@@ -304,7 +304,7 @@ function renderTabs() {
   $("tabs").querySelectorAll(".tab").forEach(b => b.onclick = () => { tab = b.dataset.tab; sessionStorage.setItem("dash-tab", tab); $("search").value = ""; render(); });
   const acts = Object.keys(REG).filter(id => REG[id].course === tab && REG[id].path);
   $("links").innerHTML = acts.length
-    ? "<details class='linkbox'><summary class='linkhead'>Student links (" + acts.length + ")</summary>" + byUnit(acts, tab).map(g => `<div class="unitlinks"><span class="unitname">${safe(g.name)}</span><div class="links">${g.ids.map(id => `<a href="../${REG[id].path}" target="_blank" rel="noopener">${safe(REG[id].title)}</a>`).join("")}</div></div>`).join("") + "</details>"
+    ? "<details class='linkbox' open><summary class='linkhead'>Student links (" + acts.length + ")</summary>" + byUnit(acts, tab).map(g => `<div class="unitlinks"><span class="unitname">${safe(g.name)}</span><div class="links">${g.ids.map(id => `<a href="../${REG[id].path}" target="_blank" rel="noopener">${safe(REG[id].title)}</a>`).join("")}</div></div>`).join("") + "</details>"
     : "<span class='status'>No activities in this class send work to the dashboard yet.</span>";
 }
 
