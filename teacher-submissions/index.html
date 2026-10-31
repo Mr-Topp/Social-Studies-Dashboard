@@ -275,7 +275,7 @@ function attentionHtml(list) {
   if (missing.length) parts.push(`<div class="att miss"><b>Missing 2 or more activities (${missing.length})</b><ul>${missing.join("")}</ul></div>`);
   if (none.length) parts.push(`<div class="att none"><b>Nothing turned in yet (${none.length})</b><p>${safe(none.join(", "))}</p></div>`);
   if (!roster.length) parts.push(`<p class="status">No class list for ${safe(COURSES[tab])} yet, so students who haven't turned anything in can't show here.</p>`);
-  return `<details class="attention" open><summary>Needs attention${count ? "" : ": nothing right now"}</summary>${parts.join("")}
+  return `<details class="attention"${attentionOpen ? " open" : ""}><summary>Needs attention${count ? " (" + count + ")" : ": nothing right now"}</summary>${parts.join("")}
     <div class="rosteredit"><button class="light" id="rosterBtn">Edit class list (${roster.length})</button>
     <div id="rosterBox" hidden><p class="status">One student per line, first name + last initial (like Jordan M.).</p><textarea id="rosterText" rows="8">${safe(roster.join("\n"))}</textarea><button id="rosterSave">Save class list</button> <span id="rosterStat" class="status"></span></div></div></details>`;
 }
@@ -300,13 +300,15 @@ function byUnit(ids, course) {
   return groups;
 }
 
-// Assignments at the top of each class: one dropdown per unit (newest unit open; remembers what you open/close).
+// Assignments at the top of each class: one dropdown per unit. Everything starts closed;
+// whatever you open stays open until you close it.
 const linkOpen = {};
+let attentionOpen = false;
 function linksHtml() {
   const acts = Object.keys(REG).filter(id => REG[id].course === tab && REG[id].path);
   if (!acts.length) return "<p class='status'>No activities in this class send work to the dashboard yet.</p>";
   const groups = byUnit(acts, tab);
-  return groups.map((g, i) => `<details class="unitdrop" data-k="${safe(tab + "|" + g.unit)}"${(linkOpen[tab + "|" + g.unit] ?? i === groups.length - 1) ? " open" : ""}><summary>${safe(g.name)} <span class="unitcount">${g.ids.length} ${g.ids.length === 1 ? "assignment" : "assignments"}</span></summary><div class="links">${g.ids.map(id => `<a href="../${REG[id].path}" target="_blank" rel="noopener">${safe(REG[id].title)}</a>`).join("")}</div></details>`).join("");
+  return groups.map((g, i) => `<details class="unitdrop" data-k="${safe(tab + "|" + g.unit)}"${linkOpen[tab + "|" + g.unit] ? " open" : ""}><summary>${safe(g.name)} <span class="unitcount">${g.ids.length} ${g.ids.length === 1 ? "assignment" : "assignments"}</span></summary><div class="links">${g.ids.map(id => `<a href="../${REG[id].path}" target="_blank" rel="noopener">${safe(REG[id].title)}</a>`).join("")}</div></details>`).join("");
 }
 
 function renderTabs() {
@@ -427,6 +429,7 @@ function render() {
   renderTabs();
   const list = tabRows(tab);
   $("attention").innerHTML = (list.length || rosterOf(tab).length || rows.length) ? attentionHtml(list) : "";
+  const att = $("attention").querySelector(".attention"); if (att) att.addEventListener("toggle", () => { attentionOpen = att.open; });
   if ($("rosterBtn")) {
     $("rosterBtn").onclick = () => { $("rosterBox").hidden = !$("rosterBox").hidden; };
     $("rosterSave").onclick = async () => {
@@ -505,7 +508,7 @@ function renderList(list) {
   if (!list.length) { $("out").innerHTML = '<div class="empty">No turn-ins match that search.</div>'; return; }
   $("out").innerHTML = `<div class="list">${list.map((r, i) => `<article class="sub"><div class="top"><div><h3>${safe(r.studentName)}</h3><p>${safe(titleOf(r))}${r.source === "old" ? '<span class="tag">old site</span>' : ""}</p></div><time>${safe(new Date(r.submittedAt).toLocaleString())}</time></div>
     ${gradeBox(r, i)}
-    <details${list.length <= 3 ? " open" : ""}><summary>View answers</summary>${showValue(r.answers)}</details></article>`).join("")}</div>`;
+    <details><summary>View answers</summary>${showValue(r.answers)}</details></article>`).join("")}</div>`;
   $("out").querySelectorAll(".gradebox button[data-l]").forEach(b => b.onclick = async () => {
     const box = b.closest(".gradebox"), r = list[+box.dataset.i], st = box.querySelector(".gstat");
     if (!TOOLS_URL) { st.innerHTML = "Finish the " + SETUP_LINK + " first."; return; }
