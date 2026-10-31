@@ -60,6 +60,13 @@ Rules:
 The reason is one short sentence for the teacher (under 120 characters), in plain words, saying what earned or cost
 the level. No student names in the reason.
 
+Also write **`"AI student feedback"`**: what the student will see on a card the next time they open an activity.
+- Talk to the student ("You…"), at about a 12-year-old reading level, 1–2 short sentences, under 200 characters.
+- First what they did well (specific), then **one** clear next step tied to the question (for a 4: one way to go further).
+- Don't mention the level number, spelling, or other students. Be warm and direct, never sarcastic.
+- Example: "You explained why the French paid for rat tails. Next step: add what some people did to earn more money."
+- Flagged (copied) work: leave `"AI student feedback"` out. The student card just says the teacher will talk with them.
+
 ## 4. Save the grade (safely)
 
 Rows can shift when new turn-ins arrive, so **never write by row number**. Use one `update_spreadsheet` call with a
@@ -67,7 +74,7 @@ Rows can shift when new turn-ins arrive, so **never write by row number**. Use o
 
 ```json
 {"findReplace": {"find": "<unique end of that Answers cell, ending with }>",
-  "replacement": "<same text without the last }>,\"AI level\":\"3\",\"AI reason\":\"...\",\"AI graded\":\"YYYY-MM-DD\"}",
+  "replacement": "<same text without the last }>,\"AI level\":\"3\",\"AI reason\":\"...\",\"AI student feedback\":\"...\",\"AI graded\":\"YYYY-MM-DD\"}",
   "matchCase": true, "matchEntireCell": false, "searchByRegex": false, "includeFormulas": false,
   "range": {"sheetId": <Turn-ins sheetId>, "startRowIndex": 1, "startColumnIndex": <Answers col index>, "endColumnIndex": <+1>}}}
 ```

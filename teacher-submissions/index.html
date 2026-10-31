@@ -99,6 +99,7 @@ td.sum.l3{background:#eef7f0;color:#1f5e2c}td.sum.l2{background:#fff8e2;color:#7
 .gradebox button{padding:6px 12px;background:#e7e0d1;color:var(--navy)}.gradebox button.on{background:var(--navy);color:#fff}
 .gradebox .gnote{flex:1 1 160px;padding:6px 8px}.gstat{margin:4px 0 0;min-height:0}
 .rosteredit{margin-top:10px}.rosteredit textarea{width:100%;box-sizing:border-box;font:inherit;padding:8px;border:1px solid #cfc5b3;border-radius:8px;margin:6px 0}
+.seen{color:#1f6b3a}
 </style>
 </head>
 <body>
@@ -149,8 +150,8 @@ const READ_OLD_SITE = false;
 const OLD_API = "https://fynn-class-assignment-submissions-20261024.neotboy.chatgpt.site/api/teacher/submissions";
 const GOOGLE = (typeof GOOGLE_SAVER_URL === "string" && GOOGLE_SAVER_URL) ? GOOGLE_SAVER_URL : "";
 // Teacher Tools web app (shared/google-saver/TeacherTools.gs): lets you change grades and class lists from here.
-// Paste its /exec address between the quotes after the one-time setup (setup-teacher-tools.html).
-const TOOLS_URL = "";
+// Its address lives in shared/turnin.js (TEACHER_TOOLS_URL), filled in after the one-time setup.
+const TOOLS_URL = (typeof TEACHER_TOOLS_URL === "string" && TEACHER_TOOLS_URL) ? TEACHER_TOOLS_URL : "";
 async function tools(action, data) {
   const res = await fetch(TOOLS_URL, { method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify(Object.assign({ action, code: $("teacherCode").value.trim() }, data)) });
   const d = await res.json().catch(() => ({}));
@@ -512,7 +513,8 @@ function gradeBox(r, i) {
   const now = t >= 1 ? `<b>Your grade: Level ${t}</b>${a["Teacher note"] ? " · " + safe(a["Teacher note"]) : ""}${ai >= 1 ? ` <span class="status">(AI said ${ai})</span>` : ""}`
     : ai >= 1 ? `<b>AI grade: Level ${ai}</b> · ${safe(a["AI reason"] || "")}${a["AI flag"] ? ` <span class="warn">⚠ ${safe(a["AI flag"])}</span>` : ""}`
     : `<span class="status">No written-answer grade yet.</span>`;
-  return `<div class="gradebox" data-i="${i}"><div>${now}</div><div class="grow"><span>Change to:</span>${[1, 2, 3, 4].map(n => `<button data-l="${n}" class="${t === n ? "on" : ""}">${n}</button>`).join("")}${t >= 1 ? '<button data-l="" class="light">Use AI grade</button>' : ""}<input class="gnote" placeholder="Note (optional)" value="${safe(a["Teacher note"] || "")}" aria-label="Note"></div><p class="gstat status"></p></div>`;
+  const fb = a["AI student feedback"] ? `<div class="status">Student sees: “${safe(a["AI student feedback"])}”${a["Student saw feedback"] ? ' <b class="seen">✓ seen ' + safe(a["Student saw feedback"]) + "</b>" : ""}</div>` : "";
+  return `<div class="gradebox" data-i="${i}"><div>${now}</div>${fb}<div class="grow"><span>Change to:</span>${[1, 2, 3, 4].map(n => `<button data-l="${n}" class="${t === n ? "on" : ""}">${n}</button>`).join("")}${t >= 1 ? '<button data-l="" class="light">Use AI grade</button>' : ""}<input class="gnote" placeholder="Note (optional)" value="${safe(a["Teacher note"] || "")}" aria-label="Note"></div><p class="gstat status"></p></div>`;
 }
 
 function flat(v) {

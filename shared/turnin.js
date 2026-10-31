@@ -8,6 +8,11 @@
 // =====================================================================
 const GOOGLE_SAVER_URL = "https://script.google.com/macros/s/AKfycbwWV93yudtLuny7OwiCluP5nyF7OZ4lJ5c7RBD1vDTYl_ezOYFAXx00XJLctKTdzZmENw/exec";
 
+// Teacher Tools web app (shared/google-saver/TeacherTools.gs). Turns on: grade changes and class-list
+// editing on the dashboard, and the feedback card students see on their next activity.
+// Paste its /exec address between the quotes after the one-time setup (teacher-submissions/setup-teacher-tools.html).
+const TEACHER_TOOLS_URL = "";
+
 (function () {
   "use strict";
 
@@ -109,6 +114,9 @@ const GOOGLE_SAVER_URL = "https://script.google.com/macros/s/AKfycbwWV93yudtLuny
 
     // Google Sheet saver.
     fillMissingId(oldUrl, body);
+    // A private receipt for this turn-in, kept on this Chromebook, so the student's feedback can find them later.
+    const receipt = newReceipt();
+    if (body.answers && typeof body.answers === "object" && !Array.isArray(body.answers)) body.answers.Receipt = receipt;
     const meta = (window.CLASS_ASSIGNMENTS || {})[body.assignmentId];
     body.action = "submit";
     body.course = window.classCourseFor ? window.classCourseFor(body.assignmentId) : "";
@@ -124,7 +132,7 @@ const GOOGLE_SAVER_URL = "https://script.google.com/macros/s/AKfycbwWV93yudtLuny
         redirect: "follow"
       });
       const data = await res.json().catch(() => ({}));
-      if (data && data.ok) return fakeResponse(200, data);
+      if (data && data.ok) { saveReceipt(receipt, body); return fakeResponse(200, data); }
       return fakeResponse(400, { error: (data && data.error) || "Your work did not save. Try again." });
     } catch (e) {
       return fakeResponse(503, { error: "Could not reach the turn-in system. Check your internet and try again." });
@@ -188,6 +196,74 @@ const GOOGLE_SAVER_URL = "https://script.google.com/macros/s/AKfycbwWV93yudtLuny
   function checkAll() { document.querySelectorAll("img").forEach(img => { if (img.complete && img.src && !img.naturalWidth) showFallback(img); }); }
   if (document.readyState === "complete") checkAll(); else window.addEventListener("load", checkAll);
 
+
+  // --- Feedback card on the next activity ----------------------------------------------
+  // After the hourly AI grader (or the teacher) grades a turn-in, the student sees a short card the
+  // next time they open any class activity: level, what went well, one next step. Fix it now / Got it.
+  const RECEIPTS = "class-feedback-receipts";
+  function newReceipt() {
+    const a = new Uint8Array(16);
+    (window.crypto || window.msCrypto).getRandomValues(a);
+    return Array.from(a, b => b.toString(16).padStart(2, "0")).join("");
+  }
+  function loadReceipts() { try { return JSON.parse(localStorage.getItem(RECEIPTS)) || []; } catch (e) { return []; } }
+  function saveReceipts(list) { try { localStorage.setItem(RECEIPTS, JSON.stringify(list.slice(-40))); } catch (e) {} }
+  function saveReceipt(token, body) {
+    const meta = (window.CLASS_ASSIGNMENTS || {})[body.assignmentId] || {};
+    const list = loadReceipts().filter(r => r.token !== token);
+    list.push({ token, id: body.assignmentId, title: meta.title || body.assignmentTitle || "Your activity", page: location.pathname + location.hash, at: Date.now(), seen: false });
+    saveReceipts(list);
+  }
+  async function toolsPost(payload) {
+    const res = await fetch(TEACHER_TOOLS_URL, { method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify(payload) });
+    return res.json();
+  }
+  function esc(t) { return String(t == null ? "" : t).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c])); }
+  async function showFeedback() {
+    if (!TEACHER_TOOLS_URL || /teacher-submissions/.test(location.pathname)) return;
+    const waiting = loadReceipts().filter(r => !r.seen && Date.now() - r.at < 45 * 864e5);
+    if (!waiting.length) return;
+    let got;
+    try { got = await toolsPost({ action: "feedback", tokens: waiting.map(r => r.token) }); } catch (e) { return; }
+    const ready = ((got && got.items) || []).filter(x => x.graded).slice(0, 3);
+    if (!ready.length) return;
+    const byToken = new Map(waiting.map(r => [r.token, r]));
+    const css = document.createElement("style");
+    css.textContent = ".fb-wrap{position:fixed;inset:0;z-index:99999;background:#0f1c2bcc;display:flex;align-items:flex-start;justify-content:center;overflow:auto;padding:20px 12px;font:17px/1.5 system-ui,Segoe UI,Arial,sans-serif}" +
+      ".fb-card{background:#fffdf8;color:#22313b;max-width:560px;width:100%;border-radius:16px;padding:20px;box-shadow:0 20px 60px #0008}" +
+      ".fb-card h2{margin:0 0 4px;font-size:1.35rem;color:#19364b}.fb-sub{margin:0 0 12px;color:#536571}" +
+      ".fb-item{border-top:1px solid #e3dccb;padding:12px 0}.fb-item b{display:block;color:#19364b}" +
+      ".fb-lvl{display:inline-block;border-radius:8px;padding:2px 10px;font-weight:900;margin:6px 0}.fb-l1{background:#f8dcd8;color:#8e2a20}.fb-l2{background:#fff1c9;color:#7a5a00}.fb-l3{background:#dff0e2;color:#1f5e2c}.fb-l4{background:#dbe8fb;color:#1c3f78}" +
+      ".fb-item p{margin:4px 0 8px}.fb-btns{display:flex;gap:8px;flex-wrap:wrap}" +
+      ".fb-btns a,.fb-btns button{font:800 16px system-ui,Arial,sans-serif;border:0;border-radius:10px;padding:10px 14px;cursor:pointer;text-decoration:none}" +
+      ".fb-fix{background:#a33d36;color:#fff}.fb-ok{background:#e7e0d1;color:#19364b}.fb-close{width:100%;margin-top:6px;background:#19364b!important;color:#fff}" +
+      ".fb-card :focus-visible{outline:3px solid #2b6cb0;outline-offset:2px}";
+    document.head.appendChild(css);
+    const wrap = document.createElement("div");
+    wrap.className = "fb-wrap"; wrap.setAttribute("role", "dialog"); wrap.setAttribute("aria-modal", "true"); wrap.setAttribute("aria-label", "Your feedback");
+    wrap.innerHTML = `<div class="fb-card"><h2>Your feedback is ready</h2><p class="fb-sub">Read it, then fix it or keep going.</p>` +
+      ready.map(x => {
+        const r = byToken.get(x.token) || {}, lvl = x.flagged ? "" : (x.level ? `<span class="fb-lvl fb-l${esc(x.level)}">Level ${esc(x.level)} of 4 · ${({ 1: "let's fix this", 2: "almost there", 3: "nice work", 4: "excellent" })[x.level] || ""}</span>` : "");
+        const msg = x.flagged ? "Your teacher wants to talk with you about this one." : (x.feedback || "Your teacher graded this one.");
+        const fix = !x.flagged && +x.level <= 2 && r.page ? `<a class="fb-fix" href="${esc(r.page)}" data-t="${esc(x.token)}">Fix it now</a>` : "";
+        return `<div class="fb-item"><b>${esc(x.title || r.title)}</b>${lvl}<p>${esc(msg)}</p><div class="fb-btns">${fix}<button class="fb-ok" data-t="${esc(x.token)}">Got it</button></div></div>`;
+      }).join("") + `<button class="fb-ok fb-close" data-all="1">Got it, start today's work</button></div>`;
+    document.body.appendChild(wrap);
+    const done = token => {
+      const list = loadReceipts(); list.forEach(r => { if (r.token === token) r.seen = true; }); saveReceipts(list);
+      toolsPost({ action: "seen", token }).catch(() => {});
+    };
+    wrap.querySelectorAll("[data-t]").forEach(b => b.addEventListener("click", () => {
+      done(b.dataset.t);
+      if (b.tagName === "BUTTON") { const item = b.closest(".fb-item"); item.remove(); if (!wrap.querySelector(".fb-item")) wrap.remove(); }
+    }));
+    wrap.querySelector("[data-all]").addEventListener("click", () => { ready.forEach(x => done(x.token)); wrap.remove(); });
+    // "Got it" unlocks after 2 seconds so the feedback gets read, not skipped. "Fix it now" works right away.
+    const oks = wrap.querySelectorAll(".fb-ok"); oks.forEach(b => { b.disabled = true; b.style.opacity = ".55"; });
+    setTimeout(() => oks.forEach(b => { b.disabled = false; b.style.opacity = ""; }), 2000);
+    const first = wrap.querySelector("a,button"); if (first) first.focus();
+  }
+  if (document.readyState === "complete") showFeedback(); else window.addEventListener("load", showFeedback);
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", fixNameBoxes);
   else fixNameBoxes();
 })();

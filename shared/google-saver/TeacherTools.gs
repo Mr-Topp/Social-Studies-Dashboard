@@ -1,6 +1,7 @@
 /**
  * TEACHER TOOLS  (Google Apps Script)
- * Lets the teacher dashboard (1) change a student's grade on a turn-in and (2) edit a class list.
+ * Lets the teacher dashboard (1) change a student's grade on a turn-in and (2) edit a class list,
+ * and (3) shows students their feedback card on their next activity (only for their own turn-ins).
  * It edits the "Class Turn-ins" Google Sheet. It does not replace or touch the turn-in saver script.
  *
  * SETUP (one time, about 5 minutes) — also shown step by step at teacher-submissions/setup-teacher-tools.html
@@ -26,6 +27,11 @@ function doPost(e) {
   var body;
   try { body = JSON.parse((e && e.postData && e.postData.contents) || "{}"); }
   catch (err) { return json({ ok: false, error: "Bad request." }); }
+  // Students' feedback cards: no teacher code, but a student can only reach a turn-in with its private receipt.
+  try {
+    if (body.action === "feedback") return json(feedback(body));
+    if (body.action === "seen") return json(seen(body));
+  } catch (err) { return json({ ok: false, error: "Try again later." }); }
   if (!codeOk(body.code)) return json({ ok: false, error: "That teacher code didn't work." });
   try {
     if (body.action === "ping") return json({ ok: true });
@@ -89,6 +95,47 @@ function setRoster(b) {
     sh.appendRow(row);
   });
   return { ok: true, count: names.length };
+}
+
+// ---------- Student feedback cards ----------
+// Returns only level + the student-facing sentence for turn-ins whose private Receipt matches.
+function feedback(b) {
+  var tokens = (b.tokens || []).map(String).filter(function (t) { return /^[a-f0-9]{32}$/.test(t); }).slice(0, 40);
+  if (!tokens.length) return { ok: true, items: [] };
+  var sh = sheet(), data = sh.getDataRange().getValues(), c = cols(data[0]), items = [];
+  for (var i = 1; i < data.length && items.length < tokens.length; i++) {
+    var cell = String(data[i][c["Answers"]] || "");
+    for (var k = 0; k < tokens.length; k++) {
+      if (cell.indexOf(tokens[k]) < 0) continue;
+      var a; try { a = JSON.parse(cell); } catch (e) { break; }
+      if (a.Receipt !== tokens[k]) break;
+      var t = /^[1-4]$/.test(String(a["Teacher level"] || "")) ? String(a["Teacher level"]) : "";
+      var level = t || (/^[1-4]$/.test(String(a["AI level"] || "")) ? String(a["AI level"]) : "");
+      var flagged = !t && !!a["AI flag"];
+      var fb = t ? (a["Teacher note"] ? String(a["Teacher note"]) : String(a["AI student feedback"] || "")) : String(a["AI student feedback"] || "");
+      items.push({ token: tokens[k], title: String(data[i][c["Activity"]] || ""), graded: !!level, level: flagged ? "" : level, flagged: flagged, feedback: flagged ? "" : fb });
+      break;
+    }
+  }
+  return { ok: true, items: items };
+}
+// Marks that the student saw their feedback (shown on the teacher dashboard).
+function seen(b) {
+  var token = String(b.token || "");
+  if (!/^[a-f0-9]{32}$/.test(token)) return { ok: false };
+  var ok = false;
+  withLock(function (sh) {
+    var data = sh.getDataRange().getValues(), c = cols(data[0]);
+    for (var i = 1; i < data.length; i++) {
+      var cell = String(data[i][c["Answers"]] || "");
+      if (cell.indexOf(token) < 0) continue;
+      var a; try { a = JSON.parse(cell); } catch (e) { return; }
+      if (a.Receipt !== token) continue;
+      if (!a["Student saw feedback"]) { a["Student saw feedback"] = new Date().toISOString().slice(0, 10); sh.getRange(i + 1, c["Answers"] + 1).setValue(JSON.stringify(a)); }
+      ok = true; return;
+    }
+  });
+  return { ok: ok };
 }
 
 // ---------- Helpers ----------
