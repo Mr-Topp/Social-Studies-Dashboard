@@ -1,24 +1,29 @@
 <!doctype html>
 <html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Tent or Booth · Ideology vs. Party | Government Unit 2 Day 1</title>
-<link rel="stylesheet" href="style.css?v=tb15">
+<title>Decision Desk · Ideology vs. Party | Government Unit 2 Day 1</title>
+<link rel="stylesheet" href="style.css?v=dd6">
 <script src="../../shared/assignments.js?v=20261031d"></script>
 <script src="../../shared/turnin.js?v=20261031d"></script>
 <script src="../../shared/arena.js?v=20261031d"></script>
 </head><body>
 <header>
-  <div class="brand"><span class="badge">⛺</span><span>TENT OR BOOTH?<small>IDEOLOGY VS. PARTY · IOWA STATE FAIR</small></span></div>
+  <div class="brand"><span class="badge"><i></i></span><span>DECISION DESK<small>IDEOLOGY VS. PARTY · GOVERNMENT UNIT 2 · DAY 1</small></span></div>
   <div class="hud">
-    <span class="pill" id="shiftPill">Getting started</span>
+    <span class="pill" id="shiftPill"></span>
     <span class="pill" id="countPill"></span>
-    <span class="pill corn" id="scorePill">🌽 0</span>
+    <span class="pill score" id="scorePill">★ 0</span>
   </div>
   <div class="head-actions"><button id="helpBtn" class="small">How to play</button><button id="resetBtn" class="small">Start over</button></div>
 </header>
-<div id="title" class="title-screen"><div class="logo"><h1><span class="t1">TENT</span> <span class="t2">OR</span> <span class="t3">BOOTH?</span></h1><p>🌽 Sort the fair. Beat your class. 🌽</p><br><button class="playbtn" id="playBtn">▶ PLAY</button></div></div>
+<div id="title" class="title-screen"><div class="logo">
+  <div class="live"><i></i> LIVE · ELECTION NIGHT</div>
+  <h1><span class="t1">DECISION</span><span class="t3">DESK</span></h1>
+  <p>Liberal? Conservative? Or just the party? <b>You make the call.</b></p>
+  <button class="playbtn" id="playBtn">▶ PLAY</button>
+</div></div>
 <main>
-  <section class="scene" aria-label="The fairgrounds">
+  <section class="scene" aria-label="Election night studio">
     <canvas id="scene" width="960" height="400" aria-hidden="true"></canvas>
     <div id="item" class="itemcard" hidden></div>
     <div id="race" class="race" aria-label="Class race"></div>
@@ -30,13 +35,16 @@
 <div id="overlay" class="overlay" hidden><article class="card" id="card"></article></div>
 
 <dialog id="helpDialog"><button class="close" data-close="helpDialog" aria-label="Close">×</button>
-  <p class="eyebrow">HOW TO PLAY</p><h2>Tent or Booth?</h2>
-  <p>⛺ The <b>Ideology Tent</b> is for BELIEFS: opinions about what the government should do.</p>
-  <p>🏛️ The <b>Party Booth</b> is for organized groups: members, leaders, money, candidates, and elections.</p>
-  <ol class="howto"><li><b>Sort Rush:</b> is it a BELIEF (tent) or a TEAM (booth)? Fast + right = more corn.</li><li><b>Same Belief, Different Party:</b> two people agree, but they're in different parties. Figure out why.</li><li><b>Start a Party:</b> what does your crew need to become a real party?</li></ol>
-  <p class="note">You can also use the ← and → arrow keys in Sort Rush. Fairgoers are made up. Iowa facts are real.</p>
-  <p class="note">Today's goal: tell the difference between an <b>ideology</b> (beliefs) and a <b>party</b> (a team that runs candidates). <span style="opacity:.7">SS.9-12.Gov.12</span></p>
+  <p class="eyebrow">HOW TO PLAY</p><h2>Decision Desk</h2>
+  <p>💭 An <b>ideology</b> is a set of BELIEFS about what government should do.<br>🏛️ A <b>party</b> is an organized GROUP that runs candidates and tries to win elections.</p>
+  <ol class="howto">
+    <li><b>Call It:</b> is each card a <b class="cb">liberal</b> belief, a <b class="cr">conservative</b> belief, or a <b>party</b> action? Get 16 of 20 to pass. Keys: ← liberal, → conservative, ↓ party.</li>
+    <li><b>Where Do They Stand?</b> Read a voter's 3 beliefs. Are they liberal, conservative, moderate, or libertarian? Which party would they most likely vote for?</li>
+    <li><b>Same Belief, Different Party:</b> two people agree, but they're in different parties. Figure out why.</li>
+  </ol>
+  <p class="note"><b class="cb">Liberal</b> (usually Democrats): more government help, higher taxes on the rich, more rules, change.<br><b class="cr">Conservative</b> (usually Republicans): smaller government, lower taxes, fewer rules, tradition.<br><b>Moderate:</b> a mix. <b>Libertarian:</b> less government on everything.</p>
+  <p class="note">Voters in this game are made up. Real facts are labeled "Real life." <span style="opacity:.7">SS.9-12.Gov.12</span></p>
 </dialog>
 
-<script src="game.js?v=tb15"></script>
+<script src="game.js?v=dd6"></script>
 </body></html>
