@@ -88,6 +88,12 @@ td.done.check button{background:#e4ecf5;color:#24496d}
 td.sum{font-size:.85rem;min-width:110px}td.sum .lvl{display:block;font-size:.75rem;font-weight:800}
 td.sum.l3{background:#eef7f0;color:#1f5e2c}td.sum.l2{background:#fff8e2;color:#7a5a00}td.sum.l1{background:#fbecea;color:#8e2a20}
 .lv.l4,td.done.l4 button{background:#dbe8fb;color:#1c3f78}td.sum.l4{background:#eaf1fc;color:#1c3f78}
+.attention{background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px 12px;margin:0 0 12px}
+.attention summary{font-weight:900;color:var(--navy);cursor:pointer}
+.att{margin:8px 0 0;padding:8px 10px;border-radius:9px}.att ul{margin:4px 0 0;padding-left:18px}.att p{margin:4px 0 0}
+.att.flag{background:#fdeeea}.att.low{background:#fbecea}.att.miss{background:#fff8e2}.att.none{background:#f3efe6}
+.offlist{display:block;font-size:.68rem;font-weight:700;color:var(--red)}
+.linkbox summary{cursor:pointer;margin:0 0 6px}.linkbox[open] summary{margin-bottom:8px}
 </style>
 </head>
 <body>
@@ -116,6 +122,7 @@ td.sum.l3{background:#eef7f0;color:#1f5e2c}td.sum.l2{background:#fff8e2;color:#7
 
 <div class="tabs" role="tablist" id="tabs"></div>
 <section class="panel tabpanel" id="tabpanel" role="tabpanel">
+  <div id="attention"></div>
   <div class="links" id="links"></div>
   <div class="views" role="group" aria-label="View">
     <button class="light" id="gridView" aria-pressed="true">Who turned in what</button>
@@ -176,11 +183,18 @@ async function load() {
 
   // Same student, same activity, same minute = same turn-in (shows once even if it's in both places).
   const seen = new Map();
-  got.filter(r => r.kind !== "progress").forEach(r => {
+  // Class lists live in the Sheet as "roster" rows (kept off the public site). Newest list per class wins.
+  rosters = {};
+  got.filter(r => r.kind === "roster").sort((a, b) => a.submittedAt.localeCompare(b.submittedAt)).forEach(r => {
+    const list = (r.answers && r.answers.students) || [];
+    if (Array.isArray(list) && list.length) rosters[r.course] = list.map(n => window.classShortName(n) || String(n));
+  });
+  got.filter(r => r.kind !== "progress" && r.kind !== "roster").forEach(r => {
     const key = r.submittedAt.slice(0, 16) + "|" + r.studentName.toLowerCase() + "|" + r.assignmentId;
     if (!seen.has(key) || r.source === "google") seen.set(key, r);
   });
   rows = [...seen.values()].sort((a, b) => b.submittedAt.localeCompare(a.submittedAt));
+  mergeNames();
   if (got.length) sessionStorage.setItem("teacher-code", code);
   $("status").innerHTML = rows.length + " turn-ins loaded (" + notes.join(" · ") + ").";
   $("importPanel").hidden = !(GOOGLE && READ_OLD_SITE && oldRows.length);
@@ -188,6 +202,62 @@ async function load() {
 }
 
 function tabRows(t) { return rows.filter(r => r.course === t); }
+
+// ---- Class lists and name clean-up ----
+let rosters = {};
+const rosterOf = t => rosters[t] || [];
+const firstKey = n => String(n || "").split(" ")[0].toLowerCase().replace(/[^a-z]/g, "");
+const nameKey = n => { const p = String(n || "").trim().split(/\s+/); return firstKey(n) + "|" + (p.length > 1 ? p[p.length - 1].replace(/[^A-Za-z]/g, "").charAt(0).toLowerCase() : ""); };
+// Same student typed two ways ("Kai" and "Kai S.") counts as one person: match to the class list first,
+// then to another turn-in in the same class with the same first name.
+function mergeNames() {
+  const byCourse = {};
+  rows.forEach(r => (byCourse[r.course] = byCourse[r.course] || []).push(r));
+  Object.entries(byCourse).forEach(([course, list]) => {
+    const roster = rosterOf(course), byKey = new Map(roster.map(n => [nameKey(n), n]));
+    const full = [...new Set(list.map(r => r.studentName).filter(n => nameKey(n).split("|")[1]))];
+    list.forEach(r => {
+      const k = nameKey(r.studentName);
+      if (byKey.has(k)) { r.studentName = byKey.get(k); return; }
+      if (!k.split("|")[1]) {                       // no last initial
+        const fk = firstKey(r.studentName);
+        const onList = roster.filter(n => firstKey(n) === fk);
+        const typed = full.filter(n => firstKey(n) === fk);
+        if (onList.length === 1) r.studentName = onList[0];
+        else if (typed.length === 1) r.studentName = typed[0];
+      }
+    });
+  });
+}
+const offList = (t, s) => rosterOf(t).length && !rosterOf(t).includes(s);
+const studentCell = (t, s) => `<td class="student">${safe(s)}${offList(t, s) ? '<small class="offlist">not on class list</small>' : ""}</td>`;
+
+// ---- Needs attention (top of each class) ----
+function attentionHtml(list) {
+  const roster = rosterOf(tab), latest = new Map();
+  list.forEach(r => { const k = r.studentName + "|" + r.assignmentId; if (!latest.has(k)) latest.set(k, r); });
+  const flags = [...latest.values()].filter(r => { const a = aiOf(r); return a && a.flag; }).map(r => `<li><b>${safe(r.studentName)}</b> · ${safe(titleOf(r))}: ${safe(aiOf(r).flag)}</li>`);
+  const data = masteryData(list), ones = [];
+  Object.keys(data).sort().forEach(s => { const c = Object.keys(data[s]).filter(c => data[s][c].n === 1); if (c.length) ones.push(`<li><b>${safe(s)}</b> · Level 1 on ${safe(c.map(shortStd).join(", "))}</li>`); });
+  // "Due so far" = days up to the latest day anyone in this class has turned in, per unit.
+  const reached = {}, submitted = new Set(list.map(r => r.assignmentId));
+  list.forEach(r => { const u = unitOf(r.assignmentId), d = REG[r.assignmentId] && REG[r.assignmentId].day; if (d) reached[u] = Math.max(reached[u] || 0, d); });
+  const due = sortIds(Object.keys(REG).filter(id => { const a = REG[id]; return a.course === tab && a.path && a.turnIn !== false && (a.day ? a.day <= (reached[unitOf(id)] || 0) : submitted.has(id)); }));
+  const missing = [], none = [];
+  [...new Set([...roster, ...list.map(r => r.studentName)])].sort((a, b) => a.localeCompare(b)).forEach(s => {
+    const done = new Set(list.filter(r => r.studentName === s).map(r => r.assignmentId));
+    if (!done.size) { if (roster.includes(s)) none.push(s); return; }
+    const miss = due.filter(id => !done.has(id));
+    if (miss.length >= 2) missing.push(`<li><b>${safe(s)}</b> · missing ${miss.length}: ${safe(miss.slice(0, 3).map(id => REG[id].title.split(" · ")[0]).join(", "))}${miss.length > 3 ? "…" : ""}</li>`);
+  });
+  const count = flags.length + ones.length + missing.length + none.length, parts = [];
+  if (flags.length) parts.push(`<div class="att flag"><b>⚠ Flagged work (${flags.length})</b><ul>${flags.join("")}</ul></div>`);
+  if (ones.length) parts.push(`<div class="att low"><b>Level 1 on a standard (${ones.length})</b><ul>${ones.join("")}</ul></div>`);
+  if (missing.length) parts.push(`<div class="att miss"><b>Missing 2 or more activities (${missing.length})</b><ul>${missing.join("")}</ul></div>`);
+  if (none.length) parts.push(`<div class="att none"><b>Nothing turned in yet (${none.length})</b><p>${safe(none.join(", "))}</p></div>`);
+  if (!roster.length) parts.push(`<p class="status">No class list for ${safe(COURSES[tab])} yet, so students who haven't turned anything in can't show here.</p>`);
+  return `<details class="attention" open><summary>Needs attention${count ? "" : ": nothing right now"}</summary>${parts.join("")}</details>`;
+}
 
 const UNITS = window.CLASS_UNITS || {}, UNIT_WORD = { civics: "Friday" };
 const unitOf = id => (REG[id] && REG[id].unit) || 0;
@@ -215,7 +285,7 @@ function renderTabs() {
   $("tabs").querySelectorAll(".tab").forEach(b => b.onclick = () => { tab = b.dataset.tab; sessionStorage.setItem("dash-tab", tab); $("search").value = ""; render(); });
   const acts = Object.keys(REG).filter(id => REG[id].course === tab && REG[id].path);
   $("links").innerHTML = acts.length
-    ? "<b class='linkhead'>Student links</b>" + byUnit(acts, tab).map(g => `<div class="unitlinks"><span class="unitname">${safe(g.name)}</span><div class="links">${g.ids.map(id => `<a href="../${REG[id].path}" target="_blank" rel="noopener">${safe(REG[id].title)}</a>`).join("")}</div></div>`).join("")
+    ? "<details class='linkbox'><summary class='linkhead'>Student links (" + acts.length + ")</summary>" + byUnit(acts, tab).map(g => `<div class="unitlinks"><span class="unitname">${safe(g.name)}</span><div class="links">${g.ids.map(id => `<a href="../${REG[id].path}" target="_blank" rel="noopener">${safe(REG[id].title)}</a>`).join("")}</div></div>`).join("") + "</details>"
     : "<span class='status'>No activities in this class send work to the dashboard yet.</span>";
 }
 
@@ -277,6 +347,7 @@ function itemText(x) {
 function renderMastery(list) {
   const codes = courseStandards(tab), data = masteryData(list);
   Object.values(data).forEach(s => Object.keys(s).forEach(c => { if (!codes.includes(c)) codes.push(c); }));
+  rosterOf(tab).forEach(s => { data[s] = data[s] || {}; });
   const students = Object.keys(data).sort((a, b) => a.localeCompare(b));
   const cellHtml = (s, c) => {
     const d = data[s][c];
@@ -290,7 +361,7 @@ function renderMastery(list) {
   $("out").innerHTML = `<div class="legend"><span class="lv l4">4</span> beyond proficient <span class="lv l3">3</span> proficient (needs a written answer) <span class="lv l3">On track for 3</span> 90%+ first try, no written answer yet <span class="lv l2">2</span> <span class="lv l1">1</span> <span class="lv none">—</span> no evidence yet <span class="lv check">Check</span> not graded yet · ⚠ flagged written answer</div>
   <p class="status" style="margin:4px 0 10px">${students.length} students · ${codes.length} standards · Each activity counts as one level: its first-try score (90%+ = 3, 70–89% = 2, under 70% = 1) and its written answers (graded 1–4 by AI against the standard), averaged. Tap any score to see where it came from.</p>
   <div class="gridwrap"><table class="mastery"><thead><tr><th class="student">Student</th>${codes.map(c => `<th title="${safe(STDTXT[c] || "")}">${safe(shortStd(c))}<small>${safe((STDTXT[c] || "").slice(0, 60))}${(STDTXT[c] || "").length > 60 ? "…" : ""}</small></th>`).join("")}<th>No evidence</th></tr></thead>
-  <tbody>${students.map(s => `<tr><td class="student">${safe(s)}</td>${codes.map(c => cellHtml(s, c)).join("")}<td class="${missing(s) ? "needs" : ""}">${missing(s) ? missing(s) + " of " + codes.length : "✓"}</td></tr>`).join("")}</tbody></table></div>
+  <tbody>${students.map(s => `<tr>${studentCell(tab, s)}${codes.map(c => cellHtml(s, c)).join("")}<td class="${missing(s) ? "needs" : ""}">${missing(s) ? missing(s) + " of " + codes.length : "✓"}</td></tr>`).join("")}</tbody></table></div>
   <div id="mdetail" class="mdetail" aria-live="polite"></div>
   ${byUnit(Object.keys(REG).filter(id => REG[id].course === tab && REG[id].path), tab).map(g => {
     const uc = []; g.ids.forEach(id => (REG[id].std || []).forEach(c => { if (!uc.includes(c)) uc.push(c); }));
@@ -304,6 +375,7 @@ function renderMastery(list) {
 }
 function masteryCsvRows(list) {
   const codes = courseStandards(tab), data = masteryData(list);
+  rosterOf(tab).forEach(s => { data[s] = data[s] || {}; });
   const rowsOut = [["Student", "Standard", "Standard text", "Level", "Average", "Has written answer", "Activities and scores"]];
   Object.keys(data).sort().forEach(s => codes.forEach(c => {
     const d = data[s][c];
@@ -320,6 +392,7 @@ function activitiesFor(list) {
 function render() {
   renderTabs();
   const list = tabRows(tab);
+  $("attention").innerHTML = (list.length || rosterOf(tab).length) ? attentionHtml(list) : "";
   $("gridView").setAttribute("aria-pressed", view === "grid");
   $("listView").setAttribute("aria-pressed", view === "list");
   $("masteryView").setAttribute("aria-pressed", view === "mastery");
@@ -329,8 +402,9 @@ function render() {
   sel.value = [...sel.options].some(o => o.value === keep) ? keep : "all";
   const shown = visible();
   $("csvBtn").disabled = view === "mastery" ? !list.length : !shown.length;
-  if (!list.length) { $("out").innerHTML = `<div class="empty">${rows.length ? "No turn-ins for " + COURSES[tab] + " yet." : "Turn-ins will appear here."}</div>`; return; }
+  if (!list.length && !rosterOf(tab).length) { $("out").innerHTML = `<div class="empty">${rows.length ? "No turn-ins for " + COURSES[tab] + " yet." : "Turn-ins will appear here."}</div>`; return; }
   view === "grid" ? renderGrid(list) : view === "mastery" ? renderMastery(list) : renderList(shown);
+
 }
 
 function visible() {
@@ -339,7 +413,7 @@ function visible() {
 }
 
 function renderGrid(list) {
-  const students = [...new Set(list.map(r => r.studentName))].sort((a, b) => a.localeCompare(b));
+  const students = [...new Set([...rosterOf(tab), ...list.map(r => r.studentName)])].sort((a, b) => a.localeCompare(b));
   const cell = (s, id) => {
     const hits = list.filter(r => r.studentName === s && r.assignmentId === id);
     if (!hits.length) return `<td class="miss">—</td>`;
@@ -363,14 +437,15 @@ function renderGrid(list) {
   // One table per unit, Unit 1 first. Each unit only shows students who turned in something in it.
   // Show every day of a unit (not just ones with turn-ins) so missing work stands out.
   const unitsUsed = new Set(list.map(r => unitOf(r.assignmentId)));
+  if (!unitsUsed.size) Object.keys(REG).forEach(id => { if (REG[id].course === tab && REG[id].path) unitsUsed.add(unitOf(id)); });
   const units = byUnit([...new Set([...activitiesFor(list), ...Object.keys(REG).filter(id => REG[id].course === tab && REG[id].path && REG[id].turnIn !== false && unitsUsed.has(unitOf(id)))])], tab);
   $("out").innerHTML = `<p class="status" style="margin:0 0 8px">${students.length} students · grouped by unit, in day order · each box is that day's grade: first-try percent and/or the AI grade of their written answers, combined into one level (blue = 4, green = 3, yellow = 2, red = 1; ⚠ = flagged written answer) · “Check” means not graded yet · click any grade to read that student's answers.</p>` +
     units.map(g => {
       const inUnit = list.filter(r => g.ids.includes(r.assignmentId));
-      const who = [...new Set(inUnit.map(r => r.studentName))].sort((a, b) => a.localeCompare(b));
+      const who = [...new Set([...rosterOf(tab), ...inUnit.map(r => r.studentName)])].sort((a, b) => a.localeCompare(b));
       return `<section class="unitblock"><h2 class="unithead">${safe(g.name)} <span class="unitcount">${g.ids.length} ${g.ids.length === 1 ? "activity" : "activities"} · ${who.length} ${who.length === 1 ? "student" : "students"}</span></h2>
     <div class="gridwrap"><table><thead><tr><th class="student">Student</th>${g.ids.map(id => `<th>${safe(titleOf({ assignmentId: id }))}${(REG[id] && REG[id].std || []).length ? `<small class="stdtag">${safe(REG[id].std.map(shortStd).join(" · "))}</small>` : ""}</th>`).join("")}<th>Unit so far</th></tr></thead>
-    <tbody>${who.map(s => `<tr><td class="student">${safe(s)}</td>${g.ids.map(id => cell(s, id)).join("")}${unitSum(s, g.ids, inUnit)}</tr>`).join("")}</tbody></table></div></section>`;
+    <tbody>${who.map(s => `<tr>${studentCell(tab, s)}${g.ids.map(id => cell(s, id)).join("")}${unitSum(s, g.ids, inUnit)}</tr>`).join("")}</tbody></table></div></section>`;
     }).join("");
   $("out").querySelectorAll("td.done button").forEach(b => b.onclick = () => { view = "list"; render(); $("search").value = b.dataset.s; $("assignment").value = b.dataset.a; render(); });
 }
