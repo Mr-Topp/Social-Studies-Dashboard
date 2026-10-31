@@ -94,6 +94,11 @@ td.sum.l3{background:#eef7f0;color:#1f5e2c}td.sum.l2{background:#fff8e2;color:#7
 .att.flag{background:#fdeeea}.att.low{background:#fbecea}.att.miss{background:#fff8e2}.att.none{background:#f3efe6}
 .offlist{display:block;font-size:.68rem;font-weight:700;color:var(--red)}
 .linkbox summary{cursor:pointer;margin:0 0 6px}.linkbox[open] summary{margin-bottom:8px}
+.gradebox{margin:8px 0 0;padding:8px 10px;background:#f6f8fb;border:1px solid #dfe6ee;border-radius:9px;font-size:.92rem}
+.gradebox .grow{display:flex;gap:6px;align-items:center;flex-wrap:wrap;margin-top:6px}
+.gradebox button{padding:6px 12px;background:#e7e0d1;color:var(--navy)}.gradebox button.on{background:var(--navy);color:#fff}
+.gradebox .gnote{flex:1 1 160px;padding:6px 8px}.gstat{margin:4px 0 0;min-height:0}
+.rosteredit{margin-top:10px}.rosteredit textarea{width:100%;box-sizing:border-box;font:inherit;padding:8px;border:1px solid #cfc5b3;border-radius:8px;margin:6px 0}
 </style>
 </head>
 <body>
@@ -143,6 +148,16 @@ td.sum.l3{background:#eef7f0;color:#1f5e2c}td.sum.l2{background:#fff8e2;color:#7
 const READ_OLD_SITE = false;
 const OLD_API = "https://fynn-class-assignment-submissions-20261024.neotboy.chatgpt.site/api/teacher/submissions";
 const GOOGLE = (typeof GOOGLE_SAVER_URL === "string" && GOOGLE_SAVER_URL) ? GOOGLE_SAVER_URL : "";
+// Teacher Tools web app (shared/google-saver/TeacherTools.gs): lets you change grades and class lists from here.
+// Paste its /exec address between the quotes after the one-time setup (setup-teacher-tools.html).
+const TOOLS_URL = "";
+async function tools(action, data) {
+  const res = await fetch(TOOLS_URL, { method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify(Object.assign({ action, code: $("teacherCode").value.trim() }, data)) });
+  const d = await res.json().catch(() => ({}));
+  if (!d.ok) throw new Error(d.error || "That didn't save. Try again.");
+  return d;
+}
+const SETUP_LINK = `<a href="setup-teacher-tools.html" target="_blank" rel="noopener">one-time setup</a>`;
 
 const COURSES = window.CLASS_COURSES, REG = window.CLASS_ASSIGNMENTS;
 const $ = id => document.getElementById(id);
@@ -157,6 +172,7 @@ function normalize(r, source) {
   const when = new Date(r.submittedAt);
   return {
     studentName: name,
+    typedName: String(r.studentName || ""),
     assignmentId: String(r.assignmentId || ""),
     assignmentTitle: r.assignmentTitle || "",
     course: COURSES[r.course] ? r.course : window.classCourseFor(r.assignmentId),
@@ -256,7 +272,9 @@ function attentionHtml(list) {
   if (missing.length) parts.push(`<div class="att miss"><b>Missing 2 or more activities (${missing.length})</b><ul>${missing.join("")}</ul></div>`);
   if (none.length) parts.push(`<div class="att none"><b>Nothing turned in yet (${none.length})</b><p>${safe(none.join(", "))}</p></div>`);
   if (!roster.length) parts.push(`<p class="status">No class list for ${safe(COURSES[tab])} yet, so students who haven't turned anything in can't show here.</p>`);
-  return `<details class="attention" open><summary>Needs attention${count ? "" : ": nothing right now"}</summary>${parts.join("")}</details>`;
+  return `<details class="attention" open><summary>Needs attention${count ? "" : ": nothing right now"}</summary>${parts.join("")}
+    <div class="rosteredit"><button class="light" id="rosterBtn">Edit class list (${roster.length})</button>
+    <div id="rosterBox" hidden><p class="status">One student per line, first name + last initial (like Jordan M.).</p><textarea id="rosterText" rows="8">${safe(roster.join("\n"))}</textarea><button id="rosterSave">Save class list</button> <span id="rosterStat" class="status"></span></div></div></details>`;
 }
 
 const UNITS = window.CLASS_UNITS || {}, UNIT_WORD = { civics: "Friday" };
@@ -301,7 +319,12 @@ function ftOf(r) { const m = String((r.answers || {})["First-try correct"] || ""
 function levelOf(pct) { return pct >= 90 ? { n: 3, label: "On track for 3", cls: "l3" } : pct >= 70 ? { n: 2, label: "2", cls: "l2" } : { n: 1, label: "1", cls: "l1" }; }
 function pctClass(ft) { if (!ft) return ""; const p = ft.right / ft.total * 100; return p >= 90 ? "l3" : p >= 70 ? "l2" : "l1"; }
 // AI grade of the written answers (saved into the turn-in by the hourly AI grader): { n, reason, flag }
-function aiOf(r) { const a = r.answers || {}, n = parseInt(a["AI level"], 10); return n >= 1 && n <= 4 ? { n, reason: String(a["AI reason"] || ""), flag: String(a["AI flag"] || "") } : null; }
+function aiOf(r) {
+  const a = r.answers || {}, t = parseInt(a["Teacher level"], 10);
+  if (t >= 1 && t <= 4) return { n: t, reason: String(a["Teacher note"] || "Set by you"), flag: "", teacher: true };
+  const n = parseInt(a["AI level"], 10);
+  return n >= 1 && n <= 4 ? { n, reason: String(a["AI reason"] || ""), flag: String(a["AI flag"] || ""), teacher: false } : null;
+}
 // Halves round down: a 3 has to be earned, not reached by rounding (2.5 -> 2, 3.5 -> 3).
 const roundDown = x => Math.ceil(x - 0.5);
 const LCLS = n => n >= 4 ? "l4" : n >= 3 ? "l3" : n >= 2 ? "l2" : "l1";
@@ -311,7 +334,7 @@ function dayGrade(r) {
   const auto = f ? levelOf(Math.round(f.right / f.total * 100)).n : null;
   if (auto) parts.push(auto); if (ai) parts.push(ai.n);
   if (!parts.length) return null;
-  const n = roundDown(parts.reduce((a, b) => a + b, 0) / parts.length);
+  const n = ai && ai.teacher ? ai.n : roundDown(parts.reduce((a, b) => a + b, 0) / parts.length);
   return { n, f, ai, auto, pct: f ? Math.round(f.right / f.total * 100) : null };
 }
 // Level label: a 3+ needs a written (explain) piece to count as a real 3, otherwise it's "On track for 3".
@@ -341,7 +364,7 @@ function itemText(x) {
   if (!x.g) return "turned in, not graded yet";
   const bits = [];
   if (x.g.f) bits.push(x.g.f.right + " of " + x.g.f.total + " right on the first try");
-  if (x.g.ai) bits.push("written answer Level " + x.g.ai.n + (x.g.ai.reason ? " (" + x.g.ai.reason + ")" : "") + (x.g.ai.flag ? " ⚠ " + x.g.ai.flag : ""));
+  if (x.g.ai) bits.push((x.g.ai.teacher ? "your grade Level " : "written answer Level ") + x.g.ai.n + (x.g.ai.reason ? " (" + x.g.ai.reason + ")" : "") + (x.g.ai.flag ? " ⚠ " + x.g.ai.flag : ""));
   return bits.join("; ");
 }
 function renderMastery(list) {
@@ -392,7 +415,17 @@ function activitiesFor(list) {
 function render() {
   renderTabs();
   const list = tabRows(tab);
-  $("attention").innerHTML = (list.length || rosterOf(tab).length) ? attentionHtml(list) : "";
+  $("attention").innerHTML = (list.length || rosterOf(tab).length || rows.length) ? attentionHtml(list) : "";
+  if ($("rosterBtn")) {
+    $("rosterBtn").onclick = () => { $("rosterBox").hidden = !$("rosterBox").hidden; };
+    $("rosterSave").onclick = async () => {
+      if (!TOOLS_URL) { $("rosterStat").innerHTML = "Finish the " + SETUP_LINK + " first, or send the new list to Claude."; return; }
+      const names = $("rosterText").value.split("\n").map(n => window.classShortName(n.trim())).filter(Boolean);
+      $("rosterSave").disabled = true; $("rosterStat").textContent = "Saving…";
+      try { await tools("set_roster", { course: tab, students: names }); rosters[tab] = names; mergeNames(); render(); }
+      catch (e) { $("rosterStat").textContent = e.message; $("rosterSave").disabled = false; }
+    };
+  }
   $("gridView").setAttribute("aria-pressed", view === "grid");
   $("listView").setAttribute("aria-pressed", view === "list");
   $("masteryView").setAttribute("aria-pressed", view === "mastery");
@@ -422,9 +455,9 @@ function renderGrid(list) {
     const big = g.f ? g.pct + "%" : "Level " + g.ai.n;
     const parts = [];
     if (g.f) parts.push((g.auto === 3 ? "First try L3" : "First try L" + g.auto) + " · " + g.f.right + "/" + g.f.total);
-    if (g.ai && g.f) parts.push("Written L" + g.ai.n + (g.ai.flag ? " ⚠" : ""));
+    if (g.ai && g.f) parts.push((g.ai.teacher ? "Your grade L" : "Written L") + g.ai.n + (g.ai.flag ? " ⚠" : ""));
     const tip = [g.f ? g.f.right + " of " + g.f.total + " right on the first try" : "", g.ai ? "Written answer Level " + g.ai.n + ": " + g.ai.reason + (g.ai.flag ? " ⚠ " + g.ai.flag : "") : "", "Day level: " + levelLabel(g.n, !!g.ai), "Open to read their answers."].filter(Boolean).join("\n");
-    return `<td class="done ${LCLS(g.n)}"><button data-s="${safe(s)}" data-a="${safe(id)}" title="${safe(tip)}"><b class="grade">${big}</b><span class="lvl">${g.f ? safe(levelLabel(g.n, !!g.ai) === "On track for 3" ? "On track for 3" : "Level " + g.n) : "Written answer" + (g.ai.flag ? " ⚠" : "")}</span><span class="when">${safe(parts.join(" · "))}</span><span class="when">${when}</span></button></td>`;
+    return `<td class="done ${LCLS(g.n)}"><button data-s="${safe(s)}" data-a="${safe(id)}" title="${safe(tip)}"><b class="grade">${big}</b><span class="lvl">${g.f ? safe(levelLabel(g.n, !!g.ai) === "On track for 3" ? "On track for 3" : "Level " + g.n) : (g.ai.teacher ? "Your grade" : "Written answer") + (g.ai.flag ? " ⚠" : "")}</span><span class="when">${safe(parts.join(" · "))}</span><span class="when">${when}</span></button></td>`;
   };
   // Unit summary for one student: activities done + average day level.
   const unitSum = (s, ids, inUnit) => {
@@ -459,8 +492,27 @@ function showValue(v, depth = 0) {
 
 function renderList(list) {
   if (!list.length) { $("out").innerHTML = '<div class="empty">No turn-ins match that search.</div>'; return; }
-  $("out").innerHTML = `<div class="list">${list.map(r => `<article class="sub"><div class="top"><div><h3>${safe(r.studentName)}</h3><p>${safe(titleOf(r))}${r.source === "old" ? '<span class="tag">old site</span>' : ""}</p></div><time>${safe(new Date(r.submittedAt).toLocaleString())}</time></div>
+  $("out").innerHTML = `<div class="list">${list.map((r, i) => `<article class="sub"><div class="top"><div><h3>${safe(r.studentName)}</h3><p>${safe(titleOf(r))}${r.source === "old" ? '<span class="tag">old site</span>' : ""}</p></div><time>${safe(new Date(r.submittedAt).toLocaleString())}</time></div>
+    ${gradeBox(r, i)}
     <details${list.length <= 3 ? " open" : ""}><summary>View answers</summary>${showValue(r.answers)}</details></article>`).join("")}</div>`;
+  $("out").querySelectorAll(".gradebox button[data-l]").forEach(b => b.onclick = async () => {
+    const box = b.closest(".gradebox"), r = list[+box.dataset.i], st = box.querySelector(".gstat");
+    if (!TOOLS_URL) { st.innerHTML = "Finish the " + SETUP_LINK + " first."; return; }
+    box.querySelectorAll("button").forEach(x => x.disabled = true); st.textContent = "Saving…";
+    try {
+      await tools("set_grade", { submittedAt: r.submittedAt, assignmentId: r.assignmentId, studentName: r.typedName, level: b.dataset.l, note: box.querySelector(".gnote").value.trim() });
+      const a = r.answers = Object.assign({}, r.answers);
+      if (b.dataset.l) { a["Teacher level"] = b.dataset.l; a["Teacher note"] = box.querySelector(".gnote").value.trim(); } else { delete a["Teacher level"]; delete a["Teacher note"]; }
+      render();
+    } catch (e) { st.textContent = e.message; box.querySelectorAll("button").forEach(x => x.disabled = false); }
+  });
+}
+function gradeBox(r, i) {
+  const a = r.answers || {}, t = parseInt(a["Teacher level"], 10), ai = parseInt(a["AI level"], 10);
+  const now = t >= 1 ? `<b>Your grade: Level ${t}</b>${a["Teacher note"] ? " · " + safe(a["Teacher note"]) : ""}${ai >= 1 ? ` <span class="status">(AI said ${ai})</span>` : ""}`
+    : ai >= 1 ? `<b>AI grade: Level ${ai}</b> · ${safe(a["AI reason"] || "")}${a["AI flag"] ? ` <span class="warn">⚠ ${safe(a["AI flag"])}</span>` : ""}`
+    : `<span class="status">No written-answer grade yet.</span>`;
+  return `<div class="gradebox" data-i="${i}"><div>${now}</div><div class="grow"><span>Change to:</span>${[1, 2, 3, 4].map(n => `<button data-l="${n}" class="${t === n ? "on" : ""}">${n}</button>`).join("")}${t >= 1 ? '<button data-l="" class="light">Use AI grade</button>' : ""}<input class="gnote" placeholder="Note (optional)" value="${safe(a["Teacher note"] || "")}" aria-label="Note"></div><p class="gstat status"></p></div>`;
 }
 
 function flat(v) {
