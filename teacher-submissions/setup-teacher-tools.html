@@ -28,13 +28,12 @@ button:focus-visible,a:focus-visible{outline:3px solid #2b6cb0;outline-offset:2p
 <main>
 <p class="eyebrow">Teacher dashboard · one-time setup</p>
 <h1>Turn on grade changes and class-list editing</h1>
-<p class="lead">This adds a small helper script to your school Google account. Your turn-in script and your Sheet stay exactly as they are. About 5 minutes.</p>
+<p class="lead">This adds a small helper script to your school Google account. Your turn-in script and your Sheet stay exactly as they are. About 3 minutes. You don't need to type your teacher code anywhere.</p>
 <p class="note"><b>Do this on a computer</b>, not your phone. Google's script editor is hard to use on a phone.</p>
 <ol>
   <li><b>Copy the script.</b> <button id="copyBtn">Copy Teacher Tools script</button><span id="status" aria-live="polite"></span></li>
   <li>Signed in to your <b>school</b> Google account, open <a href="https://script.google.com/home/projects/create" target="_blank" rel="noopener">script.google.com</a> and start a <b>New project</b>.</li>
   <li>Delete everything in the editor, <b>paste</b>, and click <b>Save</b> (the disk icon). Name the project <b>Teacher Tools</b>.</li>
-  <li>Click the <b>gear icon</b> (Project Settings) on the left. Scroll to <b>Script Properties</b> &gt; <b>Add script property</b>. Property: <code>TEACHER_CODE</code>. Value: the same teacher code you type into the dashboard. Click <b>Save script properties</b>.</li>
   <li>Click <b>Deploy</b> (top right) &gt; <b>New deployment</b>. Click the gear next to "Select type" and pick <b>Web app</b>. Set <b>Execute as: Me</b> and <b>Who has access: Anyone</b>. Click <b>Deploy</b>.</li>
   <li>Google asks for permission. Click <b>Authorize access</b>, pick your school account, then <b>Allow</b>. (If you see "Google hasn't verified this app", click <b>Advanced</b> &gt; <b>Go to Teacher Tools</b>. It's your own script.)</li>
   <li>Copy the <b>Web app URL</b> (it ends in <code>/exec</code>) and <b>send it to Claude</b>. Claude connects it to your dashboard.</li>

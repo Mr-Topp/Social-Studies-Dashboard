@@ -7,10 +7,9 @@
  * SETUP (one time, about 5 minutes) — also shown step by step at teacher-submissions/setup-teacher-tools.html
  *  1. Signed in to your school Google account, go to script.google.com and click "New project".
  *  2. Delete what's there, paste this whole file, click Save. Name the project "Teacher Tools".
- *  3. Project Settings (gear icon) > Script Properties > Add script property:
- *        Property: TEACHER_CODE     Value: the same code you type into the dashboard
- *  4. Deploy > New deployment > type "Web app".   Execute as: Me    Who has access: Anyone
+ *  3. Deploy > New deployment > type "Web app".   Execute as: Me    Who has access: Anyone
  *     Click Deploy, allow access, and copy the Web app URL (ends in /exec). Send it to Claude.
+ *  (Your teacher code is checked against your turn-in saver, so there's nothing else to set up.)
  *
  * If you ever edit this script: Deploy > Manage deployments > pencil > Version: New version > Deploy (same URL).
  */
@@ -146,9 +145,23 @@ function withLock(fn) {
   lock.waitLock(20000);
   try { fn(sheet()); } finally { lock.releaseLock(); }
 }
+// Checks the teacher code. If you set a TEACHER_CODE script property it uses that; otherwise it asks your
+// turn-in saver whether the code works (so there's nothing to type in here). Remembered for 30 minutes.
+var SAVER_URL = "https://script.google.com/macros/s/AKfycbwWV93yudtLuny7OwiCluP5nyF7OZ4lJ5c7RBD1vDTYl_ezOYFAXx00XJLctKTdzZmENw/exec";
 function codeOk(code) {
+  code = String(code || "").trim();
+  if (!code) return false;
   var real = PropertiesService.getScriptProperties().getProperty("TEACHER_CODE");
-  return !!real && String(code || "").trim() === String(real).trim();
+  if (real) return code === String(real).trim();
+  var key = "ok_" + Utilities.base64EncodeWebSafe(Utilities.computeDigest(Utilities.DigestAlgorithm.SHA_256, code)).slice(0, 40);
+  var cache = CacheService.getScriptCache();
+  if (cache.get(key) === "1") return true;
+  try {
+    var res = UrlFetchApp.fetch(SAVER_URL, { method: "post", contentType: "text/plain", payload: JSON.stringify({ action: "list", code: code }), muteHttpExceptions: true, followRedirects: true });
+    var ok = !!JSON.parse(res.getContentText()).ok;
+    if (ok) cache.put(key, "1", 1800);
+    return ok;
+  } catch (e) { return false; }
 }
 function clean(v, max) { return String(v == null ? "" : v).replace(/[\u0000-\u001f]/g, " ").trim().slice(0, max); }
 function json(o) { return ContentService.createTextOutput(JSON.stringify(o)).setMimeType(ContentService.MimeType.JSON); }
