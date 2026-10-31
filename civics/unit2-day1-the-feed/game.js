@@ -39,7 +39,7 @@ const ITEMS = [
   { id: 'i13', side: 'tent', t: 'A church that tells its members teens need a curfew downtown', why: 'Tricky! A church with members sharing a belief. It doesn\'t run anyone for office.' },
   { id: 'i14', side: 'tent', t: 'A mom who wants energy drinks banned for kids under 16', why: 'An opinion about a law. Belief = tent.' },
   { id: 'i15', side: 'tent', t: 'A senior who wants schools to teach how to do taxes', why: 'An opinion about what schools should do. Belief = tent.' },
-  { id: 'i16', side: 'tent', t: 'Yells at the TV every time a candidate talks about gas prices', why: 'Sharing opinions online is still just opinions. No candidates.' },
+  { id: 'i16', side: 'tent', t: 'Yells at the TV every time a candidate talks about gas prices', why: 'Yelling at the TV is still just an opinion. No team, no candidates.' },
   { id: 'i17', side: 'tent', t: 'Believes the voting age should be 16', why: 'A belief about a law. Belief = tent.' },
   { id: 'i18', side: 'tent', t: 'Wants police to need a warrant before searching your phone', why: 'A belief about government power = tent.' },
   { id: 'i19', side: 'tent', t: '“We all think the phone ban is dumb.” (friends at lunch)', why: 'Tricky! "We" is just friends sharing an opinion. No candidates, no elections.' },
@@ -52,7 +52,7 @@ const ITEMS = [
   // ---- a TEAM that runs candidates and tries to win elections ----
   { id: 'b1', side: 'booth', t: '“Hey Jordan! Can you knock doors Saturday so Sarah wins her race?” (a text)', why: 'Getting volunteers to win elections is what a party does.' },
   { id: 'b2', side: 'booth', t: 'Its name shows up next to candidates on your ballot', why: 'On Iowa ballots, a candidate\'s party is listed next to their name.' },
-  { id: 'b3', side: 'booth', t: 'Has a state chair who picks who it runs for each office', why: 'Leaders running election campaigns = a party.' },
+  { id: 'b3', side: 'booth', t: 'Has a state chair who runs its campaigns across Iowa', why: 'Leaders running election campaigns = a party.' },
   { id: 'b4', side: 'booth', t: '“We raised $2 million for YouTube and TV ads to win in November.”', why: 'Raising money and running campaigns is a party\'s job.' },
   { id: 'b5', side: 'booth', t: 'Pays TikTokers to post videos for the person it\'s running for governor', why: 'Running ads for its own candidate = party.' },
   { id: 'b6', side: 'booth', t: '“Our members voted in a primary to pick our candidate for governor.”', why: 'Parties hold primaries so their members pick their candidates.' },
@@ -71,7 +71,7 @@ const ITEMS = [
   { id: 'b19', side: 'booth', t: 'A volunteer group that drives voters to the polls for the people it runs for office', why: 'A team working to elect the people it runs = party.' },
   { id: 'b20', side: 'booth', t: 'A group that writes a list of goals and runs candidates to make them law', why: 'Goals + candidates trying to win = party.' },
   { id: 'b21', side: 'booth', t: '“Join our team. We pick candidates and help them win.”', why: 'That\'s basically the definition of a party.' },
-  { id: 'b22', side: 'booth', t: 'Pays organizers to find volunteers before every election', why: 'An organized team working to win elections = party.' },
+  { id: 'b22', side: 'booth', t: 'Pays organizers to find volunteers for its candidates before every election', why: 'An organized team working to win elections = party.' },
   { id: 'b23', side: 'booth', t: 'Mails you flyers that say "Vote for our team on Tuesday"', why: 'Campaigning for its own candidates = party.' },
   { id: 'b24', side: 'booth', t: '“Our candidate for governor should win, and here\'s how you can help.”', why: 'Tricky! "Should" sounds like an opinion, but it\'s a team working to win. Party.' },
   { id: 'b25', side: 'booth', t: 'Holds a convention where members vote on candidates and goals', why: 'Conventions are big party meetings to pick candidates and goals.' }
@@ -142,7 +142,7 @@ function hud() {
   const P = { title: '', intro: '', r1: 'Round 1 · Sort Rush', r2: 'Round 2 · Same Belief, Different Party', r3: 'Round 3 · Start a Party', final: 'You did it!' };
   $('#shiftPill').textContent = P[st.phase] || 'Iowa State Fair';
   $('#shiftPill').style.display = P[st.phase] ? '' : 'none';
-  $('#countPill').textContent = st.phase === 'r1' ? 'Card ' + Math.min(DECK_SIZE, att().seen + 1) + ' of ' + DECK_SIZE : st.phase === 'r2' ? 'Pair ' + (st.ci + 1) + ' of ' + CASES.length : '';
+  $('#countPill').textContent = st.phase === 'r1' ? 'Card ' + Math.min(DECK_SIZE, att().seen + (st.r1Next ? 0 : 1)) + ' of ' + DECK_SIZE : st.phase === 'r2' ? 'Pair ' + (st.ci + 1) + ' of ' + CASES.length : '';
   $('#scorePill').textContent = '🌽 ' + st.score.toLocaleString();
   race();
 }
@@ -190,7 +190,7 @@ function pIntro() {
     };
   } else {
     card.innerHTML = `<h2>The only thing you need to know:</h2>
-    <div class="analogy"><div class="a1"><div style="font-size:40px">⛺💭</div><b>IDEOLOGY = what you BELIEVE</b><br>Your opinions about what the government should do.<br><i>Like loving basketball.</i></div><div class="a2"><div style="font-size:40px">🏛️🏀</div><b>PARTY = a TEAM</b><br>Members, leaders, money, and candidates trying to win elections.<br><i>Like being ON a basketball team.</i></div></div>
+    <div class="analogy"><div class="a1"><div style="font-size:40px">⛺💭</div><b>IDEOLOGY = what you BELIEVE</b><br>Your opinions about what the government should do. A whole set of them (like liberal or conservative) is an ideology.<br><i>Like loving basketball.</i></div><div class="a2"><div style="font-size:40px">🏛️🏀</div><b>PARTY = a TEAM</b><br>Members, leaders, money, and candidates trying to win elections.<br><i>Like being ON a basketball team.</i></div></div>
     <p class="lead">Is it a <b style="color:#7b5fb2">belief</b> or a <b style="color:#b5651d">team</b>? Be fast. Get combos. 🔥</p>
     <button class="playbtn go" id="go" style="font-size:22px;padding:12px">Start sorting! →</button>`;
     $('#go').onclick = () => { st.phase = 'r1'; st.t0 = Date.now(); save(); $('#overlay').hidden = true; render(); };
@@ -220,11 +220,12 @@ function pR1() {
 }
 function showMiss(it) {
   tray.querySelectorAll('[data-s]').forEach(b => b.disabled = true);
+  const a = att(), sk = tray.querySelector('.streak'); if (sk) sk.textContent = `✅ ${a.right} right · ${'❤️'.repeat(Math.max(0, MAX_MISS - misses()))}${'🖤'.repeat(Math.min(MAX_MISS, misses()))} misses left`; hud();
   $('#fb').className = 'fb oops'; $('#fb').innerHTML = `Oops! −15 🌽 It's a <b>${it.side === 'tent' ? 'BELIEF ⛺' : 'TEAM 🏛️'}</b>. ${esc(it.why)} <button class="primary" id="gotit" style="margin-left:8px;padding:6px 14px">Got it →</button>`;
   setTimeout(() => { const b = $('#gotit'); if (b) b.onclick = () => { st.r1Next = false; st.queue.shift(); save(); render(); }; }, 400);
 }
 function sort(side) {
-  if (r1Busy || locked() || st.phase !== 'r1' || Date.now() - (st.shownAt || 0) < 700) return;
+  if (r1Busy || st.r1Next || st.showRetry || locked() || st.phase !== 'r1' || Date.now() - (st.shownAt || 0) < 700) return;
   const a = att(), id = st.queue[0], it = ITEM[id];
   const card = $('#item'); r1Busy = true; a.seen++; (st.seenIds || (st.seenIds = {}))[id] = 1;
   if (a.n === 1) st.r1[id] = { wrong: side === it.side ? 0 : 1 }; // first try is what the teacher sees
@@ -253,7 +254,7 @@ function sort(side) {
 function r1Finish() {
   const a = att();
   if (st.firstAtt == null) { st.firstAtt = a.right; st.firstSeen = a.seen; }
-  st.attempts = a.n;
+  st.attempts = (st.prevTries || 0) + a.n;
   if (a.right >= PASS) { save(); return roundDone('r2', `🎉 ${a.right} of ${DECK_SIZE}! You passed Sort Rush!`, `Best combo: 🔥${st.best}. Next: two people believe the SAME thing but pick DIFFERENT parties. Figure out why.`); }
   st.lastTry = { right: a.right, seen: a.seen };
   st.att = { n: a.n + 1, right: 0, seen: 0 }; st.queue = newDeck(st.seenIds); st.streak = 0; st.showRetry = true; save();
@@ -354,6 +355,7 @@ const PROMPTS = [
 ];
 function tally() {
   const sort = st.firstAtt != null ? [st.firstAtt, st.firstSeen || DECK_SIZE] : [att().right, att().seen];
+  sort.missed = sort[1] - sort[0];
   const why = [CASES.filter((c, i) => st.r2[i] && st.r2[i].done && !st.r2[i].wrong).length, CASES.length];
   const make = [st.r3.done && !st.r3.wrong ? 1 : 0, 1];
   return { sort, why, make, tot: [sort[0] + why[0] + make[0], sort[1] + why[1] + make[1]] };
@@ -394,9 +396,9 @@ async function turnIn() {
   for (const p of PROMPTS) { const v = ($('#w_' + p.id).value || '').trim(); const bad = checkWriting(p, v); if (bad) { msg.className = 'fb oops'; msg.textContent = bad; $('#w_' + p.id).focus(); return; } }
   const t = tally();
   const answers = { 'Standard': 'SS.9-12.Gov.12', 'First-try correct': t.tot[0] + ' of ' + t.tot[1], 'First-try by standard': 'Gov.12: ' + t.tot[0] + ' of ' + t.tot[1],
-    'First-try by part': 'Sort Rush ' + t.sort[0] + '/' + t.sort[1] + ' · Why different parties ' + t.why[0] + '/' + t.why[1] + ' · Make a party ' + (t.make[0] ? '1/1' : '0/1'), 'Corn score': String(st.score) };
+    'First-try by part': 'Sort Rush set 1: ' + t.sort[0] + ' right, ' + (t.sort[1] - t.sort[0]) + ' missed' + (t.sort[1] < DECK_SIZE ? ' (stopped at card ' + t.sort[1] + ')' : '') + ' · Why different parties ' + t.why[0] + '/' + t.why[1] + ' · Make a party ' + (t.make[0] ? '1/1' : '0/1'), 'Corn score': String(st.score) };
   const missed = ITEMS.filter(i => st.r1[i.id] && st.r1[i.id].wrong).map(i => `"${i.t}" (${i.side === 'tent' ? 'ideology' : 'party'})`);
-  answers['Sort Rush tries'] = (st.attempts || 1) + (st.attempts > 1 ? ' (needed a new set ' + (st.attempts - 1) + 'x to reach 80%)' : ' (passed first try)');
+  answers['Sort Rush tries'] = (st.attempts || 1) + (st.attempts > 1 ? ' (needed a new set ' + (st.attempts - 1) + 'x to reach 80%)' : ' (passed first try)') + ((st.attempts || 1) >= 3 ? ' ⚠️ check in with this student' : '') + (st.resets ? ' · used Start over ' + st.resets + 'x' : '');
   answers['Sort Rush misses'] = missed.length ? missed.join('; ') : 'none';
   CASES.forEach((c, i) => { const r = st.r2[i] || {}; answers['Why · ' + c.b.name] = REASONS[c.right].replace(/^\S+ /, '') + (r.wrong ? ' (after ' + r.wrong + ' wrong)' : ' (first try)'); });
   answers['Make it a party'] = st.r3.wrong ? 'after ' + st.r3.wrong + ' wrong' : 'first try';
@@ -508,7 +510,7 @@ const SCENE = (() => {
 /* ---------------- BOOT ---------------- */
 $('#helpBtn').onclick = () => $('#helpDialog').showModal();
 document.querySelectorAll('[data-close]').forEach(b => b.onclick = () => $('#' + b.dataset.close).close());
-$('#resetBtn').onclick = () => { if (!confirm('Start over? This erases your progress on this device.')) return; const n = st.name, r = st.room; st = fresh(); st.name = n; st.room = r; st.phase = 'intro'; if (window.classFirstTry) classFirstTry.reset(); save(); location.reload(); };
+$('#resetBtn').onclick = () => { if (!confirm('Start over? This erases your progress on this device.')) return; const old = st; st = fresh(); st.name = old.name; st.room = old.room; st.phase = 'intro'; ['firstAtt', 'firstSeen', 'r1'].forEach(k => { if (old[k] != null) st[k] = old[k]; }); st.prevTries = (old.prevTries || 0) + (old.att && (old.att.seen > 0 || old.att.n > 1) ? old.att.n : 0); st.attempts = old.attempts; st.resets = (old.resets || 0) + 1; save(); location.reload(); };
 if (st.name) startArena();
 render();
 })();
