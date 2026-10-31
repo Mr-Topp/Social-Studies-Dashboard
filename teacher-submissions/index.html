@@ -100,6 +100,8 @@ td.sum.l3{background:#eef7f0;color:#1f5e2c}td.sum.l2{background:#fff8e2;color:#7
 .gradebox .gnote{flex:1 1 160px;padding:6px 8px}.gstat{margin:4px 0 0;min-height:0}
 .rosteredit{margin-top:10px}.rosteredit textarea{width:100%;box-sizing:border-box;font:inherit;padding:8px;border:1px solid #cfc5b3;border-radius:8px;margin:6px 0}
 .seen{color:#1f6b3a}
+.unitdrop{background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px 12px;margin:0 0 8px}
+.unitdrop summary{cursor:pointer;font-weight:900;color:var(--navy)}.unitdrop .links{margin:10px 0 2px}
 </style>
 </head>
 <body>
@@ -134,6 +136,7 @@ td.sum.l3{background:#eef7f0;color:#1f5e2c}td.sum.l2{background:#fff8e2;color:#7
     <button class="light" id="gridView" aria-pressed="true">Who turned in what</button>
     <button class="light" id="listView" aria-pressed="false">Read answers</button>
     <button class="light" id="masteryView" aria-pressed="false">Standards &amp; mastery</button>
+    <button class="light" id="linksView" aria-pressed="false">Student links</button>
     <button class="light" id="csvBtn" disabled>Download CSV</button>
   </div>
   <div class="row" id="filters" hidden style="margin-bottom:10px">
@@ -298,14 +301,21 @@ function byUnit(ids, course) {
   return groups;
 }
 
+// Student links: one dropdown per unit, newest unit open, so nothing to scroll through.
+function renderLinks() {
+  const acts = Object.keys(REG).filter(id => REG[id].course === tab && REG[id].path);
+  if (!acts.length) { $("out").innerHTML = "<div class='empty'>No activities in this class send work to the dashboard yet.</div>"; return; }
+  const groups = byUnit(acts, tab);
+  $("out").innerHTML = `<p class="status" style="margin:0 0 8px">Tap a unit to open it. Links open the student page in a new tab.</p>` +
+    groups.map((g, i) => `<details class="unitdrop"${i === groups.length - 1 ? " open" : ""}><summary>${safe(g.name)} <span class="unitcount">${g.ids.length} ${g.ids.length === 1 ? "activity" : "activities"}</span></summary><div class="links">${g.ids.map(id => `<a href="../${REG[id].path}" target="_blank" rel="noopener">${safe(REG[id].title)}</a>`).join("")}</div></details>`).join("");
+}
+
 function renderTabs() {
   $("tabs").innerHTML = Object.keys(COURSES).map(k =>
     `<button class="tab" role="tab" data-tab="${k}" aria-selected="${k === tab}">${COURSES[k]}<span class="n">${tabRows(k).length}</span></button>`).join("");
   $("tabs").querySelectorAll(".tab").forEach(b => b.onclick = () => { tab = b.dataset.tab; sessionStorage.setItem("dash-tab", tab); $("search").value = ""; render(); });
   const acts = Object.keys(REG).filter(id => REG[id].course === tab && REG[id].path);
-  $("links").innerHTML = acts.length
-    ? "<details class='linkbox' open><summary class='linkhead'>Student links (" + acts.length + ")</summary>" + byUnit(acts, tab).map(g => `<div class="unitlinks"><span class="unitname">${safe(g.name)}</span><div class="links">${g.ids.map(id => `<a href="../${REG[id].path}" target="_blank" rel="noopener">${safe(REG[id].title)}</a>`).join("")}</div></div>`).join("") + "</details>"
-    : "<span class='status'>No activities in this class send work to the dashboard yet.</span>";
+  $("links").innerHTML = "";
 }
 
 
@@ -430,6 +440,8 @@ function render() {
   $("gridView").setAttribute("aria-pressed", view === "grid");
   $("listView").setAttribute("aria-pressed", view === "list");
   $("masteryView").setAttribute("aria-pressed", view === "mastery");
+  $("linksView").setAttribute("aria-pressed", view === "links");
+  if (view === "links") { $("filters").hidden = true; $("csvBtn").disabled = true; renderLinks(); return; }
   $("filters").hidden = view !== "list";
   const sel = $("assignment"), keep = sel.value;
   sel.innerHTML = '<option value="all">All activities</option>' + byUnit(activitiesFor(list), tab).map(g => `<optgroup label="${safe(g.name)}">${g.ids.map(id => `<option value="${safe(id)}">${safe(titleOf({ assignmentId: id }))}</option>`).join("")}</optgroup>`).join("");
@@ -556,6 +568,7 @@ $("lockBtn").onclick = () => { sessionStorage.removeItem("teacher-code"); $("tea
 $("gridView").onclick = () => { view = "grid"; render(); };
 $("listView").onclick = () => { view = "list"; render(); };
 $("masteryView").onclick = () => { view = "mastery"; render(); };
+$("linksView").onclick = () => { view = "links"; render(); };
 $("search").oninput = render; $("assignment").onchange = render;
 $("csvBtn").onclick = downloadCsv; $("importBtn").onclick = copyOld;
 render();
