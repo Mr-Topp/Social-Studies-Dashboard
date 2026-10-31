@@ -45,7 +45,7 @@ const ITEMS = [
   { id: 'l18', side: 'lib', t: 'The government should be able to bargain down what drug companies charge for medicine.', why: 'The government stepping in to lower health care costs = liberal.' },
   { id: 'l19', side: 'lib', t: 'Voting should be easier, with a mail-in ballot for anyone who wants one.', why: 'Liberals focus more on making voting easier. Conservatives focus more on preventing fraud.' },
   { id: 'l20', side: 'lib', t: 'The government should build more affordable housing for low-income families.', why: 'Government help with housing = liberal.' },
-  { id: 'l21', side: 'lib', t: 'Police should wear body cameras, and someone outside the department should review it when they use force.', why: 'More oversight and rules for police = liberal.' },
+  { id: 'l21', side: 'lib', t: 'Police should wear body cameras, and someone outside the department should review it when they use force.', why: 'More outside checks and rules for police = liberal.' },
   { id: 'l22', side: 'lib', t: 'The U.S. should take in more people who are running from war in their countries.', why: 'Welcoming more refugees (people running from war) = liberal.' },
   { id: 'l23', side: 'lib', t: 'A Republican farmer says: “The government needs to do a lot more about climate change.”', why: 'Tricky! He\'s a Republican, but THIS belief is liberal. A party label doesn\'t decide every belief.' },
   { id: 'l24', side: 'lib', t: 'A Democratic state senator says: “People making over $400,000 a year should pay higher taxes.”', why: 'Tricky! A party member is talking, but the card is a BELIEF. Higher taxes on the rich = liberal.' },
@@ -82,7 +82,7 @@ const ITEMS = [
   { id: 'p3', side: 'party', t: 'Iowa Republicans hold caucuses (neighborhood party meetings) in school gyms across the state.', why: 'Caucuses are meetings a party runs.' },
   { id: 'p4', side: 'party', t: 'A paid organizer texts 500 volunteers: “Knocking doors Saturday. We need to win this seat.”', why: 'Organizing volunteers = party.' },
   { id: 'p5', side: 'party', t: 'The Iowa Democratic Party turns in its list of candidates so they show up on the ballot.', why: 'Getting its candidates on the ballot = party. (On Iowa ballots, each candidate\'s party is printed next to their name.)' },
-  { id: 'p6', side: 'party', t: 'The Libertarian Party collects signatures to get its candidate on the Iowa ballot.', why: 'Getting candidates on the ballot = party. Third parties are parties too.' },
+  { id: 'p6', side: 'party', t: 'The Libertarian Party collects signatures to get its candidate on the Iowa ballot.', why: 'Getting candidates on the ballot = party. Smaller parties (third parties) are parties too.' },
   { id: 'p7', side: 'party', t: 'Its national committee picks a city to host the next big convention where it names its candidate for president.', why: 'Leaders running party events = party.' },
   { id: 'p8', side: 'party', t: 'Volunteers knock on 10,000 doors for the people their group is running for office.', why: 'Campaign work = party.' },
   { id: 'p9', side: 'party', t: 'The Republican Party of Iowa picks a new state leader (the state chair).', why: 'Choosing leaders = party.' },
@@ -161,7 +161,7 @@ const CASES = [
     fact: 'Real life: Almost 4 in 10 Republicans (37%) say same-sex marriage should be legal (Gallup, 2026). In Iowa, you vote in one party\'s primary, and you can switch parties right at the polls on primary day.' },
   { belief: 'taxes should be lower', tag: 'a conservative idea', a: P('Cody', 'Republican', '18 · works at Hy-Vee'), b: P('Tasha', 'No party', '19 · Kirkwood student'),
     say: 'I want lower taxes, but I also want background checks on guns. I looked at both sides. Each one gets some stuff right and some stuff way wrong, so I didn\'t pick either.',
-    right: 'nofit', q: 'Why didn\'t Tasha pick a party?', opts: ['nofit', 'family', 'issue', 'job'], hint: 'Read their quote again. What pushed them to that side?',
+    right: 'nofit', q: 'Why didn\'t Tasha pick a party?', opts: ['nofit', 'family', 'issue', 'job'], hint: 'Read her quote again. Why didn\'t either party win her over?',
     fact: 'Real life: More than 560,000 active Iowa voters are registered as "No Party." That\'s more than active registered Democrats (Iowa Secretary of State, Sept. 2026).' }
 ];
 
@@ -310,7 +310,7 @@ function r1RetryCard() {
   const lt = st.lastTry || { right: 0, seen: 0 }; hud(); SCENE.show('r1');
   $('#item').hidden = true; tray.innerHTML = '';
   const card = $('#card'); card.className = 'card brief';
-  card.innerHTML = `<p class="eyebrow">NEW SET</p><h2>Close! ${PASS} of ${DECK_SIZE} moves you on.</h2><p class="lead">That set had ${lt.right} right out of ${lt.seen}. Here's a fresh set of cards.</p>
+  card.innerHTML = `<p class="eyebrow">NEW SET</p><h2>${lt.right >= 10 ? 'Close!' : 'Keep going!'} ${PASS} of ${DECK_SIZE} moves you on.</h2><p class="lead">That set had ${lt.right} right out of ${lt.seen}. Here's a fresh set of cards.</p>
   <div class="tips"><p><b class="cb">More government help</b>, higher taxes on the rich, more rules, change → <b class="cb">LIBERAL</b></p><p><b class="cr">Smaller government</b>, lower taxes, fewer rules, tradition → <b class="cr">CONSERVATIVE</b></p><p>A group <b>picking candidates, raising money, or campaigning</b> → <b>PARTY</b>, even if it mentions a belief</p></div>
   <button class="primary go" id="go">Try a new set →</button>`;
   $('#overlay').hidden = false;
@@ -472,7 +472,9 @@ function checkWriting(p, v) {
     const who = Object.keys(VKEY).find(n => hasWord(t, n)), k = VKEY[who], N = cap(who);
     if (!IDEO_WORDS.some(w => hasWord(t, w))) return 'In answer 2, name ' + N + '\'s ideology: liberal, conservative, moderate, or libertarian.';
     if (!hasWord(t, k.ide) || new RegExp('\\bnot (a |an )?' + k.ide).test(t)) return 'Check ' + N + '\'s ideology again. Look at all 3 things they said.';
-    if (IDEO_WORDS.filter(w => hasWord(t, w)).length > 1) return 'In answer 2, pick ONE ideology for ' + N + '.';
+    const I = '(liberal|conservative|moderate|libertarian)', S = '\\b(' + who + '|he|she|they)( i|\'|’)s (a |an |more |mostly |really )?';
+    if (new RegExp(S + I + ' (and|or|but also) (a |an )?' + I).test(t)) return 'In answer 2, pick ONE ideology for ' + N + '.';
+    if (IDEO_WORDS.some(w => w !== k.ide && new RegExp(S + w).test(t))) return 'Check ' + N + '\'s ideology again. Look at all 3 things they said.';
     const proof = t.split(/[.!?]+/).filter(x => /\b(because|since|said|says|wants?|believes?|thinks?)\b/.test(x));
     if (!proof.some(x => k.ev.some(w => hasWord(x, w)))) return 'In answer 2, use one thing ' + N + ' really said as proof (look back at their 3 beliefs).';
     if (!k.p.some(w => hasWord(t, w))) return 'In answer 2, check which party ' + N + ' would most likely vote for.';
