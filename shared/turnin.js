@@ -75,6 +75,21 @@ const GOOGLE_SAVER_URL = "https://script.google.com/macros/s/AKfycbwWV93yudtLuny
       }
     }
 
+    // Save the exact wording of the written questions on the page, so grading always uses
+    // the question the student actually saw (even if the activity is reworded later).
+    if (body.answers && typeof body.answers === "object" && !Array.isArray(body.answers) && !("Questions on the page" in body.answers)) {
+      const qs = [];
+      document.querySelectorAll("textarea").forEach(t => {
+        let txt = "";
+        if (t.id) { const l = document.querySelector('label[for="' + (window.CSS && CSS.escape ? CSS.escape(t.id) : t.id) + '"]'); if (l) txt = l.textContent; }
+        if (!txt) { const l = t.closest("label"); if (l) txt = l.textContent; }
+        if (!txt) txt = t.getAttribute("aria-label") || "";
+        txt = txt.replace(/\s+/g, " ").trim();
+        if (txt.length > 8 && !qs.includes(txt)) qs.push(txt);
+      });
+      if (qs.length) body.answers["Questions on the page"] = qs;
+    }
+
     const name = shortName(body.studentName);
     if (!name || !/ [A-Z]\.$/.test(name)) return fakeResponse(400, { error: NAME_HELP });
     body.studentName = name;

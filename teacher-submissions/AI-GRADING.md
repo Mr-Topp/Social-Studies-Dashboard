@@ -29,6 +29,7 @@ Activity | Kind | Page | Source | Answers. Always find the columns by header nam
 - **Written answers** are free-text values the student typed, such as `reflection`, `Answer`, `U.S. connection`, keys
   that are the question itself (Great Hanoi Rat Hunt), or text inside the `checkN` entries of the WWII reading.
   If a key like `"Exit question"` holds the question, use it.
+- **Use the saved question first.** Turn-ins from 2026-10-31 on include `"Questions on the page"` (the exact wording of every written question the student saw), and the WWII readings include `U.S. question:` inside each `checkN`. Grade against that wording.
 - When the question text isn't in the turn-in, open the activity's page in the repo and find the label for the text box.
   **Questions change over time.** If the turn-in is older than the page's last change, find the wording that was live
   on the turn-in date with `git log -p --since/--until -- <folder>`. Known older wording (turn-ins before 2026-10-30):
