@@ -1,14 +1,14 @@
 <!doctype html>
 <html lang="en"><head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Fair Game · Booth Duty at the Iowa State Fair | Government Unit 2 Day 1</title>
-<link rel="stylesheet" href="style.css?v=fg4">
+<title>Tent or Booth · Ideology vs. Party | Government Unit 2 Day 1</title>
+<link rel="stylesheet" href="style.css?v=tb2">
 <script src="../../shared/assignments.js?v=20261031d"></script>
 <script src="../../shared/turnin.js?v=20261031d"></script>
 <script src="../../shared/arena.js?v=20261031d"></script>
 </head><body>
 <header>
-  <div class="brand"><span class="badge">🌽</span><span>FAIR GAME<small>BOOTH DUTY · IOWA STATE FAIR</small></span></div>
+  <div class="brand"><span class="badge">⛺</span><span>TENT OR BOOTH?<small>IDEOLOGY VS. PARTY · IOWA STATE FAIR</small></span></div>
   <div class="hud">
     <span class="pill" id="shiftPill">Getting started</span>
     <span class="pill" id="countPill"></span>
@@ -16,11 +16,11 @@
   </div>
   <div class="head-actions"><button id="helpBtn" class="small">How to play</button><button id="resetBtn" class="small">Start over</button></div>
 </header>
+<div id="title" class="title-screen"><div class="logo"><h1><span class="t1">TENT</span> <span class="t2">OR</span> <span class="t3">BOOTH?</span></h1><p>🌽 Sort the fair. Beat your class. 🌽</p><br><button class="playbtn" id="playBtn">▶ PLAY</button></div></div>
 <main>
-  <section class="scene" aria-label="Your booth at the fair">
+  <section class="scene" aria-label="The fairgrounds">
     <canvas id="scene" width="960" height="400" aria-hidden="true"></canvas>
-    <div id="bubble" class="bubble" hidden></div>
-    <div id="patience" class="patience" hidden><span>Patience</span><i><b id="patienceFill"></b></i></div>
+    <div id="item" class="itemcard" hidden></div>
     <div id="race" class="race" aria-label="Class race"></div>
     <div id="toast" role="status" aria-live="polite"></div>
   </section>
@@ -30,12 +30,13 @@
 <div id="overlay" class="overlay" hidden><article class="card" id="card"></article></div>
 
 <dialog id="helpDialog"><button class="close" data-close="helpDialog" aria-label="Close">×</button>
-  <p class="eyebrow">HOW TO PLAY</p><h2>Booth duty at the Iowa State Fair</h2>
-  <p>Your summer job: work a political party's booth. Your boss picks the booth. Halfway through, you switch to the other party's booth.</p>
-  <ol class="howto"><li><b>Listen.</b> Spot what shaped the fairgoer's beliefs.</li><li><b>Map it.</b> Put them on the idea map.</li><li><b>Pitch.</b> Play the card from your hand that fits them. If your party isn't a fit, be honest and send them to the other booth.</li></ol>
-  <p class="note">Faster = more corn 🌽. Beat your classmates. The fairgoers are made up. The fair, the booths, and the party positions are real.</p>
-  <p class="note">Standard <b>SS.9-12.Gov.12</b>: Critique the influence of intermediary institutions (like political parties) on government and policy.</p>
+  <p class="eyebrow">HOW TO PLAY</p><h2>Tent or Booth?</h2>
+  <p>⛺ The <b>Ideology Tent</b> is for beliefs: ideas about what government should do, and where those ideas come from.</p>
+  <p>🏛️ The <b>Party Booth</b> is for organized groups: members, leaders, money, candidates, and elections.</p>
+  <ol class="howto"><li><b>Sort Rush:</b> send each fairgoer's card to the tent or the booth. Fast + right = more corn.</li><li><b>Same Ideas, Different Booths:</b> figure out why people with the same ideology end up in different parties.</li><li><b>Make It a Party:</b> turn a group with shared ideas into a real party.</li></ol>
+  <p class="note">You can also use the ← and → arrow keys in Sort Rush. Fairgoers are made up. Iowa facts are real.</p>
+  <p class="note">Today's goal: tell the difference between an <b>ideology</b> (beliefs) and a <b>party</b> (a team that runs candidates). <span style="opacity:.7">SS.9-12.Gov.12</span></p>
 </dialog>
 
-<script src="game.js?v=fg4"></script>
+<script src="game.js?v=tb2"></script>
 </body></html>
