@@ -15,7 +15,11 @@ window.CLASS_COURSES = {
 window.CLASS_UNITS = {
   "us-history": {
     1: "Roaring 20s & the Great Depression",
-    2: "World War II"
+    2: "World War II",
+    3: "The Cold War",
+    4: "Civil Rights",
+    5: "Rise of Conservatism",
+    6: "Modern America"
   },
   "world-history": {
     1: "Imperialism & the World Wars (1800–1945)"

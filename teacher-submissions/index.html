@@ -5,7 +5,8 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
 <title>Teacher Dashboard · All Classes</title>
-<script src="../shared/assignments.js?v=20261031i"></script>
+<script src="../shared/assignments.js?v=20261031j"></script>
+<script src="presentations.js?v=20261031a"></script>
 <script src="../shared/turnin.js?v=20261031t"></script>
 <style>
 :root{--navy:#19364b;--red:#a33d36;--green:#2f6b3a;--paper:#f4efe4;--card:#fffdf8;--ink:#22313b;--muted:#536571;--line:#d8cfbd}
@@ -102,6 +103,8 @@ td.sum.l3{background:#eef7f0;color:#1f5e2c}td.sum.l2{background:#fff8e2;color:#7
 .seen{color:#1f6b3a}
 .unitdrop{background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px 12px;margin:0 0 8px}
 .unitdrop summary{cursor:pointer;font-weight:900;color:var(--navy)}.unitdrop .links{margin:10px 0 2px}
+.deckhead{font-size:.78rem;font-weight:900;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);margin:10px 0 0}
+.links.decks a{background:#fff6e5;border-color:#e7cf9c}
 </style>
 </head>
 <body>
@@ -306,9 +309,19 @@ const linkOpen = {};
 let attentionOpen = false;
 function linksHtml() {
   const acts = Object.keys(REG).filter(id => REG[id].course === tab && REG[id].path);
-  if (!acts.length) return "<p class='status'>No activities in this class send work to the dashboard yet.</p>";
+  const decks = (window.CLASS_PRESENTATIONS || []).filter(p => p.course === tab && p.url);
+  if (!acts.length && !decks.length) return "<p class='status'>No activities in this class send work to the dashboard yet.</p>";
   const groups = byUnit(acts, tab);
-  return groups.map((g, i) => `<details class="unitdrop" data-k="${safe(tab + "|" + g.unit)}"${linkOpen[tab + "|" + g.unit] ? " open" : ""}><summary>${safe(g.name)} <span class="unitcount">${g.ids.length} ${g.ids.length === 1 ? "assignment" : "assignments"}</span></summary><div class="links">${g.ids.map(id => `<a href="../${REG[id].path}" target="_blank" rel="noopener">${safe(REG[id].title)}</a>`).join("")}</div></details>`).join("");
+  decks.forEach(p => { const u = p.unit || 0; if (!groups.find(x => x.unit === u)) groups.push({ unit: u, name: unitName(tab, u), ids: [] }); });
+  groups.sort((a, b) => (a.unit || 999) - (b.unit || 999));
+  const plural = (n, w) => n + " " + w + (n === 1 ? "" : "s");
+  return groups.map(g => {
+    const mine = decks.filter(p => (p.unit || 0) === g.unit).sort((a, b) => (a.day || 0) - (b.day || 0));
+    const count = [g.ids.length ? plural(g.ids.length, "assignment") : "", mine.length ? plural(mine.length, "slide deck") : ""].filter(Boolean).join(" · ");
+    const actHtml = g.ids.length ? `<div class="links">${g.ids.map(id => `<a href="../${REG[id].path}" target="_blank" rel="noopener">${safe(REG[id].title)}</a>`).join("")}</div>` : "";
+    const deckHtml = mine.length ? `<div class="deckhead">Slides</div><div class="links decks">${mine.map(p => `<a href="${safe(p.url)}" target="_blank" rel="noopener">▶ ${safe(p.title)}</a>`).join("")}</div>` : "";
+    return `<details class="unitdrop" data-k="${safe(tab + "|" + g.unit)}"${linkOpen[tab + "|" + g.unit] ? " open" : ""}><summary>${safe(g.name)} <span class="unitcount">${count}</span></summary>${actHtml}${deckHtml}</details>`;
+  }).join("");
 }
 
 function renderTabs() {
