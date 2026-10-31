@@ -157,3 +157,7 @@ dialog .close{float:right;border:none;font-size:22px;padding:0 6px}
 .tray.final-tray{max-height:62vh;overflow:auto}
 .final-tray .final{grid-template-columns:280px 1fr}
 .final-tray textarea{min-height:58px}
+#toast{bottom:auto;top:34%}
+header{position:relative;z-index:25}
+.final-tray #sendBtn{position:sticky;bottom:4px;z-index:2}
+.final-tray ~ * , .titlemode #race{}

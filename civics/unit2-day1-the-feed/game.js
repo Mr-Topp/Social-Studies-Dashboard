@@ -24,18 +24,18 @@ const ITEMS = [
   { id: 'i1', side: 'tent', t: '“$7.25 an hour is a joke. Pay should go up.”', why: 'That\'s an opinion about what the government should do. Belief = tent.' },
   { id: 'i2', side: 'tent', t: '“Taxes take way too much out of my check.”', why: 'That\'s an opinion. You don\'t have to join anything to believe it.' },
   { id: 'i3', side: 'tent', t: '“The government should stay out of people\'s lives.”', why: 'That\'s a belief about how big government should be.' },
-  { id: 'i4', side: 'tent', t: 'A cashier who says 18-year-olds should be able to bet on sports', why: 'That\'s her opinion about a law. (In Iowa you have to be 21.)' },
-  { id: 'i5', side: 'tent', t: '“I\'d only vote for a candidate who gives police more money.”', why: 'Tricky! It mentions a candidate, but it\'s still one person\'s opinion. Belief = tent.' },
+  { id: 'i4', side: 'tent', t: '“We think 18-year-olds should be able to bet on sports.” (three friends in line)', why: 'Tricky! It says "we," but it\'s just friends sharing an opinion. No candidates, no team. (In Iowa you have to be 21.)' },
+  { id: 'i5', side: 'tent', t: '“I\'d only vote for a candidate who\'d make health care cheaper.”', why: 'Tricky! It mentions a candidate, but it\'s still one person\'s opinion. Belief = tent.' },
   { id: 'i6', side: 'tent', t: 'A group chat of friends who all hate the school phone ban', why: 'Tricky! They share a belief, but they don\'t run candidates or try to win elections. Not a party.' },
   { id: 'b1', side: 'booth', t: '“Hey! Want to volunteer to help our candidates win?”', why: 'Getting volunteers to win elections is what a party does.' },
   { id: 'b2', side: 'booth', t: 'Their team name shows up next to candidates on your ballot', why: 'On Iowa ballots, a candidate\'s party is listed next to their name.' },
-  { id: 'b3', side: 'booth', t: 'Has a state chair (the boss) who runs it in Iowa', why: 'Leaders and an organization = a party.' },
+  { id: 'b3', side: 'booth', t: 'Has a leader who runs it for all of Iowa', why: 'Leaders and an organization = a party.' },
   { id: 'b4', side: 'booth', t: '“We\'re raising money to put our candidates on TV.”', why: 'Raising money and running campaigns is a party\'s job.' },
-  { id: 'b5', side: 'booth', t: 'Sends people door to door to get you to vote for its candidates', why: 'An organized team working to win elections = party.' },
-  { id: 'b6', side: 'booth', t: '“Our members voted in June to pick who runs for governor.”', why: 'Parties hold primaries so their members pick their candidates.' }
+  { id: 'b5', side: 'booth', t: 'Writes a platform (its list of goals) at its state convention', why: 'A platform is a party\'s official list of goals. Parties vote on it at conventions.' },
+  { id: 'b6', side: 'booth', t: '“Our members voted in a primary to pick our candidate for governor.”', why: 'Parties hold primaries so their members pick their candidates.' }
 ];
 const ITEM = Object.fromEntries(ITEMS.map(i => [i.id, i]));
-const REASONS = { family: '👪 Family', candidate: '🙋 A candidate they know', issue: '⚖️ A bigger issue to them', nofit: '🚫 Neither party fits', job: '🦺 Where they work' };
+const REASONS = { family: '👪 Family', candidate: '🙋 A candidate they know', issue: '⚖️ A bigger issue to them', nofit: '🚫 Neither party fits', job: '🦺 Their job or union' };
 const LOOKP = {
   jaylen: { skin: 3, hair: 'short', hc: '#120d0b', shirt: '#3e6fb0', extra: 'none' }, mike: { skin: 0, hair: 'cap', hc: '#6b4a2b', shirt: '#7b8f4e', extra: 'cap' },
   brianna: { skin: 1, hair: 'long', hc: '#c58a3a', shirt: '#6fb7c9', extra: 'none' }, tony: { skin: 2, hair: 'short', hc: '#2a2a2a', shirt: '#3a7d3a', extra: 'hardhat' },
@@ -48,23 +48,23 @@ const P = (name, party, who) => ({ name, party, who, look: LOOKP[name.toLowerCas
 const CASES = [
   { belief: 'the minimum wage should go up', a: P('Jaylen', 'Democrat', '19 · works at a fast-food place'), b: P('Mike', 'Republican', '24 · warehouse worker'),
     say: 'Pay should go up, for real. But I hunt every fall, and I\'m not voting for anybody who\'d mess with my guns.',
-    right: 'issue', opts: ['issue', 'family', 'candidate', 'nofit'], hint: 'What does Mike care about even MORE than pay?',
+    right: 'issue', opts: ['issue', 'family', 'candidate', 'nofit'], hint: 'Read their quote again. What pushed them to that side?',
     fact: 'Real life: In 2020, Florida voters passed a $15 minimum wage. Many of those same voters picked the Republican for president.' },
   { belief: 'taxes on working people are too high', a: P('Brianna', 'Republican', '32 · CNA, mom of two'), b: P('Tony', 'Democrat', '45 · works at the John Deere plant'),
     say: 'Lower taxes would be nice. But my raise and my insurance came from our union contract. When the union says who\'s on our side, I listen.',
-    right: 'job', opts: ['job', 'family', 'candidate', 'nofit'], hint: 'Where did Tony\'s raise come from?',
+    right: 'job', opts: ['job', 'family', 'candidate', 'nofit'], hint: 'Read their quote again. What pushed them to that side?',
     fact: 'Real life: Unions often tell their members which candidates they support. Lots of members follow along, but not all of them.' },
   { belief: 'the government should stay out of people\'s lives', a: P('Dale', 'Republican', '58 · Kayla\'s uncle'), b: P('Kayla', 'Democrat', '20 · works at a phone store'),
-    say: 'My mom, my grandma, all my aunts. Every single one of them votes Democrat. Uncle Dale is the only one who switched.',
-    right: 'family', opts: ['family', 'issue', 'candidate', 'job'], hint: 'Who did Kayla list?',
+    say: 'I\'ve never voted any other way. It\'s just how I grew up. Uncle Dale is the only one at Thanksgiving who switched to Republican.',
+    right: 'family', opts: ['family', 'issue', 'candidate', 'job'], hint: 'Read their quote again. What pushed them to that side?',
     fact: 'Real life: Family is one of the biggest reasons people pick a party. But like Uncle Dale, people can switch.' },
   { belief: 'police need more money', a: P('Andre', 'Democrat', '28 · cook'), b: P('Marcy', 'Republican', '41 · runs a daycare'),
     say: 'The woman running for Iowa House is my neighbor. She helped fix my daycare fence last summer. She\'s a Republican, so I registered Republican to vote for her in the primary.',
-    right: 'candidate', opts: ['candidate', 'family', 'issue', 'nofit'], hint: 'Who does Marcy know personally?',
+    right: 'candidate', opts: ['candidate', 'family', 'issue', 'nofit'], hint: 'Read their quote again. What pushed them to that side?',
     fact: 'Real life: In Iowa, you have to be registered with a party to vote in its primary. You can even switch on primary day.' },
   { belief: 'college costs way too much', a: P('Cody', 'Republican', '18 · works at Hy-Vee'), b: P('Tasha', 'No party', '19 · Kirkwood student'),
     say: 'I looked at both. Each one gets some stuff right and some stuff way wrong. So I didn\'t pick either.',
-    right: 'nofit', opts: ['nofit', 'family', 'issue', 'job'], hint: 'Did Tasha pick a side?',
+    right: 'nofit', opts: ['nofit', 'family', 'issue', 'job'], hint: 'Read their quote again. What pushed them to that side?',
     fact: 'Real life: More than 500,000 Iowans are registered to vote as "No Party."' }
 ];
 const TILES = { cand: { t: '🗳️ Run someone for office', ok: true }, members: { t: '🙋 Sign up members & volunteers', ok: true }, leaders: { t: '🧑‍💼 Pick leaders to run things', ok: true }, money: { t: '💵 Raise money for campaigns', ok: true },
@@ -97,8 +97,8 @@ function race() {
   if (!st.bots) st.bots = [{ name: 'Kenzie R.', s: 0 }, { name: 'Marcus T.', s: 0 }, { name: 'Ava L.', s: 0 }];
   const lo = liveOthers(), live = lo.length > 0;
   const rows = (live ? lo.map(p => ({ name: p.name, s: p.score })) : st.bots).map(o => ({ name: o.name, s: o.s })).concat([{ name: 'You', s: st.score, me: true }]).sort((a, b) => b.s - a.s).slice(0, 5);
-  $('#race').innerHTML = `<div class="t">🏁 CLASS RACE<span class="tag ${live ? 'live' : ''}">${live ? 'LIVE' : 'practice'}</span></div><ol>${rows.map((r, i) => `<li class="${r.me ? 'me' : ''}"><span class="n">${i + 1}</span><span class="nm">${esc(r.name)}</span><span class="sc">🌽${r.s}</span></li>`).join('')}</ol>`;
-  $('#race').style.display = ['r1', 'r2', 'r3', 'final'].includes(st.phase) ? '' : 'none';
+  $('#race').innerHTML = `<div class="t">🏁 CLASS RACE<span class="tag ${live ? 'live' : ''}">${live ? 'LIVE' : 'practice bots'}</span></div><ol>${rows.map((r, i) => `<li class="${r.me ? 'me' : ''}"><span class="n">${i + 1}</span><span class="nm">${esc(r.name)}</span><span class="sc">🌽${r.s}</span></li>`).join('')}</ol>`;
+  $('#race').style.display = ['r1', 'r2', 'r3'].includes(st.phase) ? '' : 'none';
 }
 function botsStep(k) { if (liveOthers().length) return; (st.bots || []).forEach((b, i) => { b.s += Math.round(k * [1, 1.15, .85][i] * (0.55 + Math.random() * 0.8)); }); }
 function startArena() { if (window.Arena) Arena.join({ game: ASSIGN, name: st.name, room: st.room, onBoard(p) { livePlayers = p; race(); }, onEvent() {} }); }
@@ -145,6 +145,7 @@ function pIntro() {
 let r1Busy = false;
 function pR1() {
   $('#overlay').hidden = true;
+  if (st.requeue && !locked()) requeue();
   const id = st.queue[0];
   if (!id) return roundDone('r2', '🎉 Sort Rush done!', `Best combo: 🔥${st.best}. Next: two people believe the SAME thing but pick DIFFERENT parties. Figure out why.`);
   const it = ITEM[id];
@@ -155,8 +156,9 @@ function pR1() {
   <div class="bigbtns"><button class="tent" data-s="tent">⛺ ← BELIEF<small>Ideology Tent</small></button><button class="booth" data-s="booth">🏛️ TEAM →<small>Party Booth</small></button></div><p class="fb" id="fb"></p>`;
   st.shownAt = Date.now(); r1Busy = false;
   tray.querySelectorAll('[data-s]').forEach(b => b.onclick = () => sort(b.dataset.s));
-  if (locked()) pause(tray, $('#fb'), st.lockMsg, () => render(), true);
+  if (locked()) pause(tray, $('#fb'), st.lockMsg, () => { requeue(); render(); }, true);
 }
+function requeue() { if (st.requeue && st.queue[0] === st.requeue) st.queue.push(st.queue.shift()); st.requeue = null; save(); }
 function sort(side) {
   if (r1Busy || locked() || st.phase !== 'r1' || Date.now() - (st.shownAt || 0) < 700) return;
   const id = st.queue[0], it = ITEM[id]; const r = st.r1[id] || (st.r1[id] = { wrong: 0 });
@@ -179,13 +181,13 @@ function sort(side) {
     setTimeout(() => render(), 1100);
   } else {
     r.wrong++; st.streak = 0; st.score = Math.max(0, st.score - 15); hud(); if (window.classFirstTry) classFirstTry.wrong();
-    st.queue.push(st.queue.shift()); // try it again later
+    st.requeue = id; // moves to the back of the line after the pause
     save(); card.classList.remove('shake'); void card.offsetWidth; card.classList.add('shake');
     SCENE.oops();
-    pause(tray, $('#fb'), 'Oops! −15 🌽 ' + it.why + ' It\'ll come back later.', () => render());
+    pause(tray, $('#fb'), 'Oops! −15 🌽 ' + it.why + ' It\'ll come back later.', () => { requeue(); render(); });
   }
 }
-document.addEventListener('keydown', e => { if (st.phase !== 'r1' || !$('#overlay').hidden) return; if (e.key === 'ArrowLeft') sort('tent'); if (e.key === 'ArrowRight') sort('booth'); });
+document.addEventListener('keydown', e => { if (st.phase !== 'r1' || !$('#overlay').hidden || $('#helpDialog').open) return; if (e.key === 'ArrowLeft') sort('tent'); if (e.key === 'ArrowRight') sort('booth'); });
 
 function roundDone(next, title, line) {
   $('#item').hidden = true; tray.innerHTML = '';
@@ -214,7 +216,7 @@ function pR2() {
       if (b.dataset.k === c.right) {
         r.done = true; if (window.classFirstTry) classFirstTry.right('why-' + st.ci);
         const pts = r.wrong ? 0 : 150; st.score += pts; botsStep(130); save(); pushScore(); SCENE.confetti(); hud(); r2Result(c);
-      } else { r.wrong++; if (window.classFirstTry) classFirstTry.wrong(); save(); pause(tray, $('#fb'), 'Oops! ' + c.hint, () => draw('')); }
+      } else { r.wrong++; st.score = Math.max(0, st.score - 15); hud(); if (window.classFirstTry) classFirstTry.wrong(); save(); pause(tray, $('#fb'), 'Oops! −15 🌽 ' + c.hint, () => draw('')); }
     });
   };
   draw('');
@@ -224,9 +226,10 @@ function r2Result(c) {
   tray.innerHTML = `<div class="rhead"><span class="rtag">SAME BELIEF, DIFFERENT PARTY</span></div><p class="yay">✓ ${REASONS[c.right]}</p>
   ${st.ci === 0 ? '<p class="why2">Same belief, different team. Your beliefs (ideology) don\'t automatically decide your party. People join the party that fits them <b>best</b>, not perfectly.</p>' : ''}<p class="note">${esc(c.fact)}</p>
   <div class="row"><button class="primary" id="nx">${st.ci < CASES.length - 1 ? 'Next pair →' : 'Finish round →'}</button></div>`;
-  $('#nx').onclick = () => { st.ci++; save(); render(); };
+  guardNext(() => { st.ci++; save(); render(); });
 }
 
+function guardNext(fn) { const b = $('#nx'), t = Date.now(); b.onclick = () => { if (Date.now() - t < 450) return; b.onclick = null; fn(); }; }
 /* ---- Round 3: Make It a Party ---- */
 function pR3() {
   $('#overlay').hidden = true; $('#item').hidden = true; SCENE.show('r3');
@@ -240,11 +243,11 @@ function pR3() {
     <h2>Pick the 4 things your crew needs to become a real party.</h2>
     <div class="tiles">${order.map(k => `<button data-t="${k}" class="${r.sel.includes(k) ? 'sel' : ''}">${TILES[k].t}</button>`).join('')}</div>
     <div class="row"><button class="primary" id="make" ${r.sel.length === 4 ? '' : 'disabled'}>🏛️ Make it official!</button><span class="fb" id="fb">${msg ? esc(msg) : ''}</span></div>`;
-    tray.querySelectorAll('[data-t]').forEach(b => b.onclick = () => { const k = b.dataset.t; if (r.sel.includes(k)) r.sel = r.sel.filter(x => x !== k); else if (r.sel.length < 4) r.sel.push(k); save(); draw(''); });
+    tray.querySelectorAll('[data-t]').forEach(b => b.onclick = () => { const k = b.dataset.t; if (r.sel.includes(k)) r.sel = r.sel.filter(x => x !== k); else if (r.sel.length < 4) r.sel.push(k); save(); tray.querySelectorAll('[data-t]').forEach(x => x.classList.toggle('sel', r.sel.includes(x.dataset.t))); tray.querySelector('.streak').textContent = 'Picked ' + r.sel.length + ' of 4'; $('#make').disabled = r.sel.length !== 4; });
     $('#make').onclick = () => {
       const good = r.sel.filter(k => TILES[k].ok).length;
       if (good === 4) { r.done = true; if (window.classFirstTry) classFirstTry.right('make-party'); st.score += r.wrong ? 0 : 150; botsStep(120); save(); pushScore(); SCENE.confetti(); hud(); r3Result(); }
-      else { r.wrong++; if (window.classFirstTry) classFirstTry.wrong(); r.sel = r.sel.filter(k => TILES[k].ok); save(); pause(tray, $('#fb'), `${good} of 4 are right! Keep those, swap the rest. Hint: a party is a TEAM that tries to WIN ELECTIONS.`, () => pR3()); }
+      else { r.wrong++; if (window.classFirstTry) classFirstTry.wrong(); r.sel = []; save(); pause(tray, $('#fb'), `${good} of 4 were right. Try again! Hint: a party is a TEAM that tries to WIN ELECTIONS.`, () => pR3()); }
     };
   };
   draw('');
@@ -256,7 +259,7 @@ function r3Result() {
   <p class="why2">You still have the same belief (your ideology). Now you also have members, leaders, money, and a candidate. That's what makes it a party. Protests, petitions, and group chats can push for change, but they don't run anyone for office. And nobody has to agree on everything.</p>
   <p class="note">Real Iowa rule: to become an official party, your candidate for governor or president needs at least 2% of the vote.</p>
   <div class="row"><button class="primary" id="nx">See my results →</button></div>`;
-  $('#nx').onclick = () => { st.phase = 'final'; save(); render(); };
+  guardNext(() => { st.phase = 'final'; save(); render(); });
 }
 
 /* ---- Final + turn in ---- */
@@ -264,7 +267,9 @@ const PROMPTS = [
   { id: 'diff', short: 'Ideology vs. party', label: '1. What is the difference between an ideology and a party? Give an example of each from today.', stem: 'An ideology is ___. A party is ___. One example of an ideology is ___. One thing a party does is ___.', min: 80,
     must: [['belief', 'believe', 'opinion', 'idea', 'ideas', 'views', 'values'], ['candidate', 'member', 'organiz', 'election', 'team', 'leader', 'campaign', 'volunteer', 'ballot', 'primary']], msg: 'In answer 1, say what an ideology is (beliefs/ideas) AND what a party is (a team that runs candidates).' },
   { id: 'why', short: 'Why party ≠ ideology', label: '2. Pick Mike, Tony, Kayla, Marcy, or Tasha. Why did they pick their party (or no party)?', stem: '___ picked ___ because ___.', min: 50,
-    must: [['mike', 'tony', 'kayla', 'marcy', 'tasha']], msg: 'In answer 2, name the person AND what decided it (family, their union, a bigger issue, a candidate they know, or neither party fits).' }
+    must: [['mike', 'tony', 'kayla', 'marcy', 'tasha']], msg: 'In answer 2, name the person AND what decided it (family, their union, a bigger issue, a candidate they know, or neither party fits).' },
+  { id: 'crit', optional: true, short: '⭐ Level 4 challenge', label: '⭐ Level 4 challenge (optional, +300 🌽): Mike votes on one issue (guns). Tony follows his union. Pick one of them: is that good or bad for democracy? Give one plus AND one minus.', stem: 'One plus is ___. One minus is ___. Overall I think ___ because ___.', min: 90,
+    must: [['plus', 'good', 'help', 'benefit'], ['minus', 'bad', 'problem', 'hurt', 'downside'], ['mike', 'tony', 'union', 'gun', 'issue', 'vote', 'voting', 'election', 'democracy', 'candidate']], msg: 'For the Level 4 challenge, name Mike or Tony and give one plus AND one minus.' }
 ];
 function tally() {
   const sort = [ITEMS.filter(i => st.r1[i.id] && !st.r1[i.id].wrong).length, ITEMS.length];
@@ -279,23 +284,28 @@ function pFinal() {
   tray.classList.add('final-tray');
   tray.innerHTML = `<div class="final"><div><p class="eyebrow">YOU DID IT!</p><p class="big">🌽 ${st.score.toLocaleString()}</p><p class="jarline">#${rank} in the class race · best combo 🔥${st.best}</p>
     <ul><li>Sort Rush right on first try: <b>${t.sort[0]} of ${t.sort[1]}</b></li><li>Same Belief, Different Party: <b>${t.why[0]} of ${t.why[1]}</b></li><li>Start a Party: <b>${t.make[0] ? 'first try ✓' : 'got it ✓'}</b></li></ul>
-    <p class="note">✍️ Last step: 2 short answers, then turn in. Use the starters!</p></div>
-    <div>${PROMPTS.map(p => `<label for="w_${p.id}" style="display:block;font-weight:850;margin:10px 0 2px">${esc(p.label)}</label><p class="stem">Starter: ${esc(p.stem)}</p><textarea id="w_${p.id}">${esc(st.writing[p.id] || '')}</textarea>`).join('')}
+    <p class="note">✍️ Last step: 2 short answers, then turn in. Use the starters! The ⭐ challenge is optional.</p></div>
+    <div>${PROMPTS.map(p => `<label for="w_${p.id}" style="display:block;font-weight:850;margin:10px 0 2px${p.optional ? ';color:#7a5800' : ''}">${esc(p.label)}</label><p class="stem">Starter: ${esc(p.stem)}</p><textarea id="w_${p.id}">${esc(st.writing[p.id] || '')}</textarea>`).join('')}
     <button class="primary go" id="sendBtn">${st.turnedIn ? 'Turn in again' : 'Turn in'}</button><p class="fb ${st.turnedIn ? 'good' : ''}" id="sendMsg">${st.turnedIn ? 'Turned in! You can fix your answers and turn in again.' : ''}</p></div></div>`;
   PROMPTS.forEach(p => $('#w_' + p.id).addEventListener('input', e => { st.writing[p.id] = e.target.value; save(); }));
   $('#sendBtn').onclick = turnIn; pushScore();
 }
-const WHY_WORDS = { mike: ['gun', 'guns', 'hunt', 'hunting', 'rifle'], tony: ['union', 'raise', 'insurance', 'contract', 'plant', 'deere'], kayla: ['family', 'mom', 'grandma', 'aunt', 'aunts', 'relatives'], marcy: ['neighbor', 'fence', 'candidate', 'running'], tasha: ['neither', 'both', 'no party', 'didn\'t pick', 'didnt pick', 'each one', 'either'] };
-const hasWord = (t, w) => new RegExp('\\b' + w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + (w.length > 4 ? '' : '\\b')).test(t);
+const WHY_WORDS = { mike: ['gun', 'hunt', 'rifle'], tony: ['union', 'raise', 'insurance', 'contract', 'plant', 'deere', 'job'], kayla: ['family', 'grew up', 'raised', 'parent', 'mom', 'mother', 'dad', 'home', 'thanksgiving', 'relative'], marcy: ['neighbor', 'fence', 'candidate', 'running', 'know', 'friend', 'helped', 'trust'], tasha: ['neither', 'didn\'t pick', 'didnt pick', 'each one', 'both parties', 'not pick', 'fit', 'wrong', 'right'] };
+const hasWord = (t, w) => new RegExp('\\b' + w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + (w.length > 4 ? '' : '(s|es|ed|ing)?\\b')).test(t);
 function checkWriting(p, v) {
   const t = v.toLowerCase();
-  if (/\b(idk|lol|bruh|asdf|dunno|bathroom)\b/.test(t)) return 'Write a real answer for: ' + p.short + '. Use the starter to help.';
+  if (p.optional && !v.trim()) return '';
+  if (/\b[bcdfghjklmnpqrstvwxz]{4,}\b/.test(t)) return 'Some of that isn\'t real words. Write a real answer for: ' + p.short + '.';
+  if (/\b(idk|lol|bruh|asdf|dunno|bathroom|blah|bye)\b|ok done/.test(t)) return 'Write a real answer for: ' + p.short + '. Use the starter to help.';
   if (p.id === 'why') { const who = Object.keys(WHY_WORDS).find(n => hasWord(t, n)); if (who && !WHY_WORDS[who].some(w => hasWord(t, w))) return 'In answer 2, say what decided it for ' + who[0].toUpperCase() + who.slice(1) + '. Look back at what they said.'; }
   if (/_{2,}/.test(v)) return 'Replace the ___ blanks with your own words in: ' + p.short + '.';
   if (v.length < p.min) return 'Write a little more for: ' + p.short + ' (2 full sentences).';
+  if (p.id !== 'why' && (v.match(/[a-z][.!?](\s|$)/gi) || []).length < 2) return 'Write at least 2 full sentences for: ' + p.short + '.';
+  if (p.id === 'why' && !/\b(because|since|so)\b/.test(t)) return 'In answer 2, use "because" to explain the reason.';
   const stem = new Set(p.stem.toLowerCase().match(/[a-z']+/g) || []);
   if (new Set((t.match(/[a-z']{3,}/g) || []).filter(w => !stem.has(w))).size < 6) return 'Add more of your own words for: ' + p.short + '.';
   if (p.must.some(g => !g.some(w => hasWord(t, w)))) return p.msg;
+  if (p.id === 'diff') { const sents = t.split(/[.!?]+/); const ide = sents.find(x => /ideolog/.test(x)), par = sents.find(x => /\bpart(y|ies)\b/.test(x) && !/ideolog/.test(x)); if (ide && !p.must[0].some(w => hasWord(ide, w))) return 'Check answer 1: an ideology is about BELIEFS. Say that in your ideology sentence.'; if (par && !p.must[1].some(w => hasWord(par, w))) return 'Check answer 1: a party is a TEAM that runs candidates. Say that in your party sentence.'; }
   return '';
 }
 async function turnIn() {
@@ -308,13 +318,13 @@ async function turnIn() {
   answers['Sort Rush misses'] = missed.length ? missed.join('; ') : 'none';
   CASES.forEach((c, i) => { const r = st.r2[i] || {}; answers['Why · ' + c.b.name] = REASONS[c.right].replace(/^\S+ /, '') + (r.wrong ? ' (after ' + r.wrong + ' wrong)' : ' (first try)'); });
   answers['Make it a party'] = st.r3.wrong ? 'after ' + st.r3.wrong + ' wrong' : 'first try';
-  PROMPTS.forEach(p => answers['Writing: ' + p.short] = ($('#w_' + p.id).value || '').trim());
+  PROMPTS.forEach(p => answers['Writing: ' + p.short] = ($('#w_' + p.id).value || '').trim() || (p.optional ? '(skipped)' : ''));
   $('#sendBtn').disabled = true; msg.className = 'fb'; msg.textContent = 'Sending your work…';
   try {
     const res = await classTurnIn(OLD_API, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ studentName: st.name, assignmentId: ASSIGN, assignmentTitle: 'Government Unit 2 · Day 1 · Tent or Booth', answers }) });
     const data = await res.json().catch(() => ({}));
     if (!res.ok) throw new Error(data.error || 'Your work did not save. Try again.');
-    if (!st.turnedIn) { st.score += 200; pushScore(); hud(); SCENE.confetti(); } st.turnedIn = true; save(); msg.className = 'fb yay'; msg.textContent = 'Turned in! 🎉 +200 bonus corn. Your teacher can see your work.'; $('#sendBtn').textContent = 'Turned in ✓'; $('#sendBtn').disabled = false;
+    if (!st.turnedIn) { st.score += 200 + ((($('#w_crit') || {}).value || '').trim() ? 300 : 0); pushScore(); hud(); SCENE.confetti(); } st.turnedIn = true; save(); msg.className = 'fb yay'; msg.textContent = 'Turned in! 🎉 +200 bonus corn. Your teacher can see your work.'; $('#sendBtn').textContent = 'Turned in ✓'; $('#sendBtn').disabled = false;
   } catch (e) { msg.className = 'fb oops'; msg.textContent = e.message || 'Could not turn in. Try again.'; $('#sendBtn').disabled = false; }
 }
 
@@ -419,4 +429,15 @@ document.querySelectorAll('[data-close]').forEach(b => b.onclick = () => $('#' +
 $('#resetBtn').onclick = () => { if (!confirm('Start over? This erases your progress on this device.')) return; const n = st.name, r = st.room; st = fresh(); st.name = n; st.room = r; st.phase = 'intro'; if (window.classFirstTry) classFirstTry.reset(); save(); location.reload(); };
 if (st.name) startArena();
 render();
+})();
+/* Double-click guard: ignore clicks for a moment right after a screen redraws,
+   so a double-click can't answer the next question before the student sees it. */
+(() => {
+  let changed = 0;
+  const mark = () => { changed = performance.now(); };
+  ['tray', 'card'].forEach(id => { const el = document.getElementById(id); if (el) new MutationObserver(mark).observe(el, { childList: true }); });
+  document.addEventListener('click', e => {
+    const b = e.target.closest && e.target.closest('#tray button, #card button');
+    if (b && performance.now() - changed < 350) { e.stopImmediatePropagation(); e.preventDefault(); }
+  }, true);
 })();
