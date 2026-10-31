@@ -64,6 +64,7 @@ Also write **`"AI student feedback"`**: what the student will see on a card the 
 - Talk to the student ("You…"), at about a 12-year-old reading level, 1–2 short sentences, under 200 characters.
 - First what they did well (specific), then **one** clear next step tied to the question (for a 4: one way to go further).
 - Don't mention the level number, spelling, or other students. Be warm and direct, never sarcastic.
+- **Never mention AI, a grader, a computer, or automatic grading.** Write it the way the teacher would say it.
 - Example: "You explained why the French paid for rat tails. Next step: add what some people did to earn more money."
 - Flagged (copied) work: leave `"AI student feedback"` out. The student card just says the teacher will talk with them.
 
