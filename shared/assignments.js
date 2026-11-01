@@ -122,9 +122,13 @@ window.CLASS_ASSIGNMENTS = {
 
   // ---- Civics (Iowa civics test prep) · Fridays 2–7 (exit tickets on each Friday's presentation) ----
   "civics-f2-presentation": { course: "civics", unit: 2, title: "How the Government Works (Slides)", path: "civics/friday2-government-presentation/", std: ["SS.9-12.Gov.6", "SS.9-12.Gov.7", "SS.9-12.Gov.8"] },
+  "civics-f2-government-arcade": { course: "civics", unit: 2, title: "Government Arcade", path: "civics/day2-government-arcade/", std: ["SS.9-12.Gov.6", "SS.9-12.Gov.7", "SS.9-12.Gov.8", "SS.9-12.Gov.9", "SS.9-12.Gov.18"] },
   "civics-f3-presentation": { course: "civics", unit: 3, title: "Rights & Responsibilities (Slides)", path: "civics/friday3-rights-presentation/", std: ["SS.9-12.Gov.14", "SS.9-12.Gov.17"] },
+  "civics-f3-pixel-town": { course: "civics", unit: 3, title: "Pixel Town: Civic Quest", path: "civics/pixel-town-day3-game/", std: ["SS.9-12.Gov.13", "SS.9-12.Gov.14", "SS.9-12.Gov.17"] },
   "civics-f4-presentation": { course: "civics", unit: 4, title: "The 1776 Files (Slides)", path: "civics/friday4-1776-presentation/", std: ["SS.9-12.Gov.3", "SS.9-12.Gov.15"] },
+  "civics-f4-1776-files": { course: "civics", unit: 4, title: "The 1776 Files", path: "civics/friday4-1776-files-game/", std: ["SS.9-12.Gov.3", "SS.9-12.Gov.15"] },
   "civics-f5-presentation": { course: "civics", unit: 5, title: "The 1800s (Slides)", path: "civics/friday5-1800s-civics-presentation/", std: ["SS.9-12.Gov.14", "SS.9-12.Gov.15", "SS.9-12.Gov.3"] },
+  "civics-f5-1800s-express": { course: "civics", unit: 5, title: "The 1800s Express", path: "civics/friday5-1800s-express-game/", std: ["SS.9-12.Gov.14", "SS.9-12.Gov.15", "SS.9-12.Gov.3"] },
   "civics-f6-presentation": { course: "civics", unit: 6, title: "Modern America (Slides)", path: "civics/friday6-modern-america-presentation/", std: ["SS.9-12.Gov.11", "SS.9-12.Gov.14", "SS.9-12.Gov.15"] },
   "civics-f7-presentation": { course: "civics", unit: 7, title: "Symbols, Holidays & Final Review (Slides)", path: "civics/friday7-symbols-final-review-presentation/", std: ["SS.9-12.Gov.16"] }
 };
@@ -161,6 +165,8 @@ window.CLASS_STANDARDS = {
   "SS.9-12.Gov.15": "Assess the contributions of exemplary Iowans and Americans who have played a role in promoting civic virtues and democratic principles.",
   "SS.9-12.Gov.16": "Analyze the concept of civic virtue and its importance to a well-functioning democracy.",
   "SS.9-12.Gov.17": "Analyze the rights, liberties, duties, and responsibilities of citizens of the United States and the state of Iowa.",
+  "SS.9-12.Gov.13": "Analyze the electoral process and election systems in the United States, specifically Iowa election law including registration requirements, paper ballots, and absentee voting.",
+  "SS.9-12.Gov.18": "Identify the function, duties, and authority of the government of the state of Iowa.",
   "SS.9-12.Gov.14": "Analyze the role of citizens in the U.S. political system, with attention to the definition of who is a citizen, the expansion of that definition over time."
 };
 
