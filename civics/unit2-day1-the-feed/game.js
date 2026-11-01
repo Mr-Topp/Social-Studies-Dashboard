@@ -157,7 +157,7 @@ const CASES = [
     say: 'Yeah, the border needs fixing. But my raise and my health insurance came from our contract. The flyer in the break room lists who to vote for, and I go down the list.',
     right: 'job', opts: ['job', 'family', 'candidate', 'nofit'], hint: 'Read their quote again. What pushed them to that side?',
     fact: 'Real life: Unions often tell their members which candidates they support. Lots of members follow along, but not all of them.' },
-  { belief: 'criminals should get tougher sentences', tag: 'a conservative idea', a: P('Dale', 'Republican', '58 · retired trucker'), b: P('Kayla', 'Democrat', '20 · works at a phone store'),
+  { belief: 'criminals should get tougher sentences', tag: 'a conservative idea', a: P('Dale', 'Republican', '58 · retired trucker, Kayla\'s uncle'), b: P('Kayla', 'Democrat', '20 · works at a phone store'),
     say: 'Same table every Thanksgiving, same yard signs since I was little. I\'ve never voted any other way. Uncle Dale is the only one at that table who switched.',
     right: 'family', opts: ['family', 'issue', 'candidate', 'job'], hint: 'Read their quote again. What pushed them to that side?',
     fact: 'Real life: Family is one of the biggest reasons people pick a party. But like Uncle Dale, people can switch.' },
@@ -245,7 +245,7 @@ function pIntro() {
     <div class="d2 red"><b>🔴 CONSERVATIVE</b><small>usually votes Republican · red · elephant</small><ul><li>Government should <b>stay small</b></li><li><b>Lower taxes</b> and fewer rules on business</li><li>Strong military, tough on crime</li><li>Protect <b>tradition</b> and personal responsibility</li></ul></div></div>
     <p class="lead">Call each card: <b class="cb">LIBERAL</b>, <b class="cr">CONSERVATIVE</b>, or <b>PARTY</b> (a group doing election work). If a party is DOING something, like running ads or picking candidates, it's PARTY, even if a belief is mentioned. <b>16 of 20</b> to pass.</p>
     <button class="primary go" id="go">Open the desk →</button>`;
-    $('#go').onclick = () => { st.phase = 'r1'; st.t0 = Date.now(); save(); $('#overlay').hidden = true; render(); };
+    $('#go').onclick = () => { st.phase = 'r1'; st.t0 = Date.now(); st.r1Base = st.score; save(); $('#overlay').hidden = true; render(); };
   }
   $('#overlay').hidden = false;
 }
@@ -306,9 +306,10 @@ function sort(side) {
 function r1Finish() {
   const a = att();
   if (st.firstAtt == null) { st.firstAtt = a.right; st.firstSeen = a.seen; }
-  st.attempts = (st.prevTries || 0) + a.n;
+  st.attempts = st.passedSets || ((st.prevTries || 0) + a.n);
   if (a.right >= PASS) { save(); return roundDone('r2', `${a.right} of ${DECK_SIZE}. You passed Call It.`, 'Next: real voters. Each one tells you 3 beliefs. Decide where they stand, then which party they\'d most likely vote for. Two new ideologies show up:', `<div class="duo"><div class="d1 purple"><b>⚖️ MODERATE</b><span>A <b>mix</b>: some liberal beliefs, some conservative beliefs. Could vote for either party.</span><i>Wants free community college AND a bigger military.</i></div><div class="d2 gold"><b>🗽 LIBERTARIAN</b><span><b>Less government on everything</b>: out of your wallet AND your personal life.</span><i>Wants lower taxes AND no ban on sports betting.</i></div></div>`); }
   st.lastTry = { right: a.right, seen: a.seen };
+  if (st.r1Base != null) st.score = st.r1Base;
   st.att = { n: a.n + 1, right: 0, seen: 0 }; st.queue = newDeck(st.seenIds); st.streak = 0; st.showRetry = true; save();
   r1RetryCard();
 }
@@ -357,7 +358,7 @@ function pR2() {
         r.idone = true; if (window.classFirstTry) classFirstTry.right('ideo-' + v.id);
         const pts = r.iw ? 0 : 150; st.score += pts; botsStep(120); save(); pushScore(); hud(); SCENE.show('r2', voterPins()); SCENE.ping(v.ideo);
         r2Party(v, r);
-      } else { r.iw++; delete r.iorder; st.score = Math.max(0, st.score - 25); hud(); if (window.classFirstTry) classFirstTry.wrong(); save(); SCENE.oops(); pause(tray, $('#fb'), 'Not quite (−25). Check each belief: more government, less government, a mix, or less on everything?', draw); }
+      } else { if (!r.li) r.iw++; delete r.iorder; st.score = Math.max(0, st.score - 25); hud(); if (window.classFirstTry) classFirstTry.wrong(); save(); SCENE.oops(); pause(tray, $('#fb'), 'Not quite (−25). Check each belief: more government, less government, a mix, or less on everything?', draw); }
     });
   };
   draw();
@@ -373,7 +374,7 @@ function r2Party(v, r) {
       if (b.dataset.p === v.party) {
         r.pdone = true; if (window.classFirstTry) classFirstTry.right('party-' + v.id);
         const pts = r.pw ? 0 : 100; st.score += pts; botsStep(80); save(); pushScore(); hud(); r2Result(v, r);
-      } else { r.pw++; delete r.popt; st.score = Math.max(0, st.score - 25); hud(); if (window.classFirstTry) classFirstTry.wrong(); save(); SCENE.oops(); pause(tray, $('#fb'), v.ideo === 'mod' ? 'Not quite (−25). Moderates are a mix. Would they always stick with one party?' : 'Not quite (−25). Which party\'s beliefs match a ' + IDEO[v.ideo].b.replace(/^\S+ /, '').toLowerCase() + ' best?', draw); }
+      } else { if (!r.lp) r.pw++; delete r.popt; st.score = Math.max(0, st.score - 25); hud(); if (window.classFirstTry) classFirstTry.wrong(); save(); SCENE.oops(); pause(tray, $('#fb'), v.ideo === 'mod' ? 'Not quite (−25). Moderates are a mix. Would they always stick with one party?' : 'Not quite (−25). Which party\'s beliefs match a ' + IDEO[v.ideo].b.replace(/^\S+ /, '').toLowerCase() + ' best?', draw); }
     });
   };
   save(); draw();
@@ -406,7 +407,7 @@ function pR3() {
       if (b.dataset.k === c.right) {
         r.done = true; if (window.classFirstTry) classFirstTry.right('why-' + ci);
         const pts = r.wrong ? 0 : 150; st.score += pts; botsStep(130); save(); pushScore(); hud(); r3Result(c);
-      } else { r.wrong++; delete r.opt; st.score = Math.max(0, st.score - 25); hud(); if (window.classFirstTry) classFirstTry.wrong(); save(); SCENE.oops(); pause(tray, $('#fb'), 'Not quite (−25). ' + c.hint, draw); }
+      } else { if (!r.lk) r.wrong++; delete r.opt; st.score = Math.max(0, st.score - 25); hud(); if (window.classFirstTry) classFirstTry.wrong(); save(); SCENE.oops(); pause(tray, $('#fb'), 'Not quite (−25). ' + c.hint, draw); }
     });
   };
   save(); draw();
@@ -422,7 +423,7 @@ function r3Result(c) {
 /* ---- Final + turn in ---- */
 const PROMPTS = [
   { id: 'diff', short: 'Ideology vs. party', label: '1. What is an ideology? What is a party? How does a party help someone like Rosa or Wade get what they want?', stem: 'An ideology is ___. A party is ___. A party helps people like ___ by ___.', min: 90,
-    must: [['belief', 'believe', 'opinion', 'idea', 'ideas', 'views', 'values'], ['candidate', 'election', 'elect', 'campaign', 'ballot', 'primary', 'convention', 'caucus', 'office', 'run', 'running', 'vote', 'voting']], msg: 'In answer 1, say what an ideology is (beliefs) AND what a party is (a group that runs candidates).', link: ['elect', 'election', 'run', 'running', 'win', 'winning', 'office', 'law', 'laws', 'candidate', 'vote', 'votes'], linkMsg: 'In answer 1, explain HOW a party helps people get what they want from government (like running candidates who win and make laws).' },
+    must: [['belief', 'believe', 'opinion', 'idea', 'ideas', 'views', 'values', 'think', 'thinks', 'want', 'wants'], ['candidate', 'election', 'elect', 'campaign', 'ballot', 'primary', 'convention', 'caucus', 'office', 'run', 'running', 'vote', 'voting']], msg: 'In answer 1, say what an ideology is (beliefs) AND what a party is (a group that runs candidates).', link: ['elect', 'election', 'run', 'running', 'win', 'winning', 'office', 'law', 'laws', 'candidate', 'vote', 'votes'], linkMsg: 'In answer 1, explain HOW a party helps people get what they want from government (like running candidates who win and make laws).' },
   { id: 'union', short: 'Union and democracy', label: '2. Tony\'s union tells its members who to vote for. Give one way that HELPS democracy and one way it could HURT democracy.', stem: 'It helps democracy because ___. It could hurt democracy because ___.', min: 90, reasons: true,
     must: [['help', 'helps', 'good', 'benefit', 'plus'], ['hurt', 'hurts', 'bad', 'harm', 'problem', 'minus', 'downside'], ['union', 'tony', 'member', 'members', 'worker', 'workers', 'vote', 'votes', 'voter', 'voters', 'candidate', 'candidates']], msg: 'In answer 2, give one way Tony\'s union HELPS democracy and one way it could HURT, with a reason for each.' },
   { id: 'crit', optional: true, short: '⭐ Level 4 challenge', label: '⭐ Level 4 challenge (optional, +300 ★): Mike votes on just one issue (guns). Overall, is that good or bad for democracy? Weigh both sides, then decide and explain why.', stem: 'On one hand ___. On the other hand ___. Overall I think ___ because ___.', min: 130, reasons: true,
@@ -465,21 +466,22 @@ function checkWriting(p, v) {
   const t = v.toLowerCase();
   if (p.optional && !v.trim()) return '';
   if (/\b[bcdfghjklmnpqrstvwxz]{4,}\b/.test(t)) return 'Some of that isn\'t real words. Write a real answer for: ' + p.short + '.';
-  if (/\b(idk|lol|bruh|asdf|dunno|bathroom|blah|bye)\b|ok done/.test(t)) return 'Write a real answer for: ' + p.short + '. Use the starter to help.';
+  if (/\b(idk|idc|lol|lmao|lmfao|bruh|asdf|dunno|bathroom|blah|bye|boring|stupid|dumb|smells?|fr)\b|ok done/.test(t)) return 'Write a real answer for: ' + p.short + '. Use the starter to help.';
   if (/_{2,}/.test(v)) return 'Replace the ___ blanks with your own words in: ' + p.short + '.';
   if (v.length < p.min) return 'Write a little more for: ' + p.short + ' (2 full sentences).';
   if ((v.match(/[a-z0-9][.!?](\s|$)/gi) || []).length < 2) return 'Write at least 2 full sentences for: ' + p.short + '.';
   const stem = new Set(p.stem.toLowerCase().match(/[a-z']+/g) || []);
   if (new Set((t.match(/[a-z']{3,}/g) || []).filter(w => !stem.has(w))).size < 6) return 'Add more of your own words for: ' + p.short + '.';
   if (p.must.some(g => !g.some(w => hasWord(t, w)))) return p.msg;
-  if (p.id === 'diff') { const sents = t.split(/[.!?]+/); const ide = sents.find(x => /ideolog/.test(x)), par = sents.find(x => /\bpart(y|ies)\b/.test(x) && !/ideolog/.test(x)); if (ide && !p.must[0].some(w => hasWord(ide, w))) return 'Check answer 1: an ideology is about BELIEFS. Say that in your ideology sentence.'; if (par && !p.must[1].some(w => hasWord(par, w))) return 'Check answer 1: a party is a GROUP that runs candidates. Say that in your party sentence.'; }
+  if (p.id === 'diff') { const sents = t.split(/[.!?]+/); const ide = sents.find(x => /ideolog/.test(x)), par = sents.find(x => /\bpart(y|ies)\b/.test(x) && !/ideolog/.test(x)); if (ide && !p.must[0].some(w => hasWord(ide, w))) return 'Check answer 1: an ideology is about BELIEFS. Say that in your ideology sentence.'; if (par && (!p.must[1].some(w => hasWord(par, w)) || !/\b(group|organiz|team|members?)/.test(par))) return 'Check answer 1: a party is a GROUP that runs candidates. Say that in your party sentence.'; }
   if (p.reasons) {
     const STOP = new Set('the and that this for him her his they them their its it\'s was are has have had with from what when then than one plus minus good bad help helps hurt hurts democracy because since also could would should will can really very just like thing things way ways more less some other hand overall think side sides'.split(' '));
     const own = x => new Set((x.match(/[a-z']{3,}/g) || []).filter(w => !STOP.has(w) && !stem.has(w))).size;
     if (!/\b(because|since|so)\b/.test(t)) return 'In ' + p.short + ', use "because" to give a real reason.';
     const ss = t.split(/[.!?]+/).filter(x => x.trim());
     const pos = ss.filter(x => /\b(help|helps|good|benefit|plus|on one hand)\b/.test(x)), neg = ss.filter(x => /\b(hurt|hurts|bad|harm|problem|minus|downside|on the other hand)\b/.test(x));
-    if (!pos.some(x => own(x) >= 4) || !neg.some(x => own(x) >= 4)) return 'In ' + p.short + ', explain WHY for both sides. "It\'s good for him" isn\'t a reason yet. Say what actually happens.';
+    const REL = /\b(vot|candidat|elect|learn|inform|choos|choice|pick|power|voice|law|pay|wage|right|member|worker|government|politic|opinion|decid|turnout|list|follow|cop(y|ies)|pressure|think|issue|gun|people|citizen|leader|polic)/;
+    if (!pos.some(x => own(x) >= 4 && REL.test(x)) || !neg.some(x => own(x) >= 4 && REL.test(x))) return 'In ' + p.short + ', explain WHY for both sides. "It\'s good for him" isn\'t a reason yet. Say what actually happens.';
   }
   if (p.link && !(t.split(/[.!?]+/).filter(x => /\b(help|helps|connect|get|gets)\b/.test(x)).some(x => p.link.some(w => hasWord(x, w))))) return p.linkMsg;
   if (p.id === 'voter') {
@@ -513,7 +515,7 @@ async function turnIn() {
     const res = await classTurnIn(OLD_API, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ studentName: st.name, assignmentId: ASSIGN, assignmentTitle: 'Government Unit 2 · Day 1 · Decision Desk (Ideology vs. Party)', answers }) });
     const data = await res.json().catch(() => ({}));
     if (!res.ok) throw new Error(data.error || 'Your work did not save. Try again.');
-    if (!st.turnedIn) { st.score += 200 + ((($('#w_crit') || {}).value || '').trim() ? 300 : 0); pushScore(); hud(); SCENE.confetti(); const bg = document.querySelector('.final .big'); if (bg) bg.textContent = '★ ' + st.score.toLocaleString(); } st.turnedIn = true; save(); msg.className = 'fb yay'; msg.textContent = 'Turned in! +200 bonus. Your teacher can see your work.'; $('#sendBtn').textContent = 'Turned in ✓'; $('#sendBtn').disabled = false;
+    const hasL4 = !!((($('#w_crit') || {}).value || '').trim()); if (!st.bonusPaid || (hasL4 && !st.l4Paid)) { st.score += (st.bonusPaid ? 0 : 200) + (hasL4 && !st.l4Paid ? 300 : 0); st.bonusPaid = true; if (hasL4) st.l4Paid = true; pushScore(); hud(); SCENE.confetti(); const bg = document.querySelector('.final .big'); if (bg) bg.textContent = '★ ' + st.score.toLocaleString(); } st.turnedIn = true; save(); msg.className = 'fb yay'; msg.textContent = st.turnedIn && st.sentOnce ? 'Updated! Your teacher sees your newest answers.' : 'Turned in! +200 bonus. Your teacher can see your work.'; st.sentOnce = true; save(); $('#sendBtn').textContent = 'Turned in ✓'; $('#sendBtn').disabled = false;
   } catch (e) { msg.className = 'fb oops'; msg.textContent = e.message || 'Could not turn in. Try again.'; $('#sendBtn').disabled = false; }
 }
 
@@ -626,7 +628,8 @@ $('#helpBtn').onclick = () => $('#helpDialog').showModal();
 document.querySelectorAll('[data-close]').forEach(b => b.onclick = () => $('#' + b.dataset.close).close());
 $('#resetBtn').onclick = () => { if (!confirm('Start over? This erases your progress on this device.')) return; const old = st; st = fresh(); st.name = old.name; st.room = old.room; st.phase = 'intro'; st.primer = 1; ['firstAtt', 'firstSeen', 'r1'].forEach(k => { if (old[k] != null) st[k] = old[k]; });
   if (st.firstAtt == null && old.att && old.att.seen > 0) { st.firstAtt = old.att.right; st.firstSeen = old.att.seen; } if (st.firstAtt != null || Object.keys(st.r1 || {}).length) st.lockFirst = true;
-  Object.keys(old.r2 || {}).forEach(k => { st.r2[k] = { iw: old.r2[k].iw || 0, pw: old.r2[k].pw || 0, idone: false, pdone: false }; }); Object.keys(old.r3 || {}).forEach(k => { st.r3[k] = { wrong: old.r3[k].wrong || 0, done: false }; }); st.prevTries = (old.prevTries || 0) + (old.att && (old.att.seen > 0 || old.att.n > 1) ? old.att.n : 0); st.attempts = old.attempts; st.resets = (old.resets || 0) + 1; save(); location.reload(); };
+  Object.keys(old.r2 || {}).forEach(k => { const o = old.r2[k]; st.r2[k] = { iw: o.iw || 0, pw: o.pw || 0, idone: false, pdone: false, li: !!(o.idone || o.li), lp: !!(o.pdone || o.lp) }; }); Object.keys(old.r3 || {}).forEach(k => { const o = old.r3[k]; st.r3[k] = { wrong: o.wrong || 0, done: false, lk: !!(o.done || o.lk) }; });
+  st.bonusPaid = old.bonusPaid || old.turnedIn; st.l4Paid = old.l4Paid; st.sentOnce = old.sentOnce; if (old.phase !== 'r1' && old.phase !== 'intro' && old.phase !== 'title' && old.attempts) st.passedSets = old.attempts; else if (old.passedSets) st.passedSets = old.passedSets; st.prevTries = (old.prevTries || 0) + (old.att && (old.att.seen > 0 || old.att.n > 1) ? old.att.n : 0); st.attempts = old.attempts; st.resets = (old.resets || 0) + 1; save(); location.reload(); };
 if (st.name) startArena();
 SCENE.sync();
 render();
