@@ -6,7 +6,7 @@
 <meta name="robots" content="noindex,nofollow">
 <title>Teacher Dashboard · All Classes</title>
 <script src="../shared/assignments.js?v=20261101gov"></script>
-<script src="presentations.js?v=20261101u3"></script>
+<script src="presentations.js?v=20261101rows"></script>
 <script src="../shared/turnin.js?v=20261031t"></script>
 <style>
 :root{--navy:#19364b;--red:#a33d36;--green:#2f6b3a;--paper:#f4efe4;--card:#fffdf8;--ink:#22313b;--muted:#536571;--line:#d8cfbd}
@@ -113,6 +113,21 @@ td.sum.l3{background:#eef7f0;color:#1f5e2c}td.sum.l2{background:#fff8e2;color:#7
 .daylist a:hover{text-decoration:underline}
 .daystd{font-size:.78rem;color:var(--muted);font-weight:700}
 .decknote{font-weight:600;text-transform:none;letter-spacing:0}
+.daytable{display:grid;gap:0;margin:8px 0 4px;border-top:1px solid var(--line)}
+.dayrow{display:grid;grid-template-columns:minmax(220px,34%) 1fr;gap:10px;padding:8px 2px;border-bottom:1px solid var(--line);align-items:start}
+.daylabel{display:flex;flex-direction:column;gap:2px;font-size:.92rem;color:var(--navy)}
+.daylabel b{font-size:.8rem;letter-spacing:.04em;text-transform:uppercase;color:var(--red)}
+.daytitle{font-weight:700;line-height:1.25}
+.daychips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font-size:.84rem;text-decoration:none;color:var(--navy);border:1px solid #d6dde2;background:#eef3f5;border-radius:7px;padding:4px 8px;line-height:1.25}
+.chip:hover{text-decoration:underline}
+.chip.slides{background:#fff6e5;border-color:#e7cf9c;font-weight:800}
+.chip.online{background:#e6f1ea;border-color:#b9d8c3}
+.chip.print{background:#f4f1ea;border-color:#ddd3c0}
+.chip.key{background:#fff;border:1px dashed #b9b09c;color:#6b6252;font-size:.78rem}
+.deckfoot{font-size:.84rem;margin:8px 2px 2px;color:var(--muted)}.deckfoot a{color:var(--navy);font-weight:700}
+.chiplegend{font-size:.8rem;color:var(--muted);margin:0 0 8px}
+@media (max-width:760px){.dayrow{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -323,23 +338,60 @@ function linksHtml() {
   const P1 = (window.CLASS_UNITS_PART1 || {})[tab];
   if (!acts.length && !allDecks.length) return "<p class='status'>No activities in this class send work to the dashboard yet.</p>";
   const plural = (n, w) => n + " " + w + (n === 1 ? "" : "s");
-  // A deck's slides, one row per lesson day. Each row opens the deck right at that day's first slide.
-  const deckHtml = list => list.map(p => {
-    const days = (p.days || []).slice().sort((x, y) => x.day - y.day);
-    const head = `<div class="deckhead">${list.length > 1 || p.note ? safe(p.title) : "Slides"}${p.note ? ` <span class="decknote">${safe(p.note)}</span>` : ""}</div>`;
-    const rows = days.length
-      ? `<ol class="daylist">${days.map(d => `<li><a href="${safe(p.url)}#slide=id.${safe(d.slide)}" target="_blank" rel="noopener"><b>Day ${d.day}</b> · ${safe(d.title)}</a>${d.std ? `<span class="daystd">${safe(d.std)}</span>` : ""}</li>`).join("")}</ol>`
-      : "";
-    return head + rows + `<div class="links decks"><a href="${safe(p.url)}" target="_blank" rel="noopener">▶ Open the whole deck</a></div>`;
-  }).join("");
-  const dayCount = list => list.reduce((n, p) => n + (p.days || []).length, 0);
-  const drop = (key, name, count, inner) => `<details class="unitdrop" data-k="${safe(key)}"${linkOpen[key] ? " open" : ""}><summary>${safe(name)} <span class="unitcount">${count}</span></summary>${inner}</details>`;
-  const unitBlock = (key, name, ids, decks) => {
-    const n = dayCount(decks);
-    const count = [decks.length ? (n ? plural(n, "lesson day") : plural(decks.length, "slide deck")) : "", ids.length ? plural(ids.length, "assignment") : ""].filter(Boolean).join(" · ") || "slides not built yet";
-    const actHtml = ids.length ? `<div class="deckhead">Assignments</div><div class="links">${ids.map(id => `<a href="${/^https?:/.test(REG[id].path) ? safe(REG[id].path) : "../" + REG[id].path}" target="_blank" rel="noopener">${safe(REG[id].title)}</a>`).join("")}</div>` : "";
-    return drop(key, name, count, decks.length || ids.length ? deckHtml(decks) + actHtml : `<p class="status">No slides for this unit yet.</p>`);
+  // ---- One row per lesson day: the day's slides + that day's assignments together ----
+  // A deck can carry a "plan" (e.g. the Schoology day posts) when its own days don't line up with them:
+  //   plan: [{ day: 5, title, std, slides: [{ day: 4, slide: "g1d4s06" }] }]  -> row "Day 5" opens deck Day 4 at that slide.
+  const hrefOf = id => /^https?:/.test(REG[id].path) ? REG[id].path : "../" + REG[id].path;
+  const kindOf = id => {
+    const a = REG[id], t = a.title || "";
+    if (/answer key|teacher key/i.test(t)) return "key";
+    if (/\(printed\)/i.test(t)) return "print";
+    if (!/^https?:/.test(a.path || "") && a.turnIn !== false) return "online";
+    return "link";
   };
+  const ICON = { online: "💻", print: "🖨", key: "🔑", link: "🔗" };
+  const chipText = id => (REG[id].title || "").replace(/^Days? [\d–-]+ · /, "").replace(/\s*\(printed\)/i, "").replace(/ — /g, " · ");
+  const chip = id => { const k = kindOf(id); return `<a class="chip ${k}" href="${safe(hrefOf(id))}" target="_blank" rel="noopener" title="${safe(REG[id].title)}${k === "key" ? " (teacher only)" : ""}">${ICON[k]} ${safe(chipText(id))}</a>`; };
+  const actDay = id => { const m = (REG[id].title || "").match(/^Days? (\d+)/); return REG[id].day || (m ? +m[1] : 0); };
+  const unitBlock = (key, name, ids, decks) => {
+    const main = decks.find(p => !p.note) || decks[0];
+    const extra = decks.filter(p => p !== main);
+    const rows = new Map();
+    const row = d => { if (!rows.has(d)) rows.set(d, { day: d, title: "", std: "", slides: [], ids: [] }); return rows.get(d); };
+    if (main && main.plan) {
+      main.plan.forEach(pl => { const r = row(pl.day); r.title = pl.title; r.std = pl.std || ""; (pl.slides || []).forEach(s => { const dd = (main.days || []).find(x => x.day === s.day); r.slides.push({ url: main.url, slide: s.slide || (dd && dd.slide), label: (pl.slides.length > 1 || s.day !== pl.day) ? "Deck Day " + s.day + (s.label ? " · " + s.label : "") : "Slides" }); }); });
+    } else if (main) {
+      (main.days || []).forEach(d => { const r = row(d.day); r.title = d.title; r.std = d.std || ""; r.slides.push({ url: main.url, slide: d.slide, label: "Slides" }); });
+    }
+    // "Days 1–3 · …" goes on every one of those days that has slides; otherwise it gets one row labeled "Days 4–5".
+    ids.forEach(id => {
+      const m = (REG[id].title || "").match(/^Days (\d+)[–-](\d+)/);
+      if (m) {
+        const a = +m[1], z = +m[2], have = [];
+        for (let d = a; d <= z; d++) if (rows.has(d) && rows.get(d).slides.length) have.push(d);
+        if (have.length) { have.forEach(d => rows.get(d).ids.push(id)); return; }
+        const r = row(a); r.span = z; r.ids.push(id); return;
+      }
+      row(actDay(id)).ids.push(id);
+    });
+    // A unit with no lesson days at all (e.g. one Friday presentation): one row with the deck + its assignments.
+    if (main && !(main.days || []).length && !main.plan && [...rows.keys()].every(d => !d)) {
+      const r = row(0); r.single = true; r.title = main.title; r.slides.push({ url: main.url, label: "Slides" });
+    }
+    const list = [...rows.values()].sort((a, b) => (a.day || 999) - (b.day || 999));
+    const nDays = list.reduce((n, r) => n + (r.day ? (r.span ? r.span - r.day + 1 : 1) : 0), 0), nActs = ids.length;
+    const count = [nDays ? plural(nDays, "day") : "", nActs ? plural(nActs, "assignment") : ""].filter(Boolean).join(" · ") || "slides not built yet";
+    const body = list.map(r => {
+      const label = r.single ? "" : r.day ? `<b>${r.span ? `Days ${r.day}–${r.span}` : `Day ${r.day}`}</b>` : `<b>Other</b>`;
+      const t = r.title || (r.ids.some(id => /summative/i.test(REG[id].title)) ? "Summative" : r.ids.length ? chipText(r.ids[0]).replace(/\s*\([^)]*\)\s*$/, "") : "");
+      const slides = r.slides.map(s => `<a class="chip slides" href="${safe(s.url)}${s.slide ? "#slide=id." + safe(s.slide) : ""}" target="_blank" rel="noopener">▶ ${safe(s.label)}</a>`).join("");
+      return `<div class="dayrow"><div class="daylabel">${label}<span class="daytitle">${safe(t)}</span>${r.std ? `<span class="daystd">${safe(r.std)}</span>` : ""}</div><div class="daychips">${slides}${r.ids.map(chip).join("")}</div></div>`;
+    }).join("");
+    const deckLinks = [list.some(r => r.single) ? null : main, ...extra].filter(Boolean).map(p => `<a href="${safe(p.url)}" target="_blank" rel="noopener">${p === main ? "▶ Open the whole deck" : "Older version: " + safe(p.title) + (p.note ? " (" + safe(p.note) + ")" : "")}</a>`).join(" · ");
+    const inner = list.length ? `<div class="daytable">${body}</div>${deckLinks ? `<div class="deckfoot">${deckLinks}</div>` : ""}` : `<p class="status">No slides for this unit yet.</p>`;
+    return `<details class="unitdrop" data-k="${safe(key)}"${linkOpen[key] ? " open" : ""}><summary>${safe(name)} <span class="unitcount">${count}</span></summary>${inner}</details>`;
+  };
+  const legend = `<p class="chiplegend">▶ slides · 💻 online, turns in to this dashboard · 🖨 printed · 🔗 outside link · 🔑 answer key (teacher only)</p>`;
 
   // Current units (Part 2 when the class has a Part 1).
   const decks = allDecks.filter(p => p.part !== 1);
@@ -347,13 +399,13 @@ function linksHtml() {
   decks.forEach(p => { const u = p.unit || 0; if (!groups.find(x => x.unit === u)) groups.push({ unit: u, name: unitName(tab, u), ids: [] }); });
   groups.sort((a, b) => (a.unit || 999) - (b.unit || 999));
   const current = groups.map(g => unitBlock(tab + "|" + g.unit, g.name, g.ids, decks.filter(p => (p.unit || 0) === g.unit))).join("");
-  if (!P1) return current;
+  if (!P1) return legend + current;
 
   // Part 1 first (the order you teach it), then Part 2. Every Part 1 unit is listed, built or not.
   const part1 = allDecks.filter(p => p.part === 1);
   const p1units = [...new Set([...Object.keys(P1).map(Number), ...part1.map(p => p.unit || 0)])].sort((a, b) => (a || 999) - (b || 999));
   const p1html = p1units.map(u => unitBlock(tab + "|p1|" + u, u ? "Unit " + u + (P1[u] ? " · " + P1[u] : "") : "Other", [], part1.filter(p => (p.unit || 0) === u))).join("");
-  return `<div class="parthead">Part 1</div>${p1html}<div class="parthead">Part 2</div>${current}`;
+  return legend + `<div class="parthead">Part 1</div>${p1html}<div class="parthead">Part 2</div>${current}`;
 }
 
 function renderTabs() {
