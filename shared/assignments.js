@@ -145,7 +145,20 @@ window.CLASS_ASSIGNMENTS = {
   // ---- Government · Unit 2 ----
   "gov-unit2-day1-the-feed":          { course: "government", unit: 2, day: 1, title: "Day 1 · Decision Desk: Ideology vs. Party", path: "civics/unit2-day1-the-feed/", std: ["SS.9-12.Gov.12"] },
   "gov-unit2-day2-fair-game":         { course: "government", unit: 2, day: 2, title: "Day 2 · Fair Game: Comparing the Parties", path: "civics/unit2-day2-fair-game/", std: ["SS.9-12.Gov.12"] },
-  "gov-unit2-day2-lobby-day":         { course: "government", unit: 2, day: 3, title: "Day 3 · Lobby Day: Interest Groups & Media", path: "civics/unit2-day2-lobby-day/", std: ["SS.9-12.Gov.12"] },
+  "gov-unit2-day2-lobby-day":         { course: "government", unit: 2, day: 4, title: "Day 4 · Lobby Day: Interest Groups & Media", path: "civics/unit2-day2-lobby-day/", std: ["SS.9-12.Gov.12"] },
+  // ---- Government · Unit 2 · activities from the Schoology day posts (links only, no turn-in) ----
+  "gov-u2-d1-poster": { course: "government", unit: 2, day: 1, turnIn: false, std: [], title: "Days 1–3 · Political Party Poster (Printed)", path: "https://docs.google.com/document/d/1Z8OsrG8eBL8005dEy6XuV9o7wvWctfCvm4g2-h-AmFQ/edit?usp=sharing" },
+  "gov-u2-d1-poster-directions": { course: "government", unit: 2, day: 1, turnIn: false, std: [], title: "Days 1–3 · Political Party Poster Directions", path: "https://linnmarcsd-my.sharepoint.com/:p:/g/personal/fynnley_toppert_linnmar_k12_ia_us/IQDKPVnodH6XRaNjq_Hy3NjXATRK4fMXb5Pi0YSG_d-qA_k?e=C064xb" },
+  "gov-u2-d2-pew-quiz": { course: "government", unit: 2, day: 2, turnIn: false, std: [], title: "Day 2 · Pew Political Typology Quiz (Optional)", path: "https://www.pewresearch.org/politics/quiz/political-typology/" },
+  "gov-u2-d3-signal-break": { course: "government", unit: 2, day: 3, turnIn: false, std: [], title: "Day 3 · Signal Break (Game)", path: "https://signal-break-classroom.neotboy.chatgpt.site/" },
+  "gov-u2-d4-interest-groups": { course: "government", unit: 2, day: 4, turnIn: false, std: [], title: "Day 4 · Interest Groups — iCivics (Printed)", path: "https://ed.icivics.org/resource-assets/lesson_plan/166930/assets/interest_groups_student_docs.pdf" },
+  "gov-u2-d4-interest-groups-key": { course: "government", unit: 2, day: 4, turnIn: false, std: [], title: "Day 4 · Interest Groups Answer Key", path: "https://ed.icivics.org/resource-assets/lesson_plan/166930/assets/interest_groups_answer_key.pdf" },
+  "gov-u2-d5-election-sim": { course: "government", unit: 2, day: 5, turnIn: false, std: [], title: "Day 5 · Presidential Election Simulation (2 Player)", path: "https://misterharms.com/games/electoral-college-map-game" },
+  "gov-u2-d5-win-white-house": { course: "government", unit: 2, day: 5, turnIn: false, std: [], title: "Day 5 · Win the White House — iCivics Game", path: "https://ed.icivics.org/resources/game/67038/win-the-white-house" },
+  "gov-u2-d6-civics-exam": { course: "government", unit: 2, day: 6, turnIn: false, std: [], title: "Day 6 · Civics Exam (Google Form)", path: "https://docs.google.com/forms/d/e/1FAIpQLSfDhGXMg7OP24DFhTdPQnHNsOoGgSS-pnDWpKadJ1U2smjpoA/viewform?usp=publish-editor" },
+  "gov-u2-d7-review": { course: "government", unit: 2, day: 7, turnIn: false, std: [], title: "Day 7 · Summative Review (Blooket)", path: "https://dashboard.blooket.com/set/6aa09dfe760efeaa1135c5b7" },
+  "gov-u2-d7-summative": { course: "government", unit: 2, day: 7, turnIn: false, std: [], title: "Day 7 · Summative", path: "https://linnmarcsd-my.sharepoint.com/:w:/g/personal/fynnley_toppert_linnmar_k12_ia_us/IQAsHiWOSrOESo-agkGYeF-6AcU5jvfuw1oM0UYp-KPoIKo?e=9mAl4u" },
+  "gov-u2-d7-summative-key": { course: "government", unit: 2, day: 7, turnIn: false, std: [], title: "Day 7 · Summative Answer Key", path: "https://linnmarcsd-my.sharepoint.com/:w:/g/personal/fynnley_toppert_linnmar_k12_ia_us/IQDHa8vAMIBIQq5Z_igFdj6EAYotMPKNH6Y9D9sYH6g1-IY?e=Xz0RaZ" },
 
   // ---- Civics (Iowa civics test prep) · Friday 1 ----
   "civics-test-s1-presentation":     { course: "civics", hideLink: true, unit: 1, title: "Founders' Files (Slides)", path: "civics/civics-test-s1-presentation/", std: ["SS.9-12.Gov.3", "SS.9-12.Gov.4"] },
