@@ -634,6 +634,30 @@ if (st.name) startArena();
 SCENE.sync();
 render();
 })();
+/* Read-aloud: a 🔊 button on every card and briefing. Uses the browser's built-in voice (works on Chromebooks). */
+(() => {
+  if (!('speechSynthesis' in window)) return;
+  const clean = t => t.replace(/[\p{Extended_Pictographic}\uFE0F]/gu, ' ').replace(/[“”"]/g, '').replace(/·/g, ',').replace(/\s+/g, ' ').trim();
+  const textOf = el => {
+    const c = el.cloneNode(true);
+    c.querySelectorAll('button,input,label,.who,.eyebrow,.bigscore').forEach(x => x.remove());
+    c.querySelectorAll('li,p,h2,div,.txt,.duo span,.duo i,.duo small,.duo > div > b:first-child').forEach(x => x.append('. '));
+    return clean(c.textContent).replace(/(\.\s*)+/g, '. ').replace(/\s+\./g, '.');
+  };
+  const speak = el => { speechSynthesis.cancel(); const u = new SpeechSynthesisUtterance(textOf(el)); u.rate = 0.95; u.lang = 'en-US'; speechSynthesis.speak(u); };
+  const add = el => {
+    if (!el || el.hidden || !el.firstElementChild || el.querySelector(':scope > .say')) return;
+    const b = document.createElement('button'); b.type = 'button'; b.className = 'say'; b.title = 'Read it to me'; b.setAttribute('aria-label', 'Read it to me'); b.textContent = '🔊';
+    b.addEventListener('click', e => { e.stopPropagation(); speak(el); });
+    el.prepend(b);
+  };
+  ['item', 'card'].forEach(id => {
+    const el = document.getElementById(id); if (!el) return;
+    new MutationObserver(() => { speechSynthesis.cancel(); add(el); }).observe(el, { childList: true });
+    new MutationObserver(() => add(el)).observe(el, { attributes: true, attributeFilter: ['hidden'] });
+    add(el);
+  });
+})();
 /* Double-click guard: ignore clicks for a moment right after a screen redraws,
    so a double-click can't answer the next question before the student sees it. */
 (() => {

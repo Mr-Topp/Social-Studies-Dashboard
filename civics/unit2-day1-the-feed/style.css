@@ -150,3 +150,8 @@ dialog .close{float:right;border:none;font-size:22px;padding:0 6px}
 .finalmode main{grid-template-rows:minmax(0,1fr)}
 .finalmode .tray.final-tray{max-height:none;height:100%;overflow:auto}
 .pl{display:block}
+.say{position:absolute;top:8px;right:8px;width:38px;height:38px;padding:0;border-radius:50%;font-size:18px;line-height:1;background:#eef2f8;border:1.5px solid #b6c2d3;z-index:3}
+.say:hover{background:#dbe4f0}
+.card{position:relative}
+.itemcard .who{padding:0 40px}
+.itemcard{padding-left:50px;padding-right:50px}.itemcard .who{padding:0}
