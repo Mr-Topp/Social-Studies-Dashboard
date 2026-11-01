@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
 <title>Teacher Dashboard · All Classes</title>
-<script src="../shared/assignments.js?v=20261101gov2"></script>
-<script src="presentations.js?v=20261101gov2"></script>
+<script src="../shared/assignments.js?v=20261101gov3"></script>
+<script src="presentations.js?v=20261101gov3"></script>
 <script src="../shared/turnin.js?v=20261031t"></script>
 <style>
 :root{--navy:#19364b;--red:#a33d36;--green:#2f6b3a;--paper:#f4efe4;--card:#fffdf8;--ink:#22313b;--muted:#536571;--line:#d8cfbd}
@@ -359,7 +359,7 @@ function linksHtml() {
     const rows = new Map();
     const row = d => { if (!rows.has(d)) rows.set(d, { day: d, title: "", std: "", slides: [], ids: [] }); return rows.get(d); };
     if (main && main.plan) {
-      main.plan.forEach(pl => { const r = row(pl.day); r.title = pl.title; r.std = pl.std || ""; (pl.slides || []).forEach(s => { const dd = (main.days || []).find(x => x.day === s.day); r.slides.push({ url: main.url, slide: s.slide || (dd && dd.slide), label: (pl.slides.length > 1 || s.day !== pl.day) ? "Deck Day " + s.day + (s.label ? " · " + s.label : "") : "Slides" }); }); });
+      main.plan.forEach(pl => { const r = row(pl.day); r.title = pl.title; r.std = pl.std || ""; (pl.slides || []).forEach(s => { const dd = (main.days || []).find(x => x.day === s.day); r.slides.push({ url: main.url, slide: s.slide || (dd && dd.slide), label: "Slides" + (s.label ? " · " + s.label : (pl.slides.length > 1 ? " · part " + (pl.slides.indexOf(s) + 1) : "")) }); }); });
     } else if (main) {
       (main.days || []).forEach(d => { const r = row(d.day); r.title = d.title; r.std = d.std || ""; r.slides.push({ url: main.url, slide: d.slide, label: "Slides" }); });
     }
