@@ -56,6 +56,7 @@ window.CLASS_UNITS_PART1 = {
   "us-history": {
     1: "Founding & Citizenship",
     2: "Civil War & Reconstruction",
+    3: "Westward & Industrial Expansion",
     4: "Progressive Era"
   },
   "world-history": {
