@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
 <title>Teacher Dashboard · All Classes</title>
-<script src="../shared/assignments.js?v=20261101h"></script>
+<script src="../shared/assignments.js?v=20261101gd"></script>
 <script src="presentations.js?v=20261101u3"></script>
 <script src="../shared/turnin.js?v=20261031t"></script>
 <style>
@@ -337,7 +337,7 @@ function linksHtml() {
   const unitBlock = (key, name, ids, decks) => {
     const n = dayCount(decks);
     const count = [decks.length ? (n ? plural(n, "lesson day") : plural(decks.length, "slide deck")) : "", ids.length ? plural(ids.length, "assignment") : ""].filter(Boolean).join(" · ") || "slides not built yet";
-    const actHtml = ids.length ? `<div class="deckhead">Assignments</div><div class="links">${ids.map(id => `<a href="../${REG[id].path}" target="_blank" rel="noopener">${safe(REG[id].title)}</a>`).join("")}</div>` : "";
+    const actHtml = ids.length ? `<div class="deckhead">Assignments</div><div class="links">${ids.map(id => `<a href="${/^https?:/.test(REG[id].path) ? safe(REG[id].path) : "../" + REG[id].path}" target="_blank" rel="noopener">${safe(REG[id].title)}</a>`).join("")}</div>` : "";
     return drop(key, name, count, decks.length || ids.length ? deckHtml(decks) + actHtml : `<p class="status">No slides for this unit yet.</p>`);
   };
 

@@ -81,6 +81,14 @@ window.CLASS_ASSIGNMENTS = {
   "day8-wwii-decision-map":      { course: "world-history", unit: 1, day: 8, title: "Day 8 · Decision Map (older version)" },
   "day9-maus2-reading-checks":   { course: "world-history", unit: 1, day: 9, title: "Day 9 · Maus II (Reading)", path: "day9-maus2/", std: ["SS.9-12.WH.30", "SS.9-12.WH.33"] },
 
+  // ---- U.S. History · Unit 1 (Roaring 20s & Great Depression) · outside links, no dashboard turn-in (turnIn: false) ----
+  "ush-u1-gd-assignment":     { course: "us-history", unit: 1, day: 1, turnIn: false, std: [], title: "Days 1–3 · Great Depression Assignment (Word)", path: "https://linnmarcsd-my.sharepoint.com/:w:/g/personal/fynnley_toppert_linnmar_k12_ia_us/IQAIG6nonFrZTpOf7Br6vdQGAVsfVh9lwF7Tub5K5XmvHl8?e=5uRa7c" },
+  "ush-u1-cinderella-man":    { course: "us-history", unit: 1, day: 4, turnIn: false, std: [], title: "Days 4–5 · Cinderella Man (Movie)", path: "https://www.youtube.com/watch?v=ADPpVYZm-eM&t=1646s" },
+  "ush-u1-cinderella-material": { course: "us-history", unit: 1, day: 4, turnIn: false, std: [], title: "Days 4–5 · Cinderella Man Material", path: "https://linnmarcsd-my.sharepoint.com/:b:/g/personal/fynnley_toppert_linnmar_k12_ia_us/IQAaaJk3W85dR4h3vaWo2FlTAV6B_M1nBDfCpMYw1j9tULw?e=5KfSha" },
+  "ush-u1-summative-review":  { course: "us-history", unit: 1, day: 6, turnIn: false, std: [], title: "Day 6 · Summative Review (Blooket)", path: "https://dashboard.blooket.com/set/6add779bca99907cdd239286" },
+  "ush-u1-summative":         { course: "us-history", unit: 1, day: 6, turnIn: false, std: [], title: "Day 6 · Summative", path: "https://drive.google.com/file/d/1T2wc7ijh28jghIDy52xqhfodpFvVWHsM/view?usp=sharing" },
+  "ush-u1-summative-key":     { course: "us-history", unit: 1, day: 6, turnIn: false, std: [], title: "Day 6 · Summative Teacher Key", path: "https://drive.google.com/file/d/1graudmE3cWwLWBhDBhm1yrE_Gl8sh18D/view?usp=sharing" },
+
   // ---- U.S. History · Unit 2 (World War II) ----
   "wwii-graphic-reading-day1":   { course: "us-history", unit: 2, day: 1, title: "Day 1 · Maus I (Reading)", path: "wwii-graphic-reading/#day1", std: ["SS.9-12.US.29", "SS.9-12.US.30"] },
   "wwii-graphic-reading-day2":   { course: "us-history", unit: 2, day: 2, title: "Day 2 · Maus II (Reading)", path: "wwii-graphic-reading/#day2", std: ["SS.9-12.US.29", "SS.9-12.US.30"] },
