@@ -121,12 +121,12 @@ window.CLASS_ASSIGNMENTS = {
   "civics-test-s1-founders-defense":  { course: "civics", unit: 1, title: "Founders' Defense", path: "civics/civics-test-s1-founders-defense/", std: ["SS.9-12.Gov.3", "SS.9-12.Gov.4"] },
 
   // ---- Civics (Iowa civics test prep) · Fridays 2–7 (exit tickets on each Friday's presentation) ----
-  "civics-f2-presentation": { course: "civics", unit: 2, title: "How the Government Works · Exit Ticket", path: "civics/friday2-government-presentation/", std: ["SS.9-12.Gov.6", "SS.9-12.Gov.7", "SS.9-12.Gov.8"] },
-  "civics-f3-presentation": { course: "civics", unit: 3, title: "Rights & Responsibilities · Exit Ticket", path: "civics/friday3-rights-presentation/", std: ["SS.9-12.Gov.14", "SS.9-12.Gov.17"] },
-  "civics-f4-presentation": { course: "civics", unit: 4, title: "The 1776 Files · Exit Ticket", path: "civics/friday4-1776-presentation/", std: ["SS.9-12.Gov.3", "SS.9-12.Gov.15"] },
-  "civics-f5-presentation": { course: "civics", unit: 5, title: "The 1800s · Exit Ticket", path: "civics/friday5-1800s-civics-presentation/", std: ["SS.9-12.Gov.14", "SS.9-12.Gov.15", "SS.9-12.Gov.3"] },
-  "civics-f6-presentation": { course: "civics", unit: 6, title: "Modern America · Exit Ticket", path: "civics/friday6-modern-america-presentation/", std: ["SS.9-12.Gov.11", "SS.9-12.Gov.14", "SS.9-12.Gov.15"] },
-  "civics-f7-presentation": { course: "civics", unit: 7, title: "Symbols, Holidays & Final Review · Exit Ticket", path: "civics/friday7-symbols-final-review-presentation/", std: ["SS.9-12.Gov.16"] }
+  "civics-f2-presentation": { course: "civics", unit: 2, title: "How the Government Works (Slides)", path: "civics/friday2-government-presentation/", std: ["SS.9-12.Gov.6", "SS.9-12.Gov.7", "SS.9-12.Gov.8"] },
+  "civics-f3-presentation": { course: "civics", unit: 3, title: "Rights & Responsibilities (Slides)", path: "civics/friday3-rights-presentation/", std: ["SS.9-12.Gov.14", "SS.9-12.Gov.17"] },
+  "civics-f4-presentation": { course: "civics", unit: 4, title: "The 1776 Files (Slides)", path: "civics/friday4-1776-presentation/", std: ["SS.9-12.Gov.3", "SS.9-12.Gov.15"] },
+  "civics-f5-presentation": { course: "civics", unit: 5, title: "The 1800s (Slides)", path: "civics/friday5-1800s-civics-presentation/", std: ["SS.9-12.Gov.14", "SS.9-12.Gov.15", "SS.9-12.Gov.3"] },
+  "civics-f6-presentation": { course: "civics", unit: 6, title: "Modern America (Slides)", path: "civics/friday6-modern-america-presentation/", std: ["SS.9-12.Gov.11", "SS.9-12.Gov.14", "SS.9-12.Gov.15"] },
+  "civics-f7-presentation": { course: "civics", unit: 7, title: "Symbols, Holidays & Final Review (Slides)", path: "civics/friday7-symbols-final-review-presentation/", std: ["SS.9-12.Gov.16"] }
 };
 
 // Iowa standard wording (Iowa Academic Standards for Social Studies) for every standard an in-use activity covers.
