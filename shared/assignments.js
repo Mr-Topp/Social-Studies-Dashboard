@@ -49,6 +49,7 @@ window.CLASS_UNITS = {
 window.CLASS_UNITS_PART1 = {
   "us-history": {
     1: "Founding & Citizenship",
+    2: "Civil War & Reconstruction",
     4: "Progressive Era"
   },
   "world-history": {
