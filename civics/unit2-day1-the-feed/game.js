@@ -40,20 +40,22 @@ const ITEMS = [
   { id: 'l13', side: 'lib', t: '“Society should change faster to give every group equal rights.”', why: 'Pushing for change and equality = liberal.' },
   { id: 'l14', side: 'lib', t: '“Don\'t cut programs that help poor families just to save money.”', why: 'Protecting government help programs = liberal.' },
   { id: 'l15', side: 'lib', t: 'Workers should have an easier time forming unions (worker groups that bargain for pay).', why: 'Supporting unions and workers\' rights = liberal.' },
-  { id: 'l16', side: 'lib', t: 'Transgender people should be protected by law from being fired for who they are.', why: 'Expanding rights protections = liberal.' },
+  { id: 'l16', side: 'lib', t: 'Laws should protect transgender people from discrimination in housing and health care.', why: 'Expanding legal protections for LGBTQ+ people = liberal.' },
   { id: 'l17', side: 'lib', t: '“The government should help people pay off their student loans.”', why: 'Government help with costs = liberal.' },
-  { id: 'l18', side: 'lib', t: 'The government should be able to bargain down what drug companies charge for medicine.', why: 'The government stepping in to lower health care costs = liberal.' },
+  { id: 'l18', side: 'lib', t: 'Every worker should get paid family leave by law, like time off with pay after having a baby.', why: 'The government requiring a benefit for workers = liberal.' },
   { id: 'l19', side: 'lib', t: 'Voting should be easier, with a mail-in ballot for anyone who wants one.', why: 'Liberals focus more on making voting easier. Conservatives focus more on preventing fraud.' },
   { id: 'l20', side: 'lib', t: 'The government should build more affordable housing for low-income families.', why: 'Government help with housing = liberal.' },
-  { id: 'l21', side: 'lib', t: 'Police should wear body cameras, and someone outside the department should review it when they use force.', why: 'More outside checks and rules for police = liberal.' },
+  { id: 'l21', side: 'lib', t: 'Someone outside the police department should review it every time an officer uses serious force.', why: 'More outside checks on police = liberal.' },
   { id: 'l22', side: 'lib', t: 'The U.S. should take in more people who are running from war in their countries.', why: 'Welcoming more refugees (people running from war) = liberal.' },
   { id: 'l23', side: 'lib', t: 'A Republican farmer says: “The government needs to do a lot more about climate change.”', why: 'Tricky! He\'s a Republican, but THIS belief is liberal. A party label doesn\'t decide every belief.' },
   { id: 'l24', side: 'lib', t: 'A Democratic state senator says: “People making over $400,000 a year should pay higher taxes.”', why: 'Tricky! A party member is talking, but the card is a BELIEF. Higher taxes on the rich = liberal.' },
   { id: 'l25', side: 'lib', t: 'At a Democratic Party meeting, a mom stands up and says: “Every kid should get free school lunch.”', why: 'Tricky! It happened at a party meeting, but the card is her BELIEF. Government help = liberal.' },
+  { id: 'l26', side: 'lib', t: 'Election Day should be a national holiday so more people can vote.', why: 'Making voting easier = liberal.' },
+  { id: 'l27', side: 'lib', t: 'A candidate at a town hall says: “Families should get help from the government to pay for child care.”', why: 'Tricky! A candidate is talking, but the card is a BELIEF. Government help = liberal.' },
   // ---- conservative beliefs ----
   { id: 'c1', side: 'con', t: '“Government should stay small and out of people\'s lives.”', why: 'Smaller government = conservative.' },
   { id: 'c2', side: 'con', t: '“Cut taxes. People should keep more of the money they earn.”', why: 'Lower taxes = conservative.' },
-  { id: 'c3', side: 'con', t: 'Law-abiding people have a right to own guns, and the government shouldn\'t make that harder.', why: 'Protecting gun rights and fewer gun laws = conservative.' },
+  { id: 'c3', side: 'con', t: 'People who follow the law have a right to own guns, and the government shouldn\'t make that harder.', why: 'Protecting gun rights and fewer gun laws = conservative.' },
   { id: 'c4', side: 'con', t: 'Businesses should face fewer rules so the economy can grow.', why: 'Fewer rules on business = conservative.' },
   { id: 'c5', side: 'con', t: 'The government should spend more to keep the U.S. military the strongest in the world.', why: 'A strong military = conservative. (Yes, it says "spend more," but on defense.)' },
   { id: 'c6', side: 'con', t: '“Traditional marriage and family values should be protected.”', why: 'Protecting traditional values = conservative.' },
@@ -61,7 +63,7 @@ const ITEMS = [
   { id: 'c8', side: 'con', t: '“People should take care of themselves, not depend on government help.”', why: 'Taking care of yourself (personal responsibility) = conservative.' },
   { id: 'c9', side: 'con', t: 'The government should build a border wall and hire more border agents.', why: 'Strict border security = conservative.' },
   { id: 'c10', side: 'con', t: '“Give criminals longer, tougher sentences to keep our streets safe.”', why: 'Tough on crime, law and order = conservative.' },
-  { id: 'c11', side: 'con', t: 'Police departments need more money and support, not less.', why: 'A tough-on-crime, back-the-police focus = conservative.' },
+  { id: 'c11', side: 'con', t: 'Police officers should keep their legal protection from being sued over split-second decisions.', why: 'Protecting police from lawsuits (called qualified immunity) = conservative.' },
   { id: 'c12', side: 'con', t: 'Parents should be able to use tax money to send their kids to private or religious schools.', why: 'School choice = conservative. (Iowa passed a school choice law in 2023.)' },
   { id: 'c13', side: 'con', t: '“Change should happen slowly. Traditions are there for a reason.”', why: 'Slow change and protecting tradition = conservative.' },
   { id: 'c14', side: 'con', t: 'State governments, not the national government in Washington, D.C., should make most of the big decisions.', why: 'Less power for the national government = conservative.' },
@@ -72,9 +74,11 @@ const ITEMS = [
   { id: 'c19', side: 'con', t: 'Prayer and religion should have a bigger place in public schools.', why: 'More religion in public life = conservative.' },
   { id: 'c20', side: 'con', t: '“Climate rules hurt farmers and businesses. The economy should come first.”', why: 'Economy first, fewer environmental rules = conservative.' },
   { id: 'c21', side: 'con', t: '“The government shouldn\'t pay for anybody\'s college. That\'s up to families.”', why: 'Less government spending = conservative.' },
-  { id: 'c22', side: 'con', t: 'Cut government spending, even on popular programs, to pay back the money the country owes.', why: 'Smaller government and less spending = conservative.' },
+  { id: 'c22', side: 'con', t: 'Cut government spending, even on popular programs, so the national debt stops growing.', why: 'Smaller government and less spending = conservative.' },
   { id: 'c23', side: 'con', t: 'A Democrat who works at a union plant says: “Gun laws are strict enough. Leave my rifles alone.”', why: 'Tricky! He\'s a Democrat, but THIS belief is conservative. A party label doesn\'t decide every belief.' },
-  { id: 'c24', side: 'con', t: 'A Republican county chair says: “Property taxes in Iowa are way too high.”', why: 'Tricky! A party leader is talking, but the card is a BELIEF. Lower taxes = conservative.' },
+  { id: 'c24', side: 'con', t: 'A Republican county chair says: “Iowa should get rid of the state income tax.”', why: 'Tricky! A party leader is talking, but the card is a BELIEF. Cutting taxes = conservative.' },
+  { id: 'c26', side: 'con', t: 'People should have to show proof they are U.S. citizens when they register to vote.', why: 'Stricter voting rules to prevent fraud = conservative.' },
+  { id: 'c27', side: 'con', t: 'A candidate at a rally says: “Cut regulations on Iowa farms and get the government out of the way.”', why: 'Tricky! A candidate is talking, but the card is a BELIEF. Fewer rules on business = conservative.' },
   { id: 'c25', side: 'con', t: 'At a Republican Party meeting, a dad says: “Parents, not the government, should decide what their kids learn about.”', why: 'Tricky! It happened at a party meeting, but the card is his BELIEF. Parents\' rights and less government = conservative.' },
   // ---- party actions (an organized group running candidates / trying to win elections) ----
   { id: 'p1', side: 'party', t: 'The Democratic Party holds a huge meeting (a national convention) to pick its candidate for president.', why: 'Picking candidates is something a party DOES. It isn\'t a belief.' },
@@ -83,21 +87,23 @@ const ITEMS = [
   { id: 'p4', side: 'party', t: 'A paid organizer texts 500 volunteers: “Knocking doors Saturday. We need to win this seat.”', why: 'Organizing volunteers = party.' },
   { id: 'p5', side: 'party', t: 'The Iowa Democratic Party turns in its list of candidates so they show up on the ballot.', why: 'Getting its candidates on the ballot = party. (On Iowa ballots, each candidate\'s party is printed next to their name.)' },
   { id: 'p6', side: 'party', t: 'The Libertarian Party collects signatures to get its candidate on the Iowa ballot.', why: 'Getting candidates on the ballot = party. Smaller parties (third parties) are parties too.' },
-  { id: 'p7', side: 'party', t: 'Its national committee picks a city to host the next big convention where it names its candidate for president.', why: 'Leaders running party events = party.' },
-  { id: 'p8', side: 'party', t: 'Volunteers knock on 10,000 doors for the people their group is running for office.', why: 'Campaign work = party.' },
+  { id: 'p7', side: 'party', t: 'National party leaders pick a city to host the big convention where they will name their candidate for president.', why: 'Leaders running party events = party.' },
+  { id: 'p8', side: 'party', t: 'Volunteers knock on 10,000 doors to help their side\'s candidates win in November.', why: 'Campaign work = party.' },
   { id: 'p9', side: 'party', t: 'The Republican Party of Iowa picks a new state leader (the state chair).', why: 'Choosing leaders = party.' },
   { id: 'p10', side: 'party', t: 'Party members meet and vote to write their platform: the official list of the party\'s goals.', why: 'Tricky! A platform is full of beliefs, but writing it at a convention is something a party DOES.' },
-  { id: 'p11', side: 'party', t: 'Leaders of a statewide group ask a local mayor to run for Congress under their name.', why: 'Recruiting candidates = party.' },
+  { id: 'p11', side: 'party', t: 'State leaders ask a local mayor to run for Congress, and promise money and volunteers if she says yes.', why: 'Recruiting candidates = party.' },
   { id: 'p12', side: 'party', t: 'The Green Party runs a candidate for governor.', why: 'Running candidates = party, even a small one.' },
   { id: 'p13', side: 'party', t: 'The Democratic Party holds a primary so its voters can pick who runs for U.S. Senate.', why: 'Primaries pick a party\'s candidates. (Iowa holds its primary in June.)' },
   { id: 'p14', side: 'party', t: 'Republicans in the Iowa House meet and pick their leader.', why: 'Organizing its members in government = party.' },
-  { id: 'p15', side: 'party', t: 'A State Fair booth signs up volunteers to help elect the candidates its group is running.', why: 'Recruiting volunteers for its candidates = party.' },
+  { id: 'p15', side: 'party', t: 'Workers at a State Fair booth sign up volunteers to campaign for their candidates this fall.', why: 'Recruiting volunteers for its candidates = party.' },
   { id: 'p16', side: 'party', t: '“Vote for our candidates on Tuesday!” (a flyer from the Iowa Democratic Party)', why: 'Campaigning for its own candidates = party.' },
   { id: 'p17', side: 'party', t: 'The Republican Party texts voters: “Our candidate will cut your taxes. Vote Tuesday!”', why: 'Tricky! It mentions a belief, but this is a party campaigning to win an election.' },
   { id: 'p19', side: 'party', t: 'Volunteers set up chairs and sign-in sheets for a caucus in a Marion school gym.', why: 'Running caucuses is something a party DOES.' },
-  { id: 'p20', side: 'party', t: 'A group picks its candidate for governor, prints 5,000 yard signs, and asks people to vote for her.', why: 'Picking a candidate and campaigning = party.' },
+  { id: 'p20', side: 'party', t: 'Members pick a candidate for governor, print 5,000 yard signs, and ask people to vote for her.', why: 'Picking a candidate and campaigning = party.' },
   { id: 'p21', side: 'party', t: 'A new group gets enough votes in an Iowa election to become an official political party.', why: 'Running candidates and winning votes = party.' },
   { id: 'p22', side: 'party', t: '“Join us. We pick candidates, raise money, and help them win.” (a sign-up sheet)', why: 'That\'s basically the definition of a party.' },
+  { id: 'p23', side: 'party', t: 'The county chair says: “We should knock on every door in Linn County this Saturday.”', why: 'Tricky! It says "should," but it\'s about campaigning to win. That\'s a party action.' },
+  { id: 'p24', side: 'party', t: '“We should have a candidate on every ballot in Iowa this year,” the leaders decide, and they start calling people to run.', why: 'Tricky! It says "should," but recruiting candidates is something a party DOES.' },
   { id: 'p18', side: 'party', t: 'The Democratic Party pays for an ad saying its candidate will protect health care.', why: 'Tricky! There\'s a belief in the ad, but running ads for its candidate = party.' }
 ];
 const ITEM = Object.fromEntries(ITEMS.map(i => [i.id, i]));
@@ -117,8 +123,8 @@ function newDeck(seen) {
   }
   return shuffle(pick);
 }
-const IDEO = { lib: { b: '🔵 LIBERAL', s: 'more government help · change · equality' }, mod: { b: '⚖️ MODERATE', s: 'a mix of both sides' }, con: { b: '🔴 CONSERVATIVE', s: 'smaller government · lower taxes · tradition' }, ltn: { b: '🗽 LIBERTARIAN', s: 'less government on EVERYTHING' } };
-const PARTY = { D: 'Democratic Party', R: 'Republican Party', L: 'Libertarian Party', X: 'Could vote for either party' };
+const IDEO = { lib: { b: '🔵 LIBERAL', s: 'more government help · change · equality' }, mod: { b: '⚖️ MODERATE', s: 'some more government, some less' }, con: { b: '🔴 CONSERVATIVE', s: 'smaller government · lower taxes · tradition' }, ltn: { b: '🗽 LIBERTARIAN', s: 'less government on EVERYTHING' } };
+const PARTY = { D: 'Democratic Party', R: 'Republican Party', L: 'Libertarian Party', G: 'Green Party', X: 'Could vote for either party' };
 const VOTERS = [
   { id: 'rosa', name: 'Rosa', who: '34 · ER nurse · Des Moines', ideo: 'lib', party: 'D', popts: ['D', 'R', 'X'],
     says: ['Nobody should go broke because they got sick. Health care for everyone, even if taxes on the rich go up.', 'We need a background check on every gun sale.', 'Make companies follow tougher pollution rules. I want clean rivers.'],
@@ -135,11 +141,11 @@ const VOTERS = [
   { id: 'jasmine', name: 'Jasmine', who: '27 · bank teller · Waterloo', ideo: 'mod', party: 'X', popts: ['X', 'D', 'R'],
     says: ['The government should help make health care cheaper.', 'Our town needs more police, and criminals should get tougher sentences.', 'I want background checks on guns, but my taxes are already too high.'],
     why: 'Health care help and background checks are liberal. More police, tougher sentences, and lower taxes are conservative. A mix = moderate.', pwhy: 'Moderates are "swing voters." They might vote for either party, so both parties fight hard to win them.' },
-  { id: 'eli', name: 'Eli', who: '23 · personal trainer · Iowa City', ideo: 'ltn', party: 'L', popts: ['L', 'D', 'X'],
+  { id: 'eli', name: 'Eli', who: '23 · personal trainer · Iowa City', ideo: 'ltn', party: 'L', popts: ['L', 'D', 'G'],
     says: ['Cut taxes AND cut government programs. Let people keep their money.', 'The government should stay out of who you marry and what you do in your own home.', 'Legalize marijuana. Adults can make their own choices.'],
-    why: 'He wants less government with your money (conservative side) AND less government in your personal life (liberal side). Less government on everything = libertarian.', pwhy: 'The Libertarian Party fits best. (Some libertarians vote Republican because third parties rarely win.)' }
+    why: 'He wants less government with your money (conservative side) AND less government in your personal life (liberal side). Less government on everything = libertarian.', pwhy: 'The Libertarian Party fits best. Its whole idea is less government on everything. (The Green Party is a small party focused on the environment.)' }
 ];
-const REASONS = { family: '👪 Family', candidate: '🙋 A candidate they know', issue: '⚖️ Another issue matters more', nofit: '🚫 Neither party fits', job: '🦺 Their job or union' };
+const REASONS = { family: '👪 Family', candidate: '🙋 A candidate they know', issue: '⚖️ A different issue matters more to them', nofit: '🚫 Neither party fits', job: '🦺 Their job or union' };
 const P = (name, party, who) => ({ name, party, who });
 // Each pair AGREES on one belief but ends up in different parties (or none). Person b explains.
 const CASES = [
@@ -151,14 +157,14 @@ const CASES = [
     say: 'Yeah, the border needs fixing. But my raise and my health insurance came from our contract. The flyer in the break room lists who to vote for, and I go down the list.',
     right: 'job', opts: ['job', 'family', 'candidate', 'nofit'], hint: 'Read their quote again. What pushed them to that side?',
     fact: 'Real life: Unions often tell their members which candidates they support. Lots of members follow along, but not all of them.' },
-  { belief: 'police need more money', tag: 'a conservative idea', a: P('Dale', 'Republican', '58 · Kayla\'s uncle'), b: P('Kayla', 'Democrat', '20 · works at a phone store'),
+  { belief: 'criminals should get tougher sentences', tag: 'a conservative idea', a: P('Dale', 'Republican', '58 · retired trucker'), b: P('Kayla', 'Democrat', '20 · works at a phone store'),
     say: 'Same table every Thanksgiving, same yard signs since I was little. I\'ve never voted any other way. Uncle Dale is the only one at that table who switched.',
     right: 'family', opts: ['family', 'issue', 'candidate', 'job'], hint: 'Read their quote again. What pushed them to that side?',
     fact: 'Real life: Family is one of the biggest reasons people pick a party. But like Uncle Dale, people can switch.' },
   { belief: 'same-sex marriage should be legal', tag: 'a liberal idea', a: P('Andre', 'Democrat', '28 · cook'), b: P('Marcy', 'Republican', '41 · runs a daycare'),
-    say: 'The woman running for Iowa House is my neighbor. She helped fix my daycare fence last summer. She\'s a Republican, so I registered Republican to vote for her in the primary.',
-    right: 'candidate', opts: ['candidate', 'family', 'issue', 'nofit'], hint: 'Read their quote again. What pushed them to that side?',
-    fact: 'Real life: Almost 4 in 10 Republicans (37%) say same-sex marriage should be legal (Gallup, 2026). In Iowa, you vote in one party\'s primary, and you can switch parties right at the polls on primary day.' },
+    say: 'My friends are surprised I\'m a Republican. But I\'m pro-life, and that comes first for me every single time I vote.',
+    right: 'issue', opts: ['issue', 'family', 'candidate', 'nofit'], hint: 'Read their quote again. What pushed them to that side?',
+    fact: 'Real life: Almost 4 in 10 Republicans (37%) say same-sex marriage should be legal (Gallup, 2026). Lots of voters pick a party based on the one issue they care about most.' },
   { belief: 'taxes should be lower', tag: 'a conservative idea', a: P('Cody', 'Republican', '18 · works at Hy-Vee'), b: P('Tasha', 'No party', '19 · Kirkwood student'),
     say: 'I want lower taxes, but I also want background checks on guns. I looked at both sides. Each one gets some stuff right and some stuff way wrong, so I didn\'t pick either.',
     right: 'nofit', q: 'Why didn\'t Tasha pick a party?', opts: ['nofit', 'family', 'issue', 'job'], hint: 'Read her quote again. Why didn\'t either party win her over?',
@@ -188,7 +194,7 @@ function hud() {
 let livePlayers = [];
 function liveOthers() { return (window.Arena && Arena.live) ? livePlayers.filter(p => !p.me && p.name !== st.name) : []; }
 function race() {
-  if (!st.bots) st.bots = [{ name: 'Kenzie R.', s: 0 }, { name: 'Devon T.', s: 0 }, { name: 'Ava L.', s: 0 }];
+  if (!st.bots) st.bots = [{ name: 'Bot Kenzie', s: 0 }, { name: 'Bot Devon', s: 0 }, { name: 'Bot Ava', s: 0 }];
   const lo = liveOthers(), live = lo.length > 0;
   const rows = (live ? lo.map(p => ({ name: p.name, s: p.score })) : st.bots).map(o => ({ name: o.name, s: o.s })).concat([{ name: 'You', s: st.score, me: true }]).sort((a, b) => b.s - a.s).slice(0, 5);
   $('#race').innerHTML = `<div class="t">CLASS RACE<span class="tag ${live ? 'live' : ''}">${live ? '● LIVE' : 'practice'}</span></div><ol>${rows.map((r, i) => `<li class="${r.me ? 'me' : ''}"><span class="n">${i + 1}</span><span class="nm">${esc(r.name)}</span><span class="sc">${r.s.toLocaleString()}</span></li>`).join('')}</ol>`;
@@ -284,7 +290,7 @@ function sort(side) {
     if (a.seen === DECK_SIZE / 2) setTimeout(() => toast('Halfway there. ' + a.right + ' right so far.'), 300);
     card.classList.add('fly-' + side);
     const sr = $('.scene').getBoundingClientRect();
-    plus(pts, side === 'lib' ? sr.width * .12 : side === 'con' ? sr.width * .82 : sr.width * .47, sr.height * .36);
+    plus(pts, side === 'lib' ? sr.width * .1 : side === 'con' ? sr.width * .84 : sr.width * .47, sr.height * .3);
     SCENE.call(side);
     $('#fb').className = 'fb yay'; $('#fb').innerHTML = (st.streak >= 3 ? '🔥 ' : '✓ ') + esc(it.why);
     hud();
@@ -301,7 +307,7 @@ function r1Finish() {
   const a = att();
   if (st.firstAtt == null) { st.firstAtt = a.right; st.firstSeen = a.seen; }
   st.attempts = (st.prevTries || 0) + a.n;
-  if (a.right >= PASS) { save(); return roundDone('r2', `${a.right} of ${DECK_SIZE}. You passed Call It.`, 'Next: real voters. Each one tells you 3 beliefs. Decide where they stand, then which party they\'d most likely vote for. Two new ideologies show up:', `<div class="duo"><div class="d1 purple"><b>⚖️ MODERATE</b><span>A <b>mix</b>: some liberal beliefs, some conservative beliefs.</span><i>Wants cheaper health care AND lower taxes.</i></div><div class="d2 gold"><b>🗽 LIBERTARIAN</b><span><b>Less government on everything</b>: out of your wallet AND your personal life.</span><i>Wants lower taxes AND legal marijuana.</i></div></div>`); }
+  if (a.right >= PASS) { save(); return roundDone('r2', `${a.right} of ${DECK_SIZE}. You passed Call It.`, 'Next: real voters. Each one tells you 3 beliefs. Decide where they stand, then which party they\'d most likely vote for. Two new ideologies show up:', `<div class="duo"><div class="d1 purple"><b>⚖️ MODERATE</b><span>A <b>mix</b>: some liberal beliefs, some conservative beliefs. Could vote for either party.</span><i>Wants free community college AND a bigger military.</i></div><div class="d2 gold"><b>🗽 LIBERTARIAN</b><span><b>Less government on everything</b>: out of your wallet AND your personal life.</span><i>Wants lower taxes AND no ban on sports betting.</i></div></div>`); }
   st.lastTry = { right: a.right, seen: a.seen };
   st.att = { n: a.n + 1, right: 0, seen: 0 }; st.queue = newDeck(st.seenIds); st.streak = 0; st.showRetry = true; save();
   r1RetryCard();
@@ -310,7 +316,7 @@ function r1RetryCard() {
   const lt = st.lastTry || { right: 0, seen: 0 }; hud(); SCENE.show('r1');
   $('#item').hidden = true; tray.innerHTML = '';
   const card = $('#card'); card.className = 'card brief';
-  card.innerHTML = `<p class="eyebrow">NEW SET</p><h2>${lt.right >= 10 ? 'Close!' : 'Keep going!'} ${PASS} of ${DECK_SIZE} moves you on.</h2><p class="lead">That set had ${lt.right} right out of ${lt.seen}. Here's a fresh set of cards.</p>
+  card.innerHTML = `<p class="eyebrow">NEW SET</p><h2>New set, fresh start.</h2><p class="lead">${PASS} of ${DECK_SIZE} moves you on. These tips help:</p>
   <div class="tips"><p><b class="cb">More government help</b>, higher taxes on the rich, more rules, change → <b class="cb">LIBERAL</b></p><p><b class="cr">Smaller government</b>, lower taxes, fewer rules, tradition → <b class="cr">CONSERVATIVE</b></p><p>A group <b>picking candidates, raising money, or campaigning</b> → <b>PARTY</b>, even if it mentions a belief</p></div>
   <button class="primary go" id="go">Try a new set →</button>`;
   $('#overlay').hidden = false;
@@ -367,7 +373,7 @@ function r2Party(v, r) {
       if (b.dataset.p === v.party) {
         r.pdone = true; if (window.classFirstTry) classFirstTry.right('party-' + v.id);
         const pts = r.pw ? 0 : 100; st.score += pts; botsStep(80); save(); pushScore(); hud(); r2Result(v, r);
-      } else { r.pw++; delete r.popt; st.score = Math.max(0, st.score - 25); hud(); if (window.classFirstTry) classFirstTry.wrong(); save(); SCENE.oops(); pause(tray, $('#fb'), 'Not quite (−25). Which party\'s beliefs match a ' + IDEO[v.ideo].b.replace(/^\S+ /, '').toLowerCase() + ' best?', draw); }
+      } else { r.pw++; delete r.popt; st.score = Math.max(0, st.score - 25); hud(); if (window.classFirstTry) classFirstTry.wrong(); save(); SCENE.oops(); pause(tray, $('#fb'), v.ideo === 'mod' ? 'Not quite (−25). Moderates are a mix. Would they always stick with one party?' : 'Not quite (−25). Which party\'s beliefs match a ' + IDEO[v.ideo].b.replace(/^\S+ /, '').toLowerCase() + ' best?', draw); }
     });
   };
   save(); draw();
@@ -417,10 +423,10 @@ function r3Result(c) {
 const PROMPTS = [
   { id: 'diff', short: 'Ideology vs. party', label: '1. What is an ideology? What is a party? How does a party help someone like Rosa or Wade get what they want?', stem: 'An ideology is ___. A party is ___. A party helps people like ___ by ___.', min: 90,
     must: [['belief', 'believe', 'opinion', 'idea', 'ideas', 'views', 'values'], ['candidate', 'election', 'elect', 'campaign', 'ballot', 'primary', 'convention', 'caucus', 'office', 'run', 'running', 'vote', 'voting']], msg: 'In answer 1, say what an ideology is (beliefs) AND what a party is (a group that runs candidates).', link: ['elect', 'election', 'run', 'running', 'win', 'winning', 'office', 'law', 'laws', 'candidate', 'vote', 'votes'], linkMsg: 'In answer 1, explain HOW a party helps people get what they want from government (like running candidates who win and make laws).' },
-  { id: 'voter', short: 'Place a voter', label: '2. Pick Rosa, Marcus, Wade, Linda, Jasmine, or Eli. What is their ideology? Use one thing they said as proof, and name the party they would most likely vote for.', stem: '___ is ___ because they said ___. They would most likely vote for ___.', min: 70,
-    must: [['rosa', 'marcus', 'wade', 'linda', 'jasmine', 'eli']], msg: 'In answer 2, name the voter, their ideology, your proof, and a party.' },
-  { id: 'crit', optional: true, short: '⭐ Level 4 challenge', label: '⭐ Level 4 challenge (optional, +300 ★): Mike votes on one issue (guns). Tony follows his union. Pick one of them: is that good or bad for democracy? Give one plus AND one minus.', stem: 'One plus is ___. One minus is ___. Overall I think ___ because ___.', min: 90,
-    must: [['plus', 'good', 'help', 'benefit'], ['minus', 'bad', 'problem', 'hurt', 'downside'], ['mike', 'tony', 'union', 'gun', 'issue', 'vote', 'voting', 'election', 'democracy', 'candidate']], msg: 'For the Level 4 challenge, name Mike or Tony and give one plus AND one minus.' }
+  { id: 'union', short: 'Union and democracy', label: '2. Tony\'s union tells its members who to vote for. Give one way that HELPS democracy and one way it could HURT democracy.', stem: 'It helps democracy because ___. It could hurt democracy because ___.', min: 90, reasons: true,
+    must: [['help', 'helps', 'good', 'benefit', 'plus'], ['hurt', 'hurts', 'bad', 'harm', 'problem', 'minus', 'downside'], ['union', 'tony', 'member', 'members', 'worker', 'workers', 'vote', 'votes', 'voter', 'voters', 'candidate', 'candidates']], msg: 'In answer 2, give one way Tony\'s union HELPS democracy and one way it could HURT, with a reason for each.' },
+  { id: 'crit', optional: true, short: '⭐ Level 4 challenge', label: '⭐ Level 4 challenge (optional, +300 ★): Mike votes on just one issue (guns). Overall, is that good or bad for democracy? Weigh both sides, then decide and explain why.', stem: 'On one hand ___. On the other hand ___. Overall I think ___ because ___.', min: 130, reasons: true,
+    must: [['good', 'bad', 'help', 'helps', 'hurt', 'hurts', 'benefit', 'problem'], ['mike', 'gun', 'guns', 'issue', 'single']], msg: 'For the Level 4 challenge, talk about Mike voting on one issue, weigh both sides, and explain your decision with "because."' }
 ];
 const VKEY = {
   rosa: { ide: 'liberal', p: ['democrat'], ev: ['health', 'sick', 'broke', 'tax', 'taxes', 'rich', 'background', 'gun', 'guns', 'pollution', 'river', 'rivers', 'compan', 'clean'] },
@@ -436,7 +442,7 @@ function tally() {
   const ideo = [VOTERS.filter(v => st.r2[v.id] && st.r2[v.id].idone && !st.r2[v.id].iw).length, VOTERS.length];
   const party = [VOTERS.filter(v => st.r2[v.id] && st.r2[v.id].pdone && !st.r2[v.id].pw).length, VOTERS.length];
   const why = [CASES.filter((c, i) => st.r3[i] && st.r3[i].done && !st.r3[i].wrong).length, CASES.length];
-  return { sort, ideo, party, why, tot: [sort[0] + ideo[0] + party[0] + why[0], sort[1] + ideo[1] + party[1] + why[1]] };
+  return { sort, ideo, party, why, tot: [sort[0] + ideo[0] + why[0], sort[1] + ideo[1] + why[1]] };
 }
 function bySide() { const o = { lib: [0, 0], con: [0, 0], party: [0, 0] }; ITEMS.forEach(i => { const r = st.r1[i.id]; if (r) { o[i.side][1]++; if (!r.wrong) o[i.side][0]++; } }); return o; }
 function pFinal() {
@@ -445,7 +451,7 @@ function pFinal() {
   const rank = [{ s: st.score, me: true }].concat(liveOthers().length ? liveOthers().map(p => ({ s: p.score })) : st.bots).sort((a, b) => b.s - a.s).findIndex(x => x.me) + 1;
   tray.classList.add('final-tray');
   tray.innerHTML = `<div class="final"><div><p class="eyebrow">FINAL RESULTS</p><p class="big">★ ${st.score.toLocaleString()}</p><p class="jarline">#${rank} in the class race · best streak 🔥${st.best}</p>
-    <ul><li>Call It, set 1: <b>${t.sort[0]} of ${t.sort[1]}</b> right${(st.attempts || 1) > 1 ? ` · passed on set ${st.attempts}` : ''}</li><li>Voter ideologies (first try): <b>${t.ideo[0]} of ${t.ideo[1]}</b></li><li>Voter parties (first try): <b>${t.party[0]} of ${t.party[1]}</b></li><li>Same Belief, Different Party: <b>${t.why[0]} of ${t.why[1]}</b></li></ul>
+    <ul><li>Call It: <b>passed ✓</b></li><li>Voter ideologies (first try): <b>${t.ideo[0]} of ${t.ideo[1]}</b></li><li>Voter parties (first try): <b>${t.party[0]} of ${t.party[1]}</b></li><li>Same Belief, Different Party: <b>${t.why[0]} of ${t.why[1]}</b></li></ul>
     <p class="note">✍️ Last step: 2 short answers, then turn in. Use the starters.</p></div>
     <div>${PROMPTS.map(p => `<div class="pblock${p.optional ? ' opt' + (st.writing.crit || st.showCrit ? ' open' : '') : ''}">${p.optional ? '<button class="optbtn" id="optBtn" type="button">⭐ Want +300? Try the Level 4 challenge (optional)</button>' : ''}<label for="w_${p.id}" class="pl" style="font-weight:850;margin:10px 0 2px${p.optional ? ';color:#8a6400' : ''}">${esc(p.label)}</label><p class="stem">Starter: ${esc(p.stem)}</p><textarea id="w_${p.id}">${esc(st.writing[p.id] || '')}</textarea></div>`).join('')}
     <button class="primary go" id="sendBtn">${st.turnedIn ? 'Turn in again' : 'Turn in'}</button><p class="fb ${st.turnedIn ? 'good' : ''}" id="sendMsg">${st.turnedIn ? 'Turned in! You can fix your answers and turn in again.' : ''}</p></div></div>`;
@@ -467,6 +473,14 @@ function checkWriting(p, v) {
   if (new Set((t.match(/[a-z']{3,}/g) || []).filter(w => !stem.has(w))).size < 6) return 'Add more of your own words for: ' + p.short + '.';
   if (p.must.some(g => !g.some(w => hasWord(t, w)))) return p.msg;
   if (p.id === 'diff') { const sents = t.split(/[.!?]+/); const ide = sents.find(x => /ideolog/.test(x)), par = sents.find(x => /\bpart(y|ies)\b/.test(x) && !/ideolog/.test(x)); if (ide && !p.must[0].some(w => hasWord(ide, w))) return 'Check answer 1: an ideology is about BELIEFS. Say that in your ideology sentence.'; if (par && !p.must[1].some(w => hasWord(par, w))) return 'Check answer 1: a party is a GROUP that runs candidates. Say that in your party sentence.'; }
+  if (p.reasons) {
+    const STOP = new Set('the and that this for him her his they them their its it\'s was are has have had with from what when then than one plus minus good bad help helps hurt hurts democracy because since also could would should will can really very just like thing things way ways more less some other hand overall think side sides'.split(' '));
+    const own = x => new Set((x.match(/[a-z']{3,}/g) || []).filter(w => !STOP.has(w) && !stem.has(w))).size;
+    if (!/\b(because|since|so)\b/.test(t)) return 'In ' + p.short + ', use "because" to give a real reason.';
+    const ss = t.split(/[.!?]+/).filter(x => x.trim());
+    const pos = ss.filter(x => /\b(help|helps|good|benefit|plus|on one hand)\b/.test(x)), neg = ss.filter(x => /\b(hurt|hurts|bad|harm|problem|minus|downside|on the other hand)\b/.test(x));
+    if (!pos.some(x => own(x) >= 4) || !neg.some(x => own(x) >= 4)) return 'In ' + p.short + ', explain WHY for both sides. "It\'s good for him" isn\'t a reason yet. Say what actually happens.';
+  }
   if (p.link && !(t.split(/[.!?]+/).filter(x => /\b(help|helps|connect|get|gets)\b/.test(x)).some(x => p.link.some(w => hasWord(x, w))))) return p.linkMsg;
   if (p.id === 'voter') {
     const who = Object.keys(VKEY).find(n => hasWord(t, n)), k = VKEY[who], N = cap(who);
@@ -485,8 +499,9 @@ async function turnIn() {
   const msg = $('#sendMsg');
   for (const p of PROMPTS) { const v = ($('#w_' + p.id).value || '').trim(); const bad = checkWriting(p, v); if (bad) { msg.className = 'fb oops'; msg.textContent = bad; $('#w_' + p.id).focus(); return; } }
   const t = tally(), bs = bySide();
-  const answers = { 'Standard': 'SS.9-12.Gov.12', 'First-try correct': t.tot[0] + ' of ' + t.tot[1], 'First-try by standard': 'Gov.12: ' + t.tot[0] + ' of ' + t.tot[1],
-    'First-try by part': 'Call It set 1: ' + t.sort[0] + ' right, ' + (t.sort[1] - t.sort[0]) + ' missed' + (t.sort[1] < DECK_SIZE ? ' (stopped at card ' + t.sort[1] + ')' : '') + ' (liberal ' + bs.lib.join('/') + ', conservative ' + bs.con.join('/') + ', party ' + bs.party.join('/') + ') · Voter ideology ' + t.ideo.join('/') + ' · Voter party ' + t.party.join('/') + ' · Same belief, different party ' + t.why.join('/'), 'Score': String(st.score + (st.turnedIn ? 0 : 200 + (((($('#w_crit') || {}).value || '').trim()) ? 300 : 0))) };
+  const answers = { 'Standard': 'SS.9-12.Gov.12', 'First-try correct': t.tot[0] + ' of ' + t.tot[1] + ' (Call It set 1 + voter ideologies + same belief/different party)', 'First-try by standard': 'Gov.12: ' + t.tot[0] + ' of ' + t.tot[1],
+    'Suggested level (check the writing)': (() => { const pct = t.tot[1] ? t.tot[0] / t.tot[1] : 0, l4 = (((($('#w_crit') || {}).value || '').trim())); return (pct >= .75 ? 'Level 3' : pct >= .5 ? 'Level 2' : 'Level 1') + ' from first-try ' + Math.round(pct * 100) + '%' + (l4 ? ' · Level 4 attempted, read the challenge answer' : ''); })(),
+    'First-try by part': 'Call It set 1: ' + t.sort[0] + ' right, ' + (t.sort[1] - t.sort[0]) + ' missed' + (t.sort[1] < DECK_SIZE ? ' (stopped at card ' + t.sort[1] + ')' : '') + ' (liberal ' + bs.lib.join('/') + ', conservative ' + bs.con.join('/') + ', party ' + bs.party.join('/') + ') · Voter ideology ' + t.ideo.join('/') + ' · Voter party ' + t.party.join('/') + ' · Same belief, different party ' + t.why.join('/'), 'Game points (not a grade)': String(st.score + (st.turnedIn ? 0 : 200 + (((($('#w_crit') || {}).value || '').trim()) ? 300 : 0))) };
   answers['Call It sets'] = (st.attempts || 1) + (st.attempts > 1 ? ' sets played to reach 80%' : ' (passed first set)') + ((st.attempts || 1) >= 3 ? ' ⚠️ check in with this student' : '') + (st.resets ? ' · used Start over ' + st.resets + 'x' : '');
   const missed = ITEMS.filter(i => st.r1[i.id] && st.r1[i.id].wrong).map(i => `"${i.t.replace(/[“”]/g, '')}" (is ${SIDE[i.side].s}; picked ${SIDE[st.r1[i.id].pick] ? SIDE[st.r1[i.id].pick].s : '?'})`);
   answers['Call It misses'] = missed.length ? missed.join('; ') : 'none';
@@ -498,7 +513,7 @@ async function turnIn() {
     const res = await classTurnIn(OLD_API, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ studentName: st.name, assignmentId: ASSIGN, assignmentTitle: 'Government Unit 2 · Day 1 · Decision Desk (Ideology vs. Party)', answers }) });
     const data = await res.json().catch(() => ({}));
     if (!res.ok) throw new Error(data.error || 'Your work did not save. Try again.');
-    if (!st.turnedIn) { st.score += 200 + ((($('#w_crit') || {}).value || '').trim() ? 300 : 0); pushScore(); hud(); SCENE.confetti(); } st.turnedIn = true; save(); msg.className = 'fb yay'; msg.textContent = 'Turned in! +200 bonus. Your teacher can see your work.'; $('#sendBtn').textContent = 'Turned in ✓'; $('#sendBtn').disabled = false;
+    if (!st.turnedIn) { st.score += 200 + ((($('#w_crit') || {}).value || '').trim() ? 300 : 0); pushScore(); hud(); SCENE.confetti(); const bg = document.querySelector('.final .big'); if (bg) bg.textContent = '★ ' + st.score.toLocaleString(); } st.turnedIn = true; save(); msg.className = 'fb yay'; msg.textContent = 'Turned in! +200 bonus. Your teacher can see your work.'; $('#sendBtn').textContent = 'Turned in ✓'; $('#sendBtn').disabled = false;
   } catch (e) { msg.className = 'fb oops'; msg.textContent = e.message || 'Could not turn in. Try again.'; $('#sendBtn').disabled = false; }
 }
 
@@ -511,7 +526,7 @@ const SCENE = (() => {
   fit(); window.addEventListener('resize', fit);
   const C = { lib: '#3b82f6', con: '#ef4444', party: '#e2e8f0', mod: '#a78bfa', ltn: '#f5c242' };
   let mode = 'title', pins = [], pair = null, popT = performance.now(), oopsT = -9999, flash = { k: null, t: -9999 }, dots = [], conf = [], counts = { lib: 0, con: 0, party: 0 }, shown = { lib: 0, con: 0, party: 0 }, t0 = performance.now();
-  const WORDS = ['TAXES', 'HEALTH CARE', 'GUNS', 'BORDER', 'CLIMATE', 'MINIMUM WAGE', 'POLICE', 'SCHOOLS', 'MILITARY', 'RIGHTS', 'WELFARE', 'VOTING'].map((w, i) => ({ w, x: Math.random(), y: 40 + (i % 6) * 48, s: .012 + Math.random() * .02 }));
+  const WORDS = ['TAXES', 'HEALTH CARE', 'GUNS', 'BORDER', 'CLIMATE', 'MINIMUM WAGE', 'POLICE', 'SCHOOLS', 'MILITARY', 'RIGHTS', 'WELFARE', 'VOTING'].map((w, i) => ({ w, x: (i < 6 ? 0 : .65) + (i % 6) * .11, y: 40 + (i % 6) * 48, s: .012 + (i % 6) * .003 }));
   function show(m, a) { if (m !== mode) { popT = performance.now(); if (mode !== 'title' && mode !== m) conf = []; } mode = m; if (m === 'r2' || m === 'final') pins = a || []; if (m === 'r3') { if (a !== pair) popT = performance.now(); pair = a; } }
   function boxes() { const bw = Math.min(200, W * .17); return { lib: { x: W * .03, y: 168, w: bw, h: 112 }, con: { x: W * .97 - bw, y: 168, w: bw, h: 112 }, party: { x: W / 2 - bw * .65, y: 214, w: bw * 1.3, h: 70 } }; }
   function call(k) { const b = boxes()[k]; dots.push({ k, x0: W / 2, y0: 120, x1: b.x + b.w / 2, y1: b.y + b.h / 2, t: performance.now() }); counts[k]++; }
@@ -573,7 +588,7 @@ const SCENE = (() => {
     const pop = Math.min(1, (now - popT) / 400), ease = 1 - Math.pow(1 - pop, 3);
     if (mode === 'title' || mode === 'intro') {
       ctx.textAlign = 'center';
-      WORDS.forEach(o => { o.x += o.s * dt / 1000; if (o.x > 1.15) o.x = -.15; ctx.font = '900 30px "Arial Black",system-ui,Arial'; ctx.fillStyle = 'rgba(203,213,225,.07)'; ctx.fillText(o.w, o.x * W, o.y); });
+      WORDS.forEach(o => { o.x += o.s * dt / 1000; if (o.x > 1.15) o.x -= 1.3; ctx.font = '900 30px "Arial Black",system-ui,Arial'; ctx.fillStyle = 'rgba(203,213,225,.07)'; ctx.fillText(o.w, o.x * W, o.y); });
       spectrum(330, true);
     }
     if (mode === 'r1' || mode === 'final') {
