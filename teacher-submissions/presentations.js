@@ -82,10 +82,30 @@
       ],
       days: [{ day: 1, title: "Political Beliefs: Where Do Our Ideas Come From?", std: "Gov.12", slide: "g2d1s01" }, { day: 2, title: "Political Parties: What Do Parties Actually Do?", std: "Gov.12, 11", slide: "g2d2s01" }, { day: 3, title: "Interest Groups: Who Else Tries to Shape Laws?", std: "Gov.12, 11", slide: "g2d3s01" }, { day: 4, title: "Elections: How Do Iowans Vote, and Who Counts?", std: "Gov.13, 14", slide: "g2d4s01" }, { day: 5, title: "Citizenship: What Do We Owe Each Other?", std: "Gov.15, 16, 17, 11", slide: "g2d5s01" }] },
     { course: "government", unit: 3, title: "Judicial Branch", url: g("1OU07tOXL0fJSdysLL5_gEQdNfFMjW-CCAlIPfXPPFxk"),
+      // Rows follow Fynn's Schoology day posts; each row opens the deck day(s) that teach that topic.
+      plan: [
+        { day: 1, title: "What Is the Judicial Branch?", std: "Gov.8", slides: [{ day: 1 }] },
+        { day: 2, title: "Judicial Review: The Power of the Courts", std: "Gov.8", slides: [{ day: 2 }, { day: 3, label: "courts & rights" }] },
+        { day: 3, title: "Judicial Branch Review & Summative", std: "Gov.8" }
+      ],
       days: [{ day: 1, title: "Judicial Branch: How Do Courts Settle Fights?", std: "Gov.8, 10, 18", slide: "g3d1s01" }, { day: 2, title: "Judicial Branch: Who Decides What Laws Mean?", std: "Gov.8, 4", slide: "g3d2s01" }, { day: 3, title: "Judicial Branch: How Do Courts Protect Rights?", std: "Gov.8, 17, 18", slide: "g3d3s01" }] },
     { course: "government", unit: 4, title: "Legislative Branch", url: g("10YXQguXa4oD6k4s1cyA340UxQlTKwsTbSVx8cAh_wzo"),
+      // Rows follow Fynn's Schoology day posts; each row opens the deck day(s) that teach that topic.
+      plan: [
+        { day: 1, title: "Meet Congress — The Legislative Branch", std: "Gov.6", slides: [{ day: 1 }] },
+        { day: 2, title: "How a Bill Becomes a Law", std: "Gov.6", slides: [{ day: 2 }] },
+        { day: 3, title: "Congress in Action", std: "Gov.6", slides: [{ day: 3 }] },
+        { day: 4, title: "Legislative Branch Review & Summative", std: "Gov.6" }
+      ],
       days: [{ day: 1, title: "Legislative Branch: Who Makes Our Laws?", std: "Gov.6, 10", slide: "g4d1s01" }, { day: 2, title: "Lawmaking: Why Do So Few Bills Become Laws?", std: "Gov.6, 18", slide: "g4d2s01" }, { day: 3, title: "Power of the Purse: Who Controls the Money?", std: "Gov.6, 10, 18", slide: "g4d3s01" }] },
     { course: "government", unit: 5, title: "Executive Branch", url: g("18SaeD0mhZo4-w6G1JrwVg3qO0rxA8f_32dfyQvt_RGk"),
+      // Rows follow Fynn's Schoology day posts; each row opens the deck day(s) that teach that topic.
+      plan: [
+        { day: 1, title: "What Is the Executive Branch?", std: "Gov.7", slides: [{ day: 1 }] },
+        { day: 2, title: "Roles of the President", std: "Gov.7", slides: [{ day: 2 }] },
+        { day: 3, title: "Powers and Limits of the Presidency, Cabinet and Agencies", std: "Gov.7", slides: [{ day: 3 }] },
+        { day: 4, title: "Executive Summative", std: "Gov.7" }
+      ],
       days: [{ day: 1, title: "Executive Branch: Who Gets to Be President?", std: "Gov.7, 10", slide: "g5d1s01" }, { day: 2, title: "Presidential Power: How Far Can It Go?", std: "Gov.7", slide: "g5d2s01" }, { day: 3, title: "Executive Branch: Who Does the Daily Work?", std: "Gov.7, 18, 10", slide: "g5d3s01" }] },
     { course: "government", unit: 6, title: "Checks & Balances and Iowa Government", url: g("1P_UeMjD4NVhdZuQsBjj6fKNjICzTn2MP_4kxXcwHruQ"),
       days: [{ day: 1, title: "Checks & Balances: Who Keeps Power in Check?", std: "Gov.4, 9", slide: "g6d1s01" }, { day: 2, title: "Iowa Government: Who Runs Things Near You?", std: "Gov.18, 19, 20", slide: "g6d2s01" }] },
