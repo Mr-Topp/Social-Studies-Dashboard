@@ -58,6 +58,15 @@
       days: [{ day: 1, title: "Executive Branch: Who Gets to Be President?", std: "Gov.7, 10", slide: "g5d1s01" }, { day: 2, title: "Presidential Power: How Far Can It Go?", std: "Gov.7", slide: "g5d2s01" }, { day: 3, title: "Executive Branch: Who Does the Daily Work?", std: "Gov.7, 18, 10", slide: "g5d3s01" }] },
     { course: "government", unit: 6, title: "Checks & Balances and Iowa Government", url: g("1P_UeMjD4NVhdZuQsBjj6fKNjICzTn2MP_4kxXcwHruQ"),
       days: [{ day: 1, title: "Checks & Balances: Who Keeps Power in Check?", std: "Gov.4, 9", slide: "g6d1s01" }, { day: 2, title: "Iowa Government: Who Runs Things Near You?", std: "Gov.18, 19, 20", slide: "g6d2s01" }] },
-    { course: "government", unit: 1, title: "Foundations of the Constitution", note: "earlier 7-day version", url: g("1Ec44PBzUBZ8M1vsZldP_BVnRZqpDZBLLEXu50aD9q-A") }
+    { course: "government", unit: 1, title: "Foundations of the Constitution", note: "earlier 7-day version", url: g("1Ec44PBzUBZ8M1vsZldP_BVnRZqpDZBLLEXu50aD9q-A") },
+
+    // ---- Civics (Friday Iowa civics-test prep) · web presentations ----
+    { course: "civics", unit: 1, title: "Founders' Files (Q1–15)", url: "https://neotboy.github.io/inequalityquest/civics/civics-test-s1-presentation/" },
+    { course: "civics", unit: 2, title: "How the Government Works (Q16–62)", url: "https://neotboy.github.io/inequalityquest/civics/friday2-government-presentation/" },
+    { course: "civics", unit: 3, title: "Rights & Responsibilities (Q63–72)", url: "https://neotboy.github.io/inequalityquest/civics/friday3-rights-presentation/" },
+    { course: "civics", unit: 4, title: "The 1776 Files (Q73–89)", url: "https://neotboy.github.io/inequalityquest/civics/friday4-1776-presentation/" },
+    { course: "civics", unit: 5, title: "The 1800s (Q90–99)", url: "https://neotboy.github.io/inequalityquest/civics/friday5-1800s-civics-presentation/" },
+    { course: "civics", unit: 6, title: "Modern America (Q100–118)", url: "https://neotboy.github.io/inequalityquest/civics/friday6-modern-america-presentation/" },
+    { course: "civics", unit: 7, title: "Symbols, Holidays & Final Review (Q119–128)", url: "https://neotboy.github.io/inequalityquest/civics/friday7-symbols-final-review-presentation/" }
   ];
 })();

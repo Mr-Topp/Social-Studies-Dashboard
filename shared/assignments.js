@@ -41,7 +41,13 @@ window.CLASS_UNITS = {
     6: "Checks & Balances and Iowa Government"
   },
   "civics": {
-    1: "Founders' Files (Civics Test Section 1)"
+    1: "Founders' Files (Civics Test Q1–15)",
+    2: "How the Government Works (Q16–62)",
+    3: "Rights & Responsibilities (Q63–72)",
+    4: "The 1776 Files (Q73–89)",
+    5: "The 1800s (Q90–99)",
+    6: "Modern America (Q100–118)",
+    7: "Symbols, Holidays & Final Review (Q119–128)"
   }
 };
 
@@ -112,7 +118,15 @@ window.CLASS_ASSIGNMENTS = {
 
   // ---- Civics (Iowa civics test prep) · Friday 1 ----
   "civics-test-s1-presentation":     { course: "civics", unit: 1, title: "Founders' Files (Slides)", path: "civics/civics-test-s1-presentation/", std: ["SS.9-12.Gov.3", "SS.9-12.Gov.4"] },
-  "civics-test-s1-founders-defense":  { course: "civics", unit: 1, title: "Founders' Defense", path: "civics/civics-test-s1-founders-defense/", std: ["SS.9-12.Gov.3", "SS.9-12.Gov.4"] }
+  "civics-test-s1-founders-defense":  { course: "civics", unit: 1, title: "Founders' Defense", path: "civics/civics-test-s1-founders-defense/", std: ["SS.9-12.Gov.3", "SS.9-12.Gov.4"] },
+
+  // ---- Civics (Iowa civics test prep) · Fridays 2–7 (exit tickets on each Friday's presentation) ----
+  "civics-f2-presentation": { course: "civics", unit: 2, title: "How the Government Works · Exit Ticket", path: "civics/friday2-government-presentation/", std: ["SS.9-12.Gov.6", "SS.9-12.Gov.7", "SS.9-12.Gov.8"] },
+  "civics-f3-presentation": { course: "civics", unit: 3, title: "Rights & Responsibilities · Exit Ticket", path: "civics/friday3-rights-presentation/", std: ["SS.9-12.Gov.14", "SS.9-12.Gov.17"] },
+  "civics-f4-presentation": { course: "civics", unit: 4, title: "The 1776 Files · Exit Ticket", path: "civics/friday4-1776-presentation/", std: ["SS.9-12.Gov.3", "SS.9-12.Gov.15"] },
+  "civics-f5-presentation": { course: "civics", unit: 5, title: "The 1800s · Exit Ticket", path: "civics/friday5-1800s-civics-presentation/", std: ["SS.9-12.Gov.14", "SS.9-12.Gov.15", "SS.9-12.Gov.3"] },
+  "civics-f6-presentation": { course: "civics", unit: 6, title: "Modern America · Exit Ticket", path: "civics/friday6-modern-america-presentation/", std: ["SS.9-12.Gov.11", "SS.9-12.Gov.14", "SS.9-12.Gov.15"] },
+  "civics-f7-presentation": { course: "civics", unit: 7, title: "Symbols, Holidays & Final Review · Exit Ticket", path: "civics/friday7-symbols-final-review-presentation/", std: ["SS.9-12.Gov.16"] }
 };
 
 // Iowa standard wording (Iowa Academic Standards for Social Studies) for every standard an in-use activity covers.
@@ -140,6 +154,13 @@ window.CLASS_STANDARDS = {
   "SS.9-12.Gov.5": "Analyze the role of the government in maintaining order.",
   "SS.9-12.Gov.9": "Assess how the United States federal system divides powers between national and state governments.",
   "SS.9-12.Gov.12": "Critique the influence of intermediary institutions on government and policy.",
+  "SS.9-12.Gov.6": "Analyze the function, duties, and authority of the legislative branch, including the process of lawmaking and the power of the purse.",
+  "SS.9-12.Gov.7": "Analyze the function, duties, and authority of the executive branch, including the scope of presidential powers, executive orders, executive agreements, and the president's role in foreign and domestic policy.",
+  "SS.9-12.Gov.8": "Analyze the function, duties, and authority of the judicial branch, including the power of judicial review and interpretation of laws.",
+  "SS.9-12.Gov.11": "Analyze the historical, contemporary, and emerging patterns of political action and activism.",
+  "SS.9-12.Gov.15": "Assess the contributions of exemplary Iowans and Americans who have played a role in promoting civic virtues and democratic principles.",
+  "SS.9-12.Gov.16": "Analyze the concept of civic virtue and its importance to a well-functioning democracy.",
+  "SS.9-12.Gov.17": "Analyze the rights, liberties, duties, and responsibilities of citizens of the United States and the state of Iowa.",
   "SS.9-12.Gov.14": "Analyze the role of citizens in the U.S. political system, with attention to the definition of who is a citizen, the expansion of that definition over time."
 };
 
