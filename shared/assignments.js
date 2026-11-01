@@ -118,20 +118,20 @@ window.CLASS_ASSIGNMENTS = {
   "gov-unit2-day2-lobby-day":         { course: "government", unit: 2, day: 3, title: "Day 3 · Lobby Day: Interest Groups & Media", path: "civics/unit2-day2-lobby-day/", std: ["SS.9-12.Gov.12"] },
 
   // ---- Civics (Iowa civics test prep) · Friday 1 ----
-  "civics-test-s1-presentation":     { course: "civics", unit: 1, title: "Founders' Files (Slides)", path: "civics/civics-test-s1-presentation/", std: ["SS.9-12.Gov.3", "SS.9-12.Gov.4"] },
+  "civics-test-s1-presentation":     { course: "civics", hideLink: true, unit: 1, title: "Founders' Files (Slides)", path: "civics/civics-test-s1-presentation/", std: ["SS.9-12.Gov.3", "SS.9-12.Gov.4"] },
   "civics-test-s1-founders-defense":  { course: "civics", unit: 1, title: "Founders' Defense", path: "civics/civics-test-s1-founders-defense/", std: ["SS.9-12.Gov.3", "SS.9-12.Gov.4"] },
 
   // ---- Civics (Iowa civics test prep) · Fridays 2–7 (exit tickets on each Friday's presentation) ----
-  "civics-f2-presentation": { course: "civics", unit: 2, title: "How the Government Works (Slides)", path: "civics/friday2-government-presentation/", std: ["SS.9-12.Gov.6", "SS.9-12.Gov.7", "SS.9-12.Gov.8"] },
+  "civics-f2-presentation": { course: "civics", hideLink: true, unit: 2, title: "How the Government Works (Slides)", path: "civics/friday2-government-presentation/", std: ["SS.9-12.Gov.6", "SS.9-12.Gov.7", "SS.9-12.Gov.8"] },
   "civics-f2-government-arcade": { course: "civics", unit: 2, title: "Government Arcade", path: "civics/day2-government-arcade/", std: ["SS.9-12.Gov.6", "SS.9-12.Gov.7", "SS.9-12.Gov.8", "SS.9-12.Gov.9", "SS.9-12.Gov.18"] },
-  "civics-f3-presentation": { course: "civics", unit: 3, title: "Rights & Responsibilities (Slides)", path: "civics/friday3-rights-presentation/", std: ["SS.9-12.Gov.14", "SS.9-12.Gov.17"] },
+  "civics-f3-presentation": { course: "civics", hideLink: true, unit: 3, title: "Rights & Responsibilities (Slides)", path: "civics/friday3-rights-presentation/", std: ["SS.9-12.Gov.14", "SS.9-12.Gov.17"] },
   "civics-f3-pixel-town": { course: "civics", unit: 3, title: "Pixel Town: Civic Quest", path: "civics/pixel-town-day3-game/", std: ["SS.9-12.Gov.13", "SS.9-12.Gov.14", "SS.9-12.Gov.17"] },
-  "civics-f4-presentation": { course: "civics", unit: 4, title: "The 1776 Files (Slides)", path: "civics/friday4-1776-presentation/", std: ["SS.9-12.Gov.3", "SS.9-12.Gov.15"] },
+  "civics-f4-presentation": { course: "civics", hideLink: true, unit: 4, title: "The 1776 Files (Slides)", path: "civics/friday4-1776-presentation/", std: ["SS.9-12.Gov.3", "SS.9-12.Gov.15"] },
   "civics-f4-1776-files": { course: "civics", unit: 4, title: "The 1776 Files", path: "civics/friday4-1776-files-game/", std: ["SS.9-12.Gov.3", "SS.9-12.Gov.15"] },
-  "civics-f5-presentation": { course: "civics", unit: 5, title: "The 1800s (Slides)", path: "civics/friday5-1800s-civics-presentation/", std: ["SS.9-12.Gov.14", "SS.9-12.Gov.15", "SS.9-12.Gov.3"] },
+  "civics-f5-presentation": { course: "civics", hideLink: true, unit: 5, title: "The 1800s (Slides)", path: "civics/friday5-1800s-civics-presentation/", std: ["SS.9-12.Gov.14", "SS.9-12.Gov.15", "SS.9-12.Gov.3"] },
   "civics-f5-1800s-express": { course: "civics", unit: 5, title: "The 1800s Express", path: "civics/friday5-1800s-express-game/", std: ["SS.9-12.Gov.14", "SS.9-12.Gov.15", "SS.9-12.Gov.3"] },
-  "civics-f6-presentation": { course: "civics", unit: 6, title: "Modern America (Slides)", path: "civics/friday6-modern-america-presentation/", std: ["SS.9-12.Gov.11", "SS.9-12.Gov.14", "SS.9-12.Gov.15"] },
-  "civics-f7-presentation": { course: "civics", unit: 7, title: "Symbols, Holidays & Final Review (Slides)", path: "civics/friday7-symbols-final-review-presentation/", std: ["SS.9-12.Gov.16"] }
+  "civics-f6-presentation": { course: "civics", hideLink: true, unit: 6, title: "Modern America (Slides)", path: "civics/friday6-modern-america-presentation/", std: ["SS.9-12.Gov.11", "SS.9-12.Gov.14", "SS.9-12.Gov.15"] },
+  "civics-f7-presentation": { course: "civics", hideLink: true, unit: 7, title: "Symbols, Holidays & Final Review (Slides)", path: "civics/friday7-symbols-final-review-presentation/", std: ["SS.9-12.Gov.16"] }
 };
 
 // Iowa standard wording (Iowa Academic Standards for Social Studies) for every standard an in-use activity covers.

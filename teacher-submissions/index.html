@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
 <title>Teacher Dashboard · All Classes</title>
-<script src="../shared/assignments.js?v=20261101u3"></script>
+<script src="../shared/assignments.js?v=20261101h"></script>
 <script src="presentations.js?v=20261101u3"></script>
 <script src="../shared/turnin.js?v=20261031t"></script>
 <style>
@@ -316,7 +316,9 @@ function byUnit(ids, course) {
 const linkOpen = {};
 let attentionOpen = false;
 function linksHtml() {
-  const acts = Object.keys(REG).filter(id => REG[id].course === tab && REG[id].path);
+  // hideLink: the activity still turns in work and shows in grades, but isn't listed as an assignment link
+  // (e.g. a Friday presentation whose exit ticket turns in; the deck is already listed under Slides).
+  const acts = Object.keys(REG).filter(id => REG[id].course === tab && REG[id].path && !REG[id].hideLink);
   const allDecks = (window.CLASS_PRESENTATIONS || []).filter(p => p.course === tab && p.url);
   const P1 = (window.CLASS_UNITS_PART1 || {})[tab];
   if (!acts.length && !allDecks.length) return "<p class='status'>No activities in this class send work to the dashboard yet.</p>";
