@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
 <title>Teacher Dashboard · All Classes</title>
-<script src="../shared/assignments.js?v=20261031j"></script>
-<script src="presentations.js?v=20261031c"></script>
+<script src="../shared/assignments.js?v=20261101a"></script>
+<script src="presentations.js?v=20261101a"></script>
 <script src="../shared/turnin.js?v=20261031t"></script>
 <style>
 :root{--navy:#19364b;--red:#a33d36;--green:#2f6b3a;--paper:#f4efe4;--card:#fffdf8;--ink:#22313b;--muted:#536571;--line:#d8cfbd}
@@ -105,6 +105,7 @@ td.sum.l3{background:#eef7f0;color:#1f5e2c}td.sum.l2{background:#fff8e2;color:#7
 .unitdrop summary{cursor:pointer;font-weight:900;color:var(--navy)}.unitdrop .links{margin:10px 0 2px}
 .deckhead{font-size:.78rem;font-weight:900;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);margin:10px 0 0}
 .links.decks a{background:#fff6e5;border-color:#e7cf9c}
+.parthead{font-size:.82rem;font-weight:900;letter-spacing:.06em;text-transform:uppercase;color:var(--red);margin:16px 0 6px}
 </style>
 </head>
 <body>
@@ -309,19 +310,32 @@ const linkOpen = {};
 let attentionOpen = false;
 function linksHtml() {
   const acts = Object.keys(REG).filter(id => REG[id].course === tab && REG[id].path);
-  const decks = (window.CLASS_PRESENTATIONS || []).filter(p => p.course === tab && p.url);
-  if (!acts.length && !decks.length) return "<p class='status'>No activities in this class send work to the dashboard yet.</p>";
+  const allDecks = (window.CLASS_PRESENTATIONS || []).filter(p => p.course === tab && p.url);
+  const decks = allDecks.filter(p => p.part !== 1), part1 = allDecks.filter(p => p.part === 1);
+  if (!acts.length && !allDecks.length) return "<p class='status'>No activities in this class send work to the dashboard yet.</p>";
   const groups = byUnit(acts, tab);
   decks.forEach(p => { const u = p.unit || 0; if (!groups.find(x => x.unit === u)) groups.push({ unit: u, name: unitName(tab, u), ids: [] }); });
   groups.sort((a, b) => (a.unit || 999) - (b.unit || 999));
   const plural = (n, w) => n + " " + w + (n === 1 ? "" : "s");
-  return groups.map(g => {
+  const deckLinks = list => `<div class="deckhead">Slides</div><div class="links decks">${list.map(p => `<a href="${safe(p.url)}" target="_blank" rel="noopener">▶ ${safe(p.title)}</a>`).join("")}</div>`;
+  const drop = (key, name, count, inner) => `<details class="unitdrop" data-k="${safe(key)}"${linkOpen[key] ? " open" : ""}><summary>${safe(name)} <span class="unitcount">${count}</span></summary>${inner}</details>`;
+  let html = groups.map(g => {
     const mine = decks.filter(p => (p.unit || 0) === g.unit).sort((a, b) => (a.day || 0) - (b.day || 0));
     const count = [g.ids.length ? plural(g.ids.length, "assignment") : "", mine.length ? plural(mine.length, "slide deck") : ""].filter(Boolean).join(" · ");
     const actHtml = g.ids.length ? `<div class="links">${g.ids.map(id => `<a href="../${REG[id].path}" target="_blank" rel="noopener">${safe(REG[id].title)}</a>`).join("")}</div>` : "";
-    const deckHtml = mine.length ? `<div class="deckhead">Slides</div><div class="links decks">${mine.map(p => `<a href="${safe(p.url)}" target="_blank" rel="noopener">▶ ${safe(p.title)}</a>`).join("")}</div>` : "";
-    return `<details class="unitdrop" data-k="${safe(tab + "|" + g.unit)}"${linkOpen[tab + "|" + g.unit] ? " open" : ""}><summary>${safe(g.name)} <span class="unitcount">${count}</span></summary>${actHtml}${deckHtml}</details>`;
+    return drop(tab + "|" + g.unit, g.name, count, actHtml + (mine.length ? deckLinks(mine) : ""));
   }).join("");
+  // Part 1 (first half of the course): its own section, so current unit numbers stay the same.
+  if (part1.length) {
+    const P1 = (window.CLASS_UNITS_PART1 || {})[tab] || {};
+    const units = [...new Set(part1.map(p => p.unit || 0))].sort((a, b) => (a || 999) - (b || 999));
+    html += `<div class="parthead">Part 1</div>` + units.map(u => {
+      const mine = part1.filter(p => (p.unit || 0) === u).sort((a, b) => (a.day || 0) - (b.day || 0));
+      const name = u ? "Unit " + u + (P1[u] ? " · " + P1[u] : "") : "Other";
+      return drop(tab + "|p1|" + u, name, plural(mine.length, "slide deck"), deckLinks(mine));
+    }).join("");
+  }
+  return html;
 }
 
 function renderTabs() {

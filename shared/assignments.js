@@ -22,18 +22,40 @@ window.CLASS_UNITS = {
     6: "Modern America"
   },
   "world-history": {
-    1: "Imperialism & the World Wars (1800–1945)"
+    1: "Imperialism & the World Wars (1800–1945)",
+    2: "Cold War & Decolonization",
+    3: "The World Since 1991"
   },
   "sociology": {
     1: "Foundations, Perspectives & Methods",
-    2: "Culture, Institutions & Society"
+    2: "Culture, Institutions & Society",
+    3: "Socialization, the Self & Groups",
+    4: "Stratification & Inequality"
   },
   "government": {
     1: "Foundations of the U.S. Constitution",
-    2: "Political Beliefs, Linkage Institutions & Citizenship"
+    2: "Political Beliefs, Linkage Institutions & Citizenship",
+    3: "Judicial Branch",
+    4: "Legislative Branch",
+    5: "Executive Branch",
+    6: "Checks & Balances and Iowa Government"
   },
   "civics": {
     1: "Founders' Files (Civics Test Section 1)"
+  }
+};
+
+// Part 1 units (the first half of the course). Kept separate so the current Unit 1–6 numbers stay the same.
+window.CLASS_UNITS_PART1 = {
+  "us-history": {
+    1: "Founding & Citizenship",
+    4: "Progressive Era"
+  },
+  "world-history": {
+    1: "Exploration & Global Trade",
+    2: "Expanding Empires",
+    3: "Renaissance, Reformation & New Ideas",
+    4: "Revolutions & Industrialization"
   }
 };
 
