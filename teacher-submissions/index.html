@@ -82,7 +82,7 @@ td.needs{color:#8e2a20;font-weight:800}
 .stdtag{display:block;font-size:.68rem;font-weight:700;color:var(--red);margin-top:3px}
 .stdkey{margin-top:12px}.stdkey ul{margin:8px 0 0;padding-left:18px}.stdkey li{margin:0 0 8px}
 .mdetail{margin:10px 0 0;padding:10px 12px;background:#fff;border:1px solid var(--line);border-radius:10px;min-height:0}.mdetail:empty{display:none}.mdetail ul{margin:6px 0 0;padding-left:18px}td.lv[data-c]{cursor:pointer}td.lv.picked{outline:3px solid var(--navy);outline-offset:-3px}
-.views{flex-wrap:wrap}table.mastery th:not(.student),table.mastery td.lv{min-width:118px}@media(max-width:600px){table.mastery th small{display:none}.views button{flex:1 1 40%}}
+.views{flex-wrap:wrap}table.mastery th:not(.student),table.mastery td.lv{min-width:96px}@media(max-width:600px){table.mastery th small{display:none}.views button{flex:1 1 40%}}
 td.done button{display:block;width:100%;min-width:96px;text-align:center;line-height:1.15;padding:5px 6px}
 td.done .grade{display:block;font-size:1.05rem;font-weight:900}
 td.done .lvl{display:block;font-size:.72rem;font-weight:800}
@@ -138,24 +138,46 @@ td.sum.l3{background:#eef7f0;color:#1f5e2c}td.sum.l2{background:#fff8e2;color:#7
 .unitcount .todocount{color:var(--red);font-weight:800}
 .daytitle.unplanned{color:var(--muted);font-weight:600;font-style:italic}
 @media (max-width:760px){.dayrow{grid-template-columns:1fr}}
+/* Calmer layout (2026-11-02): one header line, Lessons | Grades switch, keys and alternatives tucked under "more" */
+.topbar{display:flex;justify-content:space-between;align-items:baseline;gap:8px 16px;flex-wrap:wrap;margin-bottom:4px}
+.topbar h1{margin:0}
+.toplinks{display:flex;gap:14px;font-size:.88rem}.toplinks a{color:var(--muted);font-weight:700}
+.codebar{padding:10px 14px}.codebar .status{margin:0 0 0 6px}
+.modes{display:flex;gap:6px;margin:0 0 14px}
+.mode{background:#e7e0d1;color:var(--navy);font-size:1rem;padding:10px 18px}
+.mode[aria-pressed=true]{background:var(--navy);color:#fff}
+.mini{font-size:.82rem;color:var(--muted);margin:0 0 8px}
+.mini summary{display:inline;cursor:pointer;font-weight:800;color:var(--navy)}
+.mini[open]{background:#fff;border:1px solid var(--line);border-radius:9px;padding:8px 10px}
+.mini p{margin:6px 0 0}
+.sw{display:inline-block;width:12px;height:12px;border-radius:3px;vertical-align:-1px;margin-right:3px}
+.keyline{display:flex;flex-wrap:wrap;gap:4px 12px;align-items:center;font-size:.82rem;color:var(--muted);margin:0 0 8px}
+.more,.mini{border-top:0;padding-top:0}
+.stdall{margin-top:12px}.stdall>summary{font-size:.92rem}.stdall .stdkey{margin-left:14px}
+.more{margin-top:0;align-self:center}.more[open]{width:100%}
+.more summary{display:inline-block;font-size:.78rem;font-weight:800;color:var(--muted);cursor:pointer;padding:2px 4px;list-style:none}
+.more summary::-webkit-details-marker{display:none}
+.more summary::before{content:"+ "}.more[open] summary::before{content:"− "}
+.more .inner{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}
 .testtag{display:block;width:max-content;margin-top:2px;background:#dbe8fb;color:#1c3f78;border-radius:6px;padding:0 6px;font-weight:800;font-size:.72rem;letter-spacing:.04em}
 </style>
 </head>
 <body>
 <main>
-<p class="eyebrow">Teacher dashboard</p>
-<h1>All class turn-ins</h1>
-<p class="status">One code, every class. Pick a class tab to see who turned in what. · <a href="../all.html">All activities (teacher list)</a> · <a href="../">Student home page</a> · <a href="update-teacher-tools.html"><b>Turn on student grades (2-min update)</b></a></p>
+<div class="topbar">
+  <h1>Teacher Dashboard</h1>
+  <nav class="toplinks" aria-label="Other pages"><a href="../">Student site</a><a href="../all.html">All activities</a><a href="update-teacher-tools.html">Teacher Tools update</a></nav>
+</div>
 
-<section class="panel">
+<section class="panel codebar">
   <div class="row">
-    <label for="teacherCode">Teacher code</label>
-    <input id="teacherCode" type="password" autocomplete="off" placeholder="Enter teacher code">
-    <button id="loadBtn">View turn-ins</button>
+    <label for="teacherCode">Code</label>
+    <input id="teacherCode" type="password" autocomplete="off" placeholder="Teacher code">
+    <button id="loadBtn">Open</button>
     <button class="light" id="refreshBtn">Refresh</button>
     <button class="light" id="lockBtn">Lock</button>
+    <span class="status" id="status" role="status" aria-live="polite">Enter your code to see grades.</span>
   </div>
-  <p class="status" id="status" role="status" aria-live="polite">Enter your teacher code to load student work.</p>
 </section>
 
 <section class="panel import" id="importPanel" hidden>
@@ -167,19 +189,25 @@ td.sum.l3{background:#eef7f0;color:#1f5e2c}td.sum.l2{background:#fff8e2;color:#7
 
 <div class="tabs" role="tablist" id="tabs"></div>
 <section class="panel tabpanel" id="tabpanel" role="tabpanel">
-  <div id="links"></div>
+  <div class="modes" role="group" aria-label="Show">
+    <button class="mode" id="gradesMode" aria-pressed="true">📊 Grades</button>
+    <button class="mode" id="lessonsMode" aria-pressed="false">📚 Lessons</button>
+  </div>
+  <div id="lessonsPane" hidden><div id="links"></div></div>
+  <div id="gradesPane">
   <div id="attention"></div>
   <div class="views" role="group" aria-label="View">
-    <button class="light" id="gridView" aria-pressed="true">Who turned in what</button>
-    <button class="light" id="listView" aria-pressed="false">Read answers</button>
-    <button class="light" id="masteryView" aria-pressed="false">Standards &amp; mastery</button>
-    <button class="light" id="csvBtn" disabled>Download CSV</button>
+    <button class="light" id="gridView" aria-pressed="true">By day</button>
+    <button class="light" id="masteryView" aria-pressed="false">Standards</button>
+    <button class="light" id="listView" aria-pressed="false">Answers</button>
+    <button class="light" id="csvBtn" disabled>⬇ CSV</button>
   </div>
   <div class="row" id="filters" hidden style="margin-bottom:10px">
     <input id="search" placeholder="Search student" aria-label="Search student">
     <select id="assignment" aria-label="Activity"></select>
   </div>
-  <div id="out"><div class="empty">Turn-ins will appear here.</div></div>
+  <div id="out"><div class="empty">Enter your code above to see grades.</div></div>
+  </div>
 </section>
 </main>
 
@@ -201,6 +229,8 @@ const SETUP_LINK = `<a href="setup-teacher-tools.html" target="_blank" rel="noop
 
 const COURSES = window.CLASS_COURSES, REG = window.CLASS_ASSIGNMENTS;
 const $ = id => document.getElementById(id);
+// Lessons | Grades switch (remembered per browser tab). Lessons = unit/day links, Grades = turn-ins.
+let mode = sessionStorage.getItem("dash-mode") === "lessons" ? "lessons" : "grades";
 let rows = [], oldRows = [], tab = (COURSES[location.hash.slice(1)] && location.hash.slice(1)) || sessionStorage.getItem("dash-tab") || "us-history", view = "grid";
 
 const safe = v => String(v ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
@@ -252,7 +282,7 @@ async function load() {
   rows = [...seen.values()].sort((a, b) => b.submittedAt.localeCompare(a.submittedAt));
   mergeNames();
   if (got.length) sessionStorage.setItem("teacher-code", code);
-  $("status").innerHTML = rows.length + " turn-ins loaded (" + notes.join(" · ") + ").";
+  $("status").innerHTML = rows.length + " turn-ins loaded" + (notes.some(n => /warn/.test(n)) ? " (" + notes.join(" · ") + ")" : "") + ".";
   $("importPanel").hidden = !(GOOGLE && READ_OLD_SITE && oldRows.length);
   render();
 }
@@ -373,6 +403,13 @@ function linksHtml() {
   // Drive files added as alternatives: readings get their own row, everything else is an alternative assignment.
   const isAltReading = id => /\(Reading/i.test(REG[id].title || "");
   const altRow = (ids, reading) => { const list = ids.filter(id => REG[id].alt && isAltReading(id) === reading); return list.length ? `<div class="altrow"><span class="altlabel">${reading ? "Alternative reading" : "Alternative assignment"}${list.length > 1 ? "s" : ""}</span>${list.map(chip).join("")}</div>` : ""; };
+  // Answer keys + Drive alternatives sit behind a small "+ more" so the day row shows only what you teach from.
+  const moreBox = ids => {
+    const keys = ids.filter(id => !REG[id].alt && kindOf(id) === "key"), alts = ids.filter(id => REG[id].alt);
+    if (!keys.length && !alts.length) return "";
+    const what = [keys.length ? (keys.length > 1 ? keys.length + " keys" : "key") : "", alts.length ? (alts.length > 1 ? alts.length + " alternatives" : "alternative") : ""].filter(Boolean).join(" + ");
+    return `<details class="more"><summary>${what}</summary><div class="inner">${keys.map(chip).join("")}${altRow(ids, true)}${altRow(ids, false)}</div></details>`;
+  };
   const chip = id => { const k = kindOf(id); return `<a class="chip ${k}${REG[id].alt ? " alt" : ""}" href="${safe(hrefOf(id))}" target="_blank" rel="noopener" title="${safe(REG[id].title)}${k === "key" ? " (teacher only)" : ""}">${ICON[k]} ${safe(chipText(id))}</a>`; };
   const actDay = id => { const m = (REG[id].title || "").match(/^Days? (\d+)/); return REG[id].day || (m ? +m[1] : 0); };
   const unitBlock = (key, name, ids, decks, cal) => {
@@ -422,20 +459,21 @@ function linksHtml() {
     const list = [...rows.values()].sort((a, b) => (a.day || 999) - (b.day || 999));
     const nTodo = list.reduce((n, r) => n + (r.todo || []).length, 0);
     const nDays = list.reduce((n, r) => n + (r.day ? (r.span ? r.span - r.day + 1 : 1) : 0), 0), nActs = ids.length;
-    const count = ([nDays ? plural(nDays, "day") : "", nActs ? plural(nActs, "assignment") : "", cal ? "summative " + (cal.summative ? niceDate(cal.summative) : "Day " + cal.days) : ""].filter(Boolean).join(" · ") || (main ? "slides ready" : "slides not built yet"))
+    const shortDate = iso => iso ? new Date(iso + "T12:00:00").toLocaleDateString("en-US", { month: "short", day: "numeric" }) : "";
+    const count = ([nDays ? plural(nDays, "day") : (nActs ? plural(nActs, "assignment") : ""), cal ? "summative " + (cal.summative ? shortDate(cal.summative) : "Day " + cal.days) : ""].filter(Boolean).join(" · ") || (main ? "slides ready" : "slides not built yet"))
       + (nTodo ? ` · <span class="todocount">⚠ ${nTodo} not made yet</span>` : "");
     const body = list.map(r => {
-      const label = r.single ? "" : r.day ? `<b>${r.span ? `Days ${r.day}–${r.span}` : `Day ${r.day}`}${r.summ ? " · Summative" : ""}</b>${r.summ ? `<span class="sumdate">📅 ${cal.summative ? safe(niceDate(cal.summative)) + " (green sheet)" : "No date on the green sheet"}</span>` : ""}` : `<b>Other</b>`;
+      const label = r.single ? "" : r.day ? `<b>${r.span ? `Days ${r.day}–${r.span}` : `Day ${r.day}`}${r.summ ? " · Summative" : ""}</b>${r.summ ? `<span class="sumdate">📅 ${cal.summative ? safe(niceDate(cal.summative)) : "No date on the green sheet"}</span>` : ""}` : `<b>Other</b>`;
       const t = r.title || (r.summ || r.ids.some(id => /summative/i.test(REG[id].title)) ? "Summative" : r.ids.length ? chipText(r.ids[0]).replace(/\s*\([^)]*\)\s*$/, "") : "");
       const slides = r.slides.map(s => `<a class="chip slides" href="${safe(s.url)}${s.slide ? "#slide=id." + safe(s.slide) : ""}" target="_blank" rel="noopener">▶ ${safe(s.label)}</a>`).join("");
       const todo = (r.todo || []).map(x => `<span class="chip todo">⚠ ${safe(x)}</span>`).join("");
-      return `<div class="dayrow${r.summ ? " summ" : ""}"><div class="daylabel">${label}<span class="daytitle${t ? "" : " unplanned"}">${safe(t || "Nothing planned yet")}</span>${r.std ? `<span class="daystd">${safe(r.std)}</span>` : ""}</div><div class="daychips">${slides}${r.ids.filter(id => !REG[id].alt).map(chip).join("")}${todo}${altRow(r.ids, true)}${altRow(r.ids, false)}</div></div>`;
+      return `<div class="dayrow${r.summ ? " summ" : ""}"><div class="daylabel">${label}<span class="daytitle${t ? "" : " unplanned"}">${safe(t || "Nothing planned yet")}</span>${r.std ? `<span class="daystd">${safe(r.std)}</span>` : ""}</div><div class="daychips">${slides}${r.ids.filter(id => !REG[id].alt && kindOf(id) !== "key").map(chip).join("")}${todo}${moreBox(r.ids)}</div></div>`;
     }).join("");
     const deckLinks = [list.some(r => r.single) ? null : main, ...extra].filter(Boolean).map(p => `<a href="${safe(p.url)}" target="_blank" rel="noopener">${p === main ? "▶ Open the whole deck" : "Older version: " + safe(p.title) + (p.note ? " (" + safe(p.note) + ")" : "")}</a>`).join(" · ");
     const inner = list.length ? `<div class="daytable">${body}</div>${deckLinks ? `<div class="deckfoot">${deckLinks}</div>` : ""}` : `<p class="status">No slides for this unit yet.</p>`;
     return `<details class="unitdrop" data-k="${safe(key)}"${linkOpen[key] ? " open" : ""}><summary>${safe(name)} <span class="unitcount">${count}</span></summary>${inner}</details>`;
   };
-  const legend = `<p class="chiplegend">▶ slides · 💻 online, turns in to this dashboard · 🖨 printed · 🔗 outside link · 🔑 answer key (teacher only) · <b>Alternative reading / assignment</b> = your Drive files, to use instead of the main activity (absent students, subs, paper days) · <span style="color:var(--red);font-weight:800">⚠ red = not made yet, fill it in</span> · the last day of each unit is the summative, dated from your green sheet</p>`;
+  const legend = `<details class="mini"><summary>Key</summary><p>▶ slides · 💻 online, turns in here · 🖨 printed · 🔗 outside link · 🔑 answer key (teacher only)</p><p><b>+ key / alternative</b> under a day = its answer keys and your Drive alternatives (for absent students, subs, paper days).</p><p><span style="color:var(--red);font-weight:800">⚠ red</span> = not made yet. The last day of each unit is the summative, dated from your green sheet.</p></details>`;
 
   // Current units (Part 2 when the class has a Part 1).
   const decks = allDecks.filter(p => p.part !== 1);
@@ -467,6 +505,9 @@ function renderTabs() {
 // Levels from first-try accuracy across every assignment for a standard (Fynn's cutoffs):
 // 90%+ = on track for 3 (teacher confirms 3/4 with written work or the unit test) · 70–89% = 2 · under 70% = 1 · nothing turned in = no evidence (credit needs at least a 1).
 const STDTXT = window.CLASS_STANDARDS || {};
+// One short color key for the grade views; the full explanation sits behind "How grades work".
+const KEYLINE = `<div class="keyline"><span><i class="sw" style="background:#dbe8fb"></i>4</span><span><i class="sw" style="background:#dff0e2"></i>3</span><span><i class="sw" style="background:#fff1c9"></i>2</span><span><i class="sw" style="background:#f8dcd8"></i>1</span><span>Check = not graded yet</span><span>⚠ = flagged</span><span>— = nothing yet</span></div>`;
+const HOWTO = `<details class="mini"><summary>How grades work</summary><p>Each activity gets one level: its first-try score (90%+ = 3, 70–89% = 2, under 70% = 1) averaged with the AI grade of the written answers (1–4), rounded down. Your own grade replaces the AI grade.</p><p>A real 3 needs a written answer. 90%+ with no written answer shows as “On track for 3.”</p><p>Hover a box for the details. Click it to read the student's answers and change the grade.</p></details>`;
 const STD_RE = /SS\.9-12\.(?:WH|US|Gov|Soc)\.\d+/g;
 const shortStd = c => c.replace("SS.9-12.", "");
 function stdsOf(r) { const got = String((r.answers || {}).Standard || "").match(STD_RE); return [...new Set(got && got.length ? got : (REG[r.assignmentId] && REG[r.assignmentId].std) || [])]; }
@@ -533,18 +574,17 @@ function renderMastery(list) {
     const tip = d.items.map(x => x.title + ": " + itemText(x)).join("\n");
     if (d.n === null) return `<td class="lv check" data-s="${safe(s)}" data-c="${safe(c)}" title="${safe(tip)}">Check<small>${d.items.length} not graded yet</small></td>`;
     const flag = d.items.some(x => x.g && x.g.ai && x.g.ai.flag);
-    return `<td class="lv ${LCLS(d.n)}" data-s="${safe(s)}" data-c="${safe(c)}" title="${safe(tip)}">${levelLabel(d.n, d.written)}${flag ? " ⚠" : ""}<small>avg ${d.avg.toFixed(1)} · ${d.items.length} ${d.items.length === 1 ? "activity" : "activities"}${d.written ? " · written" : ""}</small></td>`;
+    return `<td class="lv ${LCLS(d.n)}" data-s="${safe(s)}" data-c="${safe(c)}" title="${safe(tip)}">${levelLabel(d.n, d.written)}${flag ? " ⚠" : ""}<small>avg ${d.avg.toFixed(1)}</small></td>`;
   };
   const missing = s => codes.filter(c => !data[s][c]).length;
-  $("out").innerHTML = `<div class="legend"><span class="lv l4">4</span> beyond proficient <span class="lv l3">3</span> proficient (needs a written answer) <span class="lv l3">On track for 3</span> 90%+ first try, no written answer yet <span class="lv l2">2</span> <span class="lv l1">1</span> <span class="lv none">—</span> no evidence yet <span class="lv check">Check</span> not graded yet · ⚠ flagged written answer</div>
-  <p class="status" style="margin:4px 0 10px">${students.length} students · ${codes.length} standards · Each activity counts as one level: its first-try score (90%+ = 3, 70–89% = 2, under 70% = 1) and its written answers (graded 1–4 by AI against the standard), averaged. Tap any score to see where it came from.</p>
-  <div class="gridwrap"><table class="mastery"><thead><tr><th class="student">Student</th>${codes.map(c => `<th title="${safe(STDTXT[c] || "")}">${safe(shortStd(c))}<small>${safe((STDTXT[c] || "").slice(0, 60))}${(STDTXT[c] || "").length > 60 ? "…" : ""}</small></th>`).join("")}<th>No evidence</th></tr></thead>
+  $("out").innerHTML = KEYLINE + HOWTO + `
+  <div class="gridwrap"><table class="mastery"><thead><tr><th class="student">Student</th>${codes.map(c => `<th title="${safe(STDTXT[c] || "")}">${safe(shortStd(c))}</th>`).join("")}<th>No evidence</th></tr></thead>
   <tbody>${students.map(s => `<tr>${studentCell(tab, s)}${codes.map(c => cellHtml(s, c)).join("")}<td class="${missing(s) ? "needs" : ""}">${missing(s) ? missing(s) + " of " + codes.length : "✓"}</td></tr>`).join("")}</tbody></table></div>
   <div id="mdetail" class="mdetail" aria-live="polite"></div>
-  ${byUnit(Object.keys(REG).filter(id => REG[id].course === tab && REG[id].path), tab).map(g => {
+  <details class="stdall"><summary>What each standard means (by unit)</summary>${byUnit(Object.keys(REG).filter(id => REG[id].course === tab && REG[id].path), tab).map(g => {
     const uc = []; g.ids.forEach(id => (REG[id].std || []).forEach(c => { if (!uc.includes(c)) uc.push(c); }));
     return `<details class="stdkey"><summary>Standards in ${safe(g.name)} (${uc.length})</summary><ul>${uc.map(c => `<li><b>${safe(c)}</b> ${safe(STDTXT[c] || "")}<br><span class="status">${safe(g.ids.filter(id => (REG[id].std || []).includes(c)).map(id => REG[id].title).join(" · "))}</span></li>`).join("")}</ul></details>`;
-  }).join("")}`;
+  }).join("")}</details>`;
   $("out").querySelectorAll("td.lv[data-c]").forEach(td => td.onclick = () => {
     const d = data[td.dataset.s][td.dataset.c], c = td.dataset.c;
     $("out").querySelectorAll("td.lv.picked").forEach(x => x.classList.remove("picked")); td.classList.add("picked");
@@ -570,6 +610,10 @@ function activitiesFor(list) {
 
 function render() {
   renderTabs();
+  $("gradesMode").setAttribute("aria-pressed", mode === "grades");
+  $("lessonsMode").setAttribute("aria-pressed", mode === "lessons");
+  $("gradesPane").hidden = mode !== "grades";
+  $("lessonsPane").hidden = mode !== "lessons";
   const list = tabRows(tab);
   $("attention").innerHTML = (list.length || rosterOf(tab).length || rows.length) ? attentionHtml(list) : "";
   const att = $("attention").querySelector(".attention"); if (att) att.addEventListener("toggle", () => { attentionOpen = att.open; });
@@ -592,7 +636,7 @@ function render() {
   sel.value = [...sel.options].some(o => o.value === keep) ? keep : "all";
   const shown = visible();
   $("csvBtn").disabled = view === "mastery" ? !list.length : !shown.length;
-  if (!list.length && !rosterOf(tab).length) { $("out").innerHTML = `<div class="empty">${rows.length ? "No turn-ins for " + COURSES[tab] + " yet." : "Turn-ins will appear here."}</div>`; return; }
+  if (!list.length && !rosterOf(tab).length) { $("out").innerHTML = `<div class="empty">${rows.length ? "No turn-ins for " + COURSES[tab] + " yet." : "Enter your code above to see grades."}</div>`; return; }
   view === "grid" ? renderGrid(list) : view === "mastery" ? renderMastery(list) : renderList(shown);
 
 }
@@ -610,11 +654,8 @@ function renderGrid(list) {
     const g = dayGrade(hits[0]), when = dateShort(hits[0].submittedAt) + (hits.length > 1 ? " · ×" + hits.length : "") + ((hits[0].answers || {}).Language === "Spanish" ? " · Español" : "");
     if (!g) return `<td class="done check"><button data-s="${safe(s)}" data-a="${safe(id)}" title="Not graded yet. Open to read their answers."><b class="grade">Check</b><span class="lvl">not graded yet</span><span class="when">${when}</span></button></td>`;
     const big = g.f ? g.pct + "%" : "Level " + g.ai.n;
-    const parts = [];
-    if (g.f) parts.push((g.auto === 3 ? "First try L3" : "First try L" + g.auto) + " · " + g.f.right + "/" + g.f.total);
-    if (g.ai && g.f) parts.push((g.ai.teacher ? "Your grade L" : "Written L") + g.ai.n + (g.ai.flag ? " ⚠" : ""));
     const tip = [g.f ? g.f.right + " of " + g.f.total + " right on the first try" : "", g.ai ? "Written answer Level " + g.ai.n + ": " + g.ai.reason + (g.ai.flag ? " ⚠ " + g.ai.flag : "") : "", "Day level: " + levelLabel(g.n, !!g.ai), "Open to read their answers."].filter(Boolean).join("\n");
-    return `<td class="done ${LCLS(g.n)}"><button data-s="${safe(s)}" data-a="${safe(id)}" title="${safe(tip)}"><b class="grade">${big}</b><span class="lvl">${g.f ? safe(levelLabel(g.n, !!g.ai) === "On track for 3" ? "On track for 3" : "Level " + g.n) : (g.ai.teacher ? "Your grade" : "Written answer") + (g.ai.flag ? " ⚠" : "")}</span><span class="when">${safe(parts.join(" · "))}</span><span class="when">${when}</span></button></td>`;
+    return `<td class="done ${LCLS(g.n)}"><button data-s="${safe(s)}" data-a="${safe(id)}" title="${safe(tip)}"><b class="grade">${big}</b><span class="lvl">${g.f ? safe(levelLabel(g.n, !!g.ai) === "On track for 3" ? "On track for 3" : "Level " + g.n) : (g.ai.teacher ? "Your grade" : "Written answer")}${g.ai && g.ai.flag && !g.ai.teacher ? " ⚠" : ""}</span><span class="when">${when}</span></button></td>`;
   };
   // Unit summary for one student: activities done + average day level.
   const unitSum = (s, ids, inUnit) => {
@@ -629,7 +670,7 @@ function renderGrid(list) {
   const unitsUsed = new Set(list.map(r => unitOf(r.assignmentId)));
   if (!unitsUsed.size) Object.keys(REG).forEach(id => { if (REG[id].course === tab && REG[id].path) unitsUsed.add(unitOf(id)); });
   const units = byUnit([...new Set([...activitiesFor(list), ...Object.keys(REG).filter(id => REG[id].course === tab && REG[id].path && REG[id].turnIn !== false && unitsUsed.has(unitOf(id)))])], tab);
-  $("out").innerHTML = `<p class="status" style="margin:0 0 8px">${students.length} students · grouped by unit, in day order · each box is that day's grade: first-try percent and/or the AI grade of their written answers, combined into one level (blue = 4, green = 3, yellow = 2, red = 1; ⚠ = flagged written answer) · “Check” means not graded yet · click any grade to read that student's answers.</p>` +
+  $("out").innerHTML = KEYLINE + HOWTO +
     units.map(g => {
       const inUnit = list.filter(r => g.ids.includes(r.assignmentId));
       const who = [...new Set([...rosterOf(tab), ...inUnit.map(r => r.studentName)])].sort((a, b) => a.localeCompare(b));
@@ -710,6 +751,8 @@ $("teacherCode").value = sessionStorage.getItem("teacher-code") || "";
 $("teacherCode").addEventListener("keydown", e => { if (e.key === "Enter") load(); });
 $("loadBtn").onclick = load; $("refreshBtn").onclick = load;
 $("lockBtn").onclick = () => { sessionStorage.removeItem("teacher-code"); $("teacherCode").value = ""; rows = []; oldRows = []; $("importPanel").hidden = true; render(); $("status").textContent = "Dashboard locked."; };
+$("gradesMode").onclick = () => { mode = "grades"; sessionStorage.setItem("dash-mode", mode); render(); };
+$("lessonsMode").onclick = () => { mode = "lessons"; sessionStorage.setItem("dash-mode", mode); render(); };
 $("gridView").onclick = () => { view = "grid"; render(); };
 $("listView").onclick = () => { view = "list"; render(); };
 $("masteryView").onclick = () => { view = "mastery"; render(); };
