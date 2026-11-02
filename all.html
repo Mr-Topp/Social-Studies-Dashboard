@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>All Activities · Teacher View</title>
+<style>
+:root{--navy:#19364b;--red:#a33d36;--paper:#f4efe4;--card:#fffdf8;--ink:#22313b;--muted:#536571;--line:#d8cfbd}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.5 system-ui,Segoe UI,Arial,sans-serif}
+main{max-width:1100px;margin:auto;padding:28px 16px 60px}
+header{display:flex;justify-content:space-between;align-items:flex-end;gap:12px;flex-wrap:wrap;margin-bottom:6px}
+h1{font-size:clamp(1.9rem,4vw,2.7rem);line-height:1.08;color:var(--navy);margin:0}
+.eyebrow{color:var(--red);font-weight:900;text-transform:uppercase;letter-spacing:.12em;font-size:.78rem;margin:0 0 4px}
+.teacher{background:var(--navy);color:#fff;text-decoration:none;font-weight:800;border-radius:9px;padding:10px 14px}
+.intro{color:var(--muted);margin:6px 0 18px}
+.tabs{display:flex;gap:6px;flex-wrap:wrap}
+.tab{border:0;cursor:pointer;font:800 1rem system-ui;background:#e7e0d1;color:var(--navy);border-radius:10px 10px 0 0;padding:11px 18px}
+.tab[aria-selected=true]{background:var(--navy);color:#fff}
+.tab:focus-visible,a:focus-visible,summary:focus-visible{outline:3px solid #2b6cb0;outline-offset:2px}
+.panel{background:var(--card);border:1px solid var(--line);border-top:4px solid var(--navy);border-radius:0 14px 14px 14px;padding:18px}
+h2{font-size:1.05rem;color:var(--red);text-transform:uppercase;letter-spacing:.06em;margin:18px 0 8px}
+h2:first-child{margin-top:0}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:10px}
+.card{display:block;background:#fff;border:1px solid var(--line);border-radius:11px;padding:12px 14px;text-decoration:none;color:var(--ink)}
+.card:hover{border-color:var(--navy);box-shadow:0 3px 10px #19364b14}
+.card strong{display:block;color:var(--navy);font-size:1.02rem;line-height:1.25}
+.card small{color:var(--muted)}
+details{margin-top:18px}
+summary{cursor:pointer;color:var(--muted);font-weight:700}
+details .grid{margin-top:10px}
+details .card{opacity:.85}
+.part{border-radius:12px;padding:14px;margin:0 0 16px}
+.part.now{background:#eef5ef;border:1px solid #bcd6c0}
+.part.later{background:#f6f2ea;border:1px solid var(--line)}
+.part .parthead{margin:0 0 6px;font-size:1.15rem;color:var(--navy);letter-spacing:.03em}
+.part.now .parthead{color:#2f6b3a}
+.parthead span{display:inline-block;margin-left:6px;font-size:.85rem;background:#fff;border-radius:99px;padding:0 9px;color:var(--muted);letter-spacing:0}
+.part h3{font-size:.85rem;color:var(--red);text-transform:uppercase;letter-spacing:.06em;margin:14px 0 6px}
+.part.later .card{opacity:.9}
+.none{color:var(--muted);margin:4px 0}
+</style>
+<script src="shared/assignments.js?v=20261101n"></script>
+</head>
+<body>
+<main>
+<header>
+  <div><p class="eyebrow">Teacher view</p><h1>All activities</h1></div>
+  <span><a class="teacher" href="./" style="background:#e7e0d1;color:#19364b">Student home page</a> <a class="teacher" href="teacher-submissions/">Teacher dashboard →</a></span>
+</header>
+<p class="intro">Everything built for each class, including activities not being used right now. Students don't see this page; they use their own home page.</p>
+
+<div class="tabs" role="tablist" id="tabs"></div>
+<section class="panel" role="tabpanel" id="panel"></section>
+</main>
+
+<script>
+// HOW TO ADD SOMETHING NEW: copy a line in the right class, then change the title, the folder (link), and the note.
+// group: "Games & activities", "Readings", or "Slides". Put old versions in "Older versions".
+const CLASSES = {
+  "us-history": { name: "U.S. History", items: [
+    ["Readings", "World War II: Read, Look, Answer", "wwii-graphic-reading/", "Graphic reading, 5 days"]
+  ]},
+  "world-history": { name: "World History", items: [
+    ["Games & activities", "Day 1 · Divide Africa", "divide-africa/", "Clues, evidence checks, and map colors"],
+    ["Games & activities", "Day 2 · The Great Hanoi Rat Hunt", "day-2-hanoi/", "Reading checks"],
+    ["Games & activities", "Day 3 · Pacific Case Files", "pacific-case-files/", "Japan & U.S. expansion"],
+    ["Games & activities", "Day 4 · WWI Alliance Chain Reaction", "wwi-alliance-chain-reaction/", "Domino chain"],
+    ["Games & activities", "Day 5 · Cartoon Decoder", "write-the-peace-treaty/", "Four political cartoons"],
+    ["Games & activities", "Day 6 · A World in Crisis", "day6-world-in-crisis/", "5 decisions and explanations"],
+    ["Games & activities", "Day 8 · WWII Decisions & Warning Signs", "day8-wwii-decision-map/", "Two parts, one turn-in"],
+    ["Readings", "Day 6 · Anne Frank Diary", "day6-anne-frank-reading/", "Pages 7–14"],
+    ["Readings", "Day 6 · Anne Frank Graphic Reading", "day6-anne-graphic/", "Graphic novel pages"],
+    ["Readings", "Day 7 · Maus I", "day7-maus/", "Selected pages, 4 questions"],
+    ["Readings", "Day 9 · Maus II", "day9-maus2/", "Selected pages, 4 questions"]
+  ]},
+  "sociology": { name: "Sociology", items: [
+    ["Readings", "Day 1 · What Is Sociology?", "sociology/day-1-reading/", ""],
+    ["Readings", "Day 2 · The Sociological Imagination", "sociology/day-2-sociological-imagination/", ""],
+    ["Readings", "Day 3 · Origins and Founders", "sociology/day-3-founders/", ""],
+    ["Readings", "Day 4 · Sociological Perspectives", "sociology/day-4-perspectives/", ""],
+    ["Readings", "Day 7 · Ethics in Research", "sociology/day-7-research-ethics/", ""],
+    ["Readings", "Graphic Novel Readings", "sociology/graphic-readings/", ""],
+    ["Games & activities", "Day 4 · Theory Casebook", "day-4-theory-casebook/", "Apply three theories to real cases"],
+    ["Games & activities", "Escape from Seahaven", "sociology-ethics-review/", "Unit 1 review"],
+    ["Games & activities", "Unit 2 · Day 1 · First Shift", "sociology/unit2-day1-first-shift/", "Status, roles, norms & institutions"],
+    ["Games & activities", "Unit 2 · Day 2 · The Arrival: A New Culture", "sociology/arrival-culture/", "Culture & socialization"],
+    ["Games & activities", "Unit 2 · Day 3 · Culture Shock Exchange", "sociology/unit2-day3-culture-shock-exchange/", "Culture shock & your own culture"]
+  ]},
+  "government": { name: "Government", items: [
+    ["Games & activities", "Unit 2 · Day 1 · Decision Desk", "civics/unit2-day1-the-feed/", "Liberal, conservative, or party? Ideology vs. party"],
+    ["Games & activities", "Unit 2 · Day 2 · Fair Game", "civics/unit2-day2-fair-game/", "Booth duty: comparing Democrats and Republicans"],
+    ["Games & activities", "Unit 2 · Day 3 · Lobby Day", "civics/unit2-day2-lobby-day/", "Interest groups, money & media"],
+    ["Games & activities", "13 States. One Mess.", "civics/articles-confederation-game/", "Articles of Confederation"],
+    ["Games & activities", "The Missing Constitution", "civics/missing-constitution/", "Investigation game"],
+    ["Games & activities", "Day 3 · My Country, My Rules", "civics/my-country-my-rules/", "Build a country, live with the results"],
+    ["Games & activities", "Day 1 · Stranded: Govern or Collapse", "civics/stranded-government/", "Why we need government"],
+    ["Readings", "Democracy Visualized", "civics/democracy-visualized/", "Graphic reading"]
+  ]},
+  "civics": { name: "Civics", items: [
+    ["Games & activities", "Founders' Defense", "civics/civics-test-s1-founders-defense/", "Friday 1 · Civics test practice"],
+    ["Games & activities", "You Are the Government", "civics/you-are-the-government-v2/", "Classroom simulation"],
+    ["Games & activities", "Capitol Control", "civics/capitol-control-day2/", "Class simulation"],
+    ["Games & activities", "Government Arcade", "civics/day2-government-arcade/", "Friday 2"],
+    ["Games & activities", "Pixel Town: Civic Quest", "civics/pixel-town-day3-game/", "Day 3"],
+    ["Games & activities", "The 1776 Files", "civics/friday4-1776-files-game/", "Friday 4"],
+    ["Games & activities", "1776 Files: Evidence Lab", "civics/friday4-1776-evidence-lab/", "Friday 4"],
+    ["Games & activities", "The 1800s Express", "civics/friday5-1800s-express-game/", "Friday 5"],
+    ["Slides", "Friday 1 · Founders' Files", "civics/civics-test-s1-presentation/", "Test questions 1–15"],
+    ["Slides", "Friday 2 · How the Government Works", "civics/friday2-government-presentation/", "Test questions 16–62"],
+    ["Slides", "Friday 3 · Rights & Responsibilities", "civics/friday3-rights-presentation/", "Test questions 63–72"],
+    ["Slides", "Friday 4 · The 1776 Files", "civics/friday4-1776-presentation/", "Test questions 73–89"],
+    ["Slides", "Friday 5 · The 1800s", "civics/friday5-1800s-civics-presentation/", "Test questions 90–99"],
+    ["Slides", "Friday 6 · Modern America", "civics/friday6-modern-america-presentation/", "Test questions 100–118"],
+    ["Slides", "Friday 7 · Symbols, Holidays & Final Review", "civics/friday7-symbols-final-review-presentation/", "Test questions 119–128 + review"],
+    ["Slides", "Constitution: Teaching Slides", "civics/constitution-teaching-v4/", ""]
+  ]}
+};
+const ORDER = ["Games & activities", "Readings", "Slides"];
+const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const card = ([, t, href, note]) => `<a class="card" href="${esc(href)}"><strong>${esc(t)}</strong>${note ? `<small>${esc(note)}</small>` : ""}</a>`;
+const REG = window.CLASS_ASSIGNMENTS || {}, UNITS = window.CLASS_UNITS || {};
+const hubClass = c => c;
+const base = p => String(p || "").split("#")[0].replace(/index\.html$/, "");
+const unitLabel = a => a.course === "civics" ? "Friday " + (a.unit || "") + (UNITS.civics && UNITS.civics[a.unit] ? " · " + UNITS.civics[a.unit] : "")
+  : a.unit ? "Unit " + a.unit + (UNITS[a.course] && UNITS[a.course][a.unit] ? " · " + UNITS[a.course][a.unit] : "") : "Other";
+let current = location.hash.slice(1);
+try { if (!CLASSES[current]) current = localStorage.getItem("hub-class") || ""; } catch (e) {}
+if (!CLASSES[current]) current = "us-history";
+
+function show(key) {
+  current = key;
+  try { localStorage.setItem("hub-class", key); } catch (e) {}
+  history.replaceState(null, "", "#" + key);
+  document.getElementById("tabs").innerHTML = Object.entries(CLASSES).map(([k, c]) =>
+    `<button class="tab" role="tab" aria-selected="${k === key}" data-k="${k}">${c.name}</button>`).join("");
+  document.querySelectorAll(".tab").forEach(b => b.onclick = () => show(b.dataset.k));
+  const items = CLASSES[key].items;
+  // Being used now = the activities on the Schoology day posts (the same list the teacher dashboard uses, in shared/assignments.js).
+  // Answer keys and the unit tests stay off this public page (they're on the teacher dashboard).
+  const using = Object.entries(REG).filter(([id, a]) => a.path && hubClass(a.course) === key && !/answer key|teacher key/i.test(a.title || "") && !/-key$/.test(id) && !(/summative/i.test(a.title || "") && !/review/i.test(a.title || "")))
+    .sort(([, a], [, b]) => (a.course === b.course ? 0 : a.course === "civics" ? 1 : -1) || (a.unit || 99) - (b.unit || 99) || (a.day || 99) - (b.day || 99));
+  const usedPaths = new Set(using.map(([, a]) => base(a.path)));
+  let html = `<section class="part now"><h2 class="parthead">Being used now <span>${using.length}</span></h2>`;
+  if (using.length) {
+    const groups = [];
+    using.forEach(([, a]) => { const name = unitLabel(a); let g = groups.find(x => x.name === name); if (!g) groups.push(g = { name, list: [] }); g.list.push(a); });
+    html += groups.map(g => `<h3>${esc(g.name)}</h3><div class="grid">${g.list.map(a => card(["", a.title, a.path, ""])).join("")}</div>`).join("");
+  } else html += `<p class="none">Nothing assigned in this class yet.</p>`;
+  html += `</section>`;
+  const spare = items.filter(i => i[0] !== "Older versions" && !usedPaths.has(base(i[2])));
+  const old = items.filter(i => i[0] === "Older versions");
+  if (spare.length || old.length) {
+  html += `<section class="part later"><h2 class="parthead">Made, but not being used right now <span>${spare.length}</span></h2>`;
+  html += spare.length ? ORDER.map(g => { const list = spare.filter(i => i[0] === g); return list.length ? `<h3>${g}</h3><div class="grid">${list.map(card).join("")}</div>` : ""; }).join("") : `<p class="none">Nothing extra in this class.</p>`;
+  if (old.length) html += `<details><summary>Older versions (${old.length})</summary><div class="grid">${old.map(card).join("")}</div></details>`;
+  html += `</section>`;
+  }
+  document.getElementById("panel").innerHTML = html;
+}
+show(current);
+</script>
+</body>
+</html>

@@ -1,7 +1,8 @@
 /**
  * TEACHER TOOLS  (Google Apps Script)
  * Lets the teacher dashboard (1) change a student's grade on a turn-in and (2) edit a class list,
- * and (3) shows students their feedback card on their next activity (only for their own turn-ins).
+ * and (3) shows students their feedback card on their next activity (only for their own turn-ins),
+ * and (4) feeds each student's own home page (their class list name + their own grades and what's missing).
  * It edits the "Class Turn-ins" Google Sheet. It does not replace or touch the turn-in saver script.
  *
  * SETUP (one time, about 5 minutes) — also shown step by step at teacher-submissions/setup-teacher-tools.html
@@ -30,6 +31,9 @@ function doPost(e) {
   try {
     if (body.action === "feedback") return json(feedback(body));
     if (body.action === "seen") return json(seen(body));
+    // Student home page (the main Activities page): class list names, and one student's own work.
+    if (body.action === "class_list") return json(classList(body));
+    if (body.action === "my_work") return json(myWork(body));
   } catch (err) { return json({ ok: false, error: "Try again later." }); }
   if (!codeOk(body.code)) return json({ ok: false, error: "That teacher code didn't work." });
   try {
@@ -135,6 +139,72 @@ function seen(b) {
     }
   });
   return { ok: ok };
+}
+
+// ---------- Student home page ----------
+// class_list: just the names on the newest class list (first name + last initial), so students can tap theirs.
+// my_work: one student's turn-ins in one class (grade, first-try score, the student-facing feedback sentence),
+// plus which activities anyone in the class has turned in (ids only, no names) so the page knows what's due.
+// Never returns other students' answers, the teacher's reasons, or anything about how a grade was made.
+function shortName(raw) {
+  var words = String(raw || "").replace(/[^A-Za-zÀ-ɏ'.\- ]/g, " ").trim().split(/\s+/).filter(function (w) { return w; });
+  if (!words.length) return "";
+  var first = words[0].replace(/\.+$/, ""); first = first.charAt(0).toUpperCase() + first.slice(1);
+  if (words.length === 1) return first;
+  var last = words[words.length - 1].replace(/[^A-Za-zÀ-ɏ]/g, "");
+  return last ? first + " " + last.charAt(0).toUpperCase() + "." : first;
+}
+function firstKey(n) { return String(n || "").split(" ")[0].toLowerCase().replace(/[^a-zÀ-ɏ]/g, ""); }
+function initialOf(n) { var p = String(n || "").trim().split(/\s+/); return p.length > 1 ? p[p.length - 1].replace(/[^A-Za-z]/g, "").charAt(0).toLowerCase() : ""; }
+function courseRows(course) {
+  var data = sheet().getDataRange().getValues(), c = cols(data[0]);
+  var kindCol = ("Kind" in c) ? c["Kind"] : c["Type"];
+  var roster = [], rosterAt = -1, rows = [];
+  for (var i = 1; i < data.length; i++) {
+    var r = data[i];
+    if (String(r[c["Class"]]).trim() !== course) continue;
+    var id = String(r[c["Activity ID"]] || "").trim();
+    var when = r[c["Turned in"]] instanceof Date ? r[c["Turned in"]].getTime() : new Date(r[c["Turned in"]]).getTime();
+    var a; try { a = JSON.parse(String(r[c["Answers"]] || "{}")); } catch (e) { a = {}; }
+    if (id === "class-roster") {
+      if ((when || 0) >= rosterAt && Array.isArray(a.students)) { rosterAt = when || 0; roster = a.students.map(shortName).filter(function (n) { return n; }); }
+      continue;
+    }
+    var kind = kindCol == null ? "turn-in" : String(r[kindCol] || "turn-in");
+    if (kind === "progress" || kind === "roster" || !id) continue;
+    rows.push({ name: shortName(r[c["Student"]]), id: id, at: isNaN(when) ? "" : new Date(when).toISOString(), a: a });
+  }
+  return { roster: roster, rows: rows };
+}
+function classList(b) {
+  var course = String(b.course || "");
+  if (COURSES.indexOf(course) < 0) return { ok: false, error: "Unknown class." };
+  var d = courseRows(course);
+  return { ok: true, names: d.roster.slice().sort() };
+}
+function myWork(b) {
+  var course = String(b.course || "");
+  if (COURSES.indexOf(course) < 0) return { ok: false, error: "Unknown class." };
+  var me = shortName(clean(b.name, 40));
+  if (!/ [A-Z]\.$/.test(me)) return { ok: false, error: "Pick your name first." };
+  var d = courseRows(course), myFirst = firstKey(me), myInit = initialOf(me);
+  // Same rule as the teacher dashboard: "Kai" with no last initial counts as "Kai S." when Kai S. is the only Kai.
+  var pool = d.roster.length ? d.roster : [me];
+  var sameFirst = pool.filter(function (n) { return firstKey(n) === myFirst; });
+  var noInitialIsMe = sameFirst.length === 1 && sameFirst[0] === me;
+  var done = {}, items = [];
+  d.rows.forEach(function (r) {
+    done[r.id] = true;
+    var f = firstKey(r.name), ini = initialOf(r.name);
+    if (f !== myFirst || !(ini === myInit || (!ini && noInitialIsMe))) return;
+    var a = r.a, t = /^[1-4]$/.test(String(a["Teacher level"] || "")) ? +a["Teacher level"] : 0;
+    var ai = /^[1-4]$/.test(String(a["AI level"] || "")) ? +a["AI level"] : 0;
+    var flagged = !t && !!a["AI flag"];
+    var fb = t ? String(a["Teacher note"] || a["AI student feedback"] || "") : String(a["AI student feedback"] || "");
+    items.push({ id: r.id, at: r.at, ft: String(a["First-try correct"] || ""), written: flagged ? 0 : (t || ai), teacher: !!t,
+                 flagged: flagged, feedback: flagged ? "" : fb.slice(0, 600) });
+  });
+  return { ok: true, name: me, items: items, classDone: Object.keys(done) };
 }
 
 // ---------- Helpers ----------

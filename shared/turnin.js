@@ -156,11 +156,24 @@ const TEACHER_TOOLS_URL = "https://script.google.com/macros/s/AKfycbxbiHdWfmdn70
   };
 
   // --- Make name boxes ask for first name + last initial ---------------
+  // The student's home page (the main Activities page) saves the name they tapped on this Chromebook,
+  // so empty name boxes fill in by themselves. They can still change it.
+  let savedName = "";
+  try { savedName = shortName(localStorage.getItem("site-student-name") || ""); } catch (e) {}
+  if (!/ [A-Z]\.$/.test(savedName)) savedName = "";
   function fixNameBoxes() {
     document.querySelectorAll("input").forEach(input => {
       const tag = (input.id + " " + input.name + " " + (input.placeholder || "")).toLowerCase();
       if (!/student.?name|your name|^name | name$|first and last/.test(tag) && input.id.toLowerCase() !== "name") return;
       if (input.type && !/text|search/.test(input.type)) return;
+      if (savedName && !input.value && !input.dataset.nameFilled && !/teacher-submissions/.test(location.pathname) && !window.NO_FEEDBACK_POPUP) {
+        input.dataset.nameFilled = "1";
+        input.value = savedName;
+        input.dispatchEvent(new Event("input", { bubbles: true }));
+        input.dispatchEvent(new Event("change", { bubbles: true }));
+      }
+      if (input.dataset.nameFixed) return;
+      input.dataset.nameFixed = "1";
       input.placeholder = "First name + last initial (like Jordan M.)";
       input.setAttribute("autocomplete", "off");
       input.addEventListener("blur", () => {
@@ -227,7 +240,8 @@ const TEACHER_TOOLS_URL = "https://script.google.com/macros/s/AKfycbxbiHdWfmdn70
   function saveReceipt(token, body) {
     const meta = (window.CLASS_ASSIGNMENTS || {})[body.assignmentId] || {};
     const list = loadReceipts().filter(r => r.token !== token);
-    list.push({ token, id: body.assignmentId, title: meta.title || body.assignmentTitle || "Your activity", page: location.pathname + location.hash, at: Date.now(), seen: false });
+    const ft = body.answers && typeof body.answers === "object" ? String(body.answers["First-try correct"] || "") : "";
+    list.push({ token, id: body.assignmentId, title: meta.title || body.assignmentTitle || "Your activity", page: location.pathname + location.hash, at: Date.now(), seen: false, ft });
     saveReceipts(list);
   }
   async function toolsPost(payload) {
@@ -236,7 +250,7 @@ const TEACHER_TOOLS_URL = "https://script.google.com/macros/s/AKfycbxbiHdWfmdn70
   }
   function esc(t) { return String(t == null ? "" : t).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c])); }
   async function showFeedback() {
-    if (!TEACHER_TOOLS_URL || /teacher-submissions/.test(location.pathname)) return;
+    if (!TEACHER_TOOLS_URL || /teacher-submissions/.test(location.pathname) || window.NO_FEEDBACK_POPUP) return;
     const waiting = loadReceipts().filter(r => !r.seen && Date.now() - r.at < 45 * 864e5);
     if (!waiting.length) return;
     let got;
@@ -328,4 +342,11 @@ const TEACHER_TOOLS_URL = "https://script.google.com/macros/s/AKfycbxbiHdWfmdn70
   if (document.readyState === "complete") showFeedback(); else window.addEventListener("load", showFeedback);
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", fixNameBoxes);
   else fixNameBoxes();
+  // Name boxes that show up later (like on a game's last screen) get filled in too.
+  if (savedName && window.MutationObserver) {
+    let queued = false;
+    const later = () => { if (queued) return; queued = true; setTimeout(() => { queued = false; fixNameBoxes(); }, 120); };
+    const start = () => new MutationObserver(later).observe(document.body, { childList: true, subtree: true });
+    if (document.body) start(); else document.addEventListener("DOMContentLoaded", start);
+  }
 })();
