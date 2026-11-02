@@ -537,8 +537,10 @@ function dayGrade(r) {
 function levelLabel(n, hasWritten) { return n >= 3 && !hasWritten ? "On track for 3" : String(n); }
 function courseStandards(course) {
   const order = [];
+  ((window.CLASS_COURSE_STANDARDS || {})[course] || []).forEach(c => { if (!order.includes(c)) order.push(c); });
   sortIds(Object.keys(REG).filter(id => REG[id].course === course && REG[id].path)).forEach(id => (REG[id].std || []).forEach(c => { if (!order.includes(c)) order.push(c); }));
-  return order;
+  const num = c => { const m = c.match(/\.(\d+)$/); return m ? +m[1] : 0; };
+  return order.sort((a, b) => num(a) - num(b));
 }
 // { student: { code: { items: [{title, g}], levels: [], written: bool, unscored } } } using each student's latest turn-in per assignment.
 function masteryData(list) {
