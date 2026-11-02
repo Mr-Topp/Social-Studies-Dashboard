@@ -271,7 +271,9 @@ const TEACHER_TOOLS_URL = "https://script.google.com/macros/s/AKfycbwiVW6Cufw8Dq
   function fixNameBoxes() {
     document.querySelectorAll("input").forEach(input => {
       if (!isNameBox(input)) return;
-      if (savedName && !input.value && !input.dataset.nameFilled && !/teacher-submissions/.test(location.pathname) && !window.NO_FEEDBACK_POPUP) {
+      // Wait until the page has finished loading (some activities reset their name box while loading),
+      // and never refill a box the student typed in themselves.
+      if (savedName && !input.value && input.dataset.nameTouched !== "1" && document.readyState !== "loading" && !/teacher-submissions/.test(location.pathname) && !window.NO_FEEDBACK_POPUP) {
         input.dataset.nameFilled = "1";
         input.value = savedName;
         input.dispatchEvent(new Event("input", { bubbles: true }));
@@ -285,6 +287,8 @@ const TEACHER_TOOLS_URL = "https://script.google.com/macros/s/AKfycbwiVW6Cufw8Dq
     });
   }
   new MutationObserver(fixNameBoxes).observe(document.documentElement, { childList: true, subtree: true });
+  window.addEventListener("input", e => { if (e.isTrusted && isNameBox(e.target)) e.target.dataset.nameTouched = "1"; }, true);
+  window.addEventListener("load", () => setTimeout(fixNameBoxes, 50));
 
   // --- Outside pictures that don't load (blocked by a school filter, site down) ----
   // Show a short note with a link instead of a broken-image icon.
