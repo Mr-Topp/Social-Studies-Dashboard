@@ -117,6 +117,7 @@ window.CLASS_NO_SCHOOL = [
   ["2026-10-23", "2026-10-23"],   // no school (after end of 1st quarter)
   ["2026-11-02", "2026-11-03"],   // no school
   ["2026-11-25", "2026-11-27"],   // Thanksgiving break
+  ["2026-12-02", "2026-12-02"],   // mid-quarter day, no school for students
   ["2026-12-21", "2027-01-01"],   // winter break (school is back Mon Jan 4)
   ["2027-01-11", "2027-01-11"],   // no school
   ["2027-01-18", "2027-01-18"]    // no school (MLK Day)
