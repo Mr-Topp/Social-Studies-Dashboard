@@ -88,7 +88,16 @@ window.CLASS_CLEARED = {
   "us-history":    { unit: 1, throughDay: 4 },
   "sociology":     { unit: 1, throughDay: 4 },
   "government":    { unit: 1, throughDay: 4 },
-  "world-history": { ids: ["divide-africa-day1"] }   // Scramble for Africa: everyone did it
+  "world-history": { ids: ["divide-africa-day1"] },  // Scramble for Africa: everyone did it
+  "civics":        { ids: ["civics-test-s1-presentation", "civics-test-s1-founders-defense", "civics-f2-presentation", "civics-f2-government-arcade",
+                           "civics-f3-presentation", "civics-f3-pixel-town", "civics-f4-presentation", "civics-f4-1776-files",
+                           "civics-f5-presentation", "civics-f5-1800s-express", "civics-f6-presentation", "civics-f7-presentation"] }  // everything posted through 11/2
+};
+
+// Activities every student in the class gets credit for as "Completed in class" on the TEACHER dashboard
+// (shown with a check, no score, so it doesn't count toward mastery). Real turn-ins still show over it.
+window.CLASS_DONE_FOR_ALL = {
+  "divide-africa-day1": "Completed in class"
 };
 
 window.CLASS_CALENDAR = {

@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
 <title>Teacher Dashboard · All Classes</title>
-<script src="../shared/assignments.js?v=20261102moves"></script>
+<script src="../shared/assignments.js?v=20261102doneall"></script>
 <script src="presentations.js?v=20261102gov2"></script>
 <script src="../shared/turnin.js?v=20261102fill2"></script>
 <style>
@@ -159,6 +159,7 @@ td.sum.l3{background:#eef7f0;color:#1f5e2c}td.sum.l2{background:#fff8e2;color:#7
 .more summary::-webkit-details-marker{display:none}
 .more summary::before{content:"+ "}.more[open] summary::before{content:"− "}
 .more .inner{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}
+td.inclass{background:#eef5ef;color:#1f5e2c;text-align:center}td.inclass .lvl{display:block;font-size:.78rem}
 .testtag{display:block;width:max-content;margin-top:2px;background:#dbe8fb;color:#1c3f78;border-radius:6px;padding:0 6px;font-weight:800;font-size:.72rem;letter-spacing:.04em}
 </style>
 </head>
@@ -318,6 +319,7 @@ function mergeNames() {
 // Your test student (from the "?teacher-test" link on the student home page). Shows with a TEST tag,
 // but is left out of Needs attention and the CSV downloads.
 const TEST_NAME = "Test T.";
+const DONE_ALL = window.CLASS_DONE_FOR_ALL || {};   // "Completed in class" for every student (shared/assignments.js)
 const isTestStudent = s => s === TEST_NAME || s === "Test S."; // "Test S." was its first name
 const offList = (t, s) => rosterOf(t).length && !rosterOf(t).includes(s);
 const studentCell = (t, s) => `<td class="student">${safe(s)}${isTestStudent(s) ? '<small class="testtag">TEST (you)</small>' : offList(t, s) ? '<small class="offlist">not on class list</small>' : ""}</td>`;
@@ -339,6 +341,7 @@ function attentionHtml(list) {
   [...new Set([...roster, ...list.map(r => r.studentName)])].sort((a, b) => a.localeCompare(b)).forEach(s => {
     const done = new Set(list.filter(r => r.studentName === s).map(r => r.assignmentId));
     if (!done.size) { if (roster.includes(s)) none.push(s); return; }
+    Object.keys(DONE_ALL).forEach(id => done.add(id));   // everyone gets credit for these
     const miss = due.filter(id => !done.has(id));
     if (miss.length >= 2) missing.push(`<li><b>${safe(s)}</b> · missing ${miss.length}: ${safe(miss.slice(0, 3).map(id => REG[id].title.split(" · ")[0]).join(", "))}${miss.length > 3 ? "…" : ""}</li>`);
   });
@@ -652,7 +655,7 @@ function renderGrid(list) {
   const students = [...new Set([...rosterOf(tab), ...list.map(r => r.studentName)])].sort((a, b) => a.localeCompare(b));
   const cell = (s, id) => {
     const hits = list.filter(r => r.studentName === s && r.assignmentId === id);
-    if (!hits.length) return `<td class="miss">—</td>`;
+    if (!hits.length) return DONE_ALL[id] ? `<td class="done inclass" title="${safe(DONE_ALL[id])} (everyone gets credit, no score)"><b class="grade">✓</b><span class="lvl">${safe(DONE_ALL[id])}</span></td>` : `<td class="miss">—</td>`;
     const g = dayGrade(hits[0]), when = dateShort(hits[0].submittedAt) + (hits.length > 1 ? " · ×" + hits.length : "") + ((hits[0].answers || {}).Language === "Spanish" ? " · Español" : "");
     if (!g) return `<td class="done check"><button data-s="${safe(s)}" data-a="${safe(id)}" title="Not graded yet. Open to read their answers."><b class="grade">Check</b><span class="lvl">not graded yet</span><span class="when">${when}</span></button></td>`;
     const big = g.f ? g.pct + "%" : "Level " + g.ai.n;
@@ -661,7 +664,7 @@ function renderGrid(list) {
   };
   // Unit summary for one student: activities done + average day level.
   const unitSum = (s, ids, inUnit) => {
-    const done = new Set(inUnit.filter(r => r.studentName === s).map(r => r.assignmentId));
+    const done = new Set([...inUnit.filter(r => r.studentName === s).map(r => r.assignmentId), ...ids.filter(id => DONE_ALL[id])]);
     const lv = []; let written = false;
     ids.forEach(id => { const r = list.find(x => x.studentName === s && x.assignmentId === id); const g = r && dayGrade(r); if (g) { lv.push(g.n); if (g.ai) written = true; } });
     const avg = lv.length ? lv.reduce((a, b) => a + b, 0) / lv.length : null, n = avg === null ? null : roundDown(avg);
