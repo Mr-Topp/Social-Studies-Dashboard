@@ -76,9 +76,9 @@
         { day: 1, title: "Political Ideology and Parties", std: "Gov.12", slides: [{ day: 1 }] },
         { day: 2, title: "Republican and Democratic Parties", std: "Gov.12, 11", slides: [{ day: 2 }] },
         { day: 3, title: "Major and Third Parties; Media, Bias and Misinformation", std: "Gov.12, 11", slides: [{ day: 1, slide: "g2d1s07", label: "third parties" }, { day: 3, slide: "g2d3s07", label: "media & misinformation" }] },
-        { day: 4, title: "Interest Groups, Lobbying and PACs", std: "Gov.12, 11", slides: [{ day: 3 }] },
-        { day: 5, title: "Iowa Elections, Voting, Districting and the Electoral College", std: "Gov.13, 14", slides: [{ day: 4 }, { day: 2, slide: "g2d2s05", label: "caucuses & primaries" }] },
-        { day: 6, title: "Citizenship and Civic Responsibilities + Summative", std: "Gov.15, 16, 17, 11 · test: Gov.11–17", slides: [{ day: 5 }, { day: 4, slide: "g2d4s06", label: "becoming a citizen" }] }
+        { day: 4, title: "Interest Groups, Lobbying, PACs and Civic Virtue", std: "Gov.11, 12, 15, 16", slides: [{ day: 3 }] },
+        { day: 5, title: "Iowa Elections, Voting, Citizenship, Rights and Duties", std: "Gov.13, 14, 17", slides: [{ day: 4 }, { day: 2, slide: "g2d2s05", label: "caucuses & primaries" }] },
+        { day: 6, title: "Summative", std: "Gov.11–17" }
       ],
       days: [{ day: 1, title: "Political Beliefs: Where Do Our Ideas Come From?", std: "Gov.12", slide: "g2d1s01" }, { day: 2, title: "Political Parties: What Do Parties Actually Do?", std: "Gov.12, 11", slide: "g2d2s01" }, { day: 3, title: "Interest Groups: Who Else Tries to Shape Laws?", std: "Gov.12, 11", slide: "g2d3s01" }, { day: 4, title: "Elections: How Do Iowans Vote, and Who Counts?", std: "Gov.13, 14", slide: "g2d4s01" }, { day: 5, title: "Citizenship: What Do We Owe Each Other?", std: "Gov.15, 16, 17, 11", slide: "g2d5s01" }] },
     { course: "government", unit: 3, title: "Judicial Branch", url: g("1OU07tOXL0fJSdysLL5_gEQdNfFMjW-CCAlIPfXPPFxk"), summativeSlide: "g3d1s01summ",
