@@ -107,6 +107,14 @@ details.allwork[open]>summary{margin-bottom:10px}
 .unitflat h3 .now{background:var(--red);color:#fff;font-size:.72rem;letter-spacing:.08em;border-radius:6px;padding:2px 7px}
 .unitflat h3 .count{margin-left:auto;font-size:.9rem;color:var(--muted)}
 .unitflat+.unitflat{margin-top:18px}
+.dayblock{background:var(--card);border:1px solid var(--line);border-left:6px solid var(--navy);border-radius:14px;padding:10px 12px 4px;margin:0 0 14px}
+.dayblock.isToday{border-left-color:var(--green);background:#f3faf4}
+.daybar{display:flex;gap:10px;align-items:baseline;flex-wrap:wrap;margin:0 0 8px}
+.daybar b{font-size:1.15rem;color:var(--navy);text-transform:uppercase;letter-spacing:.04em}
+.daybar span{color:var(--muted);font-weight:700}
+.daybar .dtag{border-radius:999px;padding:1px 10px;font-size:.82rem;font-weight:900}
+.dtag.today{background:var(--green);color:#fff}.dtag.later{background:#eef1f3;color:var(--muted)}
+.dayblock .row{margin-bottom:8px}
 /* --- lists --- */
 .section{margin:0 0 14px}
 .section h2 .n{display:inline-block;background:#fff;border:1px solid var(--line);border-radius:99px;padding:0 9px;font-size:.85rem;color:var(--muted);margin-left:4px}
@@ -271,6 +279,44 @@ function nextWeekday(iso) {
   do d.setDate(d.getDate() + 1); while (!schoolDay(d));
   return d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0");
 }
+// ---- Lesson-day calendar ----
+// Core classes meet Monday–Thursday (Fridays are Civics), skipping no-school days. Day N of a unit is dated by
+// counting class days from where Fynn pinned the class (CLASS_TODAY), then spreading the rest of the unit
+// evenly up to its test date on the green sheet.
+const classDay = d => d.getDay() >= 1 && d.getDay() <= 4 && schoolDay(d);
+function classDaysBetween(a, b) {
+  let n = 0; const d = new Date(a + "T12:00:00"), end = new Date(b + "T12:00:00");
+  while (d < end) { d.setDate(d.getDate() + 1); if (classDay(d)) n++; }
+  return n;
+}
+function stepClassDays(iso, n) {
+  const d = new Date(iso + "T12:00:00"), dir = n < 0 ? -1 : 1;
+  for (let k = Math.abs(n); k > 0;) { d.setDate(d.getDate() + dir); if (classDay(d)) k--; }
+  return isoDay(d);
+}
+// { from, fromDay, days, test } for a Part 2 unit on the green sheet, or null.
+function unitPlan(course, u) {
+  const cal = CAL[course], c = cal && cal[u];
+  if (!c || !c.summative || course === "civics") return null;
+  const pin = (window.CLASS_TODAY || {})[course];
+  if (pin && pin.unit === u) return { from: pin.date, fromDay: pin.day, days: c.days, test: c.summative };
+  const prev = cal[u - 1];
+  if (!prev || !prev.summative) return null;
+  return { from: stepClassDays(prev.summative, 1), fromDay: 1, days: c.days, test: c.summative };
+}
+function dayOnDate(p, iso) {
+  if (iso <= p.from) return Math.max(0, p.fromDay - classDaysBetween(iso, p.from));
+  const total = classDaysBetween(p.from, p.test), gone = classDaysBetween(p.from, iso);
+  if (!total) return p.days;
+  return Math.min(p.days, p.fromDay + Math.floor(gone / total * (p.days - p.fromDay)));
+}
+function dateOfDay(p, n) {
+  if (n <= p.fromDay) return stepClassDays(p.from, -(p.fromDay - n));
+  let d = p.from;
+  while (d < p.test) { d = stepClassDays(d, 1); if (dayOnDate(p, d) >= n) return d; }
+  return p.test;
+}
+const longDate = iso => new Date(iso + "T12:00:00").toLocaleDateString("en-US", { weekday: "long", month: "short", day: "numeric" });
 function currentUnit(course, keys, doneIds) {
   const cal = CAL[course], pin = (window.CLASS_TODAY || {})[course];
   // Fynn's pin wins until that unit's test day has passed.
@@ -495,23 +541,8 @@ function homeBody(course, work) {
   // Today's lesson day in the current unit. Starts from where Fynn pinned the class (CLASS_TODAY in
   // shared/assignments.js) or, for a later unit, Day 1 right after the last unit's test. Then moves forward
   // evenly (weekdays only) to the test day on the green sheet.
-  const todayDay = (() => {
-    const u = +nowKey.split("|").pop(), cal = !nowKey.startsWith("p1|") && CAL[course];
-    const c = cal && cal[u];
-    if (!c || !c.summative) return 0;
-    const pin = (window.CLASS_TODAY || {})[course];
-    let fromDate, fromDay;
-    if (pin && pin.unit === u) { fromDate = pin.date; fromDay = pin.day; }
-    else {
-      const prev = cal[u - 1];
-      if (!prev || !prev.summative) return 0;
-      fromDate = nextWeekday(prev.summative); fromDay = 1;
-    }
-    if (todayIso <= fromDate) return Math.min(fromDay, c.days);
-    const total = weekdaysBetween(fromDate, c.summative), gone = weekdaysBetween(fromDate, todayIso);
-    if (!total) return c.days;
-    return Math.min(c.days, fromDay + Math.floor(gone / total * (c.days - fromDay)));
-  })();
+  const nowPlan = !nowKey.startsWith("p1|") ? unitPlan(course, +nowKey.split("|").pop()) : null;
+  const todayDay = nowPlan ? (todayIso <= nowPlan.from ? Math.min(nowPlan.fromDay, nowPlan.days) : dayOnDate(nowPlan, todayIso)) : 0;
   const isToday = a => unitKey(a) === nowKey && todayDay && a.day && (spanOf(a) ? a.day <= todayDay && todayDay <= spanOf(a)[1] : a.day === todayDay);
   const isDue = a => {
     const k = unitKey(a), o = unitOrder(k);
@@ -548,13 +579,19 @@ function homeBody(course, work) {
   const href = a => esc(a.path);
   const ext = a => /^https?:/.test(a.path) ? ` target="_blank" rel="noopener"` : "";
   const dayText = a => { const s = spanOf(a); return s ? `Days ${s[0]}–${s[1]}` : a.day ? `Day ${a.day}` : ""; };
+  // "Wed, Oct 28" for the day an activity happened (or will happen), from the class-day calendar.
+  const plans = {};
+  const planFor = k => (k in plans) ? plans[k] : (plans[k] = k.startsWith("p1|") ? null : unitPlan(course, +k.split("|").pop()));
+  const dateText = (k, n) => { const p = n && planFor(k); return p ? niceDate(dateOfDay(p, n)) : ""; };
+  const dayWithDate = a => { const s = spanOf(a), k = unitKey(a); if (!a.day) return ""; const d1 = dateText(k, s ? s[0] : a.day), d2 = s ? dateText(k, s[1]) : "";
+    return (s ? `Days ${s[0]}–${s[1]}` : `Day ${a.day}`) + (d1 ? " · " + d1 + (d2 && d2 !== d1 ? " – " + d2 : "") : ""); };
   const where = a => [unitLabel(course, unitKey(a)).replace(/ · .*/, ""), dayText(a)].filter(Boolean).join(" · ");
 
   // --- The one thing a student needs to know: what am I missing, or am I caught up? ---
   // Kept short on purpose (Fynn: not overwhelming or complicated). Grades live in one closed dropdown below.
   const RECAP = (window.CLASS_RECAPS || {})[course] || {};
   const recapOf = a => { const u = RECAP[a.part === 1 ? -1 : a.unit] || {}; return u[(spanOf(a) || [a.day])[0]] || ""; };
-  const shortWhere = a => unitKey(a) === nowKey ? dayText(a) : where(a);
+  const shortWhere = a => (unitKey(a) === nowKey ? "" : unitLabel(course, unitKey(a)).replace(/ · .*/, "") + " · ") + dayWithDate(a);
   const quick = (a, btn, recap) => `<div class="qrow"><div><span class="qday">${esc(shortWhere(a))}</span><span class="qtitle">${esc(cleanTitle(a.title))}</span>${recap && recapOf(a) ? `<span class="qrecap">In class: ${esc(recapOf(a))}</span>` : ""}</div><a class="btn qgo" href="${href(a)}"${ext(a)}>${btn} →</a></div>`;
   // Welcome back: this Chromebook hasn't opened the page in 3+ school days.
   let away = 0;
@@ -592,7 +629,7 @@ function homeBody(course, work) {
   };
   const dayGroups = [...missedDays.values()].sort((x, y) => unitOrder(x.unit) - unitOrder(y.unit) || x.day - y.day).map(g => {
     const list = sortItems(items.filter(a => unitKey(a) === g.unit && ((spanOf(a) || [a.day])[0] || 0) === g.day && !isCleared(a)));
-    const head = (g.unit === nowKey ? "" : unitLabel(course, g.unit).replace(/ · .*/, "") + " · ") + (g.day ? (spanOf(g.ex) ? `Days ${spanOf(g.ex)[0]}–${spanOf(g.ex)[1]}` : `Day ${g.day}`) : "Other");
+    const head = (g.unit === nowKey ? "" : unitLabel(course, g.unit).replace(/ · .*/, "") + " · ") + (g.day ? dayWithDate(g.ex) : "Other");
     const recap = recapOf(g.ex);
     const dg = goalOf(g.unit, g.day), dgoal = dg && dg.t && dg.t.length ? `<div class="dgoal"><b>🎯 Goal:</b>${goalList(dg)}</div>` : "";
     return `<div class="dgroup"><div class="dhead">${esc(head)}</div>${recap ? `<p class="drecap">In class: ${esc(recap)}</p>` : ""}${dgoal}${list.map(missRow).join("")}</div>`;
@@ -605,14 +642,14 @@ function homeBody(course, work) {
   } else {
     // Near a test, the test card already lists what to redo, so don't repeat it here.
     const tc = (CAL[course] || {})[nowKey.split("|").pop()], td = !nowKey.startsWith("p1|") && tc && tc.summative;
-    const nearTest = td && td >= todayIso && weekdaysBetween(todayIso, td) <= 2;
+    const nearTest = td && td >= todayIso && classDaysBetween(todayIso, td) <= 2;
     const fixRow = fix.length && !nearTest ? `<div class="qlabel">Optional: raise your grade</div>${fix.map(a => quick(a, "Fix it")).join("")}` : "";
     status = `<section class="status done" aria-label="What to do"><div class="shead"><h2>${welcome ? "Welcome back! " : ""}You're all caught up! 🎉</h2>${readBtn}</div><p>${todays.length ? "Nothing missing. Here's today's work:" : due.length ? "You've turned in everything so far." : "Nothing is due yet."}</p>${todayRow}${fixRow}</section>`;
   }
   const cal = (CAL[course] || {})[nowKey.split("|").pop()];
   const testDay = !nowKey.startsWith("p1|") && cal && cal.summative ? cal.summative : "";
   // Test countdown: within 2 school days of the unit test, a "get ready" card replaces the plain test line.
-  const daysToTest = testDay && testDay >= todayIso ? weekdaysBetween(todayIso, testDay) : -1;
+  const daysToTest = testDay && testDay >= todayIso ? classDaysBetween(todayIso, testDay) : -1;
   let testCard = "";
   if (daysToTest >= 0 && daysToTest <= 2) {
     const inUnit = online.filter(a => unitKey(a) === nowKey);
@@ -633,7 +670,7 @@ function homeBody(course, work) {
     let pill = "", btn = "Open";
     const later = !isDue(a) && !isToday(a) && !isCleared(a);   // a day the class hasn't reached yet
     if (!on && /\(printed\)/i.test(a.title || "")) {
-      return `<div class="row lite"><div class="info"><div class="day">${esc(dayText(a))} · Paper</div><div class="title">📄 ${esc(cleanTitle(a.title))}</div></div><div class="act"><span class="pill ${later ? "p-wait\">Coming up" : isToday(a) ? "p-in\">Today · in class" : "p-class\">Missed it? Get it from your teacher"}</span></div></div>`;
+      return `<div class="row lite"><div class="info"><div class="day">Paper</div><div class="title">📄 ${esc(cleanTitle(a.title))}</div></div><div class="act"><span class="pill ${later ? "p-wait\">Coming up" : isToday(a) ? "p-in\">Today · in class" : "p-class\">Missed it? Get it from your teacher"}</span></div></div>`;
     }
     if (!on) { pill = later ? `<span class="pill p-wait">Coming up</span>` : isToday(a) ? `<span class="pill p-in">Today · in class</span>` : `<span class="pill p-class">Done in class</span>`; }
     else if (w) { pill = gradePill(g); btn = g && g.n && g.n <= 2 ? "Fix it" : "Look again"; }
@@ -643,7 +680,7 @@ function homeBody(course, work) {
     const ft = g && g.ft ? `<div class="ft">${g.ft.right} of ${g.ft.total} right on the first try</div>` : "";
     const fb = w && (w.feedback || (g && g.talk)) ? `<p class="fb"><b>Feedback:</b> ${esc(g && g.talk ? "Your teacher wants to talk with you about this one." : w.feedback)}</p>` : "";
     const strong = on && (!w && (isDue(a) || isToday(a)) || (g && g.n && g.n <= 2));
-    return `<div class="row${on ? "" : " lite"}"><div class="info"><div class="day">${esc(dayText(a) || (course === "civics" ? "Friday" : ""))}${kw ? " · " + esc(kw) : ""}</div><div class="title">${esc(cleanTitle(a.title))}</div>${ft}${fb}</div>
+    return `<div class="row${on ? "" : " lite"}"><div class="info">${kw || on ? `<div class="day">${esc(kw || "Online")}</div>` : ""}<div class="title">${esc(cleanTitle(a.title))}</div>${ft}${fb}</div>
       <div class="act">${pill}<a class="btn open${strong ? "" : " soft"}" href="${href(a)}"${ext(a)}>${btn}${/^https?:/.test(a.path) ? " ↗" : ""}</a></div></div>`;
   };
 
@@ -656,11 +693,24 @@ function homeBody(course, work) {
     const owed = on.filter(a => mine[a.id] || isDue(a)).length;
     const paper = list.filter(a => !isOnline(a));
     const c = !k.startsWith("p1|") && (CAL[course] || {})[k];
-    const testRow = c && c.summative ? `<div class="row summ"><div class="info"><div class="day">Day ${c.days} · Unit test</div><div class="title">📅 ${esc(niceDate(c.summative))} · on paper in class</div></div></div>` : "";
+    // One block per lesson day: "DAY 3 · Wednesday, Oct 28", then that day's work.
+    const p = planFor(k), byDay = new Map();
+    list.forEach(a => { const d = (spanOf(a) || [a.day])[0] || 0; if (!byDay.has(d)) byDay.set(d, []); byDay.get(d).push(a); });
+    if (p && !byDay.has(p.days)) byDay.set(p.days, []);
+    const dayBlocks = [...byDay.keys()].sort((x, y) => (x || 999) - (y || 999)).map(d => {
+      const acts = byDay.get(d), ex = acts[0] || { day: d, unit: +k.split("|").pop() };
+      const span = acts.map(spanOf).find(Boolean);
+      const label = d ? (span ? `Days ${span[0]}–${span[1]}` : `Day ${d}`) : (course === "civics" ? "Friday" : "Other");
+      const iso = p && d ? dateOfDay(p, d) : "", isTest = p && d === p.days;
+      const tag = k === nowKey && d && todayDay && (d === todayDay || (span && d <= todayDay && todayDay <= span[1])) ? `<span class="dtag today">Today</span>` : (iso && iso > todayIso) || (!iso && unitOrder(k) > nowOrder) ? `<span class="dtag later">Coming up</span>` : "";
+      const iso2 = p && span ? dateOfDay(p, span[1]) : "";
+      const when = iso ? longDate(iso) + (iso2 && iso2 !== iso ? " – " + longDate(iso2) : "") : "";
+      return `<div class="dayblock${tag.includes("today") ? " isToday" : ""}"><div class="daybar"><b>${esc(label)}</b>${when ? `<span>${esc(when)}</span>` : ""}${tag}</div>${acts.map(a => row(a, true)).join("")}${isTest ? `<div class="row summ"><div class="info"><div class="title">📅 Unit test · on paper in class</div></div></div>` : ""}</div>`;
+    }).join("");
     const open = (course + "|" + k) in openUnits ? openUnits[course + "|" + k] : isNow;
     const past = unitOrder(k) < nowOrder;
     const countTxt = !on.length ? "" : future && !got ? "Coming up" : !owed ? "Nothing due yet" : `${got} of ${owed} turned in`;
-    return `<section class="unitflat"><h3>${esc(unitLabel(course, k))}${isNow ? ` <span class="now">NOW</span>` : ""}<span class="count">${countTxt}${past && on.length && got === on.length ? " ✓" : ""}</span></h3>${list.map(a => row(a, true)).join("")}</section>`;
+    return `<section class="unitflat"><h3>${esc(unitLabel(course, k))}${isNow ? ` <span class="now">NOW</span>` : ""}<span class="count">${countTxt}${past && on.length && got === on.length ? " ✓" : ""}</span></h3>${dayBlocks}</section>`;
   }).join("");
 
   return goalCard + (testCard ? testCard + status : status + testLine) + `<details class="allwork"${allOpen[course] ? " open" : ""}><summary>📋 My grades and all my ${esc(COURSES[course])} work</summary><div class="allinner">${units}</div></details>`;
