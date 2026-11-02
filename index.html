@@ -124,7 +124,7 @@ footer a{color:var(--muted)}
 @media (max-width:600px){.next .btn{width:100%;text-align:center}.row .act{width:100%}}
 </style>
 <script>window.HUB_PAGE = true;   // student home page: feedback card pops up here, name boxes are not auto-filled</script>
-<script src="shared/assignments.js?v=20261102doneall"></script>
+<script src="shared/assignments.js?v=20261102nobreak"></script>
 <script src="shared/recaps.js?v=1"></script>
 <script src="shared/turnin.js?v=20261102hub"></script>
 </head>
@@ -200,10 +200,17 @@ async function tools(payload) {
   if (!d || !d.ok) throw new Error((d && d.error) || "failed");
   return d;
 }
-const rosterCache = {};
-function getRoster(course) {
-  if (!rosterCache[course]) rosterCache[course] = tools({ action: "class_list", course }).then(d => (d.names || []).map(shortName).filter(Boolean)).catch(() => []);
-  return rosterCache[course];
+const infoCache = {};
+const classInfo = course => infoCache[course] || (infoCache[course] = tools({ action: "class_list", course }).catch(() => ({})));
+function getRoster(course) { return classInfo(course).then(d => (d.names || []).map(shortName).filter(Boolean)); }
+// Links the teacher added from the dashboard's To-do tab. They join the activity list on their day, the same as
+// any other outside link (Teacher Tools never sends answer keys or summatives).
+async function addTeacherLinks(course) {
+  const d = await classInfo(course);
+  (d.links || []).forEach(l => {
+    if (!l || !/^https:\/\//i.test(l.url || "") || /answer key|teacher key|summative/i.test(l.title || "")) return;
+    REG["todo-link-" + l.id] = Object.assign({ course, unit: +l.unit, day: +l.day, title: "Day " + l.day + " · " + l.title, path: l.url, turnIn: false }, +l.part === 1 ? { part: 1 } : {});
+  });
 }
 
 // ---------- What a student can see ----------
@@ -227,14 +234,17 @@ function unitLabel(course, key) {
 }
 // The unit the class is on: the first unit on the green sheet whose test day hasn't passed yet.
 // Weekdays after a (not counting a) up to and including b. Dates are "YYYY-MM-DD".
+// School days only: skips weekends and the no-school stretches in CLASS_NO_SCHOOL (winter break).
+const isoDay = d => d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0");
+const schoolDay = d => !!(d.getDay() % 6) && !(window.CLASS_NO_SCHOOL || []).some(([a, z]) => { const i = isoDay(d); return i >= a && i <= z; });
 function weekdaysBetween(a, b) {
   let n = 0; const d = new Date(a + "T12:00:00"), end = new Date(b + "T12:00:00");
-  while (d < end) { d.setDate(d.getDate() + 1); if (d.getDay() % 6) n++; }
+  while (d < end) { d.setDate(d.getDate() + 1); if (schoolDay(d)) n++; }
   return n;
 }
 function nextWeekday(iso) {
   const d = new Date(iso + "T12:00:00");
-  do d.setDate(d.getDate() + 1); while (!(d.getDay() % 6));
+  do d.setDate(d.getDate() + 1); while (!schoolDay(d));
   return d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0");
 }
 function currentUnit(course, keys, doneIds) {
@@ -405,7 +415,7 @@ async function drawHome(app) {
   showWork(course, name);
 }
 async function showWork(course, name) {
-  const work = await loadWork(course, name);
+  const [work] = await Promise.all([loadWork(course, name), addTeacherLinks(course)]);
   if (me.current !== course || screen !== "home") return;
   if (testMode && preview === "caught") work.preview = true;
   $("body").innerHTML = homeBody(course, work);

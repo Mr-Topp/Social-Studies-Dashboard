@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
 <title>Teacher Dashboard · All Classes</title>
-<script src="../shared/assignments.js?v=20261102doneall"></script>
+<script src="../shared/assignments.js?v=20261102nobreak"></script>
 <script src="presentations.js?v=20261102gov2"></script>
 <script src="../shared/turnin.js?v=20261102fill2"></script>
 <style>
@@ -491,10 +491,11 @@ function linksHtml() {
       if (r.day > cal.days) { r.todo.push("This day is after the summative on your green sheet. Move or cut it"); return; }
       if (r.summ) {
         if (!mainIds.some(isTest)) r.todo.push("Summative not made yet. Fill this in");
+        else if (!r.ids.some(id => kindOf(id) === "key")) r.todo.push("Answer key not made yet. Fill this in");
       } else if (!mainIds.some(id => kindOf(id) !== "key")) r.todo.push("Assignment not made yet. Fill this in");
     });
     const list = [...rows.values()].sort((a, b) => (a.day || 999) - (b.day || 999));
-    if (window.__todoSink) list.forEach(r => (r.todo || []).forEach(text => window.__todoSink.push({ key, name, day: r.day, span: r.span, title: r.title, std: r.std, text, summ: !!r.summ, after: !!(cal && r.day > cal.days) })));
+    if (window.__todoSink) list.forEach(r => (r.todo || []).forEach(text => window.__todoSink.push({ key, name, day: r.day, span: r.span, title: r.title, std: r.std, text, summ: !!r.summ, after: !!(cal && r.day > cal.days), kind: /answer key/i.test(text) ? "key" : r.day > (cal ? cal.days : 999) ? "after" : r.summ ? "test" : "assignment" })));
     const nTodo = list.reduce((n, r) => n + (r.todo || []).length, 0);
     const nDays = list.reduce((n, r) => n + (r.day ? (r.span ? r.span - r.day + 1 : 1) : 0), 0), nActs = ids.length;
     const shortDate = iso => iso ? new Date(iso + "T12:00:00").toLocaleDateString("en-US", { month: "short", day: "numeric" }) : "";
@@ -543,8 +544,8 @@ function applyLinks() {
 }
 const isoOf = d => d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0");
 const TODAY = isoOf(new Date());
-// No-school stretches (first day off, last day off), skipped when estimating lesson dates. Winter break per Fynn, 11/2/26.
-const NO_SCHOOL = [["2026-12-21", "2027-01-04"]];
+// No-school stretches (winter break) live in shared/assignments.js (CLASS_NO_SCHOOL); skipped when estimating lesson dates.
+const NO_SCHOOL = window.CLASS_NO_SCHOOL || [];
 const schoolDay = d => !!(d.getDay() % 6) && !NO_SCHOOL.some(([a, z]) => { const i = isoOf(d); return i >= a && i <= z; });
 function addWeekdays(iso, n) { const d = new Date(iso + "T12:00:00"), step = n < 0 ? -1 : 1; let k = Math.abs(n); while (k) { d.setDate(d.getDate() + step); if (schoolDay(d)) k--; } return isoOf(d); }
 function weekdaysBetween(a, b) { let n = 0; const d = new Date(a + "T12:00:00"), end = new Date(b + "T12:00:00"); while (d < end) { d.setDate(d.getDate() + 1); if (schoolDay(d)) n++; } return n; }
@@ -581,13 +582,15 @@ function collectTodos() {
   out.forEach(t => { const w = t.when && t.when.iso; t.group = !w ? 3 : w < TODAY ? 4 : w <= fri ? 0 : w <= nextFri ? 1 : 2; });
   return out.sort((a, b) => a.group - b.group || String((a.when || {}).iso || "").localeCompare(String((b.when || {}).iso || "")) || a.course.localeCompare(b.course) || (a.part1 ? 0 : 1) - (b.part1 ? 0 : 1) || a.unit - b.unit || a.day - b.day);
 }
+const MISS_TEXT = { after: "This day is after the summative. Move or cut it (tell Claude)", test: "Summative not made yet", key: "Answer key not made yet", assignment: "Assignment not made yet" };
+const NAME_START = { test: "Summative", key: "Summative Answer Key" };
 const TODO_GROUPS = ["This week", "Next week", "Later", "No date yet (not on the green sheet)", "Already passed (fill in only if you'll reuse it)"];
 const niceDay = iso => new Date(iso + "T12:00:00").toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric" });
 let todoOpen = null; const foldOpen = {};
 function renderTodo() {
   const items = collectTodos(), pane = $("todoPane");
   const linkList = Object.values(LINKS).filter(l => !l.removed && l.url && COURSES[l.course]);
-  const head = `<p class="todohead">Everything still marked <span class="red">⚠ not made yet</span>, soonest first. Paste a link to fill it in. It shows on that day in Lessons.</p>` +
+  const head = `<p class="todohead">Everything still marked <span class="red">⚠ not made yet</span>, soonest first. Paste a link to fill it in. It shows on that day in Lessons and on students' home pages (never answer keys or tests).</p>` +
     (loaded ? "" : `<p class="todowarn">Enter your code at the top first, so you can add links (and so links you already added count).</p>`);
   const body = [[], [], [], [], []];
   if (!items.length) body[0].push(`<div class="empty">Nothing left to make. 🎉</div>`);
@@ -601,10 +604,10 @@ function renderTodo() {
       <div class="todowhen">${when}</div>
       <div class="todowhat"><span class="cls">${safe(COURSES[t.course])}</span> ${safe(unitLabel)}${dayLabel ? " · " + safe(dayLabel) : ""}
         <span class="todotitle">${safe(t.title || (t.summ ? "Summative" : "Nothing planned yet"))}</span>
-        <span class="todomiss">⚠ ${safe(t.after ? "This day is after the summative. Move or cut it (tell Claude)" : t.summ ? "Summative not made yet" : "Assignment not made yet")}</span></div>
+        <span class="todomiss">⚠ ${safe(MISS_TEXT[t.kind])}</span></div>
       <div class="todoact">${canLink ? `<button class="addlink" data-i="${i}">＋ Add link</button>` : ""}<button class="light seeday" data-i="${i}">See day</button></div>
       ${canLink ? `<form class="linkform" novalidate data-i="${i}"${todoOpen === i ? "" : " hidden"}>
-        <label>Name <input name="title" required maxlength="100" placeholder="${t.summ ? "Summative" : "What is it? (e.g. Bill of Rights Blooket)"}" value="${t.summ ? "Summative" : ""}"></label>
+        <label>Name <input name="title" required maxlength="100" placeholder="${NAME_START[t.kind] || "What is it? (e.g. Bill of Rights Blooket)"}" value="${NAME_START[t.kind] || ""}"></label>
         <label>Link <input name="url" required placeholder="Paste the link"></label>
         <button type="submit">Save</button><button type="button" class="light cancel">Cancel</button>
         <span class="formstat status" aria-live="polite"></span></form>` : ""}
@@ -636,7 +639,9 @@ function renderTodo() {
     if (!loaded) { st.textContent = "Enter your code at the top first."; return; }
     if (!/^https:\/\/[^\s/]+\.[^\s]+$/i.test(url)) { st.textContent = "That doesn\'t look like a link. Copy it from the address bar and paste it here."; return; }
     if (!title) { st.textContent = "Give it a name."; return; }
-    if (t.summ && !/summative/i.test(title)) title += " (Summative)";
+    // Keeps the dashboard's labels working: tests say "Summative", keys say "Answer Key" (and keys never reach students).
+    if (t.kind === "key" && !/answer key/i.test(title)) title += " (Answer Key)";
+    else if (t.kind === "test" && !/summative/i.test(title)) title += " (Summative)";
     if (!TOOLS_URL) { st.innerHTML = "Finish the " + SETUP_LINK + " first."; return; }
     f.querySelectorAll("button,input").forEach(x => x.disabled = true); st.textContent = "Saving…";
     try {

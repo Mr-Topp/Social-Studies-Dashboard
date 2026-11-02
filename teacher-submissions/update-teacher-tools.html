@@ -34,7 +34,7 @@ kbd{background:#fff;border:1px solid #cfc5b3;border-bottom-width:2px;border-radi
 <main>
 <p class="eyebrow">Teacher dashboard · quick update</p>
 <h1>Update your Teacher Tools</h1>
-<p class="lead">This turns on <b>adding links from your To-do tab</b> (and keeps students' grades on their home page). You're swapping in a newer copy of your Teacher Tools script. Same address, nothing else changes. About 2 minutes, on a computer.</p>
+<p class="lead">This turns on <b>adding links from your To-do tab</b>, so they show on your dashboard and on students' home pages (answer keys and tests stay hidden from students). Students' grades keep working. You're swapping in a newer copy of your Teacher Tools script. Same address, nothing else changes. About 2 minutes, on a computer.</p>
 <ol>
   <li id="s1"><b>Copy the new script.</b><br><button class="btn" id="copyBtn">Copy the script</button><span class="st" id="copySt" aria-live="polite"></span></li>
   <li id="s2"><b>Open your Teacher Tools script.</b> Use your <b>school</b> Google account. (It.s the project named <b>Teacher Tools</b>. This button opens it.)<br>
@@ -73,7 +73,7 @@ $("checkBtn").onclick = async () => {
   out.className = "st"; out.textContent = "Checking…";
   try {
     const ver = await fetch(URL_, { method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify({ action: "version" }) }).then(r => r.json()).catch(() => ({}));
-    const first = ver.ok && (ver.can || []).includes("links") ? await ask("sociology") : { ok: false };
+    const first = ver.ok && (ver.can || []).includes("student-links") ? await ask("sociology") : { ok: false };
     if (!first.ok) {
       out.className = "st bad";
       out.innerHTML = "Not updated yet. Google is still running the old version. Redo step 4 and make sure you pick <b>New version</b> before Deploy. Then check again.";

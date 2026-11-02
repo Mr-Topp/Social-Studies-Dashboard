@@ -36,7 +36,7 @@ function doPost(e) {
     if (body.action === "class_list") return json(classList(body));
     if (body.action === "my_work") return json(myWork(body));
     // Lets the update page check which version is running. Shares nothing.
-    if (body.action === "version") return json({ ok: true, version: 3, can: ["links"] });
+    if (body.action === "version") return json({ ok: true, version: 3, can: ["links", "student-links"] });
   } catch (err) { return json({ ok: false, error: "Try again later." }); }
   if (!codeOk(body.code)) return json({ ok: false, error: "That teacher code didn't work." });
   try {
@@ -192,7 +192,7 @@ function initialOf(n) { var p = String(n || "").trim().split(/\s+/); return p.le
 function courseRows(course) {
   var data = sheet().getDataRange().getValues(), c = cols(data[0]);
   var kindCol = ("Kind" in c) ? c["Kind"] : c["Type"];
-  var roster = [], rosterAt = -1, rows = [];
+  var roster = [], rosterAt = -1, rows = [], links = {};
   for (var i = 1; i < data.length; i++) {
     var r = data[i];
     if (String(r[c["Class"]]).trim() !== course) continue;
@@ -204,16 +204,22 @@ function courseRows(course) {
       continue;
     }
     var kind = kindCol == null ? "turn-in" : String(r[kindCol] || "turn-in");
-    if (kind === "progress" || kind === "roster" || kind === "link" || !id) continue;
+    if (kind === "link") { if (a && a.id) links[a.id] = a; continue; }   // rows are in time order, so the newest wins
+    if (kind === "progress" || kind === "roster" || !id) continue;
     rows.push({ name: shortName(r[c["Student"]]), id: id, at: isNaN(when) ? "" : new Date(when).toISOString(), a: a });
   }
-  return { roster: roster, rows: rows };
+  return { roster: roster, rows: rows, links: links };
 }
 function classList(b) {
   var course = String(b.course || "");
   if (COURSES.indexOf(course) < 0) return { ok: false, error: "Unknown class." };
   var d = courseRows(course);
-  return { ok: true, names: d.roster.slice().sort() };
+  // Links you added from the To-do tab, so they show on students' home pages too.
+  // Answer keys and summatives are never sent to students.
+  var links = Object.keys(d.links).map(function (k) { return d.links[k]; }).filter(function (l) {
+    return !l.removed && /^https:\/\//i.test(String(l.url || "")) && !/answer key|teacher key|summative/i.test(String(l.title || ""));
+  }).map(function (l) { return { id: String(l.id), part: +l.part === 1 ? 1 : 2, unit: +l.unit || 0, day: +l.day || 0, title: String(l.title), url: String(l.url) }; });
+  return { ok: true, names: d.roster.slice().sort(), links: links };
 }
 function myWork(b) {
   var course = String(b.course || "");

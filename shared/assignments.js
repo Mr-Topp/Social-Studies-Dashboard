@@ -109,6 +109,10 @@ window.CLASS_CALENDAR = {
                      4: { days: 4,  summative: "2026-12-10" }, 5: { days: 4,  summative: "2026-12-17" }, 6: { days: 3, summative: "2027-01-06" } }
 };
 
+// Days with no school: [first day off, last day off]. Lesson-day estimates on the student home page and the
+// teacher dashboard's To-do tab skip these. Winter break per Fynn (11/2/26).
+window.CLASS_NO_SCHOOL = [["2026-12-21", "2027-01-04"]];
+
 // Part 1 units (first half of U.S. History and World History): not on the green sheet, so no dates.
 // The summative is the day right after the last lesson day.
 window.CLASS_CALENDAR_PART1 = {
