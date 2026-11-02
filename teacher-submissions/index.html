@@ -356,6 +356,9 @@ function linksHtml() {
   };
   const ICON = { online: "💻", print: "🖨", key: "🔑", link: "🔗" };
   const chipText = id => (REG[id].title || "").replace(/^Days? [\d–-]+ · /, "").replace(/\s*\(printed\)/i, "").replace(/ — /g, " · ");
+  // Drive files added as alternatives: readings get their own row, everything else is an alternative assignment.
+  const isAltReading = id => /\(Reading/i.test(REG[id].title || "");
+  const altRow = (ids, reading) => { const list = ids.filter(id => REG[id].alt && isAltReading(id) === reading); return list.length ? `<div class="altrow"><span class="altlabel">${reading ? "Alternative reading" : "Alternative assignment"}${list.length > 1 ? "s" : ""}</span>${list.map(chip).join("")}</div>` : ""; };
   const chip = id => { const k = kindOf(id); return `<a class="chip ${k}${REG[id].alt ? " alt" : ""}" href="${safe(hrefOf(id))}" target="_blank" rel="noopener" title="${safe(REG[id].title)}${k === "key" ? " (teacher only)" : ""}">${ICON[k]} ${safe(chipText(id))}</a>`; };
   const actDay = id => { const m = (REG[id].title || "").match(/^Days? (\d+)/); return REG[id].day || (m ? +m[1] : 0); };
   const unitBlock = (key, name, ids, decks) => {
@@ -385,18 +388,18 @@ function linksHtml() {
     }
     const list = [...rows.values()].sort((a, b) => (a.day || 999) - (b.day || 999));
     const nDays = list.reduce((n, r) => n + (r.day ? (r.span ? r.span - r.day + 1 : 1) : 0), 0), nActs = ids.length;
-    const count = [nDays ? plural(nDays, "day") : "", nActs ? plural(nActs, "assignment") : ""].filter(Boolean).join(" · ") || "slides not built yet";
+    const count = [nDays ? plural(nDays, "day") : "", nActs ? plural(nActs, "assignment") : ""].filter(Boolean).join(" · ") || (main ? "slides ready" : "slides not built yet");
     const body = list.map(r => {
       const label = r.single ? "" : r.day ? `<b>${r.span ? `Days ${r.day}–${r.span}` : `Day ${r.day}`}</b>` : `<b>Other</b>`;
       const t = r.title || (r.ids.some(id => /summative/i.test(REG[id].title)) ? "Summative" : r.ids.length ? chipText(r.ids[0]).replace(/\s*\([^)]*\)\s*$/, "") : "");
       const slides = r.slides.map(s => `<a class="chip slides" href="${safe(s.url)}${s.slide ? "#slide=id." + safe(s.slide) : ""}" target="_blank" rel="noopener">▶ ${safe(s.label)}</a>`).join("");
-      return `<div class="dayrow"><div class="daylabel">${label}<span class="daytitle">${safe(t)}</span>${r.std ? `<span class="daystd">${safe(r.std)}</span>` : ""}</div><div class="daychips">${slides}${r.ids.filter(id => !REG[id].alt).map(chip).join("")}${r.ids.some(id => REG[id].alt) ? `<div class="altrow"><span class="altlabel">Alternative assignments</span>${r.ids.filter(id => REG[id].alt).map(chip).join("")}</div>` : ""}</div></div>`;
+      return `<div class="dayrow"><div class="daylabel">${label}<span class="daytitle">${safe(t)}</span>${r.std ? `<span class="daystd">${safe(r.std)}</span>` : ""}</div><div class="daychips">${slides}${r.ids.filter(id => !REG[id].alt).map(chip).join("")}${altRow(r.ids, true)}${altRow(r.ids, false)}</div></div>`;
     }).join("");
     const deckLinks = [list.some(r => r.single) ? null : main, ...extra].filter(Boolean).map(p => `<a href="${safe(p.url)}" target="_blank" rel="noopener">${p === main ? "▶ Open the whole deck" : "Older version: " + safe(p.title) + (p.note ? " (" + safe(p.note) + ")" : "")}</a>`).join(" · ");
     const inner = list.length ? `<div class="daytable">${body}</div>${deckLinks ? `<div class="deckfoot">${deckLinks}</div>` : ""}` : `<p class="status">No slides for this unit yet.</p>`;
     return `<details class="unitdrop" data-k="${safe(key)}"${linkOpen[key] ? " open" : ""}><summary>${safe(name)} <span class="unitcount">${count}</span></summary>${inner}</details>`;
   };
-  const legend = `<p class="chiplegend">▶ slides · 💻 online, turns in to this dashboard · 🖨 printed · 🔗 outside link · 🔑 answer key (teacher only) · <b>Alternative assignments</b> = your Drive files, to use instead of the main activity (absent students, subs, paper days)</p>`;
+  const legend = `<p class="chiplegend">▶ slides · 💻 online, turns in to this dashboard · 🖨 printed · 🔗 outside link · 🔑 answer key (teacher only) · <b>Alternative reading / assignment</b> = your Drive files, to use instead of the main activity (absent students, subs, paper days)</p>`;
 
   // Current units (Part 2 when the class has a Part 1).
   const decks = allDecks.filter(p => p.part !== 1);
