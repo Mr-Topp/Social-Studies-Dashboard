@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
 <title>Teacher Dashboard · All Classes</title>
-<script src="../shared/assignments.js?v=20261102summ"></script>
-<script src="presentations.js?v=20261102summ"></script>
+<script src="../shared/assignments.js?v=20261102p1"></script>
+<script src="presentations.js?v=20261102p1"></script>
 <script src="../shared/turnin.js?v=20261102ai"></script>
 <style>
 :root{--navy:#19364b;--red:#a33d36;--green:#2f6b3a;--paper:#f4efe4;--card:#fffdf8;--ink:#22313b;--muted:#536571;--line:#d8cfbd}
@@ -395,7 +395,7 @@ function linksHtml() {
       const r = row(0); r.single = true; r.title = main.title; r.slides.push({ url: main.url, label: "Slides" });
     }
     // Green sheet: every day of the unit gets a row, and the LAST day is the summative (test) day.
-    const niceDate = iso => new Date(iso + "T12:00:00").toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric" });
+    const niceDate = iso => iso ? new Date(iso + "T12:00:00").toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric" }) : "";
     if (cal) {
       const spanHas = d => [...rows.values()].some(r => r.span && d > r.day && d <= r.span);
       for (let d = 1; d <= cal.days; d++) if (!rows.has(d) && !spanHas(d)) row(d);
@@ -418,10 +418,10 @@ function linksHtml() {
     const list = [...rows.values()].sort((a, b) => (a.day || 999) - (b.day || 999));
     const nTodo = list.reduce((n, r) => n + (r.todo || []).length, 0);
     const nDays = list.reduce((n, r) => n + (r.day ? (r.span ? r.span - r.day + 1 : 1) : 0), 0), nActs = ids.length;
-    const count = ([nDays ? plural(nDays, "day") : "", nActs ? plural(nActs, "assignment") : "", cal ? "summative " + niceDate(cal.summative) : ""].filter(Boolean).join(" · ") || (main ? "slides ready" : "slides not built yet"))
+    const count = ([nDays ? plural(nDays, "day") : "", nActs ? plural(nActs, "assignment") : "", cal ? "summative " + (cal.summative ? niceDate(cal.summative) : "Day " + cal.days) : ""].filter(Boolean).join(" · ") || (main ? "slides ready" : "slides not built yet"))
       + (nTodo ? ` · <span class="todocount">⚠ ${nTodo} not made yet</span>` : "");
     const body = list.map(r => {
-      const label = r.single ? "" : r.day ? `<b>${r.span ? `Days ${r.day}–${r.span}` : `Day ${r.day}`}${r.summ ? " · Summative" : ""}</b>${r.summ ? `<span class="sumdate">📅 ${safe(niceDate(cal.summative))} (green sheet)</span>` : ""}` : `<b>Other</b>`;
+      const label = r.single ? "" : r.day ? `<b>${r.span ? `Days ${r.day}–${r.span}` : `Day ${r.day}`}${r.summ ? " · Summative" : ""}</b>${r.summ ? `<span class="sumdate">📅 ${cal.summative ? safe(niceDate(cal.summative)) + " (green sheet)" : "No date on the green sheet"}</span>` : ""}` : `<b>Other</b>`;
       const t = r.title || (r.summ || r.ids.some(id => /summative/i.test(REG[id].title)) ? "Summative" : r.ids.length ? chipText(r.ids[0]).replace(/\s*\([^)]*\)\s*$/, "") : "");
       const slides = r.slides.map(s => `<a class="chip slides" href="${safe(s.url)}${s.slide ? "#slide=id." + safe(s.slide) : ""}" target="_blank" rel="noopener">▶ ${safe(s.label)}</a>`).join("");
       const todo = (r.todo || []).map(x => `<span class="chip todo">⚠ ${safe(x)}</span>`).join("");
@@ -445,7 +445,7 @@ function linksHtml() {
   // Part 1 first (the order you teach it), then Part 2. Every Part 1 unit is listed, built or not.
   const part1 = allDecks.filter(p => p.part === 1);
   const p1units = [...new Set([...Object.keys(P1).map(Number), ...part1.map(p => p.unit || 0)])].sort((a, b) => (a || 999) - (b || 999));
-  const p1html = p1units.map(u => unitBlock(tab + "|p1|" + u, u ? "Unit " + u + (P1[u] ? " · " + P1[u] : "") : "Other", sortIds(acts.filter(id => REG[id].part === 1 && (REG[id].unit || 0) === u)), part1.filter(p => (p.unit || 0) === u))).join("");
+  const p1html = p1units.map(u => unitBlock(tab + "|p1|" + u, u ? "Unit " + u + (P1[u] ? " · " + P1[u] : "") : "Other", sortIds(acts.filter(id => REG[id].part === 1 && (REG[id].unit || 0) === u)), part1.filter(p => (p.unit || 0) === u), ((window.CLASS_CALENDAR_PART1 || {})[tab] || {})[u])).join("");
   return legend + `<div class="parthead">Part 1</div>${p1html}<div class="parthead">Part 2</div>${current}`;
 }
 

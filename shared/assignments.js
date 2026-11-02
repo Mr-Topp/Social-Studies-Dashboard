@@ -79,6 +79,13 @@ window.CLASS_CALENDAR = {
                      4: { days: 4,  summative: "2026-12-10" }, 5: { days: 4,  summative: "2026-12-17" }, 6: { days: 3, summative: "2027-01-06" } }
 };
 
+// Part 1 units (first half of U.S. History and World History): not on the green sheet, so no dates.
+// The summative is the day right after the last lesson day.
+window.CLASS_CALENDAR_PART1 = {
+  "us-history":    { 1: { days: 6 }, 2: { days: 6 }, 3: { days: 7 }, 4: { days: 8 } },
+  "world-history": { 1: { days: 6 }, 2: { days: 6 }, 3: { days: 7 }, 4: { days: 9 } }
+};
+
 window.CLASS_ASSIGNMENTS = {
   // ---- World History · Unit 1 ----
   "divide-africa-day1":          { course: "world-history", unit: 1, day: 1, title: "Day 1 · Divide Africa", path: "divide-africa/", std: ["SS.9-12.WH.24"] },
