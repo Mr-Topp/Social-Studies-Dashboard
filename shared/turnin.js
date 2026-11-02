@@ -11,7 +11,7 @@ const GOOGLE_SAVER_URL = "https://script.google.com/macros/s/AKfycbwWV93yudtLuny
 // Teacher Tools web app (shared/google-saver/TeacherTools.gs). Turns on: grade changes and class-list
 // editing on the dashboard, and the feedback card students see on their next activity.
 // Paste its /exec address between the quotes after the one-time setup (teacher-submissions/setup-teacher-tools.html).
-const TEACHER_TOOLS_URL = "https://script.google.com/macros/s/AKfycbxbiHdWfmdn70dg0CLlSF_6dtyyQeYN44DCUAtl6qD-mjWrnH5WThqzFt9OBDdwP1KIhQ/exec";
+const TEACHER_TOOLS_URL = "https://script.google.com/macros/s/AKfycbwiVW6Cufw8Dqnwqka-s8eCDvzhh2B-riUzfU80vlIu4CtejXpxgzXiP-pqlqOY-M6o5g/exec";
 
 (function () {
   "use strict";
