@@ -2,7 +2,8 @@
  * TEACHER TOOLS  (Google Apps Script)
  * Lets the teacher dashboard (1) change a student's grade on a turn-in and (2) edit a class list,
  * and (3) shows students their feedback card on their next activity (only for their own turn-ins),
- * and (4) feeds each student's own home page (their class list name + their own grades and what's missing).
+ * and (4) feeds each student's own home page (their class list name + their own grades and what's missing),
+ * and (5) saves links you add from the dashboard's To-do tab to fill in a lesson day that isn't made yet.
  * It edits the "Class Turn-ins" Google Sheet. It does not replace or touch the turn-in saver script.
  *
  * SETUP (one time, about 5 minutes) — also shown step by step at teacher-submissions/setup-teacher-tools.html
@@ -34,12 +35,15 @@ function doPost(e) {
     // Student home page (the main Activities page): class list names, and one student's own work.
     if (body.action === "class_list") return json(classList(body));
     if (body.action === "my_work") return json(myWork(body));
+    // Lets the update page check which version is running. Shares nothing.
+    if (body.action === "version") return json({ ok: true, version: 3, can: ["links"] });
   } catch (err) { return json({ ok: false, error: "Try again later." }); }
   if (!codeOk(body.code)) return json({ ok: false, error: "That teacher code didn't work." });
   try {
     if (body.action === "ping") return json({ ok: true });
     if (body.action === "set_grade") return json(setGrade(body));
     if (body.action === "set_roster") return json(setRoster(body));
+    if (body.action === "set_link") return json(setLink(body));
     return json({ ok: false, error: "Unknown request." });
   } catch (err) {
     return json({ ok: false, error: "The sheet had a problem. Try again in a minute." });
@@ -98,6 +102,35 @@ function setRoster(b) {
     sh.appendRow(row);
   });
   return { ok: true, count: names.length };
+}
+
+// ---------- Links from the To-do tab ----------
+// Saves one "link" row: a link you pasted to fill in a lesson day (course, unit, day). Newest row per link id wins,
+// so "remove" just saves a newer row marked removed. The AI grader and students' pages skip these rows.
+function setLink(b) {
+  var course = String(b.course || "");
+  if (COURSES.indexOf(course) < 0) return { ok: false, error: "Unknown class." };
+  var id = clean(b.id, 40).replace(/[^a-z0-9-]/gi, "") || Utilities.getUuid().replace(/-/g, "").slice(0, 12);
+  var remove = !!b.remove, url = clean(b.url, 500), title = clean(b.title, 120);
+  var unit = parseInt(b.unit, 10) || 0, day = parseInt(b.day, 10) || 0, part = parseInt(b.part, 10) === 1 ? 1 : 2;
+  if (!remove) {
+    if (!/^https:\/\/\S+$/i.test(url)) return { ok: false, error: "Paste the whole link. It starts with https://" };
+    if (!title) return { ok: false, error: "Give it a name." };
+    if (!unit || !day) return { ok: false, error: "Missing the unit or day." };
+  }
+  withLock(function (sh) {
+    var c = cols(sh.getRange(1, 1, 1, sh.getLastColumn()).getValues()[0]);
+    var row = new Array(Object.keys(c).length).fill("");
+    var now = new Date().toISOString();
+    var set = function (k, v) { if (k in c) row[c[k]] = v; };
+    set("Key", "link|" + course + "|" + id + "|" + now);
+    set("Turned in", now); set("Student", "Teacher"); set("Class", course);
+    set("Activity ID", "dashboard-link"); set("Activity", "Link added from the dashboard"); set("Kind", "link");
+    set("Source", "teacher");
+    set("Answers", JSON.stringify({ id: id, course: course, part: part, unit: unit, day: day, title: title, url: url, removed: remove }));
+    sh.appendRow(row);
+  });
+  return { ok: true, id: id };
 }
 
 // ---------- Student feedback cards ----------
@@ -171,7 +204,7 @@ function courseRows(course) {
       continue;
     }
     var kind = kindCol == null ? "turn-in" : String(r[kindCol] || "turn-in");
-    if (kind === "progress" || kind === "roster" || !id) continue;
+    if (kind === "progress" || kind === "roster" || kind === "link" || !id) continue;
     rows.push({ name: shortName(r[c["Student"]]), id: id, at: isNaN(when) ? "" : new Date(when).toISOString(), a: a });
   }
   return { roster: roster, rows: rows };

@@ -33,8 +33,8 @@ kbd{background:#fff;border:1px solid #cfc5b3;border-bottom-width:2px;border-radi
 <body>
 <main>
 <p class="eyebrow">Teacher dashboard · quick update</p>
-<h1>Turn on students' grades on their home page</h1>
-<p class="lead">You're swapping in a newer copy of your Teacher Tools script. Same address, nothing else changes. About 2 minutes, on a computer.</p>
+<h1>Update your Teacher Tools</h1>
+<p class="lead">This turns on <b>adding links from your To-do tab</b> (and keeps students' grades on their home page). You're swapping in a newer copy of your Teacher Tools script. Same address, nothing else changes. About 2 minutes, on a computer.</p>
 <ol>
   <li id="s1"><b>Copy the new script.</b><br><button class="btn" id="copyBtn">Copy the script</button><span class="st" id="copySt" aria-live="polite"></span></li>
   <li id="s2"><b>Open your Teacher Tools script.</b> Use your <b>school</b> Google account. (It.s the project named <b>Teacher Tools</b>. This button opens it.)<br>
@@ -55,7 +55,7 @@ $("copyBtn").onclick = async () => {
   const st = $("copySt");
   try {
     const code = await fetch("../shared/google-saver/TeacherTools.gs", { cache: "no-store" }).then(r => { if (!r.ok) throw 0; return r.text(); });
-    if (!/my_work/.test(code)) throw 0;
+    if (!/my_work/.test(code) || !/set_link/.test(code)) throw 0;
     await navigator.clipboard.writeText(code);
     st.className = "st ok"; st.textContent = "Copied! Now do step 2.";
     $("s1").classList.add("done");
@@ -72,7 +72,8 @@ $("checkBtn").onclick = async () => {
   if (!URL_) { out.className = "st bad"; out.textContent = "Teacher Tools isn't set up yet. Do the first-time setup page first."; return; }
   out.className = "st"; out.textContent = "Checking…";
   try {
-    const first = await ask("sociology");
+    const ver = await fetch(URL_, { method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify({ action: "version" }) }).then(r => r.json()).catch(() => ({}));
+    const first = ver.ok && (ver.can || []).includes("links") ? await ask("sociology") : { ok: false };
     if (!first.ok) {
       out.className = "st bad";
       out.innerHTML = "Not updated yet. Google is still running the old version. Redo step 4 and make sure you pick <b>New version</b> before Deploy. Then check again.";
@@ -83,7 +84,7 @@ $("checkBtn").onclick = async () => {
     const missing = Object.keys(COURSES).filter(c => !counts[c]);
     ["s3", "s4", "s5"].forEach(id => $(id).classList.add("done"));
     out.className = "st ok";
-    out.innerHTML = "✅ It worked! Students now see their grades, feedback, and what they're missing." +
+    out.innerHTML = "✅ It worked! You can add links from the To-do tab, and students still see their grades and feedback." +
       "<ul>" + Object.keys(COURSES).map(c => `<li>${COURSES[c]}: ${counts[c] ? counts[c] + (counts[c] === 1 ? " name" : " names") + " on the class list" : "<span class='bad'>no class list yet</span>"}</li>`).join("") + "</ul>" +
       (missing.length ? `<p class="warn" style="color:#22313b">Classes with no class list make students type their name. To add one: open the <a href="./">teacher dashboard</a>, pick that class, open "Needs attention," and click <b>Edit class list</b>.</p>` : "");
   } catch (e) {
