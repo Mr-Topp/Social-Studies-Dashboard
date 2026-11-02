@@ -19,7 +19,7 @@ The Sociology Casebook is a 20–25 minute team activity applying functionalism,
 The Google Sheet saver itself is `shared/google-saver/Code.gs`. Setup steps are at the top of that file. The teacher code is stored in the script's settings, never in this public site.
 
 ## Spanish for Student (Sociology)
-the student uses his own page: https://neotboy.github.io/socialstudies1800/sociology/espanol/ (tabs by unit; set `NOW_UNIT` at the top of that file).
+the student uses his own page: https://neotboy.github.io/inequalityquest/sociology/espanol/ (tabs by unit; set `NOW_UNIT` at the top of that file).
 It lists every Sociology activity in `shared/assignments.js` automatically. An activity shows in Spanish when its folder has an `es.js`
 and its index.html loads `shared/lang.js` + `es.js` (see the top of `shared/lang.js`). **When you build a new Sociology activity, add its es.js too.**
 Only a Chromebook that opened the student's page sees the English/Español switch; other students see no change.
