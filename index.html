@@ -65,6 +65,14 @@ h1:focus{outline:none}
 .stat b{display:block;font-size:1.3rem;color:var(--navy);line-height:1.2}
 .bar{height:10px;background:#e7e0d1;border-radius:99px;overflow:hidden;margin-top:6px}
 .bar span{display:block;height:100%;background:var(--green);border-radius:99px}
+/* --- today's learning goal (Fynn's scale docs) --- */
+.goalcard{background:#fff;border:2px solid var(--navy);border-radius:16px;padding:14px 18px;margin:0 0 10px}
+.goalcard h2{font-size:1.2rem;margin:0 0 6px;color:var(--navy)}.goalcard .gday{font-size:.9rem;color:var(--muted);font-weight:700}
+.goalhd{margin:0;font-weight:800}
+.goallist{margin:4px 0 0;padding-left:22px}.goallist li{margin:2px 0;line-height:1.35}
+.goal3{margin:10px 0 0;padding:8px 10px;background:#eef7f0;border-radius:10px;line-height:1.35}
+.lv3{display:inline-block;background:#1f5e2c;color:#fff;border-radius:6px;padding:0 7px;font-size:.8rem;font-weight:900;margin-right:4px}
+.dgoal{font-size:.92rem;margin:4px 0 6px;opacity:.95}.dgoal .goallist{margin-top:2px}
 /* --- status card: missing or all caught up --- */
 .status{border-radius:16px;padding:18px 20px;margin:0 0 10px}
 .status h2{font-size:1.45rem;margin:0 0 2px}
@@ -141,6 +149,7 @@ footer a{color:var(--muted)}
 <script>window.HUB_PAGE = true;   // student home page: feedback card pops up here, name boxes are not auto-filled</script>
 <script src="shared/assignments.js?v=20261102std"></script>
 <script src="shared/recaps.js?v=1"></script>
+<script src="shared/targets.js?v=1"></script>
 <script src="shared/turnin.js?v=20261102read"></script>
 </head>
 <body>
@@ -447,10 +456,11 @@ function wireReadAloud() {
     const synth = window.speechSynthesis;
     if (synth.speaking) { synth.cancel(); btn.textContent = "🔊 Read it to me"; btn.setAttribute("aria-pressed", "false"); return; }
     const parts = [];
-    document.querySelectorAll("#body .testcard, #body .status").forEach(sec => {
+    document.querySelectorAll("#body .goalcard, #body .testcard, #body .status").forEach(sec => {
       const c = sec.cloneNode(true);
       c.querySelectorAll(".readbtn, .qgo").forEach(x => x.remove());
-      parts.push(c.innerText.replace(/[→↗📄📅🎉]/g, "").replace(/\n+/g, ". "));
+      c.querySelectorAll("h2, p, li, .qday, .qtitle, .qkind, .dhead").forEach(x => x.append(". "));   // a pause after each line
+      parts.push(c.innerText.replace(/[→↗📄📅🎉🎯]/g, "").replace(/\n+/g, ". "));
     });
     const u = new SpeechSynthesisUtterance(parts.join(". ").replace(/\.\s*\./g, ".").replace(/\s+/g, " "));
     u.rate = 0.95;
@@ -551,6 +561,16 @@ function homeBody(course, work) {
   try { const last = localStorage.getItem("hub-last-seen:" + course); if (last && last < todayIso) away = weekdaysBetween(last, todayIso); localStorage.setItem("hub-last-seen:" + course, todayIso); } catch (e) {}
   const welcome = away >= 3 && !testMode;
   const todayRow = todays.length ? `<div class="qlabel">Today's work</div>${todays.map(a => quick(a, "Start")).join("")}` : "";
+  // Learning goals in Fynn's own kid-friendly words, from his scale docs (shared/targets.js): the day's "I can"
+  // targets plus what a 3 (Proficient) looks like. Shown for today and for each day a student missed.
+  const TARGETS = (window.CLASS_TARGETS || {})[course] || {};
+  const goalOf = (unit, day) => TARGETS[unit + "|" + day] || null;
+  const goalList = g => g && g.t && g.t.length ? `<ul class="goallist">${g.t.map(x => `<li>${esc(x)}</li>`).join("")}</ul>` : "";
+  const goal3 = g => g && g.g3 ? `<p class="goal3"><span class="lv3">To get a 3</span> ${esc(g.g3)}</p>` : "";
+  const tg = todayDay ? goalOf(nowKey, todayDay) : null;
+  const goalCard = !tg ? "" : tg.test
+    ? `<section class="goalcard" aria-label="Today's goal"><h2>🎯 Test today: show what you know</h2>${goal3(tg)}</section>`
+    : `<section class="goalcard" aria-label="Today's goal"><h2>🎯 Today's goal <span class="gday">Day ${todayDay}</span></h2>${goalList(tg)}${goal3(tg)}</section>`;
   // Missed days: every day with missing online work, plus the days in between (a kid gone Day 3 and Day 5 missed Day 4 too).
   // Each day shows what happened in class, its online work (Start), and its paper work ("Get this from your teacher").
   const dayKey = a => unitKey(a) + "#" + ((spanOf(a) || [a.day])[0] || 0);
@@ -574,7 +594,8 @@ function homeBody(course, work) {
     const list = sortItems(items.filter(a => unitKey(a) === g.unit && ((spanOf(a) || [a.day])[0] || 0) === g.day && !isCleared(a)));
     const head = (g.unit === nowKey ? "" : unitLabel(course, g.unit).replace(/ · .*/, "") + " · ") + (g.day ? (spanOf(g.ex) ? `Days ${spanOf(g.ex)[0]}–${spanOf(g.ex)[1]}` : `Day ${g.day}`) : "Other");
     const recap = recapOf(g.ex);
-    return `<div class="dgroup"><div class="dhead">${esc(head)}</div>${recap ? `<p class="drecap">In class: ${esc(recap)}</p>` : ""}${list.map(missRow).join("")}</div>`;
+    const dg = goalOf(g.unit, g.day), dgoal = dg && dg.t && dg.t.length ? `<div class="dgoal"><b>🎯 Goal:</b>${goalList(dg)}</div>` : "";
+    return `<div class="dgroup"><div class="dhead">${esc(head)}</div>${recap ? `<p class="drecap">In class: ${esc(recap)}</p>` : ""}${dgoal}${list.map(missRow).join("")}</div>`;
   }).join("");
   const readBtn = "";   // read-aloud lives inside the activities (shared/turnin.js), not on this page
   let status;
@@ -642,7 +663,7 @@ function homeBody(course, work) {
     return `<section class="unitflat"><h3>${esc(unitLabel(course, k))}${isNow ? ` <span class="now">NOW</span>` : ""}<span class="count">${countTxt}${past && on.length && got === on.length ? " ✓" : ""}</span></h3>${list.map(a => row(a, true)).join("")}</section>`;
   }).join("");
 
-  return (testCard ? testCard + status : status + testLine) + `<details class="allwork"${allOpen[course] ? " open" : ""}><summary>📋 My grades and all my ${esc(COURSES[course])} work</summary><div class="allinner">${units}</div></details>`;
+  return goalCard + (testCard ? testCard + status : status + testLine) + `<details class="allwork"${allOpen[course] ? " open" : ""}><summary>📋 My grades and all my ${esc(COURSES[course])} work</summary><div class="allinner">${units}</div></details>`;
 }
 const allOpen = {};
 
