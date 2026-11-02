@@ -286,7 +286,7 @@ SiteLang.add({
     { re: /^Welcome back, (.+) — just the exit ticket is left\.$/, es: "Bienvenido de nuevo, $1 — solo te falta el ticket de salida." },
     { re: /^Watched ✓ · (.+) Tap “Sync completion” to retry\.$/, es: "Visto ✓ · $1 Toca “Sincronizar” para intentar otra vez.", tr: [1] }
   ],
-  // The 1911 fire photo has English shop signs on the building. Student gets a short Spanish note under the case header.
+  // The 1911 fire photo has English shop signs on the building. Spanish readers get a short Spanish note under the case header.
   imageAnchor: ".casehead",
   images: {
     "Image_of_Triangle_Shirtwaist_Factory_fire_on_March_25_-_1911.jpg":

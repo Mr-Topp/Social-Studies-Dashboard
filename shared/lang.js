@@ -22,14 +22,16 @@
 (function () {
   "use strict";
   const KEY = "site-lang";
-  const DEVICE = "site-lang-es-device";   // set by the student's Spanish home page (sociology/espanol/)
+  const DEVICE = "site-lang-es-device";   // set by the Spanish Sociology page (sociology/espanol/)
   const HUB = new URL("../sociology/espanol/", (document.currentScript && document.currentScript.src) || location.href).href;
   let lang = "en", optIn = false;
   try {
     optIn = localStorage.getItem(DEVICE) === "1";
-    // Spanish is only for the student's Chromebook. If this computer was switched on but the
-    // saved student isn't the student (a teacher or another student opened his page), turn it back off.
-    if (optIn && localStorage.getItem("site-student-name") !== "the student") {
+    // One-time carry-over for a Chromebook set to Spanish before names left the code.
+    if (localStorage.getItem("site-lang-es-device") === "1" && !localStorage.getItem("site-lang-es-name") && localStorage.getItem("site-student-name")) localStorage.setItem("site-lang-es-name", localStorage.getItem("site-student-name"));
+    // Spanish is only for the student who turned it on from the Spanish page. If someone else is
+    // signed in on this computer now (a teacher or another student), turn it back off.
+    if (optIn && localStorage.getItem("site-student-name") !== localStorage.getItem("site-lang-es-name")) {
       localStorage.removeItem(DEVICE); localStorage.removeItem(KEY); optIn = false;
     }
     lang = optIn && localStorage.getItem(KEY) !== "en" ? "es" : "en";

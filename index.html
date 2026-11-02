@@ -198,10 +198,17 @@ function saveMe() {
     localStorage.setItem(ME_KEY, JSON.stringify(me));
     const name = me.classes[me.current];
     if (name) localStorage.setItem("site-student-name", name); // activities fill this in for them
-    if (name && name !== "the student") { localStorage.removeItem("site-lang-es-device"); localStorage.removeItem("site-lang"); } // Spanish is only for Student
+    // Spanish stays on only for the student who turned it on from the Spanish page on this Chromebook.
+    if (name && name !== localStorage.getItem("site-lang-es-name")) { localStorage.removeItem("site-lang-es-device"); localStorage.removeItem("site-lang"); }
   } catch (e) {}
 }
+// One-time carry-over: a Chromebook already set to Spanish (before names left the code) keeps it for the student signed in.
+try { if (localStorage.getItem("site-lang-es-device") === "1" && !localStorage.getItem("site-lang-es-name") && localStorage.getItem("site-student-name")) localStorage.setItem("site-lang-es-name", localStorage.getItem("site-student-name")); } catch (e) {}
 let me = loadMe();
+// Each student's private 4-digit PIN (from the slip their teacher gives them). Kept on this Chromebook
+// with their name; "Change name" clears both.
+function pinFor(course) { return (me.pins && me.pins[course]) || ""; }
+function setPin(course, pin) { me.pins = me.pins || {}; if (pin) me.pins[course] = pin; else delete me.pins[course]; }
 
 // ---------- Teacher test student ----------
 // Open the page once with ?teacher-test on the end and this device becomes "Test T." in every class,
@@ -234,7 +241,6 @@ async function tools(payload) {
 }
 const infoCache = {};
 const classInfo = course => infoCache[course] || (infoCache[course] = tools({ action: "class_list", course }).catch(() => ({})));
-function getRoster(course) { return classInfo(course).then(d => (d.names || []).map(shortName).filter(Boolean)); }
 // Links the teacher added from the dashboard's To-do tab. They join the activity list on their day, the same as
 // any other outside link (Teacher Tools never sends answer keys or summatives).
 async function addTeacherLinks(course) {
@@ -362,23 +368,46 @@ function gradePill(g) {
 function receipts() { try { return JSON.parse(localStorage.getItem("class-feedback-receipts")) || []; } catch (e) { return []; } }
 async function loadWork(course, name) {
   try {
-    const d = await tools({ action: "my_work", course, name });
+    const d = await tools({ action: "my_work", course, name, pin: pinFor(course) });
+    if (d.locked) throw Object.assign(new Error("locked"), { locked: true, classDone: d.classDone || [] });
     const mine = {};
     (d.items || []).forEach(w => { if (!mine[w.id] || String(w.at) > String(mine[w.id].at)) mine[w.id] = w; });
     return { mine, classDone: new Set(d.classDone || []), full: true };
-  } catch (e) { /* fall back to this Chromebook */ }
+  } catch (e) { var lockedOut = !!(e && e.locked), classIds = (e && e.classDone) || []; /* fall back to this Chromebook */ }
   const mine = {};
-  const list = receipts().filter(r => REG[r.id] && REG[r.id].course === course);
+  // Only this student's own turn-ins on this Chromebook (Chromebooks get shared).
+  const list = receipts().filter(r => REG[r.id] && REG[r.id].course === course && (!r.who || r.who.toLowerCase() === String(name || "").toLowerCase()));
   list.forEach(r => { if (!mine[r.id] || r.at > mine[r.id].atMs) mine[r.id] = { id: r.id, atMs: r.at, ft: r.ft || "", token: r.token }; });
   const tokens = Object.values(mine).map(w => w.token).filter(Boolean);
   if (tokens.length) {
     try {
       const d = await tools({ action: "feedback", tokens });
       const by = new Map((d.items || []).map(x => [x.token, x]));
-      Object.values(mine).forEach(w => { const x = by.get(w.token); if (x && x.graded) { w.flagged = x.flagged; w.feedback = x.feedback; if (!x.flagged) w.written = +x.level; } });
+      const me_ = String(name || "").toLowerCase();
+      Object.values(mine).forEach(w => { const x = by.get(w.token); if (x && x.graded && String(x.who || "").toLowerCase() === me_) { w.flagged = x.flagged; w.feedback = x.feedback; if (!x.flagged) w.written = +x.level; } });
     } catch (e) {}
   }
+  // Without a PIN: the class's done list (activity ids only) still drives the to-do; grades come only from this Chromebook.
+  if (lockedOut) return { mine, classDone: new Set([...classIds, ...Object.keys(mine)]), full: true, needPin: true };
   return { mine, classDone: new Set(Object.keys(mine)), full: false };
+}
+
+// One Chromebook gets 5 wrong PINs, then waits a minute. This keeps one kid mashing numbers from
+// tripping the class-wide lock in Teacher Tools (15 wrong in 15 minutes pauses PINs for everyone).
+const PIN_WAIT = "hub-pin-wait";
+function pinWaitLeft() { try { const w = JSON.parse(localStorage.getItem(PIN_WAIT)) || {}; return w.until && w.until > Date.now() ? Math.ceil((w.until - Date.now()) / 1000) : 0; } catch (e) { return 0; } }
+function pinMiss() { try { const w = JSON.parse(localStorage.getItem(PIN_WAIT)) || {}; const n = (w.until && w.until < Date.now() ? 0 : (w.n || 0)) + 1; localStorage.setItem(PIN_WAIT, JSON.stringify(n >= 5 ? { n: 0, until: Date.now() + 60000 } : { n })); } catch (e) {} }
+function pinHit() { try { localStorage.removeItem(PIN_WAIT); } catch (e) {} }
+async function checkPin(course, pin) {
+  const left = pinWaitLeft();
+  if (left) throw new Error("Too many wrong tries. Wait " + left + " seconds, then check your slip.");
+  try { const d = await tools({ action: "pin_login", course, pin }); pinHit(); return d; }
+  catch (e) { if (/didn't match/.test(e.message)) pinMiss(); throw e; }
+}
+function pinBar() {
+  return `<div class="box" style="margin:0 0 14px"><b>🔒 Type your PIN to see your grades.</b> It's the 4 numbers on the slip from your teacher.
+    <div class="typerow" style="margin-top:8px"><input id="homePin" inputmode="numeric" pattern="[0-9]*" maxlength="7" autocomplete="off" aria-label="Your 4-number PIN" placeholder="PIN" style="max-width:7em;text-align:center;letter-spacing:.2em"><button class="go" id="homePinGo">Show my grades</button></div>
+    <p class="err" id="homePinSt" role="alert"></p></div>`;
 }
 
 // ---------- Screens ----------
@@ -411,49 +440,53 @@ function drawClassPick(app) {
 
 async function drawNamePick(app) {
   const c = pickCourse;
-  const known = Object.values(me.classes)[0] || "";
   app.innerHTML = `<section class="pick">
-    <p class="eyebrow">${esc(COURSES[c])}</p><h1 id="nameHead">Tap your name</h1>
-    <p class="sub" id="nameSub">Find your name and tap it.</p>
-    <div id="names"><p class="loading">Loading your class list…</p></div>
+    <p class="eyebrow">${esc(COURSES[c])}</p><h1>Type your PIN</h1>
+    <p class="sub">It's the 4 numbers on the slip from your teacher.</p>
+    <div id="names"><div class="typerow"><input id="pinBox" inputmode="numeric" pattern="[0-9]*" maxlength="7" autocomplete="off" aria-label="Your 4-number PIN" placeholder="1 2 3 4" style="font-size:1.6rem;letter-spacing:.3em;max-width:9em;text-align:center"><button class="go" id="pinGo">Go</button></div>
+      <p style="margin:12px 0 0"><button class="linkbtn" id="noPin">I don't have my PIN</button></p><div id="typeWrap" hidden></div></div>
     <p class="err" id="err" role="alert"></p>
     <p class="backrow"><button class="linkbtn" id="back">← Pick a different class</button></p>
   </section>${footer()}`;
   $("back").onclick = () => { screen = "class"; draw(); };
-  const names = await getRoster(c);
-  if (screen !== "name" || pickCourse !== c) return;
-  if (!names.length) { $("nameHead").textContent = "Type your name"; $("nameSub").hidden = true; }
-  const typeBox = `<div class="typerow"><input id="typed" aria-label="Your first name and last initial" placeholder="First name + last initial, like Jordan M." autocomplete="off" value="${esc(known)}"><button class="go" id="useTyped">That's me</button></div>`;
-  $("names").innerHTML = names.length
-    ? `<div class="choices names">${names.map(n => `<button class="choice" data-n="${esc(n)}">${esc(n)}</button>`).join("")}</div>
-       <p style="margin:12px 0 0"><button class="linkbtn" id="notListed">My name isn't here</button></p><div id="typeWrap" hidden>${typeBox}</div>`
-    : `<p class="muted">Type your first name and the first letter of your last name.</p>${typeBox}`;
-  const choose = n => {
-    me.classes[c] = n; me.current = c; saveMe(); screen = "home"; draw();
-  };
-  // One quick check so a mis-tap doesn't open someone else's page.
-  const confirmName = n => {
+  const choose = (n, pin) => { me.classes[c] = n; setPin(c, pin); me.current = c; saveMe(); screen = "home"; draw(); };
+  // One quick check so a mistyped PIN doesn't open someone else's page.
+  const confirmName = (n, pin) => {
     $("names").innerHTML = `<div class="box"><h2 style="font-size:1.4rem">Are you ${esc(n)}?</h2><div class="typerow"><button class="go" id="yesMe">Yes, that's me</button><button class="light" id="noMe">No, go back</button></div></div>`;
-    $("yesMe").onclick = () => choose(n);
+    $("yesMe").onclick = () => choose(n, pin);
     $("noMe").onclick = () => drawNamePick(app);
     $("yesMe").focus();
   };
-  $("names").querySelectorAll("[data-n]").forEach(b => b.onclick = () => confirmName(b.dataset.n));
-  if ($("notListed")) $("notListed").onclick = () => { $("typeWrap").hidden = false; $("typed").focus(); };
-  const useTyped = () => {
-    const n = shortName($("typed").value);
-    if (!/ [A-Z]\.$/.test(n)) { $("err").textContent = n ? "Add the first letter of your last name. Example: " + n.split(" ")[0] + " M." : "Type your name first. Example: Jordan M."; $("typed").focus(); return; }
-    confirmName(n);
+  const tryPin = async () => {
+    const pin = $("pinBox").value.replace(/\D/g, "");
+    if (pin.length !== 4) { $("err").textContent = "Your PIN is 4 numbers. Check your slip."; $("pinBox").focus(); return; }
+    $("pinGo").disabled = true; $("err").textContent = "";
+    try { const d = await checkPin(c, pin); confirmName(shortName(d.name), pin); }
+    catch (e) { $("err").textContent = /fetch|network|no tools/i.test(e.message) ? "Couldn't connect. Try again in a minute." : e.message; $("pinGo").disabled = false; $("pinBox").select(); }
   };
-  $("useTyped").onclick = useTyped;
-  $("typed").onkeydown = e => { if (e.key === "Enter") useTyped(); };
-  focusFirst();
+  $("pinGo").onclick = tryPin;
+  $("pinBox").onkeydown = e => { if (e.key === "Enter") tryPin(); };
+  // No PIN yet: type your name to see your activities. Grades show once you have your PIN.
+  $("noPin").onclick = () => {
+    const known = Object.values(me.classes)[0] || "";
+    $("typeWrap").hidden = false;
+    $("typeWrap").innerHTML = `<p class="muted">Type your first name and the first letter of your last name. You'll see your activities now, and your grades once you get your PIN.</p><div class="typerow"><input id="typed" aria-label="Your first name and last initial" placeholder="First name + last initial, like Jordan M." autocomplete="off" value="${esc(known)}"><button class="go" id="useTyped">That's me</button></div>`;
+    const useTyped = () => {
+      const n = shortName($("typed").value);
+      if (!/ [A-Z]\.$/.test(n)) { $("err").textContent = n ? "Add the first letter of your last name. Example: " + n.split(" ")[0] + " M." : "Type your name first. Example: Jordan M."; $("typed").focus(); return; }
+      confirmName(n, "");
+    };
+    $("useTyped").onclick = useTyped;
+    $("typed").onkeydown = e => { if (e.key === "Enter") useTyped(); };
+    $("typed").focus();
+  };
+  $("pinBox").focus();
 }
 
 async function drawHome(app) {
   const course = me.current, name = me.classes[course], first = name.split(" ")[0];
   const myClasses = Object.keys(COURSES).filter(k => me.classes[k]);
-  const spanish = course === "sociology" && name === "the student";
+  let spanish = false; try { spanish = course === "sociology" && name === localStorage.getItem("site-lang-es-name"); } catch (e) {}
   const testBar = testMode ? `<div class="testbar" role="note">🧪 <b>Test student mode.</b> You're seeing exactly what a student sees, as “${esc(TEST_NAME)}”. Your turn-ins show on your dashboard tagged TEST.
     <div class="previewrow"><span>Show me:</span><button class="pv" data-pv="real" aria-pressed="${preview === "real"}">My real test work</button><button class="pv" data-pv="caught" aria-pressed="${preview === "caught"}">A student who's all caught up</button><button class="linkbtn" id="testOff">Turn off test mode</button></div>
     ${preview === "caught" ? `<p class="pvnote">Pretend preview: grades and feedback below are samples. Nothing is saved.</p>` : ""}</div>` : "";
@@ -478,7 +511,7 @@ async function drawHome(app) {
   $("addClass").onclick = () => { screen = "class"; draw(); };
   $("notMe").onclick = () => {
     if (!confirm("Not " + name + "? This clears " + first + "'s name from this Chromebook so you can pick yours.")) return;
-    me = { classes: {}, current: "" };
+    me = { classes: {}, current: "", pins: {} };
     try { localStorage.removeItem(ME_KEY); localStorage.removeItem("site-student-name"); } catch (e) {}
     screen = "class"; draw();
   };
@@ -488,7 +521,20 @@ async function showWork(course, name) {
   const [work] = await Promise.all([loadWork(course, name), addTeacherLinks(course)]);
   if (me.current !== course || screen !== "home") return;
   if (testMode && preview === "caught") work.preview = true;
-  $("body").innerHTML = homeBody(course, work);
+  $("body").innerHTML = (work.needPin && !testMode ? pinBar() : "") + homeBody(course, work);
+  if ($("homePinGo")) {
+    const go = async () => {
+      const pin = $("homePin").value.replace(/\D/g, ""), st = $("homePinSt");
+      if (pin.length !== 4) { st.textContent = "Your PIN is 4 numbers."; return; }
+      $("homePinGo").disabled = true; st.textContent = "";
+      try {
+        const d = await checkPin(course, pin), n = shortName(d.name);
+        if (n !== name && !confirm("That PIN is for " + n + ". Are you " + n + "?")) { $("homePinGo").disabled = false; return; }
+        me.classes[course] = n; setPin(course, pin); saveMe(); draw();
+      } catch (e) { st.textContent = /fetch|network|no tools/i.test(e.message) ? "Couldn't connect. Try again in a minute." : e.message; $("homePinGo").disabled = false; }
+    };
+    $("homePinGo").onclick = go; $("homePin").onkeydown = e => { if (e.key === "Enter") go(); };
+  }
   if (testMode) previewFeedback(course);
   $("body").querySelectorAll("details.unit").forEach(d => d.addEventListener("toggle", () => { openUnits[course + "|" + d.dataset.k] = d.open; }));
   const all = $("body").querySelector("details.allwork"); if (all) all.addEventListener("toggle", () => { allOpen[course] = all.open; });

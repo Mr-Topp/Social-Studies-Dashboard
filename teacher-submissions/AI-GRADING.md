@@ -94,17 +94,18 @@ Decide:
 
 The flag shows in the dashboard's "Possible AI or copied work" list. It is a reason to talk with the student, not a grade by itself.
 
-## 3c. Spanish turn-ins (the student)
+## 3c. Spanish turn-ins
 
-A Spanish-speaking student works from the Spanish page (`sociology/espanol/`), so his
-turn-ins have `"Language":"Spanish"`, his multiple-choice data is in English, and his written answers are usually in Spanish.
+Some turn-ins come from the Spanish Sociology page (`sociology/espanol/`). They have `"Language":"Spanish"`, their
+multiple-choice data is in English, and the written answers are usually in Spanish. Never write anything about the
+student's background, language status, or country in the sheet.
 
-- Grade his Spanish writing exactly like English writing, on the same 1–4 scale. Writing in Spanish never lowers a grade.
-- Grade against `"Questions on the page (English)"` when it's there (it's the English of the Spanish questions he saw).
+- Grade Spanish writing exactly like English writing, on the same 1–4 scale. Writing in Spanish never lowers a grade.
+- Grade against `"Questions on the page (English)"` when it's there (it's the English of the Spanish questions the student saw).
 - AI check: writing in Spanish is never evidence by itself. Pasting from the page's own Spanish reading is lesson text.
 - Add `"English translation"` to the Answers JSON: an object with one entry per student-written answer, same key as in
-  Answers, value = a faithful English translation of what he wrote (keep his meaning and his mistakes; don't improve it).
-  If he wrote in English, skip that answer. The dashboard shows this next to his work.
+  Answers, value = a faithful English translation of what the student wrote (keep the student's meaning and mistakes; don't improve it).
+  If the student wrote in English, skip that answer. The dashboard shows this next to the work.
 - Write `"AI student feedback"` in simple Latin American Spanish (tú), same rules as English feedback.
   `"AI reason"` and `"AI flag"` stay in English for the teacher.
 

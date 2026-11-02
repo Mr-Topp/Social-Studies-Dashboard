@@ -345,7 +345,7 @@ const TEACHER_TOOLS_URL = "https://script.google.com/macros/s/AKfycbwiVW6Cufw8Dq
     const meta = (window.CLASS_ASSIGNMENTS || {})[body.assignmentId] || {};
     const list = loadReceipts().filter(r => r.token !== token);
     const ft = body.answers && typeof body.answers === "object" ? String(body.answers["First-try correct"] || "") : "";
-    list.push({ token, id: body.assignmentId, title: meta.title || body.assignmentTitle || "Your activity", page: location.pathname + location.hash, at: Date.now(), seen: false, ft });
+    list.push({ token, id: body.assignmentId, title: meta.title || body.assignmentTitle || "Your activity", page: location.pathname + location.hash, at: Date.now(), seen: false, ft, who: shortName(body.studentName || "") });
     saveReceipts(list);
   }
   async function toolsPost(payload) {
@@ -359,7 +359,13 @@ const TEACHER_TOOLS_URL = "https://script.google.com/macros/s/AKfycbwiVW6Cufw8Dq
     if (!waiting.length) return;
     let got;
     try { got = await toolsPost({ action: "feedback", tokens: waiting.map(r => r.token) }); } catch (e) { return; }
-    const ready = ((got && got.items) || []).filter(x => x.graded).slice(0, 3);
+    // Only the student who's signed in now sees their cards (Chromebooks get shared). The sheet says whose
+    // turn-in each card is; older receipts without that are matched by the name saved with the receipt.
+    let nowName = ""; try { nowName = shortName(localStorage.getItem("site-student-name") || ""); } catch (e) {}
+    if (!nowName) return;
+    const sameKid = (a, b) => !!a && !!b && a.toLowerCase() === b.toLowerCase();
+    const byTok = new Map(waiting.map(r => [r.token, r]));
+    const ready = ((got && got.items) || []).filter(x => x.graded && sameKid(x.who || (byTok.get(x.token) || {}).who, nowName)).slice(0, 3);
     if (!ready.length) return;
     const byToken = new Map(waiting.map(r => [r.token, r]));
     renderFeedback(ready, byToken, false);

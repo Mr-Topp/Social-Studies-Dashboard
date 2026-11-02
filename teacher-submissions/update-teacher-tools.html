@@ -34,15 +34,26 @@ kbd{background:#fff;border:1px solid #cfc5b3;border-bottom-width:2px;border-radi
 <main>
 <p class="eyebrow">Teacher dashboard · quick update</p>
 <h1>Update your Teacher Tools</h1>
-<p class="lead">This turns on <b>adding links from your To-do tab</b>, so they show on your dashboard and on students' home pages (answer keys and tests stay hidden from students). Students' grades keep working. You're swapping in a newer copy of your Teacher Tools script. Same address, nothing else changes. About 2 minutes, on a computer.</p>
+<p class="lead">This locks students' grades behind a private <b>PIN</b> for each student, stops anyone from guessing your teacher code, and keeps your class lists off the public site. About 5 minutes. Use your <b>school</b> Google account.</p>
+<h2 style="color:var(--navy);font-size:1.25rem;margin:18px 0 8px">Part 1 · Teacher Tools</h2>
 <ol>
-  <li id="s1"><b>Copy the new script.</b><br><button class="btn" id="copyBtn">Copy the script</button><span class="st" id="copySt" aria-live="polite"></span></li>
-  <li id="s2"><b>Open your Teacher Tools script.</b> Use your <b>school</b> Google account. (It.s the project named <b>Teacher Tools</b>. This button opens it.)<br>
+  <li id="s1"><b>Copy the new Teacher Tools script.</b><br><button class="btn" id="copyBtn">Copy the script</button><span class="st" id="copySt" aria-live="polite"></span></li>
+  <li id="s2"><b>Open your Teacher Tools script.</b> (This button opens it.)<br>
     <a class="btn navy" id="openBtn" href="https://script.google.com/d/10LC5rbmH37Slf-FvWpwqhNtP9NGPVgyh-zBuCphEoBgHCkWOSww485Uq/edit" target="_blank" rel="noopener">Open my Teacher Tools script ↗</a></li>
   <li id="s3"><b>Paste over the old code.</b> Click inside the code, press <kbd>Ctrl</kbd>+<kbd>A</kbd>, then <kbd>Ctrl</kbd>+<kbd>V</kbd>, then <kbd>Ctrl</kbd>+<kbd>S</kbd> to save.</li>
   <li id="s4"><b>Publish the new version.</b> Click <b>Deploy</b> (top right) → <b>Manage deployments</b> → the <b>pencil ✏️</b> → under Version pick <b>New version</b> → <b>Deploy</b>.
     <p class="warn">Don't click "New deployment." That makes a new address, and the site wouldn't find it.</p></li>
   <li id="s5"><b>Check that it worked.</b><br><button class="btn navy" id="checkBtn">Check it</button><div class="st" id="result" aria-live="polite"></div></li>
+</ol>
+<h2 style="color:var(--navy);font-size:1.25rem;margin:18px 0 8px">Part 2 · Turn-in saver + a new teacher code</h2>
+<ol>
+  <li id="t1"><b>Copy the new turn-in saver script.</b><br><button class="btn" id="copySaver">Copy the script</button><span class="st" id="saverSt" aria-live="polite"></span></li>
+  <li id="t2"><b>Open its script.</b> In Google Drive, open your <b>Class Turn-ins</b> sheet → <b>Extensions</b> → <b>Apps Script</b>.</li>
+  <li id="t3"><b>Paste over the old code.</b> <kbd>Ctrl</kbd>+<kbd>A</kbd>, <kbd>Ctrl</kbd>+<kbd>V</kbd>, <kbd>Ctrl</kbd>+<kbd>S</kbd>.</li>
+  <li id="t4"><b>Change your teacher code.</b> Click the <b>gear ⚙️ (Project Settings)</b> on the left → scroll to <b>Script Properties</b> → <b>Edit script properties</b> → change the value next to <b>TEACHER_CODE</b> to <b>4 random words</b>, like <i>pickle radio canyon seven</i> → <b>Save</b>.
+    <p class="warn">Write it down somewhere private. After 10 wrong tries, codes lock for 15 minutes.</p></li>
+  <li id="t5"><b>Publish the new version.</b> <b>Deploy</b> → <b>Manage deployments</b> → <b>pencil ✏️</b> → <b>New version</b> → <b>Deploy</b>.</li>
+  <li id="t6"><b>Done.</b> Go back to the dashboard and type your new code. Then, for each class, open <b>Needs attention</b> and click <b>Print PIN slips</b>.</li>
 </ol>
 <p class="lead"><a href="./">← Back to the teacher dashboard</a> · <a href="../">See the student home page</a></p>
 </main>
@@ -55,38 +66,38 @@ $("copyBtn").onclick = async () => {
   const st = $("copySt");
   try {
     const code = await fetch("../shared/google-saver/TeacherTools.gs", { cache: "no-store" }).then(r => { if (!r.ok) throw 0; return r.text(); });
-    if (!/my_work/.test(code) || !/set_link/.test(code)) throw 0;
+    if (!/pin_login/.test(code) || !/set_link/.test(code)) throw 0;
     await navigator.clipboard.writeText(code);
     st.className = "st ok"; st.textContent = "Copied! Now do step 2.";
     $("s1").classList.add("done");
   } catch (e) { st.className = "st bad"; st.textContent = "Couldn't copy. Refresh this page and try again."; }
 };
 $("openBtn").addEventListener("click", () => $("s2").classList.add("done"));
+$("copySaver").onclick = async () => {
+  const st = $("saverSt");
+  try {
+    const code = await fetch("../shared/google-saver/Code.gs", { cache: "no-store" }).then(r => { if (!r.ok) throw 0; return r.text(); });
+    if (!/codefail/.test(code)) throw 0;
+    await navigator.clipboard.writeText(code);
+    st.className = "st ok"; st.textContent = "Copied! Now do step 2.";
+    $("t1").classList.add("done");
+  } catch (e) { st.className = "st bad"; st.textContent = "Couldn't copy. Refresh this page and try again."; }
+};
 
-async function ask(course) {
-  const res = await fetch(URL_, { method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify({ action: "class_list", course }) });
-  return res.json();
-}
 $("checkBtn").onclick = async () => {
   const out = $("result");
   if (!URL_) { out.className = "st bad"; out.textContent = "Teacher Tools isn't set up yet. Do the first-time setup page first."; return; }
   out.className = "st"; out.textContent = "Checking…";
   try {
     const ver = await fetch(URL_, { method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify({ action: "version" }) }).then(r => r.json()).catch(() => ({}));
-    const first = ver.ok && (ver.can || []).includes("student-links") ? await ask("sociology") : { ok: false };
-    if (!first.ok) {
+    if (!(ver.ok && (ver.can || []).includes("pins"))) {
       out.className = "st bad";
       out.innerHTML = "Not updated yet. Google is still running the old version. Redo step 4 and make sure you pick <b>New version</b> before Deploy. Then check again.";
       return;
     }
-    const counts = { sociology: (first.names || []).length };
-    for (const c of Object.keys(COURSES)) if (!(c in counts)) { try { const d = await ask(c); counts[c] = d.ok ? (d.names || []).length : 0; } catch (e) { counts[c] = 0; } }
-    const missing = Object.keys(COURSES).filter(c => !counts[c]);
     ["s3", "s4", "s5"].forEach(id => $(id).classList.add("done"));
     out.className = "st ok";
-    out.innerHTML = "✅ It worked! You can add links from the To-do tab, and students still see their grades and feedback." +
-      "<ul>" + Object.keys(COURSES).map(c => `<li>${COURSES[c]}: ${counts[c] ? counts[c] + (counts[c] === 1 ? " name" : " names") + " on the class list" : "<span class='bad'>no class list yet</span>"}</li>`).join("") + "</ul>" +
-      (missing.length ? `<p class="warn" style="color:#22313b">Classes with no class list make students type their name. To add one: open the <a href="./">teacher dashboard</a>, pick that class, open "Needs attention," and click <b>Edit class list</b>.</p>` : "");
+    out.innerHTML = "✅ Part 1 worked! Students now need their PIN to see grades. Now do Part 2 below.";
   } catch (e) {
     out.className = "st bad"; out.textContent = "Couldn't reach Google. Check your internet and try again.";
   }

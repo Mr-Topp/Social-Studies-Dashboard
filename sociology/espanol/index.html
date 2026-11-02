@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Sociología · Actividades de Student</title>
+<title>Sociología en español</title>
 <meta name="robots" content="noindex">
 <style>
 :root{--ink:#1f2b33;--muted:#55626b;--paper:#fbf7f1;--line:#dcd9cf;--acc:#1e4f8a;--acc2:#c2410c;--green:#2a6b45}
@@ -44,7 +44,7 @@ a:focus-visible,button:focus-visible{outline:3px solid #2f7dbd;outline-offset:2p
 </head><body>
 <header>
   <p class="k">Sociología</p>
-  <h1>¡Hola, Student! 👋</h1>
+  <h1 id="hola">¡Hola! 👋</h1>
   <p>Aquí están todas tus actividades de Sociología, en español. Elige tu unidad y abre la actividad del día.</p>
 </header>
 <main>
@@ -56,36 +56,53 @@ a:focus-visible,button:focus-visible{outline:3px solid #2f7dbd;outline-offset:2p
   </div>
   <div class="tabs" role="tablist" aria-label="Unidades" id="tabs"></div>
   <section id="unit" role="tabpanel"></section>
-  <p class="foot">Tu nombre (the student) se escribe solo en cada actividad. Tu trabajo le llega a tu profesor igual que el de todos. Tu progreso se guarda en esta computadora.</p>
+  <p class="foot" id="foot">Tu nombre se escribe solo en cada actividad. Tu trabajo le llega a tu profesor igual que el de todos. Tu progreso se guarda en esta computadora.</p>
 </main>
 <script>
 // ======================================================================
 //  The unit the class is on right now. Change this number when the class moves on.
 const NOW_UNIT = 1;
 // ======================================================================
-const STUDENT = "the student";
+// The student's name is never written in this file. They type it once at the gate below.
+let STUDENT = ""; try { STUDENT = localStorage.getItem("site-lang-es-name") || ""; } catch (e) {}
 const COURSE = "sociology";
 
-// Set up a Chromebook for Student ONLY when someone taps "Sí, soy Student".
+// Set up a Chromebook in Spanish ONLY when a student types their name at the gate.
 // Opening this page never changes a computer by itself (a teacher or another student
 // can look at it and their computer stays in English).
 function isSpanishComputer() {
-  try { return localStorage.getItem("site-lang-es-device") === "1" && localStorage.getItem("site-student-name") === STUDENT; } catch (e) { return false; }
+  try { return !!STUDENT && localStorage.getItem("site-lang-es-device") === "1" && localStorage.getItem("site-student-name") === STUDENT; } catch (e) { return false; }
 }
-function setUpSpanish() {
+function setUpSpanish(name) {
+  STUDENT = name;
   try {
+    localStorage.setItem("site-lang-es-name", name);
     localStorage.setItem("site-lang-es-device", "1");
     localStorage.setItem("site-student-name", STUDENT);
     if (!localStorage.getItem("site-lang")) localStorage.setItem("site-lang", "es");
   } catch (e) {}
 }
+function hello() {
+  if (!STUDENT) return;
+  document.getElementById("hola").textContent = "¡Hola, " + STUDENT.split(" ")[0] + "! 👋";
+  document.getElementById("foot").textContent = "Tu nombre (" + STUDENT + ") se escribe solo en cada actividad. Tu trabajo le llega a tu profesor igual que el de todos. Tu progreso se guarda en esta computadora.";
+}
 function drawGate() {
   const g = document.getElementById("gate");
-  if (isSpanishComputer()) { g.innerHTML = ""; return; }
-  g.innerHTML = `<div class="gate"><h2>¿Eres the student?</h2><p>Si eres Student, toca <b>Sí</b> y esta Chromebook mostrará tus actividades de Sociología en español. <br><span lang="en">Not Student? Tap <b>No</b>. This computer stays in English.</span></p>
-    <div class="row"><button type="button" class="yes" id="gateYes">Sí, soy Student</button><button type="button" class="no" id="gateNo" lang="en">No, I'm just looking</button></div></div>`;
-  document.getElementById("gateYes").onclick = () => { setUpSpanish(); drawGate(); drawLang(); };
-  document.getElementById("gateNo").onclick = () => { g.innerHTML = `<p class="preview" lang="en">Preview only. This computer stays in English, and nothing here turns in under the student's name.</p>`; };
+  if (isSpanishComputer()) { g.innerHTML = ""; hello(); return; }
+  g.innerHTML = `<div class="gate"><h2>¿Usas las actividades en español?</h2><p>Escribe tu nombre y la primera letra de tu apellido (como <b>Jordan M.</b>). Esta Chromebook mostrará tus actividades de Sociología en español. <br><span lang="en">Just looking? Tap <b>No</b>. This computer stays in English.</span></p>
+    <div class="row"><input id="gateName" autocomplete="off" aria-label="Tu nombre y la inicial de tu apellido" placeholder="Nombre + inicial, como Jordan M." style="font:inherit;padding:10px;border-radius:10px;border:2px solid #cfc5b3;min-width:16em"><button type="button" class="yes" id="gateYes">Sí, soy yo</button><button type="button" class="no" id="gateNo" lang="en">No, I'm just looking</button></div><p id="gateErr" style="color:#a33d36;font-weight:700"></p></div>`;
+  const yes = () => {
+    const w = document.getElementById("gateName").value.replace(/[^\p{L}\p{M}'.\- ]/gu, " ").trim().split(/\s+/).filter(Boolean);
+    const cap = x => x.charAt(0).toUpperCase() + x.slice(1);
+    const last = w.length > 1 ? w[w.length - 1].replace(/[^\p{L}]/gu, "") : "";
+    const n = w.length ? cap(w[0].replace(/\.+$/, "")) + (last ? " " + last.charAt(0).toUpperCase() + "." : "") : "";
+    if (!/ [A-Z]\.$/.test(n)) { document.getElementById("gateErr").textContent = "Escribe tu nombre y la primera letra de tu apellido. Ejemplo: Jordan M."; return; }
+    setUpSpanish(n); drawGate(); drawLang();
+  };
+  document.getElementById("gateYes").onclick = yes;
+  document.getElementById("gateName").onkeydown = e => { if (e.key === "Enter") yes(); };
+  document.getElementById("gateNo").onclick = () => { g.innerHTML = `<p class="preview" lang="en">Preview only. This computer stays in English, and nothing here turns in under anyone's name.</p>`; };
 }
 
 // Spanish names for units, lesson days and activities. New activities still show up (with their English name) until one is added here.
@@ -108,7 +125,7 @@ const TITLE_ES = {
   "sociology-unit2-arrival-culture": "The Arrival (La llegada): una cultura nueva",
   "sociology-unit2-day3-culture-shock": "Intercambio y choque cultural"
 };
-// Spanish copies of the unit slide decks and of the Drive assignments (in Fynn's Drive folder "Student – Sociología en español").
+// Spanish copies of the unit slide decks and of the Drive assignments (in Fynn's Drive folder of Spanish copies).
 const ES_SLIDES = { 1: "1dRqiVQUS6FV0gVtb50A6d-PHsohwu53TEn5QTuqBpUc", 2: "135d-2eQV0zNDmlmSmfmB_RtkyyPek3MnLmBlxlYfu_8", 3: "12wzLy8r6bPeJIDUGo8-PoPC74s6UJchDaqaJogMeT1E", 4: "14pJBHxNBWJMhibxPAuB8CpJEvHHW0sTVRyzy6ubysJM" };   // unit number -> Google Slides id of the Spanish copy
 // dashboard id (like "soc-u1-d1-drive1") -> { id: Google Doc id, title: "Spanish title" }
 const ES_DOCS = {

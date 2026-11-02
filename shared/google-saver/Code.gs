@@ -8,6 +8,7 @@
  *  2. In the sheet: Extensions > Apps Script. Delete what's there, paste this whole file, click Save.
  *  3. Project Settings (gear icon) > Script Properties > Add script property:
  *        Property: TEACHER_CODE     Value: the same code you type into the dashboard
+ *     Use 4 random words (like "pickle radio canyon seven"), not a short code.
  *     (The code lives only here, never in the public website.)
  *  4. Deploy > New deployment > type "Web app".
  *        Execute as: Me      Who has access: Anyone
@@ -63,7 +64,7 @@ function submit(b) {
 
 // ---------- Teacher dashboard ----------
 function list(b) {
-  if (!codeOk(b.code)) return { ok: false, error: "That teacher code is not right." };
+  if (!codeOk(b.code)) return { ok: false, error: "That teacher code is not right. (After 10 wrong tries it locks for 15 minutes.)" };
   var sh = sheet(), n = sh.getLastRow();
   if (n < 2) return { ok: true, submissions: [] };
   var values = sh.getRange(2, 1, n - 1, HEADERS.length).getValues();
@@ -159,9 +160,14 @@ function withLock(fn) {
   lock.waitLock(20000);
   try { fn(sheet()); } finally { lock.releaseLock(); }
 }
+// After 10 wrong teacher codes in 15 minutes, every code is refused for 15 minutes, so nobody can sit and guess.
 function codeOk(code) {
+  var cache = CacheService.getScriptCache(), fails = Number(cache.get("codefail") || 0);
+  if (fails >= 10) return false;
   var real = PropertiesService.getScriptProperties().getProperty("TEACHER_CODE");
-  return !!real && String(code || "").trim() === String(real).trim();
+  var ok = !!real && String(code || "").trim() === String(real).trim();
+  if (!ok) cache.put("codefail", String(fails + 1), 900);
+  return ok;
 }
 function toRecord(v) {
   var answers; try { answers = JSON.parse(v[7] || "{}"); } catch (e) { answers = { text: String(v[7]) }; }

@@ -239,10 +239,10 @@ td.inclass{background:#eef5ef;color:#1f5e2c;text-align:center}td.inclass .lvl{di
 </main>
 
 <script>
-// This is the teacher's computer: never in the student's Spanish mode, and never filling in his name.
+// This is the teacher's computer: never in Spanish-page mode, and never filling in a student's name.
 try {
   localStorage.removeItem("site-lang-es-device"); localStorage.removeItem("site-lang");
-  if (localStorage.getItem("site-student-name") === "the student") localStorage.removeItem("site-student-name");
+  if (localStorage.getItem("site-lang-es-name")) { localStorage.removeItem("site-student-name"); localStorage.removeItem("site-lang-es-name"); }
 } catch (e) {}
 // Set to false after you've copied the old turn-ins into Google and no longer need the old site.
 const READ_OLD_SITE = false;
@@ -388,7 +388,7 @@ function attentionHtml(list) {
   if (none.length) parts.push(`<div class="att none"><b>Nothing turned in yet (${none.length})</b><p>${safe(none.join(", "))}</p></div>`);
   if (!roster.length) parts.push(`<p class="status">No class list for ${safe(COURSES[tab])} yet, so students who haven't turned anything in can't show here.</p>`);
   return `<details class="attention"${attentionOpen ? " open" : ""}><summary>Needs attention${count ? " (" + count + ")" : ": nothing right now"}</summary>${parts.join("")}
-    <div class="rosteredit"><button class="light" id="rosterBtn">Edit class list (${roster.length})</button>
+    <div class="rosteredit"><button class="light" id="rosterBtn">Edit class list (${roster.length})</button> <button class="light" id="pinBtn"${roster.length ? "" : " disabled"}>Print PIN slips</button> <span id="pinStat" class="status"></span>
     <div id="rosterBox" hidden><p class="status">One student per line, first name + last initial (like Jordan M.).</p><textarea id="rosterText" rows="8">${safe(roster.join("\n"))}</textarea><button id="rosterSave">Save class list</button> <span id="rosterStat" class="status"></span></div></div></details>`;
 }
 
@@ -812,6 +812,26 @@ function render() {
   const list = tabRows(tab);
   $("attention").innerHTML = (list.length || rosterOf(tab).length || rows.length) ? attentionHtml(list) : "";
   const att = $("attention").querySelector(".attention"); if (att) att.addEventListener("toggle", () => { attentionOpen = att.open; });
+  if ($("pinBtn")) $("pinBtn").onclick = async () => {
+    const st = $("pinStat"), course = tab;
+    // Open the window first (pop-up blockers allow it on a click), then fill it in.
+    const w = window.open("", "_blank");
+    st.textContent = "Making PIN slips…";
+    try {
+      const d = await tools("pins", { course });
+      const names = Object.keys(d.pins || {}).sort((a, b) => a.localeCompare(b));
+      const site = new URL("../", location.href).href;
+      const slip = n => `<div class="slip"><p class="c">${safe(COURSES[course])}</p><p class="n">${safe(n)}</p><p class="p">PIN: <b>${safe(d.pins[n])}</b></p><p class="h">Go to <b>${safe(site.replace(/^https?:\/\//, ""))}</b>, pick your class, and type your PIN to see your grades. Keep it private, like a locker combination.</p></div>`;
+      if (!w) { st.textContent = "Your browser blocked the slips. Allow pop-ups for this page and click again."; return; }
+      w.document.write(`<!doctype html><title>PIN slips · ${safe(COURSES[course])}</title><style>body{font:15px/1.4 system-ui,Arial,sans-serif;margin:16px;color:#000}
+        .grid{display:grid;grid-template-columns:1fr 1fr;gap:0}.slip{border:1px dashed #000;padding:12px 14px;break-inside:avoid}
+        .c{margin:0;font-size:.85rem;text-transform:uppercase;letter-spacing:.08em}.n{margin:2px 0;font-size:1.3rem;font-weight:800}.p{margin:4px 0;font-size:1.5rem}.p b{letter-spacing:.2em}.h{margin:6px 0 0;font-size:.85rem}
+        .top{display:flex;justify-content:space-between;align-items:center;margin:0 0 10px}@media print{.top{display:none}}</style>
+        <div class="top"><b>${names.length} PIN slips · ${safe(COURSES[course])}</b><button onclick="print()">Print</button></div><div class="grid">${names.map(slip).join("")}</div>`);
+      w.document.close();
+      st.textContent = "";
+    } catch (e) { if (w) w.close(); st.innerHTML = /unknown request|teacher code didn/i.test(e.message) ? `Your Teacher Tools needs a quick update first: <a href="update-teacher-tools.html">update it</a>` : safe(e.message); }
+  };
   if ($("rosterBtn")) {
     $("rosterBtn").onclick = () => { $("rosterBox").hidden = !$("rosterBox").hidden; };
     $("rosterSave").onclick = async () => {
@@ -955,10 +975,10 @@ $("search").oninput = render; $("assignment").onchange = render;
 $("csvBtn").onclick = downloadCsv; $("importBtn").onclick = copyOld;
 render();
 if ($("teacherCode").value) load();
-// "⚠ Update needed" shows only while your Teacher Tools script is an older version (it can't save To-do links yet).
+// "⚠ Update needed" shows only while your Teacher Tools script is an older version (no student PINs yet).
 // If Google can't be reached, it stays hidden rather than crying wolf.
 if (TOOLS_URL) fetch(TOOLS_URL, { method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify({ action: "version" }) })
-  .then(r => r.json()).then(d => { $("toolsUpdate").hidden = !!(d && d.ok && (d.can || []).includes("student-links")); }).catch(() => {});
+  .then(r => r.json()).then(d => { $("toolsUpdate").hidden = !!(d && d.ok && (d.can || []).includes("pins")); }).catch(() => {});
 </script>
 </body>
 </html>
