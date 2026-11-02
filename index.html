@@ -454,6 +454,8 @@ function homeBody(course, work) {
   const isCleared = a => (clr.ids || []).includes(a.id) || (!!clr.unit && (a.part === 1 || (a.unit || 0) < clr.unit ||
     ((a.unit || 0) === clr.unit && !!a.day && (spanOf(a) ? spanOf(a)[1] : a.day) <= clr.throughDay)));
   online.forEach(a => { if (!mine[a.id] && isCleared(a)) mine[a.id] = { id: a.id, cleared: true }; });
+  // Test T. (the teacher) is always caught up: anything due before today counts as done unless really turned in.
+  if (testMode) online.forEach(a => { if (!mine[a.id] && isDue(a)) mine[a.id] = { id: a.id, cleared: true }; });
   // Teacher preview: pretend this student turned in everything due (and today's work), with sample grades.
   if (work.preview) {
     const SAMPLE = [
