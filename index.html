@@ -45,6 +45,10 @@ h1:focus{outline:none}
 .addclass{background:none;border:2px dashed var(--line);color:var(--muted);padding:7px 12px}
 .testbar{background:#dbe8fb;color:#1c3f78;border:1px solid #b6cdf0;border-radius:12px;padding:9px 14px;margin:0 0 14px;font-size:.95rem}
 .testbar b{color:#1c3f78}.testbar .linkbtn{color:#1c3f78;font-size:.95rem}
+.previewrow{display:flex;gap:6px;align-items:center;flex-wrap:wrap;margin-top:8px}
+.pv{background:#fff;color:#1c3f78;border:1px solid #b6cdf0;padding:6px 12px;font-size:.92rem}
+.pv[aria-pressed=true]{background:#1c3f78;color:#fff;border-color:#1c3f78}
+.pvnote{margin:8px 0 0;font-weight:700}
 .es{background:#1e4f8a;color:#fff;padding:9px 14px}
 /* --- next up --- */
 .next{background:var(--navy);color:#fff;border-radius:16px;padding:18px 20px;display:flex;gap:16px;align-items:center;justify-content:space-between;flex-wrap:wrap;margin-bottom:12px}
@@ -60,6 +64,23 @@ h1:focus{outline:none}
 .stat b{display:block;font-size:1.3rem;color:var(--navy);line-height:1.2}
 .bar{height:10px;background:#e7e0d1;border-radius:99px;overflow:hidden;margin-top:6px}
 .bar span{display:block;height:100%;background:var(--green);border-radius:99px}
+/* --- status card: missing or all caught up --- */
+.status{border-radius:16px;padding:18px 20px;margin:0 0 10px}
+.status h2{font-size:1.45rem;margin:0 0 2px}
+.status>p{margin:0 0 12px}.status>p:last-child{margin-bottom:0}
+.status.miss{background:var(--navy);color:#fff}.status.miss h2{color:#fff}.status.miss>p{color:#d6e2ea}
+.status.done{background:var(--greenbg);color:var(--green)}.status.done h2{color:var(--green)}
+.qrow{display:flex;gap:12px;align-items:center;justify-content:space-between;background:#fff;color:var(--ink);border-radius:12px;padding:10px 12px;margin-top:8px}
+.qrow .qday{display:block;font-size:.78rem;font-weight:900;color:var(--red);text-transform:uppercase;letter-spacing:.05em}
+.qrow .qtitle{display:block;font-weight:800;color:var(--navy);line-height:1.25}
+.qgo{background:var(--navy);color:#fff;padding:10px 18px;white-space:nowrap}
+.status.miss .qgo{background:#ffd9a8;color:var(--navy)}
+.qlabel{margin:14px 0 0;font-size:.8rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;opacity:.85}
+.testline{margin:4px 2px 16px;color:var(--muted)}
+.testline b{color:var(--navy)}
+details.allwork{margin-top:6px}
+details.allwork>summary{cursor:pointer;font-weight:800;color:var(--navy);background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 16px}
+details.allwork[open]>summary{margin-bottom:10px}
 /* --- lists --- */
 .section{margin:0 0 14px}
 .section h2 .n{display:inline-block;background:#fff;border:1px solid var(--line);border-radius:99px;padding:0 9px;font-size:.85rem;color:var(--muted);margin-left:4px}
@@ -149,8 +170,9 @@ let me = loadMe();
 // Open the page once with ?teacher-test on the end and this device becomes "Test T." in every class,
 // so the teacher sees exactly what a student sees without using a real student's name.
 // Turn-ins from Test T. show on the teacher dashboard with a TEST tag (left out of Needs attention).
-const TEST_NAME = "Test T.", TEST_KEY = "hub-test-student";
-let testMode = false;
+const TEST_NAME = "Test T.", TEST_KEY = "hub-test-student", PREVIEW_KEY = "hub-test-preview";
+let testMode = false, preview = "real";   // preview: "real" or "caught" (pretend everything due is turned in)
+try { preview = localStorage.getItem(PREVIEW_KEY) === "caught" ? "caught" : "real"; } catch (e) {}
 try {
   if (/[?&]teacher-test\b/.test(location.search)) localStorage.setItem(TEST_KEY, "1");
   testMode = localStorage.getItem(TEST_KEY) === "1";
@@ -345,7 +367,9 @@ async function drawHome(app) {
   const course = me.current, name = me.classes[course], first = name.split(" ")[0];
   const myClasses = Object.keys(COURSES).filter(k => me.classes[k]);
   const spanish = course === "sociology" && (name === "the student" || (() => { try { return localStorage.getItem("site-lang-es-device") === "1"; } catch (e) { return false; } })());
-  const testBar = testMode ? `<div class="testbar" role="note">🧪 <b>Test student mode.</b> You're seeing exactly what a student sees, as “${esc(TEST_NAME)}”. Your turn-ins show on your dashboard tagged TEST. <button class="linkbtn" id="testOff">Turn off on this device</button></div>` : "";
+  const testBar = testMode ? `<div class="testbar" role="note">🧪 <b>Test student mode.</b> You're seeing exactly what a student sees, as “${esc(TEST_NAME)}”. Your turn-ins show on your dashboard tagged TEST.
+    <div class="previewrow"><span>Show me:</span><button class="pv" data-pv="real" aria-pressed="${preview === "real"}">My real test work</button><button class="pv" data-pv="caught" aria-pressed="${preview === "caught"}">A student who's all caught up</button><button class="linkbtn" id="testOff">Turn off test mode</button></div>
+    ${preview === "caught" ? `<p class="pvnote">Pretend preview: grades and feedback below are samples. Nothing is saved.</p>` : ""}</div>` : "";
   app.innerHTML = testBar + `<div class="top">
       <div><p class="eyebrow">${esc(COURSES[course])}</p><h1>Hi, ${esc(first)}! 👋</h1></div>
       <div class="who">${spanish ? `<a class="btn es" href="sociology/espanol/">Ver en español →</a>` : ""}${testMode ? "" : `<span class="muted">Not ${esc(name)}?</span><button class="linkbtn" id="notMe">Change name</button>`}</div>
@@ -358,6 +382,11 @@ async function drawHome(app) {
     try { localStorage.removeItem(TEST_KEY); localStorage.removeItem(ME_KEY); localStorage.removeItem("site-student-name"); } catch (e) {}
     testMode = false; me = { classes: {}, current: "" }; screen = "class"; draw();
   };
+  app.querySelectorAll(".pv").forEach(b => b.onclick = () => {
+    preview = b.dataset.pv;
+    try { localStorage.setItem(PREVIEW_KEY, preview); } catch (e) {}
+    draw();
+  });
   if (testMode) return showWork(course, name);
   $("addClass").onclick = () => { screen = "class"; draw(); };
   $("notMe").onclick = () => {
@@ -371,8 +400,10 @@ async function drawHome(app) {
 async function showWork(course, name) {
   const work = await loadWork(course, name);
   if (me.current !== course || screen !== "home") return;
+  if (testMode && preview === "caught") work.preview = true;
   $("body").innerHTML = homeBody(course, work);
   $("body").querySelectorAll("details.unit").forEach(d => d.addEventListener("toggle", () => { openUnits[course + "|" + d.dataset.k] = d.open; }));
+  const all = $("body").querySelector("details.allwork"); if (all) all.addEventListener("toggle", () => { allOpen[course] = all.open; });
 }
 
 const openUnits = {};
@@ -416,6 +447,15 @@ function homeBody(course, work) {
     return a.day <= (reached[k] || 0);                 // no day known: how far the class has gotten
   };
   const online = items.filter(isOnline);
+  // Teacher preview: pretend this student turned in everything due (and today's work), with sample grades.
+  if (work.preview) {
+    const SAMPLE = [
+      { ft: "9 of 9", written: 4, feedback: "Strong answer. You explained the cause and backed it up with a detail from the lesson." },
+      { ft: "10 of 10", written: 3, feedback: "You explained it clearly and used a real example. Nice work." },
+      { ft: "7 of 7", written: 3, feedback: "Good thinking. Next time, add one more specific fact to prove your point." }
+    ];
+    online.filter(a => isDue(a) || isToday(a)).forEach((a, i) => { mine[a.id] = Object.assign({ id: a.id, at: todayIso, teacher: false, flagged: false }, SAMPLE[i % SAMPLE.length]); });
+  }
   const sortItems = list => list.slice().sort((a, b) => unitOrder(unitKey(a)) - unitOrder(unitKey(b)) || (a.day || 99) - (b.day || 99));
   const due = sortItems(online.filter(isDue));
   const missing = due.filter(a => !mine[a.id]);
@@ -428,31 +468,20 @@ function homeBody(course, work) {
   const dayText = a => { const s = spanOf(a); return s ? `Days ${s[0]}–${s[1]}` : a.day ? `Day ${a.day}` : ""; };
   const where = a => [unitLabel(course, unitKey(a)).replace(/ · .*/, ""), dayText(a)].filter(Boolean).join(" · ");
 
-  // --- Do this next ---
-  let next;
+  // --- The one thing a student needs to know: what am I missing, or am I caught up? ---
+  // Kept short on purpose (Fynn: not overwhelming or complicated). Grades live in one closed dropdown below.
+  const quick = (a, btn) => `<div class="qrow"><div><span class="qday">${esc(where(a))}</span><span class="qtitle">${esc(cleanTitle(a.title))}</span></div><a class="btn qgo" href="${href(a)}"${ext(a)}>${btn} →</a></div>`;
+  const todayRow = todays.length ? `<div class="qlabel">Today's work</div>${todays.map(a => quick(a, "Start")).join("")}` : "";
+  let status;
   if (missing.length) {
-    const a = missing[0];
-    next = `<section class="next" aria-label="Do this next"><div><div class="lbl">Do this next</div><div class="what">${esc(cleanTitle(a.title))}</div><div class="why">${esc(where(a))} · ${missing.length === 1 ? "the only thing left to catch up" : missing.length + " to catch up. Start here."}</div></div><a class="btn" href="${href(a)}"${ext(a)}>Start →</a></section>`;
-  } else if (fix.length) {
-    const a = fix[0];
-    next = `<section class="next" aria-label="Do this next"><div><div class="lbl">You're caught up! Want a better grade?</div><div class="what">${esc(cleanTitle(a.title))}</div><div class="why">${mine[a.id].feedback ? "Read the feedback below, then open it again and fix your answer." : "Open it again and fix the ones you missed."}</div></div><a class="btn" href="${href(a)}"${ext(a)}>Fix it →</a></section>`;
-  } else if (todays.length) {
-    const a = todays[0];
-    next = `<section class="next" aria-label="Do this next"><div><div class="lbl">Today's work</div><div class="what">${esc(cleanTitle(a.title))}</div><div class="why">${esc(where(a))} · you're caught up on everything before this</div></div><a class="btn" href="${href(a)}"${ext(a)}>Start →</a></section>`;
+    status = `<section class="status miss" aria-label="What to do"><h2>You're missing ${missing.length} ${missing.length === 1 ? "thing" : "things"}</h2><p>Do ${missing.length === 1 ? "it" : "them"} in order, top to bottom.</p>${missing.map(a => quick(a, "Start")).join("")}${todayRow}</section>`;
   } else {
-    next = `<section class="next done" aria-label="Do this next"><div><div class="lbl">All caught up 🎉</div><div class="what">You've turned in everything so far.</div><div class="why">${ahead.length ? "Want to get ahead? Next up: " + esc(cleanTitle(ahead[0].title)) : "Nice. Wait for your teacher's next step."}</div></div>${ahead.length ? `<a class="btn" href="${href(ahead[0])}"${ext(ahead[0])}>Get ahead →</a>` : ""}</section>`;
+    const fixRow = fix.length ? `<div class="qlabel">Optional: raise your grade</div>${fix.map(a => quick(a, "Fix it")).join("")}` : "";
+    status = `<section class="status done" aria-label="What to do"><h2>You're all caught up! 🎉</h2><p>${todays.length ? "Nothing missing. Here's today's work:" : due.length ? "You've turned in everything so far." : "Nothing is due yet."}</p>${todayRow}${fixRow}</section>`;
   }
-
-  // --- Stats ---
-  const dueDone = due.length - missing.length;
-  const pct = due.length ? Math.round(dueDone / due.length * 100) : 100;
   const cal = (CAL[course] || {})[nowKey.split("|").pop()];
   const testDay = !nowKey.startsWith("p1|") && cal && cal.summative ? cal.summative : "";
-  const stats = `<div class="stats">
-    <div class="stat"><span class="muted">${dueDone ? "Turned in so far" : "Your work so far"}</span>${!due.length ? `<b>Nothing due yet</b>` : dueDone ? `<b>${dueDone} of ${due.length}</b><div class="bar" aria-hidden="true"><span style="width:${pct}%"></span></div>` : `<b>${due.length} to do</b><span class="muted">Turn in your first one!</span>`}</div>
-    ${testDay ? `<div class="stat"><span class="muted">${esc(unitLabel(course, nowKey).replace(/ · .*/, ""))} test</span><b>📅 ${esc(niceDate(testDay))}</b><span class="muted">${testDay === todayIso ? "That's today!" : "Test day, on paper in class"}</span></div>` : ""}
-    ${fix.length ? `<div class="stat"><span class="muted">Can be fixed for a better grade</span><b>${fix.length}</b></div>` : ""}
-  </div>`;
+  const testLine = testDay ? `<p class="testline">📅 ${esc(unitLabel(course, nowKey).replace(/ · .*/, ""))} test: <b>${esc(niceDate(testDay))}</b>${testDay === todayIso ? " (today!)" : ""} · on paper in class</p>` : "";
 
   // --- One activity row ---
   const row = (a, inUnit) => {
@@ -460,7 +489,7 @@ function homeBody(course, work) {
     let pill = "", btn = "Open";
     if (!on) { pill = `<span class="pill p-class">${/\(printed\)/i.test(a.title || "") ? "Paper · in class" : "Done in class"}</span>`; }
     else if (w) { pill = gradePill(g); btn = g && g.n && g.n <= 2 ? "Fix it" : "Look again"; }
-    else if (isDue(a)) { pill = inUnit && missing.length > 1 ? `<span class="pill p-wait">In your catch-up list</span>` : `<span class="pill p-miss">Not turned in yet</span>`; btn = "Start"; }
+    else if (isDue(a)) { pill = `<span class="pill p-miss">Missing</span>`; btn = "Start"; }
     else if (isToday(a)) { pill = `<span class="pill p-in">Today</span>`; btn = "Start"; }
     else { pill = `<span class="pill p-wait">Coming up</span>`; btn = "Look ahead"; }
     const ft = g && g.ft ? `<div class="ft">${g.ft.right} of ${g.ft.total} right on the first try</div>` : "";
@@ -470,13 +499,9 @@ function homeBody(course, work) {
       <div class="act">${pill}<a class="btn open${strong ? "" : " soft"}" href="${href(a)}"${ext(a)}>${btn}${/^https?:/.test(a.path) ? " ↗" : ""}</a></div></div>`;
   };
 
-  // --- Catch-up and fix lists (only when there's more than what "Do this next" shows) ---
-  let lists = "";
-  if (missing.length > 1) lists += `<section class="section"><h2>Catch up <span class="n">${missing.length}</span></h2><p class="muted" style="margin:-4px 0 8px">Go in order, top to bottom.</p>${missing.map(a => row(a)).join("")}</section>`;
-  if (fix.length && (missing.length || fix.length > 1)) lists += `<section class="section"><h2>Fix these for a better grade <span class="n">${fix.length}</span></h2>${fix.map(a => row(a)).join("")}</section>`;
-
   // --- Every unit, in day order. The class's current unit starts open. ---
-  const units = keys.map(k => {
+  // Only this unit and earlier ones (future units would just be clutter).
+  const units = keys.filter(k => unitOrder(k) <= nowOrder).map(k => {
     const list = sortItems(items.filter(a => unitKey(a) === k));
     const on = list.filter(isOnline), got = on.filter(a => mine[a.id]).length;
     const isNow = k === nowKey, future = unitOrder(k) > nowOrder;
@@ -484,16 +509,16 @@ function homeBody(course, work) {
     const paper = list.filter(a => !isOnline(a));
     const c = !k.startsWith("p1|") && (CAL[course] || {})[k];
     const testRow = c && c.summative ? `<div class="row summ"><div class="info"><div class="day">Day ${c.days} · Unit test</div><div class="title">📅 ${esc(niceDate(c.summative))} · on paper in class</div></div></div>` : "";
-    // The class's unit starts open, unless there's a catch-up list to do first.
-    const open = (course + "|" + k) in openUnits ? openUnits[course + "|" + k] : isNow && missing.length <= 1;
+    const open = (course + "|" + k) in openUnits ? openUnits[course + "|" + k] : isNow;
     const past = unitOrder(k) < nowOrder;
     const countTxt = !on.length ? "" : future && !got ? "Coming up" : !owed ? "Nothing due yet" : `${got} of ${owed} turned in`;
     return `<details class="unit" data-k="${esc(k)}"${open ? " open" : ""}><summary>${esc(unitLabel(course, k))}${isNow ? ` <span class="now">NOW</span>` : ""}<span class="count">${countTxt}${past && on.length && got === on.length ? " ✓" : ""}</span></summary>
-      <div class="inner">${on.map(a => row(a, true)).join("")}${paper.length ? `<details class="paper"><summary>📄 Paper and in-class work (${paper.length})${!future ? " · missed class? Ask your teacher for these" : ""}</summary>${paper.map(a => row(a, true)).join("")}</details>` : ""}${testRow}</div></details>`;
+      <div class="inner">${on.map(a => row(a, true)).join("")}${paper.length ? `<details class="paper"><summary>📄 Paper and in-class work (${paper.length})${!future ? " · missed class? Ask your teacher for these" : ""}</summary>${paper.map(a => row(a, true)).join("")}</details>` : ""}</div></details>`;
   }).join("");
 
-  return next + stats + lists + `<section class="section"><h2>All my ${esc(COURSES[course])} work</h2>${units}</section>`;
+  return status + testLine + `<details class="allwork"${allOpen[course] ? " open" : ""}><summary>📋 My grades and all my ${esc(COURSES[course])} work</summary><div class="allinner">${units}</div></details>`;
 }
+const allOpen = {};
 
 function footer() {
   return `<footer><span>Your name fills in by itself on every activity on this Chromebook.</span></footer>`;
