@@ -471,6 +471,28 @@ window.CLASS_COURSE_STANDARDS = {
 };
 
 window.CLASS_STANDARDS = {
+  // Part 1 standards (first half of U.S. and World History): exact state wording, Jan 2026 set (via Common Planner).
+  "SS.9-12.US.4": "Evaluate the multiple causes and effects of the Civil War.",
+  "SS.9-12.US.5": "Analyze the consequences of the Civil War and Reconstruction.",
+  "SS.9-12.US.7": "Assess the impact of exemplary Americans and Iowans who displayed civic virtues in the Civil War and Reconstruction.",
+  "SS.9-12.US.8": "Evaluate the impact of inventions and technological innovations on American society and culture.",
+  "SS.9-12.US.19": "Evaluate the multiple causes and effects of the Spanish-American War, the Philippine–American War, and World War I.",
+  "SS.9-12.WH.2": "Evaluate the impacts of the Columbian Exchange on global populations and environments.",
+  "SS.9-12.WH.5": "Explain how and why land-based and maritime empires expanded from 1450 - 1750.",
+  "SS.9-12.WH.7": "Map the development and expansion of land-based and maritime empires from 1450 to 1750.",
+  "SS.9-12.WH.8": "Assess how the artistic accomplishments of an empire reflected and reinforced their values and beliefs from 1450 to 1750.",
+  "SS.9-12.WH.9": "Evaluate the long-term impacts of expanding empires from 1450 to 1750 in world history.",
+  "SS.9-12.WH.10": "Explain how the Renaissance changed European societies from 1450 to 1750.",
+  "SS.9-12.WH.13": "Describe the ways in which various groups supported and/or resisted the Reformation.",
+  "SS.9-12.WH.14": "Analyze the role of printing and the printing press in the development of new intellectual and belief systems.",
+  "SS.9-12.WH.15": "Explain the causes of political revolutions in the period of 1750 to 1826.",
+  "SS.9-12.WH.17": "Explain the intellectual context that shaped and spread revolutions in the Atlantic world from 1750 to 1826.",
+  "SS.9-12.WH.18": "Analyze how revolutions from 1750 to 1826 impacted various groups of people.",
+  "SS.9-12.WH.19": "Assess to what extent the revolutions changed political, economic, and/or social systems from 1750-1826.",
+  "SS.9-12.WH.20": "Explain the factors that led to the start of the Industrial Revolution in Britain in 1750.",
+  "SS.9-12.WH.21": "Compare and contrast the industrialization of two or more countries in the 19th century.",
+  "SS.9-12.WH.22": "Analyze how the Industrial Revolution changed societies from 1750 to 1900.",
+  "SS.9-12.WH.23": "Compare ideological responses to industrialization and the Industrial Revolution.",
   "SS.9-12.WH.24": "Describe the economic, political and cultural factors that contributed to a new wave of European imperialism in the 19th century.",
   "SS.9-12.WH.25": "Compare and contrast the different imperialist systems created by European and other imperialist nations.",
   "SS.9-12.WH.27": "Compare the responses of resistance and adaptation to Western imperialism in the 19th century.",

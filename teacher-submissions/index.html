@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
 <title>Teacher Dashboard · All Classes</title>
-<script src="../shared/assignments.js?v=20261102nobreak"></script>
+<script src="../shared/assignments.js?v=20261102std"></script>
 <script src="presentations.js?v=20261102gov2"></script>
 <script src="../shared/turnin.js?v=20261102fill2"></script>
 <style>
@@ -183,6 +183,7 @@ td.inclass{background:#eef5ef;color:#1f5e2c;text-align:center}td.inclass .lvl{di
 .todonote{background:#e3f0e5;color:#1f5e2c;font-weight:800;border-radius:9px;padding:8px 12px;margin:0 0 10px}
 .dayrow.flash{background:#fff1c9;transition:background .3s}
 @media (max-width:760px){.todo{grid-template-columns:1fr}.linkform input[name=title],.linkform input[name=url]{width:100%}.tab.todotab{margin-left:0}}
+.stdn{cursor:help;text-decoration:underline dotted;text-underline-offset:2px}
 .testtag{display:block;width:max-content;margin-top:2px;background:#dbe8fb;color:#1c3f78;border-radius:6px;padding:0 6px;font-weight:800;font-size:.72rem;letter-spacing:.04em}
 </style>
 </head>
@@ -507,7 +508,7 @@ function linksHtml() {
       const t = r.title || (r.summ || r.ids.some(id => /summative/i.test(REG[id].title)) ? "Summative" : r.ids.length ? chipText(r.ids[0]).replace(/\s*\([^)]*\)\s*$/, "") : "");
       const slides = r.slides.map(s => `<a class="chip slides" href="${safe(s.url)}${s.slide ? "#slide=id." + safe(s.slide) : ""}" target="_blank" rel="noopener">▶ ${safe(s.label)}</a>`).join("");
       const todo = (r.todo || []).map(x => `<span class="chip todo">⚠ ${safe(x)}</span>`).join("");
-      return `<div class="dayrow${r.summ ? " summ" : ""}" id="${safe(dayAnchor(key, r.day))}"><div class="daylabel">${label}<span class="daytitle${t ? "" : " unplanned"}">${safe(t || "Nothing planned yet")}</span>${r.std ? `<span class="daystd">${safe(r.std)}</span>` : ""}</div><div class="daychips">${slides}${r.ids.filter(id => !REG[id].alt && kindOf(id) !== "key").map(chip).join("")}${todo}${moreBox(r.ids)}</div></div>`;
+      return `<div class="dayrow${r.summ ? " summ" : ""}" id="${safe(dayAnchor(key, r.day))}"><div class="daylabel">${label}<span class="daytitle${t ? "" : " unplanned"}">${safe(t || "Nothing planned yet")}</span>${r.std ? `<span class="daystd">${stdHover(r.std)}</span>` : ""}</div><div class="daychips">${slides}${r.ids.filter(id => !REG[id].alt && kindOf(id) !== "key").map(chip).join("")}${todo}${moreBox(r.ids)}</div></div>`;
     }).join("");
     const deckLinks = [list.some(r => r.single) ? null : main, ...extra].filter(Boolean).map(p => `<a href="${safe(p.url)}" target="_blank" rel="noopener">${p === main ? "▶ Open the whole deck" : "Older version: " + safe(p.title) + (p.note ? " (" + safe(p.note) + ")" : "")}</a>`).join(" · ");
     const inner = list.length ? `<div class="daytable">${body}</div>${deckLinks ? `<div class="deckfoot">${deckLinks}</div>` : ""}` : `<p class="status">No slides for this unit yet.</p>`;
@@ -530,6 +531,22 @@ function linksHtml() {
   const p1html = p1units.map(u => unitBlock(tab + "|p1|" + u, u ? "Unit " + u + (P1[u] ? " · " + P1[u] : "") : "Other", sortIds(acts.filter(id => REG[id].part === 1 && (REG[id].unit || 0) === u)), part1.filter(p => (p.unit || 0) === u), ((window.CLASS_CALENDAR_PART1 || {})[tab] || {})[u])).join("");
   return legend + `<div class="parthead">Part 1</div>${p1html}<div class="parthead">Part 2</div>${current}`;
 }
+
+// ================= Standard hover =================
+// Hover any standard number (like the 5 in "Gov.1, 5") to see the full code and what the standard says.
+const STD_PREFIX = { gov: "Gov", us: "US", wh: "WH", soc: "Soc" };
+function stdTip(code) { const t = (window.CLASS_STANDARDS || {})[code]; return code + "\n" + (t || "(Full wording isn't saved on the dashboard yet.)"); }
+function stdHover(str) {
+  const m = String(str || "").match(/^\s*(Gov|US|WH|SOC)\.\s*(.+)$/i);
+  if (!m) return safe(str);
+  const pre = STD_PREFIX[m[1].toLowerCase()], code = n => "SS.9-12." + pre + "." + n;
+  return safe(m[1]) + "." + m[2].split(/\s*,\s*/).map(tok => {
+    const r = tok.match(/^(\d+)\s*[–-]\s*(\d+)$/);
+    const nums = r ? Array.from({ length: Math.max(0, +r[2] - +r[1]) + 1 }, (_, i) => +r[1] + i) : /^\d+$/.test(tok) ? [+tok] : [];
+    return nums.length ? `<span class="stdn" title="${safe(nums.map(n => stdTip(code(n))).join("\n\n"))}">${safe(tok)}</span>` : safe(tok);
+  }).join(", ");
+}
+const stdCodeHover = c => `<span class="stdn" title="${safe(stdTip(c))}">${safe(c.replace("SS.9-12.", ""))}</span>`;
 
 // ================= To-do tab =================
 // Every red "not made yet" note from all classes, soonest first, with a box to paste a link that fills it in.
@@ -753,7 +770,7 @@ function renderMastery(list) {
   };
   const missing = s => codes.filter(c => !data[s][c]).length;
   $("out").innerHTML = KEYLINE + HOWTO + `
-  <div class="gridwrap"><table class="mastery"><thead><tr><th class="student">Student</th>${codes.map(c => `<th title="${safe(STDTXT[c] || "")}">${safe(shortStd(c))}</th>`).join("")}<th>No evidence</th></tr></thead>
+  <div class="gridwrap"><table class="mastery"><thead><tr><th class="student">Student</th>${codes.map(c => `<th>${stdCodeHover(c)}</th>`).join("")}<th>No evidence</th></tr></thead>
   <tbody>${students.map(s => `<tr>${studentCell(tab, s)}${codes.map(c => cellHtml(s, c)).join("")}<td class="${missing(s) ? "needs" : ""}">${missing(s) ? missing(s) + " of " + codes.length : "✓"}</td></tr>`).join("")}</tbody></table></div>
   <div id="mdetail" class="mdetail" aria-live="polite"></div>
   <details class="stdall"><summary>What each standard means (by unit)</summary>${byUnit(Object.keys(REG).filter(id => REG[id].course === tab && REG[id].path), tab).map(g => {
@@ -853,7 +870,7 @@ function renderGrid(list) {
       const inUnit = list.filter(r => g.ids.includes(r.assignmentId));
       const who = [...new Set([...rosterOf(tab), ...inUnit.map(r => r.studentName)])].sort((a, b) => a.localeCompare(b));
       return `<section class="unitblock"><h2 class="unithead">${safe(g.name)} <span class="unitcount">${g.ids.length} ${g.ids.length === 1 ? "activity" : "activities"} · ${who.length} ${who.length === 1 ? "student" : "students"}</span></h2>
-    <div class="gridwrap"><table><thead><tr><th class="student">Student</th>${g.ids.map(id => `<th>${safe(titleOf({ assignmentId: id }))}${(REG[id] && REG[id].std || []).length ? `<small class="stdtag">${safe(REG[id].std.map(shortStd).join(" · "))}</small>` : ""}</th>`).join("")}<th>Unit so far</th></tr></thead>
+    <div class="gridwrap"><table><thead><tr><th class="student">Student</th>${g.ids.map(id => `<th>${safe(titleOf({ assignmentId: id }))}${(REG[id] && REG[id].std || []).length ? `<small class="stdtag">${REG[id].std.map(stdCodeHover).join(" · ")}</small>` : ""}</th>`).join("")}<th>Unit so far</th></tr></thead>
     <tbody>${who.map(s => `<tr>${studentCell(tab, s)}${g.ids.map(id => cell(s, id)).join("")}${unitSum(s, g.ids, inUnit)}</tr>`).join("")}</tbody></table></div></section>`;
     }).join("");
   $("out").querySelectorAll("td.done button").forEach(b => b.onclick = () => { view = "list"; render(); $("search").value = b.dataset.s; $("assignment").value = b.dataset.a; render(); });
