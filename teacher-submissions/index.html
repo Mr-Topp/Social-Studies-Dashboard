@@ -317,8 +317,8 @@ function mergeNames() {
 }
 // Your test student (from the "?teacher-test" link on the student home page). Shows with a TEST tag,
 // but is left out of Needs attention and the CSV downloads.
-const TEST_NAME = "Test S.";
-const isTestStudent = s => s === TEST_NAME;
+const TEST_NAME = "Test T.";
+const isTestStudent = s => s === TEST_NAME || s === "Test S."; // "Test S." was its first name
 const offList = (t, s) => rosterOf(t).length && !rosterOf(t).includes(s);
 const studentCell = (t, s) => `<td class="student">${safe(s)}${isTestStudent(s) ? '<small class="testtag">TEST (you)</small>' : offList(t, s) ? '<small class="offlist">not on class list</small>' : ""}</td>`;
 

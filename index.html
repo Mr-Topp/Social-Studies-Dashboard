@@ -146,10 +146,10 @@ function saveMe() {
 let me = loadMe();
 
 // ---------- Teacher test student ----------
-// Open the page once with ?teacher-test on the end and this device becomes "Test S." in every class,
+// Open the page once with ?teacher-test on the end and this device becomes "Test T." in every class,
 // so the teacher sees exactly what a student sees without using a real student's name.
-// Turn-ins from Test S. show on the teacher dashboard with a TEST tag (left out of Needs attention).
-const TEST_NAME = "Test S.", TEST_KEY = "hub-test-student";
+// Turn-ins from Test T. show on the teacher dashboard with a TEST tag (left out of Needs attention).
+const TEST_NAME = "Test T.", TEST_KEY = "hub-test-student";
 let testMode = false;
 try {
   if (/[?&]teacher-test\b/.test(location.search)) localStorage.setItem(TEST_KEY, "1");
