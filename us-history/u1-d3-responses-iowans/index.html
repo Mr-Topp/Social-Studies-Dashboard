@@ -1,0 +1,201 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Hoover vs. the New Deal | U.S. History Unit 1 Day 3</title>
+<meta name="description" content="Follow an Iowa farm family through the Great Depression and compare Herbert Hoover's response with FDR's New Deal.">
+<style>
+:root{--ink:#1f2b33;--muted:#55626b;--paper:#f6f4ee;--card:#fff;--line:#dad9cf;--teal:#3d5a2a;--coral:#b0632a;--green:#2a6b45;--bad:#a2392f;--soft:#eef2e6}
+*{box-sizing:border-box}
+html,body{overflow-x:hidden}
+body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.5 system-ui,Segoe UI,Arial,sans-serif}
+header{background:linear-gradient(90deg,#e9efdf,#f5ecdd);border-bottom:5px solid var(--teal);padding:16px max(16px,calc((100vw - 900px)/2)) 12px}
+.k{font-size:.78rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:var(--teal);margin:0}
+h1{margin:2px 0 4px;font-size:clamp(1.7rem,3.4vw,2.3rem)}
+.std{margin:2px 0;font-size:.92rem;color:var(--muted)}.std b{color:var(--ink)}
+.hud{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line);padding:8px max(16px,calc((100vw - 900px)/2));display:flex;gap:10px;flex-wrap:wrap;align-items:center;font-weight:800;font-size:.92rem;box-shadow:0 2px 8px #1f2b3312}
+.hud .bar{flex:1;min-width:100px;height:10px;background:#e6e6de;border-radius:9px;overflow:hidden}.hud .bar span{display:block;height:100%;width:0;background:var(--teal);transition:width .4s}
+.pill{background:#f0efe8;border-radius:20px;padding:3px 10px;white-space:nowrap}
+.meter{display:flex;align-items:center;gap:6px}.meter .track{width:100px;height:10px;border-radius:9px;background:#e6e6de;overflow:hidden}.meter .track span{display:block;height:100%;background:var(--coral);transition:width .5s}
+main{max-width:900px;margin:auto;padding:14px 16px 60px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;box-shadow:0 3px 12px #1f2b330d}
+.kicker{font-size:.78rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:var(--coral);margin:0}
+h2{margin:2px 0 10px;font-size:1.45rem}
+.teach{background:var(--soft);border-left:5px solid var(--teal);border-radius:9px;padding:10px 14px;margin:0 0 12px}.teach p{margin:4px 0}.teach b{color:var(--teal)}
+.block{margin:14px 0;padding:14px;border-radius:12px;border:2px solid var(--line);background:#fff}
+.block.current{border-color:var(--ink);box-shadow:0 0 0 4px #1f2b3320}
+.block h3{margin:0 0 10px;font-size:1.06rem;line-height:1.35;font-weight:700}
+.block p{margin:6px 0}
+.event{background:#fbf9f4;border-style:dashed;border-color:#cdbf9a}.event.current{border-style:solid}
+.event-body p{margin:4px 0}
+.doc{background:#fbf6ea;border:1px solid #e0d3b0;border-left:5px solid var(--coral);border-radius:9px;padding:10px 12px;margin:4px 0 10px}
+.doc .cap{display:block;font-size:.74rem;font-weight:900;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:2px}
+.doc q,.quote{font-style:italic}
+.doc p{margin:4px 0}
+.tablewrap{overflow-x:auto;margin:6px 0 10px}
+table{border-collapse:collapse;width:100%;font-size:.92rem;background:#fff}
+th,td{border:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}th{background:var(--soft)}
+.picked{margin:10px 0 4px;color:var(--muted)}.result{background:#f0efe8;border-radius:9px;padding:9px 12px}.result p{margin:4px 0}
+.tag{display:inline-block;font-weight:900;font-size:.8rem;border-radius:12px;padding:2px 9px;margin-right:6px}.tag.up{background:#dcefe2;color:var(--green)}.tag.down{background:#f6dcd8;color:var(--bad)}.tag.flat{background:#ebe9e0;color:var(--ink)}
+.qlabel{font-size:.75rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:var(--teal);margin:0 0 4px}
+.choices{display:grid;gap:8px}
+@media(min-width:700px){.q .choices{grid-template-columns:1fr 1fr}}
+button{font:inherit;cursor:pointer;border-radius:10px;min-height:46px}
+.choice{text-align:left;background:#fff;color:var(--ink);border:2px solid #cfcdbf;padding:10px 12px;font-weight:650;line-height:1.3}
+.choice:hover:not(:disabled){border-color:var(--ink);background:#fcfcfa}.choice:disabled{opacity:.5;cursor:not-allowed}
+.go{margin-top:12px;background:var(--teal);color:#fff;border:0;padding:11px 18px;font-weight:900}
+button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid #2f7dbd;outline-offset:2px}
+.answered{font-weight:800;color:var(--green);margin:4px 0}.why{margin:2px 0;color:var(--muted)}
+.msg{min-height:1.3em;font-weight:750;margin:8px 0 0}.msg.bad{color:var(--bad)}.msg.good{color:var(--green)}
+label{display:block;font-weight:850;margin:14px 0 4px}.stem{margin:0 0 4px;color:var(--muted);font-size:.92rem}
+input,textarea{width:100%;font:inherit;border:2px solid #cfcdbf;border-radius:9px;padding:10px;background:#fff;color:var(--ink)}
+.steps{display:grid;gap:6px;margin:10px 0;padding:0;list-style:none}.steps li{background:#f0efe8;border-radius:9px;padding:8px 12px;font-weight:700}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 0}.pair>div{border-radius:10px;padding:8px 10px;font-size:.93rem;background:var(--soft)}.pair>div>b:first-child{display:block}
+.block h3 .doc,.block h3 .pair,.block h3 .tablewrap{font-weight:400;font-size:1rem}.block h3 .doc b,.block h3 .pair b{font-weight:800}
+@media(max-width:640px){.pair{grid-template-columns:1fr}}
+.welcome{background:#e6f1ea;color:var(--green);font-weight:800;border-radius:9px;padding:8px 12px;margin:0 0 10px}
+.foot{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-top:14px;color:var(--muted);font-size:.85rem}
+.foot button{background:#ebe9e0;border:0;padding:8px 12px;font-weight:800;color:var(--ink)}
+.src{font-size:.8rem;color:var(--muted)}
+.big{font-size:1.15rem}
+@media print{.hud,.foot,.go{display:none}}
+</style>
+<script src="../../shared/assignments.js?v=20261101fill"></script>
+<script src="../../shared/turnin.js?v=20261101fill"></script>
+<script src="../../shared/unit-game.js?v=20261101fill"></script>
+</head><body>
+<header>
+  <p class="k">U.S. History · Unit 1 · Day 3</p>
+  <h1>Responses, Viewpoints, and Iowans</h1>
+  <p class="std"><b>SS.9-12.US.25</b> Economic systems, labor, and government responses (Great Depression) &nbsp;<b>SS.9-12.US.27</b> Multiple perspectives using primary/secondary sources &nbsp;<b>SS.9-12.US.28</b> Civic virtue and contributions of individuals</p>
+  <p class="std"><b>Goal:</b> Compare Hoover's and FDR's responses to the Great Depression and explain how Iowans shaped them. · About 25 minutes.</p>
+</header>
+<div class="hud" aria-label="Progress">
+  <span id="progressText">0 checks done</span>
+  <div class="bar" aria-hidden="true"><span id="progressFill"></span></div>
+  <span class="pill meter">Family stability: <span class="track" aria-hidden="true"><span id="meterFill" style="width:60%"></span></span> <span id="meterNum">6/10</span></span>
+</div>
+<main>
+  <p class="welcome" id="welcome" hidden></p>
+  <div id="app"></div>
+  <div class="foot"><span>Progress saves on this device. Your teacher sees your work after you turn it in.</span><button type="button" id="restartBtn">Start over</button></div>
+</main>
+<script>
+const T = (cls, txt) => `<span class="tag ${cls}">${txt}</span>`;
+const doc = (cap, body) => `<div class="doc"><span class="cap">${cap}</span>${body}</div>`;
+const card = (problem, program) => `<div class="pair"><div><b>Problem</b>${problem}</div><div><b>New Deal program</b>${program}</div></div>`;
+UnitGame.start({
+  key: "ush-u1-d3-responses-iowans-v1",
+  assignmentId: "ush-u1-d3-responses-iowans",
+  title: "U.S. History · Unit 1 · Day 3 · Responses, Viewpoints, and Iowans",
+  standard: "SS.9-12.US.25, SS.9-12.US.27, SS.9-12.US.28",
+  oldApi: "https://fynn-class-assignment-submissions-20261024.neotboy.chatgpt.site/api/submit",
+  startFx: { home: 6 },
+  clampFx: fx => { fx.home = Math.max(0, Math.min(10, fx.home)); },
+  hud: st => {
+    const s = st.fx.home || 0;
+    document.getElementById("meterFill").style.width = (s * 10) + "%";
+    document.getElementById("meterNum").textContent = s + "/10";
+  },
+  startLabel: "Meet the family",
+  introHtml: `<p class="kicker">Cedar County, Iowa · 1929–1938</p><h2>Two Plans for a Hurting Country</h2>
+    <p>The Great Depression hits. Two presidents try two very different plans. One of them, <b>Herbert Hoover</b>, was born just down the road in <b>West Branch, Iowa</b>.</p>
+    <div class="pair"><div><b>The Brenner family</b>Corn and hog farmers near West Branch. Mom, Dad, and three kids. They make choices as the Depression hits.</div><div><b>Your meter</b>The <b>Family stability</b> meter shows how well the Brenners are holding on.</div></div>
+    <ul class="steps"><li>1. Read each source and answer the check.</li><li>2. Choose what the Brenners do at 3 hard moments.</li><li>3. Write 2 short answers and turn in.</li></ul>
+    <p class="src">The Brenners are made up. The presidents, programs, Iowans, and events are real.</p>`,
+  scenes: [
+    { kicker: "Part 1 of 3 · 1874–1931", title: "The Boy from West Branch",
+      teach: `<p>The <b>Great Depression</b> was the worst economic crisis in U.S. history. It started with the stock market crash of <b>October 1929</b> and lasted until about 1941, when war production put people back to work.</p>`,
+      blocks: [
+        { type: "q", id: "h1", std: "US.28", short: "Hoover = Great Humanitarian (WWI food relief)", label: "Source check",
+          prompt: doc("Herbert Hoover's life", `<p>Born <b>August 10, 1874, in West Branch, Iowa</b>, to a Quaker family. Both parents died by the time he was 9, and he was sent to live with relatives in Oregon.</p>
+            <p>He graduated with Stanford's first class (1895) and became a rich mining engineer. During <b>World War I</b>, he organized food for millions of starving people in Belgium and ran the U.S. Food Administration. People called him <b>"The Great Humanitarian."</b></p>
+            <p>He was Secretary of Commerce, then was elected president in 1928. The stock market crashed about 7 months after he took office.</p>`) + "Why was Hoover called \"The Great Humanitarian\" before he became president?",
+          options: ["He organized food for millions in World War I", "He gave his whole fortune away to Iowa's farmers", "He ended the Great Depression in one year", "He built the first public schools in Iowa"],
+          hint: "Look at the second paragraph. What did he do during World War I?", why: "Hoover's food relief during and after WWI saved millions of lives. That's why he was trusted when he ran in 1928." },
+        { type: "q", id: "h2", std: "US.27", short: "Rugged individualism viewpoint",
+          prompt: doc("Hoover's big idea", `<p>Hoover believed in <b>"rugged individualism"</b>: people and communities should solve their own problems. He wanted help to be <b>voluntary</b> (done by choice) through businesses, churches, and local charities.</p><p>He worried that direct government payments to people would make them depend on the government and would make it too big.</p>`) + "Based on this, how would Hoover want hunger to be handled?",
+          options: ["By local charities and neighbors helping", "By federal checks mailed to every family", "By the army running food lines in towns", "By forcing banks to give away their money"],
+          hint: "Reread what Hoover wanted help to come from.", why: "Hoover trusted local, voluntary help over direct federal aid." },
+        { type: "event", id: "e1", short: "Bank rumor (1931)", html: `<p><b>Spring 1931.</b> Corn prices have crashed. Rumors say the bank in town is in trouble. People are lining up to pull out their money.</p><p>The Brenners have $300 saved in that bank. What do they do?</p>`,
+          choices: [
+            { label: "Pull all the savings out now", fx: { home: 1 }, result: `<p>${T("up", "+1 stability")}The Brenners keep their cash. But when everyone pulls out at once, it's called a <b>bank run</b>, and it can make even a healthy bank fail. Hundreds of Iowa banks closed in these years.</p>` },
+            { label: "Leave it. The bank will be fine.", fx: { home: -3 }, result: `<p>${T("down", "−3 stability")}The bank closes its doors. The Brenners' $300 is gone. There was no insurance on bank savings yet.</p>` },
+            { label: "Take out half and leave half", fx: { home: -1 }, result: `<p>${T("down", "−1 stability")}The bank fails a month later. The Brenners kept $150 but lost the rest.</p>` }
+          ] },
+        { type: "q", id: "h3", std: "US.25", short: "Why bank runs were so scary",
+          prompt: "Why were bank rumors so scary in 1931?",
+          options: ["No insurance protected people's savings", "Banks paid savers too much interest", "Laws banned people from taking money out of banks", "Farmers kept their money in stocks"],
+          hint: "Look at what happened to the family who left their money in.", why: "If a bank failed, depositors simply lost their money. That fear caused bank runs, which caused more failures." }
+      ] },
+    { kicker: "Part 2 of 3 · 1930–1932", title: "Hoover Tries",
+      teach: `<p>Hoover did not do nothing. But he drew a line: he would help <b>businesses, banks, and states</b>, but not give <b>direct relief</b> (money or food straight from the federal government to people).</p>`,
+      blocks: [
+        { type: "q", id: "r1", std: "US.25", short: "What Hoover actually did",
+          prompt: doc("What Hoover did, 1929–1932", `<p>• Asked business leaders to keep wages up and not lay people off.</p><p>• Pushed public building projects, like the giant dam on the Colorado River now called <b>Hoover Dam</b>.</p><p>• In 1932, created the <b>Reconstruction Finance Corporation (RFC)</b>, which lent money to banks, railroads, and businesses, and later to states.</p><p>• Refused to give federal money directly to jobless families.</p>`) + "Which statement about Hoover is TRUE?",
+          options: ["He made RFC loans but avoided direct aid to people", "He did nothing at all to fight the Depression after 1929", "He started Social Security for every worker", "He closed every bank and ran the railroads"],
+          hint: "Read the list. What did he do, and what did he refuse to do?", why: "Hoover took real steps, like the RFC, but refused direct federal relief to individuals." },
+        { type: "q", id: "r2", std: "US.27", short: "Hoovervilles show public blame",
+          prompt: doc("1930–1932", `<p>Homeless families built shacks out of scrap wood and tin on the edges of cities. People called these shantytowns <b>"Hoovervilles."</b> A newspaper used as a blanket was a \"Hoover blanket.\"</p>`) + "What do these nicknames show?",
+          options: ["Many people blamed Hoover for their suffering", "Hoover paid to build the shacks for homeless families", "Hoover grew up in a shantytown in Iowa", "The towns were named after Hoover Dam"],
+          hint: "Would you name a shack after someone you liked?", why: "The names were bitter jokes. They show how many Americans blamed Hoover." },
+        { type: "event", id: "e2", short: "Farm Holiday / penny auction (1932)", html: `<p><b>Fall 1932.</b> Corn sells for about <b>10 cents a bushel</b>, less than it costs to grow. The Brenners' neighbors, the Kowalskis, can't pay their loan. The bank will auction their farm.</p><p>The Iowa <b>Farmers' Holiday Association</b>, led by Milo Reno, says farmers should fight back. What do the Brenners do?</p>`,
+          choices: [
+            { label: "Join a \"penny auction\" to save the neighbors' farm", fx: { home: 1 }, result: `<p>${T("up", "+1 stability")}At a <b>penny auction</b>, neighbors showed up in a crowd, bid pennies, and scared off other bidders. Then they gave the farm back to the family. It saved some Iowa farms, but it was risky and sometimes turned into threats.</p>` },
+            { label: "Join the farm strike blocking roads to market", fx: { home: 0 }, result: `<p>${T("flat", "No change")}Farmers blocked highways near Sioux City and other towns to keep crops off the market and push prices up. Some fights broke out. Prices barely moved.</p>` },
+            { label: "Stay home and hope things get better", fx: { home: -1 }, result: `<p>${T("down", "−1 stability")}The Kowalskis lose their farm. The Brenners worry they're next.</p>` }
+          ] },
+        { type: "q", id: "r3", std: "US.27", short: "Farm Holiday viewpoint",
+          prompt: "What does the Farm Holiday movement show about many Iowa farmers in 1932?",
+          options: ["They felt the government wasn't helping, so they acted", "They were doing well and wanted fewer new farm laws passed", "They wanted to move to big cities right away", "They wanted Hoover to push crop prices lower"],
+          hint: "Why would farmers block roads or stop auctions themselves?", why: "Desperate farmers took action on their own because they felt help wasn't coming fast enough." },
+        { type: "note", html: doc("Election of 1932", `<p><b>Franklin D. Roosevelt (FDR)</b> beats Hoover by a huge margin. Iowa votes for FDR too.</p><p>FDR, first speech as president, March 1933: <span class="quote">"The only thing we have to fear is fear itself."</span> and <span class="quote">"This Nation asks for action, and action now."</span></p>`) }
+      ] },
+    { kicker: "Part 3 of 3 · 1933–1938", title: "The New Deal",
+      teach: `<p>FDR's <b>New Deal</b> had three goals, the "3 Rs":</p>
+        <p><b>Relief</b> = help people right now. <b>Recovery</b> = get the economy working again. <b>Reform</b> = change the rules so a crash doesn't happen again.</p>
+        <p><b>Two more Iowans ran big parts of it.</b> <b>Henry A. Wallace</b>, born near Orient, Iowa, was FDR's Secretary of Agriculture. <b>Harry Hopkins</b>, born in Sioux City and a Grinnell College graduate, ran FDR's relief and jobs programs.</p>`,
+      blocks: [
+        { type: "q", id: "n1", std: "US.25", short: "FDIC matches bank failure problem",
+          prompt: "Problem: <b>People lost all their savings when banks failed.</b> Which New Deal program fixed that?",
+          options: ["FDIC: insures bank deposits", "AAA: pays farmers to grow less", "CCC: hires young men outdoors", "TVA: builds dams for power"],
+          hint: "Think back to the Brenners' bank. What was missing?", why: "The FDIC (1933) insured bank savings, first up to $2,500. Bank runs mostly stopped." },
+        { type: "q", id: "n2", std: "US.25", short: "AAA = Recovery",
+          prompt: card("Corn and hog prices are so low that farmers can't pay their loans.", "<b>AAA</b> (1933), run by Iowan Henry Wallace: paid farmers to grow and raise less, so prices would go up.") + "Which \"R\" is the AAA?",
+          options: ["Recovery", "Relief", "Reform"],
+          hint: "Was it a handout, a fix for the economy, or a new rule to prevent another crash?", why: "The AAA tried to raise farm prices and get the farm economy working again. That's recovery." },
+        { type: "event", id: "e3", short: "Son joins the CCC? (1935)", html: `<p><b>1935.</b> The Brenners' oldest son, Walt, is 19. He can join the <b>Civilian Conservation Corps (CCC)</b>: young men plant trees, build parks, and stop soil erosion. The pay is <b>$30 a month, and $25 of it is sent home</b> to the family.</p><p>What should Walt do?</p>`,
+          choices: [
+            { label: "Join the CCC", fx: { home: 2 }, result: `<p>${T("up", "+2 stability")}$25 a month helps the Brenners pay their bills. Walt helps build a state park. CCC camps did real work in Iowa parks, like Backbone and Ledges State Parks.</p>` },
+            { label: "Stay and work on the family farm", fx: { home: 0 }, result: `<p>${T("flat", "No change")}Walt's help on the farm is useful, but there's no extra money coming in.</p>` },
+            { label: "Ride the rails to look for city work", fx: { home: -1 }, result: `<p>${T("down", "−1 stability")}Hundreds of thousands of young people hopped trains looking for work. Most found very little, and the trips were dangerous.</p>` }
+          ] },
+        { type: "q", id: "n3", std: "US.25", short: "CCC helped whole families",
+          prompt: "Why did the CCC send $25 of the $30 home?",
+          options: ["To help whole families, not just the worker", "To stop young men from buying new cars", "Because the army required it of all its soldiers", "To pay off loans the families owed banks"],
+          hint: "Who got the $25, and what did families need?", why: "Sending most of the pay home spread relief to whole families." },
+        { type: "q", id: "n4", std: "US.25", short: "Social Security = Reform",
+          prompt: card("Older people who can't work anymore have no income.", "<b>Social Security Act</b> (1935): monthly payments to retired workers 65 and older, paid for by a tax on workers' paychecks. Still exists today.") + "Which \"R\" is Social Security?",
+          options: ["Reform", "Relief", "Recovery"],
+          hint: "Is it short-term help, or a permanent new rule for the future?", why: "Social Security permanently changed how the U.S. protects older people. That's reform." },
+        { type: "q", id: "n5", std: "US.27", short: "Criticism of the New Deal",
+          prompt: doc("Two views of the New Deal", `<p><b>Supporters said:</b> It saved people from hunger, put millions to work (the WPA, run by Iowan Harry Hopkins, alone employed about 8.5 million), and made banks safe.</p><p><b>Critics said:</b> It made the federal government too big, ran up debt, and told businesses and farmers what to do. In the 1930s, Hoover himself warned it was a threat to freedom.</p>`) + "Which is a criticism some Americans made of the New Deal?",
+          options: ["It made the federal government too big and costly", "It did nothing at all for farmers or for banks in trouble", "It was run only by Iowa's state government", "It ended the Depression too quickly to plan"],
+          hint: "Reread what critics said.", why: "Critics, including Hoover, argued the New Deal grew government too much. People still debate this today." },
+        { type: "q", id: "n6", std: "US.27", short: "Biggest Hoover vs. FDR difference",
+          prompt: "Hoover and FDR both wanted to end the Depression. What was the BIGGEST difference between them?",
+          options: ["How much direct help the federal government gave people", "Whether the Depression was really a serious problem at all", "Whether Iowa farmers should be allowed to vote", "Whether the U.S. should get into World War I"],
+          hint: "Think about \"direct relief.\" Who refused it, and who gave it?", why: "Hoover relied on voluntary and local help. FDR used the federal government to help people directly." }
+      ] }
+  ],
+  finale: {
+    title: "Which Response Fit the Crisis?",
+    report: st => `<p><b>The Brenners' stability meter ended at ${st.fx.home}/10.</b> Three Iowans shaped how America answered the Depression: Hoover from West Branch, and New Dealers Henry Wallace and Harry Hopkins.</p><p>Answer both in 1–2 full sentences.</p>`,
+    prompts: [
+      { id: "fit", short: "Hoover or FDR: which fit the crisis better?", label: "1. Whose response fit the crisis better: Hoover's or FDR's? Use one program or event from today as evidence.", stem: "I think ___'s response fit better because ___. For example, ___.", min: 80, mustAll: [["hoover", "fdr", "roosevelt", "new deal"], ["because", "since"]], mustMsg: "In answer 1, name Hoover or FDR and explain why (use \"because\")." },
+      { id: "iowan", short: "One Iowan's contribution", label: "2. Pick one Iowan: Herbert Hoover, Henry Wallace, or Harry Hopkins. How did they try to help people during hard times?", stem: "___ tried to help people by ___.", min: 60, newWords: 5, mustAll: [["hoover", "wallace", "hopkins"], ["help", "food", "farm", "job", "work", "relief", "price", "hungry", "starv"]], mustMsg: "In answer 2, name Hoover, Wallace, or Hopkins and say how they helped (food, farms, jobs, or relief)." }
+    ]
+  },
+  extraAnswers: st => ({ "Family stability meter": st.fx.home + " of 10" })
+});
+
+</script>
+</body></html>

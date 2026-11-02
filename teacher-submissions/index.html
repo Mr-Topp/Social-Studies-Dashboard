@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
 <title>Teacher Dashboard · All Classes</title>
-<script src="../shared/assignments.js?v=20261101gov3"></script>
+<script src="../shared/assignments.js?v=20261101fill"></script>
 <script src="presentations.js?v=20261101gov3"></script>
 <script src="../shared/turnin.js?v=20261031t"></script>
 <style>
@@ -307,9 +307,11 @@ function attentionHtml(list) {
 }
 
 const UNITS = window.CLASS_UNITS || {}, UNIT_WORD = { civics: "Friday" };
-const unitOf = id => (REG[id] && REG[id].unit) || 0;
+// Part 1 units get keys below zero (Unit 1 = -99), so they sort first and never mix with Part 2 units of the same number.
+const unitOf = id => { const r = REG[id]; if (!r || !r.unit) return 0; return r.part === 1 ? r.unit - 100 : r.unit; };
 const dayOf = id => (REG[id] && REG[id].day) || 99;
-const unitName = (course, u) => u ? (UNIT_WORD[course] || "Unit") + " " + u + (UNITS[course] && UNITS[course][u] ? " · " + UNITS[course][u] : "") : "Other activities";
+const UNITS_P1 = window.CLASS_UNITS_PART1 || {};
+const unitName = (course, u) => u < 0 ? "Part 1 · Unit " + (u + 100) + (UNITS_P1[course] && UNITS_P1[course][u + 100] ? " · " + UNITS_P1[course][u + 100] : "") : u ? (UNIT_WORD[course] || "Unit") + " " + u + (UNITS[course] && UNITS[course][u] ? " · " + UNITS[course][u] : "") : "Other activities";
 function sortIds(ids) {
   const order = Object.keys(REG);
   return ids.slice().sort((a, b) => ((unitOf(a) || 999) - (unitOf(b) || 999)) || (dayOf(a) - dayOf(b)) || ((order.indexOf(a) + 1 || 999) - (order.indexOf(b) + 1 || 999)));
@@ -395,7 +397,7 @@ function linksHtml() {
 
   // Current units (Part 2 when the class has a Part 1).
   const decks = allDecks.filter(p => p.part !== 1);
-  const groups = byUnit(acts, tab);
+  const groups = byUnit(acts.filter(id => REG[id].part !== 1), tab);
   decks.forEach(p => { const u = p.unit || 0; if (!groups.find(x => x.unit === u)) groups.push({ unit: u, name: unitName(tab, u), ids: [] }); });
   groups.sort((a, b) => (a.unit || 999) - (b.unit || 999));
   const current = groups.map(g => unitBlock(tab + "|" + g.unit, g.name, g.ids, decks.filter(p => (p.unit || 0) === g.unit))).join("");
@@ -404,7 +406,7 @@ function linksHtml() {
   // Part 1 first (the order you teach it), then Part 2. Every Part 1 unit is listed, built or not.
   const part1 = allDecks.filter(p => p.part === 1);
   const p1units = [...new Set([...Object.keys(P1).map(Number), ...part1.map(p => p.unit || 0)])].sort((a, b) => (a || 999) - (b || 999));
-  const p1html = p1units.map(u => unitBlock(tab + "|p1|" + u, u ? "Unit " + u + (P1[u] ? " · " + P1[u] : "") : "Other", [], part1.filter(p => (p.unit || 0) === u))).join("");
+  const p1html = p1units.map(u => unitBlock(tab + "|p1|" + u, u ? "Unit " + u + (P1[u] ? " · " + P1[u] : "") : "Other", sortIds(acts.filter(id => REG[id].part === 1 && (REG[id].unit || 0) === u)), part1.filter(p => (p.unit || 0) === u))).join("");
   return legend + `<div class="parthead">Part 1</div>${p1html}<div class="parthead">Part 2</div>${current}`;
 }
 

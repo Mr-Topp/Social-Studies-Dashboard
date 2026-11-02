@@ -1,0 +1,193 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Votes for Women | U.S. History Unit 4 Day 6</title>
+<meta name="description" content="Advise the woman suffrage movement from Seneca Falls to the 19th Amendment and pick between Catt's and Paul's strategies.">
+<style>
+:root{--ink:#1f2b33;--muted:#55626b;--paper:#f6f4f7;--card:#fff;--line:#dad9cf;--teal:#5b2a6e;--coral:#a07a10;--green:#2a6b45;--bad:#a2392f;--soft:#f1eaf4}
+*{box-sizing:border-box}
+html,body{overflow-x:hidden}
+body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.5 system-ui,Segoe UI,Arial,sans-serif}
+header{background:linear-gradient(90deg,#efe6f3,#f8f1dc);border-bottom:5px solid var(--teal);padding:16px max(16px,calc((100vw - 900px)/2)) 12px}
+.k{font-size:.78rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:var(--teal);margin:0}
+h1{margin:2px 0 4px;font-size:clamp(1.7rem,3.4vw,2.3rem)}
+.std{margin:2px 0;font-size:.92rem;color:var(--muted)}.std b{color:var(--ink)}
+.hud{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line);padding:8px max(16px,calc((100vw - 900px)/2));display:flex;gap:10px;flex-wrap:wrap;align-items:center;font-weight:800;font-size:.92rem;box-shadow:0 2px 8px #1f2b3312}
+.hud .bar{flex:1;min-width:100px;height:10px;background:#e6e6de;border-radius:9px;overflow:hidden}.hud .bar span{display:block;height:100%;width:0;background:var(--teal);transition:width .4s}
+.pill{background:#f0efe8;border-radius:20px;padding:3px 10px;white-space:nowrap}
+.meter{display:flex;align-items:center;gap:6px}.meter .track{width:100px;height:10px;border-radius:9px;background:#e6e6de;overflow:hidden}.meter .track span{display:block;height:100%;background:var(--coral);transition:width .5s}
+main{max-width:900px;margin:auto;padding:14px 16px 60px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;box-shadow:0 3px 12px #1f2b330d}
+.kicker{font-size:.78rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:var(--coral);margin:0}
+h2{margin:2px 0 10px;font-size:1.45rem}
+.teach{background:var(--soft);border-left:5px solid var(--teal);border-radius:9px;padding:10px 14px;margin:0 0 12px}.teach p{margin:4px 0}.teach b{color:var(--teal)}
+.block{margin:14px 0;padding:14px;border-radius:12px;border:2px solid var(--line);background:#fff}
+.block.current{border-color:var(--ink);box-shadow:0 0 0 4px #1f2b3320}
+.block h3{margin:0 0 10px;font-size:1.06rem;line-height:1.35;font-weight:700}
+.block p{margin:6px 0}
+.event{background:#fbf9f4;border-style:dashed;border-color:#cdbf9a}.event.current{border-style:solid}
+.event-body p{margin:4px 0}
+.doc{background:#fbf6ea;border:1px solid #e0d3b0;border-left:5px solid var(--coral);border-radius:9px;padding:10px 12px;margin:4px 0 10px}
+.doc .cap{display:block;font-size:.74rem;font-weight:900;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:2px}
+.doc q,.quote{font-style:italic}
+.doc p{margin:4px 0}
+.tablewrap{overflow-x:auto;margin:6px 0 10px}
+table{border-collapse:collapse;width:100%;font-size:.92rem;background:#fff}
+th,td{border:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}th{background:var(--soft)}
+.picked{margin:10px 0 4px;color:var(--muted)}.result{background:#f0efe8;border-radius:9px;padding:9px 12px}.result p{margin:4px 0}
+.tag{display:inline-block;font-weight:900;font-size:.8rem;border-radius:12px;padding:2px 9px;margin-right:6px}.tag.up{background:#dcefe2;color:var(--green)}.tag.down{background:#f6dcd8;color:var(--bad)}.tag.flat{background:#ebe9e0;color:var(--ink)}
+.qlabel{font-size:.75rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:var(--teal);margin:0 0 4px}
+.choices{display:grid;gap:8px}
+@media(min-width:700px){.q .choices{grid-template-columns:1fr 1fr}}
+button{font:inherit;cursor:pointer;border-radius:10px;min-height:46px}
+.choice{text-align:left;background:#fff;color:var(--ink);border:2px solid #cfcdbf;padding:10px 12px;font-weight:650;line-height:1.3}
+.choice:hover:not(:disabled){border-color:var(--ink);background:#fcfcfa}.choice:disabled{opacity:.5;cursor:not-allowed}
+.go{margin-top:12px;background:var(--teal);color:#fff;border:0;padding:11px 18px;font-weight:900}
+button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid #2f7dbd;outline-offset:2px}
+.answered{font-weight:800;color:var(--green);margin:4px 0}.why{margin:2px 0;color:var(--muted)}
+.msg{min-height:1.3em;font-weight:750;margin:8px 0 0}.msg.bad{color:var(--bad)}.msg.good{color:var(--green)}
+label{display:block;font-weight:850;margin:14px 0 4px}.stem{margin:0 0 4px;color:var(--muted);font-size:.92rem}
+input,textarea{width:100%;font:inherit;border:2px solid #cfcdbf;border-radius:9px;padding:10px;background:#fff;color:var(--ink)}
+.steps{display:grid;gap:6px;margin:10px 0;padding:0;list-style:none}.steps li{background:#f0efe8;border-radius:9px;padding:8px 12px;font-weight:700}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 0}.pair>div{border-radius:10px;padding:8px 10px;font-size:.93rem;background:var(--soft)}.pair>div>b:first-child{display:block}
+.block h3 .doc,.block h3 .pair,.block h3 .tablewrap{font-weight:400;font-size:1rem}.block h3 .doc b,.block h3 .pair b{font-weight:800}
+@media(max-width:640px){.pair{grid-template-columns:1fr}}
+.welcome{background:#e6f1ea;color:var(--green);font-weight:800;border-radius:9px;padding:8px 12px;margin:0 0 10px}
+.foot{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-top:14px;color:var(--muted);font-size:.85rem}
+.foot button{background:#ebe9e0;border:0;padding:8px 12px;font-weight:800;color:var(--ink)}
+.src{font-size:.8rem;color:var(--muted)}
+.big{font-size:1.15rem}
+@media print{.hud,.foot,.go{display:none}}
+</style>
+<script src="../../shared/assignments.js?v=20261101fill"></script>
+<script src="../../shared/turnin.js?v=20261101fill"></script>
+<script src="../../shared/unit-game.js?v=20261101fill"></script>
+</head><body>
+<header>
+  <p class="k">U.S. History · Part 1 · Unit 4 · Day 6</p>
+  <h1>Suffrage: How Did Women Win the Vote?</h1>
+  <p class="std"><b>SS.9-12.US.15</b> Social movements and reform (including reactionary movements) &nbsp;<b>SS.9-12.US.18</b> Civic virtue and contributions of individuals</p>
+  <p class="std"><b>Goal:</b> Explain the strategies, opponents, and people that won the 19th Amendment, and who was still left out. · About 25 minutes.</p>
+</header>
+<div class="hud" aria-label="Progress">
+  <span id="progressText">0 checks done</span>
+  <div class="bar" aria-hidden="true"><span id="progressFill"></span></div>
+  <span class="pill meter">Momentum: <span class="track" aria-hidden="true"><span id="meterFill" style="width:30%"></span></span> <span id="meterNum">3/10</span></span>
+</div>
+<main>
+  <p class="welcome" id="welcome" hidden></p>
+  <div id="app"></div>
+  <div class="foot"><span>Progress saves on this device. Your teacher sees your work after you turn it in.</span><button type="button" id="restartBtn">Start over</button></div>
+</main>
+<script>
+const T = (cls, txt) => `<span class="tag ${cls}">${txt}</span>`;
+const doc = (cap, body) => `<div class="doc"><span class="cap">${cap}</span>${body}</div>`;
+UnitGame.start({
+  key: "ush-p1u4-d6-suffrage-v1",
+  assignmentId: "ush-p1u4-d6-suffrage",
+  title: "U.S. History · Unit 4 · Day 6 · Suffrage: How Did Women Win the Vote?",
+  standard: "SS.9-12.US.15, SS.9-12.US.18",
+  oldApi: "https://fynn-class-assignment-submissions-20261024.neotboy.chatgpt.site/api/submit",
+  startFx: { push: 3 },
+  clampFx: fx => { fx.push = Math.max(0, Math.min(10, fx.push)); },
+  hud: st => {
+    const s = st.fx.push || 0;
+    document.getElementById("meterFill").style.width = (s * 10) + "%";
+    document.getElementById("meterNum").textContent = s + "/10";
+  },
+  startLabel: "Open the movement's files",
+  introHtml: `<p class="kicker">72 years · 1848 to 1920</p><h2>Votes for Women: The Strategy Room</h2>
+    <p><b>Suffrage</b> means the right to vote. For most of U.S. history, women could not vote. It took 72 years of work to change the Constitution.</p>
+    <div class="pair"><div><b>Your role</b>You're an adviser to the suffrage movement. You'll read the movement's files and make calls at key moments.</div><div><b>Your meter</b>The <b>Momentum</b> meter shows how much your advice pushes the movement forward.</div></div>
+    <ul class="steps"><li>1. Read each source and answer the check.</li><li>2. Make 2 big strategy calls.</li><li>3. Write 2 short answers and turn in.</li></ul>
+    <p class="src">You are a made-up character. The people, dates, and quotes are real.</p>`,
+  scenes: [
+    { kicker: "Part 1 of 3 · 1848–1870", title: "Where It Started",
+      teach: `<p>A <b>suffragist</b> is a person who works for women's right to vote.</p>
+        <p>An <b>amendment</b> is a change to the Constitution. It needs a two-thirds vote in both houses of Congress, then approval from <b>three-fourths of the states</b>. In 1920, that meant <b>36 of 48 states</b>.</p>`,
+      blocks: [
+        { type: "q", id: "f1", std: "US.15", short: "Declaration of Sentiments echoes Declaration of Independence", label: "Source check",
+          prompt: doc("Declaration of Sentiments · Seneca Falls, New York, 1848", `<p>Written mainly by <b>Elizabeth Cady Stanton</b>. About 300 people came to the meeting, led by Stanton and <b>Lucretia Mott</b>.</p><p class="quote">"We hold these truths to be self-evident: that all men and women are created equal…"</p>`) + "Which famous document did the Declaration of Sentiments copy and change?",
+          options: ["The Declaration of Independence", "The Bill of Rights", "Lincoln's Emancipation Proclamation", "The Articles of Confederation"],
+          hint: "Which document first said \"all men are created equal\"?", why: "Stanton borrowed the Declaration of Independence's words and added \"and women\" to make her point." },
+        { type: "note", html: `<p><b>The 15th Amendment (ratified 1870)</b> said the right to vote can't be denied because of race. In practice, it protected <b>Black men</b> only. Women of every race were still left out. This split the reformers, who had worked together to end slavery.</p>` +
+          doc("Frederick Douglass, 1869", `<p class="quote">"When women, because they are women, are… dragged from their houses and hung upon lamp-posts… then they will have an urgency to obtain the ballot equal to our own."</p>`) +
+          doc("Sojourner Truth, 1867", `<p class="quote">"There is a great stir about colored men getting their rights, but not a word about the colored women…"</p>`) },
+        { type: "q", id: "f2", std: "US.15", short: "Douglass: urgency for Black men",
+          prompt: "Douglass supported women's suffrage. Why did he still back the 15th Amendment first?",
+          options: ["Black men faced deadly violence and needed the vote now", "He believed women should never be allowed to vote", "He thought most women could already vote in their states by 1869", "He wanted to stop Stanton from running for office"],
+          hint: "Reread Douglass's quote. What was happening to Black men?", why: "Douglass argued that Black men were being attacked and killed, so their need for the vote was more urgent." },
+        { type: "q", id: "f3", std: "US.15", short: "Truth: Black women left out",
+          prompt: "What was Sojourner Truth's point?",
+          options: ["Black women were being left out of the debate", "Black men did not deserve the right to vote", "Women should wait until slavery had fully ended everywhere", "The 15th Amendment gave Black women the vote"],
+          hint: "Who did she say nobody was talking about?", why: "Truth pointed out that Black women were ignored by both sides of the argument." }
+      ] },
+    { kicker: "Part 2 of 3 · 1870–1916", title: "The Long Fight",
+      teach: `<p>In 1890, two suffrage groups joined to form <b>NAWSA</b> (National American Woman Suffrage Association). It used two paths: win the vote <b>state by state</b>, and push Congress for a <b>constitutional amendment</b>. The amendment was first introduced in 1878, but the Senate kept blocking it.</p>`,
+      blocks: [
+        { type: "q", id: "m1", std: "US.15", short: "Western states first",
+          prompt: doc("States where women had full voting rights by 1914", `<p>Wyoming · Colorado · Utah · Idaho · Washington · California · Oregon · Kansas · Arizona · Nevada · Montana</p>`) + "What pattern do you see?",
+          options: ["Most were Western states", "Most were Southern states", "Most were New England states", "Most were original colonies"],
+          hint: "Picture a map. Where are Wyoming, Colorado, and California?", why: "The West went first. Newer Western states needed settlers and had fewer old traditions blocking change." },
+        { type: "q", id: "m2", std: "US.15", short: "Anti-suffragists: reactionary movement",
+          prompt: doc("The other side: anti-suffragists", `<p>Many people who fought AGAINST women voting were women. They argued women belonged at home, were too emotional for politics, or would lose their \"feminine\" nature.</p><p>A pro-suffrage cartoon mocked them with the caption: <span class="quote">"O Save Us, Senators, from Ourselves!"</span></p>`) + "Who is the cartoon making fun of?",
+          options: ["Women who opposed women voting", "Senators who wanted women to vote", "Suffragists who marched in parades", "Men who refused to pay their taxes"],
+          hint: "Read the caption. Who is saying \"save us from ourselves,\" and what are they asking senators to do?", why: "The cartoon mocked anti-suffrage women for asking male senators to protect them from having the vote." },
+        { type: "q", id: "m3", std: "US.15", short: "Iowa 1916 vote shows state path is slow",
+          prompt: doc("Iowa connection", `<p><b>Carrie Chapman Catt</b> grew up in <b>Charles City, Iowa</b>, and graduated from Iowa State in 1880. She became president of NAWSA.</p><p>But in <b>1916</b>, Iowa's male voters <b>narrowly voted down</b> a state amendment to let women vote.</p>`) + "What does Iowa's 1916 vote show about the state-by-state path?",
+          options: ["It was slow, because male voters could say no", "It was quick, because every state agreed", "It was decided by Congress, not by each state", "It didn't need voters, only judges' rulings in court"],
+          hint: "Who got to vote on the Iowa amendment? What did they decide?", why: "In each state, men had to vote to share the vote. Even in Catt's home state, they said no in 1916." },
+        { type: "event", id: "e1", short: "1913 parade: where Black women march", html: `<p><b>March 3, 1913, Washington, D.C.</b> The day before President Wilson takes office, organizer <b>Alice Paul</b> plans a huge parade of about 5,000 marchers.</p><p>Some white Southern members threaten to quit if Black women march with their state groups. Organizers tell Black suffragists, including journalist <b>Ida B. Wells</b>, to march at the back.</p><p>What do you advise?</p>`,
+          choices: [
+            { label: "Let every woman march with her own state group", fx: { push: 2 }, result: `<p>${T("up", "+2 momentum")}You choose fairness inside the movement. In real life, Ida B. Wells refused to go to the back. She stepped into the Illinois group as it marched by.</p>` },
+            { label: "Keep Black marchers at the back to hold on to Southern support", fx: { push: -1 }, result: `<p>${T("down", "−1 momentum")}This is close to what organizers really did. It kept some white Southern members, but it betrayed Black suffragists who had worked just as hard.</p>` },
+            { label: "Cancel the parade to avoid the argument", fx: { push: -2 }, result: `<p>${T("down", "−2 momentum")}In real life the parade went on. Crowds attacked the marchers while police did little, and about 100 people were hurt. The news coverage won the movement new sympathy.</p>` }
+          ] },
+        { type: "q", id: "m4", std: "US.18", short: "Ida B. Wells: civic virtue",
+          prompt: "Ida B. Wells joined the Illinois marchers instead of going to the back. Why is that an example of <b>civic virtue</b> (putting the good of the community and fairness first)?",
+          options: ["She stood up for fairness even in her own movement", "She followed the organizers' orders exactly as told", "She quit the movement to run for a seat in Congress", "She asked the police to end the parade early"],
+          hint: "What rule did she refuse to follow, and why?", why: "Wells refused to accept unfair treatment and stood up for Black women's place in the fight." }
+      ] },
+    { kicker: "Part 3 of 3 · 1917–1920", title: "1917: Pick a Strategy",
+      teach: `<p>Stanton died in 1902 and Susan B. Anthony in 1906. A new generation took over, and it split into two strategies.</p>`,
+      blocks: [
+        { type: "note", html: `<div class="pair"><div><b>Carrie Chapman Catt · NAWSA</b>Her 1916 "Winning Plan": keep winning states AND push Congress at the same time. Stay polite. Support the war effort. Work with President Wilson. NAWSA grew to about 2 million members.</div><div><b>Alice Paul · National Woman's Party</b>Focus only on the amendment. Starting January 1917, picket (protest with signs) outside the White House every day. Many were arrested and jailed. In jail some went on hunger strike and were <b>force-fed</b>.</div></div>` },
+        { type: "event", id: "e2", short: "1917 strategy pick", html: `<p><b>April 1917.</b> The U.S. has just entered World War I. Some people say protesting the president during a war is disloyal.</p><p>Which strategy do you back?</p>`,
+          choices: [
+            { label: "Catt's plan: win states, stay polite, support the war", fx: { push: 2 }, result: `<p>${T("up", "+2 momentum")}In November 1917, suffragists won in <b>New York</b>, the biggest state. Women's war work also made the \"they can't handle it\" argument look weak.</p>` },
+            { label: "Paul's plan: picket the White House, even in wartime", fx: { push: 2 }, result: `<p>${T("up", "+2 momentum")}The arrests and force-feeding made headlines. Some people called the pickets disloyal, but the harsh treatment won them sympathy and put pressure on Wilson.</p>` },
+            { label: "Pause everything until the war is over", fx: { push: -2 }, result: `<p>${T("down", "−2 momentum")}Many women had paused for the Civil War and still got left out of the 15th Amendment. Neither Catt nor Paul was willing to wait again.</p>` }
+          ] },
+        { type: "q", id: "v1", std: "US.15", short: "Banner: democracy abroad vs. at home", label: "Source check",
+          prompt: doc("National Woman's Party picket banner, 1917", `<p class="quote">"Mr. President, how long must women wait for liberty?"</p><p>That spring, Wilson told Congress the U.S. was going to war so the world would be \"safe for democracy.\"</p>`) + "Why was this banner so powerful during the war?",
+          options: ["Wilson fought for democracy abroad, but women couldn't vote", "Wilson had already promised all women the vote in 1916", "It asked women to stop working in the war factories right away", "It said the U.S. should stay out of the war in Europe"],
+          hint: "Compare the banner to what Wilson said the war was for.", why: "It pointed out the hypocrisy: fighting for democracy overseas while denying half of Americans the vote at home." },
+        { type: "q", id: "v2", std: "US.15", short: "Example of Catt's approach",
+          prompt: "Which action is an example of <b>Catt's</b> approach?",
+          options: ["Winning the New York state vote in 1917", "Picketing outside the White House gates", "Going on a hunger strike while in jail", "Holding signs that criticized the president"],
+          hint: "Catt worked through states and stayed polite. Paul protested in public.", why: "Catt's Winning Plan included big state wins like New York. The other three were Paul's tactics." },
+        { type: "note", html: doc("How it ended", `<p>In January 1918, Wilson came out for the amendment. Later that year, he told the Senate it was a war measure. Congress finally passed it in <b>June 1919</b>. Iowa ratified it on July 2, 1919.</p>
+          <p>On <b>August 18, 1920</b>, <b>Tennessee</b> became the 36th state to <b>ratify</b> (approve) it. A 24-year-old lawmaker, <b>Harry Burn</b>, changed his vote to yes after his mother wrote him a letter asking him to.</p>
+          <p><b>19th Amendment:</b> <span class="quote">"The right of citizens of the United States to vote shall not be denied or abridged by the United States or by any State on account of sex."</span> <span class="src">(abridged = limited)</span></p>`) },
+        { type: "q", id: "v3", std: "US.15", short: "Tennessee was the 36th state",
+          prompt: "Why did Tennessee's vote matter so much?",
+          options: ["It was the 36th state, the last one needed", "It was the very first state to let women vote in elections", "It was the state where Catt was born", "It was the only state that voted no"],
+          hint: "How many states did the amendment need? Check the box at the top of Part 1.", why: "Three-fourths of 48 states is 36. Tennessee put the amendment over the line." },
+        { type: "q", id: "v4", std: "US.15", short: "19th Amendment didn't end all barriers",
+          prompt: doc("After 1920", `<p>In the South, most Black women (and men) were still kept from voting by <b>poll taxes</b>, <b>literacy tests</b>, and violence. Many Native American women could not vote because the U.S. did not make all Native Americans citizens until 1924.</p>`) + "What does this show?",
+          options: ["The 19th Amendment didn't end every barrier", "The 19th Amendment let every adult vote at once", "Southern states welcomed all new women voters", "Native American women voted first, in 1920"],
+          hint: "Who still couldn't vote after 1920, and why?", why: "The 19th Amendment banned sex discrimination in voting, but other barriers kept many women of color from voting for decades." }
+      ] }
+  ],
+  finale: {
+    title: "How Did Women Win the Vote?",
+    report: st => `<p><b>Your momentum meter ended at ${st.fx.push}/10.</b> Most historians say both strategies mattered: Catt's state wins built pressure from below, and Paul's protests kept the issue in the headlines.</p><p>Answer both in 1–2 full sentences.</p>`,
+    prompts: [
+      { id: "strategy", short: "Catt or Paul: which did more?", label: "1. Whose strategy did more to win the vote: Catt's or Paul's? Use one piece of evidence from today.", stem: "I think ___'s strategy did more because ___.", min: 70, mustAll: [["catt", "paul"], ["because", "since"]], mustMsg: "In answer 1, name Catt or Paul and explain why (use \"because\")." },
+      { id: "virtue", short: "One person's civic virtue", label: "2. Pick one person: Stanton, Sojourner Truth, Ida B. Wells, Catt, Alice Paul, or Harry Burn. How did they show civic virtue?", stem: "___ showed civic virtue when they ___. This mattered because ___.", min: 70, mustAll: [["stanton", "truth", "wells", "catt", "paul", "burn"], ["because", "since", "when", "by "]], mustMsg: "In answer 2, name one person from the list and say what they did." }
+    ]
+  },
+  extraAnswers: st => ({ "Momentum meter": st.fx.push + " of 10" })
+});
+
+</script>
+</body></html>

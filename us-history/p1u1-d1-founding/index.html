@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Rider: Who Was Included in the Promise? | U.S. History Unit 1 Day 1</title>
+<meta name="description" content="Carry the Declaration of Independence to a crossroads town in July 1776. Sort its ideas, hear four colonists' views, and ask who the promise left out.">
+<style>
+:root{--ink:#1f2b33;--muted:#55626b;--paper:#f6f3ec;--card:#fff;--line:#dcd5c4;--acc:#2a4f7a;--acc2:#9b3a2c;--soft:#eef2f7;--green:#2a6b45;--bad:#a2392f;--parch:#fbf5e6;--parchline:#e2d3ad}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.5 system-ui,Segoe UI,Arial,sans-serif}
+header{background:linear-gradient(100deg,#eef2f7 0 60%,#f7ebe6 60% 100%);border-bottom:5px solid var(--acc);padding:16px max(16px,calc((100vw - 900px)/2)) 12px}
+.k{font-size:.78rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:var(--acc);margin:0}
+h1{margin:2px 0 4px;font-size:clamp(1.6rem,3.4vw,2.3rem)}
+.std{margin:2px 0;font-size:.92rem;color:var(--muted)}.std b{color:var(--ink)}
+.hud{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line);padding:8px max(16px,calc((100vw - 900px)/2));display:flex;gap:12px;flex-wrap:wrap;align-items:center;font-weight:800;font-size:.92rem;box-shadow:0 2px 8px #1f2b3312}
+.hud .bar{flex:1;min-width:120px;height:10px;background:#e6e3da;border-radius:9px;overflow:hidden}.hud .bar span{display:block;height:100%;width:0;background:var(--acc);transition:width .4s}
+.pill{background:#f0ede4;border-radius:20px;padding:3px 10px;white-space:nowrap}
+.meter{display:flex;align-items:center;gap:6px}.meter .track{width:110px;height:10px;border-radius:9px;background:#e6e3da;overflow:hidden}.meter .track span{display:block;height:100%;background:var(--acc2);transition:width .5s}
+main{max-width:900px;margin:auto;padding:14px 16px 60px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;box-shadow:0 3px 12px #1f2b330d}
+.kicker{font-size:.78rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:var(--acc2);margin:0}
+h2{margin:2px 0 10px;font-size:1.45rem}
+.teach{background:var(--soft);border-left:5px solid var(--acc);border-radius:9px;padding:10px 14px;margin:0 0 12px}.teach p{margin:4px 0}.teach b{color:var(--acc)}
+.block{margin:14px 0;padding:14px;border-radius:12px;border:2px solid var(--line);background:#fff}
+.block.current{border-color:var(--ink);box-shadow:0 0 0 4px #2a4f7a30}
+.block h3{margin:0 0 10px;font-size:1.06rem;line-height:1.35;font-weight:700}
+.event{background:#fbf9f4;border-style:dashed;border-color:#cdbf9a}.event.current{border-style:solid}
+.event-body p{margin:4px 0}
+.srccard{background:var(--parch);border:1px solid var(--parchline);border-left:5px solid #b8975a;border-radius:10px;padding:9px 12px;margin:0 0 10px;font-weight:400}
+.srccard .who{font-size:.75rem;font-weight:900;letter-spacing:.06em;text-transform:uppercase;color:#7a5c26;margin-bottom:3px}
+.srccard q,.srccard .quote{font-family:Georgia,"Times New Roman",serif;font-style:italic}
+.srccard p{margin:3px 0}
+.voices{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:8px 0}.voices div{background:#fff;border:1px solid var(--line);border-radius:9px;padding:7px 10px;font-size:.93rem}.voices b{display:block;color:var(--acc)}
+.picked{margin:10px 0 4px;color:var(--muted)}.result{background:#f0ede4;border-radius:9px;padding:9px 12px}.result p{margin:4px 0}
+.tag{display:inline-block;font-weight:900;font-size:.8rem;border-radius:12px;padding:2px 9px;margin-right:6px}.tag.up{background:#dcefe2;color:var(--green)}.tag.down{background:#f6dcd8;color:var(--bad)}.tag.flat{background:#ebe9e0;color:var(--ink)}
+.choices{display:grid;gap:8px}
+@media(min-width:700px){.q .choices{grid-template-columns:1fr 1fr}}
+button{font:inherit;cursor:pointer;border-radius:10px;min-height:46px}
+.choice{text-align:left;background:#fff;color:var(--ink);border:2px solid #cfcab9;padding:10px 12px;font-weight:650;line-height:1.3}
+.choice:hover:not(:disabled){border-color:var(--ink);background:#fcfcfa}.choice:disabled{opacity:.5;cursor:not-allowed}
+.go{margin-top:12px;background:var(--acc);color:#fff;border:0;padding:11px 18px;font-weight:900}
+button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid #2f7dbd;outline-offset:2px}
+.answered{font-weight:800;color:var(--green);margin:4px 0}.why{margin:2px 0;color:var(--muted)}
+.msg{min-height:1.3em;font-weight:750;margin:8px 0 0}.msg.bad{color:var(--bad)}.msg.good{color:var(--green)}
+label{display:block;font-weight:850;margin:14px 0 4px}.stem{margin:0 0 4px;color:var(--muted);font-size:.92rem}
+input,textarea{width:100%;font:inherit;border:2px solid #cfcab9;border-radius:9px;padding:10px;background:#fff;color:var(--ink)}
+.steps{display:grid;gap:6px;margin:10px 0;padding:0;list-style:none}.steps li{background:#f0ede4;border-radius:9px;padding:8px 12px;font-weight:700}
+.welcome{background:#e6f1ea;color:var(--green);font-weight:800;border-radius:9px;padding:8px 12px;margin:0 0 10px}
+.foot{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-top:14px;color:var(--muted);font-size:.85rem}
+.foot button{background:#ebe9e0;border:0;padding:8px 12px;font-weight:800;color:var(--ink)}
+.src{font-size:.8rem;color:var(--muted)}
+@media(max-width:640px){.voices{grid-template-columns:1fr}}
+@media(max-width:420px){.meter .track{width:70px}}
+@media print{.hud,.foot,.go{display:none}}
+</style>
+<script src="../../shared/assignments.js?v=20261101fill"></script>
+<script src="../../shared/turnin.js?v=20261101fill"></script>
+<script src="../../shared/unit-game.js?v=20261101fill"></script>
+</head><body>
+<header>
+  <p class="k">U.S. History · Part 1 · Unit 1 · Day 1</p>
+  <h1>The Rider: Who Was Included in the Promise?</h1>
+  <p class="std"><b>SS.9-12.US.2</b> Analyze ideas in founding documents using primary and secondary sources. &nbsp;<b>SS.9-12.US.1</b> Analyze change, continuity, and context of American citizenship, 1776–1870.</p>
+  <p class="std"><b>Goal:</b> Explain why the colonies broke from Britain, what the Declaration of Independence argued, and who its promise left out. · About 25 minutes.</p>
+</header>
+<div class="hud" aria-label="Progress and town meter">
+  <span id="progressText">0 checks done</span>
+  <div class="bar" aria-hidden="true"><span id="progressFill"></span></div>
+  <span class="pill meter">Town listening: <span class="track" aria-hidden="true"><span id="meterFill" style="width:40%"></span></span> <span id="meterNum">4/10</span></span>
+</div>
+<main>
+  <p class="welcome" id="welcome" hidden></p>
+  <div id="app"></div>
+  <div class="foot"><span>Progress saves on this device. Your teacher sees your work after you turn it in.</span><button type="button" id="restartBtn">Start over</button></div>
+</main>
+<script>
+const T = (cls, txt) => `<span class="tag ${cls}">${txt}</span>`;
+const SRC = (who, body) => `<div class="srccard"><div class="who">${who}</div>${body}</div>`;
+const SORT = ["Principle (a big idea about rights)", "Grievance (a complaint against the king)", "Decision (the colonies break away)", "Law (a rule passed by the British Parliament)"];
+UnitGame.start({
+  key: "ush-p1u1-d1-founding-v1",
+  assignmentId: "ush-p1u1-d1-founding",
+  title: "U.S. History · Unit 1 · Day 1 · The Rider: Who Was Included in the Promise?",
+  standard: "SS.9-12.US.2, SS.9-12.US.1",
+  oldApi: "https://fynn-class-assignment-submissions-20261024.neotboy.chatgpt.site/api/submit",
+  startFx: { town: 4 },
+  clampFx: fx => { fx.town = Math.max(0, Math.min(10, fx.town)); },
+  hud: st => {
+    const v = st.fx.town || 0;
+    document.getElementById("meterFill").style.width = (v * 10) + "%";
+    document.getElementById("meterNum").textContent = v + "/10";
+  },
+  startLabel: "Grab the Declaration",
+  introHtml: `<p class="kicker">July 1776 · Philadelphia</p><h2>You're the rider</h2>
+    <p>The ink is still wet. Congress just approved the <b>Declaration of Independence</b>. Printers made copies, and riders carried them to towns to be read out loud.</p>
+    <p>You'll carry one copy to a small crossroads town. Some people there love the idea. Some hate it. Some just want to be left alone.</p>
+    <ul class="steps"><li>1. Read the short source cards and answer the checks.</li><li>2. Make choices at the town. They move the "Town listening" meter.</li><li>3. Write 2 short answers and turn in.</li></ul>
+    <p class="src">You and the town are made up. The events, people, and quotes from 1776 are real.</p>`,
+  scenes: [
+    { kicker: "Part 1 of 3 · Before July 1776", title: "Why Break Away?",
+      teach: `<p>Britain won the <b>French and Indian War</b> in 1763, but the war left it deep in debt. So <b>Parliament</b> (Britain's law-making body) taxed the colonies.</p>
+        <p>Colonists elected no one to Parliament. They had no <b>representation</b>, meaning no one they chose to speak for them. Anger grew with each new law.</p>`,
+      blocks: [
+        { type: "q", id: "a1", std: "US.2", short: "Why Britain taxed the colonies", prompt: SRC("British view, 1760s", `<p>The war in North America cost a fortune. British soldiers still guard the colonies. Leaders in London say the colonists should help pay for that protection.</p>`) + "Why did Parliament start taxing the colonies?", options: ["To pay off debt from the French and Indian War", "To punish the colonies for the Boston Tea Party", "To pay for a colonial army led by Washington", "To buy western land from Native nations"], hint: "Reread what the British view says the money is for.", why: "Britain was in debt from the French and Indian War and wanted the colonies to share the cost. The Tea Party came later, in 1773." },
+        { type: "q", id: "a2", std: "US.2", short: "\"No taxation without representation\"", prompt: SRC("How trust broke down", `<p><b>1765 Stamp Act:</b> a tax on newspapers, legal papers, even playing cards.<br><b>1770 Boston Massacre:</b> British soldiers fire into a crowd. Five colonists die.<br><b>1773 Boston Tea Party:</b> protesters dump British tea into the harbor.<br><b>1774 Intolerable Acts:</b> Britain closes Boston's harbor as punishment.</p>`) + "Patriots shouted, \"No taxation without representation.\" What was their complaint?", options: ["Parliament taxed them, but they elected no one to it", "Parliament's taxes were higher than taxes in Britain", "The king taxed them without asking Parliament first", "Their own colonies refused to collect any taxes"], hint: "Look at the word \"representation\" in the teach box.", why: "Colonists said only their own elected assemblies should tax them. They had no members in Parliament." },
+        { type: "event", id: "e1", short: "Arriving at the tavern", html: `<p><b>You ride into town.</b> The tavern is packed. You can feel the tension. Some people wear Patriot ribbons. A shopkeeper glares at you. A farmer near the door looks nervous.</p><p>How do you start?</p>`,
+          choices: [
+            { label: "Ask people what worries them before you read", fx: { town: 2 }, result: `<p>${T("up","+2 listening")}People talk: taxes, soldiers, trade, crops. Now they want to hear what Congress said about it.</p>` },
+            { label: "Shout that anyone loyal to the king is a traitor", fx: { town: -2 }, result: `<p>${T("down","−2 listening")}The shopkeeper storms out. Two farmers follow him. A divided town tunes you out.</p>` },
+            { label: "Nail the paper to the door and leave fast", fx: {}, result: `<p>${T("flat","No change")}A few people read it. Most can't read well or don't bother. The news spreads slowly.</p>` }
+          ] },
+        { type: "q", id: "a3", std: "US.2", short: "Farmer's quote = neutral", prompt: `<div class="voices"><div><b>Patriot blacksmith</b>"No taxation without representation!"</div><div><b>Loyalist shopkeeper</b>"British ships protect my trade. Why throw that away?"</div><div><b>Farmer by the door</b>"I do not want either army to take my crops."</div><div><b>Enslaved man, listening</b>"They shout about liberty. I am still not free."</div></div>` + "Colonists split into Patriots, Loyalists, and neutrals. Which group is the farmer in?", options: ["Neutral", "Patriot", "Loyalist", "Parliament"], hint: "Is the farmer picking a side, or trying to stay out of it?", why: "Neutrals wanted to avoid the war. Armies on both sides often took food from farms." },
+        { type: "q", id: "a4", std: "US.2", short: "Why Loyalists stayed loyal", prompt: "Reread the Loyalist shopkeeper's words above. Why did many Loyalists want to stay in the British Empire?", options: ["They valued British protection and trade", "They had elected members in Parliament", "They believed the king would end all taxes", "They planned to move back to England soon"], hint: "What does the shopkeeper say Britain gives him?", why: "Loyalists often depended on British trade and protection, and feared war and chaos." }
+      ] },
+    { kicker: "Part 2 of 3 · July 4, 1776", title: "Declaration Detective",
+      teach: `<p>Congress approved the Declaration on <b>July 4, 1776</b>. <b>Thomas Jefferson</b> wrote the first draft, and Congress edited it.</p>
+        <p>Its argument has four steps: (1) people have <b>natural rights</b> they are born with, (2) government gets its power from the <b>consent</b> (permission) of the people, (3) people may <b>alter or abolish</b> (change or get rid of) a government that breaks those rights, and (4) a long list of <b>grievances</b> (complaints) against King George III, ending with the decision to separate.</p>`,
+      blocks: [
+        { type: "q", id: "d1", std: "US.2", short: "Sort: \"all men are created equal\" = principle", prompt: SRC("Declaration of Independence, 1776", `<p class="quote">"We hold these truths to be self-evident, that all men are created equal, that they are endowed by their Creator with certain unalienable Rights, that among these are Life, Liberty and the pursuit of Happiness."</p><p>"Endowed" = given. "Unalienable" = can't be taken away.</p>`) + "Sort this line. What type is it?", options: SORT, hint: "Is it a big idea, a complaint, or the final decision?", why: "It's a principle: a big idea about rights everyone is born with." },
+        { type: "q", id: "d2", std: "US.2", short: "Sort: \"dissolved Representative Houses\" = grievance", prompt: SRC("Declaration of Independence, 1776", `<p class="quote">"He has dissolved Representative Houses repeatedly, for opposing with manly firmness his invasions on the rights of the people."</p><p>"He" = King George III. "Dissolved Representative Houses" = shut down the colonists' elected assemblies.</p>`) + "Sort this line. What type is it?", options: [SORT[1], SORT[0], SORT[2], SORT[3]], hint: "Who is \"he,\" and is this line praising him or blaming him?", why: "It's a grievance: a complaint that the king shut down the colonists' elected assemblies." },
+        { type: "event", id: "e2", short: "Which part to read first", html: `<p><b>The crowd quiets down.</b> You unroll the paper. It's long. You only have their attention for a minute. Which part do you read first?</p>`,
+          choices: [
+            { label: "The grievances, since this town lived through them", fx: { town: 2 }, result: `<p>${T("up","+2 listening")}"He has kept among us, in times of peace, Standing Armies…" People nod. Soldiers were housed in this very town. The complaints feel real.</p>` },
+            { label: "The big idea: \"all men are created equal\"", fx: { town: 1 }, result: `<p>${T("up","+1 listening")}Some people cheer. But in the back, an enslaved man and a woman holding a baby exchange a look. Equal for who?</p>` },
+            { label: "Just the ending: \"Free and Independent States\"", fx: { town: -1 }, result: `<p>${T("down","−1 listening")}People are confused. Why now? Why should they risk a war? Without the reasons, the ending sounds reckless.</p>` }
+          ] },
+        { type: "q", id: "d3", std: "US.2", short: "Sort: \"Free and Independent States\" = decision", prompt: SRC("Declaration of Independence, 1776", `<p class="quote">"…these United Colonies are, and of Right ought to be Free and Independent States…"</p>`) + "Sort this line. What type is it?", options: [SORT[2], SORT[0], SORT[1], SORT[3]], hint: "Look at the words \"Free and Independent.\" What is happening here?", why: "This is the decision: the colonies declare they are now independent states." },
+        { type: "q", id: "d4", std: "US.2", short: "Standing armies grievance breaks consent", prompt: SRC("Declaration of Independence, 1776", `<p class="quote">"He has kept among us, in times of peace, Standing Armies without the Consent of our legislatures."</p>`) + "This grievance shows the king breaking which principle most directly?", options: ["Government by consent of the people", "Freedom to worship as you choose", "The right to travel between colonies", "The right to own a printing press"], hint: "Find the word in the quote that matches one of the four steps in the teach box.", why: "The colonists' elected legislatures never agreed to the soldiers. That breaks government by consent." },
+        { type: "q", id: "d5", std: "US.2", short: "How the Declaration justified independence", prompt: SRC("Declaration of Independence, 1776", `<p class="quote">"…Governments are instituted among Men, deriving their just powers from the consent of the governed, — That whenever any Form of Government becomes destructive of these ends, it is the Right of the People to alter or to abolish it…"</p><p>"Instituted" = set up. "Deriving their just powers from the consent of the governed" = getting their power from the people's permission.</p>`) + "Using this line, how did Congress argue that breaking away was right?", options: ["The king broke their rights, so they could end his rule", "The king was too old, so the colonies needed a new one", "France asked the colonies to leave the British Empire", "Most colonists voted for independence in a special election"], hint: "What may the people do when a government destroys their rights?", why: "The Declaration says people may alter or abolish a government that breaks their rights. The grievances were the proof." }
+      ] },
+    { kicker: "Part 3 of 3 · After the reading", title: "Who Was Included?",
+      teach: `<p><b>"All men are created equal" was not applied equally in 1776.</b></p>
+        <p>About one in five people in the colonies was enslaved. Women could not vote or hold office. Native nations were treated as outsiders or enemies. In most colonies, men who owned no property could not vote.</p>
+        <p>But the words were powerful. Later generations used the Declaration's own words to demand change.</p>`,
+      blocks: [
+        { type: "q", id: "w1", std: "US.1", short: "Abigail Adams: \"Remember the Ladies\"", prompt: SRC("Abigail Adams, letter to her husband John Adams in Congress, March 1776", `<p class="quote">"…in the new Code of Laws which I suppose it will be necessary for you to make I desire you would Remember the Ladies, and be more generous and favourable to them than your ancestors."</p>`) + "What was Abigail Adams asking for?", options: ["That new laws treat women more fairly", "That women be allowed to join the army", "That John Adams come home from Congress", "That Congress lower taxes on families"], hint: "What does she want the \"new Code of Laws\" to do for \"the Ladies\"?", why: "She asked the men writing new laws to treat women more fairly. The new nation did not give women the vote." },
+        { type: "q", id: "w2", std: "US.1", short: "Slave-trade passage cut from the draft", prompt: SRC("The draft vs. the final version", `<p>Jefferson's first draft blamed King George for the slave trade. Congress cut that whole passage. Jefferson later wrote it was cut to please South Carolina and Georgia.</p><p>In 1776, slavery was legal in all 13 colonies. Jefferson himself enslaved more than 600 people over his lifetime.</p>`) + "What does this evidence show?", options: ["Congress avoided slavery to keep slaveholding colonies on board", "Congress ended slavery on the same day it approved the Declaration", "Jefferson's draft promised freedom to every enslaved person in America", "Only the southern colonies allowed slavery when the war began"], hint: "Why did Jefferson say the passage was cut? And what does the card say about slavery in 1776?", why: "Congress chose unity among the colonies over challenging slavery. Liberty was declared while slavery continued everywhere." },
+        { type: "q", id: "w3", std: "US.1", short: "How the Declaration described Native nations", prompt: SRC("Declaration of Independence, 1776 — a grievance", `<p class="quote">"He has… endeavoured to bring on the inhabitants of our frontiers, the merciless Indian Savages…"</p><p>This is the Declaration's own wording, and it is insulting. Context: many Native nations sided with Britain to protect their land from settlers moving west.</p>`) + "What does this line show about how the writers saw Native nations?", options: ["As enemies, not as people the promise covered", "As allies who would help sign the document", "As citizens who had the right to vote", "As neutral groups who stayed out of the war"], hint: "Is this line in the list of rights, or in the list of complaints?", why: "Native nations appear only as a threat in the grievances. The promise of equal rights was not meant for them." },
+        { type: "q", id: "w4", std: "US.1", short: "Property rules for voting", prompt: SRC("Voting rules in most colonies, 1776", `<p>To vote, a man usually had to own land or a certain amount of money. Women, enslaved people, and most men without property could not vote.</p>`) + "Which person could NOT vote in most colonies in 1776?", options: ["A man who worked for wages and owned no land", "A man who owned a 100-acre farm", "A merchant who owned a shop and a brick house in town", "A planter who owned a large estate"], hint: "Check the card: what did a man usually need to own?", why: "Property rules kept many working men from voting. Most states dropped these rules for white men in the early 1800s." },
+        { type: "q", id: "w5", std: "US.1", short: "Later use of the Declaration's words", prompt: SRC("1848 · Declaration of Sentiments, Seneca Falls, New York", `<p class="quote">"We hold these truths to be self-evident: that all men and women are created equal…"</p>`) + SRC("1852 · Frederick Douglass, formerly enslaved, speaking in Rochester, New York", `<p class="quote">"What, to the American slave, is your 4th of July?"</p>`) + "What did these later Americans do with the Declaration?", options: ["Used its own words to demand rights for people left out", "Argued the Declaration should be thrown away for good", "Proved that every American had equal rights by 1850", "Asked Britain to take back control of the country"], hint: "Compare the 1848 line to the 1776 line. What word was added?", why: "Women's rights activists added \"and women.\" Douglass pointed out the gap between the promise and slavery. Both used the Declaration to push for change." }
+      ] }
+  ],
+  finale: {
+    title: "Who Was the Promise For?",
+    report: st => `<p><b>The town ended at ${st.fx.town}/10 listening.</b> Riders who listened first and gave reasons won more support than riders who shouted or skipped the reasons.</p><p>Now answer both in 1–2 full sentences. Use evidence from today.</p>`,
+    prompts: [
+      { id: "left", short: "Who was left out in 1776", label: "1. \"All men are created equal\" was not applied equally in 1776. Name one group that was left out and give one piece of evidence from today.", stem: "In 1776, ___ were left out of the promise. One piece of evidence is ___.", min: 80, newWords: 7, mustAll: [["enslav", "slave", "women", "woman", "native", "indian", "indigenous", "property", "black", "poor", "land"], ["evidence", "because", "shows", "example", "letter", "vote", "draft", "since", "could"]], mustMsg: "In answer 1, name a group (like enslaved people, women, Native nations, or men without property) AND give evidence." },
+      { id: "idea", short: "A central idea that supported independence", label: "2. Pick one big idea from the Declaration (natural rights, consent of the governed, or the right to alter or abolish a government). How did it help the colonists argue for independence?", stem: "One big idea is ___. It helped the colonists argue for independence because ___.", min: 80, newWords: 7, mustAll: [["right", "consent", "equal", "abolish", "alter"], ["because", "since", "so"]], mustMsg: "In answer 2, name the idea (rights, consent, or alter/abolish) AND explain how it helped (use \"because\")." }
+    ]
+  },
+  extraAnswers: st => ({ "Town listening meter": st.fx.town + " of 10" })
+});
+</script>
+</body></html>

@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Hot Take Lab | Sociology Unit 1 Day 5</title>
+<meta name="description" content="Turn a viral hot take into a real study: hypothesis, variables, control group, and correlation vs. causation.">
+<style>
+:root{--ink:#1f2b33;--muted:#55626b;--paper:#f6f5fb;--card:#fff;--line:#dcd9cf;--acc:#5b3fa8;--acc2:#d14b7a;--soft:#f0ecfa;--green:#2a6b45;--bad:#a2392f}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.5 system-ui,Segoe UI,Arial,sans-serif}
+header{background:linear-gradient(100deg,#efe9fb,#fbe9f0);border-bottom:5px solid var(--acc);padding:16px max(16px,calc((100vw - 900px)/2)) 12px}
+.k{font-size:.78rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:var(--acc);margin:0}
+h1{margin:2px 0 4px;font-size:clamp(1.7rem,3.4vw,2.3rem)}
+.std{margin:2px 0;font-size:.92rem;color:var(--muted)}.std b{color:var(--ink)}
+.hud{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line);padding:8px max(16px,calc((100vw - 900px)/2));display:flex;gap:10px 12px;flex-wrap:wrap;align-items:center;font-weight:800;font-size:.92rem;box-shadow:0 2px 8px #1f2b3312}
+.hud .bar{flex:1;min-width:110px;height:10px;background:#e6e6de;border-radius:9px;overflow:hidden}.hud .bar span{display:block;height:100%;width:0;background:var(--acc);transition:width .4s}
+.pill{background:#f0efe8;border-radius:20px;padding:3px 10px;white-space:nowrap}
+.meter{display:flex;align-items:center;gap:6px}.meter .track{width:100px;height:10px;border-radius:9px;background:#e6e6de;overflow:hidden}.meter .track span{display:block;height:100%;background:var(--acc2);transition:width .5s}
+main{max-width:900px;margin:auto;padding:14px 16px 60px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;box-shadow:0 3px 12px #1f2b330d}
+.kicker{font-size:.78rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:var(--acc2);margin:0}
+h2{margin:2px 0 10px;font-size:1.45rem}
+.teach{background:var(--soft);border-left:5px solid var(--acc);border-radius:9px;padding:10px 14px;margin:0 0 12px}.teach p{margin:4px 0}.teach b{color:var(--acc)}.teach ul{margin:4px 0;padding-left:20px}
+.block{margin:14px 0;padding:14px;border-radius:12px;border:2px solid var(--line);background:#fff}
+.block.current{border-color:var(--ink);box-shadow:0 0 0 4px color-mix(in srgb,var(--acc) 22%,transparent)}
+.block h3{margin:0 0 10px;font-size:1.06rem;line-height:1.35;font-weight:700}
+.event{background:#fbf9f4;border-style:dashed;border-color:#cdbf9a}.event.current{border-style:solid}
+.event-body p{margin:4px 0}
+.ev{display:block;font-weight:400;background:#f7f6f1;border:1px solid var(--line);border-left:5px solid var(--acc2);border-radius:10px;padding:9px 12px;margin:0 0 10px;font-size:.98rem}
+.ev .who{display:block;font-size:.74rem;font-weight:900;letter-spacing:.06em;text-transform:uppercase;color:var(--acc2);margin-bottom:2px}
+.ev p{margin:3px 0}
+.picked{margin:10px 0 4px;color:var(--muted)}.result{background:#f0efe8;border-radius:9px;padding:9px 12px}.result p{margin:4px 0}
+.tag{display:inline-block;font-weight:900;font-size:.8rem;border-radius:12px;padding:2px 9px;margin-right:6px}.tag.up{background:#dcefe2;color:var(--green)}.tag.down{background:#f6dcd8;color:var(--bad)}.tag.flat{background:#ebe9e0;color:var(--ink)}
+.qlabel{font-size:.75rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:var(--acc);margin:0 0 4px}
+.choices{display:grid;gap:8px}
+@media(min-width:700px){.q .choices{grid-template-columns:1fr 1fr}}
+button{font:inherit;cursor:pointer;border-radius:10px;min-height:46px}
+.choice{text-align:left;background:#fff;color:var(--ink);border:2px solid #cfcdbf;padding:10px 12px;font-weight:650;line-height:1.3}
+.choice:hover:not(:disabled){border-color:var(--ink);background:#fcfcfa}.choice:disabled{opacity:.5;cursor:not-allowed}
+.go{margin-top:12px;background:var(--acc);color:#fff;border:0;padding:11px 18px;font-weight:900}
+button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid #2f7dbd;outline-offset:2px}
+.answered{font-weight:800;color:var(--green);margin:4px 0}.why{margin:2px 0;color:var(--muted)}
+.msg{min-height:1.3em;font-weight:750;margin:8px 0 0}.msg.bad{color:var(--bad)}.msg.good{color:var(--green)}
+label{display:block;font-weight:850;margin:14px 0 4px}.stem{margin:0 0 4px;color:var(--muted);font-size:.92rem}
+input,textarea{width:100%;font:inherit;border:2px solid #cfcdbf;border-radius:9px;padding:10px;background:#fff;color:var(--ink)}
+.steps{display:grid;gap:6px;margin:10px 0;padding:0;list-style:none}.steps li{background:#f0efe8;border-radius:9px;padding:8px 12px;font-weight:700}
+.welcome{background:#e6f1ea;color:var(--green);font-weight:800;border-radius:9px;padding:8px 12px;margin:0 0 10px}
+.foot{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-top:14px;color:var(--muted);font-size:.85rem}
+.foot button{background:#ebe9e0;border:0;padding:8px 12px;font-weight:800;color:var(--ink)}
+.src{font-size:.8rem;color:var(--muted)}
+.bars{display:grid;gap:6px;margin:8px 0}.brow{display:grid;grid-template-columns:minmax(90px,140px) 1fr 44px;gap:8px;align-items:center;font-size:.9rem}.brow .t{height:16px;background:#e6e6de;border-radius:6px;overflow:hidden}.brow .t span{display:block;height:100%;background:var(--acc2)}
+@media print{.hud,.foot,.go{display:none}}
+
+header{color:var(--ink)}
+.post{background:#fff;border:1px solid #d9d3ea;border-radius:14px;padding:10px 12px;margin:0 0 10px;max-width:520px;font-weight:400;font-size:.98rem;display:block}
+.post .ph{display:flex;align-items:center;gap:8px}.post .av{width:28px;height:28px;border-radius:50%;background:var(--acc2);color:#fff;display:grid;place-items:center;font-weight:900;font-size:.85rem}
+.post .pb{margin:6px 0 4px;font-size:1.05rem}.post .ps{font-size:.8rem;color:var(--muted)}
+h3.plain{margin:0 0 6px}
+
+</style>
+<script src="../../shared/assignments.js?v=20261101fill"></script>
+<script src="../../shared/turnin.js?v=20261101fill"></script>
+<script src="../../shared/unit-game.js?v=20261101fill"></script>
+</head><body>
+<header>
+  <p class="k">Sociology · Unit 1 · Day 5</p>
+  <h1>How Can You Prove a Hot Take?</h1>
+  <p class="std"><b>SS.9-12.Soc.1</b> Analyze the components of a sociological investigation.</p>
+  <p class="std"><b>Goal:</b> Turn a claim into a testable hypothesis, design a fair study, and tell correlation from causation. · About 25 minutes.</p>
+</header>
+<div class="hud" aria-label="Progress and proof meter">
+  <span id="progressText">0 checks done</span>
+  <div class="bar" aria-hidden="true"><span id="progressFill"></span></div>
+  <span class="pill meter">Proof meter: <span class="track" aria-hidden="true"><span id="proofFill" style="width:30%"></span></span> <span id="proofNum">3/10</span></span>
+</div>
+<main>
+  <p class="welcome" id="welcome" hidden></p>
+  <div id="app"></div>
+  <div class="foot"><span>Progress saves on this device. Your teacher sees your work after you turn it in.</span><button type="button" id="restartBtn">Start over</button></div>
+</main>
+<script>
+const T = (cls, txt) => `<span class="tag ${cls}">${txt}</span>`;
+const ev = (who, body) => `<span class="ev"><span class="who">${who}</span>${body}</span>`;
+window.S = null;
+
+const post = (handle, body, stats) => `<div class="post"><div class="ph"><span class="av">${handle[1].toUpperCase()}</span><b>${handle}</b></div><div class="pb">${body}</div><div class="ps">${stats}</div></div>`;
+function resultsHtml() {
+  const f = (window.S && window.S.fx) || {};
+  let sample, sampleNote;
+  if (f.s_friends) { sample = "6 of your friends"; sampleNote = `<p>${T("down","Weak")} <b>Tiny sample.</b> With only 6 people, one person's bad week can swing the whole result. And your friends are not like all teens.</p>`; }
+  else if (f.s_likes) { sample = "1,000 people who liked the post"; sampleNote = `<p>${T("down","Weak")} <b>Biased sample.</b> These people already agreed with the hot take before the study started. Big is not the same as fair.</p>`; }
+  else { sample = "240 random students, 4 schools"; sampleNote = `<p>${T("up","Strong")} <b>Random sample.</b> Picking at random from different schools makes your group more like teens in general.</p>`; }
+  let chart, ctrlNote;
+  if (f.c_rand) {
+    chart = `<div class="brow"><span>Deleted apps</span><span class="t"><span style="width:41%"></span></span><b>4.1</b></div><div class="brow"><span>Kept apps (control)</span><span class="t"><span style="width:50%"></span></span><b>5.0</b></div>`;
+    ctrlNote = `<p>${T("up","Strong")} <b>Random control group.</b> Both groups lived through the same two weeks, so the main difference was the apps.</p>`;
+  } else if (f.c_choose) {
+    chart = `<div class="brow"><span>Chose to delete</span><span class="t"><span style="width:38%"></span></span><b>3.8</b></div><div class="brow"><span>Chose to keep</span><span class="t"><span style="width:52%"></span></span><b>5.2</b></div>`;
+    ctrlNote = `<p>${T("flat","Mixed")} <b>Teens picked their own group.</b> The ones who chose to delete may have been less lonely to start with. That's a hidden difference.</p>`;
+  } else {
+    chart = `<div class="brow"><span>Before</span><span class="t"><span style="width:52%"></span></span><b>5.2</b></div><div class="brow"><span>After deleting</span><span class="t"><span style="width:43%"></span></span><b>4.3</b></div>`;
+    ctrlNote = `<p>${T("down","Weak")} <b>No control group.</b> Loneliness went down, but finals also ended that week. Without a comparison group, you can't tell what caused the drop.</p>`;
+  }
+  return `<p class="kicker">Lab report</p><h3 class="plain">Your results are in</h3><p class="src">Who you studied: ${sample}. Average loneliness score (0 = not lonely, 10 = very lonely). Results are made up for this lab.</p><div class="bars">${chart}</div>${sampleNote}${ctrlNote}`;
+}
+UnitGame.start({
+  key: "soc-u1-d5-prove-hot-take-v1",
+  assignmentId: "soc-u1-d5-prove-hot-take",
+  title: "Sociology · Unit 1 · Day 5 · How Can You Prove a Hot Take?",
+  standard: "SS.9-12.Soc.1",
+  oldApi: "https://fynn-class-assignment-submissions-20261024.neotboy.chatgpt.site/api/submit",
+  startFx: { proof: 3 },
+  clampFx: fx => { fx.proof = Math.max(0, Math.min(10, fx.proof)); },
+  hud: st => { window.S = st; const p = st.fx.proof || 0; document.getElementById("proofFill").style.width = (p * 10) + "%"; document.getElementById("proofNum").textContent = p + "/10"; },
+  startLabel: "Open the lab",
+  introHtml: `<p class="kicker">Hot Take Lab</p><h2>Don't argue. Test it.</h2>
+    ${post("@realtalk_tay", "phones are literally making every teen lonely. no debate. 🔥", "2.1M views · 48K comments")}
+    <p>The comments are a war. Half say it's true. Half say it's fake. Nobody has <b>evidence</b>.</p>
+    <p>You run a small teen research lab. Your job: turn this hot take into a real study. Your choices change the <b>Proof meter</b> at the top. Strong studies = strong proof.</p>
+    <ul class="steps"><li>1. Turn the hot take into something you can test.</li><li>2. Design your study and see your results.</li><li>3. Read the results without getting fooled. Then write 2 short answers.</li></ul>`,
+  scenes: [
+    { kicker: "Part 1 of 3", title: "From Hot Take to Hypothesis",
+      teach: `<p>Sociologists use the <b>scientific method</b>: a step-by-step way to answer questions with <b>evidence</b>, not opinion.</p>
+        <p>Steps: ask a question → do <b>background research</b> → write a <b>hypothesis</b> → collect data → analyze it → <b>share</b> it so others can check.</p>
+        <p>A <b>hypothesis</b> is a testable prediction. It must be <b>testable</b> (you can collect data on it) and <b>falsifiable</b> (the data could prove it wrong).</p>`,
+      blocks: [
+        { type: "q", id: "h1", std: "Soc.1", short: "Pick the testable hypothesis", prompt: ev("Four ways to say it", "Your lab rewrites Tay's post four ways.") + "Which version is a testable hypothesis?", options: ["Teens on phones 5+ hours a day feel lonelier than other teens", "Phones are ruining this whole generation, and that's a fact", "Teens should put their phones away more than they do now", "Loneliness is a feeling, so nobody could ever measure it"], hint: "Which one could you check by collecting data from real teens?", why: "It names who to compare (5+ hours vs. less) and what to measure (loneliness). You could collect data on it, and the data could prove it wrong." },
+        { type: "q", id: "h2", std: "Soc.1", short: "Hypothesis must be falsifiable", prompt: post("@realtalk_tay", "if ur study says phones DON'T make teens lonely then ur study is fake lol", "replying to your lab") + "What's wrong with Tay's rule?", options: ["A real hypothesis has to be able to be proven wrong", "A real hypothesis has to be agreed on by most people", "A real hypothesis has to come from a famous scientist", "A real hypothesis has to be about something online"], hint: "Reread the teach box: what does falsifiable mean?", why: "If no result could ever prove Tay wrong, it's not science. A hypothesis has to be falsifiable." },
+        { type: "q", id: "h3", std: "Soc.1", short: "Step after asking a question", prompt: ev("Your lab's to-do list", "1. Ask a question ✓<br>2. ???<br>3. Write a hypothesis<br>4. Collect data<br>5. Analyze<br>6. Share") + "What goes in step 2?", options: ["Background research", "Publish the results", "Analyze the data", "Pick a control group"], hint: "Look at the order of steps in the teach box.", why: "Before you predict anything, you find out what other researchers already learned. That's background research." },
+        { type: "event", id: "e1", short: "Background research choice", html: `<p><b>Your lab partner Marco:</b> "Do we really need to read old studies? Let's just start."</p>`,
+          choices: [
+            { label: "Read what other researchers already found first", fx: { proof: 1 }, result: `<p>${T("up","+1 proof")}You find studies that say the link is real but small, and that it depends on HOW teens use phones. Now your study can build on them.</p>` },
+            { label: "Skip it. Our gut feeling is good enough.", fx: { proof: -1 }, result: `<p>${T("down","−1 proof")}You start fast, but you repeat mistakes other researchers already fixed.</p>` },
+            { label: "Ask the comment section what they think", fx: {}, result: `<p>${T("flat","No change")}You get 300 replies and zero data. Opinions are not research.</p>` }
+          ] },
+        { type: "q", id: "h4", std: "Soc.1", short: "Quantitative vs. qualitative", prompt: ev("Two survey questions", "<b>A:</b> \"From 0 to 10, how lonely do you feel this week?\"<br><b>B:</b> \"Tell me about a time this week you felt alone.\"") + "Which one collects <b>quantitative</b> data, and why?", options: ["A, because it turns feelings into numbers to compare", "B, because it lets people describe what happened", "A, because it asks about feelings instead of facts", "B, because longer answers give more numbers"], hint: "Quantitative sounds like quantity. Which answer will be a number?", why: "Quantitative data is numbers. Question B collects qualitative data: descriptions and experiences." }
+      ] },
+    { kicker: "Part 2 of 3", title: "Design the Study",
+      teach: `<p>The <b>independent variable (IV)</b> is what you change. The <b>dependent variable (DV)</b> is what you measure.</p>
+        <p>The <b>experimental group</b> gets the change. The <b>control group</b> doesn't. It's the comparison group.</p>
+        <p>Your <b>sample</b> is the people you study. A <b>random sample</b> from many places is fairer than just people you know.</p>`,
+      blocks: [
+        { type: "note", html: ev("Your study plan", "For 2 weeks, teens <b>delete their social media apps</b>. Before and after, they take a survey that gives a <b>loneliness score</b> from 0 to 10.") },
+        { type: "q", id: "v1", std: "Soc.1", short: "Find the IV (deleting apps)", prompt: "In your plan, what is the <b>independent variable</b> (the thing you change)?", options: ["Whether teens delete their social apps", "How lonely teens say they feel", "The survey used to ask about loneliness", "The two weeks the study takes"], hint: "Look at the plan. What do the researchers make teens do differently?", why: "Deleting the apps is the change. That's the IV." },
+        { type: "q", id: "v2", std: "Soc.1", short: "Find the DV (loneliness score)", prompt: "What is the <b>dependent variable</b> (the thing you measure)?", options: ["The loneliness scores on the survey", "Deleting the social media apps", "The number of teens in the study", "Which phones the teens own"], hint: "What number does the survey give you at the end?", why: "You measure loneliness to see if it changes. That's the DV." },
+        { type: "event", id: "e2", short: "Sample choice", html: `<p><b>Who is in your study?</b> Pick your sample.</p>`,
+          choices: [
+            { label: "6 of your closest friends", fx: { proof: -2, s_friends: 1 }, result: `<p>${T("down","−2 proof")}Easy to set up. But 6 friends who are all alike can't speak for all teens.</p>` },
+            { label: "240 students picked at random from 4 schools", fx: { proof: 3 }, result: `<p>${T("up","+3 proof")}More work, but a random sample from different schools looks more like teens in general.</p>` },
+            { label: "1,000 people who liked Tay's post", fx: { proof: -1, s_likes: 1 }, result: `<p>${T("down","−1 proof")}A huge group, but they already agree with the hot take. That's a biased sample.</p>` }
+          ] },
+        { type: "event", id: "e3", short: "Control group choice", html: `<p><b>Marco:</b> "Should some teens keep their apps, so we can compare?"</p>`,
+          choices: [
+            { label: "Yes. Split them at random: half delete, half keep.", fx: { proof: 3, c_rand: 1 }, result: `<p>${T("up","+3 proof")}Now you have a real control group. Random splitting keeps the two groups alike.</p>` },
+            { label: "No. Everyone deletes. Just compare before and after.", fx: { proof: -1 }, result: `<p>${T("down","−1 proof")}Simpler, but with nothing to compare to, you won't know what caused any change.</p>` },
+            { label: "Yes, but let each teen choose their group.", fx: { proof: 1, c_choose: 1 }, result: `<p>${T("up","+1 proof")}Better than nothing. But people who choose to delete may already be different from people who don't.</p>` }
+          ] },
+        { type: "q", id: "v3", std: "Soc.1", short: "Find the control group", prompt: ev("Random-split plan", "Group A deletes their social apps for 2 weeks.<br>Group B keeps using their apps like normal.") + "Which group is the <b>control group</b>?", options: ["Group B, which keeps the apps like normal", "Group A, which deletes the social apps", "The teens who drop out of the study early", "The researchers who score the surveys"], hint: "The control group is the one that does NOT get the change.", why: "Group B doesn't get the change, so it's the comparison group." },
+        { type: "q", id: "v4", std: "Soc.1", short: "DV in a new hot take", prompt: post("@coachdre", "kids who eat breakfast get better grades. facts.", "340K views") + "If you tested this, what is the <b>dependent variable</b>?", options: ["Students' grades", "Eating breakfast", "The school lunch menu", "What time kids wake up"], hint: "Which one would you measure to see if it changed?", why: "You'd change (or compare) breakfast and measure grades. Grades are the DV." }
+      ] },
+    { kicker: "Part 3 of 3", title: "Read the Results (Don't Get Played)",
+      teach: `<p><b>Correlation</b> means two things go up or down together. It does <b>not</b> prove one causes the other.</p>
+        <p><b>Causation</b> means one thing directly causes the other. Sometimes a hidden <b>third variable</b> causes both.</p>
+        <p><b>Bias</b> is anything that tilts a study toward one answer, like who paid for it or who was picked.</p>`,
+      blocks: [
+        { type: "note", get html() { return resultsHtml(); } },
+        { type: "q", id: "r1", std: "Soc.1", short: "Ice cream & drownings = third variable", prompt: ev("Summer data", "In summer, ice cream sales go up. Drownings go up too.") + "What best explains this?", options: ["Hot weather drives both of them up", "Eating ice cream makes people drown", "Drownings make people buy ice cream", "It proves ice cream is dangerous"], hint: "What else happens in summer that could cause both?", why: "Hot weather is a third variable. More people swim AND more people buy ice cream. Correlation isn't causation." },
+        { type: "q", id: "r2", std: "Soc.1", short: "Survey link ≠ cause", prompt: ev("A different study (survey only)", "Teens who feel lonely spend more hours on their phones.") + "Which conclusion is correct?", options: ["Phone time and loneliness are linked, but cause isn't proven", "Phones cause loneliness, so the hot take was right all along", "Loneliness causes phone use, so the hot take is backwards", "The two have nothing to do with each other at all"], hint: "Did this study change anything, or just find two things that go together?", why: "A survey can show a correlation. Lonely teens might use phones more, or phones might add loneliness, or something else causes both." },
+        { type: "event", id: "e4", short: "Headline choice", html: `<p><b>A news site wants a quote for its headline.</b> What do you send?</p>`,
+          choices: [
+            { label: "\"Phones CAUSE loneliness. Science proves it!\"", fx: { proof: -3 }, result: `<p>${T("down","−3 proof")}The headline goes viral. Then other researchers point out one study can't prove that much. Your lab looks careless.</p>` },
+            { label: "\"In our study, quitting apps was linked to less loneliness. More studies are needed.\"", fx: { proof: 2 }, result: `<p>${T("up","+2 proof")}Less flashy, but true. Other labs start running the same test to check you.</p>` },
+            { label: "Say nothing until you're 100% sure", fx: { proof: -1 }, result: `<p>${T("down","−1 proof")}Science is almost never 100% sure. If you never share, nobody can check or build on your work.</p>` }
+          ] },
+        { type: "q", id: "r3", std: "Soc.1", short: "Funding = bias", prompt: ev("Fine print on another study", "This study was paid for by a company that sells a $9.99 \"phone detox\" app.") + "What should make you careful about this study?", options: ["Bias, since the payer wants a certain result", "Correlation, since two things went up together", "Control group, since nobody kept their phones", "Qualitative data, since it used no numbers"], hint: "Who paid, and what do they sell?", why: "The company makes money if phones look bad. That's a possible bias, so you'd want other studies to check it." },
+        { type: "q", id: "r4", std: "Soc.1", short: "Why share your methods", prompt: ev("Last step of the scientific method", "Share / publish: explain what you did and what you found.") + "Why do researchers share HOW they did a study, not just the results?", options: ["So others can check it and try it again", "So the researchers can get famous online", "So nobody else needs to study it again", "So the study can never be proven wrong"], hint: "What can other labs do once they know your exact steps?", why: "Sharing methods lets others check your work and repeat the study. If they get the same result, the evidence gets stronger." }
+      ] }
+  ],
+  finale: {
+    title: "Write Your Own Hypothesis",
+    report: st => `<p><b>Your Proof meter ended at ${st.fx.proof}/10.</b> ${st.fx.proof >= 7 ? "Strong study. Random sample, a control group, and careful claims make proof hard to argue with." : st.fx.proof >= 4 ? "Decent study, with some weak spots. Look back at your sample, control group, and headline." : "Weak proof. A small or biased sample, no fair comparison, or a big claim can sink a study."}</p><p>Answer both in 1–2 full sentences.</p>`,
+    prompts: [
+      { id: "hyp", short: "My hot take as a hypothesis", label: "1. Pick your OWN hot take (about school, sports, music, food, anything). Turn it into a testable hypothesis and name the independent and dependent variables.", stem: "My hot take: ___. Hypothesis: ___. The independent variable is ___ and the dependent variable is ___.", min: 90, mustAll: [["independent", "iv", "change"], ["dependent", "dv", "measure"]], mustMsg: "In answer 1, name the independent variable (what you change) AND the dependent variable (what you measure)." },
+      { id: "design", short: "A choice that changed my proof", label: "2. Explain one choice you made today that made your evidence stronger or weaker.", stem: "My evidence got stronger/weaker when I ___ because ___.", min: 60, newWords: 5, mustAll: [["sample", "random", "friend", "control", "group", "bias", "correlat", "cause", "headline", "research", "compar"], ["because", "since", "so "]], mustMsg: "In answer 2, name the choice (sample, control group, headline, or research) AND explain why (use \"because\")." }
+    ]
+  },
+  extraAnswers: st => ({ "Proof meter": st.fx.proof + " of 10" })
+});
+
+</script>
+</body></html>

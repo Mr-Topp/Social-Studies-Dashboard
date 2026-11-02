@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Case Against Segregation | U.S. History Unit 4 Day 1</title>
+<meta name="description" content="Follow the fight against school and bus segregation from Plessy v. Ferguson to Brown v. Board, Montgomery, and Little Rock.">
+<style>
+:root{--ink:#1f2b33;--muted:#55626b;--paper:#f6f4f0;--card:#fff;--line:#dad9cf;--main:#3f2f5a;--accent:#8a5a14;--meter:#3f2f5a;--green:#2a6b45;--bad:#a2392f;--tint:#eeebf3}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.5 system-ui,Segoe UI,Arial,sans-serif}
+header{background:#efebf3;border-bottom:5px solid var(--main);padding:16px max(16px,calc((100vw - 900px)/2)) 12px}
+.k{font-size:.78rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:var(--main);margin:0}
+h1{margin:2px 0 4px;font-size:clamp(1.7rem,3.4vw,2.3rem)}
+.std{margin:2px 0;font-size:.92rem;color:var(--muted)}.std b{color:var(--ink)}
+.hud{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line);padding:8px max(16px,calc((100vw - 900px)/2));display:flex;gap:12px;flex-wrap:wrap;align-items:center;font-weight:800;font-size:.92rem;box-shadow:0 2px 8px #1f2b3312}
+.hud .bar{flex:1;min-width:120px;height:10px;background:#e6e6de;border-radius:9px;overflow:hidden}.hud .bar span{display:block;height:100%;width:0;background:var(--main);transition:width .4s}
+.pill{background:#f0efe8;border-radius:20px;padding:3px 10px;white-space:nowrap}
+.meter{display:flex;align-items:center;gap:6px}.meter .track{width:110px;height:10px;border-radius:9px;background:#e6e6de;overflow:hidden}.meter .track span{display:block;height:100%;background:var(--meter);transition:width .5s}
+main{max-width:900px;margin:auto;padding:14px 16px 60px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;box-shadow:0 3px 12px #1f2b330d}
+.kicker{font-size:.78rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin:0}
+h2{margin:2px 0 10px;font-size:1.45rem}
+.teach{background:var(--tint);border-left:5px solid var(--main);border-radius:9px;padding:10px 14px;margin:0 0 12px}.teach p{margin:4px 0}.teach b{color:var(--main)}
+.block{margin:14px 0;padding:14px;border-radius:12px;border:2px solid var(--line);background:#fff}
+.block.current{border-color:var(--ink);box-shadow:0 0 0 4px #3f2f5a30}
+.block h3{margin:0 0 10px;font-size:1.06rem;line-height:1.35;font-weight:700}
+.event{background:#fbf9f4;border-style:dashed;border-color:#cdbf9a}.event.current{border-style:solid}
+.event-body p{margin:4px 0}
+.note p{margin:4px 0}
+.desk{font-size:.78rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin:0 0 4px}
+.doc{background:#fbfaf6;border:1px solid #d9d3c2;border-left:5px solid var(--accent);border-radius:9px;padding:9px 12px;margin:0 0 10px}
+.doc .who{font-size:.76rem;font-weight:900;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);margin:0 0 3px}
+.doc p{margin:3px 0}.doc q{font-style:italic}
+.facts{width:100%;border-collapse:collapse;margin:0 0 10px;font-size:.93rem;background:#fff}
+.facts th,.facts td{border:1px solid #d9d3c2;padding:6px 8px;text-align:left;vertical-align:top}.facts th{background:var(--tint)}
+.strip{display:grid;gap:3px;margin:0 0 10px;max-width:420px}
+.strip div{display:flex;justify-content:space-between;gap:8px;padding:5px 10px;border-radius:7px;font-size:.9rem;font-weight:700}
+.strip .n{background:#f3e3e0}.strip .s{background:#e2ebf4}.strip .line{background:var(--ink);color:#fff;justify-content:center;font-size:.8rem;letter-spacing:.06em}
+.picked{margin:10px 0 4px;color:var(--muted)}.result{background:#f0efe8;border-radius:9px;padding:9px 12px}.result p{margin:4px 0}
+.tag{display:inline-block;font-weight:900;font-size:.8rem;border-radius:12px;padding:2px 9px;margin-right:6px}.tag.up{background:#dcefe2;color:var(--green)}.tag.down{background:#f6dcd8;color:var(--bad)}.tag.flat{background:#ebe9e0;color:var(--ink)}
+.real{display:block;margin-top:6px;font-size:.93rem}.real b{color:var(--main)}
+.choices{display:grid;gap:8px}
+@media(min-width:700px){.q .choices{grid-template-columns:1fr 1fr}}
+button{font:inherit;cursor:pointer;border-radius:10px;min-height:46px}
+.choice{text-align:left;background:#fff;color:var(--ink);border:2px solid #cfcdbf;padding:10px 12px;font-weight:650;line-height:1.3}
+.choice:hover:not(:disabled){border-color:var(--ink);background:#fcfcfa}.choice:disabled{opacity:.5;cursor:not-allowed}
+.go{margin-top:12px;background:var(--main);color:#fff;border:0;padding:11px 18px;font-weight:900}
+button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid #2f7dbd;outline-offset:2px}
+.answered{font-weight:800;color:var(--green);margin:4px 0}.why{margin:2px 0;color:var(--muted)}
+.msg{min-height:1.3em;font-weight:750;margin:8px 0 0}.msg.bad{color:var(--bad)}.msg.good{color:var(--green)}
+label{display:block;font-weight:850;margin:14px 0 4px}.stem{margin:0 0 4px;color:var(--muted);font-size:.92rem}
+input,textarea{width:100%;font:inherit;border:2px solid #cfcdbf;border-radius:9px;padding:10px;background:#fff;color:var(--ink)}
+.steps{display:grid;gap:6px;margin:10px 0;padding:0;list-style:none}.steps li{background:#f0efe8;border-radius:9px;padding:8px 12px;font-weight:700}
+.role{background:var(--tint);border-radius:10px;padding:10px 12px;margin:8px 0}
+.welcome{background:#e6f1ea;color:var(--green);font-weight:800;border-radius:9px;padding:8px 12px;margin:0 0 10px}
+.foot{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-top:14px;color:var(--muted);font-size:.85rem}
+.foot button{background:#ebe9e0;border:0;padding:8px 12px;font-weight:800;color:var(--ink)}
+.src{font-size:.8rem;color:var(--muted)}
+@media(max-width:520px){.pill{white-space:normal}.meter .track{width:70px;flex:none}.facts{font-size:.85rem}}
+@media print{.hud,.foot,.go{display:none}}
+</style>
+<script src="../../shared/assignments.js?v=20261101fill"></script>
+<script src="../../shared/turnin.js?v=20261101fill"></script>
+<script src="../../shared/unit-game.js?v=20261101fill"></script>
+</head><body>
+<header>
+  <p class="k">U.S. History · Unit 4 · Day 1</p>
+  <h1>The Case Against Segregation</h1>
+  <p class="std"><b>Civil Rights: How did Americans fight segregation?</b></p>
+  <p class="std">Standards: <b>SS.9-12.US.42</b> · <b>SS.9-12.US.43</b> · <b>SS.9-12.US.44</b></p>
+  <p class="std"><b>Goal:</b> Explain how Americans used the courts, boycotts, and the federal government to fight segregation, and how some people resisted. · About 25 minutes.</p>
+</header>
+<div class="hud" aria-label="Progress and Pressure on segregation">
+  <span id="progressText">0 checks done</span>
+  <div class="bar" aria-hidden="true"><span id="progressFill"></span></div>
+  <span class="pill meter">Pressure on segregation: <span class="track" aria-hidden="true"><span id="meterFill" style="width:30%"></span></span> <span id="meterNum">3/10</span></span>
+</div>
+<main>
+  <p class="welcome" id="welcome" hidden></p>
+  <div id="app"></div>
+  <div class="foot"><span>Progress saves on this device. Your teacher sees your work after you turn it in.</span><button type="button" id="restartBtn">Start over</button></div>
+</main>
+<script>
+const T = (cls, txt) => `<span class="tag ${cls}">${txt}</span>`;
+const doc = (who, body) => `<div class="doc"><p class="who">${who}</p>${body}</div>`;
+const real = txt => `<span class="real"><b>What really happened:</b> ${txt}</span>`;
+const METER = "push";
+UnitGame.start(Object.assign({
+  key: "ush-u4-d1-fight-segregation-v1",
+  assignmentId: "ush-u4-d1-fight-segregation",
+  title: "U.S. History · Unit 4 · Day 1 · The Case Against Segregation",
+  standard: "SS.9-12.US.42, SS.9-12.US.43, SS.9-12.US.44",
+  oldApi: "https://fynn-class-assignment-submissions-20261024.neotboy.chatgpt.site/api/submit",
+  startFx: { push: 3 },
+  clampFx: fx => { fx[METER] = Math.max(0, Math.min(10, fx[METER])); },
+  hud: st => {
+    const v = st.fx[METER] || 0;
+    document.getElementById("meterFill").style.width = (v * 10) + "%";
+    document.getElementById("meterNum").textContent = v + "/10";
+  },
+  extraAnswers: st => ({ "Pressure on segregation meter": (st.fx[METER] || 0) + " of 10" })
+}, (function () {
+return {
+  startLabel: "Open the case file",
+  introHtml: `<p class="kicker">1950 to 1957</p><h2>Building the case</h2>
+    <p>In 1950, in much of the country, Black and white children were sent to separate schools by law. This was called <b>segregation</b>. Black Americans and their allies set out to end it.</p>
+    <p>You'll work through a case file of real sources. At three key moments, you'll decide what the movement or the government should do. Your choices change the "Pressure on segregation" meter.</p>
+    <ul class="steps"><li>1. Read each source and answer the check.</li><li>2. Make 3 decisions, then see what really happened.</li><li>3. Write 2 short answers and turn in.</li></ul>`,
+  scenes: [
+    { kicker: "Part 1 of 3 · 1896–1950", title: "\"Separate but Equal\"",
+      teach: `<p>In <b>Plessy v. Ferguson (1896)</b>, the Supreme Court ruled that segregation was legal if the separate places were "equal." This idea was called <b>"separate but equal."</b></p>
+        <p>In real life, places for Black Americans were almost never equal. Laws that enforced segregation in the South were called <b>Jim Crow laws</b>.</p>`,
+      blocks: [
+        { type: "q", id: "s1", std: "US.42", short: "Plessy = separate but equal",
+          prompt: doc("Fact card · Plessy v. Ferguson, 1896", `<p>Homer Plessy, a Black man in Louisiana, sat in a \"whites only\" train car and was arrested. He said the law broke his rights.</p><p>The Supreme Court ruled 7–1 against him. Separate train cars were allowed, as long as they were \"equal.\"</p>`) + "What did the Plessy decision allow?",
+          options: ["Segregation, if the separate places were called equal", "Black and white passengers to sit anywhere they wanted on trains", "States to ban Black Americans from riding trains", "Schools to decide on their own to integrate"],
+          hint: "What did the Court say was allowed \"as long as\"?", why: "Plessy made \"separate but equal\" the law of the land for almost 60 years." },
+        { type: "q", id: "s2", std: "US.42", short: "Unequal school funding",
+          prompt: `<table class="facts"><tr><th>Clarendon County, South Carolina (about 1950)</th><th>White schools</th><th>Black schools</th></tr><tr><td>Money spent per student each year</td><td>About $179</td><td>About $43</td></tr><tr><td>Buses</td><td>Yes</td><td>None</td></tr></table>What does this evidence show about \"separate but equal\"?`,
+          options: ["The separate schools were not equal at all", "Black schools got more money for each student", "Both kinds of schools were funded about the same", "White students had to walk to school farther"],
+          hint: "Compare the two money amounts.", why: "White schools got about four times as much money per student. Black schools were also crowded and used hand-me-down books." },
+        { type: "q", id: "s3", std: "US.43", short: "14th Amendment equal protection",
+          prompt: doc("14th Amendment to the U.S. Constitution · 1868", `<p><q>No State shall … deny to any person within its jurisdiction the equal protection of the laws.</q></p><p class="src"><b>jurisdiction</b> = the area a government controls</p>`) + "How could lawyers use this amendment against school segregation?",
+          options: ["They could argue segregation denied Black students equal protection", "They could argue states had to build more schools in cities", "They could argue only Congress could run public schools", "They could argue all students had a legal right to pick their own teachers"],
+          hint: "What does the amendment say states can't deny?", why: "The NAACP argued that segregated schools denied Black children the \"equal protection of the laws.\"" },
+        { type: "event", id: "e1", short: "NAACP legal strategy", html: `<p class="desk">NAACP lawyers' meeting · 1950</p><p>The <b>NAACP</b> (National Association for the Advancement of Colored People) has won some cases forcing states to spend more on Black schools. Now the lawyers must choose the next step.</p>`,
+          choices: [
+            { label: "Attack segregation itself: separate can never be equal", fx: { push: 3 }, result: `<p>${T("up", "+3 pressure")}It's a bigger risk, but a win would end school segregation everywhere.</p>${real("In 1950 the NAACP, led by lawyer Thurgood Marshall, decided to challenge segregation itself.")}` },
+            { label: "Keep suing to make Black schools truly equal", fx: { push: 1 }, result: `<p>${T("up", "+1 pressure")}Some towns spend more. But segregation stays legal.</p>${real("The NAACP had done this for years. In 1950 it switched to attacking segregation itself.")}` },
+            { label: "Wait for states to change on their own", fx: { push: -1 }, result: `<p>${T("down", "−1 pressure")}Nothing changes. States have no reason to.</p>${real("The NAACP did not wait. It filed cases in several states.")}` }
+          ] }
+      ] },
+    { kicker: "Part 2 of 3 · 1951–1955", title: "Brown v. Board of Education",
+      teach: `<p><b>Brown v. Board of Education</b> combined five cases from around the country. The lead case came from <b>Topeka, Kansas</b>.</p>`,
+      blocks: [
+        { type: "q", id: "s4", std: "US.44", short: "Why Oliver Brown sued",
+          prompt: doc("Fact card · The Brown family, Topeka", `<p>Linda Brown, a Black third grader, had to walk a long way and cross railroad tracks to catch a bus to a Black school.</p><p>A white school was much closer to her home. It would not let her enroll. Her father, <b>Oliver Brown</b>, joined the lawsuit.</p>`) + "Why did Oliver Brown join the case?",
+          options: ["His daughter was kept out of a closer school because she was Black", "His daughter's school had no teachers left for any of the third graders", "The white school wanted Linda to transfer there", "Topeka had no schools for Black students at all"],
+          hint: "Why couldn't Linda go to the closer school?", why: "Segregation forced Linda past a nearby school only because of her race. Families like the Browns put their names on the case, often at real risk." },
+        { type: "q", id: "s5", std: "US.44", short: "Thurgood Marshall argued the case",
+          prompt: doc("Fact card · The lawyer", `<p><b>Thurgood Marshall</b> led the NAACP's legal team. He argued Brown before the Supreme Court.</p><p>In 1967, he became the first Black justice on the Supreme Court.</p>`) + "What was Thurgood Marshall's role in Brown?",
+          options: ["He argued the case against segregation in court", "He was the judge who wrote the final decision", "He was the Kansas governor who closed the schools", "He was the parent who first filed the lawsuit"],
+          hint: "Reread the first sentence of the card.", why: "Marshall was the NAACP's lead lawyer. He used the courts as a tool for change." },
+        { type: "q", id: "s6", std: "US.43", short: "\"Inherently unequal\"",
+          prompt: doc("Chief Justice Earl Warren · Brown v. Board decision, May 17, 1954", `<p><q>We conclude that in the field of public education the doctrine of \"separate but equal\" has no place. Separate educational facilities are inherently unequal.</q></p><p class="src"><b>inherently</b> = by its very nature, no matter what</p>`) + "What did the Court mean by <b>inherently unequal</b>?",
+          options: ["Segregated schools are unequal even if the money is the same", "Segregated schools are fine as long as the money spent is the same", "Black schools need more teachers, but can stay separate", "Only schools in Kansas had to stop being segregated"],
+          hint: "Use the meaning of \"inherently\" in the small note.", why: "The Court said separating children by race is itself unequal. It sends a message that one group is valued less. This overturned Plessy for public schools." },
+        { type: "q", id: "s7", std: "US.43", short: "9–0 vote, then \"all deliberate speed\"",
+          prompt: doc("Fact card · The vote and what came next", `<p>The decision was <b>unanimous</b> (all 9 justices agreed): 9–0.</p><p>A year later, in 1955, the Court said schools must integrate <b>\"with all deliberate speed.\"</b> It set no deadline.</p>`) + "Why did the lack of a deadline matter?",
+          options: ["Many states used it to delay integration for years", "All schools had to integrate within one week", "It let the Court overturn its own 9–0 decision", "It forced Congress to pay for all new schools"],
+          hint: "If there's no deadline, what might people who oppose a change do?", why: "The 9–0 vote sent a strong message. But with no deadline, many Southern states stalled. Ten years later, most Black children in the Deep South were still in segregated schools." }
+      ] },
+    { kicker: "Part 3 of 3 · 1955–1957", title: "Resistance and Response",
+      teach: `<p>Many white Southern leaders fought the Brown decision. This was called <b>massive resistance</b>. Groups called <b>White Citizens' Councils</b> pressured people who supported integration. At the same time, Black communities kept organizing.</p>`,
+      blocks: [
+        { type: "q", id: "s8", std: "US.42", short: "Closing schools = massive resistance",
+          prompt: doc("Fact card · Prince Edward County, Virginia", `<p>Rather than integrate, the county <b>closed all its public schools</b> from 1959 to 1964. Private schools opened for white students. Most Black children had no school for five years.</p>`) + "What does this example show about massive resistance?",
+          options: ["Some leaders would shut schools rather than integrate", "Most Southern counties quickly followed the Brown ruling", "Closing the schools was ordered by the Supreme Court", "Black and white families agreed to close the schools"],
+          hint: "What did the county choose instead of integrating?", why: "Some places chose to have no public schools at all rather than integrate. Black children paid the heaviest price." },
+        { type: "event", id: "e2", short: "Montgomery: after Parks's arrest", html: `<p class="desk">Montgomery, Alabama · December 1955</p><p><b>Rosa Parks</b>, a seamstress and secretary of the local NAACP, was arrested for not giving her bus seat to a white man. <b>Jo Ann Robinson</b> and the Women's Political Council print thousands of flyers calling for a one-day bus boycott. It works. Now what?</p>`,
+          choices: [
+            { label: "Keep the boycott going and set up carpools", fx: { push: 3 }, result: `<p>${T("up", "+3 pressure")}People walk miles and share rides. The bus company loses money.</p>${real("The boycott lasted 381 days. Leaders like E.D. Nixon and a young pastor, Dr. Martin Luther King Jr., helped run it.")}` },
+            { label: "End the boycott and send the city a polite letter", fx: { push: -1 }, result: `<p>${T("down", "−1 pressure")}The city has no reason to change.</p>${real("Montgomery's Black community kept the boycott going for 381 days.")}` },
+            { label: "Only boycott on Sundays", fx: { push: 0 }, result: `<p>${T("flat", "No change")}The bus company barely notices.</p>${real("The boycott was every day, for 381 days.")}` }
+          ] },
+        { type: "q", id: "s9", std: "US.44", short: "Why the boycott worked",
+          prompt: doc("Fact card · Montgomery buses", `<p>About three out of four bus riders in Montgomery were Black.</p><p>In 1956, in a case called <b>Browder v. Gayle</b>, the Supreme Court ruled bus segregation unconstitutional. The boycott ended in December 1956.</p>`) + "Why did the boycott put so much pressure on the city?",
+          options: ["Most bus riders were Black, so the buses lost most of their money", "The city wanted to sell the buses to a new company", "White riders joined the boycott and stopped riding the city buses too", "The bus drivers went on strike to help the riders"],
+          hint: "Look at who rode the buses most.", why: "Without Black riders, the buses lost most of their income. The boycott (economic pressure) and the court case worked together." },
+        { type: "event", id: "e3", short: "Little Rock: federal response", html: `<p class="desk">Little Rock, Arkansas · September 1957</p><p>Nine Black students, the <b>Little Rock Nine</b>, are set to attend Central High. Governor Orval Faubus uses the state's National Guard to block them. Angry mobs gather. A federal court orders the school to let them in. You advise President Dwight Eisenhower.</p>`,
+          choices: [
+            { label: "Send federal troops to protect the students", fx: { push: 3 }, result: `<p>${T("up", "+3 pressure")}The court's order is enforced.</p>${real("Eisenhower sent soldiers of the 101st Airborne. They escorted the Little Rock Nine to class. Troops stayed at the school all year.")}` },
+            { label: "Let Arkansas handle it", fx: { push: -2 }, result: `<p>${T("down", "−2 pressure")}Other states see they can ignore the courts.</p>${real("Eisenhower did not leave it to Arkansas. He sent federal troops.")}` },
+            { label: "Ask the students to wait a year", fx: { push: -1 }, result: `<p>${T("down", "−1 pressure")}The mob wins this round.</p>${real("Eisenhower sent troops so the students could go to school that fall.")}` }
+          ] },
+        { type: "q", id: "s10", std: "US.43", short: "Eisenhower: courts must be obeyed",
+          prompt: doc("President Eisenhower · address to the nation, September 24, 1957", `<p><q>Mob rule cannot be allowed to override the decisions of our courts.</q></p>`) + "Why did Eisenhower send troops to Little Rock?",
+          options: ["To enforce a federal court's order over the mob", "To close Central High until the protests ended", "To arrest the Little Rock Nine for breaking state law", "To help the governor keep the school segregated"],
+          hint: "What does Eisenhower say mobs can't override?", why: "The federal government used its power to make sure court rulings were obeyed, even when a state resisted." },
+        { type: "q", id: "s11", std: "US.44", short: "Courts + people working together",
+          prompt: `<table class="facts"><tr><th>Step</th><th>What happened</th></tr><tr><td>1. Law</td><td>Plessy (1896) allows \"separate but equal\"</td></tr><tr><td>2. Challenge</td><td>NAACP lawsuits and families like the Browns</td></tr><tr><td>3. Ruling</td><td>Brown (1954) and Browder v. Gayle (1956)</td></tr><tr><td>4. Resistance</td><td>Massive resistance, closed schools, mobs</td></tr><tr><td>5. Response</td><td>Boycotts and federal troops</td></tr></table>What does this timeline show about how segregation was fought?`,
+          options: ["It took court cases, ordinary people, and federal action together", "One Supreme Court ruling ended segregation right away", "The federal government acted first, before anyone asked", "Segregation ended quickly because states gave it up on their own"],
+          hint: "Count how many different groups appear in steps 2, 3, and 5.", why: "No single step was enough. Lawyers, families, boycotters, the courts, and the President all played a part, against strong resistance." }
+      ] }
+  ],
+  finale: {
+    title: "Closing the Case File",
+    report: st => `<p><b>Your "Pressure on segregation" meter ended at ${st.fx.push}/10.</b> The real movement kept up pressure in the courts and in the streets, and it still took years.</p><p>Answer both in 1–2 full sentences.</p>`,
+    prompts: [
+      { id: "better", short: "Courts or boycotts: which worked better?", label: "1. Which worked better against segregation: the courts or boycotts? Use evidence from today.", stem: "I think ___ worked better because ___.", min: 60, mustAll: [["court", "brown", "plessy", "marshall", "lawsuit", "case", "boycott", "montgomery", "bus", "parks", "carpool"], ["because", "since"]], mustMsg: "In answer 1, pick courts or boycotts, use evidence from today, and use \"because\"." },
+      { id: "unequal", short: "Why separate was never equal", label: "2. Explain why \"separate but equal\" was never really equal. Use one piece of evidence.", stem: "\"Separate but equal\" was not really equal because ___.", min: 60, newWords: 5, mustInclude: ["money", "fund", "dollar", "179", "43", "bus", "book", "crowd", "inherently", "warren", "message", "walk", "track", "closer"], mustMsg: "In answer 2, use one piece of evidence (like the money chart, Linda Brown's walk, or the Court's words)." }
+    ]
+  }
+};
+
+})()));
+</script>
+</body></html>

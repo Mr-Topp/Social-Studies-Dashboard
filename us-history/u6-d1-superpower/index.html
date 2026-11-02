@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Superpower Decision Desk | U.S. History Unit 6 Day 1</title>
+<meta name="description" content="Learn the roots of 9/11 and what happened that day, then advise on how the U.S. should respond while balancing safety and freedom.">
+<style>
+:root{--ink:#1d2733;--muted:#536170;--paper:#f3f5f7;--card:#fff;--line:#d5dbe2;--navy:#23415f;--steel:#4f6b85;--gold:#c9a24a;--green:#2a6b45;--bad:#a2392f;--sec:#2f6690;--free:#7a4f8c}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.5 system-ui,Segoe UI,Arial,sans-serif}
+header{background:#fff;border-bottom:5px solid var(--navy);padding:16px max(16px,calc((100vw - 900px)/2)) 12px}
+.k{font-size:.78rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:var(--navy);margin:0}
+h1{margin:2px 0 4px;font-size:clamp(1.7rem,3.4vw,2.3rem)}
+.std{margin:2px 0;font-size:.92rem;color:var(--muted)}.std b{color:var(--ink)}
+.hud{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line);padding:8px max(16px,calc((100vw - 900px)/2));display:flex;gap:10px;flex-wrap:wrap;align-items:center;font-weight:800;font-size:.9rem;box-shadow:0 2px 8px #1d273312}
+.hud .bar{flex:1;min-width:110px;height:10px;background:#e3e7ec;border-radius:9px;overflow:hidden}.hud .bar span{display:block;height:100%;width:0;background:var(--navy);transition:width .4s}
+.pill{background:#eef1f4;border-radius:20px;padding:3px 10px;white-space:nowrap}
+.meter{display:flex;align-items:center;gap:6px}.meter .track{width:70px;height:10px;border-radius:9px;background:#dfe4ea;overflow:hidden}.meter .track span{display:block;height:100%;transition:width .5s}
+#secFill{background:var(--sec)}#freeFill{background:var(--free)}
+main{max-width:900px;margin:auto;padding:14px 16px 60px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;box-shadow:0 3px 12px #1d27330d}
+.kicker{font-size:.78rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:var(--steel);margin:0}
+h2{margin:2px 0 10px;font-size:1.45rem}
+.teach{background:#edf2f7;border-left:5px solid var(--navy);border-radius:9px;padding:10px 14px;margin:0 0 12px}.teach p{margin:4px 0}.teach b{color:var(--navy)}
+.block{margin:14px 0;padding:14px;border-radius:12px;border:2px solid var(--line);background:#fff}
+.block.current{border-color:var(--ink);box-shadow:0 0 0 4px #23415f2b}
+.block h3{margin:0 0 10px;font-size:1.06rem;line-height:1.35;font-weight:700}
+.block.note p{margin:4px 0}
+.event{background:#f8f7f2;border-style:dashed;border-color:#c8bd9c}.event.current{border-style:solid}
+.event-body p{margin:4px 0}
+.desk{font-size:.75rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:var(--navy);margin:0 0 4px}
+.source{background:#f6f7f9;border:1px solid var(--line);border-left:5px solid var(--steel);border-radius:9px;padding:8px 12px;margin:0 0 10px;font-weight:400}
+.source .who{font-size:.75rem;font-weight:900;letter-spacing:.06em;text-transform:uppercase;color:var(--steel);margin:0 0 2px}
+.source p{margin:3px 0}.source q{font-style:italic}
+.tl{list-style:none;margin:4px 0;padding:0}.tl li{padding:3px 0 3px 10px;border-left:3px solid var(--gold);margin:3px 0}
+table.flights{border-collapse:collapse;width:100%;font-size:.92rem;margin:6px 0}table.flights th,table.flights td{border:1px solid var(--line);padding:5px 7px;text-align:left;vertical-align:top}table.flights th{background:#e8edf2}
+.picked{margin:10px 0 4px;color:var(--muted)}.result{background:#eef1f4;border-radius:9px;padding:9px 12px}.result p{margin:4px 0}
+.tag{display:inline-block;font-weight:900;font-size:.8rem;border-radius:12px;padding:2px 9px;margin:0 6px 2px 0}.tag.s{background:#dce9f3;color:var(--sec)}.tag.f{background:#ece1f1;color:var(--free)}.tag.flat{background:#e8eaec;color:var(--ink)}
+.qlabel{font-size:.75rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:var(--steel);margin:0 0 4px}
+.choices{display:grid;gap:8px}
+@media(min-width:700px){.q .choices{grid-template-columns:1fr 1fr}}
+button{font:inherit;cursor:pointer;border-radius:10px;min-height:46px}
+.choice{text-align:left;background:#fff;color:var(--ink);border:2px solid #c9d0d8;padding:10px 12px;font-weight:650;line-height:1.3}
+.choice:hover:not(:disabled){border-color:var(--ink);background:#fafbfc}.choice:disabled{opacity:.5;cursor:not-allowed}
+.go{margin-top:12px;background:var(--navy);color:#fff;border:0;padding:11px 18px;font-weight:900}
+button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid #2f7dbd;outline-offset:2px}
+.answered{font-weight:800;color:var(--green);margin:4px 0}.why{margin:2px 0;color:var(--muted)}
+.msg{min-height:1.3em;font-weight:750;margin:8px 0 0}.msg.bad{color:var(--bad)}.msg.good{color:var(--green)}
+label{display:block;font-weight:850;margin:14px 0 4px}.stem{margin:0 0 4px;color:var(--muted);font-size:.92rem}
+input,textarea{width:100%;font:inherit;border:2px solid #c9d0d8;border-radius:9px;padding:10px;background:#fff;color:var(--ink)}
+.steps{display:grid;gap:6px;margin:10px 0;padding:0;list-style:none}.steps li{background:#eef1f4;border-radius:9px;padding:8px 12px;font-weight:700}
+.pair{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 0}.pair div{border-radius:10px;padding:8px 10px;font-size:.93rem}.pair b{display:block}
+.sbox{background:#dce9f3}.fbox{background:#ece1f1}
+@media(max-width:640px){.pair{grid-template-columns:1fr}}
+.welcome{background:#e6f1ea;color:var(--green);font-weight:800;border-radius:9px;padding:8px 12px;margin:0 0 10px}
+.foot{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-top:14px;color:var(--muted);font-size:.85rem}
+.foot button{background:#e3e7ec;border:0;padding:8px 12px;font-weight:800;color:var(--ink)}
+.src{font-size:.8rem;color:var(--muted)}
+@media print{.hud,.foot,.go{display:none}}
+</style>
+<script src="../../shared/assignments.js?v=20261101fill"></script>
+<script src="../../shared/turnin.js?v=20261101fill"></script>
+<script src="../../shared/unit-game.js?v=20261101fill"></script>
+</head><body>
+<header>
+  <p class="k">U.S. History · Unit 6: Modern America · Day 1</p>
+  <h1>Superpower Decision Desk</h1>
+  <p class="std"><b>Standards:</b> SS.9-12.US.52 · SS.9-12.US.53 · SS.9-12.US.55 · SS.9-12.US.56</p>
+  <p class="std"><b>Goal:</b> Explain where the 9/11 attacks came from, what happened that day, and how the U.S. tried to balance safety and freedom afterward. · About 25 minutes.</p>
+</header>
+<div class="hud" aria-label="Progress and your advice meters">
+  <span id="progressText">0 checks done</span>
+  <div class="bar" aria-hidden="true"><span id="progressFill"></span></div>
+  <span class="pill meter">Security <span class="track" aria-hidden="true"><span id="secFill" style="width:50%"></span></span> <span id="secNum">5/10</span></span>
+  <span class="pill meter">Freedoms <span class="track" aria-hidden="true"><span id="freeFill" style="width:50%"></span></span> <span id="freeNum">5/10</span></span>
+</div>
+<main>
+  <p class="welcome" id="welcome" hidden></p>
+  <div id="app"></div>
+  <div class="foot"><span>Progress saves on this device. Your teacher sees your work after you turn it in.</span><button type="button" id="restartBtn">Start over</button></div>
+</main>
+<script>
+const S = (who, body) => `<div class="source"><p class="who">${who}</p>${body}</div>`;
+const T = (fx) => {
+  const out = [];
+  if (fx.sec) out.push(`<span class="tag s">${fx.sec > 0 ? "+" : "−"}${Math.abs(fx.sec)} security</span>`);
+  if (fx.free) out.push(`<span class="tag f">${fx.free > 0 ? "+" : "−"}${Math.abs(fx.free)} freedoms</span>`);
+  return out.length ? out.join("") : `<span class="tag flat">No change</span>`;
+};
+const C = (label, fx, html) => ({ label, fx, result: `<p>${T(fx)}</p>${html}` });
+UnitGame.start({
+  key: "ush-u6-d1-superpower-v1",
+  assignmentId: "ush-u6-d1-superpower",
+  title: "U.S. History · Unit 6 · Day 1 · Superpower Decision Desk",
+  standard: "SS.9-12.US.52, SS.9-12.US.53, SS.9-12.US.55, SS.9-12.US.56",
+  oldApi: "https://fynn-class-assignment-submissions-20261024.neotboy.chatgpt.site/api/submit",
+  startFx: { sec: 5, free: 5 },
+  clampFx: fx => { fx.sec = Math.max(0, Math.min(10, fx.sec)); fx.free = Math.max(0, Math.min(10, fx.free)); },
+  hud: st => {
+    const s = st.fx.sec || 0, f = st.fx.free || 0;
+    document.getElementById("secFill").style.width = (s * 10) + "%"; document.getElementById("secNum").textContent = s + "/10";
+    document.getElementById("freeFill").style.width = (f * 10) + "%"; document.getElementById("freeNum").textContent = f + "/10";
+  },
+  startLabel: "Open the briefing",
+  introHtml: `<p class="kicker">Your job today</p><h2>You're an adviser to the President</h2>
+    <p>It's the fall of 2001. The United States was just attacked. You'll learn where the attack came from, then help decide what the country does next.</p>
+    <div class="pair"><div class="sbox"><b>Security meter</b>How well your advice protects the country from another attack.</div><div class="fbox"><b>Freedoms meter</b>How well your advice protects Americans' rights, like privacy.</div></div>
+    <p>There's no perfect answer. Most choices trade one for the other. That's the real debate.</p>
+    <ul class="steps"><li>1. Read the short briefings and answer the checks.</li><li>2. Make 3 decisions as an adviser.</li><li>3. Write 2 short answers and turn in.</li></ul>`,
+  scenes: [
+    { kicker: "Part 1 of 3 · Briefing", title: "Where Did the Attack Come From?",
+      teach: `<p>In 1979 the <b>Soviet Union</b> invaded Afghanistan. During the <b>Cold War</b>, the U.S. wanted to weaken the Soviets. So the CIA sent money and weapons to Afghan fighters called the <b>Mujahideen</b>.</p>
+        <p>The Soviets left in 1989. But armed groups stayed behind. Around 1988, <b>Osama bin Laden</b>, the son of a rich Saudi family, started <b>al-Qaeda</b> ("The Base"). It was a <b>terrorist</b> group: it used violence against regular people to scare a government into changing what it does.</p>`,
+      blocks: [
+        { type: "q", id: "r1", std: "US.52", short: "Why the U.S. armed the Mujahideen", prompt: S("Timeline", `<ul class="tl"><li><b>1979:</b> Soviet troops invade Afghanistan.</li><li><b>1980s:</b> The CIA sends weapons and money to the Mujahideen fighting the Soviets.</li><li><b>1989:</b> Soviet troops leave Afghanistan.</li></ul>`) + "Why did the U.S. send weapons to the Mujahideen?", options: ["To weaken the Soviet Union during the Cold War", "To help al-Qaeda take over Saudi Arabia", "To gain control of Afghanistan's oil and gas fields", "To protect U.S. troops stationed in Iraq"], hint: "Look at who the Mujahideen were fighting.", why: "The U.S. wanted the Soviets to lose in Afghanistan. It was a Cold War move." },
+        { type: "q", id: "r2", std: "US.52", short: "Unintended result of arming fighters", prompt: "Some historians say this Cold War policy had an <b>unintended</b> (not planned) result. Based on the briefing, what was it?", options: ["Armed extremist groups stayed after the Soviets left", "The Soviet Union kept control of Afghanistan for good", "Afghanistan became a strong U.S. ally right away", "The CIA stopped working in the Middle East"], hint: "Reread what the briefing says happened in 1989.", why: "The weapons and fighters didn't disappear. Some extremist networks, like al-Qaeda, grew out of that war." },
+        { type: "q", id: "r3", std: "US.52", short: "Bin Laden's anger over Saudi bases", prompt: S("Briefing card", `<p>After Iraq invaded Kuwait in 1990, the U.S. fought the <b>Gulf War</b> (1990–91). U.S. troops were based in <b>Saudi Arabia</b>. Bin Laden called this a betrayal. Islam's two holiest cities, <b>Mecca and Medina</b>, are in Saudi Arabia. Al-Qaeda also opposed U.S. support for Israel and U.S. influence in the Middle East.</p>`) + "Why was bin Laden angry about U.S. troops in Saudi Arabia?", options: ["He saw them as foreign troops in Islam's holy land", "He wanted those troops to go fight in Kuwait", "He thought the troops were secretly helping the Soviets", "He wanted U.S. troops to protect his family"], hint: "Look at which cities are in Saudi Arabia.", why: "Bin Laden saw non-Muslim troops near Mecca and Medina as an insult to Islam's holy land." },
+        { type: "q", id: "r4", std: "US.52", short: "Earlier al-Qaeda attacks", prompt: S("Briefing card", `<ul class="tl"><li><b>1998:</b> Al-Qaeda bombs U.S. embassies in Kenya and Tanzania. Over 200 people are killed.</li><li><b>2000:</b> Al-Qaeda bombs the Navy ship USS <i>Cole</i> in Yemen. 17 sailors are killed.</li></ul>`) + "What do these two events show?", options: ["Al-Qaeda attacked U.S. targets before 9/11", "Al-Qaeda only attacked targets inside the U.S.", "The U.S. started the war with al-Qaeda in 1998", "Al-Qaeda stopped its attacks after the year 2000"], hint: "Check the years and where each attack happened.", why: "Al-Qaeda had already attacked Americans overseas years before September 11, 2001." },
+        { type: "q", id: "r5", std: "US.55", short: "Al-Qaeda vs. most Muslims", prompt: S("Briefing card", `<p>Al-Qaeda claimed to speak for Islam. But most of the world's Muslims rejected its ideas. Muslim leaders and many Muslim countries publicly condemned the 9/11 attacks.</p>`) + "Which statement is accurate?", options: ["Al-Qaeda was an extremist group most Muslims rejected", "Al-Qaeda spoke for most of the world's Muslims", "Most Muslim-majority countries supported the 9/11 attacks", "Al-Qaeda was the government of Saudi Arabia"], hint: "Reread what most Muslims did, according to the card.", why: "Al-Qaeda was a small extremist group. Blaming all Muslims for its actions is not accurate or fair." }
+      ] },
+    { kicker: "Part 2 of 3 · The Day", title: "September 11, 2001",
+      teach: `<p>On the morning of September 11, 2001, <b>19 hijackers</b> from al-Qaeda took over 4 passenger planes. They flew them into buildings on purpose.</p>
+        <table class="flights"><tr><th>Flight</th><th>Time</th><th>What happened</th></tr>
+        <tr><td>American 11</td><td>8:46 a.m.</td><td>Hit the North Tower of the World Trade Center, New York</td></tr>
+        <tr><td>United 175</td><td>9:03 a.m.</td><td>Hit the South Tower of the World Trade Center</td></tr>
+        <tr><td>American 77</td><td>9:37 a.m.</td><td>Hit the Pentagon, near Washington, D.C.</td></tr>
+        <tr><td>United 93</td><td>10:03 a.m.</td><td>Passengers fought back. It crashed in a field near Shanksville, Pennsylvania.</td></tr></table>
+        <p>Both towers fell that morning, the South Tower first. Nearly <b>3,000 people</b> were killed.</p>`,
+      blocks: [
+        { type: "q", id: "d1", std: "US.52", short: "Flight 93 was different", prompt: "Look at the table. How was <b>United 93</b> different from the other three planes?", options: ["Passengers fought back, and it never reached its target", "It was the first plane to hit a building that day", "It hit the Pentagon instead of one of the towers in New York", "It landed safely after the hijackers gave up"], hint: "Read the last row of the table.", why: "The passengers on Flight 93 fought the hijackers. The plane crashed in a field. Its target was likely the U.S. Capitol or the White House." },
+        { type: "q", id: "d2", std: "US.56", short: "Flight 93 passengers = civic virtue", prompt: S("Briefing card", `<p>On Flight 93, passengers and crew used phones to call family. They learned other planes had hit buildings. They knew their plane was likely headed for a target too. They decided to rush the cockpit.</p>`) + "<b>Civic virtue</b> means putting the common good ahead of yourself. How did the Flight 93 passengers show it?", options: ["They risked their lives to stop an attack on others", "They called their families to say goodbye", "They followed the hijackers' orders to stay calm and seated", "They waited for the military to rescue them"], hint: "What did they decide to do after they learned about the other planes?", why: "They acted to protect people on the ground, even though it put their own lives at risk." },
+        { type: "q", id: "d3", std: "US.56", short: "First responders = civic virtue", prompt: S("Briefing card", `<p>As people ran out of the burning towers, firefighters, police, and paramedics ran in to rescue them. <b>343 New York firefighters</b> died that day.</p>`) + "What does the card show about the first responders?", options: ["They put others' safety ahead of their own", "They were ordered to stay away from the towers", "They waited until the towers were safe to enter", "They mostly worked to protect government buildings"], hint: "Which direction were they going while others ran out?", why: "Running into danger to save strangers is civic virtue. Many gave their lives doing it." },
+        { type: "q", id: "d4", std: "US.53", short: "Why all flights were grounded", prompt: S("Briefing card", `<p>That morning, the government ordered <b>every plane</b> over the U.S. to land. It was the first time this had ever happened. No regular flights flew for about two days.</p>`) + "Why would the government ground every plane?", options: ["To stop any other hijacked planes from being used", "To save fuel for the military during the war", "To punish the airlines for letting hijackers on", "To let the president travel without any traffic"], hint: "What had the hijackers used as weapons?", why: "Nobody knew yet if more planes were hijacked. Landing every plane was the fastest way to stop more attacks." }
+      ] },
+    { kicker: "Part 3 of 3 · The Decision Desk", title: "What Should a Superpower Do?",
+      teach: `<p>A <b>superpower</b> is a country with huge military and economic power. In 2001, the U.S. was the world's only one. Now it had to decide how to respond.</p>
+        <p>President <b>George W. Bush</b> called it an act of war by terrorists. He announced a <b>"War on Terror."</b> Your advice is next. Watch both meters.</p>`,
+      blocks: [
+        { type: "q", id: "x1", std: "US.53", short: "Meaning of Bush's War on Terror quote", prompt: S("President George W. Bush, speech to Congress, Sept. 20, 2001", `<p><q>Our war on terror begins with al Qaeda, but it does not end there. It will not end until every terrorist group of global reach has been found, stopped and defeated.</q></p>`) + "What did Bush mean?", options: ["The fight would target many groups, not just al-Qaeda", "The war would end as soon as al-Qaeda was finally stopped", "The U.S. would fight only inside its own borders", "Only one country was responsible for the attack"], hint: "Look at the words \"does not end there.\"", why: "Bush said the War on Terror would reach beyond al-Qaeda to other terrorist groups around the world." },
+        { type: "event", id: "e1", short: "Afghanistan decision", html: `<p class="desk">Decision 1 · Afghanistan</p><p>Al-Qaeda's training camps are in Afghanistan. Afghanistan's rulers, the <b>Taliban</b>, are protecting bin Laden. They refuse to hand him over. What do you advise?</p>`,
+          choices: [
+            C("Use military force with allies to remove the Taliban and destroy the camps", { sec: 2 }, `<p><b>This is what the U.S. did.</b> On October 7, 2001, the U.S. and allies like Britain attacked. NATO said an attack on one member was an attack on all, for the first time ever. The Taliban lost power within about two months.</p><p>But bin Laden escaped. U.S. troops stayed in Afghanistan for 20 years, and the Taliban took power again in 2021.</p>`),
+            C("Pressure the Taliban with talks and trade penalties while small teams hunt al-Qaeda", { sec: 1 }, `<p>Supporters of this view said a full invasion could pull the U.S. into a long war. Critics said the Taliban had already refused, and al-Qaeda could plan new attacks while the U.S. waited.</p><p>In real life, the U.S. chose a full military attack in October 2001.</p>`),
+            C("Treat it as a crime: build court cases and work with other countries' police", { sec: 0 }, `<p>Some argued that courts, not armies, should handle terrorists. That's how the 1993 World Trade Center bombers were caught and tried. Critics said police can't arrest leaders who are protected by a government.</p><p>In real life, the U.S. chose a full military attack in October 2001.</p>`)
+          ] },
+        { type: "event", id: "e2", short: "Airport security decision", html: `<p class="desk">Decision 2 · Airports</p><p>The hijackers got through airport security with small knives and box cutters. Congress is writing new airport rules. What do you advise?</p>`,
+          choices: [
+            C("Put federal screeners at every airport with much stricter searches", { sec: 2, free: -1 }, `<p><b>Close to what happened.</b> In November 2001, Congress created the <b>TSA</b> (Transportation Security Administration). Screening got much stricter. Supporters said it made flying safer. Critics said the searches were slow and invaded privacy.</p>`),
+            C("Lock cockpit doors and add air marshals, but keep searches about the same", { sec: 1 }, `<p>Stronger cockpit doors and more armed air marshals were added in real life too. Your plan is less strict, so lines are shorter, but some officials would say it leaves gaps.</p>`),
+            C("Keep airport rules about the same so travel stays fast and normal", { sec: -1, free: 1 }, `<p>Some people worried that fear would lead to rules that went too far. But most Americans in 2001 wanted stronger security after hijackers got through so easily.</p>`)
+          ] },
+        { type: "q", id: "x2", std: "US.53", short: "Why Homeland Security was created", prompt: S("Briefing card", `<p>In 2002, Congress created the <b>Department of Homeland Security</b>. It joined 22 separate agencies, like the Coast Guard and border agencies, into one department. A 2004 report on 9/11 later found that agencies had clues about the plot but <b>didn't share them</b> with each other.</p>`) + "Why combine so many agencies into one department?", options: ["So the groups protecting the country work together and share information", "So the military could take over all police work inside the U.S.", "So the government could cut spending on border and airport security", "So each state could run its own separate homeland security plan"], hint: "What problem did the 2004 report find?", why: "Agencies hadn't connected the clues. One department was meant to help them share information and work together." },
+        { type: "event", id: "e3", short: "Surveillance decision", html: `<p class="desk">Decision 3 · Surveillance</p><p><b>Surveillance</b> means watching or listening to people's communications and records. Congress is voting on a law to give agencies more power to search phone, email, and other records of terror suspects. What do you advise?</p>`,
+          choices: [
+            C("Give agencies broad new search powers with fewer court steps", { sec: 2, free: -2 }, `<p><b>Close to what happened.</b> In October 2001, Congress passed the <b>USA PATRIOT Act</b>, 98–1 in the Senate. Later, in 2013, Americans learned the government had been collecting phone records of millions of ordinary people. In 2015, Congress passed a new law to end that mass collection.</p>`),
+            C("Add new powers, but require a judge's OK and an end date for the law", { sec: 1 }, `<p>Some parts of the real Patriot Act did have end dates, so Congress had to vote again to keep them. Your plan gives agencies new tools while keeping courts involved.</p>`),
+            C("Don't add new powers; make agencies use the ones they already have", { free: 1 }, `<p>Groups like the ACLU (a civil liberties group) argued for this. They said the problem before 9/11 was agencies not sharing clues, not a lack of power. Others said terrorists use new technology, so the old rules weren't enough.</p>`)
+          ] },
+        { type: "q", id: "x3", std: "US.55", short: "Identify a critic's view of the Patriot Act", prompt: S("Two viewpoints on the Patriot Act", `<p><b>Supporter:</b> Terrorists plan attacks by phone and email. Agencies need faster ways to track them before they strike.</p><p><b>Critic:</b> These powers can be used to watch ordinary Americans. The Constitution protects us from unreasonable searches.</p>`) + "Which sentence matches the <b>critic's</b> view?", options: ["Giving up privacy can put Americans' rights at risk", "Tracking terrorists quickly can save many American lives", "New technology means agencies need new tools", "Agencies should act before an attack happens"], hint: "Which viewpoint talks about rights and searches?", why: "The critic worried about privacy and the Fourth Amendment's protection from unreasonable searches. The other three are supporter arguments." },
+        { type: "q", id: "x4", std: "US.55", short: "Bush's message on Muslim Americans", prompt: S("After 9/11", `<p>Hate crimes against Muslim Americans jumped in 2001. Some Sikh and Arab Americans were attacked too, just for how they looked. Six days after the attacks, President Bush visited a mosque (a Muslim place of worship) and said: <q>The face of terror is not the true faith of Islam.</q></p>`) + "What was Bush's message?", options: ["Don't blame Muslim Americans for what the terrorists did", "All Muslims should be watched closely by the government", "Islam was the main cause of the September 11 attacks", "Muslim Americans should leave the country to stay safe"], hint: "What did Bush say terror is NOT?", why: "Bush separated the terrorists from the religion of Islam to push back on hate against Muslim Americans." },
+        { type: "q", id: "x5", std: "US.55", short: "Why the Iraq War was debated", prompt: S("Briefing card · The Iraq War (2003)", `<p>In 2003 the U.S. invaded <b>Iraq</b> and removed its dictator, Saddam Hussein. The Bush administration said Iraq had <b>weapons of mass destruction</b> (WMDs) and could give them to terrorists.</p><p>No WMD stockpiles were found. The 9/11 Commission found no proof that Iraq helped plan 9/11. Supporters said removing a cruel dictator still made the region safer.</p>`) + "Why was the Iraq War more debated than the war in Afghanistan?", options: ["Iraq wasn't shown to be behind 9/11, and no WMDs were found", "Iraq's government had openly protected bin Laden for many years", "The Iraq War was approved by every country in the world", "U.S. troops never actually entered Iraq during the war"], hint: "Compare the reasons given with what was actually found.", why: "Afghanistan's Taliban sheltered al-Qaeda. Iraq's link to 9/11 was never proven, and the WMDs weren't there, so many Americans questioned the war." }
+      ] }
+  ],
+  finale: {
+    title: "Your Advice to the President",
+    report: st => `<p><b>Your meters ended at Security ${st.fx.sec}/10 and Freedoms ${st.fx.free}/10.</b> No adviser gets both to 10. Every choice traded something.</p><p>U.S. forces finally found and killed bin Laden in Pakistan in May 2011. Americans still debate how to fight terrorism and protect freedom at the same time.</p><p>Answer both in 1–2 full sentences.</p>`,
+    prompts: [
+      { id: "respond", short: "How a superpower should respond", label: "1. Pick ONE of your three decisions (Afghanistan, airports, or surveillance). Was it the right call? Explain why, using a fact from today.", stem: "For ___, I advised ___. I think this was the right call because ___.", min: 80, mustAll: [["afghan", "taliban", "airport", "tsa", "surveil", "patriot", "record", "phone", "military", "screen"], ["because", "since"]], mustMsg: "In answer 1, name the decision (Afghanistan, airports, or surveillance) and explain why (use \"because\")." },
+      { id: "balance", short: "Balancing safety and freedom", label: "2. How should a democracy fight terrorism while still protecting people's freedoms? Give one example.", stem: "A democracy should ___ while protecting freedoms by ___. For example, ___.", min: 70, newWords: 5, mustAll: [["safe", "secur", "protect", "terror"], ["freedom", "free", "right", "privacy", "liberty", "court", "judge"]], mustMsg: "In answer 2, talk about BOTH safety and freedom (like privacy, rights, or courts)." }
+    ]
+  },
+  extraAnswers: st => ({ "Security meter": st.fx.sec + " of 10", "Freedoms meter": st.fx.free + " of 10" })
+});
+</script>
+</body></html>

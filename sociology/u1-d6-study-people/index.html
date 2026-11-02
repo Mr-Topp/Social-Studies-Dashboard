@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Research Agency | Sociology Unit 1 Day 6</title>
+<meta name="description" content="Run a research company: pick the right method for each client, weigh the tradeoffs, and judge famous ethics cases.">
+<style>
+:root{--ink:#1f2b33;--muted:#55626b;--paper:#f4f7f6;--card:#fff;--line:#dcd9cf;--acc:#1b6b5c;--acc2:#c0632d;--soft:#eaf4f1;--green:#2a6b45;--bad:#a2392f}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.5 system-ui,Segoe UI,Arial,sans-serif}
+header{background:linear-gradient(100deg,#e5f2ee,#fbefe5);border-bottom:5px solid var(--acc);padding:16px max(16px,calc((100vw - 900px)/2)) 12px}
+.k{font-size:.78rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:var(--acc);margin:0}
+h1{margin:2px 0 4px;font-size:clamp(1.7rem,3.4vw,2.3rem)}
+.std{margin:2px 0;font-size:.92rem;color:var(--muted)}.std b{color:var(--ink)}
+.hud{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line);padding:8px max(16px,calc((100vw - 900px)/2));display:flex;gap:10px 12px;flex-wrap:wrap;align-items:center;font-weight:800;font-size:.92rem;box-shadow:0 2px 8px #1f2b3312}
+.hud .bar{flex:1;min-width:110px;height:10px;background:#e6e6de;border-radius:9px;overflow:hidden}.hud .bar span{display:block;height:100%;width:0;background:var(--acc);transition:width .4s}
+.pill{background:#f0efe8;border-radius:20px;padding:3px 10px;white-space:nowrap}
+.meter{display:flex;align-items:center;gap:6px}.meter .track{width:100px;height:10px;border-radius:9px;background:#e6e6de;overflow:hidden}.meter .track span{display:block;height:100%;background:var(--acc2);transition:width .5s}
+main{max-width:900px;margin:auto;padding:14px 16px 60px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;box-shadow:0 3px 12px #1f2b330d}
+.kicker{font-size:.78rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:var(--acc2);margin:0}
+h2{margin:2px 0 10px;font-size:1.45rem}
+.teach{background:var(--soft);border-left:5px solid var(--acc);border-radius:9px;padding:10px 14px;margin:0 0 12px}.teach p{margin:4px 0}.teach b{color:var(--acc)}.teach ul{margin:4px 0;padding-left:20px}
+.block{margin:14px 0;padding:14px;border-radius:12px;border:2px solid var(--line);background:#fff}
+.block.current{border-color:var(--ink);box-shadow:0 0 0 4px color-mix(in srgb,var(--acc) 22%,transparent)}
+.block h3{margin:0 0 10px;font-size:1.06rem;line-height:1.35;font-weight:700}
+.event{background:#fbf9f4;border-style:dashed;border-color:#cdbf9a}.event.current{border-style:solid}
+.event-body p{margin:4px 0}
+.ev{display:block;font-weight:400;background:#f7f6f1;border:1px solid var(--line);border-left:5px solid var(--acc2);border-radius:10px;padding:9px 12px;margin:0 0 10px;font-size:.98rem}
+.ev .who{display:block;font-size:.74rem;font-weight:900;letter-spacing:.06em;text-transform:uppercase;color:var(--acc2);margin-bottom:2px}
+.ev p{margin:3px 0}
+.picked{margin:10px 0 4px;color:var(--muted)}.result{background:#f0efe8;border-radius:9px;padding:9px 12px}.result p{margin:4px 0}
+.tag{display:inline-block;font-weight:900;font-size:.8rem;border-radius:12px;padding:2px 9px;margin-right:6px}.tag.up{background:#dcefe2;color:var(--green)}.tag.down{background:#f6dcd8;color:var(--bad)}.tag.flat{background:#ebe9e0;color:var(--ink)}
+.qlabel{font-size:.75rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:var(--acc);margin:0 0 4px}
+.choices{display:grid;gap:8px}
+@media(min-width:700px){.q .choices{grid-template-columns:1fr 1fr}}
+button{font:inherit;cursor:pointer;border-radius:10px;min-height:46px}
+.choice{text-align:left;background:#fff;color:var(--ink);border:2px solid #cfcdbf;padding:10px 12px;font-weight:650;line-height:1.3}
+.choice:hover:not(:disabled){border-color:var(--ink);background:#fcfcfa}.choice:disabled{opacity:.5;cursor:not-allowed}
+.go{margin-top:12px;background:var(--acc);color:#fff;border:0;padding:11px 18px;font-weight:900}
+button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid #2f7dbd;outline-offset:2px}
+.answered{font-weight:800;color:var(--green);margin:4px 0}.why{margin:2px 0;color:var(--muted)}
+.msg{min-height:1.3em;font-weight:750;margin:8px 0 0}.msg.bad{color:var(--bad)}.msg.good{color:var(--green)}
+label{display:block;font-weight:850;margin:14px 0 4px}.stem{margin:0 0 4px;color:var(--muted);font-size:.92rem}
+input,textarea{width:100%;font:inherit;border:2px solid #cfcdbf;border-radius:9px;padding:10px;background:#fff;color:var(--ink)}
+.steps{display:grid;gap:6px;margin:10px 0;padding:0;list-style:none}.steps li{background:#f0efe8;border-radius:9px;padding:8px 12px;font-weight:700}
+.welcome{background:#e6f1ea;color:var(--green);font-weight:800;border-radius:9px;padding:8px 12px;margin:0 0 10px}
+.foot{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-top:14px;color:var(--muted);font-size:.85rem}
+.foot button{background:#ebe9e0;border:0;padding:8px 12px;font-weight:800;color:var(--ink)}
+.src{font-size:.8rem;color:var(--muted)}
+.bars{display:grid;gap:6px;margin:8px 0}.brow{display:grid;grid-template-columns:minmax(90px,140px) 1fr 44px;gap:8px;align-items:center;font-size:.9rem}.brow .t{height:16px;background:#e6e6de;border-radius:6px;overflow:hidden}.brow .t span{display:block;height:100%;background:var(--acc2)}
+@media print{.hud,.foot,.go{display:none}}
+
+.ev.client{border-left-color:var(--acc);background:#f2f8f6}
+
+</style>
+<script src="../../shared/assignments.js?v=20261101fill"></script>
+<script src="../../shared/turnin.js?v=20261101fill"></script>
+<script src="../../shared/unit-game.js?v=20261101fill"></script>
+</head><body>
+<header>
+  <p class="k">Sociology · Unit 1 · Day 6</p>
+  <h1>How Should We Study People?</h1>
+  <p class="std"><b>SS.9-12.Soc.1</b> Analyze the components of a sociological investigation.</p>
+  <p class="std"><b>Goal:</b> Pick the right research method for a question, explain its tradeoffs, and spot ethics problems. · About 25 minutes.</p>
+</header>
+<div class="hud" aria-label="Progress, days, and trust">
+  <span id="progressText">0 checks done</span>
+  <div class="bar" aria-hidden="true"><span id="progressFill"></span></div>
+  <span class="pill">📅 Days left: <span id="daysNum">40</span></span>
+  <span class="pill meter">Trust: <span class="track" aria-hidden="true"><span id="trustFill" style="width:50%"></span></span> <span id="trustNum">5/10</span></span>
+</div>
+<main>
+  <p class="welcome" id="welcome" hidden></p>
+  <div id="app"></div>
+  <div class="foot"><span>Progress saves on this device. Your teacher sees your work after you turn it in.</span><button type="button" id="restartBtn">Start over</button></div>
+</main>
+<script>
+const T = (cls, txt) => `<span class="tag ${cls}">${txt}</span>`;
+const ev = (who, body) => `<span class="ev"><span class="who">${who}</span>${body}</span>`;
+window.S = null;
+
+const client = (who, ask) => `<span class="ev client"><span class="who">📋 New client · ${who}</span>"${ask}"</span>`;
+UnitGame.start({
+  key: "soc-u1-d6-study-people-v1",
+  assignmentId: "soc-u1-d6-study-people",
+  title: "Sociology · Unit 1 · Day 6 · How Should We Study People?",
+  standard: "SS.9-12.Soc.1",
+  oldApi: "https://fynn-class-assignment-submissions-20261024.neotboy.chatgpt.site/api/submit",
+  startFx: { days: 40, trust: 5 },
+  clampFx: fx => { fx.trust = Math.max(0, Math.min(10, fx.trust)); fx.days = Math.max(0, fx.days); },
+  hud: st => { window.S = st; const t = st.fx.trust || 0; document.getElementById("trustFill").style.width = (t * 10) + "%"; document.getElementById("trustNum").textContent = t + "/10"; document.getElementById("daysNum").textContent = st.fx.days; },
+  startLabel: "Clock in",
+  introHtml: `<p class="kicker">Day one on the job</p><h2>Welcome to Cedar River Research Co.</h2>
+    <p>You just got hired at a small research company. Schools, cities, and businesses bring you questions about <b>people</b>. You pick how to study them.</p>
+    <p>Every method has a cost. Some take a long time. Some only give part of the story. And if you treat people badly, you lose <b>trust</b>.</p>
+    <ul class="steps"><li>📅 You have <b>40 work days</b> this season.</li><li>🤝 Watch your <b>Trust</b> meter. Good, ethical work raises it.</li><li>✍️ At the end, write 2 short answers and turn in.</li></ul>
+    <p class="src">The company and clients are made up. The famous studies in Part 3 are real.</p>`,
+  scenes: [
+    { kicker: "Part 1 of 3", title: "The Toolbox",
+      teach: `<p>Sociologists use six main <b>research methods</b>:</p>
+        <ul><li><b>Survey</b>: the same questions to many people. Fast and big. Usually gives numbers.</li>
+        <li><b>Interview</b>: one-on-one, open-ended talk. Slow but deep.</li>
+        <li><b>Participant observation</b>: the researcher joins a group over time and takes notes.</li>
+        <li><b>Experiment</b>: change one thing and control the rest. Best for showing <b>cause and effect</b>.</li>
+        <li><b>Case study</b>: one person, group, or event in depth.</li>
+        <li><b>Secondary data</b>: data someone else already collected, like the U.S. Census.</li></ul>
+        <p><b>Quantitative</b> = numbers. <b>Qualitative</b> = descriptions, meanings, and experiences.</p>`,
+      blocks: [
+        { type: "q", id: "m1", std: "Soc.1", short: "1,200 students → survey", prompt: client("A school district", "How many of our 1,200 students work a job after school?") + "Which method fits best?", options: ["A survey sent to every student", "A case study of one student", "Joining one student's work crew", "One long interview with the principal"], hint: "The client wants a number for a big group. Which method reaches many people fast?", why: "A survey asks the same questions to lots of people and gives numbers. That's what this client needs." },
+        { type: "q", id: "m2", std: "Soc.1", short: "Working at a restaurant = participant observation", prompt: ev("Research note", "A researcher takes a job at a fast-food restaurant for 8 months. She takes notes on how workers treat each other.") + "Which method is this?", options: ["Participant observation", "Secondary data analysis", "A controlled experiment", "A large-scale survey"], hint: "The researcher becomes part of the group. Check the toolbox.", why: "Joining a group over time and watching from the inside is participant observation." },
+        { type: "q", id: "m3", std: "Soc.1", short: "Census numbers = secondary data", prompt: ev("Research note", "A researcher uses U.S. Census numbers to compare incomes in Iowa's 99 counties. He never talks to anyone.") + "Which method is this?", options: ["Secondary data", "Participant observation", "A case study", "An interview"], hint: "Who collected the numbers he's using?", why: "The Census Bureau already collected that data. Using existing data is secondary data." },
+        { type: "event", id: "e1", short: "Young-people-leaving method", html: client("A city council", "Why do so many young people move away after high school?") + `<p>Pick your method.</p>`,
+          choices: [
+            { label: "Survey 2,000 young adults (5 days)", fx: { days: -5, trust: 1 }, result: `<p>${T("up","+1 trust · −5 days")}Results: 41% said jobs, 22% said college, 15% said things to do. Clear numbers. But the client asks, "What's the story behind them?" You don't know.</p>` },
+            { label: "Long interviews with 20 people who left (12 days)", fx: { days: -12, trust: 1 }, result: `<p>${T("up","+1 trust · −12 days")}Powerful stories. One said, "My mom got laid off, and I felt like there was nothing here for me." But with only 20 people, you can't say how common each reason is.</p>` },
+            { label: "Survey first, then interview 10 people (15 days)", fx: { days: -15, trust: 2 }, result: `<p>${T("up","+2 trust · −15 days")}You get the numbers AND the stories behind them. The client loves it. It costs the most time, though.</p>` }
+          ] },
+        { type: "q", id: "m4", std: "Soc.1", short: "Why choose qualitative", prompt: ev("Two kinds of results", "<b>Survey:</b> 41% said they left for jobs.<br><b>Interview:</b> \"My mom got laid off, and I felt like there was nothing here for me.\"") + "Why might a researcher choose interviews (qualitative) over a survey?", options: ["To learn the reasons behind the numbers", "To get answers from more people in less time", "To prove that one thing causes another", "To avoid talking with the people being studied"], hint: "What does the interview quote tell you that 41% doesn't?", why: "Qualitative methods show meanings and experiences. Numbers tell you how many; interviews help explain why." }
+      ] },
+    { kicker: "Part 2 of 3", title: "Every Method Has a Tradeoff",
+      teach: `<p>A <b>tradeoff</b> is what you give up to get something.</p>
+        <p><b>Surveys</b> are fast and big, but people don't always answer honestly. <b>Experiments</b> show cause and effect, but can feel fake. <b>Case studies</b> go deep, but may not apply to others. <b>Observation</b> is deep, but slow, and people may act differently when watched.</p>`,
+      blocks: [
+        { type: "q", id: "t1", std: "Soc.1", short: "Cause & effect → experiment", prompt: client("A tutoring app company", "Does our app actually RAISE test scores?") + "Which method fits best?", options: ["An experiment with a control group", "A case study of one top student", "Census data on Iowa test scores", "Watching students at lunch for a month"], hint: "The client wants to know if the app CAUSES higher scores.", why: "Only an experiment changes one thing (using the app) and compares to a control group. That's how you test cause and effect." },
+        { type: "q", id: "t2", std: "Soc.1", short: "Case study weakness", prompt: ev("Research note", "A researcher spends a year studying one small Iowa town after its factory closed.") + "What is the biggest weakness of this case study?", options: ["Its results may not apply to other towns", "It can't tell us anything in real detail", "It uses too many numbers and statistics", "It can only study people who are online"], hint: "It's ONE town. Would every town react the same way?", why: "Case studies go deep on one example, but that example may not represent others." },
+        { type: "event", id: "e2", short: "Skate park consent choice", html: client("A parks department", "The skaters at Riverside Park seem to have their own rules. What are they?") + `<p>You'll use participant observation. How do you join the group?</p>`,
+          choices: [
+            { label: "Tell them you're a researcher and ask if it's OK (10 days)", fx: { days: -10, trust: 2 }, result: `<p>${T("up","+2 trust · −10 days")}Most say yes. One says no, so you leave him out of your notes. This is <b>informed consent</b>: people agree after knowing what the study is.</p>` },
+            { label: "Go undercover. Just pretend to be a skater (8 days).", fx: { days: -8, trust: -3 }, result: `<p>${T("down","−3 trust · −8 days")}A skater finds your notebook. Word spreads that you were secretly studying them. The crew stops talking to you, and the client worries about complaints.</p>` },
+            { label: "Skip it. Tape a survey QR code to the rail (2 days).", fx: { days: -2 }, result: `<p>${T("flat","No change · −2 days")}You get 3 answers, one of them a meme. Fast, but you learn almost nothing.</p>` }
+          ] },
+        { type: "q", id: "t3", std: "Soc.1", short: "Observer effect", prompt: ev("Field notes, week 3", "When the skaters knew I was watching, they swore less and helped each other more. When I left, things went back to normal.") + "What problem does this show?", options: ["People act differently when they know they're watched", "The skaters were both the test group and the control", "She used secondary data instead of her own data", "Her sample was much too large to be a case study"], hint: "What changed when the researcher was there?", why: "People change how they act when they know they're being studied. Observers have to plan for this." },
+        { type: "q", id: "t4", std: "Soc.1", short: "Survey weakness: honesty", prompt: ev("Two numbers that don't match", "<b>Survey:</b> students said they do 2.5 hours of homework a night.<br><b>Teacher logs:</b> about 40 minutes.") + "What survey weakness does this show?", options: ["People don't always answer surveys honestly", "Surveys can't collect any numbers at all", "Surveys only work with one person at a time", "Surveys prove cause and effect too strongly"], hint: "Why might students report more homework than they really do?", why: "People may guess, forget, or say what sounds good. Researchers check surveys against other data when they can." }
+      ] },
+    { kicker: "Part 3 of 3", title: "The Ethics Files",
+      teach: `<p>Research <b>ethics</b> are rules that protect the people being studied:</p>
+        <ul><li><b>Informed consent</b>: people agree after knowing the purpose and risks.</li><li><b>Do no harm</b>: don't hurt people physically or mentally.</li><li><b>Right to quit</b>: people can stop at any time.</li><li><b>Honesty</b> and <b>objectivity</b>: don't trick people, and don't let your own views tilt the results (<b>bias</b>).</li></ul>
+        <p>These four real studies are a big reason these rules exist. In the U.S., most studies with people now need a review board's OK before they start.</p>`,
+      blocks: [
+        { type: "q", id: "x1", std: "Soc.1", short: "Tuskegee = no informed consent", prompt: ev("Case file · Tuskegee Study, 1932–1972", "The U.S. Public Health Service studied about 600 Black men in Alabama, 399 of them with syphilis. The men were told they were being treated for \"bad blood.\" By 1947 penicillin could cure syphilis, but the men were not given it. Many died, and some wives and children were infected.") + "Which rule was most clearly broken?", options: ["Informed consent, since the men were lied to", "Objectivity, since the researchers liked the men", "Secondary data, since they used old census records", "Sample size, since the study had too few people"], hint: "What were the men told, and was it true?", why: "The men never agreed to an untreated disease study. They were lied to and harmed. Public outrage led to the 1974 National Research Act and modern consent rules." },
+        { type: "q", id: "x2", std: "Soc.1", short: "Milgram = deception & stress", prompt: ev("Case file · Milgram, Yale, 1961", "People were told to give electric shocks to a \"learner\" each time he got an answer wrong. The shocks were fake and the learner was an actor, but the participants didn't know. In the best-known version, about 65% went to the highest level. Many sweated, shook, and begged to stop.") + "What was the main ethical problem?", options: ["Deception and serious stress for the participants", "It had no way to control any of its variables", "It only used old records instead of real people", "The participants were paid far too much money"], hint: "Did participants know the truth? How did they feel?", why: "Participants were tricked and put under heavy stress. Today, deception like this is strictly limited." },
+        { type: "q", id: "x3", std: "Soc.1", short: "Little Albert = harm, no consent", prompt: ev("Case file · \"Little Albert,\" 1920", "John Watson and Rosalie Rayner made a loud, scary noise every time a baby named Albert touched a white rat. Soon he cried at the rat, and also at other furry things. They never undid the fear.") + "Why is this study seen as unethical?", options: ["A baby can't consent, and he was harmed", "The study used too many babies at once", "The researchers gave the baby a survey", "A rat can't be used as a variable"], hint: "Could Albert agree to this? Was he hurt?", why: "Albert couldn't give consent, and the study left him with fears that were never removed. That breaks consent and do no harm." },
+        { type: "event", id: "e3", short: "Participant wants to stop", html: ev("Your own interview study", "Halfway through an interview about losing a job, your participant starts crying. \"I don't think I want to keep going.\""),
+          choices: [
+            { label: "Stop. Remind them they can quit and pull their answers out.", fx: { trust: 3, days: -1 }, result: `<p>${T("up","+3 trust")}They thank you. A week later they come back and finish on their own terms. That's the <b>right to quit</b>.</p>` },
+            { label: "Push on. You're almost done, and you need the data.", fx: { trust: -4 }, result: `<p>${T("down","−4 trust")}You finish, but they file a complaint. The review board pauses your whole study.</p>` },
+            { label: "Take a short break, then ask the same question again", fx: { trust: -1 }, result: `<p>${T("down","−1 trust")}Kinder than pushing, but they already said they wanted to stop. They need to hear clearly that quitting is OK.</p>` }
+          ] },
+        { type: "q", id: "x4", std: "Soc.1", short: "Stanford Prison = not objective", prompt: ev("Case file · Stanford Prison Experiment, 1971", "Philip Zimbardo put college students in a fake prison as \"guards\" and \"prisoners.\" Guards became cruel, and the study ended after 6 of 14 planned days. Later, recordings showed the guards were coached to be tough, and Zimbardo acted as the prison boss.") + "Why do many researchers now doubt its results?", options: ["The researcher wasn't objective. He shaped what happened.", "Its control group was much too small to compare against", "It was only a survey, so the students could have lied", "It happened too long ago for anyone to learn from it"], hint: "Reread the last sentence of the case file.", why: "A researcher shouldn't steer results. Zimbardo was part of the experiment and guards were coached, so the study is biased, besides harming the 'prisoners.'" }
+      ] }
+  ],
+  finale: {
+    title: "Your Research Review",
+    report: st => `<p><b>Season over: ${st.fx.days} work days left · Trust ${st.fx.trust}/10.</b> ${st.fx.trust >= 8 ? "Clients and participants trust your company. You picked methods that fit and treated people right." : st.fx.trust >= 5 ? "Solid season, with a few shortcuts. Think about consent and the right to quit." : "Trust took a hit. Methods matter, but so does how you treat people."}</p><p>Answer both in 1–2 full sentences.</p>`,
+    prompts: [
+      { id: "rules", short: "Worst study and the rule that would stop it", label: "1. Which famous study broke the most rules? Which rule would have stopped it?", stem: "I think the ___ study broke the most rules because ___. The rule of ___ would have stopped it.", min: 70, newWords: 5, mustAll: [["tuskegee", "milgram", "albert", "stanford", "zimbardo", "watson"], ["consent", "harm", "deceiv", "decept", "lie", "lied", "quit", "stress", "objectiv", "bias", "truth", "honest"]], mustMsg: "In answer 1, name the study (Tuskegee, Milgram, Little Albert, or Stanford) AND the rule (like informed consent or do no harm)." },
+      { id: "method", short: "My research question, method, and tradeoff", label: "2. Make up a question about your school or town. Which method would you use, and what is one tradeoff?", stem: "My question: ___? I would use a ___ because ___. One tradeoff is ___.", min: 80, mustAll: [["survey", "interview", "observ", "experiment", "case", "secondary", "census"], ["but", "because", "although", "however", "tradeoff", "slow", "fast", "might", "may"]], mustMsg: "In answer 2, name a method (survey, interview, observation, experiment, case study, or secondary data) AND explain why or what you give up." }
+    ]
+  },
+  extraAnswers: st => ({ "Trust meter": st.fx.trust + " of 10", "Days left": String(st.fx.days) })
+});
+
+</script>
+</body></html>

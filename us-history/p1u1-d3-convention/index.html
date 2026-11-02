@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Behind Closed Doors: Who Wrote the Constitution? | U.S. History Unit 1 Day 3</title>
+<meta name="description" content="Work as an aide inside the secret Constitutional Convention of 1787. Meet the framers, broker the deals, and judge who won and who lost.">
+<style>
+
+:root{--ink:#1f2b33;--muted:#55626b;--paper:#f6f3ec;--card:#fff;--line:#dcd5c4;--acc:#5a3d7a;--acc2:#9b3a2c;--soft:#f1edf6;--green:#2a6b45;--bad:#a2392f;--parch:#fbf5e6;--parchline:#e2d3ad}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.5 system-ui,Segoe UI,Arial,sans-serif}
+header{background:linear-gradient(100deg,#eef2f7 0 60%,#f7ebe6 60% 100%);border-bottom:5px solid var(--acc);padding:16px max(16px,calc((100vw - 900px)/2)) 12px}
+.k{font-size:.78rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:var(--acc);margin:0}
+h1{margin:2px 0 4px;font-size:clamp(1.6rem,3.4vw,2.3rem)}
+.std{margin:2px 0;font-size:.92rem;color:var(--muted)}.std b{color:var(--ink)}
+.hud{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line);padding:8px max(16px,calc((100vw - 900px)/2));display:flex;gap:12px;flex-wrap:wrap;align-items:center;font-weight:800;font-size:.92rem;box-shadow:0 2px 8px #1f2b3312}
+.hud .bar{flex:1;min-width:120px;height:10px;background:#e6e3da;border-radius:9px;overflow:hidden}.hud .bar span{display:block;height:100%;width:0;background:var(--acc);transition:width .4s}
+.pill{background:#f0ede4;border-radius:20px;padding:3px 10px;white-space:nowrap}
+.meter{display:flex;align-items:center;gap:6px}.meter .track{width:110px;height:10px;border-radius:9px;background:#e6e3da;overflow:hidden}.meter .track span{display:block;height:100%;background:var(--acc2);transition:width .5s}
+main{max-width:900px;margin:auto;padding:14px 16px 60px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;box-shadow:0 3px 12px #1f2b330d}
+.kicker{font-size:.78rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:var(--acc2);margin:0}
+h2{margin:2px 0 10px;font-size:1.45rem}
+.teach{background:var(--soft);border-left:5px solid var(--acc);border-radius:9px;padding:10px 14px;margin:0 0 12px}.teach p{margin:4px 0}.teach b{color:var(--acc)}
+.block{margin:14px 0;padding:14px;border-radius:12px;border:2px solid var(--line);background:#fff}
+.block.current{border-color:var(--ink);box-shadow:0 0 0 4px #2a4f7a30}
+.block h3{margin:0 0 10px;font-size:1.06rem;line-height:1.35;font-weight:700}
+.event{background:#fbf9f4;border-style:dashed;border-color:#cdbf9a}.event.current{border-style:solid}
+.event-body p{margin:4px 0}
+.srccard{background:var(--parch);border:1px solid var(--parchline);border-left:5px solid #b8975a;border-radius:10px;padding:9px 12px;margin:0 0 10px;font-weight:400}
+.srccard .who{font-size:.75rem;font-weight:900;letter-spacing:.06em;text-transform:uppercase;color:#7a5c26;margin-bottom:3px}
+.srccard q,.srccard .quote{font-family:Georgia,"Times New Roman",serif;font-style:italic}
+.srccard p{margin:3px 0}
+.voices{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:8px 0}.voices div{background:#fff;border:1px solid var(--line);border-radius:9px;padding:7px 10px;font-size:.93rem}.voices b{display:block;color:var(--acc)}
+.picked{margin:10px 0 4px;color:var(--muted)}.result{background:#f0ede4;border-radius:9px;padding:9px 12px}.result p{margin:4px 0}
+.tag{display:inline-block;font-weight:900;font-size:.8rem;border-radius:12px;padding:2px 9px;margin-right:6px}.tag.up{background:#dcefe2;color:var(--green)}.tag.down{background:#f6dcd8;color:var(--bad)}.tag.flat{background:#ebe9e0;color:var(--ink)}
+.choices{display:grid;gap:8px}
+@media(min-width:700px){.q .choices{grid-template-columns:1fr 1fr}}
+button{font:inherit;cursor:pointer;border-radius:10px;min-height:46px}
+.choice{text-align:left;background:#fff;color:var(--ink);border:2px solid #cfcab9;padding:10px 12px;font-weight:650;line-height:1.3}
+.choice:hover:not(:disabled){border-color:var(--ink);background:#fcfcfa}.choice:disabled{opacity:.5;cursor:not-allowed}
+.go{margin-top:12px;background:var(--acc);color:#fff;border:0;padding:11px 18px;font-weight:900}
+button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid #2f7dbd;outline-offset:2px}
+.answered{font-weight:800;color:var(--green);margin:4px 0}.why{margin:2px 0;color:var(--muted)}
+.msg{min-height:1.3em;font-weight:750;margin:8px 0 0}.msg.bad{color:var(--bad)}.msg.good{color:var(--green)}
+label{display:block;font-weight:850;margin:14px 0 4px}.stem{margin:0 0 4px;color:var(--muted);font-size:.92rem}
+input,textarea{width:100%;font:inherit;border:2px solid #cfcab9;border-radius:9px;padding:10px;background:#fff;color:var(--ink)}
+.steps{display:grid;gap:6px;margin:10px 0;padding:0;list-style:none}.steps li{background:#f0ede4;border-radius:9px;padding:8px 12px;font-weight:700}
+.welcome{background:#e6f1ea;color:var(--green);font-weight:800;border-radius:9px;padding:8px 12px;margin:0 0 10px}
+.foot{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-top:14px;color:var(--muted);font-size:.85rem}
+.foot button{background:#ebe9e0;border:0;padding:8px 12px;font-weight:800;color:var(--ink)}
+.src{font-size:.8rem;color:var(--muted)}
+@media(max-width:640px){.voices{grid-template-columns:1fr}}
+@media(max-width:420px){.meter .track{width:70px}}
+@media print{.hud,.foot,.go{display:none}}
+
+header{background:linear-gradient(100deg,#f1edf6 0 62%,#f6ece4 62% 100%)}
+.block.current{box-shadow:0 0 0 4px #5a3d7a30}
+.framers{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:8px 0}.framers div{background:#fff;border:1px solid var(--line);border-radius:9px;padding:7px 10px;font-size:.92rem}.framers b{display:block;color:var(--acc)}
+.serious{background:#f3f1ee;border-left:5px solid #555;border-radius:9px;padding:10px 14px;margin:10px 0}
+@media(max-width:640px){.framers{grid-template-columns:1fr}}
+
+
+</style>
+<script src="../../shared/assignments.js?v=20261101fill"></script>
+<script src="../../shared/turnin.js?v=20261101fill"></script>
+<script src="../../shared/unit-game.js?v=20261101fill"></script>
+</head><body>
+<header>
+  <p class="k">U.S. History · Part 1 · Unit 1 · Day 3</p>
+  <h1>Behind Closed Doors: Who Wrote the Constitution?</h1>
+  <p class="std"><b>SS.9-12.US.3</b> Analyze civic virtue and how individuals contributed to the founding. &nbsp;<b>SS.9-12.US.2</b> Analyze ideas in founding documents using primary and secondary sources.</p>
+  <p class="std"><b>Goal:</b> Explain who wrote the Constitution, what qualities helped them succeed, and who won and lost in their compromises. · About 25 minutes.</p>
+</header>
+<div class="hud" aria-label="Progress and convention unity">
+  <span id="progressText">0 checks done</span>
+  <div class="bar" aria-hidden="true"><span id="progressFill"></span></div>
+  <span class="pill meter">Unity: <span class="track" aria-hidden="true"><span id="meterFill" style="width:50%"></span></span> <span id="meterNum">5/10</span></span>
+</div>
+<main>
+  <p class="welcome" id="welcome" hidden></p>
+  <div id="app"></div>
+  <div class="foot"><span>Progress saves on this device. Your teacher sees your work after you turn it in.</span><button type="button" id="restartBtn">Start over</button></div>
+</main>
+<script>
+const T = (cls, txt) => `<span class="tag ${cls}">${txt}</span>`;
+const SRC = (who, body) => `<div class="srccard"><div class="who">${who}</div>${body}</div>`;
+UnitGame.start({
+  key: "ush-p1u1-d3-convention-v1",
+  assignmentId: "ush-p1u1-d3-convention",
+  title: "U.S. History · Unit 1 · Day 3 · Behind Closed Doors: Who Wrote the Constitution?",
+  standard: "SS.9-12.US.3, SS.9-12.US.2",
+  oldApi: "https://fynn-class-assignment-submissions-20261024.neotboy.chatgpt.site/api/submit",
+  startFx: { unity: 5 },
+  clampFx: fx => { fx.unity = Math.max(0, Math.min(10, fx.unity)); },
+  hud: st => {
+    const v = st.fx.unity || 0;
+    document.getElementById("meterFill").style.width = (v * 10) + "%";
+    document.getElementById("meterNum").textContent = v + "/10";
+  },
+  startLabel: "Step inside",
+  introHtml: `<p class="kicker">Summer 1787 · Philadelphia</p><h2>The doors are shut</h2>
+    <p>Fifty-five delegates are meeting in secret. Guards stand at the doors. The windows stay closed, even in the summer heat.</p>
+    <p>You're an aide sworn to keep quiet. You'll meet the framers, help them through their biggest fights, and decide who won and who lost.</p>
+    <ul class="steps"><li>1. Read each source card and answer the check.</li><li>2. Give advice when the convention is about to fall apart. The "Unity" meter shows how well it is holding together.</li><li>3. Write 2 short answers and turn in.</li></ul>
+    <p class="src">You are made up. The delegates, events, and quotes are real.</p>`,
+  scenes: [
+    { kicker: "Part 1 of 3 · May 1787", title: "Who's in the Room?",
+      teach: `<p>Delegates came to Philadelphia to fix the Articles of Confederation. Instead, they wrote a whole new plan: the <b>Constitution</b>.</p>
+        <p><b>Civic virtue</b> means putting the common good ahead of your own interests. Watch for it today.</p>`,
+      blocks: [
+        { type: "q", id: "c1", std: "US.3", short: "Who was missing from the room", prompt: SRC("The delegates, 1787", `<p>55 delegates came from 12 states. Rhode Island refused to send anyone. All the delegates were white men. Most were wealthy lawyers, merchants, or planters. Many, including Washington and Madison, enslaved people.</p>`) + "Whose voices were missing from the room?", options: ["Women, enslaved people, and Native nations", "Lawyers, merchants, and wealthy planters", "Former Revolutionary War army officers", "Leaders from Virginia and Pennsylvania"], hint: "The card says who WAS there. Who does that leave out?", why: "The men who wrote the Constitution did not include women, Black Americans, Native nations, or poor farmers." },
+        { type: "q", id: "c2", std: "US.3", short: "Washington's role = trust/legitimacy", prompt: `<div class="framers"><div><b>George Washington, 55</b>Led the army in the Revolution. Chosen to run the meetings. Spoke very little.</div><div><b>James Madison, 36</b>Came with a plan ready. Sat up front and wrote down nearly every speech.</div><div><b>Benjamin Franklin, 81</b>The oldest delegate. Told jokes and stories to cool down angry arguments.</div></div>` + "Washington barely spoke. Why did his being there still matter so much?", options: ["He was trusted, so his support gave the plan legitimacy", "He wrote every word of the final Constitution by himself", "He was the only delegate who had read the Articles", "He promised to become king if the convention failed"], hint: "Think about his reputation from the war.", why: "Washington was the most trusted man in America. Having him lead the meeting gave the new plan legitimacy (people saw it as rightful)." },
+        { type: "event", id: "e1", short: "Secrecy rule", html: SRC("Convention rule, May 29, 1787", `<p>Nothing said in the meetings may be printed, published, or shared without permission.</p>`) + `<p>A newspaper printer offers you good money for the inside story. What do you do?</p>`,
+          choices: [
+            { label: "Keep the secret", fx: { unity: 2 }, result: `<p>${T("up","+2 unity")}Delegates speak freely and change their minds without being attacked in the papers. Many historians say the secrecy helped compromises happen.</p>` },
+            { label: "Sell the story", fx: { unity: -2 }, result: `<p>${T("down","−2 unity")}Angry delegates read their private arguments in print. They dig in and stop compromising.</p>` },
+            { label: "Leak just a small hint", fx: { unity: -1 }, result: `<p>${T("down","−1 unity")}Rumors spread. Some delegates start speaking for the public instead of working out deals.</p>` }
+          ] },
+        { type: "q", id: "c3", std: "US.3", short: "Why Madison's notes matter", prompt: SRC("James Madison, describing his notes (written later)", `<p class="quote">"I chose a seat in front of the presiding member, with the other members on my right and left hand. In this favorable position for hearing all that passed I noted… what was read from the Chair or spoken by the members…"</p><p>"Presiding member" = the person running the meeting (Washington). His notes were published in 1840, after every delegate had died.</p>`) + "Why are Madison's notes so valuable to historians today?", options: ["They are the fullest record of debates held in secret", "They were printed in the newspapers every day in 1787", "They became the official law that the convention passed", "They prove that every delegate agreed on every issue"], hint: "The meetings were secret. How else would we know what was said?", why: "Because the meetings were secret, Madison's careful notes are our best window into the debates." }
+      ] },
+    { kicker: "Part 2 of 3 · June–August 1787", title: "The Deal Desk",
+      teach: `<p><b>Virginia Plan</b> (Madison): Congress seats based on <b>population</b>. Good for big states.</p>
+        <p><b>New Jersey Plan</b> (William Paterson): every state gets an <b>equal vote</b>. Protects small states.</p>
+        <p>A <b>compromise</b> is a deal where each side gives up something to get something.</p>`,
+      blocks: [
+        { type: "q", id: "g1", std: "US.2", short: "Why small states opposed the Virginia Plan", prompt: SRC("Population, first U.S. census (1790)", `<table class="ledger" style="width:100%;border-collapse:collapse;font-size:.92rem"><tr><td style="border:1px solid var(--parchline);padding:4px 8px">Virginia</td><td style="border:1px solid var(--parchline);padding:4px 8px">about 748,000 people</td></tr><tr><td style="border:1px solid var(--parchline);padding:4px 8px">Delaware</td><td style="border:1px solid var(--parchline);padding:4px 8px">about 59,000 people</td></tr></table>`) + "Why did Delaware's delegates fight the Virginia Plan?", options: ["Big states would get far more votes than Delaware", "It gave Delaware more votes than Virginia had", "It got rid of Congress and kept only a president", "It let Britain choose the leader of the country"], hint: "Under the Virginia Plan, seats come from population. Compare the numbers.", why: "With seats by population, Virginia would have had more than ten times Delaware's voice." },
+        { type: "event", id: "e2", short: "Small states threaten to walk out", html: SRC("Gunning Bedford of Delaware, speaking to the large states, June 30, 1787", `<p class="quote">"The small ones will find some foreign ally of more honor and good faith, who will take them by the hand and do them justice."</p>`) + `<p>The room explodes. The convention is close to falling apart. What do you advise?</p>`,
+          choices: [
+            { label: "Form a committee, one delegate per state, to find a middle path", fx: { unity: 2 }, result: `<p>${T("up","+2 unity")}That's what they did. Roger Sherman and Oliver Ellsworth of Connecticut pushed a split plan. It passed on July 16 by a very close vote.</p>` },
+            { label: "Tell the big states to outvote the small ones", fx: { unity: -2 }, result: `<p>${T("down","−2 unity")}Small-state delegates pack their bags. Without them, there's no national plan at all.</p>` },
+            { label: "Take a two-week break and hope tempers cool", fx: { unity: -1 }, result: `<p>${T("down","−1 unity")}Delegates leave the city. Some may not come back. The problem is still waiting.</p>` }
+          ] },
+        { type: "q", id: "g2", std: "US.2", short: "Great Compromise: Senate = 2 per state", prompt: SRC("The Great Compromise (Connecticut Compromise), July 1787", `<p><b>House of Representatives:</b> seats based on population.<br><b>Senate:</b> two senators from every state.<br>A bill must pass both houses to become law.</p>`) + "Under the Great Compromise, how is each state represented in the Senate?", options: ["Two per state, no matter the size", "By population, so big states get more", "One senator for every 30,000 people", "Each state picks as many as it wants"], hint: "Find the Senate line on the card.", why: "The Senate gives every state two votes. The House is based on population. Both sides got something." },
+        { type: "q", id: "g3", std: "US.2", short: "Who benefited from the House deal", prompt: "Look at the card again. Which states benefited most from the <b>House</b> part of the deal?", options: ["Large states with many people", "Small states with few people", "States where slavery was banned", "Rhode Island, which stayed home"], hint: "What decides the number of House seats?", why: "House seats follow population, so large states got more power there. Small states got equal power in the Senate." },
+        { type: "q", id: "g4", std: "US.2", short: "Three-Fifths: slaveholding states gained power", prompt: `<div class="serious"><p><b>A serious deal.</b> Southern delegates wanted enslaved people counted to give their states more House seats. Northern delegates objected. Enslaved people had no say at all.</p></div>` + SRC("U.S. Constitution, Article I, Section 2 (1787)", `<p class="quote">"Representatives and direct Taxes shall be apportioned among the several States… by adding to the whole Number of free Persons… three fifths of all other Persons."</p><p>"Apportioned" = divided up. "All other Persons" = enslaved people. The Constitution never uses the word "slave."</p>`) + "Who gained power from the Three-Fifths Compromise?", options: ["Slaveholding states, which got more House seats", "Enslaved people, who gained the right to vote", "Free states, which got more seats in the Senate", "Small states, which got an equal vote in the House"], hint: "Counting more people means more of what? And who got that?", why: "Enslaved people gained no rights. Their numbers were used to give their enslavers more seats and more power." },
+        { type: "q", id: "g5", std: "US.2", short: "1808 rule + fugitive slave clause protected slaveholders", prompt: SRC("Two more deals on slavery", `<p><b>Slave trade:</b> Congress could not ban bringing enslaved people from overseas until 1808.<br><b>Fugitive slave clause:</b> a person who escaped slavery into another state had to be returned.</p>`) + "What did these two deals have in common?", options: ["Both protected the interests of slaveholders", "Both ended slavery in every state right away", "Both made formerly enslaved people citizens", "Both were demanded by the small states only"], hint: "Who would want an escaped person returned?", why: "Both deals protected slaveholders. These compromises held the states together at the cost of enslaved people's freedom." }
+      ] },
+    { kicker: "Part 3 of 3 · September 1787–1791", title: "Sign It? Ratify It?",
+      teach: `<p>On <b>September 17, 1787</b>, 39 delegates signed. Then the people of each state had to <b>ratify</b> (approve) it. <b>9 of 13</b> states were needed.</p>
+        <p><b>Federalists</b> (Alexander Hamilton, James Madison, John Jay) wanted a stronger national government. <b>Anti-Federalists</b> (Patrick Henry, George Mason, Samuel Adams) feared a king-like president and the missing list of rights.</p>`,
+      blocks: [
+        { type: "q", id: "r1", std: "US.3", short: "Franklin's compromise = civic virtue", prompt: SRC("Benjamin Franklin, final speech, September 17, 1787", `<p class="quote">"I consent, Sir, to this Constitution because I expect no better, and because I am not sure, that it is not the best."</p>`) + "What civic virtue does Franklin show here?", options: ["Accepting a compromise for the common good", "Refusing to give up any of his own ideas", "Keeping quiet so no one knew his opinion", "Putting Pennsylvania ahead of other states"], hint: "Does Franklin love every part of the plan? What does he do anyway?", why: "Franklin had doubts but backed the plan for the good of the country. That's civic virtue." },
+        { type: "q", id: "r2", std: "US.3", short: "Mason refused: no bill of rights", prompt: SRC("George Mason of Virginia, \"Objections to This Constitution,\" 1787", `<p class="quote">"There is no Declaration of Rights…"</p><p>Mason helped debate the plan all summer, then refused to sign it.</p>`) + "Why did George Mason refuse to sign?", options: ["It had no list of protected rights", "It gave small states too much power", "It ended slavery much too quickly", "It did not include a president at all"], hint: "Read his objection word for word.", why: "Mason wanted a written list of rights. Standing by his principles, even alone, can be civic virtue too." },
+        { type: "event", id: "e3", short: "Winning over Massachusetts", html: SRC("Massachusetts ratifying convention · February 1788", `<p>Many delegates distrust the new plan. Samuel Adams, a famous Patriot, is undecided. You're helping the Federalists.</p>`) + `<p>How do you win votes?</p>`,
+          choices: [
+            { label: "Promise to push for amendments that protect rights", fx: { unity: 2 }, result: `<p>${T("up","+2 unity")}This is what happened. Massachusetts ratified 187 to 168 and recommended amendments. Other states copied the idea.</p>` },
+            { label: "Call the doubters ignorant farmers", fx: { unity: -2 }, result: `<p>${T("down","−2 unity")}Insulted delegates dig in. Votes you needed walk away.</p>` },
+            { label: "Rush a vote before anyone can speak", fx: { unity: -1 }, result: `<p>${T("down","−1 unity")}Delegates feel tricked. Even supporters worry the new government will run over people.</p>` }
+          ] },
+        { type: "q", id: "r3", std: "US.2", short: "Patrick Henry = Anti-Federalist", prompt: SRC("Patrick Henry, Virginia ratifying convention, June 1788", `<p class="quote">"Your President may easily become King."</p>`) + "Which side was Patrick Henry on?", options: ["Anti-Federalist", "Federalist", "Loyalist", "Neutral"], hint: "Check the teach box. Which side feared a king-like president?", why: "Anti-Federalists like Henry feared a strong central government and a powerful president." },
+        { type: "q", id: "r4", std: "US.2", short: "Why the Bill of Rights was added", prompt: SRC("Timeline", `<p><b>1788:</b> New Hampshire becomes the 9th state to ratify. The Constitution takes effect.<br><b>1789:</b> Madison proposes amendments in the first Congress.<br><b>1791:</b> The <b>Bill of Rights</b> (first 10 amendments) is ratified.</p>`) + "Why was the Bill of Rights added in 1791?", options: ["To keep a promise made to win over doubters", "Because the Supreme Court ordered Congress to", "Because Britain demanded it in a peace treaty", "To give the president more power over states"], hint: "Think back to how Federalists won votes in Massachusetts.", why: "Federalists promised amendments to win ratification. Madison followed through. The Anti-Federalists lost the vote but won the Bill of Rights." }
+      ] }
+  ],
+  finale: {
+    title: "Judge the Framers",
+    report: st => `<p><b>The convention ended at ${st.fx.unity}/10 holding together.</b> The convention survived because delegates kept secrets, formed committees, and made deals. Some of those deals came at a terrible cost to enslaved people.</p><p>Now answer both in 1–2 full sentences.</p>`,
+    prompts: [
+      { id: "virtue", short: "Quality that helped + framer example", label: "1. Which quality helped the Convention succeed? Use one framer as your example.", stem: "One quality that helped was ___. For example, ___ showed it when ___.", min: 80, newWords: 7, mustAll: [["washington", "madison", "franklin", "sherman", "ellsworth", "mason", "hamilton"]], mustMsg: "In answer 1, name one framer (like Washington, Madison, Franklin, or Sherman) and what he did." },
+      { id: "deal", short: "Who benefited / who was harmed by a compromise", label: "2. Pick the Great Compromise or the Three-Fifths Compromise. Who benefited, and who was harmed or lost out?", stem: "The ___ Compromise helped ___. It harmed (or cost) ___ because ___.", min: 80, newWords: 7, mustAll: [["great", "three", "fifths", "3/5"], ["because", "since", "so"]], mustMsg: "In answer 2, name the compromise (Great or Three-Fifths) AND explain who it helped and harmed (use \"because\")." }
+    ]
+  },
+  extraAnswers: st => ({ "Convention unity meter": st.fx.unity + " of 10" })
+});
+</script>
+</body></html>

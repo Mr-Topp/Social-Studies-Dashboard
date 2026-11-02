@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Clerk of a Broke Congress | U.S. History Unit 1 Day 2</title>
+<meta name="description" content="Work the desk of the Confederation Congress, 1781–1787. Real letters arrive. Find out why the first U.S. government was too weak to fix them.">
+<style>
+
+:root{--ink:#1f2b33;--muted:#55626b;--paper:#f6f3ec;--card:#fff;--line:#dcd5c4;--acc:#2f5d46;--acc2:#8a5a1f;--soft:#edf3ee;--green:#2a6b45;--bad:#a2392f;--parch:#fbf5e6;--parchline:#e2d3ad}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.5 system-ui,Segoe UI,Arial,sans-serif}
+header{background:linear-gradient(100deg,#eef2f7 0 60%,#f7ebe6 60% 100%);border-bottom:5px solid var(--acc);padding:16px max(16px,calc((100vw - 900px)/2)) 12px}
+.k{font-size:.78rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:var(--acc);margin:0}
+h1{margin:2px 0 4px;font-size:clamp(1.6rem,3.4vw,2.3rem)}
+.std{margin:2px 0;font-size:.92rem;color:var(--muted)}.std b{color:var(--ink)}
+.hud{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line);padding:8px max(16px,calc((100vw - 900px)/2));display:flex;gap:12px;flex-wrap:wrap;align-items:center;font-weight:800;font-size:.92rem;box-shadow:0 2px 8px #1f2b3312}
+.hud .bar{flex:1;min-width:120px;height:10px;background:#e6e3da;border-radius:9px;overflow:hidden}.hud .bar span{display:block;height:100%;width:0;background:var(--acc);transition:width .4s}
+.pill{background:#f0ede4;border-radius:20px;padding:3px 10px;white-space:nowrap}
+.meter{display:flex;align-items:center;gap:6px}.meter .track{width:110px;height:10px;border-radius:9px;background:#e6e3da;overflow:hidden}.meter .track span{display:block;height:100%;background:var(--acc2);transition:width .5s}
+main{max-width:900px;margin:auto;padding:14px 16px 60px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;box-shadow:0 3px 12px #1f2b330d}
+.kicker{font-size:.78rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:var(--acc2);margin:0}
+h2{margin:2px 0 10px;font-size:1.45rem}
+.teach{background:var(--soft);border-left:5px solid var(--acc);border-radius:9px;padding:10px 14px;margin:0 0 12px}.teach p{margin:4px 0}.teach b{color:var(--acc)}
+.block{margin:14px 0;padding:14px;border-radius:12px;border:2px solid var(--line);background:#fff}
+.block.current{border-color:var(--ink);box-shadow:0 0 0 4px #2a4f7a30}
+.block h3{margin:0 0 10px;font-size:1.06rem;line-height:1.35;font-weight:700}
+.event{background:#fbf9f4;border-style:dashed;border-color:#cdbf9a}.event.current{border-style:solid}
+.event-body p{margin:4px 0}
+.srccard{background:var(--parch);border:1px solid var(--parchline);border-left:5px solid #b8975a;border-radius:10px;padding:9px 12px;margin:0 0 10px;font-weight:400}
+.srccard .who{font-size:.75rem;font-weight:900;letter-spacing:.06em;text-transform:uppercase;color:#7a5c26;margin-bottom:3px}
+.srccard q,.srccard .quote{font-family:Georgia,"Times New Roman",serif;font-style:italic}
+.srccard p{margin:3px 0}
+.voices{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:8px 0}.voices div{background:#fff;border:1px solid var(--line);border-radius:9px;padding:7px 10px;font-size:.93rem}.voices b{display:block;color:var(--acc)}
+.picked{margin:10px 0 4px;color:var(--muted)}.result{background:#f0ede4;border-radius:9px;padding:9px 12px}.result p{margin:4px 0}
+.tag{display:inline-block;font-weight:900;font-size:.8rem;border-radius:12px;padding:2px 9px;margin-right:6px}.tag.up{background:#dcefe2;color:var(--green)}.tag.down{background:#f6dcd8;color:var(--bad)}.tag.flat{background:#ebe9e0;color:var(--ink)}
+.choices{display:grid;gap:8px}
+@media(min-width:700px){.q .choices{grid-template-columns:1fr 1fr}}
+button{font:inherit;cursor:pointer;border-radius:10px;min-height:46px}
+.choice{text-align:left;background:#fff;color:var(--ink);border:2px solid #cfcab9;padding:10px 12px;font-weight:650;line-height:1.3}
+.choice:hover:not(:disabled){border-color:var(--ink);background:#fcfcfa}.choice:disabled{opacity:.5;cursor:not-allowed}
+.go{margin-top:12px;background:var(--acc);color:#fff;border:0;padding:11px 18px;font-weight:900}
+button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid #2f7dbd;outline-offset:2px}
+.answered{font-weight:800;color:var(--green);margin:4px 0}.why{margin:2px 0;color:var(--muted)}
+.msg{min-height:1.3em;font-weight:750;margin:8px 0 0}.msg.bad{color:var(--bad)}.msg.good{color:var(--green)}
+label{display:block;font-weight:850;margin:14px 0 4px}.stem{margin:0 0 4px;color:var(--muted);font-size:.92rem}
+input,textarea{width:100%;font:inherit;border:2px solid #cfcab9;border-radius:9px;padding:10px;background:#fff;color:var(--ink)}
+.steps{display:grid;gap:6px;margin:10px 0;padding:0;list-style:none}.steps li{background:#f0ede4;border-radius:9px;padding:8px 12px;font-weight:700}
+.welcome{background:#e6f1ea;color:var(--green);font-weight:800;border-radius:9px;padding:8px 12px;margin:0 0 10px}
+.foot{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-top:14px;color:var(--muted);font-size:.85rem}
+.foot button{background:#ebe9e0;border:0;padding:8px 12px;font-weight:800;color:var(--ink)}
+.src{font-size:.8rem;color:var(--muted)}
+@media(max-width:640px){.voices{grid-template-columns:1fr}}
+@media(max-width:420px){.meter .track{width:70px}}
+@media print{.hud,.foot,.go{display:none}}
+
+header{background:linear-gradient(100deg,#edf3ee 0 62%,#f6eedf 62% 100%)}
+.block.current{box-shadow:0 0 0 4px #2f5d4630}
+.ledger{width:100%;border-collapse:collapse;font-size:.92rem;margin:6px 0;font-weight:400}.ledger th,.ledger td{border:1px solid var(--parchline);padding:5px 8px;text-align:left;vertical-align:top}.ledger th{background:#f3ead2}
+.yes{color:var(--green);font-weight:800}.no{color:var(--bad);font-weight:800}
+
+
+</style>
+<script src="../../shared/assignments.js?v=20261101fill"></script>
+<script src="../../shared/turnin.js?v=20261101fill"></script>
+<script src="../../shared/unit-game.js?v=20261101fill"></script>
+</head><body>
+<header>
+  <p class="k">U.S. History · Part 1 · Unit 1 · Day 2</p>
+  <h1>Clerk of a Broke Congress</h1>
+  <p class="std"><b>SS.9-12.US.2</b> Analyze ideas in founding documents using primary and secondary sources.</p>
+  <p class="std"><b>Goal:</b> Explain why the Articles of Confederation made a weak national government, and how its weaknesses led to the Constitution. · About 25 minutes.</p>
+</header>
+<div class="hud" aria-label="Progress and union strength">
+  <span id="progressText">0 checks done</span>
+  <div class="bar" aria-hidden="true"><span id="progressFill"></span></div>
+  <span class="pill meter">Union strength: <span class="track" aria-hidden="true"><span id="meterFill" style="width:50%"></span></span> <span id="meterNum">5/10</span></span>
+</div>
+<main>
+  <p class="welcome" id="welcome" hidden></p>
+  <div id="app"></div>
+  <div class="foot"><span>Progress saves on this device. Your teacher sees your work after you turn it in.</span><button type="button" id="restartBtn">Start over</button></div>
+</main>
+<script>
+const T = (cls, txt) => `<span class="tag ${cls}">${txt}</span>`;
+const SRC = (who, body) => `<div class="srccard"><div class="who">${who}</div>${body}</div>`;
+UnitGame.start({
+  key: "ush-p1u1-d2-articles-v1",
+  assignmentId: "ush-p1u1-d2-articles",
+  title: "U.S. History · Unit 1 · Day 2 · Clerk of a Broke Congress",
+  standard: "SS.9-12.US.2",
+  oldApi: "https://fynn-class-assignment-submissions-20261024.neotboy.chatgpt.site/api/submit",
+  startFx: { union: 5 },
+  clampFx: fx => { fx.union = Math.max(0, Math.min(10, fx.union)); },
+  hud: st => {
+    const v = st.fx.union || 0;
+    document.getElementById("meterFill").style.width = (v * 10) + "%";
+    document.getElementById("meterNum").textContent = v + "/10";
+  },
+  startLabel: "Sit down at the desk",
+  introHtml: `<p class="kicker">1781–1787 · The first U.S. government</p><h2>You're the clerk</h2>
+    <p>The Revolution is won. The new country runs on its first plan of government: the <b>Articles of Confederation</b>.</p>
+    <p>You work the desk for Congress. Real letters and problems land in front of you. Your job: figure out what Congress can and can't do about them.</p>
+    <ul class="steps"><li>1. Read each letter or record and answer the check.</li><li>2. Advise Congress in a crisis. Watch the "Union strength" meter.</li><li>3. Give your verdict on the Articles in 2 short answers.</li></ul>
+    <p class="src">You are made up. The events, laws, and quotes are real.</p>`,
+  scenes: [
+    { kicker: "Part 1 of 3 · 1781", title: "A League of Friendship",
+      teach: `<p>Americans had just fought a war against a king and a Parliament far away. They did not want a new strong government to take their place.</p>
+        <p>So the Articles kept the national government weak. Each state kept its <b>sovereignty</b> (its power to rule itself). Congress had one house, and each state got <b>one vote</b>. There was <b>no president</b> and <b>no national courts</b>.</p>
+        <p>Big laws needed <b>9 of 13</b> states. Changing the Articles needed <b>all 13</b>.</p>`,
+      blocks: [
+        { type: "q", id: "s1", std: "US.2", short: "Article II: states keep sovereignty", prompt: SRC("Articles of Confederation, Article II", `<p class="quote">"Each state retains its sovereignty, freedom, and independence…"</p>`) + "What does this line tell you about the Articles?", options: ["The states kept most of the power", "Congress could overrule any state law", "A president led all thirteen states", "The states gave up their own governments"], hint: "\"Retains\" means \"keeps.\" Who keeps the power?", why: "Under the Articles, the states kept their sovereignty. The national government was a loose \"league of friendship.\"" },
+        { type: "q", id: "s2", std: "US.2", short: "Why the Articles were weak on purpose", prompt: SRC("Articles of Confederation, Article III", `<p class="quote">"The said states hereby severally enter into a firm league of friendship with each other…"</p>`) + "Why did Americans set up just a \"league of friendship\" instead of a strong national government?", options: ["They feared a strong central government", "They wanted Britain to keep some control", "They believed wars would never happen again", "They wanted every town to vote in Congress"], hint: "Reread the first line of the teach box. What had they just fought against?", why: "After fighting a powerful king, many Americans feared any strong central government." },
+        { type: "q", id: "s3", std: "US.2", short: "Power sort: Congress COULD make treaties", prompt: SRC("Articles of Confederation, Article IX (short version)", `<p>Congress has the power to decide on peace and war, to send and receive ambassadors, and to make treaties with other nations.</p>`) + "Which job COULD Congress do under the Articles?", options: ["Make a treaty with a foreign nation", "Collect a tax directly from people", "Stop states from taxing each other's goods", "Arrest people who broke national laws"], hint: "Look for a job listed on the card.", why: "Congress could handle war, peace, and treaties. It could not tax people, control trade between states, or enforce its laws." },
+        { type: "q", id: "s4", std: "US.2", short: "Northwest Ordinance = a success", prompt: SRC("Northwest Ordinance, 1787", `<p>Set up how the land north of the Ohio River (today's Ohio, Indiana, Illinois, Michigan, Wisconsin, and part of Minnesota) would become new states, equal to the original 13. It banned slavery in that territory and set aside land for public schools.</p>`) + "Why do historians count the Northwest Ordinance as a success of the Articles?", options: ["It set a clear plan for new states to join as equals", "It gave Congress a new power to tax western land", "It ended every conflict with Native nations there", "It created the first national court for the West"], hint: "What does the card say would happen to the new states?", why: "It created a fair, orderly path to statehood. But the Native nations living there were not asked, and wars over the land followed." }
+      ] },
+    { kicker: "Part 2 of 3 · 1783–1786", title: "Break the Government",
+      teach: `<p>Congress could not tax. It could only send <b>requisitions</b> (requests for money) to the states. States could say no, and many did.</p>
+        <p>Each letter below shows a weakness. Name it.</p>`,
+      blocks: [
+        { type: "event", id: "e1", short: "Unpaid soldiers surround Congress", html: SRC("Philadelphia · June 1783", `<p>Hundreds of unpaid soldiers surround the building where Congress meets. They want the pay they were promised for fighting the war. Congress has almost no money. There is no national army or police to call.</p>`) + `<p>What do you advise Congress to do?</p>`,
+          choices: [
+            { label: "Ask Pennsylvania's leaders to send their militia", fx: { union: -1 }, result: `<p>${T("down","−1 union")}Pennsylvania's leaders refuse. Congress gives up and moves to Princeton, New Jersey. <b>This really happened.</b> The national government had to run from its own soldiers.</p>` },
+            { label: "Beg the states to send money for back pay", fx: { union: -1 }, result: `<p>${T("down","−1 union")}Letters go out. Months pass. Few states send much. The soldiers leave angry, and Congress moves to Princeton anyway.</p>` },
+            { label: "Promise the soldiers pay that Congress can't afford", fx: { union: -2 }, result: `<p>${T("down","−2 union")}The crowd leaves for now. When the money never comes, trust in Congress drops even lower.</p>` }
+          ] },
+        { type: "q", id: "b1", std: "US.2", short: "States refuse money = no tax power", prompt: SRC("Report to Congress, 1786", `<p>For years Congress asked the states for money to pay the war debts. Most states sent only a small part of what was asked. Some sent nothing at all.</p>`) + "Which weakness of the Articles does this show?", options: ["Congress could not tax; it could only ask", "Congress could not make treaties with others", "Congress had too many members to agree", "Congress had a president who said no"], hint: "Reread the teach box. What is a requisition?", why: "Without tax power, Congress depended on the states. When they didn't pay, the debts and the soldiers went unpaid." },
+        { type: "q", id: "b2", std: "US.2", short: "New York fees on NJ goods = no commerce power", prompt: SRC("Trade between states, 1780s", `<p>New York charged fees on boats bringing goods from New Jersey and Connecticut. States fought trade wars with each other. Congress could not stop it.</p>`) + "Which weakness does this show?", options: ["Congress could not control trade between states", "Congress could not declare war on another nation", "Congress could not manage the western lands", "Congress could not send ambassadors abroad"], hint: "What were the states fighting over, and who couldn't step in?", why: "Congress had no power over trade between states, so states taxed each other's goods." },
+        { type: "q", id: "b3", std: "US.2", short: "Rhode Island blocks the import tax = unanimity", prompt: SRC("The import tax plan, 1781–1782", `<p>Congress asked the states to let it collect a small tax on imports (goods from other countries). Almost every state agreed. In 1782 Rhode Island said no, and the plan died.</p>`) + "Why could one small state kill the plan?", options: ["Changing the Articles needed all 13 states", "Rhode Island was the largest state then", "Taxes needed approval from Britain first", "Rhode Island's vote counted twice as much"], hint: "Check the teach box from Part 1: how many states did a change need?", why: "Amendments needed all 13 states. One \"no\" could block anything." },
+        { type: "q", id: "b4", std: "US.2", short: "States ignore treaty = no way to enforce", prompt: SRC("After the Treaty of Paris, 1783", `<p>The peace treaty said Americans would repay debts they owed British merchants. Several states passed laws blocking those payments. Britain used this as a reason to keep its army forts on U.S. land in the West.</p>`) + "Which weakness does this show?", options: ["Congress could not make states obey laws or treaties", "Congress could not make treaties in the first place", "Congress could not decide where the forts should go", "Congress could not meet without British permission"], hint: "Congress made the treaty. Who refused to follow it?", why: "There was no president or national court to enforce Congress's laws and treaties on the states." },
+        { type: "event", id: "e2", short: "Annapolis meeting invitation", html: SRC("Letter from Virginia, 1786", `<p>Virginia invites every state to meet in Annapolis, Maryland, to talk about trade problems. Some in Congress think this goes around them.</p>`) + `<p>How do you advise Congress?</p>`,
+          choices: [
+            { label: "Support the meeting and urge every state to send people", fx: { union: 2 }, result: `<p>${T("up","+2 union")}Only five states show up. But the delegates, including Alexander Hamilton and James Madison, call for a bigger meeting in Philadelphia in May 1787.</p>` },
+            { label: "Oppose it: the Articles are fine as they are", fx: { union: -1 }, result: `<p>${T("down","−1 union")}Five states meet anyway and call for a bigger meeting in Philadelphia. Congress looks out of touch.</p>` },
+            { label: "Stay quiet and wait to see what happens", fx: {}, result: `<p>${T("flat","No change")}Only five states show up. They call for a bigger meeting in Philadelphia in May 1787.</p>` }
+          ] }
+      ] },
+    { kicker: "Part 3 of 3 · 1786–1787", title: "Shays' Rebellion",
+      teach: `<p>Massachusetts raised taxes to pay its war debts, and it wanted payment in coins, which farmers rarely had. Courts began taking farms from people who couldn't pay.</p>
+        <p>In 1786, indebted farmers, many of them Revolutionary War veterans, shut down courts. One leader was <b>Daniel Shays</b>, a former army captain.</p>`,
+      blocks: [
+        { type: "q", id: "r1", std: "US.2", short: "Why Shays' farmers rebelled", prompt: SRC("Massachusetts farmers, 1786", `<p>Summary of the farmers' complaints: We fought for liberty. Now the state taxes us in coins we don't have, and the courts take our farms.</p>`) + "Why did the farmers rebel?", options: ["Debt, high taxes, and courts taking farms", "Anger that the state had ended slavery", "Britain paid them to attack American towns", "They wanted Massachusetts to join Canada"], hint: "List what the farmers say is happening to them.", why: "Debt, taxes paid in coins, and farm seizures pushed veterans to shut down the courts." },
+        { type: "event", id: "e3", short: "Springfield armory crisis", html: SRC("Springfield, Massachusetts · January 1787", `<p>Shays' men march toward the federal armory, where the nation stores weapons. Massachusetts asks Congress for help. Congress votes to raise troops, but it has no money to pay them.</p>`) + `<p>What do you advise?</p>`,
+          choices: [
+            { label: "Ask the states for money to raise an army", fx: { union: -1 }, result: `<p>${T("down","−1 union")}Too slow. Almost no money arrives. Wealthy Massachusetts merchants pay for a state militia themselves, and it breaks up the rebels. The nation looks helpless.</p>` },
+            { label: "Write to leaders: the Articles must be fixed", fx: { union: 2 }, result: `<p>${T("up","+2 union")}Massachusetts merchants pay for a militia that stops the rebels. Your letter joins many others saying the same thing: the national government is too weak. States agree to send delegates to Philadelphia.</p>` },
+            { label: "Tell Massachusetts it's on its own", fx: { union: -2 }, result: `<p>${T("down","−2 union")}Merchants pay for a militia that stops the rebels. But other states wonder: if trouble comes to us, will anyone help?</p>` }
+          ] },
+        { type: "q", id: "r2", std: "US.2", short: "Washington: the Union needs real power", prompt: SRC("George Washington, letter to John Jay, August 1, 1786", `<p class="quote">"I do not conceive we can exist long as a nation, without having lodged somewhere a power which will pervade the whole Union…"</p><p>"Pervade the whole Union" = reach across all the states.</p>`) + "What was Washington saying?", options: ["The nation needs a power that reaches every state", "The states should split up into separate countries", "The army should take over the government for a while", "Congress should hand more of its power to the states"], hint: "Use the definition under the quote.", why: "Washington believed the country could not survive without a national government strong enough to act across all the states." },
+        { type: "q", id: "r3", std: "US.2", short: "Shays' lesson: national gov too weak", prompt: SRC("What happened next", `<p>Congress could not pay for an army to stop the rebellion. A state militia, paid for by private merchants, did it instead. In May 1787, delegates from 12 states met in Philadelphia.</p>`) + "Many leaders took Shays' Rebellion as proof of what?", options: ["The national government was too weak to keep order", "The states had too little power over their people", "Farmers needed their own seats in the Congress", "Britain was getting ready to invade once more"], hint: "Who stopped the rebellion, and who couldn't?", why: "When Congress couldn't protect its own armory, many leaders decided the Articles had to be replaced or fixed." },
+        { type: "q", id: "r4", std: "US.2", short: "Weakness → Constitution fix", prompt: SRC("Weakness → Fix", `<table class="ledger"><tr><th>Weakness under the Articles</th><th>Fix in the Constitution (1787)</th></tr><tr><td>Could not tax</td><td>Congress can collect taxes</td></tr><tr><td>Could not control trade between states</td><td>Commerce clause</td></tr><tr><td>Changes needed all 13 states</td><td>Amendments need three-fourths of states</td></tr><tr><td>Could not enforce laws</td><td>?</td></tr><tr><td>No national courts</td><td>Federal courts and a Supreme Court</td></tr></table>`) + "Which fix answers \"Could not enforce laws\"?", options: ["A president to carry out national laws", "A Senate with two members per state", "Amendments that need all 13 states", "A Congress that can only ask for money"], hint: "Which branch's job is to carry out (enforce) laws?", why: "The Constitution created a president, the executive branch, to enforce national laws." }
+      ] }
+  ],
+  finale: {
+    title: "Your Verdict on the Articles",
+    report: st => `<p><b>Union strength ended at ${st.fx.union}/10.</b> Notice: almost no choice could fix a crisis under the Articles. The best moves pushed for a new plan.</p><p>Now answer both in 1–2 full sentences. Use evidence from today.</p>`,
+    prompts: [
+      { id: "verdict", short: "Verdict on the Articles", label: "1. Were the Articles mostly successful, successful at first but too weak later, or a complete failure? Give your best evidence.", stem: "I think the Articles were ___ because ___.", min: 80, newWords: 7, mustAll: [["success", "fail", "weak", "first"], ["because", "since"]], mustMsg: "In answer 1, give your verdict (successful, too weak later, or a failure) AND your evidence (use \"because\")." },
+      { id: "fix", short: "One weakness and its fix", label: "2. Pick one weakness of the Articles. What problem did it cause, and how did the Constitution fix it?", stem: "One weakness was ___. This caused ___. The Constitution fixed it by ___.", min: 80, newWords: 7, mustAll: [["tax", "trade", "commerce", "enforce", "president", "court", "amend", "13", "all", "army", "money"], ["constitution", "fix", "now"]], mustMsg: "In answer 2, name the weakness (like no tax power) AND how the Constitution fixed it." }
+    ]
+  },
+  extraAnswers: st => ({ "Union strength meter": st.fx.union + " of 10" })
+});
+</script>
+</body></html>

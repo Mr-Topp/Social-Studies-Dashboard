@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Daniela's Scrapbook | Sociology Unit 3 Day 1</title>
+<meta name="description" content="Flip through one person's life from age 2 to 31 and figure out who taught her how to be who she is.">
+<style>
+:root{--ink:#1f2b33;--muted:#55626b;--paper:#faf6ef;--card:#fff;--line:#dcd9cf;--acc:#7a3b69;--acc2:#2d7d74;--soft:#f6edf3;--green:#2a6b45;--bad:#a2392f}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.5 system-ui,Segoe UI,Arial,sans-serif}
+header{background:linear-gradient(100deg,#f6e7f0,#fbf3e2);border-bottom:5px solid var(--acc);padding:16px max(16px,calc((100vw - 900px)/2)) 12px}
+.k{font-size:.78rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:var(--acc);margin:0}
+h1{margin:2px 0 4px;font-size:clamp(1.7rem,3.4vw,2.3rem)}
+.std{margin:2px 0;font-size:.92rem;color:var(--muted)}.std b{color:var(--ink)}
+.hud{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line);padding:8px max(16px,calc((100vw - 900px)/2));display:flex;gap:10px 12px;flex-wrap:wrap;align-items:center;font-weight:800;font-size:.92rem;box-shadow:0 2px 8px #1f2b3312}
+.hud .bar{flex:1;min-width:110px;height:10px;background:#e6e6de;border-radius:9px;overflow:hidden}.hud .bar span{display:block;height:100%;width:0;background:var(--acc);transition:width .4s}
+.pill{background:#f0efe8;border-radius:20px;padding:3px 10px;white-space:nowrap}
+.meter{display:flex;align-items:center;gap:6px}.meter .track{width:100px;height:10px;border-radius:9px;background:#e6e6de;overflow:hidden}.meter .track span{display:block;height:100%;background:var(--acc2);transition:width .5s}
+main{max-width:900px;margin:auto;padding:14px 16px 60px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;box-shadow:0 3px 12px #1f2b330d}
+.kicker{font-size:.78rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:var(--acc2);margin:0}
+h2{margin:2px 0 10px;font-size:1.45rem}
+.teach{background:var(--soft);border-left:5px solid var(--acc);border-radius:9px;padding:10px 14px;margin:0 0 12px}.teach p{margin:4px 0}.teach b{color:var(--acc)}.teach ul{margin:4px 0;padding-left:20px}
+.block{margin:14px 0;padding:14px;border-radius:12px;border:2px solid var(--line);background:#fff}
+.block.current{border-color:var(--ink);box-shadow:0 0 0 4px color-mix(in srgb,var(--acc) 22%,transparent)}
+.block h3{margin:0 0 10px;font-size:1.06rem;line-height:1.35;font-weight:700}
+.event{background:#fbf9f4;border-style:dashed;border-color:#cdbf9a}.event.current{border-style:solid}
+.event-body p{margin:4px 0}
+.ev{display:block;font-weight:400;background:#f7f6f1;border:1px solid var(--line);border-left:5px solid var(--acc2);border-radius:10px;padding:9px 12px;margin:0 0 10px;font-size:.98rem}
+.ev .who{display:block;font-size:.74rem;font-weight:900;letter-spacing:.06em;text-transform:uppercase;color:var(--acc2);margin-bottom:2px}
+.ev p{margin:3px 0}
+.picked{margin:10px 0 4px;color:var(--muted)}.result{background:#f0efe8;border-radius:9px;padding:9px 12px}.result p{margin:4px 0}
+.tag{display:inline-block;font-weight:900;font-size:.8rem;border-radius:12px;padding:2px 9px;margin-right:6px}.tag.up{background:#dcefe2;color:var(--green)}.tag.down{background:#f6dcd8;color:var(--bad)}.tag.flat{background:#ebe9e0;color:var(--ink)}
+.qlabel{font-size:.75rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:var(--acc);margin:0 0 4px}
+.choices{display:grid;gap:8px}
+@media(min-width:700px){.q .choices{grid-template-columns:1fr 1fr}}
+button{font:inherit;cursor:pointer;border-radius:10px;min-height:46px}
+.choice{text-align:left;background:#fff;color:var(--ink);border:2px solid #cfcdbf;padding:10px 12px;font-weight:650;line-height:1.3}
+.choice:hover:not(:disabled){border-color:var(--ink);background:#fcfcfa}.choice:disabled{opacity:.5;cursor:not-allowed}
+.go{margin-top:12px;background:var(--acc);color:#fff;border:0;padding:11px 18px;font-weight:900}
+button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid #2f7dbd;outline-offset:2px}
+.answered{font-weight:800;color:var(--green);margin:4px 0}.why{margin:2px 0;color:var(--muted)}
+.msg{min-height:1.3em;font-weight:750;margin:8px 0 0}.msg.bad{color:var(--bad)}.msg.good{color:var(--green)}
+label{display:block;font-weight:850;margin:14px 0 4px}.stem{margin:0 0 4px;color:var(--muted);font-size:.92rem}
+input,textarea{width:100%;font:inherit;border:2px solid #cfcdbf;border-radius:9px;padding:10px;background:#fff;color:var(--ink)}
+.steps{display:grid;gap:6px;margin:10px 0;padding:0;list-style:none}.steps li{background:#f0efe8;border-radius:9px;padding:8px 12px;font-weight:700}
+.welcome{background:#e6f1ea;color:var(--green);font-weight:800;border-radius:9px;padding:8px 12px;margin:0 0 10px}
+.foot{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-top:14px;color:var(--muted);font-size:.85rem}
+.foot button{background:#ebe9e0;border:0;padding:8px 12px;font-weight:800;color:var(--ink)}
+.src{font-size:.8rem;color:var(--muted)}
+.bars{display:grid;gap:6px;margin:8px 0}.brow{display:grid;grid-template-columns:minmax(90px,140px) 1fr 44px;gap:8px;align-items:center;font-size:.9rem}.brow .t{height:16px;background:#e6e6de;border-radius:6px;overflow:hidden}.brow .t span{display:block;height:100%;background:var(--acc2)}
+@media print{.hud,.foot,.go{display:none}}
+
+.ev.photo{background:#fffdf7;border-left-color:var(--acc2);box-shadow:2px 3px 0 #e8dcc4}
+.agents{display:flex;flex-wrap:wrap;gap:6px 10px;font-size:.78rem}
+.agents span.a{display:flex;align-items:center;gap:4px}.agents .track{width:44px;height:8px;border-radius:6px;background:#e6e6de;overflow:hidden;display:inline-block}.agents .track i{display:block;height:100%;background:var(--acc2);transition:width .5s}
+
+</style>
+<script src="../../shared/assignments.js?v=20261101fill"></script>
+<script src="../../shared/turnin.js?v=20261101fill"></script>
+<script src="../../shared/unit-game.js?v=20261101fill"></script>
+</head><body>
+<header>
+  <p class="k">Sociology · Unit 3 · Day 1</p>
+  <h1>Who Taught You How to Be You?</h1>
+  <p class="std"><b>SS.9-12.Soc.9</b></p>
+  <p class="std"><b>Goal:</b> Explain how family, peers, school, and media socialize us, and use Mead and Kohlberg to explain how the self grows. · About 25 minutes.</p>
+</header>
+<div class="hud" aria-label="Progress and influence bars">
+  <span id="progressText">0 checks done</span>
+  <div class="bar" aria-hidden="true"><span id="progressFill"></span></div>
+  <div class="agents" aria-label="Influence on Daniela"><span class="a">Family <span class="track"><i id="ag_fam"></i></span></span><span class="a">Peers <span class="track"><i id="ag_peer"></i></span></span><span class="a">School <span class="track"><i id="ag_sch"></i></span></span><span class="a">Media <span class="track"><i id="ag_med"></i></span></span></div>
+</div>
+<main>
+  <p class="welcome" id="welcome" hidden></p>
+  <div id="app"></div>
+  <div class="foot"><span>Progress saves on this device. Your teacher sees your work after you turn it in.</span><button type="button" id="restartBtn">Start over</button></div>
+</main>
+<script>
+const T = (cls, txt) => `<span class="tag ${cls}">${txt}</span>`;
+const ev = (who, body) => `<span class="ev"><span class="who">${who}</span>${body}</span>`;
+window.S = null;
+
+const pg = (age, body) => `<span class="ev photo"><span class="who">📷 Age ${age}</span>${body}</span>`;
+const AG = [["fam","Family"],["peer","Peers"],["sch","School"],["med","Media"]];
+function loudest(fx) { let best = AG[0]; AG.forEach(a => { if ((fx[a[0]] || 0) > (fx[best[0]] || 0)) best = a; }); return best[1]; }
+UnitGame.start({
+  key: "soc-u3-d1-who-taught-you-v1",
+  assignmentId: "soc-u3-d1-who-taught-you",
+  title: "Sociology · Unit 3 · Day 1 · Who Taught You How to Be You?",
+  standard: "SS.9-12.Soc.9",
+  oldApi: "https://fynn-class-assignment-submissions-20261024.neotboy.chatgpt.site/api/submit",
+  startFx: { fam: 3, peer: 1, sch: 1, med: 1 },
+  clampFx: fx => { AG.forEach(a => { fx[a[0]] = Math.max(0, Math.min(8, fx[a[0]] || 0)); }); },
+  hud: st => { window.S = st; AG.forEach(([k]) => { document.getElementById("ag_" + k).style.width = ((st.fx[k] || 0) / 8 * 100) + "%"; }); },
+  startLabel: "Open the scrapbook",
+  introHtml: `<p class="kicker">A life in pages</p><h2>Daniela's scrapbook</h2>
+    <p>Nobody is born knowing how to talk, what's polite, or what's "cool." We learn it from people around us.</p>
+    <p>You'll flip through the life of <b>Daniela</b>, from age 2 to 31. On each page, figure out <b>who taught her that</b>. Three times, you'll choose what happens. Watch the <b>influence bars</b> at the top. They show which teachers in her life get louder.</p>
+    <ul class="steps"><li>📖 Part 1: little kid. Part 2: teenager. Part 3: adult.</li><li>🎚️ Your choices change which influences grow.</li><li>✍️ Write 2 short answers about Daniela and turn in.</li></ul>
+    <p class="src">Daniela is made up. The ideas come from real sociologists.</p>`,
+  scenes: [
+    { kicker: "Part 1 of 3 · Ages 2–8", title: "Little Daniela",
+      teach: `<p><b>Socialization</b> is the lifelong process of learning the <b>norms, values, and behaviors</b> of your society. It's how you get your culture and your sense of who you are.</p>
+        <p><b>Agents of socialization</b> are the people and groups who teach us: <b>family</b> (first and usually strongest), <b>peers</b> (friends your age), <b>school</b>, and <b>media</b>.</p>
+        <p><b>George Herbert Mead</b>: your <b>self</b> grows as you learn to see yourself through other people's eyes.</p><ul><li><b>Play stage</b>: kids pretend to be one other person (a parent, a teacher).</li><li><b>Game stage</b>: kids understand many roles and rules at once. Mead called what everyone expects the <b>generalized other</b>.</li></ul>`,
+      blocks: [
+        { type: "q", id: "k1", std: "Soc.9", short: "First words = family", prompt: pg("2", "Daniela says her first words, \"agua\" and \"more,\" in the kitchen with her mom and grandma.") + "Which agent taught Daniela her first language?", options: ["Family", "Peers", "School", "Media"], hint: "Who is around a 2-year-old all day?", why: "Family is the first agent of socialization. It teaches language, values, and rules." },
+        { type: "q", id: "k2", std: "Soc.9", short: "Playing teacher = Mead's play stage", prompt: pg("4", "Daniela lines up her stuffed animals. \"Criss-cross applesauce! Raise your hand!\" she says in her teacher voice.") + "According to Mead, what is she learning?", options: ["To see the world from another person's role", "To memorize the rules of her favorite game", "To stop using her imagination as she grows", "To follow whatever her stuffed animals do"], hint: "She's pretending to BE someone else. Check Mead in the teach box.", why: "In the play stage, kids take on one other person's role. That teaches them to see from someone else's point of view, which builds the self." },
+        { type: "event", id: "e1", short: "First day of 1st grade", html: pg("6", "First day of 1st grade. Daniela is nervous and holding the door frame.") + `<p>What helps her walk in?</p>`,
+          choices: [
+            { label: "Grandma kneels down and practices: \"Good morning, Ms. Park.\"", fx: { fam: 2 }, result: `<p>${T("up","Family +2")}Daniela greets her teacher just like Grandma showed her. Ms. Park smiles. Family taught her how to greet adults.</p>` },
+            { label: "She says the brave line from her favorite cartoon", fx: { med: 2 }, result: `<p>${T("up","Media +2")}"Let's GO!" she whispers, like the cartoon hero. A TV show just gave her a script for being brave.</p>` },
+            { label: "The neighbor kid grabs her hand: \"Sit by me!\"", fx: { peer: 2 }, result: `<p>${T("up","Peers +2")}She copies how her new friend acts all day. Peers start teaching her early.</p>` }
+          ] },
+        { type: "q", id: "k3", std: "Soc.9", short: "Line up & wait turn = school", prompt: pg("7", "At school Daniela learns to line up, wait her turn, and stay quiet when the teacher talks, even with kids she doesn't know.") + "Which agent is teaching these norms?", options: ["School", "Family", "Media", "Peers"], hint: "Where is she, and who sets these rules?", why: "School teaches wider norms for living with lots of strangers: waiting, taking turns, following a schedule." },
+        { type: "q", id: "k4", std: "Soc.9", short: "Shortstop = generalized other", prompt: pg("8", "Daniela plays shortstop. She knows where the pitcher, catcher, and runner will go, and what the rules expect from everyone.") + "Which idea from Mead does this show?", options: ["The game stage, or seeing the generalized other", "The play stage, or pretending to be one grown-up", "A total institution, or living by strict rules", "Media, or learning from the TV"], hint: "She understands MANY roles and the rules at once.", why: "In the game stage, kids understand what everyone on the team expects. That's taking the role of the generalized other." }
+      ] },
+    { kicker: "Part 2 of 3 · Ages 13–17", title: "Teen Daniela",
+      teach: `<p>In the teen years, <b>peers</b> and <b>media</b> get louder. Peers shape interests, slang, and behavior. Media sends messages about what's acceptable, attractive, or cool.</p>
+        <p><b>Lawrence Kohlberg</b> said moral thinking grows in three levels:</p>
+        <ul><li><b>Preconventional</b>: do right to avoid punishment or get a reward.</li><li><b>Conventional</b>: follow the rules to fit in and be seen as good.</li><li><b>Postconventional</b>: follow your own ethical principles, even if it breaks a rule.</li></ul>`,
+      blocks: [
+        { type: "q", id: "t1", std: "Soc.9", short: "Slang = peers", prompt: pg("14", "Group chat: <i>\"that's lowkey fire 😭\"</i>. Daniela's mom has no idea what it means.") + "Who most likely taught Daniela this slang?", options: ["Peers", "Family", "School", "Religion"], hint: "Her mom doesn't even know it. Who does?", why: "Slang spreads among friends the same age. That's peers as an agent of socialization." },
+        { type: "event", id: "e2", short: "High school look", html: pg("14", "First week of high school. Daniela is picking her look.") + `<p>What shapes her choice?</p>`,
+          choices: [
+            { label: "Match her friend group's style", fx: { peer: 2 }, result: `<p>${T("up","Peers +2")}They take a group photo in matching hoodies. Fitting in with friends matters a lot at 14.</p>` },
+            { label: "Copy an influencer's back-to-school video", fx: { med: 2 }, result: `<p>${T("up","Media +2")}She buys the exact outfit from the video. Media told her what \"good\" looks like.</p>` },
+            { label: "Wear the gold hoop earrings Grandma gave her", fx: { fam: 2 }, result: `<p>${T("up","Family +2")}Grandma wore the same hoops at her age. Family traditions shape identity, too.</p>` }
+          ] },
+        { type: "q", id: "t2", std: "Soc.9", short: "Ad shapes behavior = media", prompt: pg("15", "An ad shows pro athletes: <i>\"Real athletes drink BOLT.\"</i> Daniela starts buying BOLT before every softball game.") + "Which agent shaped this habit?", options: ["Media", "Peers", "Family", "School"], hint: "Where did the message come from?", why: "Ads are media. They send messages about what people \"like us\" should do or buy." },
+        { type: "q", id: "t3", std: "Soc.9", short: "No cheating to fit in = conventional", prompt: pg("15", "Friends ask Daniela to help them cheat. She says no: \"Good teammates don't cheat. Coach expects better from us.\"") + "Which Kohlberg level is this?", options: ["Conventional, following rules to be seen as good", "Preconventional, just avoiding getting caught", "Postconventional, her own deep principles", "Game stage, understanding every team role"], hint: "She cares about what a 'good teammate' does and what Coach expects.", why: "Following rules to be seen as good by others is the conventional level." },
+        { type: "q", id: "t4", std: "Soc.9", short: "Clean room or lose tablet = preconventional", prompt: pg("16", "Daniela's little brother, 6, cleans his room only because \"Mom said no tablet if I don't.\"") + "Which Kohlberg level is he at?", options: ["Preconventional, avoiding punishment", "Conventional, wanting to fit in", "Postconventional, his own principles", "Play stage, pretending to be Mom"], hint: "Why is he cleaning? What happens if he doesn't?", why: "Doing the right thing only to avoid punishment is the preconventional level. It's normal for young kids." }
+      ] },
+    { kicker: "Part 3 of 3 · Ages 18–31", title: "Adult Daniela",
+      teach: `<p>Socialization is <b>lifelong</b>. New jobs, new groups, and new stages of life all teach new norms.</p>
+        <p>A <b>total institution</b> is a place where people live cut off from society under strict control, like a prison or military boot camp. It strips away old roles and habits and replaces them with strict new routines. That's called <b>resocialization</b>.</p>`,
+      blocks: [
+        { type: "event", id: "e3", short: "Boot camp choice", html: pg("18", "Daniela joins the Army. At boot camp: same haircut, same uniform, wake-up at 4:30 a.m., no phone for weeks.") + `<p>How does she get through it?</p>`,
+          choices: [
+            { label: "Lean on her squad. They push each other.", fx: { peer: 2 }, result: `<p>${T("up","Peers +2")}Her squad becomes like family. They learn the new rules together.</p>` },
+            { label: "Fight every rule she thinks is dumb", fx: {}, result: `<p>${T("flat","No change")}Extra push-ups, every time. She still has to follow the routine. In a total institution, the system wins.</p>` },
+            { label: "Write letters home every Sunday", fx: { fam: 2 }, result: `<p>${T("up","Family +2")}Grandma writes back every week. Family still matters, even from far away.</p>` }
+          ] },
+        { type: "q", id: "a1", std: "Soc.9", short: "Boot camp = total institution", prompt: pg("18", "Boot camp: everyone lives on base, cut off from home, under strict control 24 hours a day.") + "Boot camp is an example of…", options: ["A total institution", "A generalized other", "A peer group", "The play stage"], hint: "Check the teach box: which term means a place of total control?", why: "Places where people live cut off from society under strict control, like boot camp or prison, are total institutions." },
+        { type: "q", id: "a2", std: "Soc.9", short: "Stripping old habits = resocialization", prompt: pg("18", "Daniela's old habits are gone: her hair, her clothes, her sleep schedule, even how she talks to adults (\"Yes, Drill Sergeant!\").") + "What process is this?", options: ["Resocialization", "The play stage", "Preconventional morality", "Culture shock"], hint: "Old roles are stripped away and new ones replace them.", why: "Removing old habits and replacing them with new norms is resocialization." },
+        { type: "q", id: "a3", std: "Soc.9", short: "New job = lifelong socialization", prompt: pg("27", "Daniela becomes a nurse. She learns hospital rules, medical words, and how to calm scared patients.") + "What does this page show?", options: ["Socialization keeps going all through life", "Socialization ends when you finish school", "Only family can teach adults new norms", "Adults can't learn new roles or rules"], hint: "She's an adult and still learning new norms.", why: "Socialization is lifelong. Every new job or group teaches new norms and roles." },
+        { type: "q", id: "a4", std: "Soc.9", short: "Refusing unsafe order = postconventional", prompt: pg("31", "A manager tells Daniela to skip a safety check to save time. She refuses and reports it, even though she could lose her job. \"Patients' safety matters more.\"") + "Which Kohlberg level is this?", options: ["Postconventional, her own principles", "Conventional, following rules to fit in", "Preconventional, avoiding punishment", "Play stage, copying her manager"], hint: "She's going AGAINST her boss and risking punishment. Why?", why: "Acting on your own principles, even when it costs you, is the postconventional level." }
+      ] }
+  ],
+  finale: {
+    title: "Who Taught Daniela?",
+    report: st => `<p><b>In your version of Daniela's life, the loudest influence was: ${loudest(st.fx)}.</b> But every agent (family, peers, school, and media) shaped her at some point. That's socialization.</p><p>Answer both in 1–2 full sentences, using Daniela's life.</p>`,
+    prompts: [
+      { id: "kid", short: "Agent that shaped Daniela most as a kid", label: "1. Which agent of socialization shaped Daniela most as a kid? Give one example from her life.", stem: "The agent that shaped Daniela most as a kid was ___. For example, ___.", min: 70, newWords: 5, mustAll: [["family", "grandma", "mom", "peer", "friend", "neighbor", "school", "teacher", "media", "cartoon", "tv"], ["example", "because", "when", "like", "taught"]], mustMsg: "In answer 1, name the agent (family, peers, school, or media) AND give an example from Daniela's life." },
+      { id: "mead", short: "A Mead or Kohlberg moment in Daniela's life", label: "2. Pick one moment from Daniela's life that shows Mead's or Kohlberg's idea. Explain how.", stem: "When Daniela ___, it shows ___ because ___.", min: 70, newWords: 5, mustAll: [["play", "game", "generalized", "self", "preconventional", "conventional", "postconventional", "kohlberg", "mead"], ["because", "since", "shows"]], mustMsg: "In answer 2, name Mead's idea (play stage, game stage, self) or a Kohlberg level AND explain why (use \"because\")." }
+    ]
+  },
+  extraAnswers: st => ({ "Influence bars": AG.map(a => a[1] + " " + (st.fx[a[0]] || 0)).join(" · ") })
+});
+
+</script>
+</body></html>

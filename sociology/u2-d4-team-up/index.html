@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Save the Night Bus | Sociology Unit 2 Day 4</title>
+<meta name="description" content="Build a movement to save a city bus line and learn why people team up for change: types, stages, and collective behavior.">
+<style>
+:root{--ink:#1f2b33;--muted:#55626b;--paper:#fbf7f1;--card:#fff;--line:#dcd9cf;--acc:#c2410c;--acc2:#1e4f8a;--soft:#fdf0e6;--green:#2a6b45;--bad:#a2392f}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.5 system-ui,Segoe UI,Arial,sans-serif}
+header{background:linear-gradient(100deg,#fde9da,#e4ecf7);border-bottom:5px solid var(--acc);padding:16px max(16px,calc((100vw - 900px)/2)) 12px}
+.k{font-size:.78rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:var(--acc);margin:0}
+h1{margin:2px 0 4px;font-size:clamp(1.7rem,3.4vw,2.3rem)}
+.std{margin:2px 0;font-size:.92rem;color:var(--muted)}.std b{color:var(--ink)}
+.hud{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line);padding:8px max(16px,calc((100vw - 900px)/2));display:flex;gap:10px 12px;flex-wrap:wrap;align-items:center;font-weight:800;font-size:.92rem;box-shadow:0 2px 8px #1f2b3312}
+.hud .bar{flex:1;min-width:110px;height:10px;background:#e6e6de;border-radius:9px;overflow:hidden}.hud .bar span{display:block;height:100%;width:0;background:var(--acc);transition:width .4s}
+.pill{background:#f0efe8;border-radius:20px;padding:3px 10px;white-space:nowrap}
+.meter{display:flex;align-items:center;gap:6px}.meter .track{width:100px;height:10px;border-radius:9px;background:#e6e6de;overflow:hidden}.meter .track span{display:block;height:100%;background:var(--acc2);transition:width .5s}
+main{max-width:900px;margin:auto;padding:14px 16px 60px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;box-shadow:0 3px 12px #1f2b330d}
+.kicker{font-size:.78rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:var(--acc2);margin:0}
+h2{margin:2px 0 10px;font-size:1.45rem}
+.teach{background:var(--soft);border-left:5px solid var(--acc);border-radius:9px;padding:10px 14px;margin:0 0 12px}.teach p{margin:4px 0}.teach b{color:var(--acc)}.teach ul{margin:4px 0;padding-left:20px}
+.block{margin:14px 0;padding:14px;border-radius:12px;border:2px solid var(--line);background:#fff}
+.block.current{border-color:var(--ink);box-shadow:0 0 0 4px color-mix(in srgb,var(--acc) 22%,transparent)}
+.block h3{margin:0 0 10px;font-size:1.06rem;line-height:1.35;font-weight:700}
+.event{background:#fbf9f4;border-style:dashed;border-color:#cdbf9a}.event.current{border-style:solid}
+.event-body p{margin:4px 0}
+.ev{display:block;font-weight:400;background:#f7f6f1;border:1px solid var(--line);border-left:5px solid var(--acc2);border-radius:10px;padding:9px 12px;margin:0 0 10px;font-size:.98rem}
+.ev .who{display:block;font-size:.74rem;font-weight:900;letter-spacing:.06em;text-transform:uppercase;color:var(--acc2);margin-bottom:2px}
+.ev p{margin:3px 0}
+.picked{margin:10px 0 4px;color:var(--muted)}.result{background:#f0efe8;border-radius:9px;padding:9px 12px}.result p{margin:4px 0}
+.tag{display:inline-block;font-weight:900;font-size:.8rem;border-radius:12px;padding:2px 9px;margin-right:6px}.tag.up{background:#dcefe2;color:var(--green)}.tag.down{background:#f6dcd8;color:var(--bad)}.tag.flat{background:#ebe9e0;color:var(--ink)}
+.qlabel{font-size:.75rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:var(--acc);margin:0 0 4px}
+.choices{display:grid;gap:8px}
+@media(min-width:700px){.q .choices{grid-template-columns:1fr 1fr}}
+button{font:inherit;cursor:pointer;border-radius:10px;min-height:46px}
+.choice{text-align:left;background:#fff;color:var(--ink);border:2px solid #cfcdbf;padding:10px 12px;font-weight:650;line-height:1.3}
+.choice:hover:not(:disabled){border-color:var(--ink);background:#fcfcfa}.choice:disabled{opacity:.5;cursor:not-allowed}
+.go{margin-top:12px;background:var(--acc);color:#fff;border:0;padding:11px 18px;font-weight:900}
+button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid #2f7dbd;outline-offset:2px}
+.answered{font-weight:800;color:var(--green);margin:4px 0}.why{margin:2px 0;color:var(--muted)}
+.msg{min-height:1.3em;font-weight:750;margin:8px 0 0}.msg.bad{color:var(--bad)}.msg.good{color:var(--green)}
+label{display:block;font-weight:850;margin:14px 0 4px}.stem{margin:0 0 4px;color:var(--muted);font-size:.92rem}
+input,textarea{width:100%;font:inherit;border:2px solid #cfcdbf;border-radius:9px;padding:10px;background:#fff;color:var(--ink)}
+.steps{display:grid;gap:6px;margin:10px 0;padding:0;list-style:none}.steps li{background:#f0efe8;border-radius:9px;padding:8px 12px;font-weight:700}
+.welcome{background:#e6f1ea;color:var(--green);font-weight:800;border-radius:9px;padding:8px 12px;margin:0 0 10px}
+.foot{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-top:14px;color:var(--muted);font-size:.85rem}
+.foot button{background:#ebe9e0;border:0;padding:8px 12px;font-weight:800;color:var(--ink)}
+.src{font-size:.8rem;color:var(--muted)}
+.bars{display:grid;gap:6px;margin:8px 0}.brow{display:grid;grid-template-columns:minmax(90px,140px) 1fr 44px;gap:8px;align-items:center;font-size:.9rem}.brow .t{height:16px;background:#e6e6de;border-radius:6px;overflow:hidden}.brow .t span{display:block;height:100%;background:var(--acc2)}
+@media print{.hud,.foot,.go{display:none}}
+
+.ev.chat{border-left-color:var(--acc);background:#fff7ec}
+.stages{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:8px 0}.stages div{background:#fff;border:1px solid var(--line);border-radius:9px;padding:6px 8px;font-size:.86rem}.stages b{display:block;color:var(--acc)}
+@media(max-width:640px){.stages{grid-template-columns:1fr 1fr}}
+h3.plain{margin:0 0 6px}
+
+</style>
+<script src="../../shared/assignments.js?v=20261101fill"></script>
+<script src="../../shared/turnin.js?v=20261101fill"></script>
+<script src="../../shared/unit-game.js?v=20261101fill"></script>
+</head><body>
+<header>
+  <p class="k">Sociology · Unit 2 · Day 4</p>
+  <h1>Why Do People Team Up for Change?</h1>
+  <p class="std"><b>SS.9-12.Soc.7</b> Evaluate important social institutions and how they respond to social needs. &nbsp;<b>SS.9-12.Soc.8</b></p>
+  <p class="std"><b>Goal:</b> Explain why social movements form, name their types and stages, and tell a movement apart from a crowd. · About 25 minutes.</p>
+</header>
+<div class="hud" aria-label="Progress and supporters">
+  <span id="progressText">0 checks done</span>
+  <div class="bar" aria-hidden="true"><span id="progressFill"></span></div>
+  <span class="pill">👥 Supporters: <span id="supNum">3</span></span>
+</div>
+<main>
+  <p class="welcome" id="welcome" hidden></p>
+  <div id="app"></div>
+  <div class="foot"><span>Progress saves on this device. Your teacher sees your work after you turn it in.</span><button type="button" id="restartBtn">Start over</button></div>
+</main>
+<script>
+const T = (cls, txt) => `<span class="tag ${cls}">${txt}</span>`;
+const ev = (who, body) => `<span class="ev"><span class="who">${who}</span>${body}</span>`;
+window.S = null;
+
+const chat = (who, msg) => `<span class="ev chat"><span class="who">${who}</span>${msg}</span>`;
+function voteHtml() {
+  const s = (window.S && window.S.fx.sup) || 0;
+  let res;
+  if (s >= 250) res = `<p>${T("up","Win")} The council votes <b>5–2 to keep Night Route 12</b> and writes it into the yearly city budget. It's now a normal part of how the city runs.</p>`;
+  else if (s >= 120) res = `<p>${T("flat","Partial win")} The council votes <b>4–3 to keep Route 12 for one more year</b> as a trial. Your group has to prove riders really use it.</p>`;
+  else res = `<p>${T("down","Loss, for now")} The council votes <b>4–3 to cut Route 12</b>. A few members say they'd look at it again if more people speak up next year.</p>`;
+  return `<p class="kicker">Council vote night</p><h3 class="plain">${s} people signed on. Here's what happened.</h3>${res}<p class="src">Movements with more organized supporters usually get more attention from leaders, but bigger never guarantees a win.</p>`;
+}
+UnitGame.start({
+  key: "soc-u2-d4-team-up-v1",
+  assignmentId: "soc-u2-d4-team-up",
+  title: "Sociology · Unit 2 · Day 4 · Why Do People Team Up for Change?",
+  standard: "SS.9-12.Soc.7, SS.9-12.Soc.8",
+  oldApi: "https://fynn-class-assignment-submissions-20261024.neotboy.chatgpt.site/api/submit",
+  startFx: { sup: 3 },
+  clampFx: fx => { fx.sup = Math.max(3, fx.sup); },
+  hud: st => { window.S = st; document.getElementById("supNum").textContent = st.fx.sup; },
+  startLabel: "Start organizing",
+  introHtml: `<p class="kicker">Save the night bus</p><h2>Night Route 12 is on the chopping block</h2>
+    ${chat("City news alert", "The city council is planning to cut <b>Night Route 12</b>, the only bus that runs until midnight, to save money.")}
+    <p>Lots of teens ride Route 12 home from late shifts at work. You and two friends are mad. Yelling about it online won't fix it. Can you build a <b>movement</b>?</p>
+    <ul class="steps"><li>👥 Your choices change your <b>supporter count</b> at the top. You start with 3.</li><li>📚 Learn how real movements grow, from a spark to the end.</li><li>🗳️ See how the council votes. Then write 2 short answers.</li></ul>
+    <p class="src">Route 12 and the city are made up. The history examples are real.</p>`,
+  scenes: [
+    { kicker: "Part 1 of 3", title: "The Spark",
+      teach: `<p>A <b>social movement</b> is a long-term, organized effort by many people to bring about change, <b>or to resist it</b>.</p>
+        <p><b>Collective behavior</b> is different. It's short-term and unplanned: a crowd, a flash mob, a panic, a riot.</p>
+        <p>Movements usually form when people feel <b>treated unfairly</b>, feel <b>ignored by leaders</b>, are <b>sparked by a big event</b>, or are <b>inspired by a new idea</b>.</p>`,
+      blocks: [
+        { type: "q", id: "s1", std: "Soc.8", short: "Why this movement formed", prompt: chat("City news alert", "Council votes 4–3 to start plans to cut Night Route 12.") + "Which reason for forming a movement does this news show best?", options: ["Sparked by a major event", "Inspired by an idea in a book", "Ordered by the state government", "Copying a trend from overseas"], hint: "Check the four reasons in the teach box. What just happened?", why: "The vote is a big event that sparks people to act. Many riders may also feel ignored by leaders." },
+        { type: "event", id: "e1", short: "First-night choice", html: `<p>That night, about 80 angry riders gather outside city hall. People are shouting. Someone kicks over a trash can. What do you do?</p>`,
+          choices: [
+            { label: "Pass around a sign-up sheet and announce a planning meeting Saturday", fx: { sup: 40 }, result: `<p>${T("up","+40 supporters")}You leave with 43 names and phone numbers. Now there's a plan, not just a crowd.</p>` },
+            { label: "Start a louder chant. The crowd energy is amazing!", fx: { sup: 0 }, result: `<p>${T("flat","+0 supporters")}It feels huge for an hour. Then everyone goes home, and nobody knows what's next.</p>` },
+            { label: "Post an angry video and go home", fx: { sup: 10 }, result: `<p>${T("up","+10 supporters")}The video gets shared, and a few people message you. But there's no plan yet.</p>` }
+          ] },
+        { type: "q", id: "s2", std: "Soc.8", short: "Crowd = collective behavior", prompt: ev("That night outside city hall", "80 people showed up after hearing the news. No one planned it. By 10 p.m., they were gone.") + "That crowd was an example of…", options: ["Collective behavior", "A social movement", "Bureaucratization", "Institutionalization"], hint: "Was it planned and long-term, or short and spur of the moment?", why: "A short, unplanned crowd is collective behavior. A movement is organized and lasts a long time." },
+        { type: "q", id: "s3", std: "Soc.8", short: "Mob mentality = deindividuation", prompt: ev("A witness", "\"The guy who kicked the trash can? He'd never do that alone. In the crowd it was like nobody was a person anymore.\"") + "Sociologists call this…", options: ["Deindividuation, or losing self-control in a crowd", "Coalescence, or a movement starting to get organized", "Reform, or trying to change a single law", "Socialization, or learning society's rules"], hint: "The witness says people stopped acting like themselves in the crowd.", why: "Deindividuation (\"mob mentality\") is losing your sense of self and self-restraint in a crowd." },
+        { type: "q", id: "s4", std: "Soc.8", short: "Protest vs. riot", prompt: ev("Two scenes", "<b>A:</b> 200 people march to city hall with signs and a permit.<br><b>B:</b> A crowd breaks store windows and steals.") + "What's the main difference between a protest (A) and a riot (B)?", options: ["Protests are usually legal; riots break laws", "Protests are small; riots are always huge", "Protests are unplanned; riots are planned", "Protests happen online; riots don't"], hint: "Look at what each crowd is doing.", why: "Protests are usually legal ways to be heard. Riots involve breaking laws, like damage and theft." }
+      ] },
+    { kicker: "Part 2 of 3", title: "Getting Organized",
+      teach: `<p>Sociologist Herbert Blumer described <b>four classic stages</b> of a movement:</p>
+        <div class="stages"><div><b>1. Emergence</b>People feel a problem, but aren't organized.</div><div><b>2. Coalescence</b>People organize, pick leaders, make a plan, go public.</div><div><b>3. Bureaucratization</b>A formal group with staff, rules, and money.</div><div><b>4. Decline</b>The movement winds down. That can mean it won, lost, or became part of the system.</div></div>
+        <p><b>Types:</b> <b>reform</b> (change certain laws), <b>revolutionary</b> (replace the whole system), <b>resistance</b> (stop or reverse a change), <b>redemptive</b> (change individuals' hearts or lives), <b>alternative</b> (change one habit, like quitting smoking).</p>`,
+      blocks: [
+        { type: "event", id: "e2", short: "Tactic choice", html: `<p>Saturday's meeting is packed. What's your main plan?</p>`,
+          choices: [
+            { label: "Collect signatures, then bring 40 riders to tell their stories at the council meeting", fx: { sup: 120 }, result: `<p>${T("up","+120 supporters")}A nurse's aide says Route 12 is her only way home at 11 p.m. Local news covers it. Sign-ups jump.</p>` },
+            { label: "Hold one huge rally downtown, then take a break", fx: { sup: 60 }, result: `<p>${T("up","+60 supporters")}Great photos and a big crowd. But a week later, the council has moved on.</p>` },
+            { label: "Post the council members' home addresses online", fx: { sup: -30 }, result: `<p>${T("down","−30 supporters")}This is called doxxing. It scares people and can be dangerous. Supporters quit, and the council refuses to meet with you.</p>` }
+          ] },
+        { type: "q", id: "g1", std: "Soc.8", short: "Montgomery boycott = coalescence", prompt: ev("History file · Montgomery, Alabama, 1955", "After Rosa Parks was arrested for not giving up her bus seat, Black residents organized a bus boycott. They chose leaders, including Martin Luther King Jr., and set up carpools. It lasted 381 days.") + "Which stage does this show?", options: ["Coalescence", "Emergence", "Decline", "Bureaucratization"], hint: "People were choosing leaders, making a plan, and going public.", why: "Organizing, picking leaders, and acting publicly is coalescence." },
+        { type: "q", id: "g2", std: "Soc.8", short: "Route 12 = reform", prompt: chat("Your group's goal", "Keep Night Route 12 running. We're not trying to replace the city government.") + "What type of movement is yours?", options: ["A reform movement", "A revolutionary movement", "A redemptive movement", "An alternative movement"], hint: "Do you want to change one decision, or the whole system?", why: "Trying to change one specific policy, inside the system, is reform." },
+        { type: "event", id: "e3", short: "Organize choice", html: chat("Your group chat", "300 members · 1,240 unread messages. Three people made three different flyers. Nobody knows who's in charge.") + `<p>What now?</p>`,
+          choices: [
+            { label: "Form an official group: elected leaders, a bank account, a website", fx: { sup: 100 }, result: `<p>${T("up","+100 supporters")}"Riders for Route 12" is born. People know who to call, and the city takes you more seriously.</p>` },
+            { label: "Keep it a loose group chat. Rules are boring.", fx: { sup: -20 }, result: `<p>${T("down","−20 supporters")}Messages get lost. People get frustrated and mute the chat.</p>` },
+            { label: "Let the loudest person run everything", fx: { sup: 10 }, result: `<p>${T("up","+10 supporters")}Things move fast, but some members feel ignored and drift away.</p>` }
+          ] },
+        { type: "q", id: "g3", std: "Soc.8", short: "NAACP = bureaucratization", prompt: ev("History file · NAACP", "Founded in 1909. Today it has paid staff, lawyers, local branches across the country, and members who pay dues.") + "Which stage does the NAACP show?", options: ["Bureaucratization", "Coalescence", "Emergence", "Decline"], hint: "Staff, branches, and dues. Which stage is about becoming a formal organization?", why: "Becoming a formal organization with staff, rules, and money is bureaucratization." },
+        { type: "q", id: "g4", std: "Soc.8", short: "Counter-group = resistance movement", prompt: chat("A new group appears", "\"Keep Our Budget\" forms to STOP the city from raising a fee to pay for Route 12. They say families already pay enough.") + "What type of movement is this?", options: ["A resistance movement", "A reform movement", "An alternative movement", "A revolutionary movement"], hint: "Is this group pushing for a change, or trying to stop one?", why: "A movement that tries to stop or reverse a change is resistance. People can have fair reasons on both sides." }
+      ] },
+    { kicker: "Part 3 of 3", title: "How Movements End",
+      teach: `<p>In the <b>decline</b> stage, a movement shrinks. That doesn't always mean it failed. Sometimes it wins and isn't needed anymore.</p>
+        <p><b>Institutionalization</b> is when a movement's goal becomes a regular part of the system, like a law or an agency.</p>`,
+      blocks: [
+        { type: "note", get html() { return voteHtml(); } },
+        { type: "q", id: "d1", std: "Soc.8", short: "Suffrage declined after winning", prompt: ev("History file · Women's suffrage", "Women organized for the right to vote for about 70 years. In 1920 the 19th Amendment became part of the Constitution. After that, the big suffrage groups closed or changed into new groups.") + "Why did the suffrage movement decline?", options: ["It won its main goal", "It ran out of members", "The government banned it", "People forgot its goal"], hint: "What happened in 1920?", why: "Once women won the vote, the movement's main job was done. Decline can mean success." },
+        { type: "q", id: "d2", std: "Soc.7", short: "Clean Air Act = institutionalization", prompt: ev("History file · Clean air", "Environmental activists pushed for cleaner air. In 1970, Congress passed the Clean Air Act, and the new EPA began enforcing it.") + "What is this outcome called?", options: ["Institutionalization", "Deindividuation", "Coalescence", "Collective behavior"], hint: "The movement's goal became part of government. Check the teach box.", why: "The goal became a law and an agency, part of a social institution (government). That's institutionalization." },
+        { type: "q", id: "d3", std: "Soc.8", short: "Temperance = reform", prompt: ev("History file · Temperance", "From the 1800s to 1919, the temperance movement worked to pass a law banning alcohol across the country. It won the 18th Amendment, which made selling alcohol illegal.") + "What type of movement was temperance?", options: ["A reform movement", "A resistance movement", "A revolutionary movement", "Collective behavior"], hint: "Its big goal was a specific law. Which type changes laws?", why: "Temperance aimed to change specific laws, so it's a reform movement." },
+        { type: "q", id: "d4", std: "Soc.8", short: "American Revolution = revolutionary", prompt: ev("History file · 1776", "American colonists didn't just want one tax law changed. They threw off British rule and set up a whole new government.") + "What type of movement was this?", options: ["A revolutionary movement", "A reform movement", "A resistance movement", "A redemptive movement"], hint: "Did they want one law changed, or the whole system replaced?", why: "Replacing the whole system of government is a revolutionary movement." },
+        { type: "q", id: "d5", std: "Soc.7", short: "Why team up: power in numbers", prompt: chat("Route 12 rider, Kiara, 17", "\"When I emailed the council by myself, nobody answered. When 40 of us showed up, they had to listen.\"") + "What does Kiara's story show about why people join movements?", options: ["Organized numbers get leaders to respond", "Leaders only read messages from groups", "Acting alone is against city rules", "Groups make sure every person agrees"], hint: "What changed between Kiara alone and Kiara with 40 people?", why: "Institutions like city government respond to organized pressure. Many voices together have power one person lacks." }
+      ] }
+  ],
+  finale: {
+    title: "Why Team Up?",
+    report: st => `<p><b>You finished with ${st.fx.sup} supporters.</b> Organized, legal, steady actions built the movement. Unplanned crowds and actions that scare people did not.</p><p>Answer both in 1–2 full sentences.</p>`,
+    prompts: [
+      { id: "why", short: "Why join a movement instead of acting alone", label: "1. Why do people join a movement instead of acting alone? Use an example from today.", stem: "People join a movement instead of acting alone because ___. For example, ___.", min: 70, mustInclude: ["because", "since", "so ", "power", "together", "numbers", "listen"], mustMsg: "In answer 1, explain WHY (use \"because\") and give an example." },
+      { id: "stage", short: "One stage of my movement", label: "2. Pick one of the four stages. Explain what your Route 12 movement did in that stage.", stem: "In the ___ stage, our movement ___.", min: 60, newWords: 5, mustInclude: ["emergence", "coalescence", "bureaucrat", "decline"], mustMsg: "In answer 2, name one of the four stages: emergence, coalescence, bureaucratization, or decline." }
+    ]
+  },
+  extraAnswers: st => ({ "Supporters": String(st.fx.sup) })
+});
+
+</script>
+</body></html>

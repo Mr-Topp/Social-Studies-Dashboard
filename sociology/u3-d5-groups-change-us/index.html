@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Group Pressure Lab | Sociology Unit 3 Day 5</title>
+<meta name="description" content="Step into three famous situations and see how groups change the way people act: conformity, groupthink, obedience, and controlling groups.">
+<style>
+:root{--ink:#22223a;--muted:#585a70;--paper:#f5f4fa;--card:#fff;--line:#d9d7e6;--main:#4b3f8f;--accent:#b5487a;--gold:#d9a43a;--green:#2a6b45;--bad:#a2392f}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.5 system-ui,Segoe UI,Arial,sans-serif}
+header{background:linear-gradient(100deg,#ece9f8,#f8eaf1);border-bottom:5px solid var(--main);padding:16px max(16px,calc((100vw - 900px)/2)) 12px}
+.k{font-size:.78rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:var(--main);margin:0}
+h1{margin:2px 0 4px;font-size:clamp(1.7rem,3.4vw,2.3rem)}
+.std{margin:2px 0;font-size:.92rem;color:var(--muted)}.std b{color:var(--ink)}
+.hud{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line);padding:8px max(16px,calc((100vw - 900px)/2));display:flex;gap:12px;flex-wrap:wrap;align-items:center;font-weight:800;font-size:.92rem;box-shadow:0 2px 8px #22223a12}
+.hud .bar{flex:1;min-width:120px;height:10px;background:#e6e4ee;border-radius:9px;overflow:hidden}.hud .bar span{display:block;height:100%;width:0;background:var(--main);transition:width .4s}
+.pill{background:#f0eef7;border-radius:20px;padding:3px 10px;white-space:nowrap}
+.meter{display:flex;align-items:center;gap:6px}.meter .track{width:110px;height:10px;border-radius:9px;background:#e6e4ee;overflow:hidden}.meter .track span{display:block;height:100%;background:var(--accent);transition:width .5s}
+main{max-width:900px;margin:auto;padding:14px 16px 60px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;box-shadow:0 3px 12px #22223a0d}
+.kicker{font-size:.78rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin:0}
+h2{margin:2px 0 10px;font-size:1.45rem}
+.teach{background:#f0eef9;border-left:5px solid var(--main);border-radius:9px;padding:10px 14px;margin:0 0 12px}.teach p{margin:4px 0}.teach b{color:var(--main)}
+.block{margin:14px 0;padding:14px;border-radius:12px;border:2px solid var(--line);background:#fff}
+.block.current{border-color:var(--ink);box-shadow:0 0 0 4px #4b3f8f30}
+.block h3{margin:0 0 10px;font-size:1.06rem;line-height:1.35;font-weight:700}
+.event{background:#fbf8fc;border-style:dashed;border-color:#c9b7d6}.event.current{border-style:solid}
+.event-body p,.note p{margin:4px 0}
+.src-card{background:#fbfaf5;border:1px solid #e1dccb;border-left:5px solid var(--gold);border-radius:10px;padding:10px 12px;margin:0 0 10px;font-weight:400;font-size:.97rem}
+.src-card .lab{font-size:.74rem;font-weight:900;letter-spacing:.06em;text-transform:uppercase;color:#8a6a1f;margin:0 0 4px}
+.src-card p{margin:3px 0}
+.src-card.warn{border-left-color:var(--bad)}.src-card.warn .lab{color:var(--bad)}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:8px 0}.stats div{background:#fff;border:1px solid var(--line);border-radius:9px;padding:6px 8px;font-size:.88rem;text-align:center}.stats b{display:block;font-size:1.35rem;color:var(--main)}
+.lines{display:flex;gap:18px;flex-wrap:wrap;align-items:flex-end;justify-content:center;margin:8px 0}
+.lines svg{max-width:100%;height:auto}
+.room{display:flex;gap:6px;flex-wrap:wrap;margin:8px 0}.room span{background:#ece9f8;border-radius:16px;padding:3px 10px;font-size:.88rem;font-weight:700}.room span.you{background:var(--accent);color:#fff}
+.chat{background:#eef3fb;border:1px solid #cfdcef;border-radius:14px;padding:9px 12px;margin:0 0 8px;max-width:620px}.chat .who{font-size:.76rem;font-weight:900;color:#2d5a91;margin-bottom:2px}.chat p{margin:2px 0}
+.picked{margin:10px 0 4px;color:var(--muted)}.result{background:#f0eef7;border-radius:9px;padding:9px 12px}.result p{margin:4px 0}
+.tag{display:inline-block;font-weight:900;font-size:.8rem;border-radius:12px;padding:2px 9px;margin-right:6px}.tag.up{background:#dcefe2;color:var(--green)}.tag.down{background:#f6dcd8;color:var(--bad)}.tag.flat{background:#ebe9f0;color:var(--ink)}
+.qlabel{font-size:.75rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:var(--main);margin:0 0 4px}
+.choices{display:grid;gap:8px}
+@media(min-width:700px){.q .choices{grid-template-columns:1fr 1fr}}
+button{font:inherit;cursor:pointer;border-radius:10px;min-height:46px}
+.choice{text-align:left;background:#fff;color:var(--ink);border:2px solid #cfcbe0;padding:10px 12px;font-weight:650;line-height:1.3}
+.choice:hover:not(:disabled){border-color:var(--ink);background:#fcfbfe}.choice:disabled{opacity:.5;cursor:not-allowed}
+.go{margin-top:12px;background:var(--main);color:#fff;border:0;padding:11px 18px;font-weight:900}
+button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid #2f7dbd;outline-offset:2px}
+.answered{font-weight:800;color:var(--green);margin:4px 0}.why{margin:2px 0;color:var(--muted)}
+.msg{min-height:1.3em;font-weight:750;margin:8px 0 0}.msg.bad{color:var(--bad)}.msg.good{color:var(--green)}
+label{display:block;font-weight:850;margin:14px 0 4px}.stem{margin:0 0 4px;color:var(--muted);font-size:.92rem}
+input,textarea{width:100%;font:inherit;border:2px solid #cfcbe0;border-radius:9px;padding:10px;background:#fff;color:var(--ink)}
+.steps{display:grid;gap:6px;margin:10px 0;padding:0;list-style:none}.steps li{background:#f0eef7;border-radius:9px;padding:8px 12px;font-weight:700}
+.welcome{background:#e6f1ea;color:var(--green);font-weight:800;border-radius:9px;padding:8px 12px;margin:0 0 10px}
+.foot{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-top:14px;color:var(--muted);font-size:.85rem}
+.foot button{background:#ebe9f0;border:0;padding:8px 12px;font-weight:800;color:var(--ink)}
+.src{font-size:.8rem;color:var(--muted)}
+@media(max-width:640px){.stats{grid-template-columns:1fr}}
+@media print{.hud,.foot,.go{display:none}}
+</style>
+<script src="../../shared/assignments.js?v=20261101fill"></script>
+<script src="../../shared/turnin.js?v=20261101fill"></script>
+<script src="../../shared/unit-game.js?v=20261101fill"></script>
+</head><body>
+<header>
+  <p class="k">Sociology · Unit 3 · Day 5</p>
+  <h1>The Group Pressure Lab</h1>
+  <p class="std"><b>SS.9-12.Soc.11</b> Explain the social construction of groups and their impact on the life chances of individuals.</p>
+  <p class="std"><b>Goal:</b> Explain why groups change how we act (conformity, groupthink, obedience, social control) and how to spot a group that's taking over. · About 25 minutes.</p>
+</header>
+<div class="hud" aria-label="Progress and your own-voice meter">
+  <span id="progressText">0 checks done</span>
+  <div class="bar" aria-hidden="true"><span id="progressFill"></span></div>
+  <span class="pill meter">Your own voice: <span class="track" aria-hidden="true"><span id="voiceFill" style="width:50%"></span></span> <span id="voiceNum">5/10</span></span>
+</div>
+<main>
+  <p class="welcome" id="welcome" hidden></p>
+  <div id="app"></div>
+  <div class="foot"><span>Progress saves on this device. Your teacher sees your work after you turn it in.</span><button type="button" id="restartBtn">Start over</button></div>
+</main>
+<script>
+const T = (cls, txt) => `<span class="tag ${cls}">${txt}</span>`;
+const card = (lab, body, cls) => `<div class="src-card ${cls || ""}"><p class="lab">${lab}</p>${body}</div>`;
+const chat = (who, body) => `<div class="chat"><div class="who">${who}</div>${body}</div>`;
+// Asch-style line card: target line, then A (short), B (match), C (long)
+const lineCard = `<div class="lines" role="img" aria-label="A target line on the left. Three lines on the right: A is shorter, B is the same length, C is longer.">
+<svg width="120" height="190" viewBox="0 0 120 190"><text x="60" y="18" text-anchor="middle" font-size="14" font-weight="800" fill="#22223a">Target</text><line x1="60" y1="60" x2="60" y2="175" stroke="#22223a" stroke-width="6"/></svg>
+<svg width="260" height="190" viewBox="0 0 260 190"><text x="45" y="18" text-anchor="middle" font-size="14" font-weight="800" fill="#22223a">A</text><line x1="45" y1="110" x2="45" y2="175" stroke="#4b3f8f" stroke-width="6"/><text x="130" y="18" text-anchor="middle" font-size="14" font-weight="800" fill="#22223a">B</text><line x1="130" y1="60" x2="130" y2="175" stroke="#4b3f8f" stroke-width="6"/><text x="215" y="18" text-anchor="middle" font-size="14" font-weight="800" fill="#22223a">C</text><line x1="215" y1="25" x2="215" y2="175" stroke="#4b3f8f" stroke-width="6"/></svg></div>`;
+UnitGame.start({
+  key: "soc-u3-d5-groups-change-us-v1",
+  assignmentId: "soc-u3-d5-groups-change-us",
+  title: "Sociology · Unit 3 · Day 5 · Why Do Groups Change How We Act?",
+  standard: "SS.9-12.Soc.11",
+  oldApi: "https://fynn-class-assignment-submissions-20261024.neotboy.chatgpt.site/api/submit",
+  startFx: { voice: 5 },
+  clampFx: fx => { fx.voice = Math.max(0, Math.min(10, fx.voice)); },
+  hud: st => {
+    const v = st.fx.voice || 0;
+    document.getElementById("voiceFill").style.width = (v * 10) + "%";
+    document.getElementById("voiceNum").textContent = v + "/10";
+  },
+  startLabel: "Enter the lab",
+  introHtml: `<p class="kicker">Three rooms, three tests</p><h2>Would you go along with the group?</h2>
+    <p>Most people say, "Not me. I think for myself." Scientists have tested that. You'll step into three real situations and see what usually happens.</p>
+    <ul class="steps"><li>Room 1: A simple line test</li><li>Room 2: A team meeting where nobody speaks up</li><li>Room 3: A group that wants more and more of you</li></ul>
+    <p>Your choices move the <b>Your own voice</b> meter at the top. At the end, write 2 short answers and turn in.</p>`,
+  scenes: [
+    { kicker: "Part 1 of 3 · Room 1", title: "The Line Test",
+      teach: `<p><b>Conformity</b> means changing what you say or do to match a group, so you fit in.</p>
+        <p>In 1951, psychologist <b>Solomon Asch</b> tested it with a simple task: which line matches the target line?</p>`,
+      blocks: [
+        { type: "note", html: `${lineCard}<p>You're in a room with 7 other students. They're all secretly working for the researcher (these helpers are called <b>confederates</b>). The researcher asks each person out loud which line matches the target.</p>
+          <div class="room"><span>"A"</span><span>"A"</span><span>"A"</span><span>"A"</span><span>"A"</span><span>"A"</span><span>"A"</span><span class="you">You: ?</span></div>` },
+        { type: "event", id: "e1", short: "Line test answer", html: `<p>All 7 people said <b>A</b>. They didn't even hesitate. Now everyone is looking at you.</p>`,
+          choices: [
+            { label: "Say \"B.\" It's clearly B.", fx: { voice: 2 }, result: `<p>${T("up","+2 own voice")}You trusted your eyes. A couple of people glance at you. It felt awkward, but you were right.</p>` },
+            { label: "Say \"A,\" like everyone else", fx: { voice: -2 }, result: `<p>${T("down","−2 own voice")}You went along. No awkward stares. But you said something you knew was wrong. That's conformity.</p>` },
+            { label: "Mumble \"I'm not totally sure…\"", fx: {}, result: `<p>${T("flat","No change")}You didn't go along, but you didn't stand up either. The group made you doubt something you could see.</p>` }
+          ] },
+        { type: "q", id: "a1", std: "Soc.11", short: "Asch: ~75% went along once", prompt: card("Asch's results (1950s)", `<div class="stats"><div><b>under 1%</b>got it wrong when tested alone</div><div><b>about 75%</b>went along with the wrong group answer at least once</div><div><b>about 25%</b>never went along</div></div>`) + "About how many people went along with the wrong group answer at least once?", options: ["About 3 out of 4 people", "About 1 out of 4 people", "About 1 out of 100 people", "About 9 out of 10 people"], hint: "Look at the middle box on the results card.", why: "About 75%, or 3 out of 4, went along at least once. Alone, almost nobody got it wrong, so the group caused the mistakes." },
+        { type: "q", id: "a2", std: "Soc.11", short: "Lines weren't hard (alone <1%)", prompt: "Why does the \"under 1%\" number matter?", options: ["It proves the task was easy, so the group caused the errors", "It proves most people in the study had bad eyesight", "It shows that the confederates were telling the truth", "It shows people conform more when they are alone"], hint: "What happened when people answered with no group around?", why: "When alone, people almost never missed. So the wrong answers came from group pressure, not a hard task." },
+        { type: "q", id: "a3", std: "Soc.11", short: "Why people conformed", prompt: card("After the test, people explained", `<p>"I didn't want to look stupid."</p><p>"I figured they must see something I didn't."</p><p class="src">Paraphrased from interviews Asch reported.</p>`) + "Based on what people said, why did they go along?", options: ["They wanted to fit in, or they doubted themselves", "The researcher ordered them to pick the same line", "They were paid extra money for matching the group", "They could not see the lines from where they sat"], hint: "Read both quotes. One is about looks, one is about doubt.", why: "Some people went along to avoid looking foolish (fitting in). Others started to doubt their own eyes. Both are reasons people conform." },
+        { type: "q", id: "a4", std: "Soc.11", short: "One ally cuts conformity", prompt: card("Asch changed one thing", `<p>In another version, <b>one</b> confederate gave the right answer. Going along with the wrong answer dropped to about <b>1 in 20</b> answers.</p>`) + "What does this suggest?", options: ["Having just one ally makes it easier to speak up", "Bigger groups always make people feel braver", "People conform more when someone disagrees", "The line test was broken in this version"], hint: "What changed when one person broke from the group?", why: "One person on your side breaks the spell. That's why speaking up can help others speak up too." }
+      ] },
+    { kicker: "Part 2 of 3 · Room 2", title: "The Meeting Where Nobody Spoke Up",
+      teach: `<p><b>Groupthink</b> happens when a close group wants to agree so badly that people stop questioning a bad idea. Psychologist <b>Irving Janis</b> named it in 1972.</p>
+        <p><b>Obedience</b> is following orders from someone in charge (an <b>authority figure</b>), even when you have doubts.</p>`,
+      blocks: [
+        { type: "q", id: "g1", std: "Soc.11", short: "Bay of Pigs = groupthink", prompt: card("Case file: The Bay of Pigs, 1961", `<p>President John F. Kennedy's advisers approved a plan to land about 1,400 Cuban exiles in Cuba to overthrow Fidel Castro.</p><p>Some advisers had serious doubts but kept quiet so the team would stay united. The invasion failed in about 3 days.</p>`) + "Advisers kept their doubts quiet so the team would agree. This is an example of…", options: ["Groupthink", "Obedience to orders", "Resocialization", "Culture shock"], hint: "Were they following a direct order, or staying quiet to keep the group united?", why: "Staying quiet to keep a group in agreement, even when the plan is bad, is groupthink. Janis used this case as his main example." },
+        { type: "event", id: "e2", short: "Warehouse meeting choice", html: chat("SHIFT LEAD · team huddle", `<p>Big truck order due by 2. Let's skip the forklift safety check today. Everybody good with that? 👍</p>`) + `<p>Five coworkers nod right away. You've seen that forklift's brakes act weird.</p>`,
+          choices: [
+            { label: "Ask: \"What happens if the brakes go?\"", fx: { voice: 2 }, result: `<p>${T("up","+2 own voice")}There's a pause. Then another worker says, "Yeah, I noticed that too." The lead agrees to a 5-minute check. One question broke the groupthink.</p>` },
+            { label: "Nod along. Nobody else seems worried.", fx: { voice: -2 }, result: `<p>${T("down","−2 own voice")}The meeting ends fast. Later, two coworkers admit they were worried too. Nobody said it out loud.</p>` },
+            { label: "Say nothing, but complain later in the group chat", fx: { voice: -1 }, result: `<p>${T("down","−1 own voice")}People agree with you in the chat, but the forklift already went out. The doubt came too late to help.</p>` }
+          ] },
+        { type: "q", id: "g2", std: "Soc.11", short: "Fix for groupthink", prompt: card("Janis's ways to prevent groupthink", `<p>• The leader shares an opinion <b>last</b>, not first.</p><p>• Someone's job is to argue <b>against</b> the plan (a <b>devil's advocate</b>).</p><p>• Invite outside people to check the plan.</p>`) + "Which move would best prevent groupthink?", options: ["Assign someone to argue against the plan", "Let the leader share an opinion first", "Vote fast so nobody feels awkward", "Only invite people who already agree"], hint: "Which choice matches a bullet on the card?", why: "A devil's advocate makes disagreement part of the job, so doubts get said out loud." },
+        { type: "note", html: card("Case file: The Milgram experiment, 1961", `<p>At Yale University, Stanley Milgram told volunteers they were helping with a memory study. Each time a "learner" in the next room got an answer wrong, the volunteer had to press a switch for a stronger electric shock.</p><p>The shocks were <b>fake</b>, and the learner was an actor. But the volunteers didn't know that. When they wanted to stop, a man in a lab coat said things like, "The experiment requires that you continue."</p><div class="stats"><div><b>26 of 40</b>went all the way to the highest switch</div><div><b>65%</b>of volunteers obeyed to the end</div><div><b>Many</b>sweated, shook, or argued, but kept going</div></div>`) },
+        { type: "q", id: "m1", std: "Soc.11", short: "Milgram = obedience", prompt: "What does Milgram's study show about people?", options: ["Many people obey authority even when it feels wrong", "Most people refuse orders that could hurt someone", "People only obey when they are paid a lot of money", "Only cruel or violent people follow harmful orders"], hint: "Look at the 65% and how upset volunteers were.", why: "Most volunteers were ordinary people who felt upset but obeyed anyway. Authority can push people to act against their conscience." },
+        { type: "q", id: "m2", std: "Soc.11", short: "Peers refusing cut obedience", prompt: card("Milgram changed one thing", `<p>In one version, two other "teachers" (also actors) refused to keep going. Only about <b>1 in 10</b> volunteers went all the way.</p>`) + "What lowered obedience in this version?", options: ["Seeing other people refuse first", "Having a stricter man in a lab coat", "Moving the study to a bigger room", "Paying the volunteers less money"], hint: "Think back to Asch's 'one ally' result.", why: "When others refused, people felt free to refuse too. Like in Asch's study, one or two people who break from the group change everything." },
+        { type: "note", html: card("Research check: be careful with this one", `<p>The <b>Stanford Prison Experiment</b> (1971) is famous. It's often taught as proof that giving people the role of "guard" makes them cruel.</p><p>But later, recordings and records showed the researchers <b>coached the guards</b> to act tough. Some guards said they were acting. Many scientists now say it <b>does not prove</b> what it claimed.</p>`, "warn") },
+        { type: "q", id: "m3", std: "Soc.11", short: "Why Stanford Prison is disputed", prompt: "Why do many scientists now question the Stanford Prison Experiment?", options: ["Researchers coached guards on how to act", "Too many people joined to track them all", "It took place outside the United States", "All the guards were trained police officers"], hint: "Reread the research-check card. What did the researchers do?", why: "If guards were told how to act, their cruelty doesn't show what roles do on their own. Good science has to check how a study was run." }
+      ] },
+    { kicker: "Part 3 of 3 · Room 3", title: "The Group That Wants More",
+      teach: `<p>Most groups are good for us: teams, families, faith groups, jobs, friend groups. They give us <b>belonging</b>.</p>
+        <p>But some groups use <b>social control</b> (rewards, punishments, and rules that control what members do, eat, wear, read, and who they talk to) to take over people's lives. A very controlling group like this is often called a <b>cult</b>. It usually has a <b>charismatic leader</b> (a leader people find magnetic and special) who claims to have the only truth.</p>
+        <p>The danger isn't believing something different. The danger is control, manipulation, and fear.</p>`,
+      blocks: [
+        { type: "event", id: "e3", short: "Joining RISE", html: chat("YOUR FRIEND TASHA", `<p>You HAVE to come to RISE. Free workouts, free food, and everyone is so nice. Coach Vance says we're gonna change our whole lives 🔥</p>`) + `<p>You go once. People hug you, remember your name, and say you're "meant to be here." It feels amazing.</p><p class="src">RISE and Coach Vance are made up. The warning signs are real.</p>`,
+          choices: [
+            { label: "Keep going, but keep your other plans and friends too", fx: { voice: 1 }, result: `<p>${T("up","+1 own voice")}You enjoy the workouts and still see your other friends. You stay connected to people outside the group.</p>` },
+            { label: "Go every night. These people feel like family.", fx: { voice: -1 }, result: `<p>${T("down","−1 own voice")}RISE fills up your week fast. You start missing hangouts and family dinner. It feels great, for now.</p>` }
+          ] },
+        { type: "q", id: "r1", std: "Soc.11", short: "Red flag vs. normal group", prompt: "Which one is a <b>red flag</b>, not normal group stuff?", options: ["The leader tells you to stop talking to family", "The coach asks everyone to wear team colors", "Members do a loud chant before every game", "The club asks for $20 to pay for team shirts"], hint: "Which one cuts you off from people outside the group?", why: "Rituals, uniforms, and small fees are normal. Cutting members off from family is a classic sign of a controlling group." },
+        { type: "event", id: "e4", short: "Phones and doubters", html: chat("COACH VANCE · week 6", `<p>Phones go in the basket during meetings. Doubters are weak. If your family doesn't support your growth, maybe they're holding you back. Level 2 is $300.</p>`) + `<p>Tasha already handed over her phone. Everyone is watching.</p>`,
+          choices: [
+            { label: "Call an outside friend and talk it through", fx: { voice: 2 }, result: `<p>${T("up","+2 own voice")}Your cousin says, "That's not a gym, that's control." Hearing an outside view helps you see it clearly. You stop going and check on Tasha.</p>` },
+            { label: "Hand over your phone and stay quiet", fx: { voice: -2 }, result: `<p>${T("down","−2 own voice")}You don't want to be called weak. Now you can't check with anyone outside. That's exactly how control grows.</p>` },
+            { label: "Keep going, but stop telling family about it", fx: { voice: -1 }, result: `<p>${T("down","−1 own voice")}Keeping the group secret from family means fewer people can warn you. Secrecy is another warning sign.</p>` }
+          ] },
+        { type: "q", id: "r2", std: "Soc.11", short: "Taking phones = social control", prompt: "Taking phones and calling doubters \"weak\" are both examples of…", options: ["Social control", "Cultural relativity", "Culture shock", "Ethnocentrism"], hint: "Reread the box at the top of Part 3. Which idea is about rewards, punishments, and rules for members?", why: "Punishing doubt and controlling who you talk to are tools of social control." },
+        { type: "q", id: "r3", std: "Soc.11", short: "Resocialization in groups", prompt: card("Inside a controlling group", `<p>New members get a new name, strict rules about food and clothes, and are told their old life was \"fake.\"</p>`) + "Replacing a person's old beliefs and habits with new ones is called…", options: ["Resocialization", "A reference group", "Culture shock", "Role-taking"], hint: "Old beliefs out, new beliefs in. Which word means being socialized all over again?", why: "Resocialization replaces old values and habits with new ones. Boot camp does this too, but controlling groups use it to make members depend on them." },
+        { type: "note", html: card("Case file: Jonestown, 1978 (a serious one)", `<p><b>Jim Jones</b> led a group called the Peoples Temple. He moved his followers from the U.S. to a remote camp in the jungle of Guyana, in South America. He took their passports, controlled their news, and punished people who doubted him.</p><p>In November 1978, more than <b>900</b> people died there, including about <b>300 children</b>. Most were made to drink poison. Many were forced.</p><p>Most members had joined because they wanted community and fairness. They were not "stupid." They were cut off, step by step.</p>`, "warn") },
+        { type: "q", id: "r4", std: "Soc.11", short: "Jonestown: isolation trapped people", prompt: "Which step made it hardest for Peoples Temple members to leave?", options: ["Moving them far away and taking passports", "Holding big meetings with music and food", "Asking members to volunteer to help people", "Giving the group a hopeful-sounding name"], hint: "Reread the first paragraph. What made leaving almost impossible?", why: "Isolation (far from home, no passports, no outside news) left members with no way out and no outside voices." },
+        { type: "q", id: "r5", std: "Soc.11", short: "Why people join", prompt: "Based on today, what usually draws people into controlling groups?", options: ["Needing to belong and wanting answers", "Being forced to join at the very start", "Having low grades or not being smart", "Hoping to get rich in a short time"], hint: "Think about how RISE felt in week 1, and why Peoples Temple members joined.", why: "People usually join for belonging, meaning, and a leader who seems to have answers. Anyone can be pulled in, especially when lonely." }
+      ] }
+  ],
+  finale: {
+    title: "Your Pressure Plan",
+    report: st => `<p><b>Your own-voice meter ended at ${st.fx.voice}/10.</b> Groups give us belonging. They also push us to conform, stay quiet, obey, or cut off outsiders. The fix is usually the same: one person who speaks up, and staying connected to people outside the group.</p><p>Answer both in 1–2 full sentences.</p>`,
+    prompts: [
+      { id: "flag", short: "When a group starts controlling you", label: "1. When does a group stop helping you and start controlling you? Name one red flag from today.", stem: "A group starts controlling you when ___. One red flag is ___.", min: 70, mustInclude: ["family", "friend", "phone", "leader", "doubt", "question", "isolat", "cut", "money", "punish", "fear", "secret", "control", "weak"], mustMsg: "In answer 1, name a real red flag from today (like cutting off family or friends, taking phones, punishing doubters)." },
+      { id: "resist", short: "Resisting group pressure (study)", label: "2. Pick Asch's line test, Milgram's study, or groupthink. Based on it, what's one way a person can resist group pressure?", stem: "In ___, people ___. One way to resist is ___ because ___.", min: 80, mustAll: [["asch", "line", "milgram", "shock", "groupthink", "bay of pigs", "janis"], ["because", "since", "so ", "when", "if "]], mustMsg: "In answer 2, name the study (Asch, Milgram, or groupthink) AND explain why your idea works (use \"because\")." }
+    ]
+  },
+  extraAnswers: st => ({ "Own-voice meter": st.fx.voice + " of 10" })
+});
+</script>
+</body></html>

@@ -204,7 +204,47 @@ window.CLASS_ASSIGNMENTS = {
   "civics-f5-presentation": { course: "civics", hideLink: true, unit: 5, title: "The 1800s (Slides)", path: "civics/friday5-1800s-civics-presentation/", std: ["SS.9-12.Gov.14", "SS.9-12.Gov.15", "SS.9-12.Gov.3"] },
   "civics-f5-1800s-express": { course: "civics", unit: 5, title: "The 1800s Express", path: "civics/friday5-1800s-express-game/", std: ["SS.9-12.Gov.14", "SS.9-12.Gov.15", "SS.9-12.Gov.3"] },
   "civics-f6-presentation": { course: "civics", hideLink: true, unit: 6, title: "Modern America (Slides)", path: "civics/friday6-modern-america-presentation/", std: ["SS.9-12.Gov.11", "SS.9-12.Gov.14", "SS.9-12.Gov.15"] },
-  "civics-f7-presentation": { course: "civics", hideLink: true, unit: 7, title: "Symbols, Holidays & Final Review (Slides)", path: "civics/friday7-symbols-final-review-presentation/", std: ["SS.9-12.Gov.16"] }
+  "civics-f7-presentation": { course: "civics", hideLink: true, unit: 7, title: "Symbols, Holidays & Final Review (Slides)", path: "civics/friday7-symbols-final-review-presentation/", std: ["SS.9-12.Gov.16"] },
+  // Added 2026-11-01: past Drive assignments rebuilt as online activities for empty lesson days
+  "ush-p1u1-d1-founding": { course: "us-history", unit: 1, day: 1, part: 1, title: "Day 1 · The Rider: Who Was in the Promise?", path: "us-history/p1u1-d1-founding/", std: ["SS.9-12.US.2", "SS.9-12.US.1"] },
+  "ush-p1u1-d2-articles": { course: "us-history", unit: 1, day: 2, part: 1, title: "Day 2 · Clerk of a Broke Congress", path: "us-history/p1u1-d2-articles/", std: ["SS.9-12.US.2"] },
+  "ush-p1u1-d3-convention": { course: "us-history", unit: 1, day: 3, part: 1, title: "Day 3 · Behind Closed Doors", path: "us-history/p1u1-d3-convention/", std: ["SS.9-12.US.3", "SS.9-12.US.2"] },
+  "ush-p1u1-d4-constitution": { course: "us-history", unit: 1, day: 4, part: 1, title: "Day 4 · Power Watch, 1787–1868", path: "us-history/p1u1-d4-constitution/", std: ["SS.9-12.US.2"] },
+  "ush-p1u1-d5-citizenship": { course: "us-history", unit: 1, day: 5, part: 1, title: "Day 5 · Who Counted? 1776–1870", path: "us-history/p1u1-d5-citizenship/", std: ["SS.9-12.US.1"] },
+  "ush-p1u4-d2-labor": { course: "us-history", unit: 4, day: 2, part: 1, title: "Day 2 · Union Leader: Haymarket to Pullman", path: "us-history/p1u4-d2-labor/", std: ["SS.9-12.US.14"] },
+  "ush-p1u4-d5-big-business": { course: "us-history", unit: 4, day: 5, part: 1, title: "Day 5 · TR's Adviser: Trust-Busting", path: "us-history/p1u4-d5-big-business/", std: ["SS.9-12.US.16", "SS.9-12.US.14"] },
+  "ush-p1u4-d6-suffrage": { course: "us-history", unit: 4, day: 6, part: 1, title: "Day 6 · Road to the 19th Amendment", path: "us-history/p1u4-d6-suffrage/", std: ["SS.9-12.US.15", "SS.9-12.US.18"] },
+  "ush-u1-d3-responses-iowans": { course: "us-history", unit: 1, day: 3, title: "Day 3 · Iowa Farm Family, 1929–1938", path: "us-history/u1-d3-responses-iowans/", std: ["SS.9-12.US.25", "SS.9-12.US.27", "SS.9-12.US.28"] },
+  "ush-u2-d8-common-good": { course: "us-history", unit: 2, day: 8, title: "Day 8 · 1943 Ration Book", path: "us-history/u2-d8-common-good/", std: ["SS.9-12.US.34"] },
+  "ush-u3-d1-allies-enemies": { course: "us-history", unit: 3, day: 1, title: "Day 1 · The Cold War Desk, 1945–1949", path: "us-history/u3-d1-allies-enemies/", std: ["SS.9-12.US.37", "SS.9-12.US.39", "SS.9-12.US.40"] },
+  "ush-u3-d3-korea": { course: "us-history", unit: 3, day: 3, title: "Day 3 · The War That Swung: Korea", path: "us-history/u3-d3-korea/", std: ["SS.9-12.US.35", "SS.9-12.US.37", "SS.9-12.US.40"] },
+  "ush-u3-d5-nuclear-brink": { course: "us-history", unit: 3, day: 5, title: "Day 5 · Thirteen Days: Kennedy's Choices", path: "us-history/u3-d5-nuclear-brink/", std: ["SS.9-12.US.35", "SS.9-12.US.37", "SS.9-12.US.40"] },
+  "ush-u3-d6-vietnam": { course: "us-history", unit: 3, day: 6, title: "Day 6 · Front Page: A Nation Divided", path: "us-history/u3-d6-vietnam/", std: ["SS.9-12.US.35", "SS.9-12.US.36", "SS.9-12.US.37", "SS.9-12.US.38", "SS.9-12.US.39", "SS.9-12.US.40", "SS.9-12.US.41"] },
+  "ush-u4-d1-fight-segregation": { course: "us-history", unit: 4, day: 1, title: "Day 1 · The Case Against Segregation", path: "us-history/u4-d1-fight-segregation/", std: ["SS.9-12.US.42", "SS.9-12.US.43", "SS.9-12.US.44"] },
+  "ush-u4-d2-nonviolence": { course: "us-history", unit: 4, day: 2, title: "Day 2 · The Nonviolence Strategy File", path: "us-history/u4-d2-nonviolence/", std: ["SS.9-12.US.42", "SS.9-12.US.43", "SS.9-12.US.44"] },
+  "ush-u4-d3-who-else": { course: "us-history", unit: 4, day: 3, title: "Day 3 · Build the Exhibit: Who Else Fought?", path: "us-history/u4-d3-who-else/", std: ["SS.9-12.US.42", "SS.9-12.US.44"] },
+  "ush-u5-d1-voters-change": { course: "us-history", unit: 5, day: 1, title: "Day 1 · Election Desk 1980", path: "us-history/u5-d1-voters-change/", std: ["SS.9-12.US.46", "SS.9-12.US.47", "SS.9-12.US.49"] },
+  "ush-u5-d4-cold-war-ends": { course: "us-history", unit: 5, day: 4, title: "Day 4 · Who Ended the Cold War?", path: "us-history/u5-d4-cold-war-ends/", std: ["SS.9-12.US.48", "SS.9-12.US.49", "SS.9-12.US.50"] },
+  "ush-u6-d1-superpower": { course: "us-history", unit: 6, day: 1, title: "Day 1 · Superpower Decision Desk", path: "us-history/u6-d1-superpower/", std: ["SS.9-12.US.52", "SS.9-12.US.53", "SS.9-12.US.55", "SS.9-12.US.56"] },
+  "ush-u6-d2-crisis": { course: "us-history", unit: 6, day: 2, title: "Day 2 · Surviving 2008", path: "us-history/u6-d2-crisis/", std: ["SS.9-12.US.53", "SS.9-12.US.55"] },
+  "ush-u6-d4-still-fighting": { course: "us-history", unit: 6, day: 4, title: "Day 4 · The Fight for Access", path: "us-history/u6-d4-still-fighting/", std: ["SS.9-12.US.51", "SS.9-12.US.55", "SS.9-12.US.56"] },
+  "wh-p1u1-d4-conquistadors": { course: "world-history", unit: 1, day: 4, part: 1, title: "Day 4 · Council of Tlaxcala, 1519", path: "world-history/p1u1-d4-conquistadors/", std: ["SS.9-12.WH.3", "SS.9-12.WH.1"] },
+  "wh-p1u1-d5-slave-trade": { course: "world-history", unit: 1, day: 5, part: 1, title: "Day 5 · Equiano's Words: An Exhibit", path: "world-history/p1u1-d5-slave-trade/", std: ["SS.9-12.WH.1", "SS.9-12.WH.3", "SS.9-12.WH.4"] },
+  "wh-u2-d4-china": { course: "world-history", unit: 2, day: 4, title: "Day 4 · The Lin Family Under Mao", path: "world-history/u2-d4-china/", std: ["SS.9-12.WH.34", "SS.9-12.WH.35", "SS.9-12.WH.38"] },
+  "wh-u2-d6-empires-end": { course: "world-history", unit: 2, day: 6, title: "Day 6 · India's Road to Freedom", path: "world-history/u2-d6-empires-end/", std: ["SS.9-12.WH.36", "SS.9-12.WH.34"] },
+  "wh-u2-d7-africa": { course: "world-history", unit: 2, day: 7, title: "Day 7 · Freedom Day Advisers", path: "world-history/u2-d7-africa/", std: ["SS.9-12.WH.36", "SS.9-12.WH.34", "SS.9-12.WH.37"] },
+  "wh-u2-d8-vietnam": { course: "world-history", unit: 2, day: 8, title: "Day 8 · Vietnam Turning Points", path: "world-history/u2-d8-vietnam/", std: ["SS.9-12.WH.36", "SS.9-12.WH.37", "SS.9-12.WH.34"] },
+  "wh-u2-d11-1989": { course: "world-history", unit: 2, day: 11, title: "Day 11 · East Berlin, 1989", path: "world-history/u2-d11-1989/", std: ["SS.9-12.WH.34", "SS.9-12.WH.37", "SS.9-12.WH.35"] },
+  "gov-u6-d1-checks-balances": { course: "government", unit: 6, day: 1, title: "Day 1 · Branch Wars", path: "civics/gov-u6-d1-checks-balances/", std: ["SS.9-12.Gov.4", "SS.9-12.Gov.9"] },
+  "gov-u6-d2-iowa-government": { course: "government", unit: 6, day: 2, title: "Day 2 · Who Do I Call? Iowa Government", path: "civics/gov-u6-d2-iowa-government/", std: ["SS.9-12.Gov.18", "SS.9-12.Gov.19", "SS.9-12.Gov.20"] },
+  "soc-u1-d5-prove-hot-take": { course: "sociology", unit: 1, day: 5, title: "Day 5 · Hot Take Lab", path: "sociology/u1-d5-prove-hot-take/", std: ["SS.9-12.Soc.1"] },
+  "soc-u1-d6-study-people": { course: "sociology", unit: 1, day: 6, title: "Day 6 · Research Company", path: "sociology/u1-d6-study-people/", std: ["SS.9-12.Soc.1"] },
+  "soc-u2-d4-team-up": { course: "sociology", unit: 2, day: 4, title: "Day 4 · Save Night Route 12", path: "sociology/u2-d4-team-up/", std: ["SS.9-12.Soc.7", "SS.9-12.Soc.8"] },
+  "soc-u2-d5-everyday-life": { course: "sociology", unit: 2, day: 5, title: "Day 5 · Jaylen's Tuesday", path: "sociology/u2-d5-everyday-life/", std: ["SS.9-12.Soc.5", "SS.9-12.Soc.6", "SS.9-12.Soc.7", "SS.9-12.Soc.8"] },
+  "soc-u3-d1-who-taught-you": { course: "sociology", unit: 3, day: 1, title: "Day 1 · Daniela's Scrapbook", path: "sociology/u3-d1-who-taught-you/", std: ["SS.9-12.Soc.9"] },
+  "soc-u3-d5-groups-change-us": { course: "sociology", unit: 3, day: 5, title: "Day 5 · The Group Pressure Lab", path: "sociology/u3-d5-groups-change-us/", std: ["SS.9-12.Soc.11"] },
+  "soc-u4-d2-bad-day": { course: "sociology", unit: 4, day: 2, title: "Day 2 · Same Bad Day, Three Wallets", path: "sociology/u4-d2-bad-day/", std: ["SS.9-12.Soc.12", "SS.9-12.Soc.13"] },
+  "soc-u4-d6-fight-inequality": { course: "sociology", unit: 4, day: 6, title: "Day 6 · The Organizer's Toolkit", path: "sociology/u4-d6-fight-inequality/", std: ["SS.9-12.Soc.15"] }
 };
 
 // Iowa standard wording (Iowa Academic Standards for Social Studies) for every standard an in-use activity covers.
@@ -241,7 +281,17 @@ window.CLASS_STANDARDS = {
   "SS.9-12.Gov.17": "Analyze the rights, liberties, duties, and responsibilities of citizens of the United States and the state of Iowa.",
   "SS.9-12.Gov.13": "Analyze the electoral process and election systems in the United States, specifically Iowa election law including registration requirements, paper ballots, and absentee voting.",
   "SS.9-12.Gov.18": "Identify the function, duties, and authority of the government of the state of Iowa.",
-  "SS.9-12.Gov.14": "Analyze the role of citizens in the U.S. political system, with attention to the definition of who is a citizen, the expansion of that definition over time."
+  "SS.9-12.Gov.14": "Analyze the role of citizens in the U.S. political system, with attention to the definition of who is a citizen, the expansion of that definition over time.",
+  "SS.9-12.Soc.11": "Explain the social construction of groups and their impact on the life chances of individuals.",
+  "SS.9-12.Soc.12": "Explain the concept of social stratification and its influence on societal structures and individual opportunities.",
+  "SS.9-12.Soc.13": "Analyze the effects of social inequality on groups and individuals.",
+  "SS.9-12.Soc.15": "Evaluate how people and groups have responded to social inequality.",
+  "SS.9-12.WH.34": "Map how communism and decolonization changed the global order from 1945 to 1991.",
+  "SS.9-12.WH.35": "Compare and contrast the methods of control used by various forms of government during the Cold War.",
+  "SS.9-12.WH.36": "Analyze the causes of decolonization within the context of the Cold War.",
+  "SS.9-12.WH.37": "Explain how various groups promoted their interests and goals within the context of the Cold War.",
+  "SS.9-12.Gov.19": "Identify the function, duties, and authority of the sovereign Meskwaki Nation tribal government.",
+  "SS.9-12.Gov.20": "Identify the functions and organizational structures of Iowa's local governments."
 };
 
 // Works out the class for any id, even one not listed above.

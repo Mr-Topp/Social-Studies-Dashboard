@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Power Watch, 1787–1868 | U.S. History Unit 1 Day 4</title>
+<meta name="description" content="Stand watch over the young republic. Real tests of power from 1787 to 1868 show how the Constitution's principles and the Bill of Rights stop abuse of power.">
+<style>
+
+:root{--ink:#1f2b33;--muted:#55626b;--paper:#f6f3ec;--card:#fff;--line:#dcd5c4;--acc:#1d4f63;--acc2:#b0562a;--soft:#eaf2f5;--green:#2a6b45;--bad:#a2392f;--parch:#fbf5e6;--parchline:#e2d3ad}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.5 system-ui,Segoe UI,Arial,sans-serif}
+header{background:linear-gradient(100deg,#eef2f7 0 60%,#f7ebe6 60% 100%);border-bottom:5px solid var(--acc);padding:16px max(16px,calc((100vw - 900px)/2)) 12px}
+.k{font-size:.78rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:var(--acc);margin:0}
+h1{margin:2px 0 4px;font-size:clamp(1.6rem,3.4vw,2.3rem)}
+.std{margin:2px 0;font-size:.92rem;color:var(--muted)}.std b{color:var(--ink)}
+.hud{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line);padding:8px max(16px,calc((100vw - 900px)/2));display:flex;gap:12px;flex-wrap:wrap;align-items:center;font-weight:800;font-size:.92rem;box-shadow:0 2px 8px #1f2b3312}
+.hud .bar{flex:1;min-width:120px;height:10px;background:#e6e3da;border-radius:9px;overflow:hidden}.hud .bar span{display:block;height:100%;width:0;background:var(--acc);transition:width .4s}
+.pill{background:#f0ede4;border-radius:20px;padding:3px 10px;white-space:nowrap}
+.meter{display:flex;align-items:center;gap:6px}.meter .track{width:110px;height:10px;border-radius:9px;background:#e6e3da;overflow:hidden}.meter .track span{display:block;height:100%;background:var(--acc2);transition:width .5s}
+main{max-width:900px;margin:auto;padding:14px 16px 60px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;box-shadow:0 3px 12px #1f2b330d}
+.kicker{font-size:.78rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:var(--acc2);margin:0}
+h2{margin:2px 0 10px;font-size:1.45rem}
+.teach{background:var(--soft);border-left:5px solid var(--acc);border-radius:9px;padding:10px 14px;margin:0 0 12px}.teach p{margin:4px 0}.teach b{color:var(--acc)}
+.block{margin:14px 0;padding:14px;border-radius:12px;border:2px solid var(--line);background:#fff}
+.block.current{border-color:var(--ink);box-shadow:0 0 0 4px #2a4f7a30}
+.block h3{margin:0 0 10px;font-size:1.06rem;line-height:1.35;font-weight:700}
+.event{background:#fbf9f4;border-style:dashed;border-color:#cdbf9a}.event.current{border-style:solid}
+.event-body p{margin:4px 0}
+.srccard{background:var(--parch);border:1px solid var(--parchline);border-left:5px solid #b8975a;border-radius:10px;padding:9px 12px;margin:0 0 10px;font-weight:400}
+.srccard .who{font-size:.75rem;font-weight:900;letter-spacing:.06em;text-transform:uppercase;color:#7a5c26;margin-bottom:3px}
+.srccard q,.srccard .quote{font-family:Georgia,"Times New Roman",serif;font-style:italic}
+.srccard p{margin:3px 0}
+.voices{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:8px 0}.voices div{background:#fff;border:1px solid var(--line);border-radius:9px;padding:7px 10px;font-size:.93rem}.voices b{display:block;color:var(--acc)}
+.picked{margin:10px 0 4px;color:var(--muted)}.result{background:#f0ede4;border-radius:9px;padding:9px 12px}.result p{margin:4px 0}
+.tag{display:inline-block;font-weight:900;font-size:.8rem;border-radius:12px;padding:2px 9px;margin-right:6px}.tag.up{background:#dcefe2;color:var(--green)}.tag.down{background:#f6dcd8;color:var(--bad)}.tag.flat{background:#ebe9e0;color:var(--ink)}
+.choices{display:grid;gap:8px}
+@media(min-width:700px){.q .choices{grid-template-columns:1fr 1fr}}
+button{font:inherit;cursor:pointer;border-radius:10px;min-height:46px}
+.choice{text-align:left;background:#fff;color:var(--ink);border:2px solid #cfcab9;padding:10px 12px;font-weight:650;line-height:1.3}
+.choice:hover:not(:disabled){border-color:var(--ink);background:#fcfcfa}.choice:disabled{opacity:.5;cursor:not-allowed}
+.go{margin-top:12px;background:var(--acc);color:#fff;border:0;padding:11px 18px;font-weight:900}
+button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid #2f7dbd;outline-offset:2px}
+.answered{font-weight:800;color:var(--green);margin:4px 0}.why{margin:2px 0;color:var(--muted)}
+.msg{min-height:1.3em;font-weight:750;margin:8px 0 0}.msg.bad{color:var(--bad)}.msg.good{color:var(--green)}
+label{display:block;font-weight:850;margin:14px 0 4px}.stem{margin:0 0 4px;color:var(--muted);font-size:.92rem}
+input,textarea{width:100%;font:inherit;border:2px solid #cfcab9;border-radius:9px;padding:10px;background:#fff;color:var(--ink)}
+.steps{display:grid;gap:6px;margin:10px 0;padding:0;list-style:none}.steps li{background:#f0ede4;border-radius:9px;padding:8px 12px;font-weight:700}
+.welcome{background:#e6f1ea;color:var(--green);font-weight:800;border-radius:9px;padding:8px 12px;margin:0 0 10px}
+.foot{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-top:14px;color:var(--muted);font-size:.85rem}
+.foot button{background:#ebe9e0;border:0;padding:8px 12px;font-weight:800;color:var(--ink)}
+.src{font-size:.8rem;color:var(--muted)}
+@media(max-width:640px){.voices{grid-template-columns:1fr}}
+@media(max-width:420px){.meter .track{width:70px}}
+@media print{.hud,.foot,.go{display:none}}
+
+header{background:linear-gradient(100deg,#eaf2f5 0 62%,#f8ece2 62% 100%)}
+.block.current{box-shadow:0 0 0 4px #1d4f6330}
+.toolkit{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin:8px 0}.toolkit div{background:#fff;border:1px solid var(--line);border-radius:9px;padding:6px 10px;font-size:.9rem}.toolkit b{color:var(--acc)}
+.principles{margin:6px 0;padding-left:20px}.principles li{margin:2px 0}
+@media(max-width:640px){.toolkit{grid-template-columns:1fr}}
+
+
+</style>
+<script src="../../shared/assignments.js?v=20261101fill"></script>
+<script src="../../shared/turnin.js?v=20261101fill"></script>
+<script src="../../shared/unit-game.js?v=20261101fill"></script>
+</head><body>
+<header>
+  <p class="k">U.S. History · Part 1 · Unit 1 · Day 4</p>
+  <h1>Power Watch, 1787–1868</h1>
+  <p class="std"><b>SS.9-12.US.2</b> Analyze ideas in founding documents using primary and secondary sources.</p>
+  <p class="std"><b>Goal:</b> Explain how the Constitution's principles and the Bill of Rights were built to stop abuse of power, using real moments from early U.S. history. · About 25 minutes.</p>
+</header>
+<div class="hud" aria-label="Progress and liberty shield">
+  <span id="progressText">0 checks done</span>
+  <div class="bar" aria-hidden="true"><span id="progressFill"></span></div>
+  <span class="pill meter">Liberty shield: <span class="track" aria-hidden="true"><span id="meterFill" style="width:50%"></span></span> <span id="meterNum">5/10</span></span>
+</div>
+<main>
+  <p class="welcome" id="welcome" hidden></p>
+  <div id="app"></div>
+  <div class="foot"><span>Progress saves on this device. Your teacher sees your work after you turn it in.</span><button type="button" id="restartBtn">Start over</button></div>
+</main>
+<script>
+const T = (cls, txt) => `<span class="tag ${cls}">${txt}</span>`;
+const SRC = (who, body) => `<div class="srccard"><div class="who">${who}</div>${body}</div>`;
+const AMEND = ["4th Amendment", "5th Amendment", "6th Amendment", "8th Amendment"];
+UnitGame.start({
+  key: "ush-p1u1-d4-constitution-v1",
+  assignmentId: "ush-p1u1-d4-constitution",
+  title: "U.S. History · Unit 1 · Day 4 · Power Watch, 1787–1868",
+  standard: "SS.9-12.US.2",
+  oldApi: "https://fynn-class-assignment-submissions-20261024.neotboy.chatgpt.site/api/submit",
+  startFx: { shield: 5 },
+  clampFx: fx => { fx.shield = Math.max(0, Math.min(10, fx.shield)); },
+  hud: st => {
+    const v = st.fx.shield || 0;
+    document.getElementById("meterFill").style.width = (v * 10) + "%";
+    document.getElementById("meterNum").textContent = v + "/10";
+  },
+  startLabel: "Start your watch",
+  introHtml: `<p class="kicker">The new republic</p><h2>Someone always wants more power</h2>
+    <p>The framers believed people in power will be tempted to grab more. So they built a government with locks on it.</p>
+    <p>You're on watch from 1787 to 1868. Real moments arrive when power gets tested. Spot which lock kicks in, and make calls that protect liberty.</p>
+    <ul class="steps"><li>1. Read each real case and answer the check.</li><li>2. Make 3 calls. They move the "Liberty shield" meter.</li><li>3. Write 2 short answers and turn in.</li></ul>
+    <p class="src">You are made up. The cases, people, and quotes are real.</p>`,
+  scenes: [
+    { kicker: "Part 1 of 3 · 1787–1803", title: "The Locks on Power",
+      teach: `<p>The Constitution rests on seven big ideas (principles):</p>
+        <ul class="principles"><li><b>Popular sovereignty:</b> the people give government its power.</li><li><b>Republicanism:</b> we elect representatives.</li><li><b>Federalism:</b> national and state governments share power.</li><li><b>Separation of powers:</b> Congress makes laws, the president carries them out, courts interpret them.</li><li><b>Checks and balances:</b> each branch can block the others.</li><li><b>Limited government:</b> leaders must follow the rules too.</li><li><b>Individual rights:</b> the Bill of Rights protects people.</li></ul>`,
+      blocks: [
+        { type: "q", id: "p1", std: "US.2", short: "Preamble = popular sovereignty", prompt: SRC("Preamble to the Constitution, 1787", `<p class="quote">"We the People of the United States… do ordain and establish this Constitution for the United States of America."</p><p>"Ordain and establish" = officially create.</p>`) + "Which principle do the first three words show?", options: ["Popular sovereignty", "Federalism", "Checks and balances", "Separation of powers"], hint: "Who is creating the government in this line?", why: "\"We the People\" means the power comes from the people. That's popular sovereignty." },
+        { type: "q", id: "p2", std: "US.2", short: "Articles I–III = separation of powers", prompt: SRC("Structure of the Constitution", `<p><b>Article I:</b> Congress (legislative) makes the laws.<br><b>Article II:</b> the President (executive) carries out the laws.<br><b>Article III:</b> the courts (judicial) decide what laws mean.</p>`) + "Splitting government into three branches is called…", options: ["Separation of powers", "Popular sovereignty", "Individual rights", "Republicanism"], hint: "Is power in one place, or split up?", why: "Separation of powers divides the work among three branches so no one holds all of it." },
+        { type: "q", id: "p3", std: "US.2", short: "Washington's 1792 veto = checks and balances", prompt: SRC("April 1792", `<p>Congress passed a bill dividing up House seats. President George Washington <b>vetoed</b> (rejected) it. He said it broke the Constitution's rules. It was the first veto in U.S. history.</p>`) + "Which principle lets the president block Congress like this?", options: ["Checks and balances", "Popular sovereignty", "Federalism", "Republicanism"], hint: "One branch is stopping another. Which principle in the teach box is about that?", why: "The veto is a check the president holds on Congress. Congress can override it with two-thirds of both houses." },
+        { type: "q", id: "p4", std: "US.2", short: "Marbury v. Madison = judicial review", prompt: SRC("Chief Justice John Marshall, Marbury v. Madison, 1803", `<p class="quote">"It is emphatically the province and duty of the judicial department to say what the law is."</p><p>"Province" = job. In this case, the Supreme Court struck down part of a law Congress had passed.</p>`) + "What power did the Court claim in this case?", options: ["Courts can cancel laws that break the Constitution", "Courts can write new laws when Congress is slow", "Courts can remove a president from his office", "Courts can choose the judges for state courts"], hint: "What did the Court do to Congress's law?", why: "This is judicial review: courts can strike down laws that break the Constitution. It's a check on Congress and the president." },
+        { type: "q", id: "p5", std: "US.2", short: "10th Amendment = federalism", prompt: SRC("10th Amendment, 1791", `<p class="quote">"The powers not delegated to the United States by the Constitution, nor prohibited by it to the States, are reserved to the States respectively, or to the people."</p><p>"Delegated" = handed over. "Reserved" = kept.</p>`) + "Which principle does this amendment protect?", options: ["Federalism", "Separation of powers", "Republicanism", "Popular sovereignty"], hint: "This amendment is about the national government and the states.", why: "Powers not given to the national government stay with the states or the people. That's federalism." }
+      ] },
+    { kicker: "Part 2 of 3 · 1787–1798", title: "The Great Argument",
+      teach: `<p><b>Federalists</b> wanted a stronger national government to keep the country safe and trading. <b>Anti-Federalists</b> feared a distant, powerful government would crush ordinary people's liberty.</p>
+        <p>Their fight shaped the government we got.</p>`,
+      blocks: [
+        { type: "q", id: "f1", std: "US.2", short: "Federalist 51: \"If men were angels\"", prompt: SRC("James Madison, Federalist No. 51, 1788", `<p class="quote">"If men were angels, no government would be necessary. If angels were to govern men, neither external nor internal controls on government would be necessary."</p>`) + "What was Madison's point?", options: ["People aren't perfect, so leaders need checks too", "Government is useless because people are good", "Only religious leaders should run the country", "People should obey leaders without question"], hint: "Are men angels? So what does government need?", why: "People, including leaders, can't be fully trusted. So government needs checks on the people AND checks on itself." },
+        { type: "q", id: "f2", std: "US.2", short: "Anti-Federalist claim: need a list of rights", prompt: SRC("Patrick Henry, Virginia ratifying convention, June 1788", `<p class="quote">"Your President may easily become King."</p>`) + "Patrick Henry was an Anti-Federalist. Which statement would he most likely agree with?", options: ["The Constitution needs a clear list of rights", "The Articles are too weak to hold us together", "Checks and balances will prevent tyranny", "Strong national power is needed for trade"], hint: "What did Anti-Federalists fear, and what did they want added?", why: "Anti-Federalists wanted written protections for rights. The other three are Federalist arguments." },
+        { type: "event", id: "e1", short: "Virginia ratifying vote", html: SRC("Virginia ratifying convention · June 1788", `<p>Madison argues for the Constitution. Patrick Henry argues against it for days. You're a delegate. Time to vote.</p>`),
+          choices: [
+            { label: "Vote yes, and call for a bill of rights", fx: { shield: 2 }, result: `<p>${T("up","+2 liberty shield")}That's what Virginia did. It ratified 89 to 79 and sent a list of recommended amendments. Madison later used ideas like these to write the Bill of Rights.</p>` },
+            { label: "Vote yes, with no changes needed", fx: {}, result: `<p>${T("flat","No change")}The plan passes, but many Virginians still distrust it. Without a bill of rights, people worry their freedoms have no written protection.</p>` },
+            { label: "Vote no and wait for a better plan", fx: { shield: -1 }, result: `<p>${T("down","−1 liberty shield")}If Virginia, the largest state, stays out, the new union may fall apart and the old weak government continues.</p>` }
+          ] },
+        { type: "q", id: "f3", std: "US.2", short: "Federalist claim: Articles too weak", prompt: SRC("Alexander Hamilton, Federalist No. 15, 1787 (short version)", `<p>We have reached almost the last stage of national humiliation. We owe debts we can't pay. Foreign countries hold our land. We can't even protect our own trade.</p>`) + "Which statement fits Hamilton's Federalist argument?", options: ["The Articles are too weak to protect the country", "A distant government may ignore ordinary people", "A standing army could threaten our liberty", "States should keep nearly all of the power"], hint: "Is Hamilton worried about too much power, or too little?", why: "Federalists like Hamilton said the Articles were too weak. The other three are Anti-Federalist worries." },
+        { type: "event", id: "e2", short: "Sedition Act 1798", html: SRC("1798 · The Sedition Act", `<p>Congress makes it a crime to publish "false, scandalous and malicious" writing against the government. Matthew Lyon, a congressman from Vermont, is jailed for four months for criticizing President John Adams. You run a newspaper.</p>`) + `<p>What do you do?</p>`,
+          choices: [
+            { label: "Keep printing honest criticism and back repeal", fx: { shield: 2 }, result: `<p>${T("up","+2 liberty shield")}Voters push back. Lyon is re-elected from his jail cell. In 1800, voters elect Thomas Jefferson, the law expires in 1801, and Jefferson pardons those convicted.</p>` },
+            { label: "Stop printing anything about politics", fx: { shield: -2 }, result: `<p>${T("down","−2 liberty shield")}Your readers stop hearing both sides. When papers go quiet out of fear, leaders face fewer checks.</p>` },
+            { label: "Print wild rumors to fight back", fx: { shield: -1 }, result: `<p>${T("down","−1 liberty shield")}Your false stories give the government an excuse, and readers stop trusting your paper.</p>` }
+          ] },
+        { type: "q", id: "f4", std: "US.2", short: "Sedition Act vs. the 1st Amendment", prompt: SRC("1st Amendment, 1791", `<p class="quote">"Congress shall make no law… abridging the freedom of speech, or of the press…"</p><p>"Abridging" = cutting down or limiting.</p>`) + "Critics said the Sedition Act broke which amendment?", options: ["1st Amendment", "4th Amendment", "8th Amendment", "10th Amendment"], hint: "The Sedition Act punished people for what they published.", why: "Jailing people for criticizing the government limits freedom of speech and the press, which the 1st Amendment protects." }
+      ] },
+    { kicker: "Part 3 of 3 · 1791–1868", title: "The Rights Toolkit",
+      teach: `<div class="toolkit"><div><b>1st</b> speech, religion, press, assembly, petition</div><div><b>2nd</b> keep and bear arms</div><div><b>4th</b> no unreasonable searches; warrants needed</div><div><b>5th</b> due process, right to stay silent, no double jeopardy</div><div><b>6th</b> lawyer, speedy and public trial, jury</div><div><b>8th</b> no cruel and unusual punishment, no excessive bail</div><div><b>10th</b> other powers stay with the states or the people</div></div>`,
+      blocks: [
+        { type: "q", id: "r1", std: "US.2", short: "Search without warrant = 4th", prompt: SRC("Why the founders cared", `<p>Before the Revolution, British officers used <b>writs of assistance</b>, general papers that let them search almost any home or ship for smuggled goods, with no specific reason.</p>`) + "Today, police search a home with no warrant and no good reason. Which amendment protects the owner?", options: AMEND, hint: "Check the toolkit for \"searches.\"", why: "The 4th Amendment bans unreasonable searches. It grew right out of anger at writs of assistance." },
+        { type: "q", id: "r2", std: "US.2", short: "Refuses to testify against self = 5th", prompt: "A man on trial says, \"I will not answer that question. My answer could be used against me.\" Which amendment protects him?", options: [AMEND[1], AMEND[0], AMEND[2], AMEND[3]], hint: "Look in the toolkit for \"silent.\"", why: "The 5th Amendment protects the right not to be a witness against yourself." },
+        { type: "q", id: "r3", std: "US.2", short: "Asks for a lawyer = 6th", prompt: "A woman is charged with a crime. She can't afford a lawyer and asks for one before her trial. Which amendment applies?", options: [AMEND[2], AMEND[1], AMEND[0], AMEND[3]], hint: "Find \"lawyer\" in the toolkit.", why: "The 6th Amendment guarantees the help of a lawyer and a fair, speedy trial." },
+        { type: "event", id: "e3", short: "Johnson impeachment vote", html: SRC("1868 · Impeachment of President Andrew Johnson", `<p>The House <b>impeached</b> (formally charged) President Andrew Johnson. Now the Senate holds the trial. Removing him takes two-thirds of senators. You're a senator.</p>`),
+          choices: [
+            { label: "Vote based on the evidence and the law", fx: { shield: 2 }, result: `<p>${T("up","+2 liberty shield")}That's the job. The final vote was 35 to 19, one vote short of two-thirds. Johnson stayed in office. A few senators broke with their party to vote their conscience.</p>` },
+            { label: "Vote however your party leaders tell you", fx: { shield: -1 }, result: `<p>${T("down","−1 liberty shield")}If impeachment becomes just a party weapon, it stops being a real check. The final vote was 35 to 19, one short.</p>` },
+            { label: "Skip the vote to avoid taking sides", fx: { shield: -1 }, result: `<p>${T("down","−1 liberty shield")}Checks only work if people use them. Every senator voted. The final count was 35 to 19, one vote short.</p>` }
+          ] },
+        { type: "q", id: "r4", std: "US.2", short: "Cruel punishment = 8th", prompt: "A judge orders a person to be whipped in public for stealing a loaf of bread. Which amendment forbids this?", options: [AMEND[3], AMEND[2], AMEND[1], AMEND[0]], hint: "Which right in the toolkit is about punishment?", why: "The 8th Amendment bans cruel and unusual punishment." }
+      ] }
+  ],
+  finale: {
+    title: "Your Report from the Watch",
+    report: st => `<p><b>Liberty shield ended at ${st.fx.shield}/10.</b> The locks on power only work when people use them: delegates, voters, editors, and senators.</p><p>Now answer both in 1–2 full sentences.</p>`,
+    prompts: [
+      { id: "shape", short: "How the F vs. AF fight shaped government", label: "1. How did the fight between Federalists and Anti-Federalists shape the government we got?", stem: "Anti-Federalists worried that ___. Because of their pressure, ___ was added.", min: 80, newWords: 7, mustInclude: ["bill of rights", "rights", "amendment"], mustMsg: "In answer 1, name what was added because of the Anti-Federalists (hint: think about 1791)." },
+      { id: "case", short: "Rights Case File: student group banned", label: "2. Rights Case File: A town bans a peaceful student group from speaking at a public meeting because officials dislike its opinion. Which amendment protects the group, and why?", stem: "The ___ Amendment protects them because ___.", min: 80, newWords: 7, mustAll: [["first", "1st"], ["speech", "speak", "assembl", "petition", "opinion", "express"]], mustMsg: "In answer 2, name the amendment AND the right it protects (like speech or assembly)." }
+    ]
+  },
+  extraAnswers: st => ({ "Liberty shield meter": st.fx.shield + " of 10" })
+});
+</script>
+</body></html>

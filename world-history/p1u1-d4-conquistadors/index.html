@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Conquistadors: How Did So Few Beat So Many? | World History Part 1 Unit 1 Day 4</title>
+<meta name="description" content="Advise the council of Tlaxcala in 1519, then crack the case: how did a few hundred Spanish soldiers topple the Aztec and Inca empires?">
+<style>
+:root{--ink:#22262b;--muted:#59606a;--paper:#f7f4ee;--card:#fff;--line:#ddd5c6;--accent:#8a4b1f;--accent2:#1f6b5c;--soft:#f6ede3;--glow:#8a4b1f30;--green:#2a6b45;--bad:#a2392f;--hdr:linear-gradient(100deg,#f6ead9,#e6f1ec);--srcbg:#f5f8f6;--srcline:#cfe0d9}
+*{box-sizing:border-box}
+html,body{overflow-x:hidden}
+body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.5 system-ui,Segoe UI,Arial,sans-serif}
+header{background:var(--hdr);border-bottom:5px solid var(--accent);padding:16px max(16px,calc((100vw - 900px)/2)) 12px}
+.k{font-size:.78rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin:0}
+h1{margin:2px 0 4px;font-size:clamp(1.6rem,3.4vw,2.3rem);line-height:1.15}
+.std{margin:2px 0;font-size:.92rem;color:var(--muted)}.std b{color:var(--ink)}
+.hud{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line);padding:8px max(16px,calc((100vw - 900px)/2));display:flex;gap:10px 12px;flex-wrap:wrap;align-items:center;font-weight:800;font-size:.92rem;box-shadow:0 2px 8px #1f2b3312}
+.hud .bar{flex:1;min-width:110px;height:10px;background:#e6e6de;border-radius:9px;overflow:hidden}.hud .bar span{display:block;height:100%;width:0;background:var(--accent);transition:width .4s}
+.pill{background:#f0efe8;border-radius:20px;padding:3px 10px;white-space:nowrap}
+.meter{display:flex;align-items:center;gap:6px}.meter .track{width:90px;height:10px;border-radius:9px;background:#e6e6de;overflow:hidden}.meter .track span{display:block;height:100%;background:var(--accent2);transition:width .5s}
+main{max-width:900px;margin:auto;padding:14px 16px 60px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;box-shadow:0 3px 12px #1f2b330d}
+.kicker{font-size:.78rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:var(--accent2);margin:0}
+h2{margin:2px 0 10px;font-size:1.45rem}
+.teach{background:var(--soft);border-left:5px solid var(--accent);border-radius:9px;padding:10px 14px;margin:0 0 12px}.teach p{margin:6px 0}.teach b{color:var(--accent)}
+.block{margin:14px 0;padding:14px;border-radius:12px;border:2px solid var(--line);background:#fff}
+.block.current{border-color:var(--ink);box-shadow:0 0 0 4px var(--glow)}
+.block h3{margin:0 0 10px;font-size:1.06rem;line-height:1.4;font-weight:700}
+.block.note p{margin:6px 0}
+.event{background:#fbf9f4;border-style:dashed;border-color:#cdbf9a}.event.current{border-style:solid}
+.event-body p{margin:6px 0}
+.picked{margin:10px 0 4px;color:var(--muted)}.result{background:#f0efe8;border-radius:9px;padding:9px 12px}.result p{margin:4px 0}
+.tag{display:inline-block;font-weight:900;font-size:.8rem;border-radius:12px;padding:2px 9px;margin-right:6px}.tag.up{background:#dcefe2;color:var(--green)}.tag.down{background:#f6dcd8;color:var(--bad)}.tag.flat{background:#ebe9e0;color:var(--ink)}
+.qlabel{font-size:.75rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin:0 0 4px}
+.choices{display:grid;gap:8px}
+@media(min-width:700px){.q .choices{grid-template-columns:1fr 1fr}}
+button{font:inherit;cursor:pointer;border-radius:10px;min-height:46px}
+.choice{text-align:left;background:#fff;color:var(--ink);border:2px solid #cfcdbf;padding:10px 12px;font-weight:650;line-height:1.3}
+.choice:hover:not(:disabled){border-color:var(--ink);background:#fcfcfa}.choice:disabled{opacity:.5;cursor:not-allowed}
+.go{margin-top:12px;background:var(--accent);color:#fff;border:0;padding:11px 18px;font-weight:900}
+button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid #2f7dbd;outline-offset:2px}
+.answered{font-weight:800;color:var(--green);margin:4px 0}.why{margin:2px 0;color:var(--muted)}
+.msg{min-height:1.3em;font-weight:750;margin:8px 0 0}.msg.bad{color:var(--bad)}.msg.good{color:var(--green)}
+label{display:block;font-weight:850;margin:14px 0 4px}.stem{margin:0 0 4px;color:var(--muted);font-size:.92rem}
+input,textarea{width:100%;font:inherit;border:2px solid #cfcdbf;border-radius:9px;padding:10px;background:#fff;color:var(--ink)}
+.steps{display:grid;gap:6px;margin:10px 0;padding:0;list-style:none}.steps li{background:#f0efe8;border-radius:9px;padding:8px 12px;font-weight:700}
+.src-card{background:var(--srcbg);border:1px solid var(--srcline);border-left:5px solid var(--accent2);border-radius:10px;padding:10px 12px;margin:0 0 10px;font-weight:400}
+.src-card .who{font-size:.75rem;font-weight:900;letter-spacing:.06em;text-transform:uppercase;color:var(--accent2);margin-bottom:3px}
+.src-card p{margin:3px 0}
+.src-card q,.src-card .quote{font-style:italic}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px;margin:8px 0}.facts div{background:#fff;border:1px solid var(--line);border-radius:9px;padding:7px 10px;font-size:.92rem}.facts b{display:block;color:var(--accent)}
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:8px 0}.duo div{border-radius:10px;padding:8px 10px;font-size:.93rem;background:#f0efe8}.duo b{display:block}
+@media(max-width:640px){.duo{grid-template-columns:1fr}}
+.welcome{background:#e6f1ea;color:var(--green);font-weight:800;border-radius:9px;padding:8px 12px;margin:0 0 10px}
+.foot{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-top:14px;color:var(--muted);font-size:.85rem}
+.foot button{background:#ebe9e0;border:0;padding:8px 12px;font-weight:800;color:var(--ink)}
+.src{font-size:.8rem;color:var(--muted)}
+.report{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:8px;margin:8px 0}.report div{background:#f0efe8;border-radius:10px;padding:8px;text-align:center;font-size:.9rem}.report b{display:block;font-size:1.3rem}
+@media print{.hud,.foot,.go{display:none}}
+
+</style>
+<script src="../../shared/assignments.js?v=20261101fill"></script>
+<script src="../../shared/turnin.js?v=20261101fill"></script>
+<script src="../../shared/unit-game.js?v=20261101fill"></script>
+</head><body>
+<header>
+  <p class="k">World History · Part 1 · Unit 1 · Day 4</p>
+  <h1>Conquistadors: How Did So Few Beat So Many?</h1>
+  <p class="std"><b>Standards:</b> SS.9‑12.WH.3 · SS.9‑12.WH.1</p>
+  <p class="std"><b>Goal:</b> Explain the real reasons a few hundred Spanish soldiers toppled the Aztec and Inca empires. · About 25 minutes.</p>
+</header>
+<div class="hud" aria-label="Progress and Tlaxcala's strength">
+  <span id="progressText">0 checks done</span>
+  <div class="bar" aria-hidden="true"><span id="progressFill"></span></div>
+  <span class="pill meter">Tlaxcala's strength: <span class="track" aria-hidden="true"><span id="mFill" style="width:40%"></span></span> <span id="mNum">4/10</span></span>
+</div>
+<main>
+  <p class="welcome" id="welcome" hidden></p>
+  <div id="app"></div>
+  <div class="foot"><span>Progress saves on this device. Your teacher sees your work after you turn it in.</span><button type="button" id="restartBtn">Start over</button></div>
+</main>
+<script>
+const T = (cls, txt) => `<span class="tag ${cls}">${txt}</span>`;
+const card = (who, body) => `<div class="src-card"><div class="who">${who}</div>${body}</div>`;
+UnitGame.start({
+  key: "wh-p1u1-d4-conquistadors-v1",
+  assignmentId: "wh-p1u1-d4-conquistadors",
+  title: "World History · Part 1 Unit 1 · Day 4 · Conquistadors: How Did So Few Beat So Many?",
+  standard: "SS.9-12.WH.3, SS.9-12.WH.1",
+  oldApi: "https://fynn-class-assignment-submissions-20261024.neotboy.chatgpt.site/api/submit",
+  startFx: { power: 4 },
+  clampFx: fx => { fx.power = Math.max(0, Math.min(10, fx.power)); },
+  hud: st => {
+    const p = st.fx.power || 0;
+    document.getElementById("mFill").style.width = (p * 10) + "%";
+    document.getElementById("mNum").textContent = p + "/10";
+  },
+  startLabel: "Join the council",
+  introHtml: `<p class="kicker">Mexico, 1519</p><h2>Strangers on the coast</h2>
+    <p>Strangers in metal armor have landed on the coast. They ride huge animals nobody here has seen. You advise the council of <b>Tlaxcala</b>, a city that has fought the mighty Aztec Empire for years.</p>
+    <p>Your choices change Tlaxcala's strength (the meter at the top). Along the way, you'll solve a famous mystery: how did a few hundred Spanish soldiers beat empires of millions?</p>
+    <ul class="steps"><li>1. Read each clue and answer the check.</li><li>2. Make 3 choices for Tlaxcala.</li><li>3. Write 2 short answers and turn in.</li></ul>
+    <p class="src">Tlaxcala and the events are real. Your role as an adviser is made up.</p>`,
+  scenes: [
+    { kicker: "Part 1 of 3 · 1519", title: "Strangers on the Coast",
+      teach: `<p>The <b>Aztec Empire</b> ruled much of central Mexico. Its capital, <b>Tenochtitlán</b>, was an island city in a lake and one of the biggest cities in the world.</p>
+        <p>The Aztec forced conquered cities to pay <b>tribute</b> (regular payments of goods like cloth, food, and gold, plus captives for sacrifice). Tlaxcala was never conquered, but it was surrounded by Aztec land.</p>
+        <p><b>Conquistador</b> is Spanish for "conqueror." It means the Spanish soldiers who took over lands in the Americas.</p>`,
+      blocks: [
+        { type: "note", html: card("Clue 1 · The numbers", `<p>In 1519, <b>Hernán Cortés</b> landed near Veracruz, Mexico.</p><div class="facts"><div><b>About 550</b>Spanish soldiers</div><div><b>16</b>horses</div><div><b>Millions</b>of people in the Aztec Empire</div></div>`) },
+        { type: "q", id: "a1", std: "WH.3", short: "Why the numbers are a puzzle", prompt: "Look at Clue 1. Why is today's question a real mystery?", options: ["About 550 soldiers took on an empire of millions", "The Spanish had more horses than the Aztec had soldiers", "The Aztec had never fought a war before 1519", "Cortés brought more soldiers than lived in the capital"], hint: "Compare the Spanish number to the Aztec number in Clue 1.", why: "A few hundred soldiers against millions of people sounds impossible. That's the mystery." },
+        { type: "q", id: "a2", std: "WH.3", short: "Why cities resented the Aztec", prompt: card("Clue 2 · Conquered cities", `<p>Many cities had been conquered by the Aztec. Every year they had to send cloth, food, gold, and captives to Tenochtitlán. Many of them hated Aztec rule.</p>`) + "Why might these cities help strangers fight the Aztec?", options: ["They wanted to stop paying tribute to the Aztec", "They hoped the Spanish would pay them tribute", "They thought the Spanish were Aztec soldiers", "They had already signed a trade deal with Spain"], hint: "Reread what the conquered cities had to send every year.", why: "Cities that were forced to pay tribute had a reason to help anyone who might break Aztec power." },
+        { type: "event", id: "e1", short: "Tlaxcala: ally with the Spanish?", html: `<p><b>Your council's choice.</b> The Spanish marched inland. Tlaxcala's warriors fought them for about two weeks. The Spanish were badly outnumbered, but their steel swords and armor made every battle costly.</p><p>Now Cortés offers a deal: join him against the Aztec. What do you advise?</p>`,
+          choices: [
+            { label: "Ally with the Spanish against the Aztec", fx: { power: 3 }, result: `<p>${T("up","+3 strength")}This is what Tlaxcala really did. Thousands of Tlaxcalan warriors joined Cortés. Tlaxcala hoped to finally beat its old enemy.</p>` },
+            { label: "Keep fighting the Spanish", fx: { power: -2 }, result: `<p>${T("down","−2 strength")}More of your warriors die against steel and armor, and the Aztec still surround you. In real life, Tlaxcala tried this first, then switched to an alliance.</p>` },
+            { label: "Stay out and let them pass", fx: { power: -1 }, result: `<p>${T("down","−1 strength")}The strangers might make a deal with the Aztec instead. In real life, Tlaxcala did not stay out.</p>` }
+          ] },
+        { type: "q", id: "a3", std: "WH.3", short: "Evidence that Native allies mattered", prompt: "Which piece of evidence shows that <b>Native allies</b> helped the Spanish?", options: ["Thousands of Tlaxcalan warriors joined Cortés", "Cortés landed near Veracruz with 16 horses", "Tenochtitlán was built on an island in a lake", "Spanish soldiers carried steel swords and armor"], hint: "An ally is someone who fights on your side. Which choice is about people joining Cortés?", why: "Tlaxcala's warriors turned a few hundred Spanish into a much bigger army." },
+        { type: "q", id: "a4", std: "WH.3", short: "Why take Moctezuma hostage", prompt: card("Clue 3 · November 1519", `<p>The Aztec ruler <b>Moctezuma</b> welcomed Cortés into Tenochtitlán as a guest. Within days, the Spanish took Moctezuma hostage. They kept him prisoner in his own palace and began taking the city's gold.</p>`) + "What did the Spanish gain by holding Moctezuma prisoner?", options: ["They could give orders through the captured ruler", "They gained thousands of new Aztec soldiers for their army", "They made peace with every Aztec city at once", "They got a new trade deal with Tlaxcala"], hint: "Think about what a ruler does. What could the Spanish do if they controlled him?", why: "Holding the ruler let a small force control a big city for a while, without a battle." }
+      ] },
+    { kicker: "Part 2 of 3 · 1520–1521", title: "The Fall of Tenochtitlán",
+      teach: `<p>In June 1520 the people of Tenochtitlán rose up and drove the Spanish out of the city. Hundreds of Spanish soldiers and many of their allies died. Moctezuma died during the fighting.</p>
+        <p>Then a new enemy arrived: <b>smallpox</b>, a deadly disease from Europe. Native people had no <b>immunity</b> (the body's built-up protection from a disease) because the disease had never been in the Americas.</p>`,
+      blocks: [
+        { type: "q", id: "b1", std: "WH.3", short: "1520 revolt shows Aztec could win", prompt: "In 1520 the Aztec drove the Spanish out of their capital. What does this show?", options: ["The Aztec could beat the Spanish in battle", "The Spanish never lost a fight in Mexico", "Moctezuma had politely ordered the Spanish to leave the city", "Tlaxcala had switched to the Aztec side"], hint: "Reread the top box. Who won the fight in June 1520?", why: "Spanish weapons alone did not guarantee a win. Something else had to change." },
+        { type: "event", id: "e2", short: "Tlaxcala: shelter the beaten Spanish?", html: `<p><b>Your council's choice.</b> The beaten Spanish limp into Tlaxcala. Many are wounded. The Aztec send messengers: "Hand them over, and we will make peace."</p>`,
+          choices: [
+            { label: "Hand the Spanish over to the Aztec", fx: { power: -2 }, result: `<p>${T("down","−2 strength")}The Aztec take the prisoners, but they don't trust Tlaxcala. You've lost your chance to beat your old enemy. (Tlaxcala did not do this.)</p>` },
+            { label: "Shelter the Spanish and rebuild the alliance", fx: { power: 2 }, result: `<p>${T("up","+2 strength")}This is what Tlaxcala really did. The Spanish rested, healed, and got fresh troops. Without Tlaxcala, Cortés's army might have been finished.</p>` },
+            { label: "Send the Spanish away to the coast", fx: { power: -1 }, result: `<p>${T("down","−1 strength")}The weak Spanish force leaves, and Tlaxcala faces the Aztec alone again. (Tlaxcala did not do this.)</p>` }
+          ] },
+        { type: "q", id: "b2", std: "WH.1", short: "Why smallpox killed so many", prompt: card("Clue 4 · Smallpox, 1520", `<p>Aztec witnesses later described people covered in sores, too weak to move, dying in huge numbers. The new Aztec emperor, <b>Cuitláhuac</b>, died of smallpox only months after taking power.</p>`) + "Why did smallpox kill so many Aztec but few Spanish?", options: ["The Aztec had never faced it, so they had no immunity", "The Spanish carried a cure and kept it from the Aztec", "The disease only spread in cities built on lakes", "The Aztec refused to use their own doctors"], hint: "Look back at the word in bold in the top box.", why: "Most Spanish had grown up around smallpox. Many had survived it as children and could not catch it again." },
+        { type: "q", id: "b3", std: "WH.1", short: "Emperor dies of smallpox = disease", prompt: "Clue 4 says the new emperor died of smallpox. Which cause of the Spanish win does this evidence fit <b>best</b>?", options: ["Disease", "Native allies", "Steel weapons", "Horses"], hint: "What killed the emperor?", why: "Disease killed leaders, soldiers, and farmers right when the Aztec needed them most." },
+        { type: "event", id: "e3", short: "Tlaxcala: join the siege?", html: `<p><b>Your council's choice, 1521.</b> Cortés plans to attack Tenochtitlán by land and water. He asks Tlaxcala for warriors, plus people to carry pieces of 13 boats over the mountains to the lake.</p>`,
+          choices: [
+            { label: "Send a few warriors, keep most at home", fx: {}, result: `<p>${T("flat","No change")}Tlaxcala stays safer, but has less say in what comes next. (In real life, Tlaxcala sent many warriors.)</p>` },
+            { label: "Refuse and stay out of it", fx: { power: -2 }, result: `<p>${T("down","−2 strength")}If the Aztec win, they will remember. (Tlaxcala did not refuse.)</p>` },
+            { label: "Send thousands of warriors and carry the boats", fx: { power: 2 }, result: `<p>${T("up","+2 strength")}This is what really happened. Tlaxcalans carried the boat parts and fought in the siege, with tens of thousands of other Native allies.</p>` }
+          ] },
+        { type: "q", id: "b4", std: "WH.3", short: "Siege = several causes together", prompt: card("Clue 5 · The siege, 1521", `<p>Spanish boats with cannons controlled the lake. Tens of thousands of Native allies surrounded the city. Food and fresh water were cut off. Smallpox had already killed many people inside. After months of fighting, the Aztec surrendered on August 13, 1521.</p>`) + "Based on Clue 5, which statement is <b>most</b> accurate?", options: ["Allies, disease, and Spanish weapons worked together", "Spanish cannons alone forced the Aztec to give up", "The Aztec gave up the city without any fighting", "Tlaxcala won the siege with no Spanish help at all"], hint: "Count how many different causes Clue 5 mentions.", why: "No single cause explains the fall. Weapons, allies, hunger, and disease all hit at once." }
+      ] },
+    { kicker: "Part 3 of 3 · 1532", title: "Peru: The Inca Case",
+      teach: `<p>The <b>Inca Empire</b> stretched about 2,500 miles along the Andes Mountains in South America. Its emperor held huge power.</p>
+        <p>Smallpox spread south and reached the Inca around 1527, <b>before</b> the Spanish arrived. It killed the emperor. Two of his sons, <b>Atahualpa</b> and <b>Huáscar</b>, then fought a <b>civil war</b> (a war between groups inside one country).</p>`,
+      blocks: [
+        { type: "note", html: card("Clue 6 · Weapons compared", `<p>In 1532, <b>Francisco Pizarro</b> marched into the Inca Empire with fewer than 200 men.</p><div class="duo"><div><b>Spanish</b>Steel swords, steel armor, guns, small cannons, horses</div><div><b>Inca</b>Stones, slings, arrows, light spears, padded cotton armor</div></div>`) },
+        { type: "q", id: "c1", std: "WH.1", short: "Smallpox led to Inca civil war", prompt: "Smallpox reached the Inca before Pizarro did. What did that lead to?", options: ["The emperor died, and his sons fought a civil war", "The Inca invited Spanish doctors into Peru to help the sick", "The Inca army grew larger than ever before", "Pizarro turned back to avoid getting sick"], hint: "Reread the second paragraph in the top box.", why: "The disease killed the emperor, and the fight over who would rule next split the empire." },
+        { type: "q", id: "c2", std: "WH.3", short: "Evidence for 'weapons' cause", prompt: "Which piece of evidence belongs under the cause <b>Weapons and technology</b>?", options: ["Inca warriors used stones and slings against steel", "Atahualpa had just beaten his brother in a civil war", "Smallpox killed the Inca emperor around 1527", "Some groups who hated Inca rule helped the Spanish"], hint: "Look at Clue 6. Which choice compares what each side fought with?", why: "Steel armor and swords gave each Spanish soldier a big edge in close fighting." },
+        { type: "q", id: "c3", std: "WH.3", short: "Why capturing Atahualpa mattered", prompt: card("Clue 7 · Cajamarca, 1532–1533", `<p>Atahualpa, the winner of the civil war, agreed to meet Pizarro. Spanish soldiers made a surprise attack on his mostly unarmed servants and captured him. Atahualpa offered a room full of gold to be freed. The Spanish took the gold, then executed him in 1533.</p>`) + "Why did capturing Atahualpa hurt the Inca so badly?", options: ["The empire was run from the top, and it lost its leader", "The Inca had no warriors left anywhere after this", "The ransom gold was the only money the Inca had", "Atahualpa ordered his army to join the Spanish"], hint: "Reread the top box of Part 3. How much power did the Inca emperor hold?", why: "In an empire where the emperor held huge power, taking him threw everything into confusion, right after a civil war." },
+        { type: "q", id: "c4", std: "WH.3", short: "What both conquests shared", prompt: `<div class="duo"><div><b>Aztec, 1519–1521</b>Native allies like Tlaxcala · smallpox · steel weapons · ruler taken hostage</div><div><b>Inca, 1532–1533</b>Civil war between brothers · smallpox · steel weapons · ruler taken hostage</div></div>What did <b>both</b> conquests have in common?`, options: ["Disease and divisions among Native peoples helped Spain", "Both empires surrendered the day the Spanish landed", "Both were won by Spanish soldiers with no outside help", "Both emperors joined with Spain to fight against their own rivals"], hint: "Look for items that show up in both boxes.", why: "In both cases, smallpox and splits among Native peoples did much of the damage before or during the fighting." },
+        { type: "q", id: "c5", std: "WH.3", short: "'So few' is partly a myth", prompt: card("Clue 8 · Historians today", `<p>Historians estimate that in the final attack on Tenochtitlán, about 1,000 Spanish soldiers fought alongside <b>tens of thousands</b> of Native warriors. Many Native allies saw it as their war against the Aztec, not Spain's war.</p>`) + "So is \"a few Spanish beat millions\" the whole story?", options: ["No, because huge Native armies fought with the Spanish", "Yes, because about 550 Spanish won with no help from anyone at all", "No, because Spain sent 100,000 soldiers from Europe", "Yes, because the Aztec and Inca never fought back"], hint: "Reread Clue 8. Who made up most of the army?", why: "\"So few\" is partly a myth. The Spanish won with Native allies, disease, and divided empires on their side." }
+      ] }
+  ],
+  finale: {
+    title: "Crack the Case",
+    report: st => `<p><b>Tlaxcala's strength ended at ${st.fx.power}/10.</b> In real life, Tlaxcala's choices helped bring down the Aztec, and Spain gave Tlaxcala some special rights. But Tlaxcala still ended up ruled by Spain, and disease struck its people too.</p><p>Answer both in 1–2 full sentences.</p>`,
+    prompts: [
+      { id: "causes", short: "Two biggest causes, with evidence", label: "1. How did so few beat so many? Name the TWO causes you think mattered most, and give one piece of evidence.", stem: "The two biggest reasons were ___ and ___. One piece of evidence is ___.", min: 70, mustAll: [["ally", "allies", "tlaxcala", "native", "disease", "smallpox", "weapon", "steel", "gun", "horse", "armor", "civil war", "divid", "division", "hostage"], ["because", "evidence", "example", "when", "like", "clue", "warriors", "died", "killed", "thousand"]], mustMsg: "In answer 1, name the causes (like allies, disease, weapons, or division) AND give a real piece of evidence." },
+      { id: "tlax", short: "Was Tlaxcala's choice smart?", label: "2. Was Tlaxcala's choice to join the Spanish a smart one? Explain from Tlaxcala's point of view in 1519.", stem: "From Tlaxcala's point of view, joining the Spanish was ___ because ___.", min: 60, newWords: 5, mustAll: [["because", "since"], ["aztec", "spanish", "spain", "tribute", "enemy", "enemies", "rule", "ruled"]], mustMsg: "In answer 2, explain WHY (use \"because\") and mention the Aztec or the Spanish." }
+    ]
+  },
+  extraAnswers: st => ({ "Tlaxcala's strength meter": st.fx.power + " of 10" })
+});
+</script>
+</body></html>
