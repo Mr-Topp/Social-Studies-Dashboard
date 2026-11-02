@@ -13,6 +13,9 @@
 //  (for example a question with <b> words inside) or a single piece of text.
 //  patterns: [{ re: /^You have (\d+) points$/, es: "Tienes $1 puntos" }]
 //     Add tr: [1] to also translate what capture group 1 holds, using dict.
+//     A real dollar sign right before a digit is written $$ ("$$35" shows as "$35").
+//  images: { "assets/01-page.webp": "<p>Spanish explanation of what the picture says</p>" } — shown in a
+//     blue "Esta página en español" box under that picture (for scanned pages and comics with English words).
 //  writing: { promptId: [["spanish", "words"], ...] } — Spanish words that also count for a
 //     writing prompt's "must include" check (one list per English group, same order).
 // =====================================================================
@@ -33,6 +36,8 @@
   const esSeen = new Set();    // normalized Spanish HTML (skip quickly)
   const patterns = [];
   const writing = {};
+  const images = [];   // [{ key: "assets/01.webp", html: "<p>…</p>" }]
+  let imageAnchor = "";   // optional CSS selector: put the Spanish box after img.closest(imageAnchor)
   let hasPage = false;
 
   const tpl = document.createElement("template");
@@ -54,6 +59,8 @@
       backMap.set(asText(es), asText(en));
     });
     (pack.patterns || []).forEach(p => patterns.push(p));
+    Object.keys(pack.images || {}).forEach(k => images.push({ key: k, html: String(pack.images[k]) }));
+    if (pack.imageAnchor) imageAnchor = pack.imageAnchor;
     Object.assign(writing, pack.writing || {});
   }
 
@@ -69,7 +76,8 @@
     for (const p of patterns) {
       const m = key.match(p.re);
       if (!m) continue;
-      const out = p.es.replace(/\$(\d)/g, (_, n) => {
+      const out = p.es.replace(/\$(\$|\d)/g, (_, n) => {
+        if (n === "$") return "$";   // write $$ for a real dollar sign before a digit
         const v = m[+n] == null ? "" : m[+n];
         return (p.tr || []).includes(+n) ? t(v) : v;
       });
@@ -105,12 +113,31 @@
     const out = t(v);
     if (out !== v) n.nodeValue = out;
   }
+  // A picture with English words in it (a scanned page, a comic) gets a Spanish box right under it.
+  function imageNote(img) {
+    const src = img.getAttribute("src") || "";
+    const hit = images.find(x => src === x.key || src.endsWith("/" + x.key) || src.endsWith(x.key));
+    const box = img.__esNote;
+    if (!hit) { if (box) { box.remove(); img.__esNote = null; } return; }
+    if (box && box.isConnected && box.dataset.key === hit.key) return;
+    if (box) box.remove();
+    const note = document.createElement("div");
+    note.className = "es-img-note"; note.dataset.key = hit.key; note.setAttribute("data-no-es", ""); note.setAttribute("lang", "es");
+    note.innerHTML = '<p class="es-img-h">📖 Esta página en español</p>' + hit.html;
+    const anchor = (imageAnchor && img.closest(imageAnchor)) || img.closest("figure, a, button") || img;
+    anchor.insertAdjacentElement("afterend", note);
+    img.__esNote = note;
+  }
   function walk(node) {
     if (!node) return;
     if (node.nodeType === 3) { textNode(node); return; }
     if (node.nodeType !== 1 || node.closest && node.closest("[data-no-es]")) return;
     attrs(node);   // runs for text boxes too, so their hint text (placeholder) is translated
     if (SKIP.has(node.tagName)) return;
+    if (images.length) {
+      if (node.tagName === "IMG") imageNote(node);
+      else if (node.querySelectorAll) node.querySelectorAll("img").forEach(imageNote);
+    }
     if (node.firstChild && node.tagName !== "HTML" && node.tagName !== "BODY" && node.tagName !== "HEAD") {
       const h = squash(node.innerHTML);
       if (h.length < 6000 && !esSeen.has(h)) {
@@ -127,7 +154,7 @@
       list.forEach(m => {
         if (m.type === "childList") walk(m.target.nodeType === 1 ? m.target : m.target.parentNode);
         else if (m.type === "characterData") textNode(m.target);
-        else if (m.type === "attributes") attrs(m.target);
+        else if (m.type === "attributes") { if (m.attributeName === "src") { if (images.length && m.target.tagName === "IMG") imageNote(m.target); } else attrs(m.target); }
       });
     } finally { busy = false; }
   }
@@ -240,6 +267,12 @@
 
   function startSwapping() {
     if (lang !== "es" || !hasPage) return;
+    if (images.length) {
+      const st = document.createElement("style");
+      st.textContent = ".es-img-note{background:#f3f7fd;border:2px solid #b9cbe6;border-left:6px solid #1c3f78;border-radius:10px;padding:10px 14px;margin:10px 0;color:#1f2b33;font:17px/1.5 system-ui,Segoe UI,Arial,sans-serif;text-align:left}" +
+        ".es-img-note .es-img-h{margin:0 0 4px;font-weight:900;color:#1c3f78;font-size:.95rem}.es-img-note p{margin:4px 0}.es-img-note ul{margin:4px 0;padding-left:20px}@media print{.es-img-note{border-color:#999}}";
+      document.head.appendChild(st);
+    }
     document.documentElement.lang = "es";
     if (document.title) document.title = t(document.title);
     walk(document.body);
@@ -248,7 +281,7 @@
   // Watch from the very start so nothing flashes in English.
   if (lang === "es") {
     new MutationObserver(list => { if (hasPage) onMutations(list); })
-      .observe(document.documentElement, { childList: true, subtree: true, characterData: true, attributes: true, attributeFilter: ATTRS.concat(["value"]) });
+      .observe(document.documentElement, { childList: true, subtree: true, characterData: true, attributes: true, attributeFilter: ATTRS.concat(["value", "src"]) });
   }
   // Fill in the student's name (saved by his home page) in empty name boxes.
   let myName = "";

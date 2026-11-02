@@ -52,7 +52,7 @@
     ["EXIT DOOR", "A painted sky once meant safety to Truman. After he discovers the set, the same sky becomes a sign of deception.",
       "Antes, un cielo pintado significaba seguridad para Truman. Cuando descubre el escenario, ese mismo cielo se vuelve una señal de engaño."],
     ["FINAL LENS", "A classmate says, “Functionalism, conflict theory, and symbolic interactionism all mean the same thing.”",
-      "Un compañero de clase dice: “El funcionalismo, la teoría del conflicto y el interaccionismo simbólico significan lo mismo”."],
+      "Un compañero de clase te dice: “Chamo, el funcionalismo, la teoría del conflicto y el interaccionismo simbólico significan lo mismo”."],
     ["INVESTIGATION", "Truman needs a study that can be checked—not a guess disguised as a fact.",
       "Truman necesita un estudio que se pueda comprobar, no una suposición disfrazada de hecho."],
     ["INVESTIGATION", "Truman wants to know whether warnings about travel affect residents’ choices.",

@@ -45,7 +45,7 @@
         <p>La <b>relatividad cultural (cultural relativity)</b>, también llamada relativismo cultural, significa tratar de entender una costumbre desde dentro de su propia cultura antes de juzgarla.</p>
         <p>Una <b>sanción (sanction)</b> es una reacción, como miradas o elogios, que empuja a la gente a seguir una norma.</p>`,
       [maya("Day 2", `<p>Everyone takes off their shoes at the school entrance and puts on indoor shoes. I walked in wearing my sneakers and EVERYONE stared. 😳</p>`) + "Everyone at Maya's school switches to indoor shoes. Which part of culture is this shoe rule?"]:
-        mayaEs("Día 2", `<p>Todos se quitan los zapatos en la entrada del liceo y se ponen zapatos de interior. Yo entré con mis zapatos deportivos y TODOS se me quedaron mirando. 😳</p>`) + "En el liceo de Maya todos se cambian a zapatos de interior. ¿Qué parte de la cultura es esta regla de los zapatos?",
+        mayaEs("Día 2", `<p>Todos se quitan los zapatos en la entrada del liceo y se ponen zapatos de interior. Yo entré con mis gomas y TODOS se me quedaron mirando. 😳</p>`) + "En el liceo de Maya todos se cambian a zapatos de interior. ¿Qué parte de la cultura es esta regla de los zapatos?",
       "A norm": "Norma",
       "A value": "Valor",
       "A symbol": "Símbolo",
@@ -60,7 +60,7 @@
       "Is the shoe rule the same thing as the shoes?": "¿La regla de los zapatos es lo mismo que los zapatos?",
       "Physical objects a culture makes and uses are material culture.": "Los objetos físicos que una cultura hace y usa son cultura material (material culture).",
       [haruto("Day 2", `<p>Lunch here is so loud! People eat fast and walk around. Nobody cleans the school after class. There are janitors? I feel lost and kind of tired.</p>`) + "What is Haruto feeling?"]:
-        harutoEs("Día 2", `<p>¡El almuerzo aquí es muy ruidoso! La gente come rápido y anda de un lado a otro. Nadie limpia la escuela después de clases. ¿Hay conserjes? Me siento perdido y algo cansado.</p>`) + "¿Qué está sintiendo Haruto?",
+        harutoEs("Día 2", `<p>¡Qué bulla hay en el almuerzo! La gente come rápido y anda de un lado a otro. Nadie limpia el liceo después de clases. ¿Hay conserjes? Me siento perdido y algo cansado.</p>`) + "¿Qué está sintiendo Haruto?",
       "Culture shock": "Choque cultural",
       "Ethnocentrism": "Etnocentrismo",
       "Reread how Haruto says he feels.": "Vuelve a leer cómo dice Haruto que se siente.",
@@ -102,7 +102,7 @@
         <div class="stages"><div><b>1. Luna de miel (Honeymoon)</b>Todo es emocionante.</div><div><b>2. Frustración (Frustration)</b>Las diferencias causan estrés. Extrañas tu hogar.</div><div><b>3. Ajuste (Adjustment)</b>Empiezas a entender cómo funcionan las cosas.</div><div><b>4. Aceptación (Acceptance)</b>Te sientes en casa en las dos culturas.</div></div>
         <p>No todos pasan por todas las etapas, ni en el mismo orden.</p>`,
       [maya("Week 4", `<p>On the train everyone is SILENT. I called my mom and an older man frowned at me. I keep messing up. I miss home so much.</p>`) + "Which stage of culture shock is Maya in?"]:
-        mayaEs("Semana 4", `<p>En el tren todos están en SILENCIO. Llamé a mi mamá y un señor mayor me puso mala cara. Sigo metiendo la pata. Extraño mucho mi casa.</p>`) + "¿En qué etapa del choque cultural está Maya?",
+        mayaEs("Semana 4", `<p>En el tren todos están en SILENCIO. Llamé a mi mamá y un señor mayor me puso mala cara. Qué ladilla, sigo metiendo la pata. Extraño mucho mi casa.</p>`) + "¿En qué etapa del choque cultural está Maya?",
       "Frustration": "Frustración",
       "Honeymoon": "Luna de miel",
       "Adjustment": "Ajuste",
@@ -110,11 +110,11 @@
       "Is she excited, stressed, learning, or at home?": "¿Está emocionada, estresada, aprendiendo o como en casa?",
       "Stress, mistakes, and homesickness are the frustration stage.": "El estrés, los errores y extrañar tu hogar son parte de la etapa de frustración.",
       [haruto("Week 4", `<p>At a restaurant my host dad left extra money for the server. In Japan we don't tip. Here, everyone expects it!</p>`) + "In the U.S., leaving a tip for a server is a…"]:
-        harutoEs("Semana 4", `<p>En un restaurante, mi papá anfitrión le dejó dinero extra al mesero. En Japón no damos propina. ¡Aquí todo el mundo la espera!</p>`) + "En EE. UU., ¿qué es dejarle propina a un mesero?",
+        harutoEs("Semana 4", `<p>En un restaurante, mi papá anfitrión le dejó dinero extra al mesonero. En Japón no damos propina. ¡Aquí todo el mundo la espera!</p>`) + "En EE. UU., ¿qué es dejarle propina a un mesonero?",
       "Is tipping a belief, or something people are expected to do?": "¿Dar propina es una creencia o algo que se espera que la gente haga?",
       "An expected behavior is a norm. In Japan, the norm is different: tipping usually isn't done.": "Una conducta esperada es una norma. En Japón la norma es diferente: normalmente no se da propina.",
       "Which thought about American tipping shows <b>cultural relativity</b>?": "¿Qué pensamiento sobre la propina en EE. UU. muestra <b>relatividad cultural</b>?",
-      "Tipping makes sense here since many servers' pay depends on it": "La propina tiene sentido aquí porque muchos meseros dependen de ella",
+      "Tipping makes sense here since many servers' pay depends on it": "La propina tiene sentido aquí porque muchos mesoneros dependen de ella",
       "Tipping is a bad custom because Japan doesn't need it at all": "La propina es una mala costumbre porque en Japón no hace ninguna falta",
       "Americans tip because they want to show off their money": "Los estadounidenses dan propina porque quieren presumir su dinero",
       "Tipping is confusing, so I'll skip restaurants for now": "La propina es confusa, así que por ahora no iré a restaurantes",
@@ -144,7 +144,7 @@
       "Seeing Your Own Culture": "Ver tu propia cultura",
       "<p>You usually don't notice your own culture until you're somewhere else.</p>": "<p>Por lo general no notas tu propia cultura hasta que estás en otro lugar.</p>",
       [maya("Month 3", `<p>Japan feels like my second home now. I bow without thinking, and I'll miss cleaning time. On a video call, my little brother walked into the kitchen in his muddy sneakers and it looked SO weird to me. Haha.</p>`) + "Which stage is Maya in now?"]:
-        mayaEs("Mes 3", `<p>Ahora Japón se siente como mi segundo hogar. Hago reverencias sin pensar, y voy a extrañar la hora de limpieza. En una videollamada, mi hermanito entró a la cocina con sus zapatos deportivos llenos de barro y me pareció MUY raro. Jaja.</p>`) + "¿En qué etapa está Maya ahora?",
+        mayaEs("Mes 3", `<p>Ahora Japón se siente como mi segundo hogar. Hago reverencias sin pensar, y voy a extrañar la hora de limpieza. En una videollamada, mi hermanito entró a la cocina con sus gomas llenas de barro y me pareció MUY raro. Jaja.</p>`) + "¿En qué etapa está Maya ahora?",
       "Is she still figuring things out, or does it feel like home?": "¿Todavía está tratando de entender las cosas, o ya se siente en casa?",
       "Feeling at home in the new culture is acceptance. Now even her home culture looks a little strange to her.": "Sentirse en casa en la nueva cultura es aceptación. Ahora hasta su propia cultura le parece un poco extraña.",
       [haruto("Month 3", `<p>I'm making a list of American habits that surprised me.</p>`) + "Which habit could be on <b>Haruto's</b> list?"]:
@@ -167,7 +167,7 @@
       "Your Culture, Your Lens": "Tu cultura, tu lente",
       " Choices built on understanding (cultural relativity) helped her belong. Choices that judged (ethnocentrism) pushed people away.": "Las decisiones basadas en entender (relatividad cultural) la ayudaron a pertenecer. Las decisiones que juzgaban (etnocentrismo) alejaron a la gente.",
       "Now turn the lens on yourself. Answer both in 1–2 full sentences.": "Ahora mírate a ti mismo con ese lente. Responde las dos con 1–2 oraciones completas.",
-      "1. Name one norm from YOUR everyday life (school, home, work, or online) that might seem strange to someone from another culture. Why does it feel normal to you?": "1. Nombra una norma de TU vida diaria (escuela, casa, trabajo o internet) que podría parecerle extraña a alguien de otra cultura. ¿Por qué te parece normal a ti?",
+      "1. Name one norm from YOUR everyday life (school, home, work, or online) that might seem strange to someone from another culture. Why does it feel normal to you?": "1. Nombra una norma de TU vida diaria (liceo, casa, trabajo o internet) que podría parecerle extraña a alguien de otra cultura. ¿Por qué te parece normal a ti?",
       "In my life, it's normal to ___. Someone from another culture might think it's strange because ___. It feels normal to me because ___.": "En mi vida, es normal ___. Alguien de otra cultura podría pensar que es extraño porque ___. A mí me parece normal porque ___.",
       "In answer 1, explain WHY it feels normal to you (use \"because\").": "En la respuesta 1, explica POR QUÉ te parece normal (usa \"porque\").",
       "2. Pick one Iowa custom Haruto found strange (loud lunches, janitors cleaning, tipping, or outdoor shoes inside). Explain why it makes sense in Iowa, the way a cultural relativist would.": "2. Escoge una costumbre de Iowa que a Haruto le pareció extraña (almuerzos ruidosos, conserjes que limpian, la propina o zapatos de la calle adentro). Explica por qué tiene sentido en Iowa, como lo haría un relativista cultural.",
@@ -186,7 +186,7 @@
         ["porque", "ya que", "debido a", "aprend", "creci", "me enseñ", "enseñ"]
       ],
       lens: [
-        ["almuerzo", "almorz", "lonch", "comida", "comer", "ruido", "conserje", "limpi", "propina", "zapato", "calzado", "gomas", "tenis"],
+        ["almuerzo", "almorz", "lonch", "comida", "comer", "ruido", "conserje", "limpi", "propina", "zapato", "calzado", "gomas", "tenis", "bulla", "mesoner"],
         ["porque", "ya que", "debido a"]
       ]
     }

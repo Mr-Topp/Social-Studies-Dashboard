@@ -33,7 +33,7 @@ SiteLang.add({
     "Social structures are patterns in how society is set up. Schools, families, and other groups can give people chances. They can also place limits on people’s choices.": "Las estructuras sociales (social structures) son patrones en la forma en que está organizada la sociedad. Las escuelas, las familias y otros grupos pueden darles oportunidades a las personas. También pueden ponerles límites a sus decisiones.",
     "Scanned text explaining that social structures are steady relationships shaped by institutions and can create opportunities and limits.": "Texto escaneado que explica que las estructuras sociales son relaciones estables formadas por las instituciones, y que pueden crear oportunidades y límites.",
     "Scanned illustration of a class with a speech bubble saying social groups can strongly affect life choices and experiences.": "Ilustración escaneada de una clase con un globo de diálogo que dice que los grupos sociales pueden afectar mucho las decisiones y experiencias de vida.",
-    "A town’s only high school offers welding classes but no college-credit classes. How would this page describe that?": "La única escuela secundaria de un pueblo ofrece clases de soldadura, pero no clases con créditos universitarios. ¿Cómo describiría eso esta página?",
+    "A town’s only high school offers welding classes but no college-credit classes. How would this page describe that?": "El único liceo de un pueblo ofrece clases de soldadura, pero no clases con créditos universitarios. ¿Cómo describiría eso esta página?",
     "Find the sentence about “opportunities and constraints.” A constraint is a limit.": "Busca la oración que dice “opportunities and constraints” (oportunidades y limitaciones). Una limitación es un límite.",
     "A social structure that opens some chances and limits others": "Una estructura social que abre algunas oportunidades y limita otras",
     "A personal choice that each student makes all on their own": "Una decisión personal que cada estudiante toma por su propia cuenta",
@@ -59,5 +59,21 @@ SiteLang.add({
     "Two strangers ignore each other and never interact at all": "Dos desconocidos se ignoran y no interactúan nunca entre ellos",
     "A builder puts up a wall that will stand for many years": "Un constructor levanta un muro que va a durar muchos años",
     "Small daily actions, like a neighbor and a worker handling the trash, add up to make society work.": "Las pequeñas acciones diarias, como una vecina y un trabajador que se encargan de la basura, se suman y hacen que la sociedad funcione."
+  },
+  // Each box goes inside its picture's button (right after the picture): the reader finds the marked
+  // picture by its position in #scans, so boxes between the buttons would move the outline.
+  imageAnchor: "img",
+  // Spanish boxes under the scanned pages and comics (own-words summaries, not translations).
+  images: {
+    "assets/01-what-is-sociology.webp":
+      "<p>Título: <b>¿Qué es la sociología?</b></p><p>El autor dice que no es fácil dar una definición sencilla, porque la sociología ya tiene más de cien años y usa muchas teorías y métodos distintos. Luego propone una forma de verla: la sociología es el estudio ordenado de cómo la sociedad afecta a las personas y cómo las personas también afectan a la sociedad. También estudia lo que pasa en los grupos, en las sociedades y en las instituciones (institutions).</p>",
+    "assets/02-howard-becker.webp":
+      "<p><b>Lo que se ve:</b> el sociólogo Howard Becker (nació en 1928) está delante de una foto de una marcha por los derechos civiles en Estados Unidos. La gente lleva carteles que piden leyes de derechos civiles y un salario mínimo para todos. Abajo hay otra foto de Martin Luther King Jr. y Malcolm X.</p><p><b>El globo de Becker:</b> la buena sociología hace tres cosas con las organizaciones y los eventos: (1) los describe de una forma que tenga sentido, (2) explica bien por qué empiezan y por qué continúan, y (3) propone ideas realistas para mejorarlos o eliminarlos.</p>",
+    "assets/03-social-structures.webp":
+      "<p>La meta de la sociología es mostrar cómo las estructuras sociales nos dan oportunidades y también nos ponen límites. (Busca “opportunities and constraints”: <i>constraints</i> son límites.)</p><p><b>Estructuras sociales (social structures):</b> relaciones entre personas que se mantienen bastante estables y que vienen formadas por las instituciones. La sociología hace un “mapa” de estas estructuras para que veamos las fuerzas sociales que actúan sobre nosotros.</p><p>Al final, la página dice que es un mito pensar que la conducta humana sale solo de cada individuo o solo de la biología.</p>",
+    "assets/04-thinking-sociologically.webp":
+      "<p><b>Lo que se ve:</b> un salón de clases. Al frente, una persona con lentes abre los brazos delante del pizarrón. Los estudiantes están sentados de espaldas, y uno voltea hacia la ventana.</p><p><b>El globo (arriba, a la izquierda):</b> dice que pensar de forma sociológica es darte cuenta de que tus grupos sociales tienen un gran impacto en las decisiones que tomas en la vida y en las experiencias que vives.</p>",
+    "assets/05-values-and-society.webp":
+      "<p><b>Lo que se ve:</b> a la izquierda, una mujer joven con lentes redondos señala hacia atrás con la mano. Detrás de ella, en una calle de la ciudad, una señora mayor con bastón lleva una bolsa de basura, y un trabajador del aseo vacía un contenedor grande.</p><p><b>El globo de la mujer:</b> dice que nuestros valores y nuestras oportunidades dependen del lugar que ocupamos en la sociedad. Después dice que la sociedad también es la suma de las interacciones de todos los días (“the sum of everyday interactions”) entre personas que buscan metas comunes.</p>"
   }
 });

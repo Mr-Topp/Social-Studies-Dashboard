@@ -14,14 +14,14 @@
       "Goal:": "Meta:",
       "Explain how statuses, roles, norms, and institutions shape what people do. · About 25 minutes.": "Explicar cómo los estatus, los roles, las normas y las instituciones influyen en lo que hace la gente. · Unos 25 minutos.",
       "Shift status": "Estado del turno",
-      "Manager rating:": "Calificación de la gerente:",
+      "Manager rating:": "Calificación de la encargada:",
 
       // ---------- Intro ----------
       "Clock in": "Empezar mi turno",
       "Your first job": "Tu primer trabajo",
       "Welcome to Cedar Grill": "Bienvenido a Cedar Grill",
       "You just got hired at Cedar Grill, a busy diner. Nobody hands you every rule. Some rules are written down. Some you only learn when people react to what you do.": "Te acaban de contratar en Cedar Grill, un restaurante con mucha clientela. Nadie te da todas las reglas. Algunas reglas están escritas. Otras solo las aprendes cuando la gente reacciona a lo que haces.",
-      "Shift manager": "Gerente del turno",
+      "Shift manager": "Encargada del turno",
       "Ms. Ortiz": "Sra. Ortiz",
       "Cook, 10 years here": "Cocinero, 10 años aquí",
       "A regular customer": "Una clienta frecuente",
@@ -38,7 +38,7 @@
       [`<p>A <b>status</b> is a position a person holds in a group, like <i>manager</i> or <i>sister</i>.</p>
         <p>An <b>ascribed status</b> is one you did not choose. An <b>achieved status</b> is one you earned or chose.</p>
         <p>A <b>role</b> is the behavior people expect from someone because of their status.</p>`]:
-        `<p>Un <b>estatus (status)</b> es una posición que una persona tiene en un grupo, como <i>gerente</i> o <i>hermana</i>.</p>
+        `<p>Un <b>estatus (status)</b> es una posición que una persona tiene en un grupo, como <i>encargada</i> o <i>hermana</i>.</p>
         <p>Un <b>estatus adscrito (ascribed status)</b> es uno que no escogiste. Un <b>estatus adquirido (achieved status)</b> es uno que ganaste o escogiste.</p>
         <p>Un <b>rol (role)</b> es el comportamiento que la gente espera de alguien por su estatus.</p>`,
       [`<p class="ticket">Status check</p><p>Dana hands you a name tag and says: "Everybody here has more than one status. Let's sort yours." Decide if each one is <b>ascribed</b> or <b>achieved</b>.</p>`]:
@@ -60,10 +60,10 @@
       "Older sibling": "Hermano mayor",
       "Did you pick the order you were born in?": "¿Escogiste en qué orden naciste?",
       "Birth order is not chosen, so it is ascribed.": "El orden de nacimiento no se escoge, así que es adscrito.",
-      "Dana's status: shift manager": "El estatus de Dana: gerente del turno",
-      "How does someone become a manager?": "¿Cómo llega alguien a ser gerente?",
-      "Dana worked her way up, so manager is achieved.": "Dana fue subiendo con su trabajo, así que ser gerente es adquirido.",
-      "Licensed driver": "Conductor con licencia",
+      "Dana's status: shift manager": "El estatus de Dana: encargada del turno",
+      "How does someone become a manager?": "¿Cómo llega alguien a ser encargado?",
+      "Dana worked her way up, so manager is achieved.": "Dana fue subiendo con su trabajo, así que ser encargada es adquirido.",
+      "Licensed driver": "Tener licencia para manejar",
       "What do you have to do to get a license?": "¿Qué tienes que hacer para sacar la licencia?",
       "You pass tests to get a license, so it is achieved.": "Tienes que aprobar exámenes para sacar la licencia, así que es adquirido.",
       "Someone's son or daughter": "Hijo o hija de alguien",
@@ -107,15 +107,15 @@
         `<p class="ticket">Mesas</p><p>Una familia de cuatro quiere una mesa. La única libre es la <b>mesa 4</b>. Nadie te ha dicho nada sobre la mesa 4.</p>`,
       "Seat the family in booth 4": "Sentar a la familia en la mesa 4",
       [`<p>${R("neg","Negative sanction")}At noon Ms. Ortiz walks in and stares at booth 4. Marcus mutters, "That's Ms. Ortiz's booth. Everybody knows that." She sits at the counter and leaves no tip. <b>−$3.</b></p><p>Nobody wrote this rule down. You learned it from people's reactions.</p>`]:
-        `<p>${R("neg","Sanción negativa")}Al mediodía entra la Sra. Ortiz y se queda mirando la mesa 4. Marcus murmura: "Esa es la mesa de la Sra. Ortiz. Todo el mundo lo sabe". Ella se sienta en la barra y no deja propina. <b>−$3.</b></p><p>Nadie escribió esta regla. La aprendiste por cómo reaccionó la gente.</p>`,
+        `<p>${R("neg","Sanción negativa")}Al mediodía entra la Sra. Ortiz y se queda mirando la mesa 4. Marcus murmura: "Chamo, esa es la mesa de la Sra. Ortiz. Todo el mundo lo sabe". Ella se sienta en la barra y no deja propina. <b>−$3.</b></p><p>Nadie escribió esta regla. La aprendiste por cómo reaccionó la gente.</p>`,
       "Ask the family to wait 5 minutes for a different booth": "Pedirle a la familia que espere 5 minutos por otra mesa",
       [`<p>${R("pos","Positive sanction")}At noon Ms. Ortiz walks in and sits in booth 4, like she does every day. Marcus grins: "Good call. That's her booth." She leaves you $5. <b>+$5.</b></p><p>Nobody wrote this rule down. You got lucky this time.</p>`]:
-        `<p>${R("pos","Sanción positiva")}Al mediodía entra la Sra. Ortiz y se sienta en la mesa 4, como todos los días. Marcus sonríe: "Bien pensado. Esa es su mesa". Ella te deja $5. <b>+$5.</b></p><p>Nadie escribió esta regla. Esta vez tuviste suerte.</p>`,
+        `<p>${R("pos","Sanción positiva")}Al mediodía entra la Sra. Ortiz y se sienta en la mesa 4, como todos los días. Marcus sonríe: "¡Buena esa, chamo! Esa es su mesa". Ella te deja $5. <b>+$5.</b></p><p>Nadie escribió esta regla. Esta vez tuviste suerte.</p>`,
       "The \"booth 4 belongs to Ms. Ortiz\" rule is not written anywhere. What is it?": "La regla de que \"la mesa 4 es de la Sra. Ortiz\" no está escrita en ningún lado. ¿Qué es?",
       "An informal norm that people expect anyway": "Una norma informal que la gente igual espera",
       "A formal norm that is in the store policy": "Una norma formal que está en el reglamento del local",
       "A status that Ms. Ortiz earned by eating": "Un estatus que la Sra. Ortiz ganó comiendo allí",
-      "A sanction that the manager puts in the log": "Una sanción que la gerente anota en el registro",
+      "A sanction that the manager puts in the log": "Una sanción que la encargada anota en el registro",
       "Is the rule written down? Do people still expect it?": "¿La regla está escrita? ¿La gente igual la espera?",
       "It is unwritten but expected, so it is an informal norm.": "No está escrita pero se espera, así que es una norma informal.",
       "How do new workers usually learn an <b>informal</b> norm like the booth 4 rule?": "¿Cómo suelen aprender los trabajadores nuevos una norma <b>informal</b> como la regla de la mesa 4?",
@@ -132,12 +132,12 @@
         `<p>${R("neg","Sanción negativa")}Dana pasa y dice: "Guarda el celular, por favor. El descanso es a las 2". <b>−1 estrella.</b></p>`,
       "Wait and check it on break in the back": "Esperar y revisarlo en el descanso, atrás",
       [`<p>${R("pos","Positive sanction")}Dana notices you waited and says, "Thanks for keeping the floor covered." <b>+1 star.</b></p>`]:
-        `<p>${R("pos","Sanción positiva")}Dana nota que esperaste y dice: "Gracias por atender a los clientes". <b>+1 estrella.</b></p>`,
+        `<p>${R("pos","Sanción positiva")}Dana nota que esperaste y dice: "Gracias por estar pendiente de los clientes". <b>+1 estrella.</b></p>`,
       "When Dana says <i>\"Phone away, please,\"</i> what is she doing?": "Cuando Dana dice <i>\"Guarda el celular, por favor\"</i>, ¿qué está haciendo?",
       "Giving a negative sanction to stop a behavior": "Dando una sanción negativa para frenar una conducta",
       "Giving a positive sanction to reward a behavior": "Dando una sanción positiva para premiar una conducta",
       "Creating a brand-new formal norm for the diner": "Creando una norma formal nueva para el restaurante",
-      "Changing her status from manager to coworker": "Cambiando su estatus de gerente a compañera",
+      "Changing her status from manager to coworker": "Cambiando su estatus de encargada a compañera",
       "Is she rewarding the behavior or discouraging it?": "¿Está premiando la conducta o desanimándola?",
       "She is discouraging phone use, so it is a negative sanction.": "Está desanimando el uso del celular, así que es una sanción negativa.",
       [`<p class="ticket">End of the rush</p><p>Ms. Ortiz tells Dana you did a great job today. Dana says: "Want the window section tomorrow? That's where the best tips are."</p>`]:
@@ -175,10 +175,10 @@
         `<p><b>Conflicto de roles (role conflict)</b>: los roles de dos estatus <i>diferentes</i> chocan. (Un entrenador cuyo propio hijo está en el equipo.)</p>
         <p><b>Tensión de rol (role strain)</b>: <i>un solo</i> estatus tiene tantas expectativas que cuesta cumplirlas todas. (Un estudiante con cuatro exámenes el mismo día.)</p>`,
       [`<p class="ticket">New text from Dana</p><p><b>"Can you cover Thursday 3–9? Someone called in."</b></p><p>But Thursday you have a <b>make-up test after school</b>, and you promised to <b>watch your little brother</b>.</p>`]:
-        `<p class="ticket">Mensaje nuevo de Dana</p><p><b>"¿Puedes cubrir el jueves de 3 a 9? Alguien avisó que no viene."</b></p><p>Pero el jueves tienes un <b>examen de recuperación después de clases</b>, y prometiste <b>cuidar a tu hermanito</b>.</p>`,
-      "Cover the shift. I need the money.": "Cubrir el turno. Necesito el dinero.",
+        `<p class="ticket">Mensaje nuevo de Dana</p><p><b>"¿Puedes cubrir el jueves de 3 a 9? Alguien avisó que no viene."</b></p><p>Pero el jueves tienes un <b>examen pendiente después de clases</b>, y prometiste <b>cuidar a tu hermanito</b>.</p>`,
+      "Cover the shift. I need the money.": "Cubrir el turno. Necesito la plata.",
       [`<p>You earn about $6 more in tips and Dana is grateful. But you miss the make-up test, and your mom has to leave work early to get your brother. Every choice cost something.</p>`]:
-        `<p>Ganas unos $6 más en propinas y Dana te lo agradece. Pero faltas al examen de recuperación, y tu mamá tiene que salir temprano del trabajo para buscar a tu hermano. Cada decisión tuvo un costo.</p>`,
+        `<p>Ganas unos $6 más en propinas y Dana te lo agradece. Pero faltas al examen pendiente, y tu mamá tiene que salir temprano del trabajo para buscar a tu hermano. Cada decisión tuvo un costo.</p>`,
       "Say no. Explain the test and my brother.": "Decir que no. Explicar lo del examen y mi hermano.",
       [`<p>Dana says, "Okay, thanks for telling me early." You take the test and watch your brother. You miss the extra money. Every choice cost something.</p>`]:
         `<p>Dana dice: "Está bien, gracias por avisarme con tiempo". Presentas el examen y cuidas a tu hermano. Te pierdes el dinero extra. Cada decisión tuvo un costo.</p>`,
@@ -193,18 +193,18 @@
       "How many different statuses are pulling on you?": "¿Cuántos estatus diferentes te piden algo al mismo tiempo?",
       "Three different statuses (worker, student, sibling) clash, so it is role conflict.": "Tres estatus diferentes (trabajador, estudiante, hermano) chocan, así que es conflicto de roles.",
       [`<p class="ticket">Dinner rush</p><p>You have <b>6 tables</b>. Table 2 wants refills, table 5 is ready to order, table 1 wants the check, and the register line is growing. All of this is part of being a server.</p>`]:
-        `<p class="ticket">Hora pico de la cena</p><p>Tienes <b>6 mesas</b>. La mesa 2 quiere que le rellenes las bebidas, la mesa 5 está lista para pedir, la mesa 1 quiere la cuenta y la fila de la caja está creciendo. Todo esto es parte de ser mesero.</p>`,
+        `<p class="ticket">Hora pico de la cena</p><p>Tienes <b>6 mesas</b>. La mesa 2 quiere que le rellenes las bebidas, la mesa 5 está lista para pedir, la mesa 1 quiere la cuenta y la cola de la caja está creciendo. Todo esto es parte de ser mesonero.</p>`,
       "Ask Marcus to run the register for 5 minutes": "Pedirle a Marcus que atienda la caja por 5 minutos",
       [`<p>Marcus helps out. Things calm down. Dana likes that you asked for help. <b>+1 star.</b></p>`]:
         `<p>Marcus ayuda. Las cosas se calman. A Dana le gustó que pidieras ayuda. <b>+1 estrella.</b></p>`,
       "Try to do it all myself as fast as I can": "Intentar hacerlo todo yo solo lo más rápido posible",
       [`<p>You get it done, but table 5 waits 15 minutes and tips less. <b>−$2.</b></p>`]:
         `<p>Lo logras, pero la mesa 5 espera 15 minutos y deja menos propina. <b>−$2.</b></p>`,
-      "Six tables, refills, orders, and the register, all as a server. What is this?": "Seis mesas, bebidas, pedidos y la caja, todo como mesero. ¿Qué es esto?",
+      "Six tables, refills, orders, and the register, all as a server. What is this?": "Seis mesas, bebidas, pedidos y la caja, todo como mesonero. ¿Qué es esto?",
       "A positive sanction: a reward for working hard": "Una sanción positiva: un premio por trabajar duro",
       "An informal norm: an unwritten diner rule": "Una norma informal: una regla no escrita del local",
       "Is this one status or several?": "¿Es un solo estatus o varios?",
-      "It's all one status (server) with too many expectations, so it is role strain.": "Es un solo estatus (mesero) con demasiadas expectativas, así que es tensión de rol.",
+      "It's all one status (server) with too many expectations, so it is role strain.": "Es un solo estatus (mesonero) con demasiadas expectativas, así que es tensión de rol.",
 
       // ---------- Part 4 ----------
       "Part 4 of 4 · 9:00 PM close": "Parte 4 de 4 · Cierre a las 9:00 PM",
@@ -233,27 +233,27 @@
       "Someone needs to make sure restaurant food is safe to eat.": "Alguien tiene que asegurarse de que la comida de los restaurantes sea segura.",
       "Who sends inspectors and makes health codes?": "¿Quién manda inspectores y hace los códigos de salud?",
       "Health codes and inspections come from government.": "Los códigos de salud y las inspecciones vienen del gobierno.",
-      "Teens need to learn skills and earn a diploma.": "Los adolescentes necesitan aprender habilidades y sacar un diploma.",
-      "Which institution runs schools?": "¿Qué institución dirige las escuelas?",
-      "Schools are the institution of education.": "Las escuelas son parte de la institución de la educación.",
+      "Teens need to learn skills and earn a diploma.": "Los jóvenes necesitan aprender habilidades y sacar su título de bachiller.",
+      "Which institution runs schools?": "¿Qué institución se encarga de los liceos?",
+      "Schools are the institution of education.": "Los liceos y las escuelas son parte de la institución de la educación.",
       "Kids need care, love, and someone to raise them.": "Los niños necesitan cuidado, cariño y alguien que los críe.",
       "Who usually raises children first?": "¿Quién suele criar a los niños primero?",
       "Raising and caring for children is the main job of family.": "Criar y cuidar a los niños es la tarea principal de la familia.",
       "People look for meaning, shared beliefs, and traditions with a community.": "La gente busca sentido, creencias compartidas y tradiciones con una comunidad.",
       "Which institution is built around faith and shared beliefs?": "¿Qué institución se basa en la fe y en creencias compartidas?",
       "Religion meets the need for meaning, shared beliefs, and community traditions.": "La religión satisface la necesidad de sentido, creencias compartidas y tradiciones de la comunidad.",
-      "Lots of teens work evening shifts and also go to school. Which is an example of an institution <b>responding to that need</b>?": "Muchos adolescentes trabajan en turnos de noche y también van a la escuela. ¿Cuál es un ejemplo de una institución <b>que responde a esa necesidad</b>?",
-      "A school adds flexible hours for working students": "Una escuela crea horarios flexibles para quien trabaja",
-      "A school adds more homework to raise test scores": "Una escuela pone más tarea para subir las notas",
+      "Lots of teens work evening shifts and also go to school. Which is an example of an institution <b>responding to that need</b>?": "Muchos adolescentes trabajan en turnos de noche y también van al liceo. ¿Cuál es un ejemplo de una institución <b>que responde a esa necesidad</b>?",
+      "A school adds flexible hours for working students": "Un liceo crea horarios flexibles para quien trabaja",
+      "A school adds more homework to raise test scores": "Un liceo pone más tarea para subir las notas",
       "A diner raises prices when food costs go up": "Un restaurante sube los precios si la comida sube",
       "A teen asks the boss for fewer hours on weekdays": "Un joven le pide a su jefe menos horas entre semana",
       "Which choice changes a system because of the working-teen problem?": "¿Qué opción cambia un sistema por el problema de los jóvenes que trabajan?",
-      "The school (education) changed how it works because working teens needed it. That's an institution responding to a social need.": "La escuela (educación) cambió su forma de funcionar porque los jóvenes que trabajan lo necesitaban. Eso es una institución respondiendo a una necesidad social.",
+      "The school (education) changed how it works because working teens needed it. That's an institution responding to a social need.": "El liceo (educación) cambió su forma de funcionar porque los jóvenes que trabajan lo necesitaban. Eso es una institución respondiendo a una necesidad social.",
 
       // ---------- Finale ----------
       "Shift Report": "Reporte del turno",
       "tips earned": "en propinas",
-      "manager rating": "calificación de la gerente",
+      "manager rating": "calificación de la encargada",
       "Your tips and rating came from your choices <i>and</i> from rules you didn't know yet. That's how norms work.": "Tus propinas y tu calificación vinieron de tus decisiones <i>y</i> de reglas que todavía no conocías. Así funcionan las normas.",
       "Answer both in 1–2 sentences each.": "Responde las dos con 1–2 oraciones cada una.",
       "1. Pick one norm from your shift. Is it formal or informal? What sanction showed you the rule, and what value is behind it?": "1. Escoge una norma de tu turno. ¿Es formal o informal? ¿Qué sanción te mostró la regla y qué valor hay detrás de ella?",
@@ -268,16 +268,16 @@
       "Evaluate one institution for teens": "Evalúa una institución para los jóvenes"
     },
     patterns: [
-      { re: /^Tips: \$(\d+)$/, es: "Propinas: $$1" },
+      { re: /^Tips: \$(\d+)$/, es: "Propinas: $$$1" },
       { re: /^(\d+) of 5 ★$/, es: "$1 de 5 ★" }
     ],
     writing: {
       norm: [
         ["formal", "informal"],
-        ["sanción", "reacción", "reaccion", "reaccionó", "advirti", "advertencia", "regañ", "llamó la atención", "enoj", "molest", "quit", "perdí", "gané", "propina", "estrella", "dijo", "dijeron", "me dijo", "miró", "miraron", "mirando", "murmur", "asinti", "felicit", "premi", "castig", "sonri"]
+        ["sanción", "reacción", "reaccion", "encargad", "jefa", "reaccionó", "advirti", "advertencia", "regañ", "llamó la atención", "enoj", "molest", "quit", "perdí", "gané", "propina", "estrella", "dijo", "dijeron", "me dijo", "miró", "miraron", "mirando", "murmur", "asinti", "felicit", "premi", "castig", "sonri"]
       ],
       inst: [
-        ["familia", "educación", "escuela", "colegio", "liceo", "religión", "iglesia", "economía", "negocio", "empresa", "trabajo", "empleo", "gobierno"]
+        ["familia", "educación", "escuela", "colegio", "liceo", "religión", "iglesia", "economía", "negocio", "empresa", "trabajo", "trabaj", "empleo", "mesoner", "restaurante", "bachiller", "gobierno"]
       ]
     }
   });

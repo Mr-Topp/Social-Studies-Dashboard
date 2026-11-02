@@ -18,7 +18,7 @@ SiteLang.add({
     // ---------- Reading 1: Parsons, check the evidence ----------
     "Parsons: check the evidence": "Parsons: revisar la evidencia",
     "Parsons drew on ideas from Weber and Durkheim. He thought ideas were useful, but researchers still needed to check what they saw against evidence.":
-      "Parsons usó ideas de Weber y de Durkheim. Pensaba que las ideas eran útiles, pero que los investigadores igual tenían que comparar lo que veían con la evidencia.",
+      "Parsons usó ideas de Weber y de Durkheim. Pensaba que las ideas eran útiles, pero que los investigadores aun así tenían que comparar lo que veían con la evidencia.",
     "Scanned text introducing Talcott Parsons and his effort to combine ideas from Weber and Durkheim.":
       "Texto escaneado que presenta a Talcott Parsons y su intento de combinar ideas de Weber y Durkheim.",
     "Scanned Parsons comic saying concepts matter, but observations must be checked against evidence.":
@@ -27,7 +27,7 @@ SiteLang.add({
     "Parsons combined ideas from two thinkers. What did he take from each?":
       "Parsons combinó ideas de dos pensadores. ¿Qué tomó de cada uno?",
     "Find “From Weber...” and “From Durkheim...” in the passage.":
-      "Busca en el texto dónde dice “From Weber...” y “From Durkheim...”.",
+      "En el recuadro azul, busca qué tomó Parsons de Weber y qué tomó de Durkheim.",
     "Weber: we need concepts. Durkheim: social facts are real.": "Weber: necesitamos conceptos. Durkheim: los hechos sociales son reales.",
     "Weber: social facts are real. Durkheim: we need concepts.": "Weber: los hechos sociales son reales. Durkheim: necesitamos conceptos.",
     "Marx: class conflict matters. Weber: we need concepts.": "Marx: el conflicto de clases importa. Weber: necesitamos conceptos.",
@@ -58,7 +58,7 @@ SiteLang.add({
       "Texto escaneado que explica la idea de Parsons de que la familia nuclear ayuda a socializar a los niños en roles como la clase social y el género.",
 
     "How does structural functionalism view society?": "¿Cómo ve la sociedad el funcionalismo estructural?",
-    "Look for the system comparison near the end.": "Busca la comparación con un sistema cerca del final.",
+    "Look for the system comparison near the end.": "Busca, cerca del final, con qué compara la página a la sociedad.",
     "Connected parts that each help society work": "Partes conectadas que ayudan a que la sociedad funcione",
     "Competing classes that struggle over resources": "Clases rivales que luchan por los recursos",
     "Shared meanings built through daily contact": "Significados compartidos creados en el trato diario",
@@ -92,7 +92,7 @@ SiteLang.add({
       "El interaccionismo simbólico (symbolic interactionism) estudia cómo las personas crean significado en la vida diaria. Blumer estudió cómo las personas entienden una situación y cómo se responden unas a otras.",
     "Scanned text introducing Herbert Blumer’s theory and its focus on everyday interactions and shared reality.":
       "Texto escaneado que presenta la teoría de Herbert Blumer y su enfoque en las interacciones diarias y la realidad compartida.",
-    "Scanned comic about a sick student who wants to go home while another person worries about attendance.":
+    "Scanned comic about a sick worker who wants to go home while another person worries about attendance.":
       "Cómic escaneado sobre un trabajador enfermo que quiere irse a su casa mientras otra persona se preocupa por la asistencia.",
 
     "What does symbolic interactionism focus on?": "¿En qué se enfoca el interaccionismo simbólico?",
@@ -100,7 +100,7 @@ SiteLang.add({
     "Meanings people build through daily contact": "Los significados que las personas crean en el trato diario",
     "Roles institutions fill to keep society stable": "Los roles que cumplen las instituciones para mantener estable la sociedad",
     "Conflicts classes have over power and wealth": "Los conflictos que tienen las clases por el poder y la riqueza",
-    "Patterns researchers find in inherited traits": "Los patrones que los investigadores hallan en rasgos heredados",
+    "Patterns researchers find in inherited traits": "Los patrones que los investigadores encuentran en rasgos heredados",
     "Blumer saw society as built through everyday interactions that create a shared reality.":
       "Blumer veía la sociedad como algo construido con interacciones diarias que crean una realidad compartida.",
 
@@ -197,5 +197,70 @@ SiteLang.add({
     "Marx tells the worker to see their place in the capitalist system as the first step to challenging alienation.":
       "Marx le dice al trabajador que ver su lugar en el sistema capitalista es el primer paso para enfrentar la alienación."
   },
-  patterns: []
+  patterns: [],
+
+  // Spanish box under each scanned page / comic. Our own short explanation, not a translation of the book.
+  // "img" keeps the box inside the picture's button, so the reader's own list of pictures (and its
+  // "marked picture" highlight) is not thrown off by extra boxes between the pictures.
+  imageAnchor: "img",
+  images: {
+    "assets/01.webp":
+      "<p><b>Título:</b> El funcionalismo estructural y Talcott Parsons.</p>" +
+      "<p>Después de Durkheim y Weber, muchos sociólogos siguieron a uno o al otro. El estadounidense Talcott Parsons (1902-79) quiso juntar ideas de los dos en una propuesta que llamó realismo analítico (analytical realism).</p>" +
+      "<ul><li><b>De Weber</b> tomó que no se puede observar la sociedad sin conceptos (ideas que usamos para nombrar y ordenar lo que vemos), y que esos conceptos dependen de los valores de quien los usa.</li>" +
+      "<li><b>De Durkheim</b> tomó que los hechos sociales (social facts) nos muestran cómo es el mundo.</li></ul>",
+
+    "assets/02.webp":
+      "<p><b>El dibujo:</b> Parsons está sentado frente a una mesa, con los brazos abiertos. En la mesa hay una taza de verdad. Arriba, en un globo de pensamiento, imagina una taza sencilla: es su idea o concepto de taza. A su lado hay otra taza dibujada con líneas, como si alguien la estuviera midiendo y comparando.</p>" +
+      "<p><b>Globo de diálogo:</b> Parsons explica el realismo analítico. Dice que crear conceptos es importante, pero que lo que observamos hay que revisarlo y compararlo con la evidencia.</p>",
+
+    "assets/03.webp":
+      "<p>Parsons decía que la sociología necesita un “marco de referencia de la acción” (action frame of reference): conceptos para estudiar cómo se comportan las personas en sociedad, distintos de los que sirven para estudiar la naturaleza. Para él era clave entender las cosas como las ven las personas y los grupos que se estudian.</p>" +
+      "<p>Ese marco se usa en el funcionalismo estructural (structural functionalism). <b>Al final</b>, la página compara la sociedad y sus grupos con un sistema: muchas partes unidas por una gran estructura social.</p>",
+
+    "assets/04.webp":
+      "<p><b>El dibujo:</b> un niño con lentes está sentado en el piso, leyendo, al lado de una pila alta de libros. Por la ventana se ven otros niños jugando afuera. Su papá entra con un periódico en la mano y señala la ventana.</p>" +
+      "<p><b>Globo de diálogo (el papá):</b> le dice a su hijo que salga a jugar fútbol, porque según él no es sano que un varón se quede todo el día metido en la casa.</p>",
+
+    "assets/05.webp":
+      "<p><b>Primera oración:</b> para Parsons, la meta del sociólogo es identificar las distintas partes del sistema social y luego mostrar qué función (qué trabajo) cumple cada una en el sistema completo.</p>" +
+      "<p><b>Su ejemplo:</b> la familia nuclear (nuclear family), o sea, una pareja adulta con sus hijos. Este tipo de familia pequeña apareció con la sociedad industrial porque la función de la familia cambió. En la sociedad moderna, su tarea principal pasó a ser socializar (socialize) a los hijos: enseñarles sus roles, como la clase social y el género.</p>",
+
+    "assets/06.webp":
+      "<p><b>Título:</b> El interaccionismo simbólico y Herbert Blumer.</p>" +
+      "<p>El funcionalismo estructural fue la teoría más fuerte de la sociología hasta los años 70. Pero algunos lo criticaron por dos cosas: no le prestaba atención a la acción social (cómo la gente piensa y actúa frente a las estructuras) y no podía explicar el cambio social.</p>" +
+      "<p>Como respuesta, Herbert Blumer (1900-87) creó el interaccionismo simbólico (symbolic interactionism). Para esta teoría, la sociedad sale de las interacciones de todos los días entre personas que buscan metas comunes. Con ese contacto diario, la gente construye una realidad compartida.</p>",
+
+    "assets/07.webp":
+      "<p><b>El dibujo:</b> varios trabajadores caminan juntos, con fábricas al fondo. Parecen muñecos de cuerda, con una llave en la espalda, como si fueran máquinas.</p>" +
+      "<p><b>Globo de la izquierda:</b> un trabajador dice que se siente muy mal y que lo único que quiere es irse a su casa a dormir.</p>" +
+      "<p><b>Globo de la derecha:</b> otro le contesta que no eche a perder su récord de asistencia y que mejor se tome más pastillas para el dolor.</p>",
+
+    "assets/08.webp":
+      "<p>Blumer les pedía a los investigadores descubrir los muchos significados subjetivos que los grupos le dan a la sociedad. Con “subjetivo” quería decir que las personas son actores prácticos: todo el tiempo ajustan su conducta según lo que hacen los demás. Podemos reaccionar a lo que hacen otros porque lo interpretamos, como si fueran símbolos.</p>" +
+      "<p>Para Blumer, la sociedad no es una estructura fija, como decían los funcionalistas, sino una red de interacciones que cambia. Por eso hay que estudiar cómo interactúa la gente y cómo cada quien va formando su idea de sí mismo con el tiempo.</p>",
+
+    "assets/09.webp":
+      "<p><b>El dibujo:</b> en una obra de construcción, un obrero con casco empuja una mezcladora de cemento. Una mujer con casco y unos planos bajo el brazo lo mira desde arriba.</p>" +
+      "<p><b>Primer globo (el obrero):</b> el significado que les damos a la sociedad y a sus instituciones no es “natural”; lo construimos nosotros.</p>" +
+      "<p><b>Segundo globo (la mujer):</b> cómo yo te trato depende del significado que tú tienes para mí.</p>",
+
+    "assets/10.webp":
+      "<p><b>Título:</b> Conflicto social. La página dice que dos ideas de Marx fueron clave para la sociología.</p>" +
+      "<p><b>Primer párrafo:</b> Marx vio el conflicto social como el motor de los cambios en la historia, y así trajo a la sociología el concepto de clase social (social class). En la época industrial, describió la lucha entre dos clases: la burguesía (gobernantes y dueños de fábricas) y el proletariado (obreros de las fábricas).</p>" +
+      "<p><b>Segundo párrafo:</b> en este gran choque (“monumental clash”), Marx predijo que al final ganarían los obreros con una revolución. El resultado sería el comunismo: una sociedad igualitaria donde los trabajadores controlan los medios de producción.</p>",
+
+    "assets/11.webp":
+      "<p><b>El dibujo:</b> Karl Marx aparece pequeño, encima de un trabajador gigante que está acostado. El trabajador levanta los puños y las cadenas que tenía en las muñecas se rompen.</p>" +
+      "<p><b>Globo de diálogo (Marx):</b> les advierte a las clases que gobiernan que tiemblen ante una revolución comunista, porque los proletarios, es decir, los trabajadores, no tienen nada que perder más que sus cadenas.</p>",
+
+    "assets/12.webp":
+      "<p><b>Primer párrafo:</b> la segunda idea clave de Marx es la alienación (alienation). Al principio la define como sentirse aislado por no tener poder. Según Marx, en las fábricas del capitalismo los obreros quedaban separados de su propio trabajo, de lo que fabricaban, de sus compañeros y hasta de su potencial como seres humanos.</p>" +
+      "<p><b>Segundo párrafo:</b> la alienación venía de pertenecer a una clase social, sobre todo la clase obrera, y era producto del capitalismo. Los dueños de las fábricas se beneficiaban de ella. Una forma importante era cuando los obreros competían entre sí por puestos y sueldos.</p>",
+
+    "assets/13.webp":
+      "<p><b>El dibujo:</b> a la derecha hay un obrero con gorra y la cabeza baja. Detrás, Marx sostiene una lámpara que ilumina a un grupo de personas.</p>" +
+      "<p><b>Globo de arriba (el obrero):</b> dice que se siente separado de lo que él es en el fondo y de su propia humanidad.</p>" +
+      "<p><b>Globo de abajo (Marx):</b> le dice que, para enfrentar la alienación, primero tiene que ver qué lugar ocupa él dentro del sistema capitalista.</p>"
+  }
 });

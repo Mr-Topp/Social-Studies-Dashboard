@@ -354,7 +354,7 @@ window.classCourseFor = function (id) {
   id = String(id || "");
   const known = window.CLASS_ASSIGNMENTS[id];
   if (known) return known.course;
-  if (id.startsWith("sociology-")) return "sociology";
+  if (id.startsWith("sociology-") || id.startsWith("soc-")) return "sociology";
   if (id.startsWith("civics-")) return "civics";
   if (id.startsWith("gov-")) return "government";
   if (id.startsWith("ush-") || id.startsWith("us-history-") || id.startsWith("wwii-graphic-reading")) return "us-history";

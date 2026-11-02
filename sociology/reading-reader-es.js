@@ -85,3 +85,32 @@ SiteLang.add({
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", fix);
   else fix();
 })();
+
+// Shared by every reading day (moved here from Day 3).
+// The Spanish boxes make the pictures taller, and they (and the pictures) appear a moment after the
+// reader has already scrolled the picture list to the marked picture. Re-scroll to the marked picture
+// as things load, for the first few seconds of each reading, unless the student has started scrolling.
+(function () {
+  if (!window.SiteLang || !SiteLang.isEs()) return;
+  function setup() {
+    var box = document.getElementById("scans");
+    if (!box) return;
+    var moved = false, until = 0;
+    function realign() {
+      if (moved || Date.now() > until) return;
+      var marked = box.querySelector(".focus-comic");
+      if (marked) box.scrollTop = marked.offsetTop - box.offsetTop;
+    }
+    ["wheel", "touchstart", "keydown", "mousedown"].forEach(function (ev) {
+      box.addEventListener(ev, function () { moved = true; }, { passive: true });
+    });
+    new MutationObserver(function (list) {
+      var fresh = list.some(function (r) { return r.target === box && r.addedNodes.length; });
+      if (fresh) { moved = false; until = Date.now() + 4000; }
+      requestAnimationFrame(realign);
+    }).observe(box, { childList: true, subtree: true });
+    box.addEventListener("load", realign, true);   // each picture finishing loading
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", setup);
+  else setup();
+})();

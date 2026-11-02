@@ -110,7 +110,7 @@ SiteLang.add({
       "Los trenes se detuvieron cuando se fue la luz. Los pasajeros y los trabajadores del transporte tuvieron que sacar a la gente de forma segura. Un sistema de la ciudad hecho para mover a millones de personas no podía funcionar sin electricidad.",
     "The street": "La calle",
     "Traffic lights went dark. Drivers, pedestrians, and police had to negotiate intersections without the usual signals telling everyone when to go.":
-      "Los semáforos se apagaron. Los conductores, los peatones y la policía tuvieron que ponerse de acuerdo en los cruces sin las señales que normalmente le dicen a todos cuándo pasar.",
+      "Los semáforos se apagaron. Los choferes, los peatones y la policía tuvieron que ponerse de acuerdo en los cruces sin las señales que normalmente le dicen a todos cuándo pasar.",
     "The building": "El edificio",
     "Elevators stopped between floors. People climbed stairwells, checked on neighbors, and helped others who could not easily use the stairs.":
       "Los ascensores se detuvieron entre pisos. La gente bajó por las escaleras, fue a ver cómo estaban sus vecinos y ayudó a quienes no podían usar las escaleras fácilmente.",
@@ -285,5 +285,11 @@ SiteLang.add({
     { re: /^Welcome back, (.+) — you’re on case (\d) of 3\.$/, es: "Bienvenido de nuevo, $1 — vas en el caso $2 de 3." },
     { re: /^Welcome back, (.+) — just the exit ticket is left\.$/, es: "Bienvenido de nuevo, $1 — solo te falta el ticket de salida." },
     { re: /^Watched ✓ · (.+) Tap “Sync completion” to retry\.$/, es: "Visto ✓ · $1 Toca “Sincronizar” para intentar otra vez.", tr: [1] }
-  ]
+  ],
+  // The 1911 fire photo has English shop signs on the building. Student gets a short Spanish note under the case header.
+  imageAnchor: ".casehead",
+  images: {
+    "Image_of_Triangle_Shirtwaist_Factory_fire_on_March_25_-_1911.jpg":
+      "<p><b>Sobre la foto del incendio:</b> los letreros en inglés que cuelgan en la esquina del edificio son anuncios de las empresas de ropa que trabajaban en los pisos de arriba (ropa de hombre, trajes y abrigos). Esto muestra que el edificio estaba lleno de talleres de costura. Abajo, los bomberos lanzan agua hacia los pisos altos mientras la gente mira desde la calle.</p>"
+  }
 });

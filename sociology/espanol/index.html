@@ -25,15 +25,20 @@ h2{margin:14px 0 4px;font-size:1.35rem}
 .act .t{flex:1;font-weight:800;line-height:1.3}
 .act .tag{font-size:.8rem;font-weight:900;border-radius:10px;padding:2px 9px;white-space:nowrap}
 .es{background:#dbe8fb;color:#1c3f78}.en{background:#ebe9e0;color:#55626b}.done{background:#dcefe2;color:var(--green)}
+.day h3 span{text-transform:none;letter-spacing:0;color:var(--ink);font-size:1.02rem;margin-left:6px}
+.more{display:flex;flex-wrap:wrap;gap:8px;margin:6px 0 0}
+.more a{display:inline-flex;align-items:center;gap:6px;font-weight:800;font-size:.92rem;text-decoration:none;color:#1c3f78;background:#f3f7fd;border:2px solid #b9cbe6;border-radius:10px;padding:7px 11px}
+.more a:hover{border-color:#1c3f78}
 .empty{color:var(--muted);background:#fff;border:2px dashed var(--line);border-radius:12px;padding:14px}
 a:focus-visible,button:focus-visible{outline:3px solid #2f7dbd;outline-offset:2px}
 .foot{margin-top:18px;color:var(--muted);font-size:.85rem}
 </style>
 <script src="../../shared/assignments.js?v=20261102es"></script>
+<script src="../../teacher-submissions/presentations.js?v=20261102es"></script>
 </head><body>
 <header>
   <p class="k">Sociología</p>
-  <h1>Hola, Student 👋</h1>
+  <h1>¡Hola, Student! 👋</h1>
   <p>Aquí están todas tus actividades de Sociología, en español. Elige tu unidad y abre la actividad del día.</p>
 </header>
 <main>
@@ -61,8 +66,14 @@ try {
   if (!localStorage.getItem("site-lang")) localStorage.setItem("site-lang", "es");
 } catch (e) {}
 
-// Spanish names for units and activities. New activities still show up (with their English name) until one is added here.
+// Spanish names for units, lesson days and activities. New activities still show up (with their English name) until one is added here.
 const UNIT_ES = { 1: "Fundamentos, perspectivas y métodos", 2: "Cultura, instituciones y sociedad", 3: "Socialización, el yo y los grupos", 4: "Estratificación y desigualdad" };
+const DAY_ES = {
+  1: ["¿Cómo influyen los grupos en lo que haces?", "¿Soy solo yo o es un patrón más grande?", "¿Por qué la gente sigue las reglas?", "¿Puede un problema tener tres causas?", "¿Cómo se prueba una opinión polémica?", "¿Cómo deberíamos estudiar a las personas?", "¿Deberían los investigadores mentirte alguna vez?"],
+  2: ["¿Quién escribió las reglas no escritas?", "¿Qué hace que tu grupo sea una cultura?", "¿Por qué lo normal se siente tan normal?", "¿Por qué la gente se une para lograr cambios?", "¿Qué le da forma a tu vida diaria?"],
+  3: ["¿Quién te enseñó a ser tú?", "¿Quién influye más en ti ahorita?", "¿Puede estar bien romper una regla?", "¿Quién decide quién eres?", "¿Por qué los grupos cambian cómo actuamos?", "¿Por qué apoyamos a «nosotros» antes que a «ellos»?"],
+  4: ["¿Todos empiezan en igualdad de condiciones?", "¿Quién puede darse el lujo de tener un mal día?", "¿Por qué algunos países son ricos?", "¿Las instituciones nos tratan a todos por igual?", "¿Por qué la desigualdad causa conflictos?", "¿Cómo lucha la gente contra la desigualdad?"]
+};
 const TITLE_ES = {
   "sociology-day-1-reading": "¿Qué es la sociología? (Lectura)",
   "sociology-day-2-sociological-imagination": "La imaginación sociológica (Lectura)",
@@ -74,6 +85,25 @@ const TITLE_ES = {
   "sociology-unit2-day1-first-shift": "Primer turno: estatus, roles y normas",
   "sociology-unit2-arrival-culture": "The Arrival (La llegada): una cultura nueva",
   "sociology-unit2-day3-culture-shock": "Intercambio y choque cultural"
+};
+// Spanish copies of the unit slide decks and of the Drive assignments (in Fynn's Drive folder "Student – Sociología en español").
+const ES_SLIDES = { 1: "1dRqiVQUS6FV0gVtb50A6d-PHsohwu53TEn5QTuqBpUc", 2: "135d-2eQV0zNDmlmSmfmB_RtkyyPek3MnLmBlxlYfu_8", 3: "12wzLy8r6bPeJIDUGo8-PoPC74s6UJchDaqaJogMeT1E", 4: "14pJBHxNBWJMhibxPAuB8CpJEvHHW0sTVRyzy6ubysJM" };   // unit number -> Google Slides id of the Spanish copy
+// dashboard id (like "soc-u1-d1-drive1") -> { id: Google Doc id, title: "Spanish title" }
+const ES_DOCS = {
+  "soc-u1-d1-drive1": { id: "13JgbPuSRV9VlGGfaknKiMgSALeKXrAaU_X0qBaFEZBc", title: "La sociología en mi vida (Reflexión)" },
+  "soc-u1-d2-drive1": { id: "1G3Qovsgaxts0fjfrxSj-im1VpTagQHh8Y5I03xdrqp8", title: "La imaginación sociológica en tu vida (Escritura)" },
+  "soc-u1-d3-drive1": { id: "1zkgyEhQekNnB74_yo2FIqOPP4AGoxhQqqRFY7M_VTtA", title: "El juego de romper normas" },
+  "soc-u1-d4-drive1": { id: "1Xsa-YZZGSJTLwV7LjdCDE2spitBgQSYYVA7pc5dxi2U", title: "Fundadores y las tres perspectivas (Hoja de trabajo)" },
+  "soc-u1-d5-drive1": { id: "1eNBdmfMm7pyNx_ksYguYRBTvlpazdVtg-u9zwscjx50", title: "El método científico: completa los espacios y lectura" },
+  "soc-u1-d6-drive1": { id: "1q41cpSF__7wX_YeanU9Odk6UQhG7Iz0_kCvQtrNXwjQ", title: "Métodos de investigación: completa y relaciona" },
+  "soc-u1-d7-drive1": { id: "1Kf_MEwbk8wAPnDtkRJ4Rpf5kxpUwiYpK3ALF0IxkNCY", title: "Encuentra el problema ético: cinco investigaciones" },
+  "soc-u2-d4-drive1": { id: "1xUd2iSRCg97i9MP7N9MqNJrRGiA69WiPvidOgU97m-g", title: "Movimientos sociales (Lectura)" },
+  "soc-u2-d4-drive2": { id: "1mUv1gkqRi6aQyoGJsc4XUufucmoh56t-n1X93jH_Sdk", title: "Comportamiento colectivo y movimientos (Preguntas)" },
+  "soc-u2-d5-drive1": { id: "1n0l7n3u4HaMhfoZanaB191OILiqD4V_Z3pPfd15wJuU", title: "¿Qué son las instituciones sociales? (Lectura)" },
+  "soc-u3-d1-drive1": { id: "1N7H2v36hU4Yl5sSeg9gqCmopGlxII1CVtnmYuPkX0b0", title: "La socialización: completa los espacios y lectura" },
+  "soc-u3-d5-drive1": { id: "1RIfLYY2-SOOvT-K8yGm2RRvAdbOgJ4_g50t-cPwJryk", title: "Cómo se conectan las sectas con la sociología (Lectura)" },
+  "soc-u4-d2-drive1": { id: "1XYXhLSD4nONNdPO6CwuMBGVDz6kTqgF1mMJiT3RqSgM", title: "El poder y la estratificación social (Lectura)" },
+  "soc-u4-d6-drive1": { id: "1gOiQmxZarNAhzmHQ1GRaKpCM6cf6gLx6grOxU92c1mw", title: "Los movimientos sociales y la desigualdad (Lectura)" }
 };
 
 const $ = id => document.getElementById(id);
@@ -107,18 +137,33 @@ function drawTabs() {
 }
 async function drawUnit() {
   const list = acts.filter(a => a.unit === current).sort((a, b) => (a.day || 99) - (b.day || 99));
+  const deck = (window.CLASS_PRESENTATIONS || []).find(p => p.course === COURSE && p.unit === current && !p.part);
+  const extras = Object.entries(window.CLASS_ASSIGNMENTS || {}).filter(([id, a]) => a.course === COURSE && a.unit === current && a.alt && ES_DOCS[id]);
   const done = turnedIn();
-  const byDay = new Map();
-  list.forEach(a => { const k = a.day || 0; if (!byDay.has(k)) byDay.set(k, []); byDay.get(k).push(a); });
+  const days = new Set();
+  list.forEach(a => days.add(a.day || 0));
+  if (ES_SLIDES[current] && deck) (deck.days || []).forEach(d => days.add(d.day));
+  extras.forEach(([, a]) => days.add(a.day || 0));
+  const order = [...days].sort((a, b) => (a || 99) - (b || 99));
   const box = $("unit");
   box.setAttribute("aria-labelledby", "tab" + current);
-  if (!list.length) {
-    box.innerHTML = `<h2>Unidad ${current}: ${esc(UNIT_ES[current] || "")}</h2><p class="empty">Todavía no hay actividades en esta unidad. Aparecen aquí cuando tu profesor las agrega.</p>`;
-    return;
-  }
-  box.innerHTML = `<h2>Unidad ${current}: ${esc(UNIT_ES[current] || window.CLASS_UNITS[COURSE][current] || "")}</h2><p class="unitnote">${list.length} actividad${list.length === 1 ? "" : "es"}</p>` +
-    [...byDay.entries()].map(([day, items]) => `<div class="day"><h3>${day ? "Día " + day : "Repaso"}</h3>${items.map(a =>
-      `<a class="act" href="${esc(ROOT + a.path)}" data-path="${esc(a.path)}"><span class="t">${esc(titleFor(a))}</span>${done.has(a.id) ? '<span class="tag done">✓ Entregado</span>' : ""}<span class="tag lang en">…</span></a>`).join("")}</div>`).join("");
+  const head = `<h2>Unidad ${current}: ${esc(UNIT_ES[current] || window.CLASS_UNITS[COURSE][current] || "")}</h2>`;
+  if (!order.length) { box.innerHTML = head + `<p class="empty">Todavía no hay actividades en esta unidad. Aparecen aquí cuando tu profesor las agrega.</p>`; return; }
+  const slideUrl = (day) => {
+    const d = deck && (deck.days || []).find(x => x.day === day);
+    return ES_SLIDES[current] && d ? "https://docs.google.com/presentation/d/" + ES_SLIDES[current] + "/edit#slide=id." + d.slide : "";
+  };
+  box.innerHTML = head + `<p class="unitnote">${list.length} actividad${list.length === 1 ? "" : "es"}${ES_SLIDES[current] ? ` · <a href="https://docs.google.com/presentation/d/${esc(ES_SLIDES[current])}/edit" target="_blank" rel="noopener">Todas las láminas de la unidad en español ↗</a>` : ""}</p>` +
+    order.map(day => {
+      const items = list.filter(a => (a.day || 0) === day);
+      const dayTitle = day && DAY_ES[current] && DAY_ES[current][day - 1] ? `<span>${esc(DAY_ES[current][day - 1])}</span>` : "";
+      const sUrl = day ? slideUrl(day) : "";
+      const ex = extras.filter(([, a]) => (a.day || 0) === day);
+      const more = (sUrl ? `<a href="${esc(sUrl)}" target="_blank" rel="noopener">🖥️ Láminas del día ↗</a>` : "") +
+        ex.map(([id]) => `<a href="https://docs.google.com/document/d/${esc(ES_DOCS[id].id)}/edit" target="_blank" rel="noopener">📄 ${esc(ES_DOCS[id].title)} ↗</a>`).join("");
+      return `<div class="day"><h3>${day ? "Día " + day : "Repaso"}${dayTitle}</h3>${items.map(a =>
+        `<a class="act" href="${esc(ROOT + a.path)}" data-path="${esc(a.path)}"><span class="t">${esc(titleFor(a))}</span>${done.has(a.id) ? '<span class="tag done">✓ Entregado</span>' : ""}<span class="tag lang en">…</span></a>`).join("")}${more ? `<div class="more">${more}</div>` : ""}</div>`;
+    }).join("");
   box.querySelectorAll(".act").forEach(async el => {
     const tag = el.querySelector(".lang");
     const ok = await hasSpanish(el.dataset.path);
