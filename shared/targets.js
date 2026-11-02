@@ -4,6 +4,7 @@
 // Keys are "<unit>|<day>" ("p1|3|2" = Part 1, Unit 3, Day 2). test = the unit's summative day.
 // Built 2026-11-02. Matched to real lesson days by topic; Fynn reviews the matches.
 // U.S. and World History daily targets (and World History World Wars Level 3 lines) were drafted in his style and approved by Fynn 11/2/26.
+// 2026-11-02: days combined in U.S. History U3, Government U3, Sociology U3, World History U2 (merged days keep both days' targets).
 window.CLASS_TARGETS = {
  "us-history": {
   "p1|1|1": {
@@ -306,19 +307,14 @@ window.CLASS_TARGETS = {
    "t": [
     "I can explain how the United States and the Soviet Union went from allies to enemies after World War II.",
     "I can analyze how the Truman Doctrine and Marshall Plan used containment to stop the spread of communism.",
-    "I can explain how the U.S. responded to the Berlin Blockade and why it helped form NATO."
-   ],
-   "g3": "I can analyze the causes of the Cold War between the United States and the Soviet Union."
-  },
-  "3|2": {
-   "t": [
+    "I can explain how the U.S. responded to the Berlin Blockade and why it helped form NATO.",
     "I can explain why many Americans feared communism inside the United States during the Red Scare.",
     "I can analyze how fear of communism affected people's jobs, free speech, and civil liberties.",
     "I can identify individuals who spoke up during the Red Scare and explain how their actions mattered."
    ],
-   "g3": "I can analyze how the Cold War affected life in the United States (society, politics, civil liberties)."
+   "g3": "I can analyze the causes of the Cold War between the United States and the Soviet Union. I can analyze how the Cold War affected life in the United States (society, politics, civil liberties)."
   },
-  "3|3": {
+  "3|2": {
    "t": [
     "I can explain why the United States fought in Korea, using the idea of containment.",
     "I can analyze how the Korean War swung back and forth and ended in a stalemate.",
@@ -326,7 +322,7 @@ window.CLASS_TARGETS = {
    ],
    "g3": "I can analyze how the United States responded to the Cold War around the world (containment, global conflicts)."
   },
-  "3|4": {
+  "3|3": {
    "t": [
     "I can explain how the nuclear arms race between the U.S. and the Soviet Union created fear in the 1950s.",
     "I can analyze how Cold War fear changed everyday life for American families and schools.",
@@ -334,7 +330,7 @@ window.CLASS_TARGETS = {
    ],
    "g3": "I can analyze how the Cold War affected life in the United States (society, politics, civil liberties)."
   },
-  "3|5": {
+  "3|4": {
    "t": [
     "I can explain how the Bay of Pigs led to the Cuban Missile Crisis and how the crisis ended.",
     "I can analyze why the U.S. went to war in Vietnam and why Americans split over it.",
@@ -342,7 +338,7 @@ window.CLASS_TARGETS = {
    ],
    "g3": "I can analyze how the United States responded to the Cold War around the world (containment, global conflicts)."
   },
-  "3|6": {
+  "3|5": {
    "test": 1,
    "g3": "I can analyze how the United States responded to the Cold War around the world (containment, global conflicts)."
   },
@@ -680,35 +676,25 @@ window.CLASS_TARGETS = {
    "t": [
     "I can explain how the U.S. and Soviet Union went from allies in World War II to Cold War enemies.",
     "I can analyze how communism in the Soviet Union and democracy in the U.S. organized power differently.",
-    "I can use a map to explain how Europe was split into U.S. and Soviet sides after 1945."
-   ],
-   "g3": "I can analyze forms of government during the Cold War."
-  },
-  "2|2": {
-   "t": [
+    "I can use a map to explain how Europe was split into U.S. and Soviet sides after 1945.",
     "I can explain what containment was and why the U.S. wanted to stop the spread of communism.",
     "I can analyze how the U.S. and Soviet Union each tried to win allies and influence around the world.",
     "I can use a map to explain where communism spread and where the U.S. tried to stop it."
    ],
-   "g3": "I can analyze how groups pursued goals during the Cold War."
+   "g3": "I can analyze forms of government during the Cold War. I can analyze how groups pursued goals during the Cold War."
   },
-  "2|3": {
+  "2|2": {
    "t": [
     "I can explain how communist governments used spying, secret police, and propaganda to control people.",
     "I can analyze how being watched by the government changed the way people acted and spoke.",
-    "I can explain how methods of control in communist countries were different from those in democracies."
-   ],
-   "g3": "I can analyze forms of government during the Cold War."
-  },
-  "2|4": {
-   "t": [
+    "I can explain how methods of control in communist countries were different from those in democracies.",
     "I can explain how Mao Zedong tried to remake China after the Communists took power in 1949.",
     "I can analyze how the Great Leap Forward and the Cultural Revolution affected ordinary families in China.",
     "I can explain how Mao's policies led to a famine that killed millions of Chinese people."
    ],
    "g3": "I can analyze forms of government during the Cold War."
   },
-  "2|5": {
+  "2|3": {
    "t": [
     "I can explain why the U.S. and Soviet Union backed sides in wars far from home during the Cold War.",
     "I can analyze how local groups and the two superpowers each pursued their own goals in Cold War hot spots.",
@@ -716,7 +702,7 @@ window.CLASS_TARGETS = {
    ],
    "g3": "I can analyze how groups pursued goals during the Cold War."
   },
-  "2|6": {
+  "2|4": {
    "t": [
     "I can explain how Gandhi and millions of Indians used nonviolent protest, like the Salt March, against British rule.",
     "I can analyze what the Partition of India and Pakistan in 1947 cost ordinary people.",
@@ -724,7 +710,7 @@ window.CLASS_TARGETS = {
    ],
    "g3": "I can analyze the causes of decolonization."
   },
-  "2|7": {
+  "2|5": {
    "t": [
     "I can explain how African nations like Ghana won independence from European rule in the 1950s and 1960s.",
     "I can analyze why some African independence movements were peaceful and others, like in Kenya and Algeria, turned violent.",
@@ -732,7 +718,7 @@ window.CLASS_TARGETS = {
    ],
    "g3": "I can analyze how decolonization changed the world."
   },
-  "2|8": {
+  "2|6": {
    "t": [
     "I can explain how Ho Chi Minh led Vietnam's fight for independence from France.",
     "I can analyze how Vietnam's fight for independence turned into a Cold War conflict involving the U.S.",
@@ -740,23 +726,18 @@ window.CLASS_TARGETS = {
    ],
    "g3": "I can analyze how groups pursued goals during the Cold War."
   },
-  "2|9": {
+  "2|7": {
    "t": [
     "I can explain what the Khmer Rouge did to the people of Cambodia from 1975 to 1979.",
     "I can analyze how the Khmer Rouge used fear, forced labor, and violence to control Cambodians.",
-    "I can explain why the world promised \"never again\" after the Holocaust and how that promise failed in Cambodia."
-   ],
-   "g3": "I can analyze impacts of mass atrocities."
-  },
-  "2|10": {
-   "t": [
+    "I can explain why the world promised \"never again\" after the Holocaust and how that promise failed in Cambodia.",
     "I can explain what apartheid was and how it separated people by race in South Africa.",
     "I can analyze how the apartheid government used laws and violence to control Black South Africans.",
     "I can explain how protests, boycotts, and pressure from other countries helped bring apartheid to an end."
    ],
-   "g3": "I can analyze how groups pursued goals during the Cold War."
+   "g3": "I can analyze impacts of mass atrocities. I can analyze how groups pursued goals during the Cold War."
   },
-  "2|11": {
+  "2|8": {
    "t": [
     "I can explain the chain of events that brought down the Berlin Wall in 1989.",
     "I can analyze how East Germany used the wall and the Stasi (secret police) to control its people.",
@@ -764,7 +745,7 @@ window.CLASS_TARGETS = {
    ],
    "g3": "I can analyze forms of government during the Cold War."
   },
-  "2|12": {
+  "2|9": {
    "test": 1,
    "g3": "I can analyze how groups pursued goals during the Cold War."
   },
@@ -1032,19 +1013,14 @@ window.CLASS_TARGETS = {
    "t": [
     "I can identify different types of social groups.",
     "I can analyze the differences between primary and secondary groups.",
-    "I can explain how groups influence behavior and identity."
-   ],
-   "g3": "I can analyze how different groups influence individuals and behavior."
-  },
-  "3|6": {
-   "t": [
+    "I can explain how groups influence behavior and identity.",
     "I can explain the concepts of in-groups, out-groups, and reference groups.",
     "I can analyze how group membership shapes behavior and attitudes.",
     "I can identify how groups can influence inclusion, exclusion, and identity."
    ],
    "g3": "I can analyze how different groups influence individuals and behavior."
   },
-  "3|7": {
+  "3|6": {
    "t": [
     "I can analyze how socialization and groups shape identity and behavior.",
     "I can use sociological concepts to explain real-world interactions and relationships.",
@@ -1052,7 +1028,7 @@ window.CLASS_TARGETS = {
    ],
    "g3": "I can analyze how socialization shapes individuals and explain the role of major agents of socialization."
   },
-  "3|8": {
+  "3|7": {
    "test": 1,
    "g3": "I can analyze how socialization shapes individuals and explain the role of major agents of socialization."
   },
@@ -1226,19 +1202,12 @@ window.CLASS_TARGETS = {
   "3|2": {
    "t": [
     "I can explain how courts interpret laws.",
-    "I can analyze the role of judicial review in the United States government."
+    "I can analyze the role of judicial review in the United States government.",
+    "I can identify the structure of the judicial branch."
    ],
-   "g3": "I can analyze how laws are made, how the president enforces laws, and how courts interpret laws."
+   "g3": "I can analyze how laws are made, how the president enforces laws, and how courts interpret laws. I can analyze how the legislative, executive, and judicial branches are structured and explain their main powers and responsibilities."
   },
   "3|3": {
-   "t": [
-    "I can identify the structure of the judicial branch.",
-    "I can explain how courts interpret laws.",
-    "I can analyze the role of judicial review in the United States government."
-   ],
-   "g3": "I can analyze how the legislative, executive, and judicial branches are structured and explain their main powers and responsibilities."
-  },
-  "3|4": {
    "test": 1,
    "g3": "I can analyze how the legislative, executive, and judicial branches are structured and explain their main powers and responsibilities."
   },
