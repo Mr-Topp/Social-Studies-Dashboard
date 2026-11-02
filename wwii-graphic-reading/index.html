@@ -64,7 +64,7 @@ input:focus,textarea:focus,button:focus{outline:3px solid #6aa5bf;outline-offset
 @media(max-width:900px){.layout{grid-template-columns:1fr}.scan{height:68vh;min-height:400px}.directions ol{display:block}}
 @media print{header{background:white;color:black;border-bottom:2px solid black}.reading,.day-tabs,.actions,.reader-tools{display:none!important}.layout{display:block}.panel{box-shadow:none}}
 </style>
-<script src="../shared/assignments.js?v=20261031h"></script><script src="../shared/turnin.js?v=20261030d"></script></head>
+<script src="../shared/assignments.js?v=20261031h"></script><script src="../shared/turnin.js?v=20261102guard"></script></head>
 <body>
 <header><div class="wrap"><div class="kicker">U.S. History · World War II</div><h1>Read. Look. Answer.</h1></div></header>
 <main class="wrap">
@@ -83,7 +83,7 @@ input:focus,textarea:focus,button:focus{outline:3px solid #6aa5bf;outline-offset
 <div class="panel questions-panel" aria-labelledby="checkTitle">
  <div class="progress-line"><div><p class="label" id="assignmentTitle"></p><h2 id="checkTitle"></h2></div><strong id="checkCount"></strong></div><div class="progressbar"><span id="progressFill"></span></div>
  <p class="section-help" id="dayPlan"></p>
- <div class="name-wrap"><label for="studentName">Your name</label><input id="studentName" maxlength="100" autocomplete="name" placeholder="First and last name"></div>
+ <div class="name-wrap"><label for="studentName">Your name: first name + last initial (like Jordan M.)</label><input id="studentName" maxlength="40" autocomplete="off" placeholder="First name + last initial (like Jordan M.)"></div>
  <section class="question book-question" aria-labelledby="bookPromptTitle"><h3 class="prompt-heading"><span class="step-number" aria-hidden="true">1</span><span id="bookPromptTitle">Read this page</span></h3><p id="questionText"></p><div id="choiceList" class="choice-list" role="group" aria-label="Book answer choices"></div><button type="button" class="secondary check-answer" id="checkPageAnswer" disabled>Check answer</button><p class="page-feedback" id="pageFeedback" aria-live="polite"></p></section>
  <section class="question us-connection" aria-labelledby="usPromptTitle"><h3 class="prompt-heading" id="usPromptTitle"><span class="step-number" aria-hidden="true">2</span>Connect to the U.S.</h3><div class="fact"><h3>U.S. history fact</h3><div id="factText"></div></div><p id="usQuestionText"></p><label for="usAnswer">Your U.S. connection</label><textarea id="usAnswer" placeholder="Write a short answer." disabled></textarea></section>
  <p class="small" id="answerHelp">Answer the book question to unlock the U.S. response.</p>

@@ -111,6 +111,9 @@ const TEACHER_TOOLS_URL = "https://script.google.com/macros/s/AKfycbxbiHdWfmdn70
       if (w) { body.answers["Writing check"] = w.text; if (w.mostlyPasted) body.answers["Pasted writing"] = w.detail; }
     }
 
+    if (nameState(body.studentName) !== "ok") {
+      return fakeResponse(400, { error: nameState(body.studentName) === "tooMuch" ? guardText("tooMuch") : NAME_HELP });
+    }
     const name = shortName(body.studentName);
     if (!name || !/ [A-Z]\.$/.test(name)) return fakeResponse(400, { error: NAME_HELP });
     body.studentName = name;
@@ -155,36 +158,133 @@ const TEACHER_TOOLS_URL = "https://script.google.com/macros/s/AKfycbxbiHdWfmdn70
     }
   };
 
-  // --- Make name boxes ask for first name + last initial ---------------
+  // --- Name guard: first name + last initial ONLY ------------------------
+  // If a student types a whole last name, the box turns red and nothing else on the
+  // page works (no buttons, links, Enter, or game clicks) until it's just one letter.
+  // The page itself never even sees the full last name.
+  const NOT_A_PERSON = /country|leader|island|team|place|region|map|law|city|town|nation|party|pet|character|flag|state\d/;
+  function isNameBox(el) {
+    if (!el || el.tagName !== "INPUT" || (el.type && !/^(text|search)$/i.test(el.type))) return false;
+    if (el.dataset.studentName === "1") return true;
+    let label = el.getAttribute("aria-label") || "";
+    if (el.id) { const l = document.querySelector('label[for="' + (window.CSS && CSS.escape ? CSS.escape(el.id) : el.id) + '"]'); if (l) label += " " + l.textContent; }
+    const tag = (el.id + " " + (el.name || "") + " " + (el.placeholder || "") + " " + label).toLowerCase();
+    if (NOT_A_PERSON.test(tag)) return false;
+    return /student.?name|turn.?name|player.?name|your name|namebox|xname|^name | name$|first and last|first name|last initial|jordan m|nombre/.test(tag) || el.id.toLowerCase() === "name";
+  }
+  // "ok", "empty", "needInitial" (just a first name), or "tooMuch" (a whole last name or extra words)
+  function nameState(raw) {
+    const words = String(raw || "").trim().split(/\s+/).filter(Boolean);
+    if (!words.length) return "empty";
+    if (words.length === 1) return "needInitial";
+    if (words.length === 2 && /^\p{L}\.?$/u.test(words[1]) && /\p{L}/u.test(words[0])) return "ok";
+    return "tooMuch";
+  }
+  window.classNameState = nameState;
+  const isEs = () => !!(window.SiteLang && window.SiteLang.isEs && window.SiteLang.isEs());
+  function guardText(state) {
+    if (state === "tooMuch") return isEs()
+      ? "Solo la inicial de tu apellido, no el apellido completo. Ejemplo: Jordan M."
+      : "Only your last INITIAL, not your whole last name. Example: Jordan M.";
+    return isEs() ? "Agrega la inicial de tu apellido. Ejemplo: Jordan M." : "Add your last initial. Example: Jordan M.";
+  }
+  function showGuard(box, state) {
+    let msg = box.nextElementSibling && box.nextElementSibling.classList.contains("name-guard") ? box.nextElementSibling : null;
+    if (!state) {
+      if (msg) msg.remove();
+      box.style.outline = ""; box.removeAttribute("aria-invalid");
+      return;
+    }
+    if (!msg) {
+      msg = document.createElement("p");
+      msg.className = "name-guard"; msg.setAttribute("role", "alert");
+      msg.style.cssText = "color:#b00020;font-weight:700;margin:6px 0 8px;font-size:1rem;line-height:1.3";
+      box.insertAdjacentElement("afterend", msg);
+    }
+    msg.textContent = "⚠ " + guardText(state);
+    box.style.outline = "3px solid #b00020"; box.setAttribute("aria-invalid", "true");
+  }
+  const visible = el => el.isConnected && !el.disabled && el.getClientRects().length > 0;
+  // A visible name box that has something typed in it but isn't "First L." yet.
+  function badBox() {
+    for (const el of document.querySelectorAll("input")) {
+      if (!isNameBox(el) || !visible(el)) continue;
+      const s = nameState(el.value);
+      if (s === "tooMuch" || s === "needInitial") return { el, s };
+    }
+    return null;
+  }
+  function allowed(target, box) {
+    if (!target || !target.closest) return false;
+    return target === box || target.closest("label") && target.closest("label").control === box ||
+      target.closest(".name-guard, #langSwitch, .lang-switch");
+  }
+
+  // Typing: once they start a whole last name, warn right away and keep it from the page.
+  window.addEventListener("input", e => {
+    const box = e.target;
+    if (!isNameBox(box)) return;
+    const s = nameState(box.value);
+    if (s === "tooMuch") { showGuard(box, s); e.stopImmediatePropagation(); }
+    else showGuard(box, null);
+  }, true);
+  ["change", "keyup"].forEach(type => window.addEventListener(type, e => {
+    if (isNameBox(e.target) && nameState(e.target.value) === "tooMuch") e.stopImmediatePropagation();
+  }, true));
+  // Leaving the box with a good name: tidy it to "Jordan M."
+  window.addEventListener("blur", e => {
+    const box = e.target;
+    if (!isNameBox(box) || nameState(box.value) !== "ok") return;
+    const fixed = shortName(box.value);
+    if (fixed && fixed !== box.value) { box.value = fixed; box.dispatchEvent(new Event("input", { bubbles: true })); }
+  }, true);
+  // Trying to move on: block every click, tap, Enter, and form submit until the name is fixed.
+  function block(e) {
+    const bad = badBox();
+    if (!bad || allowed(e.target, bad.el)) return;
+    e.stopImmediatePropagation();
+    if (e.type === "click" || e.type === "submit") {
+      e.preventDefault();
+      showGuard(bad.el, bad.s);
+      bad.el.scrollIntoView({ block: "center", behavior: "smooth" });
+      bad.el.focus({ preventScroll: true });
+    }
+  }
+  ["click", "submit", "pointerdown", "mousedown"].forEach(type => window.addEventListener(type, block, true));
+  window.addEventListener("keydown", e => {
+    if (e.key !== "Enter" && e.key !== " ") return;
+    const bad = badBox();
+    if (!bad) return;
+    if (e.target === bad.el && e.key === " ") return; // spaces are fine while typing
+    if (e.target === bad.el || !allowed(e.target, bad.el)) {
+      e.preventDefault(); e.stopImmediatePropagation();
+      showGuard(bad.el, bad.s); bad.el.focus();
+    }
+  }, true);
+
+  // Every name box (even ones a game adds later): right hint, and no Chromebook autofill of a full name.
   // The student's home page (the main Activities page) saves the name they tapped on this Chromebook,
   // so empty name boxes fill in by themselves. They can still change it.
   let savedName = "";
   try { savedName = shortName(localStorage.getItem("site-student-name") || ""); } catch (e) {}
-  if (!/ [A-Z]\.$/.test(savedName)) savedName = "";
+  if (nameState(savedName) !== "ok") savedName = "";
   function fixNameBoxes() {
     document.querySelectorAll("input").forEach(input => {
-      const tag = (input.id + " " + input.name + " " + (input.placeholder || "")).toLowerCase();
-      if (!/student.?name|your name|^name | name$|first and last/.test(tag) && input.id.toLowerCase() !== "name") return;
-      if (input.type && !/text|search/.test(input.type)) return;
+      if (!isNameBox(input)) return;
       if (savedName && !input.value && !input.dataset.nameFilled && !/teacher-submissions/.test(location.pathname) && !window.NO_FEEDBACK_POPUP) {
         input.dataset.nameFilled = "1";
         input.value = savedName;
         input.dispatchEvent(new Event("input", { bubbles: true }));
         input.dispatchEvent(new Event("change", { bubbles: true }));
       }
-      if (input.dataset.nameFixed) return;
-      input.dataset.nameFixed = "1";
+      if (input.dataset.nameGuard) return;
+      input.dataset.nameGuard = "1";
       input.placeholder = "First name + last initial (like Jordan M.)";
       input.setAttribute("autocomplete", "off");
-      input.addEventListener("blur", () => {
-        const fixed = shortName(input.value);
-        if (fixed && fixed !== input.value) {
-          input.value = fixed;
-          input.dispatchEvent(new Event("input", { bubbles: true }));
-        }
-      });
+      if (nameState(input.value) === "tooMuch") showGuard(input, "tooMuch"); // an old saved full name
     });
   }
+  new MutationObserver(fixNameBoxes).observe(document.documentElement, { childList: true, subtree: true });
 
   // --- Outside pictures that don't load (blocked by a school filter, site down) ----
   // Show a short note with a link instead of a broken-image icon.
