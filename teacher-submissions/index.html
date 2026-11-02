@@ -138,6 +138,7 @@ td.sum.l3{background:#eef7f0;color:#1f5e2c}td.sum.l2{background:#fff8e2;color:#7
 .unitcount .todocount{color:var(--red);font-weight:800}
 .daytitle.unplanned{color:var(--muted);font-weight:600;font-style:italic}
 @media (max-width:760px){.dayrow{grid-template-columns:1fr}}
+.testtag{display:block;width:max-content;margin-top:2px;background:#dbe8fb;color:#1c3f78;border-radius:6px;padding:0 6px;font-weight:800;font-size:.72rem;letter-spacing:.04em}
 </style>
 </head>
 <body>
@@ -284,11 +285,16 @@ function mergeNames() {
     });
   });
 }
+// Your test student (from the "?teacher-test" link on the student home page). Shows with a TEST tag,
+// but is left out of Needs attention and the CSV downloads.
+const TEST_NAME = "Test S.";
+const isTestStudent = s => s === TEST_NAME;
 const offList = (t, s) => rosterOf(t).length && !rosterOf(t).includes(s);
-const studentCell = (t, s) => `<td class="student">${safe(s)}${offList(t, s) ? '<small class="offlist">not on class list</small>' : ""}</td>`;
+const studentCell = (t, s) => `<td class="student">${safe(s)}${isTestStudent(s) ? '<small class="testtag">TEST (you)</small>' : offList(t, s) ? '<small class="offlist">not on class list</small>' : ""}</td>`;
 
 // ---- Needs attention (top of each class) ----
 function attentionHtml(list) {
+  list = list.filter(r => !isTestStudent(r.studentName));
   const roster = rosterOf(tab), latest = new Map();
   list.forEach(r => { const k = r.studentName + "|" + r.assignmentId; if (!latest.has(k)) latest.set(k, r); });
   const flagText = r => { const a = aiOf(r), ans = r.answers || {}; if (a && a.teacher) return ""; if (a && a.flag) return a.flag; return ans["Pasted writing"] ? ans["Pasted writing"] + " (not graded yet). Check with the student." : ""; };
@@ -546,6 +552,7 @@ function renderMastery(list) {
   });
 }
 function masteryCsvRows(list) {
+  list = list.filter(r => !isTestStudent(r.studentName));
   const codes = courseStandards(tab), data = masteryData(list);
   rosterOf(tab).forEach(s => { data[s] = data[s] || {}; });
   const rowsOut = [["Student", "Standard", "Standard text", "Level", "Average", "Has written answer", "Activities and scores"]];
@@ -642,7 +649,7 @@ function showValue(v, depth = 0) {
 
 function renderList(list) {
   if (!list.length) { $("out").innerHTML = '<div class="empty">No turn-ins match that search.</div>'; return; }
-  $("out").innerHTML = `<div class="list">${list.map((r, i) => `<article class="sub"><div class="top"><div><h3>${safe(r.studentName)}</h3><p>${safe(titleOf(r))}${r.source === "old" ? '<span class="tag">old site</span>' : ""}${(r.answers || {}).Language === "Spanish" ? '<span class="tag es">Español</span>' : ""}</p></div><time>${safe(new Date(r.submittedAt).toLocaleString())}</time></div>
+  $("out").innerHTML = `<div class="list">${list.map((r, i) => `<article class="sub"><div class="top"><div><h3>${safe(r.studentName)}</h3><p>${safe(titleOf(r))}${isTestStudent(r.studentName) ? '<span class="tag">TEST (you)</span>' : ""}${r.source === "old" ? '<span class="tag">old site</span>' : ""}${(r.answers || {}).Language === "Spanish" ? '<span class="tag es">Español</span>' : ""}</p></div><time>${safe(new Date(r.submittedAt).toLocaleString())}</time></div>
     ${gradeBox(r, i)}
     <details><summary>View answers</summary>${showValue(r.answers)}</details></article>`).join("")}</div>`;
   $("out").querySelectorAll(".gradebox button[data-l]").forEach(b => b.onclick = async () => {
@@ -675,7 +682,7 @@ function flat(v) {
 function downloadCsv() {
   const cell = v => '"' + String(v ?? "").replace(/"/g, '""').replace(/^([=+\-@])/, "'$1") + '"';
   if (view === "mastery") { const out = masteryCsvRows(tabRows(tab)).map(r => r.map(cell).join(",")); const url = URL.createObjectURL(new Blob([out.join("\r\n")], { type: "text/csv;charset=utf-8" })); const a = document.createElement("a"); a.href = url; a.download = COURSES[tab].replace(/\W+/g, "-").toLowerCase() + "-mastery.csv"; a.click(); URL.revokeObjectURL(url); return; }
-  const list = view === "grid" ? tabRows(tab) : visible();
+  const list = (view === "grid" ? tabRows(tab) : visible()).filter(r => !isTestStudent(r.studentName));
   const out = [["Student", "Class", "Activity", "Turned in", "Answers"].map(cell).join(","),
     ...list.map(r => [r.studentName, COURSES[r.course], titleOf(r), new Date(r.submittedAt).toLocaleString(), flat(r.answers)].map(cell).join(","))];
   const url = URL.createObjectURL(new Blob([out.join("\r\n")], { type: "text/csv;charset=utf-8" }));

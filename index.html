@@ -43,6 +43,8 @@ h1:focus{outline:none}
 .tab{background:#e7e0d1;color:var(--navy);padding:9px 14px}
 .tab[aria-selected=true]{background:var(--navy);color:#fff}
 .addclass{background:none;border:2px dashed var(--line);color:var(--muted);padding:7px 12px}
+.testbar{background:#dbe8fb;color:#1c3f78;border:1px solid #b6cdf0;border-radius:12px;padding:9px 14px;margin:0 0 14px;font-size:.95rem}
+.testbar b{color:#1c3f78}.testbar .linkbtn{color:#1c3f78;font-size:.95rem}
 .es{background:#1e4f8a;color:#fff;padding:9px 14px}
 /* --- next up --- */
 .next{background:var(--navy);color:#fff;border-radius:16px;padding:18px 20px;display:flex;gap:16px;align-items:center;justify-content:space-between;flex-wrap:wrap;margin-bottom:12px}
@@ -142,6 +144,24 @@ function saveMe() {
   } catch (e) {}
 }
 let me = loadMe();
+
+// ---------- Teacher test student ----------
+// Open the page once with ?teacher-test on the end and this device becomes "Test S." in every class,
+// so the teacher sees exactly what a student sees without using a real student's name.
+// Turn-ins from Test S. show on the teacher dashboard with a TEST tag (left out of Needs attention).
+const TEST_NAME = "Test S.", TEST_KEY = "hub-test-student";
+let testMode = false;
+try {
+  if (/[?&]teacher-test\b/.test(location.search)) localStorage.setItem(TEST_KEY, "1");
+  testMode = localStorage.getItem(TEST_KEY) === "1";
+} catch (e) {}
+if (testMode) {
+  const keep = COURSES[me.current] ? me.current : "us-history";
+  me = { classes: {}, current: keep };
+  Object.keys(COURSES).forEach(k => { me.classes[k] = TEST_NAME; });
+  saveMe();
+  if (/[?&]teacher-test\b/.test(location.search)) history.replaceState(null, "", location.pathname + location.hash);
+}
 // Drop anything saved for a class that no longer exists.
 Object.keys(me.classes).forEach(k => { if (!COURSES[k]) delete me.classes[k]; });
 
@@ -312,13 +332,20 @@ async function drawHome(app) {
   const course = me.current, name = me.classes[course], first = name.split(" ")[0];
   const myClasses = Object.keys(COURSES).filter(k => me.classes[k]);
   const spanish = course === "sociology" && (name === "the student" || (() => { try { return localStorage.getItem("site-lang-es-device") === "1"; } catch (e) { return false; } })());
-  app.innerHTML = `<div class="top">
+  const testBar = testMode ? `<div class="testbar" role="note">🧪 <b>Test student mode.</b> You're seeing exactly what a student sees, as “${esc(TEST_NAME)}”. Your turn-ins show on your dashboard tagged TEST. <button class="linkbtn" id="testOff">Turn off on this device</button></div>` : "";
+  app.innerHTML = testBar + `<div class="top">
       <div><p class="eyebrow">${esc(COURSES[course])}</p><h1>Hi, ${esc(first)}! 👋</h1></div>
-      <div class="who">${spanish ? `<a class="btn es" href="sociology/espanol/">Ver en español →</a>` : ""}<span class="muted">Not ${esc(name)}?</span><button class="linkbtn" id="notMe">Change name</button></div>
+      <div class="who">${spanish ? `<a class="btn es" href="sociology/espanol/">Ver en español →</a>` : ""}${testMode ? "" : `<span class="muted">Not ${esc(name)}?</span><button class="linkbtn" id="notMe">Change name</button>`}</div>
     </div>
-    <div class="tabs" role="tablist">${myClasses.length > 1 ? myClasses.map(k => `<button class="tab" role="tab" aria-selected="${k === course}" data-k="${k}">${esc(COURSES[k])}</button>`).join("") : ""}<button class="addclass" id="addClass">+ Add a class</button></div>
+    <div class="tabs" role="tablist">${myClasses.length > 1 ? myClasses.map(k => `<button class="tab" role="tab" aria-selected="${k === course}" data-k="${k}">${esc(COURSES[k])}</button>`).join("") : ""}${testMode ? "" : `<button class="addclass" id="addClass">+ Add a class</button>`}</div>
     <div id="body"><p class="loading">Loading your work…</p></div>${footer()}`;
   app.querySelectorAll(".tab").forEach(b => b.onclick = () => { me.current = b.dataset.k; saveMe(); draw(); });
+  if ($("testOff")) $("testOff").onclick = () => {
+    if (!confirm("Turn off test student mode on this device?")) return;
+    try { localStorage.removeItem(TEST_KEY); localStorage.removeItem(ME_KEY); localStorage.removeItem("site-student-name"); } catch (e) {}
+    testMode = false; me = { classes: {}, current: "" }; screen = "class"; draw();
+  };
+  if (testMode) return showWork(course, name);
   $("addClass").onclick = () => { screen = "class"; draw(); };
   $("notMe").onclick = () => {
     if (!confirm("Not " + name + "? This clears " + first + "'s name from this Chromebook so you can pick yours.")) return;
@@ -326,7 +353,9 @@ async function drawHome(app) {
     try { localStorage.removeItem(ME_KEY); localStorage.removeItem("site-student-name"); } catch (e) {}
     screen = "class"; draw();
   };
-
+  showWork(course, name);
+}
+async function showWork(course, name) {
   const work = await loadWork(course, name);
   if (me.current !== course || screen !== "home") return;
   $("body").innerHTML = homeBody(course, work);
@@ -448,12 +477,15 @@ function footer() {
 function focusFirst() { const el = document.querySelector("#app h1"); if (el) { el.setAttribute("tabindex", "-1"); el.focus({ preventScroll: true }); } }
 
 // A link with a class on the end (like .../#us-history from Schoology) opens that class.
-(function fromLink() {
+function fromLink() {
   const h = location.hash.slice(1);
-  if (!COURSES[h]) return;
+  if (!COURSES[h]) return false;
   if (me.classes[h]) { me.current = h; saveMe(); screen = "home"; }
   else { pickCourse = h; screen = "name"; }
-})();
+  return true;
+}
+fromLink();
+window.addEventListener("hashchange", () => { if (fromLink()) draw(); });
 draw();
 </script>
 </body>
