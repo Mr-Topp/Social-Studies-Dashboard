@@ -4,6 +4,7 @@
  * and (3) shows students their feedback card on their next activity (only for their own turn-ins),
  * and (4) feeds each student's own home page (their class list name + their own grades and what's missing),
  * and (5) saves links you add from the dashboard's To-do tab to fill in a lesson day that isn't made yet,
+ * and (7) saves paper grades you type on the dashboard (paper columns, 1-4 / EX exempt / M missing) and "exempt everyone",
  * and (6) makes each student's private 4-digit PIN (printed on slips from the dashboard). A student needs their PIN
  * to see their own grades, and class lists are never sent to the public site.
  * Wrong teacher codes and wrong PINs are limited, so nobody can sit and guess.
@@ -40,7 +41,7 @@ function doPost(e) {
     if (body.action === "my_work") return json(myWork(body));
     // Lets the update page check which version is running. Shares nothing.
     if (body.action === "pin_login") return json(pinLogin(body));
-    if (body.action === "version") return json({ ok: true, version: 4, can: ["links", "student-links", "pins"] });
+    if (body.action === "version") return json({ ok: true, version: 5, can: ["links", "student-links", "pins", "paper"] });
   } catch (err) { return json({ ok: false, error: "Try again later." }); }
   var check = codeCheck(body.code);
   if (check === "locked") return json({ ok: false, error: "Too many wrong teacher codes. Wait 15 minutes, then try again." });
@@ -51,6 +52,9 @@ function doPost(e) {
     if (body.action === "set_roster") return json(setRoster(body));
     if (body.action === "set_link") return json(setLink(body));
     if (body.action === "pins") return json(makePins(body));
+    if (body.action === "paper_task") return json(setPaperTask(body));
+    if (body.action === "marks") return json(setMarks(body));
+    if (body.action === "col_exempt") return json(setColExempt(body));
     return json({ ok: false, error: "Unknown request." });
   } catch (err) {
     return json({ ok: false, error: "The sheet had a problem. Try again in a minute." });
@@ -141,6 +145,93 @@ function setLink(b) {
   return { ok: true, id: id };
 }
 
+// ---------- Paper grades and exemptions (PowerSchool-style) ----------
+// paper_task: adds or removes a paper column on a lesson day (one "paper-task" row; newest row per id wins).
+// marks: what you type in a box. One "mark" row per student per activity, updated in place:
+//   "1"-"4" = level (paper columns only), "EX" = exempt (any activity), "M" = missing (paper columns), "" = clear.
+// col_exempt: "Exempt everyone" for one activity in one class (one "col" row; newest row per activity wins).
+// The AI grader skips all of these rows (Kind isn't "turn-in"). Students' pages only learn what's exempt.
+var STD_OK = /^SS\.9-12\.(WH|US|Gov|Soc)\.\d+$/;
+function cellText(v) { v = String(v); return /^[=+\-@]/.test(v) ? "'" + v : v; }
+function teacherRow(c, key, course, actId, actTitle, kind, student, answers) {
+  var width = Math.max.apply(null, Object.keys(c).map(function (k) { return c[k]; })) + 1;
+  var row = new Array(width).fill(""), now = new Date().toISOString();
+  var set = function (k, v) { if (k in c) row[c[k]] = v; };
+  set("Key", key + "|" + now); set("Turned in", now); set("Student", student); set("Class", course);
+  set("Activity ID", actId); set("Activity", cellText(actTitle)); set("Kind", kind); set("Type", kind);
+  set("Source", "teacher"); set("Answers", JSON.stringify(answers));
+  return row;
+}
+function setPaperTask(b) {
+  var course = String(b.course || "");
+  if (COURSES.indexOf(course) < 0) return { ok: false, error: "Unknown class." };
+  var id = clean(b.id, 40).replace(/[^a-z0-9]/gi, "").toLowerCase() || Utilities.getUuid().replace(/-/g, "").slice(0, 12);
+  var remove = !!b.remove, title = clean(b.title, 100);
+  var unit = parseInt(b.unit, 10) || 0, day = parseInt(b.day, 10) || 0, part = parseInt(b.part, 10) === 1 ? 1 : 2;
+  var std = (Array.isArray(b.std) ? b.std : []).map(function (x) { return String(x); }).filter(function (x) { return STD_OK.test(x); }).slice(0, 8);
+  if (!remove) {
+    if (!title) return { ok: false, error: "Give the paper a name." };
+    if (!unit || !day) return { ok: false, error: "Pick the unit and day." };
+  }
+  withLock(function (sh) {
+    var c = cols(sh.getRange(1, 1, 1, sh.getLastColumn()).getValues()[0]);
+    sh.appendRow(teacherRow(c, "paper-task|" + course + "|" + id, course, "paper-task", "Paper column added from the dashboard", "paper-task", "Teacher",
+      { id: id, course: course, part: part, unit: unit, day: day, title: title, std: std, removed: remove }));
+  });
+  return { ok: true, id: id };
+}
+function setMarks(b) {
+  var course = String(b.course || "");
+  if (COURSES.indexOf(course) < 0) return { ok: false, error: "Unknown class." };
+  var items = (Array.isArray(b.items) ? b.items : []).slice(0, 300).map(function (x) {
+    return { act: clean(x.activity, 80), student: clean(x.student, 40), value: String(x.value == null ? "" : x.value).trim().toUpperCase(), title: clean(x.title, 120) };
+  });
+  for (var k = 0; k < items.length; k++) {
+    var it = items[k], paper = /^paper-[a-z0-9]{1,40}$/.test(it.act);
+    if (!/^[a-z0-9][a-z0-9-]{0,79}$/.test(it.act) || !it.student) return { ok: false, error: "Missing the student or activity." };
+    if (!(it.value === "" || it.value === "EX" || (paper && /^([1-4]|M)$/.test(it.value)))) return { ok: false, error: "Type 1-4, EX or M." };
+  }
+  var saved = [];
+  withLock(function (sh) {
+    var data = sh.getDataRange().getValues(), c = cols(data[0]);
+    var kindCol = ("Kind" in c) ? c["Kind"] : c["Type"], at = {};
+    for (var i = 1; i < data.length; i++) {
+      if (String(data[i][kindCol]) !== "mark" || String(data[i][c["Class"]]).trim() !== course) continue;
+      at[String(data[i][c["Activity ID"]]) + "|" + String(data[i][c["Student"]]).trim()] = i;
+    }
+    var add = [], today = new Date().toISOString().slice(0, 10);
+    items.forEach(function (it) {
+      var a = { Mark: "", "Teacher graded": today };
+      if (/^[1-4]$/.test(it.value)) a["Teacher level"] = it.value; else a.Mark = it.value;
+      var i = at[it.act + "|" + it.student];
+      if (i != null) {
+        var old; try { old = JSON.parse(String(data[i][c["Answers"]] || "{}")); } catch (e) { old = {}; }
+        delete old["Teacher level"]; old.Mark = a.Mark; old["Teacher graded"] = today;
+        if (a["Teacher level"]) old["Teacher level"] = a["Teacher level"];
+        sh.getRange(i + 1, c["Answers"] + 1).setValue(JSON.stringify(old));
+        var t = data[i][c["Turned in"]]; saved.push({ activity: it.act, student: it.student, at: t instanceof Date ? t.toISOString() : String(t) });
+      } else if (it.value) {
+        var row = teacherRow(c, "mark|" + course + "|" + it.act + "|" + it.student, course, it.act, it.title || it.act, "mark", cellText(it.student), a);
+        add.push(row); at[it.act + "|" + it.student] = -1;
+        saved.push({ activity: it.act, student: it.student, at: row[c["Turned in"]] });
+      }
+    });
+    if (add.length) sh.getRange(sh.getLastRow() + 1, 1, add.length, add[0].length).setValues(add);
+  });
+  return { ok: true, saved: saved };
+}
+function setColExempt(b) {
+  var course = String(b.course || ""), act = clean(b.activity, 80);
+  if (COURSES.indexOf(course) < 0) return { ok: false, error: "Unknown class." };
+  if (!/^[a-z0-9][a-z0-9-]{0,79}$/.test(act)) return { ok: false, error: "Missing the activity." };
+  withLock(function (sh) {
+    var c = cols(sh.getRange(1, 1, 1, sh.getLastColumn()).getValues()[0]);
+    sh.appendRow(teacherRow(c, "col|" + course + "|" + act, course, "col-setting", "Exempt everyone (dashboard)", "col", "Teacher",
+      { activity: act, exempt: !!b.exempt }));
+  });
+  return { ok: true };
+}
+
 // ---------- Student feedback cards ----------
 // Returns only level + the student-facing sentence for turn-ins whose private Receipt matches.
 function feedback(b) {
@@ -200,7 +291,7 @@ function initialOf(n) { var p = String(n || "").trim().split(/\s+/); return p.le
 function courseRows(course) {
   var data = sheet().getDataRange().getValues(), c = cols(data[0]);
   var kindCol = ("Kind" in c) ? c["Kind"] : c["Type"];
-  var roster = [], rosterAt = -1, rows = [], links = {}, pins = {};
+  var roster = [], rosterAt = -1, rows = [], links = {}, pins = {}, colEx = {}, exempt = {};
   for (var i = 1; i < data.length; i++) {
     var r = data[i];
     if (String(r[c["Class"]]).trim() !== course) continue;
@@ -217,10 +308,14 @@ function courseRows(course) {
     }
     var kind = kindCol == null ? "turn-in" : String(r[kindCol] || "turn-in");
     if (kind === "link") { if (a && a.id) links[a.id] = a; continue; }   // rows are in time order, so the newest wins
+    if (kind === "col") { if (a && a.activity) colEx[a.activity] = !!a.exempt; continue; }
+    if (kind === "mark") { var who = shortName(r[c["Student"]]); exempt[id + "|" + who] = a.Mark === "EX"; continue; }   // paper grades stay teacher-only for now
+    if (kind === "paper-task") continue;
     if (kind === "progress" || kind === "roster" || !id) continue;
     rows.push({ name: shortName(r[c["Student"]]), id: id, at: isNaN(when) ? "" : new Date(when).toISOString(), a: a });
   }
-  return { roster: roster, rows: rows, links: links, pins: pins };
+  var exAll = Object.keys(colEx).filter(function (k) { return colEx[k]; });
+  return { roster: roster, rows: rows, links: links, pins: pins, exemptAll: exAll, exempt: exempt };
 }
 function classList(b) {
   var course = String(b.course || "");
@@ -232,7 +327,7 @@ function classList(b) {
     return !l.removed && /^https:\/\//i.test(String(l.url || "")) && !/answer key|teacher key|summative/i.test(String(l.title || ""));
   }).map(function (l) { return { id: String(l.id), part: +l.part === 1 ? 1 : 2, unit: +l.unit || 0, day: +l.day || 0, title: String(l.title), url: String(l.url) }; });
   // Names are NOT sent: students sign in with their PIN (pin_login), so no class list is ever public.
-  return { ok: true, names: [], links: links, pins: true };
+  return { ok: true, names: [], links: links, pins: true, exemptAll: d.exemptAll };
 }
 function myWork(b) {
   var course = String(b.course || "");
@@ -263,7 +358,9 @@ function myWork(b) {
     items.push({ id: r.id, at: r.at, ft: String(a["First-try correct"] || ""), written: flagged ? 0 : (t || ai), teacher: !!t,
                  flagged: flagged, feedback: flagged ? "" : fb.slice(0, 600) });
   });
-  return { ok: true, name: me, items: items, classDone: Object.keys(done) };
+  // Activities you exempted just this student from (EX on the dashboard).
+  var myEx = Object.keys(d.exempt).filter(function (k) { return d.exempt[k] && k.slice(k.indexOf("|") + 1) === me; }).map(function (k) { return k.slice(0, k.indexOf("|")); });
+  return { ok: true, name: me, items: items, classDone: Object.keys(done), exempt: myEx, exemptAll: d.exemptAll };
 }
 
 // ---------- Student PINs ----------

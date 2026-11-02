@@ -34,7 +34,7 @@ kbd{background:#fff;border:1px solid #cfc5b3;border-bottom-width:2px;border-radi
 <main>
 <p class="eyebrow">Teacher dashboard · quick update</p>
 <h1>Update your Teacher Tools</h1>
-<p class="lead">This locks students' grades behind a private <b>PIN</b> for each student, stops anyone from guessing your teacher code, and keeps your class lists off the public site. About 5 minutes. Use your <b>school</b> Google account.</p>
+<p class="lead"><b>New (Nov 2):</b> this adds <b>paper grades</b> and <b>exempt (EX)</b> to your dashboard. It keeps everything from before (student PINs, links, class lists). About 2 minutes. Use your <b>school</b> Google account.</p>
 <h2 style="color:var(--navy);font-size:1.25rem;margin:18px 0 8px">Part 1 · Teacher Tools</h2>
 <ol>
   <li id="s1"><b>Copy the new Teacher Tools script.</b><br><button class="btn" id="copyBtn">Copy the script</button><span class="st" id="copySt" aria-live="polite"></span></li>
@@ -46,6 +46,7 @@ kbd{background:#fff;border:1px solid #cfc5b3;border-bottom-width:2px;border-radi
   <li id="s5"><b>Check that it worked.</b><br><button class="btn navy" id="checkBtn">Check it</button><div class="st" id="result" aria-live="polite"></div></li>
 </ol>
 <h2 style="color:var(--navy);font-size:1.25rem;margin:18px 0 8px">Part 2 · Turn-in saver + a new teacher code</h2>
+<p class="lead">Already did Part 2 before (when you set up PIN slips)? <b>Skip it.</b> This update doesn't change the turn-in saver.</p>
 <ol>
   <li id="t1"><b>Copy the new turn-in saver script.</b><br><button class="btn" id="copySaver">Copy the script</button><span class="st" id="saverSt" aria-live="polite"></span></li>
   <li id="t2"><b>Open its script.</b> In Google Drive, open your <b>Class Turn-ins</b> sheet → <b>Extensions</b> → <b>Apps Script</b>.</li>
@@ -66,7 +67,7 @@ $("copyBtn").onclick = async () => {
   const st = $("copySt");
   try {
     const code = await fetch("../shared/google-saver/TeacherTools.gs", { cache: "no-store" }).then(r => { if (!r.ok) throw 0; return r.text(); });
-    if (!/pin_login/.test(code) || !/set_link/.test(code)) throw 0;
+    if (!/pin_login/.test(code) || !/set_link/.test(code) || !/setMarks/.test(code)) throw 0;
     await navigator.clipboard.writeText(code);
     st.className = "st ok"; st.textContent = "Copied! Now do step 2.";
     $("s1").classList.add("done");
@@ -90,14 +91,14 @@ $("checkBtn").onclick = async () => {
   out.className = "st"; out.textContent = "Checking…";
   try {
     const ver = await fetch(URL_, { method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify({ action: "version" }) }).then(r => r.json()).catch(() => ({}));
-    if (!(ver.ok && (ver.can || []).includes("pins"))) {
+    if (!(ver.ok && (ver.can || []).includes("paper"))) {
       out.className = "st bad";
       out.innerHTML = "Not updated yet. Google is still running the old version. Redo step 4 and make sure you pick <b>New version</b> before Deploy. Then check again.";
       return;
     }
     ["s3", "s4", "s5"].forEach(id => $(id).classList.add("done"));
     out.className = "st ok";
-    out.innerHTML = "✅ Part 1 worked! Students now need their PIN to see grades. Now do Part 2 below.";
+    out.innerHTML = "✅ It worked! Paper grades and exempt are on. (Only do Part 2 if you never did it before.)";
   } catch (e) {
     out.className = "st bad"; out.textContent = "Couldn't reach Google. Check your internet and try again.";
   }

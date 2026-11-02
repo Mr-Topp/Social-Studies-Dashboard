@@ -18,6 +18,7 @@ Activity | Kind | Page | Source | Answers. Always find the columns by header nam
 4. Skip grading a row when (it may still need the AI check in 3b):
    - Answers already has `"AI level"` or `"AI graded"`, or
    - Kind is not `turn-in` (for example `progress`), or
+     (Rows with Kind `mark`, `paper-task` or `col` are the teacher's own paper grades and exemptions: never grade them and never give them the AI check.)
    - Answers does not parse as JSON.
 5. If a row has **no student-written text** (only multiple choice, sequences, matches, scores), mark it so it's
    not checked again: add only `"AI graded":"no written answer"` (no level). The dashboard ignores that.

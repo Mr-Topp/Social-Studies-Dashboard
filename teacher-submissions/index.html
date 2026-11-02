@@ -185,6 +185,37 @@ td.inclass{background:#eef5ef;color:#1f5e2c;text-align:center}td.inclass .lvl{di
 @media (max-width:760px){.todo{grid-template-columns:1fr}.linkform input[name=title],.linkform input[name=url]{width:100%}.tab.todotab{margin-left:0}}
 .stdn{cursor:help;text-decoration:underline dotted;text-underline-offset:2px}
 .testtag{display:block;width:max-content;margin-top:2px;background:#dbe8fb;color:#1c3f78;border-radius:6px;padding:0 6px;font-weight:800;font-size:.72rem;letter-spacing:.04em}
+/* Paper grades + exemptions */
+td.paper{padding:3px 4px;min-width:72px}
+td.paper input{width:58px;text-align:center;font:900 1.05rem system-ui;padding:6px 2px;border:1.5px dashed #c9bda6;background:#fffdf8}
+td.paper input:focus{border-style:solid}
+td.paper.l4 input{background:#dbe8fb;color:#1c3f78;border-style:solid;border-color:#b7cdee}
+td.paper.l3 input{background:#dff0e2;color:#1f5e2c;border-style:solid;border-color:#b9dcc0}
+td.paper.l2 input{background:#fff1c9;color:#7a5a00;border-style:solid;border-color:#ecd690}
+td.paper.l1 input{background:#f8dcd8;color:#8e2a20;border-style:solid;border-color:#e9b9b2}
+td.paper.ex input,td.ex button.mk{background:#ecebe8;color:#5d6670;border-style:solid;border-color:#d6d3cc}
+td.paper.mm input{background:#fff;color:#a33d36;border:2px solid #a33d36}
+td.ex{background:#f3f2ef;color:#5d6670;font-weight:900}
+button.mk{background:transparent;color:#b9ad97;font:800 .95rem system-ui;padding:6px 10px;min-width:56px}
+button.mk:hover{background:#f1ebde;color:var(--navy)}
+td.ex button.mk{color:#5d6670;border:1px solid #d6d3cc}
+th .papertag{display:block;font-size:.68rem;font-weight:900;color:#7a5a00;letter-spacing:.04em}
+th .extag{display:block;font-size:.68rem;font-weight:900;color:#5d6670}
+th.exall{background:#e9e7e1!important;color:#5d6670}
+button.colmenu{background:transparent;color:var(--navy);padding:0 6px;font-size:1.1rem;line-height:1.2;margin-left:2px}
+button.colmenu:hover{background:#e7e0d1}
+.pop{position:absolute;z-index:20;background:#fff;border:1px solid var(--line);border-radius:10px;box-shadow:0 6px 20px rgba(0,0,0,.15);padding:6px;min-width:220px;max-width:300px}
+.pop p{margin:4px 6px 6px;font-size:.82rem;color:var(--muted)}
+.pop button{display:block;width:100%;text-align:left;margin:2px 0;background:#f4efe4;color:var(--navy);font-size:.9rem}
+.pop button.danger{background:#f8dcd8;color:#8e2a20}
+.paperbox{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin:0 0 12px}
+.paperbox h3{margin:0 0 6px;color:var(--navy);font-size:1.05rem}
+.paperbox .prow{display:flex;gap:10px;flex-wrap:wrap;align-items:flex-end}
+.paperbox label{display:flex;flex-direction:column;gap:3px;font-size:.85rem}
+.paperbox input[name=title]{width:min(340px,80vw)}
+.savechip{font-size:.85rem;font-weight:800;color:var(--muted);align-self:center;margin-left:4px}
+.savechip.bad{color:#a33d36}.savechip.ok{color:#2f6b3a}
+.savechip button{padding:4px 10px;font-size:.8rem;margin-left:6px}
 </style>
 </head>
 <body>
@@ -228,7 +259,10 @@ td.inclass{background:#eef5ef;color:#1f5e2c;text-align:center}td.inclass .lvl{di
     <button class="light" id="masteryView" aria-pressed="false">Standards</button>
     <button class="light" id="listView" aria-pressed="false">Answers</button>
     <button class="light" id="csvBtn" disabled>⬇ CSV</button>
+    <button id="paperBtn" hidden>＋ Paper grades</button>
+    <span class="savechip" id="saveChip" role="status" aria-live="polite"></span>
   </div>
+  <div id="paperBox" class="paperbox" hidden></div>
   <div class="row" id="filters" hidden style="margin-bottom:10px">
     <input id="search" placeholder="Search student" aria-label="Search student">
     <select id="assignment" aria-label="Activity"></select>
@@ -312,12 +346,19 @@ async function load() {
   LINKS = {};
   got.filter(r => r.kind === "link").sort((a, b) => a.submittedAt.localeCompare(b.submittedAt)).forEach(r => { const a = r.answers || {}; if (a.id) LINKS[a.id] = a; });
   applyLinks(); loaded = true;
-  got.filter(r => r.kind !== "progress" && r.kind !== "roster" && r.kind !== "link").forEach(r => {
+  // Paper columns, paper grades / EX / M, and "Exempt everyone" (rows saved from this dashboard). Newest row wins.
+  PAPER = {}; MARKS = {}; COLEX = {};
+  const asc = list => list.sort((a, b) => a.submittedAt.localeCompare(b.submittedAt));
+  asc(got.filter(r => r.kind === "paper-task")).forEach(r => { const a = r.answers || {}; if (a.id) PAPER[a.id] = a; });
+  asc(got.filter(r => r.kind === "col")).forEach(r => { const a = r.answers || {}; if (a.activity) COLEX[r.course + "|" + a.activity] = !!a.exempt; });
+  asc(got.filter(r => r.kind === "mark")).forEach(r => { const a = r.answers || {}, v = /^[1-4]$/.test(String(a["Teacher level"] || "")) ? String(a["Teacher level"]) : String(a.Mark || ""); MARKS[r.course + "|" + r.assignmentId + "|" + r.typedName] = { v, at: r.submittedAt }; });
+  applyPaper();
+  got.filter(r => !TEACHER_KINDS.includes(r.kind)).forEach(r => {
     const key = r.submittedAt.slice(0, 16) + "|" + r.studentName.toLowerCase() + "|" + r.assignmentId;
     if (!seen.has(key) || r.source === "google") seen.set(key, r);
   });
-  rows = [...seen.values()].sort((a, b) => b.submittedAt.localeCompare(a.submittedAt));
-  mergeNames();
+  baseRows = [...seen.values()];
+  rebuildRows();
   if (got.length) sessionStorage.setItem("teacher-code", code);
   $("status").innerHTML = rows.length + " turn-ins loaded" + (notes.some(n => /warn/.test(n)) ? " (" + notes.join(" · ") + ")" : "") + ".";
   $("importPanel").hidden = !(GOOGLE && READ_OLD_SITE && oldRows.length);
@@ -325,6 +366,247 @@ async function load() {
 }
 
 function tabRows(t) { return rows.filter(r => r.course === t); }
+
+// ================= Paper grades + exemptions (works like PowerSchool) =================
+// Paper column = printed work on a lesson day. Type 1-4 in a box, EX = exempt, M = missing. Saves by itself.
+// "Exempt everyone" (any activity, online or paper) takes it out of averages, standards and Missing for the whole class.
+// Exempt one student: click their "—" box. Everything is saved in your Google Sheet through Teacher Tools.
+const TEACHER_KINDS = ["progress", "roster", "link", "paper-task", "mark", "col"];
+let baseRows = [], PAPER = {}, MARKS = {}, COLEX = {};
+const pend = {}, pendMeta = {};   // boxes typed but not saved yet: "course|activity|student" -> value
+let flushing = false, flushTimer = null, saveErr = "";
+function applyPaper() {
+  Object.keys(REG).filter(id => REG[id].paper).forEach(id => delete REG[id]);
+  Object.values(PAPER).forEach(p => {
+    if (p.removed || !COURSES[p.course]) return;
+    REG["paper-" + p.id] = Object.assign({ course: p.course, unit: +p.unit, day: +p.day, title: "Day " + p.day + " · " + p.title + " (Paper)", std: p.std || [], paper: true, paperId: p.id }, +p.part === 1 ? { part: 1 } : {});
+  });
+}
+const mkKey = (course, id, s) => course + "|" + id + "|" + s;
+const markOf = (course, id, s) => { const k = mkKey(course, id, s); return k in pend ? pend[k] : ((MARKS[k] || {}).v || ""); };
+const colEx = (course, id) => !!COLEX[course + "|" + id];
+const isEx = (course, id, s) => colEx(course, id) || markOf(course, id, s) === "EX";
+const counted = list => list.filter(r => !isEx(r.course, r.assignmentId, r.studentName));
+// Turn-ins + one pretend "turn-in" per paper grade (so averages, standards and CSVs treat paper work like any other day).
+function rebuildRows() {
+  const paper = [];
+  Object.entries(MARKS).forEach(([k, m]) => {
+    if (!/^[1-4]$/.test(m.v)) return;
+    const [course, id, ...rest] = k.split("|"), s = rest.join("|");
+    if (!REG[id] || !REG[id].paper) return;
+    paper.push({ studentName: s, typedName: s, assignmentId: id, assignmentTitle: REG[id].title, course, submittedAt: m.at || new Date().toISOString(), answers: { "Teacher level": m.v, "Teacher note": "Paper grade" }, kind: "mark", source: "google" });
+  });
+  rows = baseRows.concat(paper).sort((a, b) => b.submittedAt.localeCompare(a.submittedAt));
+  mergeNames();
+}
+// Redraw without losing your place: keeps each table's scroll and the box you were typing in.
+function renderKeep() {
+  const wraps = [...document.querySelectorAll("#out .gridwrap")].map(w => [w.scrollLeft, w.scrollTop]);
+  const f = document.activeElement, fs = f && f.dataset ? { s: f.dataset.s, a: f.dataset.a, cls: f.className } : null, y = window.scrollY;
+  render();
+  document.querySelectorAll("#out .gridwrap").forEach((w, i) => { if (wraps[i]) { w.scrollLeft = wraps[i][0]; w.scrollTop = wraps[i][1]; } });
+  window.scrollTo(0, y);
+  if (fs && fs.s && fs.cls === "pg") { const el = [...document.querySelectorAll("#out input.pg")].find(x => x.dataset.s === fs.s && x.dataset.a === fs.a); if (el) { el.focus({ preventScroll: true }); el.select(); } }
+}
+function chip(state, msg) {
+  const c = $("saveChip"); if (!c) return;
+  c.className = "savechip" + (state === "bad" || state === "warn" ? " bad" : state === "ok" ? " ok" : "");
+  c.innerHTML = state === "bad" ? "⚠ " + safe(msg) + (Object.keys(pend).length ? ` <button class="light" id="retrySave">Try again</button>` : "") : state === "warn" ? "⚠ " + safe(msg) : safe(msg || "");
+  const r = $("retrySave"); if (r) r.onclick = () => flushMarks();
+  if (state === "ok") { clearTimeout(chip.t); chip.t = setTimeout(() => { if (c.textContent.startsWith("✓")) c.textContent = ""; }, 3000); }
+}
+function queueMark(course, id, s, value) {
+  const k = mkKey(course, id, s);
+  pend[k] = value; pendMeta[k] = { course, activity: id, student: s, title: (REG[id] && REG[id].title) || id };
+  chip("", "Saving…");
+  clearTimeout(flushTimer); flushTimer = setTimeout(flushMarks, 700);
+}
+const needUpdate = msg => /unknown request/i.test(msg) ? `Teacher Tools needs a quick update first: <a href="update-teacher-tools.html">2-minute update</a>` : safe(msg);
+async function flushMarks() {
+  clearTimeout(flushTimer);
+  if (flushing) { flushTimer = setTimeout(flushMarks, 400); return; }
+  const keys = Object.keys(pend); if (!keys.length) return;
+  if (!TOOLS_URL || !loaded) { chip("bad", "Not saved: enter your code at the top first."); return; }
+  flushing = true; chip("", "Saving " + keys.length + "…");
+  const sent = {}; keys.forEach(k => sent[k] = pend[k]);
+  const byCourse = {};
+  keys.forEach(k => { const m = pendMeta[k]; (byCourse[m.course] = byCourse[m.course] || []).push({ activity: m.activity, student: m.student, value: sent[k], title: m.title }); });
+  try {
+    for (const course of Object.keys(byCourse)) {
+      const d = await tools("marks", { course, items: byCourse[course] });
+      const at = {}; (d.saved || []).forEach(x => at[mkKey(course, x.activity, x.student)] = x.at);
+      byCourse[course].forEach(it => {
+        const k = mkKey(course, it.activity, it.student);
+        MARKS[k] = { v: it.value, at: at[k] || (MARKS[k] || {}).at || new Date().toISOString() };
+        if (pend[k] === sent[k]) { delete pend[k]; delete pendMeta[k]; }
+      });
+    }
+    saveErr = ""; flushing = false; rebuildRows(); renderKeep(); chip("ok", "✓ Saved");
+    if (Object.keys(pend).length) flushTimer = setTimeout(flushMarks, 300);
+  } catch (e) {
+    flushing = false; saveErr = e.message;
+    const c = $("saveChip"); chip("bad", "Not saved yet. Your typing is kept."); if (c && /unknown request/i.test(e.message)) c.innerHTML = "⚠ " + needUpdate(e.message);
+  }
+}
+window.addEventListener("beforeunload", e => { if (Object.keys(pend).length || flushing) { e.preventDefault(); e.returnValue = ""; } });
+// What you type in a paper box -> "1".."4", "EX", "M", "" (blank). null = not allowed.
+function readBox(raw) {
+  const v = String(raw || "").toUpperCase().replace(/\s/g, "");
+  if (!v) return "";
+  if (/[1-4]$/.test(v)) return v.slice(-1);
+  if (/^(E|X|EX)$/.test(v)) return "EX";
+  if (/^M$/.test(v)) return "M";
+  return null;
+}
+const boxCls = v => /^[1-4]$/.test(v) ? LCLS(+v) : v === "EX" ? "ex" : v === "M" ? "mm" : "";
+// Small menu next to a button.
+function popMenu(anchor, html, wire) {
+  closePop();
+  const p = document.createElement("div"); p.className = "pop"; p.id = "pop"; p.innerHTML = html;
+  document.body.appendChild(p);
+  const r = anchor.getBoundingClientRect();
+  p.style.top = (window.scrollY + r.bottom + 4) + "px";
+  p.style.left = Math.max(8, Math.min(window.scrollX + r.left, window.scrollX + document.documentElement.clientWidth - p.offsetWidth - 8)) + "px";
+  wire(p); const first = p.querySelector("button"); if (first) first.focus();
+  setTimeout(() => document.addEventListener("click", outsidePop), 0);
+}
+function outsidePop(e) { const p = $("pop"); if (p && !p.contains(e.target)) closePop(); }
+function closePop() { const p = $("pop"); if (p) p.remove(); document.removeEventListener("click", outsidePop); }
+document.addEventListener("keydown", e => { if (e.key === "Escape") closePop(); });
+async function setColExempt(id, on) {
+  if (!TOOLS_URL || !loaded) { chip("bad", "Enter your code at the top first."); return; }
+  chip("", "Saving…");
+  try { await tools("col_exempt", { course: tab, activity: id, exempt: on }); COLEX[tab + "|" + id] = on; renderKeep(); chip("ok", on ? "✓ Everyone is exempt from " + titleOf({ assignmentId: id }).replace(/^Days? [\d–-]+ · /, "") : "✓ No longer exempt"); }
+  catch (e) { chip("bad", e.message); const c = $("saveChip"); if (/unknown request/i.test(e.message)) c.innerHTML = "⚠ " + needUpdate(e.message); }
+}
+function wireGridExtras(list) {
+  const out = $("out");
+  out.querySelectorAll("input.pg").forEach(inp => {
+    inp.dataset.prev = inp.value;
+    inp.addEventListener("focus", () => inp.select());
+    inp.addEventListener("mouseup", e => e.preventDefault());
+    inp.addEventListener("input", () => {
+      const v = readBox(inp.value);
+      if (v === null) { inp.value = inp.dataset.prev; inp.title = "Type 1, 2, 3 or 4 · EX = exempt · M = missing"; chip("warn", "Only 1–4, EX or M go in a paper box."); inp.select(); return; }
+      inp.value = v; inp.dataset.prev = v; inp.parentElement.className = "paper " + boxCls(v);
+      queueMark(tab, inp.dataset.a, inp.dataset.s, v);
+      if (/^[1-4]$|^M$/.test(v) || v === "EX") inp.select();
+    });
+    inp.addEventListener("keydown", e => {
+      if (e.key === "Enter" || e.key === "ArrowDown" || e.key === "ArrowUp") {
+        e.preventDefault();
+        const col = [...out.querySelectorAll("input.pg")].filter(x => x.dataset.a === inp.dataset.a && x.closest("table") === inp.closest("table"));
+        const i = col.indexOf(inp) + (e.key === "ArrowUp" ? -1 : 1);
+        if (col[i]) col[i].focus(); else flushMarks();
+      }
+    });
+    inp.addEventListener("blur", () => { if (Object.keys(pend).length) { clearTimeout(flushTimer); flushTimer = setTimeout(flushMarks, 300); } });
+  });
+  // Exempt one student on an online activity: click their box.
+  out.querySelectorAll("button.mk").forEach(b => b.onclick = e => {
+    e.stopPropagation();
+    const s = b.dataset.s, id = b.dataset.a, on = markOf(tab, id, s) === "EX", name = titleOf({ assignmentId: id }).replace(/^Days? [\d–-]+ · /, "");
+    popMenu(b, `<p><b>${safe(s)}</b> · ${safe(name)}</p>` + (on ? `<button data-do="un">Not exempt anymore</button>` : `<button data-do="ex">Exempt ${safe(s)} (EX)</button><p>EX doesn't count for or against them, and it won't show as missing.</p>`) + `<button data-do="x" class="light">Cancel</button>`,
+      p => p.querySelectorAll("button").forEach(x => x.onclick = () => { closePop(); if (x.dataset.do === "x") return; queueMark(tab, id, s, x.dataset.do === "ex" ? "EX" : ""); flushMarks(); renderKeep(); }));
+  });
+  // Column menu (⋮): exempt everyone, fill blanks with M, remove a paper column.
+  out.querySelectorAll("button.colmenu").forEach(b => b.onclick = e => {
+    e.stopPropagation();
+    const id = b.dataset.a, a = REG[id] || {}, on = colEx(tab, id), name = titleOf({ assignmentId: id }).replace(/^Days? [\d–-]+ · /, "");
+    const blanks = a.paper ? [...b.closest("table").querySelectorAll("input.pg")].filter(x => x.dataset.a === id && !x.value) : [];
+    popMenu(b, `<p><b>${safe(name)}</b></p>` +
+      (on ? `<button data-do="unall">Stop exempting everyone</button>` : `<button data-do="exall">Exempt everyone (EX)</button><p>Use this if you decided not to do it. It stops counting in grades, standards and Missing. Nothing is deleted.</p>`) +
+      (a.paper ? `<button data-do="fillm"${blanks.length ? "" : " disabled"}>Mark the ${blanks.length} empty ${blanks.length === 1 ? "box" : "boxes"} M (missing)</button><button data-do="rm" class="danger">Remove this paper column</button>` : "") +
+      `<button data-do="x" class="light">Cancel</button>`,
+      p => p.querySelectorAll("button").forEach(x => x.onclick = async ev => {
+        ev.stopPropagation();
+        const act = x.dataset.do;
+        if (act === "x") return closePop();
+        if (act === "exall" || act === "unall") { closePop(); return setColExempt(id, act === "exall"); }
+        if (act === "fillm") { closePop(); blanks.forEach(i => queueMark(tab, id, i.dataset.s, "M")); flushMarks(); renderKeep(); return; }
+        if (act === "rm") {
+          if (!x.dataset.sure) { x.dataset.sure = "1"; x.textContent = "Click again to remove it (typed grades stay saved in your Sheet)"; return; }
+          closePop(); chip("", "Removing…");
+          try { await tools("paper_task", { id: a.paperId, course: tab, remove: true }); PAPER[a.paperId].removed = true; applyPaper(); rebuildRows(); renderKeep(); chip("ok", "✓ Column removed"); }
+          catch (err) { chip("bad", err.message); }
+        }
+      }));
+  });
+}
+
+// ---- The "＋ Paper grades" box: pick unit + day, name it, pick the standard ----
+const cleanPaperName = t => String(t || "").replace(/^Days? [\d–-]+ · /, "").replace(/\s*\((Printed|Word|Paper)\)\s*/gi, " ").replace(/\s+/g, " ").trim();
+function unitChoices(course) {
+  const out = [], p1 = UNITS_P1[course] || {}, p2 = UNITS[course] || {};
+  Object.keys(p1).forEach(u => out.push(+u - 100)); Object.keys(p2).forEach(u => out.push(+u));
+  Object.keys(REG).forEach(id => { if (REG[id].course === course) { const u = unitOf(id); if (u && !out.includes(u)) out.push(u); } });
+  return out.sort((a, b) => a - b);
+}
+function dayChoices(course, key) {
+  const part1 = key < 0, unit = part1 ? key + 100 : key, cal = !part1 && ((window.CLASS_CALENDAR || {})[course] || {})[unit];
+  let n = cal ? cal.days : 0;
+  Object.keys(REG).forEach(id => { if (REG[id].course === course && unitOf(id) === key && REG[id].day) n = Math.max(n, REG[id].day); });
+  return Array.from({ length: Math.max(n, 1) }, (_, i) => {
+    const d = i + 1, w = dayDate(course, part1, unit, d, cal && d === cal.days);
+    return { d, iso: w && w.iso, label: "Day " + d + (w ? " · " + niceDay(w.iso) : "") + (cal && d === cal.days ? " · Summative" : "") };
+  });
+}
+function dayStuff(course, key, d) {
+  const same = Object.keys(REG).filter(id => REG[id].course === course && unitOf(id) === key && REG[id].day === d && !REG[id].paper);
+  const names = same.filter(id => /^https?:/.test(REG[id].path || "") && !/answer key|teacher key/i.test(REG[id].title) && !/-key$/.test(id) && !/blooket|youtube|icivics\.org\/resources\/game/i.test(REG[id].path))
+    .sort((a, b) => (/printed/i.test(REG[b].title) ? 1 : 0) - (/printed/i.test(REG[a].title) ? 1 : 0)).map(id => cleanPaperName(REG[id].title));
+  const std = []; same.forEach(id => (REG[id].std || []).forEach(c => { if (!std.includes(c)) std.push(c); }));
+  const unitStd = []; Object.keys(REG).filter(id => REG[id].course === course && unitOf(id) === key).forEach(id => (REG[id].std || []).forEach(c => { if (!unitStd.includes(c)) unitStd.push(c); }));
+  return { names: [...new Set(names)], std, unitStd };
+}
+function openPaperBox() {
+  const box = $("paperBox"), course = tab, units = unitChoices(course);
+  if (!units.length) { box.hidden = false; box.innerHTML = `<p class="status">No units set up for ${safe(COURSES[course])} yet.</p>`; return; }
+  const pin = (window.CLASS_TODAY || {})[course];
+  let key = pin && units.includes(pin.unit) ? pin.unit : (units.find(u => u > 0) || units[0]);
+  const draw = (keepDay) => {
+    const days = dayChoices(course, key);
+    let day = keepDay || (days.filter(x => x.iso && x.iso <= TODAY).pop() || days[0]).d;
+    const cal = key > 0 && ((window.CLASS_CALENDAR || {})[course] || {})[key], summ = cal && day === cal.days;
+    const st = dayStuff(course, key, day), useStd = st.std.length ? st.std : summ ? st.unitStd : [];
+    const nameGuess = st.names[0] || (summ ? "Unit " + key + " Test" : "");
+    const all = courseStandards(course);
+    box.hidden = false;
+    box.innerHTML = `<h3>📄 Add a paper column</h3><p class="status" style="margin:0 0 8px">For work students do on paper. After you add it, type 1–4 in each student's box (EX = exempt, M = missing). Enter moves down. It saves by itself.</p>
+      <form id="paperForm" novalidate><div class="prow">
+        <label>Unit <select name="unit">${units.map(u => `<option value="${u}"${u === key ? " selected" : ""}>${safe(unitName(course, u))}</option>`).join("")}</select></label>
+        <label>Day <select name="day">${days.map(x => `<option value="${x.d}"${x.d === day ? " selected" : ""}>${safe(x.label)}</option>`).join("")}</select></label>
+        <label>What's the paper? <input name="title" maxlength="100" list="paperNames" value="${safe(nameGuess)}" placeholder="e.g. Bill of Rights worksheet"><datalist id="paperNames">${st.names.map(n => `<option value="${safe(n)}">`).join("")}</datalist></label>
+        <label>Standard <select name="std">
+          ${useStd.length ? `<option value="day" selected>${summ && !st.std.length ? "This unit's standards" : "Same as this day"} (${safe(useStd.map(shortStd).join(", "))})</option>` : ""}
+          ${all.map(c => `<option value="${safe(c)}">${safe(shortStd(c))}${STDTXT[c] ? " · " + safe(STDTXT[c].slice(0, 60)) + (STDTXT[c].length > 60 ? "…" : "") : ""}</option>`).join("")}
+          <option value=""${useStd.length ? "" : " selected"}>No standard (won't show on Standards)</option></select></label>
+      </div><div class="row" style="margin-top:10px"><button type="submit">Add column</button><button type="button" class="light" id="paperCancel">Cancel</button><span class="status" id="paperStat" aria-live="polite" style="margin:0"></span></div></form>`;
+    const f = $("paperForm");
+    f.elements.unit.onchange = () => { key = +f.elements.unit.value; draw(); };
+    f.elements.day.onchange = () => draw(+f.elements.day.value);
+    $("paperCancel").onclick = () => { box.hidden = true; };
+    f.onsubmit = async e => {
+      e.preventDefault();
+      const stat = $("paperStat"), title = f.elements.title.value.trim(), sv = f.elements.std.value;
+      if (!loaded) { stat.textContent = "Enter your code at the top first."; return; }
+      if (!TOOLS_URL) { stat.innerHTML = "Finish the " + SETUP_LINK + " first."; return; }
+      if (!title) { stat.textContent = "Give the paper a name."; f.elements.title.focus(); return; }
+      const std = sv === "day" ? useStd : sv ? [sv] : [], part1 = key < 0, unit = part1 ? key + 100 : key;
+      f.querySelectorAll("button,input,select").forEach(x => x.disabled = true); stat.textContent = "Adding…";
+      try {
+        const d = await tools("paper_task", { course, part: part1 ? 1 : 2, unit, day, title, std });
+        PAPER[d.id] = { id: d.id, course, part: part1 ? 1 : 2, unit, day, title, std, removed: false };
+        applyPaper(); box.hidden = true; render();
+        const first = [...document.querySelectorAll("#out input.pg")].find(x => x.dataset.a === "paper-" + d.id);
+        if (first) { first.scrollIntoView({ block: "center", inline: "center" }); first.focus({ preventScroll: true }); }
+        chip("ok", "✓ Added. Type a grade in each box.");
+        if (!rosterOf(course).length) chip("bad", "Added, but there's no class list yet, so there are no boxes. Open Needs attention → Edit class list.");
+      } catch (err) { f.querySelectorAll("button,input,select").forEach(x => x.disabled = false); stat.innerHTML = needUpdate(err.message); }
+    };
+  };
+  draw();
+}
 
 // ---- Class lists and name clean-up ----
 let rosters = {};
@@ -378,7 +660,8 @@ function attentionHtml(list) {
     const done = new Set(list.filter(r => r.studentName === s).map(r => r.assignmentId));
     if (!done.size) { if (roster.includes(s)) none.push(s); return; }
     Object.keys(DONE_ALL).forEach(id => done.add(id));   // everyone gets credit for these
-    const miss = due.filter(id => !done.has(id));
+    const miss = due.filter(id => !done.has(id) && !isEx(tab, id, s))
+      .concat(Object.keys(REG).filter(id => REG[id].paper && REG[id].course === tab && markOf(tab, id, s) === "M"));   // paper boxes marked M
     if (miss.length >= 2) missing.push(`<li><b>${safe(s)}</b> · missing ${miss.length}: ${safe(miss.slice(0, 3).map(id => REG[id].title.split(" · ")[0]).join(", "))}${miss.length > 3 ? "…" : ""}</li>`);
   });
   const count = flags.length + ones.length + missing.length + none.length, parts = [];
@@ -721,8 +1004,8 @@ function renderTabs() {
 // 90%+ = on track for 3 (teacher confirms 3/4 with written work or the unit test) · 70–89% = 2 · under 70% = 1 · nothing turned in = no evidence (credit needs at least a 1).
 const STDTXT = window.CLASS_STANDARDS || {};
 // One short color key for the grade views; the full explanation sits behind "How grades work".
-const KEYLINE = `<div class="keyline"><span><i class="sw" style="background:#dbe8fb"></i>4</span><span><i class="sw" style="background:#dff0e2"></i>3</span><span><i class="sw" style="background:#fff1c9"></i>2</span><span><i class="sw" style="background:#f8dcd8"></i>1</span><span>Check = not graded yet</span><span>⚠ = flagged</span><span>— = nothing yet</span></div>`;
-const HOWTO = `<details class="mini"><summary>How grades work</summary><p>Each activity gets one level: its first-try score (90%+ = 3, 70–89% = 2, under 70% = 1) averaged with the AI grade of the written answers (1–4), rounded down. Your own grade replaces the AI grade.</p><p>A real 3 needs a written answer. 90%+ with no written answer shows as “On track for 3.”</p><p>Hover a box for the details. Click it to read the student's answers and change the grade.</p></details>`;
+const KEYLINE = `<div class="keyline"><span><i class="sw" style="background:#dbe8fb"></i>4</span><span><i class="sw" style="background:#dff0e2"></i>3</span><span><i class="sw" style="background:#fff1c9"></i>2</span><span><i class="sw" style="background:#f8dcd8"></i>1</span><span>Check = not graded yet</span><span>⚠ = flagged</span><span>— = nothing yet</span><span>EX = exempt</span><span>M = missing</span></div>`;
+const HOWTO = `<details class="mini"><summary>How grades work</summary><p>Each activity gets one level: its first-try score (90%+ = 3, 70–89% = 2, under 70% = 1) averaged with the AI grade of the written answers (1–4), rounded down. Your own grade replaces the AI grade.</p><p>A real 3 needs a written answer. 90%+ with no written answer shows as “On track for 3.”</p><p>Hover a box for the details. Click it to read the student's answers and change the grade.</p><p><b>Paper work:</b> click <b>＋ Paper grades</b>, pick the day, then type 1–4 in each box (EX = exempt, M = missing). Enter moves down. It saves by itself.</p><p><b>Exempt:</b> click a student's “—” box to exempt just them, or use a column's <b>⋮</b> menu to exempt everyone. Exempt work doesn't count in averages, standards or Missing.</p></details>`;
 const STD_RE = /SS\.9-12\.(?:WH|US|Gov|Soc)\.\d+/g;
 const shortStd = c => c.replace("SS.9-12.", "");
 function stdsOf(r) { const got = String((r.answers || {}).Standard || "").match(STD_RE); return [...new Set(got && got.length ? got : (REG[r.assignmentId] && REG[r.assignmentId].std) || [])]; }
@@ -760,7 +1043,7 @@ function courseStandards(course) {
 // { student: { code: { items: [{title, g}], levels: [], written: bool, unscored } } } using each student's latest turn-in per assignment.
 function masteryData(list) {
   const latest = new Map();
-  list.forEach(r => { const k = r.studentName + "|" + r.assignmentId; if (!latest.has(k)) latest.set(k, r); });
+  counted(list).forEach(r => { const k = r.studentName + "|" + r.assignmentId; if (!latest.has(k)) latest.set(k, r); });
   const out = {};
   latest.forEach(r => {
     const g = dayGrade(r), s = out[r.studentName] = out[r.studentName] || {};
@@ -871,6 +1154,8 @@ function render() {
   $("listView").setAttribute("aria-pressed", view === "list");
   $("masteryView").setAttribute("aria-pressed", view === "mastery");
   $("filters").hidden = view !== "list";
+  $("paperBtn").hidden = view !== "grid";
+  if (view !== "grid" || $("paperBox").dataset.tab !== tab) $("paperBox").hidden = true;
   const sel = $("assignment"), keep = sel.value;
   sel.innerHTML = '<option value="all">All activities</option>' + byUnit(activitiesFor(list), tab).map(g => `<optgroup label="${safe(g.name)}">${g.ids.map(id => `<option value="${safe(id)}">${safe(titleOf({ assignmentId: id }))}</option>`).join("")}</optgroup>`).join("");
   sel.value = [...sel.options].some(o => o.value === keep) ? keep : "all";
@@ -889,8 +1174,15 @@ function visible() {
 function renderGrid(list) {
   const students = [...new Set([...rosterOf(tab), ...list.map(r => r.studentName)])].sort((a, b) => a.localeCompare(b));
   const cell = (s, id) => {
+    if (REG[id] && REG[id].paper) {
+      const v = colEx(tab, id) ? "EX" : markOf(tab, id, s);
+      if (colEx(tab, id)) return `<td class="ex" title="Everyone is exempt from this (column menu ⋮ to undo)">EX</td>`;
+      return `<td class="paper ${boxCls(v)}"><input class="pg" data-s="${safe(s)}" data-a="${safe(id)}" value="${safe(v)}" maxlength="2" autocomplete="off" inputmode="text" aria-label="${safe(s)} · ${safe(titleOf({ assignmentId: id }))}: type 1 to 4, EX or M" title="Type 1–4 · EX = exempt · M = missing"></td>`;
+    }
+    if (colEx(tab, id)) return `<td class="ex" title="Everyone is exempt from this (column menu ⋮ to undo)">EX</td>`;
+    if (markOf(tab, id, s) === "EX") return `<td class="ex"><button class="mk" data-s="${safe(s)}" data-a="${safe(id)}" title="Exempt. Click to change.">EX</button></td>`;
     const hits = list.filter(r => r.studentName === s && r.assignmentId === id);
-    if (!hits.length) return DONE_ALL[id] ? `<td class="done inclass" title="${safe(DONE_ALL[id])} (everyone gets credit, no score)"><b class="grade">✓</b><span class="lvl">${safe(DONE_ALL[id])}</span></td>` : `<td class="miss">—</td>`;
+    if (!hits.length) return DONE_ALL[id] ? `<td class="done inclass" title="${safe(DONE_ALL[id])} (everyone gets credit, no score)"><b class="grade">✓</b><span class="lvl">${safe(DONE_ALL[id])}</span></td>` : `<td class="miss"><button class="mk" data-s="${safe(s)}" data-a="${safe(id)}" title="Nothing turned in. Click to exempt this student.">—</button></td>`;
     const g = dayGrade(hits[0]), when = dateShort(hits[0].submittedAt) + (hits.length > 1 ? " · ×" + hits.length : "") + ((hits[0].answers || {}).Language === "Spanish" ? " · Español" : "");
     if (!g) return `<td class="done check"><button data-s="${safe(s)}" data-a="${safe(id)}" title="Not graded yet. Open to read their answers."><b class="grade">Check</b><span class="lvl">not graded yet</span><span class="when">${when}</span></button></td>`;
     const big = g.f ? g.pct + "%" : "Level " + g.ai.n;
@@ -898,8 +1190,10 @@ function renderGrid(list) {
     return `<td class="done ${LCLS(g.n)}"><button data-s="${safe(s)}" data-a="${safe(id)}" title="${safe(tip)}"><b class="grade">${big}</b><span class="lvl">${g.f ? safe(levelLabel(g.n, !!g.ai) === "On track for 3" ? "On track for 3" : "Level " + g.n) : (g.ai.teacher ? "Your grade" : "Written answer")}${g.ai && g.ai.flag && !g.ai.teacher ? " ⚠" : ""}</span><span class="when">${when}</span></button></td>`;
   };
   // Unit summary for one student: activities done + average day level.
-  const unitSum = (s, ids, inUnit) => {
-    const done = new Set([...inUnit.filter(r => r.studentName === s).map(r => r.assignmentId), ...ids.filter(id => DONE_ALL[id])]);
+  const unitSum = (s, allIds, inUnit) => {
+    const ids = allIds.filter(id => !isEx(tab, id, s));   // exempt work doesn't count either way
+    if (!ids.length) return `<td class="sum ex">EX</td>`;
+    const done = new Set([...inUnit.filter(r => r.studentName === s && ids.includes(r.assignmentId)).map(r => r.assignmentId), ...ids.filter(id => DONE_ALL[id])]);
     const lv = []; let written = false;
     ids.forEach(id => { const r = list.find(x => x.studentName === s && x.assignmentId === id); const g = r && dayGrade(r); if (g) { lv.push(g.n); if (g.ai) written = true; } });
     const avg = lv.length ? lv.reduce((a, b) => a + b, 0) / lv.length : null, n = avg === null ? null : roundDown(avg);
@@ -908,17 +1202,19 @@ function renderGrid(list) {
   // One table per unit, Unit 1 first. Each unit only shows students who turned in something in it.
   // Show every day of a unit (not just ones with turn-ins) so missing work stands out.
   const unitsUsed = new Set(list.map(r => unitOf(r.assignmentId)));
+  Object.keys(REG).forEach(id => { if (REG[id].paper && REG[id].course === tab) unitsUsed.add(unitOf(id)); });
   if (!unitsUsed.size) Object.keys(REG).forEach(id => { if (REG[id].course === tab && REG[id].path) unitsUsed.add(unitOf(id)); });
-  const units = byUnit([...new Set([...activitiesFor(list), ...Object.keys(REG).filter(id => REG[id].course === tab && REG[id].path && REG[id].turnIn !== false && unitsUsed.has(unitOf(id)))])], tab);
+  const units = byUnit([...new Set([...activitiesFor(list), ...Object.keys(REG).filter(id => REG[id].course === tab && ((REG[id].path && REG[id].turnIn !== false) || REG[id].paper) && unitsUsed.has(unitOf(id)))])], tab);
   $("out").innerHTML = KEYLINE + HOWTO +
     units.map(g => {
       const inUnit = list.filter(r => g.ids.includes(r.assignmentId));
       const who = [...new Set([...rosterOf(tab), ...inUnit.map(r => r.studentName)])].sort((a, b) => a.localeCompare(b));
       return `<section class="unitblock"><h2 class="unithead">${safe(g.name)} <span class="unitcount">${g.ids.length} ${g.ids.length === 1 ? "activity" : "activities"} · ${who.length} ${who.length === 1 ? "student" : "students"}</span></h2>
-    <div class="gridwrap"><table><thead><tr><th class="student">Student</th>${g.ids.map(id => `<th>${safe(titleOf({ assignmentId: id }))}${(REG[id] && REG[id].std || []).length ? `<small class="stdtag">${REG[id].std.map(stdCodeHover).join(" · ")}</small>` : ""}</th>`).join("")}<th>Unit so far</th></tr></thead>
-    <tbody>${who.map(s => `<tr>${studentCell(tab, s)}${g.ids.map(id => cell(s, id)).join("")}${unitSum(s, g.ids, inUnit)}</tr>`).join("")}</tbody></table></div></section>`;
+    <div class="gridwrap"><table><thead><tr><th class="student">Student</th>${g.ids.map(id => `<th${colEx(tab, id) ? ' class="exall"' : ""}>${REG[id] && REG[id].paper ? '<span class="papertag">📄 PAPER</span>' : ""}${safe(titleOf({ assignmentId: id }))}<button class="colmenu" data-a="${safe(id)}" aria-label="Options for ${safe(titleOf({ assignmentId: id }))}" title="Exempt everyone${REG[id] && REG[id].paper ? ", fill blanks, remove" : ""}">⋮</button>${colEx(tab, id) ? '<span class="extag">EX · everyone exempt</span>' : ""}${(REG[id] && REG[id].std || []).length ? `<small class="stdtag">${REG[id].std.map(stdCodeHover).join(" · ")}</small>` : ""}</th>`).join("")}<th>Unit so far</th></tr></thead>
+    <tbody>${who.length ? who.map(s => `<tr>${studentCell(tab, s)}${g.ids.map(id => cell(s, id)).join("")}${unitSum(s, g.ids, inUnit)}</tr>`).join("") : `<tr><td class="student" colspan="${g.ids.length + 2}">No students yet. Add your class list (Needs attention → Edit class list) so everyone gets a box.</td></tr>`}</tbody></table></div></section>`;
     }).join("");
   $("out").querySelectorAll("td.done button").forEach(b => b.onclick = () => { view = "list"; render(); $("search").value = b.dataset.s; $("assignment").value = b.dataset.a; render(); });
+  wireGridExtras(list);
 }
 
 function showValue(v, depth = 0) {
@@ -946,6 +1242,7 @@ function renderList(list) {
   });
 }
 function gradeBox(r, i) {
+  if (r.kind === "mark") return `<div class="gradebox"><b>Paper grade: Level ${safe((r.answers || {})["Teacher level"])}</b> <span class="status">Change it in the By day view.</span></div>`;
   const a = r.answers || {}, t = parseInt(a["Teacher level"], 10), ai = parseInt(a["AI level"], 10);
   const now = t >= 1 ? `<b>Your grade: Level ${t}</b>${a["Teacher note"] ? " · " + safe(a["Teacher note"]) : ""}${ai >= 1 ? ` <span class="status">(AI said ${ai})</span>` : ""}`
     : ai >= 1 ? `<b>AI grade: Level ${ai}</b> · ${safe(a["AI reason"] || "")}${a["AI flag"] ? ` <span class="warn">⚠ ${safe(a["AI flag"])}</span>` : ""}`
@@ -990,7 +1287,7 @@ async function copyOld() {
 $("teacherCode").value = sessionStorage.getItem("teacher-code") || "";
 $("teacherCode").addEventListener("keydown", e => { if (e.key === "Enter") load(); });
 $("loadBtn").onclick = load; $("refreshBtn").onclick = load;
-$("lockBtn").onclick = () => { sessionStorage.removeItem("teacher-code"); $("teacherCode").value = ""; rows = []; oldRows = []; LINKS = {}; loaded = false; applyLinks(); $("importPanel").hidden = true; render(); $("status").textContent = "Dashboard locked."; };
+$("lockBtn").onclick = () => { sessionStorage.removeItem("teacher-code"); $("teacherCode").value = ""; rows = []; baseRows = []; oldRows = []; LINKS = {}; PAPER = {}; MARKS = {}; COLEX = {}; loaded = false; applyLinks(); applyPaper(); $("importPanel").hidden = true; render(); $("status").textContent = "Dashboard locked."; };
 $("gradesMode").onclick = () => { mode = "grades"; sessionStorage.setItem("dash-mode", mode); render(); };
 $("lessonsMode").onclick = () => { mode = "lessons"; sessionStorage.setItem("dash-mode", mode); render(); };
 $("gridView").onclick = () => { view = "grid"; render(); };
@@ -998,12 +1295,13 @@ $("listView").onclick = () => { view = "list"; render(); };
 $("masteryView").onclick = () => { view = "mastery"; render(); };
 $("search").oninput = render; $("assignment").onchange = render;
 $("csvBtn").onclick = downloadCsv; $("importBtn").onclick = copyOld;
+$("paperBtn").onclick = () => { const b = $("paperBox"); if (!b.hidden) { b.hidden = true; return; } b.dataset.tab = tab; openPaperBox(); };
 render();
 if ($("teacherCode").value) load();
 // "⚠ Update needed" shows only while your Teacher Tools script is an older version (no student PINs yet).
 // If Google can't be reached, it stays hidden rather than crying wolf.
 if (TOOLS_URL) fetch(TOOLS_URL, { method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify({ action: "version" }) })
-  .then(r => r.json()).then(d => { $("toolsUpdate").hidden = !!(d && d.ok && (d.can || []).includes("pins")); }).catch(() => {});
+  .then(r => r.json()).then(d => { $("toolsUpdate").hidden = !!(d && d.ok && (d.can || []).includes("paper")); }).catch(() => {});
 </script>
 </body>
 </html>
