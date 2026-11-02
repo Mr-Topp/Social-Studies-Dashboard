@@ -328,19 +328,19 @@ window.CLASS_ASSIGNMENTS = {
   "wh-u2-d8-vietnam": { course: "world-history", unit: 2, day: 8, title: "Day 8 · Vietnam: Who Should Decide a Nation's Future?", path: "world-history/u2-d8-vietnam/", std: ["SS.9-12.WH.36", "SS.9-12.WH.37", "SS.9-12.WH.34"] },
   "wh-u2-d11-1989": { course: "world-history", unit: 2, day: 11, title: "Day 11 · 1989: How Does a Wall Come Down?", path: "world-history/u2-d11-1989/", std: ["SS.9-12.WH.34", "SS.9-12.WH.37", "SS.9-12.WH.35"] },
   "ush-u1-d3-responses-iowans": { course: "us-history", unit: 1, day: 3, title: "Day 3 · Hoover vs. the New Deal", path: "us-history/u1-d3-responses-iowans/", std: ["SS.9-12.US.25", "SS.9-12.US.27", "SS.9-12.US.28"] },
-  "ush-u2-d8-common-good": { course: "us-history", unit: 2, day: 8, title: "Day 8 · The Ration Book", path: "us-history/u2-d8-common-good/", std: ["SS.9-12.US.34"] },
+  "ush-u2-d8-common-good": { course: "us-history", unit: 2, day: 4, title: "Day 4 · The Ration Book", path: "us-history/u2-d8-common-good/", std: ["SS.9-12.US.34"] },
   "ush-u3-d1-allies-enemies": { course: "us-history", unit: 3, day: 1, title: "Day 1 · The Cold War Desk", path: "us-history/u3-d1-allies-enemies/", std: ["SS.9-12.US.37", "SS.9-12.US.39", "SS.9-12.US.40"] },
   "ush-u3-d3-korea": { course: "us-history", unit: 3, day: 3, title: "Day 3 · The War That Swung: Korea", path: "us-history/u3-d3-korea/", std: ["SS.9-12.US.35", "SS.9-12.US.37", "SS.9-12.US.40"] },
   "ush-u3-d5-nuclear-brink": { course: "us-history", unit: 3, day: 5, title: "Day 5 · Thirteen Days", path: "us-history/u3-d5-nuclear-brink/", std: ["SS.9-12.US.35", "SS.9-12.US.37", "SS.9-12.US.40"] },
-  "ush-u3-d6-vietnam": { course: "us-history", unit: 3, day: 6, title: "Day 6 · Front Page: A Nation Divided", path: "us-history/u3-d6-vietnam/", std: ["SS.9-12.US.35", "SS.9-12.US.36", "SS.9-12.US.37", "SS.9-12.US.38", "SS.9-12.US.39", "SS.9-12.US.40", "SS.9-12.US.41"] },
+  "ush-u3-d6-vietnam": { course: "us-history", unit: 3, day: 5, title: "Day 5 · Front Page: A Nation Divided", path: "us-history/u3-d6-vietnam/", std: ["SS.9-12.US.35", "SS.9-12.US.36", "SS.9-12.US.37", "SS.9-12.US.38", "SS.9-12.US.39", "SS.9-12.US.40", "SS.9-12.US.41"] },
   "ush-u4-d1-fight-segregation": { course: "us-history", unit: 4, day: 1, title: "Day 1 · The Case Against Segregation", path: "us-history/u4-d1-fight-segregation/", std: ["SS.9-12.US.42", "SS.9-12.US.43", "SS.9-12.US.44"] },
   "ush-u4-d2-nonviolence": { course: "us-history", unit: 4, day: 2, title: "Day 2 · The Nonviolence Strategy File", path: "us-history/u4-d2-nonviolence/", std: ["SS.9-12.US.42", "SS.9-12.US.43", "SS.9-12.US.44"] },
   "ush-u4-d3-who-else": { course: "us-history", unit: 4, day: 3, title: "Day 3 · Build the Exhibit: Who Else Fought?", path: "us-history/u4-d3-who-else/", std: ["SS.9-12.US.42", "SS.9-12.US.44"] },
   "ush-u5-d1-voters-change": { course: "us-history", unit: 5, day: 1, title: "Day 1 · Election Desk 1980", path: "us-history/u5-d1-voters-change/", std: ["SS.9-12.US.46", "SS.9-12.US.47", "SS.9-12.US.49"] },
-  "ush-u5-d4-cold-war-ends": { course: "us-history", unit: 5, day: 4, title: "Day 4 · Who Ended the Cold War?", path: "us-history/u5-d4-cold-war-ends/", std: ["SS.9-12.US.48", "SS.9-12.US.49", "SS.9-12.US.50"] },
+  "ush-u5-d4-cold-war-ends": { course: "us-history", unit: 5, day: 3, title: "Day 3 · Who Ended the Cold War?", path: "us-history/u5-d4-cold-war-ends/", std: ["SS.9-12.US.48", "SS.9-12.US.49", "SS.9-12.US.50"] },
   "ush-u6-d1-superpower": { course: "us-history", unit: 6, day: 1, title: "Day 1 · Superpower Decision Desk", path: "us-history/u6-d1-superpower/", std: ["SS.9-12.US.52", "SS.9-12.US.53", "SS.9-12.US.55", "SS.9-12.US.56"] },
   "ush-u6-d2-crisis": { course: "us-history", unit: 6, day: 2, title: "Day 2 · Surviving 2008", path: "us-history/u6-d2-crisis/", std: ["SS.9-12.US.53", "SS.9-12.US.55"] },
-  "ush-u6-d4-still-fighting": { course: "us-history", unit: 6, day: 4, title: "Day 4 · The Fight for Access", path: "us-history/u6-d4-still-fighting/", std: ["SS.9-12.US.51", "SS.9-12.US.55", "SS.9-12.US.56"] },
+  "ush-u6-d4-still-fighting": { course: "us-history", unit: 6, day: 2, title: "Day 2 · The Fight for Access", path: "us-history/u6-d4-still-fighting/", std: ["SS.9-12.US.51", "SS.9-12.US.55", "SS.9-12.US.56"] },
 };
 
 // Iowa standard wording (Iowa Academic Standards for Social Studies) for every standard an in-use activity covers.
