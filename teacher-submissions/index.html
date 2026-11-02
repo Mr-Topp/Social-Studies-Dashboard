@@ -404,7 +404,6 @@ function linksHtml() {
     }
     // Red "not made yet" notes: a day with no assignment, a summative day with no test (or no answer key).
     const isTest = id => /summative/i.test(REG[id].title || "") && !/review|key/i.test(REG[id].title || "");
-    const isKeyOf = id => kindOf(id) === "key" && /summative/i.test(REG[id].title || "");
     rows.forEach(r => {
       r.todo = [];
       if (!cal || !r.day || r.single) return;
@@ -412,7 +411,6 @@ function linksHtml() {
       if (r.day > cal.days) { r.todo.push("This day is after the summative on your green sheet. Move or cut it"); return; }
       if (r.summ) {
         if (!mainIds.some(isTest)) r.todo.push("Summative not made yet. Fill this in");
-        else if (!mainIds.some(isKeyOf)) r.todo.push("Summative answer key not made yet");
       } else if (!mainIds.some(id => kindOf(id) !== "key")) r.todo.push("Assignment not made yet. Fill this in");
     });
     const list = [...rows.values()].sort((a, b) => (a.day || 999) - (b.day || 999));
