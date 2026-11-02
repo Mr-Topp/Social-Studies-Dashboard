@@ -364,7 +364,7 @@ window.CLASS_ASSIGNMENTS = {
   "ush-u2-d8-common-good": { course: "us-history", unit: 2, day: 4, title: "Day 4 · The Ration Book", path: "us-history/u2-d8-common-good/", std: ["SS.9-12.US.31", "SS.9-12.US.33", "SS.9-12.US.34"] },
   "ush-u3-d1-allies-enemies": { course: "us-history", unit: 3, day: 1, title: "Day 1 · The Cold War Desk", path: "us-history/u3-d1-allies-enemies/", std: ["SS.9-12.US.37", "SS.9-12.US.40"] },
   "ush-u3-d3-korea": { course: "us-history", unit: 3, day: 3, title: "Day 3 · The War That Swung: Korea", path: "us-history/u3-d3-korea/", std: ["SS.9-12.US.35", "SS.9-12.US.37", "SS.9-12.US.40"] },
-  "ush-u3-d5-nuclear-brink": { course: "us-history", unit: 3, day: 5, title: "Day 5 · Thirteen Days", path: "us-history/u3-d5-nuclear-brink/", std: ["SS.9-12.US.37", "SS.9-12.US.40"] },
+  "ush-u3-d5-nuclear-brink": { course: "us-history", unit: 3, day: 4, title: "Day 4 · Thirteen Days", path: "us-history/u3-d5-nuclear-brink/", std: ["SS.9-12.US.37", "SS.9-12.US.40"] },
   "ush-u3-d6-vietnam": { course: "us-history", unit: 3, day: 5, title: "Day 5 · Front Page: A Nation Divided", path: "us-history/u3-d6-vietnam/", std: ["SS.9-12.US.35", "SS.9-12.US.37", "SS.9-12.US.38", "SS.9-12.US.40", "SS.9-12.US.41"] },
   "ush-u4-d1-fight-segregation": { course: "us-history", unit: 4, day: 1, title: "Day 1 · The Case Against Segregation", path: "us-history/u4-d1-fight-segregation/", std: ["SS.9-12.US.42", "SS.9-12.US.43", "SS.9-12.US.44"] },
   "ush-u4-d2-nonviolence": { course: "us-history", unit: 4, day: 2, title: "Day 2 · The Nonviolence Strategy File", path: "us-history/u4-d2-nonviolence/", std: ["SS.9-12.US.42", "SS.9-12.US.43", "SS.9-12.US.44"] },
