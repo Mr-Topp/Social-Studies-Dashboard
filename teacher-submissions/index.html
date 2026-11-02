@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
 <title>Teacher Dashboard · All Classes</title>
-<script src="../shared/assignments.js?v=20261101fill"></script>
+<script src="../shared/assignments.js?v=20261102alt"></script>
 <script src="presentations.js?v=20261101gov3"></script>
 <script src="../shared/turnin.js?v=20261031t"></script>
 <style>
@@ -127,6 +127,9 @@ td.sum.l3{background:#eef7f0;color:#1f5e2c}td.sum.l2{background:#fff8e2;color:#7
 .chip.key{background:#fff;border:1px dashed #b9b09c;color:#6b6252;font-size:.78rem}
 .deckfoot{font-size:.84rem;margin:8px 2px 2px;color:var(--muted)}.deckfoot a{color:var(--navy);font-weight:700}
 .chiplegend{font-size:.8rem;color:var(--muted);margin:0 0 8px}
+.altrow{display:flex;flex-wrap:wrap;align-items:center;gap:6px;width:100%;margin-top:2px}
+.altlabel{font-size:.72rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.chip.alt{background:#f1f5f2;border:1px dashed #9db8a8}
 @media (max-width:760px){.dayrow{grid-template-columns:1fr}}
 </style>
 </head>
@@ -353,7 +356,7 @@ function linksHtml() {
   };
   const ICON = { online: "💻", print: "🖨", key: "🔑", link: "🔗" };
   const chipText = id => (REG[id].title || "").replace(/^Days? [\d–-]+ · /, "").replace(/\s*\(printed\)/i, "").replace(/ — /g, " · ");
-  const chip = id => { const k = kindOf(id); return `<a class="chip ${k}" href="${safe(hrefOf(id))}" target="_blank" rel="noopener" title="${safe(REG[id].title)}${k === "key" ? " (teacher only)" : ""}">${ICON[k]} ${safe(chipText(id))}</a>`; };
+  const chip = id => { const k = kindOf(id); return `<a class="chip ${k}${REG[id].alt ? " alt" : ""}" href="${safe(hrefOf(id))}" target="_blank" rel="noopener" title="${safe(REG[id].title)}${k === "key" ? " (teacher only)" : ""}">${ICON[k]} ${safe(chipText(id))}</a>`; };
   const actDay = id => { const m = (REG[id].title || "").match(/^Days? (\d+)/); return REG[id].day || (m ? +m[1] : 0); };
   const unitBlock = (key, name, ids, decks) => {
     const main = decks.find(p => !p.note) || decks[0];
@@ -387,13 +390,13 @@ function linksHtml() {
       const label = r.single ? "" : r.day ? `<b>${r.span ? `Days ${r.day}–${r.span}` : `Day ${r.day}`}</b>` : `<b>Other</b>`;
       const t = r.title || (r.ids.some(id => /summative/i.test(REG[id].title)) ? "Summative" : r.ids.length ? chipText(r.ids[0]).replace(/\s*\([^)]*\)\s*$/, "") : "");
       const slides = r.slides.map(s => `<a class="chip slides" href="${safe(s.url)}${s.slide ? "#slide=id." + safe(s.slide) : ""}" target="_blank" rel="noopener">▶ ${safe(s.label)}</a>`).join("");
-      return `<div class="dayrow"><div class="daylabel">${label}<span class="daytitle">${safe(t)}</span>${r.std ? `<span class="daystd">${safe(r.std)}</span>` : ""}</div><div class="daychips">${slides}${r.ids.map(chip).join("")}</div></div>`;
+      return `<div class="dayrow"><div class="daylabel">${label}<span class="daytitle">${safe(t)}</span>${r.std ? `<span class="daystd">${safe(r.std)}</span>` : ""}</div><div class="daychips">${slides}${r.ids.filter(id => !REG[id].alt).map(chip).join("")}${r.ids.some(id => REG[id].alt) ? `<div class="altrow"><span class="altlabel">Alternative assignments</span>${r.ids.filter(id => REG[id].alt).map(chip).join("")}</div>` : ""}</div></div>`;
     }).join("");
     const deckLinks = [list.some(r => r.single) ? null : main, ...extra].filter(Boolean).map(p => `<a href="${safe(p.url)}" target="_blank" rel="noopener">${p === main ? "▶ Open the whole deck" : "Older version: " + safe(p.title) + (p.note ? " (" + safe(p.note) + ")" : "")}</a>`).join(" · ");
     const inner = list.length ? `<div class="daytable">${body}</div>${deckLinks ? `<div class="deckfoot">${deckLinks}</div>` : ""}` : `<p class="status">No slides for this unit yet.</p>`;
     return `<details class="unitdrop" data-k="${safe(key)}"${linkOpen[key] ? " open" : ""}><summary>${safe(name)} <span class="unitcount">${count}</span></summary>${inner}</details>`;
   };
-  const legend = `<p class="chiplegend">▶ slides · 💻 online, turns in to this dashboard · 🖨 printed · 🔗 outside link · 🔑 answer key (teacher only)</p>`;
+  const legend = `<p class="chiplegend">▶ slides · 💻 online, turns in to this dashboard · 🖨 printed · 🔗 outside link · 🔑 answer key (teacher only) · <b>Alternative assignments</b> = your Drive files, to use instead of the main activity (absent students, subs, paper days)</p>`;
 
   // Current units (Part 2 when the class has a Part 1).
   const decks = allDecks.filter(p => p.part !== 1);
