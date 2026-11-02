@@ -73,6 +73,9 @@ h1:focus{outline:none}
 .qrow{display:flex;gap:12px;align-items:center;justify-content:space-between;background:#fff;color:var(--ink);border-radius:12px;padding:10px 12px;margin-top:8px}
 .qrow .qday{display:block;font-size:.78rem;font-weight:900;color:var(--red);text-transform:uppercase;letter-spacing:.05em}
 .qrow .qtitle{display:block;font-weight:800;color:var(--navy);line-height:1.25}
+.qrow .qrecap{display:block;font-size:.88rem;color:var(--muted);margin-top:2px;line-height:1.35}
+.testcard{background:var(--yellowbg);color:var(--yellow);border:1px solid #ecd58f;border-radius:16px;padding:16px 20px;margin:0 0 12px}
+.testcard h2{color:#5c4300;font-size:1.25rem;margin:0 0 4px}.testcard p{margin:6px 0 0}
 .qgo{background:var(--navy);color:#fff;padding:10px 18px;white-space:nowrap}
 .status.miss .qgo{background:#ffd9a8;color:var(--navy)}
 .qlabel{margin:14px 0 0;font-size:.8rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;opacity:.85}
@@ -120,9 +123,10 @@ footer{margin-top:26px;font-size:.85rem;color:var(--muted);display:flex;gap:14px
 footer a{color:var(--muted)}
 @media (max-width:600px){.next .btn{width:100%;text-align:center}.row .act{width:100%}}
 </style>
-<script>window.NO_FEEDBACK_POPUP = true;</script>
+<script>window.HUB_PAGE = true;   // student home page: feedback card pops up here, name boxes are not auto-filled</script>
 <script src="shared/assignments.js?v=20261102doneall"></script>
-<script src="shared/turnin.js?v=20261102fill2"></script>
+<script src="shared/recaps.js?v=1"></script>
+<script src="shared/turnin.js?v=20261102hub"></script>
 </head>
 <body>
 <main id="app" aria-live="polite"></main>
@@ -480,17 +484,40 @@ function homeBody(course, work) {
 
   // --- The one thing a student needs to know: what am I missing, or am I caught up? ---
   // Kept short on purpose (Fynn: not overwhelming or complicated). Grades live in one closed dropdown below.
-  const quick = (a, btn) => `<div class="qrow"><div><span class="qday">${esc(where(a))}</span><span class="qtitle">${esc(cleanTitle(a.title))}</span></div><a class="btn qgo" href="${href(a)}"${ext(a)}>${btn} →</a></div>`;
+  const RECAP = (window.CLASS_RECAPS || {})[course] || {};
+  const recapOf = a => { const u = RECAP[a.part === 1 ? -1 : a.unit] || {}; return u[(spanOf(a) || [a.day])[0]] || ""; };
+  const quick = (a, btn, recap) => `<div class="qrow"><div><span class="qday">${esc(where(a))}</span><span class="qtitle">${esc(cleanTitle(a.title))}</span>${recap && recapOf(a) ? `<span class="qrecap">In class: ${esc(recapOf(a))}</span>` : ""}</div><a class="btn qgo" href="${href(a)}"${ext(a)}>${btn} →</a></div>`;
+  // Welcome back: this Chromebook hasn't opened the page in 3+ school days.
+  let away = 0;
+  try { const last = localStorage.getItem("hub-last-seen:" + course); if (last && last < todayIso) away = weekdaysBetween(last, todayIso); localStorage.setItem("hub-last-seen:" + course, todayIso); } catch (e) {}
+  const welcome = away >= 3 && !testMode;
   const todayRow = todays.length ? `<div class="qlabel">Today's work</div>${todays.map(a => quick(a, "Start")).join("")}` : "";
   let status;
   if (missing.length) {
-    status = `<section class="status miss" aria-label="What to do"><h2>You're missing ${missing.length} ${missing.length === 1 ? "thing" : "things"}</h2><p>Do ${missing.length === 1 ? "it" : "them"} in order, top to bottom.</p>${missing.map(a => quick(a, "Start")).join("")}${todayRow}</section>`;
+    status = `<section class="status miss" aria-label="What to do"><h2>${welcome ? "Welcome back! " : ""}You're missing ${missing.length} ${missing.length === 1 ? "thing" : "things"}</h2><p>${welcome ? "Here's what the class did while you were gone. " : ""}Do ${missing.length === 1 ? "it" : "them"} in order, top to bottom.</p>${missing.map(a => quick(a, "Start", true)).join("")}${todayRow}</section>`;
   } else {
-    const fixRow = fix.length ? `<div class="qlabel">Optional: raise your grade</div>${fix.map(a => quick(a, "Fix it")).join("")}` : "";
-    status = `<section class="status done" aria-label="What to do"><h2>You're all caught up! 🎉</h2><p>${todays.length ? "Nothing missing. Here's today's work:" : due.length ? "You've turned in everything so far." : "Nothing is due yet."}</p>${todayRow}${fixRow}</section>`;
+    // Near a test, the test card already lists what to redo, so don't repeat it here.
+    const tc = (CAL[course] || {})[nowKey.split("|").pop()], td = !nowKey.startsWith("p1|") && tc && tc.summative;
+    const nearTest = td && td >= todayIso && weekdaysBetween(todayIso, td) <= 2;
+    const fixRow = fix.length && !nearTest ? `<div class="qlabel">Optional: raise your grade</div>${fix.map(a => quick(a, "Fix it")).join("")}` : "";
+    status = `<section class="status done" aria-label="What to do"><h2>${welcome ? "Welcome back! " : ""}You're all caught up! 🎉</h2><p>${todays.length ? "Nothing missing. Here's today's work:" : due.length ? "You've turned in everything so far." : "Nothing is due yet."}</p>${todayRow}${fixRow}</section>`;
   }
   const cal = (CAL[course] || {})[nowKey.split("|").pop()];
   const testDay = !nowKey.startsWith("p1|") && cal && cal.summative ? cal.summative : "";
+  // Test countdown: within 2 school days of the unit test, a "get ready" card replaces the plain test line.
+  const daysToTest = testDay && testDay >= todayIso ? weekdaysBetween(todayIso, testDay) : -1;
+  let testCard = "";
+  if (daysToTest >= 0 && daysToTest <= 2) {
+    const inUnit = online.filter(a => unitKey(a) === nowKey);
+    const review = inUnit.filter(a => /review/i.test(a.title || ""));
+    const graded = inUnit.filter(a => mine[a.id] && !mine[a.id].cleared).map(a => ({ a, g: gradeOf(mine[a.id]) })).filter(x => x.g && x.g.n).sort((x, y) => x.g.n - y.g.n);
+    const weak = graded.filter(x => x.g.n <= 2).slice(0, 2);
+    const when = daysToTest === 0 ? "today" : daysToTest === 1 ? "tomorrow" : new Date(testDay + "T12:00:00").toLocaleDateString("en-US", { weekday: "long" });
+    testCard = `<section class="testcard" aria-label="Test coming up"><h2>📅 ${esc(unitLabel(course, nowKey).replace(/ · .*/, ""))} test ${esc(when)}${daysToTest === 0 ? "! Good luck." : ". Get ready!"}</h2>` +
+      (review.length ? `<div class="qlabel">Review game</div>${review.map(a => quick(a, "Play")).join("")}` : "") +
+      (weak.length ? `<div class="qlabel">Practice these first</div>${weak.map(x => quick(x.a, "Redo")).join("")}` : `<p>${graded.length ? "Your grades look solid. Look back over this unit's work and your notes." : "Look back over this unit's work and your notes."}</p>`) +
+      `</section>`;
+  }
   const testLine = testDay ? `<p class="testline">📅 ${esc(unitLabel(course, nowKey).replace(/ · .*/, ""))} test: <b>${esc(niceDate(testDay))}</b>${testDay === todayIso ? " (today!)" : ""} · on paper in class</p>` : "";
 
   // --- One activity row ---
@@ -526,7 +553,7 @@ function homeBody(course, work) {
       <div class="inner">${on.map(a => row(a, true)).join("")}${paper.length ? `<details class="paper"><summary>📄 Paper and in-class work (${paper.length})${!future ? " · missed class? Ask your teacher for these" : ""}</summary>${paper.map(a => row(a, true)).join("")}</details>` : ""}</div></details>`;
   }).join("");
 
-  return status + testLine + `<details class="allwork"${allOpen[course] ? " open" : ""}><summary>📋 My grades and all my ${esc(COURSES[course])} work</summary><div class="allinner">${units}</div></details>`;
+  return (testCard ? testCard + status : status + testLine) + `<details class="allwork"${allOpen[course] ? " open" : ""}><summary>📋 My grades and all my ${esc(COURSES[course])} work</summary><div class="allinner">${units}</div></details>`;
 }
 const allOpen = {};
 

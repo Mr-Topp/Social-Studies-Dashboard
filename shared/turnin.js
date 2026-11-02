@@ -273,7 +273,7 @@ const TEACHER_TOOLS_URL = "https://script.google.com/macros/s/AKfycbwiVW6Cufw8Dq
       if (!isNameBox(input)) return;
       // Wait until the page has finished loading (some activities reset their name box while loading),
       // and never refill a box the student typed in themselves.
-      if (savedName && !input.value && input.dataset.nameTouched !== "1" && document.readyState !== "loading" && !/teacher-submissions/.test(location.pathname) && !window.NO_FEEDBACK_POPUP) {
+      if (savedName && !input.value && input.dataset.nameTouched !== "1" && document.readyState !== "loading" && !/teacher-submissions/.test(location.pathname) && !window.NO_FEEDBACK_POPUP && !window.HUB_PAGE) {
         input.dataset.nameFilled = "1";
         input.value = savedName;
         input.dispatchEvent(new Event("input", { bubbles: true }));
