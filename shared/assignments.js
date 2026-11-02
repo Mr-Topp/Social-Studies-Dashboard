@@ -73,11 +73,12 @@ window.CLASS_UNITS_PART1 = {
 // Where each class really is, pinned by Fynn. The student home page shows that day as "Today" and
 // moves forward evenly (weekdays only) to the unit's test date on the green sheet below.
 // To re-pin: change unit/day and set date to the day it's true (e.g. Fynn says "Gov is on Day 7").
+// 2026-11-02: everyone is on Unit 1 Day 5. Nov 2-3 are no-school days, so Day 5 is Wed Nov 4.
 window.CLASS_TODAY = {
-  "us-history":    { unit: 1, day: 5, date: "2026-11-02" },
-  "world-history": { unit: 1, day: 5, date: "2026-11-02" },
-  "sociology":     { unit: 1, day: 5, date: "2026-11-02" },
-  "government":    { unit: 1, day: 5, date: "2026-11-02" }
+  "us-history":    { unit: 1, day: 5, date: "2026-11-04" },
+  "world-history": { unit: 1, day: 5, date: "2026-11-04" },
+  "sociology":     { unit: 1, day: 5, date: "2026-11-04" },
+  "government":    { unit: 1, day: 5, date: "2026-11-04" }
 };
 
 // Work Fynn counts as DONE for every student on the student home page (shows "✓ Done", never "missing").
@@ -111,7 +112,15 @@ window.CLASS_CALENDAR = {
 
 // Days with no school: [first day off, last day off]. Lesson-day estimates on the student home page and the
 // teacher dashboard's To-do tab skip these. Winter break per Fynn (11/2/26).
-window.CLASS_NO_SCHOOL = [["2026-12-21", "2027-01-04"]];
+// From the district calendar (Fynn's photo, 2026-11-02). Each pair is first and last day off (inclusive).
+window.CLASS_NO_SCHOOL = [
+  ["2026-10-23", "2026-10-23"],   // no school (after end of 1st quarter)
+  ["2026-11-02", "2026-11-03"],   // no school
+  ["2026-11-25", "2026-11-27"],   // Thanksgiving break
+  ["2026-12-21", "2027-01-01"],   // winter break (school is back Mon Jan 4)
+  ["2027-01-11", "2027-01-11"],   // no school
+  ["2027-01-18", "2027-01-18"]    // no school (MLK Day)
+];
 
 // Part 1 units (first half of U.S. History and World History): not on the green sheet, so no dates.
 // The summative is the day right after the last lesson day.
