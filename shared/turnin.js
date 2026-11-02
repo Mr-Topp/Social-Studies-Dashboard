@@ -450,6 +450,59 @@ const TEACHER_TOOLS_URL = "https://script.google.com/macros/s/AKfycbwiVW6Cufw8Dq
     return { text, mostlyPasted: pasted >= 40 && share >= 50, detail: "About " + share + "% of the final writing was pasted in" };
   }
 
+  // --- 🔊 Read to me (every activity page) ---------------------------------------------------
+  // Reads what's on the screen right now out loud with the Chromebook's own voice.
+  // If the student highlights some words first, it reads just those. Not on the teacher pages or the student home page.
+  function addReadAloud() {
+    if (!("speechSynthesis" in window) || window.HUB_PAGE || window.NO_FEEDBACK_POPUP || /teacher-submissions|setup-|update-teacher/.test(location.pathname)) return;
+    if (document.getElementById("readAloudBtn")) return;
+    const css = document.createElement("style");
+    css.textContent = "#readAloudBtn{position:fixed;right:14px;bottom:14px;z-index:9990;display:flex;align-items:center;gap:6px;min-height:44px;padding:8px 16px;border:2px solid #fff;border-radius:999px;background:#19364b;color:#fff;font:800 16px/1 system-ui,Segoe UI,Arial,sans-serif;box-shadow:0 4px 14px #0004;cursor:pointer}" +
+      "#readAloudBtn[aria-pressed=true]{background:#a33d36}#readAloudBtn:focus-visible{outline:3px solid #2b6cb0;outline-offset:2px}@media print{#readAloudBtn{display:none}}";
+    document.head.appendChild(css);
+    const btn = document.createElement("button");
+    btn.id = "readAloudBtn"; btn.type = "button"; btn.setAttribute("aria-pressed", "false"); btn.setAttribute("data-no-es", "");
+    btn.title = "Reads what's on your screen. Highlight words first to hear just those.";
+    const es = () => !!(window.SiteLang && window.SiteLang.isEs && window.SiteLang.isEs());
+    const label = on => { btn.textContent = on ? (es() ? "⏹ Parar" : "⏹ Stop") : (es() ? "🔊 Léemelo" : "🔊 Read to me"); btn.setAttribute("aria-pressed", String(on)); };
+    label(false);
+    // Text that's showing on the screen right now (skips hidden screens, buttons' icons, and this button).
+    function screenText() {
+      const sel = String(window.getSelection ? window.getSelection() : "").trim();
+      if (sel.length > 1) return sel;
+      const out = [], vh = window.innerHeight, vw = window.innerWidth;
+      const walker = document.createTreeWalker(document.body, NodeFilter.SHOW_TEXT, {
+        acceptNode(n) {
+          const el = n.parentElement;
+          if (!el || !n.nodeValue.trim() || el.closest("script,style,noscript,#readAloudBtn,.lang-switch,[aria-hidden=true]")) return NodeFilter.FILTER_REJECT;
+          const r = document.createRange(); r.selectNodeContents(n);
+          const box = r.getBoundingClientRect();
+          if (!box.width || !box.height || box.bottom < 0 || box.top > vh || box.right < 0 || box.left > vw) return NodeFilter.FILTER_REJECT;
+          const cs = getComputedStyle(el);
+          return cs.visibility === "hidden" || +cs.opacity === 0 ? NodeFilter.FILTER_REJECT : NodeFilter.FILTER_ACCEPT;
+        }
+      });
+      let n; while ((n = walker.nextNode())) out.push(n.nodeValue.trim());
+      return out.join(" ").replace(/Standard\s+SS\.9-12\.[A-Za-z]+\.\d+\s*[—-]?/g, "Standard: ").replace(/SS\.9-12\.[A-Za-z]+\.\d+/g, " ")
+        .replace(/[→↗←▶✓✔⚠🔊]/g, " ").replace(/\s+/g, " ").trim();
+    }
+    btn.addEventListener("click", () => {
+      const synth = window.speechSynthesis;
+      if (synth.speaking) { synth.cancel(); label(false); return; }
+      const text = screenText();
+      if (!text) return;
+      const u = new SpeechSynthesisUtterance(text.slice(0, 6000));
+      u.rate = 0.95; u.lang = es() ? "es-US" : "en-US";
+      u.onend = u.onerror = () => label(false);
+      synth.cancel(); synth.speak(u); label(true);
+    });
+    // Keep the highlighted words when the button is pressed.
+    btn.addEventListener("mousedown", e => e.preventDefault());
+    document.body.appendChild(btn);
+    window.addEventListener("pagehide", () => window.speechSynthesis.cancel());
+  }
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", addReadAloud); else addReadAloud();
+
   if (document.readyState === "complete") showFeedback(); else window.addEventListener("load", showFeedback);
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", fixNameBoxes);
   else fixNameBoxes();

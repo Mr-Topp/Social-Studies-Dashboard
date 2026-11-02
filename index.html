@@ -95,6 +95,10 @@ h1:focus{outline:none}
 details.allwork{margin-top:6px}
 details.allwork>summary{cursor:pointer;font-weight:800;color:var(--navy);background:var(--card);border:1px solid var(--line);border-radius:12px;padding:12px 16px}
 details.allwork[open]>summary{margin-bottom:10px}
+.unitflat h3{display:flex;gap:8px;align-items:center;flex-wrap:wrap;margin:6px 2px 8px;font-size:1.05rem;color:var(--navy)}
+.unitflat h3 .now{background:var(--red);color:#fff;font-size:.72rem;letter-spacing:.08em;border-radius:6px;padding:2px 7px}
+.unitflat h3 .count{margin-left:auto;font-size:.9rem;color:var(--muted)}
+.unitflat+.unitflat{margin-top:18px}
 /* --- lists --- */
 .section{margin:0 0 14px}
 .section h2 .n{display:inline-block;background:#fff;border:1px solid var(--line);border-radius:99px;padding:0 9px;font-size:.85rem;color:var(--muted);margin-left:4px}
@@ -137,7 +141,7 @@ footer a{color:var(--muted)}
 <script>window.HUB_PAGE = true;   // student home page: feedback card pops up here, name boxes are not auto-filled</script>
 <script src="shared/assignments.js?v=20261102std"></script>
 <script src="shared/recaps.js?v=1"></script>
-<script src="shared/turnin.js?v=20261102preview"></script>
+<script src="shared/turnin.js?v=20261102read"></script>
 </head>
 <body>
 <main id="app" aria-live="polite"></main>
@@ -430,7 +434,6 @@ async function showWork(course, name) {
   if (me.current !== course || screen !== "home") return;
   if (testMode && preview === "caught") work.preview = true;
   $("body").innerHTML = homeBody(course, work);
-  wireReadAloud();
   if (testMode) previewFeedback(course);
   $("body").querySelectorAll("details.unit").forEach(d => d.addEventListener("toggle", () => { openUnits[course + "|" + d.dataset.k] = d.open; }));
   const all = $("body").querySelector("details.allwork"); if (all) all.addEventListener("toggle", () => { allOpen[course] = all.open; });
@@ -573,7 +576,7 @@ function homeBody(course, work) {
     const recap = recapOf(g.ex);
     return `<div class="dgroup"><div class="dhead">${esc(head)}</div>${recap ? `<p class="drecap">In class: ${esc(recap)}</p>` : ""}${list.map(missRow).join("")}</div>`;
   }).join("");
-  const readBtn = ("speechSynthesis" in window) ? `<button class="readbtn" type="button" aria-pressed="false">🔊 Read it to me</button>` : "";
+  const readBtn = "";   // read-aloud lives inside the activities (shared/turnin.js), not on this page
   let status;
   if (missing.length) {
     const nDays = missedDays.size;
@@ -607,10 +610,11 @@ function homeBody(course, work) {
   const row = (a, inUnit) => {
     const w = mine[a.id], g = gradeOf(w), on = isOnline(a), kw = kindWord(a);
     let pill = "", btn = "Open";
+    const later = !isDue(a) && !isToday(a) && !isCleared(a);   // a day the class hasn't reached yet
     if (!on && /\(printed\)/i.test(a.title || "")) {
-      return `<div class="row lite"><div class="info"><div class="day">${esc(dayText(a))} · Paper</div><div class="title">📄 ${esc(cleanTitle(a.title))}</div></div><div class="act"><span class="pill p-class">Missed it? Get it from your teacher</span></div></div>`;
+      return `<div class="row lite"><div class="info"><div class="day">${esc(dayText(a))} · Paper</div><div class="title">📄 ${esc(cleanTitle(a.title))}</div></div><div class="act"><span class="pill ${later ? "p-wait\">Coming up" : isToday(a) ? "p-in\">Today · in class" : "p-class\">Missed it? Get it from your teacher"}</span></div></div>`;
     }
-    if (!on) { pill = `<span class="pill p-class">Done in class</span>`; }
+    if (!on) { pill = later ? `<span class="pill p-wait">Coming up</span>` : isToday(a) ? `<span class="pill p-in">Today · in class</span>` : `<span class="pill p-class">Done in class</span>`; }
     else if (w) { pill = gradePill(g); btn = g && g.n && g.n <= 2 ? "Fix it" : "Look again"; }
     else if (isDue(a)) { pill = `<span class="pill p-miss">Missing</span>`; btn = "Start"; }
     else if (isToday(a)) { pill = `<span class="pill p-in">Today</span>`; btn = "Start"; }
@@ -635,8 +639,7 @@ function homeBody(course, work) {
     const open = (course + "|" + k) in openUnits ? openUnits[course + "|" + k] : isNow;
     const past = unitOrder(k) < nowOrder;
     const countTxt = !on.length ? "" : future && !got ? "Coming up" : !owed ? "Nothing due yet" : `${got} of ${owed} turned in`;
-    return `<details class="unit" data-k="${esc(k)}"${open ? " open" : ""}><summary>${esc(unitLabel(course, k))}${isNow ? ` <span class="now">NOW</span>` : ""}<span class="count">${countTxt}${past && on.length && got === on.length ? " ✓" : ""}</span></summary>
-      <div class="inner">${list.map(a => row(a, true)).join("")}</div></details>`;
+    return `<section class="unitflat"><h3>${esc(unitLabel(course, k))}${isNow ? ` <span class="now">NOW</span>` : ""}<span class="count">${countTxt}${past && on.length && got === on.length ? " ✓" : ""}</span></h3>${list.map(a => row(a, true)).join("")}</section>`;
   }).join("");
 
   return (testCard ? testCard + status : status + testLine) + `<details class="allwork"${allOpen[course] ? " open" : ""}><summary>📋 My grades and all my ${esc(COURSES[course])} work</summary><div class="allinner">${units}</div></details>`;
