@@ -362,6 +362,11 @@ const TEACHER_TOOLS_URL = "https://script.google.com/macros/s/AKfycbwiVW6Cufw8Dq
     const ready = ((got && got.items) || []).filter(x => x.graded).slice(0, 3);
     if (!ready.length) return;
     const byToken = new Map(waiting.map(r => [r.token, r]));
+    renderFeedback(ready, byToken, false);
+  }
+  // Draws the feedback card. preview = true: the teacher's test student sees a sample (nothing is saved or sent).
+  function renderFeedback(ready, byToken, preview) {
+    if (document.querySelector(".fb-wrap")) return;
     const css = document.createElement("style");
     css.textContent = ".fb-wrap{position:fixed;inset:0;z-index:99999;background:#0f1c2bcc;display:flex;align-items:flex-start;justify-content:center;overflow:auto;padding:20px 12px;font:17px/1.5 system-ui,Segoe UI,Arial,sans-serif}" +
       ".fb-card{background:#fffdf8;color:#22313b;max-width:560px;width:100%;border-radius:16px;padding:20px;box-shadow:0 20px 60px #0008}" +
@@ -375,7 +380,7 @@ const TEACHER_TOOLS_URL = "https://script.google.com/macros/s/AKfycbwiVW6Cufw8Dq
     document.head.appendChild(css);
     const wrap = document.createElement("div");
     wrap.className = "fb-wrap"; wrap.setAttribute("role", "dialog"); wrap.setAttribute("aria-modal", "true"); wrap.setAttribute("aria-label", "Your feedback");
-    wrap.innerHTML = `<div class="fb-card"><h2>Your feedback is ready</h2><p class="fb-sub">Read it, then fix it or keep going.</p>` +
+    wrap.innerHTML = `<div class="fb-card">${preview ? '<p class="fb-sub" style="background:#dbe8fb;color:#1c3f78;border-radius:8px;padding:4px 10px;font-weight:700">🧪 Teacher preview: this is the card students see when you grade their work. Sample feedback.</p>' : ""}<h2>Your feedback is ready</h2><p class="fb-sub">Read it, then fix it or keep going.</p>` +
       ready.map(x => {
         const r = byToken.get(x.token) || {}, lvl = x.flagged ? "" : (x.level ? `<span class="fb-lvl fb-l${esc(x.level)}">Level ${esc(x.level)} of 4 · ${({ 1: "let's fix this", 2: "almost there", 3: "nice work", 4: "excellent" })[x.level] || ""}</span>` : "");
         const msg = x.flagged ? "Your teacher wants to talk with you about this one." : (x.feedback || "Your teacher graded this one.");
@@ -384,6 +389,7 @@ const TEACHER_TOOLS_URL = "https://script.google.com/macros/s/AKfycbwiVW6Cufw8Dq
       }).join("") + `<button class="fb-ok fb-close" data-all="1">Got it, start today's work</button></div>`;
     document.body.appendChild(wrap);
     const done = token => {
+      if (preview) return;
       const list = loadReceipts(); list.forEach(r => { if (r.token === token) r.seen = true; }); saveReceipts(list);
       toolsPost({ action: "seen", token }).catch(() => {});
     };
@@ -397,6 +403,7 @@ const TEACHER_TOOLS_URL = "https://script.google.com/macros/s/AKfycbwiVW6Cufw8Dq
     setTimeout(() => oks.forEach(b => { b.disabled = false; b.style.opacity = ""; }), 2000);
     const first = wrap.querySelector("a,button"); if (first) first.focus();
   }
+  window.classFeedbackPreview = items => renderFeedback(items, new Map(items.map(x => [x.token, x])), true);
   // --- Writing check -------------------------------------------------------------------
   // Counts what students type vs. paste into written-answer boxes, so copied or AI-written text
   // shows up on the teacher dashboard. Students get a short heads-up the moment they paste.
