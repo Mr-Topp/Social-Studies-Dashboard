@@ -237,6 +237,11 @@ td.inclass{background:#eef5ef;color:#1f5e2c;text-align:center}td.inclass .lvl{di
 </main>
 
 <script>
+// This is the teacher's computer: never in the student's Spanish mode, and never filling in his name.
+try {
+  localStorage.removeItem("site-lang-es-device"); localStorage.removeItem("site-lang");
+  if (localStorage.getItem("site-student-name") === "the student") localStorage.removeItem("site-student-name");
+} catch (e) {}
 // Set to false after you've copied the old turn-ins into Google and no longer need the old site.
 const READ_OLD_SITE = false;
 const OLD_API = "https://fynn-class-assignment-submissions-20261024.neotboy.chatgpt.site/api/teacher/submissions";

@@ -27,6 +27,11 @@
   let lang = "en", optIn = false;
   try {
     optIn = localStorage.getItem(DEVICE) === "1";
+    // Spanish is only for the student's Chromebook. If this computer was switched on but the
+    // saved student isn't the student (a teacher or another student opened his page), turn it back off.
+    if (optIn && localStorage.getItem("site-student-name") !== "the student") {
+      localStorage.removeItem(DEVICE); localStorage.removeItem(KEY); optIn = false;
+    }
     lang = optIn && localStorage.getItem(KEY) !== "en" ? "es" : "en";
   } catch (e) {}
 

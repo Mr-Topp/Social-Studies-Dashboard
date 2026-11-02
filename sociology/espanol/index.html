@@ -32,6 +32,12 @@ h2{margin:14px 0 4px;font-size:1.35rem}
 .empty{color:var(--muted);background:#fff;border:2px dashed var(--line);border-radius:12px;padding:14px}
 a:focus-visible,button:focus-visible{outline:3px solid #2f7dbd;outline-offset:2px}
 .foot{margin-top:18px;color:var(--muted);font-size:.85rem}
+.gate{background:#fff;border:3px solid var(--acc);border-radius:16px;padding:16px 18px;margin:0 0 16px;box-shadow:0 3px 12px #1f2b331a}
+.gate h2{margin:0 0 6px}.gate p{margin:4px 0 12px}
+.gate .row{display:flex;gap:10px;flex-wrap:wrap}
+.gate button{font:800 16px system-ui,Segoe UI,Arial,sans-serif;border-radius:12px;padding:10px 16px;min-height:44px;cursor:pointer;border:2px solid var(--ink)}
+.gate .yes{background:var(--ink);color:#fff}.gate .no{background:#fff;color:var(--ink)}
+.preview{background:#fff4d6;border:2px solid #e7c96a;border-radius:12px;padding:10px 14px;margin:0 0 14px;font-weight:700}
 </style>
 <script src="../../shared/assignments.js?v=20261102es"></script>
 <script src="../../teacher-submissions/presentations.js?v=20261102es"></script>
@@ -42,6 +48,7 @@ a:focus-visible,button:focus-visible{outline:3px solid #2f7dbd;outline-offset:2p
   <p>Aquí están todas tus actividades de Sociología, en español. Elige tu unidad y abre la actividad del día.</p>
 </header>
 <main>
+  <div id="gate"></div>
   <div class="langrow" role="group" aria-label="Idioma de las actividades">
     <span>🌐 Abrir actividades en:</span>
     <button type="button" data-l="es">Español</button>
@@ -59,12 +66,27 @@ const NOW_UNIT = 1;
 const STUDENT = "the student";
 const COURSE = "sociology";
 
-// Set up this Chromebook for Student: Spanish switch on, name fills in by itself.
-try {
-  localStorage.setItem("site-lang-es-device", "1");
-  localStorage.setItem("site-student-name", STUDENT);
-  if (!localStorage.getItem("site-lang")) localStorage.setItem("site-lang", "es");
-} catch (e) {}
+// Set up a Chromebook for Student ONLY when someone taps "Sí, soy Student".
+// Opening this page never changes a computer by itself (a teacher or another student
+// can look at it and their computer stays in English).
+function isSpanishComputer() {
+  try { return localStorage.getItem("site-lang-es-device") === "1" && localStorage.getItem("site-student-name") === STUDENT; } catch (e) { return false; }
+}
+function setUpSpanish() {
+  try {
+    localStorage.setItem("site-lang-es-device", "1");
+    localStorage.setItem("site-student-name", STUDENT);
+    if (!localStorage.getItem("site-lang")) localStorage.setItem("site-lang", "es");
+  } catch (e) {}
+}
+function drawGate() {
+  const g = document.getElementById("gate");
+  if (isSpanishComputer()) { g.innerHTML = ""; return; }
+  g.innerHTML = `<div class="gate"><h2>¿Eres the student?</h2><p>Si eres Student, toca <b>Sí</b> y esta Chromebook mostrará tus actividades de Sociología en español. <br><span lang="en">Not Student? Tap <b>No</b>. This computer stays in English.</span></p>
+    <div class="row"><button type="button" class="yes" id="gateYes">Sí, soy Student</button><button type="button" class="no" id="gateNo" lang="en">No, I'm just looking</button></div></div>`;
+  document.getElementById("gateYes").onclick = () => { setUpSpanish(); drawGate(); drawLang(); };
+  document.getElementById("gateNo").onclick = () => { g.innerHTML = `<p class="preview" lang="en">Preview only. This computer stays in English, and nothing here turns in under the student's name.</p>`; };
+}
 
 // Spanish names for units, lesson days and activities. New activities still show up (with their English name) until one is added here.
 const UNIT_ES = { 1: "Fundamentos, perspectivas y métodos", 2: "Cultura, instituciones y sociedad", 3: "Socialización, el yo y los grupos", 4: "Estratificación y desigualdad" };
@@ -179,6 +201,6 @@ function drawLang() {
     b.onclick = () => { try { localStorage.setItem("site-lang", b.dataset.l); } catch (e) {} drawLang(); };
   });
 }
-drawLang(); drawTabs(); drawUnit();
+drawGate(); drawLang(); drawTabs(); drawUnit();
 </script>
 </body></html>

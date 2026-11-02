@@ -162,6 +162,7 @@ function saveMe() {
     localStorage.setItem(ME_KEY, JSON.stringify(me));
     const name = me.classes[me.current];
     if (name) localStorage.setItem("site-student-name", name); // activities fill this in for them
+    if (name && name !== "the student") { localStorage.removeItem("site-lang-es-device"); localStorage.removeItem("site-lang"); } // Spanish is only for Student
   } catch (e) {}
 }
 let me = loadMe();
@@ -368,7 +369,7 @@ async function drawNamePick(app) {
 async function drawHome(app) {
   const course = me.current, name = me.classes[course], first = name.split(" ")[0];
   const myClasses = Object.keys(COURSES).filter(k => me.classes[k]);
-  const spanish = course === "sociology" && (name === "the student" || (() => { try { return localStorage.getItem("site-lang-es-device") === "1"; } catch (e) { return false; } })());
+  const spanish = course === "sociology" && name === "the student";
   const testBar = testMode ? `<div class="testbar" role="note">🧪 <b>Test student mode.</b> You're seeing exactly what a student sees, as “${esc(TEST_NAME)}”. Your turn-ins show on your dashboard tagged TEST.
     <div class="previewrow"><span>Show me:</span><button class="pv" data-pv="real" aria-pressed="${preview === "real"}">My real test work</button><button class="pv" data-pv="caught" aria-pressed="${preview === "caught"}">A student who's all caught up</button><button class="linkbtn" id="testOff">Turn off test mode</button></div>
     ${preview === "caught" ? `<p class="pvnote">Pretend preview: grades and feedback below are samples. Nothing is saved.</p>` : ""}</div>` : "";
