@@ -15,7 +15,7 @@ Activity | Kind | Page | Source | Answers. Always find the columns by header nam
 2. Candidates are rows turned in during the **last 21 days** (by "Turned in").
 3. For each candidate, read its whole row (`'Turn-ins'!A{n}:J{n}`; batch nearby rows into one range). Check that the Key
    you read matches the Key from step 1. If not, rows have shifted: read A:B again and re-locate.
-4. Skip a row when:
+4. Skip grading a row when (it may still need the AI check in 3b):
    - Answers already has `"AI level"` or `"AI graded"`, or
    - Kind is not `turn-in` (for example `progress`), or
    - Answers does not parse as JSON.
@@ -52,9 +52,7 @@ Rules:
 - Spelling, grammar and capitalization never lower a grade. These are alternative high school students; short and
   plain is fine if it is accurate and explains.
 - If the question has several parts (Hanoi has four), weigh all of them. Missing parts pull the level down.
-- **Copied work**: text pasted from an AI chat (prompts, "AI can make mistakes", "AI Mode reply") or clearly copied
-  from a website gets level **1** and `"AI flag":"Copied from an AI chat. Talk with the student."` (or "Looks copied
-  from a website…"). Flag anything unsafe or inappropriate too.
+- **Copied or AI work**: follow the AI check in 3b. Flag anything unsafe or inappropriate too.
 - Be consistent: similar answers get the same level. Don't guess when the answer is ambiguous; grade what's on the page.
 
 The reason is one short sentence for the teacher (under 120 characters), in plain words, saying what earned or cost
@@ -67,6 +65,34 @@ Also write **`"AI student feedback"`**: what the student will see on a card the 
 - **Never mention AI, a grader, a computer, or automatic grading.** Write it the way the teacher would say it.
 - Example: "You explained why the French paid for rat tails. Next step: add what some people did to earn more money."
 - Flagged (copied) work: leave `"AI student feedback"` out. The student card just says the teacher will talk with them.
+
+## 3b. AI check (every turn-in with written answers)
+
+Every turn-in with student-written text gets an AI check, including rows graded before this check existed.
+A row needs the check when Answers has no `"AI checked"` key. Add `"AI checked":"YYYY-MM-DD"` when you check it.
+For a row that already has `"AI level"` or `"Teacher level"`, add only `"AI checked"` (and `"AI flag"` if needed);
+never change its level, reason or feedback.
+
+Evidence to weigh (AI detectors are unreliable, so flag only on real evidence, and never on spelling or good writing alone):
+1. **Pasted writing.** Turn-ins from 2026-11-02 on include `"Writing check"` (typed vs. pasted characters) and, when
+   most of the writing was pasted, `"Pasted writing"`. Pasting from the page's own reading is not cheating; compare
+   the pasted text to the lesson. Mostly pasted text that is NOT from the lesson is strong evidence.
+2. **AI leftovers**: "As an AI", "Certainly!", "Here's a…", "I hope this helps", markdown headings or bullet lists,
+   bolded labels, "In conclusion," a restated prompt, or text in a different language than the question.
+3. **Style far beyond the student and the lesson**: polished essay voice, vocabulary the lesson never used
+   ("multifaceted", "pivotal", "underscores", "a testament to"), em-dashes everywhere, perfect three-part lists,
+   facts or names that are not in the lesson, or writing that is very different from this student's other turn-ins
+   (look at their other rows in the sheet).
+
+Decide:
+- **Clear AI or copied work** (leftovers, or mostly pasted text that isn't from the lesson): level **1**,
+  `"AI flag":"Likely AI or copied: <the evidence in a few words>. Talk with the student."`, no student feedback.
+- **Possible AI** (style signs only, or partial pasting): grade it normally, add
+  `"AI flag":"Possible AI: <the evidence in a few words>. Check with the student."`, and leave out
+  `"AI student feedback"` so the student's card says the teacher wants to talk with them.
+- **No real evidence**: no flag. Short, plain or misspelled answers are normal for these students.
+
+The flag shows in the dashboard's "Possible AI or copied work" list. It is a reason to talk with the student, not a grade by itself.
 
 ## 4. Save the grade (safely)
 
@@ -89,5 +115,5 @@ Rows can shift when new turn-ins arrive, so **never write by row number**. Use o
 
 ## 5. Finish
 
-End with one line: how many turn-ins were graded, how many had no written answer, and any flags (activity and level,
+End with one line: how many turn-ins were graded, how many were AI-checked, how many had no written answer, and any flags (activity and level,
 no names). If nothing was new, say so in one line and stop.

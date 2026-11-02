@@ -95,6 +95,12 @@ const TEACHER_TOOLS_URL = "https://script.google.com/macros/s/AKfycbxbiHdWfmdn70
       if (qs.length) body.answers["Questions on the page"] = qs;
     }
 
+    // Writing check: how much of the written answers was typed vs. pasted in (see "Writing check" below).
+    if (body.answers && typeof body.answers === "object" && !Array.isArray(body.answers) && !("Writing check" in body.answers)) {
+      const w = writingSummary();
+      if (w) { body.answers["Writing check"] = w.text; if (w.mostlyPasted) body.answers["Pasted writing"] = w.detail; }
+    }
+
     const name = shortName(body.studentName);
     if (!name || !/ [A-Z]\.$/.test(name)) return fakeResponse(400, { error: NAME_HELP });
     body.studentName = name;
@@ -263,6 +269,52 @@ const TEACHER_TOOLS_URL = "https://script.google.com/macros/s/AKfycbxbiHdWfmdn70
     setTimeout(() => oks.forEach(b => { b.disabled = false; b.style.opacity = ""; }), 2000);
     const first = wrap.querySelector("a,button"); if (first) first.focus();
   }
+  // --- Writing check -------------------------------------------------------------------
+  // Counts what students type vs. paste into written-answer boxes, so copied or AI-written text
+  // shows up on the teacher dashboard. Students get a short heads-up the moment they paste.
+  // Counts are kept on this device per page and box, so a refresh doesn't reset them.
+  const WKEY = "writingcheck:" + location.pathname;
+  let wdata;
+  try { wdata = JSON.parse(localStorage.getItem(WKEY)) || {}; } catch (e) { wdata = {}; }
+  const wsave = () => { try { localStorage.setItem(WKEY, JSON.stringify(wdata)); } catch (e) {} };
+  const wid = t => t.id || t.name || ("box" + [...document.querySelectorAll("textarea")].indexOf(t));
+  const wstat = t => (wdata[wid(t)] = wdata[wid(t)] || { typed: 0, pasted: 0, pastes: 0 });
+  function pasteNotice(t) {
+    let n = t.nextElementSibling;
+    if (!n || !n.classList || !n.classList.contains("paste-note")) {
+      n = document.createElement("p");
+      n.className = "paste-note"; n.setAttribute("role", "status");
+      n.style.cssText = "margin:6px 0 0;padding:8px 10px;border-radius:8px;background:#fff4d6;color:#5c4300;font:700 .9rem/1.35 system-ui,Segoe UI,Arial,sans-serif";
+      t.insertAdjacentElement("afterend", n);
+    }
+    n.textContent = "Heads up: pasted writing shows up for your teacher. Write your answer in your own words.";
+  }
+  function onPasteLike(t, text) {
+    if (!t || t.tagName !== "TEXTAREA") return;
+    const len = String(text || "").trim().length; if (!len) return;
+    const s = wstat(t); s.pasted += len; s.pastes++; wsave();
+    if (len >= 25) pasteNotice(t);
+  }
+  document.addEventListener("paste", e => onPasteLike(e.target, e.clipboardData && e.clipboardData.getData("text")), true);
+  document.addEventListener("drop", e => onPasteLike(e.target, e.dataTransfer && e.dataTransfer.getData("text")), true);
+  document.addEventListener("input", e => {
+    const t = e.target; if (!t || t.tagName !== "TEXTAREA") return;
+    if (e.inputType === "insertText" && e.data) { wstat(t).typed += e.data.length; wsave(); }
+    else if (e.inputType === "insertReplacementText" && e.data) { wstat(t).typed += e.data.length; wsave(); }
+  }, true);
+  function writingSummary() {
+    let typed = 0, pasted = 0, pastes = 0, written = 0, boxes = 0;
+    document.querySelectorAll("textarea").forEach(t => {
+      const len = (t.value || "").trim().length; if (!len) return;
+      const s = wdata[wid(t)] || { typed: 0, pasted: 0, pastes: 0 };
+      written += len; boxes++; typed += s.typed; pasted += Math.min(s.pasted, len); pastes += s.pastes;
+    });
+    if (!boxes) return null;
+    const share = written ? Math.round(pasted / written * 100) : 0;
+    const text = "Typed about " + typed + " characters, pasted about " + pasted + (pastes ? " (" + pastes + " paste" + (pastes === 1 ? "" : "s") + ")" : "") + " · final writing " + written + " characters";
+    return { text, mostlyPasted: pasted >= 40 && share >= 50, detail: "About " + share + "% of the final writing was pasted in" };
+  }
+
   if (document.readyState === "complete") showFeedback(); else window.addEventListener("load", showFeedback);
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", fixNameBoxes);
   else fixNameBoxes();

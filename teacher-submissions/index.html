@@ -7,7 +7,7 @@
 <title>Teacher Dashboard · All Classes</title>
 <script src="../shared/assignments.js?v=20261102alt"></script>
 <script src="presentations.js?v=20261101gov3"></script>
-<script src="../shared/turnin.js?v=20261031t"></script>
+<script src="../shared/turnin.js?v=20261102ai"></script>
 <style>
 :root{--navy:#19364b;--red:#a33d36;--green:#2f6b3a;--paper:#f4efe4;--card:#fffdf8;--ink:#22313b;--muted:#536571;--line:#d8cfbd}
 *{box-sizing:border-box}
@@ -284,7 +284,8 @@ const studentCell = (t, s) => `<td class="student">${safe(s)}${offList(t, s) ? '
 function attentionHtml(list) {
   const roster = rosterOf(tab), latest = new Map();
   list.forEach(r => { const k = r.studentName + "|" + r.assignmentId; if (!latest.has(k)) latest.set(k, r); });
-  const flags = [...latest.values()].filter(r => { const a = aiOf(r); return a && a.flag; }).map(r => `<li><b>${safe(r.studentName)}</b> · ${safe(titleOf(r))}: ${safe(aiOf(r).flag)}</li>`);
+  const flagText = r => { const a = aiOf(r), ans = r.answers || {}; if (a && a.teacher) return ""; if (a && a.flag) return a.flag; return ans["Pasted writing"] ? ans["Pasted writing"] + " (not graded yet). Check with the student." : ""; };
+  const flags = [...latest.values()].filter(r => flagText(r)).map(r => `<li><b>${safe(r.studentName)}</b> · ${safe(titleOf(r))}: ${safe(flagText(r))}</li>`);
   const data = masteryData(list), ones = [];
   Object.keys(data).sort().forEach(s => { const c = Object.keys(data[s]).filter(c => data[s][c].n === 1); if (c.length) ones.push(`<li><b>${safe(s)}</b> · Level 1 on ${safe(c.map(shortStd).join(", "))}</li>`); });
   // "Due so far" = days up to the latest day anyone in this class has turned in, per unit.
@@ -299,7 +300,7 @@ function attentionHtml(list) {
     if (miss.length >= 2) missing.push(`<li><b>${safe(s)}</b> · missing ${miss.length}: ${safe(miss.slice(0, 3).map(id => REG[id].title.split(" · ")[0]).join(", "))}${miss.length > 3 ? "…" : ""}</li>`);
   });
   const count = flags.length + ones.length + missing.length + none.length, parts = [];
-  if (flags.length) parts.push(`<div class="att flag"><b>⚠ Flagged work (${flags.length})</b><ul>${flags.join("")}</ul></div>`);
+  if (flags.length) parts.push(`<div class="att flag"><b>⚠ Possible AI or copied work (${flags.length})</b> <small>A flag means “check with the student,” not proof.</small><ul>${flags.join("")}</ul></div>`);
   if (ones.length) parts.push(`<div class="att low"><b>Level 1 on a standard (${ones.length})</b><ul>${ones.join("")}</ul></div>`);
   if (missing.length) parts.push(`<div class="att miss"><b>Missing 2 or more activities (${missing.length})</b><ul>${missing.join("")}</ul></div>`);
   if (none.length) parts.push(`<div class="att none"><b>Nothing turned in yet (${none.length})</b><p>${safe(none.join(", "))}</p></div>`);
