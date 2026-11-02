@@ -569,19 +569,28 @@ function addWeekdays(iso, n) { const d = new Date(iso + "T12:00:00"), step = n <
 function weekdaysBetween(a, b) { let n = 0; const d = new Date(a + "T12:00:00"), end = new Date(b + "T12:00:00"); while (d < end) { d.setDate(d.getDate() + 1); if (schoolDay(d)) n++; } return n; }
 // When a lesson day lands: the summative is the green-sheet date. Other days are spread evenly (weekdays) from
 // where you pinned the class (CLASS_TODAY) or the day after the last unit's test, the same way the student home page does it.
+// Lesson dates use the same class-day calendar as the student home page: core classes meet Monday–Thursday,
+// skipping no-school days. Day N is counted from where you pinned the class (CLASS_TODAY) and the rest of the
+// unit is spread evenly up to its green-sheet test date, so you and your students always see the same dates.
+const classDayT = d => d.getDay() >= 1 && d.getDay() <= 4 && schoolDay(d);
+function classDaysBetweenT(a, b) { let n = 0; const d = new Date(a + "T12:00:00"), end = new Date(b + "T12:00:00"); while (d < end) { d.setDate(d.getDate() + 1); if (classDayT(d)) n++; } return n; }
+function stepClassDaysT(iso, n) { const d = new Date(iso + "T12:00:00"), dir = n < 0 ? -1 : 1; for (let k = Math.abs(n); k > 0;) { d.setDate(d.getDate() + dir); if (classDayT(d)) k--; } return isoOf(d); }
 function dayDate(course, part1, unit, day, summ) {
-  if (part1) return null;
+  if (part1 || course === "civics") return null;
   const cal = (window.CLASS_CALENDAR || {})[course] || {}, c = cal[unit];
   if (!c || !c.summative) return null;
   if (summ || day >= c.days) return { iso: c.summative, exact: true };
   const pin = (window.CLASS_TODAY || {})[course];
-  let fromDate, fromDay;
-  if (pin && pin.unit === unit) { fromDate = pin.date; fromDay = pin.day; }
-  else if (pin && unit < pin.unit) return { iso: addWeekdays(pin.date, -1), exact: false };
-  else { const prev = cal[unit - 1]; if (!prev || !prev.summative) return null; fromDate = addWeekdays(prev.summative, 1); fromDay = 1; }
-  if (day < fromDay) return { iso: addWeekdays(fromDate, -(fromDay - day)), exact: false };
-  const total = weekdaysBetween(fromDate, c.summative);
-  return { iso: addWeekdays(fromDate, Math.ceil((day - fromDay) / (c.days - fromDay) * total)), exact: false };
+  let from, fromDay;
+  if (pin && pin.unit === unit) { from = pin.date; fromDay = pin.day; }
+  else if (pin && unit < pin.unit) return { iso: stepClassDaysT(pin.date, -1), exact: false };
+  else { const prev = cal[unit - 1]; if (!prev || !prev.summative) return null; from = stepClassDaysT(prev.summative, 1); fromDay = 1; }
+  if (day <= fromDay) return { iso: stepClassDaysT(from, -(fromDay - day)), exact: day === fromDay && !!(pin && pin.unit === unit) };
+  const total = classDaysBetweenT(from, c.summative);
+  const dayOn = iso => total ? Math.min(c.days, fromDay + Math.floor(classDaysBetweenT(from, iso) / total * (c.days - fromDay))) : c.days;
+  let d = from;
+  while (d < c.summative) { d = stepClassDaysT(d, 1); if (dayOn(d) >= day) return { iso: d, exact: false }; }
+  return { iso: c.summative, exact: false };
 }
 function collectTodos() {
   const keep = tab, out = [];
