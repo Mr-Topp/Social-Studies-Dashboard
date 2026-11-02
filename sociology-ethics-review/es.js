@@ -1,0 +1,526 @@
+// Spanish for "Escape from Seahaven" (Sociology Unit 1 review). Loaded after ../shared/lang.js.
+// game.js keeps running in English; these entries swap what shows on screen.
+(function () {
+  const dict = {};
+  const add = pairs => pairs.forEach(([en, es]) => { dict[en] = es; });
+
+  // ---------- Speakers (the letter in the round portrait comes from the first letter) ----------
+  const speakers = {
+    "TRUMAN": "TRUMAN", "MERYL": "MERYL", "CHRISTOF": "CHRISTOF",
+    "CASE TRAINING": "ENTRENAMIENTO", "PRODUCER FEED": "SEÑAL DEL PRODUCTOR", "RADIO CONTROL": "CONTROL DE RADIO",
+    "CASE NOTE": "NOTA DEL CASO", "ARCHIVE": "ARCHIVO", "COMTE FILE": "ARCHIVO DE COMTE", "MARX FILE": "ARCHIVO DE MARX",
+    "FINAL FILE": "ARCHIVO FINAL", "THREE-LENS SCAN": "ESCANEO DE TRES LENTES", "STORM WARNING": "ALERTA DE TORMENTA",
+    "EXIT DOOR": "PUERTA DE SALIDA", "FINAL LENS": "LENTE FINAL", "INVESTIGATION": "INVESTIGACIÓN",
+    "VARIABLE SCAN": "ESCANEO DE VARIABLES", "METHOD SELECT": "ELEGIR MÉTODO", "SYLVIA’S INTERVIEW": "ENTREVISTA A SYLVIA",
+    "SURVEY TERMINAL": "TERMINAL DE ENCUESTAS", "RESULTS DESK": "MESA DE RESULTADOS", "ETHICS BOARD": "COMITÉ DE ÉTICA",
+    "CONTROL ROOM": "SALA DE CONTROL", "FINAL VOTE": "VOTO FINAL"
+  };
+  Object.keys(speakers).forEach(k => { if (k !== speakers[k]) dict[k] = speakers[k]; });
+
+  // [speaker, English story, Spanish story] — same markup game.js builds, so the portrait letter changes too.
+  const stories = [
+    ["TRUMAN", "Truman is nervous about leaving town. A psychologist might ask what memories or fears shape his feelings. A sociologist asks how the town around him shapes those fears.",
+      "Truman está nervioso por salir del pueblo. Un psicólogo podría preguntar qué recuerdos o miedos influyen en sus sentimientos. Un sociólogo pregunta cómo el pueblo que lo rodea influye en esos miedos."],
+    ["CASE TRAINING", "A good investigator can tell when an explanation is about an individual and when it points to the social world.",
+      "Un buen investigador sabe cuándo una explicación trata de una sola persona y cuándo apunta al mundo social."],
+    ["MERYL", "Family, coworkers, advertisements, and the news all repeat the same warning: leaving Seahaven is dangerous.",
+      "La familia, los compañeros de trabajo, los anuncios y las noticias repiten la misma advertencia: salir de Seahaven es peligroso."],
+    ["PRODUCER FEED", "The show presents one kind of marriage, job, home, and future as the only normal way to live.",
+      "El programa presenta un solo tipo de matrimonio, trabajo, casa y futuro como la única forma normal de vivir."],
+    ["CASE TRAINING", "The sociological imagination asks whether a problem is isolated or connected to a wider pattern.",
+      "La imaginación sociológica (sociological imagination) pregunta si un problema es aislado o si está conectado con un patrón más amplio."],
+    ["TRUMAN", "A stage light falls from the sky. The radio gives a quick excuse, but Truman starts linking this clue to other strange events.",
+      "Un reflector de escenario cae del cielo. La radio da una excusa rápida, pero Truman empieza a conectar esta pista con otros hechos extraños."],
+    ["RADIO CONTROL", "Truman’s car radio accidentally broadcasts a crew tracking his exact movements. His fear grows as he notices the town keeps redirecting him.",
+      "Por accidente, la radio del carro de Truman transmite a un equipo que sigue cada uno de sus movimientos. Su miedo crece cuando nota que el pueblo lo sigue desviando."],
+    ["CASE NOTE", "From childhood, Truman learns town rules from family, school, friends, work, and media. These lessons shape what he thinks is possible.",
+      "Desde niño, Truman aprende las reglas del pueblo de su familia, la escuela, sus amigos, el trabajo y los medios. Estas lecciones moldean lo que él cree que es posible."],
+    ["ARCHIVE", "The first sociologists built different tools for studying society. Open the right file for each idea.",
+      "Los primeros sociólogos crearon distintas herramientas para estudiar la sociedad. Abre el archivo correcto para cada idea."],
+    ["COMTE FILE", "A crew member says, “I just feel like the town is controlling Truman.” Comte asks how the claim could be studied with evidence.",
+      "Un miembro del equipo dice: “Yo solo siento que el pueblo está controlando a Truman”. Comte pregunta cómo se podría estudiar esa afirmación con evidencia."],
+    ["MARX FILE", "Christof owns the show and controls the profits. Truman provides the labor and story but has no say in how the money or power is used.",
+      "Christof es el dueño del programa y controla las ganancias. Truman pone el trabajo y la historia, pero no tiene voz ni voto sobre cómo se usan el dinero o el poder."],
+    ["FINAL FILE", "One investigator studies how shared rules help hold a community together. Another examines how officials use formal rules and authority to control it.",
+      "Un investigador estudia cómo las reglas compartidas ayudan a mantener unida a una comunidad. Otro examina cómo los funcionarios usan reglas formales y autoridad para controlarla."],
+    ["THREE-LENS SCAN", "The same scene can look different through different theories. Sort each explanation.",
+      "La misma escena puede verse distinta a través de distintas teorías. Clasifica cada explicación."],
+    ["CHRISTOF", "Christof argues that the show gives workers jobs, brings viewers together, and keeps Seahaven’s routines stable.",
+      "Christof dice que el programa les da empleo a los trabajadores, une a los televidentes y mantiene estables las rutinas de Seahaven."],
+    ["STORM WARNING", "Christof controls the set, the information, and the profits. When Truman resists, the show uses fear to keep him in place.",
+      "Christof controla el escenario, la información y las ganancias. Cuando Truman se resiste, el programa usa el miedo para mantenerlo en su lugar."],
+    ["EXIT DOOR", "A painted sky once meant safety to Truman. After he discovers the set, the same sky becomes a sign of deception.",
+      "Antes, un cielo pintado significaba seguridad para Truman. Cuando descubre el escenario, ese mismo cielo se vuelve una señal de engaño."],
+    ["FINAL LENS", "A classmate says, “Functionalism, conflict theory, and symbolic interactionism all mean the same thing.”",
+      "Un compañero de clase dice: “El funcionalismo, la teoría del conflicto y el interaccionismo simbólico significan lo mismo”."],
+    ["INVESTIGATION", "Truman needs a study that can be checked—not a guess disguised as a fact.",
+      "Truman necesita un estudio que se pueda comprobar, no una suposición disfrazada de hecho."],
+    ["INVESTIGATION", "Truman wants to know whether warnings about travel affect residents’ choices.",
+      "Truman quiere saber si las advertencias sobre viajar afectan las decisiones de los vecinos."],
+    ["INVESTIGATION", "The team predicts: “Residents who see more travel warnings will be less willing to leave Seahaven.”",
+      "El equipo predice: “Los vecinos que ven más advertencias sobre viajar tendrán menos ganas de irse de Seahaven”."],
+    ["VARIABLE SCAN", "Use the hypothesis: more travel warnings may be related to less willingness to leave.",
+      "Usa la hipótesis: más advertencias sobre viajar pueden estar relacionadas con menos ganas de irse."],
+    ["METHOD SELECT", "Different questions need different tools. A good researcher chooses the method that can collect the evidence the question needs.",
+      "Cada pregunta necesita sus propias herramientas. Un buen investigador elige el método que puede reunir la evidencia que la pregunta necesita."],
+    ["SYLVIA’S INTERVIEW", "The board wants to understand how Sylvia experienced being part of the show. It needs detail and room for follow-up questions.",
+      "El comité quiere entender cómo fue para Sylvia ser parte del programa. Necesita detalles y espacio para preguntas de seguimiento."],
+    ["SURVEY TERMINAL", "The survey asks, “Don’t you agree Seahaven is the safest and happiest town?” Many residents choose “yes.”",
+      "La encuesta pregunta: “¿No estás de acuerdo en que Seahaven es el pueblo más seguro y feliz?”. Muchos vecinos eligen “sí”."],
+    ["RESULTS DESK", "A researcher interviews only Truman’s closest friends, then claims every Seahaven resident wants to escape.",
+      "Un investigador entrevista solo a los amigos más cercanos de Truman y luego dice que todos los vecinos de Seahaven quieren escapar."],
+    ["ETHICS BOARD", "The producers secretly record Truman from birth, keep the real purpose from him, broadcast private moments, and block him when he tries to leave.",
+      "Los productores graban a Truman en secreto desde que nació, le ocultan el propósito real, transmiten sus momentos privados y lo bloquean cuando intenta irse."],
+    ["ETHICS BOARD", "A study may use some deception only under strict limits. Participants still deserve protection and a real choice.",
+      "Un estudio puede usar algo de engaño solo con límites estrictos. Aun así, los participantes merecen protección y una elección real."],
+    ["CONTROL ROOM", "A board approved a low-risk study that used limited deception because the question could not be studied another way. The study is over.",
+      "Un comité aprobó un estudio de bajo riesgo que usó un engaño limitado, porque la pregunta no se podía estudiar de otra forma. El estudio ya terminó."],
+    ["FINAL VOTE", "Christof argues that viewers love the show and that it has produced years of data. The board must decide whether Truman’s study can continue.",
+      "Christof dice que a los televidentes les encanta el programa y que ha producido años de datos. El comité debe decidir si el estudio de Truman puede continuar."]
+  ];
+  const block = (sp, story) => `<div class="speaker"><div class="portrait">${sp[0]}</div><div class="bubble"><b>${sp}</b>${story}</div></div>`;
+  stories.forEach(([sp, en, es]) => {
+    dict[en] = es;
+    dict[block(sp, en)] = block(speakers[sp], es);
+  });
+
+  // ---------- Chapters ----------
+  add([
+    ["Good Morning, Seahaven", "Buenos días, Seahaven"],
+    ["Cracks in the Set", "Grietas en el escenario"],
+    ["The Founders’ Files", "Los archivos de los fundadores"],
+    ["Three Lenses", "Tres lentes"],
+    ["Build the Investigation", "Arma la investigación"],
+    ["Gather the Proof", "Reúne las pruebas"],
+    ["The Ethics Tribunal", "El tribunal de ética"],
+    // kickers are shown in capitals
+    ["READ THE SOCIAL WORLD", "LEE EL MUNDO SOCIAL"],
+    ["CONNECT TROUBLE TO SOCIETY", "CONECTA LOS PROBLEMAS CON LA SOCIEDAD"],
+    ["UNLOCK FOUR INVESTIGATOR POWERS", "DESBLOQUEA CUATRO PODERES DE INVESTIGADOR"],
+    ["EXPLAIN THE SAME SHOW THREE WAYS", "EXPLICA EL MISMO PROGRAMA DE TRES FORMAS"],
+    ["TURN SUSPICION INTO A STUDY", "CONVIERTE UNA SOSPECHA EN UN ESTUDIO"],
+    ["CHOOSE METHODS AND CATCH BIAS", "ELIGE MÉTODOS Y DETECTA EL SESGO"],
+    ["PUT THE SHOW ON TRIAL", "LLEVA EL PROGRAMA A JUICIO"],
+    ["LANCASTER SQUARE • 6:30 AM", "PLAZA LANCASTER • 6:30 AM"],
+    ["OBJECT FALL • STAGE LIGHT 9", "OBJETO CAÍDO • REFLECTOR 9"],
+    ["ARCHIVE ROOM • ACCESS GRANTED", "SALA DE ARCHIVOS • ACCESO PERMITIDO"],
+    ["CONTROL ROOM • THEORY SCAN", "SALA DE CONTROL • ESCANEO DE TEORÍAS"],
+    ["BASEMENT OFFICE • CASE DESIGN", "OFICINA DEL SÓTANO • DISEÑO DEL CASO"],
+    ["HIDDEN CAMERA NETWORK • ONLINE", "RED DE CÁMARAS OCULTAS • EN LÍNEA"],
+    ["REVIEW BOARD • FINAL HEARING", "COMITÉ DE REVISIÓN • AUDIENCIA FINAL"],
+    ["MORNING ROUTINE • 6:30 AM", "RUTINA DE LA MAÑANA • 6:30 AM"]
+  ]);
+
+  // ---------- Topics (shown in hints, feedback, and the mastery report) ----------
+  const topics = {
+    "Sociology vs. Psychology": "Sociología vs. psicología",
+    "Sociological Perspective": "Perspectiva sociológica",
+    "Social Context": "Contexto social",
+    "Trouble vs. Issue": "Problema personal vs. asunto público",
+    "Sociological Imagination": "Imaginación sociológica",
+    "Founders": "Fundadores",
+    "Major Theories": "Teorías principales",
+    "Scientific Method": "Método científico",
+    "Variables": "Variables",
+    "Research Methods": "Métodos de investigación",
+    "Research Ethics": "Ética en la investigación"
+  };
+  Object.keys(topics).forEach(t => {
+    if (t !== topics[t]) dict[t] = topics[t];
+    dict[`Think about <strong>${t}</strong> and choose the most complete answer.`] = `Piensa en <strong>${topics[t]}</strong> y elige la respuesta más completa.`;
+    dict[`Signal intercepted: focus on <strong>${t}</strong>. Two choices have been blocked.`] = `Señal interceptada: enfócate en <strong>${topics[t]}</strong>. Se bloquearon dos opciones.`;
+  });
+
+  // ---------- Sorting categories (+ the Glitch Card hint that lists them) ----------
+  const cats = {
+    "SOCIOLOGICAL": "SOCIOLÓGICA", "PSYCHOLOGICAL": "PSICOLÓGICA",
+    "PERSONAL TROUBLE": "PROBLEMA PERSONAL", "PUBLIC ISSUE": "ASUNTO PÚBLICO",
+    "COMTE": "COMTE", "MARX": "MARX", "DURKHEIM": "DURKHEIM", "WEBER": "WEBER",
+    "FUNCTIONALISM": "FUNCIONALISMO", "CONFLICT THEORY": "TEORÍA DEL CONFLICTO", "SYMBOLIC INTERACTIONISM": "INTERACCIONISMO SIMBÓLICO",
+    "INDEPENDENT VARIABLE": "VARIABLE INDEPENDIENTE", "DEPENDENT VARIABLE": "VARIABLE DEPENDIENTE",
+    "SURVEY": "ENCUESTA", "INTERVIEW": "ENTREVISTA", "EXPERIMENT": "EXPERIMENTO", "OBSERVATION": "OBSERVACIÓN", "CONTENT ANALYSIS": "ANÁLISIS DE CONTENIDO",
+    "PROTECTS PARTICIPANTS": "PROTEGE A LOS PARTICIPANTES", "VIOLATES ETHICS": "VIOLA LA ÉTICA"
+  };
+  Object.keys(cats).forEach(c => { if (c !== cats[c]) dict[c] = cats[c]; });
+  [["SOCIOLOGICAL", "PSYCHOLOGICAL"], ["PERSONAL TROUBLE", "PUBLIC ISSUE"], ["COMTE", "MARX", "DURKHEIM", "WEBER"],
+   ["FUNCTIONALISM", "CONFLICT THEORY", "SYMBOLIC INTERACTIONISM"], ["INDEPENDENT VARIABLE", "DEPENDENT VARIABLE"],
+   ["SURVEY", "INTERVIEW", "EXPERIMENT", "OBSERVATION", "CONTENT ANALYSIS"], ["PROTECTS PARTICIPANTS", "VIOLATES ETHICS"]].forEach(list => {
+    const es = list.map(c => cats[c]);
+    const joined = es.length > 1 ? es.slice(0, -1).join(", ") + " y " + es[es.length - 1] : es[0];
+    dict[`Signal intercepted: compare each card directly with the definitions of <strong>${list.join(" and ")}</strong>.`] =
+      `Señal interceptada: compara cada tarjeta directamente con las definiciones de <strong>${joined}</strong>.`;
+  });
+
+  // ---------- Questions, choices, sort cards, explanations, evidence ----------
+  add([
+    // Chapter 1
+    ["Which question is the sociological one?", "¿Cuál es la pregunta sociológica?"],
+    ["Which past event shaped Truman’s fear of leaving?", "¿Qué evento del pasado influyó en el miedo de Truman a irse?"],
+    ["How do town rules and media shape his fear?", "¿Cómo influyen en su miedo las reglas del pueblo y los medios?"],
+    ["Does his anxiety affect how he makes choices?", "¿Su ansiedad afecta la forma en que toma decisiones?"],
+    ["Which memory keeps him from leaving town?", "¿Qué recuerdo le impide salir del pueblo?"],
+    ["Psychology often focuses on an individual’s thoughts and feelings. Sociology asks how social context—groups, culture, institutions, and relationships—shapes behavior.",
+      "La psicología suele enfocarse en los pensamientos y sentimientos de una persona. La sociología pregunta cómo el contexto social (social context) —los grupos, la cultura, las instituciones y las relaciones— influye en la conducta."],
+    ["Two investigator lenses", "Dos lentes de investigador"],
+
+    ["Sort each clue by the kind of explanation it gives.", "Clasifica cada pista según el tipo de explicación que da."],
+    ["The town rewards people for following the same routine.", "El pueblo premia a la gente por seguir la misma rutina."],
+    ["Truman’s memory of his father’s accident affects his choices.", "El recuerdo del accidente de su padre afecta las decisiones de Truman."],
+    ["Advertisements and school lessons teach that travel is dangerous.", "Los anuncios y las clases de la escuela enseñan que viajar es peligroso."],
+    ["Truman’s individual fear makes him hesitate.", "El miedo personal de Truman lo hace dudar."],
+    ["Sociological explanations connect behavior to social forces. Psychological explanations focus more on an individual’s mind, feelings, or personality.",
+      "Las explicaciones sociológicas conectan la conducta con fuerzas sociales. Las explicaciones psicológicas se enfocan más en la mente, los sentimientos o la personalidad de una persona."],
+    ["Perspective decoder", "Decodificador de perspectivas"],
+
+    ["What helps explain why Truman’s choices are shaped by this message?", "¿Qué ayuda a explicar por qué este mensaje influye en las decisiones de Truman?"],
+    ["Does he remember the staged accident clearly?", "¿Recuerda claramente el accidente falso?"],
+    ["Does his anxiety rise after each travel warning?", "¿Su ansiedad sube después de cada advertencia de viaje?"],
+    ["Do family, news, and schools repeat warnings?", "¿La familia, las noticias y la escuela repiten advertencias?"],
+    ["Does he prefer familiar places over new ones?", "¿Prefiere los lugares conocidos a los nuevos?"],
+    ["Social context includes the surroundings, relationships, institutions, and culture that influence a person.",
+      "El contexto social incluye el entorno, las relaciones, las instituciones y la cultura que influyen en una persona."],
+    ["The warning network", "La red de advertencias"],
+
+    ["How did that version of “normal” become powerful?", "¿Cómo se volvió tan poderosa esa versión de lo “normal”?"],
+    ["Repeated expectations make one lifestyle seem normal.", "Las expectativas repetidas hacen que un estilo de vida parezca normal."],
+    ["A survey shows many people already agree with it.", "Una encuesta muestra que mucha gente ya está de acuerdo."],
+    ["Written rules make a custom natural by themselves.", "Las reglas escritas, por sí solas, vuelven natural una costumbre."],
+    ["Personal traits make residents follow the same future.", "Los rasgos personales hacen que los vecinos elijan el mismo futuro."],
+    ["A social construction feels natural when people repeatedly create, teach, and reinforce it.",
+      "Una construcción social (social construction) se siente natural cuando la gente la crea, la enseña y la refuerza una y otra vez."],
+    ["The perfect-life script", "El guion de la vida perfecta"],
+
+    // Chapter 2
+    ["Sort each situation.", "Clasifica cada situación."],
+    ["One resident misses a bus once.", "Un vecino pierde el autobús una vez."],
+    ["Buses across town are shut down whenever residents try to leave.", "Cancelan los autobuses de todo el pueblo cada vez que los vecinos intentan irse."],
+    ["One worker forgets a line during a show.", "Un trabajador olvida una línea del guion durante el programa."],
+    ["Workers across the town are threatened if they help Truman leave.", "Amenazan a los trabajadores de todo el pueblo si ayudan a Truman a irse."],
+    ["A personal trouble mainly affects one person. A public issue is connected to a wider social pattern or institution.",
+      "Un problema personal (personal trouble) afecta sobre todo a una persona. Un asunto público (public issue) está conectado con un patrón social más amplio o con una institución."],
+    ["Trouble-or-issue decoder", "Decodificador de problema o asunto"],
+
+    ["What is Truman practicing when he connects his experience to patterns in Seahaven?", "¿Qué está practicando Truman cuando conecta su experiencia con los patrones de Seahaven?"],
+    ["Socialization shapes expectations", "La socialización moldea expectativas"],
+    ["Symbolic interactionism", "Interaccionismo simbólico"],
+    ["Functionalism explains order", "El funcionalismo explica el orden"],
+    ["Sociological imagination", "Imaginación sociológica"],
+    ["C. Wright Mills called this the sociological imagination: connecting personal experiences with larger social forces and patterns.",
+      "C. Wright Mills llamó a esto la imaginación sociológica: conectar las experiencias personales con fuerzas y patrones sociales más grandes."],
+    ["The fallen stage light", "El reflector caído"],
+
+    ["Which explanation best connects personal trouble to public issue?", "¿Qué explicación conecta mejor el problema personal con el asunto público?"],
+    ["His distress means most people are trapped too.", "Su angustia significa que casi todos también están atrapados."],
+    ["His distress connects with a wider system of fear and control.", "Su angustia se conecta con un sistema más amplio de miedo y control."],
+    ["His personality best explains the town’s response.", "Su personalidad es lo que mejor explica la respuesta del pueblo."],
+    ["His fear matters only if measured in an experiment.", "Su miedo solo importa si se mide en un experimento."],
+    ["The sociological imagination connects Truman’s personal distress to an organized system. Social explanations add context; they do not dismiss feelings or choice.",
+      "La imaginación sociológica conecta la angustia personal de Truman con un sistema organizado. Las explicaciones sociales agregan contexto; no descartan los sentimientos ni las decisiones."],
+    ["The tracking frequency", "La frecuencia de rastreo"],
+
+    ["What process is teaching him norms and expectations?", "¿Qué proceso le está enseñando normas y expectativas?"],
+    ["Role conflict", "Conflicto de roles"],
+    ["Cultural diffusion", "Difusión cultural"],
+    ["Socialization", "Socialización"],
+    ["Social mobility", "Movilidad social"],
+    ["Socialization is how people learn culture, norms, roles, and expected behavior through everyday life.",
+      "La socialización (socialization) es la forma en que las personas aprenden la cultura, las normas, los roles y la conducta esperada en la vida diaria."],
+    ["The socialization script", "El guion de la socialización"],
+
+    // Chapter 3
+    ["Match all four contributions to the founder.", "Une cada uno de los cuatro aportes con su fundador."],
+    ["Study society systematically, using evidence.", "Estudiar la sociedad de forma sistemática, usando evidencia."],
+    ["Examine class, ownership, and unequal power.", "Examinar las clases sociales, la propiedad y el poder desigual."],
+    ["Study social bonds, shared rules, and social order.", "Estudiar los lazos sociales, las reglas compartidas y el orden social."],
+    ["Study meaning, authority, and bureaucracy.", "Estudiar el significado, la autoridad y la burocracia."],
+    ["Comte supported systematic social science; Marx analyzed class and power; Durkheim studied cohesion and order; Weber examined meaning and authority.",
+      "Comte apoyó una ciencia social sistemática; Marx analizó las clases sociales y el poder; Durkheim estudió la cohesión y el orden; Weber examinó el significado y la autoridad."],
+    ["The founders’ archive", "El archivo de los fundadores"],
+    ["⚡ FOUNDER FILES UNLOCKED", "⚡ ARCHIVOS DE FUNDADORES DESBLOQUEADOS"],
+
+    ["Which next step best fits Comte’s approach?", "¿Qué siguiente paso encaja mejor con el enfoque de Comte?"],
+    ["Survey residents about Christof’s leadership.", "Encuestar a los vecinos sobre el liderazgo de Christof."],
+    ["Compare one worker’s personal account.", "Comparar el relato personal de un trabajador."],
+    ["Guess the result before observing.", "Adivinar el resultado antes de observar."],
+    ["Record travel patterns consistently.", "Registrar los patrones de viaje de forma ordenada."],
+    ["Comte promoted a systematic, evidence-based study of society instead of relying on unsupported opinion.",
+      "Comte promovió un estudio sistemático de la sociedad, basado en evidencia, en vez de depender de opiniones sin pruebas."],
+    ["The observation log", "El registro de observaciones"],
+
+    ["Which question would Marx most likely ask?", "¿Qué pregunta es más probable que haga Marx?"],
+    ["Who owns the show and receives its profits?", "¿Quién es dueño del programa y recibe sus ganancias?"],
+    ["Which ritual helps residents feel connected?", "¿Qué ritual ayuda a los vecinos a sentirse unidos?"],
+    ["What meaning does the exit door carry?", "¿Qué significado tiene la puerta de salida?"],
+    ["How do town routines create social stability?", "¿Cómo crean estabilidad social las rutinas del pueblo?"],
+    ["Marx focused on ownership, class, inequality, and how power lets some groups benefit from others’ work.",
+      "Marx se enfocó en la propiedad, las clases sociales, la desigualdad y en cómo el poder permite que algunos grupos se beneficien del trabajo de otros."],
+    ["Who profits?", "¿Quién se lleva las ganancias?"],
+
+    ["Which pairing fits those questions?", "¿Qué combinación encaja con esas preguntas?"],
+    ["Weber studies cohesion; Comte studies bureaucracy.", "Weber estudia la cohesión; Comte estudia la burocracia."],
+    ["Durkheim studies cohesion; Weber studies bureaucracy.", "Durkheim estudia la cohesión; Weber estudia la burocracia."],
+    ["Marx studies order; Durkheim studies authority.", "Marx estudia el orden; Durkheim estudia la autoridad."],
+    ["Comte studies symbols; Marx studies social order.", "Comte estudia los símbolos; Marx estudia el orden social."],
+    ["Durkheim examined cohesion and shared rules. Weber studied authority, bureaucracy, and the meanings people attach to social action.",
+      "Durkheim examinó la cohesión (cohesion) y las reglas compartidas. Weber estudió la autoridad, la burocracia (bureaucracy) y los significados que las personas le dan a la acción social."],
+    ["The system map", "El mapa del sistema"],
+
+    // Chapter 4
+    ["Classify all six clues.", "Clasifica las seis pistas."],
+    ["Town routines help its institutions work together.", "Las rutinas del pueblo ayudan a que sus instituciones funcionen juntas."],
+    ["Christof controls information and keeps the profits.", "Christof controla la información y se queda con las ganancias."],
+    ["A painted exit sign changes meaning for Truman.", "Un letrero de salida pintado cambia de significado para Truman."],
+    ["Shared rules help Seahaven feel stable.", "Las reglas compartidas ayudan a que Seahaven se sienta estable."],
+    ["The producer has power Truman does not have.", "El productor tiene un poder que Truman no tiene."],
+    ["Everyday greetings teach people what the town means.", "Los saludos de cada día le enseñan a la gente lo que significa el pueblo."],
+    ["Functionalism studies how parts of society work together; conflict theory studies unequal power; symbolic interactionism studies meanings in everyday interaction.",
+      "El funcionalismo (functionalism) estudia cómo las partes de la sociedad funcionan juntas; la teoría del conflicto (conflict theory) estudia el poder desigual; el interaccionismo simbólico (symbolic interactionism) estudia los significados en la interacción de cada día."],
+    ["Three lenses unlocked", "Tres lentes desbloqueados"],
+
+    ["Which lens best describes the part of his argument about how society’s parts work together?", "¿Qué lente describe mejor la parte de su argumento sobre cómo las partes de la sociedad funcionan juntas?"],
+    ["Conflict theory", "Teoría del conflicto"],
+    ["Functionalism", "Funcionalismo"],
+    ["Functionalism examines how institutions and social patterns contribute to order and how parts of society connect.",
+      "El funcionalismo examina cómo las instituciones y los patrones sociales contribuyen al orden y cómo se conectan las partes de la sociedad."],
+
+    ["Which lens best exposes the unequal power in this situation?", "¿Qué lente muestra mejor el poder desigual en esta situación?"],
+    ["Conflict theory focuses on inequality, competition over resources, and who has the power to shape society.",
+      "La teoría del conflicto se enfoca en la desigualdad, en la competencia por los recursos y en quién tiene el poder para moldear la sociedad."],
+    ["Christof’s control room", "La sala de control de Christof"],
+
+    ["Which lens best explains how the symbol’s meaning changes?", "¿Qué lente explica mejor cómo cambia el significado del símbolo?"],
+    ["The sociological imagination", "La imaginación sociológica"],
+    ["Symbolic interactionism examines how people create and change meanings through symbols and everyday interactions.",
+      "El interaccionismo simbólico examina cómo las personas crean y cambian significados por medio de símbolos e interacciones de cada día."],
+    ["The door in the sky", "La puerta en el cielo"],
+
+    ["What is the best response?", "¿Cuál es la mejor respuesta?"],
+    ["Use one lens for every part of a social pattern.", "Usar el mismo lente para todas las partes de un patrón social."],
+    ["Choose the lens that matches your opinion.", "Elegir el lente que coincida con tu opinión."],
+    ["Each lens highlights a different part of society.", "Cada lente resalta una parte distinta de la sociedad."],
+    ["A theory replaces evidence once it sounds convincing.", "Una teoría reemplaza la evidencia si suena convincente."],
+    ["Theories ask different questions. A sociologist can use more than one lens to understand the same society.",
+      "Las teorías hacen preguntas distintas. Un sociólogo puede usar más de un lente para entender la misma sociedad."],
+
+    // Chapter 5
+    ["Put the research steps in the order the team should use.", "Pon los pasos de la investigación en el orden que el equipo debe seguir."],
+    ["Analyze the results", "Analizar los resultados"],
+    ["Ask a research question", "Hacer una pregunta de investigación"],
+    ["Collect data", "Recolectar datos"],
+    ["Form a hypothesis", "Formular una hipótesis"],
+    ["Draw a conclusion", "Sacar una conclusión"],
+    ["A basic study starts with a question, predicts an answer, gathers data, analyzes it, and then draws a conclusion.",
+      "En el método científico (scientific method), un estudio básico empieza con una pregunta, predice una respuesta, recolecta datos, los analiza y luego saca una conclusión."],
+    ["Research plan", "Plan de investigación"],
+
+    ["Which question tests a relationship between social messages and residents’ actions?", "¿Qué pregunta pone a prueba una relación entre los mensajes sociales y las acciones de los vecinos?"],
+    ["Does family affect travel choices in the town?", "¿La familia afecta las decisiones de viaje en el pueblo?"],
+    ["Do warnings relate to residents’ willingness to leave?", "¿Las advertencias se relacionan con las ganas de irse de los vecinos?"],
+    ["Which street do most residents use after work?", "¿Qué calle usan más los vecinos después del trabajo?"],
+    ["How many signs mention travel each day?", "¿Cuántos letreros hablan de viajes cada día?"],
+    ["A strong sociological question is clear and can be answered with evidence about social behavior.",
+      "Una buena pregunta de investigación (research question) en sociología es clara y se puede responder con evidencia sobre la conducta social."],
+    ["A testable question", "Una pregunta que se puede comprobar"],
+
+    ["Why is this a testable hypothesis?", "¿Por qué es una hipótesis que se puede comprobar?"],
+    ["It predicts a link data can support or challenge.", "Predice una relación que los datos pueden apoyar o contradecir."],
+    ["It describes one person’s opinion about the show.", "Describe la opinión de una persona sobre el programa."],
+    ["It assumes the prediction is already proven.", "Da por hecho que la predicción ya está probada."],
+    ["It explains all residents without collecting data.", "Explica a todos los vecinos sin recolectar datos."],
+    ["A hypothesis predicts a relationship that can be checked by collecting and analyzing data.",
+      "Una hipótesis (hypothesis) predice una relación que se puede comprobar recolectando y analizando datos."],
+    ["The fear hypothesis", "La hipótesis del miedo"],
+
+    ["Sort the parts of the investigation.", "Clasifica las partes de la investigación."],
+    ["Number of travel warnings seen", "Número de advertencias de viaje que se ven"],
+    ["Residents’ willingness to leave", "Las ganas de irse de los vecinos"],
+    ["The factor expected to influence the result", "El factor que se espera que influya en el resultado"],
+    ["The outcome the researchers measure", "El resultado que miden los investigadores"],
+    ["The independent variable is the factor being compared or changed. The dependent variable is the measured outcome.",
+      "La variable independiente (independent variable) es el factor que se compara o se cambia. La variable dependiente (dependent variable) es el resultado que se mide."],
+    ["Variables identified", "Variables identificadas"],
+
+    // Chapter 6
+    ["Match each mission to the best method.", "Une cada misión con el mejor método."],
+    ["Ask many residents the same short questions about travel warnings.", "Hacerles a muchos vecinos las mismas preguntas cortas sobre las advertencias de viaje."],
+    ["Learn how Sylvia experienced life inside the show, with follow-up questions.", "Saber cómo fue para Sylvia vivir dentro del programa, con preguntas de seguimiento."],
+    ["Change one factor and measure its effect, while protecting participants.", "Cambiar un factor y medir su efecto, mientras se protege a los participantes."],
+    ["Record how workers behave during a normal work shift.", "Anotar cómo se comportan los trabajadores durante un turno normal de trabajo."],
+    ["Look for repeated messages across years of Seahaven advertisements.", "Buscar mensajes repetidos en años de anuncios de Seahaven."],
+    ["Surveys gather comparable answers; interviews explore experience; experiments test effects; observation records behavior; content analysis finds patterns in texts or media.",
+      "Las encuestas (surveys) reúnen respuestas que se pueden comparar; las entrevistas (interviews) exploran experiencias; los experimentos (experiments) prueban efectos; la observación (observation) registra la conducta; el análisis de contenido (content analysis) encuentra patrones en textos o medios."],
+    ["Complete method kit", "Kit completo de métodos"],
+
+    ["Which method fits this question best?", "¿Qué método encaja mejor con esta pregunta?"],
+    ["Survey many residents with the same questions.", "Encuestar a muchos vecinos con las mismas preguntas."],
+    ["Observe how people act during a shift.", "Observar cómo actúa la gente durante un turno."],
+    ["Count repeated themes in the show’s scripts.", "Contar los temas repetidos en los guiones del programa."],
+    ["Interview Sylvia and ask follow-up questions.", "Entrevistar a Sylvia y hacerle preguntas de seguimiento."],
+    ["Interviews let participants explain experiences in depth and allow researchers to ask relevant follow-up questions.",
+      "Las entrevistas permiten que los participantes expliquen sus experiencias a fondo y que los investigadores hagan preguntas de seguimiento útiles."],
+
+    ["What should the review team flag?", "¿Qué debería señalar el equipo de revisión?"],
+    ["The sample is too small for any question.", "La muestra es demasiado pequeña para cualquier pregunta."],
+    ["The survey uses more than one response choice.", "La encuesta usa más de una opción de respuesta."],
+    ["The wording may push residents toward “yes.”", "La forma de preguntar puede empujar a los vecinos al “sí”."],
+    ["The question does not ask about behavior.", "La pregunta no trata sobre la conducta de la gente."],
+    ["Leading wording can bias responses. Researchers should use neutral questions and consider who was surveyed.",
+      "Una pregunta tendenciosa (leading question) puede causar sesgo (bias) en las respuestas. Los investigadores deben usar preguntas neutrales y pensar en a quién encuestaron."],
+    ["Biased survey exposed", "Encuesta sesgada al descubierto"],
+
+    ["What is the biggest problem with that conclusion?", "¿Cuál es el mayor problema de esa conclusión?"],
+    ["His friends may not represent all residents.", "Puede que sus amigos no representen a todos los vecinos."],
+    ["Interviews cannot provide useful evidence.", "Las entrevistas no pueden dar evidencia útil."],
+    ["The researcher asked about intentions, not actions.", "El investigador preguntó por intenciones, no por acciones."],
+    ["A conclusion cannot include more than one person.", "Una conclusión no puede incluir a más de una persona."],
+    ["Researchers should consider how participants were selected. A narrow sample may not represent the larger population.",
+      "Los investigadores deben pensar en cómo eligieron a los participantes. Una muestra (sample) muy limitada puede no representar a toda la población."],
+    ["Sample warning", "Alerta de muestra"],
+
+    // Chapter 7
+    ["Select every research-ethics problem the board should investigate.", "Selecciona todos los problemas de ética que el comité debe investigar."],
+    ["No informed consent", "No hay consentimiento informado"],
+    ["Private information is exposed", "Se expone información privada"],
+    ["Participants may be harmed", "Los participantes pueden sufrir daño"],
+    ["Truman cannot freely withdraw", "Truman no puede retirarse libremente"],
+    ["The researchers use a clear, neutral survey", "Los investigadores usan una encuesta clara y neutral"],
+    ["The case raises consent, confidentiality and privacy, protection from harm, deception, and the right to withdraw. Those safeguards protect participants; they are not optional.",
+      "El caso tiene problemas de consentimiento informado (informed consent), confidencialidad (confidentiality) y privacidad, protección contra daños (protection from harm), engaño (deception) y el derecho a retirarse (right to withdraw). Esas protecciones cuidan a los participantes; no son opcionales."],
+    ["Four ethics charges", "Cuatro cargos de ética"],
+
+    ["Sort each research action.", "Clasifica cada acción de investigación."],
+    ["Explain risks and get voluntary informed consent.", "Explicar los riesgos y obtener consentimiento informado voluntario."],
+    ["Hide the purpose when deception is not justified.", "Ocultar el propósito cuando el engaño no está justificado."],
+    ["Protect identities and keep private information confidential.", "Proteger las identidades y mantener confidencial la información privada."],
+    ["Punish a participant who decides to stop.", "Castigar a un participante que decide parar."],
+    ["Debrief participants after approved, limited deception.", "Dar una explicación final a los participantes después de un engaño limitado y aprobado."],
+    ["Expose someone to serious harm for better evidence.", "Exponer a alguien a un daño grave para conseguir mejor evidencia."],
+    ["Ethical research requires informed consent, confidentiality, protection from harm, limits on deception, and the right to withdraw. Debriefing explains approved deception afterward.",
+      "La investigación ética exige consentimiento informado, confidencialidad, protección contra daños, límites al engaño y el derecho a retirarse. La explicación final (debriefing) aclara después el engaño que se aprobó."],
+    ["Ethics rulebook", "Reglamento de ética"],
+
+    ["What should the researchers do next?", "¿Qué deben hacer ahora los investigadores?"],
+    ["Keep the purpose hidden to protect the results.", "Mantener oculto el propósito para proteger los resultados."],
+    ["Explain the study and withheld information afterward.", "Explicar después el estudio y la información que ocultaron."],
+    ["Anonymize the records before analyzing the results.", "Volver anónimos los registros antes de analizar los resultados."],
+    ["Ask participants about joining a future study.", "Preguntar a los participantes si quieren unirse a otro estudio."],
+    ["When limited deception is approved, researchers should debrief participants afterward and explain what happened.",
+      "Cuando se aprueba un engaño limitado, los investigadores deben dar una explicación final a los participantes y contarles lo que pasó."],
+    ["The debriefing order", "La orden de explicación final"],
+
+    ["Which ruling best applies the ethics standards you learned?", "¿Qué decisión aplica mejor las normas de ética que aprendiste?"],
+    ["Continue because audience interest serves the public good.", "Continuar, porque el interés del público sirve al bien común."],
+    ["Stop the broadcasts, but keep filming as before.", "Parar las transmisiones, pero seguir grabando como antes."],
+    ["Debrief Truman later, while filming continues now.", "Explicarle todo a Truman después, y seguir grabando ahora."],
+    ["Pause until Truman can consent, withdraw, and be protected.", "Pausar hasta que Truman pueda consentir, retirarse y estar protegido."],
+    ["Research value does not cancel participant rights. The study must stop or be redesigned so participants are informed, protected, and free to withdraw.",
+      "El valor de una investigación no cancela los derechos de los participantes. El estudio debe parar o rediseñarse para que los participantes estén informados, protegidos y libres de retirarse."],
+    ["The board’s ruling", "La decisión del comité"]
+  ]);
+
+  // ---------- Game screens, buttons, and messages ----------
+  add([
+    ["Escape from Seahaven | Sociology Game", "Escape de Seahaven | Juego de sociología"],
+    ["LIVE FROM SEAHAVEN", "EN VIVO DESDE SEAHAVEN"],
+    ["LIVE FROM SEAHEAVEN", "EN VIVO DESDE SEAHAVEN"],
+    ["A sociology story game", "Un juego narrativo de sociología"],
+    ["ESCAPE<br><em>FROM</em><br>SEAHAVEN", "ESCAPE<br><em>DE</em><br>SEAHAVEN"],
+    ["Everything looks perfect. Everyone is smiling. And every choice has already been made for you. Break the patterns, collect evidence, and escape before Christof takes back control.",
+      "Todo se ve perfecto. Todos sonríen. Y cada decisión ya la tomaron por ti. Rompe los patrones, reúne evidencia y escapa antes de que Christof recupere el control."],
+    ["SOLO GAME", "JUEGO INDIVIDUAL"],
+    ["25–35 MINUTES", "25–35 MINUTOS"],
+    ["TEST REVIEW", "REPASO PARA EL EXAMEN"],
+    ["Investigator name", "Nombre del investigador"],
+    ["Enter your name", "Escribe tu nombre"],
+    ["Start the Broadcast <span>→</span>", "Empezar la transmisión <span>→</span>"],
+    ["Find the pattern.<br>Question the world.<br>Reach the door.", "Encuentra el patrón.<br>Cuestiona el mundo.<br>Llega a la puerta."],
+    ["Return to start", "Volver al inicio"],
+    ["Toggle sound", "Activar o quitar el sonido"],
+    ["Mute sound", "Quitar el sonido"],
+    ["Turn on sound", "Activar el sonido"],
+    ["ESCAPE METER", "MEDIDOR DE ESCAPE"],
+    ["TIME", "TIEMPO"],
+    ["CONFIDENTIAL", "CONFIDENCIAL"],
+    ["CASE FILE", "EXPEDIENTE"],
+    ["Evidence", "Evidencia"],
+    ["Correct", "Correctas"],
+    ["CHRISTOF'S CONTROL", "CONTROL DE CHRISTOF"],
+    ["Clues you uncover will appear here.", "Las pistas que descubras aparecerán aquí."],
+    ["⚡ Use Glitch Card (", "⚡ Usar Carta de Falla ("],
+    ["THE ROUTE", "LA RUTA"],
+    ["Game chapters", "Capítulos del juego"],
+    ["Continue <span>→</span>", "Continuar <span>→</span>"],
+    ["Continue", "Continuar"],
+    ["Enter Next Chapter", "Entrar al siguiente capítulo"],
+
+    ["DECISION", "DECISIÓN"],
+    ["SORTING MISSION", "MISIÓN DE CLASIFICAR"],
+    ["ORDER THE STEPS", "ORDENA LOS PASOS"],
+    ["SELECT ALL THAT APPLY", "ELIGE TODAS LAS QUE CORRESPONDAN"],
+    ["Make the call", "Toma la decisión"],
+    ["Break the pattern", "Rompe el patrón"],
+    ["Build the investigation", "Arma la investigación"],
+    ["File the charges", "Presenta los cargos"],
+    ["Place every card correctly. A mistake raises Christof’s Control.", "Pon cada tarjeta en el lugar correcto. Un error sube el control de Christof."],
+    ["Click each step in the correct order.", "Haz clic en cada paso en el orden correcto."],
+    ["Reset order", "Borrar el orden"],
+    ["More than one answer may be correct.", "Puede haber más de una respuesta correcta."],
+    ["Submit evidence", "Enviar evidencia"],
+
+    ["Evidence secured.", "Evidencia asegurada."],
+    ["Connection repaired.", "Conexión reparada."],
+    ["That clue does not fully explain the social pattern. Try again.", "Esa pista no explica del todo el patrón social. Intenta otra vez."],
+    ["Not that category. Look at what the statement is mainly describing, then try again.", "No es esa categoría. Fíjate en lo que más describe la frase e intenta otra vez."],
+    ["The study would break down in that order. Start with the question, then make a prediction before collecting data.",
+      "En ese orden, el estudio no funcionaría. Empieza con la pregunta y luego haz una predicción antes de recolectar datos."],
+    ["At least one charge is missing or one selected choice is not an ethical problem. Recheck consent, privacy, and confidentiality.",
+      "Falta al menos un cargo, o elegiste una opción que no es un problema ético. Revisa otra vez el consentimiento, la privacidad y la confidencialidad."],
+    ["Christof nearly reset the broadcast—but a signal glitch saved your progress. You gained a Glitch Card.",
+      "Christof casi reinicia la transmisión, pero una falla en la señal salvó tu progreso. Ganaste una Carta de Falla."],
+    ["Signal intercepted: begin with the research question. A hypothesis must come before data collection.",
+      "Señal interceptada: empieza con la pregunta de investigación. La hipótesis debe ir antes de recolectar datos."],
+    ["Signal intercepted: evaluate consent, privacy, confidentiality, harm, and the right to withdraw separately.",
+      "Señal interceptada: revisa por separado el consentimiento, la privacidad, la confidencialidad, el daño y el derecho a retirarse."],
+
+    ["CHAPTER CLEARED", "CAPÍTULO SUPERADO"],
+    ["You broke another layer of Christof’s control and secured the evidence from this section.", "Rompiste otra capa del control de Christof y aseguraste la evidencia de esta sección."],
+    ["GLITCH CARD EARNED", "GANASTE UNA CARTA DE FALLA"],
+    ["Use it whenever you need a clue.", "Úsala cuando necesites una pista."],
+
+    ["Transmission ended", "Transmisión terminada"],
+    ["YOU FOUND<br>THE EXIT.", "LLEGASTE<br>A LA SALIDA."],
+    ["Mastery", "Dominio"],
+    ["Time", "Tiempo"],
+    ["Play Again <span>↻</span>", "Jugar otra vez <span>↻</span>"],
+    ["Investigator", "Investigador"],
+    ["TEST READY", "LISTO PARA EL EXAMEN"],
+    ["ALMOST READY", "CASI LISTO"],
+    ["REVIEW THE CASE FILES", "REPASA LOS EXPEDIENTES"],
+    ["Leave this investigation and lose your progress?", "¿Salir de esta investigación y perder tu progreso?"],
+
+    ["Turn in your work", "Entrega tu trabajo"],
+    ["Partner on this computer? Type their name and answer, then turn in again.", "¿Tu compañero usa esta computadora? Escribe su nombre y su respuesta, y entrega otra vez."],
+    ["Pick one theory or founder from the game. How would it explain why Truman stayed in Seahaven for so long? Use one detail from the town.",
+      "Elige una teoría o un fundador del juego. ¿Cómo explicaría por qué Truman se quedó tanto tiempo en Seahaven? Usa un detalle del pueblo."],
+    ["Conflict theory / functionalism / … would say Truman stayed because…", "La teoría del conflicto / el funcionalismo / … diría que Truman se quedó porque…"],
+    ["Your name (first name + last initial)", "Tu nombre (nombre + inicial del apellido)"],
+    ["Write at least two full sentences (12+ words): name the theory or founder, then use a detail from Seahaven.",
+      "Escribe al menos dos oraciones completas (12 palabras o más): nombra la teoría o el fundador y luego usa un detalle de Seahaven."],
+    ["Turn-in is not available right now. Tell your teacher.", "La entrega no está disponible ahora. Avísale a tu profesor."],
+    ["Turning in…", "Entregando…"],
+    ["Turned in! You can close this page.", "¡Entregado! Ya puedes cerrar esta página."]
+  ]);
+
+  SiteLang.add({
+    dict,
+    patterns: [
+      { re: /^CHAPTER (\d+) OF (\d+) • (.+)$/, es: "CAPÍTULO $1 DE $2 • $3", tr: [3] },
+      { re: /^CHAPTER (\d+) OF (\d+)$/, es: "CAPÍTULO $1 DE $2" },
+      { re: /^CARD (\d+) OF (\d+)$/, es: "TARJETA $1 DE $2" },
+      { re: /^(\d+)% first-try accuracy$/, es: "$1% de aciertos al primer intento" },
+      { re: /^Turned in for (.+)$/, es: "Entregado a nombre de $1" },
+      { re: /^(.+), you exposed the system behind Seahaven\. You connected Truman’s experience to social context, research, ethics, and theory—and chose to walk through the door\.$/,
+        es: "$1, descubriste el sistema detrás de Seahaven. Conectaste la experiencia de Truman con el contexto social, la investigación, la ética y la teoría, y decidiste cruzar la puerta.", tr: [1] }
+    ]
+  });
+})();

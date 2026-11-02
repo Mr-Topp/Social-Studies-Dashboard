@@ -94,6 +94,20 @@ Decide:
 
 The flag shows in the dashboard's "Possible AI or copied work" list. It is a reason to talk with the student, not a grade by itself.
 
+## 3c. Spanish turn-ins (the student)
+
+A Spanish-speaking student works from the Spanish page (`sociology/espanol/`), so his
+turn-ins have `"Language":"Spanish"`, his multiple-choice data is in English, and his written answers are usually in Spanish.
+
+- Grade his Spanish writing exactly like English writing, on the same 1–4 scale. Writing in Spanish never lowers a grade.
+- Grade against `"Questions on the page (English)"` when it's there (it's the English of the Spanish questions he saw).
+- AI check: writing in Spanish is never evidence by itself. Pasting from the page's own Spanish reading is lesson text.
+- Add `"English translation"` to the Answers JSON: an object with one entry per student-written answer, same key as in
+  Answers, value = a faithful English translation of what he wrote (keep his meaning and his mistakes; don't improve it).
+  If he wrote in English, skip that answer. The dashboard shows this next to his work.
+- Write `"AI student feedback"` in simple Latin American Spanish (tú), same rules as English feedback.
+  `"AI reason"` and `"AI flag"` stay in English for the teacher.
+
 ## 4. Save the grade (safely)
 
 Rows can shift when new turn-ins arrive, so **never write by row number**. Use one `update_spreadsheet` call with a

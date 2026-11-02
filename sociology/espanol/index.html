@@ -1,0 +1,139 @@
+<!doctype html>
+<html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Sociología · Actividades de Student</title>
+<meta name="robots" content="noindex">
+<style>
+:root{--ink:#1f2b33;--muted:#55626b;--paper:#fbf7f1;--line:#dcd9cf;--acc:#1e4f8a;--acc2:#c2410c;--green:#2a6b45}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.5 system-ui,Segoe UI,Arial,sans-serif}
+header{background:linear-gradient(100deg,#e4ecf7,#fde9da);border-bottom:5px solid var(--acc);padding:18px max(16px,calc((100vw - 860px)/2)) 14px}
+.k{font-size:.78rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:var(--acc);margin:0}
+h1{margin:2px 0 4px;font-size:clamp(1.7rem,3.4vw,2.2rem)}
+header p{margin:2px 0;color:var(--muted)}
+main{max-width:860px;margin:auto;padding:14px 16px 60px}
+.langrow{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:0 0 14px;font-weight:800}
+.langrow button,.tabs button{font:800 15px system-ui,Segoe UI,Arial,sans-serif;border:2px solid #cfcdbf;background:#fff;color:var(--ink);border-radius:999px;padding:7px 14px;min-height:40px;cursor:pointer}
+.langrow button[aria-pressed=true],.tabs button[aria-selected=true]{background:var(--ink);border-color:var(--ink);color:#fff}
+.tabs{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 6px}
+.tabs .now{font-size:.72rem;font-weight:900;background:var(--acc2);color:#fff;border-radius:8px;padding:1px 6px;margin-left:6px;vertical-align:2px}
+h2{margin:14px 0 4px;font-size:1.35rem}
+.unitnote{margin:0 0 10px;color:var(--muted)}
+.day{background:#fff;border:1px solid var(--line);border-radius:14px;padding:12px 14px;margin:10px 0;box-shadow:0 3px 12px #1f2b330d}
+.day h3{margin:0 0 8px;font-size:1rem;color:var(--muted);text-transform:uppercase;letter-spacing:.06em}
+.act{display:flex;align-items:center;gap:12px;text-decoration:none;color:var(--ink);border:2px solid #cfcdbf;border-radius:12px;padding:10px 12px;margin:6px 0;background:#fff}
+.act:hover{border-color:var(--ink);background:#fcfcfa}
+.act .t{flex:1;font-weight:800;line-height:1.3}
+.act .tag{font-size:.8rem;font-weight:900;border-radius:10px;padding:2px 9px;white-space:nowrap}
+.es{background:#dbe8fb;color:#1c3f78}.en{background:#ebe9e0;color:#55626b}.done{background:#dcefe2;color:var(--green)}
+.empty{color:var(--muted);background:#fff;border:2px dashed var(--line);border-radius:12px;padding:14px}
+a:focus-visible,button:focus-visible{outline:3px solid #2f7dbd;outline-offset:2px}
+.foot{margin-top:18px;color:var(--muted);font-size:.85rem}
+</style>
+<script src="../../shared/assignments.js?v=20261102es"></script>
+</head><body>
+<header>
+  <p class="k">Sociología</p>
+  <h1>Hola, Student 👋</h1>
+  <p>Aquí están todas tus actividades de Sociología, en español. Elige tu unidad y abre la actividad del día.</p>
+</header>
+<main>
+  <div class="langrow" role="group" aria-label="Idioma de las actividades">
+    <span>🌐 Abrir actividades en:</span>
+    <button type="button" data-l="es">Español</button>
+    <button type="button" data-l="en">English</button>
+  </div>
+  <div class="tabs" role="tablist" aria-label="Unidades" id="tabs"></div>
+  <section id="unit" role="tabpanel"></section>
+  <p class="foot">Tu nombre (the student) se escribe solo en cada actividad. Tu trabajo le llega a tu profesor igual que el de todos. Tu progreso se guarda en esta computadora.</p>
+</main>
+<script>
+// ======================================================================
+//  The unit the class is on right now. Change this number when the class moves on.
+const NOW_UNIT = 1;
+// ======================================================================
+const STUDENT = "the student";
+const COURSE = "sociology";
+
+// Set up this Chromebook for Student: Spanish switch on, name fills in by itself.
+try {
+  localStorage.setItem("site-lang-es-device", "1");
+  localStorage.setItem("site-student-name", STUDENT);
+  if (!localStorage.getItem("site-lang")) localStorage.setItem("site-lang", "es");
+} catch (e) {}
+
+// Spanish names for units and activities. New activities still show up (with their English name) until one is added here.
+const UNIT_ES = { 1: "Fundamentos, perspectivas y métodos", 2: "Cultura, instituciones y sociedad", 3: "Socialización, el yo y los grupos", 4: "Estratificación y desigualdad" };
+const TITLE_ES = {
+  "sociology-day-1-reading": "¿Qué es la sociología? (Lectura)",
+  "sociology-day-2-sociological-imagination": "La imaginación sociológica (Lectura)",
+  "sociology-day-3-founders": "Orígenes y fundadores (Lectura)",
+  "sociology-day-4-perspectives": "Perspectivas sociológicas (Lectura)",
+  "sociology-theory-casebook": "Casos de teorías sociológicas",
+  "sociology-day-7-research-ethics": "La ética en la investigación sociológica (Lectura)",
+  "sociology-unit1-review-seahaven": "Repaso de la Unidad 1 · Escape de Seahaven",
+  "sociology-unit2-day1-first-shift": "Primer turno: estatus, roles y normas",
+  "sociology-unit2-arrival-culture": "The Arrival (La llegada): una cultura nueva",
+  "sociology-unit2-day3-culture-shock": "Intercambio y choque cultural"
+};
+
+const $ = id => document.getElementById(id);
+const esc = s => String(s == null ? "" : s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+const ROOT = "../../";
+
+// Every Sociology activity on the teacher dashboard (main activities, not the teacher's alternative Drive files).
+const acts = Object.entries(window.CLASS_ASSIGNMENTS || {})
+  .filter(([id, a]) => a.course === COURSE && !a.alt && a.turnIn !== false && a.path && !/^https?:/.test(a.path))
+  .map(([id, a]) => ({ id, ...a }));
+const units = Object.keys(window.CLASS_UNITS[COURSE] || {}).map(Number).sort((a, b) => a - b);
+
+function titleFor(a) {
+  if (TITLE_ES[a.id]) return TITLE_ES[a.id];
+  return String(a.title || a.id).replace(/^Day \d+ · /, "").replace(/\(Reading\)/, "(Lectura)").replace(/^Unit (\d+) Review · /, "Repaso de la Unidad $1 · ");
+}
+function turnedIn() {
+  try { return new Set((JSON.parse(localStorage.getItem("class-feedback-receipts")) || []).map(r => r.id)); } catch (e) { return new Set(); }
+}
+const spanishCache = {};
+async function hasSpanish(path) {
+  const url = ROOT + path.replace(/#.*$/, "").replace(/\/?$/, "/") + "es.js";
+  if (!(url in spanishCache)) spanishCache[url] = fetch(url, { method: "HEAD", cache: "no-store" }).then(r => r.ok).catch(() => false);
+  return spanishCache[url];
+}
+
+let current = NOW_UNIT;
+function drawTabs() {
+  $("tabs").innerHTML = units.map(u => `<button type="button" role="tab" id="tab${u}" aria-controls="unit" aria-selected="${u === current}" data-u="${u}">Unidad ${u}${u === NOW_UNIT ? '<span class="now">AHORA</span>' : ""}</button>`).join("");
+  $("tabs").querySelectorAll("button").forEach(b => b.onclick = () => { current = +b.dataset.u; drawTabs(); drawUnit(); });
+}
+async function drawUnit() {
+  const list = acts.filter(a => a.unit === current).sort((a, b) => (a.day || 99) - (b.day || 99));
+  const done = turnedIn();
+  const byDay = new Map();
+  list.forEach(a => { const k = a.day || 0; if (!byDay.has(k)) byDay.set(k, []); byDay.get(k).push(a); });
+  const box = $("unit");
+  box.setAttribute("aria-labelledby", "tab" + current);
+  if (!list.length) {
+    box.innerHTML = `<h2>Unidad ${current}: ${esc(UNIT_ES[current] || "")}</h2><p class="empty">Todavía no hay actividades en esta unidad. Aparecen aquí cuando tu profesor las agrega.</p>`;
+    return;
+  }
+  box.innerHTML = `<h2>Unidad ${current}: ${esc(UNIT_ES[current] || window.CLASS_UNITS[COURSE][current] || "")}</h2><p class="unitnote">${list.length} actividad${list.length === 1 ? "" : "es"}</p>` +
+    [...byDay.entries()].map(([day, items]) => `<div class="day"><h3>${day ? "Día " + day : "Repaso"}</h3>${items.map(a =>
+      `<a class="act" href="${esc(ROOT + a.path)}" data-path="${esc(a.path)}"><span class="t">${esc(titleFor(a))}</span>${done.has(a.id) ? '<span class="tag done">✓ Entregado</span>' : ""}<span class="tag lang en">…</span></a>`).join("")}</div>`).join("");
+  box.querySelectorAll(".act").forEach(async el => {
+    const tag = el.querySelector(".lang");
+    const ok = await hasSpanish(el.dataset.path);
+    tag.className = "tag lang " + (ok ? "es" : "en");
+    tag.textContent = ok ? "En español" : "En inglés por ahora";
+  });
+}
+
+function drawLang() {
+  let l = "es"; try { l = localStorage.getItem("site-lang") === "en" ? "en" : "es"; } catch (e) {}
+  document.querySelectorAll(".langrow button").forEach(b => {
+    b.setAttribute("aria-pressed", String(b.dataset.l === l));
+    b.onclick = () => { try { localStorage.setItem("site-lang", b.dataset.l); } catch (e) {} drawLang(); };
+  });
+}
+drawLang(); drawTabs(); drawUnit();
+</script>
+</body></html>

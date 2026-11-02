@@ -95,6 +95,16 @@ const TEACHER_TOOLS_URL = "https://script.google.com/macros/s/AKfycbxbiHdWfmdn70
       if (qs.length) body.answers["Questions on the page"] = qs;
     }
 
+    // Student used the Español switch: tag it, and save the English wording of the questions too.
+    if (window.SiteLang && window.SiteLang.isEs() && body.answers && typeof body.answers === "object" && !Array.isArray(body.answers)) {
+      body.answers.Language = "Spanish";
+      const qs = body.answers["Questions on the page"];
+      if (Array.isArray(qs)) {
+        const en = qs.map(q => window.SiteLang.toEn(q) || q);
+        if (en.some((q, i) => q !== qs[i])) body.answers["Questions on the page (English)"] = en;
+      }
+    }
+
     // Writing check: how much of the written answers was typed vs. pasted in (see "Writing check" below).
     if (body.answers && typeof body.answers === "object" && !Array.isArray(body.answers) && !("Writing check" in body.answers)) {
       const w = writingSummary();
