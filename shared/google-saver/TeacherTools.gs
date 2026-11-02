@@ -41,7 +41,7 @@ function doPost(e) {
     if (body.action === "my_work") return json(myWork(body));
     // Lets the update page check which version is running. Shares nothing.
     if (body.action === "pin_login") return json(pinLogin(body));
-    if (body.action === "version") return json({ ok: true, version: 5, can: ["links", "student-links", "pins", "paper"] });
+    if (body.action === "version") return json({ ok: true, version: 6, can: ["links", "student-links", "pins", "paper", "paper-student"] });
   } catch (err) { return json({ ok: false, error: "Try again later." }); }
   var check = codeCheck(body.code);
   if (check === "locked") return json({ ok: false, error: "Too many wrong teacher codes. Wait 15 minutes, then try again." });
@@ -291,7 +291,7 @@ function initialOf(n) { var p = String(n || "").trim().split(/\s+/); return p.le
 function courseRows(course) {
   var data = sheet().getDataRange().getValues(), c = cols(data[0]);
   var kindCol = ("Kind" in c) ? c["Kind"] : c["Type"];
-  var roster = [], rosterAt = -1, rows = [], links = {}, pins = {}, colEx = {}, exempt = {};
+  var roster = [], rosterAt = -1, rows = [], links = {}, pins = {}, colEx = {}, exempt = {}, papers = {}, marks = {};
   for (var i = 1; i < data.length; i++) {
     var r = data[i];
     if (String(r[c["Class"]]).trim() !== course) continue;
@@ -309,13 +309,16 @@ function courseRows(course) {
     var kind = kindCol == null ? "turn-in" : String(r[kindCol] || "turn-in");
     if (kind === "link") { if (a && a.id) links[a.id] = a; continue; }   // rows are in time order, so the newest wins
     if (kind === "col") { if (a && a.activity) colEx[a.activity] = !!a.exempt; continue; }
-    if (kind === "mark") { var who = shortName(r[c["Student"]]); exempt[id + "|" + who] = a.Mark === "EX"; continue; }   // paper grades stay teacher-only for now
-    if (kind === "paper-task") continue;
+    if (kind === "mark") { var who = shortName(r[c["Student"]]); exempt[id + "|" + who] = a.Mark === "EX"; marks[id + "|" + who] = a; continue; }
+    if (kind === "paper-task") { if (a && a.id) papers[a.id] = a; continue; }
     if (kind === "progress" || kind === "roster" || !id) continue;
     rows.push({ name: shortName(r[c["Student"]]), id: id, at: isNaN(when) ? "" : new Date(when).toISOString(), a: a });
   }
   var exAll = Object.keys(colEx).filter(function (k) { return colEx[k]; });
-  return { roster: roster, rows: rows, links: links, pins: pins, exemptAll: exAll, exempt: exempt };
+  // Paper columns still in use (name + day only), so students' pages can show their paper grades on that day.
+  var paperCols = Object.keys(papers).map(function (k) { return papers[k]; }).filter(function (p) { return !p.removed; })
+    .map(function (p) { return { id: "paper-" + p.id, part: +p.part === 1 ? 1 : 2, unit: +p.unit || 0, day: +p.day || 0, title: String(p.title || "") }; });
+  return { roster: roster, rows: rows, links: links, pins: pins, exemptAll: exAll, exempt: exempt, paperCols: paperCols, marks: marks };
 }
 function classList(b) {
   var course = String(b.course || "");
@@ -327,7 +330,7 @@ function classList(b) {
     return !l.removed && /^https:\/\//i.test(String(l.url || "")) && !/answer key|teacher key|summative/i.test(String(l.title || ""));
   }).map(function (l) { return { id: String(l.id), part: +l.part === 1 ? 1 : 2, unit: +l.unit || 0, day: +l.day || 0, title: String(l.title), url: String(l.url) }; });
   // Names are NOT sent: students sign in with their PIN (pin_login), so no class list is ever public.
-  return { ok: true, names: [], links: links, pins: true, exemptAll: d.exemptAll };
+  return { ok: true, names: [], links: links, pins: true, exemptAll: d.exemptAll, paperCols: d.paperCols };
 }
 function myWork(b) {
   var course = String(b.course || "");
@@ -360,7 +363,14 @@ function myWork(b) {
   });
   // Activities you exempted just this student from (EX on the dashboard).
   var myEx = Object.keys(d.exempt).filter(function (k) { return d.exempt[k] && k.slice(k.indexOf("|") + 1) === me; }).map(function (k) { return k.slice(0, k.indexOf("|")); });
-  return { ok: true, name: me, items: items, classDone: Object.keys(done), exempt: myEx, exemptAll: d.exemptAll };
+  // This student's own paper grades (level 1-4, or M = missing). Only with their PIN, like everything above.
+  var paper = {};
+  Object.keys(d.marks).forEach(function (k) {
+    var i = k.indexOf("|"); if (k.slice(i + 1) !== me || !/^paper-/.test(k.slice(0, i))) return;
+    var a = d.marks[k], lv = /^[1-4]$/.test(String(a["Teacher level"] || "")) ? +a["Teacher level"] : 0;
+    if (lv || a.Mark === "M") paper[k.slice(0, i)] = { level: lv, mark: lv ? "" : "M" };
+  });
+  return { ok: true, name: me, items: items, classDone: Object.keys(done), exempt: myEx, exemptAll: d.exemptAll, paper: paper };
 }
 
 // ---------- Student PINs ----------

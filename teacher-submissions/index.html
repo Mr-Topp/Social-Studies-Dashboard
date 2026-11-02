@@ -1301,7 +1301,7 @@ if ($("teacherCode").value) load();
 // "⚠ Update needed" shows only while your Teacher Tools script is an older version (no student PINs yet).
 // If Google can't be reached, it stays hidden rather than crying wolf.
 if (TOOLS_URL) fetch(TOOLS_URL, { method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify({ action: "version" }) })
-  .then(r => r.json()).then(d => { $("toolsUpdate").hidden = !!(d && d.ok && (d.can || []).includes("paper")); }).catch(() => {});
+  .then(r => r.json()).then(d => { $("toolsUpdate").hidden = !!(d && d.ok && (d.can || []).includes("paper-student")); }).catch(() => {});
 </script>
 </body>
 </html>

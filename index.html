@@ -243,8 +243,20 @@ const infoCache = {};
 const classInfo = course => infoCache[course] || (infoCache[course] = tools({ action: "class_list", course }).catch(() => ({})));
 // Links the teacher added from the dashboard's To-do tab. They join the activity list on their day, the same as
 // any other outside link (Teacher Tools never sends answer keys or summatives).
+// Paper columns the teacher grades on the dashboard. If one matches a printed handout already listed that day,
+// the grade shows on that row; otherwise it gets its own "Paper" row on its day.
+const paperName = t => String(t || "").replace(/^Days? [\d–-]+ · /, "").replace(/\((Printed|Word|Paper)\)/gi, "").toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
+function addPaperCols(course, cols) {
+  (cols || []).forEach(p => {
+    if (!p || !p.id || !p.unit || !p.day) return;
+    const same = Object.keys(REG).find(id => { const a = REG[id]; return a.course === course && a.unit === +p.unit && (a.part === 1) === (+p.part === 1) && a.day === +p.day && /\(printed\)/i.test(a.title || "") && paperName(a.title) === paperName(p.title); });
+    if (same) { REG[same].paperId = p.id; return; }
+    REG[p.id] = Object.assign({ course, unit: +p.unit, day: +p.day, title: "Day " + p.day + " · " + p.title + " (printed)", path: "", turnIn: false, paperCol: true, paperId: p.id }, +p.part === 1 ? { part: 1 } : {});
+  });
+}
 async function addTeacherLinks(course) {
   const d = await classInfo(course);
+  addPaperCols(course, d.paperCols);
   (d.links || []).forEach(l => {
     if (!l || !/^https:\/\//i.test(l.url || "") || /answer key|teacher key|summative/i.test(l.title || "")) return;
     REG["todo-link-" + l.id] = Object.assign({ course, unit: +l.unit, day: +l.day, title: "Day " + l.day + " · " + l.title, path: l.url, turnIn: false }, +l.part === 1 ? { part: 1 } : {});
@@ -256,7 +268,7 @@ const isKey = (id, a) => /answer key|teacher key/i.test(a.title || "") || /-key$
 const isTest = a => /summative/i.test(a.title || "") && !/review/i.test(a.title || "");
 const isOnline = a => !/^https?:/.test(a.path || "") && a.turnIn !== false;
 function studentItems(course) {
-  return Object.entries(REG).filter(([id, a]) => a.course === course && a.path && !a.alt && !isKey(id, a) && !isTest(a)
+  return Object.entries(REG).filter(([id, a]) => a.course === course && (a.path || a.paperCol) && !a.alt && !isKey(id, a) && !isTest(a)
     && !/dashboard\.blooket\.com/.test(a.path)).map(([id, a]) => ({ id, ...a }));
 }
 const unitKey = a => (a.part === 1 ? "p1|" : "") + (a.unit || 0);
@@ -381,7 +393,7 @@ async function loadWork0(course, name) {
     if (d.locked) throw Object.assign(new Error("locked"), { locked: true, classDone: d.classDone || [] });
     const mine = {};
     (d.items || []).forEach(w => { if (!mine[w.id] || String(w.at) > String(mine[w.id].at)) mine[w.id] = w; });
-    return { mine, classDone: new Set(d.classDone || []), full: true, exempt: d.exempt || [] };
+    return { mine, classDone: new Set(d.classDone || []), full: true, exempt: d.exempt || [], paper: d.paper || {} };
   } catch (e) { var lockedOut = !!(e && e.locked), classIds = (e && e.classDone) || []; /* fall back to this Chromebook */ }
   const mine = {};
   // Only this student's own turn-ins on this Chromebook (Chromebooks get shared).
@@ -632,7 +644,9 @@ function homeBody(course, work) {
   }
   const sortItems = list => list.slice().sort((a, b) => unitOrder(unitKey(a)) - unitOrder(unitKey(b)) || (a.day || 99) - (b.day || 99));
   const due = sortItems(online.filter(isDue));
-  const missing = due.filter(a => !mine[a.id]);
+  const paperOf = a => a.paperId ? (work.paper || {})[a.paperId] : null;
+  // Paper work the teacher marked M (missing) counts as missing too. Exempt paper work never shows as missing.
+  const missing = sortItems(due.filter(a => !mine[a.id]).concat(items.filter(a => !isOnline(a) && paperOf(a) && paperOf(a).mark === "M" && !exempt.has(a.paperId))));
   const turnedIn = online.filter(a => mine[a.id]);
   const fix = sortItems(turnedIn.filter(a => { const g = gradeOf(mine[a.id]); return g && g.n && g.n <= 2; }));
   const ahead = sortItems(online.filter(a => !isDue(a) && !mine[a.id] && unitOrder(unitKey(a)) === nowOrder));
@@ -689,7 +703,7 @@ function homeBody(course, work) {
     return `<div class="qrow"><div><span class="qtitle">${esc(cleanTitle(a.title))}</span><span class="qkind">Done in class · you can open it here</span></div><a class="btn qgo soft" href="${href(a)}"${ext(a)}>Open ↗</a></div>`;
   };
   const dayGroups = [...missedDays.values()].sort((x, y) => unitOrder(x.unit) - unitOrder(y.unit) || x.day - y.day).map(g => {
-    const list = sortItems(items.filter(a => unitKey(a) === g.unit && ((spanOf(a) || [a.day])[0] || 0) === g.day && !isCleared(a)));
+    const list = sortItems(items.filter(a => unitKey(a) === g.unit && ((spanOf(a) || [a.day])[0] || 0) === g.day && (!isCleared(a) || missing.includes(a))));
     const head = (g.unit === nowKey ? "" : unitLabel(course, g.unit).replace(/ · .*/, "") + " · ") + (g.day ? dayWithDate(g.ex) : "Other");
     const recap = recapOf(g.ex);
     const dg = goalOf(g.unit, g.day), dgoal = dg && dg.t && dg.t.length ? `<div class="dgoal"><b>🎯 Goal:</b>${goalList(dg)}</div>` : "";
@@ -731,6 +745,10 @@ function homeBody(course, work) {
     let pill = "", btn = "Open";
     const later = !isDue(a) && !isToday(a) && !isCleared(a);   // a day the class hasn't reached yet
     if (!on && /\(printed\)/i.test(a.title || "")) {
+      const pg = paperOf(a);
+      if (a.paperId && exempt.has(a.paperId)) return `<div class="row lite"><div class="info"><div class="day">Paper</div><div class="title">📄 ${esc(cleanTitle(a.title))}</div></div><div class="act"><span class="pill p-in">Exempt · you don't need to do this</span></div></div>`;
+      if (pg && pg.level) return `<div class="row lite"><div class="info"><div class="day">Paper</div><div class="title">📄 ${esc(cleanTitle(a.title))}</div></div><div class="act"><span class="pill p-l${pg.level}">Level ${pg.level} · ${WORD[pg.level]}</span></div></div>`;
+      if (pg && pg.mark === "M") return `<div class="row lite"><div class="info"><div class="day">Paper</div><div class="title">📄 ${esc(cleanTitle(a.title))}</div></div><div class="act"><span class="pill p-miss">Missing · get it from your teacher</span></div></div>`;
       return `<div class="row lite"><div class="info"><div class="day">Paper</div><div class="title">📄 ${esc(cleanTitle(a.title))}</div></div><div class="act"><span class="pill ${later ? "p-wait\">Coming up" : isToday(a) ? "p-in\">" + (classToday ? "Today · in class" : "Next class · in class") : "p-class\">Missed it? Get it from your teacher"}</span></div></div>`;
     }
     if (!on) { pill = later ? `<span class="pill p-wait">Coming up</span>` : isToday(a) ? `<span class="pill p-in">${classToday ? "Today · in class" : "Next class · in class"}</span>` : `<span class="pill p-class">Done in class</span>`; }
