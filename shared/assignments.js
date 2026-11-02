@@ -70,6 +70,16 @@ window.CLASS_UNITS_PART1 = {
 // Fynn's green sheet: how many days each unit runs and the date of its LAST day.
 // The last day of every unit is the SUMMATIVE (test) day, even when the test isn't made yet.
 // The dashboard shows that date on the summative row and puts red "not made yet" notes on anything missing.
+// Where each class really is, pinned by Fynn. The student home page shows that day as "Today" and
+// moves forward evenly (weekdays only) to the unit's test date on the green sheet below.
+// To re-pin: change unit/day and set date to the day it's true (e.g. Fynn says "Gov is on Day 7").
+window.CLASS_TODAY = {
+  "us-history":    { unit: 1, day: 5, date: "2026-11-02" },
+  "world-history": { unit: 1, day: 5, date: "2026-11-02" },
+  "sociology":     { unit: 1, day: 5, date: "2026-11-02" },
+  "government":    { unit: 1, day: 5, date: "2026-11-02" }
+};
+
 window.CLASS_CALENDAR = {
   "us-history":    { 1: { days: 6,  summative: "2026-11-05" }, 2: { days: 8,  summative: "2026-11-19" }, 3: { days: 6, summative: "2026-12-03" },
                      4: { days: 4,  summative: "2026-12-10" }, 5: { days: 4,  summative: "2026-12-17" }, 6: { days: 4, summative: "2027-01-07" } },

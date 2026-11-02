@@ -100,7 +100,7 @@ footer a{color:var(--muted)}
 @media (max-width:600px){.next .btn{width:100%;text-align:center}.row .act{width:100%}}
 </style>
 <script>window.NO_FEEDBACK_POPUP = true;</script>
-<script src="shared/assignments.js?v=20261101n"></script>
+<script src="shared/assignments.js?v=20261102today"></script>
 <script src="shared/turnin.js?v=20261102fill2"></script>
 </head>
 <body>
@@ -199,8 +199,21 @@ function unitLabel(course, key) {
   return (p1 ? "Part 1 · " : "") + "Unit " + u + (name ? " · " + name : "");
 }
 // The unit the class is on: the first unit on the green sheet whose test day hasn't passed yet.
+// Weekdays after a (not counting a) up to and including b. Dates are "YYYY-MM-DD".
+function weekdaysBetween(a, b) {
+  let n = 0; const d = new Date(a + "T12:00:00"), end = new Date(b + "T12:00:00");
+  while (d < end) { d.setDate(d.getDate() + 1); if (d.getDay() % 6) n++; }
+  return n;
+}
+function nextWeekday(iso) {
+  const d = new Date(iso + "T12:00:00");
+  do d.setDate(d.getDate() + 1); while (!(d.getDay() % 6));
+  return d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0");
+}
 function currentUnit(course, keys, doneIds) {
-  const cal = CAL[course];
+  const cal = CAL[course], pin = (window.CLASS_TODAY || {})[course];
+  // Fynn's pin wins until that unit's test day has passed.
+  if (pin && keys.includes(String(pin.unit)) && (!cal || !cal[pin.unit] || !cal[pin.unit].summative || cal[pin.unit].summative >= todayIso)) return String(pin.unit);
   if (cal) {
     const u = Object.keys(cal).map(Number).sort((a, b) => a - b).find(n => cal[n].summative && cal[n].summative >= todayIso);
     if (u && keys.includes(String(u))) return String(u);
@@ -373,14 +386,25 @@ function homeBody(course, work) {
   // How far the class has gotten in each unit = the latest day anyone turned in work for.
   const reached = {};
   [...classDone, ...Object.keys(mine)].forEach(id => { const a = REG[id]; if (a && a.day) { const k = unitKey(a); reached[k] = Math.max(reached[k] || 0, (spanOf(a) || [a.day, a.day])[0]); } });
-  // Today's lesson day in the current unit, from the green sheet: count school days (Mon–Fri) back from the test day.
-  // Used when the class's turn-ins don't say how far the class has gotten.
+  // Today's lesson day in the current unit. Starts from where Fynn pinned the class (CLASS_TODAY in
+  // shared/assignments.js) or, for a later unit, Day 1 right after the last unit's test. Then moves forward
+  // evenly (weekdays only) to the test day on the green sheet.
   const todayDay = (() => {
-    const c = !nowKey.startsWith("p1|") && (CAL[course] || {})[nowKey];
+    const u = +nowKey.split("|").pop(), cal = !nowKey.startsWith("p1|") && CAL[course];
+    const c = cal && cal[u];
     if (!c || !c.summative) return 0;
-    let left = 0; const d = new Date(todayIso + "T12:00:00"), end = new Date(c.summative + "T12:00:00");
-    while (d < end) { d.setDate(d.getDate() + 1); if (d.getDay() % 6) left++; }
-    return Math.max(1, c.days - left);
+    const pin = (window.CLASS_TODAY || {})[course];
+    let fromDate, fromDay;
+    if (pin && pin.unit === u) { fromDate = pin.date; fromDay = pin.day; }
+    else {
+      const prev = cal[u - 1];
+      if (!prev || !prev.summative) return 0;
+      fromDate = nextWeekday(prev.summative); fromDay = 1;
+    }
+    if (todayIso <= fromDate) return Math.min(fromDay, c.days);
+    const total = weekdaysBetween(fromDate, c.summative), gone = weekdaysBetween(fromDate, todayIso);
+    if (!total) return c.days;
+    return Math.min(c.days, fromDay + Math.floor(gone / total * (c.days - fromDay)));
   })();
   const isToday = a => unitKey(a) === nowKey && todayDay && a.day && (spanOf(a) ? a.day <= todayDay && todayDay <= spanOf(a)[1] : a.day === todayDay);
   const isDue = a => {
@@ -388,8 +412,8 @@ function homeBody(course, work) {
     if (o < nowOrder) return true;                    // earlier units are all due
     if (o > nowOrder) return false;                   // later units are coming up
     if (!a.day) return classDone.has(a.id);
-    if (work.full && reached[k]) return a.day <= reached[k];   // how far the class has really gotten
-    return a.day <= (reached[k] || 0) || (todayDay && a.day < todayDay);
+    if (todayDay) return (spanOf(a) ? spanOf(a)[1] : a.day) < todayDay;   // everything before today's day
+    return a.day <= (reached[k] || 0);                 // no day known: how far the class has gotten
   };
   const online = items.filter(isOnline);
   const sortItems = list => list.slice().sort((a, b) => unitOrder(unitKey(a)) - unitOrder(unitKey(b)) || (a.day || 99) - (b.day || 99));
