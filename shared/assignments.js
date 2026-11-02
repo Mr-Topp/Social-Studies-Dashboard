@@ -80,6 +80,17 @@ window.CLASS_TODAY = {
   "government":    { unit: 1, day: 5, date: "2026-11-02" }
 };
 
+// Work Fynn counts as DONE for every student on the student home page (shows "✓ Done", never "missing").
+//   unit + throughDay: everything in that unit up to and including that day (and earlier units) is done.
+//   ids: specific activities that are done for everyone.
+// This only changes what students see as missing. It doesn't add grades or turn-ins to the teacher dashboard.
+window.CLASS_CLEARED = {
+  "us-history":    { unit: 1, throughDay: 4 },
+  "sociology":     { unit: 1, throughDay: 4 },
+  "government":    { unit: 1, throughDay: 4 },
+  "world-history": { ids: ["divide-africa-day1"] }   // Scramble for Africa: everyone did it
+};
+
 window.CLASS_CALENDAR = {
   "us-history":    { 1: { days: 6,  summative: "2026-11-05" }, 2: { days: 8,  summative: "2026-11-19" }, 3: { days: 6, summative: "2026-12-03" },
                      4: { days: 4,  summative: "2026-12-10" }, 5: { days: 4,  summative: "2026-12-17" }, 6: { days: 4, summative: "2027-01-07" } },

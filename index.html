@@ -121,7 +121,7 @@ footer a{color:var(--muted)}
 @media (max-width:600px){.next .btn{width:100%;text-align:center}.row .act{width:100%}}
 </style>
 <script>window.NO_FEEDBACK_POPUP = true;</script>
-<script src="shared/assignments.js?v=20261102today"></script>
+<script src="shared/assignments.js?v=20261102clear"></script>
 <script src="shared/turnin.js?v=20261102fill2"></script>
 </head>
 <body>
@@ -251,6 +251,7 @@ const unitOrder = k => (k.startsWith("p1|") ? 0 : 1000) + (+k.split("|").pop() |
 const roundDown = x => Math.ceil(x - 0.5);
 function gradeOf(w) {
   if (!w) return null;
+  if (w.cleared) return { cleared: true };
   if (w.flagged) return { talk: true };
   const m = String(w.ft || "").match(/(\d+)\s*(?:of|\/)\s*(\d+)/);
   const ft = m && +m[2] ? { right: +m[1], total: +m[2] } : null;
@@ -265,6 +266,7 @@ const WORD = { 1: "Needs a redo", 2: "Almost there", 3: "Got it", 4: "Excellent"
 function gradePill(g) {
   if (!g) return "";
   if (g.talk) return `<span class="pill p-talk">Talk with your teacher</span>`;
+  if (g.cleared) return `<span class="pill p-in">✓ Done</span>`;
   if (g.pending) return `<span class="pill p-in">✓ Turned in · grade coming soon</span>`;
   return `<span class="pill p-l${g.n}">${g.onTrack ? "On track for Level 3" : "Level " + g.n + " · " + WORD[g.n]}</span>`;
 }
@@ -447,6 +449,11 @@ function homeBody(course, work) {
     return a.day <= (reached[k] || 0);                 // no day known: how far the class has gotten
   };
   const online = items.filter(isOnline);
+  // Work the teacher counts as done for everyone (CLASS_CLEARED in shared/assignments.js).
+  const clr = (window.CLASS_CLEARED || {})[course] || {};
+  const isCleared = a => (clr.ids || []).includes(a.id) || (!!clr.unit && (a.part === 1 || (a.unit || 0) < clr.unit ||
+    ((a.unit || 0) === clr.unit && !!a.day && (spanOf(a) ? spanOf(a)[1] : a.day) <= clr.throughDay)));
+  online.forEach(a => { if (!mine[a.id] && isCleared(a)) mine[a.id] = { id: a.id, cleared: true }; });
   // Teacher preview: pretend this student turned in everything due (and today's work), with sample grades.
   if (work.preview) {
     const SAMPLE = [
