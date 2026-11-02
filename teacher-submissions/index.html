@@ -142,6 +142,7 @@ td.sum.l3{background:#eef7f0;color:#1f5e2c}td.sum.l2{background:#fff8e2;color:#7
 .topbar{display:flex;justify-content:space-between;align-items:baseline;gap:8px 16px;flex-wrap:wrap;margin-bottom:4px}
 .topbar h1{margin:0}
 .toplinks{display:flex;gap:14px;font-size:.88rem}.toplinks a{color:var(--muted);font-weight:700}
+.toplinks a.needupdate{color:var(--red);font-weight:900}
 .codebar{padding:10px 14px}.codebar .status{margin:0 0 0 6px}
 .modes{display:flex;gap:6px;margin:0 0 14px}
 .mode{background:#e7e0d1;color:var(--navy);font-size:1rem;padding:10px 18px}
@@ -189,7 +190,7 @@ td.inclass{background:#eef5ef;color:#1f5e2c;text-align:center}td.inclass .lvl{di
 <main>
 <div class="topbar">
   <h1>Teacher Dashboard</h1>
-  <nav class="toplinks" aria-label="Other pages"><a href="../">Student site</a><a href="../all.html">All activities</a><a href="update-teacher-tools.html">Teacher Tools update</a></nav>
+  <nav class="toplinks" aria-label="Other pages"><a href="../">Student site</a><a href="../all.html">All activities</a><a href="update-teacher-tools.html" id="toolsUpdate" class="needupdate" hidden>⚠ Update needed</a></nav>
 </div>
 
 <section class="panel codebar">
@@ -937,6 +938,10 @@ $("search").oninput = render; $("assignment").onchange = render;
 $("csvBtn").onclick = downloadCsv; $("importBtn").onclick = copyOld;
 render();
 if ($("teacherCode").value) load();
+// "⚠ Update needed" shows only while your Teacher Tools script is an older version (it can't save To-do links yet).
+// If Google can't be reached, it stays hidden rather than crying wolf.
+if (TOOLS_URL) fetch(TOOLS_URL, { method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify({ action: "version" }) })
+  .then(r => r.json()).then(d => { $("toolsUpdate").hidden = !!(d && d.ok && (d.can || []).includes("student-links")); }).catch(() => {});
 </script>
 </body>
 </html>
