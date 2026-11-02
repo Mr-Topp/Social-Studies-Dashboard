@@ -1,6 +1,7 @@
 // Teacher-only list of slide decks, shown inside each unit's dropdown on the Teacher Dashboard.
 // Each deck lists its lesson days; each day link opens the deck at that day's first slide.
 // part: 1 = Part 1 section (first half of the course). Empty decks (no days yet) are left out.
+// summativeSlide: the "Summative day" slide at the end of the deck (shown on the unit's summative row).
 (function () {
   const g = id => "https://docs.google.com/presentation/d/" + id + "/edit";
   window.CLASS_PRESENTATIONS = [
@@ -14,17 +15,17 @@
       days: [{ day: 1, title: "Inventions: How Did New Machines Change Life?", std: "US.8, 12", slide: "p1u3d1s01" }, { day: 2, title: "Railroads: How Did Trains Change the Country?", std: "US.9, 8", slide: "p1u3d2s01" }, { day: 3, title: "Immigration: Why Did People Move West?", std: "US.10, 9", slide: "p1u3d3s01" }, { day: 4, title: "The Plains: What Did It Take to Survive?", std: "US.11, 9", slide: "p1u3d4s01" }, { day: 5, title: "Native Nations: How Did They Lose Their Land?", std: "US.11, 12", slide: "p1u3d5s01" }, { day: 6, title: "Civic Virtue: Who Stood Up for Others?", std: "US.13, 9, 12", slide: "p1u3d6s01" }] },
     { course: "us-history", part: 1, unit: 4, title: "Progressive Era", url: g("1Qh9F9Gjkq1Ht_INUWHT3RX-WY3n5libnlrUMFcOZy_M"),
       days: [{ day: 1, title: "Progressive Era: Can People Fix Big Problems?", std: "US.14, 16", slide: "p1u4d1s01" }, { day: 2, title: "Labor: How Did Workers Fight Back?", std: "US.14", slide: "p1u4d2s01" }, { day: 3, title: "Muckrakers: Can the Truth Change Laws?", std: "US.16, 17", slide: "p1u4d3s01" }, { day: 4, title: "Workplace Reform: Who Keeps Workers Safe?", std: "US.14, 16", slide: "p1u4d4s01" }, { day: 5, title: "Big Business: Should Government Step In?", std: "US.16, 14", slide: "p1u4d5s01" }, { day: 6, title: "Suffrage: How Did Women Win the Vote?", std: "US.15, 18", slide: "p1u4d6s01" }, { day: 7, title: "Equal Rights: Who Did Reform Leave Out?", std: "US.15, 17, 18", slide: "p1u4d7s01" }] },
-    { course: "us-history", unit: 1, title: "Roaring 20s & the Great Depression", url: g("1SGWhPkqqQboEAaB9OwM1X7H4KIxRzCqygMmgcWA1WBY"),
+    { course: "us-history", unit: 1, title: "Roaring 20s & the Great Depression", url: g("1SGWhPkqqQboEAaB9OwM1X7H4KIxRzCqygMmgcWA1WBY"), summativeSlide: "p1summ",
       days: [{ day: 1, title: "The Roaring 20s: New Ideas and New Technology", std: "US.23–24, 26–27", slide: "p1" }, { day: 2, title: "The Boom, the Crash, and the Great Depression", std: "US.25–26", slide: "p13" }, { day: 3, title: "Responses, Viewpoints, and Iowans", std: "US.25, 27–28", slide: "p23" }] },
-    { course: "us-history", unit: 2, title: "World War II", url: g("1pUGsmryRs7-xYkxp4rOWNMnRLewlVWJIwnw-xI-PI04"),
+    { course: "us-history", unit: 2, title: "World War II", url: g("1pUGsmryRs7-xYkxp4rOWNMnRLewlVWJIwnw-xI-PI04"), summativeSlide: "p1summ",
       days: [{ day: 1, title: "World War II: Why Couldn't America Stay Out?", std: "US.29, 33", slide: "p1" }, { day: 2, title: "World War II: How Did America Enter the War?", std: "US.29, 32, 33", slide: "SLIDES_API701598609_0" }, { day: 3, title: "World War II: What Did America Do About the Holocaust?", std: "US.29, 30, 33", slide: "h9f4fd9f8e308616_5_75" }, { day: 4, title: "World War II: How Did the War Change Life at Home?", std: "US.29, 31", slide: "h9f4fd9f8e308616_5_227" }, { day: 5, title: "World War II: Were All Americans Treated Fairly?", std: "US.31, 32, 33", slide: "h9f4fd9f8e308616_5_361" }, { day: 6, title: "World War II: How Did the Allies Beat Germany?", std: "US.29, 33", slide: "h9f4fd9f8e308616_5_529" }, { day: 7, title: "World War II: How Did the War with Japan End?", std: "US.29, 32, 33", slide: "h9f4fd9f8e308616_5_648" }, { day: 8, title: "World War II: Who Put the Common Good First?", std: "US.34 + REVIEW", slide: "h9f4fd9f8e308616_5_801" }] },
-    { course: "us-history", unit: 3, title: "The Cold War", url: g("14ZrFkpiug0H6JDjxpser1Ug-PBBimvS_Yv8816fJfr0"),
+    { course: "us-history", unit: 3, title: "The Cold War", url: g("14ZrFkpiug0H6JDjxpser1Ug-PBBimvS_Yv8816fJfr0"), summativeSlide: "u3d1s01summ",
       days: [{ day: 1, title: "The Cold War: How Did Allies Become Enemies?", std: "US.37, 39, 40", slide: "u3d1s01" }, { day: 2, title: "The Cold War: Why Were Americans Afraid at Home?", std: "US.36, 40, 41", slide: "u3d2s01" }, { day: 3, title: "The Cold War: Why Did Americans Fight in Korea?", std: "US.35, 37, 40", slide: "u3d3s01" }, { day: 4, title: "The Cold War: How Did Fear Shape the 1950s?", std: "US.38, 39, 40", slide: "u3d4s01" }, { day: 5, title: "The Cold War: How Close Did We Come to Nuclear War?", std: "US.35, 37, 40", slide: "u3d5s01" }, { day: 6, title: "The Cold War: How Did Vietnam Divide Americans?", std: "US.35–41 + REVIEW", slide: "u3d6s01" }] },
-    { course: "us-history", unit: 4, title: "Civil Rights", url: g("1aoSmu8Le_U38p2a7trtVCzRPYfPBIfBEqD0gc8TYB0E"),
+    { course: "us-history", unit: 4, title: "Civil Rights", url: g("1aoSmu8Le_U38p2a7trtVCzRPYfPBIfBEqD0gc8TYB0E"), summativeSlide: "u4d1s01summ",
       days: [{ day: 1, title: "Civil Rights: How Did Americans Fight Segregation?", std: "US.42, 43, 44", slide: "u4d1s01" }, { day: 2, title: "Civil Rights: How Did Nonviolence Change Laws?", std: "US.42, 43, 44", slide: "u4d2s01" }, { day: 3, title: "Civil Rights: Who Else Fought for Equal Rights?", std: "US.42, 44", slide: "u4d3s01" }, { day: 4, title: "Civil Rights: Who Showed Civic Virtue?", std: "US.44, 45 + REVIEW", slide: "u4d4s01" }] },
-    { course: "us-history", unit: 5, title: "Rise of Conservatism", url: g("1KM3NcuWpURBxiLCQdmacCDVQiZIy5f0XiWsf_Y3yGfY"),
+    { course: "us-history", unit: 5, title: "Rise of Conservatism", url: g("1KM3NcuWpURBxiLCQdmacCDVQiZIy5f0XiWsf_Y3yGfY"), summativeSlide: "u5d1s01summ",
       days: [{ day: 1, title: "Rise of Conservatism: Why Did Many Voters Change?", std: "US.46, 47, 49", slide: "u5d1s01" }, { day: 2, title: "Rise of Conservatism: What Did the New Right Want?", std: "US.46, 47, 49", slide: "u5d2s01" }, { day: 3, title: "Rise of Conservatism: Who Won and Lost in the New Economy?", std: "US.47, 49", slide: "u5d3s01" }, { day: 4, title: "Rise of Conservatism: How Did the Cold War End?", std: "US.48, 49, 50", slide: "u5d4s01" }] },
-    { course: "us-history", unit: 6, title: "Modern America", url: g("1EaHd7ZHPbGRVHsgO_DhR_iF5ZW8Wvvvjy5BLjS1qCGE"),
+    { course: "us-history", unit: 6, title: "Modern America", url: g("1EaHd7ZHPbGRVHsgO_DhR_iF5ZW8Wvvvjy5BLjS1qCGE"), summativeSlide: "u6d1s01summ",
       days: [{ day: 1, title: "Modern America: What Should a Superpower Do?", std: "US.52, 53, 55, 56", slide: "u6d1s01" }, { day: 2, title: "Modern America: How Should Government Handle a Crisis?", std: "US.53, 55", slide: "u6d2s01" }, { day: 3, title: "Modern America: How Did Technology and Trade Change Jobs?", std: "US.54, 55", slide: "u6d3s01" }, { day: 4, title: "Modern America: How Are Americans Still Fighting for Rights?", std: "US.51, 55, 56 + REVIEW", slide: "u6d4s01" }] },
 
     // ---- world-history ----
@@ -36,25 +37,25 @@
       days: [{ day: 1, title: "Renaissance: Why Did Italy Get a Rebirth?", std: "WH.10", slide: "p1u3d01s01" }, { day: 2, title: "Printing Press: How Do Ideas Go Viral?", std: "WH.14, 10", slide: "p1u3d02s01" }, { day: 3, title: "Reformation: Can One Person Change a Church?", std: "WH.13, 11, 14", slide: "p1u3d03s01" }, { day: 4, title: "Choosing Sides: Who Picks Your Religion?", std: "WH.13, 11", slide: "p1u3d04s01" }, { day: 5, title: "Science: How Do We Know What's True?", std: "WH.12", slide: "p1u3d05s01" }, { day: 6, title: "Enlightenment: Can We Question Kings?", std: "WH.12", slide: "p1u3d06s01" }] },
     { course: "world-history", part: 1, unit: 4, title: "Revolutions & Industrialization", url: g("1gpdf-xnu4mOxgv2mmTmwP2RliVk3TDqk5ScyAG7uSls"),
       days: [{ day: 1, title: "Revolutions: When Do People Push Back?", std: "WH.15, 17", slide: "p1u4ad01s01" }, { day: 2, title: "France 1789: Who Pays the Bill?", std: "WH.15, 16, 18", slide: "p1u4ad02s01" }, { day: 3, title: "Look Back: How Radical Was America?", std: "WH.16, 19, 18", slide: "p1u4ad03s01" }, { day: 4, title: "Freedom for Whom?", std: "WH.16, 18, 19, 17", slide: "p1u4ad04s01" }, { day: 5, title: "Industry: Why Did Britain Go First?", std: "WH.20", slide: "p1u4bd05s01" }, { day: 6, title: "Factory Life: Would You Take This Job?", std: "WH.22", slide: "p1u4bd06s01" }, { day: 7, title: "Industry Spreads: Copy, Buy, or Build?", std: "WH.21", slide: "p1u4bd07s01" }, { day: 8, title: "Look Back: Who Should Own the Factory?", std: "WH.23", slide: "p1u4bd08s01" }] },
-    { course: "world-history", unit: 1, title: "Imperialism & the World Wars", url: g("1JUfOmeu36L67ptPXmqXB3ZeM1FH4EsbW_zigcG4gAO0"),
+    { course: "world-history", unit: 1, title: "Imperialism & the World Wars", url: g("1JUfOmeu36L67ptPXmqXB3ZeM1FH4EsbW_zigcG4gAO0"), summativeSlide: "w1ad01s01summ",
       days: [{ day: 1, title: "Imperialism: Why Grab a Whole Continent?", std: "WH.24, 28", slide: "w1ad01s01" }, { day: 2, title: "Colonial Vietnam: Can a Reward Plan Backfire?", std: "WH.27, 24, 25", slide: "w1ad02s01" }, { day: 3, title: "Pacific Pressure: Fight Back or Copy Them?", std: "WH.27, 25, 26", slide: "w1ad03s01" }, { day: 4, title: "Look Back: Could Empires Start a World War?", std: "WH.29, 32, 33", slide: "w1ad04s01" }, { day: 5, title: "After WWI: How Do You Make Peace Last?", std: "WH.31, 33", slide: "w1ad05s01" }, { day: 6, title: "Look Back: Broke and Angry. Who Do You Trust?", std: "WH.31, 30", slide: "w1ad06s01" }, { day: 7, title: "Nazi Persecution: How Does Hate Grow?", std: "WH.30, 33", slide: "w1bd07s01" }, { day: 8, title: "Look Back: When Should Someone Step In?", std: "WH.29, 30", slide: "w1bd08s01" }, { day: 9, title: "The Holocaust: Why Do We Remember?", std: "WH.30, 33", slide: "w1bd09s01" }, { day: 10, title: "WWII Turning Points: What Wins a War?", std: "WH.32, 33", slide: "w1bd10s01" }, { day: 11, title: "Look Back: Punish the Losers, or Rebuild?", std: "WH.31, 29", slide: "w1bd11s01" }] },
-    { course: "world-history", unit: 2, title: "Cold War & Decolonization", url: g("1C2lIeO3ujBxF6Uk0pmtRohzPkXUIjBkjLIRcFFjMRFI"),
+    { course: "world-history", unit: 2, title: "Cold War & Decolonization", url: g("1C2lIeO3ujBxF6Uk0pmtRohzPkXUIjBkjLIRcFFjMRFI"), summativeSlide: "w2ad01s01summ",
       days: [{ day: 1, title: "Cold War: How Do Allies Become Enemies?", std: "WH.34, 35", slide: "w2ad01s01" }, { day: 2, title: "Containment: How Do You Stop a Spread?", std: "WH.34, 37", slide: "w2ad02s01" }, { day: 3, title: "Control: Would You Act Differently If Watched?", std: "WH.35", slide: "w2ad03s01" }, { day: 4, title: "China: Can One Leader Remake a Country?", std: "WH.34, 35, 38", slide: "w2ad04s01" }, { day: 5, title: "Hot Spots: Why Fight Far From Home?", std: "WH.34, 37", slide: "w2ad05s01" }, { day: 6, title: "Empire's End: How Do Colonies Get Free?", std: "WH.36, 34", slide: "w2ad06s01" }, { day: 7, title: "Africa: What Would Freedom Day Feel Like?", std: "WH.36, 34, 37", slide: "w2bd07s01" }, { day: 8, title: "Vietnam: Who Should Decide a Nation's Future?", std: "WH.36, 37, 34", slide: "w2bd08s01" }, { day: 9, title: "Cambodia: Can the World Keep “Never Again”?", std: "WH.38, 35", slide: "w2bd09s01" }, { day: 10, title: "Apartheid: Can Regular People Beat a System?", std: "WH.37, 38", slide: "w2bd10s01" }, { day: 11, title: "1989: How Does a Wall Come Down?", std: "WH.34, 37, 35", slide: "w2bd11s01" }] },
-    { course: "world-history", unit: 3, title: "The World Since 1991", url: g("12LQppsCMxrA3K5kbT_MK4ikKpFc8b1ae88G15Gm4m-0"),
+    { course: "world-history", unit: 3, title: "The World Since 1991", url: g("12LQppsCMxrA3K5kbT_MK4ikKpFc8b1ae88G15Gm4m-0"), summativeSlide: "w3d01s01summ",
       days: [{ day: 1, title: "Globalization: How Far Did Your Stuff Travel?", std: "WH.39", slide: "w3d01s01" }, { day: 2, title: "Globalization: Who Wins, Who Loses?", std: "WH.39, 42", slide: "w3d02s01" }, { day: 3, title: "Global Rules: Who Should Make Them?", std: "WH.41", slide: "w3d03s01" }, { day: 4, title: "Pushing Back: Would You Pay More for Local?", std: "WH.42", slide: "w3d04s01" }, { day: 5, title: "Pop Culture: Where Did Your Playlist Come From?", std: "WH.40", slide: "w3d05s01" }, { day: 6, title: "Terrorism: Why Do Some Groups Use Fear?", std: "WH.43", slide: "w3d06s01" }, { day: 7, title: "Fighting Terror: Safety or Freedom?", std: "WH.43, 41", slide: "w3d07s01" }] },
 
     // ---- sociology ----
-    { course: "sociology", unit: 1, title: "Foundations, Perspectives & Methods", url: g("12guCZyH2bmzsCxPOJUTXgJnAlNTMZ0EmO2JxisEFkXM"),
+    { course: "sociology", unit: 1, title: "Foundations, Perspectives & Methods", url: g("12guCZyH2bmzsCxPOJUTXgJnAlNTMZ0EmO2JxisEFkXM"), summativeSlide: "so1summ",
       days: [{ day: 1, title: "Sociology: How Do Groups Shape What You Do?", std: "SOC.2", slide: "so1s01" }, { day: 2, title: "Sociology: Is It Just Me or a Bigger Pattern?", std: "SOC.2", slide: "so2s01" }, { day: 3, title: "Sociology: Why Do People Follow the Rules?", std: "SOC.4", slide: "so3s01" }, { day: 4, title: "Sociology: Can One Problem Have Three Causes?", std: "SOC.4", slide: "so4s01" }, { day: 5, title: "Sociology: How Can You Prove a Hot Take?", std: "SOC.1", slide: "so5s01" }, { day: 6, title: "Sociology: How Should We Study People?", std: "SOC.1", slide: "so6s01" }, { day: 7, title: "Sociology: Should Researchers Ever Lie to You?", std: "SOC.1", slide: "so7s01" }] },
-    { course: "sociology", unit: 2, title: "Culture, Institutions & Society", url: g("1ARuSpvs5XwgItN44NgHMt1S9Ykjy7Nma5wQPwG1yXxw"),
+    { course: "sociology", unit: 2, title: "Culture, Institutions & Society", url: g("1ARuSpvs5XwgItN44NgHMt1S9Ykjy7Nma5wQPwG1yXxw"), summativeSlide: "s21s01summ",
       days: [{ day: 1, title: "Sociology: Who Wrote the Unwritten Rules?", std: "SOC.5, 6, 7", slide: "s21s01" }, { day: 2, title: "Sociology: What Makes Your Group a Culture?", std: "SOC.5, 6", slide: "s22s01" }, { day: 3, title: "Sociology: Why Does Normal Feel So Normal?", std: "SOC.5, 6", slide: "s23s01" }, { day: 4, title: "Sociology: Why Do People Team Up for Change?", std: "SOC.7, 8", slide: "s24s01" }, { day: 5, title: "Sociology: What Shapes Your Everyday Life?", std: "SOC.5, 6, 7, 8", slide: "s25s01" }] },
-    { course: "sociology", unit: 3, title: "Socialization, the Self & Groups", url: g("1IhgaaVGGyevEVLE8JeCGkWLmATK3OxWQgUZQ3WMPm1U"),
+    { course: "sociology", unit: 3, title: "Socialization, the Self & Groups", url: g("1IhgaaVGGyevEVLE8JeCGkWLmATK3OxWQgUZQ3WMPm1U"), summativeSlide: "s31s01summ",
       days: [{ day: 1, title: "Sociology: Who Taught You How to Be You?", std: "SOC.9", slide: "s31s01" }, { day: 2, title: "Sociology: Who Shapes You the Most Right Now?", std: "SOC.9", slide: "s32s01" }, { day: 3, title: "Sociology: Can Breaking a Rule Be Right?", std: "SOC.4, 9", slide: "s33s01" }, { day: 4, title: "Sociology: Who Decides Who You Are?", std: "SOC.10", slide: "s34s01" }, { day: 5, title: "Sociology: Why Do Groups Change How We Act?", std: "SOC.11", slide: "s35s01" }, { day: 6, title: "Sociology: Why Do We Root for Us Over Them?", std: "SOC.10, 11", slide: "s36s01" }] },
-    { course: "sociology", unit: 4, title: "Stratification & Inequality", url: g("1L6owAmyMqNK2gqqkbYARwXUbpR1ABUJWHpqwqrQxoCs"),
+    { course: "sociology", unit: 4, title: "Stratification & Inequality", url: g("1L6owAmyMqNK2gqqkbYARwXUbpR1ABUJWHpqwqrQxoCs"), summativeSlide: "s41s01summ",
       days: [{ day: 1, title: "Sociology: Does Everyone Start Out Equal?", std: "SOC.12", slide: "s41s01" }, { day: 2, title: "Sociology: Who Can Afford a Bad Day?", std: "SOC.12, 13", slide: "s42s01" }, { day: 3, title: "Sociology: Why Are Some Countries Rich?", std: "SOC.12", slide: "s43s01" }, { day: 4, title: "Sociology: Do Institutions Treat Us Equally?", std: "SOC.14", slide: "s44s01" }, { day: 5, title: "Sociology: Why Does Inequality Cause Conflict?", std: "SOC.13", slide: "s45s01" }, { day: 6, title: "Sociology: How Do People Fight Inequality?", std: "SOC.15", slide: "s46s01" }] },
 
     // ---- government ----
-    { course: "government", unit: 1, title: "Foundations", url: g("16kOZNiGGwIK4CfQXlpSoumBXYRtuYIaL1zjc3IiWJus"),
+    { course: "government", unit: 1, title: "Foundations", url: g("16kOZNiGGwIK4CfQXlpSoumBXYRtuYIaL1zjc3IiWJus"), summativeSlide: "g1d1s01summ",
       // Rows follow Fynn's Schoology day posts; each row opens the deck day(s) that teach that topic.
       plan: [
         { day: 1, title: "Purposes and Origins of Government", std: "Gov.1, 5", slides: [{ day: 1 }] },
@@ -69,7 +70,7 @@
         { day: 10, title: "Summative", std: "Gov.1–5, 9", slides: [{ day: 9, label: "review" }] }
       ],
       days: [{ day: 1, title: "Government: Why Do People Make Rules?", std: "Gov.1, 5", slide: "g1d1s01" }, { day: 2, title: "Enlightenment: Who Gives Government Its Power?", std: "Gov.2", slide: "g1d2s01" }, { day: 3, title: "Types of Government: Who Holds the Power?", std: "Gov.1", slide: "g1d3s01" }, { day: 4, title: "American Roots: Where Did Our Rights Start?", std: "Gov.3, 4", slide: "g1d4s01" }, { day: 5, title: "Constitution: How Do You Make a Fair Deal?", std: "Gov.3, 4", slide: "g1d5s01" }, { day: 6, title: "Constitution: Who Holds the Power?", std: "Gov.4, 9", slide: "g1d6s01" }, { day: 7, title: "Bill of Rights: How Free Are You at School?", std: "Gov.3, 4, 5", slide: "g1d7s01" }, { day: 8, title: "Keeping Order: How Much Power Is Too Much?", std: "Gov.3, 5", slide: "g1d8s01" }, { day: 9, title: "Review: What Have We Built So Far?", std: "Gov.1, 2, 3, 4, 5, 9", slide: "g1d9s01" }] },
-    { course: "government", unit: 2, title: "Political Beliefs, Parties & Citizenship", url: g("1r_9cfbyiq-eIJujo9HQqOoTCqDmfSucM0VhRUgc3pDE"),
+    { course: "government", unit: 2, title: "Political Beliefs, Parties & Citizenship", url: g("1r_9cfbyiq-eIJujo9HQqOoTCqDmfSucM0VhRUgc3pDE"), summativeSlide: "g2d1s01summ",
       // Rows follow Fynn's Schoology day posts; each row opens the deck day(s) that teach that topic.
       plan: [
         { day: 1, title: "Political Ideology and Parties", std: "Gov.12", slides: [{ day: 1 }] },
@@ -77,19 +78,19 @@
         { day: 3, title: "Major and Third Parties; Media, Bias and Misinformation", std: "Gov.12, 11", slides: [{ day: 1, slide: "g2d1s07", label: "third parties" }, { day: 3, slide: "g2d3s07", label: "media & misinformation" }] },
         { day: 4, title: "Interest Groups, Lobbying and PACs", std: "Gov.12, 11", slides: [{ day: 3 }] },
         { day: 5, title: "Iowa Elections, Voting, Districting and the Electoral College", std: "Gov.13, 14", slides: [{ day: 4 }, { day: 2, slide: "g2d2s05", label: "caucuses & primaries" }] },
-        { day: 6, title: "Citizenship and Civic Responsibilities", std: "Gov.15, 16, 17, 11", slides: [{ day: 5 }, { day: 4, slide: "g2d4s06", label: "becoming a citizen" }] },
-        { day: 7, title: "Summative", std: "Gov.11–17" }
+        { day: 6, title: "Citizenship and Civic Responsibilities + Summative", std: "Gov.15, 16, 17, 11 · test: Gov.11–17", slides: [{ day: 5 }, { day: 4, slide: "g2d4s06", label: "becoming a citizen" }] }
       ],
       days: [{ day: 1, title: "Political Beliefs: Where Do Our Ideas Come From?", std: "Gov.12", slide: "g2d1s01" }, { day: 2, title: "Political Parties: What Do Parties Actually Do?", std: "Gov.12, 11", slide: "g2d2s01" }, { day: 3, title: "Interest Groups: Who Else Tries to Shape Laws?", std: "Gov.12, 11", slide: "g2d3s01" }, { day: 4, title: "Elections: How Do Iowans Vote, and Who Counts?", std: "Gov.13, 14", slide: "g2d4s01" }, { day: 5, title: "Citizenship: What Do We Owe Each Other?", std: "Gov.15, 16, 17, 11", slide: "g2d5s01" }] },
-    { course: "government", unit: 3, title: "Judicial Branch", url: g("1OU07tOXL0fJSdysLL5_gEQdNfFMjW-CCAlIPfXPPFxk"),
+    { course: "government", unit: 3, title: "Judicial Branch", url: g("1OU07tOXL0fJSdysLL5_gEQdNfFMjW-CCAlIPfXPPFxk"), summativeSlide: "g3d1s01summ",
       // Rows follow Fynn's Schoology day posts; each row opens the deck day(s) that teach that topic.
       plan: [
         { day: 1, title: "What Is the Judicial Branch?", std: "Gov.8", slides: [{ day: 1 }] },
         { day: 2, title: "Judicial Review: The Power of the Courts", std: "Gov.8", slides: [{ day: 2 }, { day: 3, label: "courts & rights" }] },
-        { day: 3, title: "Judicial Branch Review & Summative", std: "Gov.8" }
+        { day: 3, title: "Judicial Branch Review", std: "Gov.8" },
+        { day: 4, title: "Judicial Summative", std: "Gov.8" }
       ],
       days: [{ day: 1, title: "Judicial Branch: How Do Courts Settle Fights?", std: "Gov.8, 10, 18", slide: "g3d1s01" }, { day: 2, title: "Judicial Branch: Who Decides What Laws Mean?", std: "Gov.8, 4", slide: "g3d2s01" }, { day: 3, title: "Judicial Branch: How Do Courts Protect Rights?", std: "Gov.8, 17, 18", slide: "g3d3s01" }] },
-    { course: "government", unit: 4, title: "Legislative Branch", url: g("10YXQguXa4oD6k4s1cyA340UxQlTKwsTbSVx8cAh_wzo"),
+    { course: "government", unit: 4, title: "Legislative Branch", url: g("10YXQguXa4oD6k4s1cyA340UxQlTKwsTbSVx8cAh_wzo"), summativeSlide: "g4d1s01summ",
       // Rows follow Fynn's Schoology day posts; each row opens the deck day(s) that teach that topic.
       plan: [
         { day: 1, title: "Meet Congress — The Legislative Branch", std: "Gov.6", slides: [{ day: 1 }] },
@@ -98,7 +99,7 @@
         { day: 4, title: "Legislative Branch Review & Summative", std: "Gov.6" }
       ],
       days: [{ day: 1, title: "Legislative Branch: Who Makes Our Laws?", std: "Gov.6, 10", slide: "g4d1s01" }, { day: 2, title: "Lawmaking: Why Do So Few Bills Become Laws?", std: "Gov.6, 18", slide: "g4d2s01" }, { day: 3, title: "Power of the Purse: Who Controls the Money?", std: "Gov.6, 10, 18", slide: "g4d3s01" }] },
-    { course: "government", unit: 5, title: "Executive Branch", url: g("18SaeD0mhZo4-w6G1JrwVg3qO0rxA8f_32dfyQvt_RGk"),
+    { course: "government", unit: 5, title: "Executive Branch", url: g("18SaeD0mhZo4-w6G1JrwVg3qO0rxA8f_32dfyQvt_RGk"), summativeSlide: "g5d1s01summ",
       // Rows follow Fynn's Schoology day posts; each row opens the deck day(s) that teach that topic.
       plan: [
         { day: 1, title: "What Is the Executive Branch?", std: "Gov.7", slides: [{ day: 1 }] },
@@ -107,7 +108,7 @@
         { day: 4, title: "Executive Summative", std: "Gov.7" }
       ],
       days: [{ day: 1, title: "Executive Branch: Who Gets to Be President?", std: "Gov.7, 10", slide: "g5d1s01" }, { day: 2, title: "Presidential Power: How Far Can It Go?", std: "Gov.7", slide: "g5d2s01" }, { day: 3, title: "Executive Branch: Who Does the Daily Work?", std: "Gov.7, 18, 10", slide: "g5d3s01" }] },
-    { course: "government", unit: 6, title: "Checks & Balances and Iowa Government", url: g("1P_UeMjD4NVhdZuQsBjj6fKNjICzTn2MP_4kxXcwHruQ"),
+    { course: "government", unit: 6, title: "Checks & Balances and Iowa Government", url: g("1P_UeMjD4NVhdZuQsBjj6fKNjICzTn2MP_4kxXcwHruQ"), summativeSlide: "g6d1s01summ",
       days: [{ day: 1, title: "Checks & Balances: Who Keeps Power in Check?", std: "Gov.4, 9", slide: "g6d1s01" }, { day: 2, title: "Iowa Government: Who Runs Things Near You?", std: "Gov.18, 19, 20", slide: "g6d2s01" }] },
     { course: "government", unit: 1, title: "Foundations of the Constitution", note: "earlier 7-day version", url: g("1Ec44PBzUBZ8M1vsZldP_BVnRZqpDZBLLEXu50aD9q-A") },
 

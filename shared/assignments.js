@@ -67,6 +67,18 @@ window.CLASS_UNITS_PART1 = {
   }
 };
 
+// Fynn's green sheet: how many days each unit runs and the date of its LAST day.
+// The last day of every unit is the SUMMATIVE (test) day, even when the test isn't made yet.
+// The dashboard shows that date on the summative row and puts red "not made yet" notes on anything missing.
+window.CLASS_CALENDAR = {
+  "us-history":    { 1: { days: 6,  summative: "2026-11-05" }, 2: { days: 8,  summative: "2026-11-19" }, 3: { days: 6, summative: "2026-12-03" },
+                     4: { days: 4,  summative: "2026-12-10" }, 5: { days: 4,  summative: "2026-12-17" }, 6: { days: 4, summative: "2027-01-07" } },
+  "world-history": { 1: { days: 12, summative: "2026-11-19" }, 2: { days: 12, summative: "2026-12-10" }, 3: { days: 8, summative: "2027-01-07" } },
+  "sociology":     { 1: { days: 10, summative: "2026-11-12" }, 2: { days: 6,  summative: "2026-11-24" }, 3: { days: 8, summative: "2026-12-10" }, 4: { days: 7, summative: "2027-01-06" } },
+  "government":    { 1: { days: 10, summative: "2026-11-12" }, 2: { days: 6,  summative: "2026-11-24" }, 3: { days: 4, summative: "2026-12-03" },
+                     4: { days: 4,  summative: "2026-12-10" }, 5: { days: 4,  summative: "2026-12-17" }, 6: { days: 3, summative: "2027-01-06" } }
+};
+
 window.CLASS_ASSIGNMENTS = {
   // ---- World History · Unit 1 ----
   "divide-africa-day1":          { course: "world-history", unit: 1, day: 1, title: "Day 1 · Divide Africa", path: "divide-africa/", std: ["SS.9-12.WH.24"] },
@@ -103,7 +115,7 @@ window.CLASS_ASSIGNMENTS = {
   "sociology-day-4-perspectives":             { course: "sociology", unit: 1, day: 4, title: "Day 4 · Sociological Perspectives (Reading)", path: "sociology/day-4-perspectives/", std: ["SS.9-12.Soc.4"] },
   "sociology-theory-casebook":                { course: "sociology", unit: 1, day: 4, title: "Day 4 · Theory Casebook", path: "day-4-theory-casebook/", std: ["SS.9-12.Soc.4"] },
   "sociology-day-7-research-ethics":          { course: "sociology", unit: 1, day: 7, title: "Day 7 · Ethics in Sociological Research (Reading)", path: "sociology/day-7-research-ethics/", std: ["SS.9-12.Soc.1"] },
-  "sociology-unit1-review-seahaven":          { course: "sociology", unit: 1, title: "Unit 1 Review · Escape from Seahaven", path: "sociology-ethics-review/", std: ["SS.9-12.Soc.2", "SS.9-12.Soc.4", "SS.9-12.Soc.1"] },
+  "sociology-unit1-review-seahaven":          { course: "sociology", unit: 1, day: 8, title: "Day 8 · Unit 1 Review · Escape from Seahaven", path: "sociology-ethics-review/", std: ["SS.9-12.Soc.2", "SS.9-12.Soc.4", "SS.9-12.Soc.1"] },
 
   // ---- Sociology · Unit 2 ----
   "sociology-unit2-day1-first-shift":         { course: "sociology", unit: 2, day: 1, title: "Day 1 · First Shift: Status, Roles & Norms", path: "sociology/unit2-day1-first-shift/", std: ["SS.9-12.Soc.5", "SS.9-12.Soc.6", "SS.9-12.Soc.7"] },
@@ -156,9 +168,9 @@ window.CLASS_ASSIGNMENTS = {
   "gov-u2-d5-election-sim": { course: "government", unit: 2, day: 5, turnIn: false, std: [], title: "Day 5 · Presidential Election Simulation (2 Player)", path: "https://misterharms.com/games/electoral-college-map-game" },
   "gov-u2-d5-win-white-house": { course: "government", unit: 2, day: 5, turnIn: false, std: [], title: "Day 5 · Win the White House — iCivics Game", path: "https://ed.icivics.org/resources/game/67038/win-the-white-house" },
   "gov-u2-d6-civics-exam": { course: "government", unit: 2, day: 6, turnIn: false, std: [], title: "Day 6 · Civics Exam (Google Form)", path: "https://docs.google.com/forms/d/e/1FAIpQLSfDhGXMg7OP24DFhTdPQnHNsOoGgSS-pnDWpKadJ1U2smjpoA/viewform?usp=publish-editor" },
-  "gov-u2-d7-review": { course: "government", unit: 2, day: 7, turnIn: false, std: [], title: "Day 7 · Summative Review (Blooket)", path: "https://dashboard.blooket.com/set/6aa09dfe760efeaa1135c5b7" },
-  "gov-u2-d7-summative": { course: "government", unit: 2, day: 7, turnIn: false, std: [], title: "Day 7 · Summative", path: "https://linnmarcsd-my.sharepoint.com/:w:/g/personal/fynnley_toppert_linnmar_k12_ia_us/IQAsHiWOSrOESo-agkGYeF-6AcU5jvfuw1oM0UYp-KPoIKo?e=9mAl4u" },
-  "gov-u2-d7-summative-key": { course: "government", unit: 2, day: 7, turnIn: false, std: [], title: "Day 7 · Summative Answer Key", path: "https://linnmarcsd-my.sharepoint.com/:w:/g/personal/fynnley_toppert_linnmar_k12_ia_us/IQDHa8vAMIBIQq5Z_igFdj6EAYotMPKNH6Y9D9sYH6g1-IY?e=Xz0RaZ" },
+  "gov-u2-d7-review": { course: "government", unit: 2, day: 6, turnIn: false, std: [], title: "Day 6 · Summative Review (Blooket)", path: "https://dashboard.blooket.com/set/6aa09dfe760efeaa1135c5b7" },
+  "gov-u2-d7-summative": { course: "government", unit: 2, day: 6, turnIn: false, std: [], title: "Day 6 · Summative", path: "https://linnmarcsd-my.sharepoint.com/:w:/g/personal/fynnley_toppert_linnmar_k12_ia_us/IQAsHiWOSrOESo-agkGYeF-6AcU5jvfuw1oM0UYp-KPoIKo?e=9mAl4u" },
+  "gov-u2-d7-summative-key": { course: "government", unit: 2, day: 6, turnIn: false, std: [], title: "Day 6 · Summative Answer Key", path: "https://linnmarcsd-my.sharepoint.com/:w:/g/personal/fynnley_toppert_linnmar_k12_ia_us/IQDHa8vAMIBIQq5Z_igFdj6EAYotMPKNH6Y9D9sYH6g1-IY?e=Xz0RaZ" },
 
   // ---- Government · Unit 3 (Judicial) · activities from the Schoology day posts (links only, no turn-in) ----
   "gov-u3-argument-wars": { course: "government", unit: 3, day: 1, turnIn: false, std: [], title: "Days 1–2 · Argument Wars — iCivics Game", path: "https://ed.icivics.org/games/argument-wars" },
@@ -169,7 +181,7 @@ window.CLASS_ASSIGNMENTS = {
   "gov-u3-d1-supreme-key": { course: "government", unit: 3, day: 1, turnIn: false, std: [], title: "Day 1 · Supreme in Supreme Court Answer Key", path: "https://ed.icivics.org/resource-assets/lesson_plan/616/assets/supreme_in_supreme_court_answer_key.pdf" },
   "gov-u3-d2-case-project-example": { course: "government", unit: 3, day: 2, turnIn: false, std: [], title: "Day 2 · Supreme Court Case Project Example", path: "https://linnmarcsd-my.sharepoint.com/:p/g/personal/fynnley_toppert_linnmar_k12_ia_us/IQD0fz0PCgvAQpJPlX--T7xSAXLSoDIix8Gs28wZ_90Rbb0?e=5oLw6R" },
   "gov-u3-d3-review": { course: "government", unit: 3, day: 3, turnIn: false, std: [], title: "Day 3 · Summative Review (Blooket)", path: "https://dashboard.blooket.com/set/6abe6bb22cd0b625b10babad" },
-  "gov-u3-d3-summative": { course: "government", unit: 3, day: 3, turnIn: false, std: [], title: "Day 3 · Judicial Summative", path: "https://linnmarcsd-my.sharepoint.com/:w/g/personal/fynnley_toppert_linnmar_k12_ia_us/IQA6E-D0L4FZSqQHsenxDH2oAeCuLKZWepPZbSuON2jwoDc?e=64u4TI" },
+  "gov-u3-d3-summative": { course: "government", unit: 3, day: 4, turnIn: false, std: [], title: "Day 4 · Judicial Summative", path: "https://linnmarcsd-my.sharepoint.com/:w/g/personal/fynnley_toppert_linnmar_k12_ia_us/IQA6E-D0L4FZSqQHsenxDH2oAeCuLKZWepPZbSuON2jwoDc?e=64u4TI" },
   // ---- Government · Unit 4 (Legislative) ----
   "gov-u4-d1-branches-of-power": { course: "government", unit: 4, day: 1, turnIn: false, std: [], title: "Day 1 · Branches of Power — iCivics Game", path: "https://ed.icivics.org/resources/game/74/branches-of-power" },
   "gov-u4-d1-first-branch": { course: "government", unit: 4, day: 1, turnIn: false, std: [], title: "Day 1 · First Branch — iCivics (Printed)", path: "https://ed.icivics.org/resources/lesson_plan/3018136/first-branch-legislative" },

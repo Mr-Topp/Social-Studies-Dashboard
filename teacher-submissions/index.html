@@ -5,8 +5,8 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
 <title>Teacher Dashboard · All Classes</title>
-<script src="../shared/assignments.js?v=20261102alt"></script>
-<script src="presentations.js?v=20261101gov3"></script>
+<script src="../shared/assignments.js?v=20261102summ"></script>
+<script src="presentations.js?v=20261102summ"></script>
 <script src="../shared/turnin.js?v=20261102ai"></script>
 <style>
 :root{--navy:#19364b;--red:#a33d36;--green:#2f6b3a;--paper:#f4efe4;--card:#fffdf8;--ink:#22313b;--muted:#536571;--line:#d8cfbd}
@@ -132,6 +132,11 @@ td.sum.l3{background:#eef7f0;color:#1f5e2c}td.sum.l2{background:#fff8e2;color:#7
 .altrow{display:flex;flex-wrap:wrap;align-items:center;gap:6px;width:100%;margin-top:2px}
 .altlabel{font-size:.72rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
 .chip.alt{background:#f1f5f2;border:1px dashed #9db8a8}
+.chip.todo{background:#fbeceb;border:1px dashed #c9776f;color:var(--red);font-weight:800;cursor:default}
+.dayrow.summ{background:#fff5f3;border-left:4px solid var(--red);padding-left:8px}
+.sumdate{font-size:.8rem;font-weight:800;color:var(--red)}
+.unitcount .todocount{color:var(--red);font-weight:800}
+.daytitle.unplanned{color:var(--muted);font-weight:600;font-style:italic}
 @media (max-width:760px){.dayrow{grid-template-columns:1fr}}
 </style>
 </head>
@@ -364,7 +369,7 @@ function linksHtml() {
   const altRow = (ids, reading) => { const list = ids.filter(id => REG[id].alt && isAltReading(id) === reading); return list.length ? `<div class="altrow"><span class="altlabel">${reading ? "Alternative reading" : "Alternative assignment"}${list.length > 1 ? "s" : ""}</span>${list.map(chip).join("")}</div>` : ""; };
   const chip = id => { const k = kindOf(id); return `<a class="chip ${k}${REG[id].alt ? " alt" : ""}" href="${safe(hrefOf(id))}" target="_blank" rel="noopener" title="${safe(REG[id].title)}${k === "key" ? " (teacher only)" : ""}">${ICON[k]} ${safe(chipText(id))}</a>`; };
   const actDay = id => { const m = (REG[id].title || "").match(/^Days? (\d+)/); return REG[id].day || (m ? +m[1] : 0); };
-  const unitBlock = (key, name, ids, decks) => {
+  const unitBlock = (key, name, ids, decks, cal) => {
     const main = decks.find(p => !p.note) || decks[0];
     const extra = decks.filter(p => p !== main);
     const rows = new Map();
@@ -389,27 +394,52 @@ function linksHtml() {
     if (main && !(main.days || []).length && !main.plan && [...rows.keys()].every(d => !d)) {
       const r = row(0); r.single = true; r.title = main.title; r.slides.push({ url: main.url, label: "Slides" });
     }
+    // Green sheet: every day of the unit gets a row, and the LAST day is the summative (test) day.
+    const niceDate = iso => new Date(iso + "T12:00:00").toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric" });
+    if (cal) {
+      const spanHas = d => [...rows.values()].some(r => r.span && d > r.day && d <= r.span);
+      for (let d = 1; d <= cal.days; d++) if (!rows.has(d) && !spanHas(d)) row(d);
+      const sr = rows.get(cal.days);
+      if (sr) { sr.summ = true; if (main && main.summativeSlide) sr.slides.push({ url: main.url, slide: main.summativeSlide, label: "Slides · summative" }); }
+    }
+    // Red "not made yet" notes: a day with no assignment, a summative day with no test (or no answer key).
+    const isTest = id => /summative/i.test(REG[id].title || "") && !/review|key/i.test(REG[id].title || "");
+    const isKeyOf = id => kindOf(id) === "key" && /summative/i.test(REG[id].title || "");
+    rows.forEach(r => {
+      r.todo = [];
+      if (!cal || !r.day || r.single) return;
+      const mainIds = r.ids.filter(id => !REG[id].alt);
+      if (r.day > cal.days) { r.todo.push("This day is after the summative on your green sheet. Move or cut it"); return; }
+      if (r.summ) {
+        if (!mainIds.some(isTest)) r.todo.push("Summative not made yet. Fill this in");
+        else if (!mainIds.some(isKeyOf)) r.todo.push("Summative answer key not made yet");
+      } else if (!mainIds.some(id => kindOf(id) !== "key")) r.todo.push("Assignment not made yet. Fill this in");
+    });
     const list = [...rows.values()].sort((a, b) => (a.day || 999) - (b.day || 999));
+    const nTodo = list.reduce((n, r) => n + (r.todo || []).length, 0);
     const nDays = list.reduce((n, r) => n + (r.day ? (r.span ? r.span - r.day + 1 : 1) : 0), 0), nActs = ids.length;
-    const count = [nDays ? plural(nDays, "day") : "", nActs ? plural(nActs, "assignment") : ""].filter(Boolean).join(" · ") || (main ? "slides ready" : "slides not built yet");
+    const count = ([nDays ? plural(nDays, "day") : "", nActs ? plural(nActs, "assignment") : "", cal ? "summative " + niceDate(cal.summative) : ""].filter(Boolean).join(" · ") || (main ? "slides ready" : "slides not built yet"))
+      + (nTodo ? ` · <span class="todocount">⚠ ${nTodo} not made yet</span>` : "");
     const body = list.map(r => {
-      const label = r.single ? "" : r.day ? `<b>${r.span ? `Days ${r.day}–${r.span}` : `Day ${r.day}`}</b>` : `<b>Other</b>`;
-      const t = r.title || (r.ids.some(id => /summative/i.test(REG[id].title)) ? "Summative" : r.ids.length ? chipText(r.ids[0]).replace(/\s*\([^)]*\)\s*$/, "") : "");
+      const label = r.single ? "" : r.day ? `<b>${r.span ? `Days ${r.day}–${r.span}` : `Day ${r.day}`}${r.summ ? " · Summative" : ""}</b>${r.summ ? `<span class="sumdate">📅 ${safe(niceDate(cal.summative))} (green sheet)</span>` : ""}` : `<b>Other</b>`;
+      const t = r.title || (r.summ || r.ids.some(id => /summative/i.test(REG[id].title)) ? "Summative" : r.ids.length ? chipText(r.ids[0]).replace(/\s*\([^)]*\)\s*$/, "") : "");
       const slides = r.slides.map(s => `<a class="chip slides" href="${safe(s.url)}${s.slide ? "#slide=id." + safe(s.slide) : ""}" target="_blank" rel="noopener">▶ ${safe(s.label)}</a>`).join("");
-      return `<div class="dayrow"><div class="daylabel">${label}<span class="daytitle">${safe(t)}</span>${r.std ? `<span class="daystd">${safe(r.std)}</span>` : ""}</div><div class="daychips">${slides}${r.ids.filter(id => !REG[id].alt).map(chip).join("")}${altRow(r.ids, true)}${altRow(r.ids, false)}</div></div>`;
+      const todo = (r.todo || []).map(x => `<span class="chip todo">⚠ ${safe(x)}</span>`).join("");
+      return `<div class="dayrow${r.summ ? " summ" : ""}"><div class="daylabel">${label}<span class="daytitle${t ? "" : " unplanned"}">${safe(t || "Nothing planned yet")}</span>${r.std ? `<span class="daystd">${safe(r.std)}</span>` : ""}</div><div class="daychips">${slides}${r.ids.filter(id => !REG[id].alt).map(chip).join("")}${todo}${altRow(r.ids, true)}${altRow(r.ids, false)}</div></div>`;
     }).join("");
     const deckLinks = [list.some(r => r.single) ? null : main, ...extra].filter(Boolean).map(p => `<a href="${safe(p.url)}" target="_blank" rel="noopener">${p === main ? "▶ Open the whole deck" : "Older version: " + safe(p.title) + (p.note ? " (" + safe(p.note) + ")" : "")}</a>`).join(" · ");
     const inner = list.length ? `<div class="daytable">${body}</div>${deckLinks ? `<div class="deckfoot">${deckLinks}</div>` : ""}` : `<p class="status">No slides for this unit yet.</p>`;
     return `<details class="unitdrop" data-k="${safe(key)}"${linkOpen[key] ? " open" : ""}><summary>${safe(name)} <span class="unitcount">${count}</span></summary>${inner}</details>`;
   };
-  const legend = `<p class="chiplegend">▶ slides · 💻 online, turns in to this dashboard · 🖨 printed · 🔗 outside link · 🔑 answer key (teacher only) · <b>Alternative reading / assignment</b> = your Drive files, to use instead of the main activity (absent students, subs, paper days)</p>`;
+  const legend = `<p class="chiplegend">▶ slides · 💻 online, turns in to this dashboard · 🖨 printed · 🔗 outside link · 🔑 answer key (teacher only) · <b>Alternative reading / assignment</b> = your Drive files, to use instead of the main activity (absent students, subs, paper days) · <span style="color:var(--red);font-weight:800">⚠ red = not made yet, fill it in</span> · the last day of each unit is the summative, dated from your green sheet</p>`;
 
   // Current units (Part 2 when the class has a Part 1).
   const decks = allDecks.filter(p => p.part !== 1);
   const groups = byUnit(acts.filter(id => REG[id].part !== 1), tab);
   decks.forEach(p => { const u = p.unit || 0; if (!groups.find(x => x.unit === u)) groups.push({ unit: u, name: unitName(tab, u), ids: [] }); });
   groups.sort((a, b) => (a.unit || 999) - (b.unit || 999));
-  const current = groups.map(g => unitBlock(tab + "|" + g.unit, g.name, g.ids, decks.filter(p => (p.unit || 0) === g.unit))).join("");
+  const CAL = (window.CLASS_CALENDAR || {})[tab] || {};
+  const current = groups.map(g => unitBlock(tab + "|" + g.unit, g.name, g.ids, decks.filter(p => (p.unit || 0) === g.unit), CAL[g.unit])).join("");
   if (!P1) return legend + current;
 
   // Part 1 first (the order you teach it), then Part 2. Every Part 1 unit is listed, built or not.
