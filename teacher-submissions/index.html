@@ -501,10 +501,14 @@ function linksHtml() {
     const nTodo = list.reduce((n, r) => n + (r.todo || []).length, 0);
     const nDays = list.reduce((n, r) => n + (r.day ? (r.span ? r.span - r.day + 1 : 1) : 0), 0), nActs = ids.length;
     const shortDate = iso => iso ? new Date(iso + "T12:00:00").toLocaleDateString("en-US", { month: "short", day: "numeric" }) : "";
+    const kParts = String(key).split("|"), isP1 = kParts[1] === "p1", unitNo = +kParts[kParts.length - 1] || 0;
+    const fit = cal && !isP1 ? unitFit(tab, unitNo) : null;
+    const rowDate = r => { if (!cal || isP1 || !r.day || r.summ || r.day > cal.days) return ""; const a = dayDate(tab, false, unitNo, r.day, false); if (!a) return ""; const b = r.span ? dayDate(tab, false, unitNo, r.span, false) : null; return `<span class="sumdate">📅 ${safe(niceDate(a.iso))}${b && b.iso !== a.iso ? " – " + safe(niceDate(b.iso)) : ""}</span>`; };
     const count = ([nDays ? plural(nDays, "day") : (nActs ? plural(nActs, "assignment") : ""), cal ? "summative " + (cal.summative ? shortDate(cal.summative) : "Day " + cal.days) : ""].filter(Boolean).join(" · ") || (main ? "slides ready" : "slides not built yet"))
-      + (nTodo ? ` · <span class="todocount">⚠ ${nTodo} not made yet</span>` : "");
+      + (nTodo ? ` · <span class="todocount">⚠ ${nTodo} not made yet</span>` : "")
+      + (fit ? ` · <span class="todocount">⚠ ${fit.need} lesson days planned, but ${fit.have} class days before the test</span>` : "");
     const body = list.map(r => {
-      const label = r.single ? "" : r.day ? `<b>${r.span ? `Days ${r.day}–${r.span}` : `Day ${r.day}`}${r.summ ? " · Summative" : ""}</b>${r.summ ? `<span class="sumdate">📅 ${cal.summative ? safe(niceDate(cal.summative)) : "No date on the green sheet"}</span>` : ""}` : `<b>Other</b>`;
+      const label = r.single ? "" : r.day ? `<b>${r.span ? `Days ${r.day}–${r.span}` : `Day ${r.day}`}${r.summ ? " · Summative" : ""}</b>${rowDate(r)}${r.summ ? `<span class="sumdate">📅 ${cal.summative ? safe(niceDate(cal.summative)) : "No date on the green sheet"}</span>` : ""}` : `<b>Other</b>`;
       const t = r.title || (r.summ || r.ids.some(id => /summative/i.test(REG[id].title)) ? "Summative" : r.ids.length ? chipText(r.ids[0]).replace(/\s*\([^)]*\)\s*$/, "") : "");
       const slides = r.slides.map(s => `<a class="chip slides" href="${safe(s.url)}${s.slide ? "#slide=id." + safe(s.slide) : ""}" target="_blank" rel="noopener">▶ ${safe(s.label)}</a>`).join("");
       const todo = (r.todo || []).map(x => `<span class="chip todo">⚠ ${safe(x)}</span>`).join("");
@@ -566,6 +570,25 @@ const TODAY = isoOf(new Date());
 const NO_SCHOOL = window.CLASS_NO_SCHOOL || [];
 const schoolDay = d => !!(d.getDay() % 6) && !NO_SCHOOL.some(([a, z]) => { const i = isoOf(d); return i >= a && i <= z; });
 function addWeekdays(iso, n) { const d = new Date(iso + "T12:00:00"), step = n < 0 ? -1 : 1; let k = Math.abs(n); while (k) { d.setDate(d.getDate() + step); if (schoolDay(d)) k--; } return isoOf(d); }
+// Core classes meet Monday-Thursday only (Fridays are civics prep). Lesson days count class days, one lesson per class day.
+const classDay = d => d.getDay() >= 1 && d.getDay() <= 4 && schoolDay(d);
+function addClassDays(iso, n) { const d = new Date(iso + "T12:00:00"), step = n < 0 ? -1 : 1; let k = Math.abs(n); while (k) { d.setDate(d.getDate() + step); if (classDay(d)) k--; } return isoOf(d); }
+function classDaysFromTo(a, b) { let n = 0; const d = new Date(a + "T12:00:00"), end = new Date(b + "T12:00:00"); while (d <= end) { if (classDay(d)) n++; d.setDate(d.getDate() + 1); } return n; }
+// Where a unit starts: the pinned day for the current unit, else the first class day after the last unit's test.
+function unitStart(course, unit) {
+  const cal = (window.CLASS_CALENDAR || {})[course] || {}, pin = (window.CLASS_TODAY || {})[course];
+  if (pin && pin.unit === unit) return { date: pin.date, day: pin.day };
+  const prev = cal[unit - 1];
+  if (prev && prev.summative && !(pin && unit < pin.unit)) return { date: addClassDays(prev.summative, 1), day: 1 };
+  return null;
+}
+// Do the class days left before the test match the planned days? Returns {have, need} when they don't.
+function unitFit(course, unit) {
+  const c = ((window.CLASS_CALENDAR || {})[course] || {})[unit], st = unitStart(course, unit);
+  if (!c || !c.summative || !st) return null;
+  const have = classDaysFromTo(st.date, c.summative), need = c.days - st.day + 1;
+  return have === need ? null : { have, need };
+}
 function weekdaysBetween(a, b) { let n = 0; const d = new Date(a + "T12:00:00"), end = new Date(b + "T12:00:00"); while (d < end) { d.setDate(d.getDate() + 1); if (schoolDay(d)) n++; } return n; }
 // When a lesson day lands: the summative is the green-sheet date. Other days are spread evenly (weekdays) from
 // where you pinned the class (CLASS_TODAY) or the day after the last unit's test, the same way the student home page does it.
@@ -576,21 +599,14 @@ const classDayT = d => d.getDay() >= 1 && d.getDay() <= 4 && schoolDay(d);
 function classDaysBetweenT(a, b) { let n = 0; const d = new Date(a + "T12:00:00"), end = new Date(b + "T12:00:00"); while (d < end) { d.setDate(d.getDate() + 1); if (classDayT(d)) n++; } return n; }
 function stepClassDaysT(iso, n) { const d = new Date(iso + "T12:00:00"), dir = n < 0 ? -1 : 1; for (let k = Math.abs(n); k > 0;) { d.setDate(d.getDate() + dir); if (classDayT(d)) k--; } return isoOf(d); }
 function dayDate(course, part1, unit, day, summ) {
-  if (part1 || course === "civics") return null;
+  if (part1) return null;
   const cal = (window.CLASS_CALENDAR || {})[course] || {}, c = cal[unit];
   if (!c || !c.summative) return null;
   if (summ || day >= c.days) return { iso: c.summative, exact: true };
-  const pin = (window.CLASS_TODAY || {})[course];
-  let from, fromDay;
-  if (pin && pin.unit === unit) { from = pin.date; fromDay = pin.day; }
-  else if (pin && unit < pin.unit) return { iso: stepClassDaysT(pin.date, -1), exact: false };
-  else { const prev = cal[unit - 1]; if (!prev || !prev.summative) return null; from = stepClassDaysT(prev.summative, 1); fromDay = 1; }
-  if (day <= fromDay) return { iso: stepClassDaysT(from, -(fromDay - day)), exact: day === fromDay && !!(pin && pin.unit === unit) };
-  const total = classDaysBetweenT(from, c.summative);
-  const dayOn = iso => total ? Math.min(c.days, fromDay + Math.floor(classDaysBetweenT(from, iso) / total * (c.days - fromDay))) : c.days;
-  let d = from;
-  while (d < c.summative) { d = stepClassDaysT(d, 1); if (dayOn(d) >= day) return { iso: d, exact: false }; }
-  return { iso: c.summative, exact: false };
+  const st = unitStart(course, unit);
+  if (!st) { const pin = (window.CLASS_TODAY || {})[course]; return pin && unit < pin.unit ? { iso: addClassDays(pin.date, -1), exact: false } : null; }
+  const iso = addClassDays(st.date, day - st.day);
+  return { iso, exact: !unitFit(course, unit) && iso < c.summative };
 }
 function collectTodos() {
   const keep = tab, out = [];
