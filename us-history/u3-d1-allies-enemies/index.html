@@ -87,7 +87,7 @@ UnitGame.start(Object.assign({
   key: "ush-u3-d1-allies-enemies-v1",
   assignmentId: "ush-u3-d1-allies-enemies",
   title: "U.S. History · Unit 3 · Day 1 · The Cold War Desk, 1945–1949",
-  standard: "SS.9-12.US.37, SS.9-12.US.39, SS.9-12.US.40",
+  standard: "SS.9-12.US.37, SS.9-12.US.40",
   oldApi: "https://fynn-class-assignment-submissions-20261024.neotboy.chatgpt.site/api/submit",
   startFx: { trust: 5 },
   clampFx: fx => { fx[METER] = Math.max(0, Math.min(10, fx[METER])); },
@@ -150,7 +150,7 @@ return {
             { label: "A small loan they must pay back fast", fx: { trust: -1 }, result: `<p>${T("down", "−1 trust")}It's not enough to rebuild. Anger and hunger stay high.</p>${real("The U.S. went big: about $13 billion, mostly as gifts, not loans.")}` },
             { label: "Nothing. Americans need the money at home.", fx: { trust: -2 }, result: `<p>${T("down", "−2 trust")}Western Europe feels on its own.</p>${real("Congress approved about $13 billion. Some members did argue the money should stay home.")}` }
           ] },
-        { type: "q", id: "a7", std: "US.39", short: "Why aid fights communism",
+        { type: "q", id: "a7", std: "US.37", short: "Why aid fights communism",
           prompt: doc("Fact card · The Marshall Plan, 1948–1952", `<p>16 Western European countries got aid.</p><p>By 1952, factories in Western Europe were making more than before the war. Communist parties there lost support.</p>`) + "Why did U.S. leaders think money could stop communism?",
           options: ["Hungry, desperate people were more likely to turn to communism", "Communist leaders promised to quit politics if Europe got richer", "The money paid Western Europe to declare war on the USSR", "Communism was illegal in any country that took U.S. money"],
           hint: "Think back to Marshall's list: hunger, poverty, desperation.", why: "When people have jobs and food, a revolution looks less appealing. Economic aid was a tool of containment." },

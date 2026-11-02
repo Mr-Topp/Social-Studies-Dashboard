@@ -146,7 +146,7 @@ window.CLASS_ASSIGNMENTS = {
   "wwii-graphic-reading-day1":   { course: "us-history", unit: 2, day: 1, title: "Day 1 · Maus I (Reading)", path: "wwii-graphic-reading/#day1", std: ["SS.9-12.US.29", "SS.9-12.US.30"] },
   "wwii-graphic-reading-day2":   { course: "us-history", unit: 2, day: 2, title: "Day 2 · Maus II (Reading)", path: "wwii-graphic-reading/#day2", std: ["SS.9-12.US.29", "SS.9-12.US.30"] },
   "wwii-graphic-reading-day3":   { course: "us-history", unit: 2, day: 3, title: "Day 3 · Anne Frank’s Diary (Reading)", path: "wwii-graphic-reading/#day3", std: ["SS.9-12.US.30"] },
-  "wwii-graphic-reading-day4":   { course: "us-history", unit: 2, day: 4, title: "Day 4 · Fight on the Home Front (Reading)", path: "wwii-graphic-reading/#day4", std: ["SS.9-12.US.29", "SS.9-12.US.31", "SS.9-12.US.33"] },
+  "wwii-graphic-reading-day4":   { course: "us-history", unit: 2, day: 4, title: "Day 4 · America Joins the War: Fight on the Home Front (Reading)", path: "wwii-graphic-reading/#day4", std: ["SS.9-12.US.29", "SS.9-12.US.31", "SS.9-12.US.33"] },
   "wwii-graphic-reading-day5":   { course: "us-history", unit: 2, day: 5, title: "Day 5 · Japanese American Incarceration Comics (Reading)", path: "wwii-graphic-reading/#day5", std: ["SS.9-12.US.31", "SS.9-12.US.33"] },
 
   // ---- Sociology · Unit 1 ----
@@ -159,17 +159,17 @@ window.CLASS_ASSIGNMENTS = {
   "sociology-unit1-review-seahaven":          { course: "sociology", unit: 1, day: 8, title: "Day 8 · Unit 1 Review · Escape from Seahaven", path: "sociology-ethics-review/", std: ["SS.9-12.Soc.2", "SS.9-12.Soc.4", "SS.9-12.Soc.1"] },
 
   // ---- Sociology · Unit 2 ----
-  "sociology-unit2-day1-first-shift":         { course: "sociology", unit: 2, day: 1, title: "Day 1 · First Shift: Status, Roles & Norms", path: "sociology/unit2-day1-first-shift/", std: ["SS.9-12.Soc.5", "SS.9-12.Soc.6", "SS.9-12.Soc.7"] },
+  "sociology-unit2-day1-first-shift":         { course: "sociology", unit: 2, day: 1, title: "Day 1 · First Shift: Status, Roles & Norms", path: "sociology/unit2-day1-first-shift/", std: ["SS.9-12.Soc.5", "SS.9-12.Soc.7"] },
   "sociology-unit2-arrival-culture":          { course: "sociology", unit: 2, day: 2, title: "Day 2 · The Arrival: A New Culture", path: "sociology/arrival-culture/", std: ["SS.9-12.Soc.5", "SS.9-12.Soc.6"] },
   "sociology-unit2-day3-culture-shock":      { course: "sociology", unit: 2, day: 3, title: "Day 3 · Culture Shock Exchange", path: "sociology/unit2-day3-culture-shock-exchange/", std: ["SS.9-12.Soc.6", "SS.9-12.Soc.5"] },
 
   // ---- Government · Unit 1 ----
   "gov-stranded-day1":                { course: "government", unit: 1, day: 1, title: "Day 1 · Stranded: Govern or Collapse", path: "civics/stranded-government/", std: ["SS.9-12.Gov.1", "SS.9-12.Gov.5"] },
   "gov-my-country-day3":              { course: "government", unit: 1, day: 3, title: "Day 3 · My Country, My Rules", path: "civics/my-country-my-rules/", std: ["SS.9-12.Gov.1", "SS.9-12.Gov.4"] },
-  "gov-articles-day5":                { course: "government", unit: 1, day: 5, title: "Day 5 · 13 States. One Mess.", path: "civics/articles-confederation-game/", std: ["SS.9-12.Gov.9"] },
-  "gov-missing-constitution-day7":    { course: "government", unit: 1, day: 7, title: "Day 7 · The Missing Constitution", path: "civics/missing-constitution/", std: ["SS.9-12.Gov.4"] },
+  "gov-articles-day5":                { course: "government", unit: 1, day: 5, title: "Day 5 · 13 States. One Mess.", path: "civics/articles-confederation-game/", std: ["SS.9-12.Gov.3", "SS.9-12.Gov.9"] },
+  "gov-missing-constitution-day7":    { course: "government", unit: 1, day: 7, title: "Day 7 · The Missing Constitution", path: "civics/missing-constitution/", std: ["SS.9-12.Gov.3", "SS.9-12.Gov.4"] },
   "gov-democracy-visualized-day1":    { course: "government", unit: 1, day: 1, title: "Day 1 · Purposes of Government (Reading)", path: "civics/democracy-visualized/#day1", std: ["SS.9-12.Gov.1"] },
-  "gov-democracy-visualized-day2":    { course: "government", unit: 1, day: 2, title: "Day 2 · Social Contract & Rule of Law (Reading)", path: "civics/democracy-visualized/#day2", std: ["SS.9-12.Gov.14"] },
+  "gov-democracy-visualized-day2":    { course: "government", unit: 1, day: 2, title: "Day 2 · Who Counts as 'We the People'? (Reading)", path: "civics/democracy-visualized/#day2", std: ["SS.9-12.Gov.14"] },
   "gov-democracy-visualized-day7":    { course: "government", unit: 1, day: 7, title: "Day 7 · The Constitution (Reading)", path: "civics/democracy-visualized/#day7", std: ["SS.9-12.Gov.4"] },
   "gov-democracy-visualized-day9":    { course: "government", unit: 1, day: 9, title: "Day 9 · Federalism & Iowa Government (Reading)", path: "civics/democracy-visualized/#day9", std: ["SS.9-12.Gov.9"] },
   // ---- Government · Unit 1 · printed/outside resources from the Schoology day posts (links only, no turn-in) ----
@@ -339,9 +339,9 @@ window.CLASS_ASSIGNMENTS = {
   "soc-u1-d5-prove-hot-take": { course: "sociology", unit: 1, day: 5, title: "Day 5 · Hot Take Lab", path: "sociology/u1-d5-prove-hot-take/", std: ["SS.9-12.Soc.1"] },
   "soc-u1-d6-study-people": { course: "sociology", unit: 1, day: 6, title: "Day 6 · Research Agency", path: "sociology/u1-d6-study-people/", std: ["SS.9-12.Soc.1", "SS.9-12.Soc.3"] },
   "soc-u2-d4-team-up": { course: "sociology", unit: 2, day: 4, title: "Day 4 · Save the Night Bus", path: "sociology/u2-d4-team-up/", std: ["SS.9-12.Soc.7", "SS.9-12.Soc.8"] },
-  "soc-u2-d5-everyday-life": { course: "sociology", unit: 2, day: 5, title: "Day 5 · Jaylen's Tuesday", path: "sociology/u2-d5-everyday-life/", std: ["SS.9-12.Soc.5", "SS.9-12.Soc.6", "SS.9-12.Soc.7", "SS.9-12.Soc.8"] },
+  "soc-u2-d5-everyday-life": { course: "sociology", unit: 2, day: 5, title: "Day 5 · Jaylen's Tuesday", path: "sociology/u2-d5-everyday-life/", std: ["SS.9-12.Soc.5", "SS.9-12.Soc.6", "SS.9-12.Soc.7"] },
   "soc-u3-d1-who-taught-you": { course: "sociology", unit: 3, day: 1, title: "Day 1 · Daniela's Scrapbook", path: "sociology/u3-d1-who-taught-you/", std: ["SS.9-12.Soc.9"] },
-  "soc-u3-d5-groups-change-us": { course: "sociology", unit: 3, day: 5, title: "Day 5 · The Group Pressure Lab", path: "sociology/u3-d5-groups-change-us/", std: ["SS.9-12.Soc.11"] },
+  "soc-u3-d5-groups-change-us": { course: "sociology", unit: 3, day: 5, title: "Day 5 · The Group Pressure Lab", path: "sociology/u3-d5-groups-change-us/", std: ["SS.9-12.Soc.9", "SS.9-12.Soc.11"] },
   "soc-u4-d2-bad-day": { course: "sociology", unit: 4, day: 2, title: "Day 2 · Same Bad Day, Three Wallets", path: "sociology/u4-d2-bad-day/", std: ["SS.9-12.Soc.12", "SS.9-12.Soc.13"] },
   "soc-u4-d6-fight-inequality": { course: "sociology", unit: 4, day: 6, title: "Day 6 · The Organizer's Toolkit", path: "sociology/u4-d6-fight-inequality/", std: ["SS.9-12.Soc.15"] },
   "gov-u6-d1-checks-balances": { course: "government", unit: 6, day: 1, title: "Day 1 · Branch Wars", path: "civics/gov-u6-d1-checks-balances/", std: ["SS.9-12.Gov.4", "SS.9-12.Gov.9"] },
@@ -352,19 +352,19 @@ window.CLASS_ASSIGNMENTS = {
   "wh-u2-d8-vietnam": { course: "world-history", unit: 2, day: 8, title: "Day 8 · Vietnam: Who Should Decide a Nation's Future?", path: "world-history/u2-d8-vietnam/", std: ["SS.9-12.WH.36", "SS.9-12.WH.37", "SS.9-12.WH.34"] },
   "wh-u2-d11-1989": { course: "world-history", unit: 2, day: 11, title: "Day 11 · 1989: How Does a Wall Come Down?", path: "world-history/u2-d11-1989/", std: ["SS.9-12.WH.34", "SS.9-12.WH.37", "SS.9-12.WH.35"] },
   "ush-u1-d3-responses-iowans": { course: "us-history", unit: 1, day: 3, title: "Day 3 · Hoover vs. the New Deal", path: "us-history/u1-d3-responses-iowans/", std: ["SS.9-12.US.25", "SS.9-12.US.27", "SS.9-12.US.28"] },
-  "ush-u2-d8-common-good": { course: "us-history", unit: 2, day: 4, title: "Day 4 · The Ration Book", path: "us-history/u2-d8-common-good/", std: ["SS.9-12.US.34"] },
-  "ush-u3-d1-allies-enemies": { course: "us-history", unit: 3, day: 1, title: "Day 1 · The Cold War Desk", path: "us-history/u3-d1-allies-enemies/", std: ["SS.9-12.US.37", "SS.9-12.US.39", "SS.9-12.US.40"] },
+  "ush-u2-d8-common-good": { course: "us-history", unit: 2, day: 4, title: "Day 4 · The Ration Book", path: "us-history/u2-d8-common-good/", std: ["SS.9-12.US.31", "SS.9-12.US.33", "SS.9-12.US.34"] },
+  "ush-u3-d1-allies-enemies": { course: "us-history", unit: 3, day: 1, title: "Day 1 · The Cold War Desk", path: "us-history/u3-d1-allies-enemies/", std: ["SS.9-12.US.37", "SS.9-12.US.40"] },
   "ush-u3-d3-korea": { course: "us-history", unit: 3, day: 3, title: "Day 3 · The War That Swung: Korea", path: "us-history/u3-d3-korea/", std: ["SS.9-12.US.35", "SS.9-12.US.37", "SS.9-12.US.40"] },
-  "ush-u3-d5-nuclear-brink": { course: "us-history", unit: 3, day: 5, title: "Day 5 · Thirteen Days", path: "us-history/u3-d5-nuclear-brink/", std: ["SS.9-12.US.35", "SS.9-12.US.37", "SS.9-12.US.40"] },
-  "ush-u3-d6-vietnam": { course: "us-history", unit: 3, day: 5, title: "Day 5 · Front Page: A Nation Divided", path: "us-history/u3-d6-vietnam/", std: ["SS.9-12.US.35", "SS.9-12.US.36", "SS.9-12.US.37", "SS.9-12.US.38", "SS.9-12.US.39", "SS.9-12.US.40", "SS.9-12.US.41"] },
+  "ush-u3-d5-nuclear-brink": { course: "us-history", unit: 3, day: 5, title: "Day 5 · Thirteen Days", path: "us-history/u3-d5-nuclear-brink/", std: ["SS.9-12.US.37", "SS.9-12.US.40"] },
+  "ush-u3-d6-vietnam": { course: "us-history", unit: 3, day: 5, title: "Day 5 · Front Page: A Nation Divided", path: "us-history/u3-d6-vietnam/", std: ["SS.9-12.US.35", "SS.9-12.US.37", "SS.9-12.US.38", "SS.9-12.US.40", "SS.9-12.US.41"] },
   "ush-u4-d1-fight-segregation": { course: "us-history", unit: 4, day: 1, title: "Day 1 · The Case Against Segregation", path: "us-history/u4-d1-fight-segregation/", std: ["SS.9-12.US.42", "SS.9-12.US.43", "SS.9-12.US.44"] },
   "ush-u4-d2-nonviolence": { course: "us-history", unit: 4, day: 2, title: "Day 2 · The Nonviolence Strategy File", path: "us-history/u4-d2-nonviolence/", std: ["SS.9-12.US.42", "SS.9-12.US.43", "SS.9-12.US.44"] },
   "ush-u4-d3-who-else": { course: "us-history", unit: 4, day: 3, title: "Day 3 · Build the Exhibit: Who Else Fought?", path: "us-history/u4-d3-who-else/", std: ["SS.9-12.US.42", "SS.9-12.US.44"] },
   "ush-u5-d1-voters-change": { course: "us-history", unit: 5, day: 1, title: "Day 1 · Election Desk 1980", path: "us-history/u5-d1-voters-change/", std: ["SS.9-12.US.46", "SS.9-12.US.47", "SS.9-12.US.49"] },
-  "ush-u5-d4-cold-war-ends": { course: "us-history", unit: 5, day: 3, title: "Day 3 · Who Ended the Cold War?", path: "us-history/u5-d4-cold-war-ends/", std: ["SS.9-12.US.48", "SS.9-12.US.49", "SS.9-12.US.50"] },
+  "ush-u5-d4-cold-war-ends": { course: "us-history", unit: 5, day: 3, title: "Day 3 · Who Ended the Cold War?", path: "us-history/u5-d4-cold-war-ends/", std: ["SS.9-12.US.48", "SS.9-12.US.49"] },
   "ush-u6-d1-superpower": { course: "us-history", unit: 6, day: 1, title: "Day 1 · Superpower Decision Desk", path: "us-history/u6-d1-superpower/", std: ["SS.9-12.US.52", "SS.9-12.US.53", "SS.9-12.US.55", "SS.9-12.US.56"] },
-  "ush-u6-d2-crisis": { course: "us-history", unit: 6, day: 2, title: "Day 2 · Surviving 2008", path: "us-history/u6-d2-crisis/", std: ["SS.9-12.US.53", "SS.9-12.US.55"] },
-  "ush-u6-d4-still-fighting": { course: "us-history", unit: 6, day: 2, title: "Day 2 · The Fight for Access", path: "us-history/u6-d4-still-fighting/", std: ["SS.9-12.US.51", "SS.9-12.US.55", "SS.9-12.US.56"] },
+  "ush-u6-d2-crisis": { course: "us-history", unit: 6, day: 2, title: "Day 2 · Surviving 2008", path: "us-history/u6-d2-crisis/", std: ["SS.9-12.US.53", "SS.9-12.US.54", "SS.9-12.US.55"] },
+  "ush-u6-d4-still-fighting": { course: "us-history", unit: 6, day: 2, title: "Day 2 · The Fight for Access", path: "us-history/u6-d4-still-fighting/", std: ["SS.9-12.US.51", "SS.9-12.US.56"] },
 };
 
 // Iowa standard wording (Iowa Academic Standards for Social Studies) for every standard an in-use activity covers.

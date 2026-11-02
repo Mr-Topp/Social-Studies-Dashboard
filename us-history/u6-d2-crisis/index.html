@@ -86,7 +86,7 @@ UnitGame.start({
   key: "ush-u6-d2-crisis-v1",
   assignmentId: "ush-u6-d2-crisis",
   title: "U.S. History · Unit 6 · Day 2 · Surviving 2008",
-  standard: "SS.9-12.US.53, SS.9-12.US.55",
+  standard: "SS.9-12.US.53, SS.9-12.US.54, SS.9-12.US.55",
   oldApi: "https://fynn-class-assignment-submissions-20261024.neotboy.chatgpt.site/api/submit",
   startFx: { cash: 5000 },
   hud: st => {
@@ -122,7 +122,7 @@ UnitGame.start({
         ${S("U.S. unemployment rate (Bureau of Labor Statistics)", `<p class="src">Unemployment rate = the share of people who want a job but can't find one.</p><div class="chart">${bar("Dec 2007", 5.0)}${bar("Dec 2008", 7.3)}${bar("Oct 2009", 10.0, 1)}${bar("Dec 2010", 9.3)}${bar("Dec 2012", 7.9)}${bar("Dec 2014", 5.6)}${bar("Dec 2016", 4.7)}</div>`)}`,
       blocks: [
         { type: "q", id: "j1", std: "US.53", short: "Read the unemployment peak", prompt: "Look at the chart. When was unemployment the highest?", options: ["October 2009, at 10%", "December 2007, at 5%", "December 2010, at 9.3%", "December 2016, at 4.7%"], hint: "Find the longest bar.", why: "Unemployment peaked at 10% in October 2009, about double what it was before the crash." },
-        { type: "q", id: "j2", std: "US.55", short: "Recovery was slow", prompt: "What does the chart show about the <b>recovery</b> (the time it took to get better)?", options: ["It was slow; unemployment took years to fall back", "It was fast; jobs came back within a few months", "It never happened; unemployment kept rising", "It was even; the rate stayed the same each year"], hint: "Track the bars after 2009. When do they get back near 5%?", why: "Unemployment didn't get back near 5% until about 2015–2016. Many families struggled for years." },
+        { type: "q", id: "j2", std: "US.54", short: "Recovery was slow", prompt: "What does the chart show about the <b>recovery</b> (the time it took to get better)?", options: ["It was slow; unemployment took years to fall back", "It was fast; jobs came back within a few months", "It never happened; unemployment kept rising", "It was even; the rate stayed the same each year"], hint: "Track the bars after 2009. When do they get back near 5%?", why: "Unemployment didn't get back near 5% until about 2015–2016. Many families struggled for years." },
         { type: "event", id: "e2", short: "Layoff decision", html: `<p class="bill">Decision 2 · Your job</p><p>Your company announces layoffs. About half the people in your department will lose their jobs next month. What do you do?</p>`,
           choices: [
             C("Start job hunting right now", -1200, `<p>You find a new job before the layoffs hit. It pays $400 less a month, so over a few months you lose $1,200. But you're still working.</p>`),
@@ -136,7 +136,7 @@ UnitGame.start({
             C("Take a fast, high-interest loan", -2400, `<p>A <b>payday lender</b> gives you the cash today. With high interest and fees, you end up paying back $2,400 for a $1,500 repair.</p>`),
             C("Carpool and walk until you can afford it", -300, `<p>You chip in $300 for gas with a coworker. It's a hassle and takes extra time, but your savings mostly hold.</p>`)
           ] },
-        { type: "q", id: "j4", std: "US.55", short: "Why high-interest debt hurts", prompt: "Why can a high-interest loan make a family's crisis <b>worse</b>?", options: ["They pay back much more than they borrowed", "They can't use the money for car repairs", "It makes the bank give them a lower house payment", "It raises the family's monthly income"], hint: "Compare $1,500 and $2,400 from the car decision.", why: "Interest and fees mean the family pays far more later, when money is already tight." }
+        { type: "q", id: "j4", std: "US.54", short: "Why high-interest debt hurts", prompt: "Why can a high-interest loan make a family's crisis <b>worse</b>?", options: ["They pay back much more than they borrowed", "They can't use the money for car repairs", "It makes the bank give them a lower house payment", "It raises the family's monthly income"], hint: "Compare $1,500 and $2,400 from the car decision.", why: "Interest and fees mean the family pays far more later, when money is already tight." }
       ] },
     { kicker: "Part 3 of 3 · You Are Congress", title: "How Should Government Handle a Crisis?",
       teach: `<p>Now switch sides. You're in Congress. Here's what the real government did:</p>

@@ -82,7 +82,7 @@ UnitGame.start({
   key: "soc-u2d1-first-shift-v1",
   assignmentId: "sociology-unit2-day1-first-shift",
   title: "Sociology Unit 2 · Day 1 · First Shift",
-  standard: "SS.9-12.Soc.5, SS.9-12.Soc.6, SS.9-12.Soc.7",
+  standard: "SS.9-12.Soc.5, SS.9-12.Soc.7",
   oldApi: "https://fynn-class-assignment-submissions-20261024.neotboy.chatgpt.site/api/submit",
   startFx: { tips: 10, stars: 3 },
   wrongFx: { tips: -1 },
@@ -105,13 +105,13 @@ UnitGame.start({
         <p>A <b>role</b> is the behavior people expect from someone because of their status.</p>`,
       blocks: [
         { type: "note", html: `<p class="ticket">Status check</p><p>Dana hands you a name tag and says: "Everybody here has more than one status. Let's sort yours." Decide if each one is <b>ascribed</b> or <b>achieved</b>.</p>` },
-        { type: "q", id: "s1", std: "Soc.6", label: "Sort 1 of 6", short: "Sort: 17 years old", prompt: "Being 17 years old", options: ["Ascribed status", "Achieved status"], hint: "Did you do anything to earn your age?", why: "You can't choose or earn your age, so it is ascribed." },
-        { type: "q", id: "s2", std: "Soc.6", label: "Sort 2 of 6", short: "Sort: new hire", prompt: "New hire at Cedar Grill", options: ["Achieved status", "Ascribed status"], hint: "Think about the application and interview.", why: "You applied and got hired, so this status was achieved." },
-        { type: "q", id: "s3", std: "Soc.6", label: "Sort 3 of 6", short: "Sort: older sibling", prompt: "Older sibling", options: ["Ascribed status", "Achieved status"], hint: "Did you pick the order you were born in?", why: "Birth order is not chosen, so it is ascribed." },
-        { type: "q", id: "s4", std: "Soc.6", label: "Sort 4 of 6", short: "Sort: shift manager", prompt: "Dana's status: shift manager", options: ["Achieved status", "Ascribed status"], hint: "How does someone become a manager?", why: "Dana worked her way up, so manager is achieved." },
-        { type: "q", id: "s5", std: "Soc.6", label: "Sort 5 of 6", short: "Sort: driver's license", prompt: "Licensed driver", options: ["Achieved status", "Ascribed status"], hint: "What do you have to do to get a license?", why: "You pass tests to get a license, so it is achieved." },
-        { type: "q", id: "s6", std: "Soc.6", label: "Sort 6 of 6", short: "Sort: son or daughter", prompt: "Someone's son or daughter", options: ["Ascribed status", "Achieved status"], hint: "Did you choose your parents?", why: "You are born into this status, so it is ascribed." },
-        { type: "q", id: "role1", std: "Soc.6", short: "Role for 'new hire'", prompt: "Your status here is <b>new hire</b>. Which of these is a <b>role</b> that comes with that status?", options: ["Learning the menu and following training", "Being the oldest kid in your whole family", "Turning seventeen years old this summer", "Having your first name on your name tag"], hint: "A role is something people expect you to DO because of the status.", why: "A role is expected behavior. New hires are expected to learn and follow training." }
+        { type: "q", id: "s1", std: "Soc.7", label: "Sort 1 of 6", short: "Sort: 17 years old", prompt: "Being 17 years old", options: ["Ascribed status", "Achieved status"], hint: "Did you do anything to earn your age?", why: "You can't choose or earn your age, so it is ascribed." },
+        { type: "q", id: "s2", std: "Soc.7", label: "Sort 2 of 6", short: "Sort: new hire", prompt: "New hire at Cedar Grill", options: ["Achieved status", "Ascribed status"], hint: "Think about the application and interview.", why: "You applied and got hired, so this status was achieved." },
+        { type: "q", id: "s3", std: "Soc.7", label: "Sort 3 of 6", short: "Sort: older sibling", prompt: "Older sibling", options: ["Ascribed status", "Achieved status"], hint: "Did you pick the order you were born in?", why: "Birth order is not chosen, so it is ascribed." },
+        { type: "q", id: "s4", std: "Soc.7", label: "Sort 4 of 6", short: "Sort: shift manager", prompt: "Dana's status: shift manager", options: ["Achieved status", "Ascribed status"], hint: "How does someone become a manager?", why: "Dana worked her way up, so manager is achieved." },
+        { type: "q", id: "s5", std: "Soc.7", label: "Sort 5 of 6", short: "Sort: driver's license", prompt: "Licensed driver", options: ["Achieved status", "Ascribed status"], hint: "What do you have to do to get a license?", why: "You pass tests to get a license, so it is achieved." },
+        { type: "q", id: "s6", std: "Soc.7", label: "Sort 6 of 6", short: "Sort: son or daughter", prompt: "Someone's son or daughter", options: ["Ascribed status", "Achieved status"], hint: "Did you choose your parents?", why: "You are born into this status, so it is ascribed." },
+        { type: "q", id: "role1", std: "Soc.7", short: "Role for 'new hire'", prompt: "Your status here is <b>new hire</b>. Which of these is a <b>role</b> that comes with that status?", options: ["Learning the menu and following training", "Being the oldest kid in your whole family", "Turning seventeen years old this summer", "Having your first name on your name tag"], hint: "A role is something people expect you to DO because of the status.", why: "A role is expected behavior. New hires are expected to learn and follow training." }
       ] },
     { kicker: "Part 2 of 4 · 12:00 PM rush", title: "The Lunch Rush: Rules You Can See and Can't",
       teach: `<p>A <b>norm</b> is a rule or expectation for how to act. Norms are part of <b>culture</b>.</p>
@@ -154,13 +154,13 @@ UnitGame.start({
             { label: "Say no. Explain the test and my brother.", fx: {}, result: `<p>Dana says, "Okay, thanks for telling me early." You take the test and watch your brother. You miss the extra money. Every choice cost something.</p>` },
             { label: "Offer to cover only 6–9, after the test", fx: { tips: 3 }, result: `<p>Dana takes the deal. You take the test, then ask a neighbor to watch your brother for 2 hours. You earn about $3. Even a compromise cost something.</p>` }
           ] },
-        { type: "q", id: "r1", std: "Soc.6", short: "Thursday = conflict or strain", prompt: "Worker, student, and older sibling all want your Thursday. What is this?", options: ["Role conflict: roles of different statuses clash", "Role strain: one status has too many demands", "A formal norm: written rules from a handbook", "An ascribed status: something you didn't choose"], hint: "How many different statuses are pulling on you?", why: "Three different statuses (worker, student, sibling) clash, so it is role conflict." },
+        { type: "q", id: "r1", std: "Soc.7", short: "Thursday = conflict or strain", prompt: "Worker, student, and older sibling all want your Thursday. What is this?", options: ["Role conflict: roles of different statuses clash", "Role strain: one status has too many demands", "A formal norm: written rules from a handbook", "An ascribed status: something you didn't choose"], hint: "How many different statuses are pulling on you?", why: "Three different statuses (worker, student, sibling) clash, so it is role conflict." },
         { type: "event", id: "e6", short: "Dinner rush", html: `<p class="ticket">Dinner rush</p><p>You have <b>6 tables</b>. Table 2 wants refills, table 5 is ready to order, table 1 wants the check, and the register line is growing. All of this is part of being a server.</p>`,
           choices: [
             { label: "Ask Marcus to run the register for 5 minutes", fx: { stars: 1 }, result: `<p>Marcus helps out. Things calm down. Dana likes that you asked for help. <b>+1 star.</b></p>` },
             { label: "Try to do it all myself as fast as I can", fx: { tips: -2 }, result: `<p>You get it done, but table 5 waits 15 minutes and tips less. <b>−$2.</b></p>` }
           ] },
-        { type: "q", id: "r2", std: "Soc.6", short: "Dinner rush = conflict or strain", prompt: "Six tables, refills, orders, and the register, all as a server. What is this?", options: ["Role strain: one status has too many demands", "Role conflict: roles of different statuses clash", "A positive sanction: a reward for working hard", "An informal norm: an unwritten diner rule"], hint: "Is this one status or several?", why: "It's all one status (server) with too many expectations, so it is role strain." }
+        { type: "q", id: "r2", std: "Soc.7", short: "Dinner rush = conflict or strain", prompt: "Six tables, refills, orders, and the register, all as a server. What is this?", options: ["Role strain: one status has too many demands", "Role conflict: roles of different statuses clash", "A positive sanction: a reward for working hard", "An informal norm: an unwritten diner rule"], hint: "Is this one status or several?", why: "It's all one status (server) with too many expectations, so it is role strain." }
       ] },
     { kicker: "Part 4 of 4 · 9:00 PM close", title: "Bigger Than the Diner: Institutions",
       teach: `<p>A <b>social institution</b> is an organized system that meets a big need in society.</p>

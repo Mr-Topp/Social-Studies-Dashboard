@@ -36,7 +36,7 @@ books:{name:'THE FOUNDING LIBRARY',type:'pick',prompt:'The archivist wants the s
 };
 let state;let active=null;let pickLeft=null;let matched=[];let ordered=[];let seconds=0;let timer;let taskTry=0;let choiceOrder=[];let pairLeftOrder=[];let pairRightOrder=[];let orderPartOrder=[];
 // ---- First-try score + turn-in (teacher dashboard) ----
-const STANDARD='SS.9-12.Gov.4: Analyze the underlying principles established by the United States Constitution.';
+const STANDARD='SS.9-12.Gov.3, SS.9-12.Gov.4: Analyze important founding and historical documents to the United States and the State of Iowa. Analyze the underlying principles established by the United States Constitution.';
 const EXIT_Q='The Constitution starts with “We the People.” What does that tell you about where government power comes from? Give one example from the game.';
 function markMiss(id){if(!id)return;state.missed=state.missed||{};state.missed[id]=true;save()}
 function scoreItem(id){if(!window.classFirstTry)return;if(state.missed&&state.missed[id])classFirstTry.wrong();classFirstTry.right(id)}

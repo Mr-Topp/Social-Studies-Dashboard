@@ -1,5 +1,5 @@
 'use strict';
-const STANDARD='SS.9-12.Gov.9: Assess how the United States federal system divides powers between national and state governments.';
+const STANDARD='SS.9-12.Gov.3, SS.9-12.Gov.9: Analyze important founding and historical documents to the United States and the State of Iowa. Assess how the United States federal system divides powers between national and state governments.';
 const EXIT_Q='Pick one problem from the game. What power was missing under the Articles, and what did the Constitution change?';
 const E=SimpleArticles,$=q=>document.querySelector(q),KEY='articles-comparison-v3';let s=E.fresh(),timer,resetArmed=false;try{const old=JSON.parse(localStorage.getItem(KEY));if(old?.version===3)s={...s,...old};}catch{}
 function save(){try{localStorage.setItem(KEY,JSON.stringify(s));}catch{$('#saved').textContent='Saving unavailable';}}
