@@ -101,6 +101,7 @@ window.CLASS_DONE_FOR_ALL = {
   "divide-africa-day1": "Completed in class"
 };
 
+// 🔒 LOCKED by Fynn (2026-11-02). Don't change unit day counts or test dates without his yes in your chat (see CLAUDE.md).
 // 2026-11-02: Fynn combined days so every unit fits Mon–Thu class days (Dec 2 no school): U.S. History U3 6→5,
 // Government U3 4→3, Sociology U3 8→7, World History U2 12→9. Test dates unchanged.
 window.CLASS_CALENDAR = {
