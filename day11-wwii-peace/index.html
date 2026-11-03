@@ -1,0 +1,175 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Never Again? | World History Day 11</title>
+<meta name="description" content="Read a real 1945 comic that promised World War III could be prevented, and fact-check its plan for the United Nations against what really happened.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../shared/graphic-reading.css?v=3">
+<style>
+.flip-layout{grid-template-columns:minmax(0,1.9fr) minmax(320px,1fr)}
+.flip-stage img{min-height:0;max-height:calc(100vh - 130px)}
+.qcol{padding-bottom:70px}
+.intro-line{font-size:1.02rem;margin:0 0 10px}
+.words{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0 10px;padding:0;list-style:none}
+.words li{background:#fff;border:1px solid #e6dcc8;border-left:4px solid var(--navy);border-radius:8px;padding:3px 9px;font-size:.88rem}
+.declass{display:block;background:#fff;border:2px dashed #18364a;border-radius:10px;padding:8px 11px;margin:6px 0 8px;font-weight:650;color:#22313b;line-height:1.4;font-style:normal}
+.declass > b:first-child{display:block;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#18364a;margin-bottom:2px}
+.dime{display:inline-block;background:#e6bd64;color:#0f2433;border-radius:999px;font-weight:850;padding:0 9px;margin-right:4px}
+.credits{font-size:.8rem;color:var(--muted);margin:10px 0 0;line-height:1.4}
+.gr-head{padding-top:18px;padding-bottom:16px}.gr-head h1{margin:6px 0 6px}.gr-head .hook{margin-bottom:8px}
+body.reading-now .choices{opacity:.45;pointer-events:none}
+</style>
+<script src="../shared/assignments.js?v=20261103p11"></script><script src="../shared/turnin.js?v=20261103d"></script></head><body>
+<header class="gr-head" data-years="1918 — 1948"><div class="gr-wrap">
+<div class="kicker">World History · Day 11 · Look Back: Punish or Rebuild?</div>
+<h1>Never Again?</h1>
+<p class="hook"><span class="dime">10¢</span>After WWI, the winners punished Germany. In 1945, this comic promised kids a better plan that would stop World War III. Fact-check it. 4 checks + 4 short answers. <b>About 25 minutes.</b></p>
+<p class="goal"><b>Today's goal:</b> Explain how the world tried to fix the mistakes made after World War I, and judge whether the new plan after World War II worked.</p>
+<details class="std-details"><summary>Iowa standards for today</summary>
+<p><b>Standard SS.9-12.WH.31</b> — Assess the political and economic consequences and cultural developments after World War I and World War II.</p><p><b>Standard SS.9-12.WH.29</b> — Analyze the causes that led to the outbreak of World War I and World War II.</p>
+</details>
+<nav><a class="back" href="../">← Class activities</a></nav>
+</div></header>
+
+<nav class="route" aria-label="Your progress"><ol id="flipRoute"></ol></nav>
+
+<main class="gr-main gr-wrap">
+<section class="card">
+<p class="intro-line"><b>You're the fact-checker.</b> For each part: <b>read</b> the comic on the left → get the <b>check</b> right → <b>write</b> 1–2 sentences. Done = 4 green checks + 4 answers, then turn in at the bottom.</p>
+<ul class="words" aria-label="Word help">
+<li><b>World organization</b> = the United Nations (UN)</li><li><b>League of Nations</b> = the peace group made after WWI</li><li><b>Dispute</b> = argument</li><li><b>Veto</b> = a vote that can block a decision</li><li><b>Human rights</b> = rights every person has</li><li><b>Security Council</b> = the UN group that can act to stop wars</li><li><b>Charter</b> = the UN's founding rules</li>
+</ul>
+<p class="welcome" id="welcome" role="status"></p>
+</section>
+
+<div class="flip-layout">
+<section class="flip-reader reading" id="flipReader" aria-label="Pages from the 1945 comic A Third World War Can Be Prevented Now!">
+<div class="flip-bar"><div><p class="eyebrow">The reading</p><h2>A real 1945 comic · 7 short pages</h2></div><span class="flip-pos" id="flipPos"></span></div>
+<div class="flip-tools"><button type="button" class="quiet" id="flipBack">← Back a page</button><span class="grow"><span id="flipPart"></span><span id="flipTimer" aria-live="polite"></span></span><button type="button" class="secondary" id="flipNext">Next page →</button><button type="button" class="quiet" id="flipZoom">Make page bigger</button></div>
+<div class="flip-stage"><img id="flipImg" alt="" src="pages/p-01.jpg"></div>
+<p class="flip-cap">Click the page to make it bigger.</p>
+</section>
+
+<div class="qcol">
+<section class="card">
+<label for="studentName">First name + last initial (like Jordan M.)</label><input id="studentName" maxlength="100" autocomplete="off" placeholder="First name + last initial (like Jordan M.)" required>
+</section>
+<div id="flipCards"></div>
+<div class="flip-nav"><button type="button" class="quiet" id="flipBack2">← Back</button><button type="button" class="secondary" id="flipNext2">Next page →</button><p class="flip-why" id="flipWhy" aria-live="polite"></p></div>
+<section class="card finish" id="finish">
+<h2>Turn in your work</h2>
+<div class="actions"><button id="submitBtn" class="primary" type="button">Turn in answers</button><button id="clearBtn" class="quiet" type="button">Start over</button></div><p id="submitStatus" class="status" role="status" aria-live="polite"></p><p class="reader-note">Your work saves on this device, so you can come back later. Your teacher sees it after you turn it in.</p>
+<p class="credits">Comic: "A Third World War Can Be Prevented Now!" <i>True Comics</i> #44 (1945), Parents' Magazine Press. Public-domain scan from the ComicBook Experience reading library (formerly comicbooks.com). Panels were cropped to today's reading.</p>
+</section>
+</div></div></main>
+<div class="flip-big" id="flipBig" hidden role="dialog" aria-label="Bigger page"><button type="button" class="quiet" id="flipBigClose">✕ Close</button><img id="flipBigImg" alt="Bigger view of the current page"></div>
+<script>
+window.FLIP={
+title:"Pages from the 1945 comic \"A Third World War Can Be Prevented Now!\"",prefix:"wh-day11-peace-",pages:7,readSeconds:8,lockSeconds:8,
+assignmentId:"day11-wwii-peace",api:"https://fynn-class-assignment-submissions-20261024.neotboy.chatgpt.site/api/submit",
+lockedText:"This box opens when you get the check right.",
+clearConfirm:"Start over? This clears your checks and answers on this device.",
+successText:"Turned in! Your teacher got your 4 checks and 4 answers. You're done.",
+wrongText:(c,left)=>left>0?"Not quite. "+c.hint+" Try again in "+left+"…":"Not quite. "+c.hint+" The choices were mixed up. Try again.",
+parts:[
+{
+"short":"Look back",
+"ref":"Reader pages 1–3",
+"title":"1. Look back: after World War I",
+"from":1,"to":3,
+"check":{
+"page":3,
+"tag":"Reading check · Reader page 3",
+"q":"Read the 1918 panel. What did people believe about WWI's terrible new weapons?",
+"right":"That these weapons would make another big war impossible.",
+"wrong":["That the U.S. should build even bigger weapons for the next war.","That Germany should get to keep its army, planes, and weapons.","That the new weapons would only be used to keep peace at home."],
+"why":"✓ Correct. In 1918, people hoped WWI's horror would end war. Then in 1939 a second world war came, with even worse weapons.",
+"hint":"Read the soldier's speech bubble in the 1918 panel at the top of reader page 3."
+},
+"prompt":"Look back to Day 5. Why didn't the peace after World War I stop another war?",
+"stem":"<span class=\"declass\"><b>Fact file · Day 5 look-back</b>The 1919 Treaty of Versailles punished Germany. It lost land, had to pay huge reparations (war payments), and its army was cut to 100,000 men. The new League of Nations had no army, the U.S. never joined, and it failed to stop Japan, Italy, and Germany in the 1930s. Many Germans were angry and broke, and Hitler promised to tear up the treaty.</span>Write 1–2 sentences. Start like this: <i>After WWI, the winners ___. This did not stop another war because ___.</i>",
+"stemText":"After WWI, the winners ___. This did not stop another war because ___.",
+"placeholder":"After WWI, the winners ___. This did not stop another war because ___."
+},
+{
+"short":"The UN plan",
+"ref":"Reader pages 4–5",
+"title":"2. The plan: a new world organization",
+"from":4,"to":5,
+"check":{
+"page":4,
+"tag":"Reading check · Reader page 4",
+"q":"Read the right-hand panel. Which countries planned this world organization in 1944?",
+"right":"The United States, Britain, China, and Russia (Soviet Union)",
+"wrong":["The United States, Britain, France, and a defeated Germany","Every country in the world, voting together at one meeting","Britain, France, Italy, and Japan, the ones who ran the League"],
+"why":"✓ Correct. The \"four great powers\" met at Dumbarton Oaks in Washington, D.C., in 1944. Their plan added something the League never had: troops sent by member countries (bottom-right of the chart on the next page).",
+"hint":"Read the caption at the top of the right-hand panel on reader page 4. It names the countries that met."
+},
+"prompt":"How was the new United Nations different from the League of Nations?",
+"stem":"<span class=\"declass\"><b>Fact file</b>The League of Nations had no troops, and the U.S. never joined. On June 26, 1945, 50 countries signed the United Nations Charter. This time, the U.S. joined, and the plan included troops sent by member countries.</span>Write 1–2 sentences. Start like this: <i>The UN was different from the League because ___ (reader page 5). This might help keep peace because ___.</i>",
+"stemText":"The UN was different from the League because ___ (reader page 5). This might help keep peace because ___.",
+"placeholder":"The UN was different from the League because ___ (reader page 5). This might help keep peace because ___."
+},
+{
+"short":"Human rights",
+"ref":"Reader page 6",
+"title":"3. Never again: human rights",
+"from":6,"to":6,
+"check":{
+"page":6,
+"tag":"Reading check · Reader page 6",
+"q":"Read the bottom row (\"…and promote respect for human rights\"). What does the comic say the world must never allow again?",
+"right":"Putting people in concentration camps or burning their books",
+"wrong":["Enemy planes flying over their cities and scaring families","A disease spreading from one country across the whole world","Countries arguing with each other about where borders go"],
+"why":"✓ Correct. The comic says no country can again put people in concentration camps, and book burning \"must never happen again.\" It asks for a \"world bill of rights.\"",
+"hint":"Read only the three speech bubbles in the bottom row of reader page 6."
+},
+"prompt":"Did the world keep the comic's human-rights promise?",
+"stem":"<span class=\"declass\"><b>Fact file</b>1945–46: At the Nuremberg Trials, judges from 4 countries put 22 top Nazi leaders on trial for crimes against humanity (terrible crimes against regular people); 12 were sentenced to death. This time, the leaders were punished, not the whole country. 1948: The UN passed the Universal Declaration of Human Rights. Eleanor Roosevelt led the group that wrote it. But mass killings still happened later, like in Cambodia (1975–79) and Rwanda (1994).</span>Write 1–2 sentences. Start like this: <i>After the war, the world ___. The promise worked / did not fully work because ___.</i>",
+"stemText":"After the war, the world ___. The promise worked / did not fully work because ___.",
+"placeholder":"After the war, the world ___. The promise worked / did not fully work because ___."
+},
+{
+"short":"Stopping wars",
+"ref":"Reader page 7",
+"title":"4. The promise: stopping the next war",
+"from":7,"to":7,
+"check":{
+"page":7,
+"tag":"Fact-check · Reader page 7",
+"q":"<span class=\"declass\"><b>Fact file</b>In the real UN, five countries each got a veto: the U.S., the Soviet Union, Britain, France, and China. One veto stops any Security Council action. All five still have it today (Russia took the Soviet seat in 1991).</span>The comic says the Security Council will be \"ever watchful\" so it can act \"immediately\" against \"Bratavania.\" What could stop that from working in real life?",
+"right":"If a big power or its ally is the attacker, it can vote the action down.",
+"wrong":["The Security Council would only meet once a year, too late to act fast.","Small countries were not allowed to speak at the General Assembly at all.","The real UN plan had no Security Council to make decisions about wars."],
+"why":"✓ Correct. Bratavania is a made-up country. After 1945, the U.S. and the Soviets became rivals. The Soviet Union used its veto dozens of times in the UN's first years, and the U.S. and others have used it too, so the Security Council often cannot act.",
+"hint":"Reread the Fact file. What can one veto do, and who had one?"
+},
+"prompt":"The comic's title promised a third world war \"can be prevented now.\" Was it right?",
+"stem":"<span class=\"declass\"><b>Fact file</b>After WWII, the winners occupied Germany and Japan, then helped them rebuild with new governments. The U.S. Marshall Plan (1948) gave about $13 billion to help rebuild Europe. There has been no third world war since 1945, but the U.S. and Soviets became rivals in the Cold War.</span>Write 1–2 sentences. Use the veto and one other fact. Start like this: <i>The comic was mostly right / partly right / mostly wrong because ___. My best evidence is ___.</i>",
+"stemText":"The comic was mostly right / partly right / mostly wrong because ___. My best evidence is ___.",
+"placeholder":"The comic was mostly right / partly right / mostly wrong because ___. My best evidence is ___."
+}
+],
+questions:["Look back to Day 5. Why didn't the peace after World War I stop another war?","How was the new United Nations different from the League of Nations?","Did the world keep the comic's human-rights promise?","The comic's title promised a third world war \"can be prevented now.\" Was it right?"],
+validate(s){if(!s.name)return{text:"Type your first name + last initial (like Jordan M.) at the top of the questions.",focus:"studentName"};
+ const mc=[1,2,3,4].find(i=>!s.checkDone(i));if(mc)return{text:"Get the check right for part "+mc+" first.",part:mc};
+ const ma=[1,2,3,4].find(i=>!s.answer(i));if(ma)return{text:"Write your answer for part "+ma+" before turning in.",part:ma,focus:"answer"+ma};
+ for(const i of [1,2,3,4]){const j=window.classJunkStop&&window.classJunkStop(document.getElementById("answer"+i));if(j)return{text:"Part "+i+": "+j,part:i}}return null},
+buildAnswers(s){const a={Standard:"SS.9-12.WH.31, SS.9-12.WH.29","First-try correct":[1,2,3,4].filter(i=>(s.tries(i)||1)===1).length+" of 4"};
+ this.questions.forEach((q,i)=>a[q]=s.answer(i+1));a["Reading checks"]="4 of 4 correct · tries: "+[1,2,3,4].map(i=>s.tries(i)||1).join(", ");return a}
+};
+</script>
+<script src="../shared/flip-reader.js?v=1"></script>
+<script>
+// This page only: choices wait for the read timer, and "Not quite" scrolls into view.
+(function(){
+  const t=document.getElementById("flipTimer");
+  const sync=()=>document.body.classList.toggle("reading-now",t.textContent.trim()!=="");
+  new MutationObserver(sync).observe(t,{childList:true,characterData:true,subtree:true});sync();
+  document.getElementById("flipCards").addEventListener("click",e=>{if(!e.target.closest(".choice"))return;
+    setTimeout(()=>{const f=[...document.querySelectorAll(".flip-part:not([hidden]) .fb")].find(x=>x.textContent.trim());
+      if(f){const r=f.getBoundingClientRect();if(r.bottom>innerHeight-80||r.top<0)f.scrollIntoView({behavior:"smooth",block:"center"})}
+      const a=document.querySelector(".flip-part:not([hidden]) textarea:not([disabled])");
+      if(a&&f&&f.classList.contains("ok")){const r=a.getBoundingClientRect();if(r.bottom>innerHeight-80)a.scrollIntoView({behavior:"smooth",block:"center"})}},120)});
+})();
+</script>
+</body></html>
