@@ -1,18 +1,18 @@
 // =====================================================================
 //  BUILD THE EXHIBIT: WHO ELSE FOUGHT?  (U.S. History Unit 4 · Day 3)
 //  You're the curator of a new museum exhibit. Three rooms:
-//    Room 1 Farmworkers & the Chicano Movement · Room 2 Red Power · Room 3 Asian American activists
+//    Room 1 Farmworkers & the Chicano Movement · Room 2 Red Power · Room 3 The Women's Movement (NOW, Title IX, ERA vs. STOP ERA)
 //  then a Comparison Wall. Each solved check hangs an item on the wall.
 //  Two meters: 🎯 Accuracy (wrong tries put a wrong label up: −5) and 👥 Visitors.
 //  Director Halvorsen wants crowds; the curator calls trade crowds against accuracy.
-//  7 checks (Fynn 11/3: ~7 max; every day goal gets one), 3 curator calls, 4 opening-day endings,
+//  7 checks (Fynn 11/3: ~7 max; every day goal gets one), 4 curator calls, 4 opening-day endings,
 //  ⚡ Lightning Round (day before the Unit 4 test): 7 one-tap questions on the other Day 3 slide
-//  topics + Days 1–2 (recorded as checks; they don't move the meters), 2 writing answers.
+//  topics, Asian American activism (redress, Vincent Chin) + Days 1–2 (recorded as checks; they don't move the meters), 2 writing answers.
 //  Same assignmentId as the old engine version. Turn-in via shared/turnin.js.
 // =====================================================================
 (function () {
   "use strict";
-  const KEY = "ush-u4-d3-who-else-v2";
+  const KEY = "ush-u4-d3-who-else-v2-r3";
   const ASSIGNMENT_ID = "ush-u4-d3-who-else";
   const TITLE = "U.S. History · Unit 4 · Day 3 · Build the Exhibit: Who Else Fought?";
   const STANDARD = "SS.9-12.US.42, SS.9-12.US.44";
@@ -41,8 +41,8 @@
       terms: [["Boycott", "refusing to buy something to pressure a business"], ["Strike", "workers refuse to work until things change"], ["Chicano", "a name Mexican American activists used with pride"]] },
     { icon: "🪶", tag: "Red Power", name: "Room 2 · Red Power",
       terms: [["Treaty", "an official agreement between nations"], ["Sovereignty", "a nation's right to govern itself"], ["Occupation", "taking over a place and staying there"]] },
-    { icon: "📜", tag: "Asian Americans", name: "Room 3 · Asian American Activists",
-      terms: [["Incarceration", "being locked up; WWII camps held 120,000+ Japanese Americans"], ["Redress", "making up for a wrong: an apology or payment"]] },
+    { icon: "♀️", tag: "Women's Rights", name: "Room 3 · The Women's Movement",
+      terms: [["Women's movement", "the fight for equal rights for women"], ["Title IX", "1972 law: no sex discrimination in schools"], ["ERA", "Equal Rights Amendment: equal rights for women and men"], ["Ratify", "approve; 38 states had to say yes"]] },
     { icon: "⚖️", tag: "Compare", name: "The Comparison Wall",
       terms: [["Black civil rights movement", "ended legal segregation, won the 1964 and 1965 laws"], ["Sovereignty", "a nation's right to govern itself"]] }
   ];
@@ -106,25 +106,37 @@
       reveal: "Alcatraz: <b>Indians of All Tribes</b>. AIM led Wounded Knee, 1973." },
 
     // ===== Room 3 =====
-    { id: "a1", type: "check", r: 2, std: "US.42", item: "✉️", kicker: "Item 5 · Civil Liberties Act, 1988", short: "Redress: pushed Congress, won apology + $20,000", stamp: "ON THE WALL",
-      scene: () => ln("⛓️", "WWII: 120,000+ Japanese Americans forced into camps. Most were citizens.") + art("Payment + apology, 1990", `<div class="check"><span>PAY TO: each camp survivor</span><b>$20,000</b><span>U.S. Treasury · 1990</span></div>`, "Congress passed it in 1988. President Reagan signed it."),
-      ask: "What tactic won this?",
-      options: ["Pushing Congress for redress", "A boycott of American stores", "Occupying a government building", "A long work strike"],
-      miss: ["No boycott. Look at who passed the law.", "That's Alcatraz. Who passed this law?", "No strike. Activists testified and lobbied."],
-      hint: "An “Act” is a law. Who passes laws?",
-      reveal: "<b>Redress</b>: making up for a wrong. Activists pushed Congress for years." },
+    { id: "w1", type: "check", r: 2, std: "US.42", item: "🏀", kicker: "Item 5 · Title IX, 1972", short: "Title IX: schools risked losing their funding", stamp: "ON THE WALL",
+      scene: () => ln("✊", "1966: <b>NOW</b> forms to fight unfair treatment of women.") + ln("📜", "1972: <b>Title IX</b>. Schools that take U.S. government money can't treat students unfairly because of sex.") + art("Girls in high school sports", `<div class="sport"><div><b>295,000</b><span>🏀</span><small>1972</small></div><div><b>3 million+</b><span>🏀🏐⚽🥎🏃🏽‍♀️</span><small>Today</small></div></div>`, "Title IX became law June 23, 1972."),
+      ask: "Why did schools add girls' teams?",
+      options: ["They risked losing their funding", "The ERA forced them to", "Girls staged a walkout from class", "Boys' teams voted to share"],
+      miss: ["The ERA never became law. Reread the Title IX line.", "No walkout. Congress passed a law.", "No vote. A law made it happen."],
+      hint: "Reread the Title IX line. What could a school lose?",
+      reveal: "<b>Title IX</b>: the <b>women's movement</b> pushed Congress and won a law." },
 
-    { id: "a2", type: "check", r: 2, std: "US.42", item: "📰", kicker: "Item 6 · Detroit, 1982 · ⚠️ Heads up: a violent crime", short: "Vincent Chin: no jail time sparked organizing", stamp: "ON THE WALL",
-      scene: () => `<div class="paper"><p class="mast">CASE FILE · DETROIT · 1982–83</p><p class="hl">Vincent Chin</p><p>Two autoworkers beat Chinese American Vincent Chin to death. They blamed Japan for lost car jobs.</p><p class="sent-box">Sentence: probation (no jail) + $3,000 fine</p></div>`,
-      ask: "Why did Asian Americans nationwide organize?",
-      options: ["The sentence made his life seem worth less", "Detroit car plants were laying off workers", "The judge gave the killers long prison terms", "Japan's car companies asked them to protest"],
-      miss: ["Layoffs were the killers' excuse, not the protest.", "Reread the sentence box: no jail.", "Nothing here says that. Look at the sentence."],
-      hint: "Compare the crime with the punishment.",
-      reveal: "Groups formed to demand <b>equal justice</b>." },
+    { id: "w2", type: "check", r: 2, std: "US.42", item: "📜", kicker: "Item 6 · The ERA fight, 1972–1982", short: "ERA: opponents kept it 3 states short", stamp: "ON THE WALL",
+      scene: () => art("ERA · passed Congress 1972", `<p class="era-q">“Equality of rights under the law shall not be denied … on account of sex.”</p>`, "Equal Rights Amendment. Then 38 of 50 states had to ratify (say yes).") +
+        `<div class="pins"><div class="pin yes"><b>✅ ERA YES</b><span>NOW: Equal pay and fair laws for women, locked into the Constitution.</span></div><div class="pin no"><b>🛑 STOP ERA</b><span>Phyllis Schlafly: Women could be drafted. Wives could lose Social Security benefits.</span></div></div>` +
+        `<div class="tally"><span class="tl">States that said yes</span><span class="tbar"><span style="width:92%"></span><i style="left:100%"></i></span><span class="tn"><b>35</b> of 38 needed</span></div>`,
+      ask: "Why did the ERA fall short?",
+      options: ["Opponents won over enough states", "Congress voted it down", "The Supreme Court struck it down", "Women's groups stopped backing it"],
+      miss: ["Congress passed it in 1972. States had to ratify.", "No court case. It needed 38 states.", "NOW pushed hard to the end. Look at the tally."],
+      hint: "Look at the tally. Who had to say yes?",
+      reveal: "<b>Ratify</b>: 38 states had to approve. <b>STOP ERA</b> helped hold it to 35." },
+
+    { id: "e4", type: "event", r: 2, kicker: "Curator call · The ERA display", short: "ERA display",
+      scene: () => say("Director Halvorsen", "“Make it a showdown. Crowds love a hero and a villain.”", "boss") + art("ERA display plan", ln("✅", "Supporters' reasons") + ln("🛑", "Opponents' reasons") + ln("🗺️", "35 of 38 states")),
+      ask: "How do you show the ERA fight?",
+      cards: [
+        { icon: "🥊", t: "Hero vs. villain", line: "One side cheered, one side booed.", fx: { vis: 20, acc: -15 }, res: "Crowds cheer and boo. Nobody learns either side's reasons.", cause: "Hero-vs-villain ERA display" },
+        { icon: "🗣️", t: "Both sides, real reasons", line: "Each side in its own words.", fx: { vis: -5, acc: 15 }, res: "Visitors see why people disagreed. Some find it slow.", cause: "Both sides, real reasons" },
+        { icon: "🗺️", t: "Race to 38 game", line: "Light up states. Fast and fun.", fx: { vis: 15, acc: 0 }, res: "Kids race to 38. Few learn why states said no.", cause: "Race-to-38 map game" }
+      ],
+      reveal: "Both sides had <b>real reasons</b>. Accurate history shows both." },
 
     // ===== Comparison Wall =====
     { id: "e3", type: "event", r: 3, kicker: "Curator call · The big headline", short: "Comparison wall headline",
-      scene: () => say("Director Halvorsen", "“Our sponsor wants: ‘They all won!’”", "boss") + art("Results", ln("🍇", "Contracts, 1970") + ln("🪶", "More tribal control, 1975") + ln("📜", "Apology + payment, 1988") + ln("⏳", "Some fights still go on")),
+      scene: () => say("Director Halvorsen", "“Our sponsor wants: ‘They all won!’”", "boss") + art("Results", ln("🍇", "Contracts, 1970") + ln("🪶", "More tribal control, 1975") + ln("♀️", "Title IX, 1972. ERA fell short.") + ln("⏳", "Some fights still go on")),
       ask: "What's the headline?",
       cards: [
         { icon: "🎉", t: "“They all won!”", line: "Happy sponsor.", fx: { vis: 20, acc: -15 }, res: "Upbeat, but no movement won everything.", cause: "“They all won!” headline" },
@@ -158,18 +170,18 @@
       options: ["A right to self-defense", "Nonviolence, no matter what", "Wait for the courts to act", "Only use lunch-counter sit-ins"],
       miss: ["That was Dr. King's way.", "King refused to wait. Malcolm X did too.", "Sit-ins were nonviolent. Malcolm X backed self-defense."],
       reveal: "<b>Black Power</b>: Black pride and control of Black neighborhoods." },
-    { id: "lr2", std: "US.42", short: "Title IX: opened school sports to girls",
-      ev: "🏀 1972 · Title IX bans sex discrimination in schools that get federal money.",
-      ask: "What did it open up for girls?",
-      options: ["School sports teams", "The right to vote", "Jobs in car factories", "Seats on city buses"],
-      miss: ["Women won the vote in 1920.", "Title IX is about schools.", "Buses: that was Montgomery, 1956."],
-      reveal: "<b>Title IX</b> came out of the <b>women's movement</b>." },
-    { id: "lr3", std: "US.42", short: "STOP ERA: Schlafly said it hurt homemakers",
-      ev: "🛑 The ERA: no denying rights because of sex. Phyllis Schlafly led STOP ERA.",
-      ask: "Why did Schlafly oppose it?",
-      options: ["She said it would hurt homemakers", "She said it gave women too few rights", "She wanted it to cover voting only", "She said it would raise taxes"],
-      miss: ["She said it went too far, not too little.", "Voting wasn't her issue. Think homemakers.", "Taxes weren't her argument. Think homemakers."],
-      reveal: "<b>STOP ERA</b> was pushback. The ERA fell short of 38 states." },
+    { id: "lr2", std: "US.42", short: "1988 redress: activists pushed Congress",
+      ev: "⛓️ WWII: 120,000+ Japanese Americans forced into camps. 1988: the Civil Liberties Act gives survivors an apology + $20,000.",
+      ask: "How did activists win it?",
+      options: ["Pushing Congress for years", "A boycott of U.S. stores", "Taking over an empty island", "A long work strike"],
+      miss: ["No boycott. An “Act” is a law. Who passes laws?", "That was Alcatraz. An “Act” is a law.", "No strike. Activists testified and lobbied Congress."],
+      reveal: "<b>Redress</b>: making up for a wrong. Activists lobbied Congress for years." },
+    { id: "lr3", std: "US.42", short: "Vincent Chin: light sentence sparked organizing",
+      ev: "📰 ⚠️ Heads up: a violent crime. Detroit, 1982: Two men, angry about lost car jobs, beat Chinese American Vincent Chin to death. Sentence: probation + $3,000 fine.",
+      ask: "Why did Asian Americans nationwide organize?",
+      options: ["The sentence seemed far too light", "Car plants were laying off workers", "The killers got long prison terms", "Japan's car companies asked them"],
+      miss: ["Layoffs were the killers' excuse, not the protest.", "Reread: probation, no jail.", "Nothing says that. Look at the sentence."],
+      reveal: "Groups formed to demand <b>equal justice</b> for Asian Americans." },
     { id: "lr4", std: "US.42", short: "1977 disability sit-in: rules enforced",
       ev: "♿ 1977 · The government ignored a 1973 disability-rights law. Protesters sat in a federal building for almost a month.",
       ask: "What did they win?",
@@ -198,14 +210,14 @@
 
   const PROMPTS = [
     { id: "venn", short: "Compare one movement to Black civil rights", label: "1. Plaque: Pick ONE movement from today. How was it LIKE the Black civil rights movement? How was it DIFFERENT?",
-      bank: ["🍇 farmworkers", "🪶 Red Power", "📜 Japanese American redress", "📰 Vincent Chin"],
+      bank: ["🍇 farmworkers", "🪶 Red Power", "♀️ women's movement", "🏀 Title IX"],
       stem: "The ___ movement was like the Black civil rights movement because ___. It was different because ___.", min: 90, newWords: 6,
       mustAll: [["similar", "same", "both", "like", "also"], ["different", "but", "unlike", "while", "however"]],
       mustMsg: "In answer 1, include one way they were the SAME and one way they were DIFFERENT." },
     { id: "tactic", short: "Best tactic with evidence", label: "2. Tour guide pick: Which tactic worked best? Use a fact from the exhibit.",
-      bank: ["🍇 grape boycott", "🏝️ Alcatraz occupation", "📜 pushing Congress for redress"],
+      bank: ["🍇 grape boycott", "🏝️ Alcatraz occupation", "🏀 pushing Congress for Title IX"],
       stem: "I think ___ worked best because ___.", min: 60, newWords: 5,
-      mustAll: [["boycott", "grape", "occup", "alcatraz", "redress", "congress", "apolog"], ["because", "since"]],
+      mustAll: [["boycott", "grape", "occup", "alcatraz", "congress", "title", "law", "lobby", "era", "ratif", "redress", "apolog"], ["because", "since"]],
       mustMsg: "In answer 2, name a tactic AND explain why with a fact (use “because”)." }
   ];
 
@@ -330,7 +342,7 @@
     app.innerHTML = `<section class="title">
       <div class="tart" aria-hidden="true">
         <div class="facade"><div class="pediment">HISTORY MUSEUM</div><div class="banner">WHO ELSE FOUGHT?<small>Opening Friday</small></div><div class="cols"><span></span><span></span><span></span><span></span><span></span></div>
-        <div class="doors"><div>🍇<small>Room 1</small></div><div>🪶<small>Room 2</small></div><div>📜<small>Room 3</small></div></div></div>
+        <div class="doors"><div>🍇<small>Room 1</small></div><div>🪶<small>Room 2</small></div><div>♀️<small>Room 3</small></div></div></div>
         ${say("Director Halvorsen", "“Three empty rooms. Fill them by Friday.”", "boss")}
       </div>
       <div class="tcopy">
@@ -340,7 +352,7 @@
         <p class="tline">You're the curator. You decide what goes up.</p>
         <ul class="how"><li><span>🔍</span>Check each item</li><li><span>🖼️</span>Make curator calls</li><li><span>🏛️</span>Open the doors</li></ul>
         <p class="tline">🎯 Goal: how other groups fought, and how they compare.</p>
-        <p class="tchips"><span>⏱️ 25 min</span><span>🔍 7 items</span><span>🖼️ 3 calls</span><span>⚡ Test-prep round</span><span>✏️ 2 plaques</span></p>
+        <p class="tchips"><span>⏱️ 25 min</span><span>🔍 7 items</span><span>🖼️ 4 calls</span><span>⚡ Test-prep round</span><span>✏️ 2 plaques</span></p>
         <label for="nameBox">Your name (first name + last initial)</label>
         <div class="namerow"><input id="nameBox" maxlength="60" autocomplete="off" placeholder="Like Jordan M." value="${esc(pre || "")}"><button type="button" class="go big" id="startBtn">Get the keys 🔑</button></div>
         <p id="introMsg" class="msg bad" role="status"></p>

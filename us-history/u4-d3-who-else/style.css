@@ -280,3 +280,23 @@ body[data-step="lightning"] .scene .say{color:var(--ink)}
   .goalchip{display:none}.goalrow{justify-content:flex-end}
   .scene .ln{font-size:.92rem}
 }
+/* Room 3 (v2-r3): Title IX bars, ERA pins + ratify tally */
+.sport{display:grid;grid-template-columns:auto 1fr;gap:8px;align-items:end}
+.sport div{display:flex;flex-direction:column;align-items:center;gap:2px;background:#ede9fe;border:2px solid #5b21b6;border-radius:8px;padding:6px 8px}
+.sport b{font:900 1.25rem/1 system-ui,sans-serif;color:#4c1d95}
+.sport span{font-size:1.5rem;letter-spacing:2px}
+.sport small{font-weight:900;font-size:.75rem;color:var(--ink)}
+.era-q{margin:0;font:700 1.05rem/1.3 Georgia,serif;color:var(--ink)}
+.pins{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:8px 0}
+.pin{display:flex;flex-direction:column;gap:3px;border-radius:12px;padding:8px 10px;border:3px solid;font-size:.9rem;font-weight:700;line-height:1.25;animation:pop .4s both}
+.pin b{font:900 1.05rem/1 Impact,"Arial Black",system-ui,sans-serif;letter-spacing:.03em}
+.pin.yes{background:#f3e8ff;border-color:#7e22ce;color:#3b0764}
+.pin.no{background:#fee2e2;border-color:#b91c1c;color:#450a0a;animation-delay:.1s}
+.tally{display:grid;gap:3px;background:#0b2f2c;border:2px dashed #5eead4;border-radius:12px;padding:6px 10px}
+.tally .tl{font-size:.7rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:#5eead4}
+.tally .tbar{position:relative;height:16px;background:#1f4f4a;border-radius:8px;overflow:visible}
+.tally .tbar span{display:block;height:100%;background:linear-gradient(90deg,#a855f7,#facc15);border-radius:8px}
+.tally .tbar i{position:absolute;top:-4px;width:3px;height:24px;background:#fff;transform:translateX(-3px)}
+.tally .tn{font-weight:800;color:#fde68a}
+.tally .tn b{font-size:1.2rem}
+@media(max-width:560px){.pins{grid-template-columns:1fr}.sport span{font-size:1.2rem}}
