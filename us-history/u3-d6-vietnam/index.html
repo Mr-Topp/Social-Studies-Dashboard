@@ -1,201 +1,293 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Front Page: A Nation Divided | U.S. History Unit 3 Day 4</title>
-<meta name="description" content="Run a 1969–1970 newspaper page about the Vietnam War and decide how to tell the story fairly, with voices for and against the war.">
+<meta name="description" content="Run an Iowa newspaper, 1964–1973. Pick what leads the front page while the White House pushes and readers split over Vietnam.">
 <style>
-:root{--ink:#1f2b33;--muted:#55626b;--paper:#f5f4ee;--card:#fff;--line:#dad9cf;--main:#3d5a3a;--accent:#8b5a2b;--meter:#3d5a3a;--green:#2a6b45;--bad:#a2392f;--tint:#ecf0e6}
+:root{--ink:#1b1b1d;--muted:#5e5a52;--paper:#fffdf6;--news:#f4ecd8;--line:#d9ceb2;--red:#c4262e;--red2:#8c161c;--navy:#1d3557;--hawk:#b5562a;--dove:#2f7fbf;--gold:#ffd166;--green:#23804f;--try:#8a5a00}
 *{box-sizing:border-box}
-body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.5 system-ui,Segoe UI,Arial,sans-serif}
-header{background:linear-gradient(180deg,#ecf0e6,#f6f1e6);border-bottom:5px solid var(--main);padding:16px max(16px,calc((100vw - 900px)/2)) 12px}
-.k{font-size:.78rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:var(--main);margin:0}
-h1{margin:2px 0 4px;font-size:clamp(1.7rem,3.4vw,2.3rem)}
-.std{margin:2px 0;font-size:.92rem;color:var(--muted)}.std b{color:var(--ink)}
-.hud{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line);padding:8px max(16px,calc((100vw - 900px)/2));display:flex;gap:12px;flex-wrap:wrap;align-items:center;font-weight:800;font-size:.92rem;box-shadow:0 2px 8px #1f2b3312}
-.hud .bar{flex:1;min-width:120px;height:10px;background:#e6e6de;border-radius:9px;overflow:hidden}.hud .bar span{display:block;height:100%;width:0;background:var(--main);transition:width .4s}
-.pill{background:#f0efe8;border-radius:20px;padding:3px 10px;white-space:nowrap}
-.meter{display:flex;align-items:center;gap:6px}.meter .track{width:110px;height:10px;border-radius:9px;background:#e6e6de;overflow:hidden}.meter .track span{display:block;height:100%;background:var(--meter);transition:width .5s}
-main{max-width:900px;margin:auto;padding:14px 16px 60px}
-.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;box-shadow:0 3px 12px #1f2b330d}
-.kicker{font-size:.78rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin:0}
-h2{margin:2px 0 10px;font-size:1.45rem}
-.teach{background:var(--tint);border-left:5px solid var(--main);border-radius:9px;padding:10px 14px;margin:0 0 12px}.teach p{margin:4px 0}.teach b{color:var(--main)}
-.block{margin:14px 0;padding:14px;border-radius:12px;border:2px solid var(--line);background:#fff}
-.block.current{border-color:var(--ink);box-shadow:0 0 0 4px #3d5a3a30}
-.block h3{margin:0 0 10px;font-size:1.06rem;line-height:1.35;font-weight:700}
-.event{background:#fbf9f4;border-style:dashed;border-color:#cdbf9a}.event.current{border-style:solid}
-.event-body p{margin:4px 0}
-.note p{margin:4px 0}
-.desk{font-size:.78rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin:0 0 4px}
-.doc{background:#fbfaf6;border:1px solid #d9d3c2;border-left:5px solid var(--accent);border-radius:9px;padding:9px 12px;margin:0 0 10px}
-.doc .who{font-size:.76rem;font-weight:900;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);margin:0 0 3px}
-.doc p{margin:3px 0}.doc q{font-style:italic}
-.facts{width:100%;border-collapse:collapse;margin:0 0 10px;font-size:.93rem;background:#fff}
-.facts th,.facts td{border:1px solid #d9d3c2;padding:6px 8px;text-align:left;vertical-align:top}.facts th{background:var(--tint)}
-.strip{display:grid;gap:3px;margin:0 0 10px;max-width:420px}
-.strip div{display:flex;justify-content:space-between;gap:8px;padding:5px 10px;border-radius:7px;font-size:.9rem;font-weight:700}
-.strip .n{background:#f3e3e0}.strip .s{background:#e2ebf4}.strip .line{background:var(--ink);color:#fff;justify-content:center;font-size:.8rem;letter-spacing:.06em}
-.picked{margin:10px 0 4px;color:var(--muted)}.result{background:#f0efe8;border-radius:9px;padding:9px 12px}.result p{margin:4px 0}
-.tag{display:inline-block;font-weight:900;font-size:.8rem;border-radius:12px;padding:2px 9px;margin-right:6px}.tag.up{background:#dcefe2;color:var(--green)}.tag.down{background:#f6dcd8;color:var(--bad)}.tag.flat{background:#ebe9e0;color:var(--ink)}
-.real{display:block;margin-top:6px;font-size:.93rem}.real b{color:var(--main)}
-.choices{display:grid;gap:8px}
-@media(min-width:700px){.q .choices{grid-template-columns:1fr 1fr}}
-button{font:inherit;cursor:pointer;border-radius:10px;min-height:46px}
-.choice{text-align:left;background:#fff;color:var(--ink);border:2px solid #cfcdbf;padding:10px 12px;font-weight:650;line-height:1.3}
-.choice:hover:not(:disabled){border-color:var(--ink);background:#fcfcfa}.choice:disabled{opacity:.5;cursor:not-allowed}
-.go{margin-top:12px;background:var(--main);color:#fff;border:0;padding:11px 18px;font-weight:900}
+html,body{overflow-x:clip}
+body{margin:0;color:var(--ink);font:17px/1.45 system-ui,"Segoe UI",Arial,sans-serif;background:#efe4c9;background-image:radial-gradient(#d9c9a3 1px,transparent 1.4px);background-size:14px 14px}
+button{font:inherit;cursor:pointer;border-radius:14px;min-height:46px}
 button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid #2f7dbd;outline-offset:2px}
-.answered{font-weight:800;color:var(--green);margin:4px 0}.why{margin:2px 0;color:var(--muted)}
-.msg{min-height:1.3em;font-weight:750;margin:8px 0 0}.msg.bad{color:var(--bad)}.msg.good{color:var(--green)}
-label{display:block;font-weight:850;margin:14px 0 4px}.stem{margin:0 0 4px;color:var(--muted);font-size:.92rem}
-input,textarea{width:100%;font:inherit;border:2px solid #cfcdbf;border-radius:9px;padding:10px;background:#fff;color:var(--ink)}
-.steps{display:grid;gap:6px;margin:10px 0;padding:0;list-style:none}.steps li{background:#f0efe8;border-radius:9px;padding:8px 12px;font-weight:700}
-.role{background:var(--tint);border-radius:10px;padding:10px 12px;margin:8px 0}
-.welcome{background:#e6f1ea;color:var(--green);font-weight:800;border-radius:9px;padding:8px 12px;margin:0 0 10px}
-.foot{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-top:14px;color:var(--muted);font-size:.85rem}
-.foot button{background:#ebe9e0;border:0;padding:8px 12px;font-weight:800;color:var(--ink)}
-.src{font-size:.8rem;color:var(--muted)}
-@media(max-width:520px){.pill{white-space:normal}.meter .track{width:70px;flex:none}.facts{font-size:.85rem}}
+
+/* ---------- HUD ---------- */
+.hud{position:sticky;top:0;z-index:30;background:#1b1b1d;border-bottom:4px solid var(--red);box-shadow:0 4px 14px #0005;padding:6px max(10px,calc((100vw - 1040px)/2)) 4px;color:#fff}
+.hud-in{display:grid;grid-template-columns:auto 1fr 1.15fr 1.15fr 1.3fr;gap:8px;align-items:stretch}
+.yr{background:var(--paper);color:var(--ink);border-radius:8px;text-align:center;min-width:72px;overflow:hidden;display:flex;flex-direction:column;box-shadow:0 2px 0 #0006}
+.yr span{background:var(--red);color:#fff;font-weight:900;font-size:.68rem;letter-spacing:.08em;padding:1px 6px}
+.yr b{font:900 1.3rem/1.15 Georgia,"Times New Roman",serif}
+.mt{position:relative;display:flex;gap:8px;align-items:center;background:#ffffff12;border:2px solid #ffffff26;border-radius:12px;padding:4px 8px;min-width:0}
+.mt-face{position:relative;font-size:1.5rem;line-height:1;flex:none}
+.mt-face i{position:absolute;right:-9px;bottom:-6px;font-style:normal;font-size:.95rem;background:#fff;border-radius:50%;box-shadow:0 1px 3px #0005}
+.mt-r{flex:1;min-width:0;display:grid;grid-template-columns:1fr auto;align-items:center;column-gap:6px}
+.lab{grid-column:1/3;font-size:.66rem;font-weight:900;text-transform:uppercase;letter-spacing:.05em;color:#d9d2c3;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.trk{position:relative;height:10px;background:#ffffff26;border-radius:9px;overflow:hidden}
+.trk span{display:block;height:100%;border-radius:9px;transition:width .7s cubic-bezier(.3,1.4,.5,1)}
+#mTrust{background:linear-gradient(90deg,#e8452c,#f2a516 40%,#3fbf6f)}
+#mAccess{background:linear-gradient(90deg,#6f8fb8,#9ec1ff)}
+.mt b{font-size:.9rem;color:#fff}
+.mt.rival{background:#1d3557;border-color:#9ec1ff66}
+.tug{position:relative;height:12px;border-radius:9px;background:linear-gradient(90deg,var(--hawk),#ffffff40 45% 55%,var(--dove));grid-column:1/3;margin:2px 0}
+.tug i{position:absolute;top:50%;width:18px;height:18px;border-radius:50%;background:#fff;border:3px solid #1b1b1d;transform:translate(-50%,-50%);transition:left .7s cubic-bezier(.3,1.4,.5,1);box-shadow:0 0 0 2px #fff8}
+.tug-ends{grid-column:1/3;display:flex;justify-content:space-between;font-size:.66rem;font-weight:900;color:#d9d2c3}
+.gap{grid-column:1/3;display:flex;align-items:center;gap:4px;font-size:.62rem;font-weight:900}
+.gap .said,.gap .seen{background:#fff;color:var(--ink);border-radius:5px;padding:0 5px;white-space:nowrap}
+.gap .said{background:#9ec1ff}.gap .seen{background:#ffd166}
+.gap .mid{flex:1;height:8px;position:relative}
+.gap .mid span{position:absolute;left:50%;top:0;height:100%;transform:translateX(-50%);background:repeating-linear-gradient(90deg,#e8452c 0 5px,transparent 5px 8px);border-radius:4px;transition:width .8s}
+.hide{font-size:.78rem;font-weight:900;background:#3a1d1d;border:2px solid #e8452c88;border-radius:8px;padding:0 6px;white-space:nowrap}
+.mt.warn{animation:warn 1.2s ease-in-out infinite}
+@keyframes warn{50%{box-shadow:0 0 0 4px #ff5a3c99;border-color:#ff5a3c}}
+.mt.bump{animation:bump .5s}
+@keyframes bump{30%{transform:scale(1.07)}}
+.pop{position:absolute;right:6px;bottom:-24px;font-weight:900;font-size:.95rem;padding:2px 9px;border-radius:12px;pointer-events:none;animation:floatup 1.9s ease-out forwards;z-index:40;white-space:nowrap}
+.pop.good{background:#23804f;color:#fff}.pop.bad{background:#c4262e;color:#fff}.pop.n{background:#fff;color:var(--ink)}
+@keyframes floatup{0%{opacity:0;transform:translateY(14px) scale(.7)}15%{opacity:1;transform:translateY(0) scale(1.2)}80%{opacity:1}100%{opacity:0;transform:translateY(-10px)}}
+.hud-step{display:flex;gap:8px;align-items:center;margin-top:4px;font-size:.72rem;font-weight:900;color:#d9d2c3}
+.sbar{flex:1;height:6px;background:#ffffff22;border-radius:6px;overflow:hidden}.sbar span{display:block;height:100%;background:var(--gold);transition:width .4s}
+
+main{max-width:1040px;margin:auto;padding:14px 12px 96px}
+.welcome{background:#e3f1e8;color:var(--green);font-weight:800;border-radius:12px;padding:8px 12px;margin:0 0 10px;border:2px solid #b9d8c4;display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between}
+.welcome[hidden]{display:none}
+.notyou{min-height:36px;font:800 .9rem system-ui,Arial,sans-serif;background:#fff;color:var(--green);border:2px solid var(--green);border-radius:10px;padding:5px 12px}
+.notyou:hover{background:var(--green);color:#fff}
+
+/* ---------- scene ---------- */
+.scene{background:var(--paper);border-radius:18px;overflow:clip;box-shadow:0 10px 26px #5a4a2a55;border:3px solid #1b1b1d}
+.sc-top{background:var(--ink);color:#fff;padding:7px 16px 8px;display:flex;align-items:baseline;gap:12px;flex-wrap:wrap;border-bottom:4px solid var(--red)}
+.chap{font-size:.72rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;background:var(--red);border-radius:6px;padding:2px 8px}
+.sc-top h2{margin:0;font:900 clamp(1.25rem,2.6vw,1.75rem) Georgia,"Times New Roman",serif;letter-spacing:.01em}
+.stage{display:flex;gap:16px;align-items:center;padding:10px 18px;position:relative;background:linear-gradient(180deg,#f7e7c4,#f1dcae 70%,#8a5f3c 70%,#6f4a2d)}
+.stage-art{font-size:3.6rem;line-height:1;flex:none;filter:drop-shadow(0 4px 0 #0003);min-width:80px;text-align:center}
+.st-file .stage{background:linear-gradient(180deg,#e3e7ea,#cfd6db 70%,#6b7b86 70%)}
+.st-tv .stage{background:linear-gradient(180deg,#2b3440,#3b4656 70%,#1d232b 70%)}
+.st-gray .stage{background:linear-gradient(180deg,#d6d6d6,#c2c2c2 70%,#5b5b5b 70%)}
+.st-night .stage{background:linear-gradient(180deg,#1e2a44,#2b3b5e 70%,#141c2e 70%)}
+.st-dawn .stage{background:linear-gradient(180deg,#ffe0ad,#fff0d4 70%,#9cc3e0 70%)}
+.bubbles{display:flex;flex-direction:column;gap:8px;flex:1;min-width:0}
+.bub{display:flex;gap:8px;align-items:flex-end;max-width:680px}
+.bub .av{font-size:1.75rem;width:46px;height:46px;flex:none;display:grid;place-items:center;background:#fff;border-radius:50%;border:3px solid var(--ink);box-shadow:0 2px 0 #0004}
+.bub .bt{position:relative;background:#fff;border-radius:16px;padding:6px 12px;box-shadow:0 3px 0 #0002;border:2px solid #1b1b1d22}
+.bub .bt::before{content:"";position:absolute;left:-9px;bottom:10px;border:8px solid transparent;border-right-color:#fff;border-left:0}
+.bub .bt b{display:block;font-size:.68rem;letter-spacing:.06em;text-transform:uppercase;color:var(--red)}
+.bub .bt p{margin:0;font-size:1.03rem;font-weight:650}
+.bub.hale .av{background:#1d3557;border-color:#9ec1ff}.bub.hale .bt{background:#1d3557;color:#fff;border-color:#9ec1ff}.bub.hale .bt::before{border-right-color:#1d3557}.bub.hale .bt b{color:#9ec1ff}
+.bub.lou .av{background:#fff3c4;border-color:#c49a1d}
+.sc-body{padding:14px 18px 18px}
+.howto{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:10px}
+.howto div{background:#fff;border:2px dashed var(--line);border-radius:12px;padding:5px 10px;display:flex;gap:8px;align-items:center}
+.howto .hi{font-size:1.5rem}.howto b{font-size:.95rem;line-height:1.2}
+.key{font-size:.82rem;font-weight:800;color:var(--muted);margin:10px 0 0;text-align:center}
+.src{font-size:.74rem;color:var(--muted);margin:3px 0 0;font-weight:400}
+.fict{font-size:.78rem;color:var(--muted);font-style:italic;margin:6px 0}
+
+/* ---------- newsroom desk ---------- */
+.desk{display:grid;grid-template-columns:1fr 1.15fr;gap:16px;align-items:start}
+.wire h3,.pagecol h3{margin:0 0 8px;font:900 .82rem "Arial Black",Impact,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:var(--red)}
+.cards{display:grid;gap:12px}
+.scard{position:relative;display:grid;grid-template-columns:auto 1fr;gap:2px 12px;align-items:center;text-align:left;background:#fff;border:3px solid var(--ink);border-radius:14px;padding:10px 12px;color:var(--ink);box-shadow:0 5px 0 var(--ink);transition:transform .12s,box-shadow .12s,opacity .2s}
+.scard:hover:not(:disabled){transform:translateY(-3px) rotate(-.4deg);box-shadow:0 8px 0 var(--ink)}
+.scard:active:not(:disabled){transform:translateY(3px);box-shadow:0 2px 0 var(--ink)}
+.scard .s-ico{grid-row:1/4;font-size:2.4rem;line-height:1}
+.scard .s-t{font:900 1.12rem/1.15 Georgia,"Times New Roman",serif}
+.scard .s-l{font-size:.86rem;color:var(--muted);font-weight:650;line-height:1.25}
+.scard.used{opacity:.4;transform:none;box-shadow:0 2px 0 var(--ink)}
+.scard .slot-tag{position:absolute;top:-11px;right:10px;background:var(--ink);color:#fff;font-size:.66rem;font-weight:900;letter-spacing:.07em;border-radius:6px;padding:2px 8px}
+.scard.off{border-color:#1d3557;box-shadow:0 5px 0 #1d3557;background:#f1f5fb}
+.hale-tag{position:absolute;top:-11px;left:12px;background:#1d3557;color:#fff;font-size:.66rem;font-weight:900;letter-spacing:.06em;border-radius:6px;padding:2px 8px;white-space:nowrap;border:2px solid #9ec1ff}
+.chips{display:flex;flex-wrap:wrap;gap:4px;margin-top:4px}
+.chip{font-size:.78rem;font-weight:900;border-radius:9px;padding:1px 7px;white-space:nowrap}
+.chip.g{background:#e3f3e8;color:var(--green)}.chip.c{background:#fde7e3;color:var(--red2)}.chip.h{background:#f8e3d6;color:var(--hawk)}.chip.d{background:#e0eefa;color:var(--dove)}.chip.x{background:#3a1d1d;color:#ffd0c4}
+
+/* ---------- front page mockup ---------- */
+.front{background:var(--news);border:1px solid #cdbf98;padding:10px 14px 12px;box-shadow:4px 6px 0 #0002;font-family:Georgia,"Times New Roman",serif;position:relative}
+.mast{font:900 clamp(1.05rem,2.6vw,1.55rem)/1 "Old English Text MT",Georgia,serif;text-align:center;letter-spacing:.02em;margin:0}
+.dline{display:flex;justify-content:space-between;font:700 .7rem system-ui,Arial,sans-serif;letter-spacing:.06em;text-transform:uppercase;border-top:2px solid #222;border-bottom:4px double #222;margin:5px 0 8px;padding:2px 0;color:#333}
+.slot{width:100%;display:flex;gap:10px;align-items:center;text-align:left;border:3px dashed #a99a72;border-radius:8px;background:#fffaf0;color:#8a7a52;padding:8px 10px;font:800 .95rem system-ui,Arial,sans-serif;min-height:70px}
+.slot.lead{min-height:120px;margin-bottom:8px}
+.slot.full{border:2px solid #222;background:#fffdf7;color:var(--ink);border-radius:2px}
+.slot.full:hover:not(:disabled){outline:3px solid #e8452c55}
+.slot .s-ico{font-size:2.2rem;filter:grayscale(1) contrast(1.2)}
+.slot.lead.full .s-ico{font-size:3.4rem}
+.slot .hl{display:block;font:900 1.1rem/1.1 Georgia,"Times New Roman",serif;text-transform:uppercase}
+.slot.lead .hl{font-size:clamp(1.45rem,3.2vw,2.1rem)}
+.slot .sl{display:block;font:600 .8rem system-ui,Arial,sans-serif;color:var(--muted);margin-top:3px}
+.slot .tg{font:900 .62rem system-ui,Arial,sans-serif;letter-spacing:.08em;background:#222;color:#fff;border-radius:4px;padding:1px 6px;margin-bottom:2px;display:inline-block}
+.slot .x{margin-left:auto;font-size:1rem;color:#a99a72}
+.cutline{margin:8px 0 0;font:800 .86rem system-ui,Arial,sans-serif;color:var(--red2)}
+.front .stamp{position:absolute;right:22px;top:66px;z-index:2}
+.front.printed{animation:press .6s ease-out}
+.front.printed .slot{min-height:0;padding:5px 10px}.front.printed .slot.lead{margin-bottom:6px}.front.printed .slot.lead.full .s-ico{font-size:2.6rem}
+@keyframes press{0%{transform:scale(1.04);filter:brightness(1.3)}100%{transform:none;filter:none}}
+
+.go{margin-top:14px;background:var(--red);color:#fff;border:0;padding:13px 26px;font:900 1.1rem system-ui,Arial,sans-serif;box-shadow:0 5px 0 var(--red2)}
+.go:hover:not(:disabled){filter:brightness(1.08)}.go:active:not(:disabled){transform:translateY(3px);box-shadow:0 2px 0 var(--red2)}
+.go:disabled{opacity:.45;cursor:not-allowed}
+.go.ink{background:var(--ink);box-shadow:0 5px 0 #000}
+
+/* ---------- results ---------- */
+.result{display:flex;gap:14px;align-items:flex-start;background:#fff;border:3px solid var(--ink);border-radius:16px;padding:10px 14px;margin-top:12px;box-shadow:0 5px 0 #0002}
+.flip{animation:flip .6s ease-out}
+@keyframes flip{0%{opacity:0;transform:perspective(700px) rotateX(-70deg)}100%{opacity:1;transform:none}}
+.r-main{flex:1;min-width:0}.r-main>p{margin:2px 0;font-weight:700}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0}
+.tag{display:inline-block;font-weight:900;font-size:.84rem;border-radius:12px;padding:3px 10px;white-space:nowrap}.tag.up{background:#dcefe2;color:var(--green)}.tag.down{background:#f9dcd7;color:#9a2f22}.tag.h{background:#f8e3d6;color:var(--hawk)}.tag.d{background:#e0eefa;color:var(--dove)}.tag.x{background:#3a1d1d;color:#ffd0c4}
+.mail{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:8px 0 0}
+.letter{background:#fffdf3;border:1px solid #d8cba6;border-radius:4px;padding:6px 10px;box-shadow:2px 3px 0 #0001;font:italic 600 .95rem Georgia,serif;transform:rotate(-.6deg)}
+.letter:nth-child(2){transform:rotate(.6deg)}
+.mail.one{grid-template-columns:1fr;max-width:420px;margin-left:auto;margin-right:auto}
+.letter b{display:block;font:900 .66rem system-ui,Arial,sans-serif;letter-spacing:.07em;text-transform:uppercase;font-style:normal}
+.letter.h b{color:var(--hawk)}.letter.d b{color:var(--dove)}
+.warnbox{background:#3a1d1d;color:#fff;border-radius:10px;padding:6px 12px;margin:8px 0 0;font-weight:800}
+.reveal{background:var(--ink);color:#fff;border-radius:14px;padding:9px 14px;margin:12px 0 2px;box-shadow:0 4px 0 #0003}
+.reveal .nw{display:inline-block;background:var(--gold);color:var(--ink);font-weight:900;font-size:.7rem;letter-spacing:.08em;border-radius:8px;padding:2px 8px;margin-bottom:3px}
+.reveal p{margin:0;font-size:1.05rem}.reveal b{color:var(--gold)}
+.real{background:#fff;border:2px dashed #d6c79c;border-radius:12px;padding:6px 12px;margin:10px 0;font-size:.97rem;font-weight:650}.real p{margin:2px 0}
+.real-b{display:inline-block;background:#7a5a00;color:#fff;font-size:.68rem;letter-spacing:.07em;text-transform:uppercase;border-radius:6px;padding:1px 7px;margin-right:4px;vertical-align:1px}
+.stamp{border:4px solid var(--red);color:var(--red);font:900 1rem/1 "Arial Black",Impact,sans-serif;padding:6px 10px;border-radius:8px;transform:rotate(-8deg);letter-spacing:.05em;background:#fff8;text-transform:uppercase;display:inline-block}
+.stamp.g{border-color:var(--green);color:var(--green)}
+.stamp.q{border-color:#555;color:#555}
+.slam{animation:slam .55s cubic-bezier(.2,1.6,.4,1)}
+@keyframes slam{0%{opacity:0;transform:rotate(-8deg) scale(2.6)}60%{opacity:1;transform:rotate(-8deg) scale(.92)}100%{transform:rotate(-8deg) scale(1)}}
+
+/* ---------- evidence objects ---------- */
+.ev{max-width:720px;margin:12px auto 0}
+.docx{background:#fbf8ec;border:1px solid #d8cba6;border-radius:4px;padding:10px 14px;box-shadow:3px 4px 0 #0002;font-family:"Courier New",Courier,monospace;background-image:repeating-linear-gradient(#fbf8ec 0 26px,#efe6cc 26px 27px)}
+.docx .th{font-weight:900;letter-spacing:.06em;color:var(--red2);margin:0 0 4px;font-size:.85rem}
+.docx p{margin:3px 0}.docx .q{font-style:italic;font-size:1.05rem}
+.docx .hi{background:#fff3a8;font-weight:900;padding:0 3px}
+.gloss{font:600 .85rem system-ui,Arial,sans-serif;color:#5e5a52;margin:2px 0}
+.docx.secret{border:3px solid var(--red)}
+.two{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.tv{background:#4a3524;border-radius:20px;padding:12px 14px 24px;box-shadow:0 6px 0 #2b1d12;position:relative}
+.tv::after{content:"";position:absolute;bottom:7px;right:20px;width:12px;height:12px;border-radius:50%;background:#c9a46a;box-shadow:-22px 0 0 #c9a46a}
+.screen{background:radial-gradient(circle,#e9eef2,#b9c3cb);border-radius:34px/20px;padding:14px 18px;filter:grayscale(1);font-family:Georgia,serif;min-height:120px}
+.screen .live{display:inline-block;background:#222;color:#fff;font:900 .68rem system-ui;letter-spacing:.1em;padding:1px 6px;border-radius:4px}
+.screen .q{font-size:1.08rem;font-style:italic;margin:6px 0}
+.tv.said .screen{background:radial-gradient(circle,#eef3ff,#b7c6e6);filter:none}
+.morgue{background:#e9dcc0;border:2px solid #b8a274;border-radius:4px 14px 4px 4px;padding:10px 12px 12px;position:relative;box-shadow:3px 4px 0 #0002}
+.morgue::before{content:"FILE: INDOCHINA";position:absolute;top:-14px;left:12px;background:#e9dcc0;border:2px solid #b8a274;border-bottom:0;border-radius:6px 6px 0 0;padding:0 10px;font:900 .7rem system-ui;letter-spacing:.08em}
+.flow{display:flex;gap:6px;align-items:stretch;flex-wrap:wrap;justify-content:center;margin:4px 0 10px}
+.flow div{background:#fff;border:2px solid var(--line);border-radius:12px;padding:6px 10px;text-align:center;font-weight:800;font-size:.92rem;min-width:110px}
+.flow div span{display:block;font-size:1.6rem}
+.flow .arr{background:none;border:0;min-width:0;display:grid;place-items:center;font-size:1.4rem;padding:0}
+.dominos{display:block;width:100%;max-width:660px;margin:0 auto;height:auto}
+.dom{transform-box:fill-box;transform-origin:100% 100%;transition:transform .45s cubic-bezier(.5,0,.7,1)}
+.fallen .dom{transform:rotate(62deg)}
+.tapme{display:block;margin:6px auto 0}
+.strip{display:grid;grid-template-columns:auto 1fr 1fr;gap:3px;font-size:.88rem;font-weight:700;margin:8px 0}
+.strip div{background:#fff;padding:4px 8px;border-radius:6px}
+.strip .hd{background:var(--ink);color:#fff;font-size:.74rem;letter-spacing:.06em;text-transform:uppercase}
+.strip .rl{background:#efe6cc}
+.candles{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:10px 0 0}
+.candles div{background:#2a2a2a;color:#fff;border-radius:12px;padding:8px 12px;font-size:.88rem}
+.candles b{display:block;color:#ffd166;font-size:.8rem;letter-spacing:.05em;text-transform:uppercase}
+.exposed{display:grid;gap:8px;margin:10px 0}
+.exposed div{display:flex;justify-content:space-between;align-items:center;gap:10px;background:#fff;border:2px solid var(--line);border-radius:10px;padding:6px 12px;font-weight:800}
+.lottery{display:flex;gap:6px;flex-wrap:wrap;justify-content:center;margin:8px 0 0}
+.lottery span{background:#fff;border:2px solid #1b1b1d;border-radius:50%;width:54px;height:54px;display:grid;place-items:center;font:900 .7rem/1.05 system-ui;text-align:center;box-shadow:0 3px 0 #0003}
+.lottery span:first-child{background:var(--gold)}
+
+/* ---------- in-world checks ---------- */
+.check{position:relative;margin:14px 0 6px;padding:12px;border:3px solid var(--ink);border-radius:18px;background:#fff8e6;box-shadow:0 5px 0 #0002}
+.qlabel{position:absolute;top:-16px;left:-12px;font-size:1.5rem;margin:0;background:#fff;border:3px solid var(--ink);border-radius:50%;width:46px;height:46px;display:grid;place-items:center;box-shadow:0 3px 0 #0002}
+.check .bub{margin-bottom:6px}
+.choices{display:grid;gap:8px}
+@media(min-width:761px){.check .choices{grid-template-columns:1fr 1fr}}
+.reply{display:flex;gap:10px;align-items:center;text-align:left;background:#fff;color:var(--ink);border:3px solid #d6c9a6;padding:10px 12px;font-weight:750;line-height:1.3;border-radius:16px 16px 16px 4px;box-shadow:0 3px 0 #0001;transition:transform .12s}
+.reply:hover:not(:disabled){transform:translateY(-2px);border-color:var(--ink)}
+.reply:disabled{opacity:.55;cursor:not-allowed}
+.r-ico{font-size:1.2rem;flex:none}
+.shake{animation:shake .45s}
+@keyframes shake{20%,60%{transform:translateX(-7px)}40%,80%{transform:translateX(7px)}}
+.msg{min-height:1.3em;font-weight:800;margin:8px 0 0}.msg.try{color:var(--try)}.msg.good{color:var(--green);font-size:1.1rem}
+.check.done{background:#f1faf4;border-color:var(--green);box-shadow:none;padding:8px 14px;display:flex;justify-content:center}
+.check.done .stamp{border-color:var(--green);color:var(--green);font-size:1.15rem}
+
+/* ---------- ending ---------- */
+.headline{display:flex;gap:12px;align-items:center}.e-big{font-size:3.2rem;line-height:1}
+.headline h3{margin:0;font:900 clamp(1.5rem,4vw,2.4rem)/1.05 Georgia,"Times New Roman",serif;text-transform:uppercase}
+.front.bad .headline h3{color:var(--red2)}
+.front>p.body{font-size:1.08rem;margin:8px 0}
+.finalm{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0;font-family:system-ui,Arial,sans-serif}.finalm span{background:#fff;border-radius:10px;padding:4px 10px;font-weight:700;border:1px solid var(--line)}
+.cb{margin:10px 0 4px;font-family:system-ui,Arial,sans-serif;text-transform:uppercase;letter-spacing:.06em;font-size:.85rem}
+.trail{list-style:none;padding:0;margin:0;display:grid;gap:5px;font-family:system-ui,Arial,sans-serif}.trail li{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;background:#fff;border:1px solid var(--line);border-radius:9px;padding:5px 10px;font-size:.92rem}
+.trail .tags{margin:0}
+.after{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:10px 0}
+.after span{background:#fff;border:2px solid var(--line);border-radius:999px;padding:3px 12px;font-weight:800;font-size:.92rem}
+
+/* ---------- editorial ---------- */
+.edpage{background:var(--news);border:2px solid #222;padding:12px 16px;box-shadow:0 6px 0 #0002;position:relative;font-family:Georgia,serif}
+.ed-h{font:900 1.1rem Georgia,serif;text-transform:uppercase;margin:0 0 6px;border-bottom:3px double #222;padding-bottom:4px}
+label{display:block;font:850 1rem system-ui,Arial,sans-serif;margin:12px 0 4px}
+.stem{margin:0 0 4px;color:var(--muted);font:600 .92rem system-ui,Arial,sans-serif}.stem::before{content:"✏️ "}
+.vrow{display:flex;gap:10px;align-items:flex-end;flex-wrap:wrap}
+.back{margin-top:14px;background:#fff;border:3px solid var(--ink);color:var(--ink);font-weight:900;padding:10px 18px}
+input,textarea{width:100%;font:17px/1.4 system-ui,Arial,sans-serif;border:2px solid #cfc6af;border-radius:10px;padding:10px;background:#fff;color:var(--ink)}
+.kv{display:grid;grid-template-columns:auto 1fr 1fr;gap:3px;font:700 .88rem system-ui,Arial,sans-serif;margin:6px 0 4px}
+.kv div{background:#fff;padding:4px 8px;border-radius:6px}.kv .hd{background:var(--ink);color:#fff}
+
+/* ---------- title ---------- */
+.title-card{background:var(--news);border-radius:6px;padding:16px 24px 20px;box-shadow:0 12px 30px #5a4a2a66;border:3px solid #1b1b1d;position:relative;overflow:hidden;font-family:Georgia,serif}
+.t-mast{font:900 clamp(.95rem,2.4vw,1.3rem) Georgia,serif;text-align:center;margin:0;letter-spacing:.04em}
+.t-dl{display:flex;justify-content:space-between;font:800 .7rem system-ui,Arial,sans-serif;letter-spacing:.08em;border-top:2px solid #222;border-bottom:4px double #222;margin:4px 0 10px;padding:2px 0;text-transform:uppercase}
+.t-grid{display:grid;grid-template-columns:1.5fr 1fr;gap:20px;align-items:center}
+.extra{display:inline-block;background:var(--red);color:#fff;font:900 .8rem "Arial Black",Impact,sans-serif;letter-spacing:.14em;padding:2px 10px;transform:rotate(-2deg)}
+h1{font:900 clamp(2.2rem,5.4vw,3.6rem)/.98 Georgia,"Times New Roman",serif;margin:6px 0 8px;text-transform:uppercase}
+.hook{font:700 1.18rem system-ui,Arial,sans-serif;margin:0 0 10px}
+.t-chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px;font-family:system-ui,Arial,sans-serif}.t-chips span{background:#fff;border:2px solid var(--line);border-radius:999px;padding:3px 12px;font-weight:750;font-size:.92rem}
+.goal{background:#fff;border-left:5px solid var(--red);border-radius:8px;padding:6px 12px;margin:6px 0;font-family:system-ui,Arial,sans-serif}
+.t-row{display:flex;gap:8px;align-items:stretch;flex-wrap:wrap;font-family:system-ui,Arial,sans-serif}.t-row input{flex:1;min-width:200px}
+.go.start{margin-top:0;font-size:1.3rem;padding:12px 34px}
+.t-art{display:flex;flex-direction:column;align-items:center;gap:10px;font-family:system-ui,Arial,sans-serif}
+.t-paper{background:#fff;border:2px solid #222;padding:8px 10px;transform:rotate(3deg);box-shadow:4px 6px 0 #0002;width:220px;text-align:center}
+.t-paper b{display:block;font:900 1.3rem/1.05 Georgia,serif;text-transform:uppercase}
+.t-paper span{display:block;font-size:2.6rem;filter:grayscale(1)}
+.t-cast{display:flex;align-items:center;gap:8px;font-size:2.4rem}.t-cast .vs{font:900 .95rem "Arial Black",Impact,sans-serif;background:var(--red);color:#fff;border-radius:50%;width:38px;height:38px;display:grid;place-items:center}
+.t-fict{font:italic .8rem system-ui,Arial,sans-serif;color:var(--muted);margin:8px 0 0}
+
+.foot{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-top:14px;color:#5e5a52;font-size:.85rem}
+.foot button{background:#fff;border:2px solid #b8a274;padding:8px 12px;font-weight:800;color:var(--ink);min-height:40px}
+
+@media(max-width:760px){
+  .hud{padding:5px 6px 3px}
+  .hud-in{grid-template-columns:1fr 1fr;gap:5px}
+  .yr{display:none}.dsuf{display:none}
+  .mt{padding:3px 6px;gap:6px}.mt-face{font-size:1.15rem}.lab{font-size:.6rem}.mt b{font-size:.78rem}
+  .stage{flex-direction:column;align-items:stretch;gap:8px;padding:10px 12px}
+  .stage-art{font-size:2.6rem;min-width:0}
+  .bub .av{width:40px;height:40px;font-size:1.4rem}.bub .bt p{font-size:.98rem}
+  .sc-body{padding:12px}
+  .howto{grid-template-columns:1fr}.howto div{flex-direction:row;text-align:left;gap:10px}
+  .desk{grid-template-columns:1fr}
+  .two,.mail,.candles{grid-template-columns:1fr}
+  .t-grid{grid-template-columns:1fr}.t-art{display:none}
+  .title-card{padding:14px 14px 18px}
+  .result{flex-direction:column;gap:6px}
+  .front .stamp{position:static;margin:6px 0}
+  .strip,.kv{font-size:.8rem}
+  .flow div{min-width:90px}
+}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 @media print{.hud,.foot,.go{display:none}}
 </style>
 <script src="../../shared/assignments.js?v=20261101fill"></script>
 <script src="../../shared/turnin.js?v=20261102read"></script>
-<script src="../../shared/unit-game.js?v=20261101fill"></script>
 </head><body>
-<header>
-  <p class="k">U.S. History · Unit 3 · Day 4</p>
-  <h1>Front Page: A Nation Divided</h1>
-  <p class="std"><b>The Cold War: How did Vietnam divide Americans?</b></p>
-  <p class="std">Standards: <b>SS.9-12.US.35</b> · <b>SS.9-12.US.36</b> · <b>SS.9-12.US.37</b> · <b>SS.9-12.US.38</b> · <b>SS.9-12.US.39</b> · <b>SS.9-12.US.40</b> · <b>SS.9-12.US.41</b></p>
-  <p class="std"><b>Goal:</b> Explain why the U.S. went to war in Vietnam and why Americans split over it, using voices from more than one side. · About 25 minutes.</p>
-</header>
-<div class="hud" aria-label="Progress and Story fairness">
-  <span id="progressText">0 checks done</span>
-  <div class="bar" aria-hidden="true"><span id="progressFill"></span></div>
-  <span class="pill meter">Story fairness: <span class="track" aria-hidden="true"><span id="meterFill" style="width:50%"></span></span> <span id="meterNum">5/10</span></span>
+<div class="hud" id="hud" hidden aria-label="Game board">
+  <div class="hud-in">
+    <div class="yr" aria-label="Year"><span>EDITION</span><b id="yrNum">1964</b></div>
+    <div class="mt" id="hudTrust"><div class="mt-face" aria-hidden="true">🗞️</div><div class="mt-r"><span class="lab">Reader trust</span><div class="trk"><span id="mTrust"></span></div><b id="nTrust">5/10</b></div></div>
+    <div class="mt rival" id="hudAccess"><div class="mt-face" aria-hidden="true"><span>🕴️</span><i id="haleFace">😐</i></div><div class="mt-r"><span class="lab" id="haleLab">Whitcomb · White House access</span><div class="trk"><span id="mAccess"></span></div><b id="nAccess">6/10</b></div></div>
+    <div class="mt" id="hudLean"><div class="mt-r"><span class="tug-ends"><span>🦅 HAWK<span class="dsuf"> READERS</span></span><span>DOVE<span class="dsuf"> READERS</span> 🕊️</span></span><div class="tug"><i id="tugDot" style="left:50%"></i></div></div></div>
+    <div class="mt" id="hudGap"><div class="mt-r"><span class="lab">📏 Credibility gap</span><div class="gap"><span class="said">SAID</span><span class="mid"><span id="gapBar"></span></span><span class="seen">SEEN</span></div></div><span class="hide" id="hideN" title="Unchecked claims you printed">🙈 0</span></div>
+  </div>
+  <div class="hud-step"><span id="stepText">Step 1 of 9</span><div class="sbar" aria-hidden="true"><span id="stepFill"></span></div></div>
 </div>
 <main>
   <p class="welcome" id="welcome" hidden></p>
   <div id="app"></div>
-  <div class="foot"><span>Progress saves on this device. Your teacher sees your work after you turn it in.</span><button type="button" id="restartBtn">Start over</button></div>
+  <div class="foot"><span>Progress saves on this device.</span><button type="button" id="restartBtn">Start over</button></div>
 </main>
-<script>
-const T = (cls, txt) => `<span class="tag ${cls}">${txt}</span>`;
-const doc = (who, body) => `<div class="doc"><p class="who">${who}</p>${body}</div>`;
-const real = txt => `<span class="real"><b>What really happened:</b> ${txt}</span>`;
-const METER = "fair";
-UnitGame.start(Object.assign({
-  key: "ush-u3-d6-vietnam-v1",
-  assignmentId: "ush-u3-d6-vietnam",
-  title: "U.S. History · Unit 3 · Day 4 · Front Page: A Nation Divided",
-  standard: "SS.9-12.US.35, SS.9-12.US.37, SS.9-12.US.38, SS.9-12.US.40, SS.9-12.US.41",
-  oldApi: "https://fynn-class-assignment-submissions-20261024.neotboy.chatgpt.site/api/submit",
-  startFx: { fair: 5 },
-  clampFx: fx => { fx[METER] = Math.max(0, Math.min(10, fx[METER])); },
-  hud: st => {
-    const v = st.fx[METER] || 0;
-    document.getElementById("meterFill").style.width = (v * 10) + "%";
-    document.getElementById("meterNum").textContent = v + "/10";
-  },
-  extraAnswers: st => ({ "Story fairness meter": (st.fx[METER] || 0) + " of 10" })
-}, (function () {
-return {
-  startLabel: "Open the newsroom",
-  introHtml: `<p class="kicker">An Iowa newspaper · 1969</p><h2>You're the new page editor</h2>
-    <p>Your paper is doing a special page: <b>"Vietnam: Why Are We So Divided?"</b> Your readers include soldiers' parents, college students, veterans, and factory workers. They don't all agree.</p>
-    <p>First you'll learn how the U.S. got into the war. Then you'll pick which voices go on the page. Fair stories show more than one side.</p>
-    <ul class="steps"><li>1. Read each source and answer the check.</li><li>2. Make 3 editor choices. They change the "Story fairness" meter.</li><li>3. Write 2 short answers and turn in.</li></ul>
-    <p class="src">The newspaper is made up. The events, people, and quotes are real.</p>`,
-  scenes: [
-    { kicker: "Part 1 of 3 · 1945–1965", title: "How the U.S. Got In",
-      teach: `<p><b>France</b> ruled Vietnam from the late 1800s. After World War II, Vietnamese leader <b>Ho Chi Minh</b> fought for independence. He was a nationalist (he wanted his country free) and a communist.</p>
-        <p>France lost in 1954. A peace deal called the <b>Geneva Accords</b> split Vietnam for a while: a communist North (Ho Chi Minh) and an anti-communist South (Ngo Dinh Diem). Elections to unite the country were set for 1956.</p>`,
-      blocks: [
-        { type: "q", id: "v1", std: "US.40", short: "Ho Chi Minh quotes the Declaration",
-          prompt: doc("Ho Chi Minh · Vietnam's declaration of independence, September 2, 1945", `<p>He began with words from the U.S. Declaration of Independence: <q>All men are created equal.</q></p>`) + "Why would Ho Chi Minh quote America's founding document?",
-          options: ["To say Vietnam deserved independence like America did", "To ask the U.S. to make Vietnam a new American state someday", "To show he supported France ruling Vietnam", "To say Vietnam would become a U.S. colony"],
-          hint: "What was the U.S. Declaration of Independence written to do?", why: "Ho compared Vietnam's fight against France to America's fight against Britain. He hoped Americans would see it that way too." },
-        { type: "q", id: "v2", std: "US.37", short: "1956 elections never held",
-          prompt: doc("Fact card · The election that never happened", `<p>The Geneva Accords planned a vote in 1956 to unite Vietnam.</p><p>The South's leader, Diem, and the U.S. refused to hold it. Many expected Ho Chi Minh to win.</p>`) + "Why didn't the 1956 election happen?",
-          options: ["The South and U.S. feared a communist would win", "The North refused to let anyone run against Ho", "The UN canceled it because of a war in Korea", "Voters in both halves asked to stay split forever"],
-          hint: "Who refused, and who did they think would win?", why: "Leaders feared a fair vote would unite Vietnam under communism. Vietnam stayed split, and fighting grew." },
-        { type: "q", id: "v3", std: "US.37", short: "Domino Theory (Eisenhower, 1954)",
-          prompt: doc("President Eisenhower · April 7, 1954", `<p><q>You have a row of dominoes set up, you knock over the first one, and what will happen to the last one is the certainty that it will go over very quickly.</q></p><p>He meant Southeast Asia: Vietnam, then Laos, Cambodia, Thailand, and beyond.</p>`) + "Why did the <b>Domino Theory</b> lead the U.S. to help South Vietnam?",
-          options: ["If Vietnam fell to communism, its neighbors might follow", "If Vietnam traded with the USSR, it would start a war", "Every country near China had already turned communist", "Helping Vietnam would knock over the Soviet government in Moscow"],
-          hint: "Picture the row of dominoes. What happens after the first falls?", why: "The Domino Theory said one country falling to communism would pull down its neighbors. So the U.S. sent money, weapons, and advisers to the South." },
-        { type: "q", id: "v4", std: "US.35", short: "Gulf of Tonkin Resolution",
-          prompt: doc("Fact card · Gulf of Tonkin, August 1964", `<p>The U.S. said North Vietnamese boats attacked U.S. Navy ships twice. Later evidence shows the <b>second attack likely never happened</b>.</p><p>Congress passed the <b>Gulf of Tonkin Resolution</b>. It let President Lyndon Johnson use military force without a declaration of war. In March 1965, U.S. Marines landed at Da Nang.</p>`) + "Why was the Gulf of Tonkin Resolution so important?",
-          options: ["It let the President send troops without declaring war", "It ended U.S. help to South Vietnam for good", "It was a formal declaration of war on North Vietnam and China", "It made the draft illegal for college students"],
-          hint: "What did the resolution let Johnson do?", why: "Congress never declared war in Vietnam. The resolution gave Johnson the power to send hundreds of thousands of troops." }
-      ] },
-    { kicker: "Part 2 of 3 · 1965–1969", title: "The War Comes Home",
-      teach: `<p>By 1968, more than 500,000 U.S. troops were in Vietnam. Many were <b>drafted</b> (required by law to serve). For the first time, a war showed up on TV news almost every night.</p>`,
-      blocks: [
-        { type: "q", id: "v5", std: "US.38", short: "TV = living-room war",
-          prompt: doc("Fact card · The \"living-room war\"", `<p>By the mid-1960s, most American homes had a TV. Nightly news showed wounded soldiers, burning villages, and coffins coming home.</p><p>In early 1968, the <b>Tet Offensive</b> (surprise attacks across South Vietnam) shocked viewers. U.S. leaders had said the war was almost won.</p>`) + "How did TV change how Americans saw the war?",
-          options: ["People saw the violence up close, and many began to doubt", "People stopped watching the news because nothing was shown", "TV only showed victories, so support grew every year", "TV news was banned from showing anything about Vietnam"],
-          hint: "What did people see every night, and what had leaders said?", why: "Seeing the war at home, and seeing it didn't match leaders' promises, made many Americans question it." },
-        { type: "event", id: "e1", short: "Draft story interviews", html: `<p class="desk">Editor's desk · story on the draft</p><p>Young men could get a <b>deferment</b> (a delay in being drafted) if they were in college. Who do you interview?</p>`,
-          choices: [
-            { label: "A factory worker who was drafted AND a college student with a deferment", fx: { fair: 2 }, result: `<p>${T("up", "+2 fairness")}Readers see how the draft hit two young men differently.</p>` },
-            { label: "Only the college student. He's easier to reach.", fx: { fair: -1 }, result: `<p>${T("down", "−1 fairness")}Readers from working-class towns feel left out of the story.</p>` },
-            { label: "Only the draft board official", fx: { fair: -1 }, result: `<p>${T("down", "−1 fairness")}You explain the rules, but readers don't hear from anyone affected.</p>` }
-          ] },
-        { type: "q", id: "v6", std: "US.40", short: "Draft fell hardest on working class",
-          prompt: doc("Your interview notes", `<p><b>Ray, 19, factory worker:</b> "I couldn't afford college, so I got my notice. Half my high school class is over there."</p><p><b>Tom, 19, college student:</b> "As long as I stay in school, I'm deferred."</p>`) + "What problem with the draft do these notes show?",
-          options: ["Men who couldn't afford college were more likely to be drafted", "College students were drafted first, before anyone else", "Only volunteers were sent to fight in Vietnam", "Factory workers could get a deferment by working longer hours each week"],
-          hint: "Who had a way to delay the draft, and who didn't?", why: "College deferments meant working-class and poor men were more likely to be drafted. Many saw this as unfair." },
-        { type: "q", id: "v7", std: "US.41", short: "Vietnam Veterans Against the War",
-          prompt: doc("John Kerry, Vietnam Veterans Against the War · U.S. Senate hearing, April 22, 1971", `<p><q>How do you ask a man to be the last man to die for a mistake?</q></p><p class="src">Kerry was a Navy veteran of the war. Later he became a senator and Secretary of State.</p>`) + "What was Kerry's argument?",
-          options: ["The war was a mistake, and more soldiers shouldn't die in it", "Soldiers should keep fighting there until total victory is won", "Veterans should be kept out of Senate hearings", "The draft should take college students first"],
-          hint: "What does Kerry call the war?", why: "<b>Vietnam Veterans Against the War</b> spoke as people who had fought. Their voice carried weight because they had been there." },
-        { type: "q", id: "v8", std: "US.41", short: "How protesters took action",
-          prompt: doc("Fact card · Ways people protested", `<p><b>Teach-ins:</b> college classes and talks about the war, started in 1965. Groups like <b>Students for a Democratic Society (SDS)</b> led many.</p><p><b>Marches:</b> In 1969, hundreds of thousands marched in Washington, D.C.</p><p><b>Music:</b> protest songs and the <b>counterculture</b> (young people rejecting mainstream ways), like the Woodstock festival (1969).</p>`) + "What did these protests have in common?",
-          options: ["Citizens used speech and assembly to oppose the war", "They were all organized by the U.S. government", "They all supported sending more troops", "They only happened in other countries"],
-          hint: "Who led them, and what were they trying to do?", why: "Speech, assembly, and music are ways citizens push their government. The First Amendment protects peaceful protest." }
-      ] },
-    { kicker: "Part 3 of 3 · 1969–1970", title: "Two Americas",
-      teach: `<p>Not everyone opposed the war. Many Americans supported it. They wanted to stop communism, back the troops, and not abandon South Vietnam. Many also disliked the protests.</p>`,
-      blocks: [
-        { type: "event", id: "e2", short: "Adding a pro-war voice", html: `<p class="desk">Editor's desk · November 1969</p><p>Your page has three anti-war voices so far. President <b>Richard Nixon</b> just gave a big TV speech asking for support. A local mother whose son serves in Vietnam calls. She supports the war.</p>`,
-          choices: [
-            { label: "Add her story and a quote from Nixon's speech", fx: { fair: 3 }, result: `<p>${T("up", "+3 fairness")}Now readers who support the war see their view, too.</p>` },
-            { label: "Leave her out. The protests are the bigger story.", fx: { fair: -2 }, result: `<p>${T("down", "−2 fairness")}Many readers who support the war feel ignored by your paper.</p>` },
-            { label: "Write that war supporters just don't understand", fx: { fair: -3 }, result: `<p>${T("down", "−3 fairness")}That's an opinion, not reporting. Readers stop trusting the page.</p>` }
-          ] },
-        { type: "q", id: "v9", std: "US.40", short: "Nixon's silent majority",
-          prompt: doc("President Richard Nixon · TV address, November 3, 1969", `<p><q>And so tonight — to you, the great silent majority of my fellow Americans — I ask for your support.</q></p>`) + doc("Mrs. Hansen, mother of a soldier (a made-up but typical voice)", `<p>"My son is over there doing his duty. If we pull out now, the communists win and it was all for nothing. The protesters on TV don't speak for me."</p>`) + "Who did Nixon mean by the <b>silent majority</b>?",
-          options: ["Americans who backed the war but didn't protest", "Protesters who marched without making any noise", "Soldiers in Vietnam who weren't allowed to vote", "Members of Congress who skipped votes on the war"],
-          hint: "Read Mrs. Hansen's view. Is she loud on TV, or quiet at home?", why: "Nixon believed most Americans quietly supported him, even if the protesters got more attention." },
-        { type: "q", id: "v10", std: "US.37", short: "Pro-war reasoning",
-          prompt: "Based on Mrs. Hansen and Nixon, what reason did supporters give for staying in Vietnam?",
-          options: ["Leaving would hand South Vietnam to communism", "The war was making the U.S. economy much stronger", "Vietnam had attacked the U.S. mainland directly", "The draft treated rich and poor exactly the same"],
-          hint: "What does Mrs. Hansen say happens \"if we pull out now\"?", why: "Supporters saw the war as containment. Leaving meant letting communism win, and wasting the sacrifices already made." },
-        { type: "event", id: "e3", short: "Covering the campus shootings", html: `<p class="desk">Editor's desk · May 1970</p><p>Two shootings happen at colleges after Nixon sends troops into Cambodia. Your page has room for the story.</p>`,
-          choices: [
-            { label: "Cover both shootings, Kent State and Jackson State", fx: { fair: 2 }, result: `<p>${T("up", "+2 fairness")}Readers learn about both. Many papers covered only one.</p>` },
-            { label: "Cover only Kent State, like most papers did", fx: { fair: -1 }, result: `<p>${T("down", "−1 fairness")}Jackson State is left out, as it was in much of the news.</p>` },
-            { label: "Skip both. It's too upsetting.", fx: { fair: -2 }, result: `<p>${T("down", "−2 fairness")}Readers miss major news that shaped the country.</p>` }
-          ] },
-        { type: "q", id: "v11", std: "US.41", short: "Kent State and Jackson State",
-          prompt: `<table class="facts"><tr><th></th><th>Kent State (Ohio)</th><th>Jackson State (Mississippi)</th></tr><tr><td>Date</td><td>May 4, 1970</td><td>May 15, 1970</td></tr><tr><td>Who fired</td><td>Ohio National Guard</td><td>City and state police</td></tr><tr><td>Students</td><td>Mostly white; protesting the Cambodia invasion</td><td>Black students at a historically Black college</td></tr><tr><td>Killed / wounded</td><td>4 killed, 9 wounded</td><td>2 killed, 12 wounded</td></tr><tr><td>News coverage</td><td>Huge, across the country</td><td>Much smaller</td></tr></table>What does the chart show?`,
-          options: ["Both were deadly, but Jackson State got far less attention", "Kent State had more people wounded than Jackson State did that May", "Jackson State happened first and got more coverage", "Both shootings were carried out by the U.S. Army"],
-          hint: "Compare the last two rows.", why: "Both shootings killed students. Jackson State got much less coverage, which many saw as a sign of racial unfairness." },
-        { type: "q", id: "v12", std: "US.35", short: "Why Vietnam divided more than Korea",
-          prompt: `<table class="facts"><tr><th></th><th>Korea (1950–1953)</th><th>Vietnam (U.S. combat 1965–1973)</th></tr><tr><td>How it started</td><td>North Korea invaded; UN voted to defend</td><td>Gulf of Tonkin; facts later in doubt</td></tr><tr><td>Length</td><td>About 3 years</td><td>About 8 years of U.S. combat</td></tr><tr><td>TV news</td><td>TV was new; fewer homes had one</td><td>Most homes; war on TV nightly</td></tr><tr><td>Draft</td><td>Yes</td><td>Yes, with college deferments</td></tr></table>Why did Vietnam divide Americans more than Korea did?`,
-          options: ["It lasted longer, was on TV, and its start was in doubt", "It was a UN war, so Americans felt left out of it", "Korea had a draft, but Vietnam had no draft at all", "Vietnam was over faster, so people never had time to agree on it"],
-          hint: "Compare each row. Which differences would make people angrier?", why: "A long war, nightly TV images, an unfair draft, and doubts about how it started all made Vietnam far more divisive." }
-      ] }
-  ],
-  finale: {
-    title: "Your Editor's Note",
-    report: st => `<p><b>Your story fairness meter ended at ${st.fx.fair}/10.</b> Fair reporting gave space to people who opposed the war AND people who supported it.</p><p>Answer both in 1–2 full sentences.</p>`,
-    prompts: [
-      { id: "korea", short: "Why Vietnam divided more than Korea", label: "1. Why did Vietnam divide Americans more than Korea did? Give one reason with evidence from today.", stem: "Vietnam divided Americans more than Korea because ___.", min: 60, mustAll: [["tv", "television", "news", "draft", "deferment", "tonkin", "long", "years", "kent", "jackson", "tet", "protest"], ["because", "since"]], mustMsg: "In answer 1, give a reason with evidence (like TV, the draft, or Tonkin) and use \"because\"." },
-      { id: "sides", short: "Two sides, explained fairly", label: "2. Explain one reason some Americans OPPOSED the war and one reason others SUPPORTED it.", stem: "Some Americans opposed the war because ___. Others supported it because ___.", min: 80, newWords: 6, mustAll: [["oppos", "against", "protest", "mistake", "unfair"], ["support", "communis", "troops", "silent", "domino", "contain"]], mustMsg: "In answer 2, give one reason people opposed the war AND one reason people supported it." }
-    ]
-  }
-};
-
-})()));
-</script>
+<script src="game.js?v=2"></script>
 </body></html>

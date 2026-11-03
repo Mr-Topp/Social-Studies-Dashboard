@@ -1,257 +1,27 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Mirror Week | Sociology Unit 3 Day 4</title>
-<meta name="description" content="Help a teen get to his first open mic while likes, a coach, his little sister, and a hater account all push on how he sees himself.">
-<style>
-:root{--ink:#1d2a33;--muted:#53636d;--paper:#f2f8fa;--card:#fff;--line:#d3e2e7;--main:#167a8a;--accent:#e2573a;--sun:#f2b134;--green:#2a6b45;--bad:#a2392f;--me:#167a8a;--i:#e2573a}
-*{box-sizing:border-box}
-body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.5 system-ui,Segoe UI,Arial,sans-serif}
-header{background:linear-gradient(100deg,#dff3f5,#fdf0d8 60%,#fde3dc);border-bottom:5px solid var(--main);padding:16px max(16px,calc((100vw - 900px)/2)) 12px}
-.k{font-size:.78rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:var(--main);margin:0}
-h1{margin:2px 0 4px;font-size:clamp(1.7rem,3.4vw,2.3rem)}
-.std{margin:2px 0;font-size:.92rem;color:var(--muted)}.std b{color:var(--ink)}
-.hud{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line);padding:8px max(16px,calc((100vw - 900px)/2));display:flex;gap:8px 12px;flex-wrap:wrap;align-items:center;font-weight:800;font-size:.92rem;box-shadow:0 2px 8px #1d2a3312}
-.hud .bar{flex:1;min-width:110px;height:10px;background:#e1ebee;border-radius:9px;overflow:hidden}.hud .bar span{display:block;height:100%;width:0;background:var(--main);transition:width .4s}
-.pill{background:#eef5f7;border-radius:20px;padding:3px 10px;white-space:nowrap}
-.meter{display:flex;align-items:center;gap:6px}.meter .track{width:90px;height:10px;border-radius:9px;background:#e1ebee;overflow:hidden}.meter .track span{display:block;height:100%;transition:width .5s}
-#selfFill{background:var(--main)}#feedFill{background:var(--accent)}
-main{max-width:900px;margin:auto;padding:14px 16px 60px}
-.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;box-shadow:0 3px 12px #1d2a330d}
-.kicker{font-size:.78rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin:0}
-h2{margin:2px 0 10px;font-size:1.45rem}
-.teach{background:#e9f5f7;border-left:5px solid var(--main);border-radius:9px;padding:10px 14px;margin:0 0 12px}.teach p{margin:4px 0}
-.block{margin:14px 0;padding:14px;border-radius:12px;border:2px solid var(--line);background:#fff}
-.block.current{border-color:var(--ink);box-shadow:0 0 0 4px #167a8a30}
-.block h3{margin:0 0 10px;font-size:1.06rem;line-height:1.35;font-weight:700}
-.event{background:#fbfdfd;border-style:dashed;border-color:#a9cdd4}.event.current{border-style:solid}
-.event-body p,.note p{margin:4px 0}
-.scene-line{font-weight:400;color:var(--ink);margin:4px 0}
-.src-card{background:#fbfaf5;border:1px solid #e1dccb;border-left:5px solid var(--sun);border-radius:10px;padding:10px 12px;margin:0 0 10px;font-weight:400;font-size:.97rem}
-.src-card .lab{font-size:.74rem;font-weight:900;letter-spacing:.06em;text-transform:uppercase;color:#8a6a1f;margin:0 0 4px}
-.src-card p{margin:3px 0}
-.src-card.warn{border-left-color:var(--bad)}.src-card.warn .lab{color:var(--bad)}
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:8px 0}.stats div{background:#fff;border:1px solid var(--line);border-radius:9px;padding:6px 8px;font-size:.88rem;text-align:center}.stats b{display:block;font-size:1.35rem;color:var(--main)}
-/* phone post */
-.post{max-width:430px;background:#fff;border:1px solid #cfdde2;border-radius:16px;padding:10px 12px;margin:0 0 10px;font-weight:400;box-shadow:0 2px 8px #1d2a3314}
-.post .top{display:flex;align-items:center;gap:8px;font-size:.88rem}.post .av{width:30px;height:30px;border-radius:50%;background:linear-gradient(135deg,var(--main),var(--sun));display:inline-block;flex:none}
-.post .av.rt{background:#596670}
-.post .top b{color:var(--ink)}.post .top span{color:var(--muted)}
-.post .wave{display:flex;gap:3px;align-items:flex-end;height:40px;margin:8px 0;padding:6px 8px;background:#13343b;border-radius:10px}.post .wave i{flex:1;background:#7fd3dc;border-radius:2px}
-.post .meta{display:flex;gap:16px;font-size:.9rem;font-weight:800;color:var(--muted)}
-.post p{margin:4px 0}
-/* texts */
-.thread{display:grid;gap:6px;margin:0 0 10px;font-weight:400}
-.thread .when{font-size:.75rem;font-weight:800;color:var(--muted);text-align:center}
-.tx{max-width:520px;background:#e8eef1;border-radius:16px 16px 16px 4px;padding:7px 12px}
-.tx .lt{display:inline-block;background:var(--ink);color:#fff;border-radius:6px;font-size:.75rem;font-weight:900;padding:0 6px;margin-right:6px}
-.tx.from{font-size:.75rem;font-weight:900;color:var(--main);background:none;padding:0 4px}
-/* mirror trace */
-.trace{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:6px;align-items:stretch;margin:10px 0}
-.trace .st{background:#fff;border:2px solid var(--main);border-radius:12px;padding:8px 10px;font-size:.92rem;font-weight:700;text-align:center;display:flex;flex-direction:column;justify-content:center}
-.trace .st small{display:block;font-size:.72rem;font-weight:900;letter-spacing:.06em;text-transform:uppercase;color:var(--main)}
-.trace .ar{align-self:center;font-weight:900;color:var(--main)}
-/* reveal */
-.reveal{background:#fff8e6;border:2px solid var(--sun);border-radius:12px;padding:10px 14px;margin:10px 0 0;font-weight:400}
-.reveal .rk{font-size:.75rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:#8a6a1f;margin:0 0 4px}
-.reveal b{color:#7a4f00}
-.quote{font-size:1.05rem;font-style:italic;border-left:4px solid var(--main);padding-left:10px;margin:6px 0}
-/* voices */
-.voices{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:8px 0;font-weight:400}
-.voice{border-radius:12px;padding:8px 12px;border:2px solid}
-.voice .vl{display:block;font-size:.75rem;font-weight:900;letter-spacing:.06em;text-transform:uppercase}
-.voice.v1{border-color:#d9c3ec;background:#f7f1fc}.voice.v1 .vl{color:#6b3e94}
-.voice.v2{border-color:#c9e0c9;background:#f2f9f2}.voice.v2 .vl{color:#2f6b35}
-.picked{margin:10px 0 4px;color:var(--muted)}.result{background:#eef5f7;border-radius:9px;padding:9px 12px}.result p{margin:4px 0}
-.tag{display:inline-block;font-weight:900;font-size:.8rem;border-radius:12px;padding:2px 9px;margin-right:6px}.tag.up{background:#dcefe2;color:var(--green)}.tag.down{background:#f6dcd8;color:var(--bad)}.tag.flat{background:#e6ecee;color:var(--ink)}
-.qlabel{font-size:.75rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:var(--main);margin:0 0 4px}
-.choices{display:grid;gap:8px}
-@media(min-width:700px){.q .choices{grid-template-columns:1fr 1fr}}
-button{font:inherit;cursor:pointer;border-radius:10px;min-height:46px}
-.choice{text-align:left;background:#fff;color:var(--ink);border:2px solid #c3d6dc;padding:10px 12px;font-weight:650;line-height:1.3}
-.choice:hover:not(:disabled){border-color:var(--ink);background:#fafdfd}.choice:disabled{opacity:.5;cursor:not-allowed}
-.go{margin-top:12px;background:var(--main);color:#fff;border:0;padding:11px 18px;font-weight:900}
-.intro .go{font-size:1.15rem;padding:14px 26px}
-button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid #2f7dbd;outline-offset:2px}
-.answered{font-weight:800;color:var(--green);margin:4px 0}.why{margin:2px 0;color:var(--muted)}
-.msg{min-height:1.3em;font-weight:750;margin:8px 0 0}.msg.bad{color:var(--bad)}.msg.good{color:var(--green)}
-label{display:block;font-weight:850;margin:14px 0 4px}.stem{margin:0 0 4px;color:var(--muted);font-size:.92rem}
-input,textarea{width:100%;font:inherit;border:2px solid #c3d6dc;border-radius:9px;padding:10px;background:#fff;color:var(--ink)}
-.steps{display:grid;gap:6px;margin:10px 0;padding:0;list-style:none}.steps li{background:#eef5f7;border-radius:9px;padding:8px 12px;font-weight:700}
-.steps.chips{display:flex;flex-wrap:wrap}.steps.chips li{padding:6px 12px}
-.intro p{margin:6px 0}.intro label{margin-top:10px}
-.goal{background:#e9f5f7;border-radius:9px;padding:8px 12px;font-weight:700}
-.cause{margin:4px 0 8px;padding-left:22px}.cause li{margin:2px 0}
-.welcome{background:#e6f1ea;color:var(--green);font-weight:800;border-radius:9px;padding:8px 12px;margin:0 0 10px}
-.foot{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-top:14px;color:var(--muted);font-size:.85rem}
-.foot button{background:#e6ecee;border:0;padding:8px 12px;font-weight:800;color:var(--ink)}
-.src{font-size:.8rem;color:var(--muted)}
-@media(max-width:640px){.stats{grid-template-columns:1fr}.voices{grid-template-columns:1fr}.trace{grid-template-columns:1fr}.trace .ar{transform:rotate(90deg);justify-self:center}}
-@media(max-height:800px){header{padding-top:8px;padding-bottom:6px}header h1{font-size:1.45rem;margin:0}header .k{display:inline-block;margin-right:10px}header h1{display:inline-block}.intro h2{font-size:1.25rem}header .std.goal-line{display:none}.intro h2{margin:0 0 6px}.intro .src{margin:2px 0}.card.intro{padding:12px 18px}.intro p{margin:4px 0}.steps.chips{margin:6px 0}.intro label{margin-top:6px}.intro .go{margin-top:6px;padding:10px 24px}.intro input{padding:7px 10px}.intro .msg{min-height:0;margin:0}.hud{padding-top:5px;padding-bottom:5px}}
-@media print{.hud,.foot,.go{display:none}}
-</style>
+<meta name="description" content="Run Jalen's week before his first open mic: pick which mirrors he looks into, beat a hater account, and balance his two voices.">
+<link rel="stylesheet" href="style.css?v=20261103r">
 <script src="../../shared/assignments.js?v=20261101fill"></script>
 <script src="../../shared/turnin.js?v=20261102read"></script>
-<script src="../../shared/unit-game.js?v=20261102es"></script>
-<script src="../../shared/lang.js?v=20261102samonly"></script>
 </head><body>
-<header>
-  <p class="k">Sociology · Unit 3 · Day 4</p>
-  <h1>Mirror Week</h1>
-  <p class="std"><b>SS.9-12.Soc.10</b> Explain the process of the social construction of the self.</p>
-  <p class="std goal-line"><b>Goal:</b> Explain how other people's reactions shape who we think we are (looking-glass self, role-taking, the generalized other, and the "I" and "Me"). · About 25 minutes.</p>
-</header>
-<div class="hud" aria-label="Progress and Jalen's meters">
-  <span id="progressText">0 checks done</span>
-  <div class="bar" aria-hidden="true"><span id="progressFill"></span></div>
-  <span class="pill meter">Jalen's self-view: <span class="track" aria-hidden="true"><span id="selfFill" style="width:40%"></span></span> <span id="selfNum">4/10</span></span>
-  <span class="pill meter">Feed pressure: <span class="track" aria-hidden="true"><span id="feedFill" style="width:50%"></span></span> <span id="feedNum">5/10</span></span>
+<div class="hud" id="hud" hidden aria-label="Jalen's week">
+  <div class="hud-in">
+    <div class="who" id="jalenBox"><span class="face" id="jFace" aria-hidden="true">😕</span><span class="who-t"><b>Jalen</b><small>16 · makes beats</small></span></div>
+    <div class="meters">
+      <div class="m" id="mSelf" title="Self-image"><span class="mi" aria-hidden="true">🪞</span><span class="ml">Self-image</span><span class="bar"><span id="selfFill"></span></span><span class="mn" id="selfNum">3</span></div>
+      <div class="m" id="mBeat" title="Beat"><span class="mi" aria-hidden="true">🎧</span><span class="ml">Beat</span><span class="pips" id="beatPips"></span></div>
+      <div class="m" id="mCrew" title="Crew"><span class="mi" aria-hidden="true">🤝</span><span class="ml">Crew</span><span class="pips" id="crewPips"></span></div>
+    </div>
+    <div class="rival" id="rivalBox" title="Rival: @cr.realtalk"><span class="rface" aria-hidden="true">💀</span><span class="rmood" id="rMood" aria-hidden="true">😴</span><span class="rt"><b>@cr.realtalk</b><span class="m mpress" id="mPress"><span class="mi" aria-hidden="true">📱</span><span class="ml">Feed pressure</span><span class="bar red"><span id="pressFill"></span></span><span class="mn" id="pressNum">4</span></span></span><span class="rtag">Rival</span></div>
+  </div>
+  <div class="days" id="days" aria-label="Day"></div>
 </div>
-<main>
-  <p class="welcome" id="welcome" hidden></p>
-  <div id="app"></div>
+<main id="wrap">
+  <div class="welcome" id="welcome" role="status" hidden></div>
+  <section id="app" aria-live="polite"></section>
   <div class="foot"><span>Progress saves on this device. Your teacher sees your work after you turn it in.</span><button type="button" id="restartBtn">Start over</button></div>
 </main>
-<script>
-const T = (cls, txt) => `<span class="tag ${cls}">${txt}</span>`;
-const card = (lab, body, cls) => `<div class="src-card ${cls || ""}"><p class="lab">${lab}</p>${body}</div>`;
-const WAVE = `<div class="wave" aria-hidden="true">${[30,55,80,45,95,60,35,70,100,50,40,85,65,30,75,55,90,45].map(h => `<i style="height:${h}%"></i>`).join("")}</div>`;
-const post = (who, when, body, meta, rt) => `<div class="post"><div class="top"><span class="av${rt ? " rt" : ""}"></span><b>${who}</b><span>${when}</span></div>${body}${meta ? `<div class="meta">${meta}</div>` : ""}</div>`;
-const thread = (when, lines) => `<div class="thread"><div class="when">${when}</div><div class="tx from">JALEN</div>${lines.map(l => `<div class="tx">${l}</div>`).join("")}</div>`;
-const L = (letter, text) => `<span class="lt">${letter}</span>${text}`;
-const trace = (a, b, c) => `<div class="trace"><div class="st"><small>Step 1 · Look</small>${a}</div><span class="ar" aria-hidden="true">→</span><div class="st"><small>Step 2 · Judge</small>${b}</div><span class="ar" aria-hidden="true">→</span><div class="st"><small>Step 3 · Feel</small>${c}</div></div>`;
-const reveal = body => `<div class="reveal"><p class="rk">💡 Name the idea</p>${body}</div>`;
-const voices = (a, b) => `<div class="voices"><div class="voice v1"><span class="vl">Voice 1</span>${a}</div><div class="voice v2"><span class="vl">Voice 2</span>${b}</div></div>`;
-
-// What caused Friday night (one line per story choice, by original choice index)
-const CAUSES = {
-  e1: ["Monday: you told him likes don't matter, but he didn't believe it.", "Monday: the group chat hyped him up, then became his mirror.", "Monday: the after-school repost gave him a fairer mirror."],
-  e2: ["Wednesday: telling the team meant more people watching, cheering or judging.", "Wednesday: hiding it made the judgment he imagined even louder.", "Wednesday: Coach's support helped, but now he feared letting her down."],
-  e3: ["Thursday: the clap-back made the beef bigger than the beat.", "Thursday: muting the hater also cut him off from his support.", "Thursday: checking the account showed it was a warped mirror."]
-};
-function friday(st) {
-  const s = st.fx.self, f = st.fx.feed;
-  let out;
-  if (s >= 6 && f <= 7) out = `<p><b>Friday night:</b> The speaker comes back. Jalen grins, says "run it back," and finishes strong. He signs up for next month before he leaves.</p>`;
-  else if (s >= 4) out = `<p><b>Friday night:</b> He freezes for a second, then keeps going. He finishes, a little shaky. Before he's off the stage, he's already checking his phone for comments.</p>`;
-  else out = `<p><b>Friday night:</b> He almost walks off. He plays 30 more seconds, says "thank you," and sits down fast. Later he texts you: "maybe december." He didn't quit. He's still deciding who he is.</p>`;
-  if (f >= 8) out += `<p>The video from the back of the room gets posted. Jalen reads every comment that night.</p>`;
-  return out;
-}
-
-UnitGame.start({
-  key: "soc-u3-d4-who-decides-you-v1",
-  assignmentId: "soc-u3-d4-who-decides-you",
-  title: "Sociology · Unit 3 · Day 4 · Who Decides Who You Are?",
-  standard: "SS.9-12.Soc.10",
-  oldApi: "https://fynn-class-assignment-submissions-20261024.neotboy.chatgpt.site/api/submit",
-  startFx: { self: 4, feed: 5 },
-  clampFx: fx => { fx.self = Math.max(0, Math.min(10, fx.self)); fx.feed = Math.max(0, Math.min(10, fx.feed)); },
-  hud: st => {
-    const s = st.fx.self || 0, f = st.fx.feed || 0;
-    document.getElementById("selfFill").style.width = (s * 10) + "%";
-    document.getElementById("selfNum").textContent = s + "/10";
-    document.getElementById("feedFill").style.width = (f * 10) + "%";
-    document.getElementById("feedNum").textContent = f + "/10";
-  },
-  startLabel: "Pick up your phone",
-  introHtml: `<p class="kicker">5 days · 1 open mic</p><h2>Who decides who Jalen is?</h2>
-    <p><b>Jalen Moore</b>, 16, makes beats on his phone. On Friday he plays one live at the Westside Teen Center open mic.</p>
-    <p>You're his older cousin. <b>Your job:</b> get him to Friday still seeing himself as someone who makes music, while likes, comments, and one hater account push on him. Your texts move the two meters at the top.</p>
-    <ul class="steps chips"><li>📱 Mon: 2 likes</li><li>🏀 Wed: practice</li><li>🎤 Thu–Fri: the hater, then the mic</li><li>⏱️ 25 min · 13 checks · 1 short answer</li></ul>
-    <p class="goal">🎯 Today's goal: explain how other people's reactions shape the way a person sees himself.</p>
-    <p class="src">Jalen and everyone in his story are made up. The ideas and the survey are real.</p>`,
-  scenes: [
-    { kicker: "Part 1 of 3 · Monday", title: "Two Likes",
-      blocks: [
-        { type: "event", id: "e1", short: "Monday reply (2 likes)", html: post("@jalen.makes.beats", "posted 1:47 a.m.", `<p>blue hour (beat #1) 🎧</p>${WAVE}`, "<span>♥ 2</span><span>💬 0</span>") +
-            thread("Monday 7:52 a.m.", ["bro. 2 likes. one is my mom 💀", L("A", "i feel dumb for even posting it ngl"), L("B", "ppl saw some random kid's bedroom beat pop up"), L("C", "they def think it's trash and i'm doing too much"), "maybe i should drop out of friday"]) +
-            `<p><b>What do you text back?</b></p>`,
-          choices: [
-            { label: "\"Likes don't mean anything. Just ignore them.\"", fx: { feed: -1 }, result: `<p>${T("flat","Self-view +0")}${T("up","Feed pressure −1")}He texts back: "easy for u to say." He stops checking for an hour, but he doesn't believe you. Being told a mirror doesn't matter doesn't make it stop working.</p>` },
-            { label: "\"Drop it in the group chat. They'll hype you up.\"", fx: { self: 1, feed: 2 }, result: `<p>${T("up","Self-view +1")}${T("down","Feed pressure +2")}Six 🔥 emojis in ten minutes. He feels great. But now he refreshes the chat every few minutes. The group chat just became his mirror.</p>` },
-            { label: "\"You posted at 1:47 a.m. Repost it after school.\"", fx: { self: 1, feed: 1 }, result: `<p>${T("up","Self-view +1")}${T("down","Feed pressure +1")}He reposts at 4 p.m. and gets 23 likes by dinner. He feels better. He also checks his phone about 40 times before bed.</p>` }
-          ] },
-        { type: "note", html: reveal(`<p>What just happened to Jalen has a name: the <b>looking-glass self</b>. (A looking-glass is an old word for a mirror.)</p>
-            <p>In 1902, sociologist <b>Charles Horton Cooley</b> said other people work like a mirror. We see ourselves in their reactions, in 3 steps:</p>` +
-            trace("I imagine how I look to others", "I imagine how they judge me", "I feel something about myself, like pride or shame") +
-            `<p><b>Key point:</b> it's what we <b>imagine</b> others think. And we can be wrong.</p>`) },
-        { type: "q", id: "t1", std: "Soc.10", label: "Mirror trace · Monday", short: "Trace Monday's mirror (Cooley's 3 steps)", prompt: "Look back at Jalen's texts A, B, and C. Which order matches Cooley's 3 steps?", options: ["B, then C, then A", "A, then B, then C", "C, then A, then B", "B, then A, then C"], hint: "Step 1 is how he imagines he looks. Step 3 is a feeling. Find those two first.", why: "B is how he imagines he looks (a random kid's bedroom beat). C is the judgment he imagines (trash). A is the feeling (dumb). Look, judge, feel." },
-        { type: "q", id: "t2", std: "Soc.10", label: "Mirror check", short: "Monday's mirror was wrong (stats)", prompt: card("Jalen's post stats (he never checked these)", `<div class="stats"><div><b>9</b>people saw it overnight</div><div><b>41 of 45</b>seconds: how long they listened, on average</div><div><b>0</b>mean comments</div></div>`) + "What do the stats show about Jalen's Monday mirror?", options: ["He imagined a harsh judgment that nobody made", "Most people who heard the beat thought it was bad", "Likes show exactly how good a song really is", "Posting music online is a bad idea for any teen"], hint: "How many people even saw it? How long did they listen?", why: "Only 9 people saw it, and they listened to almost all of it. Nobody said \"trash.\" Jalen imagined that judgment. Step 2 happens in your head, and it can be wrong." },
-        { type: "q", id: "t3", std: "Soc.10", short: "Pew 2018: teens feel pressure to post for likes", prompt: card("Real survey · Pew Research Center, 2018", `<div class="stats"><div><b>43%</b>of teens felt pressure to only post things that make them look good</div><div><b>37%</b>felt pressure to post things that get a lot of likes or comments</div><div><b>81%</b>said social media makes them feel more connected to friends' lives</div></div><p class="src">U.S. teens ages 13–17. Pew Research Center, "Teens' Social Media Habits and Experiences," November 28, 2018.</p>`) + "What does this survey suggest about Jalen's Monday?", options: ["Many teens feel the same pressure he felt", "Almost no teens care how many likes they get", "Social media only ever makes teens feel worse", "Only adults feel pressure about what they post"], hint: "Look at the 37% and the 81%. Is the pressure rare? Is it all bad?", why: "About 4 in 10 teens felt pressure to look good or get likes. Likes are the looking-glass self with a scoreboard. But 81% also said it helps them feel connected, so it isn't all bad." }
-      ] },
-    { kicker: "Part 2 of 3 · Wednesday", title: "Through Other People's Eyes",
-      blocks: [
-        { type: "event", id: "e2", short: "Wednesday: tell the team?", html: `<p class="scene-line">JV basketball practice. A loose ball rolls toward the bleachers. Jalen dives for it and slides into the first row.</p>` +
-            card("Coach Haley, loud enough for the whole gym", `<p>"MOORE! That's hustle! That's what I want to see!"</p>`) +
-            thread("Wednesday 6:10 p.m.", ["coach called me out in front of everybody. for HUSTLE 😤", "i never thought of myself as a hustle guy. kinda am tho??", "should i tell the team i'm doing open mic friday? they might roast me"]) +
-            `<p><b>What do you text back?</b></p>`,
-          choices: [
-            { label: "\"Tell them. Real teammates show up.\"", fx: { self: 1, feed: 1 }, result: `<p>${T("up","Self-view +1")}${T("down","Feed pressure +1")}Three teammates say they'll come. One sends a 🤡. Now more people will be watching Friday, some cheering, some judging.</p>` },
-            { label: "\"Keep it quiet until after Friday.\"", fx: { self: -1, feed: -1 }, result: `<p>${T("down","Self-view −1")}${T("up","Feed pressure −1")}Less pressure. But he spends all night guessing what they'd say. Hiding it makes the judgment he imagines even louder.</p>` },
-            { label: "\"Tell Coach first. See what she says.\"", fx: { self: 2, feed: 1 }, result: `<p>${T("up","Self-view +2")}${T("down","Feed pressure +1")}Coach says, "Proud of you. Same hustle on that stage." He loves it. But now he's scared of letting Coach down, too.</p>` }
-          ] },
-        { type: "q", id: "w1", std: "Soc.10", label: "Mirror check · Wednesday", short: "New mirror changed his self-view (Coach)", prompt: "On Monday, Jalen felt dumb. Tonight he says he's \"kinda\" a hustle guy. What changed?", options: ["The judgment he imagined from others changed", "His basketball skills got a lot better overnight", "He decided to stop caring what anyone thinks", "Nobody reacted to anything he did on Wednesday"], hint: "Whose reaction did he see today? What did he imagine it meant about him?", why: "Coach's reaction was a new mirror. He imagined a good judgment, so step 3 was pride. Same kid, new mirror, new self-view. That's the looking-glass self." },
-        { type: "note", html: `<p class="scene-line"><b>8:30 p.m.</b> Jalen's little sister <b>Kiara</b>, age 5, sets up an "open mic" in the living room for her stuffed animals.</p>
-            <div class="voices"><div class="voice v1"><span class="vl">Kiara as the host</span>"Give it up for DJ JALEN!"</div><div class="voice v2"><span class="vl">Kiara as Jalen</span>(hairbrush mic) "Um… hi. I'm kinda nervous."</div></div>
-            <p class="scene-line">Then she runs to the couch, becomes the crowd, and claps like crazy. Jalen texts you a video: "she did all 3 parts 😭 she even did my nervous voice."</p>
-            <p class="scene-line">Later, Jalen sits in the back of the room and pictures Friday from a seat in the crowd. "If I was out there, I'd want the beat to drop fast. Cut the long intro."</p>` +
-            reveal(`<p><b>George Herbert Mead</b> (University of Chicago) said the self grows through <b>role-taking</b>: imagining how someone else sees a situation.</p>
-            <p>Little kids practice in the <b>play stage</b>, trying on one role at a time, like Kiara playing the host, then Jalen, then the crowd.</p>
-            <p class="quote">"The self is something which has a development; it is not initially there, at birth, but arises in the process of social experience and activity…"</p>
-            <p class="src"><b>Word help:</b> initially = at first · arises = grows, shows up · social experience = time spent with other people</p>
-            <p class="src">George Herbert Mead, <i>Mind, Self, and Society</i> (1934), p. 135. Fun fact: babies don't know the face in a mirror is theirs. Most kids only recognize themselves around age 2.</p>`) },
-        { type: "q", id: "w2", std: "Soc.10", short: "Kiara switching roles = role-taking (play stage)", prompt: "Kiara plays the host, then Jalen, then the crowd. What is she learning?", options: ["To see a situation through other people's eyes", "To memorize the real rules of an open mic night", "To do whatever she wants the moment she wants it", "To repeat words without knowing what they mean"], hint: "Each time she switches, whose point of view is she using?", why: "Every switch makes her imagine someone else's view. That's role-taking. At her age, Mead called it the play stage: one role at a time." },
-        { type: "q", id: "w3", std: "Soc.10", short: "Teen pictures crowd's view = role-taking", prompt: "Jalen pictures Friday from the crowd's seats, then cuts his long intro. Which idea is he using?", options: ["Role-taking, since he imagines the crowd's view", "The \"I,\" because he acts on a sudden impulse", "Play stage, because only little kids do this", "Looking-glass self, because he only got 2 likes"], hint: "He hasn't gotten any reaction yet. He's imagining someone else's view.", why: "He's putting himself in the crowd's seat to see his own set. That's role-taking, and teens and adults do it all the time." },
-        { type: "q", id: "w4", std: "Soc.10", label: "Primary source · Mead, 1934", short: "Mead quote: self not there at birth", prompt: "Reread Mead's quote. In plain words, what is he saying?", options: ["Nobody is born with a self; it grows from time with others", "Your self is set at birth and stays the same all your life", "Your self comes mostly from the choices you make all alone", "Only your parents can ever shape who you become as a person"], hint: "\"Not initially there, at birth\" and \"arises\" (grows) from \"social experience\" (time with others).", why: "Mead says the self isn't there when you're born. It grows out of time spent with other people, like Jalen's week." },
-        { type: "note", html: `<p class="scene-line"><b>Back at practice</b>, Jalen plays defense. He knows where the ball handler wants to pass, who's coming to block him, and where each teammate will move, all at once.</p>` +
-            thread("Wednesday 10:02 p.m.", ["never been to an open mic in my life", "but i already know. don't talk during other ppl's sets. clap even if it's mid. stay under 3 min. thank the host"]) +
-            reveal(`<p>Mead's next stage is the <b>game stage</b>: you understand many roles at once, like every position on a team.</p>
-            <p>Over time, you blend all those views into the <b>generalized other</b>: a sense of what society in general expects. That's how you know how to act in a place you've never been.</p>`) },
-        { type: "q", id: "w5", std: "Soc.10", short: "Knowing every role on defense = game stage", prompt: "Knowing what every player will do at once, like Jalen on defense, is Mead's…", options: ["Game stage", "Play stage", "Looking-glass self", "Spontaneous \"I\""], hint: "One role at a time, or many roles at once?", why: "Understanding many roles at the same time is the game stage. Mead used baseball as his example." },
-        { type: "q", id: "w6", std: "Soc.10", short: "Open mic rules = generalized other", prompt: "Jalen has never been to an open mic. How does he already know how to act there?", options: ["He's learned what people in general expect", "He is copying one person he trusts the most", "He was born knowing how to act at any show", "He is doing whatever he feels like right now"], hint: "Reread his 10:02 p.m. texts. Did one person teach him that, or everybody?", why: "He's blended lots of people's expectations into a sense of what society in general expects. Mead called that the generalized other." }
-      ] },
-    { kicker: "Part 3 of 3 · Thursday–Friday", title: "Two Voices",
-      blocks: [
-        { type: "event", id: "e3", short: "Thursday: reply to @cr.realtalk", html: post("@cr.realtalk", "commented on blue hour", `<p>lol bedroom producer thinks he's ready for open mic 💀 can't wait to film this</p>`, "", true) +
-            thread("Thursday 9:14 p.m.", [L("X", "part of me wants to cook this guy in the comments RIGHT NOW"), L("Y", "but my mom follows me. and coach says we represent the team"), "so what do i do"]) +
-            `<p><b>What do you text back?</b></p>`,
-          choices: [
-            { label: "\"Clap back. Don't let him punk you.\"", fx: { self: 1, feed: 3 }, result: `<p>${T("up","Self-view +1")}${T("down","Feed pressure +3")}His reply gets 200 views in an hour. It feels good for about 10 minutes. Then @cr.realtalk posts again, and now people are watching the beef, not the beat.</p>` },
-            { label: "\"Mute him. Put your phone away until Friday.\"", fx: { self: -1, feed: -2 }, result: `<p>${T("down","Self-view −1")}${T("up","Feed pressure −2")}It gets quieter. But he also misses his teammates' "we're coming" texts, and Thursday night feels lonely.</p>` },
-            { label: "\"Screenshot it, report it, and send it to me.\"", fx: { self: 1, feed: 0 }, result: `<p>${T("up","Self-view +1")}${T("flat","Feed pressure +0")}You look up the account together (see below). He feels less alone. But the comment stays up while the report is checked, and he rereads it 6 times.</p>` }
-          ] },
-        { type: "note", html: reveal(`<p>Mead said your self has two parts that go back and forth all day.</p>
-            <p>The <b>"I"</b> is the spontaneous you: what you want to do right now.</p>
-            <p>The <b>"Me"</b> is the social you: the rules and expectations you learned from others (the generalized other).</p>
-            <p>Neither part is bad. The "I" brings new ideas and guts. The "Me" keeps you connected to people.</p>`) },
-        { type: "q", id: "i1", std: "Soc.10", short: "Text X = the \"I\"", prompt: "Look back at Jalen's texts X and Y. Which one is his \"I\" talking, and why?", options: ["X, because it's what he wants to do right now", "Y, because it's what he wants to do right now", "X, because it's what other people expect of him", "Y, because it comes from a sudden feeling"], hint: "The \"I\" is the right-now urge. The \"Me\" thinks about what others expect.", why: "X is the \"I\": the urge to clap back right now. Y is the \"Me\": he remembers what his mom and Coach expect." },
-        { type: "q", id: "i2", std: "Soc.10", label: "Mirror check · Thursday", short: "@cr.realtalk is a warped mirror (evidence)", prompt: card("Who is @cr.realtalk?", `<div class="stats"><div><b>3 days</b>since the account was made</div><div><b>0</b>posts of its own</div><div><b>6</b>other kids' videos with the same 💀 comment</div></div>`) + "A warped mirror is bent, so it shows you wrong. Why is @cr.realtalk a warped mirror for Jalen?", options: ["It's one stranger's judgment, not what most people think", "It proves that most people at his school dislike his music", "It shows this account knows Jalen better than anyone", "It means his coach and his family secretly agree"], hint: "Look at the three boxes. Is this account really judging Jalen's music?", why: "One brand-new account that posts the same insult on lots of videos isn't really judging Jalen. But step 2 happens in your head, so it can still sting. Checking the evidence helps fix the mirror." },
-        { type: "note", html: `<p class="scene-line"><b>Friday, 7:40 p.m. · Westside Teen Center.</b> Jalen is up third. He hits play. Halfway through, the speaker cuts out for 3 seconds. Somebody in the back laughs and holds up a phone.</p>` +
-            voices(`Yell "stop filming!" into the mic and walk off.`, `The host said, "The show goes on." Everybody here expects you to keep going.`) +
-            `<p class="scene-line">How Friday ends depends on the week you helped build. You'll see it at the end.</p>` },
-        { type: "q", id: "i3", std: "Soc.10", short: "The \"Me\" comes from others' expectations", prompt: "On stage, Voice 2 is Jalen's \"Me.\" Where does the \"Me\" come from?", options: ["Expectations he learned from others", "Feelings that pop up with no warning", "The genes he got from his parents", "The beat he made alone in his room"], hint: "The \"Me\" is the social part of the self. Who taught it to him?", why: "The \"Me\" is built from what others expect: the host, the crowd, the generalized other. Voice 1 is the \"I\": the right-now urge." },
-        { type: "q", id: "ex1", std: "Soc.10", label: "Exit ticket · 1 of 2", short: "Exit: others' reactions shaped Jalen's self", prompt: "Which sentence best explains how Jalen's sense of self changed this week?", options: ["Feedback from people around him changed his self-image", "His self-image was set before the week even started", "Only the choices he made alone changed his self-image", "Likes mattered, but people in real life did not"], hint: "Think about the 2 likes, Coach, Kiara, and @cr.realtalk. Did they matter?", why: "Likes, Coach, Kiara's game, and even a hater account all pushed on how Jalen saw himself. The self is built through social interaction." }
-      ] }
-  ],
-  finale: {
-    title: "Friday Night",
-    report: st => friday(st) +
-      `<p><b>Caused by:</b></p><ul class="cause">${["e1", "e2", "e3"].filter(k => st.picks[k] != null).map(k => `<li>${CAUSES[k][st.picks[k]]}</li>`).join("")}</ul>` +
-      `<p><b>Jalen's self-view ended at ${st.fx.self}/10. Feed pressure ended at ${st.fx.feed}/10.</b></p>` +
-      `<p>Every reaction this week was a mirror. Some were fair, and some were warped. Jalen's self was built out of all of them. Sociologists call that the social construction of the self.</p>` +
-      `<p class="qlabel">Exit ticket · 2 of 2</p><p>Answer in 1–2 full sentences, using Jalen's week.</p><p class="src"><b>Go deeper:</b> also name who was doing the shaping (family, peers, school, a coach, or media).</p>`,
-    prompts: [
-      { id: "shape", short: "How others shaped Jalen's self", label: "How did other people shape Jalen's sense of self this week? Pick one moment and explain it with Cooley or Mead.", stem: "Other people shaped Jalen's self because ___. For example, when ___, it shows ___.", min: 80, newWords: 6,
-        mustAll: [
-          ["looking", "glass", "mirror", "cooley", "mead", "role", "generalized", "general", "judg", "imagin", "impulse", "spontan", "expect", "society", "game stage", "play stage", "\"i\"", "\"me\""],
-          ["likes", "liked", "post", "coach", "hustle", "kiara", "sister", "realtalk", "hater", "comment", "open mic", "mic", "chat", "team", "crowd", "speaker", "stage", "beat", "defense", "practice", "host", "account", "mom", "stats", "trash", "dumb", "proud", "nervous", "film"],
-          ["jalen", "kiara", "he ", "his ", "him", "she ", "her "],
-          ["because", "since", "so ", "shows", "which", "that's", "that is", "means", "this is"]
-        ],
-        mustMsg: "Write about Jalen: name one moment from his week (the 2 likes, Coach, Kiara, the open mic rules, @cr.realtalk, or Friday), name an idea (looking-glass self, role-taking, generalized other, or the \"I\" and \"Me\"), and say why (use \"because\")." }
-    ]
-  },
-  extraAnswers: st => ({ "Jalen's self-view": st.fx.self + " of 10", "Feed pressure": st.fx.feed + " of 10" })
-});
-</script>
+<script src="game.js?v=20261103r"></script>
 </body></html>
