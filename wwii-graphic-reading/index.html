@@ -129,7 +129,7 @@
 <section class="reader-panel reading" aria-labelledby="bookTitle">
  <div class="reader-bar"><div><p class="eyebrow" id="dayLabel"></p><h2 id="bookTitle"></h2></div><p class="range" id="pageRange"></p></div>
  <div class="reader-body">
- <div class="reader-tools"><div class="reader-controls"><button id="prevPage" type="button">← Back a page</button><span class="small" id="currentPage"></span><button id="nextPage" type="button">Next page →</button></div><button class="zoom-button" id="zoomBtn" type="button" aria-pressed="false">Make page bigger</button></div>
+ <div class="reader-tools"><div class="reader-controls"><button id="prevPage" type="button">← Back a page</button><span class="small" id="currentPage"></span><button id="nextPage" type="button">Next question →</button></div><button class="zoom-button" id="zoomBtn" type="button" aria-pressed="false">Make page bigger</button></div>
  <div class="scan"><img id="pageImage" alt="Page from the assigned reading"></div>
  <p class="small" id="sourceCredit" hidden>Preview illustrations © Kate Hannigan, Josh Rosen, and First Second/Macmillan. <a href="https://us.macmillan.com/books/9781250358325/historycomicsworldwarii/" target="_blank" rel="noopener noreferrer">Publisher preview</a> · <a href="https://play.google.com/books/reader?id=c4DXEAAAQBAJ&pg=GBS.PP1&hl=en_US" target="_blank" rel="noopener noreferrer">Additional free Google Play sample</a>.</p>
  <p class="small" id="smithsonianCredit" hidden>Source: <a href="https://americanhistory.si.edu/sites/default/files/file-uploader/Incarceration-through-Comics-and-Graphic-Novels.pdf" target="_blank" rel="noopener noreferrer">Smithsonian National Museum of American History · free classroom PDF</a>. Only the six comics are shown here; both halves of each original foldable page have been turned upright for reading.</p>
@@ -358,7 +358,7 @@ function ftText(dI){const v=Object.values(ftLoad(dI).done);return v.filter(Boole
 $('checkPageAnswer').addEventListener('click',()=>{
  if(selectedChoice<0||!sectionRead.has(pageNow))return;
  if(currentChoices[selectedChoice]===pageQuestion()[1]){
-  ftMark(dayIndex,pageNow,true);localStorage.setItem(pageAnswerKey(dayIndex,pageNow),currentChoices[selectedChoice]);$('pageFeedback').textContent='That is right. The next page is open.';$('pageFeedback').className='page-feedback success';selectedChoice=-1;updateReadState(0);updateProgress()
+  ftMark(dayIndex,pageNow,true);localStorage.setItem(pageAnswerKey(dayIndex,pageNow),currentChoices[selectedChoice]);$('pageFeedback').textContent='That is right. The next question is open.';$('pageFeedback').className='page-feedback success';selectedChoice=-1;updateReadState(0);updateProgress()
  }else{
   ftMark(dayIndex,pageNow,false);$('pageFeedback').textContent='Not yet. Read this page again and try another answer.';$('pageFeedback').className='page-feedback error';
   const before=currentChoices.join('|');currentChoices=shuffled([pageQuestion()[1],pageQuestion()[2],pageQuestion()[3]]);if(currentChoices.join('|')===before)currentChoices.push(currentChoices.shift());selectedChoice=-1;updateReadState(0)

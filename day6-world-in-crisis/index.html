@@ -438,8 +438,9 @@ $("clearWork").addEventListener("click",()=>{if(confirm("Start over? This clears
     const nq=nextQ(cur);
     $("anneWait").textContent=qs(cur).length?"":"No question on this page. Read it, then go on."+(nq?" Your next question is on page "+nq+".":"");
     $("anneWrite").hidden=!(last||anneDone()===8);
-    $("anneNext").hidden=last;$("anneNext").disabled=!done;
-    $("anneNext2").disabled=!done;$("anneNext2").textContent=last?"Go to Turn in ↓":"Next page →";
+    const lbl=qs(cur).length?"Next question →":"Next page →";
+    $("anneNext").hidden=last;$("anneNext").disabled=!done;$("anneNext").textContent=lbl;
+    $("anneNext2").disabled=!done;$("anneNext2").textContent=last?"Go to Turn in ↓":lbl;
     $("anneBack").disabled=cur===FIRST;
     $("anneWhy").textContent=!read.has(cur)?"Read this page first. Next opens in a few seconds.":!qs(cur).every(isRight)?"Get this page's question"+(qs(cur).length>1?"s":"")+" right to go on.":last?(anneDone()===8&&!$("write5").value.trim()?"Write your 2 sentences, then turn in.":""):"";
   }
