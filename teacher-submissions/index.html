@@ -62,8 +62,6 @@ summary{font-weight:800;color:var(--navy);cursor:pointer}
 .ans span{white-space:pre-wrap;overflow-wrap:anywhere}
 .ans .ans{margin-left:14px}
 .tag{display:inline-block;font-size:.75rem;background:#efe7d6;border-radius:6px;padding:1px 6px;color:var(--muted);margin-left:6px}
-.tag.es{background:#dbe8fb;color:#1c3f78;font-weight:800}
-.translation{background:#f3f7fd;border-left:4px solid #1c3f78;border-radius:8px;padding:8px 10px;margin:6px 0}
 .import{background:#fff8e6;border-color:#e8cf8f}
 .linkhead{display:block;color:var(--navy);margin:0 0 6px}
 .unitlinks{margin:0 0 8px}
@@ -274,7 +272,7 @@ button.colmenu:hover{background:#e7e0d1}
 </main>
 
 <script>
-// This is the teacher's computer: never in Spanish-page mode, and never filling in a student's name.
+// This is the teacher's computer: never filling in a student's name.
 try {
   localStorage.removeItem("site-lang-es-device"); localStorage.removeItem("site-lang");
   if (localStorage.getItem("site-lang-es-name")) { localStorage.removeItem("site-student-name"); localStorage.removeItem("site-lang-es-name"); }
@@ -1176,7 +1174,7 @@ function renderGrid(list) {
     if (markOf(tab, id, s) === "EX") return `<td class="ex"><button class="mk" data-s="${safe(s)}" data-a="${safe(id)}" title="Exempt. Click to change.">EX</button></td>`;
     const hits = list.filter(r => r.studentName === s && r.assignmentId === id);
     if (!hits.length) return DONE_ALL[id] ? `<td class="done inclass" title="${safe(DONE_ALL[id])} (everyone gets credit, no score)"><b class="grade">✓</b><span class="lvl">${safe(DONE_ALL[id])}</span></td>` : `<td class="miss"><button class="mk" data-s="${safe(s)}" data-a="${safe(id)}" title="Nothing turned in. Click to exempt this student.">—</button></td>`;
-    const g = dayGrade(hits[0]), when = dateShort(hits[0].submittedAt) + (hits.length > 1 ? " · ×" + hits.length : "") + ((hits[0].answers || {}).Language === "Spanish" ? " · Español" : "");
+    const g = dayGrade(hits[0]), when = dateShort(hits[0].submittedAt) + (hits.length > 1 ? " · ×" + hits.length : "");
     if (!g) return `<td class="done check"><button data-s="${safe(s)}" data-a="${safe(id)}" title="Not graded yet. Open to read their answers."><b class="grade">Check</b><span class="lvl">not graded yet</span><span class="when">${when}</span></button></td>`;
     const big = g.f ? g.pct + "%" : "Level " + g.ai.n;
     const tip = [g.f ? g.f.right + " of " + g.f.total + " right on the first try" : "", g.ai ? "Written answer Level " + g.ai.n + ": " + g.ai.reason + (g.ai.flag ? " ⚠ " + g.ai.flag : "") : "", "Day level: " + levelLabel(g.n, !!g.ai), "Open to read their answers."].filter(Boolean).join("\n");
@@ -1227,7 +1225,7 @@ function showValue(v, depth = 0) {
 
 function renderList(list) {
   if (!list.length) { $("out").innerHTML = '<div class="empty">No turn-ins match that search.</div>'; return; }
-  $("out").innerHTML = `<div class="list">${list.map((r, i) => `<article class="sub"><div class="top"><div><h3>${safe(r.studentName)}</h3><p>${safe(titleOf(r))}${isTestStudent(r.studentName) ? '<span class="tag">TEST (you)</span>' : ""}${r.source === "old" ? '<span class="tag">old site</span>' : ""}${(r.answers || {}).Language === "Spanish" ? '<span class="tag es">Español</span>' : ""}</p></div><time>${safe(new Date(r.submittedAt).toLocaleString())}</time></div>
+  $("out").innerHTML = `<div class="list">${list.map((r, i) => `<article class="sub"><div class="top"><div><h3>${safe(r.studentName)}</h3><p>${safe(titleOf(r))}${isTestStudent(r.studentName) ? '<span class="tag">TEST (you)</span>' : ""}${r.source === "old" ? '<span class="tag">old site</span>' : ""}</p></div><time>${safe(new Date(r.submittedAt).toLocaleString())}</time></div>
     ${gradeBox(r, i)}
     <details><summary>View answers</summary>${showValue(r.answers)}</details></article>`).join("")}</div>`;
   $("out").querySelectorAll(".gradebox button[data-l]").forEach(b => b.onclick = async () => {
@@ -1249,7 +1247,7 @@ function gradeBox(r, i) {
     : ai >= 1 ? `<b>AI grade: Level ${ai}</b> · ${safe(a["AI reason"] || "")}${a["AI flag"] ? ` <span class="warn">⚠ ${safe(a["AI flag"])}</span>` : ""}`
     : `<span class="status">No written-answer grade yet.</span>`;
   const fb = a["AI student feedback"] ? `<div class="status">Student sees: “${safe(a["AI student feedback"])}”${a["Student saw feedback"] ? ' <b class="seen">✓ seen ' + safe(a["Student saw feedback"]) + "</b>" : ""}</div>` : "";
-  const tr = a["English translation"] ? `<div class="translation"><b>English translation of the written answers:</b>${showValue(a["English translation"])}</div>` : (a.Language === "Spanish" ? `<div class="status">Written in Spanish. The English translation appears after the daily grader runs (3:30 p.m.).</div>` : "");
+  const tr = "";
   return `<div class="gradebox" data-i="${i}"><div>${now}</div>${tr}${fb}<div class="grow"><span>Change to:</span>${[1, 2, 3, 4].map(n => `<button data-l="${n}" class="${t === n ? "on" : ""}">${n}</button>`).join("")}${t >= 1 ? '<button data-l="" class="light">Use AI grade</button>' : ""}<input class="gnote" placeholder="Note (optional)" value="${safe(a["Teacher note"] || "")}" aria-label="Note"></div><p class="gstat status"></p></div>`;
 }
 
