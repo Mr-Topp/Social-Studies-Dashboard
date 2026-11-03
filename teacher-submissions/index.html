@@ -791,7 +791,8 @@ function linksHtml() {
       + (nTodo ? ` · <span class="todocount">⚠ ${nTodo} not made yet</span>` : "")
       + (fit ? ` · <span class="todocount">⚠ ${fit.need} lesson days planned, but ${fit.have} class days before the test</span>` : "");
     const body = list.map(r => {
-      const label = r.single ? "" : r.day ? `<b>${r.span ? `Days ${r.day}–${r.span}` : `Day ${r.day}`}${r.summ ? " · Summative" : ""}</b>${rowDate(r)}${r.summ ? `<span class="sumdate">📅 ${cal.summative ? safe(niceDate(cal.summative)) : "No date on the green sheet"}</span>` : ""}` : `<b>Other</b>`;
+      // Summative row: just the green-sheet date, no "Day N · Summative" (Fynn, 2026-11-02).
+      const label = r.single ? "" : r.summ && cal && cal.summative ? `<span class="sumdate">📅 ${safe(niceDate(cal.summative))}</span>` : r.day ? `<b>${r.span ? `Days ${r.day}–${r.span}` : `Day ${r.day}`}${r.summ ? " · Summative" : ""}</b>${rowDate(r)}${r.summ ? `<span class="sumdate">📅 No date on the green sheet</span>` : ""}` : `<b>Other</b>`;
       const t = r.title || (r.summ || r.ids.some(id => /summative/i.test(REG[id].title)) ? "Summative" : r.ids.length ? chipText(r.ids[0]).replace(/\s*\([^)]*\)\s*$/, "") : "");
       const slides = r.slides.map(s => `<a class="chip slides" href="${safe(s.url)}${s.slide ? "#slide=id." + safe(s.slide) : ""}" target="_blank" rel="noopener">▶ ${safe(s.label)}</a>`).join("");
       const todo = (r.todo || []).map(x => `<span class="chip todo">⚠ ${safe(x)}</span>`).join("");
@@ -924,7 +925,7 @@ function renderTodo() {
     let html = "";
     const when = t.when ? (t.when.exact ? `<b>${safe(niceDay(t.when.iso))}</b>` : `<span>about</span> <b>${safe(niceDay(t.when.iso))}</b>`) : `<span class="muted">no date</span>`;
     const unitLabel = (t.part1 ? "Part 1 · " : "") + (t.unit ? (t.course === "civics" ? "Friday " : "Unit ") + t.unit : "Other");
-    const dayLabel = t.day ? (t.span ? `Days ${t.day}–${t.span}` : `Day ${t.day}`) + (t.summ ? " · Summative" : "") : "";
+    const dayLabel = (t.summ && t.when) || !t.day ? "" : (t.span ? `Days ${t.day}–${t.span}` : `Day ${t.day}`) + (t.summ ? " · Summative" : "");   // dated summative: the date column already shows it
     const canLink = !t.after && t.unit && t.day;
     html += `<div class="todo${t.summ ? " summ" : ""}" data-i="${i}">
       <div class="todowhen">${when}</div>
