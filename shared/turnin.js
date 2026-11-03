@@ -381,6 +381,121 @@ const TEACHER_TOOLS_URL = "https://script.google.com/macros/s/AKfycbwiVW6Cufw8Dq
     }
   } catch (e) {}
 
+  // --- "Not you? Start fresh" on every activity (Fynn said yes 11/3/26) -------------------
+  // Older activities don't have their own "Not NAME? Start fresh" button. When this Chromebook remembers a
+  // student's name, a small line shows at the top: "Working as Jordan M. · Not you? Start fresh".
+  // One tap (no pop-up) erases the saved work and the name on this Chromebook, then reloads the page clean.
+  // Pages that draw their own button (the newer games) keep theirs, and this line stays away.
+  // A page can also opt out with window.OWN_NOT_YOU = true or a data-own-not-you attribute.
+  const OWN_NOT_YOU = /^\s*(Not .+\?\s*Start fresh|¿No eres .+\?\s*Empieza de nuevo)\s*$/i;
+  function noNotYouHere() {
+    return !!(window.HUB_PAGE || window.NO_FEEDBACK_POPUP || /teacher-submissions|setup-|update-teacher/.test(location.pathname));
+  }
+  let sawOwnNotYou = false;
+  function hasOwnNotYou() {
+    if (sawOwnNotYou) return true;
+    if (window.OWN_NOT_YOU || document.querySelector("[data-own-not-you], script[src*='unit-game.js']")) return true;
+    for (const b of document.querySelectorAll("button, a, [role=button]")) {
+      if (!b.closest("#siteNotYou") && OWN_NOT_YOU.test(b.textContent || "")) return (sawOwnNotYou = true);
+    }
+    return false;
+  }
+  function rememberedName() {
+    try { return shortName(localStorage.getItem("site-student-name") || ""); } catch (e) { return ""; }
+  }
+  function startFresh() {
+    const who = rememberedName();
+    try {
+      // The home page's saved name for each class: drop this student's, so it can't sign the next kid in as them.
+      const m = JSON.parse(localStorage.getItem("hub-me"));
+      if (who && m && m.classes) {
+        Object.keys(m.classes).forEach(k => { if (sameStudent(m.classes[k], who)) delete m.classes[k]; });
+        if (!m.classes[m.current]) m.current = Object.keys(m.classes)[0] || "";
+        if (Object.keys(m.classes).length) localStorage.setItem("hub-me", JSON.stringify(m)); else localStorage.removeItem("hub-me");
+      }
+    } catch (e) {}
+    // Some pages save their game as they close. Block that, so the old student's work can't come back.
+    try {
+      const set = Storage.prototype.setItem;
+      Storage.prototype.setItem = function (k, v) {
+        if (this === localStorage && (!KEEP_KEY.test(String(k)) || k === "site-student-name" || k === OWNER_KEY)) return;
+        return set.call(this, k, v);
+      };
+    } catch (e) {}
+    wipeOtherStudent();
+    try { localStorage.removeItem("site-student-name"); localStorage.removeItem(OWNER_KEY); } catch (e) {}
+    try { sessionStorage.setItem("site-progress-wiped", "1"); } catch (e) {}
+    // Empty any name box on the page right away (it's reloading anyway).
+    document.querySelectorAll("input").forEach(i => { if (isNameBox(i)) { i.value = ""; i.dataset.nameTouched = "1"; } });
+    location.reload();
+  }
+  function addNotYouBar() {
+    if (noNotYouHere() || !document.body || document.getElementById("siteNotYou")) return;
+    const who = rememberedName();
+    if (!who || hasOwnNotYou()) return;
+    if (!document.getElementById("siteNotYouCss")) {
+      const css = document.createElement("style");
+      css.id = "siteNotYouCss";
+      css.textContent = "#siteNotYou{box-sizing:border-box;display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:0 6px;width:100%;margin:0;padding:2px 12px;background:#f4f1ea;border:0;border-bottom:1px solid #e0dacb;color:#33434e;font:600 14px/1.3 system-ui,Segoe UI,Arial,sans-serif;text-align:center}" +
+        "#siteNotYou b{font-weight:800;color:#19364b}" +
+        "#siteNotYou button.snu-btn{box-sizing:border-box;display:inline-block;width:auto;min-width:0;height:auto;min-height:32px;margin:0;padding:4px 6px;background:none;border:0;border-radius:6px;box-shadow:none;color:#1e4f8a;font:800 14px/1.2 system-ui,Segoe UI,Arial,sans-serif;text-transform:none;letter-spacing:normal;text-decoration:underline;cursor:pointer;transform:none}" +
+        "#siteNotYou button.snu-btn:hover{background:#e7e0d1}#siteNotYou button.snu-btn:focus-visible{outline:3px solid #2b6cb0;outline-offset:1px}" +
+        "@media (max-width:480px){#siteNotYou{font-size:13px;padding:1px 8px}#siteNotYou button.snu-btn{font-size:13px;min-height:30px}}" +
+        // Pages with a fixed header, title screen or toolbar at the top: a small pill at the bottom left instead
+        // (the "Read to me" button sits at the bottom right).
+        "#siteNotYou.snu-pill{position:fixed;left:12px;bottom:14px;z-index:9989;width:auto;max-width:calc(100vw - 200px);padding:3px 10px;border:2px solid #fff;border-radius:16px;box-shadow:0 4px 14px #0004;justify-content:flex-start;text-align:left;line-height:1.25}" +
+        "#siteNotYou.snu-pill button.snu-btn{padding:3px 4px;min-height:30px}#siteNotYou.snu-pill .snu-dot{display:none}#siteNotYou.snu-pill span{margin-right:4px}" +
+        "@media print{#siteNotYou{display:none}}";
+      document.head.appendChild(css);
+    }
+    const es = isEs();
+    const bar = document.createElement("div");
+    bar.id = "siteNotYou"; bar.setAttribute("data-no-es", ""); bar.setAttribute("role", "group");
+    bar.setAttribute("aria-label", es ? "Quién está trabajando" : "Who is working");
+    const span = document.createElement("span");
+    span.appendChild(document.createTextNode(es ? "Trabajando como " : "Working as "));
+    const b = document.createElement("b"); b.textContent = who; span.appendChild(b);
+    const dot = document.createElement("span"); dot.className = "snu-dot"; dot.textContent = " ·"; span.appendChild(dot);
+    const btn = document.createElement("button");
+    btn.type = "button"; btn.className = "snu-btn";
+    btn.textContent = es ? "¿No eres tú? Empieza de nuevo" : "Not you? Start fresh";
+    btn.title = es ? "Borra el trabajo guardado y el nombre en esta computadora" : "Erases the saved work and the name on this Chromebook";
+    btn.addEventListener("click", e => { e.preventDefault(); startFresh(); });
+    bar.appendChild(span); bar.appendChild(btn);
+    document.body.insertBefore(bar, document.body.firstChild);
+  }
+  (function watchNotYou() {
+    if (noNotYouHere()) return;
+    // Is anything from the page drawn on top of the top line (a fixed header, title screen or toolbar)?
+    const coveredAtTop = bar => {
+      if (bar.classList.contains("snu-pill") || window.scrollY > 2) return false;
+      const r = bar.getBoundingClientRect();
+      if (!r.height) return false;
+      for (const fx of [0.03, 0.25, 0.5, 0.75, 0.97]) for (const y of [r.top + 3, r.top + r.height / 2, r.bottom - 3]) {
+        const hit = document.elementFromPoint(r.left + r.width * fx, y);
+        if (hit && !bar.contains(hit) && hit.id !== "readAloudBtn") return true;
+      }
+      return false;
+    };
+    const check = () => {
+      let bar = document.getElementById("siteNotYou");
+      if (bar && hasOwnNotYou()) { bar.remove(); return; }   // the page drew its own button after all
+      if (!bar) { addNotYouBar(); bar = document.getElementById("siteNotYou"); }
+      if (bar && coveredAtTop(bar)) bar.classList.add("snu-pill");
+    };
+    let queued = false;
+    const later = () => { if (queued) return; queued = true; setTimeout(() => { queued = false; check(); }, 250); };
+    const start = () => {
+      setTimeout(check, 150);
+      if (window.MutationObserver) {
+        const mo = new MutationObserver(later);
+        mo.observe(document.body, { childList: true, subtree: true });
+        setTimeout(() => mo.disconnect(), 20000);
+      }
+    };
+    if (document.readyState === "complete") start(); else window.addEventListener("load", start);
+  })();
+
   const NAME_HELP = "Type your first name and last initial, like Jordan M.";
 
   function fakeResponse(status, data) {
@@ -580,7 +695,7 @@ const TEACHER_TOOLS_URL = "https://script.google.com/macros/s/AKfycbwiVW6Cufw8Dq
   function allowed(target, box) {
     if (!target || !target.closest) return false;
     return target === box || target.closest("label") && target.closest("label").control === box ||
-      target.closest(".name-guard, #langSwitch, .lang-switch");
+      target.closest(".name-guard, #langSwitch, .lang-switch, #siteNotYou");
   }
 
   // Typing: once they start a whole last name, warn right away and keep it from the page.

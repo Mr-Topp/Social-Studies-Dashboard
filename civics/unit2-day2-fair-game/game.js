@@ -369,8 +369,8 @@ const PROMPTS = [
     must: [['tax', 'wage', 'union', 'gun', 'health', 'red tape', 'police', 'border', 'school', 'college', 'energy', 'pollution', 'business'], ['farm', 'veteran', 'vets']], msg: 'In answer 1, name a disagreement AND a goal they share (like farmers or veterans).' },
   { id: 'why', short: 'Party vs. beliefs', label: '2. Pick Rosa, Tyler, or Priya. What do they believe that doesn\'t match their party?', stem: '___ is a ___, but ___. That shows ___.', min: 60,
     must: [['rosa', 'tyler', 'priya']], msg: 'In answer 2, name Rosa, Tyler, or Priya and the belief that doesn\'t match.' },
-  { id: 'crit', optional: true, short: '⭐ Level 4 challenge', label: '⭐ Level 4 challenge (optional, +300 🌽): Most Iowa voters only have two big parties to pick from. Is that good or bad for people like Walt or Dana? Give one plus AND one minus.', stem: 'One plus is ___. One minus is ___. Overall I think ___ because ___.', min: 90,
-    must: [['plus', 'good', 'help', 'benefit'], ['minus', 'bad', 'problem', 'hurt', 'downside']], msg: 'For the Level 4 challenge, give one plus AND one minus.' }
+  { id: 'crit', optional: true, short: '⭐ Go deeper', label: '⭐ Go deeper (optional, +300 🌽): Most Iowa voters only have two big parties to pick from. Is that good or bad for people like Walt or Dana? Give one plus AND one minus.', stem: 'One plus is ___. One minus is ___. Overall I think ___ because ___.', min: 90,
+    must: [['plus', 'good', 'help', 'benefit'], ['minus', 'bad', 'problem', 'hurt', 'downside']], msg: 'For Go deeper, give one plus AND one minus.' }
 ];
 const WHY_WORDS = { rosa: ['tax', 'taxes', 'red tape', 'permit', 'business', 'marijuana', 'bakery', 'republican'], tyler: ['gun', 'guns', 'hunt', 'hunting', 'rifle'], priya: ['adults', 'own time', 'freedom', 'personal', 'democrat', 'choices'] };
 const hasWord = (t, w) => new RegExp('\\b' + w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + (w.length > 4 ? '' : '\\b')).test(t);
@@ -387,8 +387,7 @@ function pFinal() {
   const rank = [{ s: st.score, me: true }].concat((liveOthers().length ? liveOthers().map(p => ({ s: p.score })) : st.bots)).sort((a, b) => b.s - a.s).findIndex(x => x.me) + 1;
   tray.classList.add('final-tray');
   tray.innerHTML = `<div class="final"><div><p class="eyebrow">FAIR'S OVER</p><p class="big">🌽 ${st.score.toLocaleString()} corn</p><p class="jarline">#${rank} in the class race</p>
-    <ul><li>Signed up: <b>${signed}</b> · Sent honestly to the other booth: <b>${honest}</b> · Walked away: <b>${ORDER.length - signed - honest}</b></li>
-    <li>Spotted what shaped them (first try): <b>${ft.out.clue[0]} of ${ORDER.length}</b></li><li>Idea map (first try): <b>${ft.out.map[0]} of ${ORDER.length}</b></li><li>Right pitch: <b>${ft.out.pitch[0]} of ${ORDER.length}</b></li><li>Quick checks (first try): <b>${ft.out.checks[0]} of ${ft.out.checks[1]}</b></li></ul>
+    <ul><li>Signed up: <b>${signed}</b> · Sent honestly to the other booth: <b>${honest}</b> · Walked away: <b>${ORDER.length - signed - honest}</b></li></ul>
     <p class="note">${ORDER.map(id => { const r = st.res[id] || {}; return `${FOLK[id].name} ${r.pitch === 'walked' ? '😕' : r.pitch === 'honest' ? '🤝' : '✅'}`; }).join(' · ')}</p></div>
     <div>${PROMPTS.map(p => `<label for="w_${p.id}" style="display:block;font-weight:850;margin:10px 0 2px${p.optional ? ';color:#7a5800' : ''}">${esc(p.label)}</label><p class="stem">Starter: ${esc(p.stem)}</p><textarea id="w_${p.id}">${esc(st.writing[p.id] || '')}</textarea>`).join('')}
     <button class="primary go" id="sendBtn">${st.turnedIn ? 'Turn in again' : 'Turn in'}</button><p class="fb ${st.turnedIn ? 'good' : ''}" id="sendMsg">${st.turnedIn ? 'Turned in! You can fix your answers and turn in again.' : ''}</p></div></div>`;

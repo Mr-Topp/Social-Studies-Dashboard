@@ -64,7 +64,7 @@ input:focus,textarea:focus,button:focus{outline:3px solid #6aa5bf;outline-offset
 @media(max-width:900px){.layout{grid-template-columns:1fr}.scan{height:68vh;min-height:400px}.directions ol{display:block}}
 @media print{header{background:white;color:black;border-bottom:2px solid black}.reading,.day-tabs,.actions,.reader-tools{display:none!important}.layout{display:block}.panel{box-shadow:none}}
 </style>
-<script src="../shared/assignments.js?v=20261103c"></script><script src="../shared/turnin.js?v=20261103c"></script></head>
+<script src="../shared/assignments.js?v=20261103c"></script><script src="../shared/turnin.js?v=20261103d"></script></head>
 <body>
 <header><div class="wrap"><div class="kicker">U.S. History · World War II</div><h1>Read. Look. Answer.</h1></div></header>
 <main class="wrap">
@@ -217,7 +217,7 @@ function paintChoices(){
 }
 function updateProgress(){
  const d=DAYS[dayIndex],done=d.checks.filter((_,i)=>sectionHasAllCorrect(dayIndex,i)&&getAnswer(i,'us').trim()).length;
- $('answerProgress').textContent=done+' of 6 sections done · '+countPageCorrect(dayIndex)+' of '+pageTotal(d)+' reading questions right';
+ $('answerProgress').textContent=done+' of 6 sections done · '+countPageCorrect(dayIndex)+' of '+pageTotal(d)+' reading questions done';
  $('progressFill').style.width=(done/6*100)+'%';
  if($('nextCheck'))$('nextCheck').disabled=checkIndex===5||!sectionHasAllCorrect(dayIndex,checkIndex)||!$('usAnswer').value.trim();
 }
@@ -225,7 +225,7 @@ function countPageCorrect(dIndex){let total=0;const d=DAYS[dIndex];for(let i=0;i
 function updateReadState(secondsLeft=0){
  const d=DAYS[dayIndex],read=sectionRead.has(pageNow),allCorrect=sectionHasAllCorrect(dayIndex,checkIndex),correct=isCurrentCorrect();
  const size=groupSize(d),done=Array.from({length:size},(_,n)=>getPageAnswer(dayIndex,sectionStart+n)===PAGE_QUESTIONS[dayIndex][sectionStart+n-d.start][1]).filter(Boolean).length;
- $('currentPage').textContent=pageLabel(d,pageNow)+' · '+(pageNow-sectionStart+1)+' of '+size+' · '+done+' of '+size+' correct'+(!read?' · '+secondsLeft+' sec':'');
+ $('currentPage').textContent=pageLabel(d,pageNow)+' · '+(pageNow-sectionStart+1)+' of '+size+' · '+done+' of '+size+' done'+(!read?' · '+secondsLeft+' sec':'');
  $('prevPage').disabled=pageNow===sectionStart;
  $('nextPage').disabled=pageNow===sectionEnd||!correct;
  $('usAnswer').disabled=!allCorrect;
@@ -255,11 +255,12 @@ function showCheck(){
  const d=DAYS[dayIndex],start=d.start+checkIndex*groupSize(d),end=start+groupSize(d)-1;sectionStart=start;sectionEnd=end;sectionRead=loadReadPages();zoomed=false;$('pageImage').classList.remove('zoomed');$('zoomBtn').textContent='Make page bigger';$('zoomBtn').setAttribute('aria-pressed','false');$('zoomBtn').hidden=false;$('assignmentTitle').textContent=d.day;$('checkTitle').textContent=d.preview?'Read book pages '+(start*2)+'–'+(start*2+1):d.pdfPreview?'Read comic '+(start-3):'Read pages '+printedPage(d,start)+'–'+printedPage(d,end);$('checkCount').textContent=(checkIndex+1)+' / 6';$('pageRange').textContent=d.preview?'Official free preview: pages 2–13.':d.pdfPreview?'Six upright Smithsonian comics, one at a time.':'Only book pages '+printedPage(d,start)+'–'+printedPage(d,end)+' are shown.';$('sourceCredit').hidden=!d.preview;$('smithsonianCredit').hidden=!d.pdfPreview;$('readerHint').textContent=d.preview?'Read the publisher’s spread. A correct answer unlocks your U.S. history response.':d.pdfPreview?'Read this comic. A correct answer unlocks your U.S. history response.':'Read each page. A correct answer opens the next page.';$('dayPlan').textContent=d.preview?'Read the comic. Answer both questions.':d.pdfPreview?'Read the comic. Answer both questions.':'Read the pages. Answer both questions.';$('factText').textContent=d.facts[checkIndex];$('usQuestionText').textContent=d.checks[checkIndex][1];$('usAnswer').value=getAnswer(checkIndex,'us');$('prevCheck').disabled=checkIndex===0;setPage(start);updateProgress()
 }
 function showDay(i){
- saveCurrent();dayIndex=i;checkIndex=0;const d=DAYS[i];document.querySelectorAll('.day-tab').forEach((b,n)=>b.classList.toggle('active',n===i));$('dayLabel').textContent=d.day;$('bookTitle').textContent=d.book;$('studentName').value=localStorage.getItem('wwii-reading-name')||'';$('status').textContent='';showCheck()
+ saveCurrent();dayIndex=i;checkIndex=0;const d=DAYS[i];document.querySelectorAll('.day-tab').forEach((b,n)=>b.classList.toggle('active',n===i));$('dayLabel').textContent=d.day;$('bookTitle').textContent=d.book;$('status').textContent='';showCheck()
 }
 $('dayTabs').innerHTML=DAYS.map((d,i)=>'<button type="button" class="day-tab'+(i===0?' active':'')+'" data-day="'+i+'">'+d.day+'</button>').join('');
 document.querySelectorAll('.day-tab').forEach(b=>b.addEventListener('click',()=>showDay(Number(b.dataset.day))));
-$('studentName').addEventListener('input',()=>localStorage.setItem('wwii-reading-name',$('studentName').value));
+// The name box is filled from the name signed in on this Chromebook (shared/turnin.js), never from a name an earlier student typed here.
+try{localStorage.removeItem('wwii-reading-name')}catch(e){}
 $('usAnswer').addEventListener('input',()=>{saveCurrent();$('status').textContent='Saved on this device.'});
 $('prevPage').addEventListener('click',()=>setPage(pageNow-1));
 $('nextPage').addEventListener('click',()=>{if(isCurrentCorrect())setPage(pageNow+1)});
