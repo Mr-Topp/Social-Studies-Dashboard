@@ -374,7 +374,7 @@ window.CLASS_ASSIGNMENTS = {
   "gov-u6-d1-checks-balances": { course: "government", unit: 6, day: 1, title: "Day 1 · Branch Wars", path: "civics/gov-u6-d1-checks-balances/", std: ["SS.9-12.Gov.4", "SS.9-12.Gov.9"] },
   "gov-u6-d2-iowa-government": { course: "government", unit: 6, day: 2, title: "Day 2 · Who Do I Call?", path: "civics/gov-u6-d2-iowa-government/", std: ["SS.9-12.Gov.18", "SS.9-12.Gov.19", "SS.9-12.Gov.20"] },
   "wh-u2-d4-china": { course: "world-history", unit: 2, day: 2, title: "Day 2 · Paper Harvest: Can One Leader Remake a Country?", path: "world-history/u2-d4-china/", std: ["SS.9-12.WH.34", "SS.9-12.WH.35", "SS.9-12.WH.38"] },
-  "wh-u2-d6-empires-end": { course: "world-history", unit: 2, day: 4, title: "Day 4 · Empire's End: How Do Colonies Get Free?", path: "world-history/u2-d6-empires-end/", std: ["SS.9-12.WH.36", "SS.9-12.WH.34"] },
+  "wh-u2-d6-empires-end": { course: "world-history", unit: 2, day: 4, title: "Day 4 · Break the Grip: How Do Colonies Get Free?", path: "world-history/u2-d6-empires-end/", std: ["SS.9-12.WH.36", "SS.9-12.WH.34"] },
   "wh-u2-d7-africa": { course: "world-history", unit: 2, day: 5, title: "Day 5 · Africa: What Would Freedom Day Feel Like?", path: "world-history/u2-d7-africa/", std: ["SS.9-12.WH.36", "SS.9-12.WH.34", "SS.9-12.WH.37"] },
   "wh-u2-d8-vietnam": { course: "world-history", unit: 2, day: 6, title: "Day 6 · Vietnam: Who Should Decide a Nation's Future?", path: "world-history/u2-d8-vietnam/", std: ["SS.9-12.WH.36", "SS.9-12.WH.37", "SS.9-12.WH.34"] },
   "wh-u2-d11-1989": { course: "world-history", unit: 2, day: 8, title: "Day 8 · 1989: How Does a Wall Come Down?", path: "world-history/u2-d11-1989/", std: ["SS.9-12.WH.34", "SS.9-12.WH.37", "SS.9-12.WH.35"] },

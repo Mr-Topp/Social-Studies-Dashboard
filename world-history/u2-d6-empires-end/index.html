@@ -1,157 +1,263 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Empire's End: How Do Colonies Get Free? | World History Unit 2 Day 4</title>
-<meta name="description" content="Organize for India's independence from Britain, live through Partition, and compare other paths to freedom after World War II.">
+<title>Break the Grip | World History Unit 2 Day 4</title>
+<meta name="description" content="India, 1930. Lead the push to make the British Empire leave. Pick tactics, face Britain's reaction, then the Cold War superpowers come calling.">
 <style>
-:root{--ink:#22262b;--muted:#59606a;--paper:#f7f5ef;--card:#fff;--line:#ddd6c6;--accent:#1c6b4a;--accent2:#b5600f;--soft:#e9f3ee;--glow:#1c6b4a2e;--green:#2a6b45;--bad:#a2392f;--hdr:linear-gradient(180deg,#fbe9d6 0 33%,#ffffff 33% 66%,#e2f0e8 66% 100%);--srcbg:#fdf6ee;--srcline:#ecd9c2}
+:root{--ink:#1d2433;--muted:#5d6577;--paper:#fff8ec;--card:#fffdf8;--line:#ecdcc2;--saf:#f08a24;--saf2:#ffe7cc;--grn:#138a4a;--grn2:#e0f4e8;--navy:#23356b;--navy2:#e5eaf7;--red:#c42a2a;--red2:#fde2e0;--bad:#b0261f;--gold:#f2b11f;--gold2:#fff1c9;--gray:#6b6f7a}
 *{box-sizing:border-box}
-html,body{overflow-x:hidden}
-body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.5 system-ui,Segoe UI,Arial,sans-serif}
-header{background:var(--hdr);border-bottom:5px solid var(--accent);padding:16px max(16px,calc((100vw - 900px)/2)) 12px}
-.k{font-size:.78rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin:0}
-h1{margin:2px 0 4px;font-size:clamp(1.6rem,3.4vw,2.3rem);line-height:1.15}
-.std{margin:2px 0;font-size:.92rem;color:var(--muted)}.std b{color:var(--ink)}
-.hud{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line);padding:8px max(16px,calc((100vw - 900px)/2));display:flex;gap:10px 12px;flex-wrap:wrap;align-items:center;font-weight:800;font-size:.92rem;box-shadow:0 2px 8px #1f2b3312}
-.hud .bar{flex:1;min-width:110px;height:10px;background:#e6e6de;border-radius:9px;overflow:hidden}.hud .bar span{display:block;height:100%;width:0;background:var(--accent);transition:width .4s}
-.pill{background:#f0efe8;border-radius:20px;padding:3px 10px;white-space:nowrap}
-.meter{display:flex;align-items:center;gap:6px}.meter .track{width:90px;height:10px;border-radius:9px;background:#e6e6de;overflow:hidden}.meter .track span{display:block;height:100%;background:var(--accent2);transition:width .5s}
-main{max-width:900px;margin:auto;padding:14px 16px 60px}
-.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;box-shadow:0 3px 12px #1f2b330d}
-.kicker{font-size:.78rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:var(--accent2);margin:0}
-h2{margin:2px 0 10px;font-size:1.45rem}
-.teach{background:var(--soft);border-left:5px solid var(--accent);border-radius:9px;padding:10px 14px;margin:0 0 12px}.teach p{margin:6px 0}.teach b{color:var(--accent)}
-.block{margin:14px 0;padding:14px;border-radius:12px;border:2px solid var(--line);background:#fff}
-.block.current{border-color:var(--ink);box-shadow:0 0 0 4px var(--glow)}
-.block h3{margin:0 0 10px;font-size:1.06rem;line-height:1.4;font-weight:700}
-.block.note p{margin:6px 0}
-.event{background:#fbf9f4;border-style:dashed;border-color:#cdbf9a}.event.current{border-style:solid}
-.event-body p{margin:6px 0}
-.picked{margin:10px 0 4px;color:var(--muted)}.result{background:#f0efe8;border-radius:9px;padding:9px 12px}.result p{margin:4px 0}
-.tag{display:inline-block;font-weight:900;font-size:.8rem;border-radius:12px;padding:2px 9px;margin-right:6px}.tag.up{background:#dcefe2;color:var(--green)}.tag.down{background:#f6dcd8;color:var(--bad)}.tag.flat{background:#ebe9e0;color:var(--ink)}
-.qlabel{font-size:.75rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin:0 0 4px}
-.choices{display:grid;gap:8px}
-@media(min-width:700px){.q .choices{grid-template-columns:1fr 1fr}}
-button{font:inherit;cursor:pointer;border-radius:10px;min-height:46px}
-.choice{text-align:left;background:#fff;color:var(--ink);border:2px solid #cfcdbf;padding:10px 12px;font-weight:650;line-height:1.3}
-.choice:hover:not(:disabled){border-color:var(--ink);background:#fcfcfa}.choice:disabled{opacity:.5;cursor:not-allowed}
-.go{margin-top:12px;background:var(--accent);color:#fff;border:0;padding:11px 18px;font-weight:900}
+html,body{overflow-x:clip}
+body{margin:0;background:radial-gradient(circle at 10% 0,#ffe2bf 0,transparent 38%),radial-gradient(circle at 92% 6%,#d7f0df 0,transparent 34%),var(--paper);color:var(--ink);font:17px/1.42 system-ui,Segoe UI,Arial,sans-serif;min-height:100vh}
+[hidden]{display:none!important}
+.topline{background:var(--ink);color:#fff;padding:5px max(14px,calc((100vw - 1000px)/2));font-size:.82rem;display:flex;gap:10px;flex-wrap:wrap;justify-content:space-between}
+.topline b{color:var(--gold2)}
+/* ---------- HUD ---------- */
+#hud{position:sticky;top:0;z-index:20;background:#fffdf8;border-bottom:4px solid var(--saf);box-shadow:0 3px 10px #1d243314;padding:6px max(12px,calc((100vw - 1000px)/2));display:flex;flex-wrap:wrap;gap:5px 12px;align-items:center}
+.pill{background:#f3e7d3;border-radius:20px;padding:3px 10px;font-weight:900;font-size:.84rem;white-space:nowrap}
+.pill.year{background:var(--ink);color:#fff}
+.m{display:flex;align-items:center;gap:5px;font-weight:850;font-size:.84rem;white-space:nowrap;position:relative}
+.bar{width:70px;height:11px;border-radius:9px;background:#eadfcf;overflow:hidden}
+.bar span{display:block;height:100%;width:0;transition:width .7s ease;background:var(--saf)}
+.bar.world span{background:var(--navy)}
+.m b{min-width:18px}
+.m.bump{animation:bump .7s}
+@keyframes bump{30%{transform:scale(1.14)}}
+.delta{position:absolute;right:-6px;top:-14px;font-weight:1000;font-size:.85rem;animation:floatup 1.6s forwards;pointer-events:none}
+.delta.up{color:var(--grn)}.delta.down{color:var(--bad)}
+@keyframes floatup{0%{opacity:0;transform:translateY(6px)}20%{opacity:1}100%{opacity:0;transform:translateY(-14px)}}
+.hearts{display:flex;align-items:center;gap:1px;font-size:.9rem;font-weight:850}
+.hearts i{font-style:normal;filter:grayscale(1);opacity:.85}
+.row2{display:flex;gap:10px;align-items:center;flex-wrap:wrap;width:100%}
+.chainbox{display:flex;align-items:center;gap:6px;font-weight:900;font-size:.84rem}
+.chain{display:flex;gap:0;align-items:center}
+.link{width:22px;height:13px;border:3px solid var(--red);border-radius:8px;margin-left:-5px;background:transparent;transition:all .5s}
+.link:first-child{margin-left:0}
+.link:nth-child(even){height:9px;width:18px;border-color:#9d1f1f}
+.link.broken{border-color:#d8cfc0;border-style:dashed;transform:rotate(25deg) translateY(3px);opacity:.55}
+.link.snap{animation:snap .7s}
+@keyframes snap{0%{transform:scale(1.6);border-color:var(--gold)}50%{transform:rotate(40deg) translateY(-6px)}}
+.link.forge{animation:forge .8s}
+@keyframes forge{0%{box-shadow:0 0 0 6px #ff9a3c;transform:scale(1.4)}}
+.chainnum{min-width:34px}
+.rival{display:flex;align-items:center;gap:6px;background:var(--red2);border:2px solid var(--red);border-radius:30px;padding:2px 10px 2px 3px;font-weight:900;font-size:.82rem;margin-left:auto}
+.rface{width:30px;height:30px;border-radius:50%;background:#fff;display:grid;place-items:center;font-size:1.15rem}
+.rmood{color:var(--bad);font-weight:800}
+.rival.gone{background:#eee;border-color:#888}.rival.gone .rmood{color:#555}
+.rival.mad{animation:shake .5s}
+/* ---------- Layout ---------- */
+main{max-width:1000px;margin:auto;padding:12px 14px 70px}
+.welcome{background:var(--grn2);color:var(--grn);font-weight:800;border-radius:9px;padding:8px 12px;margin:0 0 10px}
+.notme{min-height:36px;margin-left:8px;padding:4px 10px;font-size:.85rem;font-weight:800;background:#fff;color:var(--ink);border:2px solid var(--ink)}
+.card{background:var(--card);border:3px solid var(--ink);border-radius:18px;padding:16px;box-shadow:0 6px 0 var(--ink)}
+h1{margin:0 0 4px;font-size:clamp(2.4rem,5.6vw,3.7rem);line-height:1;letter-spacing:-.02em;color:var(--ink);text-shadow:3px 3px 0 var(--saf)}
+h2{margin:2px 0 8px;font-size:1.45rem;line-height:1.15}
+p{margin:6px 0}
+/* Title */
+.titlecard{display:grid;grid-template-columns:1.1fr .9fr;gap:20px;align-items:center;background:linear-gradient(125deg,#fffdf8 55%,#ffe9cf)}
+.hook{font-size:1.2rem;font-weight:750;margin:4px 0 8px}
+.how{list-style:none;padding:0;margin:6px 0;display:grid;gap:3px;font-weight:800}
+.meta{color:var(--muted);font-weight:800;font-size:.9rem}
+.goal{background:var(--gold2);border-left:6px solid var(--gold);border-radius:10px;padding:7px 11px;font-weight:700}
+.heads{font-size:.88rem;color:var(--muted);font-weight:700}
+label{display:block;font-weight:850;margin:8px 0 4px}
+input,textarea{width:100%;font:inherit;border:2px solid #cdb998;border-radius:10px;padding:9px 10px;background:#fff;color:var(--ink)}
+.art{display:grid;justify-items:center;gap:10px}
+.bigchain{display:flex;align-items:center;justify-content:center;padding:18px 10px;background:#fff;border:3px solid var(--ink);border-radius:16px;box-shadow:5px 6px 0 var(--saf);transform:rotate(-2deg);width:100%;max-width:330px;position:relative}
+.bigchain .link{width:40px;height:24px;border-width:5px;margin-left:-9px}
+.bigchain .link:nth-child(even){width:32px;height:16px}
+.bigchain .crack{position:absolute;font-size:2.2rem;left:50%;top:50%;transform:translate(-50%,-60%)}
+.flagband{height:12px;border-radius:6px;width:100%;max-width:330px;background:linear-gradient(90deg,var(--saf) 0 33%,#fff 33% 66%,var(--grn) 66%);border:2px solid var(--ink)}
+/* Buttons */
+button{font:inherit;cursor:pointer;border-radius:12px;min-height:46px}
 button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid #2f7dbd;outline-offset:2px}
-.answered{font-weight:800;color:var(--green);margin:4px 0}.why{margin:2px 0;color:var(--muted)}
-.msg{min-height:1.3em;font-weight:750;margin:8px 0 0}.msg.bad{color:var(--bad)}.msg.good{color:var(--green)}
-label{display:block;font-weight:850;margin:14px 0 4px}.stem{margin:0 0 4px;color:var(--muted);font-size:.92rem}
-input,textarea{width:100%;font:inherit;border:2px solid #cfcdbf;border-radius:9px;padding:10px;background:#fff;color:var(--ink)}
-.steps{display:grid;gap:6px;margin:10px 0;padding:0;list-style:none}.steps li{background:#f0efe8;border-radius:9px;padding:8px 12px;font-weight:700}
-.src-card{background:var(--srcbg);border:1px solid var(--srcline);border-left:5px solid var(--accent2);border-radius:10px;padding:10px 12px;margin:0 0 10px;font-weight:400}
-.src-card .who{font-size:.75rem;font-weight:900;letter-spacing:.06em;text-transform:uppercase;color:var(--accent2);margin-bottom:3px}
-.src-card p{margin:3px 0}
-.src-card q,.src-card .quote{font-style:italic}
-.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px;margin:8px 0}.facts div{background:#fff;border:1px solid var(--line);border-radius:9px;padding:7px 10px;font-size:.92rem}.facts b{display:block;color:var(--accent)}
-.duo{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:8px 0}.duo div{border-radius:10px;padding:8px 10px;font-size:.93rem;background:#f0efe8}.duo b{display:block}
-@media(max-width:640px){.duo{grid-template-columns:1fr}}
-.welcome{background:#e6f1ea;color:var(--green);font-weight:800;border-radius:9px;padding:8px 12px;margin:0 0 10px}
-.foot{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-top:14px;color:var(--muted);font-size:.85rem}
-.foot button{background:#ebe9e0;border:0;padding:8px 12px;font-weight:800;color:var(--ink)}
-.src{font-size:.8rem;color:var(--muted)}
-.report{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:8px;margin:8px 0}.report div{background:#f0efe8;border-radius:10px;padding:8px;text-align:center;font-size:.9rem}.report b{display:block;font-size:1.3rem}
-@media print{.hud,.foot,.go{display:none}}
-
+.go{margin-top:12px;background:var(--grn);color:#fff;border:3px solid var(--ink);padding:10px 22px;font-weight:1000;font-size:1.05rem;box-shadow:0 4px 0 var(--ink);transition:transform .1s}
+.go:hover:not(:disabled){transform:translateY(-2px)}
+.go:active{transform:translateY(2px);box-shadow:0 2px 0 var(--ink)}
+.go.big{font-size:1.25rem;padding:13px 26px;width:100%;max-width:380px}
+.go:disabled{background:#a9a59c;cursor:not-allowed}
+/* Scene banner */
+.banner{position:relative;border-radius:14px;border:3px solid var(--ink);padding:10px 14px;margin:0 0 12px;min-height:96px;display:flex;align-items:flex-end;justify-content:space-between;gap:10px;overflow:hidden;background:linear-gradient(180deg,#ffd79a 0,#ffb86b 55%,#e7c48a 56%,#d4a865 100%)}
+.banner.sea{background:linear-gradient(180deg,#ffd79a 0,#ffc58a 45%,#4aa3c9 46%,#2f7fa8 70%,#f1dfb5 71%,#e7cf9a 100%)}
+.banner.gray{background:linear-gradient(180deg,#cfd3da 0,#a9afba 55%,#7d8494 56%,#666d7c 100%);color:#fff}
+.banner.night{background:linear-gradient(180deg,#22305e 0,#4b3d73 60%,#2c2a44 61%,#201f33 100%);color:#fff}
+.banner.green{background:linear-gradient(180deg,#bfe6cc 0,#8fd0a6 55%,#e8d3a2 56%,#d9bd82 100%)}
+.banner.cold{background:linear-gradient(90deg,#cfe0ff 0 49%,#ffd2cf 51% 100%)}
+.banner .yr{background:var(--ink);color:#fff;font-weight:1000;border-radius:9px;padding:3px 10px;font-size:.95rem;display:inline-block}
+.banner .place{display:inline-block;background:#fffdf8;color:var(--ink);font-weight:850;border-radius:8px;padding:2px 9px;font-size:.88rem;margin-top:4px}
+.banner .em{font-size:2.6rem;line-height:1;letter-spacing:4px;filter:drop-shadow(0 3px 0 #0003)}
+.realtag{display:inline-block;background:var(--navy);color:#fff;font-weight:1000;font-size:.74rem;letter-spacing:.08em;border-radius:7px;padding:2px 8px;margin:0 0 4px}
+/* Speech */
+.say{display:flex;gap:9px;align-items:flex-start;margin:8px 0}
+.av{width:48px;height:48px;border-radius:50%;border:3px solid var(--ink);display:grid;place-items:center;font-size:1.6rem;flex:none;background:#fff}
+.av.brit{background:var(--red2);border-color:var(--red)}
+.av.us{background:var(--navy2);border-color:var(--navy)}
+.av.su{background:#ffd9d6;border-color:#b31010;color:#b31010;font-weight:1000}
+.av.you{background:var(--gold2)}
+.bubble{position:relative;background:#fff;border:3px solid var(--ink);border-radius:14px;padding:7px 12px;font-weight:750;font-size:1.05rem;max-width:560px}
+.bubble::before{content:"";position:absolute;left:-12px;top:12px;border:9px solid transparent;border-right-color:var(--ink);border-left:0}
+.bubble.mad{border-color:var(--bad);color:var(--bad)}.bubble.mad::before{border-right-color:var(--bad)}
+.who{font-size:.72rem;font-weight:1000;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);display:block}
+.envoys{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.lead{font-size:1.1rem;font-weight:800;margin:6px 0}
+/* Evidence docs */
+.doc{position:relative;background:#fffef6;border:3px solid var(--ink);border-radius:12px;padding:12px 14px;box-shadow:0 5px 0 var(--ink);margin:12px 0}
+.doc .dh{display:inline-block;background:var(--ink);color:#fff;font-weight:1000;font-size:.76rem;letter-spacing:.08em;text-transform:uppercase;border-radius:7px;padding:3px 9px;margin:0 0 6px}
+.doc.shake{animation:shake .5s}
+@keyframes shake{20%{transform:translateX(-7px)}40%{transform:translateX(7px)}60%{transform:translateX(-4px)}80%{transform:translateX(4px)}}
+.news{background:#f7f3e8;border:2px solid #b8ab8c;border-radius:6px;padding:10px 12px;font-family:Georgia,serif;background-image:repeating-linear-gradient(90deg,transparent 0 48%,#e3dccb 48% 48.4%,transparent 48.4% 100%)}
+.news .mast{font-weight:900;letter-spacing:.12em;text-transform:uppercase;font-size:.85rem;border-bottom:3px double #5b5240;padding-bottom:3px;display:flex;justify-content:space-between}
+.news .hl{font-size:1.35rem;font-weight:900;line-height:1.2;margin:8px 0 4px}
+.news .by{font-size:.9rem;font-style:italic}
+.quote{font-family:Georgia,serif;font-size:1.25rem;font-weight:700;line-height:1.3;border-left:6px solid var(--saf);padding:4px 12px;margin:6px 0;background:#fff}
+.quote .by{display:block;font-size:.88rem;font-style:italic;font-weight:600;color:var(--muted);margin-top:4px}
+.src{font-size:.78rem;color:var(--muted);margin:4px 0}
+.gloss{font-weight:850;background:var(--navy2);border-radius:9px;padding:5px 10px;display:inline-block;margin:4px 0}
+.facts{align-items:center}.facts .fl{font-weight:900;font-size:.9rem}.facts .chip{font-size:.85rem}
+.ask{font-weight:900;font-size:1.08rem;margin:10px 0 6px}
+.opts{display:grid;gap:9px}
+@media(min-width:720px){.opts{grid-template-columns:1fr 1fr}}
+.opt{text-align:left;background:#fff;color:var(--ink);border:3px solid var(--ink);box-shadow:0 4px 0 var(--ink);padding:10px 12px 10px 44px;font-weight:800;line-height:1.25;position:relative;transition:transform .1s}
+.opt::before{content:"🔎";position:absolute;left:12px;top:50%;transform:translateY(-50%)}
+.opt:hover:not(:disabled){transform:translateY(-2px);background:var(--gold2)}
+.opt:disabled{opacity:.5;cursor:not-allowed}
+.opt.nope{background:#ffe3df;border-color:var(--bad)}
+.opt.yes,.opt.yes:disabled{background:var(--grn2);border-color:var(--grn);opacity:1;cursor:default}
+.msg{min-height:1.2em;font-weight:800;margin:8px 0 0}.msg.bad{color:var(--bad)}.msg.good{color:var(--grn)}
+.stamp{position:absolute;right:14px;top:-16px;z-index:3;background:#fff;color:var(--grn);border:4px solid var(--grn);border-radius:8px;padding:2px 12px;font-weight:1000;font-size:1.05rem;letter-spacing:.08em;text-transform:uppercase;transform:rotate(-7deg);font-family:Georgia,serif}
+.stamp.red{color:var(--bad);border-color:var(--bad)}
+.stamp.slam{animation:slam .45s cubic-bezier(.2,1.6,.4,1)}
+@keyframes slam{0%{transform:rotate(-7deg) scale(2.8);opacity:0}100%{transform:rotate(-7deg) scale(1);opacity:1}}
+.reveal{display:flex;flex-wrap:wrap;gap:4px 6px;align-items:baseline;background:var(--gold2);border:2px solid var(--gold);border-left:7px solid var(--saf);border-radius:10px;padding:8px 12px;margin:10px 0;font-size:1.05rem;animation:pop .4s}
+.reveal .term{color:#b4580a;font-weight:1000}
+.reveal .term::before{content:"💡 "}
+.reveal .term::after{content:":"}
+@keyframes pop{0%{transform:scale(.92)}60%{transform:scale(1.03)}}
+/* Decision cards */
+.decide{display:grid;gap:12px;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));margin:10px 0}
+.dcard{background:#fff;border:3px solid var(--ink);box-shadow:0 5px 0 var(--ink);padding:12px;display:flex;flex-direction:column;align-items:center;gap:4px;text-align:center;color:var(--ink);transition:transform .12s}
+.dcard:hover:not(:disabled){transform:translateY(-3px) rotate(-.5deg);background:var(--saf2)}
+.dcard .ic{font-size:2.4rem;line-height:1}
+.dcard .ct{font-weight:1000;font-size:1.08rem}
+.dcard .cd{font-size:.88rem;color:var(--muted);font-weight:700}
+.dcard.sel{background:var(--saf2);border-color:var(--saf);box-shadow:0 5px 0 var(--saf)}
+.dcard:disabled:not(.sel){opacity:.4}
+.dcard.sel:disabled{opacity:1}
+.fx{display:flex;flex-wrap:wrap;gap:4px;justify-content:center;margin-top:4px}
+.fx span{font-size:.8rem;font-weight:900;border-radius:10px;padding:1px 7px;background:#f3e7d3}
+.fx .bad{background:#ffe1dc;color:var(--bad)}.fx .good{background:var(--grn2);color:var(--grn)}
+.result{position:relative;background:#fff;border:3px dashed var(--ink);border-radius:12px;padding:12px 14px;margin:14px 0;font-weight:750;font-size:1.05rem}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0}
+.chip{background:#fff;border:2px solid #e2cfaf;border-radius:20px;padding:3px 11px;font-weight:800;font-size:.92rem}
+.chip.red{background:var(--red2);border-color:var(--red)}
+.chip.grn{background:var(--grn2);border-color:var(--grn)}
+/* Scene art */
+.stage{display:flex;justify-content:space-between;align-items:flex-end;gap:10px;background:linear-gradient(180deg,#fff4e0 0,#fff4e0 60%,#e9d3a6 60%);border:3px solid var(--ink);border-radius:14px;padding:12px 16px 8px;font-size:2rem;margin:8px 0;min-height:92px}
+.stage .side{display:flex;gap:2px;flex-wrap:wrap}
+.stage .gate{font-size:2.4rem}
+.stage small{display:block;font-size:.75rem;font-weight:900;text-align:center;color:var(--muted)}
+.notice{background:#fff;border:3px solid var(--red);border-radius:6px;padding:10px 12px;font-family:Georgia,serif;text-align:center;max-width:420px;margin:8px auto;box-shadow:0 4px 0 var(--red);transform:rotate(-1deg)}
+.notice .nh{font-weight:900;letter-spacing:.12em;color:var(--red);font-size:.85rem}
+.notice .nb{font-size:1.2rem;font-weight:900}
+/* Ledger */
+.ledger{display:grid;gap:8px}
+.lrow{display:grid;grid-template-columns:150px 1fr;gap:10px;align-items:center;font-weight:850}
+.ltrack{height:26px;background:#f1e6d4;border-radius:6px;overflow:hidden;position:relative}
+.ltrack span{display:block;height:100%;background:var(--grn);animation:grow 1.2s ease-out;border-radius:6px}
+.ltrack em{position:absolute;left:8px;top:3px;font-style:normal;font-weight:1000;color:var(--ink)}
+@keyframes grow{from{width:0}}
+.lchips{display:flex;gap:8px;flex-wrap:wrap}
+.lchips span{background:var(--red2);border:2px solid var(--red);border-radius:10px;padding:4px 10px;font-weight:900}
+.lchips span.blue{background:var(--navy2);border-color:var(--navy)}
+.drain{background:var(--ink);color:#fff;border-radius:12px;padding:10px 14px;margin:10px 0;font-weight:900;display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center;animation:pop .5s}
+.drain .big{font-size:1.3rem;color:var(--gold)}
+/* Maps */
+.mapwrap{background:#dff0fa;border:3px solid var(--ink);border-radius:12px;padding:6px;margin:6px 0}
+.mapwrap svg{display:block;width:100%;height:auto;max-height:340px}
+.toll{display:inline-block;background:var(--ink);color:#fff;border-radius:10px;padding:6px 14px;font-weight:900;margin:8px 0}
+.pin{cursor:pointer}
+.pin circle{transition:r .2s}
+.pin:hover circle.dot,.pin:focus circle.dot{r:13}
+.pin:focus{outline:none}
+.pin:focus-visible circle.ring{stroke:#2f7dbd;stroke-width:4}
+.pinbtns{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin:8px 0}
+.pinbtn{background:#fff;border:3px solid var(--ink);box-shadow:0 4px 0 var(--ink);padding:6px 14px;font-weight:1000}
+.pinbtn.seen{background:var(--grn2);border-color:var(--grn)}
+.files{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:10px;margin:8px 0}
+.file{background:#f4ecdc;border:3px solid #b49a6e;border-radius:12px;padding:10px;font-weight:800;animation:flip .55s}
+.file.home{background:var(--saf2);border-color:var(--saf)}
+@keyframes flip{0%{transform:rotateY(90deg)}100%{transform:rotateY(0)}}
+.file .fh{font-weight:1000;font-size:1.1rem;display:flex;justify-content:space-between;align-items:center}
+.file .free{background:var(--grn);color:#fff;border-radius:8px;padding:1px 8px;font-size:.85rem}
+.file p{margin:4px 0;font-size:.95rem}
+.file .src{font-weight:500;font-size:.76rem}
+.mapwrap.world svg{max-height:250px}
+.path{display:flex;align-items:center;gap:6px;font-size:.8rem;font-weight:900;margin:6px 0}
+.ptrack{flex:1;height:10px;border-radius:6px;background:linear-gradient(90deg,var(--grn),#e7d07a,var(--red));position:relative}
+.ptrack i{position:absolute;top:-6px;width:20px;height:20px;border-radius:50%;background:#fff;border:3px solid var(--ink);margin-left:-10px}
+/* Ending */
+.ending{text-align:center;border-width:4px;animation:pop .5s}
+.ending .e-icon{font-size:3.4rem;line-height:1}
+.ending h2{color:#b4580a;font-size:1.8rem}
+.ending .eline{font-size:1.1rem;font-weight:750;max-width:640px;margin:6px auto}
+.caused{text-align:left;background:#fff;border:3px dashed var(--ink);border-radius:12px;padding:8px 14px;margin:12px auto 0;max-width:520px}
+.caused .ch{font-weight:1000;color:#b4580a;margin:0}
+.caused ul{margin:4px 0;padding-left:20px}.caused li{font-weight:800;margin:2px 0}
+.endchips{justify-content:center}
+/* Writing */
+.radio{background:#fffef6;background-image:repeating-linear-gradient(#fffef6 0 30px,#eadfcf 30px 31px);border:3px solid var(--ink);border-radius:14px;box-shadow:0 6px 0 var(--ink);padding:12px 16px 16px}
+.tag{display:inline-block;background:var(--ink);color:#fff;font-weight:900;font-size:.8rem;letter-spacing:.06em;text-transform:uppercase;border-radius:8px;padding:3px 10px;margin:0}
+.onair{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:0 0 6px}
+.onair .tag{background:#b0261f}
+.factbox{margin:4px 0 2px}
+.factbox summary{cursor:pointer;display:inline-block;list-style:none;background:var(--gold2);border:2px solid var(--gold);border-radius:20px;padding:3px 12px;font-weight:900;font-size:.88rem}
+.factbox summary::-webkit-details-marker{display:none}
+.factbox summary::after{content:" ▸"}.factbox[open] summary::after{content:" ▾"}
+.factbox .chip{font-size:.82rem;padding:2px 9px}
+.stem{margin:0 0 4px;color:var(--muted);font-size:.95rem;font-weight:700}
+.turned{display:inline-block;background:var(--grn2);color:var(--grn);font-weight:1000;border-radius:10px;padding:6px 14px;margin-top:8px}
+.foot{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin-top:14px;color:var(--muted);font-size:.85rem}
+.foot button{background:#fff;border:2px solid var(--ink);padding:6px 12px;font-weight:800;color:var(--ink)}
+.made{color:var(--muted);font-size:.8rem;margin-top:6px}
+@media(max-width:820px){.titlecard{grid-template-columns:1fr}.art{order:-1}.bigchain{max-width:260px;padding:12px}.bigchain .link{width:30px;height:18px;border-width:4px;margin-left:-7px}.bigchain .link:nth-child(even){width:24px;height:12px}}
+@media(max-width:640px){
+ #hud{gap:4px 8px;padding:5px 8px}
+ #hud .lbl,.rname,.chainbox .lbl{display:none}
+ .pill{font-size:.76rem;padding:2px 8px}
+ .bar{width:46px}
+ .link{width:16px;height:11px;border-width:2px;margin-left:-4px}.link:nth-child(even){width:13px;height:8px}
+ .rival{margin-left:0}
+ .card{padding:12px}
+ .envoys{grid-template-columns:1fr}
+ .decide{grid-template-columns:1fr 1fr;gap:9px}.dcard{padding:9px 6px}.dcard .ic{font-size:2rem}.dcard .ct{font-size:1rem}
+ .banner{min-height:80px}.banner .em{font-size:2rem}
+ .stamp{right:6px;font-size:.9rem}
+ .lrow{grid-template-columns:1fr}
+ .stage{font-size:1.5rem;padding:10px}
+ .stage .gate{font-size:1.8rem}
+}
+@media(max-height:700px) and (min-width:641px){.banner{min-height:62px;padding:6px 12px;margin-bottom:8px}.banner .em{font-size:2rem}.say{margin:5px 0}.decide{margin:6px 0}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+@media print{#hud,.foot,.go{display:none}}
 </style>
 <script src="../../shared/assignments.js?v=20261101fill"></script>
 <script src="../../shared/turnin.js?v=20261102read"></script>
-<script src="../../shared/unit-game.js?v=20261101fill"></script>
 </head><body>
-<header>
-  <p class="k">World History · Unit 2 · Day 4</p>
-  <h1>Empire's End: How Do Colonies Get Free?</h1>
-  <p class="std"><b>Standards:</b> SS.9‑12.WH.36 · SS.9‑12.WH.34</p>
-  <p class="std"><b>Goal:</b> Explain how India won independence from Britain, what Partition cost, and how other colonies' paths compared. · About 25 minutes.</p>
-</header>
-<div class="hud" aria-label="Progress and pressure on Britain">
-  <span id="progressText">0 checks done</span>
-  <div class="bar" aria-hidden="true"><span id="progressFill"></span></div>
-  <span class="pill meter">Pressure on Britain: <span class="track" aria-hidden="true"><span id="mFill" style="width:20%"></span></span> <span id="mNum">2/10</span></span>
+<div class="topline"><span><b>World History · Unit 2 · Day 4</b> · Empire's End: How Do Colonies Get Free?</span><span><b>SS.9-12.WH.36 · WH.34</b></span></div>
+<div id="hud" hidden>
+  <span class="pill" id="stepPill"></span>
+  <span class="pill year" id="yearPill"></span>
+  <div class="m" id="mPeople" title="People in your movement"><span>✊ <span class="lbl">People</span></span><div class="bar"><span id="peopleBar"></span></div><b id="peopleNum"></b></div>
+  <div class="m" id="mWorld" title="How much the world is watching"><span>🌍 <span class="lbl">World watching</span></span><div class="bar world"><span id="worldBar"></span></div><b id="worldNum"></b></div>
+  <div class="hearts" id="hearts" title="Human cost"></div>
+  <div class="row2">
+    <div class="chainbox" id="chainBox"><span>👑 <span class="lbl">Britain's grip</span></span><div class="chain" id="chain" aria-hidden="true"></div><b class="chainnum" id="gripNum"></b></div>
+    <div class="rival" id="rival"><span class="rface" id="rFace" aria-hidden="true">😏</span><span class="rname">Britain</span><span class="rmood" id="rMood"></span></div>
+  </div>
 </div>
 <main>
   <p class="welcome" id="welcome" hidden></p>
   <div id="app"></div>
-  <div class="foot"><span>Progress saves on this device. Your teacher sees your work after you turn it in.</span><button type="button" id="restartBtn">Start over</button></div>
+  <div class="foot"><span>💾 Saves on this device. Turn in to send it to your teacher.</span><button type="button" id="restartBtn">Start over</button></div>
+  <p class="made">Made up: you, your movement, and the "in your game" results. Real: the events, quotes, and numbers (sources in small gray lines).</p>
 </main>
-<script>
-const T = (cls, txt) => `<span class="tag ${cls}">${txt}</span>`;
-const card = (who, body) => `<div class="src-card"><div class="who">${who}</div>${body}</div>`;
-UnitGame.start({
-  key: "wh-u2-d6-empires-end-v1",
-  assignmentId: "wh-u2-d6-empires-end",
-  title: "World History · Unit 2 · Day 4 · Empire's End: How Do Colonies Get Free?",
-  standard: "SS.9-12.WH.36, SS.9-12.WH.34",
-  oldApi: "https://fynn-class-assignment-submissions-20261024.neotboy.chatgpt.site/api/submit",
-  startFx: { press: 2 },
-  clampFx: fx => { fx.press = Math.max(0, Math.min(10, fx.press)); },
-  hud: st => {
-    const p = st.fx.press || 0;
-    document.getElementById("mFill").style.width = (p * 10) + "%";
-    document.getElementById("mNum").textContent = p + "/10";
-  },
-  startLabel: "Join the movement",
-  introHtml: `<p class="kicker">India, 1930</p><h2>How do you make an empire leave?</h2>
-    <p>Britain has ruled India for almost 200 years. You're a young organizer in the movement for <b>independence</b> (self-rule). Britain has the army and the guns. You have millions of people.</p>
-    <p>Your choices change the <b>pressure on Britain</b> (meter at the top).</p>
-    <ul class="steps"><li>1. Read each card and answer the check.</li><li>2. Make 3 choices.</li><li>3. Write 2 short answers and turn in.</li></ul>
-    <p class="src">Your role is made up. The events are real.</p>`,
-  scenes: [
-    { kicker: "Part 1 of 3 · 1919–1930", title: "Why India Wanted Out",
-      teach: `<p>Britain ruled India first through a trading business, the <b>East India Company</b>, and then directly after 1858. India sent cotton, tea, and soldiers to the empire. Indians had little say in their own government.</p>
-        <p><b>Mohandas Gandhi</b> led the push for freedom with <b>nonviolent resistance</b>: boycotts (refusing to buy British goods), strikes, marches, and never fighting back. He used <b>civil disobedience</b>: breaking an unfair law on purpose, peacefully, and accepting the punishment.</p>`,
-      blocks: [
-        { type: "q", id: "a1", std: "WH.36", short: "How British rule hurt India's economy", prompt: card("Fact card · Cotton and salt", `<p>Indian farmers grew raw cotton. It was shipped to factories in Britain, made into cloth, and sold back to Indians.</p><p>British law also made it illegal for Indians to make or sell their own salt. They had to buy salt that Britain taxed.</p>`) + "How did British rule hurt India's economy?", options: ["India's raw goods made British factories rich instead", "Britain paid Indian farmers extra money for all their cotton", "India sold more cloth to Britain than it bought", "Britain banned Indians from growing any cotton"], hint: "Follow the cotton on the card. Where was the money made?", why: "India supplied cheap raw materials and bought back finished goods, so the profit went to Britain." },
-        { type: "q", id: "a2", std: "WH.36", short: "Effect of the Amritsar massacre", prompt: card("Fact card · Amritsar, 1919", `<p>British troops fired on an unarmed crowd gathered in a walled garden in the city of Amritsar. The British count was 379 dead. Indian estimates were over 1,000.</p>`) + "How do you think the Amritsar massacre affected the independence movement?", options: ["It turned many Indians firmly against British rule", "It convinced most Indians that Britain would leave very soon", "It shut down Gandhi's movement for good", "It made Indians ask for more British police"], hint: "How would you feel about a government whose troops did this?", why: "After Amritsar, many Indians who had trusted Britain decided only full independence would do." },
-        { type: "q", id: "a3", std: "WH.36", short: "Example of civil disobedience", prompt: "Reread the top box. Which is an example of <b>civil disobedience</b>?", options: ["Making your own salt even though the law bans it", "Voting for a new leader in a regular election", "Attacking a police station to take weapons", "Writing a polite letter to British leaders asking for change"], hint: "Civil disobedience means breaking an unfair law on purpose, peacefully.", why: "Making salt broke an unfair law peacefully, and protesters accepted arrest." },
-        { type: "event", id: "e1", short: "1930 Salt March", html: `<p><b>March 1930: The Salt March.</b> Gandhi plans to walk about 240 miles to the sea and make salt from seawater, breaking the salt law. What do you do?</p>`,
-          choices: [
-            { label: "Join the march and make salt at the sea", fx: { press: 3 }, result: `<p>${T("up","+3 pressure")}Thousands joined along the route, and people all over India made salt. Over 60,000 Indians were arrested. Newspapers around the world reported police beating peaceful protesters.</p>` },
-            { label: "Burn the local tax office", fx: { press: -1 }, result: `<p>${T("down","−1 pressure")}Britain uses the violence as an excuse to crack down. Gandhi had once stopped a whole campaign (1922) after protesters killed police officers.</p>` },
-            { label: "Stay home and wait", fx: {}, result: `<p>${T("flat","No change")}You stay safe, but Britain feels no new pressure from you.</p>` }
-          ] },
-        { type: "q", id: "a4", std: "WH.36", short: "Why nonviolence worked", prompt: "Why did reports of police beating peaceful salt marchers help India's cause?", options: ["They made British rule look cruel to the world", "They showed that the marchers were secretly planning a war", "They proved most Indians liked the salt law", "They convinced Gandhi to give up nonviolence"], hint: "The marchers didn't fight back. What did that make the police look like?", why: "When peaceful people are beaten, the government doing it loses support at home and around the world." }
-      ] },
-    { kicker: "Part 2 of 3 · 1939–1948", title: "War, Freedom, and Partition",
-      teach: `<p>In World War II about <b>2.5 million</b> Indians served in Britain's army. Indian leaders asked: if we fight for freedom abroad, why not freedom at home? In 1942 Gandhi's party launched the <b>Quit India</b> movement. Britain jailed Gandhi, Nehru, and thousands more.</p>
-        <p>By 1945 Britain had won the war, but it was broke and exhausted.</p>`,
-      blocks: [
-        { type: "event", id: "e2", short: "1942 Quit India choice", html: `<p><b>1942: Quit India.</b> Britain is fighting for its life in World War II. What do you do?</p>`,
-          choices: [
-            { label: "Join the Quit India protests", fx: { press: 2 }, result: `<p>${T("up","+2 pressure")}You're arrested along with tens of thousands of others. Britain now has to keep India by force in the middle of a world war.</p>` },
-            { label: "Join the army and demand freedom after the war", fx: { press: 1 }, result: `<p>${T("up","+1 pressure")}Millions of Indian soldiers helped win the war. Afterward, it was very hard for Britain to deny them freedom.</p>` },
-            { label: "Stay out of it until the war ends", fx: {}, result: `<p>${T("flat","No change")}You wait. The movement goes on without you.</p>` }
-          ] },
-        { type: "q", id: "b1", std: "WH.34", short: "Why WWII ended British rule", prompt: "Why did World War II make it harder for Britain to keep India?", options: ["Britain was broke and worn out after the war", "Britain won new colonies to replace India", "India's army switched sides and joined Germany during the war", "The U.S. paid Britain to keep ruling India"], hint: "Reread the last line of the top box.", why: "A broke, exhausted Britain could not afford to hold India against millions of people who wanted it gone." },
-        { type: "q", id: "b2", std: "WH.36", short: "What Partition was", prompt: card("Fact card · August 1947", `<p>Many Muslims, led by <b>Muhammad Ali Jinnah</b>, feared being a small minority in a mostly Hindu country, and wanted their own nation.</p><p>In August 1947, Britain split the colony into two independent countries: <b>India</b> (mostly Hindu) and <b>Pakistan</b> (mostly Muslim, in two pieces). This split is called <b>Partition</b>. A British lawyer who had never been to India drew the border in about five weeks.</p>`) + "What was Partition?", options: ["Splitting British India into India and Pakistan", "Britain handing India back to the East India Company", "Dividing India into states for each language", "A peace treaty ending a war between India and Britain"], hint: "Find the bold word Partition on the card.", why: "Partition split the colony along religious lines into two countries on the same day freedom came." },
-        { type: "event", id: "e3", short: "1947 Partition: stay or leave", html: `<p><b>August 1947, Punjab.</b> Your family is Hindu. The new border puts your town inside Pakistan. Rumors of attacks spread every day. What does your family do?</p>`,
-          choices: [
-            { label: "Leave for India with what you can carry", fx: {}, result: `<p>You join a line of refugees miles long. Trains and roads are attacked by mobs on both sides. You reach India, but you'll never see home again.</p>` },
-            { label: "Stay and hope your Muslim neighbors protect you", fx: {}, result: `<p>Some neighbors hide you, risking their own lives. Many families on both sides were saved this way. Many others were not. Within months, nearly all Hindus and Sikhs in your area have fled.</p>` }
-          ] },
-        { type: "q", id: "b3", std: "WH.36", short: "Problems Partition caused", prompt: card("Fact card · The cost of Partition", `<p>About <b>10 to 15 million</b> people crossed the new borders, one of the biggest mass movements of people in history. Violence between Hindus, Muslims, and Sikhs killed hundreds of thousands. Some estimates say up to 1 to 2 million.</p>`) + "What problem did Partition cause?", options: ["Mass migration and violence between religious groups", "A ten-year war between India and Britain", "A famine caused by the Salt March protests", "Britain taking back control of India in 1948"], hint: "Reread the card. Who fought whom?", why: "Freedom came with a terrible cost: millions forced from home and huge religious violence." },
-        { type: "q", id: "b4", std: "WH.36", short: "Gandhi's death and lasting anger", prompt: card("Fact card · 1948", `<p><b>Jawaharlal Nehru</b> became India's first prime minister. Jinnah led Pakistan. In January 1948, Gandhi was shot and killed by a Hindu extremist who thought Gandhi was too friendly toward Muslims. Kashmir, a region both countries claim, is still disputed today.</p>`) + "What does Gandhi's killing show?", options: ["Religious anger from Partition did not end in 1947", "Britain was still in control of India in 1948", "Gandhi had given up on nonviolence in the year before he died", "Pakistan and India had agreed on every border"], hint: "Why did the killer attack Gandhi?", why: "The hatred stirred up by Partition kept going, even killing the man who led India to freedom." }
-      ] },
-    { kicker: "Part 3 of 3 · After 1945", title: "Other Paths to Freedom",
-      teach: `<p>India was not alone. After World War II, colony after colony in Asia broke free. Some paths were mostly peaceful. Others were long wars.</p>
-        <div class="facts"><div><b>Philippines</b>U.S. granted independence on July 4, 1946, as promised in a 1934 law. Peaceful.</div><div><b>Indonesia</b>Sukarno declared independence in 1945. Fought the Dutch until 1949.</div><div><b>Malaya</b>Negotiated with Britain. Independent in 1957.</div><div><b>Vietnam</b>Fought France until the French defeat at Dien Bien Phu, 1954.</div></div>`,
-      blocks: [
-        { type: "q", id: "c1", std: "WH.36", short: "Path most like India's", prompt: "Which colony's path was most like India's mostly nonviolent path?", options: ["Malaya, through talks with Britain", "Indonesia, after its 1945 declaration", "Vietnam, at Dien Bien Phu", "None. Every colony fought a war"], hint: "Look at the four boxes. Which ones say peaceful or negotiated?", why: "Malaya won freedom through negotiation, like India's mostly nonviolent path. (The Philippines was peaceful too.)" },
-        { type: "q", id: "c2", std: "WH.36", short: "Colony that won by war", prompt: "Which colony won independence by <b>fighting a war</b> against its European ruler?", options: ["Indonesia, against the Dutch", "The Philippines, in 1946", "Malaya, in 1957", "India, after the Salt March"], hint: "Look for the word \"fought\" in the boxes.", why: "Indonesia fought the Dutch for four years. Vietnam also fought France." },
-        { type: "q", id: "c3", std: "WH.34", short: "Why colonies broke free after 1945", prompt: "Why did so many colonies break free after 1945, and not before?", options: ["European powers were weakened and broke after the war", "Colonies had only started asking for their freedom in 1945", "The UN ordered every empire to end in 1945", "Colonies became too poor for Europe to want"], hint: "Think back to what WWII did to Britain.", why: "WWII drained Europe's money and power, while colonized people were more organized and determined than ever." }
-      ] }
-  ],
-  finale: {
-    title: "How Do Colonies Get Free?",
-    report: st => `<p><b>Pressure on Britain ended at ${st.fx.press}/10.</b> In real life, millions of ordinary people taking part in peaceful protests, plus a world war that left Britain broke, made British rule impossible to keep.</p><p>Answer both in 1–2 full sentences.</p>`,
-    prompts: [
-      { id: "method", short: "One method India used and why it worked", label: "1. Name one method India used to win freedom, and explain why it worked.", stem: "India used ___. It worked because ___.", min: 60, mustAll: [["because", "since"], ["salt", "march", "boycott", "strike", "nonviolen", "civil disobedience", "quit india", "protest", "soldier", "army", "peaceful"]], mustMsg: "In answer 1, name a real method (like the Salt March, boycotts, or Quit India) AND explain WHY it worked (use \"because\")." },
-      { id: "cost", short: "Was freedom worth the cost of Partition?", label: "2. India got its freedom, but Partition came with it. What did freedom cost? Use one detail about Partition.", stem: "Freedom cost India ___. One detail about Partition is ___.", min: 60, mustAll: [["partition", "pakistan", "migrat", "violence", "border", "killed", "refugee", "million", "gandhi", "kashmir", "fled", "home"]], mustMsg: "In answer 2, use a real detail about Partition (like the migration, the violence, or the new border)." }
-    ]
-  },
-  extraAnswers: st => ({ "Pressure on Britain meter": st.fx.press + " of 10" })
-});
-</script>
+<script src="game.js?v=20261103r"></script>
 </body></html>
