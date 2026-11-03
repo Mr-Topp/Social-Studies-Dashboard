@@ -1,165 +1,223 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Research Agency | Sociology Unit 1 Day 6</title>
-<meta name="description" content="Run a research company: pick the right method for each client, weigh the tradeoffs, and judge famous ethics cases.">
-<style>
-:root{--ink:#1f2b33;--muted:#55626b;--paper:#f4f7f6;--card:#fff;--line:#dcd9cf;--acc:#1b6b5c;--acc2:#c0632d;--soft:#eaf4f1;--green:#2a6b45;--bad:#a2392f}
+<title>Research Rivals | Sociology Unit 1 Day 6</title>
+<meta name="description" content="Run a research agency: match the right research method to each client's question, and beat a rival that sells fast, cheap answers.">
+<style>:root{--ink:#1d2a33;--muted:#56636c;--card:#fff;--line:#e0dccf;--teal:#0f7a67;--teal2:#e3f5ef;--orange:#e0602a;--red:#b8352a;--green:#1f7a47;--gold:#e0a21b;
+--survey:#2f6fd0;--interview:#8a4fc4;--observe:#1f8a5b;--experiment:#d0533a;--content:#c48a10}
 *{box-sizing:border-box}
-body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.5 system-ui,Segoe UI,Arial,sans-serif}
-header{background:linear-gradient(100deg,#e5f2ee,#fbefe5);border-bottom:5px solid var(--acc);padding:16px max(16px,calc((100vw - 900px)/2)) 12px}
-.k{font-size:.78rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:var(--acc);margin:0}
-h1{margin:2px 0 4px;font-size:clamp(1.7rem,3.4vw,2.3rem)}
-.std{margin:2px 0;font-size:.92rem;color:var(--muted)}.std b{color:var(--ink)}
-.hud{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line);padding:8px max(16px,calc((100vw - 900px)/2));display:flex;gap:10px 12px;flex-wrap:wrap;align-items:center;font-weight:800;font-size:.92rem;box-shadow:0 2px 8px #1f2b3312}
-.hud .bar{flex:1;min-width:110px;height:10px;background:#e6e6de;border-radius:9px;overflow:hidden}.hud .bar span{display:block;height:100%;width:0;background:var(--acc);transition:width .4s}
-.pill{background:#f0efe8;border-radius:20px;padding:3px 10px;white-space:nowrap}
-.meter{display:flex;align-items:center;gap:6px}.meter .track{width:100px;height:10px;border-radius:9px;background:#e6e6de;overflow:hidden}.meter .track span{display:block;height:100%;background:var(--acc2);transition:width .5s}
-main{max-width:900px;margin:auto;padding:14px 16px 60px}
-.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;box-shadow:0 3px 12px #1f2b330d}
-.kicker{font-size:.78rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:var(--acc2);margin:0}
-h2{margin:2px 0 10px;font-size:1.45rem}
-.teach{background:var(--soft);border-left:5px solid var(--acc);border-radius:9px;padding:10px 14px;margin:0 0 12px}.teach p{margin:4px 0}.teach b{color:var(--acc)}.teach ul{margin:4px 0;padding-left:20px}
-.block{margin:14px 0;padding:14px;border-radius:12px;border:2px solid var(--line);background:#fff}
-.block.current{border-color:var(--ink);box-shadow:0 0 0 4px color-mix(in srgb,var(--acc) 22%,transparent)}
-.block h3{margin:0 0 10px;font-size:1.06rem;line-height:1.35;font-weight:700}
-.event{background:#fbf9f4;border-style:dashed;border-color:#cdbf9a}.event.current{border-style:solid}
-.event-body p{margin:4px 0}
-.ev{display:block;font-weight:400;background:#f7f6f1;border:1px solid var(--line);border-left:5px solid var(--acc2);border-radius:10px;padding:9px 12px;margin:0 0 10px;font-size:.98rem}
-.ev .who{display:block;font-size:.74rem;font-weight:900;letter-spacing:.06em;text-transform:uppercase;color:var(--acc2);margin-bottom:2px}
-.ev p{margin:3px 0}
-.picked{margin:10px 0 4px;color:var(--muted)}.result{background:#f0efe8;border-radius:9px;padding:9px 12px}.result p{margin:4px 0}
-.tag{display:inline-block;font-weight:900;font-size:.8rem;border-radius:12px;padding:2px 9px;margin-right:6px}.tag.up{background:#dcefe2;color:var(--green)}.tag.down{background:#f6dcd8;color:var(--bad)}.tag.flat{background:#ebe9e0;color:var(--ink)}
-.qlabel{font-size:.75rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:var(--acc);margin:0 0 4px}
-.choices{display:grid;gap:8px}
-@media(min-width:700px){.q .choices{grid-template-columns:1fr 1fr}}
-button{font:inherit;cursor:pointer;border-radius:10px;min-height:46px}
-.choice{text-align:left;background:#fff;color:var(--ink);border:2px solid #cfcdbf;padding:10px 12px;font-weight:650;line-height:1.3}
-.choice:hover:not(:disabled){border-color:var(--ink);background:#fcfcfa}.choice:disabled{opacity:.5;cursor:not-allowed}
-.go{margin-top:12px;background:var(--acc);color:#fff;border:0;padding:11px 18px;font-weight:900}
-button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid #2f7dbd;outline-offset:2px}
-.answered{font-weight:800;color:var(--green);margin:4px 0}.why{margin:2px 0;color:var(--muted)}
-.msg{min-height:1.3em;font-weight:750;margin:8px 0 0}.msg.bad{color:var(--bad)}.msg.good{color:var(--green)}
-label{display:block;font-weight:850;margin:14px 0 4px}.stem{margin:0 0 4px;color:var(--muted);font-size:.92rem}
-input,textarea{width:100%;font:inherit;border:2px solid #cfcdbf;border-radius:9px;padding:10px;background:#fff;color:var(--ink)}
-.steps{display:grid;gap:6px;margin:10px 0;padding:0;list-style:none}.steps li{background:#f0efe8;border-radius:9px;padding:8px 12px;font-weight:700}
-.welcome{background:#e6f1ea;color:var(--green);font-weight:800;border-radius:9px;padding:8px 12px;margin:0 0 10px}
-.foot{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-top:14px;color:var(--muted);font-size:.85rem}
-.foot button{background:#ebe9e0;border:0;padding:8px 12px;font-weight:800;color:var(--ink)}
-.src{font-size:.8rem;color:var(--muted)}
-.bars{display:grid;gap:6px;margin:8px 0}.brow{display:grid;grid-template-columns:minmax(90px,140px) 1fr 44px;gap:8px;align-items:center;font-size:.9rem}.brow .t{height:16px;background:#e6e6de;border-radius:6px;overflow:hidden}.brow .t span{display:block;height:100%;background:var(--acc2)}
-@media print{.hud,.foot,.go{display:none}}
+html{min-height:100%;background:radial-gradient(circle at 15% 0%,#2bb39a 0,transparent 45%),radial-gradient(circle at 90% 6%,#ffb36b 0,transparent 35%),linear-gradient(160deg,#0f7a67 0%,#1b5f9e 100%)}
+body{margin:0;color:var(--ink);font:17px/1.45 system-ui,"Segoe UI",Arial,sans-serif;min-height:100vh;background:transparent}
+body::before{content:"";position:fixed;inset:0;pointer-events:none;background-image:radial-gradient(#ffffff22 1.5px,transparent 1.6px);background-size:22px 22px;z-index:0}
+body>*{position:relative;z-index:1}
+button{font:inherit;cursor:pointer;color:inherit}
+button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid #ffd34d;outline-offset:2px}
+.top{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:6px max(14px,calc((100vw - 1040px)/2));font-size:.78rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:#e6fff8;background:#0b4f45cc}
+.top .agency{color:#fff}
+/* ---------- versus HUD ---------- */
+.hud{position:sticky;top:0;z-index:20;background:#102b3add;backdrop-filter:blur(6px);color:#fff;border-bottom:3px solid #ffd34d;padding:6px max(14px,calc((100vw - 1040px)/2));display:grid;grid-template-columns:1fr auto 1fr;gap:6px 14px;align-items:center;font-weight:800;font-size:.9rem;box-shadow:0 4px 14px #0004}
+.team{display:flex;align-items:center;gap:8px}.team.rival{justify-content:flex-end}
+.ava{width:40px;height:40px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:1.4rem;background:#fff;box-shadow:0 0 0 3px #2bd1a8;flex:none}
+.rivalava{background:linear-gradient(135deg,#ff9a4d,#d9302b);box-shadow:0 0 0 3px #ffb36b;font-size:1.5rem}
+.tm{display:flex;flex-direction:column;line-height:1.05}.tm .sm{font-size:.72rem;opacity:.8;font-weight:700}
+.center{display:flex;align-items:center;gap:8px;flex-wrap:wrap;justify-content:center}
+.hjob{display:flex;align-items:center;gap:6px}
+.dots{display:flex;gap:4px}.dots i{width:11px;height:11px;border-radius:50%;background:#ffffff40;display:block}.dots i.done{background:#2bd1a8}.dots i.now{background:#ffd34d;box-shadow:0 0 0 3px #ffd34d55}
+.tok{position:relative;background:#ffffff1f;border:1px solid #ffffff40;border-radius:999px;padding:3px 11px;white-space:nowrap}
+.tok.neg,.tok:has(.neg){background:#b8352a}
+.meter{position:relative;display:flex;align-items:center;gap:6px;white-space:nowrap}.meter .tr{width:78px;height:11px;border-radius:9px;background:#ffffff30;overflow:hidden;display:inline-block}.meter .tr i{display:block;height:100%;transition:width .6s cubic-bezier(.3,1.4,.5,1)}
+.meter .lbl{font-size:.75rem;opacity:.85}
+#repFill{background:linear-gradient(90deg,#ffd34d,#ffb000)}#hypeFill{background:linear-gradient(90deg,#ff9a4d,#ff3d2e)}
+.float{position:absolute;left:50%;top:100%;transform:translateX(-50%);font-weight:900;font-size:1rem;pointer-events:none;animation:floatUp 1.5s ease-out forwards;text-shadow:0 1px 3px #0008;white-space:nowrap}
+.float.up{color:#7dffb5}.float.down{color:#ff9d8f}
+@keyframes floatUp{0%{opacity:0;transform:translate(-50%,-6px)}15%{opacity:1}100%{opacity:0;transform:translate(-50%,26px)}}
+.bump{animation:bump .6s}@keyframes bump{0%{transform:scale(1)}40%{transform:scale(1.35) rotate(-6deg)}100%{transform:scale(1)}}
+main{max-width:1040px;margin:auto;padding:12px 14px 40px}
+.welcome{background:#e3f6ea;color:var(--green);font-weight:800;border-radius:12px;padding:8px 12px;margin:0 0 10px;box-shadow:0 3px 0 #0002}
+.foot{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-top:14px;color:#e8fff9;font-size:.85rem;align-items:center}
+.foot button{background:#ffffffd9;border:0;padding:8px 12px;font-weight:800;border-radius:9px;min-height:40px;color:var(--ink)}
+.card{background:#fffdf8;border:3px solid #fff;border-radius:20px;padding:16px 18px;box-shadow:0 10px 30px #0003}
+.kicker{display:inline-block;font-size:.78rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:#fff;background:var(--orange);border-radius:999px;padding:3px 12px;margin:0 0 10px}
+h2{font-size:1.35rem;margin:14px 0 8px;line-height:1.25}
+.sub{margin:-4px 0 10px;color:var(--muted)}
+.go{background:linear-gradient(180deg,#ffd34d,#ffb000);color:#3a2600;border:0;border-radius:14px;padding:12px 22px;font-weight:900;min-height:50px;font-size:1.05rem;box-shadow:0 4px 0 #b97d00,0 6px 14px #0003;letter-spacing:.01em}
+.go:hover{filter:brightness(1.06)}.go:active{transform:translateY(3px);box-shadow:0 1px 0 #b97d00}
+.go.next{margin-top:14px}
+.msg{min-height:1.3em;font-weight:750;margin:8px 0 0}.msg.bad{color:var(--red)}.msg.good{color:var(--green)}
+/* ---------- animations (only when a screen first appears) ---------- */
+.anim .stamp{animation:slam .5s cubic-bezier(.2,1.6,.4,1) both .15s}
+@keyframes slam{0%{opacity:0;transform:scale(2.6) rotate(-14deg)}70%{opacity:1;transform:scale(.92) rotate(-3deg)}100%{transform:scale(1) rotate(-3deg)}}
+.anim .unlock{animation:pop .5s cubic-bezier(.2,1.5,.4,1) both .6s}
+@keyframes pop{0%{opacity:0;transform:scale(.7)}100%{opacity:1;transform:scale(1)}}
+.anim .post{animation:slideIn .45s ease-out both .4s}
+@keyframes slideIn{0%{opacity:0;transform:translateX(30px)}100%{opacity:1;transform:none}}
+.anim .pp{animation:pop .35s both}.anim .pp:nth-child(2){animation-delay:.9s}.anim .pp:nth-child(3){animation-delay:1s}.anim .pp:nth-child(4){animation-delay:1.1s}.anim .pp:nth-child(1){animation-delay:.8s}
+.anim .minicard{animation:flip .6s ease-out both}
+@keyframes flip{0%{transform:rotateY(90deg) scale(.8)}100%{transform:rotateY(0) rotate(-6deg)}}
+.anim .garbage .paper,.anim .bt i{animation:grow .7s ease-out both}
+@keyframes grow{0%{width:0}}
+.anim .garbage .paper{animation:crumple .5s ease-out both}
+@keyframes crumple{0%{transform:scale(1.15) rotate(4deg);opacity:0}100%{transform:rotate(-1deg);opacity:1}}
+.shake{animation:shake .45s}
+@keyframes shake{0%,100%{transform:none}20%{transform:translateX(-8px)}40%{transform:translateX(8px)}60%{transform:translateX(-5px)}80%{transform:translateX(5px)}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important}}
 
-.ev.client{border-left-color:var(--acc);background:#f2f8f6}
+/* ---------- intro ---------- */
+body.on-intro .hud{display:none}
+.intro{display:grid;grid-template-columns:1.25fr 1fr;gap:18px;align-items:center;background:linear-gradient(120deg,#fff 0%,#fff8ef 55%,#e8f5f0 100%);border:3px solid #fff;border-radius:22px;padding:18px 22px;box-shadow:0 10px 30px #0003}
+.intro .kick{margin:0;font-size:.78rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:var(--teal)}
+.intro h1{margin:0;font-size:clamp(2.2rem,4.8vw,3.4rem);line-height:1.02;letter-spacing:-.02em;background:linear-gradient(90deg,#0f7a67,#1b5f9e 60%,#e0602a);-webkit-background-clip:text;background-clip:text;color:transparent}
+.intro .hook{font-size:1.12rem;font-weight:700;margin:6px 0 8px}
+.chips{list-style:none;padding:0;margin:0 0 8px;display:flex;flex-wrap:wrap;gap:6px}.chips li{background:#fff;border:2px solid var(--line);border-radius:999px;padding:3px 11px;font-weight:750;font-size:.9rem}
+.goal{margin:0 0 8px;background:var(--teal2);border-radius:10px;padding:7px 11px;font-size:.96rem}
+.namelab{display:block;font-weight:800;font-size:.9rem;margin:0 0 4px}
+.startrow{display:flex;gap:8px;flex-wrap:wrap}
+.startrow input{flex:1 1 220px;font:inherit;border:2px solid #cfcab9;border-radius:12px;padding:10px;min-height:50px}
+.go.big{font-size:1.15rem;padding:12px 24px}
+.intro-art{display:flex;flex-direction:column;gap:12px;align-items:center}
+.fan{position:relative;height:170px;width:300px}
+.fcard{position:absolute;left:50%;top:10px;width:96px;height:136px;margin-left:-48px;background:#fff;border:3px solid var(--c);border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;box-shadow:0 4px 12px #0003;font-size:.72rem;text-align:center;padding:4px;transition:transform .3s}
+.fcard span{font-size:2rem}.fcard b{color:var(--c)}
+.fcard:nth-child(1){transform:rotate(-24deg) translate(-70px,16px)}.fcard:nth-child(2){transform:rotate(-12deg) translate(-36px,4px)}.fcard:nth-child(3){transform:translateY(-4px)}.fcard:nth-child(4){transform:rotate(12deg) translate(36px,4px)}.fcard:nth-child(5){transform:rotate(24deg) translate(70px,16px)}
+.m-survey{--c:var(--survey)}.m-interview{--c:var(--interview)}.m-observe{--c:var(--observe)}.m-experiment{--c:var(--experiment)}.m-content{--c:var(--content)}
 
+/* ---------- people talking ---------- */
+.how{background:#fff4d6;border:2px dashed #e7b84a;border-radius:14px;padding:8px 12px;margin:0 0 10px;font-size:.95rem}.how p{margin:3px 0}
+.client{display:flex;gap:12px;align-items:flex-start}
+.c-ava,.say-ava{font-size:2.2rem;line-height:1;background:#fff;border-radius:50%;width:60px;height:60px;display:flex;align-items:center;justify-content:center;flex:none;box-shadow:0 0 0 3px #9cc3ee,0 3px 8px #0002}
+.c-body{flex:1;min-width:0}.c-body>p{margin:2px 0}.c-who{font-size:.9rem}.c-tag{font-weight:900;color:#2b5d9c;text-transform:uppercase;font-size:.74rem;letter-spacing:.06em;margin-right:4px}
+.c-ask{position:relative;background:#eaf3ff;border:2px solid #9cc3ee;border-radius:4px 18px 18px 18px;padding:10px 14px;font-size:1.1rem;font-weight:700;line-height:1.35;margin:4px 0!important}
+.c-pay{font-size:.92rem;font-weight:800}.c-pay b{color:var(--green);font-size:1.1rem}
+.fict{margin-left:6px;font-size:.74rem;background:#ece8dc;border-radius:6px;padding:1px 6px;font-weight:700;color:var(--muted)}
+.say{display:flex;gap:10px;align-items:flex-start;margin:10px 0 0}
+.say-ava{width:48px;height:48px;font-size:1.7rem}
+.say-b{background:#fff;border:2px solid #d9d3c3;border-radius:4px 16px 16px 16px;padding:7px 12px;max-width:640px}
+.say-b p{margin:0;font-weight:700}.say-n{display:block;font-size:.74rem;font-weight:900;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+.say.angry .say-ava{box-shadow:0 0 0 3px #e9a99f}.say.angry .say-b{border-color:#e9a99f;background:#fff5f3}
+.say.ask .say-ava{box-shadow:0 0 0 3px #ffd34d}.say.ask .say-b{border-color:#ffd34d;background:#fffbea;font-size:1.05rem}
+/* ---------- cards ---------- */
+.pickh{margin-top:16px}
+.hand{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;perspective:800px}
+.mcard{position:relative;text-align:left;background:#fff;border:3px solid #ddd8c9;border-top:10px solid var(--c);border-radius:16px;padding:9px 10px;display:flex;flex-direction:column;gap:5px;font-size:.84rem;line-height:1.3;transition:transform .18s,box-shadow .18s;min-height:220px;box-shadow:0 4px 0 #0000001a}
+.mcard:hover:not(:disabled){transform:translateY(-6px) rotate(-1deg);box-shadow:0 12px 20px #0003}
+.mcard.sel{border-color:var(--c);box-shadow:0 0 0 5px color-mix(in srgb,var(--c) 35%,transparent),0 12px 20px #0003;transform:translateY(-10px)}
+.mcard.tried{cursor:not-allowed;background:#f4f2ec}.mcard.tried>:not(.stampmini){opacity:.35;filter:grayscale(.8)}
+.mcard:disabled{cursor:not-allowed}
+.mc-top{display:flex;align-items:center;gap:6px}.mc-icon{font-size:1.7rem}.mc-name{font-weight:900;font-size:1rem;color:var(--c);line-height:1.1}
+.mc-what{font-weight:700}
+.mc-shows{background:color-mix(in srgb,var(--c) 12%,#fff);border-radius:8px;padding:4px 6px}.mc-lab{font-weight:900}
+.mc-limit{color:#8a3a2a}
+.mc-pips{font-size:.74rem;color:var(--muted);display:grid;grid-template-columns:auto 1fr;gap:0 5px}.pv{color:var(--c);letter-spacing:1px}.pv .off{color:#ddd}
+.mc-cost{margin-top:auto;display:flex;justify-content:space-between;gap:4px;font-weight:900;font-size:.82rem;border-top:1px dashed #ddd;padding-top:5px}
+.stampmini{position:absolute;top:40%;left:50%;transform:translate(-50%,-50%) rotate(-12deg);background:#fff;border:3px solid var(--red);color:var(--red);font-weight:900;border-radius:8px;padding:2px 8px;font-size:1.05rem;z-index:2;white-space:nowrap;box-shadow:0 2px 6px #0003}
+.playbar{display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px;margin-top:14px;background:#102b3a;color:#fff;border-radius:16px;padding:10px 14px;min-height:70px}
+.playbar p{margin:0}.pb-none{opacity:.85;font-weight:700}.pb-sel{font-size:1.05rem;flex:1}.pb-cost{margin-left:6px;font-weight:800;opacity:.85;white-space:nowrap}
+.playbar .msg.bad{color:#ffb4a8}
+.minicard{width:74px;height:100px;border:3px solid var(--c);border-top-width:9px;border-radius:10px;background:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:.66rem;text-align:center;transform:rotate(-6deg);box-shadow:0 4px 10px #0003;flex:none}
+.minicard span{font-size:1.8rem}.minicard b{color:var(--c)}
+.played{display:flex;gap:14px;align-items:center}.played p{margin:0}.played .say{margin-top:4px}
+.setups{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.setup{position:relative;text-align:center;background:#fff;border:3px solid #d6d1c1;border-bottom-width:7px;border-radius:18px;padding:14px;display:flex;flex-direction:column;align-items:center;gap:4px;min-height:150px;transition:transform .15s}
+.setup:hover{border-color:var(--teal);transform:translateY(-4px)}
+.sc-ic{font-size:2.4rem;line-height:1}.sc-l{font-weight:900;font-size:1.15rem;line-height:1.2}.sc-s{color:var(--muted);font-size:.92rem}
+.sc-cost{margin-top:auto;display:flex;gap:6px;flex-wrap:wrap;justify-content:center}.chip{background:#fbe3dd;color:var(--red);font-weight:900;border-radius:999px;padding:2px 10px;font-size:.88rem}
+.sc-cost.free .chip{background:#e1f2e7;color:var(--green)}.chip.up{background:#e1f2e7;color:var(--green)}
+/* ---------- reports ---------- */
+.desk{display:grid;grid-template-columns:1.35fr 1fr;gap:14px;align-items:start}
+.paper{background:#fff;border:1px solid #e3ddca;border-radius:6px;padding:12px 14px;box-shadow:0 1px 0 #e3ddca,0 6px 0 -2px #f3efe3,0 7px 0 -2px #e3ddca,0 10px 18px #0002;position:relative}
+.report{transform:rotate(-.6deg)}
+.report::before{content:"📎";position:absolute;top:-14px;left:18px;font-size:1.5rem;transform:rotate(-20deg)}
+.garbage{margin:12px 0 0}
+.garbage .paper{background:#fff6f4;border-color:#efc2b9;transform:rotate(-1deg)}
+.garbage .paper p{margin:4px 0}
+.stamp{display:inline-block;font-weight:900;letter-spacing:.08em;border:4px solid;border-radius:8px;padding:2px 12px;margin:0 0 6px;transform:rotate(-3deg);font-size:1.05rem;text-transform:uppercase}
+.s-solid{color:var(--green);border-color:var(--green);background:#eaf6ef}.s-shaky{color:#a05a00;border-color:#d89b2b;background:#fff5e0}.s-ok{color:#806400;border-color:#d4b23c;background:#fffbe3}.s-garbage{color:var(--red);border-color:var(--red);background:#fff}
+.payline{display:flex;flex-wrap:wrap;gap:6px;margin:12px 0 0}.pp{background:#efece3;border-radius:999px;padding:4px 12px;font-weight:900;font-size:.95rem}.pp.up{background:#d8f2e1;color:var(--green)}.pp.down{background:#f9ddd7;color:var(--red)}
+.r-plan{margin:0 0 8px;font-size:.95rem}.r-sep{color:var(--muted)}.r-text{margin:8px 0 0;font-weight:800}
+.bars{display:grid;gap:6px;margin:6px 0 2px}.brow{display:grid;grid-template-columns:minmax(100px,170px) 1fr 44px;gap:8px;align-items:center;font-size:.9rem}
+.bt{height:18px;background:#ebe8de;border-radius:6px;overflow:hidden}.bt i{display:block;height:100%;background:linear-gradient(90deg,var(--teal),#3ac2a5)}.bv{text-align:right}
+.madeup{margin:3px 0 0;font-size:.76rem;color:var(--muted)}
+.quote{margin:6px 0;background:#f7f2ff;border-left:5px solid var(--interview);border-radius:8px;padding:6px 10px;font-style:italic}
+.rivalh{margin:0 0 6px;font-size:.82rem;color:var(--muted);font-weight:700}
+.post{display:flex;gap:10px;background:#fff;border:2px solid #f0d6cc;border-radius:16px;padding:10px 12px;box-shadow:0 4px 12px #0000001a;max-width:560px}
+.post.quiet{background:#f3f9f1;border-color:#cfe6cf}
+.p-ava{font-size:1.4rem;width:42px;height:42px;border-radius:50%;background:linear-gradient(135deg,#ff9a4d,#d9302b);display:flex;align-items:center;justify-content:center;flex:none}
+.quiet .p-ava{background:#dfeedd}
+.p-body p{margin:0}.p-head{font-size:.9rem}.handle{color:var(--muted);font-weight:500}.p-text{font-size:1rem;font-weight:700;margin:2px 0 4px!important}.p-meta{font-size:.78rem;color:var(--muted)}
+.unlock{display:flex;gap:12px;align-items:center;margin:16px 0 0;background:linear-gradient(90deg,#fff6cf,#fffdf3);border:3px solid #ffd34d;border-radius:16px;padding:10px 14px;box-shadow:0 4px 0 #e6b800}
+.u-ic{font-size:2rem;width:52px;height:52px;border-radius:50%;background:#ffd34d;display:flex;align-items:center;justify-content:center;flex:none}
+.unlock p{margin:0}.u-tag{font-size:.74rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:#9a6a00}.u-txt{font-size:1.04rem}.u-txt b{color:#0d5a4c}
+/* ---------- evidence checks: a clue board ---------- */
+.board{position:relative;margin:18px 0 0;border-radius:18px;padding:12px 14px 14px;background:#c99a5e;background-image:radial-gradient(#00000014 1px,transparent 1.5px),radial-gradient(#ffffff1c 1px,transparent 1.5px);background-size:9px 9px,13px 13px;border:6px solid #8b5a2b;box-shadow:inset 0 0 18px #0003,0 6px 16px #0003}
+.board .ck-kick{display:inline-block;margin:0 0 10px;font-weight:900;font-size:.82rem;letter-spacing:.06em;text-transform:uppercase;color:#fff;background:#102b3a;border-radius:8px;padding:4px 10px}
+.pins{display:grid;gap:10px}
+.pins>*{position:relative;transform:rotate(-.7deg)}.pins>*:nth-child(2){transform:rotate(.8deg)}
+.pins>*::after{content:"📌";position:absolute;top:-12px;right:14px;font-size:1.2rem}
+.pins .bars{background:#fff;border-radius:6px;padding:8px 10px;margin:0}.pins .madeup{background:#fff;border-radius:6px;padding:2px 8px;display:inline-block;transform:none}
+.pins .madeup::after{display:none}
+.board .say-b{border-width:3px}
+.replies{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px}
+.choice{position:relative;text-align:left;background:#fff;border:3px solid #fff;border-bottom:6px solid #d6d1c1;border-radius:14px;padding:10px 12px 10px 38px;font-weight:800;min-height:54px;line-height:1.3;transition:transform .12s}
+.choice::before{content:"💬";position:absolute;left:10px;top:50%;transform:translateY(-50%)}
+.choice:hover:not(:disabled){transform:translateY(-3px);border-color:#ffd34d}
+.choice:disabled{opacity:.6;cursor:not-allowed}.choice.nope{border-color:var(--red);background:#fdeceb;opacity:1}
+.board .msg{background:#fff;border-radius:10px;padding:0 10px;display:inline-block}.board .msg:empty{display:none}.board .msg.bad{padding:6px 10px}
+.board .msg:not(.bad):not(:empty){padding:6px 10px}
+.board.done{background:#e8f6ec;background-image:none;border-color:#7cc49a;padding-top:12px}
+.board.done .ck-kick{background:var(--green)}
+.unstamp{position:absolute;top:10px;right:14px;font-weight:900;letter-spacing:.1em;color:var(--green);border:3px solid var(--green);border-radius:8px;padding:0 8px;transform:rotate(6deg);background:#fff}
+.solved .unstamp{animation:slam .5s cubic-bezier(.2,1.6,.4,1) both}
+.answered{font-weight:900;color:var(--green);margin:10px 0 2px;font-size:1.05rem}.why{margin:2px 0}
+.casefile{margin:0;background:#fbf6e9;border:1px solid #e1d3a8;border-radius:6px;padding:9px 12px;font-family:Georgia,"Times New Roman",serif;box-shadow:2px 3px 0 #0002}
+.casefile p,.notes p{margin:4px 0}.cf-tag{font-family:system-ui,"Segoe UI",Arial,sans-serif;font-weight:900;font-size:.8rem;color:#7a5a10;text-transform:uppercase;letter-spacing:.04em}
+.src{font-size:.76rem;color:var(--muted);font-family:system-ui,"Segoe UI",Arial,sans-serif}
+.notes{border:1px solid #d9d4c4;border-radius:6px;padding:9px 12px;background:#fff repeating-linear-gradient(#fff 0 26px,#e8eef7 26px 27px);box-shadow:2px 3px 0 #0002}
+.twobox{display:grid;grid-template-columns:1fr 1.6fr;gap:10px}.tb{background:#fff;border-radius:6px;padding:8px 10px;box-shadow:2px 3px 0 #0002}.tb p{margin:2px 0}.tb-h{font-weight:900;font-size:.85rem}.bignum{font-size:1.8rem;font-weight:900;color:var(--survey)}
+/* ---------- phone call + leak ---------- */
+.bonus{margin:18px 0 0;background:#102b3a;color:#fff;border-radius:22px;padding:14px;border:4px solid #2b4a5c;box-shadow:0 8px 20px #0003}
+.bonus p{margin:4px 0}.b-h{font-weight:900;display:flex;align-items:center;gap:8px}.ring{display:inline-block;animation:ring 1s ease-in-out infinite;font-size:1.4rem}
+@keyframes ring{0%,100%{transform:rotate(0)}10%{transform:rotate(-18deg)}20%{transform:rotate(18deg)}30%{transform:rotate(-12deg)}40%{transform:rotate(0)}}
+.b-ask{font-size:1.08rem;font-weight:700;margin-bottom:12px!important;background:#ffffff1a;border-radius:4px 16px 16px 16px;padding:8px 12px}
+.bonus .setup{color:var(--ink)}
+.bonus.done{background:#f3f1ea;color:var(--ink);border-color:var(--line)}.bonus.done .ring{animation:none}
+.leak{margin:16px 0 0;background:#fff0ee;border:3px solid #e9a99f;border-radius:18px;padding:12px 14px}.leak>p{margin:6px 0}.leak .b-h{color:var(--red);font-size:1.1rem}
+/* ---------- ending ---------- */
+.end-head{display:flex;gap:14px;align-items:center}.end-ic{font-size:4rem;filter:drop-shadow(0 4px 6px #0003)}
+.anim .end-ic{animation:pop .6s cubic-bezier(.2,1.6,.4,1) both}
+.sign{flex:1;background:#102b3a;color:#fff;border-radius:14px;padding:10px 16px;border:4px solid #ffd34d;box-shadow:0 6px 0 #b97d00}
+.sign h2{margin:0;font-size:1.55rem;color:#ffd34d}.sign p{margin:4px 0 0}
+.e-low .sign{border-color:#ff7a52;box-shadow:0 6px 0 #a33a1a}.e-low .sign h2{color:#ffb39a}.e-mid .sign{border-color:#c9d3da;box-shadow:0 6px 0 #6c7a84}.e-mid .sign h2{color:#e9eef2}
+.endstats{display:flex;flex-wrap:wrap;gap:8px;margin:14px 0}.endstats>span{background:#f1eee5;border-radius:999px;padding:4px 12px;font-weight:700}
+.causedh{margin:10px 0 4px}
+.trail{list-style:none;margin:0;padding:0;display:grid;gap:4px}.trail li{display:grid;grid-template-columns:62px 1fr auto;gap:8px;align-items:center;background:#faf8f3;border-left:5px solid #ccc;border-radius:6px;padding:4px 10px;font-size:.92rem}
+.trail li.up{border-left-color:var(--green)}.trail li.down{border-left-color:var(--red)}.trail li.flat{border-left-color:var(--gold)}.lj{font-weight:900;color:var(--muted);font-size:.8rem}.ld{white-space:nowrap}
+.replay{color:var(--muted);font-size:.88rem}
+.writing{margin-top:16px;transform:none}.w-h{margin:0;font-size:1.25rem;font-weight:900}
+.writing label{display:block;font-weight:850;margin:12px 0 2px}.stem{margin:0 0 4px;color:var(--muted);font-size:.92rem}
+textarea{width:100%;font:inherit;border:2px solid #cfcab9;border-radius:10px;padding:10px;background:#fffef9 repeating-linear-gradient(#fffef9 0 27px,#e8eef7 27px 28px)}
+.turned{display:inline-block;background:#d8f2e1;color:var(--green);font-weight:900;border-radius:999px;padding:6px 14px;margin:8px 0 0}
+@media (max-width:900px){.hand{grid-template-columns:repeat(3,1fr)}.desk{grid-template-columns:1fr}.hud{grid-template-columns:1fr 1fr}.hud .center{grid-column:1/-1;order:-1}}
+@media (max-width:760px){.intro{grid-template-columns:1fr}.intro-art{display:none}.setups,.replies{grid-template-columns:1fr}.twobox{grid-template-columns:1fr}.setup{min-height:0}}
+@media (max-width:560px){body{font-size:16px}.hand{grid-template-columns:1fr 1fr;gap:8px}.mcard{min-height:0;font-size:.8rem;padding:8px}.mc-pips{display:none}.meter .tr{width:46px}.card{padding:12px}.brow{grid-template-columns:90px 1fr 40px;font-size:.84rem}.trail li{grid-template-columns:52px 1fr}.trail .ld{grid-column:2}.hud{gap:4px 8px;font-size:.82rem;padding:5px 10px}.top{font-size:.68rem}.top .agency,.meter .lbl,.tm .sm{display:none}.ava{width:32px;height:32px;font-size:1.1rem}.c-ava{width:46px;height:46px;font-size:1.7rem}.say-ava{width:40px;height:40px;font-size:1.4rem}.c-ask{font-size:1rem}.end-ic{font-size:2.8rem}.played{gap:10px}.minicard{width:60px;height:84px}}
+@media print{.hud,.foot,.go{display:none}html{background:#fff}}
 </style>
 <script src="../../shared/assignments.js?v=20261101fill"></script>
 <script src="../../shared/turnin.js?v=20261102read"></script>
-<script src="../../shared/unit-game.js?v=20261102es"></script>
 <script src="../../shared/lang.js?v=20261102samonly"></script>
-<script src="es.js?v=20261102c"></script>
+<script src="es.js?v=20261103b"></script>
 </head><body>
-<header>
-  <p class="k">Sociology · Unit 1 · Day 6</p>
-  <h1>How Should We Study People?</h1>
-  <p class="std"><b>SS.9-12.Soc.1</b> Analyze the components of a sociological investigation.</p>
-  <p class="std"><b>Goal:</b> Pick the right research method for a question, explain its tradeoffs, and spot ethics problems. · About 25 minutes.</p>
-</header>
-<div class="hud" aria-label="Progress, days, and trust">
-  <span id="progressText">0 checks done</span>
-  <div class="bar" aria-hidden="true"><span id="progressFill"></span></div>
-  <span class="pill">📅 Days left: <span id="daysNum">40</span></span>
-  <span class="pill meter">Trust: <span class="track" aria-hidden="true"><span id="trustFill" style="width:50%"></span></span> <span id="trustNum">5/10</span></span>
+<div class="top"><span>Sociology · Unit 1 · Day 6 · SS.9-12.Soc.1, Soc.3</span><span class="agency">🏢 Cedar River Research Co.</span></div>
+<div class="hud" id="hud" hidden aria-label="Your agency">
+  <div class="team you"><span class="ava" aria-hidden="true">🏢</span><div class="tm"><b>Cedar River</b><span class="sm">You</span></div>
+    <span class="meter" title="Reputation">⭐ <span class="lbl">Reputation</span> <span class="tr" aria-hidden="true"><i id="repFill"></i></span> <b id="repNum">5/10</b></span></div>
+  <div class="center"><span class="hjob"><span id="hudJob">Job 1 of 6</span><span class="dots" id="hudDots" aria-hidden="true"></span></span>
+    <span class="tok">💵 <b id="hudMoney">$1,000</b></span><span class="tok">📅 <b id="hudDays">51</b> <span>days left</span></span></div>
+  <div class="team rival"><span class="meter" title="Hot Take hype">🔥 <span class="lbl">Rival hype</span> <span class="tr" aria-hidden="true"><i id="hypeFill"></i></span> <b id="hypeNum">2/10</b></span>
+    <div class="tm"><b>Hot Take</b><span class="sm">Blake</span></div><span class="ava rivalava" id="blakeMood" aria-hidden="true">😎</span></div>
 </div>
 <main>
   <p class="welcome" id="welcome" hidden></p>
   <div id="app"></div>
   <div class="foot"><span>Progress saves on this device. Your teacher sees your work after you turn it in.</span><button type="button" id="restartBtn">Start over</button></div>
 </main>
-<script>
-const T = (cls, txt) => `<span class="tag ${cls}">${txt}</span>`;
-const ev = (who, body) => `<span class="ev"><span class="who">${who}</span>${body}</span>`;
-window.S = null;
-
-const client = (who, ask) => `<span class="ev client"><span class="who">📋 New client · ${who}</span>"${ask}"</span>`;
-UnitGame.start({
-  key: "soc-u1-d6-study-people-v1",
-  assignmentId: "soc-u1-d6-study-people",
-  title: "Sociology · Unit 1 · Day 6 · How Should We Study People?",
-  standard: "SS.9-12.Soc.1, SS.9-12.Soc.3",
-  oldApi: "https://fynn-class-assignment-submissions-20261024.neotboy.chatgpt.site/api/submit",
-  startFx: { days: 40, trust: 5 },
-  clampFx: fx => { fx.trust = Math.max(0, Math.min(10, fx.trust)); fx.days = Math.max(0, fx.days); },
-  hud: st => { window.S = st; const t = st.fx.trust || 0; document.getElementById("trustFill").style.width = (t * 10) + "%"; document.getElementById("trustNum").textContent = t + "/10"; document.getElementById("daysNum").textContent = st.fx.days; },
-  startLabel: "Clock in",
-  introHtml: `<p class="kicker">Day one on the job</p><h2>Welcome to Cedar River Research Co.</h2>
-    <p>You just got hired at a small research company. Schools, cities, and businesses bring you questions about <b>people</b>. You pick how to study them.</p>
-    <p>Every method has a cost. Some take a long time. Some only give part of the story. And if you treat people badly, you lose <b>trust</b>.</p>
-    <ul class="steps"><li>📅 You have <b>40 work days</b> this season.</li><li>🤝 Watch your <b>Trust</b> meter. Good, ethical work raises it.</li><li>✍️ At the end, write 2 short answers and turn in.</li></ul>
-    <p class="src">The company and clients are made up. The famous studies in Part 3 are real.</p>`,
-  scenes: [
-    { kicker: "Part 1 of 3", title: "The Toolbox",
-      teach: `<p>Sociologists use six main <b>research methods</b>:</p>
-        <ul><li><b>Survey</b>: the same questions to many people. Fast and big. Usually gives numbers.</li>
-        <li><b>Interview</b>: one-on-one, open-ended talk. Slow but deep.</li>
-        <li><b>Participant observation</b>: the researcher joins a group over time and takes notes.</li>
-        <li><b>Experiment</b>: change one thing and control the rest. Best for showing <b>cause and effect</b>.</li>
-        <li><b>Case study</b>: one person, group, or event in depth.</li>
-        <li><b>Secondary data</b>: data someone else already collected, like the U.S. Census.</li></ul>
-        <p><b>Quantitative</b> = numbers. <b>Qualitative</b> = descriptions, meanings, and experiences.</p>`,
-      blocks: [
-        { type: "q", id: "m1", std: "Soc.1", short: "1,200 students → survey", prompt: client("A school district", "How many of our 1,200 students work a job after school?") + "Which method fits best?", options: ["A survey sent to every student", "A case study of one student", "Joining one student's work crew", "One long interview with the principal"], hint: "The client wants a number for a big group. Which method reaches many people fast?", why: "A survey asks the same questions to lots of people and gives numbers. That's what this client needs." },
-        { type: "q", id: "m2", std: "Soc.1", short: "Working at a restaurant = participant observation", prompt: ev("Research note", "A researcher takes a job at a fast-food restaurant for 8 months. She takes notes on how workers treat each other.") + "Which method is this?", options: ["Participant observation", "Secondary data analysis", "A controlled experiment", "A large-scale survey"], hint: "The researcher becomes part of the group. Check the toolbox.", why: "Joining a group over time and watching from the inside is participant observation." },
-        { type: "q", id: "m3", std: "Soc.1", short: "Census numbers = secondary data", prompt: ev("Research note", "A researcher uses U.S. Census numbers to compare incomes in Iowa's 99 counties. He never talks to anyone.") + "Which method is this?", options: ["Secondary data", "Participant observation", "A case study", "An interview"], hint: "Who collected the numbers he's using?", why: "The Census Bureau already collected that data. Using existing data is secondary data." },
-        { type: "event", id: "e1", short: "Young-people-leaving method", html: client("A city council", "Why do so many young people move away after high school?") + `<p>Pick your method.</p>`,
-          choices: [
-            { label: "Survey 2,000 young adults (5 days)", fx: { days: -5, trust: 1 }, result: `<p>${T("up","+1 trust · −5 days")}Results: 41% said jobs, 22% said college, 15% said things to do. Clear numbers. But the client asks, "What's the story behind them?" You don't know.</p>` },
-            { label: "Long interviews with 20 people who left (12 days)", fx: { days: -12, trust: 1 }, result: `<p>${T("up","+1 trust · −12 days")}Powerful stories. One said, "My mom got laid off, and I felt like there was nothing here for me." But with only 20 people, you can't say how common each reason is.</p>` },
-            { label: "Survey first, then interview 10 people (15 days)", fx: { days: -15, trust: 2 }, result: `<p>${T("up","+2 trust · −15 days")}You get the numbers AND the stories behind them. The client loves it. It costs the most time, though.</p>` }
-          ] },
-        { type: "q", id: "m4", std: "Soc.1", short: "Why choose qualitative", prompt: ev("Two kinds of results", "<b>Survey:</b> 41% said they left for jobs.<br><b>Interview:</b> \"My mom got laid off, and I felt like there was nothing here for me.\"") + "Why might a researcher choose interviews (qualitative) over a survey?", options: ["To learn the reasons behind the numbers", "To get answers from more people in less time", "To prove that one thing causes another", "To avoid talking with the people being studied"], hint: "What does the interview quote tell you that 41% doesn't?", why: "Qualitative methods show meanings and experiences. Numbers tell you how many; interviews help explain why." }
-      ] },
-    { kicker: "Part 2 of 3", title: "Every Method Has a Tradeoff",
-      teach: `<p>A <b>tradeoff</b> is what you give up to get something.</p>
-        <p><b>Surveys</b> are fast and big, but people don't always answer honestly. <b>Experiments</b> show cause and effect, but can feel fake. <b>Case studies</b> go deep, but may not apply to others. <b>Observation</b> is deep, but slow, and people may act differently when watched.</p>`,
-      blocks: [
-        { type: "q", id: "t1", std: "Soc.3", short: "Cause & effect → experiment", prompt: client("A tutoring app company", "Does our app actually RAISE test scores?") + "Which method fits best?", options: ["An experiment with a control group", "A case study of one top student", "Census data on Iowa test scores", "Watching students at lunch for a month"], hint: "The client wants to know if the app CAUSES higher scores.", why: "Only an experiment changes one thing (using the app) and compares to a control group. That's how you test cause and effect." },
-        { type: "q", id: "t2", std: "Soc.3", short: "Case study weakness", prompt: ev("Research note", "A researcher spends a year studying one small Iowa town after its factory closed.") + "What is the biggest weakness of this case study?", options: ["Its results may not apply to other towns", "It can't tell us anything in real detail", "It uses too many numbers and statistics", "It can only study people who are online"], hint: "It's ONE town. Would every town react the same way?", why: "Case studies go deep on one example, but that example may not represent others." },
-        { type: "event", id: "e2", short: "Skate park consent choice", html: client("A parks department", "The skaters at Riverside Park seem to have their own rules. What are they?") + `<p>You'll use participant observation. How do you join the group?</p>`,
-          choices: [
-            { label: "Tell them you're a researcher and ask if it's OK (10 days)", fx: { days: -10, trust: 2 }, result: `<p>${T("up","+2 trust · −10 days")}Most say yes. One says no, so you leave him out of your notes. This is <b>informed consent</b>: people agree after knowing what the study is.</p>` },
-            { label: "Go undercover. Just pretend to be a skater (8 days).", fx: { days: -8, trust: -3 }, result: `<p>${T("down","−3 trust · −8 days")}A skater finds your notebook. Word spreads that you were secretly studying them. The crew stops talking to you, and the client worries about complaints.</p>` },
-            { label: "Skip it. Tape a survey QR code to the rail (2 days).", fx: { days: -2 }, result: `<p>${T("flat","No change · −2 days")}You get 3 answers, one of them a meme. Fast, but you learn almost nothing.</p>` }
-          ] },
-        { type: "q", id: "t3", std: "Soc.3", short: "Observer effect", prompt: ev("Field notes, week 3", "When the skaters knew I was watching, they swore less and helped each other more. When I left, things went back to normal.") + "What problem does this show?", options: ["People act differently when they know they're watched", "The skaters were both the test group and the control", "She used secondary data instead of her own data", "Her sample was much too large to be a case study"], hint: "What changed when the researcher was there?", why: "People change how they act when they know they're being studied. Observers have to plan for this." },
-        { type: "q", id: "t4", std: "Soc.3", short: "Survey weakness: honesty", prompt: ev("Two numbers that don't match", "<b>Survey:</b> students said they do 2.5 hours of homework a night.<br><b>Teacher logs:</b> about 40 minutes.") + "What survey weakness does this show?", options: ["People don't always answer surveys honestly", "Surveys can't collect any numbers at all", "Surveys only work with one person at a time", "Surveys prove cause and effect too strongly"], hint: "Why might students report more homework than they really do?", why: "People may guess, forget, or say what sounds good. Researchers check surveys against other data when they can." }
-      ] },
-    { kicker: "Part 3 of 3", title: "The Ethics Files",
-      teach: `<p>Research <b>ethics</b> are rules that protect the people being studied:</p>
-        <ul><li><b>Informed consent</b>: people agree after knowing the purpose and risks.</li><li><b>Do no harm</b>: don't hurt people physically or mentally.</li><li><b>Right to quit</b>: people can stop at any time.</li><li><b>Honesty</b> and <b>objectivity</b>: don't trick people, and don't let your own views tilt the results (<b>bias</b>).</li></ul>
-        <p>These four real studies are a big reason these rules exist. In the U.S., most studies with people now need a review board's OK before they start.</p>`,
-      blocks: [
-        { type: "q", id: "x1", std: "Soc.3", short: "Tuskegee = no informed consent", prompt: ev("Case file · Tuskegee Study, 1932–1972", "The U.S. Public Health Service studied about 600 Black men in Alabama, 399 of them with syphilis. The men were told they were being treated for \"bad blood.\" By 1947 penicillin could cure syphilis, but the men were not given it. Many died, and some wives and children were infected.") + "Which rule was most clearly broken?", options: ["Informed consent, since the men were lied to", "Objectivity, since the researchers liked the men", "Secondary data, since they used old census records", "Sample size, since the study had too few people"], hint: "What were the men told, and was it true?", why: "The men never agreed to an untreated disease study. They were lied to and harmed. Public outrage led to the 1974 National Research Act and modern consent rules." },
-        { type: "q", id: "x2", std: "Soc.3", short: "Milgram = deception & stress", prompt: ev("Case file · Milgram, Yale, 1961", "People were told to give electric shocks to a \"learner\" each time he got an answer wrong. The shocks were fake and the learner was an actor, but the participants didn't know. In the best-known version, about 65% went to the highest level. Many sweated, shook, and begged to stop.") + "What was the main ethical problem?", options: ["Deception and serious stress for the participants", "It had no way to control any of its variables", "It only used old records instead of real people", "The participants were paid far too much money"], hint: "Did participants know the truth? How did they feel?", why: "Participants were tricked and put under heavy stress. Today, deception like this is strictly limited." },
-        { type: "q", id: "x3", std: "Soc.3", short: "Little Albert = harm, no consent", prompt: ev("Case file · \"Little Albert,\" 1920", "John Watson and Rosalie Rayner made a loud, scary noise every time a baby named Albert touched a white rat. Soon he cried at the rat, and also at other furry things. They never undid the fear.") + "Why is this study seen as unethical?", options: ["A baby can't consent, and he was harmed", "The study used too many babies at once", "The researchers gave the baby a survey", "A rat can't be used as a variable"], hint: "Could Albert agree to this? Was he hurt?", why: "Albert couldn't give consent, and the study left him with fears that were never removed. That breaks consent and do no harm." },
-        { type: "event", id: "e3", short: "Participant wants to stop", html: ev("Your own interview study", "Halfway through an interview about losing a job, your participant starts crying. \"I don't think I want to keep going.\""),
-          choices: [
-            { label: "Stop. Remind them they can quit and pull their answers out.", fx: { trust: 3, days: -1 }, result: `<p>${T("up","+3 trust")}They thank you. A week later they come back and finish on their own terms. That's the <b>right to quit</b>.</p>` },
-            { label: "Push on. You're almost done, and you need the data.", fx: { trust: -4 }, result: `<p>${T("down","−4 trust")}You finish, but they file a complaint. The review board pauses your whole study.</p>` },
-            { label: "Take a short break, then ask the same question again", fx: { trust: -1 }, result: `<p>${T("down","−1 trust")}Kinder than pushing, but they already said they wanted to stop. They need to hear clearly that quitting is OK.</p>` }
-          ] },
-        { type: "q", id: "x4", std: "Soc.3", short: "Stanford Prison = not objective", prompt: ev("Case file · Stanford Prison Experiment, 1971", "Philip Zimbardo put college students in a fake prison as \"guards\" and \"prisoners.\" Guards became cruel, and the study ended after 6 of 14 planned days. Later, recordings showed the guards were coached to be tough, and Zimbardo acted as the prison boss.") + "Why do many researchers now doubt its results?", options: ["The researcher wasn't objective. He shaped what happened.", "Its control group was much too small to compare against", "It was only a survey, so the students could have lied", "It happened too long ago for anyone to learn from it"], hint: "Reread the last sentence of the case file.", why: "A researcher shouldn't steer results. Zimbardo was part of the experiment and guards were coached, so the study is biased, besides harming the 'prisoners.'" }
-      ] }
-  ],
-  finale: {
-    title: "Your Research Review",
-    report: st => `<p><b>Season over: ${st.fx.days} work days left · Trust ${st.fx.trust}/10.</b> ${st.fx.trust >= 8 ? "Clients and participants trust your company. You picked methods that fit and treated people right." : st.fx.trust >= 5 ? "Solid season, with a few shortcuts. Think about consent and the right to quit." : "Trust took a hit. Methods matter, but so does how you treat people."}</p><p>Answer both in 1–2 full sentences.</p>`,
-    prompts: [
-      { id: "rules", short: "Worst study and the rule that would stop it", label: "1. Which famous study broke the most rules? Which rule would have stopped it?", stem: "I think the ___ study broke the most rules because ___. The rule of ___ would have stopped it.", min: 70, newWords: 5, mustAll: [["tuskegee", "milgram", "albert", "stanford", "zimbardo", "watson"], ["consent", "harm", "deceiv", "decept", "lie", "lied", "quit", "stress", "objectiv", "bias", "truth", "honest"]], mustMsg: "In answer 1, name the study (Tuskegee, Milgram, Little Albert, or Stanford) AND the rule (like informed consent or do no harm)." },
-      { id: "method", short: "My research question, method, and tradeoff", label: "2. Make up a question about your school or town. Which method would you use, and what is one tradeoff?", stem: "My question: ___? I would use a ___ because ___. One tradeoff is ___.", min: 80, mustAll: [["survey", "interview", "observ", "experiment", "case", "secondary", "census"], ["but", "because", "although", "however", "tradeoff", "slow", "fast", "might", "may"]], mustMsg: "In answer 2, name a method (survey, interview, observation, experiment, case study, or secondary data) AND explain why or what you give up." }
-    ]
-  },
-  extraAnswers: st => ({ "Trust meter": st.fx.trust + " of 10", "Days left": String(st.fx.days) })
-});
-
-</script>
+<script src="game.js?v=20261103c"></script>
 </body></html>

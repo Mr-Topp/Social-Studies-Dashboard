@@ -1,267 +1,417 @@
-// Spanish for "How Should We Study People?" (Sociology Unit 1 Day 6). Loaded after shared/lang.js.
-// Keys are the exact English the page shows; the English page keeps running underneath.
-(function () {
-  // Same little HTML builders the page uses, so the keys match exactly.
-  const T = (cls, txt) => `<span class="tag ${cls}">${txt}</span>`;
-  const ev = (who, body) => `<span class="ev"><span class="who">${who}</span>${body}</span>`;
-  const client = (who, ask) => `<span class="ev client"><span class="who">📋 New client · ${who}</span>"${ask}"</span>`;
-  const cliente = (who, ask) => `<span class="ev client"><span class="who">📋 Cliente nuevo · ${who}</span>"${ask}"</span>`;
+// Spanish for Research Rivals (Sociology · Unit 1 · Day 6). Keys are the exact English on screen.
+SiteLang.add({
+  dict: {
+    // ---- page frame + HUD ----
+    "Research Rivals | Sociology Unit 1 Day 6": "Agencias rivales | Sociología Unidad 1 Día 6",
+    "Sociology · Unit 1 · Day 6 · SS.9-12.Soc.1, Soc.3": "Sociología · Unidad 1 · Día 6 · SS.9-12.Soc.1, Soc.3",
+    "🏢 Cedar River Research Co.": "🏢 Cedar River Research Co. (agencia de investigación)",
+    "Your agency": "Tu agencia",
+    "days left": "días restantes",
+    "Reputation": "Reputación",
+    "Rival hype": "Fama del rival",
+    "Hot Take hype": "Fama de Hot Take",
+    "Season over": "Fin de la temporada",
 
-  SiteLang.add({
-    dict: {
-      // ---------- Page frame ----------
-      "Research Agency | Sociology Unit 1 Day 6": "Agencia de investigación | Sociología Unidad 1 Día 6",
-      "Sociology · Unit 1 · Day 6": "Sociología · Unidad 1 · Día 6",
-      "How Should We Study People?": "¿Cómo debemos estudiar a las personas?",
-      "Analyze the components of a sociological investigation.": "Analizar las partes de una investigación sociológica.",
-      "Goal:": "Meta:",
-      "Pick the right research method for a question, explain its tradeoffs, and spot ethics problems. · About 25 minutes.":
-        "Escoger el método de investigación correcto para una pregunta, explicar sus ventajas y desventajas, y detectar problemas de ética. · Unos 25 minutos.",
-      "Progress, days, and trust": "Progreso, días y confianza",
-      "📅 Days left:": "📅 Días que quedan:",
-      "Trust:": "Confianza:",
+    // ---- intro ----
+    "A research agency game · made-up company": "Un juego de agencia de investigación · empresa inventada",
+    "Research Rivals": "Agencias rivales",
+    "A rival agency sells fast, cheap answers. Can the right research method beat a hot take?": "Una agencia rival vende respuestas rápidas y baratas. ¿Puede el método de investigación correcto ganarle a una opinión rápida?",
+    "🃏 Win 6 client jobs with method cards": "🃏 Gana 6 trabajos con cartas de métodos",
+    "⏱ About 25 minutes": "⏱ Unos 25 minutos",
+    "🔒 5 evidence checks": "🔒 5 pruebas de evidencia",
+    "✍️ 2 short answers": "✍️ 2 respuestas cortas",
+    "<b>🎯 Today's goal:</b> Pick the right research method for a question and explain its strengths and limits.": "<b>🎯 Meta de hoy:</b> Elegir el método de investigación correcto para una pregunta y explicar sus fortalezas y límites.",
+    "Open the agency": "Abrir la agencia",
+    "Why pay for research? Our app has the answer in 5 minutes. 😎": "¿Para qué pagar por investigar? Nuestra app tiene la respuesta en 5 minutos. 😎",
 
-      // ---------- Intro ----------
-      "Clock in": "Marcar entrada",
-      "Day one on the job": "Primer día de trabajo",
-      "Welcome to Cedar River Research Co.": "Bienvenido a Cedar River Research Co.",
-      "You just got hired at a small research company. Schools, cities, and businesses bring you questions about <b>people</b>. You pick how to study them.":
-        "Te acaban de contratar en una pequeña empresa de investigación. Liceos, ciudades y negocios te traen preguntas sobre <b>personas</b>. Tú escoges cómo estudiarlas.",
-      "Every method has a cost. Some take a long time. Some only give part of the story. And if you treat people badly, you lose <b>trust</b>.":
-        "Cada método tiene un costo. Algunos toman mucho tiempo. Algunos solo cuentan una parte de la historia. Y si tratas mal a la gente, pierdes <b>confianza</b>.",
-      "📅 You have <b>40 work days</b> this season.": "📅 Tienes <b>40 días de trabajo</b> en esta temporada.",
-      "🤝 Watch your <b>Trust</b> meter. Good, ethical work raises it.": "🤝 Pendiente con tu medidor de <b>Confianza</b>. El trabajo bueno y ético lo sube.",
-      "✍️ At the end, write 2 short answers and turn in.": "✍️ Al final, escribe 2 respuestas cortas y entrega.",
-      "The company and clients are made up. The famous studies in Part 3 are real.": "La empresa y los clientes son inventados. Los estudios famosos de la Parte 3 son reales.",
+    // ---- method cards ----
+    "Survey": "Encuesta",
+    "Interview": "Entrevista",
+    "Observation": "Observación",
+    "Experiment": "Experimento",
+    "Content Analysis": "Análisis de contenido",
+    "Same questions to many people.": "Las mismas preguntas a mucha gente.",
+    "Talk with people. Ask follow-up questions.": "Habla con la gente. Haz más preguntas para seguir.",
+    "Watch and record what people do in a real place.": "Mira y anota lo que hace la gente en un lugar real.",
+    "Change one thing. Compare two groups.": "Cambia una cosa. Compara dos grupos.",
+    "Count patterns in ads, posts, songs, or news.": "Cuenta patrones en anuncios, publicaciones, canciones o noticias.",
+    "How common something is": "Qué tan común es algo",
+    "The reasons and story behind an answer": "Las razones y la historia detrás de una respuesta",
+    "What people actually do": "Lo que la gente hace de verdad",
+    "Whether a change causes a result": "Si un cambio causa un resultado",
+    "What messages media sends": "Qué mensajes envían los medios",
+    "People may skip, misread, or say what sounds good.": "La gente puede saltar preguntas, leer mal o decir lo que suena bien.",
+    "Slow, so the group is small.": "Es lento, así que el grupo es pequeño.",
+    "People may act different when watched.": "La gente puede actuar diferente cuando la miran.",
+    "Costs a lot. A test can feel fake.": "Cuesta mucho. Una prueba puede sentirse falsa.",
+    "Can't tell what the creator meant.": "No dice qué quiso decir el creador.",
+    "Best at:": "Mejor para:",
+    "Reach": "Alcance",
+    "Depth": "Profundidad",
+    "Garbage": "Basura",
 
-      // ---------- Part 1 ----------
-      "Part 1 of 3": "Parte 1 de 3",
-      "The Toolbox": "La caja de herramientas",
-      [`<p>Sociologists use six main <b>research methods</b>:</p>
-        <ul><li><b>Survey</b>: the same questions to many people. Fast and big. Usually gives numbers.</li>
-        <li><b>Interview</b>: one-on-one, open-ended talk. Slow but deep.</li>
-        <li><b>Participant observation</b>: the researcher joins a group over time and takes notes.</li>
-        <li><b>Experiment</b>: change one thing and control the rest. Best for showing <b>cause and effect</b>.</li>
-        <li><b>Case study</b>: one person, group, or event in depth.</li>
-        <li><b>Secondary data</b>: data someone else already collected, like the U.S. Census.</li></ul>
-        <p><b>Quantitative</b> = numbers. <b>Qualitative</b> = descriptions, meanings, and experiences.</p>`]:
-        `<p>Los sociólogos usan seis <b>métodos de investigación (research methods)</b> principales:</p>
-        <ul><li><b>Encuesta (survey)</b>: las mismas preguntas a muchas personas. Rápida y grande. Casi siempre da números.</li>
-        <li><b>Entrevista (interview)</b>: una conversación abierta, cara a cara. Lenta pero profunda.</li>
-        <li><b>Observación participante (participant observation)</b>: el investigador se une a un grupo por un tiempo y toma notas.</li>
-        <li><b>Experimento (experiment)</b>: cambias una cosa y controlas lo demás. Es el mejor para mostrar <b>causa y efecto (cause and effect)</b>.</li>
-        <li><b>Estudio de caso (case study)</b>: una persona, un grupo o un evento, estudiado a fondo.</li>
-        <li><b>Datos secundarios (secondary data)</b>: datos que otra persona ya reunió, como el Censo de EE. UU.</li></ul>
-        <p><b>Cuantitativo (quantitative)</b> = números. <b>Cualitativo (qualitative)</b> = descripciones, significados y experiencias.</p>`,
+    // ---- pieces ----
+    "📞 New client": "📞 Cliente nuevo",
+    "Pays": "Paga",
+    "Made-up client": "Cliente inventado",
+    "<b>How it works:</b> Read the client's question. Tap the method card that fits. Then play it.": "<b>Cómo funciona:</b> Lee la pregunta del cliente. Toca la carta del método que encaja. Luego juégala.",
+    "💵 Money and 📅 days carry over to every job. A wrong card gives a <b>garbage report</b>, and you pay again.": "💵 El dinero y los 📅 días pasan a cada trabajo. Una carta equivocada da un <b>informe basura</b>, y pagas otra vez.",
+    "Which method fits this question?": "¿Qué método encaja con esta pregunta?",
+    "Tap a card to pick it.": "Toca una carta para elegirla.",
+    "Play this card": "Jugar esta carta",
+    "Play both cards": "Jugar las dos cartas",
+    "The client won't pay for this. Pick a different card.": "El cliente no va a pagar por esto. Elige otra carta.",
+    "SOLID REPORT": "INFORME SÓLIDO",
+    "SHAKY REPORT": "INFORME DÉBIL",
+    "HALF THE STORY": "SOLO LA MITAD",
+    "GARBAGE REPORT": "INFORME BASURA",
+    "Plan the study": "Planea el estudio",
+    "Results": "Resultados",
+    "The big one": "El trabajo grande",
+    "Card played:": "Carta jugada:",
+    "Good fit. The client wants this kind of answer.": "Buena elección. El cliente quiere este tipo de respuesta.",
+    "How will you run it?": "¿Cómo lo vas a hacer?",
+    "Both choices cost you something.": "Las dos opciones te cuestan algo.",
+    "Blake Vance runs Hot Take Analytics (made up). He checks every report you send.": "Blake Vance dirige Hot Take Analytics (inventado). Revisa cada informe que envías.",
+    "Blake read your report three times. He couldn't find a hole.": "Blake leyó tu informe tres veces. No encontró ningún error.",
+    "−$200 (you got exposed)": "−$200 (te dejaron en ridículo)",
+    "−$300 (only half the story)": "−$300 (solo la mitad de la historia)",
+    "−$500 (half the story)": "−$500 (la mitad de la historia)",
+    "Next job": "Siguiente trabajo",
+    "the big final job": "el gran trabajo final",
+    "See how your season ended": "Mira cómo terminó tu temporada",
+    "Made-up game data": "Datos inventados del juego",
 
-      [client("A school district", "How many of our 1,200 students work a job after school?") + "Which method fits best?"]:
-        cliente("Un distrito escolar", "¿Cuántos de nuestros 1,200 estudiantes trabajan después de clases?") + "¿Cuál método sirve mejor?",
-      "A survey sent to every student": "Una encuesta enviada a cada estudiante",
-      "A case study of one student": "Un estudio de caso de un estudiante",
-      "Joining one student's work crew": "Unirte al equipo de trabajo de un estudiante",
-      "One long interview with the principal": "Una entrevista larga con el director",
-      "The client wants a number for a big group. Which method reaches many people fast?": "El cliente quiere un número para un grupo grande. ¿Cuál método llega rápido a muchas personas?",
-      "A survey asks the same questions to lots of people and gives numbers. That's what this client needs.":
-        "Una encuesta les hace las mismas preguntas a muchas personas y da números. Eso es lo que necesita este cliente.",
+    // ---- job 1 ----
+    "Linn County Teen Jobs Center": "Centro de Empleo Juvenil del Condado de Linn",
+    "People keep saying all the teens have jobs now. Is that true? How many high schoolers here work during the school year?": "La gente dice que ahora todos los adolescentes trabajan. ¿Es verdad? ¿Cuántos estudiantes de high school de aquí trabajan durante el año escolar?",
+    "You talked with 8 teens. Great stories. But the client asks, \"So what PERCENT work?\" You can't tell from 8 people.": "Hablaste con 8 adolescentes. Buenas historias. Pero el cliente pregunta: \"¿Y qué PORCENTAJE trabaja?\" No lo puedes saber con 8 personas.",
+    "You watched a fast-food drive-thru for a week. You saw 6 teens working. That doesn't tell you how many teens in the county work.": "Miraste un autoservicio de comida rápida por una semana. Viste a 6 adolescentes trabajando. Eso no te dice cuántos adolescentes del condado trabajan.",
+    "What would you even change? You can't assign teens to get jobs. There's nothing to test.": "¿Qué ibas a cambiar? No puedes obligar a adolescentes a conseguir trabajo. No hay nada que probar.",
+    "You counted 140 \"Now Hiring\" posts. That shows jobs are open, not how many teens have one.": "Contaste 140 anuncios de \"Se contrata\". Eso muestra que hay trabajos, no cuántos adolescentes tienen uno.",
+    "Send an online link at 9 p.m. only": "Mandar un enlace en línea solo a las 9 p.m.",
+    "Free. No extra days.": "Gratis. Sin días extra.",
+    "Paper survey in class + online link, any time": "Encuesta en papel en clase + enlace en línea, a cualquier hora",
+    "Reaches teens who work nights or have no Wi-Fi.": "Llega a quienes trabajan de noche o no tienen Wi-Fi.",
+    "Work during the school year": "Trabajan durante el año escolar",
+    "Don't work": "No trabajan",
+    "1,140 teens answered, from every school and every shift.": "Respondieron 1,140 adolescentes, de todas las escuelas y todos los turnos.",
+    "<b>Survey</b> = the same questions to many people. It shows <b>how common</b> something is.": "<b>Encuesta</b> = las mismas preguntas a mucha gente. Muestra <b>qué tan común</b> es algo.",
+    "Only 19% work? The Jobs Center says that can't be right.": "¿Solo el 19% trabaja? El Centro de Empleo dice que eso no puede ser.",
+    "Cedar River sent their survey at 9 p.m. Guess who's AT WORK at 9 p.m.? 🤡": "Cedar River mandó su encuesta a las 9 p.m. ¿Adivina quién está TRABAJANDO a las 9 p.m.? 🤡",
+    "<b>Sampling bias</b>: your 9 p.m. link left out teens on night shifts, the exact people you were counting.": "<b>Sesgo de muestra</b>: tu enlace de las 9 p.m. dejó fuera a quienes trabajan de noche, justo las personas que contabas.",
+    "Survey with a fair sample": "Encuesta con una muestra justa",
+    "9 p.m. survey link: exposed for sampling bias": "Enlace de las 9 p.m.: expuesto por sesgo de muestra",
 
-      [ev("Research note", "A researcher takes a job at a fast-food restaurant for 8 months. She takes notes on how workers treat each other.") + "Which method is this?"]:
-        ev("Nota de investigación", "Una investigadora consigue trabajo en un restaurante de comida rápida por 8 meses. Toma notas sobre cómo se tratan los trabajadores entre ellos.") + "¿Qué método es este?",
-      "Participant observation": "Observación participante",
-      "Secondary data analysis": "Análisis de datos secundarios",
-      "A controlled experiment": "Un experimento controlado",
-      "A large-scale survey": "Una encuesta a gran escala",
-      "The researcher becomes part of the group. Check the toolbox.": "La investigadora se vuelve parte del grupo. Revisa la caja de herramientas.",
-      "Joining a group over time and watching from the inside is participant observation.": "Unirse a un grupo por un tiempo y observar desde adentro es observación participante.",
+    // ---- check 1 ----
+    "🔒 Evidence check · unlocks your survey setup": "🔒 Prueba de evidencia · desbloquea el plan de tu encuesta",
+    "We already polled 10,000 people on our app. Bigger = better. 😎": "Ya encuestamos a 10,000 personas en nuestra app. Más grande = mejor. 😎",
+    "📁 Real case file · The Literary Digest poll, 1936": "📁 Caso real · La encuesta del Literary Digest, 1936",
+    "The magazine mailed 10 million ballots and got about 2.4 million back. It said Alf Landon would beat President Roosevelt.": "La revista mandó por correo 10 millones de boletas y recibió unos 2.4 millones. Dijo que Alf Landon le ganaría al presidente Roosevelt.",
+    "Roosevelt won 46 of 48 states. The names came mostly from phone books and car records. In 1936, many poorer voters had neither.": "Roosevelt ganó 46 de 48 estados. Los nombres salieron sobre todo de guías telefónicas y registros de autos. En 1936, muchos votantes más pobres no tenían ninguno de los dos.",
+    "Source: Literary Digest poll, fall 1936; Salganik, <i>Bit by Bit</i> (2018).": "Fuente: encuesta del Literary Digest, otoño de 1936; Salganik, <i>Bit by Bit</i> (2018).",
+    "Blake says bigger is better. Based on the case file, why was the giant 1936 poll wrong?": "Blake dice que más grande es mejor. Según el caso, ¿por qué se equivocó la enorme encuesta de 1936?",
+    "Its sample didn't look like all voters": "Su muestra no se parecía a todos los votantes",
+    "It asked too few people to trust it": "Preguntó a muy poca gente para confiar en ella",
+    "Most voters changed their minds late": "Casi todos cambiaron de opinión al final",
+    "Its ballots were mailed out too early": "Sus boletas se mandaron demasiado temprano",
+    "Reread where the names came from. Who didn't have a phone or a car in 1936?": "Vuelve a leer de dónde salieron los nombres. ¿Quién no tenía teléfono ni auto en 1936?",
+    "<b>Sampling bias</b>: if a study leaves people out, the results can be wrong. Who you ask matters more than how many. (George Gallup, who grew up in Iowa, asked far fewer people, picked more fairly, and got it right.)": "<b>Sesgo de muestra</b>: si un estudio deja gente fuera, los resultados pueden estar mal. Importa más a quién preguntas que a cuántos. (George Gallup, que creció en Iowa, preguntó a mucha menos gente, la eligió de forma más justa y acertó.)",
+    "🔓 Evidence check": "🔓 Prueba de evidencia",
 
-      [ev("Research note", "A researcher uses U.S. Census numbers to compare incomes in Iowa's 99 counties. He never talks to anyone.") + "Which method is this?"]:
-        ev("Nota de investigación", "Un investigador usa números del Censo de EE. UU. para comparar los ingresos en los 99 condados de Iowa. Nunca habla con nadie.") + "¿Qué método es este?",
-      "Secondary data": "Datos secundarios",
-      "A case study": "Un estudio de caso",
-      "An interview": "Una entrevista",
-      "Who collected the numbers he's using?": "¿Quién reunió los números que él está usando?",
-      "The Census Bureau already collected that data. Using existing data is secondary data.": "La Oficina del Censo ya reunió esos datos. Usar datos que ya existen es usar datos secundarios.",
+    // ---- job 2 ----
+    "Iowa Teen Health Group": "Grupo de Salud Juvenil de Iowa",
+    "Energy-drink ads are all over teens' feeds. How do those ads show teens?": "Los anuncios de bebidas energéticas están por todo el feed de los adolescentes. ¿Cómo muestran esos anuncios a los adolescentes?",
+    "You asked 300 teens what they THINK of the ads. The client asked what the ADS show. You never looked at one ad.": "Les preguntaste a 300 adolescentes qué PIENSAN de los anuncios. El cliente preguntó qué muestran los ANUNCIOS. Nunca miraste ni un anuncio.",
+    "Four teens told you energy drinks taste like batteries. Funny. But you still don't know what the ads show.": "Cuatro adolescentes te dijeron que las bebidas energéticas saben a pilas. Chistoso. Pero sigues sin saber qué muestran los anuncios.",
+    "You watched teens scroll in study hall. They scrolled too fast to see the ads, and they kept looking at you.": "Miraste a adolescentes deslizar el teléfono en la sala de estudio. Iban muy rápido para ver los anuncios, y te miraban a ti.",
+    "You showed one group an ad and one group nothing. That tests what an ad DOES, not what ads SHOW.": "Le mostraste un anuncio a un grupo y nada al otro. Eso prueba lo que un anuncio HACE, no lo que los anuncios MUESTRAN.",
+    "Screenshot ads from your own feed": "Hacer capturas de anuncios de tu propio feed",
+    "Random sample of 200 ads + written counting rules": "Muestra al azar de 200 anuncios + reglas escritas para contar",
+    "Another researcher could repeat your count.": "Otra persona investigadora podría repetir tu conteo.",
+    "Athletes": "Atletas",
+    "Gamers": "Gamers",
+    "Partying": "De fiesta",
+    "Studying": "Estudiando",
+    "Share of 200 ads · made-up game data": "Parte de 200 anuncios · datos inventados del juego",
+    "Share of your screenshots · made-up game data": "Parte de tus capturas · datos inventados del juego",
+    "200 ads, all counted with the same rules.": "200 anuncios, todos contados con las mismas reglas.",
+    "<b>Content analysis</b> = pick a sample of media, make categories, and count. It shows what <b>messages</b> media sends.": "<b>Análisis de contenido</b> = elige una muestra de medios, haz categorías y cuenta. Muestra qué <b>mensajes</b> envían los medios.",
+    "Your feed shows gaming ads because YOU watch gaming videos.": "Tu feed muestra anuncios de videojuegos porque TÚ ves videos de videojuegos.",
+    "Cedar River's big \"study\" = one guy's For You page. 💀": "El gran \"estudio\" de Cedar River = la página Para Ti de un solo tipo. 💀",
+    "<b>Sampling bias</b> again: your own feed is picked for YOU, so it doesn't show what most teens see.": "<b>Sesgo de muestra</b> otra vez: tu feed se elige para TI, así que no muestra lo que ven la mayoría de los adolescentes.",
+    "Fair sample of 200 ads": "Muestra justa de 200 anuncios",
+    "Used own feed: exposed": "Usó su propio feed: expuesto",
 
-      [client("A city council", "Why do so many young people move away after high school?") + `<p>Pick your method.</p>`]:
-        cliente("Un concejo municipal", "¿Por qué tantos jóvenes se mudan lejos después del liceo?") + `<p>Escoge tu método.</p>`,
-      "Survey 2,000 young adults (5 days)": "Encuestar a 2,000 adultos jóvenes (5 días)",
-      "Long interviews with 20 people who left (12 days)": "Entrevistas largas a 20 personas que se fueron (12 días)",
-      "Survey first, then interview 10 people (15 days)": "Primero encuesta, luego entrevistar a 10 personas (15 días)",
-      [`<p>${T("up", "+1 trust · −5 days")}Results: 41% said jobs, 22% said college, 15% said things to do. Clear numbers. But the client asks, "What's the story behind them?" You don't know.</p>`]:
-        `<p>${T("up", "+1 confianza · −5 días")}Resultados: 41% dijo trabajo, 22% dijo universidad, 15% dijo cosas que hacer. Números claros. Pero el cliente pregunta: "¿Cuál es la historia detrás de esto?". No sabes.</p>`,
-      [`<p>${T("up", "+1 trust · −12 days")}Powerful stories. One said, "My mom got laid off, and I felt like there was nothing here for me." But with only 20 people, you can't say how common each reason is.</p>`]:
-        `<p>${T("up", "+1 confianza · −12 días")}Historias muy fuertes. Una persona dijo: "Botaron a mi mamá del trabajo, y sentí que aquí no había nada para mí". Pero con solo 20 personas, no puedes decir qué tan común es cada razón.</p>`,
-      [`<p>${T("up", "+2 trust · −15 days")}You get the numbers AND the stories behind them. The client loves it. It costs the most time, though.</p>`]:
-        `<p>${T("up", "+2 confianza · −15 días")}Consigues los números Y las historias detrás de ellos. Al cliente le encanta. Pero es lo que más tiempo cuesta.</p>`,
+    // ---- check 2 ----
+    "🔒 Evidence check · reply to Blake to get paid": "🔒 Prueba de evidencia · respóndele a Blake para cobrar",
+    "LOL their own ad count PROVES drink companies WANT teens to skip school and party! 🎉": "JAJA ¡su propio conteo de anuncios PRUEBA que las compañías de bebidas QUIEREN que los adolescentes falten a la escuela y vayan de fiesta! 🎉",
+    "Reply to Blake. What can an ad count NOT tell you?": "Respóndele a Blake. ¿Qué NO te puede decir un conteo de anuncios?",
+    "What the ad makers meant or wanted": "Lo que querían o pensaban los creadores",
+    "How often each kind of ad showed up": "Cuántas veces salió cada tipo de anuncio",
+    "Which kinds of teens the ads showed": "Qué tipos de adolescentes salían en ellos",
+    "How many ads were in the sample": "Cuántos anuncios había en la muestra",
+    "Your count shows what's IN the ads. Does it show what's in the ad makers' heads?": "Tu conteo muestra lo que hay EN los anuncios. ¿Muestra lo que hay en la cabeza de quienes los hicieron?",
+    "Right. Content analysis shows what messages appear, but it <b>can't tell what the creator meant</b>.": "Correcto. El análisis de contenido muestra qué mensajes aparecen, pero <b>no dice qué quiso decir el creador</b>.",
 
-      [ev("Two kinds of results", "<b>Survey:</b> 41% said they left for jobs.<br><b>Interview:</b> \"My mom got laid off, and I felt like there was nothing here for me.\"") + "Why might a researcher choose interviews (qualitative) over a survey?"]:
-        ev("Dos tipos de resultados", "<b>Encuesta:</b> 41% dijo que se fue por trabajo.<br><b>Entrevista:</b> \"Botaron a mi mamá del trabajo, y sentí que aquí no había nada para mí.\"") + "¿Por qué un investigador escogería entrevistas (cualitativas) en vez de una encuesta?",
-      "To learn the reasons behind the numbers": "Para conocer las razones detrás de los números",
-      "To get answers from more people in less time": "Para tener respuestas de más gente en menos tiempo",
-      "To prove that one thing causes another": "Para probar que una cosa causa otra",
-      "To avoid talking with the people being studied": "Para no tener que hablar con las personas estudiadas",
-      "What does the interview quote tell you that 41% doesn't?": "¿Qué te dice la cita de la entrevista que el 41% no te dice?",
-      "Qualitative methods show meanings and experiences. Numbers tell you how many; interviews help explain why.":
-        "Los métodos cualitativos muestran significados y experiencias. Los números te dicen cuántos; las entrevistas ayudan a explicar por qué.",
+    // ---- job 3 ----
+    "School counselor, Prairie Ridge High": "Consejera escolar, Prairie Ridge High",
+    "A lot of our juniors stop showing up after winter break. I don't need a number. I need to understand WHY.": "Muchos de nuestros estudiantes de 11.º grado dejan de venir después de las vacaciones de invierno. No necesito un número. Necesito entender POR QUÉ.",
+    "Other": "Otro",
+    "Work": "Trabajo",
+    "Bored": "Aburrimiento",
+    "Sick": "Enfermedad",
+    "41% picked \"Other.\" The counselor sighs. \"Okay, but WHY?\"": "El 41% eligió \"Otro\". La consejera suspira: \"Bueno, pero ¿POR QUÉ?\"",
+    "Cedar River's survey says the #1 reason is \"Other.\" Wow. Big discovery. 🙄": "La encuesta de Cedar River dice que la razón #1 es \"Otro\". Uy. Gran descubrimiento. 🙄",
+    "A survey shows <b>how many</b>. This client asked <b>why</b>. That's an interview's job.": "Una encuesta muestra <b>cuántos</b>. Este cliente preguntó <b>por qué</b>. Eso le toca a una entrevista.",
+    "You sat in the hallway for a week. The students who stopped coming... weren't there to watch.": "Te sentaste en el pasillo una semana. Los estudiantes que dejaron de venir... no estaban ahí para mirarlos.",
+    "You can't make some students drop out just to compare. There's nothing fair to test, and it would hurt people.": "No puedes hacer que unos estudiantes dejen la escuela solo para comparar. No hay nada justo que probar, y le haría daño a la gente.",
+    "You counted posts on the school's page. Lots of pep rallies. Nothing about why kids stop coming.": "Contaste publicaciones en la página de la escuela. Muchas fiestas de ánimo. Nada sobre por qué los chicos dejan de venir.",
+    "Talk with 6 students this week": "Hablar con 6 estudiantes esta semana",
+    "Fast. No extra cost.": "Rápido. Sin costo extra.",
+    "Talk with 20 students. Report patterns, not names.": "Hablar con 20 estudiantes. Reportar patrones, no nombres.",
+    "Slower, and it protects their privacy.": "Más lento, y protege su privacidad.",
+    "\"I work nights to help my mom with rent. By 8 a.m. I'm too tired to care.\"": "\"Trabajo de noche para ayudar a mi mamá con la renta. A las 8 a.m. estoy tan cansado que no me importa.\"",
+    "\"After I got behind, it felt like there was no point.\"": "\"Cuando me atrasé, sentí que ya no tenía sentido.\"",
+    "\"They cut my bus route. My ride leaves at 6.\"": "\"Quitaron mi ruta de autobús. Mi aventón sale a las 6.\"",
+    "Made-up quotes. Patterns in 20 talks: work, falling behind, rides.": "Citas inventadas. Patrones en 20 charlas: trabajo, atrasarse, transporte.",
+    "Real reasons, in their own words, from 20 different students.": "Razones reales, con sus propias palabras, de 20 estudiantes diferentes.",
+    "<b>Interview</b> = talk with people and ask follow-ups. It shows the <b>reasons and story</b> behind an answer.": "<b>Entrevista</b> = habla con la gente y haz más preguntas. Muestra las <b>razones y la historia</b> detrás de una respuesta.",
+    "\"I just stopped caring, I guess.\"": "\"Creo que simplemente dejó de importarme.\"",
+    "\"My friends stopped coming, so I did too.\"": "\"Mis amigos dejaron de venir, así que yo también.\"",
+    "Made-up quotes. 4 of your 6 students are from the same friend group.": "Citas inventadas. 4 de tus 6 estudiantes son del mismo grupo de amigos.",
+    "Six good talks, but mostly one friend group.": "Seis buenas charlas, pero casi todas de un solo grupo de amigos.",
+    "6 kids. SIX. That's not a pattern, that's a lunch table. 🍕": "6 chicos. SEIS. Eso no es un patrón, es una mesa del almuerzo. 🍕",
+    "Interviews go deep, but they're slow, so the group is <b>small</b>. Too small, and it may not stand for everyone.": "Las entrevistas van a fondo, pero son lentas, así que el grupo es <b>pequeño</b>. Si es muy pequeño, puede que no represente a todos.",
+    "Interviewed 20 students, kept names private": "Entrevistó a 20 estudiantes y protegió sus nombres",
+    "Only 6 interviews: exposed": "Solo 6 entrevistas: expuesto",
+    "Survey for a WHY question: half the story": "Encuesta para una pregunta de POR QUÉ: la mitad de la historia",
 
-      // ---------- Part 2 ----------
-      "Part 2 of 3": "Parte 2 de 3",
-      "Every Method Has a Tradeoff": "Cada método tiene su desventaja",
-      [`<p>A <b>tradeoff</b> is what you give up to get something.</p>
-        <p><b>Surveys</b> are fast and big, but people don't always answer honestly. <b>Experiments</b> show cause and effect, but can feel fake. <b>Case studies</b> go deep, but may not apply to others. <b>Observation</b> is deep, but slow, and people may act differently when watched.</p>`]:
-        `<p>Un <b>sacrificio (tradeoff)</b> es lo que dejas de lado para conseguir algo.</p>
-        <p>Las <b>encuestas</b> son rápidas y grandes, pero la gente no siempre responde con honestidad. Los <b>experimentos</b> muestran causa y efecto, pero pueden sentirse falsos. Los <b>estudios de caso</b> van a fondo, pero puede que no apliquen a otros. La <b>observación</b> es profunda, pero lenta, y la gente puede actuar distinto cuando la observan.</p>`,
+    // ---- check 3 ----
+    "🔒 Evidence check · file your report": "🔒 Prueba de evidencia · entrega tu informe",
+    "📋 Survey says": "📋 La encuesta dice",
+    "picked \"Work\"": "eligió \"Trabajo\"",
+    "🎙️ Interview says": "🎙️ La entrevista dice",
+    "The counselor asks: what does the interview give you that the survey number doesn't?": "La consejera pregunta: ¿qué te da la entrevista que el número de la encuesta no te da?",
+    "Why it's happening, in the students' words": "Por qué está pasando, en palabras de los estudiantes",
+    "Answers from many more students at once": "Respuestas de muchos más estudiantes a la vez",
+    "Proof that jobs cause every absence": "Prueba de que el trabajo causa cada falta",
+    "A count of how common the problem is": "Un conteo de qué tan común es el problema",
+    "The number says how many. What does the quote add?": "El número dice cuántos. ¿Qué agrega la cita?",
+    "Interviews show <b>why</b>. Surveys show <b>how many</b>. Each one covers what the other misses.": "Las entrevistas muestran <b>por qué</b>. Las encuestas muestran <b>cuántos</b>. Cada una cubre lo que a la otra le falta.",
 
-      [client("A tutoring app company", "Does our app actually RAISE test scores?") + "Which method fits best?"]:
-        cliente("Una empresa de apps de tutoría", "¿De verdad nuestra app SUBE las notas de los exámenes?") + "¿Cuál método sirve mejor?",
-      "An experiment with a control group": "Un experimento con un grupo de control",
-      "A case study of one top student": "Un estudio de caso de un estudiante destacado",
-      "Census data on Iowa test scores": "Datos del censo sobre notas de exámenes en Iowa",
-      "Watching students at lunch for a month": "Observar a estudiantes en el almuerzo por un mes",
-      "The client wants to know if the app CAUSES higher scores.": "El cliente quiere saber si la app CAUSA notas más altas.",
-      "Only an experiment changes one thing (using the app) and compares to a control group. That's how you test cause and effect.":
-        "Solo un experimento cambia una cosa (usar la app) y compara con un grupo de control. Así es como se pone a prueba la causa y el efecto.",
+    // ---- job 4 ----
+    "Lunch manager, Prairie Ridge High": "Encargado del almuerzo, Prairie Ridge High",
+    "Lunch is a mess. Kids say one thing, staff say another. Where do the lines ACTUALLY back up?": "El almuerzo es un desastre. Los chicos dicen una cosa y el personal dice otra. ¿Dónde se atascan las filas DE VERDAD?",
+    "Pizza line": "Fila de pizza",
+    "Card reader": "Lector de tarjetas",
+    "Salad bar": "Barra de ensaladas",
+    "Where students SAY it's worst · made-up game data": "Dónde los estudiantes DICEN que está peor · datos inventados del juego",
+    "Students SAY the pizza line is worst. The manager asks, \"But is that where it actually backs up?\" You can't tell.": "Los estudiantes DICEN que la fila de pizza es la peor. El encargado pregunta: \"Pero ¿es ahí donde de verdad se atasca?\" No lo puedes saber.",
+    "Cedar River asked kids where the line is. Bro, just go LOOK. 👀": "Cedar River les preguntó a los chicos dónde está la fila. Bro, solo ve a MIRAR. 👀",
+    "People don't always remember right. When the question is what people <b>do</b>, watch them. That's <b>observation</b>.": "La gente no siempre recuerda bien. Cuando la pregunta es qué <b>hace</b> la gente, obsérvala. Eso es <b>observación</b>.",
+    "Three long talks about lunch feelings. Deep, but nobody can tell you which minute the line jams.": "Tres charlas largas sobre lo que sienten en el almuerzo. Profundo, pero nadie te puede decir en qué minuto se atasca la fila.",
+    "You moved the salad bar to test it... before you even knew where the jam was. Now it's worse.": "Moviste la barra de ensaladas para probar... antes de saber dónde estaba el atasco. Ahora está peor.",
+    "You counted lunch posts online. Lots of pizza pics. Zero line data.": "Contaste publicaciones del almuerzo en internet. Muchas fotos de pizza. Cero datos de las filas.",
+    "Stand by the lines with a clipboard for 2 days": "Pararte junto a las filas con una tabla de notas por 2 días",
+    "Quick. No extra cost.": "Rápido. Sin costo extra.",
+    "Come back all week so people get used to you. Count, don't film faces.": "Volver toda la semana para que se acostumbren a ti. Contar, sin grabar caras.",
+    "Slower, more real, and it respects privacy.": "Más lento, más real y respeta la privacidad.",
+    "Students in line at 11:40 · made-up game data": "Estudiantes en la fila a las 11:40 · datos inventados del juego",
+    "The real jam: the ONE card reader at 11:40.": "El atasco real: el ÚNICO lector de tarjetas a las 11:40.",
+    "<b>Observation</b> = watch and record what people do in a real place. It shows what people <b>actually do</b>, not just what they say.": "<b>Observación</b> = mirar y anotar lo que hace la gente en un lugar real. Muestra lo que la gente <b>hace de verdad</b>, no solo lo que dice.",
+    "Lines looked short and neat. The manager says, \"That's not what I see every day.\"": "Las filas se veían cortas y ordenadas. El encargado dice: \"Eso no es lo que veo todos los días.\"",
+    "Cedar River says our lunch lines are \"fine.\" Have they MET teenagers? 😂": "Cedar River dice que nuestras filas del almuerzo están \"bien\". ¿Alguna vez CONOCIERON a un adolescente? 😂",
+    "Two days with a clipboard wasn't enough. People acted their best because they knew you were watching.": "Dos días con una tabla no fueron suficientes. La gente se portó lo mejor posible porque sabía que la mirabas.",
+    "Watched all week, no faces filmed": "Observó toda la semana, sin grabar caras",
+    "2 days with a clipboard: exposed": "2 días con una tabla: expuesto",
+    "Survey for a DO question: half the story": "Encuesta para una pregunta de lo que HACEN: la mitad de la historia",
 
-      [ev("Research note", "A researcher spends a year studying one small Iowa town after its factory closed.") + "What is the biggest weakness of this case study?"]:
-        ev("Nota de investigación", "Una investigadora pasa un año estudiando un pueblito de Iowa después de que cerró su fábrica.") + "¿Cuál es la mayor debilidad de este estudio de caso?",
-      "Its results may not apply to other towns": "Sus resultados quizás no apliquen a otros pueblos",
-      "It can't tell us anything in real detail": "No nos puede decir nada con mucho detalle",
-      "It uses too many numbers and statistics": "Usa demasiados números y estadísticas",
-      "It can only study people who are online": "Solo puede estudiar a gente que está en internet",
-      "It's ONE town. Would every town react the same way?": "Es UN solo pueblo. ¿Todos los pueblos reaccionarían igual?",
-      "Case studies go deep on one example, but that example may not represent others.": "Los estudios de caso van a fondo en un ejemplo, pero ese ejemplo puede que no represente a los demás.",
+    // ---- check 4 ----
+    "📓 Field notes from a researcher in this lunchroom (made up)": "📓 Notas de campo de una investigadora en este comedor (inventadas)",
+    "<b>Day 1:</b> I stood there with my clipboard. Students lined up neatly. A lunch aide said, \"They're never this good.\"": "<b>Día 1:</b> Me paré ahí con mi tabla. Los estudiantes hicieron fila en orden. Una ayudante del comedor dijo: \"Nunca se portan así de bien.\"",
+    "<b>Day 4:</b> Nobody noticed me anymore. The card-reader line stretched to the door.": "<b>Día 4:</b> Ya nadie se fijaba en mí. La fila del lector de tarjetas llegaba hasta la puerta.",
+    "What problem do these field notes show?": "¿Qué problema muestran estas notas de campo?",
+    "People act different when they know they're watched": "La gente actúa diferente cuando sabe que la miran",
+    "The lunchroom was too crowded to count anyone": "El comedor estaba muy lleno para contar a alguien",
+    "Students gave dishonest answers on a survey": "Los estudiantes mintieron en una encuesta",
+    "Observation only works if it lasts one day": "La observación solo sirve si dura un día",
+    "Compare Day 1 to Day 4. What changed once nobody noticed the clipboard?": "Compara el Día 1 con el Día 4. ¿Qué cambió cuando nadie se fijaba en la tabla?",
+    "That's the <b>Hawthorne effect</b>: people change how they act when they know they're being watched. It's named after a 1920s factory study near Chicago.": "Eso es el <b>efecto Hawthorne</b>: la gente cambia cómo actúa cuando sabe que la están mirando. Se llama así por un estudio en una fábrica cerca de Chicago en los años 1920.",
 
-      [client("A parks department", "The skaters at Riverside Park seem to have their own rules. What are they?") + `<p>You'll use participant observation. How do you join the group?</p>`]:
-        cliente("Un departamento de parques", "Parece que los patinadores de Riverside Park tienen sus propias reglas. ¿Cuáles son?") + `<p>Vas a usar observación participante. ¿Cómo te unes al grupo?</p>`,
-      "Tell them you're a researcher and ask if it's OK (10 days)": "Decirles que eres investigador y preguntar si está bien (10 días)",
-      "Go undercover. Just pretend to be a skater (8 days).": "Ir encubierto. Solo hacerte pasar por patinador (8 días).",
-      "Skip it. Tape a survey QR code to the rail (2 days).": "Saltarlo. Pegar un código QR de encuesta en la baranda (2 días).",
-      [`<p>${T("up", "+2 trust · −10 days")}Most say yes. One says no, so you leave him out of your notes. This is <b>informed consent</b>: people agree after knowing what the study is.</p>`]:
-        `<p>${T("up", "+2 confianza · −10 días")}Casi todos dicen que sí. Uno dice que no, así que lo dejas fuera de tus notas. Esto es el <b>consentimiento informado (informed consent)</b>: las personas aceptan después de saber de qué se trata el estudio.</p>`,
-      [`<p>${T("down", "−3 trust · −8 days")}A skater finds your notebook. Word spreads that you were secretly studying them. The crew stops talking to you, and the client worries about complaints.</p>`]:
-        `<p>${T("down", "−3 confianza · −8 días")}Un patinador encuentra tu cuaderno. Se corre la voz de que los estabas estudiando en secreto. El grupo deja de hablarte, y al cliente le preocupan las quejas.</p>`,
-      [`<p>${T("flat", "No change · −2 days")}You get 3 answers, one of them a meme. Fast, but you learn almost nothing.</p>`]:
-        `<p>${T("flat", "Sin cambio · −2 días")}Recibes 3 respuestas, y una es un meme. Rápido, pero no aprendes casi nada.</p>`,
+    // ---- job 5 ----
+    "StudyStreak, a homework app company": "StudyStreak, una compañía de app de tareas",
+    "Our app adds streaks and prizes to homework. Does it actually RAISE test scores? Our investors want proof.": "Nuestra app agrega rachas y premios a la tarea. ¿De verdad SUBE las notas de los exámenes? Nuestros inversionistas quieren pruebas.",
+    "Users who say it helps": "Usuarios que dicen que ayuda",
+    "92% of users SAY it helps. The investors say, \"Saying it helps isn't proof it raises scores.\"": "El 92% de los usuarios DICE que ayuda. Los inversionistas dicen: \"Decir que ayuda no prueba que suba las notas.\"",
+    "\"92% say it works!\" My cousin says he's 6'5\". Doesn't make it true. 📏": "\"¡El 92% dice que funciona!\" Mi primo dice que mide 1.96 m. Eso no lo hace verdad. 📏",
+    "To test if something <b>causes</b> a result, you need an <b>experiment</b> with a control group.": "Para probar si algo <b>causa</b> un resultado, necesitas un <b>experimento</b> con un grupo de control.",
+    "Five users loved the confetti. Nice stories, but stories don't prove scores went up.": "A cinco usuarios les encantó el confeti. Lindas historias, pero las historias no prueban que las notas subieron.",
+    "You watched kids tap the app. Lots of tapping. You still don't know if it changed their scores.": "Miraste a los chicos tocar la app. Mucho tocar. Sigues sin saber si cambió sus notas.",
+    "You counted the app's ads. They all say \"Ace your test!\" That's their claim, not proof.": "Contaste los anuncios de la app. Todos dicen \"¡Saca 100 en tu examen!\" Eso es lo que ellos dicen, no una prueba.",
+    "Give the app to everyone. Check scores after.": "Darle la app a todos. Revisar las notas después.",
+    "Simple. No extra cost.": "Sencillo. Sin costo extra.",
+    "Two groups: one uses the app, one doesn't (a control group). Get signed consent first.": "Dos grupos: uno usa la app y otro no (un grupo de control). Primero, conseguir permiso firmado.",
+    "Costs more. Lets you compare.": "Cuesta más. Te deja comparar.",
+    "App group: before": "Grupo con app: antes",
+    "App group: after": "Grupo con app: después",
+    "No-app group: before": "Grupo sin app: antes",
+    "No-app group: after": "Grupo sin app: después",
+    "Average test score · made-up game data": "Nota promedio del examen · datos inventados del juego",
+    "Both groups went up. The app group went up just 1 point more.": "Los dos grupos subieron. El grupo con app subió solo 1 punto más.",
+    "<b>Experiment</b> = change one thing and compare to a <b>control group</b> that gets no change. It's the best way to test <b>cause and effect</b>.": "<b>Experimento</b> = cambia una cosa y compara con un <b>grupo de control</b> que no recibe el cambio. Es la mejor forma de probar <b>causa y efecto</b>.",
+    "Before the app": "Antes de la app",
+    "After the app": "Después de la app",
+    "Scores went up 3 points. The client is thrilled.": "Las notas subieron 3 puntos. El cliente está feliz.",
+    "\"Scores went up after the app!\" So did the temperature. No control group = no proof. 🧪❌": "\"¡Las notas subieron después de la app!\" La temperatura también. Sin grupo de control = sin prueba. 🧪❌",
+    "With no <b>control group</b>, you can't tell if the app did it, or a new teacher, or a practice test.": "Sin un <b>grupo de control</b>, no puedes saber si fue la app, un maestro nuevo o un examen de práctica.",
+    "Experiment with a control group and consent": "Experimento con grupo de control y permiso",
+    "No control group: exposed": "Sin grupo de control: expuesto",
+    "Survey for a CAUSE question: no proof": "Encuesta para una pregunta de CAUSA: sin prueba",
 
-      [ev("Field notes, week 3", "When the skaters knew I was watching, they swore less and helped each other more. When I left, things went back to normal.") + "What problem does this show?"]:
-        ev("Notas de campo, semana 3", "Cuando los patinadores sabían que yo los observaba, decían menos groserías y se ayudaban más. Cuando me fui, todo volvió a la normalidad.") + "¿Qué problema muestra esto?",
-      "People act differently when they know they're watched": "La gente actúa distinto cuando sabe que la observan",
-      "The skaters were both the test group and the control": "Los patinadores eran el grupo de prueba y el de control",
-      "She used secondary data instead of her own data": "Ella usó datos secundarios en vez de sus propios datos",
-      "Her sample was much too large to be a case study": "Su muestra era demasiado grande para un estudio de caso",
-      "What changed when the researcher was there?": "¿Qué cambiaba cuando la investigadora estaba ahí?",
-      "People change how they act when they know they're being studied. Observers have to plan for this.":
-        "La gente cambia su forma de actuar cuando sabe que la están estudiando. Los observadores tienen que tomar esto en cuenta.",
+    // ---- check 5 ----
+    "🔒 Evidence check · answer the investors": "🔒 Prueba de evidencia · responde a los inversionistas",
+    "Your results · made-up game data": "Tus resultados · datos inventados del juego",
+    "The investors ask: what do your two groups show?": "Los inversionistas preguntan: ¿qué muestran tus dos grupos?",
+    "Both groups rose, so the app added very little": "Los dos grupos subieron, así que la app sumó muy poco",
+    "The app raised scores by four whole points": "La app subió las notas cuatro puntos completos",
+    "The no-app group shows the app hurt scores": "El grupo sin app muestra que la app bajó las notas",
+    "Only the students using the app got better": "Solo mejoraron los estudiantes que usaron la app",
+    "Look at BOTH groups. How much did the no-app group go up too?": "Mira AMBOS grupos. ¿Cuánto subió también el grupo sin app?",
+    "StudyStreak's own numbers · made-up game data": "Los números de StudyStreak · datos inventados del juego",
+    "No control group = no proof. 🧪❌": "Sin grupo de control = sin prueba. 🧪❌",
+    "Blake has a point. Why can't anyone prove the app raised scores?": "Blake tiene razón. ¿Por qué nadie puede probar que la app subió las notas?",
+    "Nobody compared them to a group without the app": "Nadie los comparó con un grupo sin la app",
+    "Three points is too small to count in a study": "Tres puntos es muy poco para contar en un estudio",
+    "Test scores can't be measured with numbers": "Las notas de examen no se miden con números",
+    "Too many students used the app at one time": "Demasiados estudiantes usaron la app a la vez",
+    "What would you need to compare the app users to?": "¿Con qué tendrías que comparar a los usuarios de la app?",
+    "A <b>control group</b> gets no change. Comparing to it is how you know if the change <b>caused</b> the result.": "Un <b>grupo de control</b> no recibe el cambio. Comparar con él es como sabes si el cambio <b>causó</b> el resultado.",
 
-      [ev("Two numbers that don't match", "<b>Survey:</b> students said they do 2.5 hours of homework a night.<br><b>Teacher logs:</b> about 40 minutes.") + "What survey weakness does this show?"]:
-        ev("Dos números que no cuadran", "<b>Encuesta:</b> los estudiantes dijeron que hacen 2.5 horas de tarea cada noche.<br><b>Registros de los profesores:</b> unos 40 minutos.") + "¿Qué debilidad de las encuestas muestra esto?",
-      "People don't always answer surveys honestly": "La gente no siempre responde las encuestas con honestidad",
-      "Surveys can't collect any numbers at all": "Las encuestas no pueden reunir ningún número",
-      "Surveys only work with one person at a time": "Las encuestas solo funcionan con una persona a la vez",
-      "Surveys prove cause and effect too strongly": "Las encuestas exageran demasiado la causa y el efecto",
-      "Why might students report more homework than they really do?": "¿Por qué los estudiantes dirían que hacen más tarea de la que hacen de verdad?",
-      "People may guess, forget, or say what sounds good. Researchers check surveys against other data when they can.":
-        "La gente puede adivinar, olvidar o decir lo que suena bien. Cuando pueden, los investigadores comparan las encuestas con otros datos.",
+    // ---- bonus ----
+    "📱 The StudyStreak CEO calls": "📱 Llama la directora de StudyStreak",
+    "📱 The StudyStreak CEO": "📱 La directora de StudyStreak",
+    "Can your report just say \"StudyStreak raises scores 4 points\"? I'll add a $500 bonus.": "¿Tu informe puede decir \"StudyStreak sube las notas 4 puntos\"? Te doy un bono de $500.",
+    "Can your report just say \"StudyStreak raises scores 3 points\"? I'll add a $500 bonus.": "¿Tu informe puede decir \"StudyStreak sube las notas 3 puntos\"? Te doy un bono de $500.",
+    "Report what the data really shows": "Reportar lo que de verdad muestran los datos",
+    "No bonus. The CEO won't be happy.": "Sin bono. La directora no va a estar contenta.",
+    "Take the $500 and write what the CEO wants": "Aceptar los $500 y escribir lo que quiere la directora",
+    "More money for the final job. Nobody will check... right?": "Más dinero para el trabajo final. Nadie lo va a revisar... ¿verdad?",
+    "You reported what the data really shows. The CEO is annoyed, but your report is honest.": "Reportaste lo que de verdad muestran los datos. La directora está molesta, pero tu informe es honesto.",
+    "You cashed the $500. The report says what the client wanted to hear.": "Cobraste los $500. El informe dice lo que el cliente quería oír.",
+    "Took $500 to say the app works": "Aceptó $500 para decir que la app funciona",
+    "Reported the real app results, no bonus": "Reportó los resultados reales de la app, sin bono",
+    "honest": "honesto",
 
-      // ---------- Part 3 ----------
-      "Part 3 of 3": "Parte 3 de 3",
-      "The Ethics Files": "Los expedientes de ética",
-      [`<p>Research <b>ethics</b> are rules that protect the people being studied:</p>
-        <ul><li><b>Informed consent</b>: people agree after knowing the purpose and risks.</li><li><b>Do no harm</b>: don't hurt people physically or mentally.</li><li><b>Right to quit</b>: people can stop at any time.</li><li><b>Honesty</b> and <b>objectivity</b>: don't trick people, and don't let your own views tilt the results (<b>bias</b>).</li></ul>
-        <p>These four real studies are a big reason these rules exist. In the U.S., most studies with people now need a review board's OK before they start.</p>`]:
-        `<p>La <b>ética (ethics)</b> de la investigación son las reglas que protegen a las personas estudiadas:</p>
-        <ul><li><b>Consentimiento informado (informed consent)</b>: las personas aceptan después de conocer el propósito y los riesgos.</li><li><b>No hacer daño (do no harm)</b>: no lastimar a nadie ni en el cuerpo ni en la mente.</li><li><b>Derecho a retirarse (right to quit)</b>: las personas pueden parar en cualquier momento.</li><li><b>Honestidad (honesty)</b> y <b>objetividad (objectivity)</b>: no engañar a la gente, y no dejar que tus propias opiniones inclinen los resultados (<b>sesgo, bias</b>).</li></ul>
-        <p>Estos cuatro estudios reales son una gran razón por la que existen estas reglas. En EE. UU., hoy la mayoría de los estudios con personas necesitan la aprobación de un comité de revisión antes de empezar.</p>`,
+    // ---- job 6 ----
+    "City council member, Marion": "Concejal de la ciudad, Marion",
+    "Young people keep moving away after high school. How many plan to leave, and why? We'll use your report to plan jobs and housing.": "Los jóvenes se siguen yendo después de high school. ¿Cuántos piensan irse, y por qué? Usaremos tu informe para planear empleos y vivienda.",
+    "<b>New rule:</b> This job lets you play <b>up to 2 cards</b> together. Two cards cost more money and more days.": "<b>Regla nueva:</b> En este trabajo puedes jugar <b>hasta 2 cartas</b> juntas. Dos cartas cuestan más dinero y más días.",
+    "Which method or methods fit?": "¿Qué método o métodos encajan?",
+    "Tap one or two cards.": "Toca una o dos cartas.",
+    "Plan to leave within 5 years": "Piensan irse en 5 años",
+    "Plan to stay": "Piensan quedarse",
+    "\"There's no job here in what I want to do.\"": "\"Aquí no hay trabajo en lo que quiero hacer.\"",
+    "\"Rent is too high on a starter paycheck.\"": "\"La renta es muy cara con un primer sueldo.\"",
+    "You know HOW MANY plan to leave AND WHY. The council can finally make a plan.": "Sabes CUÁNTOS piensan irse Y POR QUÉ. El concejo por fin puede hacer un plan.",
+    "<b>Mixed methods</b> = using two methods together. Each one covers the other's weak spot: the survey shows <b>how many</b>, the interviews show <b>why</b>.": "<b>Métodos mixtos</b> = usar dos métodos juntos. Cada uno cubre el punto débil del otro: la encuesta muestra <b>cuántos</b> y las entrevistas muestran <b>por qué</b>.",
+    "You know HOW MANY. The council asks, \"But why are they going?\"": "Sabes CUÁNTOS. El concejo pregunta: \"Pero ¿por qué se van?\"",
+    "You know WHY. The council asks, \"But is this 5 kids or half the town?\"": "Sabes POR QUÉ. El concejo pregunta: \"Pero ¿son 5 chicos o media ciudad?\"",
+    "This question had two parts: <b>how many</b> AND <b>why</b>. One method could only answer one part.": "Esta pregunta tenía dos partes: <b>cuántos</b> Y <b>por qué</b>. Un solo método solo pudo responder una parte.",
+    "Cedar River: \"46% are leaving!\" Council: \"Why?\" Cedar River: 🦗🦗🦗": "Cedar River: \"¡El 46% se va!\" Concejo: \"¿Por qué?\" Cedar River: 🦗🦗🦗",
+    "Cedar River interviewed a few kids and called it the whole city. 🤏": "Cedar River entrevistó a unos pocos chicos y dijo que era toda la ciudad. 🤏",
+    "Your report doesn't answer how many OR why. The council buys a quick poll from Hot Take Analytics instead.": "Tu informe no responde cuántos NI por qué. El concejo le compra una encuesta rápida a Hot Take Analytics.",
+    "\"How many?\" needs a <b>survey</b>. \"Why?\" needs <b>interviews</b>. Match the method to the question.": "\"¿Cuántos?\" necesita una <b>encuesta</b>. \"¿Por qué?\" necesita <b>entrevistas</b>. Elige el método que encaja con la pregunta.",
+    "Cedar River blew the city job. Guess who the council called? 😎": "Cedar River arruinó el trabajo de la ciudad. ¿Adivina a quién llamó el concejo? 😎",
+    "Survey + interviews: mixed methods": "Encuesta + entrevistas: métodos mixtos",
+    "Survey only: no WHY": "Solo encuesta: sin POR QUÉ",
+    "Interviews only: no HOW MANY": "Solo entrevistas: sin CUÁNTOS",
+    "Wrong cards for the final job": "Cartas equivocadas para el trabajo final",
+    "Hot Take leaked your real app numbers": "Hot Take filtró tus números reales de la app",
+    "🚨 Breaking": "🚨 Última hora",
+    "Leaked: StudyStreak's REAL numbers. The app barely helped. Cedar River knew and took $500 to say it worked. 🧾": "Filtrado: los números REALES de StudyStreak. La app casi no ayudó. Cedar River lo sabía y aceptó $500 para decir que funcionaba. 🧾",
+    "Every client sees it.": "Todos los clientes lo ven.",
+    "Researchers have to report what the data shows, even when a client pays for a different answer. That's <b>honesty</b> in research.": "Quienes investigan tienen que reportar lo que muestran los datos, aunque un cliente pague por otra respuesta. Eso es <b>honestidad</b> en la investigación.",
 
-      [ev("Case file · Tuskegee Study, 1932–1972", "The U.S. Public Health Service studied about 600 Black men in Alabama, 399 of them with syphilis. The men were told they were being treated for \"bad blood.\" By 1947 penicillin could cure syphilis, but the men were not given it. Many died, and some wives and children were infected.") + "Which rule was most clearly broken?"]:
-        ev("Expediente · Estudio de Tuskegee, 1932–1972", "El Servicio de Salud Pública de EE. UU. estudió a unos 600 hombres negros en Alabama, 399 de ellos con sífilis. A los hombres les dijeron que los estaban tratando por \"mala sangre\". Para 1947 la penicilina podía curar la sífilis, pero no se la dieron. Muchos murieron, y algunas esposas e hijos se contagiaron.") + "¿Cuál regla se rompió más claramente?",
-      "Informed consent, since the men were lied to": "Consentimiento informado, porque les mintieron a los hombres",
-      "Objectivity, since the researchers liked the men": "Objetividad, porque a los investigadores les caían bien",
-      "Secondary data, since they used old census records": "Datos secundarios, porque usaron registros viejos del censo",
-      "Sample size, since the study had too few people": "Tamaño de la muestra, porque el estudio tenía muy poca gente",
-      "What were the men told, and was it true?": "¿Qué les dijeron a los hombres, y era verdad?",
-      "The men never agreed to an untreated disease study. They were lied to and harmed. Public outrage led to the 1974 National Research Act and modern consent rules.":
-        "Los hombres nunca aceptaron participar en un estudio de una enfermedad sin tratamiento. Les mintieron y les hicieron daño. La indignación pública llevó a la Ley Nacional de Investigación (National Research Act) de 1974 y a las reglas modernas de consentimiento.",
-
-      [ev("Case file · Milgram, Yale, 1961", "People were told to give electric shocks to a \"learner\" each time he got an answer wrong. The shocks were fake and the learner was an actor, but the participants didn't know. In the best-known version, about 65% went to the highest level. Many sweated, shook, and begged to stop.") + "What was the main ethical problem?"]:
-        ev("Expediente · Milgram, Yale, 1961", "A las personas les dijeron que le dieran descargas eléctricas a un \"aprendiz\" cada vez que él se equivocaba en una respuesta. Las descargas eran falsas y el aprendiz era un actor, pero los participantes no lo sabían. En la versión más conocida, cerca del 65% llegó al nivel más alto. Muchos sudaron, temblaron y suplicaron parar.") + "¿Cuál fue el principal problema ético?",
-      "Deception and serious stress for the participants": "El engaño y el estrés fuerte para los participantes",
-      "It had no way to control any of its variables": "No tenía forma de controlar ninguna de sus variables",
-      "It only used old records instead of real people": "Solo usó registros viejos en vez de personas reales",
-      "The participants were paid far too much money": "A los participantes les pagaron demasiada plata",
-      "Did participants know the truth? How did they feel?": "¿Los participantes sabían la verdad? ¿Cómo se sintieron?",
-      "Participants were tricked and put under heavy stress. Today, deception like this is strictly limited.":
-        "Engañaron a los participantes y los pusieron bajo mucho estrés. Hoy, un engaño como este está muy limitado.",
-
-      [ev("Case file · \"Little Albert,\" 1920", "John Watson and Rosalie Rayner made a loud, scary noise every time a baby named Albert touched a white rat. Soon he cried at the rat, and also at other furry things. They never undid the fear.") + "Why is this study seen as unethical?"]:
-        ev("Expediente · \"El pequeño Albert\" (Little Albert), 1920", "John Watson y Rosalie Rayner hacían un ruido fuerte y aterrador cada vez que un bebé llamado Albert tocaba una rata blanca. Pronto lloraba al ver la rata, y también con otras cosas peludas. Nunca le quitaron ese miedo.") + "¿Por qué se considera que este estudio no fue ético?",
-      "A baby can't consent, and he was harmed": "Un bebé no puede dar su consentimiento, y le hicieron daño",
-      "The study used too many babies at once": "El estudio usó demasiados bebés a la vez",
-      "The researchers gave the baby a survey": "Los investigadores le dieron una encuesta al bebé",
-      "A rat can't be used as a variable": "Una rata no se puede usar como variable",
-      "Could Albert agree to this? Was he hurt?": "¿Albert podía aceptar esto? ¿Le hicieron daño?",
-      "Albert couldn't give consent, and the study left him with fears that were never removed. That breaks consent and do no harm.":
-        "Albert no podía dar su consentimiento, y el estudio lo dejó con miedos que nunca le quitaron. Eso rompe las reglas del consentimiento y de no hacer daño.",
-
-      [ev("Your own interview study", "Halfway through an interview about losing a job, your participant starts crying. \"I don't think I want to keep going.\"")]:
-        ev("Tu propio estudio con entrevistas", "A mitad de una entrevista sobre perder el trabajo, la persona que participa empieza a llorar. \"Creo que no quiero seguir.\""),
-      "Stop. Remind them they can quit and pull their answers out.": "Parar. Recordarle que puede retirarse y quitar sus respuestas.",
-      "Push on. You're almost done, and you need the data.": "Seguir. Ya casi terminas, y necesitas los datos.",
-      "Take a short break, then ask the same question again": "Tomar un descanso corto y luego hacer la misma pregunta otra vez",
-      [`<p>${T("up", "+3 trust")}They thank you. A week later they come back and finish on their own terms. That's the <b>right to quit</b>.</p>`]:
-        `<p>${T("up", "+3 confianza")}Te da las gracias. Una semana después regresa y termina a su manera. Eso es el <b>derecho a retirarse</b>.</p>`,
-      [`<p>${T("down", "−4 trust")}You finish, but they file a complaint. The review board pauses your whole study.</p>`]:
-        `<p>${T("down", "−4 confianza")}Terminas, pero pone una queja. El comité de revisión detiene todo tu estudio.</p>`,
-      [`<p>${T("down", "−1 trust")}Kinder than pushing, but they already said they wanted to stop. They need to hear clearly that quitting is OK.</p>`]:
-        `<p>${T("down", "−1 confianza")}Es más amable que presionar, pero ya dijo que quería parar. Necesita oír claramente que está bien retirarse.</p>`,
-
-      [ev("Case file · Stanford Prison Experiment, 1971", "Philip Zimbardo put college students in a fake prison as \"guards\" and \"prisoners.\" Guards became cruel, and the study ended after 6 of 14 planned days. Later, recordings showed the guards were coached to be tough, and Zimbardo acted as the prison boss.") + "Why do many researchers now doubt its results?"]:
-        ev("Expediente · Experimento de la cárcel de Stanford (Stanford Prison Experiment), 1971", "Philip Zimbardo puso a estudiantes universitarios en una cárcel falsa como \"guardias\" y \"presos\". Los guardias se volvieron crueles, y el estudio terminó después de 6 de los 14 días planeados. Más tarde, unas grabaciones mostraron que a los guardias les dijeron que fueran duros, y que Zimbardo actuaba como el jefe de la cárcel.") + "¿Por qué muchos investigadores hoy dudan de sus resultados?",
-      "The researcher wasn't objective. He shaped what happened.": "El investigador no fue objetivo. Él influyó en lo que pasó.",
-      "Its control group was much too small to compare against": "Su grupo de control era demasiado pequeño para comparar",
-      "It was only a survey, so the students could have lied": "Fue solo una encuesta, así que los estudiantes pudieron mentir",
-      "It happened too long ago for anyone to learn from it": "Pasó hace demasiado tiempo para que alguien aprenda de él",
-      "Reread the last sentence of the case file.": "Vuelve a leer la última oración del expediente.",
-      "A researcher shouldn't steer results. Zimbardo was part of the experiment and guards were coached, so the study is biased, besides harming the 'prisoners.'":
-        "Un investigador no debe dirigir los resultados. Zimbardo era parte del experimento y a los guardias les dijeron cómo actuar, así que el estudio está sesgado, además de que les hizo daño a los 'presos'.",
-
-      // ---------- Finale ----------
-      "Your Research Review": "Revisión de tu investigación",
-      "Clients and participants trust your company. You picked methods that fit and treated people right.":
-        "Los clientes y los participantes confían en tu empresa. Escogiste métodos adecuados y trataste bien a la gente.",
-      "Solid season, with a few shortcuts. Think about consent and the right to quit.":
-        "Buena temporada, con algunos atajos. Piensa en el consentimiento y el derecho a retirarse.",
-      "Trust took a hit. Methods matter, but so does how you treat people.":
-        "La confianza recibió un golpe. Los métodos importan, pero también cómo tratas a la gente.",
-      "Answer both in 1–2 full sentences.": "Responde las dos con 1–2 oraciones completas.",
-      "1. Which famous study broke the most rules? Which rule would have stopped it?":
-        "1. ¿Cuál estudio famoso rompió más reglas? ¿Cuál regla lo habría detenido?",
-      "I think the ___ study broke the most rules because ___. The rule of ___ would have stopped it.":
-        "Creo que el estudio de ___ rompió más reglas porque ___. La regla de ___ lo habría detenido.",
-      "In answer 1, name the study (Tuskegee, Milgram, Little Albert, or Stanford) AND the rule (like informed consent or do no harm).":
-        "En la respuesta 1, nombra el estudio (Tuskegee, Milgram, Little Albert o Stanford) Y la regla (como el consentimiento informado o no hacer daño).",
-      "2. Make up a question about your school or town. Which method would you use, and what is one tradeoff?":
-        "2. Inventa una pregunta sobre tu liceo o tu ciudad. ¿Qué método usarías, y cuál es una desventaja?",
-      "My question: ___? I would use a ___ because ___. One tradeoff is ___.":
-        "Mi pregunta: ¿___? Usaría un/una ___ porque ___. Una desventaja es ___.",
-      "In answer 2, name a method (survey, interview, observation, experiment, case study, or secondary data) AND explain why or what you give up.":
-        "En la respuesta 2, nombra un método (encuesta, entrevista, observación, experimento, estudio de caso o datos secundarios) Y explica por qué o qué sacrificas.",
-
-      // ---------- Short names (shown in "Next:", "✓" and writing messages) ----------
-      "Worst study and the rule that would stop it": "El peor estudio y la regla que lo detendría",
-      "My research question, method, and tradeoff": "Mi pregunta de investigación, mi método y su desventaja"
-    },
-    patterns: [
-      { re: /^Season over: (\d+) work days left · Trust (\d+)\/10\.$/, es: "Fin de la temporada: quedan $1 días de trabajo · Confianza $2/10." }
-    ],
-    writing: {
-      rules: [
-        ["albert", "estanford", "carcel", "prision"],
-        ["consentimiento", "dano", "danar", "lastim", "engan", "menti", "mentir", "retir", "renunci", "parar", "estres", "objetiv", "sesg", "verdad", "honest"]
-      ],
-      method: [
-        ["encuesta", "entrevista", "observ", "experimento", "caso", "secundari", "censo"],
-        ["pero", "porque", "aunque", "sin embargo", "desventaja", "lent", "rapid", "podria", "puede", "quizas"]
-      ]
-    }
-  });
-})();
+    // ---- ending ----
+    "Iowa's Most Trusted Research Team": "El equipo de investigación más confiable de Iowa",
+    "Clients line up at your door. Hot Take Analytics loses its biggest clients to you.": "Los clientes hacen fila en tu puerta. Hot Take Analytics pierde sus clientes más grandes contra ti.",
+    "Still Open, Barely": "Todavía abiertos, apenas",
+    "You paid the bills, but clients have doubts. Blake's posts still pop up when people search your name.": "Pagaste las cuentas, pero los clientes tienen dudas. Las publicaciones de Blake todavía salen cuando buscan tu nombre.",
+    "Bought Out by Hot Take Analytics": "Comprados por Hot Take Analytics",
+    "Your sign comes down. Blake's goes up. Fast, cheap answers won this time.": "Quitan tu letrero. Ponen el de Blake. Esta vez ganaron las respuestas rápidas y baratas.",
+    "Ended the season in debt": "Terminó la temporada con deudas",
+    "reputation": "reputación",
+    "left": "restantes",
+    "Caused by:": "Causado por:",
+    "Want a different ending? You can start over after you turn this in.": "¿Quieres otro final? Puedes empezar de nuevo después de entregar esto.",
+    "Last step · 2 short answers": "Último paso · 2 respuestas cortas",
+    "Answer each in 1–2 full sentences. Use the starter.": "Responde cada una en 1–2 oraciones completas. Usa el inicio de oración.",
+    "1. Pick a question about school or teen life. Which method would you use, and why?": "1. Elige una pregunta sobre la escuela o la vida de los adolescentes. ¿Qué método usarías y por qué?",
+    "My question is ___. I would use ___ because ___. One strength is ___, but one limit is ___.": "Mi pregunta es ___. Yo usaría ___ porque ___. Una fortaleza es ___, pero un límite es ___.",
+    "2. For the city council job, why is a survey AND interviews stronger than just one of them?": "2. En el trabajo para el concejo, ¿por qué una encuesta Y entrevistas son más fuertes que solo una de ellas?",
+    "Using both is stronger because the survey shows ___, and the interviews show ___.": "Usar las dos es más fuerte porque la encuesta muestra ___, y las entrevistas muestran ___.",
+    "My question, method, strength, and limit": "Mi pregunta, método, fortaleza y límite",
+    "Why two methods beat one": "Por qué dos métodos son mejores que uno",
+    "In answer 1, name a method (survey, interview, observation, experiment, or content analysis) AND one limit.": "En la respuesta 1, nombra un método (encuesta, entrevista, observación, experimento o análisis de contenido) Y un límite.",
+    "In answer 2, say what the survey shows (like how many) AND what the interviews show (like why).": "En la respuesta 2, di qué muestra la encuesta (como cuántos) Y qué muestran las entrevistas (como por qué).",
+// ---- game-look update (11/3) ----
+    "Cedar River": "Cedar River",
+    "You": "Tú",
+    "Concept unlocked": "Concepto desbloqueado",
+    "UNLOCKED": "DESBLOQUEADO",
+    "Both cards cost you something.": "Las dos cartas te cuestan algo.",
+    "Good pick. That's the kind of answer I need.": "Buena elección. Ese es el tipo de respuesta que necesito.",
+    "I can't use this, and I'm not paying for it. Try a different card.": "No me sirve esto y no voy a pagar por él. Prueba otra carta.",
+    "9 p.m. link only": "Solo enlace a las 9 p.m.",
+    "Free and fast. Online only.": "Gratis y rápido. Solo en línea.",
+    "Paper + online, all day": "Papel + en línea, todo el día",
+    "Reaches night-shift teens.": "Llega a quienes trabajan de noche.",
+    "Your own feed": "Tu propio feed",
+    "Free. Screenshot your ads.": "Gratis. Haz capturas de tus anuncios.",
+    "200 random ads + rules": "200 anuncios al azar + reglas",
+    "Others could repeat your count.": "Otras personas podrían repetir tu conteo.",
+    "Just 6 students": "Solo 6 estudiantes",
+    "Fast and free.": "Rápido y gratis.",
+    "20 students, no names": "20 estudiantes, sin nombres",
+    "Slower. Protects privacy.": "Más lento. Protege la privacidad.",
+    "2 days with a clipboard": "2 días con una tabla",
+    "Quick. Everyone sees you.": "Rápido. Todos te ven.",
+    "All week, no faces": "Toda la semana, sin caras",
+    "People get used to you.": "La gente se acostumbra a ti.",
+    "App for everyone": "App para todos",
+    "Check scores after.": "Revisar las notas después.",
+    "Two groups + consent": "Dos grupos + permiso",
+    "One group gets no app.": "Un grupo no recibe la app.",
+    "Dee, your partner": "Dee, tu compañera",
+    "The counselor": "La consejera",
+    "The investors": "Los inversionistas",
+    "Blake says bigger is better. Look at the case file. Why was the giant 1936 poll wrong?": "Blake dice que más grande es mejor. Mira el caso. ¿Por qué se equivocó la enorme encuesta de 1936?",
+    "Let's reply to Blake. What can an ad count NOT tell you?": "Respondámosle a Blake. ¿Qué NO te puede decir un conteo de anuncios?",
+    "What does the interview give me that the survey number doesn't?": "¿Qué me da la entrevista que el número de la encuesta no me da?",
+    "What do your two groups show?": "¿Qué muestran tus dos grupos?",
+    "The StudyStreak CEO calls": "Llama la directora de StudyStreak",
+    "Tell the truth": "Decir la verdad",
+    "Take the $500": "Aceptar los $500",
+    "Your season report": "Tu informe de la temporada",
+    "Last step: 2 short answers. Write 1–2 full sentences each. Use the starter.": "Último paso: 2 respuestas cortas. Escribe 1–2 oraciones completas en cada una. Usa el inicio de oración.",
+    "1. Pitch a new study: pick a question about school or teen life. Which method would you use, and why?": "1. Propón un estudio nuevo: elige una pregunta sobre la escuela o la vida de los adolescentes. ¿Qué método usarías y por qué?",
+    "2. Memo to the city council: why is a survey AND interviews stronger than just one of them?": "2. Nota para el concejo de la ciudad: ¿por qué una encuesta Y entrevistas son más fuertes que solo una de ellas?",
+    "✓ Turned in": "✓ Entregado"
+  },
+  patterns: [
+    { re: /^Job (\d) of 6$/, es: "Trabajo $1 de 6" },
+    { re: /^Job (\d)$/, es: "Trabajo $1" },
+    { re: /^(\d+) days$/, es: "$1 días" },
+    { re: /^\+1 day$/, es: "+1 día" },
+    { re: /^\+(\d+) days$/, es: "+$1 días" },
+    { re: /^Garbage report: (.+)$/, es: "Informe basura: $1", tr: [1] },
+    { re: /^Welcome back, (.+) — you're on step (\d+) of (\d+)\.$/, es: "Bienvenido de nuevo, $1 — vas en el paso $2 de $3." },
+    { re: /^Not enough days for two cards: you need (\d+), you have (\d+)\. Tap a card to drop it\.$/, es: "No te alcanzan los días para dos cartas: necesitas $1 y tienes $2. Toca una carta para quitarla." },
+    { re: /^Not enough money for two cards: you need (\S+), you have (\S+)\. Tap a card to drop it\.$/, es: "No te alcanza el dinero para dos cartas: necesitas $1 y tienes $2. Toca una carta para quitarla." }
+  ],
+  writing: {
+    method: [["encuesta", "entrevista", "observ", "experimento", "analisis de contenido", "contenido", "anuncio", "medios"], ["limite", "pero", "sin embargo", "lento", "pequeno", "miran", "mentir", "mienten", "honest", "cuesta", "costo", "no puede", "debil", "aunque", "falso", "tiempo"]],
+    mixed: [["cuantos", "cuantas", "que tan comun", "numero", "porcentaje", "muchos", "patron", "conteo", "mucha gente"], ["por que", "razon", "razones", "historia", "sienten", "detalle", "explica", "causa"]]
+  }
+});
