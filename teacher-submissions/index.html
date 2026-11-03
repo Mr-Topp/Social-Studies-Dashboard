@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
 <title>Teacher Dashboard · All Classes</title>
-<script src="../shared/assignments.js?v=20261103p12"></script>
+<script src="../shared/assignments.js?v=20261103p13"></script>
 <script src="presentations.js?v=20261103civics3"></script>
 <script src="../shared/turnin.js?v=20261103d"></script>
 <style>
@@ -204,6 +204,7 @@ td.paper.mm input{background:#fff;color:#a33d36;border:2px solid #a33d36}
 td.ex{background:#f3f2ef;color:#5d6670;font-weight:900}
 button.mk{background:transparent;color:#b9ad97;font:800 .95rem system-ui;padding:6px 10px;min-width:56px}
 button.mk:hover{background:#f1ebde;color:var(--navy)}
+td.miss.lbl button.mk{color:#1f5e2c;background:#eef5ef;font-size:.74rem;white-space:nowrap}
 td.ex button.mk{color:#5d6670;border:1px solid #d6d3cc}
 th .papertag{display:block;font-size:.68rem;font-weight:900;color:#7a5a00;letter-spacing:.04em}
 th .extag{display:block;font-size:.68rem;font-weight:900;color:#5d6670}
@@ -644,6 +645,15 @@ function mergeNames() {
 // but is left out of Needs attention and the CSV downloads.
 const TEST_NAME = "Test T.";
 const DONE_ALL = window.CLASS_DONE_FOR_ALL || {};   // "Completed in class" for every student (shared/assignments.js)
+// Label-only "Done in class" (CLASS_CLEARED entries that have a label, e.g. Soc + Gov U1 Days 1–4; Fynn, 11-03).
+// Only changes the words in an empty box. No credit, no score, not counted in "done" or grades; still clickable to exempt.
+function clearedLabel(course, id) {
+  const c = (window.CLASS_CLEARED || {})[course], a = REG[id];
+  if (!c || !c.label || !a) return "";
+  const end = a.day ? Math.max(a.day, +((String(a.title || "").match(/^Days \d+[–-](\d+)/) || [])[1] || 0)) : 0;
+  const hit = (c.ids || []).includes(id) || (!!c.unit && (a.part === 1 || (a.unit || 0) < c.unit || ((a.unit || 0) === c.unit && !!a.day && end <= c.throughDay)));
+  return hit ? c.label : "";
+}
 const isTestStudent = s => s === TEST_NAME || s === "Test S."; // "Test S." was its first name
 const offList = (t, s) => rosterOf(t).length && !rosterOf(t).includes(s);
 const studentCell = (t, s) => `<td class="student">${safe(s)}${isTestStudent(s) ? '<small class="testtag">TEST (you)</small>' : offList(t, s) ? '<small class="offlist">not on class list</small>' : ""}</td>`;
@@ -1171,7 +1181,7 @@ function renderGrid(list) {
     if (colEx(tab, id)) return `<td class="ex" title="Everyone is exempt from this (column menu ⋮ to undo)">EX</td>`;
     if (markOf(tab, id, s) === "EX") return `<td class="ex"><button class="mk" data-s="${safe(s)}" data-a="${safe(id)}" title="Exempt. Click to change.">EX</button></td>`;
     const hits = list.filter(r => r.studentName === s && r.assignmentId === id);
-    if (!hits.length) return DONE_ALL[id] ? `<td class="done inclass" title="${safe(DONE_ALL[id])} (everyone gets credit, no score)"><b class="grade">✓</b><span class="lvl">${safe(DONE_ALL[id])}</span></td>` : `<td class="miss"><button class="mk" data-s="${safe(s)}" data-a="${safe(id)}" title="Nothing turned in. Click to exempt this student.">—</button></td>`;
+    if (!hits.length) return DONE_ALL[id] ? `<td class="done inclass" title="${safe(DONE_ALL[id])} (everyone gets credit, no score)"><b class="grade">✓</b><span class="lvl">${safe(DONE_ALL[id])}</span></td>` : (clearedLabel(tab, id) ? `<td class="miss lbl"><button class="mk" data-s="${safe(s)}" data-a="${safe(id)}" title="${safe(clearedLabel(tab, id))} for everyone (label only, no grade). Click to exempt this student.">${safe(clearedLabel(tab, id))}</button></td>` : `<td class="miss"><button class="mk" data-s="${safe(s)}" data-a="${safe(id)}" title="Nothing turned in. Click to exempt this student.">—</button></td>`);
     const g = dayGrade(hits[0]), when = dateShort(hits[0].submittedAt) + (hits.length > 1 ? " · ×" + hits.length : "");
     if (!g) return `<td class="done check"><button data-s="${safe(s)}" data-a="${safe(id)}" title="Not graded yet. Open to read their answers."><b class="grade">Check</b><span class="lvl">not graded yet</span><span class="when">${when}</span></button></td>`;
     const big = g.f ? g.pct + "%" : "Level " + g.ai.n;
