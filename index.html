@@ -73,6 +73,9 @@ h1:focus{outline:none}
 .goal3{margin:10px 0 0;padding:8px 10px;background:#eef7f0;border-radius:10px;line-height:1.35}
 .lv3{display:inline-block;background:#1f5e2c;color:#fff;border-radius:6px;padding:0 7px;font-size:.8rem;font-weight:900;margin-right:4px}
 .dgoal{font-size:.92rem;margin:4px 0 6px;opacity:.95}.dgoal .goallist{margin-top:2px}
+.slidebtns{display:flex;flex-wrap:wrap;gap:8px;margin-top:10px}
+.sbtn{background:var(--navy);color:#fff;padding:10px 18px}
+.qrow.sliderow{background:#eef3f7}
 /* --- status card: missing or all caught up --- */
 .status{border-radius:16px;padding:18px 20px;margin:0 0 10px}
 .status h2{font-size:1.45rem;margin:0 0 2px}
@@ -158,6 +161,7 @@ footer a{color:var(--muted)}
 <script src="shared/assignments.js?v=20261103p7"></script>
 <script src="shared/recaps.js?v=20261103c"></script>
 <script src="shared/targets.js?v=20261103f"></script>
+<script src="teacher-submissions/presentations.js?v=20261103s1"></script>
 <script src="shared/turnin.js?v=20261103d"></script>
 </head>
 <body>
@@ -613,10 +617,30 @@ function homeBody(course, work) {
   const goalOf = (unit, day) => TARGETS[unit + "|" + day] || null;
   const goalList = g => g && g.t && g.t.length ? `<ul class="goallist">${g.t.map(x => `<li>${esc(x)}</li>`).join("")}</ul>` : "";
   const goal3 = g => g && g.g3 ? `<p class="goal3"><span class="lv3">To get a 3</span> ${esc(g.g3)}</p>` : "";
+  // Slides for a lesson day (teacher-submissions/presentations.js). Students get Google's "Publish to web" view:
+  // slides only (never the speaker notes / Pear Deck answers), Linn-Mar accounts only, opened at that day's first slide.
+  const slidesFor = (uKey, day) => {
+    const p1 = uKey.startsWith("p1|"), u = +uKey.split("|").pop();
+    const deck = (window.CLASS_PRESENTATIONS || []).find(p => p.course === course && p.url && !p.note && p.unit === u && (p1 ? p.part === 1 : p.part !== 1));
+    if (!deck) return [];
+    const google = /docs\.google\.com\/presentation/.test(deck.url);
+    if (!google) return (deck.days || []).length || deck.plan ? [] : [{ url: deck.url, label: "Slides" }];   // Friday civics web presentations
+    if (!deck.pub || !day) return [];   // never link the editor: it shows the speaker notes (Pear Deck answers)
+    const pub = id => "https://docs.google.com/presentation/d/e/" + deck.pub + "/pub?start=false&loop=false&delayms=60000" + (id ? "&slide=id." + id : "");
+    const deckDay = n => (deck.days || []).find(x => x.day === n);
+    if (deck.plan) {
+      const pl = deck.plan.find(x => x.day === day), list = (pl && pl.slides) || [];
+      return list.map((s, i) => ({ url: pub(s.slide || (deckDay(s.day) || {}).slide), label: list.length > 1 ? "Slides, part " + (i + 1) : "Slides" }));
+    }
+    const d = deckDay(day);
+    return d ? [{ url: pub(d.slide), label: "Slides" }] : [];
+  };
   const tg = todayDay ? goalOf(nowKey, todayDay) : null;
-  const goalCard = !tg ? "" : tg.test
-    ? `<section class="goalcard" aria-label="Today's goal"><h2>🎯 ${classToday ? "Test today" : "Test next class (" + esc(niceDate(nextClassIso)) + ")"}: show what you know</h2>${tg.t && tg.t.length ? `<p class="gfirst"><b>First, a short lesson:</b></p>${goalList(tg)}` : ""}${goal3(tg)}</section>`
-    : `<section class="goalcard" aria-label="Today's goal"><h2>🎯 ${classToday ? "Today's goal" : "Next class goal"} <span class="gday">Day ${todayDay}${classToday ? "" : " · " + esc(niceDate(nextClassIso))}</span></h2>${goalList(tg)}${goal3(tg)}</section>`;
+  const todaySlides = todayDay ? slidesFor(nowKey, todayDay) : [];
+  const slideBtns = !todaySlides.length ? "" : `<div class="slidebtns">${todaySlides.map(s => `<a class="btn sbtn" href="${esc(s.url)}" target="_blank" rel="noopener">📽 ${classToday ? "Today's" : "Next class"} ${esc(s.label.toLowerCase())} ↗</a>`).join("")}</div>`;
+  const goalCard = !tg ? (slideBtns ? `<section class="goalcard" aria-label="Today's slides"><h2>📽 ${classToday ? "Today's slides" : "Next class slides"}</h2>${slideBtns}</section>` : "") : tg.test
+    ? `<section class="goalcard" aria-label="Today's goal"><h2>🎯 ${classToday ? "Test today" : "Test next class (" + esc(niceDate(nextClassIso)) + ")"}: show what you know</h2>${tg.t && tg.t.length ? `<p class="gfirst"><b>First, a short lesson:</b></p>${goalList(tg)}` : ""}${goal3(tg)}${slideBtns}</section>`
+    : `<section class="goalcard" aria-label="Today's goal"><h2>🎯 ${classToday ? "Today's goal" : "Next class goal"} <span class="gday">Day ${todayDay}${classToday ? "" : " · " + esc(niceDate(nextClassIso))}</span></h2>${goalList(tg)}${goal3(tg)}${slideBtns}</section>`;
   // Missed days: every day with missing online work, plus the days in between (a kid gone Day 3 and Day 5 missed Day 4 too).
   // Each day shows what happened in class, its online work (Start), and its paper work ("Get this from your teacher").
   const dayKey = a => unitKey(a) + "#" + ((spanOf(a) || [a.day])[0] || 0);
@@ -641,7 +665,8 @@ function homeBody(course, work) {
     const head = (g.unit === nowKey ? "" : unitLabel(course, g.unit).replace(/ · .*/, "") + " · ") + (g.day ? dayWithDate(g.ex) : "Other");
     const recap = recapOf(g.ex);
     const dg = goalOf(g.unit, g.day), dgoal = dg && dg.t && dg.t.length ? `<div class="dgoal"><b>🎯 Goal:</b>${goalList(dg)}</div>` : "";
-    return `<div class="dgroup"><div class="dhead">${esc(head)}</div>${recap ? `<p class="drecap">In class: ${esc(recap)}</p>` : ""}${dgoal}${list.map(missRow).join("")}</div>`;
+    const sl = slidesFor(g.unit, g.day).map(s => `<div class="qrow sliderow"><div><span class="qtitle">📽 ${esc(s.label)} from this day</span><span class="qkind">See what the class learned</span></div><a class="btn qgo soft" href="${esc(s.url)}" target="_blank" rel="noopener">Open ↗</a></div>`).join("");
+    return `<div class="dgroup"><div class="dhead">${esc(head)}</div>${recap ? `<p class="drecap">In class: ${esc(recap)}</p>` : ""}${dgoal}${sl}${list.map(missRow).join("")}</div>`;
   }).join("");
   const readBtn = "";   // read-aloud lives inside the activities (shared/turnin.js), not on this page
   let status;
