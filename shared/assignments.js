@@ -375,6 +375,8 @@ window.CLASS_ASSIGNMENTS = {
   "soc-u3-d3-break-a-rule": { course: "sociology", unit: 3, day: 3, title: "Day 3 · Teen Court: Rule Breakers", path: "sociology/u3-d3-break-a-rule/", std: ["SS.9-12.Soc.4", "SS.9-12.Soc.9"] },
   "soc-u3-d4-who-decides-you": { course: "sociology", unit: 3, day: 4, title: "Day 4 · Mirror Week", path: "sociology/u3-d4-who-decides-you/", std: ["SS.9-12.Soc.10"] },
   "soc-u3-d6-unit3-review": { course: "sociology", unit: 3, day: 6, title: "Day 6 · Unit 3 Review · Born Reckless?", path: "sociology/u3-d6-unit3-review/", std: ["SS.9-12.Soc.4", "SS.9-12.Soc.9", "SS.9-12.Soc.10", "SS.9-12.Soc.11"] },
+  "soc-u3-summative": { course: "sociology", unit: 3, day: 7, turnIn: false, std: [], title: "Day 7 · Summative (Form A)", path: "https://docs.google.com/document/d/1wTBbD7U-oJ0IMatKZL6Hx8MVpgTtVGOYnWk-1TgMkBA/edit" },
+  "soc-u3-summative-key": { course: "sociology", unit: 3, day: 7, turnIn: false, std: [], title: "Day 7 · Summative Teacher Key", path: "https://docs.google.com/document/d/1IEugKRMKiYiKL1T_e6ejOt51fK40eatViiS_Nk3i-Y8/edit" },
   "soc-u4-d1-start-equal": { course: "sociology", unit: 4, day: 1, title: "Day 1 · The Ladder Test", path: "sociology/u4-d1-start-equal/", std: ["SS.9-12.Soc.12"] },
   "soc-u4-d3-rich-countries": { course: "sociology", unit: 4, day: 3, title: "Day 3 · The Cobalt Deal", path: "sociology/u4-d3-rich-countries/", std: ["SS.9-12.Soc.12"] },
   "soc-u4-d4-institutions": { course: "sociology", unit: 4, day: 4, title: "Day 4 · Fair on Paper", path: "sociology/u4-d4-institutions/", std: ["SS.9-12.Soc.14"] },
