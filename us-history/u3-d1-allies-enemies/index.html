@@ -1,205 +1,270 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>The Cold War Desk, 1945–1949 | U.S. History Unit 3 Day 1</title>
-<meta name="description" content="Advise the U.S. government from 1945 to 1949 and see how wartime allies became Cold War rivals.">
+<title>The Cold War Desk | U.S. History Unit 3 Day 1</title>
+<meta name="description" content="Out-move the Soviets in Europe from 1945 to 1949, then survive the Red Scare hearings at home.">
 <style>
-:root{--ink:#1f2b33;--muted:#55626b;--paper:#f4f6f8;--card:#fff;--line:#dad9cf;--main:#24476b;--accent:#a63a32;--meter:#24476b;--green:#2a6b45;--bad:#a2392f;--tint:#e9eff5}
+:root{--ink:#17233a;--muted:#5b6577;--navy:#1d3557;--navy2:#2b4a78;--sea:#cfe6f3;--cream:#fff8ea;--paper:#fffdf7;--red:#c8312b;--red2:#8f1f1a;--gold:#f2b134;--green:#23784a;--free:#4f8fd6;--free2:#2f6db3;--line:#e3d8bf;--wood:#b7834f;--cork:#e2c08f}
 *{box-sizing:border-box}
-body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.5 system-ui,Segoe UI,Arial,sans-serif}
-header{background:linear-gradient(90deg,#e6edf5 0 50%,#f6e7e5 50% 100%);border-bottom:5px solid var(--main);padding:16px max(16px,calc((100vw - 900px)/2)) 12px}
-.k{font-size:.78rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:var(--main);margin:0}
-h1{margin:2px 0 4px;font-size:clamp(1.7rem,3.4vw,2.3rem)}
-.std{margin:2px 0;font-size:.92rem;color:var(--muted)}.std b{color:var(--ink)}
-.hud{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line);padding:8px max(16px,calc((100vw - 900px)/2));display:flex;gap:12px;flex-wrap:wrap;align-items:center;font-weight:800;font-size:.92rem;box-shadow:0 2px 8px #1f2b3312}
-.hud .bar{flex:1;min-width:120px;height:10px;background:#e6e6de;border-radius:9px;overflow:hidden}.hud .bar span{display:block;height:100%;width:0;background:var(--main);transition:width .4s}
-.pill{background:#f0efe8;border-radius:20px;padding:3px 10px;white-space:nowrap}
-.meter{display:flex;align-items:center;gap:6px}.meter .track{width:110px;height:10px;border-radius:9px;background:#e6e6de;overflow:hidden}.meter .track span{display:block;height:100%;background:var(--meter);transition:width .5s}
-main{max-width:900px;margin:auto;padding:14px 16px 60px}
-.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;box-shadow:0 3px 12px #1f2b330d}
-.kicker{font-size:.78rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin:0}
-h2{margin:2px 0 10px;font-size:1.45rem}
-.teach{background:var(--tint);border-left:5px solid var(--main);border-radius:9px;padding:10px 14px;margin:0 0 12px}.teach p{margin:4px 0}.teach b{color:var(--main)}
-.block{margin:14px 0;padding:14px;border-radius:12px;border:2px solid var(--line);background:#fff}
-.block.current{border-color:var(--ink);box-shadow:0 0 0 4px #24476b30}
-.block h3{margin:0 0 10px;font-size:1.06rem;line-height:1.35;font-weight:700}
-.event{background:#fbf9f4;border-style:dashed;border-color:#cdbf9a}.event.current{border-style:solid}
-.event-body p{margin:4px 0}
-.note p{margin:4px 0}
-.desk{font-size:.78rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin:0 0 4px}
-.doc{background:#fbfaf6;border:1px solid #d9d3c2;border-left:5px solid var(--accent);border-radius:9px;padding:9px 12px;margin:0 0 10px}
-.doc .who{font-size:.76rem;font-weight:900;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);margin:0 0 3px}
-.doc p{margin:3px 0}.doc q{font-style:italic}
-.facts{width:100%;border-collapse:collapse;margin:0 0 10px;font-size:.93rem;background:#fff}
-.facts th,.facts td{border:1px solid #d9d3c2;padding:6px 8px;text-align:left;vertical-align:top}.facts th{background:var(--tint)}
-.strip{display:grid;gap:3px;margin:0 0 10px;max-width:420px}
-.strip div{display:flex;justify-content:space-between;gap:8px;padding:5px 10px;border-radius:7px;font-size:.9rem;font-weight:700}
-.strip .n{background:#f3e3e0}.strip .s{background:#e2ebf4}.strip .line{background:var(--ink);color:#fff;justify-content:center;font-size:.8rem;letter-spacing:.06em}
-.picked{margin:10px 0 4px;color:var(--muted)}.result{background:#f0efe8;border-radius:9px;padding:9px 12px}.result p{margin:4px 0}
-.tag{display:inline-block;font-weight:900;font-size:.8rem;border-radius:12px;padding:2px 9px;margin-right:6px}.tag.up{background:#dcefe2;color:var(--green)}.tag.down{background:#f6dcd8;color:var(--bad)}.tag.flat{background:#ebe9e0;color:var(--ink)}
-.real{display:block;margin-top:6px;font-size:.93rem}.real b{color:var(--main)}
-.choices{display:grid;gap:8px}
-@media(min-width:700px){.q .choices{grid-template-columns:1fr 1fr}}
-button{font:inherit;cursor:pointer;border-radius:10px;min-height:46px}
-.choice{text-align:left;background:#fff;color:var(--ink);border:2px solid #cfcdbf;padding:10px 12px;font-weight:650;line-height:1.3}
-.choice:hover:not(:disabled){border-color:var(--ink);background:#fcfcfa}.choice:disabled{opacity:.5;cursor:not-allowed}
-.go{margin-top:12px;background:var(--main);color:#fff;border:0;padding:11px 18px;font-weight:900}
-button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid #2f7dbd;outline-offset:2px}
-.answered{font-weight:800;color:var(--green);margin:4px 0}.why{margin:2px 0;color:var(--muted)}
-.msg{min-height:1.3em;font-weight:750;margin:8px 0 0}.msg.bad{color:var(--bad)}.msg.good{color:var(--green)}
-label{display:block;font-weight:850;margin:14px 0 4px}.stem{margin:0 0 4px;color:var(--muted);font-size:.92rem}
-input,textarea{width:100%;font:inherit;border:2px solid #cfcdbf;border-radius:9px;padding:10px;background:#fff;color:var(--ink)}
-.steps{display:grid;gap:6px;margin:10px 0;padding:0;list-style:none}.steps li{background:#f0efe8;border-radius:9px;padding:8px 12px;font-weight:700}
-.role{background:var(--tint);border-radius:10px;padding:10px 12px;margin:8px 0}
-.welcome{background:#e6f1ea;color:var(--green);font-weight:800;border-radius:9px;padding:8px 12px;margin:0 0 10px}
-.foot{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-top:14px;color:var(--muted);font-size:.85rem}
-.foot button{background:#ebe9e0;border:0;padding:8px 12px;font-weight:800;color:var(--ink)}
-.src{font-size:.8rem;color:var(--muted)}
-@media(max-width:520px){.pill{white-space:normal}.meter .track{width:70px;flex:none}.facts{font-size:.85rem}}
-@media print{.hud,.foot,.go{display:none}}
+html,body{overflow-x:clip}
+body{margin:0;color:var(--ink);font:17px/1.45 system-ui,"Segoe UI",Arial,sans-serif;background:#eaf3f9;background-image:radial-gradient(circle at 20% 0%,#fff 0,#eaf3f9 55%),repeating-linear-gradient(0deg,#1d355708 0 1px,transparent 1px 30px),repeating-linear-gradient(90deg,#1d355708 0 1px,transparent 1px 30px);background-attachment:fixed}
+body.home{background:#f6ead8;background-image:radial-gradient(circle at 50% 0%,#fff6e6 0,#f1dfc4 70%)}
+body.fearhot{box-shadow:inset 0 0 120px #c8312b55}
+[hidden]{display:none!important}
+button{font:inherit;cursor:pointer;border-radius:14px;min-height:46px}
+button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.topline{background:var(--navy);color:#dfe8f5;padding:5px max(12px,calc((100vw - 1060px)/2));font-size:.82rem;display:flex;gap:10px;flex-wrap:wrap;justify-content:space-between}
+.topline b{color:#fff}
+/* ---------- HUD ---------- */
+#hud{position:sticky;top:0;z-index:20;background:var(--cream);border-bottom:4px solid var(--red);box-shadow:0 4px 12px #0003;padding:6px max(10px,calc((100vw - 1060px)/2))}
+.hud-in{display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center}
+.date{background:#fff;border:2px solid var(--navy);border-radius:10px;overflow:hidden;text-align:center;min-width:62px;display:flex;flex-direction:column}
+.date span{background:var(--red);color:#fff;font-size:.68rem;font-weight:900;letter-spacing:.08em;padding:0 6px}
+.date b{font-size:1rem;padding:1px 6px;color:var(--navy)}
+.hm{display:flex;align-items:center;gap:6px;background:#fff;border:2px solid var(--line);border-radius:12px;padding:4px 9px;font-weight:800;font-size:.86rem;white-space:nowrap}
+.hm .ic{font-size:1.15rem}
+.hm.bump{animation:bump .6s}
+@keyframes bump{30%{transform:scale(1.12)}}
+.tok{display:inline-flex;gap:1px}.tok i{font-style:normal;transition:opacity .4s,filter .4s}.tok i.spent{opacity:.2;filter:grayscale(1)}
+.bar{width:90px;height:11px;background:#ece3cf;border-radius:9px;overflow:hidden}
+.bar span{display:block;height:100%;border-radius:9px;transition:width .7s cubic-bezier(.3,1.4,.5,1)}
+#warBar{background:linear-gradient(90deg,#f2b134,#c8312b)}
+#fearBar{background:linear-gradient(90deg,#f6a5a0,#c8312b)}
+.hearts i{font-style:normal;transition:opacity .4s}.hearts i.gone{opacity:.18;filter:grayscale(1)}
+.rival{display:flex;align-items:center;gap:6px;margin-left:auto;background:#fff;border:2px solid var(--red);border-radius:30px;padding:2px 10px 2px 3px;font-weight:800;font-size:.84rem}
+.rival .face{font-size:1.5rem;line-height:1;background:#fde3e1;border-radius:50%;width:34px;height:34px;display:grid;place-items:center}
+.rival small{display:block;font-size:.68rem;color:var(--muted);font-weight:800;text-transform:uppercase;letter-spacing:.05em}
+.rival.react{animation:bump .6s}
+.steppill{font-size:.8rem;font-weight:900;color:var(--navy);background:#e4ecf7;border-radius:20px;padding:3px 10px}
+main{max-width:1060px;margin:auto;padding:12px 12px 90px}
+.welcome{background:#e1f3e8;color:var(--green);font-weight:800;border-radius:10px;padding:8px 12px;margin:0 0 10px;border:2px solid #9fd3b3}
+/* ---------- Cards / frame ---------- */
+.card{background:var(--paper);border:3px solid var(--ink);border-radius:20px;box-shadow:0 7px 0 var(--ink);padding:16px}
+.kicker{display:inline-block;background:var(--navy);color:#fff;border-radius:20px;padding:3px 12px;font-size:.78rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase;margin:0 0 6px}
+body.home .kicker{background:var(--red2)}
+h1{margin:4px 0 8px;font-size:clamp(2.1rem,5vw,3.3rem);line-height:1;letter-spacing:-.02em;color:var(--navy)}
+h2{margin:2px 0 8px;font-size:1.4rem;line-height:1.2}
+p{margin:6px 0}
+.split{display:grid;grid-template-columns:1.08fr .92fr;gap:16px;align-items:start}
+@media(max-width:860px){.split{grid-template-columns:1fr}}
+/* ---------- Title ---------- */
+.titlecard{display:grid;grid-template-columns:1.1fr .9fr;gap:20px;align-items:center;background:linear-gradient(115deg,#fffdf7 55%,#fde9e6)}
+.hook{font-size:1.2rem;font-weight:700}
+.facts{list-style:none;padding:0;margin:8px 0;display:grid;gap:4px}.facts li{font-weight:800}
+.goal{background:#e4ecf7;border-left:5px solid var(--navy);border-radius:9px;padding:7px 11px;font-size:.96rem}
+label{display:block;font-weight:850;margin:10px 0 4px}
+input,textarea{width:100%;font:inherit;border:2px solid #c9cfda;border-radius:10px;padding:9px 10px;background:#fff;color:var(--ink)}
+.vsbox{display:grid;grid-template-columns:1fr auto 1fr;gap:10px;align-items:center;text-align:center}
+.who{background:#fff;border:3px solid var(--free2);border-radius:16px;padding:12px 8px;box-shadow:0 5px 0 var(--free2)}
+.who.red{border-color:var(--red);box-shadow:0 5px 0 var(--red)}
+.who .big{font-size:2.8rem;line-height:1.1}.who b{display:block}.who small{color:var(--muted);font-size:.78rem}
+.vs{font-weight:1000;font-size:1.3rem;color:var(--red);background:#fff;border:3px solid var(--red);border-radius:50%;width:52px;height:52px;display:grid;place-items:center}
+.ticker{margin-top:12px;background:var(--ink);color:#ffe9a8;border-radius:10px;padding:6px 10px;font-weight:800;font-size:.9rem;text-align:center}
+@media(max-width:820px){.titlecard{grid-template-columns:1fr}.title-right{order:-1}.who .big{font-size:2rem}}
+/* ---------- Buttons ---------- */
+.go{margin-top:12px;background:var(--red);color:#fff;border:0;padding:11px 20px;font-weight:900;box-shadow:0 5px 0 var(--red2);transition:transform .08s,box-shadow .08s}
+.go:active:not(:disabled){transform:translateY(4px);box-shadow:0 1px 0 var(--red2)}
+.go:disabled{background:#b9a9a7;box-shadow:0 5px 0 #8e7f7d;cursor:not-allowed}
+.go.big{font-size:1.18rem;padding:13px 26px;width:100%;max-width:380px}
+.go.navy{background:var(--navy);box-shadow:0 5px 0 #0e1c30}
+/* ---------- Map board ---------- */
+.board{position:relative;background:var(--sea);background-image:radial-gradient(circle at 30% 30%,#e2f1f9,#bcdcee);border:3px solid var(--navy);border-radius:16px;padding:8px;box-shadow:inset 0 0 0 3px #ffffff80}
+.grid{position:relative;display:grid;grid-template-columns:repeat(8,1fr);grid-template-rows:repeat(6,minmax(40px,1fr));gap:4px;aspect-ratio:8/5.6}
+.tile{position:relative;border-radius:9px;display:flex;flex-direction:column;align-items:center;justify-content:center;font-weight:900;font-size:.7rem;overflow-wrap:anywhere;line-height:1.05;text-align:center;color:#fff;border:2px solid #0002;transition:background .6s,transform .3s;padding:2px;overflow:hidden}
+.tile .full{display:none}.tile .code{display:block}
+@media(min-width:700px){.tile .full{display:block}.tile .code{display:none}}
+.tile.free{background:var(--free);border-color:var(--free2)}
+.tile.red{background:var(--red);border-color:var(--red2)}
+.tile.occ{background:#f6c9c5;color:var(--red2);border:2px dashed var(--red2)}
+.sw.o{background:#f6c9c5;border:1px dashed var(--red2)}
+.news{margin:0 0 6px;background:var(--ink);color:#ffe9a8;border-radius:10px;padding:5px 10px;font-weight:800;font-size:.88rem;animation:pop .5s}
+.tile.lost{background:repeating-linear-gradient(135deg,var(--red) 0 8px,#a8241f 8px 16px);border-color:#5b0f0c}
+.tile.flip{animation:flip .8s}
+@keyframes flip{0%{transform:rotateY(0)}50%{transform:rotateY(90deg)}100%{transform:rotateY(0)}}
+.tile.risk{box-shadow:0 0 0 3px var(--gold),0 0 14px 4px #f2b134;animation:pulse 1.2s infinite}
+@keyframes pulse{50%{box-shadow:0 0 0 3px var(--gold),0 0 4px 1px #f2b134}}
+.tile .badge{position:absolute;top:1px;right:3px;font-size:.8rem}
+.tile.ussr{font-size:1rem}
+.tile.has-berlin{justify-content:flex-start;padding-top:5px}
+.tile.usa{background:linear-gradient(160deg,#2f6db3,#1d3557);border-color:#14243b;font-size:.8rem}
+.tile.usa .sub{font-size:.62rem;font-weight:800;opacity:.85}
+.berlin{position:absolute;left:50%;bottom:3px;transform:translateX(-50%);background:#fff;color:var(--ink);border-radius:20px;padding:0 5px;font-size:.62rem;font-weight:900;border:2px solid var(--free2);white-space:nowrap}
+.berlin.lost{border-color:var(--red);color:var(--red)}
+.berlin.risk{box-shadow:0 0 0 3px var(--gold);animation:pulse 1.2s infinite}
+.curtain{position:absolute;inset:0;pointer-events:none;width:100%;height:100%}
+.curtain path{fill:none;stroke:#111;stroke-width:5;stroke-linecap:round;stroke-dasharray:7 4}
+.curtain.draw path{stroke-dasharray:400;stroke-dashoffset:400;animation:draw 1.6s forwards}
+@keyframes draw{to{stroke-dashoffset:0}}
+.legend{display:flex;gap:10px;flex-wrap:wrap;font-size:.8rem;font-weight:800;margin:6px 2px 0}
+.legend span{display:inline-flex;align-items:center;gap:4px}
+.sw{width:14px;height:14px;border-radius:4px;display:inline-block}.sw.f{background:var(--free)}.sw.r{background:var(--red)}
+/* ---------- Bubbles ---------- */
+.say{display:flex;gap:9px;align-items:flex-start;margin:6px 0}
+.av{flex:none;width:46px;height:46px;border-radius:50%;display:grid;place-items:center;font-size:1.6rem;background:#fde3e1;border:2px solid var(--red)}
+.av.us{background:#e4ecf7;border-color:var(--navy)}.av.gold{background:#fff1cf;border-color:#b98a12}.av.gray{background:#eef0f3;border-color:#8892a3}
+.bub{position:relative;background:#fff;border:2px solid #d9dde5;border-radius:14px;padding:7px 11px;font-weight:650}
+.bub small{display:block;font-size:.72rem;font-weight:900;color:var(--muted);text-transform:uppercase;letter-spacing:.05em}
+.how{display:grid;gap:4px;background:#fff7dc;border:2px dashed var(--gold);border-radius:12px;padding:8px 12px;margin:8px 0;font-weight:800;list-style:none}
+/* ---------- Decision cards ---------- */
+.ask{font-weight:900;font-size:1.05rem;margin:10px 0 4px}
+.deck{display:grid;grid-template-columns:repeat(auto-fit,minmax(128px,1fr));gap:10px;margin:6px 0}
+.dcard{position:relative;background:#fff;border:3px solid var(--ink);border-radius:16px;box-shadow:0 5px 0 var(--ink);padding:12px 10px 10px;display:flex;flex-direction:column;align-items:center;gap:4px;text-align:center;color:var(--ink);transition:transform .12s}
+.dcard:hover:not(:disabled){transform:translateY(-3px)}
+.dcard:disabled{opacity:.45;cursor:not-allowed;box-shadow:0 5px 0 #8892a3;border-color:#8892a3}
+.dcard .ci{font-size:2.3rem;line-height:1}
+.dtext{display:flex;flex-direction:column;gap:3px;align-items:center}
+.dcard .ct{font-weight:900;font-size:1.05rem;line-height:1.15}
+.dcard .cd{font-size:.86rem;color:var(--muted);font-weight:650}
+.chips{display:flex;flex-wrap:wrap;gap:4px;justify-content:center;margin-top:2px}
+.chip{background:#f1f3f7;border-radius:20px;padding:1px 8px;font-size:.8rem;font-weight:900;white-space:nowrap}
+.chip.bad{background:#fde3e1;color:var(--red2)}.chip.good{background:#e1f3e8;color:var(--green)}.chip.cost{background:#fff1cf;color:#7a5600}
+.dcard .lockt{font-size:.78rem;font-weight:900;color:var(--red)}
+.dcard.newcard{animation:deal .7s cubic-bezier(.2,1.4,.4,1)}
+@keyframes deal{0%{transform:rotateY(90deg) scale(.7)}100%{transform:none}}
+.dcard.unlock{border-color:var(--gold);box-shadow:0 5px 0 #b98a12}
+.dcard .newtag{position:absolute;top:-11px;left:50%;transform:translateX(-50%);background:var(--gold);color:var(--ink);border-radius:10px;padding:0 8px;font-size:.72rem;font-weight:1000;white-space:nowrap}
+.dcard.picked{border-color:var(--navy);box-shadow:0 5px 0 var(--navy)}
+/* ---------- Result ---------- */
+.result{position:relative;background:#fff;border:3px solid var(--ink);border-radius:16px;padding:14px 14px 10px;margin:14px 0 6px;box-shadow:0 5px 0 var(--ink)}
+.result .rline{font-weight:800;font-size:1.06rem;padding-right:8px}
+.youpicked{display:inline-flex;align-items:center;gap:6px;background:#e4ecf7;border-radius:20px;padding:3px 12px;font-weight:900;font-size:.9rem}
+.stamp{position:absolute;right:12px;top:-16px;z-index:2;background:#fff;border:4px solid var(--green);color:var(--green);border-radius:9px;padding:1px 10px;font-weight:1000;letter-spacing:.06em;text-transform:uppercase;transform:rotate(-6deg);font-size:1rem}
+.stamp.bad{border-color:var(--red);color:var(--red)}.stamp.warn{border-color:#c47a00;color:#c47a00}
+.stamp.slam{animation:slam .45s cubic-bezier(.2,1.6,.4,1)}
+@keyframes slam{0%{transform:rotate(-6deg) scale(2.6);opacity:0}100%{transform:rotate(-6deg) scale(1);opacity:1}}
+.real{font-size:.82rem;color:var(--muted);margin:4px 0 0}
+.real b{color:var(--navy)}
+.reveal{background:#fff1cf;border:2px solid var(--gold);border-radius:12px;padding:8px 12px;font-weight:700;margin:10px 0 0}
+.reveal b{color:var(--red2)}
+.fx{display:flex;flex-wrap:wrap;gap:5px;margin:6px 0 0}
+/* ---------- Evidence (document on the desk) ---------- */
+.doc{position:relative;background:#fffef6;background-image:repeating-linear-gradient(#fffef6 0 27px,#e9eef7 27px 28px);border:2px solid #cdbf9a;border-radius:6px;padding:12px 14px 10px;box-shadow:3px 4px 0 #cdbf9a;transform:rotate(-.6deg);margin:6px 0 10px}
+.doc::before{content:"📎";position:absolute;top:-14px;left:14px;font-size:1.4rem}
+.doc .dtag{font-size:.74rem;font-weight:900;letter-spacing:.06em;text-transform:uppercase;color:#7b5d16;margin:0 0 2px}
+.doc .quote{font-family:Georgia,"Times New Roman",serif;font-size:1.12rem;font-style:italic;font-weight:600;margin:4px 0}
+.doc .gloss{font-size:.82rem;color:var(--muted);margin:2px 0 0}
+.check{border:3px solid var(--ink);border-radius:16px;background:#fff;box-shadow:0 5px 0 var(--ink);padding:10px 12px;margin:8px 0}
+.check.spark{animation:shake .5s}
+@keyframes shake{20%{transform:translateX(-6px)}40%{transform:translateX(6px)}60%{transform:translateX(-4px)}80%{transform:translateX(4px)}}
+.check-tag{font-size:.72rem;font-weight:900;letter-spacing:.07em;text-transform:uppercase;color:var(--red);margin:0}
+.opts{display:grid;gap:8px;margin-top:6px}
+@media(min-width:700px){.opts{grid-template-columns:1fr 1fr}}
+.opt{text-align:left;background:#fff;border:3px solid #c9cfda;border-radius:14px;box-shadow:0 3px 0 #c9cfda;padding:9px 12px 9px 38px;position:relative;font-weight:750;color:var(--ink);line-height:1.25}
+.opt::before{content:"🗂️";position:absolute;left:10px;top:50%;transform:translateY(-50%)}
+.opt:hover:not(:disabled){border-color:var(--navy)}
+.opt:disabled{opacity:.5;cursor:not-allowed}
+.msg{min-height:1.2em;font-weight:750;margin:8px 0 0}.msg.bad{color:var(--red2)}.msg.good{color:var(--green)}
+.solved{display:flex;align-items:center;gap:8px;flex-wrap:wrap;background:#e1f3e8;border:2px solid #9fd3b3;border-radius:12px;padding:6px 10px;font-weight:800;color:var(--green);margin:6px 0}
+.solved.slam{animation:pop .5s cubic-bezier(.2,1.5,.4,1)}
+@keyframes pop{0%{transform:scale(.85);opacity:0}100%{transform:none;opacity:1}}
+/* ---------- Airlift ---------- */
+.sky{position:relative;height:150px;border-radius:14px;background:linear-gradient(#9fd0f0,#e7f5fd);border:3px solid var(--navy);overflow:hidden;margin:8px 0}
+.sky .city{position:absolute;bottom:0;left:0;right:0;height:34px;background:#5b6577;display:flex;align-items:center;justify-content:center;color:#fff;font-weight:900;font-size:.85rem;letter-spacing:.05em}
+.plane{position:absolute;left:-60px;border:0;background:none;font-size:2.1rem;min-height:0;padding:4px;animation:fly linear infinite}
+.plane.landed{animation:none;opacity:0}
+@keyframes fly{from{left:-60px}to{left:105%}}
+.food{display:flex;align-items:center;gap:8px;font-weight:900}
+.food .bar{width:200px;height:14px}.food .bar span{background:linear-gradient(90deg,#f2b134,#23784a)}
+/* ---------- Part 2: the wall ---------- */
+.wall{background:var(--cork);background-image:radial-gradient(#c79f66 1px,transparent 1.5px);background-size:9px 9px;border:8px solid var(--wood);border-radius:12px;padding:12px;display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:12px;box-shadow:inset 0 0 12px #0004}
+.pin{position:relative;background:#fff;border-radius:4px;padding:16px 6px 6px;text-align:center;box-shadow:2px 3px 0 #0003;font-size:.78rem;font-weight:800;line-height:1.15;transform:rotate(-2deg)}
+.pin:nth-child(even){transform:rotate(2deg)}
+.pin::before{content:"📌";position:absolute;top:-8px;left:50%;transform:translateX(-50%);font-size:1rem}
+.pin .pf{font-size:1.9rem;display:block;line-height:1.1}
+.pin .ps{display:block;font-size:.68rem;color:var(--muted);font-weight:700}
+.pin.cur{outline:4px solid var(--gold);animation:pulse 1.2s infinite}
+.pin.black{filter:grayscale(1);background:#e9e9e9}
+.pin.black::after,.pin.safe::after,.pin.spy::after{position:absolute;left:50%;top:44%;transform:translate(-50%,-50%) rotate(-14deg);border:3px solid var(--red);color:var(--red);background:#fffc;border-radius:5px;padding:0 4px;font-size:.62rem;font-weight:1000;letter-spacing:.04em;white-space:nowrap}
+.pin.black::after{content:"BLACKLISTED"}
+.pin.safe::after{content:"NO NAMES";border-color:var(--green);color:var(--green)}
+.pin.spy::after{content:"CONVICTED";border-color:var(--ink);color:var(--ink)}
+.pin.q{background:#fff6e6}
+.pin.new{animation:deal .7s cubic-bezier(.2,1.4,.4,1)}
+.pin.you{background:#e4ecf7;outline:3px solid var(--navy)}
+html[lang=es] .pin.black::after{content:"LISTA NEGRA"}html[lang=es] .pin.safe::after{content:"SIN NOMBRES"}html[lang=es] .pin.spy::after{content:"CONDENADO"}
+body.es .pin.black::after{content:"LISTA NEGRA"}body.es .pin.safe::after{content:"SIN NOMBRES"}body.es .pin.spy::after{content:"CONDENADO"}
+.file{background:#fffef6;border:2px solid #cdbf9a;border-left:8px solid var(--red);border-radius:8px;padding:8px 12px;margin:8px 0;box-shadow:3px 4px 0 #cdbf9a}
+.file .fh{display:flex;align-items:center;gap:8px;font-weight:900}
+.file .fh .pf{font-size:1.8rem}
+.file ul{margin:4px 0 0;padding-left:0;list-style:none;font-size:.92rem;font-weight:700}
+.file li{margin:2px 0}
+.banner{background:var(--ink);color:#fff;border-radius:12px;padding:8px 12px;font-weight:800;margin:8px 0;display:flex;gap:10px;align-items:center}
+.banner .bi{font-size:1.8rem}
+.banner small{display:block;color:#c9d3e3;font-weight:700;font-size:.78rem}
+.tick{display:inline-block;background:#fde3e1;color:var(--red2);border:2px solid #f2b0aa;border-radius:20px;padding:3px 12px;font-weight:900;font-size:.88rem;margin:4px 0;animation:pop .5s}
+/* ---------- Hearing room scene ---------- */
+.scene{display:flex;align-items:flex-end;justify-content:space-between;gap:10px;background:linear-gradient(#f9eedd,#ecd6b4);border:3px solid var(--wood);border-radius:14px;padding:10px 16px 0;margin-top:12px;min-height:118px;overflow:hidden}
+.scene .bench{display:flex;flex-direction:column;align-items:center;background:var(--wood);color:#fff;border-radius:10px 10px 0 0;padding:6px 18px 8px;font-weight:900;font-size:.82rem;box-shadow:inset 0 -6px 0 #8a5d33}
+.scene .bench .bf{font-size:2.6rem;line-height:1}
+.scene .mic{font-size:1.8rem;align-self:center}
+.scene .witness{display:flex;flex-direction:column;align-items:center;font-weight:900;font-size:.82rem;padding-bottom:6px}
+.scene .witness .bf{font-size:2.3rem;line-height:1}
+.scene .flash{font-size:1.5rem;align-self:flex-start;animation:pulse 1.4s infinite}
+/* ---------- TV ---------- */
+.tv{position:relative;max-width:520px;margin:40px auto 12px;background:#6b4a2f;border-radius:22px;padding:14px 14px 22px;box-shadow:0 6px 0 #3e2a1a}
+.tv::before,.tv::after{content:"";position:absolute;top:-34px;width:3px;height:40px;background:#333;border-radius:3px}
+.tv::before{left:44%;transform:rotate(-25deg)}.tv::after{left:54%;transform:rotate(25deg)}
+.screen{background:radial-gradient(circle,#e9eef0,#9aa6ab);border-radius:16px;padding:14px;filter:grayscale(1) contrast(1.1);min-height:120px;text-align:center}
+.screen .live{display:inline-block;background:#222;color:#fff;font-weight:900;font-size:.75rem;border-radius:6px;padding:1px 8px;letter-spacing:.06em}
+.screen .quote{font-family:Georgia,serif;font-size:1.25rem;font-weight:700;font-style:italic;margin:8px 0 4px}
+.screen .cite{font-size:.82rem;font-weight:800}
+.knobs{position:absolute;right:20px;bottom:4px;display:flex;gap:8px}.knobs i{width:12px;height:12px;border-radius:50%;background:#2a1b10;display:block}
+/* ---------- Ending ---------- */
+.ending{text-align:center;border:3px solid var(--ink);border-radius:18px;padding:14px;background:#fff;box-shadow:0 6px 0 var(--ink);animation:pop .5s cubic-bezier(.2,1.5,.4,1)}
+.ending .e-icon{font-size:3.2rem;line-height:1}
+.ending h2{font-size:1.75rem;margin:4px 0}
+.ending.free{background:#eaf6ef}.ending.saved{background:#fff6df}.ending.black,.ending.black2{background:#eef0f3}.ending.witch{background:#fde3e1}
+.abroad{display:inline-block;border-radius:20px;padding:4px 14px;font-weight:900;margin:4px 0;background:#e4ecf7}
+.abroad.war{background:#ffe6c7}.abroad.dom{background:#fde3e1}
+.caused{background:#fff;border:2px solid var(--line);border-radius:12px;padding:8px 12px;margin-top:10px}
+.caused .ctag{font-size:.74rem;font-weight:900;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:0}
+.caused ul{margin:4px 0;padding-left:20px}.caused li{margin:2px 0;font-weight:700}
+.statrow{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin:8px 0 0}
+/* ---------- Report ---------- */
+.report{background:#fffef7;background-image:repeating-linear-gradient(#fffef7 0 30px,#e8eef7 30px 31px);border:3px solid var(--ink);border-radius:16px;box-shadow:0 6px 0 var(--ink);padding:12px 16px 16px;margin-top:10px}
+.report-tag{display:inline-block;background:var(--ink);color:#fff;font-weight:900;font-size:.78rem;letter-spacing:.06em;text-transform:uppercase;border-radius:8px;padding:3px 10px;margin:0}
+.stem{margin:0 0 4px;color:var(--muted);font-size:.92rem}
+.go4{margin:0 0 4px;font-size:.88rem;font-weight:800;color:#7a5600}
+.mini-end{display:inline-block;background:#fff;border:2px solid var(--line);border-radius:20px;padding:4px 14px;font-weight:800}
+.turned{display:inline-block;background:#e1f3e8;color:var(--green);font-weight:900;font-size:1.15rem;border-radius:12px;padding:6px 14px}
+.replay{font-size:.88rem;color:var(--muted)}
+.foot{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-top:14px;color:var(--muted);font-size:.8rem}
+.foot button{background:#e4e7ee;border:0;padding:8px 12px;font-weight:800;color:var(--ink);min-height:38px}
+@media(max-width:560px){
+  body{font-size:16px}
+  #hud{padding:5px 8px}.hud-in{gap:4px 6px}
+  .hm{padding:3px 6px;font-size:.78rem}.bar{width:56px}
+  .rival{margin-left:0;font-size:.76rem}.rival small{display:none}.rival .face{width:28px;height:28px;font-size:1.2rem}
+  .date{min-width:52px}.date b{font-size:.88rem}
+  .card{padding:12px;border-radius:16px}
+  .grid{gap:3px}.tile{font-size:.62rem;border-radius:7px}
+  .berlin{font-size:.5rem;padding:0 3px}
+  .deck{grid-template-columns:1fr}
+  .dcard{flex-direction:row;text-align:left;align-items:center;gap:10px;padding:10px}
+  .dcard .ci{font-size:2rem}.dcard .chips{justify-content:flex-start}
+  .dtext{display:flex;flex-direction:column;gap:2px;align-items:flex-start}
+  .stamp{font-size:.85rem;right:8px}
+  .wall{grid-template-columns:repeat(3,1fr);gap:9px;padding:9px;border-width:6px}
+  h2{font-size:1.25rem}
+  .hm .lbl{display:none}
+  .scene{display:none}
+  .berlin .bl{display:none}
+  .topline span:first-child{font-size:.76rem}
+}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+@media print{#hud,.foot,.go{display:none}}
 </style>
 <script src="../../shared/assignments.js?v=20261101fill"></script>
 <script src="../../shared/turnin.js?v=20261102read"></script>
-<script src="../../shared/unit-game.js?v=20261101fill"></script>
+<script src="../../shared/lang.js?v=20261102samonly"></script>
+<script src="es.js?v=20261103a"></script>
 </head><body>
-<header>
-  <p class="k">U.S. History · Unit 3 · Day 1</p>
-  <h1>The Cold War Desk, 1945–1949</h1>
-  <p class="std"><b>The Cold War: How did allies become enemies?</b></p>
-  <p class="std">Standards: <b>SS.9-12.US.37</b> · <b>SS.9-12.US.39</b> · <b>SS.9-12.US.40</b></p>
-  <p class="std"><b>Goal:</b> Explain how the U.S. and the Soviet Union went from allies to rivals, and how the U.S. used containment and money to respond. · About 25 minutes.</p>
-</header>
-<div class="hud" aria-label="Progress and Europe's trust in U.S.">
-  <span id="progressText">0 checks done</span>
-  <div class="bar" aria-hidden="true"><span id="progressFill"></span></div>
-  <span class="pill meter">Europe's trust in U.S.: <span class="track" aria-hidden="true"><span id="meterFill" style="width:50%"></span></span> <span id="meterNum">5/10</span></span>
-</div>
+<div class="topline"><span><b>U.S. History · Unit 3 · Day 1</b> · How did allies become enemies, and why were Americans afraid at home?</span><span><b>SS.9-12.US.36 · US.37 · US.40</b></span></div>
+<div id="hud" hidden><div class="hud-in" id="hudIn"></div></div>
 <main>
   <p class="welcome" id="welcome" hidden></p>
   <div id="app"></div>
-  <div class="foot"><span>Progress saves on this device. Your teacher sees your work after you turn it in.</span><button type="button" id="restartBtn">Start over</button></div>
+  <div class="foot"><span>💾 Saves on this device. Turn in to send it to your teacher.</span><button type="button" id="restartBtn">Start over</button></div>
+  <p class="foot"><span>Made up: you, Orlov, Rep. Garrity, Ruth, Leo, Dana, and the game's "what ifs." Real: every quote, date, and number.</span></p>
 </main>
-<script>
-const T = (cls, txt) => `<span class="tag ${cls}">${txt}</span>`;
-const doc = (who, body) => `<div class="doc"><p class="who">${who}</p>${body}</div>`;
-const real = txt => `<span class="real"><b>What really happened:</b> ${txt}</span>`;
-const METER = "trust";
-UnitGame.start(Object.assign({
-  key: "ush-u3-d1-allies-enemies-v1",
-  assignmentId: "ush-u3-d1-allies-enemies",
-  title: "U.S. History · Unit 3 · Day 1 · The Cold War Desk, 1945–1949",
-  standard: "SS.9-12.US.37, SS.9-12.US.40",
-  oldApi: "https://fynn-class-assignment-submissions-20261024.neotboy.chatgpt.site/api/submit",
-  startFx: { trust: 5 },
-  clampFx: fx => { fx[METER] = Math.max(0, Math.min(10, fx[METER])); },
-  hud: st => {
-    const v = st.fx[METER] || 0;
-    document.getElementById("meterFill").style.width = (v * 10) + "%";
-    document.getElementById("meterNum").textContent = v + "/10";
-  },
-  extraAnswers: st => ({ "Europe's trust in U.S. meter": (st.fx[METER] || 0) + " of 10" })
-}, (function () {
-return {
-  startLabel: "Take your seat at the desk",
-  introHtml: `<p class="kicker">Washington, D.C. · 1945</p><h2>World War II is over. Now what?</h2>
-    <p>You just got a job as an adviser at the U.S. State Department (the part of government that deals with other countries).</p>
-    <p>The U.S. and the Soviet Union (USSR) just won the war together. In four years, they will be rivals. You'll watch it happen and help make the calls.</p>
-    <ul class="steps"><li>1. Read each source and answer the check.</li><li>2. Make 3 big decisions. They change the meter at the top.</li><li>3. Write 2 short answers and turn in.</li></ul>`,
-  scenes: [
-    { kicker: "Part 1 of 3 · 1945–1946", title: "Allies Stop Trusting Each Other",
-      teach: `<p>During World War II, the U.S., Britain, and the USSR fought together against Nazi Germany. Once Germany lost, the reason to work together was gone.</p>
-        <p>The two biggest winners had very different systems. The <b>Cold War</b> was the long rivalry between them (about 1945–1991). It was "cold" because the U.S. and USSR never fought each other directly.</p>`,
-      blocks: [
-        { type: "q", id: "a1", std: "US.40", short: "Soviet system = communism + state control",
-          prompt: `<table class="facts"><tr><th></th><th>United States</th><th>Soviet Union (USSR)</th></tr><tr><td>Government</td><td>Democracy: voters choose leaders from more than one party</td><td>One party (the Communist Party) holds all power</td></tr><tr><td>Economy</td><td><b>Capitalism</b>: people and companies own businesses</td><td><b>Communism</b>: the government owns and runs businesses</td></tr></table>Based on the chart, which describes the Soviet Union?`,
-          options: ["One party ruled, and the government ran the economy", "Voters picked leaders, and companies owned the factories", "Several parties shared power, and the state owned farms", "A king ruled, and private families owned most land"],
-          hint: "Read down the Soviet Union column only.", why: "The USSR had one-party rule and a government-run economy. The U.S. had elections and private business. Each side thought its system should spread." },
-        { type: "q", id: "a2", std: "US.37", short: "Why Berlin was a problem",
-          prompt: doc("Fact card · Germany after the war", `<p>The winners split Germany into <b>4 zones</b>: U.S., British, French, and Soviet. The capital, <b>Berlin</b>, was split into 4 parts too.</p><p>But Berlin sat about 100 miles inside the Soviet zone.</p>`) + "Why did Berlin become a trouble spot?",
-          options: ["The West's part of Berlin was surrounded by the Soviet zone", "Berlin was the only city the Soviets were not allowed in", "The U.S. controlled all roads that led into the Soviet zone", "Berlin was split into two parts instead of four like Germany"],
-          hint: "Look at where Berlin was on the map of zones.", why: "West Berlin was an island of U.S., British, and French control deep inside Soviet territory. That made it easy for the Soviets to pressure it." },
-        { type: "q", id: "a3", std: "US.40", short: "Churchill's Iron Curtain",
-          prompt: doc("Winston Churchill, former British leader · speech in Missouri, March 1946", `<p><q>…an iron curtain has descended across the Continent.</q></p><p>He meant the line across Europe. East of it, Soviet-backed communist governments took over countries like Poland and Hungary.</p>`) + "What was Churchill warning Americans about?",
-          options: ["Europe was being divided, with the East under Soviet control", "Europe was building a real metal wall along every single border", "Britain planned to close its borders to American trade", "The USSR was pulling its troops out of Eastern Europe"],
-          hint: "A curtain is something that divides a room. What did it divide?", why: "The \"Iron Curtain\" was Churchill's phrase for the split between a free West and a Soviet-controlled East." },
-        { type: "q", id: "a4", std: "US.37", short: "UN veto blocks action",
-          prompt: doc("Fact card · The United Nations (UN)", `<p>The UN was founded on <b>October 24, 1945</b> to keep peace. Its <b>Security Council</b> has 5 permanent members: the U.S., USSR, Britain, France, and China.</p><p>Each of the 5 has a <b>veto</b> (the power to block a decision alone).</p>`) + "Why couldn't the UN easily settle U.S.–Soviet fights?",
-          options: ["Either the U.S. or the USSR could block any decision", "The USSR was not allowed to join the United Nations", "The UN did not have any members from Europe at all", "Only the U.S. was allowed to vote on Security Council issues"],
-          hint: "What can one permanent member do alone?", why: "Both rivals had a veto, so the UN could not act against either one. They had to look elsewhere to deal with each other." }
-      ] },
-    { kicker: "Part 2 of 3 · 1947–1948", title: "Containment: Stop the Spread",
-      teach: `<p>In 1947, the U.S. picked a strategy called <b>containment</b>: keep communism from spreading to new countries. It doesn't try to destroy communism where it already is.</p>
-        <p>The U.S. used two tools: help countries under pressure (the <b>Truman Doctrine</b>) and money to rebuild Europe (the <b>Marshall Plan</b>).</p>`,
-      blocks: [
-        { type: "event", id: "e1", short: "Greece and Turkey decision", html: `<p class="desk">Your desk · February 1947</p><p>Britain says it can't afford to help <b>Greece</b> anymore. Communist rebels are fighting the Greek government. The USSR is also pushing <b>Turkey</b> for control of a key sea passage.</p><p>President Truman asks: what should the U.S. do?</p>`,
-          choices: [
-            { label: "Send money, supplies, and advisers to Greece and Turkey", fx: { trust: 2 }, result: `<p>${T("up", "+2 trust")}Western Europe sees the U.S. will help.</p>${real("Congress approved $400 million in aid. The Greek government won its civil war by 1949, and Turkey stayed with the West.")}` },
-            { label: "Stay out. It's Europe's problem, not ours.", fx: { trust: -2 }, result: `<p>${T("down", "−2 trust")}Western Europe worries the U.S. will go home, like after World War I.</p>${real("Truman did NOT stay out. He asked Congress for $400 million in aid, and Congress agreed.")}` },
-            { label: "Send U.S. combat troops to fight the rebels", fx: { trust: 0 }, result: `<p>${T("flat", "No change")}Allies are glad the U.S. cares, but fear a new war with the USSR.</p>${real("Truman sent money, supplies, and military advisers, not combat troops.")}` }
-          ] },
-        { type: "q", id: "a5", std: "US.37", short: "Truman Doctrine = containment",
-          prompt: doc("President Harry Truman · speech to Congress, March 12, 1947", `<p><q>I believe that it must be the policy of the United States to support free peoples who are resisting attempted subjugation by armed minorities or by outside pressures.</q></p><p class="src"><b>subjugation</b> = being taken over and controlled</p>`) + "What policy is Truman describing?",
-          options: ["Helping countries stay free of communist control", "Pulling U.S. troops and aid out of Europe", "Invading the Soviet Union to end communism", "Letting the UN decide all fights in Europe"],
-          hint: "Who does Truman say the U.S. will support, and against what?", why: "This is the Truman Doctrine. It started containment: the U.S. would help countries resist communist pressure." },
-        { type: "q", id: "a6", std: "US.40", short: "Marshall: aim is hunger and poverty",
-          prompt: doc("Secretary of State George Marshall · Harvard University, June 5, 1947", `<p><q>Our policy is directed not against any country or doctrine but against hunger, poverty, desperation, and chaos.</q></p><p class="src"><b>doctrine</b> = set of beliefs, like communism</p>`) + "According to Marshall, what was his plan aimed against?",
-          options: ["Hunger and poverty in war-torn Europe", "The Soviet Union and its leader Stalin", "Communist parties in the United States", "Germany, as punishment for the war"],
-          hint: "Marshall lists four things. Are they countries or problems?", why: "Marshall said the plan fought hunger and chaos, not a country. That's his viewpoint. Many in Congress also saw it as a way to stop communism." },
-        { type: "event", id: "e2", short: "Marshall Plan size", html: `<p class="desk">Your desk · early 1948</p><p>Europe's cities are in ruins. Many people are cold and hungry. Communist parties are growing in France and Italy. Congress asks how big the rebuilding plan should be.</p>`,
-          choices: [
-            { label: "Go big: billions of dollars over several years", fx: { trust: 2 }, result: `<p>${T("up", "+2 trust")}Factories and farms start working again.</p>${real("Congress approved the Marshall Plan in 1948. The U.S. gave about $13 billion (well over $100 billion in today's money) from 1948 to 1952.")}` },
-            { label: "A small loan they must pay back fast", fx: { trust: -1 }, result: `<p>${T("down", "−1 trust")}It's not enough to rebuild. Anger and hunger stay high.</p>${real("The U.S. went big: about $13 billion, mostly as gifts, not loans.")}` },
-            { label: "Nothing. Americans need the money at home.", fx: { trust: -2 }, result: `<p>${T("down", "−2 trust")}Western Europe feels on its own.</p>${real("Congress approved about $13 billion. Some members did argue the money should stay home.")}` }
-          ] },
-        { type: "q", id: "a7", std: "US.37", short: "Why aid fights communism",
-          prompt: doc("Fact card · The Marshall Plan, 1948–1952", `<p>16 Western European countries got aid.</p><p>By 1952, factories in Western Europe were making more than before the war. Communist parties there lost support.</p>`) + "Why did U.S. leaders think money could stop communism?",
-          options: ["Hungry, desperate people were more likely to turn to communism", "Communist leaders promised to quit politics if Europe got richer", "The money paid Western Europe to declare war on the USSR", "Communism was illegal in any country that took U.S. money"],
-          hint: "Think back to Marshall's list: hunger, poverty, desperation.", why: "When people have jobs and food, a revolution looks less appealing. Economic aid was a tool of containment." },
-        { type: "q", id: "a8", std: "US.37", short: "Soviets refuse Marshall aid",
-          prompt: doc("Fact card · Who got the aid?", `<p>The U.S. offered aid to all of Europe, even the USSR. Stalin said no. He also kept the countries he controlled, like Poland, from taking it.</p>`) + "What does this show about Europe by 1948?",
-          options: ["Europe was splitting into a U.S. side and a Soviet side", "The Soviets and Americans were rebuilding Europe together", "All of Europe turned down U.S. money to stay neutral", "Eastern Europe got more aid than Western Europe"],
-          hint: "Which countries took aid and which ones didn't?", why: "The West took aid. The East was blocked from it. The Iron Curtain was now an economic line too." }
-      ] },
-    { kicker: "Part 3 of 3 · 1948–1949", title: "Berlin, Alliances, and China",
-      teach: `<p>In June 1948, the Soviets shut every road, railroad, and canal into West Berlin. This was the <b>Berlin Blockade</b>. About 2 million people needed food and coal.</p>`,
-      blocks: [
-        { type: "event", id: "e3", short: "Berlin Blockade response", html: `<p class="desk">Your desk · June 1948</p><p>West Berlin has about a month of food left. What should the U.S. do?</p>`,
-          choices: [
-            { label: "Fly in food and coal by plane", fx: { trust: 3 }, result: `<p>${T("up", "+3 trust")}Planes land around the clock. The Soviets don't shoot at them.</p>${real("The Berlin Airlift. U.S. and British planes flew in supplies for almost a year. The Soviets ended the blockade in May 1949.")}` },
-            { label: "Send tanks to force the roads open", fx: { trust: -1 }, result: `<p>${T("down", "−1 trust")}Allies fear this could start World War III.</p>${real("Some generals suggested an armed convoy. Truman chose the airlift instead because it did not force the first shot.")}` },
-            { label: "Give West Berlin to the Soviets", fx: { trust: -3 }, result: `<p>${T("down", "−3 trust")}Western Europe wonders if the U.S. will defend them next.</p>${real("Truman refused to give up Berlin. He ordered the airlift.")}` }
-          ] },
-        { type: "q", id: "a9", std: "US.37", short: "Airlift = containment without war",
-          prompt: "The Berlin Airlift kept West Berlin free without firing a shot. How does it fit the idea of <b>containment</b>?",
-          options: ["It stopped Soviet expansion without starting a war", "It pushed the Soviets out of East Germany", "It gave the Soviets full control of the whole city of Berlin", "It ended the Cold War by the end of 1949"],
-          hint: "Containment means stop the spread. Did the airlift stop it? Did it start a war?", why: "The airlift kept West Berlin out of Soviet hands, and no war started. That's containment." },
-        { type: "q", id: "a10", std: "US.37", short: "NATO = attack on one is attack on all",
-          prompt: doc("North Atlantic Treaty, Article 5 · April 4, 1949", `<p><q>…an armed attack against one or more of them in Europe or North America shall be considered an attack against them all…</q></p>`) + "What did joining <b>NATO</b> mean for the U.S.?",
-          options: ["It promised to defend its allies if any were attacked", "It promised to defend only itself, and not any other nations", "It agreed to let the Soviet Union join the alliance", "It agreed to stop sending money to Western Europe"],
-          hint: "Read what an attack on one member counts as.", why: "NATO (1949) was the U.S. plus 11 nations. An attack on one is an attack on all. It was the first time the U.S. promised in peacetime to defend countries in Europe." },
-        { type: "q", id: "a11", std: "US.40", short: "Warsaw Pact = Soviet answer",
-          prompt: `<table class="facts"><tr><th>Year</th><th>What happened</th></tr><tr><td>1949</td><td>NATO forms: U.S., Canada, and Western European allies</td></tr><tr><td>1955</td><td>West Germany joins NATO</td></tr><tr><td>1955</td><td><b>Warsaw Pact</b> forms: USSR and Eastern European countries</td></tr></table>How did the Soviets see NATO, based on the timeline?`,
-          options: ["As a threat, so they formed their own alliance", "As a friend, so they asked to join it", "As unimportant, so they ignored it", "As a trade deal, so they copied its rules for their own trade"],
-          hint: "What did the USSR build right after West Germany joined NATO?", why: "Each side saw the other's alliance as a threat. Now Europe had two armed camps." },
-        { type: "q", id: "a12", std: "US.37", short: "1949 China raises fear",
-          prompt: doc("Fact card · China, 1949", `<p>Mao Zedong's Communists won China's civil war. The U.S.-backed leader, Chiang Kai-shek, fled to the island of Taiwan.</p><p>The same year, the USSR tested its first atomic bomb.</p>`) + "Why did 1949 scare many Americans?",
-          options: ["Communism suddenly looked like it was winning", "China and the USSR both became U.S. allies", "The U.S. agreed to give up all of its atomic bombs that year", "Taiwan declared war on the United States"],
-          hint: "The biggest country in Asia went communist, and the USSR got the bomb.", why: "Americans called it the \"Loss of China.\" With the Soviet bomb, it made communism feel like it was spreading fast." },
-        { type: "q", id: "a13", std: "US.37", short: "Domino Theory definition",
-          prompt: doc("President Dwight Eisenhower · news conference, April 7, 1954 (about Southeast Asia)", `<p><q>You have a row of dominoes set up, you knock over the first one, and what will happen to the last one is the certainty that it will go over very quickly.</q></p>`) + "This idea became the <b>Domino Theory</b>. What does it mean?",
-          options: ["If one country falls to communism, its neighbors will follow", "Any country that trades with the USSR will become communist", "Communist countries will fall apart one at a time on their own", "The U.S. should knock out communist countries one by one"],
-          hint: "Picture the dominoes. What happens after the first one falls?", why: "The Domino Theory said one country falling to communism would knock over its neighbors. This fear drove U.S. choices in Asia for 20 years." }
-      ] }
-  ],
-  finale: {
-    title: "Your Report to the President",
-    report: st => `<p><b>Western Europe's trust in the U.S. ended at ${st.fx.trust}/10.</b> Choices that helped allies without starting a war raised trust. Staying out or going too far lowered it.</p><p>Answer both in 1–2 full sentences.</p>`,
-    prompts: [
-      { id: "turn", short: "One moment that made them enemies", label: "1. Pick ONE event from today (Iron Curtain, Truman Doctrine, Marshall Plan, Berlin Blockade, NATO, or China). Explain how it pushed the U.S. and USSR apart.", stem: "One event that pushed them apart was ___. It made things worse because ___.", min: 70, mustAll: [["iron", "curtain", "truman", "greece", "turkey", "marshall", "berlin", "blockade", "airlift", "nato", "warsaw", "china", "mao"], ["because", "since", "so "]], mustMsg: "In answer 1, name one event from today AND explain why it pushed them apart (use \"because\")." },
-      { id: "plan", short: "Marshall Plan: help people or stop communism?", label: "2. Was the Marshall Plan more about helping people or about stopping communism? Use Marshall's words or a fact from today.", stem: "I think the Marshall Plan was mostly about ___ because ___.", min: 60, newWords: 5, mustAll: [["help", "hunger", "poverty", "rebuild", "communis", "contain", "stop", "spread"], ["because", "since"]], mustMsg: "In answer 2, say helping people OR stopping communism, and give a reason (use \"because\")." }
-    ]
-  }
-};
-
-})()));
-</script>
+<script src="game.js?v=20261103a"></script>
 </body></html>

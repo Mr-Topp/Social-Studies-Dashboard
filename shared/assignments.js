@@ -380,7 +380,7 @@ window.CLASS_ASSIGNMENTS = {
   "wh-u2-d11-1989": { course: "world-history", unit: 2, day: 8, title: "Day 8 · 1989: How Does a Wall Come Down?", path: "world-history/u2-d11-1989/", std: ["SS.9-12.WH.34", "SS.9-12.WH.37", "SS.9-12.WH.35"] },
   "ush-u1-d3-responses-iowans": { course: "us-history", unit: 1, day: 3, title: "Day 3 · Hoover vs. the New Deal", path: "us-history/u1-d3-responses-iowans/", std: ["SS.9-12.US.25", "SS.9-12.US.27", "SS.9-12.US.28"] },
   "ush-u2-d8-common-good": { course: "us-history", unit: 2, day: 4, title: "Day 4 · Hold the Home Front", path: "us-history/u2-d8-common-good/", std: ["SS.9-12.US.31", "SS.9-12.US.33", "SS.9-12.US.34"] },
-  "ush-u3-d1-allies-enemies": { course: "us-history", unit: 3, day: 1, title: "Day 1 · The Cold War Desk", path: "us-history/u3-d1-allies-enemies/", std: ["SS.9-12.US.37", "SS.9-12.US.40"] },
+  "ush-u3-d1-allies-enemies": { course: "us-history", unit: 3, day: 1, title: "Day 1 · The Cold War Desk", path: "us-history/u3-d1-allies-enemies/", std: ["SS.9-12.US.36", "SS.9-12.US.37", "SS.9-12.US.40"] },
   "ush-u3-d3-korea": { course: "us-history", unit: 3, day: 2, title: "Day 2 · The Line That Moved: Korea", path: "us-history/u3-d3-korea/", std: ["SS.9-12.US.35", "SS.9-12.US.37", "SS.9-12.US.40"] },
   "ush-u3-d5-nuclear-brink": { course: "us-history", unit: 3, day: 3, title: "Day 3 · Thirteen Days: Crisis Room", path: "us-history/u3-d5-nuclear-brink/", std: ["SS.9-12.US.37", "SS.9-12.US.40"] },
   "ush-u3-d6-vietnam": { course: "us-history", unit: 3, day: 4, title: "Day 4 · Front Page: A Nation Divided", path: "us-history/u3-d6-vietnam/", std: ["SS.9-12.US.35", "SS.9-12.US.37", "SS.9-12.US.38", "SS.9-12.US.40", "SS.9-12.US.41"] },
