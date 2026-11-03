@@ -615,7 +615,7 @@ function homeBody(course, work) {
   const goal3 = g => g && g.g3 ? `<p class="goal3"><span class="lv3">To get a 3</span> ${esc(g.g3)}</p>` : "";
   const tg = todayDay ? goalOf(nowKey, todayDay) : null;
   const goalCard = !tg ? "" : tg.test
-    ? `<section class="goalcard" aria-label="Today's goal"><h2>🎯 ${classToday ? "Test today" : "Test next class (" + esc(niceDate(nextClassIso)) + ")"}: show what you know</h2>${goal3(tg)}</section>`
+    ? `<section class="goalcard" aria-label="Today's goal"><h2>🎯 ${classToday ? "Test today" : "Test next class (" + esc(niceDate(nextClassIso)) + ")"}: show what you know</h2>${tg.t && tg.t.length ? `<p class="gfirst"><b>First, a short lesson:</b></p>${goalList(tg)}` : ""}${goal3(tg)}</section>`
     : `<section class="goalcard" aria-label="Today's goal"><h2>🎯 ${classToday ? "Today's goal" : "Next class goal"} <span class="gday">Day ${todayDay}${classToday ? "" : " · " + esc(niceDate(nextClassIso))}</span></h2>${goalList(tg)}${goal3(tg)}</section>`;
   // Missed days: every day with missing online work, plus the days in between (a kid gone Day 3 and Day 5 missed Day 4 too).
   // Each day shows what happened in class, its online work (Start), and its paper work ("Get this from your teacher").

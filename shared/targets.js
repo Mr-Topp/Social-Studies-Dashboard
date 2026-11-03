@@ -5,6 +5,7 @@
 // Built 2026-11-02. Matched to real lesson days by topic; Fynn reviews the matches.
 // U.S. and World History daily targets (and World History World Wars Level 3 lines) were drafted in his style and approved by Fynn 11/2/26.
 // 2026-11-02: days combined in U.S. History U3, Government U3, Sociology U3, World History U2 (merged days keep both days' targets).
+// 2026-11-03: U.S. History 6|3 and World History 3|7 are short lesson + test days (test: 1 plus that lesson's targets).
 window.CLASS_TARGETS = {
  "us-history": {
   "p1|1|1": {
@@ -428,9 +429,6 @@ window.CLASS_TARGETS = {
     "I can analyze who gained and who lost jobs as factories moved overseas or added machines and computers.",
     "I can explain how different Americans and leaders have responded to these changes in jobs."
    ],
-   "g3": "I can analyze how globalization and economic policies have affected the United States."
-  },
-  "6|4": {
    "test": 1,
    "g3": "I can analyze how the government has responded to domestic challenges."
   }
@@ -811,9 +809,6 @@ window.CLASS_TARGETS = {
     "I can analyze the trade-off between keeping people safe and protecting their freedom and privacy.",
     "I can explain how countries work together through global institutions to respond to terrorism."
    ],
-   "g3": "I can analyze terrorism and efforts to address it."
-  },
-  "3|8": {
    "test": 1,
    "g3": "I can analyze the effects of globalization."
   },

@@ -104,10 +104,12 @@ window.CLASS_DONE_FOR_ALL = {
 // 🔒 LOCKED by Fynn (2026-11-02). Don't change unit day counts or test dates without his yes in your chat (see CLAUDE.md).
 // 2026-11-02: Fynn combined days so every unit fits Mon–Thu class days (Dec 2 no school): U.S. History U3 6→5,
 // Government U3 4→3, Sociology U3 8→7, World History U2 12→9. Test dates unchanged.
+// 2026-11-03: Fynn said every last summative is by Wed Jan 6. U.S. History U6 4→3 and World History U3 8→7:
+// the last lesson day is now a short lesson + the test on 1/6 (cut slides are hidden in the decks, not deleted).
 window.CLASS_CALENDAR = {
   "us-history":    { 1: { days: 6,  summative: "2026-11-05" }, 2: { days: 8,  summative: "2026-11-19" }, 3: { days: 5, summative: "2026-12-03" },
-                     4: { days: 4,  summative: "2026-12-10" }, 5: { days: 4,  summative: "2026-12-17" }, 6: { days: 4, summative: "2027-01-07" } },
-  "world-history": { 1: { days: 12, summative: "2026-11-19" }, 2: { days: 9, summative: "2026-12-10" }, 3: { days: 8, summative: "2027-01-07" } },
+                     4: { days: 4,  summative: "2026-12-10" }, 5: { days: 4,  summative: "2026-12-17" }, 6: { days: 3, summative: "2027-01-06" } },
+  "world-history": { 1: { days: 12, summative: "2026-11-19" }, 2: { days: 9, summative: "2026-12-10" }, 3: { days: 7, summative: "2027-01-06" } },
   "sociology":     { 1: { days: 10, summative: "2026-11-12" }, 2: { days: 6,  summative: "2026-11-24" }, 3: { days: 7, summative: "2026-12-10" }, 4: { days: 7, summative: "2027-01-06" } },
   "government":    { 1: { days: 10, summative: "2026-11-12" }, 2: { days: 6,  summative: "2026-11-24" }, 3: { days: 3, summative: "2026-12-03" },
                      4: { days: 4,  summative: "2026-12-10" }, 5: { days: 4,  summative: "2026-12-17" }, 6: { days: 3, summative: "2027-01-06" } }
@@ -330,7 +332,7 @@ window.CLASS_ASSIGNMENTS = {
   "ush-u5-d4-drive2": { course: "us-history", unit: 5, day: 4, title: "Day 4 · A World Transformed, with Timeline (Reading)", path: "https://drive.google.com/open?id=144YSHJ1k5ZuEILjM2BinPkr8M2tb1W5xPE4sKdlG-Gg", turnIn: false, alt: true, std: ["SS.9-12.US.48", "SS.9-12.US.50"] },
   "ush-u6-d1-drive1": { course: "us-history", unit: 6, day: 1, title: "Day 1 · 9/11 Two-Part Reading (Reading)", path: "https://drive.google.com/open?id=1YvtAUDBxO3B11PREwBZyvhiD_ll8XXxmQ_MTa8NFJTE", turnIn: false, alt: true, std: ["SS.9-12.US.52", "SS.9-12.US.53", "SS.9-12.US.55"] },
   "ush-u6-d2-drive1": { course: "us-history", unit: 6, day: 2, title: "Day 2 · What Was the Great Recession? (Reading)", path: "https://drive.google.com/open?id=1kUwEOzdYwcGyATzIfbCpZ498Mrp_g7xUXbrZekEVxnk", turnIn: false, alt: true, std: ["SS.9-12.US.53"] },
-  "ush-u6-d4-drive1": { course: "us-history", unit: 6, day: 4, title: "Day 4 · Disability Rights Movement (Reading)", path: "https://drive.google.com/open?id=1p0738lXhj-rBV8fjOGyWGFtrV2cdwxeome7AjGoW-gI", turnIn: false, alt: true, std: ["SS.9-12.US.51", "SS.9-12.US.56"] },
+  "ush-u6-d4-drive1": { course: "us-history", unit: 6, day: 2, title: "Day 2 · Disability Rights Movement (Reading)", path: "https://drive.google.com/open?id=1p0738lXhj-rBV8fjOGyWGFtrV2cdwxeome7AjGoW-gI", turnIn: false, alt: true, std: ["SS.9-12.US.51", "SS.9-12.US.56"] },
   "wh-p1u1-d4-drive1": { course: "world-history", unit: 1, day: 4, part: 1, title: "Day 4 · Chapter 17: Conquest of the Aztec and Inca (Reading)", path: "https://drive.google.com/open?id=1foIyU8uSEJ61f73SYIQUPL7nEFOyebShUnsr6RixOFc", turnIn: false, alt: true, std: ["SS.9-12.WH.3", "SS.9-12.WH.1"] },
   "wh-p1u1-d5-drive1": { course: "world-history", unit: 1, day: 5, part: 1, title: "Day 5 · Atlantic Slave Trade and Equiano Found Poem (Slides activity)", path: "https://drive.google.com/open?id=1WWFqY6z5S1gSPx3kKIhLjNkpZcN91hV65DvJHwY-iqE", turnIn: false, alt: true, std: ["SS.9-12.WH.1", "SS.9-12.WH.3", "SS.9-12.WH.4"] },
   "wh-u1-d3-drive1": { course: "world-history", unit: 1, day: 3, title: "Day 3 · Meiji Restoration Activity Packet", path: "https://drive.google.com/open?id=1FnB5lDcISN20C0a-_pfahNnIYSCYgCsn1iRKLEQkzhY", turnIn: false, alt: true, std: ["SS.9-12.WH.27", "SS.9-12.WH.25", "SS.9-12.WH.26"] },

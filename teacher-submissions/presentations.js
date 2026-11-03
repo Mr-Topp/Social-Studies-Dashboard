@@ -34,6 +34,12 @@
     { course: "us-history", unit: 5, title: "Rise of Conservatism", url: g("1KM3NcuWpURBxiLCQdmacCDVQiZIy5f0XiWsf_Y3yGfY"), summativeSlide: "u5d1s01summ",
       days: [{ day: 1, title: "Rise of Conservatism: Why Did Many Voters Change?", std: "US.46, 47, 49", slide: "u5d1s01" }, { day: 2, title: "Rise of Conservatism: What Did the New Right Want?", std: "US.46–49", slide: "u5d2s01" }, { day: 3, title: "Rise of Conservatism: Who Won and Lost in the New Economy?", std: "US.47–50", slide: "u5d3s01" }] },
     { course: "us-history", unit: 6, title: "Modern America", url: g("1EaHd7ZHPbGRVHsgO_DhR_iF5ZW8Wvvvjy5BLjS1qCGE"), summativeSlide: "u6d1s01summ",
+      // 2026-11-03: last summative by Wed Jan 6. Day 3 = short lesson (bellringer + 4 slides; the rest is hidden in the deck) + test.
+      plan: [
+        { day: 1, title: "Modern America: What Should a Superpower Do?", std: "US.52, 53, 55, 56", slides: [{ day: 1 }] },
+        { day: 2, title: "Modern America: How Should Government Handle a Crisis?", std: "US.51, 53, 55", slides: [{ day: 2 }] },
+        { day: 3, title: "Short lesson: How Did Technology and Trade Change Jobs? + Summative", std: "US.51–56", slides: [{ day: 3, label: "short lesson" }] }
+      ],
       days: [{ day: 1, title: "Modern America: What Should a Superpower Do?", std: "US.52, 53, 55, 56", slide: "u6d1s01" }, { day: 2, title: "Modern America: How Should Government Handle a Crisis?", std: "US.51, 53, 55", slide: "u6d2s01" }, { day: 3, title: "Modern America: How Did Technology and Trade Change Jobs?", std: "US.54–56", slide: "u6d3s01" }, { day: 4, title: "Review + Summative", std: "US.51–56", slide: "u6d4s07" }] },
 
     // ---- world-history ----
@@ -61,6 +67,16 @@
       ],
       days: [{ day: 1, title: "Cold War: How Do Allies Become Enemies?", std: "WH.34, 35", slide: "w2ad01s01" }, { day: 2, title: "Containment: How Do You Stop a Spread?", std: "WH.34, 37", slide: "w2ad02s01" }, { day: 3, title: "Control: Would You Act Differently If Watched?", std: "WH.35", slide: "w2ad03s01" }, { day: 4, title: "China: Can One Leader Remake a Country?", std: "WH.34, 35, 38", slide: "w2ad04s01" }, { day: 5, title: "Hot Spots: Why Fight Far From Home?", std: "WH.34, 37", slide: "w2ad05s01" }, { day: 6, title: "Empire's End: How Do Colonies Get Free?", std: "WH.36, 34", slide: "w2ad06s01" }, { day: 7, title: "Africa: What Would Freedom Day Feel Like?", std: "WH.36, 34, 37", slide: "w2bd07s01" }, { day: 8, title: "Vietnam: Who Should Decide a Nation's Future?", std: "WH.36, 37, 34", slide: "w2bd08s01" }, { day: 9, title: "Cambodia: Can the World Keep “Never Again”?", std: "WH.38, 35", slide: "w2bd09s01" }, { day: 10, title: "Apartheid: Can Regular People Beat a System?", std: "WH.37, 38", slide: "w2bd10s01" }, { day: 11, title: "1989: How Does a Wall Come Down?", std: "WH.34, 37, 35", slide: "w2bd11s01" }] },
     { course: "world-history", unit: 3, title: "The World Since 1991", url: g("12LQppsCMxrA3K5kbT_MK4ikKpFc8b1ae88G15Gm4m-0"), summativeSlide: "w3d01s01summ",
+      // 2026-11-03: last summative by Wed Jan 6. Day 7 = short lesson (bellringer + 4 slides; the rest is hidden in the deck) + test.
+      plan: [
+        { day: 1, title: "Globalization: How Far Did Your Stuff Travel?", std: "WH.39", slides: [{ day: 1 }] },
+        { day: 2, title: "Globalization: Who Wins, Who Loses?", std: "WH.39, 42", slides: [{ day: 2 }] },
+        { day: 3, title: "Global Rules: Who Should Make Them?", std: "WH.41", slides: [{ day: 3 }] },
+        { day: 4, title: "Pushing Back: Would You Pay More for Local?", std: "WH.42", slides: [{ day: 4 }] },
+        { day: 5, title: "Pop Culture: Where Did Your Playlist Come From?", std: "WH.40", slides: [{ day: 5 }] },
+        { day: 6, title: "Terrorism: Why Do Some Groups Use Fear?", std: "WH.43", slides: [{ day: 6 }] },
+        { day: 7, title: "Short lesson: Fighting Terror: Safety or Freedom? + Summative", std: "WH.39–43", slides: [{ day: 7, label: "short lesson" }] }
+      ],
       days: [{ day: 1, title: "Globalization: How Far Did Your Stuff Travel?", std: "WH.39", slide: "w3d01s01" }, { day: 2, title: "Globalization: Who Wins, Who Loses?", std: "WH.39, 42", slide: "w3d02s01" }, { day: 3, title: "Global Rules: Who Should Make Them?", std: "WH.41", slide: "w3d03s01" }, { day: 4, title: "Pushing Back: Would You Pay More for Local?", std: "WH.42", slide: "w3d04s01" }, { day: 5, title: "Pop Culture: Where Did Your Playlist Come From?", std: "WH.40", slide: "w3d05s01" }, { day: 6, title: "Terrorism: Why Do Some Groups Use Fear?", std: "WH.43", slide: "w3d06s01" }, { day: 7, title: "Fighting Terror: Safety or Freedom?", std: "WH.43, 41", slide: "w3d07s01" }] },
 
     // ---- sociology ----
