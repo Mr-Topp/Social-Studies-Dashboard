@@ -182,7 +182,7 @@ window.CLASS_ASSIGNMENTS = {
   "gov-stranded-day1":                { course: "government", unit: 1, day: 1, title: "Day 1 · Stranded: Govern or Collapse", path: "civics/stranded-government/", std: ["SS.9-12.Gov.1", "SS.9-12.Gov.5"] },
   "gov-my-country-day3":              { course: "government", unit: 1, day: 3, title: "Day 3 · My Country, My Rules", path: "civics/my-country-my-rules/", std: ["SS.9-12.Gov.1", "SS.9-12.Gov.4"] },
   "gov-articles-day5":                { course: "government", unit: 1, day: 5, title: "Day 5 · 13 States. One Mess.", path: "civics/articles-confederation-game/", std: ["SS.9-12.Gov.3", "SS.9-12.Gov.9"] },
-  "gov-missing-constitution-day7":    { course: "government", unit: 1, day: 7, title: "Day 7 · The Missing Constitution", path: "civics/missing-constitution/", std: ["SS.9-12.Gov.3", "SS.9-12.Gov.4"] },
+  "gov-missing-constitution-day7":    { course: "government", unit: 1, day: 7, title: "Day 7 · Power Grab", path: "civics/missing-constitution/", std: ["SS.9-12.Gov.3", "SS.9-12.Gov.4"] },
   "gov-democracy-visualized-day1":    { course: "government", unit: 1, day: 1, title: "Day 1 · Purposes of Government (Reading)", path: "civics/democracy-visualized/#day1", std: ["SS.9-12.Gov.1"] },
   "gov-democracy-visualized-day2":    { course: "government", unit: 1, day: 2, title: "Day 2 · Who Counts as 'We the People'? (Reading)", path: "civics/democracy-visualized/#day2", std: ["SS.9-12.Gov.14"] },
   "gov-democracy-visualized-day7":    { course: "government", unit: 1, day: 7, title: "Day 7 · The Constitution (Reading)", path: "civics/democracy-visualized/#day7", std: ["SS.9-12.Gov.4"] },
