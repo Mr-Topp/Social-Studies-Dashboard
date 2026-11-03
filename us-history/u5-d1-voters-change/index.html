@@ -1,161 +1,27 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Election Desk 1980 | U.S. History Unit 5 Day 1</title>
-<meta name="description" content="Report on the 1980 election: interview voters, read the numbers, and figure out why many Americans switched to Ronald Reagan.">
-<style>
-:root{--ink:#23262d;--muted:#5a5f6b;--paper:#f4f4f1;--card:#fff;--line:#d8d8d0;--main:#3b4f73;--accent:#8a5a2b;--green:#2a6b45;--bad:#a2392f;--soft:#eef0f5}
-*{box-sizing:border-box}
-body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.5 system-ui,Segoe UI,Arial,sans-serif}
-header{background:#fff;border-bottom:5px solid var(--main);padding:16px max(16px,calc((100vw - 900px)/2)) 12px}
-.k{font-size:.78rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:var(--main);margin:0}
-h1{margin:2px 0 4px;font-size:clamp(1.7rem,3.4vw,2.3rem)}
-.std{margin:2px 0;font-size:.92rem;color:var(--muted)}.std b{color:var(--ink)}
-.hud{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line);padding:8px max(16px,calc((100vw - 900px)/2));display:flex;gap:12px;flex-wrap:wrap;align-items:center;font-weight:800;font-size:.92rem;box-shadow:0 2px 8px #1f263312}
-.hud .bar{flex:1;min-width:120px;height:10px;background:#e6e5de;border-radius:9px;overflow:hidden}.hud .bar span{display:block;height:100%;width:0;background:var(--main);transition:width .4s}
-.pill{background:#f0efe8;border-radius:20px;padding:3px 10px;white-space:nowrap}
-.meter{display:flex;align-items:center;gap:6px}.meter .track{width:110px;height:10px;border-radius:9px;background:#e6e5de;overflow:hidden}.meter .track span{display:block;height:100%;background:var(--accent);transition:width .5s}
-main{max-width:900px;margin:auto;padding:14px 16px 60px}
-.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;box-shadow:0 3px 12px #1f26330d}
-.kicker{font-size:.78rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin:0}
-h2{margin:2px 0 10px;font-size:1.45rem}
-.teach{background:var(--soft);border-left:5px solid var(--main);border-radius:9px;padding:10px 14px;margin:0 0 12px}.teach p{margin:4px 0}.teach b{color:var(--main)}
-.block{margin:14px 0;padding:14px;border-radius:12px;border:2px solid var(--line);background:#fff}
-.block.current{border-color:var(--ink);box-shadow:0 0 0 4px #3b4f7330}
-.block h3{margin:0 0 10px;font-size:1.06rem;line-height:1.35;font-weight:700}
-.event{background:#fbf9f4;border-style:dashed;border-color:#cdbf9a}.event.current{border-style:solid}
-.event-body p{margin:4px 0}
-.src-card{background:#faf8f2;border:1px solid #ddd5c2;border-left:5px solid var(--accent);border-radius:10px;padding:10px 12px;margin:0 0 10px;font-weight:400}
-.src-card .who{font-size:.76rem;font-weight:900;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);margin-bottom:3px}
-.src-card p{margin:3px 0}.src-card .cite{font-size:.8rem;color:var(--muted)}
-.picked{margin:10px 0 4px;color:var(--muted)}.result{background:#f0efe8;border-radius:9px;padding:9px 12px}.result p{margin:4px 0}
-.tag{display:inline-block;font-weight:900;font-size:.8rem;border-radius:12px;padding:2px 9px;margin-right:6px}.tag.up{background:#dcefe2;color:var(--green)}.tag.down{background:#f6dcd8;color:var(--bad)}.tag.flat{background:#ebe9e0;color:var(--ink)}
-.qlabel{font-size:.75rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:var(--main);margin:0 0 4px}
-.choices{display:grid;gap:8px}
-@media(min-width:700px){.q .choices{grid-template-columns:1fr 1fr}}
-button{font:inherit;cursor:pointer;border-radius:10px;min-height:46px}
-.choice{text-align:left;background:#fff;color:var(--ink);border:2px solid #cfcdbf;padding:10px 12px;font-weight:650;line-height:1.3}
-.choice:hover:not(:disabled){border-color:var(--ink);background:#fcfcfa}.choice:disabled{opacity:.5;cursor:not-allowed}
-.go{margin-top:12px;background:var(--main);color:#fff;border:0;padding:11px 18px;font-weight:900}
-button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid #2f7dbd;outline-offset:2px}
-.answered{font-weight:800;color:var(--green);margin:4px 0}.why{margin:2px 0;color:var(--muted)}
-.msg{min-height:1.3em;font-weight:750;margin:8px 0 0}.msg.bad{color:var(--bad)}.msg.good{color:var(--green)}
-label{display:block;font-weight:850;margin:14px 0 4px}.stem{margin:0 0 4px;color:var(--muted);font-size:.92rem}
-input,textarea{width:100%;font:inherit;border:2px solid #cfcdbf;border-radius:9px;padding:10px;background:#fff;color:var(--ink)}
-.steps{display:grid;gap:6px;margin:10px 0;padding:0;list-style:none}.steps li{background:#f0efe8;border-radius:9px;padding:8px 12px;font-weight:700}
-.chain{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin:10px 0}.chain div{background:var(--soft);border-radius:9px;padding:7px 8px;font-size:.85rem;text-align:center}.chain b{display:block;color:var(--main)}
-.bars{margin:6px 0}.bars .row{display:grid;grid-template-columns:70px 1fr 54px;gap:8px;align-items:center;margin:4px 0;font-size:.92rem}.bars .fill{height:18px;background:var(--main);border-radius:4px}
-@media(max-width:640px){.chain{grid-template-columns:1fr 1fr}}
-.voter{background:#fffdf6;border:1px solid #e3dcc6;border-radius:12px;padding:10px 12px;margin:0 0 10px;font-weight:400}.voter .who{font-size:.78rem;font-weight:900;letter-spacing:.04em;text-transform:uppercase;color:var(--main);margin-bottom:3px}.voter p{margin:2px 0}
-.tbl{border-collapse:collapse;width:100%;font-size:.93rem;margin:4px 0}.tbl th,.tbl td{border-bottom:1px solid var(--line);padding:5px 6px;text-align:left}
-.bars .row{grid-template-columns:52px 1fr 70px}
-.welcome{background:#e6f1ea;color:var(--green);font-weight:800;border-radius:9px;padding:8px 12px;margin:0 0 10px}
-.foot{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-top:14px;color:var(--muted);font-size:.85rem}
-.foot button{background:#ebe9e0;border:0;padding:8px 12px;font-weight:800;color:var(--ink)}
-.src{font-size:.8rem;color:var(--muted)}
-@media print{.hud,.foot,.go{display:none}}
-</style>
+<meta name="description" content="Fall 1980 newsroom game: check the facts, interview six Iowa voters, and write fair headlines about why voters chose Reagan, Carter, or Anderson.">
+<link rel="stylesheet" href="style.css?v=20261103u80">
 <script src="../../shared/assignments.js?v=20261103c"></script>
 <script src="../../shared/turnin.js?v=20261103c"></script>
-<script src="../../shared/unit-game.js?v=20261103c"></script>
-</head><body>
-<header>
-  <p class="k">U.S. History · Unit 5: Rise of Conservatism · Day 1</p>
-  <h1>Election Desk 1980</h1>
-  <p class="std"><b>Standards:</b> SS.9-12.US.46 · SS.9-12.US.47 · SS.9-12.US.49</p>
-  <p class="std"><b>Goal:</b> Explain why many voters switched to Ronald Reagan and conservative ideas in 1980, and how his view of government differed from earlier leaders. · About 25 minutes.</p>
-</header>
-<div class="hud" aria-label="Progress and reporter fairness">
-  <span id="progressText">0 checks done</span>
-  <div class="bar" aria-hidden="true"><span id="progressFill"></span></div>
-  <span class="pill meter">Fair reporting: <span class="track" aria-hidden="true"><span id="meterFill" style="width:50%"></span></span> <span id="meterNum">5/10</span></span>
+</head><body class="on-title">
+<div class="hud" id="hud" hidden aria-label="Your newsroom">
+  <div class="hud-in">
+    <div class="you"><span class="yface" aria-hidden="true">🧑‍💻</span><span class="yt"><b>Reporter</b><small id="youName"></small></span></div>
+    <div class="parts" id="parts" aria-label="Your three assignments"></div>
+    <div class="meters">
+      <div class="m" id="mFair" title="Fair reporting"><span class="mi" aria-hidden="true">⚖️</span><span class="ml">Fair</span><span class="bar"><span id="fairFill"></span></span><span class="mn" id="fairNum">4/10</span></div>
+      <div class="m" id="mRead" title="Readers who trust your paper"><span class="mi" aria-hidden="true">🗞️</span><span class="ml">Readers</span><span class="bar blue"><span id="readFill"></span></span><span class="mn" id="readNum">5/10</span></div>
+    </div>
+    <div class="boss" id="bossBox" title="Your editor, Bev"><span class="bface" aria-hidden="true">👩🏼‍💼</span><span class="bmood" id="bMood" aria-hidden="true">😐</span><span class="bt"><b>Bev</b><small>Editor</small></span></div>
+  </div>
+  <div class="goalrow"><span class="date" id="dateChip" aria-label="Date in the story"></span><span class="goalchip">🎯 Front page: ⚖️ 8+ · 🗞️ 5+</span><span class="stepn" id="stepN"></span></div>
 </div>
-<main>
-  <p class="welcome" id="welcome" hidden></p>
-  <div id="app"></div>
+<main id="wrap">
+  <div class="welcome" id="welcome" role="status" hidden></div>
+  <section id="app" aria-live="polite"></section>
   <div class="foot"><span>Progress saves on this device. Your teacher sees your work after you turn it in.</span><button type="button" id="restartBtn">Start over</button></div>
 </main>
-<script>
-const T = (cls, txt) => `<span class="tag ${cls}">${txt}</span>`;
-const SRC = (who, body, cite) => `<div class="src-card"><div class="who">${who}</div>${body}${cite ? `<p class="cite">${cite}</p>` : ""}</div>`;
-const VOTER = (who, body) => `<div class="voter"><div class="who">${who}</div>${body}</div>`;
-UnitGame.start({
-  key: "ush-u5-d1-voters-change-v1",
-  assignmentId: "ush-u5-d1-voters-change",
-  title: "U.S. History · Unit 5 · Day 1 · Election Desk 1980",
-  standard: "SS.9-12.US.46, SS.9-12.US.47, SS.9-12.US.49",
-  oldApi: "https://fynn-class-assignment-submissions-20261024.neotboy.chatgpt.site/api/submit",
-  startFx: { fair: 5 },
-  clampFx: fx => { fx.fair = Math.max(0, Math.min(10, fx.fair)); },
-  hud: st => {
-    const f = st.fx.fair || 0;
-    document.getElementById("meterFill").style.width = (f * 10) + "%";
-    document.getElementById("meterNum").textContent = f + "/10";
-  },
-  startLabel: "Start your shift",
-  introHtml: `<p class="kicker">Newsroom · Fall 1980</p><h2>You're the new political reporter</h2>
-    <p>It's 1980. President <b>Jimmy Carter</b> (Democrat) is running against <b>Ronald Reagan</b> (Republican). Lots of people who voted for Carter in 1976 are thinking about switching. Your editor wants to know why.</p>
-    <ul class="steps"><li>1. Read the numbers and interview voters. Answer the checks.</li><li>2. Make 3 reporting calls. Fair, balanced choices raise the <b>Fair reporting</b> meter.</li><li>3. Write 2 short answers and turn in.</li></ul>
-    <p class="src">Your job is to explain why voters chose what they did, not to pick a side.</p>`,
-  scenes: [
-    { kicker: "Part 1 of 3 · Background research", title: "What Was Going Wrong?",
-      teach: `<p><b>Inflation</b> means prices go up, so your money buys less. <b>Unemployment</b> means people who want jobs can't find them.</p>
-        <p>Usually, when one is high, the other is low. In the late 1970s, <b>both</b> were high at once. People called this <b>stagflation</b>.</p>`,
-      blocks: [
-        { type: "q", id: "b1", std: "US.47", short: "Inflation chart 1976–80", prompt: SRC("How fast prices rose each year", `<div class="bars"><div class="row"><span>1976</span><div><div class="fill" style="width:43%"></div></div><span>5.8%</span></div><div class="row"><span>1977</span><div><div class="fill" style="width:48%"></div></div><span>6.5%</span></div><div class="row"><span>1978</span><div><div class="fill" style="width:56%"></div></div><span>7.6%</span></div><div class="row"><span>1979</span><div><div class="fill" style="width:84%"></div></div><span>11.3%</span></div><div class="row"><span>1980</span><div><div class="fill" style="width:100%"></div></div><span>13.5%</span></div></div>`, "U.S. Bureau of Labor Statistics, consumer prices") + "What does the chart show?", options: ["Prices rose faster almost every year", "Prices went down every year after 1977", "Prices stayed about the same", "Prices rose the most in 1976"], hint: "Compare the first bar with the last bar.", why: "Inflation more than doubled, from 5.8% to 13.5%. A $100 grocery bill became about $113 in one year." },
-        { type: "q", id: "b2", std: "US.47", short: "Stagflation applied", prompt: SRC("Economy report · 1980", `<p>Prices are up 13.5% this year. About 7 out of every 100 workers can't find a job. Banks charge up to 20% interest on loans, so buying a house or a car is very expensive.</p>`) + "What is the word for high prices and high unemployment at the same time?", options: ["Stagflation", "Depression", "Boom", "Bailout"], hint: "Look in the blue box at the top.", why: "Stagflation = stagnant (stuck) economy + inflation." },
-        { type: "q", id: "b3", std: "US.46", short: "Trust in government fell", prompt: SRC("\"Do you trust the government in Washington to do what is right most of the time?\"", `<div class="bars"><div class="row"><span>1964</span><div><div class="fill" style="width:77%"></div></div><span>77% yes</span></div><div class="row"><span>1974</span><div><div class="fill" style="width:36%"></div></div><span>36% yes</span></div><div class="row"><span>1980</span><div><div class="fill" style="width:25%"></div></div><span>25% yes</span></div></div>`, "American National Election Studies. The Watergate scandal led President Nixon to resign in 1974.") + "What does this survey show?", options: ["Trust in government fell a lot", "Trust in government stayed high", "Trust went up after Watergate", "Most people trusted it in 1980"], hint: "Compare 1964 with 1980.", why: "Trust fell from about 3 in 4 people to about 1 in 4. Many people were open to someone promising a different kind of government." },
-        { type: "q", id: "b4", std: "US.49", short: "Iran hostage crisis effect", prompt: SRC("World news · 1979–1980", `<p>On November 4, 1979, students in Iran took over the U.S. embassy. They held <b>52 Americans hostage for 444 days</b>. In April 1980, a U.S. rescue mission failed and eight U.S. service members died. The news showed the hostage count every night.</p>`) + "How did the hostage crisis affect how many voters saw the country?", options: ["The U.S. looked weak in the world", "The U.S. looked stronger than ever", "Voters forgot about other countries", "Voters thought Iran was a U.S. ally"], hint: "52 Americans held for over a year. A rescue that failed. How would that feel?", why: "Many Americans felt the country looked weak and stuck. That hurt Carter." },
-        { type: "note", html: SRC("Fair is fair · Carter's record", `<p>Carter had real successes too. He brought Egypt and Israel together for the <b>Camp David Accords</b> (1978), a peace deal that still holds. He created the Department of Energy.</p><p>After leaving office, Carter worked for decades on peace, health, and building homes for families. He won the Nobel Peace Prize in 2002. He died in December 2024 at age 100.</p>`) },
-        { type: "event", id: "e1", short: "Headline on Carter's record", html: `<p><b>Reporting call.</b> Your editor needs a headline for a story about Carter's record. Which one do you write?</p>`,
-          choices: [
-            { label: "\"Carter: Peace Deal Abroad, but Prices and Hostages Hurt at Home\"", fx: { fair: 2 }, result: `<p>${T("up","+2 fair")}Balanced. It names a real success and real problems.</p>` },
-            { label: "\"Carter Has Failed at Everything\"", fx: { fair: -2 }, result: `<p>${T("down","−2 fair")}Not accurate. It ignores Camp David. Readers on both sides will stop trusting you.</p>` },
-            { label: "\"None of the Country's Problems Are Carter's Fault\"", fx: { fair: -2 }, result: `<p>${T("down","−2 fair")}Not accurate either. A president gets judged on how the country is doing. Readers will see this as taking sides.</p>` }
-          ] }
-      ] },
-    { kicker: "Part 2 of 3 · Interviews in Iowa", title: "Four Voters, Four Reasons",
-      teach: `<p><b>Ronald Reagan</b> was a former movie actor and governor of California. People called him "the Great Communicator" because he was good at speaking to people.</p>
-        <p>He ran as a <b>conservative</b>. In 1980, that meant: <b>limited government</b> (government should do fewer things), <b>lower taxes</b>, <b>fewer rules on businesses</b>, a <b>strong military</b>, and <b>traditional social values</b>.</p>
-        <p class="src">The voters below are made up, but each one stands for a real group of 1980 voters.</p>`,
-      blocks: [
-        { type: "event", id: "e2", short: "Interview opening question", html: `<p><b>Reporting call.</b> Before your first interview, choose your opening question.</p>`,
-          choices: [
-            { label: "\"What issue matters most to you this year, and why?\"", fx: { fair: 2 }, result: `<p>${T("up","+2 fair")}An open question. The voter gets to tell you what they really think.</p>` },
-            { label: "\"Don't you agree Carter has ruined the country?\"", fx: { fair: -2 }, result: `<p>${T("down","−2 fair")}A leading question. It pushes the voter toward your answer.</p>` },
-            { label: "\"Aren't you scared Reagan is too extreme?\"", fx: { fair: -2 }, result: `<p>${T("down","−2 fair")}Also a leading question, just in the other direction.</p>` }
-          ] },
-        { type: "q", id: "v1", std: "US.47", short: "Factory worker: economy", prompt: VOTER("Voter 1 · Factory worker, Waterloo, union member", `<p>"I've voted Democrat my whole life. But my paycheck buys less every month, and they just laid off 200 guys at my plant. Reagan says he'll get the economy growing. I'm willing to try something new."</p>`) + "Which issue is moving this voter most?", options: ["The economy and jobs", "Traditional family values", "The hostages in Iran", "Rules on small business"], hint: "What does he say about his paycheck and his plant?", why: "Rising prices and layoffs are economic issues." },
-        { type: "q", id: "v2", std: "US.46", short: "\"Reagan Democrat\" defined", prompt: "Voters like Voter 1, who were usually Democrats but voted for Reagan, got a nickname. What was it?", options: ["Reagan Democrats", "New Dealers", "Carter Republicans", "Great Society voters"], hint: "He's a Democrat who voted for Reagan.", why: "\"Reagan Democrats\" were often working-class voters who switched in 1980 and 1984." },
-        { type: "q", id: "v3", std: "US.46", short: "Church family: social values", prompt: VOTER("Voter 2 · Parents of three, Des Moines, active in their church", `<p>"We think the country has drifted from traditional family values. We want prayer allowed in public schools, and we oppose abortion. Our church helped sign up new voters this year. Reagan speaks to what we believe."</p>`) + "Which part of conservatism matters most to this family?", options: ["Traditional social values", "Fewer rules on businesses", "A stronger military", "Lower taxes on income"], hint: "What do they say they want for families and schools?", why: "School prayer and opposing abortion are traditional social values. Many evangelical Christians became active in politics around 1980." },
-        { type: "q", id: "v4", std: "US.47", short: "Store owner: taxes and rules", prompt: VOTER("Voter 3 · Hardware store owner, Cedar Rapids", `<p>"I want to open a second store. But the bank wants almost 20% interest on a loan, my taxes keep going up, and I spend hours on federal paperwork. Get government off my back and I'll hire more people."</p>`) + "Which Reagan promise fits this voter best?", options: ["Cut taxes and business rules", "Build up the U.S. military", "Bring back prayer in schools", "Raise the minimum wage"], hint: "What two things does he say are slowing him down?", why: "Lower taxes and less regulation were key conservative promises to businesses." },
-        { type: "q", id: "v5", std: "US.49", short: "Veteran: strength abroad", prompt: VOTER("Voter 4 · Navy veteran, Iowa City", `<p>"Every night the news counts how many days those hostages have been held. The rescue failed. The Soviets just invaded Afghanistan. I want a president who will make America strong again."</p>`) + "Which issue is moving this voter most?", options: ["America's strength in the world", "Rising prices at the local grocery store", "Federal paperwork rules", "Prayer in public schools"], hint: "Iran, the rescue, the Soviets: are these at home or abroad?", why: "He cares about foreign policy and military strength. Reagan promised a big military build-up." },
-        { type: "q", id: "v6", std: "US.46", short: "Why some stayed with Carter", prompt: VOTER("Voter 5 · Teacher, Iowa City", `<p>"Times are hard, I know. But I'm worried Reagan will cut programs that help people, like student loans and job training. Carter is honest and he got a peace deal done. I'm sticking with him."</p>`) + "Why is this voter staying with Carter?", options: ["She values government help programs", "She wants fewer rules on businesses", "She wants to build up the military", "She wants taxes cut for everyone"], hint: "What is she worried Reagan will cut?", why: "Not everyone switched. Many voters liked government programs and trusted Carter." }
-      ] },
-    { kicker: "Part 3 of 3 · Election night", title: "Two Views of Government",
-      teach: `<p>Since the <b>New Deal</b> (1930s, FDR) and the <b>Great Society</b> (1960s, LBJ), many leaders believed the federal government should actively help people, with programs like Social Security, Medicare, and job training.</p>
-        <p>Reagan argued the government had grown too big and too expensive. He wanted to cut taxes and rules and let people and businesses make more of their own choices.</p>`,
-      blocks: [
-        { type: "q", id: "n1", std: "US.49", short: "\"Better off\" debate question", prompt: SRC("Reagan in the October 1980 debate", `<p>"Are you better off than you were four years ago?"</p>`, "From the presidential debate, October 28, 1980") + "What was Reagan asking voters to judge?", options: ["How the country did under Carter", "Whether Reagan was a good actor", "How much they liked the Soviets", "Whether Carter told the truth"], hint: "Who had been president for the last four years?", why: "With prices up and the hostages still held, many voters answered \"no.\" That helped Reagan." },
-        { type: "q", id: "n2", std: "US.49", short: "1980 results", prompt: SRC("Results · November 4, 1980", `<table class="tbl"><tr><th></th><th>Popular vote</th><th>States won</th></tr><tr><td><b>Reagan</b> (R)</td><td>50.7%</td><td>44</td></tr><tr><td><b>Carter</b> (D)</td><td>41.0%</td><td>6 + D.C.</td></tr><tr><td><b>Anderson</b> (Ind.)</td><td>6.6%</td><td>0</td></tr></table><p>Republicans also won the U.S. Senate for the first time since the 1950s.</p>`) + "What do the results show?", options: ["Reagan won by a lot", "Carter won a second term", "The race was nearly a tie", "Anderson won most states"], hint: "Compare the states won.", why: "Reagan won 44 states. It was a landslide, and conservatives gained in Congress too." },
-        { type: "q", id: "n3", std: "US.46", short: "Reagan vs. New Deal view", prompt: SRC("Reagan's first speech as president · January 20, 1981", `<p>"In this present crisis, government is not the solution to our problem; government is the problem."</p>`, "Public-domain inaugural address") + "How was this view different from the New Deal and Great Society?", options: ["It said government should do less, not more", "It said government should start more programs", "It said Congress should hire more workers", "It agreed fully with the New Deal view"], hint: "Reread the blue box. What did FDR and LBJ believe government should do?", why: "FDR and LBJ saw government as a tool to help. Reagan saw big government as part of the problem." },
-        { type: "event", id: "e3", short: "Election-night headline", html: `<p><b>Reporting call.</b> It's election night. Write the front-page headline.</p>`,
-          choices: [
-            { label: "\"Worried About Prices and Hostages, Voters Turn to Reagan\"", fx: { fair: 2 }, result: `<p>${T("up","+2 fair")}Accurate and balanced. It explains why voters chose Reagan without cheering or booing.</p>` },
-            { label: "\"Americans Finally Wake Up and Dump Carter\"", fx: { fair: -2 }, result: `<p>${T("down","−2 fair")}That's an opinion, not news. 41% of voters chose Carter.</p>` },
-            { label: "\"Voters Fooled by Hollywood Actor\"", fx: { fair: -2 }, result: `<p>${T("down","−2 fair")}Also an opinion. Voters had real reasons, which you just reported on.</p>` }
-          ] },
-        { type: "q", id: "n4", std: "US.46", short: "Fair summary of 1980", prompt: "Which sentence is the most <b>fair and accurate</b> summary of why many voters changed in 1980?", options: ["Many worried about the economy, the hostages, and values", "Every American agreed that Carter was a bad president", "Voters only cared that Reagan was a famous movie star", "Most voters wanted a much bigger government"], hint: "Think about all of the voters you interviewed.", why: "Different voters had different reasons: the economy, foreign policy, and social values." }
-      ] }
-  ],
-  finale: {
-    title: "File Your Story",
-    report: st => `<p><b>Your Fair reporting meter ended at ${st.fx.fair}/10.</b> Good reporters explain why people vote the way they do, on every side.</p><p>Answer both in 1–2 full sentences.</p>`,
-    prompts: [
-      { id: "voter", short: "Why one voter switched", label: "1. Pick one voter you interviewed. Explain which issue moved them and why it mattered in 1980.", stem: "The ___ cared most about ___ because ___.", min: 80, mustAll: [["worker", "factory", "family", "parent", "church", "store", "owner", "business", "veteran", "navy", "teacher"], ["because", "since"]], mustMsg: "In answer 1, name the voter (like \"the factory worker\") AND explain why (use \"because\")." },
-      { id: "view", short: "Reagan's view vs. New Deal", label: "2. How was Reagan's view of government different from the New Deal and Great Society view?", stem: "The New Deal and Great Society said government should ___. Reagan believed ___.", min: 70, newWords: 5, mustAll: [["new deal", "great society", "fdr", "lbj", "roosevelt", "johnson", "before", "earlier"], ["less", "small", "limit", "cut", "problem", "fewer", "lower"]], mustMsg: "In answer 2, describe BOTH views: the New Deal / Great Society view and Reagan's view (smaller, less, limited, cut…)." }
-    ]
-  },
-  extraAnswers: st => ({ "Fair reporting meter": st.fx.fair + " of 10" })
-});
-</script>
+<script src="game.js?v=20261103u80"></script>
 </body></html>
