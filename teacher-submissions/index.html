@@ -646,29 +646,15 @@ function attentionHtml(list) {
   list = list.filter(r => !isTestStudent(r.studentName));
   const roster = rosterOf(tab), latest = new Map();
   list.forEach(r => { const k = r.studentName + "|" + r.assignmentId; if (!latest.has(k)) latest.set(k, r); });
-  const flagText = r => { const a = aiOf(r), ans = r.answers || {}; if (a && a.teacher) return ""; if (a && a.flag) return a.flag; return ans["Pasted writing"] ? ans["Pasted writing"] + " (not graded yet). Check with the student." : ""; };
+  // Only turned-in work that has a grade shows here (Fynn, 11-03): Level 1s, and AI/copied flags on graded
+  // written answers. Missing work and "nothing turned in yet" stay in the grade table, not here.
+  const flagText = r => { const a = aiOf(r), ans = r.answers || {}; if (!a || a.teacher) return ""; if (a.flag) return a.flag; return ans["Pasted writing"] ? ans["Pasted writing"] + ". Check with the student." : ""; };
   const flags = [...latest.values()].filter(r => flagText(r)).map(r => `<li><b>${safe(r.studentName)}</b> · ${safe(titleOf(r))}: ${safe(flagText(r))}</li>`);
   const data = masteryData(list), ones = [];
   Object.keys(data).sort().forEach(s => { const c = Object.keys(data[s]).filter(c => data[s][c].n === 1); if (c.length) ones.push(`<li><b>${safe(s)}</b> · Level 1 on ${safe(c.map(shortStd).join(", "))}</li>`); });
-  // "Due so far" = days up to the latest day anyone in this class has turned in, per unit.
-  const reached = {}, submitted = new Set(list.map(r => r.assignmentId));
-  list.forEach(r => { const u = unitOf(r.assignmentId), d = REG[r.assignmentId] && REG[r.assignmentId].day; if (d) reached[u] = Math.max(reached[u] || 0, d); });
-  const due = sortIds(Object.keys(REG).filter(id => { const a = REG[id]; return a.course === tab && a.path && a.turnIn !== false && (a.day ? a.day <= (reached[unitOf(id)] || 0) : submitted.has(id)); }));
-  const missing = [], none = [];
-  [...new Set([...roster, ...list.map(r => r.studentName)])].sort((a, b) => a.localeCompare(b)).forEach(s => {
-    const done = new Set(list.filter(r => r.studentName === s).map(r => r.assignmentId));
-    if (!done.size) { if (roster.includes(s)) none.push(s); return; }
-    Object.keys(DONE_ALL).forEach(id => done.add(id));   // everyone gets credit for these
-    const miss = due.filter(id => !done.has(id) && !isEx(tab, id, s))
-      .concat(Object.keys(REG).filter(id => REG[id].paper && REG[id].course === tab && markOf(tab, id, s) === "M"));   // paper boxes marked M
-    if (miss.length >= 2) missing.push(`<li><b>${safe(s)}</b> · missing ${miss.length}: ${safe(miss.slice(0, 3).map(id => REG[id].title.split(" · ")[0]).join(", "))}${miss.length > 3 ? "…" : ""}</li>`);
-  });
-  const count = flags.length + ones.length + missing.length + none.length, parts = [];
+  const count = flags.length + ones.length, parts = [];
   if (flags.length) parts.push(`<div class="att flag"><b>⚠ Possible AI or copied work (${flags.length})</b> <small>A flag means “check with the student,” not proof.</small><ul>${flags.join("")}</ul></div>`);
   if (ones.length) parts.push(`<div class="att low"><b>Level 1 on a standard (${ones.length})</b><ul>${ones.join("")}</ul></div>`);
-  if (missing.length) parts.push(`<div class="att miss"><b>Missing 2 or more activities (${missing.length})</b><ul>${missing.join("")}</ul></div>`);
-  if (none.length) parts.push(`<div class="att none"><b>Nothing turned in yet (${none.length})</b><p>${safe(none.join(", "))}</p></div>`);
-  if (!roster.length) parts.push(`<p class="status">No class list for ${safe(COURSES[tab])} yet, so students who haven't turned anything in can't show here.</p>`);
   return `<details class="attention"${attentionOpen ? " open" : ""}><summary>Needs attention${count ? " (" + count + ")" : ": nothing right now"}</summary>${parts.join("")}
     <div class="rosteredit"><button class="light" id="rosterBtn">Edit class list (${roster.length})</button>
     <div id="rosterBox" hidden><p class="status">One student per line, first name + last initial (like Jordan M.).</p><textarea id="rosterText" rows="8">${safe(roster.join("\n"))}</textarea><button id="rosterSave">Save class list</button> <span id="rosterStat" class="status"></span></div></div></details>`;
