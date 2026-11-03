@@ -491,6 +491,8 @@
     ["Transmission ended", "Transmisión terminada"],
     ["YOU FOUND<br>THE EXIT.", "LLEGASTE<br>A LA SALIDA."],
     ["Mastery", "Dominio"],
+    ["Strong", "Sólido"],
+    ["Review this", "Repasa esto"],
     ["Time", "Tiempo"],
     ["Play Again <span>↻</span>", "Jugar otra vez <span>↻</span>"],
     ["Investigator", "Investigador"],

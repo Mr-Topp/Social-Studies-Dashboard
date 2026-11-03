@@ -138,7 +138,7 @@ function finish(){clearInterval(state.timer);const first=state.phase!=="done";if
  $("final-correct").textContent=`${state.correct}/${state.possible}`;$("final-evidence").textContent=state.evidence.length;$("final-score").textContent=pct+"%";$("final-time").textContent=state.finalTime||"—";
  $("end-message").innerHTML=`<span>${escH(state.name)}, you exposed the system behind Seahaven. You connected Truman’s experience to social context, research, ethics, and theory—and chose to walk through the door.</span>`+(state.reviewDone?`<br><br><span>You fixed every clue you missed.</span>`:"");
  $("result-stamp").textContent=state.reviewDone?"ESCAPED AFTER REVIEW":pct>=85?"TEST READY":"ALMOST READY";
- const topics=[...new Set(chapters.flatMap(c=>c.scenes.map(s=>s.topic)))];$("mastery-report").innerHTML=topics.map(t=>{const a=state.topicScores[t]||0,p=state.topicPossible[t]||0,n=p?Math.round(a/p*100):0;return `<div class="mastery-row"><span>${t}</span><b>${n}% first-try accuracy</b></div>`}).join("");
+ const topics=[...new Set(chapters.flatMap(c=>c.scenes.map(s=>s.topic)))];$("mastery-report").innerHTML=topics.map(t=>{const a=state.topicScores[t]||0,p=state.topicPossible[t]||0,n=p?Math.round(a/p*100):0;return `<div class="mastery-row"><span>${t}</span><b>${n>=70?"Strong":"Review this"}</b></div>`}).join("");
  save();showScreen("end");renderTurnIn();if(first)tone(760,.18)}
 
 // ---------- Start, resume, restart ----------
