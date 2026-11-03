@@ -254,6 +254,7 @@
       { re: /^Next: (.+) →$/, es: "Siguiente: $1 →", tr: [1] },
       { re: /^✓ (.+)$/, es: "✓ $1", tr: [1] },
       { re: /^Welcome back, (.+) — you're right where you left off\.$/, es: "Bienvenido de nuevo, $1. Sigues donde lo dejaste." },
+      { re: /^Not (.+)\? Start fresh$/, es: "¿No eres $1? Empieza de nuevo" },
       { re: /^Write a little more for: (.+) \(1–2 full sentences\)\.$/, es: "Escribe un poco más en: $1 (1–2 oraciones completas).", tr: [1] },
       { re: /^Fill in the blanks with your own words for: (.+)\.$/, es: "Completa los espacios con tus propias palabras en: $1.", tr: [1] },
       { re: /^Add more of your own ideas for: (.+)\. Use details from today\.$/, es: "Agrega más ideas propias en: $1. Usa detalles de hoy.", tr: [1] },

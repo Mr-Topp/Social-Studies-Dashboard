@@ -25,6 +25,12 @@
       let st;
       try { st = JSON.parse(localStorage.getItem(KEY)); } catch (e) {}
       if (!st || typeof st !== "object" || !st.picks) st = fresh();
+      // Shared Chromebooks: if a different student is signed in on this device, start clean (never show the last kid's work).
+      try {
+        const nowName = localStorage.getItem("site-student-name") || "";
+        const short = window.classShortName || (x => x);
+        if (st.name && nowName && short(st.name).toLowerCase() !== short(nowName).toLowerCase()) { st = fresh(); localStorage.removeItem(KEY); }
+      } catch (e) {}
       const save = () => { try { localStorage.setItem(KEY, JSON.stringify(st)); } catch (e) {} };
       let locked = false;
       const eventOrder = {};
@@ -220,7 +226,21 @@
         if (window.classFirstTry) window.classFirstTry.reset();
         save(); render(); window.scrollTo(0, 0);
       };
-      if (st.scene >= 0 && $("welcome")) { $("welcome").textContent = "Welcome back, " + st.name + " — you're right where you left off."; $("welcome").hidden = false; }
+      if (st.scene >= 0 && $("welcome")) {
+        const w = $("welcome");
+        w.textContent = "Welcome back, " + st.name + " — you're right where you left off.";
+        // Not this student? One tap erases the saved game on this Chromebook and starts clean.
+        const notMe = document.createElement("button");
+        notMe.type = "button"; notMe.className = "light notme";
+        notMe.style.cssText = "margin-left:10px;padding:4px 10px;font-size:.85rem;cursor:pointer";
+        notMe.textContent = "Not " + st.name + "? Start fresh";
+        notMe.onclick = () => {
+          try { localStorage.removeItem(KEY); localStorage.removeItem("site-student-name"); } catch (e) {}
+          if (window.classFirstTry) window.classFirstTry.reset();
+          st = fresh(); save(); location.reload();
+        };
+        w.appendChild(document.createTextNode(" ")); w.appendChild(notMe); w.hidden = false;
+      }
       render();
     }
   };

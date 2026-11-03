@@ -246,6 +246,79 @@ const TEACHER_TOOLS_URL = "https://script.google.com/macros/s/AKfycbwiVW6Cufw8Dq
   }
   window.classShortName = shortName;
 
+  // --- Shared Chromebooks (FERPA, Fynn 11/3/26) -------------------------
+  // Saved progress lives on the device. When a DIFFERENT student starts using this Chromebook,
+  // erase the last student's saved games, answers and drafts so the next kid never sees them.
+  // Who's on the device = the name tapped on the home page, or the name typed into an activity.
+  // Site settings (language, home-page class, feedback receipts that are already matched by name) are kept.
+  const OWNER_KEY = "site-progress-owner";
+  const KEEP_KEY = /^(site-|hub-|class-feedback-receipts$|fd_muted$)/;
+  const sameStudent = (a, b) => shortName(a).toLowerCase() === shortName(b).toLowerCase();
+  function wipeOtherStudent() {
+    const gone = [];
+    try {
+      for (let i = 0; i < localStorage.length; i++) { const k = localStorage.key(i); if (k && !KEEP_KEY.test(k)) gone.push(k); }
+      gone.forEach(k => localStorage.removeItem(k));
+    } catch (e) {}
+    return gone.length;
+  }
+  // The home page remembers the name used for each class ("hub-me"). Drop names that aren't this student,
+  // so the home page can't greet the next kid as the last one (or switch the device back to that name).
+  function dropOtherHubNames(who) {
+    try {
+      const m = JSON.parse(localStorage.getItem("hub-me"));
+      if (!m || !m.classes || localStorage.getItem("hub-test-student") === "1") return;
+      let changed = false;
+      Object.keys(m.classes).forEach(k => { if (!sameStudent(m.classes[k], who)) { delete m.classes[k]; changed = true; } });
+      if (!changed) return;
+      if (!m.classes[m.current]) m.current = Object.keys(m.classes)[0] || "";
+      localStorage.setItem("hub-me", JSON.stringify(m));
+    } catch (e) {}
+  }
+  // Call when a student is now using this device. Returns how many saved items were erased.
+  function claimDevice(name) {
+    const who = shortName(name);
+    if (!who || /teacher-submissions/.test(location.pathname)) return 0;
+    let erased = 0;
+    try {
+      const owner = localStorage.getItem(OWNER_KEY) || "";
+      if (owner && !sameStudent(owner, who)) erased = wipeOtherStudent();
+      dropOtherHubNames(who);
+      localStorage.setItem(OWNER_KEY, who);
+      localStorage.setItem("site-student-name", who);
+    } catch (e) {}
+    return erased;
+  }
+  window.classClaimDevice = claimDevice;
+  try {
+    if (!/teacher-submissions/.test(location.pathname)) {
+      // A page we reloaded after erasing: erase once more in case it re-saved the old student's game on the way out.
+      if (sessionStorage.getItem("site-progress-wiped")) { sessionStorage.removeItem("site-progress-wiped"); wipeOtherStudent(); }
+      const nowName = localStorage.getItem("site-student-name") || "";
+      const owner = localStorage.getItem(OWNER_KEY) || "";
+      if (nowName && owner && !sameStudent(owner, nowName)) {
+        const erased = wipeOtherStudent();
+        dropOtherHubNames(nowName);
+        localStorage.setItem(OWNER_KEY, shortName(nowName));
+        // Some activities read their saved game before this file loads. Reload once so they start clean.
+        if (erased) { sessionStorage.setItem("site-progress-wiped", "1"); location.reload(); }
+      } else if (nowName && !owner) {
+        localStorage.setItem(OWNER_KEY, shortName(nowName));
+      }
+      // A tab the last student left open: when a different student signs in from another tab, reload this one
+      // so it can't keep showing (or re-save) the last student's work. Its saves are blocked on the way out.
+      const tabOwner = localStorage.getItem(OWNER_KEY) || "";
+      if (tabOwner) window.addEventListener("storage", e => {
+        if ((e.key !== OWNER_KEY && e.key !== "site-student-name") || !e.newValue || sameStudent(e.newValue, tabOwner)) return;
+        try {
+          const set = Storage.prototype.setItem;
+          Storage.prototype.setItem = function (k, v) { if (this === localStorage && !KEEP_KEY.test(String(k))) return; return set.call(this, k, v); };
+        } catch (err) {}
+        location.reload();
+      });
+    }
+  } catch (e) {}
+
   const NAME_HELP = "Type your first name and last initial, like Jordan M.";
 
   function fakeResponse(status, data) {
@@ -474,6 +547,8 @@ const TEACHER_TOOLS_URL = "https://script.google.com/macros/s/AKfycbwiVW6Cufw8Dq
     if (!isNameBox(box) || nameState(box.value) !== "ok") return;
     const fixed = shortName(box.value);
     if (fixed && fixed !== box.value) { box.value = fixed; box.dispatchEvent(new Event("input", { bubbles: true })); }
+    // A new student typed their name here: erase the last student's other saved work on this Chromebook.
+    if (!/teacher-submissions/.test(location.pathname) && !window.HUB_PAGE) claimDevice(fixed || box.value);
   }, true);
   // Trying to move on: block every click, tap, Enter, and form submit until the name is fixed.
   function block(e) {
@@ -741,6 +816,7 @@ const TEACHER_TOOLS_URL = "https://script.google.com/macros/s/AKfycbwiVW6Cufw8Dq
     });
     // Keep the highlighted words when the button is pressed.
     btn.addEventListener("mousedown", e => e.preventDefault());
+    if (!document.body) return; // page is reloading (shared-Chromebook reset)
     document.body.appendChild(btn);
     window.addEventListener("pagehide", () => window.speechSynthesis.cancel());
   }
