@@ -53,7 +53,7 @@ main{max-width:1020px;margin:auto;padding:14px 12px 96px}
 .fearbar{display:flex;align-items:center;gap:8px;max-width:520px;margin:0 auto 10px;background:#2a2a2a;color:#fff;border-radius:12px;padding:6px 12px;font-size:.9rem}
 .fearbar>span{font-size:1.4rem}.fearbar b{white-space:nowrap;text-transform:uppercase;letter-spacing:.05em;font-size:.75rem}
 .fearbar .trk{flex:1}.fearbar .trk span{background:linear-gradient(90deg,#f2a516,#e8452c)}
-.reels{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:0 0 6px}
+.reels{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin:0 0 6px}
 .reelc{position:relative;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;min-height:150px;padding:18px 8px 12px;text-align:center;background:#1b1b1b;color:#fff;border:0;border-radius:12px;box-shadow:0 6px 0 #000;
   background-image:radial-gradient(circle,#ffffff22 30%,transparent 32%),radial-gradient(circle,#ffffff22 30%,transparent 32%);background-size:14px 14px;background-position:0 2px,0 calc(100% - 2px);background-repeat:repeat-x;transition:transform .12s}
 .reelc:hover:not(:disabled){transform:translateY(-3px) rotate(-1deg)}
@@ -96,6 +96,7 @@ main{max-width:1020px;margin:auto;padding:14px 12px 96px}
 .howto .hi{font-size:2rem}.howto b{color:var(--navy);font-size:1rem;line-height:1.25}
 .board{position:relative;max-width:720px;margin:0 auto 8px;background:#fff;border-radius:6px;padding:8px;box-shadow:0 6px 18px #0004;transform:rotate(-.4deg)}
 .board svg{display:block;width:100%;height:auto;border-radius:3px}
+.board .photo{position:relative}.board .u2img{display:block;width:100%;height:auto;border-radius:3px}
 .hot{position:absolute;width:15%;aspect-ratio:1;border-radius:50%;border:3px dashed #fff;background:#ffffff1f;transform:translate(-50%,-50%);min-height:0;padding:0;animation:pulse 1.6s ease-in-out infinite;box-shadow:0 0 0 2px #0008}
 .hot:hover{background:#ffffff40}
 .hot.found{animation:none;border:3px solid var(--gold);background:transparent;cursor:default}
@@ -258,7 +259,7 @@ h1{font-family:"Arial Black","Segoe UI Black",Impact,system-ui,sans-serif;font-s
   .sc-body{padding:12px}
   .howto{grid-template-columns:1fr}.howto div{flex-direction:row;text-align:left;gap:10px}
   .letters,.deal{grid-template-columns:1fr}
-  .reels{grid-template-columns:1fr 1fr}.reelc{min-height:120px}
+  .reels{grid-template-columns:1fr 1fr}.reelc{min-height:120px}.reelc:last-child:nth-child(odd){grid-column:1/-1}
   .cards.n2,.cards.n3,.cards.n4{grid-template-columns:1fr}
   .dcard{flex-direction:row;flex-wrap:wrap;text-align:left;justify-content:flex-start;padding:12px 12px 10px;gap:2px 10px}
   .d-ico{font-size:2.1rem}.d-t{flex:1;min-width:150px}.d-l{width:100%}.d-chips{justify-content:flex-start;width:100%}
@@ -275,7 +276,7 @@ h1{font-family:"Arial Black","Segoe UI Black",Impact,system-ui,sans-serif;font-s
 <script src="../../shared/assignments.js?v=20261101fill"></script>
 <script src="../../shared/turnin.js?v=20261102read"></script>
 <script src="../../shared/lang.js?v=20261102samonly"></script>
-<script src="es.js?v=2"></script>
+<script src="es.js?v=3"></script>
 </head><body>
 <div class="hud" id="hud" hidden aria-label="Game board">
   <div class="hud-in">
@@ -292,5 +293,5 @@ h1{font-family:"Arial Black","Segoe UI Black",Impact,system-ui,sans-serif;font-s
   <div id="app"></div>
   <div class="foot"><span>Progress saves on this device.</span><button type="button" id="restartBtn">Start over</button></div>
 </main>
-<script src="game.js?v=2"></script>
+<script src="game.js?v=3"></script>
 </body></html>

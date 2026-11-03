@@ -362,63 +362,50 @@
   const S = {};
 
   // ---- 1 · The photos (photo hunt + check 1) ----
+  // Spots line up with the real photo (1000×822 file). x/y = % of the photo.
+  // id "launcher" kept so saved progress still works; on the real photo that spot is the truck convoy.
   const SPOTS = [
-    { id: "trailers", x: 27, y: 62, label: "MISSILE TRAILERS" },
-    { id: "launcher", x: 58, y: 44, label: "MISSILE LAUNCHER" },
-    { id: "tents", x: 80, y: 73, label: "TENTS FOR TROOPS" }
+    { id: "trailers", x: 72, y: 84, label: "MISSILE TRAILERS" },
+    { id: "launcher", x: 59, y: 47, label: "TRUCK CONVOY" },
+    { id: "tents", x: 32, y: 23, label: "TENTS FOR TROOPS" }
   ];
-  function u2Svg() {
-    let trees = "";
-    const T = [[40, 90], [80, 120], [60, 300], [110, 360], [640, 90], [690, 140], [600, 380], [670, 340], [330, 380], [380, 400], [250, 110], [470, 110], [520, 380], [150, 200], [690, 250]];
-    T.forEach(([x, y], i) => { trees += `<circle cx="${x}" cy="${y}" r="${18 + (i % 3) * 6}" fill="#3e4636"/><circle cx="${x + 18}" cy="${y + 8}" r="${14 + (i % 2) * 5}" fill="#454d3c"/>`; });
-    let tents = "";
-    for (let r = 0; r < 3; r++) for (let c = 0; c < 4; c++) tents += `<polygon points="${540 + c * 26},${300 + r * 22} ${552 + c * 26},${288 + r * 22} ${564 + c * 26},${300 + r * 22}" fill="#d9d6c8" stroke="#555" stroke-width="1"/>`;
-    let trailers = "";
-    for (let i = 0; i < 4; i++) trailers += `<g transform="rotate(-18 ${150 + i * 34} ${255 + i * 10})"><rect x="${120 + i * 34}" y="${250 + i * 10}" width="70" height="10" rx="4" fill="#e8e4d6" stroke="#444"/><rect x="${116 + i * 34}" y="${251 + i * 10}" width="8" height="8" fill="#777"/></g>`;
-    return `<svg viewBox="0 0 720 420" role="img" aria-label="${esc(L("Drawing of a spy-plane photo: a jungle clearing with long missile trailers, a launcher, and rows of tents."))}">
-      <defs><filter id="grain"><feTurbulence type="fractalNoise" baseFrequency=".9" numOctaves="2" seed="4"/><feColorMatrix type="saturate" values="0"/><feComponentTransfer><feFuncA type="table" tableValues="0 .22"/></feComponentTransfer><feBlend in2="SourceGraphic" mode="multiply"/></filter></defs>
-      <rect width="720" height="420" fill="#7d8070"/>
-      <path d="M190 160 Q360 120 520 170 Q640 220 600 330 Q520 360 380 340 Q220 330 160 290 Q120 220 190 160Z" fill="#b3ae98"/>
-      <path d="M0 210 Q120 190 200 230 Q320 280 420 250 Q560 210 720 260" stroke="#cfc9b2" stroke-width="16" fill="none"/>
-      ${trees}${trailers}
-      <rect x="380" y="170" width="120" height="34" rx="4" fill="#cfcab6" stroke="#444"/><rect x="392" y="180" width="96" height="10" rx="5" fill="#f2efe4" stroke="#333"/><line x1="380" y1="204" x2="365" y2="222" stroke="#333" stroke-width="3"/><line x1="500" y1="204" x2="515" y2="222" stroke="#333" stroke-width="3"/>
-      ${tents}
-      <rect width="720" height="420" fill="#000" opacity="0" filter="url(#grain)"/>
-      <rect x="0" y="0" width="720" height="30" fill="#111"/><text x="12" y="20" fill="#fff" font-family="Arial,sans-serif" font-size="14" font-weight="700" letter-spacing="1">U-2 PHOTO · SAN CRISTÓBAL, CUBA · OCT. 14, 1962</text>
-    </svg>`;
+  function u2Img() {
+    return `<img class="u2img" src="u2-photo-oct14-1962.jpg" width="1000" height="822" alt="${esc(L("Real U-2 spy-plane photo, black and white: fields and trees in Cuba, a truck convoy on a dirt road, missile trailers, and tents. CIA labels are printed on it."))}">`;
   }
+  const U2_CREDIT = "Real U-2 photo, Oct. 14, 1962 (printed Oct. 15). Los Palacios, near San Cristóbal, Cuba. U.S. Air Force photo, public domain (National Museum of the U.S. Air Force).";
   function boardHtml(interactive) {
     const spots = SPOTS.map(s => {
       const f = st.found.includes(s.id);
       if (!interactive && !f) return "";
       return `<button type="button" class="hot${f ? " found" : ""}" data-spot="${s.id}" style="left:${s.x}%;top:${s.y}%" aria-label="${esc(f ? L(s.label) : L("Look closer"))}"${f ? " disabled" : ""}>${f ? `<span class="tagl">${esc(L(s.label))}</span>` : ""}</button>`;
     }).join("");
-    return `<div class="board">${u2Svg()}<span class="draw-note">${esc(L("GAME DRAWING"))}</span>${spots}</div>` +
-      srcLine("Drawing based on the real CIA photo board. Real labels: “8 missile trailers,” “erector launcher equipment,” “tent areas.” Real photo: JFK Library.");
+    return `<div class="board"><div class="photo">${u2Img()}${spots}</div></div>` + srcLine(U2_CREDIT);
   }
   // ---- 1a · Before the crisis: 1950s fear (flip 4 newsreels + check 0) ----
   const REELS = [
-    { id: "duck", icon: "🐢", yr: "1950s", t: "Duck and cover", l: "Kids drill under desks." },
+    { id: "duck", icon: "🐢", yr: "1950s", t: "Duck and cover", l: "Drills under desks." },
     { id: "hbomb", icon: "💥", yr: "1952", t: "H-bomb", l: "Hundreds of times Hiroshima's power." },
-    { id: "roads", icon: "🛣️", yr: "1956", t: "Interstates", l: "Partly for defense. Suburbs boom." },
+    { id: "roads", icon: "🛣️", yr: "1956", t: "Defense highways", l: "Suburbs boom." },
+    { id: "left", icon: "🏘️", yr: "1950s", t: "Left out", l: "Levittown suburb: whites only. Redlining blocked Black home loans.", noFear: true },
     { id: "sputnik", icon: "🛰️", yr: "1957", t: "Sputnik", l: "U.S. pays for NASA, science." }
   ];
   function opener(app) {
     const base = { title: "Before the Crisis", chap: "1950s", stage: "st-reel", art: "📺" };
     const all = REELS.every(r => st.flipped.includes(r.id));
-    const fear = st.flipped.length;
+    const fear = REELS.filter(r => !r.noFear && st.flipped.includes(r.id)).length;   // the "Left out" card is not a fear reel
     const reels = `<div class="fearbar" aria-label="${esc(F("Fear at home: {n} of 4", { n: fear }))}"><span aria-hidden="true">😨</span><b>${esc(L("Fear at home"))}</b><div class="trk"><span style="width:${fear * 25}%"></span></div></div>` +
       `<div class="reels">${REELS.map(r => {
         const f = st.flipped.includes(r.id);
         return `<button type="button" class="reelc${f ? " on" : ""}" data-reel="${r.id}"${f ? " disabled" : ""} aria-label="${esc(f ? L(r.t) + ": " + L(r.l) : r.yr + " · " + L("tap to play"))}">
           <span class="r-yr">${esc(r.yr)}</span><span class="r-ic" aria-hidden="true">${f ? r.icon : "🎞️"}</span>${f ? `<b>${esc(L(r.t))}</b><span class="r-l">${esc(L(r.l))}</span>` : `<span class="r-tap">▶ ${esc(L("PLAY"))}</span>`}</button>`;
       }).join("")}</div>` +
-      srcLine("Real events: “Duck and Cover” school film, 1952; “Ivy Mike” H-bomb test, Nov. 1, 1952; Interstate Highway Act, 1956; Sputnik, Oct. 4, 1957; NASA, 1958.");
+      srcLine("Real events: “Duck and Cover” school film, 1952; “Ivy Mike” H-bomb test, Nov. 1, 1952; Interstate Highway Act, 1956; Sputnik, Oct. 4, 1957; NASA, 1958.") +
+      srcLine("Levittown, N.Y., leases (1947): homes only for “members of the Caucasian race.” The federal FHA used redlining: lower loan values near Black neighborhoods. Smithsonian NMAAHC.");
     if (st.done.c0) {
       app.innerHTML = scene(Object.assign({}, base, { body: reels + checkDone("c0") + `<div id="after">${newWord("<b>Arms race</b> = U.S. and USSR racing to build more, bigger nukes.")}${nextBtn("To October 1962 →")}</div>` }));
       return wireNext(() => toPhase(1));
     }
-    app.innerHTML = scene(Object.assign({}, base, { bubbles: [["reel", "Americans fear the bomb. Play all 4 reels."]], body: reels + (all ? `<div id="checkBox"></div>` : "") }));
+    app.innerHTML = scene(Object.assign({}, base, { bubbles: [["reel", "Play all 5 reels."]], body: reels + (all ? `<div id="checkBox"></div>` : "") }));
     app.querySelectorAll(".reelc:not(.on)").forEach(b => b.onclick = () => {
       if (!st.flipped.includes(b.dataset.reel)) st.flipped.push(b.dataset.reel);
       save(); render();
@@ -538,7 +525,7 @@
       app.innerHTML = scene({ title: "The UN Showdown", stage: "st-un", art, body });
       return wireNext();
     }
-    const body = `<div class="board" style="max-width:420px">${u2Svg()}<span class="draw-note">${esc(L("GAME DRAWING"))}</span></div>` +
+    const body = `<div class="board" style="max-width:420px"><div class="photo">${u2Img()}</div></div>` + srcLine(U2_CREDIT) +
       srcLine("Oct. 25, 1962: U.S. Ambassador Adlai Stevenson showed the spy photos at the UN. The Soviet ambassador would not answer. UN; JFK Library") + `<div id="checkBox"></div>`;
     app.innerHTML = scene({ title: "The UN Showdown", stage: "st-un", art, bubbles: [["stevenson", "“I am prepared to wait for my answer until hell freezes over.”"]], body });
     mountCheck("c3", solved("c3", () => { applyFx({ firm: 1 }); st.trail.push({ label: "Showed the photos at the UN", fx: { firm: 1 } }); }));
