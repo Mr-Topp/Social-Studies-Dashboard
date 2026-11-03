@@ -154,6 +154,30 @@ button:disabled{cursor:not-allowed;opacity:.75}
   .card{box-shadow:none;border:1px solid #888;break-inside:avoid}.wrap{max-width:none}
   .case-card.wide{width:auto;left:auto;transform:none}.anne-workspace{grid-template-columns:1fr}.anne-reader{display:none}.anne-questions{max-height:none;overflow:visible}
 }
+
+/* ---------- Anne Frank flip-through (one page at a time) ---------- */
+.anne-workspace{grid-template-columns:minmax(0,1.5fr) minmax(330px,1fr)}
+.flip-reader{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;scroll-margin-top:76px}
+.flip-bar{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;background:var(--navy);color:#fff;padding:11px 16px}
+.flip-bar .eyebrow{margin:0;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;font-weight:850;color:#f1d991}
+.flip-bar h2{color:#fff;font-size:1.15rem;margin:2px 0 0}.flip-pos{font-size:.85rem;color:#dfe8ee;font-weight:650}
+.flip-tools{display:flex;align-items:center;gap:8px;flex-wrap:wrap;padding:10px 14px;border-bottom:1px solid var(--line);background:#fbf8f1}
+.flip-tools .grow{flex:1;text-align:center;font-size:.86rem;color:var(--red);font-weight:800;min-width:110px}
+.flip-tools button{padding:8px 13px;font-size:.9rem}
+.flip-stage{background:#e9e2d3;padding:12px;display:flex;justify-content:center}
+.flip-stage img{display:block;max-width:100%;max-height:calc(100vh - 150px);min-height:460px;width:auto;height:auto;background:#fff;box-shadow:0 2px 10px #0002;cursor:zoom-in}
+.flip-wait{background:#fff;border:1px dashed #d8cfbd;border-radius:10px;padding:10px 12px;color:var(--muted);font-weight:650;font-size:.93rem;margin:6px 0 10px}
+.flip-wait:empty{display:none}
+.flip-nav{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:14px 0 2px}
+.flip-why{flex:1;min-width:160px;margin:0;font-size:.9rem;color:var(--muted);font-weight:650}
+.flip-why:empty{display:none}
+.anne-questions{max-height:none;overflow:visible}
+.anne-q[hidden],#anneWrite[hidden],.actions[hidden]{display:none}
+.flip-big{position:fixed;inset:0;z-index:100;background:#0f2433ee;overflow:auto;padding:56px 12px 24px;display:flex;justify-content:center;align-items:flex-start}
+.flip-big[hidden]{display:none}.flip-big img{width:min(1100px,100%);height:auto;background:#fff;border-radius:6px}
+.flip-big button{position:fixed;top:12px;right:16px;background:#fff;color:var(--navy)}
+@media(max-width:860px){.anne-workspace{grid-template-columns:1fr}.flip-stage img{max-height:none;min-height:0;width:100%}}
+@media print{.flip-reader,.flip-nav,.flip-big{display:none!important}.anne-q[hidden],#anneWrite[hidden]{display:block!important}}
 </style>
 <script src="../shared/assignments.js?v=20261103g"></script><script src="../shared/turnin.js?v=20261103d"></script></head>
 <body>
@@ -261,21 +285,26 @@ button:disabled{cursor:not-allowed;opacity:.75}
 </div>
 </div>
 <div class="anne-workspace">
-<div class="anne-reader"><iframe title="Anne Frank graphic novel, pages 6 through 15" src="../day6-anne-graphic/" loading="lazy"></iframe></div>
+<div class="anne-reader flip-reader" id="anneReader" aria-label="Anne Frank graphic novel, pages 6 through 15">
+<div class="flip-bar"><div><p class="eyebrow">Anne Frank</p><h2>Graphic novel pages 6–15</h2></div><span class="flip-pos" id="annePos"></span></div>
+<div class="flip-tools"><button type="button" class="quiet" id="anneBack">← Back a page</button><span class="grow"><span id="anneTimer" aria-live="polite"></span></span><button type="button" class="secondary" id="anneNext">Next page →</button><button type="button" class="quiet" id="anneZoom">Make page bigger</button></div>
+<div class="flip-stage"><img id="anneImg" src="../day6-anne-graphic/pages/010.svg" alt="Anne Frank graphic novel page 6"></div>
+</div>
 <div class="anne-questions" id="anneCheck">
 <h3>Answer as you read</h3>
-<label for="anne1">1. Page 7: Anne's father reads that his Jewish friends with government jobs were fired. Why does he say, "It's time to make a move"?</label><select id="anne1"><option value="">Choose one</option><option value="a">He sees the Nazis' anti-Jewish rules getting worse and expects more danger.</option><option value="b">He was offered a better-paying government job in another country.</option><option value="c">He wants to leave before the Nazis start drafting men into the army.</option><option value="d">He worries the Great Depression will close his bank in Frankfurt.</option></select><p class="small fb" id="feedback-anne1" aria-live="polite"></p>
-<label for="anne2">2. Page 7: The caption says Jews were less than 1% of Germany's people, but the Nazis called them "the root of all evil." Which Nazi method does this show?</label><select id="anne2"><option value="">Choose one</option><option value="a">Scapegoating: blaming a small group for the whole country's problems</option><option value="b">Censorship: banning newspapers that disagreed with the Nazi Party</option><option value="c">Invasion: taking land from neighboring countries by force</option><option value="d">Reform: changing a few laws to help struggling German workers</option></select><p class="small fb" id="feedback-anne2" aria-live="polite"></p>
-<label for="anne3">3. Page 8: Why did Anne's father move to Amsterdam in 1933?</label><select id="anne3"><option value="">Choose one</option><option value="a">He believed Holland was a safe place for Jewish families.</option><option value="b">His bank in Frankfurt sent him to open a new branch.</option><option value="c">Anne's grandmother already owned a jam company there.</option><option value="d">The family wanted to live closer to the Swiss Alps.</option></select><p class="small fb" id="feedback-anne3" aria-live="polite"></p>
-<label for="anne4">4. Page 9: Uncle Uli fled Germany. Which detail on this page shows Nazi persecution turning violent?</label><select id="anne4"><option value="">Choose one</option><option value="a">Synagogues and Jewish-owned shops were burned and their windows smashed.</option><option value="b">Jewish workers were ordered to work longer hours in German factories.</option><option value="c">Jewish families were ordered to sign their names at the town hall.</option><option value="d">Jewish children were moved into separate schools across the city.</option></select><p class="small fb" id="feedback-anne4" aria-live="polite"></p>
-<label for="anne5">5. Page 10: Anne writes that after they ran from Germany, the Nazis invaded Holland "and it would start all over again." What does she mean?</label><select id="anne5"><option value="">Choose one</option><option value="a">The same anti-Jewish rules they escaped in Germany now came to Holland.</option><option value="b">Her father had to start his business over after Holland lost the war.</option><option value="c">Holland and Germany started fighting World War I all over again.</option><option value="d">Anne had to start school over in a lower grade in a new country.</option></select><p class="small fb" id="feedback-anne5" aria-live="polite"></p>
-<label for="anne6">6. Page 10: A soldier orders Jewish swimmers out of the pool. What reason is given, and what does it show?</label><select id="anne6"><option value="">Choose one</option><option value="a">A false claim that Jews spread germs, used to push them out of public life</option><option value="b">A wartime rule that only soldiers could use city pools in the summer</option><option value="c">A health rule that closed every pool in Amsterdam to stop typhus</option><option value="d">A punishment because some Jewish swimmers had broken the pool rules</option></select><p class="small fb" id="feedback-anne6" aria-live="polite"></p>
-<label for="anne7">7. Page 11: Compare the first panel with "Two weeks later... no bikes." What pattern does this show about Nazi rules?</label><select id="anne7"><option value="">Choose one</option><option value="a">Rights were taken away step by step, a little more each time.</option><option value="b">The rules were strict at first, but they got easier over time.</option><option value="c">All of the rules were announced on the same day, all at once.</option><option value="d">The rules only applied to adults, not to children like Anne.</option></select><p class="small fb" id="feedback-anne7" aria-live="polite"></p>
-<label for="anne8">8. Page 15: Mr. Kleiman and Mr. Kugler took over Father's company. Using pages 7 and 11 too, what is the most likely reason?</label><select id="anne8"><option value="">Choose one</option><option value="a">Nazi rules were pushing Jewish people out of their jobs and businesses.</option><option value="b">Anne's father wanted to retire and spend more time with his family.</option><option value="c">The jam company was losing money because of the Great Depression.</option><option value="d">The Dutch government took it over to pay for the war.</option></select><p class="small fb" id="feedback-anne8" aria-live="polite"></p>
-<div class="actions no-print"><button type="button" class="secondary" id="checkAnne">Check my answers</button></div>
+<p class="flip-wait" id="anneWait"></p>
+<div class="anne-q" data-gn="7"><label for="anne1">1. Page 7: Anne's father reads that his Jewish friends with government jobs were fired. Why does he say, "It's time to make a move"?</label><select id="anne1"><option value="">Choose one</option><option value="a">He sees the Nazis' anti-Jewish rules getting worse and expects more danger.</option><option value="b">He was offered a better-paying government job in another country.</option><option value="c">He wants to leave before the Nazis start drafting men into the army.</option><option value="d">He worries the Great Depression will close his bank in Frankfurt.</option></select><p class="small fb" id="feedback-anne1" aria-live="polite"></p><label for="anne2">2. Page 7: The caption says Jews were less than 1% of Germany's people, but the Nazis called them "the root of all evil." Which Nazi method does this show?</label><select id="anne2"><option value="">Choose one</option><option value="a">Scapegoating: blaming a small group for the whole country's problems</option><option value="b">Censorship: banning newspapers that disagreed with the Nazi Party</option><option value="c">Invasion: taking land from neighboring countries by force</option><option value="d">Reform: changing a few laws to help struggling German workers</option></select><p class="small fb" id="feedback-anne2" aria-live="polite"></p><div class="actions no-print"><button type="button" class="secondary" data-check="anne1,anne2">Check</button></div></div>
+<div class="anne-q" data-gn="8"><label for="anne3">3. Page 8: Why did Anne's father move to Amsterdam in 1933?</label><select id="anne3"><option value="">Choose one</option><option value="a">He believed Holland was a safe place for Jewish families.</option><option value="b">His bank in Frankfurt sent him to open a new branch.</option><option value="c">Anne's grandmother already owned a jam company there.</option><option value="d">The family wanted to live closer to the Swiss Alps.</option></select><p class="small fb" id="feedback-anne3" aria-live="polite"></p><div class="actions no-print"><button type="button" class="secondary" data-check="anne3">Check</button></div></div>
+<div class="anne-q" data-gn="9"><label for="anne4">4. Page 9: Uncle Uli fled Germany. Which detail on this page shows Nazi persecution turning violent?</label><select id="anne4"><option value="">Choose one</option><option value="a">Synagogues and Jewish-owned shops were burned and their windows smashed.</option><option value="b">Jewish workers were ordered to work longer hours in German factories.</option><option value="c">Jewish families were ordered to sign their names at the town hall.</option><option value="d">Jewish children were moved into separate schools across the city.</option></select><p class="small fb" id="feedback-anne4" aria-live="polite"></p><div class="actions no-print"><button type="button" class="secondary" data-check="anne4">Check</button></div></div>
+<div class="anne-q" data-gn="10"><label for="anne5">5. Page 10: Anne writes that after they ran from Germany, the Nazis invaded Holland "and it would start all over again." What does she mean?</label><select id="anne5"><option value="">Choose one</option><option value="a">The same anti-Jewish rules they escaped in Germany now came to Holland.</option><option value="b">Her father had to start his business over after Holland lost the war.</option><option value="c">Holland and Germany started fighting World War I all over again.</option><option value="d">Anne had to start school over in a lower grade in a new country.</option></select><p class="small fb" id="feedback-anne5" aria-live="polite"></p><label for="anne6">6. Page 10: A soldier orders Jewish swimmers out of the pool. What reason is given, and what does it show?</label><select id="anne6"><option value="">Choose one</option><option value="a">A false claim that Jews spread germs, used to push them out of public life</option><option value="b">A wartime rule that only soldiers could use city pools in the summer</option><option value="c">A health rule that closed every pool in Amsterdam to stop typhus</option><option value="d">A punishment because some Jewish swimmers had broken the pool rules</option></select><p class="small fb" id="feedback-anne6" aria-live="polite"></p><div class="actions no-print"><button type="button" class="secondary" data-check="anne5,anne6">Check</button></div></div>
+<div class="anne-q" data-gn="11"><label for="anne7">7. Page 11: Compare the first panel with "Two weeks later... no bikes." What pattern does this show about Nazi rules?</label><select id="anne7"><option value="">Choose one</option><option value="a">Rights were taken away step by step, a little more each time.</option><option value="b">The rules were strict at first, but they got easier over time.</option><option value="c">All of the rules were announced on the same day, all at once.</option><option value="d">The rules only applied to adults, not to children like Anne.</option></select><p class="small fb" id="feedback-anne7" aria-live="polite"></p><div class="actions no-print"><button type="button" class="secondary" data-check="anne7">Check</button></div></div>
+<div class="anne-q" data-gn="15"><label for="anne8">8. Page 15: Mr. Kleiman and Mr. Kugler took over Father's company. Using pages 7 and 11 too, what is the most likely reason?</label><select id="anne8"><option value="">Choose one</option><option value="a">Nazi rules were pushing Jewish people out of their jobs and businesses.</option><option value="b">Anne's father wanted to retire and spend more time with his family.</option><option value="c">The jam company was losing money because of the Great Depression.</option><option value="d">The Dutch government took it over to pay for the war.</option></select><p class="small fb" id="feedback-anne8" aria-live="polite"></p><div class="actions no-print"><button type="button" class="secondary" data-check="anne8">Check</button></div></div>
+<div class="actions no-print" hidden><button type="button" class="secondary" id="checkAnne">Check my answers</button></div>
 <p id="anneStatus" class="small" role="status" aria-live="polite"></p>
-<label for="write5">Write 2 sentences. Use one detail from the Great Depression reading and one from Anne's pages. How did the crisis help Hitler gain support, and why did Anne's family leave Germany?</label><textarea id="write5" style="min-height:110px" placeholder="The Depression helped Hitler gain support because ___. Anne's family left Germany because on page ___ ___."></textarea>
+<div id="anneWrite"><label for="write5">Write 2 sentences. Use one detail from the Great Depression reading and one from Anne's pages. How did the crisis help Hitler gain support, and why did Anne's family leave Germany?</label><textarea id="write5" style="min-height:110px" placeholder="The Depression helped Hitler gain support because ___. Anne's family left Germany because on page ___ ___."></textarea></div>
+<div class="flip-nav no-print"><button type="button" class="secondary" id="anneNext2">Next page →</button><p class="flip-why" id="anneWhy" aria-live="polite"></p></div>
 </div></div>
+<div class="flip-big" id="anneBig" hidden role="dialog" aria-label="Bigger page"><button type="button" class="quiet" id="anneBigClose">✕ Close</button><img id="anneBigImg" alt="Bigger view of the current page"></div>
 </section>
 
 <section class="card turnin" id="turnin">
@@ -354,7 +383,7 @@ function writingProblem(id){const v=$(id).value.trim(),low=v.toLowerCase();if(!v
 async function submitWork(){const status=$("submitStatus"),name=$("studentName").value.trim(),button=$("submitWork");if(!name){status.textContent="Type your first name + last initial (like Jordan M.) first.";$("studentName").focus();return}
 if(caseDone()<4){status.textContent="Get a green check on Cases 1, 2, and both Ukraine checks first.";$("ukraineCase").scrollIntoView({behavior:"smooth",block:"start"});return}
 for(const id of writeIds){const prob=writingProblem(id);if(prob){status.textContent=(id==="writeUkr"?"Ukraine answer: ":"Anne Frank answer: ")+prob;$(id).focus();return}}
-if(anneDone()<8){status.textContent="Get a green check on all eight Anne Frank questions before turning in your work. Press \"Check my answers\" in the Anne Frank section.";$("anneCheck").scrollIntoView({behavior:"smooth",block:"start"});return}
+if(anneDone()<8){status.textContent="Get a green check on all eight Anne Frank questions before turning in your work. Press \"Check\" on each Anne Frank page.";$("anneCheck").scrollIntoView({behavior:"smooth",block:"start"});return}
 const answers={Standard:STANDARD};caseIds.forEach(id=>answers[CASE[id]+" · check"]=$(id).selectedOptions[0].textContent);anneIds.forEach((id,i)=>answers["Anne Frank question "+(i+1)]=$(id).selectedOptions[0].textContent);writeIds.forEach(id=>answers[CASE[id]+" · writing"]=$(id).value.trim());
 button.disabled=true;status.textContent="Sending your work…";try{const response=await classTurnIn(API,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({studentName:name,assignmentId:"day6-world-in-crisis",answers})});const result=await response.json();if(!response.ok)throw new Error(result.error||"Could not send your work.");status.textContent="Turned in! Your work was sent to your teacher. You're done.";button.textContent="Turned in ✓"}catch(error){status.textContent=error instanceof Error?error.message:"Could not turn in your work. Try again.";button.disabled=false}}
 $("submitWork").addEventListener("click",submitWork);
@@ -375,6 +404,54 @@ $("clearWork").addEventListener("click",()=>{if(confirm("Start over? This clears
   ["click","input","change"].forEach(t=>document.addEventListener(t,()=>setTimeout(updateRoute,60)));
   new MutationObserver(updateRoute).observe(document.getElementById("submitStatus"),{childList:true,characterData:true,subtree:true});
   updateRoute();
+})();
+</script>
+<script>
+// Anne Frank pages: one page at a time. Next page shows only while there are more pages to read;
+// each page's questions must be green before going on. (Display/flow only — answer keys and grading above are unchanged.)
+(function(){
+  const FIRST=6,LAST=15,K="day6-crisis-anne-",SEC=8,$=id=>document.getElementById(id);
+  const qByPage={7:["anne1","anne2"],8:["anne3"],9:["anne4"],10:["anne5","anne6"],11:["anne7"],15:["anne8"]};
+  const src=gn=>"../day6-anne-graphic/pages/0"+(gn+4)+".svg";
+  // after "Start over" every saved answer is gone, so reset the page progress too
+  if(!allIds.some(id=>localStorage.getItem("day6-crisis-"+id))){localStorage.removeItem(K+"read");localStorage.removeItem(K+"at")}
+  let read=new Set();try{read=new Set(JSON.parse(localStorage.getItem(K+"read")||"[]"))}catch(e){}
+  let cur=FIRST,timer=null;
+  const qs=gn=>qByPage[gn]||[];
+  const pageDone=gn=>read.has(gn)&&qs(gn).every(isRight);
+  const maxOpen=()=>{for(let g=FIRST;g<LAST;g++)if(!pageDone(g))return g;return LAST};
+  const nextQ=gn=>{for(let g=gn+1;g<=LAST;g++)if(qByPage[g])return g;return 0};
+  function show(gn,scroll){
+    cur=Math.max(FIRST,Math.min(LAST,gn));localStorage.setItem(K+"at",cur);
+    $("anneImg").src=src(cur);$("anneImg").alt="Anne Frank graphic novel page "+cur;if(cur<LAST){const pre=new Image();pre.src=src(cur+1)}
+    document.querySelectorAll(".anne-q").forEach(d=>d.hidden=Number(d.dataset.gn)!==cur);
+    clearInterval(timer);
+    if(!read.has(cur)){let left=SEC;const tick=()=>{$("anneTimer").textContent="Read this page · "+left+" sec"};tick();
+      timer=setInterval(()=>{left--;if(left<=0){clearInterval(timer);read.add(cur);localStorage.setItem(K+"read",JSON.stringify([...read]));$("anneTimer").textContent="";refresh()}else tick()},1000)}
+    else $("anneTimer").textContent="";
+    refresh();
+    if(scroll){const top=$("anneReader").getBoundingClientRect().top+scrollY-76;if(Math.abs(scrollY-top)>40)scrollTo({top,behavior:"smooth"})}
+  }
+  function refresh(){
+    const last=cur===LAST,done=pageDone(cur);
+    $("annePos").textContent="Page "+cur+" of pages "+FIRST+"–"+LAST;
+    const nq=nextQ(cur);
+    $("anneWait").textContent=qs(cur).length?"":"No question on this page. Read it, then go on."+(nq?" Your next question is on page "+nq+".":"");
+    $("anneWrite").hidden=!(last||anneDone()===8);
+    $("anneNext").hidden=last;$("anneNext").disabled=!done;
+    $("anneNext2").disabled=!done;$("anneNext2").textContent=last?"Go to Turn in ↓":"Next page →";
+    $("anneBack").disabled=cur===FIRST;
+    $("anneWhy").textContent=!read.has(cur)?"Read this page first. Next opens in a few seconds.":!qs(cur).every(isRight)?"Get this page's question"+(qs(cur).length>1?"s":"")+" right to go on.":last?(anneDone()===8&&!$("write5").value.trim()?"Write your 2 sentences, then turn in.":""):"";
+  }
+  function next(){if(!pageDone(cur))return;if(cur===LAST){$("turnin").scrollIntoView({behavior:"smooth",block:"start"});return}show(cur+1,true)}
+  $("anneNext").addEventListener("click",next);$("anneNext2").addEventListener("click",next);
+  $("anneBack").addEventListener("click",()=>{if(cur>FIRST)show(cur-1,true)});
+  document.addEventListener("click",e=>{if(e.target.closest("#anneCheck"))setTimeout(refresh,80)});
+  $("write5").addEventListener("input",refresh);
+  const big=()=>{$("anneBigImg").src=src(cur);$("anneBig").hidden=false;$("anneBigClose").focus()},close=()=>{$("anneBig").hidden=true};
+  $("anneZoom").addEventListener("click",big);$("anneImg").addEventListener("click",big);$("anneBigClose").addEventListener("click",close);
+  $("anneBig").addEventListener("click",e=>{if(e.target.id==="anneBig")close()});document.addEventListener("keydown",e=>{if(e.key==="Escape")close()});
+  show(Math.min(Number(localStorage.getItem(K+"at"))||FIRST,maxOpen()),false);
 })();
 </script>
 </body>
