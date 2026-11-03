@@ -214,6 +214,15 @@ textarea{width:100%;font:inherit;border:2px solid #cfcab9;border-radius:10px;pad
 @media (max-width:760px){.intro{grid-template-columns:1fr}.intro-art{display:none}.setups,.replies{grid-template-columns:1fr}.twobox{grid-template-columns:1fr}.setup{min-height:0}}
 @media (max-width:560px){body{font-size:16px}.hand{grid-template-columns:1fr 1fr;gap:8px}.mcard{min-height:0;font-size:.8rem;padding:8px}.mc-pips{display:none}.meter .tr{width:46px}.card{padding:12px}.brow{grid-template-columns:90px 1fr 40px;font-size:.84rem}.trail li{grid-template-columns:28px 1fr}.trail .ld{grid-column:2}.hud{gap:4px 8px;font-size:.82rem;padding:5px 10px}.top{font-size:.68rem}.top .agency,.meter .lbl,.tm .sm{display:none}.ava{width:32px;height:32px;font-size:1.1rem}.c-ava{width:46px;height:46px;font-size:1.7rem}.say-ava{width:40px;height:40px;font-size:1.4rem}.c-ask{font-size:1rem}.end-ic{font-size:2.8rem}.played{gap:10px}.minicard{width:60px;height:84px}.hud{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.team{min-width:0}.tok{padding:3px 8px}.tok>span:not(.float){display:none}.meter .tr{width:40px}.how-art{gap:8px}.fan.small{width:180px}}
 @media print{.hud,.foot,.go{display:none}html{background:#fff}}
+/* Trim pass 2026-11-03: cards say what a method IS; one plain direction line; 3-step how-to on the intro */
+.mc-d{font-size:.92rem;font-weight:700;line-height:1.3;color:var(--ink);background:color-mix(in srgb,var(--c) 12%,#fff);border-radius:10px;padding:7px 8px;flex:1}
+.mcard{min-height:128px}
+.direct{font-weight:800;font-size:1.05rem;margin:12px 0 8px}
+.howsteps{margin:10px 0 6px;padding-left:22px;display:grid;gap:3px;font-size:1rem}
+.hud{grid-template-columns:1fr auto 1fr}
+.leak{margin-top:14px}
+@media (max-width:560px){.mc-d{font-size:.84rem}}
+.mini-reveal{background:#fff6cf;border:2px solid #ffd34d;border-radius:12px;padding:8px 11px;margin:10px 0 6px;font-size:.95rem;line-height:1.35}
 </style>
 <script src="../../shared/assignments.js?v=20261103p7"></script>
 <script src="../../shared/turnin.js?v=20261103d"></script>
@@ -223,15 +232,13 @@ textarea{width:100%;font:inherit;border:2px solid #cfcab9;border-radius:10px;pad
 <div class="hud" id="hud" hidden aria-label="Your agency">
   <div class="team you"><span class="ava" aria-hidden="true">🏢</span><div class="tm"><b>Cedar River</b><span class="sm">You</span></div>
     <span class="meter" title="Reputation">⭐ <span class="lbl">Reputation</span> <span class="tr" aria-hidden="true"><i id="repFill"></i></span> <b id="repNum">5/10</b></span></div>
-  <div class="center"><span class="hjob"><span id="hudJob">Job 1 of 6</span><span class="dots" id="hudDots" aria-hidden="true"></span></span>
-    <span class="tok">💵 <b id="hudMoney">$1,000</b></span><span class="tok">📅 <b id="hudDays">51</b> <span>days left</span></span></div>
-  <div class="team rival"><span class="meter" title="Hot Take hype">🔥 <span class="lbl">Rival hype</span> <span class="tr" aria-hidden="true"><i id="hypeFill"></i></span> <b id="hypeNum">2/10</b></span>
-    <div class="tm"><b>Hot Take</b><span class="sm">Blake</span></div><span class="ava rivalava" id="blakeMood" aria-hidden="true">😎</span></div>
+  <div class="center"><span class="hjob"><span id="hudJob">Job 1 of 4</span><span class="dots" id="hudDots" aria-hidden="true"></span></span></div>
+  <div class="team rival"><div class="tm"><b>Hot Take</b><span class="sm">Blake, your rival</span></div><span class="ava rivalava" id="blakeMood" aria-hidden="true">😎</span></div>
 </div>
 <main>
   <p class="welcome" id="welcome" hidden></p>
   <div id="app"></div>
   <div class="foot"><span>Progress saves on this device.</span><button type="button" id="restartBtn">Start over</button></div>
 </main>
-<script src="game.js?v=20261103trim"></script>
+<script src="game.js?v=20261103t4"></script>
 </body></html>

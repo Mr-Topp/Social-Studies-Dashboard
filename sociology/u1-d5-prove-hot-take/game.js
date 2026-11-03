@@ -2,20 +2,20 @@
 //  PROVE IT LAB  (Sociology Unit 1 Day 5 · SS.9-12.Soc.1)
 //  A viral hot take says sleep is for the weak. The student runs the school's research lab:
 //  10 lab hours to build a study, then the design choices GENERATE the data.
-//  Kai (the rival) runs a rigged study. Peer review, then Channel 9, then one of 5 endings.
+//  Kai (the rival) runs a rigged study. Peer review, then CVTV, then one of 5 endings.
 //  5 evidence checks are woven into play. Strict order. Saves on this device.
 //  Turn-in goes through shared/turnin.js (same id, same payload shape as shared/unit-game.js).
-//  Kai, the lab, Cedar Valley High, Channel 9, Dr. Ruiz and all study numbers are made up.
+//  Kai, the lab, Cedar Valley High, CVTV, Dr. Ruiz and all study numbers are made up.
 //  Real: the CDC sleep number (MMWR, Jan 2018) and the Hawthorne Works lighting tests (1924–1927).
 // =====================================================================
 (function () {
   "use strict";
-  const KEY = "soc-u1-d5-prove-hot-take-v2";
+  const KEY = "soc-u1-d5-prove-hot-take-v3";
   const ASSIGNMENT_ID = "soc-u1-d5-prove-hot-take";
   const TITLE = "Sociology · Unit 1 · Day 5 · How Can You Prove a Hot Take?";
   const STANDARD = "SS.9-12.Soc.1";
   const OLD_API = "https://fynn-class-assignment-submissions-20261024.neotboy.chatgpt.site/api/submit";
-  const LOCK = 5, START_HOURS = 10, TOTAL = 9;
+  const LOCK = 2, START_HOURS = 8, TOTAL = 6;   // 8 hours: you can't buy every best option, so the build is a real trade-off
 
   const $ = id => document.getElementById(id);
   const esc = s => String(s == null ? "" : s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
@@ -25,18 +25,18 @@
   const tr = s => (window.SiteLang ? window.SiteLang.t(s) : s);
 
   // ---------------- State ----------------
-  const fresh = () => ({ v: 2, name: "", step: 0, hours: START_HOURS, kai: 70, research: null, draft: {}, measure: null, sample: null, outside: null,
+  const fresh = () => ({ v: 3, name: "", step: 0, hours: START_HOURS, kai: 50, built: false, research: null, draft: {}, measure: null, sample: null, outside: null,
     runs: 0, review: null, fix: null, fixRuns: 0, kaiDrop: false, extra: null, headline: null, checks: {}, writing: {}, turnedIn: false });
   let st;
   try { st = JSON.parse(localStorage.getItem(KEY)); } catch (e) {}
-  if (!st || st.v !== 2) st = fresh();
+  if (!st || st.v !== 3) st = fresh();
   const save = () => { try { localStorage.setItem(KEY, JSON.stringify(st)); } catch (e) {} };
   const chk = id => (st.checks[id] = st.checks[id] || { wrong: 0, done: false });
 
   // ---------------- Content ----------------
   const METHOD = ["Ask", "Check", "Predict", "Collect", "Analyze", "Conclude"];
-  const STEP_METHOD = [0, 0, 1, 2, 3, 3, 4, 4, 5, 5];
-  const STEP_NAME = ["", "Ask a question", "Check the research", "Wire the Data Machine", "Build your study", "Run the study", "Peer review", "Kai goes live", "Live on Channel 9", "The verdict"];
+  // Trim pass 2026-11-03: 6 steps that match the 6 method chips exactly (one counter), then the finish screen.
+  const STEP_NAME = ["", "Ask", "Check the research", "Predict", "Collect data", "Analyze", "Conclude on air", "See how it ends"];
 
   // t = card title, d = one short line. full = the long wording Fynn sees in the turn-in.
   const MEASURES = {
@@ -70,8 +70,8 @@
     };
     const v = T[m][s][run], max = m === "likert" ? 5 : 50;
     return { kind: "bars", unit: m === "likert" ? "Focus, 1–5" : "Minutes on task, of 50",
-      rows: [{ l: "😴 Under 7 h", v: v[0], max, txt: m === "likert" ? v[0].toFixed(1) : String(v[0]) },
-             { l: "🛌 7+ h", v: v[1], max, txt: m === "likert" ? v[1].toFixed(1) : String(v[1]) }] };
+      rows: [{ l: "😴 Under 8 h", v: v[0], max, txt: m === "likert" ? v[0].toFixed(1) : String(v[0]) },
+             { l: "🛌 8+ h", v: v[1], max, txt: m === "likert" ? v[1].toFixed(1) : String(v[1]) }] };
   }
   function chartHtml(run) {
     const d = dataFor(st.measure, st.sample, run);
@@ -89,20 +89,20 @@
 
   // ---------------- Evidence checks (first option is right; screen always shuffles) ----------------
   const CHECKS = {
-    q_question: { short: "Pick the focused research question", who: { av: "📺", n: "Channel 9 producer" },
+    q_question: { short: "Pick the focused research question", who: { av: "📺", n: "CVTV producer" },
       prompt: "Which question do we air Friday?",
-      options: ["Is sleep linked to first-period focus at our school?", "Is sleep actually good for people, or a myth?", "Why is Kai so locked in on no sleep?", "Does sleep even matter at all for teens?"],
+      options: ["Is sleep linked to first-period focus at our school?", "Is sleep actually good for people, or is it a myth?", "Why does Kai think 4 hours of sleep is enough?", "Does sleep even matter at all for teenagers?"],
       hint: "Use the rule card: a group AND two things to measure.",
       why: "<b>Research question</b> = step 1 of the <b>scientific method</b>." },
-    q_kai: { short: "Why Kai got the opposite result", who: { av: "📺", n: "Channel 9 anchor" },
-      prompt: "Why did Kai get the opposite result?",
-      options: ["He asked fans, with a question pushing “yes”", "Too many people mixed up his numbers", "His followers sleep more than most teens", "He ran his study on a weekend"],
+    q_kai: { short: "Why Kai got the opposite result", who: { av: "📺", n: "CVTV anchor" },
+      prompt: "Why did Kai's study say less sleep = more focus?",
+      options: ["He asked fans, with a question pushing “yes”", "So many people answered that his numbers got mixed up", "His followers sleep more than most teens do", "He ran it on a weekend, when sleep is weird"],
       hint: "Read the fine print: WHO did he ask, and HOW?",
-      why: "<b>Objectivity:</b> test a claim without rigging the answer." },
-    q_hawthorne: { short: "Hawthorne: pattern is not proof of cause", who: { av: "🎤", n: "Channel 9 reporter" },
-      prompt: "What does Hawthorne mean for YOUR chart?",
-      options: ["Changing together doesn't prove one caused it", "Brighter lights always make people work harder", "1920s factory studies don't apply to teens", "If numbers go up, the hypothesis is proven"],
-      hint: "Output rose even when the lights did NOT change. Was light the cause?",
+      why: "<b>Objectivity</b> = being fair. Don't set up a test to get the answer you want." },
+    q_hawthorne: { short: "Hawthorne: pattern is not proof of cause", who: { av: "🎤", n: "CVTV reporter" },
+      prompt: "Workers made more no matter what the lights did. Was light the cause?",
+      options: ["No. Output rose even when lights stayed the same", "Yes. Brighter lights made them work much harder", "Yes. Any change in the lights boosts work", "No. The factory faked all of its numbers"],
+      hint: "Output rose even when the lights did NOT change. Read the “Why?” line.",
       why: "<b>Correlation</b> = things go together. <b>Causation</b> = one makes the other happen." }
   };
   const REVIEWS = {
@@ -156,7 +156,7 @@
   }
   const ENDINGS = {
     holds: { icon: "🏆", t: "The Study Holds Up", lines: ["Another school repeated your posted methods. Same pattern.", "Kai's post gets a fact-check label."], adj: -20 },
-    noreceipts: { icon: "📋", t: "Solid Study, No Receipts", lines: ["Channel 9 airs it, but no one can check your methods.", "Kai: “trust me bro.” The comments stay split."], adj: 0 },
+    noreceipts: { icon: "📋", t: "Solid Study, No Receipts", lines: ["CVTV airs it, but no one can check your methods.", "Kai: “trust me bro.” The comments stay split."], adj: 0 },
     factcheck: { icon: "🚨", t: "Fact-Checked", lines: ["Your headline went viral. Then Dr. Ruiz said: a pattern isn't proof of cause.", "Kai: “see? lab kids make stuff up too.”"], adj: 10 },
     played: { icon: "😈", t: "Played by the Hot Take", lines: ["Your headline matched Kai, but your data was broken.", "Kai: “even the lab kids agree with me.” 2M views."], adj: 15 },
     backlab: { icon: "🔁", t: "Back to the Lab", lines: ["You admitted the problem. That's honest science.", "Kai wins tonight. Next week, you redo it right."], adj: 5 }
@@ -191,11 +191,13 @@
     const on = st.step >= 1;
     $("hud").hidden = !on;
     if (!on) return;
-    const m = STEP_METHOD[st.step];
-    $("track").innerHTML = METHOD.map((n, i) => `<li class="${i < m ? "done" : i === m ? "now" : ""}"><span>${i + 1}</span>${n}</li>`).join("");
-    $("stepPill").textContent = "Step " + st.step + " of " + TOTAL;
+    const m = st.step - 1;   // step 1-6 = chip 1-6; step 7 (finish) = all done
+    $("track").innerHTML = METHOD.map((n, i) => `<li class="${i < m ? "done" : i === m ? "now" : ""}"><span>${i < m ? "✓" : i + 1}</span>${n}</li>`).join("");
+    // Lab hours only matter while you plan and build (steps 2-4).
+    // Hours show on the screens that spend them (step 2 card costs, step 4 budget box), not up here.
+    $("hoursPill").hidden = true;
     $("hoursPill").textContent = "⏱ " + st.hours + (st.hours === 1 ? " lab hour" : " lab hours");
-    const kai = st.step === 9 && st.headline ? finalKai() : clamp(st.kai, 5, 95);
+    const kai = st.step === 7 && st.headline ? finalKai() : clamp(st.kai, 5, 95);
     $("warYou").style.width = (100 - kai) + "%";
     $("warWord").textContent = warWord(kai);
     $("kaiFace").textContent = kaiFace(kai);
@@ -243,15 +245,16 @@
             save(); onRight(); return;
           }
           c.wrong++; if (window.classFirstTry) window.classFirstTry.wrong();
-          st.kai = clamp(st.kai + 3, 5, 95); save(); hud();
+          save();
           taunt.textContent = TAUNTS[(c.wrong - 1) % TAUNTS.length]; taunt.hidden = false;
           wrap.classList.remove("spark"); void wrap.offsetWidth; wrap.classList.add("spark");
           locked = true; area.querySelectorAll("button").forEach(x => x.disabled = true);
+          fb.scrollIntoView && fb.scrollIntoView({ block: "nearest", behavior: "smooth" });
           let left = LOCK;
           const tick = () => {
             fb.className = "msg bad";
             if (left <= 0) { locked = false; fb.textContent = "Not quite. " + def.hint + " Try again."; draw(); return; }
-            fb.textContent = "Not quite. " + def.hint + " The choices will mix up. Try again in " + left + "…";
+            fb.textContent = "Not quite. " + def.hint + " New order in " + left + "…";
             left--; setTimeout(tick, 1000);
           };
           tick();
@@ -260,7 +263,7 @@
       });
     }
     draw();
-    wrap.appendChild(area); wrap.appendChild(fb); wrap.appendChild(taunt);
+    wrap.appendChild(fb); wrap.appendChild(area); wrap.appendChild(taunt);
   }
 
   // ---------------- Title screen ----------------
@@ -268,7 +271,7 @@
     app.innerHTML = `<section class="card titlecard">
       <div class="title-left">
         <h1>Prove It Lab</h1>
-        <ul class="facts"><li>🧪 Build a study</li><li>📺 Beat Kai on air</li><li>🏁 5 endings · 25 min</li></ul>
+        <ul class="facts"><li>🧪 Build a study</li><li>📺 Beat Kai on air</li><li>🏁 6 steps · 5 endings · 25 min</li></ul>
         <p class="goal">🎯 <b>Goal:</b> test a hot take with the scientific method.</p>
         <label for="nameBox">Your name</label>
         <input id="nameBox" maxlength="60" autocomplete="off" placeholder="Jordan M." value="${esc(st.name)}">
@@ -294,8 +297,10 @@
   // ---------------- Step 1: Ask ----------------
   function step1() {
     const box = card();
-    box.innerHTML = head("Pick your research question") + kaiPost(KAI_POST, "") +
-      `<div class="rule">📌 <b>Rule card:</b> a group + 2 things you can measure.</div>`;
+    box.innerHTML = head("Test Kai's hot take") +
+      `<p>😤 <b>@kai.grindset:</b> “${KAI_POST}” <span class="meta">(2.4M views)</span></p>
+       <p>📺 CVTV gives your lab Friday's news slot to test it. First, pick the question.</p>
+       <div class="rule">📌 <b>Rule card:</b> a group + 2 things you can measure.</div>`;
     mountCheck(box, "q_question", CHECKS.q_question, () => { render(); scrollToEl($("nextBtn")); });
     if (chk("q_question").done) addNext(box);
   }
@@ -303,12 +308,12 @@
   // ---------------- Step 2: Check the research ----------------
   function step2() {
     const box = card();
-    box.innerHTML = head("Read the research first?");
+    box.innerHTML = head("Read the research first?") + (st.research ? "" : `<p class="budget">⏱ You have <b>${START_HOURS} lab hours</b> to plan and build your study.</p>`);
     if (!st.research) {
       box.appendChild(decision([
         { id: "read", t: "📚 Read the research", d: "Learn what's already known.", cost: 2 },
         { id: "skip", t: "⏩ Skip it", d: "Save hours for your study.", cost: 0 }
-      ], id => { st.research = id; if (id === "read") st.hours -= 2; save(); render(); scrollToEl($("nextBtn")); }));
+      ], id => { st.research = id; if (id === "read") { st.hours -= 2; st.kai = clamp(st.kai - 4, 5, 95); } save(); render(); scrollToEl($("nextBtn")); }));
       return;
     }
     if (st.research === "read") {
@@ -327,15 +332,17 @@
     addNext(box);
   }
 
-  // A row of choice cards (decisions with costs).
+  // A row of choice cards. cost: number shows an hours chip; null shows none.
   function decision(opts, onPick) {
     const row = document.createElement("div"); row.className = "decide";
     opts.forEach(o => {
       const b = document.createElement("button"); b.type = "button"; b.className = "dcard"; b.dataset.id = o.id;
-      const short = o.cost > st.hours;
+      const short = o.cost != null && o.cost > st.hours;
       b.disabled = !!short || !!o.off;
-      const mm = o.ic ? [0, o.ic, o.t] : /^(\p{Extended_Pictographic}\uFE0F?)\s+(.+)$/u.exec(o.t);
-      b.innerHTML = (mm ? `<span class="ic">${mm[1]}</span><span class="ct">${mm[2]}</span>` : `<span class="ct">${o.t}</span>`) + `<span class="cd">${o.d}</span><span class="cost">${o.cost ? "−" + o.cost + " h" : "0 h"}</span>` + (short ? `<span class="why-off">Not enough hours</span>` : o.off ? `<span class="why-off">${o.off}</span>` : "");
+      const mm = o.ic ? [0, o.ic, o.t] : /^(\p{Extended_Pictographic}️?)\s+(.+)$/u.exec(o.t);
+      b.innerHTML = (mm ? `<span class="ic">${mm[1]}</span><span class="ct">${mm[2]}</span>` : `<span class="ct">${o.t}</span>`) + `<span class="cd">${o.d}</span>` +
+        (o.cost == null ? "" : `<span class="cost">${o.cost ? "−" + o.cost + " h" : "0 h"}</span>`) +
+        (short ? `<span class="why-off">Not enough hours</span>` : o.off ? `<span class="why-off">${o.off}</span>` : "");
       b.onclick = () => onPick(o.id);
       row.appendChild(b);
     });
@@ -347,8 +354,8 @@
   function step3() {
     const box = card();
     const c = chk("q_vars");
-    box.innerHTML = head("Wire the machine") +
-      `<div class="hyp"><p class="src-tag">🔮 Hypothesis = testable prediction</p><p class="hyp-t">Students who sleep 7+ hours will rate their first-period focus higher.</p></div>` +
+    box.innerHTML = head("Predict: wire the machine") +
+      `<div class="hyp"><p class="src-tag">🔮 Hypothesis = testable prediction</p><p class="hyp-t">Students who sleep 8+ hours will rate their first-period focus higher.</p></div>` +
       (c.done ? "" : `<p>👆 Tap a card, then a box.</p>`);
     const m = document.createElement("div"); m.className = "machine" + (c.done ? " on" : ""); box.appendChild(m);
     if (c.done) {
@@ -362,7 +369,7 @@
     const taunt = document.createElement("p"); taunt.className = "taunt"; taunt.hidden = true;
     function draw() {
       m.innerHTML = "";
-      [["iv", "🔌 IV (independent)", "Might cause it"], ["dv", "📟 DV (dependent)", "What you measure"]].forEach(([k, lab, sub]) => {
+      [["iv", "🔌 IV (independent)", "Might cause it"], ["dv", "📟 DV (dependent)", "The result you check"]].forEach(([k, lab, sub]) => {
         const s = document.createElement("button"); s.type = "button"; s.className = "socket" + (wire[k] != null ? " full" : "") + (wire.pick != null && wire[k] == null ? " ready" : "");
         s.dataset.socket = k;
         s.innerHTML = `<span class="sk">${lab}</span><span class="sub">${sub}</span>` + (wire[k] != null ? `<b>${TILES[wire[k]]}</b>` : `<span class="empty" aria-label="empty">⬚</span>`);
@@ -394,16 +401,17 @@
         c.done = true; justSolved = "q_vars"; if (window.classFirstTry) window.classFirstTry.right("q_vars"); save(); wire = { pick: null, iv: null, dv: null, order: null }; render(); scrollToEl($("nextBtn")); return;
       }
       c.wrong++; if (window.classFirstTry) window.classFirstTry.wrong();
-      st.kai = clamp(st.kai + 3, 5, 95); save(); hud();
+      save();
       m.classList.add("spark"); setTimeout(() => m.classList.remove("spark"), 600);
       taunt.textContent = TAUNTS[(c.wrong - 1) % TAUNTS.length]; taunt.hidden = false;
       locked = true; draw();
+      setTimeout(() => fb.scrollIntoView && fb.scrollIntoView({ block: "nearest", behavior: "smooth" }), 30);
       let left = LOCK;
-      const hint = "IV = might cause it. DV = what you measure.";
+      const hint = "IV = might cause it. DV = the result you check.";
       const tick = () => {
         fb.className = "msg bad";
         if (left <= 0) { locked = false; wire = { pick: null, iv: null, dv: null, order: shuffle(TILES.map((t, i) => i)) }; fb.textContent = "Not quite. " + hint + " Try again."; draw(); return; }
-        fb.textContent = "Not quite. " + hint + " The choices will mix up. Try again in " + left + "…";
+        fb.textContent = "Not quite. " + hint + " New order in " + left + "…";
         left--; setTimeout(tick, 1000);
       };
       tick();
@@ -412,27 +420,36 @@
     box.appendChild(fb); box.appendChild(taunt);
   }
 
-  // ---------------- Step 4: Build the study (budget) ----------------
+
+  // How each design choice moves the comment war (negative = toward you).
+  const DELTA = { leading: 8, likert: -4, observe: -6, kai: 8, friends: 2, random: -8, jobs: -3, skip: 0, locked: 0 };
+  const designDelta = (m, s, o) => (DELTA[m] || 0) + (DELTA[s] || 0) + (DELTA[o] || 0);
+
+  // ---------------- Step 4: Collect = build the study, then run it ----------------
   function step4() {
     const box = card();
+    if (st.built) return runView(box);
     const d = st.draft;
     if (st.research !== "read") d.outside = "locked";
     const cost = (d.measure ? MEASURES[d.measure].cost : 0) + (d.sample ? SAMPLES[d.sample].cost : 0) + (d.outside && OUTSIDES[d.outside] ? OUTSIDES[d.outside].cost : 0);
     const left = st.hours - cost;
     box.innerHTML = head("Build your study") +
-      `<p>Better data costs more hours.</p>
+      `<p>Better data costs more hours. Pick one at a time.</p>
        <p class="budget"><span>Hours left:</span> <b id="leftN">${left}</b> <span class="tokens" aria-hidden="true">${Array.from({ length: st.hours }, (x, i) => `<i class="${i < left ? "" : "spent"}">⏱</i>`).join("")}</span></p>`;
     const rows = [
-      ["measure", "📏 Measure focus", MEASURES],
-      ["sample", "👥 Sample: who's in it?", SAMPLES],
-      ["outside", "🔍 Outside factor?", OUTSIDES]
+      ["measure", "1️⃣ How will you measure focus?", MEASURES],
+      ["sample", "2️⃣ Who's in your study?", SAMPLES],
+      ["outside", "3️⃣ Check an outside factor?", OUTSIDES]
     ];
-    rows.forEach(([slot, label, set]) => {
+    // One decision at a time: the next row appears after you pick the one above it.
+    for (let r = 0; r < rows.length; r++) {
+      const [slot, label, set] = rows[r];
+      if (r > 0 && !d[rows[r - 1][0]]) break;
       const sec = document.createElement("div"); sec.className = "slot";
       sec.innerHTML = `<h3>${label}</h3>`;
       if (slot === "outside" && d.outside === "locked") {
         sec.insertAdjacentHTML("beforeend", `<p class="lockline">🔒 Locked: you skipped the research.</p>`);
-        box.appendChild(sec); return;
+        box.appendChild(sec); continue;
       }
       if (slot === "sample") sec.insertAdjacentHTML("beforeend", `<p class="dm">📩 <b>Kai:</b> “use my followers lol 😇”</p>`);
       const row = document.createElement("div"); row.className = "decide three";
@@ -448,31 +465,30 @@
         b.disabled = (tooMuch && d[slot] !== k) || !!off;
         b.dataset.slot = slot; b.dataset.val = k;
         b.innerHTML = `<span class="ic">${o.ic}</span><span class="ct">${o.t}</span><span class="cd">${o.d}</span><span class="cost">${o.cost ? "−" + o.cost + " h" : "0 h"}</span>` + (off ? `<span class="why-off">${off}</span>` : (tooMuch && d[slot] !== k) ? `<span class="why-off">Not enough hours</span>` : "");
-        b.onclick = () => { d[slot] = k; save(); render(); };
+        b.onclick = () => {
+          const firstPick = !d[slot]; d[slot] = k; save(); render();
+          if (firstPick) scrollToEl(document.querySelectorAll(".slot")[Math.min(r + 1, 2)] || $("nextBtn"));
+        };
         row.appendChild(b);
       });
       sec.appendChild(row); box.appendChild(sec);
-    });
+    }
     const ready = d.measure && d.sample && d.outside;
+    if (!ready) return;
     const b = nextBtn("🔒 Lock in my design →", () => {
       st.measure = d.measure; st.sample = d.sample; st.outside = d.outside === "locked" ? "locked" : d.outside;
-      st.hours = left; st.step++; save(); render(); window.scrollTo(0, 0);
+      st.hours = left; st.built = true;
+      st.kai = clamp(st.kai + designDelta(st.measure, st.sample, st.outside), 5, 95);
+      save(); render(); window.scrollTo(0, 0);
     });
-    b.disabled = !ready;
     box.appendChild(b);
   }
 
-  // ---------------- Step 5: Run it (twice) ----------------
-  function step5() {
-    const box = card();
-    box.innerHTML = head("Run the study") + designSummary();
-    if (st.runs === 0) {
-      box.appendChild(nextBtn("▶ Run the study", () => { st.runs = 1; save(); render(); scrollToEl(document.querySelector(".chart")); }));
-      return;
-    }
-    if (st.runs === 1) {
-      box.insertAdjacentHTML("beforeend", `<div class="charts">${chartHtml(0)}</div><p>🔁 Real results repeat. Run it again.</p>`);
-      box.appendChild(nextBtn("🔁 Run it again", () => { st.runs = 2; save(); render(); scrollToEl(document.querySelectorAll(".chart")[1]); }));
+  function runView(box) {
+    box.innerHTML = head("Run your study") + designSummary();
+    if (st.runs < 2) {
+      box.insertAdjacentHTML("beforeend", `<p>🔁 Scientists run a study more than once. Real results repeat.</p>`);
+      box.appendChild(nextBtn("▶ Run it twice", () => { st.runs = 2; save(); render(); scrollToEl(document.querySelector(".charts")); }));
       return;
     }
     box.insertAdjacentHTML("beforeend", chartsHtml());
@@ -488,20 +504,20 @@
     return `<div class="design"><div class="chips"><span class="chip">${M.ic} <b>${M.t}</b>${st.measure === "leading" ? ` <span>${M.d}</span>` : ""}</span><span class="chip">${S.ic} <b>${S.t}</b></span><span class="chip">${o}</span></div></div>`;
   }
 
-  // ---------------- Step 6: Peer review + one fix ----------------
-  function step6() {
+  // ---------------- Step 5: Analyze = peer review + one free fix ----------------
+  function step5() {
     if (!st.review) { const f = flaw(); st.review = f === "none" ? (st.outside === "jobs" ? "third" : "replicate") : f; save(); }
     const box = card();
     const def = REVIEWS[st.review];
-    box.innerHTML = head("Peer review");
-    // Evidence on screen for this check
+    box.innerHTML = head("Peer review") + `<p>👩🏽‍🔬 <b>Peer review</b> = another scientist checks your work.</p>`;
     const ev = document.createElement("div"); ev.className = "evidence";
     const firstDesign = st.fix && st.fix.to ? Object.assign({}, st, { [st.fix.slot]: st.fix.from }) : st;
     const saved = { m: st.measure, s: st.sample };
     st.measure = firstDesign.measure; st.sample = firstDesign.sample;
-    let evh = st.review === "third" ? jobsHtml() : designSummary() + chartsHtml();
+    const evh = st.review === "third" ? jobsHtml() : designSummary() + chartsHtml();
     st.measure = saved.m; st.sample = saved.s;
-    ev.innerHTML = evh; box.appendChild(ev);
+    ev.innerHTML = evh;
+    if (!chk("q_review").done) box.appendChild(ev);   // evidence goes away once you've used it
     const id = "q_review";
     mountCheck(box, id, { prompt: def.prompt, options: def.options, hint: def.hint, why: def.why, who: { av: "👩🏽‍🔬", n: "Dr. Ruiz, sociologist" } }, () => { render(); scrollToEl($("nextBtn") || document.querySelector(".fix")); });
     if (!chk(id).done) return;
@@ -509,20 +525,23 @@
     const f0 = st.review;
     if (f0 === "third" || f0 === "replicate") {
       if (f0 === "replicate" && st.research !== "read") box.insertAdjacentHTML("beforeend", `<p class="dm">👩🏽‍🔬 Dr. Ruiz: “You never checked outside factors like jobs.”</p>`);
-      addNext(box); return;
+      if (extrasPick(box)) addNext(box); return;
     }
-    // A fix is possible: go back a step.
     const fix = document.createElement("div"); fix.className = "fix"; box.appendChild(fix);
     if (!st.fix) {
       const slot = f0 === "junk" ? "measure" : "sample";
       const opts = f0 === "junk" ? ["likert", "observe"] : f0 === "flipped" ? ["random", "friends"] : ["random"];
       const set = slot === "measure" ? MEASURES : SAMPLES;
-      fix.innerHTML = `<h3>🔧 Go back and fix it?</h3>`;
-      const list = opts.map(k => ({ id: k, ic: set[k].ic, t: "Swap to: " + set[k].t, d: set[k].d, cost: set[k].cost }));
-      list.push({ id: "keep", ic: "✋", t: "Keep it", d: "Go live as is.", cost: 0 });
+      fix.innerHTML = `<h3>🔧 Dr. Ruiz lends you lab time. Fix it?</h3>`;
+      const list = opts.map(k => ({ id: k, ic: set[k].ic, t: "Swap to: " + set[k].t, d: set[k].d, cost: null }));
+      list.push({ id: "keep", ic: "✋", t: "Keep it", d: "Go live as is.", cost: null });
       fix.appendChild(decision(list, k => {
         if (k === "keep") st.fix = { slot, from: st[slot], to: null };
-        else { st.fix = { slot, from: st[slot], to: k }; st.hours -= set[k].cost; st[slot] = k; }
+        else {
+          const before = designDelta(st.measure, st.sample, st.outside);
+          st.fix = { slot, from: st[slot], to: k }; st[slot] = k;
+          st.kai = clamp(st.kai + designDelta(st.measure, st.sample, st.outside) - before, 5, 95);
+        }
         save(); render(); scrollToEl(document.querySelector(".fix"));
       }));
       return;
@@ -535,54 +554,53 @@
     } else {
       fix.innerHTML = `<p class="react">✋ You kept it. Defend it on air.</p>`;
     }
-    addNext(box);
+    if (extrasPick(box)) addNext(box);
   }
 
-  // ---------------- Step 7: Kai goes live ----------------
-  function step7() {
-    if (!st.kaiDrop) { st.kaiDrop = true; st.kai = clamp(st.kai + 8, 5, 95); save(); hud(); }
-    const box = card();
-    box.innerHTML = `<div class="live"><p class="live-tag">🔴 LIVE · @kai.grindset</p><p class="live-big">“91% say less sleep = more locked in 😤”</p>
-       <div class="fine"><p class="src-tag">Kai's fine print</p><p><b>Who:</b> 1,000 of my fans</p><p><b>Asked:</b> “4 hrs = locked in, right?”</p></div></div>`;
-    mountCheck(box, "q_kai", CHECKS.q_kai, () => { render(); scrollToEl($("nextBtn")); });
-    if (!chk("q_kai").done) return;
-    if (st.sample === "kai") box.insertAdjacentHTML("beforeend", `<p class="dm">😬 Same followers as your study!</p>`);
-    addNext(box);
-  }
 
-  // ---------------- Step 8: Live on Channel 9 ----------------
-  function step8() {
-    const box = card();
-    box.innerHTML = head("Live on Channel 9") + (chk("q_hawthorne").done ? "" :
-      `<div class="source"><p class="src-tag">📜 Real · Hawthorne Works factory, 1924–27</p>
-       <div class="hw"><p>💡⬆️ Lights brighter → <b>workers made more</b></p><p>💡⬇️ Lights dimmer → <b>workers made more</b></p><p>💡⏸️ Lights never changed → <b>workers made more</b></p></div></div>`);
-    mountCheck(box, "q_hawthorne", CHECKS.q_hawthorne, () => { render(); scrollToEl(document.querySelector(".extra") || document.querySelector(".headline")); });
-    if (!chk("q_hawthorne").done) return;
-
-    // Last hours: receipts or hype (both cost 2 hours)
+  // End of Analyze: receipts or hype, before you go on air.
+  function extrasPick(box) {
     const ex = document.createElement("div"); ex.className = "extra"; box.appendChild(ex);
     if (st.extra == null) {
-      if (st.hours < 2) { st.extra = "none"; save(); }
-      else {
-        ex.innerHTML = `<h3>Spend 2 hours on one:</h3>`;
-        ex.appendChild(decision([
-          { id: "methods", t: EXTRAS.methods.t, d: EXTRAS.methods.d, cost: 2 },
-          { id: "hype", t: EXTRAS.hype.t, d: EXTRAS.hype.d, cost: 2 }
-        ], k => { st.extra = k; st.hours -= 2; st.kai = clamp(st.kai + (k === "hype" ? -15 : -5), 5, 95); save(); render(); scrollToEl(document.querySelector(".headline")); }));
-        return;
-      }
+      ex.innerHTML = `<h3>📺 CVTV wants you on tonight. Before you go, pick one:</h3>`;
+      ex.appendChild(decision([
+        { id: "methods", t: EXTRAS.methods.t, d: EXTRAS.methods.d, cost: null },
+        { id: "hype", t: EXTRAS.hype.t, d: EXTRAS.hype.d, cost: null }
+      ], k => { st.extra = k; st.kai = clamp(st.kai + (k === "hype" ? -15 : -5), 5, 95); save(); render(); scrollToEl($("nextBtn")); }));
+      return false;
     }
-    ex.innerHTML = st.extra === "methods" ? `<p class="react">📄 Methods posted.</p>`
-      : st.extra === "hype" ? `<p class="react">🎬 Hype video everywhere.</p>`
-      : `<p class="react">⏱ No hours left for extras.</p>`;
+    ex.innerHTML = st.extra === "methods" ? `<p class="react">📄 Methods posted.</p>` : `<p class="react">🎬 Hype video everywhere.</p>`;
+    return true;
+  }
 
-    // Headline
+  // ---------------- Step 6: Conclude = live on CVTV (one thing at a time) ----------------
+  function step6() {
+    const box = card();
+    box.innerHTML = head("Live on CVTV");
+    // 1) Kai goes live with his own "study"
+    if (!chk("q_kai").done) {
+      box.insertAdjacentHTML("beforeend", `<div class="live"><p class="live-tag">🔴 LIVE · @kai.grindset</p><p class="live-big">“91% say less sleep = more locked in 😤”</p>
+       <div class="fine"><p class="src-tag">Kai's fine print</p><p><b>Who:</b> 1,000 of my fans</p><p><b>Asked:</b> “4 hrs = locked in, right?”</p></div></div>`);
+      mountCheck(box, "q_kai", CHECKS.q_kai, () => { render(); scrollToEl(document.querySelector(".source")); });
+      return;
+    }
+    mountCheck(box, "q_kai", CHECKS.q_kai, () => {});
+    // 2) The reporter brings up Hawthorne
+    if (!chk("q_hawthorne").done) {
+      box.insertAdjacentHTML("beforeend", `<div class="source"><p class="src-tag">📜 Real · Hawthorne Works factory, 1924–27</p>
+       <div class="hw"><p>💡⬆️ Lights brighter → <b>workers made more</b></p><p>💡⬇️ Lights dimmer → <b>workers made more</b></p><p>💡⏸️ Lights never changed → <b>workers made more</b></p><p>🕵️ Why? The workers knew they were being studied.</p></div></div>`);
+      mountCheck(box, "q_hawthorne", CHECKS.q_hawthorne, () => { render(); scrollToEl(document.querySelector(".headline")); });
+      return;
+    }
+    mountCheck(box, "q_hawthorne", CHECKS.q_hawthorne, () => {});
+
+    // 3) Headline
     const hl = document.createElement("div"); hl.className = "headline"; box.appendChild(hl);
     const H = headlineSet();
     if (!st.headline) {
       hl.innerHTML = `<h3>🎤 Host: “Your headline?”</h3>`;
       const order = shuffle(["bold", "honest"]);
-      hl.appendChild(decision(order.map(k => ({ id: k, ic: k === "bold" ? "🔥" : "🧊", t: "“" + H[k] + "”", d: k === "bold" ? "Big claim. Huge views." : "Careful claim. Fewer views.", cost: 0 })), k => {
+      hl.appendChild(decision(order.map(k => ({ id: k, ic: k === "bold" ? "🔥" : "🧊", t: "“" + H[k] + "”", d: k === "bold" ? "📈 Goes viral" : "📉 Fewer views", cost: null })), k => {
         st.headline = k;
         const f = flaw();
         if (k === "bold") st.kai = clamp(st.kai + (f === "flipped" || f === "junk" ? 20 : 10), 5, 95);
@@ -595,10 +613,10 @@
     box.appendChild(nextBtn("See how it ends →", goNext));
   }
 
-  // ---------------- Step 9: Verdict + writing + turn in ----------------
+  // ---------------- Finish: verdict + writing + turn in ----------------
   const PROMPTS = [
     { id: "hyp", short: "My hypothesis (IV + DV)", label: "1. Your hypothesis on a new topic (jobs, phones…). Name the IV + DV.",
-      stem: "Among ___, students who ___ will report ___. The IV is ___ and the DV is ___.", min: 70, newWords: 4,
+      stem: "I predict students who ___ will ___. The IV is ___ and the DV is ___.", min: 70, newWords: 4,
       // The shared junk check would strip this whole fill-in starter and then call a good, short answer
       // "a list of words". So it checks the full sentence; blanks and starter-only answers are still caught
       // below (the ___ check and the "own words" count).
@@ -610,12 +628,12 @@
       mustAll: [["sample", "random", "friend", "follower", "fans", "kai", "question", "leading", "scale", "survey", "observ", "teacher", "job", "shift", "research", "headline", "cause", "method", "video", "repeat", "run", "6 ", "120", "1,000", "1000"], ["because", "since", "so "]],
       mustMsg: "In answer 2, name a choice (sample, question, headline…) AND say why (use “because”)." }
   ];
-  function step9() {
+  function step7() {
     const box = card();
     const eid = endingId(), E = ENDINGS[eid];
     const kai = finalKai();
     if (!st.atReport) {
-      box.innerHTML = `<div class="ending ${eid}"><div class="e-icon">${E.icon}</div><h2>${E.t}</h2>${E.lines.concat(holdsGap() ? ["One gap: you never checked outside factors like jobs."] : []).map(l => `<p>${l}</p>`).join("")}
+      box.innerHTML = `<div class="ending ${eid}"><div class="e-icon">${E.icon}</div><h2>${E.t}</h2>${(eid === "played" && flaw() === "junk" ? ["Your headline claimed too much from a question that pushed “yes.”", "Kai: “lol their survey was rigged too.” 2M views."] : E.lines).concat(holdsGap() ? ["One gap: you never checked outside factors like jobs."] : []).map(l => `<p>${l}</p>`).join("")}
         <div class="war big"><span class="wl">You</span><div class="wbar"><span style="width:${100 - kai}%"></span></div><span class="wl">${kaiFace(kai)} Kai</span></div>
         <p class="war-n"><span>Comment war:</span> <b>${warWord(kai)}</b></p></div>
         <div class="caused"><p class="src-tag">Caused by:</p><ul>${causedBy().map(c => `<li>${c}</li>`).join("")}</ul></div>`;
@@ -687,7 +705,7 @@
     a["Choice · Sample"] = SAMPLES[firstS].full;
     a["Choice · Outside factor"] = st.outside === "jobs" ? OUTSIDES.jobs.full : st.outside === "skip" ? OUTSIDES.skip.full : "Locked (skipped research)";
     a["Choice · Peer-review fix"] = !st.fix ? "No fix needed" : st.fix.to ? "Swapped to: " + (st.fix.slot === "measure" ? MEASURES : SAMPLES)[st.fix.to].full : "Kept the design as is";
-    a["Choice · Last 2 hours"] = st.extra === "methods" ? EXTRAS.methods.full : st.extra === "hype" ? EXTRAS.hype.full : "No hours left";
+    a["Choice · Receipts or hype"] = st.extra === "methods" ? EXTRAS.methods.full : EXTRAS.hype.full;
     a["Choice · Headline"] = headlineSet()[st.headline] + (st.headline === "bold" ? " (bold claim)" : " (careful claim)");
     a["Ending"] = ENDINGS[endingId()].t;
     a["Caused by"] = causedBy().join(" | ");
@@ -698,7 +716,7 @@
 
   // ---------------- Render ----------------
   function card() { app.innerHTML = `<section class="card step" id="stepCard"></section>`; return $("stepCard"); }
-  const STEPS = [title, step1, step2, step3, step4, step5, step6, step7, step8, step9];
+  const STEPS = [title, step1, step2, step3, step4, step5, step6, step7];
   let first = true;
   function render() {
     if (!first && $("welcome")) $("welcome").hidden = true;
@@ -715,6 +733,6 @@
     if (window.classFirstTry) window.classFirstTry.reset();
     save(); render(); window.scrollTo(0, 0);
   };
-  if (st.step >= 1 && $("welcome")) { $("welcome").textContent = "Welcome back, " + st.name + " — you're on step " + st.step + " of " + TOTAL + "."; $("welcome").hidden = false; }
+  if (st.step >= 1 && $("welcome")) { $("welcome").textContent = "Welcome back, " + st.name + " — you're on " + (st.step > TOTAL ? "the last screen" : "step " + st.step + " of " + TOTAL) + "."; $("welcome").hidden = false; }
   render();
 })();
