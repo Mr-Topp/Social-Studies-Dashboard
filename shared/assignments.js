@@ -176,7 +176,7 @@ window.CLASS_ASSIGNMENTS = {
   // ---- Sociology · Unit 2 ----
   "sociology-unit2-day1-first-shift":         { course: "sociology", unit: 2, day: 1, title: "Day 1 · First Shift: Status, Roles & Norms", path: "sociology/unit2-day1-first-shift/", std: ["SS.9-12.Soc.5", "SS.9-12.Soc.7"] },
   "sociology-unit2-arrival-culture":          { course: "sociology", unit: 2, day: 2, title: "Day 2 · The Arrival: A New Culture", path: "sociology/arrival-culture/", std: ["SS.9-12.Soc.5", "SS.9-12.Soc.6"] },
-  "sociology-unit2-day3-culture-shock":      { course: "sociology", unit: 2, day: 3, title: "Day 3 · Culture Shock Exchange", path: "sociology/unit2-day3-culture-shock-exchange/", std: ["SS.9-12.Soc.6", "SS.9-12.Soc.5"] },
+  "sociology-unit2-day3-culture-shock":      { course: "sociology", unit: 2, day: 3, title: "Day 3 · Read the Room: Osaka", path: "sociology/unit2-day3-culture-shock-exchange/", std: ["SS.9-12.Soc.6", "SS.9-12.Soc.5"] },
 
   // ---- Government · Unit 1 ----
   "gov-stranded-day1":                { course: "government", unit: 1, day: 1, title: "Day 1 · Stranded: Govern or Collapse", path: "civics/stranded-government/", std: ["SS.9-12.Gov.1", "SS.9-12.Gov.5"] },
