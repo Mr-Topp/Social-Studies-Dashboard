@@ -161,7 +161,7 @@
 
 <div class="part-nav">
  <p class="small" id="answerProgress"></p>
- <div class="actions"><button type="button" class="secondary quiet" id="prevCheck">← Back</button><button type="button" class="secondary" id="nextCheck">Next →</button></div>
+ <div class="actions"><button type="button" class="secondary quiet" id="prevCheck">← Back</button><button type="button" class="secondary" id="nextCheck">Next part →</button></div>
 </div>
 
 <section class="card finish" id="finish">
@@ -298,7 +298,7 @@ function updateProgress(){
  const d=DAYS[dayIndex],done=d.checks.filter((_,i)=>sectionHasAllCorrect(dayIndex,i)&&getAnswer(i,'us').trim()).length;
  $('answerProgress').textContent=done+' of 6 sections done · '+countPageCorrect(dayIndex)+' of '+pageTotal(d)+' reading questions done';
  $('progressFill').style.width=(done/6*100)+'%';
- if($('nextCheck'))$('nextCheck').disabled=checkIndex===5||!sectionHasAllCorrect(dayIndex,checkIndex)||!$('usAnswer').value.trim();
+ if($('nextCheck'))$('nextCheck').hidden=checkIndex===5;if($('nextCheck'))$('nextCheck').disabled=checkIndex===5||!sectionHasAllCorrect(dayIndex,checkIndex)||!$('usAnswer').value.trim();
 }
 function countPageCorrect(dIndex){let total=0;const d=DAYS[dIndex];for(let i=0;i<pageTotal(d);i++)if(getPageAnswer(dIndex,d.start+i)===PAGE_QUESTIONS[dIndex][i][1])total++;return total}
 function updateReadState(secondsLeft=0){
@@ -306,7 +306,7 @@ function updateReadState(secondsLeft=0){
  const size=groupSize(d),done=Array.from({length:size},(_,n)=>getPageAnswer(dayIndex,sectionStart+n)===PAGE_QUESTIONS[dayIndex][sectionStart+n-d.start][1]).filter(Boolean).length;
  $('currentPage').textContent=pageLabel(d,pageNow)+' · '+(pageNow-sectionStart+1)+' of '+size+' · '+done+' of '+size+' done'+(!read?' · '+secondsLeft+' sec':'');
  $('prevPage').disabled=pageNow===sectionStart;
- $('nextPage').disabled=pageNow===sectionEnd||!correct;
+ $('nextPage').disabled=pageNow===sectionEnd||!correct;$('nextPage').hidden=pageNow===sectionEnd;/* Next page only while this part has more pages */
  $('usAnswer').disabled=!allCorrect;
  $('answerHelp').textContent=allCorrect?'Reading answer correct. Now answer the U.S. question.':'Answer each reading question to unlock the U.S. response.';
  if(!read&&!correct)$('pageFeedback').textContent='Read the page. The choices open after 15 seconds.';
