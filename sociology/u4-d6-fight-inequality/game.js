@@ -1,8 +1,9 @@
 // =====================================================================
 //  THE ORGANIZER'S TOOLKIT  (Sociology Unit 4 · Day 6 · SS.9-12.Soc.15)
-//  Polish of the original: same premise (the city wants to cut the Route 9
-//  bus; you organize riders), same 3 parts (How movements start → Fill your
-//  toolkit → Run the Route 9 campaign), same mechanic (real case files you
+//  Clinic version (Fynn 11/3: "change what's saved" so it doesn't repeat the
+//  Unit 2 bus game): the city wants to close Eastside Clinic in Millbrook,
+//  Iowa; you organize patients. 3 parts (How movements start → Fill your
+//  toolkit → Run the clinic campaign), same mechanic (real case files you
 //  must crack + campaign choices that move a Momentum meter).
 //  Added in the polish: case files earn tactic cards for your toolkit; a
 //  rival (Councilor Brandt, made up) whose mood follows your momentum; a
@@ -11,12 +12,12 @@
 //  trade-offs and 5 endings with a "Caused by" trail; a test-tomorrow word
 //  bank on the report screen (Unit 4 test is the next day).
 //  7 checks (all Soc.15; Fynn 11/3: about 7 max), 4 real decisions, 2 short writing answers.
-//  Route 9, its city, Brandt, Odette are made up. Every case file is real.
+//  Millbrook, Eastside Clinic, Brandt, Odette are made up. Every case file is real.
 //  Turn-in via shared/turnin.js with the same assignmentId as before.
 // =====================================================================
 (function () {
   "use strict";
-  const KEY = "soc-u4-d6-fight-inequality-v2";
+  const KEY = "soc-u4-d6-fight-inequality-v2-clinic";
   const ASSIGNMENT_ID = "soc-u4-d6-fight-inequality";
   const TITLE = "Sociology · Unit 4 · Day 6 · How Do People Fight Inequality?";
   const STANDARD = "SS.9-12.Soc.15";
@@ -47,22 +48,36 @@
   const rows = list => `<div class="tl">${list.map(r => `<span><i aria-hidden="true">${r[0]}</i><em>${r[1]}</em></span>`).join("")}</div>`;
   const file = (lab, inner, cite) => `<div class="file"><span class="clip" aria-hidden="true"></span><p class="flab">📁 ${lab}</p>${inner}${cite ? src(cite) : ""}</div>`;
 
-  // Route 9 map: homes → warehouses → hospital. The bus rides farther as momentum grows.
+  // Clinic map: homes → street → Eastside Clinic. The doors open wider (and a
+  // patient walks closer) as momentum grows.
+  const SAVED_ENDS = ["Clinic Saved", "Saved by Vote"];
   function routeMap(extra) {
     const m = st.m;
-    const x = 34 + Math.round(m * 29);
-    const saved = st.ended && (st.endKey === "Route 9 Saved" || st.endKey === "Saved by Vote");
-    return `<div class="map${saved ? " saved" : ""}" role="img" aria-label="Route 9 map: homes, warehouses, hospital. Momentum ${m} of 10.">
+    const saved = st.ended && SAVED_ENDS.includes(st.endKey);
+    const popup = st.ended && st.endKey === "Pop-Up Clinic";
+    const open = saved ? 10 : popup ? 4 : st.ended ? 0 : m;   // doors-open meter (ending overrides momentum)
+    const gap = Math.round(open * 1.7);
+    const x = 60 + Math.round(m * 15);
+    return `<div class="map${saved ? " saved" : ""}" role="img" aria-label="Map: homes, a street, and Eastside Clinic. Doors open: ${open} of 10.">
       <svg viewBox="0 0 360 120" aria-hidden="true">
         <rect x="0" y="0" width="360" height="120" rx="14" fill="#dfe9f2"/>
-        ${[[14, 12], [96, 70], [150, 14], [232, 72], [286, 10], [60, 80], [200, 8]].map(p => `<rect x="${p[0]}" y="${p[1]}" width="44" height="30" rx="5" fill="#c7d6e4"/>`).join("")}
-        <path d="M34 66 C 110 30, 140 96, 180 62 S 280 40, 330 62" fill="none" stroke="${saved ? "#1f8a4c" : "#f26b1d"}" stroke-width="9" stroke-linecap="round" ${saved ? "" : 'stroke-dasharray="1 0"'}/>
-        <circle cx="34" cy="66" r="9" fill="#fff" stroke="#1d2433" stroke-width="3"/><circle cx="180" cy="62" r="9" fill="#fff" stroke="#1d2433" stroke-width="3"/><circle cx="330" cy="62" r="9" fill="#fff" stroke="#1d2433" stroke-width="3"/>
-        <text x="34" y="104" text-anchor="middle" font-size="22">🏘️</text><text x="180" y="100" text-anchor="middle" font-size="22">🏭</text><text x="330" y="100" text-anchor="middle" font-size="22">🏥</text>
-        <text x="${x}" y="50" text-anchor="middle" font-size="30" class="busx">🚌</text>
+        <rect x="0" y="92" width="360" height="18" fill="#c7d6e4"/>
+        <path d="M6 101 H 354" stroke="#fff" stroke-width="2" stroke-dasharray="10 8"/>
+        <text x="14" y="44" font-size="12" font-weight="800" fill="#1d2433">🚪 Doors open</text>
+        <rect x="14" y="50" width="150" height="11" rx="5" fill="#fff" stroke="#1d2433" stroke-width="2"/>
+        <rect x="15" y="51" width="${Math.max(0, open * 15 - 2)}" height="9" rx="4" fill="${saved ? "#1f8a4c" : "#0f8b8d"}"/>
+        <text x="24" y="92" text-anchor="middle" font-size="26">🏘️</text>
+        <text x="${x}" y="92" text-anchor="middle" font-size="24" class="busx">🚶🏾‍♀️</text>
+        <rect x="232" y="16" width="118" height="13" rx="3" fill="#0f8b8d" stroke="#1d2433" stroke-width="2"/>
+        <rect x="238" y="28" width="106" height="64" fill="#fff" stroke="#1d2433" stroke-width="3"/>
+        <rect x="284" y="34" width="14" height="5" fill="#e0453a"/><rect x="288.5" y="29.5" width="5" height="14" fill="#e0453a"/>
+        <rect x="246" y="38" width="22" height="18" rx="2" fill="#bfe3f0" stroke="#1d2433" stroke-width="2"/><rect x="314" y="38" width="22" height="18" rx="2" fill="#bfe3f0" stroke="#1d2433" stroke-width="2"/>
+        <rect x="273" y="54" width="36" height="38" fill="#ffe9a8" stroke="#1d2433" stroke-width="2"/>
+        <rect x="${274 - gap}" y="55" width="17" height="36" fill="#9aa7b8" stroke="#1d2433" stroke-width="1.5"/>
+        <rect x="${291 + gap}" y="55" width="17" height="36" fill="#9aa7b8" stroke="#1d2433" stroke-width="1.5"/>
       </svg>
-      <span class="rt9">ROUTE 9 · 600 riders a day</span>
-      ${saved ? `<span class="cut ok">SAVED</span>` : st.ended ? `<span class="cut">CUT</span>` : `<span class="cut">CUT FEB 1?</span>`}
+      <span class="rt9">EASTSIDE CLINIC · 1,800 patients</span>
+      ${saved ? `<span class="cut ok">OPEN</span>` : popup ? `<span class="cut ok">POP-UP</span>` : st.ended ? `<span class="cut">CLOSED</span>` : `<span class="cut">CLOSES FEB 1?</span>`}
       ${extra || ""}
     </div>`;
   }
@@ -70,7 +85,7 @@
   function council(extra) {
     const v = votes(st.m);
     const seats = Array.from({ length: 7 }, (_, i) => i < v ? `<span class="seat y">🙂<b>✔</b></span>` : i === 6 ? `<span class="seat n br">🧑‍💼<b>✖</b></span>` : `<span class="seat n">😐<b>✖</b></span>`);
-    return `<div class="chamber" role="img" aria-label="City council: ${v} of 7 lean toward saving Route 9. ${NEED_VOTES} needed."><p class="cap">🏛️ City council · <b>${v} of 7</b> lean “save it” · need ${NEED_VOTES}</p><div class="seats">${seats.join("")}</div>${extra || ""}</div>`;
+    return `<div class="chamber" role="img" aria-label="City council: ${v} of 7 lean toward saving the clinic. ${NEED_VOTES} needed."><p class="cap">🏛️ City council · <b>${v} of 7</b> lean “save it” · need ${NEED_VOTES}</p><div class="seats">${seats.join("")}</div>${extra || ""}</div>`;
   }
   function refreshCouncil() {
     const ch = document.querySelector("#scene .chamber"); if (!ch) return;
@@ -101,17 +116,17 @@
       stem: "___ works best because ___. In ___, it ___.",
       min: 70, newWords: 6, mustAll: [TACTIC_WORDS, CASE_WORDS],
       mustMsg: "Rally speech: name a tactic AND a real case (Montgomery, Katz Drug, or the Freedom Rides)." },
-    { id: "plan", short: "Route 9 plan: policy or community fix + challenge",
+    { id: "plan", short: "Clinic plan: policy or community fix + challenge",
       label: "📋 Report: was your fix a policy fix or a community fix? Name one challenge.",
       stem: "My fix was a ___ fix because ___. One challenge was ___.",
       min: 70, newWords: 6,
-      mustAll: [["policy", "community", "private", "government", "law", "vote", "council", "carpool", "van", "both"],
-                ["tax", "cost", "money", "oppon", "disagree", "rumor", "false", "ignore", "slow", "criticism", "backlash", "show up", "lazy", "vote", "volunteer", "driver", "tired", "burn", "brandt", "budget", "time", "lost", "lose"]],
+      mustAll: [["policy", "community", "private", "government", "law", "vote", "council", "carpool", "van", "volunteer", "nurse", "church", "pop-up", "pop up", "both"],
+                ["tax", "cost", "money", "oppon", "disagree", "rumor", "false", "ignore", "slow", "criticism", "backlash", "show up", "lazy", "vote", "volunteer", "hours", "driver", "tired", "burn", "brandt", "budget", "time", "lost", "lose"]],
       mustMsg: "Report: say policy or community fix AND one challenge (cost, opponents, rumors, lost vote, tired volunteers…)." }
   ];
 
   // ---------------- The game ----------------
-  const PARTS = ["🗂️ How movements start", "🧰 Fill your toolkit", "🚌 Route 9 campaign"];
+  const PARTS = ["🗂️ How movements start", "🧰 Fill your toolkit", "🏥 Clinic campaign"];
   const STEPS = [
     // ===== Part 1 · How movements start =====
     { id: "s1", type: "check", part: 0, std: "Soc.15", kicker: "Case file 1 · Des Moines, Iowa · 1948", short: "Katz Drug: a law only works if enforced", stamp: "+3 TOOLS", tools: ["sitin", "picket", "court"],
@@ -157,13 +172,13 @@
       hint: "Check the chart. Who paid most of the fares?",
       reveal: `<p><b>Boycott</b> = refuse to buy or use. <b>Carpools</b> = a community fix, no government needed.</p>` },
 
-    { id: "e1", type: "event", part: 1, kicker: "Route 9 · Week 1", short: "First tool for Route 9",
-      scene: () => routeMap() + say("🧑‍💼 Councilor Brandt", "Route 9 costs too much. It's gone Feb 1.", "rv") + say("👩🏾‍⚕️ Odette, nurse's aide", "No bus, no job. Help us."),
+    { id: "e1", type: "event", part: 1, kicker: "Clinic · Week 1", short: "First tool for the clinic",
+      scene: () => routeMap() + say("🧑‍💼 Councilor Brandt", "The clinic costs too much. It closes Feb 1.", "rv") + say("👩🏾 Odette, mom of two", "No clinic, no doctor for my kids. Help us."),
       ask: "Your first move?",
       cards: [
-        { id: "meet", icon: "🎤", title: "Rider meeting", line: "Collect stories and names.", fx: 2, result: "40 riders show up. Now you have real stories.", stamp: "PACKED ROOM", cause: "Week 1: held a rider meeting" },
+        { id: "meet", icon: "🎤", title: "Patient meeting", line: "Collect stories and names.", fx: 2, result: "40 patients show up. Now you have real stories.", stamp: "PACKED ROOM", cause: "Week 1: held a patient meeting" },
         { id: "roast", icon: "📱", title: "Roast Brandt online", line: "Go viral fast.", fx: 0, result: "Lots of views. Zero volunteers.", stamp: "ALL TALK", cause: "Week 1: roasted Brandt online" },
-        { id: "shops", icon: "🚫", title: "Boycott all city shops", line: "Hit the whole city.", fx: -1, result: "Shop owners get mad. Some riders work there.", stamp: "BACKFIRE", cause: "Week 1: boycotted the wrong target" }
+        { id: "shops", icon: "🚫", title: "Boycott all city shops", line: "Hit the whole city.", fx: -1, result: "Shop owners get mad. Some patients work there.", stamp: "BACKFIRE", cause: "Week 1: boycotted the wrong target" }
       ],
       after: `<p>Montgomery's boycott aimed at the one company that decided.</p>` },
 
@@ -181,35 +196,35 @@
       reveal: `<p>News of the violence pushed the government to act.</p>` },
 
 
-    // ===== Part 3 · Route 9 campaign =====
-    { id: "e2", type: "event", part: 2, kicker: "Route 9 · Council night", short: "City council move",
+    // ===== Part 3 · Clinic campaign =====
+    { id: "e2", type: "event", part: 2, kicker: "Clinic · Council night", short: "City council move",
       scene: () => council(say("🧑‍💼 Councilor Brandt", "Public comment. You get ten minutes.", "rv")),
       ask: "How do you use the 10 minutes?",
       cards: [
-        { id: "facts", icon: "🎤", title: "Riders + numbers", line: "Stories, plus who rides.", fx: 2, result: "Two members ask the city for other cuts.", stamp: "HEARD", cause: "Council: riders spoke with facts" },
-        { id: "chant", icon: "📢", title: "Chant till it stops", line: "Make them hear you.", fx: -2, result: "Meeting canceled. The news shows shouting, not riders.", stamp: "SHUT DOWN", cause: "Council: chanted the meeting down" },
+        { id: "facts", icon: "🎤", title: "Patients + numbers", line: "Stories, plus who uses it.", fx: 2, result: "Two members ask the city for other cuts.", stamp: "HEARD", cause: "Council: patients spoke with facts" },
+        { id: "chant", icon: "📢", title: "Chant till it stops", line: "Make them hear you.", fx: -2, result: "Meeting canceled. The news shows shouting, not patients.", stamp: "SHUT DOWN", cause: "Council: chanted the meeting down" },
         { id: "petition", icon: "📝", title: "Drop off a petition", line: "300 online names.", fx: 1, result: "It shows support, but it's easy to ignore.", stamp: "FILED", cause: "Council: dropped off a petition" }
       ] },
 
     { id: "c1", type: "check", part: 2, std: "Soc.15", kicker: "Council night · Public comment", short: "Opponents have real reasons", stamp: "LISTENED",
-      scene: () => council(say("👵 Resident", "I'm retired. My check never grows. Keep every route, and my taxes go up.")),
+      scene: () => council(say("👵 Resident", "I'm retired. My check never grows. Fund the clinic, and my taxes go up.")),
       ask: "What does her comment show about the fight?",
-      options: ["Opponents can have real reasons, like cost.", "Anyone against Route 9 wants riders to fail.", "Taxes have nothing to do with bus service.", "Opponents never come to council meetings."],
-      nope: ["", "Her worry is about her own bills.", "Taxes pay for city buses.", "She's at the meeting right now."],
+      options: ["Opponents can have real reasons, like cost.", "Anyone against the clinic wants patients hurt.", "Taxes have nothing to do with city clinics.", "Opponents never come to council meetings."],
+      nope: ["", "Her worry is about her own bills.", "City money comes from taxes.", "She's at the meeting right now."],
       hint: "Is her worry about money a real one?",
       reveal: `<p>Movements face <b>challenges</b>: opponents, cost worries, rumors, slow change.</p>` },
 
-    { id: "e3", type: "event", part: 2, kicker: "Route 9 · The comments", short: "Answering opponents",
-      scene: () => phone(`<div class="post"><b>🗞️ City News</b><p>Council may cut Route 9 to save money.</p></div><div class="cmt">💬 “Bus riders are lazy.”</div><div class="cmt">💬 “The city has no choice.”</div>`),
+    { id: "e3", type: "event", part: 2, kicker: "Clinic · The comments", short: "Answering opponents",
+      scene: () => phone(`<div class="post"><b>🗞️ City News</b><p>Council may close Eastside Clinic to save money.</p></div><div class="cmt">💬 “Just go to the ER.”</div><div class="cmt">💬 “The city has no choice.”</div>`),
       ask: "How do you answer?",
       cards: [
-        { id: "comp", icon: "🤝", title: "Offer a compromise", line: "Fewer trips, not zero.", fx: 2, result: "The city saves money. Shift-change buses stay.", stamp: "MIDDLE GROUND", cause: "Comments: offered a compromise" },
+        { id: "comp", icon: "🤝", title: "Offer a compromise", line: "Fewer days, not zero.", fx: 2, result: "The city saves money. Doors stay open 3 days a week.", stamp: "MIDDLE GROUND", cause: "Comments: offered a compromise" },
         { id: "clap", icon: "🔥", title: "Clap back", line: "Call them selfish.", fx: -2, result: "Name-calling. Undecided people tune out.", stamp: "BACKFIRE", cause: "Comments: clapped back" },
-        { id: "ignore", icon: "📸", title: "Just post rider stories", line: "Ignore the haters.", fx: 1, result: "Stories help, but a false rumor spreads.", stamp: "HALF HEARD", cause: "Comments: ignored critics" }
+        { id: "ignore", icon: "📸", title: "Just post patient stories", line: "Ignore the haters.", fx: 1, result: "Stories help, but a false rumor spreads.", stamp: "HALF HEARD", cause: "Comments: ignored critics" }
       ],
       after: `<p>Many real wins are <b>partial</b>.</p>` },
 
-    { id: "pc", type: "sort", part: 2, std: "Soc.15", kicker: "Route 9 · How did real wins happen?", short: "Policy vs. community/private responses (sort)", stamp: "BOTH WORK",
+    { id: "pc", type: "sort", part: 2, std: "Soc.15", kicker: "Clinic · How did real wins happen?", short: "Policy vs. community/private responses (sort)", stamp: "BOTH WORK",
       scene: () => routeMap() + say("👩🏾‍⚕️ Odette", "Wait for the city, or fix it ourselves?"),
       ask: "Tap a real fix, then sort it.",
       tiles: [
@@ -225,13 +240,13 @@
       hint: "Did a government pass it? Or did people make it happen themselves?",
       reveal: `<p><b>Community</b> fixes can start fast. <b>Policy</b> fixes can reach everyone.</p>` },
 
-    { id: "e4", type: "fix", part: 2, kicker: "Route 9 · Final week", short: "Route 9 fix (policy or community)",
-      scene: () => council(say("🧑‍💼 Councilor Brandt", "The vote is Tuesday. I still say cut it.", "rv")),
+    { id: "e4", type: "fix", part: 2, kicker: "Clinic · Final week", short: "Clinic fix (policy or community)",
+      scene: () => council(say("🧑‍💼 Councilor Brandt", "The vote is Tuesday. I still say close it.", "rv")),
       ask: "Pick your fix.",
       cards: [
-        { id: "policy", icon: "🏛️", title: "Policy fix", line: "Council votes to fund Route 9.", pros: ["✔ lasts", "✔ every rider"], cons: [`✖ needs ${NEED_VOTES} votes`], cause: "Fix: pushed for a council vote" },
-        { id: "community", icon: "🤝", title: "Community fix", line: "Rider carpools + a hospital van.", pros: ["✔ starts now", "✔ no vote"], cons: ["✖ needs volunteers"], cause: "Fix: started carpools + a van" },
-        { id: "both", icon: "🏛️🤝", title: "Both", line: "Carpools now, vote Tuesday.", pros: ["✔ now + lasting"], cons: ["✖ most work"], need: 8, cause: "Fix: carpools now + a vote" }
+        { id: "policy", icon: "🏛️", title: "Policy fix", line: "Council votes to fund the clinic.", pros: ["✔ lasts", "✔ every patient"], cons: [`✖ needs ${NEED_VOTES} votes`, "✖ costs taxes"], cause: "Fix: pushed for a council vote" },
+        { id: "community", icon: "🤝", title: "Community fix", line: "Volunteer nurses, church space, a van.", pros: ["✔ starts now", "✔ no vote"], cons: ["✖ needs volunteers", "✖ fewer hours"], cause: "Fix: volunteer nurses + a van" },
+        { id: "both", icon: "🏛️🤝", title: "Both", line: "Pop-up clinic now, vote Tuesday.", pros: ["✔ now + lasting"], cons: ["✖ most work"], need: 8, cause: "Fix: pop-up clinic now + a vote" }
       ] },
 
     { id: "c3", type: "check", part: 2, std: "Soc.15", kicker: "Epilogue · Does winning end it?", short: "Wins vs. lasting inequality", stamp: "REAL DATA",
@@ -320,7 +335,7 @@
     if (nx.type === "end") return "Go to the vote ▶";
     if (nx.type === "write") return "Write your report ▶";
     if (nx.part !== step.part) return "Next: " + PARTS[nx.part].replace(/^\S+ /, "") + " ▶";
-    if (nx.type === "event" || nx.type === "fix") return "Back to Route 9 ▶";
+    if (nx.type === "event" || nx.type === "fix") return "Back to the clinic ▶";
     return nx.part === 2 ? "Next ▶" : "Next case file ▶";
   }
   function nextBtn(step) {
@@ -345,14 +360,14 @@
       <div class="tcopy">
         <p class="tk">Sociology · Unit 4 · Day 6</p>
         <h1>The Organizer's Toolkit</h1>
-        <p class="hook">The city wants to cut Route 9. 600 riders need it.</p>
-        <ul class="how"><li><span>🗂️</span>Crack real case files</li><li><span>🧰</span>Collect the tactics that won</li><li><span>🚌</span>Use them to save Route 9</li></ul>
+        <p class="hook">The city wants to close Eastside Clinic. 1,800 patients need it.</p>
+        <ul class="how"><li><span>🗂️</span>Crack real case files</li><li><span>🧰</span>Collect the tactics that won</li><li><span>🏥</span>Use them to save the clinic</li></ul>
         <p class="chips"><span>⏱️ 20 min</span><span>🔍 7 checks</span><span>✏️ 2 short answers</span><span>❌ Guesses cost 📣</span></p>
         <p class="goal">🎯 Goal: explain how people, movements, and governments fight inequality.</p>
         <label for="nameBox">Your name (first name + last initial)</label>
         <div class="namerow"><input id="nameBox" maxlength="60" autocomplete="off" placeholder="Like Jordan M." value="${esc(pre || "")}"><button type="button" class="go big" id="startBtn">Open case file 1 ▶</button></div>
         <p id="introMsg" class="msg" role="status"></p>
-        <p class="src">Route 9, its city, and its people are made up. Every case file is real.</p>
+        <p class="src">Millbrook, Iowa, its clinic, and its people are made up. Every case file is real.</p>
       </div></section>`;
     $("startBtn").onclick = () => {
       const fixed = window.classShortName ? window.classShortName($("nameBox").value) : $("nameBox").value.trim();
@@ -554,7 +569,7 @@
         st.picks[step.id] = c.id; save();
         b.classList.add("chosen");
         box.querySelectorAll(".gcard").forEach(x => { x.disabled = true; if (x !== b) x.classList.add("spent"); });
-        stamp($("scene"), c.id === "policy" ? "VOTE SET" : c.id === "community" ? "RIDES START" : "ALL IN");
+        stamp($("scene"), c.id === "policy" ? "VOTE SET" : c.id === "community" ? "VOLUNTEERS IN" : "ALL IN");
         setTimeout(() => addNext(step, ""), 700);
       };
       box.appendChild(b);
@@ -566,11 +581,11 @@
   function ending() {
     const m = st.m, v = votes(m), f = st.picks.e4, n = 7 - v;
     let e;
-    if (f === "both") e = { key: "Route 9 Saved", icon: "🎉", cls: "win", text: `Carpools got riders to work all week. Then the council voted ${v}–${n} to keep Route 9.` };
-    else if (f === "policy" && v >= NEED_VOTES) e = { key: "Saved by Vote", icon: "🗳️", cls: "win", text: `The council votes ${v}–${n} to keep Route 9. It covers every rider, but it took weeks.` };
-    else if (f === "policy") e = { key: "Vote Lost", icon: "📉", cls: "low", text: `The council votes ${v}–${n} to cut Route 9. Many movements lose the first vote. Riders plan round two.` };
-    else if (m >= 6) e = { key: "Rides Rolling", icon: "🚐", cls: "mid", text: "Thirty drivers sign up. Carpools and a hospital van start Monday. No vote, so no lasting promise." };
-    else e = { key: "Rides Sputter", icon: "🚗", cls: "low", text: "Only six drivers sign up. The van covers hospital shifts. Warehouse riders still walk." };
+    if (f === "both") e = { key: "Clinic Saved", icon: "🎉", cls: "win", text: `Volunteers ran a pop-up clinic all week. Then the council voted ${v}–${n} to keep Eastside open.` };
+    else if (f === "policy" && v >= NEED_VOTES) e = { key: "Saved by Vote", icon: "🗳️", cls: "win", text: `The council votes ${v}–${n} to fund the clinic. It covers every patient, but it costs tax money.` };
+    else if (f === "policy") e = { key: "Vote Lost", icon: "📉", cls: "low", text: `The council votes ${v}–${n} to close the clinic. Many movements lose the first vote. Patients plan round two.` };
+    else if (m >= 6) e = { key: "Pop-Up Clinic", icon: "🩺", cls: "mid", text: "Twelve nurses volunteer. A church hosts a clinic two days a week. No vote, so no lasting promise." };
+    else e = { key: "Volunteers Stretched", icon: "🚐", cls: "low", text: "Only three nurses sign up. The van comes once a week. Lines are long." };
     const causes = [];
     ["e1", "e2", "e3"].forEach(id => { const s = STEPS.find(x => x.id === id); const c = s.cards.find(x => x.id === st.picks[id]); if (c) causes.push(c.cause); });
     const misses = CHECKS.filter(c => st.wrong[c.id]).length;
@@ -660,7 +675,7 @@
     PROMPTS.forEach(p => { answers["Writing: " + p.short] = ($("w_" + p.id).value || "").trim(); });
     answers["Ending"] = e.key;
     answers["Caused by"] = e.causes.join(" · ");
-    answers["Route 9 momentum"] = st.m + " of 10";
+    answers["Clinic momentum"] = st.m + " of 10";
 
     $("sendBtn").disabled = true; msg.textContent = "Sending your work…"; msg.className = "msg";
     try {

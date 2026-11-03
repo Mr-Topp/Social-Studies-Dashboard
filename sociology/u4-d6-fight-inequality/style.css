@@ -46,7 +46,7 @@ button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px soli
 .parts .stepn{margin-left:auto;background:none!important;color:var(--muted)}
 
 /* ---------- Layout ---------- */
-main{max-width:1120px;margin:auto;padding:12px 14px 40px}
+main{max-width:1120px;margin:auto;padding:12px 14px 90px} /* room so the floating "Read to me" button never covers the last card */
 .welcome{background:#e1f6ec;border:2px solid var(--good);color:#155c33;font-weight:800;border-radius:12px;padding:8px 12px;margin:0 0 10px;display:flex;flex-wrap:wrap;gap:8px;align-items:center}
 .welcome[hidden]{display:none}
 .notme{background:#fff;border:2px solid var(--ink);border-radius:9px;padding:4px 10px;font-weight:800;font-size:.85rem}
