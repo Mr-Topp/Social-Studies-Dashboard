@@ -382,6 +382,8 @@ window.CLASS_ASSIGNMENTS = {
   "soc-u4-d3-rich-countries": { course: "sociology", unit: 4, day: 3, title: "Day 3 · The Cobalt Deal", path: "sociology/u4-d3-rich-countries/", std: ["SS.9-12.Soc.12"] },
   "soc-u4-d4-institutions": { course: "sociology", unit: 4, day: 4, title: "Day 4 · Fair on Paper", path: "sociology/u4-d4-institutions/", std: ["SS.9-12.Soc.14"] },
   "soc-u4-d5-inequality-conflict": { course: "sociology", unit: 4, day: 5, title: "Day 5 · Kettle Creek on Edge", path: "sociology/u4-d5-inequality-conflict/", std: ["SS.9-12.Soc.13"] },
+  "soc-u4-summative": { course: "sociology", unit: 4, day: 7, turnIn: false, std: [], title: "Day 7 · Summative (Form A)", path: "https://docs.google.com/document/d/1ZL826CGxgm1Andibp2MO607pnxcDBdzjxZVpBA4cMMc/edit" },
+  "soc-u4-summative-key": { course: "sociology", unit: 4, day: 7, turnIn: false, std: [], title: "Day 7 · Summative Teacher Key", path: "https://docs.google.com/document/d/1qJ1K7U3rIC6wtp919J1TetJyZd68-6e8eo_uXOYYnYc/edit" },
   "gov-u6-d1-checks-balances": { course: "government", unit: 6, day: 1, title: "Day 1 · Branch Wars", path: "civics/gov-u6-d1-checks-balances/", std: ["SS.9-12.Gov.4", "SS.9-12.Gov.9"] },
   "gov-u6-d2-iowa-government": { course: "government", unit: 6, day: 2, title: "Day 2 · Who Do I Call?", path: "civics/gov-u6-d2-iowa-government/", std: ["SS.9-12.Gov.18", "SS.9-12.Gov.19", "SS.9-12.Gov.20"] },
   "gov-u6-summative": { course: "government", unit: 6, day: 3, turnIn: false, std: [], title: "Day 3 · Summative (Form A)", path: "https://docs.google.com/document/d/19EQxjsDCAHus8zJI0_YzmREwSS7SgxfUFMHnrkIVISQ/edit" },
