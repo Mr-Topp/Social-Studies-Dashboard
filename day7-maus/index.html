@@ -4,7 +4,7 @@
 <meta name="description" content="Read selected pages from Maus I and answer questions about Nazi persecution, hiding, and survival.">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../shared/graphic-reading.css?v=2">
+<link rel="stylesheet" href="../shared/graphic-reading.css?v=3">
 <script src="../shared/assignments.js?v=20261103f"></script><script src="../shared/turnin.js?v=20261103d"></script></head><body>
 <header class="gr-head" data-years="1933 — 1944"><div class="gr-wrap">
 <div class="kicker">World History · Day 7 · Rise of Fascism &amp; Dictators</div>
@@ -18,13 +18,7 @@
 <nav><a class="back" href="../">← Class activities</a></nav>
 </div></header>
 
-<nav class="route" aria-label="Your progress"><ol>
-<li id="r1"><a href="#q1"><span class="dot"><span>1</span></span><span>Nazi power<small>Pages 1–5</small></span></a></li>
-<li id="r2"><a href="#q2"><span class="dot"><span>2</span></span><span>Persecution<small>Pages 6–8</small></span></a></li>
-<li id="r3"><a href="#q3"><span class="dot"><span>3</span></span><span>Hiding<small>Pages 9–13</small></span></a></li>
-<li id="r4"><a href="#q4"><span class="dot"><span>4</span></span><span>Camps<small>Pages 14–16</small></span></a></li>
-<li id="r5"><a href="#finish"><span class="dot"><span>★</span></span><span>Turn in<small>Last step</small></span></a></li>
-</ol></nav>
+<nav class="route" aria-label="Your progress"><ol id="flipRoute"></ol></nav>
 
 <main class="gr-main gr-wrap">
 <section class="card">
@@ -39,157 +33,137 @@
 <p class="welcome" id="welcome" role="status"></p>
 </section>
 
-<div class="gr-layout">
-<section class="reader-panel reading" aria-label="Selected pages from Maus I">
-<div class="reader-bar"><p class="eyebrow">The reading</p><h2><em>Maus I</em> — 16 selected pages</h2></div>
-<div class="reader-body">
-<p class="reader-note">Read the pages in order. Each question tells you which reader pages to use. The book's own page number is printed at the bottom of each page.</p>
-<p class="reader-note"><a href="./maus-day7-pages.pdf#page=1" target="_blank" rel="noopener">Open the reading in a new tab ↗</a></p>
-<iframe id="reader" title="Selected pages from Maus I" src="./maus-day7-pages.pdf#page=1&view=FitH"></iframe>
-</div>
+<div class="flip-layout">
+<section class="flip-reader reading" id="flipReader" aria-label="Selected pages from Maus I">
+<div class="flip-bar"><div><p class="eyebrow">The reading</p><h2><em>Maus I</em> — 16 selected pages</h2></div><span class="flip-pos" id="flipPos"></span></div>
+<div class="flip-tools"><button type="button" class="quiet" id="flipBack">← Back a page</button><span class="grow"><span id="flipPart"></span><span id="flipTimer" aria-live="polite"></span></span><button type="button" class="secondary" id="flipNext">Next page →</button><button type="button" class="quiet" id="flipZoom">Make page bigger</button></div>
+<div class="flip-stage"><img id="flipImg" alt="" src="pages/p-01.jpg"></div>
+<p class="flip-cap">Read each page. Click the page to make it bigger. <a href="./maus-day7-pages.pdf" target="_blank" rel="noopener">Open all pages as a PDF ↗</a></p>
 </section>
 
 <div class="qcol">
 <section class="card">
-<h2>Your questions</h2>
 <label for="studentName">First name + last initial (like Jordan M.)</label><input id="studentName" maxlength="100" autocomplete="off" placeholder="First name + last initial (like Jordan M.)" required>
-<p class="status" id="progress" aria-live="polite">0 of 4 checks correct · 0 of 4 answers written</p>
 </section>
-
-<section class="card qcard question" id="q1"><span class="stamp">Done</span>
-<p class="case-tag"><span class="num">Question 1</span> Reader pages 1–5 · Book pages 12, 32–33, and 37–38</p><h3>1. Nazi power</h3>
-<div class="check"><p class="tag">Reading check · Reader page 3 (book page 33)</p><p class="q">On the train, people share stories: a cousin who had to sell his business and flee, a relative taken by police, a sign saying &quot;This town is Jew Free.&quot; What do these stories show together?</p><div class="choices" id="choices1"></div><p class="fb" id="fb1" aria-live="polite"></p><button class="pageBtn" type="button" data-page="3">Show me reader page 3 ↖</button></div>
-<label class="prompt" for="answer1">What is one detail that shows Nazis gaining power? How did this affect Jewish people?</label><p class="stem">Write 1–2 sentences. Start like this: <i>One detail is ___ (book page ___). This hurt Jewish people because ___.</i></p><textarea id="answer1" placeholder="One detail is ___ (book page ___). This hurt Jewish people because ___."></textarea><p class="lockmsg" id="unlock1">This box opens when you get the reading check right.</p><button class="pageBtn" type="button" data-page="1">Go to these pages ↖</button>
-</section>
-
-<section class="card qcard question" id="q2"><span class="stamp">Done</span>
-<p class="case-tag"><span class="num">Question 2</span> Reader pages 6–8 · Book pages 49–51</p><h3>2. Persecution</h3>
-<div class="check"><p class="tag">Reading check · Reader page 8 (book page 51)</p><p class="q">At the prisoner camp near Nuremberg, the Jewish prisoners are made to stand apart, and a Nazi officer shouts, &quot;It&#x27;s all YOUR fault, this war!&quot; What does this show?</p><div class="choices" id="choices2"></div><p class="fb" id="fb2" aria-live="polite"></p><button class="pageBtn" type="button" data-page="8">Show me reader page 8 ↖</button></div>
-<label class="prompt" for="answer2">What happens to Vladek after he joins the Polish army? What does this show about the danger to Jewish people?</label><p class="stem">Write 1–2 sentences. Start like this: <i>After he joins the army, Vladek ___. This shows Jewish people were in danger because ___.</i></p><textarea id="answer2" placeholder="After he joins the army, Vladek ___. This shows Jewish people were in danger because ___."></textarea><p class="lockmsg" id="unlock2">This box opens when you get the reading check right.</p><button class="pageBtn" type="button" data-page="6">Go to these pages ↖</button>
-</section>
-
-<section class="card qcard question" id="q3"><span class="stamp">Done</span>
-<p class="case-tag"><span class="num">Question 3</span> Reader pages 9–13 · Book pages 80, 88, and 111–113</p><h3>3. Hiding to survive</h3>
-<div class="check"><p class="tag">Reading check · Reader page 10 (book page 88)</p><p class="q">Every Jew must register at the stadium. Vladek says, &quot;To go, it was no good. But, not to go — it was also no good.&quot; Why?</p><div class="choices" id="choices3"></div><p class="fb" id="fb3" aria-live="polite"></p><button class="pageBtn" type="button" data-page="10">Show me reader page 10 ↖</button></div>
-<label class="prompt" for="answer3">What danger does Vladek&#x27;s family face? Name one thing they do to stay alive.</label><p class="stem">Write 1–2 sentences. Start like this: <i>Vladek&#x27;s family faced ___. To stay alive, they ___ (book page ___).</i></p><textarea id="answer3" placeholder="Vladek&#x27;s family faced ___. To stay alive, they ___ (book page ___)."></textarea><p class="lockmsg" id="unlock3">This box opens when you get the reading check right.</p><button class="pageBtn" type="button" data-page="9">Go to these pages ↖</button>
-</section>
-
-<section class="card qcard question" id="q4"><span class="stamp">Done</span>
-<p class="case-tag"><span class="num">Question 4</span> Reader pages 14–16 · Book pages 157–159</p><h3>4. Nazi camps</h3>
-<div class="check"><p class="tag">Reading check · Reader page 14 (book page 157)</p><p class="q">As the trucks arrive, Vladek says, &quot;We knew the stories — that they will gas us... This was 1944... We knew everything. And here we were.&quot; What does this tell you?</p><div class="choices" id="choices4"></div><p class="fb" id="fb4" aria-live="polite"></p><button class="pageBtn" type="button" data-page="14">Show me reader page 14 ↖</button></div>
-<label class="prompt" for="answer4">Where do Vladek and Anja arrive? What does this show about how Nazi persecution grew more dangerous?</label><p class="stem">Write 1–2 sentences. Start like this: <i>Vladek and Anja arrive at ___. This shows persecution grew more dangerous because ___.</i></p><textarea id="answer4" placeholder="Vladek and Anja arrive at ___. This shows persecution grew more dangerous because ___."></textarea><p class="lockmsg" id="unlock4">This box opens when you get the reading check right.</p><button class="pageBtn" type="button" data-page="14">Go to these pages ↖</button>
-</section>
-
+<div id="flipCards"></div>
+<div class="flip-nav"><button type="button" class="quiet" id="flipBack2">← Back</button><button type="button" class="secondary" id="flipNext2">Next page →</button><p class="flip-why" id="flipWhy" aria-live="polite"></p></div>
 <section class="card finish" id="finish">
 <h2>Turn in your work</h2>
 <div class="actions"><button id="submitBtn" class="primary" type="button">Turn in answers</button><button id="clearBtn" class="quiet" type="button">Start over</button></div><p id="submitStatus" class="status" role="status" aria-live="polite"></p><p class="reader-note">Your work saves on this device, so you can come back later. Your teacher sees it after you turn it in.</p>
 </section>
 </div></div></main>
+<div class="flip-big" id="flipBig" hidden role="dialog" aria-label="Bigger page"><button type="button" class="quiet" id="flipBigClose">✕ Close</button><img id="flipBigImg" alt="Bigger view of the current page"></div>
 <script>
-const ASSIGNMENT_ID="day7-maus-reading-checks";
-const STANDARD="SS.9-12.WH.30, SS.9-12.WH.33";
-const PREFIX="maus-day7-",PDF="./maus-day7-pages.pdf";
-// Original prompts. These are the answer keys the teacher dashboard already uses, so keep the wording exactly.
-const QUESTIONS=[
-"What is one detail that shows Nazis gaining power? How did this affect Jewish people?",
-"What happens to Vladek after he joins the Polish army? What does this show about the danger to Jewish people?",
-"What danger does Vladek's family face? Name one thing they do to stay alive.",
-"Where do Vladek and Anja arrive? What does this show about how Nazi persecution grew more dangerous?"
-];
-// Reading checks. The FIRST option is the correct one; options are shuffled on screen.
-const CHECKS=[
+window.FLIP={
+title:"Selected pages from Maus I",prefix:"maus-day7-",pages:16,readSeconds:8,lockSeconds:8,
+assignmentId:"day7-maus-reading-checks",api:"https://fynn-class-assignment-submissions-20261024.neotboy.chatgpt.site/api/submit",
+lockedText:"This box opens when you get the reading check right.",
+clearConfirm:"Start over? This clears your checks and answers on this device.",
+successText:"Turned in! Your teacher got your 4 checks and 4 answers. You're done.",
+wrongText:(c,left)=>left>0?"Not quite. "+c.hint+" Try again in "+left+"…":"Not quite. "+c.hint+" The choices were mixed up. Try again.",
+parts:[
 {
-"options": [
-"Nazi persecution kept growing: Jews lost their businesses, safety, and homes.",
+"short": "Nazi power",
+"ref": "Reader pages 1–5 · Book pages 12, 32–33, and 37–38",
+"title": "1. Nazi power",
+"from": 1,
+"to": 5,
+"check": {
+"page": 3,
+"tag": "Reading check · Reader page 3 (book page 33)",
+"q": "On the train, people share stories: a cousin who had to sell his business and flee, a relative taken by police, a sign saying &quot;This town is Jew Free.&quot; What do these stories show together?",
+"right": "Nazi persecution kept growing: Jews lost their businesses, safety, and homes.",
+"wrong": [
 "Only a few Jewish families were harmed, and only in one small border town.",
 "German police were guarding Jewish homes and shops from angry street mobs.",
 "Jewish families left Germany mostly to find better jobs in nearby countries."
 ],
-"why": "Each story is worse than the one before — that is how Nazi persecution of Jews grew in Germany before the war.",
+"why": "✓ Correct. Each story is worse than the one before — that is how Nazi persecution of Jews grew in Germany before the war.",
 "hint": "Reread all six boxes on reader page 3. Who is losing things, and who is doing it?"
 },
+"prompt": "What is one detail that shows Nazis gaining power? How did this affect Jewish people?",
+"stem": "Write 1–2 sentences. Start like this: <i>One detail is ___ (book page ___). This hurt Jewish people because ___.</i>",
+"placeholder": "One detail is ___ (book page ___). This hurt Jewish people because ___."
+},
 {
-"options": [
-"Jewish prisoners were singled out and blamed for the war itself.",
+"short": "Persecution",
+"ref": "Reader pages 6–8 · Book pages 49–51",
+"title": "2. Persecution",
+"from": 6,
+"to": 8,
+"check": {
+"page": 8,
+"tag": "Reading check · Reader page 8 (book page 51)",
+"q": "At the prisoner camp near Nuremberg, the Jewish prisoners are made to stand apart, and a Nazi officer shouts, &quot;It&#x27;s all YOUR fault, this war!&quot; What does this show?",
+"right": "Jewish prisoners were singled out and blamed for the war itself.",
+"wrong": [
 "Jewish prisoners were kept apart so they could be sent home first.",
 "The officer split up prisoners by rank to question the officers first.",
 "Jewish prisoners were praised for fighting harder than the others."
 ],
-"why": "Blaming Jews for the war is scapegoating. Even as a soldier, Vladek was treated worse because he was Jewish.",
+"why": "✓ Correct. Blaming Jews for the war is scapegoating. Even as a soldier, Vladek was treated worse because he was Jewish.",
 "hint": "Reread the first two panels on reader page 8. Who stands separate, and what does the officer say to them?"
 },
+"prompt": "What happens to Vladek after he joins the Polish army? What does this show about the danger to Jewish people?",
+"stem": "Write 1–2 sentences. Start like this: <i>After he joins the army, Vladek ___. This shows Jewish people were in danger because ___.</i>",
+"placeholder": "After he joins the army, Vladek ___. This shows Jewish people were in danger because ___."
+},
 {
-"options": [
-"It might be a Nazi trap, but without stamped papers they could be lost.",
+"short": "Hiding",
+"ref": "Reader pages 9–13 · Book pages 80, 88, and 111–113",
+"title": "3. Hiding to survive",
+"from": 9,
+"to": 13,
+"check": {
+"page": 10,
+"tag": "Reading check · Reader page 10 (book page 88)",
+"q": "Every Jew must register at the stadium. Vladek says, &quot;To go, it was no good. But, not to go — it was also no good.&quot; Why?",
+"right": "It might be a Nazi trap, but without stamped papers they could be lost.",
+"wrong": [
 "The stadium was far away, and the Nazis had stopped all the trains.",
 "Only healthy workers could go, so families would be split up either way.",
 "Going meant losing a day's pay, but staying home meant paying a fine."
 ],
-"why": "The Nazis used lies like \"no cause for alarm\" to control Jews. Every choice was dangerous.",
+"why": "✓ Correct. The Nazis used lies like \"no cause for alarm\" to control Jews. Every choice was dangerous.",
 "hint": "Reread the bottom two panels on reader page 10. What do the two men say about the stadium and about papers?"
 },
+"prompt": "What danger does Vladek&#x27;s family face? Name one thing they do to stay alive.",
+"stem": "Write 1–2 sentences. Start like this: <i>Vladek&#x27;s family faced ___. To stay alive, they ___ (book page ___).</i>",
+"placeholder": "Vladek's family faced ___. To stay alive, they ___ (book page ___)."
+},
 {
-"options": [
-"Even knowing Auschwitz meant death, they had no way left to escape it.",
+"short": "Camps",
+"ref": "Reader pages 14–16 · Book pages 157–159",
+"title": "4. Nazi camps",
+"from": 14,
+"to": 16,
+"check": {
+"page": 14,
+"tag": "Reading check · Reader page 14 (book page 157)",
+"q": "As the trucks arrive, Vladek says, &quot;We knew the stories — that they will gas us... This was 1944... We knew everything. And here we were.&quot; What does this tell you?",
+"right": "Even knowing Auschwitz meant death, they had no way left to escape it.",
+"wrong": [
 "The Nazis had promised them Auschwitz was only a work camp for the war.",
 "Vladek expected to be let go soon because he had paid off the guards.",
 "Vladek was glad to be back near the town where he once sold textiles."
 ],
-"why": "By 1944, persecution had become mass murder. Knowing the truth could not save them.",
+"why": "✓ Correct. By 1944, persecution had become mass murder. Knowing the truth could not save them.",
 "hint": "Reread the last box on reader page 14. What did they know, and could they do anything about it?"
+},
+"prompt": "Where do Vladek and Anja arrive? What does this show about how Nazi persecution grew more dangerous?",
+"stem": "Write 1–2 sentences. Start like this: <i>Vladek and Anja arrive at ___. This shows persecution grew more dangerous because ___.</i>",
+"placeholder": "Vladek and Anja arrive at ___. This shows persecution grew more dangerous because ___."
 }
-];
-
-const API="https://fynn-class-assignment-submissions-20261024.neotboy.chatgpt.site/api/submit";
-const $=id=>document.getElementById(id);
-const LOCK_SECONDS=8;
-const textFields=["studentName","answer1","answer2","answer3","answer4"];
-let tries=[0,0,0,0,0],locked=[false,false,false,false,false];
-function isDone(i){return localStorage.getItem(PREFIX+"check"+i)==="1"}
-function shuffle(a){for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
-function renderChoices(i){const c=CHECKS[i-1],box=$("choices"+i);box.innerHTML="";
-const opts=isDone(i)?[c.options[0]]:shuffle(c.options.slice());
-opts.forEach(text=>{const b=document.createElement("button");b.type="button";b.className="choice";b.textContent=text;
-if(isDone(i)){b.classList.add("right");b.disabled=true}else{b.disabled=locked[i];b.addEventListener("click",()=>pick(i,text))}box.appendChild(b)})}
-function setCheckDone(i){const c=CHECKS[i-1];renderChoices(i);const f=$("fb"+i);f.className="fb ok";f.textContent="✓ Correct. "+c.why;
-const t=$("answer"+i);t.disabled=false;$("unlock"+i).textContent=""}
-function pick(i,text){const c=CHECKS[i-1],f=$("fb"+i);tries[i]++;
-if(text===c.options[0]){localStorage.setItem(PREFIX+"check"+i,"1");localStorage.setItem(PREFIX+"tries"+i,String(tries[i]));setCheckDone(i);updateProgress();$("answer"+i).focus({preventScroll:true});return}
-// Wrong: mix up the choices, pause briefly, and point back to the page. No answer is marked wrong.
-locked[i]=true;renderChoices(i);f.className="fb no";let left=LOCK_SECONDS;
-const tick=()=>{f.textContent="Not quite. "+c.hint+" Try again in "+left+"…"};tick();
-const timer=setInterval(()=>{left--;if(left<=0){clearInterval(timer);locked[i]=false;renderChoices(i);f.textContent="Not quite. "+c.hint+" The choices were mixed up. Try again."}else tick()},1000)}
-function stepsDone(){let n=0;for(let i=1;i<=4;i++){if(isDone(i))n++;if($("answer"+i).value.trim())n++}return n}
-function updateProgress(){const checks=[1,2,3,4].filter(isDone).length,written=[1,2,3,4].filter(i=>$("answer"+i).value.trim()).length;
-$("progress").textContent=checks+" of 4 checks correct · "+written+" of 4 answers written"}
-function save(){textFields.forEach(id=>localStorage.setItem(PREFIX+id,$(id).value));updateProgress()}
-textFields.forEach(id=>{$(id).value=localStorage.getItem(PREFIX+id)||"";$(id).addEventListener("input",save)});
-for(let i=1;i<=4;i++){tries[i]=Number(localStorage.getItem(PREFIX+"tries"+i)||0);if(isDone(i))setCheckDone(i);else{renderChoices(i);$("answer"+i).disabled=true}}
-updateProgress();
-(function welcome(){const n=stepsDone();if(n===0)return;const w=$("welcome");w.style.display="block";
-w.textContent=n>=8?"Welcome back — all 8 steps are done. Check your name and press Turn in answers.":"Welcome back — your work was saved. You're on step "+(n+1)+" of 8 (4 checks + 4 short answers)."})();
-document.querySelectorAll(".pageBtn").forEach(button=>button.addEventListener("click",()=>{$("reader").src=PDF+"#page="+button.dataset.page+"&view=FitH";document.querySelector(".reading").scrollIntoView({behavior:"smooth",block:"start"})}));
-$("clearBtn").addEventListener("click",()=>{if(!confirm("Start over? This clears your checks and answers on this device."))return;
-textFields.forEach(id=>localStorage.removeItem(PREFIX+id));for(let i=1;i<=4;i++){localStorage.removeItem(PREFIX+"check"+i);localStorage.removeItem(PREFIX+"tries"+i)}location.reload()});
-$("submitBtn").addEventListener("click",async()=>{const name=$("studentName").value.trim(),status=$("submitStatus"),button=$("submitBtn");status.className="status";
-if(!name){status.textContent="Type your first name + last initial (like Jordan M.) at the top of the questions.";status.classList.add("error");$("studentName").focus();return}
-const missingCheck=[1,2,3,4].find(i=>!isDone(i));if(missingCheck){status.textContent="Get the reading check right for question "+missingCheck+" first.";status.classList.add("error");$("q"+missingCheck).scrollIntoView({behavior:"smooth",block:"start"});return}
-const missing=[1,2,3,4].find(i=>!$("answer"+i).value.trim());if(missing){status.textContent="Write your answer for question "+missing+" before turning in.";status.classList.add("error");$("answer"+missing).focus();return}
-for(const i of [1,2,3,4]){const j=window.classJunkStop&&window.classJunkStop($("answer"+i));if(j){status.textContent="Question "+i+": "+j;return}}
-const answers={Standard:STANDARD,"First-try correct":[1,2,3,4].filter(i=>(tries[i]||1)===1).length+" of 4"};QUESTIONS.forEach((q,i)=>answers[q]=$("answer"+(i+1)).value.trim());
-answers["Reading checks"]="4 of 4 correct · tries: "+[1,2,3,4].map(i=>tries[i]||1).join(", ");
-button.disabled=true;status.textContent="Sending your work…";
-try{const response=await classTurnIn(API,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({studentName:name,assignmentId:ASSIGNMENT_ID,answers})});const result=await response.json();if(!response.ok)throw new Error(result.error||"Could not send your work.");status.textContent="Turned in! Your teacher got your 4 checks and 4 answers. You're done.";status.classList.add("success");button.textContent="Turned in ✓"}catch(err){status.textContent=err instanceof Error?err.message:"Could not turn in your work. Try again.";status.classList.add("error");button.disabled=false}});
+],
+// Original prompts. These are the answer keys the teacher dashboard already uses, so keep the wording exactly.
+questions:["What is one detail that shows Nazis gaining power? How did this affect Jewish people?", "What happens to Vladek after he joins the Polish army? What does this show about the danger to Jewish people?", "What danger does Vladek's family face? Name one thing they do to stay alive.", "Where do Vladek and Anja arrive? What does this show about how Nazi persecution grew more dangerous?"],
+validate(s){if(!s.name)return{text:"Type your first name + last initial (like Jordan M.) at the top of the questions.",focus:"studentName"};
+ const mc=[1,2,3,4].find(i=>!s.checkDone(i));if(mc)return{text:"Get the reading check right for question "+mc+" first.",part:mc};
+ const ma=[1,2,3,4].find(i=>!s.answer(i));if(ma)return{text:"Write your answer for question "+ma+" before turning in.",part:ma,focus:"answer"+ma};
+ for(const i of [1,2,3,4]){const j=window.classJunkStop&&window.classJunkStop(document.getElementById("answer"+i));if(j)return{text:"Question "+i+": "+j,part:i}}return null},
+buildAnswers(s){const a={Standard:"SS.9-12.WH.30, SS.9-12.WH.33","First-try correct":[1,2,3,4].filter(i=>(s.tries(i)||1)===1).length+" of 4"};
+ this.questions.forEach((q,i)=>a[q]=s.answer(i+1));a["Reading checks"]="4 of 4 correct · tries: "+[1,2,3,4].map(i=>s.tries(i)||1).join(", ");return a}
+};
 </script>
-<script>
-// Progress route: lights up each question card as it is finished (display only — grading logic above is unchanged).
-(function(){
-  const done=i=>isDone(i)&&document.getElementById("answer"+i).value.trim()!=="";
-  function updateRoute(){for(let i=1;i<=4;i++){const d=done(i);document.getElementById("r"+i).classList.toggle("done",d);document.getElementById("q"+i).classList.toggle("is-done",d)}
-    document.getElementById("r5").classList.toggle("done",/Turned in/.test(document.getElementById("submitBtn").textContent))}
-  ["click","input","change"].forEach(t=>document.addEventListener(t,()=>setTimeout(updateRoute,60)));
-  new MutationObserver(updateRoute).observe(document.getElementById("submitStatus"),{childList:true,characterData:true,subtree:true});
-  updateRoute();
-})();
-</script>
+<script src="../shared/flip-reader.js?v=1"></script>
 </body></html>

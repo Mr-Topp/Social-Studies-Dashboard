@@ -4,20 +4,7 @@
 <meta name="description" content="World History Day 2 reading checks about French colonial rule in Hanoi.">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../shared/graphic-reading.css?v=2">
-<style>
-/* Page-specific: this page draws its quick checks with code, so map its class names onto the shared look */
-.check-q{font-weight:750;color:var(--navy);margin:0 0 10px;line-height:1.4}
-.check-fb{margin:8px 0 2px;border-radius:9px;padding:8px 11px;font-size:.92rem;line-height:1.4;color:var(--amber);background:var(--amberbg);border-left:4px solid #d39b3a}
-.check-fb:empty{display:none}
-.check-fb.ok{color:var(--green);background:var(--greenbg);font-weight:650;border-left-color:var(--green)}
-.check.done{background:var(--greenbg);border-color:#c5dfcf}.check.done .choices{display:none}
-.gr-main > .welcome{display:block;margin:0 0 4px}
-.stemBtn{background:#ebe4d5;color:var(--navy);font-size:.85rem;padding:6px 11px;margin:0 6px 8px 0}
-.stemBtn:hover:not(:disabled){background:#e0d7c4}
-.stem b{color:var(--ink)}
-.qcard .pageBtn{margin:0 0 4px}
-</style>
+<link rel="stylesheet" href="../shared/graphic-reading.css?v=3">
 <script src="../shared/assignments.js?v=20261103f"></script><script src="../shared/turnin.js?v=20261103d"></script></head><body>
 <header class="gr-head" data-years="1897 — 1945"><div class="gr-wrap">
 <div class="kicker">World History · Day 2 · Imperialism in Asia</div>
@@ -30,13 +17,7 @@
 <nav><a class="back" href="../">← Class activities</a></nav>
 </div></header>
 
-<nav class="route" aria-label="Your progress"><ol>
-<li id="r1"><a href="#part1"><span class="dot"><span>1</span></span><span>French plans<small>Pages 1–6</small></span></a></li>
-<li id="r2"><a href="#part2"><span class="dot"><span>2</span></span><span>The cost<small>Pages 7–10</small></span></a></li>
-<li id="r3"><a href="#part3"><span class="dot"><span>3</span></span><span>Rat bounty<small>Pages 11–15</small></span></a></li>
-<li id="r4"><a href="#part4"><span class="dot"><span>4</span></span><span>Pushback<small>Pages 16–17</small></span></a></li>
-<li id="r5"><a href="#finish"><span class="dot"><span>★</span></span><span>Turn in<small>Last step</small></span></a></li>
-</ol></nav>
+<nav class="route" aria-label="Your progress"><ol id="flipRoute"></ol></nav>
 
 <main class="gr-main gr-wrap">
 <section class="card">
@@ -48,135 +29,140 @@
 </div>
 </section>
 
-<div class="gr-layout">
-<section class="reader-panel reading" aria-label="Selected book pages">
-<div class="reader-bar"><p class="eyebrow">The reading</p><h2>Selected pages from the book</h2></div>
-<div class="reader-body">
-<p class="reader-note">Use the page numbers beside each question. If the embedded reader does not load, open the PDF in another tab.</p>
-<p class="reader-note"><a href="great-hanoi-rat-hunt-reading%20(1).pdf#page=1" target="_blank" rel="noopener">Open the reading PDF ↗</a></p>
-<iframe id="reader" title="The Great Hanoi Rat Hunt selected reading pages" src="great-hanoi-rat-hunt-reading%20(1).pdf#page=1&view=FitH"></iframe>
-</div>
+<div class="flip-layout">
+<section class="flip-reader reading" id="flipReader" aria-label="The Great Hanoi Rat Hunt">
+<div class="flip-bar"><div><p class="eyebrow">The reading</p><h2>Selected pages from the book</h2></div><span class="flip-pos" id="flipPos"></span></div>
+<div class="flip-tools"><button type="button" class="quiet" id="flipBack">← Back a page</button><span class="grow"><span id="flipPart"></span><span id="flipTimer" aria-live="polite"></span></span><button type="button" class="secondary" id="flipNext">Next page →</button><button type="button" class="quiet" id="flipZoom">Make page bigger</button></div>
+<div class="flip-stage"><img id="flipImg" alt="" src="pages/p-01.jpg"></div>
+<p class="flip-cap">Read each page. Click the page to make it bigger. <a href="great-hanoi-rat-hunt-reading%20(1).pdf" target="_blank" rel="noopener">Open all pages as a PDF ↗</a></p>
 </section>
 
 <div class="qcol">
 <section class="card">
-<h2>Your reading checks</h2>
 <label for="studentName">First name + last initial (like Jordan M.)</label><input id="studentName" maxlength="100" autocomplete="off" placeholder="First name + last initial (like Jordan M.)" required>
-<p class="status" id="progress" aria-live="polite">0 of 4 parts done</p>
 </section>
-
-<section class="card qcard question" id="part1"><span class="stamp">Done</span>
-<p class="case-tag"><span class="num">Part 1</span> Book pages 5–39 · Reader pages 1–6</p><h3>1. French plans for Hanoi</h3><button class="pageBtn" type="button" data-page="1">Go to pages ↖</button><div class="check" id="check1"></div><label class="prompt" for="answer1">What did the French want Hanoi to become, and what is one change they made to get there?</label><p class="stem">Sentence starter: <b>The French wanted Hanoi to become ___. One change they made was ___.</b></p><button class="stemBtn" type="button" data-for="answer1">Use the sentence starter</button><textarea id="answer1" placeholder="Use a detail from pages 13 or 19…"></textarea>
-</section>
-
-<section class="card qcard question" id="part2"><span class="stamp">Done</span>
-<p class="case-tag"><span class="num">Part 2</span> Book pages 47–71 · Reader pages 7–10</p><h3>2. Who paid the cost?</h3><button class="pageBtn" type="button" data-page="7">Go to pages ↖</button><div class="check" id="check2"></div><label class="prompt" for="answer2">Pick one page (47, 49, 55, or 71). What did French rule cost Vietnamese people there?</label><p class="stem">Sentence starter: <b>On page ___, French rule hurt Vietnamese people because ___.</b></p><button class="stemBtn" type="button" data-for="answer2">Use the sentence starter</button><textarea id="answer2" placeholder="Name the page and give one detail…"></textarea>
-</section>
-
-<section class="card qcard question" id="part3"><span class="stamp">Done</span>
-<p class="case-tag"><span class="num">Part 3</span> Book pages 87–98 · Reader pages 11–15</p><h3>3. The rat bounty backfires</h3><button class="pageBtn" type="button" data-page="11">Go to pages ↖</button><div class="check" id="check3"></div><label class="prompt" for="answer3">Why did French officials pay people for rat tails (a bounty, or reward), and how did the plan backfire?</label><p class="stem">Sentence starter: <b>The French paid for rat tails because ___. The plan backfired when ___.</b></p><button class="stemBtn" type="button" data-for="answer3">Use the sentence starter</button><textarea id="answer3" placeholder="Use a detail from pages 87, 94, or 96…"></textarea>
-</section>
-
-<section class="card qcard question" id="part4"><span class="stamp">Done</span>
-<p class="case-tag"><span class="num">Part 4</span> Book pages 112–113 · Reader pages 16–17</p><h3>4. French rule weakens</h3><button class="pageBtn" type="button" data-page="16">Go to pages ↖</button><div class="check" id="check4"></div><label class="prompt" for="answer4">How did Vietnamese people push back against French rule in 1945, and what does it show about how they felt?</label><p class="stem">Sentence starter: <b>In 1945, Vietnamese people pushed back by ___. This shows they felt ___.</b></p><button class="stemBtn" type="button" data-for="answer4">Use the sentence starter</button><textarea id="answer4" placeholder="Use a detail from page 112 or 113…"></textarea>
-</section>
-
+<div id="flipCards"></div>
+<div class="flip-nav"><button type="button" class="quiet" id="flipBack2">← Back</button><button type="button" class="secondary" id="flipNext2">Next page →</button><p class="flip-why" id="flipWhy" aria-live="polite"></p></div>
 <section class="card finish" id="finish">
 <h2>Turn in your work</h2>
 <div class="actions"><button id="submitBtn" class="primary" type="button">Turn in my work</button><button id="clearBtn" class="quiet" type="button">Start over</button></div><p id="submitStatus" class="status" role="status" aria-live="polite"></p><p class="reader-note">Your work saves on this device. "Start over" erases it. When you see "Turned in!", you are done.</p>
 </section>
 </div></div></main>
+<div class="flip-big" id="flipBig" hidden role="dialog" aria-label="Bigger page"><button type="button" class="quiet" id="flipBigClose">✕ Close</button><img id="flipBigImg" alt="Bigger view of the current page"></div>
 <script>
-const API="https://fynn-class-assignment-submissions-20261024.neotboy.chatgpt.site/api/submit";
-const PREFIX="hanoi-day2-";
-const fields=["studentName","answer1","answer2","answer3","answer4"];
-const questions=[
-"What did the French want Hanoi to become, and what is one change they made to get there?",
-"Pick one page (47, 49, 55, or 71). What did French rule cost Vietnamese people there?",
-"Why did French officials pay people for rat tails, and how did the plan backfire?",
-"How did Vietnamese people push back against French rule in 1945, and what does it show about how they felt?"
-];
-const stems=[
-"The French wanted Hanoi to become ___. One change they made was ___.",
-"On page ___, French rule hurt Vietnamese people because ___.",
-"The French paid for rat tails because ___. The plan backfired when ___.",
-"In 1945, Vietnamese people pushed back by ___. This shows they felt ___."
-];
-// One page-specific check per part. It must be right before the writing box opens.
-const checks=[
- {q:"Book page 31 (reader page 4): the three bottom panels name reasons countries grabbed colonies. Which list matches those panels?",
-  right:"Resources, strategic advantage, and national pride",
-  wrong:["Resources, cheap labor, and spreading Christianity","Gold mines, trade routes, and fear of Britain","Spreading religion, new farmland, and national pride"],
-  page:4,why:"Right. Page 31 gives money (resources), power (strategic advantage), and pride as reasons — the same kinds of reasons Europe had in Africa."},
- {q:"Book page 55 (reader page 9): where did Governor Doumer get the money for roads, bridges, and Hanoi's big buildings?",
-  right:"Government sales of opium, alcohol, and salt",
-  wrong:["Taxes paid by French companies in Paris","Yearly payments from the government in Paris","Selling Vietnamese rice and rubber to China"],
-  page:9,why:"Right. Doumer's state monopolies (only the government could sell them) on opium, alcohol, and salt paid for French Hanoi — and opium addiction grew."},
- {q:"Book page 96 (reader page 14): the French official is angry. What does he say people are doing to earn more bounty money?",
-  right:"Bringing in rats from the provinces and raising rats in the city",
-  wrong:["Turning in the same rat tails two or three times each day","Buying cheap rat tails from traders on ships from China","Catching rats in French homes and charging the owners twice"],
-  page:14,why:"Right. People adapted to the bounty by raising and importing rats — so the plan to get rid of rats made more rats."},
- {q:"Book page 113 (reader page 17): Ho Chi Minh quotes the American and French declarations of rights. Why does he quote them?",
-  right:"To show France broke its own ideas of liberty and equality",
-  wrong:["To thank France and America for helping Vietnam grow","To ask the United States to take over from France","To promise Vietnam would copy France's government"],
-  page:17,why:"Right. He used France's own words about freedom to argue that French rule was unjust — a form of resistance."}
-];
-const $=id=>document.getElementById(id);
-function shuffle(a){a=[...a];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
-let checkState={done:[false,false,false,false],misses:[0,0,0,0]};
-try{const c=JSON.parse(localStorage.getItem(PREFIX+"checks")||"null");if(c&&Array.isArray(c.done))checkState=c}catch(e){}
-function saveChecks(){try{localStorage.setItem(PREFIX+"checks",JSON.stringify(checkState))}catch(e){}}
-function goPage(n){$("reader").src="great-hanoi-rat-hunt-reading%20(1).pdf#page="+n+"&view=FitH";if(matchMedia("(min-width:781px)").matches)document.querySelector(".reading").scrollIntoView({behavior:"smooth",block:"start"})}
-function renderCheck(i,msg){
- const box=$("check"+(i+1)),c=checks[i],done=checkState.done[i];
- box.className="check"+(done?" done":"");box.replaceChildren();
- const q=document.createElement("p");q.className="check-q";q.textContent="Quick check: "+c.q;box.append(q);
- if(!done){
-  const list=document.createElement("div");list.className="choices";
-  shuffle([c.right,...c.wrong]).forEach(t=>{const b=document.createElement("button");b.type="button";b.className="choice";b.textContent=t;b.addEventListener("click",()=>answerCheck(i,t));list.append(b)});
-  box.append(list);
- }
- const fb=document.createElement("p");fb.className="check-fb"+(done?" ok":"");fb.setAttribute("aria-live","polite");
- fb.textContent=done?c.why:(msg||"");box.append(fb);
- $("answer"+(i+1)).disabled=!done;
- box.parentElement.querySelector(".stemBtn").disabled=!done;
- $("answer"+(i+1)).placeholder=done?$("answer"+(i+1)).dataset.ph:"Answer the quick check above to unlock this box.";
+window.FLIP={
+title:"The Great Hanoi Rat Hunt",prefix:"hanoi-day2-",pages:17,readSeconds:8,lockSeconds:0,
+assignmentId:"day-2-hanoi-rat-hunt",api:"https://fynn-class-assignment-submissions-20261024.neotboy.chatgpt.site/api/submit",
+lockedText:"Answer the quick check above to unlock this box.",
+clearConfirm:"Start over? This erases your answers on this device.",
+successText:"Turned in! Your work was sent to your teacher. You're done.",
+wrongText:(c)=>"Not yet. Look at reader page "+c.page+" again — the choices moved.",
+clearExtra:["checks"],
+// Old saves stored all four checks together; carry them over so returning students keep their progress.
+migrate(ls){try{const c=JSON.parse(ls.get("checks")||"null");if(c&&Array.isArray(c.done))c.done.forEach((d,i)=>{if(d&&ls.get("check"+(i+1))!=="1"){ls.set("check"+(i+1),"1");ls.set("tries"+(i+1),String((c.misses&&c.misses[i]||0)+1))}});}catch(e){}},
+parts:[
+{
+"short": "French plans",
+"ref": "Book pages 5–39 · Reader pages 1–6",
+"title": "1. French plans for Hanoi",
+"from": 1,
+"to": 6,
+"check": {
+"page": 4,
+"tag": "Quick check · Reader page 4",
+"q": "Book page 31 (reader page 4): the three bottom panels name reasons countries grabbed colonies. Which list matches those panels?",
+"right": "Resources, strategic advantage, and national pride",
+"wrong": [
+"Resources, cheap labor, and spreading Christianity",
+"Gold mines, trade routes, and fear of Britain",
+"Spreading religion, new farmland, and national pride"
+],
+"why": "Right. Page 31 gives money (resources), power (strategic advantage), and pride as reasons — the same kinds of reasons Europe had in Africa."
+},
+"prompt": "What did the French want Hanoi to become, and what is one change they made to get there?",
+"stem": "Sentence starter: <b>The French wanted Hanoi to become ___. One change they made was ___.</b>",
+"stemText": "The French wanted Hanoi to become ___. One change they made was ___.",
+"placeholder": "Use a detail from pages 13 or 19…"
+},
+{
+"short": "The cost",
+"ref": "Book pages 47–71 · Reader pages 7–10",
+"title": "2. Who paid the cost?",
+"from": 7,
+"to": 10,
+"check": {
+"page": 9,
+"tag": "Quick check · Reader page 9",
+"q": "Book page 55 (reader page 9): where did Governor Doumer get the money for roads, bridges, and Hanoi's big buildings?",
+"right": "Government sales of opium, alcohol, and salt",
+"wrong": [
+"Taxes paid by French companies in Paris",
+"Yearly payments from the government in Paris",
+"Selling Vietnamese rice and rubber to China"
+],
+"why": "Right. Doumer's state monopolies (only the government could sell them) on opium, alcohol, and salt paid for French Hanoi — and opium addiction grew."
+},
+"prompt": "Pick one page (47, 49, 55, or 71). What did French rule cost Vietnamese people there?",
+"stem": "Sentence starter: <b>On page ___, French rule hurt Vietnamese people because ___.</b>",
+"stemText": "On page ___, French rule hurt Vietnamese people because ___.",
+"placeholder": "Name the page and give one detail…"
+},
+{
+"short": "Rat bounty",
+"ref": "Book pages 87–98 · Reader pages 11–15",
+"title": "3. The rat bounty backfires",
+"from": 11,
+"to": 15,
+"check": {
+"page": 14,
+"tag": "Quick check · Reader page 14",
+"q": "Book page 96 (reader page 14): the French official is angry. What does he say people are doing to earn more bounty money?",
+"right": "Bringing in rats from the provinces and raising rats in the city",
+"wrong": [
+"Turning in the same rat tails two or three times each day",
+"Buying cheap rat tails from traders on ships from China",
+"Catching rats in French homes and charging the owners twice"
+],
+"why": "Right. People adapted to the bounty by raising and importing rats — so the plan to get rid of rats made more rats."
+},
+"prompt": "Why did French officials pay people for rat tails (a bounty, or reward), and how did the plan backfire?",
+"stem": "Sentence starter: <b>The French paid for rat tails because ___. The plan backfired when ___.</b>",
+"stemText": "The French paid for rat tails because ___. The plan backfired when ___.",
+"placeholder": "Use a detail from pages 87, 94, or 96…"
+},
+{
+"short": "Pushback",
+"ref": "Book pages 112–113 · Reader pages 16–17",
+"title": "4. French rule weakens",
+"from": 16,
+"to": 17,
+"check": {
+"page": 17,
+"tag": "Quick check · Reader page 17",
+"q": "Book page 113 (reader page 17): Ho Chi Minh quotes the American and French declarations of rights. Why does he quote them?",
+"right": "To show France broke its own ideas of liberty and equality",
+"wrong": [
+"To thank France and America for helping Vietnam grow",
+"To ask the United States to take over from France",
+"To promise Vietnam would copy France's government"
+],
+"why": "Right. He used France's own words about freedom to argue that French rule was unjust — a form of resistance."
+},
+"prompt": "How did Vietnamese people push back against French rule in 1945, and what does it show about how they felt?",
+"stem": "Sentence starter: <b>In 1945, Vietnamese people pushed back by ___. This shows they felt ___.</b>",
+"stemText": "In 1945, Vietnamese people pushed back by ___. This shows they felt ___.",
+"placeholder": "Use a detail from page 112 or 113…"
 }
-function answerCheck(i,t){
- if(t===checks[i].right){checkState.done[i]=true;saveChecks();renderCheck(i);$("answer"+(i+1)).focus()}
- else{checkState.misses[i]++;saveChecks();renderCheck(i,"Not yet. Look at reader page "+checks[i].page+" again — the choices moved.");$("check"+(i+1)).querySelector(".choice")?.focus()}
- save();
-}
-function wordsOk(v){return !/_{2,}/.test(v)&&v.trim().split(/\s+/).filter(Boolean).length>=10}
-function partDone(i){return checkState.done[i-1]&&wordsOk($("answer"+i).value)}
-function save(){fields.forEach(id=>{try{localStorage.setItem(PREFIX+id,$(id).value)}catch(e){}});$("progress").textContent=[1,2,3,4].filter(partDone).length+" of 4 parts done"}
-fields.forEach(id=>{const field=$(id);field.value=localStorage.getItem(PREFIX+id)||"";field.addEventListener("input",save)});
-[1,2,3,4].forEach(i=>{$("answer"+i).dataset.ph=$("answer"+i).placeholder});
-checks.forEach((c,i)=>renderCheck(i));
-save();
-(function welcome(){const n=[1,2,3,4].filter(partDone).length,any=checkState.done.some(Boolean)||[1,2,3,4].some(i=>$("answer"+i).value.trim());if(!any)return;const next=[1,2,3,4].find(i=>!partDone(i));const box=document.createElement("div");box.className="welcome";box.setAttribute("role","status");box.textContent=next?"Welcome back! "+n+" of 4 parts are done. You're on part "+next+".":"Welcome back! All 4 parts are done. Press Turn in when you're ready.";document.querySelector("main").prepend(box)})();
-document.querySelectorAll(".pageBtn").forEach(button=>button.addEventListener("click",()=>goPage(button.dataset.page)));
-document.querySelectorAll(".stemBtn").forEach(b=>b.addEventListener("click",()=>{const t=$(b.dataset.for),stem=stems[Number(b.dataset.for.slice(-1))-1];if(t.disabled)return;if(!t.value.trim())t.value=stem;else if(!t.value.includes(stem))t.value=stem+" "+t.value;t.focus();const k=t.value.indexOf("___");if(k>=0)t.setSelectionRange(k,k+3);save()}));
-$("clearBtn").addEventListener("click",()=>{if(!confirm("Start over? This erases your answers on this device."))return;fields.forEach(id=>{$(id).value="";localStorage.removeItem(PREFIX+id)});localStorage.removeItem(PREFIX+"checks");checkState={done:[false,false,false,false],misses:[0,0,0,0]};checks.forEach((c,i)=>renderCheck(i));save();$("submitStatus").textContent="Your work was cleared."});
-$("submitBtn").addEventListener("click",async()=>{const name=$("studentName").value.trim(),status=$("submitStatus"),button=$("submitBtn");status.className="status";
-if(!name||!/ [A-Z]\.$/.test(window.classShortName?window.classShortName(name):name)){status.textContent="Type your first name + last initial (like Jordan M.).";status.classList.add("error");$("studentName").focus();return}
-const missing=[1,2,3,4].find(i=>!partDone(i));
-if(missing){status.textContent=!checkState.done[missing-1]?"Finish the quick check in part "+missing+" first.":"Part "+missing+" needs a full answer: fill in every ___ and write at least 10 words.";status.classList.add("error");$("part"+missing).scrollIntoView({behavior:"smooth",block:"center"});return}
-for(const i of [1,2,3,4]){const j=window.classJunkStop&&window.classJunkStop($("answer"+i));if(j){status.textContent="Part "+i+": "+j;return}}
-const answers={"Standard":"SS.9-12.WH.27, SS.9-12.WH.24","First-try correct":checkState.misses.filter(m=>!m).length+" of 4"};
-questions.forEach((q,i)=>{answers[q]=$("answer"+(i+1)).value.trim()});
-
-button.disabled=true;status.textContent="Sending your work…";
-try{const response=await classTurnIn(API,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({studentName:name,assignmentId:"day-2-hanoi-rat-hunt",answers})});const result=await response.json();if(!response.ok)throw new Error(result.error||"Could not send your work.");status.textContent="Turned in! Your work was sent to your teacher. You're done.";status.classList.add("success");button.textContent="Turned in ✓"}catch(err){status.textContent=err instanceof Error?err.message:"Could not turn in your work. Try again.";status.classList.add("error");button.disabled=false}});
+],
+questions:["What did the French want Hanoi to become, and what is one change they made to get there?", "Pick one page (47, 49, 55, or 71). What did French rule cost Vietnamese people there?", "Why did French officials pay people for rat tails, and how did the plan backfire?", "How did Vietnamese people push back against French rule in 1945, and what does it show about how they felt?"],
+validate(s){const wordsOk=v=>!/_{2,}/.test(v)&&v.trim().split(/\s+/).filter(Boolean).length>=10;
+ if(!s.name||!/ [A-Z]\.$/.test(window.classShortName?window.classShortName(s.name):s.name))return{text:"Type your first name + last initial (like Jordan M.).",focus:"studentName"};
+ const m=[1,2,3,4].find(i=>!(s.checkDone(i)&&wordsOk(s.answer(i))));
+ if(m)return{text:!s.checkDone(m)?"Finish the quick check in part "+m+" first.":"Part "+m+" needs a full answer: fill in every ___ and write at least 10 words.",part:m};
+ for(const i of [1,2,3,4]){const j=window.classJunkStop&&window.classJunkStop(document.getElementById("answer"+i));if(j)return{text:"Part "+i+": "+j,part:i}}return null},
+buildAnswers(s){const a={"Standard":"SS.9-12.WH.27, SS.9-12.WH.24","First-try correct":[1,2,3,4].filter(i=>(s.tries(i)||1)===1).length+" of 4"};
+ this.questions.forEach((q,i)=>{a[q]=s.answer(i+1)});return a}
+};
 </script>
-<script>
-// Progress route: lights up each part as it is finished (display only — grading logic above is unchanged).
-(function(){
-  function updateRoute(){for(let i=1;i<=4;i++){const d=partDone(i);document.getElementById("r"+i).classList.toggle("done",d);document.getElementById("part"+i).classList.toggle("is-done",d)}
-    document.getElementById("r5").classList.toggle("done",/Turned in/.test(document.getElementById("submitBtn").textContent))}
-  ["click","input","change"].forEach(t=>document.addEventListener(t,()=>setTimeout(updateRoute,60)));
-  new MutationObserver(updateRoute).observe(document.getElementById("submitStatus"),{childList:true,characterData:true,subtree:true});
-  updateRoute();
-})();
-</script>
+<script src="../shared/flip-reader.js?v=1"></script>
 </body></html>
