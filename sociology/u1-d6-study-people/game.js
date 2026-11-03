@@ -1,628 +1,553 @@
 // =====================================================================
 //  RESEARCH RIVALS  (Sociology · Unit 1 · Day 6 · How Should We Study People?)
-//  You run Cedar River Research Co. Each client brings a question about people.
-//  Play the METHOD CARD that fits (survey, interview, observation, experiment,
-//  content analysis), then pick how to run it. A wrong card = a garbage report.
-//  A flawed setup = a shaky report your rival Blake (Hot Take) mocks.
+//  Rework 2026-11-03 (Fynn: "they won't get this one at all"). Picks up Day 5's story:
+//  same coach (Dr. Ruiz), same rival (Kai), same 4 teen topics.
 //
-//  Trim pass 2026-11-03 (Fynn: "confusing, a lot going on"):
-//   - 4 jobs (was 6), 2 screens per job (was 4): ~11 screens total (was 24).
-//     All 5 methods still taught: Job 1 survey, Job 2 observation,
-//     Job 3 experiment, Job 4 = content analysis + interviews (mixed methods).
-//   - One meter: Reputation. Money, days, and rival hype are gone.
-//   - Cards say what a method IS, not which question it answers.
-//   - Plan choices are two believable setups (no "free vs careful" giveaway);
-//     the flawed one isn't always the quick-looking one.
-//   - Every job runs the same way: pick → plan → results + evidence check.
-//   - Wrong-answer wait: 2 seconds (was 5).
+//  6 steps:
+//   1 Pick   — keep your Day 5 topic (or pick one)
+//   2 Try    — run all 5 research tools on YOUR topic; each shows what it found + what it can't tell you
+//   3 Match  — match each tool to the question it answers (check)
+//   4 Clients— 3 new local questions: pick the right tool (3 checks; wrong tools show what you'd get)
+//   5 Ethics — permission + privacy check, then a paid temptation to stretch results
+//   6 Finale — Kai asks HOW MANY and WHY about your topic: play 2 tools (mixed methods, check)
+//  then the ending + 2 short written answers. 6 checks total. Saves on this device.
+//  Turn-in goes through shared/turnin.js (same assignment id and payload shape as before).
+//  All people, clients and numbers are made up.
 // =====================================================================
 (function () {
   "use strict";
-
-  const KEY = "soc-u1-d6-study-people-v3";
+  const KEY = "soc-u1-d6-study-people-v4";
+  const D5_KEY = "soc-u1-d5-prove-hot-take-v4";
   const ASSIGNMENT_ID = "soc-u1-d6-study-people";
   const TITLE = "Sociology · Unit 1 · Day 6 · How Should We Study People?";
   const STANDARD = "SS.9-12.Soc.1, SS.9-12.Soc.3";
   const OLD_API = "https://fynn-class-assignment-submissions-20261024.neotboy.chatgpt.site/api/submit";
-  const LOCK = 2;
-  const TOTAL_STEPS = 10;   // 4 jobs × 2 screens + ending + report
+  const LOCK = 2, TOTAL = 6;
 
   const $ = id => document.getElementById(id);
   const esc = s => String(s == null ? "" : s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
-  const shuffle = a => { const b = a.slice(); for (let i = b.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [b[i], b[j]] = [b[j], b[i]]; } return b; };
+  function shuffle(a) { const b = a.slice(); for (let i = b.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [b[i], b[j]] = [b[j], b[i]]; } return b; }
   const isEs = () => !!(window.SiteLang && window.SiteLang.isEs());
-  const tr = s => (isEs() ? window.SiteLang.t(s) : s);
+  const tr = s => (window.SiteLang ? window.SiteLang.t(s) : s);
 
-  // ---------------- The method cards: what each one IS ----------------
-  const ORDER = ["survey", "interview", "observe", "experiment", "content"];
-  const M = {
-    survey:     { icon: "📋", name: "Survey", d: "Same questions to lots of people" },
-    interview:  { icon: "🎙️", name: "Interview", d: "Long talks with follow-up questions" },
-    observe:    { icon: "👀", name: "Observation", d: "Watch people in a real place" },
-    experiment: { icon: "🧪", name: "Experiment", d: "Change one thing, compare two groups" },
-    content:    { icon: "📺", name: "Content Analysis", d: "Count what shows up in media" }
+  // ---------------- The 5 tools ----------------
+  const TOOLS = ["survey", "interview", "observe", "experiment", "content"];
+  const TOOL = {
+    survey: { ic: "📋", name: "Survey", what: "Same questions to lots of people", answers: "How many? How common?" },
+    interview: { ic: "🎙️", name: "Interview", what: "Long talks with follow-up questions", answers: "Why? In their own words" },
+    observe: { ic: "👀", name: "Observation", what: "Watch what people do in a real place", answers: "What do people actually do?" },
+    experiment: { ic: "🧪", name: "Experiment", what: "Change one thing, compare two groups", answers: "Does one thing cause another?" },
+    content: { ic: "📺", name: "Content analysis", what: "Count what shows up in media", answers: "What does media show?" }
   };
 
-  // ---------------- Little drawing helpers ----------------
-  const bars = (rows, note) => `<div class="bars">${rows.map(r => `<div class="brow"><span class="bl">${r[0]}</span><span class="bt"><i style="width:${Math.min(100, r[2] || r[1])}%"></i></span><b class="bv">${r[3] || r[1] + "%"}</b></div>`).join("")}</div><p class="madeup">${note || "Made-up game data"}</p>`;
-  const quote = q => `<blockquote class="quote">${q}</blockquote>`;
-  const reposts = likes => { const l = String(likes || "1.2K"), n = parseFloat(l) * (/K$/i.test(l) ? 1000 : 1), r = Math.round(n * 0.28); return r >= 1000 ? (r / 1000).toFixed(1).replace(/\.0$/, "") + "K" : String(r); };
-  const post = (txt, likes) => `<div class="post"><div class="p-ava" aria-hidden="true">🔥</div><div class="p-body"><div class="p-head"><b>Blake</b> <span class="handle">@HotTake</span></div><p class="p-text">${txt}</p><div class="p-meta" aria-hidden="true">❤️ ${likes || "1.2K"} · 🔁 ${reposts(likes)}</div></div></div>`;
-  const quiet = () => `<div class="post quiet"><div class="p-ava" aria-hidden="true">😤</div><div class="p-body"><div class="p-head"><b>Blake</b></div><p class="p-text">ok… can't even roast this one 😤</p></div></div>`;
-  const say = (av, who, txt, cls) => `<div class="say ${cls || ""}"><span class="say-ava" aria-hidden="true">${av}</span><div class="say-b"><span class="say-n">${who}</span><p>${txt}</p></div></div>`;
-  const unlock = html => `<div class="unlock"><span class="u-ic" aria-hidden="true">💡</span><div><p class="u-tag">Concept unlocked</p><p class="u-txt">${html}</p></div></div>`;
+  // ---------------- The 4 topics (same as Day 5) ----------------
+  // r = what each tool finds on this topic (made up); no = what it can't tell you.
+  const TOPICS = {
+    sleep: { ic: "📱", name: "Phones & sleep", take: "Scrolling till 2 a.m. doesn't mess up your sleep 😤",
+      r: {
+        survey: { found: "You surveyed 300 students. <b>41%</b> are on their phone after midnight most nights.", no: "WHY they stay up." },
+        interview: { found: "“After my shift, my phone is the only time I get to talk to my friends.”", no: "How many students feel that way." },
+        observe: { found: "At the 7 a.m. bus stop, <b>9 of 14</b> kids were on their phones and 3 were half asleep.", no: "What they did last night, or why." },
+        experiment: { found: "Half the kids (we flipped a coin for each one) left phones in the kitchen for a week. That group slept <b>40 min more</b>.", no: "Lots of kids won't agree to give up their phone, so it's hard to run." },
+        content: { found: "You counted 100 TikToks about sleep. <b>62</b> joked about “running on no sleep.”", no: "Whether real teens actually sleep that little." }
+      } },
+    jobs: { ic: "💼", name: "Jobs & grades", take: "Having a job tanks your grades. Facts 💯",
+      r: {
+        survey: { found: "You surveyed 300 students. <b>38%</b> work during the school year.", no: "WHY they work, or how it feels." },
+        interview: { found: "“I close at Casey's on school nights. My family needs the money, so homework waits.”", no: "How many students are in the same spot." },
+        observe: { found: "In 1st-period study hall, <b>11 of 25</b> students had their heads down.", no: "Why they're tired, or whether they work." },
+        experiment: { cant: true, found: "You can't flip a coin to decide which teens get jobs. That would mess with real people's lives.", no: "Some questions can't be tested this way. It wouldn't be fair or safe." },
+        content: { found: "You counted 80 “Now Hiring” posts. <b>55</b> said “flexible hours for students.”", no: "How working actually affects grades." }
+      } },
+    social: { ic: "📸", name: "Social media & mood", take: "Social media makes everybody miserable 😭",
+      r: {
+        survey: { found: "You surveyed 300 students. <b>1 in 3</b> spend 3+ hours a day on social media.", no: "WHY they scroll, or how it feels." },
+        interview: { found: "“I scroll when I'm bored. Then I see everyone's perfect life and feel worse.”", no: "How many students feel that way." },
+        observe: { found: "In the lunchroom, <b>23 of 40</b> students were on their phones instead of talking.", no: "How they feel, or why." },
+        experiment: { found: "Half the kids (we flipped a coin for each one) took a 1-week social media break. Kids on the break felt a little happier.", no: "Whether it lasts, and some kids quit the break early." },
+        content: { found: "You counted 100 posts from teen accounts. <b>70</b> showed only the best parts of people's lives.", no: "How the people looking at them actually feel." }
+      } },
+    sports: { ic: "🏀", name: "Sports & grades", take: "Athletes don't care about school lol 🏈",
+      r: {
+        survey: { found: "You surveyed 300 students. <b>45%</b> play a school sport.", no: "WHY they play, or how they balance school." },
+        interview: { found: "“Coach checks our grades every week. If I fail, I sit.”", no: "How many athletes say the same thing." },
+        observe: { found: "At the after-practice study table, <b>18 of 20</b> players were doing homework.", no: "What their grades are, or why." },
+        experiment: { cant: true, found: "You can't flip a coin to make kids join or quit a team. It wouldn't be fair.", no: "Some questions can't be tested this way. It wouldn't be fair or safe." },
+        content: { found: "You counted 60 local sports articles. <b>Only 4</b> mentioned players' schoolwork.", no: "What athletes are actually like in class." }
+      } }
+  };
+  const TOPIC_ORDER = ["sleep", "jobs", "social", "sports"];
 
-  // ---------------- The four jobs ----------------
-  // setup: two believable plans. good = the sound one. The screen shuffles them.
-  const JOBS = [
-    { id: "j1", icon: "🧑‍💼", who: "Linn County Jobs Center", best: "survey",
-      ask: "What percent of teens here have a school-year job?",
-      fits: {
-        interview: { fit: "wrong", text: "8 teens, great stories. But what PERCENT work? 8 people can't tell you." },
-        observe: { fit: "wrong", text: "You saw 6 teens at one drive-thru. That's not the whole county." },
-        experiment: { fit: "wrong", text: "What would you change? You can't assign teens jobs. Nothing to test." },
-        content: { fit: "wrong", text: "140 \"Now Hiring\" posts show open jobs, not teens who work." }
-      },
-      setup: {
-        good: { icon: "📝", title: "Paper survey in 2nd period", sub: "Every class, every grade." },
-        bad: { icon: "📲", title: "Link on the school Instagram", sub: "Teens are online all night." }
-      },
-      solid: { data: () => bars([["Have a job", 38], ["No job", 62]]), text: "1,140 teens answered, from every grade.",
-        reveal: "<b>Survey</b> = same questions, many people. Shows <b>how common</b> something is." },
-      shaky: { data: () => bars([["Have a job", 19], ["No job", 81]]), text: "Only 210 teens answered. Most were 9th graders.",
-        rival: "Cedar River surveyed kids who follow the SCHOOL Instagram. Who does that? 🤡",
-        reveal: "<b>Sampling bias</b>: school Instagram followers aren't all teens. Who got left out?" },
-      check: "c1",
-      logSolid: "Survey reached every class", logShaky: "Instagram link: sampling bias"
-    },
-    { id: "j2", icon: "🍕", who: "Prairie Ridge lunch manager", best: "observe",
-      ask: "Where do the lunch lines really back up, and when?",
-      fits: {
-        survey: { fit: "ok", data: () => bars([["Pizza line", 58], ["Card reader", 30], ["Salad bar", 12]], "Where students SAY it's worst · made-up game data"),
-          rival: "Cedar River asked kids where the line is. Bro, just go LOOK. 👀",
-          reveal: "When the question is what people <b>do</b>, watch them: <b>observation</b>." },
-        interview: { fit: "wrong", text: "3 long talks about lunch feelings. Nobody knows which minute it jams." },
-        experiment: { fit: "wrong", text: "You moved the salad bar before finding the jam. Now it's worse." },
-        content: { fit: "wrong", text: "Lots of pizza pics online. Zero line data." }
-      },
-      setup: {
-        good: { icon: "🪑", title: "Sit by the door all week", sub: "Quiet, from the same spot." },
-        bad: { icon: "📋", title: "Clipboard at the card reader", sub: "Up close for 2 lunches." }
-      },
-      solid: { data: () => bars([["Card reader", 31, 100, "31"], ["Pizza line", 12, 39, "12"], ["Salad bar", 3, 10, "3"]], "Students in line at 11:40 · made-up game data"), text: "The jam: ONE card reader at 11:40.",
-        reveal: "<b>Observation</b> = watching what people <b>actually do</b>, in a real place." },
-      shaky: { data: () => bars([["Card reader", 8, 26, "8"], ["Pizza line", 9, 29, "9"], ["Salad bar", 3, 10, "3"]], "Students in line at 11:40 · made-up game data"), text: "Lines looked fine. The lunch worker says that's not normal.",
-        rival: "Our lunch lines are \"fine\"? Has Cedar River MET teenagers? 😂",
-        reveal: "People behaved because they saw you watching. 2 days wasn't enough." },
-      check: "c4",
-      logSolid: "Watched all week", logShaky: "Clipboard: people acted different", logOk: "Survey for a DO question"
-    },
-    { id: "j3", icon: "📱", who: "StudyStreak homework app", best: "experiment",
-      ask: "Does our app raise test scores? We need proof.",
-      fits: {
-        survey: { fit: "ok", data: () => bars([["Users who say it helps", 92]]),
-          rival: "\"92% say it works!\" My cousin says he's 6'5\". 📏",
-          reveal: "Proving a <b>cause</b> takes an <b>experiment</b> with a control group." },
-        interview: { fit: "wrong", text: "5 users loved the confetti. Stories don't prove scores went up." },
-        observe: { fit: "wrong", text: "Lots of tapping. Still no idea if scores changed." },
-        content: { fit: "wrong", text: "Their ads say \"Ace your test!\" That's a claim, not proof." }
-      },
-      setup: {
-        good: { icon: "🎲", title: "Random half get the app", sub: "The other half don't. Parents sign permission." },
-        bad: { icon: "🙋", title: "Kids who want it get it", sub: "Compare them to everyone else. Parents sign permission." }
-      },
-      solid: { data: () => bars([["App: before", 72, 72, "72"], ["App: after", 76, 76, "76"], ["No app: before", 72, 72, "72"], ["No app: after", 75, 75, "75"]], "Average test score · made-up game data"), text: "Both groups' scores are in.",
-        reveal: "<b>Experiment</b> = change one thing and compare to a <b>control group</b>." },
-      shaky: { data: () => bars([["Chose the app: before", 74, 74, "74"], ["Chose the app: after", 81, 81, "81"], ["Everyone else: before", 70, 70, "70"], ["Everyone else: after", 72, 72, "72"]], "Average test score · made-up game data"), text: "App kids went up 7. Everyone else went up 2.",
-        rival: "Kids who BEG for a homework app? Bet they were acing tests anyway. 🤔",
-        reveal: "Groups must start out the same. Picking at <b>random</b> does that." },
-      check: "c5", bonus: true,
-      logSolid: "Random groups + permission", logShaky: "Volunteers vs. everyone: unfair groups", logOk: "Survey for a CAUSE question"
-    },
-    { id: "j4", icon: "🩺", who: "Iowa Teen Health Group", final: true,
-      ask: "What do energy-drink ads show teens, and why do teens say they buy them?",
-      check: "c2"
-    }
+  // ---------------- Step 3: match ----------------
+  const MATCH_QS = [
+    { q: "How many students do this?", a: "survey" },
+    { q: "Why do they do it?", a: "interview" },
+    { q: "What do people actually do?", a: "observe" },
+    { q: "Does one thing cause another?", a: "experiment" },
+    { q: "What does media show?", a: "content" }
   ];
 
-  // ---------------- Evidence checks (first option is right; screen shuffles) ----------------
-  const CHECKS = {
-    c1: { std: "Soc.1", short: "1936 poll = biased sample",
-      evidence: () => `<div class="casefile"><p class="cf-tag">📁 Real case, 1936</p><ul class="facts"><li><span aria-hidden="true">📬</span> <span>Mailed 10 million ballots; about 2.4 million came back</span></li><li><span aria-hidden="true">🔮</span> <span>Predicted winner: Landon</span></li><li><span aria-hidden="true">🗳️</span> <span>Roosevelt won 46 of 48 states</span></li><li><span aria-hidden="true">📒</span> <span>Names from phone books + car records</span></li><li><span aria-hidden="true">🚫</span> <span>Many poorer voters had neither</span></li></ul><p class="src">Source: Literary Digest poll, fall 1936; Salganik, <i>Bit by Bit</i> (2018).</p></div>`,
-      asker: ["👩🏽‍💻", "Dee, your partner"], prompt: "This real poll went badly wrong. Why?",
-      options: ["Its sample didn't match all voters", "It asked too few people", "Voters changed their minds late", "Its ballots went out too early"],
-      hint: "Who had no phone or car?",
-      why: "<b>Sampling bias</b>: who you ask matters more than how many." },
-    c4: { std: "Soc.3", short: "Hawthorne effect: people act different when watched",
-      evidence: () => `<div class="notes"><p class="cf-tag">📓 Another researcher's field notes (made up)</p><p><b>Day 1:</b> Clipboard out. Lines neat. Lunch worker: "They're never this good."</p><p><b>Day 4:</b> Nobody notices me. Card-reader line hits the door.</p></div>`,
-      asker: ["👩🏽‍💻", "Dee, your partner"], prompt: "What problem do these notes show?",
-      options: ["People act different when watched", "Too crowded to count anyone", "Students lied on a survey", "Observation only works one day"],
-      hint: "Compare Day 1 and Day 4.",
-      why: "<b>Hawthorne effect</b>: people act different when they know they're watched.",
-      fact: "Named for 1920s studies at the Hawthorne Works factory near Chicago." },
-    c5: { asker: ["💼", "The investors"], std: "Soc.1", short: "Control group shows if a change caused the result",
-      // Two versions: one for players who used random groups, one for players who didn't.
-      variants: {
-        A: { evidence: () => `<p class="madeup">👆 Use your results chart above.</p>`,
-          prompt: "What do your two groups show?",
-          options: ["Both rose, so the app added little", "The app added four whole points", "The app made the other group worse", "Only the app group got better"],
-          hint: "Look at BOTH groups. Did the no-app group rise too?" },
-        B: { evidence: () => `<p class="madeup">👆 Use your results chart above.</p>` + post("Kids who CHOSE the app started higher. Fair fight? 🧪❌", "4.0K"),
-          prompt: "Blake has a point. Why is this not proof?",
-          options: ["The groups weren't the same at the start", "Seven points is too small to matter", "Test scores can't be measured fairly", "Too many students used the app"],
-          hint: "Look at the BEFORE scores. Did both groups start the same?" },
-        C: { evidence: () => bars([["Users who say it helps", 92]], "Your survey · made-up game data") + post("92% of users LIKE it. Did anyone check scores? 🧪❌", "4.0K"),
-          prompt: "Why doesn't \"92% say it helps\" prove the app works?",
-          options: ["Nobody compared them to kids without it", "92% is too high to be believable", "Surveys aren't allowed to ask about apps", "Too many users answered the survey"],
-          hint: "To prove the app did it, who would you compare users to?" }
-      },
-      // C: the player ran a survey instead of an experiment
-      why: "<b>Control group</b>: a same-start group with no change. Only then can you prove <b>cause</b>." },
-    c2: { std: "Soc.3", short: "Content analysis can't show what creators meant",
-      evidence: () => post("LOL an ad count PROVES drink companies WANT teens to party! 🎉", "2.1K"),
-      asker: ["👩🏽‍💻", "Dee, your partner"], prompt: "Let's reply. What can an ad count NOT tell you?",
-      options: ["What the ad makers meant", "How often each ad type appeared", "Which kinds of teens were shown", "How many ads were counted"],
-      hint: "A count shows what's IN ads, not in heads.",
-      why: "Content analysis shows messages, <b>not what creators meant</b>." }
-  };
-  const CHECK_IDS = ["c1", "c4", "c5", "c2"];
-
-  // ---------------- Writing ----------------
-  const PROMPTS = [
-    { id: "method", short: "My question, method, strength, and limit",
-      label: "1. Pitch a study about teen life.",
-      stem: "I'd study ___. I'd use ___ because ___. One limit is ___.",
-      min: 80, newWords: 6,
-      mustAll: [["survey", "interview", "observ", "experiment", "content analysis", "content", "ads", "media"], ["limit", "but", "however", "slow", "small", "watched", "lie", "honest", "cost", "can't", "cannot", "weak", "although", "fake", "time", "bias", "random"]],
-      mustMsg: "Answer 1: name a method AND one limit." },
-    { id: "mixed", short: "Why two methods beat one",
-      label: "2. Why use an ad count AND interviews?",
-      stem: "Both are stronger: the ad count shows ___, and interviews show ___.",
-      min: 60, newWords: 4,
-      mustAll: [["show", "ads", "ad ", "media", "message", "count", "athlete", "gamer", "party", "what", "how many", "how often", "percent", "%", "pattern"], ["why", "reason", "story", "stories", "feel", "detail", "explain", "think", "cause", "because"]],
-      mustMsg: "Answer 2: say what the ad count shows AND what interviews show (why)." }
+  // ---------------- Step 4: clients (made up) ----------------
+  const CLIENTS = [
+    { id: "c_casey", ic: "⛽", who: "Casey's store manager", ask: "We moved the pizza warmer by the door. Do customers stop and look, or walk right past it?", best: "observe",
+      wrong: { survey: "Customers said they “always check it out.” Then you watched: most walked right past. People don't always do what they say.",
+        interview: "3 long talks about pizza feelings. Still no idea how many people stop.",
+        experiment: "You'd have to move the warmer around for weeks. The manager just wants to know what's happening now.",
+        content: "You counted pizza posts online. That's not this store." },
+      why: "<b>Observation</b>: when you want to know what people actually DO, watch them." },
+    { id: "c_counselor", ic: "🏫", who: "Linn-Mar school counselor", ask: "Some juniors stop coming after winter break. I need to know why.", best: "interview",
+      wrong: { survey: "Top answer: “Other.” A checkbox can't explain a real reason.",
+        observe: "You watched the hallway. The kids who stopped coming weren't there.",
+        experiment: "You can't make students drop out to compare. That would hurt people.",
+        content: "The school's posts show pep rallies. Nothing about why kids leave." },
+      why: "<b>Interview</b>: talk and ask follow-ups to find the real reasons." },
+    { id: "c_city", ic: "🚌", who: "Marion city council", ask: "If we give teens a free bus pass, will they miss less school because of it?", best: "experiment",
+      wrong: { survey: "Teens said a bus pass “would help.” Saying isn't proof it works.",
+        interview: "Great stories about bad bus routes. Still not proof a pass changes attendance.",
+        observe: "You watched the bus stop. Nobody had the pass yet, so there's nothing to compare.",
+        content: "You counted bus ads. They tell you nothing about attendance." },
+      why: "<b>Experiment</b>: flip a coin to decide who gets the pass, then compare the two groups." }
   ];
 
   // ---------------- State ----------------
-  const fresh = () => ({ v: 3, name: "", started: false, job: 0, phase: "pick", tried: {}, lastGarbage: {}, pick: {}, setup: {}, fit: {}, order: {},
-    checks: {}, bonus: null, finalSel: [], finalPick: null, finalFit: null, leak: false, ending: null,
-    rep: 6, log: [], writing: {}, turnedIn: false });
+  const fresh = () => ({ v: 4, name: "", step: 0, topic: null, fromD5: false, tried: [], open: null, match: {}, clientPick: {}, deal: null, finalSel: [], checks: {}, writing: {}, turnedIn: false, atReport: false });
   let st;
   try { st = JSON.parse(localStorage.getItem(KEY)); } catch (e) {}
-  if (!st || typeof st !== "object" || st.v !== 3) st = fresh();
-  // Shared Chromebooks: if a different student is signed in on this device now, don't show the last kid's game or writing.
-  try {
-    const who = window.classShortName ? window.classShortName(localStorage.getItem("site-student-name") || "") : "";
-    if (st.started && who && st.name && who.toLowerCase() !== st.name.toLowerCase()) st = fresh();
-  } catch (e) {}
+  if (!st || st.v !== 4) st = fresh();
   const save = () => { try { localStorage.setItem(KEY, JSON.stringify(st)); } catch (e) {} };
-  const clampRep = () => { st.rep = Math.max(1, Math.min(10, st.rep)); };
-  const addLog = (job, text, delta, kind) => st.log.push({ job, text, delta, kind: kind || (String(delta).indexOf("−") === 0 ? "down" : "up") });
+  const chk = id => (st.checks[id] = st.checks[id] || { wrong: 0, done: false });
+  const T = () => TOPICS[st.topic];
+  function day5Topic() { try { const d = JSON.parse(localStorage.getItem(D5_KEY)); return d && TOPICS[d.topic] ? d.topic : null; } catch (e) { return null; } }
 
-  let locked = false, lockTimer = null, anim = true, justSolved = null;
+  const CHECK_IDS = ["q_match", "c_casey", "c_counselor", "c_city", "q_ethics", "q_mixed"];
+  const SHORT = { q_match: "Match each tool to its question", c_casey: "Casey's: do customers stop at the pizza warmer?", c_counselor: "Counselor: why juniors stop coming", c_city: "City: does a bus pass cause better attendance?", q_ethics: "Research ethics: permission + privacy", q_mixed: "Mixed methods: how many AND why" };
+  const TAUNTS = ["💬 Kai: “just use a survey for everything lol”", "💬 Kai: “research is so extra 😴”", "💬 Kai: “take ur time, i'm going viral 🔥”"];
+
+  // ---------------- Shared pieces ----------------
   const app = $("app");
+  const head = t => `<h2>${t}</h2>`;
+  const coach = html => `<div class="coach"><span class="sav" aria-hidden="true">👩🏽‍🔬</span><div class="bubble"><span class="cname">Dr. Ruiz, your coach</span><p>${html}</p></div></div>`;
+  const reveal = html => `<p class="reveal">💡 ${html}</p>`;
+  const kaiPost = (body, stats) => `<div class="post"><div class="ph"><span class="av">😤</span><b>@kai.grindset</b><span class="verified">✔</span></div><p class="pb">${body}</p><p class="ps">${stats || ""}</p></div>`;
+  function nextBtn(label, onclick) { const b = document.createElement("button"); b.type = "button"; b.className = "go"; b.id = "nextBtn"; b.textContent = label; b.onclick = onclick; return b; }
+  const STEP_NAME = ["", "Pick", "Try the tools", "Match", "Clients", "Ethics", "Finale", "See how it ends"];
+  function goNext() { st.step++; save(); render(); window.scrollTo(0, 0); }
+  function addNext(box) { box.appendChild(nextBtn("Next: " + STEP_NAME[st.step + 1] + " →", goNext)); }
+  function scrollToEl(el) { if (el && el.scrollIntoView) setTimeout(() => el.scrollIntoView({ behavior: "smooth", block: "center" }), 40); }
+  let locked = false, justSolved = null;
+  const stamp = (id, txt) => `<span class="stamp${justSolved === id ? " slam" : ""}">${txt}</span>`;
+  function wrongTick(fb, hint, done, label) {
+    let left = LOCK;
+    const tick = () => {
+      fb.className = "msg bad";
+      if (left <= 0) { locked = false; fb.textContent = "Not quite. " + hint + " Try again."; done(); return; }
+      fb.textContent = "Not quite. " + hint + " " + (label || "New order in") + " " + left + "…";
+      left--; setTimeout(tick, 1000);
+    };
+    tick();
+  }
 
-  function stepNow() {
-    if (!st.started) return 0;
-    if (st.phase === "write") return 10;
-    if (st.phase === "end") return 9;
-    return st.job * 2 + (st.phase === "pick" ? 1 : 2);
+  // Multiple-choice check. def.options[0] is right; shuffled every draw.
+  function mountCheck(box, id, def, onRight) {
+    const c = chk(id);
+    const wrap = document.createElement("div"); wrap.className = "check"; wrap.dataset.check = id;
+    const who = def.who || { av: "🔎", n: "Evidence check" };
+    box.appendChild(wrap);
+    if (c.done) { wrap.innerHTML = stamp(id, "✔ Got it") + reveal(def.why); wrap.classList.add("solved"); if (justSolved === id) justSolved = null; return; }
+    wrap.innerHTML = `<div class="speaker"><span class="sav">${who.av}</span><span class="sname"><b>${who.n}</b><small>🔎 Evidence check</small></span></div><div class="bubble"><h3>${def.prompt}</h3></div>`;
+    const area = document.createElement("div"); area.className = "choices";
+    const fb = document.createElement("p"); fb.className = "msg"; fb.setAttribute("aria-live", "polite");
+    const taunt = document.createElement("p"); taunt.className = "taunt"; taunt.hidden = true;
+    let lastOrder = "";
+    function draw() {
+      area.replaceChildren();
+      let order;
+      for (let k = 0; k < 8; k++) { order = shuffle(def.options.map((t, n) => ({ t, n }))); if (order.map(o => o.n).join() !== lastOrder) break; }
+      lastOrder = order.map(o => o.n).join();
+      order.forEach(o => {
+        const b = document.createElement("button"); b.type = "button"; b.className = "choice"; b.textContent = o.t;
+        b.onclick = () => {
+          if (locked) return;
+          if (o.n === 0) { c.done = true; justSolved = id; if (window.classFirstTry) window.classFirstTry.right(id); save(); onRight(); return; }
+          c.wrong++; if (window.classFirstTry) window.classFirstTry.wrong(); save();
+          const TT = def.taunts || TAUNTS; taunt.textContent = TT[(c.wrong - 1) % TT.length]; taunt.hidden = false;
+          wrap.classList.remove("spark"); void wrap.offsetWidth; wrap.classList.add("spark");
+          locked = true; area.querySelectorAll("button").forEach(x => x.disabled = true);
+          if (fb.scrollIntoView) fb.scrollIntoView({ block: "nearest", behavior: "smooth" });
+          wrongTick(fb, def.hint, draw);
+        };
+        area.appendChild(b);
+      });
+    }
+    draw();
+    wrap.appendChild(fb); wrap.appendChild(area); wrap.appendChild(taunt);
+  }
+  // A row of the 5 tool cards. opts: { shown: what to print under the name, mark: k => class, off: k => bool }
+  function toolRow(onPick, opts) {
+    const o = opts || {};
+    const row = document.createElement("div"); row.className = "tools";
+    (o.order || TOOLS).forEach(k => {
+      const t = TOOL[k];
+      const b = document.createElement("button"); b.type = "button"; b.className = "tool " + (o.mark ? o.mark(k) : ""); b.dataset.tool = k;
+      b.disabled = !!(o.off && o.off(k));
+      b.innerHTML = `<span class="tl-ic">${t.ic}</span><span class="tl-name">${t.name}</span>${o.shown === "none" ? "" : `<span class="tl-what">${t.what}</span>`}`;
+      b.onclick = () => onPick(k);
+      row.appendChild(b);
+    });
+    return row;
   }
 
   // ---------------- HUD ----------------
-  let prevRep = null;
   function hud() {
-    const h = $("hud");
-    if (!st.started) { h.hidden = true; return; }
-    h.hidden = false;
-    const over = st.phase === "end" || st.phase === "write";
-    $("hudJob").textContent = over ? "Season over" : "Job " + (st.job + 1) + " of 4";
-    $("hudDots").innerHTML = JOBS.map((j, i) => `<i class="${i < st.job || over ? "done" : i === st.job ? "now" : ""}"></i>`).join("");
-    $("repFill").style.width = st.rep * 10 + "%";
-    $("repNum").textContent = st.rep + "/10";
-    const mood = $("blakeMood");
-    if (mood && mood.textContent !== (st.mood || "😎")) { mood.textContent = st.mood || "😎"; bounce(mood); }
-    if (prevRep != null && prevRep !== st.rep) {
-      const host = $("repNum").closest(".meter"), d = st.rep - prevRep;
-      const f = document.createElement("span"); f.className = "float " + (d > 0 ? "up" : "down"); f.setAttribute("aria-hidden", "true");
-      f.textContent = (d > 0 ? "+" : "−") + Math.abs(d) + " ⭐"; host.appendChild(f); setTimeout(() => f.remove(), 1600);
-    }
-    prevRep = st.rep;
+    const on = st.step >= 1;
+    $("hud").hidden = !on;
+    if (!on) return;
+    const m = st.step - 1;
+    $("track").innerHTML = ["Pick", "Try", "Match", "Clients", "Ethics", "Finale"].map((n, i) => `<li class="${i < m ? "done" : i === m ? "now" : ""}"><span>${i < m ? "✓" : i + 1}</span>${n}</li>`).join("");
+    $("topicPill").hidden = !st.topic;
+    if (st.topic) $("topicPill").textContent = T().ic + " " + T().name;
   }
-  function bounce(el) { el.classList.remove("bump"); void el.offsetWidth; el.classList.add("bump"); }
 
-  // ---------------- Pieces ----------------
-  function clientCard(j) {
-    return `<div class="client"><div class="c-ava" aria-hidden="true">${j.icon}</div><div class="c-body">
-      <p class="c-who"><span aria-hidden="true">📞</span> <b>${j.who}</b> <span class="fict">Made-up client</span></p>
-      <p class="c-ask">“<span>${j.ask}</span>”</p></div></div>`;
-  }
-  const kick = (n, label) => `<p class="kicker"><span>Job ${n} of 4</span>${label ? ` · <span>${label}</span>` : ""}</p>`;
-  // Card order is shuffled once per job, so clicking the first card isn't always Survey.
-  function handOrder(jid) { st.cardOrder = st.cardOrder || {}; if (!st.cardOrder[jid]) { st.cardOrder[jid] = shuffle(ORDER); save(); } return st.cardOrder[jid]; }
-  function cardHtml(k, o) {
-    const m = M[k];
-    return `<button type="button" class="mcard m-${k}${o.sel ? " sel" : ""}${o.tried ? " tried" : ""}" data-m="${k}" aria-pressed="${o.sel ? "true" : "false"}"${o.tried || o.off ? " disabled" : ""}>
-      ${o.tried ? `<span class="stampmini">✖ <span>Tried</span></span>` : ""}
-      <span class="mc-top"><span class="mc-icon" aria-hidden="true">${m.icon}</span><span class="mc-name">${m.name}</span></span>
-      <span class="mc-d">${m.d}</span>
-    </button>`;
-  }
-  function stamp(kind) {
-    const t = { solid: ["✅", "SOLID REPORT"], shaky: ["⚠️", "SHAKY REPORT"], ok: ["🟡", "HALF THE STORY"], garbage: ["🔧", "WRONG TOOL"] }[kind];
-    return `<p class="stamp s-${kind}"><span aria-hidden="true">${t[0]}</span> <span>${t[1]}</span></p>`;
-  }
-  const repLine = d => `<p class="payline"><span class="pp ${d > 0 ? "up" : d < 0 ? "down" : ""}">⭐ ${d > 0 ? "+" + d : d < 0 ? "−" + Math.abs(d) : "±0"} reputation</span></p>`;
-
-  // ---------------- Intro ----------------
-  function intro() {
-    app.innerHTML = `<section class="intro">
-      <div class="intro-left">
-        <p class="kick">Made-up agency game</p>
+  // ---------------- Title ----------------
+  function title() {
+    app.innerHTML = `<section class="card titlecard">
+      <div class="title-left">
+        <p class="kicker">Day 6 · Prove It Lab, part 2</p>
         <h1>Research Rivals</h1>
-        <p class="hook">Clients bring questions about people. Pick the right way to find the answer, before Blake makes you look bad.</p>
-        <ul class="chips"><li>🃏 4 jobs</li><li>⏱ 25 min</li><li>✍️ 2 short answers</li></ul>
-        <p class="goal"><b>🎯 Goal:</b> Match each research method to the question it answers, and spot a flawed study.</p>
-        <ol class="howsteps"><li><b>Pick</b> a method card that fits the question</li><li><b>Plan</b> how to run it</li><li><b>Prove</b> what your results mean</li></ol>
-        <label for="nameBox" class="namelab">First name + last initial</label>
-        <div class="startrow"><input id="nameBox" maxlength="40" autocomplete="off" placeholder="Like Jordan M." value="${esc(st.name)}">
-        <button type="button" class="go big" id="startBtn">Open the agency →</button></div>
+        <p class="hook">Sociologists have 5 tools for studying people. Today you try all 5, then use them to out-research Kai.</p>
+        <p class="recap">📌 <b>Missed yesterday?</b> Kai posts hot takes about teen life. You test them like a sociologist, with Dr. Ruiz as your coach.</p>
+        <ul class="facts"><li>🧰 Try 5 research tools on your topic</li><li>📞 Help 3 local clients</li><li>⏱ About 25 min</li></ul>
+        <p class="goal">🎯 <b>Goal:</b> pick the right research tool for a question, and know its limits.</p>
+        <label for="nameBox">Your name</label>
+        <input id="nameBox" maxlength="60" autocomplete="off" placeholder="Jordan M." value="${esc(st.name)}">
         <p id="introMsg" class="msg" role="status"></p>
+        <button type="button" class="go big" id="startBtn">Open the toolbox →</button>
       </div>
-      <div class="intro-art" aria-hidden="true">
-        <div class="fan">${ORDER.map(k => `<div class="fcard m-${k}"><span>${M[k].icon}</span></div>`).join("")}</div>
-        ${post("Research? Ask my app. 😎", "8.8K")}
+      <div class="title-right" aria-hidden="true">
+        <div class="fan">${TOOLS.map(k => `<span class="fcard">${TOOL[k].ic}</span>`).join("")}</div>
+        ${kaiPost("research? just ask my followers lol 😎", "880K views")}
       </div></section>`;
     $("startBtn").onclick = () => {
       const fixed = window.classShortName ? window.classShortName($("nameBox").value) : $("nameBox").value.trim();
       if (!/^\S+ [A-Z]\.$/.test(fixed)) { $("introMsg").textContent = "Type your first name and last initial, like Jordan M."; $("introMsg").className = "msg bad"; $("nameBox").focus(); return; }
-      st.name = fixed; st.started = true; st.job = 0; st.phase = "pick"; save(); render(); window.scrollTo(0, 0);
+      st.name = fixed; st.step = 1; save(); render(); window.scrollTo(0, 0);
     };
   }
 
-  // ---------------- Screen 1 of each job: pick a card, then plan it ----------------
-  function pickScreen() {
-    const j = JOBS[st.job];
-    const tried = st.tried[j.id] || [];
-    const picked = st.pick[j.id];
-    let html = `<section class="card job">${kick(st.job + 1, picked ? "Plan it" : "Pick a method")}${clientCard(j)}`;
-    if (!picked) {
-      html += `<p class="direct">👆 Which method answers this question?</p>`;
-      html += `<div class="hand">${handOrder(j.id).map(k => cardHtml(k, { tried: tried.includes(k) })).join("")}</div>`;
-      const g = st.lastGarbage[j.id];
-      if (g) html += `<div class="garbage" id="garb"><div class="paper crumpled">${stamp("garbage")}<p class="g-what"><span aria-hidden="true">${M[g].icon}</span> <b>${M[g].name}</b></p><p>${j.fits[g].text}</p></div>
-        ${say(j.icon, j.who, "That won't answer my question. Try another card.")}${repLine(tried.length === 1 ? -1 : 0)}</div>`;
-    } else {
-      const m = M[picked];
-      if (!st.order[j.id]) { st.order[j.id] = shuffle(["good", "bad"]); save(); }
-      html += `<div class="played"><div class="minicard m-${picked}" aria-hidden="true"><span>${m.icon}</span><b>${m.name}</b></div>${say(j.icon, j.who, "Good pick. How will you run it?")}</div>`;
-      html += `<div class="setups" id="setupH">${st.order[j.id].map(x => {
-        const s = j.setup[x];
-        return `<button type="button" class="setup" data-s="${x}"><span class="sc-ic" aria-hidden="true">${s.icon}</span><span class="sc-l">${s.title}</span><span class="sc-s">${s.sub}</span></button>`;
-      }).join("")}</div>`;
-    }
-    html += `</section>`;
-    app.innerHTML = html;
-    app.querySelectorAll(".mcard").forEach(b => b.onclick = () => playCard(j, b.dataset.m));
-    app.querySelectorAll(".setup").forEach(b => b.onclick = () => chooseSetup(j, b.dataset.s));
-    if ($("garb")) $("garb").scrollIntoView({ block: "nearest", behavior: "smooth" });
-  }
-
-  function playCard(j, k) {
-    const m = M[k];
-    if (k === j.best) {
-      st.pick[j.id] = k; st.lastGarbage[j.id] = null; anim = true;
-      save(); render(); window.scrollTo(0, 0); return;
-    }
-    const f = j.fits[k];
-    if (f.fit === "wrong") {
-      (st.tried[j.id] = st.tried[j.id] || []).push(k);
-      st.lastGarbage[j.id] = k;
-      const firstMiss = st.tried[j.id].length === 1;   // only the first wrong card on a job costs a star
-      if (firstMiss) { st.rep -= 1; addLog(st.job + 1, "Wrong tool: " + m.name, "−1 ⭐", "down"); }
-      st.mood = "😂"; clampRep(); anim = false;
-      save(); render(); return;
-    }
-    // "ok": accepted, but only half the story. No plan step.
-    st.pick[j.id] = k; st.fit[j.id] = "ok"; st.lastGarbage[j.id] = null;
-    st.rep -= 1; st.mood = "😏"; clampRep(); anim = true;
-    addLog(st.job + 1, j.logOk, "−1 ⭐", "down");
-    st.phase = "results"; save(); render(); window.scrollTo(0, 0);
-  }
-
-  function chooseSetup(j, x) {
-    st.setup[j.id] = x;
-    const solid = x === "good";
-    st.fit[j.id] = solid ? "solid" : "shaky";
-    anim = true; st.mood = solid ? "😤" : "😂";
-    if (solid) { st.rep += 1; addLog(st.job + 1, j.logSolid, "+1 ⭐", "up"); }
-    else { st.rep -= 2; addLog(st.job + 1, j.logShaky, "−2 ⭐", "down"); }
-    clampRep(); st.phase = "results"; save(); render(); window.scrollTo(0, 0);
-  }
-
-  // ---------------- Screen 2 of each job: results + evidence check ----------------
-  function resultsScreen() {
-    const j = JOBS[st.job];
-    const fit = st.fit[j.id];
-    const k = st.pick[j.id], m = M[k];
-    const r = fit === "ok" ? j.fits[k] : fit === "solid" ? j.solid : j.shaky;
-    const side = fit === "solid" ? quiet() : post(r.rival, fit === "ok" ? "900" : "2.7K");
-    const sel = st.setup[j.id] ? j.setup[st.setup[j.id]] : null;
-    const ck = j.check, v = variantFor(ck), ckDone = (st.checks[ck] || {}).done;
-    let html = `<section class="card job">${kick(st.job + 1, "Results")}
-      <div class="desk"><div class="report paper">${stamp(fit)}<p class="r-plan"><span aria-hidden="true">${m.icon}</span> <b>${m.name}</b>${sel ? `<span class="r-sep"> · </span><span aria-hidden="true">${sel.icon}</span> <span>${sel.title}</span>` : ""}</p>${r.data()}${r.text ? `<p class="r-text">${r.text}</p>` : ""}</div>
-      <div class="rivalcol">${side}<p class="mini-reveal">💡 ${r.reveal}</p>${repLine(fit === "solid" ? 1 : fit === "ok" ? -1 : -2)}</div></div>`;
-    html += checkHtml(ck, v);
-    if (ckDone && j.bonus) html += bonusHtml();
-    if (ckDone && (!j.bonus || st.bonus)) html += `<button type="button" class="go next" id="nextBtn">${st.job === 2 ? "Next: the final job →" : "Next job →"}</button>`;
-    html += `</section>`;
-    app.innerHTML = html;
-    wireCheck(ck, v);
-    bringCheck(ck);
-    app.querySelectorAll(".bonusbtn").forEach(b => b.onclick = () => chooseBonus(b.dataset.b));
-    if ($("nextBtn")) $("nextBtn").onclick = nextJob;
-  }
-  // After the report has a moment to land, slide the unanswered question into view.
-  function bringCheck(ck) {
-    if ((st.checks[ck] || {}).done) return;
-    setTimeout(() => { const el = $("chk_" + ck); if (el && el.getBoundingClientRect().bottom > window.innerHeight) el.scrollIntoView({ block: "start", behavior: "smooth" }); }, 1400);
-  }
-  function nextJob() { st.job += 1; st.phase = "pick"; anim = true; save(); render(); window.scrollTo(0, 0); }
-  function variantFor(id) { return id === "c5" ? ({ solid: "A", shaky: "B", ok: "C" }[st.fit.j3] || "B") : null; }
-
-  // ---------------- Temptation (job 3) ----------------
-  function bonusHtml() {
-    const claim = { solid: "raises scores 4 points more than studying without it", shaky: "raises scores 7 points", ok: "is proven to raise scores" }[st.fit.j3] || "raises scores";
-    const ask = "Write \"StudyStreak " + claim + "\" and we'll sign a big contract with you.";
-    if (st.bonus) {
-      return `<div class="bonus done"><p class="b-h">📱 The StudyStreak CEO</p><p>${st.bonus === "truth" ? "You told the truth. The CEO is annoyed." : "You took the deal. The report says what they wanted. ⭐ +2 for now."}</p></div>`;
-    }
-    return `<div class="bonus phone" id="bonusBox"><p class="b-h"><span class="ring" aria-hidden="true">📱</span> <span>The StudyStreak CEO calls</span></p><p class="b-ask">“<span>${ask}</span>”</p>
-      <div class="setups"><button type="button" class="setup bonusbtn" data-b="truth"><span class="sc-ic" aria-hidden="true">🧾</span><span class="sc-l">Report what the data shows</span><span class="sc-s">No contract.</span></button>
-      <button type="button" class="setup bonusbtn" data-b="lie"><span class="sc-ic" aria-hidden="true">🤝</span><span class="sc-l">Take the deal</span><span class="sc-s">⭐ +2 now.</span></button></div></div>`;
-  }
-  function chooseBonus(b) {
-    st.bonus = b;
-    if (b === "lie") { st.rep += 2; st.mood = "🤨"; addLog(3, "Took a deal to stretch the results", "+2 ⭐", "down"); }
-    else addLog(3, "Reported the real results", "honest", "up");
-    clampRep(); save(); render();
-    const n = $("nextBtn"); if (n) n.scrollIntoView({ block: "center", behavior: "smooth" });
-  }
-
-  // ---------------- Final job: two cards ----------------
-  function finalScreen() {
-    const j = JOBS[3];
-    const sel = st.finalSel || [];
-    let html = `<section class="card job">${kick(4, "The big one")}${clientCard(j)}
-      <p class="rule"><span aria-hidden="true">🃏🃏</span> <span>Two-part question. Play <b>2 cards</b>.</span></p>
-      <div class="hand">${handOrder(j.id).map(k => cardHtml(k, { sel: sel.includes(k) })).join("")}</div>
-      <div class="playbar">${sel.length ? `<p class="pb-sel">${sel.map(k => `<span aria-hidden="true">${M[k].icon}</span> <b>${M[k].name}</b>`).join(" + ")}</p>` : `<p class="pb-none"><span aria-hidden="true">👆</span> <span>Tap 2 cards</span></p>`}
-      ${sel.length === 2 ? `<button type="button" class="go" id="playBtn">Play both cards →</button>` : sel.length === 1 ? `<p class="pb-none">Pick 1 more</p>` : ""}</div></section>`;
-    app.innerHTML = html;
-    app.querySelectorAll(".mcard").forEach(b => b.onclick = () => {
-      const k = b.dataset.m; let s = (st.finalSel || []).slice();
-      if (s.includes(k)) s = s.filter(x => x !== k); else { s.push(k); if (s.length > 2) s.shift(); }
-      st.finalSel = s; save(); render();
-      const p = $("playBtn"); if (p) p.scrollIntoView({ block: "nearest", behavior: "smooth" });
+  // ---------------- Step 1: Pick ----------------
+  function step1() {
+    const box = card();
+    const d5 = day5Topic();
+    if (d5 && !st.topic) { st.topic = d5; st.fromD5 = true; save(); }
+    box.innerHTML = head("Pick: your topic") + coach(d5 ? `Yesterday you tested <b>${TOPICS[d5].ic} ${TOPICS[d5].name}</b>. Keep it, or pick a new one. Today you'll study it 5 different ways.` : "Pick the topic you want to study today. You'll study it 5 different ways.");
+    const row = document.createElement("div"); row.className = "topics";
+    TOPIC_ORDER.forEach(k => {
+      const t = TOPICS[k];
+      const b = document.createElement("button"); b.type = "button"; b.className = "topic" + (st.topic === k ? " sel" : ""); b.dataset.topic = k;
+      b.innerHTML = `<span class="t-ic">${t.ic}</span><span class="t-name">${t.name}${k === d5 ? ` <span class="t-yday">yesterday's</span>` : ""}</span><span class="t-take">“${t.take}”</span>`;
+      b.onclick = () => { st.topic = k; st.fromD5 = k === d5; save(); render(); scrollToEl($("nextBtn")); };
+      row.appendChild(b);
     });
-    if ($("playBtn")) $("playBtn").onclick = playFinal;
+    box.appendChild(row);
+    if (st.topic) addNext(box);
   }
-  function playFinal() {
-    const sel = st.finalSel.slice(); st.finalPick = sel;
-    const hasC = sel.includes("content"), hasI = sel.includes("interview"), hasS = sel.includes("survey");
-    const fit = hasC && hasI ? "solid" : (hasC || hasI) ? "ok" : "garbage";
-    st.finalFit = fit;
-    anim = true; st.mood = fit === "solid" ? "😡" : fit === "ok" ? "😏" : "🤑";
-    if (fit === "solid") { st.rep += 2; addLog(4, "Ad count + interviews: mixed methods", "+2 ⭐", "up"); }
-    else if (fit === "ok") addLog(4, hasC ? (hasS ? "Ad count + survey: reasons were just checkboxes" : "Ad count only: no WHY") : "Interviews only: no ad data", "±0 ⭐", "flat");
-    else { st.rep -= 2; addLog(4, "Wrong cards for the final job", "−2 ⭐", "down"); }
-    if (st.bonus === "lie") st.leak = true;   // the −4 lands when the leak appears on screen
-    clampRep(); st.phase = "results"; save(); render(); window.scrollTo(0, 0);
-  }
-  function finalResults() {
-    const fit = st.finalFit, sel = st.finalPick || [];
-    const hasC = sel.includes("content"), hasS = sel.includes("survey");
-    const adBit = bars([["Athletes", 44], ["Gamers", 27], ["Partying", 18], ["Studying", 11]], "Who's shown in 200 random ads · made-up game data");
-    const talkBit = quote("\"I drink one before practice. The athletes in the ads look unstoppable.\"") + quote("\"Honestly? To stay up gaming.\"") + `<p class="madeup">Made-up quotes from 20 talks</p>`;
-    let data = "", text = "", reveal = "", side = "";
-    if (fit === "solid") {
-      data = adBit + talkBit; text = "Now you know WHAT ads show and WHY teens buy.";
-      reveal = "<b>Mixed methods</b> = two methods covering each other's weak spots.";
-    } else if (fit === "ok") {
-      if (hasC) {
-        data = adBit + (hasS ? bars([["Taste", 41], ["Energy", 38], ["Other", 21]], "Why teens buy (checkbox survey) · made-up game data") : "");
-        side = post(hasS ? "Cedar River's big WHY: \"Other.\" 🦗" : "Cedar River counted ads. Council: \"But WHY do teens buy?\" Cedar River: 🦗", "3.1K");
-        reveal = hasS ? "A checkbox can't explain WHY. <b>Interviews</b> get reasons in people's own words." : "Two-part question. An ad count answers <b>what ads show</b>. <b>Interviews</b> answer <b>why</b>.";
+
+  // ---------------- Step 2: Try all 5 tools (predict first, then see) ----------------
+  const GETS = { survey: "A number: how many students", interview: "Reasons, in people's own words", observe: "What people actually do", experiment: "Whether one thing causes another", content: "What shows up in media" };
+  function step2() {
+    const box = card(), t = T();
+    st.pred = st.pred || {}; st.predOpt = st.predOpt || {};
+    const left = TOOLS.filter(k => !(k in st.pred)).length;
+    box.innerHTML = head("Try: use each tool on your topic") +
+      coach(left === 5 ? `Tap a tool. First guess what it will get you, then see what it finds on <b>${t.name}</b>.` : left ? `${left} more to try. Each tool sees a different piece of the picture.` : "That's all 5. Every tool finds something, and every tool misses something.");
+    box.appendChild(toolRow(k => { st.open = k; if (!st.predOpt[k]) { const others = TOOLS.filter(x => x !== k); st.predOpt[k] = shuffle([k, others[Math.floor(Math.random() * others.length)]]); } save(); render(); scrollToEl(document.querySelector(".toolres")); },
+      { shown: "none", mark: k => ((k in st.pred) ? "tried" : "") + (st.open === k ? " sel" : "") }));
+    if (st.open) {
+      const k = st.open, r = t.r[k], tl = TOOL[k];
+      if (!(k in st.pred)) {
+        const res = document.createElement("div"); res.className = "toolres predict"; box.appendChild(res);
+        res.innerHTML = `<p class="tr-h">🔮 Guess first: what will a <b>${tl.ic} ${tl.name}</b> get you?</p><p class="madeup">${tl.what}.</p>`;
+        const row = document.createElement("div"); row.className = "decide";
+        st.predOpt[k].forEach(opt => {
+          const b = document.createElement("button"); b.type = "button"; b.className = "dcard"; b.dataset.pred = opt;
+          b.innerHTML = `<span class="ct">${GETS[opt]}</span>`;
+          b.onclick = () => { st.pred[k] = opt === k; save(); render(); scrollToEl(document.querySelector(".toolres")); };
+          row.appendChild(b);
+        });
+        res.appendChild(row);
       } else {
-        data = talkBit;
-        side = post("Cedar River talked to 20 kids and never looked at ONE ad. 🤏", "3.1K");
-        reveal = "Two-part question. <b>Content analysis</b> shows what the ads show.";
+        box.insertAdjacentHTML("beforeend", `<div class="toolres"><p class="tr-h">${tl.ic} <b>${tl.name}</b> on ${t.ic} ${t.name} <span class="predres">${st.pred[k] ? "✅ Good guess!" : "🤔 Not quite. It gets you: " + GETS[k].toLowerCase() + "."}</span></p>
+          <p class="tr-found">${r.cant ? `<span class="tr-tag bad">🚫 Can't run it</span>` : `<span class="tr-tag good">✅ What you found</span>`} ${r.found}</p>
+          <p class="tr-no"><span class="tr-tag bad">🚫 What it can't tell you</span> ${r.no}</p><p class="madeup">Made-up game data</p></div>`);
       }
-    } else {
-      text = "No ad data, no reasons. The client hires Hot Take instead.";
-      reveal = "\"What do ads show?\" needs <b>content analysis</b>. \"Why?\" needs <b>interviews</b>.";
-      side = post("Guess who the client called? 😎", "6.6K");
     }
-    const ck = "c2", ckDone = (st.checks[ck] || {}).done;
-    let html = `<section class="card job">${kick(4, "Results")}
-      <div class="report paper">${stamp(fit)}<p class="r-plan">${sel.map(k => `<span aria-hidden="true">${M[k].icon}</span> <b>${M[k].name}</b>`).join(" + ")}</p>${data}${text ? `<p class="r-text">${text}</p>` : ""}</div>
-      ${side}<p class="mini-reveal">💡 ${reveal}</p>${repLine(fit === "solid" ? 2 : fit === "ok" ? 0 : -2)}`;
-    html += checkHtml(ck);
-    if (ckDone && st.leak && !st.leakHit) { st.leakHit = true; st.rep -= 4; addLog(4, "Blake leaked the real app numbers", "−4 ⭐", "down"); clampRep(); save(); setTimeout(hud, 50); }
-    if (ckDone) {
-      if (st.leak) html += `<div class="leak"><p class="b-h">🚨 Breaking</p>${post("LEAKED: StudyStreak's real numbers. Cedar River stretched them for a contract. 🧾", "12K")}${repLine(-4)}
-        ${unlock("<b>Honesty</b>: report what the data shows, even when someone pays you not to.")}</div>`;
-      html += `<button type="button" class="go next" id="nextBtn">See how your season ended →</button>`;
-    }
-    html += `</section>`;
-    app.innerHTML = html;
-    wireCheck(ck);
-    bringCheck(ck);
-    if ($("nextBtn")) $("nextBtn").onclick = toEnding;
+    if (!left) addNext(box);
   }
-  function toEnding() { st.ending = endingFor(); st.phase = "end"; anim = true; save(); render(); window.scrollTo(0, 0); }
 
-  // ---------------- Ending + writing + turn in ----------------
+  // ---------------- Step 3: Match ----------------
+  let matchPick = null;
+  function step3() {
+    const box = card();
+    const c = chk("q_match");
+    box.innerHTML = head("Match each tool to its job");
+    if (c.done) {
+      box.insertAdjacentHTML("beforeend", `<div class="check solved">${stamp("q_match", "✔ All matched")}<div class="matchdone">${MATCH_QS.map(m => `<p>${TOOL[m.a].ic} <b>${TOOL[m.a].name}</b> → ${m.q}</p>`).join("")}</div></div>`);
+      if (justSolved === "q_match") justSolved = null;
+      box.insertAdjacentHTML("beforeend", reveal("Pick the tool by the <b>question</b>, not by what's easiest."));
+      addNext(box); return;
+    }
+    box.insertAdjacentHTML("beforeend", coach("Think back to what each tool found. Tap a question, then tap the tool that answers it best."));
+    const wrap = document.createElement("div"); wrap.className = "check"; box.appendChild(wrap);
+    const fb = document.createElement("p"); fb.className = "msg"; fb.setAttribute("aria-live", "polite");
+    function draw() {
+      wrap.innerHTML = `<div class="speaker"><span class="sav">🔎</span><span class="sname"><b>Match all 5</b><small>🔎 Evidence check</small></span></div>`;
+      wrap.appendChild(fb);
+      const grid = document.createElement("div"); grid.className = "matchgrid"; wrap.appendChild(grid);
+      const qs = document.createElement("div"); qs.className = "mq";
+      if (!st.mqOrder) { st.mqOrder = shuffle(MATCH_QS.map((x, i) => i)); save(); }
+      st.mqOrder.forEach(i => {
+        const m = MATCH_QS[i], got = st.match[i];
+        const bad = st.badMatch && st.badMatch.includes(i) && got;
+        const b = document.createElement("button"); b.type = "button"; b.className = "mqbtn" + (matchPick === i ? " picked" : "") + (got ? " full" : "") + (bad ? " bad" : ""); b.disabled = locked;
+        b.innerHTML = `<span class="mq-q">${m.q}</span><span class="mq-a">${got ? (bad ? "✗ " : "") + TOOL[got].ic + " " + TOOL[got].name : "⬚ tap a tool"}</span>`;
+        b.onclick = () => { if (locked) return; matchPick = matchPick === i ? null : i; if (st.match[i] && matchPick === i) { delete st.match[i]; save(); } draw(); };
+        qs.appendChild(b);
+      });
+      grid.appendChild(qs);
+      const used = Object.values(st.match);
+      grid.appendChild(toolRow(k => {
+        if (locked || matchPick == null) { fb.className = "msg"; fb.textContent = "👆 Tap a question first, then a tool."; return; }
+        Object.keys(st.match).forEach(q => { if (st.match[q] === k) delete st.match[q]; });
+        st.match[matchPick] = k; if (st.badMatch) st.badMatch = st.badMatch.filter(x => x !== matchPick); matchPick = null; save(); draw();
+      }, { shown: "none", mark: k => used.includes(k) ? "used" : "", off: () => locked }));
+      const go = document.createElement("button"); go.type = "button"; go.className = "go"; go.id = "matchBtn"; go.textContent = "✔ Check my matches";
+      go.disabled = locked || Object.keys(st.match).length < 5;
+      go.onclick = () => {
+        const wrongN = MATCH_QS.filter((m, i) => st.match[i] !== m.a).length;
+        if (!wrongN) { c.done = true; justSolved = "q_match"; if (window.classFirstTry) window.classFirstTry.right("q_match"); save(); render(); scrollToEl($("nextBtn")); return; }
+        c.wrong++; if (window.classFirstTry) window.classFirstTry.wrong();
+        st.badMatch = MATCH_QS.map((m, i) => i).filter(i => st.match[i] !== MATCH_QS[i].a);   // mark the wrong ones; keep everything
+        save(); locked = true; draw();
+        wrongTick(fb, wrongN + (wrongN === 1 ? " match is" : " matches are") + " marked ✗. Tap " + (wrongN === 1 ? "it" : "one") + ", then pick a different tool.", () => { draw(); }, "Try again in");
+      };
+      wrap.appendChild(go);
+    }
+    draw();
+  }
+
+  // ---------------- Step 4: Clients ----------------
+  function step4() {
+    const box = card();
+    box.innerHTML = head("Clients: pick the right tool");
+    const nextC = CLIENTS.find(cl => !chk(cl.id).done);
+    // Solved ones collapse to one line.
+    CLIENTS.forEach(cl => { if (chk(cl.id).done) box.insertAdjacentHTML("beforeend", `<div class="check solved">${stamp(cl.id, "✔ Hired")}<p class="reveal">${cl.ic} <b>${cl.who}</b> → ${TOOL[cl.best].ic} ${TOOL[cl.best].name}. ${cl.why}</p></div>`); });
+    if (justSolved && CLIENTS.some(cl => cl.id === justSolved)) justSolved = null;
+    if (!nextC) { box.insertAdjacentHTML("beforeend", coach("3 for 3. You picked by the question, not by habit.")); addNext(box); return; }
+    if (nextC === CLIENTS[0]) box.insertAdjacentHTML("beforeend", coach("Read what the client really wants to know. Then pick the tool that answers that kind of question."));
+    const c = chk(nextC.id);
+    const wrap = document.createElement("div"); wrap.className = "check"; box.appendChild(wrap);
+    wrap.innerHTML = `<div class="speaker"><span class="sav">${nextC.ic}</span><span class="sname"><b>${nextC.who}</b><small>📞 New client · made up</small></span></div><div class="bubble"><h3>“${nextC.ask}”</h3></div>`;
+    const fb = document.createElement("div"); fb.className = "msg"; fb.setAttribute("aria-live", "polite"); wrap.appendChild(fb);
+    const tried = st.clientPick[nextC.id] || [];
+    if (!st.toolOrder) { st.toolOrder = shuffle(TOOLS); save(); }
+    wrap.appendChild(toolRow(k => {
+      if (locked) return;
+      if (k === nextC.best) { c.done = true; justSolved = nextC.id; if (window.classFirstTry) window.classFirstTry.right(nextC.id); save(); render(); scrollToEl(document.querySelectorAll(".check")[Math.min(CLIENTS.indexOf(nextC) + 1, 2)] || $("nextBtn")); return; }
+      c.wrong++; if (window.classFirstTry) window.classFirstTry.wrong();
+      (st.clientPick[nextC.id] = tried).push(k); save();
+      fb.className = "msg bad wrongtool"; fb.innerHTML = `${TOOL[k].ic} <b>${TOOL[k].name}?</b> ${nextC.wrong[k]} <br><span class="taunt">${TAUNTS[(c.wrong - 1) % TAUNTS.length]}</span> <span class="wait">⏳ 2</span>`;
+      wrap.querySelectorAll(".tool").forEach(x => { x.disabled = true; if (x.dataset.tool === k) x.classList.add("nope"); });
+      locked = true;
+      let left = LOCK;
+      const tick = () => { const w = fb.querySelector(".wait"); if (left <= 0) { locked = false; if (w) w.remove(); wrap.querySelectorAll(".tool").forEach(x => { x.disabled = x.classList.contains("nope"); }); return; } if (w) w.textContent = "⏳ " + left; left--; setTimeout(tick, 1000); };
+      tick();
+    }, { order: st.toolOrder, shown: "none", mark: k => tried.includes(k) ? "nope" : "", off: k => tried.includes(k) }));
+  }
+
+  // ---------------- Step 5: Ethics ----------------
+  function step5() {
+    const box = card(), t = T();
+    box.innerHTML = head("Ethics: research the right way");
+    mountCheck(box, "q_ethics", { who: { av: "👩🏽‍🔬", n: "Dr. Ruiz, sociologist" },
+      prompt: `You're about to interview students about ${t.name.toLowerCase()}. What do you HAVE to do first?`,
+      options: ["Get their OK and a parent's, and keep names private", "Get their OK, but use their real names in the report", "Keep names private, but skip asking anyone for permission", "Only interview kids who already agree with your idea"],
+      hint: "Two rules: ask first (for under 18, a parent too), and protect who they are.",
+      taunts: ["💬 Kai: “permission slips? that's so extra 😴”", "💬 Kai: “just post their names, who cares lol”"],
+      why: "<b>Research ethics</b>: get permission first (for anyone under 18, a parent's too), keep names secret, and don't harm anyone." },
+      () => { render(); scrollToEl(document.querySelector(".deal")); });
+    if (!chk("q_ethics").done) return;
+    const deal = document.createElement("div"); deal.className = "deal"; box.appendChild(deal);
+    if (!st.deal) {
+      deal.innerHTML = `<div class="phone"><p class="b-h">📱 A homework-app company calls</p><p class="b-ask">“We'll pay your lab $500 if your report says our app <b>raises grades</b>. Your data only shows students <i>like</i> it.”</p></div>`;
+      const row = document.createElement("div"); row.className = "decide";
+      [["truth", "🧾", "Report what the data shows", "No $500."], ["lie", "💰", "Take the $500", "Write what they want."]].forEach(([id, ic, tt, dd]) => {
+        const b = document.createElement("button"); b.type = "button"; b.className = "dcard"; b.dataset.id = id;
+        b.innerHTML = `<span class="ic">${ic}</span><span class="ct">${tt}</span><span class="cd">${dd}</span>`;
+        b.onclick = () => { st.deal = id; save(); render(); scrollToEl($("nextBtn")); };
+        row.appendChild(b);
+      });
+      deal.appendChild(row);
+      return;
+    }
+    deal.innerHTML = st.deal === "truth"
+      ? `<p class="react">🧾 You told the truth. The company hangs up. Dr. Ruiz nods.</p>` + reveal("<b>Honesty</b>: report what the data shows, even when someone pays you not to.")
+      : `<p class="react">💰 You took the money…</p>${kaiPost("LEAKED 🧾 the lab took $500 to say an app raises grades. their data never showed that.", "1.9M views")}` + reveal("<b>Honesty</b>: faking results breaks trust in ALL research. That's why it's an ethics rule.");
+    addNext(box);
+  }
+
+  // ---------------- Step 6: Finale (mixed methods) ----------------
+  function step6() {
+    const box = card(), t = T();
+    box.innerHTML = head("Finale: out-research Kai") + kaiPost(`ok lab kid. ${t.name.toLowerCase()}: HOW MANY teens does this affect, and WHY? one tool can't do both 😏`, "live");
+    const c = chk("q_mixed");
+    if (c.done) {
+      const s = t.r.survey, i = t.r.interview;
+      box.insertAdjacentHTML("beforeend", `<div class="check solved">${stamp("q_mixed", "✔ Mixed methods")}<div class="toolres"><p class="tr-found"><span class="tr-tag good">📋 How many</span> ${s.found}</p><p class="tr-found"><span class="tr-tag good">🎙️ Why</span> ${i.found}</p><p class="madeup">Made-up game data</p></div></div>`);
+      if (justSolved === "q_mixed") justSolved = null;
+      box.insertAdjacentHTML("beforeend", reveal("<b>Mixed methods</b> = using two tools, so each one fills in what the other misses.") + `<p class="react">😤 Kai: “…ok that's actually kinda solid.”</p>`);
+      box.appendChild(nextBtn("See how it ends →", goNext));
+      return;
+    }
+    box.insertAdjacentHTML("beforeend", coach("Kai's right about one thing: one tool can't answer both. Pick the <b>2 tools</b> that do."));
+    const sel = st.finalSel || [];
+    const wrap = document.createElement("div"); wrap.className = "check"; box.appendChild(wrap);
+    const fb = document.createElement("p"); fb.className = "msg"; fb.setAttribute("aria-live", "polite"); wrap.appendChild(fb);
+    if (!st.toolOrder) { st.toolOrder = shuffle(TOOLS); save(); }
+    wrap.appendChild(toolRow(k => {
+      if (locked) return;
+      let s = sel.slice(); if (s.includes(k)) s = s.filter(x => x !== k); else { s.push(k); if (s.length > 2) s.shift(); }
+      st.finalSel = s; save(); render();
+    }, { order: st.toolOrder, shown: "none", mark: k => sel.includes(k) ? "sel" : "", off: () => locked }));
+    const go = document.createElement("button"); go.type = "button"; go.className = "go"; go.textContent = sel.length === 2 ? "Play both tools →" : "Pick " + (2 - sel.length) + " more";
+    go.disabled = sel.length !== 2 || locked;
+    go.onclick = () => {
+      if (sel.includes("survey") && sel.includes("interview")) { c.done = true; justSolved = "q_mixed"; if (window.classFirstTry) window.classFirstTry.right("q_mixed"); save(); render(); return; }
+      c.wrong++; if (window.classFirstTry) window.classFirstTry.wrong(); save();
+      const hasHowMany = sel.includes("survey"), hasWhy = sel.includes("interview");
+      locked = true; go.disabled = true; wrap.querySelectorAll(".tool").forEach(x => x.disabled = true);
+      wrongTick(fb, (hasHowMany ? "You've got HOW MANY covered. " : hasWhy ? "You've got WHY covered. " : "") + "Which tool counts lots of people? Which one gets reasons in their own words?", () => { st.finalSel = []; save(); render(); });
+    };
+    wrap.appendChild(go);
+  }
+
+  // ---------------- Finish ----------------
+  function endingId() { return st.deal === "lie" ? "leaked" : "trusted"; }
   const ENDINGS = {
-    top: { icon: "🏆", title: "Iowa's Most Trusted Research Team", text: "Clients line up. Hot Take loses its biggest clients to you." },
-    mid: { icon: "🏚️", title: "Still Open, Barely", text: "Bills paid, but clients doubt you. Blake's posts still follow you." },
-    low: { icon: "🔥", title: "Bought Out by Hot Take Analytics", text: "Your reports had too many holes. Clients went with Blake." }
+    trusted: { icon: "🏆", t: "The Lab Kai Can't Beat", line: "You found the right tool for every question, and you stayed honest. Clients trust your lab." },
+    leaked: { icon: "🧾", t: "Good Tools, Broken Trust", line: "You knew your tools, but the $500 leak follows you. Now nobody's sure your reports are real." }
   };
-  function endingFor() { return st.rep >= 8 ? "top" : st.rep >= 4 ? "mid" : "low"; }
-  function endScreen() {
-    const e = ENDINGS[st.ending || endingFor()];
-    const trail = st.log.map(l => `<li class="${l.kind}"><span class="lj" aria-label="Job ${l.job}">${l.job}</span><span class="lt">${l.text}</span><b class="ld">${l.delta}</b></li>`).join("");
-    app.innerHTML = `<section class="card ending e-${st.ending}">
-      <p class="kicker">Season over</p><div class="end-head"><span class="end-ic" aria-hidden="true">${e.icon}</span><div class="sign"><h2>${e.title}</h2><p>${e.text}</p></div></div>
-      <div class="endstats"><span>⭐ <b>${st.rep}/10</b> reputation</span></div>
-      <h3 class="causedh">Caused by:</h3><ul class="trail">${trail}</ul>
-      <button type="button" class="go next" id="writeBtn">Write your report →</button></section>`;
-    $("writeBtn").onclick = () => { st.phase = "write"; anim = true; save(); render(); window.scrollTo(0, 0); };
+  function causedBy(forTeacher) {
+    const t = T(), out = [];
+    const miss = id => !forTeacher ? "" : chk(id).wrong ? ` (after ${chk(id).wrong} ${chk(id).wrong === 1 ? "miss" : "misses"})` : " (first try)";
+    out.push(`🧰 Tried all 5 tools on ${t.ic} ${t.name}`);
+    out.push("🧩 Matched each tool to its question" + miss("q_match"));
+    CLIENTS.forEach(cl => out.push(`${cl.ic} ${cl.who} → ${TOOL[cl.best].name}` + (forTeacher && chk(cl.id).wrong ? ` (after trying ${chk(cl.id).wrong} other ${chk(cl.id).wrong === 1 ? "tool" : "tools"})` : "")));
+    out.push("🔒 Ethics: ask permission, keep names secret" + miss("q_ethics"));
+    out.push(st.deal === "truth" ? "🧾 Turned down the $500 → stayed honest" : "💰 Took the $500 → it leaked");
+    out.push("📋 + 🎙️ Survey AND interviews → how many AND why" + miss("q_mixed"));
+    return out;
   }
-  function writeScreen() {
-    const e = ENDINGS[st.ending || "mid"];
-    app.innerHTML = `<section class="card ending">
-      <p class="kicker"><span aria-hidden="true">${e.icon}</span> <span>Last step</span></p>
-      <div class="writing paper"><p class="w-h"><span aria-hidden="true">📄</span> <span>Your season report</span></p>
-      ${PROMPTS.map(p => `<label for="w_${p.id}">${p.label}</label><p class="stem">${p.stem}</p><textarea id="w_${p.id}" rows="3">${esc(st.writing[p.id] || "")}</textarea>`).join("")}
-      <button type="button" class="go" id="sendBtn">${st.turnedIn ? "Turn in again" : "Turn in"}</button>
-      <p id="sendMsg" class="msg" role="status" aria-live="polite">${st.turnedIn ? "Already turned in. You can fix it and turn in again." : ""}</p>
-      ${st.turnedIn ? turnedHtml() : ""}</div>
-      <p class="foot-back"><button type="button" class="linkbtn" id="backEnd">← Back to my ending</button></p></section>`;
-    PROMPTS.forEach(p => $("w_" + p.id).addEventListener("input", ev => { st.writing[p.id] = ev.target.value; save(); }));
-    $("sendBtn").onclick = turnIn;
-    $("backEnd").onclick = () => { st.phase = "end"; save(); render(); window.scrollTo(0, 0); };
+  const PROMPTS = [
+    { id: "method", short: "My question, method, strength, and limit", label: "1. Pitch a study about teen life. Which tool would you use, and what's one limit?",
+      stem: "I'd study ___. I'd use ___ because ___. One limit is ___.", min: 80, newWords: 6,
+      mustAll: [["survey", "interview", "observ", "experiment", "content analysis", "content", "ads", "media", "watch", "count"], ["limit", "but", "however", "slow", "small", "watched", "lie", "honest", "cost", "can't", "cannot", "weak", "although", "fake", "time", "bias", "random", "won't", "wont"]],
+      mustMsg: "Answer 1: name a tool AND one limit." },
+    { id: "mixed", short: "Why two methods beat one", label: "2. Why is a survey AND interviews stronger than just one?",
+      stem: "Both are stronger because the survey shows ___, and interviews show ___.", min: 60, newWords: 4,
+      mustAll: [["how many", "how common", "number", "numbers", "percent", "%", "many", "pattern", "count", "lots of"], ["why", "reason", "story", "stories", "feel", "detail", "explain", "cause", "own words"]],
+      go4: "Go deeper: which tool would you add third, and what would it catch that these two miss?",
+      mustMsg: "Answer 2: say what the survey shows (how many) AND what interviews show (why)." }
+  ];
+  function step7() {
+    const box = card(), t = T();
+    const eid = endingId(), E = ENDINGS[eid];
+    if (!st.atReport) {
+      box.innerHTML = `<div class="ending ${eid === "trusted" ? "holds" : "played"}"><div class="e-icon">${E.icon}</div><h2>${E.t}</h2><p>${E.line}</p></div>
+        <div class="caused"><p class="src-tag">Caused by:</p><ul>${causedBy().map(c => `<li>${c}</li>`).join("")}</ul></div>`;
+      box.appendChild(nextBtn("📝 Write your report →", () => { st.atReport = true; save(); render(); window.scrollTo(0, 0); }));
+      return;
+    }
+    box.innerHTML = `<p class="mini-end">${E.icon} <b>${E.t}</b> · ${t.ic} ${t.name}</p>
+      <div class="report" id="report"><p class="report-tag">📝 Research report</p><h3 class="wr-h">1–2 sentences each</h3></div>`;
+    const rep = $("report");
+    PROMPTS.forEach(p => rep.insertAdjacentHTML("beforeend", `<label for="w_${p.id}">${p.label}</label><p class="stem">✏️ ${esc(p.stem)}</p>${p.go4 ? `<p class="go4">⭐ ${p.go4}</p>` : ""}<textarea id="w_${p.id}" rows="3">${esc(st.writing[p.id] || "")}</textarea>`));
+    rep.insertAdjacentHTML("beforeend", `<button type="button" class="go" id="sendBtn">${st.turnedIn ? "Turn in again" : "Turn in"}</button>
+      <p id="sendMsg" class="msg" role="status" aria-live="polite">${st.turnedIn ? "You already turned this in. You can fix your writing and turn it in again." : ""}</p>
+      <p class="turned" id="turnedBadge" ${st.turnedIn ? "" : "hidden"}>✓ Turned in</p>
+      <p class="replay" id="replay" ${st.turnedIn ? "" : "hidden"}>🔁 Want to try another topic? Press “Start over” below.</p>`);
+    PROMPTS.forEach(p => $("w_" + p.id).addEventListener("input", e => { st.writing[p.id] = e.target.value; save(); }));
+    $("sendBtn").onclick = send;
   }
-  const turnedHtml = () => `<p class="turned" id="turned">✓ Turned in</p><p class="replay">Want a different ending? Tap Start over.</p>`;
 
-  async function turnIn() {
+  async function send() {
     const msg = $("sendMsg");
     const plain = s => String(s || "").normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
     for (const p of PROMPTS) {
       const box = $("w_" + p.id), v = (box.value || "").trim();
-      const stemShown = tr(p.stem);
       if (window.classJunkStop) {
-        const junk = window.classJunkStop(box, { starter: stemShown, source: "from today", sourceEs: "de hoy" });
+        const junk = window.classJunkStop(box, { starter: isEs() ? tr(p.stem) : p.stem, source: "from today", sourceEs: "de hoy" });
         if (junk) { msg.textContent = (isEs() ? "En " + tr(p.short) : "For " + p.short) + ": " + junk; msg.className = "msg"; return; }
       }
       if (v.length < p.min) { msg.textContent = "Write a little more for: " + p.short + " (1–2 full sentences)."; msg.className = "msg bad"; box.focus(); return; }
       if (/_{2,}/.test(v)) { msg.textContent = "Fill in the blanks with your own words for: " + p.short + "."; msg.className = "msg bad"; box.focus(); return; }
-      const stemWords = new Set(plain(p.stem + " " + stemShown).match(/[\p{L}']+/gu) || []);
+      const stemWords = new Set(plain(p.stem + " " + tr(p.stem)).match(/[\p{L}']+/gu) || []);
       const freshW = new Set((plain(v).match(/[\p{L}']{3,}/gu) || []).filter(w => !stemWords.has(w)));
       if (freshW.size < p.newWords) { msg.textContent = "Add more of your own ideas for: " + p.short + ". Use details from today."; msg.className = "msg bad"; box.focus(); return; }
       let groups = p.mustAll;
       const esWords = window.SiteLang && window.SiteLang.must(p.id);
       if (esWords) groups = groups.map((g, i) => esWords[i] ? g.concat(esWords[i]) : g);
-      const has = w => new RegExp("(^|[^\\p{L}])" + plain(w).replace(/[.*+?^${}()|[\]\\]/g, "\\$&"), "iu").test(plain(v));
-      if (groups.some(g => !g.some(has))) { msg.textContent = p.mustMsg; msg.className = "msg bad"; box.focus(); return; }
+      const pv = " " + plain(v) + " ";
+      if (groups.some(g => !g.some(w => new RegExp("(^|[^\\p{L}])" + plain(w).replace(/[.*+?^${}()|[\]\\]/g, "\\$&"), "iu").test(pv)))) { msg.textContent = p.mustMsg; msg.className = "msg bad"; box.focus(); return; }
     }
-    const answers = { "Standard": STANDARD };
-    const right = CHECK_IDS.filter(id => !(st.checks[id] || {}).wrong).length;
-    answers["First-try correct"] = right + " of " + CHECK_IDS.length;
-    const byStd = {};
-    CHECK_IDS.forEach(id => { const s = CHECKS[id].std; byStd[s] = byStd[s] || [0, 0]; byStd[s][1]++; if (!(st.checks[id] || {}).wrong) byStd[s][0]++; });
-    answers["First-try by standard"] = Object.keys(byStd).sort().map(k => k + ": " + byStd[k][0] + " of " + byStd[k][1]).join(" · ");
-    CHECK_IDS.forEach(id => {
-      const c = CHECKS[id], w = (st.checks[id] || {}).wrong || 0, v = variantFor(id);
-      const opts = v ? c.variants[v].options : c.options;
-      answers[c.short] = opts[0] + (w ? " (after " + w + " wrong " + (w === 1 ? "try" : "tries") + ")" : " (first try)");
-    });
-    JOBS.slice(0, 3).forEach((j, i) => {
-      const tried = (st.tried[j.id] || []).map(k => M[k].name);
-      const pk = st.pick[j.id] ? M[st.pick[j.id]].name : "";
-      answers["Choice · Job " + (i + 1) + " method"] = pk + (st.fit[j.id] === "ok" ? " (half the story; best was " + M[j.best].name + ")" : "") + (tried.length ? " (after wrong cards: " + tried.join(", ") + ")" : " (first card)");
-      if (st.setup[j.id]) answers["Choice · Job " + (i + 1) + " plan"] = j.setup[st.setup[j.id]].title + " — " + j.setup[st.setup[j.id]].sub + (st.setup[j.id] === "good" ? " (sound)" : " (flawed)");
-    });
-    answers["Choice · StudyStreak deal"] = st.bonus === "lie" ? "Took the deal to stretch the results" : "Reported the real results";
-    answers["Choice · Final job methods"] = (st.finalPick || []).map(k => M[k].name).join(" + ") + (st.finalFit === "solid" ? " (mixed methods)" : st.finalFit === "ok" ? " (one part only)" : " (did not fit)");
-    answers["Ending"] = ENDINGS[st.ending].title;
-    answers["Caused by"] = st.log.map(l => "Job " + l.job + ": " + l.text + " (" + l.delta + ")").join(" · ");
-    answers["Reputation"] = st.rep + " of 10";
-    PROMPTS.forEach(p => { answers["Writing: " + p.short] = ($("w_" + p.id).value || "").trim(); });
     $("sendBtn").disabled = true; msg.textContent = "Sending your work…"; msg.className = "msg";
     try {
-      const res = await window.classTurnIn(OLD_API, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ studentName: st.name, assignmentId: ASSIGNMENT_ID, assignmentTitle: TITLE, answers }) });
+      const res = await window.classTurnIn(OLD_API, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ studentName: st.name, assignmentId: ASSIGNMENT_ID, assignmentTitle: TITLE, answers: buildAnswers() }) });
       const data = await res.json().catch(() => ({}));
       if (!res.ok) throw new Error(data.error || "Your work did not save. Try again.");
       st.turnedIn = true; save();
-      msg.textContent = "Turned in! You're done."; msg.className = "msg good";
-      $("sendBtn").textContent = "Turn in again"; $("sendBtn").disabled = false;
-      if (!$("turned")) msg.insertAdjacentHTML("afterend", turnedHtml());
+      msg.textContent = "Turned in! Your teacher can see your work. You're done."; msg.className = "msg good";
+      $("sendBtn").textContent = "Turned in ✓"; $("turnedBadge").hidden = false; $("replay").hidden = false;
     } catch (err) { msg.textContent = err.message || "Could not turn in. Try again."; msg.className = "msg bad"; $("sendBtn").disabled = false; }
   }
 
-  // ---------------- Evidence checks ----------------
-  function checkData(id, v) { const c = CHECKS[id]; return v ? Object.assign({}, c, c.variants[v]) : c; }
-  function checkHtml(id, v) {
-    const c = checkData(id, v), s = st.checks[id] || {};
-    const a = c.asker || ["👩🏽‍💻", "Dee, your partner"];
-    if (s.done) return `<div class="check board done${justSolved === id ? " solved" : ""}" id="chk_${id}"><p class="ck-kick" aria-hidden="true">🔓</p><span class="unstamp" aria-hidden="true">UNLOCKED</span><p class="why"><span aria-hidden="true">✓</span> <span>${c.why}</span></p>${c.fact ? `<p class="fact">${c.fact}</p>` : ""}</div>`;
-    return `<div class="check board" id="chk_${id}"><p class="ck-kick">🔒 Evidence check: answer to finish the job</p><div class="pins">${c.evidence()}</div>${say(a[0], a[1], c.prompt, "ask")}<div class="choices replies" id="ch_${id}"></div><p class="msg" id="fb_${id}" aria-live="polite"></p></div>`;
-  }
-  function wireCheck(id, v) {
-    const c = checkData(id, v), area = $("ch_" + id), fb = $("fb_" + id);
-    if (!area) return;
-    let last = null;
-    function draw() {
-      area.replaceChildren();
-      let order = shuffle(c.options.map((t, n) => ({ t, n })));
-      if (last && order.map(o => o.n).join() === last) order.push(order.shift());
-      last = order.map(o => o.n).join();
-      order.forEach(o => {
-        const btn = document.createElement("button"); btn.type = "button"; btn.className = "choice"; btn.textContent = o.t;
-        btn.onclick = () => {
-          if (locked) return;
-          const s = st.checks[id] = st.checks[id] || { wrong: 0, done: false };
-          if (o.n === 0) {
-            s.done = true; justSolved = id; st.mood = "😒"; save(); render(); justSolved = null;
-            setTimeout(() => { const nx = $("bonusBox") || $("nextBtn") || $("chk_" + id); if (nx) nx.scrollIntoView({ block: "center", behavior: "smooth" }); }, 300);
-            return;
-          }
-          s.wrong += 1; st.mood = "😏"; save(); hud();
-          const bd = $("chk_" + id); if (bd) { bd.classList.remove("shake"); void bd.offsetWidth; bd.classList.add("shake"); }
-          locked = true; btn.classList.add("nope");
-          area.querySelectorAll("button").forEach(x => x.disabled = true);
-          let left = LOCK;
-          const tick = () => {
-            fb.textContent = "Not quite. " + c.hint + " ⏳ " + left; fb.className = "msg bad";
-            if (left-- <= 0) { locked = false; fb.textContent = "Not quite. " + c.hint; fb.className = "msg"; draw(); return; }
-            lockTimer = setTimeout(tick, 1000);
-          };
-          tick();
-        };
-        area.appendChild(btn);
-      });
-    }
-    draw();
+  function buildAnswers() {
+    const t = T(), a = { "Standard": STANDARD };
+    const right = CHECK_IDS.filter(id => chk(id).done && !chk(id).wrong).length;
+    a["First-try correct"] = right + " of " + CHECK_IDS.length;
+    const soc3 = ["q_match", "c_casey", "c_counselor", "c_city", "q_ethics", "q_mixed"];
+    a["First-try by standard"] = "Soc.1/Soc.3 (methods + ethics): " + soc3.filter(id => chk(id).done && !chk(id).wrong).length + " of " + soc3.length;
+    a["Topic"] = t.name + (st.fromD5 ? " (kept from Day 5)" : "");
+    const line = id => (chk(id).wrong ? "after " + chk(id).wrong + " wrong " + (chk(id).wrong === 1 ? "try" : "tries") : "first try");
+    a[SHORT.q_match] = "Survey→how many, Interview→why, Observation→what people do, Experiment→cause, Content analysis→media (" + line("q_match") + ")";
+    CLIENTS.forEach(cl => { a[SHORT[cl.id]] = TOOL[cl.best].name + " (" + line(cl.id) + ")" + ((st.clientPick[cl.id] || []).length ? "; tried first: " + st.clientPick[cl.id].map(k => TOOL[k].name).join(", ") : ""); });
+    a[SHORT.q_ethics] = "Get their OK and a parent's, keep names private (" + line("q_ethics") + ")";
+    a["Choice · $500 deal"] = st.deal === "lie" ? "Took the $500 to fake results" : "Reported the real results";
+    a[SHORT.q_mixed] = "Survey + Interview (" + line("q_mixed") + ")";
+    a["Ending"] = ENDINGS[endingId()].t;
+    a["Caused by"] = causedBy(true).join(" | ");
+    PROMPTS.forEach(p => { a["Writing: " + p.short] = ($("w_" + p.id).value || "").trim(); });
+    return a;
   }
 
-  // ---------------- Router ----------------
+  // ---------------- Render ----------------
+  function card() { app.innerHTML = `<section class="card step" id="stepCard"></section>`; return $("stepCard"); }
+  const STEPS = [title, step1, step2, step3, step4, step5, step6, step7];
   let first = true;
   function render() {
     if (!first && $("welcome")) $("welcome").hidden = true;
     first = false;
-    clearTimeout(lockTimer); locked = false;
-    hud();
-    document.body.classList.toggle("on-intro", !st.started);
-    if (!st.started) intro();
-    else if (st.phase === "write") writeScreen();
-    else if (st.phase === "end") endScreen();
-    else if (st.job === 3) (st.phase === "pick" ? finalScreen : finalResults)();
-    else if (st.phase === "pick") pickScreen();
-    else resultsScreen();
-    if (anim && app.firstElementChild) app.firstElementChild.classList.add("anim");
-    anim = false;
+    if (st.step >= 2 && !st.topic) st.step = 1;
+    hud(); locked = false;
+    (STEPS[st.step] || title)();
   }
-
   $("restartBtn").onclick = () => {
     if (!confirm("Start over? This clears your work on this device.")) return;
-    const name = st.name; st = fresh(); st.name = name; prevRep = null; anim = true; save(); render(); window.scrollTo(0, 0);
+    const name = st.name; st = fresh(); st.name = name; matchPick = null;
+    if (window.classFirstTry) window.classFirstTry.reset();
+    save(); render(); window.scrollTo(0, 0);
   };
-  if (st.started && $("welcome")) {
-    $("welcome").textContent = "Welcome back, " + st.name + " — you're on " + (st.phase === "end" || st.phase === "write" ? "the last step" : "Job " + (st.job + 1) + " of 4") + ".";
-    $("welcome").hidden = false;
-  }
+  if (st.step >= 1 && $("welcome")) { $("welcome").textContent = "Welcome back, " + st.name + " — you're on " + (st.step > TOTAL ? "the last screen" : "step " + st.step + " of " + TOTAL) + "."; $("welcome").hidden = false; }
   render();
-  // for testing only (read-only peek)
   window.__rr = { state: () => JSON.parse(JSON.stringify(st)) };
 })();
