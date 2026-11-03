@@ -151,7 +151,7 @@ window.CLASS_ASSIGNMENTS = {
   "day10-wwii-comics":           { course: "world-history", unit: 1, day: 10, title: "Day 10 · What Wins a War? 1940s War Comics (Reading)", path: "day10-wwii-comics/", std: ["SS.9-12.WH.32", "SS.9-12.WH.33"] },  // public-domain 1940s comics fact-check (Fynn, 11-03)
 
   // ---- U.S. History · Unit 1 (Roaring 20s & Great Depression) · outside links, no dashboard turn-in (turnIn: false) ----
-  "ush-u1-gd-assignment":     { course: "us-history", unit: 1, day: 1, turnIn: false, std: [], title: "Days 1–3 · Great Depression Assignment (Word)", path: "https://linnmarcsd-my.sharepoint.com/:w:/g/personal/fynnley_toppert_linnmar_k12_ia_us/IQAIG6nonFrZTpOf7Br6vdQGAVsfVh9lwF7Tub5K5XmvHl8?e=5uRa7c" },
+  "ush-u1-gd-assignment":     { course: "us-history", unit: 1, day: 1, turnIn: false, std: [], title: "Days 1–3 · Great Depression Project (Word)", path: "https://linnmarcsd-my.sharepoint.com/:w:/g/personal/fynnley_toppert_linnmar_k12_ia_us/IQAIG6nonFrZTpOf7Br6vdQGAVsfVh9lwF7Tub5K5XmvHl8?e=5uRa7c" },
   "ush-u1-cinderella-man":    { course: "us-history", unit: 1, day: 4, turnIn: false, std: [], title: "Days 4–5 · Cinderella Man (Movie)", path: "https://www.youtube.com/watch?v=ADPpVYZm-eM&t=1646s" },
   "ush-u1-cinderella-material": { course: "us-history", unit: 1, day: 4, turnIn: false, std: [], title: "Days 4–5 · Cinderella Man Material", path: "https://linnmarcsd-my.sharepoint.com/:b:/g/personal/fynnley_toppert_linnmar_k12_ia_us/IQAaaJk3W85dR4h3vaWo2FlTAV6B_M1nBDfCpMYw1j9tULw?e=5KfSha" },
   "ush-u1-summative-review":  { course: "us-history", unit: 1, day: 6, turnIn: false, std: [], title: "Day 6 · Summative Review (Blooket)", path: "https://dashboard.blooket.com/set/6add779bca99907cdd239286" },
