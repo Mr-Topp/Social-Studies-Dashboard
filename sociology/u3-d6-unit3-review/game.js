@@ -7,11 +7,14 @@
 //  trust). The last round ends with an objection you BUILD (idea + evidence
 //  + why), the same shape as an "explain" answer on Thursday's test.
 //  7 checks (Fynn 11/3: ~7 max; every test standard gets at least one), 4 decisions, 4 endings, 2 writing answers.
+//  + ⚡ Lightning Round after the verdict (Fynn 11/3): 7 one-tap questions on the topics the
+//    7-check cut dropped (Coleman/Pew, deviance is relative, formal sanctions, Mead's stages,
+//    Asch, Tajfel, Robbers Cave). Recorded as checks in the turn-in; they don't move the verdict.
 //  Same assignmentId as the old engine version. Turn-in via shared/turnin.js.
 // =====================================================================
 (function () {
   "use strict";
-  const KEY = "soc-u3-d6-unit3-review-v2";
+  const KEY = "soc-u3-d6-unit3-review-v2-lr";
   const ASSIGNMENT_ID = "soc-u3-d6-unit3-review";
   const TITLE = "Sociology · Unit 3 · Day 6 · Unit 3 Review: Born Reckless?";
   const STANDARD = "SS.9-12.Soc.4, SS.9-12.Soc.9, SS.9-12.Soc.10, SS.9-12.Soc.11";
@@ -20,6 +23,7 @@
   const WRONG_CASE = 5;    // each wrong answer makes Kane's case stronger
   const RIGHT_CASE = 9;    // each solved check makes it weaker
   const GOAL = { case: 20, trust: 4 };
+  const LR_LOCK = 4;       // seconds locked after a wrong lightning answer (short: it is a fast round)
 
   const $ = id => document.getElementById(id);
   const esc = s => String(s == null ? "" : s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
@@ -175,12 +179,65 @@
       reveal: "Full test answer = <b>idea + evidence + why</b>." },
 
     { id: "verdict", type: "verdict", r: 3, kicker: "The verdict" },
+    { id: "lightning", type: "lightning", r: 3, kicker: "After court · Lightning round" },
     { id: "write", type: "write", r: 3, kicker: "Closing argument" }
   ];
 
   const TOTAL = STEPS.length;
   const CHECKS = STEPS.filter(s => s.type === "check" || s.type === "build");
   const EVENTS = STEPS.filter(s => s.type === "event");
+
+  // ---------------- ⚡ Lightning round (topics the 7-check cut dropped) ----------------
+  // options[0] is right; miss[i] is the one-line teach for options[i+1]. Tags follow the Day 2–5 games.
+  const LR = [
+    { id: "lr1", std: "Soc.9", short: "Coleman + Pew: peers and media shape teens",
+      ev: "🏈 Coleman: boys picked “star athlete” over “brilliant student.” 📱 Pew: nearly half of teens are online almost constantly.",
+      src: "Coleman, The Adolescent Society, 1961 · Pew Research Center, 2024",
+      ask: "Which two agents?",
+      options: ["Peers and media", "Family and school", "School and media", "Family and peers"],
+      miss: ["Coleman is about friends. Pew is about screens.", "Media, yes. Coleman shows friends set “cool,” not teachers.", "Peers, yes. Pew is about screens: that's media."],
+      reveal: "<b>Peers</b> and <b>media</b>: huge agents of socialization for teens." },
+    { id: "lr2", std: "Soc.9", short: "Tattoos: deviance is relative",
+      ev: "🖋️ Tattoos were once seen as deviant. Pew 2023: 32% of U.S. adults have one.",
+      src: "Pew Research Center, Aug. 2023 (8,480 U.S. adults)",
+      ask: "What does this show?",
+      options: ["Deviance depends on time and place", "Deviance always means breaking a law", "Norms stay the same over time", "A third of adults are deviant now"],
+      miss: ["Deviance breaks a norm. It's not always a crime.", "Then tattoos would still be deviant. The norm changed.", "8 in 10 say people accept tattoos more now. The norm moved."],
+      reveal: "<b>Deviance is relative</b>: it depends on time and place." },
+    { id: "lr3", std: "Soc.9", short: "Formal sanction = from an official group",
+      ev: "🚗 Back to Darius.",
+      ask: "Which one is a formal sanction?",
+      options: ["A speeding ticket from police", "Mom takes his car keys for a month", "2,000 likes on his clip", "The crew stops texting him"],
+      miss: ["Mom is everyday people. That's informal.", "Likes are informal: a reward from everyday people.", "Friends are everyday people. That's informal."],
+      reveal: "<b>Formal sanction</b>: from an official group, like police or a school." },
+    { id: "lr4", std: "Soc.10", short: "Mead: shortstop = game stage",
+      ev: "⚾ A shortstop knows what the pitcher, batter, and runner will do, all at once.",
+      ask: "Mead calls this…",
+      options: ["The game stage", "The play stage", "The looking-glass self", "The “I”"],
+      miss: ["Play stage = one role at a time, like playing house.", "Looking-glass = imagining how others judge you.", "The “I” acts on impulse. This is knowing every role."],
+      reveal: "<b>Game stage</b>: many roles at once. <b>Play stage</b>: one at a time." },
+    { id: "lr5", std: "Soc.11", short: "Asch: 3 in 4 went along at least once",
+      ev: "📏 Asch: alone, almost nobody missed. With a wrong-answer group, 3 in 4 caved at least once.",
+      src: "Solomon Asch, line study, 1951",
+      ask: "This shows…",
+      options: ["Conformity: we bend to match a group", "The lines were too hard to judge", "Most people never go along with groups", "In-group bias: favoring their own team"],
+      miss: ["Alone, almost nobody missed. The lines were easy.", "3 in 4 went along at least once.", "No teams here. They changed answers to match the group."],
+      reveal: "<b>Conformity</b>: going along with a group, even when it's wrong." },
+    { id: "lr6", std: "Soc.11", short: "Tajfel: in-group bias, even for tiny reasons",
+      ev: "🎨 Tajfel: boys split by favorite painting. Many gave their own group less, if it beat the other group.",
+      src: "Henri Tajfel, Bristol, England, early 1970s",
+      ask: "This shows…",
+      options: ["In-group bias, even for tiny reasons", "Groups need a real rivalry to form first", "Most boys split the points fairly", "Boys just wanted the most money"],
+      miss: ["A painting pick was enough. No rivalry needed.", "Most favored their own group.", "Many took LESS, just to beat the other group."],
+      reveal: "<b>In-group bias</b>: favoring “us,” even for tiny reasons." },
+    { id: "lr7", std: "Soc.11", short: "Robbers Cave: shared goals ended the fighting",
+      ev: "🏕️ Robbers Cave, 1954: prize contests turned two camps of boys into enemies.",
+      src: "Muzafer Sherif and others, Oklahoma, 1954",
+      ask: "What ended the fighting?",
+      options: ["Goals neither group could reach alone", "Eating meals and watching movies together", "More contests with even bigger prizes", "Keeping the two camps fully apart"],
+      miss: ["Meals together led to food fights.", "Contests are what started the fighting.", "Apart, nothing changed. Working together did."],
+      reveal: "Competition → conflict. <b>Shared goals</b> → cooperation." }
+  ];
 
   const PROMPTS = [
     { id: "theory", short: "Theory that explains #NoBrakes (Soc.4)", label: "1. Why did Darius do #NoBrakes? Use ONE theory.",
@@ -196,10 +253,12 @@
   ];
 
   // ---------------- State ----------------
-  const fresh = () => ({ name: "", step: -1, fx: { case: 0, trust: 5 }, picks: {}, wrong: {}, done: {}, writing: {}, turnedIn: false });
+  const freshLR = () => ({ done: {}, wrong: {}, streak: 0, best: 0 });
+  const fresh = () => ({ name: "", step: -1, fx: { case: 0, trust: 5 }, picks: {}, wrong: {}, done: {}, writing: {}, turnedIn: false, lr: freshLR() });
   let st;
   try { st = JSON.parse(localStorage.getItem(KEY)); } catch (e) {}
   if (!st || typeof st !== "object" || !st.fx || !st.picks) st = fresh();
+  if (!st.lr || !st.lr.done) st.lr = freshLR();
   // Shared Chromebooks: a different student signed in on this device starts clean.
   try {
     const raw = localStorage.getItem("site-student-name") || "";
@@ -224,7 +283,7 @@
     $("rMood").textContent = kaneMood(c);
     $("youName").textContent = st.name;
     const step = STEPS[Math.min(st.step, TOTAL - 1)];
-    $("claims").innerHTML = ROUNDS.map((r, i) => `<span class="${roundWon(i) ? "won" : i === step.r && st.step < TOTAL - 2 ? "now" : ""}">${roundWon(i) ? "✓" : i + 1} ${r.tag}</span>`).join("");
+    $("claims").innerHTML = ROUNDS.map((r, i) => `<span class="${roundWon(i) ? "won" : i === step.r && !["verdict", "lightning", "write"].includes(step.type) ? "now" : ""}">${roundWon(i) ? "✓" : i + 1} ${r.tag}</span>`).join("");
     $("stepN").textContent = "Step " + Math.min(st.step + 1, TOTAL) + " of " + TOTAL;
   }
   function bump(id, delta, goodWhenUp) {
@@ -266,11 +325,12 @@
   function shell(step, sceneHtml, playHtml) {
     const R = ROUNDS[step.r];
     const busted = roundWon(step.r);
-    const top = step.type === "verdict" || step.type === "write" ? "" :
+    const off = ["verdict", "lightning", "write"].includes(step.type);
+    const top = off ? "" :
       `<div class="claimbar"><span class="kface" aria-hidden="true">👨🏻‍💼</span>${say("Kane · claim " + (step.r + 1) + " · " + R.std, R.claim, "kane" + (busted ? " busted" : ""))}</div>`;
-    const termsBtn = step.type === "verdict" || step.type === "write" ? "" : `<button type="button" class="termsBtn" id="termsBtn" aria-expanded="false">📒 Term help</button>`;
+    const termsBtn = off ? "" : `<button type="button" class="termsBtn" id="termsBtn" aria-expanded="false">📒 Term help</button>`;
     const tq = step.test ? `<p class="tq">🧪 Test question: ${esc(step.test)}</p>` : "";
-    app.innerHTML = `<div class="board"><div class="scene${top ? "" : " noclaim"}" id="scene">${top}<p class="kick">${esc(step.kicker)}</p>${sceneHtml}${juryHtml()}</div>
+    app.innerHTML = `<div class="board"><div class="scene${top ? "" : " noclaim"}" id="scene">${top}<p class="kick">${esc(step.kicker)}</p>${sceneHtml}${step.type === "lightning" ? "" : juryHtml()}</div>
       <div class="play" id="play">${tq || termsBtn ? `<div class="ptop">${tq}${termsBtn}</div>` : ""}<div id="termsBox"></div>${playHtml}</div></div>`;
     if ($("termsBtn")) $("termsBtn").onclick = () => {
       const box = $("termsBox"), open = !!box.innerHTML;
@@ -315,7 +375,7 @@
         <p class="tline">You're Darius's advocate. What really pushed him?</p>
         <ul class="how"><li><span>🔍</span>Use class evidence</li><li><span>⚖️</span>Make tough calls</li><li><span>🏁</span>Jury decides</li></ul>
         <p class="tline">🎯 Goal: explain how people and groups shape who we become.</p>
-        <p class="tchips"><span>⏱️ 15–20 min</span><span>🔍 7 checks</span><span>⚖️ 4 decisions</span><span>✏️ 2 short answers</span></p>
+        <p class="tchips"><span>⏱️ 20 min</span><span>🔍 7 checks</span><span>⚖️ 4 decisions</span><span>⚡ Lightning round</span><span>✏️ 2 answers</span></p>
         <label for="nameBox">Your name (first name + last initial)</label>
         <div class="namerow"><input id="nameBox" maxlength="60" autocomplete="off" placeholder="Like Jordan M." value="${esc(pre || "")}"><button type="button" class="go big" id="startBtn">Take the case ⚖️</button></div>
         <p id="introMsg" class="msg bad" role="status"></p>
@@ -489,6 +549,111 @@
     addNext(step, step.reveal, quiet);
   }
 
+  // ---- ⚡ Lightning round: fast one-tap questions. Streak + cheering gallery, no score shown, no countdown. ----
+  const lrNext = () => LR.findIndex(q => !st.lr.done[q.id]);
+  const streakTxt = k => k ? `🔥 <b>${k}</b> in a row` : "🔥 Start a streak!";
+  const strip = h => String(h).replace(/<[^>]+>/g, "");
+  function lrScene() {
+    const n = lrNext(), k = st.lr.streak || 0;
+    return `<div class="lrhead"><span class="bolt" aria-hidden="true">⚡</span><h2>Lightning Round</h2></div>
+      ${say("Prosecutor Kane", "“Court's done. One more round, rookie.”", "kane")}
+      <div class="pips" id="lrPips" aria-label="Question ${n < 0 ? LR.length : n + 1} of ${LR.length}">${LR.map((q, i) => `<span class="${st.lr.done[q.id] ? "lit" : i === n ? "now" : ""}" aria-hidden="true">⚡</span>`).join("")}</div>
+      <div class="streak${k >= 2 ? " hot" : ""}" id="lrStreak">${streakTxt(k)}</div>
+      <div class="gallery" id="gallery" aria-hidden="true">${Array.from({ length: 10 }, (_, i) => `<span style="animation-delay:${i * 0.06}s">🙂</span>`).join("")}</div>`;
+  }
+  function lightning(step) {
+    shell(step, lrScene(), `<div id="lrPlay"></div><div id="after"></div>`);
+    if (lrNext() < 0) return lrDone(step, true);
+    lrCard(step, false);
+    if (lockLeft() > 0 && st.lockLR === LR[lrNext()].id) { $("replies").querySelectorAll("button").forEach(x => x.disabled = true); runLock(st.lockMsg || "", $("qmsg"), () => lrOptions(step), lockLeft()); }
+  }
+  function lrCard(step, anim) {
+    const q = LR[lrNext()];
+    $("lrPlay").innerHTML = `<div class="lrcard${anim ? " flipin" : ""}" id="lrCard">
+        <p class="lrn">⚡ ${lrNext() + 1} / ${LR.length}</p>
+        <p class="lrev">${esc(q.ev)}</p>${q.src ? src(esc(q.src)) : ""}
+        <p class="ask">${esc(q.ask)}</p>
+        <div class="replies lrgrid" id="replies"></div>
+        <p class="msg" id="qmsg" role="status" aria-live="polite"></p>
+        ${"speechSynthesis" in window ? `<button type="button" class="mini lrread" id="lrRead">🔊 Read it to me</button>` : ""}
+      </div>`;
+    if ($("lrRead")) $("lrRead").onclick = () => {
+      const synth = window.speechSynthesis;
+      if (synth.speaking) { synth.cancel(); return; }
+      const opts = [...document.querySelectorAll("#replies .reply")].map(b => b.textContent);
+      const u = new SpeechSynthesisUtterance([strip(q.ev).replace(/[^\p{L}\p{N}\s.,:%'“”"?…-]/gu, " "), q.ask, "Choices: " + opts.join(". ")].join(" "));
+      u.rate = 0.95; u.lang = "en-US"; synth.cancel(); synth.speak(u);
+    };
+    lrOptions(step);
+  }
+  function lrOptions(step) {
+    const area = $("replies"); if (!area) return;
+    const q = LR[lrNext()];
+    const before = [...area.querySelectorAll(".reply")].map(x => x.textContent).join("|");
+    let order = shuffle(q.options.map((t, n) => ({ t, n })));
+    for (let k = 0; k < 8 && before && order.map(o => o.t).join("|") === before; k++) order = shuffle(order);
+    area.replaceChildren();
+    order.forEach(o => {
+      const b = document.createElement("button"); b.type = "button"; b.className = "reply lr"; b.textContent = o.t;
+      b.onclick = () => lrPick(step, q, o, b);
+      area.appendChild(b);
+    });
+  }
+  function lrPick(step, q, o, btn) {
+    if (locked || st.lr.done[q.id]) return;
+    const msg = $("qmsg");
+    if (o.n === 0) {
+      st.lr.done[q.id] = true;
+      if (!st.lr.wrong[q.id]) { st.lr.streak = (st.lr.streak || 0) + 1; st.lr.best = Math.max(st.lr.best || 0, st.lr.streak); }
+      save();
+      try { window.classFirstTry && window.classFirstTry.right("lr-" + q.id); } catch (e) {}
+      btn.classList.add("right");
+      $("replies").querySelectorAll("button").forEach(x => { x.disabled = true; if (x !== btn) x.classList.add("fade"); });
+      msg.innerHTML = `✓ ${q.reveal}`; msg.className = "msg good lrok";
+      if ($("welcome")) $("welcome").hidden = true;
+      cheer();
+      locked = true;
+      setTimeout(() => {
+        locked = false;
+        if (!document.body.contains(btn)) return;
+        if (lrNext() < 0) return lrDone(step, false);
+        lrCard(step, true);
+      }, 1900);
+      return;
+    }
+    btn.classList.add("wrong");
+    const why = (q.miss && q.miss[o.n - 1]) || "Look at the evidence again.";
+    st.lr.wrong[q.id] = (st.lr.wrong[q.id] || 0) + 1;
+    st.lr.streak = 0;
+    st.lockUntil = Date.now() + LR_LOCK * 1000; st.lockMsg = why; st.lockLR = q.id;
+    save();
+    try { window.classFirstTry && window.classFirstTry.wrong(); } catch (e) {}
+    lrHud(false);
+    $("replies").querySelectorAll("button").forEach(x => x.disabled = true);
+    runLock(why, msg, () => lrOptions(step), LR_LOCK);
+  }
+  function lrHud(up) {
+    const n = lrNext(), k = st.lr.streak || 0;
+    const p = $("lrPips"); if (p) p.querySelectorAll("span").forEach((s, i) => { s.className = st.lr.done[LR[i].id] ? "lit" : i === n ? "now" : ""; });
+    const s = $("lrStreak"); if (s) { s.innerHTML = streakTxt(k); s.classList.toggle("hot", k >= 2); s.classList.remove("pulse"); void s.offsetWidth; if (up) s.classList.add("pulse"); }
+  }
+  function cheer() {
+    lrHud(true);
+    const g = $("gallery"); if (!g) return;
+    const faces = ["🙌", "👏", "🤩", "📣", "🙌", "👏", "🥳", "🙌", "👏", "📣"];
+    g.querySelectorAll("span").forEach((s, i) => { s.textContent = faces[i]; s.classList.remove("jump"); void s.offsetWidth; s.classList.add("jump"); });
+    setTimeout(() => { const g2 = $("gallery"); if (g2) g2.querySelectorAll("span").forEach(s => s.textContent = "🙂"); }, 1500);
+  }
+  function lrDone(step, quiet) {
+    lrHud(false);
+    const best = st.lr.best || 0;
+    $("lrPlay").innerHTML = `<div class="lrcard lrend${quiet ? "" : " flipin"}"><p class="big" aria-hidden="true">⚡🏆⚡</p><h3>Round cleared!</h3><p class="lrbest">🔥 Best streak: <b>${best}</b> in a row</p><p class="lrev">Kane packs up his files. 👏 The gallery is on its feet.</p></div>`;
+    const g = $("gallery"); if (g) g.querySelectorAll("span").forEach((s, i) => s.textContent = ["🙌", "👏", "🤩", "📣", "🥳"][i % 5]);
+    if (!quiet) stamp("KANE SILENCED", "huge stay");
+    addNext(step, null, quiet);
+    const b = $("nextBtn"); if (b) b.textContent = "✏️ Make your closing argument ▶";
+  }
+
   // ---- Endings ----
   function ending() {
     const c = caseNow(), t = trustNow();
@@ -511,7 +676,7 @@
     shell(step, `<div class="endcard ${e.cls}"><span class="eicon" aria-hidden="true">${e.icon}</span><h2>${esc(e.key)}</h2><p>${esc(e.text)}</p></div>`,
       `<div class="cause"><p class="ch">Caused by</p><ul>${e.causes.map(c => `<li>${esc(c)}</li>`).join("")}</ul><p class="endm">⚖️ Kane's case ${caseNow()}% · 💛 Trust ${trustNow()}/10</p></div><div id="after"></div>`);
     stamp(e.key.toUpperCase(), (e.cls === "best" ? "" : "bad") + " huge");
-    const b = nextBtn(step); b.textContent = "✏️ Make your closing argument ▶";
+    const b = nextBtn(step); b.textContent = "⚡ Lightning round ▶";
     $("after").appendChild(b);
   }
 
@@ -561,9 +726,10 @@
     if (typeof window.classTurnIn !== "function") { msg.textContent = "Turn-in isn't working right now. Keep this page open and tell your teacher."; msg.className = "msg bad"; return; }
 
     const answers = { "Standard": STANDARD };
-    answers["First-try correct"] = CHECKS.filter(c => !st.wrong[c.id]).length + " of " + CHECKS.length;
+    const ALL = CHECKS.map(c => ({ std: c.std, miss: st.wrong[c.id] })).concat(LR.map(q => ({ std: q.std, miss: st.lr.wrong[q.id] })));
+    answers["First-try correct"] = ALL.filter(c => !c.miss).length + " of " + ALL.length;
     const byStd = {};
-    CHECKS.forEach(c => { byStd[c.std] = byStd[c.std] || [0, 0]; byStd[c.std][1]++; if (!st.wrong[c.id]) byStd[c.std][0]++; });
+    ALL.forEach(c => { byStd[c.std] = byStd[c.std] || [0, 0]; byStd[c.std][1]++; if (!c.miss) byStd[c.std][0]++; });
     answers["First-try by standard"] = Object.keys(byStd).sort((a, b) => parseFloat(a.split(".")[1]) - parseFloat(b.split(".")[1])).map(k => k + ": " + byStd[k][0] + " of " + byStd[k][1]).join(" · ");
     PROMPTS.forEach(p => { answers["Writing: " + p.short] = ($("w_" + p.id).value || "").trim(); });
     STEPS.forEach(s => {
@@ -574,6 +740,11 @@
         answers[s.std + " · " + s.short] = ans + (w ? " (after " + w + " wrong " + (w === 1 ? "try" : "tries") + ")" : " (first try)");
       }
     });
+    LR.forEach(q => {
+      const w = st.lr.wrong[q.id];
+      answers[q.std + " · ⚡ " + q.short] = q.options[0] + (w ? " (after " + w + " wrong " + (w === 1 ? "try" : "tries") + ")" : " (first try)");
+    });
+    answers["⚡ Lightning best streak"] = (st.lr.best || 0) + " in a row";
     answers["Jury outcome"] = e.out;
     answers["Caused by"] = e.causes.join(" · ");
     answers["Kane's case (end)"] = caseNow() + "%";
@@ -605,6 +776,7 @@
     if (step.type === "build") return build(step);
     if (step.type === "event") return event(step);
     if (step.type === "verdict") return verdict(step);
+    if (step.type === "lightning") return lightning(step);
     return writeStep(step);
   }
 
@@ -616,7 +788,8 @@
   };
   if (st.step >= 0 && st.name) {
     const w = $("welcome");
-    w.innerHTML = `<span>👋 Welcome back, ${esc(st.name)}! You're on step ${Math.min(st.step + 1, TOTAL)} of ${TOTAL}.</span>`;
+    const onLR = STEPS[Math.min(st.step, TOTAL - 1)].type === "lightning" && lrNext() >= 0;
+    w.innerHTML = `<span>👋 Welcome back, ${esc(st.name)}! You're on step ${Math.min(st.step + 1, TOTAL)} of ${TOTAL}.${onLR ? " ⚡ Question " + (lrNext() + 1) + " of " + LR.length + "." : ""}</span>`;
     const notMe = document.createElement("button");
     notMe.type = "button"; notMe.className = "notme"; notMe.textContent = "Not " + st.name + "? Start fresh";
     notMe.onclick = () => {
