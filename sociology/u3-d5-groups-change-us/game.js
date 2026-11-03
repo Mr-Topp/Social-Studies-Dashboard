@@ -19,7 +19,7 @@
   const KEY = "soc-u3-d5-groups-change-us-v2";
   const ASSIGNMENT_ID = "soc-u3-d5-groups-change-us";
   const TITLE = "Sociology · Unit 3 · Day 5 · The Group Pressure Lab";
-  const STANDARD = "SS.9-12.Soc.9, SS.9-12.Soc.10, SS.9-12.Soc.11";
+  const STANDARD = "SS.9-12.Soc.10, SS.9-12.Soc.11";
   const OLD_API = "https://fynn-class-assignment-submissions-20261024.neotboy.chatgpt.site/api/submit";
   const LOCK = 5;       // seconds locked after a wrong answer
   const MAXV = { riv: 10, fun: 10, voice: 3 };
@@ -102,7 +102,7 @@
   const STEPS = [
     { id: "line", type: "line", day: 0, kicker: "Staff training · The line game", short: "Line test (others were in on it)" },
 
-    { id: "c1", type: "check", day: 0, std: "Soc.9", kicker: "Staff training · Duke's folder", short: "Asch 1951: most caved once; alone, almost nobody missed", stamp: "REAL DATA",
+    { id: "c1", type: "check", day: 0, std: "Soc.11", kicker: "Staff training · Duke's folder", short: "Asch 1951: most caved once; alone, almost nobody missed", stamp: "REAL DATA",
       scene: () => file("Real study · Solomon Asch, 1951",
         `<div class="stats"><div><b>under 1%</b>wrong when alone</div><div><b>75%</b>went with the group at least once</div><div><b>25%</b>never went along</div></div>`,
         "Asch, 1951: 7 actors gave wrong answers on purpose.") + say("🤠 Duke", "See? Everybody caves.", "duke"),
@@ -183,7 +183,7 @@
       ],
       after: () => `<p><b>Groupthink</b>: wanting to agree so much that nobody questions a bad plan.</p>` },
 
-    { id: "c5", type: "check", day: 4, std: "Soc.9", kicker: "Thursday · Hank's history file", short: "Bay of Pigs = groupthink (stayed quiet to agree)", stamp: "GROUPTHINK",
+    { id: "c5", type: "check", day: 4, std: "Soc.11", kicker: "Thursday · Hank's history file", short: "Bay of Pigs = groupthink (stayed quiet to agree)", stamp: "GROUPTHINK",
       scene: () => file("Real case · Bay of Pigs, 1961",
         `<div class="tl"><span>🏛️ Kennedy's advisers OK a plan: about 1,400 Cubans who fled Castro invade Cuba.</span><span>🤐 Some had doubts. They stayed quiet.</span><span>⛓️ About 1,200 invaders were captured.</span></div>`,
         "Irving Janis, Victims of Groupthink, 1972."),
