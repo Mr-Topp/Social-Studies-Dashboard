@@ -399,6 +399,8 @@ function pFinal() {
 function checkWriting(p, v) {
   const t = v.toLowerCase();
   if (p.optional && !v.trim()) return '';
+  // Shared junk check (shared/turnin.js) first: idk, mashing, repeats, filler, copied question, bare keyword lists.
+  if (window.classJunkStop) { const j = window.classJunkStop(document.getElementById('w_' + p.id), { prompt: p.label, starter: p.stem, source: 'from the game' }); if (j) return 'For ' + p.short + ': ' + j; }
   if (/\b(idk|lol|bruh|asdf|dunno|bathroom|blah|bye)\b|ok done/.test(t)) return 'Write a real answer for: ' + p.short + '. Use the starter to help.';
   if (/_{2,}/.test(v)) return 'Replace the ___ blanks with your own words in: ' + p.short + '.';
   if (v.length < p.min) return 'Write a little more for: ' + p.short + ' (2 full sentences).';

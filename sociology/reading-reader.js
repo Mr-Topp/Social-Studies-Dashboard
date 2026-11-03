@@ -79,6 +79,7 @@ if($('reflection'))$('reflection').addEventListener('input',save);
   if(!/^\S+ [A-Z]\.$/.test(name)){msg.style.color='#b42318';msg.textContent='Type your first name and last initial, like Jordan M.';$('turnName').focus();return}
   const ref=($('reflection')&&$('reflection').value||'').trim();
   if(ref.split(/\s+/).filter(Boolean).length<5){msg.style.color='#b42318';msg.textContent='Write your final thought (at least one full sentence) before turning in.';$('reflection').focus();return}
+  const junk=window.classJunkStop?window.classJunkStop($('reflection')):'';if(junk){msg.style.color='#19364b';msg.textContent=junk;return}
   const answers={'Standard':meta.standard||'','First-try correct':'','Reading':t};let n=0,ft=0;
   groups.forEach((g,gi)=>g.questions.forEach((q,qi)=>{const m=misses[gi+'-'+qi]||0;n++;if(!m)ft++;answers['Q'+n+': '+q.question]=m?('Correct after '+m+' wrong '+(m===1?'try':'tries')):'Correct on first try'}));
   answers['First-try correct']=ft+' of '+n;answers['Final thought']=ref;

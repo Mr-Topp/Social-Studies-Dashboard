@@ -317,7 +317,7 @@ const name=$("studentName").value.trim(),answerText=$("finalAnswer").value.trim(
 state.studentName=name;state.answerText=answerText;save();
 const short=window.classShortName?window.classShortName(name):name;
 if(!name||!/ [A-Z]\.$/.test(short)){status.textContent="Type your first name + last initial (like Jordan M.).";$("studentName").focus();return}
-if(/_{2,}/.test(answerText)||answerText.split(/\s+/).filter(Boolean).length<10){status.textContent="Finish the sentence: fill in every ___ and write at least 10 words.";$("finalAnswer").focus();return}
+if(/_{2,}/.test(answerText)||answerText.split(/\s+/).filter(Boolean).length<10){status.textContent="Finish the sentence: fill in every ___ and write at least 10 words.";$("finalAnswer").focus();return}{const j=window.classJunkStop&&window.classJunkStop($("finalAnswer"),{source:"from the cartoon"});if(j){status.textContent=j;return}}
 button.disabled=true;status.textContent="Sending your work…";
 try{
 const res=await classTurnIn("https://fynn-class-assignment-submissions-20261024.neotboy.chatgpt.site/api/submit",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({studentName:name,assignmentId:"write-the-peace-treaty",answers:{"Standard":"SS.9-12.WH.31, SS.9-12.WH.29",...state.responses,"Final reflection":answerText}})});

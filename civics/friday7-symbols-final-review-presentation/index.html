@@ -503,6 +503,7 @@ document.getElementById('xTurn').onclick=turnIn}
 function turnIn(){var s=document.getElementById('xStatus'),ans=document.getElementById('xAns').value.trim(),name=document.getElementById('xName').value.trim(),btn=document.getElementById('xTurn');
  if(Q.some(function(q){return !st.done[q.id]})){s.textContent='Answer questions 1'+(Q.length>1?' and 2':'')+' first.';return}
  if(ans.split(/\s+/).filter(Boolean).length<(C.w.min||8)){s.textContent=C.w.short;document.getElementById('xAns').focus();return}
+ {var j=window.classJunkStop&&window.classJunkStop(document.getElementById('xAns'),{source:'from the slides'});if(j){s.textContent=j;return}}
  if(!name){s.textContent='Type your first name and last initial, like Jordan M.';document.getElementById('xName').focus();return}
  if(!window.classTurnIn){s.textContent='Turn-in only works on the class website. Tell your teacher.';return}
  btn.disabled=true;s.textContent='Turning in…';

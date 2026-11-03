@@ -465,6 +465,8 @@ const cap = s => s[0].toUpperCase() + s.slice(1);
 function checkWriting(p, v) {
   const t = v.toLowerCase();
   if (p.optional && !v.trim()) return '';
+  // Shared junk check (shared/turnin.js) first: idk, mashing, repeats, filler, copied question, bare keyword lists.
+  if (window.classJunkStop) { const j = window.classJunkStop(document.getElementById('w_' + p.id), { prompt: p.label, starter: p.stem, source: 'from the game' }); if (j) return 'For ' + p.short + ': ' + j; }
   if (/\b[bcdfghjklmnpqrstvwxz]{4,}\b/.test(t)) return 'Some of that isn\'t real words. Write a real answer for: ' + p.short + '.';
   if (/\b(idk|idc|lol|lmao|lmfao|bruh|asdf|dunno|bathroom|blah|bye|boring|stupid|dumb|smells?|fr)\b|ok done/.test(t)) return 'Write a real answer for: ' + p.short + '. Use the starter to help.';
   if (/_{2,}/.test(v)) return 'Replace the ___ blanks with your own words in: ' + p.short + '.';

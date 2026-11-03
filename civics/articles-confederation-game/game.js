@@ -198,6 +198,8 @@ async function turnIn() {
   const st = $('#tiStatus'), ans = $('#exitAnswer').value.trim(), name = $('#studentName').value.trim(), btn = $('#turnInBtn');
   const problem = A.checkWriting(ans, STARTER);
   if (problem) { $('#wHelp').textContent = problem; $('#wHelp').className = 'sub warn'; $('#exitAnswer').focus(); return; }
+  // Shared junk check (shared/turnin.js): idk, mashing, repeats, filler, copied question, bare keyword lists.
+  { const j = window.classJunkStop && window.classJunkStop($('#exitAnswer'), { starter: STARTER, source: 'from the game' }); if (j) { $('#wHelp').textContent = j; $('#wHelp').className = 'sub'; return; } }
   if (!name) { st.textContent = 'Type your first name and last initial, like Jordan M.'; $('#studentName').focus(); return; }
   if (!window.classTurnIn) { st.textContent = 'Turn-in is not available right now. Tell your teacher.'; return; }
   const e = A.ending(s);

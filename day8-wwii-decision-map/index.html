@@ -83,6 +83,7 @@ for(let i=1;i<=4;i++){
 const choice=d.getElementById("choice"+i)?.value||"",reason=d.getElementById("reason"+i)?.value.trim()||"",outcome=d.getElementById("outcome"+i);
 if(!choice||!reason)throw new Error("Finish all four Decision Map choices and reasons in Part 1.");
 if(!d.getElementById("mapcheck"+i)?.classList.contains("done"))throw new Error("Pass the map check at all four Part 1 stops.");
+if(window.classWritingCheck){const r=classWritingCheck(reason,{prompt:"Why did you choose it? Write one sentence.",source:"from the map"});if(!r.ok)throw new Error("Part 1, stop "+i+": "+r.message)}
 if(!outcome?.classList.contains("show"))throw new Error("Open the history card at all four Part 1 stops before turning in.");
 answers["Part 1 · Decision "+i]=choice;answers["Part 1 · Reason "+i]=reason;
 }

@@ -285,11 +285,14 @@ $('checkPageAnswer').addEventListener('click',()=>{
  }
 });
 $('prevCheck').addEventListener('click',()=>{saveCurrent();if(checkIndex>0){checkIndex--;showCheck()}});
-$('nextCheck').addEventListener('click',()=>{if(checkIndex<5&&sectionHasAllCorrect(dayIndex,checkIndex)&&getAnswer(checkIndex,'us').trim()){saveCurrent();checkIndex++;showCheck()}});
+$('nextCheck').addEventListener('click',()=>{if(checkIndex<5&&sectionHasAllCorrect(dayIndex,checkIndex)&&getAnswer(checkIndex,'us').trim()){if(usJunk())return;saveCurrent();checkIndex++;showCheck()}});
+// Shared junk check (shared/turnin.js) on the U.S. connection box. The question and fact card are on screen.
+function usJunk(){return window.classJunkStop&&window.classJunkStop($('usAnswer'),{prompt:$('usQuestionText').textContent,source:'from the fact card'})}
 $('submitBtn').addEventListener('click',async()=>{
  saveCurrent();const name=$('studentName').value.trim(),d=DAYS[dayIndex],status=$('status'),btn=$('submitBtn');status.className='status';
  if(!name){status.textContent='Type your name first.';status.classList.add('error');$('studentName').focus();return}
  if(d.checks.some((_,i)=>!getAnswer(i,'us').trim())){status.textContent='Answer all 6 U.S. questions first.';status.classList.add('error');return}
+ {const bad=window.classWritingCheck?d.checks.findIndex((c,i)=>!classWritingCheck(getAnswer(i,'us'),{prompt:c[1]}).ok):-1;if(bad>=0){checkIndex=bad;showCheck();status.textContent='U.S. question '+(bad+1)+': '+(usJunk()||'Fix this answer.');return}}
  if(d.checks.some((_,i)=>!sectionIsRead(dayIndex,i)||!sectionHasAllCorrect(dayIndex,i))){status.textContent='Read and answer all '+pageTotal(d)+' reading questions before turning in your work.';status.classList.add('error');return}
  const answers=Object.assign({Standard:STD[d.id]||'','First-try correct':ftText(dayIndex)},Object.fromEntries(d.checks.map((_,i)=>{const first=d.start+i*groupSize(d);const book=Array.from({length:groupSize(d)},(_,n)=>pageLabel(d,first+n)+': '+getPageAnswer(dayIndex,first+n)).join('\n');return['check'+(i+1),'Book questions:\n'+book+'\nU.S. question: '+d.checks[i][1]+'\nU.S. connection: '+getAnswer(i,'us').trim()]})));
  btn.disabled=true;status.textContent='Sending…';

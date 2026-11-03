@@ -13,6 +13,224 @@ const GOOGLE_SAVER_URL = "https://script.google.com/macros/s/AKfycbwWV93yudtLuny
 // Paste its /exec address between the quotes after the one-time setup (teacher-submissions/setup-teacher-tools.html).
 const TEACHER_TOOLS_URL = "https://script.google.com/macros/s/AKfycbwiVW6Cufw8Dqnwqka-s8eCDvzhh2B-riUzfU80vlIu4CtejXpxgzXiP-pqlqOY-M6o5g/exec";
 
+// =====================================================================
+//  JUNK-WRITING CHECK (one check for every writing box on the site)
+//  Blocks "idk", "bruh lol", keyboard mashing, the same word over and over,
+//  filler, the question copied back, an empty sentence starter, and a bare
+//  list of topic words. Never blocks for spelling, grammar, or capitals.
+//  Short honest answers pass ("he was scared because the soldiers took his family").
+//  Works for English and Spanish answers.
+//
+//  classWritingCheck(text, {prompt, starter})  -> { ok, reason, message }
+//  classJunkStop(box, {prompt, starter, source}) -> "" if fine, or the kind
+//     message (also shown in a calm note under the box, with the starter if there is one).
+// =====================================================================
+(function () {
+  "use strict";
+  const plain = s => String(s || "").normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase().replace(/[’‘`´]/g, "'");
+  const words = s => (plain(s).match(/[\p{L}\p{N}']+/gu) || []).map(w => w.replace(/^'+|'+$/g, "")).filter(Boolean);
+  const set = s => new Set(s.split(/\s+/).filter(Boolean));
+  // Never a real answer.
+  const SLANG = /^(i+d+k+|i+d+c+|idek|dunno+|lo+l+(o*l+)*|lmf?a+o+|rofl|bru+h+|wtf+|wth|smh+|x+d+|(ha){2,}h?|(ah){2,}|(ja){2,}|(je){2,}|(he){2,}h?|kek)$/;
+  // Keyboard mashing.
+  const MASH = /^(asdf\w*|sdf\w*|qwe\w*|zxc\w*|hjk\w*|jkl\w*|fgh\w*|ghj\w*|(\p{L})\2{3,}|(\p{L}{2})\3{2,})$/u;
+  const NO_VOWEL_OK = set("govt ppls pplz thx thnx smth sthg mrs");
+  // Small words that hold a sentence together (English + Spanish). They show it's a sentence, not a list.
+  const GLUE = set(
+    "a an the and or but so because cause cuz bc bcuz cus coz since if then than that this these those there theres their they them theyre " +
+    "he him his she her hers it its i me my mine we us our you your who whom whose which what when where why how is are was were be been being am " +
+    "do does did done doing have has had having can could would should will wont might must may to of in on at by for from with without about into " +
+    "onto over under after before during until up down out off as not no nor all any some each every both one also too still yet again here " +
+    "wasnt werent isnt arent didnt dont doesnt couldnt wouldnt shouldnt cant im ive id hes shes were youre gonna wanna gotta got get gets getting let lets make made makes " +
+    "el la los las lo un una unos unas de del al en y e o u pero porque por para con sin sobre que quien cual como cuando donde se su sus es son era eran " +
+    "fue fueron ser estar esta estaba estaban estan hay habia tiene tienen tenia tenian ha han muy mas ya le les me te nos yo tu ella ellos ellas " +
+    "nosotros usted este esto ese esa eso mi mis tan tambien entre hasta desde mucho muchos mucha muchas poco otra otro otros si");
+  // Words that don't count as a real idea.
+  const FILLER = set(
+    "know knew sure idea clue nothing something anything everything stuff thing things whatever boring bored dumb stupid forgot guess maybe " +
+    "ok okay okey k kk yes yeah yea yep ya yah nah nope no cool nice fr frfr ong tbh ngl ig istg bro bruv dude fam lowkey highkey " +
+    "really very just like literally basically honestly actually totally think thought feel believe answer question idk " +
+    "shit fuck fucking damn hell ass crap bye bathroom hmm hmmm umm um uh uhh eh meh " +
+    "nada algo cosa cosas pues bueno osea creo nose nse sepa idea respuesta pregunta");
+  const FILLER_PHRASES = /\b(i (do ?n'?o?t|dont|do not|dunno) know|(do ?n'?t|dont) know|not sure|no idea|no clue|i forgot|i guess|who cares|no se|no lo se|ni idea|no tengo (ni )?idea|quien sabe)\b/g;
+  // Common action words, so a real sentence with lots of names in it isn't mistaken for a list.
+  const VERBS = set(
+    "give gave take took go went come came see saw get got make made lose lost leave left run ran win won fight fought begin began keep kept put say said " +
+    "tell told think thought bring brought buy bought send sent build built feel felt hold held pay paid sell sold stand stood write wrote grow grew know knew " +
+    "throw threw hide hid die kill fall fell lead led meet met speak spoke try tried want need help stay stop start eat ate find found become became break broke " +
+    "catch caught choose chose drive drove flee fled force join live work vote protect control rule spread show hurt hit cut let move change use mean meant " +
+    "set lie lied cost own care happen turn call ask look seem believe agree beat bit sit sat sleep slept steal stole teach taught wear wore");
+  const isVerb = w => VERBS.has(w) || VERBS.has(stem(w)) || (w.length > 4 && /(ed|ing|aron|ieron|aban|ando|iendo)$/.test(w));
+  const stem = w => w.length > 4 ? w.replace(/'s$/, "").replace(/ies$/, "y").replace(/(es|s|ed|ing|ly)$/, "") : w.replace(/'s$/, "");
+  const isEs = () => !!(window.SiteLang && window.SiteLang.isEs && window.SiteLang.isEs());
+
+  function msgFor(reason, o) {
+    const es = o.lang ? o.lang === "es" : isEs();
+    const why = /\bwhy\b|because|explain|reason|por ?que|razon|explica/.test(plain(o.prompt || ""));
+    const one = es ? (why ? "Dime una razón real " : "Dime un detalle real ") + (o.sourceEs || "de la página") + "."
+                   : "Tell me one real " + (why ? "reason" : "detail") + " " + (o.source || "from the page") + ".";
+    const M = es ? {
+      blank: "Llena cada ___ con tus propias palabras.",
+      slang: "Quita \"" + o.word + "\" y " + one.charAt(0).toLowerCase() + one.slice(1),
+      mash: "Parte de eso no son palabras reales. " + one,
+      repeat: "Repetiste las mismas palabras. " + one,
+      list: "Eso es una lista de palabras. Úsalas en una oración que diga qué pasó.",
+      copy: "Eso es la pregunta copiada. Ahora contéstala. " + one,
+      starter: "Termina el inicio con tus propias palabras. " + one,
+      short: "Di un poco más. " + one
+    } : {
+      blank: "Fill in each ___ with your own words.",
+      slang: "Take out \"" + o.word + "\" and t" + one.slice(1),
+      mash: "Some of that isn't real words. " + one,
+      repeat: "That's the same words over and over. " + one,
+      list: "That's a list of words. Put them in a sentence that says what happened.",
+      copy: "That's the question copied back. Now answer it. " + one,
+      starter: "Finish the starter in your own words. " + one,
+      short: "Say a bit more. " + one
+    };
+    return M[reason] || M.short;
+  }
+
+  // Take the starter's own words out, so only what the student added is checked.
+  function studentPart(text, starter) {
+    let t = " " + words(text).join(" ") + " ";
+    let frame = false;
+    if (starter) {
+      const parts = String(starter).split(/_{2,}|…|\.\.\./).map(p => words(p).join(" ")).filter(p => p.length >= 5 || p.includes(" "));
+      let found = 0;
+      // Every copy of the starter comes out (typing the starter twice is still just the starter).
+      parts.forEach(p => { let i = t.indexOf(" " + p + " "), hit = false; while (i >= 0) { t = t.slice(0, i) + " | " + t.slice(i + p.length + 2); hit = true; i = t.indexOf(" " + p + " "); } if (hit) found++; });
+      frame = parts.length > 0 && found >= Math.ceil(parts.length * 0.6);
+    }
+    return { tokens: t.split(/\s+/).filter(w => w && w !== "|"), runs: t.split("|"), frame };
+  }
+
+  function check(text, opts) {
+    const o = Object.assign({}, opts || {});
+    const done = (reason, extra) => { Object.assign(o, extra || {}); return { ok: false, reason, message: msgFor(reason, o) }; };
+    const raw = String(text || "").trim();
+    if (!raw) return { ok: false, reason: "empty", message: "" };
+    if (/_{2,}/.test(raw)) return done("blank");
+    const p = plain(raw);
+    const spaced = p.match(/(^|[^\p{L}])(i[\s.]*d[\s.]*k|i\s+d\s+c)(?=[^\p{L}]|$)/u);
+    const all = words(raw);
+    const slang = all.find(w => SLANG.test(w));
+    if (slang || spaced) return done("slang", { word: slang || "idk" });
+    if (!all.length) return done("short");
+    // Short ALL-CAPS words are names like FDR, USSR, NAACP, not mashing.
+    const caps = new Set((raw.normalize("NFD").replace(/[\u0300-\u036f]/g, "").match(/[\p{L}']+/gu) || []).filter(w => /^\p{Lu}{2,6}'?s?$/u.test(w)).map(w => w.toLowerCase().replace(/'/g, "")));
+    const isMash = w => MASH.test(w) || (!caps.has(w) && w.length >= 4 && /^\p{L}+$/u.test(w) && !/[aeiouy]/.test(w) && !NO_VOWEL_OK.has(w));
+    const mash = all.filter(isMash);
+    if (mash.some(w => MASH.test(w)) || mash.length >= 2 || (mash.length && mash.length * 3 >= all.length)) return done("mash");
+    // The same word over and over (or one sentence pasted again and again).
+    // (Only the student's own words count here, so a starter that repeats itself is fine.)
+    const mine = o.starter ? studentPart(p, o.starter).tokens : all;
+    if (mine.length >= 4) {
+      const n = {}; mine.forEach(w => { const s = stem(w); n[s] = (n[s] || 0) + 1; });
+      const top = Math.max(...Object.values(n)), distinct = Object.keys(n).length;
+      if (top / mine.length >= 0.5 || (mine.length >= 8 && distinct / mine.length < 0.45)) return done("repeat");
+    }
+    const sp = studentPart(p.replace(FILLER_PHRASES, " "), o.starter);
+    const toks = sp.tokens;
+    // A bare list of topic words: no small sentence words holding it together.
+    if (toks.length >= 4) {
+      const glue = toks.filter(w => GLUE.has(w)).length;
+      let run = 0, longest = 0;
+      toks.forEach(w => { run = GLUE.has(w) ? 0 : run + 1; longest = Math.max(longest, run); });
+      const commaList = (raw.match(/,/g) || []).length >= 3 && raw.split(/[,;]/).filter(x => words(x).length <= 2).length >= 4;
+      const verbs = toks.filter(w => !GLUE.has(w) && isVerb(w)).length, g = glue / toks.length;
+      if ((!verbs && (g < 0.2 || longest >= 5)) || (g < 0.08 && longest >= 7) || (commaList && g < 0.25)) return done("list");
+    }
+    const promptSet = new Set(words(o.prompt).map(stem));
+    const content = [...new Set(toks.filter(w => !GLUE.has(w) && !FILLER.has(w) && w.length > 1).map(stem))];
+    const own = content.filter(w => !promptSet.has(w));
+    // Words from the question count half: an answer may reuse them, but it has to add something new.
+    const score = own.length + 0.5 * (content.length - own.length);
+    if (!own.length || score < 2 || content.length < (sp.frame ? 2 : 3)) {
+      if (content.length >= 2 && !own.length) return done("copy");
+      if (sp.frame && content.length < 2) return done("starter");
+      return done("short");
+    }
+    return { ok: true, reason: "", message: "" };
+  }
+  window.classWritingCheck = check;
+
+  // ---------- On the page: find the question and starter for a box, show a calm note ----------
+  const clean = s => String(s || "").replace(/\s+/g, " ").trim();
+  function promptFor(box) {
+    let txt = "";
+    if (box.id) { const l = document.querySelector('label[for="' + (window.CSS && CSS.escape ? CSS.escape(box.id) : box.id) + '"]'); if (l) txt = l.textContent; }
+    if (!txt && box.closest("label")) txt = box.closest("label").textContent;
+    if (!txt) txt = box.getAttribute("aria-label") || "";
+    if (!txt) {
+      let el = box.previousElementSibling, hops = 0;
+      while (el && hops++ < 4 && !txt) { if (/^(LABEL|H\d|P|LEGEND|STRONG|B|DIV)$/.test(el.tagName) && !/stem|starter/i.test(el.className)) txt = el.textContent; el = el.previousElementSibling; }
+    }
+    return clean(txt);
+  }
+  function starterFor(box) {
+    if (box.dataset.starter) return box.dataset.starter;
+    let el = box.parentElement;
+    for (let hop = 0; el && hop < 4 && el !== document.body; hop++, el = el.parentElement) {
+      if (el.querySelectorAll("textarea").length > 1) break;
+      const s = [...el.querySelectorAll(".stem, .starter, [class*='starter'], [class*='stem'], [data-starter]")].find(x => x.tagName !== "BUTTON" && x !== box && !x.closest("button") && clean(x.textContent).length > 8);
+      if (s) return clean(s.dataset.starter || s.textContent).replace(/^.*?\b(start like this|sentence starter|starter|start with|try|empieza as[ií]|inicio( de la oraci[oó]n)?|para empezar)\s*:\s*/i, "");
+    }
+    if (/_{2,}/.test(box.placeholder || "")) return clean(box.placeholder);
+    return "";
+  }
+  function clearNote(box) { const n = box.parentElement && box.parentElement.querySelector(".junk-note[data-for='" + noteId(box) + "']"); if (n) n.remove(); }
+  let seq = 0;
+  function noteId(box) { if (!box.dataset.junkId) box.dataset.junkId = "j" + (++seq); return box.dataset.junkId; }
+  function showNote(box, message, starter, reason) {
+    clearNote(box);
+    const es = isEs();
+    const n = document.createElement("div");
+    n.className = "junk-note"; n.dataset.for = noteId(box); n.setAttribute("role", "status"); n.setAttribute("data-no-es", "");
+    n.style.cssText = "margin:6px 0 8px;padding:9px 12px;border-left:5px solid #2b6cb0;border-radius:8px;background:#eef4fb;color:#19364b;font:700 1rem/1.4 system-ui,Segoe UI,Arial,sans-serif;text-align:left";
+    const m = document.createElement("span"); m.textContent = message; n.appendChild(m);
+    const frameIn = starter && studentPart(box.value, starter).frame;
+    if (starter && !frameIn) {
+      const tip = document.createElement("span"); tip.style.cssText = "display:block;font-weight:600;margin-top:4px";
+      tip.textContent = (es ? "Prueba este inicio: " : "Try this starter: ") + starter + " ";
+      const b = document.createElement("button"); b.type = "button"; b.className = "junk-use";
+      b.textContent = es ? "Usarlo" : "Use it";
+      b.style.cssText = "font:800 .95rem system-ui,Segoe UI,Arial,sans-serif;background:#fff;color:#19364b;border:2px solid #2b6cb0;border-radius:8px;padding:3px 10px;cursor:pointer;margin-left:4px";
+      b.onclick = () => {
+        const keep = /^(list|copy)$/.test(reason) ? " " + box.value.trim() : "";
+        box.value = starter + keep; box.focus();
+        const k = box.value.indexOf("___"); if (k >= 0 && box.setSelectionRange) box.setSelectionRange(k, k + 3);
+        box.dispatchEvent(new Event("input", { bubbles: true })); box.dispatchEvent(new Event("change", { bubbles: true }));
+        n.remove();
+      };
+      tip.appendChild(b); n.appendChild(tip);
+    }
+    box.insertAdjacentElement("afterend", n);
+    const off = () => { n.remove(); box.removeEventListener("input", off); };
+    box.addEventListener("input", e => { if (e.isTrusted) off(); });
+    return n;
+  }
+  window.classJunkStop = function (box, opts) {
+    if (!box) return "";
+    const o = Object.assign({}, opts || {});
+    if (o.prompt == null) o.prompt = promptFor(box);
+    // On a page shown in Spanish, the English question counts as "the question" too.
+    if (o.prompt && window.SiteLang && window.SiteLang.toEn) { const en = window.SiteLang.toEn(o.prompt) || window.SiteLang.toEn(o.prompt.replace(/^\d+\.\s*/, "")); if (en) o.prompt += " " + en; }
+    if (o.starter == null) o.starter = starterFor(box);
+    const r = check(box.value, o);
+    if (r.ok || r.reason === "empty") { clearNote(box); return ""; }
+    if (!o.quiet) {
+      showNote(box, r.message, o.starter, r.reason);
+      if (box.getClientRects().length) {
+        try { box.scrollIntoView({ block: "center", behavior: "smooth" }); box.focus({ preventScroll: true }); } catch (e) {}
+      }
+    }
+    return r.message;
+  };
+  window.classJunkPrompt = promptFor;
+  window.classJunkStarter = starterFor;
+})();
+
 (function () {
   "use strict";
 
@@ -67,6 +285,25 @@ const TEACHER_TOOLS_URL = "https://script.google.com/macros/s/AKfycbwiVW6Cufw8Dq
   window.classTurnIn = async function (oldUrl, options) {
     let body;
     try { body = JSON.parse(options && options.body || "{}"); } catch (e) { body = {}; }
+
+    // Last stop for junk writing: any writing box on the page whose words are in this turn-in.
+    if (window.classJunkStop && body.kind !== "progress") {
+      const strs = [];
+      (function walk(v) { if (typeof v === "string") strs.push(v); else if (v && typeof v === "object") Object.values(v).forEach(walk); })(body);
+      const sq = s => String(s).replace(/\s+/g, " ").trim();
+      const sent = strs.map(sq).join("\n");
+      for (const t of document.querySelectorAll("textarea:not([data-junk-skip])")) {
+        const v = sq(t.value);
+        if (!v || !sent.includes(v)) continue;
+        const seen = t.getClientRects().length > 0;
+        const m = window.classJunkStop(t, { quiet: !seen });
+        if (m) {
+          const q = (window.classJunkPrompt(t) || "").replace(/^\d+[.)]\s*/, "");
+          const where = !seen && q ? (window.SiteLang && window.SiteLang.isEs() ? " (Pregunta: " : " (Question: ") + (q.length > 70 ? q.slice(0, 67) + "…" : q) + ")" : "";
+          return fakeResponse(400, { error: m + where });
+        }
+      }
+    }
 
     // Add the first-try score (second, right after the standard) if the page tracked one.
     if (body.answers && typeof body.answers === "object" && !Array.isArray(body.answers) && !("First-try correct" in body.answers)) {

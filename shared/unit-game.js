@@ -161,6 +161,12 @@
           const msg = $("sendMsg");
           for (const p of prompts) {
             const v = ($("w_" + p.id).value || "").trim();
+            // Shared junk check (shared/turnin.js): idk, bruh, mashing, repeats, filler, copied question, bare keyword lists.
+            if (window.classJunkStop) {
+              const es = window.SiteLang && window.SiteLang.isEs();
+              const junk = window.classJunkStop($("w_" + p.id), { starter: es ? window.SiteLang.t(p.stem || "") : (p.stem || ""), source: "from today", sourceEs: "de hoy" });
+              if (junk) { msg.textContent = (es ? "En " + window.SiteLang.t(p.short) : "For " + p.short) + ": " + junk; msg.className = "msg"; return; }
+            }
             if (v.length < (p.min || 40)) { msg.textContent = "Write a little more for: " + p.short + " (1–2 full sentences)."; msg.className = "msg bad"; $("w_" + p.id).focus(); return; }
             if (/_{2,}/.test(v)) { msg.textContent = "Fill in the blanks with your own words for: " + p.short + "."; msg.className = "msg bad"; $("w_" + p.id).focus(); return; }
             // Letters in any language (so Spanish words with accents count), accents ignored.

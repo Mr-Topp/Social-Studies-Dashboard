@@ -104,6 +104,7 @@ $("submitBtn").addEventListener("click",async()=>{const name=$("studentName").va
 if(!name||!/ [A-Z]\.$/.test(window.classShortName?window.classShortName(name):name)){status.textContent="Type your first name + last initial (like Jordan M.).";status.classList.add("error");$("studentName").focus();return}
 const missing=[1,2,3,4].find(i=>!partDone(i));
 if(missing){status.textContent=!checkState.done[missing-1]?"Finish the quick check in part "+missing+" first.":"Part "+missing+" needs a full answer: fill in every ___ and write at least 10 words.";status.classList.add("error");$("part"+missing).scrollIntoView({behavior:"smooth",block:"center"});return}
+for(const i of [1,2,3,4]){const j=window.classJunkStop&&window.classJunkStop($("answer"+i));if(j){status.textContent="Part "+i+": "+j;return}}
 const answers={"Standard":"SS.9-12.WH.27, SS.9-12.WH.24","First-try correct":checkState.misses.filter(m=>!m).length+" of 4"};
 questions.forEach((q,i)=>{answers[q]=$("answer"+(i+1)).value.trim()});
 

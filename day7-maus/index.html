@@ -129,6 +129,7 @@ $("submitBtn").addEventListener("click",async()=>{const name=$("studentName").va
 if(!name){status.textContent="Type your first name + last initial (like Jordan M.) at the top of the questions.";status.classList.add("error");$("studentName").focus();return}
 const missingCheck=[1,2,3,4].find(i=>!isDone(i));if(missingCheck){status.textContent="Get the reading check right for question "+missingCheck+" first.";status.classList.add("error");$("q"+missingCheck).scrollIntoView({behavior:"smooth",block:"start"});return}
 const missing=[1,2,3,4].find(i=>!$("answer"+i).value.trim());if(missing){status.textContent="Write your answer for question "+missing+" before turning in.";status.classList.add("error");$("answer"+missing).focus();return}
+for(const i of [1,2,3,4]){const j=window.classJunkStop&&window.classJunkStop($("answer"+i));if(j){status.textContent="Question "+i+": "+j;return}}
 const answers={Standard:STANDARD,"First-try correct":[1,2,3,4].filter(i=>(tries[i]||1)===1).length+" of 4"};QUESTIONS.forEach((q,i)=>answers[q]=$("answer"+(i+1)).value.trim());
 answers["Reading checks"]="4 of 4 correct · tries: "+[1,2,3,4].map(i=>tries[i]||1).join(", ");
 button.disabled=true;status.textContent="Sending your work…";
