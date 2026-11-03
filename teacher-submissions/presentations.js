@@ -161,7 +161,7 @@
     { course: "civics", unit: 3, title: "Rights & Responsibilities (Q63–72)", url: "https://neotboy.github.io/inequalityquest/civics/friday3-rights-presentation/" },
     { course: "civics", unit: 4, title: "The 1776 Files (Q73–89)", url: "https://neotboy.github.io/inequalityquest/civics/friday4-1776-presentation/" },
     { course: "civics", unit: 5, title: "Civil War to Modern America (Q90–118)", url: "https://neotboy.github.io/inequalityquest/civics/friday5-1800s-civics-presentation/" },
-    { course: "civics", unit: 6, title: "Geography & Symbols (Q119–128)", url: "https://neotboy.github.io/inequalityquest/civics/friday6-geography-symbols-presentation/" }
+    { course: "civics", unit: 6, title: "Symbols & Holidays (Q119–128)", url: "https://neotboy.github.io/inequalityquest/civics/friday6-geography-symbols-presentation/" }
     // Friday 7 = Iowa Civics Exam (Google Form, in shared/assignments.js), no slides. Fynn, 2026-11-03.
   ];
 })();
