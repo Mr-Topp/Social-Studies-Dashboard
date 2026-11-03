@@ -1,0 +1,174 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>What Wins a War? | World History Day 10</title>
+<meta name="description" content="Read real 1940s comics about WWII turning points (radar, Midway, Stalingrad, the atomic bomb), fact-check them, and explain what wins a war.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../shared/graphic-reading.css?v=3">
+<style>
+/* Wide comic crops: give the reader more room so the lettering is bigger. */
+.flip-layout{grid-template-columns:minmax(0,1.9fr) minmax(320px,1fr)}
+.flip-stage img{min-height:0;max-height:calc(100vh - 130px)}
+.qcol{padding-bottom:70px}
+.intro-line{font-size:1.02rem;margin:0 0 10px}
+.words{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0 10px;padding:0;list-style:none}
+.words li{background:#fff;border:1px solid #e6dcc8;border-left:4px solid var(--navy);border-radius:8px;padding:3px 9px;font-size:.88rem}
+.declass{display:block;background:#fff;border:2px dashed #7a2b26;border-radius:10px;padding:8px 11px;margin:6px 0 8px;font-weight:650;color:#3c2a20;line-height:1.4;font-style:normal}
+.declass b{display:block;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#a33d36;margin-bottom:2px}
+.declass.file{border-color:#18364a}.declass.file b{color:#18364a}
+.dime{display:inline-block;background:#e6bd64;color:#0f2433;border-radius:999px;font-weight:850;padding:0 9px;margin-right:4px}
+.credits{font-size:.8rem;color:var(--muted);margin:10px 0 0;line-height:1.4}
+/* Choices wait until the page's read timer is done. */
+body.reading-now .choices{opacity:.45;pointer-events:none}
+</style>
+<script src="../shared/assignments.js?v=20261103p9"></script><script src="../shared/turnin.js?v=20261103d"></script></head><body>
+<header class="gr-head" data-years="1940 — 1945"><div class="gr-wrap">
+<div class="kicker">World History · Day 10 · WWII Turning Points</div>
+<h1>What Wins a War?</h1>
+<p class="hook"><span class="dime">10¢</span>Kids your age bought these comics <i>during</i> WWII. Fact-check them: what did they get wrong, and what did they keep secret? 4 checks + 4 short answers. <b>About 25 minutes.</b></p>
+<p class="goal"><b>Today's goal:</b> Explain how new tools like radar, codebreaking, and the atomic bomb helped decide WWII, and whose story the comics left out.</p>
+<details class="std-details"><summary>Iowa standards for today</summary>
+<p><b>Standard SS.9-12.WH.32</b> — Analyze how new technology contributed to the major turning points in World War I and World War II.</p><p><b>Standard SS.9-12.WH.33</b> — Compare the experiences and perspectives of individuals affected by total war during World War I and World War II.</p>
+</details>
+<nav><a class="back" href="../">← Class activities</a></nav>
+</div></header>
+
+<nav class="route" aria-label="Your progress"><ol id="flipRoute"></ol></nav>
+
+<main class="gr-main gr-wrap">
+<section class="card">
+<p class="intro-line"><b>You're the fact-checker.</b> For each part: <b>read</b> the comic on the left → get the <b>check</b> right → <b>write</b> 1–2 sentences. Done = 4 green checks + 4 answers, then turn in at the bottom.</p>
+<ul class="words" aria-label="Word help">
+<li><b>RAF</b> = Britain's air force</li><li><b>Luftwaffe</b> = Germany's air force</li><li><b>Radar</b> (or radiolocation) = radio waves that find planes</li><li><b>Intercept</b> = cut off, catch</li><li><b>Vessels</b> = ships</li><li><b>Codebreaker</b> = reads the enemy's secret messages</li>
+</ul>
+<p class="content-note"><span><strong>Content note:</strong> These pages show battles and the atomic bomb. The 1943 Midway page used a hateful slur for Japanese people, common in U.S. wartime comics. We covered it with a <b>slur</b> tag.</span></p>
+<p class="welcome" id="welcome" role="status"></p>
+</section>
+
+<div class="flip-layout">
+<section class="flip-reader reading" id="flipReader" aria-label="Selected panels from 1940s WWII comics">
+<div class="flip-bar"><div><p class="eyebrow">The reading</p><h2>4 real WWII comics · 5 pages</h2></div><span class="flip-pos" id="flipPos"></span></div>
+<div class="flip-tools"><button type="button" class="quiet" id="flipBack">← Back a page</button><span class="grow"><span id="flipPart"></span><span id="flipTimer" aria-live="polite"></span></span><button type="button" class="secondary" id="flipNext">Next page →</button><button type="button" class="quiet" id="flipZoom">Make page bigger</button></div>
+<div class="flip-stage"><img id="flipImg" alt="" src="pages/p-01.jpg"></div>
+<p class="flip-cap">Click the page to make it bigger.</p>
+</section>
+
+<div class="qcol">
+<section class="card">
+<label for="studentName">First name + last initial (like Jordan M.)</label><input id="studentName" maxlength="100" autocomplete="off" placeholder="First name + last initial (like Jordan M.)" required>
+</section>
+<div id="flipCards"></div>
+<div class="flip-nav"><button type="button" class="quiet" id="flipBack2">← Back</button><button type="button" class="secondary" id="flipNext2">Next page →</button><p class="flip-why" id="flipWhy" aria-live="polite"></p></div>
+<section class="card finish" id="finish">
+<h2>Turn in your work</h2>
+<div class="actions"><button id="submitBtn" class="primary" type="button">Turn in answers</button><button id="clearBtn" class="quiet" type="button">Start over</button></div><p id="submitStatus" class="status" role="status" aria-live="polite"></p><p class="reader-note">Your work saves on this device, so you can come back later. Your teacher sees it after you turn it in.</p>
+<p class="credits">Comics: "Radar: Wonder Weapon," <i>True Comics</i> #28 (Oct. 1943); "Admiral Nimitz," <i>Real Heroes</i> #8 (Jan. 1943); quiz page, <i>True Comics</i> #63 (Aug. 1947); "Atoms Unleashed," <i>True Comics</i> #47 (Mar. 1946). Parents' Magazine Press. Public-domain scans from the ComicBook Experience reading library. Panels were cropped to today's reading.</p>
+</section>
+</div></div></main>
+<div class="flip-big" id="flipBig" hidden role="dialog" aria-label="Bigger page"><button type="button" class="quiet" id="flipBigClose">✕ Close</button><img id="flipBigImg" alt="Bigger view of the current page"></div>
+<script>
+window.FLIP={
+title:"Selected panels from 1940s WWII comics",prefix:"wh-day10-comics-",pages:5,readSeconds:8,lockSeconds:8,
+assignmentId:"day10-wwii-comics",api:"https://fynn-class-assignment-submissions-20261024.neotboy.chatgpt.site/api/submit",
+lockedText:"This box opens when you get the check right.",
+clearConfirm:"Start over? This clears your checks and answers on this device.",
+successText:"Turned in! Your teacher got your 4 checks and 4 answers. You're done.",
+wrongText:(c,left)=>left>0?"Not quite. "+c.hint+" Try again in "+left+"…":"Not quite. "+c.hint+" The choices were mixed up. Try again.",
+parts:[
+{
+"short":"Radar",
+"ref":"Reader page 1 · True Comics, 1943",
+"title":"1. Britain, 1940: Radar",
+"from":1,"to":1,
+"check":{
+"page":1,
+"tag":"Reading check · Reader page 1",
+"q":"In 1940, German planes attacked Britain. How did <b>radar</b> help Britain's air force (the RAF) win?",
+"right":"It found enemy planes early, so fighters could meet them before they struck.",
+"wrong":["It jammed German radios, so the pilots could not find their way to Britain.","It let British bombers fly over Germany at night without being spotted.","It told British cities when to turn off their lights so bombers got lost."],
+"why":"✓ Correct. Radar found the planes' position, and fighters stopped many raiders \"before they reach their targets.\" A new technology helped Britain win the Battle of Britain.",
+"hint":"Make the page bigger and read the last two boxes. What do fighter planes do once radar finds the raiders?"
+},
+"prompt":"How did radar help Britain win the Battle of Britain? Use one detail from the page.",
+"stem":"Write 1–2 sentences. Start like this: <i>Radar helped Britain because ___ (reader page 1). Without radar, ___.</i>",
+"placeholder":"Radar helped Britain because ___ (reader page 1). Without radar, ___."
+},
+{
+"short":"Midway",
+"ref":"Reader page 2 · Real Heroes, 1943",
+"title":"2. The Pacific, 1942: Midway",
+"from":2,"to":2,
+"check":{
+"page":2,
+"tag":"Reading check · Reader page 2",
+"q":"Read the big Midway panel. What does this 1943 comic say happened at Midway?",
+"right":"U.S. planes sank 4 Japanese aircraft carriers along with other ships.",
+"wrong":["U.S. ships sank 19 Japanese warships, including just one aircraft carrier.","The U.S. landed troops on Midway Island and took it back from Japan.","Japan's fleet sank most of the U.S. carriers, but Midway Island held on."],
+"why":"✓ Correct. Losing 4 carriers cost Japan the upper hand at sea. (The \"19 warships\" box is about the Battle of the Coral Sea, a month earlier.)",
+"hint":"Read only the caption on the big battle panel in the middle. How many carriers, and whose?"
+},
+"prompt":"This 1943 comic tells Midway as a win for Admiral Nimitz and his fleet. What did it leave out, and what would have happened if Japan found out?",
+"stem":"<span class=\"declass\"><b>Declassified</b>Before Midway, U.S. Navy codebreakers cracked part of Japan's secret code. They knew Japan's attack plan, so U.S. carriers were waiting. This stayed secret during the war.</span>Write 1–2 sentences. Start like this: <i>The comic left out ___. If Japan had found out in 1943, ___.</i>",
+"placeholder":"The comic left out ___. If Japan had found out in 1943, ___."
+},
+{
+"short":"Stalingrad",
+"ref":"Reader page 3 · True Comics, 1947",
+"title":"3. The Soviet Union, 1942–43: Stalingrad",
+"from":3,"to":3,
+"check":{
+"page":3,
+"tag":"Fact-check · Reader page 3",
+"q":"<span class=\"declass file\"><b>Fact file</b>Soviet troops closed a ring around the German army at Stalingrad on November 23, 1942. About 91,000 trapped Germans surrendered on February 2, 1943.</span>Compare the comic to the fact file. What did the comic get wrong?",
+"right":"It skips November 1942 and makes the trap look like it began in January 1943.",
+"wrong":["It says the Germans gave up, but most of them escaped across the river.","It says the battle began in 1942, but Germany attacked the city in 1944.","It says the Soviets won, but the battle really ended with no winner at all."],
+"why":"✓ Correct. The ring closed in November 1942. January 1943 is when the Soviets squeezed the trapped army, and it gave up in February. Germany never recovered from losing a whole army, and the Soviets pushed west from then on.",
+"hint":"Find the date in the bottom-left panel, then compare it to the fact file."
+},
+"prompt":"Compare Midway and Stalingrad. What helped win each one, and which matters more in a war?",
+"stem":"Write 1–2 sentences. (Remember: at Midway, codebreakers knew Japan's plan.) Start like this: <i>At Midway, the U.S. won with help from ___. At Stalingrad, the Soviets won by ___. I think wars are won more by ___ than by ___ because ___.</i>",
+"placeholder":"At Midway, the U.S. won with help from ___. At Stalingrad, the Soviets won by ___. I think wars are won more by ___ than by ___ because ___."
+},
+{
+"short":"Atomic bomb",
+"ref":"Reader pages 4–5 · True Comics, 1946",
+"title":"4. Japan, 1945: The atomic bomb",
+"from":4,"to":5,
+"check":{
+"page":5,
+"tag":"Perspective check · Reader pages 4–5",
+"q":"Look at every panel on reader pages 4 and 5. Whose experience of August 1945 does this comic <b>never</b> show?",
+"right":"The people of Hiroshima who were under the bomb when it hit.",
+"wrong":["The scientists who tested the first bomb in the New Mexico desert.","The airplane crew who flew the bomb to Japan from their island base.","President Truman, who told the world the news about the new bomb."],
+"why":"✓ Correct. The comic shows the cloud from above but never one person in Hiroshima. Estimates say 90,000 to 166,000 people there died within four months. Fact-check: the bomber flew from Tinian, not Guam, and Nagasaki was bombed 3 days later (Aug. 6 to Aug. 9), not 4. Historians still debate whether the bombs or the Soviet Union declaring war on Japan (Aug. 8) did more to make Japan surrender. This comic only credits the bomb.",
+"hint":"Look at each panel on pages 4 and 5. Who do you see? Who is never drawn?"
+},
+"prompt":"Compare Truman's words in the comic with Setsuko Thurlow's. Why do they describe August 6, 1945 so differently?",
+"stem":"<span class=\"declass file\"><b>A survivor's voice</b>Setsuko Thurlow was 13 and about a mile from the blast. In her 2017 Nobel Peace Prize lecture, she said: \"At 8:15, I saw a blinding bluish-white flash from the window.\" She was trapped in a collapsed building and lost family members and most of her classmates.</span>Truman (reader page 5) calls the bomb \"a harnessing of the basic powers of the universe.\" Write 1–2 sentences. Start like this: <i>Truman wanted Americans to feel ___. Setsuko Thurlow remembers ___. They see the same day differently because ___.</i>",
+"placeholder":"Truman wanted Americans to feel ___. Setsuko Thurlow remembers ___. They see the same day differently because ___."
+}
+],
+questions:["How did radar help Britain win the Battle of Britain? Use one detail from the page.","This 1943 comic tells Midway as a win for Admiral Nimitz and his fleet. What did it leave out, and what would have happened if Japan found out?","Compare Midway and Stalingrad. What helped win each one, and which matters more in a war?","Compare Truman's words in the comic with Setsuko Thurlow's. Why do they describe August 6, 1945 so differently?"],
+validate(s){if(!s.name)return{text:"Type your first name + last initial (like Jordan M.) at the top of the questions.",focus:"studentName"};
+ const mc=[1,2,3,4].find(i=>!s.checkDone(i));if(mc)return{text:"Get the check right for part "+mc+" first.",part:mc};
+ const ma=[1,2,3,4].find(i=>!s.answer(i));if(ma)return{text:"Write your answer for part "+ma+" before turning in.",part:ma,focus:"answer"+ma};
+ for(const i of [1,2,3,4]){const j=window.classJunkStop&&window.classJunkStop(document.getElementById("answer"+i));if(j)return{text:"Part "+i+": "+j,part:i}}return null},
+buildAnswers(s){const a={Standard:"SS.9-12.WH.32, SS.9-12.WH.33","First-try correct":[1,2,3,4].filter(i=>(s.tries(i)||1)===1).length+" of 4"};
+ this.questions.forEach((q,i)=>a[q]=s.answer(i+1));a["Reading checks"]="4 of 4 correct · tries: "+[1,2,3,4].map(i=>s.tries(i)||1).join(", ");return a}
+};
+</script>
+<script src="../shared/flip-reader.js?v=1"></script>
+<script>
+// This page only: choices wait for the read timer, and "Not quite" scrolls into view.
+(function(){
+  const t=document.getElementById("flipTimer");
+  const sync=()=>document.body.classList.toggle("reading-now",t.textContent.trim()!=="");
+  new MutationObserver(sync).observe(t,{childList:true,characterData:true,subtree:true});sync();
+  document.getElementById("flipCards").addEventListener("click",e=>{if(!e.target.closest(".choice"))return;
+    setTimeout(()=>{const f=[...document.querySelectorAll(".flip-part:not([hidden]) .fb")].find(x=>x.textContent.trim());
+      if(f){const r=f.getBoundingClientRect();if(r.bottom>innerHeight-80||r.top<0)f.scrollIntoView({behavior:"smooth",block:"center"})}
+      const a=document.querySelector(".flip-part:not([hidden]) textarea:not([disabled])");
+      if(a&&f&&f.classList.contains("ok")){const r=a.getBoundingClientRect();if(r.bottom>innerHeight-80)a.scrollIntoView({behavior:"smooth",block:"center"})}},120)});
+})();
+</script>
+</body></html>

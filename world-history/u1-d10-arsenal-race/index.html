@@ -1,6 +1,6 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Arsenal Race: What Wins a War? | World History Unit 1 Day 10</title>
+<title>Arsenal Race: What Wins a War? | U.S. History Unit 2 Day 6</title>
 <meta name="description" content="Run the Allied war effort in World War II: choose what to build and what to ask of people at home, then see Midway, Stalingrad, the Atlantic, and D-Day play out.">
 <style>
 :root{--ink:#1f2630;--muted:#565f6b;--paper:#f4f4f1;--card:#fff;--line:#d7d8d2;--accent:#36503a;--accent2:#8a4b1c;--soft:#edf1f6;--glow:#2c4a6b2e;--green:#2a6b45;--bad:#a2392f;--hdr:#e9edf2;--srcbg:#faf6f3;--srcline:#e3d5cf}
@@ -63,14 +63,14 @@ input,textarea{width:100%;font:inherit;border:2px solid #cfcdbf;border-radius:9p
 .meters{display:flex;gap:8px;flex-wrap:wrap}
 .duo div i{display:block;margin-top:6px;font-family:Georgia,serif}
 </style>
-<script src="../../shared/assignments.js?v=20261103p8"></script>
+<script src="../../shared/assignments.js?v=20261103p9"></script>
 <script src="../../shared/turnin.js?v=20261103d"></script>
 <script src="../../shared/unit-game.js?v=20261103c"></script>
 </head><body>
 <header>
-  <p class="k">World History · Unit 1 · Day 10 · WWII Turning Points</p>
+  <p class="k">U.S. History · Unit 2 · Day 6 · How Did the Allies Beat Germany?</p>
   <h1>Arsenal Race: What Wins a War?</h1>
-  <p class="std"><b>Standards:</b> SS.9‑12.WH.32 · SS.9‑12.WH.33</p>
+  <p class="std"><b>Standards:</b> SS.9‑12.US.29 · SS.9‑12.US.33</p>
   <p class="std"><b>Goal:</b> Explain how technology, factories, and people at home turned World War II toward the Allies. · About 25–30 minutes.</p>
 </header>
 <div class="hud" aria-label="Progress and war effort">
@@ -119,9 +119,9 @@ const real = html => `<div class="real"><b class="h">What really happened</b>${h
 
 const CFG = {
   key: KEY,
-  assignmentId: "wh-u1-d10-arsenal-race",
-  title: "World History · Unit 1 · Day 10 · Arsenal Race: What Wins a War?",
-  standard: "SS.9-12.WH.32, SS.9-12.WH.33",
+  assignmentId: "ush-u2-d6-arsenal-race",
+  title: "U.S. History · Unit 2 · Day 6 · Arsenal Race: What Wins a War?",
+  standard: "SS.9-12.US.29, SS.9-12.US.33",
   oldApi: "https://fynn-class-assignment-submissions-20261024.neotboy.chatgpt.site/api/submit",
   startFx: { prod: 0, morale: 0 },
   hud: st => {
@@ -141,7 +141,7 @@ const CFG = {
       blocks: [
         { type: "note", html: card("Source card · Factories on the move (Soviet Union, 1941)", `<p>When Germany invaded in 1941, Soviet workers took apart about <b>1,500 factories</b> and shipped them by train east of the Ural Mountains, out of German reach. Women and teenagers rebuilt them, often in freezing weather, and worked shifts of 12 hours or more.</p>`) },
         { type: "note", html: card("Two voices from the home front", `<div class="duo"><div><b>Fanny Christina Hill · Los Angeles, U.S.</b>A Black woman who left housekeeping work for a job building warplanes in 1943. Years later she said: <i>"The war made me live better, it really did."</i></div><div><b>Tanya Savicheva · Leningrad, Soviet Union</b>An 11-year-old trapped when German armies surrounded her city. About 800,000 civilians there died, mostly of hunger. Her diary's last page reads: <i>"The Savichevs died. Everyone died. Only Tanya is left."</i></div></div>`) },
-        { type: "q", id: "q0", std: "WH.33", short: "Two voices: why so different", prompt: "Why were Fanny Hill's and Tanya Savicheva's experiences of the <b>same war</b> so different?", options: ["The fighting surrounded Leningrad but never reached U.S. factories", "Tanya was younger, so the war mattered less to her family", "Fanny's city was bombed, but she had a better shelter", "Both had the same experience, just in different countries"], hint: "Where was the fighting? Did it reach Los Angeles? Did it reach Leningrad?", why: "Total war hit everyone, but very differently: war work opened doors for some Americans, while Soviet civilians lived and died inside the fighting." },
+        { type: "q", id: "q0", std: "US.33", short: "Two voices: why so different", prompt: "Why were Fanny Hill's and Tanya Savicheva's experiences of the <b>same war</b> so different?", options: ["The fighting surrounded Leningrad but never reached U.S. factories", "Tanya was younger, so the war mattered less to her family", "Fanny's city was bombed, but she had a better shelter", "Both had the same experience, just in different countries"], hint: "Where was the fighting? Did it reach Los Angeles? Did it reach Leningrad?", why: "Total war hit everyone, but very differently: war work opened doors for some Americans, while Soviet civilians lived and died inside the fighting." },
         { type: "event", id: "h1", short: "Home front plan", html: `<p><b>Decision 1: Home front.</b> The factories need millions more workers. Where do they come from?</p>`,
           choices: [
             { label: "Bring millions of women into war factories", fx: { prod: 3, morale: -1 }, result: `<p>🏭 +3 · 🏠 −1. In the U.S., about 6 million more women took jobs, recruited by \"Rosie the Riveter\" posters. In Britain and the Soviet Union, women also built weapons and ran farms. But with mothers on double shifts and few places to leave kids, families were stretched thin.</p>` },
@@ -160,7 +160,7 @@ const CFG = {
       teach: `<p>In the Pacific, Japan has won battle after battle. Now Japan plans to trap and destroy the U.S. Navy's aircraft carriers, the ships that carry warplanes.</p>`,
       blocks: [
         { type: "note", html: card("Source card · The code", `<p>American codebreakers in Hawaii had cracked part of Japan's navy code. Messages said Japan would attack a target called <b>"AF."</b> To test a guess, the U.S. had the base at Midway Island send a fake radio message saying its water machine had broken. Soon a Japanese message reported: <b>"AF is short of water."</b></p>`) },
-        { type: "q", id: "q2", std: "WH.32", short: "Midway: the fake water message", prompt: "What did the fake water message prove?", options: ["That \"AF\" meant Midway, so the U.S. knew the target", "That Japan's navy was running out of fresh water", "That Midway's water machine really had broken", "That Japan had cracked the U.S. Navy's code"], hint: "Midway sent the fake message. Then who repeated it, and what name did they use?", why: "Japan repeated the fake news about \"AF,\" which proved AF = Midway." },
+        { type: "q", id: "q2", std: "US.29", short: "Midway: the fake water message", prompt: "What did the fake water message prove?", options: ["That \"AF\" meant Midway, so the U.S. knew the target", "That Japan's navy was running out of fresh water", "That Midway's water machine really had broken", "That Japan had cracked the U.S. Navy's code"], hint: "Midway sent the fake message. Then who repeated it, and what name did they use?", why: "Japan repeated the fake news about \"AF,\" which proved AF = Midway." },
         { type: "event", id: "m1", short: "Midway plan", html: `<p><b>Decision 3:</b> You know where Japan will strike. What do you do with your carriers?</p>`,
           choices: [
             { label: "Hide your carriers near Midway and ambush the Japanese fleet", fx: {}, result: `<p>Orders sent. Your carriers slip into position northeast of Midway.</p>` },
@@ -170,13 +170,13 @@ const CFG = {
         { type: "note", get html() { const st = live(), r = outcomes(st).midway;
             const yours = r === "win" ? "Your ambush works. Your codebreakers gave you the date and direction of the attack, so your scout planes knew where to look and found Japan's carriers first." : r === "mid" ? "Your ambush works, but with fewer codebreakers you weren't sure of the timing. You win, but lose more ships and pilots than you had to." : "Without your carriers, Japan takes Midway. Its navy is still on the attack.";
             return `<div class="report-card"><p class="kicker">Battle report · Midway</p>${tag(r || "mid")}<p>${yours}${pick(st, "t1") !== 0 && r !== "loss" ? " <i>(Your 1942 bet wasn't codebreaking.)</i>" : ""}</p>${real(`<p>The U.S. ambushed the Japanese fleet. Japan lost <b>4 aircraft carriers</b>, about 250 planes, and many experienced crew; the U.S. lost 1 carrier. Japan could not replace them quickly. After Midway, Japan was mostly on defense.</p>`)}</div>`; } },
-        { type: "q", id: "q3", std: "WH.32", short: "Why Midway was a turning point", prompt: "Why was Midway a <b>turning point</b>?", options: ["Japan lost 4 carriers it could not quickly replace", "Japan captured Midway and used it to attack Hawaii", "U.S. battleships sank most of Japan's navy that day", "Japan surrendered a few weeks after losing the battle"], hint: "Read the \"What really happened\" box. What did Japan lose, and could it get them back?", why: "Losing 4 carriers and their crews put Japan on defense for the rest of the war." }
+        { type: "q", id: "q3", std: "US.29", short: "Why Midway was a turning point", prompt: "Why was Midway a <b>turning point</b>?", options: ["Japan lost 4 carriers it could not quickly replace", "Japan captured Midway and used it to attack Hawaii", "U.S. battleships sank most of Japan's navy that day", "Japan surrendered a few weeks after losing the battle"], hint: "Read the \"What really happened\" box. What did Japan lose, and could it get them back?", why: "Losing 4 carriers and their crews put Japan on defense for the rest of the war." }
       ] },
     { kicker: "Turning point 2 · 1942–43", title: "Stalingrad",
       teach: `<p>Germany invaded the Soviet Union in 1941. In 1942, it attacked <b>Stalingrad</b>, a big factory city on the Volga River. Soldiers fought for it street by street, building by building.</p>`,
       blocks: [
         { type: "note", html: card("Source card · Out-building the enemy", `<p>The factories moved east were now running. In 1942, Soviet factories built about <b>four times as many tanks</b> as Germany, many of them the tough, simple <b>T-34</b>.</p><p>Through a program called <b>Lend-Lease</b>, the U.S. and Britain also shipped supplies to the Soviets. Over the war this included hundreds of thousands of trucks, plus food and boots.</p>`) },
-        { type: "q", id: "q4", std: "WH.32", short: "Stalingrad: Soviet advantage", prompt: "Which detail best explains why the Soviets could win a long, grinding fight?", options: ["Their moved factories built about 4 times as many tanks", "Germany chose to stop attacking the city in winter", "The Soviets had better codebreakers than the British", "The U.S. Army fought inside the city of Stalingrad"], hint: "Look at the first paragraph of the card.", why: "Out-producing Germany let the Soviets replace losses and launch a huge counterattack." },
+        { type: "q", id: "q4", std: "US.29", short: "Stalingrad: Soviet advantage", prompt: "Which detail best explains why the Soviets could win a long, grinding fight?", options: ["Their moved factories built about 4 times as many tanks", "Germany chose to stop attacking the city in winter", "The Soviets had better codebreakers than the British", "The U.S. Army fought inside the city of Stalingrad"], hint: "Look at the first paragraph of the card.", why: "Out-producing Germany let the Soviets replace losses and launch a huge counterattack." },
         { type: "event", id: "s1", short: "Lend-Lease choice", html: `<p><b>Decision 4:</b> What should the U.S. and Britain send the Soviets?</p>`,
           choices: [
             { label: "Trucks, food, and boots so their army can move and eat", fx: { lend: 1 }, result: `<p>Convoys sail for the Soviet Union, through freezing seas full of U-boats.</p>` },
@@ -186,7 +186,7 @@ const CFG = {
         { type: "note", get html() { const st = live(), r = outcomes(st).stalingrad;
             const s = pick(st, "s1"); const yours = "The Soviets win at Stalingrad with their own soldiers and factories." + (s === 0 ? " Your trucks and food arrive mostly in 1943–44 and help the Soviet army move fast as it pushes west." : s === 1 ? " Your tanks and planes add to Soviet strength in 1943–44." : " Without your help, the Soviet push west in 1943–44 is slower, but your extra ships are ready for D-Day.");
             return `<div class="report-card"><p class="kicker">Battle report · Stalingrad</p>${tag(r || "mid")}<p>${yours}</p>${real(`<p>In November 1942, Soviet armies <b>surrounded</b> the German army in Stalingrad. On February 2, 1943, about <b>91,000</b> German soldiers surrendered. Around 2 million soldiers and civilians were killed, wounded, or captured. After Stalingrad, the Soviet army was mostly on the attack, pushing Germany back toward Berlin.</p>`)}</div>`; } },
-        { type: "q", id: "q5", std: "WH.33", short: "Stalingrad: cost of total war", prompt: "What does Stalingrad show about how total war affected <b>ordinary people</b>?", options: ["Civilians were trapped in a street-by-street battle in their own city", "Civilians were all moved out by train before German troops arrived", "Civilians waited safely in shelters outside the city the whole time", "Civilians left the city to go work in the factories farther east"], hint: "Reread the blue box at the top. How was the city fought for, and who lived there?", why: "Stalingrad was fought street by street and building by building, with many civilians still inside." }
+        { type: "q", id: "q5", std: "US.33", short: "Stalingrad: cost of total war", prompt: "What does Stalingrad show about how total war affected <b>ordinary people</b>?", options: ["Civilians were trapped in a street-by-street battle in their own city", "Civilians were all moved out by train before German troops arrived", "Civilians waited safely in shelters outside the city the whole time", "Civilians left the city to go work in the factories farther east"], hint: "Reread the blue box at the top. How was the city fought for, and who lived there?", why: "Stalingrad was fought street by street and building by building, with many civilians still inside." }
       ] },
     { kicker: "Turning point 3 · 1943", title: "The Battle of the Atlantic",
       teach: `<p>Britain needed food, fuel, and weapons shipped across the Atlantic Ocean. German <b>U-boats</b> (submarines) hunted in groups called \"wolf packs\" and sank thousands of cargo ships.</p>`,
@@ -205,7 +205,7 @@ const CFG = {
       teach: `<p>To free Western Europe, the Allies had to cross the English Channel and land on beaches in German-held France. Germany had built the <b>Atlantic Wall</b>: bunkers, guns, and mines along the coast.</p>`,
       blocks: [
         { type: "note", html: card("Source card · Operation Fortitude", `<p>The Allies built a <b>fake army</b> in England: inflatable rubber tanks, fake radio messages, and a famous general, George Patton, \"in command.\" The goal was to make Germany believe the landing would come at <b>Calais</b>, the shortest crossing, instead of the beaches of <b>Normandy</b>.</p>`) },
-        { type: "q", id: "q7", std: "WH.32", short: "D-Day: why the fake army mattered", prompt: "Why would a fake army help the real landing?", options: ["Germany would keep troops at Calais instead of Normandy", "The rubber tanks could be used in the real battle", "It would scare Germany into giving up before the landing", "It let the Allies skip crossing the English Channel"], hint: "Where did the Allies want Germany to think the landing would happen?", why: "Every German soldier waiting at Calais was one fewer at Normandy." },
+        { type: "q", id: "q7", std: "US.29", short: "D-Day: why the fake army mattered", prompt: "Why would a fake army help the real landing?", options: ["Germany would keep troops at Calais instead of Normandy", "The rubber tanks could be used in the real battle", "It would scare Germany into giving up before the landing", "It let the Allies skip crossing the English Channel"], hint: "Where did the Allies want Germany to think the landing would happen?", why: "Every German soldier waiting at Calais was one fewer at Normandy." },
         { type: "event", id: "d1", short: "D-Day plan", html: `<p><b>Final decision:</b> How do you invade?</p>`,
           choices: [
             { label: "Land in Normandy and use the fake army to fool Germany", fx: {}, result: `<p>Orders sent. On June 6, 1944, thousands of ships head for Normandy.</p>` },
@@ -219,7 +219,7 @@ const CFG = {
             if (N(st, "morale") >= 0) why.push("people at home backed the war"); if (o.atlantic === "win") why.push("you won the Atlantic, so supplies got through");
             const yours = d === 2 ? "You wait. The Soviet army keeps pushing west alone, and Germany gets a year to strengthen its defenses." : r === "win" ? "Your landing succeeds. Within weeks your armies push inland." : r === "mid" ? "You get ashore, but at a terrible cost, and the push inland is slow." : "The landing fails. Your troops are pushed back into the sea.";
             return `<div class="report-card"><p class="kicker">Battle report · D-Day</p>${tag(r || "mid")}<p>${yours}${why.length ? " Why: " + why.join("; ") + "." : ""}</p>${real(`<p>On June 6, 1944, about <b>156,000</b> Allied troops landed in Normandy. About 4,400 died that day. German reserves stayed near Calais, waiting for an attack that never came. Paris was freed in August 1944, and Germany surrendered in May 1945.</p>`)}</div>`; } },
-        { type: "q", id: "q8", std: "WH.32", short: "D-Day: what made it work", prompt: "Based on today, which <b>combination</b> made D-Day possible?", options: ["Ships and supplies from home, a won Atlantic, and deception", "Out-building Germany in tanks before crossing the Channel", "Landing at the shortest crossing to save time and fuel", "Bombing the Atlantic Wall until every bunker was gone"], hint: "Think back over all 4 turning points. Did any one thing win it alone?", why: "D-Day needed everything at once: factories, ships, a safe ocean, and a clever trick." }
+        { type: "q", id: "q8", std: "US.29", short: "D-Day: what made it work", prompt: "Based on today, which <b>combination</b> made D-Day possible?", options: ["Ships and supplies from home, a won Atlantic, and deception", "Out-building Germany in tanks before crossing the Channel", "Landing at the shortest crossing to save time and fuel", "Bombing the Atlantic Wall until every bunker was gone"], hint: "Think back over all 4 turning points. Did any one thing win it alone?", why: "D-Day needed everything at once: factories, ships, a safe ocean, and a clever trick." }
       ] }
   ],
   finale: {
