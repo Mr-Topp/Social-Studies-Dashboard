@@ -102,7 +102,7 @@
       hint: "Who does Truman support, and against what?",
       reveal: "<b>Truman Doctrine</b>: help free countries fight off communist takeovers.",
       unlock: "📜 Truman Doctrine card unlocked" },
-    c_marshall: { std: "US.40", short: "Marshall Plan: what Marshall said it fights",
+    c_marshall: { std: "US.37", short: "Marshall Plan: what Marshall said it fights",
       tag: "George Marshall, Secretary of State · June 5, 1947",
       quote: "“Our policy is directed not against any country or doctrine but against hunger, poverty, desperation, and chaos.”",
       gloss: "doctrine = a set of beliefs",
