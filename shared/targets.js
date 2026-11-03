@@ -369,7 +369,7 @@ window.CLASS_TARGETS = {
   },
   "4|3": {
    "t": [
-    "I can identify how Mexican American, Native American, and Asian American activists fought for equal rights.",
+    "I can identify how Mexican American, Native American, and women's rights activists fought for equal rights.",
     "I can analyze the goals and strategies of groups like the United Farm Workers and Red Power activists.",
     "I can compare these movements to the Black civil rights movement and explain how they connect."
    ],
