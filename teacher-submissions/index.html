@@ -787,12 +787,12 @@ function linksHtml() {
     const kParts = String(key).split("|"), isP1 = kParts[1] === "p1", unitNo = +kParts[kParts.length - 1] || 0;
     const fit = cal && !isP1 ? unitFit(tab, unitNo) : null;
     const rowDate = r => { if (!cal || isP1 || !r.day || r.summ || r.day > cal.days) return ""; const a = dayDate(tab, false, unitNo, r.day, false); if (!a) return ""; const b = r.span ? dayDate(tab, false, unitNo, r.span, false) : null; return `<span class="sumdate">📅 ${safe(niceDate(a.iso))}${b && b.iso !== a.iso ? " – " + safe(niceDate(b.iso)) : ""}</span>`; };
-    const count = ([nDays ? plural(nDays, "day") : (nActs ? plural(nActs, "assignment") : ""), cal ? "summative " + (cal.summative ? shortDate(cal.summative) : "Day " + cal.days) : ""].filter(Boolean).join(" · ") || (main ? "slides ready" : "slides not built yet"))
+    const count = ([nDays ? plural(nDays, "day") : (nActs ? plural(nActs, "assignment") : ""), cal && cal.summative ? "summative " + shortDate(cal.summative) : ""].filter(Boolean).join(" · ") || (main ? "slides ready" : "slides not built yet"))
       + (nTodo ? ` · <span class="todocount">⚠ ${nTodo} not made yet</span>` : "")
       + (fit ? ` · <span class="todocount">⚠ ${fit.need} lesson days planned, but ${fit.have} class days before the test</span>` : "");
     const body = list.map(r => {
       // Summative row: just the green-sheet date, no "Day N · Summative" (Fynn, 2026-11-02).
-      const label = r.single ? "" : r.summ && cal && cal.summative ? `<span class="sumdate">📅 ${safe(niceDate(cal.summative))}</span>` : r.day ? `<b>${r.span ? `Days ${r.day}–${r.span}` : `Day ${r.day}`}${r.summ ? " · Summative" : ""}</b>${rowDate(r)}${r.summ ? `<span class="sumdate">📅 No date on the green sheet</span>` : ""}` : `<b>Other</b>`;
+      const label = r.single ? "" : r.summ && cal && cal.summative ? `<span class="sumdate">📅 ${safe(niceDate(cal.summative))}</span>` : r.day ? `<b>${r.span ? `Days ${r.day}–${r.span}` : `Day ${r.day}`}</b>${rowDate(r)}` : `<b>Other</b>`;
       const t = r.title || (r.summ || r.ids.some(id => /summative/i.test(REG[id].title)) ? "Summative" : r.ids.length ? chipText(r.ids[0]).replace(/\s*\([^)]*\)\s*$/, "") : "");
       const slides = r.slides.map(s => `<a class="chip slides" href="${safe(s.url)}${s.slide ? "#slide=id." + safe(s.slide) : ""}" target="_blank" rel="noopener">▶ ${safe(s.label)}</a>`).join("");
       const todo = (r.todo || []).map(x => `<span class="chip todo">⚠ ${safe(x)}</span>`).join("");
@@ -925,7 +925,7 @@ function renderTodo() {
     let html = "";
     const when = t.when ? (t.when.exact ? `<b>${safe(niceDay(t.when.iso))}</b>` : `<span>about</span> <b>${safe(niceDay(t.when.iso))}</b>`) : `<span class="muted">no date</span>`;
     const unitLabel = (t.part1 ? "Part 1 · " : "") + (t.unit ? (t.course === "civics" ? "Friday " : "Unit ") + t.unit : "Other");
-    const dayLabel = (t.summ && t.when) || !t.day ? "" : (t.span ? `Days ${t.day}–${t.span}` : `Day ${t.day}`) + (t.summ ? " · Summative" : "");   // dated summative: the date column already shows it
+    const dayLabel = (t.summ && t.when) || !t.day ? "" : (t.span ? `Days ${t.day}–${t.span}` : `Day ${t.day}`);   // no "· Summative" (Fynn, 2026-11-02): the date column already shows it
     const canLink = !t.after && t.unit && t.day;
     html += `<div class="todo${t.summ ? " summ" : ""}" data-i="${i}">
       <div class="todowhen">${when}</div>
