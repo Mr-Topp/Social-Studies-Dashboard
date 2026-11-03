@@ -160,8 +160,8 @@
     { course: "civics", unit: 2, title: "How the Government Works (Q16–62)", url: "https://neotboy.github.io/inequalityquest/civics/friday2-government-presentation/" },
     { course: "civics", unit: 3, title: "Rights & Responsibilities (Q63–72)", url: "https://neotboy.github.io/inequalityquest/civics/friday3-rights-presentation/" },
     { course: "civics", unit: 4, title: "The 1776 Files (Q73–89)", url: "https://neotboy.github.io/inequalityquest/civics/friday4-1776-presentation/" },
-    { course: "civics", unit: 5, title: "The 1800s (Q90–99)", url: "https://neotboy.github.io/inequalityquest/civics/friday5-1800s-civics-presentation/" },
-    { course: "civics", unit: 6, title: "Modern America (Q100–118)", url: "https://neotboy.github.io/inequalityquest/civics/friday6-modern-america-presentation/" },
-    { course: "civics", unit: 7, title: "Symbols, Holidays & Final Review (Q119–128)", url: "https://neotboy.github.io/inequalityquest/civics/friday7-symbols-final-review-presentation/" }
+    { course: "civics", unit: 5, title: "Civil War to Modern America (Q90–118)", url: "https://neotboy.github.io/inequalityquest/civics/friday5-1800s-civics-presentation/" },
+    { course: "civics", unit: 6, title: "Geography & Symbols (Q119–128)", url: "https://neotboy.github.io/inequalityquest/civics/friday6-geography-symbols-presentation/" }
+    // Friday 7 = Iowa Civics Exam (Google Form, in shared/assignments.js), no slides. Fynn, 2026-11-03.
   ];
 })();
