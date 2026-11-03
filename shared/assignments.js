@@ -248,6 +248,7 @@ window.CLASS_ASSIGNMENTS = {
   "gov-u4-d3-scenario-game": { course: "government", unit: 4, day: 3, turnIn: false, std: [], title: "Day 3 · Congress Scenario Game", path: "https://capitol-crisis-live.floot.app/" },
   "gov-u4-d4-review": { course: "government", unit: 4, day: 4, turnIn: false, std: [], title: "Day 4 · Summative Review (Blooket)", path: "https://dashboard.blooket.com/set/6ac2eab3b78211c196153a34" },
   "gov-u4-d4-summative": { course: "government", unit: 4, day: 4, turnIn: false, std: [], title: "Day 4 · Legislative Summative", path: "https://docs.google.com/document/d/1xCF77ZzM9EnyxgAWGcdPArbRrlAvzOpACsMcbn4hEOc/edit?usp=sharing" },
+  "gov-u4-d4-summative-key": { course: "government", unit: 4, day: 4, turnIn: false, std: [], title: "Day 4 · Legislative Summative Teacher Key", path: "https://docs.google.com/document/d/1sDN_ypVEHnlIb3bRQE1J7eHZRNFs9mMCPCRAN8KLpVI/edit" },
   // ---- Government · Unit 5 (Executive) ----
   "gov-u5-d1-for-the-president": { course: "government", unit: 5, day: 1, turnIn: false, std: [], title: "Day 1 · For the President: All in a Day's Work — iCivics (Printed)", path: "https://ed.icivics.org/resource-assets/lesson_plan/613/assets/for_the_president_all_in_a_days_work_student_docs.pdf" },
   "gov-u5-d1-for-the-president-key": { course: "government", unit: 5, day: 1, turnIn: false, std: [], title: "Day 1 · For the President Answer Key", path: "https://ed.icivics.org/resource-assets/lesson_plan/613/assets/for_the_president_all_in_a_days_work_answer_key.pdf" },
