@@ -1,216 +1,286 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>The Ration Book | U.S. History Unit 2 Day 4</title>
-<meta name="description" content="Run a 1943 Cedar Rapids family's ration book, then weigh who put the common good first on the World War II home front.">
+<title>Hold the Home Front | U.S. History Unit 2 Day 4</title>
+<meta name="description" content="Run an Iowa family's WWII ration book from 1943 to 1945: shop with points, face the black market, take a war job, buy bonds, and see who was treated unfairly.">
 <style>
-:root{--ink:#1f2b33;--muted:#55626b;--paper:#f4f3ef;--card:#fff;--line:#dad9cf;--teal:#2f4a3a;--coral:#9b2c2c;--green:#2a6b45;--bad:#a2392f;--soft:#ebf0ec}
+:root{--ink:#1b2433;--muted:#5a6472;--navy:#1b2f4d;--navy2:#26426b;--red:#c0392b;--red2:#8e2418;--gold:#f2b134;--cream:#fff7e6;--paper:#fffdf6;--green:#2a7a4b;--blue:#2c5d9e;--try:#8a5a00;--line:#e7dcc2}
 *{box-sizing:border-box}
-html,body{overflow-x:hidden}
-body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.5 system-ui,Segoe UI,Arial,sans-serif}
-header{background:linear-gradient(90deg,#e6ece7,#f3e6e2);border-bottom:5px solid var(--teal);padding:16px max(16px,calc((100vw - 900px)/2)) 12px}
-.k{font-size:.78rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:var(--teal);margin:0}
-h1{margin:2px 0 4px;font-size:clamp(1.7rem,3.4vw,2.3rem)}
-.std{margin:2px 0;font-size:.92rem;color:var(--muted)}.std b{color:var(--ink)}
-.hud{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line);padding:8px max(16px,calc((100vw - 900px)/2));display:flex;gap:10px;flex-wrap:wrap;align-items:center;font-weight:800;font-size:.92rem;box-shadow:0 2px 8px #1f2b3312}
-.hud .bar{flex:1;min-width:100px;height:10px;background:#e6e6de;border-radius:9px;overflow:hidden}.hud .bar span{display:block;height:100%;width:0;background:var(--teal);transition:width .4s}
-.pill{background:#f0efe8;border-radius:20px;padding:3px 10px;white-space:nowrap}
-.meter{display:flex;align-items:center;gap:6px}.meter .track{width:100px;height:10px;border-radius:9px;background:#e6e6de;overflow:hidden}.meter .track span{display:block;height:100%;background:var(--coral);transition:width .5s}
-main{max-width:900px;margin:auto;padding:14px 16px 60px}
-.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;box-shadow:0 3px 12px #1f2b330d}
-.kicker{font-size:.78rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:var(--coral);margin:0}
-h2{margin:2px 0 10px;font-size:1.45rem}
-.teach{background:var(--soft);border-left:5px solid var(--teal);border-radius:9px;padding:10px 14px;margin:0 0 12px}.teach p{margin:4px 0}.teach b{color:var(--teal)}
-.block{margin:14px 0;padding:14px;border-radius:12px;border:2px solid var(--line);background:#fff}
-.block.current{border-color:var(--ink);box-shadow:0 0 0 4px #1f2b3320}
-.block h3{margin:0 0 10px;font-size:1.06rem;line-height:1.35;font-weight:700}
-.block p{margin:6px 0}
-.event{background:#fbf9f4;border-style:dashed;border-color:#cdbf9a}.event.current{border-style:solid}
-.event-body p{margin:4px 0}
-.doc{background:#fbf6ea;border:1px solid #e0d3b0;border-left:5px solid var(--coral);border-radius:9px;padding:10px 12px;margin:4px 0 10px}
-.doc .cap{display:block;font-size:.74rem;font-weight:900;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:2px}
-.doc q,.quote{font-style:italic}
-.doc p{margin:4px 0}
-.tablewrap{overflow-x:auto;margin:6px 0 10px}
-table{border-collapse:collapse;width:100%;font-size:.92rem;background:#fff}
-th,td{border:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}th{background:var(--soft)}
-.picked{margin:10px 0 4px;color:var(--muted)}.result{background:#f0efe8;border-radius:9px;padding:9px 12px}.result p{margin:4px 0}
-.tag{display:inline-block;font-weight:900;font-size:.8rem;border-radius:12px;padding:2px 9px;margin-right:6px}.tag.up{background:#dcefe2;color:var(--green)}.tag.down{background:#f6dcd8;color:var(--bad)}.tag.flat{background:#ebe9e0;color:var(--ink)}
-.qlabel{font-size:.75rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:var(--teal);margin:0 0 4px}
+html,body{overflow-x:clip}
+body{margin:0;color:var(--ink);font:17px/1.45 system-ui,"Segoe UI",Arial,sans-serif;background:var(--navy);background-image:repeating-linear-gradient(135deg,#1b2f4d 0 22px,#1e3456 22px 44px)}
+button{font:inherit;cursor:pointer;border-radius:14px;min-height:46px}
+button:focus-visible,input:focus-visible,textarea:focus-visible,a:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+
+/* ---------- game board HUD ---------- */
+.hud{position:sticky;top:0;z-index:30;background:linear-gradient(#fff7e6,#fbeed2);border-bottom:4px solid var(--red);box-shadow:0 4px 14px #0005;padding:6px max(10px,calc((100vw - 1020px)/2)) 4px}
+.hud-in{display:grid;grid-template-columns:auto 1.2fr 1.2fr 1.2fr .8fr;gap:8px;align-items:stretch}
+.cal{background:#fff;border:2px solid var(--navy);border-radius:10px;text-align:center;min-width:64px;overflow:hidden;display:flex;flex-direction:column}
+.cal span{background:var(--red);color:#fff;font-weight:900;font-size:.8rem;letter-spacing:.08em;padding:1px 6px}
+.cal b{font-size:1.05rem;padding:2px 6px;color:var(--navy)}
+.mt{position:relative;display:flex;gap:8px;align-items:center;background:#fff;border:2px solid #e2d3b0;border-radius:12px;padding:4px 8px;min-width:0}
+.mt-face{position:relative;font-size:1.6rem;line-height:1;flex:none}
+.mt-face i{position:absolute;right:-8px;bottom:-6px;font-style:normal;font-size:1.05rem;background:#fff;border-radius:50%;box-shadow:0 1px 3px #0003}
+.fam-f{font-size:1.25rem;letter-spacing:-.25em}
+.mt-r{flex:1;min-width:0;display:grid;grid-template-columns:1fr auto;align-items:center;column-gap:6px}
+.lab{grid-column:1/3;font-size:.72rem;font-weight:900;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.trk{position:relative;height:10px;background:#ece3cf;border-radius:9px;overflow:hidden}
+.trk span{display:block;height:100%;border-radius:9px;transition:width .7s cubic-bezier(.3,1.4,.5,1)}
+#hudStrain .trk span{background:linear-gradient(90deg,#f0a35e,#c0392b)}
+#hudEffort .trk span{background:linear-gradient(90deg,#f2b134,#e07b00)}
+#hudEffort .trk em{position:absolute;left:60%;top:0;bottom:0;width:2px;background:var(--navy)}
+#hudBm .trk span{background:linear-gradient(90deg,#555,#1b1b24)}
+.mt b{font-size:.92rem;color:var(--navy)}.mt.cash b{font-size:1.15rem;grid-column:1/3}
+.mt.rival{background:#2b2b36;border-color:#45455a;color:#fff}.mt.rival .lab{color:#ffd27a}.mt.rival b{color:#fff}.mt.rival .trk{background:#45455a}#hudBm .trk span{background:linear-gradient(90deg,#ffd27a,#ff7a59)}
+.mt.rival.down{opacity:.75}.mt.rival.down .mt-face>span{filter:grayscale(1)}
+.mt.warn{animation:warn 1.4s ease-in-out infinite}
+@keyframes warn{50%{box-shadow:0 0 0 4px #ff7a5966}}
+.mt.bump{animation:bump .5s}
+@keyframes bump{30%{transform:scale(1.08)}}
+.pop{position:absolute;right:6px;bottom:-24px;font-weight:900;font-size:1rem;padding:2px 9px;border-radius:12px;pointer-events:none;animation:floatup 1.9s ease-out forwards;z-index:40;white-space:nowrap}
+.pop.good{background:#2a7a4b;color:#fff}.pop.bad{background:#c0392b;color:#fff}
+@keyframes floatup{0%{opacity:0;transform:translateY(14px) scale(.7)}15%{opacity:1;transform:translateY(0) scale(1.2)}80%{opacity:1}100%{opacity:0;transform:translateY(-10px)}}
+.hud-step{display:flex;gap:8px;align-items:center;margin-top:4px;font-size:.75rem;font-weight:900;color:var(--navy)}
+.sbar{flex:1;height:6px;background:#e7dcc2;border-radius:6px;overflow:hidden}.sbar span{display:block;height:100%;background:var(--red);transition:width .4s}
+
+main{max-width:1020px;margin:auto;padding:14px 12px 96px}
+.welcome{background:#e3f1e8;color:var(--green);font-weight:800;border-radius:12px;padding:8px 12px;margin:0 0 10px;border:2px solid #b9d8c4}
+
+/* ---------- scene ---------- */
+.scene{background:var(--paper);border-radius:20px;overflow:clip;box-shadow:0 10px 30px #0006;border:3px solid #fff3d6}
+.sc-top{background:var(--red);color:#fff;padding:8px 18px 9px;display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+.chap{font-size:.75rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;background:#0003;border-radius:8px;padding:2px 8px}
+.sc-top h2{margin:0;font-family:"Arial Black","Segoe UI Black",Impact,system-ui,sans-serif;font-size:clamp(1.25rem,2.6vw,1.75rem);letter-spacing:.01em;text-transform:uppercase}
+.stage{display:flex;gap:16px;align-items:center;padding:14px 18px;min-height:132px;background:linear-gradient(180deg,#bfe1f4,#e8f3f8 70%,#cfe3c1 70%,#b9d39e);position:relative}
+.stage-art{font-size:4.2rem;line-height:1;flex:none;filter:drop-shadow(0 4px 0 #0002);min-width:84px;text-align:center}
+.st-home .stage{background:linear-gradient(180deg,#f7e2c0,#f3d6a8 72%,#b98a55 72%,#a87a48)}
+.st-store .stage{background:linear-gradient(180deg,#fff0d0 0,#fff0d0 70%,#7a5230 70%);}
+.st-office .stage{background:linear-gradient(180deg,#d9e2ea,#c7d3de 72%,#8a6a4a 72%)}
+.st-factory .stage{background:linear-gradient(180deg,#c9ced6,#aeb6c2 70%,#6b7380 70%)}
+.st-garage .stage{background:linear-gradient(180deg,#2b2b36,#3b3b4a 72%,#1f1f28 72%)}
+.st-garage .stage-art{filter:drop-shadow(0 0 12px #ffd27a88)}
+.st-rally .stage{background:linear-gradient(180deg,#bfe1f4,#e3f1fa 68%,#9aa6b2 68%)}
+.st-school .stage{background:linear-gradient(180deg,#fde9b8,#fbe0a0 72%,#c58f4d 72%)}
+.st-farm .stage{background:linear-gradient(180deg,#bfe1f4,#e6f4ff 62%,#e5c04f 62%,#c99b2c)}
+.st-parade .stage{background:linear-gradient(180deg,#1b2f4d,#26426b 70%,#c0392b 70%)}
+.bubbles{display:flex;flex-direction:column;gap:8px;flex:1;min-width:0}
+.bub{display:flex;gap:8px;align-items:flex-end;max-width:640px}
+.bub .av{font-size:1.9rem;width:48px;height:48px;flex:none;display:grid;place-items:center;background:#fff;border-radius:50%;border:3px solid var(--navy);box-shadow:0 2px 0 #0003}
+.bub .bt{position:relative;background:#fff;border-radius:16px;padding:7px 12px;box-shadow:0 3px 0 #0002;border:2px solid #1b2f4d22}
+.bub .bt::before{content:"";position:absolute;left:-9px;bottom:10px;border:8px solid transparent;border-right-color:#fff;border-left:0}
+.bub .bt b{display:block;font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--red)}
+.bub .bt p{margin:0;font-size:1.04rem;font-weight:600}
+.bub.think .bt{background:#f4f4f8;border-style:dashed;font-style:italic}
+.bub.earl .av{background:#2b2b36;border-color:#ffd27a}.bub.earl .bt{background:#2b2b36;color:#fff;border-color:#ffd27a}.bub.earl .bt::before{border-right-color:#2b2b36}.bub.earl .bt b{color:#ffd27a}
+.bub.radio .av{background:var(--gold)}
+.sc-body{padding:14px 18px 18px}
+
+/* ---------- world objects ---------- */
+.family{display:flex;gap:6px}.family span{display:flex;flex-direction:column;align-items:center;font-size:2.6rem}.family small{font-size:.7rem;font-weight:900;background:#fff;border-radius:8px;padding:0 6px;margin-top:2px;color:var(--navy)}.family .gone{opacity:.75}
+.board-explain{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:10px}
+.board-explain div{background:#fff;border:2px solid var(--line);border-radius:14px;padding:8px;text-align:center;display:flex;flex-direction:column;gap:2px}
+.board-explain .be-i{font-size:2rem}.board-explain b{color:var(--navy)}.board-explain small{color:var(--muted);font-size:.84rem;line-height:1.3}
+.board-explain .rival{background:#2b2b36;border-color:#ffd27a;color:#fff}.board-explain .rival b{color:#ffd27a}.board-explain .rival small{color:#e6e0d0}
+.mini-book{background:#d9cfb4;border:3px solid #7a6a45;border-radius:8px;padding:6px 8px;transform:rotate(-4deg);font:900 .6rem Georgia,serif;letter-spacing:.1em;color:#3b2f17;display:flex;flex-direction:column;align-items:center;gap:4px}
+.mini-book div{display:grid;grid-template-columns:repeat(4,1fr);gap:3px}.mini-book i{font-style:normal;width:20px;height:20px;display:grid;place-items:center;color:#fff;font-size:.7rem;border:1px dashed #fff}.mini-book .r{background:var(--red)}.mini-book .b{background:var(--blue)}
+.book{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:0 0 10px}
+.stamps{border-radius:12px;padding:10px;border:3px dashed;display:flex;flex-direction:column;gap:2px;font-size:.95rem;background:#fff}.stamps b{font-size:1.05rem}.stamps em{font-style:normal;font-weight:900}
+.stamps.red{border-color:var(--red);background:#fdeeec}.stamps.blue{border-color:var(--blue);background:#ebf1fa}.stamps.free{border-color:var(--green);background:#e9f5ee}
+.notice{position:relative;background:#fffbe9;border:1px solid #e6d9a8;border-radius:4px;padding:16px 14px 10px;margin:8px auto 10px;max-width:720px;transform:rotate(-.6deg);box-shadow:3px 5px 0 #0001,0 0 0 6px #c79a5a33}
+.notice .pin{position:absolute;top:-12px;left:50%;font-size:1.4rem}
+.cap{display:block;font-size:.72rem;font-weight:900;letter-spacing:.07em;text-transform:uppercase;color:var(--muted);margin-bottom:2px}
+.notice p{margin:2px 0;font-size:1.05rem;font-family:Georgia,serif}
+.real{background:#fff;border:2px dashed #d6c79c;border-radius:12px;padding:7px 12px;margin:10px 0;font-size:.92rem}.real p{margin:2px 0}
+.real-h{font-weight:900;color:#7a5a00;font-size:.75rem;letter-spacing:.07em;text-transform:uppercase;margin:0 0 2px}
+.src{font-size:.76rem;color:var(--muted);margin:3px 0 0}
+.fict{font-size:.8rem;color:var(--muted);font-style:italic;margin:6px 0}
+.poster{margin:0 auto 10px;max-width:300px;background:#fff;border-radius:6px;padding:8px;box-shadow:0 6px 18px #0003;transform:rotate(1deg)}
+.poster.small{max-width:210px;float:right;margin:0 0 10px 16px;transform:rotate(-1.5deg)}
+.poster img{display:block;width:100%;height:auto;max-height:360px;object-fit:contain;border-radius:4px}.poster figcaption{font-size:.74rem;color:var(--muted);margin-top:4px;line-height:1.3}.poster a{color:inherit}
+.paper{background:#f7f1e1;border:1px solid #d8cba6;padding:10px 16px;margin:0 auto 10px;max-width:720px;box-shadow:3px 4px 0 #0002;font-family:Georgia,serif;transform:rotate(.4deg)}
+.paper .masthead{font:900 1.2rem "Old English Text MT",Georgia,serif;text-align:center;border-bottom:3px double #333;margin:0 0 6px;letter-spacing:.04em}
+.paper .quote{font-size:1.15rem;font-style:italic;margin:4px 0}.gloss{font-size:.88rem;color:var(--muted);font-family:system-ui,Arial,sans-serif}
+.memorial{background:#1b2f4d;color:#fff;border-radius:14px;padding:12px 16px;margin:0 0 10px;border:3px solid var(--gold)}
+.memorial .m-h{font-weight:900;color:var(--gold);margin:0 0 4px}.memorial p{margin:4px 0}.memorial .src{color:#c9d3e2}
+.thermo-big{width:44px;height:120px;border:4px solid #fff;border-radius:22px;background:#fff8;position:relative;overflow:hidden;margin:auto;box-shadow:0 0 0 3px var(--navy)}
+.thermo-big span{position:absolute;bottom:0;left:0;right:0;background:linear-gradient(0deg,#c0392b,#f2b134);transition:height 1s}
+.bond{border:4px double var(--green);border-radius:12px;background:linear-gradient(135deg,#eff8ea,#fffdf2);padding:10px 14px;margin:0 auto 10px;max-width:640px;text-align:center;box-shadow:0 4px 0 #0001}
+.b-top{font-weight:900;letter-spacing:.12em;color:var(--green);margin:0 0 6px;font-size:.85rem}
+.b-row{display:flex;justify-content:center;align-items:center;gap:14px;flex-wrap:wrap}.b-row b{display:block;font-size:1.7rem;color:var(--green)}.b-row small{color:var(--muted);font-weight:700}
+.b-arrow{font-weight:800;color:var(--muted)}.b-note{margin:6px 0 0;font-weight:700}
+.files{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-bottom:6px}
+.folder{position:relative;background:#f4dfa7;border-radius:0 12px 12px 12px;padding:12px 12px 8px;margin-top:16px;box-shadow:0 4px 0 #0002;font-size:.95rem}
+.folder .tab{position:absolute;top:-22px;left:0;background:#f4dfa7;border-radius:10px 10px 0 0;padding:2px 12px;font-size:.75rem;font-weight:900;text-transform:uppercase;letter-spacing:.04em}
+.folder p{margin:2px 0}
+
+/* ---------- in-world checks ---------- */
+.check{position:relative;margin:12px 0 6px;padding:12px;border:3px solid var(--navy);border-radius:18px;background:#eef4fb;box-shadow:0 5px 0 #1b2f4d33}
+.check.form{background:#fffdf3;border-color:var(--green);background-image:repeating-linear-gradient(#fffdf3 0 30px,#e9e2c9 30px 31px)}
+.check.notes{background:#fff6dc;border-color:#c79a5a}
+.qlabel{font-size:.74rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:var(--navy);margin:0 0 6px}
+.check .bub{margin-bottom:10px}.check .bub .bt{border-color:var(--navy)}
 .choices{display:grid;gap:8px}
-@media(min-width:700px){.q .choices{grid-template-columns:1fr 1fr}}
-button{font:inherit;cursor:pointer;border-radius:10px;min-height:46px}
-.choice{text-align:left;background:#fff;color:var(--ink);border:2px solid #cfcdbf;padding:10px 12px;font-weight:650;line-height:1.3}
-.choice:hover:not(:disabled){border-color:var(--ink);background:#fcfcfa}.choice:disabled{opacity:.5;cursor:not-allowed}
-.go{margin-top:12px;background:var(--teal);color:#fff;border:0;padding:11px 18px;font-weight:900}
-button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid #2f7dbd;outline-offset:2px}
-.answered{font-weight:800;color:var(--green);margin:4px 0}.why{margin:2px 0;color:var(--muted)}
-.msg{min-height:1.3em;font-weight:750;margin:8px 0 0}.msg.bad{color:var(--bad)}.msg.good{color:var(--green)}
-label{display:block;font-weight:850;margin:14px 0 4px}.stem{margin:0 0 4px;color:var(--muted);font-size:.92rem}
-input,textarea{width:100%;font:inherit;border:2px solid #cfcdbf;border-radius:9px;padding:10px;background:#fff;color:var(--ink)}
-.steps{display:grid;gap:6px;margin:10px 0;padding:0;list-style:none}.steps li{background:#f0efe8;border-radius:9px;padding:8px 12px;font-weight:700}
-.pair{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 0}.pair>div{border-radius:10px;padding:8px 10px;font-size:.93rem;background:var(--soft)}.pair>div>b:first-child{display:block}
-.block h3 .doc,.block h3 .pair,.block h3 .tablewrap{font-weight:400;font-size:1rem}.block h3 .doc b,.block h3 .pair b{font-weight:800}
-@media(max-width:640px){.pair{grid-template-columns:1fr}}
-.welcome{background:#e6f1ea;color:var(--green);font-weight:800;border-radius:9px;padding:8px 12px;margin:0 0 10px}
-.foot{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-top:14px;color:var(--muted);font-size:.85rem}
-.foot button{background:#ebe9e0;border:0;padding:8px 12px;font-weight:800;color:var(--ink)}
-.src{font-size:.8rem;color:var(--muted)}
-.posters{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:8px 0}.posters figure,.cartoon{margin:0;background:#f6f4ee;border:1px solid var(--line);border-radius:10px;padding:8px}.posters img,.cartoon img{display:block;width:100%;height:auto;max-height:430px;object-fit:contain;background:#fff;border-radius:6px}.posters figcaption,.cartoon figcaption{font-size:.8rem;color:var(--muted);margin-top:5px;line-height:1.3}.posters a,.cartoon a{color:inherit}.cnote{background:#fff4e5;border-left:5px solid #b7791f;border-radius:8px;padding:7px 10px;font-size:.92rem;margin:4px 0 8px}
-@media(max-width:640px){.posters{grid-template-columns:1fr}}
-.big{font-size:1.15rem}
+@media(min-width:761px){.check .choices{grid-template-columns:1fr 1fr}}
+.reply{display:flex;gap:10px;align-items:center;text-align:left;background:#fff;color:var(--ink);border:3px solid #c9d6e6;padding:10px 12px;font-weight:750;line-height:1.3;border-radius:16px 16px 16px 4px;box-shadow:0 3px 0 #1b2f4d22;transition:transform .12s}
+.reply:hover:not(:disabled){transform:translateY(-2px);border-color:var(--navy)}
+.reply:disabled{opacity:.55;cursor:not-allowed}
+.r-ico{font-size:1.3rem;flex:none}
+.check.notes .reply{background:#fff3a8;border-color:#e2cf6b;border-radius:4px;transform:rotate(-.5deg)}.check.notes .reply:nth-child(2n){transform:rotate(.6deg)}
+.check.form .reply{border-radius:8px;border-color:#b9d8c4}
+.shake{animation:shake .45s}
+@keyframes shake{20%,60%{transform:translateX(-7px)}40%,80%{transform:translateX(7px)}}
+.msg{min-height:1.3em;font-weight:800;margin:8px 0 0}.msg.try{color:var(--try)}.msg.good{color:var(--green);font-size:1.1rem}
+.check.done{background:#f1faf4;border-color:var(--green);box-shadow:none;padding:12px 14px;min-height:70px}
+.answered{font-weight:900;color:var(--green);margin:2px 0;padding-right:250px}.why{margin:2px 0;color:var(--muted);padding-right:250px}
+.stamp{position:absolute;right:12px;top:10px;border:4px solid var(--red);color:var(--red);font:900 1rem/1 "Arial Black",Impact,sans-serif;padding:6px 10px;border-radius:8px;transform:rotate(-8deg);letter-spacing:.05em;background:#fff8;text-transform:uppercase}
+.msg .stamp{position:static;display:inline-block;margin-right:8px}
+.slam{animation:slam .55s cubic-bezier(.2,1.6,.4,1)}
+@keyframes slam{0%{opacity:0;transform:rotate(-8deg) scale(2.6)}60%{opacity:1;transform:rotate(-8deg) scale(.92)}100%{transform:rotate(-8deg) scale(1)}}
+
+/* ---------- decision cards ---------- */
+.pick-h{font:900 1.05rem "Arial Black",Impact,sans-serif;text-transform:uppercase;color:var(--red);margin:14px 0 6px;letter-spacing:.04em}
+.cards{display:grid;gap:12px}.cards.n2{grid-template-columns:1fr 1fr}.cards.n3{grid-template-columns:repeat(3,1fr)}
+.dcard{display:flex;flex-direction:column;align-items:center;gap:4px;text-align:center;background:#fff;border:3px solid var(--navy);border-radius:18px;padding:14px 12px 12px;color:var(--ink);box-shadow:0 6px 0 var(--navy);transition:transform .12s,box-shadow .12s}
+.dcard:hover{transform:translateY(-4px) rotate(-.5deg);box-shadow:0 10px 0 var(--navy)}
+.dcard:active{transform:translateY(3px);box-shadow:0 2px 0 var(--navy)}
+.d-ico{font-size:3rem;line-height:1.1}.d-t{font-size:1.2rem;line-height:1.2;color:var(--navy)}.d-l{font-size:.84rem;color:var(--muted);line-height:1.3}
+.d-chips{display:flex;flex-direction:column;gap:4px;margin-top:6px;width:100%}
+.chip{font-size:.8rem;font-weight:800;border-radius:10px;padding:3px 8px}.chip.g{background:#e3f3e8;color:var(--green)}.chip.c{background:#fde7e3;color:var(--red2)}
+
+/* ---------- results ---------- */
+.result{display:flex;gap:14px;align-items:flex-start;background:#fff;border:3px solid var(--gold);border-radius:18px;padding:12px 14px;margin-top:12px;box-shadow:0 6px 0 #f2b13455}
+.flip{animation:flip .6s ease-out}
+@keyframes flip{0%{opacity:0;transform:perspective(700px) rotateX(-70deg)}100%{opacity:1;transform:none}}
+.r-big{font-size:3.2rem;line-height:1;flex:none}
+.r-main{flex:1;min-width:0}.r-main .lines p{margin:4px 0;font-weight:600}
+.you{margin:0 0 4px;color:var(--muted)}.you b{color:var(--navy)}
+.tags{display:flex;flex-wrap:wrap;gap:6px;margin:2px 0 8px}
+.tag{display:inline-block;font-weight:900;font-size:.85rem;border-radius:12px;padding:3px 10px;white-space:nowrap}.tag.up{background:#dcefe2;color:var(--green)}.tag.down{background:#f9dcd7;color:#9a2f22}.tag.flat{background:#ece7d8;color:var(--ink)}
+.reveal{position:relative;background:var(--navy);color:#fff;border-radius:14px;padding:10px 14px 10px;margin:10px 0 2px;box-shadow:0 4px 0 #0003}
+.reveal .nw{display:inline-block;background:var(--gold);color:var(--navy);font-weight:900;font-size:.72rem;letter-spacing:.08em;border-radius:8px;padding:2px 8px;margin-bottom:4px}
+.reveal p{margin:0;font-size:1.05rem}.reveal b{color:var(--gold)}
+.go{margin-top:14px;background:var(--red);color:#fff;border:0;padding:13px 26px;font:900 1.1rem system-ui,Arial,sans-serif;box-shadow:0 5px 0 var(--red2);text-transform:none}
+.go:hover{filter:brightness(1.08)}.go:active{transform:translateY(3px);box-shadow:0 2px 0 var(--red2)}.go:disabled{opacity:.6}
+
+/* ---------- shop ---------- */
+.till{position:sticky;top:calc(var(--hudH,96px) + 6px);z-index:5;background:var(--navy);color:#fff;border-radius:16px;padding:8px 12px;margin:0 0 12px;box-shadow:0 6px 16px #0004}
+.pts{display:flex;gap:8px;flex-wrap:wrap}
+.ptbig{font-weight:900;border-radius:10px;padding:4px 10px;font-size:.95rem;display:flex;align-items:center;gap:6px;flex-wrap:wrap}.ptbig b{font-size:1.25rem}
+.ptbig.red{background:#fdeeec;color:var(--red)}.ptbig.blue{background:#ebf1fa;color:var(--blue)}.ptbig.cash{background:#e9f5ee;color:var(--green)}
+.stamprow{display:inline-grid;grid-template-columns:repeat(12,9px);gap:2px}.stamprow i{height:12px;border-radius:2px}.stamprow .r{background:var(--red)}.stamprow .b{background:var(--blue)}.stamprow .used{background:#0001;outline:1px dashed #0002}
+.table{background:#7a5230;border-radius:12px;padding:6px 8px 4px;margin-top:8px;background-image:repeating-linear-gradient(90deg,#7a5230 0 40px,#6e4a2b 40px 42px)}
+.plates{display:flex;gap:6px;flex-wrap:wrap}
+.plate{width:46px;display:flex;flex-direction:column;align-items:center}
+.plate i{width:42px;height:42px;border-radius:50%;border:3px dashed #ffffff88;background:#ffffff22;display:grid;place-items:center;font-size:1.35rem;font-style:normal}
+.plate.full i{border:3px solid #fff;background:#fff;box-shadow:0 2px 0 #0004;animation:pop .3s}
+.plate.extra i{border-color:#ff9a8a}
+.plate small{font-size:.68rem;font-weight:800;color:#fde9c9}
+@keyframes pop{0%{transform:scale(.4)}70%{transform:scale(1.15)}}
+.tally{margin:2px 0 0;font-weight:800;font-size:.88rem;color:#fff}
+.shelf{display:grid;grid-template-columns:repeat(auto-fill,minmax(165px,1fr));gap:10px;background:#c9a06a;padding:10px;border-radius:14px;background-image:repeating-linear-gradient(180deg,#c9a06a 0 150px,#8a6238 150px 158px)}
+.item{position:relative;display:flex;flex-direction:column;align-items:flex-start;gap:2px;text-align:left;background:#fffdf6;border:3px solid #e2d3b0;padding:8px 10px;color:var(--ink);box-shadow:0 4px 0 #0002;border-radius:12px}
+.item:hover:not(:disabled){border-color:var(--navy);transform:translateY(-2px)}
+.item.in{border-color:var(--green);background:#e9f7ee;box-shadow:0 0 0 3px #2a7a4b55}
+.pop-in{animation:pop .3s}
+.item.black{background:#2b2b36;color:#f4efe2;border-color:#ffd27a}.item.black .i-note{color:#ffd27a}.item.black.in{background:#3b3b4a;box-shadow:0 0 0 3px #ffd27a88}
+.item:disabled{opacity:.5;cursor:not-allowed}
+.item.out{opacity:.65}
+.i-top{display:flex;justify-content:space-between;width:100%}.i-e{font-size:2rem;line-height:1}.i-mood{font-size:1.1rem}
+.i-n{font-weight:850;line-height:1.2}.i-w{font-size:.85rem}.i-c{display:flex;gap:4px;flex-wrap:wrap}
+.pt{font-size:.8rem;font-weight:900;border-radius:8px;padding:1px 7px}.pt.red{background:var(--red);color:#fff}.pt.blue{background:var(--blue);color:#fff}.pt.cash{background:var(--green);color:#fff}.pt.free{background:#e3f3e8;color:var(--green)}
+.i-note{font-size:.74rem;color:var(--muted);font-weight:700}.i-s{font-size:.74rem;font-weight:900;color:var(--navy)}.item.black .i-s{color:#fff}
+.soldout{position:absolute;top:38%;left:50%;transform:translate(-50%,-50%) rotate(-12deg);border:3px solid var(--red);color:var(--red);background:#fff;font:900 .9rem "Arial Black",Impact,sans-serif;padding:2px 8px;border-radius:6px}
+.bonus{background:#e9f7ee;border-radius:10px;padding:6px 10px;font-weight:800;margin:0 0 8px}.bonus.bad{background:#2b2b36;color:#ffd27a}
+.dinner{font-size:2.4rem;letter-spacing:-.15em;display:block;max-width:180px;line-height:1.1}
+
+/* ---------- ending ---------- */
+.front{background:#f7f1e1;border:1px solid #d8cba6;padding:12px 16px;box-shadow:4px 6px 0 #0002;font-family:Georgia,serif}
+.front .masthead{font:900 clamp(1rem,2.6vw,1.5rem) Georgia,serif;text-align:center;border-bottom:4px double #222;margin:0;letter-spacing:.04em}
+.dateline{text-align:center;font-size:.8rem;margin:2px 0 8px;border-bottom:1px solid #222;padding-bottom:4px;font-family:system-ui,Arial,sans-serif;font-weight:700}
+.headline{display:flex;gap:12px;align-items:center}.e-big{font-size:3.2rem;line-height:1}
+.headline h3{margin:0;font:900 clamp(1.5rem,4vw,2.3rem)/1.05 "Arial Black",Impact,sans-serif;text-transform:uppercase;color:var(--navy)}
+.kicker{font-size:.74rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:var(--red);margin:0;font-family:system-ui,Arial,sans-serif}
+.front p{margin:6px 0}
+.front.busted .headline h3{color:var(--red)}
+.finalm{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0;font-family:system-ui,Arial,sans-serif}.finalm span{background:#fff;border-radius:10px;padding:4px 10px;font-weight:700;border:1px solid var(--line)}
+.cb{margin:10px 0 4px;font-family:system-ui,Arial,sans-serif;text-transform:uppercase;letter-spacing:.06em;font-size:.85rem}
+.trail{list-style:none;padding:0;margin:0;display:grid;gap:5px;font-family:system-ui,Arial,sans-serif}.trail li{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;background:#fff;border:1px solid var(--line);border-radius:9px;padding:5px 10px;font-size:.92rem}
+.trail .tags{margin:0}
+.left-out{background:#f1eef6;border-left:6px solid #6b4fa0;border-radius:12px;padding:8px 12px;margin:12px 0}.left-out p{margin:3px 0}.left-out .real-h{color:#4b3478}
+
+/* ---------- V-mail ---------- */
+.vmail{background:#fffdf3;border:3px solid var(--navy);border-radius:6px;padding:12px 16px;box-shadow:0 6px 0 #0002;background-image:repeating-linear-gradient(#fffdf3 0 32px,#e9e2c9 32px 33px)}
+.vm-h{font:900 1rem "Arial Black",Impact,sans-serif;color:var(--red);margin:0 0 4px;letter-spacing:.03em}
+.vm-sub{margin:0 0 6px;font-weight:600}
+label{display:block;font-weight:850;margin:12px 0 4px}.stem{margin:0 0 4px;color:var(--muted);font-size:.92rem}
+input,textarea{width:100%;font:inherit;border:2px solid #cfc6af;border-radius:10px;padding:10px;background:#fff;color:var(--ink)}
+textarea{font-family:"Segoe Print","Comic Sans MS",system-ui,sans-serif}
+
+/* ---------- title ---------- */
+.title-card{background:var(--cream);border-radius:22px;padding:22px 26px;box-shadow:0 12px 36px #0007;border:4px solid var(--gold);position:relative;overflow:hidden}
+.title-card::before{content:"";position:absolute;inset:0 0 auto 0;height:10px;background:repeating-linear-gradient(90deg,var(--red) 0 40px,#fff 40px 80px,var(--blue) 80px 120px)}
+.t-grid{display:grid;grid-template-columns:1.45fr 1fr;gap:20px;align-items:center}
+.t-kick{font-size:.76rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:var(--red);margin:6px 0 0}
+h1{font-family:"Arial Black","Segoe UI Black",Impact,system-ui,sans-serif;font-size:clamp(2.2rem,5.4vw,3.6rem);line-height:.98;margin:4px 0 8px;color:var(--navy);text-transform:uppercase;letter-spacing:-.01em;text-shadow:3px 3px 0 var(--gold)}
+.hook{font-size:1.2rem;font-weight:700;margin:0 0 10px}
+.t-chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px}.t-chips span{background:#fff;border:2px solid var(--line);border-radius:999px;padding:3px 12px;font-weight:750;font-size:.92rem}
+.goal{background:#e7eef8;border-radius:12px;padding:6px 12px;margin:6px 0}
+.t-start label{margin-top:8px}
+.t-row{display:flex;gap:8px;align-items:stretch;flex-wrap:wrap}.t-row input{flex:1;min-width:200px}
+.go.start{margin-top:0;font-size:1.3rem;padding:12px 34px}
+.ration-book{background:#d9cfb4;border:3px solid #7a6a45;border-radius:10px;padding:14px;transform:rotate(-4deg);box-shadow:8px 10px 0 #1b2f4d33;display:flex;flex-direction:column;align-items:center;gap:8px;font-family:Georgia,serif;color:#3b2f17}
+.rb-top{font-weight:900;letter-spacing:.14em;font-size:.95rem}.rb-name{font-size:1.6rem;font-weight:900;letter-spacing:.2em}
+.rb-stamps{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}.rb-stamps i{font-style:normal;width:40px;height:40px;display:grid;place-items:center;font-weight:900;color:#fff;border:2px dashed #fff;border-radius:4px}.rb-stamps .r{background:var(--red)}.rb-stamps .b{background:var(--blue)}
+.rb-foot{font-size:.72rem;letter-spacing:.12em}
+.t-cast{display:flex;justify-content:center;align-items:center;gap:4px;font-size:2.4rem;margin-top:16px}.t-cast .vs{font:900 1rem "Arial Black",Impact,sans-serif;background:var(--red);color:#fff;border-radius:50%;width:40px;height:40px;display:grid;place-items:center;margin:0 6px}
+.t-cast .earl{position:relative}.t-cast .earl i{position:absolute;left:6px;top:4px;font-size:1.4rem;font-style:normal}
+
+.foot{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-top:14px;color:#c9d3e2;font-size:.85rem}
+.foot button{background:#ffffff22;border:2px solid #ffffff44;padding:8px 12px;font-weight:800;color:#fff;min-height:40px}
+
+@media(max-width:760px){
+  .hud{padding:5px 6px 3px}
+  .hud-in{grid-template-columns:1fr 1fr;gap:5px}
+  .cal{display:none}
+  .mt{padding:3px 6px;gap:6px}.mt-face{font-size:1.25rem}.fam-f{font-size:1rem}.lab{font-size:.64rem}.mt b{font-size:.82rem}.mt.cash b{font-size:1rem}
+  .stage{flex-direction:column;align-items:stretch;gap:8px;padding:10px 12px;min-height:0}
+  .stage-art{font-size:3rem;min-width:0}
+  .bub .av{width:40px;height:40px;font-size:1.5rem}.bub .bt p{font-size:.98rem}
+  .sc-body{padding:12px}
+  .board-explain{grid-template-columns:1fr 1fr}
+  .book,.files{grid-template-columns:1fr}
+  .cards.n2,.cards.n3{grid-template-columns:1fr}
+  .dcard{flex-direction:row;flex-wrap:wrap;text-align:left;justify-content:flex-start;padding:10px 12px}
+  .d-ico{font-size:2.2rem}.d-t{flex:1;min-width:150px}.d-chips{flex-direction:row;flex-wrap:wrap}
+  .poster.small{float:none;margin:0 auto 10px}
+  .till{padding:6px 8px;border-radius:12px}.stamprow{display:none}.pts{gap:4px}.ptbig{font-size:.78rem;padding:2px 6px}.ptbig b{font-size:1rem}
+  .table{padding:4px 6px 2px;margin-top:5px}.plates{gap:3px;flex-wrap:nowrap}.plate{width:34px}.plate i{width:31px;height:31px;font-size:1rem;border-width:2px}.plate small{font-size:.58rem}.tally{font-size:.78rem}
+  .shelf{grid-template-columns:1fr 1fr;padding:8px;gap:8px}
+  .t-grid{grid-template-columns:1fr}.t-art{display:none}
+  .title-card{padding:18px 16px}
+  .answered,.why{padding-right:0}.check.done .stamp{position:static;display:inline-block;margin-bottom:6px}
+  .result{flex-direction:column;gap:6px}.r-big{font-size:2.4rem}
+  }
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 @media print{.hud,.foot,.go{display:none}}
 </style>
 <script src="../../shared/assignments.js?v=20261101fill"></script>
 <script src="../../shared/turnin.js?v=20261102read"></script>
-<script src="../../shared/unit-game.js?v=20261101fill"></script>
+<script src="../../shared/lang.js?v=20261102samonly"></script>
+<script src="es.js?v=3"></script>
 </head><body>
-<header>
-  <p class="k">U.S. History · Unit 2 · Day 4</p>
-  <h1>World War II: Who Put the Common Good First?</h1>
-  <p class="std"><b>SS.9-12.US.31 · US.33 · US.34</b> Home front, propaganda and cartoons, and civic virtue</p>
-  <p class="std"><b>Goal:</b> Explain how Americans sacrificed for the common good on the home front, and who was denied fair treatment. · About 25 minutes.</p>
-</header>
-<div class="hud" aria-label="Progress">
-  <span id="progressText">0 checks done</span>
-  <div class="bar" aria-hidden="true"><span id="progressFill"></span></div>
-  <span class="pill" style="color:#9b2c2c">Red: <span id="redNum">256</span></span><span class="pill" style="color:#1f4f8a">Blue: <span id="blueNum">192</span></span><span class="pill meter">Common good: <span class="track" aria-hidden="true"><span id="meterFill" style="width:50%"></span></span> <span id="meterNum">5/10</span></span>
+<div class="hud" id="hud" hidden aria-label="Game board">
+  <div class="hud-in">
+    <div class="cal" aria-label="Date"><span id="calMo">MAR</span><b id="calYr">1943</b></div>
+    <div class="mt fam" id="hudStrain"><div class="mt-face" aria-hidden="true"><span class="fam-f">👩🧑👧</span><i id="famMood">😊</i></div><div class="mt-r"><span class="lab">Family strain</span><div class="trk"><span id="mStrain"></span></div><b id="nStrain">3/10</b></div></div>
+    <div class="mt eff" id="hudEffort"><div class="mt-face" aria-hidden="true">🌡️</div><div class="mt-r"><span class="lab">Town war effort</span><div class="trk"><span id="mEffort"></span><em title="Goal"></em></div><b id="nEffort">30%</b></div></div>
+    <div class="mt rival" id="hudBm"><div class="mt-face" aria-hidden="true"><span>🧔</span><i id="earlFace">🙂</i></div><div class="mt-r"><span class="lab" id="earlMood">Earl: waiting</span><div class="trk"><span id="mBm"></span></div><b id="nBm">3/10</b></div></div>
+    <div class="mt cash" id="hudCash"><div class="mt-face" aria-hidden="true">💵</div><div class="mt-r"><span class="lab">Savings</span><b id="nCash">$12</b></div></div>
+  </div>
+  <div class="hud-step"><span id="stepText">Step 1 of 15</span><div class="sbar" aria-hidden="true"><span id="stepFill"></span></div></div>
 </div>
 <main>
   <p class="welcome" id="welcome" hidden></p>
   <div id="app"></div>
   <div class="foot"><span>Progress saves on this device. Your teacher sees your work after you turn it in.</span><button type="button" id="restartBtn">Start over</button></div>
 </main>
-<script>
-const T = (cls, txt) => `<span class="tag ${cls}">${txt}</span>`;
-const doc = (cap, body) => `<div class="doc"><span class="cap">${cap}</span>${body}</div>`;
-UnitGame.start({
-  key: "ush-u2-d8-common-good-v1",
-  assignmentId: "ush-u2-d8-common-good",
-  title: "U.S. History · Unit 2 · Day 4 · The Ration Book",
-  standard: "SS.9-12.US.31, SS.9-12.US.33, SS.9-12.US.34",
-  oldApi: "https://fynn-class-assignment-submissions-20261024.neotboy.chatgpt.site/api/submit",
-  startFx: { red: 256, blue: 192, good: 5 },
-  clampFx: fx => { fx.red = Math.max(0, fx.red); fx.blue = Math.max(0, fx.blue); fx.good = Math.max(0, Math.min(10, fx.good)); },
-  hud: st => {
-    const f = st.fx;
-    document.getElementById("redNum").textContent = f.red;
-    document.getElementById("blueNum").textContent = f.blue;
-    document.getElementById("meterFill").style.width = ((f.good || 0) * 10) + "%";
-    document.getElementById("meterNum").textContent = (f.good || 0) + "/10";
-  },
-  startLabel: "Open the ration book",
-  introHtml: `<p class="kicker">Cedar Rapids, Iowa · 1943</p><h2>The Ration Book</h2>
-    <p>The U.S. is fighting World War II. Soldiers need food, metal, rubber, and gas, so families at home get less. You run the shopping for the <b>Novak family</b>: Mom, Dad, and two kids.</p>
-    <div class="pair"><div><b>Your ration book</b>Each month the family gets <b>red points</b> (meat, butter, cheese) and <b>blue points</b> (canned food). Watch them at the top.</div><div><b>Your meter</b>The <b>Common good</b> meter goes up when your choices help the whole country, not just your family.</div></div>
-    <ul class="steps"><li>1. Make the Novaks' choices and answer the checks.</li><li>2. Decode real WWII posters and a political cartoon.</li><li>3. Write 2 short answers and turn in.</li></ul>
-    <p class="src">The Novaks are made up. The rationing rules, people, and events are real. Point prices for single items are simplified.</p>`,
-  scenes: [
-    { kicker: "Part 1 of 3 · Spring 1943", title: "Shopping with Points",
-      teach: `<p><b>Rationing</b> means limiting how much of something each person can buy. The <b>OPA</b> (Office of Price Administration) ran it.</p>
-        <p>To buy rationed food, you needed money <b>and</b> ration points. Starting in 1943, each person got <b>64 red points</b> and <b>48 blue points</b> a month. Sugar (about half a pound per person a week) and coffee (about 1 pound every 5 weeks, until mid-1943) were rationed too.</p>
-        <p><b>Not rationed:</b> chicken, fish, eggs, milk, bread, and fresh vegetables.</p>`,
-      blocks: [
-        { type: "q", id: "r1", std: "US.34", short: "Points math: weekly roast leaves 160",
-          prompt: "The Novaks get <b>256 red points</b> for the month (64 for each of 4 people). A 3-pound pot roast costs <b>24 red points</b>. If they bought one roast every week for 4 weeks, how many red points would be left for butter, cheese, and everything else?",
-          options: ["160 points", "232 points", "96 points", "208 points"],
-          hint: "First find 4 roasts × 24 points. Then subtract that from 256.", why: "4 × 24 = 96 points on roasts, and 256 − 96 = 160 left. Every choice used up something else." },
-        { type: "q", id: "r2", std: "US.34", short: "Why ration: fair shares",
-          prompt: doc("OPA message to families (paraphrased)", `<p>Rationing makes sure everyone gets a fair share of what's left after the military is fed. Without it, people with more money could buy up everything, and prices would shoot up.</p>`) + "Why did the government ration food instead of just letting prices rise?",
-          options: ["So everyone got a fair share, not just the rich", "So grocery stores could charge more money for meat", "So the army could sell extra food to families", "So families would stop growing any vegetables"],
-          hint: "Who would get the food if only money mattered?", why: "Rationing spread the limited food fairly. Rich and poor families got the same number of points." },
-        { type: "event", id: "e1", short: "Week 1 meat choice", html: `<p><b>Week 1.</b> You're at the grocery store. <span class="src">(Simplified point prices: pot roast, 3 lb = 24 red · butter, 1 lb = 8 red · cheese, 1 lb = 8 red · chicken = 0)</span></p><p>What do you buy for the week?</p>`,
-          choices: [
-            { label: "Sunday pot roast + 1 lb butter (32 red)", fx: { red: -32 }, result: `<p>${T("flat", "−32 red points")}A good dinner, and fair. You still have points left for the rest of the month if you're careful.</p>` },
-            { label: "A chicken + 1 lb butter (8 red)", fx: { red: -8, good: 1 }, result: `<p>${T("up", "+1 common good")}${T("flat", "−8 red points")}Smart. Chicken wasn't rationed, so you saved red points and left more beef for the troops and other families.</p>` },
-            { label: "Stock up: 6 lb beef, 2 lb butter, 2 lb cheese (80 red)", fx: { red: -80, good: -2 }, result: `<p>${T("down", "−2 common good")}${T("flat", "−80 red points")}Buying extra \"just in case\" is <b>hoarding</b>. The government asked people not to do it, because it empties shelves for everyone else. Now you've used almost a third of the month's points in week 1.</p>` }
-          ] },
-        { type: "event", id: "e2", short: "Victory garden choice", html: `<p><b>Week 2.</b> The government asks families to plant <b>victory gardens</b>. Canned vegetables cost blue points <span class="src">(simplified: 1 can = 12 blue)</span>. There's an empty patch of yard behind the house.</p><p>What do you do?</p>`,
-          choices: [
-            { label: "Plant a victory garden and can vegetables at home", fx: { blue: -24, good: 2 }, result: `<p>${T("up", "+2 common good")}${T("flat", "−24 blue points")}You buy just two cans until the garden comes in. By 1944, about 20 million victory gardens grew roughly 40% of the fresh vegetables Americans ate.</p>` },
-            { label: "Skip the garden and buy canned vegetables all month", fx: { blue: -144 }, result: `<p>${T("flat", "−144 blue points")}Easy, but it uses most of your blue points. Every can you buy is metal and factory work the war could have used.</p>` },
-            { label: "Skip vegetables mostly. The kids don't like them anyway.", fx: { good: -1 }, result: `<p>${T("down", "−1 common good")}You save points, but the family eats worse. The government ran ads asking families to keep kids healthy so they could help the war effort.</p>` }
-          ] },
-        { type: "q", id: "r3", std: "US.34", short: "How victory gardens helped",
-          prompt: "How did a victory garden help the war effort?",
-          options: ["It freed up canned food and metal for the military", "It sent fresh vegetables straight to soldiers overseas", "It raised tax money for the government", "It replaced the need for ration books"],
-          hint: "If you grow your own vegetables, what don't you need to buy?", why: "Home-grown food meant fewer cans bought at home, so more canned food, tin, and shipping could go to the military." }
-      ] },
-    { kicker: "Part 2 of 3 · 1943", title: "Everyone Pitches In",
-      teach: `<p>World War II was a <b>total war</b>: the whole country, not just soldiers, was part of the war effort. People bought <b>war bonds</b> (loans to the government), collected scrap metal and rubber, and took war jobs.</p>`,
-      blocks: [
-        { type: "event", id: "e3", short: "Gas and carpooling", html: `<p><b>Gas rationing.</b> Japan captured the places where most of America's natural rubber came from. Gas was rationed mainly to save <b>tires</b>. Most drivers got an \"A\" sticker: only a few gallons a week. The speed limit was 35 mph.</p><p>Dad drives to work. A coworker asks if they can ride together. What does Dad do?</p>`,
-          choices: [
-            { label: "Carpool with the coworker", fx: { good: 1 }, result: `<p>${T("up", "+1 common good")}Two people, one set of tires. Posters said: <span class="quote">"When you ride ALONE you ride with Hitler!"</span></p>` },
-            { label: "Take the city bus instead of driving", fx: { good: 1 }, result: `<p>${T("up", "+1 common good")}That saves gas and rubber too. Buses and streetcars were packed during the war.</p>` },
-            { label: "Keep driving alone. It's his car.", fx: { good: -1 }, result: `<p>${T("down", "−1 common good")}Legal, but it uses up rubber that the military needed for trucks and planes.</p>` }
-          ] },
-        { type: "note", html: `<p class="qlabel">Name it: propaganda</p><p><b>Propaganda</b> is a message made to push people to think or act a certain way. It uses strong pictures and feelings like fear, guilt, or pride more than facts. During World War II, the U.S. government, and companies helping it, made thousands of posters like these.</p><div class="posters"><figure><a href="ride-alone-poster.jpg" target="_blank" rel="noopener"><img src="ride-alone-poster.jpg" alt="WWII poster: a man drives a car with Adolf Hitler in the passenger seat"></a><figcaption>“When you ride ALONE you ride with Hitler!” Weimer Pursell, U.S. government poster, 1941–45. National Archives (NAID 516143). Click to enlarge.</figcaption></figure><figure><a href="loose-lips-poster.jpg" target="_blank" rel="noopener"><img src="loose-lips-poster.jpg" alt="WWII poster: a ship sinking under black smoke with the words Loose lips might sink ships"></a><figcaption>“Loose lips might sink ships.” Published by the House of Seagram, a company, for the war effort, 1941–45. National Archives (NAID 513543). Click to enlarge.</figcaption></figure></div>` },
-        { type: "q", id: "g5", std: "US.31", short: "Ride-alone poster technique", label: "Poster check",
-          prompt: "Look at the car poster on the left. Who is sitting in the passenger seat, and why would that make a driver want to carpool?",
-          options: ["Hitler. It makes driving alone feel like helping the enemy.", "A soldier. It makes driving alone feel like a fun road trip.", "A police officer. It warns drivers they will get a ticket.", "A gas station worker. It shows that gas is cheap again."],
-          hint: "Look closely at the passenger, then read the words above the car.", why: "The poster uses guilt: wasting gas and tires was shown as riding with Hitler. That is a propaganda technique." },
-        { type: "q", id: "g3", std: "US.33", short: "Loose lips poster", label: "Poster check",
-          prompt: "Look at the ship poster on the right. What was it asking Americans to do?",
-          options: ["Not talk about ships or troop movements", "Write letters to sailors and soldiers every week", "Buy more war bonds at the local bank", "Join the Navy to replace the lost sailors"],
-          hint: "\"Loose lips\" means talking too much. What could an enemy spy learn?", why: "Careless talk about where ships or soldiers were going could reach enemy spies. The poster uses fear: your words could sink a ship." },
-        { type: "q", id: "g1", std: "US.34", short: "Women's war work (1942 magazine)", label: "Source check",
-          prompt: doc("Ladies' Home Journal, August 1942 (paraphrased)", `<p>Women on the bomber assembly line at the Glenn L. Martin aircraft plant work six days a week. They rivet, weld, and inspect parts. They earn about $28 to $33 a week.</p>`) + doc("Here in Cedar Rapids", `<p>Collins Radio made radios for the military, and many of its new wartime workers were women.</p>`) + "What do these sources show?",
-          options: ["Women did skilled war work for real pay", "Women were banned from most factory jobs", "Women worked in factories for free", "Women earned more than every man did"],
-          hint: "What kind of work, and was it paid?", why: "Millions of women took skilled industrial jobs during the war. The image of \"Rosie the Riveter\" came from them." },
-        { type: "event", id: "e4", short: "Black market meat", html: `<p><b>Week 3.</b> The red points are running low. A butcher leans over the counter and whispers: \"I've got extra steaks in the back. No points needed. Just pay double.\"</p><p>This is the <b>black market</b>: selling rationed goods illegally.</p>`,
-          choices: [
-            { label: "Buy the steaks. The family deserves it.", fx: { good: -3 }, result: `<p>${T("down", "−3 common good")}Your family eats well tonight. But that meat came out of someone else's fair share. Black markets were a real problem, and the OPA prosecuted thousands of sellers.</p>` },
-            { label: "Say no and make do with chicken and eggs", fx: { good: 1 }, result: `<p>${T("up", "+1 common good")}It's not as exciting, but it's fair. Most families followed the rules most of the time.</p>` },
-            { label: "Say no and report the butcher to the ration board", fx: { good: 2 }, result: `<p>${T("up", "+2 common good")}Local ration boards were run by volunteers from the community. Reports from shoppers helped them catch cheaters.</p>` }
-          ] },
-        { type: "q", id: "g2", std: "US.34", short: "Why the black market hurt the common good",
-          prompt: "Why was buying black-market meat harmful to the <b>common good</b> (what's best for everyone)?",
-          options: ["It let some people take more than their fair share", "It raised the number of ration points every family got", "It helped the army get more meat for soldiers", "It was legal, just a little more expensive"],
-          hint: "If one family gets extra steaks without points, who ends up with less?", why: "Rationing only worked if everyone played fair. Black-market buyers took food out of the shared supply." },
-        { type: "q", id: "g4", std: "US.34", short: "Double V campaign",
-          prompt: doc("The Double V campaign, 1942", `<p>The <i>Pittsburgh Courier</i>, a leading Black newspaper, started the <b>Double V</b> campaign. About 1 million Black Americans served in the military, many in segregated units.</p>`) + "\"Double V\" stood for victory over fascism abroad (the dictatorships of Hitler and Mussolini) and victory over…",
-          options: ["Racism at home", "Japan in the Pacific", "Hunger in Europe", "The Soviet Union"],
-          hint: "Black soldiers fought for freedom overseas. What were they still denied in the U.S.?", why: "Double V meant beating fascism overseas AND racism at home. Black Americans served while still facing segregation." }
-      ] },
-    { kicker: "Part 3 of 3 · 1942–1988", title: "Who Was Left Out?",
-      teach: `<p>The common good was supposed to include everyone. For one group of Americans, the government did the opposite. A <b>political cartoon</b> is a drawing that makes a point about the news. Some helped spread fear.</p>`,
-      blocks: [
-        { type: "q", id: "c1", std: "US.33", short: "Seuss cartoon: false idea about Japanese Americans", label: "Political cartoon check",
-          prompt: `<div class="cnote">This real 1942 cartoon uses a racist stereotype. We study it because cartoons like this helped convince Americans to support the camps.</div><figure class="cartoon"><a href="seuss-waiting-for-the-signal-1942.png" target="_blank" rel="noopener"><img src="seuss-waiting-for-the-signal-1942.png" alt="1942 cartoon: a long line of Japanese Americans along the West Coast picking up blocks labeled TNT while a man on a roof watches the ocean through a telescope"></a><figcaption>“Waiting for the Signal From Home,” Dr. Seuss (Theodor Geisel), <i>PM</i> newspaper, February 13, 1942. Public domain. Click to enlarge.</figcaption></figure>` + "Look at what the people in line are picking up and what the man on the roof is doing. What false idea does this cartoon spread about Japanese Americans?",
-          options: ["That they were all secretly getting ready to attack for Japan", "That they refused to follow the food and gas rationing rules", "That they were leaving the West Coast to take factory jobs", "That they were joining the Navy so they could spy on ships"],
-          hint: "Read the labels on the blocks (TNT is an explosive) and the sign on the house. Where is the man on the roof looking?", why: "The cartoon shows a whole group of Americans as traitors. That was false, but fear like this helped lead to Executive Order 9066 six days later." },
-        { type: "note", html: doc("Executive Order 9066 · February 19, 1942", `<p>Six days after that cartoon ran, President Franklin Roosevelt signed an order that led to about <b>120,000 people of Japanese ancestry</b> being forced from their West Coast homes. About two-thirds were <b>U.S. citizens</b>, born in America.</p>
-          <p>Families had days to sell homes and businesses. They were held in <b>incarceration camps</b> (prison camps) behind barbed wire, many for about three years. No Japanese American was ever convicted of spying for Japan during the war.</p>`) },
-        { type: "q", id: "x1", std: "US.34", short: "Most removed were U.S. citizens",
-          prompt: "Most people forced into the camps were…",
-          options: ["American citizens born in the U.S.", "Japanese soldiers captured in battle", "Spies caught sending secret messages", "Visitors who had come from Japan"],
-          hint: "Reread the first paragraph. What fraction were citizens?", why: "About two-thirds were U.S.-born citizens. They lost their freedom because of their ancestry, not anything they did." },
-        { type: "note", html: doc("The 442nd Regimental Combat Team", `<p>Thousands of young Japanese American men joined the U.S. Army while their families were held in the camps. Many served in the <b>442nd</b>, whose motto was <b>\"Go for Broke.\"</b></p>
-          <p>They fought in Italy and France. For its size and time in combat, the 442nd became one of the <b>most decorated units</b> in U.S. history.</p>`) },
-        { type: "q", id: "x2", std: "US.34", short: "442nd = civic virtue",
-          prompt: "Why is the 442nd a strong example of <b>civic virtue</b> (putting the good of the community first)?",
-          options: ["They served the country even while it jailed their families", "They refused to fight until all of the camps were finally closed", "They were paid far more than any other U.S. soldiers", "They fought only in the Pacific against Japan's army"],
-          hint: "Where were their families while they fought?", why: "They risked their lives for a country that was treating their own families unfairly." },
-        { type: "q", id: "x3", std: "US.34", short: "1988 apology shows camps were wrong",
-          prompt: doc("Civil Liberties Act of 1988", `<p>Congress formally <b>apologized</b> for the camps and paid <b>$20,000</b> to each living survivor. A government study had found the camps were caused by \"race prejudice, war hysteria, and a failure of political leadership.\"</p>`) + "What does the 1988 law show?",
-          options: ["The nation later admitted the camps were wrong", "The camps had been fair and needed after all", "Japanese Americans had been proven to be spies", "Congress planned to open new camps in the future"],
-          hint: "Why would a government apologize and pay survivors?", why: "The apology admitted the camps were caused by prejudice, not real danger." },
-        { type: "q", id: "x4", std: "US.34", short: "Common thread: sacrifice for common good",
-          prompt: "Rationing, victory gardens, carpooling, Rosie the Riveter, the Double V campaign, and the 442nd all show…",
-          options: ["Ordinary people giving something up for the good of all", "The government doing all of the war work without anyone's help", "Americans who refused to take part in the war at all", "That every American was treated fairly during the war"],
-          hint: "What did each of these people or groups give up?", why: "Each example shows people sacrificing time, comfort, or safety for the common good, even when they weren't treated fairly." }
-      ] }
-  ],
-  finale: {
-    title: "Who Put the Common Good First?",
-    report: st => `<p><b>The Novaks finished with ${st.fx.red} red points and ${st.fx.blue} blue points left, and a common good meter of ${st.fx.good}/10.</b> Real families made choices like these every week from 1942 to 1945.</p><p>Answer both in 1–2 full sentences.</p>`,
-    prompts: [
-      { id: "ration", short: "Hardest ration choice and why it mattered", label: "1. What was the hardest choice for the Novak family? Why did that choice matter for the common good?", stem: "The hardest choice was ___. It mattered for the common good because ___.", min: 70, mustAll: [["meat", "point", "garden", "butcher", "black market", "steak", "butter", "chicken", "carpool", "gas", "ration", "vegetable", "hoard"], ["because", "since", "so "]], mustMsg: "In answer 1, name the choice (meat, garden, gas, or black market) and explain why it mattered (use \"because\")." },
-      { id: "who", short: "Who put the common good first", label: "2. Who put the common good first? Pick one: a Rosie the Riveter worker, a victory gardener, the Double V campaign, or the 442nd. Explain.", stem: "___ put the common good first because ___.", min: 60, newWords: 5, mustAll: [["rosie", "women", "worker", "garden", "double v", "double", "442", "japanese"], ["because", "since"]], mustMsg: "In answer 2, name one group from the list and explain why (use \"because\")." }
-    ]
-  },
-  extraAnswers: st => ({ "Points left": "Red " + st.fx.red + " · Blue " + st.fx.blue, "Common good meter": st.fx.good + " of 10" })
-});
-
-</script>
+<script src="game.js?v=3"></script>
 </body></html>
