@@ -351,7 +351,7 @@ window.CLASS_ASSIGNMENTS = {
   "gov-u6-d2-marion-local": { course: "government", unit: 6, day: 2, title: "Day 2 · Local Governments: Marion (Reading)", path: "https://drive.google.com/open?id=1Mrcx2EpKQyCXqDadGEarMcEnl9P3mfjl9Dsp5DaN-kM", turnIn: false, alt: true, std: ["SS.9-12.Gov.20"] },
 
   // ---- Added 2026-11-02: activities that were already built but not listed here yet ----
-  "soc-u1-d5-prove-hot-take": { course: "sociology", unit: 1, day: 5, title: "Day 5 · Hot Take Lab", path: "sociology/u1-d5-prove-hot-take/", std: ["SS.9-12.Soc.1"] },
+  "soc-u1-d5-prove-hot-take": { course: "sociology", unit: 1, day: 5, title: "Day 5 · Prove It Lab", path: "sociology/u1-d5-prove-hot-take/", std: ["SS.9-12.Soc.1"] },
   "soc-u1-d6-study-people": { course: "sociology", unit: 1, day: 6, title: "Day 6 · Research Agency", path: "sociology/u1-d6-study-people/", std: ["SS.9-12.Soc.1", "SS.9-12.Soc.3"] },
   "soc-u2-d4-team-up": { course: "sociology", unit: 2, day: 4, title: "Day 4 · Save the Night Bus", path: "sociology/u2-d4-team-up/", std: ["SS.9-12.Soc.7", "SS.9-12.Soc.8"] },
   "soc-u2-d5-everyday-life": { course: "sociology", unit: 2, day: 5, title: "Day 5 · Jaylen's Tuesday", path: "sociology/u2-d5-everyday-life/", std: ["SS.9-12.Soc.5", "SS.9-12.Soc.6", "SS.9-12.Soc.7"] },

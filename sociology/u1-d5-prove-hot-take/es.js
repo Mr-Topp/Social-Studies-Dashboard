@@ -1,295 +1,369 @@
-// Spanish for "How Can You Prove a Hot Take?" (Sociology Unit 1 Day 5). Loaded after shared/lang.js.
-// Keys are the exact English the page shows; the English page keeps running underneath.
+// Spanish for "Prove It Lab" (Sociology Unit 1 Day 5). Loaded after shared/lang.js.
+// Keys are the exact English the page shows; the English game keeps running underneath.
 (function () {
-  // Same little HTML builders the page uses, so the keys match exactly.
-  const T = (cls, txt) => `<span class="tag ${cls}">${txt}</span>`;
-  const ev = (who, body) => `<span class="ev"><span class="who">${who}</span>${body}</span>`;
-  const post = (handle, body, stats) => `<div class="post"><div class="ph"><span class="av">${handle[1].toUpperCase()}</span><b>${handle}</b></div><div class="pb">${body}</div><div class="ps">${stats}</div></div>`;
-
+  const R = h => "💡 " + h;   // the "reveal" boxes start with this
   SiteLang.add({
     dict: {
-      // ---------- Page frame ----------
-      "Hot Take Lab | Sociology Unit 1 Day 5": "Laboratorio de opiniones polémicas | Sociología Unidad 1 Día 5",
+      // ---------- Frame ----------
+      "Prove It Lab | Sociology Unit 1 Day 5": "Laboratorio Pruébalo | Sociología Unidad 1 Día 5",
       "Sociology · Unit 1 · Day 5": "Sociología · Unidad 1 · Día 5",
-      "How Can You Prove a Hot Take?": "¿Cómo puedes probar una opinión polémica?",
+      "· How Can You Prove a Hot Take?": "· ¿Cómo puedes probar una opinión polémica?",
       "Analyze the components of a sociological investigation.": "Analizar las partes de una investigación sociológica.",
-      "Goal:": "Meta:",
-      "Turn a claim into a testable hypothesis, design a fair study, and tell correlation from causation. · About 25 minutes.": "Convertir una afirmación en una hipótesis que se pueda comprobar, diseñar un estudio justo y distinguir la correlación de la causalidad. · Unos 25 minutos.",
-      "Proof meter:": "Medidor de pruebas:",
-      "Progress and proof meter": "Progreso y medidor de pruebas",
+      "Scientific method steps": "Pasos del método científico",
+      "Comment war": "Guerra de comentarios",
+      "You": "Tú",
+      "Ask": "Preguntar", "Check": "Revisar", "Predict": "Predecir", "Collect": "Recolectar", "Analyze": "Analizar", "Conclude": "Concluir",
+      "Kai, the lab, Cedar Valley High, Channel 9, Dr. Ruiz, and all study results are made up for this game. The CDC number and the Hawthorne Works study are real.":
+        "Kai, el laboratorio, Cedar Valley High, el Canal 9, la Dra. Ruiz y todos los resultados de los estudios son inventados para este juego. El dato de los CDC y el estudio de Hawthorne Works son reales.",
 
-      // ---------- Intro ----------
+      // ---------- Title ----------
+      "Prove It Lab": "Laboratorio Pruébalo",
+      "A hot take about sleep has 2.4 million views. You run the school research lab. Prove it or bust it before Kai goes live Friday.":
+        "Una opinión polémica sobre el sueño tiene 2.4 millones de vistas. Tú diriges el laboratorio de investigación de la escuela. Pruébala o desmiéntela antes de que Kai salga en vivo el viernes.",
+      "🧪 Build a real study with 10 lab hours": "🧪 Arma un estudio real con 10 horas de laboratorio",
+      "📊 Your choices make your data": "📊 Tus decisiones crean tus datos",
+      "📺 Face Kai on Channel 9 · 5 endings": "📺 Enfrenta a Kai en el Canal 9 · 5 finales",
+      "About 25 minutes · 5 evidence checks · 2 short answers": "Unos 25 minutos · 5 preguntas de evidencia · 2 respuestas cortas",
+      "<b>Today's goal:</b> Use the scientific method to test a claim, and tell a pattern from a cause.":
+        "<b>Meta de hoy:</b> Usar el método científico para poner a prueba una afirmación y distinguir un patrón de una causa.",
       "Open the lab": "Abrir el laboratorio",
-      "Hot Take Lab": "Laboratorio de opiniones polémicas",
-      "Don't argue. Test it.": "No discutas. Ponlo a prueba.",
-      "phones are literally making every teen lonely. no debate. 🔥": "los celulares literalmente están dejando solos a todos los chamos. no hay debate. 🔥",
-      "2.1M views · 48K comments": "2.1M vistas · 48K comentarios",
-      "The comments are a war. Half say it's true. Half say it's fake. Nobody has <b>evidence</b>.":
-        "Los comentarios son una guerra. La mitad dice que es verdad. La otra mitad dice que es falso. Nadie tiene <b>evidencia</b>.",
-      "You run a small teen research lab. Your job: turn this hot take into a real study. Your choices change the <b>Proof meter</b> at the top. Strong studies = strong proof.":
-        "Diriges un pequeño laboratorio de investigación hecho por jóvenes. Tu trabajo: convertir esta opinión polémica (hot take) en un estudio de verdad. Tus decisiones cambian el <b>Medidor de pruebas</b> de arriba. Estudios fuertes = pruebas fuertes.",
-      "1. Turn the hot take into something you can test.": "1. Convierte la opinión polémica en algo que puedas comprobar.",
-      "2. Design your study and see your results.": "2. Diseña tu estudio y mira tus resultados.",
-      "3. Read the results without getting fooled. Then write 2 short answers.": "3. Lee los resultados sin dejarte engañar. Luego escribe 2 respuestas cortas.",
+      "sleep is for the weak. i run on 4 hrs and i'm LOCKED IN every class. 8 hrs = lazy 😤🔥": "dormir es para débiles. yo duermo 4 horas y estoy SÚPER CONCENTRADO en cada clase. 8 horas = flojo 😤🔥",
+      "2.4M views · 61K comments": "2.4M vistas · 61K comentarios",
+      "Cedar Valley High Research Lab": "Laboratorio de investigación de Cedar Valley High",
+      "You. 10 lab hours. One shot.": "Tú. 10 horas de laboratorio. Una sola oportunidad.",
 
-      // ---------- Part 1 ----------
-      "Part 1 of 3": "Parte 1 de 3",
-      "From Hot Take to Hypothesis": "De opinión polémica a hipótesis",
-      [`<p>Sociologists use the <b>scientific method</b>: a step-by-step way to answer questions with <b>evidence</b>, not opinion.</p>
-        <p>Steps: ask a question → do <b>background research</b> → write a <b>hypothesis</b> → collect data → analyze it → <b>share</b> it so others can check.</p>
-        <p>A <b>hypothesis</b> is a testable prediction. It must be <b>testable</b> (you can collect data on it) and <b>falsifiable</b> (the data could prove it wrong).</p>`]:
-        `<p>Los sociólogos usan el <b>método científico (scientific method)</b>: una forma de responder preguntas paso a paso con <b>evidencia (evidence)</b>, no con opiniones.</p>
-        <p>Pasos: haz una pregunta → haz una <b>investigación previa (background research)</b> → escribe una <b>hipótesis (hypothesis)</b> → reúne datos → analízalos → <b>compártelos (share)</b> para que otros los puedan revisar.</p>
-        <p>Una <b>hipótesis</b> es una predicción que se puede poner a prueba. Tiene que ser <b>comprobable (testable)</b>: puedes reunir datos sobre ella. Y tiene que ser <b>falsable (falsifiable)</b>: los datos podrían demostrar que está equivocada.</p>`,
+      // ---------- Shared pieces ----------
+      "🔎 Evidence check": "🔎 Pregunta de evidencia",
+      "Not enough hours": "No tienes suficientes horas",
+      "💬 Kai: “lol the lab is lost 😂”": "💬 Kai: “lol el laboratorio está perdido 😂”",
+      "💬 Kai: “see? science is just vibes 😤”": "💬 Kai: “¿ves? la ciencia es pura vibra 😤”",
+      "💬 Kai: “take ur time, i'll be busy going viral 🔥”": "💬 Kai: “tómate tu tiempo, yo voy a estar ocupado haciéndome viral 🔥”",
+      // Step names (used in "Next: … →")
+      "Ask a question": "Hacer una pregunta",
+      "Check the research": "Revisar la investigación",
+      "Wire the Data Machine": "Conectar la Máquina de Datos",
+      "Build your study": "Arma tu estudio",
+      "Run the study": "Hacer el estudio",
+      "Peer review": "Revisión de una experta",
+      "Kai goes live": "Kai sale en vivo",
+      "Live on Channel 9": "En vivo en el Canal 9",
+      "The verdict": "El veredicto",
 
-      [ev("Four ways to say it", "Your lab rewrites Tay's post four ways.") + "Which version is a testable hypothesis?"]:
-        ev("Cuatro formas de decirlo", "Tu laboratorio reescribe la publicación de Tay de cuatro formas.") + "¿Cuál versión es una hipótesis comprobable?",
-      "Teens on phones 5+ hours a day feel lonelier than other teens": "Los jóvenes que usan el celular 5+ horas al día se sienten más solos que los demás",
-      "Phones are ruining this whole generation, and that's a fact": "Los celulares están arruinando a toda esta generación, y eso es un hecho",
-      "Teens should put their phones away more than they do now": "Los jóvenes deberían guardar el celular más de lo que lo guardan ahora",
-      "Loneliness is a feeling, so nobody could ever measure it": "La soledad es un sentimiento, así que nadie podría medirla nunca",
-      "Which one could you check by collecting data from real teens?": "¿Cuál podrías comprobar reuniendo datos de jóvenes reales?",
-      "It names who to compare (5+ hours vs. less) and what to measure (loneliness). You could collect data on it, and the data could prove it wrong.":
-        "Dice a quiénes comparar (5+ horas vs. menos) y qué medir (la soledad). Podrías reunir datos sobre eso, y los datos podrían demostrar que está equivocada.",
+      // ---------- Step 1 ----------
+      "🧪 Method step 1 of 6 · Ask": "🧪 Paso 1 de 6 del método · Preguntar",
+      "Send Channel 9 your question": "Mándale tu pregunta al Canal 9",
+      "Channel 9 News will air ONE study on Friday. Kai is making his own. The producer wants your research question first.":
+        "Las noticias del Canal 9 van a mostrar UN estudio el viernes. Kai está haciendo el suyo. La productora quiere primero tu pregunta de investigación.",
+      "📌 <b>Rule card:</b> A good research question names a group and two things you can measure.":
+        "📌 <b>Tarjeta de regla:</b> Una buena pregunta de investigación nombra a un grupo y dos cosas que puedes medir.",
+      "Which question do you send to Channel 9?": "¿Qué pregunta le mandas al Canal 9?",
+      "Are hours of sleep linked to first-period focus at our school?": "¿Están relacionadas las horas de sueño con la concentración en la primera clase en nuestra escuela?",
+      "Is sleep actually good for people, or is that just a myth?": "¿De verdad dormir es bueno para la gente, o eso es solo un mito?",
+      "Why is Kai always so locked in when he barely sleeps?": "¿Por qué Kai siempre está tan concentrado si casi no duerme?",
+      "Does sleep even matter at all for teens like us?": "¿De verdad importa el sueño para jóvenes como nosotros?",
+      "Use the rule card: which one names a group AND two things you can measure?": "Usa la tarjeta de regla: ¿cuál nombra a un grupo Y dos cosas que puedes medir?",
+      [R("<b>Research question:</b> a focused question that names a group and two things you can measure. It's step 1 of the <b>scientific method</b>.")]:
+        R("<b>Pregunta de investigación:</b> una pregunta enfocada que nombra a un grupo y dos cosas que puedes medir. Es el paso 1 del <b>método científico</b>."),
 
-      [post("@realtalk_tay", "if ur study says phones DON'T make teens lonely then ur study is fake lol", "replying to your lab") + "What's wrong with Tay's rule?"]:
-        post("@realtalk_tay", "si tu estudio dice que los celulares NO dejan solos a los chamos entonces tu estudio es falso jaja", "respondiendo a tu laboratorio") + "¿Qué tiene de malo la regla de Tay?",
-      "A real hypothesis has to be able to be proven wrong": "Una hipótesis real tiene que poder demostrarse falsa",
-      "A real hypothesis has to be agreed on by most people": "Una hipótesis real tiene que ser aceptada por casi todos",
-      "A real hypothesis has to come from a famous scientist": "Una hipótesis real tiene que venir de un científico famoso",
-      "A real hypothesis has to be about something online": "Una hipótesis real tiene que tratar sobre algo de internet",
-      "Reread the teach box: what does falsifiable mean?": "Vuelve a leer el cuadro de la lección: ¿qué significa falsable?",
-      "If no result could ever prove Tay wrong, it's not science. A hypothesis has to be falsifiable.":
-        "Si ningún resultado pudiera demostrar que Tay está equivocada, no es ciencia. Una hipótesis tiene que ser falsable.",
+      // ---------- Step 2 ----------
+      "🧪 Method step 2 of 6 · Check": "🧪 Paso 2 de 6 del método · Revisar",
+      "Read first, or save your hours?": "¿Leer primero o ahorrar tus horas?",
+      "Real researchers check what others already found. But reading takes 2 of your 10 lab hours.":
+        "Los investigadores de verdad revisan lo que otros ya encontraron. Pero leer te cuesta 2 de tus 10 horas de laboratorio.",
+      "📚 Read the research": "📚 Leer la investigación",
+      "Find out what's already known.": "Descubre lo que ya se sabe.",
+      "⏩ Skip it": "⏩ Saltarlo",
+      "Save hours for a bigger study.": "Ahorra horas para un estudio más grande.",
+      "📄 Real source · CDC report, January 2018": "📄 Fuente real · Informe de los CDC, enero de 2018",
+      "“The prevalence of short sleep duration among high school students in the national YRBS was 72.7%.”":
+        "“La prevalencia de poco tiempo de sueño entre los estudiantes de secundaria en la encuesta nacional YRBS fue de 72.7%.”",
+      "In plain words: in 2015, about 3 out of 4 U.S. high school students slept less than 8 hours on school nights.":
+        "En palabras simples: en 2015, unos 3 de cada 4 estudiantes de secundaria en EE. UU. dormían menos de 8 horas en noches de escuela.",
+      "🗂️ <b>Clue from other studies:</b> late-night jobs, phones in bed, and long bus rides can mess with sleep AND focus.":
+        "🗂️ <b>Pista de otros estudios:</b> los trabajos de noche, el celular en la cama y los viajes largos en autobús pueden afectar el sueño Y la concentración.",
+      "🔓 Unlocked: you can check an outside factor in your study.": "🔓 Desbloqueado: puedes revisar un factor externo en tu estudio.",
+      "You saved 2 hours. But you don't know what else could mess with sleep and focus.": "Ahorraste 2 horas. Pero no sabes qué más podría afectar el sueño y la concentración.",
+      "🔒 The “outside factor” row in your study stays locked.": "🔒 La fila de “factor externo” en tu estudio sigue bloqueada.",
+      [R("<b>Existing research</b> is what other researchers already found. It's step 2, and it shows you what else to watch for.")]:
+        R("La <b>investigación existente</b> es lo que otros investigadores ya encontraron. Es el paso 2, y te muestra qué más vigilar."),
 
-      [ev("Your lab's to-do list", "1. Ask a question ✓<br>2. ???<br>3. Write a hypothesis<br>4. Collect data<br>5. Analyze<br>6. Share") + "What goes in step 2?"]:
-        ev("Lista de tareas de tu laboratorio", "1. Hacer una pregunta ✓<br>2. ???<br>3. Escribir una hipótesis<br>4. Reunir datos<br>5. Analizar<br>6. Compartir") + "¿Qué va en el paso 2?",
-      "Background research": "Investigación previa",
-      "Publish the results": "Publicar los resultados",
-      "Analyze the data": "Analizar los datos",
-      "Pick a control group": "Escoger un grupo de control",
-      "Look at the order of steps in the teach box.": "Mira el orden de los pasos en el cuadro de la lección.",
-      "Before you predict anything, you find out what other researchers already learned. That's background research.":
-        "Antes de predecir algo, averiguas lo que otros investigadores ya aprendieron. Eso es la investigación previa.",
+      // ---------- Step 3 ----------
+      "🧪 Method step 3 of 6 · Predict": "🧪 Paso 3 de 6 del método · Predecir",
+      "Your hypothesis (a testable prediction)": "Tu hipótesis (una predicción que se puede comprobar)",
+      "Among students at our school, students who sleep 7 or more hours will report better first-period focus.":
+        "Entre los estudiantes de nuestra escuela, los que duermen 7 horas o más van a reportar mejor concentración en la primera clase.",
+      "Kai predicts the opposite. Good. A real hypothesis can be proven wrong.": "Kai predice lo contrario. Bien. Una hipótesis de verdad puede resultar equivocada.",
+      "The machine changes one thing and measures another. Tap a card, then tap the box where it goes.": "La máquina cambia una cosa y mide otra. Toca una tarjeta y luego toca la caja donde va.",
+      "🔌 INPUT · Independent variable (IV)": "🔌 ENTRADA · Variable independiente (VI)",
+      "📟 OUTPUT · Dependent variable (DV)": "📟 SALIDA · Variable dependiente (VD)",
+      "The thing that may cause a change": "Lo que podría causar un cambio",
+      "The result you measure": "El resultado que mides",
+      "Empty": "Vacío",
+      "Hours of sleep": "Horas de sueño",
+      "First-period focus rating": "Calificación de concentración en la primera clase",
+      "Grade level": "Grado escolar",
+      "Kai's follower count": "Número de seguidores de Kai",
+      "⚡ Power on": "⚡ Encender",
+      "Machine on.": "Máquina encendida.",
+      "The IV may cause the change. The DV is what you measure. Check your hypothesis card.": "La VI puede causar el cambio. La VD es lo que mides. Revisa tu tarjeta de hipótesis.",
+      [R("<b>Independent variable (IV):</b> what may cause a change (sleep). <b>Dependent variable (DV):</b> what you measure (focus). The DV depends on the IV.")]:
+        R("<b>Variable independiente (VI):</b> lo que podría causar un cambio (el sueño). <b>Variable dependiente (VD):</b> lo que mides (la concentración). La VD depende de la VI."),
 
-      [`<p><b>Your lab partner Marco:</b> "Do we really need to read old studies? Let's just start."</p>`]:
-        `<p><b>Tu compañero de laboratorio, Marco:</b> "¿De verdad tenemos que leer estudios viejos? Empecemos de una".</p>`,
-      "Read what other researchers already found first": "Leer primero lo que otros investigadores ya descubrieron",
-      "Skip it. Our gut feeling is good enough.": "Saltarlo. Nuestra intuición es suficiente.",
-      "Ask the comment section what they think": "Preguntarle a la sección de comentarios qué piensa",
-      [`<p>${T("up", "+1 proof")}You find studies that say the link is real but small, and that it depends on HOW teens use phones. Now your study can build on them.</p>`]:
-        `<p>${T("up", "+1 prueba")}Encuentras estudios que dicen que la relación es real pero pequeña, y que depende de CÓMO los jóvenes usan el celular. Ahora tu estudio puede construir sobre ellos.</p>`,
-      [`<p>${T("down", "−1 proof")}You start fast, but you repeat mistakes other researchers already fixed.</p>`]:
-        `<p>${T("down", "−1 prueba")}Empiezas rápido, pero repites errores que otros investigadores ya corrigieron.</p>`,
-      [`<p>${T("flat", "No change")}You get 300 replies and zero data. Opinions are not research.</p>`]:
-        `<p>${T("flat", "Sin cambio")}Recibes 300 respuestas y cero datos. Las opiniones no son investigación.</p>`,
+      // ---------- Step 4 ----------
+      "🧪 Method step 4 of 6 · Collect": "🧪 Paso 4 de 6 del método · Recolectar",
+      "Pick one card in each row. Better data costs more hours. Hours you spend here are gone later.":
+        "Elige una tarjeta en cada fila. Los mejores datos cuestan más horas. Las horas que gastes aquí ya no las tendrás después.",
+      "One gap: you never checked outside factors like late-night jobs. A viewer asked, and you had no answer.":
+        "Un hueco: nunca revisaste factores externos como los trabajos de noche. Alguien del público preguntó y no tuviste respuesta.",
+      "Hours left after this plan:": "Horas que te quedan con este plan:",
+      "How will you measure focus?": "¿Cómo vas a medir la concentración?",
+      "Who is in your study? (your sample)": "¿Quién está en tu estudio? (tu muestra)",
+      "Check an outside factor?": "¿Revisar un factor externo?",
+      "🔒 Locked. You skipped the research, so you don't know which outside factors to check.": "🔒 Bloqueado. Te saltaste la investigación, así que no sabes qué factores externos revisar.",
+      "📩 <b>@kai.grindset:</b> “need answers? use my followers lol. i'm generous 😇”": "📩 <b>@kai.grindset:</b> “¿necesitas respuestas? usa a mis seguidores jaja. soy generoso 😇”",
+      "Yes/no: “You focus better when you sleep more, right?”": "Sí/no: “Te concentras mejor cuando duermes más, ¿verdad?”",
+      "Fast. Everyone gets it.": "Rápido. Todos lo entienden.",
+      "Survey: “Rate your first-period focus from 1 to 5.”": "Encuesta: “Califica tu concentración en la primera clase del 1 al 5.”",
+      "Same question for everyone. Number answers.": "La misma pregunta para todos. Respuestas con números.",
+      "Teachers count minutes on task in first period": "Los maestros cuentan los minutos trabajando en la primera clase",
+      "Watches what students do, not what they say.": "Observa lo que hacen los estudiantes, no lo que dicen.",
+      "Kai's offer: his 1,000 followers' answers": "La oferta de Kai: las respuestas de sus 1,000 seguidores",
+      "1,000 answers. Free!": "¡1,000 respuestas. Gratis!",
+      "6 friends at your lunch table": "6 amigos de tu mesa del almuerzo",
+      "Easy. They'll actually answer.": "Fácil. Ellos sí van a contestar.",
+      "120 students picked at random from every grade": "120 estudiantes elegidos al azar de todos los grados",
+      "Slow to set up. Lots of permission slips.": "Tarda en organizarse. Muchos permisos firmados.",
+      "Also ask: “Do you work a shift that ends after 10 p.m.?”": "También preguntar: “¿Trabajas un turno que termina después de las 10 p.m.?”",
+      "One more question on the survey.": "Una pregunta más en la encuesta.",
+      "No. Keep the study short.": "No. Mantener el estudio corto.",
+      "Saves an hour.": "Ahorra una hora.",
+      "Can't watch online followers in class": "No puedes observar a seguidores en línea en clase",
+      "🔒 Lock in my design": "🔒 Fijar mi diseño",
+      "Pick a card in every row to lock in.": "Elige una tarjeta en cada fila para fijarlo.",
 
-      [ev("Two survey questions", "<b>A:</b> \"From 0 to 10, how lonely do you feel this week?\"<br><b>B:</b> \"Tell me about a time this week you felt alone.\"") + "Which one collects <b>quantitative</b> data, and why?"]:
-        ev("Dos preguntas de encuesta", "<b>A:</b> \"Del 0 al 10, ¿qué tan solo te sientes esta semana?\"<br><b>B:</b> \"Cuéntame de un momento de esta semana en que te sentiste solo.\"") + "¿Cuál reúne datos <b>cuantitativos (quantitative)</b>, y por qué?",
-      "A, because it turns feelings into numbers to compare": "A, porque convierte los sentimientos en números para comparar",
-      "B, because it lets people describe what happened": "B, porque deja que la gente describa lo que pasó",
-      "A, because it asks about feelings instead of facts": "A, porque pregunta por sentimientos en vez de hechos",
-      "B, because longer answers give more numbers": "B, porque las respuestas largas dan más números",
-      "Quantitative sounds like quantity. Which answer will be a number?": "Cuantitativo suena como cantidad. ¿Cuál respuesta será un número?",
-      "Quantitative data is numbers. Question B collects qualitative data: descriptions and experiences.":
-        "Los datos cuantitativos son números. La pregunta B reúne datos cualitativos (qualitative): descripciones y experiencias.",
+      // ---------- Step 5 ----------
+      "Your design": "Tu diseño",
+      "Measure:": "Medida:", "Sample:": "Muestra:", "Outside factor:": "Factor externo:",
+      "🔒 Locked": "🔒 Bloqueado",
+      "Your design is locked. Time to collect the data.": "Tu diseño está fijado. Hora de recolectar los datos.",
+      "▶ Run the study": "▶ Hacer el estudio",
+      "Real results should hold up when you run the study again.": "Los resultados reales deberían mantenerse cuando repites el estudio.",
+      "🔁 Run it again": "🔁 Hacerlo otra vez",
+      "Run 1": "Prueba 1", "Run 2": "Prueba 2",
+      "Average focus (1 = low, 5 = high)": "Concentración promedio (1 = baja, 5 = alta)",
+      "Average minutes on task (out of 50)": "Minutos promedio trabajando (de 50)",
+      "Said YES to the question": "Dijeron SÍ a la pregunta",
+      "👍 Said YES": "👍 Dijeron SÍ",
+      "😴 Under 7 hours of sleep": "😴 Menos de 7 horas de sueño",
+      "🛌 7 or more hours of sleep": "🛌 7 horas de sueño o más",
+      "Who: <b>120 students picked at random</b>": "Quiénes: <b>120 estudiantes elegidos al azar</b>",
+      "Who: <b>6 friends from your lunch table</b>": "Quiénes: <b>6 amigos de tu mesa del almuerzo</b>",
+      "Who: <b>1,000 of Kai's followers</b>": "Quiénes: <b>1,000 seguidores de Kai</b>",
+      "Outside factor check: late-night jobs": "Revisión de factor externo: trabajos de noche",
+      "Group": "Grupo", "Average sleep": "Sueño promedio", "Average focus": "Concentración promedio",
+      "Works a shift that ends after 10 p.m.": "Trabaja un turno que termina después de las 10 p.m.",
+      "No late shift": "Sin turno de noche",
+      "✅ Both runs show the same pattern.": "✅ Las dos pruebas muestran el mismo patrón.",
+      "😵 Whoa. The two runs flipped!": "😵 ¡Wow! ¡Las dos pruebas salieron al revés!",
+      "🤔 Both runs agree with Kai. Strange…": "🤔 Las dos pruebas le dan la razón a Kai. Qué raro…",
+      "🤔 Almost everyone said YES. Slam dunk… right?": "🤔 Casi todos dijeron SÍ. Caso cerrado… ¿o no?",
+      "Before anything airs, a real sociologist checks your work.": "Antes de que algo salga al aire, una socióloga de verdad revisa tu trabajo.",
 
-      // ---------- Part 2 ----------
-      "Part 2 of 3": "Parte 2 de 3",
-      "Design the Study": "Diseña el estudio",
-      [`<p>The <b>independent variable (IV)</b> is what you change. The <b>dependent variable (DV)</b> is what you measure.</p>
-        <p>The <b>experimental group</b> gets the change. The <b>control group</b> doesn't. It's the comparison group.</p>
-        <p>Your <b>sample</b> is the people you study. A <b>random sample</b> from many places is fairer than just people you know.</p>`]:
-        `<p>La <b>variable independiente (independent variable, IV)</b> es lo que tú cambias. La <b>variable dependiente (dependent variable, DV)</b> es lo que mides.</p>
-        <p>El <b>grupo experimental (experimental group)</b> recibe el cambio. El <b>grupo de control (control group)</b> no. Es el grupo con el que comparas.</p>
-        <p>Tu <b>muestra (sample)</b> son las personas que estudias. Una <b>muestra aleatoria (random sample)</b> de muchos lugares es más justa que solo gente que conoces.</p>`,
-      [ev("Your study plan", "For 2 weeks, teens <b>delete their social media apps</b>. Before and after, they take a survey that gives a <b>loneliness score</b> from 0 to 10.")]:
-        ev("El plan de tu estudio", "Durante 2 semanas, los jóvenes <b>borran sus apps de redes sociales</b>. Antes y después, responden una encuesta que da un <b>puntaje de soledad</b> del 0 al 10."),
+      // ---------- Step 6 ----------
+      "🧪 Method step 5 of 6 · Analyze": "🧪 Paso 5 de 6 del método · Analizar",
+      "Peer review with Dr. Ruiz": "Revisión con la Dra. Ruiz",
+      "👩🏽‍🔬 <b>Dr. Ana Ruiz</b> is a sociologist at a local college (made-up character). She checks student studies before they air.":
+        "👩🏽‍🔬 La <b>Dra. Ana Ruiz</b> es socióloga en una universidad local (personaje inventado). Ella revisa los estudios de los estudiantes antes de que salgan al aire.",
+      "Dr. Ruiz: “Your chart says less sleep means MORE focus. Look at who answered. Why did it come out on Kai's side?”": "Dra. Ruiz: “Tu gráfica dice que dormir menos da MÁS concentración. Mira quién contestó. ¿Por qué salió del lado de Kai?”",
+      "They already agreed with Kai before the study": "Ya estaban de acuerdo con Kai antes del estudio",
+      "1,000 people is too small to show a real pattern": "1,000 personas son muy pocas para mostrar un patrón real",
+      "Followers can't rate their own focus with numbers": "Los seguidores no pueden calificar su concentración con números",
+      "The study ran on the wrong day of the school week": "El estudio se hizo en el día equivocado de la semana escolar",
+      "Who are Kai's followers? What did they believe before you asked?": "¿Quiénes son los seguidores de Kai? ¿Qué creían antes de que les preguntaras?",
+      [R("<b>Biased sample:</b> the people you study aren't like the whole group. Big doesn't mean fair.")]:
+        R("<b>Muestra sesgada:</b> las personas que estudias no se parecen a todo el grupo. Grande no significa justa."),
+      "Dr. Ruiz: “Almost everyone said yes. Look at your question. Why did almost everyone give the same answer?”": "Dra. Ruiz: “Casi todos dijeron que sí. Mira tu pregunta. ¿Por qué casi todos dieron la misma respuesta?”",
+      "The question told people which answer to give": "La pregunta le dijo a la gente qué respuesta dar",
+      "Too many students answered the same survey": "Demasiados estudiantes contestaron la misma encuesta",
+      "Students who sleep more always tell the truth": "Los estudiantes que duermen más siempre dicen la verdad",
+      "Yes/no questions can't ever be used in a study": "Las preguntas de sí/no nunca se pueden usar en un estudio",
+      "Read your question out loud. Does it push people toward one answer?": "Lee tu pregunta en voz alta. ¿Empuja a la gente hacia una respuesta?",
+      [R("<b>Leading question:</b> a question that pushes people toward one answer. The data shows the question, not the truth.")]:
+        R("<b>Pregunta tendenciosa:</b> una pregunta que empuja a la gente hacia una respuesta. Los datos muestran la pregunta, no la verdad."),
+      "Dr. Ruiz: “Run 1 and run 2 flipped. Why did your results jump around?”": "Dra. Ruiz: “La prueba 1 y la prueba 2 salieron al revés. ¿Por qué tus resultados saltaron tanto?”",
+      "With only 6 people, one person can swing it": "Con solo 6 personas, una persona puede cambiarlo todo",
+      "Friends are too honest to answer surveys well": "Los amigos son demasiado honestos para contestar bien encuestas",
+      "The focus scale only goes up to five points": "La escala de concentración solo llega hasta cinco puntos",
+      "Sleep changes too fast for anyone to measure": "El sueño cambia demasiado rápido para que alguien lo mida",
+      "How many people were in your study? What happens if one of them has a bad week?": "¿Cuántas personas había en tu estudio? ¿Qué pasa si una de ellas tiene una mala semana?",
+      [R("<b>Sample size:</b> with too few people, one person can swing the whole result.")]:
+        R("<b>Tamaño de la muestra:</b> con muy pocas personas, una sola persona puede cambiar todo el resultado."),
+      "Dr. Ruiz: “Students with late shifts sleep less AND focus less. What does that mean for your study?”": "Dra. Ruiz: “Los estudiantes con turnos de noche duermen menos Y se concentran menos. ¿Qué significa eso para tu estudio?”",
+      "The job may affect both, so sleep alone isn't proven": "El trabajo puede afectar a los dos, así que no está probado que sea solo el sueño",
+      "Jobs prove sleep has nothing to do with focus at all": "Los trabajos prueban que el sueño no tiene nada que ver con la concentración",
+      "The whole study is ruined and should be thrown out": "Todo el estudio está arruinado y hay que tirarlo",
+      "Students with jobs must be lying on their surveys": "Los estudiantes con trabajo deben estar mintiendo en sus encuestas",
+      "Look at the job table. Could one thing push sleep down AND focus down?": "Mira la tabla de trabajos. ¿Podría una cosa bajar el sueño Y bajar la concentración?",
+      [R("<b>Third variable:</b> an outside factor that could cause both things. That's one reason a pattern isn't proof.")]:
+        R("<b>Tercera variable:</b> un factor externo que podría causar las dos cosas. Por eso un patrón no es prueba."),
+      "Dr. Ruiz: “Both runs gave almost the same result. Why does that matter?”": "Dra. Ruiz: “Las dos pruebas dieron casi el mismo resultado. ¿Por qué importa eso?”",
+      "The pattern held up when the study was repeated": "El patrón se mantuvo cuando se repitió el estudio",
+      "It proves sleep causes better focus for everyone": "Prueba que el sueño causa mejor concentración en todos",
+      "It means the sample was too big to be trusted": "Significa que la muestra era demasiado grande para confiar en ella",
+      "It shows the survey question was a leading one": "Muestra que la pregunta de la encuesta era tendenciosa",
+      "Compare Run 1 and Run 2. What does it mean when a repeat matches?": "Compara la prueba 1 y la prueba 2. ¿Qué significa cuando la repetición coincide?",
+      [R("<b>Replication:</b> repeating a study to see if the result holds. When it does, the evidence gets stronger.")]:
+        R("<b>Replicación:</b> repetir un estudio para ver si el resultado se mantiene. Cuando se mantiene, la evidencia se hace más fuerte."),
+      "👩🏽‍🔬 Dr. Ruiz: “One weak spot: you never checked outside factors like jobs. Someone on air may ask.”": "👩🏽‍🔬 Dra. Ruiz: “Un punto débil: nunca revisaste factores externos como los trabajos. Alguien en vivo te lo puede preguntar.”",
+      "Go back a step?": "¿Regresar un paso?",
+      "Researchers redo a step when the evidence shows a problem. Swapping a card costs its hours.": "Los investigadores repiten un paso cuando la evidencia muestra un problema. Cambiar una tarjeta cuesta sus horas.",
+      "Keep it and go live as is": "Dejarlo así y salir en vivo",
+      "Save your hours.": "Ahorra tus horas.",
+      "You redid the study": "Repetiste el estudio",
+      "✅ Fixed. Both runs now show the same pattern.": "✅ Arreglado. Ahora las dos pruebas muestran el mismo patrón.",
+      "⚠️ Better, but with only 6 people the runs still flip.": "⚠️ Mejor, pero con solo 6 personas las pruebas todavía salen al revés.",
+      "⚠️ Better sample, but the question still pushes people to say yes.": "⚠️ Mejor muestra, pero la pregunta todavía empuja a la gente a decir que sí.",
+      "⚠️ Still Kai's fans.": "⚠️ Siguen siendo los fans de Kai.",
+      "You kept your design. You'll have to defend it on air.": "Dejaste tu diseño igual. Vas a tener que defenderlo en vivo.",
 
-      "In your plan, what is the <b>independent variable</b> (the thing you change)?": "En tu plan, ¿cuál es la <b>variable independiente</b> (lo que tú cambias)?",
-      "Whether teens delete their social apps": "Si los jóvenes borran o no sus apps sociales",
-      "How lonely teens say they feel": "Qué tan solos dicen sentirse los jóvenes",
-      "The survey used to ask about loneliness": "La encuesta que pregunta sobre la soledad",
-      "The two weeks the study takes": "Las dos semanas que dura el estudio",
-      "Look at the plan. What do the researchers make teens do differently?": "Mira el plan. ¿Qué les piden los investigadores a los jóvenes que hagan distinto?",
-      "Deleting the apps is the change. That's the IV.": "Borrar las apps es el cambio. Esa es la variable independiente.",
+      // ---------- Step 7 ----------
+      "😤 Rival move": "😤 Jugada del rival",
+      "🔴 LIVE · @kai.grindset": "🔴 EN VIVO · @kai.grindset",
+      "“MY STUDY: 91% say less sleep = more locked in. SCIENCE. 😤”": "“MI ESTUDIO: 91% dice que dormir menos = más concentrado. CIENCIA. 😤”",
+      "Kai's fine print": "La letra pequeña de Kai",
+      "<b>Who:</b> 1,000 followers who liked my post": "<b>Quiénes:</b> 1,000 seguidores a los que les gustó mi publicación",
+      "<b>Question:</b> “You're more locked in on 4 hours of sleep, right?”": "<b>Pregunta:</b> “Estás más concentrado con 4 horas de sueño, ¿verdad?”",
+      "The comments go wild. Kai's side of the comment war just grew.": "Los comentarios explotan. El lado de Kai en la guerra de comentarios acaba de crecer.",
+      "Channel 9 asks you: why did Kai get the opposite result? Use his fine print.": "El Canal 9 te pregunta: ¿por qué Kai obtuvo el resultado contrario? Usa su letra pequeña.",
+      "He asked fans who agreed, with a question that pushed “yes”": "Les preguntó a fans que ya estaban de acuerdo, con una pregunta que empujaba al “sí”",
+      "He asked too many people, so the numbers got mixed up": "Les preguntó a demasiadas personas, así que los números se mezclaron",
+      "His followers sleep more than most high school students": "Sus seguidores duermen más que la mayoría de los estudiantes de secundaria",
+      "He ran his study on a weekend instead of a school day": "Hizo su estudio en fin de semana en vez de un día de escuela",
+      "Read Kai's fine print: WHO did he ask, and HOW did he ask it?": "Lee la letra pequeña de Kai: ¿a QUIÉN le preguntó y CÓMO le preguntó?",
+      [R("<b>Objectivity</b> means testing a claim without pushing for the answer you want. Kai picked people and a question that would make him look right.")]:
+        R("La <b>objetividad</b> significa poner a prueba una afirmación sin empujar hacia la respuesta que quieres. Kai escogió personas y una pregunta que lo harían quedar bien."),
+      "😬 Heads up: your study used the same followers.": "😬 Ojo: tu estudio usó a los mismos seguidores.",
 
-      "What is the <b>dependent variable</b> (the thing you measure)?": "¿Cuál es la <b>variable dependiente</b> (lo que mides)?",
-      "The loneliness scores on the survey": "Los puntajes de soledad en la encuesta",
-      "Deleting the social media apps": "Borrar las apps de redes sociales",
-      "The number of teens in the study": "La cantidad de jóvenes en el estudio",
-      "Which phones the teens own": "Qué celulares tienen los jóvenes",
-      "What number does the survey give you at the end?": "¿Qué número te da la encuesta al final?",
-      "You measure loneliness to see if it changes. That's the DV.": "Mides la soledad para ver si cambia. Esa es la variable dependiente.",
+      // ---------- Step 8 ----------
+      "🧪 Method step 6 of 6 · Conclude": "🧪 Paso 6 de 6 del método · Concluir",
+      "📜 Real history · Hawthorne Works, Cicero, Illinois (1924–1927)": "📜 Historia real · Fábrica Hawthorne Works, Cicero, Illinois (1924–1927)",
+      "Researchers made the factory lights brighter. Workers made more. They made the lights dimmer. Workers still made more.":
+        "Los investigadores pusieron más brillantes las luces de la fábrica. Los trabajadores produjeron más. Pusieron las luces más bajas. Los trabajadores igual produjeron más.",
+      "In a room where the lights never changed, workers made more too.": "En un cuarto donde las luces nunca cambiaron, los trabajadores también produjeron más.",
+      "The reporter asks: “So what does Hawthorne teach us about YOUR sleep chart?”": "La reportera pregunta: “Entonces, ¿qué nos enseña Hawthorne sobre TU gráfica del sueño?”",
+      "Two things changing together doesn't prove one caused it": "Que dos cosas cambien juntas no prueba que una causó la otra",
+      "Brighter lights make people work harder every single time": "Las luces más brillantes hacen que la gente trabaje más cada vez",
+      "Factory studies from the 1920s don't apply to teens today": "Los estudios de fábricas de los años 1920 no aplican a los jóvenes de hoy",
+      "If the numbers go up, the hypothesis is always proven right": "Si los números suben, la hipótesis siempre queda probada",
+      "At Hawthorne, output went up even when the lights did NOT change. So was light the cause?": "En Hawthorne, la producción subió incluso cuando las luces NO cambiaron. Entonces, ¿la luz fue la causa?",
+      [R("<b>Correlation</b> means two things go together. <b>Causation</b> means one thing makes the other happen. A pattern alone isn't proof of cause.")]:
+        R("<b>Correlación</b> significa que dos cosas van juntas. <b>Causalidad</b> significa que una cosa hace que pase la otra. Un patrón solo no es prueba de causa."),
+      "📄 Post your full methods so anyone can check and repeat it": "📄 Publicar todos tus métodos para que cualquiera pueda revisarlo y repetirlo",
+      "Receipts. Not flashy.": "Pruebas. Nada llamativo.",
+      "🎬 Make a hype video edit to win the comment war": "🎬 Hacer un video llamativo para ganar la guerra de comentarios",
+      "Views. No receipts.": "Vistas. Sin pruebas.",
+      "📄 Your methods are posted. Anyone can check them.": "📄 Tus métodos están publicados. Cualquiera puede revisarlos.",
+      "🎬 Your hype edit is everywhere. The comments are swinging your way.": "🎬 Tu video está en todas partes. Los comentarios se están poniendo de tu lado.",
+      "⏱ No lab hours left for extras.": "⏱ No te quedan horas de laboratorio para extras.",
+      "The news host turns to you: “Give us your headline.”": "La presentadora te mira: “Danos tu titular.”",
+      "Huge views. Big claim.": "Muchísimas vistas. Afirmación grande.",
+      "Fewer views. Careful claim.": "Menos vistas. Afirmación cuidadosa.",
+      "Your headline:": "Tu titular:",
+      "SLEEP CAUSES FOCUS. Kai is DONE. 🔥": "EL SUEÑO CAUSA CONCENTRACIÓN. Kai PERDIÓ. 🔥",
+      "In our study, more sleep was linked to better focus. It's a pattern, not proof of cause.": "En nuestro estudio, dormir más estuvo relacionado con mejor concentración. Es un patrón, no prueba de causa.",
+      "Our study agrees: less sleep = more focus. Kai was right. 😴🔥": "Nuestro estudio coincide: dormir menos = más concentración. Kai tenía razón. 😴🔥",
+      "Our sample was mostly Kai's fans, so we can't trust this result yet.": "Nuestra muestra era casi toda de fans de Kai, así que todavía no podemos confiar en este resultado.",
+      "96% agree: sleep makes you focus! Case closed. 🔥": "96% está de acuerdo: ¡el sueño te hace concentrar! Caso cerrado. 🔥",
+      "Our question pushed people to say yes. We have to redo it.": "Nuestra pregunta empujó a la gente a decir que sí. Tenemos que repetirlo.",
+      "See how it ends": "Ver cómo termina",
 
-      [`<p><b>Who is in your study?</b> Pick your sample.</p>`]: `<p><b>¿Quién está en tu estudio?</b> Escoge tu muestra.</p>`,
-      "6 of your closest friends": "6 de tus amigos más cercanos",
-      "240 students picked at random from 4 schools": "240 estudiantes escogidos al azar en 4 liceos",
-      "1,000 people who liked Tay's post": "1,000 personas que le dieron like a la publicación de Tay",
-      [`<p>${T("down", "−2 proof")}Easy to set up. But 6 friends who are all alike can't speak for all teens.</p>`]:
-        `<p>${T("down", "−2 pruebas")}Es fácil de organizar. Pero 6 amigos que se parecen mucho no pueden hablar por todos los jóvenes.</p>`,
-      [`<p>${T("up", "+3 proof")}More work, but a random sample from different schools looks more like teens in general.</p>`]:
-        `<p>${T("up", "+3 pruebas")}Da más trabajo, pero una muestra aleatoria de distintos liceos se parece más a los jóvenes en general.</p>`,
-      [`<p>${T("down", "−1 proof")}A huge group, but they already agree with the hot take. That's a biased sample.</p>`]:
-        `<p>${T("down", "−1 prueba")}Es un grupo enorme, pero ya están de acuerdo con la opinión polémica. Esa es una muestra sesgada (biased sample).</p>`,
-
-      [`<p><b>Marco:</b> "Should some teens keep their apps, so we can compare?"</p>`]:
-        `<p><b>Marco:</b> "¿Y si algunos jóvenes se quedan con sus apps, para poder comparar?"</p>`,
-      "Yes. Split them at random: half delete, half keep.": "Sí. Dividirlos al azar: la mitad borra, la otra mitad no.",
-      "No. Everyone deletes. Just compare before and after.": "No. Todos borran. Solo comparar el antes y el después.",
-      "Yes, but let each teen choose their group.": "Sí, pero dejar que cada joven escoja su grupo.",
-      [`<p>${T("up", "+3 proof")}Now you have a real control group. Random splitting keeps the two groups alike.</p>`]:
-        `<p>${T("up", "+3 pruebas")}Ahora tienes un grupo de control real. Dividir al azar hace que los dos grupos se parezcan.</p>`,
-      [`<p>${T("down", "−1 proof")}Simpler, but with nothing to compare to, you won't know what caused any change.</p>`]:
-        `<p>${T("down", "−1 prueba")}Es más sencillo, pero sin nada con qué comparar, no vas a saber qué causó algún cambio.</p>`,
-      [`<p>${T("up", "+1 proof")}Better than nothing. But people who choose to delete may already be different from people who don't.</p>`]:
-        `<p>${T("up", "+1 prueba")}Es mejor que nada. Pero puede que la gente que decide borrar ya fuera distinta de la que no borra.</p>`,
-
-      [ev("Random-split plan", "Group A deletes their social apps for 2 weeks.<br>Group B keeps using their apps like normal.") + "Which group is the <b>control group</b>?"]:
-        ev("Plan con división al azar", "El grupo A borra sus apps sociales por 2 semanas.<br>El grupo B sigue usando sus apps como siempre.") + "¿Cuál es el <b>grupo de control</b>?",
-      "Group B, which keeps the apps like normal": "El grupo B, que sigue con las apps como siempre",
-      "Group A, which deletes the social apps": "El grupo A, que borra las apps sociales",
-      "The teens who drop out of the study early": "Los jóvenes que se salen temprano del estudio",
-      "The researchers who score the surveys": "Los investigadores que califican las encuestas",
-      "The control group is the one that does NOT get the change.": "El grupo de control es el que NO recibe el cambio.",
-      "Group B doesn't get the change, so it's the comparison group.": "El grupo B no recibe el cambio, así que es el grupo con el que se compara.",
-
-      [post("@coachdre", "kids who eat breakfast get better grades. facts.", "340K views") + "If you tested this, what is the <b>dependent variable</b>?"]:
-        post("@coachdre", "los chamos que desayunan sacan mejores notas. es un hecho.", "340K vistas") + "Si pusieras esto a prueba, ¿cuál sería la <b>variable dependiente</b>?",
-      "Students' grades": "Las notas de los estudiantes",
-      "Eating breakfast": "Desayunar",
-      "The school lunch menu": "El menú del almuerzo del liceo",
-      "What time kids wake up": "A qué hora se despiertan",
-      "Which one would you measure to see if it changed?": "¿Cuál medirías para ver si cambió?",
-      "You'd change (or compare) breakfast and measure grades. Grades are the DV.": "Cambiarías (o compararías) el desayuno y medirías las notas. Las notas son la variable dependiente.",
-
-      // ---------- Part 3 ----------
-      "Part 3 of 3": "Parte 3 de 3",
-      "Read the Results (Don't Get Played)": "Lee los resultados (que no te engañen)",
-      [`<p><b>Correlation</b> means two things go up or down together. It does <b>not</b> prove one causes the other.</p>
-        <p><b>Causation</b> means one thing directly causes the other. Sometimes a hidden <b>third variable</b> causes both.</p>
-        <p><b>Bias</b> is anything that tilts a study toward one answer, like who paid for it or who was picked.</p>`]:
-        `<p>La <b>correlación (correlation)</b> significa que dos cosas suben o bajan juntas. <b>No</b> prueba que una cause la otra.</p>
-        <p>La <b>causalidad (causation)</b> significa que una cosa causa directamente la otra. A veces una <b>tercera variable (third variable)</b> escondida causa las dos.</p>
-        <p>El <b>sesgo (bias)</b> es cualquier cosa que inclina un estudio hacia una respuesta, como quién lo pagó o a quién escogieron.</p>`,
-
-      // Lab report (built from your choices)
-      "Lab report": "Informe del laboratorio",
-      "Your results are in": "Ya tienes tus resultados",
-      "Who you studied: 6 of your friends. Average loneliness score (0 = not lonely, 10 = very lonely). Results are made up for this lab.":
-        "A quién estudiaste: 6 de tus amigos. Puntaje promedio de soledad (0 = nada solo, 10 = muy solo). Los resultados son inventados para este laboratorio.",
-      "Who you studied: 1,000 people who liked the post. Average loneliness score (0 = not lonely, 10 = very lonely). Results are made up for this lab.":
-        "A quién estudiaste: 1,000 personas que le dieron like a la publicación. Puntaje promedio de soledad (0 = nada solo, 10 = muy solo). Los resultados son inventados para este laboratorio.",
-      "Who you studied: 240 random students, 4 schools. Average loneliness score (0 = not lonely, 10 = very lonely). Results are made up for this lab.":
-        "A quién estudiaste: 240 estudiantes al azar, 4 liceos. Puntaje promedio de soledad (0 = nada solo, 10 = muy solo). Los resultados son inventados para este laboratorio.",
-      "Deleted apps": "Borraron las apps",
-      "Kept apps (control)": "Se quedaron con las apps (control)",
-      "Chose to delete": "Decidieron borrar",
-      "Chose to keep": "Decidieron quedarse",
-      "Before": "Antes",
-      "After deleting": "Después de borrar",
-      [`${T("down", "Weak")} <b>Tiny sample.</b> With only 6 people, one person's bad week can swing the whole result. And your friends are not like all teens.`]:
-        `${T("down", "Débil")} <b>Muestra muy pequeña.</b> Con solo 6 personas, la mala semana de una sola persona puede cambiar todo el resultado. Y tus amigos no son como todos los jóvenes.`,
-      [`${T("down", "Weak")} <b>Biased sample.</b> These people already agreed with the hot take before the study started. Big is not the same as fair.`]:
-        `${T("down", "Débil")} <b>Muestra sesgada.</b> Estas personas ya estaban de acuerdo con la opinión polémica antes de empezar el estudio. Grande no es lo mismo que justa.`,
-      [`${T("up", "Strong")} <b>Random sample.</b> Picking at random from different schools makes your group more like teens in general.`]:
-        `${T("up", "Fuerte")} <b>Muestra aleatoria.</b> Escoger al azar en distintos liceos hace que tu grupo se parezca más a los jóvenes en general.`,
-      [`${T("up", "Strong")} <b>Random control group.</b> Both groups lived through the same two weeks, so the main difference was the apps.`]:
-        `${T("up", "Fuerte")} <b>Grupo de control al azar.</b> Los dos grupos vivieron las mismas dos semanas, así que la diferencia principal fueron las apps.`,
-      [`${T("flat", "Mixed")} <b>Teens picked their own group.</b> The ones who chose to delete may have been less lonely to start with. That's a hidden difference.`]:
-        `${T("flat", "Regular")} <b>Los jóvenes escogieron su propio grupo.</b> Los que decidieron borrar quizás ya se sentían menos solos desde el principio. Esa es una diferencia escondida.`,
-      [`${T("down", "Weak")} <b>No control group.</b> Loneliness went down, but finals also ended that week. Without a comparison group, you can't tell what caused the drop.`]:
-        `${T("down", "Débil")} <b>Sin grupo de control.</b> La soledad bajó, pero esa semana también terminaron los exámenes finales. Sin un grupo para comparar, no puedes saber qué causó la bajada.`,
-
-      [ev("Summer data", "In summer, ice cream sales go up. Drownings go up too.") + "What best explains this?"]:
-        ev("Datos del verano", "En verano suben las ventas de helado. También suben los ahogamientos.") + "¿Qué lo explica mejor?",
-      "Hot weather drives both of them up": "El calor hace que las dos cosas suban",
-      "Eating ice cream makes people drown": "Comer helado hace que la gente se ahogue",
-      "Drownings make people buy ice cream": "Los ahogamientos hacen que la gente compre helado",
-      "It proves ice cream is dangerous": "Prueba que el helado es peligroso",
-      "What else happens in summer that could cause both?": "¿Qué más pasa en verano que podría causar las dos cosas?",
-      "Hot weather is a third variable. More people swim AND more people buy ice cream. Correlation isn't causation.":
-        "El calor es una tercera variable. Más gente nada Y más gente compra helado. Correlación no es causalidad.",
-
-      [ev("A different study (survey only)", "Teens who feel lonely spend more hours on their phones.") + "Which conclusion is correct?"]:
-        ev("Otro estudio (solo una encuesta)", "Los jóvenes que se sienten solos pasan más horas en el celular.") + "¿Cuál conclusión es correcta?",
-      "Phone time and loneliness are linked, but cause isn't proven": "El celular y la soledad están relacionados, pero la causa no está probada",
-      "Phones cause loneliness, so the hot take was right all along": "Los celulares causan soledad, así que la opinión polémica siempre tuvo razón",
-      "Loneliness causes phone use, so the hot take is backwards": "La soledad causa el uso del celular, así que la opinión polémica está al revés",
-      "The two have nothing to do with each other at all": "Las dos cosas no tienen absolutamente nada que ver entre sí",
-      "Did this study change anything, or just find two things that go together?": "¿Este estudio cambió algo, o solo encontró dos cosas que van juntas?",
-      "A survey can show a correlation. Lonely teens might use phones more, or phones might add loneliness, or something else causes both.":
-        "Una encuesta puede mostrar una correlación. Puede que los jóvenes solos usen más el celular, o que el celular aumente la soledad, o que otra cosa cause las dos.",
-
-      [`<p><b>A news site wants a quote for its headline.</b> What do you send?</p>`]:
-        `<p><b>Una página de noticias quiere una cita para su titular.</b> ¿Qué le mandas?</p>`,
-      "\"Phones CAUSE loneliness. Science proves it!\"": "\"Los celulares CAUSAN soledad. ¡La ciencia lo prueba!\"",
-      "\"In our study, quitting apps was linked to less loneliness. More studies are needed.\"": "\"En nuestro estudio, dejar las apps se relacionó con menos soledad. Hacen falta más estudios.\"",
-      "Say nothing until you're 100% sure": "No decir nada hasta estar 100% seguro",
-      [`<p>${T("down", "−3 proof")}The headline goes viral. Then other researchers point out one study can't prove that much. Your lab looks careless.</p>`]:
-        `<p>${T("down", "−3 pruebas")}El titular se hace viral. Luego otros investigadores señalan que un solo estudio no puede probar tanto. Tu laboratorio queda como poco serio.</p>`,
-      [`<p>${T("up", "+2 proof")}Less flashy, but true. Other labs start running the same test to check you.</p>`]:
-        `<p>${T("up", "+2 pruebas")}Menos llamativo, pero cierto. Otros laboratorios empiezan a hacer la misma prueba para revisar tu trabajo.</p>`,
-      [`<p>${T("down", "−1 proof")}Science is almost never 100% sure. If you never share, nobody can check or build on your work.</p>`]:
-        `<p>${T("down", "−1 prueba")}La ciencia casi nunca está 100% segura. Si nunca compartes, nadie puede revisar tu trabajo ni construir sobre él.</p>`,
-
-      [ev("Fine print on another study", "This study was paid for by a company that sells a $9.99 \"phone detox\" app.") + "What should make you careful about this study?"]:
-        ev("La letra pequeña de otro estudio", "Este estudio lo pagó una empresa que vende una app de \"desintoxicación del celular\" de $9.99.") + "¿Qué debería hacerte tener cuidado con este estudio?",
-      "Bias, since the payer wants a certain result": "Sesgo, porque quien paga quiere cierto resultado",
-      "Correlation, since two things went up together": "Correlación, porque dos cosas subieron juntas",
-      "Control group, since nobody kept their phones": "Grupo de control, porque nadie se quedó con el celular",
-      "Qualitative data, since it used no numbers": "Datos cualitativos, porque no usó números",
-      "Who paid, and what do they sell?": "¿Quién pagó, y qué vende?",
-      "The company makes money if phones look bad. That's a possible bias, so you'd want other studies to check it.":
-        "La empresa gana plata si los celulares quedan mal. Ese es un posible sesgo, así que querrías que otros estudios lo revisaran.",
-
-      [ev("Last step of the scientific method", "Share / publish: explain what you did and what you found.") + "Why do researchers share HOW they did a study, not just the results?"]:
-        ev("Último paso del método científico", "Compartir / publicar: explicar lo que hiciste y lo que encontraste.") + "¿Por qué los investigadores comparten CÓMO hicieron un estudio, y no solo los resultados?",
-      "So others can check it and try it again": "Para que otros lo revisen y lo vuelvan a hacer",
-      "So the researchers can get famous online": "Para que los investigadores se hagan famosos en internet",
-      "So nobody else needs to study it again": "Para que nadie más tenga que volver a estudiarlo",
-      "So the study can never be proven wrong": "Para que nunca se pueda demostrar que el estudio está mal",
-      "What can other labs do once they know your exact steps?": "¿Qué pueden hacer otros laboratorios cuando conocen tus pasos exactos?",
-      "Sharing methods lets others check your work and repeat the study. If they get the same result, the evidence gets stronger.":
-        "Compartir los métodos deja que otros revisen tu trabajo y repitan el estudio. Si obtienen el mismo resultado, la evidencia se hace más fuerte.",
-
-      // ---------- Finale ----------
-      "Write Your Own Hypothesis": "Escribe tu propia hipótesis",
-      "Strong study. Random sample, a control group, and careful claims make proof hard to argue with.":
-        "Estudio fuerte. Una muestra aleatoria, un grupo de control y afirmaciones cuidadosas hacen que las pruebas sean difíciles de discutir.",
-      "Decent study, with some weak spots. Look back at your sample, control group, and headline.":
-        "Estudio aceptable, con algunos puntos débiles. Revisa otra vez tu muestra, tu grupo de control y tu titular.",
-      "Weak proof. A small or biased sample, no fair comparison, or a big claim can sink a study.":
-        "Pruebas débiles. Una muestra pequeña o sesgada, no tener una comparación justa o una afirmación exagerada pueden hundir un estudio.",
-      "Answer both in 1–2 full sentences.": "Responde las dos con 1–2 oraciones completas.",
-      "1. Pick your OWN hot take (about school, sports, music, food, anything). Turn it into a testable hypothesis and name the independent and dependent variables.":
-        "1. Escoge TU PROPIA opinión polémica (sobre el liceo, deportes, música, comida, lo que sea). Conviértela en una hipótesis comprobable y nombra la variable independiente y la variable dependiente.",
-      "My hot take: ___. Hypothesis: ___. The independent variable is ___ and the dependent variable is ___.":
-        "Mi opinión polémica: ___. Hipótesis: ___. La variable independiente es ___ y la variable dependiente es ___.",
-      "In answer 1, name the independent variable (what you change) AND the dependent variable (what you measure).":
-        "En la respuesta 1, nombra la variable independiente (lo que cambias) Y la variable dependiente (lo que mides).",
-      "2. Explain one choice you made today that made your evidence stronger or weaker.":
-        "2. Explica una decisión que tomaste hoy que hizo tu evidencia más fuerte o más débil.",
+      // ---------- Step 9 ----------
+      "The Study Holds Up": "El estudio se sostiene",
+      "A lab at another school used your posted methods. They got the same pattern.": "Un laboratorio de otra escuela usó tus métodos publicados. Obtuvieron el mismo patrón.",
+      "Kai's post gets a fact-check label. The comments flip.": "La publicación de Kai recibe una etiqueta de verificación de datos. Los comentarios cambian de lado.",
+      "Solid Study, No Receipts": "Estudio sólido, sin pruebas",
+      "Channel 9 airs your study. But nobody can check how you did it.": "El Canal 9 muestra tu estudio. Pero nadie puede revisar cómo lo hiciste.",
+      "Kai: “trust me bro.” You: “trust us bro.” The comments stay split.": "Kai: “créeme, bro.” Tú: “créenos, bro.” Los comentarios siguen divididos.",
+      "Fact-Checked": "Desmentido",
+      "Your headline went viral. Then Dr. Ruiz pointed out that a pattern isn't proof of cause.": "Tu titular se hizo viral. Luego la Dra. Ruiz señaló que un patrón no es prueba de causa.",
+      "Kai: “see? lab kids make stuff up too.”": "Kai: “¿ven? los del laboratorio también inventan cosas.”",
+      "Played by the Hot Take": "Engañado por la opinión polémica",
+      "Your headline matched Kai's hot take, but your data was broken.": "Tu titular coincidió con la opinión de Kai, pero tus datos estaban dañados.",
+      "Kai clips your headline: “even the lab kids agree with me.” 2 million views.": "Kai recorta tu titular: “hasta los del laboratorio están de acuerdo conmigo.” 2 millones de vistas.",
+      "Back to the Lab": "De vuelta al laboratorio",
+      "You admitted your study had a problem. That's honest science.": "Admitiste que tu estudio tenía un problema. Eso es ciencia honesta.",
+      "Kai owns the comments tonight. Next week you run it again, the right way.": "Kai domina los comentarios esta noche. La próxima semana lo repites, bien hecho.",
+      "Comment war:": "Guerra de comentarios:",
+      "Caused by:": "Causado por:",
+      "Read the research → knew which outside factors to check": "Leíste la investigación → sabías qué factores externos revisar",
+      "Skipped the research → couldn't check outside factors": "Te saltaste la investigación → no pudiste revisar factores externos",
+      "Asked a leading yes/no question → answers were pushed toward yes": "Hiciste una pregunta tendenciosa de sí/no → las respuestas se empujaron hacia el sí",
+      "Used a 1–5 focus scale → answers could be compared": "Usaste una escala de concentración del 1 al 5 → las respuestas se podían comparar",
+      "Teachers counted minutes on task → measured what students did": "Los maestros contaron minutos trabajando → mediste lo que hicieron los estudiantes",
+      "Used Kai's followers → biased sample, result flipped toward Kai": "Usaste a los seguidores de Kai → muestra sesgada, el resultado se volteó a favor de Kai",
+      "Studied 6 friends → tiny sample, results jumped around": "Estudiaste a 6 amigos → muestra muy pequeña, los resultados saltaron",
+      "Picked 120 students at random → fair sample, steady result": "Elegiste 120 estudiantes al azar → muestra justa, resultado estable",
+      "Fixed it after peer review → switched to a fair 1–5 focus scale": "Lo arreglaste después de la revisión → cambiaste a una escala justa del 1 al 5",
+      "Fixed it after peer review → switched to teachers counting minutes on task": "Lo arreglaste después de la revisión → cambiaste a maestros contando minutos trabajando",
+      "Fixed it after peer review → switched to 120 students picked at random": "Lo arreglaste después de la revisión → cambiaste a 120 estudiantes elegidos al azar",
+      "Fixed it after peer review → switched to 6 friends (still a tiny sample)": "Lo arreglaste después de la revisión → cambiaste a 6 amigos (todavía una muestra muy pequeña)",
+      "Kept the design after peer review → the problem went on air": "Dejaste el diseño igual después de la revisión → el problema salió al aire",
+      "Asked about late shifts → spotted a third variable": "Preguntaste por turnos de noche → encontraste una tercera variable",
+      "Posted your methods → others could check and repeat it": "Publicaste tus métodos → otros pudieron revisarlo y repetirlo",
+      "Made a hype video → more views, no receipts": "Hiciste un video llamativo → más vistas, sin pruebas",
+      "Used a big, bold headline → claimed more than the data showed": "Usaste un titular grande y atrevido → afirmaste más de lo que mostraban los datos",
+      "Used a careful headline → the claim matched the evidence": "Usaste un titular cuidadoso → la afirmación coincidió con la evidencia",
+      "Want a different ending? Finish and turn in first. Then you can press “Start over” at the bottom.": "¿Quieres otro final? Primero termina y entrega. Luego puedes presionar “Empezar de nuevo” abajo.",
+      "Last step: 2 short answers": "Último paso: 2 respuestas cortas",
+      "Answer both in 1–2 full sentences.": "Contesta las dos con 1–2 oraciones completas.",
+      "1. Write your own hypothesis about teens. Pick a new topic (jobs, phones, sports, music…). Name the IV and the DV.":
+        "1. Escribe tu propia hipótesis sobre los jóvenes. Elige un tema nuevo (trabajos, celulares, deportes, música…). Nombra la VI y la VD.",
+      "Among ___, students who ___ will report ___. The IV is ___ and the DV is ___.": "Entre ___, los estudiantes que ___ van a reportar ___. La VI es ___ y la VD es ___.",
+      "2. Explain one choice in your study that made your evidence stronger or weaker.": "2. Explica una decisión de tu estudio que hizo tu evidencia más fuerte o más débil.",
       "My evidence got stronger/weaker when I ___ because ___.": "Mi evidencia se hizo más fuerte/más débil cuando ___ porque ___.",
-      "In answer 2, name the choice (sample, control group, headline, or research) AND explain why (use \"because\").":
-        "En la respuesta 2, nombra la decisión (muestra, grupo de control, titular o investigación) Y explica por qué (usa \"porque\").",
-
-      // ---------- Short names (shown in "Next:", "✓" and writing messages) ----------
-      "My hot take as a hypothesis": "Mi opinión polémica como hipótesis",
-      "A choice that changed my proof": "Una decisión que cambió mis pruebas"
+      "My hypothesis (IV + DV)": "Mi hipótesis (VI + VD)",
+      "A choice that changed my evidence": "Una decisión que cambió mi evidencia",
+      "In answer 1, name the IV (what may cause a change) AND the DV (what you measure).": "En la respuesta 1, nombra la VI (lo que podría causar un cambio) Y la VD (lo que mides).",
+      "In answer 2, name the choice (like your sample, question, research, or headline) AND explain why (use \"because\").": "En la respuesta 2, nombra la decisión (como tu muestra, tu pregunta, la investigación o el titular) Y explica por qué (usa \"porque\").",
+      "Go deeper: add why your result could show a pattern but not prove a cause.": "Ve más a fondo: agrega por qué tu resultado podría mostrar un patrón pero no probar una causa.",
+      // ---------- Review pass: game look ----------
+      "🧪 You": "🧪 Tú",
+      "Kai's way ahead": "Kai va muy adelante",
+      "Kai's winning": "Kai va ganando",
+      "Neck and neck": "Muy parejo",
+      "You're winning": "Tú vas ganando",
+      "You're way ahead": "Tú vas muy adelante",
+      "Channel 9 producer": "Productora del Canal 9",
+      "Channel 9 news anchor": "Presentador de noticias del Canal 9",
+      "Channel 9 reporter": "Reportera del Canal 9",
+      "Dr. Ruiz": "Dra. Ruiz",
+      "Evidence check": "Pregunta de evidencia",
+      "✔ Confirmed": "✔ Confirmado",
+      "Read the research": "Leer la investigación",
+      "Skip it": "Saltarlo",
+      "Post your full methods so anyone can check and repeat it": "Publicar todos tus métodos para que cualquiera pueda revisarlo y repetirlo",
+      "Make a hype video edit to win the comment war": "Hacer un video llamativo para ganar la guerra de comentarios",
+      "📝 Lab report · Cedar Valley High Research Lab": "📝 Informe del laboratorio · Laboratorio de Investigación de Cedar Valley High",
+      "Last step: write your lab report": "Último paso: escribe tu informe del laboratorio",
+      "Turned in": "Entregado"
     },
     patterns: [
-      { re: /^Your Proof meter ended at (\d+)\/10\.$/, es: "Tu Medidor de pruebas terminó en $1/10." }
+      { re: /^⭐ (.+)$/, es: "⭐ $1", tr: [1] },
+      { re: /^Step (\d+) of (\d+)$/, es: "Paso $1 de $2" },
+      { re: /^⏱ (\d+) lab hours?$/, es: "⏱ $1 h de laboratorio" },
+      { re: /^You (\d+)%$/, es: "Tú $1%" },
+      { re: /^Welcome back, (.+) — you're on step (\d+) of (\d+)\.$/, es: "Bienvenido de nuevo, $1 — vas en el paso $2 de $3." },
+      { re: /^You have (\d+) lab hours left\. Spend 2 of them on:$/, es: "Te quedan $1 horas de laboratorio. Gasta 2 en:" },
+      { re: /^Swap to: (.+)$/, es: "Cambiar a: $1", tr: [1] },
+      { re: /^“(.+)”$/, es: "“$1”", tr: [1] },
+      { re: /^Sentence starter: (.+)$/, es: "Para empezar: $1", tr: [1] },
+      { re: /^([\d.]+) of 5$/, es: "$1 de 5" },
+      { re: /^(\d+) of 50 min$/, es: "$1 de 50 min" }
     ],
     writing: {
-      hyp: [
-        ["independiente", "vi", "cambi"],
-        ["dependiente", "vd", "mid", "medi"]
-      ],
-      design: [
-        ["muestra", "aleatori", "azar", "amig", "pana", "control", "grupo", "sesg", "correlaci", "causa", "titular", "investigaci", "compar", "estudio"],
-        ["porque", "ya que", "pues", "asi que", "por eso", "debido"]
-      ]
+      hyp: [["vi", "independiente"], ["vd", "dependiente"]],
+      why: [["muestra", "aleatori", "azar", "amig", "seguidor", "fans", "kai", "pregunta", "tendencios", "escala", "encuesta", "observ", "maestr", "profesor", "trabajo", "turno", "investigaci", "titular", "causa", "metodo", "video", "repet", "prueba"],
+            ["porque", "ya que", "pues", "asi que", "por eso", "debido"]]
     }
   });
 })();
