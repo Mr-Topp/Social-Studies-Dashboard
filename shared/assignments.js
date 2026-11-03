@@ -383,6 +383,8 @@ window.CLASS_ASSIGNMENTS = {
   "soc-u4-d5-inequality-conflict": { course: "sociology", unit: 4, day: 5, title: "Day 5 · Kettle Creek on Edge", path: "sociology/u4-d5-inequality-conflict/", std: ["SS.9-12.Soc.13"] },
   "gov-u6-d1-checks-balances": { course: "government", unit: 6, day: 1, title: "Day 1 · Branch Wars", path: "civics/gov-u6-d1-checks-balances/", std: ["SS.9-12.Gov.4", "SS.9-12.Gov.9"] },
   "gov-u6-d2-iowa-government": { course: "government", unit: 6, day: 2, title: "Day 2 · Who Do I Call?", path: "civics/gov-u6-d2-iowa-government/", std: ["SS.9-12.Gov.18", "SS.9-12.Gov.19", "SS.9-12.Gov.20"] },
+  "gov-u6-summative": { course: "government", unit: 6, day: 3, turnIn: false, std: [], title: "Day 3 · Summative (Form A)", path: "https://docs.google.com/document/d/19EQxjsDCAHus8zJI0_YzmREwSS7SgxfUFMHnrkIVISQ/edit" },
+  "gov-u6-summative-key": { course: "government", unit: 6, day: 3, turnIn: false, std: [], title: "Day 3 · Summative Teacher Key", path: "https://docs.google.com/document/d/1fzCSACgRUni5XW_UhA-PHCw6-AlI4v_4oWINChsxlT4/edit" },
   "wh-u2-d4-china": { course: "world-history", unit: 2, day: 2, title: "Day 2 · Paper Harvest: Can One Leader Remake a Country?", path: "world-history/u2-d4-china/", std: ["SS.9-12.WH.34", "SS.9-12.WH.35", "SS.9-12.WH.38"] },
   "wh-u2-d6-empires-end": { course: "world-history", unit: 2, day: 4, title: "Day 4 · Break the Grip: How Do Colonies Get Free?", path: "world-history/u2-d6-empires-end/", std: ["SS.9-12.WH.36", "SS.9-12.WH.34"] },
   "wh-u2-d7-africa": { course: "world-history", unit: 2, day: 5, title: "Day 5 · The Day After Freedom", path: "world-history/u2-d7-africa/", std: ["SS.9-12.WH.36", "SS.9-12.WH.34", "SS.9-12.WH.37"] },
@@ -409,9 +411,13 @@ window.CLASS_ASSIGNMENTS = {
   "ush-u4-summative-key": { course: "us-history", unit: 4, day: 4, turnIn: false, std: [], title: "Day 4 · Summative Teacher Key", path: "https://docs.google.com/document/d/1pKHn0HtOVu_y5lYWCngm-aX6c0Ko7YkxSw9BY8JzjtU/edit" },
   "ush-u5-d1-voters-change": { course: "us-history", unit: 5, day: 1, title: "Day 1 · Election Desk 1980", path: "us-history/u5-d1-voters-change/", std: ["SS.9-12.US.46", "SS.9-12.US.47", "SS.9-12.US.49"] },
   "ush-u5-d4-cold-war-ends": { course: "us-history", unit: 5, day: 3, title: "Day 3 · Who Ended the Cold War?", path: "us-history/u5-d4-cold-war-ends/", std: ["SS.9-12.US.48", "SS.9-12.US.49"] },
+  "ush-u5-summative": { course: "us-history", unit: 5, day: 4, turnIn: false, std: [], title: "Day 4 · Summative (Form A)", path: "https://docs.google.com/document/d/1eoCDs_pRn77SPgc_oMShwElT2dP1FauPKRepNYuVmEU/edit" },
+  "ush-u5-summative-key": { course: "us-history", unit: 5, day: 4, turnIn: false, std: [], title: "Day 4 · Summative Teacher Key", path: "https://docs.google.com/document/d/1B3WYAFlmwR-Pvz3cfjMa2EcV2zXgb8518mxNzcQm8lU/edit" },
   "ush-u6-d1-superpower": { course: "us-history", unit: 6, day: 1, title: "Day 1 · Superpower Decision Desk", path: "us-history/u6-d1-superpower/", std: ["SS.9-12.US.52", "SS.9-12.US.53", "SS.9-12.US.55", "SS.9-12.US.56"] },
   "ush-u6-d2-crisis": { course: "us-history", unit: 6, day: 2, title: "Day 2 · Surviving 2008", path: "us-history/u6-d2-crisis/", std: ["SS.9-12.US.53", "SS.9-12.US.54", "SS.9-12.US.55"] },
   "ush-u6-d4-still-fighting": { course: "us-history", unit: 6, day: 2, title: "Day 2 · The Fight for Access", path: "us-history/u6-d4-still-fighting/", std: ["SS.9-12.US.51", "SS.9-12.US.56"] },
+  "ush-u6-summative": { course: "us-history", unit: 6, day: 3, turnIn: false, std: [], title: "Day 3 · Summative (Form A)", path: "https://docs.google.com/document/d/1Oixe7ylaE7nYY9jffTQsbMDJk362lDtROlC6G3GDMN0/edit" },
+  "ush-u6-summative-key": { course: "us-history", unit: 6, day: 3, turnIn: false, std: [], title: "Day 3 · Summative Teacher Key", path: "https://docs.google.com/document/d/1tDsdYTIRf7fGXvybvdHV8XClFsI4kiI63_7HlrlOfzQ/edit" },
 };
 
 // Iowa standard wording (Iowa Academic Standards for Social Studies) for every standard an in-use activity covers.
