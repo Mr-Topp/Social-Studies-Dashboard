@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Decision Desk · The New Right | U.S. History Unit 5 Day 2</title>
+<meta name="description" content="1980s news desk game: sort what the New Right wanted, then hear real supporters and critics.">
+<link rel="stylesheet" href="style.css?v=nr1">
+<script src="../../shared/assignments.js?v=20261103g"></script>
+<script src="../../shared/turnin.js?v=20261103d"></script>
+</head><body>
+<header>
+  <div class="brand"><span class="badge"><i></i></span><span>DECISION DESK<small>THE NEW RIGHT · U.S. HISTORY UNIT 5 · DAY 2</small></span></div>
+  <div class="hud">
+    <span class="pill" id="shiftPill"></span>
+    <span class="pill" id="countPill"></span>
+  </div>
+  <div class="head-actions"><button id="helpBtn" class="small">How to play</button><button id="resetBtn" class="small">Start over</button></div>
+</header>
+<div id="title" class="title-screen"><div class="logo">
+  <div class="live"><i></i> LIVE · 1980s NEWS DESK</div>
+  <h1><span class="t1">DECISION</span><span class="t3">DESK</span></h1>
+  <p>The New Right is rising. <b>What does it want?</b> You make the call.</p>
+  <div class="plan"><span>⚡ 4 fast calls</span><span>🎙️ 3 real debates</span><span>✍️ 2 short answers</span><span>⏱️ about 20 min</span></div>
+  <button class="playbtn" id="playBtn">▶ PLAY</button>
+</div></div>
+<main>
+  <section class="scene" aria-label="1980s TV news studio">
+    <canvas id="scene" width="960" height="400" aria-hidden="true"></canvas>
+    <div id="item" class="itemcard" hidden></div>
+    <div id="toast" role="status" aria-live="polite"></div>
+  </section>
+  <section class="tray" id="tray" aria-live="polite"></section>
+</main>
+
+<div id="overlay" class="overlay" hidden><article class="card" id="card"></article></div>
+
+<dialog id="helpDialog"><button class="close" data-close="helpDialog" aria-label="Close">×</button>
+  <p class="eyebrow">HOW TO PLAY</p><h2>Decision Desk: The New Right</h2>
+  <p>The <b>New Right</b> was a conservative movement in the 1970s and 1980s. It helped elect Ronald Reagan.</p>
+  <ol class="howto">
+    <li><b>Call It:</b> which New Right goal is each news card about? 💵 Cut taxes, 🏛️ Smaller government, ⛪ Traditional values, or 🛡️ Fight communism. Keys 1–4 work too.</li>
+    <li><b>Two Views:</b> a real supporter and a real critic talk about the same goal. Read their words and make the call.</li>
+    <li><b>Write:</b> 2 short answers, then turn in.</li>
+  </ol>
+  <p class="note">Wrong answer? You get a hint and try again.</p>
+  <p class="note">Everyone in this game is real. Quotes are their real words. "Plain words" lines are our short versions.</p>
+  <details class="stds"><summary>Iowa standards</summary>
+    <p><b>SS.9-12.US.46</b> Assess the impact of social movements, including reactionary movements, in creating reform in the United States.</p>
+    <p><b>SS.9-12.US.49</b> Analyze diverse ideologies through primary and secondary sources, noting the impact on social, economic, and political institutions from the late 60s through 1990.</p>
+  </details>
+</dialog>
+
+<script src="game.js?v=nr1"></script>
+</body></html>

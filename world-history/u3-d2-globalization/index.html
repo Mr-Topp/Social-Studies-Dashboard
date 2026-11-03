@@ -1,0 +1,316 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Follow the Cobalt: Who Wins, Who Loses? | World History Unit 3 Day 2</title>
+<meta name="description" content="Buy cobalt for an Iowa phone company and follow it from a mine in Congo to a refinery in China to a store near you. Find out who gains and who loses from globalization, and why some push back.">
+<style>
+:root{--ink:#17252c;--muted:#4f5f66;--paper:#eef6f4;--card:#fff;--line:#d3dfdc;--main:#0f6e6a;--accent:#b8501c;--gold:#d9a43a;--green:#22683f;--bad:#a2392f;--sea:#1d5f8a}
+*{box-sizing:border-box}
+body{margin:0;background:radial-gradient(circle at 12% 0,#d6efe9 0,transparent 40%),radial-gradient(circle at 92% 8%,#f8e2d2 0,transparent 35%),var(--paper);color:var(--ink);font:17px/1.5 system-ui,Segoe UI,Arial,sans-serif;min-height:100vh}
+header{background:linear-gradient(100deg,#0d3b4f,#0f6e6a 55%,#b8501c);color:#fff;border-bottom:5px solid var(--gold);padding:14px max(16px,calc((100vw - 900px)/2)) 10px}
+.k{font-size:.78rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:#ffd98a;margin:0}
+h1{margin:2px 0 4px;font-size:clamp(1.7rem,3.4vw,2.3rem)}
+.std{margin:2px 0;font-size:.9rem;color:#e2f0ee}.std b{color:#fff}
+.hud{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line);padding:7px max(12px,calc((100vw - 1000px)/2));display:flex;gap:6px 8px;flex-wrap:wrap;align-items:center;font-weight:800;font-size:.88rem;box-shadow:0 2px 8px #17252c18}
+.hud .bar{flex:1;min-width:60px;height:10px;background:#e3e9e8;border-radius:9px;overflow:hidden}.hud .bar span{display:block;height:100%;width:0;background:var(--main);transition:width .4s}
+.route{display:inline-flex;align-items:center;gap:2px;background:#e9f4f2;border-radius:20px;padding:2px 6px}
+.route i{font-style:normal;font-size:1.05rem;line-height:1;padding:3px 5px;border-radius:12px;opacity:.45;transition:all .3s}
+.route i.done{opacity:.8}.route i.on{opacity:1;background:#fff;box-shadow:0 0 0 2px var(--main);transform:scale(1.15)}
+.route b{color:#9ab9b4;font-size:.75rem}
+.pill{position:relative;background:#eef3f2;border-radius:20px;padding:3px 10px;white-space:nowrap;display:inline-flex;align-items:center;gap:5px}
+.track{width:64px;height:10px;border-radius:9px;background:#e3e9e8;overflow:hidden;display:inline-block}.track span{display:block;height:100%;background:var(--accent);transition:width .5s}
+.face{font-size:1.2rem;line-height:1;display:inline-block}
+.flash{animation:fl .9s}@keyframes fl{0%{background:#ffe6a8;transform:scale(1.08)}100%{background:#eef3f2;transform:scale(1)}}
+.delta{position:absolute;right:6px;top:100%;background:#fff;border-radius:8px;padding:0 6px;box-shadow:0 2px 6px #0002;font-weight:900;font-size:.9rem;pointer-events:none;animation:up 1.6s forwards}.delta.g{color:var(--green)}.delta.b{color:var(--bad)}
+@keyframes up{0%{opacity:0;transform:translateY(-8px)}15%{opacity:1}75%{opacity:1}100%{opacity:0;transform:translateY(10px)}}
+main{max-width:900px;margin:auto;padding:14px 16px 70px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:18px;box-shadow:0 6px 20px #17252c1a}
+.kicker{font-size:.78rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin:0}
+h2{margin:2px 0 10px;font-size:1.45rem}
+.hook{font-size:1.12rem;font-weight:750;margin:0 0 8px}
+.teach{background:#0d3b4f;color:#fff;border-radius:12px;padding:10px 14px;margin:0 0 12px;display:flex;gap:12px;align-items:center}.teach p{margin:2px 0}.teach b{color:#ffd98a}.teach .big{font-size:2rem;line-height:1}
+/* Intro: the cobalt's route, four stops with arrows */
+.stops{display:grid;grid-template-columns:repeat(4,1fr);gap:22px;margin:8px 0 10px;position:relative}
+.stop{position:relative;background:#fff;border:2px solid #b9d6d1;border-radius:14px;padding:8px 8px;text-align:center;font-size:.92rem;line-height:1.25;box-shadow:0 4px 0 #b9d6d1}
+.stop:not(:last-child)::after{content:"➜";position:absolute;right:-20px;top:50%;transform:translateY(-50%);font-size:1.1rem;color:var(--accent);font-weight:900}
+.stop .ic{font-size:1.8rem;display:block;line-height:1.15}
+.stop b{display:block;font-size:.98rem}
+.stop small{display:block;color:var(--muted);font-weight:700}
+.stop.you{border-color:var(--accent);box-shadow:0 4px 0 #e2b79e;background:#fff8f2}
+.boss{background:#fff6ea;border:2px solid #efd3bb;border-radius:12px;padding:6px 12px;margin:0 0 8px;display:flex;gap:10px;align-items:center}.boss b{color:#9a4a1c}.boss .face{font-size:2rem}
+.plan{font-weight:800;background:#fff7e3;border-radius:9px;padding:5px 12px;display:inline-block;margin:2px 0 4px}
+.block{margin:14px 0;padding:14px;border-radius:14px;border:2px solid var(--line);background:#fff}
+.block.current{border-color:var(--ink);box-shadow:0 0 0 4px #0f6e6a30}
+.block h3{margin:0 0 10px;font-size:1.08rem;line-height:1.35;font-weight:700}
+.event{background:#f4f9f8;border-style:dashed;border-color:#a9cdc7}.event.current{border-style:solid;border-color:var(--main);box-shadow:0 0 0 4px #0f6e6a30}
+.event-body p,.note p{margin:4px 0}
+.gtag{display:inline-block;font-size:.72rem;font-weight:900;letter-spacing:.06em;text-transform:uppercase;background:#dcefeb;color:#0d5552;border-radius:10px;padding:1px 8px;margin-bottom:6px}
+.chat{display:flex;gap:10px;align-items:flex-start;margin:0 0 8px;max-width:660px}
+.chat .av{font-size:2.3rem;line-height:1;flex:none;width:52px;height:52px;border-radius:50%;background:#fdf1e7;display:grid;place-items:center;border:2px solid #efd3bb}
+.chat .bub{background:#fdf1e7;border:1px solid #efd3bb;border-radius:4px 16px 16px 16px;padding:8px 12px;font-size:1.05rem}
+.chat .who{font-size:.74rem;font-weight:900;color:#9a4a1c;letter-spacing:.04em}.chat p{margin:2px 0}
+.src-card{background:#fbfaf5;border:1px solid #e1dccb;border-left:5px solid var(--gold);border-radius:10px;padding:10px 12px;margin:0 0 10px;font-weight:400;font-size:.97rem}
+.src-card .lab{font-size:.74rem;font-weight:900;letter-spacing:.06em;text-transform:uppercase;color:#7a5c14;margin:0 0 4px}
+.src-card p{margin:3px 0}
+.icons{list-style:none;padding:0;margin:6px 0;display:grid;gap:4px}.icons li{display:flex;gap:8px;align-items:center}.icons li span{font-size:1.2rem;width:1.6rem;text-align:center;flex:none}
+.cite{display:block;font-size:.78rem;color:var(--muted)}
+.reveal{background:var(--main);color:#fff;border-radius:10px;padding:8px 12px;margin:10px 0 0!important;font-size:1.02rem}.reveal b{color:#ffd98a}
+/* Gains vs. costs ledger */
+.ledger{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:6px 0}
+.ledger>div{border-radius:10px;padding:8px 12px}
+.ledger .gain{background:#e3f2e8;border:2px solid #b5dbc2}.ledger .cost{background:#fbe6e1;border:2px solid #efc1b7}
+.ledger h4{margin:0 0 4px;font-size:1rem}.ledger .gain h4{color:var(--green)}.ledger .cost h4{color:var(--bad)}
+.ledger p{margin:4px 0;font-size:.95rem}
+/* Supply chain strip */
+.chain{display:flex;align-items:stretch;gap:6px;margin:8px 0;flex-wrap:wrap}
+.chain>div{flex:1;min-width:120px;background:#fff;border:2px solid #b9d6d1;border-radius:12px;padding:6px 8px;text-align:center;font-size:.9rem;line-height:1.25}
+.chain>div i{font-style:normal;font-size:1.5rem;display:block}
+.chain>div b{display:block;font-size:1.15rem;color:var(--main)}
+.chain .arr{flex:none;min-width:0;border:0;background:none;align-self:center;font-weight:900;color:var(--accent);padding:0}
+.barchart{margin:6px 0}.barchart .row{display:grid;grid-template-columns:150px 1fr 90px;gap:8px;align-items:center;margin:4px 0;font-size:.92rem}.barchart .t{height:16px;background:#e3e9e8;border-radius:8px;overflow:hidden}.barchart .t span{display:block;height:100%;background:var(--sea)}.barchart .row.hi .t span{background:var(--accent)}
+.headline{font-family:Georgia,serif;font-weight:900;font-size:1.35rem;background:#fff;border:2px solid var(--ink);border-radius:6px;padding:6px 12px;margin:0 0 8px;display:inline-block}
+.picked{margin:10px 0 4px;color:var(--muted)}.result{background:#eef3f2;border-radius:10px;padding:9px 12px}.result p{margin:4px 0}
+.stamp{display:inline-block;font-weight:900;letter-spacing:.08em;text-transform:uppercase;border:3px solid currentColor;border-radius:8px;padding:1px 10px;transform:rotate(-5deg);margin:2px 10px 4px 0;font-size:1rem}
+.stamp.g{color:var(--green)}.stamp.b{color:var(--bad)}.stamp.m{color:#7a5c14}
+.block.past:has(+ .block.current) .stamp,.block.past:last-child .stamp{animation:slam .45s ease-out}
+@keyframes slam{0%{transform:scale(2.4) rotate(-12deg);opacity:0}70%{transform:scale(.92) rotate(-5deg);opacity:1}100%{transform:scale(1) rotate(-5deg)}}
+.cause{background:#fff;border:1px solid var(--line);border-left:5px solid var(--main);border-radius:8px;padding:4px 10px;margin:6px 0 0!important;font-size:.92rem}.cause b{color:var(--main)}
+.tag{display:inline-block;font-weight:900;font-size:.8rem;border-radius:12px;padding:2px 9px;margin:0 6px 2px 0}.tag.up{background:#dcefe2;color:var(--green)}.tag.down{background:#f6dcd8;color:var(--bad)}
+.block.q{background:#fffdf5;border-color:#d9cfb4;box-shadow:4px 5px 0 #e8dfc6}.block.q.current{border-color:#7a5c14;box-shadow:4px 5px 0 #d9cfb4,0 0 0 4px #d9a43a40}
+.qlabel{display:inline-block;font-size:.74rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:#fff;background:#7a5c14;border-radius:8px;padding:2px 9px;margin:0 0 6px}
+.choices{display:grid;gap:8px}
+@media(min-width:700px){.q .choices{grid-template-columns:1fr 1fr}.event .choices{grid-template-columns:repeat(3,1fr)}}
+button{font:inherit;cursor:pointer;border-radius:10px;min-height:46px}
+.choice{text-align:left;background:#fff;color:var(--ink);border:2px solid #c3d0cd;padding:10px 12px;font-weight:650;line-height:1.3}
+.choice:hover:not(:disabled){border-color:var(--ink);background:#fbfdfc}.choice:disabled{opacity:.5;cursor:not-allowed}
+.event .choice{white-space:pre-line;text-align:center;padding:14px 10px;min-height:96px;border-radius:14px;border-width:3px;border-color:#a9cdc7;box-shadow:0 4px 0 #a9cdc7;color:var(--muted);font-weight:650;font-size:.95rem;transition:transform .12s}
+.event .choice::first-line{font-size:1.2rem;font-weight:900;color:var(--ink)}
+.event .choice:hover:not(:disabled){transform:translateY(-3px);border-color:var(--main);background:#fff}
+.go{margin-top:12px;background:var(--main);color:#fff;border:0;padding:11px 18px;font-weight:900;box-shadow:0 4px 0 #0a4a47}
+.intro .go{font-size:1.15rem;padding:13px 28px;min-width:220px;background:var(--accent);box-shadow:0 4px 0 #7f3714}
+button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid #2f7dbd;outline-offset:2px}
+.answered{font-weight:800;color:var(--green);margin:4px 0}.why{margin:2px 0;color:var(--muted)}
+.block.past:has(+ .block.current) .answered,.block.past:last-child .answered{animation:pop .4s}
+@keyframes pop{0%{transform:scale(.9);opacity:0}100%{transform:scale(1);opacity:1}}
+.msg{min-height:1.3em;font-weight:750;margin:8px 0 0}.msg.bad{color:var(--bad)}.msg.good{color:var(--green)}
+label{display:block;font-weight:850;margin:14px 0 4px}.stem{margin:0 0 4px;color:var(--muted);font-size:.92rem}
+input,textarea{width:100%;font:inherit;border:2px solid #c3d0cd;border-radius:9px;padding:10px;background:#fff;color:var(--ink)}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0;padding:0;list-style:none}.chips li{background:#eef3f2;border-radius:20px;padding:4px 12px;font-weight:800;font-size:.92rem}
+.ending{text-align:center;background:#0d3b4f;color:#fff;border-radius:14px;padding:12px;margin:0 0 10px}
+.ending .stamp{font-size:1.5rem;background:#fff;animation:slam .5s ease-out;margin:4px 0 20px}
+.ending p{margin:6px 0 0}
+.board{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:8px 0}
+.board>div{border-radius:10px;padding:8px 12px;border:1px solid var(--line);background:#fff}
+.board .mine{background:#fff8f2;border-color:#efd3bb}.board .real{background:#eef6f4;border-color:#b9d6d1}
+.board p{margin:3px 0}.board ul{list-style:none;margin:4px 0;padding:0;font-size:.93rem}.board li{margin:3px 0}
+.wl{display:inline-block;min-width:3.2em;text-align:center;font-weight:900;font-size:.74rem;border-radius:9px;padding:0 6px;margin-right:6px}.wl.w{background:#dcefe2;color:var(--green)}.wl.l{background:#f6dcd8;color:var(--bad)}.wl.m{background:#f3ead2;color:#7a5c14}
+.report{background:#fffdf5;border:2px solid #d9cfb4;border-radius:12px;padding:4px 14px 10px;margin-top:10px}
+.welcome{background:#e6f1ea;color:var(--green);font-weight:800;border-radius:9px;padding:8px 12px;margin:0 0 10px}
+.foot{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-top:14px;color:var(--muted);font-size:.85rem}
+.foot button{background:#e6ebea;border:0;padding:8px 12px;font-weight:800;color:var(--ink)}
+.src{font-size:.78rem;color:var(--muted);margin:2px 0}
+@media(max-width:760px){.stops{grid-template-columns:1fr 1fr;gap:12px}.stop:not(:last-child)::after{display:none}.ledger,.board{grid-template-columns:1fr}.barchart .row{grid-template-columns:96px 1fr 76px;font-size:.85rem}.hud .lbl{display:none}.track{width:44px}.hud{font-size:.82rem}.chat .av{width:42px;height:42px;font-size:1.8rem}}
+@media print{.hud,.foot,.go{display:none}}
+@media(max-height:800px){header{padding-top:8px;padding-bottom:6px}header h1{font-size:1.45rem;margin:0 10px 0 0;display:inline-block}header .k{display:inline-block;margin-right:10px}header .std{font-size:.82rem;margin:0}.intro h2{font-size:1.25rem;margin:0 0 4px}.card.intro{padding:10px 18px}.intro p{margin:3px 0}.intro label{margin-top:4px}.intro .go{margin-top:6px;padding:9px 24px}.intro input{padding:6px 10px}.intro .msg{min-height:0;margin:0}.hud{padding-top:4px;padding-bottom:4px}.stop{padding:4px 6px}.stop .ic{font-size:1.4rem}.stops{margin:4px 0 8px}.intro .hook{margin:2px 0 4px}.intro .boss{padding:4px 10px;margin:4px 0}.intro .boss .face{font-size:1.6rem}.intro .chips{margin:4px 0}}
+</style>
+<script src="../../shared/assignments.js?v=20261103g"></script>
+<script src="../../shared/turnin.js?v=20261103d"></script>
+<script src="../../shared/unit-game.js?v=20261103c"></script>
+<script src="../../shared/lang.js?v=20261103c"></script>
+</head><body>
+<header>
+  <p class="k">World History · Unit 3 · Day 2</p>
+  <h1>Follow the Cobalt</h1>
+  <p class="std"><b>SS.9-12.WH.39</b> Evaluate the effects of globalization since the 1990s.</p>
+  <p class="std"><b>SS.9-12.WH.42</b> Explain various responses to increasing globalization since the 1990s</p>
+  <p class="std"><b>Goal:</b> Find who wins and who loses from globalization, and why some people push back. · About 25 minutes.</p>
+</header>
+<div class="hud" aria-label="Progress and Brightline's meters">
+  <span id="progressText">0 checks done</span>
+  <div class="bar" aria-hidden="true"><span id="progressFill"></span></div>
+  <span class="route" aria-label="The cobalt's route" id="route"><i>⛏️</i><b>›</b><i>🏭</i><b>›</b><i>📱</i><b>›</b><i>🛒</i></span>
+  <span class="pill" id="pricePill"><span aria-hidden="true">🏷️</span> <span class="lbl">Phone price</span> <b id="priceNum">$500</b></span>
+  <span class="pill" id="minerPill"><span class="face" id="mFace" aria-hidden="true">😟</span> <span class="lbl">Miners' deal</span> <span class="track" aria-hidden="true"><span id="minerFill" style="width:30%"></span></span> <b id="minerNum">3/10</b></span>
+  <span class="pill" id="jobsPill"><span aria-hidden="true">🏭</span> <span class="lbl">U.S. jobs</span> <b id="jobsNum">200</b></span>
+</div>
+<main>
+  <p class="welcome" id="welcome" hidden></p>
+  <div id="app"></div>
+  <div class="foot"><span>Progress saves on this device. Your teacher sees your work after you turn it in.</span><button type="button" id="restartBtn">Start over</button></div>
+</main>
+<script>
+// Small builders for the screens.
+const T = (cls, txt) => `<span class="tag ${cls}">${txt}</span>`;
+const S = (cls, txt) => `<span class="stamp ${cls}">${txt}</span>`;
+const card = (lab, body) => `<div class="src-card"><p class="lab">${lab}</p>${body}</div>`;
+const chat = (face, who, body) => `<div class="chat"><span class="av" aria-hidden="true">${face}</span><div class="bub"><div class="who">${who}</div>${body}</div></div>`;
+const icons = rows => `<ul class="icons">${rows.map(([i, t]) => `<li><span aria-hidden="true">${i}</span>${t}</li>`).join("")}</ul>`;
+const cause = txt => `<p class="cause"><b>Real link:</b> ${txt}</p>`;
+const reveal = txt => `<p class="reveal">${txt}</p>`;
+const GAME = `<span class="gtag">Game event · made up</span>`;
+const CHECK = "🔍 Stop check";
+const BOSS = body => chat("👩🏽‍💼", "DANA COLE · CEO, BRIGHTLINE (made up)", body);
+
+// What each choice changed, for the finale (keys = event id + choice index). Short.
+const EFFECT = {
+  e1: ["Cheapest cobalt, no checks", "Inspected mine, small price bump", "Fair-pay deal for miners"],
+  e2: ["Factory in Asia: cheapest phone", "Factory in Mexico: some U.S. jobs", "Factory in Iowa: 900 jobs, pricey phone"],
+  e3: ["Paid the higher price", "Switched to recycled cobalt", "Helped build a refinery in Congo"]
+};
+// Endings: which one you reach depends on the meters.
+function ending(st) {
+  const f = st.fx;
+  if (f.jobs >= 1000) return { s: S("g", "🌽 Made in Iowa"), t: `Brightline now has ${f.jobs.toLocaleString()} U.S. jobs. Shoppers paid $${f.price} a phone.` };
+  if (f.miners >= 6) return { s: S("g", "🤝 Fair deal"), t: `Miners got a better deal (${f.miners}/10). Shoppers paid $${f.price} a phone.` };
+  if (f.price <= 470) return { s: S("m", "💲 Cheap phone"), t: `Shoppers paid just $${f.price}. Miners and U.S. workers got little.` };
+  return { s: S("m", "⚖️ A bit for all"), t: "A little for every group. A big win for none." };
+}
+const wl = (cls, txt) => `<span class="wl ${cls}">${txt}</span>`;
+
+UnitGame.start({
+  key: "wh-u3-d2-globalization-v1",
+  assignmentId: "wh-u3-d2-globalization",
+  title: "World History · Unit 3 · Day 2 · Globalization: Who Wins, Who Loses?",
+  standard: "SS.9-12.WH.39, SS.9-12.WH.42",
+  oldApi: "https://fynn-class-assignment-submissions-20261024.neotboy.chatgpt.site/api/submit",
+  startFx: { price: 500, miners: 3, jobs: 200 },
+  clampFx: fx => { fx.miners = Math.max(0, Math.min(10, fx.miners)); fx.jobs = Math.max(0, fx.jobs); },
+  hud: st => {
+    const f = st.fx, prev = window.__lastFx || f;
+    document.getElementById("priceNum").textContent = "$" + f.price;
+    document.getElementById("minerNum").textContent = f.miners + "/10";
+    document.getElementById("minerFill").style.width = (f.miners * 10) + "%";
+    document.getElementById("mFace").textContent = f.miners >= 6 ? "🙂" : f.miners >= 3 ? "😐" : "😟";
+    document.getElementById("jobsNum").textContent = f.jobs.toLocaleString();
+    // The route lights up the stop you're on.
+    document.querySelectorAll("#route i").forEach((el, i) => { el.className = i === st.scene ? "on" : (i < st.scene ? "done" : ""); });
+    // Meters flash and show a floating +/− when they change. Green = good for that group.
+    [["price", "pricePill", -1, "$", ""], ["miners", "minerPill", 1, "", ""], ["jobs", "jobsPill", 1, "", ""]].forEach(([k, id, good, pre, post]) => {
+      if (prev[k] === f[k]) return;
+      const el = document.getElementById(id); el.classList.remove("flash"); void el.offsetWidth; el.classList.add("flash");
+      const d = f[k] - prev[k], sp = document.createElement("span");
+      sp.className = "delta " + (d * good > 0 ? "g" : "b"); sp.setAttribute("aria-hidden", "true");
+      sp.textContent = (d > 0 ? "+" : "−") + pre + Math.abs(d) + post;
+      el.appendChild(sp); setTimeout(() => sp.remove(), 1700);
+    });
+    window.__lastFx = Object.assign({}, f);
+  },
+  startLabel: "Start the route",
+  introHtml: `<p class="kicker">Your new job</p><h2>Follow the Cobalt</h2>
+    <p class="hook">There's cobalt in your phone battery. You just became the cobalt buyer for Brightline, an Iowa phone company.</p>
+    <div class="stops">
+      <div class="stop"><span class="ic" aria-hidden="true">⛏️</span><b>Mine</b><small>Congo</small></div>
+      <div class="stop"><span class="ic" aria-hidden="true">🏭</span><b>Refinery</b><small>China</small></div>
+      <div class="stop"><span class="ic" aria-hidden="true">📱</span><b>Factory</b><small>You pick</small></div>
+      <div class="stop you"><span class="ic" aria-hidden="true">🛒</span><b>Store</b><small>Iowa</small></div>
+    </div>
+    <p class="boss"><span class="face" aria-hidden="true">👩🏽‍💼</span><span>Your boss, <b>Dana</b>: “Cheap, fair, or jobs at home. You can't max out all three.”</span></p>
+    <ul class="chips"><li>🧭 Follow 4 stops</li><li>🤝 Make 3 big calls</li><li>⚖️ Who wins? Who loses?</li></ul>
+    <p class="plan">About 25 min · 7 quick checks · 2 short answers</p>
+    <p class="src">Made up: Brightline, Dana Cole, and the game meters (phone price, miners' deal, U.S. jobs). Real facts show sources.</p>`,
+  scenes: [
+    { kicker: "Stop 1 of 4 · Kolwezi, Congo", title: "The Mine",
+      teach: `<span class="big" aria-hidden="true">⛏️</span><p>Your cobalt starts in the ground in the <b>Democratic Republic of the Congo</b>, in Africa. Its trip to you crosses 3 continents. That's <b>globalization</b>: countries tied together by trade.</p>`,
+      blocks: [
+        { type: "note", html: card("Real data · cobalt mined in 2025", `<div class="barchart"><div class="row hi"><span>Congo</span><div class="t"><span style="width:74%"></span></div><b>230,000 t</b></div><div class="row"><span>Rest of the world</span><div class="t"><span style="width:26%"></span></div><b>80,000 t</b></div></div><span class="cite">U.S. Geological Survey, Mineral Commodity Summaries 2026</span>`)
+          + reveal(`Congo digs about <b>3 of every 4 tons</b> of the world's cobalt.`) },
+        { type: "note", html: `<p><b>Who wins and who loses at the mine?</b></p><div class="ledger">
+            <div class="gain"><h4>👍 Gains</h4><p>Congo's economy grew <b>5.5%</b> in 2025, mostly from mining.</p><p>Mining means jobs and money for the country.</p></div>
+            <div class="cost"><h4>👎 Costs</h4><p>Many mine workers earn <b>$120–$150 a month</b>. A living wage in Kolwezi: <b>$520</b>.</p><p>The U.S. lists Congo's cobalt as made with child or forced labor.</p></div></div>
+            <p class="src">Living wage = enough for a family's food, rent, and school.</p>
+            <span class="cite">World Bank, Congo overview (2026) · RAID, Kolwezi living wage (June 2025) · U.S. Dept. of Labor, 2024 list of goods</span>` },
+        { type: "q", id: "q1", std: "WH.39", label: CHECK, short: "Mine: growth vs. workers' pay", prompt: "Congo's economy grew. But many mine workers earn $120–$150 a month. What does that show?", options: ["Congo's economy grows, but workers get a small share", "Mining growth means most miners now earn a living wage", "Congo's economy shrank because mine pay is so low", "Miners there earn more than Kolwezi's living wage"], hint: "Compare the 👍 side and the 👎 side. Is $150 more or less than $520?", why: "Both are true at once: the country grows, while many workers stay far below a living wage." },
+        { type: "event", id: "e1", short: "Where to buy cobalt", html: GAME + BOSS(`<p>Two sellers. One is cheap and asks no questions. One lets outside inspectors check the mine. Or we pay extra so miners earn more.</p>`) + `<p><b>Where does Brightline buy its cobalt?</b></p>`,
+          choices: [
+            { label: "💲 Cheapest seller\nNo questions asked", fx: { price: -10, miners: -2 }, result: `<p>${S("m", "Bought cheap")}${T("up", "−$10 phone price")}${T("down", "−2 miners' deal")}</p><p>Your phone gets a little cheaper. No one checks who dug the cobalt, or for what pay.</p>` + cause("if no one checks the mine, no one can say who dug the cobalt.") },
+            { label: "🔎 Inspected mine\nOutside checks for child labor", fx: { price: 5, miners: 1 }, result: `<p>${S("g", "Checked")}${T("down", "+$5 phone price")}${T("up", "+1 miners' deal")}</p><p>Inspectors visit. No kids in your supply. Pay is still low.</p>` + cause("many phone and car makers now pay for mine audits (checks).") },
+            { label: "🤝 Fair-pay deal\nPay extra so miners earn more", fx: { price: 10, miners: 3 }, result: `<p>${S("g", "Fair deal")}${T("down", "+$10 phone price")}${T("up", "+3 miners' deal")}</p><p>Workers at your supplier get closer to a living wage. Your phone costs a bit more.</p>` + cause("no big mine in Kolwezi pays all workers a living wage yet (RAID, 2025).") }
+          ] }
+      ] },
+    { kicker: "Stop 2 of 4 · China", title: "The Refinery",
+      teach: `<span class="big" aria-hidden="true">🚢</span><p>Your rough cobalt rides a truck, then a ship, to <b>China</b>. Refineries clean it into battery metal.</p>`,
+      blocks: [
+        { type: "note", html: `<div class="chain"><div><i aria-hidden="true">⛏️</i>Congo <b>digs 73%</b></div><div class="arr" aria-hidden="true">➜</div><div><i aria-hidden="true">🏭</i>China <b>refines 78%</b></div><div class="arr" aria-hidden="true">➜</div><div><i aria-hidden="true">🔋</i>Batteries <b>everywhere</b></div></div>
+            <span class="cite">Shares of the world's cobalt · USGS 2026 (mining, 2025) · International Energy Agency via Reuters (refining, 2024)</span>`
+          + reveal(`<b>Adding value:</b> each step makes the metal worth more. The country that does the step keeps those jobs and that money.`) },
+        { type: "q", id: "q2", std: "WH.39", label: CHECK, short: "Refining adds value in China", prompt: "China digs very little cobalt. Why does it still gain a lot from cobalt?", options: ["It does the refining step, which adds value", "It has the world's biggest cobalt mines", "Congo gives China its cobalt for free", "It sells the refined cobalt back to Congo's miners"], hint: "Read the dark box under the chain. What does each step do to the metal?", why: "Refining adds value. China does most of that step, so it keeps those jobs and that money." },
+        { type: "note", html: card("Real history · China joins world trade", icons([["📅", "<b>2001:</b> China joins the World Trade Organization (WTO)."], ["🏭", "Factories boom. China becomes a top seller to the world."], ["📈", "Close to <b>800 million</b> people in China left extreme poverty in 40 years."]]) + `<span class="cite">World Bank, Four Decades of Poverty Reduction in China (2022)</span>`) }
+      ] },
+    { kicker: "Stop 3 of 4 · The factory", title: "Cheap Phones, Lost Jobs",
+      teach: `<span class="big" aria-hidden="true">📱</span><p>Battery metal becomes a battery. The battery goes in a phone. Now: <b>where do you build it?</b></p>`,
+      blocks: [
+        { type: "note", html: card("Real data · price of battery cells, for the same amount of power", `<div class="barchart"><div class="row hi"><span>1991</span><div class="t"><span style="width:100%"></span></div><b>$9,200</b></div><div class="row"><span>2024</span><div class="t"><span style="width:1.5%"></span></div><b>$78</b></div></div><span class="cite">Our World in Data, “Battery price decline” (2026)</span>`)
+          + reveal(`Over <b>99% cheaper</b>. Making batteries in huge amounts for buyers all over the world helped drive the price down.`) },
+        { type: "q", id: "q3", std: "WH.39", label: CHECK, short: "Winner: shoppers (cheap batteries)", prompt: "Which group clearly <b>won</b> from this price drop?", options: ["Shoppers buying phones and electric cars", "Congo's miners, since cobalt sells for more", "Battery makers, since each battery costs more", "Nobody, since cheaper batteries are worse"], hint: "The price went down. Who pays that price?", why: "Cheaper batteries mean cheaper phones, laptops, and cars for buyers, including in Iowa." },
+        { type: "note", html: card("Real case · Newton, Iowa", icons([["🧺", "Maytag made washing machines in Newton starting in 1893."], ["🏢", "Whirlpool bought Maytag in 2006. It closed the Newton plant in 2007."], ["👷", "About <b>2,000 people</b> were building washers and dryers there."], ["🇲🇽", "The work moved to other states and to Mexico."]]) + `<span class="cite">The World (PRI), “The most broken town in America is back on its feet,” 2017</span>`)
+          + card("Real data · the whole U.S.", `<p>Goods bought from China (imports) cost the U.S. an estimated <b>2.0 to 2.4 million</b> jobs, 1999–2011.</p><span class="cite">Acemoglu, Autor, Dorn, Hanson &amp; Price, National Bureau of Economic Research, 2014</span>`) },
+        { type: "q", id: "q4", std: "WH.39", label: CHECK, short: "Loser: Newton factory workers", prompt: "In the Newton story, which group <b>lost</b>?", options: ["Factory workers whose jobs moved away", "Shoppers who had to pay more for washers", "Workers in Mexico who got the new jobs", "Whirlpool, which closed the plant to cut costs"], hint: "Reread the 👷 line and the 🇲🇽 line.", why: "About 2,000 Newton workers lost their jobs. The same move was a gain for the workers hired somewhere else." },
+        { type: "event", id: "e2", short: "Where to build the phone", html: GAME + BOSS(`<p>Time to pick a factory. A cheaper phone, or jobs at home? Shoppers notice price. Iowa notices jobs.</p>`) + `<p><b>Where does Brightline build its phone?</b></p>`,
+          choices: [
+            { label: "🌏 Asia\nCheapest place to build", fx: { price: -40 }, result: `<p>${S("m", "Shipped overseas")}${T("up", "−$40 phone price")}${T("down", "+0 U.S. jobs")}</p><p>Your cheapest phone yet. Almost no new jobs at home.</p>` + cause("most of the world's phones are put together in Asia.") },
+            { label: "🇲🇽 Mexico\nCloser, costs a bit more", fx: { price: 20, jobs: 150 }, result: `<p>${S("m", "Close by")}${T("down", "+$20 phone price")}${T("up", "+150 U.S. jobs")}</p><p>Faster shipping. Some new U.S. jobs making parts and driving trucks.</p>` + cause("Maytag's Newton work moved partly to Mexico.") },
+            { label: "🌽 Iowa\nBuild it here", fx: { price: 120, jobs: 900 }, result: `<p>${S("g", "Made in Iowa")}${T("down", "+$120 phone price")}${T("up", "+900 U.S. jobs")}</p><p>900 new jobs in Iowa. But the phone costs a lot more, and some buyers switch brands.</p>` + cause("U.S. workers earn more than factory workers in Asia, so building here costs more.") }
+          ] }
+      ] },
+    { kicker: "Stop 4 of 4 · The store", title: "The Pushback",
+      teach: `<span class="big" aria-hidden="true">🛑</span><p>Your phones hit the stores. Then the news hits.</p>`,
+      blocks: [
+        { type: "note", html: `<div class="headline">📰 Congo stops cobalt exports</div>`
+          + card("Real news · 2025", icons([["📉", "Early 2025: the cobalt price hits a 9-year low."], ["🛑", "February: Congo stops all cobalt exports (sales to other countries)."], ["📦", "October: exports start again, but with a limit (a <b>quota</b>)."], ["💲", "Price per pound: <b>$10 → $25</b>."]]) + `<span class="cite">USGS 2026 · Reuters, 2025–2026</span>`)
+          + reveal(`<b>Pushback:</b> when a country or group acts to change how globalization treats it.`) },
+        { type: "q", id: "q5", std: "WH.42", label: CHECK, short: "Why Congo limited exports", prompt: "Why did Congo stop, then limit, its cobalt exports?", options: ["To push the price up so Congo earns more", "Because its mines had run out of cobalt", "To make phones cheaper for shoppers", "Because China stopped buying any of its cobalt"], hint: "Look at the price before and after.", why: "Less cobalt for sale pushed the price up. Congo also wants more of the refining done at home." },
+        { type: "event", id: "e3", short: "Cobalt price jump response", html: GAME + BOSS(`<p>Cobalt costs more than double what it did. What's our move?</p>`),
+          choices: [
+            { label: "💸 Pay up\nRaise the phone price", fx: { price: 15 }, result: `<p>${S("m", "Paid more")}${T("down", "+$15 phone price")}</p><p>Same suppliers. Shoppers pay the difference.</p>` + cause("Congo's limits pushed up costs for battery makers everywhere.") },
+            { label: "♻️ Go recycled\nReuse cobalt from old batteries", fx: { price: 5, miners: -1, jobs: 100 }, result: `<p>${S("g", "Recycled")}${T("up", "+100 U.S. jobs")}${T("down", "−1 miners' deal")}</p><p>New recycling jobs at home. You buy less from Congo's miners.</p>` + cause("Apple says all the batteries it designs now use 100% recycled cobalt (2026).") },
+            { label: "🏗️ Refine in Congo\nHelp build a refinery there", fx: { price: 10, miners: 2 }, result: `<p>${S("g", "Built there")}${T("down", "+$10 phone price")}${T("up", "+2 miners' deal")}</p><p>Slow and costly. But more of the value stays in Congo.</p>` + cause("Congo says its quotas can change as more refining happens at home.") }
+          ] },
+        { type: "note", html: card("Real case · the 2018 tariff fight", icons([["🇺🇸", "2018: the U.S. puts <b>tariffs</b> (import taxes) on Chinese goods. Supporters' goal: fairer trade and more U.S. factory jobs."], ["🇨🇳", "July 2018: China hits back with a tariff on U.S. soybeans."], ["🌱", "In 2017, China bought about <b>$12 billion</b> of U.S. soybeans. By late 2018, sales nearly stopped."], ["🌽", "Iowa lost about <b>$1.46 billion a year</b> in farm sales abroad."]]) + `<span class="cite">Congressional Research Service, 2019 · USDA Economic Research Service, 2022</span>`) },
+        { type: "q", id: "q6", std: "WH.42", label: CHECK, short: "Tariff pushback hurt Iowa farms", prompt: "The U.S. pushed back with tariffs. How did that hurt Iowa?", options: ["China taxed U.S. soybeans, so Iowa sold less", "China stopped selling seed to Iowa's soybean farmers", "Iowa farmers had to pay tariffs to sell at home", "Iowa factories closed to pay for the tariffs"], hint: "Find the 🇨🇳 line. What did China put a tariff on?", why: "Pushback can cut both ways. China hit back, and Iowa farmers lost sales." },
+        { type: "note", html: card("More ways people push back", icons([["🇪🇺", "From 2027, the European Union will make battery companies check every step, mine to store, for abuses."], ["♻️", "Some companies switch to recycled cobalt."], ["🛒", "Some shoppers buy local or fair-trade, even when it costs more."]]) + `<span class="cite">EU Batteries Regulation (start delayed to August 2027) · Apple, 2026</span>`) },
+        { type: "q", id: "q7", std: "WH.42", label: "🔒 Exit check", short: "Exit: why people disagree", prompt: "Why do some people cheer globalization while others push back?", options: ["Its gains and its costs land on different groups", "Pushback comes only from countries that lost every deal", "People who push back never buy anything imported", "Its supporters gain nothing from it at all"], hint: "Think of shoppers and Newton workers. Same trade, different results.", why: "Shoppers and many workers in China gained. Newton workers and low-paid miners paid costs. So people disagree." }
+      ] }
+  ],
+  finale: {
+    title: "The Winners & Losers Board",
+    report: st => {
+      const f = st.fx, p = st.picks || {}, e = ending(st);
+      const mine = ["e1", "e2", "e3"].filter(k => p[k] != null).map(k => `<li>• ${EFFECT[k][p[k]]}</li>`).join("");
+      const shop = f.price <= 500 ? wl("w", "WON") : wl("l", "LOST");
+      const minr = f.miners >= 6 ? wl("w", "WON") : f.miners >= 3 ? wl("m", "SO-SO") : wl("l", "LOST");
+      const jobs = f.jobs >= 600 ? wl("w", "WON") : f.jobs >= 300 ? wl("m", "SO-SO") : wl("l", "LOST");
+      return `<div class="ending">${e.s}<p>${e.t}</p></div>
+        <div class="board"><div class="mine"><p><b>🎮 Your game (made up)</b></p><ul>
+          <li>${shop}🛒 Shoppers: phone costs <b>$${f.price}</b></li>
+          <li>${minr}⛏️ Miners: deal <b>${f.miners}/10</b></li>
+          <li>${jobs}🏭 U.S. workers: <b>${f.jobs.toLocaleString()}</b> jobs</li></ul>
+          <p><b>Your calls:</b></p><ul>${mine}</ul></div>
+        <div class="real"><p><b>🌍 The real world</b></p><ul>
+          <li>${wl("w", "WON")}🛒 Shoppers: batteries 99% cheaper since 1991</li>
+          <li>${wl("w", "WON")}🇨🇳 China: refines 78% of cobalt</li>
+          <li>${wl("m", "MIXED")}🇨🇩 Congo: economy +5.5%, workers $120–$150 a month</li>
+          <li>${wl("l", "LOST")}👷 Newton, Iowa: about 2,000 jobs gone</li>
+          <li>${wl("l", "LOST")}🌽 Iowa farmers: hit by China's soybean tariff</li></ul></div></div>
+        <div class="report"><p class="kicker" style="margin-top:8px">📝 Your memo to Dana</p>
+        <p>Answer both in 1–2 full sentences. <span class="src">Go deeper: in answer 2, say who would disagree with you and why.</span></p></div>`;
+    },
+    prompts: [
+      { id: "winlose", short: "One winner + one loser", label: "1. Name one group that <b>gained</b> and one group that <b>lost</b> from globalization. Use a real fact from today.", stem: "___ gained because ___. But ___ lost because ___.", min: 80,
+        mustAll: [["shopper", "consumer", "buyer", "customer", "people who buy", "china", "chinese", "refin", "compan", "apple", "whirlpool", "maytag", "mexic", "congo", "economy", "country", "countries"],
+          ["miner", "worker", "newton", "maytag", "farmer", "soybean", "child", "job", "congo", "employee", "kid"],
+          ["5.5", "120", "150", "520", "living wage", "78", "73", "3 of", "99", "9,200", "1991", "2,000", "2000", "2007", "1893", "newton", "maytag", "whirlpool", "million", "soybean", "1.46", "12 billion", "tariff", "2018", "2001", "wto", "800", "kolwezi", "child", "export", "quota", "$25", "$10", "refin", "cheaper", "mexico"]],
+        mustMsg: "In answer 1, name a group that gained (shoppers, China…) AND a group that lost (miners, Newton workers, Iowa farmers…), with one real fact from today (a number, a place, or a year)." },
+      { id: "pushback", short: "Push back or not?", label: "2. Pick one pushback from today: Congo's export limits, tariffs, or fair-cobalt rules. Is it a good idea? Give one gain and one cost.", stem: "I think ___ is a good / bad idea because ___. One cost is ___.", min: 80,
+        mustAll: [["export", "quota", "ban", "limit", "tariff", "fair", "rule", "recycl", "refin", "inspect", "check", "local", "europe", "eu "],
+          ["price", "cost", "job", "pay", "farmer", "soybean", "miner", "worker", "money", "cheap", "expens", "shopper", "wage", "sale", "sell", "earn"]],
+        mustMsg: "In answer 2, name the pushback (Congo's export limits, tariffs, or fair-cobalt rules) AND say what it does to prices, jobs, pay, or sales." }
+    ]
+  },
+  extraAnswers: st => ({
+    "Ending reached": ending(st).s.replace(/<[^>]+>/g, "").replace(/^\W+/u, "").trim(),
+    "Phone price at the end": "$" + st.fx.price + " (started at $500)",
+    "Miners' deal at the end": st.fx.miners + "/10 (started at 3)",
+    "U.S. jobs at the end": st.fx.jobs + " (started at 200)"
+  })
+});
+</script>
+</body></html>
