@@ -258,7 +258,8 @@ window.CLASS_ASSIGNMENTS = {
   "gov-u5-d3-very-big-branch-key": { course: "government", unit: 5, day: 3, turnIn: false, std: [], title: "Day 3 · A Very Big Branch Answer Key", path: "https://ed.icivics.org/resource-assets/lesson_plan/317985/assets/a_very_big_branch_answer_key.pdf" },
   "gov-u5-d3-executive-command": { course: "government", unit: 5, day: 3, turnIn: false, std: [], title: "Day 3 · Executive Command — iCivics Game", path: "https://ed.icivics.org/games/executive-command" },
   "gov-u5-d4-review": { course: "government", unit: 5, day: 4, turnIn: false, std: [], title: "Day 4 · Summative Review (Blooket)", path: "https://dashboard.blooket.com/set/6ac83efba124fe7811777ef9" },
-  "gov-u5-d4-summative": { course: "government", unit: 5, day: 4, turnIn: false, std: [], title: "Day 4 · Executive Summative", path: "https://linnmarcsd-my.sharepoint.com/:w/g/personal/fynnley_toppert_linnmar_k12_ia_us/IQCzCufjdG-FT7lgR_cdXoIEAcIqSvc7-LB8rbHBlK7eOIM?e=aTJ8tU" },
+  "gov-u5-d4-summative": { course: "government", unit: 5, day: 4, turnIn: false, std: [], title: "Day 4 · Summative (Form A)", path: "https://docs.google.com/document/d/16p7Ubx5837UwP_Em54IiJ22KNgkFup7YiaKaNptFXJw/edit" },
+  "gov-u5-d4-summative-key": { course: "government", unit: 5, day: 4, turnIn: false, std: [], title: "Day 4 · Summative Teacher Key", path: "https://docs.google.com/document/d/1yqdUXgLqraXwGceG1LL0AavIehOYcV_P7syh6fWQoPY/edit" },
 
   // ---- Civics (Iowa civics test prep) · Friday 1 ----
   "civics-test-s1-presentation":     { course: "civics", hideLink: true, unit: 1, title: "Founders' Files (Slides)", path: "civics/civics-test-s1-presentation/", std: ["SS.9-12.Gov.3", "SS.9-12.Gov.4"] },
