@@ -710,7 +710,15 @@ function homeBody(course, work) {
     const p = planFor(k), byDay = new Map();
     list.forEach(a => { const d = (spanOf(a) || [a.day])[0] || 0; if (!byDay.has(d)) byDay.set(d, []); byDay.get(d).push(a); });
     if (p && !byDay.has(p.days)) byDay.set(p.days, []);
-    const dayBlocks = [...byDay.keys()].sort((x, y) => (x || 999) - (y || 999)).map(d => {
+    // Kids never look ahead (Fynn, 2026-11-02): days the class hasn't reached yet stay hidden until they're taught.
+    // A day still shows if this student already turned something in from it, so their work never disappears.
+    const notYet = d => {
+      if (!d) return false;
+      if (k === nowKey && todayDay) return d > todayDay;
+      const iso = p ? dateOfDay(p, d) : "";
+      return !!iso && iso > nextClassIso;
+    };
+    const dayBlocks = [...byDay.keys()].filter(d => !notYet(d) || byDay.get(d).some(a => mine[a.id])).sort((x, y) => (x || 999) - (y || 999)).map(d => {
       const acts = byDay.get(d), ex = acts[0] || { day: d, unit: +k.split("|").pop() };
       const span = acts.map(spanOf).find(Boolean);
       const label = d ? (span ? `Days ${span[0]}–${span[1]}` : `Day ${d}`) : (course === "civics" ? "Friday" : "Other");
