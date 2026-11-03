@@ -36,6 +36,14 @@
     }
     lang = optIn && localStorage.getItem(KEY) !== "en" ? "es" : "en";
   } catch (e) {}
+  // SPANISH IS OFF SITE-WIDE (Fynn, 11/3/26: "nothing should be in Spanish"). Everything shows in English,
+  // no language switch appears, and any Chromebook that had Spanish on is switched back to English.
+  // To turn it back on someday, delete these lines.
+  const SPANISH_OFF = true;
+  if (SPANISH_OFF) {
+    lang = "en"; optIn = false;
+    try { [KEY, DEVICE, "site-lang-es-name"].forEach(k => localStorage.removeItem(k)); } catch (e) {}
+  }
 
   const htmlMap = new Map();   // normalized HTML  -> Spanish HTML
   const textMap = new Map();   // normalized text  -> Spanish text

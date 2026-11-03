@@ -454,7 +454,7 @@ async function drawNamePick(app) {
 async function drawHome(app) {
   const course = me.current, name = me.classes[course], first = name.split(" ")[0];
   const myClasses = Object.keys(COURSES).filter(k => me.classes[k]);
-  let spanish = false; try { spanish = course === "sociology" && name === localStorage.getItem("site-lang-es-name"); } catch (e) {}
+  let spanish = false; // Spanish is off site-wide (Fynn, 11/3/26)
   const testBar = testMode ? `<div class="testbar" role="note">🧪 <b>Test student mode.</b> You're seeing exactly what a student sees, as “${esc(TEST_NAME)}”. Your turn-ins show on your dashboard tagged TEST.
     <div class="previewrow"><span>Show me:</span><button class="pv" data-pv="real" aria-pressed="${preview === "real"}">My real test work</button><button class="pv" data-pv="caught" aria-pressed="${preview === "caught"}">A student who's all caught up</button><button class="linkbtn" id="testOff">Turn off test mode</button></div>
     ${preview === "caught" ? `<p class="pvnote">Pretend preview: the feedback below is a sample. Nothing is saved.</p>` : ""}</div>` : "";
