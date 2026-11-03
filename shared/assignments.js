@@ -399,6 +399,8 @@ window.CLASS_ASSIGNMENTS = {
   "ush-u4-d1-fight-segregation": { course: "us-history", unit: 4, day: 1, title: "Day 1 · The Case Against Segregation", path: "us-history/u4-d1-fight-segregation/", std: ["SS.9-12.US.42", "SS.9-12.US.43", "SS.9-12.US.44"] },
   "ush-u4-d2-nonviolence": { course: "us-history", unit: 4, day: 2, title: "Day 2 · The Nonviolence Strategy File", path: "us-history/u4-d2-nonviolence/", std: ["SS.9-12.US.42", "SS.9-12.US.43", "SS.9-12.US.44"] },
   "ush-u4-d3-who-else": { course: "us-history", unit: 4, day: 3, title: "Day 3 · Build the Exhibit: Who Else Fought?", path: "us-history/u4-d3-who-else/", std: ["SS.9-12.US.42", "SS.9-12.US.44"] },
+  "ush-u4-summative": { course: "us-history", unit: 4, day: 4, turnIn: false, std: [], title: "Day 4 · Summative (Form A)", path: "https://docs.google.com/document/d/1a-ErCvsfx2ARxEak96y3Pt1LifVyK0NWuAus9OWo9rU/edit" },
+  "ush-u4-summative-key": { course: "us-history", unit: 4, day: 4, turnIn: false, std: [], title: "Day 4 · Summative Teacher Key", path: "https://docs.google.com/document/d/1pKHn0HtOVu_y5lYWCngm-aX6c0Ko7YkxSw9BY8JzjtU/edit" },
   "ush-u5-d1-voters-change": { course: "us-history", unit: 5, day: 1, title: "Day 1 · Election Desk 1980", path: "us-history/u5-d1-voters-change/", std: ["SS.9-12.US.46", "SS.9-12.US.47", "SS.9-12.US.49"] },
   "ush-u5-d4-cold-war-ends": { course: "us-history", unit: 5, day: 3, title: "Day 3 · Who Ended the Cold War?", path: "us-history/u5-d4-cold-war-ends/", std: ["SS.9-12.US.48", "SS.9-12.US.49"] },
   "ush-u6-d1-superpower": { course: "us-history", unit: 6, day: 1, title: "Day 1 · Superpower Decision Desk", path: "us-history/u6-d1-superpower/", std: ["SS.9-12.US.52", "SS.9-12.US.53", "SS.9-12.US.55", "SS.9-12.US.56"] },
