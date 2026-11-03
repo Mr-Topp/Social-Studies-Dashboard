@@ -388,9 +388,9 @@ const TEACHER_TOOLS_URL = "https://script.google.com/macros/s/AKfycbwiVW6Cufw8Dq
     wrap.className = "fb-wrap"; wrap.setAttribute("role", "dialog"); wrap.setAttribute("aria-modal", "true"); wrap.setAttribute("aria-label", "Your feedback");
     wrap.innerHTML = `<div class="fb-card">${preview ? '<p class="fb-sub" style="background:#dbe8fb;color:#1c3f78;border-radius:8px;padding:4px 10px;font-weight:700">🧪 Teacher preview: this is the card students see when you grade their work. Sample feedback.</p>' : ""}<h2>Your feedback is ready</h2><p class="fb-sub">Read it, then fix it or keep going.</p>` +
       ready.map(x => {
-        const r = byToken.get(x.token) || {}, lvl = x.flagged ? "" : (x.level ? `<span class="fb-lvl fb-l${esc(x.level)}">Level ${esc(x.level)} of 4 · ${({ 1: "let's fix this", 2: "almost there", 3: "nice work", 4: "excellent" })[x.level] || ""}</span>` : "");
+        const r = byToken.get(x.token) || {}, lvl = "";   // no level numbers for students (grades live in PowerSchool)
         const msg = x.flagged ? "Your teacher wants to talk with you about this one." : (x.feedback || "Your teacher graded this one.");
-        const fix = !x.flagged && +x.level <= 2 && r.page ? `<a class="fb-fix" href="${esc(r.page)}" data-t="${esc(x.token)}">Fix it now</a>` : "";
+        const fix = !x.flagged && (x.fix || (+x.level > 0 && +x.level <= 2)) && r.page ? `<a class="fb-fix" href="${esc(r.page)}" data-t="${esc(x.token)}">Fix it now</a>` : "";
         return `<div class="fb-item"><b>${esc(x.title || r.title)}</b>${lvl}<p>${esc(msg)}</p><div class="fb-btns">${fix}<button class="fb-ok" data-t="${esc(x.token)}">Got it</button></div></div>`;
       }).join("") + `<button class="fb-ok fb-close" data-all="1">Got it, start today's work</button></div>`;
     document.body.appendChild(wrap);

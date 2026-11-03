@@ -169,11 +169,11 @@ footer a{color:var(--muted)}
 //  STUDENT HOME PAGE
 //  Each student picks their class and taps their name once. This Chromebook remembers it.
 //  They see only their own class: what to do next, what they're missing, what's coming up,
-//  and their grades with the teacher's feedback. Answer keys, tests, the teacher's Drive
+//  and the teacher's feedback tips (no grades: those are in PowerSchool). Answer keys, tests, the teacher's Drive
 //  alternatives, and teacher links are never shown here.
 //
 //  The list of activities comes from shared/assignments.js (same list as the teacher dashboard).
-//  Names and grades come from the Teacher Tools web app (shared/google-saver/TeacherTools.gs).
+//  Class progress and feedback come from the Teacher Tools web app (shared/google-saver/TeacherTools.gs).
 // =====================================================================
 const REG = window.CLASS_ASSIGNMENTS || {}, COURSES = window.CLASS_COURSES || {};
 const UNITS = window.CLASS_UNITS || {}, UNITS_P1 = window.CLASS_UNITS_PART1 || {};
@@ -205,10 +205,6 @@ function saveMe() {
 // One-time carry-over: a Chromebook already set to Spanish (before names left the code) keeps it for the student signed in.
 try { if (localStorage.getItem("site-lang-es-device") === "1" && !localStorage.getItem("site-lang-es-name") && localStorage.getItem("site-student-name")) localStorage.setItem("site-lang-es-name", localStorage.getItem("site-student-name")); } catch (e) {}
 let me = loadMe();
-// Each student's private 4-digit PIN (from the slip their teacher gives them). Kept on this Chromebook
-// with their name; "Change name" clears both.
-function pinFor(course) { return (me.pins && me.pins[course]) || ""; }
-function setPin(course, pin) { me.pins = me.pins || {}; if (pin) me.pins[course] = pin; else delete me.pins[course]; }
 
 // ---------- Teacher test student ----------
 // Open the page once with ?teacher-test on the end and this device becomes "Test T." in every class,
@@ -350,35 +346,26 @@ function currentUnit(course, keys, doneIds) {
 }
 const unitOrder = k => (k.startsWith("p1|") ? 0 : 1000) + (+k.split("|").pop() || 999);
 
-// ---------- Grades (same rules as the teacher dashboard) ----------
-const roundDown = x => Math.ceil(x - 0.5);
+// ---------- No grades here ----------
+// Students see grades in PowerSchool, not on this site (Fynn's decision, 2026-11-02). A turned-in activity just
+// shows "✓ Turned in", plus the teacher's feedback tip and a "Fix it" button when the work needs another try.
 function gradeOf(w) {
   if (!w) return null;
   if (w.exempt) return { exempt: true };
   if (w.cleared) return { cleared: true };
   if (w.flagged) return { talk: true };
-  const m = String(w.ft || "").match(/(\d+)\s*(?:of|\/)\s*(\d+)/);
-  const ft = m && +m[2] ? { right: +m[1], total: +m[2] } : null;
-  const pct = ft ? Math.round(ft.right / ft.total * 100) : null;
-  const auto = ft ? (pct >= 90 ? 3 : pct >= 70 ? 2 : 1) : null;
-  const written = +w.written || null;
-  if (!auto && !written) return { pending: true, ft };
-  const n = w.teacher && written ? written : roundDown([auto, written].filter(Boolean).reduce((a, b) => a + b, 0) / [auto, written].filter(Boolean).length);
-  return { n, ft, onTrack: n >= 3 && !written };
+  return { done: true, fix: !!w.fix };
 }
-const WORD = { 1: "Needs a redo", 2: "Almost there", 3: "Got it", 4: "Excellent" };
 function gradePill(g) {
   if (!g) return "";
   if (g.talk) return `<span class="pill p-talk">Talk with your teacher</span>`;
-  if (g.cleared) return `<span class="pill p-in">✓ Done</span>`;
   if (g.exempt) return `<span class="pill p-in">Exempt · you don't need to do this</span>`;
-  if (g.pending) return `<span class="pill p-in">✓ Turned in · grade coming soon</span>`;
-  return `<span class="pill p-l${g.n}">${g.onTrack ? "On track for Level 3" : "Level " + g.n + " · " + WORD[g.n]}</span>`;
+  return `<span class="pill p-in">✓ ${g.cleared ? "Done" : "Turned in"}</span>`;
 }
 
 // ---------- My work ----------
 // From the sheet when the Teacher Tools web app knows about student pages; otherwise from the
-// receipts this Chromebook kept when the student turned work in (grades still come from the sheet).
+// receipts this Chromebook kept when the student turned work in (feedback tips come from the sheet; no grades).
 function receipts() { try { return JSON.parse(localStorage.getItem("class-feedback-receipts")) || []; } catch (e) { return []; } }
 // Exempt work (EX on the teacher dashboard): "Exempt everyone" comes with the class info, one student's EX with their own work.
 async function loadWork(course, name) {
@@ -388,47 +375,24 @@ async function loadWork(course, name) {
   return w;
 }
 async function loadWork0(course, name) {
-  try {
-    const d = await tools({ action: "my_work", course, name, pin: pinFor(course) });
-    if (d.locked) throw Object.assign(new Error("locked"), { locked: true, classDone: d.classDone || [] });
-    const mine = {};
-    (d.items || []).forEach(w => { if (!mine[w.id] || String(w.at) > String(mine[w.id].at)) mine[w.id] = w; });
-    return { mine, classDone: new Set(d.classDone || []), full: true, exempt: d.exempt || [], paper: d.paper || {} };
-  } catch (e) { var lockedOut = !!(e && e.locked), classIds = (e && e.classDone) || []; /* fall back to this Chromebook */ }
+  // Which activities the class has turned in (ids only, no names) drives the to-do. What THIS student turned in
+  // comes from the receipts kept on this Chromebook; nothing about one student is ever looked up.
+  let classIds = null;
+  try { const d = await tools({ action: "my_work", course, name }); classIds = d.classDone || []; } catch (e) {}
   const mine = {};
-  // Only this student's own turn-ins on this Chromebook (Chromebooks get shared).
   const list = receipts().filter(r => REG[r.id] && REG[r.id].course === course && (!r.who || r.who.toLowerCase() === String(name || "").toLowerCase()));
-  list.forEach(r => { if (!mine[r.id] || r.at > mine[r.id].atMs) mine[r.id] = { id: r.id, atMs: r.at, ft: r.ft || "", token: r.token }; });
+  list.forEach(r => { if (!mine[r.id] || r.at > mine[r.id].atMs) mine[r.id] = { id: r.id, atMs: r.at, token: r.token }; });
   const tokens = Object.values(mine).map(w => w.token).filter(Boolean);
   if (tokens.length) {
     try {
       const d = await tools({ action: "feedback", tokens });
       const by = new Map((d.items || []).map(x => [x.token, x]));
       const me_ = String(name || "").toLowerCase();
-      Object.values(mine).forEach(w => { const x = by.get(w.token); if (x && x.graded && String(x.who || "").toLowerCase() === me_) { w.flagged = x.flagged; w.feedback = x.feedback; if (!x.flagged) w.written = +x.level; } });
+      Object.values(mine).forEach(w => { const x = by.get(w.token); if (x && x.graded && String(x.who || "").toLowerCase() === me_) { w.flagged = x.flagged; w.feedback = x.feedback; w.fix = !x.flagged && (x.fix || (+x.level > 0 && +x.level <= 2)); } });
     } catch (e) {}
   }
-  // Without a PIN: the class's done list (activity ids only) still drives the to-do; grades come only from this Chromebook.
-  if (lockedOut) return { mine, classDone: new Set([...classIds, ...Object.keys(mine)]), full: true, needPin: true };
+  if (classIds) return { mine, classDone: new Set([...classIds, ...Object.keys(mine)]), full: true };
   return { mine, classDone: new Set(Object.keys(mine)), full: false };
-}
-
-// One Chromebook gets 5 wrong PINs, then waits a minute. This keeps one kid mashing numbers from
-// tripping the class-wide lock in Teacher Tools (15 wrong in 15 minutes pauses PINs for everyone).
-const PIN_WAIT = "hub-pin-wait";
-function pinWaitLeft() { try { const w = JSON.parse(localStorage.getItem(PIN_WAIT)) || {}; return w.until && w.until > Date.now() ? Math.ceil((w.until - Date.now()) / 1000) : 0; } catch (e) { return 0; } }
-function pinMiss() { try { const w = JSON.parse(localStorage.getItem(PIN_WAIT)) || {}; const n = (w.until && w.until < Date.now() ? 0 : (w.n || 0)) + 1; localStorage.setItem(PIN_WAIT, JSON.stringify(n >= 5 ? { n: 0, until: Date.now() + 60000 } : { n })); } catch (e) {} }
-function pinHit() { try { localStorage.removeItem(PIN_WAIT); } catch (e) {} }
-async function checkPin(course, pin) {
-  const left = pinWaitLeft();
-  if (left) throw new Error("Too many wrong tries. Wait " + left + " seconds, then check your slip.");
-  try { const d = await tools({ action: "pin_login", course, pin }); pinHit(); return d; }
-  catch (e) { if (/didn't match/.test(e.message)) pinMiss(); throw e; }
-}
-function pinBar() {
-  return `<div class="box" style="margin:0 0 14px"><b>🔒 Type your PIN to see your grades.</b> It's the 4 numbers on the slip from your teacher.
-    <div class="typerow" style="margin-top:8px"><input id="homePin" inputmode="numeric" pattern="[0-9]*" maxlength="7" autocomplete="off" aria-label="Your 4-number PIN" placeholder="PIN" style="max-width:7em;text-align:center;letter-spacing:.2em"><button class="go" id="homePinGo">Show my grades</button></div>
-    <p class="err" id="homePinSt" role="alert"></p></div>`;
 }
 
 // ---------- Screens ----------
@@ -461,47 +425,30 @@ function drawClassPick(app) {
 
 async function drawNamePick(app) {
   const c = pickCourse;
+  const known = Object.values(me.classes)[0] || "";
   app.innerHTML = `<section class="pick">
-    <p class="eyebrow">${esc(COURSES[c])}</p><h1>Type your PIN</h1>
-    <p class="sub">It's the 4 numbers on the slip from your teacher.</p>
-    <div id="names"><div class="typerow"><input id="pinBox" inputmode="numeric" pattern="[0-9]*" maxlength="7" autocomplete="off" aria-label="Your 4-number PIN" placeholder="1 2 3 4" style="font-size:1.6rem;letter-spacing:.3em;max-width:9em;text-align:center"><button class="go" id="pinGo">Go</button></div>
-      <p style="margin:12px 0 0"><button class="linkbtn" id="noPin">I don't have my PIN</button></p><div id="typeWrap" hidden></div></div>
+    <p class="eyebrow">${esc(COURSES[c])}</p><h1>Type your name</h1>
+    <p class="sub">Your first name and the first letter of your last name.</p>
+    <div id="names"><div class="typerow"><input id="typed" aria-label="Your first name and last initial" placeholder="Like Jordan M." autocomplete="off" value="${esc(known)}"><button class="go" id="useTyped">That's me</button></div></div>
     <p class="err" id="err" role="alert"></p>
     <p class="backrow"><button class="linkbtn" id="back">← Pick a different class</button></p>
   </section>${footer()}`;
   $("back").onclick = () => { screen = "class"; draw(); };
-  const choose = (n, pin) => { me.classes[c] = n; setPin(c, pin); me.current = c; saveMe(); screen = "home"; draw(); };
-  // One quick check so a mistyped PIN doesn't open someone else's page.
-  const confirmName = (n, pin) => {
+  const choose = n => { me.classes[c] = n; me.current = c; saveMe(); screen = "home"; draw(); };
+  const confirmName = n => {
     $("names").innerHTML = `<div class="box"><h2 style="font-size:1.4rem">Are you ${esc(n)}?</h2><div class="typerow"><button class="go" id="yesMe">Yes, that's me</button><button class="light" id="noMe">No, go back</button></div></div>`;
-    $("yesMe").onclick = () => choose(n, pin);
+    $("yesMe").onclick = () => choose(n);
     $("noMe").onclick = () => drawNamePick(app);
     $("yesMe").focus();
   };
-  const tryPin = async () => {
-    const pin = $("pinBox").value.replace(/\D/g, "");
-    if (pin.length !== 4) { $("err").textContent = "Your PIN is 4 numbers. Check your slip."; $("pinBox").focus(); return; }
-    $("pinGo").disabled = true; $("err").textContent = "";
-    try { const d = await checkPin(c, pin); confirmName(shortName(d.name), pin); }
-    catch (e) { $("err").textContent = /fetch|network|no tools/i.test(e.message) ? "Couldn't connect. Try again in a minute." : e.message; $("pinGo").disabled = false; $("pinBox").select(); }
+  const useTyped = () => {
+    const n = shortName($("typed").value);
+    if (!/ [A-Z]\.$/.test(n)) { $("err").textContent = n ? "Add the first letter of your last name. Example: " + n.split(" ")[0] + " M." : "Type your name first. Example: Jordan M."; $("typed").focus(); return; }
+    confirmName(n);
   };
-  $("pinGo").onclick = tryPin;
-  $("pinBox").onkeydown = e => { if (e.key === "Enter") tryPin(); };
-  // No PIN yet: type your name to see your activities. Grades show once you have your PIN.
-  $("noPin").onclick = () => {
-    const known = Object.values(me.classes)[0] || "";
-    $("typeWrap").hidden = false;
-    $("typeWrap").innerHTML = `<p class="muted">Type your first name and the first letter of your last name. You'll see your activities now, and your grades once you get your PIN.</p><div class="typerow"><input id="typed" aria-label="Your first name and last initial" placeholder="First name + last initial, like Jordan M." autocomplete="off" value="${esc(known)}"><button class="go" id="useTyped">That's me</button></div>`;
-    const useTyped = () => {
-      const n = shortName($("typed").value);
-      if (!/ [A-Z]\.$/.test(n)) { $("err").textContent = n ? "Add the first letter of your last name. Example: " + n.split(" ")[0] + " M." : "Type your name first. Example: Jordan M."; $("typed").focus(); return; }
-      confirmName(n, "");
-    };
-    $("useTyped").onclick = useTyped;
-    $("typed").onkeydown = e => { if (e.key === "Enter") useTyped(); };
-    $("typed").focus();
-  };
-  $("pinBox").focus();
+  $("useTyped").onclick = useTyped;
+  $("typed").onkeydown = e => { if (e.key === "Enter") { e.preventDefault(); useTyped(); } };
+  $("typed").focus();
 }
 
 async function drawHome(app) {
@@ -510,7 +457,7 @@ async function drawHome(app) {
   let spanish = false; try { spanish = course === "sociology" && name === localStorage.getItem("site-lang-es-name"); } catch (e) {}
   const testBar = testMode ? `<div class="testbar" role="note">🧪 <b>Test student mode.</b> You're seeing exactly what a student sees, as “${esc(TEST_NAME)}”. Your turn-ins show on your dashboard tagged TEST.
     <div class="previewrow"><span>Show me:</span><button class="pv" data-pv="real" aria-pressed="${preview === "real"}">My real test work</button><button class="pv" data-pv="caught" aria-pressed="${preview === "caught"}">A student who's all caught up</button><button class="linkbtn" id="testOff">Turn off test mode</button></div>
-    ${preview === "caught" ? `<p class="pvnote">Pretend preview: grades and feedback below are samples. Nothing is saved.</p>` : ""}</div>` : "";
+    ${preview === "caught" ? `<p class="pvnote">Pretend preview: the feedback below is a sample. Nothing is saved.</p>` : ""}</div>` : "";
   app.innerHTML = testBar + `<div class="top">
       <div><p class="eyebrow">${esc(COURSES[course])}</p><h1>Hi, ${esc(first)}! 👋</h1></div>
       <div class="who">${spanish ? `<a class="btn es" href="sociology/espanol/">Ver en español →</a>` : ""}${testMode ? "" : `<span class="muted">Not ${esc(name)}?</span><button class="linkbtn" id="notMe">Change name</button>`}</div>
@@ -532,7 +479,7 @@ async function drawHome(app) {
   $("addClass").onclick = () => { screen = "class"; draw(); };
   $("notMe").onclick = () => {
     if (!confirm("Not " + name + "? This clears " + first + "'s name from this Chromebook so you can pick yours.")) return;
-    me = { classes: {}, current: "", pins: {} };
+    me = { classes: {}, current: "" };
     try { localStorage.removeItem(ME_KEY); localStorage.removeItem("site-student-name"); } catch (e) {}
     screen = "class"; draw();
   };
@@ -542,20 +489,7 @@ async function showWork(course, name) {
   const [work] = await Promise.all([loadWork(course, name), addTeacherLinks(course)]);
   if (me.current !== course || screen !== "home") return;
   if (testMode && preview === "caught") work.preview = true;
-  $("body").innerHTML = (work.needPin && !testMode ? pinBar() : "") + homeBody(course, work);
-  if ($("homePinGo")) {
-    const go = async () => {
-      const pin = $("homePin").value.replace(/\D/g, ""), st = $("homePinSt");
-      if (pin.length !== 4) { st.textContent = "Your PIN is 4 numbers."; return; }
-      $("homePinGo").disabled = true; st.textContent = "";
-      try {
-        const d = await checkPin(course, pin), n = shortName(d.name);
-        if (n !== name && !confirm("That PIN is for " + n + ". Are you " + n + "?")) { $("homePinGo").disabled = false; return; }
-        me.classes[course] = n; setPin(course, pin); saveMe(); draw();
-      } catch (e) { st.textContent = /fetch|network|no tools/i.test(e.message) ? "Couldn't connect. Try again in a minute." : e.message; $("homePinGo").disabled = false; }
-    };
-    $("homePinGo").onclick = go; $("homePin").onkeydown = e => { if (e.key === "Enter") go(); };
-  }
+  $("body").innerHTML = homeBody(course, work);
   if (testMode) previewFeedback(course);
   $("body").querySelectorAll("details.unit").forEach(d => d.addEventListener("toggle", () => { openUnits[course + "|" + d.dataset.k] = d.open; }));
   const all = $("body").querySelector("details.allwork"); if (all) all.addEventListener("toggle", () => { allOpen[course] = all.open; });
@@ -589,8 +523,8 @@ function previewFeedback(course) {
   const acts = studentItems(course).filter(isOnline).sort((a, b) => (a.unit || 0) - (b.unit || 0) || (a.day || 0) - (b.day || 0)).slice(0, 2);
   if (!acts.length || !window.classFeedbackPreview) return;
   const SAMPLES = [
-    { level: "2", feedback: "You named the main idea. Add one specific detail from the lesson to explain why." },
-    { level: "3", feedback: "Nice work. You explained it clearly and backed it up with a real example." }
+    { fix: true, feedback: "You named the main idea. Add one specific detail from the lesson to explain why." },
+    { fix: false, feedback: "Nice work. You explained it clearly and backed it up with a real example." }
   ];
   setTimeout(() => window.classFeedbackPreview(acts.map((a, i) => Object.assign({ token: "preview-" + a.id, title: a.title, page: a.path, graded: true, flagged: false }, SAMPLES[i % 2]))), 300);
 }
@@ -648,7 +582,7 @@ function homeBody(course, work) {
   // Paper work the teacher marked M (missing) counts as missing too. Exempt paper work never shows as missing.
   const missing = sortItems(due.filter(a => !mine[a.id]).concat(items.filter(a => !isOnline(a) && paperOf(a) && paperOf(a).mark === "M" && !exempt.has(a.paperId))));
   const turnedIn = online.filter(a => mine[a.id]);
-  const fix = sortItems(turnedIn.filter(a => { const g = gradeOf(mine[a.id]); return g && g.n && g.n <= 2; }));
+  const fix = sortItems(turnedIn.filter(a => { const g = gradeOf(mine[a.id]); return g && g.fix; }));
   const ahead = sortItems(online.filter(a => !isDue(a) && !mine[a.id] && unitOrder(unitKey(a)) === nowOrder));
   const todays = ahead.filter(isToday);
   const href = a => esc(a.path);
@@ -718,7 +652,7 @@ function homeBody(course, work) {
     // Near a test, the test card already lists what to redo, so don't repeat it here.
     const tc = (CAL[course] || {})[nowKey.split("|").pop()], td = !nowKey.startsWith("p1|") && tc && tc.summative;
     const nearTest = td && td >= todayIso && classDaysBetween(todayIso, td) <= 2;
-    const fixRow = fix.length && !nearTest ? `<div class="qlabel">Optional: raise your grade</div>${fix.map(a => quick(a, "Fix it")).join("")}` : "";
+    const fixRow = fix.length && !nearTest ? `<div class="qlabel">Optional: fix these up</div>${fix.map(a => quick(a, "Fix it")).join("")}` : "";
     status = `<section class="status done" aria-label="What to do"><div class="shead"><h2>${welcome ? "Welcome back! " : ""}You're all caught up! 🎉</h2>${readBtn}</div><p>${todays.length ? (classToday ? "Nothing missing. Here's today's work:" : "Nothing missing. Here's what's next:") : due.length ? "You've turned in everything so far." : "Nothing is due yet."}</p>${todayRow}${fixRow}</section>`;
   }
   const cal = (CAL[course] || {})[nowKey.split("|").pop()];
@@ -752,13 +686,13 @@ function homeBody(course, work) {
       return `<div class="row lite"><div class="info"><div class="day">Paper</div><div class="title">📄 ${esc(cleanTitle(a.title))}</div></div><div class="act"><span class="pill ${later ? "p-wait\">Coming up" : isToday(a) ? "p-in\">" + (classToday ? "Today · in class" : "Next class · in class") : "p-class\">Missed it? Get it from your teacher"}</span></div></div>`;
     }
     if (!on) { pill = later ? `<span class="pill p-wait">Coming up</span>` : isToday(a) ? `<span class="pill p-in">${classToday ? "Today · in class" : "Next class · in class"}</span>` : `<span class="pill p-class">Done in class</span>`; }
-    else if (w) { pill = gradePill(g); btn = g && g.exempt ? "Open" : g && g.n && g.n <= 2 ? "Fix it" : "Look again"; }
+    else if (w) { pill = gradePill(g); btn = g && g.exempt ? "Open" : g && g.fix ? "Fix it" : "Look again"; }
     else if (isDue(a)) { pill = `<span class="pill p-miss">Missing</span>`; btn = "Start"; }
     else if (isToday(a)) { pill = `<span class="pill p-in">${classToday ? "Today" : "Next class"}</span>`; btn = "Start"; }
     else { pill = `<span class="pill p-wait">Coming up</span>`; btn = "Look ahead"; }
     const ft = g && g.ft ? `<div class="ft">${g.ft.right} of ${g.ft.total} right on the first try</div>` : "";
     const fb = w && (w.feedback || (g && g.talk)) ? `<p class="fb"><b>Feedback:</b> ${esc(g && g.talk ? "Your teacher wants to talk with you about this one." : w.feedback)}</p>` : "";
-    const strong = on && (!w && (isDue(a) || isToday(a)) || (g && g.n && g.n <= 2));
+    const strong = on && (!w && (isDue(a) || isToday(a)) || (g && g.fix));
     return `<div class="row${on ? "" : " lite"}"><div class="info">${kw || on ? `<div class="day">${esc(kw || "Online")}</div>` : ""}<div class="title">${esc(cleanTitle(a.title))}</div>${ft}${fb}</div>
       <div class="act">${pill}<a class="btn open${strong ? "" : " soft"}" href="${href(a)}"${ext(a)}>${btn}${/^https?:/.test(a.path) ? " ↗" : ""}</a></div></div>`;
   };
@@ -792,7 +726,7 @@ function homeBody(course, work) {
     return `<section class="unitflat"><h3>${esc(unitLabel(course, k))}${isNow ? ` <span class="now">NOW</span>` : ""}<span class="count">${countTxt}${past && on.length && got === on.length ? " ✓" : ""}</span></h3>${dayBlocks}</section>`;
   }).join("");
 
-  return goalCard + (testCard ? testCard + status : status + testLine) + `<details class="allwork"${allOpen[course] ? " open" : ""}><summary>📋 My grades and all my ${esc(COURSES[course])} work</summary><div class="allinner">${units}</div></details>`;
+  return goalCard + (testCard ? testCard + status : status + testLine) + `<details class="allwork"${allOpen[course] ? " open" : ""}><summary>📋 All my ${esc(COURSES[course])} work</summary><div class="allinner">${units}</div></details>`;
 }
 const allOpen = {};
 

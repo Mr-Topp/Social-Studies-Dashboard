@@ -22,3 +22,14 @@ If you think the calendar doesn't fit, tell Fynn and ask with multiple-choice op
 Fynn often has more than one chat working on this site at the same time. Before changing anything shared
 (`shared/assignments.js`, `shared/turnin.js`, `index.html`, `teacher-submissions/`), pull first, read the latest
 commits, and don't undo another chat's work unless Fynn says to.
+
+## Locked: no grades and no student lookups on the student site (Fynn decided 2026-11-02)
+
+Students see their grades in **PowerSchool**, not here. Fynn chose "no grades, no PINs."
+- The student home page and activities never show levels, scores, first-try scores, or paper grades. A turned-in
+  activity shows "✓ Turned in", the teacher's feedback tip, and a "Fix it" button when the work needs another try.
+- Teacher Tools never sends anything about one student to the public site: no class lists (students type their
+  name), no per-student grades, exemptions or work lists. `my_work` only returns which activities the class has
+  turned in (ids, no names). Feedback cards are reached only with the private receipt kept on the student's Chromebook.
+- Never write a student's name, language status, background, or accommodations into any file here. This site is public.
+- Grades, paper grades and EX stay on the teacher dashboard, behind the teacher code.

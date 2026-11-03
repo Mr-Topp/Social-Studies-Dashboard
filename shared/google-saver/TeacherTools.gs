@@ -5,9 +5,8 @@
  * and (4) feeds each student's own home page (their class list name + their own grades and what's missing),
  * and (5) saves links you add from the dashboard's To-do tab to fill in a lesson day that isn't made yet,
  * and (7) saves paper grades you type on the dashboard (paper columns, 1-4 / EX exempt / M missing) and "exempt everyone",
- * and (6) makes each student's private 4-digit PIN (printed on slips from the dashboard). A student needs their PIN
- * to see their own grades, and class lists are never sent to the public site.
- * Wrong teacher codes and wrong PINs are limited, so nobody can sit and guess.
+ * Students never see grades on the site (they use PowerSchool), so nothing about one student is ever sent out:
+ * no grades, no class lists. Wrong teacher codes are limited, so nobody can sit and guess.
  * It edits the "Class Turn-ins" Google Sheet. It does not replace or touch the turn-in saver script.
  *
  * SETUP (one time, about 5 minutes) — also shown step by step at teacher-submissions/setup-teacher-tools.html
@@ -40,8 +39,7 @@ function doPost(e) {
     if (body.action === "class_list") return json(classList(body));
     if (body.action === "my_work") return json(myWork(body));
     // Lets the update page check which version is running. Shares nothing.
-    if (body.action === "pin_login") return json(pinLogin(body));
-    if (body.action === "version") return json({ ok: true, version: 6, can: ["links", "student-links", "pins", "paper", "paper-student"] });
+    if (body.action === "version") return json({ ok: true, version: 7, can: ["links", "student-links", "paper", "no-grades"] });
   } catch (err) { return json({ ok: false, error: "Try again later." }); }
   var check = codeCheck(body.code);
   if (check === "locked") return json({ ok: false, error: "Too many wrong teacher codes. Wait 15 minutes, then try again." });
@@ -51,7 +49,6 @@ function doPost(e) {
     if (body.action === "set_grade") return json(setGrade(body));
     if (body.action === "set_roster") return json(setRoster(body));
     if (body.action === "set_link") return json(setLink(body));
-    if (body.action === "pins") return json(makePins(body));
     if (body.action === "paper_task") return json(setPaperTask(body));
     if (body.action === "marks") return json(setMarks(body));
     if (body.action === "col_exempt") return json(setColExempt(body));
@@ -101,7 +98,6 @@ function setRoster(b) {
   if (COURSES.indexOf(course) < 0) return { ok: false, error: "Unknown class." };
   var names = (b.students || []).map(function (n) { return clean(n, 40); }).filter(function (n) { return n; });
   if (names.length > 60) return { ok: false, error: "That list is too long." };
-  var pins = pinsFor(names, courseRows(course).pins);
   withLock(function (sh) {
     var c = cols(sh.getRange(1, 1, 1, sh.getLastColumn()).getValues()[0]);
     var row = new Array(Object.keys(c).length).fill("");
@@ -110,10 +106,10 @@ function setRoster(b) {
     set("Key", "roster|" + course + "|" + now);
     set("Turned in", now); set("Student", "Teacher"); set("Class", course);
     set("Activity ID", "class-roster"); set("Activity", "Class list"); set("Kind", "roster");
-    set("Source", "teacher"); set("Answers", JSON.stringify({ students: names, pins: pins }));
+    set("Source", "teacher"); set("Answers", JSON.stringify({ students: names }));
     sh.appendRow(row);
   });
-  return { ok: true, count: names.length, pins: pins };
+  return { ok: true, count: names.length };
 }
 
 // ---------- Links from the To-do tab ----------
@@ -248,7 +244,8 @@ function feedback(b) {
       var level = t || (/^[1-4]$/.test(String(a["AI level"] || "")) ? String(a["AI level"]) : "");
       var flagged = !t && !!a["AI flag"];
       var fb = t ? (a["Teacher note"] ? String(a["Teacher note"]) : String(a["AI student feedback"] || "")) : String(a["AI student feedback"] || "");
-      items.push({ token: tokens[k], who: shortName(data[i][c["Student"]]), title: String(data[i][c["Activity"]] || ""), graded: !!level, level: flagged ? "" : level, flagged: flagged, feedback: flagged ? "" : fb });
+            // No level number goes to students. "fix" only says whether to offer the Fix it button (level 1 or 2).
+      items.push({ token: tokens[k], who: shortName(data[i][c["Student"]]), title: String(data[i][c["Activity"]] || ""), graded: !!level, fix: !flagged && +level <= 2, flagged: flagged, feedback: flagged ? "" : fb });
       break;
     }
   }
@@ -329,86 +326,21 @@ function classList(b) {
   var links = Object.keys(d.links).map(function (k) { return d.links[k]; }).filter(function (l) {
     return !l.removed && /^https:\/\//i.test(String(l.url || "")) && !/answer key|teacher key|summative/i.test(String(l.title || ""));
   }).map(function (l) { return { id: String(l.id), part: +l.part === 1 ? 1 : 2, unit: +l.unit || 0, day: +l.day || 0, title: String(l.title), url: String(l.url) }; });
-  // Names are NOT sent: students sign in with their PIN (pin_login), so no class list is ever public.
-  return { ok: true, names: [], links: links, pins: true, exemptAll: d.exemptAll, paperCols: d.paperCols };
+  // Names are NOT sent, so no class list is ever public. Students type their own name.
+  return { ok: true, names: [], links: links, exemptAll: d.exemptAll, paperCols: d.paperCols };
 }
 function myWork(b) {
+  // Students see grades in PowerSchool, not here (Fynn's decision, 2026-11-02). So this never looks up one student:
+  // it only says which activities the class has turned in (ids, no names) and class-wide exemptions.
   var course = String(b.course || "");
   if (COURSES.indexOf(course) < 0) return { ok: false, error: "Unknown class." };
-  var me = shortName(clean(b.name, 40));
-  if (!/ [A-Z]\.$/.test(me)) return { ok: false, error: "Pick your name first." };
-  var d = courseRows(course), myFirst = firstKey(me), myInit = initialOf(me);
-  var classDone = {}; d.rows.forEach(function (r) { classDone[r.id] = true; });
-  // Grades only with the student's own PIN. Without it: just which activities the class has done (ids, no names).
-  if (pinState(course) === "locked") return { ok: true, name: me, items: [], classDone: Object.keys(classDone), locked: true, tooMany: true };
-  if (!d.pins[me] || String(b.pin || "") !== d.pins[me]) {
-    if (b.pin) pinFail(course);
-    return { ok: true, name: me, items: [], classDone: Object.keys(classDone), locked: true };
-  }
-  // Same rule as the teacher dashboard: "Kai" with no last initial counts as "Kai S." when Kai S. is the only Kai.
-  var pool = d.roster.length ? d.roster : [me];
-  var sameFirst = pool.filter(function (n) { return firstKey(n) === myFirst; });
-  var noInitialIsMe = sameFirst.length === 1 && sameFirst[0] === me;
-  var done = {}, items = [];
-  d.rows.forEach(function (r) {
-    done[r.id] = true;
-    var f = firstKey(r.name), ini = initialOf(r.name);
-    if (f !== myFirst || !(ini === myInit || (!ini && noInitialIsMe))) return;
-    var a = r.a, t = /^[1-4]$/.test(String(a["Teacher level"] || "")) ? +a["Teacher level"] : 0;
-    var ai = /^[1-4]$/.test(String(a["AI level"] || "")) ? +a["AI level"] : 0;
-    var flagged = !t && !!a["AI flag"];
-    var fb = t ? String(a["Teacher note"] || a["AI student feedback"] || "") : String(a["AI student feedback"] || "");
-    items.push({ id: r.id, at: r.at, ft: String(a["First-try correct"] || ""), written: flagged ? 0 : (t || ai), teacher: !!t,
-                 flagged: flagged, feedback: flagged ? "" : fb.slice(0, 600) });
-  });
-  // Activities you exempted just this student from (EX on the dashboard).
-  var myEx = Object.keys(d.exempt).filter(function (k) { return d.exempt[k] && k.slice(k.indexOf("|") + 1) === me; }).map(function (k) { return k.slice(0, k.indexOf("|")); });
-  // This student's own paper grades (level 1-4, or M = missing). Only with their PIN, like everything above.
-  var paper = {};
-  Object.keys(d.marks).forEach(function (k) {
-    var i = k.indexOf("|"); if (k.slice(i + 1) !== me || !/^paper-/.test(k.slice(0, i))) return;
-    var a = d.marks[k], lv = /^[1-4]$/.test(String(a["Teacher level"] || "")) ? +a["Teacher level"] : 0;
-    if (lv || a.Mark === "M") paper[k.slice(0, i)] = { level: lv, mark: lv ? "" : "M" };
-  });
-  return { ok: true, name: me, items: items, classDone: Object.keys(done), exempt: myEx, exemptAll: d.exemptAll, paper: paper };
+  var d = courseRows(course), done = {};
+  d.rows.forEach(function (r) { done[r.id] = true; });
+  return { ok: true, items: [], classDone: Object.keys(done), exemptAll: d.exemptAll || {}, noGrades: true };
 }
 
-// ---------- Student PINs ----------
-// Each student on the newest class list gets a private 4-digit PIN, kept in that class-list row of the sheet.
-// pin_login: class + PIN -> that student's name. Wrong PINs are counted per class; after 15 wrong tries in
-// 15 minutes the class pauses PIN checks for 15 minutes (students get "wait a few minutes"), so nobody can guess.
-var PIN_LIMIT = 15, CODE_LIMIT = 10, LOCK_SECS = 900;
-function pinsFor(names, old) {
-  var used = {}, out = {};
-  names.forEach(function (n) { var k = shortName(n); if (old[k] && !used[old[k]]) { out[k] = old[k]; used[old[k]] = true; } });
-  names.forEach(function (n) {
-    var k = shortName(n); if (out[k]) return;
-    var p; do { p = String(1000 + Math.floor(Math.random() * 9000)); } while (used[p] || /^(\d)\1{3}$/.test(p) || p === "1234");
-    out[k] = p; used[p] = true;
-  });
-  return out;
-}
-function makePins(b) {
-  var course = String(b.course || "");
-  if (COURSES.indexOf(course) < 0) return { ok: false, error: "Unknown class." };
-  var d = courseRows(course);
-  if (!d.roster.length) return { ok: false, error: "Add a class list first (Edit class list)." };
-  var missing = d.roster.some(function (n) { return !d.pins[n]; });
-  if (!missing) return { ok: true, pins: d.pins };
-  return setRoster({ course: course, students: d.roster });   // same list, now with a PIN for everyone
-}
-function pinState(course) { var n = Number(CacheService.getScriptCache().get("pinfail:" + course) || 0); return n >= PIN_LIMIT ? "locked" : "ok"; }
-function pinFail(course) { var cache = CacheService.getScriptCache(), k = "pinfail:" + course; cache.put(k, String(Number(cache.get(k) || 0) + 1), LOCK_SECS); }
-function pinLogin(b) {
-  var course = String(b.course || ""), pin = String(b.pin || "").trim();
-  if (COURSES.indexOf(course) < 0) return { ok: false, error: "Unknown class." };
-  if (pinState(course) === "locked") return { ok: false, error: "Too many tries. Wait a few minutes, then try again." };
-  if (!/^\d{4}$/.test(pin)) return { ok: false, error: "Your PIN is 4 numbers. Check your slip." };
-  var d = courseRows(course), name = "";
-  Object.keys(d.pins).forEach(function (n) { if (d.pins[n] === pin && d.roster.indexOf(n) >= 0) name = n; });
-  if (!name) { pinFail(course); return { ok: false, error: "That PIN didn't match. Check your slip or ask your teacher." }; }
-  return { ok: true, name: name };
-}
+// Wrong-code limits (see codeCheck below).
+var CODE_LIMIT = 10, LOCK_SECS = 900;
 
 // ---------- Helpers ----------
 function sheet() { return SpreadsheetApp.openById(SPREADSHEET_ID).getSheetByName(SHEET_NAME); }

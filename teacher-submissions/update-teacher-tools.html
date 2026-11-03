@@ -34,7 +34,7 @@ kbd{background:#fff;border:1px solid #cfc5b3;border-bottom-width:2px;border-radi
 <main>
 <p class="eyebrow">Teacher dashboard · quick update</p>
 <h1>Update your Teacher Tools</h1>
-<p class="lead">This turns on <b>paper grades</b>, <b>exempt (EX)</b>, and lets students see their paper grades on their home page. About 2 minutes. Use your <b>school</b> Google account.</p>
+<p class="lead">This turns on <b>paper grades</b> and <b>exempt (EX)</b> on your dashboard, and makes sure students never see grades on the site (they use PowerSchool). About 2 minutes. Use your <b>school</b> Google account.</p>
 <ol>
   <li id="s1"><b>Copy the new script.</b><br><button class="btn" id="copyBtn">Copy the script</button><span class="st" id="copySt" aria-live="polite"></span></li>
   <li id="s2"><b>Open your Teacher Tools script.</b><br>
@@ -55,7 +55,7 @@ $("copyBtn").onclick = async () => {
   const st = $("copySt");
   try {
     const code = await fetch("../shared/google-saver/TeacherTools.gs", { cache: "no-store" }).then(r => { if (!r.ok) throw 0; return r.text(); });
-    if (!/pin_login/.test(code) || !/set_link/.test(code) || !/paperCols/.test(code)) throw 0;
+    if (!/no-grades/.test(code) || !/set_link/.test(code) || !/paperCols/.test(code)) throw 0;
     await navigator.clipboard.writeText(code);
     st.className = "st ok"; st.textContent = "Copied! Now do step 2.";
     $("s1").classList.add("done");
@@ -68,7 +68,7 @@ $("checkBtn").onclick = async () => {
   out.className = "st"; out.textContent = "Checking…";
   try {
     const ver = await fetch(URL_, { method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify({ action: "version" }) }).then(r => r.json()).catch(() => ({}));
-    if (!(ver.ok && (ver.can || []).includes("paper-student"))) {
+    if (!(ver.ok && (ver.can || []).includes("no-grades"))) {
       out.className = "st bad";
       out.innerHTML = "Not updated yet. Google is still running the old version. Redo step 4 and make sure you pick <b>New version</b> before Deploy. Then check again.";
       return;
