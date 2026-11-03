@@ -141,7 +141,7 @@ window.CLASS_ASSIGNMENTS = {
   "day-2-hanoi-rat-hunt":        { course: "world-history", unit: 1, day: 2, title: "Day 2 · The Great Hanoi Rat Hunt (Reading)", path: "day-2-hanoi/", std: ["SS.9-12.WH.27", "SS.9-12.WH.24"] },
   "pacific-case-files":          { course: "world-history", unit: 1, day: 3, title: "Day 3 · Pacific Case Files", path: "pacific-case-files/", std: ["SS.9-12.WH.27", "SS.9-12.WH.25"] },
   "wwi-alliance-chain-reaction": { course: "world-history", unit: 1, day: 4, title: "Day 4 · WWI Alliance Chain Reaction", path: "wwi-alliance-chain-reaction/", std: ["SS.9-12.WH.29"] },
-  "write-the-peace-treaty":      { course: "world-history", unit: 1, day: 5, title: "Day 5 · Treaty of Versailles: Write the Peace", path: "write-the-peace-treaty/", std: ["SS.9-12.WH.31", "SS.9-12.WH.29"] },
+  "write-the-peace-treaty":      { course: "world-history", unit: 1, day: 5, title: "Day 5 · Treaty of Versailles: Wilson's Promise", path: "write-the-peace-treaty/", std: ["SS.9-12.WH.31", "SS.9-12.WH.29"] },
   "day6-world-in-crisis":        { course: "world-history", unit: 1, day: 6, title: "Day 6 · A World in Crisis", path: "day6-world-in-crisis/", std: ["SS.9-12.WH.31", "SS.9-12.WH.30"] },
   "day7-maus-reading-checks":    { course: "world-history", unit: 1, day: 7, title: "Day 7 · Maus I (Reading)", path: "day7-maus/", std: ["SS.9-12.WH.30", "SS.9-12.WH.33"] },
   "day7-warning-signs":          { course: "world-history", unit: 1, day: 7, title: "Day 7 · Spot the Warning Signs (now in Day 8)" },

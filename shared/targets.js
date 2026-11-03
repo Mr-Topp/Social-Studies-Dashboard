@@ -815,7 +815,7 @@ window.CLASS_TARGETS = {
   "1|5": {
    "t": [
     "I can explain how the Treaty of Versailles ended World War I and punished Germany.",
-    "I can analyze political cartoons to explain how Russia, China, and India changed after World War I.",
+    "I can analyze real sources (cartoons, photos, maps) to explain how Russia, China, and India changed after World War I.",
     "I can explain how people around the world faced revolution, foreign control, and hard times after World War I."
    ],
    "g3": "I can analyze the political, economic, and cultural changes that came after World War I and World War II."
