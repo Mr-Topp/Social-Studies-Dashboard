@@ -1,172 +1,365 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Save the Night Bus | Sociology Unit 2 Day 4</title>
-<meta name="description" content="Build a movement to save a city bus line and learn why people team up for change: types, stages, and collective behavior.">
+<title>Last Bus Home | Sociology Unit 2 Day 4</title>
+<meta name="description" content="Run a campaign to save a night bus route. Recruit people, pick tactics, and push a movement through its real stages before the vote.">
 <style>
-:root{--ink:#1f2b33;--muted:#55626b;--paper:#fbf7f1;--card:#fff;--line:#dcd9cf;--acc:#c2410c;--acc2:#1e4f8a;--soft:#fdf0e6;--green:#2a6b45;--bad:#a2392f}
+:root{--ink:#14213a;--muted:#5b6780;--night:#16214a;--night2:#24356f;--sun:#ffc629;--coral:#ef5b34;--green:#21a05a;--bad:#d2412c;--paper:#fffdf5;--card:#fff;--line:#d9e0ec}
 *{box-sizing:border-box}
-body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.5 system-ui,Segoe UI,Arial,sans-serif}
-header{background:linear-gradient(100deg,#fde9da,#e4ecf7);border-bottom:5px solid var(--acc);padding:16px max(16px,calc((100vw - 900px)/2)) 12px}
-.k{font-size:.78rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:var(--acc);margin:0}
-h1{margin:2px 0 4px;font-size:clamp(1.7rem,3.4vw,2.3rem)}
-.std{margin:2px 0;font-size:.92rem;color:var(--muted)}.std b{color:var(--ink)}
-.hud{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line);padding:8px max(16px,calc((100vw - 900px)/2));display:flex;gap:10px 12px;flex-wrap:wrap;align-items:center;font-weight:800;font-size:.92rem;box-shadow:0 2px 8px #1f2b3312}
-.hud .bar{flex:1;min-width:110px;height:10px;background:#e6e6de;border-radius:9px;overflow:hidden}.hud .bar span{display:block;height:100%;width:0;background:var(--acc);transition:width .4s}
-.pill{background:#f0efe8;border-radius:20px;padding:3px 10px;white-space:nowrap}
-.meter{display:flex;align-items:center;gap:6px}.meter .track{width:100px;height:10px;border-radius:9px;background:#e6e6de;overflow:hidden}.meter .track span{display:block;height:100%;background:var(--acc2);transition:width .5s}
-main{max-width:900px;margin:auto;padding:14px 16px 60px}
-.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;box-shadow:0 3px 12px #1f2b330d}
-.kicker{font-size:.78rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:var(--acc2);margin:0}
-h2{margin:2px 0 10px;font-size:1.45rem}
-.teach{background:var(--soft);border-left:5px solid var(--acc);border-radius:9px;padding:10px 14px;margin:0 0 12px}.teach p{margin:4px 0}.teach b{color:var(--acc)}.teach ul{margin:4px 0;padding-left:20px}
-.block{margin:14px 0;padding:14px;border-radius:12px;border:2px solid var(--line);background:#fff}
-.block.current{border-color:var(--ink);box-shadow:0 0 0 4px color-mix(in srgb,var(--acc) 22%,transparent)}
-.block h3{margin:0 0 10px;font-size:1.06rem;line-height:1.35;font-weight:700}
-.event{background:#fbf9f4;border-style:dashed;border-color:#cdbf9a}.event.current{border-style:solid}
-.event-body p{margin:4px 0}
-.ev{display:block;font-weight:400;background:#f7f6f1;border:1px solid var(--line);border-left:5px solid var(--acc2);border-radius:10px;padding:9px 12px;margin:0 0 10px;font-size:.98rem}
-.ev .who{display:block;font-size:.74rem;font-weight:900;letter-spacing:.06em;text-transform:uppercase;color:var(--acc2);margin-bottom:2px}
-.ev p{margin:3px 0}
-.picked{margin:10px 0 4px;color:var(--muted)}.result{background:#f0efe8;border-radius:9px;padding:9px 12px}.result p{margin:4px 0}
-.tag{display:inline-block;font-weight:900;font-size:.8rem;border-radius:12px;padding:2px 9px;margin-right:6px}.tag.up{background:#dcefe2;color:var(--green)}.tag.down{background:#f6dcd8;color:var(--bad)}.tag.flat{background:#ebe9e0;color:var(--ink)}
-.qlabel{font-size:.75rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:var(--acc);margin:0 0 4px}
-.choices{display:grid;gap:8px}
-@media(min-width:700px){.q .choices{grid-template-columns:1fr 1fr}}
-button{font:inherit;cursor:pointer;border-radius:10px;min-height:46px}
-.choice{text-align:left;background:#fff;color:var(--ink);border:2px solid #cfcdbf;padding:10px 12px;font-weight:650;line-height:1.3}
-.choice:hover:not(:disabled){border-color:var(--ink);background:#fcfcfa}.choice:disabled{opacity:.5;cursor:not-allowed}
-.go{margin-top:12px;background:var(--acc);color:#fff;border:0;padding:11px 18px;font-weight:900}
-button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid #2f7dbd;outline-offset:2px}
-.answered{font-weight:800;color:var(--green);margin:4px 0}.why{margin:2px 0;color:var(--muted)}
-.msg{min-height:1.3em;font-weight:750;margin:8px 0 0}.msg.bad{color:var(--bad)}.msg.good{color:var(--green)}
-label{display:block;font-weight:850;margin:14px 0 4px}.stem{margin:0 0 4px;color:var(--muted);font-size:.92rem}
-input,textarea{width:100%;font:inherit;border:2px solid #cfcdbf;border-radius:9px;padding:10px;background:#fff;color:var(--ink)}
-.steps{display:grid;gap:6px;margin:10px 0;padding:0;list-style:none}.steps li{background:#f0efe8;border-radius:9px;padding:8px 12px;font-weight:700}
-.welcome{background:#e6f1ea;color:var(--green);font-weight:800;border-radius:9px;padding:8px 12px;margin:0 0 10px}
-.foot{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-top:14px;color:var(--muted);font-size:.85rem}
-.foot button{background:#ebe9e0;border:0;padding:8px 12px;font-weight:800;color:var(--ink)}
-.src{font-size:.8rem;color:var(--muted)}
-.bars{display:grid;gap:6px;margin:8px 0}.brow{display:grid;grid-template-columns:minmax(90px,140px) 1fr 44px;gap:8px;align-items:center;font-size:.9rem}.brow .t{height:16px;background:#e6e6de;border-radius:6px;overflow:hidden}.brow .t span{display:block;height:100%;background:var(--acc2)}
-@media print{.hud,.foot,.go{display:none}}
+html,body{margin:0}
+body{background:var(--night);color:var(--ink);font:17px/1.4 system-ui,"Segoe UI",Arial,sans-serif;min-height:100vh}
+button{font:inherit;cursor:pointer;border-radius:14px;min-height:44px}
+button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid #8cc4ff;outline-offset:2px}
+.hide{display:none!important}
+.badge12{display:inline-grid;place-items:center;width:46px;height:46px;border-radius:11px;background:var(--sun);color:var(--night);font-weight:950;font-size:1.3rem;box-shadow:inset 0 -4px 0 #e0a800;flex:none;line-height:1}
+.badge12 small{display:block;font-size:.5rem;letter-spacing:.08em}
 
-.ev.chat{border-left-color:var(--acc);background:#fff7ec}
-.stages{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:8px 0}.stages div{background:#fff;border:1px solid var(--line);border-radius:9px;padding:6px 8px;font-size:.86rem}.stages b{display:block;color:var(--acc)}
-@media(max-width:640px){.stages{grid-template-columns:1fr 1fr}}
-h3.plain{margin:0 0 6px}
+/* ================= START ================= */
+#start{min-height:100vh;display:grid;place-items:center;padding:16px;background:radial-gradient(circle at 80% 10%,#3c5aa8 0,transparent 40%),linear-gradient(180deg,#16214a,#2b3f80)}
+.start-card{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.95fr);gap:24px;max-width:1120px;width:100%;align-items:center;color:#fff}
+.eyebrow{font-size:.78rem;font-weight:900;letter-spacing:.12em;text-transform:uppercase;color:var(--sun);margin:0}
+#start h1{font-size:clamp(2.6rem,6vw,4.4rem);line-height:.92;margin:6px 0 10px;letter-spacing:-.02em;text-shadow:0 4px 0 #0b1330}
+#start h1 em{font-style:normal;color:var(--sun)}
+.hook{font-size:1.22rem;font-weight:750;margin:0 0 12px;color:#fff}
+.do-row{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:0 0 10px;padding:0;list-style:none}
+.do-row li{background:#ffffff14;border:1px solid #ffffff2e;border-radius:14px;padding:8px 10px;font-size:.9rem;font-weight:650;line-height:1.25;color:#e9efff}
+.do-row li span{display:block;font-size:1.6rem}
+.facts{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 8px}
+.facts span{background:var(--sun);color:var(--night);border-radius:99px;padding:3px 12px;font-size:.84rem;font-weight:900}
+.goal{margin:0 0 4px;font-size:.98rem;color:#fff}.std{margin:0 0 10px;font-size:.78rem;color:#b9c6e8}
+.name-row label{display:block;font-weight:800;font-size:.9rem;margin:0 0 4px;color:#fff}
+.name-row input{width:100%;max-width:380px;font:inherit;border:3px solid #ffffff55;border-radius:12px;padding:9px 12px}
+.big{display:inline-flex;align-items:center;gap:10px;margin-top:10px;background:var(--coral);color:#fff;border:0;padding:14px 32px;font-size:1.3rem;font-weight:950;border-radius:16px;box-shadow:0 6px 0 #a83515}
+.big:hover{filter:brightness(1.07)}.big:active{transform:translateY(3px);box-shadow:0 3px 0 #a83515}
+.fine{font-size:.8rem;color:#b9c6e8;margin:8px 0 0}
+.msg{min-height:1.2em;font-weight:800;margin:6px 0 0}.msg.bad{color:#ffb4a4}
+#start .msg.bad{color:#ffb4a4}
+.scene-art{width:100%;height:auto;border-radius:20px;box-shadow:0 16px 40px #0007;display:block}
+.welcome{background:#d8f6e4;color:#14633a;font-weight:850;border-radius:12px;padding:8px 12px;margin:0 0 10px}
 
+/* ================= GAME FRAME ================= */
+#game{min-height:100vh;background:radial-gradient(circle at 85% 0,#36508f 0,transparent 35%),linear-gradient(180deg,#16214a 0,#22336b 100%);padding:8px 12px 40px}
+.wrap{max-width:1240px;margin:0 auto}
+.hud{display:flex;align-items:center;gap:12px;color:#fff;padding:4px 2px 8px}
+.hud .ttl{font-weight:950;letter-spacing:.04em;line-height:1.05;font-size:1.05rem}
+.hud .ttl small{display:block;font-weight:700;letter-spacing:.02em;font-size:.76rem;color:#b9c6e8}
+.route{flex:1;position:relative;height:50px;margin:0 6px 0 10px;min-width:0}
+.route .line{position:absolute;left:14px;right:22px;top:30px;height:8px;border-radius:9px;background:#ffffff26}
+.route .line i{display:block;height:100%;border-radius:9px;background:var(--sun);transition:width .8s}
+.route .stops{position:absolute;left:0;right:0;top:22px;display:flex;justify-content:space-between}
+.route .stop{width:24px;height:24px;border-radius:50%;background:#2a3b74;border:3px solid #ffffff55;display:grid;place-items:center;font-size:.66rem;font-weight:900;color:#c9d4f2}
+.route .stop.past{background:var(--sun);border-color:var(--sun);color:var(--night)}
+.route .stop.now{background:#fff;border-color:var(--sun);color:var(--night);transform:scale(1.2)}
+.route .stop.vote{width:30px;height:30px;margin-top:-3px;background:var(--coral);border-color:#fff;font-size:.9rem}
+.route .busi{position:absolute;top:-2px;font-size:1.6rem;transition:left .8s;transform:translateX(-50%) scaleX(-1);filter:drop-shadow(0 2px 2px #0006)}
+.wkchip{background:var(--sun);color:var(--night);font-weight:950;border-radius:99px;padding:4px 12px;white-space:nowrap}
+.board{display:grid;grid-template-columns:268px minmax(0,1fr);gap:12px;align-items:start}
+
+/* dash */
+.dash{display:grid;gap:7px;position:sticky;top:8px}
+.pane{background:#ffffff12;border:1px solid #ffffff24;border-radius:16px;padding:7px 10px;color:#fff;position:relative}
+.pane h3{margin:0 0 4px;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;color:#b9c6e8}
+.meter{display:grid;grid-template-columns:32px 1fr;gap:8px;align-items:center;margin:0 0 5px;position:relative}
+.meter .ico{width:34px;height:34px;border-radius:50%;display:grid;place-items:center;font-size:1.15rem;background:#ffffff1c}
+.meter .lab{display:flex;justify-content:space-between;font-weight:850;font-size:.88rem}
+.meter .tr{height:13px;border-radius:9px;background:#0d1533;overflow:hidden;margin-top:2px}
+.meter .tr i{display:block;height:100%;border-radius:9px;transition:width .7s cubic-bezier(.3,1.4,.5,1)}
+.meter.mom .tr i{background:linear-gradient(90deg,#ffb347,#ef5b34)}
+.meter.pres .tr i{background:linear-gradient(90deg,#7fb3ff,#3f7ae0)}
+.meter.low .ico{background:#d2412c;animation:pulse 1.2s infinite}
+@keyframes pulse{50%{transform:scale(1.12)}}
+.tokens{display:flex;align-items:center;gap:8px;font-weight:900}
+.coin{display:inline-grid;place-items:center;width:34px;height:34px;border-radius:50%;background:#2e9a5a;font-size:1.05rem}
+.float{position:absolute;right:6px;top:-6px;font-weight:950;font-size:1.1rem;pointer-events:none;animation:floatup 1.4s ease-out forwards;text-shadow:0 2px 0 #0008}
+.float.up{color:#7dffb0}.float.dn{color:#ffb4a4}
+@keyframes floatup{0%{opacity:0;transform:translateY(8px) scale(.8)}20%{opacity:1;transform:translateY(0) scale(1.15)}100%{opacity:0;transform:translateY(-26px)}}
+.seats{display:grid;grid-template-columns:repeat(7,1fr);gap:4px}
+.seat{height:26px;border-radius:9px 9px 4px 4px;background:#56607d;display:grid;place-items:center;font-size:.85rem;font-weight:900;color:#fff;transition:background .5s,transform .3s}
+.seat.keep{background:var(--green)}
+.seat.flip{animation:flip .6s}
+@keyframes flip{50%{transform:rotateY(90deg)}}
+.seat-note{font-size:.8rem;color:#c9d4f2;margin:4px 0 0}
+.rival{display:grid;grid-template-columns:54px 1fr;gap:9px;align-items:start}
+.face{width:54px;height:54px;border-radius:50%;background:#ffe2d6;display:grid;place-items:center;font-size:2rem;position:relative;border:3px solid var(--coral)}
+.face .mood{position:absolute;right:-6px;bottom:-6px;font-size:1.15rem;background:#fff;border-radius:50%;width:26px;height:26px;display:grid;place-items:center;box-shadow:0 1px 3px #0005}
+.rival b{display:block;font-size:.88rem;line-height:1.1}.rival small{display:block;font-size:.7rem;color:#b9c6e8}
+.say{position:relative;background:#fff;color:var(--ink);border-radius:12px;padding:6px 9px;font-size:.86rem;font-weight:650;margin-top:5px;line-height:1.25}
+.say::before{content:"";position:absolute;left:-7px;top:10px;border:7px solid transparent;border-right-color:#fff;border-left:0}
+.say.pop{animation:pop .45s}
+@keyframes pop{0%{transform:scale(.7);opacity:0}70%{transform:scale(1.05)}100%{transform:none;opacity:1}}
+.minibus{background:#f4f4f0;border-radius:14px 22px 10px 10px;padding:7px 8px 10px;position:relative;border-bottom:7px solid var(--coral)}
+.minibus .wins{display:grid;grid-template-columns:repeat(8,1fr);gap:3px}
+.minibus .win{height:26px;border-radius:5px;background:#a9c8ee;display:grid;place-items:center;font-size:.95rem}
+.minibus .win.full{background:#d8e9ff;animation:pop .5s}
+.minibus::after{content:"";position:absolute;left:18px;bottom:-14px;width:16px;height:16px;border-radius:50%;background:#1b1b1b;box-shadow:150px 0 0 #1b1b1b}
+.team-names{font-size:.76rem;color:#c9d4f2;margin:9px 0 0;min-height:1em;line-height:1.25}
+.ladder{display:grid;gap:3px}
+.rung{display:flex;align-items:center;gap:7px;font-size:.8rem;font-weight:800;padding:2px 8px;border-radius:9px;background:#ffffff10;color:#b9c6e8}
+.rung i{font-style:normal;width:19px;height:19px;border-radius:50%;display:grid;place-items:center;background:#ffffff22;font-size:.75rem}
+.rung.done{color:#fff}.rung.done i{background:var(--green)}
+.rung.on{background:var(--sun);color:var(--night)}.rung.on i{background:var(--night);color:#fff}
+
+/* scene */
+.scene{background:var(--card);border-radius:20px;overflow:hidden;box-shadow:0 14px 34px #0006;min-height:520px}
+.banner{display:flex;align-items:center;gap:14px;padding:12px 18px;color:#fff;position:relative;overflow:hidden;min-height:96px}
+.banner .art{font-size:3.4rem;line-height:1;filter:drop-shadow(0 4px 4px #0004);animation:bob 3s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-4px)}}
+.banner .cap{display:inline-block;font-size:.7rem;font-weight:900;letter-spacing:.14em;text-transform:uppercase;background:#0003;border-radius:6px;padding:2px 8px;margin:0 0 4px}
+.banner h2{margin:0;font-size:1.55rem;line-height:1.12;text-shadow:0 2px 0 #0003}
+.bg-red{background:linear-gradient(120deg,#c8352a,#ef7a3a)}.bg-night{background:linear-gradient(120deg,#1f2d63,#4a5fb0)}.bg-gold{background:linear-gradient(120deg,#c98a00,#f2b927)}
+.bg-green{background:linear-gradient(120deg,#16794a,#38b874)}.bg-purple{background:linear-gradient(120deg,#5b2c87,#9a5ad1)}.bg-teal{background:linear-gradient(120deg,#0f6b78,#2fb0b9)}
+.bg-brown{background:linear-gradient(120deg,#6b4a1e,#b9853c)}.bg-coral{background:linear-gradient(120deg,#d2412c,#f28a5c)}
+.body{padding:14px 18px 18px}
+.bub{display:grid;grid-template-columns:44px 1fr;gap:9px;align-items:start;margin:0 0 9px;animation:pop .45s both}
+.bub:nth-child(2){animation-delay:.12s}.bub:nth-child(3){animation-delay:.24s}
+.bub .av{width:44px;height:44px;border-radius:50%;display:grid;place-items:center;font-size:1.55rem;background:#eef3fb;border:2px solid #d5deee}
+.bub .tx{background:#eef3fb;border-radius:4px 16px 16px 16px;padding:7px 12px}
+.bub .who{display:block;font-size:.7rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.bub .tx p{margin:1px 0}
+.bub.rv .av{background:#ffe2d6;border-color:#f3b29d}.bub.rv .tx{background:#fff1ea}
+.bub.news .tx{background:#fff3f0;border-left:5px solid #c8352a}
+.bub.chat .tx{background:#e8f6ee}
+.flyer{background:#fff7d6;border:3px dashed #c8352a;border-radius:12px;padding:8px 14px;text-align:center;transform:rotate(-1.2deg);margin:4px auto 10px;max-width:440px;box-shadow:0 4px 10px #0002}
+.flyer b{display:block;font-size:1.3rem;color:#c8352a;letter-spacing:.04em}
+.flyer p{margin:2px 0;font-weight:700}
+.idea{display:flex;gap:10px;align-items:flex-start;background:linear-gradient(90deg,#fff3c4,#fff9e3);border:2px solid #f2c94c;border-radius:14px;padding:8px 13px;margin:10px 0 0;animation:pop .5s both .2s}
+.idea .bulb{font-size:1.5rem}
+.idea p{margin:1px 0}.idea b{color:#9a5b00}
+
+/* big decision cards */
+.deck{display:grid;gap:10px;margin:12px 0 0;grid-template-columns:repeat(auto-fit,minmax(190px,1fr))}
+.pickcard{display:flex;flex-direction:column;align-items:center;text-align:center;gap:4px;background:#fff;border:3px solid #cdd6e6;border-radius:18px;padding:12px 10px 12px;color:var(--ink);box-shadow:0 5px 0 #cdd6e6;transition:transform .15s,box-shadow .15s,border-color .15s}
+.pickcard:hover:not(:disabled){border-color:var(--coral);box-shadow:0 5px 0 var(--coral),0 0 0 4px #ef5b3433}
+.pickcard:active:not(:disabled){transform:translateY(2px);box-shadow:0 2px 0 var(--coral)}
+.pickcard:disabled{opacity:.5;cursor:not-allowed}
+.pickcard .em{font-size:2.6rem;line-height:1.1}
+.pickcard .t{font-weight:950;font-size:1.08rem;line-height:1.15}
+.pickcard .s{font-size:.86rem;color:var(--muted);line-height:1.25}
+.pickcard .req{font-size:.8rem;font-weight:850;color:var(--bad)}
+.outcome{display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:center;background:#f4f7fc;border:2px solid #dbe3f0;border-radius:18px;padding:11px 14px;margin:12px 0 0;animation:flipin .55s both}
+@keyframes flipin{0%{transform:perspective(700px) rotateX(-70deg);opacity:0}100%{transform:none;opacity:1}}
+.outcome .em{font-size:2.6rem}
+.outcome .you{font-size:.76rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:0}
+.outcome p{margin:2px 0}
+.chips{display:flex;flex-wrap:wrap;gap:5px;margin:5px 0 1px}
+.chip{display:inline-block;font-weight:950;font-size:.86rem;border-radius:99px;padding:2px 10px;background:#e6ebf3;animation:pop .4s both .25s}
+.chip.up{background:#d2f3df;color:#147a42}.chip.dn{background:#fbdad3;color:#b23a2b}
+.note{font-size:.88rem;color:var(--muted);margin:2px 0}
+.go{margin-top:12px;background:var(--night);color:#fff;border:0;padding:12px 24px;font-weight:950;font-size:1.05rem;box-shadow:0 5px 0 #0b1330;border-radius:14px}
+.go:hover:not(:disabled){filter:brightness(1.2)}.go:active{transform:translateY(3px);box-shadow:0 2px 0 #0b1330}
+.go:disabled{opacity:.45;cursor:not-allowed}
+.go.coral{background:var(--coral);box-shadow:0 5px 0 #a83515}
+
+/* in-world evidence + stamping */
+.desk{background:repeating-linear-gradient(45deg,#e9dcc3 0 14px,#e4d5b9 14px 28px);border-radius:16px;padding:14px;margin:10px 0 0}
+.doc{position:relative;background:var(--paper);border-radius:6px;padding:12px 16px 14px;box-shadow:0 6px 16px #0003;transform:rotate(-.6deg);max-width:640px;margin:0 auto}
+.doc .dh{font-family:"Courier New",Courier,monospace;font-weight:900;font-size:.8rem;letter-spacing:.1em;text-transform:uppercase;color:#7a4d00;border-bottom:2px dashed #e0cfa6;padding-bottom:4px;margin:0 0 6px}
+.doc p{margin:3px 0}
+.doc.shake{animation:shake .45s}
+@keyframes shake{20%,60%{transform:translateX(-8px) rotate(-1deg)}40%,80%{transform:translateX(8px) rotate(0)}}
+.doc .defs{display:grid;gap:4px;margin:8px 0 0;padding:0;list-style:none}
+.doc .defs li{background:#f5efdd;border-radius:7px;padding:4px 9px;font-size:.88rem}
+.doc .src{font-size:.76rem;color:#7d7259;margin-top:6px}
+.stampmark{position:absolute;right:14px;top:24px;font-weight:950;font-size:1.25rem;letter-spacing:.06em;color:#c8352a;border:4px solid #c8352a;border-radius:10px;padding:4px 12px;transform:rotate(-12deg);background:#fffdf5cc;animation:slam .5s cubic-bezier(.2,1.6,.4,1) both;text-transform:uppercase;max-width:70%;text-align:center}
+.stampmark.ok{color:#147a42;border-color:#147a42}
+@keyframes slam{0%{transform:rotate(-12deg) scale(3);opacity:0}60%{opacity:1}100%{transform:rotate(-12deg) scale(1);opacity:1}}
+@keyframes slam2{0%{transform:rotate(-3deg) scale(3);opacity:0}60%{opacity:1}100%{transform:rotate(-3deg) scale(1);opacity:1}}
+.ask{display:flex;align-items:center;gap:8px;font-weight:950;font-size:1.08rem;margin:12px 0 6px;color:var(--night)}
+.ask span{font-size:1.4rem}
+.stamps{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.pick{display:flex;align-items:center;gap:8px;text-align:left;background:#fff;border:3px solid #c3cddd;border-radius:14px;padding:9px 12px;font-weight:800;color:var(--ink);box-shadow:0 4px 0 #c3cddd;line-height:1.25}
+.pick::before{content:"🔖";font-size:1.2rem}
+.pick:hover:not(:disabled){border-color:var(--night);box-shadow:0 4px 0 var(--night)}
+.pick:disabled{opacity:.45;cursor:not-allowed}
+.lockbar{height:6px;border-radius:9px;background:#e6ebf3;overflow:hidden;margin-top:6px}.lockbar i{display:block;height:100%;background:var(--coral);width:100%;transition:width 1s linear}
+.hintmsg{min-height:1.2em;font-weight:800;margin:8px 0 0;color:var(--muted)}
+.hintmsg.bad{color:var(--bad)}
+
+/* moves */
+.tickets{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin:0 0 4px}
+.ticket{display:inline-grid;place-items:center;width:46px;height:30px;border-radius:6px;background:var(--sun);color:var(--night);font-weight:950;font-size:.9rem;position:relative;box-shadow:0 3px 0 #c99a00;transition:all .4s}
+.ticket::before,.ticket::after{content:"";position:absolute;top:50%;width:10px;height:10px;border-radius:50%;background:#fff;transform:translateY(-50%)}
+.ticket::before{left:-5px}.ticket::after{right:-5px}
+.ticket.used{background:#dfe4ec;color:#9aa3b5;box-shadow:none;transform:rotate(-8deg) scale(.9)}
+.tk-lab{font-weight:900;color:var(--night)}
+.gate{display:flex;align-items:center;gap:12px;width:100%;text-align:left;background:linear-gradient(90deg,#fff1b8,#ffd75e);border:3px solid #e0a800;padding:10px 14px;margin:8px 0;font-weight:950;color:var(--night);font-size:1.08rem;animation:glow 1.6s ease-in-out infinite;border-radius:16px}
+.gate .em{font-size:2rem}.gate small{display:block;font-weight:700;color:#6b5200;font-size:.85rem}
+@keyframes glow{50%{box-shadow:0 0 0 6px #ffc62966}}
+.sec{font-size:.76rem;font-weight:950;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin:12px 0 6px}
+.hand{display:grid;grid-template-columns:repeat(auto-fill,minmax(168px,1fr));gap:9px;align-items:start}
+.gcard{position:relative;display:flex;flex-direction:column;align-items:center;text-align:center;gap:3px;background:#fff;border:3px solid #cdd6e6;border-radius:16px;padding:10px 8px 9px;color:var(--ink);box-shadow:0 5px 0 #cdd6e6;transition:transform .15s,box-shadow .15s}
+.gcard:hover:not(:disabled){box-shadow:0 5px 0 var(--coral),0 0 0 4px #ef5b3433;border-color:var(--coral)}
+.gcard:disabled{opacity:.5;cursor:not-allowed;filter:grayscale(.7);box-shadow:none;padding:7px 8px}
+.gcard.locked .em{font-size:1.5rem}
+.gcard .em{font-size:2.1rem;line-height:1.1}
+.gcard .nm{font-weight:950;line-height:1.15;font-size:.98rem}
+.gcard .qt{font-size:.8rem;color:var(--muted);font-style:italic;line-height:1.2}
+.gcard .gv,.gcard .ct{font-size:.8rem;font-weight:750;line-height:1.2}
+.gcard .ln{font-size:.84rem;color:var(--muted);line-height:1.25}
+.fxrow{display:flex;gap:4px;flex-wrap:wrap;justify-content:center;margin-top:3px}.fx{font-weight:900;font-size:.82rem;border-radius:99px;padding:1px 7px;background:#e6ebf3}.fx.up{background:#d2f3df;color:#147a42}.fx.dn{background:#fbdad3;color:#b23a2b}
+.gcard .gv{color:#147a42}.gcard .ct{color:#b23a2b}
+.gcard .gv::before{content:"✅ "}.gcard .ct::before{content:"⚠️ "}.gcard .req::before,.pickcard .req::before{content:"🔒 "}
+.gcard .req{font-size:.78rem;font-weight:900;color:var(--bad)}
+.gcard.person{background:linear-gradient(180deg,#eef5ff 0,#fff 45%)}
+.gcard.tactic{background:linear-gradient(180deg,#fff3ec 0,#fff 45%)}
+.gcard .cost2{position:absolute;top:6px;right:8px;font-size:.72rem;font-weight:950;background:var(--sun);border-radius:6px;padding:1px 5px}
+.lockline{margin:6px 0 2px;font-size:.88rem;font-weight:800;color:var(--muted);background:#f1f4f9;border:2px dashed #cdd6e6;border-radius:12px;padding:6px 11px}
+.lockline::before{content:"🔒 "}
+.played{display:grid;gap:7px;margin:4px 0 0;padding:0;list-style:none}
+.played li{display:grid;grid-template-columns:auto 1fr;gap:10px;align-items:center;background:#f4f7fc;border-radius:14px;padding:7px 11px;animation:flipin .5s both}
+.played .em{font-size:1.7rem}.played .nm{font-weight:900}
+.nightsum{display:grid;gap:7px;margin:4px 0;padding:0;list-style:none}
+.nightsum li{display:flex;align-items:center;gap:10px;background:#eef2fa;border-radius:14px;padding:8px 12px;font-weight:700;animation:pop .45s both}
+.nightsum li:nth-child(2){animation-delay:.15s}.nightsum li:nth-child(3){animation-delay:.3s}
+.nightsum .em{font-size:1.4rem}
+.warn{background:#fde3dd;border:2px solid #f2a796;border-radius:14px;padding:8px 12px;margin:8px 0 0;font-weight:800;color:#8d2a1a}
+
+/* vote, ending, brief */
+.chamber{background:linear-gradient(180deg,#f6efe2,#efe2c8);border-radius:18px;padding:14px;margin:6px 0 0;text-align:center}
+.chamber .bench{display:flex;gap:8px;justify-content:center;flex-wrap:wrap}
+.vseat{width:58px;height:74px;border-radius:14px 14px 6px 6px;background:#8d97a8;display:grid;place-items:center;font-weight:950;color:#fff;font-size:1.5rem;opacity:0;transform:translateY(14px);transition:all .4s}
+.vseat.show{opacity:1;transform:none}.vseat.keep{background:var(--green)}
+.vtally{font-weight:950;font-size:1.3rem;margin:10px 0 0}
+.stamp{display:inline-block;font-weight:950;letter-spacing:.06em;font-size:1.5rem;border:5px solid currentColor;border-radius:14px;padding:6px 16px;transform:rotate(-3deg);margin:6px 0 18px;animation:slam2 .6s cubic-bezier(.2,1.6,.4,1) both;background:#fff}
+.stamp.win{color:var(--green)}.stamp.comp{color:#b07a00}.stamp.fizz{color:var(--bad)}
+.receipt{background:#fff;border:2px dashed #c3cddd;border-radius:12px;padding:9px 14px;margin:10px 0;font-size:.95rem}
+.receipt h3{margin:0 0 4px;font-size:.78rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.receipt ul{margin:0;padding-left:0;list-style:none}.receipt li{margin:3px 0;padding-left:22px;position:relative}
+.receipt li::before{content:"➜";position:absolute;left:0;color:var(--coral);font-weight:900}
+.mroute{position:relative;display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin:12px 0 4px}
+.mroute::before{content:"";position:absolute;left:6%;right:6%;top:17px;height:6px;border-radius:9px;background:#7a4d00}
+.mstop{position:relative;background:#fffaf0;border:2px solid #ecd9ae;border-radius:12px;padding:30px 9px 8px;font-size:.88rem;margin-top:4px}
+.mstop .dot{position:absolute;top:-4px;left:50%;transform:translateX(-50%);width:30px;height:30px;border-radius:50%;background:#7a4d00;color:#fff;display:grid;place-items:center;font-weight:950;border:3px solid #fff}
+.mstop b{display:block;color:#7a4d00;margin-bottom:2px}
+.src{font-size:.78rem;color:var(--muted)}
+.phone{max-width:640px;margin:8px auto 0;background:#111a36;border-radius:26px;padding:12px;box-shadow:0 12px 26px #0004}
+.phone .scr{background:#fff;border-radius:18px;padding:12px 14px}
+.phone .ph{display:flex;align-items:center;gap:8px;font-weight:900;color:var(--night);border-bottom:1px solid var(--line);padding-bottom:6px;margin-bottom:4px}
+label.w{display:block;font-weight:850;margin:12px 0 2px}
+.stem{margin:0 0 4px;color:var(--muted);font-size:.9rem}
+textarea{width:100%;font:inherit;border:2px solid #b8c3d6;border-radius:12px;padding:10px;background:#fbfcff;color:var(--ink)}
+.done-box{background:#d8f6e4;border:2px solid #8fd3ab;border-radius:16px;padding:12px;text-align:center;margin-top:10px;animation:pop .5s}
+.done-box .big-check{font-size:1.5rem;font-weight:950;color:#147a42;margin:0}
+.send-msg{min-height:1.2em;font-weight:800;margin:8px 0 0}.send-msg.bad{color:var(--bad)}.send-msg.good{color:#147a42}
+.foot{display:flex;justify-content:flex-start;gap:10px;flex-wrap:wrap;margin-top:12px;color:#b9c6e8;font-size:.82rem;align-items:center}
+.foot button{background:#ffffff1c;border:1px solid #ffffff33;padding:7px 13px;font-weight:800;color:#fff}
+
+@media(max-width:980px){
+  .start-card{grid-template-columns:1fr}
+  .start-art{order:-1;max-width:430px;margin:0 auto;width:100%}
+  .board{grid-template-columns:1fr}
+  .dash{position:static;grid-template-columns:1fr 1fr}
+  .dash .p-team,.dash .p-ladder{display:none}
+}
+@media(max-width:600px){
+  .gcard .em{font-size:1.7rem}
+  body{font-size:16px}
+  .do-row{grid-template-columns:1fr}.do-row li{display:flex;gap:8px;align-items:center}.do-row li span{display:inline;font-size:1.2rem}
+  .hud{flex-wrap:wrap;gap:8px}.hud .route{order:3;flex-basis:100%;margin:0}
+  .dash{grid-template-columns:1fr;gap:7px}
+  .dash .p-board{display:none}
+  .rival{grid-template-columns:44px 1fr}.face{width:44px;height:44px;font-size:1.6rem}
+  .banner{min-height:76px;padding:10px 12px}.banner .art{font-size:2.5rem}.banner h2{font-size:1.25rem}
+  .body{padding:12px}
+  .stamps{grid-template-columns:1fr}
+  .hand{grid-template-columns:1fr 1fr}
+  .vseat{width:38px;height:52px;font-size:1.1rem}
+  .mroute{grid-template-columns:1fr}.mroute::before{display:none}
+  .big{width:100%;justify-content:center}
+  .start-art{max-width:230px}
+  .pickcard{flex-direction:row;text-align:left;align-items:center;gap:10px;padding:9px 12px}.pickcard .em{font-size:2rem}.pickcard > span:not(.em){display:block}
+  .pickcard{display:grid;grid-template-columns:44px 1fr}.pickcard .em{grid-row:span 3}
+  .route .stop{width:20px;height:20px;font-size:.6rem}.route .stop.vote{width:26px;height:26px}
+}
+@media(max-height:800px) and (min-width:981px){
+  #start h1{font-size:3.5rem}.hook{font-size:1.12rem;margin-bottom:8px}.do-row li{padding:6px 9px}.do-row li span{font-size:1.3rem}
+}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 </style>
 <script src="../../shared/assignments.js?v=20261101fill"></script>
 <script src="../../shared/turnin.js?v=20261102read"></script>
-<script src="../../shared/unit-game.js?v=20261102es"></script>
 <script src="../../shared/lang.js?v=20261102samonly"></script>
-<script src="es.js?v=20261102c"></script>
+<script src="es.js?v=20261103b"></script>
 </head><body>
-<header>
-  <p class="k">Sociology · Unit 2 · Day 4</p>
-  <h1>Why Do People Team Up for Change?</h1>
-  <p class="std"><b>SS.9-12.Soc.7</b> Evaluate important social institutions and how they respond to social needs. &nbsp;<b>SS.9-12.Soc.8</b></p>
-  <p class="std"><b>Goal:</b> Explain why social movements form, name their types and stages, and tell a movement apart from a crowd. · About 25 minutes.</p>
-</header>
-<div class="hud" aria-label="Progress and supporters">
-  <span id="progressText">0 checks done</span>
-  <div class="bar" aria-hidden="true"><span id="progressFill"></span></div>
-  <span class="pill">👥 Supporters: <span id="supNum">3</span></span>
+
+<section id="start" aria-labelledby="gameTitle">
+  <div class="start-card">
+    <div>
+      <p class="eyebrow">Sociology · Unit 2 · Day 4</p>
+      <h1 id="gameTitle">LAST BUS <em>HOME</em></h1>
+      <p class="hook">The city is cutting the night bus. Save it in 8 weeks.</p>
+      <ul class="do-row">
+        <li><span>👥</span>Recruit people</li>
+        <li><span>🎟️</span>Pick tactics, climb 4 stages</li>
+        <li><span>🏛️</span>Win the board's vote</li>
+      </ul>
+      <div class="facts"><span>About 25 minutes</span></div>
+      <p class="goal"><b>Goal:</b> how people team up to change an institution.</p>
+      <p class="std"><b>SS.9-12.Soc.7</b> Evaluate important social institutions and how they respond to social needs. <b>SS.9-12.Soc.8</b> Assess how social institutions and cultures change and evolve.</p>
+      <p class="welcome hide" id="welcome"></p>
+      <div class="name-row" id="nameRow">
+        <label for="nameBox">Your name (like Jordan M.)</label>
+        <input id="nameBox" maxlength="40" autocomplete="off" placeholder="First name + last initial (like Jordan M.)">
+      </div>
+      <p class="msg" id="startMsg" role="status"></p>
+      <button type="button" class="big" id="startBtn">Start the campaign →</button>
+      <p class="fine">Made-up town. Real history files.</p>
+    </div>
+    <div class="start-art" aria-hidden="true">
+      <svg class="scene-art" viewBox="0 0 520 400" xmlns="http://www.w3.org/2000/svg">
+        <defs><linearGradient id="sky" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#1b2c55"/><stop offset="1" stop-color="#3f5f9c"/></linearGradient></defs>
+        <rect width="520" height="400" fill="url(#sky)"/>
+        <circle cx="430" cy="70" r="34" fill="#fff4c2"/><circle cx="444" cy="62" r="30" fill="#2a3f70"/>
+        <g fill="#fff" opacity=".8"><circle cx="60" cy="50" r="2"/><circle cx="150" cy="90" r="1.6"/><circle cx="250" cy="40" r="2"/><circle cx="330" cy="110" r="1.4"/><circle cx="90" cy="140" r="1.4"/></g>
+        <g fill="#22355f"><rect x="0" y="170" width="80" height="140"/><rect x="85" y="130" width="70" height="180"/><rect x="160" y="190" width="60" height="120"/><rect x="380" y="150" width="70" height="160"/><rect x="455" y="190" width="65" height="120"/></g>
+        <g fill="#ffd866" opacity=".85"><rect x="18" y="190" width="12" height="12"/><rect x="45" y="220" width="12" height="12"/><rect x="100" y="150" width="12" height="12"/><rect x="128" y="190" width="12" height="12"/><rect x="398" y="175" width="12" height="12"/><rect x="420" y="215" width="12" height="12"/><rect x="472" y="210" width="12" height="12"/></g>
+        <rect y="300" width="520" height="100" fill="#2b2f3a"/><g fill="#ffc629"><rect x="20" y="346" width="50" height="6"/><rect x="120" y="346" width="50" height="6"/><rect x="220" y="346" width="50" height="6"/><rect x="320" y="346" width="50" height="6"/><rect x="420" y="346" width="50" height="6"/></g>
+        <g transform="translate(120 205)">
+          <rect x="0" y="0" width="260" height="105" rx="16" fill="#f4f4f0"/>
+          <rect x="0" y="62" width="260" height="14" fill="#ef5b34"/>
+          <g fill="#9fc3ee"><rect x="16" y="14" width="44" height="38" rx="5"/><rect x="68" y="14" width="44" height="38" rx="5"/><rect x="120" y="14" width="44" height="38" rx="5"/><rect x="172" y="14" width="44" height="38" rx="5"/></g>
+          <rect x="224" y="14" width="28" height="70" rx="4" fill="#c9dff6"/>
+          <rect x="200" y="-14" width="58" height="18" rx="4" fill="#16214a"/><text x="229" y="0" font-family="Arial" font-weight="900" font-size="13" fill="#ffc629" text-anchor="middle">12 NIGHT</text>
+          <circle cx="55" cy="106" r="17" fill="#1b1b1b"/><circle cx="55" cy="106" r="7" fill="#999"/><circle cx="205" cy="106" r="17" fill="#1b1b1b"/><circle cx="205" cy="106" r="7" fill="#999"/>
+          <circle cx="256" cy="84" r="5" fill="#ffe680"/>
+        </g>
+        <polygon points="381,290 520,262 520,318" fill="#ffe680" opacity=".25"/>
+        <g transform="translate(430 196)"><rect x="-3" y="0" width="6" height="104" fill="#9aa4b5"/><rect x="-26" y="-10" width="52" height="40" rx="6" fill="#ffc629"/><text x="0" y="16" font-family="Arial" font-weight="900" font-size="18" fill="#16214a" text-anchor="middle">12</text></g>
+        <rect x="16" y="16" width="190" height="44" rx="10" fill="#ef5b34"/><text x="111" y="44" font-family="Arial" font-weight="900" font-size="17" fill="#fff" text-anchor="middle">LAST RUN: WEEK 8</text>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<div id="game" class="hide">
+  <div class="wrap">
+    <div class="hud">
+      <span class="badge12">12<small>NIGHT</small></span>
+      <span class="ttl">LAST BUS HOME<small>Save Night Route 12</small></span>
+      <div class="route" id="route" aria-hidden="true"></div>
+      <span class="wkchip" id="wk">Week 1 of 8</span>
+    </div>
+    <div class="board">
+      <aside class="dash" aria-label="Your campaign">
+        <div class="pane p-meters">
+          <div class="meter mom" id="mMom"><span class="ico">🔥</span><div><div class="lab"><span>Momentum</span><b id="momN">30</b></div><div class="tr"><i id="momF"></i></div></div></div>
+          <div class="meter pres" id="mPres"><span class="ico">🏛️</span><div><div class="lab"><span>Board pressure</span><b id="presN">0</b></div><div class="tr"><i id="presF"></i></div></div></div>
+          <div class="tokens" id="mCash"><span class="coin">💵</span><span>$<span id="cashN">0</span></span></div>
+        </div>
+        <div class="pane rival">
+          <div class="face">👩🏼‍💼<span class="mood" id="mood">😏</span></div>
+          <div><b>Chair Dana Pruitt</b><small>Riverbend Transit Board (made up)</small><div class="say" id="pruitt"></div></div>
+        </div>
+        <div class="pane p-board"><h3>Board votes · need 4</h3><div class="seats" id="seats"></div><p class="seat-note" id="seatNote"></p></div>
+        <div class="pane p-team"><h3>On your bus</h3><div class="minibus"><div class="wins" id="team"></div></div><p class="team-names" id="teamNames"></p></div>
+        <div class="pane p-ladder"><h3>Movement stage</h3><div class="ladder" id="ladder"></div></div>
+      </aside>
+      <main class="scene" id="scene" aria-live="polite">
+        <div class="banner" id="banner"></div>
+        <div class="body" id="main"></div>
+      </main>
+    </div>
+    <div class="foot"><button type="button" id="restartBtn">Start over</button><span>Progress saves on this device. Your teacher sees your work after you turn it in.</span></div>
+  </div>
 </div>
-<main>
-  <p class="welcome" id="welcome" hidden></p>
-  <div id="app"></div>
-  <div class="foot"><span>Progress saves on this device. Your teacher sees your work after you turn it in.</span><button type="button" id="restartBtn">Start over</button></div>
-</main>
-<script>
-const T = (cls, txt) => `<span class="tag ${cls}">${txt}</span>`;
-const ev = (who, body) => `<span class="ev"><span class="who">${who}</span>${body}</span>`;
-window.S = null;
-
-const chat = (who, msg) => `<span class="ev chat"><span class="who">${who}</span>${msg}</span>`;
-function voteHtml() {
-  const s = (window.S && window.S.fx.sup) || 0;
-  let res;
-  if (s >= 250) res = `<p>${T("up","Win")} The council votes <b>5–2 to keep Night Route 12</b> and writes it into the yearly city budget. It's now a normal part of how the city runs.</p>`;
-  else if (s >= 120) res = `<p>${T("flat","Partial win")} The council votes <b>4–3 to keep Route 12 for one more year</b> as a trial. Your group has to prove riders really use it.</p>`;
-  else res = `<p>${T("down","Loss, for now")} The council votes <b>4–3 to cut Route 12</b>. A few members say they'd look at it again if more people speak up next year.</p>`;
-  return `<p class="kicker">Council vote night</p><h3 class="plain">${s} people signed on. Here's what happened.</h3>${res}<p class="src">Movements with more organized supporters usually get more attention from leaders, but bigger never guarantees a win.</p>`;
-}
-UnitGame.start({
-  key: "soc-u2-d4-team-up-v1",
-  assignmentId: "soc-u2-d4-team-up",
-  title: "Sociology · Unit 2 · Day 4 · Why Do People Team Up for Change?",
-  standard: "SS.9-12.Soc.7, SS.9-12.Soc.8",
-  oldApi: "https://fynn-class-assignment-submissions-20261024.neotboy.chatgpt.site/api/submit",
-  startFx: { sup: 3 },
-  clampFx: fx => { fx.sup = Math.max(3, fx.sup); },
-  hud: st => { window.S = st; document.getElementById("supNum").textContent = st.fx.sup; },
-  startLabel: "Start organizing",
-  introHtml: `<p class="kicker">Save the night bus</p><h2>Night Route 12 is on the chopping block</h2>
-    ${chat("City news alert", "The city council is planning to cut <b>Night Route 12</b>, the only bus that runs until midnight, to save money.")}
-    <p>Lots of teens ride Route 12 home from late shifts at work. You and two friends are mad. Yelling about it online won't fix it. Can you build a <b>movement</b>?</p>
-    <ul class="steps"><li>👥 Your choices change your <b>supporter count</b> at the top. You start with 3.</li><li>📚 Learn how real movements grow, from a spark to the end.</li><li>🗳️ See how the council votes. Then write 2 short answers.</li></ul>
-    <p class="src">Route 12 and the city are made up. The history examples are real.</p>`,
-  scenes: [
-    { kicker: "Part 1 of 3", title: "The Spark",
-      teach: `<p>A <b>social movement</b> is a long-term, organized effort by many people to bring about change, <b>or to resist it</b>.</p>
-        <p><b>Collective behavior</b> is different. It's short-term and unplanned: a crowd, a flash mob, a panic, a riot.</p>
-        <p>Movements usually form when people feel <b>treated unfairly</b>, feel <b>ignored by leaders</b>, are <b>sparked by a big event</b>, or are <b>inspired by a new idea</b>.</p>`,
-      blocks: [
-        { type: "q", id: "s1", std: "Soc.8", short: "Why this movement formed", prompt: chat("City news alert", "Council votes 4–3 to start plans to cut Night Route 12.") + "Which reason for forming a movement does this news show best?", options: ["Sparked by a major event", "Inspired by an idea in a book", "Ordered by the state government", "Copying a trend from overseas"], hint: "Check the four reasons in the teach box. What just happened?", why: "The vote is a big event that sparks people to act. Many riders may also feel ignored by leaders." },
-        { type: "event", id: "e1", short: "First-night choice", html: `<p>That night, about 80 angry riders gather outside city hall. People are shouting. Someone kicks over a trash can. What do you do?</p>`,
-          choices: [
-            { label: "Pass around a sign-up sheet and announce a planning meeting Saturday", fx: { sup: 40 }, result: `<p>${T("up","+40 supporters")}You leave with 43 names and phone numbers. Now there's a plan, not just a crowd.</p>` },
-            { label: "Start a louder chant. The crowd energy is amazing!", fx: { sup: 0 }, result: `<p>${T("flat","+0 supporters")}It feels huge for an hour. Then everyone goes home, and nobody knows what's next.</p>` },
-            { label: "Post an angry video and go home", fx: { sup: 10 }, result: `<p>${T("up","+10 supporters")}The video gets shared, and a few people message you. But there's no plan yet.</p>` }
-          ] },
-        { type: "q", id: "s2", std: "Soc.8", short: "Crowd = collective behavior", prompt: ev("That night outside city hall", "80 people showed up after hearing the news. No one planned it. By 10 p.m., they were gone.") + "That crowd was an example of…", options: ["Collective behavior", "A social movement", "Bureaucratization", "Institutionalization"], hint: "Was it planned and long-term, or short and spur of the moment?", why: "A short, unplanned crowd is collective behavior. A movement is organized and lasts a long time." },
-        { type: "q", id: "s3", std: "Soc.8", short: "Mob mentality = deindividuation", prompt: ev("A witness", "\"The guy who kicked the trash can? He'd never do that alone. In the crowd it was like nobody was a person anymore.\"") + "Sociologists call this…", options: ["Deindividuation, or losing self-control in a crowd", "Coalescence, or a movement starting to get organized", "Reform, or trying to change a single law", "Socialization, or learning society's rules"], hint: "The witness says people stopped acting like themselves in the crowd.", why: "Deindividuation (\"mob mentality\") is losing your sense of self and self-restraint in a crowd." },
-        { type: "q", id: "s4", std: "Soc.8", short: "Protest vs. riot", prompt: ev("Two scenes", "<b>A:</b> 200 people march to city hall with signs and a permit.<br><b>B:</b> A crowd breaks store windows and steals.") + "What's the main difference between a protest (A) and a riot (B)?", options: ["Protests are usually legal; riots break laws", "Protests are small; riots are always huge", "Protests are unplanned; riots are planned", "Protests happen online; riots don't"], hint: "Look at what each crowd is doing.", why: "Protests are usually legal ways to be heard. Riots involve breaking laws, like damage and theft." }
-      ] },
-    { kicker: "Part 2 of 3", title: "Getting Organized",
-      teach: `<p>Sociologist Herbert Blumer described <b>four classic stages</b> of a movement:</p>
-        <div class="stages"><div><b>1. Emergence</b>People feel a problem, but aren't organized.</div><div><b>2. Coalescence</b>People organize, pick leaders, make a plan, go public.</div><div><b>3. Bureaucratization</b>A formal group with staff, rules, and money.</div><div><b>4. Decline</b>The movement winds down. That can mean it won, lost, or became part of the system.</div></div>
-        <p><b>Types:</b> <b>reform</b> (change certain laws), <b>revolutionary</b> (replace the whole system), <b>resistance</b> (stop or reverse a change), <b>redemptive</b> (change individuals' hearts or lives), <b>alternative</b> (change one habit, like quitting smoking).</p>`,
-      blocks: [
-        { type: "event", id: "e2", short: "Tactic choice", html: `<p>Saturday's meeting is packed. What's your main plan?</p>`,
-          choices: [
-            { label: "Collect signatures, then bring 40 riders to tell their stories at the council meeting", fx: { sup: 120 }, result: `<p>${T("up","+120 supporters")}A nurse's aide says Route 12 is her only way home at 11 p.m. Local news covers it. Sign-ups jump.</p>` },
-            { label: "Hold one huge rally downtown, then take a break", fx: { sup: 60 }, result: `<p>${T("up","+60 supporters")}Great photos and a big crowd. But a week later, the council has moved on.</p>` },
-            { label: "Post the council members' home addresses online", fx: { sup: -30 }, result: `<p>${T("down","−30 supporters")}This is called doxxing. It scares people and can be dangerous. Supporters quit, and the council refuses to meet with you.</p>` }
-          ] },
-        { type: "q", id: "g1", std: "Soc.8", short: "Montgomery boycott = coalescence", prompt: ev("History file · Montgomery, Alabama, 1955", "After Rosa Parks was arrested for not giving up her bus seat, Black residents organized a bus boycott. They chose leaders, including Martin Luther King Jr., and set up carpools. It lasted 381 days.") + "Which stage does this show?", options: ["Coalescence", "Emergence", "Decline", "Bureaucratization"], hint: "People were choosing leaders, making a plan, and going public.", why: "Organizing, picking leaders, and acting publicly is coalescence." },
-        { type: "q", id: "g2", std: "Soc.8", short: "Route 12 = reform", prompt: chat("Your group's goal", "Keep Night Route 12 running. We're not trying to replace the city government.") + "What type of movement is yours?", options: ["A reform movement", "A revolutionary movement", "A redemptive movement", "An alternative movement"], hint: "Do you want to change one decision, or the whole system?", why: "Trying to change one specific policy, inside the system, is reform." },
-        { type: "event", id: "e3", short: "Organize choice", html: chat("Your group chat", "300 members · 1,240 unread messages. Three people made three different flyers. Nobody knows who's in charge.") + `<p>What now?</p>`,
-          choices: [
-            { label: "Form an official group: elected leaders, a bank account, a website", fx: { sup: 100 }, result: `<p>${T("up","+100 supporters")}"Riders for Route 12" is born. People know who to call, and the city takes you more seriously.</p>` },
-            { label: "Keep it a loose group chat. Rules are boring.", fx: { sup: -20 }, result: `<p>${T("down","−20 supporters")}Messages get lost. People get frustrated and mute the chat.</p>` },
-            { label: "Let the loudest person run everything", fx: { sup: 10 }, result: `<p>${T("up","+10 supporters")}Things move fast, but some members feel ignored and drift away.</p>` }
-          ] },
-        { type: "q", id: "g3", std: "Soc.8", short: "NAACP = bureaucratization", prompt: ev("History file · NAACP", "Founded in 1909. Today it has paid staff, lawyers, local branches across the country, and members who pay dues.") + "Which stage does the NAACP show?", options: ["Bureaucratization", "Coalescence", "Emergence", "Decline"], hint: "Staff, branches, and dues. Which stage is about becoming a formal organization?", why: "Becoming a formal organization with staff, rules, and money is bureaucratization." },
-        { type: "q", id: "g4", std: "Soc.8", short: "Counter-group = resistance movement", prompt: chat("A new group appears", "\"Keep Our Budget\" forms to STOP the city from raising a fee to pay for Route 12. They say families already pay enough.") + "What type of movement is this?", options: ["A resistance movement", "A reform movement", "An alternative movement", "A revolutionary movement"], hint: "Is this group pushing for a change, or trying to stop one?", why: "A movement that tries to stop or reverse a change is resistance. People can have fair reasons on both sides." }
-      ] },
-    { kicker: "Part 3 of 3", title: "How Movements End",
-      teach: `<p>In the <b>decline</b> stage, a movement shrinks. That doesn't always mean it failed. Sometimes it wins and isn't needed anymore.</p>
-        <p><b>Institutionalization</b> is when a movement's goal becomes a regular part of the system, like a law or an agency.</p>`,
-      blocks: [
-        { type: "note", get html() { return voteHtml(); } },
-        { type: "q", id: "d1", std: "Soc.8", short: "Suffrage declined after winning", prompt: ev("History file · Women's suffrage", "Women organized for the right to vote for about 70 years. In 1920 the 19th Amendment became part of the Constitution. After that, the big suffrage groups closed or changed into new groups.") + "Why did the suffrage movement decline?", options: ["It won its main goal", "It ran out of members", "The government banned it", "People forgot its goal"], hint: "What happened in 1920?", why: "Once women won the vote, the movement's main job was done. Decline can mean success." },
-        { type: "q", id: "d2", std: "Soc.7", short: "Clean Air Act = institutionalization", prompt: ev("History file · Clean air", "Environmental activists pushed for cleaner air. In 1970, Congress passed the Clean Air Act, and the new EPA began enforcing it.") + "What is this outcome called?", options: ["Institutionalization", "Deindividuation", "Coalescence", "Collective behavior"], hint: "The movement's goal became part of government. Check the teach box.", why: "The goal became a law and an agency, part of a social institution (government). That's institutionalization." },
-        { type: "q", id: "d3", std: "Soc.8", short: "Temperance = reform", prompt: ev("History file · Temperance", "From the 1800s to 1919, the temperance movement worked to pass a law banning alcohol across the country. It won the 18th Amendment, which made selling alcohol illegal.") + "What type of movement was temperance?", options: ["A reform movement", "A resistance movement", "A revolutionary movement", "Collective behavior"], hint: "Its big goal was a specific law. Which type changes laws?", why: "Temperance aimed to change specific laws, so it's a reform movement." },
-        { type: "q", id: "d4", std: "Soc.8", short: "American Revolution = revolutionary", prompt: ev("History file · 1776", "American colonists didn't just want one tax law changed. They threw off British rule and set up a whole new government.") + "What type of movement was this?", options: ["A revolutionary movement", "A reform movement", "A resistance movement", "A redemptive movement"], hint: "Did they want one law changed, or the whole system replaced?", why: "Replacing the whole system of government is a revolutionary movement." },
-        { type: "q", id: "d5", std: "Soc.7", short: "Why team up: power in numbers", prompt: chat("Route 12 rider, Kiara, 17", "\"When I emailed the council by myself, nobody answered. When 40 of us showed up, they had to listen.\"") + "What does Kiara's story show about why people join movements?", options: ["Organized numbers get leaders to respond", "Leaders only read messages from groups", "Acting alone is against city rules", "Groups make sure every person agrees"], hint: "What changed between Kiara alone and Kiara with 40 people?", why: "Institutions like city government respond to organized pressure. Many voices together have power one person lacks." }
-      ] }
-  ],
-  finale: {
-    title: "Why Team Up?",
-    report: st => `<p><b>You finished with ${st.fx.sup} supporters.</b> Organized, legal, steady actions built the movement. Unplanned crowds and actions that scare people did not.</p><p>Answer both in 1–2 full sentences.</p>`,
-    prompts: [
-      { id: "why", short: "Why join a movement instead of acting alone", label: "1. Why do people join a movement instead of acting alone? Use an example from today.", stem: "People join a movement instead of acting alone because ___. For example, ___.", min: 70, mustInclude: ["because", "since", "so ", "power", "together", "numbers", "listen"], mustMsg: "In answer 1, explain WHY (use \"because\") and give an example." },
-      { id: "stage", short: "One stage of my movement", label: "2. Pick one of the four stages. Explain what your Route 12 movement did in that stage.", stem: "In the ___ stage, our movement ___.", min: 60, newWords: 5, mustInclude: ["emergence", "coalescence", "bureaucrat", "decline"], mustMsg: "In answer 2, name one of the four stages: emergence, coalescence, bureaucratization, or decline." }
-    ]
-  },
-  extraAnswers: st => ({ "Supporters": String(st.fx.sup) })
-});
-
-</script>
+<script src="game.js?v=20261103b"></script>
 </body></html>
