@@ -11,10 +11,10 @@
 // =====================================================================
 (function () {
   "use strict";
-  const KEY = "wilsons-broken-promise-v1";
+  const KEY = "did-they-choose-v1";
   const API = "https://fynn-class-assignment-submissions-20261024.neotboy.chatgpt.site/api/submit";
   const ID = "write-the-peace-treaty";
-  const TITLE = "Day 5 · Treaty of Versailles: Wilson's Promise";
+  const TITLE = "Day 5 · Treaty of Versailles: Did They Get to Choose?";
   const STANDARD = "SS.9-12.WH.31, SS.9-12.WH.29";
   const LOCK = 3;
   // A copy opened anywhere other than the real class site never sends work to the dashboard.
@@ -25,95 +25,71 @@
   const app = $("app");
   function el(html) { const d = document.createElement("div"); d.innerHTML = html.trim(); return d.firstChild; }
 
-  // ---------------- The four stamps (who decided?) ----------------
-  const STAMPS = [
-    { k: "people", i: "🗳️", t: "THE PEOPLE THERE", s: "People who live there made the choice." },
-    { k: "big3", i: "✍️", t: "THE BIG THREE", s: "Wilson, Clemenceau, and Lloyd George decided for them." },
-    { k: "empire", i: "👑", t: "THEIR OLD RULER", s: "The empire that ruled them before the war kept control." },
-    { k: "force", i: "💥", t: "A GROUP WITH GUNS", s: "A group grabbed power by force." }
-  ];
-  const stampOf = k => STAMPS.find(s => s.k === k);
-
   // ---------------- The five case files ----------------
-  // Each file: one note that decides it (proof), one true note that points to a wrong stamp (a lead), one background note.
+  // Each file: 2 short lines, a real source, then 2 taps: Did they get to choose? (yes/no) and Why? (3 reasons, first is right).
   const FILES = [
-    { id: "germany", place: "Germany", year: "1919", answer: "big3", q: "Who decided Germany's punishment?",
+    { id: "germany", place: "Germany", year: "1919", chose: false,
       source: { kind: "doc" },
-      notes: [
-        { t: "January 1919: Germans vote for new leaders.", lead: true },
-        { t: "Wilson, Clemenceau, and Lloyd George write the terms. Germany can't join the talks. It can only send written complaints.", proof: true },
-        { t: "Sign, or the war starts again. The treaty blames Germany (Article 231) and makes it pay <b>reparations</b>: payments for war damage." }],
-      chief: "Germans just voted in new leaders. Sounds like they got a say.",
-      hint: "Germans voted for leaders. But who wrote the punishment?",
-      proofHint: "Which note shows Germany had no say in the terms?",
-      after: "Okay, you got me. Their vote never touched the treaty.",
-      next: "<b>June 28, 1919:</b> Germany signs. Germans call it a <b>Diktat</b>: a forced peace." },
-    { id: "poland", place: "Poland", year: "1918–1919", answer: "people", q: "Who decided Poland would exist again?",
+      lines: ["The winners write the treaty. Germany is <b>not allowed</b> in the talks.",
+              "Germany must take the blame, pay for war damage, and shrink its army."],
+      q1: "Did Germany get to choose?",
+      why: ["The winners wrote it, and Germany had to sign.", "Russia wrote it, and Germany had to sign.", "Japan wrote it, and Germany had to sign."],
+      hint: "Read the two lines. Who wrote the treaty?",
+      next: "Germans called it a <b>Diktat</b>: a forced peace." },
+    { id: "poland", place: "Poland", year: "1918", chose: true,
       source: { kind: "img", src: "img/europe-1923-map.png", alt: "Map of Europe after World War I. New countries such as Poland, Czechoslovakia, Yugoslavia, Finland, Estonia, Latvia and Lithuania are labeled in red.",
-        cap: "Europe in 1923, after the new borders were settled. Red names are new countries. Map by Historicair and Fluteflute, <a href=\"https://commons.wikimedia.org/wiki/File:Map_Europe_1923-en.svg\" target=\"_blank\" rel=\"noopener\">CC BY-SA 2.5</a>, via Wikimedia Commons." },
+        cap: "Europe after WWI. Red names are new countries. Map by Historicair and Fluteflute, <a href=\"https://commons.wikimedia.org/wiki/File:Map_Europe_1923-en.svg\" target=\"_blank\" rel=\"noopener\">CC BY-SA 2.5</a>, via Wikimedia Commons." },
       look: "Red names = new countries. Find POLAND.",
-      notes: [
-        { t: "Poland's neighbors split it up. For <b>123 years</b>, there was no Poland." },
-        { t: "November 1918: Poles declare a free Poland and set up their own government, before the peace talks even start.", proof: true },
-        { t: "Later, Wilson, Clemenceau, and Lloyd George help draw Poland's border with Germany.", lead: true }],
-      chief: "Paris drew Poland's borders. So Paris made Poland, right?",
-      hint: "Who acted first, before anyone met in Paris?",
-      proofHint: "Which note shows Poles acting on their own?",
-      after: "Fair. The Poles did this one themselves.",
-      next: "Wilson's promise worked here. But about <b>1 million Germans</b> now live inside Poland. Germany wants that land back." },
-    { id: "india", place: "India", year: "1919", answer: "empire", q: "Who decided India's future after the war?",
+      lines: ["Poland was wiped off the map for <b>123 years</b>.",
+              "In 1918, Poles set up their own country again."],
+      q1: "Did the Poles get to choose?",
+      why: ["Poles made their own country before the talks.", "Poles voted for it at the Paris peace talks.", "Poles won it in a war against France."],
+      hint: "Read line 2. Who set up the new Poland, and when?",
+      next: "Promise kept! But about <b>1 million Germans</b> now live in Poland, and Germany wants that land back." },
+    { id: "india", place: "India", year: "1919", chose: false,
       source: { kind: "img", src: "img/india-soldiers-1914.jpg", alt: "Postcard photo of Indian soldiers with rifles marching through a French town in 1914.",
         cap: "Indian soldiers march in France, 1914. Postcard, National Army Museum, public domain." },
       look: "Indian soldiers marching in France to fight for Britain.",
-      notes: [
-        { t: "Over <b>1 million</b> Indians served for Britain in WWI." },
-        { t: "Indian leaders ask to govern themselves after the war.", lead: true },
-        { t: "Britain has ruled India as a <b>colony</b> (a land ruled from far away) since the 1800s. It even picks India's delegates for the peace talks.", proof: true }],
-      chief: "Britain even picks who speaks for India in Paris. Doesn't that tell you something?",
-      hint: "India asked. Who already ruled India, and kept ruling?",
-      proofHint: "Which note shows who stayed in control of India?",
-      after: "Right. Britain never let go.",
-      next: "<b>April 1919:</b> A British general orders troops to fire on a peaceful crowd in Amritsar. Hundreds die. Gandhi leads a peaceful freedom movement. India wins freedom in <b>1947</b>." },
-    { id: "china", place: "China", year: "1919", answer: "big3", q: "Who decided Shandong's future in 1919?",
+      lines: ["Over <b>1 million</b> Indians served Britain in WWI.",
+              "After the war, Britain keeps ruling India as a <b>colony</b> (a land ruled from far away)."],
+      q1: "Did India get to choose?",
+      why: ["Britain kept ruling India after the war.", "Japan took over India after the war.", "Lenin's army took over India after the war."],
+      hint: "Read line 2. Who rules India after the war?",
+      next: "1919: troops under a British general fire on a peaceful crowd in Amritsar. Hundreds die. Gandhi leads a peaceful fight for freedom. India is free in <b>1947</b>." },
+    { id: "china", place: "China", year: "1919", chose: false,
       source: { kind: "img", src: "img/china-1915.jpg", alt: "1915 cartoon. A large figure labeled China holds a paper that says My Rights. A smaller figure labeled Japan holds a sign that says Demands.",
         cap: "Luther D. Bradley, <i>Chicago Daily News</i>, March 13, 1915. <a href=\"https://www.loc.gov/pictures/item/2009616341/\" target=\"_blank\" rel=\"noopener\">Library of Congress</a>, public domain." },
-      look: "1915: Japan holds a sign that says DEMANDS. China holds a paper that says MY RIGHTS.",
-      notes: [
-        { t: "China joined the <b>Allies</b> (Britain, France, the U.S.). <b>140,000</b> Chinese workers went to France to help." },
-        { t: "1914: Japan's army takes Germany's base in <b>Shandong</b>, a part of China.", lead: true },
-        { t: "April 1919: Wilson, Clemenceau, and Lloyd George agree that Japan keeps Shandong.", proof: true }],
-      chief: "Look at that cartoon. Japan's been pushing China around for years, and its army took Shandong. Guns decided this.",
-      hint: "The question says 1919. Who made the final call that year?",
-      proofHint: "Which note shows the 1919 decision?",
-      after: "Huh. The guns took it, but Paris made it official.",
+      look: "1915 cartoon: Japan holds DEMANDS. China holds MY RIGHTS.",
+      lines: ["China helped the winners in WWI.",
+              "But the winners give part of China, called <b>Shandong</b>, to Japan."],
+      q1: "Did China get to choose?",
+      why: ["The winners gave China's land to Japan.", "Britain took Shandong as its colony.", "Japan won Shandong in a war with China."],
+      hint: "Read line 2. Who gave Shandong to Japan?",
       next: "<b>May 4, 1919:</b> Students march in Beijing. China refuses to sign the treaty.",
-      nextImg: { src: "img/may-fourth-1919.jpg", alt: "Students carrying flags and banners march in Beijing, May 4, 1919.", cap: "Beijing students protest the treaty, May 4, 1919. Public domain." } },
-    { id: "russia", place: "Russia", year: "1917–1918", answer: "force", q: "Who decided who would rule Russia?",
+      nextImg: { src: "img/may-fourth-1919.jpg", alt: "Students carrying flags and banners march in Beijing, May 4, 1919.", cap: "Beijing students protest, May 4, 1919. Public domain." } },
+    { id: "russia", place: "Russia", year: "1917–1918", chose: false,
       source: { kind: "img", src: "img/lenin-1920.jpg", alt: "Photo of Lenin speaking from a wooden stand to a large crowd of Red Army soldiers in Moscow, 1920.",
         cap: "Lenin speaks to Red Army soldiers in Moscow, May 5, 1920. Photo by G. Goldstein, public domain." },
-      look: "Lenin speaks to his Red Army soldiers.",
-      notes: [
-        { t: "WWI killed millions of Russians. Cities ran out of food." },
-        { t: "March 1917: huge crowds protest, and the tsar (Russia's king) quits.", lead: true },
-        { t: "November 1917: Lenin's party, the Bolsheviks, takes over by force. Russians elect a lawmaking group. In January 1918, Lenin's soldiers shut it down after one day.", proof: true }],
-      chief: "Russians got to elect a lawmaking group. Sounds like the people chose to me.",
-      hint: "Read the whole note about the election. What happened to it? Who took over, and how?",
-      proofHint: "Which note shows how Lenin got and kept power?",
-      after: "So people voted, and Lenin shut the vote down. That's the story.",
-      next: "Russia isn't even invited to Paris. After a civil war, Lenin's party rules alone. In <b>1922</b> Russia and nearby lands join to form the <b>Soviet Union</b>." }
+      look: "Lenin speaks to his soldiers.",
+      lines: ["1917: Lenin's party takes over Russia by force. This is a <b>revolution</b>.",
+              "Russians vote for lawmakers. After one day, Lenin's soldiers send the lawmakers home."],
+      q1: "Did Russians get to choose?",
+      why: ["Lenin took power with guns and shut down the vote.", "The winners in Paris picked Russia's new leader.", "The tsar handed power to Lenin's party."],
+      hint: "Read both lines. How did Lenin get power? What happened to the lawmakers?",
+      next: "Russia wasn't even invited to Paris. In <b>1922</b>, Russia and nearby lands form the <b>Soviet Union</b>." }
   ];
 
   // ---------------- The two other checks ----------------
   const CHECKS = {
     promise: { std: "WH.31", short: "Check 1 · Wilson's promise",
-      prompt: "Wilson's test: a place keeps the promise when…",
-      options: ["the people living there agree to their government.", "the winners of the war agree on its government.", "a strong neighbor agrees to protect its government."],
-      hint: "Consent means agreeing. Whose agreement does Wilson say counts?",
-      why: "That idea is called <b>self-determination</b>." },
+      prompt: "Wilson promised that…",
+      options: ["people choose their own government.", "winners choose the losers' government.", "strong nations protect the weak ones."],
+      hint: "Look at the big blue line.",
+      why: "This idea is called <b>self-determination</b>." },
     dyson: { std: "WH.29", short: "Check 7 · Dyson's warning",
-      prompt: "Dyson drew this in May 1919. What is he predicting?",
+      prompt: "Dyson drew this in 1919. What is he predicting?",
       options: ["This peace will cause another war.", "This peace will keep children safe.", "This treaty will end war for good."],
-      hint: "“1940 Class” = boys old enough to be drafted in 1940. Why is he crying?",
+      hint: "“1940 Class” = boys old enough to be soldiers in 1940. Why is he crying?",
       why: "He was close. World War II began in <b>1939</b>." }
   };
 
@@ -156,13 +132,13 @@
       o.onclick = () => o.remove(); document.body.appendChild(o);
     });
   }
-  const isDone = f => !!(st.files[f.id] && st.files[f.id].proof);
-  function kept() { return FILES.filter(f => isDone(f) && f.answer === "people").length; }
-  function broken() { return FILES.filter(f => isDone(f) && f.answer !== "people").length; }
+  const isDone = f => !!(st.files[f.id] && st.files[f.id].done);
+  function kept() { return FILES.filter(f => isDone(f) && f.chose).length; }
+  function broken() { return FILES.filter(f => isDone(f) && !f.chose).length; }
   function boardHtml(now) {
     return `<div class="board">` + FILES.map((f, n) => {
-      const done = isDone(f), cls = done ? (f.answer === "people" ? " kept" : " broken") : n === now ? " now" : " locked";
-      const s = done ? (f.answer === "people" ? "✓ KEPT" : "✗ BROKEN") : n === now ? "OPEN" : "🔒";
+      const done = isDone(f), cls = done ? (f.chose ? " kept" : " broken") : n === now ? " now" : " locked";
+      const s = done ? (f.chose ? "✓ CHOSE" : "✗ NO CHOICE") : n === now ? "OPEN" : "🔒";
       return `<div class="pin${cls}"><span>📁 ${f.place}</span><span class="pin-s">${s}</span></div>`;
     }).join("") + `</div>`;
   }
@@ -174,7 +150,7 @@
     const rec = st.checks[id] || (st.checks[id] = { done: false, wrong: 0 });
     if (rec.done) {
       box.className = "done-check";
-      box.innerHTML = `<p class="right">✓ Right! ${q.options[0]}</p><p>${q.why}</p>`;
+      box.innerHTML = `<p class="right">✓ Right! ${/…$/.test(q.prompt) ? q.prompt.replace(/…$/, " ") : ""}${q.options[0]}</p><p>${q.why}</p>`;
       return box;
     }
     box.className = "check";
@@ -219,14 +195,14 @@
     app.innerHTML = `<section class="card title-card">
       <div>
         <p class="kicker">World History · Day 5</p>
-        <h1>Case File: Wilson's Promise</h1>
-        <p class="hook">1919. The deadliest war yet is over. One leader promised the world a fair peace. Did he keep it?</p>
-        <div class="facts"><span>📁 5 case files</span><span>✅ 7 checks</span><span>✍️ 2 short writes</span><span>⏱️ about 25 min</span></div>
+        <h1>Case File: Did They Get to Choose?</h1>
+        <p class="hook">WWI is over. The winners promise: people get to pick their own government. Did they mean it?</p>
+        <div class="facts"><span>📁 5 case files</span><span>👆 2 taps each</span><span>✍️ 2 short writes</span><span>⏱️ about 20 min</span></div>
         <p class="goal"><b>Today's goal:</b> Explain how the peace after WWI changed Germany, Poland, India, China, and Russia.</p>
         <button type="button" class="go big" id="startBtn">Start →</button>
         <p class="heads">Serious topic: war and protest deaths. No graphic images. Your work saves on this Chromebook.</p>
       </div>
-      <div class="folder-art" aria-hidden="true"><div><b>CASE FILE</b><small>PARIS · 1919<br>5 PLACES · 1 PROMISE</small></div><span class="stamp">OPEN</span></div>
+      <div class="folder-art" aria-hidden="true"><div><b>CASE FILE</b><small>PARIS · 1919<br>5 PLACES · 1 QUESTION</small></div><span class="stamp">OPEN</span></div>
     </section>`;
     $("startBtn").onclick = () => { st.step = 0; save(); render(); window.scrollTo(0, 0); };
   }
@@ -237,26 +213,23 @@
       <h2>The promise</h2>
       <div class="split">
         <div>
-          <div class="wwi"><b>WWI, 1914–1918:</b> The <b>Allies</b> (Britain, France, the U.S., and others) beat Germany and its partners. About 20 million people died. Now the winners meet in Paris to write the peace: the <b>Treaty of Versailles</b>.</div>
+          <div class="wwi"><b>WWI (1914–1918):</b> Britain, France, and the U.S. beat Germany. About 20 million people died. Now the winners meet in Paris to write the peace: the <b>Treaty of Versailles</b>.</div>
           <figure class="source promise-photo"><img src="img/big-four-1919.jpg" alt="Photo of four leaders in suits standing outside a building in Paris, 1919.">
-          <figcaption><span class="namebar"><span>Lloyd George, Britain</span><span>Orlando, Italy</span><span>Clemenceau, France</span><span>Wilson, USA</span></span>The <b>Big Three</b> (Wilson, Clemenceau, Lloyd George) make the big calls. Italy's Orlando gets pushed aside. Germany and Russia aren't invited. May 27, 1919, U.S. Army Signal Corps, public domain.</figcaption></figure>
+          <figcaption><span class="namebar"><span>Lloyd George, Britain</span><span>Orlando, Italy</span><span>Clemenceau, France</span><span>Wilson, USA</span></span>The winners' leaders in Paris, May 27, 1919. U.S. Army Signal Corps, public domain.</figcaption></figure>
         </div>
         <div>
-          <p>You're a reporter in Paris. Your editor, the Chief, wants one story: <b>did Wilson keep his promise?</b></p>
-          <div class="doc"><p class="doc-h">📜 President Woodrow Wilson, Feb. 11, 1918</p>
-            <p class="doc-text">“Peoples may now be dominated and governed only by their own consent.”</p>
-            <p class="plain">= No one should rule a people unless they agree to it. <span class="small">(consent = agreeing)</span></p></div>
+          <p class="bigpromise">🇺🇸 Wilson's promise: <b>People get to choose their own government.</b></p>
+          <p class="small">His words, Feb. 11, 1918: “Peoples may now be dominated and governed only by their own consent.”</p>
+          <p>You're a reporter. Check 5 places. <b>Did the people there get to choose?</b></p>
         </div>
       </div>
     </section>`);
     app.appendChild(card);
     const side = card.querySelector(".split > div:last-child");
-    side.appendChild(checkWidget("promise", () => { render(); scrollTo(".kit"); }));
+    side.appendChild(checkWidget("promise", () => { render(); scrollTo("button.go"); }));
     if (st.checks.promise && st.checks.promise.done) {
-      card.appendChild(el(`<div><p class="q">Your 4 stamps. For each place, stamp who really decided.</p>
-        <div class="kit">${STAMPS.map(s => `<div class="${s.k === "people" ? "keep" : ""}"><i aria-hidden="true">${s.i}</i><b>${s.t}</b><span>${s.s}</span></div>`).join("")}</div>
-        <p class="small" style="margin-top:8px">Wilson's promise is kept only when the people there decide. Then you'll tap the note that proves your stamp.</p></div>`));
-      app.appendChild(nextBtn("Open file 1 →", advance));
+      side.appendChild(el(`<p class="howto">Each file: <b>1.</b> Did they get to choose? <b>2.</b> Why?</p>`));
+      side.appendChild(nextBtn("Open file 1 →", advance));
     }
   }
 
@@ -269,8 +242,8 @@
     </div><figcaption>Treaty of Versailles: Article 231 (blame), Article 160 (army), Part III (land), Article 119 (colonies). Signed June 28, 1919.</figcaption></figure>`;
   }
 
-  // A file: 1) stamp who decided, 2) tap the note that proves it.
-  let stampLock = false;
+  // A file: 1) Did they get to choose? (yes/no)  2) Why? (3 reasons)
+  let fileLock = false;
   function fileScreen(n) {
     const f = FILES[n], rec = st.files[f.id] || {};
     const card = el(`<section class="card">
@@ -280,8 +253,7 @@
         <div>
           <h2>📁 ${f.place} <span class="yr">File ${n + 1} of 5 · ${f.year}</span></h2>
           ${f.look ? `<p class="look">👀 ${f.look}</p>` : ""}
-          <div class="notes"></div>
-          ${chief(f.chief)}
+          <div class="lines">${f.lines.map(t => `<p>${t}</p>`).join("")}</div>
           <div class="verdict"></div>
         </div>
       </div>
@@ -293,82 +265,59 @@
       slot.outerHTML = `<figure class="source"><img src="${f.source.src}" alt="${f.source.alt}"><span class="zoom" aria-hidden="true">🔍 click to zoom</span><figcaption>${f.source.cap}</figcaption></figure>`;
       zoomable(card.querySelector(".source img"));
     }
-    const notesBox = card.querySelector(".notes"), verdict = card.querySelector(".verdict");
-    const drawNotes = (order, clickable, onPick) => {
-      notesBox.replaceChildren();
-      order.forEach(i => {
-        const nt = f.notes[i];
-        const b = document.createElement(clickable ? "button" : "div");
-        if (clickable) b.type = "button";
-        b.className = "note" + (clickable ? " pick" : "") + (rec.proof && nt.proof ? " proved" : "");
-        b.innerHTML = (rec.proof && nt.proof ? "✓ " : "📝 ") + nt.t;
-        if (clickable) b.onclick = () => onPick(i, b);
-        notesBox.appendChild(b);
-      });
-    };
-    const baseOrder = f.notes.map((x, i) => i);
+    const verdict = card.querySelector(".verdict");
+    const yn = f.chose ? "YES" : "NO";
 
-    // Done: show the result.
-    if (rec.proof) {
-      drawNotes(baseOrder, false);
-      const s = stampOf(f.answer), keep = f.answer === "people";
-      card.querySelector(".source").insertAdjacentHTML("beforeend", `<span class="stamp big-stamp${keep ? " green" : ""}">PROMISE ${keep ? "KEPT" : "BROKEN"}</span>`);
-      verdict.innerHTML = `<div class="result"><p class="right">✓ Right! ${s.i} ${s.t}, and you found the proof.</p><p><b>🗞️ “${f.after}”</b></p></div>
+    if (rec.done) {
+      card.querySelector(".source").insertAdjacentHTML("beforeend", `<span class="stamp big-stamp${f.chose ? " green" : ""}">${f.chose ? "THEY CHOSE" : "NO CHOICE"}</span>`);
+      verdict.innerHTML = `<div class="result"><p class="right">✓ Right! ${yn}. ${f.why[0]}</p></div>
         <div class="next"><p class="kicker">What happened next</p><p>${f.next}</p>${f.nextImg ? `<img src="${f.nextImg.src}" alt="${f.nextImg.alt}"><span class="small">${f.nextImg.cap}</span>` : ""}</div>`;
       verdict.appendChild(nextBtn(n < FILES.length - 1 ? "Open file " + (n + 2) + " →" : "Close the files →", advance));
       return;
     }
 
-    // Step 2: stamp chosen, now prove it.
-    if (rec.stamp) {
-      const s = stampOf(f.answer);
-      notesBox.insertAdjacentHTML("beforebegin", `<div class="prove"><p class="right">✓ ${s.i} ${s.t}. Good call.</p><p class="q">Now prove it: tap the note that shows it. 👇</p></div>`);
-      verdict.innerHTML = `<p class="msg" role="status" aria-live="polite"></p>`;
-      const fb = verdict.querySelector(".msg");
-      let lockP = false, last = "";
+    if (!rec.yn) {
+      verdict.innerHTML = `<p class="q">1. ${f.q1}</p><div class="yn"></div><p class="msg" role="status" aria-live="polite"></p>`;
+      const area = verdict.querySelector(".yn"), fb = verdict.querySelector(".msg");
       const draw = () => {
-        let order = shuffle(baseOrder);
-        if (order.join() === last) order.push(order.shift());
-        last = order.join();
-        drawNotes(order, true, (i) => {
-          if (lockP) return;
-          if (f.notes[i].proof) {
-            rec.proof = true; st.files[f.id] = rec;
-            if (window.classFirstTry) window.classFirstTry.right("bp-" + f.id);
-            save(); render(); scrollTo(".result"); return;
-          }
-          rec.wrong = (rec.wrong || 0) + 1; rec.pw = (rec.pw || 0) + 1; if (f.notes[i].lead) rec.leadPicked = true; st.files[f.id] = rec;
-          if (window.classFirstTry) window.classFirstTry.wrong(); save();
-          miss(notesBox, notesBox, fb, f.notes[i].lead ? "That note is true, but it points the other way. " + f.proofHint : f.proofHint, draw, rec.pw, () => { lockP = false; }, () => { lockP = true; });
+        area.replaceChildren();
+        [["YES", "🗳️", "They got to choose."], ["NO", "🚫", "Someone else decided."]].forEach(([v, i, sub]) => {
+          const b = document.createElement("button"); b.type = "button"; b.className = "ynbtn " + (v === "YES" ? "y" : "n");
+          b.innerHTML = `<i aria-hidden="true">${i}</i><b>${v}</b><span>${sub}</span>`;
+          b.onclick = () => {
+            if (fileLock) return;
+            if (v === yn) { rec.yn = true; st.files[f.id] = rec; save(); render(); scrollTo(".verdict"); return; }
+            rec.wrong = (rec.wrong || 0) + 1; rec.ynw = (rec.ynw || 0) + 1; st.files[f.id] = rec;
+            if (window.classFirstTry) window.classFirstTry.wrong(); save();
+            miss(area, verdict, fb, f.hint, draw, rec.ynw, () => { fileLock = false; }, () => { fileLock = true; });
+          };
+          area.appendChild(b);
         });
       };
       draw();
       return;
     }
 
-    // Step 1: pick the stamp.
-    drawNotes(baseOrder, false);
-    verdict.innerHTML = `<p class="q">${f.q}</p><div class="stamps"></div><p class="msg" role="status" aria-live="polite"></p>`;
-    const area = verdict.querySelector(".stamps"), fb = verdict.querySelector(".msg");
+    verdict.innerHTML = `<p class="right">✓ ${yn}. Good.</p><p class="q">2. Why?</p><div class="choices"></div><p class="msg" role="status" aria-live="polite"></p>`;
+    const area = verdict.querySelector(".choices"), fb = verdict.querySelector(".msg");
     let last = "";
-    function draw() {
+    const draw = () => {
       area.replaceChildren();
-      let order = shuffle(STAMPS);
-      if (order.map(o => o.k).join() === last) order.push(order.shift());
-      last = order.map(o => o.k).join();
-      order.forEach(o => {
-        const b = document.createElement("button"); b.type = "button"; b.className = "stampbtn";
-        b.innerHTML = `<i aria-hidden="true">${o.i}</i><b>${o.t}</b><span>${o.s}</span>`;
+      let order = shuffle(f.why.map((t, i) => i));
+      if (order.join() === last) order.push(order.shift());
+      last = order.join();
+      order.forEach(i => {
+        const b = document.createElement("button"); b.type = "button"; b.className = "choice"; b.textContent = f.why[i];
         b.onclick = () => {
-          if (stampLock) return;
-          if (o.k === f.answer) { rec.stamp = true; st.files[f.id] = rec; save(); render(); scrollTo(".verdict"); return; }
-          rec.wrong = (rec.wrong || 0) + 1; rec.sw = (rec.sw || 0) + 1; (rec.picked = rec.picked || []).push(o.t); st.files[f.id] = rec;
+          if (fileLock) return;
+          if (i === 0) { rec.done = true; st.files[f.id] = rec; if (window.classFirstTry) window.classFirstTry.right("bp-" + f.id); save(); render(); scrollTo(".result"); return; }
+          rec.wrong = (rec.wrong || 0) + 1; rec.ww = (rec.ww || 0) + 1; (rec.picked = rec.picked || []).push(f.why[i]); st.files[f.id] = rec;
           if (window.classFirstTry) window.classFirstTry.wrong(); save();
-          miss(area, verdict, fb, f.hint, draw, rec.sw, () => { stampLock = false; }, () => { stampLock = true; });
+          miss(area, verdict, fb, f.hint, draw, rec.ww, () => { fileLock = false; }, () => { fileLock = true; });
         };
         area.appendChild(b);
       });
-    }
+    };
     draw();
   }
 
@@ -428,15 +377,15 @@
   const words = v => String(v || "").toLowerCase().replace(/[’']/g, "").match(/[a-z0-9]+/g) || [];
   const hasAny = (v, list) => { const w = words(v); return list.some(k => k.endsWith("*") ? w.some(x => x.startsWith(k.slice(0, -1))) : w.includes(k)); };
   const PLACES = ["germany", "german", "germans", "poland", "polish", "poles", "india", "indian", "indians", "china", "chinese", "shandong", "russia", "russian", "russians"];
-  const DECIDERS = ["wilson", "clemenceau", "lloyd", "peacemaker*", "big", "three", "paris", "talks", "treaty", "britain", "british", "colony", "colonies", "japan*", "lenin*", "bolshevik*", "force", "forced", "guns", "soldiers", "army", "vote*", "declare*", "chose", "choose", "chosen", "assembly", "tsar", "delegates", "empire", "ruler", "ruled", "rules", "blame*", "231", "reparation*", "complaints", "kicked", "allowed", "decided", "leaders"];
+  const DECIDERS = ["wilson", "clemenceau", "lloyd", "peacemaker*", "big", "three", "winner*", "gun*", "trade*", "gave", "give*", "kept", "keep*", "paris", "talks", "treaty", "britain", "british", "colony", "colonies", "japan*", "lenin*", "bolshevik*", "force", "forced", "guns", "soldiers", "army", "vote*", "declare*", "chose", "choose", "chosen", "assembly", "tsar", "delegates", "empire", "ruler", "ruled", "rules", "blame*", "231", "reparation*", "complaints", "kicked", "allowed", "decided", "leaders"];
   const REASONS = ["blame*", "231", "guilt", "pay", "paid", "paying", "payment*", "reparation*", "money", "debt*", "land", "lands", "territory", "army", "military", "soldiers", "colonies", "diktat", "forced", "revenge", "humiliat*", "unfair", "harsh*", "punish*", "poland", "talks", "complaints", "1940", "draft*"];
   const PROMPTS = [
-    { id: "w1", short: "Kept or broken", label: "2. Pick one place. Was Wilson's promise kept or broken there? Who decided?",
-      stem: "In ___, the promise was ___ because ___.",
-      check: v => !hasAny(v, PLACES) ? "Name the place you picked: Germany, Poland, India, China, or Russia." : !hasAny(v, DECIDERS) ? "Say who decided, and how: the Big Three in Paris, Britain, Lenin's soldiers, or the people there." : "" },
-    { id: "w2", short: "Dyson's warning", label: "3. Dyson's warning: why might this peace lead to another war? Explain how one cause leads to the next.",
+    { id: "w1", short: "Did they choose", label: "2. Pick one place. Did the people there get to choose? Why?",
+      stem: "In ___, people did / did not get to choose because ___.",
+      check: v => !hasAny(v, PLACES) ? "Name the place you picked: Germany, Poland, India, China, or Russia." : !hasAny(v, DECIDERS) ? "Say why. Who decided for them: the winners, Britain, Lenin's soldiers, or the people themselves?" : "" },
+    { id: "w2", short: "Dyson's warning", label: "3. Dyson's warning: why might this peace lead to another war?",
       stem: "This peace might lead to war because ___, so Germans ___.",
-      ideas: "Ideas from today: the blame · the payments · lost land · the 100,000-soldier army · no say in the talks · Germans living in Poland",
+      ideas: "Ideas: the blame · the payments · lost land · the small army · no say in the talks",
       check: v => !hasAny(v, REASONS) ? "Use a real reason from today: the blame, the payments, the lost land, the army limit, or Germany having no say in the talks." : "" }
   ];
   function frontScreen() {
@@ -453,7 +402,7 @@
       <button type="button" class="go" id="sendBtn">${st.turnedIn ? "Turn in again" : "Turn in"}</button>
       <p class="msg" id="sendMsg" role="status" aria-live="polite"></p>
       ${st.turnedIn ? `<p class="turned" id="turnedBox">✓ Turned in</p>` : ""}
-      <details class="sources"><summary>Sources</summary><p>Woodrow Wilson, address to Congress, Feb. 11, 1918. Treaty of Versailles (1919), Articles 119 (colonies), 156–158 (Shandong), 160 (army), 231 (war guilt), Part III (borders). Photos and cartoons: “The Big Four,” U.S. Army Signal Corps, May 27, 1919; map of Europe in 1923 by Historicair and Fluteflute (CC BY-SA 2.5, Wikimedia Commons); Indian soldiers in France, 1914 postcard, National Army Museum; Luther D. Bradley, <i>Chicago Daily News</i>, March 13, 1915 (Library of Congress); May Fourth protest, Beijing, 1919; Lenin in Moscow, May 5, 1920, by G. Goldstein; Will Dyson, “Peace and Future Cannon Fodder,” <i>Daily Herald</i>, May 1919. The reporter and the Chief are made-up roles. Everything in the case files is real.</p></details>
+      <details class="sources"><summary>Sources</summary><p>Woodrow Wilson, address to Congress, Feb. 11, 1918. Treaty of Versailles (1919), Articles 119 (colonies), 156–158 (Shandong), 160 (army), 231 (war guilt), Part III (borders). Photos and cartoons: “The Big Four,” U.S. Army Signal Corps, May 27, 1919; map of Europe in 1923 by Historicair and Fluteflute (CC BY-SA 2.5, Wikimedia Commons); Indian soldiers in France, 1914 postcard, National Army Museum; Luther D. Bradley, <i>Chicago Daily News</i>, March 13, 1915 (Library of Congress); May Fourth protest, Beijing, 1919; Lenin in Moscow, May 5, 1920, by G. Goldstein; Will Dyson, “Peace and Future Cannon Fodder,” <i>Daily Herald</i>, May 1919. The reporter is a made-up role. Everything in the case files is real.</p></details>
     </section>`);
     app.appendChild(card);
     card.querySelectorAll(".hbtn").forEach((b, i) => b.onclick = () => {
@@ -491,7 +440,7 @@
     const answers = { "Standard": STANDARD };
     const ids = ["promise"].concat(FILES.map(f => f.id), ["dyson"]);
     const wrongOf = id => CHECKS[id] ? ((st.checks[id] && st.checks[id].wrong) || 0) : ((st.files[id] && st.files[id].wrong) || 0);
-    const doneOf = id => CHECKS[id] ? !!(st.checks[id] && st.checks[id].done) : !!(st.files[id] && st.files[id].proof);
+    const doneOf = id => CHECKS[id] ? !!(st.checks[id] && st.checks[id].done) : !!(st.files[id] && st.files[id].done);
     const right = ids.filter(id => doneOf(id) && !wrongOf(id)).length;
     answers["First-try correct"] = right + " of " + ids.length;
     const by = {};
@@ -501,7 +450,7 @@
     answers[CHECKS.promise.short] = CHECKS.promise.options[0] + tries(wrongOf("promise"));
     FILES.forEach((f, n) => {
       const r = st.files[f.id] || {};
-      answers["Check " + (n + 2) + " · File: " + f.place] = stampOf(f.answer).t + " + proof note" + tries(wrongOf(f.id)) + ((r.sw || r.pw) ? " [wrong stamps: " + ((r.picked || []).join(", ") || "none") + "; proof misses " + (r.pw || 0) + (r.leadPicked ? ", fell for the lead note" : "") + "]" : "");
+      answers["Check " + (n + 2) + " · File: " + f.place] = (f.chose ? "YES" : "NO") + " · " + f.why[0] + tries(wrongOf(f.id)) + ((r.ynw || r.ww) ? " [yes/no misses " + (r.ynw || 0) + "; wrong reasons: " + ((r.picked || []).join(" / ") || "none") + "]" : "");
     });
     answers[CHECKS.dyson.short] = CHECKS.dyson.options[0] + tries(wrongOf("dyson"));
     answers["Headline picked"] = st.headline;
@@ -531,7 +480,7 @@
   // ---------------- Router (no skipping: each step needs the one before it) ----------------
   function render() {
     // Fix a save that points past unfinished work.
-    const need = [() => st.checks.promise && st.checks.promise.done].concat(FILES.map(f => () => !!(st.files[f.id] && st.files[f.id].proof)), [() => st.checks.dyson && st.checks.dyson.done]);
+    const need = [() => st.checks.promise && st.checks.promise.done].concat(FILES.map(f => () => !!(st.files[f.id] && st.files[f.id].done)), [() => st.checks.dyson && st.checks.dyson.done]);
     for (let i = 0; i < Math.min(st.step, need.length); i++) if (!need[i]()) { st.step = i; save(); break; }
     header();
     app.innerHTML = "";
@@ -555,5 +504,5 @@
     const s = Math.min(st.step, STEPS.length - 1);
     app.insertBefore(el(`<p class="welcome" role="status">Welcome back! You're on step ${s + 1} of ${STEPS.length}: ${STEPS[s].name}.</p>`), app.firstChild);
   }
-  window.__case = { FILES, CHECKS, STAMPS };
+  window.__case = { FILES, CHECKS };
 })();
