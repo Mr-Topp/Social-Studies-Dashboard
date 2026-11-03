@@ -1185,9 +1185,12 @@ function renderGrid(list) {
   const nowUnit = currentUnit(tab);
   if (nowUnit) unitsUsed.add(nowUnit);
   const allUnits = byUnit([...new Set([...activitiesFor(list), ...Object.keys(REG).filter(id => REG[id].course === tab && ((REG[id].path && REG[id].turnIn !== false) || REG[id].paper) && unitsUsed.has(unitOf(id)))])], tab);
-  const pick = gridUnitPick[tab], showKey = allUnits.some(g => g.unit === pick) ? pick : nowUnit;
+  // "Look at another unit" only lists units from the part the class is on now (Fynn, 11-03): Part 1 units
+  // (keys below zero) or Part 2 units, never both, and no "Other activities".
+  const partUnits = nowUnit ? allUnits.filter(g => nowUnit < 0 ? g.unit < 0 : g.unit > 0) : allUnits;
+  const pick = gridUnitPick[tab], showKey = partUnits.some(g => g.unit === pick) ? pick : nowUnit;
   const units = showKey && allUnits.some(g => g.unit === showKey) ? allUnits.filter(g => g.unit === showKey) : allUnits;
-  const unitPicker = allUnits.length > 1 && units.length === 1 ? `<div class="unitpick"><label>Look at another unit <select id="gridUnitSel">${allUnits.map(g => `<option value="${g.unit}"${g.unit === units[0].unit ? " selected" : ""}>${safe(g.name)}${g.unit === nowUnit ? " (now)" : ""}</option>`).join("")}</select></label>${units[0].unit !== nowUnit && nowUnit ? ` <button class="light" id="gridUnitNow">Back to current unit</button>` : ""}</div>` : "";
+  const unitPicker = partUnits.length > 1 && units.length === 1 ? `<div class="unitpick"><label>Look at another unit <select id="gridUnitSel">${partUnits.map(g => `<option value="${g.unit}"${g.unit === units[0].unit ? " selected" : ""}>${safe(g.name)}${g.unit === nowUnit ? " (now)" : ""}</option>`).join("")}</select></label>${units[0].unit !== nowUnit && nowUnit ? ` <button class="light" id="gridUnitNow">Back to current unit</button>` : ""}</div>` : "";
   $("out").innerHTML = KEYLINE + HOWTO + unitPicker +
     units.map(g => {
       const inUnit = list.filter(r => g.ids.includes(r.assignmentId));
