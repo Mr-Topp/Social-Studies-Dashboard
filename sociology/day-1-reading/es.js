@@ -50,6 +50,13 @@ SiteLang.add({
 
     // Reading 3
     "Everyday life": "La vida diaria",
+    "Sociologists call the bubble’s last idea the social construction of reality: “normal” is built by people acting together every day. Why does the trash handoff in this picture feel normal?": "Los sociólogos llaman a la última idea del globo la construcción social de la realidad (social construction of reality): lo “normal” lo construyen las personas al actuar juntas todos los días. ¿Por qué se siente normal la entrega de la basura en esta imagen?",
+    "Read the bubble’s last sentence: society is the sum of everyday interactions between people. Which choice shows people building “normal” together?": "Lee la última oración del globo: la sociedad es la suma de las interacciones diarias entre las personas. ¿Qué opción muestra a personas construyendo lo “normal” juntas?",
+    "Neighbors and workers repeat this exchange until everyone expects it": "Los vecinos y los trabajadores repiten este intercambio hasta que todos lo esperan",
+    "Her place in society alone decides it, no matter what people do": "Su lugar en la sociedad lo decide todo, sin importar lo que haga la gente",
+    "A city leader made the rule, and people follow it without talking": "Un líder de la ciudad hizo la regla, y la gente la sigue sin hablar",
+    "Each person learned the habit alone, with no one else involved": "Cada persona aprendió la costumbre sola, sin nadie más",
+    "That’s the social construction of reality: things like trash day feel “normal” because people keep doing them together, day after day.": "Eso es la construcción social de la realidad: cosas como el día de la basura se sienten “normales” porque la gente las sigue haciendo juntas, día tras día.",
     "Our place in society can shape our beliefs and chances in life. Society is also built through what people do together each day.": "Nuestro lugar en la sociedad puede influir en nuestras creencias y en nuestras oportunidades en la vida. La sociedad también se construye con lo que las personas hacen juntas cada día.",
     "Scanned illustration with a quote saying values and opportunities are shaped by a person’s position in society, and society is made from everyday interactions.": "Ilustración escaneada con una cita que dice que los valores y las oportunidades dependen de la posición de una persona en la sociedad, y que la sociedad está hecha de interacciones diarias.",
     "The speaker says society is “the sum of everyday interactions.” How does the picture behind her show that?": "La mujer que habla dice que la sociedad es “la suma de las interacciones diarias” (“the sum of everyday interactions”). ¿Cómo lo muestra la imagen que está detrás de ella?",

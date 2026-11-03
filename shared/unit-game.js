@@ -7,6 +7,7 @@
 //  A page calls UnitGame.start({...}) with its scenes. Block types:
 //    {type:"note",  html}                         - info box
 //    {type:"event", id, html, choices:[{label, result, fx:{...}}]}  - a choice with consequences
+//                                                    (choices are shuffled on screen; list them in any order)
 //    {type:"q", id, prompt, options:[CORRECT, wrong, wrong, wrong], hint, why, label}
 //  In "q" blocks the FIRST option is the right one; the screen always shuffles them.
 // =====================================================================
@@ -26,6 +27,7 @@
       if (!st || typeof st !== "object" || !st.picks) st = fresh();
       const save = () => { try { localStorage.setItem(KEY, JSON.stringify(st)); } catch (e) {} };
       let locked = false;
+      const eventOrder = {};
 
       const allQs = [];
       cfg.scenes.forEach(s => s.blocks.forEach(b => { if (b.type === "q") allQs.push(b); }));
@@ -68,7 +70,11 @@
             return wrap;
           }
           const row = document.createElement("div"); row.className = "choices";
-          b.choices.forEach((c, i) => {
+          // Story choices are shown in a shuffled order (the best one used to sit first almost every
+          // time). The order stays the same while the page is open; picks are saved by original index.
+          if (!eventOrder[b.id]) eventOrder[b.id] = shuffle(b.choices.map((c, i) => i));
+          eventOrder[b.id].forEach(i => {
+            const c = b.choices[i];
             const btn = document.createElement("button"); btn.type = "button"; btn.className = "choice"; btn.textContent = c.label;
             btn.onclick = () => { st.picks[b.id] = i; applyFx(c.fx); st.step++; save(); render(true); };
             row.appendChild(btn);

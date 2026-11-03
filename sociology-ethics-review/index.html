@@ -6,7 +6,7 @@
   <meta name="theme-color" content="#08111f">
   <title>Escape from Seahaven | Sociology Game</title>
   <meta name="description" content="A story-driven sociology review game inspired by The Truman Show.">
-  <link rel="stylesheet" href="styles.css?v=2">
+  <link rel="stylesheet" href="styles.css?v=3">
 </head>
 <body>
   <div class="noise" aria-hidden="true"></div>
@@ -19,9 +19,14 @@
           <h1 id="game-title">ESCAPE<br><em>FROM</em><br>SEAHAVEN</h1>
           <p class="intro">Everything looks perfect. Everyone is smiling. And every choice has already been made for you. Break the patterns, collect evidence, and escape before Christof takes back control.</p>
           <div class="start-facts"><span>SOLO GAME</span><span>25–35 MINUTES</span><span>TEST REVIEW</span></div>
-          <label class="name-field">Investigator name
-            <input id="player-name" maxlength="24" autocomplete="off" placeholder="Enter your name">
+          <div id="resume-box" class="resume-box" hidden>
+            <p id="resume-text" role="status"></p>
+            <button id="new-run-btn" type="button" class="link-btn">Not you? Start a new investigation</button>
+          </div>
+          <label class="name-field">Your name: first name + last initial (like Jordan M.)
+            <input id="player-name" maxlength="24" autocomplete="off" placeholder="Jordan M.">
           </label>
+          <p id="name-msg" class="name-msg" role="alert"></p>
           <button id="start-btn" class="primary-btn">Start the Broadcast <span>→</span></button>
         </div>
         <div class="tv-stage" aria-hidden="true">
@@ -110,6 +115,6 @@
       </div>
     </section>
   </main>
-  <script src="../shared/assignments.js?v=20261031h"></script><script src="../shared/turnin.js?v=20261102read"></script><script src="../shared/lang.js?v=20261102samonly"></script><script src="es.js?v=20261102c"></script><script src="game.js?v=2"></script>
+  <script src="../shared/assignments.js?v=20261031h"></script><script src="../shared/turnin.js?v=20261102read"></script><script src="../shared/lang.js?v=20261102samonly"></script><script src="es.js?v=20261102d"></script><script src="game.js?v=3"></script>
 </body>
 </html>
