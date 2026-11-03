@@ -181,12 +181,22 @@ body{background-color:#dff0f3;background-image:linear-gradient(#0f7c8c14 1px,tra
 #sendBtn::before{content:"📨 "}
 @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
 @media(max-width:560px){.wword{font-size:.72rem}.sav{width:36px;height:36px;font-size:1.2rem}.bubble{margin-left:10px}.stamp{font-size:.8rem;right:8px}.decide:not(.three) .dcard .ic{font-size:2rem}}
+/* Trim pass 2026-11-03: fewer words, more visuals */
+.chips{display:flex;flex-wrap:wrap;gap:6px}.chip{background:#fff;border:2px solid #b6dde2;border-radius:20px;padding:3px 11px;font-size:.92rem}.chip span{color:var(--muted)}
+.stat{display:flex;align-items:center;gap:10px;margin:2px 0}.stat .faces{font-size:1.9rem;letter-spacing:2px}.stat b{font-size:2rem;color:#7b5d16}
+.hw{display:grid;gap:4px}.hw p{margin:0;background:#fff;border-radius:9px;padding:5px 10px;font-size:1.02rem}.hw b{color:var(--green)}
+.check.solved{padding-top:16px}.check.solved .reveal{margin:0}
+.titlecard .hook{font-size:1.25rem}
+.post .ps:empty{display:none}
+.mini-end{display:inline-block;background:#f5f8fa;border:2px solid var(--line);border-radius:20px;padding:4px 14px;margin:0 0 4px}
+.mini-end.holds{background:#eaf7ef}.mini-end.played{background:var(--kai2)}.mini-end.factcheck{background:#fff6e0}
+@media(max-width:820px){.title-right{display:grid;order:-1}.title-right .vs,.title-right .labcard{display:none}}
 @media print{#hud,.foot,.go{display:none}}
 </style>
 <script src="../../shared/assignments.js?v=20261101fill"></script>
 <script src="../../shared/turnin.js?v=20261102read"></script>
 <script src="../../shared/lang.js?v=20261102samonly"></script>
-<script src="es.js?v=20261103r"></script>
+<script src="es.js?v=20261103u"></script>
 </head><body>
 <div class="topline"><span><b>Sociology · Unit 1 · Day 5</b> · How Can You Prove a Hot Take?</span><span><b>SS.9-12.Soc.1</b> Analyze the components of a sociological investigation.</span></div>
 <div id="hud" hidden>
@@ -198,8 +208,8 @@ body{background-color:#dff0f3;background-image:linear-gradient(#0f7c8c14 1px,tra
 <main>
   <p class="welcome" id="welcome" hidden></p>
   <div id="app"></div>
-  <div class="foot"><span>Progress saves on this device. Your teacher sees your work after you turn it in.</span><button type="button" id="restartBtn">Start over</button></div>
-  <p class="foot"><span>Kai, the lab, Cedar Valley High, Channel 9, Dr. Ruiz, and all study results are made up for this game. The CDC number and the Hawthorne Works study are real.</span></p>
+  <div class="foot"><span>💾 Saves on this device. Turn in to send it to your teacher.</span><button type="button" id="restartBtn">Start over</button></div>
+  <p class="foot"><span>Made up: Kai, the lab, Cedar Valley High, Channel 9, Dr. Ruiz, all study data. Real: the CDC number and the Hawthorne Works study.</span></p>
 </main>
-<script src="game.js?v=20261103r"></script>
+<script src="game.js?v=20261103u"></script>
 </body></html>
