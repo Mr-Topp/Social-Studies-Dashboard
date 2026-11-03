@@ -158,7 +158,7 @@ footer a{color:var(--muted)}
 @media (max-width:600px){.next .btn{width:100%;text-align:center}.row .act{width:100%}}
 </style>
 <script>window.HUB_PAGE = true;   // student home page: feedback card pops up here, name boxes are not auto-filled</script>
-<script src="shared/assignments.js?v=20261103p11"></script>
+<script src="shared/assignments.js?v=20261103p12"></script>
 <script src="shared/recaps.js?v=20261103c"></script>
 <script src="shared/targets.js?v=20261103f"></script>
 <script src="teacher-submissions/presentations.js?v=20261103s1"></script>
@@ -356,7 +356,7 @@ const unitOrder = k => (k.startsWith("p1|") ? 0 : 1000) + (+k.split("|").pop() |
 function gradeOf(w) {
   if (!w) return null;
   if (w.exempt) return { exempt: true };
-  if (w.cleared) return { cleared: true };
+  if (w.cleared) return { cleared: true, label: w.label || "" };
   if (w.flagged) return { talk: true };
   return { done: true, fix: !!w.fix };
 }
@@ -364,7 +364,7 @@ function gradePill(g) {
   if (!g) return "";
   if (g.talk) return `<span class="pill p-talk">Talk with your teacher</span>`;
   if (g.exempt) return `<span class="pill p-in">Exempt · you don't need to do this</span>`;
-  return `<span class="pill p-in">✓ ${g.cleared ? "Done" : "Turned in"}</span>`;
+  return `<span class="pill p-in">✓ ${g.cleared ? esc(g.label || "Done") : "Turned in"}</span>`;
 }
 
 // ---------- My work ----------
@@ -565,7 +565,7 @@ function homeBody(course, work) {
   const clr = (window.CLASS_CLEARED || {})[course] || {};
   const isCleared = a => (clr.ids || []).includes(a.id) || (!!clr.unit && (a.part === 1 || (a.unit || 0) < clr.unit ||
     ((a.unit || 0) === clr.unit && !!a.day && (spanOf(a) ? spanOf(a)[1] : a.day) <= clr.throughDay)));
-  online.forEach(a => { if (!mine[a.id] && isCleared(a)) mine[a.id] = { id: a.id, cleared: true }; });
+  online.forEach(a => { if (!mine[a.id] && isCleared(a)) mine[a.id] = { id: a.id, cleared: true, label: clr.label || "" }; });
   // Exempt (EX) from the teacher dashboard: not missing, not graded.
   const exempt = new Set([...(work.exemptAll || []), ...(work.exempt || [])]);
   online.forEach(a => { if (exempt.has(a.id)) mine[a.id] = { id: a.id, exempt: true }; });

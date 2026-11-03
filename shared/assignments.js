@@ -84,11 +84,12 @@ window.CLASS_TODAY = {
 // Work Fynn counts as DONE for every student on the student home page (shows "✓ Done", never "missing").
 //   unit + throughDay: everything in that unit up to and including that day (and earlier units) is done.
 //   ids: specific activities that are done for everyone.
+//   label: what the student sees instead of "✓ Done" (e.g. "Done in class"). Label only, no grades change.
 // This only changes what students see as missing. It doesn't add grades or turn-ins to the teacher dashboard.
 window.CLASS_CLEARED = {
   "us-history":    { unit: 1, throughDay: 4 },
-  "sociology":     { unit: 1, throughDay: 4 },
-  "government":    { unit: 1, throughDay: 4 },
+  "sociology":     { unit: 1, throughDay: 4, label: "Done in class" },   // Fynn 11-03: Days 1–4 done in class for everyone (label only)
+  "government":    { unit: 1, throughDay: 4, label: "Done in class" },   // Fynn 11-03: Days 1–4 done in class for everyone (label only)
   "world-history": { ids: ["divide-africa-day1"] },  // Scramble for Africa: everyone did it
   "civics":        { ids: ["civics-test-s1-presentation", "civics-test-s1-founders-defense", "civics-f2-presentation", "civics-f2-government-arcade",
                            "civics-f3-presentation", "civics-f3-pixel-town", "civics-f4-presentation", "civics-f4-1776-files",
