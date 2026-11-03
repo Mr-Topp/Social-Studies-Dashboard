@@ -1,5 +1,5 @@
 // =====================================================================
-//  HOLD THE HOME FRONT  (World History · Unit 1 · Day 10; moved from U.S. History U2 D4, Fynn 11-03)
+//  HOLD THE HOME FRONT  (U.S. History · Unit 2 · Day 4)
 //  Run the Novak family's ration book from 1943 to 1945.
 //  Core loop: shop with real ration points, make home-front choices that carry forward,
 //  and watch the game board: family moods (strain), the town's bond thermometer (war effort),
@@ -15,8 +15,8 @@
   const KEY = "ush-u2-d8-common-good-v2";
   const CFG = {
     assignmentId: "ush-u2-d8-common-good",
-    title: "World History · Unit 1 · Day 10 · Hold the Home Front",
-    standard: "SS.9-12.WH.33",
+    title: "U.S. History · Unit 2 · Day 4 · Hold the Home Front",
+    standard: "SS.9-12.US.31, SS.9-12.US.33, SS.9-12.US.34",
     oldApi: "https://fynn-class-assignment-submissions-20261024.neotboy.chatgpt.site/api/submit"
   };
   const TOTAL = 15;          // steps after the title screen
@@ -159,27 +159,27 @@
 
   // ---------- evidence checks (in-world) ----------
   const CHECKS = {
-    c1: { std: "WH.33", short: "Why ration: fair shares", who: "mae", kind: "talk", stamp: "FAIR SHARES",
+    c1: { std: "US.31", short: "Why ration: fair shares", who: "mae", kind: "talk", stamp: "FAIR SHARES",
       prompt: "“Why can't we just buy what we want?”",
       options: ["Rich and poor get equal amounts", "Stores can charge more for meat", "The Army can sell its extra food", "Families stop growing their own food"],
       hint: "Who'd eat if only money counted?" },
-    c2: { std: "WH.33", short: "Ride-alone poster: propaganda", who: "clerk", kind: "notes", stamp: "STICKER ISSUED",
+    c2: { std: "US.33", short: "Ride-alone poster: propaganda", who: "clerk", kind: "notes", stamp: "STICKER ISSUED",
       prompt: "“Before your gas sticker: why would this poster make you carpool?”",
       options: ["Driving alone feels like helping the enemy", "Driving with friends is more fun", "Police give tickets to solo drivers", "Gas is cheaper when you share"],
       hint: "Look at the see-through passenger." },
-    c3: { std: "WH.33", short: "Double V: two victories", who: "dorothy", kind: "talk", stamp: "DOUBLE V",
+    c3: { std: "US.34", short: "Double V: two victories", who: "dorothy", kind: "talk", stamp: "DOUBLE V",
       prompt: "“What do my pin's two V's mean?”",
       options: ["Win overseas AND beat racism at home", "Win in Europe, then the Pacific", "Victory gardens and war bonds", "Wins for the Army and Navy"],
       hint: "“Within” = inside the U.S." },
-    c4: { std: "WH.33", short: "Sullivans: civic virtue", who: "speaker", kind: "talk", stamp: "CIVIC VIRTUE",
+    c4: { std: "US.34", short: "Sullivans: civic virtue", who: "speaker", kind: "talk", stamp: "CIVIC VIRTUE",
       prompt: "“How did the parents put the country first?”",
       options: ["Kept helping the war after losing their sons", "Got paid to give speeches at plants", "Asked the Navy to send sailors home", "Turned against the war after the sinking"],
       hint: "What did they do next?" },
-    c5: { std: "WH.33", short: "War bond = loan to the government", who: "clerk", kind: "form", stamp: "APPROVED",
+    c5: { std: "US.31", short: "War bond = loan to the government", who: "clerk", kind: "form", stamp: "APPROVED",
       prompt: "“What are you really doing when you buy this?”",
       options: ["Lending the government money", "Paying the government a new tax", "Buying extra ration points", "Sending money to a soldier"],
       hint: "You get paid back later." },
-    c6: { std: "WH.33", short: "Farm labor: Braceros and POWs", who: "walt", kind: "notes", stamp: "CREW HIRED",
+    c6: { std: "US.31", short: "Farm labor: Braceros and POWs", who: "walt", kind: "notes", stamp: "CREW HIRED",
       prompt: "“Why were braceros and POWs on farms?”",
       options: ["Farms couldn't find enough workers", "Workers wanted to move here for good", "A law made every farm hire them", "The Army paid to keep them busy"],
       hint: "Both files: same problem." }

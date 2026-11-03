@@ -1,0 +1,163 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Executive Order Court | Government Unit 5 Day 2</title>
+<meta name="description" content="Judge three real executive orders (9066, 9981, and 10730) and decide whether each president stayed inside his power.">
+<style>
+:root{--ink:#1f2630;--muted:#565f6b;--paper:#f4f4f1;--card:#fff;--line:#d7d8d2;--accent:#2d3e66;--accent2:#6b2d4a;--soft:#edf1f6;--glow:#2c4a6b2e;--green:#2a6b45;--bad:#a2392f;--hdr:#e9edf2;--srcbg:#faf6f3;--srcline:#e3d5cf}
+*{box-sizing:border-box}
+html,body{overflow-x:hidden}
+body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.5 system-ui,Segoe UI,Arial,sans-serif}
+header{background:var(--hdr);border-bottom:5px solid var(--accent);padding:16px max(16px,calc((100vw - 900px)/2)) 12px}
+.k{font-size:.78rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin:0}
+h1{margin:2px 0 4px;font-size:clamp(1.6rem,3.4vw,2.3rem);line-height:1.15}
+.std{margin:2px 0;font-size:.92rem;color:var(--muted)}.std b{color:var(--ink)}
+.hud{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line);padding:8px max(16px,calc((100vw - 900px)/2));display:flex;gap:10px 12px;flex-wrap:wrap;align-items:center;font-weight:800;font-size:.92rem;box-shadow:0 2px 8px #1f2b3312}
+.hud .bar{flex:1;min-width:110px;height:10px;background:#e6e6de;border-radius:9px;overflow:hidden}.hud .bar span{display:block;height:100%;width:0;background:var(--accent);transition:width .4s}
+.pill{background:#f0efe8;border-radius:20px;padding:3px 10px;white-space:nowrap}
+.meter{display:flex;align-items:center;gap:6px}.meter .track{width:90px;height:10px;border-radius:9px;background:#e6e6de;overflow:hidden}.meter .track span{display:block;height:100%;background:var(--accent2);transition:width .5s}
+main{max-width:900px;margin:auto;padding:14px 16px 60px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;box-shadow:0 3px 12px #1f2b330d}
+.kicker{font-size:.78rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:var(--accent2);margin:0}
+h2{margin:2px 0 10px;font-size:1.45rem}
+.teach{background:var(--soft);border-left:5px solid var(--accent);border-radius:9px;padding:10px 14px;margin:0 0 12px}.teach p{margin:6px 0}.teach b{color:var(--accent)}
+.block{margin:14px 0;padding:14px;border-radius:12px;border:2px solid var(--line);background:#fff}
+.block.current{border-color:var(--ink);box-shadow:0 0 0 4px var(--glow)}
+.block h3{margin:0 0 10px;font-size:1.06rem;line-height:1.4;font-weight:700}
+.block.note p{margin:6px 0}
+.event{background:#fbf9f4;border-style:dashed;border-color:#cdbf9a}.event.current{border-style:solid}
+.event-body p{margin:6px 0}
+.picked{margin:10px 0 4px;color:var(--muted)}.result{background:#f0efe8;border-radius:9px;padding:9px 12px}.result p{margin:4px 0}
+.tag{display:inline-block;font-weight:900;font-size:.8rem;border-radius:12px;padding:2px 9px;margin-right:6px}.tag.up{background:#dcefe2;color:var(--green)}.tag.down{background:#f6dcd8;color:var(--bad)}.tag.flat{background:#ebe9e0;color:var(--ink)}
+.qlabel{font-size:.75rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin:0 0 4px}
+.choices{display:grid;gap:8px}
+@media(min-width:700px){.q .choices{grid-template-columns:1fr 1fr}}
+button{font:inherit;cursor:pointer;border-radius:10px;min-height:46px}
+.choice{text-align:left;background:#fff;color:var(--ink);border:2px solid #cfcdbf;padding:10px 12px;font-weight:650;line-height:1.3}
+.choice:hover:not(:disabled){border-color:var(--ink);background:#fcfcfa}.choice:disabled{opacity:.5;cursor:not-allowed}
+.go{margin-top:12px;background:var(--accent);color:#fff;border:0;padding:11px 18px;font-weight:900}
+button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid #2f7dbd;outline-offset:2px}
+.answered{font-weight:800;color:var(--green);margin:4px 0}.why{margin:2px 0;color:var(--muted)}
+.msg{min-height:1.3em;font-weight:750;margin:8px 0 0}.msg.bad{color:var(--bad)}.msg.good{color:var(--green)}
+label{display:block;font-weight:850;margin:14px 0 4px}.stem{margin:0 0 4px;color:var(--muted);font-size:.92rem}
+input,textarea{width:100%;font:inherit;border:2px solid #cfcdbf;border-radius:9px;padding:10px;background:#fff;color:var(--ink)}
+.steps{display:grid;gap:6px;margin:10px 0;padding:0;list-style:none}.steps li{background:#f0efe8;border-radius:9px;padding:8px 12px;font-weight:700}
+.src-card{background:var(--srcbg);border:1px solid var(--srcline);border-left:5px solid var(--accent2);border-radius:10px;padding:10px 12px;margin:0 0 10px;font-weight:400}
+.src-card .who{font-size:.75rem;font-weight:900;letter-spacing:.06em;text-transform:uppercase;color:var(--accent2);margin-bottom:3px}
+.src-card p{margin:3px 0}
+.src-card q,.src-card .quote{font-style:italic}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px;margin:8px 0}.facts div{background:#fff;border:1px solid var(--line);border-radius:9px;padding:7px 10px;font-size:.92rem}.facts b{display:block;color:var(--accent)}
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:8px 0}.duo div{border-radius:10px;padding:8px 10px;font-size:.93rem;background:#f0efe8}.duo b{display:block}
+@media(max-width:640px){.duo{grid-template-columns:1fr}}
+.welcome{background:#e6f1ea;color:var(--green);font-weight:800;border-radius:9px;padding:8px 12px;margin:0 0 10px}
+.foot{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-top:14px;color:var(--muted);font-size:.85rem}
+.foot button{background:#ebe9e0;border:0;padding:8px 12px;font-weight:800;color:var(--ink)}
+.src{font-size:.8rem;color:var(--muted)}
+.report{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:8px;margin:8px 0}.report div{background:#f0efe8;border-radius:10px;padding:8px;text-align:center;font-size:.9rem}.report b{display:block;font-size:1.3rem}
+@media print{.hud,.foot,.go{display:none}}
+
+.src-card .quote{font-family:Georgia,"Times New Roman",serif;font-size:1.05rem}
+.lookback{margin:10px 0 14px;border:2px solid var(--line);border-radius:12px;background:#fbfbf8;padding:4px 12px}.lookback summary{cursor:pointer;font-weight:900;padding:8px 0;color:var(--accent)}
+.docket{display:inline-block;background:var(--accent);color:#fff;font-weight:900;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;border-radius:6px;padding:3px 9px;margin-bottom:6px}
+.power{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:8px;margin:8px 0}.power div{background:#fff;border:1px solid var(--line);border-radius:9px;padding:8px 10px;font-size:.93rem}.power b{display:block;color:var(--accent)}
+</style>
+<script src="../../shared/assignments.js?v=20261103p8"></script>
+<script src="../../shared/turnin.js?v=20261103d"></script>
+<script src="../../shared/unit-game.js?v=20261103c"></script>
+</head><body>
+<header>
+  <p class="k">Government · Unit 5 · Day 2 · Presidential Power</p>
+  <h1>Executive Order Court</h1>
+  <p class="std"><b>Standard:</b> SS.9‑12.Gov.7</p>
+  <p class="std"><b>Goal:</b> Explain what an executive order is, where a president's power to issue one comes from, and how other branches can check it. · About 25 minutes.</p>
+</header>
+<div class="hud" aria-label="Progress">
+  <span id="progressText">0 checks done</span>
+  <div class="bar" aria-hidden="true"><span id="progressFill"></span></div>
+  <span class="pill" id="casePill">Rulings: 0 of 3</span>
+</div>
+<main>
+  <p class="welcome" id="welcome" hidden></p>
+  <div id="app"></div>
+  <div class="foot"><span>Progress saves on this device. Your teacher sees your work after you turn it in.</span><button type="button" id="restartBtn">Start over</button></div>
+</main>
+<script>
+const card = (who, body) => `<div class="src-card"><div class="who">${who}</div>${body}</div>`;
+const RULE = { in: "Inside his power", out: "Went too far", split: "Legal then, but wrong" };
+const ruling = (id, label, inR, outR, splitR) => ({ type: "event", id, short: "Ruling: " + label, html: `<p><b>Your ruling on ${label}:</b> Did the president stay inside his power?</p>`,
+  choices: [ { label: RULE.in, fx: { rulings: 1 }, result: inR }, { label: RULE.out, fx: { rulings: 1 }, result: outR }, { label: RULE.split, fx: { rulings: 1 }, result: splitR } ] });
+const lookBack = () => `<details class="lookback"><summary>📖 Look back at the cases</summary>${CFG.scenes.map(s => `<p class="kicker">${s.kicker}: ${s.title}</p>` + (s.teach ? `<div class="teach">${s.teach}</div>` : "") + s.blocks.filter(b => b.type === "note").map(b => b.html).join("")).join("")}</details>`;
+const CFG = {
+  key: "gov-u5-d2-executive-order-court-v1",
+  assignmentId: "gov-u5-d2-executive-order-court",
+  title: "Government · Unit 5 · Day 2 · Executive Order Court",
+  standard: "SS.9-12.Gov.7",
+  oldApi: "https://fynn-class-assignment-submissions-20261024.neotboy.chatgpt.site/api/submit",
+  startFx: { rulings: 0 },
+  hud: st => { document.getElementById("casePill").textContent = "Rulings: " + Math.min(3, st.fx.rulings || 0) + " of 3"; },
+  startLabel: "Open court",
+  introHtml: `<p class="kicker">Today</p><h2>You're the judge</h2>
+    <p>Presidents can't pass laws. That's Congress's job. But presidents can sign <b>executive orders</b>, and some changed millions of lives.</p>
+    <ul class="steps"><li>1. Learn where a president's power comes from.</li><li>2. Hear 3 real cases and rule on each one.</li><li>3. Write your final opinion and turn it in.</li></ul>
+    <p class="src">Your rulings aren't graded right or wrong. Your <b>reasons</b> are what count.</p>`,
+  scenes: [
+    { kicker: "Before court", title: "What Is an Executive Order?",
+      teach: `<p>An <b>executive order</b> is a written order from the president telling the executive branch (the military and government agencies) what to do. It works like a law, but <b>Congress never votes on it</b>.</p>
+        <p>A president can't just order anything. The power has to come from <b>the Constitution</b> or from <b>a law Congress passed</b>.</p>`,
+      blocks: [
+        { type: "note", html: card("Where the power comes from", `<div class="power"><div><b>Commander in chief</b>The Constitution puts the president in charge of the military.</div><div><b>"Take care that the laws be faithfully executed"</b>The president must make sure laws and court rulings are carried out.</div><div><b>Laws from Congress</b>Congress can pass laws that give the president extra powers.</div></div>`) },
+        { type: "note", html: card("How an executive order can be checked", `<div class="power"><div><b>Congress</b>can pass a law to block it or refuse to pay for it.</div><div><b>The courts</b>can rule it unconstitutional.</div><div><b>A later president</b>can cancel it with a new order.</div></div>`) },
+        { type: "q", id: "a2", std: "Gov.7", short: "Checks on executive orders", prompt: "A president signs an order you think breaks the Constitution. Who can strike it down?", options: ["The courts, by ruling it unconstitutional", "The Senate, by refusing to confirm it", "The attorney general, by refusing to sign it", "State governors, by voting it down together"], hint: "Look at the checks card. Which branch decides if something breaks the Constitution?", why: "Courts can strike it down. Congress and later presidents can also check it." }
+      ] },
+    { kicker: "Case 1 of 3", title: "Executive Order 9066 (1942)",
+      teach: `<p><span class="docket">Case 1</span><br>After Japan attacked <b>Pearl Harbor</b> in December 1941, many Americans feared Japanese Americans would spy for Japan. In February 1942, President <b>Franklin D. Roosevelt</b> signed Executive Order 9066, using his power as commander in chief during a war.</p>`,
+      blocks: [
+        { type: "note", html: card("The order and what it did", `<div class="facts"><div><b>What it allowed</b>The military could remove "any or all persons" from areas it chose.</div><div><b>Who was removed</b>About 120,000 people of Japanese ancestry (family background) on the West Coast</div><div><b>How many were citizens</b>About 2 out of 3</div><div><b>Spies convicted</b>Zero Japanese Americans were convicted of spying for Japan.</div></div>`) },
+        { type: "note", html: card("Ted Nakashima, a U.S. citizen, describing his camp, June 1942", `<p class="quote">"The resettlement center is actually a jail: armed guards in towers with spotlights and deadly tommy guns, fifteen feet of barbed-wire fences… Can this be the same America we left a few weeks ago?"</p><p class="src"><i>Resettlement center</i> = the camp · <i>tommy guns</i> = machine guns</p>`) },
+        { type: "q", id: "b1", std: "Gov.7", short: "9066: source of power", prompt: "Which power did Roosevelt use to sign Executive Order 9066?", options: ["His power as commander in chief during a war", "His power to make treaties with other nations", "His power to appoint the heads of agencies", "His power to pardon people for federal crimes"], hint: "Reread the blue case box. What role does the Constitution give the president over the military?", why: "He claimed his wartime power as commander in chief." },
+        { type: "note", html: card("How the other branches responded", `<div class="facts"><div><b>1942 · Congress</b>Passed a law making it a crime to disobey the order. It <i>backed</i> the president.</div><div><b>1944 · Supreme Court</b>Upheld the order in <i>Korematsu v. United States</i>.</div><div><b>1976 · President Ford</b>Officially canceled the order.</div><div><b>1988 · Congress</b>Apologized and paid $20,000 to each survivor.</div><div><b>2018 · Supreme Court</b>Said <i>Korematsu</i> was "gravely wrong the day it was decided."</div></div>`) },
+        { type: "q", id: "b2", std: "Gov.7", short: "9066: checks failed in 1942–44", prompt: "Why did the checks on the president <b>fail</b> in 1942–1944?", options: ["Congress and the Supreme Court both backed the order", "Congress was not meeting during the war years", "The Supreme Court never heard a case about it", "The order was secret, so no one knew about it"], hint: "Look at the 1942 and 1944 boxes on the card.", why: "The checks only work if the other branches use them. In wartime fear, both went along with the president." },
+        ruling("e1", "Executive Order 9066",
+          `<p>You ruled it was inside his power. In 1944, the Supreme Court agreed with you. But in 2018, the Court said that decision was "gravely wrong," and Congress apologized in 1988. Wartime power is real, but it was used against citizens because of their ancestry.</p>`,
+          `<p>You ruled he went too far. Many Americans agree today: about 80,000 citizens were locked up with no trial and no evidence against them. The country later apologized, and the Court rejected <i>Korematsu</i> in 2018.</p>`,
+          `<p>You ruled it was legal then but wrong. That's close to what happened: Congress and the Court allowed it in the 1940s, but later leaders said it was caused by "race prejudice, war hysteria (panic), and a failure of political leadership."</p>`)
+      ] },
+    { kicker: "Case 2 of 3", title: "Executive Order 9981 (1948)",
+      teach: `<p><span class="docket">Case 2</span><br>During World War II, Black soldiers served in <b>segregated</b> (separated) units, often with worse jobs and equipment. After the war, Congress refused to pass civil rights laws. In 1948, President <b>Harry Truman</b> acted on his own.</p>`,
+      blocks: [
+        { type: "note", html: card("Executive Order 9981 · Harry S. Truman, July 26, 1948", `<p class="quote">"…there shall be equality of treatment and opportunity for all persons in the armed services without regard to race, color, religion or national origin."</p><p class="src">The armed forces ended their last all-Black units by 1954.</p>`) },
+        { type: "q", id: "c1", std: "Gov.7", short: "9981: why no Congress needed", prompt: "Why could Truman end segregation in the <b>military</b> without Congress?", options: ["As commander in chief, he is in charge of the armed forces", "The Supreme Court ordered him to do it the year before", "Executive orders can change any rule anywhere in America", "Every state governor had already agreed to the change"], hint: "Which of the president's powers covers the military?", why: "The military is part of the executive branch, and he commands it. He could NOT have ordered every business to desegregate." },
+        { type: "q", id: "c2", std: "Gov.7", short: "9981 vs. 9066: same power, different use", prompt: "Truman and Roosevelt both used their power as commander in chief. What was the big difference?", options: ["Truman's order expanded people's rights; Roosevelt's took them away", "Truman's order was secret; Roosevelt's was announced on the radio", "Truman's order only covered Japan; Roosevelt's covered every state", "Truman's order was voted on by Congress; Roosevelt's was not"], hint: "Compare what each order did TO people.", why: "Same power, opposite effects. Whether an order is legal depends on where the power comes from. Whether it is right is a separate question." },
+        ruling("e2", "Executive Order 9981",
+          `<p>You ruled it was inside his power. Most experts agree: the president commands the military, so he can set its rules. It became a model for later civil rights laws.</p>`,
+          `<p>You ruled he went too far. Some members of Congress argued that in 1948, saying a change this big should be voted on. But the Constitution makes the president commander in chief, and the order only covered the military.</p>`,
+          `<p>You ruled it was legal but wrong. In 1948, some Southern members of Congress argued that mixing Black and white troops would hurt unity and that a change this big belonged to Congress. Most historians today see the order as a major step toward equal treatment.</p>`)
+      ] },
+    { kicker: "Case 3 of 3", title: "Executive Order 10730 (1957)",
+      teach: `<p><span class="docket">Case 3</span><br>In 1954, the Supreme Court ruled in <b>Brown v. Board of Education</b> that segregated public schools were unconstitutional. In 1957, nine Black students, the <b>Little Rock Nine</b>, enrolled at Central High School in Little Rock, Arkansas.</p>`,
+      blocks: [
+        { type: "note", html: card("What happened in Little Rock, 1957", `<p>Arkansas Governor <b>Orval Faubus</b> sent the state's National Guard to <b>block</b> the nine students from entering the school. Angry mobs gathered outside.</p><p>President <b>Dwight Eisenhower</b> signed Executive Order 10730. He took command of the Arkansas National Guard and sent U.S. Army soldiers from the 101st Airborne to <b>protect</b> the students as they went to class.</p>`) },
+        { type: "q", id: "d1", std: "Gov.7", short: "10730: what was enforced", prompt: "What was Eisenhower <b>enforcing</b> when he sent the troops?", options: ["The Supreme Court's ruling in Brown v. Board", "A new law Arkansas had just passed", "Governor Faubus's order to block the school", "A vote by the people of Little Rock"], hint: "Reread the blue case box. What did the Supreme Court decide in 1954?", why: "He was carrying out a Supreme Court ruling, part of his duty to \"take care that the laws be faithfully executed.\"" },
+        { type: "q", id: "d2", std: "Gov.7", short: "10730: president vs. governor", prompt: "Which detail shows this was a clash between <b>national</b> and <b>state</b> power?", options: ["The president took command of a state's own National Guard", "Nine students signed up for classes at a public high school", "Angry crowds gathered outside the school building", "The Supreme Court made its ruling three years earlier"], hint: "Who controlled the Arkansas National Guard at first, and who took it over?", why: "The governor used the Guard to block a federal ruling; the president took the Guard away from him." },
+        ruling("e3", "Executive Order 10730",
+          `<p>You ruled it was inside his power. The president's job includes making sure court rulings are carried out, and federal law lets presidents use troops to enforce it.</p>`,
+          `<p>You ruled he went too far. Governor Faubus and his supporters argued that, calling it an invasion of a state. But the governor was the one defying the Supreme Court.</p>`,
+          `<p>You ruled it was legal but wrong. Some people worried about soldiers in a school. Still, without them, the nine students likely could not have attended safely.</p>`)
+      ] }
+  ],
+  finale: {
+    title: "Your Court Opinion",
+    report: st => `<div class="report">${["e1","e2","e3"].map((id, i) => `<div>Case ${i + 1}<b style="font-size:1rem">${st.picks[id] != null ? [RULE.in, RULE.out, RULE.split][st.picks[id]] : "—"}</b></div>`).join("")}</div><p>Now write your opinion. Open the box below to look back at the cases.</p>` + lookBack(),
+    prompts: [
+      { id: "furthest", short: "Which order went furthest, and why", label: "1. Which executive order tested the limits of presidential power the most? Use one fact from that case.", stem: "Executive Order ___ tested the limits the most because ___.", min: 60, newWords: 6,
+        mustAll: [["because", "since", "so "], ["9066", "9981", "10730", "roosevelt", "fdr", "truman", "eisenhower"], ["japanese", "camp", "military", "armed", "segregat", "little rock", "troops", "army", "citizen", "spy", "spies", "korematsu", "guard", "school", "120,000", "80,000", "faubus", "brown", "trial"]],
+        mustMsg: "Name the order number or the president, and give one fact from that case, using \"because.\"" },
+      { id: "check", short: "How a branch checked an order", label: "2. In 1942–44, the checks on Executive Order 9066 failed. Which branch failed to stop it, and what did a later branch or president do about it? Why does that matter?", stem: "In 1942–44, ___ did not stop it. Later, ___. This matters because ___.", min: 70, newWords: 7,
+        mustAll: [["because", "since", "so ", "matters"], ["congress", "court", "korematsu", "1942", "1944"], ["ford", "1976", "1988", "2018", "cancel", "apolog", "gravely"]],
+        mustMsg: "Name the branch that failed (Congress or the Supreme Court) AND what came later (like Ford canceling it in 1976), then say why it matters." }
+    ]
+  },
+  extraAnswers: st => ({ "Rulings": ["e1", "e2", "e3"].map((id, i) => "Case " + (i + 1) + ": " + (st.picks[id] != null ? [RULE.in, RULE.out, RULE.split][st.picks[id]] : "—")).join(" · ") })
+};
+UnitGame.start(CFG);
+</script>
+</body></html>

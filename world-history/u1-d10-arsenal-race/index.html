@@ -1,0 +1,243 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Arsenal Race: What Wins a War? | World History Unit 1 Day 10</title>
+<meta name="description" content="Run the Allied war effort in World War II: choose what to build and what to ask of people at home, then see Midway, Stalingrad, the Atlantic, and D-Day play out.">
+<style>
+:root{--ink:#1f2630;--muted:#565f6b;--paper:#f4f4f1;--card:#fff;--line:#d7d8d2;--accent:#36503a;--accent2:#8a4b1c;--soft:#edf1f6;--glow:#2c4a6b2e;--green:#2a6b45;--bad:#a2392f;--hdr:#e9edf2;--srcbg:#faf6f3;--srcline:#e3d5cf}
+*{box-sizing:border-box}
+html,body{overflow-x:hidden}
+body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.5 system-ui,Segoe UI,Arial,sans-serif}
+header{background:var(--hdr);border-bottom:5px solid var(--accent);padding:16px max(16px,calc((100vw - 900px)/2)) 12px}
+.k{font-size:.78rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin:0}
+h1{margin:2px 0 4px;font-size:clamp(1.6rem,3.4vw,2.3rem);line-height:1.15}
+.std{margin:2px 0;font-size:.92rem;color:var(--muted)}.std b{color:var(--ink)}
+.hud{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line);padding:8px max(16px,calc((100vw - 900px)/2));display:flex;gap:10px 12px;flex-wrap:wrap;align-items:center;font-weight:800;font-size:.92rem;box-shadow:0 2px 8px #1f2b3312}
+.hud .bar{flex:1;min-width:110px;height:10px;background:#e6e6de;border-radius:9px;overflow:hidden}.hud .bar span{display:block;height:100%;width:0;background:var(--accent);transition:width .4s}
+.pill{background:#f0efe8;border-radius:20px;padding:3px 10px;white-space:nowrap}
+.meter{display:flex;align-items:center;gap:6px}.meter .track{width:90px;height:10px;border-radius:9px;background:#e6e6de;overflow:hidden}.meter .track span{display:block;height:100%;background:var(--accent2);transition:width .5s}
+main{max-width:900px;margin:auto;padding:14px 16px 60px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;box-shadow:0 3px 12px #1f2b330d}
+.kicker{font-size:.78rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:var(--accent2);margin:0}
+h2{margin:2px 0 10px;font-size:1.45rem}
+.teach{background:var(--soft);border-left:5px solid var(--accent);border-radius:9px;padding:10px 14px;margin:0 0 12px}.teach p{margin:6px 0}.teach b{color:var(--accent)}
+.block{margin:14px 0;padding:14px;border-radius:12px;border:2px solid var(--line);background:#fff}
+.block.current{border-color:var(--ink);box-shadow:0 0 0 4px var(--glow)}
+.block h3{margin:0 0 10px;font-size:1.06rem;line-height:1.4;font-weight:700}
+.block.note p{margin:6px 0}
+.event{background:#fbf9f4;border-style:dashed;border-color:#cdbf9a}.event.current{border-style:solid}
+.event-body p{margin:6px 0}
+.picked{margin:10px 0 4px;color:var(--muted)}.result{background:#f0efe8;border-radius:9px;padding:9px 12px}.result p{margin:4px 0}
+.tag{display:inline-block;font-weight:900;font-size:.8rem;border-radius:12px;padding:2px 9px;margin-right:6px}.tag.up{background:#dcefe2;color:var(--green)}.tag.down{background:#f6dcd8;color:var(--bad)}.tag.flat{background:#ebe9e0;color:var(--ink)}
+.qlabel{font-size:.75rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin:0 0 4px}
+.choices{display:grid;gap:8px}
+@media(min-width:700px){.q .choices{grid-template-columns:1fr 1fr}}
+button{font:inherit;cursor:pointer;border-radius:10px;min-height:46px}
+.choice{text-align:left;background:#fff;color:var(--ink);border:2px solid #cfcdbf;padding:10px 12px;font-weight:650;line-height:1.3}
+.choice:hover:not(:disabled){border-color:var(--ink);background:#fcfcfa}.choice:disabled{opacity:.5;cursor:not-allowed}
+.go{margin-top:12px;background:var(--accent);color:#fff;border:0;padding:11px 18px;font-weight:900}
+button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid #2f7dbd;outline-offset:2px}
+.answered{font-weight:800;color:var(--green);margin:4px 0}.why{margin:2px 0;color:var(--muted)}
+.msg{min-height:1.3em;font-weight:750;margin:8px 0 0}.msg.bad{color:var(--bad)}.msg.good{color:var(--green)}
+label{display:block;font-weight:850;margin:14px 0 4px}.stem{margin:0 0 4px;color:var(--muted);font-size:.92rem}
+input,textarea{width:100%;font:inherit;border:2px solid #cfcdbf;border-radius:9px;padding:10px;background:#fff;color:var(--ink)}
+.steps{display:grid;gap:6px;margin:10px 0;padding:0;list-style:none}.steps li{background:#f0efe8;border-radius:9px;padding:8px 12px;font-weight:700}
+.src-card{background:var(--srcbg);border:1px solid var(--srcline);border-left:5px solid var(--accent2);border-radius:10px;padding:10px 12px;margin:0 0 10px;font-weight:400}
+.src-card .who{font-size:.75rem;font-weight:900;letter-spacing:.06em;text-transform:uppercase;color:var(--accent2);margin-bottom:3px}
+.src-card p{margin:3px 0}
+.src-card q,.src-card .quote{font-style:italic}
+.facts{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px;margin:8px 0}.facts div{background:#fff;border:1px solid var(--line);border-radius:9px;padding:7px 10px;font-size:.92rem}.facts b{display:block;color:var(--accent)}
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:8px 0}.duo div{border-radius:10px;padding:8px 10px;font-size:.93rem;background:#f0efe8}.duo b{display:block}
+@media(max-width:640px){.duo{grid-template-columns:1fr}}
+.welcome{background:#e6f1ea;color:var(--green);font-weight:800;border-radius:9px;padding:8px 12px;margin:0 0 10px}
+.foot{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-top:14px;color:var(--muted);font-size:.85rem}
+.foot button{background:#ebe9e0;border:0;padding:8px 12px;font-weight:800;color:var(--ink)}
+.src{font-size:.8rem;color:var(--muted)}
+.report{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:8px;margin:8px 0}.report div{background:#f0efe8;border-radius:10px;padding:8px;text-align:center;font-size:.9rem}.report b{display:block;font-size:1.3rem}
+@media print{.hud,.foot,.go{display:none}}
+
+.src-card .quote{font-family:Georgia,"Times New Roman",serif;font-size:1.05rem}
+.report-card{border:2px solid var(--line);border-radius:12px;padding:10px 14px;margin:6px 0;background:#fff}
+.outcome{display:inline-block;font-weight:900;border-radius:8px;padding:3px 10px;margin:2px 0 6px}
+.outcome.win{background:#dcefe2;color:var(--green)}.outcome.mid{background:#fbefd5;color:#7a5a12}.outcome.loss{background:#f6dcd8;color:var(--bad)}
+.real{background:#f3f0e6;border-left:5px solid var(--accent2);border-radius:9px;padding:8px 12px;margin-top:8px}.real b.h{display:block;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:var(--accent2)}
+.meters{display:flex;gap:8px;flex-wrap:wrap}
+.duo div i{display:block;margin-top:6px;font-family:Georgia,serif}
+</style>
+<script src="../../shared/assignments.js?v=20261103p8"></script>
+<script src="../../shared/turnin.js?v=20261103d"></script>
+<script src="../../shared/unit-game.js?v=20261103c"></script>
+</head><body>
+<header>
+  <p class="k">World History · Unit 1 · Day 10 · WWII Turning Points</p>
+  <h1>Arsenal Race: What Wins a War?</h1>
+  <p class="std"><b>Standards:</b> SS.9‑12.WH.32 · SS.9‑12.WH.33</p>
+  <p class="std"><b>Goal:</b> Explain how technology, factories, and people at home turned World War II toward the Allies. · About 25–30 minutes.</p>
+</header>
+<div class="hud" aria-label="Progress and war effort">
+  <span id="progressText">0 checks done</span>
+  <div class="bar" aria-hidden="true"><span id="progressFill"></span></div>
+  <span class="meters"><span class="pill" id="prodPill">🏭 Factories: 0</span><span class="pill" id="moralePill">🏠 Home front: 0</span><span class="pill" id="winPill">⭐ Turning points won: 0 of 4</span></span>
+</div>
+<main>
+  <p class="welcome" id="welcome" hidden></p>
+  <div id="app"></div>
+  <div class="foot"><span>Progress saves on this device. Your teacher sees your work after you turn it in.</span><button type="button" id="restartBtn">Start over</button></div>
+</main>
+<script>
+const KEY = "wh-u1-d10-arsenal-race-v1";
+const card = (who, body) => `<div class="src-card"><div class="who">${who}</div>${body}</div>`;
+const live = () => { try { return JSON.parse(localStorage.getItem(KEY)) || { fx: {}, picks: {} }; } catch (e) { return { fx: {}, picks: {} }; } };
+const N = (st, k) => (st.fx && st.fx[k]) || 0;
+// Event choices are saved by their place in the list below.
+const pick = (st, id) => st.picks ? st.picks[id] : undefined;
+
+// ---------- How your choices decide each battle ----------
+function outcomes(st) {
+  const o = {};
+  const code = N(st, "code"), radar = N(st, "radar"), ships = N(st, "ships"), tanks = N(st, "tanks"), lend = N(st, "lend");
+  // Midway: ambush + extra codebreaking
+  const ambush = pick(st, "m1") === 0, code42 = pick(st, "t1") === 0;   // only the 1942 bet counts for Midway (June 1942)
+  o.midway = pick(st, "m1") == null ? null : ambush && code42 ? "win" : ambush ? "mid" : "loss";
+  // Stalingrad: the Soviets hold either way; help makes it faster
+  o.stalingrad = pick(st, "s1") == null ? null : "win";   // the Soviets won it with their own factories and soldiers; aid changes only the 1943–44 push west
+  // Atlantic: radar + codebreaking beat U-boats; ships alone only keep up
+  const atl = radar + code;
+  o.atlantic = pick(st, "a1") == null ? null : atl >= 2 ? "win" : atl === 1 ? "win" : ships ? "mid" : "loss";
+  // D-Day: deception, shipping, factories, and home-front support
+  const d = pick(st, "d1");
+  if (d == null) o.dday = null;
+  else if (d === 2) o.dday = "mid";
+  else {
+    let pts = (d === 0 ? 2 : -1) + (ships ? 1 : 0) + (N(st, "prod") >= 2 ? 1 : 0) + (N(st, "morale") >= 0 ? 1 : 0) + (o.atlantic === "win" ? 1 : 0);
+    o.dday = pts >= 4 ? "win" : pts >= 2 ? "mid" : "loss";
+  }
+  return o;
+}
+const LABEL = { win: "Allied win", mid: "Costly or slow", loss: "Setback" };
+const tag = r => `<span class="outcome ${r}">${LABEL[r]}</span>`;
+const real = html => `<div class="real"><b class="h">What really happened</b>${html}</div>`;
+
+const CFG = {
+  key: KEY,
+  assignmentId: "wh-u1-d10-arsenal-race",
+  title: "World History · Unit 1 · Day 10 · Arsenal Race: What Wins a War?",
+  standard: "SS.9-12.WH.32, SS.9-12.WH.33",
+  oldApi: "https://fynn-class-assignment-submissions-20261024.neotboy.chatgpt.site/api/submit",
+  startFx: { prod: 0, morale: 0 },
+  hud: st => {
+    const o = outcomes(st);
+    document.getElementById("prodPill").textContent = "🏭 Factories: " + N(st, "prod");
+    document.getElementById("moralePill").textContent = "🏠 Home front: " + (N(st, "morale") > 0 ? "+" : "") + N(st, "morale");
+    document.getElementById("winPill").textContent = "⭐ Turning points won: " + Object.values(o).filter(x => x === "win").length + " of 4";
+  },
+  startLabel: "Take your seat on the War Board",
+  introHtml: `<p class="kicker">Early 1942</p><h2>The Allies are losing</h2>
+    <p>Germany controls most of Europe. Japan has taken huge parts of Asia and the Pacific. You sit on the Allied War Board for <b>Britain, the Soviet Union, and the United States</b>.</p>
+    <ul class="steps"><li>1. Decide how to use factories, people at home, and new technology.</li><li>2. Watch 4 turning points play out based on your choices, then see what really happened.</li><li>3. Answer: <b>what wins a war?</b></li></ul>
+    <p class="src">You can't have everything. Every choice leaves something else out.</p>`,
+  scenes: [
+    { kicker: "Round 1 · 1942", title: "Build the Arsenal",
+      teach: `<p>World War II was a <b>total war</b>: whole countries turned their factories, farms, and families toward winning. Soldiers needed planes, tanks, ships, and food, and someone at home had to make all of it.</p>`,
+      blocks: [
+        { type: "note", html: card("Source card · Factories on the move (Soviet Union, 1941)", `<p>When Germany invaded in 1941, Soviet workers took apart about <b>1,500 factories</b> and shipped them by train east of the Ural Mountains, out of German reach. Women and teenagers rebuilt them, often in freezing weather, and worked shifts of 12 hours or more.</p>`) },
+        { type: "note", html: card("Two voices from the home front", `<div class="duo"><div><b>Fanny Christina Hill · Los Angeles, U.S.</b>A Black woman who left housekeeping work for a job building warplanes in 1943. Years later she said: <i>"The war made me live better, it really did."</i></div><div><b>Tanya Savicheva · Leningrad, Soviet Union</b>An 11-year-old trapped when German armies surrounded her city. About 800,000 civilians there died, mostly of hunger. Her diary's last page reads: <i>"The Savichevs died. Everyone died. Only Tanya is left."</i></div></div>`) },
+        { type: "q", id: "q0", std: "WH.33", short: "Two voices: why so different", prompt: "Why were Fanny Hill's and Tanya Savicheva's experiences of the <b>same war</b> so different?", options: ["The fighting surrounded Leningrad but never reached U.S. factories", "Tanya was younger, so the war mattered less to her family", "Fanny's city was bombed, but she had a better shelter", "Both had the same experience, just in different countries"], hint: "Where was the fighting? Did it reach Los Angeles? Did it reach Leningrad?", why: "Total war hit everyone, but very differently: war work opened doors for some Americans, while Soviet civilians lived and died inside the fighting." },
+        { type: "event", id: "h1", short: "Home front plan", html: `<p><b>Decision 1: Home front.</b> The factories need millions more workers. Where do they come from?</p>`,
+          choices: [
+            { label: "Bring millions of women into war factories", fx: { prod: 3, morale: -1 }, result: `<p>🏭 +3 · 🏠 −1. In the U.S., about 6 million more women took jobs, recruited by \"Rosie the Riveter\" posters. In Britain and the Soviet Union, women also built weapons and ran farms. But with mothers on double shifts and few places to leave kids, families were stretched thin.</p>` },
+            { label: "Ration food, gas, and metal so factories get more", fx: { prod: 2, morale: 0 }, result: `<p>🏭 +2 · 🏠 +0. Rationing freed up steel, rubber, and food. Families felt it every day, but most accepted it as \"fair shares\" (some cheated on the black market). In Britain, food rationing lasted until 1954.</p>` },
+            { label: "Draft more men into the army and leave factories as they are", fx: { prod: 0, morale: 0 }, result: `<p>🏭 +0 · 🏠 +0. You have more soldiers, but no new weapons to give them. Every Allied country learned it needed workers as badly as soldiers.</p>` }
+          ] },
+        { type: "event", id: "t1", short: "First technology bet", html: `<p><b>Decision 2: Your first big bet.</b> Scientists and engineers can only do so much at once. Pick <b>one</b> to push hardest in 1942.</p>`,
+          choices: [
+            { label: "Codebreakers: read the enemy's secret messages", fx: { code: 1 }, result: `<p>Math experts, puzzle-solvers, and early computing machines go to work on enemy codes.</p>` },
+            { label: "Radar: see ships and planes before they see you", fx: { radar: 1 }, result: `<p>Radar sets go on ships, planes, and coastlines. Radar uses radio waves to spot enemies in the dark and in fog.</p>` },
+            { label: "Cargo ships: build them faster than they can be sunk", fx: { ships: 1 }, result: `<p>Shipyards start mass-producing simple \"Liberty ships,\" building some in a few weeks.</p>` },
+            { label: "Tanks: out-build the enemy on land", fx: { tanks: 1 }, result: `<p>Car factories switch to tanks. Detroit stops making new cars for civilians.</p>` }
+          ] }
+      ] },
+    { kicker: "Turning point 1 · June 1942", title: "Midway",
+      teach: `<p>In the Pacific, Japan has won battle after battle. Now Japan plans to trap and destroy the U.S. Navy's aircraft carriers, the ships that carry warplanes.</p>`,
+      blocks: [
+        { type: "note", html: card("Source card · The code", `<p>American codebreakers in Hawaii had cracked part of Japan's navy code. Messages said Japan would attack a target called <b>"AF."</b> To test a guess, the U.S. had the base at Midway Island send a fake radio message saying its water machine had broken. Soon a Japanese message reported: <b>"AF is short of water."</b></p>`) },
+        { type: "q", id: "q2", std: "WH.32", short: "Midway: the fake water message", prompt: "What did the fake water message prove?", options: ["That \"AF\" meant Midway, so the U.S. knew the target", "That Japan's navy was running out of fresh water", "That Midway's water machine really had broken", "That Japan had cracked the U.S. Navy's code"], hint: "Midway sent the fake message. Then who repeated it, and what name did they use?", why: "Japan repeated the fake news about \"AF,\" which proved AF = Midway." },
+        { type: "event", id: "m1", short: "Midway plan", html: `<p><b>Decision 3:</b> You know where Japan will strike. What do you do with your carriers?</p>`,
+          choices: [
+            { label: "Hide your carriers near Midway and ambush the Japanese fleet", fx: {}, result: `<p>Orders sent. Your carriers slip into position northeast of Midway.</p>` },
+            { label: "Pull your carriers back to protect Hawaii", fx: {}, result: `<p>Orders sent. Your carriers head for Pearl Harbor.</p>` },
+            { label: "Warn Midway, but keep your carriers far away and safe", fx: {}, result: `<p>Orders sent. Midway's small force will face the attack alone.</p>` }
+          ] },
+        { type: "note", get html() { const st = live(), r = outcomes(st).midway;
+            const yours = r === "win" ? "Your ambush works. Your codebreakers gave you the date and direction of the attack, so your scout planes knew where to look and found Japan's carriers first." : r === "mid" ? "Your ambush works, but with fewer codebreakers you weren't sure of the timing. You win, but lose more ships and pilots than you had to." : "Without your carriers, Japan takes Midway. Its navy is still on the attack.";
+            return `<div class="report-card"><p class="kicker">Battle report · Midway</p>${tag(r || "mid")}<p>${yours}${pick(st, "t1") !== 0 && r !== "loss" ? " <i>(Your 1942 bet wasn't codebreaking.)</i>" : ""}</p>${real(`<p>The U.S. ambushed the Japanese fleet. Japan lost <b>4 aircraft carriers</b>, about 250 planes, and many experienced crew; the U.S. lost 1 carrier. Japan could not replace them quickly. After Midway, Japan was mostly on defense.</p>`)}</div>`; } },
+        { type: "q", id: "q3", std: "WH.32", short: "Why Midway was a turning point", prompt: "Why was Midway a <b>turning point</b>?", options: ["Japan lost 4 carriers it could not quickly replace", "Japan captured Midway and used it to attack Hawaii", "U.S. battleships sank most of Japan's navy that day", "Japan surrendered a few weeks after losing the battle"], hint: "Read the \"What really happened\" box. What did Japan lose, and could it get them back?", why: "Losing 4 carriers and their crews put Japan on defense for the rest of the war." }
+      ] },
+    { kicker: "Turning point 2 · 1942–43", title: "Stalingrad",
+      teach: `<p>Germany invaded the Soviet Union in 1941. In 1942, it attacked <b>Stalingrad</b>, a big factory city on the Volga River. Soldiers fought for it street by street, building by building.</p>`,
+      blocks: [
+        { type: "note", html: card("Source card · Out-building the enemy", `<p>The factories moved east were now running. In 1942, Soviet factories built about <b>four times as many tanks</b> as Germany, many of them the tough, simple <b>T-34</b>.</p><p>Through a program called <b>Lend-Lease</b>, the U.S. and Britain also shipped supplies to the Soviets. Over the war this included hundreds of thousands of trucks, plus food and boots.</p>`) },
+        { type: "q", id: "q4", std: "WH.32", short: "Stalingrad: Soviet advantage", prompt: "Which detail best explains why the Soviets could win a long, grinding fight?", options: ["Their moved factories built about 4 times as many tanks", "Germany chose to stop attacking the city in winter", "The Soviets had better codebreakers than the British", "The U.S. Army fought inside the city of Stalingrad"], hint: "Look at the first paragraph of the card.", why: "Out-producing Germany let the Soviets replace losses and launch a huge counterattack." },
+        { type: "event", id: "s1", short: "Lend-Lease choice", html: `<p><b>Decision 4:</b> What should the U.S. and Britain send the Soviets?</p>`,
+          choices: [
+            { label: "Trucks, food, and boots so their army can move and eat", fx: { lend: 1 }, result: `<p>Convoys sail for the Soviet Union, through freezing seas full of U-boats.</p>` },
+            { label: "Tanks and fighter planes", fx: { tanks: 1 }, result: `<p>Tanks and planes head east. The Soviets use them, though many prefer their own T-34s.</p>` },
+            { label: "Nothing. Save it all for your own invasion of France", fx: { ships: 1 }, result: `<p>You hold your supplies back. More cargo ships stay free for the invasion.</p>` }
+          ] },
+        { type: "note", get html() { const st = live(), r = outcomes(st).stalingrad;
+            const s = pick(st, "s1"); const yours = "The Soviets win at Stalingrad with their own soldiers and factories." + (s === 0 ? " Your trucks and food arrive mostly in 1943–44 and help the Soviet army move fast as it pushes west." : s === 1 ? " Your tanks and planes add to Soviet strength in 1943–44." : " Without your help, the Soviet push west in 1943–44 is slower, but your extra ships are ready for D-Day.");
+            return `<div class="report-card"><p class="kicker">Battle report · Stalingrad</p>${tag(r || "mid")}<p>${yours}</p>${real(`<p>In November 1942, Soviet armies <b>surrounded</b> the German army in Stalingrad. On February 2, 1943, about <b>91,000</b> German soldiers surrendered. Around 2 million soldiers and civilians were killed, wounded, or captured. After Stalingrad, the Soviet army was mostly on the attack, pushing Germany back toward Berlin.</p>`)}</div>`; } },
+        { type: "q", id: "q5", std: "WH.33", short: "Stalingrad: cost of total war", prompt: "What does Stalingrad show about how total war affected <b>ordinary people</b>?", options: ["Civilians were trapped in a street-by-street battle in their own city", "Civilians were all moved out by train before German troops arrived", "Civilians waited safely in shelters outside the city the whole time", "Civilians left the city to go work in the factories farther east"], hint: "Reread the blue box at the top. How was the city fought for, and who lived there?", why: "Stalingrad was fought street by street and building by building, with many civilians still inside." }
+      ] },
+    { kicker: "Turning point 3 · 1943", title: "The Battle of the Atlantic",
+      teach: `<p>Britain needed food, fuel, and weapons shipped across the Atlantic Ocean. German <b>U-boats</b> (submarines) hunted in groups called \"wolf packs\" and sank thousands of cargo ships.</p>`,
+      blocks: [
+        { type: "event", id: "a1", short: "Second technology bet", html: `<p><b>Decision 5: Your second big bet.</b> How do you beat the U-boats?</p>`,
+          choices: [
+            { label: "Put radar on planes and escort ships to hunt U-boats", fx: { radar: 1 }, result: `<p>Long-range planes with radar start patrolling the middle of the ocean.</p>` },
+            { label: "Have codebreakers read the U-boats' secret messages", fx: { code: 1 }, result: `<p>Codebreakers at Bletchley Park in Britain work on Germany's Enigma code machine.</p>` },
+            { label: "Build cargo ships faster than the U-boats can sink them", fx: { ships: 1 }, result: `<p>Shipyards run day and night. One Liberty ship is built in less than 5 days.</p>` }
+          ] },
+        { type: "note", get html() { const st = live(), r = outcomes(st).atlantic; const t = N(st, "radar") + N(st, "code");
+            const yours = t >= 2 ? "Your radar AND codebreakers work together: you know where the wolf packs are and can spot them on the surface. U-boats start dying fast." : t === 1 ? "Your new technology starts turning the tide. U-boat losses climb." : r === "mid" ? "You replace ships as fast as they sink, but sailors keep dying and the U-boats keep hunting." : "The U-boats keep winning. Britain is running short of food and fuel.";
+            return `<div class="report-card"><p class="kicker">Battle report · The Atlantic</p>${tag(r || "mid")}<p>${yours}</p>${real(`<p>In May 1943, using <b>radar, long-range planes, escort carriers, and broken Enigma codes</b>, the Allies sank 41 U-boats in a single month. Germany pulled its U-boats out of the North Atlantic. U.S. shipyards also built about 2,700 Liberty ships during the war.</p>`)}</div>`; } },
+      ] },
+    { kicker: "Turning point 4 · June 6, 1944", title: "D-Day",
+      teach: `<p>To free Western Europe, the Allies had to cross the English Channel and land on beaches in German-held France. Germany had built the <b>Atlantic Wall</b>: bunkers, guns, and mines along the coast.</p>`,
+      blocks: [
+        { type: "note", html: card("Source card · Operation Fortitude", `<p>The Allies built a <b>fake army</b> in England: inflatable rubber tanks, fake radio messages, and a famous general, George Patton, \"in command.\" The goal was to make Germany believe the landing would come at <b>Calais</b>, the shortest crossing, instead of the beaches of <b>Normandy</b>.</p>`) },
+        { type: "q", id: "q7", std: "WH.32", short: "D-Day: why the fake army mattered", prompt: "Why would a fake army help the real landing?", options: ["Germany would keep troops at Calais instead of Normandy", "The rubber tanks could be used in the real battle", "It would scare Germany into giving up before the landing", "It let the Allies skip crossing the English Channel"], hint: "Where did the Allies want Germany to think the landing would happen?", why: "Every German soldier waiting at Calais was one fewer at Normandy." },
+        { type: "event", id: "d1", short: "D-Day plan", html: `<p><b>Final decision:</b> How do you invade?</p>`,
+          choices: [
+            { label: "Land in Normandy and use the fake army to fool Germany", fx: {}, result: `<p>Orders sent. On June 6, 1944, thousands of ships head for Normandy.</p>` },
+            { label: "Land at Calais, the shortest crossing", fx: {}, result: `<p>Orders sent. The fleet heads for Calais, right where Germany is strongest.</p>` },
+            { label: "Wait one more year to build up even more", fx: {}, result: `<p>Orders sent. The invasion is pushed back to 1945.</p>` }
+          ] },
+        { type: "note", get html() { const st = live(), o = outcomes(st), r = o.dday, d = pick(st, "d1");
+            const why = [];
+            if (d === 0) why.push("your fake army kept German troops at Calais"); if (d === 1) why.push("you landed where Germany was strongest");
+            if (N(st, "ships")) why.push("you had extra ships"); if (N(st, "prod") >= 2) why.push("your factories were running full speed");
+            if (N(st, "morale") >= 0) why.push("people at home backed the war"); if (o.atlantic === "win") why.push("you won the Atlantic, so supplies got through");
+            const yours = d === 2 ? "You wait. The Soviet army keeps pushing west alone, and Germany gets a year to strengthen its defenses." : r === "win" ? "Your landing succeeds. Within weeks your armies push inland." : r === "mid" ? "You get ashore, but at a terrible cost, and the push inland is slow." : "The landing fails. Your troops are pushed back into the sea.";
+            return `<div class="report-card"><p class="kicker">Battle report · D-Day</p>${tag(r || "mid")}<p>${yours}${why.length ? " Why: " + why.join("; ") + "." : ""}</p>${real(`<p>On June 6, 1944, about <b>156,000</b> Allied troops landed in Normandy. About 4,400 died that day. German reserves stayed near Calais, waiting for an attack that never came. Paris was freed in August 1944, and Germany surrendered in May 1945.</p>`)}</div>`; } },
+        { type: "q", id: "q8", std: "WH.32", short: "D-Day: what made it work", prompt: "Based on today, which <b>combination</b> made D-Day possible?", options: ["Ships and supplies from home, a won Atlantic, and deception", "Out-building Germany in tanks before crossing the Channel", "Landing at the shortest crossing to save time and fuel", "Bombing the Atlantic Wall until every bunker was gone"], hint: "Think back over all 4 turning points. Did any one thing win it alone?", why: "D-Day needed everything at once: factories, ships, a safe ocean, and a clever trick." }
+      ] }
+  ],
+  finale: {
+    title: "What Wins a War?",
+    report: st => { const o = outcomes(st); const names = { midway: "Midway", stalingrad: "Stalingrad", atlantic: "The Atlantic", dday: "D-Day" };
+      return `<div class="report">${Object.keys(names).map(k => `<div>${names[k]}<b style="font-size:1rem">${o[k] ? LABEL[o[k]] : "—"}</b></div>`).join("")}</div><p>Look at your results. Now answer the big question in your own words.</p>`; },
+    prompts: [
+      { id: "wins", short: "What wins a war (technology, factories, or home front)", label: "1. What wins a war? Pick the ONE that mattered most today: technology, factories, or people at home. Back it up with 2 examples.", stem: "I think ___ mattered most because ___. For example, ___.", min: 80, newWords: 8,
+        mustAll: [["because", "since", "so "], ["radar", "code", "enigma", "ship", "liberty", "tank", "t-34", "factor", "midway", "stalingrad", "atlantic", "d-day", "normandy", "u-boat", "women", "rationing", "fake", "decoy", "fortitude", "lend", "truck", "carrier"]],
+        mustMsg: "Pick one (technology, factories, or people at home) and give real examples from today, like radar, Midway, or the T-34, with \"because.\"" },
+      { id: "people", short: "How total war changed ordinary lives", label: "2. Total war: How did the war change daily life for one group of ordinary people? Name the country and the group.", stem: "In ___, ___ had to ___ because ___.", min: 60, newWords: 6,
+        mustAll: [["women", "worker", "famil", "civilian", "teen", "kid", "children", "people", "mother", "girls"], ["u.s", "us ", "america", "united states", "britain", "british", "england", "soviet", "ussr", "russia", "germany", "german", "japan"]],
+        mustMsg: "Name a country AND a group of ordinary people (like Soviet teenagers or British families), and say how their lives changed." }
+    ]
+  },
+  extraAnswers: st => { const o = outcomes(st); const names = { h1: "Home front plan", t1: "First tech bet", m1: "Midway plan", s1: "Lend-Lease", a1: "Second tech bet", d1: "D-Day plan" };
+    return { "Results": ["midway", "stalingrad", "atlantic", "dday"].map(k => k + ": " + (o[k] ? LABEL[o[k]] : "—")).join(" · ") }; }
+};
+UnitGame.start(CFG);
+</script>
+</body></html>
