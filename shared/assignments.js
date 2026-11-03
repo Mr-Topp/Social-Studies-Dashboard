@@ -363,7 +363,7 @@ window.CLASS_ASSIGNMENTS = {
   "soc-u4-d2-bad-day": { course: "sociology", unit: 4, day: 2, title: "Day 2 · Same Bad Day, Three Wallets", path: "sociology/u4-d2-bad-day/", std: ["SS.9-12.Soc.12", "SS.9-12.Soc.13"] },
   "soc-u4-d6-fight-inequality": { course: "sociology", unit: 4, day: 6, title: "Day 6 · The Organizer's Toolkit", path: "sociology/u4-d6-fight-inequality/", std: ["SS.9-12.Soc.15"] },
   // 2026-11-02 overnight: Sociology "not made yet" days filled in (Fynn said yes to linking finished drafts that pass every check).
-  "soc-u3-d2-who-shapes-you": { course: "sociology", unit: 3, day: 2, title: "Day 2 · The Feed vs. Everybody", path: "sociology/u3-d2-who-shapes-you/", std: ["SS.9-12.Soc.9"] },
+  "soc-u3-d2-who-shapes-you": { course: "sociology", unit: 3, day: 2, title: "Day 2 · Push Wars", path: "sociology/u3-d2-who-shapes-you/", std: ["SS.9-12.Soc.9"] },
   "soc-u3-d3-break-a-rule": { course: "sociology", unit: 3, day: 3, title: "Day 3 · Teen Court: Rule Breakers", path: "sociology/u3-d3-break-a-rule/", std: ["SS.9-12.Soc.4", "SS.9-12.Soc.9"] },
   "soc-u3-d4-who-decides-you": { course: "sociology", unit: 3, day: 4, title: "Day 4 · Mirror Week", path: "sociology/u3-d4-who-decides-you/", std: ["SS.9-12.Soc.10"] },
   "soc-u3-d6-unit3-review": { course: "sociology", unit: 3, day: 6, title: "Day 6 · Unit 3 Review · Born Reckless?", path: "sociology/u3-d6-unit3-review/", std: ["SS.9-12.Soc.4", "SS.9-12.Soc.9", "SS.9-12.Soc.10", "SS.9-12.Soc.11"] },

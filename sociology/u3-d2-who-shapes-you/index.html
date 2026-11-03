@@ -1,253 +1,30 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>The Feed vs. Everybody | Sociology Unit 3 Day 2</title>
-<meta name="description" content="Run a video app's feed for one week and try to win a teen's choices. Find out when family, friends, school, faith, work, or the feed really wins.">
-<style>
-:root{--ink:#1d2433;--muted:#556074;--paper:#f3f7fb;--card:#fff;--line:#d8dfe9;--main:#0f6f86;--accent:#d8386c;--green:#2a6b45;--bad:#a2392f;
-  --fam:#b5562b;--peer:#6a3fb5;--sch:#1f63a8;--med:#c42f63;--rel:#2a7d62;--work:#9a6a07}
-*{box-sizing:border-box}
-body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.5 system-ui,Segoe UI,Arial,sans-serif}
-header{background:linear-gradient(100deg,#e3f3f7,#fbe7ef);border-bottom:5px solid var(--main);padding:16px max(16px,calc((100vw - 900px)/2)) 12px}
-.k{font-size:.78rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:var(--main);margin:0}
-h1{margin:2px 0 4px;font-size:clamp(1.7rem,3.4vw,2.3rem)}
-.std{margin:2px 0;font-size:.92rem;color:var(--muted)}.std b{color:var(--ink)}
-.hud{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line);padding:7px max(12px,calc((100vw - 1100px)/2));display:flex;gap:6px 10px;flex-wrap:wrap;align-items:center;font-weight:800;font-size:.86rem;box-shadow:0 2px 8px #1d243312}
-.hud .bar{flex:1;min-width:90px;height:10px;background:#e3e8ef;border-radius:9px;overflow:hidden}.hud .bar span{display:block;height:100%;width:0;background:var(--main);transition:width .4s}
-.pill{background:#eef2f7;border-radius:20px;padding:3px 10px;white-space:nowrap;display:inline-flex;align-items:center;gap:5px}
-.track{width:64px;height:9px;border-radius:9px;background:#dde3ea;overflow:hidden;display:inline-block}.track span{display:block;height:100%;transition:width .5s}
-#dexFill{background:var(--accent)}#lifeFill{background:var(--green)}
-.wins{white-space:normal}.wins .w{background:#fff;border:1px solid var(--line);border-radius:12px;padding:0 7px;margin-left:2px;font-weight:800}
-main{max-width:900px;margin:auto;padding:14px 16px 60px}
-.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;box-shadow:0 3px 12px #1d24330d}
-.kicker{font-size:.78rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin:0}
-h2{margin:2px 0 10px;font-size:1.45rem}
-.hook{font-size:1.12rem;font-weight:750;margin:4px 0 10px}
-.goal{background:#e6f4f7;border-radius:9px;padding:8px 12px;font-weight:650}
-.teach{background:#eaf5f8;border-left:5px solid var(--main);border-radius:9px;padding:10px 14px;margin:0 0 12px}.teach p{margin:4px 0}.teach b{color:var(--main)}
-.block{margin:14px 0;padding:14px;border-radius:12px;border:2px solid var(--line);background:#fff}
-.block.current{border-color:var(--ink);box-shadow:0 0 0 4px #0f6f8630}
-.block h3{margin:0 0 10px;font-size:1.06rem;line-height:1.35;font-weight:700}
-.event{background:#fbfcfe;border-style:dashed;border-color:#b9c7d8}.event.current{border-style:solid}
-.event-body p{margin:5px 0}
-.when{display:inline-block;background:var(--ink);color:#fff;border-radius:8px;padding:2px 10px;font-weight:850;font-size:.86rem}
-.mcs{display:grid;gap:8px;margin:10px 0}
-@media(min-width:760px){.mcs.three{grid-template-columns:repeat(3,1fr)}.mcs.two{grid-template-columns:1fr 1fr}}
-.mc{background:#fff;border:1px solid var(--line);border-top:5px solid var(--c,#888);border-radius:12px;padding:9px 11px;box-shadow:0 2px 6px #1d24330c;font-weight:400}
-.mc-top{display:flex;justify-content:space-between;gap:6px;align-items:baseline;flex-wrap:wrap}
-.mc-who{font-weight:850;font-size:.92rem}
-.mc-agent{font-size:.7rem;font-weight:900;letter-spacing:.06em;text-transform:uppercase;color:#fff;background:var(--c,#888);border-radius:10px;padding:1px 8px}
-.mc p{margin:6px 0;font-size:.97rem}
-.mc.fam{--c:var(--fam)}.mc.peer{--c:var(--peer)}.mc.sch{--c:var(--sch)}.mc.med{--c:var(--med);background:#fff6f9}.mc.rel{--c:var(--rel)}.mc.work{--c:var(--work)}.mc.famrel{--c:linear-gradient(90deg,var(--fam),var(--rel));border-top-color:var(--fam)}
-.mc.famrel .mc-agent{background:linear-gradient(90deg,var(--fam),var(--rel))}
-.levers{display:flex;flex-wrap:wrap;gap:4px;margin:4px 0 0}.levers span{background:#f0f3f7;border-radius:12px;padding:1px 8px;font-size:.8rem;font-weight:700}
-.profile{background:#fffdf6;border:1px solid #e6dcc0;border-left:5px solid #c9a227;border-radius:10px;padding:9px 12px;margin:0 0 8px;font-weight:400}.profile p{margin:4px 0}
-.src-card{background:#fbfaf5;border:1px solid #e1dccb;border-left:5px solid #c9a227;border-radius:10px;padding:10px 12px;margin:0 0 10px;font-weight:400;font-size:.97rem}
-.src-card .lab{font-size:.74rem;font-weight:900;letter-spacing:.06em;text-transform:uppercase;color:#8a6a1f;margin:0 0 4px}
-.src-card p{margin:3px 0}
-.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:8px 0}.stats.two{grid-template-columns:1fr 1fr}.stats div{background:#fff;border:1px solid var(--line);border-radius:9px;padding:6px 8px;font-size:.88rem;text-align:center}.stats b{display:block;font-size:1.25rem;color:var(--main)}
-.picked{margin:10px 0 4px;color:var(--muted)}.result{background:#eef2f7;border-radius:9px;padding:9px 12px}.result p{margin:5px 0}
-.cause{background:#fff;border:2px solid var(--ink);border-radius:9px;padding:6px 10px}
-.reveal{background:#fff7d6;border-radius:9px;padding:7px 10px}.reveal b{color:#7a4b00}
-.tag{display:inline-block;font-weight:900;font-size:.8rem;border-radius:12px;padding:2px 9px;margin-right:6px}.tag.up{background:#f9dce6;color:#9b1f4b}.tag.down{background:#e3e8ef;color:var(--ink)}.tag.good{background:#dcefe2;color:var(--green)}.tag.hurt{background:#f6dcd8;color:var(--bad)}.tag.flat{background:#ebedf0;color:var(--ink)}
-.qlabel{font-size:.75rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:var(--main);margin:0 0 4px}
-.choices{display:grid;gap:8px}
-@media(min-width:700px){.q .choices{grid-template-columns:1fr 1fr}}
-button{font:inherit;cursor:pointer;border-radius:10px;min-height:46px}
-.choice{text-align:left;background:#fff;color:var(--ink);border:2px solid #c9d2de;padding:10px 12px;font-weight:650;line-height:1.3}
-.choice:hover:not(:disabled){border-color:var(--ink);background:#fbfcfe}.choice:disabled{opacity:.5;cursor:not-allowed}
-.event .choice{border-color:#e7a9bf}.event .choice:hover:not(:disabled){border-color:var(--accent)}
-.go{margin-top:12px;background:var(--main);color:#fff;border:0;padding:11px 18px;font-weight:900}
-.intro .go{font-size:1.2rem;padding:14px 30px;background:linear-gradient(90deg,var(--main),var(--accent))}
-button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid #2f7dbd;outline-offset:2px}
-.answered{font-weight:800;color:var(--green);margin:4px 0}.why{margin:2px 0;color:var(--muted)}
-.msg{min-height:1.3em;font-weight:750;margin:8px 0 0}.msg.bad{color:var(--bad)}.msg.good{color:var(--green)}
-label{display:block;font-weight:850;margin:14px 0 4px}.stem{margin:0 0 4px;color:var(--muted);font-size:.92rem}
-input,textarea{width:100%;font:inherit;border:2px solid #c9d2de;border-radius:9px;padding:10px;background:#fff;color:var(--ink)}
-.steps{display:grid;gap:6px;margin:10px 0;padding:0;list-style:none}.steps li{background:#eef2f7;border-radius:9px;padding:8px 12px;font-weight:700}
-.welcome{background:#e6f1ea;color:var(--green);font-weight:800;border-radius:9px;padding:8px 12px;margin:0 0 10px}
-.foot{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-top:14px;color:var(--muted);font-size:.85rem}
-.foot button{background:#e6eaf0;border:0;padding:8px 12px;font-weight:800;color:var(--ink)}
-.src{font-size:.8rem;color:var(--muted)}
-.board{display:grid;gap:6px;margin:8px 0}.board div{background:#eef2f7;border-radius:9px;padding:6px 10px}.board b{color:var(--main)}
-@media(max-width:640px){.stats{grid-template-columns:1fr}.hud{font-size:.8rem;position:static}.track{width:48px}}
-@media print{.hud,.foot,.go{display:none}}
-.steps.chips{display:flex;flex-wrap:wrap}.steps.chips li{padding:6px 12px}
-.intro p{margin:6px 0}
-@media(max-height:800px){header{padding-top:8px;padding-bottom:6px}header h1{font-size:1.45rem;margin:0}header .k{display:inline-block;margin-right:10px}header h1{display:inline-block}header .std.goal-line{display:none}.intro h2{font-size:1.25rem;margin:0 0 6px}.card.intro{padding:12px 18px}.intro p{margin:4px 0}.steps.chips{margin:6px 0}.intro label{margin-top:6px}.intro .go{margin-top:6px;padding:10px 24px}.intro input{padding:7px 10px}.intro .msg{min-height:0;margin:0}.hud{padding-top:5px;padding-bottom:5px}}
-</style>
+<title>Push Wars | Sociology Unit 3 Day 2</title>
+<meta name="description" content="Run a video app's push alerts for one week. Try to beat a teen's friends, family, job, school, and Grandma's church.">
+<link rel="stylesheet" href="style.css?v=2">
 <script src="../../shared/assignments.js?v=20261101fill"></script>
 <script src="../../shared/turnin.js?v=20261102read"></script>
-<script src="../../shared/unit-game.js?v=20261102es"></script>
 <script src="../../shared/lang.js?v=20261102samonly"></script>
-<script src="es.js?v=20261102a"></script>
+<script src="es.js?v=2"></script>
 </head><body>
-<header>
-  <p class="k">Sociology · Unit 3 · Day 2</p>
-  <h1>The Feed vs. Everybody</h1>
-  <p class="std"><b>SS.9-12.Soc.9</b> Describe the process of socialization across the life course.</p>
-  <p class="std goal-line"><b>Goal:</b> Explain how family, peers, school, media, religion, and work each shape a teen, and why the strongest one changes. · About 25 minutes.</p>
-</header>
-<div class="hud" aria-label="Progress, Dex's goal, Jay's life, and who won">
-  <span id="progressText">0 checks done</span>
-  <div class="bar" aria-hidden="true"><span id="progressFill"></span></div>
-  <span class="pill">Dex's watch-time goal <span class="track" aria-hidden="true"><span id="dexFill" style="width:50%"></span></span> <span id="dexNum">5/10</span></span>
-  <span class="pill">Jay's real life <span class="track" aria-hidden="true"><span id="lifeFill" style="width:60%"></span></span> <span id="lifeNum">6/10</span></span>
-  <span class="pill wins">Who won Jay's choices: <span id="winList"><span class="w">none yet</span></span></span>
+<div class="hud" id="hud" hidden>
+  <div class="hud-in">
+    <div class="dex" id="dex" aria-live="polite"><span class="dface" aria-hidden="true">🧔<span class="dmood" id="dexMood">😐</span></span><div><span class="dname">Dex · your boss</span><span class="dsay" id="dexSay"></span></div></div>
+    <div class="meters" aria-label="Game meters">
+      <div class="m watch" id="mWatch"><span aria-hidden="true">📈</span> <span>Watch time</span> <span class="mt" aria-hidden="true"><span id="watchFill"></span><i class="goal" id="goalTick"></i></span> <span id="watchNum">0 / 8</span></div>
+      <div class="m life" id="mLife"><span aria-hidden="true">💚</span> <span>Jay's life</span> <span class="mt" aria-hidden="true"><span id="lifeFill"></span></span> <span id="lifeNum">6 / 10</span></div>
+      <div class="m annoy" id="mAnnoy"><span aria-hidden="true">🔕</span> <span>Annoyed</span> <span class="dots" id="annoyDots" aria-hidden="true"></span></div>
+      <div class="m tok" id="mTok"><span class="tokic" aria-hidden="true">⚡</span> <span>Pushes</span> <span class="toks" id="toks" aria-hidden="true"></span> <span id="tokNum">10</span></div>
+    </div>
+    <div class="week" id="week" aria-hidden="true"></div>
+  </div>
 </div>
 <main>
   <p class="welcome" id="welcome" hidden></p>
   <div id="app"></div>
   <div class="foot"><span>Progress saves on this device. Your teacher sees your work after you turn it in.</span><button type="button" id="restartBtn">Start over</button></div>
+  <p class="std"><b>SS.9-12.Soc.9</b> <span>Describe the process of socialization across the life course.</span></p>
 </main>
-<script>
-// ---- Helpers (es.js has the same ones, so the Spanish keys match) ----
-const T = (cls, txt) => `<span class="tag ${cls}">${txt}</span>`;
-const card = (lab, body) => `<div class="src-card"><p class="lab">${lab}</p>${body}</div>`;
-// A voice pulling on Jay: who, which agent, the message, and the "levers" it has over him.
-const mc = (cls, who, agent, msg, levers) => `<div class="mc ${cls}"><div class="mc-top"><span class="mc-who">${who}</span><span class="mc-agent">${agent}</span></div><p>${msg}</p><div class="levers">${levers.map(l => `<span>${l}</span>`).join("")}</div></div>`;
-const cause = txt => `<p class="cause"><b>Caused by:</b> ${txt}</p>`;
-const dex = n => T(n > 0 ? "up" : (n < 0 ? "down" : "flat"), "Dex " + (n > 0 ? "+" + n : n < 0 ? "−" + Math.abs(n) : "+0"));
-const life = n => T(n > 0 ? "good" : (n < 0 ? "hurt" : "flat"), "Jay's life " + (n > 0 ? "+" + n : n < 0 ? "−" + Math.abs(n) : "+0"));
-
-// Who won each of Jay's 4 choices (j_* counters), in the order they can happen.
-const WIN = [["j_peer", "Peers"], ["j_work", "Workplace"], ["j_med", "Media"], ["j_sch", "School"], ["j_fam", "Family + Religion"]];
-const winsHtml = fx => { const on = WIN.filter(w => fx[w[0]]); return on.length ? on.map(w => `<span class="w">${w[1]}</span>`).join(" ") : `<span class="w">none yet</span>`; };
-
-const R1 = `<p class="reveal">💡 <b>Agents of socialization</b> are the people and groups that teach us how to act. Jay's friends are his <b>peer group</b>: people his age who shape how he talks, dresses, and what counts as cool.</p>`;
-const C2 = cause("Workplace. He needed the $60, and Rosa can cut his hours. His squad played ranked with Tyler instead.");
-const R2 = `<p class="reveal">💡 A job is an agent of socialization too. The <b>workplace</b> teaches rules no class covers: show up, follow the dress code, talk to customers and a boss the right way.</p>`;
-const R3 = `<p class="reveal">💡 School teaches a <b>hidden curriculum</b>: lessons nobody says out loud, like being on time and working with people you didn't pick. The feed is <b>mass media</b>: TV, music, games, and apps that show us what's normal.</p>`;
-const C4 = cause("Family and religion. A tradition with Grandma, tied to her church, beat his friends AND the feed.");
-const O4 = `<p>At the register, church member Mr. Ortiz watches Jay make change and talk with adults. "You're good at this. Want me to be a reference for your next job?"</p>`;
-const R4 = `<p class="reveal">💡 <b>Family</b> is usually the first and strongest agent. It teaches language, values, and habits. Families also pass on <b>cultural capital</b>: know-how and connections that help in school and work. <b>Religion</b> teaches values, holidays, and rituals, and gives people a community.</p><p class="src">Real Iowa: faith communities of every kind do this. Cedar Rapids is home to the Mother Mosque of America, built in 1934 and often called the oldest standing mosque in the U.S.</p>`;
-const R5 = `<p class="reveal">💡 Socialization goes on across the whole <b>life course</b>. At 8, family is loudest. At 16, <b>peers and media</b> often gain pull, but family still shapes deep values. At 24, work and the family you build take over. And Dex is socializing <b>you</b> right now: your job is teaching you what's "normal" at work.</p>`;
-
-UnitGame.start({
-  key: "soc-u3-d2-who-shapes-you-v1",
-  assignmentId: "soc-u3-d2-who-shapes-you",
-  title: "Sociology · Unit 3 · Day 2 · Who Shapes You the Most Right Now?",
-  standard: "SS.9-12.Soc.9",
-  oldApi: "https://fynn-class-assignment-submissions-20261024.neotboy.chatgpt.site/api/submit",
-  startFx: { dex: 5, life: 6 },
-  clampFx: fx => { fx.dex = Math.max(0, Math.min(10, fx.dex)); fx.life = Math.max(0, Math.min(10, fx.life)); },
-  hud: st => {
-    const d = st.fx.dex || 0, l = st.fx.life || 0;
-    document.getElementById("dexFill").style.width = (d * 10) + "%";
-    document.getElementById("dexNum").textContent = d + "/10";
-    document.getElementById("lifeFill").style.width = (l * 10) + "%";
-    document.getElementById("lifeNum").textContent = l + "/10";
-    const wl = document.getElementById("winList"), h = winsHtml(st.fx);
-    if (wl.dataset.h !== h) { wl.dataset.h = h; wl.innerHTML = h; }
-  },
-  startLabel: "Clock in",
-  introHtml: `<p class="kicker">ClipLoop · For You team</p><h2>Can the feed beat everybody?</h2>
-    <p class="hook">Your boss swears the feed can beat anyone in a teen's life. You get one week to prove it.</p>
-    <p>You just got hired at <b>ClipLoop</b>, a video app. Your boss, <b>Dex</b>, hands you one user: <b>Jay, 16, a junior in Marion</b>. Your job: keep Jay on the app.</p>
-    <p>But his mom, friends, school, grandma's church, and job all pull on him too. Each round: read who's pulling, make your move, see who really won.</p>
-    <ul class="steps chips"><li>📲 5 rounds. Every move costs something.</li><li>🧾 After each round, trace who won and why.</li><li>✅ 12 quick checks, then 2 short answers. About 25 minutes.</li></ul>
-    <p class="goal"><b>Today's goal:</b> Figure out who shapes a teen the most, and why the answer changes.</p>
-    <p class="src">ClipLoop, Dex, Jay, and everyone in his life are made up. The research and survey numbers are real.</p>`,
-  scenes: [
-    { kicker: "Part 1 of 3 · Monday and Tuesday", title: "Shoes and a Shift",
-      teach: `<p><b>How to read a round:</b> each card is a voice pulling on Jay. The tags show what that voice has over him:</p>
-        <div class="levers"><span>⏱ Time with him</span><span>🤝 Trust</span><span>🎁 A reward</span><span>⚠️ A punishment</span></div>
-        <p>You run the 📲 feed. Pick your move. Then see who really won.</p>`,
-      blocks: [
-        { type: "event", id: "e1", short: "Round 1 · Shoes move", html: `<p class="when">Round 1 · Monday, 3:15 p.m.</p>
-          <p>Jay has $120 from his pizza job. He needs new basketball shoes for Saturday's 3-on-3 tournament.</p>
-          <div class="mcs three">${mc("peer", "💬 Group chat (4 friends)", "Peers", "\"everybody's getting the Volt 3s for saturday 🔥 dont be the one in old shoes\"", ["⏱ All day, at school and online", "🎁 Fitting in", "⚠️ Getting roasted"])}
-          ${mc("fam", "👩 Mom", "Family", "\"Don't spend it all on shoes. You still owe me $40 for your phone bill.\"", ["🤝 Trust", "⚠️ Can take his phone"])}
-          ${mc("med", "📲 ClipLoop feed (you)", "Media", "Dex: \"Shoe ads pay us the most. Make a move.\"", ["⏱ Hours a day on his screen", "🎁 Likes and new videos"])}</div>
-          <p><b>Your move:</b></p>`,
-          choices: [
-            { label: "Push Volt 3 hype videos, the shoes his friends want", fx: { dex: 2, life: -1, j_peer: 1 }, result: `<p>${dex(2)}${life(-1)}</p><p>Jay watches 40 minutes of Volt 3 videos and buys them for $120. Now he can't pay Mom the $40.</p>${cause("Peers. The feed only helped. Jay wanted the Volts because his friends did.")}${R1}` },
-            { label: "Push Glide Pros, the brand that pays ClipLoop the most", fx: { dex: -1, life: -1, j_peer: 1 }, result: `<p>${dex(-1)}${life(-1)}</p><p>Jay watches the Glide Pro ads, then buys the Volt 3s anyway for $120. Glide is mad their ads didn't work. Jay can't pay Mom the $40.</p>${cause("Peers. An ad couldn't beat what his whole friend group was wearing.")}${R1}` },
-            { label: "Push \"how to find shoes on sale\" videos", fx: { dex: -2, life: 0, j_peer: 1 }, result: `<p>${dex(-2)}${life(0)}</p><p>Jay finds the Volt 3s on sale for $80 and pays Mom her $40. Dex is furious: "Sale videos make us nothing."</p>${cause("Peers. His friends picked the shoe. The feed only changed the price.")}${R1}` }
-          ] },
-        { type: "q", id: "q1", std: "Soc.9", short: "Shoes: peers decided style", prompt: "Jay ended up with the Volt 3s no matter what the feed pushed. What does that show?", options: ["On style, his friends' approval pulled harder than any ad", "On style, the feed's ads pulled harder than his friends", "On style, his mom's rules pulled harder than his friends", "On style, the price mattered more than what friends wore"], hint: "Look at the Caused by line. Which voice won in every version?", why: "Every version ended with the Volts. His peer group set the style. The feed could only help or lose." },
-        { type: "q", id: "q2", std: "Soc.9", short: "Coleman: teens set status rules", prompt: card("Real research · James Coleman, late 1950s", `<p>Sociologist James Coleman surveyed students at nine Midwest high schools. He asked how they wanted to be remembered.</p><div class="stats two"><div><b>over 40%</b>of boys picked star athlete</div><div><b>under 30%</b>of boys picked brilliant student</div></div><p>Coleman said teens build their own world, with its own rules for who is cool.</p><p class="src">Source: James Coleman, The Adolescent Society (1961), summarized by Education Next.</p>`) + "What does Coleman's survey suggest about peers?", options: ["Teens set their own rules for who is looked up to", "Teens care most about what their teachers want", "Teens mostly copy the goals their parents set", "Teens care very little about how others see them"], hint: "Compare the two numbers, then read Coleman's last line.", why: "More boys wanted to be the star athlete than the brilliant student. Respect from peers, not adult goals, decided what mattered." },
-        { type: "event", id: "e2", short: "Round 2 · Shift move", html: `<p class="when">Round 2 · Tuesday, 4:30 p.m.</p>
-          <p>Jay's share of his car insurance, $90, is due Friday. Then three messages hit at once.</p>
-          <div class="mcs three">${mc("work", "🍕 Rosa, shift manager at Big Slice", "Workplace", "\"Can you cover 5 to 9 tonight? Mike called in sick. Reminder: phones stay in the back on shift.\"", ["🎁 $60 for 4 hours", "⚠️ Can cut his hours", "🤝 She trained him"])}
-          ${mc("peer", "🎮 Squad chat", "Peers", "\"ranked at 7 tonight. we need our 5th. if ur out we're grabbing Tyler\"", ["🎁 Fun with friends", "⚠️ Losing his spot"])}
-          ${mc("med", "📲 ClipLoop feed (you)", "Media", "Dex: \"The new Rift season drops at 7. Get him watching.\"", ["⏱ In his pocket all night"])}</div>
-          <p><b>Your move:</b></p>`,
-          choices: [
-            { label: "Blast Rift season hype videos all evening", fx: { dex: 1, life: -1, j_work: 1 }, result: `<p>${dex(1)}${life(-1)}</p><p>Jay takes the shift anyway. He keeps sneaking looks at the hype clips. Rosa catches his phone at the counter: "Back room. Last warning."</p>${C2}${R2}` },
-            { label: "Send \"your squad is live!\" alerts during his shift", fx: { dex: 2, life: -2, j_work: 1 }, result: `<p>${dex(2)}${life(-2)}</p><p>Jay takes the shift. The alerts keep buzzing. He checks one, messes up a large order, and Rosa writes him up.</p>${C2}${R2}` },
-            { label: "Stay quiet until 9:15, then push the highlights", fx: { dex: -1, life: 1, j_work: 1 }, result: `<p>${dex(-1)}${life(1)}</p><p>Jay works a clean shift and makes $60. After close, he watches Rift highlights in the parking lot. Dex: "You gave up four hours of watch time?"</p>${C2}${R2}` }
-          ] },
-        { type: "q", id: "q3", std: "Soc.9", short: "Shift: reward + punishment", prompt: "Jay picked the shift over ranked with his friends. Which pulls decided it?", options: ["The $60 he needed and Rosa's power to cut his hours", "The feed's alerts and the new Rift season dropping", "His squad's threat to give his spot to Tyler tonight", "His mom's reminder about paying the phone bill"], hint: "Look at the tags on Rosa's card, and the $90 bill.", why: "Work had a reward he needed (money) and a punishment (fewer hours). Rewards and punishments are how agents pull." },
-        { type: "q", id: "q4", std: "Soc.9", short: "Workplace teaches a norm", prompt: "Which part of Tuesday shows the workplace teaching Jay a norm (a rule for how to act)?", options: ["Rosa's rule that phones stay in the back on shift", "His squad's plan to play ranked together at 7", "Dex's order to get Jay watching the Rift season", "The $90 car insurance bill that is due Friday"], hint: "Which rule for how to act came from his job?", why: "\"Phones stay in the back\" is a work rule. No class taught it. Jobs socialize people into new norms." }
-      ] },
-    { kicker: "Part 2 of 3 · Wednesday and Sunday", title: "Late Night and Sunday Morning",
-      teach: `<p>Dex checks the numbers: "The feed keeps losing. Fix it." Two more rounds.</p>`,
-      blocks: [
-        { type: "event", id: "e3", short: "Round 3 · Late-night move", html: `<p class="when">Round 3 · Wednesday, 11:00 p.m.</p>
-          <p>Jay's group presents in Ms. Harlan's class at 8:05 a.m. He got put with two kids he barely knows. He still owes them slide 3.</p>
-          <div class="mcs three">${mc("sch", "🏫 Ms. Harlan, teacher", "School", "\"Presentations start at the bell. Late groups lose their slot. Your group is counting on you.\"", ["⏱ 7 hours a day", "⚠️ His grade"])}
-          ${mc("sch", "📝 Nia, his group partner", "School", "\"did u finish slide 3?? 😬\"", ["🤝 Counting on him"])}
-          ${mc("med", "📲 ClipLoop feed (you)", "Media", "It's 11 p.m. Mom is asleep. His friends are offline. Nobody else is pulling right now.", ["⏱ The only voice awake"])}</div>
-          <p><b>Your move:</b></p>`,
-          choices: [
-            { label: "Autoplay one more video, then one more…", fx: { dex: 3, life: -3, j_med: 1 }, result: `<p>${dex(3)}${life(-3)}</p><p>Jay watches until 2:10 a.m. He sleeps through his alarm and walks in at 8:20. His group presented without him, and slide 3 was blank.</p>${cause("Media. The feed won the night because nobody else was around to pull. School still made him pay for it in the morning.")}${R3}` },
-            { label: "Show the \"you've been scrolling a while\" bedtime reminder", fx: { dex: -2, life: 2, j_sch: 1 }, result: `<p>${dex(-2)}${life(2)}</p><p>Jay closes the app, finishes slide 3, and goes to sleep. He's in his seat at 8:00. Nia says, "Nice slide." Dex: "We built that reminder to look good. Don't actually USE it."</p>${cause("School. Being there for his group won, because the feed stepped back.")}${R3}` },
-            { label: "Push \"study with me\" videos so he stays on the app", fx: { dex: 1, life: -1, j_sch: 1 }, result: `<p>${dex(1)}${life(-1)}</p><p>Jay finishes slide 3, slowly, with a video playing. Bed at 1:00 a.m. He makes it at 8:04, tired, and stumbles through his part.</p>${cause("School, barely. He showed up for his group, but the feed cost him sleep.")}${R3}` }
-          ] },
-        { type: "q", id: "q5", std: "Soc.9", short: "Hidden curriculum", prompt: "Which lesson from Ms. Harlan's class is part of the hidden curriculum?", options: ["Showing up on time so your group can count on you", "The facts Jay's group put on slide 3 of the project", "How to make slides look good in a presentation app", "The topic Ms. Harlan gave each project group"], hint: "Hidden means nobody teaches it as a subject. Which lesson is a habit, not facts?", why: "Being on time and working with kids you didn't pick are habits school teaches without saying so. Most jobs expect the same habits." },
-        { type: "q", id: "q6", std: "Soc.9", short: "Feed's best shot: alone at night", prompt: "When did the feed have its best chance to win?", options: ["Late at night, when no other voice was awake to pull", "After school, when all his friends were in the chat", "During his shift, while Rosa watched the counter", "At 8:05 a.m., right as his group got up to present"], hint: "Reread the feed's card in Round 3.", why: "Agents pull with time. At 11 p.m., the feed had Jay all to itself." },
-        { type: "q", id: "q7", std: "Soc.9", short: "Pew: media time is growing", prompt: card("Real survey · Pew Research Center, 2024", `<p>Pew surveyed 1,391 U.S. teens in fall 2024.</p><div class="stats"><div><b>about 9 in 10</b>used YouTube</div><div><b>about 6 in 10</b>used TikTok and Instagram</div><div><b>nearly half</b>said they are online "almost constantly"</div></div><p>Ten years earlier, only 24% (about 1 in 4) said "almost constantly."</p><p class="src">Source: Pew Research Center, "Teens, Social Media and Technology 2024" (Dec. 12, 2024).</p>`) + "What does the Pew survey show about media as an agent?", options: ["It has more time with teens than it did 10 years ago", "It has less time with teens than it did 10 years ago", "Only about 1 in 4 teens use video apps like YouTube", "It mostly reaches adults instead of reaching teens"], hint: "Compare \"nearly half\" today with 24% ten years earlier.", why: "\"Almost constantly\" went from about 1 in 4 teens to nearly 1 in 2. More time means more pull." },
-        { type: "event", id: "e4", short: "Round 4 · Sunday move", html: `<p class="when">Round 4 · Sunday, 7:30 a.m.</p>
-          <p>Every year, Jay's grandma runs a pancake breakfast at her church to raise money for the food pantry. Jay has flipped pancakes next to her since he was 9.</p>
-          <div class="mcs three">${mc("famrel", "👵 Grandma", "Family + Religion", "\"Pancakes start at 8. Wear a clean shirt. Pastor Dee is counting on us.\"", ["🤝 Years of trust", "⏱ A tradition since he was 9", "🎁 A whole church community"])}
-          ${mc("peer", "🏀 Marcus, his best friend", "Peers", "\"pickup at the Y at 9. u coming?\"", ["🎁 Fun", "⚠️ Missing out"])}
-          ${mc("med", "📲 ClipLoop feed (you)", "Media", "Dex: \"The Rift championship streams live at 10. Make Sunday ours.\"", ["⏱ In his pocket", "🎁 A live event"])}</div>
-          <p><b>Your move:</b></p>`,
-          choices: [
-            { label: "Push the championship stream all morning", fx: { dex: -1, life: 0, j_fam: 1 }, result: `<p>${dex(-1)}${life(0)}</p><p>Jay goes to the breakfast. His phone buzzes all morning. Grandma: "Phone away at the griddle." He puts it away. Zero minutes watched.</p>${C4}${O4}${R4}` },
-            { label: "Push a Saturday night watch party so he sleeps in", fx: { dex: 1, life: -2, j_fam: 1 }, result: `<p>${dex(1)}${life(-2)}</p><p>Jay watches until 3 a.m. Grandma calls at 7:30. He drags himself in, exhausted, but he still shows up.</p>${C4}${O4}${R4}` },
-            { label: "Leave Sunday morning alone", fx: { dex: -2, life: 1, j_fam: 1 }, result: `<p>${dex(-2)}${life(1)}</p><p>Jay flips 200 pancakes. Dex: "You gave away a whole morning? Unbelievable."</p>${C4}${O4}${R4}` }
-          ] },
-        { type: "q", id: "q8", std: "Soc.9", short: "Sunday: family + faith won", prompt: "Why did Sunday morning go to Grandma, even against his best friend AND the feed?", options: ["Years of family tradition and a church community", "His best friend canceled the pickup game at the Y", "The championship stream got canceled that morning", "Grandma promised to pay him for working all day"], hint: "Look at the tags on Grandma's card.", why: "Family and religion pull on deep values and traditions. Years of trust and a whole community beat one morning of fun." },
-        { type: "q", id: "q9", std: "Soc.9", short: "Reference = cultural capital", prompt: "Mr. Ortiz offers to be Jay's job reference after seeing him at Grandma's breakfast. Which idea is this?", options: ["Cultural capital: know-how and connections that help at work", "Hidden curriculum: habits school teaches without saying so", "Peer group: friends his age who decide what is cool", "Mass media: apps and shows that tell us what is normal"], hint: "Reread the yellow 💡 box from Round 4.", why: "Through his family, Jay gained a skill (talking with adults) and a connection (a reference). That's cultural capital." }
-      ] },
-    { kicker: "Part 3 of 3 · The next week", title: "Dex Wants More Users",
-      teach: `<p>Dex has a new plan: "If the feed can't win Jay, try the rest of his family." He wants you to go after Jay's little sister, Mia, and his cousin, Andre.</p>`,
-      blocks: [
-        { type: "q", id: "q10", std: "Soc.9", short: "Age 8: family controls", prompt: `<div class="profile"><p><b>Mia, 8</b> · Jay's sister, 3rd grade</p><p>Mom keeps the family tablet in the kitchen. Mia gets 1 hour a day, with parental controls on. Mom picks the apps.</p></div><div class="mcs">${mc("med", "📲 Dex", "Media", "\"Kids' videos get huge views. Get Mia hooked.\"", ["🎁 Bright, fun videos"])}</div>` + "Who has the strongest pull on Mia's screen time?", options: ["Family, because Mom controls the tablet, the time, and the apps", "Media, because kids' videos get huge views on apps like ClipLoop", "Peers, because third graders all want to watch the same videos", "School, because her teacher sends home homework every night"], hint: "Read Mia's card. Who is in charge of the tablet?", why: "At 8, family controls the time, the rewards, and the rules. Family is usually strongest early in life." },
-        { type: "q", id: "q11", std: "Soc.9", short: "Age 24: work + own family", prompt: `<div class="profile"><p><b>Andre, 24</b> · Jay's cousin</p><p>Andre works 6 p.m. to 2 a.m. at a warehouse in Cedar Rapids. His supervisor writes people up for phones on the floor. At home, he's raising a 2-year-old daughter with his partner.</p></div><div class="mcs">${mc("med", "📲 Dex", "Media", "\"Night-shift workers get bored. Push alerts at midnight.\"", ["⏱ In his pocket"])}</div>` + "Which agents pull hardest on Andre now?", options: ["His job and the family he's raising, since they fill his time", "His old high school friends, since they want him to fit in", "His old high school, since it taught him to show up on time", "The feed, since night-shift workers get bored at midnight"], hint: "Look at what fills Andre's nights and days.", why: "For adults, the workplace and the family they build fill most of their time and set the rules. The strongest agent changes with age." },
-        { type: "event", id: "e5", short: "Dex's plan for Mia", html: `<p class="when">Friday · Dex's office</p>
-          <p>Dex: "Write the plan. Autoplay for 8-year-olds. Bright colors, no end, no off switch. On my desk by Friday."</p>
-          <p>Most big social apps say users must be at least 13. Dex shrugs: "Nobody checks."</p>
-          <p><b>Your move:</b></p>`,
-          choices: [
-            { label: "Build it. Dex is the boss.", fx: { dex: -2 }, result: `<p>${dex(-2)}</p><p>Mia watches until 9 p.m. one night. Mom finds out, turns on stricter controls, and deletes ClipLoop from the tablet. Then she posts a 1-star review.</p>${cause("Family. For an 8-year-old, Mom has the final say.")}${R5}` },
-            { label: "Push back: \"She's 8. She's not our user.\"", fx: { dex: -1 }, result: `<p>${dex(-1)}</p><p>Dex is mad. "Fine. Then don't expect a bonus this year." Mia's mom never has to deal with ClipLoop at all.</p>${cause("Your own values beat pressure at work. Mia's family still controls her screen.")}${R5}` },
-            { label: "Secretly add a 20-minute timer, then tell Dex it's done", fx: { dex: 0 }, result: `<p>${dex(0)}</p><p>Mia watches 20 minutes, and the timer stops it. A week later Dex finds the timer: "Who added this?" You have some explaining to do.</p>${cause("Workplace pressure, and your own values. Dex pushed you. You pushed back quietly.")}${R5}` }
-          ] },
-        { type: "q", id: "q12", std: "Soc.9", label: "Exit ticket", short: "Exit: when the feed won", prompt: "Look back at Jay's week. When did the feed actually win?", options: ["When nobody else was pulling, or it pushed what friends wanted", "Every time Dex told you to make a bigger, louder move on Jay's feed", "When the choice was about Grandma, church, and family traditions", "When Jay needed extra money for his car insurance and his bills"], hint: "Check the Caused by lines from Round 1 and Round 3.", why: "The feed won at 11 p.m. when nobody else was awake. It only 'won' the shoes by pushing what his friends already wanted. On money, school, and family values, other agents won." }
-      ] }
-  ],
-  finale: {
-    title: "Dex's Report: Did the Feed Beat Everybody?",
-    report: st => `<p><b>Who won Jay's 4 choices:</b> ${winsHtml(st.fx)}</p>
-      <p>Dex's watch-time goal ended at ${st.fx.dex}/10. Jay's real life ended at ${st.fx.life}/10.</p>
-      <p>The feed is loud, but it rarely wins alone. Different agents win different choices: friends on style, work on money, family and faith on deep values. And who pulls hardest changes with age.</p>
-      <p>Answer both in 1–2 full sentences.</p>`,
-    prompts: [
-      { id: "clash", short: "A round where two agents clashed", label: "1. Pick one round where two agents pulled Jay different ways. Who won, and why? (Use a pull: time, trust, a reward, or a punishment.)", stem: "In Round ___, ___ and ___ pulled Jay different ways. ___ won because ___.", min: 70, newWords: 5,
-        mustAll: [["family", "mom", "grandma", "peer", "friend", "squad", "chat", "marcus", "school", "teacher", "harlan", "nia", "media", "feed", "app", "cliploop", "video", "religion", "church", "faith", "work", "job", "rosa", "boss", "manager"], ["because", "since", "so ", "reason"], ["time", "trust", "reward", "punish", "money", "$", "pay", "hour", "fun", "fit", "roast", "grade", "late", "night", "awake", "alone", "sleep", "tradition", "spot", "cool"]],
-        mustMsg: "In answer 1, name who won (like friends, work, school, the feed, or Grandma), explain why (use \"because\"), AND name the pull that won (time, trust, a reward like money, or a punishment like losing hours)." },
-      { id: "most", short: "Which agent shapes teens most", label: "2. Which agent of socialization shapes teens the most today? Back it up with evidence from today (Coleman, the Pew survey, or Jay's week). Then name one agent that pushes back.", stem: "___ shapes teens the most because ___. But ___ pushes back when ___.", min: 80, newWords: 6,
-        mustAll: [["family", "parent", "mom", "grandma", "peer", "friend", "school", "teacher", "media", "feed", "phone", "app", "online", "social media", "religion", "church", "faith", "work", "job"], ["coleman", "athlete", "pew", "survey", "constantly", "half", "%", "percent", "in 10", "jay", "volt", "shoe", "shift", "slide", "night", "pancake", "round", "rosa", "grandma", "mia", "andre"]],
-        mustMsg: "In answer 2, name an agent AND use evidence from today (Coleman, the Pew survey, or something from Jay's week)." }
-    ]
-  },
-  extraAnswers: st => ({
-    "Who won Jay's choices": WIN.filter(w => st.fx[w[0]]).map(w => w[1]).join(", ") || "none",
-    "Dex's watch-time goal": st.fx.dex + " of 10",
-    "Jay's real life": st.fx.life + " of 10"
-  })
-});
-</script>
+<script src="game.js?v=2"></script>
 </body></html>
