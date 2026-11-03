@@ -263,7 +263,7 @@ window.CLASS_ASSIGNMENTS = {
   "civics-test-s1-founders-defense":  { course: "civics", unit: 1, title: "Founders' Defense", path: "civics/civics-test-s1-founders-defense/", std: ["SS.9-12.Gov.3", "SS.9-12.Gov.4"] },
 
   // ---- Civics (Iowa civics test prep) · Fridays 2–6 (exit tickets on each Friday's presentation); Friday 7 = exam ----
-  // 2026-11-03 (Fynn): match Schoology. F5 = Civil War to Modern America (one condensed deck), F6 = Geography & Symbols + Smithsonian, F7 = Iowa Civics Exam.
+  // 2026-11-03 (Fynn): match Schoology. F5 = Civil War to Modern America (one condensed deck), F6 = Geography & Symbols + Smithsonian Symbols & Holidays activity, F7 = Iowa Civics Exam.
   "civics-f2-presentation": { course: "civics", hideLink: true, unit: 2, title: "How the Government Works (Slides)", path: "civics/friday2-government-presentation/", std: ["SS.9-12.Gov.6", "SS.9-12.Gov.7", "SS.9-12.Gov.8"] },
   "civics-f2-government-arcade": { course: "civics", unit: 2, title: "Government Arcade", path: "civics/day2-government-arcade/", std: ["SS.9-12.Gov.6", "SS.9-12.Gov.7", "SS.9-12.Gov.8", "SS.9-12.Gov.9", "SS.9-12.Gov.18"] },
   "civics-f3-presentation": { course: "civics", hideLink: true, unit: 3, title: "Rights & Responsibilities (Slides)", path: "civics/friday3-rights-presentation/", std: ["SS.9-12.Gov.14", "SS.9-12.Gov.17"] },
@@ -273,8 +273,7 @@ window.CLASS_ASSIGNMENTS = {
   "civics-f5-presentation": { course: "civics", hideLink: true, unit: 5, title: "Civil War to Modern America (Slides)", path: "civics/friday5-1800s-civics-presentation/", std: ["SS.9-12.Gov.14", "SS.9-12.Gov.15", "SS.9-12.Gov.11", "SS.9-12.Gov.3"] },
   "civics-f5-1800s-express": { course: "civics", unit: 5, title: "The 1800s Express", path: "civics/friday5-1800s-express-game/", std: ["SS.9-12.Gov.14", "SS.9-12.Gov.15", "SS.9-12.Gov.3"] },
   "civics-f6-presentation": { course: "civics", hideLink: true, unit: 6, title: "Geography & Symbols (Slides)", path: "civics/friday6-geography-symbols-presentation/", std: ["SS.9-12.Gov.16"] },
-  "civics-f6-smithsonian-geography": { course: "civics", unit: 6, turnIn: false, std: [], title: "Smithsonian: Preparing for the Oath · Geography", path: "https://americanhistory.si.edu/citizenship/" },
-  "civics-f6-smithsonian-symbols": { course: "civics", unit: 6, turnIn: false, std: [], title: "Smithsonian: Preparing for the Oath · Symbols & Holidays", path: "https://americanhistory.si.edu/citizenship/" },
+  "civics-f6-smithsonian-symbols": { course: "civics", unit: 6, turnIn: false, std: [], title: "Smithsonian: Preparing for the Oath · Symbols & Holidays", path: "https://americanhistory.si.edu/education/resources/preparing-oath-symbols-holidays" },
   "civics-f7-exam": { course: "civics", unit: 7, turnIn: false, std: [], title: "Iowa Civics Exam (Summative)", path: "https://docs.google.com/forms/d/1joEmHjcHzjwr7SpNKqNYyS8fifEKlgE61OfEEUMRV8g/viewform" },
   // Added 2026-11-01: past Drive assignments rated Strong by Fynn's student panel + teacher review, linked on their lesson days
   "gov-u1-d1-drive1": { course: "government", unit: 1, day: 1, title: "Day 1 · Foundations of Government Packet, Why Government? section (Page 1)", path: "https://drive.google.com/open?id=1PcQjjqcDXeLLRwC-ly-qZzidjIfQhanFafBKWr9r4TA", turnIn: false, alt: true, std: ["SS.9-12.Gov.1", "SS.9-12.Gov.5"] },
