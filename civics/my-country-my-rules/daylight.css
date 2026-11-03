@@ -204,3 +204,25 @@ body.guided{color:#263b50;background:radial-gradient(ellipse at 8% 5%,#ffe4ab88,
 .board-tile.built{opacity:.55;background:#eef7f4}
 .board-check{position:absolute;top:4px;right:6px;color:#1d7c7a;font-weight:900}
 @media(min-width:1100px){.board-grid{grid-template-columns:repeat(4,minmax(0,1fr))}}
+/* Nov 2026: reading page on the right for "Compare the systems" and the history briefing (questions stay on the left). */
+.world.has-page>:not(#sidePage){display:none!important}
+.side-page{padding:26px 30px;color:#294b5d;background:#fffdf8;min-height:100%}
+.side-page .step-kicker{font-size:11px;letter-spacing:.12em;font-weight:800;color:#8a5a00;margin-bottom:10px}
+.compare-chart table{width:100%;border-collapse:collapse;font-size:16px;line-height:1.4}
+.compare-chart th,.compare-chart td{border-bottom:1px solid #d9e4e6;padding:10px 12px;text-align:left;vertical-align:top}
+.compare-chart thead th{font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:#5b7480;border-bottom:2px solid #9fbcc4}
+.compare-chart tbody th{width:24%;color:#1d3a4a}
+.compare-chart td:last-child{width:24%;font-weight:700;color:#7a4b00;background:#fff6df}
+.compare-chart tbody tr:first-child th,.compare-chart tbody tr:first-child td:not(:last-child){background:#eef7f3}
+.history-briefing h3{font-size:26px;margin:0 0 8px;color:#5a1d1d}
+.history-briefing>p{font-size:17px;line-height:1.6;margin:0 0 14px}
+.history-briefing article{border-left:4px solid #8b2c2c;background:#fbf4f1;padding:12px 16px;margin:12px 0;border-radius:4px}
+.history-briefing h4{margin:0 0 6px;font-size:18px;color:#5a1d1d}
+.history-briefing article p{font-size:16px;line-height:1.6;margin:0 0 6px}
+.history-briefing a{font-size:13px;color:#2b5d8a}
+#historyDialog .history-briefing{color:#294b5d}
+.cmp-progress{display:flex;align-items:center;gap:8px;margin:14px 0 4px;font-size:14px}
+.cmp-dot{display:inline-grid;place-items:center;width:28px;height:28px;border-radius:50%;border:2px solid #9fbcc4;font-weight:800;font-size:13px;color:#5b7480;background:#fff}
+.cmp-dot.done{background:#2f7a5d;border-color:#2f7a5d;color:#fff}
+.cmp-dot.now{border-color:#a87935;box-shadow:0 0 0 3px #f3dfb5}
+@media(max-width:650px){.side-page{padding:16px}.compare-chart table{font-size:14px}.compare-chart th,.compare-chart td{padding:7px}}

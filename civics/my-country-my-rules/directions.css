@@ -14,3 +14,5 @@
 .directions-reminder p{margin:0}
 .guide-welcome #startCountry{font-size:17px;padding:14px;margin-top:18px}
 @media(max-width:650px){.guided.guide-welcome main{padding:14px}.guide-welcome #tools{padding:22px 18px}.directions-intro h2{font-size:27px}.country-directions li{font-size:15px;padding-right:10px}.directions-intro>p{font-size:16px}}
+/* Short Chromebook screens (about 640px tall): keep the Start button on the first screen. */
+@media(max-height:700px) and (min-width:651px){.guided.guide-welcome main{padding:10px 24px}.guide-welcome #tools{padding:16px 28px}.directions-intro h2{font-size:26px;margin-bottom:4px}.country-directions{gap:5px;margin:10px 0}.country-directions li{padding:6px 12px 6px 48px;font-size:15px}.country-directions li::before{top:5px;width:24px;height:24px;line-height:24px;font-size:13px}.directions-reminder{padding:7px 12px;font-size:14px}.guide-welcome #startCountry{margin-top:8px;padding:11px}}

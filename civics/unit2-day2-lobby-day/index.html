@@ -61,7 +61,7 @@ input,textarea{width:100%;font:inherit;border:2px solid #cdc6b6;border-radius:9p
   <p class="k">Government · Unit 2 · Day 3</p>
   <h1>Lobby Day: Can You Pass the Repair Bill?</h1>
   <p class="std"><b>SS.9-12.Gov.12</b> Critique the influence of intermediary institutions on government and policy.</p>
-  <p class="std"><b>Goal:</b> Explain how interest groups and media influence lawmakers, and judge whether that influence is fair. · About 25 minutes.</p>
+  <p class="std"><b>Goal:</b> Explain how interest groups and media influence lawmakers, and critique how that influence works. · About 25 minutes.</p>
 </header>
 <div class="hud" aria-label="Progress, budget, and votes">
   <span id="progressText">0 checks done</span>
@@ -168,12 +168,12 @@ UnitGame.start({
     report: st => {
       const v = st.fx.votes, pass = v >= NEED;
       return `<div class="verdict ${pass ? "pass" : "fail"}">${pass ? "PASSED: " + v + " yes votes out of 15. Your bill moves to the full Senate." : "FAILED: only " + v + " yes votes out of 15 (needed 8). The bill dies in committee."} Money left: ${money(st.fx.budget)}.</div>
-        <div class="real"><p><b>What really happened:</b> In 2026 the House passed the bill 70–18 with support from both parties. Farm groups backed it. John Deere and equipment dealers opposed it, saying they already share repair tools. The Senate never took it up, so it died.</p><p>A bill that dies can be brought back in a later session. That's why interest groups keep organizing year after year.</p></div>
+        <div class="real"><p><b>What really happened:</b> In 2026 the House passed the bill 70–18 with support from both parties. Farm groups backed it. John Deere and equipment dealers opposed it, saying they already share repair tools. The Senate never took it up, so it died.</p><p>A bill that dies can be brought back in a later session. That's why interest groups keep organizing year after year.</p><p class="src">Sources: Iowa Capital Dispatch, April 27, 2026; Iowa Legislature lobbyist declarations for the bill; Iowa Farmers Union, spring 2026.</p></div>
         <p>Answer both in 1–2 full sentences.</p>`;
     },
     prompts: [
-      { id: "frame", short: "How framing could change senators' votes", label: "1. Pick Headline A or B. How could that framing change what senators do? Is that fair to voters?", stem: "Headline ___ frames the vote as ___. Senators might ___. That is (fair / unfair) because ___.", min: 90, mustInclude: ["headline", "frame", "framing"], mustMsg: "In answer 1, say which headline (A or B) you picked." },
-      { id: "crit", short: "Critique: money and lobbying", label: "2. Is it fair that groups with more money can hire more lobbyists? Give one way lobbying helps, one problem it causes, and your verdict.", stem: "Lobbying helps because ___. One problem is ___. I think it is (fair / unfair) because ___.", min: 100, mustAll: [["fair", "unfair"], ["help", "voice", "inform", "explain", "good"], ["problem", "money", "rich", "more", "but", "however"]], mustMsg: "In answer 2, give one way lobbying helps, one problem, AND say if it's fair or unfair." }
+      { id: "frame", short: "How framing could change senators' votes", label: "1. Pick Headline A or B. Which words in it push readers toward one side, and how could that change what senators do?", stem: "Headline ___ uses the words \"___\" to frame the vote as ___. Senators might ___ because ___.", min: 90, mustInclude: ["headline", "frame", "framing"], mustMsg: "In answer 1, say which headline (A or B) you picked." },
+      { id: "crit", short: "Critique: how lobbying works", label: "2. Give one way lobbying helped lawmakers and one problem it caused. Use a moment from the game as evidence for each.", stem: "Lobbying helped lawmakers when ___. One problem showed up when ___.", min: 100, mustAll: [["help", "helped", "inform", "explain", "learn", "story", "voice", "heard"], ["problem", "money", "more lobbyists", "meetings", "afford", "budget", "ads", "but", "however"], ["farmer", "lobbyist", "subcommittee", "senator", "week", "pac", "ads", "calls", "called", "coalition", "deere", "dealer", "tv", "meeting", "meetings", "claim"]], mustMsg: "In answer 2, give one way lobbying helped, one problem it caused, and name a moment from the game (like the farmer's story or the five lobbyists)." }
     ]
   },
   extraAnswers: st => ({ "Committee result": (st.fx.votes >= NEED ? "Passed" : "Failed") + " with " + st.fx.votes + " of 15 votes", "Money left": money(st.fx.budget) })

@@ -1,26 +1,235 @@
 'use strict';
-const STANDARD='SS.9-12.Gov.3, SS.9-12.Gov.9: Analyze important founding and historical documents to the United States and the State of Iowa. Assess how the United States federal system divides powers between national and state governments.';
-const EXIT_Q='Pick one problem from the game. What power was missing under the Articles, and what did the Constitution change?';
-const E=SimpleArticles,$=q=>document.querySelector(q),KEY='articles-comparison-v3';let s=E.fresh(),timer,resetArmed=false;try{const old=JSON.parse(localStorage.getItem(KEY));if(old?.version===3)s={...s,...old};}catch{}
-function save(){try{localStorage.setItem(KEY,JSON.stringify(s));}catch{$('#saved').textContent='Saving unavailable';}}
-function systemBand(r){return `<div class="system-band ${r.system}"><b>${r.system==='confederate'?'CONFEDERATE · ARTICLES':'FEDERAL · CONSTITUTION'}</b><span>${r.system==='confederate'?'States keep most power. Weak national government.':'National and state governments each have powers.'}</span></div>`;}
-function art(kind,result){const r=E.rounds[s.round];if(r.system==='federal'&&kind!=='power'){const pair={money:['🏛️ ⏳','States refuse. National bill stays unpaid.','🏛️ 🪙','Congress can raise national tax revenue.'],trade:['🛒 🚧','Different state trade rules block the route.','🏛️ 🛒','Congress can regulate the whole interstate route.'],votes:['📜 ✋','One state can block a change.','📜 ✓','Broad support needed, but not every state.']}[kind];return `<div class="pair-view"><div class="before"><b>BEFORE · ARTICLES</b><span aria-hidden="true">${pair[0]}</span><p>${pair[1]}</p></div><div class="after"><b>AFTER · CONSTITUTION</b><span aria-hidden="true">${pair[2]}</span><p>${pair[3]}</p></div></div>`;}if(kind==='power')return `<div class="power-picture"><div>🏛️<b>NATIONAL GOVERNMENT</b><small>National taxes · Interstate trade</small></div><strong>+</strong><div>🏠<b>STATE GOVERNMENTS</b><small>Own governments · State matters</small></div></div>`;if(kind==='money')return `<div class="scene"><div class="icons" aria-hidden="true">🏛️ <span>← ?</span> 🏠 🪙</div><small>THE BILL IS NATIONAL. CONGRESS DEPENDS ON THE STATES.</small></div>`;if(kind==='trade')return `<div class="scene"><div class="road"><span class="cart">🛒</span><span class="border">🚧</span></div><small>THE TRIP CROSSES STATES. CONGRESS CANNOT REGULATE IT.</small></div>`;return `<div class="scene"><div class="ballots" aria-label="12 states say yes. One state says no.">${Array.from({length:13},(_,i)=>`<span class="ballot ${i===12?'no':''}">${i===12?'NO':'YES'}</span>`).join('')}</div><small>THE ARTICLES’ RULE: ALL 13 MUST AGREE.</small></div>`;}
-function render(){clock();$('#progress').innerHTML=E.rounds.map((r,i)=>`<span class="${s.finished||i<s.round?'done':i===s.round?'active':''}"></span>`).join('');if(s.finished){finish();return;}const r=E.rounds[s.round];if(s.pending){const p=s.pending;$('#game').innerHTML=`${systemBand(r)}<div class="eyebrow">HERE’S WHAT HAPPENED</div><h1 class="result-title">${p.title}</h1><p>${p.text}</p><div class="speech">${p.quote}</div>${p.retry?'':`<div class="takeaway">${r.takeaway}</div>`}<button id="nextBtn" class="primary">${p.retry?'Try the other plan →':s.round===6?'See the difference →':r.system==='confederate'?'Try this under the Constitution →':s.round===5?'See what the states keep →':'Next problem under the Articles →'}</button>`;$('#nextBtn').onclick=()=>{E.next(s);save();render();scrollTop();};return;}$('#game').innerHTML=`${systemBand(r)}<div class="eyebrow">${r.tag}</div><h1>${r.title}</h1><p>${r.text}</p>${art(r.art,false)}<div class="choice-row">${r.choices.map((c,i)=>`<button data-choice="${i}">${c}</button>`).join('')}</div>`;document.querySelectorAll('[data-choice]').forEach(b=>b.onclick=()=>{if(E.choose(s,+b.dataset.choice)){firstTry(r);save();render();scrollTop();}});}
-function scrollTop(){window.scrollTo({top:0,behavior:'smooth'});}
-function finish(){$('#game').innerHTML=`<div class="eyebrow">WHY THE UNITED STATES CHANGED ITS PLAN</div><h1>Fix national problems.<br>Keep state governments.</h1><div class="final-compare"><div><b>CONFEDERATE · ARTICLES</b><p>States held most power.</p><p>Congress depended on state payments.</p><p>Congress could not regulate trade between states.</p></div><div><b>FEDERAL · CONSTITUTION</b><p>National and state powers are divided.</p><p>Congress can collect national taxes.</p><p>Congress can regulate trade between states.</p></div></div><div class="takeaway"><b>The reason for change:</b> Give the national government power to address shared problems, while states keep powers of their own.</div><p class="small">In 1787, delegates met to revise the Articles. They proposed a new Constitution. It also changed the amendment process so every state did not have to agree.</p>${turnInBox()}<button id="againBtn" class="secondary-wide">Replay the two systems ↻</button>`;$('#againBtn').onclick=()=>{s=E.fresh();s.started=true;save();render();scrollTop();};wireTurnIn();}
-function clock(){const n=Math.max(0,s.remaining);$('#clock').textContent=n?String(Math.floor(n/60)).padStart(2,'0')+':'+String(n%60).padStart(2,'0'):'Finish up';$('#pauseBtn').textContent=s.paused?'Resume':'Pause';$('#pauseBtn').setAttribute('aria-label',s.paused?'Resume timer':'Pause timer');}
-setInterval(()=>{if(s.started&&!s.finished&&!s.paused&&!document.hidden&&s.remaining>0){s.remaining--;clock();if(s.remaining%5===0)save();}},1000);$('#pauseBtn').onclick=()=>{s.paused=!s.paused;clock();save();};$('#startBtn').onclick=()=>{s.started=true;save();$('#start').hidden=true;render();};$('#sourceBtn').onclick=()=>$('#sourceDialog').showModal();document.querySelectorAll('[data-close]').forEach(b=>b.onclick=()=>$('#'+b.dataset.close).close());$('#restartBtn').onclick=()=>{if(!resetArmed){resetArmed=true;$('#restartBtn').textContent='Click again to restart';setTimeout(()=>{resetArmed=false;$('#restartBtn').textContent='Restart';},4000);return;}localStorage.removeItem(KEY);location.reload();};render();if(s.started)$('#start').hidden=true;
+/* 13 States. One Mess. — screens. Data and rules are in engine.js. */
+const A = window.ArticlesGame, $ = q => document.querySelector(q);
+const KEY = 'articles-mess-v4', OLD_KEYS = ['articles-comparison-v3'];
+const STANDARD = 'SS.9-12.Gov.3, SS.9-12.Gov.9: Analyze important founding and historical documents to the United States and the State of Iowa. Assess how the United States federal system divides powers between national and state governments.';
+const EXIT_Q = 'Pick ONE problem from your game. What could Congress not do under the Articles, what did that cause, and how did the Constitution fix it?';
+const STARTER = 'Under the Articles, Congress could not ___';
+const STEPS = 8; // 5 crises + convention + final check + write
+const STATES = ['NH', 'MA', 'RI', 'CT', 'NY', 'NJ', 'PA', 'DE', 'MD', 'VA', 'NC', 'SC', 'GA'];
+let s = A.fresh(), resetArmed = false, gateTimer = null;
+const readyAt = {};
+try { const old = JSON.parse(localStorage.getItem(KEY)); if (old && old.v === 4) s = Object.assign(A.fresh(), old); } catch (e) {}
+OLD_KEYS.forEach(k => { try { localStorage.removeItem(k); } catch (e) {} });
+function save() { try { localStorage.setItem(KEY, JSON.stringify(s)); $('#saved').textContent = 'Saved on this device'; } catch (e) { $('#saved').textContent = 'Saving is off on this device'; } }
+function esc(t) { return String(t).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c])); }
+function rng(seed) { let x = (seed >>> 0) || 1; return () => { x ^= x << 13; x >>>= 0; x ^= x >> 17; x ^= x << 5; x >>>= 0; return x / 4294967296; }; }
+function shuffle(n, seed) { const r = rng(seed), a = [...Array(n).keys()]; for (let i = n - 1; i > 0; i--) { const j = Math.floor(r() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
+function hash(str) { let h = 2166136261; for (const c of str) { h ^= c.charCodeAt(0); h = Math.imul(h, 16777619); } return h >>> 0; }
+function stepLabel() { return s.step < 5 ? 'Crisis ' + (s.step + 1) + ' of 5' : s.step === 5 ? 'The Convention' : s.step === 6 ? 'Final check' : 'Your report'; }
 
-// ---- Turn-in (sends to the teacher dashboard) ----
-function firstTry(r){if(!window.classFirstTry||r.good===undefined)return;if(s.pending&&s.pending.retry)classFirstTry.wrong();else classFirstTry.right('round-'+s.round);}
-function esc(t){return String(t).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));}
-function turnInBox(){const done=s.turnedIn||[];return `<section class="turnin" aria-labelledby="tiHead"><h2 id="tiHead">Turn in your work</h2>${done.length?`<p class="ti-done">✓ Turned in for ${done.map(esc).join(', ')}${/\.$/.test(done[done.length-1])?'':'.'}</p><p class="small">Partner on this computer? Type their name and answer, then turn in again.</p>`:''}<label for="exitAnswer">${EXIT_Q}</label><textarea id="exitAnswer" rows="4" placeholder="Under the Articles, Congress could not… Under the Constitution, Congress can…"></textarea><label for="studentName">Your name (first name + last initial)</label><input id="studentName" type="text" autocomplete="off" placeholder="Jordan M."><button id="turnInBtn" class="primary">Turn in</button><p id="tiStatus" class="ti-status" role="status" aria-live="polite"></p></section>`;}
-function wireTurnIn(){const btn=$('#turnInBtn');if(!btn)return;btn.onclick=async()=>{const st=$('#tiStatus'),ans=$('#exitAnswer').value.trim(),name=$('#studentName').value.trim();
-if(ans.split(/\s+/).filter(Boolean).length<10){st.textContent='Write at least one full sentence (10+ words) that names the missing power and the change.';$('#exitAnswer').focus();return;}
-if(!name){st.textContent='Type your first name and last initial, like Jordan M.';$('#studentName').focus();return;}
-if(!window.classTurnIn){st.textContent='Turn-in is not available right now. Tell your teacher.';return;}
-btn.disabled=true;st.textContent='Turning in…';
-try{const res=await classTurnIn('https://fynn-class-assignment-submissions-20261024.neotboy.chatgpt.site/api/submit',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({studentName:name,assignmentId:'gov-articles-day5',answers:{Standard:STANDARD,'Rounds finished':'7 of 7','Exit question':EXIT_Q,'Answer':ans}})});
-const d=await res.json().catch(()=>({}));if(!res.ok)throw new Error(d.error||'Your work did not save. Try again.');
-s.turnedIn=[...(s.turnedIn||[]),window.classShortName?classShortName(name):name];save();finish();$('#tiStatus').textContent='Turned in! You can close this page.';}
-catch(e){st.textContent=e.message;btn.disabled=false;}};}
+/* ---------- header: meters, 13 states, progress ---------- */
+function hud(changes) {
+  const m = s.meters, angry = A.angryStates(s);
+  const bar = (k, label, icon, bad) => { const d = changes && changes[k]; return `<div class="meter ${k}${bad ? ' bad' : ''}"><div class="m-top"><span>${icon} ${label}</span><b>${m[k]}${d ? `<em class="${(k === 'anger' ? d < 0 : d > 0) ? 'up' : 'down'}">${d > 0 ? '+' : ''}${d}</em>` : ''}</b></div><div class="m-track"><i style="width:${m[k]}%"></i></div></div>`; };
+  $('#hud').innerHTML = bar('money', 'Treasury', '💰', m.money < 20) + bar('union', 'Union', '🤝', m.union < 30) + bar('anger', 'Anger', '🔥', m.anger > 70) +
+    `<div class="states" aria-label="${13 - angry} of 13 states still listen to Congress">${STATES.map((st, i) => `<span class="st${i < angry ? ' mad' : ''}" title="${st}">${st}</span>`).join('')}<small>${13 - angry} of 13 states still listen to Congress</small></div>`;
+  $('#progress').innerHTML = `<span class="p-label">Step ${Math.min(s.step + 1, STEPS)} of ${STEPS} · ${stepLabel()}</span><span class="p-dots">${[...Array(STEPS).keys()].map(i => `<i class="${i < s.step ? 'done' : i === s.step ? 'now' : ''}"></i>`).join('')}</span>`;
+}
+
+/* ---------- read gate: buttons unlock after a few seconds ---------- */
+function gate(key, secs, sel, label) {
+  clearTimeout(gateTimer);
+  if (!readyAt[key]) readyAt[key] = Date.now() + secs * 1000;
+  const btns = [...document.querySelectorAll(sel)]; if (!btns.length) return;
+  const note = document.createElement('p'); note.className = 'gate'; note.setAttribute('role', 'status');
+  btns[0].parentElement.before(note);
+  const tick = () => {
+    if (!document.body.contains(btns[0])) return;
+    if (document.hidden) { readyAt[key] += 500; gateTimer = setTimeout(tick, 500); return; }
+    const left = Math.ceil((readyAt[key] - Date.now()) / 1000);
+    if (left > 0) { btns.forEach(b => b.disabled = true); note.textContent = label + ' Opens in ' + left + '…'; gateTimer = setTimeout(tick, 400); }
+    else { btns.forEach(b => b.disabled = false); note.remove(); }
+  };
+  tick();
+}
+
+/* ---------- the "page" on the left: the real problem ---------- */
+function problemCard(r) {
+  return `<article class="real-card"><div class="kicker">REAL PROBLEM · ${esc(r.year)} · ${esc(r.tag)}</div><h2>${esc(r.title)}</h2>${r.real.map(p => `<p>${esc(p)}</p>`).join('')}
+  <div class="rule"><div class="rule-k">THE ARTICLES RULE · ${esc(r.rule.name)}</div><p class="quote">${esc(r.rule.text)}</p><p class="plain"><b>In plain words:</b> ${esc(r.rule.plain)}</p></div></article>`;
+}
+
+function render() {
+  hud();
+  if (!s.started) { $('#start').hidden = false; startCard(); return; }
+  $('#start').hidden = true;
+  if (s.step < 5) roundScreen(); else if (s.step === 5) convention(); else if (s.step === 6) finalCheck(); else report();
+}
+
+function startCard() {
+  const back = s.step > 0 || s.phase !== 'choose';
+  $('#startBody').innerHTML = back
+    ? `<p class="hook">Welcome back. You’re on <b>step ${Math.min(s.step + 1, STEPS)} of ${STEPS}</b> (${stepLabel()}).</p><button id="startBtn" class="primary big">Keep going →</button>`
+    : `<p class="hook">It’s 1783. America won the war. Now you have to run 13 states that don’t want to be run.</p>
+       <ul class="what"><li><b>5 real crises.</b> Pick a move. Every move costs something.</li><li><b>1 convention.</b> Fix the government.</li><li><b>About 25 minutes.</b> Solo. Highest score wins.</li></ul>
+       <button id="startBtn" class="primary big">Take charge →</button>`;
+  $('#startBtn').onclick = () => { if (!s.started && s.step === 0 && s.phase === 'choose') { if (window.classFirstTry) classFirstTry.reset(); } s.started = true; save(); render(); window.scrollTo(0, 0); };
+}
+
+/* ---------- crisis rounds ---------- */
+function roundScreen() {
+  const r = A.ROUNDS[s.step];
+  $('#game').innerHTML = `<div class="two"><section class="left">${problemCard(r)}</section><section class="right" id="right"></section></div>`;
+  if (s.phase === 'choose') chooseMove(r); else if (s.phase === 'result') showResult(r); else checkScreen(r);
+}
+function chooseMove(r) {
+  const order = shuffle(r.moves.length, s.seed + hash(r.id));
+  $('#right').innerHTML = `<div class="kicker">YOUR MOVE · YOU LEAD CONGRESS</div><h3>What do you do?</h3><p class="sub">Read the real problem first. Every move costs something. No take-backs.</p>
+   <div class="moves">${order.map(i => { const m = r.moves[i]; return `<button class="move" data-move="${i}"><b>${esc(m.title)}</b><span>${esc(m.text)}</span></button>`; }).join('')}</div>`;
+  const words = (r.real.join(' ') + ' ' + r.rule.text + ' ' + r.rule.plain).split(/\s+/).length;
+  gate('pick' + s.step, Math.max(8, Math.min(14, Math.round(words / 6))), '[data-move]', 'Read the real problem first.');
+  document.querySelectorAll('[data-move]').forEach(b => b.onclick = () => {
+    if (b.disabled || s.phase !== 'choose') return;
+    const m = r.moves[+b.dataset.move];
+    s.lastEffects = A.applyMove(s, r, m); s.phase = 'result'; save(); render(); scrollRight();
+  });
+}
+function showResult(r) {
+  const m = r.moves.find(x => x.id === s.picks[r.id]), eff = s.lastEffects || [{ fx: m.fx, why: m.cause }];
+  const total = {}; eff.forEach(e => Object.entries(e.fx).forEach(([k, v]) => total[k] = (total[k] || 0) + v));
+  hud(total);
+  const chips = Object.entries(total).filter(([, v]) => v).map(([k, v]) => `<span class="chip ${(k === 'anger' ? v < 0 : v > 0) ? 'good' : 'bad'}">${{ money: '💰 Treasury', union: '🤝 Union', anger: '🔥 Anger' }[k]} ${v > 0 ? '+' : ''}${v}</span>`).join('') || '<span class="chip">No change</span>';
+  $('#right').innerHTML = `<div class="kicker">IN YOUR GAME · MADE UP</div><h3 class="${m.blocked ? 'blocked' : ''}">You chose: ${esc(m.title)}</h3><p class="result">${esc(m.result)}</p><div class="chips">${chips}</div>
+   <p class="causes-h">Caused by:</p><ul class="causes">${eff.map(e => `<li>${esc(e.why.replace(/^Caused by: /, ''))}</li>`).join('')}</ul>
+   <p class="rival"><b>${A.RIVAL} (fictional):</b> “${esc(m.rival)}”</p>
+   <div class="really"><div class="kicker">WHAT REALLY HAPPENED</div><p>${esc(r.realHappened)}</p></div>
+   <p class="reveal">${r.reveal}</p>
+   <div class="btnrow"><button id="toCheck" class="primary">Next: quick check →</button></div>`;
+  gate('res' + s.step, 6, '#toCheck', 'Read what happened.');
+  $('#toCheck').onclick = () => { if ($('#toCheck').disabled) return; s.phase = 'check'; save(); render(); scrollRight(); };
+}
+function checkRec(id) { return s.checks[id] || (s.checks[id] = { first: null, variant: 0, salt: 0, done: false, wrongAt: 0, tries: 0 }); }
+function mcBlock(rec, bank, id, msg) {
+  const q = bank[rec.variant % bank.length], choices = [q.a].concat(q.w), order = shuffle(choices.length, s.seed + hash(id + rec.variant + ':' + rec.salt));
+  if (rec.done) return `<div class="check done"><p class="ok">✓ Right. ${esc(q.why)}</p></div>`;
+  return `<div class="check"><p class="q">${esc(q.q)}</p><div class="choices">${order.map(i => `<button class="choice" data-ans="${i}">${esc(choices[i])}</button>`).join('')}</div>${msg ? `<p class="fb" role="status">${msg}</p>` : ''}</div>`;
+}
+function wireMc(rec, bank, id, after, rerender) {
+  const q = bank[rec.variant % bank.length];
+  const left = () => Math.ceil((8000 - (Date.now() - rec.wrongAt)) / 1000);
+  if (!rec.done && rec.wrongAt && left() > 0) { readyAt['mc' + id + rec.tries] = rec.wrongAt + 8000; gate('mc' + id + rec.tries, 8, '[data-ans]', 'Look back at the card.'); }
+  document.querySelectorAll('[data-ans]').forEach(b => b.onclick = () => {
+    if (b.disabled || rec.done) return;
+    rec.tries++;
+    if (+b.dataset.ans === 0) {
+      if (rec.first === null) rec.first = true;
+      rec.done = true; if (window.classFirstTry) classFirstTry.right(id);
+      save(); after(); return;
+    }
+    if (rec.first === null) rec.first = false;
+    if (window.classFirstTry) classFirstTry.wrong();
+    rec.wrongAt = Date.now(); rec.variant++; rec.salt++;
+    save(); rerender('Not quite. Go back to the card on the left and read it again. The question changed and the answers moved.');
+  });
+}
+function checkScreen(r, msg) {
+  const rec = checkRec(r.id), last = s.step === 4;
+  $('#right').innerHTML = `<div class="kicker">QUICK CHECK · USE THE CARD</div><h3>Prove it from the page.</h3>${mcBlock(rec, r.checks, r.id, msg)}
+   ${rec.done ? `<div class="btnrow"><button id="nextStep" class="primary">${last ? 'Next: the Convention →' : 'Next crisis →'}</button></div>` : '<p class="sub">Wrong answers cost points and lock the choices for a few seconds.</p>'}`;
+  wireMc(rec, r.checks, r.id, () => render(), m => checkScreen(r, m));
+  if ($('#nextStep')) $('#nextStep').onclick = () => { s.step++; s.phase = 'choose'; s.lastEffects = null; save(); render(); window.scrollTo(0, 0); };
+}
+function scrollRight() { const el = $('#right'); if (el && el.getBoundingClientRect().top < 0 || window.innerWidth < 900) el && el.scrollIntoView({ block: 'start', behavior: 'smooth' }); }
+
+/* ---------- the Convention: match each problem to its fix ---------- */
+function convention(msg, ok) {
+  const done = A.PROBLEMS.filter(p => s.fixes[p.round] && s.fixes[p.round].done).length;
+  const cur = A.PROBLEMS.find(p => !(s.fixes[p.round] && s.fixes[p.round].done));
+  const yourMove = p => { const r = A.ROUNDS.find(x => x.id === p.round), m = r.moves.find(x => x.id === s.picks[p.round]); return m ? m.title : '—'; };
+  const dmg = `<article class="real-card convention-card"><div class="kicker">PHILADELPHIA · MAY 1787 · REAL</div><h2>The Convention</h2><p>Delegates from 12 states meet in Philadelphia. They planned to fix the Articles. Instead, they write a whole new <b>Constitution</b>.</p>
+    <div class="kicker">YOUR DAMAGE REPORT</div><ol class="damage">${A.PROBLEMS.map(p => { const f = s.fixes[p.round]; return `<li class="${f && f.done ? 'fixed' : p === cur ? 'now' : ''}"><b>${esc(p.label)}</b><span>Your move: ${esc(yourMove(p))}</span>${f && f.done ? `<em>✓ Fixed by: ${esc(A.FIXES.find(x => x.id === p.fix).cite)}</em>` : ''}</li>`; }).join('')}</ol></article>`;
+  let right;
+  if (cur) {
+    const rec = s.fixes[cur.round] || (s.fixes[cur.round] = { first: null, salt: 0, done: false, wrongAt: 0, tries: 0 });
+    const order = shuffle(A.FIXES.length, s.seed + hash('fix' + cur.round + rec.salt));
+    right = `<div class="kicker">FIX ${done + 1} OF 5 · YOU WRITE THE CONSTITUTION</div>${ok ? `<p class="ok">${ok}</p>` : ''}<h3>${esc(cur.label)}</h3><p class="sub">Which part of the new Constitution fixes this problem?</p>
+      <div class="choices fixes">${order.map(i => `<button class="choice fix" data-fix="${i}">${esc(A.FIXES[i].text)}</button>`).join('')}</div>${msg ? `<p class="fb" role="status">${msg}</p>` : ''}`;
+    $('#game').innerHTML = `<div class="two"><section class="left">${dmg}</section><section class="right" id="right">${right}</section></div>`;
+    if (rec.wrongAt && Date.now() - rec.wrongAt < 6000) { readyAt['fx' + cur.round + rec.tries] = rec.wrongAt + 6000; gate('fx' + cur.round + rec.tries, 6, '[data-fix]', 'Think about what was missing.'); }
+    document.querySelectorAll('[data-fix]').forEach(b => b.onclick = () => {
+      if (b.disabled) return; rec.tries++;
+      const pick = A.FIXES[+b.dataset.fix];
+      if (pick.id === cur.fix) { if (rec.first === null) rec.first = true; rec.done = true; if (window.classFirstTry) classFirstTry.right('fix-' + cur.round); save(); convention('', '✓ Fixed: ' + esc(pick.text) + ' (' + esc(pick.cite) + ')'); return; }
+      if (rec.first === null) rec.first = false; s.fixWrong++; rec.wrongAt = Date.now(); rec.salt++;
+      if (window.classFirstTry) classFirstTry.wrong();
+      save(); convention(pick.id === 'decoy' ? 'No. The Constitution kept state governments. Power is divided, not taken. The cards moved.' : 'That fix solves a different problem. What exactly was missing here? The cards moved.');
+    });
+  } else {
+    right = `<div class="kicker">ALL 5 FIXED</div>${ok ? `<p class="ok">${ok}</p>` : ''}<h3>The new plan is ready.</h3><p class="result">The Constitution gives Congress the powers the Articles were missing. States keep their own governments. This split is called <b>federalism</b>.</p><div class="btnrow"><button id="nextStep" class="primary">Next: final check →</button></div>`;
+    $('#game').innerHTML = `<div class="two"><section class="left">${dmg}</section><section class="right" id="right">${right}</section></div>`;
+    $('#nextStep').onclick = () => { s.step = 6; save(); render(); window.scrollTo(0, 0); };
+  }
+}
+
+/* ---------- final check (Gov.9) ---------- */
+function finalCheck(msg) {
+  const rec = s.final || (s.final = { first: null, variant: 0, salt: 0, done: false, wrongAt: 0, tries: 0 });
+  const fed = `<article class="real-card"><div class="kicker">THE NEW PLAN · 1787</div><h2>Federalism: power is split</h2>
+    <div class="split"><div><b>🏛️ National government</b><p>Taxes for national needs. Army and navy. Trade between states. Treaties.</p></div><div><b>🏠 State governments</b><p>Their own lawmakers, courts, and taxes. Schools, roads, police, and local matters.</p></div></div>
+    <p class="plain">The national government also helps states get along: it sets one set of rules for trade that crosses state lines.</p></article>`;
+  $('#game').innerHTML = `<div class="two"><section class="left">${fed}</section><section class="right" id="right"><div class="kicker">FINAL CHECK · STEP 7 OF 8</div><h3>One more question.</h3>${mcBlock(rec, A.FINAL, 'final', msg)}${rec.done ? '<div class="btnrow"><button id="nextStep" class="primary">See my score →</button></div>' : ''}</section></div>`;
+  wireMc(rec, A.FINAL, 'final', () => finalCheck(), m => finalCheck(m));
+  if ($('#nextStep')) $('#nextStep').onclick = () => { s.step = 7; save(); render(); window.scrollTo(0, 0); };
+}
+
+/* ---------- report, writing, turn-in ---------- */
+function report() {
+  const sc = A.score(s), e = A.ending(s), done = s.turnedIn || [];
+  $('#game').innerHTML = `<div class="two"><section class="left"><article class="real-card score-card ending-${e.key}"><div class="kicker">YOUR UNION SCORE</div><div class="score-num">${sc.total}<small>/100</small></div><div class="rank">${esc(sc.rank)}</div>
+    <p class="ending"><b>${esc(e.title)}.</b> ${esc(e.text)}</p>
+    <p class="parts">Country health +${sc.country} · First-try checks +${sc.checks} (${sc.firstTry.right} of ${sc.firstTry.total}) · Smart moves +${sc.smart}${s.blocked ? ` (${s.blocked} move${s.blocked > 1 ? 's' : ''} blocked by the Articles)` : ''}</p>
+    <p class="sub">Compare scores with your class. Can anyone beat 90?</p>
+    <div class="kicker">YOUR MOVES</div><ol class="moves-log">${s.log.map(l => `<li>${esc(l)}</li>`).join('')}</ol></article></section>
+    <section class="right" id="right"><div class="kicker">STEP 8 OF 8 · TURN IN</div><h3>Explain one fix.</h3>
+    <label for="exitAnswer" class="q">${esc(EXIT_Q)}</label><p class="starter">Start like this: <b>${esc(STARTER)}</b></p>
+    <textarea id="exitAnswer" rows="5" placeholder="Under the Articles, Congress could not…">${esc(s.writing || '')}</textarea><p id="wHelp" class="sub" role="status"></p>
+    <label for="studentName">Your name (first name + last initial)</label><input id="studentName" type="text" autocomplete="off" placeholder="Jordan M.">
+    <button id="turnInBtn" class="primary big">${done.length ? 'Turn in again' : 'Turn in'}</button><p id="tiStatus" class="ti-status" role="status" aria-live="polite">${done.length ? '✓ Turned in for ' + done.map(esc).join(', ') + '.' : ''}</p>
+    <div class="btnrow"><button id="printBtn" class="ghost">Print my report</button></div></section></div>`;
+  const ta = $('#exitAnswer');
+  if (!ta.value) { ta.value = STARTER.replace('___', ''); }
+  ta.oninput = () => { s.writing = ta.value; save(); $('#wHelp').textContent = ''; };
+  $('#printBtn').onclick = () => window.print();
+  $('#turnInBtn').onclick = turnIn;
+}
+async function turnIn() {
+  const st = $('#tiStatus'), ans = $('#exitAnswer').value.trim(), name = $('#studentName').value.trim(), btn = $('#turnInBtn');
+  const problem = A.checkWriting(ans, STARTER);
+  if (problem) { $('#wHelp').textContent = problem; $('#wHelp').className = 'sub warn'; $('#exitAnswer').focus(); return; }
+  if (!name) { st.textContent = 'Type your first name and last initial, like Jordan M.'; $('#studentName').focus(); return; }
+  if (!window.classTurnIn) { st.textContent = 'Turn-in is not available right now. Tell your teacher.'; return; }
+  const sc = A.score(s), e = A.ending(s);
+  const firstTry = (rec) => !rec ? 'not done' : rec.first ? 'first try' : 'after ' + Math.max(1, rec.tries - 1) + ' wrong';
+  const answers = {
+    Standard: STANDARD,
+    'Union score': sc.total + ' / 100 (' + sc.rank + ')',
+    Ending: e.title + ' (Treasury ' + s.meters.money + ', Union ' + s.meters.union + ', Anger ' + s.meters.anger + ')',
+    'Moves': s.log.join(' | '),
+    'Moves blocked by the Articles': String(s.blocked),
+    'Crisis checks (Gov.3)': A.ROUNDS.map((r, i) => (i + 1) + ') ' + r.tag.toLowerCase() + ': ' + firstTry(s.checks[r.id])).join('; '),
+    'Constitution fixes (Gov.3)': A.PROBLEMS.map(p => p.fix + ': ' + firstTry(s.fixes[p.round])).join('; '),
+    'Federalism check (Gov.9)': firstTry(s.final),
+    'Exit question': EXIT_Q,
+    'Answer': ans
+  };
+  btn.disabled = true; st.textContent = 'Turning in…';
+  try {
+    const res = await classTurnIn('https://fynn-class-assignment-submissions-20261024.neotboy.chatgpt.site/api/submit', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ studentName: name, assignmentId: 'gov-articles-day5', answers }) });
+    const d = await res.json().catch(() => ({}));
+    if (!res.ok) throw new Error(d.error || 'Your work did not save. Try again.');
+    s.turnedIn = [...(s.turnedIn || []), window.classShortName ? classShortName(name) : name]; save();
+    report(); $('#tiStatus').textContent = 'Turned in! Your teacher can see your score. You can close this page.';
+  } catch (err) { st.textContent = err.message; btn.disabled = false; }
+}
+
+/* ---------- buttons that are always there ---------- */
+$('#sourceBtn').onclick = () => $('#sourceDialog').showModal();
+document.querySelectorAll('[data-close]').forEach(b => b.onclick = () => $('#' + b.dataset.close).close());
+$('#restartBtn').onclick = () => {
+  if (!resetArmed) { resetArmed = true; $('#restartBtn').textContent = 'Click again to restart'; setTimeout(() => { resetArmed = false; $('#restartBtn').textContent = 'Restart'; }, 4000); return; }
+  try { localStorage.removeItem(KEY); } catch (e) {} if (window.classFirstTry) classFirstTry.reset(); location.reload();
+};
+const returning = s.started;
+render();
+if (returning) { const w = document.createElement('p'); w.className = 'welcome'; w.setAttribute('role', 'status'); w.innerHTML = 'Welcome back! You’re on <b>step ' + Math.min(s.step + 1, STEPS) + ' of ' + STEPS + '</b> (' + stepLabel() + ').'; $('#game').before(w); setTimeout(() => w.remove(), 9000); }
