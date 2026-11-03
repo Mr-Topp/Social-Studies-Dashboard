@@ -16,7 +16,7 @@ function esc(t) { return String(t).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<':
 function rng(seed) { let x = (seed >>> 0) || 1; return () => { x ^= x << 13; x >>>= 0; x ^= x >> 17; x ^= x << 5; x >>>= 0; return x / 4294967296; }; }
 function shuffle(n, seed) { const r = rng(seed), a = [...Array(n).keys()]; for (let i = n - 1; i > 0; i--) { const j = Math.floor(r() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
 function hash(str) { let h = 2166136261; for (const c of str) { h ^= c.charCodeAt(0); h = Math.imul(h, 16777619); } return h >>> 0; }
-function stepLabel() { return s.step < 5 ? 'Crisis ' + (s.step + 1) + ' of 5' : s.step === 5 ? 'The Convention' : s.step === 6 ? 'Final check' : 'Your report'; }
+function stepLabel() { return s.step < 5 ? 'Crisis ' + (s.step + 1) + ' of 5' : s.step === 5 ? 'The Convention' : s.step === 6 ? 'Final check' : 'Your ending'; }
 
 /* ---------- header: meters, 13 states, progress ---------- */
 function hud(changes) {
@@ -62,7 +62,7 @@ function startCard() {
   $('#startBody').innerHTML = back
     ? `<p class="hook">Welcome back. You’re on <b>step ${Math.min(s.step + 1, STEPS)} of ${STEPS}</b> (${stepLabel()}).</p><button id="startBtn" class="primary big">Keep going →</button>`
     : `<p class="hook">It’s 1783. America won the war. Now you have to run 13 states that don’t want to be run.</p>
-       <ul class="what"><li><b>5 real crises.</b> Pick a move. Every move costs something.</li><li><b>1 convention.</b> Fix the government.</li><li><b>About 25 minutes.</b> Solo. Highest score wins.</li></ul>
+       <ul class="what"><li><b>5 real crises.</b> Pick a move. Every move costs something.</li><li><b>1 convention.</b> Fix the government.</li><li><b>About 25 minutes.</b> Solo. Keep the most states on your side.</li></ul>
        <button id="startBtn" class="primary big">Take charge →</button>`;
   $('#startBtn').onclick = () => { if (!s.started && s.step === 0 && s.phase === 'choose') { if (window.classFirstTry) classFirstTry.reset(); } s.started = true; save(); render(); window.scrollTo(0, 0); };
 }
@@ -126,7 +126,7 @@ function wireMc(rec, bank, id, after, rerender) {
 function checkScreen(r, msg) {
   const rec = checkRec(r.id), last = s.step === 4;
   $('#right').innerHTML = `<div class="kicker">QUICK CHECK · USE THE CARD</div><h3>Prove it from the page.</h3>${mcBlock(rec, r.checks, r.id, msg)}
-   ${rec.done ? `<div class="btnrow"><button id="nextStep" class="primary">${last ? 'Next: the Convention →' : 'Next crisis →'}</button></div>` : '<p class="sub">Wrong answers cost points and lock the choices for a few seconds.</p>'}`;
+   ${rec.done ? `<div class="btnrow"><button id="nextStep" class="primary">${last ? 'Next: the Convention →' : 'Next crisis →'}</button></div>` : '<p class="sub">Wrong answers lock the choices for a few seconds.</p>'}`;
   wireMc(rec, r.checks, r.id, () => render(), m => checkScreen(r, m));
   if ($('#nextStep')) $('#nextStep').onclick = () => { s.step++; s.phase = 'choose'; s.lastEffects = null; save(); render(); window.scrollTo(0, 0); };
 }
@@ -168,18 +168,19 @@ function finalCheck(msg) {
   const fed = `<article class="real-card"><div class="kicker">THE NEW PLAN · 1787</div><h2>Federalism: power is split</h2>
     <div class="split"><div><b>🏛️ National government</b><p>Taxes for national needs. Army and navy. Trade between states. Treaties.</p></div><div><b>🏠 State governments</b><p>Their own lawmakers, courts, and taxes. Schools, roads, police, and local matters.</p></div></div>
     <p class="plain">The national government also helps states get along: it sets one set of rules for trade that crosses state lines.</p></article>`;
-  $('#game').innerHTML = `<div class="two"><section class="left">${fed}</section><section class="right" id="right"><div class="kicker">FINAL CHECK · STEP 7 OF 8</div><h3>One more question.</h3>${mcBlock(rec, A.FINAL, 'final', msg)}${rec.done ? '<div class="btnrow"><button id="nextStep" class="primary">See my score →</button></div>' : ''}</section></div>`;
+  $('#game').innerHTML = `<div class="two"><section class="left">${fed}</section><section class="right" id="right"><div class="kicker">FINAL CHECK · STEP 7 OF 8</div><h3>One more question.</h3>${mcBlock(rec, A.FINAL, 'final', msg)}${rec.done ? '<div class="btnrow"><button id="nextStep" class="primary">See how it ended →</button></div>' : ''}</section></div>`;
   wireMc(rec, A.FINAL, 'final', () => finalCheck(), m => finalCheck(m));
   if ($('#nextStep')) $('#nextStep').onclick = () => { s.step = 7; save(); render(); window.scrollTo(0, 0); };
 }
 
 /* ---------- report, writing, turn-in ---------- */
 function report() {
-  const sc = A.score(s), e = A.ending(s), done = s.turnedIn || [];
-  $('#game').innerHTML = `<div class="two"><section class="left"><article class="real-card score-card ending-${e.key}"><div class="kicker">YOUR UNION SCORE</div><div class="score-num">${sc.total}<small>/100</small></div><div class="rank">${esc(sc.rank)}</div>
-    <p class="ending"><b>${esc(e.title)}.</b> ${esc(e.text)}</p>
-    <p class="parts">Country health +${sc.country} · First-try checks +${sc.checks} (${sc.firstTry.right} of ${sc.firstTry.total}) · Smart moves +${sc.smart}${s.blocked ? ` (${s.blocked} move${s.blocked > 1 ? 's' : ''} blocked by the Articles)` : ''}</p>
-    <p class="sub">Compare scores with your class. Can anyone beat 90?</p>
+  const e = A.ending(s), done = s.turnedIn || [];
+  const listen = 13 - A.angryStates(s);
+  $('#game').innerHTML = `<div class="two"><section class="left"><article class="real-card score-card ending-${e.key}"><div class="kicker">HOW YOUR UNION ENDED · 1787</div><h2>${esc(e.title)}</h2><p class="ending">${esc(e.text)}</p>
+    <div class="final-meters"><div><span>🤝 States still listening</span><b>${listen} of 13</b></div><div><span>💰 Treasury</span><b>${s.meters.money}</b></div><div><span>🔥 Anger</span><b>${s.meters.anger}</b></div></div>
+    ${s.blocked ? `<p class="sub">${s.blocked} of your moves ${s.blocked > 1 ? 'were' : 'was'} blocked by the Articles.</p>` : ''}
+    <p class="sub">Compare with your class: who kept the most states listening?</p>
     <div class="kicker">YOUR MOVES</div><ol class="moves-log">${s.log.map(l => `<li>${esc(l)}</li>`).join('')}</ol></article></section>
     <section class="right" id="right"><div class="kicker">STEP 8 OF 8 · TURN IN</div><h3>Explain one fix.</h3>
     <label for="exitAnswer" class="q">${esc(EXIT_Q)}</label><p class="starter">Start like this: <b>${esc(STARTER)}</b></p>
@@ -199,11 +200,10 @@ async function turnIn() {
   if (problem) { $('#wHelp').textContent = problem; $('#wHelp').className = 'sub warn'; $('#exitAnswer').focus(); return; }
   if (!name) { st.textContent = 'Type your first name and last initial, like Jordan M.'; $('#studentName').focus(); return; }
   if (!window.classTurnIn) { st.textContent = 'Turn-in is not available right now. Tell your teacher.'; return; }
-  const sc = A.score(s), e = A.ending(s);
+  const e = A.ending(s);
   const firstTry = (rec) => !rec ? 'not done' : rec.first ? 'first try' : 'after ' + Math.max(1, rec.tries - 1) + ' wrong';
   const answers = {
     Standard: STANDARD,
-    'Union score': sc.total + ' / 100 (' + sc.rank + ')',
     Ending: e.title + ' (Treasury ' + s.meters.money + ', Union ' + s.meters.union + ', Anger ' + s.meters.anger + ')',
     'Moves': s.log.join(' | '),
     'Moves blocked by the Articles': String(s.blocked),
@@ -219,7 +219,7 @@ async function turnIn() {
     const d = await res.json().catch(() => ({}));
     if (!res.ok) throw new Error(d.error || 'Your work did not save. Try again.');
     s.turnedIn = [...(s.turnedIn || []), window.classShortName ? classShortName(name) : name]; save();
-    report(); $('#tiStatus').textContent = 'Turned in! Your teacher can see your score. You can close this page.';
+    report(); $('#tiStatus').textContent = 'Turned in! Your teacher can see your work. You can close this page.';
   } catch (err) { st.textContent = err.message; btn.disabled = false; }
 }
 

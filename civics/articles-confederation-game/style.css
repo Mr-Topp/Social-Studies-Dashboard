@@ -105,3 +105,4 @@ dialog li{margin-bottom:5px;font-size:15px}dialog a{color:var(--navy)}
 @media print{.top,.hud,.foot,.btnrow,#turnInBtn,textarea,label,input,.starter,.overlay{display:none!important}body{background:#fff}.two{grid-template-columns:1fr}.real-card,.right{box-shadow:none}}
 .welcome{max-width:1256px;margin:12px auto 0;background:#e1f3e5;color:#185c33;border:2px solid #9fd0ad;border-radius:10px;padding:8px 14px;font:700 16px Arial,sans-serif}
 .foot{padding-right:200px}main{padding-bottom:70px}
+.final-meters{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:10px 0}.final-meters div{border:2px solid var(--line);border-radius:8px;padding:8px 10px;background:#fff}.final-meters span{display:block;font:700 13px Arial,sans-serif;color:var(--muted)}.final-meters b{font:900 26px Georgia,serif;color:var(--navy)}
