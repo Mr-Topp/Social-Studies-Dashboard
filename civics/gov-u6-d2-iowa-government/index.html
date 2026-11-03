@@ -1,164 +1,24 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Who Do I Call? Iowa Government | Government Unit 6 Day 2</title>
-<meta name="description" content="Real problems around Marion, Iowa. Figure out who to call: the city, Linn County, the state of Iowa, or the Meskwaki Nation, before you get stuck on hold.">
-<style>
-:root{--ink:#1d2433;--muted:#536074;--paper:#f2f3f6;--card:#fff;--line:#d5d9e2;--navy:#1d2b4f;--gold:#e0a82e;--city:#2e7d5b;--county:#7a4fa3;--state:#2f63b0;--tribe:#b0532f;--green:#26694a;--bad:#a2392f}
-*{box-sizing:border-box}
-body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.5 system-ui,Segoe UI,Arial,sans-serif}
-header{background:var(--navy);color:#fff;padding:16px max(16px,calc((100vw - 900px)/2)) 12px;border-bottom:5px solid var(--gold)}
-.k{font-size:.78rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:#f3cd7a;margin:0}
-h1{margin:2px 0 4px;font-size:clamp(1.6rem,3.4vw,2.3rem)}
-.std{margin:2px 0;font-size:.92rem;color:#dfe5ec}.std b{color:#fff}
-.hud{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line);padding:8px max(16px,calc((100vw - 900px)/2));display:flex;gap:12px;flex-wrap:wrap;align-items:center;font-weight:800;font-size:.92rem;box-shadow:0 2px 8px #1d243312}
-.hud .bar{flex:1;min-width:120px;height:10px;background:#e3e6ec;border-radius:9px;overflow:hidden}.hud .bar span{display:block;height:100%;width:0;background:var(--gold);transition:width .4s}
-.pill{background:#eef0f4;border-radius:20px;padding:3px 10px;white-space:nowrap}
-#holdPill.warn{background:#fbe6c4;color:#7a4a08}#holdPill.bad{background:#f6dcd8;color:var(--bad)}
-main{max-width:900px;margin:auto;padding:14px 16px 60px}
-.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;box-shadow:0 3px 12px #1d24330d}
-.kicker{font-size:.78rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:var(--tribe);margin:0}
-h2{margin:2px 0 10px;font-size:1.45rem}
-.teach{background:#eef2f8;border-left:5px solid var(--navy);border-radius:9px;padding:10px 14px;margin:0 0 12px}.teach p{margin:5px 0}.teach b{color:var(--navy)}
-.block{margin:14px 0;padding:14px;border-radius:12px;border:2px solid var(--line);background:#fff}
-.block.current{border-color:var(--navy);box-shadow:0 0 0 4px #e0a82e45}
-.block h3{margin:0 0 10px;font-size:1.06rem;line-height:1.4;font-weight:700}
-.event{background:#f9f7f0;border-style:dashed;border-color:#cdb98a}.event.current{border-style:solid}
-.event-body p{margin:4px 0}
-.call{display:block;background:#1d2b4f;color:#fff;border-radius:12px;padding:9px 12px;margin:0 0 10px;font-weight:500}
-.call small{display:block;font-size:.72rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:#f3cd7a}
-.src{display:block;background:#fbfbfd;border:1px solid var(--line);border-left:5px solid var(--gold);border-radius:8px;padding:8px 12px;margin:0 0 10px;font-weight:400}
-.src small{display:block;font-size:.74rem;font-weight:900;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:2px}
-.lv{display:inline-block;border-radius:8px;padding:1px 8px;color:#fff;font-weight:800;font-size:.85rem}.lv.city{background:var(--city)}.lv.county{background:var(--county)}.lv.state{background:var(--state)}.lv.tribe{background:var(--tribe)}
-.levels{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:10px 0}.levels div{border-radius:10px;padding:8px;color:#fff;font-size:.86rem}.levels b{display:block;font-size:.98rem}
-.levels .city{background:var(--city)}.levels .county{background:var(--county)}.levels .state{background:var(--state)}.levels .tribe{background:var(--tribe)}
-.org{display:grid;grid-template-columns:repeat(3,1fr);gap:6px;margin:0 0 10px;font-weight:400}.org div{border:1px solid var(--line);border-radius:9px;padding:7px 9px;font-size:.88rem;background:#fff}.org b{display:block}
-.picked{margin:10px 0 4px;color:var(--muted)}.result{background:#eef0f4;border-radius:9px;padding:9px 12px}.result p{margin:4px 0}
-.tag{display:inline-block;font-weight:900;font-size:.8rem;border-radius:12px;padding:2px 9px;margin-right:6px}.tag.good{background:#dcefe2;color:var(--green)}.tag.bad{background:#f6dcd8;color:var(--bad)}
-.qlabel{font-size:.75rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:var(--state);margin:0 0 4px}
-.choices{display:grid;gap:8px}
-@media(min-width:700px){.q .choices{grid-template-columns:1fr 1fr}}
-button{font:inherit;cursor:pointer;border-radius:10px;min-height:46px}
-.choice{text-align:left;background:#fff;color:var(--ink);border:2px solid #c9cfd9;padding:10px 12px;font-weight:650;line-height:1.3}
-.choice:hover:not(:disabled){border-color:var(--navy);background:#fbfcfe}.choice:disabled{opacity:.5;cursor:not-allowed}
-.go{margin-top:12px;background:var(--navy);color:#fff;border:0;padding:11px 18px;font-weight:900}
-button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid #2f7dbd;outline-offset:2px}
-.answered{font-weight:800;color:var(--green);margin:4px 0}.why{margin:2px 0;color:var(--muted)}
-.msg{min-height:1.3em;font-weight:750;margin:8px 0 0}.msg.bad{color:var(--bad)}.msg.good{color:var(--green)}
-label{display:block;font-weight:850;margin:14px 0 4px}.stem{margin:0 0 4px;color:var(--muted);font-size:.92rem}
-input,textarea{width:100%;font:inherit;border:2px solid #c9cfd9;border-radius:9px;padding:10px;background:#fff;color:var(--ink)}
-.steps{display:grid;gap:6px;margin:10px 0;padding:0;list-style:none}.steps li{background:#eef0f4;border-radius:9px;padding:8px 12px;font-weight:700}
-@media(max-width:640px){.levels{grid-template-columns:1fr 1fr}.org{grid-template-columns:1fr}}
-.welcome{background:#e6f1ea;color:var(--green);font-weight:800;border-radius:9px;padding:8px 12px;margin:0 0 10px}
-.foot{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-top:14px;color:var(--muted);font-size:.85rem}
-.foot button{background:#e3e6ec;border:0;padding:8px 12px;font-weight:800;color:var(--ink)}
-.note{font-size:.8rem;color:var(--muted)}
-@media print{.hud,.foot,.go{display:none}}
-</style>
+<title>Who Do I Call? | Government Unit 6 Day 2</title>
+<meta name="description" content="Real problems around Marion, Iowa. Send each call to the right government: the city, Linn County, the school board, the state of Iowa, or the Meskwaki Nation.">
+<link rel="stylesheet" href="style.css?v=20261103gwc">
 <script src="../../shared/assignments.js?v=20261103c"></script>
 <script src="../../shared/turnin.js?v=20261103c"></script>
-<script src="../../shared/unit-game.js?v=20261103c"></script>
-</head><body>
-<header>
-  <p class="k">Government · Unit 6 · Day 2</p>
-  <h1>Who Do I Call? Iowa Government Near You</h1>
-  <p class="std"><b>SS.9-12.Gov.18</b> Identify the function, duties, and authority of the government of the state of Iowa. &nbsp;<b>SS.9-12.Gov.19</b> Identify the function, duties, and authority of the sovereign Meskwaki Nation tribal government. &nbsp;<b>SS.9-12.Gov.20</b> Identify the functions and organizational structures of Iowa's local governments.</p>
-  <p class="std"><b>Goal:</b> Match real problems around Marion to the right government (city, county, state, or tribal) and explain who does what. · About 25 minutes.</p>
-</header>
-<div class="hud" aria-label="Progress and time on hold">
-  <span id="progressText">0 checks done</span>
-  <div class="bar" aria-hidden="true"><span id="progressFill"></span></div>
-  <span class="pill" id="holdPill">☎ Time wasted on hold: 0 min</span>
+</head><body class="on-title">
+<div class="hud" id="hud" hidden aria-label="Your phone">
+  <div class="hud-in">
+    <div class="you"><span class="yface" aria-hidden="true">📱</span><span class="yt"><b>On call</b><small id="youName"></small></span></div>
+    <div class="parts" id="parts" aria-label="Rounds"></div>
+    <div class="m" id="mHold" title="Time your callers spent on hold"><span class="mi" aria-hidden="true">⏱️</span><span class="ml">On hold</span><span class="bar"><span id="holdFill"></span></span><span class="mn" id="holdNum">0 min</span></div>
+    <div class="tray" id="tray" aria-label="Big problems fixed"></div>
+  </div>
+  <div class="goalrow"><span class="goalchip">🎯 Right office first try = no hold time</span><span class="stepn" id="stepN"></span></div>
 </div>
-<main>
-  <p class="welcome" id="welcome" hidden></p>
-  <div id="app"></div>
+<main id="wrap">
+  <div class="welcome" id="welcome" role="status" hidden></div>
+  <section id="app" aria-live="polite"></section>
   <div class="foot"><span>Progress saves on this device. Your teacher sees your work after you turn it in.</span><button type="button" id="restartBtn">Start over</button></div>
 </main>
-<script>
-const CALL = (who, txt) => `<span class="call"><small>☎ Incoming problem · ${who}</small>${txt}</span>`;
-const SRC = (label, body) => `<span class="src"><small>${label}</small>${body}</span>`;
-const GOOD = txt => `<p><span class="tag good">Right office · 0 min</span>${txt}</p>`;
-const BAD = (m, txt) => `<p><span class="tag bad">Wrong office · +${m} min</span>${txt}</p>`;
-UnitGame.start({
-  key: "gov-u6-d2-iowa-government-v1",
-  assignmentId: "gov-u6-d2-iowa-government",
-  title: "Government · Unit 6 · Day 2 · Iowa Government: Who Runs Things Near You?",
-  standard: "SS.9-12.Gov.18, SS.9-12.Gov.19, SS.9-12.Gov.20",
-  oldApi: "https://fynn-class-assignment-submissions-20261024.neotboy.chatgpt.site/api/submit",
-  startFx: { hold: 0 },
-  wrongFx: { hold: 2 },
-  clampFx: fx => { fx.hold = Math.max(0, fx.hold); },
-  hud: st => {
-    const h = st.fx.hold || 0; const p = document.getElementById("holdPill");
-    p.textContent = "☎ Time wasted on hold: " + h + " min";
-    p.className = "pill" + (h >= 40 ? " bad" : h >= 20 ? " warn" : "");
-  },
-  startLabel: "Pick up the phone",
-  introHtml: `<p class="kicker">Marion, Iowa</p><h2>Something's broken. Who do you call?</h2>
-    <p>Real problems near you are about to come in. Your job: send each one to the right government before you burn all day on hold.</p>
-    <div class="levels"><div class="city"><b>City</b>Marion</div><div class="county"><b>County</b>Linn County</div><div class="state"><b>State</b>Iowa</div><div class="tribe"><b>Tribal</b>Meskwaki Nation</div></div>
-    <ul class="steps"><li>1. Read the problem. Pick who handles it.</li><li>2. A wrong call costs you time on hold (watch the top).</li><li>3. Write 2 short answers and turn in.</li></ul>
-    <p class="note">The problems are made up. The offices, rules, and facts are real.</p>`,
-  scenes: [
-    { kicker: "Part 1 of 3 · Local", title: "Your Block: Marion & Linn County",
-      teach: `<p><b>Marion</b> uses a <b>council-manager</b> government. Voters elect a <b>City Council</b> of 7: the Mayor, 2 more members elected by the whole city, and 4 members from <b>wards</b> (parts of the city). They serve 4-year terms.</p>
-        <p>The council sets the rules and the budget. It passes <b>ordinances</b> (city laws). It hires a <b>City Manager</b>, a professional who runs city departments day to day: streets, parks, police, fire, and planning.</p>
-        <p><b>Linn County</b> is run by an elected <b>Board of Supervisors</b> (3 members in Linn County). Other elected county officials include the <b>sheriff</b>, <b>auditor</b>, <b>treasurer</b>, and <b>recorder</b>. Your <b>school board</b> is local government too.</p>`,
-      blocks: [
-        { type: "q", id: "i1", std: "Gov.20", short: "Pothole on 7th Ave = City of Marion", prompt: CALL("Your mom", `"There's a pothole on 7th Avenue in Marion the size of a pizza. It almost took out my tire."`) + "Who should she call?", options: ["City of Marion (Public Works)", "Linn County Board of Supervisors", "The Governor's office in Des Moines", "The Iowa Supreme Court"], hint: "7th Avenue is inside Marion. Who runs city streets?", why: "City streets inside Marion are handled by the city's Public Works department, run under the City Manager." },
-        { type: "q", id: "i2", std: "Gov.20", short: "Council hires City Manager", prompt: SRC("City of Marion · how it's organized", `Voters → elect the <b>City Council</b> (Mayor + 6 members)<br>City Council → hires the <b>City Manager</b><br>City Manager → runs departments (Public Works, Parks, Police, Fire, Planning)`) + "Who hires Marion's City Manager?", options: ["The City Council", "The voters of Marion", "The Governor of Iowa", "The Linn County Sheriff"], hint: "Follow the arrows on the chart.", why: "In a council-manager government, voters elect the council, and the council hires the manager." },
-        { type: "q", id: "i3", std: "Gov.20", short: "Council vote = ordinance", prompt: CALL("A neighbor", `"The City Council just voted to change the hours when people can set off fireworks in Marion."`) + "What did the council just pass?", options: ["A city ordinance", "A state law", "A Linn County budget", "A court ruling"], hint: "What is a law passed by a city council called?", why: "A law made by a city council is an ordinance. It only applies inside the city." },
-        { type: "event", id: "e1", short: "Rural road washout call", html: CALL("Your uncle", `"The gravel road to my farm, out in the country past Marion, washed out in the storm. I can't get my truck out."`) + `<p>The farm is <b>outside city limits</b>, in rural Linn County. Who do you call?</p>`,
-          choices: [
-            { label: "Marion City Hall", fx: { hold: 15 }, result: BAD(15, "\"Sorry, that road is outside city limits. Try the county.\"") },
-            { label: "Linn County Secondary Roads (run under the Board of Supervisors)", fx: {}, result: GOOD("County road crews fix rural roads outside of cities. A crew is sent out the next day.") },
-            { label: "The Governor's office", fx: { hold: 20 }, result: BAD(20, "After a long wait: \"The state handles highways, not your gravel road. Call Linn County.\"") }
-          ] },
-        { type: "q", id: "i4", std: "Gov.20", short: "County auditor runs elections", prompt: SRC("Linn County elected officials", `<span class="org"><div><b>Board of Supervisors</b>County budget, property tax rate, rural roads</div><div><b>Sheriff</b>Patrols outside cities, runs the county jail</div><div><b>Auditor</b>Runs elections, keeps county records</div><div><b>Treasurer</b>Collects property taxes, renews car registrations</div><div><b>Recorder</b>Records property deeds, birth and marriage records</div></span>`) + "You just turned 18 and want to know where to vote in Linn County. Which office runs elections?", options: ["County Auditor", "County Sheriff", "County Recorder", "County Treasurer"], hint: "Find \"elections\" in the chart.", why: "In Iowa, each county's auditor runs local elections." },
-        { type: "q", id: "i5", std: "Gov.20", short: "County treasurer: car registration", prompt: CALL("Your older brother", `"My car registration is about to expire. Where do I renew it?"`) + "Using the chart above, where should he go?", options: ["Linn County Treasurer", "Marion City Council", "Linn County Auditor", "Iowa Department of Revenue"], hint: "Which county office handles car registrations?", why: "In Iowa, the county treasurer handles vehicle registrations and collects property taxes." }
-      ] },
-    { kicker: "Part 2 of 3 · State", title: "The Statehouse in Des Moines",
-      teach: `<p>Iowa's government has three branches, just like the national government.</p>
-        <p><b>Lawmakers:</b> the <b>General Assembly</b>. The <b>House</b> has 100 members (2-year terms). The <b>Senate</b> has 50 members (4-year terms).</p>
-        <p><b>Executive:</b> the <b>Governor</b> (4-year term) signs or vetoes bills, proposes the budget, and picks department heads. Voters also elect a Lieutenant Governor, Secretary of State, Attorney General, Auditor, Treasurer, and Secretary of Agriculture.</p>
-        <p><b>Courts:</b> the <b>Iowa Supreme Court</b> (7 justices), the Court of Appeals (9 judges), and district courts in all 99 counties.</p>`,
-      blocks: [
-        { type: "q", id: "i6", std: "Gov.18", short: "Phone law needed Governor", prompt: SRC("Real Iowa law · 2025", `In April 2025, the Iowa House and Senate passed a bill making schools limit student phone use during class. On April 30, 2025, the Governor signed it into law.`) + "Both chambers had already passed it. Why did it still need the Governor?", options: ["The Governor signs or vetoes bills before they become law", "The Governor writes every bill that the legislature passes", "The Governor had to get the Supreme Court to vote first", "The Governor runs every school district in Iowa directly"], hint: "Reread what the Governor does in the box above.", why: "After both chambers pass a bill, it goes to the Governor to sign or veto. The legislature can override a veto with two-thirds of both chambers." },
-        { type: "q", id: "i7", std: "Gov.18", short: "Iowa House: 100 members, 2-yr", prompt: SRC("Iowa General Assembly", `<b>Chamber A:</b> 100 members · 2-year terms · led by the Speaker<br><b>Chamber B:</b> 50 members · 4-year terms · led by the Senate President`) + "Which chamber is Chamber A?", options: ["The Iowa House", "The Iowa Senate", "The Iowa Supreme Court", "The Linn County Board"], hint: "Which one has 100 members?", why: "The Iowa House has 100 members who serve 2-year terms. The Senate has 50 who serve 4 years." },
-        { type: "q", id: "i8", std: "Gov.18", short: "Iowa judges: retention elections", prompt: SRC("How Iowa picks judges", `A commission sends the Governor a short list of qualified people. The Governor appoints one. Later, voters decide in a <b>retention election</b>: "Should this judge keep the job? Yes or No."`) + "How do Iowa voters get a say over judges?", options: ["They vote yes or no on keeping each judge", "They elect judges in party primary elections", "They pick judges from a list each year", "They have no say at any point at all"], hint: "Look at the last step on the card.", why: "Iowa judges are appointed, then voters decide whether to keep them in retention elections." },
-        { type: "event", id: "e2", short: "Change state phone law call", html: CALL("You", `"I think the state phone-in-class law should change. Who can actually change it?"`) + `<p>Who do you contact?</p>`,
-          choices: [
-            { label: "Marion City Council", fx: { hold: 15 }, result: BAD(15, "\"The city can't change a state law. Contact your state lawmakers.\"") },
-            { label: "My state representative and state senator", fx: {}, result: GOOD("State lawmakers can write a bill to change a state law. Your rep and senator represent your part of Iowa, so they listen to people from home.") },
-            { label: "The Linn County Sheriff", fx: { hold: 20 }, result: BAD(20, "\"We enforce laws, we don't write them. Try your state lawmakers.\"") }
-          ] }
-      ] },
-    { kicker: "Part 3 of 3 · Tribal", title: "The Meskwaki Nation",
-      teach: `<p>About an hour west of Marion, in Tama County, is the <b>Meskwaki Settlement</b>. It's home to the <b>Meskwaki Nation</b> (officially the Sac & Fox Tribe of the Mississippi in Iowa).</p>
-        <p>In 1856, Iowa passed a law letting the Meskwaki stay in the state. On July 13, 1857, the Meskwaki <b>bought</b> 80 acres with their own money. Today they own more than 8,000 acres.</p>
-        <p>The Meskwaki Nation is <b>sovereign</b>: it governs itself. It has its own constitution, an elected <b>Tribal Council</b> of 7 members led by a Chair, its own court, police, and school. It works with the U.S. government government-to-government.</p>`,
-      blocks: [
-        { type: "q", id: "i9", std: "Gov.19", short: "Settlement = land the tribe bought", prompt: SRC("Meskwaki history", `Many reservations were created when the U.S. government set aside land, often by treaty. The Meskwaki bought their first land in Iowa themselves, in 1857.`) + "Why is it called a <b>settlement</b> instead of a reservation?", options: ["The Meskwaki bought the land themselves", "The U.S. Army gave the land as a reward", "The state of Iowa rents the land to them", "It is only used for farming, not homes"], hint: "Who paid for the land?", why: "The Meskwaki purchased their land with their own money. That's why it's a settlement." },
-        { type: "q", id: "i10", std: "Gov.19", short: "Sovereign = governs itself", prompt: SRC("Meskwaki Nation government", `The Tribal Council makes laws for the Settlement. The tribe runs its own court (started 2005), its own police (started 2006), and its own school (under tribal control since 1981).`) + "Based on this, what does it mean that the Meskwaki Nation is <b>sovereign</b>?", options: ["It makes and enforces its own laws", "It is a part of Tama County's government", "It is run by the Governor of Iowa", "It has no government of its own"], hint: "Who makes the laws and runs the court and police?", why: "A sovereign nation governs itself. The Meskwaki Nation has its own lawmakers, court, police, and school." },
-        { type: "q", id: "i11", std: "Gov.19", short: "Tribal Council: 7 elected, Chair", prompt: SRC("Meskwaki Tribal Council", `Seven council members are elected by tribal members. The council is led by a Chair and a Vice Chair. Each member oversees areas like health, housing, education, and employment.`) + "Who leads the Meskwaki Nation's government?", options: ["An elected 7-member council led by a Chair", "A chief appointed by the U.S. President", "The Tama County Board of Supervisors", "A judge picked by the Iowa Supreme Court"], hint: "Look at the first sentence on the card.", why: "Tribal members elect a 7-member council, which is led by a Chair." },
-        { type: "event", id: "e3", short: "Meskwaki research call", html: CALL("Your class project partner", `"For our project, we want to ask how the Meskwaki police and court work on the Settlement."`) + `<p>Who do you contact?</p>`,
-          choices: [
-            { label: "The Meskwaki Nation tribal government", fx: {}, result: GOOD("The tribe runs its own court and police, so it's the right source. Its offices can point you to the right department.") },
-            { label: "The Tama County Board of Supervisors", fx: { hold: 10 }, result: BAD(10, "\"We're neighbors, but we don't run the tribe's court or police. Contact the Meskwaki Nation.\"") },
-            { label: "Marion City Hall", fx: { hold: 20 }, result: BAD(20, "\"That's an hour away and a different government. Contact the Meskwaki Nation.\"") }
-          ] },
-        { type: "q", id: "i12", std: "Gov.20", short: "Lightning: county property tax rate", prompt: CALL("Lightning round", `"Who sets Linn County's property tax rate?"`) + "Pick fast:", options: ["Linn County Board of Supervisors", "Marion City Manager", "Meskwaki Tribal Council", "The Iowa Secretary of State's office"], hint: "Think back to the Linn County chart. Which office handles the county budget?", why: "The Board of Supervisors sets the county budget and property tax rate." }
-      ] }
-  ],
-  finale: {
-    title: "Hang Up and Report",
-    report: st => { const h = st.fx.hold || 0; return `<p><b>Time wasted on hold: ${h} minutes.</b> ${h === 0 ? "Perfect. You knew exactly who to call." : h <= 20 ? "Not bad. A couple of wrong numbers." : "Lots of runaround. Now you know who does what."}</p><p>Answer both in 1–2 full sentences.</p>`; },
-    prompts: [
-      { id: "me", short: "A decision that affected me", label: "1. Name one local, state, or tribal decision that affected you this year. Who made it?", stem: "One decision that affected me was ___. It was made by ___.", min: 60, mustAll: [["city", "council", "marion", "county", "supervisor", "sheriff", "state", "legislat", "governor", "iowa", "tribal", "meskwaki", "school board", "board", "mayor", "manager", "court", "judge"]], mustMsg: "In answer 1, name WHO made the decision (like the city council, the school board, the Governor, or the legislature)." },
-      { id: "fix", short: "One Marion problem and who to call", label: "2. If you could fix one problem in Marion or Linn County, what would it be, and which office would you contact? Why that one?", stem: "I would fix ___. I would contact ___ because ___.", min: 70, newWords: 5, mustAll: [["city", "council", "manager", "mayor", "public works", "county", "supervisor", "sheriff", "auditor", "treasurer", "recorder", "state", "representative", "senator", "governor", "school board", "board"], ["because", "since"]], mustMsg: "In answer 2, name the office you'd contact AND explain why (use \"because\")." }
-    ]
-  },
-  extraAnswers: st => ({ "Time wasted on hold": (st.fx.hold || 0) + " min" })
-});
-</script>
+<script src="game.js?v=20261103gwc"></script>
 </body></html>

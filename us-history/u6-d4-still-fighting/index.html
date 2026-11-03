@@ -1,156 +1,27 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>The Fight for Access | U.S. History Unit 6 Day 2</title>
-<meta name="description" content="Join the Disability Rights Movement from the 1977 Section 504 sit-in to the Capitol Crawl and the ADA, and compare its tactics to earlier civil rights protests.">
-<style>
-:root{--ink:#22233a;--muted:#585a70;--paper:#f5f4f8;--card:#fff;--line:#d9d7e4;--plum:#5a3d8a;--teal:#1f6f78;--gold:#d39a2c;--green:#2a6b45;--bad:#a2392f}
-*{box-sizing:border-box}
-body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.5 system-ui,Segoe UI,Arial,sans-serif}
-header{background:#fff;border-bottom:5px solid var(--plum);padding:16px max(16px,calc((100vw - 900px)/2)) 12px}
-.k{font-size:.78rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:var(--plum);margin:0}
-h1{margin:2px 0 4px;font-size:clamp(1.7rem,3.4vw,2.3rem)}
-.std{margin:2px 0;font-size:.92rem;color:var(--muted)}.std b{color:var(--ink)}
-.hud{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line);padding:8px max(16px,calc((100vw - 900px)/2));display:flex;gap:12px;flex-wrap:wrap;align-items:center;font-weight:800;font-size:.92rem;box-shadow:0 2px 8px #22233a12}
-.hud .bar{flex:1;min-width:120px;height:10px;background:#e5e3ee;border-radius:9px;overflow:hidden}.hud .bar span{display:block;height:100%;width:0;background:var(--plum);transition:width .4s}
-.pill{background:#efedf5;border-radius:20px;padding:3px 10px;white-space:nowrap}
-.meter{display:flex;align-items:center;gap:6px}.meter .track{width:100px;height:10px;border-radius:9px;background:#e5e3ee;overflow:hidden}.meter .track span{display:block;height:100%;background:var(--teal);transition:width .5s}
-main{max-width:900px;margin:auto;padding:14px 16px 60px}
-.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;box-shadow:0 3px 12px #22233a0d}
-.kicker{font-size:.78rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:var(--teal);margin:0}
-h2{margin:2px 0 10px;font-size:1.45rem}
-.teach{background:#f0edf7;border-left:5px solid var(--plum);border-radius:9px;padding:10px 14px;margin:0 0 12px}.teach p{margin:4px 0}.teach b{color:var(--plum)}
-.block{margin:14px 0;padding:14px;border-radius:12px;border:2px solid var(--line);background:#fff}
-.block.current{border-color:var(--ink);box-shadow:0 0 0 4px #5a3d8a2b}
-.block h3{margin:0 0 10px;font-size:1.06rem;line-height:1.35;font-weight:700}
-.block.note p{margin:4px 0}
-.event{background:#f8f7f2;border-style:dashed;border-color:#cbbf9d}.event.current{border-style:solid}
-.event-body p{margin:4px 0}
-.where{font-size:.75rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:var(--plum);margin:0 0 4px}
-.source{background:#f7f6fa;border:1px solid var(--line);border-left:5px solid var(--teal);border-radius:9px;padding:8px 12px;margin:0 0 10px;font-weight:400}
-.source .who{font-size:.75rem;font-weight:900;letter-spacing:.06em;text-transform:uppercase;color:var(--teal);margin:0 0 2px}
-.source p{margin:3px 0}.source q{font-style:italic}
-.pair{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:6px 0}.pair div{background:#fff;border:1px solid var(--line);border-radius:9px;padding:7px 10px;font-size:.92rem}.pair b{display:block}
-@media(max-width:640px){.pair{grid-template-columns:1fr}}
-.picked{margin:10px 0 4px;color:var(--muted)}.result{background:#efedf5;border-radius:9px;padding:9px 12px}.result p{margin:4px 0}
-.tag{display:inline-block;font-weight:900;font-size:.8rem;border-radius:12px;padding:2px 9px;margin-right:6px}.tag.up{background:#d9eef0;color:var(--teal)}.tag.flat{background:#e8e7ee;color:var(--ink)}
-.qlabel{font-size:.75rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:var(--teal);margin:0 0 4px}
-.choices{display:grid;gap:8px}
-@media(min-width:700px){.q .choices{grid-template-columns:1fr 1fr}}
-button{font:inherit;cursor:pointer;border-radius:10px;min-height:46px}
-.choice{text-align:left;background:#fff;color:var(--ink);border:2px solid #cecbdc;padding:10px 12px;font-weight:650;line-height:1.3}
-.choice:hover:not(:disabled){border-color:var(--ink);background:#fbfafd}.choice:disabled{opacity:.5;cursor:not-allowed}
-.go{margin-top:12px;background:var(--plum);color:#fff;border:0;padding:11px 18px;font-weight:900}
-button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid #2f7dbd;outline-offset:2px}
-.answered{font-weight:800;color:var(--green);margin:4px 0}.why{margin:2px 0;color:var(--muted)}
-.msg{min-height:1.3em;font-weight:750;margin:8px 0 0}.msg.bad{color:var(--bad)}.msg.good{color:var(--green)}
-label{display:block;font-weight:850;margin:14px 0 4px}.stem{margin:0 0 4px;color:var(--muted);font-size:.92rem}
-input,textarea{width:100%;font:inherit;border:2px solid #cecbdc;border-radius:9px;padding:10px;background:#fff;color:var(--ink)}
-.steps{display:grid;gap:6px;margin:10px 0;padding:0;list-style:none}.steps li{background:#efedf5;border-radius:9px;padding:8px 12px;font-weight:700}
-.welcome{background:#e6f1ea;color:var(--green);font-weight:800;border-radius:9px;padding:8px 12px;margin:0 0 10px}
-.foot{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-top:14px;color:var(--muted);font-size:.85rem}
-.foot button{background:#e5e3ee;border:0;padding:8px 12px;font-weight:800;color:var(--ink)}
-.src{font-size:.8rem;color:var(--muted)}
-@media print{.hud,.foot,.go{display:none}}
-</style>
+<meta name="description" content="Organize with the Disability Rights Movement from the 1977 Section 504 sit-in to the Capitol Crawl and the ADA, and compare its tactics to earlier civil rights protests.">
+<link rel="stylesheet" href="style.css?v=20261103ufa">
 <script src="../../shared/assignments.js?v=20261103c"></script>
 <script src="../../shared/turnin.js?v=20261103c"></script>
-<script src="../../shared/unit-game.js?v=20261103c"></script>
-</head><body>
-<header>
-  <p class="k">U.S. History · Unit 6: Modern America · Day 2</p>
-  <h1>The Fight for Access</h1>
-  <p class="std"><b>Standards:</b> SS.9-12.US.51 · SS.9-12.US.55 · SS.9-12.US.56</p>
-  <p class="std"><b>Goal:</b> Explain how the Disability Rights Movement won the ADA, how its tactics echoed earlier civil rights protests, and why the fight for rights continues. · About 25 minutes.</p>
-</header>
-<div class="hud" aria-label="Progress and movement pressure">
-  <span id="progressText">0 checks done</span>
-  <div class="bar" aria-hidden="true"><span id="progressFill"></span></div>
-  <span class="pill meter">Pressure on leaders <span class="track" aria-hidden="true"><span id="pressFill" style="width:20%"></span></span> <span id="pressNum">2/10</span></span>
+</head><body class="on-title">
+<div class="hud" id="hud" hidden aria-label="Your movement">
+  <div class="hud-in">
+    <div class="you"><span class="yface" aria-hidden="true">📣</span><span class="yt"><b>Organizer</b><small id="youName"></small></span></div>
+    <div class="parts" id="parts" aria-label="Three parts"></div>
+    <div class="meters">
+      <div class="m" id="mPress" title="Pressure on leaders"><span class="mi" aria-hidden="true">📣</span><span class="ml">Pressure</span><span class="bar"><span id="pressFill"></span></span><span class="mn" id="pressNum">2/10</span></div>
+      <div class="m" id="mSup" title="Supporters"><span class="mi" aria-hidden="true">🤝</span><span class="ml">Supporters</span><span class="bar sup"><span id="supFill"></span></span><span class="mn" id="supNum">4/10</span></div>
+    </div>
+    <div class="boss" id="offBox" title="Officials: how worried they are"><span class="bface" aria-hidden="true">🏛️</span><span class="bmood" id="oMood" aria-hidden="true">😴</span><span class="bt"><b>Officials</b><small id="oSay">Ignoring you</small></span></div>
+  </div>
+  <div class="goalrow"><span class="goalchip">🏆 Best ending: 📣 8+ and 🤝 5+ · Wrong guesses cost 🤝</span><span class="stepn" id="stepN"></span></div>
 </div>
-<main>
-  <p class="welcome" id="welcome" hidden></p>
-  <div id="app"></div>
+<main id="wrap">
+  <div class="welcome" id="welcome" role="status" hidden></div>
+  <section id="app" aria-live="polite"></section>
   <div class="foot"><span>Progress saves on this device. Your teacher sees your work after you turn it in.</span><button type="button" id="restartBtn">Start over</button></div>
 </main>
-<script>
-const S = (who, body) => `<div class="source"><p class="who">${who}</p>${body}</div>`;
-const C = (label, n, html) => ({ label, fx: n ? { press: n } : {}, result: `<p><span class="tag ${n ? "up" : "flat"}">${n ? "+" + n + " pressure" : "No change"}</span></p>${html}` });
-UnitGame.start({
-  key: "ush-u6-d4-still-fighting-v1",
-  assignmentId: "ush-u6-d4-still-fighting",
-  title: "U.S. History · Unit 6 · Day 2 · The Fight for Access",
-  standard: "SS.9-12.US.51, SS.9-12.US.56",
-  oldApi: "https://fynn-class-assignment-submissions-20261024.neotboy.chatgpt.site/api/submit",
-  startFx: { press: 2 },
-  clampFx: fx => { fx.press = Math.max(0, Math.min(10, fx.press)); },
-  hud: st => {
-    const p = st.fx.press || 0;
-    document.getElementById("pressFill").style.width = (p * 10) + "%";
-    document.getElementById("pressNum").textContent = p + "/10";
-  },
-  startLabel: "Join the movement",
-  introHtml: `<p class="kicker">You're an organizer</p><h2>The fight for access</h2>
-    <p>In the 1970s, millions of Americans couldn't ride a bus, enter a courthouse, or get hired, just because they had a disability. You'll join the movement that changed that.</p>
-    <p>At key moments, you'll choose a tactic. Strong tactics raise the <b>pressure on leaders</b> meter at the top. Watch for tactics you've seen before in the Civil Rights Movement.</p>
-    <ul class="steps"><li>1. Read each short card and answer the check.</li><li>2. Choose your tactics at 3 big moments.</li><li>3. Write 2 short answers and turn in.</li></ul>`,
-  scenes: [
-    { kicker: "Part 1 of 3 · 1970–1977", title: "Shut Out",
-      teach: `<p>A <b>disability</b> is a condition that affects how a person moves, sees, hears, learns, or thinks. In 1970, many buildings had only stairs. Buses had no wheelchair lifts. Many schools could turn away kids with disabilities.</p>
-        <p>People with disabilities were often seen as "less capable" or as a <b>medical problem</b> to fix. Activists said the real problem was <b>discrimination</b>: unfair treatment of a group.</p>`,
-      blocks: [
-        { type: "q", id: "a1", std: "US.51", short: "Heumann case = shut out by disability", prompt: S("Judy Heumann, New York, 1970", `<p>Judy Heumann used a wheelchair after having polio as a baby. She passed her tests to become a teacher. New York still denied her a teaching license, saying she couldn't get students out in a fire. She sued and won. She became the first wheelchair user to teach in New York City.</p>`) + "What does Heumann's story show about life before disability rights laws?", options: ["People were shut out because of disability, not ability", "People with disabilities did not want to work or teach at all", "Schools had already made all buildings accessible", "Courts refused to hear any disability cases"], hint: "She passed the tests. So why was she turned down?", why: "Heumann could do the job. She was denied because of her wheelchair. That's discrimination." },
-        { type: "q", id: "a2", std: "US.51", short: "What Section 504 banned", prompt: S("Section 504, Rehabilitation Act of 1973", `<p><q>No otherwise qualified handicapped individual… shall, solely by reason of his handicap, be excluded from… or be subjected to discrimination under any program or activity receiving Federal financial assistance.</q></p><p class="src">"Handicapped" was the common word then. Today most people say "person with a disability."</p>`) + "What did Section 504 ban?", options: ["Discrimination in programs that get federal money", "Building any stairs in private homes across America", "Hiring anyone who does not have a disability", "Federal money for schools and hospitals"], hint: "Look at the end of the quote: which programs does it cover?", why: "Section 504 was the first federal law banning disability discrimination, in any program paid for with federal money, like schools and hospitals." },
-        { type: "q", id: "a3", std: "US.51", short: "Why 504 wasn't enforced", prompt: S("1973–1977", `<p>Section 504 passed in 1973. But a law needs <b>regulations</b>: rules that explain how to follow it. Four years later, the government still hadn't signed them. Schools and hospitals worried about the cost of ramps and changes.</p>`) + "Why didn't Section 504 change much at first?", options: ["The rules to enforce it still weren't signed", "Congress voted to cancel the whole law in 1974", "Activists did not know the law had passed", "Every building already followed the law"], hint: "Reread the card. What was still missing four years later?", why: "Without signed regulations, nobody had to follow the law. Activists decided to force the issue." },
-        { type: "event", id: "e1", short: "1977 Section 504 protest tactic", html: `<p class="where">Moment 1 · San Francisco, April 1977</p><p>Activists across the country enter federal offices to demand the 504 rules be signed. You're in the federal building in San Francisco with Judy Heumann and over 100 others. What's your tactic?</p>`,
-          choices: [
-            C("Refuse to leave until the rules are signed", 3, `<p><b>This is what happened.</b> About 150 people stayed in the building for almost a month, the longest sit-in at a federal building in U.S. history. Many slept on the floor without their usual medical help. On April 28, 1977, the government signed the rules.</p>`),
-            C("Leave at closing time and write letters to Congress", 1, `<p>Letters help, but officials had already ignored the law for 4 years. In real life, it took a sit-in that wouldn't end to get the rules signed on April 28, 1977.</p>`),
-            C("Hold a rally outside, then go home", 1, `<p>Rallies get attention for a day. In real life, protesters stayed inside for almost a month. That steady pressure got the rules signed on April 28, 1977.</p>`)
-          ] },
-        { type: "q", id: "a4", std: "US.51", short: "504 sit-in vs. Greensboro sit-in", prompt: S("Review · Two sit-ins", `<div class="pair"><div><b>Greensboro, 1960</b>Black college students sit at a whites-only lunch counter and refuse to leave until they're served.</div><div><b>San Francisco, 1977</b>Disability activists sit in a federal building and refuse to leave until the 504 rules are signed.</div></div>`) + "How were these two protests alike?", options: ["Both used sit-ins, refusing to leave until rights were met", "Both turned into violent fights between protesters and police", "Both were about who could ride a city bus", "Both ended on the very first day of the protest"], hint: "What did the protesters do in BOTH places?", why: "Disability activists borrowed the sit-in from the Civil Rights Movement: peacefully take a space and refuse to leave." },
-        { type: "q", id: "a5", std: "US.56", short: "Allies brought food = support across movements", prompt: S("Inside the sit-in", `<p>The protesters had no way to get food. The <b>Black Panther Party</b>, a Black activist group, brought hot meals every day. Churches and labor unions helped too.</p>`) + "What does this show?", options: ["Other groups stood up for disability rights too", "The protesters wanted to leave but couldn't", "The government brought meals to the protesters", "Only people with disabilities cared about the issue"], hint: "Who brought the food, and were they disability groups?", why: "Groups from other movements helped, showing civic virtue: helping others win their rights, not just your own group." }
-      ] },
-    { kicker: "Part 2 of 3 · 1978–1990", title: "Taking It to the Streets",
-      teach: `<p>In 1978 in Denver, a group of wheelchair users took a bold step. City buses had no lifts, so they couldn't ride. The group later grew into <b>ADAPT</b> (American Disabled for Accessible Public Transit).</p>
-        <p>They used <b>civil disobedience</b>: breaking an unfair rule or law on purpose, peacefully, and accepting arrest to draw attention.</p>`,
-      blocks: [
-        { type: "event", id: "e2", short: "Denver bus protest tactic", html: `<p class="where">Moment 2 · Denver, 1978</p><p>The city keeps buying new buses without wheelchair lifts. What's your tactic?</p>`,
-          choices: [
-            C("Block the buses with your wheelchairs until the city listens", 3, `<p><b>This is what happened.</b> Protesters surrounded two buses at a busy corner and stayed overnight. Many were arrested over the years. Denver agreed to add lifts, and ADAPT spread these protests across the country.</p>`),
-            C("Collect signatures on a petition to the city", 1, `<p>A petition shows support, but the city had ignored requests before. In real life, ADAPT blocked buses, and Denver agreed to add lifts.</p>`),
-            C("Call for a bus boycott, like Montgomery in 1955", 0, `<p>Smart idea, but here's the problem: a boycott only works if you ride the bus to begin with. Wheelchair users already couldn't ride. That's why ADAPT blocked the buses instead.</p>`)
-          ] },
-        { type: "q", id: "b1", std: "US.51", short: "Why ADAPT blocked buses", prompt: "Why did ADAPT protest at buses?", options: ["Buses had no lifts, so wheelchair users couldn't ride", "Bus drivers had gone on strike for higher pay", "The city had banned all protests near bus stops", "Bus fares had gotten too high for most Denver families"], hint: "Reread the first paragraph of Part 2.", why: "Without lifts, wheelchair users couldn't get to jobs, school, or stores. Transit was a rights issue." },
-        { type: "q", id: "b2", std: "US.51", short: "ADAPT vs. Montgomery bus boycott", prompt: S("Review · Two bus protests", `<div class="pair"><div><b>Montgomery, 1955–56</b>Black residents boycott city buses to end segregated seating.</div><div><b>Denver, 1978</b>Wheelchair users block buses to demand lifts.</div></div>`) + "What did these two movements have in common?", options: ["Both fought for equal access to public buses", "Both used the exact same tactic, a boycott", "Both wanted to shut down the city bus system", "Both were led by the same national group"], hint: "Look at what each group wanted, not how they protested.", why: "Both demanded equal access to public transit. They used different tactics: a boycott vs. blocking buses." },
-        { type: "note", html: `<p class="where">1989–1990</p><p>Activists now pushed for a bigger law: the <b>Americans with Disabilities Act (ADA)</b>. It would ban disability discrimination almost everywhere, not just in programs that got federal money. The Senate passed it in 1989, but it stalled in the House.</p>` },
-        { type: "event", id: "e3", short: "Capitol tactic, March 1990", html: `<p class="where">Moment 3 · U.S. Capitol, March 12, 1990</p><p>Hundreds of activists have marched to the Capitol. The ADA is stuck. In front of you are the Capitol's long marble steps. What's your tactic?</p>`,
-          choices: [
-            C("Leave your wheelchair and crawl up the steps", 3, `<p><b>This is the Capitol Crawl.</b> Dozens of activists left their wheelchairs and crutches and pulled themselves up the steps. The youngest was <b>Jennifer Keelan, age 8</b>. News cameras showed the whole country.</p>`),
-            C("Go inside and meet with members of Congress", 2, `<p>Meeting lawmakers (called <b>lobbying</b>) mattered too, and activists did it. But the crawl is what made the news and showed the problem in a way people couldn't ignore.</p>`),
-            C("Hold up signs at the bottom of the steps", 1, `<p>Signs get some attention. On that day, the crawl made the barriers impossible to miss.</p>`)
-          ] },
-        { type: "q", id: "b3", std: "US.51", short: "Message of the Capitol Crawl", prompt: "What message did the Capitol Crawl send?", options: ["Barriers like stairs shut people out of public life", "Activists were too tired to keep fighting for the ADA", "The Capitol had already been made fully accessible", "Wheelchairs were not allowed inside the Capitol"], hint: "Why crawl up the STEPS of the place where laws are made?", why: "Crawling up the Capitol steps showed lawmakers the barriers people with disabilities faced every day, even to reach their own government." },
-        { type: "q", id: "b4", std: "US.56", short: "Jennifer Keelan = civic virtue", prompt: S("Capitol steps, March 12, 1990", `<p>Eight-year-old Jennifer Keelan has cerebral palsy. With cameras watching, she pulled herself up the steps one at a time, exhausted, refusing to stop.</p>`) + "How did Jennifer show <b>civic virtue</b> (acting for the common good)?", options: ["She pushed through to fight for rights for many people", "She wanted to be on TV for the evening news shows", "She was told by Congress to climb the steps", "She was trying to win a contest against other kids"], hint: "Who would the ADA help besides Jennifer?", why: "She put herself through a hard, public struggle to win rights for millions of people, not just herself." }
-      ] },
-    { kicker: "Part 3 of 3 · 1990 to Today", title: "The Law, and the Fight Today",
-      teach: `<p>On July 26, 1990, President <b>George H.W. Bush</b> signed the ADA. Supporters called it an "Emancipation Proclamation" for people with disabilities. It requires:</p>
-        <p>• Equal chances at jobs · • Ramps, elevators, and wide doors in public buildings · • Accessible buses and trains · • No discrimination in schools, restaurants, and stores</p>`,
-      blocks: [
-        { type: "q", id: "c1", std: "US.51", short: "Meaning of Bush's ADA quote", prompt: S("President George H.W. Bush, signing the ADA, July 26, 1990", `<p><q>Let the shameful wall of exclusion finally come tumbling down.</q></p>`) + "What did Bush mean by the \"wall of exclusion\"?", options: ["The barriers that kept people with disabilities out", "A real wall that was being built around the White House", "The laws that let disabled people get jobs", "The steps of the Capitol, which were removed"], hint: "\"Exclusion\" means being left out.", why: "The \"wall\" was all the barriers, like stairs, no lifts, and unfair hiring, that shut people with disabilities out." },
-        { type: "q", id: "c2", std: "US.51", short: "Spot an ADA violation", prompt: "Which situation would break the ADA?", options: ["A store won't hire a deaf worker who can do the job", "A store hires the best person who applies for a job", "A restaurant adds a ramp next to its front steps", "A city buys new buses that have wheelchair lifts"], hint: "Look for unfair treatment of someone who can do the job.", why: "Refusing to hire a qualified worker because of a disability is job discrimination, which the ADA bans." },
-        { type: "q", id: "c3", std: "US.51", short: "Curb cuts help everyone", prompt: S("Legacy", `<p>A <b>curb cut</b> is the small ramp where a sidewalk meets the street. Activists fought for them for wheelchair users. Today they're used by people pushing strollers, riding bikes, pulling suitcases, and making deliveries.</p>`) + "What does the curb cut example show?", options: ["Access for people with disabilities can help everyone", "Curb cuts were made mainly for big delivery trucks and vans", "Few people actually use sidewalk curb cuts", "Wheelchair users stopped needing curb cuts later"], hint: "Count the different people in the card who use them.", why: "Changes won for disability rights, like curb cuts and captions, ended up helping almost everyone." },
-        { type: "q", id: "c4", std: "US.51", short: "Why the fight continues", prompt: S("After 1990", `<p>Many places didn't follow the ADA right away. People had to file <b>lawsuits</b> to make them. In 1999, the Supreme Court ruled in <i>Olmstead v. L.C.</i> that keeping people in <b>institutions</b> (large care facilities) when they could live in their community is discrimination. Activists still push today for accessible websites, housing, and jobs.</p>`) + "Why are people with disabilities <b>still</b> fighting for rights after the ADA passed?", options: ["A law has to be enforced, and new barriers keep appearing", "The Supreme Court struck down the ADA in 1999", "The ADA only covered people in Washington, D.C.", "Congress quietly canceled most of the ADA after a few years"], hint: "Reread what people had to do after 1990, and what activists push for now.", why: "Winning a law is a big step, but people still use lawsuits and protests to make sure it's followed and to fight new barriers." }
-      ] }
-  ],
-  finale: {
-    title: "Still Fighting",
-    report: st => `<p><b>Your pressure meter ended at ${st.fx.press}/10.</b> The real movement won by keeping up pressure for years, often with tactics borrowed from the Civil Rights Movement.</p><p>Answer both in 1–2 full sentences.</p>`,
-    prompts: [
-      { id: "virtue", short: "Civic virtue in the movement", label: "1. How does the Disability Rights Movement show that Americans are still fighting for rights? Use one civic-virtue example from today.", stem: "The Disability Rights Movement shows ___. One example of civic virtue is ___ because ___.", min: 80, mustAll: [["sit", "crawl", "bus", "adapt", "504", "heumann", "keelan", "jennifer", "judy", "panther", "lawsuit", "step"], ["because", "since", "risk", "help"]], mustMsg: "In answer 1, name a real example from today (like the 504 sit-in, the Capitol Crawl, or ADAPT) and explain why it shows civic virtue." },
-      { id: "compare", short: "Compare to an earlier civil rights tactic", label: "2. Compare one disability rights tactic to a tactic from the 1950s–60s Civil Rights Movement. How were they alike?", stem: "The ___ was like the ___ because both ___.", min: 70, newWords: 5, mustAll: [["sit", "crawl", "bus", "adapt", "504", "block"], ["greensboro", "montgomery", "boycott", "march", "selma", "lunch", "king", "parks", "civil rights", "freedom ride"], ["because", "since", "both"]], mustMsg: "In answer 2, name a disability rights tactic AND an earlier civil rights protest (like Greensboro or Montgomery), and explain how they were alike." }
-    ]
-  },
-  extraAnswers: st => ({ "Pressure meter": st.fx.press + " of 10" })
-});
-</script>
+<script src="game.js?v=20261103ufa"></script>
 </body></html>

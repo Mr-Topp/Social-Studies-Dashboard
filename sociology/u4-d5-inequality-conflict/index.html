@@ -275,7 +275,7 @@ UnitGame.start({
       const head = t >= 7 ? ["Town Boils Over", "Rumors and blame are winning.", "bad"] : t >= 4 ? ["Town on Edge", "Some see the causes. Others still blame each other.", "mid"] : ["Tense, but Talking", "More people argue about causes, not each other.", "good"];
       const misses = Object.values(st.wrong || {}).reduce((a, n) => a + n, 0);
       const causes = EVENTS.filter(e => st.picks[e.id] != null).map(e => { const c = e.choices[st.picks[e.id]]; return `<li>${c.label.split("\n")[0]} → ${c.cause}</li>`; }).join("");
-      return `<div class="front"><p class="mast">THE KETTLE CREEK BEACON</p><p class="head">${head[0]}</p><p>${head[1]} 🔥 ${t}/10 · 📰 ${num(st.fx.r)} readers</p><p><b>Caused by:</b></p><ul>${causes}${misses ? `<li>🔎 ${misses} misprint${misses === 1 ? "" : "s"} → −${num(misses * 100)} readers</li>` : ""}</ul><span class="stamp ${head[2]}">Final edition</span></div><p>Good reporting explains causes. It can't make the pie bigger. <b>Write your front page: 1–2 full sentences each.</b></p>`;
+      return `<div class="front"><p class="mast">THE KETTLE CREEK BEACON</p><p class="head">${head[0]}</p><p>${head[1]} 🔥 ${t}/10 · 📰 ${num(st.fx.r)} readers</p><p><b>Caused by:</b></p><ul>${causes}${misses ? `<li>🔎 Misprints cost you readers</li>` : ""}</ul><span class="stamp ${head[2]}">Final edition</span></div><p>Good reporting explains causes. It can't make the pie bigger. <b>Write your front page: 1–2 full sentences each.</b></p>`;
     },
     prompts: [
       { id: "stat", short: "Inequality + one statistic", label: "📊 Sidebar: pick race, gender, or class. Use one number from today to show who it hurts.", stem: "One example of ___ inequality is ___. This affects people because ___.", min: 70,

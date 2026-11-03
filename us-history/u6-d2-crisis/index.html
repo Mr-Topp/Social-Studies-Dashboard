@@ -1,171 +1,27 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Surviving 2008 | U.S. History Unit 6 Day 2</title>
-<meta name="description" content="Steer a family through the Great Recession, then vote as Congress on how government should respond to the crisis.">
-<style>
-:root{--ink:#1f2a24;--muted:#56645b;--paper:#f5f6f1;--card:#fff;--line:#d9dccf;--green:#2c6e49;--dk:#1e4d33;--amber:#c9861a;--good:#2a6b45;--bad:#a2392f;--blue:#2f5f86}
-*{box-sizing:border-box}
-body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.5 system-ui,Segoe UI,Arial,sans-serif}
-header{background:#fff;border-bottom:5px solid var(--green);padding:16px max(16px,calc((100vw - 900px)/2)) 12px}
-.k{font-size:.78rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:var(--green);margin:0}
-h1{margin:2px 0 4px;font-size:clamp(1.7rem,3.4vw,2.3rem)}
-.std{margin:2px 0;font-size:.92rem;color:var(--muted)}.std b{color:var(--ink)}
-.hud{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line);padding:8px max(16px,calc((100vw - 900px)/2));display:flex;gap:12px;flex-wrap:wrap;align-items:center;font-weight:800;font-size:.92rem;box-shadow:0 2px 8px #1f2a2412}
-.hud .bar{flex:1;min-width:120px;height:10px;background:#e4e6dc;border-radius:9px;overflow:hidden}.hud .bar span{display:block;height:100%;width:0;background:var(--green);transition:width .4s}
-.pill{background:#eef0e8;border-radius:20px;padding:3px 10px;white-space:nowrap}
-.meter{display:flex;align-items:center;gap:6px}.meter .track{width:100px;height:10px;border-radius:9px;background:#e4e6dc;overflow:hidden}.meter .track span{display:block;height:100%;background:var(--amber);transition:width .5s}
-#cashNum.neg{color:var(--bad)}
-main{max-width:900px;margin:auto;padding:14px 16px 60px}
-.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;box-shadow:0 3px 12px #1f2a240d}
-.kicker{font-size:.78rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:var(--amber);margin:0}
-h2{margin:2px 0 10px;font-size:1.45rem}
-.teach{background:#eef4ef;border-left:5px solid var(--green);border-radius:9px;padding:10px 14px;margin:0 0 12px}.teach p{margin:4px 0}.teach b{color:var(--dk)}
-.block{margin:14px 0;padding:14px;border-radius:12px;border:2px solid var(--line);background:#fff}
-.block.current{border-color:var(--ink);box-shadow:0 0 0 4px #2c6e492e}
-.block h3{margin:0 0 10px;font-size:1.06rem;line-height:1.35;font-weight:700}
-.event{background:#fbf8ef;border-style:dashed;border-color:#d6c08f}.event.current{border-style:solid}
-.event-body p{margin:4px 0}
-.bill{font-size:.75rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:var(--amber);margin:0 0 4px}
-.source{background:#f6f7f3;border:1px solid var(--line);border-left:5px solid var(--blue);border-radius:9px;padding:8px 12px;margin:0 0 10px;font-weight:400}
-.source .who{font-size:.75rem;font-weight:900;letter-spacing:.06em;text-transform:uppercase;color:var(--blue);margin:0 0 2px}
-.source p{margin:3px 0}
-.chain{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:4px 0}.chain span{background:#fff;border:1px solid var(--line);border-radius:8px;padding:4px 8px;font-size:.92rem}.chain i{font-style:normal;font-weight:900;color:var(--amber)}
-.chart{display:grid;gap:4px;margin:6px 0}.chart .row{display:grid;grid-template-columns:78px 1fr 42px;gap:6px;align-items:center;font-size:.86rem}.chart .bar2{height:14px;background:#e4e6dc;border-radius:5px;overflow:hidden}.chart .bar2 span{display:block;height:100%;background:var(--blue)}.chart .hi span{background:var(--bad)}
-.law{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:8px 0}.law div{background:#fff;border:1px solid var(--line);border-radius:9px;padding:8px 10px;font-size:.9rem}.law b{display:block;color:var(--dk)}
-@media(max-width:700px){.law{grid-template-columns:1fr}}
-.picked{margin:10px 0 4px;color:var(--muted)}.result{background:#f0f1ea;border-radius:9px;padding:9px 12px}.result p{margin:4px 0}
-.tag{display:inline-block;font-weight:900;font-size:.8rem;border-radius:12px;padding:2px 9px;margin-right:6px}.tag.up{background:#dcefe2;color:var(--good)}.tag.down{background:#f6dcd8;color:var(--bad)}.tag.flat{background:#e8e9e2;color:var(--ink)}
-.qlabel{font-size:.75rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:var(--green);margin:0 0 4px}
-.choices{display:grid;gap:8px}
-@media(min-width:700px){.q .choices{grid-template-columns:1fr 1fr}}
-button{font:inherit;cursor:pointer;border-radius:10px;min-height:46px}
-.choice{text-align:left;background:#fff;color:var(--ink);border:2px solid #cdd1c2;padding:10px 12px;font-weight:650;line-height:1.3}
-.choice:hover:not(:disabled){border-color:var(--ink);background:#fbfcf8}.choice:disabled{opacity:.5;cursor:not-allowed}
-.go{margin-top:12px;background:var(--green);color:#fff;border:0;padding:11px 18px;font-weight:900}
-button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid #2f7dbd;outline-offset:2px}
-.answered{font-weight:800;color:var(--good);margin:4px 0}.why{margin:2px 0;color:var(--muted)}
-.msg{min-height:1.3em;font-weight:750;margin:8px 0 0}.msg.bad{color:var(--bad)}.msg.good{color:var(--good)}
-label{display:block;font-weight:850;margin:14px 0 4px}.stem{margin:0 0 4px;color:var(--muted);font-size:.92rem}
-input,textarea{width:100%;font:inherit;border:2px solid #cdd1c2;border-radius:9px;padding:10px;background:#fff;color:var(--ink)}
-.steps{display:grid;gap:6px;margin:10px 0;padding:0;list-style:none}.steps li{background:#eef0e8;border-radius:9px;padding:8px 12px;font-weight:700}
-.family{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:10px 0}.family div{background:#eef4ef;border-radius:10px;padding:8px 10px;text-align:center;font-size:.9rem}.family b{display:block;font-size:1.25rem;color:var(--dk)}
-@media(max-width:500px){.family{grid-template-columns:1fr}}
-.welcome{background:#e6f1ea;color:var(--good);font-weight:800;border-radius:9px;padding:8px 12px;margin:0 0 10px}
-.foot{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-top:14px;color:var(--muted);font-size:.85rem}
-.foot button{background:#e4e6dc;border:0;padding:8px 12px;font-weight:800;color:var(--ink)}
-.src{font-size:.8rem;color:var(--muted)}
-@media print{.hud,.foot,.go{display:none}}
-</style>
+<meta name="description" content="Run an Iowa family's money through the 2008 crash: the housing bubble, layoffs, a stimulus check, and a vote in Congress on the bank rescue.">
+<link rel="stylesheet" href="style.css?v=20261103u08">
 <script src="../../shared/assignments.js?v=20261103c"></script>
 <script src="../../shared/turnin.js?v=20261103c"></script>
-<script src="../../shared/unit-game.js?v=20261103c"></script>
-</head><body>
-<header>
-  <p class="k">U.S. History · Unit 6: Modern America · Day 2</p>
-  <h1>Surviving 2008</h1>
-  <p class="std"><b>Standards:</b> SS.9-12.US.53 · SS.9-12.US.55</p>
-  <p class="std"><b>Goal:</b> Explain what caused the Great Recession, how it hit families, and how the government responded, then decide how government should handle a crisis. · About 25 minutes.</p>
-</header>
-<div class="hud" aria-label="Progress and family savings">
-  <span id="progressText">0 checks done</span>
-  <div class="bar" aria-hidden="true"><span id="progressFill"></span></div>
-  <span class="pill meter">Family savings <span class="track" aria-hidden="true"><span id="cashFill" style="width:62%"></span></span> <span id="cashNum">$5,000</span></span>
+</head><body class="on-title">
+<div class="hud" id="hud" hidden aria-label="Your family">
+  <div class="hud-in">
+    <div class="you" id="famBox"><span class="yface" aria-hidden="true">👨‍👩‍👧‍👦</span><span class="fmood" id="famMood" aria-hidden="true">🙂</span><span class="yt"><b>Haugens</b><small id="youName"></small></span></div>
+    <div class="parts" id="parts" aria-label="The three parts"></div>
+    <div class="meters">
+      <div class="m" id="mCash" title="Family savings"><span class="mi" aria-hidden="true">💵</span><span class="ml">Savings</span><span class="bar"><span id="cashFill"></span></span><span class="mn" id="cashNum">$5,000</span></div>
+      <span class="stat" id="homeChip"></span>
+      <span class="stat" id="jobChip"></span>
+    </div>
+  </div>
+  <div class="goalrow"><span class="date" id="dateChip" aria-label="Date in the story"></span><span class="goalchip">🎯 Keep savings above $0</span><span class="stepn" id="stepN"></span></div>
 </div>
-<main>
-  <p class="welcome" id="welcome" hidden></p>
-  <div id="app"></div>
+<main id="wrap">
+  <div class="welcome" id="welcome" role="status" hidden></div>
+  <section id="app" aria-live="polite"></section>
   <div class="foot"><span>Progress saves on this device. Your teacher sees your work after you turn it in.</span><button type="button" id="restartBtn">Start over</button></div>
 </main>
-<script>
-const money = n => (n < 0 ? "−$" : "$") + Math.abs(n).toLocaleString("en-US");
-const S = (who, body) => `<div class="source"><p class="who">${who}</p>${body}</div>`;
-const C = (label, amt, html) => ({ label, fx: amt ? { cash: amt } : {}, result: `<p><span class="tag ${amt > 0 ? "up" : amt < 0 ? "down" : "flat"}">${amt ? (amt > 0 ? "+" : "−") + "$" + Math.abs(amt).toLocaleString("en-US") + " savings" : "No change to savings"}</span></p>${html}` });
-const outcome = c => c >= 3000 ? "Financially stable" : c >= 0 ? "Struggling, but survived" : "Hit hard: the family is in debt";
-const bar = (label, v, hi) => `<div class="row${hi ? " hi" : ""}"><span>${label}</span><span class="bar2"><span style="width:${v * 10}%"></span></span><b>${v}%</b></div>`;
-UnitGame.start({
-  key: "ush-u6-d2-crisis-v1",
-  assignmentId: "ush-u6-d2-crisis",
-  title: "U.S. History · Unit 6 · Day 2 · Surviving 2008",
-  standard: "SS.9-12.US.53, SS.9-12.US.54, SS.9-12.US.55",
-  oldApi: "https://fynn-class-assignment-submissions-20261024.neotboy.chatgpt.site/api/submit",
-  startFx: { cash: 5000 },
-  hud: st => {
-    const c = st.fx.cash || 0;
-    document.getElementById("cashFill").style.width = Math.max(0, Math.min(100, c / 80)) + "%";
-    const n = document.getElementById("cashNum"); n.textContent = money(c); n.className = c < 0 ? "neg" : "";
-  },
-  startLabel: "Start in 2008",
-  introHtml: `<p class="kicker">A family simulation</p><h2>Can your family make it through 2008?</h2>
-    <p>It's 2008 in a town in Iowa. You run a family's money. Then the economy crashes. You'll make the hard calls real families made.</p>
-    <div class="family"><div><b>$3,000</b>monthly income</div><div><b>$5,000</b>in savings</div><div><b>$1,500</b>monthly house payment</div></div>
-    <p>Your choices change the family's savings (top of the screen). At the end, you'll switch sides and vote as Congress.</p>
-    <ul class="steps"><li>1. Read each short card and answer the check.</li><li>2. Make 4 money decisions.</li><li>3. Write 2 short answers and turn in.</li></ul>
-    <p class="src">The family is made up. The events and laws are real.</p>`,
-  scenes: [
-    { kicker: "Part 1 of 3 · 2006–2008", title: "The Housing Bubble Pops",
-      teach: `<p>A <b>mortgage</b> is a loan to buy a house. In the early 2000s, banks made lots of <b>subprime mortgages</b>: risky loans to people with weak credit. Many started with low payments that jumped higher later.</p>
-        <p>Home prices kept rising, so it seemed safe. Then in 2006, prices started to fall. When people can't pay, the bank takes back the house. That's called <b>foreclosure</b>.</p>`,
-      blocks: [
-        { type: "q", id: "h1", std: "US.53", short: "Identify a subprime mortgage", prompt: S("Loan offer, 2005", `<p>Dana has missed some bills before. A bank still offers her a home loan. Her payment starts at <b>$900</b> a month. After two years it jumps to <b>$1,600</b>.</p>`) + "Dana's loan is an example of a…", options: ["Subprime mortgage", "Stimulus check", "Bank bailout", "Foreclosure"], hint: "Reread the teach box. Which word means a risky loan to someone with weak credit?", why: "A risky loan to a borrower with weak credit, often with payments that jump later, is a subprime mortgage." },
-        { type: "q", id: "h2", std: "US.53", short: "Housing crash chain", prompt: S("How the crash spread", `<div class="chain"><span>Payments jump</span><i>→</i><span>Many people can't pay</span><i>→</i><span>???</span><i>→</i><span>Banks lose huge amounts of money</span></div>`) + "What belongs in the ??? box?", options: ["Banks take back millions of homes", "The government sends stimulus checks", "Home prices rise even faster", "Workers get raises across the country"], hint: "What happens when people stop paying their mortgage?", why: "Millions of foreclosures left banks holding houses worth far less than the loans." },
-        { type: "event", id: "e1", short: "House decision", html: `<p class="bill">Decision 1 · Your house</p><p>Home prices in your town dropped 30%. You owe <b>$180,000</b> on your house, but it's only worth <b>$140,000</b> now. Your payment is still $1,500 a month. What do you do?</p>`,
-          choices: [
-            C("Apply to refinance for a lower monthly payment", -500, `<p>The bank says no. Your house is worth less than you owe, and banks have stopped taking risks. You lose $500 in fees. In real life, millions of owners got turned down like this.</p>`),
-            C("Sell the house now, even at a loss", -4000, `<p>The house sells for $40,000 less than you owe. You spend most of your savings and get a bank deal for the rest, which hurts your credit for years. Then you have to rent.</p>`),
-            C("Keep paying and cut other spending", -1000, `<p>It's tight. You drop extras and pull $1,000 from savings over a few months. But you keep your home.</p>`)
-          ] },
-        { type: "q", id: "h3", std: "US.53", short: "Why underwater owners couldn't sell", prompt: "Owing more on a house than it's worth is called being <b>underwater</b>. Why couldn't your family just sell and pay off the loan?", options: ["The sale price wouldn't cover what the family owed", "The law didn't allow anyone to sell houses in 2008", "The bank wanted to keep the family in the house", "Home prices were rising too fast to find buyers"], hint: "Compare the $180,000 and the $140,000.", why: "Selling for $140,000 leaves $40,000 of the loan still unpaid." },
-        { type: "q", id: "h4", std: "US.53", short: "Why falling prices hurt banks", prompt: S("September 2008", `<p>Banks and <b>investors</b> (people who put money in to earn more) around the world held trillions of dollars in mortgage loans. In September 2008, <b>Lehman Brothers</b>, a giant Wall Street bank, went bankrupt (ran out of money and failed). Other banks stopped lending to each other out of fear.</p>`) + "Why did falling home prices hurt big banks?", options: ["The loans they held were not being paid back", "People were saving too much money at the banks", "The government took over every bank in 2008", "Banks had stopped making home loans in 2000"], hint: "What were banks holding, according to the card?", why: "Banks owned huge piles of mortgage loans. When people couldn't pay, those loans lost value and banks lost money." }
-      ] },
-    { kicker: "Part 2 of 3 · 2008–2010", title: "Losing Work",
-      teach: `<p>The <b>Great Recession</b> lasted from December 2007 to June 2009. A <b>recession</b> is when the economy shrinks and jobs disappear. It was the worst since the Great Depression. Over <b>8 million</b> Americans lost their jobs.</p>
-        ${S("U.S. unemployment rate (Bureau of Labor Statistics)", `<p class="src">Unemployment rate = the share of people who want a job but can't find one.</p><div class="chart">${bar("Dec 2007", 5.0)}${bar("Dec 2008", 7.3)}${bar("Oct 2009", 10.0, 1)}${bar("Dec 2010", 9.3)}${bar("Dec 2012", 7.9)}${bar("Dec 2014", 5.6)}${bar("Dec 2016", 4.7)}</div>`)}`,
-      blocks: [
-        { type: "q", id: "j1", std: "US.53", short: "Read the unemployment peak", prompt: "Look at the chart. When was unemployment the highest?", options: ["October 2009, at 10%", "December 2007, at 5%", "December 2010, at 9.3%", "December 2016, at 4.7%"], hint: "Find the longest bar.", why: "Unemployment peaked at 10% in October 2009, about double what it was before the crash." },
-        { type: "q", id: "j2", std: "US.54", short: "Recovery was slow", prompt: "What does the chart show about the <b>recovery</b> (the time it took to get better)?", options: ["It was slow; unemployment took years to fall back", "It was fast; jobs came back within a few months", "It never happened; unemployment kept rising", "It was even; the rate stayed the same each year"], hint: "Track the bars after 2009. When do they get back near 5%?", why: "Unemployment didn't get back near 5% until about 2015–2016. Many families struggled for years." },
-        { type: "event", id: "e2", short: "Layoff decision", html: `<p class="bill">Decision 2 · Your job</p><p>Your company announces layoffs. About half the people in your department will lose their jobs next month. What do you do?</p>`,
-          choices: [
-            C("Start job hunting right now", -1200, `<p>You find a new job before the layoffs hit. It pays $400 less a month, so over a few months you lose $1,200. But you're still working.</p>`),
-            C("Cut expenses hard and save every dollar", 800, `<p>You cancel cable, cook every meal, and save $800. You keep your job this time. Half your coworkers don't.</p>`),
-            C("Do nothing and hope it works out", -3500, `<p>You get laid off. <b>Unemployment benefits</b> (government payments to laid-off workers) cover only part of your pay. It takes 6 months to find work, and savings drain fast.</p>`)
-          ] },
-        { type: "q", id: "j3", std: "US.53", short: "Why layoffs spread", prompt: S("How a recession spreads", `<div class="chain"><span>Workers get laid off</span><i>→</i><span>They spend less</span><i>→</i><span>???</span><i>→</i><span>More workers get laid off</span></div>`) + "What belongs in the ??? box?", options: ["Stores and restaurants earn less money", "Home prices start to rise very quickly", "Banks start giving out more risky loans", "The government raises taxes on families"], hint: "If people buy less, who loses customers?", why: "Less spending means businesses earn less, so they cut workers too. That's how one layoff spreads." },
-        { type: "event", id: "e3", short: "Car repair decision", html: `<p class="bill">Decision 3 · Your car</p><p>Your car breaks down. The repair costs <b>$1,500</b>. You need to get to work. What do you do?</p>`,
-          choices: [
-            C("Pay for it out of savings", -1500, `<p>The car's fixed. Your savings take a hit, but you don't owe anyone.</p>`),
-            C("Take a fast, high-interest loan", -2400, `<p>A <b>payday lender</b> gives you the cash today. With high interest and fees, you end up paying back $2,400 for a $1,500 repair.</p>`),
-            C("Carpool and walk until you can afford it", -300, `<p>You chip in $300 for gas with a coworker. It's a hassle and takes extra time, but your savings mostly hold.</p>`)
-          ] },
-        { type: "q", id: "j4", std: "US.54", short: "Why high-interest debt hurts", prompt: "Why can a high-interest loan make a family's crisis <b>worse</b>?", options: ["They pay back much more than they borrowed", "They can't use the money for car repairs", "It makes the bank give them a lower house payment", "It raises the family's monthly income"], hint: "Compare $1,500 and $2,400 from the car decision.", why: "Interest and fees mean the family pays far more later, when money is already tight." }
-      ] },
-    { kicker: "Part 3 of 3 · You Are Congress", title: "How Should Government Handle a Crisis?",
-      teach: `<p>Now switch sides. You're in Congress. Here's what the real government did:</p>
-        <div class="law"><div><b>Bank rescue (TARP)</b>Oct. 2008 · President Bush. $700 billion to save banks, car companies, and other big firms.</div><div><b>Recovery Act</b>Feb. 2009 · President Obama. About $800 billion for jobs, tax cuts, and aid to states and schools.</div><div><b>Dodd-Frank Act</b>2010 · President Obama. Tougher rules on banks so a crash like this is less likely.</div></div>
-        <p>A <b>bailout</b> is when the government uses public money to rescue a failing company.</p>`,
-      blocks: [
-        { type: "q", id: "g1", std: "US.53", short: "Why send stimulus checks", prompt: S("Spring 2008", `<p>Before the worst of the crash, Congress and President Bush sent most families a check: about $300–$600 per adult, plus $300 per child. This is called a <b>stimulus</b>: money meant to get the economy moving.</p>`) + "Why would the government send families money during a slowdown?", options: ["So people spend more and businesses keep workers", "So families can pay their income taxes early", "So banks can make more risky home loans", "So prices go up and slow down spending"], hint: "Think back to the chain: what happens when people spend less?", why: "If families spend the money, stores earn more and keep workers. That's the goal of a stimulus." },
-        { type: "event", id: "e4", short: "Congress vote on bank rescue", html: `<p class="bill">Decision 4 · Your vote in Congress · Sept. 2008</p><p>Big banks are failing. The President asks for $700 billion to rescue them.</p>
-          ${S("Two viewpoints", `<p><b>For it:</b> If big banks fail, businesses can't get loans to pay workers. The whole economy could collapse.</p><p><b>Against it:</b> Banks made risky choices. Taxpayers shouldn't save them while regular families lose their homes.</p>`)}<p>How do you vote?</p>`,
-          choices: [
-            C("Vote YES: rescue the banks to protect the whole economy", 0, `<p>This vote doesn't change your family's savings, but it affects every family. On Oct. 3, 2008, Congress passed the rescue and Bush signed it. Most of the money given to banks was later paid back.</p>`),
-            C("Vote YES, but only with limits on bank bosses' pay", 0, `<p>This vote doesn't change your family's savings. The real law did include some limits on pay for bosses at rescued banks. Congress passed it on Oct. 3, 2008.</p>`),
-            C("Vote NO: let failing banks fail", 0, `<p>This vote doesn't change your family's savings. You're not alone: on Sept. 29, 2008, the House voted the first version DOWN. Many voters were furious about a Wall Street bailout. Read what happened next.</p>`)
-          ] },
-        { type: "q", id: "g2", std: "US.55", short: "What the market drop suggested", prompt: S("What happened", `<p><b>Sept. 29, 2008:</b> The House votes NO on the bank rescue. That same day, the stock market has one of its biggest one-day drops ever.</p><p><b>Oct. 3, 2008:</b> Congress passes a changed version. Bush signs it.</p>`) + "What did the market drop seem to show?", options: ["Investors feared a crash if banks weren't rescued", "Investors were happy that the rescue had failed", "The stock market had nothing to do with banks", "The vote caused home prices to start rising"], hint: "What happened right after the NO vote?", why: "The big drop showed investors were scared of what would happen without a rescue. Days later, Congress changed course." },
-        { type: "q", id: "g3", std: "US.53", short: "Recovery Act vs. TARP", prompt: "How was Obama's <b>Recovery Act</b> different from the bank rescue (TARP)?", options: ["It aimed at jobs and aid, not mainly at saving banks", "It sent all of its money straight to Wall Street banks", "It made new rules for banks instead of spending money", "It canceled all mortgages for families in 2009"], hint: "Look at the three boxes at the top of Part 3.", why: "TARP rescued banks and big firms. The Recovery Act spent on jobs, tax cuts, and help for states and schools." },
-        { type: "q", id: "g4", std: "US.53", short: "Purpose of Dodd-Frank", prompt: "What was the main goal of the <b>Dodd-Frank Act</b> (2010)?", options: ["To make banks follow stricter rules", "To give the banks another $700 billion", "To send checks to every family", "To end unemployment benefits"], hint: "Check the third box. Was it about spending or rules?", why: "Dodd-Frank added tougher rules for banks and created an agency to protect people from unfair loans." },
-        { type: "q", id: "g5", std: "US.55", short: "Identify a critic's view of the bailout", prompt: "Which statement is a <b>critic's</b> view of the bank bailout?", options: ["Banks got help while families still lost their homes", "Saving banks kept loans flowing to businesses", "Most of the bank money was later paid back", "Letting the banks fail could have caused a new depression"], hint: "Which one complains about who got help?", why: "Critics said the rescue helped Wall Street more than regular families. The other three are arguments supporters made." }
-      ] }
-  ],
-  finale: {
-    title: "Looking Back at 2008",
-    report: st => `<p><b>Your family ended with ${money(st.fx.cash)} in savings: ${outcome(st.fx.cash)}.</b></p><p>Real families' results depended on their choices AND their luck, like whether a layoff hit their job. Millions lost homes. Answer both in 1–2 full sentences.</p>`,
-    prompts: [
-      { id: "family", short: "Choice that mattered most", label: "1. Which of your family's decisions mattered most? Explain what happened and why.", stem: "The decision that mattered most was ___ because ___.", min: 70, mustAll: [["house", "home", "refinanc", "sell", "sold", "job", "layoff", "laid", "car", "loan", "repair", "saving", "spend"], ["because", "since"]], mustMsg: "In answer 1, name the decision (house, job, or car) and explain why (use \"because\")." },
-      { id: "govt", short: "How government should handle a crisis", label: "2. How should the government handle an economic crisis? Use TARP, the Recovery Act, or Dodd-Frank as an example.", stem: "In a crisis, the government should ___. For example, ___ because ___.", min: 80, newWords: 5, mustAll: [["tarp", "bank", "bailout", "rescue", "recovery", "stimulus", "dodd", "frank", "rule", "job", "check"], ["because", "since"]], mustMsg: "In answer 2, use TARP, the bailout, the Recovery Act, or Dodd-Frank as an example, and explain why (use \"because\")." }
-    ]
-  },
-  extraAnswers: st => ({ "Family savings": money(st.fx.cash) + " (" + outcome(st.fx.cash) + ")" })
-});
-</script>
+<script src="game.js?v=20261103u08"></script>
 </body></html>

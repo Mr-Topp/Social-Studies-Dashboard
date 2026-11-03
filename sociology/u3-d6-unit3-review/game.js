@@ -664,7 +664,7 @@
     else e = { key: "Regular Court", out: "Sent to regular court", icon: "🏛️", cls: "low", text: "Darius could get a record. Remember Milwaukee: a record cut job calls back in half." };
     const causes = EVENTS.filter(s => st.picks[s.id] != null).map(s => { const k = s.cards[st.picks[s.id]]; return k.cause + " " + fxPlain(k.fx); });
     const w = Object.values(st.wrong).reduce((a, b) => a + b, 0);
-    if (w) causes.push(w + " missed " + (w === 1 ? "try" : "tries") + " (⚖️ +" + w * WRONG_CASE + ")");
+    if (w) causes.push("Shaky answers helped Kane's case");
     if (c <= GOAL.case && t < GOAL.trust) causes.push("💛 Trust fell under " + GOAL.trust);
     e.causes = causes;
     return e;

@@ -1,172 +1,30 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Branch Wars: Checks & Balances | Government Unit 6 Day 1</title>
-<meta name="description" content="Three rounds of power fights between Congress, the President, and the Courts. Use checks and balances to keep any branch from taking over.">
-<style>
-:root{--ink:#1b2330;--muted:#526070;--paper:#eef0f4;--card:#fff;--line:#d3d8e0;--navy:#17233a;--c:#2a6fb0;--p:#b8402f;--j:#6b4fa0;--gold:#d7a93a;--green:#26694a;--bad:#a2392f}
-*{box-sizing:border-box}
-body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.5 system-ui,Segoe UI,Arial,sans-serif}
-header{background:linear-gradient(120deg,#17233a,#26324d);color:#fff;padding:16px max(16px,calc((100vw - 900px)/2)) 12px;border-bottom:5px solid var(--gold)}
-.k{font-size:.78rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:#f1d38f;margin:0}
-h1{margin:2px 0 4px;font-size:clamp(1.6rem,3.4vw,2.3rem)}
-.std{margin:2px 0;font-size:.92rem;color:#dfe5ec}.std b{color:#fff}
-.hud{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line);padding:8px max(16px,calc((100vw - 900px)/2));display:flex;gap:10px;flex-wrap:wrap;align-items:center;font-weight:800;font-size:.9rem;box-shadow:0 2px 8px #1b233012}
-.hud .bar{flex:1;min-width:110px;height:10px;background:#e2e6ec;border-radius:9px;overflow:hidden}.hud .bar span{display:block;height:100%;width:0;background:var(--gold);transition:width .4s}
-.pill{background:#eef0f4;border-radius:20px;padding:3px 10px;white-space:nowrap}
-.power{display:flex;gap:8px;flex-wrap:wrap;align-items:center}
-.pw{display:flex;align-items:center;gap:4px;font-size:.82rem}.pw .track{width:54px;height:10px;background:#e2e6ec;border-radius:9px;overflow:hidden}.pw .track span{display:block;height:100%;transition:width .5s}
-.pw.c .track span{background:var(--c)}.pw.p .track span{background:var(--p)}.pw.j .track span{background:var(--j)}
-#balance{font-size:.82rem;border-radius:20px;padding:3px 10px}#balance.ok{background:#dcefe2;color:var(--green)}#balance.off{background:#f6dcd8;color:var(--bad)}
-main{max-width:900px;margin:auto;padding:14px 16px 60px}
-.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;box-shadow:0 3px 12px #1b23300d}
-.kicker{font-size:.78rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:var(--p);margin:0}
-h2{margin:2px 0 10px;font-size:1.45rem}
-.teach{background:#eef3f8;border-left:5px solid var(--navy);border-radius:9px;padding:10px 14px;margin:0 0 12px}.teach p{margin:5px 0}.teach b{color:var(--navy)}
-.block{margin:14px 0;padding:14px;border-radius:12px;border:2px solid var(--line);background:#fff}
-.block.current{border-color:var(--navy);box-shadow:0 0 0 4px #d7a93a40}
-.block h3{margin:0 0 10px;font-size:1.06rem;line-height:1.4;font-weight:700}
-.event{background:#f8f6ef;border-style:dashed;border-color:#cdb98a}.event.current{border-style:solid}
-.event-body p{margin:4px 0}
-.vs{display:flex;align-items:center;gap:8px;flex-wrap:wrap;font-weight:900;margin:0 0 6px;text-transform:uppercase;font-size:.85rem;letter-spacing:.06em}
-.vs span{border-radius:8px;padding:3px 9px;color:#fff}.vs .C{background:var(--c)}.vs .P{background:var(--p)}.vs .J{background:var(--j)}.vs i{font-style:normal;color:var(--muted)}
-.src{display:block;background:#fbfbfd;border:1px solid var(--line);border-left:5px solid var(--gold);border-radius:8px;padding:8px 12px;margin:0 0 10px;font-weight:400}
-.src small{display:block;font-size:.74rem;font-weight:900;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:2px}
-.src q{font-family:Georgia,"Times New Roman",serif;font-style:italic}
-.fighters{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:10px 0}.fighters div{border-radius:10px;padding:8px 10px;color:#fff;font-size:.9rem}.fighters b{display:block;font-size:1rem}
-.fighters .C{background:var(--c)}.fighters .P{background:var(--p)}.fighters .J{background:var(--j)}
-.picked{margin:10px 0 4px;color:var(--muted)}.result{background:#eef0f4;border-radius:9px;padding:9px 12px}.result p{margin:4px 0}
-.tag{display:inline-block;font-weight:900;font-size:.78rem;border-radius:12px;padding:2px 8px;margin:0 4px 2px 0;background:#e2e6ec}
-.qlabel{font-size:.75rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:var(--c);margin:0 0 4px}
-.choices{display:grid;gap:8px}
-@media(min-width:700px){.q .choices{grid-template-columns:1fr 1fr}}
-button{font:inherit;cursor:pointer;border-radius:10px;min-height:46px}
-.choice{text-align:left;background:#fff;color:var(--ink);border:2px solid #c9cfd8;padding:10px 12px;font-weight:650;line-height:1.3}
-.choice:hover:not(:disabled){border-color:var(--navy);background:#fbfcfe}.choice:disabled{opacity:.5;cursor:not-allowed}
-.go{margin-top:12px;background:var(--navy);color:#fff;border:0;padding:11px 18px;font-weight:900}
-button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid #2f7dbd;outline-offset:2px}
-.answered{font-weight:800;color:var(--green);margin:4px 0}.why{margin:2px 0;color:var(--muted)}
-.msg{min-height:1.3em;font-weight:750;margin:8px 0 0}.msg.bad{color:var(--bad)}.msg.good{color:var(--green)}
-label{display:block;font-weight:850;margin:14px 0 4px}.stem{margin:0 0 4px;color:var(--muted);font-size:.92rem}
-input,textarea{width:100%;font:inherit;border:2px solid #c9cfd8;border-radius:9px;padding:10px;background:#fff;color:var(--ink)}
-.steps{display:grid;gap:6px;margin:10px 0;padding:0;list-style:none}.steps li{background:#eef0f4;border-radius:9px;padding:8px 12px;font-weight:700}
-.levels{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:0 0 10px;font-weight:400}.levels div{border:1px solid var(--line);border-radius:9px;padding:8px 10px;font-size:.92rem;background:#fff}.levels b{display:block}
-@media(max-width:640px){.fighters{grid-template-columns:1fr}.levels{grid-template-columns:1fr}}
-.welcome{background:#e6f1ea;color:var(--green);font-weight:800;border-radius:9px;padding:8px 12px;margin:0 0 10px}
-.foot{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-top:14px;color:var(--muted);font-size:.85rem}
-.foot button{background:#e2e6ec;border:0;padding:8px 12px;font-weight:800;color:var(--ink)}
-.note{font-size:.8rem;color:var(--muted)}
-@media print{.hud,.foot,.go{display:none}}
-</style>
+<meta name="description" content="Three rounds of power fights between Congress, the President, and the Courts. Use checks and balances so no branch becomes king.">
+<link rel="stylesheet" href="style.css?v=20261103gbw">
 <script src="../../shared/assignments.js?v=20261103c"></script>
 <script src="../../shared/turnin.js?v=20261103c"></script>
-<script src="../../shared/unit-game.js?v=20261103c"></script>
-</head><body>
-<header>
-  <p class="k">Government · Unit 6 · Day 1</p>
-  <h1>Branch Wars: Who Keeps Power in Check?</h1>
-  <p class="std"><b>SS.9-12.Gov.4</b> Analyze the underlying principles established by the United States Constitution. &nbsp;<b>SS.9-12.Gov.9</b> Assess how the United States federal system divides powers between national and state governments.</p>
-  <p class="std"><b>Goal:</b> Use checks and balances to stop any branch from taking over, and explain how power is split between the national and state governments. · About 25 minutes.</p>
-</header>
-<div class="hud" aria-label="Progress and balance of power">
-  <span id="progressText">0 checks done</span>
-  <div class="bar" aria-hidden="true"><span id="progressFill"></span></div>
-  <span class="power">
-    <span class="pw c">Congress <span class="track" aria-hidden="true"><span id="cFill"></span></span> <span id="cNum">5</span></span>
-    <span class="pw p">President <span class="track" aria-hidden="true"><span id="pFill"></span></span> <span id="pNum">5</span></span>
-    <span class="pw j">Courts <span class="track" aria-hidden="true"><span id="jFill"></span></span> <span id="jNum">5</span></span>
-    <span id="balance" class="ok">Balanced</span>
-  </span>
+</head><body class="on-title">
+<div class="hud" id="hud" hidden aria-label="Balance of power">
+  <div class="hud-in">
+    <div class="rounds" id="rounds" aria-label="Rounds"></div>
+    <div class="meters" id="meters">
+      <div class="m c" id="mC" title="Congress"><span class="mi" aria-hidden="true">📜</span><span class="ml">Congress</span><span class="bar"><span id="cFill"></span></span><span class="mn" id="cNum">5</span></div>
+      <div class="m p" id="mP" title="President"><span class="mi" aria-hidden="true">✒️</span><span class="ml">President</span><span class="bar"><span id="pFill"></span></span><span class="mn" id="pNum">5</span></div>
+      <div class="m j" id="mJ" title="Courts"><span class="mi" aria-hidden="true">🔨</span><span class="ml">Courts</span><span class="bar"><span id="jFill"></span></span><span class="mn" id="jNum">5</span></div>
+    </div>
+    <div class="scale" id="scaleBox" title="Balance of power">
+      <svg viewBox="0 0 60 40" aria-hidden="true"><path d="M30 8 L30 34 M20 36 L40 36" stroke="#1b2330" stroke-width="3" stroke-linecap="round"/><g id="beam"><path d="M8 10 L52 10" stroke="#1b2330" stroke-width="3" stroke-linecap="round"/><path d="M8 10 L3 20 L13 20 Z M52 10 L47 20 L57 20 Z" fill="#d7a93a" stroke="#1b2330" stroke-width="1.5"/></g><circle cx="30" cy="8" r="3" fill="#1b2330"/></svg>
+      <span id="balance" class="ok">Balanced</span>
+    </div>
+  </div>
+  <div class="goalrow"><span class="goalchip">🎯 Keep all 3 bars within 2 of each other</span><span class="stepn" id="stepN"></span></div>
 </div>
-<main>
-  <p class="welcome" id="welcome" hidden></p>
-  <div id="app"></div>
+<main id="wrap">
+  <div class="welcome" id="welcome" role="status" hidden></div>
+  <section id="app" aria-live="polite"></section>
   <div class="foot"><span>Progress saves on this device. Your teacher sees your work after you turn it in.</span><button type="button" id="restartBtn">Start over</button></div>
 </main>
-<script>
-const T = txt => `<span class="tag">${txt}</span>`;
-const SRC = (label, body) => `<span class="src"><small>${label}</small>${body}</span>`;
-const CLS = { Congress: "C", President: "P", Courts: "J" };
-const VS = (a, b) => `<p class="vs"><span class="${CLS[a]}">${a}</span><i>vs</i><span class="${CLS[b]}">${b}</span></p>`;
-const balanced = fx => { const v = [fx.C, fx.P, fx.J]; return Math.max(...v) - Math.min(...v) <= 2; };
-UnitGame.start({
-  key: "gov-u6-d1-checks-balances-v1",
-  assignmentId: "gov-u6-d1-checks-balances",
-  title: "Government · Unit 6 · Day 1 · Checks & Balances: Who Keeps Power in Check?",
-  standard: "SS.9-12.Gov.4, SS.9-12.Gov.9",
-  oldApi: "https://fynn-class-assignment-submissions-20261024.neotboy.chatgpt.site/api/submit",
-  startFx: { C: 5, P: 5, J: 5 },
-  clampFx: fx => { ["C", "P", "J"].forEach(k => { fx[k] = Math.max(0, Math.min(10, fx[k])); }); },
-  hud: st => {
-    const f = st.fx;
-    [["C", "c"], ["P", "p"], ["J", "j"]].forEach(([k, id]) => { document.getElementById(id + "Fill").style.width = (f[k] * 10) + "%"; document.getElementById(id + "Num").textContent = f[k]; });
-    const b = document.getElementById("balance"); const ok = balanced(f);
-    b.textContent = ok ? "Balanced" : "Out of balance!"; b.className = ok ? "ok" : "off";
-  },
-  startLabel: "Ring the bell",
-  introHtml: `<p class="kicker">3 rounds · 3 fighters</p><h2>Nobody gets to be king.</h2>
-    <div class="fighters"><div class="C"><b>Congress</b>Makes the laws</div><div class="P"><b>President</b>Carries out the laws</div><div class="J"><b>Courts</b>Decide what the laws mean</div></div>
-    <p>Each round, one branch makes a power move. You pick the counter-move. Watch the <b>power bars</b> at the top. If one branch gets way stronger than the others, the system is <b>out of balance</b>.</p>
-    <ul class="steps"><li>1. Read the power move. Answer the quick checks.</li><li>2. Pick the counter-move.</li><li>3. Write 2 short answers and turn in.</li></ul>
-    <p class="note">The bills and fights in this game are made up. The rules, quotes, and history are real.</p>`,
-  scenes: [
-    { kicker: "Part 1 of 3 · Round 1", title: "The Veto Showdown",
-      teach: `<p>The Founders had just fought a king. They believed power can corrupt anyone. So they split power into three branches. This is called <b>separation of powers</b>.</p>
-        <p>Then they gave each branch ways to block the others. This is called <b>checks and balances</b>. It makes government slower, but safer.</p>`,
-      blocks: [
-        { type: "q", id: "g1", std: "Gov.4", short: "Fed 51: why limit power", prompt: SRC("James Madison · Federalist No. 51 (1788)", `<q>If men were angels, no government would be necessary. If angels were to govern men, neither external nor internal controls on government would be necessary.</q>`) + "What is Madison's point?", options: ["Leaders are human, so their power needs limits", "Angels should be put in charge of the government", "Government is not needed if laws are written well", "People are evil, so they should have no rights"], hint: "Are leaders angels? So what do they need?", why: "People in power aren't angels. So government needs controls on itself." },
-        { type: "q", id: "g2", std: "Gov.4", short: "President rejects bill = veto", prompt: VS("Congress", "President") + SRC("Breaking news", `Congress passes the <b>Teen Data Privacy Act</b>, banning apps from selling data about users under 18. The President refuses to sign it and sends it back.`) + "What is the President's move called?", options: ["A veto", "An impeachment", "Judicial review", "An override"], hint: "This is the President's check on Congress's laws.", why: "When the President rejects a bill, it's a veto." },
-        { type: "event", id: "e1", short: "Round 1: respond to veto", html: VS("Congress", "President") + `<p><b>You run Congress.</b> The President just vetoed your bill. What's your counter-move?</p>`,
-          choices: [
-            { label: "Hold an override vote right now", fx: { C: -1, P: 1 }, result: `<p>${T("Congress −1")}${T("President +1")}The House votes 300 yes. The Senate votes 64 yes. Not enough in the Senate. <b>The veto stands.</b></p>` },
-            { label: "Change the bill to win more votes, then override", fx: { C: 1, P: -1 }, result: `<p>${T("Congress +1")}${T("President −1")}You add a fix that 4 more senators wanted. The new bill gets vetoed too, but this time the Senate votes 68 yes. <b>Override! It's law.</b></p>` },
-            { label: "Give up on the bill", fx: { C: -1, P: 2 }, result: `<p>${T("Congress −1")}${T("President +2")}The President wins without a fight. Next time, the President expects Congress to back down again.</p>` }
-          ] },
-        { type: "q", id: "g3", std: "Gov.4", short: "Senate votes to override = 67", prompt: SRC("The rule · U.S. Constitution, Article I", `Congress can override a veto with a <b>two-thirds</b> vote in <b>both</b> the House and the Senate.`) + "The Senate has 100 members. How many need to vote yes to override?", options: ["67", "51", "60", "75"], hint: "Two-thirds of 100, rounded up.", why: "Two-thirds of 100 is 66.7, so it takes 67 senators." },
-        { type: "q", id: "g4", std: "Gov.4", short: "House 300 of 435 is enough", prompt: SRC("The math", `The House has 435 members. Two-thirds of 435 is <b>290</b>.`) + "In the first try, 300 House members voted to override. Was that enough in the House?", options: ["Yes, 300 is more than 290", "No, it needed all 435 members", "No, it needed exactly 218 votes", "Yes, but only the Senate's vote counts"], hint: "Compare 300 to the number on the card.", why: "300 is over 290, so the House passed it. The override failed in the Senate, which only had 64 of the 67 needed." }
-      ] },
-    { kicker: "Part 2 of 3 · Round 2", title: "The Courts Strike Back",
-      teach: `<p>Courts can declare a law or a president's action <b>unconstitutional</b> (against the Constitution). This power is called <b>judicial review</b>. The Supreme Court claimed it in <i>Marbury v. Madison</i> (1803).</p>
-        <p>The President <b>appoints</b> (picks) federal judges. The Senate must <b>confirm</b> (approve) them. Once confirmed, they can serve for life.</p>`,
-      blocks: [
-        { type: "q", id: "g5", std: "Gov.4", short: "Court strikes law = judicial review", prompt: VS("Courts", "Congress") + SRC("Breaking news", `Congress passes a law letting police search anyone's phone without a warrant. The Supreme Court rules the law is unconstitutional and throws it out.`) + "Which power did the Court use?", options: ["Judicial review", "A veto", "Impeachment", "Senate confirmation"], hint: "This is the Court's check: deciding if a law breaks the Constitution.", why: "Striking down a law for breaking the Constitution is judicial review." },
-        { type: "q", id: "g6", std: "Gov.4", short: "Why law broke 4th Amendment", prompt: SRC("U.S. Constitution · 4th Amendment", `<q>The right of the people to be secure in their persons, houses, papers, and effects, against unreasonable searches and seizures, shall not be violated…</q>`) + "Why could the Court throw out the phone-search law?", options: ["It allowed unreasonable searches the Constitution bans", "The President had already vetoed the same law", "Only states can pass any laws about police", "Courts are allowed to throw out any law that they dislike"], hint: "Which words in the amendment fit a search with no warrant?", why: "Courts can only strike a law that breaks the Constitution. Searching phones with no warrant fits \"unreasonable searches.\"" },
-        { type: "event", id: "e2", short: "Round 2: Supreme Court pick", html: VS("President", "Congress") + `<p>A Supreme Court seat opens up. The President names a judge. <b>You run the Senate.</b> What's your move?</p>`,
-          choices: [
-            { label: "Hold hearings, ask hard questions, then vote", fx: { C: 1 }, result: `<p>${T("Congress +1")}Senators question the judge for four days. The judge is confirmed 55–45. Both branches had a say.</p>` },
-            { label: "Confirm the judge the same day, no questions", fx: { P: 2, C: -1 }, result: `<p>${T("President +2")}${T("Congress −1")}The President basically picked a justice alone. The Senate skipped its check.</p>` },
-            { label: "Refuse to ever hold a vote", fx: { C: 1, J: -2 }, result: `<p>${T("Congress +1")}${T("Courts −2")}The seat stays empty for a year. The Court has 8 justices and some cases end in 4–4 ties.</p>` }
-          ] },
-        { type: "q", id: "g7", std: "Gov.4", short: "Senate confirm = check on President", prompt: "When the Senate votes on the President's pick for judge, which check is it using?", options: ["Approving or rejecting appointments", "Overriding a presidential veto", "Declaring a law to be unconstitutional", "Impeaching a federal official"], hint: "Look back at the box at the top of Round 2.", why: "The Senate's power to confirm is a check on who the President can appoint." },
-        { type: "q", id: "g8", std: "Gov.4", short: "Why judges serve for life", prompt: SRC("U.S. Constitution · Article III", `Federal judges <q>shall hold their Offices during good Behaviour</q>, which means they can serve for life unless removed.`) + "Why would the Founders give judges jobs for life?", options: ["So they can rule fairly without fear of being fired", "So they can run for President after leaving court", "So they never have to read the Constitution again", "So Congress is able to pick new judges every two years"], hint: "If a president could fire a judge, how might the judge rule?", why: "Judges who can't be fired for an unpopular ruling are free to follow the Constitution." }
-      ] },
-    { kicker: "Part 3 of 3 · Round 3", title: "The Power Grab",
-      teach: `<p><b>Congress controls the money.</b> The Constitution says no money can be spent unless Congress passes a law for it. This is called the <b>power of the purse</b>.</p>
-        <p><b>Impeachment</b> is how Congress can remove a president or judge. The House <b>impeaches</b> (charges) by majority vote. The Senate holds a trial. It takes <b>two-thirds</b> of the Senate to remove.</p>`,
-      blocks: [
-        { type: "q", id: "g9", std: "Gov.4", short: "Power of the purse = Congress", prompt: VS("President", "Congress") + SRC("U.S. Constitution · Article I, Section 9", `<q>No Money shall be drawn from the Treasury, but in Consequence of Appropriations made by Law…</q><br>In plain words: no government money can be spent unless a law says so.`) + "The President wants to spend $5 billion on a project Congress refused to pay for. Based on this rule, who decides how federal money is spent?", options: ["Congress, by passing spending laws", "The President, as Commander in Chief", "The Supreme Court, by voting on budgets", "Each state, by sending money to D.C."], hint: "Money can only be spent because of what? And who makes laws?", why: "Spending needs an appropriation, which is a law. Only Congress makes laws, so Congress holds the purse." },
-        { type: "event", id: "e3", short: "Round 3: respond to spending grab", html: VS("President", "Congress") + `<p>The President spends the $5 billion anyway, calling it an emergency. <b>You run Congress.</b> Final move:</p>`,
-          choices: [
-            { label: "Sue in court and cut the money in the next budget", fx: { C: 1, J: 1, P: -2 }, result: `<p>${T("Congress +1")}${T("Courts +1")}${T("President −2")}A federal court rules the spending broke the law. Two branches checked the third.</p>` },
-            { label: "Start an impeachment investigation", fx: { C: 2, P: -2 }, result: `<p>${T("Congress +2")}${T("President −2")}The House holds hearings for weeks. It's huge news. Whether the Senate would ever reach 67 votes to remove is another story.</p>` },
-            { label: "Let it slide this time", fx: { C: -2, P: 3 }, result: `<p>${T("Congress −2")}${T("President +3")}Nothing stops the President. Next year, the President spends even more without asking.</p>` }
-          ] },
-        { type: "q", id: "g10", std: "Gov.4", short: "Who impeaches = House", prompt: "If Congress goes the impeachment route, which part of Congress impeaches (charges) the President?", options: ["The House", "The Senate", "The Supreme Court", "The Vice President"], hint: "Reread the impeachment box at the top of Round 3.", why: "The House impeaches. The Senate holds the trial." },
-        { type: "q", id: "g11", std: "Gov.4", short: "Impeachment record: removal is hard", prompt: SRC("The real record", `<b>Impeached by the House:</b> Andrew Johnson (1868), Bill Clinton (1998), Donald Trump (2019 and 2021).<br><b>Removed by the Senate:</b> none.<br>Richard Nixon resigned in 1974 before the House voted.`) + "What does this record show about impeachment?", options: ["Removing a president is very hard to do", "Presidents are impeached almost every year", "The Senate removes most impeached presidents", "Only the Supreme Court can impeach a president"], hint: "How many were removed?", why: "Four impeachments, zero removals. Getting two-thirds of the Senate is a very high bar." },
-        { type: "note", html: `<p class="qlabel">One more split: national vs. state</p><p>Power isn't just split into three branches. It's also split between the <b>national government</b> and the <b>states</b>. This is called <b>federalism</b>.</p>
-          <span class="levels"><div><b>National (federal)</b>Prints money, runs the military, declares war, makes treaties</div><div><b>States (like Iowa)</b>Driver's licenses, running elections, most school rules, most crime laws</div></span>` },
-        { type: "q", id: "g12", std: "Gov.9", short: "Fed 51: double security = federalism", prompt: SRC("James Madison · Federalist No. 51 (1788)", `<q>…the power surrendered by the people is first divided between two distinct governments, and then the portion allotted to each subdivided among distinct and separate departments. Hence a double security arises to the rights of the people.</q>`) + "What is the \"double security\" Madison describes?", options: ["Power is split between national and state, then into branches", "The President and Vice President share all the power", "Every law must be passed twice by the same Congress to count", "Two armies protect the country, one federal and one state"], hint: "First divided between two ___. Then divided again into ___.", why: "Split once by federalism (national and state), then again by separation of powers (branches). Two layers of protection." },
-        { type: "q", id: "g13", std: "Gov.9", short: "Driver's license = state power", prompt: SRC("Real Iowa example", `In Iowa, you can get a school license at 14½ and an intermediate license at 16. Other states set different ages.`) + "Why can driving ages be different from state to state?", options: ["Driver's licenses are a state power", "Congress sets a new age for each state", "The President signs every state's license law", "The Supreme Court picks the age each year"], hint: "Look at the national vs. state chart above.", why: "Licenses are a state power under federalism, so each state makes its own rules." }
-      ] }
-  ],
-  finale: {
-    title: "Final Bell: Your Verdict",
-    report: st => { const f = st.fx; const ok = balanced(f); return `<p><b>Final power bars:</b> Congress ${f.C} · President ${f.P} · Courts ${f.J}. ${ok ? "<b>Balanced.</b> No branch took over." : "<b>Out of balance.</b> One branch pulled ahead. That's what checks are built to stop."}</p><p>Answer both in 1–2 full sentences.</p>`; },
-    prompts: [
-      { id: "check", short: "Most important check", label: "1. Which check do you think matters most? What would happen without it?", stem: "The most important check is ___ because without it ___.", min: 70, mustAll: [["veto", "override", "impeach", "judicial review", "strike", "unconstitutional", "appoint", "confirm", "budget", "spend", "money", "purse", "court"], ["because", "without", "would"]], mustMsg: "In answer 1, name a check (like veto, override, judicial review, or impeachment) AND say what would happen without it." },
-      { id: "fed", short: "National vs state example", label: "2. Name one thing the national government decides and one thing your state decides. Why split power this way?", stem: "The national government decides ___. Iowa decides ___. Splitting power this way ___.", min: 70, newWords: 5, mustAll: [["national", "federal", "congress", "u.s"], ["state", "iowa"]], mustMsg: "In answer 2, name something the national (federal) government decides AND something the state (Iowa) decides." }
-    ]
-  },
-  extraAnswers: st => ({ "Final power bars": "Congress " + st.fx.C + " · President " + st.fx.P + " · Courts " + st.fx.J })
-});
-</script>
+<script src="game.js?v=20261103gbw"></script>
 </body></html>

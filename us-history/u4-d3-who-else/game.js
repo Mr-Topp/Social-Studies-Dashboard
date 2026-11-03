@@ -568,7 +568,7 @@
     else e = { key: "Closed for Fixes", out: "Closed for Fixes (errors + few visitors)", icon: "🔧", cls: "low", text: "Few visitors and wrong labels. The museum shuts the exhibit to redo it." };
     const causes = EVENTS.filter(s => st.picks[s.id] != null).map(s => { const k = s.cards[st.picks[s.id]]; return k.cause + " " + fxPlain(k.fx); });
     const w = wrongN();
-    if (w) causes.push(w + " wrong " + (w === 1 ? "label" : "labels") + " (🎯 −" + w * WRONG_ACC + ")");
+    if (w) causes.push("Wrong labels went up (🎯 down)");
     else causes.push("No wrong labels");
     e.causes = causes;
     return e;

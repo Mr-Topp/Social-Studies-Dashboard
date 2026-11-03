@@ -589,7 +589,7 @@
     const causes = [];
     ["e1", "e2", "e3"].forEach(id => { const s = STEPS.find(x => x.id === id); const c = s.cards.find(x => x.id === st.picks[id]); if (c) causes.push(c.cause); });
     const misses = CHECKS.filter(c => st.wrong[c.id]).length;
-    causes.push(misses ? `Case files: ${misses} wrong guess${misses === 1 ? "" : "es"} (−${misses} 📣)` : "Case files: all cracked on the first try");
+    causes.push(misses ? "Case files: shaky guesses cost momentum" : "Case files: all cracked on the first try");
     const fc = STEPS.find(x => x.id === "e4").cards.find(x => x.id === f); if (fc) causes.push(fc.cause);
     e.causes = causes;
     return e;
