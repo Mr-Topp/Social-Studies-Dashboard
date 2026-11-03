@@ -17,7 +17,7 @@
   const TITLE = "World History · Unit 2 · Day 4 · Break the Grip: How Do Colonies Get Free?";
   const STANDARD = "SS.9-12.WH.36, SS.9-12.WH.34";
   const OLD_API = "https://fynn-class-assignment-submissions-20261024.neotboy.chatgpt.site/api/submit";
-  const LOCK = 5, TOTAL = 9, LEAVE_AT = 4;
+  const LOCK = 5, TOTAL = 9, LEAVE_AT = 4, STRONG = 3;
 
   const $ = id => document.getElementById(id);
   const esc = s => String(s == null ? "" : s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
@@ -27,7 +27,7 @@
 
   // ---------------- State ----------------
   const fresh = () => ({ v: 1, name: "", step: 0, sub: 0, grip: 10, people: 2, world: 1, cost: 0, armed: 0, mad: false,
-    picks: {}, checks: {}, drained: null, left: null, files: {}, writing: {}, turnedIn: false });
+    picks: {}, checks: {}, owed: null, drained: null, left: null, files: {}, writing: {}, turnedIn: false });
   let st;
   try { st = JSON.parse(localStorage.getItem(KEY)); } catch (e) {}
   if (!st || st.v !== 1) st = fresh();
@@ -49,6 +49,14 @@
     if (fx.armed) st.armed++;
     st.mad = !!fx.armed;
   }
+
+  // A peaceful move's cost that lands next turn (arrests, lost pay). Paid once, then shown on that step.
+  function payOwed() {
+    const o = st.owed;
+    if (o && !o.paid && st.step >= o.at) { apply(o.fx); st.mad = false; o.paid = true; save(); }
+  }
+  const owedHtml = () => st.owed && st.owed.paid && st.owed.at === st.step && !st.sub ?
+    `<div class="owed" id="owedBox"><span class="oh">Last move's cost</span><span class="chip red">${st.owed.tag}</span></div>` : "";
 
   // ---------------- HUD ----------------
   const YEARS = ["", "1930", "May 1930", "1939–42", "1945", "Aug. 1947", "1950s", "1945–63", "The end", "Aug. 1947"];
@@ -134,7 +142,9 @@
     if (picked == null && introHtml) box.insertAdjacentHTML("beforeend", introHtml);
     cards(box, list, picked, k => {
       const c = list.find(x => x.k === k);
-      st.picks[key] = k; apply(c.eff); save(); render();
+      st.picks[key] = k; apply(c.eff);
+      if (c.later) st.owed = { k, at: st.step + 1, fx: c.later, tag: c.ltag, paid: false };
+      save(); render();
       scrollToEl($("res_" + key));
     }, key);
     if (picked == null) return false;
@@ -256,12 +266,14 @@
 
   // ---------------- Step 1 · 1930: the salt law (decision 1) ----------------
   const SALT = [
-    { k: "salt", ic: "🧂", t: "Salt March", d: "Break the salt law. Peacefully.", fx: [["⛓️ −2", "good"], ["✊ +3", "good"], ["🚔 Mass arrests", "bad"]],
-      eff: { grip: -2, people: 3, world: 1 }, stamp: "LAW BROKEN", brit: "Arrest them all!",
-      res: "Thousands make salt. Britain jails about 60,000 people.", src: "Real: Gandhi's Salt March, March–April 1930, about 240 miles to Dandi. Source: Britannica; class slides." },
-    { k: "cloth", ic: "🧵", t: "Boycott British cloth", d: "Stop buying it. Spin your own.", fx: [["⛓️ −1", "good"], ["✊ +2", "good"], ["💸 Costs you money", "bad"]],
-      eff: { grip: -1, people: 2 }, stamp: "BOYCOTT", brit: "Our mills are losing money!",
-      res: "British mills lose buyers. Indian shops lose money too.", src: "Real: boycotts of British cloth were part of Gandhi's campaigns." },
+    { k: "salt", ic: "🧂", t: "Salt March", d: "Break the salt law. Peacefully.", fx: [["⛓️ −1", "good"], ["✊ +3", "good"], ["🌍 +1", "good"], ["🚔 Arrests: ✊ −2 next turn", "bad"]],
+      eff: { grip: -1, people: 3, world: 1 }, later: { people: -2 }, ltag: "🚔 Gandhi + 60,000 jailed: ✊ −2",
+      stamp: "LAW BROKEN", brit: "Arrest them all!",
+      res: "Thousands make salt. Britain jails about 60,000 people.", src: "Real: Gandhi's Salt March, March–April 1930, about 240 miles to Dandi. Gandhi was arrested May 5; some 60,000 were in jail by year's end. Source: Britannica; class slides." },
+    { k: "cloth", ic: "🧵", t: "Boycott British cloth", d: "Stop buying it. Spin your own.", fx: [["⛓️ −1", "good"], ["✊ +2", "good"], ["💸 Lost pay: ✊ −1 next turn", "bad"]],
+      eff: { grip: -1, people: 2 }, later: { people: -1 }, ltag: "💸 Shops lose money: ✊ −1",
+      stamp: "BOYCOTT", brit: "Our mills are losing money!",
+      res: "British mills lose buyers. Indian shops lose money too.", src: "Real: the 1930 boycott cut British cloth imports sharply. Indian cloth sellers reported “considerable loss” (Nehru, Oct. 1930)." },
     { k: "raid", ic: "🔥", t: "Raid a police post", d: "Fight back with force.", fx: [["⛓️ +1", "bad"], ["🌍 −1", "bad"], ["💔 +2", "bad"]],
       eff: { grip: 1, world: -1, cost: 2, armed: 1 }, bad: true, stamp: "CRACKDOWN", brit: "Send in the troops!",
       res: "Troops crush the raid. People get hurt on both sides.", src: "Real: in 1922 Gandhi called off a whole campaign after a crowd killed 22 police at Chauri Chaura." },
@@ -296,7 +308,7 @@
   function s2() {
     const box = card();
     if (!st.sub) {
-      box.innerHTML = banner("May 1930", "Dharasana salt works", "🏭🧂");
+      box.innerHTML = banner("May 1930", "Dharasana salt works", "🏭🧂") + owedHtml();
       round(box, "line", LINE,
         `<div class="stage" aria-hidden="true"><div><div class="side">🧍🏽🧍🏽‍♀️🧍🏽🧍🏽‍♂️🧍🏽‍♀️</div><small>YOUR LINE</small></div><div class="gate">🚧</div><div><div class="side">👮👮👮👮</div><small>POLICE WITH CLUBS</small></div></div>` +
         say("Britain", "👑", "brit", "Stop them at the gate.") + `<p class="lead">Your line walks forward.</p>`,
@@ -314,12 +326,12 @@
 
   // ---------------- Step 3 · 1939–42: World War II (decision 3) ----------------
   function warList() {
-    const strong = st.picks.war != null ? !!st.warStrong : st.people >= 5;
+    const strong = st.picks.war != null ? !!st.warStrong : st.people >= STRONG;
     return [
-      { k: "quit", ic: "🚪", t: "Quit India!", d: "Protest now, mid-war.", fx: [[strong ? "⛓️ −2 (✊ 5+)" : "⛓️ −1 · −2 if ✊ 5+", "good"], ["✊ +1", "good"], ["🚔 Leaders jailed", "bad"]],
-        eff: { grip: strong ? -2 : -1, people: 1 }, stamp: "JAILED", brit: "Lock them up!",
-        res: strong ? "Your huge movement shakes Britain. Gandhi and Nehru go to jail." : "Too few join you. Gandhi and Nehru go to jail.",
-        src: "Real: the Quit India movement, August 1942. Gandhi, Nehru, and thousands more were jailed." },
+      { k: "quit", ic: "🚪", t: "Quit India!", d: "Protest now, mid-war.", fx: [strong ? ["⛓️ −2 (✊ 3+)", "good"] : ["⛓️ 0 (needs ✊ 3+)", "bad"], ["🚔 Leaders jailed", "bad"], ["💔 +1", "bad"]],
+        eff: { grip: strong ? -2 : 0, cost: 1 }, stamp: strong ? "JAILED" : "CRUSHED", bad: !strong, brit: "Lock them up!",
+        res: strong ? "Your big movement shakes Britain. Gandhi and Nehru go to jail." : "Too few join you. Britain crushes it in weeks.",
+        src: "Real: Quit India, August 1942. Over 100,000 arrested; most leaders jailed until 1945. Britain counted about 1,000 killed." },
       { k: "serve", ic: "🪖", t: "Fight, then demand", d: "Serve now. Freedom later.", fx: [["⛓️ −1", "good"], ["🌍 +1", "good"], ["💔 +1", "bad"]],
         eff: { grip: -1, world: 1, cost: 1 }, stamp: "ENLISTED", brit: "Splendid. We need soldiers.",
         res: "Indians fight in Africa, Italy, and Burma. They expect freedom in return.",
@@ -333,7 +345,7 @@
   function s3() {
     const box = card();
     box.innerHTML = banner("1939–1942", "World War II", "✈️💥", "gray");
-    if (st.picks.war == null) st.warStrong = st.people >= 5;
+    if (st.picks.war == null) st.warStrong = st.people >= STRONG;
     round(box, "war", warList(),
       say("Britain", "👑", "brit", "India is at war. We decided for you.") + `<p class="lead">Nobody asked Indian leaders.</p>` +
       src("Real: Britain's Viceroy (its top ruler in India) declared India at war in September 1939."),
@@ -513,7 +525,7 @@
   // ---------------- Step 8 · Ending ----------------
   const ENDINGS = {
     fire: { icon: "🔥", t: "Freedom by Fire", line: "Force brought crackdowns and a heavy human cost. That's closer to Algeria's and Kenya's paths than India's." },
-    delayed: { icon: "⏳", t: "Freedom Delayed", line: "Britain was broke, but your movement didn't push hard. In your game, Britain drags it out for years." },
+    delayed: { icon: "⏳", t: "Freedom Delayed", line: "Britain was broke, but the world wasn't watching. In your game, Britain drags it out for years." },
     pulled: { icon: "🔗", t: "Free, but Pulled In", line: "You broke the grip peacefully. Then you picked a Cold War side, and its rival armed your neighbor." },
     midnight: { icon: "🕊️", t: "Midnight Freedom", line: "Millions of marchers and a broke Britain ended the grip. Then you joined neither side, just like India." }
   };
@@ -521,9 +533,9 @@
   function causedBy() {
     const p = st.picks;
     return [
-      { salt: "Salt March: mass arrests", cloth: "Boycotted British cloth", raid: "Raided a police post", letter: "Only wrote a letter" }[p.salt],
+      { salt: "Salt March: mass arrests", cloth: "Boycott: shops lost money", raid: "Raided a police post", letter: "Only wrote a letter" }[p.salt],
       { hold: "Didn't hit back at Dharasana", fight: "Hit back at Dharasana", back: "Turned back at Dharasana" }[p.line],
-      { quit: "Joined Quit India, 1942", serve: "Fought for Britain in WWII", wreck: "Wrecked railways in wartime" }[p.war],
+      { quit: st.warStrong === false ? "Quit India: crushed, leaders jailed" : "Quit India: leaders jailed", serve: "Fought for Britain in WWII", wreck: "Wrecked railways in wartime" }[p.war],
       "WWII left Britain broke" + (st.drained && st.drained.bonus ? "; world watching" : ""),
       { us: "Joined the U.S. side", su: "Joined the Soviet side", none: "Joined neither Cold War side" }[p.bloc]
     ];
@@ -618,7 +630,7 @@
   function render() {
     if (!first && $("welcome")) $("welcome").hidden = true;
     first = false; locked = false;
-    hud();
+    payOwed(); hud();
     (STEPS[st.step] || title)();
   }
   $("restartBtn").onclick = () => {
