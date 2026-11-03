@@ -1,166 +1,27 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Who Ended the Cold War? | U.S. History Unit 5 Day 3</title>
-<meta name="description" content="Sort evidence into three case files, Reagan's pressure, Gorbachev's reforms, and people power, and decide who deserves the most credit for ending the Cold War.">
-<style>
-:root{--ink:#22252b;--muted:#5a5e68;--paper:#f3f3f1;--card:#fff;--line:#d6d6d0;--main:#7a2e2e;--accent:#4a5a6e;--green:#2a6b45;--bad:#a2392f;--soft:#f6eeee}
-*{box-sizing:border-box}
-body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.5 system-ui,Segoe UI,Arial,sans-serif}
-header{background:#fff;border-bottom:5px solid var(--main);padding:16px max(16px,calc((100vw - 900px)/2)) 12px}
-.k{font-size:.78rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:var(--main);margin:0}
-h1{margin:2px 0 4px;font-size:clamp(1.7rem,3.4vw,2.3rem)}
-.std{margin:2px 0;font-size:.92rem;color:var(--muted)}.std b{color:var(--ink)}
-.hud{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line);padding:8px max(16px,calc((100vw - 900px)/2));display:flex;gap:12px;flex-wrap:wrap;align-items:center;font-weight:800;font-size:.92rem;box-shadow:0 2px 8px #1f263312}
-.hud .bar{flex:1;min-width:120px;height:10px;background:#e6e5de;border-radius:9px;overflow:hidden}.hud .bar span{display:block;height:100%;width:0;background:var(--main);transition:width .4s}
-.pill{background:#f0efe8;border-radius:20px;padding:3px 10px;white-space:nowrap}
-.meter{display:flex;align-items:center;gap:6px}.meter .track{width:110px;height:10px;border-radius:9px;background:#e6e5de;overflow:hidden}.meter .track span{display:block;height:100%;background:var(--accent);transition:width .5s}
-main{max-width:900px;margin:auto;padding:14px 16px 60px}
-.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;box-shadow:0 3px 12px #1f26330d}
-.kicker{font-size:.78rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin:0}
-h2{margin:2px 0 10px;font-size:1.45rem}
-.teach{background:var(--soft);border-left:5px solid var(--main);border-radius:9px;padding:10px 14px;margin:0 0 12px}.teach p{margin:4px 0}.teach b{color:var(--main)}
-.block{margin:14px 0;padding:14px;border-radius:12px;border:2px solid var(--line);background:#fff}
-.block.current{border-color:var(--ink);box-shadow:0 0 0 4px #7a2e2e30}
-.block h3{margin:0 0 10px;font-size:1.06rem;line-height:1.35;font-weight:700}
-.event{background:#fbf9f4;border-style:dashed;border-color:#cdbf9a}.event.current{border-style:solid}
-.event-body p{margin:4px 0}
-.src-card{background:#faf8f2;border:1px solid #ddd5c2;border-left:5px solid var(--accent);border-radius:10px;padding:10px 12px;margin:0 0 10px;font-weight:400}
-.src-card .who{font-size:.76rem;font-weight:900;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);margin-bottom:3px}
-.src-card p{margin:3px 0}.src-card .cite{font-size:.8rem;color:var(--muted)}
-.picked{margin:10px 0 4px;color:var(--muted)}.result{background:#f0efe8;border-radius:9px;padding:9px 12px}.result p{margin:4px 0}
-.tag{display:inline-block;font-weight:900;font-size:.8rem;border-radius:12px;padding:2px 9px;margin-right:6px}.tag.up{background:#dcefe2;color:var(--green)}.tag.down{background:#f6dcd8;color:var(--bad)}.tag.flat{background:#ebe9e0;color:var(--ink)}
-.qlabel{font-size:.75rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:var(--main);margin:0 0 4px}
-.choices{display:grid;gap:8px}
-@media(min-width:700px){.q .choices{grid-template-columns:1fr 1fr}}
-button{font:inherit;cursor:pointer;border-radius:10px;min-height:46px}
-.choice{text-align:left;background:#fff;color:var(--ink);border:2px solid #cfcdbf;padding:10px 12px;font-weight:650;line-height:1.3}
-.choice:hover:not(:disabled){border-color:var(--ink);background:#fcfcfa}.choice:disabled{opacity:.5;cursor:not-allowed}
-.go{margin-top:12px;background:var(--main);color:#fff;border:0;padding:11px 18px;font-weight:900}
-button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid #2f7dbd;outline-offset:2px}
-.answered{font-weight:800;color:var(--green);margin:4px 0}.why{margin:2px 0;color:var(--muted)}
-.msg{min-height:1.3em;font-weight:750;margin:8px 0 0}.msg.bad{color:var(--bad)}.msg.good{color:var(--green)}
-label{display:block;font-weight:850;margin:14px 0 4px}.stem{margin:0 0 4px;color:var(--muted);font-size:.92rem}
-input,textarea{width:100%;font:inherit;border:2px solid #cfcdbf;border-radius:9px;padding:10px;background:#fff;color:var(--ink)}
-.steps{display:grid;gap:6px;margin:10px 0;padding:0;list-style:none}.steps li{background:#f0efe8;border-radius:9px;padding:8px 12px;font-weight:700}
-.chain{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin:10px 0}.chain div{background:var(--soft);border-radius:9px;padding:7px 8px;font-size:.85rem;text-align:center}.chain b{display:block;color:var(--main)}
-.bars{margin:6px 0}.bars .row{display:grid;grid-template-columns:70px 1fr 54px;gap:8px;align-items:center;margin:4px 0;font-size:.92rem}.bars .fill{height:18px;background:var(--main);border-radius:4px}
-@media(max-width:640px){.chain{grid-template-columns:1fr 1fr}}
-.files{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:10px 0}.files div{border-radius:10px;padding:8px 10px;font-size:.92rem}.files b{display:block}
-.fileA{background:#e8eef7!important;color:#24406b}.fileB{background:#f6e8e8!important;color:#7a2e2e}.fileC{background:#e7f2ea!important;color:#2a6b45}
-@media(max-width:640px){.files{grid-template-columns:1fr}}
-.welcome{background:#e6f1ea;color:var(--green);font-weight:800;border-radius:9px;padding:8px 12px;margin:0 0 10px}
-.foot{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-top:14px;color:var(--muted);font-size:.85rem}
-.foot button{background:#ebe9e0;border:0;padding:8px 12px;font-weight:800;color:var(--ink)}
-.src{font-size:.8rem;color:var(--muted)}
-@media print{.hud,.foot,.go{display:none}}
-</style>
+<meta name="description" content="You're the historian. Sort the evidence into three case files (Reagan's pressure, Gorbachev's reforms, people power), out-argue the Skeptic, and give your verdict on who ended the Cold War.">
+<link rel="stylesheet" href="style.css?v=20261103ucw">
 <script src="../../shared/assignments.js?v=20261103c"></script>
 <script src="../../shared/turnin.js?v=20261103c"></script>
-<script src="../../shared/unit-game.js?v=20261103c"></script>
-</head><body>
-<header>
-  <p class="k">U.S. History · Unit 5: Rise of Conservatism · Day 3</p>
-  <h1>Who Ended the Cold War?</h1>
-  <p class="std"><b>Standards:</b> SS.9-12.US.48 · SS.9-12.US.49 · SS.9-12.US.50</p>
-  <p class="std"><b>Goal:</b> Compare three explanations for how the Cold War ended, and decide which one deserves the most credit. · About 25 minutes.</p>
-</header>
-<div class="hud" aria-label="Progress and evidence in each file">
-  <span id="progressText">0 checks done</span>
-  <div class="bar" aria-hidden="true"><span id="progressFill"></span></div>
-  <span class="pill fileA">Reagan: <b id="nA">0</b></span>
-  <span class="pill fileB">Gorbachev: <b id="nB">0</b></span>
-  <span class="pill fileC">People: <b id="nC">0</b></span>
+</head><body class="on-title">
+<div class="hud" id="hud" hidden aria-label="Your case">
+  <div class="hud-in">
+    <div class="you"><span class="yface" aria-hidden="true">🧑‍🏫</span><span class="yt"><b>Historian</b><small id="youName"></small></span></div>
+    <div class="claims" id="chaps" aria-label="Chapters"></div>
+    <div class="meters">
+      <div class="files" id="filePills" aria-label="Cards in each file"></div>
+      <div class="m" id="mCase" title="How strong your case is (higher is better)"><span class="mi" aria-hidden="true">⚖️</span><span class="ml">Case</span><span class="bar"><span id="caseFill"></span></span><span class="mn" id="caseNum">0%</span></div>
+    </div>
+    <div class="rival" id="rivalBox" title="The Skeptic, a rival historian"><span class="rface" aria-hidden="true">🧐</span><span class="rmood" id="rMood" aria-hidden="true">😏</span><span class="rt"><b>Skeptic</b><small>doubts you</small></span></div>
+  </div>
+  <div class="goalrow"><span class="goalchip">🎯 Airtight case: ⚖️ 70%+</span><span class="stepn" id="stepN"></span></div>
 </div>
-<main>
-  <p class="welcome" id="welcome" hidden></p>
-  <div id="app"></div>
+<main id="wrap">
+  <div class="welcome" id="welcome" role="status" hidden></div>
+  <section id="app" aria-live="polite"></section>
   <div class="foot"><span>Progress saves on this device. Your teacher sees your work after you turn it in.</span><button type="button" id="restartBtn">Start over</button></div>
 </main>
-<script>
-const T = (cls, txt) => `<span class="tag ${cls}">${txt}</span>`;
-const SRC = (who, body, cite) => `<div class="src-card"><div class="who">${who}</div>${body}${cite ? `<p class="cite">${cite}</p>` : ""}</div>`;
-// Which file each check's evidence card goes into once it's answered
-const QFILE = { c1: "A", c2: "A", c3: "A", g1: "B", g2: "B", g3: "A", g4: "B", p1: "C", p2: "C", p3: "C" };
-const counts = st => {
-  const n = { A: 0, B: 0, C: 0 };
-  Object.keys(QFILE).forEach(id => { if (st.done[id]) n[QFILE[id]]++; });
-  ["A", "B", "C"].forEach(k => { n[k] += st.fx[k] || 0; });
-  return n;
-};
-const NAMES = { A: "Reagan's pressure", B: "Gorbachev's reforms", C: "People power" };
-UnitGame.start({
-  key: "ush-u5-d4-cold-war-ends-v1",
-  assignmentId: "ush-u5-d4-cold-war-ends",
-  title: "U.S. History · Unit 5 · Day 3 · Who Ended the Cold War?",
-  standard: "SS.9-12.US.48, SS.9-12.US.49",
-  oldApi: "https://fynn-class-assignment-submissions-20261024.neotboy.chatgpt.site/api/submit",
-  startFx: { A: 0, B: 0, C: 0 },
-  hud: st => {
-    const n = counts(st);
-    document.getElementById("nA").textContent = n.A;
-    document.getElementById("nB").textContent = n.B;
-    document.getElementById("nC").textContent = n.C;
-  },
-  startLabel: "Open the case files",
-  introHtml: `<p class="kicker">Historian's desk · 1981–1991</p><h2>One big question. Three suspects.</h2>
-    <p>For over 40 years, the U.S. and the Soviet Union were locked in the <b>Cold War</b>. Then, in just a few years, it ended without a war between them. <b>Who gets the credit?</b> Historians still argue about it.</p>
-    <div class="files"><div class="fileA"><b>File A</b>Reagan's pressure</div><div class="fileB"><b>File B</b>Gorbachev's reforms</div><div class="fileC"><b>File C</b>People power in Eastern Europe</div></div>
-    <ul class="steps"><li>1. Read each evidence card and answer the check. Each card goes into a file (watch the counts at the top).</li><li>2. Three cards are tricky. You decide which file they go in.</li><li>3. Make your case in 2 short answers and turn in.</li></ul>`,
-  scenes: [
-    { kicker: "Part 1 of 3 · File A · 1981–1987", title: "Pressure From Washington",
-      teach: `<p>Quick review: after World War II, the <b>Soviet Union</b> (USSR, led from Moscow) controlled the communist governments of <b>Eastern Europe</b>, like Poland and East Germany. In 1961, East Germany built the <b>Berlin Wall</b> to stop people from escaping to the West.</p>
-        <p>President <b>Ronald Reagan</b> (1981–1989) took a tough stance. He believed the U.S. could pressure the USSR until it gave in.</p>`,
-      blocks: [
-        { type: "q", id: "c1", std: "US.48", short: "Arms build-up strained USSR", prompt: SRC("Evidence card · Military build-up", `<p>U.S. military spending about doubled from 1980 to 1987. In 1983, Reagan announced the <b>Strategic Defense Initiative (SDI)</b>, a plan for a system to shoot down nuclear missiles from space. People nicknamed it "Star Wars." The Soviet economy was much smaller than the U.S. economy.</p>`) + "Why could this build-up put pressure on the Soviet Union?", options: ["The USSR couldn't afford to keep up", "The USSR wanted to join with the U.S.", "SDI was already shooting down missiles", "The U.S. had stopped building weapons"], hint: "Look at the last sentence of the card.", why: "Trying to match U.S. spending strained the smaller Soviet economy. (SDI was never fully built.)" },
-        { type: "q", id: "c2", std: "US.49", short: "\"Evil empire\" = tough talk", prompt: SRC("Evidence card · Reagan speech, March 1983", `<p>Reagan called the Soviet Union "an evil empire."</p>`, "Public-domain presidential speech") + "What does this phrase show about Reagan's approach?", options: ["He openly called the USSR immoral", "He wanted friendly trade with the USSR", "He thought the Cold War was already over", "He was praising the Soviet government"], hint: "What does the word \"evil\" tell you?", why: "Earlier presidents had tried to calm tensions. Reagan used blunt moral language instead." },
-        { type: "q", id: "c3", std: "US.48", short: "Afghanistan war cost USSR", prompt: SRC("Evidence card · Afghanistan, 1979–1989", `<p>Soviet troops invaded Afghanistan in 1979. The Reagan administration sent weapons and money to Afghan rebels fighting them. The war dragged on for ten years. About 15,000 Soviet soldiers died, and the USSR pulled out in 1989.</p>`) + "How did this war hurt the Soviet Union?", options: ["It was a long, costly war it could not win", "It made the USSR much richer and stronger", "It ended quickly with a Soviet victory", "It turned the U.S. and the USSR into close allies"], hint: "How long did it last, and how did it end?", why: "Ten years of war cost the USSR lives, money, and pride." },
-        { type: "event", id: "e1", short: "Soviet economy card → file", html: SRC("Tricky card · The Soviet economy, mid-1980s", `<p>Soviet stores often had empty shelves and long lines. The price of oil, the USSR's biggest export, crashed in 1986. A huge share of the economy went to the military.</p>`) + "<p><b>Which file does this card support best?</b> There's an argument for each.</p>",
-          choices: [
-            { label: "File A: Reagan's arms race made it worse", fx: { A: 1 }, result: `<p>${T("flat","Added to File A")}Fair argument. Keeping up with U.S. military spending pulled money away from food and goods.</p>` },
-            { label: "File B: It pushed Gorbachev to reform", fx: { B: 1 }, result: `<p>${T("flat","Added to File B")}Fair argument. Gorbachev said the system was failing and had to change. That's why he started reforms.</p>` },
-            { label: "File C: Empty shelves made people angry", fx: { C: 1 }, result: `<p>${T("flat","Added to File C")}Fair argument. Shortages helped turn ordinary people against communist governments.</p>` }
-          ] }
-      ] },
-    { kicker: "Part 2 of 3 · File B · 1985–1989", title: "A New Kind of Soviet Leader",
-      teach: `<p>In 1985, <b>Mikhail Gorbachev</b> became leader of the Soviet Union. He was younger than past leaders, and he knew the system was in trouble.</p>
-        <p>He tried two big reforms: <b>glasnost</b> ("openness") and <b>perestroika</b> ("restructuring").</p>`,
-      blocks: [
-        { type: "q", id: "g1", std: "US.48", short: "Glasnost meaning", prompt: SRC("Evidence card · Glasnost", `<p>Under glasnost, newspapers could report problems. People could criticize the government in public without being arrested. Some banned books were published.</p>`) + "What did glasnost allow?", options: ["More freedom to speak and criticize", "More control of the news by leaders", "More nuclear missiles in Europe", "More Soviet troops in Afghanistan"], hint: "\"Glasnost\" means openness. What became open?", why: "Glasnost let people speak more freely. Once people could criticize, it was hard to stop them." },
-        { type: "q", id: "g2", std: "US.48", short: "Perestroika meaning", prompt: SRC("Evidence card · Perestroika", `<p>Under perestroika, some people were allowed to open small private businesses, like cafés and repair shops. Factory managers got more say. Before this, the government ran almost everything.</p>`) + "What was perestroika trying to fix?", options: ["The failing Soviet economy", "The way the U.S. held its elections", "The Berlin Wall's design", "Soviet troops in Poland"], hint: "Businesses, factories, managers: what part of life is that?", why: "Perestroika tried to restructure the economy by adding some private business." },
-        { type: "event", id: "e2", short: "INF Treaty card → file", html: SRC("Tricky card · INF Treaty, December 1987", `<p>Reagan and Gorbachev signed the INF Treaty. For the first time, the two sides agreed to <b>destroy</b> a whole type of nuclear missile. Almost 2,700 missiles were eliminated.</p>`) + "<p><b>Both leaders signed it. Which file does it support best?</b></p>",
-          choices: [
-            { label: "File A: Reagan's pressure brought Gorbachev to the table", fx: { A: 1 }, result: `<p>${T("flat","Added to File A")}Fair argument. Reagan's supporters say building up first gave the U.S. a strong hand.</p>` },
-            { label: "File B: Gorbachev chose to compromise", fx: { B: 1 }, result: `<p>${T("flat","Added to File B")}Fair argument. Earlier Soviet leaders refused deals like this. Gorbachev accepted terms that favored the U.S.</p>` },
-            { label: "File C: Peace protests pushed both leaders", fx: { C: 1 }, result: `<p>${T("flat","Added to File C")}It's an argument. Huge anti-nuclear protests in Europe and the U.S. in the early 1980s did put pressure on leaders. But this card is mostly about the two leaders.</p>` }
-          ] },
-        { type: "q", id: "g3", std: "US.49", short: "\"Tear down this wall\"", prompt: SRC("Evidence card · Reagan in West Berlin, June 12, 1987", `<p>"Mr. Gorbachev, tear down this wall!"</p>`, "Public-domain presidential speech, given in front of the Berlin Wall") + "What was Reagan doing with this line?", options: ["Daring Gorbachev to open the wall", "Thanking Gorbachev for opening it", "Asking for a new, stronger wall", "Telling Americans to leave Berlin"], hint: "The wall was still standing in 1987. Who is he speaking to?", why: "Reagan dared Gorbachev to back up his talk of openness by opening the wall. It didn't fall for two more years." },
-        { type: "q", id: "g4", std: "US.48", short: "Gorbachev didn't send troops", prompt: SRC("Evidence card · 1989", `<p>In 1956 and 1968, Soviet tanks crushed protests in Hungary and Czechoslovakia. In 1989, protests spread across Eastern Europe again. This time, Gorbachev did <b>not</b> send the army.</p>`) + "Why does this card matter?", options: ["Protesters could win without being crushed", "It proved the Soviet army had no tanks", "It meant the U.S. army had to step in to protect protesters", "It meant protests in Europe stopped"], hint: "Compare what happened in 1956 and 1968 with 1989.", why: "Without Soviet tanks, Eastern Europeans could change their governments. That makes this strong evidence for File B." }
-      ] },
-    { kicker: "Part 3 of 3 · File C · 1989–1991", title: "People Power",
-      teach: `<p>Ordinary people in Eastern Europe had wanted freedom for decades. In Poland, a labor union called <b>Solidarity</b>, led by shipyard electrician <b>Lech Wałęsa</b>, had millions of members by 1981. The government banned it, but it didn't disappear.</p>`,
-      blocks: [
-        { type: "q", id: "p1", std: "US.48", short: "Poland's partly free election", prompt: SRC("Evidence card · Poland, June 1989", `<p>Poland held elections. The Communist Party <b>reserved</b> most seats in the main lawmaking body for itself. Solidarity could only run for the rest. It won almost every seat it was allowed to run for. Soon Poland had a non-communist prime minister.</p>`) + "Why do historians call this election \"partly free\"?", options: ["Many seats were saved for the Communist Party", "Only Solidarity members were allowed to vote", "The votes were never counted at all", "Voters could only choose communist candidates"], hint: "Reread the second sentence.", why: "Voters had real choices for only some seats. Even so, Solidarity's win showed how the people felt." },
-        { type: "q", id: "p2", std: "US.48", short: "Berlin Wall opening meaning", prompt: SRC("Evidence card · November 9, 1989", `<p>Hungary had already opened its border with Austria, and thousands of East Germans fled through it. Huge protests filled East German streets. On the night of November 9, an official mistakenly announced that people could cross. Crowds rushed the gates of the Berlin Wall. Guards let them through. People climbed on the Wall and chipped pieces off.</p>`) + "Why did the opening of the Berlin Wall matter so much?", options: ["It showed people could no longer be kept in", "It meant East Germany had won the Cold War", "It meant a new and taller wall was coming", "It was the day the Soviet Union first formed"], hint: "What was the Wall built to do in 1961?", why: "The Wall had trapped East Germans for 28 years. Its opening became the symbol of the Cold War ending. Germany reunified in 1990." },
-        { type: "event", id: "e3", short: "Fall of the Wall card → file", html: `<p><b>Tricky card · The Wall comes down.</b> Who deserves the most credit for that night in Berlin?</p>`,
-          choices: [
-            { label: "File A: Reagan demanded it in 1987", fx: { A: 1 }, result: `<p>${T("flat","Added to File A")}Fair argument. Reagan's words became famous. But he wasn't there in 1989, and the crowd opened it.</p>` },
-            { label: "File B: Gorbachev didn't stop it", fx: { B: 1 }, result: `<p>${T("flat","Added to File B")}Fair argument. Earlier Soviet leaders would likely have sent troops. Gorbachev didn't.</p>` },
-            { label: "File C: The crowds at the gates did it", fx: { C: 1 }, result: `<p>${T("flat","Added to File C")}Fair argument. Thousands of ordinary people showed up and pushed until the guards gave in.</p>` }
-          ] },
-        { type: "q", id: "p3", std: "US.48", short: "Velvet vs. Romania", prompt: SRC("Evidence card · Late 1989", `<p><b>Czechoslovakia:</b> Weeks of peaceful mass protests. The communist government stepped down. People called it the <b>Velvet Revolution</b>.</p><p><b>Romania:</b> The dictator Nicolae Ceaușescu ordered troops to fire on protesters. More than 1,000 people died before he was overthrown.</p>`) + "What is the biggest difference between these two revolutions?", options: ["One was peaceful and one was violent", "One was in Asia and one was in Europe", "One kept communism and one ended it", "One happened in 1945 and one in 1989"], hint: "Why do you think the first one is called \"velvet\"?", why: "Velvet is soft. Czechoslovakia changed peacefully. Romania's change came with bloodshed." },
-        { type: "q", id: "p4", std: "US.49", short: "December 1991 result", prompt: SRC("Evidence card · 1991", `<p>In August, hard-line communists tried to take power from Gorbachev. <b>Boris Yeltsin</b> stood on a tank in Moscow and led crowds against them. The takeover failed in three days. On <b>December 25, 1991</b>, Gorbachev resigned. The Soviet flag came down, and the USSR split into 15 countries, including Russia, Ukraine, and the Baltic states.</p>`) + "What did the end of the USSR mean for the United States?", options: ["The U.S. was the only superpower left", "The U.S. had to join the Soviet Union", "The U.S. lost all of its allies in Europe", "The Cold War got more dangerous for the U.S."], hint: "If one of the two superpowers is gone, what's left?", why: "With the USSR gone, the U.S. was the world's only superpower. That shaped the next 30 years." },
-        { type: "q", id: "p5", std: "US.49", short: "Historians: several causes", prompt: "You've seen evidence for all three files. Which statement would most historians agree with?", options: ["Several causes worked together to end it", "Only Reagan's speeches ended the Cold War", "Nothing anyone did made any difference", "The U.S. won a war against the USSR"], hint: "Look at the counts at the top. Did only one file get evidence?", why: "Historians argue about which cause mattered MOST, but most agree it took several working together." }
-      ] }
-  ],
-  finale: {
-    title: "Make Your Case",
-    report: st => { const n = counts(st); return `<p><b>Your evidence files:</b> ${NAMES.A}: ${n.A} · ${NAMES.B}: ${n.B} · ${NAMES.C}: ${n.C}</p><p>Now take a side. There's no single right answer, but you need evidence. Answer both in 1–2 full sentences.</p>`; },
-    prompts: [
-      { id: "credit", short: "Biggest cause + 2 facts", label: "1. Who deserves the MOST credit for ending the Cold War: Reagan, Gorbachev, or the people of Eastern Europe? Give two facts from today.", stem: "___ deserves the most credit because ___. Another fact is ___.", min: 100, newWords: 8, mustAll: [["reagan", "gorbachev", "people", "protest", "crowd", "solidarity", "poland", "eastern europe"], ["because", "since"]], mustMsg: "In answer 1, name who gets the most credit AND explain why with facts (use \"because\")." },
-      { id: "wall", short: "Berlin Wall as a symbol", label: "2. Why did the Berlin Wall become a symbol of freedom when it opened in 1989?", stem: "The Berlin Wall became a symbol of freedom because ___.", min: 60, newWords: 5, mustAll: [["wall"], ["because", "since"]], mustMsg: "In answer 2, talk about the Wall and explain WHY it became a symbol (use \"because\")." }
-    ]
-  },
-  extraAnswers: st => { const n = counts(st); return { "Evidence files": "Reagan " + n.A + " · Gorbachev " + n.B + " · People " + n.C }; }
-});
-</script>
+<script src="game.js?v=20261103ucw"></script>
 </body></html>

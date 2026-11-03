@@ -201,7 +201,7 @@ body[data-step="lightning"] .scene .kick{color:#fde68a;margin-top:14px}
 .lrhead .bolt{font-size:2.4rem;animation:zap 1.6s infinite}
 @keyframes zap{0%,100%{transform:scale(1) rotate(0)}10%{transform:scale(1.25) rotate(-12deg)}20%{transform:scale(1) rotate(6deg)}}
 .lrsub{margin:0;text-align:center;font-weight:800;color:#e0e7ff}
-.pips{display:flex;justify-content:center;gap:6px}
+.pips{display:flex;flex-wrap:wrap;justify-content:center;gap:6px}
 .pips span{display:grid;place-items:center;width:2.1em;height:2.1em;border-radius:50%;background:#312e81;border:3px solid #6366f1;filter:grayscale(1);opacity:.55;font-size:1.05rem;transition:all .4s}
 .pips span.now{opacity:1;filter:none;border-color:#fde047;animation:pulse 1.2s infinite}
 .pips span.lit{opacity:1;filter:none;background:#facc15;border-color:#fff;box-shadow:0 0 12px #fde047}

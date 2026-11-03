@@ -8,16 +8,17 @@
 //  World view on purpose: Eastern Europe + people power. U.S. History
 //  U5 D3 "Who Ended the Cold War?" covers Reagan/arms race/glasnost, so
 //  those checks were cut here.
-//  ⚡ Lightning Round after the ending: 7 one-tap Unit 2 review questions
-//  (the unit test is the next day), tagged only to this page's standards.
+//  ⚡ Lightning Round after the ending: 9 one-tap Unit 2 review questions
+//  (the unit test is the next day), tagged to WH.34–WH.38 so the turn-in shows
+//  first-try by standard for all five Unit 2 test standards.
 //  Same assignmentId as before. Turn-in via shared/turnin.js.
 // =====================================================================
 (function () {
   "use strict";
-  const KEY = "wh-u2-d11-1989-v2";
+  const KEY = "wh-u2-d11-1989-v2-lr2";
   const ASSIGNMENT_ID = "wh-u2-d11-1989";
   const TITLE = "World History · Unit 2 · Day 8 · 1989: How Does a Wall Come Down?";
-  const STANDARD = "SS.9-12.WH.34, SS.9-12.WH.37, SS.9-12.WH.35";
+  const STANDARD = "SS.9-12.WH.34, SS.9-12.WH.37, SS.9-12.WH.35, SS.9-12.WH.36, SS.9-12.WH.38";
   const OLD_API = "https://fynn-class-assignment-submissions-20261024.neotboy.chatgpt.site/api/submit";
   const LOCK = 5;          // seconds locked after a wrong answer
   const RIGHT = 8;         // each solved check: + cracks
@@ -181,7 +182,7 @@
   const CHECKS = STEPS.filter(s => s.type === "check" || s.type === "sort");
   const EVENTS = STEPS.filter(s => s.type === "event");
 
-  // ---------------- ⚡ Lightning round: Unit 2 test review (only this page's standards) ----------------
+  // ---------------- ⚡ Lightning round: Unit 2 test review (all five Unit 2 test standards) ----------------
   const LR = [
     { id: "lr1", std: "WH.34", short: "Containment = stop communism spreading",
       ev: "🇺🇸 1947: the U.S. promises to help countries resist communism.",
@@ -201,24 +202,36 @@
       options: ["Propaganda", "Free press", "Containment", "Non-alignment"],
       miss: ["A free press could report the famine. Mao's China couldn't.", "Containment was a U.S. plan.", "Non-alignment = joining neither side."],
       reveal: "<b>Propaganda</b>: one-sided messages a government uses to control what people think." },
-    { id: "lr4", std: "WH.35", short: "Communist vs. democratic control",
-      ev: "🗳️ Which was true in East Germany but NOT West Germany?",
-      ask: "Pick one.",
-      options: ["One party ruled, no real choice", "Courts could overrule leaders", "Parties competed in elections", "Papers could criticize leaders"],
-      miss: ["That was West Germany.", "That was West Germany.", "That was West Germany."],
-      reveal: "<b>One-party state</b>: elections, but no real choice." },
     { id: "lr5", std: "WH.37", short: "Proxy wars: win allies, avoid direct war",
       ev: "🌍 Korea, Vietnam, Angola: the U.S. and USSR each backed a side.",
       ask: "Why fight far from home?",
       options: ["Win allies, no direct war", "Grab new colonies", "The UN ordered it", "Keep fighting in Europe"],
       miss: ["They wanted allies, not colonies.", "No one ordered them. They chose to.", "The opposite: they kept fighting away from Europe."],
       reveal: "<b>Proxy war</b>: superpowers back local sides instead of fighting each other." },
+    { id: "lr8", std: "WH.36", short: "WWII left empires too weak to hold colonies",
+      ev: "🇬🇧 1945: Britain wins World War II but is broke. 🇮🇳 India is free by 1947.",
+      ask: "How did WWII speed up freedom?",
+      options: ["Empires were too weak to hold on", "Europe won more colonies in the war", "Colonies stopped wanting freedom", "The U.S. took over Europe's colonies"],
+      miss: ["Europe won the war but lost money and soldiers.", "The opposite: demands for freedom grew.", "The U.S. didn't take them. They became free countries."],
+      reveal: "<b>Decolonization</b>: WWII drained the empires, and colonies pushed harder for freedom." },
+    { id: "lr9", std: "WH.36", short: "Kenya and Algeria: settlers wouldn't leave",
+      ev: "🌍 Ghana won freedom with votes and strikes. Kenya and Algeria needed long, deadly wars.",
+      ask: "Why did they have to fight?",
+      options: ["European settlers refused to leave", "They had no leaders to organize", "The UN told them to fight", "Britain and France had no armies there"],
+      miss: ["Both had leaders and big freedom movements.", "The UN didn't order any wars.", "Britain and France sent big armies."],
+      reveal: "Settlers owned the best land and wouldn't give it up. Algeria: free 1962. Kenya: 1963." },
     { id: "lr6", std: "WH.37", short: "Geneva 1954: U.S. feared a communist win",
       ev: "🇻🇳 1954 Geneva deal: Vietnam split. A 1956 vote would reunite it.",
       ask: "Why didn't the U.S. back the vote?",
       options: ["Feared Ho's communists would win", "Vietnam didn't want a vote", "France banned elections", "The vote already happened"],
       miss: ["Many Vietnamese wanted the vote.", "France was leaving Vietnam.", "The 1956 vote never happened."],
       reveal: "Cold War fear beat the promised vote. Vietnam stayed split." },
+    { id: "lr10", std: "WH.38", short: "Cambodia 1975–79 = genocide",
+      ev: "🇰🇭 1975–1979: the Khmer Rouge force Cambodians into labor camps. About 1.5–2 million die.",
+      ask: "Historians call this…",
+      options: ["Genocide", "A proxy war", "Propaganda", "Partition"],
+      miss: ["Proxy war = superpowers back sides. Here, rulers killed their own people.", "Propaganda = one-sided messages. This was mass killing.", "Partition = splitting a country, like India in 1947."],
+      reveal: "<b>Genocide</b>: after the Holocaust the world said “never again.” It happened again in Cambodia." },
     { id: "lr7", std: "WH.37", short: "Apartheid: sanctions = outside pressure",
       ev: "🌍 1986: the U.S. and others cut trade with South Africa to push it to end apartheid.",
       ask: "Cutting trade to force change is called…",
@@ -381,7 +394,7 @@
         <label for="nameBox">Your name (first name + last initial)</label>
         <div class="namerow"><input id="nameBox" maxlength="60" autocomplete="off" placeholder="Like Jordan M." value="${esc(pre || "")}"><button type="button" class="go big" id="startBtn">Start in East Berlin 🧱</button></div>
         <p id="introMsg" class="msg bad" role="status"></p>
-        <p class="src">You and your story are made up. The events, numbers, and quotes are real. Standards: SS.9-12.WH.34, WH.35, WH.37.</p>
+        <p class="src">You and your story are made up. The events, numbers, and quotes are real. Standards: SS.9-12.WH.34, WH.35, WH.37. Test review adds WH.36, WH.38.</p>
       </div></section>`;
     $("startBtn").onclick = () => {
       const fixed = window.classShortName ? window.classShortName($("nameBox").value) : $("nameBox").value.trim();
