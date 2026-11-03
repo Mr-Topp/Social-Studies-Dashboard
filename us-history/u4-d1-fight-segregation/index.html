@@ -1,61 +1,139 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>The Case Against Segregation | U.S. History Unit 4 Day 1</title>
-<meta name="description" content="Follow the fight against school and bus segregation from Plessy v. Ferguson to Brown v. Board, Montgomery, and Little Rock.">
+<meta name="description" content="Build the case against segregation from Plessy v. Ferguson to Brown v. Board, Montgomery, and Little Rock. Make 3 big calls and push the pressure meter.">
 <style>
-:root{--ink:#1f2b33;--muted:#55626b;--paper:#f6f4f0;--card:#fff;--line:#dad9cf;--main:#3f2f5a;--accent:#8a5a14;--meter:#3f2f5a;--green:#2a6b45;--bad:#a2392f;--tint:#eeebf3}
+:root{--ink:#1d1712;--muted:#5a4f43;--desk:#2c2119;--desk2:#33271e;--manila:#f6e8c6;--manila2:#e8d29b;--paper:#fffdf7;--line:#d8c69a;--main:#7a1f1f;--accent:#b8312f;--gold:#e0a526;--green:#1f6b3f;--bad:#a3302a;--blue:#1d5a8a;--tint:#fff4c2}
 *{box-sizing:border-box}
-body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.5 system-ui,Segoe UI,Arial,sans-serif}
-header{background:#efebf3;border-bottom:5px solid var(--main);padding:16px max(16px,calc((100vw - 900px)/2)) 12px}
+body{margin:0;color:var(--ink);font:17px/1.45 system-ui,Segoe UI,Arial,sans-serif;background:var(--desk);background-image:repeating-linear-gradient(92deg,var(--desk) 0 22px,var(--desk2) 22px 26px,var(--desk) 26px 61px,#2f241b 61px 63px)}
+.tw{font-family:"Courier New",Courier,monospace}
+header{position:relative;background:var(--manila2);border-bottom:5px solid var(--ink);padding:8px max(16px,calc((100vw - 940px)/2)) 8px;overflow:hidden}
 .k{font-size:.78rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:var(--main);margin:0}
-h1{margin:2px 0 4px;font-size:clamp(1.7rem,3.4vw,2.3rem)}
-.std{margin:2px 0;font-size:.92rem;color:var(--muted)}.std b{color:var(--ink)}
-.hud{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line);padding:8px max(16px,calc((100vw - 900px)/2));display:flex;gap:12px;flex-wrap:wrap;align-items:center;font-weight:800;font-size:.92rem;box-shadow:0 2px 8px #1f2b3312}
-.hud .bar{flex:1;min-width:120px;height:10px;background:#e6e6de;border-radius:9px;overflow:hidden}.hud .bar span{display:block;height:100%;width:0;background:var(--main);transition:width .4s}
-.pill{background:#f0efe8;border-radius:20px;padding:3px 10px;white-space:nowrap}
-.meter{display:flex;align-items:center;gap:6px}.meter .track{width:110px;height:10px;border-radius:9px;background:#e6e6de;overflow:hidden}.meter .track span{display:block;height:100%;background:var(--meter);transition:width .5s}
-main{max-width:900px;margin:auto;padding:14px 16px 60px}
-.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;box-shadow:0 3px 12px #1f2b330d}
-.kicker{font-size:.78rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin:0}
-h2{margin:2px 0 10px;font-size:1.45rem}
-.teach{background:var(--tint);border-left:5px solid var(--main);border-radius:9px;padding:10px 14px;margin:0 0 12px}.teach p{margin:4px 0}.teach b{color:var(--main)}
-.block{margin:14px 0;padding:14px;border-radius:12px;border:2px solid var(--line);background:#fff}
-.block.current{border-color:var(--ink);box-shadow:0 0 0 4px #3f2f5a30}
-.block h3{margin:0 0 10px;font-size:1.06rem;line-height:1.35;font-weight:700}
-.event{background:#fbf9f4;border-style:dashed;border-color:#cdbf9a}.event.current{border-style:solid}
+h1{margin:0 0 2px;font-size:clamp(1.5rem,3vw,2.05rem);letter-spacing:-.01em;line-height:1.15}
+.std{margin:1px 0;font-size:.82rem;line-height:1.35;color:#3e3426;max-width:840px}.std b{color:var(--ink)}
+.hstamp{position:absolute;right:max(16px,calc((100vw - 940px)/2));top:12px;transform:rotate(-9deg);border:4px solid var(--accent);color:var(--accent);border-radius:8px;padding:4px 12px;font:900 1.15rem/1.1 "Courier New",monospace;letter-spacing:.08em;text-align:center;background:#fff6}
+.hud{position:sticky;top:0;z-index:5;background:var(--paper);border-bottom:3px solid var(--ink);padding:7px max(16px,calc((100vw - 940px)/2));display:flex;gap:10px;flex-wrap:wrap;align-items:center;font-weight:800;font-size:.9rem}
+.hud .bar{flex:1;min-width:80px;height:12px;background:#eadfc4;border-radius:9px;overflow:hidden;border:2px solid var(--ink)}.hud .bar span{display:block;height:100%;width:0;background:var(--gold);transition:width .4s}
+.press{position:relative;display:inline-flex;align-items:center;gap:7px;border:2px solid var(--main);background:#fbe9e7;color:var(--main);border-radius:20px;padding:3px 11px;white-space:nowrap}
+.pips{display:inline-flex;gap:2px}.pips i{width:10px;height:15px;border-radius:2px;border:1px solid var(--main);background:#fff}.pips i.on{background:var(--accent);border-color:var(--main)}
+.press.up{animation:pop .6s}.press.down{animation:shake .5s}
+@keyframes pop{30%{transform:scale(1.15);background:#dff2e5}}
+@keyframes shake{20%,60%{transform:translateX(-5px)}40%,80%{transform:translateX(5px)}}
+.delta{position:absolute;right:6px;top:calc(100% + 2px);z-index:6;background:#fff;border:2px solid currentColor;border-radius:10px;padding:0 7px;font-weight:900;font-size:1rem;pointer-events:none;animation:float 1.3s forwards}.delta.up{color:var(--green)}.delta.down{color:var(--bad)}
+@keyframes float{0%{opacity:0;transform:translateY(-6px)}15%{opacity:1}75%{opacity:1}100%{opacity:0;transform:translateY(8px)}}
+main{max-width:940px;margin:auto;padding:16px 16px 70px}
+.card{position:relative;background:var(--manila);border:3px solid var(--ink);border-radius:4px 16px 16px 16px;padding:18px;box-shadow:6px 7px 0 #120d09;margin-top:22px}
+.card::before{content:"CASE FILE";position:absolute;top:-25px;left:-3px;background:var(--manila);border:3px solid var(--ink);border-bottom:0;border-radius:10px 10px 0 0;padding:1px 16px 2px;font:900 .78rem/1.5 "Courier New",monospace;letter-spacing:.12em;color:var(--main)}
+.kicker{font:900 .8rem/1.3 "Courier New",monospace;letter-spacing:.1em;text-transform:uppercase;color:var(--main);margin:0}
+h2{margin:2px 0 10px;font-size:1.5rem}
+.teach{margin:6px 0 4px}
+.terms{display:flex;flex-wrap:wrap;gap:10px;margin:10px 0 2px}
+.term{flex:1 1 260px;background:var(--tint);border:2px solid var(--ink);border-radius:6px;padding:7px 12px;font-weight:600;box-shadow:3px 3px 0 var(--ink);transform:rotate(-.5deg)}
+.term:nth-child(2){transform:rotate(.6deg)}
+.term::before{content:"📌 NEW TERM";display:block;font:900 .7rem/1.4 "Courier New",monospace;letter-spacing:.08em;color:var(--main)}
+.term.plain::before{content:"📌 THE STORY"}
+.term b{color:var(--main)}
+/* scene art */
+.art{position:relative;border:3px solid var(--ink);border-radius:12px;overflow:hidden;min-height:118px;padding:10px 14px;display:flex;align-items:flex-end;gap:12px;flex-wrap:wrap;justify-content:center}
+.art .cap{position:absolute;left:8px;top:6px;background:#fffd;border:2px solid var(--ink);border-radius:6px;padding:0 8px;font:900 .74rem/1.5 "Courier New",monospace;letter-spacing:.06em}
+.art.train{background:linear-gradient(#a9cbe0 0 62%,#8a6a45 62% 70%,#6d6d6d 70% 74%,#8a6a45 74%)}
+.car{display:flex;align-items:center;gap:6px;background:#7b2d22;border:3px solid var(--ink);border-radius:10px 10px 4px 4px;padding:8px 10px 14px;position:relative;margin-bottom:8px}
+.car::after{content:"";position:absolute;left:12px;right:12px;bottom:-12px;height:14px;background:radial-gradient(circle at 12px 7px,#222 6px,transparent 7px) 0 0/40px 14px repeat-x}
+.win{width:36px;height:28px;background:#d8eef8;border:2px solid var(--ink);border-radius:4px}
+.sign{background:#fff;border:3px solid var(--ink);padding:3px 10px;font:900 .9rem/1.2 "Courier New",monospace;letter-spacing:.06em}
+.art.walk{background:linear-gradient(#bfe0c7 0 70%,#a58d62 70%)}
+.walkrow{display:flex;align-items:flex-end;gap:6px;flex-wrap:wrap;justify-content:center;font-weight:800;font-size:.8rem;text-align:center}
+.walkrow .st{display:flex;flex-direction:column;align-items:center;min-width:64px}.walkrow .st span{font-size:2.1rem;line-height:1.1}
+.walkrow .ar{font-size:1.3rem;padding-bottom:18px;color:var(--ink)}
+.walkrow .st.no{opacity:.95}.walkrow .st.no em{font-style:normal;color:#fff;background:var(--bad);border-radius:6px;padding:0 6px;margin-top:2px}
+.art.map{display:block;height:150px;background:#e4d7ac}.art.map .sea{position:absolute;background:#9cc7df;color:#2d5f7d;font:italic 700 .78rem/1 system-ui;display:flex;align-items:center;justify-content:center}.art.map .gulf{left:18%;right:30%;bottom:0;height:16%;border-radius:40% 40% 0 0}.art.map .atl{right:0;top:42%;bottom:0;width:13%;border-radius:40% 0 0 0}.art.map .pin{position:absolute;transform:translate(-14px,-50%);font-size:.88rem;padding:2px 10px}.art.map .pin.r{transform:translate(0,-50%)}
+.pin{display:flex;align-items:center;gap:6px;background:#fff;border:2px solid var(--ink);border-radius:20px;padding:4px 12px;font-weight:800;box-shadow:2px 2px 0 var(--ink)}
+.pin span{font-size:1.2rem}
+/* blocks */
+.block{margin:14px 0;padding:14px;border-radius:12px;border:2px solid var(--line);background:var(--paper)}
+.block.current{border:3px solid var(--ink);box-shadow:0 0 0 5px #e0a52699}
+.block.past{opacity:.92}
+.block h3{margin:0 0 10px;font-size:1.08rem;line-height:1.35;font-weight:700}
+.qlabel{font:900 .78rem/1.3 "Courier New",monospace;letter-spacing:.08em;text-transform:uppercase;color:#fff;background:var(--main);display:inline-block;border-radius:5px;padding:2px 8px;margin:0 0 6px}
+.ex{position:relative;background:#fff;border:2px solid var(--ink);border-radius:4px;padding:10px 14px 10px;margin:4px 0 12px;font-weight:500;box-shadow:4px 4px 0 #0002;transform:rotate(-.4deg)}
+.ex .lab{font:900 .78rem/1.4 "Courier New",monospace;letter-spacing:.06em;text-transform:uppercase;color:var(--main);margin:0 0 6px}
+.ex .lab::before{content:"📎 "}
+.ex p{margin:3px 0}
+.ex q{font-style:italic;font-weight:650}
+.gloss{font-size:.84rem;color:var(--muted);margin:4px 0 0}
+.src{font-size:.75rem;color:var(--muted);margin:4px 0 0}
+.bars{display:grid;gap:6px;margin:4px 0}
+.bars .row{display:grid;grid-template-columns:130px 1fr 64px;gap:8px;align-items:center;font-weight:800;font-size:.92rem}
+.bars .t{height:22px;background:#efe6d0;border:2px solid var(--ink);border-radius:5px;overflow:hidden}.bars .t span{display:block;height:100%;background:var(--blue)}.bars .row.lo .t span{background:var(--accent)}
+.bars b{font-size:1.1rem}
+.buses{display:flex;gap:18px;flex-wrap:wrap;margin:8px 0 0;font-weight:800}
+.buses span{background:#f4f0e4;border:2px solid var(--ink);border-radius:8px;padding:3px 10px}
+.bub{display:flex;gap:10px;align-items:flex-start}
+.bub .face{flex:none;width:48px;height:48px;border-radius:50%;border:3px solid var(--ink);background:#e9e2d0;display:flex;align-items:center;justify-content:center;font-size:1.6rem}
+.bub .say{background:#fff;border:2px solid var(--ink);border-radius:4px 14px 14px 14px;padding:7px 12px}
+.bub .say q{font-size:1.08rem}.bub .who{margin:0;font:900 .74rem/1.4 "Courier New",monospace;letter-spacing:.05em;color:var(--main);text-transform:uppercase}
+.closed{display:flex;gap:10px;flex-wrap:wrap;margin:6px 0}
+.closed div{flex:1 1 180px;border:2px solid var(--ink);border-radius:8px;padding:6px 10px;font-weight:700;background:#f8f4ea}
+.closed div span{font-size:1.5rem;margin-right:6px}
+.riders{display:flex;height:34px;border:2px solid var(--ink);border-radius:6px;overflow:hidden;font-weight:900;font-size:.9rem;margin:6px 0}
+.riders span{display:flex;align-items:center;justify-content:center;color:#fff}
+.timeline{display:flex;flex-wrap:wrap;align-items:center;gap:5px;margin:4px 0 10px;font-weight:800;font-size:.9rem}
+.timeline span{background:#fff;border:2px solid var(--ink);border-radius:8px;padding:3px 9px}.timeline i{font-style:normal;color:var(--muted);font-weight:900}
+.desk{display:inline-block;font:900 .82rem/1.4 "Courier New",monospace;letter-spacing:.06em;text-transform:uppercase;color:#fff;background:var(--ink);border-radius:5px;padding:2px 9px;margin:0 0 8px}
 .event-body p{margin:4px 0}
-.note p{margin:4px 0}
-.desk{font-size:.78rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin:0 0 4px}
-.doc{background:#fbfaf6;border:1px solid #d9d3c2;border-left:5px solid var(--accent);border-radius:9px;padding:9px 12px;margin:0 0 10px}
-.doc .who{font-size:.76rem;font-weight:900;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);margin:0 0 3px}
-.doc p{margin:3px 0}.doc q{font-style:italic}
-.facts{width:100%;border-collapse:collapse;margin:0 0 10px;font-size:.93rem;background:#fff}
-.facts th,.facts td{border:1px solid #d9d3c2;padding:6px 8px;text-align:left;vertical-align:top}.facts th{background:var(--tint)}
-.strip{display:grid;gap:3px;margin:0 0 10px;max-width:420px}
-.strip div{display:flex;justify-content:space-between;gap:8px;padding:5px 10px;border-radius:7px;font-size:.9rem;font-weight:700}
-.strip .n{background:#f3e3e0}.strip .s{background:#e2ebf4}.strip .line{background:var(--ink);color:#fff;justify-content:center;font-size:.8rem;letter-spacing:.06em}
-.picked{margin:10px 0 4px;color:var(--muted)}.result{background:#f0efe8;border-radius:9px;padding:9px 12px}.result p{margin:4px 0}
-.tag{display:inline-block;font-weight:900;font-size:.8rem;border-radius:12px;padding:2px 9px;margin-right:6px}.tag.up{background:#dcefe2;color:var(--green)}.tag.down{background:#f6dcd8;color:var(--bad)}.tag.flat{background:#ebe9e0;color:var(--ink)}
-.real{display:block;margin-top:6px;font-size:.93rem}.real b{color:var(--main)}
-.choices{display:grid;gap:8px}
-@media(min-width:700px){.q .choices{grid-template-columns:1fr 1fr}}
-button{font:inherit;cursor:pointer;border-radius:10px;min-height:46px}
-.choice{text-align:left;background:#fff;color:var(--ink);border:2px solid #cfcdbf;padding:10px 12px;font-weight:650;line-height:1.3}
-.choice:hover:not(:disabled){border-color:var(--ink);background:#fcfcfa}.choice:disabled{opacity:.5;cursor:not-allowed}
-.go{margin-top:12px;background:var(--main);color:#fff;border:0;padding:11px 18px;font-weight:900}
+.event-body .big{font-size:1.06rem;font-weight:600}
+.vote{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:4px 0}
+.vote span{width:46px;height:52px;display:flex;flex-direction:column;align-items:center;justify-content:center;background:#fff;border:2px solid var(--ink);border-radius:8px;font-size:1.4rem;line-height:1}
+.vote span small{font-size:.8rem;color:var(--green);font-weight:900}
+.vote b{font-size:2.2rem;margin-left:8px}
+.picked{margin:10px 0 4px;color:var(--muted)}
+.result{position:relative;background:#fff;border:2px dashed var(--ink);border-radius:10px;padding:10px 12px}.result p{margin:4px 0}
+.result .fresh .stamp{animation:slam .45s cubic-bezier(.2,1.6,.4,1)}
+@keyframes slam{0%{transform:scale(2.4) rotate(-7deg);opacity:0}100%{transform:scale(1) rotate(-7deg);opacity:1}}
+.stamp{display:inline-block;transform:rotate(-7deg);border:3px solid currentColor;border-radius:7px;padding:1px 9px;font:900 1.05rem/1.3 "Courier New",monospace;letter-spacing:.06em;margin:0 10px 4px 0;background:#fffc}
+.stamp.up{color:var(--green)}.stamp.flat{color:#5d5a52}.stamp.down{color:var(--bad)}
+.tag{display:inline-block;font-weight:900;font-size:.9rem;border-radius:12px;padding:2px 10px;margin-right:6px;vertical-align:middle}.tag.up{background:#dcefe2;color:var(--green)}.tag.down{background:#f6dcd8;color:var(--bad)}.tag.flat{background:#ebe7dc;color:var(--ink)}
+.real{display:block;margin-top:6px;font-size:.92rem;background:#f4efe1;border-radius:6px;padding:4px 8px}.real b{color:var(--main)}
+.choices{display:grid;gap:10px}
+@media(min-width:700px){.q .choices{grid-template-columns:1fr 1fr}.event .choices{grid-template-columns:repeat(3,1fr)}}
+button{font:inherit;cursor:pointer;border-radius:10px;min-height:48px}
+.choice{text-align:left;background:#fff;color:var(--ink);border:3px solid var(--ink);padding:10px 12px;font-weight:700;line-height:1.3;box-shadow:0 4px 0 var(--ink);transition:transform .1s,box-shadow .1s}
+.choice:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 6px 0 var(--ink);background:#fff9e3}
+.choice:active:not(:disabled){transform:translateY(3px);box-shadow:0 1px 0 var(--ink)}
+.choice:disabled{opacity:.45;cursor:not-allowed}
+.choice.dressed{display:flex;flex-direction:column;align-items:flex-start;gap:4px;padding:12px;background:var(--paper)}
+.choice .ic{font-size:2.1rem;line-height:1}.choice .tt{font-size:1.1rem;font-weight:900}.choice .dt{font-size:.88rem;font-weight:700;color:var(--muted)}
+.go{margin-top:12px;background:var(--accent);color:#fff;border:3px solid var(--ink);padding:10px 20px;font-weight:900;box-shadow:0 4px 0 var(--ink)}
+.go:active{transform:translateY(3px);box-shadow:0 1px 0 var(--ink)}
+.intro .go{font-size:1.2rem;padding:10px 30px;margin-top:2px}.intro label{margin-top:10px}.intro p{margin:6px 0}.intro h2{margin-bottom:4px}.intro .msg{margin:2px 0 0;min-height:1.1em}.intro{padding-top:12px}.intro .folder{padding:10px 12px 6px}
 button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid #2f7dbd;outline-offset:2px}
 .answered{font-weight:800;color:var(--green);margin:4px 0}.why{margin:2px 0;color:var(--muted)}
 .msg{min-height:1.3em;font-weight:750;margin:8px 0 0}.msg.bad{color:var(--bad)}.msg.good{color:var(--green)}
 label{display:block;font-weight:850;margin:14px 0 4px}.stem{margin:0 0 4px;color:var(--muted);font-size:.92rem}
-input,textarea{width:100%;font:inherit;border:2px solid #cfcdbf;border-radius:9px;padding:10px;background:#fff;color:var(--ink)}
-.steps{display:grid;gap:6px;margin:10px 0;padding:0;list-style:none}.steps li{background:#f0efe8;border-radius:9px;padding:8px 12px;font-weight:700}
-.role{background:var(--tint);border-radius:10px;padding:10px 12px;margin:8px 0}
-.welcome{background:#e6f1ea;color:var(--green);font-weight:800;border-radius:9px;padding:8px 12px;margin:0 0 10px}
-.foot{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-top:14px;color:var(--muted);font-size:.85rem}
-.foot button{background:#ebe9e0;border:0;padding:8px 12px;font-weight:800;color:var(--ink)}
-.src{font-size:.8rem;color:var(--muted)}
-@media(max-width:520px){.pill{white-space:normal}.meter .track{width:70px;flex:none}.facts{font-size:.85rem}}
-@media print{.hud,.foot,.go{display:none}}
+input,textarea{width:100%;font:inherit;border:3px solid var(--ink);border-radius:8px;padding:10px;background:#fff;color:var(--ink)}
+.split{display:grid;grid-template-columns:1.25fr 1fr;gap:16px;align-items:center}
+.folder{position:relative;background:var(--manila2);border:3px solid var(--ink);border-radius:4px 14px 14px 14px;padding:14px 12px 10px;text-align:center;box-shadow:5px 5px 0 #0005;transform:rotate(1.5deg)}
+.lede{font-size:1.12rem}.folder .ft{font:900 1.3rem/1.15 "Courier New",monospace;letter-spacing:.06em;margin:4px 0}
+.folder .yr{font:900 .95rem/1.2 "Courier New",monospace;color:var(--muted)}
+.folder .stamp{position:absolute;right:10px;top:-14px;color:var(--accent);background:#fff}
+.folder .ic{font-size:1.6rem;letter-spacing:.25em;margin:0}
+.rules{background:#fff;border:2px solid var(--ink);border-radius:10px;padding:6px 12px;margin:8px 0 0;box-shadow:3px 3px 0 var(--ink)}
+.rules ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:2px 22px}.rules li{margin:3px 0;font-weight:750;display:flex;gap:10px;align-items:center}.rules li span{font-size:1.3rem;width:1.6em;text-align:center}
+.ending{position:relative;background:#fff;border:3px solid var(--ink);border-radius:10px;padding:12px 14px;margin:6px 0 12px;box-shadow:4px 4px 0 var(--ink)}
+.ending .stamp{font-size:1.4rem;animation:slam .5s cubic-bezier(.2,1.6,.4,1)}
+.ending h3{margin:4px 0 4px;font-size:1.25rem}
+.ending p{margin:4px 0}
+.ending ul{margin:6px 0 0;padding-left:0;list-style:none}.ending li{font-size:.92rem;margin:2px 0;font-weight:650}
+.ending .cb{font:900 .74rem/1.4 "Courier New",monospace;letter-spacing:.06em;color:var(--main);margin:8px 0 0}
+.welcome{background:#e6f1ea;color:var(--green);font-weight:800;border:2px solid var(--ink);border-radius:10px;padding:8px 12px;margin:0 0 10px}
+.welcome button{background:#fff;border:2px solid var(--ink);border-radius:8px;min-height:36px;font-weight:800;color:var(--ink)}
+.foot{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-top:16px;color:#eadfc8;font-size:.85rem}
+.foot button{background:#fff;border:2px solid var(--ink);padding:8px 12px;font-weight:800;color:var(--ink)}
+@media(max-width:820px){.hstamp{display:none}}
+@media(max-width:700px){.split{grid-template-columns:1fr}.bars .row{grid-template-columns:96px 1fr 54px}.folder{transform:none}}
+@media(max-width:500px){.intro .folder{display:none}.hud{gap:5px 8px;font-size:.8rem;padding:6px 10px}.hud .bar{min-width:50px}.press{padding:2px 8px}.pips i{width:7px;height:13px}.choice.dressed{display:grid;grid-template-columns:auto 1fr;column-gap:12px;align-items:center}.choice .ic{grid-row:span 2}.art{min-height:100px;padding:30px 8px 8px}.walkrow .st{min-width:54px}.walkrow .st span{font-size:1.7rem}.vote span{width:34px;height:42px;font-size:1.1rem}}
+@media (prefers-reduced-motion:reduce){.result .fresh .stamp,.ending .stamp,.press.up,.press.down,.delta{animation:none}}
+@media print{.hud,.foot,.go,.hstamp{display:none}body{background:#fff}.card{box-shadow:none}}
 </style>
 <script src="../../shared/assignments.js?v=20261103c"></script>
 <script src="../../shared/turnin.js?v=20261103c"></script>
@@ -64,14 +142,14 @@ input,textarea{width:100%;font:inherit;border:2px solid #cfcdbf;border-radius:9p
 <header>
   <p class="k">U.S. History · Unit 4 · Day 1</p>
   <h1>The Case Against Segregation</h1>
-  <p class="std"><b>Civil Rights: How did Americans fight segregation?</b></p>
-  <p class="std">Standards: <b>SS.9-12.US.42</b> · <b>SS.9-12.US.43</b> · <b>SS.9-12.US.44</b></p>
-  <p class="std"><b>Goal:</b> Explain how Americans used the courts, boycotts, and the federal government to fight segregation, and how some people resisted. · About 25 minutes.</p>
+  <p class="std">Standards: <b>SS.9-12.US.42</b> · <b>SS.9-12.US.43</b> · <b>SS.9-12.US.44</b> · About 25 minutes</p>
+  <p class="std"><b>Goal:</b> Explain how Americans used courts, boycotts, and federal power to fight segregation, and how some resisted.</p>
+  <div class="hstamp" aria-hidden="true">CASE<br>OPEN</div>
 </header>
-<div class="hud" aria-label="Progress and Pressure on segregation">
+<div class="hud" aria-label="Progress and pressure on segregation">
   <span id="progressText">0 checks done</span>
   <div class="bar" aria-hidden="true"><span id="progressFill"></span></div>
-  <span class="pill meter">Pressure on segregation: <span class="track" aria-hidden="true"><span id="meterFill" style="width:30%"></span></span> <span id="meterNum">3/10</span></span>
+  <span class="press" id="pressPill">✊ Pressure <span class="pips" id="pips" aria-hidden="true"></span> <span id="meterNum">1/10</span></span>
 </div>
 <main>
   <p class="welcome" id="welcome" hidden></p>
@@ -79,118 +157,188 @@ input,textarea{width:100%;font:inherit;border:2px solid #cfcdbf;border-radius:9p
   <div class="foot"><span>Progress saves on this device. Your teacher sees your work after you turn it in.</span><button type="button" id="restartBtn">Start over</button></div>
 </main>
 <script>
-const T = (cls, txt) => `<span class="tag ${cls}">${txt}</span>`;
-const doc = (who, body) => `<div class="doc"><p class="who">${who}</p>${body}</div>`;
-const real = txt => `<span class="real"><b>What really happened:</b> ${txt}</span>`;
+// =====================================================================
+//  THE CASE AGAINST SEGREGATION — case-file game on the shared unit engine.
+//  One meter: ✊ Pressure on segregation (starts at 1, max 10).
+//  3 big calls move it (+3 / +1 / 0 / −1 / −2). Every wrong guess on a check costs 1.
+//  The ending (4 kinds) comes from where the meter lands, with a "Caused by" list.
+// =====================================================================
 const METER = "push";
-UnitGame.start(Object.assign({
-  key: "ush-u4-d1-fight-segregation-v1",
+const T = (cls, txt) => `<span class="tag ${cls}">${txt}</span>`;
+const real = txt => `<span class="real"><b>Real history:</b> ${txt}</span>`;
+const ex = (lab, body) => `<div class="ex"><p class="lab">${lab}</p>${body}</div>`;
+const bub = (face, who, quote) => `<div class="bub"><div class="face" aria-hidden="true">${face}</div><div class="say"><p class="who">${who}</p><p style="margin:2px 0"><q>${quote}</q></p></div></div>`;
+const terms = (...t) => `<div class="terms">${t.map(x => `<div class="term${x[0] === "!" ? " plain" : ""}">${x.replace(/^!/, "")}</div>`).join("")}</div>`;
+
+// Decision cards: label is "Title: detail". The result slams a stamp only right after the click.
+let fresh = null;
+const mark = id => { fresh = id; setTimeout(() => { if (fresh === id) fresh = null; }, 1500); };
+const pick = (id, label, push, stampCls, stampTxt, line, realTxt, cause) => ({
+  label, cause, push,
+  get fx() { mark(id); return { push }; },
+  get result() {
+    const tag = push > 0 ? T("up", "+" + push + " ✊") : push < 0 ? T("down", "−" + Math.abs(push) + " ✊") : T("flat", "+0 ✊");
+    return `<div class="${fresh === id ? "fresh" : ""}"><span class="stamp ${stampCls}">${stampTxt}</span>${tag}<p>${line}</p>${real(realTxt)}</div>`;
+  }
+});
+const ICONS = { "Attack segregation": "⚖️", "Fix Black schools": "🏫", "Ask Congress": "🏛️",
+  "Keep boycotting": "🚶", "Ride and sue": "📄", "Write the mayor": "✉️",
+  "Send troops": "🪖", "Make a deal": "🤝", "Stay out": "🚫" };
+function dressChoices() {
+  document.querySelectorAll(".block.event button.choice:not(.dressed)").forEach(b => {
+    const t = b.textContent, i = t.indexOf(": ");
+    if (i < 0) return;
+    b.classList.add("dressed"); b.setAttribute("aria-label", t);
+    b.innerHTML = `<span class="ic" aria-hidden="true">${ICONS[t.slice(0, i)] || "📁"}</span><span class="tt"></span><span class="dt"></span>`;
+    b.querySelector(".tt").textContent = t.slice(0, i); b.querySelector(".dt").textContent = t.slice(i + 2);
+  });
+}
+new MutationObserver(dressChoices).observe(document.getElementById("app"), { childList: true, subtree: true });
+
+// HUD meter: 10 pips, bumps/shakes when it moves.
+let lastV = null;
+function drawMeter(v) {
+  document.getElementById("pips").innerHTML = Array.from({ length: 10 }, (_, i) => `<i class="${i < v ? "on" : ""}"></i>`).join("");
+  document.getElementById("meterNum").textContent = v + "/10";
+  const pill = document.getElementById("pressPill");
+  pill.setAttribute("aria-label", "Pressure on segregation: " + v + " of 10");
+  if (lastV !== null && v !== lastV) {
+    const d = v - lastV, cls = d > 0 ? "up" : "down";
+    pill.classList.remove("up", "down"); void pill.offsetWidth; pill.classList.add(cls);
+    const f = document.createElement("span"); f.className = "delta " + cls; f.textContent = (d > 0 ? "+" : "−") + Math.abs(d);
+    pill.appendChild(f); setTimeout(() => f.remove(), 1300);
+  }
+  lastV = v;
+}
+
+const CFG = {
+  key: "ush-u4-d1-fight-segregation-v2",
   assignmentId: "ush-u4-d1-fight-segregation",
   title: "U.S. History · Unit 4 · Day 1 · The Case Against Segregation",
   standard: "SS.9-12.US.42, SS.9-12.US.43, SS.9-12.US.44",
   oldApi: "https://fynn-class-assignment-submissions-20261024.neotboy.chatgpt.site/api/submit",
-  startFx: { push: 3 },
+  startFx: { push: 1 },
+  wrongFx: { push: -1 },
   clampFx: fx => { fx[METER] = Math.max(0, Math.min(10, fx[METER])); },
-  hud: st => {
-    const v = st.fx[METER] || 0;
-    document.getElementById("meterFill").style.width = (v * 10) + "%";
-    document.getElementById("meterNum").textContent = v + "/10";
-  },
-  extraAnswers: st => ({ "Pressure on segregation meter": (st.fx[METER] || 0) + " of 10" })
-}, (function () {
-return {
+  hud: st => drawMeter(st.fx[METER] || 0),
   startLabel: "Open the case file",
-  introHtml: `<p class="kicker">1950 to 1957</p><h2>Building the case</h2>
-    <p>In 1950, in much of the country, Black and white children were sent to separate schools by law. This was called <b>segregation</b>. Black Americans and their allies set out to end it.</p>
-    <p>You'll work through a case file of real sources. At three key moments, you'll decide what the movement or the government should do. Your choices change the "Pressure on segregation" meter.</p>
-    <ul class="steps"><li>1. Read each source and answer the check.</li><li>2. Make 3 decisions, then see what really happened.</li><li>3. Write 2 short answers and turn in.</li></ul>`,
+  introHtml: `<p class="kicker">1950 · Your first case</p><h2>Can you break segregation?</h2>
+    <div class="split"><p class="lede">In much of the U.S., the law forces Black and white kids into separate schools. That's <b>segregation</b>. Build the case against it.</p>
+    <div class="folder" aria-hidden="true"><span class="stamp">OPEN</span><p class="ic">⚖️🚌🏫</p><p class="ft">SEGREGATION</p><p class="yr">1950 – 1957</p></div></div>
+    <div class="rules"><ul>
+      <li><span>🔎</span>Inspect the evidence</li>
+      <li><span>🃏</span>Make 3 big calls</li>
+      <li><span>✊</span>Fill the meter. Guessing drains it.</li></ul></div>`,
   scenes: [
-    { kicker: "Part 1 of 3 · 1896–1950", title: "\"Separate but Equal\"",
-      teach: `<p>In <b>Plessy v. Ferguson (1896)</b>, the Supreme Court ruled that segregation was legal if the separate places were "equal." This idea was called <b>"separate but equal."</b></p>
-        <p>In real life, places for Black Americans were almost never equal. Laws that enforced segregation in the South were called <b>Jim Crow laws</b>.</p>`,
+    // ================= PART 1 =================
+    { kicker: "Part 1 of 3 · 1896–1950", title: "Separate but Equal?",
+      teach: `<div class="art train" role="img" aria-label="A train car with two signs: White and Colored"><span class="cap">LOUISIANA · 1890s</span><div class="car"><span class="win"></span><span class="sign">WHITE</span><span class="win"></span></div><div class="car"><span class="win"></span><span class="sign">COLORED</span><span class="win"></span></div></div>
+        ${terms(`<b>Plessy v. Ferguson (1896)</b>: segregation is legal if it's "separate but equal."`, `<b>Jim Crow laws</b>: Southern laws that forced segregation.`)}`,
       blocks: [
-        { type: "q", id: "s1", std: "US.42", short: "Plessy = separate but equal",
-          prompt: doc("Fact card · Plessy v. Ferguson, 1896", `<p>Homer Plessy, a Black man in Louisiana, sat in a \"whites only\" train car and was arrested. He said the law broke his rights.</p><p>The Supreme Court ruled 7–1 against him. Separate train cars were allowed, as long as they were \"equal.\"</p>`) + "What did the Plessy decision allow?",
-          options: ["Segregation, if the separate places were called equal", "Black and white passengers to sit anywhere they wanted on trains", "States to ban Black Americans from riding trains", "Schools to decide on their own to integrate"],
-          hint: "What did the Court say was allowed \"as long as\"?", why: "Plessy made \"separate but equal\" the law of the land for almost 60 years." },
         { type: "q", id: "s2", std: "US.42", short: "Unequal school funding",
-          prompt: `<table class="facts"><tr><th>Clarendon County, South Carolina (about 1950)</th><th>White schools</th><th>Black schools</th></tr><tr><td>Money spent per student each year</td><td>About $179</td><td>About $43</td></tr><tr><td>Buses</td><td>Yes</td><td>None</td></tr></table>What does this evidence show about \"separate but equal\"?`,
-          options: ["The separate schools were not equal at all", "Black schools got more money for each student", "Both kinds of schools were funded about the same", "White students had to walk to school farther"],
-          hint: "Compare the two money amounts.", why: "White schools got about four times as much money per student. Black schools were also crowded and used hand-me-down books." },
+          prompt: ex("Exhibit A · Clarendon County, South Carolina, 1940s", `<p><b>Money spent per student, each year</b></p>
+            <div class="bars" role="img" aria-label="White students: $179. Black students: $42."><div class="row"><span>White students</span><div class="t"><span style="width:100%"></span></div><b>$179</b></div><div class="row lo"><span>Black students</span><div class="t"><span style="width:23%"></span></div><b>$42</b></div></div>
+            <div class="buses"><span>🚌 White schools: 30+ buses</span><span>🚌 Black schools: 0</span></div>
+            <p class="src">Source: National Park Service, Brown v. Board of Education National Historical Park</p>`) + `Plessy promised "separate but equal." What does Exhibit A prove?`,
+          options: ["The separate schools were far from equal", "The schools were close to equal, as Plessy required", "Black schools got extra money to make up for buses", "Only bus service was unequal, not the money"],
+          hint: "−1 ✊. Compare the dollars, then the buses.", why: "About 4 times the money, and 30+ buses vs. none." },
         { type: "q", id: "s3", std: "US.43", short: "14th Amendment equal protection",
-          prompt: doc("14th Amendment to the U.S. Constitution · 1868", `<p><q>No State shall … deny to any person within its jurisdiction the equal protection of the laws.</q></p><p class="src"><b>jurisdiction</b> = the area a government controls</p>`) + "How could lawyers use this amendment against school segregation?",
-          options: ["They could argue segregation denied Black students equal protection", "They could argue states had to build more schools in cities", "They could argue only Congress could run public schools", "They could argue all students had a legal right to pick their own teachers"],
-          hint: "What does the amendment say states can't deny?", why: "The NAACP argued that segregated schools denied Black children the \"equal protection of the laws.\"" },
-        { type: "event", id: "e1", short: "NAACP legal strategy", html: `<p class="desk">NAACP lawyers' meeting · 1950</p><p>The <b>NAACP</b> (National Association for the Advancement of Colored People) has won some cases forcing states to spend more on Black schools. Now the lawyers must choose the next step.</p>`,
+          prompt: ex("Exhibit B · 14th Amendment, 1868", `<p><q>No State shall … deny to any person within its jurisdiction the equal protection of the laws.</q></p><p class="gloss">jurisdiction = the area a state controls</p>`) + "What argument does Exhibit B give lawyers at the NAACP, a civil rights group?",
+          options: ["A state can't treat Black kids worse by law", "Only Congress, not states, can run public schools", "Each state must build a school for each race", "Students may attend any school in any state"],
+          hint: "−1 ✊. What can't a state deny \"any person\"?", why: "\"Equal protection\" became the NAACP's main legal weapon." },
+        { type: "event", id: "e1", short: "NAACP legal strategy",
+          html: `<p class="desk">🗂️ NAACP lawyers' meeting · 1950</p><p class="big">Suing for better Black schools wins small fixes. Segregation stays legal. What's the next move?</p>`,
           choices: [
-            { label: "Attack segregation itself: separate can never be equal", fx: { push: 3 }, result: `<p>${T("up", "+3 pressure")}It's a bigger risk, but a win would end school segregation everywhere.</p>${real("In 1950 the NAACP, led by lawyer Thurgood Marshall, decided to challenge segregation itself.")}` },
-            { label: "Keep suing to make Black schools truly equal", fx: { push: 1 }, result: `<p>${T("up", "+1 pressure")}Some towns spend more. But segregation stays legal.</p>${real("The NAACP had done this for years. In 1950 it switched to attacking segregation itself.")}` },
-            { label: "Wait for states to change on their own", fx: { push: -1 }, result: `<p>${T("down", "−1 pressure")}Nothing changes. States have no reason to.</p>${real("The NAACP did not wait. It filed cases in several states.")}` }
+            pick("e1", "Attack segregation: Argue separate can never be equal", 3, "up", "BOLD MOVE", "Huge risk. But a win ends school segregation everywhere.", "In 1950, Thurgood Marshall's NAACP team chose this.", "Attacked segregation itself in court"),
+            pick("e1", "Fix Black schools: Keep suing for equal money", 1, "flat", "SMALL WIN", "Some towns spend more. Segregation stays legal.", "The NAACP had done this for years. In 1950 it switched.", "Only sued for equal money"),
+            pick("e1", "Ask Congress: Push for a law banning it", 0, "down", "BLOCKED", "Southern senators block it. No law passes.", "Congress passed no school desegregation law until 1964.", "Waited on Congress")
           ] }
       ] },
-    { kicker: "Part 2 of 3 · 1951–1955", title: "Brown v. Board of Education",
-      teach: `<p><b>Brown v. Board of Education</b> combined five cases from around the country. The lead case came from <b>Topeka, Kansas</b>.</p>`,
+    // ================= PART 2 =================
+    { kicker: "Part 2 of 3 · 1950–1959", title: "Brown v. Board, and the Backlash",
+      teach: `<div class="art walk" role="img" aria-label="Linda Brown's trip: from home, past a nearby white school she could not attend, across rail tracks, to a bus, to a far-off Black school"><span class="cap">TOPEKA, KANSAS · 1950</span><div class="walkrow">
+          <div class="st"><span>🏠</span>Home</div><div class="st no"><span>🏫</span>Sumner<em>WHITE ONLY</em></div><i class="ar">→</i><div class="st"><span>🛤️</span>Rail yard</div><i class="ar">→</i><div class="st"><span>🚌</span>Bus</div><i class="ar">→</i><div class="st"><span>🏫</span>Monroe<br>(Black school)</div></div></div>
+        ${terms(`!Third grader <b>Linda Brown</b> was turned away from Sumner. Her dad, <b>Oliver Brown</b>, sued.`, `<b>Brown v. Board of Education</b>: 5 cases in one. NAACP lawyer <b>Thurgood Marshall</b> argued it.`)}`,
       blocks: [
-        { type: "q", id: "s4", std: "US.44", short: "Why Oliver Brown sued",
-          prompt: doc("Fact card · The Brown family, Topeka", `<p>Linda Brown, a Black third grader, had to walk a long way and cross railroad tracks to catch a bus to a Black school.</p><p>A white school was much closer to her home. It would not let her enroll. Her father, <b>Oliver Brown</b>, joined the lawsuit.</p>`) + "Why did Oliver Brown join the case?",
-          options: ["His daughter was kept out of a closer school because she was Black", "His daughter's school had no teachers left for any of the third graders", "The white school wanted Linda to transfer there", "Topeka had no schools for Black students at all"],
-          hint: "Why couldn't Linda go to the closer school?", why: "Segregation forced Linda past a nearby school only because of her race. Families like the Browns put their names on the case, often at real risk." },
-        { type: "q", id: "s5", std: "US.44", short: "Thurgood Marshall argued the case",
-          prompt: doc("Fact card · The lawyer", `<p><b>Thurgood Marshall</b> led the NAACP's legal team. He argued Brown before the Supreme Court.</p><p>In 1967, he became the first Black justice on the Supreme Court.</p>`) + "What was Thurgood Marshall's role in Brown?",
-          options: ["He argued the case against segregation in court", "He was the judge who wrote the final decision", "He was the Kansas governor who closed the schools", "He was the parent who first filed the lawsuit"],
-          hint: "Reread the first sentence of the card.", why: "Marshall was the NAACP's lead lawyer. He used the courts as a tool for change." },
         { type: "q", id: "s6", std: "US.43", short: "\"Inherently unequal\"",
-          prompt: doc("Chief Justice Earl Warren · Brown v. Board decision, May 17, 1954", `<p><q>We conclude that in the field of public education the doctrine of \"separate but equal\" has no place. Separate educational facilities are inherently unequal.</q></p><p class="src"><b>inherently</b> = by its very nature, no matter what</p>`) + "What did the Court mean by <b>inherently unequal</b>?",
-          options: ["Segregated schools are unequal even if the money is the same", "Segregated schools are fine as long as the money spent is the same", "Black schools need more teachers, but can stay separate", "Only schools in Kansas had to stop being segregated"],
-          hint: "Use the meaning of \"inherently\" in the small note.", why: "The Court said separating children by race is itself unequal. It sends a message that one group is valued less. This overturned Plessy for public schools." },
-        { type: "q", id: "s7", std: "US.43", short: "9–0 vote, then \"all deliberate speed\"",
-          prompt: doc("Fact card · The vote and what came next", `<p>The decision was <b>unanimous</b> (all 9 justices agreed): 9–0.</p><p>A year later, in 1955, the Court said schools must integrate <b>\"with all deliberate speed.\"</b> It set no deadline.</p>`) + "Why did the lack of a deadline matter?",
-          options: ["Many states used it to delay integration for years", "All schools had to integrate within one week", "It let the Court overturn its own 9–0 decision", "It forced Congress to pay for all new schools"],
-          hint: "If there's no deadline, what might people who oppose a change do?", why: "The 9–0 vote sent a strong message. But with no deadline, many Southern states stalled. Ten years later, most Black children in the Deep South were still in segregated schools." }
-      ] },
-    { kicker: "Part 3 of 3 · 1955–1957", title: "Resistance and Response",
-      teach: `<p>Many white Southern leaders fought the Brown decision. This was called <b>massive resistance</b>. Groups called <b>White Citizens' Councils</b> pressured people who supported integration. At the same time, Black communities kept organizing.</p>`,
-      blocks: [
+          prompt: ex("Exhibit C · The Supreme Court's decision, May 17, 1954", bub("⚖️", "Chief Justice Earl Warren", "Separate educational facilities are inherently unequal.") + `<p class="gloss">inherently = by its very nature, no matter what</p>`) + "What does <b>inherently unequal</b> mean here?",
+          options: ["Segregated schools are unequal even with equal money", "Segregated schools are fine once the money is equal", "Black schools need more teachers but can stay separate", "Only schools in Kansas must stop segregating"],
+          hint: "−1 ✊. Use the gray note: \"no matter what.\"", why: "Splitting kids by race is unequal by itself. Plessy no longer rules schools." },
+        { type: "note", html: `<p class="desk">🗳️ The vote</p><div class="vote" role="img" aria-label="All 9 justices voted yes: 9 to 0">${"<span>👨‍⚖️<small>✓</small></span>".repeat(9)}<b>9–0</b></div><p><span class="stamp up">SEPARATE ≠ EQUAL</span> Every justice agreed.</p>
+          ${terms(`!1955: The Court orders schools to <b>integrate</b> (mix races) "with all deliberate speed." But it sets <b>no deadline</b>.`, `<b>Massive resistance</b>: Southern leaders' plan to block Brown.`)}` },
         { type: "q", id: "s8", std: "US.42", short: "Closing schools = massive resistance",
-          prompt: doc("Fact card · Prince Edward County, Virginia", `<p>Rather than integrate, the county <b>closed all its public schools</b> from 1959 to 1964. Private schools opened for white students. Most Black children had no school for five years.</p>`) + "What does this example show about massive resistance?",
-          options: ["Some leaders would shut schools rather than integrate", "Most Southern counties quickly followed the Brown ruling", "Closing the schools was ordered by the Supreme Court", "Black and white families agreed to close the schools"],
-          hint: "What did the county choose instead of integrating?", why: "Some places chose to have no public schools at all rather than integrate. Black children paid the heaviest price." },
-        { type: "event", id: "e2", short: "Montgomery: after Parks's arrest", html: `<p class="desk">Montgomery, Alabama · December 1955</p><p><b>Rosa Parks</b>, a seamstress and secretary of the local NAACP, was arrested for not giving her bus seat to a white man. <b>Jo Ann Robinson</b> and the Women's Political Council print thousands of flyers calling for a one-day bus boycott. It works. Now what?</p>`,
+          prompt: ex("Exhibit D · Prince Edward County, Virginia, 1959–1964", `<div class="closed"><div><span>🔒</span>All public schools: <b>closed 5 years</b></div><div><span>🏫</span>White kids: new private schools</div><div><span>🚫</span>Most Black kids: no school</div></div>`) + "What does Exhibit D show about massive resistance?",
+          options: ["Some leaders shut schools rather than integrate", "Most counties obeyed Brown as soon as it came", "The Supreme Court ordered the schools closed", "The county closed schools to save money, not over race"],
+          hint: "−1 ✊. What did the county pick instead of integrating?", why: "No school at all beat integration, to them. Black children paid the price." },
+      ] },
+    // ================= PART 3 =================
+    { kicker: "Part 3 of 3 · 1955–1957", title: "Showdowns: Montgomery and Little Rock",
+      teach: `<div class="art map" role="img" aria-label="Map of the South with pins: Little Rock, Arkansas and Montgomery, Alabama"><span class="cap">THE SOUTH · 1955–1957</span><span class="sea gulf">Gulf of Mexico</span><span class="sea atl">Atlantic</span><span class="pin" style="left:13%;top:40%"><span>📍</span>Little Rock, Ark.</span><span class="pin" style="left:46%;top:60%"><span>📍</span>Montgomery, Ala.</span></div>
+        ${terms(`!Brown won in court. Now people had to make it real, on buses and at school doors.`)}`,
+      blocks: [
+        { type: "event", id: "e2", short: "Montgomery: after Parks's arrest",
+          html: `<p class="desk">🚌 Montgomery, Alabama · December 1955</p><p class="big"><b>Rosa Parks</b>, local NAACP secretary, is arrested for keeping her bus seat. <b>Jo Ann Robinson</b>'s flyers call a one-day <b>boycott</b>: nobody rides. It works. Next?</p>`,
           choices: [
-            { label: "Keep the boycott going and set up carpools", fx: { push: 3 }, result: `<p>${T("up", "+3 pressure")}People walk miles and share rides. The bus company loses money.</p>${real("The boycott lasted 381 days. Leaders like E.D. Nixon and a young pastor, Dr. Martin Luther King Jr., helped run it.")}` },
-            { label: "End the boycott and send the city a polite letter", fx: { push: -1 }, result: `<p>${T("down", "−1 pressure")}The city has no reason to change.</p>${real("Montgomery's Black community kept the boycott going for 381 days.")}` },
-            { label: "Only boycott on Sundays", fx: { push: 0 }, result: `<p>${T("flat", "No change")}The bus company barely notices.</p>${real("The boycott was every day, for 381 days.")}` }
+            pick("e2", "Keep boycotting: Walk and carpool, every single day", 3, "up", "BUSES EMPTY", "Buses run nearly empty. The bus company bleeds money.", "The boycott lasted 381 days. Dr. Martin Luther King Jr. helped lead it.", "Boycotted the buses every day"),
+            pick("e2", "Ride and sue: Ride again, fight only in court", 1, "flat", "SLOW", "The lawsuit crawls along. Buses stay segregated meanwhile.", "Montgomery did both: a boycott AND a lawsuit.", "Fought only in court"),
+            pick("e2", "Write the mayor: End boycott, send a polite letter", -1, "down", "IGNORED", "The city has no reason to change.", "Jo Ann Robinson already wrote the mayor in 1954. Nothing changed.", "Dropped the boycott for a letter")
           ] },
         { type: "q", id: "s9", std: "US.44", short: "Why the boycott worked",
-          prompt: doc("Fact card · Montgomery buses", `<p>About three out of four bus riders in Montgomery were Black.</p><p>In 1956, in a case called <b>Browder v. Gayle</b>, the Supreme Court ruled bus segregation unconstitutional. The boycott ended in December 1956.</p>`) + "Why did the boycott put so much pressure on the city?",
-          options: ["Most bus riders were Black, so the buses lost most of their money", "The city wanted to sell the buses to a new company", "White riders joined the boycott and stopped riding the city buses too", "The bus drivers went on strike to help the riders"],
-          hint: "Look at who rode the buses most.", why: "Without Black riders, the buses lost most of their income. The boycott (economic pressure) and the court case worked together." },
-        { type: "event", id: "e3", short: "Little Rock: federal response", html: `<p class="desk">Little Rock, Arkansas · September 1957</p><p>Nine Black students, the <b>Little Rock Nine</b>, are set to attend Central High. Governor Orval Faubus uses the state's National Guard to block them. Angry mobs gather. A federal court orders the school to let them in. You advise President Dwight Eisenhower.</p>`,
+          prompt: ex("Exhibit E · Jo Ann Robinson's letter to the mayor, May 21, 1954", `<p><b>Who rode Montgomery's buses?</b></p><div class="riders" role="img" aria-label="Three out of four riders were Black"><span style="width:75%;background:#7a1f1f">Black riders · 3 of 4</span><span style="width:25%;background:#1d5a8a">White</span></div>`) + "Why did the boycott hit the bus company so hard?",
+          options: ["Most riders were Black, so most fares vanished", "White riders joined in and stopped riding too", "Bus drivers went on strike to back the riders", "The city cut bus routes to punish the boycotters"],
+          hint: "−1 ✊. Look at who rode the buses.", why: "Lost fares, plus a 1956 Supreme Court ruling (Browder v. Gayle), ended bus segregation there." },
+        { type: "event", id: "e3", short: "Little Rock: federal response",
+          html: `<p class="desk">🏫 Little Rock, Arkansas · September 1957</p><p class="big">The <b>Little Rock Nine</b>, nine Black students, are set to enter Central High. Gov. Orval Faubus uses the National Guard to block them. A mob gathers. You advise President Eisenhower.</p>`,
           choices: [
-            { label: "Send federal troops to protect the students", fx: { push: 3 }, result: `<p>${T("up", "+3 pressure")}The court's order is enforced.</p>${real("Eisenhower sent soldiers of the 101st Airborne. They escorted the Little Rock Nine to class. Troops stayed at the school all year.")}` },
-            { label: "Let Arkansas handle it", fx: { push: -2 }, result: `<p>${T("down", "−2 pressure")}Other states see they can ignore the courts.</p>${real("Eisenhower did not leave it to Arkansas. He sent federal troops.")}` },
-            { label: "Ask the students to wait a year", fx: { push: -1 }, result: `<p>${T("down", "−1 pressure")}The mob wins this round.</p>${real("Eisenhower sent troops so the students could go to school that fall.")}` }
+            pick("e3", "Send troops: Army escorts the Nine to class", 3, "up", "ORDER ENFORCED", "The court's order is enforced. The Nine go to class.", "Eisenhower sent the 101st Airborne. Federal troops guarded the Nine all year.", "Sent federal troops"),
+            pick("e3", "Make a deal: Talk the governor into backing down", 0, "flat", "STALLED", "Faubus pulls the Guard. Now a mob blocks the door.", "Eisenhower did meet Faubus on Sept. 14. It didn't work.", "Trusted a deal with Faubus"),
+            pick("e3", "Stay out: Let Arkansas handle it", -2, "down", "COURTS DEFIED", "Other states learn they can ignore the courts.", "Eisenhower did not stay out. He sent troops on Sept. 24.", "Let Arkansas decide")
           ] },
         { type: "q", id: "s10", std: "US.43", short: "Eisenhower: courts must be obeyed",
-          prompt: doc("President Eisenhower · address to the nation, September 24, 1957", `<p><q>Mob rule cannot be allowed to override the decisions of our courts.</q></p>`) + "Why did Eisenhower send troops to Little Rock?",
-          options: ["To enforce a federal court's order over the mob", "To close Central High until the protests ended", "To arrest the Little Rock Nine for breaking state law", "To help the governor keep the school segregated"],
-          hint: "What does Eisenhower say mobs can't override?", why: "The federal government used its power to make sure court rulings were obeyed, even when a state resisted." },
-        { type: "q", id: "s11", std: "US.44", short: "Courts + people working together",
-          prompt: `<table class="facts"><tr><th>Step</th><th>What happened</th></tr><tr><td>1. Law</td><td>Plessy (1896) allows \"separate but equal\"</td></tr><tr><td>2. Challenge</td><td>NAACP lawsuits and families like the Browns</td></tr><tr><td>3. Ruling</td><td>Brown (1954) and Browder v. Gayle (1956)</td></tr><tr><td>4. Resistance</td><td>Massive resistance, closed schools, mobs</td></tr><tr><td>5. Response</td><td>Boycotts and federal troops</td></tr></table>What does this timeline show about how segregation was fought?`,
-          options: ["It took court cases, ordinary people, and federal action together", "One Supreme Court ruling ended segregation right away", "The federal government acted first, before anyone asked", "Segregation ended quickly because states gave it up on their own"],
-          hint: "Count how many different groups appear in steps 2, 3, and 5.", why: "No single step was enough. Lawyers, families, boycotters, the courts, and the President all played a part, against strong resistance." }
+          prompt: ex("Exhibit F · TV address to the nation, September 24, 1957", bub("🎙️", "President Dwight Eisenhower", "Mob rule cannot be allowed to override the decisions of our courts.")) + "Why did Eisenhower send the troops?",
+          options: ["To enforce a federal court's order", "To overrule an Arkansas court's ruling", "To close Central High until it calmed down", "To arrest the Nine for breaking state law"],
+          hint: "−1 ✊. What does he say a mob can't override?", why: "Federal power made a state obey the courts." },
+        { type: "q", id: "s11", std: "US.44", label: "Exit check", short: "Courts + people working together",
+          prompt: `<div class="timeline"><span>⚖️ Plessy, 1896</span><i>→</i><span>🗂️ NAACP lawsuits</span><i>→</i><span>🏛️ Brown, 1954</span><i>→</i><span>🧱 Resistance</span><i>→</i><span>🚌 Boycott</span><i>+</i><span>🪖 Troops</span></div>What does this timeline show about how segregation was fought?`,
+          options: ["It took courts, ordinary people, and federal power", "One Supreme Court ruling ended it right away", "The President acted first, before anyone asked", "Southern states gave up segregation on their own"],
+          hint: "−1 ✊. Count the different groups in the timeline.", why: "No single push was enough. And it still took years." }
       ] }
   ],
   finale: {
-    title: "Closing the Case File",
-    report: st => `<p><b>Your "Pressure on segregation" meter ended at ${st.fx.push}/10.</b> The real movement kept up pressure in the courts and in the streets, and it still took years.</p><p>Answer both in 1–2 full sentences.</p>`,
+    title: "Close the Case File",
+    report: st => endingHtml(st) + `<p><b>Your closing argument.</b> Answer each in 1–2 full sentences.</p>`,
     prompts: [
-      { id: "better", short: "Courts or boycotts: which worked better?", label: "1. Which worked better against segregation: the courts or boycotts? Use evidence from today.", stem: "I think ___ worked better because ___.", min: 60, mustAll: [["court", "brown", "plessy", "marshall", "lawsuit", "case", "boycott", "montgomery", "bus", "parks", "carpool"], ["because", "since"]], mustMsg: "In answer 1, pick courts or boycotts, use evidence from today, and use \"because\"." },
-      { id: "unequal", short: "Why separate was never equal", label: "2. Explain why \"separate but equal\" was never really equal. Use one piece of evidence.", stem: "\"Separate but equal\" was not really equal because ___.", min: 60, newWords: 5, mustInclude: ["money", "fund", "dollar", "179", "43", "bus", "book", "crowd", "inherently", "warren", "message", "walk", "track", "closer"], mustMsg: "In answer 2, use one piece of evidence (like the money chart, Linda Brown's walk, or the Court's words)." }
+      { id: "better", short: "Courts or boycotts: which worked better?", label: "1. Which hit segregation harder: the courts or boycotts? Use evidence from today. (Go deeper: why did it take both?)", stem: "I think ___ worked better because ___.", min: 60, mustAll: [["court", "boycott", "lawsuit", "case", "both"], ["brown", "plessy", "marshall", "naacp", "warren", "9-0", "9–0", "unanimous", "ruling", "decision", "illegal", "unconstitutional", "constitution", "law", "montgomery", "bus", "parks", "robinson", "carpool", "walk", "fare", "rider", "money", "381", "browder", "troops", "eisenhower", "little rock", "linda", "topeka", "supreme", "justice", "everywhere", "nation", "mob", "faubus"], ["because", "since"]], mustMsg: "In answer 1, pick courts or boycotts, give one real detail from today (like Brown, the 9–0 vote, or Montgomery's bus riders), and use \"because\"." },
+      { id: "unequal", short: "Why separate was never equal", label: "2. Exit ticket: Why was \"separate but equal\" never really equal? Use one piece of evidence.", stem: "\"Separate but equal\" was not really equal because ___.", min: 60, newWords: 5, mustInclude: ["money", "fund", "dollar", "179", "42", "43", "bus", "book", "crowd", "inherently", "warren", "message", "walk", "track", "rail", "closer", "sumner", "monroe", "linda", "clarendon", "train"], mustMsg: "In answer 2, use one piece of evidence (like the money chart, the buses, Linda Brown's trip, or the Court's words)." }
     ]
+  },
+  extraAnswers: st => {
+    const e = ending(st);
+    return { "Pressure on segregation meter": (st.fx[METER] || 0) + " of 10", "Ending": e.stamp, "Wrong guesses (−1 pressure each)": String(wrongs(st)) };
   }
 };
 
-})()));
+// ---------- Endings ----------
+const wrongs = st => Object.keys(st.wrong || {}).reduce((s, k) => s + (st.wrong[k] || 0), 0);
+function ending(st) {
+  const v = st.fx[METER] || 0;
+  if (v >= 9) return { v, cls: "up", stamp: "WALL CRACKED", head: "Segregation is on the run.", line: "Courts, streets, and the President all pushed at once. Jim Crow is cracking, but not gone." };
+  if (v >= 6) return { v, cls: "up", stamp: "CRACKS SHOWING", head: "Some walls fall. Others hold.", line: "Progress comes, but slower, and it costs more." };
+  if (v >= 3) return { v, cls: "flat", stamp: "STALLED", head: "A few wins, mostly talk.", line: "Most Southern schools stay segregated for years longer." };
+  return { v, cls: "down", stamp: "JIM CROW HOLDS", head: "Segregation stays the law.", line: "Without pressure, the people in charge have no reason to change." };
+}
+function endingHtml(st) {
+  const e = ending(st), w = wrongs(st);
+  const causes = [];
+  CFG.scenes.forEach(s => s.blocks.forEach(b => {
+    if (b.type === "event" && st.picks[b.id] != null) { const c = b.choices[st.picks[b.id]]; causes.push(`${c.push > 0 ? "✊ +" + c.push : c.push < 0 ? "✊ −" + Math.abs(c.push) : "✊ +0"} · ${c.cause}`); }
+  }));
+  if (w) causes.push(`🔎 Wrong guesses on the evidence drained pressure`);
+  return `<div class="ending"><span class="stamp ${e.cls}">${e.stamp}</span><h3>${e.head}</h3><p>${e.line} <b>Pressure: ${e.v}/10.</b></p>
+    <p class="cb">CAUSED BY</p><ul>${causes.map(c => `<li>${c}</li>`).join("")}</ul>
+    ${real("All three big pushes happened. Still, in 1957 most Southern schools stayed segregated. The fight went on.")}</div>`;
+}
+
+UnitGame.start(CFG);
 </script>
 </body></html>
