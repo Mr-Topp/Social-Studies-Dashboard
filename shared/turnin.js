@@ -290,6 +290,15 @@ const TEACHER_TOOLS_URL = "https://script.google.com/macros/s/AKfycbwiVW6Cufw8Dq
     return erased;
   }
   window.classClaimDevice = claimDevice;
+  // One-time clean start for every Chromebook (Fynn said yes 11/3/26): saved work from before the fix above
+  // doesn't say whose it is, so erase it once. Language settings and home-page class stay. Turned-in work is safe.
+  try {
+    if (!/teacher-submissions/.test(location.pathname) && !localStorage.getItem("site-clean-2026-11-03")) {
+      wipeOtherStudent();
+      ["site-student-name", OWNER_KEY, "hub-me"].forEach(k => localStorage.removeItem(k));
+      localStorage.setItem("site-clean-2026-11-03", "1");
+    }
+  } catch (e) {}
   try {
     if (!/teacher-submissions/.test(location.pathname)) {
       // A page we reloaded after erasing: erase once more in case it re-saved the old student's game on the way out.
