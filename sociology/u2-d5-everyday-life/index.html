@@ -1,169 +1,27 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Jaylen's Tuesday | Sociology Unit 2 Day 5</title>
-<meta name="description" content="Follow one teen through a normal Tuesday and spot the seven social institutions shaping every move.">
-<style>
-:root{--ink:#1f2b33;--muted:#55626b;--paper:#f5f6fa;--card:#fff;--line:#dcd9cf;--acc:#2f4a8a;--acc2:#d9822b;--soft:#ebeffa;--green:#2a6b45;--bad:#a2392f}
-*{box-sizing:border-box}
-body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.5 system-ui,Segoe UI,Arial,sans-serif}
-header{background:linear-gradient(100deg,#fde7c8 0%,#e6ecfa 55%,#d9dcef 100%);border-bottom:5px solid var(--acc);padding:16px max(16px,calc((100vw - 900px)/2)) 12px}
-.k{font-size:.78rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:var(--acc);margin:0}
-h1{margin:2px 0 4px;font-size:clamp(1.7rem,3.4vw,2.3rem)}
-.std{margin:2px 0;font-size:.92rem;color:var(--muted)}.std b{color:var(--ink)}
-.hud{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line);padding:8px max(16px,calc((100vw - 900px)/2));display:flex;gap:10px 12px;flex-wrap:wrap;align-items:center;font-weight:800;font-size:.92rem;box-shadow:0 2px 8px #1f2b3312}
-.hud .bar{flex:1;min-width:110px;height:10px;background:#e6e6de;border-radius:9px;overflow:hidden}.hud .bar span{display:block;height:100%;width:0;background:var(--acc);transition:width .4s}
-.pill{background:#f0efe8;border-radius:20px;padding:3px 10px;white-space:nowrap}
-.meter{display:flex;align-items:center;gap:6px}.meter .track{width:100px;height:10px;border-radius:9px;background:#e6e6de;overflow:hidden}.meter .track span{display:block;height:100%;background:var(--acc2);transition:width .5s}
-main{max-width:900px;margin:auto;padding:14px 16px 60px}
-.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;box-shadow:0 3px 12px #1f2b330d}
-.kicker{font-size:.78rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:var(--acc2);margin:0}
-h2{margin:2px 0 10px;font-size:1.45rem}
-.teach{background:var(--soft);border-left:5px solid var(--acc);border-radius:9px;padding:10px 14px;margin:0 0 12px}.teach p{margin:4px 0}.teach b{color:var(--acc)}.teach ul{margin:4px 0;padding-left:20px}
-.block{margin:14px 0;padding:14px;border-radius:12px;border:2px solid var(--line);background:#fff}
-.block.current{border-color:var(--ink);box-shadow:0 0 0 4px color-mix(in srgb,var(--acc) 22%,transparent)}
-.block h3{margin:0 0 10px;font-size:1.06rem;line-height:1.35;font-weight:700}
-.event{background:#fbf9f4;border-style:dashed;border-color:#cdbf9a}.event.current{border-style:solid}
-.event-body p{margin:4px 0}
-.ev{display:block;font-weight:400;background:#f7f6f1;border:1px solid var(--line);border-left:5px solid var(--acc2);border-radius:10px;padding:9px 12px;margin:0 0 10px;font-size:.98rem}
-.ev .who{display:block;font-size:.74rem;font-weight:900;letter-spacing:.06em;text-transform:uppercase;color:var(--acc2);margin-bottom:2px}
-.ev p{margin:3px 0}
-.picked{margin:10px 0 4px;color:var(--muted)}.result{background:#f0efe8;border-radius:9px;padding:9px 12px}.result p{margin:4px 0}
-.tag{display:inline-block;font-weight:900;font-size:.8rem;border-radius:12px;padding:2px 9px;margin-right:6px}.tag.up{background:#dcefe2;color:var(--green)}.tag.down{background:#f6dcd8;color:var(--bad)}.tag.flat{background:#ebe9e0;color:var(--ink)}
-.qlabel{font-size:.75rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:var(--acc);margin:0 0 4px}
-.choices{display:grid;gap:8px}
-@media(min-width:700px){.q .choices{grid-template-columns:1fr 1fr}}
-button{font:inherit;cursor:pointer;border-radius:10px;min-height:46px}
-.choice{text-align:left;background:#fff;color:var(--ink);border:2px solid #cfcdbf;padding:10px 12px;font-weight:650;line-height:1.3}
-.choice:hover:not(:disabled){border-color:var(--ink);background:#fcfcfa}.choice:disabled{opacity:.5;cursor:not-allowed}
-.go{margin-top:12px;background:var(--acc);color:#fff;border:0;padding:11px 18px;font-weight:900}
-button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid #2f7dbd;outline-offset:2px}
-.answered{font-weight:800;color:var(--green);margin:4px 0}.why{margin:2px 0;color:var(--muted)}
-.msg{min-height:1.3em;font-weight:750;margin:8px 0 0}.msg.bad{color:var(--bad)}.msg.good{color:var(--green)}
-label{display:block;font-weight:850;margin:14px 0 4px}.stem{margin:0 0 4px;color:var(--muted);font-size:.92rem}
-input,textarea{width:100%;font:inherit;border:2px solid #cfcdbf;border-radius:9px;padding:10px;background:#fff;color:var(--ink)}
-.steps{display:grid;gap:6px;margin:10px 0;padding:0;list-style:none}.steps li{background:#f0efe8;border-radius:9px;padding:8px 12px;font-weight:700}
-.welcome{background:#e6f1ea;color:var(--green);font-weight:800;border-radius:9px;padding:8px 12px;margin:0 0 10px}
-.foot{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-top:14px;color:var(--muted);font-size:.85rem}
-.foot button{background:#ebe9e0;border:0;padding:8px 12px;font-weight:800;color:var(--ink)}
-.src{font-size:.8rem;color:var(--muted)}
-.bars{display:grid;gap:6px;margin:8px 0}.brow{display:grid;grid-template-columns:minmax(90px,140px) 1fr 44px;gap:8px;align-items:center;font-size:.9rem}.brow .t{height:16px;background:#e6e6de;border-radius:6px;overflow:hidden}.brow .t span{display:block;height:100%;background:var(--acc2)}
-@media print{.hud,.foot,.go{display:none}}
-
-.chips{display:flex;flex-wrap:wrap;gap:4px;width:100%}
-.chip{font-size:.74rem;border-radius:12px;padding:2px 8px;background:#efede6;color:#8a8a80;font-weight:800}
-.chip.on{background:var(--acc2);color:#fff}
-
-</style>
+<title>Seven Bosses, One Tuesday | Sociology Unit 2 Day 5</title>
+<meta name="description" content="Plan one teen's Tuesday. Seven social institutions want the same hours, and each one has hidden rules.">
+<link rel="stylesheet" href="style.css?v=4">
 <script src="../../shared/assignments.js?v=20261101fill"></script>
 <script src="../../shared/turnin.js?v=20261102read"></script>
-<script src="../../shared/unit-game.js?v=20261102es"></script>
 <script src="../../shared/lang.js?v=20261102samonly"></script>
-<script src="es.js?v=20261102c"></script>
+<script src="es.js?v=4"></script>
 </head><body>
-<header>
-  <p class="k">Sociology · Unit 2 · Day 5</p>
-  <h1>What Shapes Your Everyday Life?</h1>
-  <p class="std"><b>SS.9-12.Soc.5</b> Describe the components of culture. &nbsp;<b>SS.9-12.Soc.6</b> Analyze how culture influences individuals, including themselves. &nbsp;<b>SS.9-12.Soc.7</b> Evaluate important social institutions and how they respond to social needs. &nbsp;<b>SS.9-12.Soc.8</b></p>
-  <p class="std"><b>Goal:</b> Explain how social institutions shape behavior through norms, values, and roles, and how they affect each other. · About 25 minutes.</p>
-</header>
-<div class="hud" aria-label="Progress, day meter, and institutions found">
-  <span id="progressText">0 checks done</span>
-  <div class="bar" aria-hidden="true"><span id="progressFill"></span></div>
-  <span class="pill meter">Day meter: <span class="track" aria-hidden="true"><span id="dayFill" style="width:60%"></span></span> <span id="dayNum">6/10</span></span>
-  <div class="chips" id="chips" aria-label="Institutions found"></div>
+<div class="hud" id="hud" hidden>
+  <div class="hud-in">
+    <div class="hud-top"><span class="pt" id="partTag">Part 1 of 5</span><div class="rival" id="rival" aria-live="polite"><span class="rface" aria-hidden="true">⏰<span class="rmood" id="rivalMood">🙂</span></span><span class="rname">The Clock</span><span class="rbub" id="rivalSay"></span></div>
+      <button type="button" class="rbtn" id="rulebookBtn">📕 <span>Rulebook</span> (<span id="ruleCount">0</span>)</button></div>
+    <div class="meters" id="meters" aria-label="Dani's meters"></div>
+    <div class="bossrow"><span class="bl"><span>Bosses met:</span> <span id="bossCount">0</span>/7</span><div class="chips" id="bosses"></div></div>
+  </div>
 </div>
 <main>
   <p class="welcome" id="welcome" hidden></p>
   <div id="app"></div>
   <div class="foot"><span>Progress saves on this device. Your teacher sees your work after you turn it in.</span><button type="button" id="restartBtn">Start over</button></div>
+  <p class="std"><b>SS.9-12.Soc.5</b> <span>Describe the components of culture.</span> <b>SS.9-12.Soc.6</b> <span>Analyze how culture influences individuals, including themselves.</span> <b>SS.9-12.Soc.7</b> <span>Evaluate important social institutions and how they respond to social needs.</span> <b>SS.9-12.Soc.8</b> <span>Assess how social institutions and cultures change and evolve.</span></p>
 </main>
-<script>
-const T = (cls, txt) => `<span class="tag ${cls}">${txt}</span>`;
-const ev = (who, body) => `<span class="ev"><span class="who">${who}</span>${body}</span>`;
-window.S = null;
-
-const tm = (time, body) => `<span class="ev"><span class="who">🕒 ${time}</span>${body}</span>`;
-const CHIPS = [["a1","Family"],["a3","Education"],["a4","Government"],["a2","Media"],["c1","Economy"],["c2","Health care"],["c3","Religion"]];
-UnitGame.start({
-  key: "soc-u2-d5-everyday-life-v1",
-  assignmentId: "soc-u2-d5-everyday-life",
-  title: "Sociology · Unit 2 · Day 5 · What Shapes Your Everyday Life?",
-  standard: "SS.9-12.Soc.5, SS.9-12.Soc.6, SS.9-12.Soc.7",
-  oldApi: "https://fynn-class-assignment-submissions-20261024.neotboy.chatgpt.site/api/submit",
-  startFx: { day: 6 },
-  clampFx: fx => { fx.day = Math.max(0, Math.min(10, fx.day)); },
-  hud: st => {
-    window.S = st;
-    const d = st.fx.day || 0;
-    document.getElementById("dayFill").style.width = (d * 10) + "%"; document.getElementById("dayNum").textContent = d + "/10";
-    document.getElementById("chips").innerHTML = CHIPS.map(([id, n]) => `<span class="chip${st.done[id] ? " on" : ""}">${st.done[id] ? "✓ " : ""}${n}</span>`).join("");
-  },
-  startLabel: "Start Jaylen's Tuesday",
-  introHtml: `<p class="kicker">One ordinary Tuesday</p><h2>The invisible strings</h2>
-    <p>Meet <b>Jaylen</b>, 16, from Marion. Today is a normal Tuesday: school, work, family. But almost nothing Jaylen does is random.</p>
-    <p>Big systems called <b>social institutions</b> pull on every part of the day. Your job: follow Jaylen hour by hour and spot all <b>7 institutions</b> (they light up at the top when you find them).</p>
-    <ul class="steps"><li>🔎 Spot the institution behind each moment.</li><li>🎯 Make 3 choices for Jaylen. Watch the <b>Day meter</b>.</li><li>✍️ Write 2 short answers and turn in.</li></ul>
-    <p class="src">Jaylen is made up. The rules and patterns are real.</p>`,
-  scenes: [
-    { kicker: "Part 1 of 3 · 6:45–8:00 a.m.", title: "Morning",
-      teach: `<p>A <b>social institution</b> is an organized system of rules, roles, and expectations that meets a basic need of society. It's <b>not just a building</b>.</p>
-        <p>The big seven: <b>family</b> (identity, values), <b>education</b> (knowledge, skills), <b>religion</b> (morals, meaning), <b>government</b> (laws, order), <b>media</b> (news, trends), <b>economy</b> (jobs, money), and <b>health care</b> (well-being).</p>
-        <p>The key idea: <b>people don't act randomly.</b> Institutions guide what we do.</p>`,
-      blocks: [
-        { type: "q", id: "a1", std: "Soc.7", short: "Mom's rules = family", prompt: tm("6:50 a.m. · Kitchen", "Mom: \"Eat something before you go. And text me when you get to school.\"") + "Which institution is shaping Jaylen here?", options: ["Family", "Government", "Media", "Economy"], hint: "Who is setting the rule?", why: "Family is usually the first institution that teaches us rules and values, like checking in and taking care of yourself." },
-        { type: "q", id: "a2", std: "Soc.6", short: "Shoe videos = media", prompt: tm("7:05 a.m. · Scrolling in bed", "Six videos in a row about the same new shoes. By the sixth one, Jaylen kind of wants them.") + "Which institution is shaping what Jaylen wants?", options: ["Media", "Religion", "Education", "Family"], hint: "Where did the shoe videos come from?", why: "Media shapes opinions and trends, including what people think is cool to buy." },
-        { type: "q", id: "a3", std: "Soc.7", short: "Institution ≠ building", prompt: tm("7:20 a.m. · Bus stop", "Jaylen's friend: \"Education is just the school building, right?\"") + "What would a sociologist say?", options: ["It's a system of rules, roles, and expectations", "It's the school building plus its buses and lots", "It's just whatever each teacher wants each day", "It's only the classes students choose to take"], hint: "Reread the first line of the teach box.", why: "Education is the whole system: grades, attendance rules, the roles of teachers and students, diplomas. The building is just where it happens." },
-        { type: "event", id: "e1", short: "Late bus choice", html: tm("7:52 a.m.", "The bus is 15 minutes late. First hour starts in 8 minutes.") + `<p>What does Jaylen do?</p>`,
-          choices: [
-            { label: "Walk in late and get a pass from the office", fx: { day: 1 }, result: `<p>${T("up","+1 day")}The office marks it "excused: bus late." The school has a rule for this, so Jaylen isn't in trouble.</p>` },
-            { label: "Skip first hour and grab breakfast instead", fx: { day: -2 }, result: `<p>${T("down","−2 day")}The school's system sends an automatic call home. Mom texts: "WHERE ARE YOU." Two institutions, school and family, react at once.</p>` },
-            { label: "Text Mom to call the school first", fx: { day: 0 }, result: `<p>${T("flat","No change")}Mom is already at work and can't answer. Jaylen ends up late anyway, with no pass yet.</p>` }
-          ] },
-        { type: "q", id: "a4", std: "Soc.7", short: "Attendance law = government", prompt: ev("Iowa law", "In Iowa, children must attend school from age 6 until they turn 16. Parents can be fined if a child keeps missing school.") + "Which institution made this rule?", options: ["Government", "Family", "Media", "Religion"], hint: "Who makes laws and can give fines?", why: "Government makes and enforces laws. This law also shapes two other institutions: education and family." }
-      ] },
-    { kicker: "Part 2 of 3 · 8:00 a.m.–3:10 p.m.", title: "School Day",
-      teach: `<p>Institutions shape us in three ways:</p>
-        <ul><li><b>Norms</b>: rules for how to act. (Raise your hand.)</li><li><b>Values</b>: ideas about what matters. (Education is important.)</li><li><b>Roles</b>: the behavior expected from a position. (Student, employee, big brother.)</li></ul>
-        <p>Over time we <b>internalize</b> them. They become part of us, so we follow them even when no one is watching.</p>`,
-      blocks: [
-        { type: "q", id: "b1", std: "Soc.5", short: "Raising hand = norm", prompt: tm("9:15 a.m. · 2nd hour", "Jaylen has an answer, but raises a hand and waits instead of shouting it.") + "Raising your hand before talking is a…", options: ["Norm", "Value", "Role", "Institution"], hint: "Is it a rule for how to act, a belief, or a position?", why: "It's an expected way to act in class, so it's a norm." },
-        { type: "q", id: "b2", std: "Soc.5", short: "'Education opens doors' = value", prompt: tm("10:40 a.m. · Hallway poster", "\"EDUCATION OPENS DOORS.\"") + "The poster's message is a…", options: ["Value", "Norm", "Role", "Sanction"], hint: "Is it telling you how to act, or what's important?", why: "It's a belief about what matters, so it's a value. Norms like going to class grow out of it." },
-        { type: "q", id: "b3", std: "Soc.7", short: "Student/employee/brother = roles", prompt: ev("Jaylen's Tuesday", "Student at 9 a.m. Employee at 4 p.m. Big brother at 9 p.m.") + "Student, employee, and big brother are all…", options: ["Roles", "Values", "Norms", "Institutions"], hint: "Each one is a position with things people expect you to do.", why: "Each is a role, the behavior expected from a position. Each role comes from a different institution." },
-        { type: "event", id: "e2", short: "Text from Mom choice", html: tm("1:30 p.m. · 5th hour", "Phone buzzes. Mom: \"Plant cut my hours. We need to talk tonight.\" The class rule: phones stay in the pocket during class.") + `<p>What does Jaylen do?</p>`,
-          choices: [
-            { label: "Ask the teacher to step out and reply", fx: { day: 1 }, result: `<p>${T("up","+1 day")}The teacher says yes. Jaylen follows the norm AND takes care of family.</p>` },
-            { label: "Text back under the desk", fx: { day: -1 }, result: `<p>${T("down","−1 day")}The teacher takes the phone until the end of the day. That's a <b>sanction</b>, a punishment for breaking a norm.</p>` },
-            { label: "Wait until passing time to answer", fx: { day: 0 }, result: `<p>${T("flat","No change")}No trouble, but Jaylen can't focus for the rest of class.</p>` }
-          ] },
-        { type: "q", id: "b4", std: "Soc.6", short: "Chair up with sub = internalized", prompt: tm("2:55 p.m. · Sub day", "The sub isn't paying attention. Jaylen still puts the chair on the desk at the end of class, like always.") + "What does this show?", options: ["Jaylen has internalized the norm", "Jaylen is breaking a school norm", "Jaylen is changing the institution", "Jaylen is scared of the sub"], hint: "Nobody is checking. Why do it anyway?", why: "When a rule becomes a habit you follow without being watched, you've internalized it. That's how institutions guide behavior without force." }
-      ] },
-    { kicker: "Part 3 of 3 · 3:10–10:00 p.m.", title: "It's All Connected",
-      teach: `<p>Institutions are <b>connected</b>. When one changes, the others feel it.</p>
-        <p>Sociologists also look at <b>patterns</b>. One student failing may be a personal issue. Many students failing is a <b>system</b> issue, so look at things like resources, teaching, money, and family support.</p>`,
-      blocks: [
-        { type: "q", id: "c1", std: "Soc.7", short: "Chain started with economy", prompt: ev("The chain", "The plant cuts Mom's hours → Mom picks up a second job at night → Jaylen babysits his little sister after school → Jaylen misses tutoring.") + "Which institution started this chain?", options: ["Economy", "Education", "Media", "Health care"], hint: "Look at the first link: what happened at the plant?", why: "Jobs and money are the economy. One change there rippled into family and education." },
-        { type: "event", id: "e3", short: "Stay late at work choice", html: tm("6:00 p.m. · Grocery store shift", "Jaylen's manager: \"Can you stay until 10? We're short.\" That's $45 more. But there's a chemistry test tomorrow.") + `<p>What does Jaylen do?</p>`,
-          choices: [
-            { label: "Stay until 10. The family needs the money.", fx: { day: -1 }, result: `<p>${T("down","−1 day")}The extra pay helps at home. Jaylen gets to bed at midnight and feels tired on the test. The economy pulled harder than education.</p>` },
-            { label: "Say no and go home to study", fx: { day: 1 }, result: `<p>${T("up","+1 day")}Jaylen feels ready for the test, but the manager seems annoyed. Will that cost hours later?</p>` },
-            { label: "Offer to stay until 8 instead", fx: { day: 1 }, result: `<p>${T("up","+1 day")}The manager agrees. Some money, some study time. A middle path between two institutions.</p>` }
-          ] },
-        { type: "q", id: "c2", std: "Soc.7", short: "Insurance links economy & health", prompt: ev("Kitchen table, 9 p.m.", "Jaylen's sister has asthma. Her health insurance comes through Mom's job. With fewer hours, Mom might lose it.") + "Which two institutions are connected here?", options: ["Economy and health care", "Religion and media", "Government and religion", "Media and education"], hint: "Where does the insurance come from, and what does it pay for?", why: "In the U.S., many people get health insurance through work. So the economy and health care are tightly linked." },
-        { type: "q", id: "c3", std: "Soc.7", short: "Church food pantry = religion", prompt: tm("9:30 p.m. · Text from cousin Ana", "\"Can't hang Friday, I volunteer at my church's food pantry. It's how I was raised: help people who need it.\"") + "Which institution is shaping Ana's values?", options: ["Religion", "Government", "Economy", "Media"], hint: "Where did Ana learn to help others?", why: "Religion teaches morals and meaning, like helping people in need. It also meets a social need here: food." },
-        { type: "q", id: "c4", std: "Soc.7", short: "Many failing = system issue", prompt: ev("School data (made-up example)", "Last year: 3 of 90 students failed Algebra 1.<br>This year, after the district cut after-school tutoring: 31 of 90 failed.") + "What would a sociologist say?", options: ["So many failing points to a system cause", "31 students all decided not to try hard this year", "It's just bad luck that will fix itself next year", "Algebra 1 must be too hard for most teens"], hint: "Is this one person, or a pattern? What changed?", why: "When many people struggle at once, look at the system. Here, losing tutoring is a likely cause to study." },
-        { type: "q", id: "c5", std: "Soc.7", short: "Institutions shape opportunities", prompt: ev("Two students, same grades", "<b>Student A's</b> school offers free college classes and a welding certificate.<br><b>Student B's</b> school offers neither.") + "What does this show about institutions?", options: ["What they offer can open or close doors", "Grades are the only thing that matters", "Opportunities depend only on effort", "Schools have no effect on future jobs"], hint: "The grades are the same. What's different?", why: "Institutions affect opportunities. The same effort can lead to different chances depending on what schools, jobs, and government offer." }
-      ] }
-  ],
-  finale: {
-    title: "Pull the Strings",
-    report: st => `<p><b>Jaylen's Day meter ended at ${st.fx.day}/10.</b> Every choice played out inside the rules of family, school, work, and more. None of it was random.</p><p>Answer both in 1–2 full sentences.</p>`,
-    prompts: [
-      { id: "mine", short: "Institution that shaped my day (norm + role)", label: "1. Which institution shaped YOUR day most today? Give one norm and one role it gave you.", stem: "The institution that shaped my day most was ___. One norm was ___. My role was ___.", min: 80, mustAll: [["family", "school", "education", "government", "law", "media", "economy", "job", "work", "religion", "church", "health"], ["norm", "rule"], ["role"]], mustMsg: "In answer 1, name an institution, one norm (a rule), and one role (like student or employee)." },
-      { id: "chain", short: "How one institution affected another", label: "2. Explain how one institution affected another in Jaylen's day.", stem: "In Jaylen's day, the ___ affected the ___ because ___.", min: 70, newWords: 5, mustAll: [["economy", "job", "work", "plant", "family", "mom", "school", "education", "health", "insurance", "government", "law", "media", "religion"], ["because", "so ", "which", "led", "caused", "made"]], mustMsg: "In answer 2, name the institutions AND explain how one affected the other (use \"because\")." }
-    ]
-  },
-  extraAnswers: st => ({ "Day meter": st.fx.day + " of 10" })
-});
-
-</script>
+<dialog id="rulebook" aria-labelledby="rbTitle"><h2 id="rbTitle">📕 Dani's Rulebook</h2><p class="fine">Hidden rules you've found so far. Each one belongs to a boss.</p><ul id="rulebookList" class="rblist"></ul><button type="button" class="go" id="rulebookClose">Close</button></dialog>
+<script src="game.js?v=4"></script>
 </body></html>

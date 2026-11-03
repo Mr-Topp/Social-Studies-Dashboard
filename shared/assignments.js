@@ -357,7 +357,7 @@ window.CLASS_ASSIGNMENTS = {
   "soc-u1-d5-prove-hot-take": { course: "sociology", unit: 1, day: 5, title: "Day 5 · Prove It Lab", path: "sociology/u1-d5-prove-hot-take/", std: ["SS.9-12.Soc.1"] },
   "soc-u1-d6-study-people": { course: "sociology", unit: 1, day: 6, title: "Day 6 · Research Rivals", path: "sociology/u1-d6-study-people/", std: ["SS.9-12.Soc.1", "SS.9-12.Soc.3"] },
   "soc-u2-d4-team-up": { course: "sociology", unit: 2, day: 4, title: "Day 4 · Last Bus Home", path: "sociology/u2-d4-team-up/", std: ["SS.9-12.Soc.7", "SS.9-12.Soc.8"] },
-  "soc-u2-d5-everyday-life": { course: "sociology", unit: 2, day: 5, title: "Day 5 · Jaylen's Tuesday", path: "sociology/u2-d5-everyday-life/", std: ["SS.9-12.Soc.5", "SS.9-12.Soc.6", "SS.9-12.Soc.7"] },
+  "soc-u2-d5-everyday-life": { course: "sociology", unit: 2, day: 5, title: "Day 5 · Seven Bosses, One Tuesday", path: "sociology/u2-d5-everyday-life/", std: ["SS.9-12.Soc.5", "SS.9-12.Soc.6", "SS.9-12.Soc.7"] },
   "soc-u3-d1-who-taught-you": { course: "sociology", unit: 3, day: 1, title: "Day 1 · Daniela's Scrapbook", path: "sociology/u3-d1-who-taught-you/", std: ["SS.9-12.Soc.9"] },
   "soc-u3-d5-groups-change-us": { course: "sociology", unit: 3, day: 5, title: "Day 5 · The Group Pressure Lab", path: "sociology/u3-d5-groups-change-us/", std: ["SS.9-12.Soc.9", "SS.9-12.Soc.11"] },
   "soc-u4-d2-bad-day": { course: "sociology", unit: 4, day: 2, title: "Day 2 · Same Bad Day, Three Wallets", path: "sociology/u4-d2-bad-day/", std: ["SS.9-12.Soc.12", "SS.9-12.Soc.13"] },
