@@ -72,6 +72,7 @@ summary{font-weight:800;color:var(--navy);cursor:pointer}
 .unitblock{margin:0 0 18px}
 .unithead{font-size:1.05rem;margin:6px 0 6px;color:var(--navy)}
 .unitcount{font-size:.82rem;font-weight:600;color:var(--muted);margin-left:6px}
+.unitpick{margin:4px 0 10px;font-size:.88rem;color:var(--muted)}.unitpick select{margin-left:6px;font-weight:700}
 .legend{display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center;font-size:.85rem;color:var(--muted);margin:0 0 6px}
 .legend .lv{display:inline-block;border-radius:6px;padding:2px 8px;font-weight:800}
 .lv{font-weight:800}.lv small{display:block;font-size:.72rem;font-weight:600;color:var(--muted)}
@@ -1152,6 +1153,17 @@ function visible() {
   return tabRows(tab).filter(r => (view !== "list" || r.studentName.toLowerCase().includes(q)) && (view !== "list" || a === "all" || r.assignmentId === a));
 }
 
+// The unit each class is on today: the first green-sheet unit whose test date is today or later.
+// After the last unit's test it stays on the last unit. Classes with no green sheet (Civics) show every unit.
+const gridUnitPick = {};   // a unit you picked with "Look at another unit" (resets when the page reloads)
+function currentUnit(course) {
+  const cal = (window.CLASS_CALENDAR || {})[course];
+  if (!cal) return null;
+  const d = new Date(), today = d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0");
+  const nums = Object.keys(cal).map(Number).filter(u => cal[u] && cal[u].summative).sort((a, b) => a - b);
+  if (!nums.length) return null;
+  return nums.find(u => cal[u].summative >= today) || nums[nums.length - 1];
+}
 function renderGrid(list) {
   const students = [...new Set([...rosterOf(tab), ...list.map(r => r.studentName)])].sort((a, b) => a.localeCompare(b));
   const cell = (s, id) => {
@@ -1185,8 +1197,14 @@ function renderGrid(list) {
   const unitsUsed = new Set(list.map(r => unitOf(r.assignmentId)));
   Object.keys(REG).forEach(id => { if (REG[id].paper && REG[id].course === tab) unitsUsed.add(unitOf(id)); });
   if (!unitsUsed.size) Object.keys(REG).forEach(id => { if (REG[id].course === tab && REG[id].path) unitsUsed.add(unitOf(id)); });
-  const units = byUnit([...new Set([...activitiesFor(list), ...Object.keys(REG).filter(id => REG[id].course === tab && ((REG[id].path && REG[id].turnIn !== false) || REG[id].paper) && unitsUsed.has(unitOf(id)))])], tab);
-  $("out").innerHTML = KEYLINE + HOWTO +
+  // Only the unit you're teaching now. It switches the day after each green-sheet test date.
+  const nowUnit = currentUnit(tab);
+  if (nowUnit) unitsUsed.add(nowUnit);
+  const allUnits = byUnit([...new Set([...activitiesFor(list), ...Object.keys(REG).filter(id => REG[id].course === tab && ((REG[id].path && REG[id].turnIn !== false) || REG[id].paper) && unitsUsed.has(unitOf(id)))])], tab);
+  const pick = gridUnitPick[tab], showKey = allUnits.some(g => g.unit === pick) ? pick : nowUnit;
+  const units = showKey && allUnits.some(g => g.unit === showKey) ? allUnits.filter(g => g.unit === showKey) : allUnits;
+  const unitPicker = allUnits.length > 1 && units.length === 1 ? `<div class="unitpick"><label>Look at another unit <select id="gridUnitSel">${allUnits.map(g => `<option value="${g.unit}"${g.unit === units[0].unit ? " selected" : ""}>${safe(g.name)}${g.unit === nowUnit ? " (now)" : ""}</option>`).join("")}</select></label>${units[0].unit !== nowUnit && nowUnit ? ` <button class="light" id="gridUnitNow">Back to current unit</button>` : ""}</div>` : "";
+  $("out").innerHTML = KEYLINE + HOWTO + unitPicker +
     units.map(g => {
       const inUnit = list.filter(r => g.ids.includes(r.assignmentId));
       const who = [...new Set([...rosterOf(tab), ...inUnit.map(r => r.studentName)])].sort((a, b) => a.localeCompare(b));
@@ -1194,6 +1212,8 @@ function renderGrid(list) {
     <div class="gridwrap"><table><thead><tr><th class="student">Student</th>${g.ids.map(id => `<th${colEx(tab, id) ? ' class="exall"' : ""}>${REG[id] && REG[id].paper ? '<span class="papertag">📄 PAPER</span>' : ""}${safe(titleOf({ assignmentId: id }))}<button class="colmenu" data-a="${safe(id)}" aria-label="Options for ${safe(titleOf({ assignmentId: id }))}" title="Exempt everyone${REG[id] && REG[id].paper ? ", fill blanks, remove" : ""}">⋮</button>${colEx(tab, id) ? '<span class="extag">EX · everyone exempt</span>' : ""}${(REG[id] && REG[id].std || []).length ? `<small class="stdtag">${REG[id].std.map(stdCodeHover).join(" · ")}</small>` : ""}</th>`).join("")}<th>Unit so far</th></tr></thead>
     <tbody>${who.length ? who.map(s => `<tr>${studentCell(tab, s)}${g.ids.map(id => cell(s, id)).join("")}${unitSum(s, g.ids, inUnit)}</tr>`).join("") : `<tr><td class="student" colspan="${g.ids.length + 2}">No students yet. Add your class list (Needs attention → Edit class list) so everyone gets a box.</td></tr>`}</tbody></table></div></section>`;
     }).join("");
+  if ($("gridUnitSel")) $("gridUnitSel").onchange = e => { gridUnitPick[tab] = +e.target.value === nowUnit ? null : +e.target.value; render(); };
+  if ($("gridUnitNow")) $("gridUnitNow").onclick = () => { gridUnitPick[tab] = null; render(); };
   $("out").querySelectorAll("td.done button").forEach(b => b.onclick = () => { view = "list"; render(); $("search").value = b.dataset.s; $("assignment").value = b.dataset.a; render(); });
   wireGridExtras(list);
 }
