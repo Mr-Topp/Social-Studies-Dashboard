@@ -20,7 +20,9 @@
  */
 
 var SHEET_NAME = "Turn-ins";
-var HEADERS = ["Turned in", "Student", "Class", "Activity ID", "Activity", "Type", "Page", "Answers"];
+// Columns are found by their header name, never by position, so the sheet's layout can change safely.
+// This is the layout Teacher Tools and the AI grader use too (see teacher-submissions/AI-GRADING.md).
+var HEADERS = ["Key", "Turned in", "Student", "Class", "Activity ID", "Activity", "Kind", "Page", "Source", "Answers"];
 var MAX_ANSWER_CHARS = 45000; // a Google Sheets cell holds 50,000 characters
 
 function doGet() {
@@ -35,6 +37,7 @@ function doPost(e) {
   try {
     if (body.action === "submit") return json(submit(body));
     if (body.action === "list")   return json(list(body));
+    if (body.action === "version") return json({ ok: true, layout: "by-name" }); // columns found by header name
     if (body.action === "import") return json(importRows(body));
     if (body.action === "arena_post")  return json(arenaPost(body));
     if (body.action === "arena_event") return json(arenaEvent(body));
@@ -54,11 +57,11 @@ function submit(b) {
   var answers = JSON.stringify(b.answers == null ? {} : b.answers);
   if (answers.length > MAX_ANSWER_CHARS) answers = answers.slice(0, MAX_ANSWER_CHARS) + "…(cut off)";
 
-  var row = [
-    new Date().toISOString(), name, clean(b.course, 30), id,
-    clean(b.assignmentTitle, 120), clean(b.kind || "turn-in", 20), clean(b.page, 200), answers
-  ];
-  withLock(function (sh) { sh.appendRow(row.map(safeCell)); });
+  var rec = {
+    submittedAt: new Date().toISOString(), studentName: name, course: clean(b.course, 30), assignmentId: id,
+    assignmentTitle: clean(b.assignmentTitle, 120), kind: clean(b.kind || "turn-in", 20), page: clean(b.page, 200), source: "student"
+  };
+  withLock(function (sh) { sh.appendRow(toRow(cols(sh), rec, answers)); });
   return { ok: true, saved: true };
 }
 
@@ -67,8 +70,8 @@ function list(b) {
   if (!codeOk(b.code)) return { ok: false, error: "That teacher code is not right. (After 10 wrong tries it locks for 15 minutes.)" };
   var sh = sheet(), n = sh.getLastRow();
   if (n < 2) return { ok: true, submissions: [] };
-  var values = sh.getRange(2, 1, n - 1, HEADERS.length).getValues();
-  return { ok: true, submissions: values.map(toRecord) };
+  var c = cols(sh), values = sh.getRange(2, 1, n - 1, sh.getLastColumn()).getValues();
+  return { ok: true, submissions: values.map(function (v) { return toRecord(v, c); }) };
 }
 
 // Copies turn-ins from the old site into this sheet, skipping ones already here.
@@ -77,22 +80,22 @@ function importRows(b) {
   var rows = Array.isArray(b.rows) ? b.rows.slice(0, 500) : [];
   var added = 0, skipped = 0;
   withLock(function (sh) {
-    var have = {}, n = sh.getLastRow();
-    if (n >= 2) sh.getRange(2, 1, n - 1, HEADERS.length).getValues().forEach(function (v) { have[keyOf(toRecord(v))] = true; });
+    var have = {}, n = sh.getLastRow(), c = cols(sh);
+    if (n >= 2) sh.getRange(2, 1, n - 1, sh.getLastColumn()).getValues().forEach(function (v) { have[keyOf(toRecord(v, c))] = true; });
     var out = [];
     rows.forEach(function (r) {
       var rec = {
         submittedAt: toIso(r.submittedAt), studentName: clean(r.studentName, 40), course: clean(r.course, 30),
-        assignmentId: clean(r.assignmentId, 80), assignmentTitle: clean(r.assignmentTitle, 120), kind: "turn-in", page: "(copied from old site)",
-        answers: r.answers == null ? {} : r.answers
+        assignmentId: clean(r.assignmentId, 80), assignmentTitle: clean(r.assignmentTitle, 120), kind: "turn-in", page: "",
+        source: "old site", answers: r.answers == null ? {} : r.answers
       };
       var k = keyOf(rec);
       if (!rec.studentName || !rec.assignmentId || have[k]) { skipped++; return; }
       have[k] = true; added++;
       var a = JSON.stringify(rec.answers); if (a.length > MAX_ANSWER_CHARS) a = a.slice(0, MAX_ANSWER_CHARS) + "…(cut off)";
-      out.push([rec.submittedAt, rec.studentName, rec.course, rec.assignmentId, rec.assignmentTitle, rec.kind, rec.page, a].map(safeCell));
+      out.push(toRow(c, rec, a));
     });
-    if (out.length) sh.getRange(sh.getLastRow() + 1, 1, out.length, HEADERS.length).setValues(out);
+    if (out.length) sh.getRange(sh.getLastRow() + 1, 1, out.length, out[0].length).setValues(out);
   });
   return { ok: true, added: added, skipped: skipped };
 }
@@ -169,10 +172,28 @@ function codeOk(code) {
   if (!ok) cache.put("codefail", String(fails + 1), 900);
   return ok;
 }
-function toRecord(v) {
-  var answers; try { answers = JSON.parse(v[7] || "{}"); } catch (e) { answers = { text: String(v[7]) }; }
-  return { submittedAt: toIso(v[0]), studentName: unCell(v[1]), course: unCell(v[2]), assignmentId: unCell(v[3]),
-           assignmentTitle: unCell(v[4]), kind: unCell(v[5]) || "turn-in", page: unCell(v[6]), answers: answers };
+// Header name -> column number. "Type" is the old name for "Kind".
+function cols(sh) {
+  var c = {}, head = sh.getRange(1, 1, 1, Math.max(1, sh.getLastColumn())).getValues()[0];
+  head.forEach(function (h, i) { h = String(h).trim(); if (h && !(h in c)) c[h] = i; });
+  if (!("Kind" in c) && ("Type" in c)) c.Kind = c.Type;
+  return c;
+}
+function toRecord(v, c) {
+  var get = function (h) { return h in c ? v[c[h]] : ""; }, raw = get("Answers"), answers;
+  try { answers = JSON.parse(raw || "{}"); } catch (e) { answers = { text: String(raw) }; }
+  return { submittedAt: toIso(get("Turned in")), studentName: unCell(get("Student")), course: unCell(get("Class")),
+           assignmentId: unCell(get("Activity ID")), assignmentTitle: unCell(get("Activity")),
+           kind: unCell(get("Kind")) || "turn-in", page: unCell(get("Page")), answers: answers };
+}
+// One sheet row, each value in its named column. Columns the sheet doesn't have are skipped.
+function toRow(c, rec, answersText) {
+  var width = 0; Object.keys(c).forEach(function (h) { width = Math.max(width, c[h] + 1); });
+  var row = new Array(width).fill(""), set = function (h, val) { if (h in c) row[c[h]] = safeCell(val); };
+  set("Key", keyOf(rec)); set("Turned in", rec.submittedAt); set("Student", rec.studentName); set("Class", rec.course);
+  set("Activity ID", rec.assignmentId); set("Activity", rec.assignmentTitle); set("Kind", rec.kind);
+  set("Page", rec.page || ""); set("Source", rec.source || ""); set("Answers", answersText);
+  return row;
 }
 function keyOf(r) { return String(r.submittedAt).slice(0, 16) + "|" + String(r.studentName).toLowerCase() + "|" + r.assignmentId; }
 function toIso(v) { var d = v instanceof Date ? v : new Date(v); return isNaN(d) ? String(v || "") : d.toISOString(); }

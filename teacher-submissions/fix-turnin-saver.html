@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Fix the turn-in saver</title>
+<style>
+:root{--navy:#19364b;--red:#a33d36;--paper:#f4efe4;--card:#fffdf8;--ink:#22313b;--muted:#536571;--line:#d8cfbd;--green:#1f6b3a}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.55 system-ui,Segoe UI,Arial,sans-serif}
+main{max-width:760px;margin:auto;padding:24px 16px 60px}
+h1{color:var(--navy);font-size:clamp(1.6rem,4vw,2.2rem);line-height:1.15;margin:0 0 6px}
+.eyebrow{color:var(--red);font-weight:900;text-transform:uppercase;letter-spacing:.12em;font-size:.75rem;margin:0 0 4px}
+.lead{color:var(--muted);margin:0 0 16px}
+ol{padding-left:0;list-style:none;counter-reset:s;margin:0}
+ol>li{counter-increment:s;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px 14px 14px 56px;margin:0 0 10px;position:relative}
+ol>li::before{content:counter(s);position:absolute;left:14px;top:12px;width:30px;height:30px;border-radius:50%;background:var(--navy);color:#fff;font-weight:900;display:grid;place-items:center}
+ol>li.done::before{content:"✓";background:var(--green)}
+b{color:var(--navy)}
+kbd{background:#fff;border:1px solid #cfc5b3;border-bottom-width:2px;border-radius:5px;padding:0 6px;font:700 .9em system-ui}
+.btn{display:inline-block;border:0;border-radius:9px;background:var(--red);color:#fff;font:800 1rem system-ui;padding:11px 16px;cursor:pointer;text-decoration:none;margin-top:6px}
+.btn.navy{background:var(--navy)}
+.btn:focus-visible,a:focus-visible{outline:3px solid #2b6cb0;outline-offset:2px}
+.warn{background:#fff8e6;border:1px solid #e8cf8f;border-radius:10px;padding:8px 10px;margin:8px 0 0;font-size:.95rem}
+.st{display:block;font-weight:700;margin-top:6px}
+.ok{color:var(--green)}.bad{color:var(--red)}
+#result ul{margin:6px 0 0;padding-left:20px}
+</style>
+<script>window.NO_FEEDBACK_POPUP = true;</script>
+<script src="../shared/turnin.js?v=20261102read"></script>
+</head>
+<body>
+<main>
+<p class="eyebrow">Teacher dashboard · quick fix</p>
+<h1>Fix the turn-in saver</h1>
+<p class="lead">This fixes the dashboard showing wrong grades, missing students and a messy layout. The turn-in script was reading your sheet's columns in the wrong order. The new one finds each column by its name. About 2 minutes. Use your <b>school</b> Google account. Nothing in your sheet gets changed.</p>
+<ol>
+  <li id="s1"><b>Copy the new script.</b><br><button class="btn" id="copyBtn">Copy the script</button><span class="st" id="copySt" aria-live="polite"></span></li>
+  <li id="s2"><b>Open your Class Turn-ins sheet</b>, then click <b>Extensions</b> → <b>Apps Script</b>.<br>
+    <a class="btn navy" id="openBtn" href="https://docs.google.com/spreadsheets/d/1CYUhw9DAZSUP55WBfnGYkHt3HIhLfVFInGlCdmObZEs/edit" target="_blank" rel="noopener">Open my Class Turn-ins sheet ↗</a>
+    <p class="warn">Make sure the file on the left says <b>Code.gs</b> (the turn-in saver), not your Teacher Tools script.</p></li>
+  <li id="s3"><b>Paste over the old code.</b> Click inside the code, then press <kbd>Ctrl</kbd>+<kbd>A</kbd>, <kbd>Ctrl</kbd>+<kbd>V</kbd>, <kbd>Ctrl</kbd>+<kbd>S</kbd>.</li>
+  <li id="s4"><b>Publish it.</b> <b>Deploy</b> (top right) → <b>Manage deployments</b> → <b>pencil ✏️</b> → Version: <b>New version</b> → <b>Deploy</b>.
+    <p class="warn">Don't click "New deployment." That makes a new address, and students' work wouldn't reach your sheet.</p></li>
+  <li id="s5"><b>Check that it worked.</b><br><button class="btn navy" id="checkBtn">Check it</button><div class="st" id="result" aria-live="polite"></div></li>
+</ol>
+<p class="lead"><a href="./">← Back to the teacher dashboard</a></p>
+</main>
+<script>
+const $ = id => document.getElementById(id);
+const URL_ = (typeof GOOGLE_SAVER_URL === "string" && GOOGLE_SAVER_URL) ? GOOGLE_SAVER_URL : "";
+$("copyBtn").onclick = async () => {
+  const st = $("copySt");
+  try {
+    const code = await fetch("../shared/google-saver/Code.gs", { cache: "no-store" }).then(r => { if (!r.ok) throw 0; return r.text(); });
+    if (!/by-name/.test(code) || !/function toRow/.test(code)) throw 0;
+    await navigator.clipboard.writeText(code);
+    st.className = "st ok"; st.textContent = "Copied! Now do step 2.";
+    $("s1").classList.add("done");
+  } catch (e) { st.className = "st bad"; st.textContent = "Couldn't copy. Refresh this page and try again."; }
+};
+$("openBtn").addEventListener("click", () => $("s2").classList.add("done"));
+$("checkBtn").onclick = async () => {
+  const out = $("result");
+  out.className = "st"; out.textContent = "Checking…";
+  try {
+    const ver = await fetch(URL_, { method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify({ action: "version" }) }).then(r => r.json()).catch(() => ({}));
+    if (!(ver.ok && ver.layout === "by-name")) {
+      out.className = "st bad";
+      out.innerHTML = "Not updated yet. Google is still running the old version. Redo step 4 and make sure you pick <b>New version</b> before Deploy. Then check again.";
+      return;
+    }
+    ["s3", "s4", "s5"].forEach(id => $(id).classList.add("done"));
+    out.className = "st ok";
+    out.innerHTML = "✅ It worked! <a href=\"./\">Open your dashboard</a> and type your code again.";
+  } catch (e) { out.className = "st bad"; out.textContent = "Couldn't reach Google. Check your internet and try again."; }
+};
+</script>
+</body>
+</html>
