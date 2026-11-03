@@ -174,7 +174,7 @@ window.CLASS_ASSIGNMENTS = {
   "sociology-unit1-review-seahaven":          { course: "sociology", unit: 1, day: 8, title: "Day 8 · Unit 1 Review · Escape from Seahaven", path: "sociology-ethics-review/", std: ["SS.9-12.Soc.2", "SS.9-12.Soc.4", "SS.9-12.Soc.1", "SS.9-12.Soc.3"] },
 
   // ---- Sociology · Unit 2 ----
-  "sociology-unit2-day1-first-shift":         { course: "sociology", unit: 2, day: 1, title: "Day 1 · First Shift: Status, Roles & Norms", path: "sociology/unit2-day1-first-shift/", std: ["SS.9-12.Soc.5", "SS.9-12.Soc.7"] },
+  "sociology-unit2-day1-first-shift":         { course: "sociology", unit: 2, day: 1, title: "Day 1 · First Shift: The Unwritten Rules", path: "sociology/unit2-day1-first-shift/", std: ["SS.9-12.Soc.5", "SS.9-12.Soc.7"] },
   "sociology-unit2-arrival-culture":          { course: "sociology", unit: 2, day: 2, title: "Day 2 · The Arrival: A New Culture", path: "sociology/arrival-culture/", std: ["SS.9-12.Soc.5", "SS.9-12.Soc.6"] },
   "sociology-unit2-day3-culture-shock":      { course: "sociology", unit: 2, day: 3, title: "Day 3 · Read the Room: Osaka", path: "sociology/unit2-day3-culture-shock-exchange/", std: ["SS.9-12.Soc.6", "SS.9-12.Soc.5"] },
 
