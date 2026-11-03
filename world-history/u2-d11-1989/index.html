@@ -1,167 +1,27 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>1989: How Does a Wall Come Down? | World History Unit 2 Day 8</title>
-<meta name="description" content="Live through 1988 and 1989 in East Germany and watch each cause push the Berlin Wall closer to falling.">
-<style>
-:root{--ink:#22262b;--muted:#565e66;--paper:#f2f2ef;--card:#fff;--line:#d7d6cf;--slate:#3b4652;--red:#b23a2f;--gold:#d7a93a;--green:#2a6b45;--bad:#a2392f;--sky:#2f6690}
-*{box-sizing:border-box}
-body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.5 system-ui,Segoe UI,Arial,sans-serif}
-header{background:repeating-linear-gradient(90deg,#e9e8e3 0 58px,#e1e0da 58px 60px);border-bottom:5px solid var(--red);padding:16px max(16px,calc((100vw - 900px)/2)) 12px}
-.k{font-size:.78rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:var(--red);margin:0}
-h1{margin:2px 0 4px;font-size:clamp(1.6rem,3.4vw,2.3rem)}
-.std{margin:2px 0;font-size:.92rem;color:var(--muted)}.std b{color:var(--ink)}
-.hud{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line);padding:8px max(16px,calc((100vw - 900px)/2));display:flex;gap:12px;flex-wrap:wrap;align-items:center;font-weight:800;font-size:.92rem;box-shadow:0 2px 8px #22262b12}
-.hud .bar{flex:1;min-width:120px;height:10px;background:#e4e3dc;border-radius:9px;overflow:hidden}.hud .bar span{display:block;height:100%;width:0;background:var(--slate);transition:width .4s}
-.pill{background:#efeee8;border-radius:20px;padding:3px 10px;white-space:nowrap}
-.wall{display:flex;align-items:center;gap:6px}.bricks{display:flex;gap:2px}.brick{width:11px;height:16px;background:#8d939a;border-radius:2px;transition:transform .5s,background .5s}.brick.down{background:var(--gold);transform:rotate(-35deg) translateY(3px)}
-main{max-width:900px;margin:auto;padding:14px 16px 60px}
-.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;box-shadow:0 3px 12px #22262b0d}
-.kicker{font-size:.78rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:var(--sky);margin:0}
-h2{margin:2px 0 10px;font-size:1.45rem}
-.teach{background:#eef1f4;border-left:5px solid var(--slate);border-radius:9px;padding:10px 14px;margin:0 0 12px}.teach p{margin:5px 0}.teach b{color:var(--slate)}
-.block{margin:14px 0;padding:14px;border-radius:12px;border:2px solid var(--line);background:#fff}
-.block.current{border-color:var(--ink);box-shadow:0 0 0 4px #b23a2f2a}
-.block h3{margin:0 0 10px;font-size:1.06rem;line-height:1.4;font-weight:700}
-.event{background:#faf8f3;border-style:dashed;border-color:#c9bfa5}.event.current{border-style:solid}
-.event-body p{margin:4px 0}
-.memo{font-weight:900;color:var(--red);text-transform:uppercase;font-size:.78rem;letter-spacing:.1em;margin:0 0 4px}
-.src{display:block;background:#fbfaf6;border:1px solid var(--line);border-left:5px solid var(--slate);border-radius:8px;padding:8px 12px;margin:0 0 10px;font-weight:400}
-.src small{display:block;font-size:.74rem;font-weight:900;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:2px}
-.src q{font-family:Georgia,"Times New Roman",serif;font-style:italic}
-.split{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:0 0 10px;font-weight:400}.split div{border-radius:9px;padding:8px 10px;font-size:.93rem}.split b{display:block}
-.west{background:#e2edf5;border:1px solid #bdd3e3}.east{background:#f3e3e1;border:1px solid #e2c0bb}
-.chain{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 10px;padding:0;list-style:none;font-weight:400}.chain li{background:#fff;border:2px solid var(--slate);border-radius:8px;padding:5px 9px;font-size:.88rem}.chain li b{color:var(--red)}
-.picked{margin:10px 0 4px;color:var(--muted)}.result{background:#efeee8;border-radius:9px;padding:9px 12px}.result p{margin:4px 0}
-.real{border-top:1px dashed #c3c1b6;margin-top:6px!important;padding-top:6px}
-.tag{display:inline-block;font-weight:900;font-size:.8rem;border-radius:12px;padding:2px 9px;margin-right:6px}.tag.up{background:#fbecc8;color:#7a5410}.tag.flat{background:#e8e7e0;color:var(--ink)}
-.qlabel{font-size:.75rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:var(--sky);margin:0 0 4px}
-.choices{display:grid;gap:8px}
-@media(min-width:700px){.q .choices{grid-template-columns:1fr 1fr}}
-button{font:inherit;cursor:pointer;border-radius:10px;min-height:46px}
-.choice{text-align:left;background:#fff;color:var(--ink);border:2px solid #cac8bd;padding:10px 12px;font-weight:650;line-height:1.3}
-.choice:hover:not(:disabled){border-color:var(--ink);background:#fcfcf9}.choice:disabled{opacity:.5;cursor:not-allowed}
-.go{margin-top:12px;background:var(--slate);color:#fff;border:0;padding:11px 18px;font-weight:900}
-button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid #2f7dbd;outline-offset:2px}
-.answered{font-weight:800;color:var(--green);margin:4px 0}.why{margin:2px 0;color:var(--muted)}
-.msg{min-height:1.3em;font-weight:750;margin:8px 0 0}.msg.bad{color:var(--bad)}.msg.good{color:var(--green)}
-label{display:block;font-weight:850;margin:14px 0 4px}.stem{margin:0 0 4px;color:var(--muted);font-size:.92rem}
-input,textarea{width:100%;font:inherit;border:2px solid #cac8bd;border-radius:9px;padding:10px;background:#fff;color:var(--ink)}
-.steps{display:grid;gap:6px;margin:10px 0;padding:0;list-style:none}.steps li{background:#efeee8;border-radius:9px;padding:8px 12px;font-weight:700}
-@media(max-width:640px){.split{grid-template-columns:1fr}}
-.welcome{background:#e6f1ea;color:var(--green);font-weight:800;border-radius:9px;padding:8px 12px;margin:0 0 10px}
-.foot{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-top:14px;color:var(--muted);font-size:.85rem}
-.foot button{background:#e8e7e0;border:0;padding:8px 12px;font-weight:800;color:var(--ink)}
-.note{font-size:.8rem;color:var(--muted)}
-@media print{.hud,.foot,.go{display:none}}
-</style>
+<meta name="description" content="You're 17 in East Berlin. Live 1988–1989 and crack the Berlin Wall: the Stasi, Gorbachev, Solidarity, Hungary's open border, Leipzig, and one mistake on live TV.">
+<link rel="stylesheet" href="style.css?v=20261103w89">
 <script src="../../shared/assignments.js?v=20261103c"></script>
 <script src="../../shared/turnin.js?v=20261103c"></script>
-<script src="../../shared/unit-game.js?v=20261103c"></script>
-</head><body>
-<header>
-  <p class="k">World History · Unit 2 · Day 8</p>
-  <h1>1989: How Does a Wall Come Down?</h1>
-  <p class="std"><b>SS.9-12.WH.34</b> Map how communism and decolonization changed the global order from 1945 to 1991. &nbsp;<b>SS.9-12.WH.37</b> Explain how various groups promoted their interests and goals within the context of the Cold War. &nbsp;<b>SS.9-12.WH.35</b> Compare and contrast the methods of control used by various forms of government during the Cold War.</p>
-  <p class="std"><b>Goal:</b> Explain the chain of causes that brought down the Berlin Wall, and how East Germany controlled its people. · About 25 minutes.</p>
-</header>
-<div class="hud" aria-label="Progress and pressure on the wall">
-  <span id="progressText">0 checks done</span>
-  <div class="bar" aria-hidden="true"><span id="progressFill"></span></div>
-  <span class="pill wall">Pressure on the wall: <span class="bricks" id="bricks" aria-hidden="true"></span> <span id="wallNum">0/10</span></span>
+</head><body class="on-title">
+<div class="hud" id="hud" hidden aria-label="Your story">
+  <div class="hud-in">
+    <div class="you"><span class="yface" aria-hidden="true">🧑</span><span class="yt"><b id="youWhere">East Berlin</b><small id="youName"></small></span></div>
+    <div class="claims" id="chaps" aria-label="Chapters"></div>
+    <div class="meters">
+      <div class="m" id="mWall" title="Cracks in the wall (higher is better)"><span class="mi" aria-hidden="true">🔨</span><span class="ml">Wall cracks</span><span class="bar"><span id="wallFill"></span></span><span class="mn" id="wallNum">0%</span></div>
+      <div class="m" id="mFile" title="Your Stasi file (thinner is safer)"><span class="mi" aria-hidden="true">📁</span><span class="ml">Stasi file</span><span class="bar red"><span id="fileFill"></span></span><span class="mn" id="fileNum">0 pg</span></div>
+    </div>
+    <div class="rival" id="rivalBox" title="The Stasi is watching"><span class="rface" aria-hidden="true">🕵️</span><span class="rmood" id="rMood" aria-hidden="true">😏</span><span class="rt"><b>Stasi</b><small>watching</small></span></div>
+  </div>
+  <div class="goalrow"><span class="goalchip">🎯 Best ending: 🔨 65%+ · 📁 4 pages or less</span><span class="stepn" id="stepN"></span></div>
 </div>
-<main>
-  <p class="welcome" id="welcome" hidden></p>
-  <div id="app"></div>
+<main id="wrap">
+  <div class="welcome" id="welcome" role="status" hidden></div>
+  <section id="app" aria-live="polite"></section>
   <div class="foot"><span>Progress saves on this device. Your teacher sees your work after you turn it in.</span><button type="button" id="restartBtn">Start over</button></div>
 </main>
-<script>
-const T = (cls, txt) => `<span class="tag ${cls}">${txt}</span>`;
-const SRC = (label, body) => `<span class="src"><small>${label}</small>${body}</span>`;
-const REAL = txt => `<p class="real"><b>What really happened:</b> ${txt}</p>`;
-UnitGame.start({
-  key: "wh-u2-d11-1989-v1",
-  assignmentId: "wh-u2-d11-1989",
-  title: "World History · Unit 2 · Day 8 · 1989: How Does a Wall Come Down?",
-  standard: "SS.9-12.WH.34, SS.9-12.WH.37, SS.9-12.WH.35",
-  oldApi: "https://fynn-class-assignment-submissions-20261024.neotboy.chatgpt.site/api/submit",
-  startFx: { wall: 0 },
-  clampFx: fx => { fx.wall = Math.max(0, Math.min(10, fx.wall)); },
-  hud: st => {
-    const w = st.fx.wall || 0;
-    document.getElementById("bricks").innerHTML = Array.from({ length: 10 }, (_, i) => `<span class="brick${i < w ? " down" : ""}"></span>`).join("");
-    document.getElementById("wallNum").textContent = w + "/10";
-  },
-  startLabel: "Start in East Berlin",
-  introHtml: `<p class="kicker">East Berlin, 1988</p><h2>You're 17. There's a wall at the end of your street.</h2>
-    <p>You live in <b>East Berlin</b>. Your cousin lives two miles away in <b>West Berlin</b>, but you have never been allowed to visit. A concrete wall and armed guards stand in between.</p>
-    <p>In about a year, that wall will be open. Your job: figure out <b>what brought it down</b>.</p>
-    <ul class="steps"><li>1. Read short sources and answer the checks.</li><li>2. Make choices as an East German teen. Watch the bricks fall at the top.</li><li>3. Write 2 short answers and turn in.</li></ul>
-    <p class="note">You, your cousin, and your personal story are made up. The big historical events, dates, and quotes are real.</p>`,
-  scenes: [
-    { kicker: "Part 1 of 3 · 1945–1988", title: "A Wall Around a City",
-      teach: `<p>After World War II, Germany was split. <b>West Germany</b> was a democracy allied with the U.S., Britain, and France. <b>East Germany</b> was communist and controlled by the Soviet Union. The city of Berlin, deep inside East Germany, was split too.</p>
-        <p><b>Communism</b> here means an economic and political system in which the state owns most property and one party rules.</p>
-        <p>By 1961, more than 2.5 million East Germans had moved west. On <b>August 13, 1961</b>, East Germany put up a wall overnight.</p>`,
-      blocks: [
-        { type: "q", id: "w1", std: "WH.35", short: "Why the wall was built", prompt: SRC("Source card · Summer 1961", `Thousands of East Germans crossed into West Berlin every week. Many were young workers, doctors, and engineers. In July 1961 alone, about 30,000 left.`) + "Based on the card, why did East Germany build the wall?", options: ["To stop its own people from leaving", "To keep West German armies from invading", "To keep out goods from Western stores", "To mark a new border chosen by voters"], hint: "Which way were people moving, and who was losing them?", why: "The wall was built to keep East Germans in. The country was losing workers it needed." },
-        { type: "q", id: "w2", std: "WH.35", short: "East vs West government", prompt: `<span class="split"><span class="west"><b>WEST GERMANY</b>Several parties compete in free elections. People can travel abroad. Newspapers can criticize leaders.</span><span class="east"><b>EAST GERMANY</b>One party rules. Jobs, housing, and health care are guaranteed. Travel to the West is banned. The state controls the news.</span></span>` + "Which is a real difference between the two governments?", options: ["Only West Germans could choose between several parties", "East Germans had no jobs or health care; West Germans did", "West Germany had no government at all during the Cold War", "Both banned travel, but only East Germany had free elections"], hint: "Compare what each side says about parties and elections.", why: "West Germany had competing parties and free elections. East Germany guaranteed jobs and care but allowed only one ruling party." },
-        { type: "q", id: "w3", std: "WH.35", short: "Stasi = control by spying", prompt: SRC("Source card · The Stasi", `East Germany's secret police, the <b>Stasi</b>, kept files on millions of people. In 1989 it had about 91,000 employees and about 189,000 part-time informers: neighbors, coworkers, classmates, even family members who reported on people.`) + "What method of control does this card describe?", options: ["Spying on people using informers", "Winning support with free elections", "Letting newspapers report freely", "Paying citizens to move to the West"], hint: "What were the informers doing?", why: "The Stasi controlled people through fear: anyone might be reporting on you." },
-        { type: "event", id: "e1", short: "Stasi questions at school", html: `<p class="memo">Your story · Spring 1988</p><p>A man from the school office pulls you aside. He knows your cousin in West Berlin sent you a letter. He asks what was in it and who you showed it to. What do you do?</p>`,
-          choices: [
-            { label: "Say it was just family news and leave", fx: { wall: 0 }, result: `<p>${T("flat","No change")}You stay safe. But you feel watched every day after this.</p>` + REAL("Millions of East Germans lived this way: careful about what they said, even to friends.") },
-            { label: "Refuse to answer his questions", fx: { wall: 1 }, result: `<p>${T("up","+1 pressure")}He writes something down. You might lose your spot at university. But you showed you won't be scared into talking.</p>` + REAL("People who refused to cooperate could lose jobs or school spots. More and more people quietly stopped cooperating in the late 1980s.") },
-            { label: "Tell a friend at church what happened", fx: { wall: 1 }, result: `<p>${T("up","+1 pressure")}Your friend says others are being questioned too. Some meet at churches to talk openly.</p>` + REAL("Churches became some of the only places East Germans could meet and speak somewhat freely. Peace prayers there grew into protests in 1989.") }
-          ] },
-        { type: "q", id: "w4", std: "WH.37", short: "Reagan's speech goal", prompt: SRC("President Ronald Reagan · speech at the Berlin Wall, June 12, 1987", `<q>Mr. Gorbachev, open this gate! Mr. Gorbachev, tear down this wall!</q>`) + "What was Reagan trying to do with this speech?", options: ["Push the Soviet leader to open the wall", "Announce the U.S. would tear down the wall", "Ask West Germany to build a second wall", "Thank the Soviets for opening the wall"], hint: "Who is he speaking to, and what does he ask that person to do?", why: "Reagan publicly challenged Soviet leader Mikhail Gorbachev, adding pressure from the West. The wall was still standing for two more years." }
-      ] },
-    { kicker: "Part 2 of 3 · 1985–Summer 1989", title: "The Cracks Spread",
-      teach: `<p>By the 1980s, communist economies were failing. Stores ran short of goods. East Germans could wait over 10 years for a car.</p>
-        <p>In 1985, <b>Mikhail Gorbachev</b> became the Soviet leader. He started <b>glasnost</b> (openness: people could criticize the government more) and <b>perestroika</b> (restructuring: changing the economy). He also signaled that Soviet tanks would <b>not</b> crush protests in Eastern Europe, as they had in Hungary in 1956 and Czechoslovakia in 1968.</p>`,
-      blocks: [
-        { type: "q", id: "w5", std: "WH.35", short: "Glasnost = openness", prompt: SRC("Source card · Soviet Union, late 1980s", `Under glasnost, Soviet newspapers began printing stories about government mistakes and past crimes. Banned books were published.`) + "Based on the card, what did glasnost change?", options: ["People could criticize leaders more openly", "The government took over every newspaper", "The economy was split into private companies", "Soviet tanks were sent into Eastern Europe"], hint: "What started showing up in newspapers?", why: "Glasnost means openness. People could talk about problems that had been hidden." },
-        { type: "q", id: "w6", std: "WH.35", short: "Why Gorbachev's signal mattered", prompt: SRC("Source card · Earlier uprisings", `<b>Hungary, 1956:</b> Soviet tanks crushed an uprising. Thousands were killed.<br><b>Czechoslovakia, 1968:</b> Soviet-led troops ended a reform movement.<br><b>1989:</b> Gorbachev says each country may choose its own path.`) + "Why did Gorbachev's new message matter so much to people in Eastern Europe?", options: ["Protesters stopped fearing Soviet tanks", "It meant the Soviet Union would join NATO that year", "It ended all communist parties in Europe overnight", "It made the Soviets send more soldiers to Berlin"], hint: "Compare what happened in 1956 and 1968 to what Gorbachev said.", why: "The fear of Soviet tanks had kept people quiet. Once that fear faded, people dared to act." },
-        { type: "q", id: "w7", std: "WH.37", short: "Solidarity: workers' union in Poland", prompt: SRC("Source card · Poland", `<b>Solidarity</b> was an independent labor union started by shipyard workers in 1980 and led by Lech Wałęsa. The government banned it, but it kept organizing. In June 1989, partly free elections were held. Solidarity won almost every seat it was allowed to run for.`) + "How did Solidarity push for its goals?", options: ["Workers formed a union, then won elections", "It asked the Soviet army to take over Poland", "It built a wall to keep communists out", "It stopped all elections from taking place"], hint: "Look at who started it and what happened in June 1989.", why: "Solidarity used union organizing, strikes, and then votes. Poland became the first Eastern Bloc country with a non-communist-led government." },
-        { type: "q", id: "w8", std: "WH.34", short: "Hungary's open border = escape route", prompt: SRC("Source card · Summer 1989", `In May 1989, Hungary began taking down its border fence with Austria. East Germans were allowed to vacation in Hungary. In September, Hungary let them cross into Austria. Tens of thousands left.`) + "Why did Hungary's open border matter so much for East Germans?", options: ["They could reach the West through Hungary and Austria", "They could now visit West Berlin without leaving home", "Hungary agreed to build a new wall for East Germany", "Austria sent its army to rescue East Germans"], hint: "Trace the route on the card: East Germany → ? → ?", why: "The wall still stood, but there was now a way around it. East Germany was losing people again, fast." },
-        { type: "event", id: "e2", short: "Summer 1989 in Hungary", html: `<p class="memo">Your story · August 1989</p><p>You're on a family trip to Lake Balaton in Hungary. People at the campground whisper that the Austrian border is open. Thousands of East Germans are going. What do you do?</p>`,
-          choices: [
-            { label: "Cross into Austria and head west", fx: { wall: 2 }, result: `<p>${T("up","+2 pressure")}You leave almost everything behind. East Germany loses one more young worker, and the news shows the world thousands like you.</p>` + REAL("Tens of thousands left this way. East Germany looked like it was emptying out, which made its leaders look weak.") },
-            { label: "Go home and join a protest group", fx: { wall: 2 }, result: `<p>${T("up","+2 pressure")}Back home, you join a church group that's planning marches. Their slogan: <b>"We're staying here!"</b> They want change at home.</p>` + REAL("Many East Germans chose to stay and demand reform rather than leave.") },
-            { label: "Go home and keep your head down", fx: { wall: 0 }, result: `<p>${T("flat","No change")}You stay safe for now. Most people made this choice at first. Speaking out was still risky.</p>` + REAL("Most East Germans did not protest at first. That changed fast in the fall.") }
-          ] }
-      ] },
-    { kicker: "Part 3 of 3 · Fall 1989", title: "The Night the Gates Opened",
-      teach: `<p>In <b>Leipzig</b>, peace prayers at a church turned into Monday night marches. On <b>October 9, 1989</b>, about 70,000 people marched peacefully. Armed police were waiting, but they did not shoot.</p>
-        <p>The marchers chanted <b>"Wir sind das Volk!"</b> ("We are the people!"). Within weeks, crowds in East Berlin topped half a million.</p>`,
-      blocks: [
-        { type: "event", id: "e3", short: "Leipzig Oct 9 march", html: `<p class="memo">Your story · Monday, October 9, 1989 · Leipzig</p><p>Rumors say police have been told to stop the march by force. Hospitals are said to be preparing extra blood. The march starts at 6 p.m. What do you do?</p>`,
-          choices: [
-            { label: "March with the crowd", fx: { wall: 2 }, result: `<p>${T("up","+2 pressure")}You hold a candle. The crowd keeps chanting <b>"No violence!"</b> The police step back.</p>` + REAL("About 70,000 marched. With a crowd that big and no clear orders, police did not shoot. After that night, the marches grew every week.") },
-            { label: "Watch from a side street", fx: { wall: 1 }, result: `<p>${T("up","+1 pressure")}You see the police step back. Next Monday, you join in.</p>` + REAL("The crowds grew every week after October 9 as fear faded.") },
-            { label: "Stay home and listen to West German radio", fx: { wall: 0 }, result: `<p>${T("flat","No change")}The radio says the march was peaceful. You can't believe it.</p>` + REAL("About 70,000 marched peacefully, and police did not shoot. The marches grew every week after that.") }
-          ] },
-        { type: "q", id: "w9", std: "WH.37", short: "'We are the people' meaning", prompt: SRC("Leipzig protest chant · Oct. 1989", `<q>Wir sind das Volk!</q> (We are the people!)`) + "What were marchers telling the government with this chant?", options: ["Leaders should answer to ordinary citizens", "The people wanted the Soviet army to stay longer", "The marchers wanted to leave for West Germany", "The people agreed with the one-party system"], hint: "A government that calls itself a \"people's\" republic hears this chant. What's the message?", why: "The marchers were saying power should come from the people, not one party." },
-        { type: "q", id: "w10", std: "WH.35", short: "Schabowski press conference mistake", prompt: SRC("Live TV press conference · East Berlin, Nov. 9, 1989", `Official Günter Schabowski read a new rule letting East Germans apply to travel. He had not been told when it started. A reporter asked when. He looked at his notes and said it took effect immediately, without delay. The rule was supposed to start the next day.`) + "Why did huge crowds rush to the wall that night?", options: ["An official said by mistake they could cross now", "The Soviet army ordered the guards to leave the wall", "West German troops opened the gates from the other side", "Reagan arrived in Berlin and gave the order to open it"], hint: "What did he say on TV, and was it what was planned?", why: "Schabowski's mistake on live TV sent thousands to the checkpoints that same night." },
-        { type: "event", id: "e4", short: "Nov 9 at the checkpoint", html: `<p class="memo">Your story · Thursday, November 9, 1989 · 9 p.m.</p><p>Your neighbor bangs on your door: "They said on TV we can cross! Now!" What do you do?</p>`,
-          choices: [
-            { label: "Run to the Bornholmer Street checkpoint", fx: { wall: 2 }, result: `<p>${T("up","+2 pressure")}Thousands are there, chanting "Open the gate!" The guards have no orders.</p>` + REAL("At about 11:30 p.m., the officer in charge at Bornholmer Street opened the gate. He had no orders, but the crowd was too big. Other crossings opened that night.") },
-            { label: "Call your friends, then go together", fx: { wall: 2 }, result: `<p>${T("up","+2 pressure")}Your group gets there as the crowd grows to thousands.</p>` + REAL("At about 11:30 p.m., the officer in charge at Bornholmer Street opened the gate. Other crossings opened that night.") },
-            { label: "Wait until morning to be safe", fx: { wall: 1 }, result: `<p>${T("up","+1 pressure")}By morning, people are dancing on top of the wall.</p>` + REAL("The gates opened late that night. By morning, people were chipping off pieces of the wall.") }
-          ] },
-        { type: "q", id: "w11", std: "WH.35", short: "Why guards opened the gate", prompt: "Look back at what happened at Bornholmer Street. Why did the guards open the gate instead of shooting?", options: ["The crowd was huge, and they had no clear orders", "The Soviet Union ordered them to open the gate", "They were told to open it at the press conference", "West Germany paid them to open the gate"], hint: "Reread the \"What really happened\" box for November 9.", why: "Without orders and facing thousands, the officer in charge chose to open the gate. Control only works if guards are willing to use force." },
-        { type: "q", id: "w12", std: "WH.34", short: "Domino chain: Gorbachev made others possible", prompt: `<span class="chain"><li><b>1985</b> Gorbachev's reforms</li><li><b>June 1989</b> Solidarity wins in Poland</li><li><b>Summer 1989</b> Hungary opens its border</li><li><b>Oct. 1989</b> Leipzig march</li><li><b>Nov. 9, 1989</b> Schabowski's mistake</li></span>` + "Here is the domino chain. Which domino made the later ones possible by taking away the fear of Soviet tanks?", options: ["Gorbachev's reforms", "Hungary opening its border", "The Leipzig march", "Schabowski's mistake"], hint: "Which person said each country could choose its own path?", why: "Gorbachev came first. Once people believed Soviet tanks would not come, Poland, Hungary, and the marchers in Leipzig could act." },
-        { type: "q", id: "w13", std: "WH.34", short: "How 1989–91 changed the map", prompt: SRC("Source card · After the wall", `<b>Oct. 3, 1990:</b> East and West Germany reunite as one country.<br><b>Dec. 1991:</b> The Soviet Union breaks up into 15 independent countries.`) + "How did the world map change after the wall came down?", options: ["Germany reunited and the USSR split apart", "Germany split into more pieces and the USSR grew", "Berlin became its own separate country in 1990", "Nothing changed until a new wall was built"], hint: "Look at what happened to Germany and to the USSR.", why: "Two Germanys became one, and one Soviet Union became 15 countries. The Cold War was over." }
-      ] }
-  ],
-  finale: {
-    title: "What Brought the Wall Down?",
-    report: st => `<p><b>Pressure on the wall: ${st.fx.wall}/10.</b> No single person brought down the wall. It took leaders, ordinary people, and one big mistake.</p>
-      <p><b>The chain:</b> failing economies → Gorbachev's reforms (1985) → Solidarity wins in Poland (June 1989) → Hungary opens its border (summer 1989) → Leipzig marches (Oct. 1989) → Schabowski's mistake (Nov. 9, 1989)</p><p>Answer both in 1–2 full sentences.</p>`,
-    prompts: [
-      { id: "who", short: "Leaders, people, or an accident", label: "1. What brought the wall down most: leaders, ordinary people, or an accident? Give one example from today.", stem: "I think ___ mattered most because ___.", min: 70, mustAll: [["leader", "gorbachev", "reagan", "people", "protest", "march", "citizen", "accident", "mistake", "schabowski", "press"], ["because", "since"]], mustMsg: "In answer 1, pick leaders, people, or an accident AND explain why (use \"because\")." },
-      { id: "link", short: "Weakest link in the chain", label: "2. Pick one domino in the chain. If it had never happened, could the wall have stayed up longer? Explain.", stem: "If ___ had never happened, the wall ___ because ___.", min: 70, newWords: 5, mustAll: [["gorbachev", "glasnost", "perestroika", "solidarity", "poland", "hungary", "border", "leipzig", "march", "schabowski", "mistake", "press", "economy", "shortage"], ["because", "since"]], mustMsg: "In answer 2, name one domino (like Hungary, Leipzig, or Gorbachev) AND explain (use \"because\")." }
-    ]
-  },
-  extraAnswers: st => ({ "Pressure on the wall": st.fx.wall + " of 10" })
-});
-</script>
+<script src="game.js?v=20261103w89"></script>
 </body></html>
