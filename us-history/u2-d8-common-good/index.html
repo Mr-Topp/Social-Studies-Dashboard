@@ -55,6 +55,8 @@ input,textarea{width:100%;font:inherit;border:2px solid #cfcdbf;border-radius:9p
 .foot{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-top:14px;color:var(--muted);font-size:.85rem}
 .foot button{background:#ebe9e0;border:0;padding:8px 12px;font-weight:800;color:var(--ink)}
 .src{font-size:.8rem;color:var(--muted)}
+.posters{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:8px 0}.posters figure,.cartoon{margin:0;background:#f6f4ee;border:1px solid var(--line);border-radius:10px;padding:8px}.posters img,.cartoon img{display:block;width:100%;height:auto;max-height:430px;object-fit:contain;background:#fff;border-radius:6px}.posters figcaption,.cartoon figcaption{font-size:.8rem;color:var(--muted);margin-top:5px;line-height:1.3}.posters a,.cartoon a{color:inherit}.cnote{background:#fff4e5;border-left:5px solid #b7791f;border-radius:8px;padding:7px 10px;font-size:.92rem;margin:4px 0 8px}
+@media(max-width:640px){.posters{grid-template-columns:1fr}}
 .big{font-size:1.15rem}
 @media print{.hud,.foot,.go{display:none}}
 </style>
@@ -65,7 +67,7 @@ input,textarea{width:100%;font:inherit;border:2px solid #cfcdbf;border-radius:9p
 <header>
   <p class="k">U.S. History · Unit 2 · Day 4</p>
   <h1>World War II: Who Put the Common Good First?</h1>
-  <p class="std"><b>SS.9-12.US.34</b> Civic virtue and contributions of individuals</p>
+  <p class="std"><b>SS.9-12.US.31 · US.33 · US.34</b> Home front, propaganda and cartoons, and civic virtue</p>
   <p class="std"><b>Goal:</b> Explain how Americans sacrificed for the common good on the home front, and who was denied fair treatment. · About 25 minutes.</p>
 </header>
 <div class="hud" aria-label="Progress">
@@ -100,7 +102,7 @@ UnitGame.start({
   introHtml: `<p class="kicker">Cedar Rapids, Iowa · 1943</p><h2>The Ration Book</h2>
     <p>The U.S. is fighting World War II. Soldiers need food, metal, rubber, and gas, so families at home get less. You run the shopping for the <b>Novak family</b>: Mom, Dad, and two kids.</p>
     <div class="pair"><div><b>Your ration book</b>Each month the family gets <b>red points</b> (meat, butter, cheese) and <b>blue points</b> (canned food). Watch them at the top.</div><div><b>Your meter</b>The <b>Common good</b> meter goes up when your choices help the whole country, not just your family.</div></div>
-    <ul class="steps"><li>1. Make the Novaks' choices and answer the checks.</li><li>2. Learn who else sacrificed, and who was treated unfairly.</li><li>3. Write 2 short answers and turn in.</li></ul>
+    <ul class="steps"><li>1. Make the Novaks' choices and answer the checks.</li><li>2. Decode real WWII posters and a political cartoon.</li><li>3. Write 2 short answers and turn in.</li></ul>
     <p class="src">The Novaks are made up. The rationing rules, people, and events are real. Point prices for single items are simplified.</p>`,
   scenes: [
     { kicker: "Part 1 of 3 · Spring 1943", title: "Shopping with Points",
@@ -142,6 +144,15 @@ UnitGame.start({
             { label: "Take the city bus instead of driving", fx: { good: 1 }, result: `<p>${T("up", "+1 common good")}That saves gas and rubber too. Buses and streetcars were packed during the war.</p>` },
             { label: "Keep driving alone. It's his car.", fx: { good: -1 }, result: `<p>${T("down", "−1 common good")}Legal, but it uses up rubber that the military needed for trucks and planes.</p>` }
           ] },
+        { type: "note", html: `<p class="qlabel">Name it: propaganda</p><p><b>Propaganda</b> is a message made to push people to think or act a certain way. It uses strong pictures and feelings like fear, guilt, or pride more than facts. During World War II, the U.S. government, and companies helping it, made thousands of posters like these.</p><div class="posters"><figure><a href="ride-alone-poster.jpg" target="_blank" rel="noopener"><img src="ride-alone-poster.jpg" alt="WWII poster: a man drives a car with Adolf Hitler in the passenger seat"></a><figcaption>“When you ride ALONE you ride with Hitler!” Weimer Pursell, U.S. government poster, 1941–45. National Archives (NAID 516143). Click to enlarge.</figcaption></figure><figure><a href="loose-lips-poster.jpg" target="_blank" rel="noopener"><img src="loose-lips-poster.jpg" alt="WWII poster: a ship sinking under black smoke with the words Loose lips might sink ships"></a><figcaption>“Loose lips might sink ships.” Published by the House of Seagram, a company, for the war effort, 1941–45. National Archives (NAID 513543). Click to enlarge.</figcaption></figure></div>` },
+        { type: "q", id: "g5", std: "US.31", short: "Ride-alone poster technique", label: "Poster check",
+          prompt: "Look at the car poster on the left. Who is sitting in the passenger seat, and why would that make a driver want to carpool?",
+          options: ["Hitler. It makes driving alone feel like helping the enemy.", "A soldier. It makes driving alone feel like a fun road trip.", "A police officer. It warns drivers they will get a ticket.", "A gas station worker. It shows that gas is cheap again."],
+          hint: "Look closely at the passenger, then read the words above the car.", why: "The poster uses guilt: wasting gas and tires was shown as riding with Hitler. That is a propaganda technique." },
+        { type: "q", id: "g3", std: "US.33", short: "Loose lips poster", label: "Poster check",
+          prompt: "Look at the ship poster on the right. What was it asking Americans to do?",
+          options: ["Not talk about ships or troop movements", "Write letters to sailors and soldiers every week", "Buy more war bonds at the local bank", "Join the Navy to replace the lost sailors"],
+          hint: "\"Loose lips\" means talking too much. What could an enemy spy learn?", why: "Careless talk about where ships or soldiers were going could reach enemy spies. The poster uses fear: your words could sink a ship." },
         { type: "q", id: "g1", std: "US.34", short: "Women's war work (1942 magazine)", label: "Source check",
           prompt: doc("Ladies' Home Journal, August 1942 (paraphrased)", `<p>Women on the bomber assembly line at the Glenn L. Martin aircraft plant work six days a week. They rivet, weld, and inspect parts. They earn about $28 to $33 a week.</p>`) + doc("Here in Cedar Rapids", `<p>Collins Radio made radios for the military, and many of its new wartime workers were women.</p>`) + "What do these sources show?",
           options: ["Women did skilled war work for real pay", "Women were banned from most factory jobs", "Women worked in factories for free", "Women earned more than every man did"],
@@ -156,19 +167,19 @@ UnitGame.start({
           prompt: "Why was buying black-market meat harmful to the <b>common good</b> (what's best for everyone)?",
           options: ["It let some people take more than their fair share", "It raised the number of ration points every family got", "It helped the army get more meat for soldiers", "It was legal, just a little more expensive"],
           hint: "If one family gets extra steaks without points, who ends up with less?", why: "Rationing only worked if everyone played fair. Black-market buyers took food out of the shared supply." },
-        { type: "q", id: "g3", std: "US.34", short: "Loose lips poster",
-          prompt: doc("U.S. wartime poster", `<p>A sinking ship, with the words <span class="quote">"Loose lips might sink ships."</span></p>`) + "What was this poster asking Americans to do?",
-          options: ["Not talk about ships or troop movements", "Write letters to sailors and soldiers every week", "Buy more war bonds at the local bank", "Report neighbors who don't recycle"],
-          hint: "\"Loose lips\" means talking too much. What could an enemy spy learn?", why: "Careless talk about where ships or soldiers were going could reach enemy spies." },
         { type: "q", id: "g4", std: "US.34", short: "Double V campaign",
           prompt: doc("The Double V campaign, 1942", `<p>The <i>Pittsburgh Courier</i>, a leading Black newspaper, started the <b>Double V</b> campaign. About 1 million Black Americans served in the military, many in segregated units.</p>`) + "\"Double V\" stood for victory over fascism abroad (the dictatorships of Hitler and Mussolini) and victory over…",
           options: ["Racism at home", "Japan in the Pacific", "Hunger in Europe", "The Soviet Union"],
           hint: "Black soldiers fought for freedom overseas. What were they still denied in the U.S.?", why: "Double V meant beating fascism overseas AND racism at home. Black Americans served while still facing segregation." }
       ] },
     { kicker: "Part 3 of 3 · 1942–1988", title: "Who Was Left Out?",
-      teach: `<p>The common good was supposed to include everyone. For one group of Americans, the government did the opposite.</p>`,
+      teach: `<p>The common good was supposed to include everyone. For one group of Americans, the government did the opposite. A <b>political cartoon</b> is a drawing that makes a point about the news. Some helped spread fear.</p>`,
       blocks: [
-        { type: "note", html: doc("Executive Order 9066 · February 19, 1942", `<p>After Japan attacked Pearl Harbor, President Franklin Roosevelt signed an order that led to about <b>120,000 people of Japanese ancestry</b> being forced from their West Coast homes. About two-thirds were <b>U.S. citizens</b>, born in America.</p>
+        { type: "q", id: "c1", std: "US.33", short: "Seuss cartoon: false idea about Japanese Americans", label: "Political cartoon check",
+          prompt: `<div class="cnote">This real 1942 cartoon uses a racist stereotype. We study it because cartoons like this helped convince Americans to support the camps.</div><figure class="cartoon"><a href="seuss-waiting-for-the-signal-1942.png" target="_blank" rel="noopener"><img src="seuss-waiting-for-the-signal-1942.png" alt="1942 cartoon: a long line of Japanese Americans along the West Coast picking up blocks labeled TNT while a man on a roof watches the ocean through a telescope"></a><figcaption>“Waiting for the Signal From Home,” Dr. Seuss (Theodor Geisel), <i>PM</i> newspaper, February 13, 1942. Public domain. Click to enlarge.</figcaption></figure>` + "Look at what the people in line are picking up and what the man on the roof is doing. What false idea does this cartoon spread about Japanese Americans?",
+          options: ["That they were all secretly getting ready to attack for Japan", "That they refused to follow the food and gas rationing rules", "That they were leaving the West Coast to take factory jobs", "That they were joining the Navy so they could spy on ships"],
+          hint: "Read the labels on the blocks (TNT is an explosive) and the sign on the house. Where is the man on the roof looking?", why: "The cartoon shows a whole group of Americans as traitors. That was false, but fear like this helped lead to Executive Order 9066 six days later." },
+        { type: "note", html: doc("Executive Order 9066 · February 19, 1942", `<p>Six days after that cartoon ran, President Franklin Roosevelt signed an order that led to about <b>120,000 people of Japanese ancestry</b> being forced from their West Coast homes. About two-thirds were <b>U.S. citizens</b>, born in America.</p>
           <p>Families had days to sell homes and businesses. They were held in <b>incarceration camps</b> (prison camps) behind barbed wire, many for about three years. No Japanese American was ever convicted of spying for Japan during the war.</p>`) },
         { type: "q", id: "x1", std: "US.34", short: "Most removed were U.S. citizens",
           prompt: "Most people forced into the camps were…",

@@ -30,10 +30,10 @@ button.secondary{background:#e7e0d1;color:var(--navy)}button:disabled{opacity:.5
 <body>
 <header><div class="wrap"><div class="kicker">World History · Day 8</div><h1>World War II: Decisions &amp; Warning Signs</h1><p>Two parts. One assignment. Turn in your work once at the end. <b>About 20–25 minutes.</b></p><p class="std"><b>Standard SS.9-12.WH.29</b> — Analyze the causes that led to the outbreak of World War I and World War II.<br><b>Standard SS.9-12.WH.30</b> — Compare and contrast the rise of dictators including their methods of repression and persecution, specifically addressing the causes and impact of the Holocaust.<br><b>Today's goal:</b> Explain how dictators' attacks started World War II, and spot the tools dictators used to take control.</p></div></header>
 <main class="wrap">
-<section class="directions"><h2>Exactly three things to do</h2><ol><li><b>Part 1:</b> At all 4 stops, pick a choice, write one sentence, and open the history card.</li><li><b>Part 2:</b> Get a green check on all 4 warning-sign cases.</li><li>Type your name at the bottom and press <b>Turn in both parts</b>.</li></ol><p class="welcome" id="welcome"></p></section>
+<section class="directions"><h2>Exactly three things to do</h2><ol><li><b>Part 1:</b> At all 4 stops, pass the map check, pick a choice, back it up with one fact, and open the history card.</li><li><b>Part 2:</b> Get a green check on all 4 warning-sign cases.</li><li>Type your name at the bottom and press <b>Turn in both parts</b>.</li></ol><p class="welcome" id="welcome"></p></section>
 <section class="part" aria-labelledby="part1title">
 <div class="part-head"><span class="part-num">1</span><h2 id="part1title">World War II Decision Map</h2></div>
-<p class="part-intro">Follow the invasions. Choose a response, explain your choice, and open each history card.</p>
+<p class="part-intro">Follow the invasions. Pass each map check, back up your choice with evidence from the map or event card, and open each history card.</p>
 <div class="frame-wrap"><iframe class="part-frame" id="decisionPart" src="./decision-stops.html" title="Part 1: World War II Decision Map"></iframe></div>
 </section>
 <section class="part" aria-labelledby="part2title">
@@ -82,6 +82,7 @@ const answers={Standard:STANDARD};
 for(let i=1;i<=4;i++){
 const choice=d.getElementById("choice"+i)?.value||"",reason=d.getElementById("reason"+i)?.value.trim()||"",outcome=d.getElementById("outcome"+i);
 if(!choice||!reason)throw new Error("Finish all four Decision Map choices and reasons in Part 1.");
+if(!d.getElementById("mapcheck"+i)?.classList.contains("done"))throw new Error("Pass the map check at all four Part 1 stops.");
 if(!outcome?.classList.contains("show"))throw new Error("Open the history card at all four Part 1 stops before turning in.");
 answers["Part 1 · Decision "+i]=choice;answers["Part 1 · Reason "+i]=reason;
 }
@@ -90,7 +91,7 @@ const warning=w.getElementById("method"+i)?.value||"";
 if(!warning||!w.getElementById("method"+i).disabled||!/^✓/.test(w.getElementById("fb"+i)?.textContent||""))throw new Error("Get a green check on all four warning-sign cases in Part 2.");
 answers["Part 2 · Case "+i+" warning sign"]=warning;
 }
-try{const ft=document.getElementById("warningPart").contentWindow.classFirstTry;if(ft&&ft.count().total)answers["First-try correct"]=ft.text()+" (Part 2 warning signs)"}catch(e){}
+try{const a=part1.contentWindow.classFirstTry,b=part2.contentWindow.classFirstTry;const ca=a?a.count():{right:0,total:0},cb=b?b.count():{right:0,total:0};if(ca.total+cb.total)answers["First-try correct"]=(ca.right+cb.right)+" of "+(ca.total+cb.total)+" (Part 1 map checks "+ca.right+" of "+ca.total+" · Part 2 warning signs "+cb.right+" of "+cb.total+")"}catch(e){}
 return answers;
 }
 async function submitWork(){
@@ -104,7 +105,7 @@ status.textContent="Turned in! Both parts were sent to your teacher together. Yo
 }catch(error){status.textContent=error instanceof Error?error.message:"Could not send your work. Try again.";button.disabled=false}
 }
 document.getElementById("submitWork").addEventListener("click",submitWork);
-document.getElementById("clearWork").addEventListener("click",()=>{if(confirm("Clear answers from both parts on this device?")){["choice1","choice2","choice3","choice4","reason1","reason2","reason3","reason4","studentName","outcome1","outcome2","outcome3","outcome4"].forEach(id=>localStorage.removeItem("day8-decision-"+id));["method1","method2","method3","method4","studentName"].forEach(id=>localStorage.removeItem("day7-warning-"+id));localStorage.removeItem("day8-wwii-combined-studentName");location.reload()}});
+document.getElementById("clearWork").addEventListener("click",()=>{if(confirm("Clear answers from both parts on this device?")){["choice1","choice2","choice3","choice4","reason1","reason2","reason3","reason4","studentName","outcome1","outcome2","outcome3","outcome4","map1","map2","map3","map4"].forEach(id=>localStorage.removeItem("day8-decision-"+id));Object.keys(localStorage).filter(k=>k.startsWith("firsttry:")&&(k.includes("decision-stops")||k.includes("day7-warning-signs"))).forEach(k=>localStorage.removeItem(k));["method1","method2","method3","method4","studentName"].forEach(id=>localStorage.removeItem("day7-warning-"+id));localStorage.removeItem("day8-wwii-combined-studentName");location.reload()}});
 </script>
 </body>
 </html>

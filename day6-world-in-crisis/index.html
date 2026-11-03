@@ -20,41 +20,52 @@ textarea{min-height:67px;resize:vertical}select:focus,input:focus,textarea:focus
 .hint{font-size:.92rem;color:var(--muted);background:#f3eee3;padding:8px 10px;border-radius:7px;margin:7px 0}
 button{font:inherit;font-weight:800;border:0;border-radius:8px;padding:11px 15px;cursor:pointer}.primary{background:var(--red);color:white}.secondary{background:#e6dfd0;color:var(--navy)}.actions{display:flex;gap:9px;flex-wrap:wrap;margin:12px 0}.small{font-size:.9rem;color:var(--muted)}
 .std{font-size:.86rem;line-height:1.4;background:#ffffff14;border-left:4px solid var(--gold);padding:7px 10px;border-radius:6px;margin-top:10px!important}.welcome{background:#eef3f7;border-left:5px solid var(--navy);padding:9px 12px;border-radius:7px;margin:8px 0;display:none}.fb{margin:4px 0 2px}.fb.ok{color:var(--green);font-weight:700}.fb.no{color:#7a4b12}select:disabled{background:#f3f8f4;color:var(--ink);opacity:1;border-color:#9cc3a8}.anne-questions select{font-size:.95rem}
+.briefing{background:#fbf7ef;border:1px solid var(--line);border-left:5px solid var(--navy);border-radius:9px;padding:10px 14px;margin:8px 0 10px}.briefing p{margin:6px 0}.quote-box{background:#f1ecdf;border-radius:7px;padding:8px 10px}.src{font-size:.82rem;color:var(--muted)}select:disabled{opacity:1}
 .anne-workspace{width:min(96vw,1320px);position:relative;left:50%;transform:translateX(-50%);display:grid;grid-template-columns:minmax(0,1.75fr) minmax(345px,1fr);gap:16px;align-items:start;margin:14px 0 18px}.anne-questions{max-height:1020px;overflow-y:auto;margin:0}.anne-reader{min-width:0}@media(max-width:860px){.anne-workspace{grid-template-columns:1fr}.anne-questions{max-height:none;overflow:visible}}@media print{body{background:white;font-size:14pt}header{background:white;color:black;border-bottom:2px solid black;padding:10px 0}header p,.kicker{color:black}.actions,.no-print{display:none!important}.card{box-shadow:none;border:1px solid #888;break-inside:avoid}.wrap{max-width:none}}
 </style>
 <script src="../shared/assignments.js?v=20261030f"></script><script src="../shared/turnin.js?v=20261102read"></script></head>
 <body>
-<header><div class="wrap"><div class="kicker">World History · Day 6</div><h1>A World in Crisis</h1><p>Read 3 short cases and pick what people wanted. Then read 10 graphic-novel pages about Anne Frank's family. <b>About 25 minutes.</b></p><p class="std"><b>Standard SS.9-12.WH.31</b> — Assess the political and economic consequences and cultural developments after World War I and World War II.<br><b>Standard SS.9-12.WH.30</b> — Compare and contrast the rise of dictators including their methods of repression and persecution, specifically addressing the causes and impact of the Holocaust.<br><b>Today's goal:</b> Explain how the problems left by World War I and the Great Depression led people to demand change — and how Hitler used the crisis to gain power and persecute Jewish people.</p></div></header>
+<header><div class="wrap"><div class="kicker">World History · Day 6</div><h1>A World in Crisis</h1><p>3 short cases with one check each, then 10 graphic-novel pages about Anne Frank's family. <b>About 25 minutes.</b></p><p class="std"><b>Standard SS.9-12.WH.31</b> — Assess the political and economic consequences and cultural developments after World War I and World War II.<br><b>Standard SS.9-12.WH.30</b> — Compare and contrast the rise of dictators including their methods of repression and persecution, specifically addressing the causes and impact of the Holocaust.<br><b>Today's goal:</b> Explain how the problems left by World War I and the Great Depression led people to demand change — and how dictators like Stalin and Hitler used crisis and terror against their own people.</p></div></header>
 <main class="wrap">
 <section class="card">
 <h2>Your job</h2>
-<p>After World War I, people in many places faced hunger, lost jobs, foreign rule, or weak leaders. They wanted change, but people disagreed about what to do.</p>
-<div class="callout"><b>Cases 1–3:</b> Pick what people might demand. For Russia and India, write one sentence why. <b>Case 4:</b> Read the Anne Frank pages, get all 8 checks right, and write one answer. <b>Done means</b> every box is filled and all 8 Anne Frank checks are green. Then turn it in at the bottom.</div>
-<div class="steps"><div class="step">1. Read the case.</div><div class="step">2. Pick a response.</div><div class="step">3. Write why, using the clue (Russia and India).</div></div>
+<p>After World War I, people in many places faced hunger, lost jobs, or foreign rule. Some demanded change. Some dictators answered with terror.</p>
+<div class="callout"><b>Cases 1–3:</b> Read the case. Pick the answer the case proves and press <b>Check</b>. It has to be right before you move on. <b>Case 4:</b> Read the Anne Frank pages and get all 8 checks right. <b>Done means</b> every check is green and both short answers are written. Then turn it in at the bottom.</div>
 <p class="hint"><b>Word help:</b> <b>Reform</b> = change some laws but keep the same rulers. <b>Revolution</b> = throw out the rulers and replace them. <b>Independence</b> = a colony rules itself. <b>Stronger government</b> = give leaders more power to restore order.</p>
 <p class="welcome" id="welcome"></p>
 </section>
 <section class="card">
-<h2>Read, choose, and write</h2>
+<h2>Read, check, and write</h2>
 <div class="case">
 <h3>1. Russia: hunger and land</h3>
-<p>During World War I, many Russian soldiers died. At home, people faced food shortages. Many farmers wanted land. The Tsar, Russia's ruler, lost support. In 1917, protests and a revolution ended his rule.</p>
-<p class="clue"><b>Clue:</b> People lacked food, wanted land, and no longer trusted the Tsar.</p>
-<label for="choice1">What might people demand?</label><select id="choice1"><option value="">Choose one</option><option>Reform: change some laws</option><option>Revolution: replace the rulers</option><option>Independence: rule themselves</option><option>Stronger government: give leaders more power</option></select>
-<label for="write1">Write one sentence. Use the clue.</label><textarea id="write1" placeholder="Russians might demand ___ because the story says ___."></textarea>
+<p>During World War I, millions of Russian soldiers died. At home, people ran short of food, and farmers wanted land. In 1917, crowds and soldiers rose up. The Tsar, Russia's ruler, was forced to give up his throne. Later that year, Lenin's Communists seized power.</p>
+<label for="case1">Which word fits what Russians did in 1917?</label><select id="case1"><option value="">Choose one</option><option value="a">Revolution: they threw out their rulers</option><option value="b">Reform: they kept the Tsar but changed laws</option><option value="c">Independence: a colony began to rule itself</option><option value="d">Stronger government: they gave the Tsar more power</option></select>
+<div class="actions"><button type="button" class="secondary" data-check="case1">Check</button></div><p class="small fb" id="feedback-case1" aria-live="polite"></p>
 </div>
 <div class="case">
 <h3>2. India: a call to rule itself</h3>
-<p>India was ruled by Britain. Many people wanted Indians to make their own laws. Some protested without violence. They asked Britain to give India more control.</p>
-<p class="clue"><b>Clue:</b> People wanted to make their own laws instead of being ruled by Britain.</p>
-<label for="choice3">What might people demand?</label><select id="choice3"><option value="">Choose one</option><option>Reform: change some laws</option><option>Revolution: replace the rulers</option><option>Independence: rule themselves</option><option>Stronger government: give leaders more power</option></select>
-<label for="write3">Write one sentence. Use the clue.</label><textarea id="write3" placeholder="People in India might demand ___ because the story says ___."></textarea>
+<p>Britain ruled India. About a million Indians served Britain in World War I, and many hoped for more say afterward. Instead, Britain kept control. In 1929, the Indian National Congress, the party Gandhi helped lead, set a new goal: <b>purna swaraj</b>, which means complete self-rule.</p>
+<label for="case2">Which word fits the Congress Party's goal?</label><select id="case2"><option value="">Choose one</option><option value="c">Independence: India would rule itself</option><option value="b">Reform: Britain would keep ruling with fairer laws</option><option value="a">Revolution: Indians would replace Britain's king</option><option value="d">Stronger government: Britain's rulers would get more power</option></select>
+<div class="actions"><button type="button" class="secondary" data-check="case2">Check</button></div><p class="small fb" id="feedback-case2" aria-live="polite"></p>
 </div>
-<div class="case">
-<h3>3. Southwest Asia: new borders</h3>
-<p>After World War I, Britain and France took control of areas that had been part of the Ottoman Empire (an empire that lost the war). They drew new borders. Many local people wanted to choose their own leaders.</p>
-<p class="clue"><b>Clue:</b> Foreign countries set the borders and chose who would rule.</p>
-<label for="choice4">What might people demand?</label><select id="choice4"><option value="">Choose one</option><option>Reform: change some laws</option><option>Revolution: replace the rulers</option><option>Independence: rule themselves</option><option>Stronger government: give leaders more power</option></select>
+<div class="case" id="ukraineCase">
+<h3>3. Ukraine, 1932–33: the Holodomor</h3>
+<p class="small"><b>Sourced history briefing.</b> This is about real mass starvation. Read it carefully.</p>
+<div class="briefing">
+<p><b>Joseph Stalin</b> was the dictator of the Soviet Union, which included Ukraine. Starting in 1929, his government forced farmers to give up their own land and animals and work on big state-run farms. This is called <b>collectivization</b>.</p>
+<p>In 1932, the government set grain <b>quotas</b>: amounts each village had to hand over. The quotas were far too high for villages that were already hungry. Officials searched homes and took food.</p>
+<p>In January 1933, an order from Moscow banned farmers in Ukraine from leaving their villages to look for food.</p>
+<p>Population experts estimate that about <b>3.9 million</b> people in Ukraine died in the famine of 1932–33. Ukrainians call it the <b>Holodomor</b>, which means “death by hunger.”</p>
+<p>The Soviet government denied there was any famine and turned down offers of help from outside.</p>
+<p class="quote-box"><b>A reporter was there.</b> Welsh journalist Gareth Jones walked through Soviet villages in March 1933. The cry he heard everywhere: <i>“There is no bread. We are dying.”</i></p>
+<p class="src">Sources: Holodomor Research and Education Consortium (HREC); Ptoukha Institute of Demography and Social Studies, Kyiv (3.9 million estimate); Gareth Jones, report in <i>The Morning Post</i>, March 30, 1933.</p>
+</div>
+<label for="ukr1">Check 1 · Use the briefing. Why did so many people in Ukraine starve in 1932–33?</label><select id="ukr1"><option value="">Choose one</option><option value="a">Stalin's government took their grain and banned them from leaving to find food.</option><option value="b">A long drought destroyed the crops, and no other country had food to send.</option><option value="c">Farmers sold most of their grain to other countries for very high prices.</option><option value="d">A war with Poland cut Ukraine off from the rest of the Soviet Union.</option></select>
+<p class="small fb" id="feedback-ukr1" aria-live="polite"></p>
+<label for="ukr2">Check 2 · What did the Soviet government do when the world heard about the famine?</label><select id="ukr2"><option value="">Choose one</option><option value="a">It denied there was a famine and turned down outside help.</option><option value="b">It asked other countries to send food to Ukraine right away.</option><option value="c">It lowered the grain quotas and let farmers keep their food.</option><option value="d">It let reporters travel freely so they could count the dead.</option></select>
+<p class="small fb" id="feedback-ukr2" aria-live="polite"></p>
+<div class="actions"><button type="button" class="secondary" data-check="ukr1,ukr2">Check both</button></div>
+<label for="writeUkr">Write one sentence. Name one method Stalin's government used against Ukraine's farmers, and what it caused. <span class="small" id="ukrLockNote">(Opens when both checks are green.)</span></label><textarea id="writeUkr" disabled placeholder="Stalin's government ___, and this caused ___."></textarea>
 </div>
 <div class="case">
 <h3>4. The Great Depression: hard times in Germany</h3>
@@ -93,10 +104,21 @@ button{font:inherit;font-weight:800;border:0;border-radius:8px;padding:11px 15px
 const API="https://fynn-class-assignment-submissions-20261024.neotboy.chatgpt.site/api/submit";
 const STANDARD="SS.9-12.WH.31, SS.9-12.WH.30";
 const LOCK_SECONDS=10;
-const writeIds=["write1","write3","write5"];
+const writeIds=["writeUkr","write5"];
 const textIds=[...writeIds,"studentName"];
-const choiceIds=["choice1","choice3","choice4"];
-const CASE={choice1:"Russia",choice3:"India",choice4:"Southwest Asia",write1:"Russia",write3:"India",write5:"Great Depression & Anne Frank"};
+const caseIds=["case1","case2","ukr1","ukr2"];
+const caseCorrect={case1:"a",case2:"c",ukr1:"a",ukr2:"a"};
+const caseWhy={case1:"The Tsar was forced out and Lenin's Communists took power. Throwing out the rulers is a revolution.",
+case2:"Purna swaraj means complete self-rule. A colony ruling itself is independence.",
+ukr1:"The briefing says officials took grain to meet quotas and an order banned farmers from leaving to find food.",
+ukr2:"The briefing says the Soviet government denied the famine and turned down outside help."};
+const caseHint={case1:"Reread the case. What happened to the Tsar, and who took power?",
+case2:"Reread the last sentence. What does purna swaraj mean?",
+ukr1:"Reread the paragraphs about quotas and the January 1933 order.",
+ukr2:"Reread the last paragraph of the briefing, before the reporter box."};
+const CASE={case1:"Russia",case2:"India",ukr1:"Ukraine check 1",ukr2:"Ukraine check 2",writeUkr:"Ukraine (Holodomor)",write5:"Great Depression & Anne Frank"};
+const writeNeed={writeUkr:{words:["quota","grain","food","leav","collectiv","farm","starv","denied","deny","ban","took","search","land"],msg:"Name a method from the briefing (like grain quotas, collectivization, or the ban on leaving)."},
+write5:{words:["page","jew","nazi","fired","holland","amsterdam","persecut","rule","hitler","job","depression","safe"],msg:"Use a detail from the reading or from Anne's pages (name the page)."}};
 const anneIds=["anne1","anne2","anne3","anne4","anne5","anne6","anne7","anne8"];
 const anneCorrect={anne1:"a",anne2:"a",anne3:"a",anne4:"a",anne5:"a",anne6:"a",anne7:"a",anne8:"a"};
 const anneWhy={
@@ -109,31 +131,45 @@ anne6:"The germ claim was a lie. Calling a group dangerous made it easier to tak
 anne7:"First no trams, then no bikes, then no parks and a curfew. Taking rights a little at a time made each step seem small.",
 anne8:"Nazi rules pushed Jewish owners out of businesses. Anne's father had to hand his company to non-Jewish partners."};
 const anneHint={anne1:"Reread page 7: what happened to his Jewish friends, and what does he think will happen next?",anne2:"Reread the caption on page 7. Who are the Nazis blaming?",anne3:"Reread the first caption on page 8. Why did Father think Holland was a good place to go?",anne4:"Reread the caption across the middle of page 9. What happened to synagogues and shops?",anne5:"Reread the \"Dear Kitty\" box on page 10. What did the family run away from?",anne6:"Reread the last speech bubble on page 10. What does the girl say the Nazis think?",anne7:"Look at the top panels of page 11. What was taken away first, and what two weeks later?",anne8:"Look back at page 7 (Jewish friends fired) and page 11 (more rules). Who was losing jobs and businesses?"};
-const allIds=[...textIds,...choiceIds,...anneIds];
+const selIds=[...caseIds,...anneIds];
+const allIds=[...textIds,...selIds];
 const saved=document.getElementById("saved");
 const $=id=>document.getElementById(id);
-function shuffleSelect(sel){const blank=sel.options[0];const opts=[...sel.options].slice(1);for(let i=opts.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[opts[i],opts[j]]=[opts[j],opts[i]]}sel.innerHTML="";sel.appendChild(blank);opts.forEach(o=>sel.appendChild(o));sel.value=""}
-anneIds.forEach(id=>shuffleSelect($(id)));
-allIds.forEach(id=>{const e=$(id);const v=localStorage.getItem("day6-crisis-"+id)||"";if(anneIds.includes(id)){if(v===anneCorrect[id])markAnne(id);else localStorage.removeItem("day6-crisis-"+id)}else e.value=v;e.addEventListener("input",save);e.addEventListener("change",save)});
+function shuffleSelect(sel){const blank=sel.options[0];const opts=[...sel.options].slice(1);const before=opts.map(o=>o.value).join();for(let i=opts.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[opts[i],opts[j]]=[opts[j],opts[i]]}if(opts.map(o=>o.value).join()===before)opts.push(opts.shift());sel.innerHTML="";sel.appendChild(blank);opts.forEach(o=>sel.appendChild(o));sel.value=""}
+const KEY={...caseCorrect,...anneCorrect};
+const WHY={...caseWhy,...anneWhy};
+selIds.forEach(id=>shuffleSelect($(id)));
 function save(){allIds.forEach(id=>localStorage.setItem("day6-crisis-"+id,$(id).value));saved.textContent="Saved on this device.";setTimeout(()=>saved.textContent="",900)}
-function markAnne(id){const el=$(id),f=$("feedback-"+id);el.value=anneCorrect[id];el.disabled=true;f.className="small fb ok";f.textContent="✓ "+anneWhy[id]}
-function anneDone(){return anneIds.filter(id=>$(id).disabled&&$(id).value===anneCorrect[id]).length}
-let lockTimer=null;
-function checkAnne(){const btn=$("checkAnne"),status=$("anneStatus");let wrong=0,blank=0;
-anneIds.forEach(id=>{const el=$(id),f=$("feedback-"+id);if(el.disabled)return;if(!el.value){blank++;f.className="small fb no";f.textContent="Choose an answer first.";return}
-if(el.value===anneCorrect[id]){window.classFirstTry&&classFirstTry.right(id);markAnne(id)}else{window.classFirstTry&&classFirstTry.wrong();wrong++;shuffleSelect(el);f.className="small fb no";f.textContent="Not quite. "+anneHint[id]}});
-save();const count=anneDone();
-if(count===8){status.textContent="All eight checks are correct. Finish your writing, then turn in your work.";updateWelcome();return true}
-if(wrong>0){// Short pause after a wrong answer so students reread instead of guessing.
-btn.disabled=true;let left=LOCK_SECONDS;const tick=()=>{status.textContent=count+" of 8 correct. The missed ones were mixed up. Reread those pages — you can check again in "+left+"…"};tick();clearInterval(lockTimer);lockTimer=setInterval(()=>{left--;if(left<=0){clearInterval(lockTimer);btn.disabled=false;status.textContent=count+" of 8 correct. Fix the ones without a green check and check again."}else tick()},1000)}
-else status.textContent=count+" of 8 correct. Answer the rest and check again.";
-updateWelcome();return false}
+function markRight(id){const el=$(id),f=$("feedback-"+id);el.value=KEY[id];el.disabled=true;f.className="small fb ok";f.textContent="✓ "+WHY[id]}
+allIds.forEach(id=>{const e=$(id);const v=localStorage.getItem("day6-crisis-"+id)||"";if(selIds.includes(id)){if(v===KEY[id])markRight(id);else localStorage.removeItem("day6-crisis-"+id)}else e.value=v;e.addEventListener("input",save);e.addEventListener("change",save)});
+function isRight(id){return $(id).disabled&&$(id).value===KEY[id]}
+function anneDone(){return anneIds.filter(isRight).length}
+function caseDone(){return caseIds.filter(isRight).length}
+function syncUkraine(){const open=isRight("ukr1")&&isRight("ukr2");$("writeUkr").disabled=!open;$("ukrLockNote").textContent=open?"":"(Opens when both checks are green.)"}
+syncUkraine();
+// One shared checker: wrong answers reshuffle, then a short lock so students reread instead of guessing.
+function runCheck(ids,btn,status){let wrong=0,blank=0;
+ids.forEach(id=>{const el=$(id),f=$("feedback-"+id);if(el.disabled)return;if(!el.value){blank++;f.className="small fb no";f.textContent="Choose an answer first.";return}
+if(el.value===KEY[id]){window.classFirstTry&&classFirstTry.right(id);markRight(id)}else{window.classFirstTry&&classFirstTry.wrong();wrong++;shuffleSelect(el);f.className="small fb no";f.textContent="Not quite. "+(caseHint[id]||anneHint[id])+" The choices moved."}});
+save();syncUkraine();updateWelcome();
+if(wrong>0){btn.disabled=true;let left=LOCK_SECONDS;const say=()=>{const t="Reread, then try again in "+left+"…";if(status)status.textContent=t;else btn.textContent=t};say();const timer=setInterval(()=>{left--;if(left<=0){clearInterval(timer);btn.disabled=false;if(status)status.textContent="Fix the ones without a green check and check again.";else btn.textContent=btn.dataset.label}else say()},1000)}
+return wrong===0&&blank===0}
+document.querySelectorAll("[data-check]").forEach(btn=>{btn.dataset.label=btn.textContent;btn.addEventListener("click",()=>runCheck(btn.dataset.check.split(","),btn,null))});
+function checkAnne(){const btn=$("checkAnne"),status=$("anneStatus");runCheck(anneIds,btn,status);const count=anneDone();
+if(count===8){status.textContent="All eight checks are correct. Finish your writing, then turn in your work.";return true}
+if(!btn.disabled)status.textContent=count+" of 8 correct. Answer the rest and check again.";else status.textContent=count+" of 8 correct. "+status.textContent;return false}
 $("checkAnne").addEventListener("click",checkAnne);
-const TOTAL_PARTS=choiceIds.length+writeIds.length+anneIds.length;
-function partsDone(){return choiceIds.filter(id=>$(id).value).length+writeIds.filter(id=>$(id).value.trim()).length+anneDone()}
-function updateWelcome(first){const w=$("welcome"),n=partsDone();if(first){if(n>0){w.style.display="block";w.textContent="Welcome back — your work was saved. You've finished "+n+" of "+TOTAL_PARTS+" parts (3 choices, 3 written answers, 8 Anne Frank checks)."}}else if(w.style.display==="block")w.textContent="You've finished "+n+" of "+TOTAL_PARTS+" parts."}
+const TOTAL_PARTS=caseIds.length+writeIds.length+anneIds.length;
+function partsDone(){return caseDone()+writeIds.filter(id=>$(id).value.trim()).length+anneDone()}
+function updateWelcome(first){const w=$("welcome"),n=partsDone();if(first){if(n>0){w.style.display="block";w.textContent="Welcome back — your work was saved. You've finished "+n+" of "+TOTAL_PARTS+" parts (4 case checks, 2 short answers, 8 Anne Frank checks)."}}else if(w.style.display==="block")w.textContent="You've finished "+n+" of "+TOTAL_PARTS+" parts."}
 updateWelcome(true);
-async function submitWork(){const status=$("submitStatus"),name=$("studentName").value.trim(),button=$("submitWork");if(!name){status.textContent="Type your first name + last initial (like Jordan M.) first.";$("studentName").focus();return}if(choiceIds.some(id=>!$(id).value)||writeIds.some(id=>!$(id).value.trim())){status.textContent="Finish the three written answers and the three case choices before turning in your work.";return}if(anneDone()<8){status.textContent="Get a green check on all eight Anne Frank questions before turning in your work. Press \"Check my answers\" in the Anne Frank section.";$("anneCheck").scrollIntoView({behavior:"smooth",block:"start"});return}const answers={Standard:STANDARD};anneIds.forEach((id,i)=>answers["Anne Frank question "+(i+1)]=$(id).selectedOptions[0].textContent);choiceIds.forEach(id=>answers[CASE[id]+" · choice"]=$(id).value);writeIds.forEach(id=>answers[CASE[id]+" · writing"]=$(id).value.trim());button.disabled=true;status.textContent="Sending your work…";try{const response=await classTurnIn(API,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({studentName:name,assignmentId:"day6-world-in-crisis",answers})});const result=await response.json();if(!response.ok)throw new Error(result.error||"Could not send your work.");status.textContent="Turned in! Your work was sent to your teacher. You're done.";button.textContent="Turned in ✓"}catch(error){status.textContent=error instanceof Error?error.message:"Could not turn in your work. Try again.";button.disabled=false}}
+function writingProblem(id){const v=$(id).value.trim(),low=v.toLowerCase();if(!v)return "Write your answer first.";if(/_{2,}/.test(v))return "Fill in every ___ with your own words.";const words=low.match(/[a-z']+/g)||[];if(words.length<8)return "Write a full sentence (at least 8 words).";if(/\b(idk|i don'?t know|bruh|lol|nothing)\b/.test(low))return "Use real details, not \"idk.\"";if(!writeNeed[id].words.some(w=>low.includes(w)))return writeNeed[id].msg;return ""}
+async function submitWork(){const status=$("submitStatus"),name=$("studentName").value.trim(),button=$("submitWork");if(!name){status.textContent="Type your first name + last initial (like Jordan M.) first.";$("studentName").focus();return}
+if(caseDone()<4){status.textContent="Get a green check on Cases 1, 2, and both Ukraine checks first.";$("ukraineCase").scrollIntoView({behavior:"smooth",block:"start"});return}
+for(const id of writeIds){const prob=writingProblem(id);if(prob){status.textContent=(id==="writeUkr"?"Ukraine answer: ":"Anne Frank answer: ")+prob;$(id).focus();return}}
+if(anneDone()<8){status.textContent="Get a green check on all eight Anne Frank questions before turning in your work. Press \"Check my answers\" in the Anne Frank section.";$("anneCheck").scrollIntoView({behavior:"smooth",block:"start"});return}
+const answers={Standard:STANDARD};caseIds.forEach(id=>answers[CASE[id]+" · check"]=$(id).selectedOptions[0].textContent);anneIds.forEach((id,i)=>answers["Anne Frank question "+(i+1)]=$(id).selectedOptions[0].textContent);writeIds.forEach(id=>answers[CASE[id]+" · writing"]=$(id).value.trim());
+button.disabled=true;status.textContent="Sending your work…";try{const response=await classTurnIn(API,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({studentName:name,assignmentId:"day6-world-in-crisis",answers})});const result=await response.json();if(!response.ok)throw new Error(result.error||"Could not send your work.");status.textContent="Turned in! Your work was sent to your teacher. You're done.";button.textContent="Turned in ✓"}catch(error){status.textContent=error instanceof Error?error.message:"Could not turn in your work. Try again.";button.disabled=false}}
 $("submitWork").addEventListener("click",submitWork);
 $("clearWork").addEventListener("click",()=>{if(confirm("Start over? This clears all your answers on this device.")){allIds.forEach(id=>localStorage.removeItem("day6-crisis-"+id));window.classFirstTry&&classFirstTry.reset();location.reload()}});
 </script>
