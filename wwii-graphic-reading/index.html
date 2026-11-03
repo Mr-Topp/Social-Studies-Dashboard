@@ -4,95 +4,174 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="description" content="A five-day U.S. History reading with graphic novel previews and short reading questions.">
 <title>World War II: Read, Look, Answer</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../shared/graphic-reading.css?v=2">
 <style>
-:root{--navy:#19364b;--red:#a33d36;--gold:#e6bd64;--paper:#f4efe4;--card:#fffdf8;--ink:#22313b;--muted:#526571;--line:#d8cfbd;--green:#396b50}
-*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:18px/1.45 system-ui,Segoe UI,Arial,sans-serif}
+/* Page-only extras for the five-day WWII reader. Shared look lives in ../shared/graphic-reading.css */
 [hidden]{display:none!important}
-header{background:var(--navy);color:white;border-bottom:5px solid var(--gold);padding:12px max(16px,calc((100vw - 1580px)/2))}.wrap{max-width:1580px;margin:auto;padding:0 18px}
-.kicker{font-size:.8rem;font-weight:800;color:#f1d991;text-transform:uppercase;letter-spacing:.08em}h1{font-size:clamp(1.65rem,3vw,2.35rem);line-height:1.1;margin:4px 0}
-main{padding:8px 0 32px}.directions,.note,.panel{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:10px 12px;margin:7px 0}
-.directions{background:#ecf2ee;border-left:4px solid var(--green);font-size:1rem}
-.note{background:#fff1e9;border-left:4px solid var(--red);font-size:.9rem;padding:7px 10px}
-.day-tabs{display:flex;gap:8px;margin:12px 0;flex-wrap:wrap}.day-tab,button{font:inherit;font-weight:800;border:0;border-radius:8px;padding:10px 14px;cursor:pointer}.day-tab{background:#e6dfd0;color:var(--navy)}.day-tab.active{background:var(--navy);color:white;box-shadow:inset 0 -3px var(--gold)}
-.layout{display:grid;grid-template-columns:minmax(0,1.08fr) minmax(390px,.92fr);gap:20px;align-items:start}.panel{margin:0;padding:16px}
-h2{font-size:1.2rem;color:var(--navy);margin:0 0 4px}.small{font-size:.9rem;color:var(--muted);margin:3px 0}
-.reader-head{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
-.scan{height:min(84vh,920px);min-height:560px;display:flex;align-items:flex-start;justify-content:center;overflow:auto;background:#e9e3d7;border:1px solid var(--line);border-radius:8px;padding:8px;margin-top:8px}
-.scan img{display:block;height:100%;width:auto;max-width:100%;max-height:100%;object-fit:contain;box-shadow:0 2px 10px #0003}.scan img.zoomed{height:150%;width:auto;max-width:none;max-height:none}.reader-tools{display:flex;align-items:center;gap:10px;flex-wrap:wrap;margin:8px 0}.reader-controls{display:flex;align-items:center;justify-content:space-between;gap:7px;flex:1;margin:0}.reader-controls button,.zoom-button{background:#e6dfd0;color:var(--navy);padding:8px 10px;font-size:.9rem}.zoom-button{background:#dbe7e1}
-.scan img.day5-comic{height:auto;width:100%;max-height:none;object-fit:initial}.scan img.day5-comic.zoomed{height:auto;width:175%;max-width:none}
-.progress-line{display:flex;justify-content:space-between;align-items:center;gap:8px}.progressbar{height:10px;background:#e5dfd2;border-radius:99px;overflow:hidden;margin:5px 0 11px}.progressbar span{display:block;height:100%;background:var(--green);width:0}
-.fact{background:#edf3ef;border-left:5px solid var(--green);border-radius:8px;padding:11px 12px;margin:10px 0}.label{font-size:.75rem;font-weight:850;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin:0 0 3px}
-.questions-panel{padding:20px;border-top:5px solid var(--navy);box-shadow:0 3px 14px #19364b12}
-.questions-panel .progress-line{align-items:flex-start}
-.questions-panel .progress-line h2{font-size:1.45rem;margin:0}
-.questions-panel #checkCount{background:#e8eef2;color:var(--navy);border-radius:999px;padding:5px 10px;white-space:nowrap;font-size:.9rem}
-.questions-panel .progressbar{height:8px;margin:11px 0}
-.section-help{font-size:.95rem;color:var(--muted);margin:0 0 14px}
-.name-wrap{background:#f6f4ee;border-radius:10px;padding:10px 12px;margin:12px 0 16px}
-.name-wrap label{margin:0 0 5px}
-.fact{background:#eef4f0;border-left:5px solid var(--green);border-radius:9px;padding:12px 14px;margin:12px 0 16px}
-.us-connection .fact{background:#fffdf8;border:1px solid #cddbc9;border-left:4px solid var(--green);padding:10px 12px;margin:8px 0 12px}
-.fact h3{font-size:.78rem;line-height:1.3;font-weight:850;text-transform:uppercase;letter-spacing:.06em;color:#315942;margin:0 0 5px}
-.question{background:#f2f5f8;border:1px solid #dbe3e9;border-left:5px solid #50738d;border-radius:10px;padding:14px 15px;margin:12px 0}
-.question p{margin:0}
-.question.us-connection{background:#f1f5ef;border-color:#d9e3d7;border-left-color:var(--green)}
-.prompt-heading{display:flex;align-items:center;gap:9px;font-size:1rem;line-height:1.25;color:var(--navy);margin:0 0 8px}
-.step-number{display:grid;place-items:center;width:27px;height:27px;flex:0 0 27px;border-radius:50%;background:var(--navy);color:#fff;font-size:.85rem}
-.question.us-connection .step-number{background:var(--green)}
-.question #questionText,.question #usQuestionText{font-size:1.06rem;line-height:1.5;color:#1e2e37}
-.questions-panel label{margin:12px 0 5px}
-.questions-panel textarea{min-height:64px}
-.choice-list{display:grid;gap:8px;margin:12px 0}
-.choice-option{width:100%;min-height:48px;padding:10px 12px;border:2px solid #d7e0e6;border-radius:9px;background:#fffdf8;color:var(--ink);font:inherit;font-size:1rem;line-height:1.35;font-weight:650;text-align:left;cursor:pointer}
-.choice-option:hover:not(:disabled){border-color:#50738d;background:#f2f6f8}
-.choice-option.selected{border-color:#315f79;background:#e8f1f5}
-.choice-option.correct{border-color:var(--green);background:#e7f1e9}
-.choice-option:disabled{opacity:1;cursor:default}
-.check-answer{font-size:.95rem;padding:9px 13px}
-.page-feedback{font-size:.92rem;min-height:1.35em;font-weight:700;color:var(--muted);margin:8px 0 0}
-.page-feedback.success{color:#246947}
-.page-feedback.error{color:#a12f2f}
-.questions-panel .us-connection label{font-size:.95rem;margin-top:12px}
-.questions-panel .us-connection textarea{background:#fff;min-height:78px}
-.questions-panel .actions button{font-size:.93rem}
-.questions-panel .actions{margin:14px 0 8px}
-.questions-panel .status{padding:4px 0}
-.questions-panel .small{line-height:1.4}
-label{display:block;font-weight:800;margin:9px 0 5px}input,textarea{width:100%;font:inherit;color:var(--ink);padding:10px;border:2px solid #cfc5b3;border-radius:8px;background:white}textarea{min-height:54px;resize:vertical}
-input:focus,textarea:focus,button:focus{outline:3px solid #6aa5bf;outline-offset:2px}textarea:disabled{background:#eee9df;color:var(--muted);cursor:not-allowed}
-.actions{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0}.primary{background:var(--red);color:white}.secondary{background:#e6dfd0;color:var(--navy)}button:disabled{opacity:.55;cursor:not-allowed}.status{font-size:.9rem;min-height:1.3em;color:var(--muted)}.success{color:#246947}.error{color:#a12f2f}
-@media(max-width:900px){.layout{grid-template-columns:1fr}.scan{height:68vh;min-height:400px}.directions ol{display:block}}
-@media print{header{background:white;color:black;border-bottom:2px solid black}.reading,.day-tabs,.actions,.reader-tools{display:none!important}.layout{display:block}.panel{box-shadow:none}}
+.small{font-size:.9rem;color:var(--muted);margin:3px 0;line-height:1.4}
+.small a{color:var(--navy);font-weight:700}
+.gr-head .hook b{color:#fff}
+
+/* Day tabs (built by the page script) */
+.day-tabs{display:flex;gap:8px;flex-wrap:wrap;margin:16px 0 0}
+.day-tab{background:#ffffff14;color:#fff;border:2px solid #ffffff38;border-radius:999px;padding:7px 16px;font-size:.92rem;box-shadow:none}
+.day-tab:hover{background:#ffffff26}
+.day-tab.active{background:var(--gold);border-color:var(--gold);color:var(--navy2)}
+
+/* Route: steps are progress markers, not links */
+.route ol{max-width:1100px}
+.route a:not([href]){cursor:default}
+.route a:not([href]):hover{background:transparent;border-color:transparent}
+@media(min-width:1200px){.route small{white-space:nowrap}}
+.route li.current a{background:#f1ecdf;border-color:#d8cfbd}
+
+/* Intro card */
+.intro{padding:14px 18px}
+.intro .content-note{margin:0}
+
+/* Reader: page images */
+.reader-panel{top:62px;display:flex;flex-direction:column;height:calc(100vh - 74px);min-height:560px}
+.reader-body{flex:1 1 auto;min-height:0;display:flex;flex-direction:column}
+.reader-bar{display:flex;justify-content:space-between;align-items:flex-end;gap:4px 14px;flex-wrap:wrap}
+.reader-bar .range{margin:0;font-size:.84rem;color:#c9d6de}
+.reader-tools{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:2px 0 8px}
+.reader-controls{display:flex;align-items:center;justify-content:space-between;gap:8px;flex:1;min-width:0}
+.reader-controls .small{text-align:center;margin:0;font-weight:650}
+.reader-tools button{background:#ebe4d5;color:var(--navy);box-shadow:none;font-size:.88rem;padding:8px 12px;white-space:nowrap;flex:none}
+.reader-controls .small{flex:1 1 auto;font-size:.84rem}
+.reader-tools button:hover:not(:disabled){background:#e0d7c4}
+.reader-tools .zoom-button{background:#dbe7e1}
+.scan{flex:1 1 auto;min-height:300px;display:flex;align-items:flex-start;justify-content:center;overflow:auto;background:#e9e3d7;border:2px solid #cfc5b3;border-radius:10px;padding:8px}
+.scan img{display:block;height:100%;width:auto;max-width:100%;max-height:100%;object-fit:contain;box-shadow:0 2px 10px #0003;background:#fff}
+.scan img.zoomed{height:150%;width:auto;max-width:none;max-height:none}
+.scan img.day5-comic{height:auto;width:100%;max-height:none;object-fit:initial}
+.scan img.day5-comic.zoomed{height:auto;width:175%;max-width:none}
+.reader-body .small{font-size:.85rem}
+
+/* Right column */
+.qcol > .card:first-child{margin-top:0}
+.part-head{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.part-head .eyebrow{margin:0 0 2px;font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;font-weight:850;color:var(--red)}
+.part-head h2{margin:0}
+#checkCount{background:#eef3f7;color:var(--navy);border-radius:999px;padding:4px 12px;white-space:nowrap;font-size:.88rem}
+.progressbar{height:8px;background:#e5dfd2;border-radius:99px;overflow:hidden;margin:12px 0 8px}
+.progressbar span{display:block;height:100%;background:var(--green);width:0;transition:width .3s}
+.section-help{margin:0 0 12px;color:var(--muted);font-size:.95rem}
+.qcard > h3{margin-right:70px}
+.qcard .check .q{font-size:1.04rem}
+
+/* Answer choices (buttons are made by the page script) */
+.choice-list{display:grid;gap:8px;margin:0 0 10px}
+.choice-option{display:block;width:100%;min-height:46px;text-align:left;background:#fff;color:var(--ink);border:2px solid #cfc5b3;border-radius:10px;padding:10px 13px;font:inherit;font-weight:600;line-height:1.35;cursor:pointer;box-shadow:none;transition:border-color .12s,background .12s}
+.choice-option:hover:not(:disabled){border-color:#28657e;background:#f3f8fa}
+.choice-option.selected{border-color:var(--navy);background:#e6eff4;box-shadow:inset 4px 0 0 var(--navy)}
+.choice-option:disabled{opacity:.6;cursor:not-allowed}
+.choice-option.correct{border-color:#86b897;background:var(--greenbg) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Cpath d='M2 8.5l4 4 8-9' fill='none' stroke='%232f6b4a' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat right 14px center;padding-right:40px;opacity:1;cursor:default}
+.check-answer{font-size:.95rem;padding:10px 16px}
+.page-feedback{margin:10px 0 2px;border-radius:9px;padding:8px 11px;font-size:.92rem;line-height:1.4;color:var(--muted);background:#efebe2;font-weight:650}
+.page-feedback:empty{display:none}
+.page-feedback.success{color:var(--green);background:var(--greenbg);border-left:4px solid var(--green)}
+.page-feedback.error{color:var(--amber);background:var(--amberbg);border-left:4px solid #d39b3a;font-weight:600}
+
+/* U.S. connection card */
+.fact{background:#f7f3ea;border:1px solid #e6dcc8;border-left:5px solid var(--navy);border-radius:12px;padding:11px 14px;margin:10px 0 12px}
+.fact h3{font:850 .74rem/1.3 system-ui,Segoe UI,Arial,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:var(--navy);margin:0 0 4px}
+#factText{line-height:1.5}
+#usQuestionText{font-weight:750;color:var(--navy);margin:0 0 10px;line-height:1.4}
+.us-connection textarea{min-height:96px}
+.us-connection .lockmsg{margin-top:8px}
+
+.part-nav{display:flex;justify-content:space-between;align-items:center;gap:10px;flex-wrap:wrap;margin:4px 0 0}
+.part-nav .small{margin:0;flex:1 1 220px}
+.part-nav .actions{margin:0}
+.finish h2::before{content:none}
+.finish .status{margin:6px 0 0}
+
+@media(max-width:900px){
+  .reader-panel{height:auto;min-height:0}
+  .scan{flex:none;height:68vh;min-height:400px}
+}
+@media(max-width:700px){
+  .gr-head{padding:22px 0 20px}
+  .day-tabs{gap:6px;margin-top:14px}.day-tab{padding:5px 11px;font-size:.86rem}
+  .reader-controls button,.reader-tools .zoom-button{padding:8px 10px}
+  .reader-tools .zoom-button{width:100%}
+  .reader-controls{flex-wrap:wrap}
+  .reader-controls .small{order:-1;flex:1 1 100%}
+}
+@media print{
+  .day-tabs,.reader-tools{display:none!important}
+}
 </style>
 <script src="../shared/assignments.js?v=20261103d"></script><script src="../shared/turnin.js?v=20261103d"></script></head>
 <body>
-<header><div class="wrap"><div class="kicker">U.S. History · World War II</div><h1>Read. Look. Answer.</h1></div></header>
-<main class="wrap">
-<section class="directions"><strong>Read each page. Answer its question to open the next one.</strong></section>
-<section class="note"><strong>Some pages show hate or camps.</strong> Ask for a break if you need one.</section>
+<header class="gr-head" data-years="1939 — 1945"><div class="gr-wrap">
+<div class="kicker">U.S. History · World War II</div>
+<h1>Read. Look. Answer.</h1>
+<p class="hook"><b>Read each page. Answer its question to open the next one.</b></p>
+<p class="goal"><b>Today's topic:</b> <span id="grTopic"></span></p>
+<details class="std-details"><summary>Iowa standards for today</summary><div id="grStd"></div></details>
 <nav class="day-tabs" id="dayTabs" aria-label="Choose a day"></nav>
-<section class="layout">
-<div class="panel reading">
- <div class="reader-head"><div><p class="label" id="dayLabel"></p><h2 id="bookTitle"></h2><p class="small" id="pageRange"></p></div></div>
+<nav><a class="back" href="../">← Class activities</a></nav>
+</div></header>
+
+<nav class="route" aria-label="Your progress"><ol id="grRoute"></ol></nav>
+
+<main class="gr-main gr-wrap">
+<section class="card intro">
+<p class="content-note"><span><strong>Some pages show hate or camps.</strong> Ask for a break if you need one.</span></p>
+<p class="welcome" id="welcome" role="status"></p>
+</section>
+
+<div class="gr-layout">
+<section class="reader-panel reading" aria-labelledby="bookTitle">
+ <div class="reader-bar"><div><p class="eyebrow" id="dayLabel"></p><h2 id="bookTitle"></h2></div><p class="range" id="pageRange"></p></div>
+ <div class="reader-body">
  <div class="reader-tools"><div class="reader-controls"><button id="prevPage" type="button">← Back a page</button><span class="small" id="currentPage"></span><button id="nextPage" type="button">Next page →</button></div><button class="zoom-button" id="zoomBtn" type="button" aria-pressed="false">Make page bigger</button></div>
  <div class="scan"><img id="pageImage" alt="Page from the assigned reading"></div>
  <p class="small" id="sourceCredit" hidden>Preview illustrations © Kate Hannigan, Josh Rosen, and First Second/Macmillan. <a href="https://us.macmillan.com/books/9781250358325/historycomicsworldwarii/" target="_blank" rel="noopener noreferrer">Publisher preview</a> · <a href="https://play.google.com/books/reader?id=c4DXEAAAQBAJ&pg=GBS.PP1&hl=en_US" target="_blank" rel="noopener noreferrer">Additional free Google Play sample</a>.</p>
  <p class="small" id="smithsonianCredit" hidden>Source: <a href="https://americanhistory.si.edu/sites/default/files/file-uploader/Incarceration-through-Comics-and-Graphic-Novels.pdf" target="_blank" rel="noopener noreferrer">Smithsonian National Museum of American History · free classroom PDF</a>. Only the six comics are shown here; both halves of each original foldable page have been turned upright for reading.</p>
  <p class="small" id="readerHint">Read each page. A correct answer opens the next page.</p>
-</div>
-<div class="panel questions-panel" aria-labelledby="checkTitle">
- <div class="progress-line"><div><p class="label" id="assignmentTitle"></p><h2 id="checkTitle"></h2></div><strong id="checkCount"></strong></div><div class="progressbar"><span id="progressFill"></span></div>
+ </div>
+</section>
+
+<div class="qcol questions-panel" aria-labelledby="checkTitle">
+<section class="card">
+ <div class="part-head"><div><p class="eyebrow" id="assignmentTitle"></p><h2 id="checkTitle"></h2></div><strong id="checkCount"></strong></div><div class="progressbar"><span id="progressFill"></span></div>
  <p class="section-help" id="dayPlan"></p>
  <div class="name-wrap"><label for="studentName">Your name: first name + last initial (like Jordan M.)</label><input id="studentName" maxlength="40" autocomplete="off" placeholder="First name + last initial (like Jordan M.)"></div>
- <section class="question book-question" aria-labelledby="bookPromptTitle"><h3 class="prompt-heading"><span class="step-number" aria-hidden="true">1</span><span id="bookPromptTitle">Read this page</span></h3><p id="questionText"></p><div id="choiceList" class="choice-list" role="group" aria-label="Book answer choices"></div><button type="button" class="secondary check-answer" id="checkPageAnswer" disabled>Check answer</button><p class="page-feedback" id="pageFeedback" aria-live="polite"></p></section>
- <section class="question us-connection" aria-labelledby="usPromptTitle"><h3 class="prompt-heading" id="usPromptTitle"><span class="step-number" aria-hidden="true">2</span>Connect to the U.S.</h3><div class="fact"><h3>U.S. history fact</h3><div id="factText"></div></div><p id="usQuestionText"></p><label for="usAnswer">Your U.S. connection</label><textarea id="usAnswer" placeholder="Write a short answer." disabled></textarea></section>
- <p class="small" id="answerHelp">Answer the book question to unlock the U.S. response.</p>
- <p class="small" id="answerProgress"></p>
- <div class="actions"><button type="button" class="secondary" id="prevCheck">← Back</button><button type="button" class="secondary" id="nextCheck">Next →</button><button type="button" class="primary" id="submitBtn">Turn in today’s work</button></div>
- <p class="status" id="status" aria-live="polite"></p>
-</div>
 </section>
-<p class="small">Your answers save on this device until you turn in the day.</p>
+
+<section class="card qcard question book-question" id="grBookCard" aria-labelledby="bookPromptTitle"><span class="stamp">Done</span>
+ <p class="case-tag"><span class="num">Question 1</span></p>
+ <h3 class="prompt-heading"><span id="bookPromptTitle">Read this page</span></h3>
+ <div class="check"><p class="q" id="questionText"></p><div id="choiceList" class="choice-list" role="group" aria-label="Book answer choices"></div><button type="button" class="secondary check-answer" id="checkPageAnswer" disabled>Check answer</button><p class="page-feedback" id="pageFeedback" aria-live="polite"></p></div>
+</section>
+
+<section class="card qcard question us-connection" id="grUsCard" aria-labelledby="usPromptTitle"><span class="stamp">Done</span>
+ <p class="case-tag"><span class="num">Question 2</span></p>
+ <h3 class="prompt-heading" id="usPromptTitle">Connect to the U.S.</h3>
+ <div class="fact"><h3>U.S. history fact</h3><div id="factText"></div></div>
+ <p id="usQuestionText"></p>
+ <label for="usAnswer">Your U.S. connection</label><textarea id="usAnswer" placeholder="Write a short answer." disabled></textarea>
+ <p class="small lockmsg" id="answerHelp">Answer the book question to unlock the U.S. response.</p>
+</section>
+
+<div class="part-nav">
+ <p class="small" id="answerProgress"></p>
+ <div class="actions"><button type="button" class="secondary quiet" id="prevCheck">← Back</button><button type="button" class="secondary" id="nextCheck">Next →</button></div>
+</div>
+
+<section class="card finish" id="finish">
+ <h2>Turn in your work</h2>
+ <div class="actions"><button type="button" class="primary" id="submitBtn">Turn in today’s work</button></div>
+ <p class="status" id="status" aria-live="polite"></p>
+ <p class="small">Your answers save on this device until you turn in the day.</p>
+</section>
+</div>
+</div>
 </main>
 <script>
 const DAYS=[
@@ -252,10 +331,10 @@ function setPage(n){
 }
 function showCheck(){
  if(pageTimer){clearInterval(pageTimer);pageTimer=null}
- const d=DAYS[dayIndex],start=d.start+checkIndex*groupSize(d),end=start+groupSize(d)-1;sectionStart=start;sectionEnd=end;sectionRead=loadReadPages();zoomed=false;$('pageImage').classList.remove('zoomed');$('zoomBtn').textContent='Make page bigger';$('zoomBtn').setAttribute('aria-pressed','false');$('zoomBtn').hidden=false;$('assignmentTitle').textContent=d.day;$('checkTitle').textContent=d.preview?'Read book pages '+(start*2)+'–'+(start*2+1):d.pdfPreview?'Read comic '+(start-3):'Read pages '+printedPage(d,start)+'–'+printedPage(d,end);$('checkCount').textContent=(checkIndex+1)+' / 6';$('pageRange').textContent=d.preview?'Official free preview: pages 2–13.':d.pdfPreview?'Six upright Smithsonian comics, one at a time.':'Only book pages '+printedPage(d,start)+'–'+printedPage(d,end)+' are shown.';$('sourceCredit').hidden=!d.preview;$('smithsonianCredit').hidden=!d.pdfPreview;$('readerHint').textContent=d.preview?'Read the publisher’s spread. A correct answer unlocks your U.S. history response.':d.pdfPreview?'Read this comic. A correct answer unlocks your U.S. history response.':'Read each page. A correct answer opens the next page.';$('dayPlan').textContent=d.preview?'Read the comic. Answer both questions.':d.pdfPreview?'Read the comic. Answer both questions.':'Read the pages. Answer both questions.';$('factText').textContent=d.facts[checkIndex];$('usQuestionText').textContent=d.checks[checkIndex][1];$('usAnswer').value=getAnswer(checkIndex,'us');$('prevCheck').disabled=checkIndex===0;setPage(start);updateProgress()
+ const d=DAYS[dayIndex],start=d.start+checkIndex*groupSize(d),end=start+groupSize(d)-1;sectionStart=start;sectionEnd=end;sectionRead=loadReadPages();zoomed=false;$('pageImage').classList.remove('zoomed');$('zoomBtn').textContent='Make page bigger';$('zoomBtn').setAttribute('aria-pressed','false');$('zoomBtn').hidden=false;$('assignmentTitle').textContent=d.day;$('checkTitle').textContent=d.preview?'Read book pages '+(start*2)+'–'+(start*2+1):d.pdfPreview?'Read comic '+(start-3):'Read pages '+printedPage(d,start)+'–'+printedPage(d,end);$('checkCount').textContent=(checkIndex+1)+' / 6';$('pageRange').textContent=d.preview?'Official free preview: pages 2–13.':d.pdfPreview?'Six upright Smithsonian comics, one at a time.':'Only book pages '+printedPage(d,start)+'–'+printedPage(d,end)+' are shown.';$('sourceCredit').hidden=!d.preview;$('smithsonianCredit').hidden=!d.pdfPreview;$('readerHint').textContent=d.preview?'Read the publisher’s spread. A correct answer unlocks your U.S. history response.':d.pdfPreview?'Read this comic. A correct answer unlocks your U.S. history response.':'Read each page. A correct answer opens the next page.';$('dayPlan').textContent=d.preview?'Read the comic. Answer both questions.':d.pdfPreview?'Read the comic. Answer both questions.':'Read the pages. Answer both questions.';$('factText').textContent=d.facts[checkIndex];$('usQuestionText').textContent=d.checks[checkIndex][1];$('usAnswer').value=getAnswer(checkIndex,'us');$('usAnswer').dataset.ready='1';$('prevCheck').disabled=checkIndex===0;setPage(start);updateProgress()
 }
 function showDay(i){
- saveCurrent();dayIndex=i;checkIndex=0;const d=DAYS[i];document.querySelectorAll('.day-tab').forEach((b,n)=>b.classList.toggle('active',n===i));$('dayLabel').textContent=d.day;$('bookTitle').textContent=d.book;$('status').textContent='';showCheck()
+ if($('usAnswer').dataset.ready)saveCurrent();dayIndex=i;checkIndex=0;const d=DAYS[i];document.querySelectorAll('.day-tab').forEach((b,n)=>b.classList.toggle('active',n===i));$('dayLabel').textContent=d.day;$('bookTitle').textContent=d.book;$('status').textContent='';showCheck()
 }
 $('dayTabs').innerHTML=DAYS.map((d,i)=>'<button type="button" class="day-tab'+(i===0?' active':'')+'" data-day="'+i+'">'+d.day+'</button>').join('');
 document.querySelectorAll('.day-tab').forEach(b=>b.addEventListener('click',()=>showDay(Number(b.dataset.day))));
@@ -302,5 +381,38 @@ $('submitBtn').addEventListener('click',async()=>{
  finally{btn.disabled=false}
 });
 showDay(0);(function(){function go(){var m=location.hash.match(/day(\d+)/);if(m){var i=Number(m[1])-1;if(i>=0&&i<DAYS.length)showDay(i);}}go();addEventListener('hashchange',go);})();
+</script>
+<script>
+// Display only: progress route, "Done" stamps, today's topic and standards. Reads the page's saved state; never changes answers, keys, locks or turn-in.
+(function(){
+  var g=function(id){return document.getElementById(id)};
+  var shownDay=-1,welcomed={};
+  function partPages(d,i){var s=d.start+i*groupSize(d),e=s+groupSize(d)-1;
+    return d.preview?'Book pages '+(s*2)+'–'+(s*2+1):d.pdfPreview?'Comic '+(s-3):'Pages '+printedPage(d,s)+'–'+printedPage(d,e)}
+  function buildDay(){var d=DAYS[dayIndex],ol=g('grRoute'),html='';
+    for(var i=0;i<d.checks.length;i++)html+='<li id="r'+(i+1)+'"><a><span class="dot"><span>'+(i+1)+'</span></span><span>Part '+(i+1)+'<small>'+partPages(d,i)+'</small></span></a></li>';
+    html+='<li id="rFinish"><a><span class="dot"><span>★</span></span><span>Turn in<small>Last step</small></span></a></li>';
+    ol.innerHTML=html;
+    g('grTopic').textContent=d.title;
+    var box=g('grStd');box.innerHTML='';
+    String(STD[d.id]||'').split('; ').forEach(function(s){if(!s)return;var m=s.match(/^(\S+)\s*\((.*)\)$/),p=document.createElement('p'),b=document.createElement('b');
+      b.textContent='Standard '+(m?m[1]:s);p.appendChild(b);if(m)p.appendChild(document.createTextNode(' — '+m[2]));box.appendChild(p)});
+    var w=g('welcome'),hasWork=countPageCorrect(dayIndex)>0||d.checks.some(function(_,i){return getAnswer(i,'us').trim()});
+    if(hasWork&&!welcomed[dayIndex]){w.textContent='Welcome back — your work was saved.';w.style.display='block'}else{w.style.display='none'}
+    welcomed[dayIndex]=true;shownDay=dayIndex}
+  function update(){if(typeof DAYS==='undefined')return;if(shownDay!==dayIndex)buildDay();
+    var d=DAYS[dayIndex];
+    for(var i=0;i<d.checks.length;i++){var li=g('r'+(i+1));if(!li)continue;
+      li.classList.toggle('done',sectionHasAllCorrect(dayIndex,i)&&!!getAnswer(i,'us').trim());
+      li.classList.toggle('current',i===checkIndex);
+      if(i===checkIndex)li.setAttribute('aria-current','step');else li.removeAttribute('aria-current')}
+    g('rFinish').classList.toggle('done',/Turned in!/.test(g('status').textContent));
+    g('grBookCard').classList.toggle('is-done',isCurrentCorrect());
+    g('grUsCard').classList.toggle('is-done',sectionHasAllCorrect(dayIndex,checkIndex)&&!!g('usAnswer').value.trim())}
+  ['click','input','change'].forEach(function(t){document.addEventListener(t,function(){setTimeout(update,60)})});
+  addEventListener('hashchange',function(){setTimeout(update,60)});
+  var mo=new MutationObserver(update);['status','checkCount','pageFeedback','dayLabel','checkTitle'].forEach(function(id){mo.observe(g(id),{childList:true,characterData:true,subtree:true})});
+  update();
+})();
 </script>
 </body></html>

@@ -3,14 +3,144 @@
 <head>
 <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="theme-color" content="#142f43">
 <title>Democracy Visualized | Government Readings</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../shared/graphic-reading.css?v=2">
 <style>
-:root{--ink:#183247;--muted:#536779;--navy:#16364d;--blue:#25708a;--gold:#f3c35c;--bg:#f0f4f5;--line:#dce5e8;--green:#246949;--red:#a34a42;--shadow:0 10px 30px #17384a12}*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 system-ui,-apple-system,"Segoe UI",sans-serif}button,textarea{font:inherit;color:inherit}header{background:var(--navy);color:white;padding:24px max(20px,calc((100vw - 1200px)/2));border-bottom:5px solid var(--gold)}.topline{display:flex;align-items:center;gap:12px;color:#cfdae0;font-size:.83rem;font-weight:700;letter-spacing:.08em;text-transform:uppercase}.mark{display:grid;place-items:center;width:38px;height:38px;border-radius:12px;background:var(--gold);color:#15374e;font-weight:900;font-size:1.2rem}h1{font-size:clamp(1.65rem,3vw,2.4rem);line-height:1.1;margin:14px 0 8px}.sub{margin:0;color:#e1e9ed;max-width:690px}.layout{max-width:1200px;margin:26px auto;padding:0 18px;display:grid;grid-template-columns:245px minmax(0,1fr);gap:22px}.sidebar{align-self:start;position:sticky;top:14px;background:white;border:1px solid var(--line);border-radius:16px;padding:16px;box-shadow:var(--shadow)}.side-title{margin:0 0 10px;font-size:.8rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}.days{display:grid;gap:6px}.day-btn{display:flex;align-items:center;gap:10px;text-align:left;width:100%;border:1px solid transparent;background:transparent;padding:9px;border-radius:10px;cursor:pointer;font-weight:650;font-size:.89rem}.day-btn:hover{background:#f4f8f9}.day-btn.active{background:#eaf3f5;border-color:#b6d3dc;color:#10465f}.day-num{width:27px;height:27px;flex:none;border-radius:50%;display:grid;place-items:center;background:#edf1f2;font-size:.8rem}.active .day-num{background:var(--blue);color:white}.tick{margin-left:auto;color:var(--green);font-weight:900}.progress{margin:15px 2px 2px;color:var(--muted);font-size:.82rem}.progressbar{height:7px;background:#e8edef;border-radius:9px;overflow:hidden;margin-top:6px}.progressbar span{height:100%;display:block;background:#39876c;width:0;transition:width .2s}.main{min-width:0}.main:focus{outline:none}.dayhead{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;margin:2px 2px 16px}.eyebrow{font-size:.79rem;color:var(--blue);font-weight:800;letter-spacing:.09em;text-transform:uppercase}.dayhead h2{font-size:clamp(1.45rem,2.5vw,2rem);line-height:1.18;margin:5px 0}.standards{font-size:.88rem;color:var(--muted);margin:0}.goal{margin:4px 0 0;font-size:.98rem}.todo{margin:6px 0 0;font-size:.9rem;color:var(--muted)}.hidden{display:none}.restart{border:1px solid var(--line);background:white;border-radius:9px;padding:6px 11px;cursor:pointer;font-size:.84rem;color:var(--muted);white-space:nowrap}.welcome{background:#eaf3f5;border:1px solid #b6d3dc;border-radius:10px;padding:10px 13px;margin:0 0 12px;color:#10465f;font-weight:650}.stem{background:#f6f8f8;border:1px dashed #b9cbd2;border-radius:8px;padding:8px 10px;color:#294b60!important;font-weight:600}.panel{background:white;border:1px solid var(--line);border-radius:16px;padding:20px;margin:14px 0;box-shadow:var(--shadow)}.panel h3{font-size:1.15rem;margin:0 0 5px}.directions{color:var(--muted);margin:0 0 14px}.readpage{background:#f6f8f8;border:1px solid var(--line);border-radius:12px;padding:12px;text-align:center;overflow:auto}.readpage img{display:block;width:auto;max-width:100%;max-height:72vh;object-fit:contain;margin:auto;border-radius:4px;box-shadow:0 3px 15px #102f411c}.page-label{display:flex;justify-content:space-between;gap:8px;align-items:center;text-align:left;font-size:.82rem;color:var(--muted);margin:0 0 10px}.zoom{display:flex;gap:5px}.zoom button{border:1px solid var(--line);background:white;border-radius:7px;padding:3px 9px;cursor:pointer}.gate{margin:12px 0 2px;padding:11px 13px;border-radius:10px;background:#edf4f6;text-align:left;color:#294b60}.gate strong{display:block}.question{border-top:1px solid var(--line);padding-top:14px;margin-top:15px;text-align:left}.question h4{margin:0 0 9px;font-size:1rem}.options{display:grid;gap:7px}.option{padding:10px 12px;border:1px solid #d8e2e6;background:white;border-radius:10px;text-align:left;cursor:pointer;line-height:1.35}.option:hover:not(:disabled){border-color:var(--blue);background:#f3f9fa}.option:disabled{cursor:default}.option.correct{border-color:#76ac92;background:#eef8f1}.option.wrong{border-color:#d99b95;background:#fff3f1}.feedback{min-height:25px;margin:8px 0 0;font-weight:650;font-size:.91rem}.feedback.good{color:var(--green)}.feedback.try{color:var(--red)}.writebox{margin-top:18px}.writebox label{display:block;font-weight:750;margin-bottom:6px}.writebox p{font-size:.9rem;color:var(--muted);margin:0 0 8px}.writebox textarea{display:block;width:100%;min-height:86px;border:1px solid #cbd9de;border-radius:10px;padding:11px;resize:vertical}.wordcount{font-size:.82rem;color:var(--muted);margin-top:5px}.finish{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:14px}.finish button{border:0;background:var(--blue);color:#fff;font-weight:750;border-radius:10px;padding:11px 16px;cursor:pointer}.finish button:disabled{background:#aab9bf;cursor:not-allowed}.timer{font-size:.9rem;color:var(--muted)}.donebox{background:#eef8f1;border:1px solid #c5e1cf;border-radius:14px;padding:19px}.donebox strong{color:var(--green);font-size:1.1rem}.note{border-left:4px solid var(--gold);background:#fff9ea;padding:12px 14px;border-radius:0 10px 10px 0;margin:12px 0;color:#5d583f}.source{max-width:1200px;margin:0 auto;padding:0 18px 30px;color:var(--muted);font-size:.82rem}.sourcebox{background:#e9f0f2;border-radius:12px;padding:14px}.sourcebox p{margin:0 0 6px}.sourcebox p:last-child{margin:0}a{color:#145f7b}@media(max-width:780px){.dayhead{flex-direction:column;gap:8px}.layout{grid-template-columns:1fr;margin-top:14px}.sidebar{position:relative;top:auto;padding:11px}.side-title{margin-left:5px}.days{grid-template-columns:repeat(3,minmax(0,1fr))}.day-btn{font-size:.79rem;padding:7px 5px;gap:5px}.day-num{width:24px;height:24px}.tick{display:none}.progress{margin:9px 5px 2px}.panel{padding:14px}.readpage img{max-height:66vh}}@media(max-width:430px){.days{grid-template-columns:repeat(2,minmax(0,1fr))}.day-btn{font-size:.76rem}}
+/* Page-only styling. Shared look lives in shared/graphic-reading.css.
+   The reading steps below are drawn by this page's script, so their classes (.panel, .option, .feedback...) are styled here to match the shared ones. */
+.gr-wrap.wide{max-width:1380px}
+.hidden{display:none!important}
+.main:focus{outline:none}
+a{color:#1d5873}
+
+/* Header: logo letter + day picker */
+.gr-head .kicker .mark{display:inline-grid;place-items:center;width:1.45em;height:1.45em;margin-right:6px;border-radius:3px;background:var(--navy2);color:var(--gold);letter-spacing:0;vertical-align:-.15em}
+.day-picker{display:flex;flex-wrap:wrap;align-items:center;gap:8px 16px;margin:16px 0 0}
+.day-picker .side-title{margin:0;font-size:.74rem;letter-spacing:.13em;text-transform:uppercase;font-weight:850;color:#f1d991}
+.days{display:flex;flex-wrap:wrap;gap:8px}
+.day-btn{display:flex;align-items:center;gap:8px;background:#ffffff14;border:2px solid #ffffff38;color:#fff;padding:6px 14px 6px 7px;border-radius:999px;font-size:.95rem;font-weight:750;line-height:1.2;box-shadow:none}
+.day-btn:hover{background:#ffffff26}
+.day-btn.active{background:var(--gold);border-color:var(--gold);color:var(--navy2)}
+.day-num{flex:none;width:26px;height:26px;border-radius:50%;display:grid;place-items:center;background:#ffffff22;font-size:.8rem;font-weight:850}
+.day-btn.active .day-num{background:var(--navy2);color:#fff}
+.tick{color:#9bdcb3;font-weight:900}.tick:empty{display:none}
+.day-btn.active .tick{color:var(--green)}
+.day-picker .progress{font-size:.85rem;color:#d7e2e8;font-weight:650;min-width:170px}
+.progressbar{height:7px;background:#ffffff26;border-radius:9px;overflow:hidden;margin-top:4px;max-width:200px}
+.progressbar span{height:100%;display:block;background:#7cc69a;width:0;transition:width .2s}
+
+/* Progress route (steps of the day on screen; not links, because the page opens one step at a time) */
+.route ol{max-width:1100px}
+.route .step{display:flex;align-items:center;gap:8px;color:var(--navy);padding:5px 8px;border-radius:9px;font-size:.84rem;line-height:1.15;font-weight:750;border:2px solid transparent;min-width:0}
+.route .step > span:last-child{min-width:0}
+.route li.here .step{background:#f1ecdf;border-color:#d8cfbd}
+.route li.here .dot{background:var(--navy);border-color:var(--navy);color:#fff}
+.route li.done .step{color:var(--green)}
+
+/* Day title card */
+.dayhead{display:flex;align-items:flex-start;justify-content:space-between;gap:14px;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px 22px;margin:0 0 14px;box-shadow:0 6px 18px #19364b12}
+.dayhead .eyebrow{display:inline-block;background:var(--navy);color:#fff;border-radius:5px;padding:2px 9px;font-size:.74rem;font-weight:850;letter-spacing:.1em;text-transform:uppercase}
+.dayhead h2{font-size:clamp(1.6rem,3vw,2.2rem);line-height:1.12;margin:10px 0 8px}
+.dayhead .standards{font-size:.86rem;color:var(--muted);margin:0 0 10px}
+.dayhead .goal{background:#fbf3df;border:1px solid #ecd9a8;border-left:5px solid var(--gold);border-radius:10px;padding:10px 14px;margin:0;max-width:62em}
+.dayhead .goal strong{color:var(--red)}
+.dayhead .todo{margin:10px 0 0;font-size:.95rem;color:var(--ink);font-weight:600}
+.restart{flex:none;background:#ebe4d5;color:var(--navy);font-size:.88rem;padding:8px 13px;white-space:nowrap}
+.restart:hover{background:#e0d7c4}
+.donebox{background:var(--greenbg);border:1px solid #9cc3a8;border-left:6px solid var(--green);border-radius:14px;padding:14px 18px;margin:0 0 14px}
+.donebox strong{color:var(--green);font:800 1.2rem/1.2 var(--serif)}
+.donebox p{margin:6px 0 0}
+#main .welcome{display:block;margin:0 0 14px}
+.note{background:#f5f0e5;border:1px solid #e6dcc8;border-left:5px solid var(--navy);border-radius:10px;padding:11px 14px;margin:0 0 14px;font-size:.98rem}
+
+/* Reading step = card; book page on the left, question on the right */
+#work{scroll-margin-top:76px}
+.panel{position:relative;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:20px;margin:0 0 16px;box-shadow:0 6px 18px #19364b12}
+.panel.is-done{border-color:#9cc3a8;box-shadow:0 6px 18px #2f6b4a1a}
+.panel.is-done::after{content:"Done";position:absolute;top:16px;right:16px;font-size:.76rem;font-weight:850;letter-spacing:.1em;text-transform:uppercase;color:var(--green);border:2px solid var(--green);border-radius:6px;padding:2px 9px;transform:rotate(3deg);background:#fff}
+.panel h3{font-size:1.35rem;margin:0 70px 4px 0}
+.directions{color:var(--muted);margin:0 0 14px;font-size:.95rem}
+.readpage:has(.gate){display:grid;grid-template-columns:minmax(0,1fr) 340px;grid-template-areas:"label ." "img gate" "img q" "img .";grid-template-rows:auto auto auto 1fr;column-gap:20px}
+.readpage:has(.gate) .page-label{grid-area:label}
+.readpage:has(.gate) > img{grid-area:img}
+.readpage:has(.gate) .gate{grid-area:gate;margin-top:0}
+.readpage:has(.gate) .question{grid-area:q}
+.readpage + .readpage{margin-top:16px}
+.page-label{display:flex;justify-content:space-between;align-items:center;gap:8px;background:var(--navy);color:#f1d991;border-radius:12px 12px 0 0;padding:8px 10px 8px 14px;margin:0;font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;font-weight:850}
+.zoom{display:flex;gap:6px}
+.zoom button{background:#ffffff1f;color:#fff;border:1px solid #ffffff4d;border-radius:7px;padding:2px 12px;font-size:1.05rem;line-height:1.3;box-shadow:none}
+.zoom button:hover{background:#ffffff38}
+.readpage > img{display:block;width:100%;height:auto;aspect-ratio:1100/846;max-width:100%;background:#fff;border:2px solid #cfc5b3;border-top:0;border-radius:0 0 12px 12px;margin:0 0 4px}
+/* Zoomed in with +: the picture goes full width in its own scroll area (the page's zoom sets the picture's width). Zoomed out stays beside the question. */
+.readpage:has(.gate) > img{justify-self:center}
+.readpage:has(#bookpage[data-zoom^="1."]){display:block;overflow:auto}
+.gate{background:#f1eee8;border:2px dashed #cfc5b3;border-radius:12px;padding:12px 14px;margin:14px 0 0;color:var(--muted);font-size:.95rem;line-height:1.45}
+.gate strong{display:block;font:800 1.08rem/1.25 var(--serif);color:var(--navy);margin-bottom:3px}
+.question{background:#f7f3ea;border:1px solid #e6dcc8;border-radius:12px;padding:12px 14px;margin:12px 0 0}
+.question::before{content:"Reading check";display:block;font-size:.74rem;font-weight:850;letter-spacing:.1em;text-transform:uppercase;color:var(--red);margin:0 0 4px}
+.question h4{font-size:1rem;font-weight:750;color:var(--navy);margin:0 0 10px;line-height:1.4}
+.options{display:grid;gap:8px}
+.option{display:block;width:100%;text-align:left;background:#fff;color:var(--ink);border:2px solid #cfc5b3;border-radius:10px;padding:10px 13px;font:inherit;font-weight:600;line-height:1.35;box-shadow:none;transition:border-color .12s,background .12s}
+.option:hover:not(:disabled){border-color:#28657e;background:#f3f8fa}
+.option:disabled{opacity:.6;cursor:not-allowed}
+.option.correct{border-color:#86b897;background:var(--greenbg) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 16 16'%3E%3Cpath d='M2 8.5l4 4 8-9' fill='none' stroke='%232f6b4a' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E") no-repeat right 14px center;padding-right:40px;opacity:1;cursor:default}
+.option.wrong{border-color:#d39b3a;background:var(--amberbg);opacity:1;cursor:default}
+.feedback{margin:10px 0 2px;border-radius:9px;font-size:.92rem;line-height:1.4;font-weight:650}
+.feedback:empty{display:none}
+.feedback.good{color:var(--green);background:var(--greenbg);border-left:4px solid var(--green);padding:8px 11px}
+.feedback.try{color:var(--amber);background:var(--amberbg);border-left:4px solid #d39b3a;padding:8px 11px;font-weight:600}
+#finishFeedback{color:#a12f2f}
+
+/* Last step = turn-in card */
+.panel:has(.writebox){border:2px solid var(--navy);background:linear-gradient(180deg,#fffdf8,#f8f3e8)}
+.panel:has(.writebox)::before{content:"Last step · Turn in your work";display:inline-block;background:var(--navy);color:#fff;border-radius:5px;padding:2px 9px;margin:0 0 8px;font-size:.74rem;font-weight:850;letter-spacing:.1em;text-transform:uppercase}
+.writebox{margin-top:6px;max-width:820px}
+.writebox p{font-size:.92rem;color:var(--muted);margin:0 0 8px}
+.writebox .stem{background:#f7f3ea;border:1px dashed #cfc5b3;border-radius:9px;padding:8px 11px;color:var(--navy);font-weight:650}
+#studentName{border-color:#cfc5b3!important}
+.writebox textarea{min-height:110px}
+.wordcount{font-size:.85rem;color:var(--muted);margin-top:5px;font-weight:650}
+#work .finish{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:14px;border:0;background:none;padding:0}
+#finish{background:var(--red);color:#fff;font-size:1.05rem;padding:13px 24px;box-shadow:0 3px 0 #7a2b26}
+#finish:hover:not(:disabled){background:#b5463e}
+#finish:disabled{background:#a99d86;box-shadow:none}
+.timer{font-size:.9rem;color:var(--muted);font-weight:650}
+
+/* Source note */
+.source{padding-bottom:84px}
+.sourcebox{font-size:.86rem;color:var(--muted);margin-top:0}
+.sourcebox p{margin:0 0 6px}.sourcebox p:last-child{margin:0}
+.sourcebox strong{color:var(--navy)}
+
+@media(max-width:1100px){
+  .readpage:has(.gate){display:block}
+}
+@media(max-width:700px){
+  .dayhead{flex-direction:column;gap:6px;padding:16px}
+  .restart{align-self:flex-start;margin-top:6px}
+  .gr-wrap{padding:0 10px}
+  .panel{padding:12px 10px}
+  .panel h3{font-size:1.18rem}
+  .days{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));width:100%}
+  .day-btn{justify-content:center;padding:7px 4px;font-size:.9rem;gap:4px}
+  .day-num{display:none}
+  .day-picker .progress{width:100%}
+  .route .step{flex-direction:column;gap:3px;text-align:center;padding:4px 2px;font-size:.72rem}
+}
 </style>
 </head>
 <body>
-<header><div class="topline"><span class="mark" aria-hidden="true">D</span><span>Government Foundations · Graphic Reading</span></div><h1>Democracy Visualized</h1><p class="sub">Open your day. Read each page, answer its question, then write 1–2 sentences and tap Turn in. Your spot saves on this device.</p></header>
-<div class="layout"><nav class="sidebar" aria-label="Choose a reading day"><p class="side-title">Reading days</p><div class="days" id="days"></div><div class="progress"><span id="progressText">0 of 4 readings finished</span><div class="progressbar"><span id="progressFill"></span></div></div></nav><main class="main" id="main" tabindex="-1"></main></div>
-<footer class="source"><div class="sourcebox"><p><strong>About this reading</strong></p><p>Selected pages from <em>This Is What Democracy Looks Like: A Graphic Guide to Governance</em>, created by the Center for Cartoon Studies.</p><p><a href="https://cartoonstudies.org/democracy" target="_blank" rel="noopener">Visit the creators’ page</a>. PDF page numbers are shown above each reading.</p></div></footer>
+<header class="gr-head" data-years="1787"><div class="gr-wrap wide">
+<div class="kicker"><span class="mark" aria-hidden="true">D</span><span>Government Foundations · Graphic Reading</span></div>
+<h1>Democracy Visualized</h1>
+<p class="hook sub">Open your day. Read each page, answer its question, then write 1–2 sentences and tap Turn in. Your spot saves on this device.</p>
+<nav class="day-picker" aria-label="Choose a reading day"><p class="side-title">Reading days</p><div class="days" id="days"></div><div class="progress"><span id="progressText">0 of 4 readings finished</span><div class="progressbar"><span id="progressFill"></span></div></div></nav>
+<a class="back" href="../../">← Class activities</a>
+</div></header>
+<nav class="route" aria-label="Your progress"><ol id="routeSteps"></ol></nav>
+<main class="main gr-main gr-wrap wide" id="main" tabindex="-1"></main>
+<footer class="source gr-wrap wide"><div class="sourcebox card"><p><strong>About this reading</strong></p><p>Selected pages from <em>This Is What Democracy Looks Like: A Graphic Guide to Governance</em>, created by the Center for Cartoon Studies.</p><p><a href="https://cartoonstudies.org/democracy" target="_blank" rel="noopener">Visit the creators’ page</a>. PDF page numbers are shown above each reading.</p></div></footer>
 <script src="../../shared/assignments.js?v=20261103d"></script>
 <script src="../../shared/turnin.js?v=20261103d"></script>
 <script>
@@ -58,6 +188,24 @@ function zoom(delta){const im=document.getElementById('bookpage');let z=Number(i
 (function(){const m=location.hash.match(/day(\d+)/);if(m){const i=data.findIndex(d=>String(d.day)===m[1]);if(i>-1)current=i;}})();
 addEventListener('hashchange',()=>{const m=location.hash.match(/day(\d+)/);if(m){const i=data.findIndex(d=>String(d.day)===m[1]);if(i>-1&&i!==current){current=i;startDay();}}});
 startDay();
+</script>
+<script>
+// Progress route: shows the steps of the day on screen and checks them off (display only — the reading, checks and turn-in code above are unchanged).
+(function(){
+  const ol=document.getElementById('routeSteps'),main=document.getElementById('main');let builtFor=null;
+  function step(num,label,sub){const li=document.createElement('li');li.innerHTML='<span class="step"><span class="dot"><span></span></span><span><b></b><small></small></span></span>';li.querySelector('.dot span').textContent=num;li.querySelector('b').textContent=label;li.querySelector('small').textContent=sub;return li}
+  function update(){
+    if(typeof data==='undefined'||!data[current])return;const d=data[current];
+    if(builtFor!==d.day){builtFor=d.day;ol.innerHTML='';d.pages.forEach((p,i)=>ol.append(step(i+1,'Page '+(i+1),p.title)));ol.append(step('★','Turn in','Last step'))}
+    const finished=!!completed[d.day],page=state?state.page:0,fb=document.getElementById('feedback'),right=!!(fb&&fb.classList.contains('good'));
+    [...ol.children].forEach((li,i)=>{const last=i===d.pages.length;const done=finished||(last?false:(page>i||(page===i&&right)));const here=!finished&&!done&&(last?page>=d.pages.length:page===i);
+      if(li.classList.contains('done')!==done)li.classList.toggle('done',done);if(li.classList.contains('here')!==here)li.classList.toggle('here',here)});
+    const panel=fb&&fb.closest('.panel');if(panel&&panel.classList.contains('is-done')!==right)panel.classList.toggle('is-done',right);
+  }
+  new MutationObserver(update).observe(main,{childList:true,subtree:true,attributes:true,attributeFilter:['class']});
+  addEventListener('hashchange',()=>setTimeout(update,0));
+  update();
+})();
 </script>
 </body>
 </html>

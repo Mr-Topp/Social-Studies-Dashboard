@@ -10,16 +10,17 @@ const $=id=>document.getElementById(id);
 const total=groups.reduce((n,g)=>n+g.questions.length,0);
 let misses={},groupIndex=0,questionIndex=0,completed=0,correct=false,ready=false,timer=null,focusImage=null,previousOrder='';
 
-/* ---- Standard + goal line (one small line under the title) ---- */
+/* ---- Today's goal box + Iowa standards (in the page header) ---- */
 (function(){
  if(!meta.standard)return;
  const header=document.querySelector('header');if(!header)return;
  const old=header.querySelector('.standard');if(old)old.remove();
- const p=document.createElement('p');p.className='std-line';
- const b=document.createElement('b');b.textContent='Standard '+meta.standard;
- p.append(b,document.createTextNode(' — '+(meta.standardText||'')));
- if(meta.goal){const br=document.createElement('br');const g=document.createElement('b');g.textContent="Today's goal:";p.append(br,g,document.createTextNode(' '+meta.goal))}
- header.after(p);
+ const box=header.querySelector('.gr-wrap')||header,spot=box.querySelector('.head-links');
+ if(meta.goal){const g=document.createElement('p');g.className='goal';const gb=document.createElement('b');gb.textContent="Today's goal:";g.append(gb,document.createTextNode(' '+meta.goal));box.insertBefore(g,spot)}
+ const d=document.createElement('details');d.className='std-details';
+ const sm=document.createElement('summary');sm.textContent='Iowa standards for today';
+ const p=document.createElement('p');const b=document.createElement('b');b.textContent='Standard '+meta.standard;
+ p.append(b,document.createTextNode(' — '+(meta.standardText||'')));d.append(sm,p);box.insertBefore(d,spot);
 })();
 
 /* ---- Save progress on this device (one save per page) ---- */
@@ -35,10 +36,10 @@ function openImage(src,alt){$('large').src=src;$('large').alt=alt;$('zoom').show
 function renderChoices(){const q=groups[groupIndex].questions[questionIndex];const options=shuffle(q.choices.map((text,i)=>({text,correct:i===q.answer})));if(options.map(o=>o.text).join('|')===previousOrder)options.push(options.shift());previousOrder=options.map(o=>o.text).join('|');$('choices').replaceChildren();options.forEach((option,i)=>{const button=document.createElement('button');button.type='button';button.className='choice';button.disabled=!ready;const letter=document.createElement('span');letter.className='letter';letter.textContent=String.fromCharCode(65+i);const text=document.createElement('span');text.textContent=option.text;button.append(letter,text);button.onclick=()=>choose(option.correct);$('choices').append(button)})}
 function unlockAfter(seconds,retry){clearInterval(timer);ready=false;$('choices').querySelectorAll('button').forEach(b=>b.disabled=true);$('lock').hidden=false;let left=seconds;function label(){const prefix=retry?'Look again.':focusImage?'Look closely.':'Read first.';$('lock').textContent=prefix+' Choices open in '+left+' seconds.'}label();timer=setInterval(()=>{if(document.hidden){$('lock').textContent='Reading time pauses while this tab is hidden.';return}if(focusImage&&(!focusImage.complete||!focusImage.naturalWidth)){$('lock').textContent='Waiting for the picture to load.';return}left--;label();if(left<=0){clearInterval(timer);ready=true;$('lock').hidden=true;$('choices').querySelectorAll('button').forEach(b=>b.disabled=false)}},1000)}
 function nextPosition(){let g=groupIndex,q=questionIndex+1;if(q>=groups[g].questions.length){g++;q=0}return {g,q}}
-function choose(isCorrect){if(!ready||correct)return;const q=groups[groupIndex].questions[questionIndex];if(!isCorrect){const k=groupIndex+'-'+questionIndex;misses[k]=(misses[k]||0)+1}if(isCorrect){correct=true;completed++;$('feedback').textContent='That fits. '+q.explain;$('feedback').className='good';$('next').disabled=false;$('bar').value=completed;$('questionProgress').textContent=completed+' of '+total+' questions done';$('choices').querySelectorAll('button').forEach(b=>b.disabled=true);savedPos=nextPosition();save()}else{$('feedback').textContent='Not quite. '+(q.hint||(focusImage?'Look at the marked picture and read its words again.':'Read the text again.'))+' The choices are mixed up now.';$('feedback').className='retry';ready=false;renderChoices();unlockAfter(8,true);save()}}
+function choose(isCorrect){if(!ready||correct)return;const q=groups[groupIndex].questions[questionIndex];if(!isCorrect){const k=groupIndex+'-'+questionIndex;misses[k]=(misses[k]||0)+1}if(isCorrect){correct=true;completed++;$('feedback').textContent='That fits. '+q.explain;$('feedback').className='fb ok';$('next').disabled=false;$('bar').value=completed;$('questionProgress').textContent=completed+' of '+total+' questions done';$('choices').querySelectorAll('button').forEach(b=>b.disabled=true);savedPos=nextPosition();save()}else{$('feedback').textContent='Not quite. '+(q.hint||(focusImage?'Look at the marked picture and read its words again.':'Read the text again.'))+' The choices are mixed up now.';$('feedback').className='fb no';ready=false;renderChoices();unlockAfter(8,true);save()}}
 function evidenceFor(q){return q.comicImage||q.image||(Array.isArray(q.images)&&q.images.length===1?q.images[0]:null)}
 function focusEvidence(q){focusImage=null;const buttons=[...$('scans').children];buttons.forEach(b=>b.classList.remove('focus-comic'));const src=evidenceFor(q);$('evidenceHint').hidden=true;if(!src)return;const index=groups[groupIndex].images.findIndex(i=>i.src===src);const button=buttons[index];if(!button)return;focusImage=button.querySelector('img');button.classList.add('focus-comic');const kind=(groups[groupIndex].images[index]||{}).kind;$('evidenceHint').textContent=kind==='comic'?'Use the marked picture.':'Use the marked page.';$('evidenceHint').hidden=false;const box=$('scans');box.scrollTop=button.offsetTop-box.offsetTop;}
-function showQuestion(first){clearInterval(timer);correct=false;ready=false;const g=groups[groupIndex],q=g.questions[questionIndex];$('within').textContent='Question '+(questionIndex+1)+' of '+g.questions.length+' for this reading';$('question').textContent=q.question;$('feedback').textContent='';$('feedback').className='';$('next').disabled=true;const last=questionIndex===g.questions.length-1;$('next').textContent=last?(groupIndex===groups.length-1?'Finish reading':'Next reading'):'Next question · same reading';$('questionProgress').textContent=completed+' of '+total+' questions done';$('bar').value=completed;focusEvidence(q);renderChoices();unlockAfter(first?20:6,false)}
+function showQuestion(first){clearInterval(timer);correct=false;ready=false;const g=groups[groupIndex],q=g.questions[questionIndex];$('within').textContent='Question '+(questionIndex+1)+' of '+g.questions.length+' for this reading';$('question').textContent=q.question;$('feedback').textContent='';$('feedback').className='fb';$('next').disabled=true;const last=questionIndex===g.questions.length-1;$('next').textContent=last?(groupIndex===groups.length-1?'Finish reading':'Next reading'):'Next question · same reading';$('questionProgress').textContent=completed+' of '+total+' questions done';$('bar').value=completed;focusEvidence(q);renderChoices();unlockAfter(first?20:6,false)}
 function showGroup(){const g=groups[groupIndex];$('progressText').textContent='Reading '+(groupIndex+1)+' of '+groups.length;$('readingTitle').textContent=g.title;$('helpText').textContent=g.summary;$('helpText').hidden=false;$('toggleHelp').setAttribute('aria-expanded','true');$('toggleHelp').textContent='Hide reading help';$('scans').replaceChildren();g.images.forEach((image,i)=>{if(image.text){/* short text panel (a case file) instead of a scan */const panel=document.createElement('div');panel.className='text-panel';panel.innerHTML=image.text;$('scans').append(panel);return}const button=document.createElement('button');button.type='button';button.setAttribute('aria-label','Enlarge picture '+(i+1));if(image.kind==='comic')button.classList.add('comic');const img=document.createElement('img');img.src=image.src;img.alt=image.alt;button.append(img);button.onclick=()=>openImage(image.src,image.alt);$('scans').append(button)});$('scans').scrollTop=0;showQuestion(true)}
 function showFinish(){clearInterval(timer);$('intro').hidden=true;$('work').hidden=true;$('finish').hidden=false}
 function start(){clearInterval(timer);clearSaved();misses={};groupIndex=0;questionIndex=0;completed=0;finished=false;savedPos={g:0,q:0};previousOrder='';$('bar').value=0;if($('reflection'))$('reflection').value='';$('intro').hidden=true;$('finish').hidden=true;$('work').hidden=false;showGroup()}
@@ -68,8 +69,8 @@ if($('reflection'))$('reflection').addEventListener('input',save);
  const folder=(location.pathname.replace(/\/index\.html$/,'/').split('/').filter(Boolean).slice(-1)[0]||'reading').replace(/\.html$/,'');
  const id='sociology-'+folder;
  const t=document.title.replace(/\s*\|\s*/,' · ').replace(/^Day (\d+) Sociology/,'Day $1');
- const wrap=document.createElement('div');wrap.className='turnin-box';wrap.style.cssText='margin:16px 0;padding:14px;border:2px solid #cfd6e2;border-radius:12px;background:#f7f9fc';
- wrap.innerHTML='<label for="turnName" style="display:block;font-weight:800;margin-bottom:6px">Your name: first name + last initial (like Jordan M.)</label><input id="turnName" type="text" autocomplete="off" style="font:inherit;font-size:1.05rem;padding:10px 12px;border:2px solid #cfd6e2;border-radius:10px;width:100%;max-width:340px"><div style="margin-top:10px"><button id="turnBtn" class="primary" type="button">Turn in to my teacher</button></div><p id="turnMsg" aria-live="polite" style="font-weight:800;margin:8px 0 0"></p>';
+ const wrap=document.createElement('div');wrap.className='turnin-box';
+ wrap.innerHTML='<h3>Turn in your work</h3><label for="turnName">Your name: first name + last initial (like Jordan M.)</label><input id="turnName" type="text" autocomplete="off"><div class="actions"><button id="turnBtn" class="primary" type="button">Turn in to my teacher</button></div><p id="turnMsg" aria-live="polite"></p>';
  const printBtn=$('print');fin.insertBefore(wrap,printBtn);
  const s=loadSaved();if(s&&s.name)$('turnName').value=s.name;
  $('turnName').addEventListener('input',save);
@@ -91,4 +92,41 @@ if($('reflection'))$('reflection').addEventListener('input',save);
    msg.style.color='#067647';msg.textContent='Turned in! Your teacher can see your work. You can print a copy below.';btn.textContent='Turned in';
   }catch(e){btn.disabled=false;msg.style.color='#b42318';msg.textContent=(e&&e.message)||'Could not turn in. Try again.'}
  };
+})();
+
+/* ---- Progress route + "Done" stamp (display only: reads the state above, changes nothing) ---- */
+(function(){
+ const nav=$('route');if(!nav)return;
+ const ol=nav.querySelector('ol')||nav.appendChild(document.createElement('ol'));
+ const ends=[];let sum=0;groups.forEach(g=>{sum+=g.questions.length;ends.push(sum)});
+ function step(num,label,small){const li=document.createElement('li');const s=document.createElement('span');s.className='step';
+  const dot=document.createElement('span');dot.className='dot';const n=document.createElement('span');n.textContent=num;dot.append(n);
+  const t=document.createElement('span');const l=document.createElement('span');l.className='label';l.textContent=label;t.append(l);
+  if(small){const sm=document.createElement('small');sm.textContent=small;t.append(sm)}
+  s.title=label;s.append(dot,t);li.append(s);ol.append(li);return li}
+ const steps=groups.map((g,i)=>step(String(i+1),g.title,g.questions.length+(g.questions.length===1?' question':' questions')));
+ const thought=step('✎','Final thought','Last sentence'),turn=step('★','Turn in','Last step');
+ const many=steps.length+2>6;
+ function fit(){nav.classList.toggle('compact',many||(window.innerWidth<=700&&steps.length+2>5))}
+ fit();window.addEventListener('resize',fit);
+ const hand=document.querySelector('.question-card');
+ function update(){
+  const onWork=!$('work').hidden,onFinish=!$('finish').hidden;
+  const saved=(!onWork&&!onFinish&&loadSaved())||null,count=Math.max(completed,saved?saved.completed||0:0);
+  steps.forEach((li,i)=>{const here=onWork&&i===groupIndex;li.classList.toggle('done',count>=ends[i]);li.classList.toggle('current',here);if(here)li.firstChild.setAttribute('aria-current','step');else li.firstChild.removeAttribute('aria-current')});
+  const ref=$('reflection'),wrote=!!(ref&&ref.value.trim()),sent=!!($('turnBtn')&&$('turnBtn').textContent==='Turned in');
+  thought.classList.toggle('done',onFinish&&wrote);turn.classList.toggle('done',sent);
+  thought.classList.toggle('current',onFinish&&!wrote);turn.classList.toggle('current',onFinish&&wrote&&!sent);
+  if(hand)hand.classList.toggle('is-done',onWork&&correct);
+ }
+ /* Mark the right answer green after a correct pick. */
+ $('choices').addEventListener('click',e=>{const b=e.target.closest('.choice');setTimeout(()=>{if(b&&correct&&b.isConnected)b.classList.add('right');update()},0)});
+ ['click','input','change'].forEach(t=>document.addEventListener(t,()=>setTimeout(update,60)));
+ /* When the reading or the finish card opens, scroll it up under the progress strip. */
+ const toTop=el=>{const y=el.getBoundingClientRect().top+window.scrollY-nav.offsetHeight-10;if(window.scrollY>y+2||el.getBoundingClientRect().top>window.innerHeight*0.45)window.scrollTo({top:Math.max(0,y),behavior:'instant'})};
+ new MutationObserver(()=>{['work','finish'].forEach(id=>{const el=$(id);if(el&&!el.hidden&&el.dataset.shown!=='1'){el.dataset.shown='1';toTop(el)}else if(el&&el.hidden)el.dataset.shown=''})}).observe(document.body,{attributes:true,subtree:true,attributeFilter:['hidden']});
+ const mo=new MutationObserver(update);
+ ['intro','work','finish'].forEach(id=>$(id)&&mo.observe($(id),{attributes:true,attributeFilter:['hidden']}));
+ ['questionProgress','turnMsg','progressText'].forEach(id=>$(id)&&mo.observe($(id),{childList:true,characterData:true,subtree:true}));
+ update();
 })();
