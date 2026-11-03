@@ -295,7 +295,9 @@ const TEACHER_TOOLS_URL = "https://script.google.com/macros/s/AKfycbwiVW6Cufw8Dq
   try {
     if (!/teacher-submissions/.test(location.pathname) && !localStorage.getItem("site-clean-2026-11-03")) {
       wipeOtherStudent();
-      ["site-student-name", OWNER_KEY, "hub-me"].forEach(k => localStorage.removeItem(k));
+      // Keep the signed-in name (Spanish mode is tied to it); just mark it as the owner from now on.
+      const nowName = localStorage.getItem("site-student-name") || "";
+      if (nowName) localStorage.setItem(OWNER_KEY, shortName(nowName)); else localStorage.removeItem(OWNER_KEY);
       localStorage.setItem("site-clean-2026-11-03", "1");
     }
   } catch (e) {}
