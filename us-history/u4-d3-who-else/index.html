@@ -1,155 +1,27 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Build the Exhibit: Who Else Fought? | U.S. History Unit 4 Day 3</title>
-<meta name="description" content="Curate a museum exhibit on the Chicano Movement, Red Power, and Asian American activism, and compare them to the Black civil rights movement.">
-<style>
-:root{--ink:#22262b;--muted:#59606a;--paper:#f6f3ee;--card:#fff;--line:#ddd5c8;--main:#2f5d50;--accent:#a4532b;--green:#2a6b45;--bad:#a2392f;--soft:#edf4f1}
-*{box-sizing:border-box}
-body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.5 system-ui,Segoe UI,Arial,sans-serif}
-header{background:#fff;border-bottom:5px solid var(--main);padding:16px max(16px,calc((100vw - 900px)/2)) 12px}
-.k{font-size:.78rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:var(--main);margin:0}
-h1{margin:2px 0 4px;font-size:clamp(1.7rem,3.4vw,2.3rem)}
-.std{margin:2px 0;font-size:.92rem;color:var(--muted)}.std b{color:var(--ink)}
-.hud{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line);padding:8px max(16px,calc((100vw - 900px)/2));display:flex;gap:12px;flex-wrap:wrap;align-items:center;font-weight:800;font-size:.92rem;box-shadow:0 2px 8px #1f263312}
-.hud .bar{flex:1;min-width:120px;height:10px;background:#e6e5de;border-radius:9px;overflow:hidden}.hud .bar span{display:block;height:100%;width:0;background:var(--main);transition:width .4s}
-.pill{background:#f0efe8;border-radius:20px;padding:3px 10px;white-space:nowrap}
-.meter{display:flex;align-items:center;gap:6px}.meter .track{width:110px;height:10px;border-radius:9px;background:#e6e5de;overflow:hidden}.meter .track span{display:block;height:100%;background:var(--accent);transition:width .5s}
-main{max-width:900px;margin:auto;padding:14px 16px 60px}
-.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;box-shadow:0 3px 12px #1f26330d}
-.kicker{font-size:.78rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin:0}
-h2{margin:2px 0 10px;font-size:1.45rem}
-.teach{background:var(--soft);border-left:5px solid var(--main);border-radius:9px;padding:10px 14px;margin:0 0 12px}.teach p{margin:4px 0}.teach b{color:var(--main)}
-.block{margin:14px 0;padding:14px;border-radius:12px;border:2px solid var(--line);background:#fff}
-.block.current{border-color:var(--ink);box-shadow:0 0 0 4px #2f5d5030}
-.block h3{margin:0 0 10px;font-size:1.06rem;line-height:1.35;font-weight:700}
-.event{background:#fbf9f4;border-style:dashed;border-color:#cdbf9a}.event.current{border-style:solid}
-.event-body p{margin:4px 0}
-.src-card{background:#faf8f2;border:1px solid #ddd5c2;border-left:5px solid var(--accent);border-radius:10px;padding:10px 12px;margin:0 0 10px;font-weight:400}
-.src-card .who{font-size:.76rem;font-weight:900;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);margin-bottom:3px}
-.src-card p{margin:3px 0}.src-card .cite{font-size:.8rem;color:var(--muted)}
-.picked{margin:10px 0 4px;color:var(--muted)}.result{background:#f0efe8;border-radius:9px;padding:9px 12px}.result p{margin:4px 0}
-.tag{display:inline-block;font-weight:900;font-size:.8rem;border-radius:12px;padding:2px 9px;margin-right:6px}.tag.up{background:#dcefe2;color:var(--green)}.tag.down{background:#f6dcd8;color:var(--bad)}.tag.flat{background:#ebe9e0;color:var(--ink)}
-.qlabel{font-size:.75rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:var(--main);margin:0 0 4px}
-.choices{display:grid;gap:8px}
-@media(min-width:700px){.q .choices{grid-template-columns:1fr 1fr}}
-button{font:inherit;cursor:pointer;border-radius:10px;min-height:46px}
-.choice{text-align:left;background:#fff;color:var(--ink);border:2px solid #cfcdbf;padding:10px 12px;font-weight:650;line-height:1.3}
-.choice:hover:not(:disabled){border-color:var(--ink);background:#fcfcfa}.choice:disabled{opacity:.5;cursor:not-allowed}
-.go{margin-top:12px;background:var(--main);color:#fff;border:0;padding:11px 18px;font-weight:900}
-button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid #2f7dbd;outline-offset:2px}
-.answered{font-weight:800;color:var(--green);margin:4px 0}.why{margin:2px 0;color:var(--muted)}
-.msg{min-height:1.3em;font-weight:750;margin:8px 0 0}.msg.bad{color:var(--bad)}.msg.good{color:var(--green)}
-label{display:block;font-weight:850;margin:14px 0 4px}.stem{margin:0 0 4px;color:var(--muted);font-size:.92rem}
-input,textarea{width:100%;font:inherit;border:2px solid #cfcdbf;border-radius:9px;padding:10px;background:#fff;color:var(--ink)}
-.steps{display:grid;gap:6px;margin:10px 0;padding:0;list-style:none}.steps li{background:#f0efe8;border-radius:9px;padding:8px 12px;font-weight:700}
-.chain{display:grid;grid-template-columns:repeat(5,1fr);gap:6px;margin:10px 0}.chain div{background:var(--soft);border-radius:9px;padding:7px 8px;font-size:.85rem;text-align:center}.chain b{display:block;color:var(--main)}
-.bars{margin:6px 0}.bars .row{display:grid;grid-template-columns:70px 1fr 54px;gap:8px;align-items:center;margin:4px 0;font-size:.92rem}.bars .fill{height:18px;background:var(--main);border-radius:4px}
-@media(max-width:640px){.chain{grid-template-columns:1fr 1fr}}
-.rooms{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:10px 0}.rooms div{background:var(--soft);border-radius:10px;padding:8px 10px;font-size:.92rem}.rooms b{display:block;color:var(--main)}
-@media(max-width:640px){.rooms{grid-template-columns:1fr}}
-.welcome{background:#e6f1ea;color:var(--green);font-weight:800;border-radius:9px;padding:8px 12px;margin:0 0 10px}
-.foot{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-top:14px;color:var(--muted);font-size:.85rem}
-.foot button{background:#ebe9e0;border:0;padding:8px 12px;font-weight:800;color:var(--ink)}
-.src{font-size:.8rem;color:var(--muted)}
-@media print{.hud,.foot,.go{display:none}}
-</style>
+<meta name="description" content="Curate a museum exhibit on farmworkers and the Chicano Movement, Red Power, and Asian American activists, and compare them to the Black civil rights movement.">
+<link rel="stylesheet" href="style.css?v=20261103p">
 <script src="../../shared/assignments.js?v=20261103c"></script>
 <script src="../../shared/turnin.js?v=20261103c"></script>
-<script src="../../shared/unit-game.js?v=20261103c"></script>
-</head><body>
-<header>
-  <p class="k">U.S. History · Unit 4: Civil Rights · Day 3</p>
-  <h1>Build the Exhibit: Who Else Fought?</h1>
-  <p class="std"><b>Standards:</b> SS.9-12.US.42 · SS.9-12.US.44</p>
-  <p class="std"><b>Goal:</b> Explain how Mexican American, Native American, and Asian American activists fought for equal rights, and compare their fights to the Black civil rights movement. · About 25 minutes.</p>
-</header>
-<div class="hud" aria-label="Progress and exhibit accuracy">
-  <span id="progressText">0 checks done</span>
-  <div class="bar" aria-hidden="true"><span id="progressFill"></span></div>
-  <span class="pill meter">Exhibit accuracy: <span class="track" aria-hidden="true"><span id="meterFill" style="width:50%"></span></span> <span id="meterNum">5/10</span></span>
+</head><body class="on-title">
+<div class="hud" id="hud" hidden aria-label="Your exhibit">
+  <div class="hud-in">
+    <div class="you"><span class="yface" aria-hidden="true">🪪</span><span class="yt"><b>Curator</b><small id="youName"></small></span></div>
+    <div class="rooms" id="rooms" aria-label="Exhibit rooms"></div>
+    <div class="meters">
+      <div class="m" id="mAcc" title="Exhibit accuracy"><span class="mi" aria-hidden="true">🎯</span><span class="ml">Accuracy</span><span class="bar"><span id="accFill"></span></span><span class="mn" id="accNum">40%</span></div>
+      <div class="m" id="mVis" title="Visitors"><span class="mi" aria-hidden="true">👥</span><span class="ml">Visitors</span><span class="bar vis"><span id="visFill"></span></span><span class="mn" id="visNum">40%</span></div>
+    </div>
+    <div class="boss" id="bossBox" title="Your boss: Director Halvorsen (wants crowds)"><span class="bface" aria-hidden="true">🧑🏼‍💼</span><span class="bmood" id="bMood" aria-hidden="true">😐</span><span class="bt"><b>Halvorsen</b><small>Director</small></span></div>
+  </div>
+  <div class="goalrow"><span class="goalchip">🏆 Best opening: 🎯 80%+ · 👥 60%+ · Wrong labels cost 🎯</span><span class="stepn" id="stepN"></span></div>
 </div>
-<main>
-  <p class="welcome" id="welcome" hidden></p>
-  <div id="app"></div>
+<main id="wrap">
+  <div class="welcome" id="welcome" role="status" hidden></div>
+  <section id="app" aria-live="polite"></section>
   <div class="foot"><span>Progress saves on this device. Your teacher sees your work after you turn it in.</span><button type="button" id="restartBtn">Start over</button></div>
 </main>
-<script>
-const T = (cls, txt) => `<span class="tag ${cls}">${txt}</span>`;
-const SRC = (who, body, cite) => `<div class="src-card"><div class="who">${who}</div>${body}${cite ? `<p class="cite">${cite}</p>` : ""}</div>`;
-UnitGame.start({
-  key: "ush-u4-d3-who-else-v1",
-  assignmentId: "ush-u4-d3-who-else",
-  title: "U.S. History · Unit 4 · Day 3 · Build the Exhibit: Who Else Fought?",
-  standard: "SS.9-12.US.42, SS.9-12.US.44",
-  oldApi: "https://fynn-class-assignment-submissions-20261024.neotboy.chatgpt.site/api/submit",
-  startFx: { acc: 5 },
-  clampFx: fx => { fx.acc = Math.max(0, Math.min(10, fx.acc)); },
-  hud: st => {
-    const a = st.fx.acc || 0;
-    document.getElementById("meterFill").style.width = (a * 10) + "%";
-    document.getElementById("meterNum").textContent = a + "/10";
-  },
-  startLabel: "Walk into the museum",
-  introHtml: `<p class="kicker">Museum job · 1960s–1980s</p><h2>Three empty rooms. You fill them.</h2>
-    <p>A history museum hired you as the <b>curator</b> (the person who picks what goes in the exhibit and writes the labels). Your job: build a new exhibit called <b>"Who Else Fought for Equal Rights?"</b> The Black civil rights movement inspired other groups to fight too.</p>
-    <div class="rooms"><div><b>Room 1</b>Farmworkers &amp; the Chicano Movement</div><div><b>Room 2</b>Red Power: Native activists</div><div><b>Room 3</b>Asian American activists</div></div>
-    <ul class="steps"><li>1. Study the items for each room and answer the checks.</li><li>2. Make 3 curator calls. Accurate choices raise the <b>Exhibit accuracy</b> meter.</li><li>3. Write 2 short comparisons and turn in.</li></ul>`,
-  scenes: [
-    { kicker: "Part 1 of 3 · Room 1 · California and the Southwest", title: "Farmworkers and the Chicano Movement",
-      teach: `<p>In the 1960s, many farmworkers in California were Mexican American or Filipino American. They earned very little, worked long hours in the heat, and often had no clean water or bathrooms in the fields.</p>
-        <p><b>Chicano</b> is a name many Mexican Americans used with pride in this movement. A <b>boycott</b> means refusing to buy something to pressure a business.</p>`,
-      blocks: [
-        { type: "q", id: "r1", std: "US.42", short: "Why farmworkers organized", prompt: SRC("Item 1 · A farmworker's day, 1965", `<p>Up at 4 a.m. Bent over in grape fields for 10 hours. Pay: about $1.25 an hour. No toilets in the field. Workers spray chemicals with no protection. Kids miss school to help the family work.</p>`, "Based on reports from Delano, California") + "Why did farmworkers want to organize?", options: ["Low pay and unsafe working conditions", "They wanted to own the big farms", "They were angry about a new state tax on farms", "They wanted to stop growing grapes"], hint: "Look at the pay and the conditions on the card.", why: "Low pay and dangerous, unhealthy conditions pushed workers to organize." },
-        { type: "q", id: "r2", std: "US.44", short: "Grape boycott tactic", prompt: SRC("Item 2 · A flyer, late 1960s", `<p><b>DON'T BUY GRAPES!</b> Help the farmworkers win fair pay. Ask your store to stop selling them.</p>`, "Cesar Chavez and Dolores Huerta's union, the United Farm Workers, asked Americans everywhere to join.") + "How was this boycott supposed to help the workers?", options: ["Lost sales would push growers to bargain", "It would get grapes banned by the courts", "It would raise the price people paid", "It would shut down California's farms"], hint: "What happens to a grower when nobody buys the grapes?", why: "Millions of Americans stopped buying grapes. Lost money pushed growers to sign union contracts in 1970." },
-        { type: "q", id: "r3", std: "US.42", short: "Filipino workers began strike", prompt: SRC("Item 3 · September 1965", `<p>Filipino American grape workers, led by <b>Larry Itliong</b>, went on strike in Delano. They asked Chavez's mostly Mexican American union to join. It did. The strike lasted five years.</p>`) + "What does this item show about the farmworker movement?", options: ["Different groups worked together", "Only one leader made every choice", "The strike ended in a few weeks", "The workers had no real goals"], hint: "Who started the strike, and who joined?", why: "Filipino and Mexican American workers joined forces. The movement was bigger than one group or one leader." },
-        { type: "event", id: "e1", short: "Room 1 front item", html: `<p><b>Curator call.</b> Your boss wants one item front and center in Room 1, with a short label. Which label do you pick?</p>`,
-          choices: [
-            { label: "\"Workers won contracts after a 5-year strike and a national boycott.\"", fx: { acc: 2 }, result: `<p>${T("up","+2 accuracy")}True and specific. It shows the tactic and the result.</p>` },
-            { label: "\"Cesar Chavez won better pay for farmworkers all by himself.\"", fx: { acc: -2 }, result: `<p>${T("down","−2 accuracy")}Not true. Dolores Huerta, Larry Itliong, and thousands of workers and shoppers made it happen.</p>` },
-            { label: "\"Farmworkers were unhappy in the 1960s.\"", fx: {}, result: `<p>${T("flat","No change")}True, but vague. Visitors won't learn what they did or what changed.</p>` }
-          ] },
-        { type: "q", id: "r4", std: "US.42", short: "1968 school walkouts", prompt: SRC("Item 4 · East Los Angeles, March 1968", `<p>Thousands of Mexican American high school students walked out of class. Their complaints: being punished for speaking Spanish, very few Mexican American teachers, and schools that pushed them toward low-paying jobs instead of college.</p>`) + "What were the students protesting?", options: ["Discrimination in their schools", "A shorter lunch period at their high schools", "The price of school supplies", "Too many classes in Spanish"], hint: "Reread the list of complaints.", why: "They protested unfair treatment because of their language and culture. Civil rights included language and culture too." }
-      ] },
-    { kicker: "Part 2 of 3 · Room 2 · San Francisco to South Dakota", title: "Red Power",
-      teach: `<p>The U.S. government signed hundreds of <b>treaties</b> (official agreements) with Native nations, then broke many of them. Native people lost land, and schools tried to erase their languages and cultures.</p>
-        <p><b>Sovereignty</b> means a nation's right to govern itself. <b>Red Power</b> activists demanded respect, sovereignty, and honored treaties.</p>`,
-      blocks: [
-        { type: "q", id: "n1", std: "US.42", short: "Red Power goals", prompt: SRC("Item 5 · Protest sign, early 1970s", `<p><b>HONOR THE TREATIES</b></p>`) + "What were Red Power activists asking the government to do?", options: ["Keep the promises it made to Native nations", "Give every Native person a government job", "Move all Native people to one big city", "Stop Native nations from governing themselves"], hint: "What is a treaty? Check the blue box.", why: "A treaty is an official agreement. Activists wanted the U.S. to keep its word." },
-        { type: "q", id: "n2", std: "US.44", short: "Alcatraz = occupation tactic", prompt: SRC("Item 6 · Alcatraz Island, November 1969", `<p>A group called <b>Indians of All Tribes</b>, mostly Native college students and city activists, took over the empty former prison on Alcatraz Island in San Francisco Bay. They stayed about 19 months, until June 1971. They said the island should be returned to Native people.</p>`) + "What tactic did the activists use at Alcatraz?", options: ["An occupation", "A national boycott", "A federal lawsuit", "A hunger strike"], hint: "They took over a place and stayed there. What's that called?", why: "Taking over and staying in a place to make a point is an occupation." },
-        { type: "event", id: "e2", short: "Alcatraz label fact-check", html: `<p><b>Curator call.</b> A volunteer wrote this label: <i>"In 1969 the American Indian Movement (AIM) took over Alcatraz."</i> You check Item 6. What do you do?</p>`,
-          choices: [
-            { label: "Fix it: Indians of All Tribes led Alcatraz", fx: { acc: 3 }, result: `<p>${T("up","+3 accuracy")}Good fact-check. Indians of All Tribes led Alcatraz. AIM supported it. AIM later led the 1973 protest at Wounded Knee. Many books and websites mix these up.</p>` },
-            { label: "Keep it. Everyone says AIM did it.", fx: { acc: -2 }, result: `<p>${T("down","−2 accuracy")}A common mistake is still a mistake. Item 6 names the group: Indians of All Tribes.</p>` },
-            { label: "Take the label down and leave the wall blank", fx: {}, result: `<p>${T("flat","No change")}No wrong fact, but visitors lose an important story.</p>` }
-          ] },
-        { type: "q", id: "n3", std: "US.42", short: "Wounded Knee 1973", prompt: SRC("Item 7 · Wounded Knee, South Dakota, 1973", `<p>AIM members and Oglala Lakota people took over the town of Wounded Knee on the Pine Ridge Reservation for 71 days. In 1890, U.S. soldiers had killed hundreds of Lakota people there. The protesters demanded that treaties be honored. It became an armed standoff with federal agents, and two Native men were killed.</p>`) + "Why might activists have chosen Wounded Knee for their protest?", options: ["An 1890 massacre of Lakota people happened there", "It was the largest city in South Dakota", "It was the place where the U.S. Constitution was signed", "It was where AIM was first started"], hint: "Reread what happened there in 1890.", why: "Wounded Knee was a powerful symbol of past injustice against Native people." },
-        { type: "q", id: "n4", std: "US.42", short: "Red Power results", prompt: SRC("Item 8 · What changed", `<p>In 1970, President Nixon said the government should stop trying to end tribal governments. He backed <b>self-determination</b>, meaning tribes make more of their own decisions. In 1975, Congress passed a law letting tribes run more of their own schools and services.</p>`) + "What did Red Power help win?", options: ["More control for tribes over their affairs", "The return of all Native land in the U.S.", "The end of every treaty the U.S. had with Native nations", "A ban on Native languages in schools"], hint: "Look for the word that means tribes making their own decisions.", why: "Tribes gained more self-determination, which is part of sovereignty." }
-      ] },
-    { kicker: "Part 3 of 3 · Room 3 · Detroit, Washington, and beyond", title: "Asian American Activists",
-      teach: `<p>During World War II, the U.S. government forced more than <b>120,000 Japanese Americans</b> into prison camps (called <b>incarceration</b>). Most were U.S. citizens. None were ever convicted of spying.</p>
-        <p><b>Redress</b> means making up for a wrong, such as with an apology or payment.</p>`,
-      blocks: [
-        { type: "q", id: "a1", std: "US.44", short: "Redress = legal/political tactic", prompt: SRC("Item 9 · Civil Liberties Act of 1988", `<p>After years of work by Japanese American activists, Congress passed this law. President Reagan signed it. The government formally apologized and paid $20,000 to each surviving person who had been incarcerated.</p>`) + "What tactic won this result?", options: ["Pushing Congress for redress", "Boycotting American stores", "Occupying a federal building", "Going on a long work strike"], hint: "Who passed the law, and what did the activists ask for?", why: "Activists used legal and political pressure, testimony, lobbying, and lawsuits, to win redress." },
-        { type: "q", id: "a2", std: "US.42", short: "Vincent Chin sparked organizing", prompt: SRC("Item 10 · Detroit, 1982", `<p>Vincent Chin, a Chinese American, was beaten to death by two white autoworkers. They blamed Japan for lost car jobs and thought Chin was Japanese. The judge gave them probation and a $3,000 fine. No jail time.</p>`) + "Why did this case spark Asian Americans across the country to organize?", options: ["The killers got no jail time at all", "The killers were sent to prison for life", "Chin had been arrested for a crime", "Car companies asked people to protest"], hint: "Compare the crime with the punishment.", why: "A killing with no jail time made many feel his life was valued less. That looked like unequal justice. Groups formed to demand civil rights protection for Asian Americans." },
-        { type: "event", id: "e3", short: "Final wall: center of the Venn", html: `<p><b>Curator call.</b> The last wall compares all of today's movements to the Black civil rights movement. What goes in the shared middle?</p>`,
-          choices: [
-            { label: "\"All fought unequal treatment, and many used nonviolent tactics.\"", fx: { acc: 2 }, result: `<p>${T("up","+2 accuracy")}True. Boycotts, walkouts, the Alcatraz occupation, and lawsuits were nonviolent ways to push for change. (Wounded Knee in 1973 turned into an armed standoff.)</p>` },
-            { label: "\"All of them had the exact same goals.\"", fx: { acc: -2 }, result: `<p>${T("down","−2 accuracy")}Not true. Farmworkers wanted fair pay, Native activists wanted sovereignty, redress activists wanted an apology.</p>` },
-            { label: "\"All of them won everything they asked for.\"", fx: { acc: -1 }, result: `<p>${T("down","−1 accuracy")}No movement got everything. Many goals are still being worked on today.</p>` }
-          ] },
-        { type: "q", id: "a3", std: "US.44", short: "Match tactic to movement", prompt: "Which match of movement → tactic is correct?", options: ["Farmworkers → national grape boycott", "Red Power → national grape boycott", "Redress activists → occupation of Alcatraz", "Farmworkers → Civil Liberties Act"], hint: "Think back to Room 1's flyer.", why: "The farmworkers' union led the grape boycott. Red Power used occupations, and redress activists used Congress." },
-        { type: "q", id: "a4", std: "US.42", short: "Difference from Black movement", prompt: "Which goal was <b>different</b> from the main goals of the Black civil rights movement?", options: ["Getting broken treaties honored", "Ending unfair treatment by race", "Being treated equally by the law", "Getting the same rights as others"], hint: "Which goal is about agreements between nations?", why: "Native activists had a special goal: treaties and sovereignty, because tribes are nations with their own governments." }
-      ] }
-  ],
-  finale: {
-    title: "Your Comparison Wall",
-    report: st => `<p><b>Your exhibit accuracy ended at ${st.fx.acc}/10.</b> Good historians check every label.</p><p>Answer both in 1–2 full sentences.</p>`,
-    prompts: [
-      { id: "venn", short: "Compare one movement to Black civil rights", label: "1. Pick ONE movement from today (farmworkers/Chicano, Red Power, or Asian American). Give one way it was SIMILAR to the Black civil rights movement and one way it was DIFFERENT.", stem: "The ___ movement was similar to the Black civil rights movement because ___. It was different because ___.", min: 90, mustAll: [["similar", "same", "both", "like", "also"], ["different", "but", "unlike", "while", "however"]], mustMsg: "In answer 1, include one way they were the SAME and one way they were DIFFERENT." },
-      { id: "tactic", short: "Best tactic with evidence", label: "2. Which tactic do you think worked best: the grape boycott, the Alcatraz occupation, or pushing Congress for redress? Use a fact from the exhibit.", stem: "I think ___ worked best because ___.", min: 60, newWords: 5, mustAll: [["boycott", "grape", "occup", "alcatraz", "redress", "congress", "apolog"], ["because", "since"]], mustMsg: "In answer 2, name a tactic AND explain why with a fact (use \"because\")." }
-    ]
-  },
-  extraAnswers: st => ({ "Exhibit accuracy meter": st.fx.acc + " of 10" })
-});
-</script>
+<script src="game.js?v=20261103p"></script>
 </body></html>
