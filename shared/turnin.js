@@ -60,7 +60,50 @@ const TEACHER_TOOLS_URL = "https://script.google.com/macros/s/AKfycbwiVW6Cufw8Dq
     "throw threw hide hid die kill fall fell lead led meet met speak spoke try tried want need help stay stop start eat ate find found become became break broke " +
     "catch caught choose chose drive drove flee fled force join live work vote protect control rule spread show hurt hit cut let move change use mean meant " +
     "set lie lied cost own care happen turn call ask look seem believe agree beat bit sit sat sleep slept steal stole teach taught wear wore");
+  // More everyday action words from class answers (so "media shapes teens" or "they attend" counts as a sentence).
+  const VERBS2 = set(
+    "shape pass attend earn receive report create cause affect influence end attack drop blame hire expect act copy learn play raise rise " +
+    "fear hate love support oppose protest march free enslave spend save invest inherit matter depend decide elect sign veto approve declare " +
+    "strike follow obey punish arrest bomb invade conquer colonize trade farm migrate settle push pull block ban allow prevent limit divide unite " +
+    "split share treat judge label value reward study read watch listen talk post prove suggest explain increase decrease lower improve harm " +
+    "benefit gain reach arrive escape survive starve suffer struggle rent owe borrow lend fund lack miss fail include compare refuse deny accept " +
+    "reject fit belong respect trust connect compete conform rebel socialize segregate integrate discriminate enforce interpret review appoint " +
+    "impeach override amend ratify govern represent serve argue claim plan hope wish carry travel walk return enter open close cross burn destroy " +
+    "kill shoot surrender collapse crash invent discover explore produce develop finish grow mean look sound tend need want keep give say");
+  // Past forms that are always action words (never a noun in a list).
+  const PAST = set("gave took went came saw got made lost left ran won fought began kept said told thought brought bought sent built felt held paid " +
+    "sold stood wrote grew knew threw hid fell led met spoke tried found became broke caught chose drove fled meant slept stole taught wore sat " +
+    "rose struck shot sank drew ate");
+  const MODALS = set("will would can could should might must may wont cant couldnt wouldnt shouldnt didnt dont doesnt did does do to");
+  const NOT_VERB = set("thing nothing something anything everything king morning evening ceiling spring string sibling wedding during hundred " +
+    "greed speed breed seed weed news class glass grass boss loss less unless across always perhaps sometimes");
+  const base = w => {
+    const c = [w];
+    if (/ies$/.test(w)) c.push(w.slice(0, -3) + "y");
+    if (/ied$/.test(w)) c.push(w.slice(0, -3) + "y");
+    if (/es$/.test(w)) c.push(w.slice(0, -2));
+    if (/s$/.test(w)) c.push(w.slice(0, -1));
+    if (/ed$/.test(w)) c.push(w.slice(0, -2), w.slice(0, -1), w.slice(0, -3));
+    if (/ing$/.test(w)) c.push(w.slice(0, -3), w.slice(0, -3) + "e", w.slice(0, -4));
+    return c.find(x => VERBS.has(x) || VERBS2.has(x)) || "";
+  };
   const isVerb = w => VERBS.has(w) || VERBS.has(stem(w)) || (w.length > 4 && /(ed|ing|aron|ieron|aban|ando|iendo)$/.test(w));
+  // How sure we are a word is an action word: 3 = sure ("gave", "dropped", "will report"),
+  // 2 = likely ("says", "attend", "vote"), 1 = maybe (an -s word in the middle of a sentence), 0 = no.
+  function verbLevel(w, i, toks, prompt) {
+    if (GLUE.has(w) || FILLER.has(w) || NOT_VERB.has(w) || w.length < 3) return 0;
+    const prev = toks[i - 1], prev2 = toks[i - 2];
+    if (PAST.has(w)) return 3;
+    if (MODALS.has(prev) && prev !== "to" || (prev === "not" && MODALS.has(prev2))) return 3;
+    const fromPrompt = prompt.has(w);
+    if (w.length > 4 && /ed$/.test(w)) return 3;
+    if (w.length > 4 && /ing$/.test(w)) return fromPrompt ? 0 : 3;   // "labeling" copied from the question is a topic word
+    if (w.length > 4 && /(aron|ieron|aban|ando|iendo)$/.test(w)) return 3;
+    if (base(w) || isVerb(w)) return 2;
+    if (prev === "to" && !fromPrompt) return 2;
+    if (w.length > 3 && /[^su]s$/.test(w) && !/ous$/.test(w) && i > 0 && i < toks.length - 1) return 1;
+    return 0;
+  }
   const stem = w => w.length > 4 ? w.replace(/'s$/, "").replace(/ies$/, "y").replace(/(es|s|ed|ing|ly)$/, "") : w.replace(/'s$/, "");
   const isEs = () => !!(window.SiteLang && window.SiteLang.isEs && window.SiteLang.isEs());
 
@@ -138,8 +181,16 @@ const TEACHER_TOOLS_URL = "https://script.google.com/macros/s/AKfycbwiVW6Cufw8Dq
       let run = 0, longest = 0;
       toks.forEach(w => { run = GLUE.has(w) ? 0 : run + 1; longest = Math.max(longest, run); });
       const commaList = (raw.match(/,/g) || []).length >= 3 && raw.split(/[,;]/).filter(x => words(x).length <= 2).length >= 4;
-      const verbs = toks.filter(w => !GLUE.has(w) && isVerb(w)).length, g = glue / toks.length;
-      if ((!verbs && (g < 0.2 || longest >= 5)) || (g < 0.08 && longest >= 7) || (commaList && g < 0.25)) return done("list");
+      const g = glue / toks.length;
+      const pw = new Set(words(o.prompt));
+      const lv = toks.map((w, i) => verbLevel(w, i, toks, pw));
+      const sure = lv.filter(x => x === 3).length, likely = lv.filter(x => x === 2).length, maybe = lv.filter(x => x === 1).length;
+      // Only joined by "and"/"because" with no action word: "labeling tyler because friends".
+      const joinOnly = toks.filter(w => GLUE.has(w)).every(w => /^(and|or|but|so|because|cause|cuz|bc|bcuz|cus|coz|since|y|o|pero|porque)$/.test(w));
+      let list;
+      if (!glue) list = !sure && (!likely || toks.length >= 5);           // no small words at all: needs a clear action word
+      else list = (!sure && !likely && (!maybe || joinOnly) && (g < 0.2 || longest >= 5 || joinOnly)) || (g < 0.08 && longest >= 7 && !sure);
+      if (list || (commaList && g < 0.25)) return done("list");
     }
     const promptSet = new Set(words(o.prompt).map(stem));
     const content = [...new Set(toks.filter(w => !GLUE.has(w) && !FILLER.has(w) && w.length > 1).map(stem))];
