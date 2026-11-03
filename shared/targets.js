@@ -239,6 +239,14 @@ window.CLASS_TARGETS = {
    ],
    "g3": "I can analyze the causes and effects of the Great Depression and government responses."
   },
+  "1|5": {
+   "t": [
+    "I can explain how James Braddock's comeback gave hope to struggling Americans during the Great Depression.",
+    "I can analyze why Braddock paid back his relief money and what that shows about getting help in hard times.",
+    "I can compare what Cinderella Man shows with what really happened during the Great Depression."
+   ],
+   "g3": "I can analyze the causes and effects of the Great Depression and government responses."
+  },
   "1|6": {
    "test": 1,
    "g3": "I can analyze the causes and effects of the Great Depression and government responses."
