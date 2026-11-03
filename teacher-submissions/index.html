@@ -108,6 +108,12 @@ td.sum.l3{background:#eef7f0;color:#1f5e2c}td.sum.l2{background:#fff8e2;color:#7
 .links.decks a{background:#fff6e5;border-color:#e7cf9c}
 .parthead{font-size:.95rem;font-weight:900;letter-spacing:.06em;text-transform:uppercase;color:var(--red);margin:16px 0 6px;padding-bottom:4px;border-bottom:2px solid var(--line)}
 .parthead:first-child{margin-top:0}
+details.partdrop{margin:0 0 6px}
+details.partdrop>summary.parthead{cursor:pointer;list-style:none;color:var(--muted)}
+details.partdrop>summary.parthead::-webkit-details-marker{display:none}
+details.partdrop>summary.parthead::before{content:"▶ ";font-size:.75em}
+details.partdrop[open]>summary.parthead::before{content:"▼ "}
+details.partdrop>summary .parthint{font-size:.75rem;font-weight:600;letter-spacing:0;text-transform:none;margin-left:6px}
 .daylist{list-style:none;margin:6px 0 4px;padding:0;display:grid;gap:4px}
 .daylist li{display:flex;align-items:baseline;gap:10px;flex-wrap:wrap}
 .daylist a{font-size:.9rem;color:var(--navy);text-decoration:none;background:#fff6e5;border:1px solid #e7cf9c;border-radius:7px;padding:5px 9px}
@@ -135,6 +141,7 @@ td.sum.l3{background:#eef7f0;color:#1f5e2c}td.sum.l2{background:#fff8e2;color:#7
 .dayrow.summ{background:#fff5f3;border-left:4px solid var(--red);padding-left:8px}
 .sumdate{font-size:.8rem;font-weight:800;color:var(--red)}
 .unitcount .todocount{color:var(--red);font-weight:800}
+.unitcount .reviewnote{color:#1d5fbf;font-weight:800}
 .daytitle.unplanned{color:var(--muted);font-weight:600;font-style:italic}
 @media (max-width:760px){.dayrow{grid-template-columns:1fr}}
 /* Calmer layout (2026-11-02): one header line, Lessons | Grades switch, keys and alternatives tucked under "more" */
@@ -719,6 +726,8 @@ function linksHtml() {
   };
   const chip = id => { const k = kindOf(id); return `<a class="chip ${k}${REG[id].alt ? " alt" : ""}" href="${safe(hrefOf(id))}" target="_blank" rel="noopener" title="${safe(REG[id].title)}${k === "key" ? " (teacher only)" : ""}">${ICON[k]} ${safe(chipText(id))}</a>`; };
   const actDay = id => { const m = (REG[id].title || "").match(/^Days? (\d+)/); return REG[id].day || (m ? +m[1] : 0); };
+  // Blue reminder: units Fynn still needs to go through again (Fynn, 2026-11-03). Delete a line when it's done.
+  const REVIEW_AGAIN = new Set(["us-history|3", "us-history|4", "us-history|5", "us-history|6", "world-history|2", "world-history|3", "sociology|2", "sociology|3", "sociology|4"]);
   const unitBlock = (key, name, ids, decks, cal) => {
     const main = decks.find(p => !p.note) || decks[0];
     const extra = decks.filter(p => p !== main);
@@ -774,7 +783,8 @@ function linksHtml() {
     const rowDate = r => { if (!cal || isP1 || !r.day || r.summ || r.day > cal.days) return ""; const a = dayDate(tab, false, unitNo, r.day, false); if (!a) return ""; const b = r.span ? dayDate(tab, false, unitNo, r.span, false) : null; return `<span class="sumdate">📅 ${safe(niceDate(a.iso))}${b && b.iso !== a.iso ? " – " + safe(niceDate(b.iso)) : ""}</span>`; };
     const count = ([nDays ? plural(nDays, "day") : (nActs ? plural(nActs, "assignment") : ""), cal && cal.summative ? "summative " + shortDate(cal.summative) : ""].filter(Boolean).join(" · ") || (main ? "slides ready" : "slides not built yet"))
       + (nTodo ? ` · <span class="todocount">⚠ ${nTodo} not made yet</span>` : "")
-      + (fit ? ` · <span class="todocount">⚠ ${fit.need} lesson days planned, but ${fit.have} class days before the test</span>` : "");
+      + (fit ? ` · <span class="todocount">⚠ ${fit.need} lesson days planned, but ${fit.have} class days before the test</span>` : "")
+      + (REVIEW_AGAIN.has(key) ? ` · <span class="reviewnote">🔁 Go through material again</span>` : "");
     const body = list.map(r => {
       // Summative row: just the green-sheet date, no "Day N · Summative" (Fynn, 2026-11-02).
       const label = r.single ? "" : r.summ && cal && cal.summative ? `<span class="sumdate">📅 ${safe(niceDate(cal.summative))}</span>` : r.day ? `<b>${r.span ? `Days ${r.day}–${r.span}` : `Day ${r.day}`}</b>${rowDate(r)}` : `<b>Other</b>`;
@@ -802,7 +812,9 @@ function linksHtml() {
   const part1 = allDecks.filter(p => p.part === 1);
   const p1units = [...new Set([...Object.keys(P1).map(Number), ...part1.map(p => p.unit || 0)])].sort((a, b) => (a || 999) - (b || 999));
   const p1html = p1units.map(u => unitBlock(tab + "|p1|" + u, u ? "Unit " + u + (P1[u] ? " · " + P1[u] : "") : "Other", sortIds(acts.filter(id => REG[id].part === 1 && (REG[id].unit || 0) === u)), part1.filter(p => (p.unit || 0) === u), ((window.CLASS_CALENDAR_PART1 || {})[tab] || {})[u])).join("");
-  return legend + `<div class="parthead">Part 1</div>${p1html}<div class="parthead">Part 2</div>${current}`;
+  // Part 1 stays closed until Fynn clicks it (Fynn, 2026-11-03: "so I'm not thinking about it right now").
+  const p1k = tab + "|part1";
+  return legend + `<details class="partdrop" data-k="${safe(p1k)}"${linkOpen[p1k] ? " open" : ""}><summary class="parthead">Part 1<span class="parthint">click to open</span></summary>${p1html}</details><div class="parthead">Part 2</div>${current}`;
 }
 
 // ================= Standard hover =================
@@ -981,7 +993,7 @@ function renderTabs() {
   $("tabs").querySelectorAll(".tab").forEach(b => b.onclick = () => { tab = b.dataset.tab; sessionStorage.setItem("dash-tab", tab); $("search").value = ""; render(); });
   if (tab === "todo") return;
   $("links").innerHTML = linksHtml();
-  $("links").querySelectorAll(".unitdrop").forEach(d => d.addEventListener("toggle", () => { linkOpen[d.dataset.k] = d.open; }));
+  $("links").querySelectorAll(".unitdrop, .partdrop").forEach(d => d.addEventListener("toggle", () => { linkOpen[d.dataset.k] = d.open; }));
 }
 
 
