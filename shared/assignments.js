@@ -210,6 +210,8 @@ window.CLASS_ASSIGNMENTS = {
   "gov-u1-d10-review": { course: "government", unit: 1, day: 10, turnIn: false, std: [], title: "Day 10 · Summative Review (Blooket)", path: "https://dashboard.blooket.com/set/6a998e452d347390093ca079" },
   "gov-u1-d10-summative": { course: "government", unit: 1, day: 10, turnIn: false, std: [], title: "Day 10 · Summative (Form A)", path: "https://docs.google.com/document/d/1WACv7ZCRuXVk278_hntD1ZznpS-a3Opdj6AtS6-0b8k/edit" },
   "gov-u1-d10-summative-key": { course: "government", unit: 1, day: 10, turnIn: false, std: [], title: "Day 10 · Summative Teacher Key", path: "https://docs.google.com/document/d/1cdvYkVNBtG0S0fNAEoWsJGcn1XkuLVXiVAbfvUSzlPE/edit" },
+  "gov-u1-d10-summative-b": { course: "government", unit: 1, day: 10, turnIn: false, std: [], title: "Day 10 · Summative (Form B · retake)", path: "https://docs.google.com/document/d/1usLUE83Cg1pr4whW6Ycv4L1nc4zZ7v6dgdeebCYg_08/edit" },
+  "gov-u1-d10-summative-b-key": { course: "government", unit: 1, day: 10, turnIn: false, std: [], title: "Day 10 · Summative Form B Teacher Key", path: "https://docs.google.com/document/d/1MGUsuWkPxp8TE-3tqjqwRJu9kHeNohFXwlyvEgCDCCk/edit" },
 
   // ---- Government · Unit 2 ----
   "gov-unit2-day1-the-feed":          { course: "government", unit: 2, day: 1, title: "Day 1 · Decision Desk: Ideology vs. Party", path: "civics/unit2-day1-the-feed/", std: ["SS.9-12.Gov.12"] },
@@ -228,6 +230,8 @@ window.CLASS_ASSIGNMENTS = {
   "gov-u2-d7-review": { course: "government", unit: 2, day: 6, turnIn: false, std: [], title: "Day 6 · Summative Review (Blooket)", path: "https://dashboard.blooket.com/set/6aa09dfe760efeaa1135c5b7" },
   "gov-u2-d7-summative": { course: "government", unit: 2, day: 6, turnIn: false, std: [], title: "Day 6 · Summative (Form A)", path: "https://docs.google.com/document/d/1b11RHuAJzv7_tum4R2fJ4IMLit9WpD8mHOxgMpXX0SQ/edit" },
   "gov-u2-d7-summative-key": { course: "government", unit: 2, day: 6, turnIn: false, std: [], title: "Day 6 · Summative Teacher Key", path: "https://docs.google.com/document/d/1mO6tC8BDwl9yEoRLS_jMc68UaYLJ1dHZgYhCv9csJJM/edit" },
+  "gov-u2-d7-summative-b": { course: "government", unit: 2, day: 6, turnIn: false, std: [], title: "Day 6 · Summative (Form B · retake)", path: "https://docs.google.com/document/d/1ZqmUUxXfxmIXJcuLiV_HIBT-n509_CFIKvTt5AAZXdc/edit" },
+  "gov-u2-d7-summative-b-key": { course: "government", unit: 2, day: 6, turnIn: false, std: [], title: "Day 6 · Summative Form B Teacher Key", path: "https://docs.google.com/document/d/1W92Z1z-g8y8l_pLm3EEnX2N23FEiiqcPfc-uvSH-zZg/edit" },
 
   // ---- Government · Unit 3 (Judicial) · activities from the Schoology day posts (links only, no turn-in) ----
   "gov-u3-argument-wars": { course: "government", unit: 3, day: 1, turnIn: false, std: [], title: "Days 1–2 · Argument Wars — iCivics Game", path: "https://ed.icivics.org/games/argument-wars" },
@@ -347,6 +351,8 @@ window.CLASS_ASSIGNMENTS = {
   "wh-u1-d8-drive1": { course: "world-history", unit: 1, day: 8, title: "Day 8 · America and the Holocaust: Help and Failure (Reading)", path: "https://drive.google.com/open?id=1tbFf2Ig7T_oCmUEj1Q1xl2OoaAjpQ-vZD5H3gnKKiwY", turnIn: false, alt: true, std: ["SS.9-12.WH.29", "SS.9-12.WH.30"] },
   "wh-u1-summative": { course: "world-history", unit: 1, day: 12, turnIn: false, std: [], title: "Day 12 · Summative (Form A)", path: "https://docs.google.com/document/d/1N_nSVYkfx_SaNllrzwxUJ-l-PS16s9vzgAovSESogyU/edit" },
   "wh-u1-summative-key": { course: "world-history", unit: 1, day: 12, turnIn: false, std: [], title: "Day 12 · Summative Teacher Key", path: "https://docs.google.com/document/d/1Ch2DkgD13JsDErm76f8is07KHADolyhuqsgreYAySjY/edit" },
+  "wh-u1-summative-b": { course: "world-history", unit: 1, day: 12, turnIn: false, std: [], title: "Day 12 · Summative (Form B · retake)", path: "https://docs.google.com/document/d/1-NHdGjCagd8v7KzTO_r6wv3GiRB1xA43IOmfaVij2M4/edit" },
+  "wh-u1-summative-b-key": { course: "world-history", unit: 1, day: 12, turnIn: false, std: [], title: "Day 12 · Summative Form B Teacher Key", path: "https://docs.google.com/document/d/1ij1KduLyGtF2ECcCb-xX0P3QA1Hd_XUWyUBlw59BOds/edit" },
   "wh-u2-d4-drive1": { course: "world-history", unit: 2, day: 2, title: "Day 2 · Mao Zedong's China (Reading)", path: "https://drive.google.com/open?id=1JzDh5PPnzoNuHVz6w_Lo7KGIlE-5DlAM3Y_Hx_Fd3VU", turnIn: false, alt: true, std: ["SS.9-12.WH.34", "SS.9-12.WH.35", "SS.9-12.WH.38"] },
   "wh-u2-d6-drive1": { course: "world-history", unit: 2, day: 4, title: "Day 4 · The Indian Subcontinent Achieves Freedom (Reading)", path: "https://drive.google.com/open?id=11oyS3ZKwI03fpZHa6FI7Cpo331yY4-QaLikv7dYoYn0", turnIn: false, alt: true, std: ["SS.9-12.WH.36", "SS.9-12.WH.34"] },
   "wh-u2-d7-drive1": { course: "world-history", unit: 2, day: 5, title: "Day 5 · New Nations in Africa (Reading)", path: "https://drive.google.com/open?id=1rYuR06gcXLtHd_3MQigCF4LF62ILM9jgYSYyxDsFeIQ", turnIn: false, alt: true, std: ["SS.9-12.WH.36", "SS.9-12.WH.34", "SS.9-12.WH.37"] },
@@ -363,6 +369,8 @@ window.CLASS_ASSIGNMENTS = {
   "soc-u1-d6-study-people": { course: "sociology", unit: 1, day: 6, title: "Day 6 · Research Rivals", path: "sociology/u1-d6-study-people/", std: ["SS.9-12.Soc.1", "SS.9-12.Soc.3"] },
   "soc-u1-summative": { course: "sociology", unit: 1, day: 10, turnIn: false, std: [], title: "Day 10 · Summative (Form A)", path: "https://docs.google.com/document/d/1bktIa-OZL30fJFz6jnWWoIXzPXJpZJvh6PKJt_IE6us/edit" },
   "soc-u1-summative-key": { course: "sociology", unit: 1, day: 10, turnIn: false, std: [], title: "Day 10 · Summative Teacher Key", path: "https://docs.google.com/document/d/1Y6rMojXQVtlN-TstH5-SBLGKWF7TLL0QckPcNg796l4/edit" },
+  "soc-u1-summative-b": { course: "sociology", unit: 1, day: 10, turnIn: false, std: [], title: "Day 10 · Summative (Form B · retake)", path: "https://docs.google.com/document/d/1-nYrcig7P7-42ZiGRA0Ldo6NryxD_HJ36Xo9huO_0eI/edit" },
+  "soc-u1-summative-b-key": { course: "sociology", unit: 1, day: 10, turnIn: false, std: [], title: "Day 10 · Summative Form B Teacher Key", path: "https://docs.google.com/document/d/1PwuQVKOKl1dhfnBfhT3VSpmYioC2po0pp4FfEdPvfxs/edit" },
   "soc-u2-d4-team-up": { course: "sociology", unit: 2, day: 4, title: "Day 4 · Last Bus Home", path: "sociology/u2-d4-team-up/", std: ["SS.9-12.Soc.7", "SS.9-12.Soc.8"] },
   "soc-u2-d5-everyday-life": { course: "sociology", unit: 2, day: 5, title: "Day 5 · Seven Bosses, One Tuesday", path: "sociology/u2-d5-everyday-life/", std: ["SS.9-12.Soc.5", "SS.9-12.Soc.6", "SS.9-12.Soc.7", "SS.9-12.Soc.8"] },
   "soc-u2-summative": { course: "sociology", unit: 2, day: 6, turnIn: false, std: [], title: "Day 6 · Summative (Form A)", path: "https://docs.google.com/document/d/1M58C16IEXXMSIRB4LjKfUecdmU9_Qk5SH7rb0XLCoVk/edit" },
