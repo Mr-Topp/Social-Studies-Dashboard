@@ -1,156 +1,309 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Who Counted? 1776–1870 | U.S. History Unit 1 Day 5</title>
-<meta name="description" content="Build a museum exhibit on who counted as a full member of the nation from 1776 to 1870, using national evidence and real Iowa cases.">
+<title>Who Counted? 1776–1870 | U.S. History Part 1 · Unit 1 · Day 5</title>
+<meta name="description" content="U.S. History Part 1, Unit 1, Day 5. Build a museum exhibit on who counted as a full American from 1776 to 1870, using national records and real Iowa cases.">
 <style>
-
-:root{--ink:#1f2b33;--muted:#55626b;--paper:#f6f3ec;--card:#fff;--line:#dcd5c4;--acc:#3b4a5a;--acc2:#7a5230;--soft:#eef0f3;--green:#2a6b45;--bad:#a2392f;--parch:#fbf5e6;--parchline:#e2d3ad}
+:root{--ink:#1f2b33;--muted:#55626b;--paper:#f4f1ea;--card:#fff;--line:#dcd5c4;--acc:#34495e;--acc2:#8a5a1f;--soft:#eef0f3;--green:#2a6b45;--bad:#a2392f;--parch:#fbf5e6;--parchline:#e2d3ad}
 *{box-sizing:border-box}
 body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.5 system-ui,Segoe UI,Arial,sans-serif}
-header{background:linear-gradient(100deg,#eef2f7 0 60%,#f7ebe6 60% 100%);border-bottom:5px solid var(--acc);padding:16px max(16px,calc((100vw - 900px)/2)) 12px}
-.k{font-size:.78rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:var(--acc);margin:0}
-h1{margin:2px 0 4px;font-size:clamp(1.6rem,3.4vw,2.3rem)}
-.std{margin:2px 0;font-size:.92rem;color:var(--muted)}.std b{color:var(--ink)}
-.hud{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line);padding:8px max(16px,calc((100vw - 900px)/2));display:flex;gap:12px;flex-wrap:wrap;align-items:center;font-weight:800;font-size:.92rem;box-shadow:0 2px 8px #1f2b3312}
-.hud .bar{flex:1;min-width:120px;height:10px;background:#e6e3da;border-radius:9px;overflow:hidden}.hud .bar span{display:block;height:100%;width:0;background:var(--acc);transition:width .4s}
-.pill{background:#f0ede4;border-radius:20px;padding:3px 10px;white-space:nowrap}
-.meter{display:flex;align-items:center;gap:6px}.meter .track{width:110px;height:10px;border-radius:9px;background:#e6e3da;overflow:hidden}.meter .track span{display:block;height:100%;background:var(--acc2);transition:width .5s}
-main{max-width:900px;margin:auto;padding:14px 16px 60px}
-.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;box-shadow:0 3px 12px #1f2b330d}
-.kicker{font-size:.78rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:var(--acc2);margin:0}
-h2{margin:2px 0 10px;font-size:1.45rem}
-.teach{background:var(--soft);border-left:5px solid var(--acc);border-radius:9px;padding:10px 14px;margin:0 0 12px}.teach p{margin:4px 0}.teach b{color:var(--acc)}
-.block{margin:14px 0;padding:14px;border-radius:12px;border:2px solid var(--line);background:#fff}
-.block.current{border-color:var(--ink);box-shadow:0 0 0 4px #2a4f7a30}
-.block h3{margin:0 0 10px;font-size:1.06rem;line-height:1.35;font-weight:700}
+.top{background:#26333f;color:#fff;padding:8px max(16px,calc((100vw - 900px)/2));display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.top .k{font-size:.78rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;margin:0;color:#e9dcc0}
+.stds{font-size:.85rem;position:relative}
+.stds summary{cursor:pointer;color:#cfd8e0;font-weight:700;list-style:none}.stds summary::-webkit-details-marker{display:none}
+.stds summary::after{content:" ▾"}.stds[open] summary::after{content:" ▴"}
+.stds .box{position:absolute;right:0;top:130%;z-index:20;width:min(460px,92vw);background:#fff;color:var(--ink);border:1px solid var(--line);border-radius:10px;padding:10px 12px;box-shadow:0 8px 24px #0003}
+.stds .box p{margin:4px 0}
+.hud{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line);padding:7px max(16px,calc((100vw - 900px)/2));display:flex;gap:12px;flex-wrap:wrap;align-items:center;font-weight:800;font-size:.9rem;box-shadow:0 2px 8px #1f2b3312}
+body.intro .hud{display:none}
+.hud .bar{flex:1;min-width:100px;height:10px;background:#e6e3da;border-radius:9px;overflow:hidden}.hud .bar span{display:block;height:100%;width:0;background:var(--acc);transition:width .4s}
+.pill{background:#f0ede4;border-radius:20px;padding:3px 10px;white-space:nowrap;display:flex;align-items:center;gap:6px}
+.pill .track{width:70px;height:9px;border-radius:9px;background:#e0dccf;overflow:hidden}.pill .track span{display:block;height:100%;background:var(--acc2);transition:width .5s}
+.pill.w .track span{background:#2f6f8f}
+.pill em{font-style:normal;color:var(--acc2)}.pill.w em{color:#2f6f8f}
+main{max-width:900px;margin:auto;padding:12px 16px 50px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px;box-shadow:0 3px 12px #1f2b330d}
+.kicker{font-size:.76rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:var(--acc2);margin:0}
+h2{margin:2px 0 8px;font-size:1.4rem}
+/* first screen */
+.hero{display:grid;grid-template-columns:1fr 200px;gap:18px;align-items:center}
+.hero h1{font-size:clamp(2.2rem,5vw,3.2rem);line-height:1.05;margin:4px 0 8px;font-family:Georgia,"Times New Roman",serif}
+.hook{font-size:1.1rem;margin:0 0 10px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:0}.chips span{background:#f0ede4;border:1px solid var(--line);border-radius:20px;padding:4px 11px;font-weight:800;font-size:.88rem}
+.hero figure{margin:0}.hero img{width:100%;height:215px;object-fit:cover;object-position:top;border-radius:10px;border:1px solid var(--line)}
+.intro label{margin-top:12px}
+.intro input{max-width:420px}
+@media(max-width:640px){.hero{grid-template-columns:1fr}.hero figure{display:none}}
+.teach{background:var(--soft);border-left:5px solid var(--acc);border-radius:9px;padding:9px 13px;margin:0 0 10px;display:flow-root}.teach p{margin:3px 0}.teach b{color:var(--acc)}
+.block{margin:12px 0;padding:13px;border-radius:12px;border:2px solid var(--line);background:#fff;display:flow-root}
+.block.current{border-color:var(--ink);box-shadow:0 0 0 4px #34495e30}
+.block h3{margin:0 0 8px;font-size:1.04rem;line-height:1.35;font-weight:700}
+.block.past{padding:9px 13px;background:#fbfaf7}
+.block.past .srccard,.block.past figure,.block.past .bigq{display:none}
 .event{background:#fbf9f4;border-style:dashed;border-color:#cdbf9a}.event.current{border-style:solid}
 .event-body p{margin:4px 0}
-.srccard{background:var(--parch);border:1px solid var(--parchline);border-left:5px solid #b8975a;border-radius:10px;padding:9px 12px;margin:0 0 10px;font-weight:400}
-.srccard .who{font-size:.75rem;font-weight:900;letter-spacing:.06em;text-transform:uppercase;color:#7a5c26;margin-bottom:3px}
-.srccard q,.srccard .quote{font-family:Georgia,"Times New Roman",serif;font-style:italic}
+.srccard{background:var(--parch);border:1px solid var(--parchline);border-left:5px solid #b8975a;border-radius:10px;padding:8px 12px;margin:0 0 8px;font-weight:400}
+.srccard .who{font-size:.74rem;font-weight:900;letter-spacing:.06em;text-transform:uppercase;color:#7a5c26;margin-bottom:2px}
+.srccard .quote{font-family:Georgia,"Times New Roman",serif;font-style:italic}
 .srccard p{margin:3px 0}
-.voices{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:8px 0}.voices div{background:#fff;border:1px solid var(--line);border-radius:9px;padding:7px 10px;font-size:.93rem}.voices b{display:block;color:var(--acc)}
-.picked{margin:10px 0 4px;color:var(--muted)}.result{background:#f0ede4;border-radius:9px;padding:9px 12px}.result p{margin:4px 0}
-.tag{display:inline-block;font-weight:900;font-size:.8rem;border-radius:12px;padding:2px 9px;margin-right:6px}.tag.up{background:#dcefe2;color:var(--green)}.tag.down{background:#f6dcd8;color:var(--bad)}.tag.flat{background:#ebe9e0;color:var(--ink)}
+figure.pic{float:right;width:190px;margin:0 0 6px 12px}
+figure.pic img{width:100%;max-height:230px;object-fit:cover;object-position:top;border-radius:8px;border:1px solid var(--line);display:block}
+figure figcaption{font-size:.76rem;line-height:1.3;color:var(--muted);margin-top:3px;font-weight:400}
+@media(max-width:560px){figure.pic{float:none;width:100%;margin:0 0 8px}figure.pic img{max-height:260px}}
+.picked{margin:8px 0 4px;color:var(--muted)}.result{background:#f0ede4;border-radius:9px;padding:8px 12px}.result p{margin:3px 0}
+.tag{display:inline-block;font-weight:900;font-size:.78rem;border-radius:12px;padding:2px 9px;margin-right:5px}.tag.up{background:#dcefe2;color:var(--green)}.tag.down{background:#f6dcd8;color:var(--bad)}.tag.flat{background:#ebe9e0;color:var(--ink)}
 .choices{display:grid;gap:8px}
-@media(min-width:700px){.q .choices{grid-template-columns:1fr 1fr}}
+@media(min-width:700px){.q .choices,.event .choices{grid-template-columns:1fr 1fr}}
 button{font:inherit;cursor:pointer;border-radius:10px;min-height:46px}
-.choice{text-align:left;background:#fff;color:var(--ink);border:2px solid #cfcab9;padding:10px 12px;font-weight:650;line-height:1.3}
+.choice{text-align:left;background:#fff;color:var(--ink);border:2px solid #cfcab9;padding:9px 12px;font-weight:650;line-height:1.3}
 .choice:hover:not(:disabled){border-color:var(--ink);background:#fcfcfa}.choice:disabled{opacity:.5;cursor:not-allowed}
-.go{margin-top:12px;background:var(--acc);color:#fff;border:0;padding:11px 18px;font-weight:900}
-button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid #2f7dbd;outline-offset:2px}
-.answered{font-weight:800;color:var(--green);margin:4px 0}.why{margin:2px 0;color:var(--muted)}
-.msg{min-height:1.3em;font-weight:750;margin:8px 0 0}.msg.bad{color:var(--bad)}.msg.good{color:var(--green)}
+.go{margin-top:12px;background:var(--acc);color:#fff;border:0;padding:11px 22px;font-weight:900;font-size:1.05rem}
+button:focus-visible,input:focus-visible,textarea:focus-visible,.wh:focus-visible{outline:3px solid #2f7dbd;outline-offset:2px}
+.answered{font-weight:800;color:var(--green);margin:3px 0}.why{margin:2px 0;color:var(--muted)}
+.msg{min-height:1.3em;font-weight:750;margin:8px 0 0}.msg.bad{color:var(--bad);background:#fbeeec;border-radius:8px;padding:6px 10px}.msg.good{color:var(--green)}
 label{display:block;font-weight:850;margin:14px 0 4px}.stem{margin:0 0 4px;color:var(--muted);font-size:.92rem}
 input,textarea{width:100%;font:inherit;border:2px solid #cfcab9;border-radius:9px;padding:10px;background:#fff;color:var(--ink)}
-.steps{display:grid;gap:6px;margin:10px 0;padding:0;list-style:none}.steps li{background:#f0ede4;border-radius:9px;padding:8px 12px;font-weight:700}
 .welcome{background:#e6f1ea;color:var(--green);font-weight:800;border-radius:9px;padding:8px 12px;margin:0 0 10px}
 .foot{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-top:14px;color:var(--muted);font-size:.85rem}
 .foot button{background:#ebe9e0;border:0;padding:8px 12px;font-weight:800;color:var(--ink)}
 .src{font-size:.8rem;color:var(--muted)}
-@media(max-width:640px){.voices{grid-template-columns:1fr}}
-@media(max-width:420px){.meter .track{width:70px}}
+.tl{list-style:none;padding:0;margin:4px 0}.tl li{border-left:4px solid var(--acc2);padding:2px 0 2px 10px;margin:3px 0}
+.wh{border-bottom:2px dotted var(--acc2);cursor:help;position:relative;font-style:normal}
+.wh:hover::after,.wh:focus::after{content:attr(data-tip);position:absolute;left:0;top:115%;z-index:30;background:#26333f;color:#fff;padding:6px 9px;border-radius:8px;font:600 .84rem/1.35 system-ui,Segoe UI,Arial,sans-serif;width:max-content;max-width:250px;white-space:normal;box-shadow:0 4px 14px #0004}
+.outcome{background:#f3efe4;border-radius:10px;padding:10px 14px;margin:6px 0 4px}.outcome p{margin:4px 0}
+.credits{margin-top:10px;font-size:.78rem;color:var(--muted)}.credits summary{cursor:pointer;font-weight:700}
 @media print{.hud,.foot,.go{display:none}}
-
-header{background:linear-gradient(100deg,#eef0f3 0 62%,#f4eee6 62% 100%)}
-.block.current{box-shadow:0 0 0 4px #3b4a5a30}
-.terms{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin:8px 0}.terms div{background:#fff;border:1px solid var(--line);border-radius:9px;padding:6px 10px;font-size:.92rem}.terms b{display:block;color:var(--acc)}
-.tl{list-style:none;padding:0;margin:6px 0}.tl li{border-left:4px solid var(--acc2);padding:3px 0 3px 10px;margin:4px 0}
-@media(max-width:640px){.terms{grid-template-columns:1fr}}
-
-
 </style>
-<script src="../../shared/assignments.js?v=20261103g"></script>
+<script src="../../shared/assignments.js?v=20261103p1"></script>
 <script src="../../shared/turnin.js?v=20261103d"></script>
 <script src="../../shared/unit-game.js?v=20261103c"></script>
-</head><body>
-<header>
+</head><body class="intro">
+<header class="top">
   <p class="k">U.S. History · Part 1 · Unit 1 · Day 5</p>
-  <h1>Who Counted? 1776–1870</h1>
-  <p class="std"><b>SS.9-12.US.1</b> Analyze change, continuity, and context of American citizenship, 1776–1870.</p>
-  <p class="std"><b>Goal:</b> Explain how citizenship and voting rights expanded from 1776 to 1870, and which limits continued, using national and Iowa evidence. · About 25 minutes.</p>
+  <details class="stds"><summary>Standard &amp; goal</summary><div class="box">
+    <p><b>SS.9-12.US.1</b> Analyze change, continuity, and context of American citizenship from 1776 to 1870.</p>
+    <p><b>Today's goal:</b> I can analyze how American citizenship changed from 1776 to 1870.</p>
+  </div></details>
 </header>
-<div class="hud" aria-label="Progress and exhibit evidence">
+<div class="hud" aria-label="Progress and exhibit meters">
   <span id="progressText">0 checks done</span>
   <div class="bar" aria-hidden="true"><span id="progressFill"></span></div>
-  <span class="pill meter">Exhibit evidence: <span class="track" aria-hidden="true"><span id="meterFill" style="width:40%"></span></span> <span id="meterNum">4/10</span></span>
+  <span class="pill v">Visitors: <span class="track" aria-hidden="true"><span id="vFill" style="width:50%"></span></span> <em id="vWord">Some</em></span>
+  <span class="pill w">Whole story: <span class="track" aria-hidden="true"><span id="wFill" style="width:50%"></span></span> <em id="wWord">Half</em></span>
 </div>
 <main>
   <p class="welcome" id="welcome" hidden></p>
   <div id="app"></div>
   <div class="foot"><span>Progress saves on this device. Your teacher sees your work after you turn it in.</span><button type="button" id="restartBtn">Start over</button></div>
+  <details class="credits"><summary>Picture credits</summary>
+    <p>"The First Vote," drawn by A. R. Waud, <i>Harper's Weekly</i>, Nov. 16, 1867. Library of Congress, via Wikimedia Commons (public domain).</p>
+    <p>Alexander Clark, engraving from William J. Simmons, <i>Men of Mark</i> (1887). Via Wikimedia Commons (public domain).</p>
+    <p>Carrie Chapman Catt, portrait photo. Library of Congress, via Wikimedia Commons (public domain).</p>
+  </details>
 </main>
 <script>
-const T = (cls, txt) => `<span class="tag ${cls}">${txt}</span>`;
 const SRC = (who, body) => `<div class="srccard"><div class="who">${who}</div>${body}</div>`;
-const AM = ["13th Amendment", "14th Amendment", "15th Amendment", "19th Amendment"];
+const W = (word, tip) => `<span class="wh" tabindex="0" data-tip="${tip}">${word}</span>`;
+const PIC = (src, alt, cap) => `<figure class="pic"><img src="img/${src}" alt="${alt}"><figcaption>${cap}</figcaption></figure>`;
+// Two exhibit meters (0–6). Every big choice trades one for the other.
+const up = t => `<span class="tag up">▲ ${t}</span>`, down = t => `<span class="tag down">▼ ${t}</span>`, flat = t => `<span class="tag flat">= ${t}</span>`;
+const vWord = v => v <= 1 ? "Empty" : v <= 3 ? "Some" : v <= 4 ? "Busy" : "Packed";
+const wWord = w => w <= 1 ? "Misleading" : w <= 3 ? "Half" : w <= 4 ? "Most" : "Full";
+const AM = ["14th Amendment (1868)", "13th Amendment (1865)", "15th Amendment (1870)", "19th Amendment (1920)"];
+
 UnitGame.start({
-  key: "ush-p1u1-d5-citizenship-v1",
+  key: "ush-p1u1-d5-citizenship-v2",
   assignmentId: "ush-p1u1-d5-citizenship",
-  title: "U.S. History · Unit 1 · Day 5 · Who Counted? 1776–1870",
+  title: "U.S. History · Part 1 · Unit 1 · Day 5 · Who Counted? 1776–1870",
   standard: "SS.9-12.US.1",
   oldApi: "https://fynn-class-assignment-submissions-20261024.neotboy.chatgpt.site/api/submit",
-  startFx: { evidence: 4 },
-  clampFx: fx => { fx.evidence = Math.max(0, Math.min(10, fx.evidence)); },
+  lockSeconds: 4,
+  startFx: { visitors: 3, story: 3 },
+  clampFx: fx => { fx.visitors = Math.max(0, Math.min(6, fx.visitors)); fx.story = Math.max(0, Math.min(6, fx.story)); },
   hud: st => {
-    const v = st.fx.evidence || 0;
-    document.getElementById("meterFill").style.width = (v * 10) + "%";
-    document.getElementById("meterNum").textContent = v + "/10";
+    document.body.classList.toggle("intro", st.scene < 0);
+    const v = st.fx.visitors || 0, w = st.fx.story || 0;
+    document.getElementById("vFill").style.width = Math.round(v / 6 * 100) + "%";
+    document.getElementById("wFill").style.width = Math.round(w / 6 * 100) + "%";
+    document.getElementById("vWord").textContent = vWord(v);
+    document.getElementById("wWord").textContent = wWord(w);
   },
-  startLabel: "Open the case files",
-  introHtml: `<p class="kicker">An Iowa history exhibit</p><h2>Who counted?</h2>
-    <p>A history museum asked you to help build a new exhibit. Its question: from 1776 to 1870, who counted as a full member of the nation, and who didn't?</p>
-    <p>You'll study real records, including three Iowa cases, and choose what goes on the exhibit walls. Strong, accurate evidence raises the "Exhibit evidence" meter.</p>
-    <ul class="steps"><li>1. Read each record and answer the check.</li><li>2. Pick the evidence for the exhibit walls.</li><li>3. Write 2 short answers and turn in.</li></ul>
-    <p class="src">The museum is made up. Every record, law, and case is real. This topic includes slavery and exclusion, so take it seriously.</p>`,
+  startLabel: "Open the exhibit",
+  introHtml: `<div class="hero"><div>
+      <p class="kicker">Museum job · Iowa and the nation</p>
+      <h1>Who Counted?</h1>
+      <p class="hook">A museum hires you to build its new exhibit: from 1776 to 1870, who counted as a full American, and who got left out?</p>
+      <div class="chips"><span>3 exhibit walls</span><span>7 quick checks</span><span>3 tough calls</span><span>2 short answers</span><span>About 25 min</span></div>
+    </div>
+    <figure><img src="img/first-vote-1867.jpg" alt="1867 magazine drawing of Black men in line to cast their first votes"><figcaption>"The First Vote," <i>Harper's Weekly</i>, 1867</figcaption></figure></div>`,
   scenes: [
-    { kicker: "Part 1 of 3 · 1776–1840", title: "Four Words That Matter",
-      teach: `<div class="terms"><div><b>Citizenship</b>Legal membership in a nation.</div><div><b>Suffrage</b>The right to vote.</div><div><b>Equality</b>Equal protection under the law.</div><div><b>Sovereignty</b>A nation's power to govern itself.</div></div>
-        <p>These are different things. A person can be a <b>citizen</b> and still be denied <b>suffrage</b>.</p>`,
+    { kicker: "Wall 1 of 3 · 1776–1850s", title: "Who Got the Vote?",
+      teach: `<p>A ${W("citizen", "A legal member of the nation.")} is not always a voter. ${W("Suffrage", "The right to vote.")} was a separate right, and states made the rules.</p>`,
       blocks: [
-        { type: "q", id: "t1", std: "US.1", short: "Citizen ≠ voter", prompt: SRC("Citizens who could not vote", `<p>In the 1800s, women born in the United States were citizens. But in nearly every state they could not vote. Most women did not win the vote nationwide until the 19th Amendment in 1920.</p>`) + "What does this record show?", options: ["A person can be a citizen and still be denied the vote", "Citizenship and suffrage always meant the same thing", "Only people who could vote were counted as citizens", "Women were not citizens of the U.S. until 1920"], hint: "Were these women citizens? Could they vote? Use the four terms.", why: "Citizenship and suffrage are different. Women were citizens long before they had the right to vote." },
-        { type: "q", id: "t2", std: "US.1", short: "Property rules dropped for white men", prompt: SRC("Voting rules change, early 1800s", `<ul class="tl"><li><b>1776:</b> Most states let only men who owned property vote.</li><li><b>Early 1800s:</b> Many states drop property rules for white men.</li><li><b>By the 1850s:</b> Nearly all white men can vote.</li></ul>`) + "Who gained the right to vote from this change?", options: ["White men who did not own property", "Free Black men in every single state", "Women who owned land or a business", "Enslaved people living in the North"], hint: "Read the early 1800s line carefully. Which men?", why: "Voting expanded to white men without property. Other groups were still shut out." },
-        { type: "event", id: "e1", short: "Exhibit wall 1: early 1800s", html: `<p><b>Exhibit wall 1: "Expansion for some."</b> You have room for one record about voting in the early 1800s. Which do you choose?</p>`,
+        { type: "q", id: "c1776", std: "US.1", short: "1776: property-owning white men vote",
+          prompt: SRC("Voter check-in · Virginia, 1776", `<p>Most states had two rules for voters: be a man, and own land.</p>`) + "Four people show up to vote. Who is most likely allowed?",
+          options: ["A white man who owns a farm", "A white man who rents a room", "A free Black woman who owns a shop", "A Cherokee man on his nation's land"],
+          hint: "Check both rules: a man, and owns land. Who fits both?",
+          why: "In 1776 most states let only men who owned land vote, and almost all of them were white. Renters, women, and most others were shut out." },
+        { type: "q", id: "pattern", std: "US.1", short: "Vote grew for white men, shrank for others",
+          prompt: SRC("Two records, same era", `<ul class="tl"><li><b>Early 1800s:</b> Many states drop the land rule. White men without land can now vote.</li><li><b>1838:</b> Pennsylvania's new constitution says only "white" men may vote. Some Black men there had voted before.</li></ul>`) + "What pattern do these two records show?",
+          options: ["The vote grew for white men but shrank for others", "The vote grew for every group at about the same time", "Land rules got stricter for every voter in the country", "Pennsylvania was the only state that changed its rules"],
+          hint: "Who gained the vote in the early 1800s? Who lost it in 1838?",
+          why: "More white men could vote, while Black men in Pennsylvania lost the vote. New Jersey did the same to women and Black voters in 1807." },
+        { type: "event", id: "e1", short: "Wall 1 centerpiece",
+          html: `<p><b>Tough call: Wall 1 has room for one big item.</b> What goes in the center?</p>`,
           choices: [
-            { label: "Pennsylvania, 1838: new rules limit voting to \"white\" men", fx: { evidence: 2 }, result: `<p>${T("up","+2 evidence")}Strong choice. Before 1838, some Black men in Pennsylvania voted. The new state constitution took that right away. New Jersey did the same to women and Black voters in 1807. So while white men gained the vote, others lost it.</p>` },
-            { label: "A painting of a crowded election-day parade", fx: {}, result: `<p>${T("flat","No change")}It looks good, but it doesn't show who was allowed to vote and who wasn't. Visitors won't learn much.</p>` },
-            { label: "A sign: \"By 1830, every adult could vote\"", fx: { evidence: -2 }, result: `<p>${T("down","−2 evidence")}This is false. Women, enslaved people, most Native Americans, and many free Black men could not vote. A history exhibit can't post a false claim.</p>` }
-          ] },
-        { type: "q", id: "t3", std: "US.1", short: "Meskwaki Settlement = tribal sovereignty", prompt: SRC("The Meskwaki Settlement, Tama County, Iowa", `<p>The Meskwaki Nation runs its own government on its land in Tama County. It has its own tribal council, police, and courts.</p>`) + "Which of the four terms does this describe?", options: ["Sovereignty", "Suffrage", "Citizenship", "Equality"], hint: "Is this about one person's rights, or a nation governing itself?", why: "Tribal sovereignty is a nation's political power to govern itself. It is not an individual right." }
+            { label: "A famous painting of a crowded election day (Bingham, 1852)", fx: { visitors: 2, story: -1 },
+              result: `<p>${up("Visitors")}${down("Whole story")}People crowd around it. But every voter in it is a white man, and nothing says who was kept out.</p>` },
+            { label: "Pennsylvania's 1838 constitution, open to the voting rule", fx: { visitors: -1, story: 2 },
+              result: `<p>${down("Visitors")}${up("Whole story")}It proves Black men lost the vote. But it's a page of old print, and most visitors walk right past.</p>` },
+            { label: "Split the wall: a small copy of each", fx: { visitors: 0, story: 1 },
+              result: `<p>${flat("Visitors")}${up("Whole story")}Both fit, but both are small. A few careful visitors get the full picture. Most don't notice.</p>` }
+          ] }
       ] },
-    { kicker: "Part 2 of 3 · Iowa, 1839–1868", title: "The Iowa Files",
-      teach: `<p>Iowa became a U.S. territory in 1838 and a state in 1846. Slavery was not allowed in Iowa. But that did not mean Black Iowans had equal rights.</p>`,
+    { kicker: "Wall 2 of 3 · Iowa, 1839–1868", title: "The Iowa Room",
+      teach: `<p>Iowa became a state in 1846. Slavery was never allowed here. So how were Black Iowans treated? Check the records.</p>`,
       blocks: [
-        { type: "q", id: "i1", std: "US.1", short: "In re Ralph (1839): not returned to slavery", prompt: SRC("Case file: In re Ralph, Iowa Territorial Supreme Court, 1839", `<p>Ralph was enslaved in Missouri. His enslaver agreed to let him go to the lead mines near Dubuque, Iowa, to earn money and buy his freedom. Ralph couldn't finish paying. Bounty hunters seized him to take him back to Missouri.</p><p>Iowa's highest court ruled that Ralph could not be returned to slavery. It was the first ruling of Iowa's territorial Supreme Court.</p>`) + "What did the court decide?", options: ["Ralph could not be returned to slavery", "Ralph had to be sent back to Missouri", "Ralph earned the right to vote in Iowa", "Ralph had to pay back all of the money"], hint: "Read the last paragraph of the case file.", why: "The court protected Ralph's freedom. Because his enslaver let him live in free territory, he could not be forced back into slavery." },
-        { type: "q", id: "i2", std: "US.1", short: "1846 Iowa constitution: white men only vote", prompt: SRC("Iowa Constitution of 1846, Article III (voting)", `<p class="quote">"Every white male citizen of the United States, of the age of twenty-one years, who shall have been a resident of the State six months… shall be entitled to vote…"</p>`) + "Under this rule, who could NOT vote in Iowa?", options: ["A free Black man who had lived in Iowa for years", "A white farmer, age 30, who moved in a year ago", "A white shopkeeper, age 25, who lived in Iowa City", "A white miner, age 40, who lived near Dubuque"], hint: "Check every word of the rule: race, sex, age, and time living there.", why: "The 1846 constitution limited voting to white men. Ralph's freedom was protected, but Black Iowans still could not vote." },
-        { type: "q", id: "i3", std: "US.1", short: "Freedom ≠ equal rights in Iowa", prompt: "Put the two Iowa records together: <b>In re Ralph (1839)</b> and the <b>1846 voting rule</b>. What do they show?", options: ["Iowa protected Black freedom but not equal rights", "Iowa gave Black men the vote before any other state", "Iowa allowed slavery until the Civil War ended it", "Iowa treated everyone the same under its laws"], hint: "Ralph stayed free. But could he vote?", why: "Freedom and equality are different. Iowa refused to return Ralph to slavery but still kept Black men from voting." },
-        { type: "q", id: "i4", std: "US.1", short: "Clark v. Board (1868)", prompt: SRC("Case file: Clark v. Board of School Directors, Iowa Supreme Court, 1868", `<p>Alexander Clark was a Black businessman in Muscatine, Iowa. When his daughter Susan was turned away from her neighborhood public school because of her race, he sued. In 1868 the Iowa Supreme Court ruled that public schools could not separate children by race.</p><p>That same year, Iowa voters removed the word "white" from the state's voting rules, two years before the 15th Amendment.</p>`) + "What does the Clark case show?", options: ["Black Iowans used the courts to win equal treatment", "Iowa schools were already equal for everyone by 1860", "Congress ran Iowa's public schools during the 1860s", "Susan Clark entered school without any fight at all"], hint: "Who took action, and how?", why: "The Clark family challenged unfair treatment in court and won. Equality expanded because people demanded it." },
-        { type: "q", id: "i5", std: "US.1", short: "Meskwaki 1856–57 = sovereignty, not individual rights", prompt: SRC("The Meskwaki, 1856–1857", `<p>The U.S. government had forced the Meskwaki out of Iowa in the 1840s. Some returned. In 1856, an Iowa law allowed them to live in the state. In 1857, the Meskwaki bought land in Tama County with their own money. Today it is the Meskwaki Settlement, with its own government.</p>`) + "How is the Meskwaki story different from the Ralph and Clark cases?", options: ["It's about a nation governing itself, not one person's rights", "It's about the Meskwaki winning the right to vote in 1857", "It's about a case decided by the Iowa Supreme Court", "It's about Iowa forcing the Meskwaki to leave for good"], hint: "Use the word \"sovereignty\" from Part 1.", why: "Ralph and Clark were about individual rights. The Meskwaki story is about tribal sovereignty: a nation's right to govern itself on its own land." }
-      ] },
-    { kicker: "Part 3 of 3 · 1865–1870", title: "The Amendment Response Team",
-      teach: `<ul class="tl"><li><b>1857:</b> In <b>Dred Scott v. Sandford</b>, the U.S. Supreme Court rules that Black Americans cannot be U.S. citizens.</li><li><b>1865 · 13th Amendment:</b> abolishes slavery, except as punishment for a crime.</li><li><b>1868 · 14th Amendment:</b> anyone born in the U.S. is a citizen. States must give due process and equal protection.</li><li><b>1870 · 15th Amendment:</b> no one can be denied the vote because of race, color, or having been enslaved.</li></ul>`,
-      blocks: [
-        { type: "q", id: "a1", std: "US.1", short: "Enslaved in Kentucky 1865 = 13th", prompt: SRC("Kentucky, 1865", `<p>The Emancipation Proclamation did not cover Kentucky, because it stayed in the Union. In 1865, tens of thousands of people there were still enslaved.</p>`) + "Which amendment finally freed them in December 1865?", options: AM, hint: "Which amendment is about slavery itself?", why: "The 13th Amendment ended slavery everywhere in the U.S., including Union states like Kentucky and Delaware." },
-        { type: "q", id: "a2", std: "US.1", short: "Born in the U.S. = citizen, 14th", prompt: "A girl is born in Georgia in 1869 to parents who were enslaved until 1865. Under Dred Scott (1857), she could not have been a citizen. Which amendment makes her a citizen?", options: [AM[1], AM[0], AM[2], AM[3]], hint: "Which amendment says anyone born in the U.S. is a citizen?", why: "The 14th Amendment created birthright citizenship and overturned the Dred Scott ruling." },
-        { type: "q", id: "a3", std: "US.1", short: "Turned away from polls for race = 15th", prompt: "1870: An election official turns away a Black man at the polls and says, \"Your kind can't vote here.\" Which amendment does this break?", options: [AM[2], AM[1], AM[0], AM[3]], hint: "Which amendment is about voting and race?", why: "The 15th Amendment bans denying the vote because of race, color, or past enslavement." },
-        { type: "q", id: "a4", std: "US.1", short: "15th Amendment left out women", prompt: SRC("15th Amendment, 1870", `<p class="quote">"The right of citizens of the United States to vote shall not be denied or abridged by the United States or by any State on account of race, color, or previous condition of servitude."</p><p>"Abridged" = limited. "Previous condition of servitude" = having been enslaved.</p>`) + "Which group did these words NOT protect?", options: ["Women of every race", "Black men freed from slavery", "Black men born free in the North", "Men of any color who were citizens"], hint: "The amendment lists three reasons a vote can't be denied. Is sex one of them?", why: "The 15th Amendment said nothing about sex. Women waited until 1920. Later, violence and unfair tests also blocked many Black men from voting." },
-        { type: "event", id: "e2", short: "Exhibit closing panel", html: `<p><b>Last wall: the closing panel.</b> Visitors read this on their way out. Which headline do you choose?</p>`,
+        { type: "q", id: "ralph", std: "US.1", short: "Ralph + 1846 rule: free but not equal",
+          prompt: SRC("Case file: In re Ralph · Iowa Supreme Court, 1839", `<p>Ralph was enslaved in Missouri. His enslaver let him work in the lead mines near Dubuque to buy his freedom. When Ralph couldn't pay it all, slave catchers grabbed him. Iowa's court ruled he could not be returned to slavery.</p>`)
+            + SRC("Iowa Constitution, 1846 · voting rule", `<p class="quote">"Every white male citizen of the United States, of the age of twenty-one years… shall be entitled to vote…"</p>`)
+            + "Put both records together. What do they show about early Iowa?",
+          options: ["It protected Black freedom but not equal rights", "It gave Black men the vote before other states", "It allowed slavery until the Civil War ended it", "It treated all of its people the same under law"],
+          hint: "Ralph stayed free. Now read the 1846 rule: could Ralph vote?",
+          why: "Iowa refused to send Ralph back to slavery, but its constitution still let only white men vote. Freedom and equality are different." },
+        { type: "q", id: "clark", std: "US.1", short: "Clark 1868: Black Iowans pushed for change",
+          prompt: PIC("alexander-clark-1887.jpg", "Engraved portrait of Alexander Clark", "Alexander Clark of Muscatine, engraving, 1887")
+            + SRC("Case file: Clark v. Board of School Directors · 1868", `<p>1867: Susan Clark, age 12, is turned away from her Muscatine school because she is Black. Her father, Alexander Clark, sues.</p><p>1868: Iowa's Supreme Court rules that schools can't separate children by race. That same year, Iowa voters take the word "white" out of the voting rule.</p>`)
+            + "What made these 1868 changes happen?",
+          options: ["Black Iowans like the Clarks pushed for them", "The 15th Amendment forced Iowa to change", "Congress ordered Iowa to fix its schools", "Iowa's governor changed the rules alone"],
+          hint: "Who sued? And check the dates: was there a 15th Amendment yet in 1868?",
+          why: "The Clark family went to court and won, and Alexander Clark campaigned for Black voting rights. Iowa acted in 1868, two years before the 15th Amendment." },
+        { type: "q", id: "meskwaki", std: "US.1", short: "Meskwaki = tribal sovereignty",
+          prompt: SRC("The Meskwaki · Tama County, Iowa", `<p>The U.S. forced the Meskwaki out of Iowa in the 1840s. Some came back. In 1857 they bought land in Tama County with their own money. Today the Meskwaki Settlement has its own council, police, and courts.</p>`)
+            + "How is the Meskwaki story different from the Ralph and Clark cases?",
+          options: ["It's about a whole people running their own government", "It's about the Meskwaki winning the right to vote in 1857", "It's about a case the Meskwaki won in Iowa's Supreme Court", "It's about Iowa forcing the Meskwaki to leave the state for good"],
+          hint: "Ralph and Clark were each about one person's rights. Who has a council, police, and courts?",
+          why: "Ralph and Clark were about one person's rights. The Meskwaki story is about <b>sovereignty</b>: a nation's power to govern itself on its own land." },
+        { type: "event", id: "e2", short: "Donor's offer for the Iowa Room",
+          html: SRC("Letter from a donor", `<p>"I'll pay for the whole Iowa Room: lights, video screens, ads on TV. One condition: the big sign must say <b>'Iowa: Always a Land of Freedom.'</b>"</p>`) + `<p><b>Tough call.</b> What do you tell him?</p>`,
           choices: [
-            { label: "\"Rights expanded, but equality remained incomplete\"", fx: { evidence: 3 }, result: `<p>${T("up","+3 evidence")}This matches the evidence: three amendments, Ralph, and Clark show real expansion. Women still couldn't vote, most Native Americans were not counted as citizens, and violence soon blocked many Black voters.</p>` },
-            { label: "\"By 1870, every American was equal\"", fx: { evidence: -2 }, result: `<p>${T("down","−2 evidence")}Not true. Women couldn't vote, most Native Americans were not citizens, and violence and unfair rules soon kept many Black men from voting.</p>` },
-            { label: "\"Nothing changed from 1776 to 1870\"", fx: { evidence: -2 }, result: `<p>${T("down","−2 evidence")}Not true either. Slavery was abolished, Black Americans became citizens, and Black men won the right to vote on paper.</p>` }
+            { label: "Take the money and use his sign", fx: { visitors: 2, story: -2 },
+              result: `<p>${up("Visitors")}${down("Whole story")}The room looks amazing and crowds pour in. But the sign hides the 1846 "white male" voting rule. Visitors leave thinking Iowa was equal.</p>` },
+            { label: "Say no and keep the true story", fx: { visitors: -2, story: 2 },
+              result: `<p>${down("Visitors")}${up("Whole story")}No money. The room stays small with paper signs. The few people who come learn what really happened.</p>` },
+            { label: "Make a deal: his name on the wall, sign says \"Free, Not Yet Equal\"", fx: { visitors: 1, story: -1 },
+              result: `<p>${up("Visitors")}${down("Whole story")}He agrees, but his giant name needs space. The Meskwaki panel gets cut to make room.</p>` }
+          ] }
+      ] },
+    { kicker: "Wall 3 of 3 · 1857–1920", title: "The Amendments, and After",
+      teach: `${PIC("first-vote-1867.jpg", "1867 magazine drawing of Black men in line to vote", `"The First Vote," <i>Harper's Weekly</i>, 1867`)}
+        <ul class="tl"><li><b>1857 · Dred Scott case:</b> the Supreme Court says Black Americans can't be U.S. citizens.</li>
+        <li><b>1865 · 13th:</b> ends slavery (except as punishment for a crime).</li>
+        <li><b>1868 · 14th:</b> anyone born in the U.S. is a citizen. States must give everyone ${W("equal protection", "The law has to treat people the same.")}.</li>
+        <li><b>1870 · 15th:</b> no one can be denied the vote because of race, color, or having been enslaved.</li></ul>`,
+      blocks: [
+        { type: "q", id: "a14", std: "US.1", short: "Born in U.S. = citizen (14th)",
+          prompt: SRC("Georgia, 1869", `<p>A girl is born to parents who were enslaved until 1865. Under the Dred Scott ruling, she could never have been a citizen.</p>`) + "What changed that?",
+          options: AM,
+          hint: "She's a baby, so she isn't voting, and slavery already ended in 1865. Which change is about who is a citizen?",
+          why: "The 14th Amendment made everyone born in the U.S. a citizen. It overturned the Dred Scott ruling." },
+        { type: "q", id: "iowa1916", std: "US.1", short: "Iowa 1916: 15th didn't cover sex",
+          prompt: PIC("carrie-chapman-catt.jpg", "Portrait photo of Carrie Chapman Catt", "Carrie Chapman Catt grew up in Charles City, Iowa, and led the national fight for women's votes.")
+            + SRC("Iowa, June 5, 1916", `<p>Iowa's voters (all men) decide whether women may vote. It loses by about 10,000 votes. Iowa women can't vote for governor or president until 1920.</p>`)
+            + SRC("15th Amendment, 1870", `<p class="quote">"The right of citizens… to vote shall not be denied… on account of race, color, or previous condition of servitude."</p><p>"Previous condition of servitude" = having been enslaved.</p>`)
+            + "Why didn't the 15th Amendment protect these Iowa women?",
+          options: ["It banned limits based on race, not on sex", "It only covered elections for the U.S. Congress", "Iowa never approved it, so it didn't apply there", "It only protected people who had been enslaved"],
+          hint: "The 15th lists three reasons a vote can't be denied. Is being a woman one of them?",
+          why: "The 15th Amendment never mentioned sex. Women in Iowa and most states waited until the 19th Amendment in 1920. That's a limit on equality that lasted long after 1870." },
+        { type: "event", id: "e3", short: "Closing headline",
+          html: `<p><b>Last tough call: the closing headline.</b> Everyone reads it on the way out. Pick one.</p>`,
+          choices: [
+            { label: "\"1870: Freedom Won\"", fx: { visitors: 2, story: -2 },
+              result: `<p>${up("Visitors")}${down("Whole story")}Huge banner, great photos. But visitors think the story ended in 1870. Nothing about women, Native Americans, or the 1916 Iowa vote.</p>` },
+            { label: "\"Rights Expanded, but Equality Remained Incomplete\"", fx: { visitors: -1, story: 2 },
+              result: `<p>${down("Visitors")}${up("Whole story")}True and complete. But it's long, and lots of people walk by without reading it.</p>` },
+            { label: "\"Who Still Couldn't Vote?\"", fx: { visitors: 1, story: 0 },
+              result: `<p>${up("Visitors")}${flat("Whole story")}A question pulls people in. But it skips the real gains: freedom, citizenship, and the vote for Black men.</p>` }
           ] }
       ] }
   ],
   finale: {
-    title: "Defend the Exhibit's Claim",
-    report: st => `<p><b>Your exhibit evidence ended at ${st.fx.evidence}/10.</b></p><p>Claim: <b>"From 1776 to 1870, rights expanded, but equality remained incomplete."</b> Answer both in 1–2 full sentences.</p>`,
+    title: "Opening Day",
+    report: st => {
+      const v = st.fx.visitors, w = st.fx.story;
+      const crowd = v >= 5 ? "Lines go out the door. Your exhibit is the talk of the town." : v >= 3 ? "A steady crowd comes through all day." : "The halls are quiet. Only a few people come.";
+      const learn = w >= 5 ? "Visitors leave knowing both sides: real gains, and the people still left out." : w >= 3 ? "Visitors learn part of the story, but some leave with gaps." : "Many visitors leave believing a story that isn't true.";
+      const verdict = (v >= 4 && w >= 4) ? "You found a way to draw a crowd without bending the truth." : (v >= 4) ? "You won the crowd, but the truth paid for it." : (w >= 4) ? "You chose the truth over a bigger crowd." : "Every trade-off cost you something. Real museums face these choices too.";
+      return `<div class="outcome"><p>${crowd} ${learn}</p><p><b>${verdict}</b></p></div>
+        <p>The museum's claim: <b>"From 1776 to 1870, rights expanded, but equality remained incomplete."</b> Back it up in 1–2 full sentences each.</p>`;
+    },
     prompts: [
-      { id: "expand", short: "Two pieces of evidence rights expanded", label: "1. Give TWO pieces of evidence that rights expanded between 1776 and 1870.", stem: "Rights expanded. One example is ___. Another example is ___.", min: 80, newWords: 7, mustInclude: ["13th", "14th", "15th", "amendment", "ralph", "clark", "property", "citizen", "slavery", "vote", "school"], mustMsg: "In answer 1, use real evidence from today (like an amendment, Ralph, Clark, or property rules)." },
-      { id: "limit", short: "One limit that continued", label: "2. Give ONE limit on equality that continued after 1870. Explain who it affected.", stem: "Equality was still incomplete because ___.", min: 80, newWords: 7, mustInclude: ["women", "woman", "violence", "native", "indigenous", "indian", "1920", "test", "threat", "block", "denied"], mustMsg: "In answer 2, name a real limit that continued (like women not voting, or violence against Black voters)." }
+      { id: "expand", short: "Two pieces of evidence rights expanded",
+        label: "1. Give TWO pieces of evidence that rights expanded from 1776 to 1870.",
+        stem: "Rights expanded. One example is ___. Another example is ___.", min: 80, newWords: 7 },
+      { id: "limit", short: "One limit that continued after 1870",
+        label: "2. Give ONE limit on equality that lasted after 1870. Who did it hurt?",
+        stem: "Equality was still incomplete because ___. This hurt ___.", min: 70, newWords: 6 }
     ]
   },
-  extraAnswers: st => ({ "Exhibit evidence meter": st.fx.evidence + " of 10" })
+  extraAnswers: st => ({ "Exhibit meters (teacher only)": "Visitors " + st.fx.visitors + " of 6 · Whole story " + st.fx.story + " of 6" })
 });
+
+// ---- Page helpers (this game only) ----
+// 1) Wrong answer: bring the hint into view right away.
+document.addEventListener("click", e => {
+  const b = e.target.closest && e.target.closest(".block .choice");
+  if (!b) return;
+  setTimeout(() => {
+    const m = b.closest(".block") && b.closest(".block").querySelector(".msg.bad");
+    if (!m || !m.isConnected) return;
+    const r = m.getBoundingClientRect();
+    if (r.bottom > innerHeight - 16) window.scrollBy({ top: r.bottom - innerHeight + 28, behavior: "smooth" });
+    else if (r.top < 60) window.scrollBy({ top: r.top - 80, behavior: "smooth" });
+  }, 60);
+}, true);
+// 2) Writing check: must use real evidence from today, no off-topic filler.
+(function () {
+  const plain = s => String(s || "").normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
+  const has = (t, w) => new RegExp("(^|[^a-z0-9])" + w.replace(/[.*+?^${}()|[\]\\]/g, "\\$&"), "i").test(t);
+  const PERSONAL = /(^|[^a-z])(birthday|my (best )?friends?|my (mom|dad|mother|father|brother|sister|cousin|girlfriend|boyfriend|dog|cat)|lunch|dinner|breakfast|to eat|party|is fun|was fun|so fun|are fun|cool|lol|lmao)([^a-z]|$)/;
+  const OFF = /(^|[^a-z])(pizza|burgers?|tacos?|fries|candy|video ?games?|gaming|fortnite|roblox|minecraft|tik ?tok|snapchat|instagram|youtube|netflix|xbox|playstation|nintendo|football|basketball|soccer|anime)([^a-z]|$)/;
+  // [words that count on their own, amendment number that counts only if "amendment" is in the answer]
+  const EVID = [[["thirteenth", "slavery", "enslav", "abolish"], "13th"], [["fourteenth", "citizen", "born in", "birthright", "dred"], "14th"],
+    [["fifteenth", "race", "color", "black men"], "15th"], [["ralph"]], [["clark", "susan", "muscatine", "separate school"]], [["property", "land"]],
+    [["1868", "white", "iowa vote", "iowa voters"]], [["meskwaki", "sovereign"]]];
+  const LIMIT = ["women", "woman", "female", "sex", "1916", "1920", "19th", "native", "indian", "indigenous", "meskwaki", "tribe", "tribal",
+    "violence", "threat", "klan", "kkk", "test", "poll tax", "jim crow", "segregat", "block", "kept", "denied", "couldn't", "could not", "cant", "can't"];
+  const WHO = ["women", "woman", "native", "indian", "indigenous", "black", "african", "meskwaki", "tribe", "people", "men", "girls", "voters", "freed"];
+  function problem(id, raw) {
+    const t = plain(raw);
+    if (t.trim().length < 80) return "";            // the game's own check handles short answers
+    if (OFF.test(t) || PERSONAL.test(t)) return "Keep it about today's history. Take out the off-topic part and use real evidence.";
+    if (id === "expand") {
+      const amend = /amend/.test(t);
+      const n = EVID.filter(([ws, num]) => ws.some(w => has(t, w)) || (num && amend && has(t, num))).length;
+      if (n < 2) return "In answer 1, name TWO real pieces of evidence (like the 13th, 14th, or 15th Amendment, the Ralph case, the Clark case, or the end of land rules).";
+    }
+    if (id === "limit") {
+      if (!LIMIT.some(w => has(t, w))) return "In answer 2, name a real limit after 1870 (like women not voting until 1920, Native Americans not counted as citizens, or violence that kept Black men from voting).";
+      if (!WHO.some(w => has(t, w))) return "In answer 2, say WHO the limit hurt.";
+    }
+    return "";
+  }
+  document.addEventListener("click", e => {
+    if (!e.target.closest || !e.target.closest("#sendBtn")) return;
+    for (const id of ["expand", "limit"]) {
+      const box = document.getElementById("w_" + id);
+      if (!box) continue;
+      const p = problem(id, box.value);
+      if (p) {
+        e.stopImmediatePropagation(); e.preventDefault();
+        const msg = document.getElementById("sendMsg");
+        msg.textContent = p; msg.className = "msg bad";
+        box.focus(); box.scrollIntoView({ behavior: "smooth", block: "center" });
+        return;
+      }
+    }
+  }, true);
+})();
 </script>
 </body></html>

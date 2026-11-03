@@ -1,40 +1,70 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Labor Fights Back | U.S. History Unit 4 Day 2</title>
-<meta name="description" content="Advise a union through Haymarket, Homestead, and Pullman and see how government and public opinion shaped the labor movement.">
+<title>Union Leader: Haymarket to Pullman | U.S. History Part 1 · Unit 4 · Day 2</title>
+<meta name="description" content="Lead a union through Haymarket, Homestead, and Pullman. Every choice costs you something.">
 <style>
-:root{--ink:#1f2b33;--muted:#55626b;--paper:#f5f3ef;--card:#fff;--line:#dad9cf;--teal:#6b3a26;--coral:#9a5b12;--green:#2a6b45;--bad:#a2392f;--soft:#f3ece6}
+:root{--ink:#1f2b33;--muted:#55626b;--paper:#f3efe8;--card:#fff;--line:#dad4c6;--teal:#6b3a26;--coral:#9a5b12;--green:#2a6b45;--bad:#a2392f;--soft:#f3ece6;--night:#231a16}
 *{box-sizing:border-box}
 html,body{overflow-x:hidden}
 body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.5 system-ui,Segoe UI,Arial,sans-serif}
-header{background:linear-gradient(90deg,#efe6dd,#f6efe4);border-bottom:5px solid var(--teal);padding:16px max(16px,calc((100vw - 900px)/2)) 12px}
-.k{font-size:.78rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:var(--teal);margin:0}
-h1{margin:2px 0 4px;font-size:clamp(1.7rem,3.4vw,2.3rem)}
-.std{margin:2px 0;font-size:.92rem;color:var(--muted)}.std b{color:var(--ink)}
-.hud{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line);padding:8px max(16px,calc((100vw - 900px)/2));display:flex;gap:10px;flex-wrap:wrap;align-items:center;font-weight:800;font-size:.92rem;box-shadow:0 2px 8px #1f2b3312}
-.hud .bar{flex:1;min-width:100px;height:10px;background:#e6e6de;border-radius:9px;overflow:hidden}.hud .bar span{display:block;height:100%;width:0;background:var(--teal);transition:width .4s}
+header{background:var(--night);color:#f3e6d8;padding:7px max(16px,calc((100vw - 960px)/2));display:flex;gap:12px;align-items:center;flex-wrap:wrap;font-size:.85rem}
+header .k{margin:0;font-weight:800;letter-spacing:.04em}
+header details{margin-left:auto}
+header summary{cursor:pointer;font-weight:800;color:#f1c98f}
+header details[open]{flex-basis:100%;margin-left:0}
+header details p{margin:6px 0;max-width:900px;color:#f3e6d8}
+.hud{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line);padding:7px max(16px,calc((100vw - 960px)/2));display:flex;gap:10px;flex-wrap:wrap;align-items:center;font-weight:800;font-size:.9rem;box-shadow:0 2px 8px #1f2b3312}
+body:has(.card.intro) .hud{display:none}
+.hud .bar{flex:1;min-width:90px;height:10px;background:#e6e6de;border-radius:9px;overflow:hidden}.hud .bar span{display:block;height:100%;width:0;background:var(--teal);transition:width .4s}
 .pill{background:#f0efe8;border-radius:20px;padding:3px 10px;white-space:nowrap}
-.meter{display:flex;align-items:center;gap:6px}.meter .track{width:100px;height:10px;border-radius:9px;background:#e6e6de;overflow:hidden}.meter .track span{display:block;height:100%;background:var(--coral);transition:width .5s}
-main{max-width:900px;margin:auto;padding:14px 16px 60px}
+.meter{display:flex;align-items:center;gap:6px}.meter .track{width:70px;height:10px;border-radius:9px;background:#e6e6de;overflow:hidden}.meter .track span{display:block;height:100%;background:var(--coral);transition:width .5s}
+.meter.u .track span{background:#3c5a7a}
+.meter i{font-style:normal;font-weight:700;color:var(--muted)}
+main{max-width:960px;margin:auto;padding:12px 16px 60px}
 .card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;box-shadow:0 3px 12px #1f2b330d}
+/* ---- first screen ---- */
+.card.intro{background:linear-gradient(135deg,#2a1d17,#4a2a1c);color:#fbf1e4;border:0;padding:22px 24px}
+.hero{display:grid;grid-template-columns:1.25fr 1fr;gap:20px;align-items:center}
+.hero .kick{margin:0;font-weight:900;letter-spacing:.14em;text-transform:uppercase;color:#f1c98f;font-size:.8rem}
+.hero h2{font-size:clamp(2.2rem,4.6vw,3.3rem);line-height:1.02;margin:4px 0 2px;letter-spacing:-.01em}
+.hero .sub{font-size:1.15rem;font-weight:800;color:#f1c98f;margin:0 0 8px}
+.hero .hook{font-size:1.12rem;margin:0 0 12px}
+.chips{display:flex;flex-wrap:wrap;gap:7px;margin:0 0 6px;padding:0;list-style:none}
+.chips li{background:#ffffff1f;border:1px solid #ffffff38;border-radius:20px;padding:3px 11px;font-weight:800;font-size:.88rem}
+.hero figure{margin:0}.hero img{width:100%;border-radius:10px;display:block;border:3px solid #ffffff26}
+.hero figcaption{font-size:.74rem;color:#e8d6c2;margin-top:3px}
+.card.intro label{color:#fbf1e4;margin-top:12px}
+.card.intro input{max-width:420px}
+.card.intro .go{background:#f1c98f;color:#2a1d17;font-size:1.1rem;padding:12px 24px}
+.card.intro .msg.bad{color:#ffb4a8}
+.card.intro .src{color:#e0cdb8}
+/* ---- game ---- */
 .kicker{font-size:.78rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:var(--coral);margin:0}
 h2{margin:2px 0 10px;font-size:1.45rem}
 .teach{background:var(--soft);border-left:5px solid var(--teal);border-radius:9px;padding:10px 14px;margin:0 0 12px}.teach p{margin:4px 0}.teach b{color:var(--teal)}
+.words{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0 2px;padding:0;list-style:none;font-size:.88rem}
+.words li{background:#fff;border:1px dashed #c9b49a;border-radius:8px;padding:2px 9px}.words b{color:var(--ink)!important}
 .block{margin:14px 0;padding:14px;border-radius:12px;border:2px solid var(--line);background:#fff}
 .block.current{border-color:var(--ink);box-shadow:0 0 0 4px #1f2b3320}
 .block h3{margin:0 0 10px;font-size:1.06rem;line-height:1.35;font-weight:700}
 .block p{margin:6px 0}
-.event{background:#fbf9f4;border-style:dashed;border-color:#cdbf9a}.event.current{border-style:solid}
+.event{background:#fbf6ee;border-color:#c99c62}.event.current{border-color:#8a5a22;box-shadow:0 0 0 4px #c99c6233}
 .event-body p{margin:4px 0}
+.event-body .call{display:inline-block;background:#8a5a22;color:#fff;font-weight:900;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;border-radius:6px;padding:2px 8px;margin-bottom:4px}
 .doc{background:#fbf6ea;border:1px solid #e0d3b0;border-left:5px solid var(--coral);border-radius:9px;padding:10px 12px;margin:4px 0 10px}
 .doc .cap{display:block;font-size:.74rem;font-weight:900;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-bottom:2px}
-.doc q,.quote{font-style:italic}
+.quote{font-style:italic}
 .doc p{margin:4px 0}
+.doc ul{margin:4px 0;padding-left:20px}.doc li{margin:2px 0}
+.withpic{display:grid;grid-template-columns:1fr 260px;gap:14px;align-items:start}
+figure.pic{margin:0}figure.pic img{width:100%;display:block;border-radius:8px;border:1px solid var(--line)}
+figure.pic figcaption{font-size:.8rem;color:var(--muted);margin-top:4px;line-height:1.35}
+.credit{display:block;font-size:.72rem}
 .tablewrap{overflow-x:auto;margin:6px 0 10px}
 table{border-collapse:collapse;width:100%;font-size:.92rem;background:#fff}
 th,td{border:1px solid var(--line);padding:6px 8px;text-align:left;vertical-align:top}th{background:var(--soft)}
 .picked{margin:10px 0 4px;color:var(--muted)}.result{background:#f0efe8;border-radius:9px;padding:9px 12px}.result p{margin:4px 0}
-.tag{display:inline-block;font-weight:900;font-size:.8rem;border-radius:12px;padding:2px 9px;margin-right:6px}.tag.up{background:#dcefe2;color:var(--green)}.tag.down{background:#f6dcd8;color:var(--bad)}.tag.flat{background:#ebe9e0;color:var(--ink)}
+.tag{display:inline-block;font-weight:900;font-size:.8rem;border-radius:12px;padding:2px 9px;margin:0 6px 4px 0}.tag.up{background:#dcefe2;color:var(--green)}.tag.down{background:#f6dcd8;color:var(--bad)}.tag.flat{background:#ebe9e0;color:var(--ink)}
 .qlabel{font-size:.75rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:var(--teal);margin:0 0 4px}
 .choices{display:grid;gap:8px}
 @media(min-width:700px){.q .choices{grid-template-columns:1fr 1fr}}
@@ -44,34 +74,34 @@ button{font:inherit;cursor:pointer;border-radius:10px;min-height:46px}
 .go{margin-top:12px;background:var(--teal);color:#fff;border:0;padding:11px 18px;font-weight:900}
 button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid #2f7dbd;outline-offset:2px}
 .answered{font-weight:800;color:var(--green);margin:4px 0}.why{margin:2px 0;color:var(--muted)}
-.msg{min-height:1.3em;font-weight:750;margin:8px 0 0}.msg.bad{color:var(--bad)}.msg.good{color:var(--green)}
+.msg{min-height:1.3em;font-weight:750;margin:8px 0 0;scroll-margin-bottom:24px}.msg.bad{color:var(--bad)}.msg.good{color:var(--green)}
 label{display:block;font-weight:850;margin:14px 0 4px}.stem{margin:0 0 4px;color:var(--muted);font-size:.92rem}
 input,textarea{width:100%;font:inherit;border:2px solid #cfcdbf;border-radius:9px;padding:10px;background:#fff;color:var(--ink)}
-.steps{display:grid;gap:6px;margin:10px 0;padding:0;list-style:none}.steps li{background:#f0efe8;border-radius:9px;padding:8px 12px;font-weight:700}
-.pair{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:10px 0}.pair>div{border-radius:10px;padding:8px 10px;font-size:.93rem;background:var(--soft)}.pair>div>b:first-child{display:block}
-.block h3 .doc,.block h3 .pair,.block h3 .tablewrap{font-weight:400;font-size:1rem}.block h3 .doc b,.block h3 .pair b{font-weight:800}
-@media(max-width:640px){.pair{grid-template-columns:1fr}}
+.block h3 .doc,.block h3 .tablewrap,.block h3 .withpic{font-weight:400;font-size:1rem}.block h3 .doc b{font-weight:800}
+.ending{background:#2a1d17;color:#fbf1e4;border-radius:12px;padding:12px 16px;margin:0 0 10px}.ending p{margin:5px 0}.ending b{color:#f1c98f}
 .welcome{background:#e6f1ea;color:var(--green);font-weight:800;border-radius:9px;padding:8px 12px;margin:0 0 10px}
 .foot{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-top:14px;color:var(--muted);font-size:.85rem}
 .foot button{background:#ebe9e0;border:0;padding:8px 12px;font-weight:800;color:var(--ink)}
 .src{font-size:.8rem;color:var(--muted)}
-.big{font-size:1.15rem}
+@media(max-width:760px){.hero,.withpic{grid-template-columns:1fr}.hero figure{max-width:420px}}
 @media print{.hud,.foot,.go{display:none}}
 </style>
-<script src="../../shared/assignments.js?v=20261103g"></script>
+<script src="../../shared/assignments.js?v=20261103p1"></script>
 <script src="../../shared/turnin.js?v=20261103d"></script>
 <script src="../../shared/unit-game.js?v=20261103c"></script>
 </head><body>
 <header>
-  <p class="k">U.S. History · Part 1 · Unit 4 · Day 2</p>
-  <h1>Labor: How Did Workers Fight Back?</h1>
-  <p class="std"><b>SS.9-12.US.14</b> Labor movements and government actions shaping society</p>
-  <p class="std"><b>Goal:</b> Explain how workers fought for better conditions in the 1880s–1890s and how government and public opinion responded. · About 25 minutes.</p>
+  <p class="k">U.S. History · Part 1 · Unit 4 · Day 2 · Labor: How Did Workers Fight Back?</p>
+  <details><summary>Standard &amp; goal</summary>
+    <p><b>SS.9-12.US.14</b> Analyze how labor and government actions during the Progressive Era influenced American economic systems, urbanization, and cultural development.</p>
+    <p><b>Goals:</b> I can explain why workers formed unions and went on strike in the 1880s and 1890s. I can analyze what happened at Haymarket, Homestead, and Pullman, and how the government responded. I can explain how public opinion affected whether workers won or lost their fights.</p>
+  </details>
 </header>
 <div class="hud" aria-label="Progress">
   <span id="progressText">0 checks done</span>
   <div class="bar" aria-hidden="true"><span id="progressFill"></span></div>
-  <span class="pill meter">Public support: <span class="track" aria-hidden="true"><span id="meterFill" style="width:50%"></span></span> <span id="meterNum">5/10</span></span>
+  <span class="pill meter">Public: <span class="track" aria-hidden="true"><span id="pubFill" style="width:50%"></span></span> <i id="pubWord">Mixed</i></span>
+  <span class="pill meter u">Union: <span class="track" aria-hidden="true"><span id="uniFill" style="width:50%"></span></span> <i id="uniWord">Mixed</i></span>
 </div>
 <main>
   <p class="welcome" id="welcome" hidden></p>
@@ -79,134 +109,151 @@ input,textarea{width:100%;font:inherit;border:2px solid #cfcdbf;border-radius:9p
   <div class="foot"><span>Progress saves on this device. Your teacher sees your work after you turn it in.</span><button type="button" id="restartBtn">Start over</button></div>
 </main>
 <script>
+// Meter changes are shown in words, never numbers.
 const T = (cls, txt) => `<span class="tag ${cls}">${txt}</span>`;
 const doc = (cap, body) => `<div class="doc"><span class="cap">${cap}</span>${body}</div>`;
+const pic = (src, alt, cap, credit) => `<figure class="pic"><img src="${src}" alt="${alt}" loading="lazy"><figcaption>${cap}<span class="credit">${credit}</span></figcaption></figure>`;
+const word = n => n <= 2 ? "Very low" : n <= 4 ? "Low" : n <= 6 ? "Mixed" : n <= 8 ? "Strong" : "Very strong";
+
+// When a wrong answer shows a hint, make sure the hint is on screen.
+new MutationObserver(() => {
+  const m = document.querySelector("#app .block.current .msg.bad");
+  if (m && !m.dataset.seen) { m.dataset.seen = "1"; const r = m.getBoundingClientRect(); if (r.bottom > innerHeight - 10 || r.top < 60) m.scrollIntoView({ behavior: "smooth", block: "nearest" }); }
+}).observe(document.getElementById("app"), { childList: true, subtree: true, attributes: true, attributeFilter: ["class"] });
+
 UnitGame.start({
-  key: "ush-p1u4-d2-labor-v1",
+  key: "ush-p1u4-d2-labor-v2",
   assignmentId: "ush-p1u4-d2-labor",
-  title: "U.S. History · Unit 4 · Day 2 · Labor: How Did Workers Fight Back?",
+  title: "U.S. History · Part 1 · Unit 4 · Day 2 · Labor: How Did Workers Fight Back?",
   standard: "SS.9-12.US.14",
   oldApi: "https://fynn-class-assignment-submissions-20261024.neotboy.chatgpt.site/api/submit",
-  startFx: { support: 5 },
-  clampFx: fx => { fx.support = Math.max(0, Math.min(10, fx.support)); },
+  lockSeconds: 3,
+  startFx: { pub: 5, uni: 5 },
+  clampFx: fx => { ["pub", "uni"].forEach(k => fx[k] = Math.max(0, Math.min(10, fx[k] || 0))); },
   hud: st => {
-    const s = st.fx.support || 0;
-    document.getElementById("meterFill").style.width = (s * 10) + "%";
-    document.getElementById("meterNum").textContent = s + "/10";
+    const p = st.fx.pub ?? 5, u = st.fx.uni ?? 5;
+    document.getElementById("pubFill").style.width = (p * 10) + "%";
+    document.getElementById("uniFill").style.width = (u * 10) + "%";
+    document.getElementById("pubWord").textContent = word(p);
+    document.getElementById("uniWord").textContent = word(u);
   },
   startLabel: "Walk into the union hall",
-  introHtml: `<p class="kicker">Chicago · 1886</p><h2>You just joined the union</h2>
-    <p>You're a young worker who helps lead a <b>union</b> (a group of workers who team up to bargain with the boss). Over the next 8 years, three huge strikes will test whether workers can win.</p>
-    <div class="pair"><div><b>1886 · Haymarket</b>Chicago. Workers want an 8-hour day.</div><div><b>1892 · Homestead</b>A Pennsylvania steel mill. Pay cuts and armed guards.</div></div>
-    <div class="pair"><div><b>1894 · Pullman</b>A railroad company town. Trains stop nationwide.</div><div><b>Your meter</b>Your advice changes how much the <b>public</b> supports workers.</div></div>
-    <ul class="steps"><li>1. Read each source and answer the check.</li><li>2. Give your advice at 3 big moments.</li><li>3. Write 2 short answers and turn in.</li></ul>
-    <p class="src">You are a made-up character. The strikes, people, dates, and quotes are real.</p>`,
+  introHtml: `<div class="hero"><div>
+      <p class="kick">Chicago · 1886</p>
+      <h2>Union Leader</h2>
+      <p class="sub">Haymarket to Pullman</p>
+      <p class="hook">You help lead a union. Three huge strikes are coming. Every choice costs you something.</p>
+      <ul class="chips"><li>3 tough calls</li><li>7 quick checks</li><li>2 short answers</li><li>About 25 min</li></ul>
+      <p class="src">Watch 2 meters: the <b>public</b> (do outsiders back you?) and your <b>union</b> (do members stick with you?). You're made up. The strikes and people are real.</p>
+    </div>
+    <figure><img src="haymarket.jpg" alt="Engraving: a bomb explodes among a line of police at a crowded night rally in Chicago." ><figcaption>Haymarket Square, 1886 · Harper's Weekly</figcaption></figure></div>`,
   scenes: [
-    { kicker: "Part 1 of 3 · Chicago, 1886", title: "The Fight for Eight Hours",
-      teach: `<p>In the 1880s, many factory workers worked <b>10 to 12 hours a day, six days a week</b>. There was no minimum wage and few safety rules.</p>
-        <p>A <b>strike</b> is when workers stop working until the boss meets their demands. Workers across the country planned strikes for <b>May 1, 1886</b>.</p>`,
+    { kicker: "Strike 1 of 3 · Chicago, 1886", title: "Haymarket: The Fight for Eight Hours",
+      teach: `<p>Most factory workers put in <b>10–12 hours a day, 6 days a week</b>. On May 1, 1886, hundreds of thousands went on <b>strike</b> for an 8-hour day.</p>
+        <p class="quote">Their slogan: "Eight hours for work, eight hours for rest, eight hours for what we will."</p>
+        <ul class="words"><li><b>union</b> = workers who team up to bargain with the boss</li><li><b>strike</b> = workers stop working until the boss gives in</li></ul>`,
       blocks: [
-        { type: "q", id: "h1", std: "US.14", short: "Haymarket demand: 8-hour day", label: "Source check",
-          prompt: doc("Labor slogan, 1880s", `<p class="quote">"Eight hours for work, eight hours for rest, eight hours for what we will."</p>`) + "What were these workers demanding?",
-          options: ["An 8-hour workday", "The right to vote", "Free land in the West", "Higher taxes on farms"],
-          hint: "Read the slogan again. What did they want work limited to?", why: "Workers wanted the workday cut to 8 hours, so they had time to rest and live." },
-        { type: "note", html: doc("Timeline · May 1886", `<p><b>May 1:</b> Hundreds of thousands of workers strike for an 8-hour day.</p>
-          <p><b>May 3:</b> At the McCormick Harvesting Machine Company in Chicago, police shoot at strikers. At least two workers are killed.</p>
-          <p><b>May 4:</b> Workers hold a rally at <b>Haymarket Square</b> to protest the killings. As police move in to end the rally, someone throws a <b>bomb</b>. Gunfire follows. <b>Seven police officers and at least four civilians die.</b></p>
-          <p>Nobody ever found out who threw the bomb.</p>`) },
-        { type: "q", id: "h2", std: "US.14", short: "Purpose of the Haymarket rally",
-          prompt: "Why did workers hold the rally at Haymarket Square on May 4?",
-          options: ["To protest police killing strikers the day before", "To celebrate winning the 8-hour workday law", "To choose a new mayor to run the whole city of Chicago", "To protest new taxes on Chicago's factories"],
-          hint: "Look at what happened on May 3 in the timeline.", why: "The rally protested the police shootings at McCormick the day before." },
-        { type: "event", id: "e1", short: "After the bomb", html: `<p><b>May 5, 1886.</b> Newspapers blame ALL unions for the bomb. People are scared. Your union has to say something.</p><p>What do you advise?</p>`,
+        { type: "q", id: "h1", std: "US.14", short: "Haymarket drawing and public opinion", label: "Picture check",
+          prompt: `<div class="withpic">${doc("What happened · May 3–4, 1886", `<ul><li><b>May 3:</b> Police shoot strikers at a Chicago factory. At least 2 die.</li><li><b>May 4:</b> Workers rally in <b>Haymarket Square</b> to protest. Police march in to break it up. Someone throws a <b>bomb</b>. Gunfire follows.</li><li>7 police officers and at least 4 other people die. <b>No one ever proved who threw the bomb.</b></li></ul>`)}
+            ${pic("haymarket.jpg", "Engraving: a bomb explodes among police while a man on a wagon raises his arm and men in the crowd fire pistols.", "This drawing ran in a national magazine 11 days later.", "Thure de Thulstrup, Harper's Weekly, May 15, 1886 · Public domain, via Wikimedia Commons")}</div>
+            Readers across the country saw this drawing, not the real scene. What would it make most of them think?`,
+          options: ["The crowd planned an attack, so unions are dangerous", "The police went too far, so they should be punished", "The bomb was an accident, so nobody is to blame", "The rally was peaceful, so workers deserve the 8-hour day"],
+          hint: "Look at the man on the wagon and the men in front with pistols. Who does the artist make look guilty?",
+          why: "The drawing shows the speaker and crowd as attackers. Pictures like this made many Americans fear unions, even though no one proved who threw the bomb." },
+        { type: "event", id: "e1", short: "After the bomb", html: `<span class="call">Your call</span><p><b>May 5, 1886.</b> Newspapers blame ALL unions. Police are arresting labor leaders. Reporters want a statement from your union.</p>`,
           choices: [
-            { label: "Condemn the bombing and keep pushing for 8 hours peacefully", fx: { support: 1 }, result: `<p>${T("up", "+1 public support")}Some readers notice. In real life, Terence Powderly, leader of the biggest union (the Knights of Labor), also spoke out against the bombers. But most papers still lumped all unions together.</p>` },
-            { label: "Hold a bigger, angrier march the next day", fx: { support: -2 }, result: `<p>${T("down", "−2 public support")}A scared public sees more danger. In real life, Chicago police raided union halls and arrested hundreds of people in the weeks after the bomb.</p>` },
-            { label: "Say nothing and wait for it to blow over", fx: { support: -1 }, result: `<p>${T("down", "−1 public support")}Silence lets the newspapers tell the whole story. It did not blow over.</p>` }
+            { label: "Speak out against the bombing and keep pushing for 8 hours peacefully", fx: { pub: 1, uni: -1 }, result: `<p>${T("up", "Public ▲")}${T("down", "Union ▼")}Some readers respect it. But members whose friends were just arrested feel you threw them under the bus. A few quit. In real life, Terence Powderly, head of the biggest union (the Knights of Labor), spoke out against the bombers. His union still lost hundreds of thousands of members over the next few years.</p>` },
+            { label: "Raise money for the arrested men's lawyers", fx: { pub: -1, uni: 1 }, result: `<p>${T("down", "Public ▼")}${T("up", "Union ▲")}Members see you stand by your own. But many newspaper readers decide you're defending bombers. In real life, labor groups did raise money for the defense. It didn't save the men.</p>` },
+            { label: "Hold a bigger, angrier march the next day", fx: { pub: -2, uni: 1 }, result: `<p>${T("down", "Public ▼▼")}${T("up", "Union ▲")}Your members are fired up. A scared public sees more danger. In real life, Chicago police raided union halls and arrested hundreds of people in the weeks after the bomb.</p>` }
           ] },
-        { type: "note", html: doc("What happened next", `<p><b>The trial:</b> Eight <b>anarchists</b> (people who want no government at all) were convicted. No evidence tied them to the bomb. <b>Seven were sentenced to death</b> and one to 15 years in prison. Four were hanged in 1887, and one died by suicide in jail.</p>
-          <p>In 1893, Illinois Governor John Peter Altgeld <b>pardoned</b> (freed) the three still in prison. He said the trial had been unfair.</p>
-          <p><b>The backlash:</b> Newspapers painted labor leaders as violent anarchists. Many people blamed German and Bohemian immigrants. Employers used the fear to fight unions. The Knights of Labor lost many members.</p>`) },
-        { type: "q", id: "h3", std: "US.14", short: "Haymarket trial and public fear",
-          prompt: "What does the Haymarket trial show about public opinion in 1886?",
-          options: ["Fear made people accept convictions on weak evidence", "Most people trusted unions more after the bombing", "Courts sided with workers whenever there was violence", "The public did not care about the bombing at all"],
-          hint: "What did the governor say about the trial in 1893? What tied the men to the bomb?", why: "There was no evidence tying the eight men to the bomb, but public fear led to harsh sentences anyway." },
-        { type: "q", id: "h4", std: "US.14", short: "How employers used Haymarket",
-          prompt: "How did employers and officials use Haymarket?",
-          options: ["They used the fear to crack down on unions", "They used it to raise workers' pay rates", "They used it to pass an 8-hour day law", "They used it to welcome more new immigrants to Chicago"],
-          hint: "Reread \"The backlash\" in the source card.", why: "Employers and officials used fear of violence to weaken unions. The 8-hour movement lost ground." }
+        { type: "note", html: doc("The trial", `<p><b>Eight anarchists</b> (people who want no government at all) were convicted. No evidence tied them to the bomb.</p>
+          <ul><li><b>7 got the death sentence.</b> 1 man, Oscar Neebe, got 15 years.</li>
+          <li><b>1887:</b> 4 were hanged. 1 killed himself in jail. The governor changed the other 2 death sentences to life in prison.</li>
+          <li><b>1893:</b> Governor John Peter Altgeld <b>pardoned</b> (freed) the 3 still in prison: the 2 serving life, plus Neebe. He said the trial had been unfair.</li></ul>`) },
+        { type: "q", id: "h2", std: "US.14", short: "Haymarket trial and public fear",
+          prompt: "No evidence tied the eight men to the bomb, yet seven got the death sentence. What does that tell you about 1886?",
+          options: ["People's fear was strong enough to beat weak evidence", "Courts usually protected workers after violence broke out", "Most people blamed the police, not unions, for the deaths", "The jury knew who threw the bomb and punished his friends"],
+          hint: "There was no proof, but the punishment was harsh anyway. What feeling was driving the public and the jury?",
+          why: "People were so afraid of radicals and unions that weak evidence was enough. Employers used that fear to fight unions for years." }
       ] },
-    { kicker: "Part 2 of 3 · Homestead, Pennsylvania, 1892", title: "Steel and Guns",
-      teach: `<p>The Homestead steel mill was owned by Andrew Carnegie and run by his manager, <b>Henry Clay Frick</b>.</p>
-        <p>A <b>lockout</b> is when the owner shuts workers out of their jobs. <b>Pinkertons</b> were armed guards from a private detective company that businesses hired.</p>`,
+    { kicker: "Strike 2 of 3 · Homestead, Pennsylvania, 1892", title: "Homestead: Steel and Guns",
+      teach: `<p>The Homestead steel mill was owned by <b>Andrew Carnegie</b> and run by his manager, <b>Henry Clay Frick</b>.</p>
+        <ul class="words"><li><b>lockout</b> = the owner shuts workers out of their jobs</li><li><b>Pinkertons</b> = armed guards a company could hire</li><li><b>militia</b> = state soldiers the governor calls up in an emergency</li></ul>`,
       blocks: [
-        { type: "note", html: doc("Homestead, summer 1892", `<p>Frick wanted to cut pay and get rid of the union. When the union said no, he <b>locked the workers out</b>. He built a tall fence with barbed wire around the mill and hired <b>300 Pinkerton guards</b>.</p>
-          <p>On <b>July 6, 1892</b>, the Pinkertons came up the river on barges at night. Workers and their families met them at the riverbank. A gun battle broke out. <b>About 10 people died</b>, both workers and guards.</p>
-          <p>Days later, the governor sent about <b>8,000 state militia</b> soldiers. They guarded the mill so it could reopen with new, non-union workers.</p>`) },
-        { type: "q", id: "s1", std: "US.14", short: "Lockout definition",
-          prompt: "Frick shut the union workers out of the mill. What is that called?",
-          options: ["A lockout", "A strike", "A boycott", "A pardon"],
-          hint: "Check the word box at the top. Who did the shutting out, the owner or the workers?", why: "When the owner keeps workers out, it's a lockout. A strike is when workers choose to stop working." },
-        { type: "q", id: "s2", std: "US.14", short: "Government sided with company at Homestead",
-          prompt: "Based on the source, who did the state government help at Homestead?",
-          options: ["The company, by sending soldiers to guard the mill", "The workers, by arresting all the Pinkerton guards", "Neither side, because it stayed out of the fight", "The union, by passing a law against pay cuts"],
-          hint: "Reread the last paragraph. What did the militia protect?", why: "The militia guarded the mill so it could reopen with new workers. That helped the company win." },
-        { type: "event", id: "e2", short: "Attack on Frick", html: `<p><b>July 23, 1892.</b> A man named <b>Alexander Berkman</b> bursts into Frick's office, shoots him, and stabs him. Frick survives. Berkman is an anarchist from New York. He is <b>not</b> a steelworker.</p><p>Reporters ask your union what you think. What do you say?</p>`,
+        { type: "note", html: `<div class="withpic">${doc("Homestead, summer 1892", `<ul><li>Frick cut pay and wanted the union gone. When the union said no, he shut the workers out and built a fence topped with barbed wire.</li>
+          <li><b>July 6:</b> 300 Pinkerton guards came up the river on barges (flat boats) at night. Workers and their families met them on the riverbank. A gun battle broke out. About 10 people died, workers and guards.</li>
+          <li>Days later, the governor sent about <b>8,000 militia</b> soldiers. The mill reopened with new, non-union workers.</li></ul>`)}
+          ${pic("homestead.jpg", "Magazine cover engraving: a large crowd, many holding rifles, outside the Homestead mill as the Pinkerton guards leave the barges.", "From a magazine cover. Its caption: the Pinkerton men leaving the barges after they surrendered.", "W. P. Snyder, Harper's Weekly, July 16, 1892 · Library of Congress, public domain")}</div>` },
+        { type: "q", id: "s1", std: "US.14", short: "Lockout vs. strike (new case)",
+          prompt: `${doc("A modern case", `<p>A warehouse boss in Cedar Rapids tells workers: <span class="quote">"Take the pay cut, or stay home. Your badges won't open the doors until you sign."</span></p>`)}Which word fits this case, and why?`,
+          options: ["Lockout, since the boss is the one keeping people from working", "Strike, since the workers are the ones who refuse to come in and work", "Boycott, since the workers will stop buying from the company", "Injunction, since a judge is ordering the workers to stay home"],
+          hint: "Who made the move here: the workers or the boss? Who is stopping the work?",
+          why: "The boss is stopping the work, so it's a lockout, just like Frick at Homestead. In a strike, the workers choose to stop." },
+        { type: "q", id: "s2", std: "US.14", short: "How the militia helped Frick win",
+          prompt: "The militia didn't fight a battle with the workers. So how did it still help Frick win?",
+          options: ["With soldiers at the gate, the work never had to stop", "It made both sides sit down and agree on a fair pay deal", "It took the Pinkertons' guns so nobody else got hurt", "It forced Frick to rehire the old workers at old pay"],
+          hint: "What does a strike need to work? It needs the mill to STOP. What did the soldiers let happen instead?",
+          why: "A strike only works if the work stops. With soldiers guarding the gates, Frick could bring in new workers, so the union lost its power." },
+        { type: "event", id: "e2", short: "Attack on Frick", html: `<span class="call">Your call</span><p><b>July 23, 1892.</b> <b>Alexander Berkman</b> bursts into Frick's office, shoots him, and stabs him. Frick survives. Berkman is an anarchist from New York. He is <b>not</b> a steelworker.</p><p>Reporters ask your union what you think.</p>`,
           choices: [
-            { label: "\"He is not one of us. Violence hurts our cause.\"", fx: { support: 1 }, result: `<p>${T("up", "+1 public support")}A clear message helps a little. But in real life, many people still linked the attack to the strikers. Sympathy swung toward Frick.</p>` },
-            { label: "\"Frick had it coming.\"", fx: { support: -3 }, result: `<p>${T("down", "−3 public support")}Now the union looks like it supports murder. Newspapers run with it. This is exactly how the public turned against the strikers.</p>` },
-            { label: "\"No comment.\"", fx: { support: -1 }, result: `<p>${T("down", "−1 public support")}People fill in the silence with their own guesses. Most guess the worst.</p>` }
-          ] },
-        { type: "q", id: "s3", std: "US.14", short: "Why Berkman's attack hurt strikers",
-          prompt: "Why did Berkman's attack hurt the strikers, even though he wasn't a steelworker?",
-          options: ["People linked the violence to the strike and lost sympathy", "It forced Frick to give all the steelworkers a large pay raise", "It caused the state militia to leave Homestead at once", "It made Carnegie fire Frick and rehire the union workers"],
-          hint: "Think about how the public saw the strike after the attack.", why: "The public connected the attack to the strike. By November 1892 the union was crushed, and the mill stayed non-union for decades." }
+            { label: "\"He is not one of us. Violence hurts our cause.\"", fx: { pub: 1, uni: -1 }, result: `<p>${T("up", "Public ▲")}${T("down", "Union ▼")}A clear message helps a little. But some members say, "Frick brought 300 armed guards. Why defend him?" In real life, strike leaders said Berkman had nothing to do with them. People started feeling sorry for Frick instead.</p>` },
+            { label: "Only talk about the workers the Pinkertons killed", fx: { pub: -1, uni: 1 }, result: `<p>${T("down", "Public ▼")}${T("up", "Union ▲")}Members like that you didn't back down. But dodging the question looks like you're hiding something.</p>` },
+            { label: "\"Frick had it coming.\"", fx: { pub: -3, uni: 1 }, result: `<p>${T("down", "Public ▼▼▼")}${T("up", "Union ▲")}A few angry members cheer. Now the union looks like it supports murder. This is how the public turned against the strikers. By November the strike was over and the union was crushed.</p>` }
+          ] }
       ] },
-    { kicker: "Part 3 of 3 · Pullman, Illinois, 1894", title: "The Company Town",
-      teach: `<p>George Pullman's company built fancy railroad sleeping cars. Workers lived in <b>Pullman</b>, a <b>company town</b>. The company owned the houses, the stores, and even the church.</p>
-        <p>A <b>boycott</b> is refusing to use or handle something as a protest. An <b>injunction</b> is a court order telling someone to stop doing something.</p>`,
+    { kicker: "Strike 3 of 3 · Pullman, Illinois, 1894", title: "Pullman: The Company Town",
+      teach: `<p>George Pullman's company built fancy railroad sleeping cars. Its workers lived in <b>Pullman</b>, a <b>company town</b>: the company owned the houses and the stores.</p>
+        <ul class="words"><li><b>boycott</b> = refusing to use or handle something as a protest</li><li><b>sympathy strike</b> = workers stop work to back up OTHER workers' strike</li><li><b>injunction</b> = a court order to stop doing something</li></ul>`,
       blocks: [
-        { type: "note", html: doc("Pullman, spring 1894", `<p>In 1893 the economy crashed. Pullman <b>cut wages about 25%</b>, but he did <b>not</b> lower rent in the company town. Rent came straight out of workers' paychecks. Some families had only a few dollars left for food.</p>
-          <p>Workers went on strike. <b>Eugene Debs</b> and his <b>American Railway Union</b> joined them. Railroad workers refused to move any train with a Pullman car. Trains stopped across much of the country.</p>`) },
-        { type: "q", id: "p1", std: "US.14", short: "Cause of the Pullman strike",
-          prompt: "Why were Pullman workers so angry?",
-          options: ["Pay was cut, but rent in the company town stayed the same", "Pullman moved the whole factory to another country overseas", "The company banned workers from riding on its trains", "Debs ordered them to stop working for no real reason"],
-          hint: "Look at what Pullman cut and what he did NOT cut.", why: "Wages dropped about 25%, but rent stayed the same, so families had almost nothing left." },
-        { type: "event", id: "e3", short: "Court order to stop the boycott", html: `<p><b>July 1894.</b> The boycott has spread. Trains carrying U.S. mail are stuck. A federal court issues an <b>injunction</b> ordering the union to stop.</p><p>What do you advise Eugene Debs?</p>`,
+        { type: "note", html: doc("Pullman, 1893–1894", `<ul><li>In 1893 the economy crashed. Pullman cut pay about <b>25%</b> but did <b>not</b> lower rent. Rent came straight out of paychecks. Some families had almost nothing left for food.</li>
+          <li>Pullman workers went on strike. <b>Eugene Debs</b> and his <b>American Railway Union</b> backed them with a sympathy strike: railroad workers refused to move any train with a Pullman car.</li>
+          <li>Trains stopped across much of the country.</li></ul>`) },
+        { type: "q", id: "p1", std: "US.14", short: "Why the company town made it worse",
+          prompt: "Workers in a regular town also got pay cuts in 1893. Why did living in a <b>company town</b> make it hit harder?",
+          options: ["The same company cut their pay and also set their rent", "Company towns charged higher taxes than any other city", "Workers there were not allowed to quit their jobs and move away", "The town was too far from any railroad to find work"],
+          hint: "In a regular town, your landlord and your boss are different people. In Pullman, who was both?",
+          why: "Pullman was the boss AND the landlord. He cut pay but kept rent the same, and took the rent right out of paychecks." },
+        { type: "event", id: "e3", short: "Court order to stop the boycott", html: `<span class="call">Your call</span><p><b>July 1894.</b> Trains carrying U.S. mail are stuck. A federal court issues an <b>injunction</b> ordering the union to stop the boycott. Debs asks for your advice.</p>`,
           choices: [
-            { label: "Obey the court and end the boycott", fx: { support: 1 }, result: `<p>${T("up", "+1 public support")}Some people respect obeying the law. But in real life, Debs kept the boycott going.</p>` },
-            { label: "Keep the boycott going no matter what", fx: { support: -2 }, result: `<p>${T("down", "−2 public support")}This is what Debs actually did. Many people turned against the strike when the trains and mail stopped.</p>` },
-            { label: "Ask President Cleveland to step in and settle it", fx: { support: 0 }, result: `<p>${T("flat", "No change")}President Cleveland did step in, but not to settle it fairly. Read what happened next.</p>` }
+            { label: "Obey the court and end the boycott", fx: { pub: 1, uni: -2 }, result: `<p>${T("up", "Public ▲")}${T("down", "Union ▼▼")}Some people respect obeying the law. But the Pullman workers are left on their own, and members feel you folded. In real life, Debs did NOT obey.</p>` },
+            { label: "Keep the boycott going no matter what", fx: { pub: -2, uni: 1 }, result: `<p>${T("down", "Public ▼▼")}${T("up", "Union ▲")}This is what Debs really did. Members stand together, but many people turn against the strike when the trains and mail stop.</p>` },
+            { label: "Ask President Cleveland to step in and make a deal", fx: { pub: 0, uni: -1 }, result: `<p>${T("flat", "Public: no change")}${T("down", "Union ▼")}Members wonder why you're waiting on the president. And Cleveland did step in, but not to make a deal. See what happened next.</p>` }
           ] },
-        { type: "note", html: doc("How Pullman ended", `<p>President <b>Grover Cleveland</b> sent <b>federal troops</b> to Chicago. He said the government had to protect the <b>U.S. mail</b> and trade between states.</p>
-          <p>Riots broke out. About 30 people were killed. The strike was crushed. <b>Debs went to jail for six months</b> for ignoring the court order.</p>`) },
-        { type: "q", id: "p2", std: "US.14", short: "Cleveland's reason for troops",
-          prompt: "What reason did President Cleveland give for sending troops?",
-          options: ["Protecting the U.S. mail", "Protecting Pullman's profits", "Stopping a foreign invasion", "Enforcing an 8-hour day law"],
-          hint: "Reread the first sentence of \"How Pullman ended.\"", why: "Cleveland said the trains carried U.S. mail, so the federal government had to keep them moving." },
-        { type: "q", id: "p3", std: "US.14", short: "Pattern: government helped employers",
-          prompt: `<div class="tablewrap"><table><tr><th>Strike</th><th>What the government did</th><th>Result for the union</th></tr>
+        { type: "note", html: `<div class="withpic">${doc("How Pullman ended", `<ul><li>President <b>Grover Cleveland</b> sent <b>federal troops</b> to Chicago. He said the U.S. mail and trade between states had to keep moving.</li>
+          <li>Illinois Governor Altgeld said the troops weren't needed. Cleveland sent them anyway.</li>
+          <li>Riots broke out. About 30 people were killed. The strike was crushed. <b>Debs went to jail for 6 months</b> for ignoring the court order.</li></ul>`)}
+          ${pic("pullman.jpg", "Photo: rows of soldiers stand in front of a large brick building while a crowd watches.", "State soldiers came too. Here, Illinois National Guard troops (state militia) guard the Arcade Building in the town of Pullman, 1894.", "Photo by Pullman Company staff, 1894 · Public domain, via Wikimedia Commons")}</div>` },
+        { type: "q", id: "p2", std: "US.14", short: "Why Cleveland could send troops",
+          prompt: "Illinois's governor didn't want the troops. Why could President Cleveland send them anyway?",
+          options: ["His reason was a national job that one state couldn't block", "A president can take over any state's police whenever he wants", "Pullman paid the U.S. Army to guard his factory and his town", "The railroad workers themselves asked the army to come in"],
+          hint: "What reason did Cleveland give? Is that a job for one state or for the whole country?",
+          why: "Mail and trade between states belong to the national government. Cleveland used that power, and it helped the railroads beat the union." },
+        { type: "q", id: "p3", std: "US.14", short: "Pattern across all three strikes",
+          prompt: `<div class="tablewrap"><table><tr><th>Strike</th><th>What the government did</th><th>What happened to the union</th></tr>
             <tr><td>Haymarket 1886</td><td>Police raids, harsh trial</td><td>Unions weakened</td></tr>
             <tr><td>Homestead 1892</td><td>State militia guarded the mill</td><td>Union crushed</td></tr>
             <tr><td>Pullman 1894</td><td>Court order + federal troops</td><td>Strike crushed, Debs jailed</td></tr></table></div>What pattern shows up in all three strikes?`,
-          options: ["Government power ended up helping employers", "Workers won almost every demand quickly", "Presidents always refused to get involved", "Owners gave in as soon as newspapers took notice"],
-          hint: "Read down the middle column. Whose side did the government's actions help?", why: "In all three, police, soldiers, or courts helped employers beat the unions." },
-        { type: "q", id: "p4", std: "US.14", short: "What helped public support",
-          prompt: "Look back at your choices and the real events. Which action did the most to help workers keep public support?",
-          options: ["Staying peaceful and speaking out against violence", "Hiring armed guards to protect every union rally and march", "Refusing to talk to reporters or newspapers", "Threatening owners in loud public speeches"],
-          hint: "Think about what turned the public AGAINST workers at Haymarket and Homestead.", why: "Violence, even by outsiders, turned the public against workers. Peaceful, clear messages kept more support." }
+          options: ["Police, soldiers, and courts ended up on the owners' side", "Workers won most of their demands within a year", "Presidents and governors refused to get involved", "Owners gave in once newspapers started taking the workers' side"],
+          hint: "Read down the middle column. Whose side did each action help?",
+          why: "Every time, police, soldiers, or courts helped employers beat the union. That's a big reason workers lost in the 1890s." }
       ] }
   ],
   finale: {
-    title: "Did Workers Win or Lose?",
-    report: st => `<p><b>Your public support meter ended at ${st.fx.support}/10.</b> In real life, workers lost all three of these strikes. But the fight continued. Railroad workers won an 8-hour day by law in 1916, and a 1938 federal law moved many workers to a 40-hour week by 1940.</p><p>Answer both in 1–2 full sentences.</p>`,
+    title: "How Did Your Union Do?",
+    report: st => {
+      const p = st.fx.pub ?? 5, u = st.fx.uni ?? 5;
+      const story = p >= 6 ? "<b>The public mostly trusted you, but your union got smaller.</b> Members felt you gave in too often."
+        : u >= 6 ? "<b>Your members stuck with you, but the public turned against workers.</b> Without outside support, you had little cover when the government stepped in."
+        : "<b>You tried to keep both sides happy, and neither meter ended strong.</b> The public wasn't sure about you, and members were restless.";
+      const squeeze = "That squeeze was real: moves that pleased the public often cost members, and the other way around.";
+      return `<div class="ending"><p>${story} ${squeeze}</p><p><b>In real life:</b> workers lost all three strikes. But the fight kept going. Railroad workers won an 8-hour day by law in 1916, and a 1938 law moved many workers to a 40-hour week by 1940.</p></div><p>Answer both in 1–2 full sentences.</p>`;
+    },
     prompts: [
-      { id: "gov", short: "Government action in one strike", label: "1. Pick ONE strike (Haymarket, Homestead, or Pullman). What did the government do, and did it help or hurt the workers?", stem: "In the ___ strike, the government ___. This hurt/helped workers because ___.", min: 70, mustAll: [["haymarket", "homestead", "pullman"], ["because", "since", "so "]], mustMsg: "In answer 1, name the strike AND explain why (use \"because\")." },
-      { id: "public", short: "How public opinion mattered", label: "2. How did public opinion help decide whether workers won or lost? Use one example from today.", stem: "Public opinion mattered because ___. For example, ___.", min: 70, mustAll: [["public", "people", "newspaper", "opinion", "support", "sympath"], ["because", "since", "example", "when"]], mustMsg: "In answer 2, talk about the public (or newspapers) and give an example." }
+      { id: "gov", short: "Government action in one strike", label: "1. Pick ONE strike (Haymarket, Homestead, or Pullman). What did the government do, and did it help or hurt the workers?", stem: "In the ___ strike, the government ___. This hurt/helped workers because ___.", min: 70, mustAll: [["haymarket", "homestead", "pullman"], ["troop", "soldier", "militia", "army", "court", "judge", "injunction", "police", "trial", "jail", "arrest", "hang", "governor", "president", "cleveland", "altgeld", "guard", "law", "pardon"], ["because", "since", "so "]], mustMsg: "In answer 1, name the strike, say what the government did (police, soldiers, courts…), and explain why (use \"because\")." },
+      { id: "public", short: "How public opinion mattered", label: "2. How did public opinion help decide whether workers won or lost? Use one example from today.", stem: "Public opinion mattered because ___. For example, ___.", min: 70, mustAll: [["public", "people", "newspaper", "opinion", "support", "sympath", "reader", "drawing", "picture"], ["because", "since", "example", "when"], ["haymarket", "homestead", "pullman", "bomb", "berkman", "frick", "debs", "trial", "mail", "train", "drawing", "picture", "violence", "violent", "riot", "anarch"]], mustMsg: "In answer 2, talk about the public (or newspapers) and give a real example from today (like Haymarket or Berkman)." }
     ]
   },
-  extraAnswers: st => ({ "Public support meter": st.fx.support + " of 10" })
+  extraAnswers: st => ({ "Public support meter": (st.fx.pub ?? 5) + " of 10", "Union strength meter": (st.fx.uni ?? 5) + " of 10" })
 });
-
 </script>
 </body></html>
