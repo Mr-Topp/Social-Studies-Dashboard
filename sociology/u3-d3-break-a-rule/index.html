@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Teen Court: Rule Breakers | Sociology Unit 3 Day 3</title>
+<meta name="description" content="Be a teen judge on a youth court. Rule on three cases, see how sanctions and labels work, then open a real file from Iowa history where breaking the rule was right.">
+<style>
+:root{--ink:#1d2733;--muted:#536170;--paper:#f3f6f9;--card:#fff;--line:#d4dde6;--main:#1d5d8c;--accent:#c4442c;--gold:#d9a43a;--green:#2a6b45;--bad:#a2392f}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.5 system-ui,Segoe UI,Arial,sans-serif}
+header{background:linear-gradient(100deg,#e3eef8,#fbeee6);border-bottom:5px solid var(--main);padding:16px max(16px,calc((100vw - 900px)/2)) 12px}
+.k{font-size:.78rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:var(--main);margin:0}
+h1{margin:2px 0 4px;font-size:clamp(1.7rem,3.4vw,2.3rem)}
+.std{margin:2px 0;font-size:.92rem;color:var(--muted)}.std b{color:var(--ink)}
+.hud{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line);padding:8px max(16px,calc((100vw - 900px)/2));display:flex;gap:10px;flex-wrap:wrap;align-items:center;font-weight:800;font-size:.92rem;box-shadow:0 2px 8px #1d273312}
+.hud .bar{flex:1;min-width:110px;height:10px;background:#e2e8ee;border-radius:9px;overflow:hidden}.hud .bar span{display:block;height:100%;width:0;background:var(--main);transition:width .4s}
+.pill{background:#edf2f7;border-radius:20px;padding:3px 10px;white-space:nowrap}
+.meter{display:flex;align-items:center;gap:6px}.meter .track{width:80px;height:10px;border-radius:9px;background:#e2e8ee;overflow:hidden}.meter .track span{display:block;height:100%;transition:width .5s}
+#trustFill{background:var(--main)}#labelFill{background:var(--accent)}
+main{max-width:900px;margin:auto;padding:14px 16px 60px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;box-shadow:0 3px 12px #1d27330d}
+.kicker{font-size:.78rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin:0}
+h2{margin:2px 0 10px;font-size:1.45rem}
+.teach{background:#e9f1f8;border-left:5px solid var(--main);border-radius:9px;padding:10px 14px;margin:0 0 12px}.teach p{margin:4px 0}.teach b{color:var(--main)}
+.block{margin:14px 0;padding:14px;border-radius:12px;border:2px solid var(--line);background:#fff}
+.block.current{border-color:var(--ink);box-shadow:0 0 0 4px #1d5d8c30}
+.block h3{margin:0 0 10px;font-size:1.06rem;line-height:1.35;font-weight:700}
+.event{background:#fdf7f2;border-style:dashed;border-color:#dfc0a8}.event.current{border-style:solid}
+.event-body p,.note p{margin:4px 0}
+.file{position:relative;background:#fffdf6;border:1px solid #e3d9bd;border-radius:4px 12px 12px 12px;padding:14px 14px 10px;margin:14px 0 4px}
+.file .tab{position:absolute;top:-13px;left:-1px;background:#e8dcb6;color:#5b4a1c;font-size:.74rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase;padding:3px 12px;border-radius:8px 8px 0 0}
+.file .stamp{float:right;transform:rotate(-6deg);border:3px solid var(--accent);color:var(--accent);font-weight:900;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;padding:2px 8px;border-radius:6px;margin:0 0 6px 10px;background:#fff}
+.file .stamp.real{border-color:var(--green);color:var(--green)}
+.file h4{margin:0 0 6px;font-size:1.08rem}
+.file p{margin:5px 0}
+.quote{background:#fff;border-left:4px solid var(--main);border-radius:6px;padding:6px 10px;margin:8px 0;font-style:italic}
+.quote b{font-style:normal}
+.src-card{background:#fbfaf5;border:1px solid #e1dccb;border-left:5px solid var(--gold);border-radius:10px;padding:10px 12px;margin:0 0 10px;font-weight:400;font-size:.97rem}
+.src-card .lab{font-size:.74rem;font-weight:900;letter-spacing:.06em;text-transform:uppercase;color:#8a6a1f;margin:0 0 4px}
+.src-card p{margin:3px 0}
+.src-card.lens{border-left-color:var(--main);background:#f4f8fc}.src-card.lens .lab{color:var(--main)}
+.sheet{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:8px 0}
+.sheet div{border-radius:10px;padding:8px 10px;font-size:.93rem;border:1px solid var(--line)}
+.sheet div b{display:block;font-size:.98rem}
+.sheet .fp{background:#e7f3ec}.sheet .fn{background:#f9e5e1}.sheet .ip{background:#eef6e2}.sheet .in{background:#fbefe3}
+table.merton{border-collapse:collapse;width:100%;margin:6px 0;font-size:.93rem}
+table.merton th,table.merton td{border:1px solid var(--line);padding:5px 8px;text-align:left}
+table.merton th{background:#edf2f7}
+.yes{color:var(--green);font-weight:900}.no{color:var(--bad);font-weight:900}
+.barchart{margin:6px 0}.barchart .row{display:grid;grid-template-columns:190px 1fr 48px;gap:8px;align-items:center;margin:4px 0;font-size:.9rem}.barchart .t{height:14px;background:#e2e8ee;border-radius:7px;overflow:hidden}.barchart .t span{display:block;height:100%;background:var(--main)}.barchart .row.low .t span{background:var(--accent)}
+.chat{background:#eef3fb;border:1px solid #cfdcef;border-radius:14px;padding:9px 12px;margin:8px 0;max-width:620px}.chat .who{font-size:.76rem;font-weight:900;color:#2d5a91;margin-bottom:2px}.chat p{margin:2px 0}
+.picked{margin:10px 0 4px;color:var(--muted)}.result{background:#edf2f7;border-radius:9px;padding:9px 12px}.result p{margin:4px 0}
+.cause{border-top:1px dashed #b9c6d3;padding-top:6px;margin-top:6px}
+.tag{display:inline-block;font-weight:900;font-size:.8rem;border-radius:12px;padding:2px 9px;margin-right:6px}.tag.up{background:#dcefe2;color:var(--green)}.tag.down{background:#f6dcd8;color:var(--bad)}.tag.flat{background:#e6eaef;color:var(--ink)}
+.qlabel{font-size:.75rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:var(--main);margin:0 0 4px}
+.choices{display:grid;gap:8px}
+@media(min-width:700px){.q .choices{grid-template-columns:1fr 1fr}}
+button{font:inherit;cursor:pointer;border-radius:10px;min-height:46px}
+.choice{text-align:left;background:#fff;color:var(--ink);border:2px solid #c8d2dc;padding:10px 12px;font-weight:650;line-height:1.3}
+.choice:hover:not(:disabled){border-color:var(--ink);background:#fbfcfd}.choice:disabled{opacity:.5;cursor:not-allowed}
+.go{margin-top:12px;background:var(--main);color:#fff;border:0;padding:11px 18px;font-weight:900}
+.intro .go{font-size:1.15rem;padding:14px 26px}
+button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid #2f7dbd;outline-offset:2px}
+.answered{font-weight:800;color:var(--green);margin:4px 0}.why{margin:2px 0;color:var(--muted)}
+.msg{min-height:1.3em;font-weight:750;margin:8px 0 0}.msg.bad{color:var(--bad)}.msg.good{color:var(--green)}
+label{display:block;font-weight:850;margin:14px 0 4px}.stem{margin:0 0 4px;color:var(--muted);font-size:.92rem}
+input,textarea{width:100%;font:inherit;border:2px solid #c8d2dc;border-radius:9px;padding:10px;background:#fff;color:var(--ink)}
+.steps{display:grid;gap:6px;margin:10px 0;padding:0;list-style:none}@media(min-width:700px){.intro .steps{grid-template-columns:1fr 1fr}}.steps li{background:#edf2f7;border-radius:9px;padding:8px 12px;font-weight:700}
+.steps li.real{background:#e4f1e8}
+.welcome{background:#e6f1ea;color:var(--green);font-weight:800;border-radius:9px;padding:8px 12px;margin:0 0 10px}
+.foot{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-top:14px;color:var(--muted);font-size:.85rem}
+.foot button{background:#e6eaef;border:0;padding:8px 12px;font-weight:800;color:var(--ink)}
+.src{font-size:.8rem;color:var(--muted)}
+@media(max-width:640px){.sheet{grid-template-columns:1fr}.barchart .row{grid-template-columns:120px 1fr 42px}table.merton{font-size:.85rem}table.merton th,table.merton td{padding:4px 5px}}
+@media print{.hud,.foot,.go{display:none}}
+@media(max-height:800px){header{padding-top:8px;padding-bottom:6px}header h1{font-size:1.45rem;margin:0}header .k{display:inline-block;margin-right:10px}header h1{display:inline-block}header .std.goal-line{display:none}.intro h2{font-size:1.25rem;margin:0 0 6px}.card.intro{padding:12px 18px}.intro p{margin:4px 0}.intro label{margin-top:6px}.intro .go{margin-top:6px;padding:10px 24px}.intro input{padding:7px 10px}.intro .msg{min-height:0;margin:0}.hud{padding-top:5px;padding-bottom:5px}header .std.goal-line{display:block;font-size:.85rem;margin:2px 0 0}.hand .suit{display:none}}
+</style>
+<script src="../../shared/assignments.js?v=20261101fill"></script>
+<script src="../../shared/turnin.js?v=20261102read"></script>
+<script src="../../shared/unit-game.js?v=20261102es"></script>
+<script src="../../shared/lang.js?v=20261102samonly"></script>
+<script src="es.js?v=20261102a"></script>
+</head><body>
+<header>
+  <p class="k">Sociology · Unit 3 · Day 3</p>
+  <h1>Teen Court: Rule Breakers</h1>
+  <p class="std"><b>SS.9-12.Soc.4</b> Explain the sociological theories that are the basis of sociology. &nbsp;<b>SS.9-12.Soc.9</b> Describe the process of socialization across the life course.</p>
+  <p class="std goal-line"><b>Goal:</b> Explain the difference between deviance and conformity, why people break norms, and how society reacts. · About 25 minutes.</p>
+</header>
+<div class="hud" aria-label="Progress and your court meters">
+  <span id="progressText">0 checks done</span>
+  <div class="bar" aria-hidden="true"><span id="progressFill"></span></div>
+  <span class="pill meter">Town trust: <span class="track" aria-hidden="true"><span id="trustFill" style="width:50%"></span></span> <span id="trustNum">5/10</span></span>
+  <span class="pill meter">Label risk: <span class="track" aria-hidden="true"><span id="labelFill" style="width:30%"></span></span> <span id="labelNum">3/10</span></span>
+</div>
+<main>
+  <p class="welcome" id="welcome" hidden></p>
+  <div id="app"></div>
+  <div class="foot"><span>Progress saves on this device. Your teacher sees your work after you turn it in.</span><button type="button" id="restartBtn">Start over</button></div>
+</main>
+<script>
+const T = (cls, txt) => `<span class="tag ${cls}">${txt}</span>`;
+const card = (lab, body, cls) => `<div class="src-card ${cls || ""}"><p class="lab">${lab}</p>${body}</div>`;
+const chat = (who, body) => `<div class="chat"><div class="who">${who}</div>${body}</div>`;
+const file = (tab, stamp, body, real) => `<div class="file"><span class="tab">${tab}</span><span class="stamp${real ? " real" : ""}">${stamp}</span>${body}</div>`;
+const BRIGGS = "COUNCILMAN RAY BRIGGS · on the Corridor Talk page";
+const cause = html => `<p class="cause"><b>Caused by:</b> ${html}</p>`;
+
+UnitGame.start({
+  key: "soc-u3-d3-break-a-rule-v1",
+  assignmentId: "soc-u3-d3-break-a-rule",
+  title: "Sociology · Unit 3 · Day 3 · Can Breaking a Rule Be Right?",
+  standard: "SS.9-12.Soc.4, SS.9-12.Soc.9",
+  oldApi: "https://fynn-class-assignment-submissions-20261024.neotboy.chatgpt.site/api/submit",
+  startFx: { trust: 5, label: 3 },
+  clampFx: fx => { fx.trust = Math.max(0, Math.min(10, fx.trust)); fx.label = Math.max(0, Math.min(10, fx.label)); },
+  hud: st => {
+    const t = st.fx.trust || 0, l = st.fx.label || 0;
+    document.getElementById("trustFill").style.width = (t * 10) + "%";
+    document.getElementById("trustNum").textContent = t + "/10";
+    document.getElementById("labelFill").style.width = (l * 10) + "%";
+    document.getElementById("labelNum").textContent = l + "/10";
+  },
+  startLabel: "Open court",
+  introHtml: `<p class="kicker">Corridor Youth Court · Thursday's cases</p><h2>Three teens broke rules. You decide what happens next.</h2>
+    <p>You're the newest teen judge on a Cedar Rapids youth court. Real teen courts like this exist all over the U.S.</p>
+    <ul class="steps"><li>🚗 Case 1: A speeding video goes viral</li><li>🎧 Case 2: Stolen AirPods for sale</li><li>🎨 Case 3: Paint on the skate park wall</li><li class="real">📁 Sealed file: Real history</li></ul>
+    <p>Your rulings move <b>Town trust</b> and <b>Label risk</b> at the top. Councilman Briggs is watching.</p>
+    <p><b>About 25 minutes · 16 checks · 1 short answer at the end</b></p>
+    <p class="src">The court, Councilman Briggs, and the three teens are made up. The facts, studies, and history are real.</p>`,
+  scenes: [
+    { kicker: "Part 1 of 4 · Case 1", title: "62 in a 35",
+      teach: `<p><b>Deviance</b> means breaking a social norm. It is not always a crime, and it is not always bad. Yelling is deviant in a library but normal at a football game.</p>
+        <p><b>Conformity</b> means going along with a group's norms.</p>`,
+      blocks: [
+        { type: "note", html: file("Case file #1", "First offense", `<h4>Tyler R., 16 · Marion</h4>
+          <p>At 11:40 p.m., Tyler drove <b>62 mph in a 35 zone</b> on Collins Road. A police officer pulled him over and wrote a speeding ticket.</p>
+          <p>His friend filmed it from the passenger seat. The video got <b>41,000 views</b> and hundreds of 🔥 comments.</p>
+          <div class="quote">Tyler: "My whole crew drives like that at the car meets. When I first started going, I didn't know what 'fast' was. After a month, 60 just felt normal."</div>
+          <p>Tyler works 20 hours a week at a grocery store. He needs his car to get there.</p>`)
+          + card("National Highway Traffic Safety Administration, 2022", `<p>Speeding-related crashes killed <b>12,151 people</b> in the U.S. That's <b>29%</b> of all traffic deaths that year.</p>`) },
+        { type: "event", id: "e1", short: "Ruling on Tyler", html: `<p><b>Your ruling.</b> Speeding puts other people in danger. But Tyler needs his car for work. What do you decide?</p>`,
+          choices: [
+            { label: "Take his license away for 90 days", fx: { trust: 2, label: 1 }, result: `<p>${T("up","+2 town trust")}${T("down","+1 label risk")}Tyler can't drive to work. He loses his job in two weeks. His crew tells him, "Who cares? You're one of us."</p>${chat(BRIGGS, `<p>Finally, a judge with a spine. 👏</p>`)}${cause(`a <b>formal negative sanction</b>. That's an official punishment from a group with power, like a court. It sends a strong message. It can also push a teen away from school and work.`)}` },
+            { label: "A driving class + 20 hours with a crash-victims group", fx: { trust: -1, label: -1 }, result: `<p>${T("down","−1 town trust")}${T("up","−1 label risk")}Tyler keeps his job. He listens to a mom talk about her son, who was killed by a speeding driver. Tyler goes quiet for a long time.</p>${chat(BRIGGS, `<p>A CLASS? He could have killed someone.</p>`)}${cause(`a <b>formal sanction</b> that keeps Tyler tied to work and to people who don't speed. Some people think it's too soft for something this dangerous.`)}` },
+            { label: "A warning only. Let his parents handle it at home.", fx: { trust: -2 }, result: `<p>${T("down","−2 town trust")}${T("flat","no change in label risk")}His parents take his keys for a week. His crew laughs it off. Two weeks later, a new video shows up online.</p>${chat(BRIGGS, `<p>Youth court = free pass. Somebody is going to get hurt.</p>`)}${cause(`an <b>informal sanction</b> (from family, not an official group). It was weaker than the reward Tyler got online.`)}` }
+          ] },
+        { type: "note", html: card("Judge's cheat sheet: sanctions", `<p><b>Social control</b> means all the ways a society gets people to follow norms. A <b>sanction</b> is a reaction that rewards or punishes behavior.</p>
+          <div class="sheet"><div class="fp"><b>Formal + positive</b>An official reward: a diploma, a raise, an award</div><div class="fn"><b>Formal + negative</b>An official punishment: a ticket, a suspension, a fine</div><div class="ip"><b>Informal + positive</b>A reward from everyday people: a laugh, a like, a compliment</div><div class="in"><b>Informal + negative</b>A punishment from everyday people: a dirty look, an eye roll</div></div>`) },
+        { type: "q", id: "c1a", std: "Soc.9", short: "Conforming to crew, deviant to town", prompt: "Tyler's whole crew speeds at the car meets. When Tyler speeds with them, he is…", options: ["Conforming to his crew, but deviant to the town", "Deviant to his crew, and deviant to the town", "Conforming to the town, but deviant to his crew", "Neither one, because speeding is not a norm"], hint: "Reread Tyler's quote. What does his crew do? What does the law say?", why: "With his crew, speeding is the norm, so he's conforming. To the town and the law, it's deviance. Whether an act is deviant depends on whose norms you use." },
+        { type: "q", id: "c1b", std: "Soc.9", short: "Views and 🔥 = informal positive sanction", prompt: "Tyler's video got 41,000 views and hundreds of 🔥 comments. What kind of sanction is that?", options: ["Informal positive: it rewards the speeding", "Formal positive: it rewards the speeding", "Informal negative: it punishes the speeding", "Formal negative: it punishes the speeding"], hint: "Use the cheat sheet. Did the views come from an official group? Do they reward or punish?", why: "Likes and views come from everyday people, so they're informal. They reward the act, so they're positive. That's why the video makes speeding more likely, not less." },
+        { type: "q", id: "c1c", std: "Soc.9", short: "Sherif: group sets the norm", prompt: card("Sherif's study, 1935", `<p>Muzafer Sherif sat people in a dark room with one dot of light. The dot seems to move, but it does not.</p><p>Alone, people guessed very different distances. In groups of three, their guesses moved toward one shared answer. Later, alone again, they <b>kept the group's answer</b>.</p>`) + "Tyler said, \"After a month, 60 just felt normal.\" How is that like Sherif's study?", options: ["The group set what \"normal\" was, and he kept it", "He saw the truth once he was alone in the car", "He refused to go along with his group's answer", "Someone in charge ordered him to drive that fast"], hint: "In Sherif's study, where did the shared answer come from? Where did Tyler's idea of \"normal\" come from?", why: "When something is unclear (like what speed is \"fast\"), a group builds its own norm. People keep it even when the group isn't around." },
+        { type: "q", id: "c1d", std: "Soc.4", short: "Differential association evidence", prompt: card("Theory lens: differential association (Edwin Sutherland, 1939)", `<p>People <b>learn</b> deviance from the people they spend the most time with, just like they learn anything else.</p>`, "lens") + "Which detail from Tyler's file best supports this theory?", options: ["His whole crew drives like that at the meets", "He needs his car to get to his grocery job", "A police officer pulled him over that night", "His video got 41,000 views on social media"], hint: "This theory is about who you spend your time with. Which detail is about his friends?", why: "Tyler learned how to drive at meets from his crew. Sutherland would say he learned speeding the same way he learned anything else: from the people around him." }
+      ] },
+    { kicker: "Part 2 of 4 · Case 2", title: "The AirPods Hustle",
+      teach: `<p>Judges don't just ask <i>what</i> happened. They ask <b>why</b>. Sociologists use different <b>theories</b> (lenses) to explain why people break norms.</p>`,
+      blocks: [
+        { type: "note", html: file("Case file #2", "First offense", `<h4>Kenzie M., 17 · Cedar Rapids</h4>
+          <p>Kenzie sold <b>14 pairs of AirPods</b> on Facebook Marketplace for $60 each. They were stolen. She bought them from a guy at a gas station for $20 a pair, and she knew they were stolen.</p>
+          <div class="quote">Kenzie: "My mom's hours got cut. I applied to 11 jobs and heard back from zero. Everybody online is flexing money. I just wanted to pay my phone bill and help with rent."</div>
+          <p>Kenzie has never been in trouble before. She gets mostly B's and C's.</p>`) },
+        { type: "event", id: "e2", short: "Ruling on Kenzie", html: `<p><b>Your ruling.</b> 14 people paid for stolen AirPods. Someone else lost them first. What do you decide?</p>`,
+          choices: [
+            { label: "Send it to juvenile court for a theft charge", fx: { trust: 2, label: 2 }, result: `<p>${T("up","+2 town trust")}${T("down","+2 label risk")}Kenzie gets a court record at 17. Her school counselor worries: "That record could show up when she applies for jobs."</p>${chat(BRIGGS, `<p>Good. A thief is a thief.</p>`)}${cause(`the strongest <b>formal negative sanction</b> this court can give. It shows that stealing is serious. It also gives Kenzie an official label: "offender."`)}` },
+            { label: "Pay back all 14 buyers through a youth job program", fx: { trust: -1, label: -1 }, result: `<p>${T("down","−1 town trust")}${T("up","−1 label risk")}Kenzie works for 3 months in a job program and pays back $840. It's her first real paycheck. Some buyers say she got off easy.</p>${chat(BRIGGS, `<p>So now we give thieves JOBS?</p>`)}${cause(`paying back the harm, plus a <b>legal way</b> to reach her goal (money). Keep that in mind for the next question.`)}` },
+            { label: "Write apology letters and do 10 hours of service", fx: { trust: -2 }, result: `<p>${T("down","−2 town trust")}${T("flat","no change in label risk")}The buyers are angry: "I'm out $60 and I get a letter?" They post about it online.</p>${chat(BRIGGS, `<p>Read these comments. This is why nobody trusts youth court.</p>`)}${cause(`a sanction that felt too weak for the harm. When people feel a rule doesn't matter, they stop trusting it.`)}` }
+          ] },
+        { type: "q", id: "c2a", std: "Soc.4", short: "Kenzie = innovation (Merton)", prompt: card("Theory lens: strain theory (Robert Merton, 1938)", `<p>Society tells everyone to chase success, like money and a good job. But not everyone gets fair, legal ways to reach it. That gap is <b>strain</b>. People respond in five ways:</p>
+          <table class="merton"><tr><th>Type</th><th>Wants the goal?</th><th>Uses legal ways?</th></tr><tr><td>Conformity</td><td class="yes">Yes</td><td class="yes">Yes</td></tr><tr><td>Innovation</td><td class="yes">Yes</td><td class="no">No</td></tr><tr><td>Ritualism</td><td class="no">Gave up</td><td class="yes">Yes</td></tr><tr><td>Retreatism</td><td class="no">Gave up</td><td class="no">No</td></tr><tr><td>Rebellion</td><td colspan="2">Replaces both with new goals and new ways</td></tr></table>
+          <p class="src">Most people still conform.</p>`, "lens") + "Which of Merton's types fits Kenzie best?", options: ["Innovation", "Ritualism", "Retreatism", "Rebellion"], hint: "Check the table. Did Kenzie still want money? Did she use legal ways to get it?", why: "Kenzie kept the goal (money for bills) but used an illegal way to get it (selling stolen goods). Merton calls that innovation." },
+        { type: "q", id: "c2b", std: "Soc.9", short: "Evidence of strain", prompt: "Which detail from Kenzie's file best shows <b>strain</b>?", options: ["She applied to 11 jobs and heard back from zero", "She sold the AirPods for $60 a pair online", "She bought them from a guy at a gas station", "She gets mostly B's and C's at her school"], hint: "Strain is the gap between the goal and the fair ways to reach it. Which detail shows a legal way being blocked?", why: "She tried the legal way (a job) and it didn't work. That blocked path is the strain Merton describes." },
+        { type: "q", id: "c2c", std: "Soc.4", short: "Cousin Dre = ritualism", prompt: card("Also in the file", `<p>Kenzie's cousin Dre has stocked shelves at the same store for 4 years. No raise. He says, <b>"I'll never get ahead. But I follow every rule."</b></p>`) + "Which of Merton's types fits Dre?", options: ["Ritualism", "Conformity", "Innovation", "Retreatism"], hint: "Use the table again. Does Dre still want to get ahead? Does he follow the rules?", why: "Dre gave up on the goal (getting ahead) but still follows every rule. That's ritualism. A conformist would still be chasing the goal." }
+      ] },
+    { kicker: "Part 3 of 4 · Case 3", title: "The Skate Park Wall",
+      teach: `<p>Two teens can do the same thing and get treated very differently. This case is about <b>labels</b>: the names people stick on you, and what happens after.</p>`,
+      blocks: [
+        { type: "note", html: file("Case file #3", "First offense", `<h4>Jordan T., 16 · Cedar Rapids</h4>
+          <p>Jordan spray-painted a huge, colorful design on the back wall of a city skate park. The cleanup will cost about <b>$600</b>.</p>
+          <p>Teachers have called Jordan "the troublemaker" since 7th grade, after one fight. Jordan's art teacher says Jordan is the most talented artist in the school.</p>
+          <div class="quote">Jordan: "Everybody already thinks I'm the bad kid. So why even try to be good?"</div>
+          <p>Two blocks away, the city just paid artists to spray-paint a giant mural on a parking garage. People love it.</p>`) },
+        { type: "event", id: "e3", short: "Ruling on Jordan", html: `<p><b>Your ruling.</b> The city has to pay to clean the wall. What do you decide?</p>`,
+          choices: [
+            { label: "Send it to juvenile court for a vandalism charge", fx: { trust: 2, label: 2 }, result: `<p>${T("up","+2 town trust")}${T("down","+2 label risk")}Jordan shrugs: "See? Told you. I'm the bad kid." At school, teachers nod like they knew it.</p>${chat(BRIGGS, `<p>Taggers are all the same. Charge every one of them.</p>`)}${cause(`a <b>formal label</b>. "Troublemaker" used to be only in people's heads. Now it's on paper.`)}` },
+            { label: "Work off the $600 by helping paint the city's next mural", fx: { trust: -1, label: -2 }, result: `<p>${T("down","−1 town trust")}${T("up","−2 label risk")}Jordan shows up every Saturday. The mural artist tells everyone Jordan is a natural. Some neighbors say it's too soft.</p>${chat(BRIGGS, `<p>Rewarding vandals with a paintbrush? Unreal.</p>`)}${cause(`a sanction that gave Jordan a <b>new label</b>: "artist" instead of "troublemaker."`)}` },
+            { label: "Jordan's family pays the $600, and nothing goes on the record", fx: { trust: 1 }, result: `<p>${T("up","+1 town trust")}${T("flat","no change in label risk")}Jordan's grandma pays it, using part of her rent money. At school, nothing changes. Teachers still say, "There goes the troublemaker."</p>${chat(BRIGGS, `<p>Well, at least somebody paid.</p>`)}${cause(`the cost landing on Jordan's family. The old label at school stayed exactly the same.`)}` }
+          ] },
+        { type: "q", id: "c3a", std: "Soc.4", short: "Labeling theory evidence", prompt: card("Theory lens: labeling theory (Howard Becker, 1963)", `<p>An act becomes deviant when people <b>label</b> it that way. Once someone is labeled a troublemaker, they may start to act the part.</p>`, "lens") + "Which line from Jordan's file best fits labeling theory?", options: ["Jordan feels like \"the bad kid,\" so why try to be good", "The skate park cleanup will cost the city about $600", "Jordan's art teacher says Jordan is very talented", "The city paid other artists for a mural nearby"], hint: "Labeling theory is about a name people stick on you, and how it changes what you do. Which line shows that?", why: "Jordan has been called \"the troublemaker\" for years and now acts like there's no point trying. The label is turning into the behavior." },
+        { type: "q", id: "c3b", std: "Soc.4", short: "Becker: groups make rules = deviance", prompt: card("Primary source: Howard Becker, Outsiders (1963)", `<p class="quote">"...social groups create deviance by making the rules whose infraction constitutes deviance..."</p><p class="src">Word help: <b>infraction</b> = breaking a rule. <b>Constitutes</b> = makes up.</p>`) + "What is Becker saying?", options: ["An act is deviant because a group made a rule against it", "Some acts are deviant everywhere, no matter who decides", "People are born either deviant or rule-following", "Only acts that break a written law count as deviance"], hint: "Swap in the word help: groups create deviance by making the rules whose ___ makes up deviance.", why: "Becker says deviance isn't inside the act. It comes from the rules groups make. No rule, no deviance." },
+        { type: "q", id: "c3c", std: "Soc.9", short: "Deviance is relative (paint, tattoos)", prompt: card("Pew Research Center, 2023", `<p><b>32%</b> of U.S. adults have a tattoo. About <b>8 in 10</b> say society is more accepting of tattoos than it was 20 years ago.</p>`) + "Spray paint on the skate park is vandalism. Spray paint on the parking garage is paid art. Together with the tattoo data, what does this show?", options: ["Deviance depends on the time, the place, and the rules", "Spray paint is deviant no matter where it is used", "Only art that a city pays for can ever be deviant", "Every culture agrees on what is and isn't deviant"], hint: "Same paint, two places, two reactions. Tattoos: same ink, two time periods. What changed?", why: "The act was the same. The place, the time, and the rules were different. That's why sociologists say deviance is relative." },
+        { type: "q", id: "c3d", std: "Soc.9", short: "Pager: record cut callbacks ~half", prompt: card("Devah Pager's job study, Milwaukee, 2003", `<p>Pairs of young men with equal résumés applied for the same entry-level jobs. The only difference: one said he had a criminal record. Who got called back?</p>
+          <div class="barchart"><div class="row"><span>White, no record</span><div class="t"><span style="width:34%"></span></div><b>34%</b></div><div class="row low"><span>White, with a record</span><div class="t"><span style="width:17%"></span></div><b>17%</b></div><div class="row"><span>Black, no record</span><div class="t"><span style="width:14%"></span></div><b>14%</b></div><div class="row low"><span>Black, with a record</span><div class="t"><span style="width:5%"></span></div><b>5%</b></div></div>
+          <p><b>Stigma</b> means shame or rejection aimed at someone seen as different. A record is a kind of stigma.</p>`) + "Based on this study, why could a vandalism record matter for Jordan years from now?", options: ["A record can cut job callbacks about in half", "Employers in the study did not check records", "A record mattered less than a strong résumé", "Having a record raised callbacks for most groups"], hint: "Compare each \"no record\" bar with the \"with a record\" bar right under it.", why: "With equal résumés, a record cut callbacks about in half, or more. The study also found a race gap, so stigma and stereotypes can stack. A label can follow someone long after the sentence ends." }
+      ] },
+    { kicker: "Part 4 of 4 · Sealed file", title: "When Breaking the Rule Was Right",
+      teach: `<p>This file is <b>real history</b>, not made up. Every fact has a source.</p>
+        <p>Sometimes the problem isn't the person breaking the rule. It's the rule.</p>`,
+      blocks: [
+        { type: "note", html: file("Real file · Des Moines, Iowa", "Real history", `<h4>Edna Griffin and the Katz Drug Store, 1948</h4>
+          <p>On <b>July 7, 1948</b>, Edna Griffin, a Black woman, ordered ice cream at the lunch counter of the Katz Drug Store in Des Moines. She had her baby daughter and two friends with her. The store refused to serve them because they were Black. That was the store's rule.</p>
+          <p>Griffin didn't let it go. She led months of <b>sit-ins</b> and protests with signs outside the store. Black and white Iowans joined her.</p>
+          <p>Iowa already had a law from <b>1884</b> against refusing service because of race. The store's owner, Maurice Katz, was charged. A jury found him guilty and fined him $50. In <b>December 1949</b>, the Iowa Supreme Court said the guilty verdict would stand.</p>
+          <p class="src">Sources: State v. Katz, Iowa Supreme Court (1949); BlackPast, "Katz Drugstore Sit-In Protests, Des Moines (1948–1949)."</p>`, true) },
+        { type: "q", id: "c4a", std: "Soc.9", short: "Griffin: the law was on her side", prompt: "At Katz, Edna Griffin broke the store's rule, but the <b>law</b> was on her side. How do we know?", options: ["Iowa law already banned refusing service by race", "She was arrested, and the court found her guilty", "The store owner said he agreed with her right away", "Nobody in Des Moines knew about the protests"], hint: "Reread the last paragraph. Who was charged, and under what law?", why: "Iowa's 1884 law was on her side. The store owner was the one convicted. Deviance and crime are not the same thing." },
+        { type: "note", html: file("Real file · Greensboro, North Carolina", "Real history", `<h4>The Greensboro sit-in, 1960</h4>
+          <p>On <b>February 1, 1960</b>, four Black college freshmen sat down at the "whites only" lunch counter at Woolworth's: Ezell Blair Jr., Franklin McCain, Joseph McNeil, and David Richmond. They asked politely for coffee. They were refused. They stayed in their seats until closing.</p>
+          <p>The next day they came back with more students. Some white customers jeered at them (yelled insults). By the end of March 1960, sit-ins had spread to <b>55 cities in 13 states</b>. Across the movement, many students were arrested for trespassing (refusing to leave).</p>
+          <p>Hundreds of people joined in or stopped shopping at the store. On <b>July 25, 1960</b>, the Greensboro Woolworth's counter served Black customers for the first time.</p>
+          <p class="src">Sources: Smithsonian National Museum of American History, "Greensboro Lunch Counter"; U.S. Census Bureau, "The 1960 Greensboro Sit-In" (2025); History.com, "The Greensboro Sit-In."</p>`, true) },
+        { type: "q", id: "c4b", std: "Soc.9", short: "Jeering informal, arrests formal", prompt: "Some customers jeered at the students, and many students were arrested by police. Which is true about those sanctions?", options: ["The jeering was informal, and the arrests were formal", "The jeering was formal, and the arrests were informal", "Both were positive sanctions that rewarded students", "Both were informal sanctions from everyday people"], hint: "Use the cheat sheet idea. Which one came from everyday people? Which came from an official group?", why: "Jeering customers are everyday people (informal). Police arrests come from an official group (formal). Both were negative. The students kept going anyway." },
+        { type: "q", id: "c4c", std: "Soc.4", short: "Functionalism: deviance pushes change", prompt: card("Theory lens: functionalism (Émile Durkheim)", `<p>Deviance can actually <b>help</b> society. It makes rules clear, brings people together, and can <b>push society to change</b>.</p>`, "lens") + "Which fact from the real files best shows deviance pushing society to change?", options: ["Woolworth's served Black customers by July 1960", "Customers jeered at the students at the counter", "The four students asked politely for coffee", "The Katz store said refusing service was its rule"], hint: "Look for the fact where something in society actually changed afterward.", why: "The sit-ins broke the norm, and within months the counter changed its rule. Durkheim would say this deviance helped society by forcing a bad rule into the open." },
+        { type: "q", id: "c4d", std: "Soc.4", short: "Conflict lens: who made the rule", prompt: card("Theory lens: conflict theory", `<p>Groups with more <b>power</b> often make the rules, and the rules tend to protect their advantage. Becker asked the same question: <b>who gets to make the rules?</b></p>`, "lens") + "Who made the \"whites only\" rule at these lunch counters?", options: ["Store owners and white leaders with power", "The Black college students who sat down", "The Iowa Supreme Court in its 1949 ruling", "The customers waiting in line to be served"], hint: "The students broke the rule. Who had the power to set it in the first place?", why: "People with power made the rule, and it kept Black customers out. Conflict theory asks who a rule helps and who it hurts." },
+        { type: "q", id: "x1", std: "Soc.9", label: "Exit ticket", short: "Exit: when breaking a rule can be right", prompt: "Based on today, when can breaking a rule be right?", options: ["When the rule is unfair and it's broken openly to change it", "Whenever a person has a good personal reason to break it", "Only when nobody finds out that the rule was broken", "Never, because every kind of deviance hurts society"], hint: "Think about Edna Griffin and the Greensboro Four. What kind of rule did they break, and how did they break it?", why: "Griffin and the Greensboro Four broke unfair rules openly and peacefully, so the rules would change. Tyler's speeding put people in danger and changed nothing. Deviance is judged by a group's norms, and norms can be wrong." }
+      ] }
+  ],
+  finale: {
+    title: "Court Is Over",
+    report: st => `<p><b>Town trust ended at ${st.fx.trust}/10. Label risk ended at ${st.fx.label}/10.</b></p><p>Tough formal sanctions made the town feel rules matter, but they stuck labels on teens. Softer ones gave teens a way back, but some people felt the rules didn't count. Real judges face this trade-off every day.</p><p>Answer in 1–2 full sentences.</p>`,
+    prompts: [
+      { id: "theory", short: "Which theory explains it best", label: "Pick Tyler, Kenzie, or Jordan. Which theory explains why they broke the rule best, and why? Who taught them that norm (friends, family, school, media)? Go deeper: how might people react differently in another time or place?", stem: "___ explains ___'s case best because ___. The one who taught it was ___.", min: 80,
+        mustAll: [["strain", "merton", "innovat", "ritual", "differential", "association", "sutherland", "label", "becker", "functional", "durkheim", "conflict", "sherif"], ["tyler", "kenzie", "jordan"], ["because", "since", "so "], ["friend", "crew", "peer", "family", "parent", "mom", "dad", "grandma", "media", "online", "social", "tiktok", "video", "school", "teacher", "church", "religio"]],
+        mustMsg: "Name a theory (strain, differential association, labeling, functionalism, or conflict), name Tyler, Kenzie, or Jordan, explain with \"because,\" and name who taught it (friends, family, school, media…)." }
+    ]
+  },
+  extraAnswers: st => ({ "Town trust at the end": st.fx.trust + " of 10", "Label risk at the end": st.fx.label + " of 10" })
+});
+</script>
+</body></html>

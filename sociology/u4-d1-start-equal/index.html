@@ -1,0 +1,421 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Ladder Test | Sociology Unit 4 Day 1</title>
+<meta name="description" content="A game company says its new board game is fair. Play-test a closed world, an open world, and the next generation, then check real U.S. mobility data.">
+<style>
+:root{--ink:#1f2a33;--muted:#55636c;--paper:#fbf8f1;--card:#fff;--line:#dfd9c9;--main:#1f7a6d;--accent:#d9573a;--gold:#f0b43c;--green:#2a6b45;--bad:#a2392f;--you:#1d6fb8;--hale:#7a4fa6;--kid:#d9573a}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.5 system-ui,Segoe UI,Arial,sans-serif}
+header{background:linear-gradient(100deg,#fff1c9,#e3f4ee 55%,#e7eefb);border-bottom:5px solid var(--main);padding:16px max(16px,calc((100vw - 900px)/2)) 12px}
+.k{font-size:.78rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:var(--main);margin:0}
+h1{margin:2px 0 4px;font-size:clamp(1.7rem,3.4vw,2.3rem)}
+.std{margin:2px 0;font-size:.92rem;color:var(--muted)}.std b{color:var(--ink)}
+.hud{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line);padding:8px max(16px,calc((100vw - 900px)/2));display:flex;gap:10px;flex-wrap:wrap;align-items:center;font-weight:800;font-size:.92rem;box-shadow:0 2px 8px #1f2a3312}
+.hud .bar{flex:1;min-width:110px;height:10px;background:#ebe6d8;border-radius:9px;overflow:hidden}.hud .bar span{display:block;height:100%;width:0;background:var(--main);transition:width .4s}
+.pill{background:#f1eee4;border-radius:20px;padding:3px 10px;white-space:nowrap}
+.pill.you{background:#e3eefa;color:#16528a}.pill.hale{background:#efe7f7;color:#5b3a80}
+main{max-width:900px;margin:auto;padding:14px 16px 60px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px;box-shadow:0 3px 12px #1f2a330d}
+.kicker{font-size:.78rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin:0}
+h2{margin:2px 0 10px;font-size:1.45rem}
+.teach{background:#e8f4f0;border-left:5px solid var(--main);border-radius:9px;padding:10px 14px;margin:8px 0}.teach p{margin:4px 0}.teach b{color:var(--main)}
+.block{margin:14px 0;padding:14px;border-radius:12px;border:2px solid var(--line);background:#fff}
+.block.current{border-color:var(--ink);box-shadow:0 0 0 4px #1f7a6d30}
+.block h3{margin:0 0 10px;font-size:1.06rem;line-height:1.35;font-weight:700}
+.event{background:#fffaf0;border-style:dashed;border-color:#e2c58a}.event.current{border-style:solid}
+.event-body p,.note p{margin:4px 0}
+.rules{background:#fffdf6;border:2px solid #e9dcb8;border-radius:12px;padding:10px 14px;margin:0 0 10px}
+.rules .lab{font-size:.74rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:#8a6a1f;margin:0 0 4px}
+.rules ol{margin:4px 0;padding-left:22px}.rules li{margin:3px 0}
+.split{display:grid;grid-template-columns:1.3fr 1fr;gap:12px;align-items:start}
+.ladder{background:linear-gradient(90deg,transparent 14px,#c79a5b 14px,#c79a5b 20px,transparent 20px,transparent calc(100% - 20px),#c79a5b calc(100% - 20px),#c79a5b calc(100% - 14px),transparent calc(100% - 14px));padding:4px 0;border-radius:6px}
+.rung{display:flex;justify-content:space-between;align-items:center;gap:6px;margin:5px 22px;padding:6px 10px;border-radius:8px;background:#f4ead6;border-bottom:4px solid #c79a5b;font-size:.88rem;font-weight:800;min-height:38px}
+.rung .rn{color:#5a4524}
+.rung .who{display:flex;gap:4px;flex-wrap:wrap;justify-content:flex-end}
+.tok{display:inline-block;border-radius:12px;padding:1px 9px;font-size:.78rem;font-weight:900;color:#fff}
+.tok.you{background:var(--you)}.tok.hale{background:var(--hale)}.tok.kid{background:var(--kid)}.tok.hkid{background:#a07cc8}
+.rollbox{border-radius:10px;padding:8px 10px;margin:6px 0;background:#f2f7fd;border:1px solid #cfe0f2}
+.rollbox.h{background:#f6f1fb;border-color:#ddd0ee}
+.rollbox .nm{font-weight:900;font-size:.85rem;margin:0 0 4px}
+.rollbox.y .nm{color:#16528a}.rollbox.h .nm{color:#5b3a80}.rollbox.kd .nm{color:#a2391f}
+.rollbox.kd{background:#fdf1ec;border-color:#f1cdbd}
+.chips{display:flex;flex-wrap:wrap;gap:5px;align-items:center}
+.chip{background:#fff;border:1px solid #d6d2c4;border-radius:14px;padding:2px 9px;font-size:.86rem;font-weight:750}
+.chip.tot{background:var(--ink);color:#fff;border-color:var(--ink)}
+.chip.die{background:#fff;border:2px solid var(--ink);border-radius:7px;font-weight:900}
+.move{font-weight:900;margin:6px 0 2px}.move.up{color:var(--green)}.move.down{color:var(--bad)}.move.flat{color:var(--ink)}
+.cause{margin:2px 0;font-size:.92rem;color:var(--muted)}.cause b{color:var(--ink)}
+.die-big{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;border:3px solid var(--ink);border-radius:10px;background:#fff;font-size:1.4rem;font-weight:900;margin-right:10px;vertical-align:middle;box-shadow:2px 3px 0 #1f2a3333}
+.birth{display:flex;align-items:center;background:#fff7e3;border:2px dashed var(--gold);border-radius:10px;padding:8px 12px;margin:0 0 10px;font-weight:700}
+.birth .lab{font-size:.74rem;font-weight:900;letter-spacing:.06em;text-transform:uppercase;color:#8a6a1f;display:block}
+.card-luck{background:#fdecea;border:2px dashed #e0a49b;border-radius:10px;padding:8px 12px;margin:0 0 8px;font-weight:700}
+.event-body .turn{margin-top:10px}
+.card-luck .lab{font-size:.74rem;font-weight:900;letter-spacing:.06em;text-transform:uppercase;color:#9a3a2e;display:block}
+.chat{background:#eef3fb;border:1px solid #cfdcef;border-radius:14px;padding:9px 12px;margin:8px 0;max-width:640px}.chat .who{font-size:.76rem;font-weight:900;color:#2d5a91;margin-bottom:2px}.chat p{margin:2px 0}
+.chat.boss{background:#f5effb;border-color:#dccdee}.chat.boss .who{color:#5b3a80}
+.src-card{background:#fbfaf5;border:1px solid #e1dccb;border-left:5px solid var(--gold);border-radius:10px;padding:10px 12px;margin:0 0 10px;font-weight:400;font-size:.97rem}
+.src-card .lab{font-size:.74rem;font-weight:900;letter-spacing:.06em;text-transform:uppercase;color:#8a6a1f;margin:0 0 4px}
+.src-card p{margin:3px 0}
+.barchart{margin:6px 0}.barchart .row{display:grid;grid-template-columns:230px 1fr 48px;gap:8px;align-items:center;margin:5px 0;font-size:.9rem}.barchart .t{height:14px;background:#ebe6d8;border-radius:7px;overflow:hidden}.barchart .t span{display:block;height:100%;background:var(--main)}.barchart .row.low .t span{background:var(--accent)}
+.path{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin:6px 0;font-weight:800}
+.path span{background:#e3eefa;color:#16528a;border-radius:8px;padding:3px 9px}.path i{font-style:normal;color:var(--muted)}
+.picked{margin:10px 0 4px;color:var(--muted)}.result{background:#f3f1e8;border-radius:9px;padding:9px 12px}.result p{margin:4px 0}
+.tag{display:inline-block;font-weight:900;font-size:.8rem;border-radius:12px;padding:2px 9px;margin-right:6px}.tag.down{background:#f6dcd8;color:var(--bad)}.tag.flat{background:#e9ebe3;color:var(--ink)}
+.qlabel{font-size:.75rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:var(--main);margin:0 0 4px}
+.choices{display:grid;gap:8px}
+@media(min-width:700px){.q .choices{grid-template-columns:1fr 1fr}}
+button{font:inherit;cursor:pointer;border-radius:10px;min-height:46px}
+.choice{text-align:left;background:#fff;color:var(--ink);border:2px solid #cfcab9;padding:10px 12px;font-weight:650;line-height:1.3}
+.choice:hover:not(:disabled){border-color:var(--ink);background:#fcfcfa}.choice:disabled{opacity:.5;cursor:not-allowed}
+.go{margin-top:12px;background:var(--main);color:#fff;border:0;padding:11px 18px;font-weight:900}
+.intro .go{font-size:1.15rem;padding:14px 28px}
+button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid #2f7dbd;outline-offset:2px}
+.answered{font-weight:800;color:var(--green);margin:4px 0}.why{margin:2px 0;color:var(--muted)}
+.msg{min-height:1.3em;font-weight:750;margin:8px 0 0}.msg.bad{color:var(--bad)}.msg.good{color:var(--green)}
+label{display:block;font-weight:850;margin:14px 0 4px}.stem{margin:0 0 4px;color:var(--muted);font-size:.92rem}
+input,textarea{width:100%;font:inherit;border:2px solid #cfcab9;border-radius:9px;padding:10px;background:#fff;color:var(--ink)}
+.steps{display:grid;gap:6px;margin:10px 0;padding:0;list-style:none}.steps li{background:#f1eee4;border-radius:9px;padding:8px 12px;font-weight:700}
+.facts{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0}.facts span{background:#fff1c9;border-radius:14px;padding:3px 11px;font-weight:850;font-size:.9rem}
+.welcome{background:#e6f1ea;color:var(--green);font-weight:800;border-radius:9px;padding:8px 12px;margin:0 0 10px}
+.foot{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-top:14px;color:var(--muted);font-size:.85rem}
+.foot button{background:#ebe7da;border:0;padding:8px 12px;font-weight:800;color:var(--ink)}
+.src{font-size:.8rem;color:var(--muted)}
+@keyframes tumble{0%{transform:translateY(-8px) rotate(-14deg);opacity:.3}35%{transform:translateY(2px) rotate(10deg);opacity:1}65%{transform:translateY(-2px) rotate(-5deg)}100%{transform:none}}
+.fresh .chip.die{animation:tumble .7s ease-out}
+@media(max-width:700px){.split{grid-template-columns:1fr}.barchart .row{grid-template-columns:120px 1fr 42px}.rung{margin:5px 20px}}
+@media (prefers-reduced-motion:reduce){.fresh .chip.die{animation:none}}
+@media print{.hud,.foot,.go{display:none}}
+</style>
+<script src="../../shared/assignments.js?v=20261101fill"></script>
+<script src="../../shared/turnin.js?v=20261102read"></script>
+<script src="../../shared/unit-game.js?v=20261102es"></script>
+<script src="../../shared/lang.js?v=20261102samonly"></script>
+<script src="es.js?v=20261102a"></script>
+</head><body>
+<header>
+  <p class="k">Sociology · Unit 4 · Day 1</p>
+  <h1>The Ladder Test</h1>
+  <p class="std"><b>SS.9-12.Soc.12</b> Explain the concept of social stratification and its influence on societal structures and individual opportunities.</p>
+  <p class="std"><b>Goal:</b> Explain social stratification and how the layer you're born into shapes your chances to move up. · About 25 minutes.</p>
+</header>
+<div class="hud" aria-label="Progress and where each family is on the ladder">
+  <span id="progressText">0 checks done</span>
+  <div class="bar" aria-hidden="true"><span id="progressFill"></span></div>
+  <span class="pill you" id="youPill">You: not born yet</span>
+  <span class="pill hale" id="halePill">The Hales: Rung 5</span>
+</div>
+<main>
+  <p class="welcome" id="welcome" hidden></p>
+  <div id="app"></div>
+  <div class="foot"><span>Progress saves on this device. Your teacher sees your work after you turn it in.</span><button type="button" id="restartBtn">Start over</button></div>
+</main>
+<script>
+// =====================================================================
+//  THE LADDER TEST — every student gets their own dice (saved, so a reload never re-rolls).
+//  Outcomes are worked out from the dice + the student's picks, so they're never all set ahead of time,
+//  but the head-start bonus, the savings cushion, and the "top takes 9" rule tip the odds on every roll.
+// =====================================================================
+const LUCK_KEY = "soc-u4-d1-start-equal-v1-luck";
+const d6 = () => 1 + Math.floor(Math.random() * 6);
+let luck = null;
+try { luck = JSON.parse(localStorage.getItem(LUCK_KEY)); } catch (e) {}
+if (!luck || typeof luck !== "object" || !Array.isArray(luck.r) || luck.r.length !== 3) {
+  luck = { stone: d6(), open: d6(), r: [d6(), d6(), d6()], kid: d6(), card: Math.floor(Math.random() * 4) };
+  try { localStorage.setItem(LUCK_KEY, JSON.stringify(luck)); } catch (e) {}
+}
+
+// ---------- Names ----------
+const STONE = { 5: "Crown", 4: "Knight", 3: "Trader", 2: "Farmer", 1: "Digger" };
+const OPEN = { 5: "Upper class", 4: "Upper-middle class", 3: "Middle class", 2: "Working class", 1: "Lower class" };
+const stoneBirth = luck.stone <= 2 ? 1 : luck.stone <= 4 ? 2 : luck.stone === 5 ? 3 : 4;
+const ABOVE = STONE[stoneBirth + 1];
+const openBirth = luck.open <= 2 ? 1 : luck.open <= 4 ? 2 : luck.open === 5 ? 3 : 4;
+const HEAD = { 1: -1, 2: 0, 3: 0, 4: 1, 5: 2 };
+const sgn = n => (n > 0 ? "+" : n < 0 ? "−" : "") + Math.abs(n);
+const CARDS = [
+  "Your car's transmission dies. You need that car to get to work.",
+  "A derecho knocks a tree onto your apartment building. You have to move, fast.",
+  "Your hours get cut at work for two months.",
+  "A trip to the ER leaves you with a big medical bill."
+];
+
+// ---------- Live state (the engine hands it to hud() before every screen) ----------
+let LIVE = { picks: {}, scene: -1 };
+let fresh = null; // which roll just happened (its dice tumble once)
+
+// ---------- The rules, in one place ----------
+// Climb 1 rung: total 5 or more. Climbing ONTO rung 5 takes 9 or more. Slide 1 rung: total 2 or less.
+function moveRung(rung, total, o) {
+  o = o || {};
+  const up = o.up || 1;
+  if (o.truck) {
+    if (total >= 7) { const c = climb(rung, 2, total); if (c.kind === "up2") c.why = "Caused by: the food truck takes off! A total of 7 or more."; return c; }
+    if (total <= 3) { const d = slide(rung, 1); if (d.kind === "down") d.why = "Caused by: the food truck fails. A total of 3 or less."; return d; }
+    return { to: rung, kind: "stay", why: "Caused by: the food truck just breaks even. A total of 4 to 6 keeps you where you are." };
+  }
+  if (total >= 5) return climb(rung, up, total);
+  if (total <= 2) {
+    if (o.safe) return { to: rung, kind: "safe", why: "Caused by: your savings. Renting and saving kept you from sliding." };
+    return slide(rung, o.house ? 2 : 1, o.house);
+  }
+  return { to: rung, kind: "stay", why: "Caused by: a total of 3 or 4 isn't enough to climb." };
+}
+function climb(rung, n, total) {
+  if (rung >= 5) return { to: 5, kind: "top", why: "Caused by: you're already on the top rung." };
+  let to = Math.min(5, rung + n);
+  if (to === 5 && total < 9) to = 4;
+  if (to === rung) return { to: rung, kind: "stay", why: "Caused by: the top rung takes a total of 9 or more." };
+  const blocked = rung + n > to;
+  return { to, kind: to - rung === 2 ? "up2" : "up", why: blocked ? "Caused by: a good total, but the top rung takes 9 or more." : to === 5 ? "Caused by: a total of 9 or more. That's what the top rung takes." : "Caused by: a total of 5 or more." };
+}
+function slide(rung, n, house) {
+  if (rung <= 1) return { to: 1, kind: "bottom", why: "Caused by: a low total. You're already on the bottom rung, so it gets harder to climb out." };
+  const to = Math.max(1, rung - n);
+  return { to, kind: to === rung - 2 ? "down2" : "down", why: house ? "Caused by: a low total. You couldn't pay the mortgage and lost the house." : "Caused by: a total of 2 or less." };
+}
+
+// Plays the whole Open Ladder from the dice + the picks so far. Same picks + same dice = same story.
+function simulate(picks) {
+  const out = { start: openBirth, turns: [], rung: openBirth };
+  let rung = openBirth, debt = 0, raise = 0, daycare = 0, cert = 0;
+  // Age 18
+  if (picks.t1 == null) return out;
+  {
+    const c = picks.t1, parts = [["Roll", luck.r[0], "die"], ["Head start", HEAD[rung]]];
+    const rich = rung >= 4;
+    if (c === 0) { parts.push([rich ? "College, parents pay" : "College on loans", 2]); if (!rich) debt = 1; }
+    if (c === 1) parts.push(["Kirkwood part-time", 1]);
+    if (c === 2) { parts.push(["Warehouse job", 0]); raise = 1; }
+    const total = parts.reduce((s, p) => s + p[1], 0), m = moveRung(rung, total);
+    out.turns.push({ id: "t1", from: rung, parts, total, m }); rung = m.to;
+  }
+  // Age 25 (bad-luck card first)
+  out.rung = rung; out.cardRung = rung;
+  if (picks.t2 == null) return out;
+  {
+    const c = picks.t2, parts = [["Roll", luck.r[1], "die"], ["Head start", HEAD[rung]]];
+    parts.push(rung >= 4 ? ["Bad-luck card (savings covered it)", 0] : ["Bad-luck card", -1]);
+    if (debt) parts.push(["Loan payments", -1]);
+    if (raise) parts.push(["Raise from the warehouse", 1]);
+    if (c === 0) { parts.push(["Des Moines job", 2]); if (rung <= 3) daycare = 1; }
+    if (c === 1) parts.push(["Extra shifts", 1]);
+    if (c === 2) { parts.push(["Apprenticeship", 0]); cert = 1; }
+    const total = parts.reduce((s, p) => s + p[1], 0), m = moveRung(rung, total);
+    out.turns.push({ id: "t2", from: rung, parts, total, m }); rung = m.to;
+  }
+  // Age 35
+  out.rung = rung;
+  if (picks.t3 == null) return out;
+  {
+    const c = picks.t3, parts = [["Roll", luck.r[2], "die"], ["Head start", HEAD[rung]]];
+    if (daycare) parts.push(["Daycare costs", -1]);
+    if (cert) parts.push(["Electrician license", 2]);
+    if (c === 0) parts.push(["Buying a house", 1]);
+    if (c === 1) parts.push(["Renting and saving", 0]);
+    if (c === 2) parts.push(["Food truck", 0]);
+    const total = parts.reduce((s, p) => s + p[1], 0);
+    const m = moveRung(rung, total, { house: c === 0, safe: c === 1, truck: c === 2 });
+    out.turns.push({ id: "t3", from: rung, parts, total, m }); rung = m.to;
+  }
+  out.rung = rung; out.end = rung;
+  // Your kid (Part 3)
+  if (picks.k1 == null) return out;
+  {
+    const c = picks.k1, kr = rung, parts = [["Roll", luck.kid, "die"], ["Head start", HEAD[kr]]];
+    if (c === 0) parts.push(["Your savings for college", 2]);
+    if (c === 1) parts.push(["Student loans", 1]);
+    if (c === 2) parts.push(["Working right away", 0]);
+    const total = parts.reduce((s, p) => s + p[1], 0), m = moveRung(kr, total);
+    out.kid = { from: kr, parts, total, m };
+  }
+  return out;
+}
+
+// ---------- Little drawing helpers ----------
+const chip = (p) => `<span class="chip${p[2] ? " " + p[2] : ""}">${p[0]}: ${p[2] === "die" ? p[1] : sgn(p[1])}</span>`;
+const chipsRow = (parts, total) => `<div class="chips">${parts.map(chip).join("")}<span class="chip tot">Total: ${total}</span></div>`;
+function moveLine(m, who) {
+  const r = m.to;
+  const txt = {
+    up: `Climb to rung ${r}.`, up2: `Climb 2 rungs to rung ${r}!`, down: `Slide down to rung ${r}.`, down2: `Slide 2 rungs down to rung ${r}.`,
+    stay: `Stay on rung ${r}.`, safe: `Stay on rung ${r}.`, top: `Stay on rung ${r}.`, bottom: `Stay on rung ${r}.`
+  }[m.kind];
+  const cls = /up/.test(m.kind) ? "up" : /down/.test(m.kind) ? "down" : "flat";
+  return `<p class="move ${cls}">${who === "kid" ? "Your kid: " + txt.replace(/^./, c => c.toLowerCase()) : txt}</p>`;
+}
+const HALE_PICK = { t1: "College, parents pay", t2: "Job at Dad's company", t3: "Family money invested", k1: "Trust fund for college" };
+function haleBox(id, roll) {
+  const parts = [["Roll", roll, "die"], ["Head start", 2]];
+  if (id === "t2") parts.push(["Bad-luck card (savings covered it)", 0]);
+  parts.push([HALE_PICK[id], 2]);
+  const total = parts.reduce((s, p) => s + p[1], 0);
+  return `<div class="rollbox h"><p class="nm">${id === "k1" ? "The Hale kid (same roll)" : "The Hales (same roll)"}</p>${chipsRow(parts, total)}<p class="move flat">${id === "k1" ? "The Hale kid stays on rung 5." : "The Hales stay on rung 5."}</p></div>`;
+}
+function turnResult(id) {
+  const s = simulate(LIVE.picks);
+  const t = id === "k1" ? s.kid : s.turns.find(x => x.id === id);
+  if (!t) return "";
+  const roll = t.parts[0][1];
+  const you = `<div class="rollbox ${id === "k1" ? "kd" : "y"}"><p class="nm">${id === "k1" ? "Your kid" : "You"}</p>${chipsRow(t.parts, t.total)}${moveLine(t.m, id === "k1" ? "kid" : "you")}<p class="cause">${t.m.why}</p></div>`;
+  return `<div class="${fresh === id ? "fresh" : ""}">${you}${haleBox(id, roll)}</div>`;
+}
+function ladder(names, marks) {
+  let h = `<div class="ladder" aria-label="The ladder">`;
+  for (let r = 5; r >= 1; r--) {
+    const toks = marks.filter(m => m[1] === r).map(m => `<span class="tok ${m[0]}">${{ you: "You", hale: "The Hales", kid: "Your kid", hkid: "Hale kid" }[m[0]]}</span>`).join("");
+    h += `<div class="rung"><span class="rn">Rung ${r} · ${names[r]}</span><span class="who">${toks}</span></div>`;
+  }
+  return h + `</div>`;
+}
+const chat = (who, body, boss) => `<div class="chat${boss ? " boss" : ""}"><div class="who">${who}</div>${body}</div>`;
+const BROCK = "BROCK HALE · founder, Rung Games";
+const ROSA = "ROSA · senior tester";
+const card = (lab, body) => `<div class="src-card"><p class="lab">${lab}</p>${body}</div>`;
+// A dice-turn choice. The engine reads fx when it's clicked (so we mark which roll just happened),
+// and reads result every time it draws the screen (so the result is worked out from the saved picks).
+const rollChoice = (id, label) => ({ label,
+  get fx() { fresh = id; setTimeout(() => { if (fresh === id) fresh = null; }, 1500); return {}; },
+  get result() { return turnResult(id); } });
+
+const stoneRules = `<div class="rules"><p class="lab">Rule card · World 1 · The Kingdom of Stone</p><ol>
+  <li>You stay on the rung you are born on. For life.</li>
+  <li>Your rung decides your job. Diggers dig. Farmers farm. Knights fight.</li>
+  <li>You may only marry someone from your own rung.</li>
+  <li>Rung 5 is only for the royal family.</li></ol></div>`;
+const openRules = `<div class="rules"><p class="lab">Rule card · World 2 · The Open Ladder</p><ol>
+  <li>Anyone can move up or down. Each turn: <b>roll + head start + your choice = total</b>.</li>
+  <li>Total of <b>5 or more</b>: climb 1 rung. Climbing onto <b>rung 5</b> takes <b>9 or more</b>.</li>
+  <li>Total of <b>2 or less</b>: slide down 1 rung.</li>
+  <li><b>Head start</b> (tutoring, a car that works, parents who know people): Rung 1 = −1 · Rungs 2–3 = 0 · Rung 4 = +1 · Rung 5 = +2.</li>
+  <li><b>Savings cushion:</b> on rungs 4–5, bad-luck cards cost nothing. Parents there pay for college, so no loans.</li></ol></div>`;
+
+UnitGame.start({
+  key: "soc-u4-d1-start-equal-v1",
+  assignmentId: "soc-u4-d1-start-equal",
+  title: "Sociology · Unit 4 · Day 1 · Does Everyone Start Out Equal?",
+  standard: "SS.9-12.Soc.12",
+  oldApi: "https://fynn-class-assignment-submissions-20261024.neotboy.chatgpt.site/api/submit",
+  startFx: {},
+  hud: st => {
+    LIVE = st;
+    const you = document.getElementById("youPill"), hale = document.getElementById("halePill");
+    if (st.scene < 0) { you.textContent = "You: not born yet"; hale.textContent = "The Hales: Rung 5"; return; }
+    if (st.scene === 0) { you.textContent = "You: Rung " + stoneBirth + " · " + STONE[stoneBirth]; hale.textContent = "The Hales: Rung 5 · " + STONE[5]; return; }
+    const s = simulate(st.picks);
+    if (st.scene >= 2 && s.kid) { you.textContent = "Your kid: Rung " + s.kid.m.to + " · " + OPEN[s.kid.m.to]; hale.textContent = "Hale kid: Rung 5 · " + OPEN[5]; return; }
+    you.textContent = "You: Rung " + s.rung + " · " + OPEN[s.rung]; hale.textContent = "The Hales: Rung 5 · " + OPEN[5];
+  },
+  startLabel: "Start the test",
+  introHtml: `<p class="kicker">Your new job · Rung Games, Cedar Rapids</p><h2>Does everyone start out equal?</h2>
+    <p><b>A game company says its new board game is totally fair. You're the tester who finds out if that's true.</b></p>
+    ${chat(BROCK, `<p>Welcome to the team! Our game <b>LADDER</b> ships Friday. The box says: <b>"ANYONE CAN REACH THE TOP!"</b> Play all three worlds and sign off on it. Easy job.</p>`, true)}
+    <div class="facts"><span>Play 3 worlds with real dice</span><span>Check real U.S. data</span><span>11 checks</span><span>2 short answers</span><span>About 25 minutes</span></div>
+    <p class="src">Rung Games, LADDER, Brock, Rosa, and every family in the game are made up. The history and the U.S. data are real.</p>`,
+  scenes: [
+    // ================= PART 1 =================
+    { kicker: "Part 1 of 3 · World 1", title: "The Kingdom of Stone",
+      blocks: [
+        { type: "note", html: `<div class="split"><div>${stoneRules}<div class="birth"><span class="die-big">${luck.stone}</span><span><span class="lab">Birth roll</span>You rolled a ${luck.stone}. You are born a <b>${STONE[stoneBirth]}</b>, on rung ${stoneBirth}.</span></div>
+          <p>Brock's family, the Hales, are the royal family, of course. "Just for testing," he says.</p></div>${ladder(STONE, [["you", stoneBirth], ["hale", 5]])}</div>` },
+        { type: "event", id: "e1", short: "Kingdom of Stone: try to move up", html: `<p><b>You're 20 years old.</b> You want a better life than the one you were born into. You want to be a <b>${ABOVE}</b>. What do you try?</p>`,
+          choices: [
+            { label: "Work double shifts for 10 years and save every coin", fx: {}, result: `<p><span class="tag flat">Rung: no change</span><span class="tag down">Cost: your health</span>Your back is wrecked and you're tired all the time. You saved a pile of coins. But you are still a ${STONE[stoneBirth]}.</p><p class="cause"><b>Caused by: Rule 1.</b> You stay on the rung you are born on.</p>` },
+            { label: `Secretly learn a ${ABOVE}'s skills so you can do their job`, fx: {}, result: `<p><span class="tag flat">Rung: no change</span><span class="tag down">Cost: a year of pay</span>A ${ABOVE} finds out. You're fined a year of pay and sent back to work as a ${STONE[stoneBirth]}.</p><p class="cause"><b>Caused by: Rule 2.</b> Your rung decides your job.</p>` },
+            { label: `Marry the ${ABOVE}'s kid you've liked for years`, fx: {}, result: `<p><span class="tag flat">Rung: no change</span><span class="tag down">Cost: your family's name</span>The marriage is blocked. Both families are shamed in the town square.</p><p class="cause"><b>Caused by: Rule 3.</b> You may only marry inside your own rung.</p>` }
+          ] },
+        { type: "note", html: `<div class="teach"><p>What you just played is <b>social stratification</b>: a society ranking groups of people into layers, by wealth, power, and respect. The word comes from rock layers (<i>strata</i>), like the Grand Canyon.</p>
+          <p>The Kingdom of Stone is a <b>closed system</b>: birth decides your layer, and moving is nearly impossible. Working harder didn't help, because the rules are built into the society, not into you.</p></div>
+          ${chat(BROCK, `<p>Okay, okay. The Kingdom of Stone is the <b>old</b> world. Nobody wants to live there. Wait until you play my Open Ladder. That's where anyone can make it.</p>`, true)}` },
+        { type: "q", id: "s1", std: "Soc.12", short: "Stone: birth decided rung", prompt: "In the Kingdom of Stone, what decided which rung you ended up on?", options: ["The family you happened to be born into", "How hard you worked once you were an adult", "Who you decided to marry later in life", "How many coins you managed to save up"], hint: "Look back at what happened when you tried to move up. Then check Rule 1.", why: "Nothing you did changed your rung. Birth decided it. That's what makes a system closed." },
+        { type: "q", id: "s2", std: "Soc.12", short: "Stratification = ranked layers", prompt: "A sociologist says the Kingdom of Stone shows <b>social stratification</b>. What does she mean?", options: ["Whole groups are ranked in layers by wealth, power, and respect", "One person in the kingdom happens to be richer than a neighbor", "Rock layers slowly build up under a kingdom over many years", "People get to pick which layer of society they want to join"], hint: "Reread the green box. Is stratification about one person, or about whole groups?", why: "Stratification is about whole groups ranked in layers that last over time, not one rich person and one poor person." },
+        { type: "q", id: "s3", std: "Soc.12", short: "India's caste system = closed", prompt: card("Real history · India's caste system", `<p>For centuries in India's <b>caste system</b>, the family you were born into set your rank, the jobs you could do, and who you could marry. People at the bottom were called "untouchable."</p><p><b>B. R. Ambedkar</b> was born "untouchable" in 1891. He earned the highest college degrees in New York and London, then led the writing of India's Constitution. In 1950, it banned "untouchability." Caste still affects some lives in India today.</p><p><b>Slavery</b> is the most closed system of all: people are owned by other people.</p>`) + "Based on the card, what made India's caste system a closed system?", options: ["Birth set your rank, your job, and who you could marry", "People voted every year on which caste they would join", "Your caste moved up once you started earning more money", "Only adults over 18 were sorted into different castes"], hint: "Reread the first sentence of the card. What did birth decide?", why: "Like the Kingdom of Stone, birth decided rank, job, and marriage. Ambedkar fought to change the rules, and the 1950 Constitution banned \"untouchability.\" But changing a law doesn't erase a system overnight." }
+      ] },
+    // ================= PART 2 =================
+    { kicker: "Part 2 of 3 · World 2", title: "The Open Ladder",
+      blocks: [
+        { type: "note", html: `<div class="split"><div>${openRules}<div class="birth"><span class="die-big">${luck.open}</span><span><span class="lab">Birth roll</span>You rolled a ${luck.open}. You are born into the <b>${OPEN[openBirth]}</b>, on rung ${openBirth}.</span></div></div>${ladder(OPEN, [["you", openBirth], ["hale", 5]])}</div>
+          ${chat(BROCK, `<p>My family starts on rung 5 again. Hey, somebody has to! But every player rolls the <b>same dice</b>. In fact, the Hales will use your exact roll every turn. Totally fair.</p>`, true)}` },
+        { type: "event", id: "t1", short: "Age 18 choice", html: `<p><b>Turn 1 · Age 18.</b> You just finished high school. What's your next move?</p><p class="src">Reminder: total of 5+ climbs a rung (rung 5 takes 9+). Total of 2 or less slides down.</p>`,
+          choices: [
+            rollChoice("t1", "Go to a 4-year college. (+2 now. If your parents can't pay, you take loans: −1 at age 25.)"),
+            rollChoice("t1", "Take classes at Kirkwood part-time while you work. (+1 now, no debt.)"),
+            rollChoice("t1", "Start full-time at a warehouse right away. (+0 now, but a raise: +1 at age 25.)")
+          ] },
+        { type: "q", id: "o1", std: "Soc.12", short: "Same roll, different totals", prompt: "You and the Hales rolled the <b>same number</b>. Why can your totals still come out different?", options: ["The rules give their rung bonus points that yours doesn't get", "The Hales worked harder, so the game gave them more points", "The Hales got luckier, because their roll counted twice", "Whoever plays second in each turn gets one bonus point"], hint: "Compare the chips in your box and the Hales' box. Which ones are different?", why: "Same roll, different rules. The head start is built into the game, not into the players. Sociologists say stratification is a trait (a built-in feature) of society, not just of people." },
+        { type: "event", id: "t2", short: "Age 25 choice", get html() {
+            const r = simulate(LIVE.picks).cardRung || openBirth;
+            return `<div class="card-luck"><span class="lab">Bad-luck card</span>${CARDS[luck.card]}</div><p>${r >= 4 ? "You're on rung " + r + ", so savings cover it. Cost: 0." : "You're on rung " + r + ", with no savings cushion. Cost: −1 this turn."} The Hales get the same card. Their savings cover it.</p><p class="turn"><b>Turn 2 · Age 25.</b> You have a 2-year-old now. What do you do?</p><p class="src">Reminder: total of 5+ climbs a rung (rung 5 takes 9+). Total of 2 or less slides down.</p>`; },
+          choices: [
+            rollChoice("t2", "Move to Des Moines for a better-paying job. (+2 now. Far from family, so daycare: −1 at age 35 unless you're on rung 4+.)"),
+            rollChoice("t2", "Stay near family and pick up extra shifts. (+1 now. Grandma watches your kid for free.)"),
+            rollChoice("t2", "Start an electrician apprenticeship at lower pay. (+0 now, but +2 at age 35.)")
+          ] },
+        { type: "q", id: "o2", std: "Soc.12", short: "Savings cushion", prompt: "Why did the bad-luck card cost the Hales nothing?", options: ["Their savings cushion covered the cost for them", "The Hales got a much smaller bad-luck card", "The Hales rolled a higher number on that turn", "The Hales worked more hours that month than you"], hint: "Check rule 5 on the rule card. Then look at the Hales' chips.", why: "Money in the bank turns a crisis into a hassle. Families without a cushion pay for bad luck with lost chances." },
+        { type: "event", id: "t3", short: "Age 35 choice", html: `<p><b>Turn 3 · Age 35.</b> Last turn of your life in the game. You've got a little money saved. What do you risk?</p><p class="src">Reminder: total of 5+ climbs a rung (rung 5 takes 9+). Total of 2 or less slides down.</p>`,
+          choices: [
+            rollChoice("t3", "Buy a small house. (+1. But if you slide, you lose it and slide 2 rungs.)"),
+            rollChoice("t3", "Keep renting and build savings. (+0. But you can't slide this turn.)"),
+            rollChoice("t3", "Quit and start a food truck. (Big risk: 7 or more climbs 2 rungs. 3 or less slides 1.)")
+          ] },
+        { type: "note", get html() {
+            const s = simulate(LIVE.picks), a = s.start, b = s.end;
+            const steps = [a].concat(s.turns.map(t => t.m.to));
+            const brock = b > a
+              ? `<p>See?! You climbed! That proves it: <b>anyone can reach the top</b> if they work hard. Sign the report.</p>`
+              : `<p>Bad rolls, that's all. If you'd worked harder, you'd have climbed. <b>Anyone can reach the top.</b> Sign the report.</p>`;
+            return `<p><b>Your life on the Open Ladder:</b></p><div class="path">${steps.map((r, i) => `<span>${["Born", "Age 18", "Age 25", "Age 35"][i]}: rung ${r}</span>`).join("<i>→</i>")}</div>
+              <div class="teach"><p>The Open Ladder is an <b>open system</b>, like the U.S. <b>class system</b>: your layer can change through school, work, or luck.</p>
+              <p>Moving up or down is called <b>social mobility</b>. Up is <b>upward mobility</b>. Down is <b>downward mobility</b>. It can happen during your own life, or between parents and kids.</p></div>
+              ${chat(BROCK, brock, true)}`; } },
+        { type: "q", id: "o3", std: "Soc.12", short: "Name your own mobility",
+          get prompt() { const s = simulate(LIVE.picks); return `You were born on rung ${s.start} and ended your life on rung ${s.end}. What do sociologists call that?`; },
+          get options() {
+            const s = simulate(LIVE.picks);
+            if (s.end > s.start) return ["Upward social mobility", "Downward social mobility", "A closed caste system", "No mobility at all"];
+            if (s.end < s.start) return ["Downward social mobility", "Upward social mobility", "A closed caste system", "No mobility at all"];
+            return ["No mobility: you ended where you started", "Upward social mobility: you ended higher", "Downward social mobility: you ended lower", "A closed system: the rules banned moving"];
+          },
+          hint: "Look at your path above. Compare the first rung and the last rung.",
+          get why() { const s = simulate(LIVE.picks); return s.end > s.start ? "You ended higher than you started. That's upward mobility, during one lifetime." : s.end < s.start ? "You ended lower than you started. That's downward mobility, during one lifetime." : "You ended where you started. In an open system, moving is allowed, but your rolls and your head start didn't get you there."; } },
+        { type: "q", id: "o4", std: "Soc.12", short: "Answer Brock's claim", prompt: "Brock says, \"Some players climb, so the game is fair. Anyone can reach the top.\" What's the best answer, based on the rule card?", options: ["Climbing is possible, but head starts make it much easier for some", "He's right: if one player climbs, the rules must be fair to all", "Some players climb, so the head starts don't change much", "The dice decide everything, so the rule card doesn't matter"], hint: "Can players climb? Yes. Now look at rules 2, 4, and 5. Is it equally easy for everyone?", why: "Moving is possible, so the system is open. But the head start, the cushion, and \"the top takes 9\" tip the odds on every roll. Beliefs like \"anyone can make it if they try\" can make big gaps seem fair. That's one of the four big principles of stratification." }
+      ] },
+    // ================= PART 3 =================
+    { kicker: "Part 3 of 3 · World 3", title: "The Next Generation",
+      blocks: [
+        { type: "note", get html() {
+            const s = simulate(LIVE.picks);
+            return `<div class="split"><div><div class="rules"><p class="lab">New rule · World 3</p><ol><li>Your kid starts the game on the rung where <b>you</b> ended.</li><li>Brock's kid starts where Brock ended.</li><li>Same rules. Same dice. One roll for each kid.</li></ol></div>
+              <p>Your kid starts on <b>rung ${s.end}</b> with a head start of <b>${sgn(HEAD[s.end])}</b>. The Hale kid starts on <b>rung 5</b> with <b>+2</b>.</p></div>${ladder(OPEN, [["kid", s.end], ["hkid", 5]])}</div>`; } },
+        { type: "event", id: "k1", short: "Help your kid choice", html: `<p><b>Your kid is 18.</b> You want them to do better than you did. What can you give them?</p><p class="src">Reminder: total of 5+ climbs a rung (rung 5 takes 9+). Total of 2 or less slides down.</p>`,
+          choices: [
+            rollChoice("k1", "Spend your savings on your kid's college. (Kid +2. Your cushion is gone.)"),
+            rollChoice("k1", "Keep your savings. Your kid takes student loans. (Kid +1, but starts life in debt.)"),
+            rollChoice("k1", "Your kid skips college and works to help pay rent. (Kid +0. Rent gets easier.)")
+          ] },
+        { type: "q", id: "n1", std: "Soc.12", short: "Advantage passes to kids", prompt: "Why does the Hale kid start on rung 5 with a +2 head start?", options: ["Advantages carry over from parents to their kids", "The Hale kid rolled the highest birth number", "The game puts the hardest-working kids on top", "Every new player gets a random starting rung"], hint: "Read rule 1 and rule 2 of the new rule card.", why: "Stratification carries over from parents to kids. That's another of the four principles. The Hale kid didn't earn rung 5. He was born there." },
+        { type: "q", id: "n2", std: "Soc.12", short: "Chetty data: 5x as likely", prompt: card("Real U.S. data · Chetty, Hendren, Kline &amp; Saez, \"Where Is the Land of Opportunity?\" (2014)", `<p>Researchers tracked millions of real U.S. kids born in 1980–82 and checked their incomes as adults. They split families into five income layers ("fifths"), like the 5 rungs.</p><div class="barchart"><div class="row low"><span>Born in the bottom fifth → stayed in the bottom fifth</span><div class="t"><span style="width:33.7%"></span></div><b>33.7%</b></div><div class="row low"><span>Born in the bottom fifth → reached the top fifth</span><div class="t"><span style="width:7.5%"></span></div><b>7.5%</b></div><div class="row"><span>Born in the top fifth → stayed in the top fifth</span><div class="t"><span style="width:36.5%"></span></div><b>36.5%</b></div></div>`) + "<span>A kid born in the <b>top</b> fifth is about how many times as likely to end up in the top fifth as a kid born in the <b>bottom</b> fifth?</span>", options: ["About 5 times as likely", "About 2 times as likely", "About the same chance", "About 20 times as likely"], hint: "Compare 36.5% and 7.5%. How many 7.5s fit into 36.5?", why: "36.5% ÷ 7.5% is about 5. Real kids CAN climb from the bottom to the top. But a kid born at the top is about 5 times as likely to end up there." },
+        { type: "q", id: "n3", std: "Soc.12", short: "Rosa = conflict view", prompt: chat(BROCK, `<p>The top rungs pay the most because those jobs matter most. Big rewards get talented people to work hard. That's good for everybody.</p>`, true) + chat(ROSA, `<p>The people on top wrote these rules. That's why their kids get +2, they never pay for bad luck, and the top takes a 9.</p>`) + "Which way of seeing stratification is Rosa using?", options: ["The conflict view: powerful groups protect their advantages", "The functionalist view: big rewards fill the most important jobs", "Weber's view: class, status, and power don't always match", "Symbolic interaction: people act on what symbols mean"], hint: "Who does Rosa say wrote the rules, and who do the rules help?", why: "Rosa uses the conflict view, which builds on Karl Marx: groups with power make rules that protect their advantages and pass them to their kids. Brock uses the functionalist view, from Kingsley Davis and Wilbert Moore (1945)." },
+        { type: "q", id: "n4", std: "Soc.12", label: "Exit check", short: "Exit: open but tilted", prompt: "Which statement fits BOTH your Ladder test and the real U.S. data best?", options: ["People can move, but where you start shapes your chances", "No one ever changes layers, so it's a closed system", "Everyone has the same odds, so where you start doesn't matter", "Lots of people move, so where you start barely matters"], hint: "Did anyone climb in the game or in the data? Did everyone have the same odds?", why: "The U.S. class system is open: people do move. But head starts carry over from parents to kids, so the odds aren't equal." }
+      ] }
+  ],
+  finale: {
+    title: "Your Test Report for Brock",
+    report: st => { const s = simulate(st.picks); const kid = s.kid ? s.kid.m.to : s.end;
+      return `<p>Your family: <b>born on rung ${s.start} → you ended on rung ${s.end} → your kid is on rung ${kid}</b>. The Hales: rung 5 → rung 5 → rung 5.</p><p>Brock wants the box to say "ANYONE CAN REACH THE TOP!" Write your report. Answer both in 1–2 full sentences.</p>`; },
+    prompts: [
+      { id: "cause", short: "What decided your family's rung", label: "1. What decided where your family ended up: your choices, the dice, or your starting rung? Use one thing that happened in your game.", stem: "My family ended on rung ___. The biggest cause was ___ because ___.", min: 70, mustAll: [["roll", "dice", "die", "luck", "chance", "head start", "headstart", "bonus", "start", "born", "birth", "choice", "chose", "college", "loan", "debt", "cushion", "saving", "card", "house", "truck", "kirkwood", "warehouse", "des moines", "shift", "apprentice", "daycare", "parent", "hale", "kid"]], mustMsg: "In answer 1, name something from your game (your roll, head start, a choice, a bad-luck card, the cushion…)." },
+      { id: "open", short: "Is the U.S. class system open", label: "2. Exit ticket: Is the U.S. class system truly open? Use one term and one fact from today. (Go deeper: say how Brock and Rosa would answer differently.)", stem: "The U.S. class system is ___ open because ___.", min: 70, mustAll: [["7.5", "33", "34", "36", "37", "5 times", "five times", "chetty", "data", "percent", "%", "bottom", "top", "parent", "kid", "child", "born", "birth", "head start", "hale", "family", "families", "money", "saving", "cushion", "carry", "pass", "rich", "poor", "caste", "ambedkar", "india", "fifth", "start", "mobility", "climb", "move"]], mustMsg: "In answer 2, back it up with one fact from today (the 7.5% data, head starts passing to kids, the Hales…)." }
+    ]
+  },
+  extraAnswers: st => {
+    const s = simulate(st.picks);
+    return {
+      "Kingdom of Stone birth": "rolled " + luck.stone + " → rung " + stoneBirth + " (" + STONE[stoneBirth] + ")",
+      "Open Ladder path": "born rung " + s.start + (s.turns.length ? " → " + s.turns.map(t => "rung " + t.m.to).join(" → ") : "") + " (rolls " + luck.r.join(", ") + ")",
+      "Kid's rung": s.kid ? "started rung " + s.kid.from + " → rung " + s.kid.m.to + " (roll " + luck.kid + ")" : "",
+      "Bad-luck card": CARDS[luck.card]
+    };
+  }
+});
+</script>
+</body></html>
