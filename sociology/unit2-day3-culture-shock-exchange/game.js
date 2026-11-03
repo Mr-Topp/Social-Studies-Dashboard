@@ -152,8 +152,8 @@
       quote: { q: OBERG, by: "Kalervo Oberg, anthropologist, 1960", plain: "Cues = signals. Acquired = picked up." } },
 
     // 7 -------------------------------------------------------------
-    { id: "c3", kind: "check", std: "Soc.6", short: "Week 4 stage = frustration", action: "📈 Mood Log", frame: "app", stamp: "PLAN UNLOCKED",
-      cards: { "Honeymoon": ["🌸", "Everything is exciting."], "Frustration": ["😤", "Small differences start to annoy you."], "Adjustment": ["🧭", "You start learning the rules."], "Acceptance": ["🏡", "The new way feels normal."] },
+    { id: "c3", kind: "check", std: "Soc.6", short: "Week 4 stage = hostility", action: "📈 Mood Log", frame: "app", stamp: "PLAN UNLOCKED",
+      cards: { "Honeymoon": ["🌸", "Everything is exciting."], "Hostility": ["😤", "Small things annoy you. You blame the new place."], "Recovery": ["🧭", "You learn the rules and laugh at mistakes."], "Adjustment": ["🏡", "The new way feels normal."] },
       title: "How Are You Doing?",
       lede: "Your exchange program asks you to track your mood. Name your stage to unlock a plan.",
       evidence: [
@@ -162,9 +162,9 @@
         { cls: "ev", nm: "Week 4", t: "“I keep messing up. I'm tired all the time. I miss home. I hate the train.”" }
       ],
       q: "Which stage card matches your Week 4? Tap it.",
-      options: ["Frustration", "Honeymoon", "Adjustment", "Acceptance"],
+      options: ["Hostility", "Honeymoon", "Recovery", "Adjustment"],
       hint: "Match your Week 4 words to what each stage card says.",
-      why: "Stress, mistakes, and missing home are the frustration stage. It's normal, and for most people it passes." },
+      why: "Stress, mistakes, and missing home are the hostility stage. It's normal, and for most people it passes." },
 
     // 8 -------------------------------------------------------------
     { id: "d3", kind: "decide", when: "Week 4", where: "Friday night", art: ["🎮", "📞", "🎤"], bg: "linear-gradient(120deg,#ede6ff,#fde7ee)",
@@ -557,17 +557,17 @@
     if (h >= 8) return { key: "pause", cls: "e-pause", big: "⏸️", title: "Program on Pause", stage: "Ending: the exchange gets paused", meter: "h", dir: 1,
       text: "Tanner's videos hit a million views. Hoshizora High pauses its exchange with Marion. Next year's students won't get to go, including Haruto's little sister.",
       reveal: "Ethnocentric hot takes don't just hurt feelings. They damage real relationships between groups of people." };
-    if (t >= 7 && h <= 5) return { key: "home", cls: "e-home", big: "🏡", title: "Second Home", stage: "Stage reached: Acceptance", meter: "t", dir: 1,
+    if (t >= 7 && h <= 5) return { key: "home", cls: "e-home", big: "🏡", title: "Second Home", stage: "Stage reached: Adjustment", meter: "t", dir: 1,
       text: "Month 3: you bow without thinking. You'll miss cleaning time. Yui is already planning a visit to Iowa.",
-      reveal: "You reached the <b>acceptance stage</b>: the new way feels normal. Back in Marion, your little brother walks into the kitchen in muddy sneakers, and it looks SO wrong to you. That's <b>reverse culture shock</b>." };
-    if (t <= 3) return { key: "sick", cls: "e-sick", big: "✈️", title: "Homesick Exit", stage: "Stage reached: stuck in Frustration", meter: "t", dir: -1,
+      reveal: "You reached the <b>adjustment stage</b>: the new way feels normal. Back in Marion, your little brother walks into the kitchen in muddy sneakers, and it looks SO wrong to you. That's <b>reverse culture shock</b>." };
+    if (t <= 3) return { key: "sick", cls: "e-sick", big: "✈️", title: "Homesick Exit", stage: "Stage reached: stuck in Hostility", meter: "t", dir: -1,
       text: "You ask to fly home a month early. Judging Osaka by Marion's rules, or hiding from people, made every day harder.",
-      reveal: "You never got past the <b>frustration stage</b>. When you treat home as the only normal, or stay away from people, a new place keeps feeling wrong." };
+      reveal: "You never got past the <b>hostility stage</b>. When you treat home as the only normal, or stay away from people, a new place keeps feeling wrong." };
     const blocked = t >= 7;   // trust was high enough, but the hot takes kept people wary
-    return { key: "out", cls: "e-out", big: "🙂", title: "Polite Outsider", stage: "Stage reached: Adjustment", meter: blocked ? "h" : "t", dir: blocked ? 1 : -1,
+    return { key: "out", cls: "e-out", big: "🙂", title: "Polite Outsider", stage: "Stage reached: Recovery", meter: blocked ? "h" : "t", dir: blocked ? 1 : -1,
       why: blocked ? "Your friends trusted you, but Tanner's hot takes made the rest of the school suspicious." : "What held you back:",
       text: "You got by. You know the rules now, but you never got really close to anyone. Osaka still doesn't feel like home.",
-      reveal: "You're in the <b>adjustment stage</b>: you learned the rules, but the new culture doesn't feel like yours yet." };
+      reveal: "You're in the <b>recovery stage</b>: you learned the rules, but the new culture doesn't feel like yours yet." };
   }
   function causedBy(e) {
     const m = e.meter, w = x => (x.want || x.fx || {})[m] || 0;
