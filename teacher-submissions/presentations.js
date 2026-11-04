@@ -102,20 +102,20 @@
 
     // ---- government ----
     { course: "government", unit: 1, title: "Foundations", url: g("16kOZNiGGwIK4CfQXlpSoumBXYRtuYIaL1zjc3IiWJus"), pub: "2PACX-1vRD0AQT47rhk_tccJw-EKPnNBUusxbD76uAgohgkFyfzRP_A-MZGsP5YIUWyAcUIcG0DDK0LklGrDL6", summativeSlide: "g1d1s01summ",
-      // Rows follow Fynn's Schoology day posts; each row opens the deck day(s) that teach that topic.
+      // 2026-11-04: deck re-split to match Fynn's 10 Schoology day posts (slides now say DAY 1–10), so each row opens its own deck day.
       plan: [
         { day: 1, title: "Purposes and Origins of Government", std: "Gov.1, 5", slides: [{ day: 1 }] },
         { day: 2, title: "Social Contract, Popular Sovereignty, and Rule of Law", std: "Gov.2, 4", slides: [{ day: 2 }] },
         { day: 3, title: "Types and Systems of Government", std: "Gov.1", slides: [{ day: 3 }] },
         { day: 4, title: "Roots of American Government", std: "Gov.3", slides: [{ day: 4 }] },
-        { day: 5, title: "Articles of Confederation", std: "Gov.3", slides: [{ day: 4, slide: "g1d4s06", label: "from the Articles" }] },
-        { day: 6, title: "Constitutional Convention, Compromises, and Ratification", std: "Gov.2–4", slides: [{ day: 5 }] },
-        { day: 7, title: "Constitution", std: "Gov.1, 3–5", slides: [{ day: 6 }, { day: 8, label: "amendments" }] },
-        { day: 8, title: "Bill of Rights", std: "Gov.3–4", slides: [{ day: 7 }] },
-        { day: 9, title: "Federalism, the Supremacy Clause, and Iowa Government", std: "Gov.1–4, 9", slides: [{ day: 6, slide: "g1d6s06", label: "from Federalism" }, { day: 8, slide: "g1d8s04", label: "from Iowa's constitution" }] },
-        { day: 10, title: "Summative", std: "Gov.1–5, 9", slides: [{ day: 9, label: "review" }] }
+        { day: 5, title: "Articles of Confederation", std: "Gov.3", slides: [{ day: 5 }] },
+        { day: 6, title: "Constitutional Convention, Compromises, and Ratification", std: "Gov.2–4", slides: [{ day: 6 }] },
+        { day: 7, title: "Constitution", std: "Gov.1, 3–5", slides: [{ day: 7 }] },
+        { day: 8, title: "Bill of Rights", std: "Gov.3–4", slides: [{ day: 8 }] },
+        { day: 9, title: "Federalism, the Supremacy Clause, and Iowa Government", std: "Gov.1–4, 9", slides: [{ day: 9 }] },
+        { day: 10, title: "Summative", std: "Gov.1–5, 9", slides: [{ day: 10, label: "review" }] }
       ],
-      days: [{ day: 1, title: "Government: Why Do People Make Rules?", std: "Gov.1, 5", slide: "g1d1s01" }, { day: 2, title: "Enlightenment: Who Gives Government Its Power?", std: "Gov.2", slide: "g1d2s01" }, { day: 3, title: "Types of Government: Who Holds the Power?", std: "Gov.1", slide: "g1d3s01" }, { day: 4, title: "American Roots: Where Did Our Rights Start?", std: "Gov.3, 4", slide: "g1d4s01" }, { day: 5, title: "Constitution: How Do You Make a Fair Deal?", std: "Gov.3, 4", slide: "g1d5s01" }, { day: 6, title: "Constitution: Who Holds the Power?", std: "Gov.4, 9", slide: "g1d6s01" }, { day: 7, title: "Bill of Rights: How Free Are You at School?", std: "Gov.3, 4, 5", slide: "g1d7s01" }, { day: 8, title: "Keeping Order: How Much Power Is Too Much?", std: "Gov.3, 5", slide: "g1d8s01" }, { day: 9, title: "Review: What Have We Built So Far?", std: "Gov.1, 2, 3, 4, 5, 9", slide: "g1d9s01" }] },
+      days: [{ day: 1, title: "Government: Why Do People Make Rules?", std: "Gov.1, 5", slide: "g1d1s01" }, { day: 2, title: "Enlightenment: Who Gives Government Its Power?", std: "Gov.2", slide: "g1d2s01" }, { day: 3, title: "Types of Government: Who Holds the Power?", std: "Gov.1", slide: "g1d3s01" }, { day: 4, title: "American Roots: Where Did Our Rights Start?", std: "Gov.3, 4", slide: "g1d4s01" }, { day: 5, title: "Articles: Why Did Our First Government Fail?", std: "Gov.3, 4", slide: "g1u1d5bell" }, { day: 6, title: "Constitution: How Do You Make a Fair Deal?", std: "Gov.3, 4", slide: "g1d5s01" }, { day: 7, title: "Constitution: How Much Power Is Too Much?", std: "Gov.3, 4, 5", slide: "g1d8s01" }, { day: 8, title: "Bill of Rights: How Free Are You at School?", std: "Gov.3, 4, 5", slide: "g1d7s01" }, { day: 9, title: "Federalism: Who Holds the Power?", std: "Gov.3, 4, 9", slide: "g1d6s01" }, { day: 10, title: "Review: What Have We Built So Far?", std: "Gov.1–5, 9", slide: "g1d9s01" }] },
     { course: "government", unit: 2, title: "Political Beliefs, Parties & Citizenship", url: g("1r_9cfbyiq-eIJujo9HQqOoTCqDmfSucM0VhRUgc3pDE"), pub: "2PACX-1vR3QERGgirHqReDreLZfqfNMOWtQUtXyVwAiMIr6ZcfAPI0MEQAo37l0U19sJMFzmQujfjAPeX7DM0O", summativeSlide: "g2d1s01summ",
       // Rows follow Fynn's Schoology day posts; each row opens the deck day(s) that teach that topic.
       plan: [
