@@ -142,6 +142,7 @@ details.partdrop>summary .parthint{font-size:.75rem;font-weight:600;letter-spaci
 .sumdate{font-size:.8rem;font-weight:800;color:var(--red)}
 .unitcount .todocount{color:var(--red);font-weight:800}
 .unitcount .reviewnote{color:#1d5fbf;font-weight:800}
+.unitcount .gnnote{color:#7b2fbf;font-weight:800}
 .daytitle.unplanned{color:var(--muted);font-weight:600;font-style:italic}
 @media (max-width:760px){.dayrow{grid-template-columns:1fr}}
 /* Calmer layout (2026-11-02): one header line, Lessons | Grades switch, keys and alternatives tucked under "more" */
@@ -795,7 +796,7 @@ function linksHtml() {
     const rowDate = r => { if (!cal || isP1 || !r.day || r.summ || r.day > cal.days) return ""; const a = dayDate(tab, false, unitNo, r.day, false); if (!a) return ""; const b = r.span ? dayDate(tab, false, unitNo, r.span, false) : null; return `<span class="sumdate">📅 ${safe(niceDate(a.iso))}${b && b.iso !== a.iso ? " – " + safe(niceDate(b.iso)) : ""}</span>`; };
     const count = ([nDays ? plural(nDays, "day") : (nActs ? plural(nActs, "assignment") : ""), cal && cal.summative ? "summative " + shortDate(cal.summative) : ""].filter(Boolean).join(" · ") || (main ? "slides ready" : "slides not built yet"))
       + (nTodo ? ` · <span class="todocount">⚠ ${nTodo} not made yet</span>` : "")
-      + (REVIEW_AGAIN.has(key) ? ` · <span class="reviewnote">🔁 Go through material again</span>` : "");
+      + (REVIEW_AGAIN.has(key) ? ` · <span class="reviewnote">🔁 Go through material again</span> · <span class="gnnote">📚 Add graphic novels</span>` : "");
     const body = list.map(r => {
       // Summative row: just the green-sheet date, no "Day N · Summative" (Fynn, 2026-11-02).
       const label = r.single ? "" : r.summ && cal && cal.summative ? `<span class="sumdate">📅 ${safe(niceDate(cal.summative))}</span>` : r.day ? `<b>${r.span ? `Days ${r.day}–${r.span}` : `Day ${r.day}`}</b>${rowDate(r)}` : `<b>Other</b>`;
