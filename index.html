@@ -406,7 +406,8 @@ async function loadWork0(course, name) {
 }
 
 // ---------- Screens ----------
-let screen = "home", pickCourse = "";
+// The plain site link always opens "Which class are you in?" (Fynn, 11-04). Class links like .../#us-history still go straight in.
+let screen = "class", pickCourse = "", adding = false;
 
 function draw() {
   const app = $("app");
@@ -417,19 +418,20 @@ function draw() {
 
 function drawClassPick(app) {
   screen = "class";
-  const have = Object.keys(me.classes);
+  const have = adding ? Object.keys(me.classes) : [];
   app.innerHTML = `<section class="pick">
-    <p class="eyebrow">Social Studies</p><h1>${have.length ? "Add a class" : "Welcome! Which class are you in?"}</h1>
-    <p class="sub">${have.length ? "Pick another class you take." : "Pick your class. You only have to do this once on this Chromebook."}</p>
+    <p class="eyebrow">Social Studies</p><h1>${adding ? "Add a class" : "Welcome! Which class are you in?"}</h1>
+    <p class="sub">${adding ? "Pick another class you take." : "Pick your class."}</p>
     <div class="choices">${Object.keys(COURSES).map(k => `<button class="choice" data-c="${k}">${esc(COURSES[k])}${have.includes(k) ? " ✓" : ""}<small>${esc(CLASS_NOTE[k] || "")}</small></button>`).join("")}</div>
-    ${have.length ? `<p class="backrow"><button class="linkbtn" id="back">← Back to my work</button></p>` : ""}
+    ${adding && have.length ? `<p class="backrow"><button class="linkbtn" id="back">← Back to my work</button></p>` : ""}
   </section>${footer()}`;
   app.querySelectorAll("[data-c]").forEach(b => b.onclick = () => {
     const c = b.dataset.c;
+    adding = false;
     if (me.classes[c]) { me.current = c; saveMe(); screen = "home"; return draw(); }
     pickCourse = c; screen = "name"; draw();
   });
-  if ($("back")) $("back").onclick = () => { screen = "home"; draw(); };
+  if ($("back")) $("back").onclick = () => { adding = false; screen = "home"; draw(); };
   focusFirst();
 }
 
@@ -486,7 +488,7 @@ async function drawHome(app) {
     draw();
   });
   if (testMode) return showWork(course, name);
-  $("addClass").onclick = () => { screen = "class"; draw(); };
+  $("addClass").onclick = () => { adding = true; screen = "class"; draw(); };
   $("notMe").onclick = () => {
     if (!confirm("Not " + name + "? This clears " + first + "'s name from this Chromebook so you can pick yours.")) return;
     me = { classes: {}, current: "" };
