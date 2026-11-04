@@ -979,8 +979,7 @@ function renderTodo() {
   const linkList = Object.values(LINKS).filter(l => !l.removed && l.url && COURSES[l.course] && !isReviewMark(l));
   const reviewList = Object.values(LINKS).filter(l => !l.removed && COURSES[l.course] && isReviewMark(l));
   const nOf = f => f === "all" ? items.length : items.filter(t => filterOf(t) === f).length;
-  const head = `<p class="todohead">Everything still to do, soonest first: <span class="red">⚠ not made yet</span>, days with no video, and online days and summatives you haven't reviewed. Paste a link to fill a day in (it shows on that day in Lessons and on students' home pages, never answer keys or tests). Played through an online day or looked over a test? Click <b>✓ Mark reviewed</b>.</p>` +
-    `<div class="todofilters" role="group" aria-label="Show">${TODO_FILTERS.map(([f, label]) => `<button class="mode" data-f="${f}" aria-pressed="${todoFilter === f}">${label} <span class="n">${nOf(f)}</span></button>`).join("")}</div>` +
+  const head = `<div class="todofilters" role="group" aria-label="Show">${TODO_FILTERS.map(([f, label]) => `<button class="mode" data-f="${f}" aria-pressed="${todoFilter === f}">${label} <span class="n">${nOf(f)}</span></button>`).join("")}</div>` +
     (loaded ? "" : `<p class="todowarn">Enter your code at the top first, so you can add links and mark days reviewed (and so ones you already did count).</p>`);
   const body = [[], [], [], [], []];
   if (!shown.length) body[0].push(`<div class="empty">${todoFilter === "all" ? "Nothing left to do. 🎉" : "Nothing left here. 🎉"}</div>`);
