@@ -413,6 +413,8 @@ function rebuildRows() {
   });
   rows = baseRows.concat(paper).sort((a, b) => b.submittedAt.localeCompare(a.submittedAt));
   mergeNames();
+  // Test T. stays in the Google Sheet (so the skip-through account keeps working) but never shows here (Fynn, 11-04).
+  rows = rows.filter(r => !isTestStudent(r.studentName) && !isTestStudent(r.typedName));
 }
 // Redraw without losing your place: keeps each table's scroll and the box you were typing in.
 function renderKeep() {
@@ -625,7 +627,7 @@ function openPaperBox() {
 
 // ---- Class lists and name clean-up ----
 let rosters = {};
-const rosterOf = t => rosters[t] || [];
+const rosterOf = t => (rosters[t] || []).filter(s => !isTestStudent(s));   // Test T. hidden from the dashboard (Fynn, 11-04)
 const firstKey = n => String(n || "").split(" ")[0].toLowerCase().replace(/[^a-z]/g, "");
 const nameKey = n => { const p = String(n || "").trim().split(/\s+/); return firstKey(n) + "|" + (p.length > 1 ? p[p.length - 1].replace(/[^A-Za-z]/g, "").charAt(0).toLowerCase() : ""); };
 // Same student typed two ways ("Kai" and "Kai S.") counts as one person: match to the class list first,
@@ -663,7 +665,7 @@ function clearedLabel(course, id) {
   return hit ? c.label : "";
 }
 const doneAll = (course, id) => DONE_ALL[id] || clearedLabel(course, id);
-const isTestStudent = s => s === TEST_NAME || s === "Test S."; // "Test S." was its first name
+const isTestStudent = s => /^test [ts]\.?$/i.test(String(s || "").trim()); // "Test T." (and "Test S.", its first name), any capitals
 const offList = (t, s) => rosterOf(t).length && !rosterOf(t).includes(s);
 const studentCell = (t, s) => `<td class="student">${safe(s)}${isTestStudent(s) ? '<small class="testtag">TEST (you)</small>' : offList(t, s) ? '<small class="offlist">not on class list</small>' : ""}</td>`;
 
@@ -683,7 +685,7 @@ function attentionHtml(list) {
   if (ones.length) parts.push(`<div class="att low"><b>Level 1 on a standard (${ones.length})</b><ul>${ones.join("")}</ul></div>`);
   return `<details class="attention"${attentionOpen ? " open" : ""}><summary>Needs attention${count ? " (" + count + ")" : ": nothing right now"}</summary>${parts.join("")}
     <div class="rosteredit"><button class="light" id="rosterBtn">Edit class list (${roster.length})</button>
-    <div id="rosterBox" hidden><p class="status">One student per line, first name + last initial (like Jordan M.).</p><textarea id="rosterText" rows="8">${safe(roster.join("\n"))}</textarea><button id="rosterSave">Save class list</button> <span id="rosterStat" class="status"></span></div></div></details>`;
+    <div id="rosterBox" hidden><p class="status">One student per line, first name + last initial (like Jordan M.).</p><textarea id="rosterText" rows="8">${safe((rosters[tab] || []).join("\n"))}</textarea><button id="rosterSave">Save class list</button> <span id="rosterStat" class="status"></span></div></div></details>`;
 }
 
 const UNITS = window.CLASS_UNITS || {}, UNIT_WORD = { civics: "Friday" };
@@ -1076,7 +1078,7 @@ function flashNote(msg) { const n = $("todoNote"); n.textContent = msg; n.hidden
 function renderTabs() {
   const todoN = collectTodos().filter(t => t.group < 3).length;
   $("tabs").innerHTML = Object.keys(COURSES).map(k =>
-    `<button class="tab" role="tab" data-tab="${k}" aria-selected="${k === tab}">${COURSES[k]}<span class="n">${tabRows(k).length}</span></button>`).join("") +
+    `<button class="tab" role="tab" data-tab="${k}" aria-selected="${k === tab}">${COURSES[k]}</button>`).join("") +
     `<button class="tab todotab" role="tab" data-tab="todo" aria-selected="${tab === "todo"}">📝 To-do<span class="n">${todoN}</span></button>`;
   $("tabs").querySelectorAll(".tab").forEach(b => b.onclick = () => { tab = b.dataset.tab; sessionStorage.setItem("dash-tab", tab); $("search").value = ""; render(); });
   if (tab === "todo") return;
