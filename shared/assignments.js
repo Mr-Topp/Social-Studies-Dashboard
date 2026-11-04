@@ -102,7 +102,8 @@ window.CLASS_CLEARED = {
 // Activities every student in the class gets credit for as "Completed in class" on the TEACHER dashboard
 // (shown with a check, no score, so it doesn't count toward mastery). Real turn-ins still show over it.
 window.CLASS_DONE_FOR_ALL = {
-  "divide-africa-day1": "Completed in class"
+  "divide-africa-day1": "Completed in class",
+  "civics-test-s1-founders-defense": "Completed in class"   // Friday 1 Founders' Defense: everyone did it (Fynn, 11-03)
 };
 
 // 🔒 LOCKED by Fynn (2026-11-02). Don't change unit day counts or test dates without his yes in your chat (see CLAUDE.md).
