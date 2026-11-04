@@ -34,7 +34,7 @@ kbd{background:#fff;border:1px solid #cfc5b3;border-bottom-width:2px;border-radi
 <main>
 <p class="eyebrow">Teacher dashboard · quick update</p>
 <h1>Update your Teacher Tools</h1>
-<p class="lead">This lets you <b>grade online work by hand</b> when a student's turn-in didn't save but you saw them do it (click their "—" box on the dashboard and pick 1–4). It keeps everything else working the same: students' to-do lists, your M and EX marks, no grades on the student site. About 2 minutes. Use your <b>school</b> Google account.</p>
+<p class="lead">This makes students' to-do lists match names the way your dashboard does, so work typed as "JORDAN M." still counts for Jordan M. It also lets you <b>grade online work by hand</b> when a student's turn-in didn't save but you saw them do it (click their "—" box on the dashboard and pick 1–4). It keeps everything else working the same: students' to-do lists, your M and EX marks, no grades on the student site. About 2 minutes. Use your <b>school</b> Google account.</p>
 <ol>
   <li id="s1"><b>Copy the new script.</b><br><button class="btn" id="copyBtn">Copy the script</button><span class="st" id="copySt" aria-live="polite"></span></li>
   <li id="s2"><b>Open your Teacher Tools script.</b><br>
@@ -68,14 +68,14 @@ $("checkBtn").onclick = async () => {
   out.className = "st"; out.textContent = "Checking…";
   try {
     const ver = await fetch(URL_, { method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify({ action: "version" }) }).then(r => r.json()).catch(() => ({}));
-    if (!(ver.ok && (ver.can || []).includes("online-grade"))) {
+    if (!(ver.ok && (ver.can || []).includes("name-caps"))) {
       out.className = "st bad";
       out.innerHTML = "Not updated yet. Google is still running the old version. Redo step 4 and make sure you pick <b>New version</b> before Deploy. Then check again.";
       return;
     }
     ["s3", "s4", "s5"].forEach(id => $(id).classList.add("done"));
     out.className = "st ok";
-    out.innerHTML = "✅ It worked! You can now grade online work by hand from the — box. <a href=\"./\">Back to your dashboard →</a>";
+    out.innerHTML = "✅ It worked! Students' to-do lists now match names the same way your dashboard does. <a href=\"./\">Back to your dashboard →</a>";
   } catch (e) {
     out.className = "st bad"; out.textContent = "Couldn't reach Google. Check your internet and try again.";
   }

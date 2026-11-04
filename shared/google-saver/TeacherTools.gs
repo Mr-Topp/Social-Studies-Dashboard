@@ -39,7 +39,7 @@ function doPost(e) {
     if (body.action === "class_list") return json(classList(body));
     if (body.action === "my_work") return json(myWork(body));
     // Lets the update page check which version is running. Shares nothing.
-    if (body.action === "version") return json({ ok: true, version: 9, can: ["links", "student-links", "paper", "no-grades", "student-todo", "online-grade"] });
+    if (body.action === "version") return json({ ok: true, version: 10, can: ["links", "student-links", "paper", "no-grades", "student-todo", "online-grade", "name-caps"] });
   } catch (err) { return json({ ok: false, error: "Try again later." }); }
   var check = codeCheck(body.code);
   if (check === "locked") return json({ ok: false, error: "Too many wrong teacher codes. Wait 15 minutes, then try again." });
@@ -339,13 +339,14 @@ function myWork(b) {
   d.rows.forEach(function (r) { done[r.id] = true; });
   var me = shortName(b.name), mine = {}, missing = {}, exempt = {};
   if (me) {
-    var meFirst = firstKey(me), meHasLast = me.indexOf(" ") > 0;
-    // A first name alone and the same first name + last initial count as one student (same rule as the teacher dashboard).
+    var meFirst = firstKey(me), meInit = initialOf(me);
+    // A first name alone and the same first name + last initial count as one student, and capitals don't matter
+    // ("JORDAN M." = "Jordan M.") -- same rule as the teacher dashboard (Fynn, 11-04).
     var same = function (n) {
       n = shortName(n);
-      if (!n) return false;
-      if (n === me) return true;
-      return firstKey(n) === meFirst && (n.indexOf(" ") < 0 || !meHasLast);
+      if (!n || firstKey(n) !== meFirst) return false;
+      var nInit = initialOf(n);
+      return !nInit || !meInit || nInit === meInit;
     };
     d.rows.forEach(function (r) { if (same(r.name)) mine[r.id] = true; });
     Object.keys(d.marks).forEach(function (k) {
