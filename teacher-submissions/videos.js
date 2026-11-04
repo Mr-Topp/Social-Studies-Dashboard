@@ -239,11 +239,16 @@ Object.assign(window.CLASS_ASSIGNMENTS, {
   "gov-u5-d3-video-qL9kqmn-dUA": { course: "government", unit: 5, day: 3, turnIn: false, video: true, std: [], title: "Day 3 · What is the Difference Between Executive and Independent Agencies? [No. 86]", path: "https://www.youtube.com/watch?v=qL9kqmn-dUA" },
   "gov-u5-d3-video-PNojm8f6Seo": { course: "government", unit: 5, day: 3, turnIn: false, video: true, std: [], title: "Day 3 · What is FEMA? The federal agency that responds to national disasters", path: "https://www.youtube.com/watch?v=PNojm8f6Seo" },
 
-  // ---- Civics · Fridays (Schoology Friday pages, same in both sections; Fridays 1 and 7 have no videos) ----
+  // ---- Civics · Fridays (Schoology Friday pages, same in both sections; Friday 1's are in its slides; Friday 7 has none) ----
+  // Friday 1: Founders' Files (videos are in the Friday 1 slides)
+  "civics-f1-video-uihNc_tdGbk": { course: "civics", unit: 1, turnIn: false, video: true, std: [], title: "The making of the American Constitution", path: "https://www.youtube.com/watch?v=uihNc_tdGbk" },
+  "civics-f1-video-LKJMWHCUoiw": { course: "civics", unit: 1, turnIn: false, video: true, std: [], title: "What you might not know about the Declaration of Independence", path: "https://www.youtube.com/watch?v=LKJMWHCUoiw" },
+  "civics-f1-video-aMCDikASE4o": { course: "civics", unit: 1, turnIn: false, video: true, std: [], title: "Why wasn\u2019t the Bill of Rights originally in the US Constitution?", path: "https://www.youtube.com/watch?v=aMCDikASE4o" },
   // Friday 2: How the Government Works
   "civics-f2-video-HuFR5XBYLfU": { course: "civics", unit: 2, turnIn: false, video: true, std: [], title: "How is power divided in the United States government?", path: "https://www.youtube.com/watch?v=HuFR5XBYLfU" },
   "civics-f2-video-Otbml6WIQPo": { course: "civics", unit: 2, turnIn: false, video: true, std: [], title: "Schoolhouse Rock: How a Bill Becomes a Law", path: "https://www.youtube.com/watch?v=Otbml6WIQPo" },
   "civics-f2-video-W9H3gvnN468": { course: "civics", unit: 2, turnIn: false, video: true, std: [], title: "Does your vote count? The Electoral College explained", path: "https://www.youtube.com/watch?v=W9H3gvnN468" },
+  "civics-f2-video-scotus-tedEd": { course: "civics", unit: 2, turnIn: false, video: true, std: [], title: "How do US Supreme Court justices get appointed? (in the slides; optional)", path: "https://www.ted.com/talks/peter_paccone_how_do_us_supreme_court_justices_get_appointed" },
   // Friday 3: Rights & Responsibilities
   "civics-f3-video-P9VdyPbbzlI": { course: "civics", unit: 3, turnIn: false, video: true, std: [], title: "The fight for the right to vote in the United States", path: "https://www.youtube.com/watch?v=P9VdyPbbzlI" },
   "civics-f3-video-c_g1BMVFcuw": { course: "civics", unit: 3, turnIn: false, video: true, std: [], title: "How to turn protest into powerful change", path: "https://www.youtube.com/watch?v=c_g1BMVFcuw" },
