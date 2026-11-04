@@ -229,7 +229,7 @@ button.colmenu:hover{background:#e7e0d1}
 .paperbox label{display:flex;flex-direction:column;gap:3px;font-size:.85rem}
 .paperbox input[name=title]{width:min(340px,80vw)}
 .savechip{font-size:.85rem;font-weight:800;color:var(--muted);align-self:center;margin-left:4px}
-.savechip.bad{color:#a33d36}.savechip.ok{color:#2f6b3a}
+.savechip.bad{color:#a33d36;position:fixed;left:50%;bottom:18px;transform:translateX(-50%);z-index:60;background:#fff3f1;border:2px solid #a33d36;border-radius:12px;padding:10px 16px;font-size:1rem;box-shadow:0 6px 20px rgba(0,0,0,.18);max-width:92vw}td.unsaved{outline:3px dashed #a33d36;outline-offset:-3px}.savechip.ok{color:#2f6b3a}
 .savechip button{padding:4px 10px;font-size:.8rem;margin-left:6px}
 </style>
 </head>
@@ -463,7 +463,7 @@ async function flushMarks() {
     saveErr = ""; flushing = false; rebuildRows(); renderKeep(); chip("ok", "✓ Saved");
     if (Object.keys(pend).length) flushTimer = setTimeout(flushMarks, 300);
   } catch (e) {
-    flushing = false; saveErr = e.message;
+    flushing = false; saveErr = e.message; renderKeep();
     const c = $("saveChip"); chip("bad", "Not saved yet. Your typing is kept."); if (c && /unknown request|Type 1-4, EX or M/i.test(e.message)) c.innerHTML = "⚠ " + needUpdate(e.message);
   }
 }
@@ -1265,11 +1265,16 @@ function renderGrid(list) {
     }
     if (colEx(tab, id)) return `<td class="ex" title="Everyone is exempt from this (column menu ⋮ to undo)">EX</td>`;
     if (markOf(tab, id, s) === "EX" && !doneAll(tab, id)) return `<td class="ex"><button class="mk" data-s="${safe(s)}" data-a="${safe(id)}" title="Exempt. Click to change.">EX</button></td>`;
-    const hits = list.filter(r => r.studentName === s && r.assignmentId === id);
+    // Your hand grades come from the marks themselves, so a new or changed grade shows the moment you tap it (Fynn, 11-04: "it didn't work").
+    const hits = list.filter(r => r.studentName === s && r.assignmentId === id && r.kind !== "mark"), hand = markOf(tab, id, s);
+    if (!hits.length && /^[1-4]$/.test(hand)) {
+      const k = mkKey(tab, id, s), wait = k in pend, n = +hand;
+      const lvl = wait ? (saveErr ? "⚠ NOT SAVED" : "saving…") : "Your grade", when = wait ? "" : dateShort((MARKS[k] || {}).at || "");
+      return `<td class="done ${LCLS(n)}${wait && saveErr ? " unsaved" : ""}"><button class="mk" data-s="${safe(s)}" data-a="${safe(id)}" title="Your grade. Their turn-in didn't save. Click to change it."><b class="grade">Level ${n}</b><span class="lvl">${lvl}</span><span class="when">${when}</span></button></td>`;
+    }
     // M = missing on online work (Fynn, 11-03): red M box. Click it to clear or exempt. Doesn't lower averages.
     if (!hits.length && markOf(tab, id, s) === "M") return `<td class="miss mmon"><button class="mk" data-s="${safe(s)}" data-a="${safe(id)}" title="Missing (M). Click to change.">M</button></td>`;
     if (!hits.length) return doneAll(tab, id) ? `<td class="done inclass" title="${safe(doneAll(tab, id))} (everyone gets credit, no score)"><span class="ic"><b class="grade">✓</b><span class="lvl">${safe(doneAll(tab, id)).replace(/ in class$/, "<br>in class")}</span></span></td>` : `<td class="miss"><button class="mk" data-s="${safe(s)}" data-a="${safe(id)}" title="Nothing turned in. Click to exempt this student.">—</button></td>`;
-    if (hits[0].kind === "mark") { const n = +(hits[0].answers || {})["Teacher level"]; return `<td class="done ${LCLS(n)}"><button class="mk" data-s="${safe(s)}" data-a="${safe(id)}" title="Your grade. Their turn-in didn't save. Click to change it."><b class="grade">Level ${n}</b><span class="lvl">Your grade</span><span class="when">${dateShort(hits[0].submittedAt)}</span></button></td>`; }
     const g = dayGrade(hits[0]), when = dateShort(hits[0].submittedAt) + (hits.length > 1 ? " · ×" + hits.length : "");
     if (!g) return `<td class="done check"><button data-s="${safe(s)}" data-a="${safe(id)}" title="Not graded yet. Open to read their answers."><b class="grade">Check</b><span class="lvl">not graded yet</span><span class="when">${when}</span></button></td>`;
     const big = g.f ? g.pct + "%" : "Level " + g.ai.n;
@@ -1402,7 +1407,7 @@ if ($("teacherCode").value) load();
 // "⚠ Update needed" shows only while your Teacher Tools script is an older version (no student PINs yet).
 // If Google can't be reached, it stays hidden rather than crying wolf.
 if (TOOLS_URL) fetch(TOOLS_URL, { method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify({ action: "version" }) })
-  .then(r => r.json()).then(d => { $("toolsUpdate").hidden = !!(d && d.ok && (d.can || []).includes("student-todo")); }).catch(() => {});
+  .then(r => r.json()).then(d => { $("toolsUpdate").hidden = !!(d && d.ok && (d.can || []).includes("online-grade")); }).catch(() => {});
 </script>
 </body>
 </html>
