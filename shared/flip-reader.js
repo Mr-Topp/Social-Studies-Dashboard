@@ -14,6 +14,8 @@ const checkDone=i=>ls.get("check"+i)==="1";
 const tries=i=>Number(ls.get("tries"+i)||0);
 const answer=i=>($("answer"+i)?$("answer"+i).value:(ls.get("answer"+i)||""));
 const partDone=i=>checkDone(i)&&answer(i).trim()!=="";
+// Junk writing ("idk", blanks left as ___) is caught before "Next part", not only at Turn in (Fynn, 11-03).
+const junk=i=>{const a=$("answer"+i);return a&&window.classJunkStop&&a.value.trim()?window.classJunkStop(a,{quiet:true}):""};
 let cur=1,timer=null,lockTimer=null,locked=false;
 
 /* ---------- build the right-hand cards ---------- */
@@ -57,6 +59,7 @@ function blocker(pg){ // why you can't leave page pg yet ("" = free to go on)
   if(!read.has(pg))return "read";
   if(p.check.page===pg&&!checkDone(p.n))return "check";
   if(pg===p.to&&!partDone(p.n))return checkDone(p.n)?"write":"check";
+  if(pg===p.to&&junk(p.n))return "junk";
   return "";}
 function maxOpen(){for(let pg=1;pg<=N;pg++)if(blocker(pg))return pg;return N}
 function show(pg,scroll){
@@ -91,9 +94,9 @@ function refresh(){
   // On a part's last (or only) page, the way forward is "Next part" under the question.
   const last=cur===N,partEnd=cur===p.to;
   const n1=$("flipNext");n1.hidden=partEnd;n1.disabled=!!b;n1.textContent="Next page →";
-  const n2=$("flipNext2");n2.disabled=!!b;n2.textContent=last?"Go to Turn in ↓":partEnd?"Next part →":"Next page →";
+  const n2=$("flipNext2");n2.disabled=!!b&&b!=="junk";n2.textContent=last?"Go to Turn in ↓":partEnd?"Next part →":"Next page →";
   ["flipBack","flipBack2"].forEach(id=>{$(id).disabled=cur===1});
-  const why={read:"Read this page first. Next opens in a few seconds.",check:"Get the reading check right to go on.",write:"Write your answer for this part to go on.","":last?"All pages done. Turn in your work below.":""}[b];
+  const why={read:"Read this page first. Next opens in a few seconds.",check:"Get the reading check right to go on.",write:"Write your answer for this part to go on.",junk:"Fix your answer for this part to go on (see the note under the box).","":last?"All pages done. Turn in your work below.":""}[b];
   $("flipWhy").textContent=why;$("flipWhy").hidden=!why;
   // progress marks
   const mo=maxOpen();
@@ -101,7 +104,7 @@ function refresh(){
     const a2=$("r"+x.n).querySelector("a");a2.setAttribute("aria-disabled",x.from>mo?"true":"false");$("q"+x.n).classList.toggle("is-done",d)});
   $("rFinish").classList.toggle("done",/Turned in/.test($("submitBtn").textContent));
 }
-function next(){if(blocker(cur))return;if(cur===N){$("finish").scrollIntoView({behavior:"smooth",block:"start"});return}show(cur+1,true)}
+function next(){const bk=blocker(cur);if(bk==="junk"&&window.classJunkStop){window.classJunkStop($("answer"+partOf(cur).n));return}if(bk)return;if(cur===N){$("finish").scrollIntoView({behavior:"smooth",block:"start"});return}show(cur+1,true)}
 function back(){if(cur>1)show(cur-1,true)}
 ["flipNext","flipNext2"].forEach(id=>$(id).addEventListener("click",next));
 ["flipBack","flipBack2"].forEach(id=>$(id).addEventListener("click",back));

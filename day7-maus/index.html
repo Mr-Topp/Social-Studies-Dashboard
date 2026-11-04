@@ -165,5 +165,5 @@ buildAnswers(s){const a={Standard:"SS.9-12.WH.30, SS.9-12.WH.33","First-try corr
  this.questions.forEach((q,i)=>a[q]=s.answer(i+1));a["Reading checks"]="4 of 4 correct · tries: "+[1,2,3,4].map(i=>s.tries(i)||1).join(", ");return a}
 };
 </script>
-<script src="../shared/flip-reader.js?v=1"></script>
+<script src="../shared/flip-reader.js?v=2"></script>
 </body></html>
