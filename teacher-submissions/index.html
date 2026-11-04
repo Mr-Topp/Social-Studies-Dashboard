@@ -6,7 +6,7 @@
 <meta name="robots" content="noindex,nofollow">
 <title>Teacher Dashboard · All Classes</title>
 <script src="../shared/assignments.js?v=20261103p22"></script>
-<script src="videos.js?v=20261104vid10"></script>
+<script src="videos.js?v=20261104vid11"></script>
 <script src="presentations.js?v=20261103civics3"></script>
 <script src="../shared/turnin.js?v=20261103ttt"></script>
 <style>
@@ -568,7 +568,7 @@ function dayChoices(course, key) {
 }
 function dayStuff(course, key, d) {
   const same = Object.keys(REG).filter(id => REG[id].course === course && unitOf(id) === key && REG[id].day === d && !REG[id].paper);
-  const names = same.filter(id => /^https?:/.test(REG[id].path || "") && !/answer key|teacher key/i.test(REG[id].title) && !/-key$/.test(id) && !/blooket|youtube|icivics\.org\/resources\/game/i.test(REG[id].path))
+  const names = same.filter(id => !REG[id].video && /^https?:/.test(REG[id].path || "") && !/answer key|teacher key/i.test(REG[id].title) && !/-key$/.test(id) && !/blooket|youtube|icivics\.org\/resources\/game/i.test(REG[id].path))
     .sort((a, b) => (/printed/i.test(REG[b].title) ? 1 : 0) - (/printed/i.test(REG[a].title) ? 1 : 0)).map(id => cleanPaperName(REG[id].title));
   const std = []; same.forEach(id => (REG[id].std || []).forEach(c => { if (!std.includes(c)) std.push(c); }));
   const unitStd = []; Object.keys(REG).filter(id => REG[id].course === course && unitOf(id) === key).forEach(id => (REG[id].std || []).forEach(c => { if (!unitStd.includes(c)) unitStd.push(c); }));

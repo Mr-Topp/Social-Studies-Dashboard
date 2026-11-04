@@ -1,4 +1,5 @@
 // YouTube videos from the Schoology day posts (Section 2), placed on the matching lesson day.
+// Also Netflix "We the People" episodes (2026-11-04) — these need a Netflix login, so play them from Fynn's account.
 // Teacher dashboard only — this file is NOT loaded on the student site.
 // Shown in each day row under "Videos". Pulled 2026-11-03.
 // To remove one, delete its line. To move one, change its unit/day.
@@ -177,6 +178,7 @@ Object.assign(window.CLASS_ASSIGNMENTS, {
   // ---- Government · Unit 1 ----
   "gov-u1-d1-video-3QGy2SbXTNE": { course: "government", unit: 1, day: 1, turnIn: false, video: true, std: [], title: "Day 1 · People on the Street: What is the Purpose of Government", path: "https://www.youtube.com/watch?v=3QGy2SbXTNE" },
   "gov-u1-d1-video-hMqEnmDp2m8": { course: "government", unit: 1, day: 1, turnIn: false, video: true, std: [], title: "Day 1 · Why Do So Many Americans Not Know How Their Government Works?", path: "https://www.youtube.com/watch?v=hMqEnmDp2m8" },
+  "gov-u1-d1-video-netflix-81250874": { course: "government", unit: 1, day: 1, turnIn: false, video: true, std: [], title: "Day 1 · We the People: “We the People” (Netflix, 5 min)", path: "https://www.netflix.com/watch/81250874" },
   "gov-u1-d2-video-ttu8va9_x1g": { course: "government", unit: 1, day: 2, turnIn: false, video: true, std: [], title: "Day 2 · Do We Need Government? (The Social Contract) – 8-Bit Philosophy", path: "https://www.youtube.com/watch?v=ttu8va9_x1g" },
   "gov-u1-d3-video-3sgAwVpCOOI": { course: "government", unit: 1, day: 3, turnIn: false, video: true, std: [], title: "Day 3 · What are the Different Forms of Government?", path: "https://www.youtube.com/watch?v=3sgAwVpCOOI" },
   "gov-u1-d3-video-RSLbmtqlLLk": { course: "government", unit: 1, day: 3, turnIn: false, video: true, std: [], title: "Day 3 · FLVS Civics: Systems of Government", path: "https://www.youtube.com/watch?v=RSLbmtqlLLk" },
@@ -191,6 +193,8 @@ Object.assign(window.CLASS_ASSIGNMENTS, {
   "gov-u1-d7-video-FwREAW4SlVY": { course: "government", unit: 1, day: 7, turnIn: false, video: true, std: [], title: "Day 7 · Why is the US Constitution so hard to amend? - Peter Paccone", path: "https://www.youtube.com/watch?v=FwREAW4SlVY" },
   "gov-u1-d8-video-yYEfLm5dLMQ": { course: "government", unit: 1, day: 8, turnIn: false, video: true, std: [], title: "Day 8 · A 3-minute guide to the Bill of Rights - Belinda Stutzman", path: "https://www.youtube.com/watch?v=yYEfLm5dLMQ" },
   "gov-u1-d8-video-Xq4x84xUdpg": { course: "government", unit: 1, day: 8, turnIn: false, video: true, std: [], title: "Day 8 · We The People", path: "https://www.youtube.com/watch?v=Xq4x84xUdpg" },
+  "gov-u1-d8-video-netflix-81250867": { course: "government", unit: 1, day: 8, turnIn: false, video: true, std: [], title: "Day 8 · We the People: The Bill of Rights (Netflix, 5 min)", path: "https://www.netflix.com/watch/81250867" },
+  "gov-u1-d8-video-netflix-81250870": { course: "government", unit: 1, day: 8, turnIn: false, video: true, std: [], title: "Day 8 · We the People: The First Amendment (Netflix, 5 min)", path: "https://www.netflix.com/watch/81250870" },
   "gov-u1-d9-video-VRDRNDtx9j4": { course: "government", unit: 1, day: 9, turnIn: false, video: true, std: [], title: "Day 9 · Federal and State Powers", path: "https://www.youtube.com/watch?v=VRDRNDtx9j4" },
 
   // ---- Government · Unit 2 ----
@@ -207,6 +211,8 @@ Object.assign(window.CLASS_ASSIGNMENTS, {
   "gov-u2-d4-video-UAZXFELMd2w": { course: "government", unit: 2, day: 4, turnIn: false, video: true, std: [], title: "Day 4 · What is an interest group?", path: "https://www.youtube.com/watch?v=UAZXFELMd2w" },
   "gov-u2-d4-video-MjY5Zkt51wY": { course: "government", unit: 2, day: 4, turnIn: false, video: true, std: [], title: "Day 4 · Billy Wants a Dog (An Introduction to Lobbying) by Hill & Knowlton", path: "https://www.youtube.com/watch?v=MjY5Zkt51wY" },
   "gov-u2-d4-video-QpVnXUCGZVc": { course: "government", unit: 2, day: 4, turnIn: false, video: true, std: [], title: "Day 4 · How do Super PACs work?", path: "https://www.youtube.com/watch?v=QpVnXUCGZVc" },
+  "gov-u2-d4-video-netflix-81250866": { course: "government", unit: 2, day: 4, turnIn: false, video: true, std: [], title: "Day 4 · We the People: Active Citizenship (Netflix, 5 min)", path: "https://www.netflix.com/watch/81250866" },
+  "gov-u2-d4-video-netflix-81250875": { course: "government", unit: 2, day: 4, turnIn: false, video: true, std: [], title: "Day 4 · We the People: The Miracle of Morning (Netflix, 4 min)", path: "https://www.netflix.com/watch/81250875" },
   "gov-u2-d5-video-A97aebAe0oU": { course: "government", unit: 2, day: 5, turnIn: false, video: true, std: [], title: "Day 5 · How to Vote in the United States", path: "https://www.youtube.com/watch?v=A97aebAe0oU" },
   "gov-u2-d5-video-pG-aVDBScUw": { course: "government", unit: 2, day: 5, turnIn: false, video: true, std: [], title: "Day 5 · What is a Primary Election?", path: "https://www.youtube.com/watch?v=pG-aVDBScUw" },
   "gov-u2-d5-video-6_gA766lT3c": { course: "government", unit: 2, day: 5, turnIn: false, video: true, std: [], title: "Day 5 · Caucus vs. Primary: what's the difference?", path: "https://www.youtube.com/watch?v=6_gA766lT3c" },
@@ -214,10 +220,12 @@ Object.assign(window.CLASS_ASSIGNMENTS, {
   "gov-u2-d5-video-W9H3gvnN468": { course: "government", unit: 2, day: 5, turnIn: false, video: true, std: [], title: "Day 5 · Does your vote count? The Electoral College explained - Christina Greer", path: "https://www.youtube.com/watch?v=W9H3gvnN468" },
   "gov-u2-d5-video-2yKP_IRAKaQ": { course: "government", unit: 2, day: 5, turnIn: false, video: true, std: [], title: "Day 5 · The Rights & Responsibilities of a U.S. Citizen", path: "https://www.youtube.com/watch?v=2yKP_IRAKaQ" },
   "gov-u2-d5-video-frLQcUYghN4": { course: "government", unit: 2, day: 5, turnIn: false, video: true, std: [], title: "Day 5 · Explaining the birthright citizenship debate", path: "https://www.youtube.com/watch?v=frLQcUYghN4" },
+  "gov-u2-d5-video-netflix-81250872": { course: "government", unit: 2, day: 5, turnIn: false, video: true, std: [], title: "Day 5 · We the People: Immigration (Netflix, 5 min)", path: "https://www.netflix.com/watch/81250872" },
 
   // ---- Government · Unit 3 ----
   "gov-u3-d1-video-9giPmCWnepU": { course: "government", unit: 3, day: 1, turnIn: false, video: true, std: [], title: "Day 1 · What Is the Judicial Branch of the U.S. Government?", path: "https://www.youtube.com/watch?v=9giPmCWnepU" },
   "gov-u3-d1-video-KEjgAXxrkXY": { course: "government", unit: 3, day: 1, turnIn: false, video: true, std: [], title: "Day 1 · How a case gets to the US Supreme Court", path: "https://www.youtube.com/watch?v=KEjgAXxrkXY" },
+  "gov-u3-d1-video-netflix-81250873": { course: "government", unit: 3, day: 1, turnIn: false, video: true, std: [], title: "Day 1 · We the People: The Courts (Netflix, 5 min)", path: "https://www.netflix.com/watch/81250873" },
   "gov-u3-d2-video-na6JXT_F0ZI": { course: "government", unit: 3, day: 2, turnIn: false, video: true, std: [], title: "Day 2 · Marbury v. Madison: What is Judicial Review?", path: "https://www.youtube.com/watch?v=na6JXT_F0ZI" },
   "gov-u3-d2-video-Ao5k3KNURE8": { course: "government", unit: 3, day: 2, turnIn: false, video: true, std: [], title: "Day 2 · Constitution Hall Pass: Tinker v. Des Moines", path: "https://www.youtube.com/watch?v=Ao5k3KNURE8" },
 
@@ -228,6 +236,7 @@ Object.assign(window.CLASS_ASSIGNMENTS, {
   "gov-u4-d2-video-G7O9ZpJ-aiU": { course: "government", unit: 4, day: 2, turnIn: false, video: true, std: [], title: "Day 2 · Facts of Congress - Committees", path: "https://www.youtube.com/watch?v=G7O9ZpJ-aiU" },
   "gov-u4-d2-video-pHSttXOpvYg": { course: "government", unit: 4, day: 2, turnIn: false, video: true, std: [], title: "Day 2 · Filibuster Explained: What Is the Filibuster?", path: "https://www.youtube.com/watch?v=pHSttXOpvYg" },
   "gov-u4-d2-video-u5jKL6hFNdk": { course: "government", unit: 4, day: 2, turnIn: false, video: true, std: [], title: "Day 2 · Facts of Congress - How a Bill Becomes Law", path: "https://www.youtube.com/watch?v=u5jKL6hFNdk" },
+  "gov-u4-d3-video-netflix-81250868": { course: "government", unit: 4, day: 3, turnIn: false, video: true, std: [], title: "Day 3 · We the People: Taxes (Netflix, 5 min)", path: "https://www.netflix.com/watch/81250868" },
 
   // ---- Government · Unit 5 ----
   "gov-u5-d1-video-BWR2p9j9hWo": { course: "government", unit: 5, day: 1, turnIn: false, video: true, std: [], title: "Day 1 · What Is the Executive Branch of the U.S. Government?", path: "https://www.youtube.com/watch?v=BWR2p9j9hWo" },
@@ -238,6 +247,12 @@ Object.assign(window.CLASS_ASSIGNMENTS, {
   "gov-u5-d3-video--bKT5rc6rsU": { course: "government", unit: 5, day: 3, turnIn: false, video: true, std: [], title: "Day 3 · President's Cabinet", path: "https://www.youtube.com/watch?v=-bKT5rc6rsU" },
   "gov-u5-d3-video-qL9kqmn-dUA": { course: "government", unit: 5, day: 3, turnIn: false, video: true, std: [], title: "Day 3 · What is the Difference Between Executive and Independent Agencies? [No. 86]", path: "https://www.youtube.com/watch?v=qL9kqmn-dUA" },
   "gov-u5-d3-video-PNojm8f6Seo": { course: "government", unit: 5, day: 3, turnIn: false, video: true, std: [], title: "Day 3 · What is FEMA? The federal agency that responds to national disasters", path: "https://www.youtube.com/watch?v=PNojm8f6Seo" },
+
+  // ---- Government · Unit 6 (added 2026-11-04, Fynn) ----
+  "gov-u6-d1-video-netflix-81250869": { course: "government", unit: 6, day: 1, turnIn: false, video: true, std: [], title: "Day 1 · We the People: The Three Branches of Government (Netflix, 5 min)", path: "https://www.netflix.com/watch/81250869" },
+  "gov-u6-d1-video-S4ymux9l-Qo": { course: "government", unit: 6, day: 1, turnIn: false, video: true, std: [], title: "Day 1 · Facts of Congress - Checks and Balances", path: "https://www.youtube.com/watch?v=S4ymux9l-Qo" },
+  "gov-u6-d1-video-netflix-81250871": { course: "government", unit: 6, day: 1, turnIn: false, video: true, std: [], title: "Day 1 · We the People: Federal vs. State Power (Netflix, 4 min)", path: "https://www.netflix.com/watch/81250871" },
+  "gov-u6-d2-video-lw7eDkAL0lo": { course: "government", unit: 6, day: 2, turnIn: false, video: true, std: [], title: "Day 2 · Iowa Constitution & Government: The Iowa Legislature", path: "https://www.youtube.com/watch?v=lw7eDkAL0lo" },
 
   // ---- Civics · Fridays (Schoology Friday pages, same in both sections; Friday 1's are in its slides; Friday 7 has none) ----
   // Friday 1: Founders' Files (videos are in the Friday 1 slides)
