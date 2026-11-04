@@ -742,6 +742,8 @@ function linksHtml() {
   const actDay = id => { const m = (REG[id].title || "").match(/^Days? (\d+)/); return REG[id].day || (m ? +m[1] : 0); };
   // Blue reminder: units Fynn still needs to go through again (Fynn, 2026-11-03). Delete a line when it's done.
   const REVIEW_AGAIN = new Set(["us-history|3", "us-history|4", "us-history|5", "us-history|6", "world-history|2", "world-history|3", "sociology|2", "sociology|3", "sociology|4"]);
+  // Purple reminder: units that still need graphic novels added (Fynn, 2026-11-03). Units in REVIEW_AGAIN get it too.
+  const ADD_GN = new Set([...REVIEW_AGAIN, "government|2", "government|3", "government|4", "government|5", "government|6"]);
   const unitBlock = (key, name, ids, decks, cal) => {
     const main = decks.find(p => !p.note) || decks[0];
     const extra = decks.filter(p => p !== main);
@@ -796,7 +798,8 @@ function linksHtml() {
     const rowDate = r => { if (!cal || isP1 || !r.day || r.summ || r.day > cal.days) return ""; const a = dayDate(tab, false, unitNo, r.day, false); if (!a) return ""; const b = r.span ? dayDate(tab, false, unitNo, r.span, false) : null; return `<span class="sumdate">📅 ${safe(niceDate(a.iso))}${b && b.iso !== a.iso ? " – " + safe(niceDate(b.iso)) : ""}</span>`; };
     const count = ([nDays ? plural(nDays, "day") : (nActs ? plural(nActs, "assignment") : ""), cal && cal.summative ? "summative " + shortDate(cal.summative) : ""].filter(Boolean).join(" · ") || (main ? "slides ready" : "slides not built yet"))
       + (nTodo ? ` · <span class="todocount">⚠ ${nTodo} not made yet</span>` : "")
-      + (REVIEW_AGAIN.has(key) ? ` · <span class="reviewnote">🔁 Go through material again</span> · <span class="gnnote">📚 Add graphic novels</span>` : "");
+      + (REVIEW_AGAIN.has(key) ? ` · <span class="reviewnote">🔁 Go through material again</span>` : "")
+      + (ADD_GN.has(key) ? ` · <span class="gnnote">📚 Add graphic novels</span>` : "");
     const body = list.map(r => {
       // Summative row: just the green-sheet date, no "Day N · Summative" (Fynn, 2026-11-02).
       const label = r.single ? "" : r.summ && cal && cal.summative ? `<span class="sumdate">📅 ${safe(niceDate(cal.summative))}</span>` : r.day ? `<b>${r.span ? `Days ${r.day}–${r.span}` : `Day ${r.day}`}</b>${rowDate(r)}` : `<b>Other</b>`;
