@@ -990,6 +990,53 @@ const TEACHER_TOOLS_URL = "https://script.google.com/macros/s/AKfycbwiVW6Cufw8Dq
   }
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", addReadAloud); else addReadAloud();
 
+  // --- "Start over" lives at the very bottom (Fynn, 11-03) -------------------------------------
+  // Kids were hitting Start over by mistake next to Turn in / Check / Next. Every "Start over" button
+  // on an activity page is moved (same button, same click handler and "are you sure?") into a small
+  // strip at the very bottom of the page. A page can opt one out with data-keep-start-over.
+  function moveStartOver() {
+    if (!document.body || window.HUB_PAGE || /teacher-submissions|setup-|update-teacher/.test(location.pathname)) return;
+    const RX = /^[\s↺↻⟲🔄]*(start over|empezar de nuevo)[\s.!]*$/i;
+    let zone = document.querySelector("[data-start-over-zone]");
+    const found = [...document.querySelectorAll("button")].filter(b => !b.closest("[data-start-over-zone],[data-keep-start-over]") && RX.test(b.textContent));
+    if (found.length && !zone) {
+      const css = document.createElement("style");
+      css.textContent = ".start-over-zone{clear:both;max-width:900px;margin:56px auto 0;padding:14px 16px 96px;border-top:1px dashed #cbbfa8;text-align:center;font:14px/1.4 system-ui,Segoe UI,Arial,sans-serif;color:#5b6670}" +
+        ".start-over-zone[hidden]{display:none}.start-over-zone p{margin:0 0 6px}.start-over-zone .start-over-btn{all:unset;cursor:pointer;color:#7a2b26;text-decoration:underline;font-weight:700;font-size:14px;padding:6px 10px;border-radius:6px}" +
+        ".start-over-zone .start-over-btn[hidden]{display:none}.start-over-zone .start-over-btn:focus-visible{outline:3px solid #2b6cb0}.start-over-zone .start-over-btn:hover{background:#f3e6e3}" +
+        ".start-over-zone.fixed{position:fixed;left:10px;bottom:10px;z-index:9989;margin:0;padding:4px 8px;border:1px solid #d8cdb8;border-radius:8px;background:#fffdf8e6;max-width:none}.start-over-zone.fixed p{display:none}" +
+        "@media print{.start-over-zone{display:none}}";
+      document.head.appendChild(css);
+      zone = document.createElement("div");
+      zone.className = "start-over-zone"; zone.setAttribute("data-start-over-zone", "");
+      const es = window.SiteLang && window.SiteLang.isEs && window.SiteLang.isEs();
+      zone.innerHTML = "<p>" + (es ? "¿Necesitas borrar tu trabajo y empezar otra vez?" : "Need to erase your work and begin again?") + "</p>";
+      document.body.appendChild(zone);
+      // Full-screen pages that don't scroll: keep it reachable as a small tab in the bottom-left corner.
+      const noScroll = el => /hidden|clip/.test(getComputedStyle(el).overflowY);
+      if (noScroll(document.documentElement) || noScroll(document.body)) zone.classList.add("fixed");
+    }
+    found.forEach(b => {
+      // A page that rebuilds its button: keep only the newest copy.
+      [...zone.querySelectorAll("button")].forEach(old => { if (old !== b && ((b.id && old.id === b.id) || (!b.id && !old.id && old.textContent.trim() === b.textContent.trim()))) old.remove(); });
+      b.classList.add("start-over-btn"); zone.appendChild(b);
+    });
+    if (zone) zone.hidden = ![...zone.querySelectorAll("button")].some(b => !b.hidden && b.style.display !== "none");
+  }
+  {
+    let q = false;
+    const soon = () => { if (q) return; q = true; setTimeout(() => { q = false; moveStartOver(); }, 150); };
+    const go = () => {
+      moveStartOver(); setTimeout(moveStartOver, 900);
+      if (!window.MutationObserver || !document.body) return;
+      new MutationObserver(soon).observe(document.body, { childList: true, subtree: true });
+      // Buttons shown/hidden later (like on a game's last screen) show/hide the bottom strip too.
+      let watched = null;
+      setInterval(() => { const z = document.querySelector("[data-start-over-zone]"); if (z && z !== watched) { watched = z; new MutationObserver(soon).observe(z, { subtree: true, attributes: true, attributeFilter: ["hidden", "style"] }); } }, 1000);
+    };
+    if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", go); else go();
+  }
+
   if (document.readyState === "complete") showFeedback(); else window.addEventListener("load", showFeedback);
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", fixNameBoxes);
   else fixNameBoxes();
