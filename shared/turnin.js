@@ -151,7 +151,8 @@ const TEACHER_TOOLS_URL = "https://script.google.com/macros/s/AKfycbwiVW6Cufw8Dq
   function check(text, opts) {
     const o = Object.assign({}, opts || {});
     const done = (reason, extra) => { Object.assign(o, extra || {}); return { ok: false, reason, message: msgFor(reason, o) }; };
-    const raw = String(text || "").trim();
+    // "UN" (United Nations) is a real word here, not the Spanish "un".
+    const raw = String(text || "").trim().replace(/\bU\.?N\.?(?=[^\p{L}]|$)/gu, "UNations");
     if (!raw) return { ok: false, reason: "empty", message: "" };
     if (/_{2,}/.test(raw)) return done("blank");
     const p = plain(raw);
@@ -188,16 +189,22 @@ const TEACHER_TOOLS_URL = "https://script.google.com/macros/s/AKfycbwiVW6Cufw8Dq
       // Only joined by "and"/"because" with no action word: "labeling tyler because friends".
       const joinOnly = toks.filter(w => GLUE.has(w)).every(w => /^(and|or|but|so|because|cause|cuz|bc|bcuz|cus|coz|since|y|o|pero|porque)$/.test(w));
       let list;
-      if (!glue) list = !sure && (!likely || toks.length >= 5);           // no small words at all: needs a clear action word
-      else list = (!sure && !likely && (!maybe || joinOnly) && (g < 0.2 || longest >= 5 || joinOnly)) || (g < 0.08 && longest >= 7 && !sure);
+      if (!glue) list = !sure;           // no small words at all: needs a clear action word ("radar planes britain germany" is a list)
+      else list = (!sure && !likely && (!maybe || joinOnly) && (g < 0.2 || longest >= 5 || joinOnly)) || (g < 0.08 && longest >= 7 && !sure) || (joinOnly && !sure);
       if (list || (commaList && g < 0.25)) return done("list");
+    }
+    // Two or three words with no small words and no action word ("japan bad"): too thin.
+    if (toks.length && toks.length < 4 && !toks.some(w => GLUE.has(w))) {
+      const pw2 = new Set(words(o.prompt));
+      if (!toks.some((w, i) => verbLevel(w, i, toks, pw2) === 3)) return done("short");
     }
     const promptSet = new Set(words(o.prompt).map(stem));
     const content = [...new Set(toks.filter(w => !GLUE.has(w) && !FILLER.has(w) && w.length > 1).map(stem))];
     const own = content.filter(w => !promptSet.has(w));
     // Words from the question count half: an answer may reuse them, but it has to add something new.
     const score = own.length + 0.5 * (content.length - own.length);
-    if (!own.length || score < 2 || content.length < (sp.frame ? 2 : 3)) {
+    // Short real answers are fine (Fynn, 11-03): two real words, one of them new, is enough ("they won by a trap").
+    if (!own.length || score < 1.5 || content.length < 2) {
       if (content.length >= 2 && !own.length) return done("copy");
       if (sp.frame && content.length < 2) return done("starter");
       return done("short");
