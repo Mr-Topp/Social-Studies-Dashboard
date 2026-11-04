@@ -539,11 +539,13 @@ function previewFeedback(course) {
 }
 const openUnits = {};
 function homeBody(course, work) {
-  const items = studentItems(course);
+  let items = studentItems(course);
   if (!items.length) return `<div class="box"><h2>Nothing posted yet</h2><p class="muted">Your teacher hasn't put any ${esc(COURSES[course])} activities here yet. Check back soon.</p></div>`;
   const { mine, classDone } = work;
-  const keys = [...new Set(items.map(unitKey))].sort((a, b) => unitOrder(a) - unitOrder(b));
+  let keys = [...new Set(items.map(unitKey))].sort((a, b) => unitOrder(a) - unitOrder(b));
   const nowKey = currentUnit(course, keys, new Set([...classDone, ...Object.keys(mine)]));
+  // Fynn 11-03: once the class is in Part 2, Part 1 work never shows as missing or to-do (matches the teacher dashboard).
+  if (!nowKey.startsWith("p1|")) { items = items.filter(a => a.part !== 1); keys = keys.filter(k => !k.startsWith("p1|")); }
   const nowOrder = unitOrder(nowKey);
   // How far the class has gotten in each unit = the latest day anyone turned in work for.
   const reached = {};
