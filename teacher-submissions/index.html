@@ -808,7 +808,9 @@ function linksHtml() {
       + (REVIEW_AGAIN.has(key) ? ` · <span class="reviewnote">🔁 Go through material again</span>` : "")
       + (ADD_GN.has(key) ? ` · <span class="gnnote">📚 Add graphic novels</span>` : "");
     const isExamRow = r => r.summ || r.ids.some(id => !REG[id].alt && isTest(id)) || /summative|civics exam/i.test(r.title || "");
-    const wantsVideo = r => (r.single || r.day > 0) && !(cal && r.day > cal.days) && !isExamRow(r);
+    // Movie days (Cinderella Man, The Truman Show) don't need a "No video yet" box: the movie is the video (Fynn, 2026-11-03).
+    const isMovieRow = r => r.ids.some(id => /\(Movie\)|Cinderella Man|Truman Show/i.test(REG[id].title || ""));
+    const wantsVideo = r => (r.single || r.day > 0) && !(cal && r.day > cal.days) && !isExamRow(r) && !isMovieRow(r);
     const body = list.map(r => {
       // Summative row: just the green-sheet date, no "Day N · Summative" (Fynn, 2026-11-02).
       const label = r.single ? "" : r.summ && cal && cal.summative ? `<span class="sumdate">📅 ${safe(niceDate(cal.summative))}</span>` : r.day ? `<b>${r.span ? `Days ${r.day}–${r.span}` : `Day ${r.day}`}</b>${rowDate(r)}` : `<b>Other</b>`;
