@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Who Paid for This Hero? | World History Unit 2 Day 7</title>
+<meta name="description" content="Investigate Mighty Man, a 1975 superhero comic sold in Soweto that was secretly paid for by South Africa&#x27;s apartheid government.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../shared/graphic-reading.css?v=3">
+<style>
+.flip-layout{grid-template-columns:minmax(0,1.9fr) minmax(320px,1fr)}
+.flip-stage img{min-height:0;max-height:calc(100vh - 130px)}
+.qcol{padding-bottom:70px}
+.intro-line{font-size:1.02rem;margin:0 0 10px}
+.words{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0 10px;padding:0;list-style:none}
+.words li{background:#fff;border:1px solid #e6dcc8;border-left:4px solid var(--navy);border-radius:8px;padding:3px 9px;font-size:.88rem}
+.declass{display:block;background:#fff;border:2px dashed #18364a;border-radius:10px;padding:8px 11px;margin:6px 0 8px;font-weight:650;color:#22313b;line-height:1.4;font-style:normal}
+.declass > b:first-child{display:block;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#18364a;margin-bottom:2px}
+.dime{display:inline-block;background:#e6bd64;color:#0f2433;border-radius:999px;font-weight:850;padding:0 9px;margin-right:4px}
+.credits{font-size:.8rem;color:var(--muted);margin:10px 0 0;line-height:1.4}
+.gr-head{padding-top:18px;padding-bottom:16px}.gr-head h1{margin:6px 0 6px}.gr-head .hook{margin-bottom:8px}
+body.reading-now .choices{opacity:.45;pointer-events:none}
+</style>
+<script src="../../shared/assignments.js?v=20261103p20"></script><script src="../../shared/turnin.js?v=20261103t"></script></head><body>
+<header class="gr-head" data-years="1975 — 1994"><div class="gr-wrap">
+<div class="kicker">World History · Unit 2 · Day 7 · Cambodia &amp; Apartheid</div>
+<h1>Who Paid for This Hero?</h1>
+<p class="hook">In 1975, a new superhero comic sold for 15 cents in Soweto, South Africa. It hid a big secret. Find out who really paid for it. 4 checks + 4 short answers. <b>About 25 minutes.</b></p>
+<p class="goal"><b>Today's goal:</b> Compare how governments controlled people during the Cold War, and explain how regular people pushed back.</p>
+<details class="std-details"><summary>Iowa standards for today</summary>
+<p><b>Standard SS.9-12.WH.35</b> — Compare and contrast the methods of control used by various forms of government during the Cold War.</p><p><b>Standard SS.9-12.WH.37</b> — Explain how various groups promoted their interests and goals within the context of the Cold War.</p><p><b>Standard SS.9-12.WH.38</b> — Analyze the impact of mass atrocities committed during the Cold War.</p>
+</details>
+<nav><a class="back" href="../../">← Class activities</a></nav>
+</div></header>
+
+<nav class="route" aria-label="Your progress"><ol id="flipRoute"></ol></nav>
+
+<main class="gr-main gr-wrap">
+<section class="card">
+<p class="intro-line"><b>You're the investigator.</b> For each part: <b>read</b> the comic page on the left → get the <b>check</b> right → <b>write</b> 1–2 sentences. Done = 4 green checks + 4 answers, then turn in at the bottom.</p>
+<p class="intro-line" style="font-size:.95rem"><b>Heads up:</b> Part 4 mentions police shooting student protesters in 1976. There are no pictures of it.</p><ul class="words" aria-label="Word help">
+<li><b>Apartheid</b> = laws that split South Africa by race (1948–1994)</li><li><b>Propaganda</b> = messages made to change what people think</li><li><b>Soweto</b> = a large Black township near Johannesburg</li><li><b>Township</b> = an area where Black South Africans were forced to live</li><li><b>Law enforcing</b> = making people follow the law</li><li><b>Front company</b> = a fake business that hides who is really in charge</li>
+</ul>
+<p class="welcome" id="welcome" role="status"></p>
+</section>
+
+<div class="flip-layout">
+<section class="flip-reader reading" id="flipReader" aria-label="Pages from the 1975 comic Mighty Man, No. 1">
+<div class="flip-bar"><div><p class="eyebrow">The reading</p><h2>A real 1975 comic · 4 pages</h2></div><span class="flip-pos" id="flipPos"></span></div>
+<div class="flip-tools"><button type="button" class="quiet" id="flipBack">← Back a page</button><span class="grow"><span id="flipPart"></span><span id="flipTimer" aria-live="polite"></span></span><button type="button" class="secondary" id="flipNext">Next page →</button><button type="button" class="quiet" id="flipZoom">Make page bigger</button></div>
+<div class="flip-stage"><img id="flipImg" alt="" src="pages/p-01.jpg"></div>
+<p class="flip-cap">Click the page to make it bigger.</p>
+</section>
+
+<div class="qcol">
+<section class="card">
+<label for="studentName">First name + last initial (like Jordan M.)</label><input id="studentName" maxlength="100" autocomplete="off" placeholder="First name + last initial (like Jordan M.)" required>
+</section>
+<div id="flipCards"></div>
+<div class="flip-nav"><button type="button" class="quiet" id="flipBack2">← Back</button><button type="button" class="secondary" id="flipNext2">Next page →</button><p class="flip-why" id="flipWhy" aria-live="polite"></p></div>
+<section class="card finish" id="finish">
+<h2>Turn in your work</h2>
+<div class="actions"><button id="submitBtn" class="primary" type="button">Turn in answers</button><button id="clearBtn" class="quiet" type="button">Start over</button></div><p id="submitStatus" class="status" role="status" aria-live="polite"></p><p class="reader-note">Your work saves on this device, so you can come back later. Your teacher sees it after you turn it in.</p>
+<p class="credits">Comic: <i>Mighty Man</i> No. 1 (1975), Afri-Comics, Pretoria. Scans: Afri-Comics Collection, UCLA Library Digital Collections (William Worger collection). Shown as a historical source for classroom study.</p>
+</section>
+</div></div></main>
+<div class="flip-big" id="flipBig" hidden role="dialog" aria-label="Bigger page"><button type="button" class="quiet" id="flipBigClose">✕ Close</button><img id="flipBigImg" alt="Bigger view of the current page"></div>
+<script>
+window.FLIP={
+title:"Pages from the 1975 comic Mighty Man, No. 1",prefix:"wh-u2d7-secret-comic-",pages:4,readSeconds:8,lockSeconds:8,
+assignmentId:"wh-u2-d7-secret-comic",api:"https://fynn-class-assignment-submissions-20261024.neotboy.chatgpt.site/api/submit",
+lockedText:"This box opens when you get the check right.",
+clearConfirm:"Start over? This clears your checks and answers on this device.",
+successText:"Turned in! Your teacher got your 4 checks and 4 answers. You are done.",
+wrongText:(c,left)=>left>0?"Not quite. "+c.hint+" Try again in "+left+"…":"Not quite. "+c.hint+" The choices were mixed up. Try again.",
+parts:[
+{
+"short": "The cover",
+"ref": "Reader page 1",
+"title": "1. The cover: meet the hero",
+"from": 1,
+"to": 1,
+"check": {
+"page": 1,
+"tag": "Reading check · Reader page 1",
+"q": "Read the yellow words under MIGHTY MAN. What kind of hero is he?",
+"right": "A hero who makes people follow the law",
+"wrong": [
+"A hero who fights to end the unfair laws of apartheid",
+"A soldier who protects South Africa from other armies",
+"A boxer who fights his way up to win a big title"
+],
+"why": "✓ Correct. He is \"The Human Law Enforcing Dynamo.\" On the cover, he is getting back stolen POLICE FILES from two armed crooks.",
+"hint": "Read the yellow words right under the big red title."
+},
+"prompt": "Why would a comic like this be popular with kids in Soweto?",
+"stem": "<span class=\"declass\"><b>Fact file</b>Mighty Man cost 15 cents. It was one of the first comics with a Black South African superhero. About 47,000 copies were printed every month.</span>Write 1–2 sentences. Start like this: <i>Kids might like Mighty Man because ___. On the cover, he fights ___.</i>",
+"stemText": "Kids might like Mighty Man because ___. On the cover, he fights ___.",
+"placeholder": "Kids might like Mighty Man because ___. On the cover, he fights ___."
+},
+{
+"short": "Who made it?",
+"ref": "Reader page 2",
+"title": "2. Who made this comic?",
+"from": 2,
+"to": 2,
+"check": {
+"page": 2,
+"tag": "Reading check · Reader page 2",
+"q": "Read the small print at the bottom of the page. Who does it say owns and publishes Mighty Man?",
+"right": "Afri-Comics, a company based in Pretoria",
+"wrong": [
+"Simon Sabela, the editor in the photo at the top",
+"A student newspaper in Soweto",
+"A comic book company in the United States"
+],
+"why": "✓ Correct. That is what the comic says. But the full truth came out later. Read the fact file below.",
+"hint": "Find the words \"owned and published by\" in the small print near the bottom."
+},
+"prompt": "Why would a government hide that it paid for a comic book?",
+"stem": "<span class=\"declass\"><b>Fact file</b>Afri-Comics was a front company (a fake company that hides who is really in charge). It was secretly paid for by apartheid South Africa's Department of Information, as part of a secret propaganda war (messages made to change what people think) to defend apartheid. In 1978, the department's secret projects were exposed in the \"Information Scandal,\" and it was shut down.</span>Write 1–2 sentences. Start like this: <i>The government hid that it paid for Mighty Man because ___. If readers knew, they might ___.</i>",
+"stemText": "The government hid that it paid for Mighty Man because ___. If readers knew, they might ___.",
+"placeholder": "The government hid that it paid for Mighty Man because ___. If readers knew, they might ___."
+},
+{
+"short": "The bad guys",
+"ref": "Reader page 3",
+"title": "3. Who are the bad guys?",
+"from": 3,
+"to": 3,
+"check": {
+"page": 3,
+"tag": "Reading check · Reader page 3",
+"q": "Read the box at the bottom of the page. Who does Mighty Man use his powers against?",
+"right": "Criminals the comic calls snakes and vermin",
+"wrong": [
+"The leaders who made the apartheid laws",
+"Police officers who treat people unfairly",
+"Soldiers from another country invading Africa"
+],
+"why": "✓ Correct. Mighty Man fights crooks in the township. These pages never show apartheid laws, pass books, or who was allowed to vote.",
+"hint": "Read the last box at the bottom. It starts with \"Mighty Man, using his awesome powers…\""
+},
+"prompt": "What does this comic leave out about life in Soweto?",
+"stem": "<span class=\"declass\"><b>Fact file</b>Under apartheid, laws decided where Black South Africans could live, work, and go to school. They had to carry pass books and could not vote. None of this shows up in Mighty Man.</span>Write 1–2 sentences. Start like this: <i>The comic leaves out ___. The government wanted kids to think the real problem was ___.</i>",
+"stemText": "The comic leaves out ___. The government wanted kids to think the real problem was ___.",
+"placeholder": "The comic leaves out ___. The government wanted kids to think the real problem was ___."
+},
+{
+"short": "Danny's job",
+"ref": "Reader page 4",
+"title": "4. Danny's old job",
+"from": 4,
+"to": 4,
+"check": {
+"page": 4,
+"tag": "Reading check · Reader page 4",
+"q": "Read the first two panels. What was Danny's job before he became Mighty Man?",
+"right": "He was a police officer who stopped a robbery",
+"wrong": [
+"He was a student who marched against unfair schools",
+"He was a boxer who trained at a Soweto gym",
+"He was a doctor at the city hospital"
+],
+"why": "✓ Correct. Danny is a brave policeman who gets shot stopping two robbers. The comic's message: the police are the heroes.",
+"hint": "Read the box in the top-left panel: \"It begins long months before, when Danny had been a member of the…\""
+},
+"prompt": "Compare how the two governments controlled people. Then: how did Soweto students push back?",
+"stem": "<span class=\"declass\"><b>Fact file</b><b>Soweto, June 16, 1976:</b> thousands of students marched against being taught in Afrikaans. Police opened fire. One of the first killed was 12-year-old Hector Pieterson. At least 176 people died, and some counts say far more. Mighty Man was sold from 1975 to 1977.<br><b>Cambodia, 1975–1979:</b> the Khmer Rouge ruled by open terror. It emptied the cities, and told people: \"Keeping you is no gain, losing you is no loss.\"</span>Write 1–2 sentences. Start like this: <i>The Khmer Rouge used terror, but South Africa's government also used ___. Soweto students pushed back by ___.</i>",
+"stemText": "The Khmer Rouge used terror, but South Africa's government also used ___. Soweto students pushed back by ___.",
+"placeholder": "The Khmer Rouge used terror, but South Africa's government also used ___. Soweto students pushed back by ___."
+}
+],
+questions:["Why would a comic like this be popular with kids in Soweto?", "Why would a government hide that it paid for a comic book?", "What does this comic leave out about life in Soweto?", "Compare how the two governments controlled people. Then: how did Soweto students push back?"],
+validate(s){if(!s.name)return{text:"Type your first name + last initial (like Jordan M.) at the top of the questions.",focus:"studentName"};
+ const mc=[1, 2, 3, 4].find(i=>!s.checkDone(i));if(mc)return{text:"Get the check right for part "+mc+" first.",part:mc};
+ const ma=[1, 2, 3, 4].find(i=>!s.answer(i));if(ma)return{text:"Write your answer for part "+ma+" before turning in.",part:ma,focus:"answer"+ma};
+ for(const i of [1, 2, 3, 4]){const j=window.classJunkStop&&window.classJunkStop(document.getElementById("answer"+i));if(j)return{text:"Part "+i+": "+j,part:i}}return null},
+buildAnswers(s){const a={Standard:"SS.9-12.WH.35, SS.9-12.WH.37, SS.9-12.WH.38","First-try correct":[1, 2, 3, 4].filter(i=>(s.tries(i)||1)===1).length+" of 4"};
+ this.questions.forEach((q,i)=>a[q]=s.answer(i+1));a["Reading checks"]="4 of 4 correct · tries: "+[1, 2, 3, 4].map(i=>s.tries(i)||1).join(", ");return a}
+
+};
+</script>
+<script src="../../shared/flip-reader.js?v=2"></script>
+<script>
+// This page only: choices wait for the read timer, and "Not quite" scrolls into view.
+(function(){
+  const t=document.getElementById("flipTimer");
+  const sync=()=>document.body.classList.toggle("reading-now",t.textContent.trim()!=="");
+  new MutationObserver(sync).observe(t,{childList:true,characterData:true,subtree:true});sync();
+  document.getElementById("flipCards").addEventListener("click",e=>{if(!e.target.closest(".choice"))return;
+    setTimeout(()=>{const f=[...document.querySelectorAll(".flip-part:not([hidden]) .fb")].find(x=>x.textContent.trim());
+      if(f){const r=f.getBoundingClientRect();if(r.bottom>innerHeight-80||r.top<0)f.scrollIntoView({behavior:"smooth",block:"center"})}
+      const a=document.querySelector(".flip-part:not([hidden]) textarea:not([disabled])");
+      if(a&&f&&f.classList.contains("ok")){const r=a.getBoundingClientRect();if(r.bottom>innerHeight-80)a.scrollIntoView({behavior:"smooth",block:"center"})}},120)});
+})();
+</script>
+</body></html>

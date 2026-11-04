@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Made Everywhere? | World History Unit 3 Day 1</title>
+<meta name="description" content="Fact-check a 2008 Federal Reserve comic about world trade against what globalization really did since the 1990s.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../shared/graphic-reading.css?v=3">
+<style>
+.flip-layout{grid-template-columns:minmax(0,1.9fr) minmax(320px,1fr)}
+.flip-stage img{min-height:0;max-height:calc(100vh - 130px)}
+.qcol{padding-bottom:70px}
+.intro-line{font-size:1.02rem;margin:0 0 10px}
+.words{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0 10px;padding:0;list-style:none}
+.words li{background:#fff;border:1px solid #e6dcc8;border-left:4px solid var(--navy);border-radius:8px;padding:3px 9px;font-size:.88rem}
+.declass{display:block;background:#fff;border:2px dashed #18364a;border-radius:10px;padding:8px 11px;margin:6px 0 8px;font-weight:650;color:#22313b;line-height:1.4;font-style:normal}
+.declass > b:first-child{display:block;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#18364a;margin-bottom:2px}
+.dime{display:inline-block;background:#e6bd64;color:#0f2433;border-radius:999px;font-weight:850;padding:0 9px;margin-right:4px}
+.credits{font-size:.8rem;color:var(--muted);margin:10px 0 0;line-height:1.4}
+.gr-head{padding-top:18px;padding-bottom:16px}.gr-head h1{margin:6px 0 6px}.gr-head .hook{margin-bottom:8px}
+body.reading-now .choices{opacity:.45;pointer-events:none}
+</style>
+<script src="../../shared/assignments.js?v=20261103p20"></script><script src="../../shared/turnin.js?v=20261103t"></script></head><body>
+<header class="gr-head" data-years="1991 — today"><div class="gr-wrap">
+<div class="kicker">World History · Unit 3 · Day 1 · Globalization</div>
+<h1>Made Everywhere?</h1>
+<p class="hook">In 2008, the New York Fed (part of the U.S. central bank) made a free comic to teach kids why trade is good. Fact-check it with what really happened. 4 checks + 4 short answers. <b>About 25 minutes.</b></p>
+<p class="goal"><b>Today's goal:</b> Evaluate the effects of globalization since the 1990s: who wins and who loses.</p>
+<details class="std-details"><summary>Iowa standards for today</summary>
+<p><b>Standard SS.9-12.WH.39</b> — Evaluate the effects of globalization since the 1990s.</p>
+</details>
+<nav><a class="back" href="../../">← Class activities</a></nav>
+</div></header>
+
+<nav class="route" aria-label="Your progress"><ol id="flipRoute"></ol></nav>
+
+<main class="gr-main gr-wrap">
+<section class="card">
+<p class="intro-line"><b>You're the fact-checker.</b> For each part: <b>read</b> the comic on the left → get the <b>check</b> right → <b>write</b> 1–2 sentences. Done = 4 green checks + 4 answers, then turn in at the bottom.</p>
+<ul class="words" aria-label="Word help">
+<li><b>Globalization</b> = countries getting more connected by trade, travel, and ideas</li><li><b>Foreign</b> = from another country</li><li><b>Efficient</b> = fast, with little waste</li><li><b>Comparative advantage</b> = what a country is best at making, compared with the other things it could make</li><li><b>Trade barrier</b> = a rule that makes trade harder, like a tax on imports</li><li><b>Displaced workers</b> = people who lose their jobs when the work moves</li>
+</ul>
+<p class="welcome" id="welcome" role="status"></p>
+</section>
+
+<div class="flip-layout">
+<section class="flip-reader reading" id="flipReader" aria-label="Pages from the 2008 comic The Story of Foreign Trade and Exchange">
+<div class="flip-bar"><div><p class="eyebrow">The reading</p><h2>A real 2008 comic · 5 short pages</h2></div><span class="flip-pos" id="flipPos"></span></div>
+<div class="flip-tools"><button type="button" class="quiet" id="flipBack">← Back a page</button><span class="grow"><span id="flipPart"></span><span id="flipTimer" aria-live="polite"></span></span><button type="button" class="secondary" id="flipNext">Next page →</button><button type="button" class="quiet" id="flipZoom">Make page bigger</button></div>
+<div class="flip-stage"><img id="flipImg" alt="" src="pages/p-01.jpg"></div>
+<p class="flip-cap">Click the page to make it bigger.</p>
+</section>
+
+<div class="qcol">
+<section class="card">
+<label for="studentName">First name + last initial (like Jordan M.)</label><input id="studentName" maxlength="100" autocomplete="off" placeholder="First name + last initial (like Jordan M.)" required>
+</section>
+<div id="flipCards"></div>
+<div class="flip-nav"><button type="button" class="quiet" id="flipBack2">← Back</button><button type="button" class="secondary" id="flipNext2">Next page →</button><p class="flip-why" id="flipWhy" aria-live="polite"></p></div>
+<section class="card finish" id="finish">
+<h2>Turn in your work</h2>
+<div class="actions"><button id="submitBtn" class="primary" type="button">Turn in answers</button><button id="clearBtn" class="quiet" type="button">Start over</button></div><p id="submitStatus" class="status" role="status" aria-live="polite"></p><p class="reader-note">Your work saves on this device, so you can come back later. Your teacher sees it after you turn it in.</p>
+<p class="credits">Comic: <i>The Story of Foreign Trade and Exchange</i> (2008 edition), Federal Reserve Bank of New York, a free classroom comic. Scan from FRASER, Federal Reserve Bank of St. Louis. Some pages cropped to today's reading.</p>
+</section>
+</div></div></main>
+<div class="flip-big" id="flipBig" hidden role="dialog" aria-label="Bigger page"><button type="button" class="quiet" id="flipBigClose">✕ Close</button><img id="flipBigImg" alt="Bigger view of the current page"></div>
+<script>
+window.FLIP={
+title:"Pages from the 2008 comic The Story of Foreign Trade and Exchange",prefix:"wh-u3d1-trade-comic-",pages:4,readSeconds:8,lockSeconds:8,
+assignmentId:"wh-u3-d1-trade-comic",api:"https://fynn-class-assignment-submissions-20261024.neotboy.chatgpt.site/api/submit",
+lockedText:"This box opens when you get the check right.",
+clearConfirm:"Start over? This clears your checks and answers on this device.",
+successText:"Turned in! Your teacher got your 4 checks and 4 answers. You are done.",
+wrongText:(c,left)=>left>0?"Not quite. "+c.hint+" Try again in "+left+"…":"Not quite. "+c.hint+" The choices were mixed up. Try again.",
+parts:[
+{
+"short": "Your stuff",
+"ref": "Reader page 1",
+"title": "1. Why is your stuff from everywhere?",
+"from": 1,
+"to": 1,
+"check": {
+"page": 1,
+"tag": "Reading check · Reader page 1",
+"q": "Read the box next to the man in the blue sweater. Why does the comic say you can buy so many foreign products?",
+"right": "The United States trades goods with many other nations.",
+"wrong": [
+"The United States stopped making things on its own.",
+"Foreign products are always better made than American ones.",
+"Stores are not allowed to sell American-made products."
+],
+"why": "✓ Correct. Trade lets you buy things made all over the world. The comic says trade has \"changed greatly over the years.\"",
+"hint": "Read the speech box next to the man in the blue sweater."
+},
+"prompt": "The comic shows a CD player and a TV from 2008. What sped up trade even more after 1991?",
+"stem": "<span class=\"declass\"><b>Fact file</b>After the Cold War ended in 1991, former communist countries joined the world market. Shipping containers (in use since the 1960s) kept shipping cheap. The internet spread in the 1990s, and by 2025 about 6 billion people were online. China joined the World Trade Organization in 2001.</span>Write 1–2 sentences. Start like this: <i>Trade grew faster after 1991 because ___. Today the comic might show a ___ instead of a CD player.</i>",
+"stemText": "Trade grew faster after 1991 because ___. Today the comic might show a ___ instead of a CD player.",
+"placeholder": "Trade grew faster after 1991 because ___. Today the comic might show a ___ instead of a CD player."
+},
+{
+"short": "Who makes what?",
+"ref": "Reader page 2",
+"title": "2. Who should make what?",
+"from": 2,
+"to": 2,
+"check": {
+"page": 2,
+"tag": "Reading check · Reader page 2",
+"q": "Read the bottom panel of reader page 2. What does the comic say each country should do?",
+"right": "The U.S. makes CDs, Jeansland makes jeans, and they trade.",
+"wrong": [
+"The U.S. makes both, because its workers are faster at both.",
+"Jeansland makes both, because its workers get paid less.",
+"Each country makes its own CDs and jeans, so no one trades."
+],
+"why": "✓ Correct. Each country makes what it is relatively best at, then they trade. That is comparative advantage.",
+"hint": "Read the two speech bubbles in the bottom panel of reader page 2."
+},
+"prompt": "Use comparative advantage to explain one way Iowa trades with the world.",
+"stem": "<span class=\"declass\"><b>Fact file</b>Iowa raises nearly one-third of America's hogs and leads all states in pork exports. In 2024, Iowa sold $3.5 billion of soybeans and $2.9 billion of pork to other countries. Iowa used to grow lots of oats, but most farmers switched to corn and soybeans, which earn more. So the Quaker plant in Cedar Rapids buys most of its oats from Canada.</span>Write 1–2 sentences. Start like this: <i>Iowa sells ___ to the world because ___. Iowa buys ___ from Canada because ___.</i>",
+"stemText": "Iowa sells ___ to the world because ___. Iowa buys ___ from Canada because ___.",
+"placeholder": "Iowa sells ___ to the world because ___. Iowa buys ___ from Canada because ___."
+},
+{
+"short": "Who loses?",
+"ref": "Reader page 3",
+"title": "3. Who loses?",
+"from": 3,
+"to": 3,
+"check": {
+"page": 3,
+"tag": "Reading check · Reader page 3",
+"q": "Read the first box. What problem with free trade does the comic admit?",
+"right": "Some workers lose their jobs when cheaper goods come in.",
+"wrong": [
+"Prices go up for everyone who shops at local stores.",
+"Countries run out of things to sell to each other.",
+"Factories have to hire too many new workers at once."
+],
+"why": "✓ Correct. The comic says some workers will lose jobs, for a while or for good. The CD maker and the jeans maker each lose their work.",
+"hint": "Read the first box, top-left: \"A third reason is that…\""
+},
+"prompt": "Who won and who lost from globalization in the United States?",
+"stem": "<span class=\"declass\"><b>Fact file</b>In 2000, about 17.3 million Americans worked in factories. By 2010, about 11.5 million did. Economists estimate cheaper imports from China cost about 2 million U.S. jobs from 1999 to 2011. Machines and the 2008 recession cost jobs too. Meanwhile, selling to other countries supports about 96,000 Iowa jobs.</span>Write 1–2 sentences. Start like this: <i>One group that won was ___ because ___. One group that lost was ___ because ___.</i>",
+"stemText": "One group that won was ___ because ___. One group that lost was ___ because ___.",
+"placeholder": "One group that won was ___ because ___. One group that lost was ___ because ___."
+},
+{
+"short": "The promise",
+"ref": "Reader page 4",
+"title": "4. Fact-check the promise",
+"from": 4,
+"to": 4,
+"check": {
+"page": 4,
+"tag": "Reading check · Reader page 4",
+"q": "Read the box above Uncle Sam. How does the comic say countries can make it easier on workers?",
+"right": "Lower trade barriers slowly so workers can retrain.",
+"wrong": [
+"Stop all trade until every worker has a new job.",
+"Pay every worker who loses a job for the rest of their life.",
+"Only let rich countries trade with each other."
+],
+"why": "✓ Correct. The comic promises that, with time, workers get new jobs and \"share in the benefits of free trade.\"",
+"hint": "Read the box right above Uncle Sam and the \"Trade Barriers\" fence."
+},
+"prompt": "Fact-check the comic's promise. Is globalization mostly good or mostly bad for a town like Marion?",
+"stem": "<span class=\"declass\"><b>Fact file</b>Since 1990, more than 1 billion people around the world rose out of extreme poverty, many in China and India. Prices for things like clothes and TVs dropped. But many U.S. factory towns never got those jobs back, and some people protested (look at the signs in the top panel). Close to home, Collins Aerospace in Cedar Rapids sells airplane parts all over the world.</span>Write 1–2 sentences. Start like this: <i>For a town like Marion, globalization is mostly ___ because ___. The comic's promise was ___ (right / partly right / wrong).</i>",
+"stemText": "For a town like Marion, globalization is mostly ___ because ___. The comic's promise was ___ (right / partly right / wrong).",
+"placeholder": "For a town like Marion, globalization is mostly ___ because ___. The comic's promise was ___ (right / partly right / wrong)."
+}
+],
+questions:["The comic shows a CD player and a TV from 2008. What sped up trade even more after 1991?", "Use comparative advantage to explain one way Iowa trades with the world.", "Who won and who lost from globalization in the United States?", "Fact-check the comic's promise. Is globalization mostly good or mostly bad for a town like Marion?"],
+validate(s){if(!s.name)return{text:"Type your first name + last initial (like Jordan M.) at the top of the questions.",focus:"studentName"};
+ const mc=[1, 2, 3, 4].find(i=>!s.checkDone(i));if(mc)return{text:"Get the check right for part "+mc+" first.",part:mc};
+ const ma=[1, 2, 3, 4].find(i=>!s.answer(i));if(ma)return{text:"Write your answer for part "+ma+" before turning in.",part:ma,focus:"answer"+ma};
+ for(const i of [1, 2, 3, 4]){const j=window.classJunkStop&&window.classJunkStop(document.getElementById("answer"+i));if(j)return{text:"Part "+i+": "+j,part:i}}return null},
+buildAnswers(s){const a={Standard:"SS.9-12.WH.39","First-try correct":[1, 2, 3, 4].filter(i=>(s.tries(i)||1)===1).length+" of 4"};
+ this.questions.forEach((q,i)=>a[q]=s.answer(i+1));a["Reading checks"]="4 of 4 correct · tries: "+[1, 2, 3, 4].map(i=>s.tries(i)||1).join(", ");return a}
+
+};
+</script>
+<script src="../../shared/flip-reader.js?v=2"></script>
+<script>
+// This page only: choices wait for the read timer, and "Not quite" scrolls into view.
+(function(){
+  const t=document.getElementById("flipTimer");
+  const sync=()=>document.body.classList.toggle("reading-now",t.textContent.trim()!=="");
+  new MutationObserver(sync).observe(t,{childList:true,characterData:true,subtree:true});sync();
+  document.getElementById("flipCards").addEventListener("click",e=>{if(!e.target.closest(".choice"))return;
+    setTimeout(()=>{const f=[...document.querySelectorAll(".flip-part:not([hidden]) .fb")].find(x=>x.textContent.trim());
+      if(f){const r=f.getBoundingClientRect();if(r.bottom>innerHeight-80||r.top<0)f.scrollIntoView({behavior:"smooth",block:"center"})}
+      const a=document.querySelector(".flip-part:not([hidden]) textarea:not([disabled])");
+      if(a&&f&&f.classList.contains("ok")){const r=a.getBoundingClientRect();if(r.bottom>innerHeight-80)a.scrollIntoView({behavior:"smooth",block:"center"})}},120)});
+})();
+</script>
+</body></html>

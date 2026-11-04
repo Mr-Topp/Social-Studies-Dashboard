@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Who Makes the World&#x27;s Rules? | World History Unit 3 Day 3</title>
+<meta name="description" content="Read three real comics about the UN, the WTO, and the European Union, and judge how much power each global group has.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../shared/graphic-reading.css?v=3">
+<style>
+.flip-layout{grid-template-columns:minmax(0,1.9fr) minmax(320px,1fr)}
+.flip-stage img{min-height:0;max-height:calc(100vh - 130px)}
+.qcol{padding-bottom:70px}
+.intro-line{font-size:1.02rem;margin:0 0 10px}
+.words{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0 10px;padding:0;list-style:none}
+.words li{background:#fff;border:1px solid #e6dcc8;border-left:4px solid var(--navy);border-radius:8px;padding:3px 9px;font-size:.88rem}
+.declass{display:block;background:#fff;border:2px dashed #18364a;border-radius:10px;padding:8px 11px;margin:6px 0 8px;font-weight:650;color:#22313b;line-height:1.4;font-style:normal}
+.declass > b:first-child{display:block;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#18364a;margin-bottom:2px}
+.dime{display:inline-block;background:#e6bd64;color:#0f2433;border-radius:999px;font-weight:850;padding:0 9px;margin-right:4px}
+.credits{font-size:.8rem;color:var(--muted);margin:10px 0 0;line-height:1.4}
+.gr-head{padding-top:18px;padding-bottom:16px}.gr-head h1{margin:6px 0 6px}.gr-head .hook{margin-bottom:8px}
+body.reading-now .choices{opacity:.45;pointer-events:none}
+</style>
+<script src="../../shared/assignments.js?v=20261103p20"></script><script src="../../shared/turnin.js?v=20261103t"></script></head><body>
+<header class="gr-head" data-years="1945 — today"><div class="gr-wrap">
+<div class="kicker">World History · Unit 3 · Day 3 · Global Rules</div>
+<h1>Who Makes the World&#x27;s Rules?</h1>
+<p class="hook">Three real comics, made by the UN's partners, the New York Fed, and the European Union. Each one wants you to like its group. See how much power each group really has. 4 checks + 4 short answers. <b>About 25 minutes.</b></p>
+<p class="goal"><b>Today's goal:</b> Explain how global groups like the UN, WTO, and EU change the way countries deal with each other.</p>
+<details class="std-details"><summary>Iowa standards for today</summary>
+<p><b>Standard SS.9-12.WH.41</b> — Explain how global institutions have influenced political and economic relationships since the 1900s.</p>
+</details>
+<nav><a class="back" href="../../">← Class activities</a></nav>
+</div></header>
+
+<nav class="route" aria-label="Your progress"><ol id="flipRoute"></ol></nav>
+
+<main class="gr-main gr-wrap">
+<section class="card">
+<p class="intro-line"><b>You're the judge.</b> For each part: <b>read</b> the comic on the left → get the <b>check</b> right → <b>write</b> 1–2 sentences. Done = 4 green checks + 4 answers, then turn in at the bottom.</p>
+<ul class="words" aria-label="Word help">
+<li><b>UN</b> = the United Nations, 193 member countries</li><li><b>Global Goals</b> = 17 goals the UN set in 2015, like ending poverty by 2030</li><li><b>Bloc</b> = a group of countries that act together</li><li><b>WTO</b> = World Trade Organization, which sets trade rules</li><li><b>Member state</b> = a country that belongs to a group</li><li><b>Human rights</b> = rights every person has</li>
+</ul>
+<p class="welcome" id="welcome" role="status"></p>
+</section>
+
+<div class="flip-layout">
+<section class="flip-reader reading" id="flipReader" aria-label="Pages from three comics about the UN, the WTO, and the European Union">
+<div class="flip-bar"><div><p class="eyebrow">The reading</p><h2>Three real comics · 5 pages</h2></div><span class="flip-pos" id="flipPos"></span></div>
+<div class="flip-tools"><button type="button" class="quiet" id="flipBack">← Back a page</button><span class="grow"><span id="flipPart"></span><span id="flipTimer" aria-live="polite"></span></span><button type="button" class="secondary" id="flipNext">Next page →</button><button type="button" class="quiet" id="flipZoom">Make page bigger</button></div>
+<div class="flip-stage"><img id="flipImg" alt="" src="pages/p-01.jpg"></div>
+<p class="flip-cap">Click the page to make it bigger.</p>
+</section>
+
+<div class="qcol">
+<section class="card">
+<label for="studentName">First name + last initial (like Jordan M.)</label><input id="studentName" maxlength="100" autocomplete="off" placeholder="First name + last initial (like Jordan M.)" required>
+</section>
+<div id="flipCards"></div>
+<div class="flip-nav"><button type="button" class="quiet" id="flipBack2">← Back</button><button type="button" class="secondary" id="flipNext2">Next page →</button><p class="flip-why" id="flipWhy" aria-live="polite"></p></div>
+<section class="card finish" id="finish">
+<h2>Turn in your work</h2>
+<div class="actions"><button id="submitBtn" class="primary" type="button">Turn in answers</button><button id="clearBtn" class="quiet" type="button">Start over</button></div><p id="submitStatus" class="status" role="status" aria-live="polite"></p><p class="reader-note">Your work saves on this device, so you can come back later. Your teacher sees it after you turn it in.</p>
+<p class="credits">Comics: <i>Comics Uniting Nations: Heroes for Change</i> © 2015 Project Everyone, PCI Media Impact and Reading With Pictures, CC BY-NC-ND 4.0 (pages shown whole and unchanged). <i>The Story of Foreign Trade and Exchange</i> (2008), Federal Reserve Bank of New York (cropped). <i>Rendez-vous at Council of Europe</i> © European Union, 2026, art and story by Kokopello; reproduction authorised provided the source is acknowledged.</p>
+</section>
+</div></div></main>
+<div class="flip-big" id="flipBig" hidden role="dialog" aria-label="Bigger page"><button type="button" class="quiet" id="flipBigClose">✕ Close</button><img id="flipBigImg" alt="Bigger view of the current page"></div>
+<script>
+window.FLIP={
+title:"Pages from three comics about the UN, the WTO, and the European Union",prefix:"wh-u3d3-rule-makers-",pages:5,readSeconds:8,lockSeconds:8,
+assignmentId:"wh-u3-d3-rule-makers",api:"https://fynn-class-assignment-submissions-20261024.neotboy.chatgpt.site/api/submit",
+lockedText:"This box opens when you get the check right.",
+clearConfirm:"Start over? This clears your checks and answers on this device.",
+successText:"Turned in! Your teacher got your 4 checks and 4 answers. You are done.",
+wrongText:(c,left)=>left>0?"Not quite. "+c.hint+" Try again in "+left+"…":"Not quite. "+c.hint+" The choices were mixed up. Try again.",
+parts:[
+{
+"short": "The UN",
+"ref": "Reader pages 1–2",
+"title": "1. The UN's to-do list",
+"from": 1,
+"to": 2,
+"check": {
+"page": 2,
+"tag": "Reading check · Reader page 2",
+"q": "Read reader pages 1–2. What plan came out of the UN's talks with over 7 million people?",
+"right": "17 Global Goals to fix big problems, like poverty, by 2030",
+"wrong": [
+"One world army to stop every war, everywhere on Earth",
+"One kind of money that every country must use",
+"A plan that lets the 5 biggest countries make every rule"
+],
+"why": "✓ Correct. In 2015, all 193 UN members agreed to the 17 Global Goals, after the UN asked over 7 million people for ideas (reader page 1).",
+"hint": "Read the boxes at the top of reader page 2, then look at the chart of 17 goals."
+},
+"prompt": "Can the UN make a country follow the Global Goals?",
+"stem": "<span class=\"declass\"><b>Fact file</b>The Global Goals are promises, not laws. A country that misses them gets no punishment. In the General Assembly, each country gets one vote, big or small. In the Security Council, 5 countries have a veto (the power to block a decision alone).</span>Write 1–2 sentences. Start like this: <i>The UN can ___, but it cannot ___. So its power is ___.</i>",
+"stemText": "The UN can ___, but it cannot ___. So its power is ___.",
+"placeholder": "The UN can ___, but it cannot ___. So its power is ___."
+},
+{
+"short": "Trade rules",
+"ref": "Reader page 3",
+"title": "2. Trade rules: NAFTA and the WTO",
+"from": 3,
+"to": 3,
+"check": {
+"page": 3,
+"tag": "Reading check · Reader page 3",
+"q": "Read the box next to the WTO building. What does the comic say the WTO does?",
+"right": "Lowers trade barriers and helps make trade deals",
+"wrong": [
+"Prints money for countries that are in a money crisis",
+"Sends troops to stop fights between member countries",
+"Decides which countries can vote at the United Nations"
+],
+"why": "✓ Correct. The WTO is like a referee for trade. If a country breaks its rules, the WTO can let other countries put tariffs (taxes on imports) on it.",
+"hint": "Read the box on the left of the WTO building picture."
+},
+"prompt": "This page is from 2008. Fact-check one thing that has changed, and say why it matters.",
+"stem": "<span class=\"declass\"><b>Fact file</b>WTO: 146 members in the comic, 166 today. NAFTA was replaced by a new deal, the USMCA, in 2020. The comic's EU list includes the United Kingdom. British voters chose to leave in 2016, and Britain left the EU in 2020 (Brexit).</span>Write 1–2 sentences. Start like this: <i>The comic says ___, but today ___. This matters because ___.</i>",
+"stemText": "The comic says ___, but today ___. This matters because ___.",
+"placeholder": "The comic says ___, but today ___. This matters because ___."
+},
+{
+"short": "The EU",
+"ref": "Reader page 4",
+"title": "3. Two maps of Europe",
+"from": 4,
+"to": 4,
+"check": {
+"page": 4,
+"tag": "Reading check · Reader page 4",
+"q": "Read the speech bubble above each map. What is the difference?",
+"right": "The EU has 27 members. The Council of Europe has 46.",
+"wrong": [
+"The EU has 46 member states. The Council of Europe has 27.",
+"Both groups have exactly the same member countries.",
+"Ukraine is in the EU, but not in the Council of Europe."
+],
+"why": "✓ Correct. Spain is in both groups. Ukraine is in the Council of Europe, but not in the EU (yet).",
+"hint": "Read the speech bubble above each map, and the small notes about Spain and Ukraine."
+},
+"prompt": "What did EU countries get, and what did they give up?",
+"stem": "<span class=\"declass\"><b>Fact file</b>Careful: the Council of Europe is NOT the EU. It is a bigger group that protects human rights. (The comic says the EU has 350 million people; it really has about 450 million.) EU members trade with no tariffs (import taxes) between them. Their citizens can live and work in any member country. 21 countries share one money, the euro. To get this, members gave up some control over their own laws.</span>Write 1–2 sentences. Start like this: <i>EU countries got ___, but gave up ___. I think it is / is not worth it because ___.</i>",
+"stemText": "EU countries got ___, but gave up ___. I think it is / is not worth it because ___.",
+"placeholder": "EU countries got ___, but gave up ___. I think it is / is not worth it because ___."
+},
+{
+"short": "The court",
+"ref": "Reader page 5",
+"title": "4. A court above governments",
+"from": 5,
+"to": 5,
+"check": {
+"page": 5,
+"tag": "Reading check · Reader page 5",
+"q": "Read the middle row. What can a person do if their own government shuts down newspapers that criticize it?",
+"right": "Take their government to the European Court of Human Rights",
+"wrong": [
+"Vote that government out of office at the United Nations",
+"Ask the WTO to put trade taxes on their own country",
+"Nothing, because each country makes all of its own rules"
+],
+"why": "✓ Correct. A person can take their own government to court in Strasbourg, France. The comic says a government that will not obey can be sanctioned (punished).",
+"hint": "Read the middle panel with the woman holding a newspaper."
+},
+"prompt": "Pick one group from today. Does it give some countries more power than others?",
+"stem": "<span class=\"declass\"><b>Fact file</b><b>UN:</b> 5 countries hold a veto. <b>WTO:</b> each member has a say, but critics say rich countries get the best deals. <b>EU:</b> bigger countries like Germany get more seats in the EU Parliament. <b>Court:</b> 46 countries agreed to follow it. Russia was kicked out of the Council of Europe in 2022, and the U.S. and China were never in it.</span>Write 1–2 sentences. Start like this: <i>The ___ gives ___ more power than others because ___.</i>",
+"stemText": "The ___ gives ___ more power than others because ___.",
+"placeholder": "The ___ gives ___ more power than others because ___."
+}
+],
+questions:["Can the UN make a country follow the Global Goals?", "This page is from 2008. Fact-check one thing that has changed, and say why it matters.", "What did EU countries get, and what did they give up?", "Pick one group from today. Does it give some countries more power than others?"],
+validate(s){if(!s.name)return{text:"Type your first name + last initial (like Jordan M.) at the top of the questions.",focus:"studentName"};
+ const mc=[1, 2, 3, 4].find(i=>!s.checkDone(i));if(mc)return{text:"Get the check right for part "+mc+" first.",part:mc};
+ const ma=[1, 2, 3, 4].find(i=>!s.answer(i));if(ma)return{text:"Write your answer for part "+ma+" before turning in.",part:ma,focus:"answer"+ma};
+ for(const i of [1, 2, 3, 4]){const j=window.classJunkStop&&window.classJunkStop(document.getElementById("answer"+i));if(j)return{text:"Part "+i+": "+j,part:i}}return null},
+buildAnswers(s){const a={Standard:"SS.9-12.WH.41","First-try correct":[1, 2, 3, 4].filter(i=>(s.tries(i)||1)===1).length+" of 4"};
+ this.questions.forEach((q,i)=>a[q]=s.answer(i+1));a["Reading checks"]="4 of 4 correct · tries: "+[1, 2, 3, 4].map(i=>s.tries(i)||1).join(", ");return a}
+
+};
+</script>
+<script src="../../shared/flip-reader.js?v=2"></script>
+<script>
+// This page only: choices wait for the read timer, and "Not quite" scrolls into view.
+(function(){
+  const t=document.getElementById("flipTimer");
+  const sync=()=>document.body.classList.toggle("reading-now",t.textContent.trim()!=="");
+  new MutationObserver(sync).observe(t,{childList:true,characterData:true,subtree:true});sync();
+  document.getElementById("flipCards").addEventListener("click",e=>{if(!e.target.closest(".choice"))return;
+    setTimeout(()=>{const f=[...document.querySelectorAll(".flip-part:not([hidden]) .fb")].find(x=>x.textContent.trim());
+      if(f){const r=f.getBoundingClientRect();if(r.bottom>innerHeight-80||r.top<0)f.scrollIntoView({behavior:"smooth",block:"center"})}
+      const a=document.querySelector(".flip-part:not([hidden]) textarea:not([disabled])");
+      if(a&&f&&f.classList.contains("ok")){const r=a.getBoundingClientRect();if(r.bottom>innerHeight-80)a.scrollIntoView({behavior:"smooth",block:"center"})}},120)});
+})();
+</script>
+</body></html>

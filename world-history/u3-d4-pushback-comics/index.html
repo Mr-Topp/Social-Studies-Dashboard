@@ -1,0 +1,196 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Walls, Taxes, or Coffee? | World History Unit 3 Day 4</title>
+<meta name="description" content="Compare two comics with two sides: a bank&#x27;s comic on trade barriers and a coffee company&#x27;s comic on fair trade.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../shared/graphic-reading.css?v=3">
+<style>
+.flip-layout{grid-template-columns:minmax(0,1.9fr) minmax(320px,1fr)}
+.flip-stage img{min-height:0;max-height:calc(100vh - 130px)}
+.qcol{padding-bottom:70px}
+.intro-line{font-size:1.02rem;margin:0 0 10px}
+.words{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0 10px;padding:0;list-style:none}
+.words li{background:#fff;border:1px solid #e6dcc8;border-left:4px solid var(--navy);border-radius:8px;padding:3px 9px;font-size:.88rem}
+.declass{display:block;background:#fff;border:2px dashed #18364a;border-radius:10px;padding:8px 11px;margin:6px 0 8px;font-weight:650;color:#22313b;line-height:1.4;font-style:normal}
+.declass > b:first-child{display:block;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#18364a;margin-bottom:2px}
+.dime{display:inline-block;background:#e6bd64;color:#0f2433;border-radius:999px;font-weight:850;padding:0 9px;margin-right:4px}
+.credits{font-size:.8rem;color:var(--muted);margin:10px 0 0;line-height:1.4}
+.gr-head{padding-top:18px;padding-bottom:16px}.gr-head h1{margin:6px 0 6px}.gr-head .hook{margin-bottom:8px}
+body.reading-now .choices{opacity:.45;pointer-events:none}
+</style>
+<script src="../../shared/assignments.js?v=20261103p20"></script><script src="../../shared/turnin.js?v=20261103t"></script></head><body>
+<header class="gr-head" data-years="1990s — today"><div class="gr-wrap">
+<div class="kicker">World History · Unit 3 · Day 4 · Pushing Back</div>
+<h1>Walls, Taxes, or Coffee?</h1>
+<p class="hook">Two comics, two sides. The New York Fed's comic explains why countries put up trade walls. A coffee company's comic says shoppers can push back by paying more. Judge both. 4 checks + 4 short answers. <b>About 25 minutes.</b></p>
+<p class="goal"><b>Today's goal:</b> Explain different ways people and countries pushed back against globalization since the 1990s.</p>
+<details class="std-details"><summary>Iowa standards for today</summary>
+<p><b>Standard SS.9-12.WH.42</b> — Explain various responses to increasing globalization since the 1990s</p>
+</details>
+<nav><a class="back" href="../../">← Class activities</a></nav>
+</div></header>
+
+<nav class="route" aria-label="Your progress"><ol id="flipRoute"></ol></nav>
+
+<main class="gr-main gr-wrap">
+<section class="card">
+<p class="intro-line"><b>You're the judge.</b> For each part: <b>read</b> the comic on the left → get the <b>check</b> right → <b>write</b> 1–2 sentences. Done = 4 green checks + 4 answers, then turn in at the bottom.</p>
+<ul class="words" aria-label="Word help">
+<li><b>Trade barrier</b> = a rule that makes imports harder</li><li><b>Tariff</b> = a tax on goods from another country</li><li><b>Quota</b> = a limit on how much of something can come in</li><li><b>National security</b> = keeping a country safe</li><li><b>Fair trade</b> = paying small farmers a set, higher price</li><li><b>Co-op</b> = a group of farmers who work and sell together</li><li><b>Certify</b> = officially say something meets the rules</li>
+</ul>
+<p class="welcome" id="welcome" role="status"></p>
+</section>
+
+<div class="flip-layout">
+<section class="flip-reader reading" id="flipReader" aria-label="Pages from a 2008 trade comic and a fair trade comic">
+<div class="flip-bar"><div><p class="eyebrow">The reading</p><h2>Two real comics · 4 pages</h2></div><span class="flip-pos" id="flipPos"></span></div>
+<div class="flip-tools"><button type="button" class="quiet" id="flipBack">← Back a page</button><span class="grow"><span id="flipPart"></span><span id="flipTimer" aria-live="polite"></span></span><button type="button" class="secondary" id="flipNext">Next page →</button><button type="button" class="quiet" id="flipZoom">Make page bigger</button></div>
+<div class="flip-stage"><img id="flipImg" alt="" src="pages/p-01.jpg"></div>
+<p class="flip-cap">Click the page to make it bigger.</p>
+</section>
+
+<div class="qcol">
+<section class="card">
+<label for="studentName">First name + last initial (like Jordan M.)</label><input id="studentName" maxlength="100" autocomplete="off" placeholder="First name + last initial (like Jordan M.)" required>
+</section>
+<div id="flipCards"></div>
+<div class="flip-nav"><button type="button" class="quiet" id="flipBack2">← Back</button><button type="button" class="secondary" id="flipNext2">Next page →</button><p class="flip-why" id="flipWhy" aria-live="polite"></p></div>
+<section class="card finish" id="finish">
+<h2>Turn in your work</h2>
+<div class="actions"><button id="submitBtn" class="primary" type="button">Turn in answers</button><button id="clearBtn" class="quiet" type="button">Start over</button></div><p id="submitStatus" class="status" role="status" aria-live="polite"></p><p class="reader-note">Your work saves on this device, so you can come back later. Your teacher sees it after you turn it in.</p>
+<p class="credits">Comics: <i>The Story of Foreign Trade and Exchange</i> (2008), Federal Reserve Bank of New York, a free classroom comic (cropped). <i>The History of Authentic Fair Trade</i>, Equal Exchange, a free educational comic.</p>
+</section>
+</div></div></main>
+<div class="flip-big" id="flipBig" hidden role="dialog" aria-label="Bigger page"><button type="button" class="quiet" id="flipBigClose">✕ Close</button><img id="flipBigImg" alt="Bigger view of the current page"></div>
+<script>
+window.FLIP={
+title:"Pages from a 2008 trade comic and a fair trade comic",prefix:"wh-u3d4-pushback-comics-",pages:4,readSeconds:8,lockSeconds:8,
+assignmentId:"wh-u3-d4-pushback-comics",api:"https://fynn-class-assignment-submissions-20261024.neotboy.chatgpt.site/api/submit",
+lockedText:"This box opens when you get the check right.",
+clearConfirm:"Start over? This clears your checks and answers on this device.",
+successText:"Turned in! Your teacher got your 4 checks and 4 answers. You are done.",
+wrongText:(c,left)=>left>0?"Not quite. "+c.hint+" Try again in "+left+"…":"Not quite. "+c.hint+" The choices were mixed up. Try again.",
+parts:[
+{
+"short": "Tariffs",
+"ref": "Reader page 1",
+"title": "1. Tariffs and quotas",
+"from": 1,
+"to": 1,
+"check": {
+"page": 1,
+"tag": "Reading check · Reader page 1",
+"q": "Read the boxes on this page. What is a tariff?",
+"right": "A tax on goods brought in from another country",
+"wrong": [
+"A limit on how many goods can come in",
+"A free-trade deal between two countries",
+"A payment to farmers who lose their sales"
+],
+"why": "✓ Correct. A quota is the limit. The comic adds that most economists oppose tariffs and quotas because they limit free trade.",
+"hint": "Read the box under the U.S. and French flags: \"Two types of trade barriers…\""
+},
+"prompt": "The comic's tariff is $1 on French wine. How did tariffs hit Iowa in 2018?",
+"stem": "<span class=\"declass\"><b>Fact file</b>In 2018, the U.S. put tariffs on Chinese goods. China hit back with a 25% tariff on U.S. soybeans. In 2017, China had bought 57% of America's soybean exports. Iowa farmers lost their top buyer, and the government sent them aid. Supporters said the tariffs pushed China to change unfair trade practices. In 2020, China signed a deal to buy more U.S. farm goods, but it bought less than it promised.</span>Write 1–2 sentences. Start like this: <i>In 2018, Iowa soybean farmers were hurt because ___. This shows a tariff can ___.</i>",
+"stemText": "In 2018, Iowa soybean farmers were hurt because ___. This shows a tariff can ___.",
+"placeholder": "In 2018, Iowa soybean farmers were hurt because ___. This shows a tariff can ___."
+},
+{
+"short": "Why walls?",
+"ref": "Reader page 2",
+"title": "2. Why keep trade walls?",
+"from": 2,
+"to": 2,
+"check": {
+"page": 2,
+"tag": "Reading check · Reader page 2",
+"q": "Read the two boxes at the top. What two reasons does the comic give for keeping some trade barriers?",
+"right": "To make war supplies at home and protect new industries",
+"wrong": [
+"To keep prices high, and to stop people from traveling",
+"To punish enemies, and to raise money for schools",
+"To make foreign goods better, and to help poor countries"
+],
+"why": "✓ Correct. Countries want their own suppliers in case of war. New industries may need time to get strong.",
+"hint": "Read the box at the top of each panel."
+},
+"prompt": "Why did the U.S. pay to build computer-chip factories at home? Use a reason from the comic.",
+"stem": "<span class=\"declass\"><b>Fact file</b>Reshoring means bringing factories back home. One company in Taiwan, TSMC, makes over 90% of the most advanced computer chips. In 2022, Congress set aside $52.7 billion to make more chips in the U.S., and TSMC is building plants in Arizona.</span>Write 1–2 sentences. Start like this: <i>The U.S. paid to make chips at home because ___. This matches the comic's reason that ___.</i>",
+"stemText": "The U.S. paid to make chips at home because ___. This matches the comic's reason that ___.",
+"placeholder": "The U.S. paid to make chips at home because ___. This matches the comic's reason that ___."
+},
+{
+"short": "Fair trade",
+"ref": "Reader page 3",
+"title": "3. Fair trade takes off",
+"from": 3,
+"to": 3,
+"check": {
+"page": 3,
+"tag": "Reading check · Reader page 3",
+"q": "Read the box at the bottom-left. In the 1990s, how could shoppers tell a product was fair trade?",
+"right": "It had a fair trade seal on the package",
+"wrong": [
+"It was always sold at a cheaper price",
+"The label said it was made in the United States",
+"Only big companies were allowed to sell it"
+],
+"why": "✓ Correct. Transfair USA certified companies. Then they could put a fair trade seal on the package.",
+"hint": "Read the box at the bottom-left about Transfair USA."
+},
+"prompt": "Fair trade and \"Made in the USA\" both can cost more on purpose. Would you pay more for either one? Why or why not?",
+"stem": "<span class=\"declass\"><b>Fact file</b>This comic was made by Equal Exchange, a company that sells fair trade coffee. The Choose Iowa program helps Iowa schools buy food from Iowa farmers.</span>Write 1–2 sentences. Start like this: <i>I would / would not pay more for ___ because ___.</i>",
+"stemText": "I would / would not pay more for ___ because ___.",
+"placeholder": "I would / would not pay more for ___ because ___."
+},
+{
+"short": "Did it help?",
+"ref": "Reader page 4",
+"title": "4. Did fair trade help?",
+"from": 4,
+"to": 4,
+"check": {
+"page": 4,
+"tag": "Reading check · Reader page 4",
+"q": "Besides higher prices, what else does the comic say fair trade gives farmer co-ops?",
+"right": "Loans until harvest and money for schools and health",
+"wrong": [
+"Free land and new houses for every farmer's family",
+"Jobs in the U.S. for farmers who want to move",
+"Machines that do all of the farm work for them"
+],
+"why": "✓ Correct. Co-ops also get help growing better crops. But the comic admits there is \"such a long way to go.\"",
+"hint": "Read the long speech bubble that starts \"Well, no, that is very important…\""
+},
+"prompt": "Pick one pushback against globalization. Who does it help, and who does it hurt?",
+"stem": "<span class=\"declass\"><b>Fact file</b>Pushbacks from today: keeping key factories at home, tariffs, protests, and fair trade. In Seattle in 1999, about 35,000 union members and others marched against the WTO, saying trade rules helped big companies but hurt workers and the planet. Both comics have a side. The New York Fed comic is for free trade. The Equal Exchange comic is for fair trade.</span>Write 1–2 sentences. Start like this: <i>___ helps ___ because ___. But it hurts ___ because ___.</i>",
+"stemText": "___ helps ___ because ___. But it hurts ___ because ___.",
+"placeholder": "___ helps ___ because ___. But it hurts ___ because ___."
+}
+],
+questions:["The comic's tariff is $1 on French wine. How did tariffs hit Iowa in 2018?", "Why did the U.S. pay to build computer-chip factories at home? Use a reason from the comic.", "Fair trade and \"Made in the USA\" both can cost more on purpose. Would you pay more for either one? Why or why not?", "Pick one pushback against globalization. Who does it help, and who does it hurt?"],
+validate(s){if(!s.name)return{text:"Type your first name + last initial (like Jordan M.) at the top of the questions.",focus:"studentName"};
+ const mc=[1, 2, 3, 4].find(i=>!s.checkDone(i));if(mc)return{text:"Get the check right for part "+mc+" first.",part:mc};
+ const ma=[1, 2, 3, 4].find(i=>!s.answer(i));if(ma)return{text:"Write your answer for part "+ma+" before turning in.",part:ma,focus:"answer"+ma};
+ for(const i of [1, 2, 3, 4]){const j=window.classJunkStop&&window.classJunkStop(document.getElementById("answer"+i));if(j)return{text:"Part "+i+": "+j,part:i}}return null},
+buildAnswers(s){const a={Standard:"SS.9-12.WH.42","First-try correct":[1, 2, 3, 4].filter(i=>(s.tries(i)||1)===1).length+" of 4"};
+ this.questions.forEach((q,i)=>a[q]=s.answer(i+1));a["Reading checks"]="4 of 4 correct · tries: "+[1, 2, 3, 4].map(i=>s.tries(i)||1).join(", ");return a}
+
+};
+</script>
+<script src="../../shared/flip-reader.js?v=2"></script>
+<script>
+// This page only: choices wait for the read timer, and "Not quite" scrolls into view.
+(function(){
+  const t=document.getElementById("flipTimer");
+  const sync=()=>document.body.classList.toggle("reading-now",t.textContent.trim()!=="");
+  new MutationObserver(sync).observe(t,{childList:true,characterData:true,subtree:true});sync();
+  document.getElementById("flipCards").addEventListener("click",e=>{if(!e.target.closest(".choice"))return;
+    setTimeout(()=>{const f=[...document.querySelectorAll(".flip-part:not([hidden]) .fb")].find(x=>x.textContent.trim());
+      if(f){const r=f.getBoundingClientRect();if(r.bottom>innerHeight-80||r.top<0)f.scrollIntoView({behavior:"smooth",block:"center"})}
+      const a=document.querySelector(".flip-part:not([hidden]) textarea:not([disabled])");
+      if(a&&f&&f.classList.contains("ok")){const r=a.getBoundingClientRect();if(r.bottom>innerHeight-80)a.scrollIntoView({behavior:"smooth",block:"center"})}},120)});
+})();
+</script>
+</body></html>
