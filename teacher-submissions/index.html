@@ -190,6 +190,9 @@ td.inclass .ic{display:block;width:96px;margin:0 auto;background:#e3f0e5;color:#
 .linkform label{display:flex;gap:6px;align-items:center;font-size:.88rem}
 .linkform input[name=title]{width:240px}.linkform input[name=url]{width:320px}
 .addedlist ul{margin:8px 0 0;padding-left:18px}.addedlist li{margin:0 0 6px}.addedlist button{padding:3px 9px;font-size:.8rem;margin-left:6px}
+.todofilters{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 10px}.todofilters .n{opacity:.7;font-size:.8rem}
+.todomiss.vid{color:#8a5a00}.todomiss.rev{color:#2a5ea8}
+.todoacts{display:flex;flex-wrap:wrap;gap:4px;margin-top:4px}.todoacts .chip{font-size:.8rem;padding:2px 8px}
 .todonote{background:#e3f0e5;color:#1f5e2c;font-weight:800;border-radius:9px;padding:8px 12px;margin:0 0 10px}
 .dayrow.flash{background:#fff1c9;transition:background .3s}
 @media (max-width:760px){.todo{grid-template-columns:1fr}.linkform input[name=title],.linkform input[name=url]{width:100%}.tab.todotab{margin-left:0}}
@@ -735,7 +738,7 @@ function linksHtml() {
   const isAltReading = id => /\(Reading/i.test(REG[id].title || "");
   // YouTube videos from the Schoology day posts get their own "Videos" row under the day (videos.js).
   // A lesson day with no videos gets a red "No video yet" box so you remember to add one (Fynn, 2026-11-03).
-  // Only on the day itself: not in the To-do tab, not counted in "not made yet". Test days and "Other" rows are skipped.
+  // Also listed in the To-do tab as "Add a video" (Fynn, 2026-11-03), but not counted in the unit's "not made yet". Test days and "Other" rows are skipped.
   const vidRow = (ids, wantVideo) => { const list = ids.filter(id => !REG[id].alt && kindOf(id) === "video"); return list.length ? `<div class="altrow vidrow"><span class="altlabel">Video${list.length > 1 ? "s" : ""}</span>${list.map(chip).join("")}</div>` : wantVideo ? `<div class="altrow vidrow"><span class="altlabel">Videos</span><span class="chip todo novid">⚠ No video yet. Add one later</span></div>` : ""; };
   const altRow = (ids, reading) => { const list = ids.filter(id => REG[id].alt && isAltReading(id) === reading); return list.length ? `<div class="altrow"><span class="altlabel">${reading ? "Alternative reading" : "Alternative assignment"}${list.length > 1 ? "s" : ""}</span>${list.map(chip).join("")}</div>` : ""; };
   // Answer keys + Drive alternatives sit behind a small "+ more" so the day row shows only what you teach from.
@@ -811,6 +814,15 @@ function linksHtml() {
     // Movie days (Cinderella Man, The Truman Show) don't need a "No video yet" box: the movie is the video (Fynn, 2026-11-03).
     const isMovieRow = r => r.ids.some(id => /\(Movie\)|Cinderella Man|Truman Show/i.test(REG[id].title || ""));
     const wantsVideo = r => (r.single || r.day > 0) && !(cal && r.day > cal.days) && !isExamRow(r) && !isMovieRow(r);
+    // To-do tab extras (Fynn, 2026-11-03): days with no video yet, and online days in "Go through material again" units
+    // he hasn't marked reviewed. "Reviewed" marks live in the Sheet (see REVIEWED).
+    if (window.__todoSink) list.forEach(r => {
+      if (!r.day || r.single) return;
+      const base = { key, name, day: r.day, span: r.span, title: r.title, std: r.std, summ: false, after: false };
+      if (wantsVideo(r) && !r.ids.some(id => !REG[id].alt && kindOf(id) === "video")) window.__todoSink.push(Object.assign({}, base, { kind: "video" }));
+      const online = r.ids.filter(id => !REG[id].alt && kindOf(id) === "online");
+      if (REVIEW_AGAIN.has(key) && online.length && !REVIEWED[key + "|" + r.day] && !APPROVED_IN_CHAT[key + "|" + r.day]) window.__todoSink.push(Object.assign({}, base, { kind: "review", acts: online.map(id => ({ title: chipText(id), href: hrefOf(id) })) }));
+    });
     const body = list.map(r => {
       // Summative row: just the green-sheet date, no "Day N · Summative" (Fynn, 2026-11-02).
       const label = r.single ? "" : r.summ && cal && cal.summative ? `<span class="sumdate">📅 ${safe(niceDate(cal.summative))}</span>` : r.day ? `<b>${r.span ? `Days ${r.day}–${r.span}` : `Day ${r.day}`}</b>${rowDate(r)}` : `<b>Other</b>`;
@@ -862,13 +874,24 @@ const stdCodeHover = c => `<span class="stdn" title="${safe(stdTip(c))}">${safe(
 // ================= To-do tab =================
 // Every red "not made yet" note from all classes, soonest first, with a box to paste a link that fills it in.
 // Links save to your Google Sheet through Teacher Tools (set_link) and show on that lesson day right away.
-let LINKS = {}, loaded = false;
+let LINKS = {}, loaded = false, REVIEWED = {};
+// "Reviewed" marks from the To-do tab are saved as link rows titled "Reviewed (teacher key)". The "teacher key" words keep
+// them off students' home pages (Teacher Tools never sends teacher keys), and they never show as chips on a day.
+const REVIEW_TITLE = "Reviewed (teacher key)";
+// Online days Fynn already went through and approved in chat (so they start off the review list).
+const APPROVED_IN_CHAT = { "sociology|2|1": true };   // "Why Did That Blow Up?" approved 2026-11-03
+const isReviewMark = l => l && l.title === REVIEW_TITLE;
+// A link added for a "no video" day counts as that day's video: YouTube/Vimeo/Edpuzzle links, or anything named "(Video)".
+const VIDEO_URL = /youtube\.com|youtu\.be|vimeo\.com|edpuzzle\.com/i;
 const dayAnchor = (key, day) => "d-" + String(key).replace(/[^a-z0-9]+/gi, "-") + "-" + (day || 0);
 function applyLinks() {
   Object.keys(REG).filter(id => REG[id].fromTodo).forEach(id => delete REG[id]);
+  REVIEWED = {};
   Object.values(LINKS).forEach(l => {
     if (l.removed || !l.url || !COURSES[l.course]) return;
-    REG["todo-link-" + l.id] = Object.assign({ course: l.course, unit: +l.unit, day: +l.day, title: "Day " + l.day + " · " + l.title, path: l.url, turnIn: false, fromTodo: true, linkId: l.id }, +l.part === 1 ? { part: 1 } : {});
+    if (isReviewMark(l)) { REVIEWED[l.course + (+l.part === 1 ? "|p1" : "") + "|" + l.unit + "|" + l.day] = l; return; }
+    const video = VIDEO_URL.test(l.url) || /\(video\)/i.test(l.title);
+    REG["todo-link-" + l.id] = Object.assign({ course: l.course, unit: +l.unit, day: +l.day, title: "Day " + l.day + " · " + l.title.replace(/\s*\(video\)\s*$/i, ""), path: l.url, turnIn: false, fromTodo: true, linkId: l.id }, video ? { video: true } : {}, +l.part === 1 ? { part: 1 } : {});
   });
 }
 const isoOf = d => d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0");
@@ -931,33 +954,44 @@ function collectTodos() {
   out.forEach(t => { const w = t.when && t.when.iso; t.group = !w ? 3 : w < TODAY ? 4 : w <= fri ? 0 : w <= nextFri ? 1 : 2; });
   return out.sort((a, b) => a.group - b.group || String((a.when || {}).iso || "").localeCompare(String((b.when || {}).iso || "")) || a.course.localeCompare(b.course) || (a.part1 ? 0 : 1) - (b.part1 ? 0 : 1) || a.unit - b.unit || a.day - b.day);
 }
-const MISS_TEXT = { after: "This day is after the summative. Move or cut it (tell Claude)", test: "Summative not made yet", key: "Answer key not made yet", assignment: "Assignment not made yet" };
+const MISS_TEXT = { after: "This day is after the summative. Move or cut it (tell Claude)", test: "Summative not made yet", key: "Answer key not made yet", assignment: "Assignment not made yet", video: "No video yet. Add one", review: "Online activity not reviewed yet" };
+// Filter buttons at the top of the To-do tab (Fynn, 2026-11-03: videos + online days to review joined the list).
+const TODO_FILTERS = [["all", "All"], ["make", "Not made yet"], ["video", "Videos to add"], ["review", "Online days to review"]];
+const filterOf = t => t.kind === "video" ? "video" : t.kind === "review" ? "review" : "make";
+let todoFilter = sessionStorage.getItem("todo-filter") || "all";
 const NAME_START = { test: "Summative", key: "Summative Answer Key" };
 const TODO_GROUPS = ["This week", "Next week", "Later", "No date yet (not on the green sheet)", "Already passed (fill in only if you'll reuse it)"];
 const niceDay = iso => new Date(iso + "T12:00:00").toLocaleDateString("en-US", { weekday: "short", month: "short", day: "numeric" });
 let todoOpen = null; const foldOpen = {};
 function renderTodo() {
-  const items = collectTodos(), pane = $("todoPane");
-  const linkList = Object.values(LINKS).filter(l => !l.removed && l.url && COURSES[l.course]);
-  const head = `<p class="todohead">Everything still marked <span class="red">⚠ not made yet</span>, soonest first. Paste a link to fill it in. It shows on that day in Lessons and on students' home pages (never answer keys or tests).</p>` +
-    (loaded ? "" : `<p class="todowarn">Enter your code at the top first, so you can add links (and so links you already added count).</p>`);
+  const all = collectTodos(), pane = $("todoPane");
+  if (!TODO_FILTERS.some(f => f[0] === todoFilter)) todoFilter = "all";
+  const items = all.map((t, i) => Object.assign(t, { i })), shown = items.filter(t => todoFilter === "all" || filterOf(t) === todoFilter);
+  const linkList = Object.values(LINKS).filter(l => !l.removed && l.url && COURSES[l.course] && !isReviewMark(l));
+  const reviewList = Object.values(LINKS).filter(l => !l.removed && COURSES[l.course] && isReviewMark(l));
+  const nOf = f => f === "all" ? items.length : items.filter(t => filterOf(t) === f).length;
+  const head = `<p class="todohead">Everything still to do, soonest first: <span class="red">⚠ not made yet</span>, days with no video, and online days you haven't reviewed. Paste a link to fill a day in (it shows on that day in Lessons and on students' home pages, never answer keys or tests). Played through an online day? Click <b>✓ Mark reviewed</b>.</p>` +
+    `<div class="todofilters" role="group" aria-label="Show">${TODO_FILTERS.map(([f, label]) => `<button class="mode" data-f="${f}" aria-pressed="${todoFilter === f}">${label} <span class="n">${nOf(f)}</span></button>`).join("")}</div>` +
+    (loaded ? "" : `<p class="todowarn">Enter your code at the top first, so you can add links and mark days reviewed (and so ones you already did count).</p>`);
   const body = [[], [], [], [], []];
-  if (!items.length) body[0].push(`<div class="empty">Nothing left to make. 🎉</div>`);
-  items.forEach((t, i) => {
+  if (!shown.length) body[0].push(`<div class="empty">${todoFilter === "all" ? "Nothing left to do. 🎉" : "Nothing left here. 🎉"}</div>`);
+  shown.forEach(t => {
+    const i = t.i;
     let html = "";
     const when = t.when ? (t.when.exact ? `<b>${safe(niceDay(t.when.iso))}</b>` : `<span>about</span> <b>${safe(niceDay(t.when.iso))}</b>`) : `<span class="muted">no date</span>`;
     const unitLabel = (t.part1 ? "Part 1 · " : "") + (t.unit ? (t.course === "civics" ? "Friday " : "Unit ") + t.unit : "Other");
     const dayLabel = (t.summ && t.when) || !t.day ? "" : (t.span ? `Days ${t.day}–${t.span}` : `Day ${t.day}`);   // no "· Summative" (Fynn, 2026-11-02): the date column already shows it
-    const canLink = !t.after && t.unit && t.day;
+    const canLink = !t.after && t.unit && t.day && t.kind !== "review";
+    const acts = t.kind === "review" ? `<span class="todoacts">${t.acts.map(a => `<a class="chip online" href="${safe(a.href)}" target="_blank" rel="noopener">💻 ${safe(a.title)}</a>`).join("")}</span>` : "";
     html += `<div class="todo${t.summ ? " summ" : ""}" data-i="${i}">
       <div class="todowhen">${when}</div>
       <div class="todowhat"><span class="cls">${safe(COURSES[t.course])}</span> ${safe(unitLabel)}${dayLabel ? " · " + safe(dayLabel) : ""}
         <span class="todotitle">${safe(t.title || (t.summ ? "Summative" : "Nothing planned yet"))}</span>
-        <span class="todomiss">⚠ ${safe(MISS_TEXT[t.kind])}</span></div>
-      <div class="todoact">${canLink ? `<button class="addlink" data-i="${i}">＋ Add link</button>` : ""}<button class="light seeday" data-i="${i}">See day</button></div>
+        <span class="todomiss${t.kind === "review" ? " rev" : t.kind === "video" ? " vid" : ""}">${t.kind === "review" ? "🔁" : t.kind === "video" ? "▶️" : "⚠"} ${safe(MISS_TEXT[t.kind])}</span>${acts}</div>
+      <div class="todoact">${canLink ? `<button class="addlink" data-i="${i}">＋ ${t.kind === "video" ? "Add video" : "Add link"}</button>` : ""}${t.kind === "review" ? `<button class="markrev" data-i="${i}">✓ Mark reviewed</button>` : ""}<button class="light seeday" data-i="${i}">See day</button></div>
       ${canLink ? `<form class="linkform" novalidate data-i="${i}"${todoOpen === i ? "" : " hidden"}>
-        <label>Name <input name="title" required maxlength="100" placeholder="${NAME_START[t.kind] || "What is it? (e.g. Bill of Rights Blooket)"}" value="${NAME_START[t.kind] || ""}"></label>
-        <label>Link <input name="url" required placeholder="Paste the link"></label>
+        <label>Name <input name="title" required maxlength="100" placeholder="${NAME_START[t.kind] || (t.kind === "video" ? "Video name (e.g. Crash Course: The Cold War)" : "What is it? (e.g. Bill of Rights Blooket)")}" value="${NAME_START[t.kind] || ""}"></label>
+        <label>Link <input name="url" required placeholder="${t.kind === "video" ? "Paste the YouTube link" : "Paste the link"}"></label>
         <button type="submit">Save</button><button type="button" class="light cancel">Cancel</button>
         <span class="formstat status" aria-live="polite"></span></form>` : ""}
     </div>`;
@@ -969,8 +1003,26 @@ function renderTodo() {
     const h = `${TODO_GROUPS[g]} <span class="unitcount">${list.length}</span>`;
     return g < 3 ? `<h2 class="todogroup">${h}</h2>${list.join("")}` : `<details class="todofold"${foldOpen[g] ? " open" : ""} data-g="${g}"><summary class="todogroup past">${h}</summary>${list.join("")}</details>`;
   }).join("");
+  if (reviewList.length) html += `<details class="mini addedlist"><summary>Online days you marked reviewed (${reviewList.length})</summary><ul>${reviewList.map(l => `<li><b>${safe(COURSES[l.course])}</b> · Unit ${safe(l.unit)} · Day ${safe(l.day)} <button class="light rmlink" data-id="${safe(l.id)}">Undo</button></li>`).join("")}</ul></details>`;
   if (linkList.length) html += `<details class="mini addedlist"><summary>Links you added (${linkList.length})</summary><ul>${linkList.map(l => `<li><b>${safe(COURSES[l.course])}</b> · ${+l.part === 1 ? "Part 1 · " : ""}Unit ${safe(l.unit)} · Day ${safe(l.day)}: <a href="${safe(l.url)}" target="_blank" rel="noopener">${safe(l.title)}</a> <button class="light rmlink" data-id="${safe(l.id)}">Remove</button></li>`).join("")}</ul></details>`;
   pane.innerHTML = html;
+  pane.querySelectorAll(".todofilters .mode").forEach(b => b.onclick = () => { todoFilter = b.dataset.f; sessionStorage.setItem("todo-filter", todoFilter); todoOpen = null; renderTodo(); });
+  pane.querySelectorAll(".markrev").forEach(b => b.onclick = async () => {
+    const t = items[+b.dataset.i];
+    if (!loaded) { flashNote("Enter your code at the top first."); return; }
+    if (!TOOLS_URL) { flashNote("Finish the Teacher Tools setup first."); return; }
+    b.disabled = true; b.textContent = "Saving…";
+    // The link is the day's first online activity (Teacher Tools needs one); the mark itself never shows on a day.
+    const url = new URL(t.acts[0].href, location.href).href.replace(/^http:/, "https:");
+    try {
+      const d = await tools("set_link", { course: t.course, part: t.part1 ? 1 : 2, unit: t.unit, day: t.day, title: REVIEW_TITLE, url });
+      LINKS[d.id] = { id: d.id, course: t.course, part: t.part1 ? 1 : 2, unit: t.unit, day: t.day, title: REVIEW_TITLE, url, removed: false };
+      applyLinks(); render(); flashNote("Marked reviewed ✓ " + COURSES[t.course] + " · Unit " + t.unit + " · Day " + t.day);
+    } catch (err) {
+      b.disabled = false; b.textContent = "✓ Mark reviewed";
+      flashNote(/unknown request|teacher code didn/i.test(err.message) ? "Your Teacher Tools needs a quick update first (see the link at the top)." : err.message);
+    }
+  });
   pane.querySelectorAll(".todofold").forEach(d => d.addEventListener("toggle", () => { foldOpen[d.dataset.g] = d.open; }));
   pane.querySelectorAll(".addlink").forEach(b => b.onclick = () => { todoOpen = +b.dataset.i; pane.querySelectorAll(".linkform").forEach(f => f.hidden = f.dataset.i !== b.dataset.i); const f = pane.querySelector(`.linkform[data-i="${b.dataset.i}"]`); (f.elements.title.value ? f.elements.url : f.elements.title).focus(); });
   pane.querySelectorAll(".linkform .cancel").forEach(b => b.onclick = () => { todoOpen = null; b.closest("form").hidden = true; });
@@ -991,6 +1043,7 @@ function renderTodo() {
     // Keeps the dashboard's labels working: tests say "Summative", keys say "Answer Key" (and keys never reach students).
     if (t.kind === "key" && !/answer key/i.test(title)) title += " (Answer Key)";
     else if (t.kind === "test" && !/summative/i.test(title)) title += " (Summative)";
+    else if (t.kind === "video" && !VIDEO_URL.test(url) && !/\(video\)/i.test(title)) title += " (Video)";   // so it lands in the day's Videos row
     if (!TOOLS_URL) { st.innerHTML = "Finish the " + SETUP_LINK + " first."; return; }
     f.querySelectorAll("button,input").forEach(x => x.disabled = true); st.textContent = "Saving…";
     try {
@@ -1003,9 +1056,9 @@ function renderTodo() {
     }
   });
   pane.querySelectorAll(".rmlink").forEach(b => b.onclick = async () => {
-    const l = LINKS[b.dataset.id]; b.disabled = true; b.textContent = "Removing…";
-    try { await tools("set_link", { id: l.id, course: l.course, remove: true }); l.removed = true; applyLinks(); render(); flashNote("Removed."); }
-    catch (err) { b.disabled = false; b.textContent = "Remove"; flashNote(err.message); }
+    const l = LINKS[b.dataset.id]; const label0 = b.textContent; b.disabled = true; b.textContent = isReviewMark(l) ? "Undoing…" : "Removing…";
+    try { await tools("set_link", { id: l.id, course: l.course, remove: true }); l.removed = true; applyLinks(); render(); flashNote(isReviewMark(l) ? "Undone. It's back on the list." : "Removed."); }
+    catch (err) { b.disabled = false; b.textContent = label0; flashNote(err.message); }
   });
 }
 function flashNote(msg) { const n = $("todoNote"); n.textContent = msg; n.hidden = false; clearTimeout(flashNote.t); flashNote.t = setTimeout(() => n.hidden = true, 4000); }
