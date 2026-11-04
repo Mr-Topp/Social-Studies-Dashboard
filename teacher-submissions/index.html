@@ -6,7 +6,7 @@
 <meta name="robots" content="noindex,nofollow">
 <title>Teacher Dashboard · All Classes</title>
 <script src="../shared/assignments.js?v=20261103p20"></script>
-<script src="videos.js?v=20261103vid1"></script>
+<script src="videos.js?v=20261103vid2"></script>
 <script src="presentations.js?v=20261103civics3"></script>
 <script src="../shared/turnin.js?v=20261103t"></script>
 <style>
@@ -796,7 +796,7 @@ function linksHtml() {
     const list = [...rows.values()].sort((a, b) => (a.day || 999) - (b.day || 999));
     if (window.__todoSink) list.forEach(r => (r.todo || []).forEach(text => window.__todoSink.push({ key, name, day: r.day, span: r.span, title: r.title, std: r.std, text, summ: !!r.summ, after: !!(cal && r.day > cal.days), kind: /answer key/i.test(text) ? "key" : r.day > (cal ? cal.days : 999) ? "after" : r.summ ? "test" : "assignment" })));
     const nTodo = list.reduce((n, r) => n + (r.todo || []).length, 0);
-    const nDays = list.reduce((n, r) => n + (r.day ? (r.span ? r.span - r.day + 1 : 1) : 0), 0), nActs = ids.length;
+    const nDays = list.reduce((n, r) => n + (r.day ? (r.span ? r.span - r.day + 1 : 1) : 0), 0), nActs = ids.filter(id => kindOf(id) !== "video").length;
     const shortDate = iso => iso ? new Date(iso + "T12:00:00").toLocaleDateString("en-US", { month: "short", day: "numeric" }) : "";
     const kParts = String(key).split("|"), isP1 = kParts[1] === "p1", unitNo = +kParts[kParts.length - 1] || 0;
     const rowDate = r => { if (!cal || isP1 || !r.day || r.summ || r.day > cal.days) return ""; const a = dayDate(tab, false, unitNo, r.day, false); if (!a) return ""; const b = r.span ? dayDate(tab, false, unitNo, r.span, false) : null; return `<span class="sumdate">📅 ${safe(niceDate(a.iso))}${b && b.iso !== a.iso ? " – " + safe(niceDate(b.iso)) : ""}</span>`; };

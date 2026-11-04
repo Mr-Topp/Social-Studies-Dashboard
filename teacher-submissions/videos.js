@@ -238,4 +238,37 @@ Object.assign(window.CLASS_ASSIGNMENTS, {
   "gov-u5-d2-video--bKT5rc6rsU": { course: "government", unit: 5, day: 2, turnIn: false, video: true, std: [], title: "Day 2 · President's Cabinet", path: "https://www.youtube.com/watch?v=-bKT5rc6rsU" },
   "gov-u5-d3-video-qL9kqmn-dUA": { course: "government", unit: 5, day: 3, turnIn: false, video: true, std: [], title: "Day 3 · What is the Difference Between Executive and Independent Agencies? [No. 86]", path: "https://www.youtube.com/watch?v=qL9kqmn-dUA" },
   "gov-u5-d3-video-PNojm8f6Seo": { course: "government", unit: 5, day: 3, turnIn: false, video: true, std: [], title: "Day 3 · What is FEMA? The federal agency that responds to national disasters", path: "https://www.youtube.com/watch?v=PNojm8f6Seo" },
+
+  // ---- Civics · Fridays (Schoology Friday pages, same in both sections; Fridays 1 and 7 have no videos) ----
+  // Friday 2: How the Government Works
+  "civics-f2-video-HuFR5XBYLfU": { course: "civics", unit: 2, turnIn: false, video: true, std: [], title: "How is power divided in the United States government?", path: "https://www.youtube.com/watch?v=HuFR5XBYLfU" },
+  "civics-f2-video-Otbml6WIQPo": { course: "civics", unit: 2, turnIn: false, video: true, std: [], title: "Schoolhouse Rock: How a Bill Becomes a Law", path: "https://www.youtube.com/watch?v=Otbml6WIQPo" },
+  "civics-f2-video-W9H3gvnN468": { course: "civics", unit: 2, turnIn: false, video: true, std: [], title: "Does your vote count? The Electoral College explained", path: "https://www.youtube.com/watch?v=W9H3gvnN468" },
+  // Friday 3: Rights & Responsibilities
+  "civics-f3-video-P9VdyPbbzlI": { course: "civics", unit: 3, turnIn: false, video: true, std: [], title: "The fight for the right to vote in the United States", path: "https://www.youtube.com/watch?v=P9VdyPbbzlI" },
+  "civics-f3-video-c_g1BMVFcuw": { course: "civics", unit: 3, turnIn: false, video: true, std: [], title: "How to turn protest into powerful change", path: "https://www.youtube.com/watch?v=c_g1BMVFcuw" },
+  // Friday 4: Early American History
+  "civics-f4-video-FITyIpePEsQ": { course: "civics", unit: 4, turnIn: false, video: true, std: [], title: "Discovery of America: Columbus 1492", path: "https://www.youtube.com/watch?v=FITyIpePEsQ" },
+  "civics-f4-video-pTliCI6uwmo": { course: "civics", unit: 4, turnIn: false, video: true, std: [], title: "Why did the Colonies Declare Independence?", path: "https://www.youtube.com/watch?v=pTliCI6uwmo" },
+  "civics-f4-video-pHVksFyfBks": { course: "civics", unit: 4, turnIn: false, video: true, std: [], title: "Who Are the Founding Fathers?", path: "https://www.youtube.com/watch?v=pHVksFyfBks&t=164s" },
+  "civics-f4-video-OZUTq0noooU": { course: "civics", unit: 4, turnIn: false, video: true, std: [], title: "What America's Founding Fathers REALLY Meant", path: "https://www.youtube.com/watch?v=OZUTq0noooU" },
+  // Friday 5: Civil War to Modern America
+  "civics-f5-video-sMh8RCqJf9U": { course: "civics", unit: 5, turnIn: false, video: true, std: [], title: "The historical audacity of the Louisiana Purchase", path: "https://www.youtube.com/watch?v=sMh8RCqJf9U" },
+  "civics-f5-video-oyOf3g-PJ94": { course: "civics", unit: 5, turnIn: false, video: true, std: [], title: "How do executive orders work?", path: "https://www.youtube.com/watch?v=oyOf3g-PJ94" },
+  "civics-f5-video-5oZ104tr8gM": { course: "civics", unit: 5, turnIn: false, video: true, std: [], title: "How the Media Started the Spanish-American War", path: "https://www.youtube.com/watch?v=5oZ104tr8gM" },
+  "civics-f5-video-XP0_wnaW-a0": { course: "civics", unit: 5, turnIn: false, video: true, std: [], title: "Debunking the myth of the Lost Cause", path: "https://www.youtube.com/watch?v=XP0_wnaW-a0" },
+  "civics-f5-video-GF6P-zqxXXQ": { course: "civics", unit: 5, turnIn: false, video: true, std: [], title: "Secession and the Civil War", path: "https://www.youtube.com/watch?v=GF6P-zqxXXQ" },
+  "civics-f5-video-fgmIr3TGT9g": { course: "civics", unit: 5, turnIn: false, video: true, std: [], title: "Emancipation Proclamation", path: "https://www.youtube.com/watch?v=fgmIr3TGT9g" },
+  "civics-f5-video-3-gsVVa9bJ0": { course: "civics", unit: 5, turnIn: false, video: true, std: [], title: "Civil War Amendments", path: "https://www.youtube.com/watch?v=3-gsVVa9bJ0" },
+  "civics-f5-video-04KR8cPl5XI": { course: "civics", unit: 5, turnIn: false, video: true, std: [], title: "The 19th Amendment", path: "https://www.youtube.com/watch?v=04KR8cPl5XI" },
+  "civics-f5-video-_yQyCTTPGuQ": { course: "civics", unit: 5, turnIn: false, video: true, std: [], title: "America Enters World War II", path: "https://www.youtube.com/watch?v=_yQyCTTPGuQ" },
+  "civics-f5-video-tLJKVVtiR3g": { course: "civics", unit: 5, turnIn: false, video: true, std: [], title: "Why Did the Cold War Begin?", path: "https://www.youtube.com/watch?v=tLJKVVtiR3g" },
+  "civics-f5-video-_IB0i6bJIjw": { course: "civics", unit: 5, turnIn: false, video: true, std: [], title: "Martin Luther King, Jr.'s \"I Have A Dream\" Speech", path: "https://www.youtube.com/watch?v=_IB0i6bJIjw" },
+  "civics-f5-video-xl_lctDXHuQ": { course: "civics", unit: 5, turnIn: false, video: true, std: [], title: "What Happened in the Persian Gulf War?", path: "https://www.youtube.com/watch?v=xl_lctDXHuQ" },
+  // Friday 6: Symbols & Holidays
+  "civics-f6-video-tDbHn-zjlmE": { course: "civics", unit: 6, turnIn: false, video: true, std: [], title: "The Statue of Liberty Breaks New Ground", path: "https://www.youtube.com/watch?v=tDbHn-zjlmE" },
+  "civics-f6-video-4mkqV9OcMDE": { course: "civics", unit: 6, turnIn: false, video: true, std: [], title: "History of the Holidays: Independence Day", path: "https://www.youtube.com/watch?v=4mkqV9OcMDE" },
+  "civics-f6-video-WNnu2cj3-pU": { course: "civics", unit: 6, turnIn: false, video: true, std: [], title: "All About Martin Luther King Jr. Day", path: "https://www.youtube.com/watch?v=WNnu2cj3-pU" },
+  "civics-f6-video-CRXrfs0f1Fo": { course: "civics", unit: 6, turnIn: false, video: true, std: [], title: "History of the Holidays: Memorial Day", path: "https://www.youtube.com/watch?v=CRXrfs0f1Fo" },
+  "civics-f6-video-ymCa1eB_qLA": { course: "civics", unit: 6, turnIn: false, video: true, std: [], title: "History of the Holidays: Veterans Day", path: "https://www.youtube.com/watch?v=ymCa1eB_qLA" },
 });
