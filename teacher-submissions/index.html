@@ -753,7 +753,7 @@ function linksHtml() {
   // Blue reminder: units Fynn still needs to go through again (Fynn, 2026-11-03). Delete a line when it's done.
   const REVIEW_AGAIN = new Set(["us-history|3", "us-history|4", "us-history|5", "us-history|6", "world-history|2", "world-history|3", "sociology|2", "sociology|3", "sociology|4"]);
   // Purple reminder: units that still need graphic novels added (Fynn, 2026-11-03). Units in REVIEW_AGAIN get it too.
-  const ADD_GN = new Set([...REVIEW_AGAIN, "government|2", "government|3", "government|4", "government|5", "government|6"]);
+  const ADD_GN = new Set([...REVIEW_AGAIN]); // Government units removed (Fynn, 2026-11-04)
   const unitBlock = (key, name, ids, decks, cal) => {
     const main = decks.find(p => !p.note) || decks[0];
     const extra = decks.filter(p => p !== main);
