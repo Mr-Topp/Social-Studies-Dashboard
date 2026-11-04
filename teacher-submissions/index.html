@@ -539,8 +539,10 @@ function wireGridExtras(list) {
     // Grade it here when the turn-in didn't save but you saw them do the work (Fynn, 11-04).
     const mine = /^[1-4]$/.test(markOf(tab, id, s)) ? markOf(tab, id, s) : "";
     const gradeRow = `<p>${mine ? "Your grade: <b>Level " + mine + "</b>. Change it:" : "Saw them do it, but it didn't turn in? Grade it:"}</p><div class="gradebtns">${[1, 2, 3, 4].map(n => `<button data-do="${n}" class="${String(n) === mine ? "on" : ""}" aria-label="Level ${n}">${n}</button>`).join("")}</div>`;
-    popMenu(b, `<p><b>${safe(s)}</b> · ${safe(name)}</p>` + gradeRow + (mine ? `<button data-do="un">Remove my grade</button>` : "") + (isM ? `<button data-do="un">Not missing anymore</button>` : "") + (on ? `<button data-do="un">Not exempt anymore</button>` : `<button data-do="ex">Exempt ${safe(s)} (EX)</button><p>EX doesn't count for or against them, and it won't show as missing.</p>`) + `<button data-do="x" class="light">Cancel</button>`,
-      p => p.querySelectorAll("button").forEach(x => x.onclick = () => { closePop(); const d = x.dataset.do; if (d === "x") return; queueMark(tab, id, s, d === "ex" ? "EX" : /^[1-4]$/.test(d) ? d : ""); flushMarks(); renderKeep(); }));
+    popMenu(b, `<p><b>${safe(s)}</b> · ${safe(name)}</p>` + gradeRow + (mine ? `<button data-do="un">Remove my grade</button>` : "") + (isM ? `<button data-do="un">Not missing anymore</button>` : "") + (on ? `<button data-do="un">Not exempt anymore</button>` : `<button data-do="ex">Exempt ${safe(s)} (EX)</button><p>EX doesn't count for or against them, and it won't show as missing.</p>`) +
+      // Mark missing from the same menu (Fynn, 11-04). M is flagged but doesn't lower averages.
+      (isM ? "" : `<button data-do="m">Mark ${safe(s)} missing (M)</button><p>M shows as missing on your dashboard and their to-do list. It doesn't lower their average.</p>`) + `<button data-do="x" class="light">Cancel</button>`,
+      p => p.querySelectorAll("button").forEach(x => x.onclick = () => { closePop(); const d = x.dataset.do; if (d === "x") return; queueMark(tab, id, s, d === "ex" ? "EX" : d === "m" ? "M" : /^[1-4]$/.test(d) ? d : ""); flushMarks(); renderKeep(); }));
   });
   // Column menu (⋮): exempt everyone, fill blanks with M, remove a paper column.
   out.querySelectorAll("button.colmenu").forEach(b => b.onclick = e => {
