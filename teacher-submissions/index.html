@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
 <title>Teacher Dashboard · All Classes</title>
-<script src="../shared/assignments.js?v=20261103p14"></script>
+<script src="../shared/assignments.js?v=20261103p15"></script>
 <script src="presentations.js?v=20261103civics3"></script>
 <script src="../shared/turnin.js?v=20261103d"></script>
 <style>
@@ -166,7 +166,8 @@ details.partdrop>summary .parthint{font-size:.75rem;font-weight:600;letter-spaci
 .more summary::-webkit-details-marker{display:none}
 .more summary::before{content:"+ "}.more[open] summary::before{content:"− "}
 .more .inner{display:flex;flex-wrap:wrap;gap:6px;margin-top:4px}
-td.inclass{background:#eef5ef;color:#1f5e2c;text-align:center}td.inclass .lvl{display:block;font-size:.78rem}
+/* Completed in class: same size and shape as a graded box so columns stay narrow (Fynn, 11-03) */
+td.inclass .ic{display:block;width:96px;margin:0 auto;background:#e3f0e5;color:#1f5e2c;border-radius:8px;padding:5px 6px;line-height:1.15;white-space:normal;font:800 .85rem system-ui}td.inclass .ic .grade{font-size:1.05rem}td.inclass .ic .lvl{font-size:.72rem}
 /* To-do tab */
 .tab.todotab{margin-left:auto;background:#fbeceb;color:var(--red)}
 .tab.todotab[aria-selected=true]{background:var(--red);color:#fff}
@@ -1182,7 +1183,7 @@ function renderGrid(list) {
     if (colEx(tab, id)) return `<td class="ex" title="Everyone is exempt from this (column menu ⋮ to undo)">EX</td>`;
     if (markOf(tab, id, s) === "EX" && !doneAll(tab, id)) return `<td class="ex"><button class="mk" data-s="${safe(s)}" data-a="${safe(id)}" title="Exempt. Click to change.">EX</button></td>`;
     const hits = list.filter(r => r.studentName === s && r.assignmentId === id);
-    if (!hits.length) return doneAll(tab, id) ? `<td class="done inclass" title="${safe(doneAll(tab, id))} (everyone gets credit, no score)"><b class="grade">✓</b><span class="lvl">${safe(doneAll(tab, id))}</span></td>` : `<td class="miss"><button class="mk" data-s="${safe(s)}" data-a="${safe(id)}" title="Nothing turned in. Click to exempt this student.">—</button></td>`;
+    if (!hits.length) return doneAll(tab, id) ? `<td class="done inclass" title="${safe(doneAll(tab, id))} (everyone gets credit, no score)"><span class="ic"><b class="grade">✓</b><span class="lvl">${safe(doneAll(tab, id)).replace(/ in class$/, "<br>in class")}</span></span></td>` : `<td class="miss"><button class="mk" data-s="${safe(s)}" data-a="${safe(id)}" title="Nothing turned in. Click to exempt this student.">—</button></td>`;
     const g = dayGrade(hits[0]), when = dateShort(hits[0].submittedAt) + (hits.length > 1 ? " · ×" + hits.length : "");
     if (!g) return `<td class="done check"><button data-s="${safe(s)}" data-a="${safe(id)}" title="Not graded yet. Open to read their answers."><b class="grade">Check</b><span class="lvl">not graded yet</span><span class="when">${when}</span></button></td>`;
     const big = g.f ? g.pct + "%" : "Level " + g.ai.n;
