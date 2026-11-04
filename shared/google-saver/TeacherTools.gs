@@ -39,7 +39,7 @@ function doPost(e) {
     if (body.action === "class_list") return json(classList(body));
     if (body.action === "my_work") return json(myWork(body));
     // Lets the update page check which version is running. Shares nothing.
-    if (body.action === "version") return json({ ok: true, version: 7, can: ["links", "student-links", "paper", "no-grades"] });
+    if (body.action === "version") return json({ ok: true, version: 8, can: ["links", "student-links", "paper", "no-grades", "student-todo"] });
   } catch (err) { return json({ ok: false, error: "Try again later." }); }
   var check = codeCheck(body.code);
   if (check === "locked") return json({ ok: false, error: "Too many wrong teacher codes. Wait 15 minutes, then try again." });
@@ -330,13 +330,32 @@ function classList(b) {
   return { ok: true, names: [], links: links, exemptAll: d.exemptAll, paperCols: d.paperCols };
 }
 function myWork(b) {
-  // Students see grades in PowerSchool, not here (Fynn's decision, 2026-11-02). So this never looks up one student:
-  // it only says which activities the class has turned in (ids, no names) and class-wide exemptions.
+  // Fynn 11-03 (replaces the 11-02 "no student lookups" rule): a student picks their name and gets ONLY their own
+  // to-do facts: which activities they turned in, which ones you marked M (missing) or EX. Never grades, scores or answers.
   var course = String(b.course || "");
   if (COURSES.indexOf(course) < 0) return { ok: false, error: "Unknown class." };
   var d = courseRows(course), done = {};
   d.rows.forEach(function (r) { done[r.id] = true; });
-  return { ok: true, items: [], classDone: Object.keys(done), exemptAll: d.exemptAll || {}, noGrades: true };
+  var me = shortName(b.name), mine = {}, missing = {}, exempt = {};
+  if (me) {
+    var meFirst = firstKey(me), meHasLast = me.indexOf(" ") > 0;
+    // A first name alone and the same first name + last initial count as one student (same rule as the teacher dashboard).
+    var same = function (n) {
+      n = shortName(n);
+      if (!n) return false;
+      if (n === me) return true;
+      return firstKey(n) === meFirst && (n.indexOf(" ") < 0 || !meHasLast);
+    };
+    d.rows.forEach(function (r) { if (same(r.name)) mine[r.id] = true; });
+    Object.keys(d.marks).forEach(function (k) {
+      var cut = k.lastIndexOf("|"), id = k.slice(0, cut), who = k.slice(cut + 1), m = d.marks[k] || {};
+      if (!same(who)) return;
+      if (m.Mark === "M") missing[id] = true; else delete missing[id];
+      if (m.Mark === "EX") exempt[id] = true; else delete exempt[id];
+    });
+  }
+  return { ok: true, items: [], classDone: Object.keys(done), exemptAll: d.exemptAll || {}, noGrades: true,
+           mine: Object.keys(mine), missing: Object.keys(missing).filter(function (id) { return !mine[id]; }), exempt: Object.keys(exempt) };
 }
 
 // Wrong-code limits (see codeCheck below).

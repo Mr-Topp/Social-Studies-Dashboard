@@ -379,13 +379,17 @@ async function loadWork(course, name) {
   return w;
 }
 async function loadWork0(course, name) {
-  // Which activities the class has turned in (ids only, no names) drives the to-do. What THIS student turned in
-  // comes from the receipts kept on this Chromebook; nothing about one student is ever looked up.
-  let classIds = null;
-  try { const d = await tools({ action: "my_work", course, name }); classIds = d.classDone || []; } catch (e) {}
+  // Fynn 11-03: the student's own to-do comes from the Sheet (what they turned in, what the teacher marked M or EX),
+  // so it matches the teacher dashboard on any Chromebook. Never grades. Receipts on this Chromebook still add feedback tips.
+  let classIds = null, sheet = null;
+  try { const d = await tools({ action: "my_work", course, name }); classIds = d.classDone || []; if (Array.isArray(d.mine)) sheet = d; } catch (e) {}
   const mine = {};
   const list = receipts().filter(r => REG[r.id] && REG[r.id].course === course && (!r.who || r.who.toLowerCase() === String(name || "").toLowerCase()));
   list.forEach(r => { if (!mine[r.id] || r.at > mine[r.id].atMs) mine[r.id] = { id: r.id, atMs: r.at, token: r.token }; });
+  if (sheet) {
+    sheet.mine.forEach(id => { if (REG[id] && !mine[id]) mine[id] = { id, atMs: 0 }; });
+    (sheet.missing || []).forEach(id => { if (mine[id] && !mine[id].token) delete mine[id]; });
+  }
   const tokens = Object.values(mine).map(w => w.token).filter(Boolean);
   if (tokens.length) {
     try {
@@ -395,7 +399,8 @@ async function loadWork0(course, name) {
       Object.values(mine).forEach(w => { const x = by.get(w.token); if (x && x.graded && String(x.who || "").toLowerCase() === me_) { w.flagged = x.flagged; w.feedback = x.feedback; w.fix = !x.flagged && (x.fix || (+x.level > 0 && +x.level <= 2)); } });
     } catch (e) {}
   }
-  if (classIds) return { mine, classDone: new Set([...classIds, ...Object.keys(mine)]), full: true };
+  const extra = sheet ? { markedMissing: sheet.missing || [], exempt: sheet.exempt || [] } : {};
+  if (classIds) return Object.assign({ mine, classDone: new Set([...classIds, ...Object.keys(mine)]), full: true }, extra);
   return { mine, classDone: new Set(Object.keys(mine)), full: false };
 }
 
@@ -565,7 +570,8 @@ function homeBody(course, work) {
   const clr = (window.CLASS_CLEARED || {})[course] || {};
   const isCleared = a => (clr.ids || []).includes(a.id) || (!!clr.unit && (a.part === 1 || (a.unit || 0) < clr.unit ||
     ((a.unit || 0) === clr.unit && !!a.day && (spanOf(a) ? spanOf(a)[1] : a.day) <= clr.throughDay)));
-  online.forEach(a => { if (!mine[a.id] && isCleared(a)) mine[a.id] = { id: a.id, cleared: true, label: clr.label || "" }; });
+  const markedM = new Set(work.markedMissing || []);   // the teacher's M (missing) marks for this student
+  online.forEach(a => { if (!mine[a.id] && isCleared(a) && !markedM.has(a.id)) mine[a.id] = { id: a.id, cleared: true, label: clr.label || "" }; });
   // Exempt (EX) from the teacher dashboard: not missing, not graded.
   const exempt = new Set([...(work.exemptAll || []), ...(work.exempt || [])]);
   // "Completed in class" (CLASS_CLEARED with a label) wins over EX, same as the teacher dashboard (Fynn, 11-03).
@@ -585,7 +591,7 @@ function homeBody(course, work) {
   const due = sortItems(online.filter(isDue));
   const paperOf = a => a.paperId ? (work.paper || {})[a.paperId] : null;
   // Paper work the teacher marked M (missing) counts as missing too. Exempt paper work never shows as missing.
-  const missing = sortItems(due.filter(a => !mine[a.id]).concat(items.filter(a => !isOnline(a) && paperOf(a) && paperOf(a).mark === "M" && !exempt.has(a.paperId))));
+  const missing = sortItems(due.filter(a => !mine[a.id]).concat(online.filter(a => markedM.has(a.id) && !mine[a.id] && !isDue(a) && !exempt.has(a.id))).concat(items.filter(a => !isOnline(a) && paperOf(a) && paperOf(a).mark === "M" && !exempt.has(a.paperId))));
   const turnedIn = online.filter(a => mine[a.id]);
   const fix = sortItems(turnedIn.filter(a => { const g = gradeOf(mine[a.id]); return g && g.fix; }));
   const ahead = sortItems(online.filter(a => !isDue(a) && !mine[a.id] && unitOrder(unitKey(a)) === nowOrder));

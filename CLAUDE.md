@@ -28,8 +28,10 @@ commits, and don't undo another chat's work unless Fynn says to.
 Students see their grades in **PowerSchool**, not here. Fynn chose "no grades, no PINs."
 - The student home page and activities never show levels, scores, first-try scores, or paper grades. A turned-in
   activity shows "✓ Turned in", the teacher's feedback tip, and a "Fix it" button when the work needs another try.
-- Teacher Tools never sends anything about one student to the public site: no class lists (students type their
-  name), no per-student grades, exemptions or work lists. `my_work` only returns which activities the class has
-  turned in (ids, no names). Feedback cards are reached only with the private receipt kept on the student's Chromebook.
+- Teacher Tools never sends grades, scores or answers to the public site, and never sends class lists (students type
+  their name). **Changed by Fynn 2026-11-03 ("look up by name only"):** `my_work` returns, for the name a student
+  types, only which activities that student turned in and which ones the teacher marked M (missing) or EX, so the
+  student's to-do matches the teacher dashboard on any Chromebook. Fynn knows a kid could type a classmate's name and
+  see that to-do list. Feedback cards are still reached only with the private receipt kept on the student's Chromebook.
 - Never write a student's name, language status, background, or accommodations into any file here. This site is public.
 - Grades, paper grades and EX stay on the teacher dashboard, behind the teacher code.
