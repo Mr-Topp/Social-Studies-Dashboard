@@ -30,6 +30,58 @@ Object.assign(window.CLASS_ASSIGNMENTS, {
   "ush-u2-d7-video-PF1A8NS1L9g": { course: "us-history", unit: 2, day: 7, turnIn: false, video: true, std: [], title: "Day 7 · The Pacific Campaign Reaches a Fever Pitch", path: "https://www.youtube.com/watch?v=PF1A8NS1L9g" },
   "ush-u2-d7-video-j25HTJ3Aud0": { course: "us-history", unit: 2, day: 7, turnIn: false, video: true, std: [], title: "Day 7 · The Atomic Bomb Changes the Course of the War", path: "https://www.youtube.com/watch?v=j25HTJ3Aud0" },
 
+  // ---- U.S. History · Unit 3 (Schoology page isn't split into days — best topic matches only) ----
+  "ush-u3-d1-video-gxVsVA72wRU": { course: "us-history", unit: 3, day: 1, turnIn: false, video: true, std: [], title: "Day 1 · How Did the Cold War Happen?", path: "https://www.youtube.com/watch?v=gxVsVA72wRU" },
+  "ush-u3-d1-video-Jb8aW46T3bg": { course: "us-history", unit: 3, day: 1, turnIn: false, video: true, std: [], title: "Day 1 · Here's How the Truman Doctrine Established the Cold War", path: "https://www.youtube.com/watch?v=Jb8aW46T3bg" },
+  "ush-u3-d1-video-tMXjsVLOznc": { course: "us-history", unit: 3, day: 1, turnIn: false, video: true, std: [], title: "Day 1 · What Was the Marshall Plan?", path: "https://www.youtube.com/watch?v=tMXjsVLOznc" },
+  "ush-u3-d1-video-A4LpLqHNOTk": { course: "us-history", unit: 3, day: 1, turnIn: false, video: true, std: [], title: "Day 1 · Sound Smart: The Red Scare", path: "https://www.youtube.com/watch?v=A4LpLqHNOTk" },
+  "ush-u3-d2-video-h1wFrXKanC0": { course: "us-history", unit: 3, day: 2, turnIn: false, video: true, std: [], title: "Day 2 · The Korean War: 5 Things to Know", path: "https://www.youtube.com/watch?v=h1wFrXKanC0" },
+  "ush-u3-d2-video-jA9neyKI62k": { course: "us-history", unit: 3, day: 2, turnIn: false, video: true, std: [], title: "Day 2 · What Caused The Korean War", path: "https://www.youtube.com/watch?v=jA9neyKI62k" },
+  "ush-u3-d3-video-N35IugBYH04": { course: "us-history", unit: 3, day: 3, turnIn: false, video: true, std: [], title: "Day 3 · What is McCarthyism? And how did it happen? - Ellen Schrecker", path: "https://www.youtube.com/watch?v=N35IugBYH04" },
+  "ush-u3-d3-video-lO7rTOZJGFo": { course: "us-history", unit: 3, day: 3, turnIn: false, video: true, std: [], title: "Day 3 · Sound Smart: Joseph McCarthy", path: "https://www.youtube.com/watch?v=lO7rTOZJGFo" },
+  "ush-u3-d4-video-OiqTffD5U2I": { course: "us-history", unit: 3, day: 4, turnIn: false, video: true, std: [], title: "Day 4 · Why Did US Go to War with Vietnam (And Got Defeated)", path: "https://www.youtube.com/watch?v=OiqTffD5U2I" },
+  "ush-u3-d4-video-rHBWwSyIbig": { course: "us-history", unit: 3, day: 4, turnIn: false, video: true, std: [], title: "Day 4 · How Likely Were You to Be Drafted Into the Vietnam War?", path: "https://www.youtube.com/watch?v=rHBWwSyIbig" },
+  "ush-u3-d4-video-vVNUlOUlMeo": { course: "us-history", unit: 3, day: 4, turnIn: false, video: true, std: [], title: "Day 4 · Opposition to the Vietnam War in the United States", path: "https://www.youtube.com/watch?v=vVNUlOUlMeo" },
+  "ush-u3-d4-video-QAT1KA3Xjbs": { course: "us-history", unit: 3, day: 4, turnIn: false, video: true, std: [], title: "Day 4 · The Media (The Vietnam War)", path: "https://www.youtube.com/watch?v=QAT1KA3Xjbs" },
+
+  // ---- U.S. History · Unit 4 (Schoology page isn't split into days — best topic matches only) ----
+  "ush-u4-d1-video--FcVBWIuR1U": { course: "us-history", unit: 4, day: 1, turnIn: false, video: true, std: [], title: "Day 1 · The law that desegregated schools overnight", path: "https://www.youtube.com/watch?v=-FcVBWIuR1U" },
+  "ush-u4-d1-video-c0xkUFe21Rk": { course: "us-history", unit: 4, day: 1, turnIn: false, video: true, std: [], title: "Day 1 · The Little Rock Nine Take on Segregation in Schools (feat. Amandla Stenberg)…", path: "https://www.youtube.com/watch?v=c0xkUFe21Rk" },
+  "ush-u4-d1-video-_omQ841ZAWg": { course: "us-history", unit: 4, day: 1, turnIn: false, video: true, std: [], title: "Day 1 · The Montgomery Bus Boycott of 1955", path: "https://www.youtube.com/watch?v=_omQ841ZAWg" },
+  "ush-u4-d1-video-Tov2tLSFq5k": { course: "us-history", unit: 4, day: 1, turnIn: false, video: true, std: [], title: "Day 1 · Claudette Colvin Refuses to Give Up Her Seat (feat. Mariah Wilson & Lisa…", path: "https://www.youtube.com/watch?v=Tov2tLSFq5k" },
+  "ush-u4-d2-video-TLberHUJgHY": { course: "us-history", unit: 4, day: 2, turnIn: false, video: true, std: [], title: "Day 2 · The Fight Against Segregation in Birmingham", path: "https://www.youtube.com/watch?v=TLberHUJgHY" },
+  "ush-u4-d2-video-dJqA6PQRh3U": { course: "us-history", unit: 4, day: 2, turnIn: false, video: true, std: [], title: "Day 2 · Sound Smart: The Freedom Rides", path: "https://www.youtube.com/watch?v=dJqA6PQRh3U" },
+  "ush-u4-d2-video-0wDU-oYQN04": { course: "us-history", unit: 4, day: 2, turnIn: false, video: true, std: [], title: "Day 2 · History Specials: King Leads the March on Washington", path: "https://www.youtube.com/watch?v=0wDU-oYQN04" },
+  "ush-u4-d2-video-Vd6D64Ai49I": { course: "us-history", unit: 4, day: 2, turnIn: false, video: true, std: [], title: "Day 2 · The Story of Bloody Sunday", path: "https://www.youtube.com/watch?v=Vd6D64Ai49I" },
+  "ush-u4-d2-video-6x0l_vkjozc": { course: "us-history", unit: 4, day: 2, turnIn: false, video: true, std: [], title: "Day 2 · The Civil Rights Act Of 1964 Explained", path: "https://www.youtube.com/watch?v=6x0l_vkjozc" },
+  "ush-u4-d2-video--nrpLVgO7l4": { course: "us-history", unit: 4, day: 2, turnIn: false, video: true, std: [], title: "Day 2 · Sound Smart: The Voting Rights Act of 1965", path: "https://www.youtube.com/watch?v=-nrpLVgO7l4" },
+  "ush-u4-d3-video-LbetS9Lk-I8": { course: "us-history", unit: 4, day: 3, turnIn: false, video: true, std: [], title: "Day 3 · Betty Friedan, The Feminine Mystique", path: "https://www.youtube.com/watch?v=LbetS9Lk-I8" },
+  "ush-u4-d3-video-g2CewziXoDg": { course: "us-history", unit: 4, day: 3, turnIn: false, video: true, std: [], title: "Day 3 · The Fight For Women's Rights", path: "https://www.youtube.com/watch?v=g2CewziXoDg" },
+  "ush-u4-d3-video-tFh4OloaJMo": { course: "us-history", unit: 4, day: 3, turnIn: false, video: true, std: [], title: "Day 3 · The Life of Malcolm X", path: "https://www.youtube.com/watch?v=tFh4OloaJMo" },
+  "ush-u4-d3-video-6UBOl5Yq-ms": { course: "us-history", unit: 4, day: 3, turnIn: false, video: true, std: [], title: "Day 3 · The Birth of the Black Panthers", path: "https://www.youtube.com/watch?v=6UBOl5Yq-ms" },
+  "ush-u4-d3-video-y505KwHp4O4": { course: "us-history", unit: 4, day: 3, turnIn: false, video: true, std: [], title: "Day 3 · Judith Heumann’s Fight for Disability Rights (feat. Ali Stroker) - Drunk History", path: "https://www.youtube.com/watch?v=y505KwHp4O4" },
+  "ush-u4-d3-video-KRCs9Bo1nMo": { course: "us-history", unit: 4, day: 3, turnIn: false, video: true, std: [], title: "Day 3 · How one 8-year-old girl changed history", path: "https://www.youtube.com/watch?v=KRCs9Bo1nMo" },
+
+  // ---- U.S. History · Unit 5 (Schoology page isn't split into days — best topic matches only) ----
+  "ush-u5-d1-video-MX_HYL6-0Co": { course: "us-history", unit: 5, day: 1, turnIn: false, video: true, std: [], title: "Day 1 · History vs. Richard Nixon - Alex Gendler", path: "https://www.youtube.com/watch?v=MX_HYL6-0Co" },
+  "ush-u5-d1-video-OZSGMMUC7FQ": { course: "us-history", unit: 5, day: 1, turnIn: false, video: true, std: [], title: "Day 1 · Watergate: Inside the scandal that took down a presidency", path: "https://www.youtube.com/watch?v=OZSGMMUC7FQ" },
+  "ush-u5-d1-video-E-WgNf6mn2k": { course: "us-history", unit: 5, day: 1, turnIn: false, video: true, std: [], title: "Day 1 · What Was the Iran Hostage Crisis?", path: "https://www.youtube.com/watch?v=E-WgNf6mn2k" },
+  "ush-u5-d2-video-NvwTfCaWK8s": { course: "us-history", unit: 5, day: 2, turnIn: false, video: true, std: [], title: "Day 2 · Ronald Reagan and CONSERVATISM [APUSH Review Unit 9 Topic 2] Period 9:…", path: "https://www.youtube.com/watch?v=NvwTfCaWK8s" },
+  "ush-u5-d2-video-KzmrxK3BOSA": { course: "us-history", unit: 5, day: 2, turnIn: false, video: true, std: [], title: "Day 2 · Ronald Reagan", path: "https://www.youtube.com/watch?v=KzmrxK3BOSA" },
+  "ush-u5-d2-video-WncN6PWEMGo": { course: "us-history", unit: 5, day: 2, turnIn: false, video: true, std: [], title: "Day 2 · Phyllis Schlafly debates Betty Friedan on ERA", path: "https://www.youtube.com/watch?v=WncN6PWEMGo" },
+  "ush-u5-d3-video-EeyGdy_SdhQ": { course: "us-history", unit: 5, day: 3, turnIn: false, video: true, std: [], title: "Day 3 · Here's Why Reaganomics is so Controversial", path: "https://www.youtube.com/watch?v=EeyGdy_SdhQ" },
+  "ush-u5-d3-video-e2JxB0d-UlQ": { course: "us-history", unit: 5, day: 3, turnIn: false, video: true, std: [], title: "Day 3 · The Rich and Poor Under Reaganomics", path: "https://www.youtube.com/watch?v=e2JxB0d-UlQ" },
+
+  // ---- U.S. History · Unit 6 (Schoology page isn't split into days — best topic matches only) ----
+  "ush-u6-d1-video-xl_lctDXHuQ": { course: "us-history", unit: 6, day: 1, turnIn: false, video: true, std: [], title: "Day 1 · What Happened in the Persian Gulf War?", path: "https://www.youtube.com/watch?v=xl_lctDXHuQ" },
+  "ush-u6-d1-video-kPfzwLbzVYs": { course: "us-history", unit: 6, day: 1, turnIn: false, video: true, std: [], title: "Day 1 · 9/11: THE DAY THE WORLD STOOD STILL", path: "https://www.youtube.com/watch?v=kPfzwLbzVYs" },
+  "ush-u6-d1-video-qIDkZAOjx9w": { course: "us-history", unit: 6, day: 1, turnIn: false, video: true, std: [], title: "Day 1 · The Taliban, explained", path: "https://www.youtube.com/watch?v=qIDkZAOjx9w" },
+  "ush-u6-d1-video-_tcUogFo9yE": { course: "us-history", unit: 6, day: 1, turnIn: false, video: true, std: [], title: "Day 1 · Iraq War 2003 Explained", path: "https://www.youtube.com/watch?v=_tcUogFo9yE" },
+  "ush-u6-d2-video-yM0uonkloXY": { course: "us-history", unit: 6, day: 2, turnIn: false, video: true, std: [], title: "Day 2 · Here's What Caused the Great Recession", path: "https://www.youtube.com/watch?v=yM0uonkloXY" },
+  "ush-u6-d2-video-KP9VklrXPZs": { course: "us-history", unit: 6, day: 2, turnIn: false, video: true, std: [], title: "Day 2 · Here's Why the Patriot Act Is So Controversial", path: "https://www.youtube.com/watch?v=KP9VklrXPZs" },
+  "ush-u6-d3-video-UpvMVTNSV6I": { course: "us-history", unit: 6, day: 3, turnIn: false, video: true, std: [], title: "Day 3 · AP Explains: What is NAFTA?", path: "https://www.youtube.com/watch?v=UpvMVTNSV6I" },
+  "ush-u6-d3-video-EqcogBeAsuw": { course: "us-history", unit: 6, day: 3, turnIn: false, video: true, std: [], title: "Day 3 · A Brief History Of Facebook", path: "https://www.youtube.com/watch?v=EqcogBeAsuw" },
+
   // ---- World History · Unit 1 ----
   "wh-u1-d1-video-DduN1cU2p9U": { course: "world-history", unit: 1, day: 1, turnIn: false, video: true, std: [], title: "Day 1 · What was the 'Scramble for Africa'? - BBC What's New", path: "https://www.youtube.com/watch?v=DduN1cU2p9U" },
   "wh-u1-d2-video-1VIe42pAhuA": { course: "world-history", unit: 1, day: 2, turnIn: false, video: true, std: [], title: "Day 2 · Birth of Empire: The East India Company", path: "https://www.youtube.com/watch?v=1VIe42pAhuA" },
