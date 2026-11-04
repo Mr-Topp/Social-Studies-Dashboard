@@ -233,7 +233,7 @@ button.colmenu:hover{background:#e7e0d1}
 .pop p{margin:4px 6px 6px;font-size:.82rem;color:var(--muted)}
 .pop button{display:block;width:100%;text-align:left;margin:2px 0;background:#f4efe4;color:var(--navy);font-size:.9rem}
 .pop button.danger{background:#f8dcd8;color:#8e2a20}
-.pop .gradebtns{display:flex;gap:4px;margin:0 0 6px}.pop .gradebtns button{text-align:center;font-weight:900;font-size:1rem;margin:0}.pop .gradebtns button.on{background:var(--navy);color:#fff}
+.pop .gradebtns{display:flex;gap:4px;margin:0 0 6px}.pop .gradebtns button{text-align:center;font-weight:900;font-size:1rem;margin:0}.pop .gradebtns button.on{background:var(--navy);color:#fff}.pop .gradebtns button.gm{color:#a33d36;background:#fff;box-shadow:inset 0 0 0 2px #a33d36}.pop .gradebtns button.gm.on{background:#a33d36;color:#fff}
 .paperbox{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin:0 0 12px}
 .paperbox h3{margin:0 0 6px;color:var(--navy);font-size:1.05rem}
 .paperbox .prow{display:flex;gap:10px;flex-wrap:wrap;align-items:flex-end}
@@ -538,10 +538,8 @@ function wireGridExtras(list) {
     const s = b.dataset.s, id = b.dataset.a, on = markOf(tab, id, s) === "EX", isM = markOf(tab, id, s) === "M", name = titleOf({ assignmentId: id }).replace(/^Days? [\d–-]+ · /, "");
     // Grade it here when the turn-in didn't save but you saw them do the work (Fynn, 11-04).
     const mine = /^[1-4]$/.test(markOf(tab, id, s)) ? markOf(tab, id, s) : "";
-    const gradeRow = `<p>${mine ? "Your grade: <b>Level " + mine + "</b>. Change it:" : "Saw them do it, but it didn't turn in? Grade it:"}</p><div class="gradebtns">${[1, 2, 3, 4].map(n => `<button data-do="${n}" class="${String(n) === mine ? "on" : ""}" aria-label="Level ${n}">${n}</button>`).join("")}</div>`;
-    popMenu(b, `<p><b>${safe(s)}</b> · ${safe(name)}</p>` + gradeRow + (mine ? `<button data-do="un">Remove my grade</button>` : "") + (isM ? `<button data-do="un">Not missing anymore</button>` : "") + (on ? `<button data-do="un">Not exempt anymore</button>` : `<button data-do="ex">Exempt ${safe(s)} (EX)</button><p>EX doesn't count for or against them, and it won't show as missing.</p>`) +
-      // Mark missing from the same menu (Fynn, 11-04). M is flagged but doesn't lower averages.
-      (isM ? "" : `<button data-do="m">Mark ${safe(s)} missing (M)</button><p>M shows as missing on your dashboard and their to-do list. It doesn't lower their average.</p>`) + `<button data-do="x" class="light">Cancel</button>`,
+    const gradeRow = `<p>${mine ? "Your grade: <b>Level " + mine + "</b>. Change it:" : "Saw them do it, but it didn't turn in? Grade it, or mark it M (missing):"}</p><div class="gradebtns">${[1, 2, 3, 4].map(n => `<button data-do="${n}" class="${String(n) === mine ? "on" : ""}" aria-label="Level ${n}">${n}</button>`).join("")}<button data-do="${isM ? "un" : "m"}" class="gm${isM ? " on" : ""}" aria-label="${isM ? "Not missing anymore" : "Missing (M)"}" title="${isM ? "Not missing anymore" : "Missing (M). It doesn't lower their average."}">M</button></div>`;
+    popMenu(b, `<p><b>${safe(s)}</b> · ${safe(name)}</p>` + gradeRow + (mine ? `<button data-do="un">Remove my grade</button>` : "") + (isM ? `<button data-do="un">Not missing anymore</button>` : "") + (on ? `<button data-do="un">Not exempt anymore</button>` : `<button data-do="ex">Exempt ${safe(s)} (EX)</button><p>EX doesn't count for or against them, and it won't show as missing.</p>`) + `<button data-do="x" class="light">Cancel</button>`,
       p => p.querySelectorAll("button").forEach(x => x.onclick = () => { closePop(); const d = x.dataset.do; if (d === "x") return; queueMark(tab, id, s, d === "ex" ? "EX" : d === "m" ? "M" : /^[1-4]$/.test(d) ? d : ""); flushMarks(); renderKeep(); }));
   });
   // Column menu (⋮): exempt everyone, fill blanks with M, remove a paper column.
