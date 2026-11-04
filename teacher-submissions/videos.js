@@ -199,7 +199,7 @@ Object.assign(window.CLASS_ASSIGNMENTS, {
   "gov-u2-d2-video-TMIB2C4tQ2w": { course: "government", unit: 2, day: 2, turnIn: false, video: true, std: [], title: "Day 2 · US Republican Party History", path: "https://www.youtube.com/watch?v=TMIB2C4tQ2w" },
   "gov-u2-d2-video-Fa7JqIooxK0": { course: "government", unit: 2, day: 2, turnIn: false, video: true, std: [], title: "Day 2 · US Democratic Party History", path: "https://www.youtube.com/watch?v=Fa7JqIooxK0" },
   "gov-u2-d3-video-viP1WzlYPM0": { course: "government", unit: 2, day: 3, turnIn: false, video: true, std: [], title: "Day 3 · What Libertarian Gary Johnson believes in 2 minutes", path: "https://www.youtube.com/watch?v=viP1WzlYPM0" },
-  "gov-u2-d3-video-bhkpX9ZYBO4": { course: "government", unit: 2, day: 3, turnIn: false, video: true, std: [], title: "Day 3 · What does a moderate voter look like?", path: "https://www.youtube.com/watch?v=bhkpX9ZYBO4" },
+  "gov-u2-d1-video-bhkpX9ZYBO4": { course: "government", unit: 2, day: 1, turnIn: false, video: true, std: [], title: "Day 1 · What does a moderate voter look like?", path: "https://www.youtube.com/watch?v=bhkpX9ZYBO4" },
   "gov-u2-d3-video-qcUIFsOu-bY": { course: "government", unit: 2, day: 3, turnIn: false, video: true, std: [], title: "Day 3 · What the Green Party's Jill Stein believes in 2 minutes", path: "https://www.youtube.com/watch?v=qcUIFsOu-bY" },
   "gov-u2-d3-video-q-Y-z6HmRgI": { course: "government", unit: 2, day: 3, turnIn: false, video: true, std: [], title: "Day 3 · How to choose your news - Damon Brown", path: "https://www.youtube.com/watch?v=q-Y-z6HmRgI" },
   "gov-u2-d3-video-hz6GULbowAk": { course: "government", unit: 2, day: 3, turnIn: false, video: true, std: [], title: "Day 3 · Why people fall for misinformation - Joseph Isaac", path: "https://www.youtube.com/watch?v=hz6GULbowAk" },
@@ -227,15 +227,15 @@ Object.assign(window.CLASS_ASSIGNMENTS, {
   "gov-u4-d2-video-Otbml6WIQPo": { course: "government", unit: 4, day: 2, turnIn: false, video: true, std: [], title: "Day 2 · Schoolhouse Rock- How a Bill Becomes a Law", path: "https://www.youtube.com/watch?v=Otbml6WIQPo" },
   "gov-u4-d2-video-G7O9ZpJ-aiU": { course: "government", unit: 4, day: 2, turnIn: false, video: true, std: [], title: "Day 2 · Facts of Congress - Committees", path: "https://www.youtube.com/watch?v=G7O9ZpJ-aiU" },
   "gov-u4-d2-video-pHSttXOpvYg": { course: "government", unit: 4, day: 2, turnIn: false, video: true, std: [], title: "Day 2 · Filibuster Explained: What Is the Filibuster?", path: "https://www.youtube.com/watch?v=pHSttXOpvYg" },
-  "gov-u4-d3-video-u5jKL6hFNdk": { course: "government", unit: 4, day: 3, turnIn: false, video: true, std: [], title: "Day 3 · Facts of Congress - How a Bill Becomes Law", path: "https://www.youtube.com/watch?v=u5jKL6hFNdk" },
+  "gov-u4-d2-video-u5jKL6hFNdk": { course: "government", unit: 4, day: 2, turnIn: false, video: true, std: [], title: "Day 2 · Facts of Congress - How a Bill Becomes Law", path: "https://www.youtube.com/watch?v=u5jKL6hFNdk" },
 
   // ---- Government · Unit 5 ----
   "gov-u5-d1-video-BWR2p9j9hWo": { course: "government", unit: 5, day: 1, turnIn: false, video: true, std: [], title: "Day 1 · What Is the Executive Branch of the U.S. Government?", path: "https://www.youtube.com/watch?v=BWR2p9j9hWo" },
   "gov-u5-d1-video-Z9v9PEng7Xo": { course: "government", unit: 5, day: 1, turnIn: false, video: true, std: [], title: "Day 1 · America 101: What is the Electoral College?", path: "https://www.youtube.com/watch?v=Z9v9PEng7Xo" },
-  "gov-u5-d1-video-8oier528TrE": { course: "government", unit: 5, day: 1, turnIn: false, video: true, std: [], title: "Day 1 · America 101: What is the Cabinet?", path: "https://www.youtube.com/watch?v=8oier528TrE" },
+  "gov-u5-d3-video-8oier528TrE": { course: "government", unit: 5, day: 3, turnIn: false, video: true, std: [], title: "Day 3 · America 101: What is the Cabinet?", path: "https://www.youtube.com/watch?v=8oier528TrE" },
   "gov-u5-d2-video-oyOf3g-PJ94": { course: "government", unit: 5, day: 2, turnIn: false, video: true, std: [], title: "Day 2 · How do executive orders work? - Christina Greer", path: "https://www.youtube.com/watch?v=oyOf3g-PJ94" },
   "gov-u5-d2-video-HqBTas0_ryg": { course: "government", unit: 5, day: 2, turnIn: false, video: true, std: [], title: "Day 2 · Executive Order", path: "https://www.youtube.com/watch?v=HqBTas0_ryg" },
-  "gov-u5-d2-video--bKT5rc6rsU": { course: "government", unit: 5, day: 2, turnIn: false, video: true, std: [], title: "Day 2 · President's Cabinet", path: "https://www.youtube.com/watch?v=-bKT5rc6rsU" },
+  "gov-u5-d3-video--bKT5rc6rsU": { course: "government", unit: 5, day: 3, turnIn: false, video: true, std: [], title: "Day 3 · President's Cabinet", path: "https://www.youtube.com/watch?v=-bKT5rc6rsU" },
   "gov-u5-d3-video-qL9kqmn-dUA": { course: "government", unit: 5, day: 3, turnIn: false, video: true, std: [], title: "Day 3 · What is the Difference Between Executive and Independent Agencies? [No. 86]", path: "https://www.youtube.com/watch?v=qL9kqmn-dUA" },
   "gov-u5-d3-video-PNojm8f6Seo": { course: "government", unit: 5, day: 3, turnIn: false, video: true, std: [], title: "Day 3 · What is FEMA? The federal agency that responds to national disasters", path: "https://www.youtube.com/watch?v=PNojm8f6Seo" },
 
