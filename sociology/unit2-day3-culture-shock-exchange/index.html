@@ -1,28 +1,199 @@
-<!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Read the Room: Osaka | Sociology Unit 2 Day 3</title>
-<meta name="description" content="A semester in Osaka, Japan. Read the clues, earn trust, and outplay a vlogger whose hot takes wreck everything.">
-<link rel="stylesheet" href="style.css?v=20261103a">
-<script src="../../shared/assignments.js?v=20261103p22"></script>
-<script src="../../shared/turnin.js?v=20261103ttt"></script>
-<script src="../../shared/lang.js?v=20261103c"></script>
-</head><body>
-<div class="hud" id="hud" hidden aria-label="Your meters">
-  <div class="hud-in">
-    <span class="step"><span id="stepWord">Step</span> <b id="stepN">1</b>/<b id="stepT">15</b></span>
-    <span class="wk"><span aria-hidden="true">📅</span> <span id="wkTxt">Week 1</span></span>
-    <div class="meter trust" title="Friends' trust"><span class="ic" aria-hidden="true">🤝</span><span class="lab">Trust</span><span class="track"><span id="tFill"></span></span><b><span id="tN">3</span>/10</b><i class="pop" id="tPop"></i></div>
-    <div class="meter energy" title="Your energy"><span class="ic" aria-hidden="true">🔋</span><span class="lab">Energy</span><span class="pips" id="ePips"></span><b><span id="eN">5</span>/6</b><i class="pop" id="ePop"></i></div>
-    <div class="rival" id="rival" title="Tanner, the rival vlogger"><span class="rav" aria-hidden="true">T<i id="rMood">😴</i></span><span class="rtx"><b>Tanner</b><small id="rWord">bored</small></span></div>
-    <div class="meter heat" title="Tanner's hot takes"><span class="ic" aria-hidden="true">🔥</span><span class="lab">Hot takes</span><span class="track"><span id="hFill"></span></span><b><span id="hN">0</span>/10</b><i class="pop" id="hPop"></i></div>
-  </div>
-  <div class="bar" aria-hidden="true"><span id="progFill"></span></div>
-</div>
-<main>
-  <p class="welcome" id="welcome" role="status" hidden></p>
-  <div id="app"></div>
-  <div class="foot"><span>Progress saves on this device. Your teacher sees your work after you turn it in.</span><button type="button" id="restartBtn">Start over</button></div>
-  <p class="made-up">Maya, Yui, Ren, Haruto, Tanner, and Hoshizora High are made up. Osaka, Amerikamura, and the customs are real. Not everyone in Japan or Iowa does things the same way.</p>
-</main>
-<script src="game.js?v=20261103rtt"></script>
-</body></html>
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Who Decides What’s Normal? | Sociology Unit 2 Day 3</title><meta name="description" content="A short visual reading about culture, belonging, and understanding before judging, using selected scenes from Malaka Gharib’s graphic memoir.">
+<style>
+:root{--navy:#18394b;--paper:#f5f1e7;--card:#fffefa;--ink:#263744;--muted:#5c6870;--line:#ddd5c8;--accent:#7a483e;--green:#286646}
+*{box-sizing:border-box}body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.45 system-ui,Segoe UI,Arial,sans-serif}header{background:var(--navy);color:#fff;padding:16px max(16px,calc((100vw - 1360px)/2));border-bottom:5px solid #d0ad73}.kicker{font-size:.77rem;letter-spacing:.08em;text-transform:uppercase;color:#f4d9a2;font-weight:800}h1{font-size:clamp(1.65rem,3vw,2.4rem);margin:3px 0}header p{margin:3px 0;color:#e7edf0;font-size:.94rem}header a{color:white}main{max-width:1390px;margin:auto;padding:14px 16px 50px}.instructions{padding:12px 16px;border-left:5px solid var(--green);background:#e9f0ea;border-radius:9px;margin-bottom:12px;font-weight:650}.layout{display:grid;grid-template-columns:minmax(0,1.12fr) minmax(350px,.88fr);gap:17px;align-items:start}.panel{background:var(--card);border:1px solid var(--line);padding:15px;border-radius:13px;box-shadow:0 3px 14px #18394b09}.reader{position:sticky;top:10px}.eyebrow{font-size:.78rem;color:var(--accent);font-weight:850;letter-spacing:.08em;text-transform:uppercase;margin:0 0 4px}h2{font-size:1.32rem;line-height:1.2;color:var(--navy);margin:2px 0 10px}.picture{display:flex;justify-content:center;align-items:center;background:#e8e2d7;border:1px solid var(--line);border-radius:9px;min-height:290px;overflow:auto;padding:8px}.picture img{display:block;width:100%;height:auto;max-height:69vh;object-fit:contain}.picture.zoomed img{width:155%;max-width:none;max-height:none}.source{font-size:.82rem;color:var(--muted);line-height:1.4}.source a{color:var(--navy)}.controls{display:flex;gap:9px;flex-wrap:wrap;margin:10px 0}.controls button,.controls a{padding:8px 12px}.controls a{display:inline-flex;align-items:center;min-height:44px;border-radius:9px;background:#e6dfd3;color:var(--navy);font-weight:800;text-decoration:none}button{border:0;border-radius:9px;background:#e6dfd3;color:var(--navy);font:inherit;font-weight:800;cursor:pointer;padding:10px 13px;min-height:44px}button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid #6ea9cb;outline-offset:2px}button:disabled{cursor:not-allowed;opacity:.52}.primary{background:var(--accent);color:white}.next{background:var(--green);color:white}.counter{font-size:.88rem;font-weight:750;color:var(--muted);margin:0 0 7px}.bar{height:8px;border-radius:20px;background:#e4e7e3;overflow:hidden;margin:0 0 14px}.bar span{display:block;height:100%;width:0;background:var(--green)}label{display:block;font-weight:800;margin:12px 0 5px}input,textarea{width:100%;border:2px solid #cdc4b7;border-radius:8px;padding:10px;background:white;color:var(--ink);font:inherit}textarea{min-height:96px;resize:vertical}.question{background:#f1f5f6;border-left:4px solid #6a8799;padding:13px;border-radius:9px;margin:13px 0}.question h3{font-size:1.04rem;margin:0 0 9px;color:var(--navy)}.choices{display:grid;gap:7px}.choice{text-align:left;background:white;color:var(--ink);font-weight:650;border:2px solid #d3dfe4;min-height:48px;line-height:1.3}.choice:hover:not(:disabled){border-color:#678796}.feedback{font-size:.89rem;min-height:1.25em;font-weight:700;margin:7px 0 0}.feedback.good{color:var(--green)}.feedback.bad{color:#9c443a}.actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:16px}.hidden{display:none!important}.connection{border-left:4px solid #78916f;background:#eef4eb;padding:11px 13px;border-radius:7px;margin:13px 0}.connection p{margin:3px 0}.booknote{color:var(--muted);font-size:.82rem}.std-line{margin:4px 0 6px;color:#e7edf0;font-size:.9rem;line-height:1.4}.std-line b{color:#fff}.welcome{background:#e9f0ea;border-left:4px solid var(--green);padding:8px 12px;border-radius:7px;font-weight:700;color:var(--green);margin:8px 0 0}.done{padding:16px;text-align:center;background:#eef4eb;border-radius:9px}@media(max-width:850px){.layout{grid-template-columns:1fr}.reader{position:static}.picture img{max-height:56vh}}@media print{header,.controls,.actions{display:none}.layout{display:block}.picture img{max-height:240px}}
+
+.hero{max-width:860px;margin:8vh auto;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:clamp(22px,5vw,48px)}.hero h1{font-size:clamp(2rem,5vw,3.2rem);line-height:1.08}.hero .primary{width:100%;margin-top:16px;background:var(--navy)}.hero p{max-width:65ch}.hero .kicker{color:var(--accent)}.scene-context{font-size:1rem;margin:10px 0}.focus{border-left:4px solid #6a8799;padding:9px 12px;background:#edf3f5;border-radius:6px}.practice{padding:24px;background:#edf3f5;min-height:260px;font-size:1.15rem;line-height:1.65;border-radius:9px}.source{margin-bottom:0}.picture img{max-height:65vh}.picture.zoomed{display:block}.picture.zoomed img{width:100%;max-height:none}.error{padding:18px;background:#fff2e7}.footer{max-width:1360px;margin:30px auto;padding:20px;text-align:center;border-top:1px dashed var(--line)}.footer button{font-size:.85rem;background:none;text-decoration:underline}.choice{font-weight:600}.header-row{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}.zoom-note{font-size:.8rem;color:var(--muted)}[hidden]{display:none!important}h3{line-height:1.4}.finish-note{background:#e9f0ea;border-radius:9px;padding:14px}</style><script src="../../shared/assignments.js?v=20261104-normal"></script><script src="../../shared/turnin.js?v=20261103ttt"></script><script src="../../shared/lang.js?v=20261103c"></script></head><body>
+<main id="intro"><section class="hero"><p class="kicker">Sociology · Unit 2 · Day 3</p><h1>Who Decides What’s Normal?</h1><p>Everyone wants to belong. But who gets to decide what counts as normal?</p><p>Follow a real teen’s illustrated story. Read 5 scenes, try 2 short examples, and write 2–3 sentences. About 20 minutes.</p><label for="studentName">Your name: first name + last initial</label><input id="studentName" maxlength="100" autocomplete="off" placeholder="Like Jordan M."><p id="introStatus" role="status"></p><button id="startBtn" type="button" class="primary">Start reading →</button></section></main>
+<div id="reading" hidden><header><div class="header-row"><div><div class="kicker">Sociology · Unit 2 · Day 3</div><h1>Who Decides What’s Normal?</h1></div><p id="working"></p></div><p>SS.9-12.Soc.5–6 · Explain how culture shapes expectations and how people understand differences.</p></header>
+<main><p id="welcome" class="welcome" hidden></p><div class="layout"><section class="panel reader" aria-label="Reading scene"><p id="sceneNo" class="eyebrow"></p><h2 id="sceneTitle"></h2><p id="setup" class="scene-context"></p><div id="pictureFrame" class="picture"><img id="art" alt=""></div><p id="imageError" class="error" role="status" hidden>The image did not load. Use “Open original panel” to try the source image, then return here.</p><div id="practice" class="practice" hidden></div><div id="imageControls" class="controls"><button type="button" id="zoomBtn" aria-pressed="false">Make panel bigger</button><a id="sourceOpen" target="_blank" rel="noopener noreferrer">Open original panel</a></div><p id="focus" class="focus"></p><p id="artCredit" class="source">Selected artwork from <i>I Was Their American Dream</i> © 2019 Malaka Gharib, published by Clarkson Potter / Penguin Random House. Excerpt published by <a href="https://thenib.com/i-was-their-american-dream/" target="_blank" rel="noopener noreferrer">The Nib</a>. This activity uses selected scenes, not the complete book.</p></section>
+<section class="panel"><p id="counter" class="counter"></p><div class="bar"><span id="fill"></span></div><div id="questionArea"></div><div id="concept" class="connection" hidden><strong id="conceptTerm"></strong><p id="conceptMeaning"></p></div><div id="writing" hidden><h2>Make the connection</h2><label for="reflection">Choose a comic scene. Use one visible detail to explain how culture shaped Malaka’s expectations or sense of belonging.</label><textarea id="reflection" maxlength="1000" placeholder="In the scene about ___, I noticed ___. This shows ___ because ___."></textarea><p class="booknote">Write 2–3 sentences. Use cultural identity, ethnocentrism, or cultural relativism. Explain the scene; you do not need to share personal experiences.</p></div><div class="actions"><button id="backBtn" type="button">← Back</button><button id="nextBtn" class="next" type="button" hidden>Next section →</button><button id="sendBtn" class="primary" type="button" hidden>Turn in answers</button></div><p id="status" class="feedback" role="status" aria-live="polite"></p><p class="booknote">Progress saves on this device. Your teacher sees your work after you turn it in.</p></section></div></main></div>
+<footer class="footer"><button id="restartBtn" type="button">Start over</button></footer><script>(() => {"use strict";
+const SCENES=[
+  {
+    "title": "More Than One Background",
+    "image": "https://thenib.com/wp-content/uploads/2019/08/i-was-their-american-dream-003-222.jpg",
+    "alt": "The comic opens at Cerritos High with a student asking about someone’s background.",
+    "setup": "Malaka Gharib tells a true story about growing up with Egyptian, Filipino, and American influences. We will study her experience, not make claims about everyone in those groups.",
+    "focus": "Look at the school setting and the question in the speech bubble.",
+    "term": "Cultural identity",
+    "meaning": "Cultural identity is how someone connects with shared ways of life. A person can connect with more than one culture.",
+    "check": {
+      "prompt": "The question asks Malaka to explain her background. Which response would leave room for her full story?",
+      "answers": [
+        "Let her describe the parts of her life that matter to her",
+        "Choose her background by looking closely at her appearance",
+        "Use her favorite food to place her in one cultural group",
+        "Use where she lives to decide which background counts"
+      ],
+      "hint": "A person’s background is more than one clue such as food, looks, or address.",
+      "why": "Malaka’s own account matters. Food, appearance, or address alone cannot tell someone’s whole cultural identity.",
+      "std": "SS.9-12.Soc.6"
+    }
+  },
+  {
+    "title": "A Belief to Question",
+    "image": "https://thenib.com/wp-content/uploads/2019/08/i-was-their-american-dream-26-855.jpg",
+    "alt": "Two white characters wear USA shirts in front of a flag; the caption treats them as the authentic Americans.",
+    "setup": "As a teen, Malaka sometimes treated whiteness as the standard for being American. This is a biased belief she looks back on, not a fact the lesson supports.",
+    "focus": "Compare who the image includes with who its claim leaves out.",
+    "term": "Ethnocentrism",
+    "meaning": "Ethnocentrism means treating one culture’s ways as the standard for judging other cultures.",
+    "check": {
+      "prompt": "What is the problem with using the pictured group as the standard for being American?",
+      "answers": [
+        "It treats one group’s identity as the measure for everyone",
+        "It describes a personal interest without ranking any group",
+        "It explains why people may share more than one culture",
+        "It asks how different people understand their own identity"
+      ],
+      "hint": "Notice the difference between describing one group and making it the standard.",
+      "why": "The image shows an exclusionary belief. Ethnocentrism also ranks cultures using one group’s ways as the standard; neither is a fact about who belongs.",
+      "std": "SS.9-12.Soc.6"
+    }
+  },
+  {
+    "title": "Where Ideas About Normal Come From",
+    "image": "https://thenib.com/wp-content/uploads/2019/08/i-was-their-american-dream-35-197.jpg",
+    "alt": "Malaka lists books, music, and magazines she liked and notices who appears in them.",
+    "setup": "Malaka looks back at the media she liked. She starts asking how those images shaped her ideas about who seemed cool and who seemed to belong.",
+    "focus": "You do not need to know these titles. Look at the faces and the arrows connecting them to media.",
+    "term": "Cultural influence",
+    "meaning": "Family, friends, school, and media can teach us what seems normal. These messages can be questioned.",
+    "check": {
+      "prompt": "Which visible detail supports the idea that media shaped her view of belonging?",
+      "answers": [
+        "The arrows connect her comment to faces on books and magazines",
+        "The schoolbooks in the corner prove that teachers chose her interests",
+        "The list of titles proves every classmate had exactly the same taste",
+        "The picture of a room proves her family banned other kinds of media"
+      ],
+      "hint": "Look for the visual links between her comment and the media examples.",
+      "why": "The arrows link a pattern she notices to the books, music, and magazines around her. The picture does not prove what every classmate or family did.",
+      "std": "SS.9-12.Soc.6"
+    }
+  },
+  {
+    "title": "Different Food, Different Expectations",
+    "image": "https://thenib.com/wp-content/uploads/2019/08/i-was-their-american-dream-34-eff.jpg",
+    "alt": "At a table, one teen uses chopsticks while her friend looks surprised at a plate of food.",
+    "setup": "Here Malaka is still explaining her earlier assumptions. The meal gives us a chance to separate being unfamiliar with a custom from treating that custom as inferior.",
+    "focus": "Look at the food, chopsticks, and the friend’s reaction.",
+    "term": "Cultural relativism",
+    "meaning": "Cultural relativism means trying to understand a practice in its own cultural setting before judging it. It does not mean excusing harm.",
+    "check": {
+      "prompt": "What response to this meal best uses cultural relativism?",
+      "answers": [
+        "Ask what the meal means to the family and how they usually eat it",
+        "Treat the meal as less proper because it differs from food at home",
+        "Assume the family has the same food habits as every other family",
+        "Copy the meal once and conclude that its meaning is now clear"
+      ],
+      "hint": "Understanding a custom takes context. It does not require liking every food.",
+      "why": "Asking about the family’s own practice seeks context. Someone may dislike a food without treating the people or their culture as inferior.",
+      "std": "SS.9-12.Soc.6"
+    }
+  },
+  {
+    "title": "Belonging Without Fitting One Box",
+    "image": "https://thenib.com/wp-content/uploads/2019/08/i-was-their-american-dream-56-66d.jpg",
+    "alt": "Malaka’s yearbook portrait is labeled Most Unique; her narration rethinks feeling like an outsider.",
+    "setup": "Later in the excerpt, Malaka questions the labels around her. The ending shows a change in how she views being different.",
+    "focus": "Read the yearbook label and her reflection beneath the portrait.",
+    "term": "Belonging",
+    "meaning": "People can belong while having different backgrounds and interests. One person’s story does not represent a whole group.",
+    "check": {
+      "prompt": "How does the ending change the meaning of her earlier outsider feeling?",
+      "answers": [
+        "She begins to value differences she once felt uneasy about",
+        "She decides fitting in requires giving up all her family customs",
+        "She proves that other people’s labels always describe her correctly",
+        "She concludes that everyone with her background feels the same way"
+      ],
+      "hint": "Compare her earlier uncertainty with the ending’s tone.",
+      "why": "The ending reconsiders difference as something she can value. It does not say that she erased her background or speaks for everyone like her.",
+      "std": "SS.9-12.Soc.6"
+    }
+  },
+  {
+    "title": "Practice: When Familiar Rules Change",
+    "image": null,
+    "alt": "",
+    "setup": "This next example is written for this lesson. It is not a scene from Malaka’s memoir.",
+    "focus": "At a new school, students wait until everyone has lunch before eating. Alex is used to starting right away. Alex feels unsure and does not know when to begin.",
+    "term": "Culture shock",
+    "meaning": "Culture shock is confusion or stress when familiar ways of doing things no longer fit a new setting.",
+    "check": {
+      "prompt": "Which detail best shows culture shock in this example?",
+      "answers": [
+        "Alex feels unsure because the familiar lunch routine no longer fits",
+        "Alex asks where to sit after noticing an empty space at a table",
+        "Alex brings the same lunch that was packed for school yesterday",
+        "Alex learns the name of a student who is sitting beside the door"
+      ],
+      "hint": "Look for confusion caused by a change in learned expectations.",
+      "why": "The unfamiliar routine makes Alex unsure how to act. A normal mistake is a chance to learn; it does not make Alex a bad person.",
+      "std": "SS.9-12.Soc.6"
+    }
+  },
+  {
+    "title": "Practice: Understand Before Judging",
+    "image": null,
+    "alt": "",
+    "setup": "Continue the classroom example. Alex wants to understand why people wait before eating.",
+    "focus": "One student says to ask classmates what the waiting means. Another says the routine is pointless because lunch at Alex’s old school worked differently.",
+    "term": "Ask, Understand, Then Evaluate",
+    "meaning": "Learn a custom’s context before judging it. Understanding a difference does not mean accepting bullying or discrimination.",
+    "check": {
+      "prompt": "Which explanation best separates the two responses?",
+      "answers": [
+        "Asking seeks local meaning; dismissing uses the old school as the standard",
+        "Asking proves every local rule is fair; dismissing proves every old rule is fair",
+        "Asking means Alex must enjoy waiting; dismissing means Alex feels no confusion",
+        "Asking erases Alex’s background; dismissing protects everyone else’s choices"
+      ],
+      "hint": "Notice which response looks for context and which ranks one routine against another.",
+      "why": "Seeking local meaning uses cultural relativism. Dismissing a custom only because it differs from home is an ethnocentric judgment.",
+      "std": "SS.9-12.Soc.6"
+    }
+  }
+];
+const ID="sociology-unit2-day3-culture-shock", TITLE="Sociology Unit 2 · Day 3 · Who Decides What’s Normal?", KEY="soc-u2d3-normal-reading-20261104", API="https://fynn-class-assignment-submissions-20261024.neotboy.chatgpt.site/api/submit";
+const $=id=>document.getElementById(id), N=SCENES.length;
+const fresh=()=>({name:"",started:false,pos:0,done:Array(N).fill(false),wrong:Array(N).fill(0),reflection:"",submitted:false});
+let state=fresh();try{const s=JSON.parse(localStorage.getItem(KEY));if(s&&Array.isArray(s.done)&&s.done.length===N&&Array.isArray(s.wrong)&&s.wrong.length===N)state={...state,...s}}catch{}
+state.pos=Number.isInteger(state.pos)?Math.max(0,Math.min(N-1,state.pos)):0;
+const firstOpen=state.done.findIndex(x=>!x);if(firstOpen>=0)state.pos=Math.min(state.pos,firstOpen);
+const save=()=>{try{localStorage.setItem(KEY,JSON.stringify(state))}catch{}};
+const test=()=>!!(window.classIsTestT&&window.classIsTestT());
+let pending=null,feedback="",retryAt=0,order=[];
+const shuffle=a=>{let b=a.slice();for(let i=b.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[b[i],b[j]]=[b[j],b[i]]}return b};
+function newOrder(){let b=shuffle([0,1,2,3]);if(b.join()===order.join())b.push(b.shift());order=b}
+function cancelRetry(){clearTimeout(pending);pending=null;retryAt=0;feedback=""}
+$("studentName").value=state.name;$("reflection").value=state.reflection;
+$("reflection").addEventListener("input",()=>{state.reflection=$("reflection").value;state.submitted=false;save()});
+function start(){let name=$("studentName").value.trim();if(window.classShortName)name=window.classShortName(name);if(!/^\S+ [A-Z]\.$/.test(name)){$("introStatus").textContent="Type your first name and last initial, like Jordan M.";$("studentName").focus();return}state.name=name;$("studentName").value=name;state.started=true;save();render();window.scrollTo(0,0)}
+$("startBtn").onclick=start;$("studentName").addEventListener("keydown",e=>{if(e.key==="Enter")start()});
+function renderQuestion(){const s=SCENES[state.pos],q=s.check,area=$("questionArea");area.replaceChildren();const wrap=document.createElement("div");wrap.className="question";const heading=document.createElement("h3");heading.textContent=q.prompt;wrap.append(heading);
+if(state.done[state.pos]){const p=document.createElement("p");p.className="feedback good";p.textContent="✓ "+q.answers[0];wrap.append(p);const why=document.createElement("p");why.textContent=q.why;wrap.append(why)}else{newOrder();const choices=document.createElement("div");choices.className="choices";for(const index of order){const b=document.createElement("button");b.type="button";b.className="choice";b.textContent=q.answers[index];b.disabled=Date.now()<retryAt;b.onclick=()=>{if(Date.now()<retryAt)return;if(index===0){state.done[state.pos]=true;cancelRetry();save();render()}else{state.wrong[state.pos]++;save();feedback="Not quite. "+q.hint+" Look again, then try the mixed-up choices.";retryAt=Date.now()+(test()?0:2500);renderQuestion();const at=state.pos;pending=setTimeout(()=>{retryAt=0;if(state.pos===at)renderQuestion()},Math.max(0,retryAt-Date.now()))}};choices.append(b)}wrap.append(choices);const f=document.createElement("p");f.className="feedback";f.setAttribute("aria-live","polite");f.textContent=feedback;wrap.append(f)}area.append(wrap)}
+function render(){const open=state.started;$("intro").hidden=open;$("reading").hidden=!open;if(!open)return;const s=SCENES[state.pos],count=state.done.filter(Boolean).length;
+$("working").textContent="Working as "+state.name;$("sceneNo").textContent="Section "+(state.pos+1)+" of "+N+(s.image?" · Comic scene":" · Practice example");$("sceneTitle").textContent=s.title;$("setup").textContent=s.setup;$("focus").textContent=s.focus;
+$("pictureFrame").hidden=!s.image;$("imageControls").hidden=!s.image;$("artCredit").hidden=!s.image;$("practice").hidden=!!s.image;$("focus").hidden=!s.image;
+$("imageError").hidden=true;if(s.image){$("art").src=s.image;$("art").alt=s.alt;$("sourceOpen").href=s.image}else{$("practice").textContent=s.focus;$("art").removeAttribute("src")}
+$("pictureFrame").classList.remove("zoomed");$("zoomBtn").textContent="Make panel bigger";$("zoomBtn").setAttribute("aria-pressed","false");
+$("counter").textContent=count+" of "+N+" checks complete";$("fill").style.width=(count/N*100)+"%";
+renderQuestion();$("concept").hidden=!state.done[state.pos];$("conceptTerm").textContent=s.term;$("conceptMeaning").textContent=s.meaning;
+$("backBtn").disabled=state.pos===0;$("nextBtn").hidden=state.pos===N-1||!state.done[state.pos];const all=state.done.every(Boolean);$("writing").hidden=state.pos!==N-1||!all;$("sendBtn").hidden=state.pos!==N-1||!all;$("sendBtn").disabled=state.submitted;$("sendBtn").textContent=state.submitted?"Turned in ✓":"Turn in answers";if(state.submitted)$("status").textContent="Turned in. Your teacher can see your work.";
+}
+$("art").onerror=()=>{if(SCENES[state.pos].image)$("imageError").hidden=false};$("art").onload=()=>{$("imageError").hidden=true};
+$("zoomBtn").onclick=()=>{const z=$("pictureFrame").classList.toggle("zoomed");$("zoomBtn").textContent=z?"Normal size":"Make panel bigger";$("zoomBtn").setAttribute("aria-pressed",String(z))};
+function go(pos){cancelRetry();state.pos=pos;$("status").textContent="";save();render();window.scrollTo(0,0)}
+$("backBtn").onclick=()=>{if(state.pos>0)go(state.pos-1)};$("nextBtn").onclick=()=>{if(state.pos<N-1&&state.done[state.pos])go(state.pos+1)};
+$("restartBtn").onclick=()=>{if(!confirm("Start over? This clears only this activity’s progress on this device."))return;cancelRetry();const name=state.name;state=fresh();state.name=name;$("studentName").value=name;$("reflection").value="";$("introStatus").textContent="";$("welcome").hidden=true;save();render();window.scrollTo(0,0)};
+$("sendBtn").onclick=async()=>{const status=$("status"),ref=$("reflection").value.trim();if(!state.done.every(Boolean)&&!test()){status.textContent="Finish all seven checks first.";return}if(!test()&&(ref.length<60||(ref.match(/[.!?]+(?=\s|$)/g)||[]).length<2)){status.textContent="Write 2–3 sentences using one comic detail and a Sociology concept.";$("reflection").focus();return}if(window.classJunkStop){const msg=window.classJunkStop($("reflection"),{source:"from the comic"});if(msg){status.textContent=msg;return}}
+state.reflection=ref;save();const answers={"Standard":"SS.9-12.Soc.5, SS.9-12.Soc.6","Reading":"Selected scenes from I Was Their American Dream by Malaka Gharib","First-try correct":state.wrong.filter((v,i)=>state.done[i]&&v===0).length+" of "+N,"First-try by standard":"SS.9-12.Soc.6: "+state.wrong.filter((v,i)=>state.done[i]&&v===0).length+" of "+N};SCENES.forEach((s,i)=>{answers["Section "+(i+1)+" · "+s.check.prompt]=state.done[i]?s.check.answers[0]+(state.wrong[i]?" (after "+state.wrong[i]+" wrong tries)":" (first try)"):"Not completed in teacher preview"});answers["Writing: How did culture shape Malaka’s expectations or belonging?"]=ref;
+$("sendBtn").disabled=true;status.textContent="Sending your work…";try{if(!window.classTurnIn)throw Error("Turn-in connection did not load. Refresh and try again; your work is saved.");const r=await window.classTurnIn(API,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({studentName:state.name,assignmentId:ID,assignmentTitle:TITLE,answers})});const result=await r.json();if(!r.ok)throw Error(result.error||"Could not send your work.");state.submitted=true;save();status.textContent="Turned in. Your teacher can see your work.";$("sendBtn").textContent="Turned in ✓"}catch(e){status.textContent=e.message||"Could not turn in. Your work is saved; try again.";$("sendBtn").disabled=false}};
+render();if(state.started&&state.done.some(Boolean)){$("welcome").textContent="Welcome back. Your progress and writing are saved.";$("welcome").hidden=false}
+try{(window.classTestHooks=window.classTestHooks||[]).push({count:()=>N+1,index:()=>state.pos===N-1&&state.done.every(Boolean)?N:state.pos,label:i=>i<N?"Section "+(i+1)+": "+SCENES[i].title:"Writing + turn in",go:i=>{if(!test())return;state.started=true;state.name="Test T.";if(i>=N){state.done=Array(N).fill(true);go(N-1)}else{state.done[i]=false;go(i)}},solve:()=>{if(!test())return;cancelRetry();state.done[state.pos]=true;save();render()}});if(window.classTestSkip)window.classTestSkip.refresh()}catch{}
+})();</script></body></html>
