@@ -169,6 +169,18 @@
       }]
     }
   ];
+  // Vocab match: the last round before the wrap-up. Tap a word, then tap what it means.
+  const VOCAB = [
+    { t: "Folkway", m: "A small everyday rule. Break it and you just get a look." },
+    { t: "Mores", m: "A rule about right and wrong. Break it and people get mad." },
+    { t: "Law", m: "A rule the government enforces with police, fines, or jail." },
+    { t: "Status", m: "Your position in a group, like captain or manager." },
+    { t: "Role", m: "What people expect from someone in a position." },
+    { t: "Role conflict", m: "When being a worker and a student pull you opposite ways." },
+    { t: "Social institution", m: "A big part of society that meets needs, like school or family." },
+    { t: "Values", m: "Big ideas a group thinks are good, like safety or freedom." }
+  ];
+  const VOCAB_STEP = 7, WRAP_STEP = 8;
   const CHECK_IDS = [].concat(...STORIES.map(s => s.checks.map(c => c.id)));
   const CHECK_LABEL = {}; STORIES.forEach(s => s.checks.forEach(c => { CHECK_LABEL[c.id] = c.label; }));
 
@@ -189,10 +201,11 @@
   };
 
   // ---------------- State ----------------
-  const fresh = () => ({ v: 1, name: "", step: 0, calls: {}, checks: {}, writing: "", pick: "", turnedIn: false });
+  const fresh = () => ({ v: 1, name: "", step: 0, calls: {}, checks: {}, writing: "", pick: "", vocab: {}, vocabWrong: 0, turnedIn: false });
   let st;
   try { st = JSON.parse(localStorage.getItem(KEY)); } catch (e) {}
   if (!st || st.v !== 1) st = fresh();
+  if (!st.vocab) { st.vocab = {}; st.vocabWrong = 0; }
   // Shared Chromebooks: a different student signed in on this device starts clean.
   try {
     const nowName = localStorage.getItem("site-student-name") || "";
@@ -222,7 +235,8 @@
     $("track").innerHTML = STORIES.map((s, i) => {
       const cls = i < now ? "done" : i === now ? "now" : "";
       return `<li class="${cls}" title="${esc(s.tag)}"><span>${i < now ? "✓" : i + 1}</span>${esc(s.tag)}</li>`;
-    }).join("") + `<li class="${st.step > STORIES.length ? "now" : ""}"><span>★</span>Wrap-up</li>`;
+    }).join("") + `<li class="${st.step === VOCAB_STEP ? "now" : st.step > VOCAB_STEP ? "done" : ""}"><span>${st.step > VOCAB_STEP ? "✓" : "7"}</span>Vocab</li>` +
+      `<li class="${st.step >= WRAP_STEP ? "now" : ""}"><span>★</span>Wrap-up</li>`;
     const made = STORIES.filter(s => st.calls[s.id] != null).length;
     $("callPill").innerHTML = `🎯 Called it: <b>${callsRight()}</b> of ${made}`;
     $("callPill").hidden = made === 0;
@@ -235,7 +249,7 @@
         <p class="kicker">Sociology · Unit 2 · Day 1</p>
         <h1>Why Did That<br>Blow Up?</h1>
         <p class="hook">Six real stories. Guess what happened. Find the hidden rule.</p>
-        <ul class="facts"><li>📰 6 real stories · ✅ 7 quick checks + 1 short answer</li><li>⏱ About 20–25 min</li></ul>
+        <ul class="facts"><li>📰 6 real stories · ✅ 7 quick checks · 🧩 vocab match · ✍️ 1 short answer</li><li>⏱ About 20–25 min</li></ul>
         <p class="goal">🎯 <b>Today's goal:</b> name the rules, roles, and institutions that shape how people act.</p>
         <label for="nameBox">Your name</label>
         <input id="nameBox" maxlength="60" autocomplete="off" placeholder="First name + last initial (like Jordan M.)" value="${esc(st.name)}">
@@ -246,7 +260,6 @@
         <div class="mosaic">
           <img src="img/tip.jpg" alt=""><img src="img/derecho.jpg" alt=""><img src="img/server.jpg" alt=""><img src="img/yondr.jpg" alt="">
         </div>
-        <div class="meter mini">${METER.map(m => `<span>${m.ic} ${m.t}</span>`).join("")}</div>
       </div></section>`;
     $("startBtn").onclick = () => {
       const fixed = window.classShortName ? window.classShortName($("nameBox").value) : $("nameBox").value.trim();
@@ -336,7 +349,6 @@
     // Step B: what happened + meter + hidden rule
     const after = document.createElement("div"); after.className = "after"; after.id = "after"; box.appendChild(after);
     after.innerHTML = `<div class="happened"><p class="step-tag">📰 What really happened</p><p>${s.happened}</p></div>
-      ${s.meter == null ? "" : meterHtml(s.meter, true)}
       <div class="rulebox"><p class="step-tag">🔍 The hidden rule</p><p>${s.rule}</p></div>`;
 
     // Step C: checks, one at a time
@@ -348,13 +360,63 @@
     }
     if (allDone) {
       const nb = document.createElement("button"); nb.type = "button"; nb.className = "go"; nb.id = "nextBtn";
-      nb.textContent = i + 1 < STORIES.length ? "Next story →" : "See your rank →";
+      nb.textContent = i + 1 < STORIES.length ? "Next story →" : "Last round: vocab match →";
       nb.onclick = () => { st.step++; save(); render(); window.scrollTo(0, 0); };
       box.appendChild(nb);
     }
     if (scrollTarget === "call") scrollToEl($("callBox"));
     else if (scrollTarget === "next") scrollToEl(box.querySelector(".check:not(.solved)") || $("nextBtn"));
     scrollTarget = null;
+  }
+
+  // ---------------- Vocab match ----------------
+  let vPick = null, vLocked = false, vOrderT = null, vOrderM = null;
+  function vocab() {
+    if (!vOrderT) { vOrderT = shuffle(VOCAB.map((v, i) => i)); vOrderM = shuffle(VOCAB.map((v, i) => i)); }
+    const box = document.createElement("section"); box.className = "card";
+    app.replaceChildren(box);
+    const doneN = VOCAB.filter(v => st.vocab[v.t]).length;
+    box.innerHTML = `<p class="kicker">Last round · Vocab match</p><h2>Match each word to what it means.</h2>
+      <p class="vhow">Tap a word, then tap its meaning. <b>${doneN} of ${VOCAB.length}</b> matched.</p>
+      <p class="msg" id="vMsg" aria-live="polite"></p>
+      <div class="vgrid"><div class="vcol" id="vTerms"></div><div class="vcol" id="vMeans"></div></div>`;
+    const terms = $("vTerms"), means = $("vMeans"), msg = $("vMsg");
+    vOrderT.forEach(i => {
+      const v = VOCAB[i], ok = !!st.vocab[v.t];
+      const b = document.createElement("button"); b.type = "button";
+      b.className = "vterm" + (ok ? " matched" : "") + (vPick === i ? " sel" : "");
+      b.textContent = (ok ? "✓ " : "") + v.t; b.disabled = ok;
+      b.onclick = () => { if (vLocked) return; vPick = i; msg.textContent = ""; msg.className = "msg"; vocab(); };
+      terms.appendChild(b);
+    });
+    vOrderM.forEach(i => {
+      const v = VOCAB[i], ok = !!st.vocab[v.t];
+      const b = document.createElement("button"); b.type = "button";
+      b.className = "vmean" + (ok ? " matched" : ""); b.disabled = ok;
+      b.textContent = v.m;
+      b.onclick = () => {
+        if (vLocked) return;
+        if (vPick == null) { msg.textContent = "👈 First tap a word on the left."; msg.className = "msg hint"; return; }
+        if (vPick === i) {
+          st.vocab[v.t] = true; vPick = null; save(); vocab();
+          if (VOCAB.every(x => st.vocab[x.t])) scrollToEl($("nextBtn"));
+          return;
+        }
+        st.vocabWrong++; hist.vocabWrong = (hist.vocabWrong || 0) + 1; saveHist(); save();
+        vLocked = true; app.querySelectorAll(".vgrid button").forEach(x => { x.disabled = true; });
+        msg.textContent = "💡 Not a match for “" + VOCAB[vPick].t + ".” Read the meanings again and try another.";
+        msg.className = "msg hint";
+        setTimeout(() => { vLocked = false; vocab(); $("vMsg").textContent = msg.textContent; $("vMsg").className = "msg hint"; }, 1500);
+      };
+      means.appendChild(b);
+    });
+    if (doneN === VOCAB.length) {
+      const end = document.createElement("div"); end.className = "vdone";
+      end.innerHTML = `<p>✅ All ${VOCAB.length} matched!</p>`;
+      const nb = document.createElement("button"); nb.type = "button"; nb.className = "go"; nb.id = "nextBtn"; nb.textContent = "See your rank →";
+      nb.onclick = () => { st.step = WRAP_STEP; save(); render(); window.scrollTo(0, 0); };
+      end.appendChild(nb); box.appendChild(end);
+    }
   }
 
   // ---------------- Wrap-up ----------------
@@ -438,6 +500,8 @@
     a["First-try by standard"] = "Soc.5: " + firstTry(soc5) + " of " + soc5.length + " · Soc.7: " + firstTry(soc7) + " of " + soc7.length;
     CHECK_IDS.forEach(id => { const w = everWrong(id); a[CHECK_LABEL[id]] = w ? "after " + w + " wrong " + (w === 1 ? "try" : "tries") : "first try"; });
     a["Started over"] = hist.restarts ? hist.restarts + (hist.restarts === 1 ? " time (wrong tries still counted)" : " times (wrong tries still counted)") : "No";
+    const vw = Math.max(st.vocabWrong || 0, hist.vocabWrong || 0);
+    a["Vocab match"] = VOCAB.filter(v => st.vocab[v.t]).length + " of " + VOCAB.length + " matched, " + (vw ? vw + " wrong " + (vw === 1 ? "try" : "tries") : "no wrong tries");
     a["Calls right (guesses, not graded)"] = callsRight() + " of " + STORIES.length;
     a["Rank"] = rank().t;
     const s = STORIES.find(x => x.id === st.pick);
@@ -457,16 +521,17 @@
     hud(); locked = false;
     if (st.step <= 0) title();
     else if (st.step <= STORIES.length) story(st.step - 1);
+    else if (st.step === VOCAB_STEP) vocab();
     else wrap();
   }
   $("restartBtn").onclick = () => {
     if (!confirm("Start over? This clears your work on this device.")) return;
-    const name = st.name; st = fresh(); st.name = name; hist.restarts++; saveHist();
+    const name = st.name; st = fresh(); st.name = name; hist.restarts++; saveHist(); vOrderT = vOrderM = null; vPick = null;
     if (window.classFirstTry) window.classFirstTry.reset();
     save(); render(); window.scrollTo(0, 0);
   };
   if (st.step >= 1 && $("welcome")) {
-    $("welcome").textContent = "Welcome back, " + st.name + "! You're on " + (st.step > STORIES.length ? "the wrap-up." : "story " + st.step + " of " + STORIES.length + ".");
+    $("welcome").textContent = "Welcome back, " + st.name + "! You're on " + (st.step >= WRAP_STEP ? "the wrap-up." : st.step === VOCAB_STEP ? "the vocab match." : "story " + st.step + " of " + STORIES.length + ".");
     $("welcome").hidden = false;
   }
   render();
