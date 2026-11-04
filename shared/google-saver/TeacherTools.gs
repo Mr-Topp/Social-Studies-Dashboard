@@ -39,7 +39,7 @@ function doPost(e) {
     if (body.action === "class_list") return json(classList(body));
     if (body.action === "my_work") return json(myWork(body));
     // Lets the update page check which version is running. Shares nothing.
-    if (body.action === "version") return json({ ok: true, version: 10, can: ["links", "student-links", "paper", "no-grades", "student-todo", "online-grade", "name-caps"] });
+    if (body.action === "version") return json({ ok: true, version: 11, can: ["links", "student-links", "paper", "no-grades", "student-todo", "online-grade", "name-caps", "online-m"] });
   } catch (err) { return json({ ok: false, error: "Try again later." }); }
   var check = codeCheck(body.code);
   if (check === "locked") return json({ ok: false, error: "Too many wrong teacher codes. Wait 15 minutes, then try again." });
@@ -186,7 +186,7 @@ function setMarks(b) {
   for (var k = 0; k < items.length; k++) {
     var it = items[k], paper = /^paper-[a-z0-9]{1,40}$/.test(it.act);
     if (!/^[a-z0-9][a-z0-9-]{0,79}$/.test(it.act) || !it.student) return { ok: false, error: "Missing the student or activity." };
-    if (!(it.value === "" || it.value === "EX" || /^[1-4]$/.test(it.value) || (paper && it.value === "M"))) return { ok: false, error: "Type 1-4, EX or M." };
+    if (!(it.value === "" || it.value === "EX" || /^[1-4]$/.test(it.value) || it.value === "M")) return { ok: false, error: "Type 1-4, EX or M." };
   }
   var saved = [];
   withLock(function (sh) {
