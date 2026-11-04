@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
 <title>Teacher Dashboard · All Classes</title>
-<script src="../shared/assignments.js?v=20261103p15"></script>
+<script src="../shared/assignments.js?v=20261103p16"></script>
 <script src="presentations.js?v=20261103civics3"></script>
 <script src="../shared/turnin.js?v=20261103d"></script>
 <style>
@@ -791,11 +791,9 @@ function linksHtml() {
     const nDays = list.reduce((n, r) => n + (r.day ? (r.span ? r.span - r.day + 1 : 1) : 0), 0), nActs = ids.length;
     const shortDate = iso => iso ? new Date(iso + "T12:00:00").toLocaleDateString("en-US", { month: "short", day: "numeric" }) : "";
     const kParts = String(key).split("|"), isP1 = kParts[1] === "p1", unitNo = +kParts[kParts.length - 1] || 0;
-    const fit = cal && !isP1 ? unitFit(tab, unitNo) : null;
     const rowDate = r => { if (!cal || isP1 || !r.day || r.summ || r.day > cal.days) return ""; const a = dayDate(tab, false, unitNo, r.day, false); if (!a) return ""; const b = r.span ? dayDate(tab, false, unitNo, r.span, false) : null; return `<span class="sumdate">📅 ${safe(niceDate(a.iso))}${b && b.iso !== a.iso ? " – " + safe(niceDate(b.iso)) : ""}</span>`; };
     const count = ([nDays ? plural(nDays, "day") : (nActs ? plural(nActs, "assignment") : ""), cal && cal.summative ? "summative " + shortDate(cal.summative) : ""].filter(Boolean).join(" · ") || (main ? "slides ready" : "slides not built yet"))
       + (nTodo ? ` · <span class="todocount">⚠ ${nTodo} not made yet</span>` : "")
-      + (fit ? ` · <span class="todocount">⚠ ${fit.need} lesson days planned, but ${fit.have} class days before the test</span>` : "")
       + (REVIEW_AGAIN.has(key) ? ` · <span class="reviewnote">🔁 Go through material again</span>` : "");
     const body = list.map(r => {
       // Summative row: just the green-sheet date, no "Day N · Summative" (Fynn, 2026-11-02).
