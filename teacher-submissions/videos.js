@@ -196,6 +196,7 @@ Object.assign(window.CLASS_ASSIGNMENTS, {
   "gov-u1-d8-video-netflix-81250867": { course: "government", unit: 1, day: 8, turnIn: false, video: true, std: [], title: "Day 8 · We the People: The Bill of Rights (Netflix, 5 min)", path: "https://www.netflix.com/watch/81250867" },
   "gov-u1-d8-video-netflix-81250870": { course: "government", unit: 1, day: 8, turnIn: false, video: true, std: [], title: "Day 8 · We the People: The First Amendment (Netflix, 5 min)", path: "https://www.netflix.com/watch/81250870" },
   "gov-u1-d9-video-VRDRNDtx9j4": { course: "government", unit: 1, day: 9, turnIn: false, video: true, std: [], title: "Day 9 · Federal and State Powers", path: "https://www.youtube.com/watch?v=VRDRNDtx9j4" },
+  "gov-u1-d9-video-netflix-81250871": { course: "government", unit: 1, day: 9, turnIn: false, video: true, std: [], title: "Day 9 · We the People: Federal vs. State Power (Netflix, 4 min)", path: "https://www.netflix.com/watch/81250871" },
 
   // ---- Government · Unit 2 ----
   "gov-u2-d1-video-j_k_k-bHigM": { course: "government", unit: 2, day: 1, turnIn: false, video: true, std: [], title: "Day 1 · Political Ideology: Crash Course Government and Politics", path: "https://www.youtube.com/watch?v=j_k_k-bHigM" },
@@ -251,7 +252,6 @@ Object.assign(window.CLASS_ASSIGNMENTS, {
   // ---- Government · Unit 6 (added 2026-11-04, Fynn) ----
   "gov-u6-d1-video-netflix-81250869": { course: "government", unit: 6, day: 1, turnIn: false, video: true, std: [], title: "Day 1 · We the People: The Three Branches of Government (Netflix, 5 min)", path: "https://www.netflix.com/watch/81250869" },
   "gov-u6-d1-video-S4ymux9l-Qo": { course: "government", unit: 6, day: 1, turnIn: false, video: true, std: [], title: "Day 1 · Facts of Congress - Checks and Balances", path: "https://www.youtube.com/watch?v=S4ymux9l-Qo" },
-  "gov-u6-d1-video-netflix-81250871": { course: "government", unit: 6, day: 1, turnIn: false, video: true, std: [], title: "Day 1 · We the People: Federal vs. State Power (Netflix, 4 min)", path: "https://www.netflix.com/watch/81250871" },
   "gov-u6-d2-video-lw7eDkAL0lo": { course: "government", unit: 6, day: 2, turnIn: false, video: true, std: [], title: "Day 2 · Iowa Constitution & Government: The Iowa Legislature", path: "https://www.youtube.com/watch?v=lw7eDkAL0lo" },
 
   // ---- Civics · Fridays (Schoology Friday pages, same in both sections; Friday 1's are in its slides; Friday 7 has none) ----
@@ -259,14 +259,23 @@ Object.assign(window.CLASS_ASSIGNMENTS, {
   "civics-f1-video-uihNc_tdGbk": { course: "civics", unit: 1, turnIn: false, video: true, std: [], title: "The making of the American Constitution", path: "https://www.youtube.com/watch?v=uihNc_tdGbk" },
   "civics-f1-video-LKJMWHCUoiw": { course: "civics", unit: 1, turnIn: false, video: true, std: [], title: "What you might not know about the Declaration of Independence", path: "https://www.youtube.com/watch?v=LKJMWHCUoiw" },
   "civics-f1-video-aMCDikASE4o": { course: "civics", unit: 1, turnIn: false, video: true, std: [], title: "Why wasn\u2019t the Bill of Rights originally in the US Constitution?", path: "https://www.youtube.com/watch?v=aMCDikASE4o" },
+  "civics-f1-video-netflix-81250874": { course: "civics", unit: 1, turnIn: false, video: true, std: [], title: "We the People: “We the People” (Netflix, 5 min)", path: "https://www.netflix.com/watch/81250874" },
+  "civics-f1-video-netflix-81250867": { course: "civics", unit: 1, turnIn: false, video: true, std: [], title: "We the People: The Bill of Rights (Netflix, 5 min)", path: "https://www.netflix.com/watch/81250867" },
   // Friday 2: How the Government Works
   "civics-f2-video-HuFR5XBYLfU": { course: "civics", unit: 2, turnIn: false, video: true, std: [], title: "How is power divided in the United States government?", path: "https://www.youtube.com/watch?v=HuFR5XBYLfU" },
   "civics-f2-video-Otbml6WIQPo": { course: "civics", unit: 2, turnIn: false, video: true, std: [], title: "Schoolhouse Rock: How a Bill Becomes a Law", path: "https://www.youtube.com/watch?v=Otbml6WIQPo" },
   "civics-f2-video-W9H3gvnN468": { course: "civics", unit: 2, turnIn: false, video: true, std: [], title: "Does your vote count? The Electoral College explained", path: "https://www.youtube.com/watch?v=W9H3gvnN468" },
   "civics-f2-video-scotus-tedEd": { course: "civics", unit: 2, turnIn: false, video: true, std: [], title: "How do US Supreme Court justices get appointed? (in the slides; optional)", path: "https://www.ted.com/talks/peter_paccone_how_do_us_supreme_court_justices_get_appointed" },
+  "civics-f2-video-netflix-81250869": { course: "civics", unit: 2, turnIn: false, video: true, std: [], title: "We the People: The Three Branches of Government (Netflix, 5 min)", path: "https://www.netflix.com/watch/81250869" },
+  "civics-f2-video-netflix-81250873": { course: "civics", unit: 2, turnIn: false, video: true, std: [], title: "We the People: The Courts (Netflix, 5 min)", path: "https://www.netflix.com/watch/81250873" },
+  "civics-f2-video-netflix-81250871": { course: "civics", unit: 2, turnIn: false, video: true, std: [], title: "We the People: Federal vs. State Power (Netflix, 4 min)", path: "https://www.netflix.com/watch/81250871" },
   // Friday 3: Rights & Responsibilities
   "civics-f3-video-P9VdyPbbzlI": { course: "civics", unit: 3, turnIn: false, video: true, std: [], title: "The fight for the right to vote in the United States", path: "https://www.youtube.com/watch?v=P9VdyPbbzlI" },
   "civics-f3-video-c_g1BMVFcuw": { course: "civics", unit: 3, turnIn: false, video: true, std: [], title: "How to turn protest into powerful change", path: "https://www.youtube.com/watch?v=c_g1BMVFcuw" },
+  "civics-f3-video-netflix-81250870": { course: "civics", unit: 3, turnIn: false, video: true, std: [], title: "We the People: The First Amendment (Netflix, 5 min)", path: "https://www.netflix.com/watch/81250870" },
+  "civics-f3-video-netflix-81250872": { course: "civics", unit: 3, turnIn: false, video: true, std: [], title: "We the People: Immigration (Netflix, 5 min)", path: "https://www.netflix.com/watch/81250872" },
+  "civics-f3-video-netflix-81250866": { course: "civics", unit: 3, turnIn: false, video: true, std: [], title: "We the People: Active Citizenship (Netflix, 5 min)", path: "https://www.netflix.com/watch/81250866" },
+  "civics-f3-video-netflix-81250868": { course: "civics", unit: 3, turnIn: false, video: true, std: [], title: "We the People: Taxes (Netflix, 5 min)", path: "https://www.netflix.com/watch/81250868" },
   // Friday 4: Early American History
   "civics-f4-video-FITyIpePEsQ": { course: "civics", unit: 4, turnIn: false, video: true, std: [], title: "Discovery of America: Columbus 1492", path: "https://www.youtube.com/watch?v=FITyIpePEsQ" },
   "civics-f4-video-pTliCI6uwmo": { course: "civics", unit: 4, turnIn: false, video: true, std: [], title: "Why did the Colonies Declare Independence?", path: "https://www.youtube.com/watch?v=pTliCI6uwmo" },
