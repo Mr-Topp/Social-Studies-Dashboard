@@ -5,6 +5,11 @@
 // To remove one, delete its line. To move one, change its unit/day.
 Object.assign(window.CLASS_ASSIGNMENTS, {
 
+  // ---- U.S. History · Part 1 · Unit 4 Progressive Era (How WWI Changed America, best fits only, 2026-11-04) ----
+  "ush-p1u4-d6-video-6UmERSpTtJc": { course: "us-history", part: 1, unit: 4, day: 6, turnIn: false, video: true, std: [], title: "Day 6 · How WWI Changed America: Women in WWI", path: "https://www.youtube.com/watch?v=6UmERSpTtJc" },
+  "ush-p1u4-d7-video-YIiPRfjIzdE": { course: "us-history", part: 1, unit: 4, day: 7, turnIn: false, video: true, std: [], title: "Day 7 · How WWI Changed America: African Americans in WWI", path: "https://www.youtube.com/watch?v=YIiPRfjIzdE" },
+  "ush-p1u4-d7-video-s_CKhzqamEo": { course: "us-history", part: 1, unit: 4, day: 7, turnIn: false, video: true, std: [], title: "Day 7 · How WWI Changed America: Immigrants and WWI", path: "https://www.youtube.com/watch?v=s_CKhzqamEo" },
+
   // ---- U.S. History · Unit 1 ----
   "ush-u1-d1-video-7TfgJnXlaxo": { course: "us-history", unit: 1, day: 1, turnIn: false, video: true, std: [], title: "Day 1 · Sound Smart: The Great Migration", path: "https://www.youtube.com/watch?v=7TfgJnXlaxo" },
   "ush-u1-d1-video-9gboEyrj02g": { course: "us-history", unit: 1, day: 1, turnIn: false, video: true, std: [], title: "Day 1 · The Harlem Renaissance", path: "https://www.youtube.com/watch?v=9gboEyrj02g" },
