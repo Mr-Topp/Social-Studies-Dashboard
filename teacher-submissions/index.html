@@ -6,6 +6,7 @@
 <meta name="robots" content="noindex,nofollow">
 <title>Teacher Dashboard · All Classes</title>
 <script src="../shared/assignments.js?v=20261103p20"></script>
+<script src="videos.js?v=20261103vid1"></script>
 <script src="presentations.js?v=20261103civics3"></script>
 <script src="../shared/turnin.js?v=20261103t"></script>
 <style>
@@ -724,12 +725,15 @@ function linksHtml() {
     if (/answer key|teacher key/i.test(t)) return "key";
     if (/\(printed\)/i.test(t)) return "print";
     if (!/^https?:/.test(a.path || "") && a.turnIn !== false) return "online";
+    if (a.video) return "video";
     return "link";
   };
-  const ICON = { online: "💻", print: "🖨", key: "🔑", link: "🔗" };
+  const ICON = { online: "💻", print: "🖨", key: "🔑", link: "🔗", video: "▶️" };
   const chipText = id => (REG[id].title || "").replace(/^Days? [\d–-]+ · /, "").replace(/\s*\(printed\)/i, "").replace(/ — /g, " · ");
   // Drive files added as alternatives: readings get their own row, everything else is an alternative assignment.
   const isAltReading = id => /\(Reading/i.test(REG[id].title || "");
+  // YouTube videos from the Schoology day posts get their own "Videos" row under the day (videos.js).
+  const vidRow = ids => { const list = ids.filter(id => !REG[id].alt && kindOf(id) === "video"); return list.length ? `<div class="altrow vidrow"><span class="altlabel">Video${list.length > 1 ? "s" : ""}</span>${list.map(chip).join("")}</div>` : ""; };
   const altRow = (ids, reading) => { const list = ids.filter(id => REG[id].alt && isAltReading(id) === reading); return list.length ? `<div class="altrow"><span class="altlabel">${reading ? "Alternative reading" : "Alternative assignment"}${list.length > 1 ? "s" : ""}</span>${list.map(chip).join("")}</div>` : ""; };
   // Answer keys + Drive alternatives sit behind a small "+ more" so the day row shows only what you teach from.
   const moreBox = ids => {
@@ -806,7 +810,7 @@ function linksHtml() {
       const t = r.title || (r.summ || r.ids.some(id => /summative/i.test(REG[id].title)) ? "Summative" : r.ids.length ? chipText(r.ids[0]).replace(/\s*\([^)]*\)\s*$/, "") : "");
       const slides = r.slides.map(s => `<a class="chip slides" href="${safe(s.url)}${s.slide ? "#slide=id." + safe(s.slide) : ""}" target="_blank" rel="noopener">▶ ${safe(s.label)}</a>`).join("");
       const todo = (r.todo || []).map(x => `<span class="chip todo">⚠ ${safe(x)}</span>`).join("");
-      return `<div class="dayrow${r.summ ? " summ" : ""}" id="${safe(dayAnchor(key, r.day))}"><div class="daylabel">${label}<span class="daytitle${t ? "" : " unplanned"}">${safe(t || "Nothing planned yet")}</span>${r.std ? `<span class="daystd">${stdHover(r.std)}</span>` : ""}</div><div class="daychips">${slides}${r.ids.filter(id => !REG[id].alt && kindOf(id) !== "key").map(chip).join("")}${todo}${moreBox(r.ids)}</div></div>`;
+      return `<div class="dayrow${r.summ ? " summ" : ""}" id="${safe(dayAnchor(key, r.day))}"><div class="daylabel">${label}<span class="daytitle${t ? "" : " unplanned"}">${safe(t || "Nothing planned yet")}</span>${r.std ? `<span class="daystd">${stdHover(r.std)}</span>` : ""}</div><div class="daychips">${slides}${r.ids.filter(id => !REG[id].alt && kindOf(id) !== "key" && kindOf(id) !== "video").map(chip).join("")}${todo}${vidRow(r.ids)}${moreBox(r.ids)}</div></div>`;
     }).join("");
     const deckLinks = [list.some(r => r.single) ? null : main, ...extra].filter(Boolean).map(p => `<a href="${safe(p.url)}" target="_blank" rel="noopener">${p === main ? "▶ Open the whole deck" : "Older version: " + safe(p.title) + (p.note ? " (" + safe(p.note) + ")" : "")}</a>`).join(" · ");
     const inner = list.length ? `<div class="daytable">${body}</div>${deckLinks ? `<div class="deckfoot">${deckLinks}</div>` : ""}` : `<p class="status">No slides for this unit yet.</p>`;
