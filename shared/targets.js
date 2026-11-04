@@ -810,7 +810,7 @@ window.CLASS_TARGETS = {
     "I can explain how countries work together through global institutions to respond to terrorism."
    ],
    "test": 1,
-   "g3": "I can analyze the effects of globalization."
+   "g3": "I can analyze terrorism and efforts to address it."
   },
   "1|5": {
    "t": [
