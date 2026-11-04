@@ -186,6 +186,7 @@
   };
   const CHECK_IDS = Object.keys(CHECKS);
   let locked = false;
+  const isTestT = () => !!(window.classIsTestT && window.classIsTestT());   // Test T. (teacher): no lockouts / writing rules
 
   function checkBox(box, id, evidenceHtml, frame, onSolved) {
     const C = CHECKS[id], c = chk(id);
@@ -218,7 +219,7 @@
             c.wrong++; if (window.classFirstTry) window.classFirstTry.wrong(); save();
             b.classList.add("nope"); d.classList.remove("shake"); void d.offsetWidth; d.classList.add("shake");
             locked = true; area.querySelectorAll("button").forEach(x => x.disabled = true);
-            let left = LOCK;
+            let left = isTestT() ? 0 : LOCK;
             const tick = () => {
               if (!document.body.contains(fb)) { locked = false; return; }
               fb.textContent = "Not quite. " + C.hint + " Try again in " + left + "…"; fb.className = "msg bad";
@@ -578,7 +579,7 @@
   async function send() {
     const msg = $("sendMsg");
     const plain = s => String(s || "").normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
-    for (const p of PROMPTS) {
+    for (const p of (isTestT() ? [] : PROMPTS)) {   // Test T. (teacher) skips the writing rules
       const box = $("w_" + p.id), v = (box.value || "").trim();
       if (window.classJunkStop) {
         const junk = window.classJunkStop(box, { starter: p.stem, source: "from today" });
@@ -654,4 +655,50 @@
     w.textContent = ""; w.appendChild(t); w.appendChild(document.createTextNode(" ")); w.appendChild(notMe); w.hidden = false;
   }
   render();
+
+  // ---------------- Test T. skip bar (shared/turnin.js) ----------------
+  // The teacher signed in as Test T. can jump to any screen (each step + its inner screens) or answer
+  // the check/decision on screen. The ending reads earlier decisions, so a jump first plays any skipped
+  // decision with the game's own card buttons (Test T. only).
+  try {
+    const SCREENS = [[1, 0, "1930 · Salt law"], [2, 0, "Dharasana: your line"], [2, 1, "Dharasana: the news"], [3, 0, "WWII: your move"],
+      [4, 0, "1945: Britain's books"], [4, 1, "1945: war drain"], [5, 0, "1947: Britain leaves"], [5, 1, "Partition map"], [5, 2, "Partition: the cost"],
+      [6, 0, "1950s: pick a side?"], [6, 1, "Nehru's plan"], [7, 0, "Other colonies: open files"], [7, 1, "Compare the files"], [8, 0, "Your ending"], [9, 0, "Radio speech + turn in"]];
+    const SCREEN_CHECK = { "2.1": "dPress", "4.0": "dWar", "5.1": "dMap", "6.1": "dNehru", "7.1": "dPaths" };
+    const SCREEN_PICK = { "1.0": "salt", "2.0": "line", "3.0": "war", "5.2": "help", "6.0": "bloc" };
+    const here = () => st.step + "." + (st.sub || 0);
+    const pickFirst = () => { const c = document.querySelector("#stepCard .dcard:not([disabled])"); if (c) c.click(); };
+    (window.classTestHooks = window.classTestHooks || []).push({
+      count: () => SCREENS.length,
+      index: () => {
+        const i = SCREENS.findIndex(x => x[0] === st.step && x[1] === (st.sub || 0));
+        if (i >= 0) return i;
+        const j = SCREENS.map(x => x[0]).lastIndexOf(st.step);
+        return Math.max(0, j >= 0 ? j : st.step < 1 ? 0 : SCREENS.length - 1);
+      },
+      label: i => SCREENS[i][2],
+      go: i => {
+        if (!st.name) st.name = "Test T.";
+        SCREENS.slice(0, i).forEach(([k, sub]) => {
+          const key = SCREEN_PICK[k + "." + sub];
+          if (key && st.picks[key] == null) { st.step = k; st.sub = sub; render(); pickFirst(); }
+        });
+        st.step = SCREENS[i][0]; st.sub = SCREENS[i][1]; st.mad = false;
+        save(); render(); window.scrollTo(0, 0);
+      },
+      solve: () => {
+        const c = SCREEN_CHECK[here()];
+        if (c && !chk(c).done) {
+          locked = false;
+          const b = [...document.querySelectorAll("#opts_" + c + " .opt")].find(x => x.textContent === CHECKS[c].options[0]);
+          if (b) b.click();
+          return;
+        }
+        const key = SCREEN_PICK[here()];
+        if (key && st.picks[key] == null) { pickFirst(); return; }
+        if (here() === "7.0" && !Object.keys(FILES).every(k => st.files[k])) { Object.keys(FILES).forEach(k => { st.files[k] = true; }); save(); render(); }
+      }
+    });
+    if (window.classTestSkip) window.classTestSkip.refresh();
+  } catch (e) {}
 })();

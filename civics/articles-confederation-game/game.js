@@ -30,6 +30,7 @@ function hud(changes) {
 /* ---------- read gate: buttons unlock after a few seconds ---------- */
 function gate(key, secs, sel, label) {
   clearTimeout(gateTimer);
+  if (window.classIsTestT && window.classIsTestT()) return;   // Test T. (teacher) skips read timers and wrong-answer locks
   if (!readyAt[key]) readyAt[key] = Date.now() + secs * 1000;
   const btns = [...document.querySelectorAll(sel)]; if (!btns.length) return;
   const note = document.createElement('p'); note.className = 'gate'; note.setAttribute('role', 'status');
@@ -196,7 +197,7 @@ function report() {
 }
 async function turnIn() {
   const st = $('#tiStatus'), ans = $('#exitAnswer').value.trim(), name = $('#studentName').value.trim(), btn = $('#turnInBtn');
-  const problem = A.checkWriting(ans, STARTER);
+  const problem = (window.classIsTestT && window.classIsTestT()) ? '' : A.checkWriting(ans, STARTER);   // Test T. skips the writing rules
   if (problem) { $('#wHelp').textContent = problem; $('#wHelp').className = 'sub warn'; $('#exitAnswer').focus(); return; }
   // Shared junk check (shared/turnin.js): idk, mashing, repeats, filler, copied question, bare keyword lists.
   { const j = window.classJunkStop && window.classJunkStop($('#exitAnswer'), { starter: STARTER, source: 'from the game' }); if (j) { $('#wHelp').textContent = j; $('#wHelp').className = 'sub'; return; } }
@@ -234,4 +235,42 @@ $('#restartBtn').onclick = () => {
 };
 const returning = s.started;
 render();
+
+/* ---------- Test T. skip bar (shared/turnin.js) ----------
+   The teacher signed in as Test T. can jump to any screen or answer the current check.
+   Screens: each crisis has 3 (move, result, check), then Convention, final check, ending/turn-in. */
+try {
+  const PH = ['choose', 'result', 'check'], N = A.ROUNDS.length * 3 + 3;
+  const fillPicks = upTo => { for (let k = 0; k < upTo; k++) { const r = A.ROUNDS[k]; if (!s.picks[r.id]) A.applyMove(s, r, r.moves[0]); } };
+  (window.classTestHooks = window.classTestHooks || []).push({
+    count: () => N,
+    index: () => Math.max(0, Math.min(N - 1, s.step < 5 ? s.step * 3 + Math.max(0, PH.indexOf(s.phase)) : s.step + 10)),
+    label: i => i < 15 ? 'Crisis ' + (Math.floor(i / 3) + 1) + ' · ' + ['Move', 'What happened', 'Check'][i % 3] : ['Convention', 'Final check', 'Ending + turn in'][i - 15],
+    go: i => {
+      s.started = true; $('#start').hidden = true;
+      if (i < 15) {
+        const k = Math.floor(i / 3), r = A.ROUNDS[k];
+        fillPicks(k); s.step = k; s.phase = PH[i % 3];
+        if (s.phase !== 'choose' && !s.picks[r.id]) A.applyMove(s, r, r.moves[0]);
+        if (s.phase === 'result') s.lastEffects = null;
+      } else { fillPicks(5); s.step = i - 10; }
+      Object.values(s.checks).concat(Object.values(s.fixes), [s.final]).forEach(rec => { if (rec) rec.wrongAt = 0; });
+      save(); render();
+    },
+    solve: () => {
+      if (s.step < 5) {
+        const r = A.ROUNDS[s.step];
+        if (s.phase === 'choose') { const b = document.querySelector('[data-move]'); if (b) { b.disabled = false; b.click(); } }
+        else if (s.phase === 'check') { const rec = checkRec(r.id); if (!rec.done) { rec.done = true; rec.wrongAt = 0; save(); render(); } }
+      } else if (s.step === 5) {
+        const cur = A.PROBLEMS.find(p => !(s.fixes[p.round] && s.fixes[p.round].done));
+        if (cur) { const rec = s.fixes[cur.round] || (s.fixes[cur.round] = { first: null, salt: 0, done: false, wrongAt: 0, tries: 0 }); rec.done = true; rec.wrongAt = 0; save(); const f = A.FIXES.find(x => x.id === cur.fix); convention('', '✓ Fixed: ' + esc(f.text) + ' (' + esc(f.cite) + ')'); }
+      } else if (s.step === 6) {
+        const rec = s.final || (s.final = { first: null, variant: 0, salt: 0, done: false, wrongAt: 0, tries: 0 });
+        if (!rec.done) { rec.done = true; rec.wrongAt = 0; save(); render(); }
+      }
+    }
+  });
+  if (window.classTestSkip) window.classTestSkip.refresh();
+} catch (e) {}
 if (returning) { const w = document.createElement('p'); w.className = 'welcome'; w.setAttribute('role', 'status'); w.innerHTML = 'Welcome back! You’re on <b>step ' + Math.min(s.step + 1, STEPS) + ' of ' + STEPS + '</b> (' + stepLabel() + ').'; $('#game').before(w); setTimeout(() => w.remove(), 9000); }

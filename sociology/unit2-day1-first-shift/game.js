@@ -17,6 +17,7 @@
   const READ = 3;   // seconds before story choices open
 
   const $ = id => document.getElementById(id);
+  const isT = () => { try { return !!(window.classIsTestT && window.classIsTestT()); } catch (e) { return false; } };   // Test T. (teacher preview)
   const esc = s => String(s == null ? "" : s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
   const shuffle = a => { const b = a.slice(); for (let i = b.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [b[i], b[j]] = [b[j], b[i]]; } return b; };
   const isEs = () => !!(window.SiteLang && window.SiteLang.isEs && window.SiteLang.isEs());
@@ -416,7 +417,7 @@
   }
   function readLock(btns, lockEl) {
     btns.forEach(b => b.disabled = true);
-    let left = READ;
+    let left = isT() ? 0 : READ;   // Test T. skips the reading wait
     const tick = () => {
       if (left <= 0) { btns.forEach(b => b.disabled = false); lockEl.textContent = ""; return; }
       lockEl.textContent = "⏳ " + left + "…";
@@ -641,7 +642,7 @@
           st.wrong[s.id] = (st.wrong[s.id] || 0) + 1; apply({ tips: -1 }, "You filled in a shift log wrong."); save(); hud();
           const clip = $("clip"); if (clip) { clip.classList.remove("shake"); void clip.offsetWidth; clip.classList.add("shake"); }
           locked = true; area.querySelectorAll("button").forEach(x => x.disabled = true);
-          let left = LOCK;
+          let left = isT() ? 0 : LOCK;   // Test T. skips the wrong-answer wait
           const tick = () => {
             if (left <= 0) { locked = false; fb.textContent = "Not quite. " + s.hint + " Try again."; fb.className = "msg"; draw(); return; }
             fb.textContent = "Not quite. " + s.hint + " The choices will mix up. Try again in " + left + "…"; fb.className = "msg bad";
@@ -705,6 +706,7 @@
   }
   const plain = s => String(s || "").normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
   function writingProblem(p) {
+    if (isT()) return "";   // Test T. (teacher) skips the writing rules
     const box = $("w_" + p.id), v = (box.value || "").trim();
     const es = isEs();
     if (window.classJunkStop) {
@@ -794,4 +796,39 @@
   // Read-only test hook (lets automated tests see progress). Students never see it.
   window.__firstShift = { get state() { return JSON.parse(JSON.stringify(st)); }, steps: STEPS.map(s => s.id), choice: (sid, lbl) => STEPS.find(s => s.id === sid).choices.findIndex(c => c.label === lbl) };
   render();
+
+  // ---------------- Test T. skip bar (shared/turnin.js) ----------------
+  // The teacher signed in as Test T. can jump to any screen or answer the current one.
+  try {
+    // Play one screen with the first choice (used by solve, and to fill skipped screens).
+    const tFill = s => {
+      if (s.type === "flip") CARDS.forEach(c => { st.flips[c.id] = true; });
+      else if (s.type === "check") st.done[s.id] = true;
+      else if (s.type === "decide" && !st.res[s.id]) choose(s, 0);
+      else if (s.type === "rush" && !st.res[s.id]) { st.sel[s.id] = s.cards.slice(0, s.bend); bend(s); }
+      else if (s.type === "juggle" && !st.res[s.id]) {
+        const j = st.jug, need = Math.min(3 + (j.asked === "yes" ? 2 : 0), s.tasks.length);
+        if (j.sel.length !== need) j.sel = s.tasks.slice(0, need).map(t => t.id);
+        let d = apply({ stress: 1 }, "Dinner rush hit all at once.");
+        if (j.askD) d = addFx(d, j.askD);
+        const missed = [];
+        s.tasks.forEach(t => { if (!j.sel.includes(t.id)) { missed.push(t.id); d = addFx(d, apply(t.fx, "Missed: " + t.text)); } });
+        st.res[s.id] = { missed, d, warn: warnLines() };
+      }
+      save();
+    };
+    (window.classTestHooks = window.classTestHooks || []).push({
+      count: () => TOTAL,
+      index: () => Math.max(0, Math.min(st.step, TOTAL - 1)),
+      label: i => STEPS[i].short || STEPS[i].title.replace(/[“”]/g, "") || STEPS[i].kicker,
+      go: i => {
+        if (!st.name) st.name = "Test T.";
+        // Walk the shift in order: unplayed screens before this one get the first choice.
+        for (let k = 0; k < i; k++) { st.step = k; enterStep(); tFill(STEPS[k]); }
+        st.step = i; enterStep(); locked = false; save(); render(); window.scrollTo(0, 0);
+      },
+      solve: () => { if (st.step < 0) return; locked = false; tFill(STEPS[st.step]); anim = true; render(); }
+    });
+    if (window.classTestSkip) window.classTestSkip.refresh();
+  } catch (e) {}
 })();

@@ -149,6 +149,8 @@ const TEACHER_TOOLS_URL = "https://script.google.com/macros/s/AKfycbwiVW6Cufw8Dq
   }
 
   function check(text, opts) {
+    // Test T. (the teacher checking a page) can type anything in any writing box.
+    try { if (window.classIsTestT && window.classIsTestT() && String(text || "").trim()) return { ok: true, reason: "test", message: "" }; } catch (e) {}
     const o = Object.assign({}, opts || {});
     const done = (reason, extra) => { Object.assign(o, extra || {}); return { ok: false, reason, message: msgFor(reason, o) }; };
     // "UN" (United Nations) is a real word here, not the Spanish "un".
@@ -1054,4 +1056,160 @@ const TEACHER_TOOLS_URL = "https://script.google.com/macros/s/AKfycbwiVW6Cufw8Dq
     const start = () => new MutationObserver(later).observe(document.body, { childList: true, subtree: true });
     if (document.body) start(); else document.addEventListener("DOMContentLoaded", start);
   }
+})();
+
+// =====================================================================
+//  TEST T. SKIP MODE (Fynn, 11/3/26: "Always let Test T. skip through everything
+//  so I can see the content.")
+//  Who counts as Test T.: this device was turned into the test student with the
+//  ?teacher-test link on the home page, OR the name signed in / typed is "Test T.".
+//  Real students never see any of this. Test T.'s turn-ins already show on the
+//  teacher dashboard with a TEST tag, so nothing counts for a real student.
+//
+//  Shows a small 🧪 bar in the bottom-left corner:
+//    ◀ Back · Skip ▶ · ✓ Answer it · Jump to… · ✍️ Fill writing · 🔓 Unlock all
+//  Games plug in by pushing a hook (load order doesn't matter):
+//    (window.classTestHooks = window.classTestHooks || []).push({
+//      count: () => number of screens, index: () => current screen (0-based),
+//      label: i => short name of screen i (optional),
+//      go: i => show screen i,  solve: () => answer the current screen correctly (optional)
+//    }); if (window.classTestSkip) window.classTestSkip.refresh();
+//  Pages with no hook still get ✍️ Fill writing and 🔓 Unlock all (turns on every locked
+//  button and shows every hidden part of the page).
+// =====================================================================
+(function () {
+  "use strict";
+  const TEST_RE = /^test\s*t\.?$/i;
+  function nameIsTest(n) { return TEST_RE.test(String(n || "").replace(/\s+/g, " ").trim()); }
+  function isTestT() {
+    try {
+      if (localStorage.getItem("hub-test-student") === "1") return true;
+      if (nameIsTest(localStorage.getItem("site-student-name"))) return true;
+      // A name typed into this page's name box (before it is saved anywhere).
+      const boxes = document.querySelectorAll('input[id*="name" i], input[name*="name" i], input[placeholder*="Jordan" i]');
+      for (const b of boxes) if (nameIsTest(b.value)) return true;
+    } catch (e) {}
+    return false;
+  }
+  window.classIsTestT = isTestT;
+  if (/teacher-submissions/.test(location.pathname)) return;   // the teacher dashboard isn't an activity
+
+  const hook = () => { const h = window.classTestHooks || []; return h.length ? h[h.length - 1] : null; };
+  const SAMPLE = "Test T. preview answer: the teacher is checking this page, so this sample sentence fills the box because it needs words.";
+  let bar = null, unlockOn = false, observer = null, open = true;
+  try { open = sessionStorage.getItem("testt-bar-closed") !== "1"; } catch (e) {}
+
+  function fire(el) { ["input", "change", "keyup"].forEach(t => { try { el.dispatchEvent(new Event(t, { bubbles: true })); } catch (e) {} }); }
+  function fillWriting() {
+    let n = 0;
+    document.querySelectorAll("textarea, input[type=text], input:not([type])").forEach(el => {
+      if (el.closest("#testt-bar")) return;
+      const id = (el.id + " " + el.name + " " + el.placeholder).toLowerCase();
+      if (/name|search|code|pin|jordan/.test(id)) return;
+      if (el.value.trim() || el.readOnly) return;
+      if (el.disabled) el.disabled = false;
+      el.value = el.tagName === "TEXTAREA" ? SAMPLE : "Test T. sample";
+      fire(el); n++;
+    });
+    say(n ? "Filled " + n + " writing box" + (n === 1 ? "" : "es") + "." : "No empty writing boxes on this screen.");
+  }
+  const NEVER_SHOW = "dialog, [role=dialog], .modal, .overlay, .fb-wrap, #flipBig, #welcome, .welcome, template, script, style";
+  function unlockPass() {
+    document.querySelectorAll("button[disabled], input[disabled], textarea[disabled], select[disabled]").forEach(el => {
+      if (el.closest("#testt-bar")) return;
+      el.disabled = false; el.dataset.testtOpened = "1";
+    });
+    document.querySelectorAll('[aria-disabled="true"]').forEach(el => { if (!el.closest("#testt-bar")) el.setAttribute("aria-disabled", "false"); });
+    document.querySelectorAll("[hidden]").forEach(el => {
+      if (el.closest("#testt-bar") || el.matches(NEVER_SHOW) || el.closest(NEVER_SHOW)) return;
+      el.hidden = false; el.dataset.testtOpened = "1";
+    });
+    document.querySelectorAll(".locked, .is-locked").forEach(el => el.classList.remove("locked", "is-locked"));
+  }
+  function setUnlock(on) {
+    unlockOn = on;
+    if (observer) { observer.disconnect(); observer = null; }
+    if (on) {
+      unlockPass();
+      let q = false;
+      observer = new MutationObserver(() => { if (q) return; q = true; setTimeout(() => { q = false; if (unlockOn) unlockPass(); }, 150); });
+      observer.observe(document.body, { subtree: true, childList: true, attributes: true, attributeFilter: ["disabled", "hidden", "aria-disabled"] });
+    }
+    draw();
+    say(on ? "Everything is unlocked on this page." : "Locks are back on for new screens.");
+  }
+  function say(t) { const m = bar && bar.querySelector(".tt-msg"); if (m) { m.textContent = t; clearTimeout(say.t); say.t = setTimeout(() => { m.textContent = ""; }, 3500); } }
+  function go(i) {
+    const h = hook(); if (!h) return;
+    const n = h.count(); i = Math.max(0, Math.min(n - 1, i));
+    try { h.go(i); } catch (e) { say("Couldn't jump there."); }
+    window.scrollTo(0, 0); setTimeout(draw, 60);
+  }
+  function solve() {
+    const h = hook();
+    if (h && h.solve) { try { h.solve(); say("Answered. The explanation shows now."); } catch (e) { say("Nothing to answer here."); } setTimeout(draw, 60); return; }
+    setUnlock(true);
+  }
+
+  function css() {
+    if (document.getElementById("testt-css")) return;
+    const s = document.createElement("style"); s.id = "testt-css";
+    s.textContent = "#testt-bar{position:fixed;left:10px;bottom:10px;z-index:100000;font:700 14px/1.2 system-ui,Segoe UI,Arial,sans-serif;color:#1c3f78;background:#eef4ff;border:2px solid #1c3f78;border-radius:12px;padding:6px 8px;box-shadow:0 6px 22px #0004;display:flex;flex-wrap:wrap;gap:5px;align-items:center;max-width:calc(100vw - 20px)}" +
+      "#testt-bar button,#testt-bar select{font:800 13px system-ui,Arial,sans-serif;border:1px solid #1c3f78;background:#fff;color:#1c3f78;border-radius:8px;padding:5px 8px;cursor:pointer}" +
+      "#testt-bar button.on{background:#1c3f78;color:#fff}#testt-bar select{max-width:190px}#testt-bar .tt-msg{font-weight:600;font-size:12px;color:#334;min-width:0}" +
+      "#testt-bar.closed{padding:4px 8px}@media print{#testt-bar{display:none}}";
+    document.head.appendChild(s);
+  }
+  function draw() {
+    if (!document.body) return;
+    const show = isTestT();
+    if (!show) { if (bar) { bar.remove(); bar = null; } return; }
+    css();
+    if (!bar) { bar = document.createElement("div"); bar.id = "testt-bar"; bar.setAttribute("role", "toolbar"); bar.setAttribute("aria-label", "Test T. skip tools"); document.body.appendChild(bar); }
+    if (!open) {
+      bar.className = "closed";
+      bar.innerHTML = '<button type="button" data-a="open" title="Open the Test T. skip tools">🧪 Test T.</button>';
+    } else {
+      const h = hook();
+      bar.className = "";
+      let html = '<span>🧪 Test T.</span>';
+      if (h) {
+        const n = h.count(), i = h.index();
+        html += '<button type="button" data-a="back"' + (i <= 0 ? " disabled" : "") + '>◀ Back</button>' +
+          '<button type="button" data-a="skip"' + (i >= n - 1 ? " disabled" : "") + '>Skip ▶</button>' +
+          (h.solve ? '<button type="button" data-a="solve">✓ Answer it</button>' : "") +
+          '<select data-a="jump" aria-label="Jump to a screen">' + Array.from({ length: n }, (_, k) => {
+            let l = ""; try { l = h.label ? h.label(k) : ""; } catch (e) {}
+            return '<option value="' + k + '"' + (k === i ? " selected" : "") + ">" + (k + 1) + " of " + n + (l ? " · " + String(l).replace(/[<>&"]/g, "").slice(0, 40) : "") + "</option>";
+          }).join("") + "</select>";
+      } else if (!document.querySelector("textarea, button, input")) {
+        html += '<span class="tt-msg">Nothing is locked on this page.</span>';
+      }
+      html += '<button type="button" data-a="fill">✍️ Fill writing</button>' +
+        '<button type="button" data-a="unlock" class="' + (unlockOn ? "on" : "") + '">' + (unlockOn ? "🔓 Unlocked" : "🔓 Unlock all") + "</button>" +
+        '<button type="button" data-a="close" title="Shrink this bar" aria-label="Shrink the Test T. bar">✕</button><span class="tt-msg" aria-live="polite"></span>';
+      bar.innerHTML = html;
+    }
+  }
+  document.addEventListener("click", e => {
+    const b = e.target.closest && e.target.closest("#testt-bar [data-a]"); if (!b || b.tagName === "SELECT") return;
+    const a = b.dataset.a, h = hook();
+    if (a === "open" || a === "close") { open = a === "open"; try { sessionStorage.setItem("testt-bar-closed", open ? "0" : "1"); } catch (x) {} draw(); return; }
+    if (a === "back" && h) go(h.index() - 1);
+    if (a === "skip" && h) go(h.index() + 1);
+    if (a === "solve") solve();
+    if (a === "fill") fillWriting();
+    if (a === "unlock") setUnlock(!unlockOn);
+  });
+  document.addEventListener("change", e => { const s = e.target.closest && e.target.closest('#testt-bar select[data-a="jump"]'); if (s) go(+s.value); });
+  // Redraw when the page changes screens or someone types "Test T." into a name box.
+  let last = "";
+  function tick() {
+    const h = hook(); let key = String(isTestT());
+    try { if (h) key += "|" + h.index() + "/" + h.count(); } catch (e) {}
+    if (key !== last) { last = key; draw(); }
+  }
+  window.classTestSkip = { refresh: () => { last = ""; tick(); }, isOn: isTestT };
+  const start = () => { tick(); setInterval(tick, 700); };
+  if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", start); else start();
 })();

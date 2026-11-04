@@ -28,6 +28,7 @@
   const GOAL = { riv: 3, fun: 5 };
 
   const $ = id => document.getElementById(id);
+  const isT = () => { try { return !!(window.classIsTestT && window.classIsTestT()); } catch (e) { return false; } };   // Test T. (teacher preview)
   const esc = s => String(s == null ? "" : s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
   const shuffle = a => { const b = a.slice(); for (let i = b.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [b[i], b[j]] = [b[j], b[i]]; } return b; };
 
@@ -366,7 +367,7 @@
        <p class="msg" id="lmsg" role="status" aria-live="polite"></p><div id="after"></div>`);
     const btns = [...document.querySelectorAll(".abcbtn")];
     btns.forEach(b => b.disabled = true);
-    setTimeout(() => btns.forEach(b => { if ($("abc")) b.disabled = false; }), d(4) * 1000);
+    setTimeout(() => btns.forEach(b => { if ($("abc")) b.disabled = false; }), isT() ? 0 : d(4) * 1000);
     btns.forEach(b => b.onclick = () => {
       btns.forEach(x => x.disabled = true);
       const x = b.dataset.x;
@@ -478,7 +479,7 @@
   let locked = false;
   function runLock(hint, msgEl, onDone, secs) {
     locked = true;
-    let left = secs;
+    let left = isT() ? 0 : secs;   // Test T. skips the wrong-answer wait
     const tick = () => {
       if (!document.body.contains(msgEl)) { locked = false; return; }
       msgEl.innerHTML = `💭 Not quite. ${esc(hint)} <span class="cd">${left}</span>`;
@@ -669,12 +670,13 @@
       const junk = window.classJunkStop(box, { starter: PROMPT.stem, source: "from today" });
       if (junk) { msg.textContent = junk; msg.className = "msg"; return; }
     }
-    if (v.length < PROMPT.min) return sayBad("Write a little more (1–2 full sentences).");
-    if (/_{2,}/.test(v)) return sayBad("Fill in the blanks (___) with your own words.");
+    const testT = isT();   // Test T. (teacher) skips the writing rules
+    if (!testT && v.length < PROMPT.min) return sayBad("Write a little more (1–2 full sentences).");
+    if (!testT && /_{2,}/.test(v)) return sayBad("Fill in the blanks (___) with your own words.");
     const stemWords = new Set(plain(PROMPT.stem).match(/[\p{L}']+/gu) || []);
     const freshWords = new Set((plain(v).match(/[\p{L}']{3,}/gu) || []).filter(w => !stemWords.has(w)));
-    if (freshWords.size < PROMPT.newWords) return sayBad("Add more of your own ideas. Use details from camp week.");
-    if (PROMPT.mustAll.some(g => !g.some(w => new RegExp("(^|[^\\p{L}])" + plain(w).replace(/[.*+?^${}()|[\]\\]/g, "\\$&"), "iu").test(plain(v))))) return sayBad(PROMPT.mustMsg);
+    if (!testT && freshWords.size < PROMPT.newWords) return sayBad("Add more of your own ideas. Use details from camp week.");
+    if (!testT && PROMPT.mustAll.some(g => !g.some(w => new RegExp("(^|[^\\p{L}])" + plain(w).replace(/[.*+?^${}()|[\]\\]/g, "\\$&"), "iu").test(plain(v))))) return sayBad(PROMPT.mustMsg);
     if (typeof window.classTurnIn !== "function") return sayBad("Turn-in isn't working right now. Keep this page open and tell your teacher.");
 
     const answers = { "Standard": STANDARD };
@@ -746,4 +748,44 @@
     w.appendChild(notMe); w.hidden = false;
   }
   render();
+
+  // ---------------- Test T. skip bar (shared/turnin.js) ----------------
+  // The teacher signed in as Test T. can jump to any screen or answer the current one.
+  try {
+    // Answer one screen the way a student could (used by solve, and to fill skipped screens).
+    const tFill = (s, rerender) => {
+      if (s.type === "line") {
+        while (st.line.length < ROUNDS.length) { const R = ROUNDS[st.line.length]; st.line.push(R.right); if (R.group !== R.right) applyFx({ voice: 1 }); }
+      } else if (s.type === "flip") {
+        if (!st.order || st.order.length !== 12) st.order = shuffle(["W", "W", "W", "W", "W", "W", "F", "F", "F", "F", "F", "F"]);
+        st.teams = st.order.slice(); doEntryFx(s, { riv: 1, fun: 1 });
+      } else if (s.type === "draft") {
+        if (s.entry && !st.applied[s.id]) { st.applied[s.id] = true; applyFx(s.entry); }
+        const got = st.picks[s.id] || [];
+        s.cards.forEach(c => {
+          if (got.length >= s.picks || got.includes(c.id) || !needMet(c)) return;
+          got.push(c.id); applyFx(c.fx);
+          if (s.id === "fri" && c.id === "rope") st.mixed = true;
+          if (s.id === "tue" && c.id === "hunt" && st.m.riv <= 2) st.mixed = true;
+        });
+        st.picks[s.id] = got;
+      } else if (s.type === "sort") {
+        s.tiles.forEach(t => { st.placed[t.id] = t.bin; }); st.done[s.id] = true;
+      } else if (s.type === "check") st.done[s.id] = true;
+      st.lockUntil = 0; save(); if (rerender) render();
+    };
+    (window.classTestHooks = window.classTestHooks || []).push({
+      count: () => TOTAL,
+      index: () => Math.max(0, Math.min(st.step, TOTAL - 1)),
+      label: i => STEPS[i].short || STEPS[i].kicker,
+      go: i => {
+        if (!st.name) st.name = "Test T.";
+        // Unplayed decisions before this screen get the first choice so later screens have data.
+        STEPS.slice(0, i).forEach(s => { if (["line", "flip", "draft"].includes(s.type)) tFill(s, false); });
+        st.step = i; st.lockUntil = 0; save(); render(); window.scrollTo(0, 0);
+      },
+      solve: () => { const s = STEPS[Math.min(st.step, TOTAL - 1)]; if (s && st.step >= 0) tFill(s, true); }
+    });
+    if (window.classTestSkip) window.classTestSkip.refresh();
+  } catch (e) {}
 })();

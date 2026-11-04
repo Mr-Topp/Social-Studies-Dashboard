@@ -447,7 +447,8 @@
   const plain = s => String(s || "").normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
   async function send(e) {
     const msg = $("sendMsg");
-    for (const p of PROMPTS) {
+    const testT = window.classIsTestT && window.classIsTestT();   // Test T. (teacher) skips the writing rules
+    for (const p of (testT ? [] : PROMPTS)) {
       const n = PROMPTS.indexOf(p) + 1;
       const box = $("w_" + p.id), v = (box.value || "").trim();
       const bad = t => { msg.textContent = t; msg.className = "msg bad"; box.focus(); };
@@ -528,4 +529,21 @@
     w.appendChild(notMe); w.hidden = false;
   }
   render();
+
+  // ---------------- Test T. skip bar (shared/turnin.js) ----------------
+  // The teacher signed in as Test T. can jump to any screen or answer the current check.
+  try {
+    (window.classTestHooks = window.classTestHooks || []).push({
+      count: () => TOTAL,
+      index: () => Math.max(0, Math.min(st.step, TOTAL - 1)),
+      label: i => STEPS[i].short || STEPS[i].kicker || STEPS[i].type,
+      go: i => { if (!st.name) st.name = "Test T."; st.step = i; st.lockUntil = 0; save(); render(); },
+      solve: () => {
+        const s = STEPS[Math.min(st.step, TOTAL - 1)]; if (!s) return;
+        if (s.type === "check" && !st.done[s.id]) { st.done[s.id] = true; st.lockUntil = 0; save(); render(); }
+        else if (s.type === "event" && st.picks[s.id] == null) { const b = document.querySelector("#dbox .dcard"); if (b) b.click(); }
+      }
+    });
+    if (window.classTestSkip) window.classTestSkip.refresh();
+  } catch (e) {}
 })();

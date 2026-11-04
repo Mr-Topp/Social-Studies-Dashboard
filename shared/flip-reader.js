@@ -17,6 +17,8 @@ const partDone=i=>checkDone(i)&&answer(i).trim()!=="";
 // Junk writing ("idk", blanks left as ___) is caught before "Next part", not only at Turn in (Fynn, 11-03).
 const junk=i=>{const a=$("answer"+i);return a&&window.classJunkStop&&a.value.trim()?window.classJunkStop(a,{quiet:true}):""};
 let cur=1,timer=null,lockTimer=null,locked=false;
+// Test T. (the teacher checking the page) can flip anywhere, no read timer, no locks (Fynn, 11-03).
+const TT=()=>!!(window.classIsTestT&&window.classIsTestT());
 
 /* ---------- build the right-hand cards ---------- */
 const qcol=$("flipCards");
@@ -55,6 +57,7 @@ function pick(p,t){const c=p.check,f=$("fb"+p.n);ls.set("tries"+p.n,String(tries
 
 /* ---------- page flow ---------- */
 function blocker(pg){ // why you can't leave page pg yet ("" = free to go on)
+  if(TT())return "";
   const p=partOf(pg);
   if(!read.has(pg))return "read";
   if(p.check.page===pg&&!checkDone(p.n))return "check";
@@ -69,6 +72,7 @@ function show(pg,scroll){
   if(cur<N){const pre=new Image();pre.src=img(cur+1)}
   parts.forEach(x=>{$("q"+x.n).hidden=x.n!==p.n});
   clearInterval(timer);
+  if(!read.has(cur)&&TT()){read.add(cur);ls.set("read",JSON.stringify([...read]))}
   if(!read.has(cur)){let left=C.readSeconds;
     const tick=()=>{$("flipTimer").textContent="Read this page · "+left+" sec"};tick();
     timer=setInterval(()=>{left--;if(left<=0){clearInterval(timer);read.add(cur);ls.set("read",JSON.stringify([...read]));$("flipTimer").textContent="";refresh()}else tick()},1000)}
@@ -82,13 +86,13 @@ function refresh(){
   $("flipPos").textContent="Reader page "+cur+" of "+N;
   $("flipPart").textContent="Part "+p.n+" · "+p.short;
   // check visibility: on its page, or any time after it's done / passed
-  const showCheck=cur>=c.page||checkDone(p.n);
+  const showCheck=cur>=c.page||checkDone(p.n)||TT();
   $("check"+p.n).hidden=!showCheck;
   $("wait"+p.n).textContent=showCheck?"":"Read the pages in order. This part's reading check is on reader page "+c.page+".";
   $("wait"+p.n).hidden=showCheck;
   const a=$("answer"+p.n),done=checkDone(p.n);
-  a.disabled=!done;const sb=$("q"+p.n).querySelector(".stemBtn");if(sb)sb.disabled=!done;$("unlock"+p.n).textContent=done?"":C.lockedText;
-  $("write"+p.n).hidden=!(done||cur===p.to);
+  a.disabled=!done&&!TT();const sb=$("q"+p.n).querySelector(".stemBtn");if(sb)sb.disabled=!done;$("unlock"+p.n).textContent=done?"":C.lockedText;
+  $("write"+p.n).hidden=!(done||cur===p.to||TT());
   // nav
   // "Next page" only shows while this part still has more pages to read.
   // On a part's last (or only) page, the way forward is "Next part" under the question.
@@ -122,7 +126,8 @@ $("clearBtn").addEventListener("click",()=>{if(!confirm(C.clearConfirm))return;
   ["studentName","read","at",...parts.flatMap(p=>["answer"+p.n,"check"+p.n,"tries"+p.n])].forEach(k=>ls.del(k));(C.clearExtra||[]).forEach(k=>ls.del(k));location.reload()});
 $("submitBtn").addEventListener("click",async()=>{const status=$("submitStatus"),btn=$("submitBtn");status.className="status";
   const st={name:$("studentName").value.trim(),parts,checkDone,tries,answer:i=>answer(i).trim()};
-  const err=C.validate(st);if(err){status.textContent=err.text;status.classList.add("error");if(err.focus)$(err.focus).focus();if(err.part){const p=parts[err.part-1];if(p.from<=maxOpen())show(Math.min(Math.max(p.check.page,p.from),maxOpen()),true)}return}
+  if(TT()&&!st.name)st.name="Test T.";
+  const err=TT()?null:C.validate(st);if(err){status.textContent=err.text;status.classList.add("error");if(err.focus)$(err.focus).focus();if(err.part){const p=parts[err.part-1];if(p.from<=maxOpen())show(Math.min(Math.max(p.check.page,p.from),maxOpen()),true)}return}
   btn.disabled=true;status.textContent="Sending your work…";
   try{const r=await classTurnIn(C.api,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({studentName:st.name,assignmentId:C.assignmentId,answers:C.buildAnswers(st)})});
     const res=await r.json();if(!r.ok)throw new Error(res.error||"Could not send your work.");
@@ -135,4 +140,11 @@ const any=read.size||parts.some(p=>checkDone(p.n)||answer(p.n).trim());
 if(any){let w=$("welcome");if(!w){w=document.createElement("p");w.className="welcome";w.id="welcome";w.setAttribute("role","status");document.querySelector("main").prepend(w)}w.style.display="block";
   w.textContent=parts.every(p=>partDone(p.n))?"Welcome back — every part is done. Check your name and press Turn in.":"Welcome back — your work was saved. You're on reader page "+startAt+" of "+N+"."}
 show(startAt,false);
+/* ---------- Test T. skip bar (shared/turnin.js) ---------- */
+try{(window.classTestHooks=window.classTestHooks||[]).push({
+  count:()=>N,index:()=>cur-1,
+  label:i=>{const p=partOf(i+1);return "Part "+p.n+" · "+p.short},
+  go:i=>show(i+1,true),
+  solve:()=>{const p=partOf(cur);ls.set("check"+p.n,"1");locked=false;clearInterval(lockTimer);renderChoices(p);refresh()}
+});if(window.classTestSkip)window.classTestSkip.refresh()}catch(e){}
 })();

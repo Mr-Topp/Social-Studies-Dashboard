@@ -23,6 +23,7 @@
   const GOAL = { home: 7, nbr: 6 };
 
   const $ = id => document.getElementById(id);
+  const isT = () => { try { return !!(window.classIsTestT && window.classIsTestT()); } catch (e) { return false; } };   // Test T. (teacher preview)
   const esc = s => String(s == null ? "" : s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
   const shuffle = a => { const b = a.slice(); for (let i = b.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [b[i], b[j]] = [b[j], b[i]]; } return b; };
   const clamp = n => Math.max(0, Math.min(10, n));
@@ -332,7 +333,7 @@
   let locked = false;
   function runLock(text, msgEl, onDone, secs) {
     locked = true;
-    let left = secs;
+    let left = isT() ? 0 : secs;   // Test T. skips the wrong-answer wait
     const tick = () => {
       if (!document.body.contains(msgEl)) { locked = false; return; }
       msgEl.innerHTML = `💭 Not quite. ${esc(text)} <span class="cd">${left}</span>`;
@@ -475,7 +476,8 @@
   const plain = s => String(s || "").normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
   async function send(e) {
     const msg = $("sendMsg");
-    for (const p of PROMPTS) {
+    const testT = isT();   // Test T. (teacher) skips the writing rules
+    for (const p of (testT ? [] : PROMPTS)) {
       const n = PROMPTS.indexOf(p) + 1;
       const box = $("w_" + p.id), v = (box.value || "").trim();
       const bad = t => { msg.textContent = t; msg.className = "msg bad"; box.focus(); };
@@ -558,4 +560,32 @@
     w.appendChild(notMe); w.hidden = false;
   }
   render();
+
+  // ---------------- Test T. skip bar (shared/turnin.js) ----------------
+  // The teacher signed in as Test T. can jump to any screen or answer the current one.
+  try {
+    (window.classTestHooks = window.classTestHooks || []).push({
+      count: () => TOTAL,
+      index: () => Math.max(0, Math.min(st.step, TOTAL - 1)),
+      label: i => STEPS[i].short || STEPS[i].kicker,
+      go: i => {
+        if (!st.name) st.name = "Test T.";
+        // Unplayed family choices before this screen get the first choice so the ending has causes.
+        STEPS.slice(0, i).forEach(s => {
+          if (s.type === "event" && st.picks[s.id] == null) {
+            const c = s.cards[0]; st.picks[s.id] = 0;
+            st.fx.home = clamp(st.fx.home + (c.fx.home || 0)); st.fx.nbr = clamp(st.fx.nbr + (c.fx.nbr || 0));
+          }
+        });
+        st.step = i; st.lockUntil = 0; save(); render(); window.scrollTo(0, 0);
+      },
+      solve: () => {
+        if (st.step < 0) return;
+        const s = STEPS[Math.min(st.step, TOTAL - 1)];
+        if (s.type === "check" && !st.done[s.id]) { st.done[s.id] = true; st.lockUntil = 0; save(); render(); }
+        else if (s.type === "event" && st.picks[s.id] == null) { const b = document.querySelector("#dbox .dcard"); if (b) b.click(); }
+      }
+    });
+    if (window.classTestSkip) window.classTestSkip.refresh();
+  } catch (e) {}
 })();

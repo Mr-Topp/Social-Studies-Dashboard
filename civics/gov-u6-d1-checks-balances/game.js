@@ -17,6 +17,7 @@
   const STANDARD = "SS.9-12.Gov.4, SS.9-12.Gov.9";
   const OLD_API = "https://fynn-class-assignment-submissions-20261024.neotboy.chatgpt.site/api/submit";
   const LOCK = 5;
+  const isTestT = () => !!(window.classIsTestT && window.classIsTestT());   // Test T. (teacher) skips locks and writing rules
   const START = { C: 5, P: 5, J: 5 };
 
   const $ = id => document.getElementById(id);
@@ -345,7 +346,7 @@
     const foe = ROUNDS[step.r].foe;
     let grabbed = false;
     if (!st.stall[step.id]) { st.stall[step.id] = true; st.fx[foe] = clamp(st.fx[foe] + 1); grabbed = true; }
-    st.lockUntil = Date.now() + LOCK * 1000;
+    st.lockUntil = Date.now() + (isTestT() ? 0 : LOCK) * 1000;
     st.lockMsg = why;
     save(); moved(before);
     stamp(grabbed ? "⏳ STALLED · " + BR[foe].icon + " +1" : "⏳ STALLED", "bad");
@@ -383,7 +384,7 @@
     const why = (step.miss && step.miss[o.n - 1]) || step.hint;
     markWrong(step, why);
     $("replies").querySelectorAll("button").forEach(x => x.disabled = true);
-    runLock(why, $("qmsg"), () => draw(step), LOCK);
+    runLock(why, $("qmsg"), () => draw(step), isTestT() ? 0 : LOCK);
   }
   function solved(step, quiet) {
     const r = $("replies"); if (r) r.outerHTML = `<div class="sent"><span>✓ ${esc(step.options[0])}</span></div>`;
@@ -474,7 +475,7 @@
   const plain = s => String(s || "").normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
   async function send(e) {
     const msg = $("sendMsg");
-    for (const p of PROMPTS) {
+    for (const p of (isTestT() ? [] : PROMPTS)) {
       const n = PROMPTS.indexOf(p) + 1;
       const box = $("w_" + p.id), v = (box.value || "").trim();
       const bad = t => { msg.textContent = t; msg.className = "msg bad"; box.focus(); };
@@ -556,4 +557,21 @@
     w.appendChild(notMe); w.hidden = false;
   }
   render();
+
+  // ---------------- Test T. skip bar (shared/turnin.js) ----------------
+  // The teacher signed in as Test T. can jump to any screen or answer the current check.
+  try {
+    (window.classTestHooks = window.classTestHooks || []).push({
+      count: () => TOTAL,
+      index: () => Math.max(0, Math.min(st.step, TOTAL - 1)),
+      label: i => STEPS[i].short || STEPS[i].kicker || STEPS[i].type,
+      go: i => { if (!st.name) st.name = "Test T."; st.step = i; st.lockUntil = 0; save(); render(); },
+      solve: () => {
+        const s = STEPS[Math.min(st.step, TOTAL - 1)]; if (!s) return;
+        if (s.type === "check" && !st.done[s.id]) { st.done[s.id] = true; st.lockUntil = 0; save(); render(); }
+        else if (s.type === "event" && st.picks[s.id] == null) { const b = document.querySelector("#dbox .dcard"); if (b) b.click(); }
+      }
+    });
+    if (window.classTestSkip) window.classTestSkip.refresh();
+  } catch (e) {}
 })();

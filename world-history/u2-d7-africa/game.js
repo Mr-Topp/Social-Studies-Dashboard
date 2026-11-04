@@ -42,6 +42,7 @@
   let flash = {};        // meter changes to glow on the next render
   let slamNext = false;  // stamp animation on the next result render
   let locked = false;
+  const isTestT = () => !!(window.classIsTestT && window.classIsTestT());   // Test T. (teacher): no lockouts / writing rules
 
   // ---------------- Steps ----------------
   const STEP = [null,
@@ -262,7 +263,7 @@
           c.wrong++; if (window.classFirstTry) window.classFirstTry.wrong(); save();
           wrap.classList.remove("spark"); void wrap.offsetWidth; wrap.classList.add("spark");
           locked = true; area.querySelectorAll("button").forEach(x => { x.disabled = true; });
-          let left = LOCK;
+          let left = isTestT() ? 0 : LOCK;
           const tick = () => {
             if (!document.body.contains(wrap)) { locked = false; return; }
             fb.className = "msg bad";
@@ -597,7 +598,7 @@
   async function send() {
     const msg = $("sendMsg");
     const plain = s => String(s || "").normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
-    for (const p of PROMPTS) {
+    for (const p of (isTestT() ? [] : PROMPTS)) {   // Test T. (teacher) skips the writing rules
       const box = $("w_" + p.id), v = (box.value || "").trim();
       if (window.classJunkStop) {
         const junk = window.classJunkStop(box, { starter: p.stem, source: "from today" });
@@ -690,4 +691,60 @@
     };
   }
   render();
+
+  // ---------------- Test T. skip bar (shared/turnin.js) ----------------
+  // The teacher signed in as Test T. can jump to any screen or answer what's on screen.
+  // Screens: each decision year = "decide" (cards, then the result) + "what really happened" (REAL cards + check);
+  // Freedom Day = flag, wave + map check, midnight; then the ending and the memo.
+  // Later years read earlier picks, so a jump first plays any skipped pick with the game's own card buttons (Test T. only).
+  try {
+    const SCREENS = [];
+    for (let k = 1; k <= 9; k++) {
+      if (k === 3) SCREENS.push([3, 0, "1960 · Design the flag"], [3, 1, "1960 · Freedom wave + map check"], [3, 2, "1960 · Midnight"]);
+      else SCREENS.push([k, 0, STEP[k].t + ": decide"], [k, 2, STEP[k].t + ": what really happened"]);
+    }
+    SCREENS.push([10, 0, STEP[10].t], [11, 0, STEP[11].t]);
+    const pickFirst = () => { const c = document.querySelector("#deck .dcard:not([disabled])"); if (c) c.click(); };
+    const clickRight = id => {
+      locked = false;
+      const b = [...document.querySelectorAll("#check .opt")].find(x => x.textContent === CHECKS[id].options[0]);
+      if (b) b.click();
+    };
+    (window.classTestHooks = window.classTestHooks || []).push({
+      count: () => SCREENS.length,
+      index: () => {
+        const ph = st.step === 3 ? (st.phase || 0) : (st.phase === 2 ? 2 : 0);
+        const i = SCREENS.findIndex(x => x[0] === st.step && x[1] === ph);
+        return i >= 0 ? i : st.step < 1 ? 0 : SCREENS.length - 1;
+      },
+      label: i => SCREENS[i][2],
+      go: i => {
+        if (!st.name) st.name = "Test T.";
+        const [ts, tp] = SCREENS[i];
+        R.STEPS_WITH_PICKS.forEach(k => {
+          if ((k < ts || (k === ts && tp >= 1)) && !st.g.picks[k]) { onEnter(k); st.step = k; st.phase = 0; render(); pickFirst(); }
+        });
+        if (ts > 3 || (ts === 3 && tp >= 1)) { if (st.flag.pal < 0) st.flag.pal = 0; if (st.flag.em < 0) st.flag.em = 0; }
+        for (let k = 1; k <= Math.min(ts, 9); k++) onEnter(k);
+        st.step = ts; st.phase = tp; slamNext = false;
+        save(); render(); window.scrollTo(0, 0);
+      },
+      solve: () => {
+        const s = st.step, e = E[s];
+        if (s === 3) {
+          if (st.phase === 0 && (st.flag.pal < 0 || st.flag.em < 0)) { if (st.flag.pal < 0) st.flag.pal = 0; if (st.flag.em < 0) st.flag.em = 0; save(); render(); }
+          else if (st.phase === 1 && !st.waved) { st.waved = true; save(); render(); }
+          else if (st.phase === 1 && !chk("c_map").done) clickRight("c_map");
+          return;
+        }
+        if (!e) return;
+        if (st.phase === 0 && !st.g.picks[s]) { pickFirst(); return; }
+        if (st.phase === 2) {
+          if (e.flip && e.reals.some(id => !st.flips[id])) { e.reals.forEach(id => { st.flips[id] = true; }); save(); render(); return; }
+          if (e.check && !chk(e.check).done) clickRight(e.check);
+        }
+      }
+    });
+    if (window.classTestSkip) window.classTestSkip.refresh();
+  } catch (e) {}
 })();

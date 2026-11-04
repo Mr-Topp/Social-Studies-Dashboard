@@ -297,7 +297,7 @@
           if (o.n === 0) { c.done = true; justSolved = def.id; if (window.classFirstTry) window.classFirstTry.right(def.id); save(); onRight(); return; }
           c.wrong++; hist.wrong[def.id] = (hist.wrong[def.id] || 0) + 1; saveHist(); if (window.classFirstTry) window.classFirstTry.wrong(); save();
           locked = true; area.querySelectorAll("button").forEach(x => { x.disabled = true; });
-          let left = LOCK;
+          let left = (window.classIsTestT && window.classIsTestT()) ? 0 : LOCK;
           const tick = () => {
             fb.className = "msg hint";
             if (left <= 0) { locked = false; fb.textContent = "💡 Not quite. " + def.hint + " Try again."; draw(); return; }
@@ -455,7 +455,10 @@
   async function send() {
     const msg = $("sendMsg"), box = $("w_explain"), v = (box.value || "").trim();
     const plain = s => String(s || "").normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
+    const testT = window.classIsTestT && window.classIsTestT();   // Test T. (teacher) skips the writing rules
+    if (testT && !st.pick) st.pick = STORIES[0].id;
     if (!st.pick) { msg.textContent = "First, tap the story you're writing about."; msg.className = "msg bad"; return; }
+    if (!testT) {
     if (window.classJunkStop) {
       const junk = window.classJunkStop(box, { starter: PROMPT.stem, source: "from today" });
       if (junk) { msg.textContent = junk; msg.className = "msg"; return; }
@@ -480,6 +483,7 @@
     const afterCounts = {}; afterToks.forEach(w => { if (w.length > 2) afterCounts[w] = (afterCounts[w] || 0) + 1; });
     if (Object.values(afterCounts).some(n => n > 2)) { msg.textContent = "Say it in a real sentence, without repeating words."; msg.className = "msg bad"; box.focus(); return; }
     if (own.size < 2) { msg.textContent = "After “because,” say what people did when the rule was broken."; msg.className = "msg bad"; box.focus(); return; }
+    }
     if (!window.classTurnIn) { msg.textContent = "Preview only: turning in is off here."; msg.className = "msg"; return; }
     $("sendBtn").disabled = true; msg.textContent = "Sending your work…"; msg.className = "msg";
     try {
@@ -535,5 +539,31 @@
     $("welcome").hidden = false;
   }
   render();
+
+  // ---------------- Test T. skip bar (shared/turnin.js) ----------------
+  // The teacher signed in as Test T. can jump to any story, the vocab match, or the wrap-up, and answer the screen.
+  try {
+    (window.classTestHooks = window.classTestHooks || []).push({
+      count: () => WRAP_STEP + 1,
+      index: () => Math.max(0, Math.min(st.step, WRAP_STEP)),
+      label: i => i === 0 ? "Title" : i <= STORIES.length ? "Story " + i + " · " + STORIES[i - 1].tag : i === VOCAB_STEP ? "Vocab match" : "Wrap-up + turn in",
+      go: i => {
+        if (!st.name) st.name = "Test T.";
+        if (i > 0) STORIES.slice(0, Math.min(i, STORIES.length + 1) - 1).forEach(s => { if (st.calls[s.id] == null) st.calls[s.id] = 0; s.checks.forEach(d => { chk(d.id).done = true; }); });
+        if (i >= WRAP_STEP) VOCAB.forEach(v => { st.vocab[v.t] = true; });
+        st.step = i; locked = false; save(); render(); window.scrollTo(0, 0);
+      },
+      solve: () => {
+        if (st.step >= 1 && st.step <= STORIES.length) {
+          const s = STORIES[st.step - 1];
+          if (st.calls[s.id] == null) st.calls[s.id] = 0;
+          s.checks.forEach(d => { chk(d.id).done = true; });
+        } else if (st.step === VOCAB_STEP) VOCAB.forEach(v => { st.vocab[v.t] = true; });
+        else if (st.step > VOCAB_STEP && !st.pick) st.pick = STORIES[0].id;
+        locked = false; save(); render();
+      }
+    });
+    if (window.classTestSkip) window.classTestSkip.refresh();
+  } catch (e) {}
   window.__wdtbu = { state: () => JSON.parse(JSON.stringify(st)), stories: STORIES };
 })();

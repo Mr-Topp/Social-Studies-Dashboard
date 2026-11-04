@@ -205,7 +205,7 @@
           wrap.classList.remove("spark"); void wrap.offsetWidth; wrap.classList.add("spark");
           locked = true; area.querySelectorAll("button").forEach(x => x.disabled = true);
           if (fb.scrollIntoView) fb.scrollIntoView({ block: "nearest", behavior: "smooth" });
-          let left = LOCK;
+          let left = (window.classIsTestT && window.classIsTestT()) ? 0 : LOCK;   // Test T.: no wait
           const tick = () => {
             fb.className = "msg bad";
             if (left <= 0) { locked = false; fb.textContent = "Not quite. " + def.hint + " Try again."; draw(); return; }
@@ -370,7 +370,7 @@
       taunt.textContent = TAUNTS[(c.wrong - 1) % TAUNTS.length]; taunt.hidden = false;
       locked = true; draw();
       setTimeout(() => fb.scrollIntoView && fb.scrollIntoView({ block: "nearest", behavior: "smooth" }), 30);
-      let left = LOCK;
+      let left = (window.classIsTestT && window.classIsTestT()) ? 0 : LOCK;   // Test T.: no wait
       const hint = "Look at your hypothesis. What are you changing between groups (IV)? What result do you check (DV)?";
       const tick = () => {
         fb.className = "msg bad";
@@ -584,7 +584,8 @@
   async function send() {
     const msg = $("sendMsg");
     const plain = s => String(s || "").normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
-    for (const p of PROMPTS) {
+    const testT = window.classIsTestT && window.classIsTestT();   // Test T. (teacher) skips the writing rules
+    for (const p of (testT ? [] : PROMPTS)) {
       const box = $("w_" + p.id), v = (box.value || "").trim();
       if (window.classJunkStop) {
         const js = "junkStarter" in p ? p.junkStarter : p.stem;
@@ -660,4 +661,40 @@
   if (st.step >= 1 && $("welcome")) { $("welcome").textContent = "Welcome back, " + st.name + " — you're on " + (st.step > TOTAL ? "the last screen" : "step " + st.step + " of " + TOTAL) + "."; $("welcome").hidden = false; }
   render();
   window.__pil = { state: () => JSON.parse(JSON.stringify(st)) };
+
+  // ---------------- Test T. skip bar (shared/turnin.js) ----------------
+  // The teacher signed in as Test T. can jump to any screen or answer the current check.
+  try {
+    const TLABEL = ["Title", "Ask", "Research", "Predict", "Collect", "Analyze", "Conclude", "Ending", "Lab report + turn in"];
+    const tDone = id => { const c = chk(id); if (c.done) return false; c.done = true; justSolved = id; save(); render(); return true; };
+    (window.classTestHooks = window.classTestHooks || []).push({
+      count: () => TLABEL.length,
+      index: () => st.step >= 7 ? (st.atReport ? 8 : 7) : Math.max(0, st.step),
+      label: i => TLABEL[i],
+      go: i => {
+        if (!st.name) st.name = "Test T.";
+        // safe defaults (first choice) for anything the jump skips past
+        if (i >= 2 && !st.topic) st.topic = TOPIC_ORDER[0];
+        if (i >= 5 && !st.built) { st.measure = st.draft.measure || "leading"; st.sample = st.draft.sample || "friends"; st.built = true; }
+        if (i >= 5 && st.runs < 2) st.runs = 2;
+        if (i >= 6 && !st.hyp) st.hyp = "more";
+        if (i >= 6 && !st.review) st.review = flaw() === "none" ? "third" : flaw();
+        if (i >= 7 && !st.headline) st.headline = "bold";
+        wire = { pick: null, iv: null, dv: null, order: null };
+        st.step = Math.min(i, 7); st.atReport = i === 8; save(); render(); window.scrollTo(0, 0);
+      },
+      solve: () => {
+        const n = st.step, click = sel => { const b = document.querySelector(sel); if (b) b.click(); };
+        if (n === 1) { if (!st.topic) click(".topics .topic"); else tDone("q_question"); }
+        else if (n === 3) { if (!st.hyp) { st.hyp = "more"; save(); render(); } else tDone("q_vars"); }
+        else if (n === 4) {
+          if (!st.built) { st.measure = st.draft.measure || "leading"; st.sample = st.draft.sample || "friends"; st.built = true; save(); render(); }
+          else if (st.runs < 2) { st.runs = 2; save(); render(); }
+        }
+        else if (n === 5) { if (!tDone("q_review") && st.review !== "third" && !st.fix) click(".fix .dcard"); }
+        else if (n === 6) { if (!tDone("q_support") && !tDone("q_cause") && !st.headline) click(".headline .dcard"); }
+      }
+    });
+    if (window.classTestSkip) window.classTestSkip.refresh();
+  } catch (e) {}
 })();

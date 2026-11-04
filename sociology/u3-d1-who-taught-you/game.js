@@ -261,7 +261,7 @@
   }
   function readLock(btns, lockEl, after) {
     btns.forEach(b => b.disabled = true);
-    let left = READ;
+    let left = (window.classIsTestT && window.classIsTestT()) ? 0 : READ;   // Test T.: no read wait
     const tick = () => {
       if (left <= 0) { btns.forEach(b => b.disabled = false); if (lockEl) lockEl.textContent = ""; if (after) after(); return; }
       if (lockEl) lockEl.textContent = "⏳ " + left;
@@ -481,7 +481,7 @@
           save(); hud();
           const ev = $("evwrap"); if (ev) { ev.classList.remove("shake"); void ev.offsetWidth; ev.classList.add("shake"); }
           locked = true; area.querySelectorAll("button").forEach(x => x.disabled = true);
-          let left = LOCK;
+          let left = (window.classIsTestT && window.classIsTestT()) ? 0 : LOCK;   // Test T.: no wait
           const tick = () => {
             if (left <= 0) { locked = false; fb.textContent = s.hint; fb.className = "msg"; draw(false); return; }
             fb.textContent = "😏 Gene thinks he's winning. " + s.hint + " New order in " + left + "…"; fb.className = "msg bad";
@@ -559,6 +559,7 @@
   }
   const plain = s => String(s || "").normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
   function writingProblem(p) {
+    if (window.classIsTestT && window.classIsTestT()) return "";   // Test T. (teacher) skips the writing rules
     const box = $("w_" + p.id), v = (box.value || "").trim();
     const es = isEs();
     if (window.classJunkStop) {
@@ -660,4 +661,57 @@
   // Read-only test hook (lets automated tests see progress). Students never see it.
   window.__raiseRemi = { get state() { return JSON.parse(JSON.stringify(st)); }, steps: STEPS.map(s => s.id) };
   render();
+
+  // ---------------- Test T. skip bar (shared/turnin.js) ----------------
+  // The teacher signed in as Test T. can jump to any screen or answer the current check.
+  try {
+    // Spend a stage's tokens on the first open cards (Test T. only).
+    const tAutoPlace = s => {
+      st.snap = st.snap || {}; if (!st.snap[s.id]) st.snap[s.id] = Object.assign({}, st.sk); st.snapAt = st.snap[s.id];
+      const slots = slotsFor(s);
+      const picked = st.place[s.id] = (st.place[s.id] || []).filter(id => slots.some(x => x.id === id));
+      let left = s.tokens - picked.reduce((n, id) => n + costOf(slots.find(x => x.id === id)), 0);
+      slots.forEach(x => { if (left > 0 && !picked.includes(x.id) && !lockReason(x) && costOf(x) <= left) { picked.push(x.id); left -= costOf(x); } });
+    };
+    const tGrowQuiet = s => {
+      const slots = slotsFor(s);
+      (st.place[s.id] || []).forEach(id => { const x = slots.find(y => y.id === id); if (!x) return; if (x.gene) hypeAdd(2); addSk(x.fx, s.id); });
+      st.gains[s.id] = st.gains[s.id] || {}; st.grown[s.id] = true;
+    };
+    const tChooseQuiet = (s, i) => { const c = s.choices[i]; st.ev[s.id] = i; addSk(c.fx, s.id); if (c.badge) st.flags[c.badge] = true; if (c.path) st.flags.path = c.path; };
+    const endAt = STEPS.findIndex(s => s.type === "ending");
+    (window.classTestHooks = window.classTestHooks || []).push({
+      count: () => TOTAL + 1,
+      index: () => st.step < 0 ? 0 : Math.min(st.step, TOTAL - 1) + 1,
+      label: i => {
+        if (i === 0) return "Title";
+        const s = STEPS[i - 1];
+        if (s.type === "check") return s.age + " check: " + s.short;
+        if (s.type === "write") return "Call in + turn in";
+        return s.age + ": " + s.title;
+      },
+      go: i => {
+        if (!st.name) st.name = "Test T.";
+        const t = i - 1;
+        // safe defaults (first open cards / first choice) for stages the jump skips past
+        for (let j = 0; j < t && j < TOTAL; j++) {
+          const s = STEPS[j];
+          if (s.type === "place" && !st.grown[s.id]) { tAutoPlace(s); tGrowQuiet(s); }
+          else if (s.type === "event" && st.ev[s.id] == null) tChooseQuiet(s, 0);
+        }
+        if (t < endAt) st.ending = null;
+        else if (!st.ending) st.ending = endingFor(st.sk);
+        locked = false; anim = false;
+        st.step = t; save(); render(); window.scrollTo(0, 0);
+      },
+      solve: () => {
+        if (st.step < 0) return;
+        const s = STEPS[st.step];
+        if (s.type === "place") { if (!st.grown[s.id]) { tAutoPlace(s); grow(s); } }
+        else if (s.type === "event") { if (st.ev[s.id] == null) choose(s, 0); }
+        else if (s.type === "check") { if (!st.done[s.id]) { st.done[s.id] = true; locked = false; anim = true; save(); render(); } }
+      }
+    });
+    if (window.classTestSkip) window.classTestSkip.refresh();
+  } catch (e) {}
 })();

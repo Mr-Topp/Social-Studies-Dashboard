@@ -306,7 +306,8 @@ function checkWriting(p, v) {
 }
 async function turnIn() {
   const msg = $('#sendMsg');
-  for (const p of PROMPTS) { const v = ($('#w_' + p.id).value || '').trim(); const bad = checkWriting(p, v); if (bad) { msg.className = 'fb oops'; msg.textContent = bad; $('#w_' + p.id).focus(); return; } }
+  const testT = window.classIsTestT && window.classIsTestT();   // Test T. (teacher) skips the writing rules
+  for (const p of (testT ? [] : PROMPTS)) { const v = ($('#w_' + p.id).value || '').trim(); const bad = checkWriting(p, v); if (bad) { msg.className = 'fb oops'; msg.textContent = bad; $('#w_' + p.id).focus(); return; } }
   const t = tally(), deep = ((($('#w_deep') || {}).value || '').trim());
   const answers = { 'Standard': STD,
     'First-try correct': t.tot[0] + ' of ' + t.tot[1] + ' (Call It + Two Views)',
@@ -417,6 +418,49 @@ $('#resetBtn').onclick = () => {
 };
 SCENE.sync();
 render();
+
+/* ---------------- Test T. skip bar (shared/turnin.js) ----------------
+   The teacher signed in as Test T. can jump to any screen or answer the current card.
+   Screens: 0-1 briefings · 2-5 Call It cards · 6-8 Two Views debates · 9 write + turn in. */
+try {
+  const R1 = 2, R2 = 6, FIN = 6 + PAIRS.length;
+  (window.classTestHooks = window.classTestHooks || []).push({
+    count: () => FIN + 1,
+    index: () => {
+      if (st.phase === 'title' || st.phase === 'intro') return st.primer ? 1 : 0;
+      if (st.phase === 'r1') return Math.min(R2, R1 + 4 - st.queue.length);
+      if (st.phase === 'r2') return Math.min(FIN - 1, R2 + st.pi);
+      return FIN;
+    },
+    label: i => i === 0 ? 'Briefing 1: Who was the New Right?' : i === 1 ? 'Briefing 2: Four big goals' : i < R2 ? 'Call It · card ' + (i - R1 + 1) : i < FIN ? 'Two Views · ' + PAIRS[st.pairOrder[i - R2]].goal : 'Write + turn in',
+    go: i => {
+      if (!st.name) st.name = 'Test T.';
+      st.lockUntil = 0; st.hintFor = null; st.btnOrder = null;
+      if (i !== FIN) tray.classList.remove('final-tray');
+      if (i < R1) { st.phase = 'intro'; st.primer = i; }
+      else {
+        $('#overlay').hidden = true;
+        if (i < R2) {
+          const deck = st.ttDeck || (st.ttDeck = Object.keys(st.r1).filter(id => st.r1[id].done).concat(st.queue).slice(0, 4));
+          if (deck.length < 4) deck.splice(0, deck.length, ...newDeck());
+          st.phase = 'r1'; st.queue = deck.slice(i - R1); st.r1Count = i - R1;
+        } else if (i < FIN) { st.phase = 'r2'; st.pi = i - R2; }
+        else st.phase = 'final';
+      }
+      save(); render();
+    },
+    solve: () => {
+      st.lockUntil = 0;
+      if (st.phase === 'r1' && st.queue[0]) { r1Busy = false; st.shownAt = 0; sort(ITEM[st.queue[0]].g); }
+      else if (st.phase === 'r2') {
+        const p = PAIRS[st.pairOrder[st.pi]]; if (!p) return;
+        const r = st.r2[p.id] || (st.r2[p.id] = { wrong: 0, done: false, picks: [] });
+        if (!r.done) { r.done = true; delete r.opt; save(); render(); }
+      }
+    }
+  });
+  if (window.classTestSkip) window.classTestSkip.refresh();
+} catch (e) {}
 })();
 /* Read-aloud: a 🔊 button on every card and briefing. Uses the browser's built-in voice (works on Chromebooks). */
 (() => {

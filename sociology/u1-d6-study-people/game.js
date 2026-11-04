@@ -137,7 +137,7 @@
   let locked = false, justSolved = null;
   const stamp = (id, txt) => `<span class="stamp${justSolved === id ? " slam" : ""}">${txt}</span>`;
   function wrongTick(fb, hint, done, label) {
-    let left = LOCK;
+    let left = (window.classIsTestT && window.classIsTestT()) ? 0 : LOCK;   // Test T.: no wait
     const tick = () => {
       fb.className = "msg bad";
       if (left <= 0) { locked = false; fb.textContent = "Not quite. " + hint + " Try again."; done(); return; }
@@ -359,7 +359,7 @@
       fb.className = "msg bad wrongtool"; fb.innerHTML = `${TOOL[k].ic} <b>${TOOL[k].name}?</b> ${nextC.wrong[k]} <br><span class="taunt">${TAUNTS[(c.wrong - 1) % TAUNTS.length]}</span> <span class="wait">⏳ 2</span>`;
       wrap.querySelectorAll(".tool").forEach(x => { x.disabled = true; if (x.dataset.tool === k) x.classList.add("nope"); });
       locked = true;
-      let left = LOCK;
+      let left = (window.classIsTestT && window.classIsTestT()) ? 0 : LOCK;   // Test T.: no wait
       const tick = () => { const w = fb.querySelector(".wait"); if (left <= 0) { locked = false; if (w) w.remove(); wrap.querySelectorAll(".tool").forEach(x => { x.disabled = x.classList.contains("nope"); }); return; } if (w) w.textContent = "⏳ " + left; left--; setTimeout(tick, 1000); };
       tick();
     }, { order: st.toolOrder, shown: "none", mark: k => tried.includes(k) ? "nope" : "", off: k => tried.includes(k) }));
@@ -483,7 +483,8 @@
   async function send() {
     const msg = $("sendMsg");
     const plain = s => String(s || "").normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
-    for (const p of PROMPTS) {
+    const testT = window.classIsTestT && window.classIsTestT();   // Test T. (teacher) skips the writing rules
+    for (const p of (testT ? [] : PROMPTS)) {
       const box = $("w_" + p.id), v = (box.value || "").trim();
       if (window.classJunkStop) {
         const junk = window.classJunkStop(box, { starter: isEs() ? tr(p.stem) : p.stem, source: "from today", sourceEs: "de hoy" });
@@ -550,4 +551,36 @@
   if (st.step >= 1 && $("welcome")) { $("welcome").textContent = "Welcome back, " + st.name + " — you're on " + (st.step > TOTAL ? "the last screen" : "step " + st.step + " of " + TOTAL) + "."; $("welcome").hidden = false; }
   render();
   window.__rr = { state: () => JSON.parse(JSON.stringify(st)) };
+
+  // ---------------- Test T. skip bar (shared/turnin.js) ----------------
+  // The teacher signed in as Test T. can jump to any screen or answer the current check.
+  try {
+    const TLABEL = ["Title", "Pick", "Try the tools", "Match", "Clients", "Ethics", "Finale", "Ending", "Report + turn in"];
+    const tDone = id => { const c = chk(id); if (c.done) return false; c.done = true; justSolved = id; save(); render(); return true; };
+    (window.classTestHooks = window.classTestHooks || []).push({
+      count: () => TLABEL.length,
+      index: () => st.step >= 7 ? (st.atReport ? 8 : 7) : Math.max(0, st.step),
+      label: i => TLABEL[i],
+      go: i => {
+        if (!st.name) st.name = "Test T.";
+        if (i >= 2 && !st.topic) st.topic = day5Topic() || TOPIC_ORDER[0];   // first choice if the jump skips the pick
+        matchPick = null;
+        st.step = Math.min(i, 7); st.atReport = i === 8; save(); render(); window.scrollTo(0, 0);
+      },
+      solve: () => {
+        const n = st.step, click = sel => { const b = document.querySelector(sel); if (b) b.click(); };
+        if (n === 1) { if (!st.topic) click(".topics .topic"); }
+        else if (n === 2) {
+          st.pred = st.pred || {}; const first = TOOLS.find(k => !(k in st.pred));
+          TOOLS.forEach(k => { if (!(k in st.pred)) st.pred[k] = true; });
+          if (first) st.open = first; save(); render();
+        }
+        else if (n === 3) { if (!chk("q_match").done) { MATCH_QS.forEach((m, i) => { st.match[i] = m.a; }); st.badMatch = []; tDone("q_match"); } }
+        else if (n === 4) { const cl = CLIENTS.find(x => !chk(x.id).done); if (cl) tDone(cl.id); }
+        else if (n === 5) { if (!tDone("q_ethics") && !st.deal) click(".deal .dcard"); }
+        else if (n === 6) { if (!chk("q_mixed").done) { st.finalSel = ["survey", "interview"]; tDone("q_mixed"); } }
+      }
+    });
+    if (window.classTestSkip) window.classTestSkip.refresh();
+  } catch (e) {}
 })();

@@ -26,6 +26,7 @@
   const LR_LOCK = 4;       // seconds locked after a wrong lightning answer (short: it is a fast round)
 
   const $ = id => document.getElementById(id);
+  const isT = () => { try { return !!(window.classIsTestT && window.classIsTestT()); } catch (e) { return false; } };   // Test T. (teacher preview)
   const esc = s => String(s == null ? "" : s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
   const shuffle = a => { const b = a.slice(); for (let i = b.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [b[i], b[j]] = [b[j], b[i]]; } return b; };
 
@@ -396,7 +397,7 @@
   let locked = false;
   function runLock(text, msgEl, onDone, secs) {
     locked = true;
-    let left = secs;
+    let left = isT() ? 0 : secs;   // Test T. skips the wrong-answer wait
     const tick = () => {
       if (!document.body.contains(msgEl)) { locked = false; return; }
       msgEl.innerHTML = `💭 Not quite. ${esc(text)} <span class="cd">${left}</span>`;
@@ -709,7 +710,8 @@
   const plain = s => String(s || "").normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
   async function send(e) {
     const msg = $("sendMsg");
-    for (const p of PROMPTS) {
+    const testT = isT();   // Test T. (teacher) skips the writing rules
+    for (const p of (testT ? [] : PROMPTS)) {
       const box = $("w_" + p.id), v = (box.value || "").trim();
       const bad = t => { msg.textContent = t; msg.className = "msg bad"; box.focus(); };
       if (window.classJunkStop) {
@@ -800,4 +802,45 @@
     w.appendChild(notMe); w.hidden = false;
   }
   render();
+
+  // ---------------- Test T. skip bar (shared/turnin.js) ----------------
+  // The teacher signed in as Test T. can jump to any screen or answer the current one.
+  // Each lightning question is its own screen in the jump list.
+  try {
+    const SCR = [];
+    STEPS.forEach((s, i) => { if (s.type === "lightning") LR.forEach((q, k) => SCR.push({ i, k })); else SCR.push({ i }); });
+    const pickEvent = s => {
+      if (st.picks[s.id] != null) return;
+      const c = s.cards[0]; st.picks[s.id] = 0;
+      st.fx.case += c.fx.case || 0; st.fx.trust = Math.max(0, Math.min(10, st.fx.trust + (c.fx.trust || 0)));
+    };
+    (window.classTestHooks = window.classTestHooks || []).push({
+      count: () => SCR.length,
+      index: () => {
+        const i = Math.max(0, Math.min(st.step, TOTAL - 1));
+        const k = STEPS[i].type === "lightning" ? (lrNext() < 0 ? LR.length - 1 : lrNext()) : undefined;
+        return Math.max(0, SCR.findIndex(x => x.i === i && x.k === k));
+      },
+      label: n => { const x = SCR[n], s = STEPS[x.i]; return x.k != null ? "⚡ " + LR[x.k].short : (s.short || s.kicker); },
+      go: n => {
+        const x = SCR[n];
+        if (!st.name) st.name = "Test T.";
+        // Unplayed decisions before this screen get the first choice so the verdict has causes.
+        STEPS.slice(0, x.i).forEach(s => { if (s.type === "event") pickEvent(s); });
+        if (x.k != null) LR.forEach((q, k) => { if (k < x.k) st.lr.done[q.id] = true; else delete st.lr.done[q.id]; });
+        st.step = x.i; st.lockUntil = 0; save(); render(); window.scrollTo(0, 0);
+      },
+      solve: () => {
+        if (st.step < 0) return;
+        const s = STEPS[Math.min(st.step, TOTAL - 1)];
+        if ((s.type === "check" || s.type === "build") && !st.done[s.id]) { st.done[s.id] = true; st.lockUntil = 0; save(); render(); }
+        else if (s.type === "event" && st.picks[s.id] == null) { const b = document.querySelector("#dbox .dcard"); if (b) b.click(); }
+        else if (s.type === "lightning" && lrNext() >= 0) {
+          const q = LR[lrNext()]; st.lockUntil = 0; save(); render();
+          const b = [...document.querySelectorAll("#replies .reply")].find(x => x.textContent === q.options[0]); if (b) b.click();
+        }
+      }
+    });
+    if (window.classTestSkip) window.classTestSkip.refresh();
+  } catch (e) {}
 })();

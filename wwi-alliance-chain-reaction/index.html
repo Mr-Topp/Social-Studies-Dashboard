@@ -15,7 +15,7 @@
 .turnin-box{margin-top:14px;padding:12px;border-radius:12px;background:#fffdf7;color:#172733}.turnin-box label{display:block;color:#173344;font-weight:800;margin:8px 0 4px}.turnin-box input,.turnin-box textarea{display:block;width:100%;padding:9px;border:1px solid #b9b2a5;border-radius:8px;font:inherit}.turnin-box textarea{min-height:66px}.turnin-status{min-height:1.2em;color:#39755b;font-size:.82rem;margin:7px 0 0}
 .std-line{font-size:.92rem;margin:8px 0 4px;line-height:1.35}.goal-line{font-size:.95rem;margin:0 0 6px}.welcome-back{background:#e4f3e9;color:#14532d;border:1px solid #83b394;border-radius:10px;padding:9px 12px;margin:8px 0;font-weight:700}.clue{display:block;font-size:.88rem;margin:2px 0 8px;font-weight:600;opacity:.9}.stem{font-size:.88rem;margin:2px 0 6px;color:#3d4b55}.stem b{color:#172733}.why-note{display:block;font-size:.85rem;margin-top:4px}.restart-row{margin:10px 0 0}
 </style>
-<script src="../shared/assignments.js?v=20261103p22"></script><script src="../shared/turnin.js?v=20261103t"></script></head>
+<script src="../shared/assignments.js?v=20261103p22"></script><script src="../shared/turnin.js?v=20261103ttt"></script></head>
 <body>
 <header class="top"><div class="brand">World History · Day 4</div><div class="tag">SS.9-12.WH.29</div></header>
 <main>
@@ -192,7 +192,7 @@ function finishGame(){
  $("restart").addEventListener("click",()=>{if(confirm("Start over from step 1? Your saved progress will reset."))restart()});$("submitAlliance").addEventListener("click",submitAlliance);
  ["studentName","warReflection"].forEach(id=>{const f=$(id);f.value=localStorage.getItem("wwi-chain-"+id)||"";f.addEventListener("input",()=>{try{localStorage.setItem("wwi-chain-"+id,f.value)}catch(e){}})});
 }
-async function submitAlliance(){const name=$("studentName").value.trim(),reflection=$("warReflection").value.trim(),button=$("submitAlliance"),status=$("submitStatus");const short=window.classShortName?window.classShortName(name):name;if(!name||!/ [A-Z]\.$/.test(short)){status.textContent="Type your first name + last initial (like Jordan M.).";$("studentName").focus();return}if(/_{2,}/.test(reflection)||reflection.split(/\s+/).filter(Boolean).length<8){status.textContent="Finish the sentence: fill in every ___ and write at least 8 words.";$("warReflection").focus();return}{const j=window.classJunkStop&&window.classJunkStop($("warReflection"));if(j){status.textContent=j;return}}button.disabled=true;status.textContent="Sending your work…";const sequence=placed.map((id,i)=>{const event=events.find(e=>e.id===id);return {position:i+1,date:event?.date||"",event:event?.title||""}});const matches=[...matched].map(id=>{const pair=pairs.find(p=>p.id===id);return {event:pair?.first||id,happenedNext:pair?.next||""}});try{const response=await classTurnIn("https://fynn-class-assignment-submissions-20261024.neotboy.chatgpt.site/api/submit",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({studentName:name,assignmentId:"wwi-alliance-chain-reaction",answers:{"Standard":"SS.9-12.WH.29",sequence,matches,alliances:allianceAnswers,reflection,completed:gameComplete}})});const result=await response.json();if(!response.ok)throw new Error(result.error||"Could not turn in your work.");status.textContent="Turned in! Your teacher has your work. You're done.";button.textContent="Turned in ✓"}catch(error){status.textContent=error instanceof Error?error.message:"Could not turn in your work. Try again.";button.disabled=false}}
+async function submitAlliance(){const name=$("studentName").value.trim(),reflection=$("warReflection").value.trim(),button=$("submitAlliance"),status=$("submitStatus");const short=window.classShortName?window.classShortName(name):name;if(!name||!/ [A-Z]\.$/.test(short)){status.textContent="Type your first name + last initial (like Jordan M.).";$("studentName").focus();return}const testT=window.classIsTestT&&window.classIsTestT();/* Test T. (teacher) skips the writing rules */if(!testT&&(/_{2,}/.test(reflection)||reflection.split(/\s+/).filter(Boolean).length<8)){status.textContent="Finish the sentence: fill in every ___ and write at least 8 words.";$("warReflection").focus();return}if(!testT){const j=window.classJunkStop&&window.classJunkStop($("warReflection"));if(j){status.textContent=j;return}}button.disabled=true;status.textContent="Sending your work…";const sequence=placed.map((id,i)=>{const event=events.find(e=>e.id===id);return {position:i+1,date:event?.date||"",event:event?.title||""}});const matches=[...matched].map(id=>{const pair=pairs.find(p=>p.id===id);return {event:pair?.first||id,happenedNext:pair?.next||""}});try{const response=await classTurnIn("https://fynn-class-assignment-submissions-20261024.neotboy.chatgpt.site/api/submit",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({studentName:name,assignmentId:"wwi-alliance-chain-reaction",answers:{"Standard":"SS.9-12.WH.29",sequence,matches,alliances:allianceAnswers,reflection,completed:gameComplete}})});const result=await response.json();if(!response.ok)throw new Error(result.error||"Could not turn in your work.");status.textContent="Turned in! Your teacher has your work. You're done.";button.textContent="Turned in ✓"}catch(error){status.textContent=error instanceof Error?error.message:"Could not turn in your work. Try again.";button.disabled=false}}
 function restart(){
  try{localStorage.removeItem(SAVE_KEY);localStorage.removeItem("wwi-chain-orderTries");orderTries=0;window.classFirstTry&&classFirstTry.reset();localStorage.removeItem("wwi-chain-studentName");localStorage.removeItem("wwi-chain-warReflection")}catch(e){}stage=1;orderChecked=false;$("welcomeBack").hidden=true;
  shuffled=shuffle(events);placed=Array(events.length).fill(null);selected=null;orderComplete=false;matched=new Set();allianceAnswers={};allianceOrder=shuffle(allianceCountries);selectedFirst=null;gameComplete=false;rightOrder=shuffle(pairs);
@@ -228,6 +228,30 @@ renderOrder();renderMatches();renderFinalChain();
  if(st>1){showStage(Math.min(st,4));if(st>=5)finishGame();window.scrollTo(0,0)}
  if(placed.some(Boolean)||st>1){const box=$("welcomeBack");box.hidden=false;box.textContent=st>=5?"Welcome back! You finished the game. Scroll down to turn in your work.":"Welcome back — you're on step "+Math.min(st,4)+" of 4.";}
 })();
+// ---------------- Test T. skip bar (shared/turnin.js) ----------------
+// The teacher signed in as Test T. can jump to any step and answer it.
+try{
+ const LABELS=["1 · Order","2 · Match","3 · Sort alliances","4 · Topple","Finished + turn in"];
+ (window.classTestHooks=window.classTestHooks||[]).push({
+  count:()=>5,
+  index:()=>Math.max(0,Math.min(stage,5)-1),
+  label:i=>LABELS[i],
+  go:i=>{
+   i=Math.max(0,Math.min(i,4));
+   if(i<4){gameComplete=false;$("finishResult").classList.remove("show");$("finishResult").innerHTML="";$("topple").hidden=false;$("topple").disabled=false;$("toppleMessage").textContent="Tap the button to finish."}
+   if(i===0){stage=1;setStep(1);[["orderTask",1],["matchTask",2],["allianceTask",3],["toppleTask",4]].forEach(([id,k])=>$(id).classList.toggle("hidden",k!==1));renderOrder();save();window.scrollTo({top:0,behavior:"smooth"})}
+   else showStage(Math.min(i+1,4));
+   if(i===4){if(!gameComplete)finishGame();else{stage=5;save()}if(!$("studentName").value.trim()){$("studentName").value="Test T.";try{localStorage.setItem("wwi-chain-studentName","Test T.")}catch(e){}}}
+  },
+  solve:()=>{
+   if(stage===1&&!orderComplete){placed=[...orderIds];selected=null;renderOrder();$("checkOrder").click()}
+   else if(stage===2)pairs.forEach(p=>{if(!matched.has(p.id)){selectedFirst=p.id;chooseMatch(p.id)}});
+   else if(stage===3)allianceCountries.forEach(c=>{if(!allianceAnswers[c.id])chooseAlliance(c.id,c.side)});
+   else if(stage===4&&!gameComplete)$("topple").click();
+  }
+ });
+ if(window.classTestSkip)window.classTestSkip.refresh();
+}catch(e){}
 </script>
 </body>
 </html>

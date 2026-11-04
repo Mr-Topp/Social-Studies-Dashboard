@@ -549,7 +549,8 @@
       if (left > 0) { b.querySelector(".wtxt").textContent = "Read the cards… " + left; setTimeout(tickNext, 1000); return; }
       b.disabled = false; b.classList.remove("wait"); b.classList.add("ready"); b.textContent = tr("Next →");
     };
-    setTimeout(tickNext, 1000);
+    if (window.classIsTestT && window.classIsTestT()) { left = 1; tickNext(); }   // Test T.: no read-first pause
+    else setTimeout(tickNext, 1000);
   }
 
   // ---------- Evidence check (must be right to move on) ----------
@@ -585,7 +586,7 @@
             st.wrong[C.id] = (st.wrong[C.id] || 0) + 1; if (window.classFirstTry) window.classFirstTry.wrong(); save();
             pad.classList.remove("shake"); void pad.offsetWidth; pad.classList.add("shake");
             locked = true; area.querySelectorAll("button").forEach(x => x.disabled = true);
-            let left = LOCK;
+            let left = (window.classIsTestT && window.classIsTestT()) ? 0 : LOCK;   // Test T.: no wait
             const tick = () => {
               if (!fb.isConnected) { locked = false; return; }
               fb.textContent = "Not quite. " + C.hint + " The choices will mix up. Try again in " + left + "…"; fb.className = "msg bad";
@@ -659,7 +660,8 @@
   async function send() {
     const msg = $("sendMsg");
     const plain = s => String(s || "").normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
-    for (const p of PROMPTS) {
+    const testT = window.classIsTestT && window.classIsTestT();   // Test T. (teacher) skips the writing rules
+    for (const p of (testT ? [] : PROMPTS)) {
       const box = $("w_" + p.id), v = (box.value || "").trim();
       if (window.classJunkStop) {
         const junk = window.classJunkStop(box, { starter: isEs() ? tr(p.stem) : p.stem, source: "from today", sourceEs: "de hoy" });
@@ -748,4 +750,53 @@
     };
   }
   render();
+
+  // ---------- Test T. skip bar (shared/turnin.js) ----------
+  // The teacher signed in as Test T. can jump to any screen or answer the current check.
+  try {
+    // Fill a round's planner in card order (whatever fits), for Test T. only.
+    const tPlan = r => {
+      const R = ROUNDS[r], n = slotsFor(st, r); let used = 0, cash = st.cash; const out = [];
+      R.cards.forEach(c => { if (used + c.s <= n && (!c.cash || cash >= c.cash)) { out.push(c.id); used += c.s; cash -= c.cash || 0; } });
+      return out;
+    };
+    const tFirstOk = d => { const D = DECISIONS[d]; const i = D.options.findIndex(o => !o.cash || st.cash >= o.cash); return i < 0 ? 0 : i; };
+    const TK = { plan: "plan", result: "what happened", decide: "text", check: "check" };
+    (window.classTestHooks = window.classTestHooks || []).push({
+      count: () => STEPS.length + 1,
+      index: () => st.step < 0 ? 0 : Math.min(st.step, STEPS.length - 1) + 1,
+      label: i => {
+        if (i === 0) return "Title";
+        const s = STEPS[i - 1];
+        if (s.k === "ending") return "Ending + last check";
+        if (s.k === "write") return "Journal + turn in";
+        const part = "Part " + partOf(i - 1);
+        if (s.k === "decide") return part + " text: " + DECISIONS[s.d].short;
+        if (s.k === "check") return part + " check";
+        return part + " " + TK[s.k] + " (" + ROUNDS[s.r].name + ")";
+      },
+      go: i => {
+        if (!st.name) st.name = "Test T.";
+        const t = i - 1;
+        // safe defaults (first choice that fits) for plans and texts the jump skips past
+        for (let j = 0; j < t && j < STEPS.length; j++) {
+          const s = STEPS[j];
+          if (s.k === "plan" && !st.plans[s.r]) lockRound(st, s.r, tPlan(s.r));
+          else if (s.k === "decide" && st.dec[s.d] == null && stepOk(j)) decide(st, s.d, tFirstOk(s.d));
+        }
+        if (t < STEPS.findIndex(s => s.k === "ending")) st.ending = "";
+        picks = []; locked = false;
+        st.step = t; save(); render(true);
+      },
+      solve: () => {
+        if (st.step < 0) return;
+        const s = STEPS[Math.min(st.step, STEPS.length - 1)];
+        if (s.k === "plan") { picks = tPlan(s.r); render(); }
+        else if (s.k === "decide") { if (st.dec[s.d] == null) { const b = document.querySelector("#opts .opt:not([disabled])"); if (b) b.click(); } }
+        else if (s.k === "check") { const C = CHECKS[s.c]; if (!st.done[C.id]) { st.done[C.id] = true; save(); render(); } }
+        else if (s.k === "ending") { if (!st.done.c6) { st.done.c6 = true; save(); render(); } }
+      }
+    });
+    if (window.classTestSkip) window.classTestSkip.refresh();
+  } catch (e) {}
 })();

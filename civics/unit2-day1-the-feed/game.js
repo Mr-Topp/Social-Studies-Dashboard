@@ -205,9 +205,10 @@ function startArena() { if (window.Arena) Arena.join({ game: ASSIGN, name: st.na
 function pushScore() { if (window.Arena && Arena.live) Arena.update({ score: st.score, stage: st.phase }); }
 
 /* wrong-answer pause (survives reload) */
+const isTestT = () => !!(window.classIsTestT && window.classIsTestT()); // Test T. (teacher) skips wrong-answer pauses and writing rules
 function pause(btnsRoot, fb, msg, done, keep) {
   btnsRoot.querySelectorAll('button').forEach(b => b.disabled = true);
-  if (!keep) { st.lockUntil = Date.now() + 1500; st.lockMsg = msg; save(); }
+  if (!keep) { st.lockUntil = Date.now() + (isTestT() ? 0 : 1500); st.lockMsg = msg; save(); }
   const tick = () => { const left = Math.ceil((st.lockUntil - Date.now()) / 1000); if (left <= 0) { st.lockUntil = 0; save(); return done(); } fb.className = 'fb oops'; fb.textContent = msg + '  (' + left + ')'; setTimeout(tick, 150); };
   tick();
 }
@@ -501,7 +502,7 @@ function checkWriting(p, v) {
 }
 async function turnIn() {
   const msg = $('#sendMsg');
-  for (const p of PROMPTS) { const v = ($('#w_' + p.id).value || '').trim(); const bad = checkWriting(p, v); if (bad) { msg.className = 'fb oops'; msg.textContent = bad; $('#w_' + p.id).focus(); return; } }
+  for (const p of (isTestT() ? [] : PROMPTS)) { const v = ($('#w_' + p.id).value || '').trim(); const bad = checkWriting(p, v); if (bad) { msg.className = 'fb oops'; msg.textContent = bad; $('#w_' + p.id).focus(); return; } }
   const t = tally(), bs = bySide();
   const answers = { 'Standard': 'SS.9-12.Gov.12', 'First-try correct': t.tot[0] + ' of ' + t.tot[1] + ' (Call It set 1 + voter ideologies + same belief/different party)', 'First-try by standard': 'Gov.12: ' + t.tot[0] + ' of ' + t.tot[1],
     'Suggested level (check the writing)': (() => { const pct = t.tot[1] ? t.tot[0] / t.tot[1] : 0, l4 = (((($('#w_crit') || {}).value || '').trim())); return (pct >= .75 ? 'Level 3' : pct >= .5 ? 'Level 2' : 'Level 1') + ' from first-try ' + Math.round(pct * 100) + '%' + (l4 ? ' · Level 4 attempted, read the challenge answer' : ''); })(),
@@ -635,6 +636,59 @@ $('#resetBtn').onclick = () => { if (!confirm('Start over? This erases your prog
 if (st.name) startArena();
 SCENE.sync();
 render();
+
+/* ---------------- Test T. skip bar (shared/turnin.js) ----------------
+   The teacher signed in as Test T. can jump to any screen or answer the current one.
+   Jumping ahead marks earlier rounds as done (Test T. only). */
+try {
+  const NV = VOTERS.length, NC = CASES.length, V0 = 5, R2DONE = V0 + NV * 3, C0 = R2DONE + 1, FIN = C0 + NC * 2;
+  const LABELS = ['Title', 'Briefing 1', 'Briefing 2', 'Call It · cards', 'Call It · passed'];
+  for (let k = 0; k < NV; k++) LABELS.push('Voter ' + (k + 1) + ' · ideology', 'Voter ' + (k + 1) + ' · party', 'Voter ' + (k + 1) + ' · result');
+  LABELS.push('Round 2 done');
+  for (let k = 0; k < NC; k++) LABELS.push('Pair ' + (k + 1) + ' · question', 'Pair ' + (k + 1) + ' · result');
+  LABELS.push('Final + turn in');
+  const roundCard = () => !$('#overlay').hidden && ($('#card .eyebrow') || {}).textContent === 'ROUND COMPLETE';
+  const vrec = k => { const v = VOTERS[(st.voterOrder || [0, 1, 2, 3, 4, 5])[k]]; return st.r2[v.id] || (st.r2[v.id] = { iw: 0, idone: false, pw: 0, pdone: false }); };
+  const crec = k => { const ci = (st.caseOrder || [0, 1, 2, 3, 4])[k]; return st.r3[ci] || (st.r3[ci] = { wrong: 0, done: false }); };
+  const passR1 = () => { const a = att(); if (a.right < PASS) st.att = { n: a.n, right: DECK_SIZE, seen: DECK_SIZE }; st.queue = []; st.showRetry = false; st.r1Next = false; };
+  const fillVoters = n => { for (let k = 0; k < n; k++) { const r = vrec(k); r.idone = true; r.pdone = true; } };
+  const fillCases = n => { for (let k = 0; k < n; k++) crec(k).done = true; };
+  (window.classTestHooks = window.classTestHooks || []).push({
+    count: () => LABELS.length,
+    index: () => {
+      if (st.phase === 'title') return 0;
+      if (st.phase === 'intro') return st.primer ? 2 : 1;
+      if (st.phase === 'r1') return 3;
+      if (st.phase === 'r2') { if (roundCard()) return 4; const k = Math.min(st.vi, NV - 1), r = vrec(k); return V0 + k * 3 + (r.pdone ? 2 : r.idone ? 1 : 0); }
+      if (st.phase === 'r3') { if (roundCard()) return R2DONE; if (st.ci >= NC) return FIN; return C0 + st.ci * 2 + (crec(st.ci).done ? 1 : 0); }
+      return FIN;
+    },
+    label: i => LABELS[i],
+    go: i => {
+      if (!st.name) st.name = 'Test T.';
+      st.lockUntil = 0; st.shownAt = 0; r1Busy = false; $('#overlay').hidden = true; tray.classList.remove('final-tray');
+      if (i === 0) st.phase = 'title';
+      else if (i <= 2) { st.phase = 'intro'; st.primer = i === 2 ? 1 : 0; }
+      else {
+        st.primer = 1;
+        if (i === 3) { st.phase = 'r1'; if (!st.queue.length || att().right >= PASS) { st.att = { n: 1, right: 0, seen: 0 }; st.queue = newDeck(st.seenIds); } st.showRetry = false; st.r1Next = false; }
+        else if (i === 4) { passR1(); st.phase = 'r1'; }
+        else if (i < R2DONE) { passR1(); const k = Math.floor((i - V0) / 3), s = (i - V0) % 3; fillVoters(k); st.vi = k; const r = vrec(k); r.idone = s >= 1; r.pdone = s === 2; delete r.iorder; delete r.popt; st.phase = 'r2'; }
+        else if (i === R2DONE) { passR1(); fillVoters(NV); st.vi = NV; st.phase = 'r2'; }
+        else if (i < FIN) { passR1(); fillVoters(NV); st.vi = NV; const k = Math.floor((i - C0) / 2); fillCases(k); st.ci = k; crec(k).done = (i - C0) % 2 === 1; st.phase = 'r3'; }
+        else { passR1(); fillVoters(NV); st.vi = NV; fillCases(NC); st.ci = NC; st.phase = 'final'; }
+      }
+      save(); SCENE.sync(); render();
+    },
+    solve: () => {
+      st.lockUntil = 0;
+      if (st.phase === 'r1' && $('#overlay').hidden && !st.showRetry) { const id = st.queue[0]; if (!id) return; if (st.r1Next) { st.r1Next = false; st.queue.shift(); save(); render(); return; } if (r1Busy) return; st.shownAt = 0; sort(ITEM[id].side); return; }
+      if (st.phase === 'r2' && !roundCard() && st.vi < NV) { const v = VOTERS[(st.voterOrder || [0, 1, 2, 3, 4, 5])[st.vi]], r = vrec(st.vi); if (!r.idone) r.idone = true; else if (!r.pdone) r.pdone = true; else return; save(); render(); return; }
+      if (st.phase === 'r3' && !roundCard() && st.ci < NC) { const r = crec(st.ci); if (!r.done) { r.done = true; save(); render(); } }
+    }
+  });
+  if (window.classTestSkip) window.classTestSkip.refresh();
+} catch (e) {}
 })();
 /* Read-aloud: a 🔊 button on every card and briefing. Uses the browser's built-in voice (works on Chromebooks). */
 (() => {

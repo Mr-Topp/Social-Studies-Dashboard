@@ -165,7 +165,8 @@
         prompts.forEach(p => { $("w_" + p.id).addEventListener("input", e => { st.writing[p.id] = e.target.value; save(); }); });
         $("sendBtn").onclick = async () => {
           const msg = $("sendMsg");
-          for (const p of prompts) {
+          const testT = window.classIsTestT && window.classIsTestT();   // Test T. (teacher) skips the writing rules
+          for (const p of (testT ? [] : prompts)) {
             const v = ($("w_" + p.id).value || "").trim();
             // Shared junk check (shared/turnin.js): idk, bruh, mashing, repeats, filler, copied question, bare keyword lists.
             if (window.classJunkStop) {
@@ -242,6 +243,26 @@
         w.appendChild(document.createTextNode(" ")); w.appendChild(notMe); w.hidden = false;
       }
       render();
+
+      // Test T. skip bar (shared/turnin.js): jump to any scene, or answer every check in this scene.
+      try {
+        (window.classTestHooks = window.classTestHooks || []).push({
+          count: () => cfg.scenes.length + 1,
+          index: () => Math.max(0, Math.min(st.scene, cfg.scenes.length)),
+          label: i => i < cfg.scenes.length ? cfg.scenes[i].title : "Turn in",
+          go: i => {
+            if (!st.name) st.name = "Test T.";
+            st.scene = i; st.step = i < cfg.scenes.length ? cfg.scenes[i].blocks.length : 0;
+            save(); render();
+          },
+          solve: () => {
+            const s = cfg.scenes[st.scene]; if (!s) return;
+            s.blocks.forEach(b => { if (b.type === "q") st.done[b.id] = true; });
+            st.step = s.blocks.length; save(); render();
+          }
+        });
+        if (window.classTestSkip) window.classTestSkip.refresh();
+      } catch (e) {}
     }
   };
 })();

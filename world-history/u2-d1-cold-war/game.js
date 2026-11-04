@@ -74,6 +74,7 @@
   } catch (e) {}
   const save = () => { try { localStorage.setItem(KEY, JSON.stringify(st)); } catch (e) {} };
   const chk = id => (st.checks[id] = st.checks[id] || { wrong: 0, done: false });
+  const isTestT = () => !!(window.classIsTestT && window.classIsTestT());   // Test T. (teacher): no lockouts / writing rules
 
   // ---------------- Steps ----------------
   const STEP = [null,
@@ -381,7 +382,7 @@
           c.wrong++; if (window.classFirstTry) window.classFirstTry.wrong(); save();
           wrap.classList.remove("spark"); void wrap.offsetWidth; wrap.classList.add("spark");
           locked = true; area.querySelectorAll("button").forEach(x => { x.disabled = true; });
-          let left = LOCK;
+          let left = isTestT() ? 0 : LOCK;
           const tick = () => {
             fb.className = "msg bad";
             if (left <= 0) { locked = false; fb.className = "msg"; fb.textContent = "Not quite. " + def.hint + " Try again."; draw(); return; }
@@ -702,7 +703,7 @@
   async function send() {
     const msg = $("sendMsg");
     const plain = s => String(s || "").normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
-    for (const p of PROMPTS) {
+    for (const p of (isTestT() ? [] : PROMPTS)) {   // Test T. (teacher) skips the writing rules
       const box = $("w_" + p.id), v = (box.value || "").trim();
       if (window.classJunkStop) {
         const junk = window.classJunkStop(box, { starter: isEs() ? tr(p.stem) : p.stem, source: "from today", sourceEs: "de hoy" });
@@ -776,4 +777,28 @@
   };
   if (st.step >= 1 && $("welcome")) { $("welcome").textContent = "Welcome back, " + st.name + " — you're on step " + st.step + " of " + TOTAL + "."; $("welcome").hidden = false; }
   render();
+
+  // ---------------- Test T. skip bar (shared/turnin.js) ----------------
+  // The teacher signed in as Test T. can jump to any screen (steps 1–11) or answer the current check/call.
+  try {
+    (window.classTestHooks = window.classTestHooks || []).push({
+      count: () => TOTAL,
+      index: () => Math.max(0, Math.min(st.step - 1, TOTAL - 1)),
+      label: i => STEP[i + 1].t,
+      go: i => {
+        if (!st.name) st.name = "Test T.";
+        st.step = i + 1;
+        for (let k = 1; k <= st.step; k++) onEnter(k);   // map/meter setup that normally happens on the way
+        save(); render(); window.scrollTo(0, 0);
+      },
+      solve: () => {
+        const s = st.step;
+        const ids = { 1: "c_yalta", 2: "c_germany", 3: "c_stalin", 5: "c_truman", 6: "c_marshall", 8: "c_nato", 9: "c_kennan" };
+        if (ids[s] && !chk(ids[s]).done && !st.picks[s]) { chk(ids[s]).done = true; justSolved = ids[s]; save(); render(); return; }
+        if (D[s] && !st.picks[s]) { const b = document.querySelector("#deck .dcard:not([disabled])"); if (b) b.click(); return; }
+        if (s === 7 && st.picks[7] === "airlift" && st.airlift < 10) { st.airlift = 10; justPicked = true; save(); render(); }
+      }
+    });
+    if (window.classTestSkip) window.classTestSkip.refresh();
+  } catch (e) {}
 })();

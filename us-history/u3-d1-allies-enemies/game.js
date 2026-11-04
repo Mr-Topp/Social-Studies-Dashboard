@@ -23,6 +23,7 @@
   const LOCK = 5, TOTAL = 13, TOKENS = 7, HEARTS = 4;
 
   const $ = id => document.getElementById(id);
+  const isT = () => { try { return !!(window.classIsTestT && window.classIsTestT()); } catch (e) { return false; } };   // Test T. (teacher preview)
   const esc = s => String(s == null ? "" : s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
   const clamp = (n, a, b) => Math.max(a, Math.min(b, n));
   function shuffle(a) { const b = a.slice(); for (let i = b.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [b[i], b[j]] = [b[j], b[i]]; } return b; }
@@ -403,7 +404,7 @@
           c.wrong++; if (window.classFirstTry) window.classFirstTry.wrong(); save();
           wrap.classList.remove("spark"); void wrap.offsetWidth; wrap.classList.add("spark");
           locked = true; area.querySelectorAll("button").forEach(x => { x.disabled = true; });
-          let left = LOCK;
+          let left = isT() ? 0 : LOCK;   // Test T. skips the wrong-answer wait
           const tick = () => {
             fb.className = "msg bad";
             if (left <= 0) { locked = false; fb.className = "msg"; fb.textContent = "Not quite. " + def.hint + " Try again."; draw(); return; }
@@ -751,7 +752,8 @@
   async function send() {
     const msg = $("sendMsg");
     const plain = s => String(s || "").normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
-    for (const p of PROMPTS) {
+    const testT = isT();   // Test T. (teacher) skips the writing rules
+    for (const p of (testT ? [] : PROMPTS)) {
       const box = $("w_" + p.id), v = (box.value || "").trim();
       if (window.classJunkStop) {
         const junk = window.classJunkStop(box, { starter: isEs() ? tr(p.stem) : p.stem, source: "from today", sourceEs: "de hoy" });
@@ -829,4 +831,40 @@
   };
   if (st.step >= 1 && $("welcome")) { $("welcome").textContent = "Welcome back, " + st.name + " — you're on step " + st.step + " of " + TOTAL + "."; $("welcome").hidden = false; }
   render();
+
+  // ---------------- Test T. skip bar (shared/turnin.js) ----------------
+  // The teacher signed in as Test T. can jump to any screen (steps 1–13) or answer the current one.
+  try {
+    const CHK_AT = { 2: "c_truman", 3: "c_marshall", 5: "c_nato", 8: "c_smith", 11: "c_welch" };
+    (window.classTestHooks = window.classTestHooks || []).push({
+      count: () => TOTAL,
+      index: () => Math.max(0, Math.min(st.step, TOTAL) - 1),
+      label: i => STEP[i + 1].t,
+      go: i => {
+        const to = i + 1;
+        if (!st.name) st.name = "Test T.";
+        // Walk the years in order: skipped moves get the first card the budget allows.
+        for (let k = 1; k <= to; k++) {
+          onEnter(k);
+          if (k < to && D[k] && !st.picks[k]) {
+            const c = D[k].find(x => k > 5 || cardCost(k, x) <= st.tokens) || D[k][D[k].length - 1];
+            st.picks[k] = c.id; applyPick(k, c.id);
+            if (k === 4 && c.id === "airlift") st.airlift = 10;
+          }
+        }
+        st.step = to; justPicked = false; save(); render(); window.scrollTo(0, 0);
+      },
+      solve: () => {
+        const k = st.step, id = CHK_AT[k];
+        if (k < 1) return;
+        if (id && !chk(id).done && !st.picks[k]) {
+          chk(id).done = true; justSolved = id;
+          if (id === "c_welch" && !st.tvDrop) { st.tvDrop = true; st.fear = clamp(st.fear - 2, 0, 10); st.hale = "beaten"; }
+          save(); render();
+        } else if (D[k] && !st.picks[k]) { const b = document.querySelector("#deck .dcard:not([disabled])"); if (b) b.click(); }
+        else if (k === 4 && st.picks[4] === "airlift" && st.airlift < 10) { st.airlift = 10; justPicked = true; save(); render(); }
+      }
+    });
+    if (window.classTestSkip) window.classTestSkip.refresh();
+  } catch (e) {}
 })();

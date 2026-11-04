@@ -617,6 +617,7 @@
   const plain = s => String(s || "").normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
   // Returns a message if the answer isn't ready yet, or "" if it's fine.
   function writingProblem(p) {
+    if (window.classIsTestT && window.classIsTestT()) return "";   // Test T. (teacher) skips the writing rules
     const box = $("w_" + p.id), v = (box.value || "").trim();
     if (window.classJunkStop) {
       const junk = window.classJunkStop(box, { starter: L(p.stem), source: "from today", sourceEs: "de hoy" });
@@ -732,4 +733,51 @@
   }
   window.addEventListener("resize", () => { if (st.step >= 1) document.documentElement.style.setProperty("--hudH", $("hud").offsetHeight + "px"); });
   render();
+
+  // ---------------- Test T. skip bar (shared/turnin.js) ----------------
+  // The teacher signed in as Test T. can jump to any screen or answer the current check/decision.
+  // Screens = each step's parts: intro · check · choice cards · result (and the ending/memo pages).
+  try {
+    const DEC = { 2: { chk: "c2", intro: true }, 3: {}, 4: { chk: "c3" }, 5: { intro: true }, 6: { chk: "c4" }, 7: { chk: "c5" } };
+    const NAMES = { 1: "The line on the map", 2: "Invasion", 3: "Trapped at Pusan", 4: "How far north?", 5: "China attacks", 6: "The general goes public", 7: "Stuck", 8: "The shooting stops", 9: "Your ending", 10: "Your memo" };
+    const KN = { intro: "intro", check: "check", choices: "decision", result: "result", p0: "", p1: "" };
+    const SCR = [];
+    for (let n = 1; n <= TOTAL; n++) {
+      const d = DEC[n];
+      const ks = d ? [].concat(d.intro ? ["intro"] : [], d.chk ? ["check"] : [], ["choices", "result"]) : n === 1 ? ["intro", "check"] : n === 8 ? ["check"] : ["p0", "p1"];
+      ks.forEach(k => SCR.push({ s: n, k, chk: n === 1 ? "c1" : n === 8 ? "c6" : d && d.chk, intro: n === 1 || !!(d && d.intro) }));
+    }
+    const kindNow = () => {
+      const n = Math.max(1, Math.min(st.step, TOTAL)), d = DEC[n];
+      if (n === 1) return st.phase === 0 && !st.done.c1 ? "intro" : "check";
+      if (n === 8) return "check";
+      if (!d) return st.phase === 1 ? "p1" : "p0";
+      if (st.phase === 9) return "result";
+      if (d.intro && st.phase === 0) return "intro";
+      if (d.chk && !st.done[d.chk]) return "check";
+      return "choices";
+    };
+    (window.classTestHooks = window.classTestHooks || []).push({
+      count: () => SCR.length,
+      index: () => { const n = Math.max(1, Math.min(st.step, TOTAL)), k = kindNow(); const i = SCR.findIndex(x => x.s === n && x.k === k); return Math.max(0, i); },
+      label: i => { const x = SCR[i]; return NAMES[x.s] + (x.s === 9 ? (x.k === "p1" ? " · real cost" : "") : x.s === 10 ? " · page " + (x.k === "p1" ? 2 : 1) : KN[x.k] ? " · " + KN[x.k] : ""); },
+      go: i => {
+        const x = SCR[i]; if (!x) return;
+        if (!st.name) st.name = "Test T.";
+        st.step = x.s; st.result = null;
+        if (x.k === "intro") { st.phase = 0; if (x.chk) delete st.done[x.chk]; }
+        else if (x.k === "check") { st.phase = x.intro ? 1 : 0; delete st.done[x.chk]; }
+        else if (x.k === "choices" || x.k === "result") { st.phase = x.intro ? 1 : 0; if (x.chk) st.done[x.chk] = true; }
+        else st.phase = x.k === "p1" ? 1 : 0;
+        save(); render(); window.scrollTo(0, 0);
+        if (x.k === "result") { const b = document.querySelector("#cChoices .dcard"); if (b) b.click(); }
+      },
+      solve: () => {
+        const n = Math.max(1, Math.min(st.step, TOTAL)), k = kindNow(), d = DEC[n];
+        if (k === "check") { const id = n === 1 ? "c1" : n === 8 ? "c6" : d.chk; if (!st.done[id]) { st.done[id] = true; if (n === 1) st.phase = 1; save(); justSolved = id; render(true); } }
+        else if (k === "choices") { const b = document.querySelector("#cChoices .dcard"); if (b) b.click(); }
+      }
+    });
+    if (window.classTestSkip) window.classTestSkip.refresh();
+  } catch (e) {}
 })();

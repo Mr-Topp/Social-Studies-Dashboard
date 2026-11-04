@@ -89,7 +89,7 @@ function drawMulti(){const s=current();state.order=freshOrder(s.choices.length,s
 function addControl(n){state.control=Math.min(100,state.control+n);if(state.control>=100){state.control=70;if(state.glitches>0){state.glitches=0;state.wipeNote=true}}updateHUD();save()}
 function markMiss(){if(!state.sceneMissed){state.sceneMissed=true;if(!inReview()&&window.classFirstTry)classFirstTry.wrong();save()}}
 // Lock the choices for a few seconds, then redraw them in a new order. Nothing stays red.
-function jam(text,redraw){state.jammed=true;const area=$("challenge-area");area.querySelectorAll("button").forEach(b=>b.disabled=true);let left=JAM_SECONDS;const wipe=state.wipeNote?`<span>Christof took full control of the signal and wiped out your Glitch Cards. Slow down: read the clue before you pick.</span><br>`:"";state.wipeNote=false;const tick=()=>{if(!state.jammed)return;if(left<=0){state.jammed=false;area.querySelectorAll("#multi-submit,#sequence-reset").forEach(x=>x.disabled=false);flash(`${wipe}<span>${text}</span> <span>Try again.</span>`,false);redraw();return}flash(`${wipe}<span>${text}</span> <strong>Christof jammed the signal.</strong> <span>New order in ${left}…</span>`,false);left--;setTimeout(tick,1000)};tick()}
+function jam(text,redraw){state.jammed=true;const area=$("challenge-area");area.querySelectorAll("button").forEach(b=>b.disabled=true);let left=(window.classIsTestT&&window.classIsTestT())?0:JAM_SECONDS;const wipe=state.wipeNote?`<span>Christof took full control of the signal and wiped out your Glitch Cards. Slow down: read the clue before you pick.</span><br>`:"";state.wipeNote=false;const tick=()=>{if(!state.jammed)return;if(left<=0){state.jammed=false;area.querySelectorAll("#multi-submit,#sequence-reset").forEach(x=>x.disabled=false);flash(`${wipe}<span>${text}</span> <span>Try again.</span>`,false);redraw();return}flash(`${wipe}<span>${text}</span> <strong>Christof jammed the signal.</strong> <span>New order in ${left}…</span>`,false);left--;setTimeout(tick,1000)};tick()}
 // In case review, the first wrong move ends the try: show the key idea, send the clue to the back of the line.
 function reviewMiss(){state.reviewMisses=(state.reviewMisses||0)+1;const s=current(),k=state.reviewQueue.shift();state.reviewQueue.push(k);$("challenge-area").querySelectorAll("button").forEach(b=>b.disabled=true);flash(`<strong>Not this time.</strong> <span>Key idea:</span> <span>${s.why}</span><br><span>This clue goes to the back of the line. You’ll see it again with the choices mixed up.</span>`,false);$("continue-btn").textContent="Next clue →";$("continue-btn").classList.remove("hidden");tone(180,.12);save()}
 
@@ -133,7 +133,7 @@ function renderLockedDoor(){state.phase="locked";const n=state.missed.length;
 function startReview(){state.phase="review";state.reviewQueue=shuffle(state.missed.map(x=>x.slice()));state.reviewTotal=state.reviewQueue.length;state.reviewRounds++;state.reviewFixed=0;nextReview()}
 function nextReview(){if(!state.reviewQueue.length){state.reviewDone=true;finish();return}[state.chapter,state.scene]=state.reviewQueue[0];renderScene()}
 function advance(){if(state.phase==="locked"){startReview();return}if(state.phase==="review"){nextReview();return}
- if(state.inClear){state.inClear=false;state.chapter++;state.scene=0;renderScene();return}const ch=chapters[state.chapter];if(state.scene<ch.scenes.length-1){state.scene++;renderScene()}else if(state.chapter<chapters.length-1)renderChapterClear();else if(score()>=PASS)finish();else renderLockedDoor()}
+ if(state.inClear){state.inClear=false;state.chapter++;state.scene=0;renderScene();return}const ch=chapters[state.chapter];if(state.scene<ch.scenes.length-1){state.scene++;renderScene()}else if(state.chapter<chapters.length-1)renderChapterClear();else if(score()>=PASS||(window.classIsTestT&&window.classIsTestT()))finish();else renderLockedDoor()}
 function finish(){clearInterval(state.timer);const first=state.phase!=="done";if(first){state.finalTime=fmtTime(elapsed());state.phase="done";state.turnedIn=false}$("meter-fill").style.width="100%";const pct=Math.round(score()*100);
  $("final-correct").textContent=`${state.correct}/${state.possible}`;$("final-evidence").textContent=state.evidence.length;$("final-score").textContent=pct+"%";$("final-time").textContent=state.finalTime||"—";
  $("end-message").innerHTML=`<span>${escH(state.name)}, you exposed the system behind Seahaven. You connected Truman’s experience to social context, research, ethics, and theory—and chose to walk through the door.</span>`+(state.reviewDone?`<br><br><span>You fixed every clue you missed.</span>`:"");
@@ -185,7 +185,7 @@ function writingProblem(ans){const words=(ans.toLowerCase().match(/[a-záéíó�
 function renderTurnIn(){let box=$("turnin-box");if(!box){box=document.createElement("section");box.id="turnin-box";box.className="turnin";$("mastery-report").after(box)}
  if(state.turnedIn){box.innerHTML=`<h2>Turn in your work</h2><p class="ti-done">✓ Turned in as ${escH(state.name.replace(/\.$/,""))}. Your teacher can see your work.</p>`;return}
  box.innerHTML=`<h2>Turn in your work</h2><label for="exitAnswer">${EXIT_Q}</label><p class="ti-small">Starter: ${STARTER}</p><textarea id="exitAnswer" rows="4" placeholder="${STARTER}"></textarea><p class="ti-small">Turning in as <b>${escH(state.name)}</b></p><button id="turnInBtn" class="primary-btn">Turn in</button><p id="tiStatus" class="ti-status" role="status" aria-live="polite"></p>`;
- $("turnInBtn").onclick=async()=>{const st=$("tiStatus"),btn=$("turnInBtn"),ans=$("exitAnswer").value.trim();{const j=window.classJunkStop&&window.classJunkStop($("exitAnswer"),{source:"from Seahaven",sourceEs:"de Seahaven"});if(j){st.textContent=j;return}}const problem=writingProblem(ans);if(problem){st.textContent=problem;$("exitAnswer").focus();return}
+ $("turnInBtn").onclick=async()=>{const st=$("tiStatus"),btn=$("turnInBtn"),ans=$("exitAnswer").value.trim();{const j=window.classJunkStop&&window.classJunkStop($("exitAnswer"),{source:"from Seahaven",sourceEs:"de Seahaven"});if(j){st.textContent=j;return}}const problem=(window.classIsTestT&&window.classIsTestT())?"":writingProblem(ans);if(problem){st.textContent=problem;$("exitAnswer").focus();return}
   if(!window.classTurnIn){st.textContent="Turn-in is not available right now. Tell your teacher.";return}
   btn.disabled=true;st.textContent="Turning in…";const review=weakTopics(),pct=Math.round(score()*100);
   const escaped=state.reviewDone?`After fixing ${state.reviewTotal} missed clue${state.reviewTotal===1?"":"s"} (${state.reviewMisses||0} wrong tries during review)`:`Yes, ${pct}% on the first try`;
@@ -195,3 +195,24 @@ function renderTurnIn(){let box=$("turnin-box");if(!box){box=document.createElem
   catch(e){st.textContent=e.message;btn.disabled=false}}}
 startScreenNote();
 (function(){const o=loadRun();if(o&&o.phase==="done"){restore(o);buildMap();renderEvidence();finish()}})();
+
+// ---------------- Test T. skip bar (shared/turnin.js) ----------------
+// The teacher signed in as Test T. can jump to any scene or answer the current clue.
+try{
+ const testPos=i=>{let c=0,n=i;while(c<chapters.length-1&&n>=chapters[c].scenes.length){n-=chapters[c].scenes.length;c++}return [c,n]};
+ (window.classTestHooks=window.classTestHooks||[]).push({
+  count:()=>totalScenes+1,
+  index:()=>state.phase==="done"?totalScenes:state.phase==="start"?0:Math.max(0,Math.min(progressIndex(),totalScenes-1)),
+  label:i=>{if(i>=totalScenes)return "Ending + turn in";const [c,n]=testPos(i);return `${c+1}.${n+1} ${chapters[c].title}`},
+  go:i=>{if(!state.name)state.name="Test T.";buildMap();renderEvidence();clearInterval(state.timer);state.elapsedBefore=elapsed();state.startTime=0;
+   if(i>=totalScenes){if(state.phase!=="done")state.phase="play";state.inClear=false;state.jammed=false;finish();return}
+   const [c,n]=testPos(i);state.chapter=c;state.scene=n;state.phase="play";state.inClear=false;state.jammed=false;
+   showScreen("game");beginTimer();renderScene()},
+  solve:()=>{if(state.inClear||state.sceneDone||(state.phase!=="play"&&state.phase!=="review"))return;const s=current();state.jammed=false;
+   if(s.type==="mc"){const b=document.querySelector(`[data-choice="${s.answer}"]`);if(b){b.disabled=false;b.click()}}
+   else if(s.type==="sort"){state.sortIndex=s.items.length;renderSortCard()}
+   else if(s.type==="sequence"){state.sequence=s.order.slice();checkSequence()}
+   else if(s.type==="multi"){state.multi=new Set(s.answers);submitMulti()}}
+ });
+ if(window.classTestSkip)window.classTestSkip.refresh();
+}catch(e){}

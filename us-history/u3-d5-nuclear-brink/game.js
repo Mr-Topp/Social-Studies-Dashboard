@@ -680,6 +680,7 @@
 
   const plain = s => String(s || "").normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
   function writingProblem(p) {
+    if (window.classIsTestT && window.classIsTestT()) return "";   // Test T. (teacher) skips the writing rules
     const box = $("w_" + p.id), v = (box.value || "").trim();
     if (window.classJunkStop) {
       const junk = window.classJunkStop(box, { starter: L(p.stem), source: "from today", sourceEs: "de hoy" });
@@ -793,4 +794,61 @@
     };
   }
   render();
+
+  // ---------------- Test T. skip bar (shared/turnin.js) ----------------
+  // The teacher signed in as Test T. can jump to any screen or answer the current check/decision.
+  // Screens = each step's parts: check · move cards · result (plus the photo hunt, ending and memo pages).
+  // Jumping to a result plays the first non-hawk card (danger capped) so it never lands on a what-if war.
+  try {
+    const DEC = { 2: {}, 3: { chk: "c2" }, 4: {}, 6: { chk: "c4" }, 7: {}, 8: {}, 9: { last: true } };
+    const NAMES = { 1: "", 2: "The crisis team", 3: "The speech", 4: "The line", 5: "The UN showdown", 6: "Letter 1", 7: "Plane down", 8: "The submarine", 9: "Letter 2", 10: "Your ending", 11: "What really happened", 12: "Your memo" };
+    const KN = { check: " · check", choices: " · move", result: " · result" };
+    const SCR = [{ s: 1, k: "opener" }, { s: 1, k: "photos" }];
+    for (let n = 2; n <= TOTAL; n++) {
+      const d = DEC[n];
+      const ks = d ? [].concat(d.chk ? ["check"] : [], ["choices"], d.last ? [] : ["result"]) : n === 10 ? ["end"] : n === 12 ? ["p0", "p1"] : ["check"];
+      ks.forEach(k => SCR.push({ s: n, k, chk: n === 5 ? "c3" : n === 11 ? "c5" : d && d.chk }));
+    }
+    const kindNow = () => {
+      const n = Math.max(1, Math.min(st.step, TOTAL)), d = DEC[n];
+      if (n === 1) return st.phase === 0 ? "opener" : "photos";
+      if (n === 10) return "end";
+      if (n === 12) return st.phase === 1 ? "p1" : "p0";
+      if (!d) return "check";
+      if (st.phase === 9 || st.phase === 8) return d.last ? "choices" : "result";
+      if (d.chk && !st.done[d.chk]) return "check";
+      return "choices";
+    };
+    const playCard = () => {
+      st.m.risk = Math.min(st.m.risk, 5); save();
+      const b = document.querySelector("#cChoices .dcard:not(.hawk):not(:disabled)") || document.querySelector("#cChoices .dcard:not(:disabled)");
+      if (b) b.click();
+    };
+    (window.classTestHooks = window.classTestHooks || []).push({
+      count: () => SCR.length,
+      index: () => { const n = Math.max(1, Math.min(st.step, TOTAL)), k = kindNow(); return Math.max(0, SCR.findIndex(x => x.s === n && x.k === k)); },
+      label: i => { const x = SCR[i]; return x.s === 1 ? (x.k === "opener" ? "Before the crisis: 1950s fear" : "The photos") : NAMES[x.s] + (x.s === 12 ? " · page " + (x.k === "p1" ? 2 : 1) : KN[x.k] || ""); },
+      go: i => {
+        const x = SCR[i]; if (!x) return;
+        if (!st.name) st.name = "Test T.";
+        st.step = x.s; st.result = null;
+        if (x.k === "opener") { st.phase = 0; delete st.done.c0; }
+        else if (x.k === "photos") { st.phase = 1; delete st.done.c1; }
+        else if (x.k === "check") { st.phase = 0; delete st.done[x.chk]; }
+        else if (x.k === "choices" || x.k === "result") { st.phase = 0; if (x.chk) st.done[x.chk] = true; }
+        else st.phase = x.k === "p1" ? 1 : 0;
+        save(); render(); window.scrollTo(0, 0);
+        if (x.k === "result") playCard();
+      },
+      solve: () => {
+        const n = Math.max(1, Math.min(st.step, TOTAL)), k = kindNow();
+        // Photo hunt / newsreels: first press opens every card, second press answers the check.
+        if (k === "opener" && !st.done.c0) { if (REELS.some(r => !st.flipped.includes(r.id))) st.flipped = REELS.map(r => r.id); else { st.done.c0 = true; justSolved = "c0"; } save(); render(true); }
+        else if (k === "photos" && !st.done.c1) { if (SPOTS.some(r => !st.found.includes(r.id))) st.found = SPOTS.map(r => r.id); else { st.done.c1 = true; justSolved = "c1"; } save(); render(true); }
+        else if (k === "check") { const id = n === 5 ? "c3" : n === 11 ? "c5" : DEC[n].chk; if (!st.done[id]) { st.done[id] = true; justSolved = id; save(); render(true); } }
+        else if (k === "choices" && st.phase !== 9 && st.phase !== 8) playCard();
+      }
+    });
+    if (window.classTestSkip) window.classTestSkip.refresh();
+  } catch (e) {}
 })();

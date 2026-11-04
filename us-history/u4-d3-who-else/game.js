@@ -613,7 +613,8 @@
   const plain = s => String(s || "").normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
   async function send(e) {
     const msg = $("sendMsg");
-    for (const p of PROMPTS) {
+    const testT = window.classIsTestT && window.classIsTestT();   // Test T. (teacher) skips the writing rules
+    for (const p of (testT ? [] : PROMPTS)) {
       const box = $("w_" + p.id), v = (box.value || "").trim();
       const bad = t => { msg.textContent = t; msg.className = "msg bad"; box.focus(); };
       if (window.classJunkStop) {
@@ -702,4 +703,42 @@
     w.appendChild(notMe); w.hidden = false;
   }
   render();
+
+  // ---------------- Test T. skip bar (shared/turnin.js) ----------------
+  // The teacher signed in as Test T. can jump to any screen or answer the current check.
+  // Each ⚡ lightning-round question gets its own screen in the jump list.
+  try {
+    const LI = STEPS.findIndex(s => s.type === "lightning"), XN = LR.length - 1;
+    const toStep = i => i < LI ? i : i < LI + LR.length ? LI : i - XN;
+    (window.classTestHooks = window.classTestHooks || []).push({
+      count: () => TOTAL + XN,
+      index: () => {
+        const s = Math.max(0, Math.min(st.step, TOTAL - 1));
+        if (s < LI) return s;
+        if (s === LI) { const n = lrNext(); return LI + (n < 0 ? XN : n); }
+        return s + XN;
+      },
+      label: i => {
+        if (i >= LI && i < LI + LR.length) return "⚡ " + (i - LI + 1) + ". " + LR[i - LI].short;
+        const s = STEPS[toStep(i)]; return s.short || s.kicker || s.type;
+      },
+      go: i => {
+        if (!st.name) st.name = "Test T.";
+        st.lockUntil = 0;
+        if (i >= LI && i < LI + LR.length) LR.forEach((q, j) => { if (j < i - LI) st.lr.done[q.id] = true; else delete st.lr.done[q.id]; });
+        st.step = toStep(i); save(); render();
+      },
+      solve: () => {
+        const s = STEPS[Math.min(st.step, TOTAL - 1)]; if (!s) return;
+        if (s.type === "check" && !st.done[s.id]) { st.done[s.id] = true; st.lockUntil = 0; save(); render(); }
+        else if (s.type === "event" && st.picks[s.id] == null) { const b = document.querySelector("#dbox .dcard"); if (b) b.click(); }
+        else if (s.type === "lightning" && lrNext() >= 0) {
+          const q = LR[lrNext()];
+          st.lockUntil = 0; save(); render();
+          const b = [...document.querySelectorAll("#replies .reply")].find(x => x.textContent === q.options[0]); if (b) b.click();
+        }
+      }
+    });
+    if (window.classTestSkip) window.classTestSkip.refresh();
+  } catch (e) {}
 })();

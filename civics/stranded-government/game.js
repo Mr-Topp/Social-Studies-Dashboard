@@ -271,8 +271,10 @@ function choiceButton(c,i){const short=c.need&&state.stats[0]<c.need;return `<bu
 
 /* Read first: choices unlock after a few seconds so nobody can click through without reading. Pauses while the tab is hidden. */
 let readTimer=null;
+/* Test T. (the teacher's test student) skips read timers, retry locks, and word-count rules. */
+function isTestT(){return !!(window.classIsTestT&&window.classIsTestT())}
 function readSecs(...t){const w=t.join(' ').split(/\s+/).filter(Boolean).length;return Math.max(5,Math.min(8,Math.round(w/5)))}
-function readLock(sec){clearInterval(readTimer);const btns=()=>document.querySelectorAll('#choiceList [data-choice], #choiceList [data-purpose]');const keep=new Set([...btns()].filter(b=>b.disabled));btns().forEach(b=>b.disabled=true);const foot=$('#eventFoot'),orig=foot.textContent;let left=sec;const tick=()=>{foot.textContent=`Read the story first. Choices open in ${left}…`};tick();
+function readLock(sec){clearInterval(readTimer);if(isTestT())return;const btns=()=>document.querySelectorAll('#choiceList [data-choice], #choiceList [data-purpose]');const keep=new Set([...btns()].filter(b=>b.disabled));btns().forEach(b=>b.disabled=true);const foot=$('#eventFoot'),orig=foot.textContent;let left=sec;const tick=()=>{foot.textContent=`Read the story first. Choices open in ${left}…`};tick();
  readTimer=setInterval(()=>{if(document.hidden)return;left--;if(left<=0){clearInterval(readTimer);btns().forEach(b=>{if(!keep.has(b))b.disabled=false});foot.textContent=orig;const f=document.querySelector('#choiceList button:not([disabled])');if(f)f.focus()}else tick()},1000)}
 function openBeat(){
  if(state.phase!=='map'||state.pending||state.openEvent||!state.started)return;
@@ -341,7 +343,7 @@ let proofTimer=null;
 function renderProof(id,feedback){
  state.proof=state.proof||{};const q=PROVE[id],st=state.proof[id]||(state.proof[id]={first:null,done:false});
  let box=$('#proof');if(!box){box=document.createElement('div');box.id='proof';box.className='proof';$('#learning').after(box)}
- const needLog=id==='emergency';const logOk=()=>!needLog||(state.logNote||'').trim().split(/\s+/).filter(Boolean).length>=8;
+ const needLog=id==='emergency';const logOk=()=>!needLog||isTestT()||(state.logNote||'').trim().split(/\s+/).filter(Boolean).length>=8;
  const cont=$('#continue');const setCont=()=>{cont.disabled=!(st.done&&logOk());cont.title=cont.disabled?'Answer the question first':''};
  if(st.done){box.innerHTML=`<div class="proof-head">✓ PROVE IT</div><p class="proof-ok">${esc(q.q)}<br><b>✓ ${esc(q.opts.find(o=>o[0]===q.ans)[1])}</b></p>`+(needLog?logHtml():'');wireLog();setCont();if(!cont.disabled)cont.focus();return}
  const opts=reshuffle('p-'+id,q.opts);
@@ -355,9 +357,9 @@ function renderProof(id,feedback){
  function logHtml(){return `<div class="captain-log"><label for="logNote"><b>Captain’s log:</b> Why that call? Use <i>limits</i> or <i>rights</i>. (8+ words)</label><div class="stem">I made that call because…</div><textarea id="logNote" rows="3" maxlength="300">${esc(state.logNote||'')}</textarea><div id="logHint" class="task-hint" role="status"></div></div>`}
  function wireLog(){const t=$('#logNote');if(!t)return;const upd=()=>{state.logNote=t.value;save();const n=t.value.trim().split(/\s+/).filter(Boolean).length;$('#logHint').textContent=n>=8?'✓ Saved to your captain’s log.':`${n} of 8 words`;setCont()};t.oninput=upd;upd();if(cont.disabled)t.focus()}
 }
-function lockProof(sec){clearInterval(proofTimer);const bs=()=>document.querySelectorAll('[data-proof]');bs().forEach(b=>b.disabled=true);let left=sec;const h=$('#proofHint'),base=h.textContent;const tick=()=>{h.textContent=base+` Try again in ${left}…`};tick();proofTimer=setInterval(()=>{if(document.hidden)return;left--;if(left<=0){clearInterval(proofTimer);bs().forEach(b=>b.disabled=false);h.textContent=base}else tick()},1000)}
+function lockProof(sec){clearInterval(proofTimer);if(isTestT())return;const bs=()=>document.querySelectorAll('[data-proof]');bs().forEach(b=>b.disabled=true);let left=sec;const h=$('#proofHint'),base=h.textContent;const tick=()=>{h.textContent=base+` Try again in ${left}…`};tick();proofTimer=setInterval(()=>{if(document.hidden)return;left--;if(left<=0){clearInterval(proofTimer);bs().forEach(b=>b.disabled=false);h.textContent=base}else tick()},1000)}
 
-function next(){const p=state.pending;if(!p)return;if(p.kind==='beat'&&PROVE[p.id]&&!(state.proof&&state.proof[p.id]&&state.proof[p.id].done))return;if(p.id==='emergency'&&p.kind==='beat'&&(state.logNote||'').trim().split(/\s+/).filter(Boolean).length<8)return;if(p.id==='emergency'&&p.kind==='beat'&&$('#logNote')&&window.classJunkStop&&classJunkStop($('#logNote'),{prompt:'Why that call? Use limits or rights.',starter:'I made that call because…',source:'from your game'}))return;const pr=$('#proof');if(pr)pr.remove();state.pending=null;$('#result').hidden=true;
+function next(){const p=state.pending;if(!p)return;if(p.kind==='beat'&&PROVE[p.id]&&!(state.proof&&state.proof[p.id]&&state.proof[p.id].done))return;if(!isTestT()&&p.id==='emergency'&&p.kind==='beat'&&(state.logNote||'').trim().split(/\s+/).filter(Boolean).length<8)return;if(!isTestT()&&p.id==='emergency'&&p.kind==='beat'&&$('#logNote')&&window.classJunkStop&&classJunkStop($('#logNote'),{prompt:'Why that call? Use limits or rights.',starter:'I made that call because…',source:'from your game'}))return;const pr=$('#proof');if(pr)pr.remove();state.pending=null;$('#result').hidden=true;
  if(p.kind!=='event'){state.step++;if(state.step<BEATS.length){const ev=nextEvent(state);if(ev){state.openEvent=ev.id;state.openCause=ev.cause(state);save();render();setTimeout(openSurprise,300);return}}}
  if(state.step>=BEATS.length){state.phase='ending';state.ending=endingFor(state);save();render();showEnding();return}
  save();render();toast(`Next: ${BEATS[state.step].title} · ${locations[BEATS[state.step].loc].name}`);
@@ -406,7 +408,7 @@ function showEnding(){
  else if(state.phase==='write'){
   box.innerHTML=`<div class="eyebrow">STEP 9 OF 10 · ONE SENTENCE</div><h2 class="stage-title">Explain your island</h2><p class="stage-help">Name one real moment from your game. (8+ words.)</p><label class="stem" for="sentence">Our island needed a government because…</label><textarea id="sentence" rows="4" maxlength="400" placeholder="…people were dying over water, and when we…">${esc(state.sentence)}</textarea><div id="writeHint" class="task-hint" role="status"></div><button class="primary wide" id="toScore">See how it ended →</button>`;
   $('#sentence').oninput=e=>{state.sentence=e.target.value;save()};
-  $('#toScore').onclick=()=>{const w=state.sentence.trim().split(/\s+/).filter(Boolean);if(w.length<8){$('#writeHint').textContent=`Add a little more. You have ${w.length} words. Write at least 8.`;$('#writeHint').className='task-hint try-again';$('#sentence').focus();return}{const j=window.classJunkStop&&window.classJunkStop($('#sentence'),{prompt:'Explain your island. Name one real moment from your game.',starter:'Our island needed a government because…',source:'from your game'});if(j){$('#writeHint').textContent=j;$('#writeHint').className='task-hint';return}}const f=finalScore();state.score=f.score;state.rank=rankFor(f.score,state.ending,state);state.phase='score';save();render();showEnding();beep(880,.3)};
+  $('#toScore').onclick=()=>{const w=state.sentence.trim().split(/\s+/).filter(Boolean);if(!isTestT()&&w.length<8){$('#writeHint').textContent=`Add a little more. You have ${w.length} words. Write at least 8.`;$('#writeHint').className='task-hint try-again';$('#sentence').focus();return}{const j=window.classJunkStop&&window.classJunkStop($('#sentence'),{prompt:'Explain your island. Name one real moment from your game.',starter:'Our island needed a government because…',source:'from your game'});if(j&&!isTestT()){$('#writeHint').textContent=j;$('#writeHint').className='task-hint';return}}const f=finalScore();state.score=f.score;state.rank=rankFor(f.score,state.ending,state);state.phase='score';save();render();showEnding();beep(880,.3)};
   $('#sentence').focus();
  }else if(state.phase==='score'){
   const f=finalScore(),pt=f.parts,sg=n=>(n>=0?'+':'−')+Math.abs(n);
@@ -646,3 +648,58 @@ render();resize();
 if(!state.started)$('#welcome').hidden=false;
 else{if(state.pending)showResult();else if(state.openEvent)openSurprise();else if(state.phase!=='map')showEnding();const bn=$('#banner');bn.textContent=`Welcome back! You’re on step ${stepNum()} of ${TOTAL_STEPS}.`;bn.hidden=false;setTimeout(()=>bn.hidden=true,6000);}
 rafId=requestAnimationFrame(frame);
+/* ===== Test T. skip bar (shared/turnin.js) =====
+   The teacher signed in as Test T. can jump to any screen or answer the current one.
+   Jumping ahead plays earlier decisions with the first choice it can afford (Test T. only). Surprise disasters still show if they come up in play. */
+try{
+ const NB=BEATS.length,END=1+2*NB,LABELS=['Welcome'];
+ BEATS.forEach((b,k)=>LABELS.push('Decision '+(k+1)+' · '+b.title,'Decision '+(k+1)+' · result + prove it'));
+ LABELS.push('Your ending','Final check 1','Final check 2','Final check 3','Final check 4','One sentence','Score + turn in');
+ const firstOk=cs=>Math.max(0,cs.findIndex(c=>!c.need||state.stats[0]>=c.need));
+ const closeAll=()=>{['#event','#result','#ending','#welcome'].forEach(s=>$(s).hidden=true);const pr=$('#proof');if(pr)pr.remove();clearInterval(readTimer);clearInterval(proofTimer);choiceLocked=false;target=null;keys={};};
+ const pickBeat=k=>{const b=BEATS[k];state.step=k;state.pending=null;state.openEvent=null;choiceLocked=false;if(b.pick2){charterPicks=[0,1];signCharter();}else choose(firstOk(b.choices));};
+ const proofDone=id=>{if(PROVE[id]){state.proof=state.proof||{};const st=state.proof[id]||(state.proof[id]={first:null,done:false});st.done=true;}};
+ const fillBeats=upTo=>{for(let k=0;k<upTo;k++){const id=BEATS[k].id;if(state.picks[id]===undefined)pickBeat(k);proofDone(id);state.pending=null;}closeAll();};
+ (window.classTestHooks=window.classTestHooks||[]).push({
+  count:()=>LABELS.length,
+  index:()=>{
+   if(!state.started)return 0;
+   if(state.phase!=='map')return state.phase==='ending'?END:state.phase==='check'?END+1+Math.min(3,state.check?state.check.idx:0):state.phase==='write'?END+5:END+6;
+   if(state.pending&&state.pending.kind==='beat'){const k=BEATS.findIndex(b=>b.id===state.pending.id);if(k>=0)return 2+2*k;}
+   return 1+2*Math.min(state.step,NB-1);
+  },
+  label:i=>LABELS[i],
+  go:i=>{
+   closeAll();state.openEvent=null;state.openCause='';state.pending=null;
+   if(i===0){state.started=false;state.phase='map';save();render();$('#welcome').hidden=false;return;}
+   state.started=true;
+   if(i<END){
+    const k=Math.floor((i-1)/2),res=(i-1)%2===1;
+    fillBeats(k);state.step=k;state.phase='map';
+    if(!res){save();render();openBeat();return;}
+    const id=BEATS[k].id;
+    if(state.picks[id]===undefined)pickBeat(k);
+    else{const e=[...state.log].reverse().find(l=>l.kind==='beat'&&l.id===id);if(e){state.pending={...e,head:e.title,learnHtml:esc(e.learn),say:state.renSay};save();render();showResult();}}
+    return;
+   }
+   fillBeats(NB);state.step=NB;
+   if(!state.ending||state.phase==='map')state.ending=endingFor(state);
+   const ph=i===END?'ending':i<END+5?'check':i===END+5?'write':'score';
+   if(ph==='check'){if(!state.check)state.check={order:shuffle(['power','state','origin','limits']),idx:0,first:{}};state.check.idx=i-END-1;}
+   if(ph==='score'){const f=finalScore();if(state.score==null)state.score=f.score;if(!state.rank)state.rank=rankFor(f.score,state.ending,state);}
+   state.phase=ph;save();render();showEnding();
+  },
+  solve:()=>{
+   if(!state.started)return;
+   if(!$('#event').hidden){clearInterval(readTimer);choiceLocked=false;
+    if(state.openEvent){const e=EVENTS.find(x=>x.id===state.openEvent);if(e)choose(firstOk(e.choices));}
+    else if(state.phase==='map'&&!state.pending){const b=BEATS[state.step];if(b.pick2){charterPicks=[0,1];signCharter();}else choose(firstOk(b.choices));}
+    return;}
+   const p=state.pending;
+   if(p&&p.kind==='beat'&&PROVE[p.id]&&!(state.proof&&state.proof[p.id]&&state.proof[p.id].done)){clearInterval(proofTimer);proofDone(p.id);save();renderProof(p.id);return;}
+   if(state.phase==='check'&&state.check&&state.check.idx<state.check.order.length){const q=questions()[state.check.order[state.check.idx]],b=document.querySelector('[data-opt="'+q.ans+'"]');if(b&&!b.disabled)b.click();return;}
+   if(state.phase==='map'&&!p&&!state.openEvent&&$('#result').hidden)openBeat();
+  }
+ });
+ if(window.classTestSkip)window.classTestSkip.refresh();
+}catch(e){}

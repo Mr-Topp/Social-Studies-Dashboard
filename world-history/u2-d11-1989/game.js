@@ -421,7 +421,9 @@
     };
     tick();
   }
-  const lockLeft = () => Math.min(LOCK, Math.ceil(((st.lockUntil || 0) - Date.now()) / 1000));
+  const isTestT = () => !!(window.classIsTestT && window.classIsTestT());   // Test T. (teacher): no lockouts / writing rules
+  const tl = secs => isTestT() ? 0 : secs;
+  const lockLeft = () => isTestT() ? 0 : Math.min(LOCK, Math.ceil(((st.lockUntil || 0) - Date.now()) / 1000));
 
   // ---- Check ----
   function check(step) {
@@ -456,11 +458,11 @@
     const why = (step.miss && step.miss[o.n - 1]) || step.hint;
     const before = snap();
     st.wrong[step.id] = (st.wrong[step.id] || 0) + 1;
-    st.lockUntil = Date.now() + LOCK * 1000; st.lockMsg = why; st.lockId = step.id;
+    st.lockUntil = Date.now() + tl(LOCK) * 1000; st.lockMsg = why; st.lockId = step.id;
     save(); moved(before);
     try { window.classFirstTry && window.classFirstTry.wrong(); } catch (e) {}
     $("replies").querySelectorAll("button").forEach(x => x.disabled = true);
-    runLock(why, $("qmsg"), () => draw(step), LOCK);
+    runLock(why, $("qmsg"), () => draw(step), tl(LOCK));
   }
   function solved(step, quiet) {
     const r = $("replies"); if (r) r.outerHTML = `<div class="sent"><span>${esc(step.options[0])}</span><small>✓ Cracked</small></div>`;
@@ -506,11 +508,11 @@
     }
     const text = `${nRight} of ${step.rows.length} right. ${step.hint}`;
     st.wrong[step.id] = (st.wrong[step.id] || 0) + 1;
-    st.lockUntil = Date.now() + LOCK * 1000; st.lockMsg = text; st.lockId = step.id;
+    st.lockUntil = Date.now() + tl(LOCK) * 1000; st.lockMsg = text; st.lockId = step.id;
     save(); moved(before);
     try { window.classFirstTry && window.classFirstTry.wrong(); } catch (e) {}
     setRows(true);
-    runLock(text, $("qmsg"), () => drawRows(step), LOCK);
+    runLock(text, $("qmsg"), () => drawRows(step), tl(LOCK));
   }
   function sorted(step, quiet) {
     $("rows").innerHTML = step.rows.map(r => `<div class="brow ok"><span class="clue"><span class="ic" aria-hidden="true">${r.icon}</span>${esc(r.t)}</span><span class="got">✓ ${esc(r.a)}</span></div>`).join("");
@@ -654,12 +656,12 @@
     const why = (q.miss && q.miss[o.n - 1]) || "Think back to that day's lesson.";
     st.lr.wrong[q.id] = (st.lr.wrong[q.id] || 0) + 1;
     st.lr.streak = 0;
-    st.lockUntil = Date.now() + LR_LOCK * 1000; st.lockMsg = why; st.lockId = q.id;
+    st.lockUntil = Date.now() + tl(LR_LOCK) * 1000; st.lockMsg = why; st.lockId = q.id;
     save();
     try { window.classFirstTry && window.classFirstTry.wrong(); } catch (e) {}
     lrHud(false);
     $("replies").querySelectorAll("button").forEach(x => x.disabled = true);
-    runLock(why, msg, () => lrOptions(step), LR_LOCK);
+    runLock(why, msg, () => lrOptions(step), tl(LR_LOCK));
   }
   function lrHud(up) {
     const n = lrNext(), k = st.lr.streak || 0;
@@ -712,7 +714,7 @@
   const plain = s => String(s || "").normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
   async function send(e) {
     const msg = $("sendMsg");
-    for (const p of PROMPTS) {
+    for (const p of (isTestT() ? [] : PROMPTS)) {   // Test T. (teacher) skips the writing rules
       const box = $("w_" + p.id), v = (box.value || "").trim();
       const n = PROMPTS.indexOf(p) + 1;
       const bad = t => { msg.textContent = t; msg.className = "msg bad"; box.focus(); };
@@ -804,4 +806,29 @@
     w.appendChild(notMe); w.hidden = false;
   }
   render();
+
+  // ---------------- Test T. skip bar (shared/turnin.js) ----------------
+  // The teacher signed in as Test T. can jump to any screen or answer the current check.
+  try {
+    (window.classTestHooks = window.classTestHooks || []).push({
+      count: () => TOTAL,
+      index: () => Math.max(0, Math.min(st.step, TOTAL - 1)),
+      label: i => STEPS[i].short || STEPS[i].kicker || STEPS[i].type,
+      go: i => { if (!st.name) st.name = "Test T."; st.step = i; st.lockUntil = 0; save(); render(); window.scrollTo(0, 0); },
+      solve: () => {
+        const s = STEPS[Math.max(0, Math.min(st.step, TOTAL - 1))]; if (!s) return;
+        if ((s.type === "check" || s.type === "sort") && !st.done[s.id]) { st.done[s.id] = true; st.lockUntil = 0; save(); render(); }
+        else if (s.type === "event" && st.picks[s.id] == null) { const b = document.querySelector("#dbox .dcard"); if (b) b.click(); }
+        else if (s.type === "lightning" && lrNext() >= 0) {
+          // One Lightning question per press: tap its right answer so the explanation shows, then it moves on.
+          if (locked) return;   // the last right answer is still showing
+          const q = LR[lrNext()];
+          st.lockUntil = 0;
+          const b = [...document.querySelectorAll("#replies .reply")].find(x => x.textContent === q.options[0] && !x.disabled);
+          if (b) b.click(); else { st.lr.done[q.id] = true; save(); render(); }
+        }
+      }
+    });
+    if (window.classTestSkip) window.classTestSkip.refresh();
+  } catch (e) {}
 })();

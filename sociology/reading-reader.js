@@ -34,7 +34,7 @@ function clearSaved(){try{localStorage.removeItem(STORE)}catch(e){}}
 function shuffle(items){const a=[...items];for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
 function openImage(src,alt){$('large').src=src;$('large').alt=alt;$('zoom').showModal()}
 function renderChoices(){const q=groups[groupIndex].questions[questionIndex];const options=shuffle(q.choices.map((text,i)=>({text,correct:i===q.answer})));if(options.map(o=>o.text).join('|')===previousOrder)options.push(options.shift());previousOrder=options.map(o=>o.text).join('|');$('choices').replaceChildren();options.forEach((option,i)=>{const button=document.createElement('button');button.type='button';button.className='choice';button.disabled=!ready;const letter=document.createElement('span');letter.className='letter';letter.textContent=String.fromCharCode(65+i);const text=document.createElement('span');text.textContent=option.text;button.append(letter,text);button.onclick=()=>choose(option.correct);$('choices').append(button)})}
-function unlockAfter(seconds,retry){clearInterval(timer);ready=false;$('choices').querySelectorAll('button').forEach(b=>b.disabled=true);$('lock').hidden=false;let left=seconds;function label(){const prefix=retry?'Look again.':focusImage?'Look closely.':'Read first.';$('lock').textContent=prefix+' Choices open in '+left+' seconds.'}label();timer=setInterval(()=>{if(document.hidden){$('lock').textContent='Reading time pauses while this tab is hidden.';return}if(focusImage&&(!focusImage.complete||!focusImage.naturalWidth)){$('lock').textContent='Waiting for the picture to load.';return}left--;label();if(left<=0){clearInterval(timer);ready=true;$('lock').hidden=true;$('choices').querySelectorAll('button').forEach(b=>b.disabled=false)}},1000)}
+function unlockAfter(seconds,retry){clearInterval(timer);if(window.classIsTestT&&window.classIsTestT()){ready=true;$('lock').hidden=true;$('choices').querySelectorAll('button').forEach(b=>b.disabled=false);return}ready=false;$('choices').querySelectorAll('button').forEach(b=>b.disabled=true);$('lock').hidden=false;let left=seconds;function label(){const prefix=retry?'Look again.':focusImage?'Look closely.':'Read first.';$('lock').textContent=prefix+' Choices open in '+left+' seconds.'}label();timer=setInterval(()=>{if(document.hidden){$('lock').textContent='Reading time pauses while this tab is hidden.';return}if(focusImage&&(!focusImage.complete||!focusImage.naturalWidth)){$('lock').textContent='Waiting for the picture to load.';return}left--;label();if(left<=0){clearInterval(timer);ready=true;$('lock').hidden=true;$('choices').querySelectorAll('button').forEach(b=>b.disabled=false)}},1000)}
 function nextPosition(){let g=groupIndex,q=questionIndex+1;if(q>=groups[g].questions.length){g++;q=0}return {g,q}}
 function choose(isCorrect){if(!ready||correct)return;const q=groups[groupIndex].questions[questionIndex];if(!isCorrect){const k=groupIndex+'-'+questionIndex;misses[k]=(misses[k]||0)+1}if(isCorrect){correct=true;completed++;$('feedback').textContent='That fits. '+q.explain;$('feedback').className='fb ok';$('next').disabled=false;$('bar').value=completed;$('questionProgress').textContent=completed+' of '+total+' questions done';$('choices').querySelectorAll('button').forEach(b=>b.disabled=true);savedPos=nextPosition();save()}else{$('feedback').textContent='Not quite. '+(q.hint||(focusImage?'Look at the marked picture and read its words again.':'Read the text again.'))+' The choices are mixed up now.';$('feedback').className='fb no';ready=false;renderChoices();unlockAfter(8,true);save()}}
 function evidenceFor(q){return q.comicImage||q.image||(Array.isArray(q.images)&&q.images.length===1?q.images[0]:null)}
@@ -129,4 +129,19 @@ if($('reflection'))$('reflection').addEventListener('input',save);
  ['intro','work','finish'].forEach(id=>$(id)&&mo.observe($(id),{attributes:true,attributeFilter:['hidden']}));
  ['questionProgress','turnMsg','progressText'].forEach(id=>$(id)&&mo.observe($(id),{childList:true,characterData:true,subtree:true}));
  update();
+})();
+
+/* ---- Test T. skip bar (shared/turnin.js): jump to any question or the finish ---- */
+(function(){
+ const flat=[];groups.forEach((g,gi)=>g.questions.forEach((q,qi)=>flat.push({gi,qi,label:g.title+' · Q'+(qi+1)})));
+ const onFinish=()=>!$('finish').hidden;
+ try{(window.classTestHooks=window.classTestHooks||[]).push({
+  count:()=>flat.length+1,
+  index:()=>onFinish()?flat.length:$('work').hidden?0:Math.max(0,flat.findIndex(f=>f.gi===groupIndex&&f.qi===questionIndex)),
+  label:i=>i<flat.length?flat[i].label:'Finish + turn in',
+  go:i=>{if(i>=flat.length){finished=true;save();showFinish();return}
+   const f=flat[i],newGroup=f.gi!==groupIndex||$('work').hidden;groupIndex=f.gi;questionIndex=f.qi;
+   $('intro').hidden=true;$('finish').hidden=true;$('work').hidden=false;if(newGroup)showGroup();else showQuestion(false)},
+  solve:()=>{if($('work').hidden||correct)return;ready=true;choose(true)}
+ });if(window.classTestSkip)window.classTestSkip.refresh()}catch(e){}
 })();

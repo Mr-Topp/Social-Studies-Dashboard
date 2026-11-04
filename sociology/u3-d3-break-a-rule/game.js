@@ -218,7 +218,7 @@
   function head(kicker, title) { return `<div class="shead"><span class="kick">${esc(kicker)}</span><h2>${esc(title)}</h2></div>`; }
   function readLock(btns, lockEl) {
     btns.forEach(b => b.disabled = true);
-    let left = READ;
+    let left = (window.classIsTestT && window.classIsTestT()) ? 0 : READ;   // Test T.: no read wait
     const tick = () => {
       if (left <= 0) { btns.forEach(b => b.disabled = false); if (lockEl) { lockEl.textContent = ""; lockEl.className = "msg"; } return; }
       if (lockEl) { lockEl.textContent = "⏳ Read first… " + left; lockEl.className = "msg wait"; }
@@ -297,7 +297,7 @@
           save(); briggsBump("😏");
           const ev = $(shakeId || "evidence"); if (ev) { ev.classList.remove("shake"); void ev.offsetWidth; ev.classList.add("shake"); }
           locked = true; area.querySelectorAll("button").forEach(x => x.disabled = true);
-          let left = LOCK;
+          let left = (window.classIsTestT && window.classIsTestT()) ? 0 : LOCK;   // Test T.: no wait
           const tick = () => {
             if (left <= 0) { locked = false; fb.textContent = "🔍 " + c.hint; fb.className = "msg"; $("bMood").textContent = briggsMood(); draw(false); return; }
             fb.textContent = "😏 Briggs smirks. " + c.hint + " New order in " + left + "…"; fb.className = "msg bad";
@@ -548,6 +548,7 @@
   };
   const plain = s => String(s || "").normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
   function writingProblem(p) {
+    if (window.classIsTestT && window.classIsTestT()) return "";   // Test T. (teacher) skips the writing rules
     const box = $("w_" + p.id), v = (box.value || "").trim();
     if (window.classJunkStop) {
       const junk = window.classJunkStop(box, { starter: p.stem, source: "from today" });
@@ -649,4 +650,37 @@
   // Read-only test hook (lets automated tests see progress). Students never see it.
   window.__ruleBreakers = { get state() { return JSON.parse(JSON.stringify(st)); }, steps: STEPS.map(s => s.id) };
   render();
+
+  // ---------------- Test T. skip bar (shared/turnin.js) ----------------
+  // The teacher signed in as Test T. can jump to any screen or answer the current check.
+  try {
+    const tFirstCard = k => { st.order = st.order || {}; if (!st.order[k]) st.order[k] = shuffle(CARDS[k].map(c => c.id)); return st.order[k][0]; };
+    const tRuleQuiet = k => { const c = CARDS[k].find(x => x.id === tFirstCard(k)); st.rule[k] = c.id; addTrust(c.trust, TEENS[k].name + ": " + c.name); if (c.tag) addTag(k, c.tag); if (c.drop) dropTag(k, c.drop); };
+    const at = type => STEPS.findIndex(s => s.type === type);
+    const TL = { file: s => TEENS[s.teen].name + "'s case file", phone: () => "Tyler's phone", rule: s => TEENS[s.teen].name + ": your ruling", later: () => "6 months later",
+      jobs: () => "5 years later: job fair", archive: () => "Edna Griffin, 1948", gboro: () => "Greensboro, 1960", ending: () => "Ending", write: () => "Opinion + turn in" };
+    (window.classTestHooks = window.classTestHooks || []).push({
+      count: () => TOTAL + 1,
+      index: () => st.step < 0 ? 0 : Math.min(st.step, TOTAL - 1) + 1,
+      label: i => i === 0 ? "Title" : TL[STEPS[i - 1].type](STEPS[i - 1]),
+      go: i => {
+        if (!st.name) st.name = "Test T.";
+        const t = i - 1;
+        // safe defaults (first card) for rulings the jump skips past
+        for (let j = 0; j < t && j < TOTAL; j++) { const s = STEPS[j]; if (s.type === "rule" && !st.rule[s.teen]) tRuleQuiet(s.teen); }
+        if (t > at("later") && !st.back) settleLater();
+        if (t < at("ending")) st.ending = null;
+        locked = false; anim = false;
+        st.step = t; save(); render(); window.scrollTo(0, 0);
+      },
+      solve: () => {
+        if (st.step < 0) return;
+        const s = STEPS[st.step];
+        if (s.check && !st.done[s.check]) { st.done[s.check] = true; locked = false; anim = true; save(); render(); }
+        else if (s.type === "rule" && !st.rule[s.teen]) playCard(s.teen, tFirstCard(s.teen));
+        else if (s.type === "gboro" && (st.gb || 0) < 3) { st.gb = 3; anim = true; save(); render(); }
+      }
+    });
+    if (window.classTestSkip) window.classTestSkip.refresh();
+  } catch (e) {}
 })();

@@ -356,6 +356,7 @@
     st.wrong[qid] = (st.wrong[qid] || 0) + 1; save();
     const box = $("opts-" + qid), fb = $("fb-" + qid), wrap = $("chk-" + qid);
     if (wrap && q.style !== "plain") { wrap.classList.remove("shake"); void wrap.offsetWidth; wrap.classList.add("shake"); }
+    if (window.classIsTestT && window.classIsTestT()) { box.innerHTML = optsHtml(qid, false); fb.textContent = "Not quite. " + q.hint + " Try again."; return; }   // Test T.: no wait
     box.innerHTML = optsHtml(qid, true);   // reshuffled, nothing left highlighted
     let left = LOCK;
     const tick = () => { fb.textContent = "Not quite. " + q.hint + " The choices will mix up. Try again in " + left + "…"; };
@@ -574,7 +575,8 @@
   async function send() {
     const msg = $("sendMsg"), btn = $("sendBtn");
     msg.className = "msg";
-    for (const p of PROMPTS) {
+    const testT = window.classIsTestT && window.classIsTestT();   // Test T. (teacher) skips the writing rules
+    for (const p of (testT ? [] : PROMPTS)) {
       const box = $(p.id), v = (box.value || "").trim();
       const starter = isEs() ? tr(p.starter) : p.starter;
       if (window.classJunkStop) {
@@ -671,4 +673,47 @@
   });
 
   render();
+
+  // ---------------- Test T. skip bar (shared/turnin.js) ----------------
+  // The teacher signed in as Test T. can jump to any screen or answer the current check.
+  try {
+    const TLABEL = { result: "result", history: "real file", briefing: "Briefing 1938", ending: "Ending", debrief: "Debrief + map", write: "Memo + turn in" };
+    (window.classTestHooks = window.classTestHooks || []).push({
+      count: () => TOTAL + 1,
+      index: () => Math.max(0, Math.min(st.step + 1, TOTAL)),
+      label: i => {
+        if (i === 0) return "Title";
+        const s = STEPS[i - 1];
+        if (s.type === "crisis") return CRISES[s.c].label;
+        return s.c != null ? CRISES[s.c].label + " " + TLABEL[s.type] : TLABEL[s.type];
+      },
+      go: i => {
+        try { if (!localStorage.getItem(NAMEKEY)) localStorage.setItem(NAMEKEY, "Test T."); } catch (e) {}
+        // fill the first choice for any crisis the jump skips past, so later screens have a pick to show
+        for (let j = 0; j < i - 1 && j < TOTAL; j++) {
+          const s = STEPS[j];
+          if (s.type !== "crisis") continue;
+          const c = CRISES[s.c];
+          if (!st.picks[c.id]) { const o = c.options[0]; st.picks[c.id] = o.k; st.deltas[c.id] = Object.assign({}, o.fx); st.notes[c.id] = ""; }
+        }
+        if (i - 1 >= STEPS.findIndex(s => s.type === "ending") && !st.ending) st.ending = endingFor();
+        clearTimers(); selected = null; anim = null; welcome = false;
+        st.step = i - 1; save(); render(true);
+      },
+      solve: () => {
+        const s = STEPS[st.step]; if (!s) return;
+        let q = null;
+        if (s.type === "crisis") {
+          const c = CRISES[s.c];
+          if (c.intel && !st.solved[c.intel]) q = c.intel;
+          else { const b = app.querySelector(".cards .card:not([disabled])"); if (b) { b.click(); const go = app.querySelector('[data-act="commit"]'); if (go) go.click(); } return; }
+        }
+        else if (s.type === "history") q = CRISES[s.c].report || null;
+        else if (s.type === "briefing") q = "q7";
+        else if (s.type === "debrief") q = "q6";
+        if (q && !st.solved[q]) { st.solved[q] = true; save(); render(false); }
+      }
+    });
+    if (window.classTestSkip) window.classTestSkip.refresh();
+  } catch (e) {}
 })();

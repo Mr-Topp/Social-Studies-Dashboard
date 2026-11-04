@@ -366,7 +366,7 @@ document.getElementById('prev').onclick=function(){show(i-1);};document.getEleme
 document.getElementById('nbtn').onclick=function(){nt.classList.toggle('on');};
 function full(){if(!document.fullscreenElement)document.documentElement.requestFullscreen&&document.documentElement.requestFullscreen();else document.exitFullscreen();}
 document.getElementById('fs').onclick=full;
-</script><script src="../../shared/assignments.js?v=20261103p22"></script><script src="../../shared/turnin.js?v=20261103t"></script>
+</script><script src="../../shared/assignments.js?v=20261103p22"></script><script src="../../shared/turnin.js?v=20261103ttt"></script>
 <script>
 var EXIT_CFG={"title": "Civil War to Modern America (Q90–118)", "standard": "SS.9-12.Gov.14; SS.9-12.Gov.15; SS.9-12.Gov.11; SS.9-12.Gov.3 — who counts as a citizen, how rights grew, and the Americans who made a difference (Iowa civics test Q94, Q110)", "key": "f5-exit-ticket-v2", "assignmentId": "civics-f5-presentation", "q": [{"id": "q1", "label": "Q1 · Lincoln", "text": "Abraham Lincoln is famous for many things. Name one.", "choices": ["Led the United States during the Civil War", "Wrote the Declaration of Independence", "Bought the Louisiana Territory from Spain", "Was the first president of the United States"], "right": "Led the United States during the Civil War"}, {"id": "q2", "label": "Q2 · Why the Korean War", "text": "Why did the United States enter the Korean War?", "choices": ["To stop the spread of communism", "To force the Iraqi military from Kuwait", "Because Japan attacked Pearl Harbor", "Because Germany attacked U.S. ships"], "right": "To stop the spread of communism"}], "w": {"text": "Pick ONE: the 15th Amendment, Susan B. Anthony, Carrie Chapman Catt, or the civil rights movement. How did it (or she) help more people get rights?", "placeholder": "___ helped more people get rights because…", "min": 8, "label": "Written answer", "short": "Add a little more. Use a full sentence that explains WHY."}};
 // ---- Online exit ticket (sends to the teacher dashboard) ----
@@ -390,10 +390,11 @@ ov.querySelectorAll('[data-q]').forEach(function(b){b.onclick=function(){var q=Q
  if(b.dataset.c===q.right){if(window.classFirstTry)classFirstTry.right(q.id);st.done[q.id]=true;save();draw()}
  else{if(window.classFirstTry)classFirstTry.wrong();draw({q:q.id,t:'Not quite. The choices moved. Think back to the slides and try again.'})}}});
 document.getElementById('xTurn').onclick=turnIn}
-function turnIn(){var s=document.getElementById('xStatus'),ans=document.getElementById('xAns').value.trim(),name=document.getElementById('xName').value.trim(),btn=document.getElementById('xTurn');
- if(Q.some(function(q){return !st.done[q.id]})){s.textContent='Answer questions 1'+(Q.length>1?' and 2':'')+' first.';return}
- if(ans.split(/\s+/).filter(Boolean).length<(C.w.min||8)){s.textContent=C.w.short;document.getElementById('xAns').focus();return}
+function turnIn(){var tt=window.classIsTestT&&window.classIsTestT(),s=document.getElementById('xStatus'),ans=document.getElementById('xAns').value.trim(),name=document.getElementById('xName').value.trim(),btn=document.getElementById('xTurn');
+ if(!tt&&Q.some(function(q){return !st.done[q.id]})){s.textContent='Answer questions 1'+(Q.length>1?' and 2':'')+' first.';return}
+ if(!tt&&ans.split(/\s+/).filter(Boolean).length<(C.w.min||8)){s.textContent=C.w.short;document.getElementById('xAns').focus();return}
  {var j=window.classJunkStop&&window.classJunkStop(document.getElementById('xAns'),{source:'from the slides'});if(j){s.textContent=j;return}}
+ if(!name&&tt)name='Test T.';
  if(!name){s.textContent='Type your first name and last initial, like Jordan M.';document.getElementById('xName').focus();return}
  if(!window.classTurnIn){s.textContent='Turn-in only works on the class website. Tell your teacher.';return}
  btn.disabled=true;s.textContent='Turning in…';
@@ -406,6 +407,14 @@ open.onclick=function(){draw();ov.hidden=false};
 var exitIx=S.indexOf(document.getElementById('exit'));
 function sync(){open.hidden=(i!==exitIx)}
 var oldShow=show;show=function(n){oldShow(n);sync()};sync();
+// ---- Test T. skip bar (shared/turnin.js): jump to any slide or the online exit ticket ----
+try{(window.classTestHooks=window.classTestHooks||[]).push({
+ count:function(){return S.length+1},
+ index:function(){return ov.hidden?Math.max(0,Math.min(i,S.length-1)):S.length},
+ label:function(n){if(n>=S.length)return 'Exit ticket (online)';var h=S[n].querySelector('h1,h2,h3'),t=h?h.textContent.replace(/\s+/g,' ').trim():'';return (t.length>42?t.slice(0,40)+'…':t)||S[n].id||('Slide '+(n+1))},
+ go:function(n){n=Math.max(0,Math.min(S.length,n));if(n>=S.length){show(exitIx>-1?exitIx:S.length-1);draw();ov.hidden=false}else{ov.hidden=true;show(n)}},
+ solve:function(){if(ov.hidden)return;var c=false;Q.forEach(function(q){if(!st.done[q.id]){st.done[q.id]=true;c=true}});if(c){save();draw()}}
+});if(window.classTestSkip)window.classTestSkip.refresh()}catch(e){}
 })();
 </script>
 </body></html>

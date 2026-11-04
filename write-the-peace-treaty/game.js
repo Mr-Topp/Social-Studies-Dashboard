@@ -145,6 +145,7 @@
 
   // ---------------- Multiple-choice check (reshuffles after every miss) ----------------
   let locked = false;
+  const isTestT = () => !!(window.classIsTestT && window.classIsTestT());   // Test T. (teacher): no lockouts / gates / writing rules
   function checkWidget(id, onDone) {
     const q = CHECKS[id], box = document.createElement("div");
     const rec = st.checks[id] || (st.checks[id] = { done: false, wrong: 0 });
@@ -180,7 +181,7 @@
   function miss(area, box, fb, hint, redraw, wrongs, unlock, lock) {
     lock(); area.querySelectorAll("button").forEach(x => { x.disabled = true; });
     box.classList.remove("shake"); void box.offsetWidth; box.classList.add("shake");
-    let left = wrongs >= 2 ? LOCK + 2 : LOCK;
+    let left = isTestT() ? 0 : wrongs >= 2 ? LOCK + 2 : LOCK;
     const tick = () => {
       fb.className = "msg bad";
       if (left <= 0) { unlock(); fb.textContent = "Not quite. " + hint + " Try again."; redraw(); return; }
@@ -419,8 +420,8 @@
   async function send() {
     const msg = $("sendMsg"), btn = $("sendBtn");
     msg.className = "msg";
-    if (!st.headline) { msg.className = "msg bad"; msg.textContent = "Pick a headline first."; return; }
-    for (const p of PROMPTS) {
+    if (!st.headline && !isTestT()) { msg.className = "msg bad"; msg.textContent = "Pick a headline first."; return; }
+    for (const p of (isTestT() ? [] : PROMPTS)) {   // Test T. (teacher) skips the writing rules
       const box = $(p.id), v = box.value.trim();
       if (window.classJunkStop) {
         const junk = window.classJunkStop(box, { starter: p.stem, source: "from today" });
@@ -481,7 +482,7 @@
   function render() {
     // Fix a save that points past unfinished work.
     const need = [() => st.checks.promise && st.checks.promise.done].concat(FILES.map(f => () => !!(st.files[f.id] && st.files[f.id].done)), [() => st.checks.dyson && st.checks.dyson.done]);
-    for (let i = 0; i < Math.min(st.step, need.length); i++) if (!need[i]()) { st.step = i; save(); break; }
+    if (!isTestT()) for (let i = 0; i < Math.min(st.step, need.length); i++) if (!need[i]()) { st.step = i; save(); break; }   // Test T. may skip ahead
     header();
     app.innerHTML = "";
     if (st.step < 0) return titleScreen();
@@ -505,4 +506,36 @@
     app.insertBefore(el(`<p class="welcome" role="status">Welcome back! You're on step ${s + 1} of ${STEPS.length}: ${STEPS[s].name}.</p>`), app.firstChild);
   }
   window.__case = { FILES, CHECKS };
+
+  // ---------------- Test T. skip bar (shared/turnin.js) ----------------
+  // The teacher signed in as Test T. can jump to any step or answer the current check/file/cartoon task.
+  try {
+    const clickRight = id => {
+      locked = false;
+      const b = [...app.querySelectorAll(".check .choice")].find(x => x.textContent === CHECKS[id].options[0]);
+      if (b) b.click();
+    };
+    (window.classTestHooks = window.classTestHooks || []).push({
+      count: () => STEPS.length,
+      index: () => Math.max(0, Math.min(st.step, STEPS.length - 1)),
+      label: i => STEPS[i].name,
+      go: i => { if (!st.name) st.name = "Test T."; locked = false; fileLock = false; st.step = i; save(); render(); window.scrollTo(0, 0); },
+      solve: () => {
+        const s = STEPS[Math.max(0, Math.min(st.step, STEPS.length - 1))].id;
+        if (s === "promise" && !(st.checks.promise && st.checks.promise.done)) return clickRight("promise");
+        if (/^f\d$/.test(s)) {
+          const f = FILES[+s[1]], rec = st.files[f.id] || {};
+          fileLock = false;
+          if (!rec.yn) { rec.yn = true; st.files[f.id] = rec; save(); render(); }
+          else if (!rec.done) { rec.done = true; st.files[f.id] = rec; save(); render(); }
+          return;
+        }
+        if (s === "warning") {
+          if ((st.hot || 0) < 2) { st.hot = 2; st.miss = 0; save(); render(); }
+          else if (!(st.checks.dyson && st.checks.dyson.done)) clickRight("dyson");
+        }
+      }
+    });
+    if (window.classTestSkip) window.classTestSkip.refresh();
+  } catch (e) {}
 })();

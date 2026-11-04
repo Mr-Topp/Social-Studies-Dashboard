@@ -21,6 +21,7 @@
   const MAX = { t: 10, e: 6, h: 10 };
 
   const $ = id => document.getElementById(id);
+  const isT = () => { try { return !!(window.classIsTestT && window.classIsTestT()); } catch (e) { return false; } };   // Test T. (teacher preview)
   const isEs = () => !!(window.SiteLang && window.SiteLang.isEs());
   const tr = s => (window.SiteLang ? window.SiteLang.t(s) : s);
   function el(tag, cls, text) { const e = document.createElement(tag); if (cls) e.className = cls; if (text != null) e.textContent = text; return e; }
@@ -386,7 +387,7 @@
       grid.appendChild(b);
     });
     card.append(head, grid);
-    return () => flips.length >= s.need;
+    return () => isT() || flips.length >= s.need;   // Test T. doesn't have to flip clues first
   }
 
   // ---------------- Moves (decisions): big icon cards ----------------
@@ -499,7 +500,7 @@
           st.wrong[s.id] = (st.wrong[s.id] || 0) + 1; if (window.classFirstTry) window.classFirstTry.wrong(); save();
           locked = true; b.classList.add("miss", "shake");
           area.querySelectorAll("button").forEach(x => x.disabled = true);
-          let left = LOCK;
+          let left = isT() ? 0 : LOCK;   // Test T. skips the wrong-answer wait
           hint.textContent = "Not quite. " + s.hint;
           fb.className = "msg bad";
           const tick = () => {
@@ -608,6 +609,7 @@
   const plain = s => String(s || "").normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
   // Returns "" if the answer is fine, or a message to show.
   function problemWith(p, box) {
+    if (isT()) return null;   // Test T. (teacher) skips the writing rules
     const v = (box.value || "").trim();
     if (window.classJunkStop) {
       const junk = window.classJunkStop(box, { starter: isEs() ? tr(p.stem) : p.stem, source: "from today", sourceEs: "de hoy" });
@@ -782,4 +784,39 @@
     w.hidden = false;
   }
   render();
+
+  // ---------------- Test T. skip bar (shared/turnin.js) ----------------
+  // The teacher signed in as Test T. can jump to any screen or answer the current one.
+  try {
+    // Make the first move the player can afford (no re-render). Used to fill skipped decisions.
+    const tPick = s => {
+      if (st.picks[s.id] != null) return;
+      let i = s.moves.findIndex(m => st.fx.e + (val(m.fx, st).e || 0) >= 0); if (i < 0) i = 0;
+      const m = s.moves[i];
+      st.picks[s.id] = i; apply(val(m.fx, st), m.s, s.id); st.log[st.log.length - 1].move = true;
+      if (m.why) st.why = true;
+      if (m.ren) st.metRen = true;
+    };
+    (window.classTestHooks = window.classTestHooks || []).push({
+      count: () => TOTAL,
+      index: () => Math.max(0, Math.min(st.step, TOTAL - 1)),
+      label: i => { const s = STEPS[i]; return s.kind === "end" ? "Ending" : s.kind === "write" ? "Writing + turn in" : (s.short || s.title); },
+      go: i => {
+        if (!st.name) st.name = "Test T.";
+        // Walk the semester in order: skipped decisions get the first move so the ending has data.
+        for (let k = 0; k < i; k++) { const s = STEPS[k]; enter(s); if (s.moves) tPick(s); }
+        st.step = i; locked = false; selLine = null; save(); render(); window.scrollTo(0, 0);
+      },
+      solve: () => {
+        if (st.step < 0) return;
+        const s = STEPS[Math.min(st.step, TOTAL - 1)];
+        locked = false;
+        if (s.clues) st.flips[s.id] = s.clues.map((c, n) => n);
+        if (s.kind === "check" && !st.done[s.id]) { st.done[s.id] = true; save(); render(); }
+        else if (s.kind === "match") { s.pairs.forEach((p, n) => { st.match[n] = true; }); selLine = null; save(); render(); }
+        else if (s.moves && st.picks[s.id] == null) { tPick(s); save(); render(); }
+      }
+    });
+    if (window.classTestSkip) window.classTestSkip.refresh();
+  } catch (e) {}
 })();

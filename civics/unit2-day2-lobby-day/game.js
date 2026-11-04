@@ -285,7 +285,7 @@
             st.wrong[id] = (st.wrong[id] || 0) + 1; if (window.classFirstTry) window.classFirstTry.wrong(); save();
             locked = true; area.querySelectorAll("button").forEach(x => { x.disabled = true; });
             taunt(); box.classList.remove("shake"); void box.offsetWidth; box.classList.add("shake");
-            let left = LOCK;
+            let left = (window.classIsTestT && window.classIsTestT()) ? 0 : LOCK;   // Test T. (teacher) skips the wrong-answer lock
             const tick = () => {
               if (!fb.isConnected) { locked = false; return; }
               fb.textContent = "Not quite. " + c.hint + " The choices will mix up. Try again in " + left + "…"; fb.className = "msg bad";
@@ -679,7 +679,7 @@
   async function turnIn() {
     const msg = $("sendMsg");
     const isEs = window.SiteLang && window.SiteLang.isEs();
-    for (const p of PROMPTS) {
+    for (const p of ((window.classIsTestT && window.classIsTestT()) ? [] : PROMPTS)) {   // Test T. (teacher) skips the writing rules
       const box = $("w_" + p.id), v = (box.value || "").trim();
       if (window.classJunkStop) {
         const junk = window.classJunkStop(box, { starter: isEs ? window.SiteLang.t(p.stem) : p.stem, source: "from your game", sourceEs: "de tu juego" });
@@ -772,5 +772,41 @@
     $("welcome").hidden = false;
   }
   render();
+
+  // ---------------- Test T. skip bar (shared/turnin.js) ----------------
+  // The teacher signed in as Test T. can jump to any step or answer the current one.
+  // Jumping ahead plays earlier steps with the first choice / first card it can afford (Test T. only).
+  try {
+    const LABELS = ["Title", "Your client", "Week 1 · team meeting", "Week 1 · card", "Week 2 · PAC call", "Week 2 · Super PAC", "Week 2 · card", "Week 3 · tally", "Week 3 · card", "Week 3 · the wall", "Week 3 · late-night offer", "Week 4 · news", "Week 4 · card", "Vote day", "Ending", "Report + turn in"];
+    const PLAY_W = { 3: 1, 6: 2, 8: 3, 12: 4 };
+    const solveHere = () => {
+      locked = false;
+      const ck = panel().querySelector('[id^="chk_"]');
+      if (ck) { const id = ck.id.slice(4); if (!st.done[id]) { st.done[id] = true; justDone = id; save(); render(); return true; } }
+      const w = PLAY_W[st.beat];
+      if (w && !st.plays[w]) {
+        const id = CARD_ORDER.find(k => !st.used[k] && st.money >= CARDS[k].money && st.vol >= CARDS[k].vol);
+        if (id) { play(w, id, CARDS[id].pick ? SEN[0].id : null); return true; }
+        return false;
+      }
+      const d = panel().querySelector("[data-sp], [data-dil]");
+      if (d && d.onclick) { d.onclick(); return true; }
+      return false;
+    };
+    (window.classTestHooks = window.classTestHooks || []).push({
+      count: () => LABELS.length,
+      index: () => st.side ? Math.max(0, Math.min(LABELS.length - 1, st.beat)) : 0,
+      label: i => LABELS[i],
+      go: i => {
+        if (!st.name) st.name = "Test T.";
+        if (!st.side) { st.side = Math.random() < 0.5 ? "fix" : "block"; st.money = SIDES[st.side].money; st.vol = SIDES[st.side].vol; st.started = Date.now(); }
+        locked = false;
+        for (let b = 1; b < i; b++) { st.beat = b; sel = null; selTarget = null; render(); for (let k = 0; k < 3 && solveHere(); k++); }
+        st.beat = i; sel = null; selTarget = null; save(); render(); window.scrollTo(0, 0);
+      },
+      solve: () => { if (st.side && st.beat > 0) solveHere(); }
+    });
+    if (window.classTestSkip) window.classTestSkip.refresh();
+  } catch (e) {}
   window.__lobby = { get st() { return st; }, closest, yesCount, CHECKS, CARDS };
 })();

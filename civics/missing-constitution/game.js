@@ -535,7 +535,7 @@
         cs.wrong++; save();
         locked = true; box.querySelectorAll("button").forEach(x => x.disabled = true);
         b.classList.add("shake");
-        let left = LOCK;
+        let left = (window.classIsTestT && window.classIsTestT()) ? 0 : LOCK;   // Test T. (teacher) skips the wrong-answer lock
         const msg = $("checkMsg");
         $("judgeSays").innerHTML = `<span>${esc(T("Not quite. " + c.hint))}</span>`;
         const tick = () => {
@@ -655,7 +655,7 @@
   async function send() {
     const msg = $("sendMsg");
     const es = window.SiteLang && window.SiteLang.isEs();
-    for (const p of PROMPTS) {
+    for (const p of ((window.classIsTestT && window.classIsTestT()) ? [] : PROMPTS)) {   // Test T. (teacher) skips the writing rules
       const box = $("w_" + p.id), v = (box.value || "").trim();
       if (window.classJunkStop) {
         const junk = window.classJunkStop(box, { starter: es ? T(p.stem) : p.stem, source: "from the game", sourceEs: "del juego" });
@@ -736,6 +736,52 @@
   };
   if (st.step > 0) { $("welcome").textContent = "Welcome back! You're on step " + st.step + " of " + STEPS + "."; $("welcome").hidden = false; }
   render();
+
+  // ---------- Test T. skip bar (shared/turnin.js) ----------
+  // The teacher signed in as Test T. can jump to any screen or answer the current one.
+  // Unplayed showdowns get filled in with the best unused card (Test T. only).
+  try {
+    const SCREENS = [{ step: 0, label: "Title" }, { step: 1, label: "How it works" }];
+    ROUNDS.forEach((r, i) => {
+      const n = "Showdown " + (i + 1);
+      SCREENS.push({ step: i + 2, phase: "play", label: n + " · " + r.short }, { step: i + 2, phase: "result", label: n + " · result" });
+      if (r.check) SCREENS.push({ step: i + 2, phase: "check", label: n + " · evidence check" });
+      if (r.id === "r4") SCREENS.push({ step: i + 2, phase: "reward", label: n + " · take back a card" });
+    });
+    SCREENS.push({ step: 9, label: "Ending" }, { step: 10, label: "Case file + turn in" });
+    const bestCard = r => HAND.find(k => !st.burned[k] && r.fits[k] && r.fits[k].fit === "best") || HAND.find(k => !st.burned[k] && r.fits[k]);
+    const playBest = r => {
+      enterRound(r);
+      const k = bestCard(r);
+      if (k) { st.rounds[r.id].tries.push(k); st.burned[k] = r.id; resolve(r, r.fits[k].fit, k); } else resolve(r, "slide", null);
+    };
+    const fill = upTo => { for (let j = 0; j < upTo; j++) { const r = ROUNDS[j]; if (!(st.rounds[r.id] && st.rounds[r.id].outcome)) { st.step = j + 2; playBest(r); } } };
+    (window.classTestHooks = window.classTestHooks || []).push({
+      count: () => SCREENS.length,
+      index: () => {
+        const ph = st.step >= 2 && st.step <= 8 ? (st.phase || "play") : undefined;
+        const k = SCREENS.findIndex(x => x.step === st.step && x.phase === ph);
+        return Math.max(0, k >= 0 ? k : SCREENS.findIndex(x => x.step === st.step));
+      },
+      label: i => SCREENS[i].label,
+      go: i => {
+        const t = SCREENS[i];
+        if (!st.name) st.name = "Test T.";
+        locked = false; busy = false; selected = null; order = null; st.miss = null;
+        if (t.step >= 2 && t.step <= 8) fill(t.phase === "play" ? t.step - 2 : t.step - 1);
+        else if (t.step >= 9) { fill(ROUNDS.length); st.ending = computeEnding(); }
+        $("welcome").hidden = true; st.step = t.step; st.phase = t.phase || "play"; save(); render();
+      },
+      solve: () => {
+        if (st.step < 2 || st.step > 8) return;
+        const r = curRound();
+        if (st.phase === "play") { if (!busy) playBest(r); }
+        else if (st.phase === "check") { const cs = st.checks[r.check] || (st.checks[r.check] = { wrong: 0, done: false }); if (!cs.done) { cs.done = true; locked = false; save(); render(); } }
+        else if (st.phase === "reward") { const b = document.querySelector("#hand .pcard"); if (b) b.click(); }
+      }
+    });
+    if (window.classTestSkip) window.classTestSkip.refresh();
+  } catch (e) {}
 
   // For testing and the Spanish file check.
   window.PowerGrab = { ROUNDS, CHECKS, CARDS, PIECES, PROMPTS, PROMPT_TAGS, ENDINGS, STAMPS, state: () => st };

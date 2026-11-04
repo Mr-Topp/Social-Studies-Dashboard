@@ -105,7 +105,7 @@
   .day-tabs,.reader-tools{display:none!important}
 }
 </style>
-<script src="../shared/assignments.js?v=20261103p22"></script><script src="../shared/turnin.js?v=20261103t"></script></head>
+<script src="../shared/assignments.js?v=20261103p22"></script><script src="../shared/turnin.js?v=20261103ttt"></script></head>
 <body>
 <header class="gr-head" data-years="1939 — 1945"><div class="gr-wrap">
 <div class="kicker">U.S. History · World War II</div>
@@ -270,6 +270,7 @@ PAGE_QUESTIONS.push([
 ]);
 const API='https://fynn-class-assignment-submissions-20261024.neotboy.chatgpt.site/api/submit';
 const READ_SECONDS=15;
+function testTOn(){try{return !!(window.classIsTestT&&window.classIsTestT())}catch(e){return false}} // Test T. (teacher) skips the reading timer, locks, and writing rules
 let dayIndex=0,checkIndex=0,pageNow=1,sectionStart=1,sectionEnd=5,zoomed=false,sectionRead=new Set(),pageTimer=null,currentChoices=[],selectedChoice=-1;
 const $=id=>document.getElementById(id);
 const answerKey=(d,i,part)=>'wwii-reading-v3-'+DAYS[d].id+'-'+i+'-'+part;
@@ -298,7 +299,7 @@ function updateProgress(){
  const d=DAYS[dayIndex],done=d.checks.filter((_,i)=>sectionHasAllCorrect(dayIndex,i)&&getAnswer(i,'us').trim()).length;
  $('answerProgress').textContent=done+' of 6 sections done · '+countPageCorrect(dayIndex)+' of '+pageTotal(d)+' reading questions done';
  $('progressFill').style.width=(done/6*100)+'%';
- if($('nextCheck'))$('nextCheck').hidden=checkIndex===5;if($('nextCheck'))$('nextCheck').disabled=checkIndex===5||!sectionHasAllCorrect(dayIndex,checkIndex)||!$('usAnswer').value.trim();
+ if($('nextCheck'))$('nextCheck').hidden=checkIndex===5;if($('nextCheck'))$('nextCheck').disabled=checkIndex===5||(!testTOn()&&(!sectionHasAllCorrect(dayIndex,checkIndex)||!$('usAnswer').value.trim()));
 }
 function countPageCorrect(dIndex){let total=0;const d=DAYS[dIndex];for(let i=0;i<pageTotal(d);i++)if(getPageAnswer(dIndex,d.start+i)===PAGE_QUESTIONS[dIndex][i][1])total++;return total}
 function updateReadState(secondsLeft=0){
@@ -307,7 +308,7 @@ function updateReadState(secondsLeft=0){
  $('currentPage').textContent=pageLabel(d,pageNow)+' · '+(pageNow-sectionStart+1)+' of '+size+' · '+done+' of '+size+' done'+(!read?' · '+secondsLeft+' sec':'');
  $('prevPage').disabled=pageNow===sectionStart;
  $('nextPage').disabled=pageNow===sectionEnd||!correct;$('nextPage').hidden=pageNow===sectionEnd;/* Next page only while this part has more pages */
- $('usAnswer').disabled=!allCorrect;
+ $('usAnswer').disabled=!allCorrect&&!testTOn();
  $('answerHelp').textContent=allCorrect?'Reading answer correct. Now answer the U.S. question.':'Answer each reading question to unlock the U.S. response.';
  if(!read&&!correct)$('pageFeedback').textContent='Read the page. The choices open after 15 seconds.';
  paintChoices();
@@ -324,6 +325,7 @@ function setPage(n){
  pageNow=Math.max(sectionStart,Math.min(sectionEnd,Number(n)||sectionStart));
  const d=DAYS[dayIndex];$('pageImage').classList.toggle('day5-comic',!!d.pdfPreview);$('pageImage').src=d.preview?'https://images.macmillan.com/folio-assets/interiors-images/9781250793348.IN'+String(pageNow).padStart(2,'0')+'.jpg':d.pdfPreview?'pages/day5-'+String(pageNow).padStart(3,'0')+'.jpg':'pages/day'+(dayIndex+1)+'-'+String(pageNow).padStart(3,'0')+'.jpg';$('pageImage').alt=(d.preview?'Official publisher preview ':d.pdfPreview?'Upright Smithsonian comic ':'Scanned ')+d.book+' '+pageLabel(d,pageNow)
  showPageQuestion();
+ if(!sectionRead.has(pageNow)&&testTOn()){sectionRead.add(pageNow);localStorage.setItem(pageReadKey(dayIndex,checkIndex),JSON.stringify([...sectionRead]))}
  if(sectionRead.has(pageNow)){updateReadState(0);return}
  const pageAtStart=pageNow,unlockAt=Date.now()+READ_SECONDS*1000;
  function tick(){if(pageNow!==pageAtStart)return;const left=Math.max(0,Math.ceil((unlockAt-Date.now())/1000));if(left===0){sectionRead.add(pageAtStart);localStorage.setItem(pageReadKey(dayIndex,checkIndex),JSON.stringify([...sectionRead]));clearInterval(pageTimer);pageTimer=null;updateReadState(0)}else updateReadState(left)}
@@ -365,15 +367,15 @@ $('checkPageAnswer').addEventListener('click',()=>{
  }
 });
 $('prevCheck').addEventListener('click',()=>{saveCurrent();if(checkIndex>0){checkIndex--;showCheck()}});
-$('nextCheck').addEventListener('click',()=>{if(checkIndex<5&&sectionHasAllCorrect(dayIndex,checkIndex)&&getAnswer(checkIndex,'us').trim()){if(usJunk())return;saveCurrent();checkIndex++;showCheck()}});
+$('nextCheck').addEventListener('click',()=>{if(checkIndex<5&&(testTOn()||(sectionHasAllCorrect(dayIndex,checkIndex)&&getAnswer(checkIndex,'us').trim()))){if(!testTOn()&&usJunk())return;saveCurrent();checkIndex++;showCheck()}});
 // Shared junk check (shared/turnin.js) on the U.S. connection box. The question and fact card are on screen.
 function usJunk(){return window.classJunkStop&&window.classJunkStop($('usAnswer'),{prompt:$('usQuestionText').textContent,source:'from the fact card'})}
 $('submitBtn').addEventListener('click',async()=>{
  saveCurrent();const name=$('studentName').value.trim(),d=DAYS[dayIndex],status=$('status'),btn=$('submitBtn');status.className='status';
  if(!name){status.textContent='Type your name first.';status.classList.add('error');$('studentName').focus();return}
- if(d.checks.some((_,i)=>!getAnswer(i,'us').trim())){status.textContent='Answer all 6 U.S. questions first.';status.classList.add('error');return}
- {const bad=window.classWritingCheck?d.checks.findIndex((c,i)=>!classWritingCheck(getAnswer(i,'us'),{prompt:c[1]}).ok):-1;if(bad>=0){checkIndex=bad;showCheck();status.textContent='U.S. question '+(bad+1)+': '+(usJunk()||'Fix this answer.');return}}
- if(d.checks.some((_,i)=>!sectionIsRead(dayIndex,i)||!sectionHasAllCorrect(dayIndex,i))){status.textContent='Read and answer all '+pageTotal(d)+' reading questions before turning in your work.';status.classList.add('error');return}
+ if(!testTOn()&&d.checks.some((_,i)=>!getAnswer(i,'us').trim())){status.textContent='Answer all 6 U.S. questions first.';status.classList.add('error');return}
+ if(!testTOn()){const bad=window.classWritingCheck?d.checks.findIndex((c,i)=>!classWritingCheck(getAnswer(i,'us'),{prompt:c[1]}).ok):-1;if(bad>=0){checkIndex=bad;showCheck();status.textContent='U.S. question '+(bad+1)+': '+(usJunk()||'Fix this answer.');return}}
+ if(!testTOn()&&d.checks.some((_,i)=>!sectionIsRead(dayIndex,i)||!sectionHasAllCorrect(dayIndex,i))){status.textContent='Read and answer all '+pageTotal(d)+' reading questions before turning in your work.';status.classList.add('error');return}
  const answers=Object.assign({Standard:STD[d.id]||'','First-try correct':ftText(dayIndex)},Object.fromEntries(d.checks.map((_,i)=>{const first=d.start+i*groupSize(d);const book=Array.from({length:groupSize(d)},(_,n)=>pageLabel(d,first+n)+': '+getPageAnswer(dayIndex,first+n)).join('\n');return['check'+(i+1),'Book questions:\n'+book+'\nU.S. question: '+d.checks[i][1]+'\nU.S. connection: '+getAnswer(i,'us').trim()]})));
  btn.disabled=true;status.textContent='Sending…';
  try{const res=await classTurnIn(API,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({studentName:name,assignmentId:d.id,answers})});const result=await res.json();if(!res.ok)throw new Error(result.error||'Could not turn this in. Try again.');status.textContent='Turned in! Your teacher has your work.';status.classList.add('success')}
@@ -381,6 +383,37 @@ $('submitBtn').addEventListener('click',async()=>{
  finally{btn.disabled=false}
 });
 showDay(0);(function(){function go(){var m=location.hash.match(/day(\d+)/);if(m){var i=Number(m[1])-1;if(i>=0&&i<DAYS.length)showDay(i);}}go();addEventListener('hashchange',go);})();
+// ---------------- Test T. skip bar (shared/turnin.js) ----------------
+// The teacher signed in as Test T. can jump to any page of any day (and each day's turn-in) and answer its question.
+try{
+ const T_SCREENS=[];DAYS.forEach((d,di)=>{for(let p=d.start;p<=d.end;p++)T_SCREENS.push({d:di,p});T_SCREENS.push({d:di,turn:true})});
+ let tTurn=-1;
+ const tIndex=()=>{if(tTurn===dayIndex&&checkIndex===5&&pageNow===sectionEnd)return T_SCREENS.findIndex(e=>e.d===dayIndex&&e.turn);const k=T_SCREENS.findIndex(e=>e.d===dayIndex&&e.p===pageNow);return k<0?0:k};
+ (window.classTestHooks=window.classTestHooks||[]).push({
+  count:()=>T_SCREENS.length,
+  index:tIndex,
+  label:i=>{const e=T_SCREENS[i],d=DAYS[e.d];return d.day+' · '+(e.turn?'Turn in':pageLabel(d,e.p))},
+  go:i=>{
+   const e=T_SCREENS[Math.max(0,Math.min(i,T_SCREENS.length-1))];
+   if(!$('studentName').value.trim())$('studentName').value='Test T.';
+   if($('usAnswer').dataset.ready)saveCurrent();
+   if(dayIndex!==e.d){showDay(e.d);try{history.replaceState(null,'','#day'+(e.d+1))}catch(err){}}
+   const d=DAYS[e.d];
+   if(e.turn){tTurn=e.d;checkIndex=5;showCheck();setPage(sectionEnd);$('finish').scrollIntoView({block:'start'})}
+   else{tTurn=-1;const ci=Math.floor((e.p-d.start)/groupSize(d));if(checkIndex!==ci){checkIndex=ci;showCheck()}setPage(e.p)}
+   document.dispatchEvent(new Event('change'));
+  },
+  solve:()=>{
+   if(tTurn===dayIndex&&tIndex()===T_SCREENS.findIndex(e=>e.d===dayIndex&&e.turn))return;
+   if(isCurrentCorrect())return;
+   sectionRead.add(pageNow);localStorage.setItem(pageReadKey(dayIndex,checkIndex),JSON.stringify([...sectionRead]));
+   localStorage.setItem(pageAnswerKey(dayIndex,pageNow),pageQuestion()[1]);
+   showPageQuestion();$('pageFeedback').textContent='That is right. The next question is open.';$('pageFeedback').className='page-feedback success';
+   updateReadState(0);updateProgress();document.dispatchEvent(new Event('change'));
+  }
+ });
+ if(window.classTestSkip)window.classTestSkip.refresh();
+}catch(e){}
 </script>
 <script>
 // Display only: progress route, "Done" stamps, today's topic and standards. Reads the page's saved state; never changes answers, keys, locks or turn-in.

@@ -151,9 +151,10 @@ function startPatience() {
 function stopPatience() { clearInterval(patTimer); }
 
 /* ---------------- LOCK + RESHUFFLE for wrong answers ---------------- */
+const isTestT = () => !!(window.classIsTestT && window.classIsTestT()); // Test T. (teacher) skips wrong-answer locks and writing rules
 function lockThen(container, fb, msg, redraw, keep) {
   container.querySelectorAll('button').forEach(b => b.disabled = true);
-  if (!keep) { st.lockUntil = Date.now() + 1500; st.lockMsg = msg; save(); }
+  if (!keep) { st.lockUntil = Date.now() + (isTestT() ? 0 : 1500); st.lockMsg = msg; save(); }
   fb.className = 'fb bad'; fb.textContent = msg;
   const tick = () => { if (Date.now() >= (st.lockUntil || 0)) { st.lockUntil = 0; save(); return redraw(msg); } setTimeout(tick, 150); };
   tick();
@@ -412,7 +413,7 @@ function checkWriting(p, v) {
 }
 async function turnIn() {
   const msg = $('#sendMsg');
-  for (const p of PROMPTS) { const v = ($('#w_' + p.id).value || '').trim(); const bad = checkWriting(p, v); if (bad) { msg.className = 'fb bad'; msg.textContent = bad; $('#w_' + p.id).focus(); return; } }
+  for (const p of (isTestT() ? [] : PROMPTS)) { const v = ($('#w_' + p.id).value || '').trim(); const bad = checkWriting(p, v); if (bad) { msg.className = 'fb bad'; msg.textContent = bad; $('#w_' + p.id).focus(); return; } }
   const ft = firstTry();
   const answers = { 'Standard': 'SS.9-12.Gov.12', 'First-try correct': ft.tot[0] + ' of ' + ft.tot[1], 'First-try by standard': 'Gov.12: ' + ft.tot[0] + ' of ' + ft.tot[1],
     'First-try by skill': 'What shaped them ' + ft.out.clue[0] + '/' + ORDER.length + ' · Idea map ' + ft.out.map[0] + '/' + ORDER.length + ' · Right pitch ' + ft.out.pitch[0] + '/' + ORDER.length + ' · Checks ' + ft.out.checks[0] + '/' + ft.out.checks[1],
@@ -546,6 +547,72 @@ document.querySelectorAll('[data-close]').forEach(b => b.onclick = () => $('#' +
 $('#resetBtn').onclick = () => { if (!confirm('Start over? This erases your progress on this device.')) return; const n = st.name, r = st.room; st = fresh(); ORDER = st.order; st.name = n; st.room = r; st.phase = 'intro'; if (window.classFirstTry) classFirstTry.reset(); save(); location.reload(); };
 if (st.phase !== 'intro') startArena();
 render();
+
+/* ---------------- Test T. skip bar (shared/turnin.js) ----------------
+   The teacher signed in as Test T. can jump to any screen or answer the current one.
+   Jumping ahead fills earlier fairgoers with the right pitch (Test T. only). */
+try {
+  const STEPS = ['listen', 'map', 'pitch', 'result'], N = ORDER.length, F0 = 4, SWAP = F0 + HALF * 4, F1 = SWAP + 2, END = F1 + (N - HALF) * 4, FIN = END + 2;
+  const LABELS = ['Title', 'How it works', 'The idea map', 'Your booth'];
+  const fl = k => ['Listen', 'Map it', 'Pitch', 'Result'].map(s => 'Fairgoer ' + (k + 1) + ' · ' + s);
+  for (let k = 0; k < HALF; k++) LABELS.push(...fl(k));
+  LABELS.push('Shift change · quick check', 'Shift change · new booth');
+  for (let k = HALF; k < N; k++) LABELS.push(...fl(k));
+  LABELS.push('Closing check 1', 'Closing check 2', 'Final + turn in');
+  const boothAt = k => k < HALF ? st.boothA : other(st.boothA);
+  const shownCheck = () => { const c = $('#card'); if ($('#overlay').hidden || !c.classList.contains('check')) return null; const h = c.querySelector('h2'); return Object.keys(CHECKS).find(id => h && h.innerHTML === CHECKS[id].prompt) || null; };
+  const fillFolk = k => { const f = FOLK[ORDER[k]], r = rec(f.id); if (r.pitch) return; const c = correctCards(f, boothAt(k))[0]; r.card = CARDS[c].t; r.pitch = c === 'redirect' ? 'honest' : 'signed'; r.pts = 0; };
+  const fillTo = n => { for (let k = 0; k < n; k++) fillFolk(k); if (n > HALF) { st.swapped = true; (st.checks.c_both || (st.checks.c_both = { wrong: 0, done: false })).done = true; } };
+  const chk = id => st.checks[id] || (st.checks[id] = { wrong: 0, done: false });
+  const toFolk = k => () => { st.idx = k; st.step = 'listen'; st.chips = null; st.hand = null; save(); render(); };
+  (window.classTestHooks = window.classTestHooks || []).push({
+    count: () => LABELS.length,
+    index: () => {
+      if (st.phase === 'title') return 0;
+      if (st.phase === 'intro') return 1;
+      if (st.phase === 'primer') return 1 + Math.min(2, st.primer || 0);
+      if (st.phase === 'final') return FIN;
+      const ck = shownCheck();
+      if (st.phase === 'endchecks') return ck === 'c_iv' ? END : END + 1;
+      if (ck === 'c_both') return SWAP;
+      if (!$('#overlay').hidden && $('#card').classList.contains('swap')) return SWAP + 1;
+      const k = Math.min(st.idx, N - 1);
+      return (k < HALF ? F0 + k * 4 : F1 + (k - HALF) * 4) + Math.max(0, STEPS.indexOf(st.step));
+    },
+    label: i => LABELS[i],
+    go: i => {
+      if (!st.name) st.name = 'Test T.';
+      st.lockUntil = 0; stopPatience(); $('#overlay').hidden = true; $('#bubble').hidden = true; tray.classList.remove('final-tray');
+      if (i === 0) { st.phase = 'title'; save(); render(); return; }
+      if (i < F0) { st.phase = 'primer'; st.primer = i - 1; save(); render(); return; }
+      if (i === SWAP || i === SWAP + 1) {
+        fillTo(HALF); st.phase = 'play'; st.idx = HALF - 1; st.step = 'result'; st.swapped = false; chk('c_both').done = i === SWAP + 1; save(); render(); swapCard(toFolk(HALF)); return;
+      }
+      if (i < END) {
+        const k = i < SWAP ? Math.floor((i - F0) / 4) + 0 : HALF + Math.floor((i - F1) / 4), s = (i < SWAP ? i - F0 : i - F1) % 4;
+        fillTo(k); st.phase = 'play'; st.idx = k; st.step = STEPS[s]; st.chips = null; st.hand = null;
+        if (s === 3) fillFolk(k);
+        save(); render(); return;
+      }
+      fillTo(N); st.idx = N - 1;
+      if (i === FIN) { chk('c_iv').done = true; chk('c_link').done = true; st.phase = 'final'; }
+      else { chk('c_iv').done = i === END + 1; chk('c_link').done = false; st.phase = 'endchecks'; }
+      save(); render();
+    },
+    solve: () => {
+      st.lockUntil = 0;
+      const ck = shownCheck();
+      if (ck) { const b = $('#card [data-n="0"]'); if (b && b.onclick) { b.disabled = false; b.onclick(); } return; }
+      if (st.phase !== 'play' || !$('#overlay').hidden) return;
+      const f = cur(); let b = null;
+      if (st.step === 'listen') b = tray.querySelector('[data-k="' + f.clue + '"]');
+      else if (st.step === 'map') b = tray.querySelector('[data-q="' + f.quad + '"]');
+      else if (st.step === 'pitch') { const right = correctCards(f, booth()); b = [...tray.querySelectorAll('[data-c]')].find(x => right.includes(x.dataset.c)); }
+      if (b && b.onclick) { b.disabled = false; b.onclick(); }
+    }
+  });
+  if (window.classTestSkip) window.classTestSkip.refresh();
+} catch (e) {}
 })();
 /* Double-click guard: ignore clicks for a moment right after a screen redraws,
    so a double-click can't answer the next question before the student sees it. */

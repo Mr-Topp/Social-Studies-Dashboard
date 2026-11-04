@@ -27,6 +27,7 @@
   function L(s) { if (!isEs()) return s; const d = window.HOMEFRONT_ES || {}; return d[s] != null ? d[s] : s; }
   function F(s, o) { return L(s).replace(/\{(\w+)\}/g, (m, k) => (o && o[k] != null ? o[k] : m)); }
   const $ = id => document.getElementById(id);
+  const isT = () => { try { return !!(window.classIsTestT && window.classIsTestT()); } catch (e) { return false; } };   // Test T. (teacher preview)
   const esc = s => String(s == null ? "" : s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
   function shuffle(a) { const b = a.slice(); for (let i = b.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [b[i], b[j]] = [b[j], b[i]]; } return b; }
   const money = n => "$" + (Math.round(n * 100) / 100).toFixed(2).replace(/\.00$/, "");
@@ -215,7 +216,7 @@
             save();
             b.classList.add("shake");
             locked = true; area.querySelectorAll("button").forEach(x => { x.disabled = true; });
-            let left = LOCK;
+            let left = isT() ? 0 : LOCK;   // Test T. skips the wrong-answer wait
             const tick = () => {
               msg.className = "msg try";
               if (left <= 0) { locked = false; msg.textContent = F("✖ {h}", { h: L(q.hint) }); draw(); return; }
@@ -671,6 +672,7 @@
   const plain = s => String(s || "").normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
   // Returns a message if the answer isn't ready yet, or "" if it's fine.
   function writingProblem(p) {
+    if (isT()) return "";   // Test T. (teacher) skips the writing rules
     const box = $("w_" + p.id), v = (box.value || "").trim();
     if (window.classJunkStop) {
       const junk = window.classJunkStop(box, { starter: L(p.stem), source: "from today", sourceEs: "de hoy" });
@@ -776,4 +778,68 @@
   }
   window.addEventListener("resize", () => { if (st.step >= 1) document.documentElement.style.setProperty("--hudH", $("hud").offsetHeight + "px"); });
   render();
+
+  // ---------------- Test T. skip bar (shared/turnin.js) ----------------
+  // The teacher signed in as Test T. can jump to any screen or answer the current one.
+  // A screen = a step + phase (intro pages, the bigger picture, and writing page 2 get their own).
+  try {
+    const SCR = [[1, 0, "Dad shipped out"], [2, 0, "The ration book"], [2, 1, "Check: why ration"], [3, 0, "Shopping week 1"],
+      [4, 0, "Gas + poster (check + choice)"], [5, 0, "Help wanted (choice)"], [6, 0, "Earl's back door (choice)"], [7, 0, "Shopping week 2"],
+      [8, 0, "Dorothy (intro)"], [8, 1, "Double V (check + choice)"], [9, 0, "Bond rally (check)"], [10, 0, "Bond booth (check + choice)"],
+      [11, 0, "Scrap drive (choice)"], [12, 0, "Shopping week 3"], [13, 0, "Harvest: File 1"], [13, 1, "Harvest: File 2 (check + choice)"],
+      [14, 0, "Ending"], [14, 1, "Bigger picture"], [15, 0, "Letter page 1"], [15, 1, "Letter page 2 + turn in"]];
+    const DEC = { 4: ["car", () => CAR], 5: ["job", () => JOB], 6: ["earl", () => EARL], 8: ["dorothy", () => DOROTHY], 10: ["bond", bondChoices], 11: ["scrap", () => SCRAP], 13: ["harvest", () => HARVEST] };
+    const CHK = { 2: "c1", 4: "c2", 8: "c3", 9: "c4", 10: "c5", 13: "c6" };
+    const INTRO = { 8: true, 13: true };
+    const SHOP = { 3: 1, 7: 2, 12: 3 };
+    // Same as decide(), without the re-render. Used to fill skipped choices with the first card.
+    const tDecide = (id, c) => {
+      const fx = typeof c.fx === "function" ? c.fx() : c.fx;
+      st.picks[id] = c.label; st.pickTitles[id] = c.title;
+      const tags = applyFx(fx);
+      if (c.flag) Object.assign(st.f, c.flag);
+      addTrail(c.trail || c.label, fx);
+      return { tags, text: c.result, reveal: c.reveal, who: c.who, icon: c.icon };
+    };
+    (window.classTestHooks = window.classTestHooks || []).push({
+      count: () => SCR.length,
+      index: () => {
+        let best = 0;
+        SCR.forEach((x, n) => { if (x[0] === st.step && x[1] <= st.phase) best = n; else if (x[0] < st.step) best = n; });
+        return best;
+      },
+      label: n => SCR[n][2],
+      go: n => {
+        const [step, phase] = SCR[n];
+        if (!st.name) st.name = "Test T.";
+        // Skipped choices before this screen get the first card so the ending has a trail.
+        Object.keys(DEC).forEach(k => { const [id, list] = DEC[k]; if (+k < step && !st.picks[id]) tDecide(id, list()[0]); });
+        st.step = step; st.phase = phase; st.result = null; st.cart = [];
+        // Back on a choice screen already made: show its result instead of the cards again.
+        const d = DEC[step];
+        if (d && st.picks[d[0]] && (!INTRO[step] || phase === 1)) {
+          const c = d[1]().find(x => x.label === st.picks[d[0]]) || d[1]().find(x => x.title === st.pickTitles[d[0]]);
+          if (c) { const fx = typeof c.fx === "function" ? c.fx() : c.fx; st.result = { tags: fxTags(fx), text: c.result, reveal: c.reveal, who: c.who, icon: c.icon }; st.phase = 9; }
+        }
+        save(); render(); window.scrollTo(0, 0);
+      },
+      solve: () => {
+        const step = st.step, chk = CHK[step], d = DEC[step];
+        if (step < 1 || st.phase === 9) return;
+        if (INTRO[step] && st.phase === 0) return;
+        if (step === 2 && st.phase === 0 && !st.done.c1) return;
+        if (chk && !st.done[chk]) { st.done[chk] = true; save(); justSolved = chk; render(true); return; }
+        if (d && !st.picks[d[0]]) { const b = document.querySelector("#cChoices .dcard"); if (b) b.click(); return; }
+        const week = SHOP[step];
+        if (week) {
+          // Fill a fair basket: dinners until 7, then one cooking fat, all within the points.
+          st.cart = []; let red = 0, blue = 0, dn = 0;
+          stock(week).forEach(i => { if (i.out || i.black || i.fat || dn + i.d > 7) return; if (red + (i.red || 0) > weekRed(week) || blue + (i.blue || 0) > BLUE_WEEK) return; st.cart.push(i.id); red += i.red || 0; blue += i.blue || 0; dn += i.d; });
+          const fat = stock(week).find(i => i.fat && red + i.red <= weekRed(week)); if (fat) st.cart.push(fat.id);
+          checkout(week);
+        }
+      }
+    });
+    if (window.classTestSkip) window.classTestSkip.refresh();
+  } catch (e) {}
 })();

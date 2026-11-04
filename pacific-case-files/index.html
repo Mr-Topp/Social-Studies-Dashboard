@@ -18,7 +18,7 @@
     @media(prefers-reduced-motion:reduce){*,*::before,*::after{scroll-behavior:auto!important;animation-duration:.01ms!important;transition-duration:.01ms!important}}
   .turnin{margin:18px 0;padding:15px;border-radius:14px;background:#ffffff12;border:1px solid #ffffff35}.turnin h2{color:white;font-size:1.25rem}.turnin label{display:block;color:#f1d38a;font-weight:800;margin:9px 0 4px}.turnin input,.turnin textarea{display:block;width:100%;padding:10px;border-radius:8px;border:1px solid #cfc5b3;font:inherit;color:#172733}.turnin textarea{min-height:72px}.turnin-status{min-height:1.3em;color:#d8e7de;font-size:.85rem;margin:7px 0 0}\n.std-line{font-size:.92rem;margin:0 0 6px;line-height:1.35}.std-line b{color:var(--gold)}.goal-line{font-size:.95rem;margin:0 0 10px}.welcome-back{background:#e4f3e9;border:1px solid #83b394;border-radius:10px;padding:9px 12px;margin:0 0 10px;font-weight:700}.btn.ghost{background:transparent;color:var(--deep);border:2px solid var(--deep);margin-left:8px}.stem{font-size:.92rem;color:var(--muted);margin:2px 0 6px}.stem b{color:var(--ink)}.visual.noimg img{display:none}.visual.noimg{min-height:0}
   </style>
-<script src="../shared/assignments.js?v=20261103p22"></script><script src="../shared/turnin.js?v=20261103t"></script></head>
+<script src="../shared/assignments.js?v=20261103p22"></script><script src="../shared/turnin.js?v=20261103ttt"></script></head>
 <body>
   <header class="top"><div class="brand"><span class="brand-icon" aria-hidden="true">⌕</span><span>Pacific History<br>Case Files</span></div><div class="score" id="score">✦ 0 / 33 stamps</div></header>
   <main>
@@ -67,8 +67,52 @@
     (function showWelcomeBack(){const p=loadProgress();if(!p||!p.casesDone)return;const box=el("welcomeBack");box.hidden=false;el("startOverBtn").hidden=false;if(p.finished){box.textContent="Welcome back! You finished all 3 cases. Press Continue to turn in.";}else if(p.casesDone>=3){box.textContent="Welcome back! All 3 cases are done. You're on the final match.";}else{box.textContent=`Welcome back — you finished ${p.casesDone} of 3 cases. You're on case ${p.casesDone+1}.`;}el("startBtn").textContent="Continue →";})();
     el("startBtn").addEventListener("click",resume);el("startOverBtn").addEventListener("click",()=>{if(!confirm("Start over? This erases your progress on this device."))return;clearProgress();begin();});el("playAgain").addEventListener("click",()=>{if(!confirm("Play again from case 1? Your saved progress will reset."))return;clearProgress();begin();});
     el("briefingContinue").addEventListener("click",resumeInvestigation);el("notesBack").addEventListener("click",reviewCaseNotes);updateScore();
-    el("submitAssignment").addEventListener("click",async()=>{const name=el("studentName").value.trim(),reflection=el("reflection").value.trim(),button=el("submitAssignment"),status=el("submitStatus");const short=window.classShortName?window.classShortName(name):name;if(!name||!/ [A-Z]\.$/.test(short)){status.textContent="Type your first name + last initial (like Jordan M.).";el("studentName").focus();return;}if(/_{2,}/.test(reflection)||reflection.split(/\s+/).filter(Boolean).length<8){status.textContent="Finish the sentence: fill in every ___ and write at least 8 words.";el("reflection").focus();return;}{const j=window.classJunkStop&&window.classJunkStop(el("reflection"));if(j){status.textContent=j;return;}}button.disabled=true;status.textContent="Sending your work…";try{const response=await classTurnIn("https://fynn-class-assignment-submissions-20261024.neotboy.chatgpt.site/api/submit",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({studentName:name,assignmentId:"pacific-case-files",answers:{"Standard":"SS.9-12.WH.27, SS.9-12.WH.25",score:state.stamps,cases:files.map(f=>({title:f.title,summary:f.summary})),reflection}})});const result=await response.json();if(!response.ok)throw new Error(result.error||"Could not turn in your work.");status.textContent="Turned in! Your teacher has your work. You're done.";button.textContent="Turned in ✓";}catch(error){status.textContent=error instanceof Error?error.message:"Could not turn in your work. Try again.";button.disabled=false;}});
-    
+    el("submitAssignment").addEventListener("click",async()=>{const name=el("studentName").value.trim(),reflection=el("reflection").value.trim(),button=el("submitAssignment"),status=el("submitStatus");const short=window.classShortName?window.classShortName(name):name;if(!name||!/ [A-Z]\.$/.test(short)){status.textContent="Type your first name + last initial (like Jordan M.).";el("studentName").focus();return;}const testT=window.classIsTestT&&window.classIsTestT();/* Test T. (teacher) skips the writing rules */if(!testT&&(/_{2,}/.test(reflection)||reflection.split(/\s+/).filter(Boolean).length<8)){status.textContent="Finish the sentence: fill in every ___ and write at least 8 words.";el("reflection").focus();return;}if(!testT){const j=window.classJunkStop&&window.classJunkStop(el("reflection"));if(j){status.textContent=j;return;}}button.disabled=true;status.textContent="Sending your work…";try{const response=await classTurnIn("https://fynn-class-assignment-submissions-20261024.neotboy.chatgpt.site/api/submit",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({studentName:name,assignmentId:"pacific-case-files",answers:{"Standard":"SS.9-12.WH.27, SS.9-12.WH.25",score:state.stamps,cases:files.map(f=>({title:f.title,summary:f.summary})),reflection}})});const result=await response.json();if(!response.ok)throw new Error(result.error||"Could not turn in your work.");status.textContent="Turned in! Your teacher has your work. You're done.";button.textContent="Turned in ✓";}catch(error){status.textContent=error instanceof Error?error.message:"Could not turn in your work. Try again.";button.disabled=false;}});
+    // ---------------- Test T. skip bar (shared/turnin.js) ----------------
+    // The teacher signed in as Test T. can jump to any part of any case and answer it.
+    try{
+      const SUBS=["notes","sort clues","timeline","quick check 1","quick check 2","case complete"],PER=SUBS.length,TOT=1+files.length*PER+2;
+      const active=id=>el(id).classList.contains("active");
+      (window.classTestHooks=window.classTestHooks||[]).push({
+        count:()=>TOT,
+        index:()=>{
+          if(active("finalScreen"))return el("finalDone").hidden?TOT-2:TOT-1;
+          if(!active("gameScreen"))return 0;
+          const base=1+state.file*PER;let sub=1;
+          if(!el("briefing").hidden)sub=0;
+          else if(el("recap").classList.contains("show"))sub=5;
+          else if(!el("decisionPanel").hidden){if(el("timelineOptions"))sub=2;else{const m=/Quick check (\d)/.exec(el("decisionPanel").textContent);sub=m?2+Number(m[1]):3}}
+          return base+sub;
+        },
+        label:i=>i===0?"Start page":i<TOT-2?"Case "+(Math.floor((i-1)/PER)+1)+" · "+SUBS[(i-1)%PER]:i===TOT-2?"Final match":"Case closed + turn in",
+        go:i=>{
+          i=Math.max(0,Math.min(i,TOT-1));
+          if(!el("studentName").value.trim())el("studentName").value="Test T.";
+          if(i===0){setScreen("welcomeScreen");return}
+          begin();
+          if(i>=TOT-2){files.forEach((f,k)=>state.solved[k]=f);state.stamps=30;updateScore();showFinal();
+            if(i===TOT-1){state.matched=new Set([0,1,2]);state.stamps=33;updateFinalProgress();finishGame()}return}
+          const f=Math.floor((i-1)/PER),sub=(i-1)%PER;
+          for(let k=0;k<f;k++)state.solved[k]=files[k];
+          state.file=f;state.stamps=f*10;updateScore();renderFile();
+          if(sub>=1)resumeInvestigation();
+          if(sub>=2){state.placed=new Set([0,1,2]);unlockTimeline()}
+          if(sub>=3){state.timelinePlaced=new Set(files[f].timeline.map((_,k)=>k));state.decisionStep=sub===3?0:sub===4?1:2;updateProgress()}
+          if(sub===3||sub===4)renderDecision();
+          if(sub===5){state.decisionSolved=true;sealFile()}
+        },
+        solve:()=>{
+          const i=window.classTestHooks[window.classTestHooks.length-1].index();
+          if(active("finalScreen")){if(!el("finalDone").hidden)return;responses.forEach((r,k)=>{if(!state.matched.has(k)){selectResponse(k);matchTarget(r.file)}});return}
+          if(!active("gameScreen"))return;
+          const f=files[state.file],sub=(i-1)%PER;
+          if(sub===1)f.cards.forEach((c,k)=>{if(!state.placed.has(k)){selectCard(k);placeCard(c.bin)}});
+          else if(sub===2){while(el("timelineOptions")&&state.timelinePlaced.size<f.timeline.length)answerTimeline(state.timelinePlaced.size)}
+          else if(sub===3||sub===4){if(state.decisionStep===sub-3)answerDecision(f.decisions[state.decisionStep].correct)}
+        }
+      });
+      if(window.classTestSkip)window.classTestSkip.refresh();
+    }catch(e){}
 </script>
 </body>
 </html>

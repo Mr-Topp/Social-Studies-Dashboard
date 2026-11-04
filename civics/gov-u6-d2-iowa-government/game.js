@@ -18,6 +18,7 @@
   const STANDARD = "SS.9-12.Gov.18, SS.9-12.Gov.19, SS.9-12.Gov.20";
   const OLD_API = "https://fynn-class-assignment-submissions-20261024.neotboy.chatgpt.site/api/submit";
   const LOCK = 5, ZAP_LOCK = 3;          // seconds locked after a wrong answer
+  const isTestT = () => !!(window.classIsTestT && window.classIsTestT());   // Test T. (teacher) skips locks and writing rules
   const HOLD_CHECK = 3, HOLD_ZAP = 2;     // minutes on hold per wrong answer
   const HOLD_MAX = 60;                    // where the hold bar is full
 
@@ -356,7 +357,7 @@
   function markWrong(step, why, mins, secs) {
     st.wrong[step.id] = (st.wrong[step.id] || 0) + 1;
     st.fx.hold = hold() + mins;
-    st.lockUntil = Date.now() + secs * 1000;
+    st.lockUntil = Date.now() + (isTestT() ? 0 : secs) * 1000;
     st.lockMsg = why;
     save(); bumpHold(mins);
     stamp(step.type === "zap" ? "ON HOLD" : "WRONG OFFICE", "bad");
@@ -400,7 +401,7 @@
     const why = (step.miss && step.miss[o.n - 1]) || step.hint || "Try another.";
     markWrong(step, why, zap ? HOLD_ZAP : HOLD_CHECK, zap ? ZAP_LOCK : LOCK);
     $("replies").querySelectorAll("button").forEach(x => x.disabled = true);
-    runLock(why, $("qmsg"), () => draw(step), zap ? ZAP_LOCK : LOCK);
+    runLock(why, $("qmsg"), () => draw(step), isTestT() ? 0 : zap ? ZAP_LOCK : LOCK);
   }
   function solved(step, quiet) {
     const r = $("replies"); if (r) r.outerHTML = `<div class="sent"><span>📞 ${esc(optText(step.options[0]))}</span><small>✓ Connected</small></div>`;
@@ -443,7 +444,7 @@
     const text = `${nRight} of ${step.rows.length} connected. ${step.hint}`;
     markWrong(step, text, HOLD_CHECK, LOCK);
     setRows(true);
-    runLock(text, $("qmsg"), () => drawRows(step), LOCK);
+    runLock(text, $("qmsg"), () => drawRows(step), isTestT() ? 0 : LOCK);
   }
   function sorted(step, quiet) {
     $("rows").innerHTML = step.rows.map(r => `<div class="brow ok"><span class="clue"><span class="ic" aria-hidden="true">${r.icon}</span>${esc(r.t)}</span><span class="got">✓ ${esc(r.a)}</span></div>`).join("");
@@ -549,7 +550,7 @@
   const plain = s => String(s || "").normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
   async function send(e) {
     const msg = $("sendMsg");
-    for (const p of PROMPTS) {
+    for (const p of (isTestT() ? [] : PROMPTS)) {
       const n = PROMPTS.indexOf(p) + 1;
       const box = $("w_" + p.id), v = (box.value || "").trim();
       const bad = t => { msg.textContent = t; msg.className = "msg bad"; box.focus(); };
@@ -634,4 +635,21 @@
     w.appendChild(notMe); w.hidden = false;
   }
   render();
+
+  // ---------------- Test T. skip bar (shared/turnin.js) ----------------
+  // The teacher signed in as Test T. can jump to any screen or answer the current check.
+  try {
+    (window.classTestHooks = window.classTestHooks || []).push({
+      count: () => TOTAL,
+      index: () => Math.max(0, Math.min(st.step, TOTAL - 1)),
+      label: i => STEPS[i].short || STEPS[i].kicker || STEPS[i].type,
+      go: i => { if (!st.name) st.name = "Test T."; st.step = i; st.lockUntil = 0; save(); render(); },
+      solve: () => {
+        const s = STEPS[Math.min(st.step, TOTAL - 1)]; if (!s) return;
+        if (["check", "sort", "zap"].includes(s.type) && !st.done[s.id]) { st.done[s.id] = true; st.lockUntil = 0; save(); render(); }
+        else if (s.type === "call" && st.picks[s.id] == null) { const b = document.querySelector("#dbox .dcard"); if (b) b.click(); }
+      }
+    });
+    if (window.classTestSkip) window.classTestSkip.refresh();
+  } catch (e) {}
 })();

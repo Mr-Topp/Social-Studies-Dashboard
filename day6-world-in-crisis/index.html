@@ -179,7 +179,7 @@ button:disabled{cursor:not-allowed;opacity:.75}
 @media(max-width:860px){.anne-workspace{grid-template-columns:1fr}.flip-stage img{max-height:none;min-height:0;width:100%}}
 @media print{.flip-reader,.flip-nav,.flip-big{display:none!important}.anne-q[hidden],#anneWrite[hidden]{display:block!important}}
 </style>
-<script src="../shared/assignments.js?v=20261103p22"></script><script src="../shared/turnin.js?v=20261103t"></script></head>
+<script src="../shared/assignments.js?v=20261103p22"></script><script src="../shared/turnin.js?v=20261103ttt"></script></head>
 <body>
 <header><div class="wrap">
 <div class="kicker">World History · Day 6</div>
@@ -320,6 +320,7 @@ button:disabled{cursor:not-allowed;opacity:.75}
 const API="https://fynn-class-assignment-submissions-20261024.neotboy.chatgpt.site/api/submit";
 const STANDARD="SS.9-12.WH.31, SS.9-12.WH.30";
 const LOCK_SECONDS=10;
+function testTOn(){try{return !!(window.classIsTestT&&window.classIsTestT())}catch(e){return false}} // Test T. (teacher) skips locks, timers, and writing rules
 const writeIds=["writeUkr","write5"];
 const textIds=[...writeIds,"studentName"];
 const caseIds=["case1","case2","ukr1","ukr2"];
@@ -361,14 +362,14 @@ allIds.forEach(id=>{const e=$(id);const v=localStorage.getItem("day6-crisis-"+id
 function isRight(id){return $(id).disabled&&$(id).value===KEY[id]}
 function anneDone(){return anneIds.filter(isRight).length}
 function caseDone(){return caseIds.filter(isRight).length}
-function syncUkraine(){const open=isRight("ukr1")&&isRight("ukr2");$("writeUkr").disabled=!open;$("ukrLockNote").textContent=open?"":"(Opens when both checks are green.)"}
+function syncUkraine(){const open=(isRight("ukr1")&&isRight("ukr2"))||testTOn();$("writeUkr").disabled=!open;$("ukrLockNote").textContent=open?"":"(Opens when both checks are green.)"}
 syncUkraine();
 // One shared checker: wrong answers reshuffle, then a short lock so students reread instead of guessing.
 function runCheck(ids,btn,status){let wrong=0,blank=0;
 ids.forEach(id=>{const el=$(id),f=$("feedback-"+id);if(el.disabled)return;if(!el.value){blank++;f.className="small fb no";f.textContent="Choose an answer first.";return}
 if(el.value===KEY[id]){window.classFirstTry&&classFirstTry.right(id);markRight(id)}else{window.classFirstTry&&classFirstTry.wrong();wrong++;shuffleSelect(el);f.className="small fb no";f.textContent="Not quite. "+(caseHint[id]||anneHint[id])+" The choices moved."}});
 save();syncUkraine();updateWelcome();
-if(wrong>0){btn.disabled=true;let left=LOCK_SECONDS;const say=()=>{const t="Reread, then try again in "+left+"…";if(status)status.textContent=t;else btn.textContent=t};say();const timer=setInterval(()=>{left--;if(left<=0){clearInterval(timer);btn.disabled=false;if(status)status.textContent="Fix the ones without a green check and check again.";else btn.textContent=btn.dataset.label}else say()},1000)}
+if(wrong>0&&!testTOn()){btn.disabled=true;let left=LOCK_SECONDS;const say=()=>{const t="Reread, then try again in "+left+"…";if(status)status.textContent=t;else btn.textContent=t};say();const timer=setInterval(()=>{left--;if(left<=0){clearInterval(timer);btn.disabled=false;if(status)status.textContent="Fix the ones without a green check and check again.";else btn.textContent=btn.dataset.label}else say()},1000)}
 return wrong===0&&blank===0}
 document.querySelectorAll("[data-check]").forEach(btn=>{btn.dataset.label=btn.textContent;btn.addEventListener("click",()=>runCheck(btn.dataset.check.split(","),btn,null))});
 function checkAnne(){const btn=$("checkAnne"),status=$("anneStatus");runCheck(anneIds,btn,status);const count=anneDone();
@@ -379,11 +380,11 @@ const TOTAL_PARTS=caseIds.length+writeIds.length+anneIds.length;
 function partsDone(){return caseDone()+writeIds.filter(id=>$(id).value.trim()).length+anneDone()}
 function updateWelcome(first){const w=$("welcome"),n=partsDone();if(first){if(n>0){w.style.display="block";w.textContent="Welcome back — your work was saved. You've finished "+n+" of "+TOTAL_PARTS+" parts (4 case checks, 2 short answers, 8 Anne Frank checks)."}}else if(w.style.display==="block")w.textContent="You've finished "+n+" of "+TOTAL_PARTS+" parts."}
 updateWelcome(true);
-function writingProblem(id){const v=$(id).value.trim(),low=v.toLowerCase();if(!v)return "Write your answer first.";if(/_{2,}/.test(v))return "Fill in every ___ with your own words.";const words=low.match(/[a-z']+/g)||[];if(words.length<8)return "Write a full sentence (at least 8 words).";if(/\b(idk|i don'?t know|bruh|lol|nothing)\b/.test(low))return "Use real details, not \"idk.\"";{const j=window.classJunkStop&&window.classJunkStop($(id),{source:"from the story"});if(j)return j;}if(!writeNeed[id].words.some(w=>low.includes(w)))return writeNeed[id].msg;return ""}
+function writingProblem(id){if(testTOn())return "";const v=$(id).value.trim(),low=v.toLowerCase();if(!v)return "Write your answer first.";if(/_{2,}/.test(v))return "Fill in every ___ with your own words.";const words=low.match(/[a-z']+/g)||[];if(words.length<8)return "Write a full sentence (at least 8 words).";if(/\b(idk|i don'?t know|bruh|lol|nothing)\b/.test(low))return "Use real details, not \"idk.\"";{const j=window.classJunkStop&&window.classJunkStop($(id),{source:"from the story"});if(j)return j;}if(!writeNeed[id].words.some(w=>low.includes(w)))return writeNeed[id].msg;return ""}
 async function submitWork(){const status=$("submitStatus"),name=$("studentName").value.trim(),button=$("submitWork");if(!name){status.textContent="Type your first name + last initial (like Jordan M.) first.";$("studentName").focus();return}
-if(caseDone()<4){status.textContent="Get a green check on Cases 1, 2, and both Ukraine checks first.";$("ukraineCase").scrollIntoView({behavior:"smooth",block:"start"});return}
+if(caseDone()<4&&!testTOn()){status.textContent="Get a green check on Cases 1, 2, and both Ukraine checks first.";$("ukraineCase").scrollIntoView({behavior:"smooth",block:"start"});return}
 for(const id of writeIds){const prob=writingProblem(id);if(prob){status.textContent=(id==="writeUkr"?"Ukraine answer: ":"Anne Frank answer: ")+prob;$(id).focus();return}}
-if(anneDone()<8){status.textContent="Get a green check on all eight Anne Frank questions before turning in your work. Press \"Check\" on each Anne Frank page.";$("anneCheck").scrollIntoView({behavior:"smooth",block:"start"});return}
+if(anneDone()<8&&!testTOn()){status.textContent="Get a green check on all eight Anne Frank questions before turning in your work. Press \"Check\" on each Anne Frank page.";$("anneCheck").scrollIntoView({behavior:"smooth",block:"start"});return}
 const answers={Standard:STANDARD};caseIds.forEach(id=>answers[CASE[id]+" · check"]=$(id).selectedOptions[0].textContent);anneIds.forEach((id,i)=>answers["Anne Frank question "+(i+1)]=$(id).selectedOptions[0].textContent);writeIds.forEach(id=>answers[CASE[id]+" · writing"]=$(id).value.trim());
 button.disabled=true;status.textContent="Sending your work…";try{const response=await classTurnIn(API,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({studentName:name,assignmentId:"day6-world-in-crisis",answers})});const result=await response.json();if(!response.ok)throw new Error(result.error||"Could not send your work.");status.textContent="Turned in! Your work was sent to your teacher. You're done.";button.textContent="Turned in ✓"}catch(error){status.textContent=error instanceof Error?error.message:"Could not turn in your work. Try again.";button.disabled=false}}
 $("submitWork").addEventListener("click",submitWork);
@@ -418,7 +419,7 @@ $("clearWork").addEventListener("click",()=>{if(confirm("Start over? This clears
   let read=new Set();try{read=new Set(JSON.parse(localStorage.getItem(K+"read")||"[]"))}catch(e){}
   let cur=FIRST,timer=null;
   const qs=gn=>qByPage[gn]||[];
-  const pageDone=gn=>read.has(gn)&&qs(gn).every(isRight);
+  const pageDone=gn=>(read.has(gn)&&qs(gn).every(isRight))||testTOn();
   const maxOpen=()=>{for(let g=FIRST;g<LAST;g++)if(!pageDone(g))return g;return LAST};
   const nextQ=gn=>{for(let g=gn+1;g<=LAST;g++)if(qByPage[g])return g;return 0};
   function show(gn,scroll){
@@ -426,6 +427,7 @@ $("clearWork").addEventListener("click",()=>{if(confirm("Start over? This clears
     $("anneImg").src=src(cur);$("anneImg").alt="Anne Frank graphic novel page "+cur;if(cur<LAST){const pre=new Image();pre.src=src(cur+1)}
     document.querySelectorAll(".anne-q").forEach(d=>d.hidden=Number(d.dataset.gn)!==cur);
     clearInterval(timer);
+    if(!read.has(cur)&&testTOn()){read.add(cur);localStorage.setItem(K+"read",JSON.stringify([...read]))}
     if(!read.has(cur)){let left=SEC;const tick=()=>{$("anneTimer").textContent="Read this page · "+left+" sec"};tick();
       timer=setInterval(()=>{left--;if(left<=0){clearInterval(timer);read.add(cur);localStorage.setItem(K+"read",JSON.stringify([...read]));$("anneTimer").textContent="";refresh()}else tick()},1000)}
     else $("anneTimer").textContent="";
@@ -453,6 +455,25 @@ $("clearWork").addEventListener("click",()=>{if(confirm("Start over? This clears
   $("anneZoom").addEventListener("click",big);$("anneImg").addEventListener("click",big);$("anneBigClose").addEventListener("click",close);
   $("anneBig").addEventListener("click",e=>{if(e.target.id==="anneBig")close()});document.addEventListener("keydown",e=>{if(e.key==="Escape")close()});
   show(Math.min(Number(localStorage.getItem(K+"at"))||FIRST,maxOpen()),false);
+  // ---------------- Test T. skip bar (shared/turnin.js) ----------------
+  // The teacher signed in as Test T. can jump to any case or Anne Frank page and answer its check.
+  try{
+    const NA=LAST-FIRST+1,TOT=3+NA+1;let at=0;
+    const secFor=i=>i===0?"c1":i===1?"c2":i===2?"ukraineCase":"turnin";
+    (window.classTestHooks=window.classTestHooks||[]).push({
+      count:()=>TOT,
+      index:()=>at>=3&&at<3+NA?3+(cur-FIRST):at,
+      label:i=>i===0?"Case 1 · Russia":i===1?"Case 2 · India":i===2?"Ukraine case":i<3+NA?"Anne Frank page "+(FIRST+i-3):"Turn in",
+      go:i=>{at=Math.max(0,Math.min(i,TOT-1));if(!$("studentName").value.trim()){$("studentName").value="Test T.";save()}syncUkraine();
+        if(at>=3&&at<3+NA)show(FIRST+at-3,true);else $(secFor(at)).scrollIntoView({behavior:"smooth",block:"start"});
+        document.dispatchEvent(new Event("change"))},
+      solve:()=>{const ids=at===0?["case1"]:at===1?["case2"]:at===2?["ukr1","ukr2"]:at<3+NA?qs(cur):[];
+        ids.forEach(id=>{if(!isRight(id))markRight(id)});
+        save();syncUkraine();updateWelcome();if(at>=3&&at<3+NA){read.add(cur);localStorage.setItem(K+"read",JSON.stringify([...read]));refresh()}
+        document.dispatchEvent(new Event("change"))}
+    });
+    if(window.classTestSkip)window.classTestSkip.refresh();
+  }catch(e){}
 })();
 </script>
 </body>

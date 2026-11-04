@@ -134,6 +134,7 @@
   };
   const CHECK_IDS = Object.keys(CHECKS);
   let locked = false;
+  const isTestT = () => !!(window.classIsTestT && window.classIsTestT());   // Test T. (teacher): no lockouts / writing rules
 
   function checkBox(box, id, evidenceHtml, frame, onSolved) {
     const C = CHECKS[id], c = chk(id);
@@ -167,7 +168,7 @@
             c.wrong++; if (window.classFirstTry) window.classFirstTry.wrong(); save();
             b.classList.add("nope"); d.classList.remove("shake"); void d.offsetWidth; d.classList.add("shake");
             locked = true; area.querySelectorAll("button").forEach(x => x.disabled = true);
-            let left = LOCK;
+            let left = isTestT() ? 0 : LOCK;
             const tick = () => {
               if (!document.body.contains(fb)) { locked = false; return; }
               fb.textContent = "Not quite. " + C.hint + " The choices will mix up. Try again in " + left + "…"; fb.className = "msg bad";
@@ -531,7 +532,7 @@
   async function send() {
     const msg = $("sendMsg");
     const plain = s => String(s || "").normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
-    for (const p of PROMPTS) {
+    for (const p of (isTestT() ? [] : PROMPTS)) {   // Test T. (teacher) skips the writing rules
       const box = $("w_" + p.id), v = (box.value || "").trim();
       if (window.classJunkStop) {
         const junk = window.classJunkStop(box, { starter: isEs() ? tr(p.stem) : p.stem, source: "from today", sourceEs: "de hoy" });
@@ -611,4 +612,42 @@
     w.textContent = ""; w.appendChild(t); w.appendChild(document.createTextNode(" ")); w.appendChild(notMe); w.hidden = false;
   }
   render();
+
+  // ---------------- Test T. skip bar (shared/turnin.js) ----------------
+  // The teacher signed in as Test T. can jump to any step (1–13) or answer the current check/decision.
+  // Later steps read earlier decisions (workers, reports, search, letter, 1966), so a jump plays any
+  // skipped decision with the game's own buttons first (Test T. only).
+  try {
+    const NAMES = ["", "Fields vs. furnaces", "Flashback: 1949", "Gao's poster", "1958 harvest report", "Lushan 1959", "Hidden grain",
+      "1959 harvest report", "1960: censorship + letter", "1961: paper vs. real", "1966: Red Guards", "Compare files", "Your ending", "Your testimony + turn in"];
+    const STEP_CHECK = { 2: "c49", 3: "cPoster", 5: "cLushan", 9: "cData", 11: "cCompare" };
+    const DECIDED = { 1: () => st.F != null, 4: () => !!st.y58, 6: () => !!st.search, 7: () => !!st.y59, 8: () => !!st.letter, 10: () => !!st.cr };
+    const decideNow = () => {   // press the game's own button for the decision on screen
+      if (st.step === 1) { const b = $("sendWork"); if (b) b.click(); return; }
+      if (st.step === 4 || st.step === 7) { const b = $("nextBtn"); if (b) b.click(); return; }
+      const c = document.querySelector("#stepCard .dcard:not([disabled])"); if (c) c.click();
+    };
+    (window.classTestHooks = window.classTestHooks || []).push({
+      count: () => TOTAL,
+      index: () => Math.max(0, Math.min(st.step - 1, TOTAL - 1)),
+      label: i => NAMES[i + 1] || "Step " + (i + 1),
+      go: i => {
+        if (!st.name) st.name = "Test T.";
+        const target = i + 1;
+        Object.keys(DECIDED).map(Number).filter(k => k < target && !DECIDED[k]()).forEach(k => { st.step = k; render(); decideNow(); });
+        st.step = target; save(); render(); window.scrollTo(0, 0);
+      },
+      solve: () => {
+        const c = STEP_CHECK[st.step];
+        if (c && !chk(c).done) {
+          locked = false;
+          const b = [...document.querySelectorAll("#opts_" + c + " .opt")].find(x => x.textContent === CHECKS[c].options[0]);
+          if (b) b.click();
+          return;
+        }
+        if (DECIDED[st.step] && !DECIDED[st.step]()) decideNow();
+      }
+    });
+    if (window.classTestSkip) window.classTestSkip.refresh();
+  } catch (e) {}
 })();

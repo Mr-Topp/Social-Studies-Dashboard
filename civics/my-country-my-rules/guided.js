@@ -10,7 +10,9 @@ const starts={build:0,power:8,crisis:15,laws:16};
 const G=state.guide&&state.guide.version===1?state.guide:{version:1,task:0,furthest:0,done:{},picks:{},meanings:{},places:[],round:0,readRounds:[],lawReasons:{},flagConfirmed:false,flagPurpose:''};
 state.guide=G;G.decorating=false;G.lawDrafts=G.lawDrafts||{};G.task=Math.max(0,Math.min(LAST,Number(G.task)||0));G.furthest=Math.max(0,Math.min(LAST,Number(G.furthest)||0));
 let viewingInstructions=false,placePage=0,savedPlaceMode=false,editingRound=null,historyPage=0,replacingSlot=-1,chosenPlace=null,pendingChoice=null,choiceGoal='',mapPurpose='',lawDraft='',lawReason='',lawTask=-1,flagPurpose=G.flagPurpose||'';
-const longEnough=t=>String(t||'').trim().split(/\s+/).filter(Boolean).length>=3&&String(t||'').trim().length>=12;
+// Test T. (the teacher's test student) skips read timers, retry waits, and writing-length rules.
+const isTestT=()=>!!(window.classIsTestT&&window.classIsTestT());
+const longEnough=t=>(isTestT()&&String(t||'').trim().length>0)||String(t||'').trim().split(/\s+/).filter(Boolean).length>=3&&String(t||'').trim().length>=12;
 const hasFlag=()=>!!state.flagSet||state.flag.length>0||state.flagBg!=='#16364a';
 const hasName=t=>String(t||'').trim().length>=2;
 const placeFor=i=>G.places[i]&&state.marks.find(m=>m.id===G.places[i].id);
@@ -115,6 +117,7 @@ function bindQuiz(id,bank,onPass=()=>{}){
   r.status=correct?'correct':'wrong';r.passed=correct;if(!correct)r.wrongAt=Date.now();
   if(correct)onPass();refresh();
  };
+ if($('#quizRetry')&&isTestT())r.wrongAt=0;
  if($('#quizRetry')){const btn=$('#quizRetry'),label=btn.textContent;const left=()=>Math.ceil((8000-(Date.now()-(r.wrongAt||0)))/1000);const tick=()=>{if(!document.body.contains(btn))return;const n=left();if(n>0){btn.disabled=true;btn.textContent=`Read first… ${n}`;setTimeout(tick,500)}else{btn.disabled=false;btn.textContent=label}};tick();}
  if($('#quizRetry'))$('#quizRetry').onclick=()=>{if(r.status!=='wrong'||Date.now()-(r.wrongAt||0)<8000)return;r.variant++;r.status='answer';r.selected=null;r.helpUsed=false;r.order=shuffled(id,r.variant,bank[r.variant%bank.length].choices.length);refresh();};
  if($('#quizClue'))$('#quizClue').addEventListener('toggle',e=>{if(e.target.open){r.helpUsed=true;save();}});
@@ -303,7 +306,7 @@ function bindPowerAlert(){if($('#reviewGovernment'))$('#reviewGovernment').oncli
 const readyAt={};
 /* Read timer: scenario choices unlock after a few seconds so students read the issue first. */
 const readSecs=text=>Math.max(5,Math.min(8,Math.round(String(text).split(/\s+/).length/4)));
-function readGate(key,sec,sel,label){if(!readyAt[key])readyAt[key]=Date.now()+sec*1000;const left=()=>Math.ceil((readyAt[key]-Date.now())/1000);const els=[...document.querySelectorAll(sel)];if(!els.length)return;const note=document.createElement('p');note.className='guided-help read-gate';(els[0].closest('.guided-options')||els[0]).before(note);const tick=()=>{if(!document.body.contains(els[0])){note.remove();return}if(document.hidden){readyAt[key]+=500;setTimeout(tick,500);return}const n=left();if(n>0){els.forEach(e=>e.disabled=true);note.textContent=`${label} Opens in ${n}…`;setTimeout(tick,500)}else{els.forEach(e=>e.disabled=false);note.remove()}};tick();}
+function readGate(key,sec,sel,label){if(isTestT())return;if(!readyAt[key])readyAt[key]=Date.now()+sec*1000;const left=()=>Math.ceil((readyAt[key]-Date.now())/1000);const els=[...document.querySelectorAll(sel)];if(!els.length)return;const note=document.createElement('p');note.className='guided-help read-gate';(els[0].closest('.guided-options')||els[0]).before(note);const tick=()=>{if(!document.body.contains(els[0])){note.remove();return}if(document.hidden){readyAt[key]+=500;setTimeout(tick,500);return}const n=left();if(n>0){els.forEach(e=>e.disabled=true);note.textContent=`${label} Opens in ${n}…`;setTimeout(tick,500)}else{els.forEach(e=>e.disabled=false);note.remove()}};tick();}
 function crisisEvent(slot){
  let rec=G.crises[slot];
  if(!rec){rec=G.crises[slot]=CH.fire(state,E,CountrySociety,slot,G.knowledge.seed);}
@@ -434,4 +437,100 @@ $('#historyCopy').innerHTML=briefingMarkup();
 $('#words').innerHTML=Object.values(E.words).map(w=>`<details class="vocab-term"><summary>${esc(w.name)}</summary><p>${esc(w.text)}</p></details>`).join('')+'<p class="note">Economic terms compare ownership. They do not tell us everything about who rules.</p><p class="note">Term sources: <a href="https://www.imf.org/en/publications/fandd/issues/series/back-to-basics/capitalism" target="_blank" rel="noopener">IMF</a> · <a href="https://www.bu.edu/eci/2024/08/23/comparative-economic-systems/" target="_blank" rel="noopener">Boston University</a></p>';
 refresh();
 document.body.classList.remove('guided-loading');$('#guideLoading')?.remove();
+/* ---------- Test T. skip bar (shared/turnin.js) ----------
+   The teacher signed in as Test T. can jump to any screen or answer the current one.
+   Jumping ahead fills earlier tasks with simple sample picks (Test T. only). */
+try{
+ const SYS=['polity','division','approach','ownership','oversight'],NR=E.governanceEvents.length,R0=18,YEAR=R0+5*(NR-1)+3;
+ const LABELS=['Directions'].concat(titles.slice(0,13),['Compare the systems 1','Compare the systems 2','Compare the systems 3',titles[14]]);
+ for(let n=0;n<NR;n++){LABELS.push('Scenario '+(n+1)+' · choose','Scenario '+(n+1)+' · result','Scenario '+(n+1)+' · check');if(n<CRISIS_SLOTS.length)LABELS.push('Crisis '+(n+1)+' · news','Crisis '+(n+1)+' · result');}
+ LABELS.push('Year over · ending',titles[16],titles[17],'Review + turn in');
+ const T_PLACES=['Hospital','Public School','National Park','Public Library','Congress'];
+ const passQ=(id,bank)=>{const r=quizRecord(id,bank);r.status='correct';r.passed=true;r.wrongAt=0;};
+ const decided=n=>state.decisions.some(d=>d.event===n&&E.governanceEvents[n].choices[d.choice]);
+ const decide=n=>{if(!decided(n)){CountrySociety.changeDecision(state,E.governanceEvents,n,0,'policy');state.revealed={event:n,choice:0};}};
+ const fillRound=n=>{decide(n);G.seenResults[n]=true;passQ('round.'+n,K.rounds[n]);G.readRounds[n]=true;};
+ const crisisRec=k=>G.crises[k]||(G.crises[k]=CH.fire(state,E,CountrySociety,k,G.knowledge.seed));
+ const fillCrisis=k=>{const rec=crisisRec(k);if(rec.choice===null||rec.choice===undefined)CH.resolve(rec,0);rec.seen=true;};
+ const fillTask=i=>{
+  if(i===0&&!hasName(state.name)){state.name='Test Country';$('#countryName').value=state.name;}
+  if(i===1&&!hasName(state.leader)){state.leader='Test Leader';$('#leaderName').value=state.leader;}
+  if(i===2){if(!state.flagSet)state.flagSet={p:'bands-v',c1:FLAG_PAL[1],c2:FLAG_PAL[5],sym:'star'};G.flagConfirmed=true;if(!G.flagPurpose)G.flagPurpose='freedom';}
+  if(i>=3&&i<=7&&!placeFor(i-3)){
+   const slot=i-3,used=G.places.map((p,k)=>k!==slot&&placeFor(k)?placeFor(k).text:'').filter(Boolean);
+   const all=stickerGroups.flatMap(g=>g.items.map(([icon,name])=>({icon,name,category:g.id})));
+   const pick=all.find(p=>T_PLACES.includes(p.name)&&!used.includes(p.name))||all.find(p=>!used.includes(p.name));
+   const before=state.marks.length;buildPlace(pick.icon,pick.name,pick.category);
+   if(state.marks.length>before){const m=state.marks[state.marks.length-1],o=CountrySociety.purposeOptions(m)[0];G.places[slot]={id:m.id,purpose:o[0],purposeText:o[1]};}
+  }
+  if(i>=8&&i<=12){const key=SYS[i-8];if(!(K.systems[key]&&K.systems[key][state[key]]))state[key]=Object.keys(checks[key]).find(k=>K.systems[key]&&K.systems[key][k]);G.picks[key]=state[key];passQ('system.'+key+'.'+state[key],K.systems[key][state[key]]);}
+  if(i===13)COMPARE.forEach((b,n)=>passQ('compare.'+n,b));
+  if(i===14)passQ('briefing',BRIEFING);
+  if(i===15)for(let n=0;n<NR;n++){fillRound(n);if(n<CRISIS_SLOTS.length)fillCrisis(n);}
+  if(i===16||i===17){
+   const slot=i-16;if(!state.rules[slot])E.addRule(state,lawIdeas[slot][1]);
+   const r=state.rules[slot];if(r){if(!longEnough(G.lawReasons[r.id]))G.lawReasons[r.id]='Test T. preview: this law protects people in my country.';G.lawDrafts[slot]={text:r.text,reason:G.lawReasons[r.id]};}
+  }
+  if(i<LAST)G.done[i]=true;
+ };
+ const clearUi=()=>{editingRound=null;pendingChoice=null;choiceGoal='';placePage=0;savedPlaceMode=false;replacingSlot=-1;chosenPlace=null;mapPurpose='';lawTask=-1;};
+ (window.classTestHooks=window.classTestHooks||[]).push({
+  count:()=>LABELS.length,
+  index:()=>{
+   if(G.instructionsSeen!==true||viewingInstructions)return 0;
+   if(G.decorating)return LABELS.length-1;
+   const t=G.task;
+   if(t<13)return 1+t;
+   if(t===13)return 14+G.compareStep;
+   if(t===14)return 17;
+   if(t===15){
+    const due=CRISIS_SLOTS.find(k=>k<G.round&&!crisisDone(k));
+    if(due!==undefined){const rec=G.crises[due];return R0+due*5+3+(rec&&rec.choice!==null&&rec.choice!==undefined?1:0);}
+    const n=G.round;if(n>=NR)return YEAR;
+    if(!decided(n)||editingRound===n)return R0+n*5;
+    return R0+n*5+(G.seenResults[n]===true?2:1);
+   }
+   return t===16?YEAR+1:t===17?YEAR+2:YEAR+3;
+  },
+  label:i=>LABELS[i],
+  go:i=>{
+   clearUi();G.decorating=false;
+   if(i===0){viewingInstructions=true;refresh();return;}
+   G.instructionsSeen=true;viewingInstructions=false;
+   const t=i<=13?i-1:i<=16?13:i===17?14:i<=YEAR?15:i===YEAR+1?16:i===YEAR+2?17:LAST;
+   for(let k=0;k<t;k++)fillTask(k);
+   G.task=t;G.furthest=Math.max(G.furthest,t);
+   if(t===13){G.compareStep=i-14;for(let n=0;n<G.compareStep;n++)passQ('compare.'+n,COMPARE[n]);}
+   if(t===15){
+    if(i===YEAR){fillTask(15);G.round=NR;}
+    else{
+     const j=i-R0,n=Math.floor(j/5),s=j%5;
+     for(let m=0;m<n;m++){fillRound(m);fillCrisis(m);}
+     if(s===0){G.round=n;if(decided(n))editingRound=n;}
+     else if(s<=2){decide(n);G.seenResults[n]=s===2;G.round=n;}
+     else{fillRound(n);G.round=n+1;const rec=crisisRec(n);
+      if(s===3){rec.choice=null;delete rec.effect;delete rec.harm;delete rec.flag;delete rec.abuse;}
+      else if(rec.choice===null||rec.choice===undefined)CH.resolve(rec,0);
+      rec.seen=false;}
+    }
+   }
+   refresh();
+  },
+  solve:()=>{
+   if(G.instructionsSeen!==true||viewingInstructions||G.decorating)return;
+   const t=G.task;
+   if(t===13)passQ('compare.'+G.compareStep,COMPARE[G.compareStep]);
+   else if(t===15){
+    const due=CRISIS_SLOTS.find(k=>k<G.round&&!crisisDone(k));
+    if(due!==undefined){const rec=G.crises[due];if(rec&&(rec.choice===null||rec.choice===undefined))CH.resolve(rec,0);}
+    else if(G.round<NR){const n=G.round;
+     if(!decided(n)||editingRound===n){CountrySociety.changeDecision(state,E.governanceEvents,n,0,'policy');state.revealed={event:n,choice:0};G.seenResults[n]=false;editingRound=null;pendingChoice=null;choiceGoal='';}
+     else if(G.seenResults[n]===true){passQ('round.'+n,K.rounds[n]);G.readRounds[n]=true;}}
+   }
+   else if(t<LAST){fillTask(t);lawTask=-1;}
+   refresh();
+  }
+ });
+ if(window.classTestSkip)window.classTestSkip.refresh();
+}catch(e){}
 })();

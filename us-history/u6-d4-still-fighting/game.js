@@ -351,7 +351,8 @@
     };
     tick();
   }
-  const lockLeft = () => Math.min(LOCK, Math.ceil(((st.lockUntil || 0) - Date.now()) / 1000));
+  const isTestT = () => !!(window.classIsTestT && window.classIsTestT());   // Test T. (teacher): no lockouts / writing rules
+  const lockLeft = () => isTestT() ? 0 : Math.min(LOCK, Math.ceil(((st.lockUntil || 0) - Date.now()) / 1000));
 
   // ---- Check ----
   function check(step) {
@@ -386,12 +387,13 @@
     const why = (step.miss && step.miss[o.n - 1]) || step.hint;
     const first = !st.wrong[step.id];
     st.wrong[step.id] = (st.wrong[step.id] || 0) + 1;
-    st.lockUntil = Date.now() + LOCK * 1000; st.lockMsg = why;
+    const lockSecs = isTestT() ? 0 : LOCK;
+    st.lockUntil = Date.now() + lockSecs * 1000; st.lockMsg = why;
     save(); moved(before);
     try { window.classFirstTry && window.classFirstTry.wrong(); } catch (e) {}
     if (first) stamp("MIXED MESSAGE", "bad");
     $("replies").querySelectorAll("button").forEach(x => x.disabled = true);
-    runLock(why + (first ? " (🤝 −1)" : ""), $("qmsg"), () => draw(step), LOCK);
+    runLock(why + (first ? " (🤝 −1)" : ""), $("qmsg"), () => draw(step), lockSecs);
   }
   function solved(step, quiet) {
     const r = $("replies"); if (r) r.outerHTML = `<div class="sent"><span>${esc(step.options[0])}</span><small>✓ Got it</small></div>`;
@@ -478,7 +480,7 @@
   const plain = s => String(s || "").normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
   async function send(e) {
     const msg = $("sendMsg");
-    for (const p of PROMPTS) {
+    for (const p of (isTestT() ? [] : PROMPTS)) {   // Test T. (teacher) skips the writing rules
       const box = $("w_" + p.id), v = (box.value || "").trim(), n = PROMPTS.indexOf(p) + 1;
       const bad = t => { msg.textContent = t; msg.className = "msg bad"; box.focus(); };
       if (window.classJunkStop) {
@@ -557,4 +559,25 @@
     w.appendChild(notMe); w.hidden = false;
   }
   render();
+
+  // ---------------- Test T. skip bar (shared/turnin.js) ----------------
+  // The teacher signed in as Test T. can jump to any screen or answer the current check.
+  try {
+    (window.classTestHooks = window.classTestHooks || []).push({
+      count: () => TOTAL,
+      index: () => Math.max(0, Math.min(st.step, TOTAL - 1)),
+      label: i => STEPS[i].short || STEPS[i].kicker || STEPS[i].type,
+      go: i => {
+        if (!st.name) st.name = "Test T.";
+        if (STEPS[i] && STEPS[i].type === "verdict") delete st.endSnap;   // re-figure the ending from what's been picked so far
+        st.step = i; st.lockUntil = 0; save(); render(); window.scrollTo(0, 0);
+      },
+      solve: () => {
+        const s = STEPS[Math.max(0, Math.min(st.step, TOTAL - 1))]; if (!s) return;
+        if (s.type === "check" && !st.done[s.id]) { st.done[s.id] = true; st.lockUntil = 0; save(); render(); }
+        else if (s.type === "event" && st.picks[s.id] == null) { const b = document.querySelector("#dbox .dcard"); if (b) b.click(); }
+      }
+    });
+    if (window.classTestSkip) window.classTestSkip.refresh();
+  } catch (e) {}
 })();

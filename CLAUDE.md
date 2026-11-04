@@ -17,6 +17,20 @@ If you think the calendar doesn't fit, tell Fynn and ask with multiple-choice op
 - Where this lives: `CLASS_CALENDAR`, `CLASS_TODAY`, `CLASS_NO_SCHOOL` and activity `day:` numbers in `shared/assignments.js`;
   deck day `plan`s in `teacher-submissions/presentations.js`; day goals in `shared/targets.js`.
 
+## Always: Test T. can skip everything (Fynn decided 2026-11-03)
+
+Every student page (existing and anything new) must let the test student **"Test T."** skip through everything,
+so Fynn can see all the content without playing it. Real students stay locked exactly as before.
+- `shared/turnin.js` draws the 🧪 bar (Back · Skip · Answer it · Jump · Fill writing · Unlock all) when
+  `window.classIsTestT()` is true (device set with `?teacher-test`, or the name "Test T.").
+- Every game/reader must register a hook so Back/Skip/Jump/Answer work — see the comment block
+  "TEST T. SKIP MODE" at the bottom of `shared/turnin.js`, and copy the pattern at the bottom of
+  `us-history/u6-d1-superpower/game.js`. `shared/unit-game.js`, `shared/flip-reader.js` and
+  `sociology/reading-reader.js` already do it.
+- Behind `classIsTestT()` only: skip reading timers, wrong-answer locks, writing rules (length, keywords, blanks),
+  and "finish everything first" gates. The shared writing check already passes Test T.
+- Before delivering a new page, check it as Test T.: every screen reachable from the Jump list, no errors.
+
 ## Working with other chats
 
 Fynn often has more than one chat working on this site at the same time. Before changing anything shared

@@ -465,7 +465,7 @@
             st.wrong[C.id] = (st.wrong[C.id] || 0) + 1; if (window.classFirstTry) window.classFirstTry.wrong(); save();
             locked = true; b.classList.add("nope");
             box.querySelectorAll("button").forEach(x => x.disabled = true);
-            let left = LOCK;
+            let left = (window.classIsTestT && window.classIsTestT()) ? 0 : LOCK;   // Test T.: no wait
             const tick = () => {
               if (!host.isConnected) { locked = false; return; }
               msg.textContent = "Not quite. " + C.hint + " The choices will mix up. Try again in " + left + "…"; msg.className = "msg bad";
@@ -553,7 +553,8 @@
   async function send() {
     const msg = $("sendMsg");
     const plain = s => String(s || "").normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
-    for (const p of PROMPTS) {
+    const testT = window.classIsTestT && window.classIsTestT();   // Test T. (teacher) skips the writing rules
+    for (const p of (testT ? [] : PROMPTS)) {
       const box = $("w_" + p.id), v = (box.value || "").trim();
       if (window.classJunkStop) {
         const junk = window.classJunkStop(box, { starter: isEs() ? tr(p.stem) : p.stem, source: "from today", sourceEs: "de hoy" });
@@ -632,4 +633,44 @@
     };
   }
   render();
+
+  // ---------- Test T. skip bar (shared/turnin.js) ----------
+  // The teacher signed in as Test T. can jump to any screen or answer the current check.
+  try {
+    // Default plan for a day (Test T. only): 1 push on the first open slot.
+    const tPlan = d => {
+      const before = simulate(d), p = DAYS[d].slots.map(() => 0);
+      if (!before.muted && before.m.tokens > 0) { const i = DAYS[d].slots.findIndex((_, k) => !getSlot(d, k, before.f).blocked); p[Math.max(0, i)] = 1; }
+      return p;
+    };
+    const decideAt = STEPS.findIndex(s => s.k === "decide");
+    (window.classTestHooks = window.classTestHooks || []).push({
+      count: () => STEPS.length + 1,
+      index: () => st.step < 0 ? 0 : Math.min(st.step, STEPS.length - 1) + 1,
+      label: i => {
+        if (i === 0) return "Title";
+        const s = STEPS[i - 1];
+        if (s.k === "day") return DAYS[s.d].name + ": " + DAYS[s.d].title;
+        if (s.k === "check") return WEEK[weekOf(i - 1)] + " check: " + CHECKS[s.c].head;
+        return { decide: "Next week: Dex's plan", ending: "Ending", write: "Report + turn in" }[s.k];
+      },
+      go: i => {
+        if (!st.name) st.name = "Test T.";
+        const t = i - 1;
+        // safe defaults (first open slot / first choice) for days and choices the jump skips past
+        for (let j = 0; j < t && j < STEPS.length; j++) { const s = STEPS[j]; if (s.k === "day" && !st.plans[s.d]) st.plans[s.d] = tPlan(s.d); }
+        if (t > decideAt && st.mia == null) st.mia = 0;
+        st.draft = null; locked = false;
+        st.step = t; save(); render(true);
+      },
+      solve: () => {
+        if (st.step < 0) return;
+        const s = STEPS[Math.min(st.step, STEPS.length - 1)];
+        if (s.k === "day") { if (!st.plans[s.d]) { st.draft = { d: s.d, p: tPlan(s.d) }; save(); dayView(s.d, false); const b = $("runBtn"); if (b) { b.disabled = false; b.click(); } } }
+        else if (s.k === "check") { const C = CHECKS[s.c]; if (!st.done[C.id]) { st.done[C.id] = true; save(); render(); } }
+        else if (s.k === "decide") { if (st.mia == null) { const b = app.querySelector("#decHost .pick"); if (b) b.click(); } }
+      }
+    });
+    if (window.classTestSkip) window.classTestSkip.refresh();
+  } catch (e) {}
 })();

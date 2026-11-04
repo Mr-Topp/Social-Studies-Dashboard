@@ -341,7 +341,7 @@
             st.say = "Take your time."; save(); dash();
             locked = true; area.querySelectorAll("button").forEach(x => x.disabled = true);
             bar.classList.remove("hide"); const fill = bar.firstChild; fill.style.transition = "none"; fill.style.width = "100%"; void fill.offsetWidth; fill.style.transition = "width " + LOCK + "s linear"; fill.style.width = "0%";
-            let left = LOCK;
+            let left = (window.classIsTestT && window.classIsTestT()) ? 0 : LOCK;   // Test T.: no wait
             const tick = () => {
               fb.textContent = "Not quite. " + c.hint + " Try again in " + left + "…"; fb.className = "hintmsg bad";
               if (left-- <= 0) { locked = false; bar.classList.add("hide"); fb.textContent = "Not quite. " + c.hint + " Try again."; fb.className = "hintmsg"; draw(); return; }
@@ -663,7 +663,7 @@
     const seats = [...document.querySelectorAll("#vs .vseat")];
     seats.forEach((s, i) => setTimeout(() => s.classList.add("show"), 250 + i * 300));
     const b = nextBtn("See what happened →", () => { st.phase = "ending"; save(); render(); toTop(); }, "coral");
-    b.disabled = true; setTimeout(() => { b.disabled = false; if ($("vtally")) $("vtally").style.visibility = "visible"; }, 250 + 7 * 300);
+    b.disabled = !(window.classIsTestT && window.classIsTestT()); setTimeout(() => { b.disabled = false; if ($("vtally")) $("vtally").style.visibility = "visible"; }, 250 + 7 * 300);
     main().appendChild(b);
   }
   function endingView() {
@@ -707,7 +707,8 @@
   async function send() {
     const msg = $("sendMsg");
     const plain = s => String(s || "").normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
-    for (const p of PROMPTS) {
+    const testT = window.classIsTestT && window.classIsTestT();   // Test T. (teacher) skips the writing rules
+    for (const p of (testT ? [] : PROMPTS)) {
       const box = $("w_" + p.id), v = (box.value || "").trim();
       if (window.classJunkStop) {
         const es = window.SiteLang && window.SiteLang.isEs();
@@ -811,4 +812,56 @@
   startScreen();
   if (st.phase === "start" || !st.name) render(); else { $("start").classList.remove("hide"); $("game").classList.add("hide"); }
   window.__lastBus = { get state() { return st; } };   // read-only peek for testing
+
+  // ---------------- Test T. skip bar (shared/turnin.js) ----------------
+  // The teacher signed in as Test T. can jump to any screen or answer the current check.
+  // Screens: title, every week step (weeks 1-8), vote, ending, Montgomery file, Montgomery check, recap post.
+  try {
+    const TLENS = [5, 5, 5, 5, 3, 5, 3, 2];   // steps per week (week 8's last step is the vote itself)
+    const TSCREENS = [{ ph: "start" }];
+    TLENS.forEach((n, w) => { for (let k = 0; k < n; k++) TSCREENS.push({ ph: "week", w: w + 1, sub: k }); });
+    TSCREENS.push({ ph: "vote" }, { ph: "ending" }, { ph: "brief", seen: false }, { ph: "brief", seen: true }, { ph: "write" });
+    const TNAME = { news: "Route 12 news", crowd: "Crowd night", c1: "Check: the crowd", demand: "Pick demand", c2: "Check: our type", public: "Go public",
+      kob: "Keep Our Budget", c3: "Check: their type", kobReply: "Answer them", chaos: "Chat chaos", c4: "Check: NAACP", official: "Make it official?",
+      jayden: "Jayden's post", tv: "Channel 9", offer: "Pruitt's offer", c5: "Check: the offer", deal: "Take the deal?", burnout: "Burnout",
+      final: "Vote tomorrow", moves: "moves", end: "end of week" };
+    const TDEF = [["news", "crowd", "c1", "moves", "end"], ["demand", "c2", "public", "moves", "end"], ["kob", "c3", "kobReply", "moves", "end"], ["chaos", "c4", "official", "moves", "end"],
+      ["jayden", "moves", "end"], ["offer", "c5", "deal", "moves", "end"], ["burnout", "moves", "end"], ["final", "moves"]];   // labels only; the game's own script decides week 5
+    TNAME.jayden = "Jayden's post / Channel 9";
+    (window.classTestHooks = window.classTestHooks || []).push({
+      count: () => TSCREENS.length,
+      index: () => {
+        if (st.phase === "week") { let n = 1; for (let w = 1; w < st.week; w++) n += TLENS[w - 1]; return Math.max(0, Math.min(n + st.sub, TSCREENS.length - 1)); }
+        if (st.phase === "brief") return TSCREENS.length - ((st.briefSeen || st.done.c6) ? 2 : 3);
+        const i = TSCREENS.findIndex(x => x.ph === st.phase); return i < 0 ? 0 : i;
+      },
+      label: i => {
+        const x = TSCREENS[i];
+        if (x.ph === "week") { const id = st.scripts[x.w] ? st.scripts[x.w][x.sub] : TDEF[x.w - 1][x.sub]; return "Week " + x.w + ": " + (TNAME[id] || id); }
+        return { start: "Title", vote: "Vote night", ending: "Ending", write: "Recap post + turn in" }[x.ph] || (x.seen ? "Montgomery check" : "Montgomery file");
+      },
+      go: i => {
+        const x = TSCREENS[i];
+        if (!st.name) st.name = "Test T.";
+        locked = false; st.say = "";
+        // safe defaults for anything the jump skips past
+        if (i >= 7 && !st.demand) st.demand = "reform";   // week 2's first demand choice
+        if (x.ph === "week") { st.ending = null; st.week = x.w; st.sub = x.sub; }
+        if (x.ph === "brief") st.briefSeen = x.seen;
+        st.phase = x.ph; save(); render(); toTop();
+      },
+      solve: () => {
+        let id = null;
+        if (st.phase === "week") id = scriptFor(st.week)[st.sub];
+        else if (st.phase === "brief" && (st.briefSeen || st.done.c6)) id = "c6";
+        if (!id) return;
+        if (CHECKS[id]) { if (!st.done[id]) { if (id === "c2" && !st.demand) st.demand = "reform"; st.done[id] = true; locked = false; save(); render(true); } }
+        else if (EVENTS[id]) { if (st.picks[id] == null) { const b = $("main").querySelector(".deck .pickcard:not([disabled])"); if (b) b.click(); } }
+        else if (id === "moves") {
+          for (let k = 0; k < 6 && movesLeft() > 0; k++) { const b = $("main").querySelector(".gcard:not([disabled])"); if (!b) break; b.click(); }
+        }
+      }
+    });
+    if (window.classTestSkip) window.classTestSkip.refresh();
+  } catch (e) {}
 })();

@@ -376,7 +376,7 @@
   async function replies(step) {
     const z = $("qzone"); if (!z || z.dataset.on) return; z.dataset.on = "1";
     z.innerHTML = `${step.askAfter ? `<p class="ask">${step.askAfter}</p>` : ""}<div class="typing"><span></span><span></span><span></span></div>`;
-    await wait(TYPING);
+    await wait((window.classIsTestT && window.classIsTestT()) ? 0 : TYPING);   // Test T.: no typing pause
     if (!$("qzone") || $("qzone") !== z) return;
     z.innerHTML = `${step.askAfter ? `<p class="ask">${step.askAfter}</p>` : ""}<div class="replies" id="replies"></div><p class="msg" id="qmsg" role="status" aria-live="polite"></p>`;
     draw(step);
@@ -416,8 +416,9 @@
     if (st.penalty < 2) { st.penalty++; real = applyFx({ press: 1 }); }
     save(); animateFx(real);
     btn.classList.add("wrong");
-    st.lockUntil = Date.now() + LOCK * 1000; save();
-    runLock(step, LOCK);
+    const lockS = (window.classIsTestT && window.classIsTestT()) ? 0 : LOCK;   // Test T.: no wait
+    st.lockUntil = Date.now() + lockS * 1000; save();
+    runLock(step, lockS);
   }
   function runLock(step, secs) {
     const msg = $("qmsg");
@@ -544,6 +545,8 @@
     const msg = $("sendMsg"), box = $("w_shape");
     const v = (box.value || "").trim();
     const say = t => { msg.textContent = t; msg.className = "msg bad"; box.focus(); };
+    const testT = window.classIsTestT && window.classIsTestT();   // Test T. (teacher) skips the writing rules
+    if (!testT) {
     if (window.classJunkStop) {
       const junk = window.classJunkStop(box, { starter: PROMPT.stem, source: "from today" });
       if (junk) { msg.textContent = junk; msg.className = "msg"; return; }
@@ -554,6 +557,7 @@
     const freshWords = new Set((plain(v).match(/[\p{L}']{3,}/gu) || []).filter(w => !stemWords.has(w)));
     if (freshWords.size < PROMPT.newWords) return say("Add more of your own ideas. Use details from Jalen's week.");
     if (PROMPT.mustAll.some(g => !g.some(w => new RegExp("(^|[^\\p{L}])" + plain(w).replace(/[.*+?^${}()|[\]\\]/g, "\\$&"), "iu").test(plain(v))))) return say(PROMPT.mustMsg);
+    }
     if (typeof window.classTurnIn !== "function") return say("Turn-in isn't working right now. Keep this page open and tell your teacher.");
 
     const answers = { "Standard": STANDARD };
@@ -618,4 +622,53 @@
     w.appendChild(notMe); w.hidden = false;
   }
   render();
+
+  // ---------------- Test T. skip bar (shared/turnin.js) ----------------
+  // The teacher signed in as Test T. can jump to any screen or answer the current check.
+  try {
+    // Fill a draft step's picks: open cards first, then any (Test T. only).
+    const tDraftQuiet = step => {
+      const picked = st.picks[step.id] = (st.picks[step.id] || []).slice();
+      const pool = step.cards.filter(c => needMet(c)).concat(step.cards.filter(c => !needMet(c)));
+      pool.forEach(c => { if (picked.length < step.picks && !picked.includes(c.id)) { picked.push(c.id); applyFx(c.fx); } });
+    };
+    const tVoicesQuiet = step => { const n = st.chips == null ? 1 : st.chips; st.picks[step.id] = n; applyFx(step.outcomes[n].fx); };
+    const TL = { finale: "Ending", write: "Text Jalen + turn in" };
+    (window.classTestHooks = window.classTestHooks || []).push({
+      count: () => TOTAL + 1,
+      index: () => st.step < 0 ? 0 : Math.min(st.step, TOTAL - 1) + 1,
+      label: i => {
+        if (i === 0) return "Title";
+        const s = STEPS[i - 1];
+        return TL[s.type] || (s.type === "check" ? "Check: " + s.short : s.short);
+      },
+      go: i => {
+        if (!st.name) st.name = "Test T.";
+        const t = i - 1;
+        // safe defaults (first open cards / default chips) for steps the jump skips past
+        for (let j = 0; j < t && j < TOTAL; j++) {
+          const s = STEPS[j];
+          doEntry(s);
+          if (s.type === "draft" && (st.picks[s.id] || []).length < s.picks) tDraftQuiet(s);
+          else if (s.type === "voices" && st.picks[s.id] == null) tVoicesQuiet(s);
+        }
+        st.lockUntil = 0; locked = false;
+        st.step = t; save(); render(); window.scrollTo(0, 0);
+      },
+      solve: () => {
+        if (st.step < 0) return;
+        const s = STEPS[Math.min(st.step, TOTAL - 1)];
+        if (s.type === "draft") { if ((st.picks[s.id] || []).length < s.picks) { tDraftQuiet(s); save(); render(); } }
+        else if (s.type === "check") {
+          if (!st.done[s.id]) {
+            st.done[s.id] = true; if (s.clues) st.clues[s.id] = s.clueList.map((c, k) => k);
+            if (s.onRight) applyFx(s.onRight);
+            st.lockUntil = 0; locked = false; save(); render();
+          }
+        }
+        else if (s.type === "voices") { if (st.picks[s.id] == null) { tVoicesQuiet(s); save(); render(); } }
+      }
+    });
+    if (window.classTestSkip) window.classTestSkip.refresh();
+  } catch (e) {}
 })();

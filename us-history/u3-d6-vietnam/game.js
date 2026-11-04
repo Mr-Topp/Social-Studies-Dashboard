@@ -470,7 +470,7 @@
         $("domSvg").classList.add("fallen");
         const stg = document.querySelector(".stage"); if (stg) stg.remove();
         $("tapBtn").outerHTML = quote;
-        setTimeout(() => { mountCheck("c1", solved("c1")); const c = $("checkBox"); if (c && c.scrollIntoView) c.scrollIntoView({ behavior: "smooth", block: "center" }); }, 1900);
+        setTimeout(() => { mountCheck("c1", solved("c1")); const c = $("checkBox"); if (c && c.scrollIntoView) c.scrollIntoView({ behavior: "smooth", block: "center" }); }, window.classIsTestT && window.classIsTestT() ? 0 : 1900);   // Test T. skips the wait
       };
     } else mountCheck("c1", solved("c1"));
   };
@@ -606,6 +606,7 @@
 
   const plain = s => String(s || "").normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
   function writingProblem(p) {
+    if (window.classIsTestT && window.classIsTestT()) return "";   // Test T. (teacher) skips the writing rules
     const box = $("w_" + p.id), v = (box.value || "").trim();
     if (window.classJunkStop) {
       const junk = window.classJunkStop(box, { starter: p.stem, source: "from today" });
@@ -716,4 +717,62 @@
     };
   }
   render();
+
+  // ---------------- Test T. skip bar (shared/turnin.js) ----------------
+  // The teacher signed in as Test T. can jump to any screen or answer the current check/page.
+  // Each front page = lay out · printed + reader mail · fact-check. Unplayed pages get the first two stories.
+  try {
+    const SCR = [{ s: 1, k: "file", label: "The old file (dominoes)" }];
+    ED_ORDER.forEach(n => {
+      SCR.push({ s: n, k: "layout", label: ED[n].title + " · lay out" }, { s: n, k: "printed", label: ED[n].title + " · printed" });
+      if (ED[n].check) SCR.push({ s: n, k: "check", label: ED[n].title + " · fact-check" });
+    });
+    SCR.push({ s: 7, k: "pp", label: "Pentagon Papers · the call" }, { s: 7, k: "truth", label: "The truth comes out" }, { s: 7, k: "check", label: "Pentagon Papers · fact-check" },
+      { s: 8, k: "end", label: "Your ending" }, { s: 9, k: "p0", label: "Your editorial · page 1" }, { s: 9, k: "p1", label: "Your editorial · page 2" });
+    const kindNow = () => {
+      const n = Math.max(1, Math.min(st.step, TOTAL));
+      if (n === 1) return "file";
+      if (ED[n]) return st.phase === 0 || !st.printed[n] ? "layout" : st.phase === 1 ? "printed" : "check";
+      if (n === 7) return st.phase === 0 ? "pp" : st.phase === 1 ? "truth" : "check";
+      if (n === 8) return "end";
+      return st.phase === 1 ? "p1" : "p0";
+    };
+    const printNow = n => {   // fill the two slots (first two stories) and print, like pressing 🖨️
+      const d = draft(n), ids = (ED[n].order || "abc").split("");
+      if (!d.lead) d.lead = ids.find(id => id !== d.side);
+      if (!d.side) d.side = ids.find(id => id !== d.lead);
+      printEdition(n);
+    };
+    const pickPP = () => { const b = document.querySelector("[data-pp]"); if (b) b.click(); };
+    (window.classTestHooks = window.classTestHooks || []).push({
+      count: () => SCR.length,
+      index: () => { const n = Math.max(1, Math.min(st.step, TOTAL)), k = kindNow(); return Math.max(0, SCR.findIndex(x => x.s === n && x.k === k)); },
+      label: i => SCR[i].label,
+      go: i => {
+        const x = SCR[i]; if (!x) return;
+        if (!st.name) st.name = "Test T.";
+        st.step = x.s; st.phase = 0; hideWelcome();
+        if (x.k === "file") delete st.done.c1;
+        else if (x.k === "layout") delete st.printed[x.s];
+        else if (ED[x.s]) {
+          if (!st.printed[x.s]) { save(); printNow(x.s); }
+          st.phase = x.k === "printed" ? 1 : 2;
+          if (x.k === "check") delete st.done[ED[x.s].check];
+        } else if (x.s === 7 && x.k !== "pp") {
+          if (!st.picks["Pentagon Papers"]) { save(); render(); pickPP(); }
+          st.phase = x.k === "truth" ? 1 : 2;
+          if (x.k === "check") delete st.done.c6;
+        } else if (x.k === "p1") st.phase = 1;
+        save(); render(); window.scrollTo(0, 0);
+      },
+      solve: () => {
+        const n = Math.max(1, Math.min(st.step, TOTAL)), k = kindNow();
+        if (k === "file" && !st.done.c1) { if (!st.tapped) st.tapped = true; else { st.done.c1 = true; justSolved = "c1"; } save(); render(true); }
+        else if (k === "layout") printNow(n);
+        else if (k === "pp") pickPP();
+        else if (k === "check") { const id = n === 7 ? "c6" : ED[n].check; if (!st.done[id]) { st.done[id] = true; justSolved = id; save(); render(true); } }
+      }
+    });
+    if (window.classTestSkip) window.classTestSkip.refresh();
+  } catch (e) {}
 })();

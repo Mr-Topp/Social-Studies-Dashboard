@@ -179,7 +179,7 @@ h2{font-size:20px;line-height:1.25;margin:0;color:var(--navy)}
 .turn-in-status.error{color:#9b3932}
 .welcome-back{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 16px;margin:0 0 16px;padding:12px 16px;border-radius:12px;background:#e8f6ef;border:1px solid #9fd3b8;color:#14532d;font-weight:600}.restart-link{background:none;border:none;color:#1d4ed8;text-decoration:underline;font:inherit;font-weight:600;cursor:pointer;padding:4px}
 </style>
-<script src="../shared/assignments.js?v=20261103p22"></script><script src="../shared/turnin.js?v=20261103t"></script></head>
+<script src="../shared/assignments.js?v=20261103p22"></script><script src="../shared/turnin.js?v=20261103ttt"></script></head>
 <body>
 <a class="skip-link" href="#activity">Skip to the map and questions</a>
 <header class="site-header"><div class="header-inner"><h1>DIVIDE AFRICA <span aria-hidden="true">|</span> READ, SOLVE &amp; COLOR</h1><div class="work-note"><span class="work-dot" aria-hidden="true"></span>Work on your own</div></div></header>
@@ -342,6 +342,7 @@ const places=[
 const powers=["Britain","France","Belgium","Germany","Italy","Portugal","Independent"];
 const colors={Britain:"var(--britain)",France:"var(--france)",Belgium:"var(--belgium)",Germany:"var(--germany)",Italy:"var(--italy)",Portugal:"var(--portugal)",Independent:"var(--independent)"};
 const TOTAL=places.length;
+function testTOn(){try{return !!(window.classIsTestT&&window.classIsTestT())}catch(e){return false}} // Test T. (teacher) can turn in without finishing
 let idx=0,step="power",solved={},whySolved={},misses={},mapAssignments={},mapMisses={},selected=null;
 places.forEach(p=>{misses[p.id]={power:0,why:0};mapMisses[p.id]=0});
 const $=id=>document.getElementById(id);
@@ -518,8 +519,8 @@ $("turn-in-button").addEventListener("click",async()=>{
  const name=$("student-name").value.trim(),status=$("turn-in-status"),button=$("turn-in-button");
  status.className="turn-in-status";
  if(!name||!/ [A-Z]\.$/.test(window.classShortName?window.classShortName(name):name)){status.textContent="Type your first name + last initial (like Jordan M.) at the top of the page.";status.classList.add("error");$("student-name").focus();return}
- if(Object.keys(whySolved).length!==TOTAL){status.textContent="Solve all ten mystery places before turning in.";return}
- if(Object.keys(mapAssignments).length!==TOTAL){status.textContent="Color all ten places correctly before turning in.";return}
+ if(Object.keys(whySolved).length!==TOTAL&&!testTOn()){status.textContent="Solve all ten mystery places before turning in.";return}
+ if(Object.keys(mapAssignments).length!==TOTAL&&!testTOn()){status.textContent="Color all ten places correctly before turning in.";return}
  const s=scoreInfo();
  const answers={"Standard":"SS.9-12.WH.24","First-try correct":s.first+" of "+s.max+" ("+s.pct+"%)"};
  places.forEach((p,i)=>{
@@ -541,6 +542,40 @@ $("turn-in-button").addEventListener("click",async()=>{
   status.classList.add("error");button.disabled=false;
  }
 });
+// ---------------- Test T. skip bar (shared/turnin.js) ----------------
+// The teacher signed in as Test T. can jump to any mystery place or the map and answer it.
+try{
+ (window.classTestHooks=window.classTestHooks||[]).push({
+  count:()=>TOTAL+1,
+  index:()=>phaseTwo.hidden?idx:TOTAL,
+  label:i=>i<TOTAL?"Mystery place "+(i+1):"Part 2 · Map + turn in",
+  go:i=>{
+   i=Math.max(0,Math.min(i,TOTAL));
+   if(!$("student-name").value.trim())$("student-name").value="Test T.";
+   if(i<TOTAL){
+    phaseTwo.hidden=true;$("phase-one").hidden=false;document.querySelector(".facts").hidden=false;
+    document.querySelector(".clue-box").hidden=false;$("part-one-done").hidden=true;
+    idx=i;setupClue();const p=places[idx];
+    if(solved[p.id])choosePower(p.power);
+    if(whySolved[p.id])chooseWhy(p.why);
+    $("phase-one").scrollIntoView({block:"start"});
+   }else{
+    $("phase-one").hidden=true;document.querySelector(".facts").hidden=true;phaseTwo.hidden=false;
+    renderMap();updateProgress();phaseTwo.scrollIntoView({block:"start"});
+   }
+   saveProgress();
+  },
+  solve:()=>{
+   if(phaseTwo.hidden){
+    if(!$("part-one-done").hidden)return;
+    const p=places[idx];
+    if(!whySolved[p.id]){if(step==="power")choosePower(p.power);chooseWhy(p.why)}
+   }else{places.forEach(p=>{mapAssignments[p.id]=p.power});renderMap()}
+   saveProgress();
+  }
+ });
+ if(window.classTestSkip)window.classTestSkip.refresh();
+}catch(e){}
 </script>
 </body>
 </html>

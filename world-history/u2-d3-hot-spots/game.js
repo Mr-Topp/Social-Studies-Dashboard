@@ -277,6 +277,7 @@
   const CHECK_ORDER = ["c1", "c2", "c3", "c4", "m1", "m2", "m3"];
 
   let lockTimer = null;
+  const isTestT = () => !!(window.classIsTestT && window.classIsTestT());   // Test T. (teacher): no lockouts / writing rules
   function mountCheck(id, onDone) {
     const q = CHECKS[id];
     const box = $("checkBox");
@@ -305,7 +306,7 @@
             save();
             b.classList.add("shake");
             locked = true; area.querySelectorAll("button").forEach(x => { x.disabled = true; });
-            let left = LOCK;
+            let left = isTestT() ? 0 : LOCK;
             const tick = () => {
               msg.className = "msg try";
               if (left <= 0) { locked = false; msg.textContent = F("✖ {h}", { h: q.hint }); draw(); return; }
@@ -603,7 +604,7 @@
         locked = true;
         const all = document.querySelectorAll(".radar button.pin");
         all.forEach(x => { x.disabled = true; });
-        let left = LOCK;
+        let left = isTestT() ? 0 : LOCK;
         const tick = () => {
           msg.className = "msg try";
           if (left <= 0) { locked = false; msg.textContent = F("✖ {h}", { h: sp.hint }); all.forEach(x => { x.disabled = false; x.classList.remove("shake"); }); return; }
@@ -725,6 +726,7 @@
   }
   // Returns a message if the answer isn't ready yet, or "" if it's fine.
   function writingProblem(p) {
+    if (isTestT()) return "";   // Test T. (teacher) skips the writing rules
     const box = $("w_" + p.id), v = (box.value || "").trim();
     if (window.classJunkStop) {
       const junk = window.classJunkStop(box, { starter: p.stem, source: "from today", sourceEs: "de hoy" });
@@ -846,4 +848,32 @@
   }
   window.addEventListener("resize", () => { if (st.step >= 1) document.documentElement.style.setProperty("--hudH", $("hud").offsetHeight + "px"); });
   render();
+
+  // ---------------- Test T. skip bar (shared/turnin.js) ----------------
+  // The teacher signed in as Test T. can jump to any step (1–11) or answer what's on screen now.
+  try {
+    const STEP_NAMES = ["Briefing: a line across Korea", "Seat 1 · North Korea", "Seat 2 · Stalin", "Seat 3 · Truman: invasion", "Seat 3 · How far north?",
+      "Seat 4 · China's choice", "Seat 5 · Rhee: stuck", "The shooting stops", "Hot Spot Radar", "Your results + the real cost", "Your report + turn in"];
+    const STEP_CHECK = { 2: "c1", 3: "c2", 4: "c3", 6: "c4" };
+    (window.classTestHooks = window.classTestHooks || []).push({
+      count: () => TOTAL,
+      index: () => Math.max(0, Math.min(st.step - 1, TOTAL - 1)),
+      label: i => STEP_NAMES[i] || "Step " + (i + 1),
+      go: i => {
+        if (!st.name) st.name = "Test T.";
+        st.step = i + 1; st.phase = 0; st.result = null;
+        save(); render(); window.scrollTo(0, 0);
+      },
+      solve: () => {
+        const c = STEP_CHECK[st.step];
+        if (c && $("checkBox") && !st.done[c]) { st.done[c] = true; save(); justSolved = c; render(true); return; }
+        const card = document.querySelector("#choiceBox .dcard"); if (card) { card.click(); return; }
+        if (st.step === 9 && document.querySelector(".radar button.pin")) {
+          const key = RADAR_ORDER[Math.min(st.radar || 0, 2)];
+          const pin = document.querySelector('.radar button.pin[data-spot="' + key + '"]'); if (pin) pin.click();
+        }
+      }
+    });
+    if (window.classTestSkip) window.classTestSkip.refresh();
+  } catch (e) {}
 })();
