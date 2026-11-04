@@ -895,11 +895,10 @@ function unitFit(course, unit) {
   return have === need ? null : { have, need };
 }
 function weekdaysBetween(a, b) { let n = 0; const d = new Date(a + "T12:00:00"), end = new Date(b + "T12:00:00"); while (d < end) { d.setDate(d.getDate() + 1); if (schoolDay(d)) n++; } return n; }
-// When a lesson day lands: the summative is the green-sheet date. Other days are spread evenly (weekdays) from
-// where you pinned the class (CLASS_TODAY) or the day after the last unit's test, the same way the student home page does it.
-// Lesson dates use the same class-day calendar as the student home page: core classes meet Monday–Thursday,
-// skipping no-school days. Day N is counted from where you pinned the class (CLASS_TODAY) and the rest of the
-// unit is spread evenly up to its green-sheet test date, so you and your students always see the same dates.
+// When a lesson day lands: the summative is the green-sheet date. Other days run back-to-back (class days only) from
+// where you pinned the class (CLASS_TODAY) or the day after the last unit's test. The student home page does the same
+// (Fynn 11-03: "back-to-back, like my dashboard"), so you and your students always see the same dates.
+// Core classes meet Monday–Thursday, skipping no-school days.
 const classDayT = d => d.getDay() >= 1 && d.getDay() <= 4 && schoolDay(d);
 function classDaysBetweenT(a, b) { let n = 0; const d = new Date(a + "T12:00:00"), end = new Date(b + "T12:00:00"); while (d < end) { d.setDate(d.getDate() + 1); if (classDayT(d)) n++; } return n; }
 function stepClassDaysT(iso, n) { const d = new Date(iso + "T12:00:00"), dir = n < 0 ? -1 : 1; for (let k = Math.abs(n); k > 0;) { d.setDate(d.getDate() + dir); if (classDayT(d)) k--; } return isoOf(d); }

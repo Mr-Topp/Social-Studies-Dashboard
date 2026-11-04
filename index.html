@@ -322,17 +322,18 @@ function unitPlan(course, u) {
   if (!prev || !prev.summative) return null;
   return { from: stepClassDays(prev.summative, 1), fromDay: 1, days: c.days, test: c.summative };
 }
+// Fynn 11-03: lesson days run back-to-back from the pin (same as the teacher dashboard's Lessons view).
+// The summative is always the green-sheet date. Extra class days before the test (e.g. World History
+// 11/17-18) stay on the last lesson day, as review/catch-up days.
 function dayOnDate(p, iso) {
   if (iso <= p.from) return Math.max(0, p.fromDay - classDaysBetween(iso, p.from));
-  const total = classDaysBetween(p.from, p.test), gone = classDaysBetween(p.from, iso);
-  if (!total) return p.days;
-  return Math.min(p.days, p.fromDay + Math.floor(gone / total * (p.days - p.fromDay)));
+  if (iso >= p.test) return p.days;
+  return Math.min(p.days - 1, p.fromDay + classDaysBetween(p.from, iso));
 }
 function dateOfDay(p, n) {
+  if (n >= p.days) return p.test;
   if (n <= p.fromDay) return stepClassDays(p.from, -(p.fromDay - n));
-  let d = p.from;
-  while (d < p.test) { d = stepClassDays(d, 1); if (dayOnDate(p, d) >= n) return d; }
-  return p.test;
+  return stepClassDays(p.from, n - p.fromDay);
 }
 const longDate = iso => new Date(iso + "T12:00:00").toLocaleDateString("en-US", { weekday: "long", month: "short", day: "numeric" });
 function currentUnit(course, keys, doneIds) {
