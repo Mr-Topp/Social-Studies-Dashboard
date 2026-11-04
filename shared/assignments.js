@@ -278,19 +278,25 @@ window.CLASS_ASSIGNMENTS = {
 
   // ---- Civics (Iowa civics test prep) · Friday 1 ----
   "civics-test-s1-presentation":     { course: "civics", hideLink: true, unit: 1, title: "Founders' Files (Slides)", path: "civics/civics-test-s1-presentation/", std: ["SS.9-12.Gov.3", "SS.9-12.Gov.4"] },
+  "civics-f1-guided-notes": { course: "civics", unit: 1, turnIn: false, std: [], title: "Guided Notes (Printed)", path: "https://docs.google.com/document/d/1YQIGUBhrlyLUvl1X3PZ89RKvNSBMzGc8JjyqR3vd7i4/edit" },  // Fynn 11-04: guided notes that follow each Friday's slides
   "civics-test-s1-founders-defense":  { course: "civics", unit: 1, title: "Founders' Defense", path: "civics/civics-test-s1-founders-defense/", std: ["SS.9-12.Gov.3", "SS.9-12.Gov.4"] },
 
   // ---- Civics (Iowa civics test prep) · Fridays 2–6 (exit tickets on each Friday's presentation); Friday 7 = exam ----
   // 2026-11-03 (Fynn): match Schoology. F5 = Civil War to Modern America (one condensed deck), F6 = Symbols & Holidays + Smithsonian Symbols & Holidays activity, F7 = Iowa Civics Exam.
   "civics-f2-presentation": { course: "civics", hideLink: true, unit: 2, title: "How the Government Works (Slides)", path: "civics/friday2-government-presentation/", std: ["SS.9-12.Gov.6", "SS.9-12.Gov.7", "SS.9-12.Gov.8"] },
+  "civics-f2-guided-notes": { course: "civics", unit: 2, turnIn: false, std: [], title: "Guided Notes (Printed)", path: "https://docs.google.com/document/d/1n3soabsHYYQPlXds_pPP9W0Af5hunOIiwj4vrICcFeI/edit" },
   "civics-f2-government-arcade": { course: "civics", unit: 2, title: "Government Arcade", path: "civics/day2-government-arcade/", std: ["SS.9-12.Gov.6", "SS.9-12.Gov.7", "SS.9-12.Gov.8", "SS.9-12.Gov.9", "SS.9-12.Gov.18"] },
   "civics-f3-presentation": { course: "civics", hideLink: true, unit: 3, title: "Rights & Responsibilities (Slides)", path: "civics/friday3-rights-presentation/", std: ["SS.9-12.Gov.14", "SS.9-12.Gov.17"] },
+  "civics-f3-guided-notes": { course: "civics", unit: 3, turnIn: false, std: [], title: "Guided Notes (Printed)", path: "https://docs.google.com/document/d/1hm_kz0zwperMkO8ox_lNnQ26rc620emsuHXwC8KAU7s/edit" },
   "civics-f3-pixel-town": { course: "civics", unit: 3, title: "Pixel Town: Civic Quest", path: "civics/pixel-town-day3-game/", std: ["SS.9-12.Gov.13", "SS.9-12.Gov.14", "SS.9-12.Gov.17"] },
   "civics-f4-presentation": { course: "civics", hideLink: true, unit: 4, title: "The 1776 Files (Slides)", path: "civics/friday4-1776-presentation/", std: ["SS.9-12.Gov.3", "SS.9-12.Gov.15"] },
+  "civics-f4-guided-notes": { course: "civics", unit: 4, turnIn: false, std: [], title: "Guided Notes (Printed)", path: "https://docs.google.com/document/d/1agkcCQPRCA8DauGJsZ-kvETpvGs8zTA7z9mvLKscE8Q/edit" },
   "civics-f4-1776-files": { course: "civics", unit: 4, title: "The 1776 Files", path: "civics/friday4-1776-files-game/", std: ["SS.9-12.Gov.3", "SS.9-12.Gov.15"] },
   "civics-f5-presentation": { course: "civics", hideLink: true, unit: 5, title: "Civil War to Modern America (Slides)", path: "civics/friday5-1800s-civics-presentation/", std: ["SS.9-12.Gov.14", "SS.9-12.Gov.15", "SS.9-12.Gov.11", "SS.9-12.Gov.3"] },
+  "civics-f5-guided-notes": { course: "civics", unit: 5, turnIn: false, std: [], title: "Guided Notes (Printed)", path: "https://docs.google.com/document/d/1BFQGIFA_-01GeFIJosKBPaRZx-eeBWdERGMufHrJYIU/edit" },
   "civics-f5-1800s-express": { course: "civics", unit: 5, title: "The 1800s Express", path: "civics/friday5-1800s-express-game/", std: ["SS.9-12.Gov.14", "SS.9-12.Gov.15", "SS.9-12.Gov.3"] },
   "civics-f6-presentation": { course: "civics", hideLink: true, unit: 6, title: "Symbols & Holidays (Slides)", path: "civics/friday6-geography-symbols-presentation/", std: ["SS.9-12.Gov.16"] },
+  "civics-f6-guided-notes": { course: "civics", unit: 6, turnIn: false, std: [], title: "Guided Notes (Printed)", path: "https://docs.google.com/document/d/1JTsF4k27CqjNfuLqtajE4yUC4TrbaGGyQID7QWLizOs/edit" },
   "civics-f6-smithsonian-symbols": { course: "civics", unit: 6, turnIn: false, std: [], title: "Smithsonian: Preparing for the Oath · Symbols & Holidays", path: "https://americanhistory.si.edu/education/resources/preparing-oath-symbols-holidays" },
   "civics-f7-exam": { course: "civics", unit: 7, turnIn: false, std: [], title: "Iowa Civics Exam (Summative)", path: "https://docs.google.com/forms/d/1joEmHjcHzjwr7SpNKqNYyS8fifEKlgE61OfEEUMRV8g/viewform" },
   // Added 2026-11-01: past Drive assignments rated Strong by Fynn's student panel + teacher review, linked on their lesson days
