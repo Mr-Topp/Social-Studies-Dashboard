@@ -84,13 +84,16 @@ window.CLASS_TODAY = {
 // Work Fynn counts as DONE for every student on the student home page (shows "✓ Done", never "missing").
 //   unit + throughDay: everything in that unit up to and including that day (and earlier units) is done.
 //   ids: specific activities that are done for everyone.
-//   label: what the student sees instead of "✓ Done" (e.g. "Done in class"). Label only, no grades change.
+//   label: what the student sees instead of "✓ Done". With a label, the teacher dashboard also shows it like
+//          CLASS_DONE_FOR_ALL below (✓ + label, counts as done, no score; overrides EX). Paper columns are never touched.
 // This only changes what students see as missing. It doesn't add grades or turn-ins to the teacher dashboard.
 window.CLASS_CLEARED = {
-  "us-history":    { unit: 1, throughDay: 4 },
-  "sociology":     { unit: 1, throughDay: 4, label: "Done in class" },   // Fynn 11-03: Days 1–4 done in class for everyone (label only)
-  "government":    { unit: 1, throughDay: 4, label: "Done in class" },   // Fynn 11-03: Days 1–4 done in class for everyone (label only)
-  "world-history": { ids: ["divide-africa-day1"] },  // Scramble for Africa: everyone did it
+  // Fynn 11-03: these show "Completed in class" on the student page AND the teacher dashboard (✓, counts as done, no score),
+  // same as World History's Divide Africa, so the whole page matches. U.S. History Unit 1 was exempt before; now Completed in class.
+  "us-history":    { unit: 1, throughDay: 4, label: "Completed in class" },
+  "sociology":     { unit: 1, throughDay: 4, label: "Completed in class" },
+  "government":    { unit: 1, throughDay: 4, label: "Completed in class" },
+  "world-history": { ids: ["divide-africa-day1"], label: "Completed in class" },  // Scramble for Africa: everyone did it
   "civics":        { ids: ["civics-test-s1-presentation", "civics-test-s1-founders-defense", "civics-f2-presentation", "civics-f2-government-arcade",
                            "civics-f3-presentation", "civics-f3-pixel-town", "civics-f4-presentation", "civics-f4-1776-files",
                            "civics-f5-presentation", "civics-f5-1800s-express", "civics-f6-presentation"] }  // everything posted through 11/2
