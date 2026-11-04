@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
 <title>Teacher Dashboard · All Classes</title>
-<script src="../shared/assignments.js?v=20261103p18"></script>
+<script src="../shared/assignments.js?v=20261103p19"></script>
 <script src="presentations.js?v=20261103civics3"></script>
 <script src="../shared/turnin.js?v=20261103s"></script>
 <style>
@@ -1205,7 +1205,8 @@ function renderGrid(list) {
   // Show every day of a unit (not just ones with turn-ins) so missing work stands out.
   const unitsUsed = new Set(list.map(r => unitOf(r.assignmentId)));
   Object.keys(REG).forEach(id => { if (REG[id].paper && REG[id].course === tab) unitsUsed.add(unitOf(id)); });
-  if (!unitsUsed.size) Object.keys(REG).forEach(id => { if (REG[id].course === tab && REG[id].path) unitsUsed.add(unitOf(id)); });
+  // Every unit with a graded activity goes in "Look at another unit", even before anyone turns something in (Fynn, 11-03).
+  Object.keys(REG).forEach(id => { if (REG[id].course === tab && REG[id].path && REG[id].turnIn !== false && !/-presentation$/.test(id)) unitsUsed.add(unitOf(id)); });
   // Only the unit you're teaching now. It switches the day after each green-sheet test date.
   const nowUnit = currentUnit(tab);
   if (nowUnit) unitsUsed.add(nowUnit);
