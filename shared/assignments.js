@@ -183,7 +183,7 @@ window.CLASS_ASSIGNMENTS = {
   // ---- Sociology · Unit 2 ----
   "sociology-unit2-day1-first-shift":         { course: "sociology", unit: 2, day: 1, title: "Day 1 · Why Did That Blow Up?", path: "sociology/u2-d1-why-blow-up/", std: ["SS.9-12.Soc.5", "SS.9-12.Soc.7"] },
   "sociology-unit2-arrival-culture":          { course: "sociology", unit: 2, day: 2, title: "Day 2 · The Arrival: A New Culture", path: "sociology/arrival-culture/", std: ["SS.9-12.Soc.5", "SS.9-12.Soc.6"] },
-  "sociology-unit2-day3-culture-shock":      { course: "sociology", unit: 2, day: 3, title: "Day 3 · Who Decides What’s Normal?", path: "sociology/unit2-day3-culture-shock-exchange/", std: ["SS.9-12.Soc.6", "SS.9-12.Soc.5"] },
+  "sociology-unit2-day3-culture-shock":      { course: "sociology", unit: 2, day: 3, title: "Day 3 · Who Decides What’s Normal? (Reading)", path: "sociology/unit2-day3-culture-shock-exchange/", std: ["SS.9-12.Soc.6", "SS.9-12.Soc.5"] },
 
   // ---- Government · Unit 1 ----
   "gov-stranded-day1":                { course: "government", unit: 1, day: 1, title: "Day 1 · Stranded: Govern or Collapse", path: "civics/stranded-government/", std: ["SS.9-12.Gov.1", "SS.9-12.Gov.5"] },
@@ -389,7 +389,7 @@ window.CLASS_ASSIGNMENTS = {
   "soc-u1-summative-key": { course: "sociology", unit: 1, day: 10, turnIn: false, std: [], title: "Day 10 · Summative Form A Teacher Key", path: "https://docs.google.com/document/d/1Y6rMojXQVtlN-TstH5-SBLGKWF7TLL0QckPcNg796l4/edit" },
   "soc-u1-summative-b": { course: "sociology", unit: 1, day: 10, turnIn: false, std: [], title: "Day 10 · Summative (Form B · retake)", path: "https://docs.google.com/document/d/1-nYrcig7P7-42ZiGRA0Ldo6NryxD_HJ36Xo9huO_0eI/edit" },
   "soc-u1-summative-b-key": { course: "sociology", unit: 1, day: 10, turnIn: false, std: [], title: "Day 10 · Summative Form B Teacher Key", path: "https://docs.google.com/document/d/1PwuQVKOKl1dhfnBfhT3VSpmYioC2po0pp4FfEdPvfxs/edit" },
-  "soc-u2-d4-montgomery-story": { course: "sociology", unit: 2, day: 4, title: "Day 4 · Walk to Freedom", path: "sociology/u2-d4-montgomery-story/", std: ["SS.9-12.Soc.7", "SS.9-12.Soc.8"] },
+  "soc-u2-d4-montgomery-story": { course: "sociology", unit: 2, day: 4, title: "Day 4 · Walk to Freedom (Reading)", path: "sociology/u2-d4-montgomery-story/", std: ["SS.9-12.Soc.7", "SS.9-12.Soc.8"] },
   "soc-u2-d5-everyday-life": { course: "sociology", unit: 2, day: 5, title: "Day 5 · Five Bosses, One Tuesday", path: "sociology/u2-d5-everyday-life/", std: ["SS.9-12.Soc.5", "SS.9-12.Soc.6", "SS.9-12.Soc.7", "SS.9-12.Soc.8"] },
   "soc-u2-summative": { course: "sociology", unit: 2, day: 6, turnIn: false, std: [], title: "Day 6 · Summative (Form A)", path: "https://docs.google.com/document/d/1M58C16IEXXMSIRB4LjKfUecdmU9_Qk5SH7rb0XLCoVk/edit" },
   "soc-u2-summative-key": { course: "sociology", unit: 2, day: 6, turnIn: false, std: [], title: "Day 6 · Summative Form A Teacher Key", path: "https://docs.google.com/document/d/1dX-pD0KFtBP5uDIIzs6IVL3LKg9Qii-GISDzT2y60XE/edit" },
