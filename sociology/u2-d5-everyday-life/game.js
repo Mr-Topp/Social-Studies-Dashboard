@@ -1,325 +1,224 @@
 // =====================================================================
-//  SEVEN BOSSES, ONE TUESDAY  (Sociology Unit 2 Day 5)
-//  A day-planner game. Each part of Dani's day has a few time slots and more
-//  demands than slots. Every demand comes from a social institution ("boss").
-//  Whatever doesn't fit gets dropped, and that boss's hidden rule bites.
-//  Meters carry through the whole day; the ending depends on what got dropped.
-//  6 evidence checks are woven in (each unlocks the next part). Saves on this device.
-//  Turn-in goes through shared/turnin.js (same payload shape as shared/unit-game.js).
-//  Dani, Leo, Mom, Grandma, Ms. Ortiz, Rick, Fresh Fare and Cedar Valley Plant are made up.
+//  FIVE BOSSES, ONE TUESDAY  (Sociology Unit 2 Day 5, review day)
+//  Dani's Tuesday in 4 parts. Each part: fill the planner (more demands than slots),
+//  see what got dropped and which rule bit, then answer ONE review check that matches
+//  that day's review slide (Soc.5 football, Soc.6 tipping, Soc.7 institutions/needs,
+//  Soc.8 Rosie). Ending = the boss Dani dropped most. Then 2 short answers + turn in.
+//  The 5 bosses match the 5 institutions taught in the Unit 2 slides.
+//  Dani, Leo, Mom, Grandma, Ms. Ortiz, Rick, Fresh Fare and Riverside High are made up.
 // =====================================================================
 (function () {
   "use strict";
-  const KEY = "soc-u2-d5-everyday-life-v2";
+  const KEY = "soc-u2-d5-everyday-life-v3";
   const ASSIGNMENT_ID = "soc-u2-d5-everyday-life";
-  const TITLE = "Sociology · Unit 2 · Day 5 · What Shapes Your Everyday Life?";
+  const TITLE = "Sociology · Unit 2 · Day 5 · Five Bosses, One Tuesday";
   const STANDARD = "SS.9-12.Soc.5, SS.9-12.Soc.6, SS.9-12.Soc.7, SS.9-12.Soc.8";
   const OLD_API = "https://fynn-class-assignment-submissions-20261024.neotboy.chatgpt.site/api/submit";
   const LOCK = 5;   // seconds the choices lock after a wrong answer
 
-  // ---------- The seven bosses (social institutions) ----------
+  // ---------- The five bosses = the five institutions from the slides ----------
   const BOSS = {
-    family:     { i: "🏠", n: "Family" },
-    education:  { i: "🎓", n: "Education" },
-    economy:    { i: "💼", n: "Economy" },
-    health:     { i: "❤️", n: "Health care" },
-    religion:   { i: "⛪", n: "Religion" },
-    government: { i: "🏛️", n: "Government" },
-    media:      { i: "📱", n: "Media" },
-    you:        { i: "😴", n: "You" }
+    family:     { i: "🏠", n: "Family",     need: "Who cares for us?" },
+    education:  { i: "🎓", n: "Education",  need: "How do we learn skills?" },
+    religion:   { i: "⛪", n: "Religion",   need: "What gives life meaning?" },
+    economy:    { i: "💼", n: "Economy",    need: "How do we get what we need?" },
+    government: { i: "🏛️", n: "Government", need: "Who makes the rules?" }
   };
-  const BOSS_ORDER = ["family", "education", "economy", "health", "religion", "government", "media"];
-  const METERS = [["school", "🎓", "School"], ["job", "💼", "Job"], ["family", "🏠", "Family"], ["health", "❤️", "Health"], ["energy", "⚡", "Energy"]];
+  const BOSS_ORDER = ["family", "education", "religion", "economy", "government"];
 
-  // ---------- Hidden rules (found when you hit them). Kept short: students skip long text. ----------
+  // ---------- Rules Dani runs into (formal norms with sanctions) ----------
   const RULES = {
-    F1: { b: "family", t: "Leo (8) can't be left alone." },
-    E1: { b: "education", t: "Late work = half credit." },
-    E2: { b: "education", t: "Quiz retakes: study hall only." },
-    S1: { b: "education", t: "Phone out in class? Teacher keeps it till 3:10." },
-    J1: { b: "economy", t: "Miss a shift = a write-up. Two = you're off." },
-    J2: { b: "economy", t: "No kids in the back room." },
-    H1: { b: "health", t: "Pharmacy closes at 6 PM." },
-    G1: { b: "government", t: "Last Route 7 bus now leaves at 6:40 PM." },
-    R1: { b: "religion", t: "Two no-shows = lose your pantry spot." },
-    A1: { b: "government", t: "U.S. law (ACA): big employers must offer insurance at 30+ hours a week, or pay a fine." },
-    M1: { b: "economy", t: "App posts shifts Tuesday night." }
+    F1: { b: "family",     t: "Leo (8) can't be left alone." },
+    E1: { b: "education",  t: "Late work = half credit." },
+    E2: { b: "education",  t: "Quiz retakes: study hall only." },
+    S1: { b: "education",  t: "Phone out in class? The teacher keeps it till 3:10." },
+    J1: { b: "economy",    t: "Miss a shift = a write-up. Two = you're off the schedule." },
+    R1: { b: "religion",   t: "Two no-shows = you lose your pantry spot." },
+    G1: { b: "government", t: "City notice: the last Route 7 bus now leaves at 6:40 PM." }
   };
 
-  // ---------- The five parts of the day ----------
-  // card: b boss, who, t title, s slots, cash cost, give (fx when played),
-  //       skip (text when dropped), dfx (fx when dropped), rule (found when dropped), prule (found when played),
-  //       flag (set when played), dflag (set when dropped)
+  // ---------- The four parts of the day ----------
   const ROUNDS = [
-    { clock: "4 demands. 3 slots.", id: "morning", name: "Morning", time: "6:30–8:00 AM", sky: "dawn", icon: "🌅", slots: 3, times: ["6:30", "7:00", "7:30"],
+    { id: "morning", name: "Morning", time: "6:30–8:00 AM", sky: "dawn", icon: "🌅", slots: 3, times: ["6:30", "7:00", "7:30"],
       setup: "Mom left for work at 5:30. Leo (8) is with you.",
       cards: [
-        { id: "leoBus", b: "family", who: "Mom's text", t: "Walk Leo to bus", s: 1, give: { family: 1 },
-          skip: "Missed bus. Mom left work, lost pay.", dfx: { family: -2 }, rule: "F1", dflag: "momLostPay" },
-        { id: "chemHW", b: "education", who: "Ms. Ortiz · due 1st hour", t: "Finish chem worksheet", s: 2, give: { school: 2, energy: -1 },
-          skip: "Turned in late.", dfx: { school: -2 }, rule: "E1" },
-        { id: "breakfast", b: "family", who: "Mom's sticky note", t: "Eat breakfast", s: 1, give: { energy: 2 },
-          skip: "Starving all through 1st hour.", dfx: { energy: -1, health: -1 } },
-        { id: "feed", b: "media", who: "Your phone", t: "Scroll your feed", s: 1, give: {}, info: true, prule: "G1", flag: "knowsBus",
-          skip: "Missed a news alert.", dfx: {} }
+        { id: "leoBus", b: "family", who: "Mom's text", t: "Walk Leo to the bus", s: 1,
+          skip: "Leo missed the bus. Mom left work and lost pay.", rule: "F1" },
+        { id: "chemHW", b: "education", who: "Ms. Ortiz · due 1st hour", t: "Finish chem worksheet", s: 2,
+          skip: "Turned in late.", rule: "E1" },
+        { id: "breakfast", b: "family", who: "Mom's sticky note", t: "Eat breakfast", s: 1,
+          skip: "Starving all through 1st hour." },
+        { id: "busNote", b: "government", who: "City Transit app", t: "Read the bus change notice", s: 1, prule: "G1", flag: "knowsBus",
+          skip: "Swiped the city's bus alert away without reading it." }
       ],
-      idea: "<b>Social institution</b>: rules and roles that meet a need." },
+      idea: "<b>Social institution</b>: an organized system that meets a need. Two of them wanted the same 30 minutes." },
 
-    { clock: "3 demands. 2 slots.", id: "school", name: "School Day", time: "8:00 AM–3:10 PM", sky: "day", icon: "🏫", slots: 2, times: ["Lunch", "Study hall"],
+    { id: "school", name: "School Day", time: "8:00 AM–3:10 PM", sky: "day", icon: "🏫", slots: 2, times: ["Lunch", "Study hall"],
       setup: "Two free moments today: lunch and study hall.",
       cards: [
-        { id: "lunch", b: "economy", who: "Lunch line", t: "Buy lunch", s: 1, cash: 3, give: { energy: 2 },
-          skip: "Running on empty by 5th hour.", dfx: { energy: -2 } },
-        { id: "retake", b: "education", who: "Ms. Ortiz", t: "Retake chem quiz", s: 1, give: { school: 2, energy: -1 },
-          skip: "Missed the only retake time.", dfx: { school: -1 }, rule: "E2" },
-        { id: "callMom", b: "family", who: "Mom: “Call me at lunch”", t: "Call Mom back", s: 1, give: { family: 1 },
-          skip: "Mom: “You didn't call back?”", dfx: { family: -1 } }
+        { id: "lunch", b: "economy", who: "Lunch line · $3", t: "Buy lunch", s: 1,
+          skip: "Running on empty by 5th hour." },
+        { id: "retake", b: "education", who: "Ms. Ortiz", t: "Retake chem quiz", s: 1,
+          skip: "Missed the only retake time.", rule: "E2" },
+        { id: "callMom", b: "family", who: "Mom: “Call me at lunch”", t: "Call Mom back", s: 1,
+          skip: "Mom: “You didn't call back?”" }
       ],
-      idea: "<b>Values</b>: what matters. <b>Norms</b>: how to act. <b>Sanctions</b>: punishments." },
+      idea: "<b>Norm</b>: a rule for how to act. <b>Sanction</b>: the response when you follow it or break it." },
 
-    { clock: "4 bosses. 3 hours.", id: "after", name: "After School", time: "3:10–6:00 PM", sky: "after", icon: "🛒", slots: 3, times: ["3:10", "4:00", "5:00"],
+    { id: "after", name: "After School", time: "3:10–6:00 PM", sky: "after", icon: "🛒", slots: 3, times: ["3:10", "4:00", "5:00"],
       setup: "Leo's bus comes at 3:30. Your shift starts at 4.",
       cards: [
-        { id: "shift", b: "economy", who: "Rick · Fresh Fare", t: "Work shift 4–6", s: 2, give: { job: 2, energy: -2 },
-          skip: "Rick: “No call, no show.”", dfx: { job: -3 }, rule: "J1" },
-        { id: "leo", b: "family", who: "Mom", t: "Meet Leo's bus", s: 1, give: { family: 1 },
-          skip: "Leo alone. Mom left work, lost pay.", dfx: { family: -2 }, rule: "F1", dflag: "momLostPay" },
-        { id: "pharmacy", b: "health", who: "Pharmacy text", t: "Pick up Leo's inhaler", s: 1, cash: 10, give: { health: 2 }, flag: "inhaler",
-          skip: "Inhaler almost empty.", dfx: {}, rule: "H1", dflag: "noInhaler" },
-        { id: "tutor", b: "education", who: "Ms. Ortiz", t: "Chem tutoring", s: 1, give: { school: 2, energy: -1 },
-          skip: "Still lost.", dfx: { school: -1 } }
+        { id: "shift", b: "economy", who: "Rick · Fresh Fare", t: "Work shift 4–6", s: 2,
+          skip: "Rick: “No call, no show.”", rule: "J1" },
+        { id: "leo", b: "family", who: "Mom", t: "Meet Leo's bus", s: 1,
+          skip: "Leo got home to an empty house. Mom left work and lost pay.", rule: "F1" },
+        { id: "tutor", b: "education", who: "Ms. Ortiz", t: "Chem tutoring", s: 1,
+          skip: "Still lost on tomorrow's test." },
+        { id: "truck", b: "religion", who: "Grandma's church", t: "Unload the pantry truck", s: 1,
+          skip: "Grandma unloaded 40 boxes by herself." }
       ],
-      idea: "<b>Institutions connect</b>: work affects health care." },
+      idea: "<b>Role conflict</b>: two of Dani's statuses (worker, big sibling) want the same hour." },
 
-    { clock: "Pantry, test, or paycheck?", id: "evening", name: "Evening", time: "6:00–9:00 PM", sky: "evening", icon: "🌆", slots: 3, times: ["6:00", "7:00", "8:00"],
-      setup: "Mom's home at 6:30 with Leo. Three hours left.",
+    { id: "evening", name: "Evening", time: "6:00–9:00 PM", sky: "evening", icon: "🌆", slots: 3, times: ["6:00", "7:00", "8:00"],
+      setup: "Mom's home at 6:30 with Leo. Chem test at 8 AM tomorrow.",
       cards: [
-        { id: "pantry", b: "religion", who: "Grandma's church · 6–8", t: "Church food pantry", s: 2, give: { family: 1, energy: -1 },
-          skip: "Grandma: “Families waited.”", dfx: { family: -1 }, rule: "R1" },
-        { id: "study", b: "education", who: "Ms. Ortiz · test tomorrow", t: "Study for chem test", s: 2, give: { school: 3, energy: -1 },
-          skip: "No studying. Test at 8 AM.", dfx: { school: -2 } },
-        { id: "dinner", b: "family", who: "Leo: “I'm hungry”", t: "Make dinner with Leo", s: 1, give: { family: 1, energy: 1, health: 1 },
-          skip: "Chips again.", dfx: { health: -1 } },
-        { id: "close", b: "economy", who: "Rick · Fresh Fare · 6–9", t: "Extra closing shift", s: 3, give: { job: 3, energy: -3 },
-          skip: "Rick: “k.”", dfx: {} }
+        { id: "pantry", b: "religion", who: "Grandma's church · 6–8", t: "Food pantry night", s: 2,
+          skip: "Grandma: “Families waited.”", rule: "R1" },
+        { id: "study", b: "education", who: "Ms. Ortiz · test tomorrow", t: "Study for chem test", s: 2,
+          skip: "No studying. Test at 8 AM." },
+        { id: "dinner", b: "family", who: "Leo: “I'm hungry”", t: "Make dinner with Leo", s: 1,
+          skip: "Chips for dinner again." },
+        { id: "close", b: "economy", who: "Rick · Fresh Fare · 6–9", t: "Extra closing shift", s: 2,
+          skip: "Rick: “k.” He gives the hours to Kayla." }
       ],
-      idea: "<b>Internalized</b> values feel like your own idea." },
-
-    { clock: "3 demands. 2 slots.", id: "night", name: "Night", time: "9:00–11:00 PM", sky: "night", icon: "🌙", slots: 2, times: ["9:00", "10:00"],
-      setup: "Two hours till bed. Chem test at 8 AM.",
-      cards: [
-        { id: "sleep", b: "you", who: "Your body", t: "Bed on time", s: 2, give: { energy: 3, health: 1 },
-          skip: "Up past midnight.", dfx: { energy: -1 } },
-        { id: "talk", b: "family", who: "Mom", t: "Talk with Mom", s: 1, give: { family: 2 },
-          skip: "Mom: “Later, I guess.”", dfx: { family: -1 } },
-        { id: "app", b: "economy", who: "Fresh Fare app", t: "Check work app", s: 1, give: { job: 1 }, prule: "M1",
-          skip: "Surprise: 3 closing shifts!", dfx: { job: -2 }, rule: "M1" }
-      ],
-      idea: "" }
+      idea: "Every boss meets a real need. Together they want more hours than a day has." }
   ];
 
-  // ---------- Text-message decisions (every choice costs something) ----------
-  const DECISIONS = {
-    phone: { r: 1, short: "Phone in 5th hour", when: "1:45 PM · Chem class", from: "Rick · Fresh Fare", boss: "economy",
-      texts: ["Come in at 3:30 instead of 4?", "Answer now or I ask Kayla."],
-      note: "Class rule: phones stay in pockets.",
-      ask: "What does Dani do?",
-      options: [
-        { ic: "📱", label: "Answer under desk", fx: { job: 1, school: -1, family: -1 }, rule: "S1",
-          res: "Ms. Ortiz takes your phone. That's a <b>formal sanction</b>: an official punishment." },
-        { ic: "🔔", label: "Wait for the bell", fx: { job: -2 },
-          res: "Rick gave Kayla the hours. “k.” That's an <b>informal sanction</b>." },
-        { ic: "🚪", label: "Ask to step out", fx: { job: 1, school: -2 },
-          res: "You followed the <b>norm</b>, but missed the test review." }
-      ] },
-    leoWork: { r: 2, short: "Leo at 4:00", when: "3:55 PM · Fresh Fare lot", from: "Leo, 8", boss: "family",
-      texts: ["Can I come to your work? I'll be quiet!"],
-      note: "Shift starts at 4. Mom works till 6.",
-      ask: "Where does Leo go?",
-      options: [
-        { ic: "🛋️", label: "Break room", fx: { job: -2 }, rule: "J2",
-          res: "Rick: “No kids in the back.” You get a warning." },
-        { ic: "💵", label: "Pay neighbor $10", fx: {}, cash: 10,
-          res: "Leo is safe. Your cash is gone." },
-        { ic: "👵", label: "Call Grandma", fx: { family: -1 }, flag: "grandmaLeft",
-          res: "Grandma leaves pantry setup. She's tired, and says so." }
-      ] },
-    nextWeek: { r: 4, short: "Next week's plan", when: "9:00 PM", from: "Mom", boss: "economy",
-      texts: ["New machines. The plant cut my hours to 24.",
-              "Under 30 hours = no insurance. I took a night job.",
-              "Watch Leo nights?"],
-      lostPay: "Today's lost pay hurt too.",
-      rule: "A1",
-      ask: "Who watches Leo?",
-      options: [
-        { ic: "📅", label: "Work weekends only", fx: { job: -3, family: 1 },
-          res: "Rick: “Then fewer hours.” Less pay." },
-        { ic: "👵", label: "Ask Grandma", fx: { family: -1, job: 1 },
-          res: "Grandma says yes, but quits pantry nights." },
-        { ic: "💻", label: "Online school at home", fx: { school: -2, family: 1 },
-          res: "You watch Leo. No more Ms. Ortiz." }
-      ] }
-  };
+  // ---------- One text-message decision (School Day) ----------
+  const DECISION = { short: "Phone in chem class", when: "1:45 PM · Chem class", from: "Rick · Fresh Fare", boss: "economy",
+    texts: ["Come in at 3:30 instead of 4?", "Answer now or I ask Kayla."],
+    note: "Class rule: phones stay in pockets.",
+    ask: "What does Dani do?",
+    options: [
+      { ic: "📱", label: "Answer under the desk", hit: "education", rule: "S1",
+        res: "Ms. Ortiz takes your phone. That's a <b>formal sanction</b>: an official, written punishment." },
+      { ic: "🔔", label: "Wait for the bell", hit: "economy",
+        res: "Rick gave Kayla the hours and texted “k.” That's an <b>informal sanction</b>: unwritten, but you feel it." },
+      { ic: "🚪", label: "Ask to step out", hit: "education",
+        res: "You followed the <b>norm</b> and got the hours, but missed the test review." }
+    ] };
 
-  // ---------- Evidence checks (6) ----------
+  // ---------- Review checks: one per part, each matches a Day 5 review slide ----------
   // options[0] is right; the screen always shuffles them.
   const CHECKS = [
-    { id: "c1", std: "Soc.6", short: "Tourist calls tip refusal rude = ethnocentrism", unlock: "Unlock: School Day",
-      frame: "phone", ftitle: "📱 7:55 AM",
-      ev: "<span class=\"notif\"><b>🎥 @tripwithtyler</b><span>Tokyo waiter chased me down to return my tip. RUDE. 😤</span></span><span class=\"notif\"><b>💬 Top comment</b><span>In Japan, tips aren't expected.</span></span>",
+    { id: "c1", std: "Soc.5", slide: "Culture on a Friday Night", short: "Chant + school pride = nonmaterial culture",
+      frame: "phone", ftitle: "📣 Riverside High · 7:45 AM text",
+      ev: "<span class=\"notif\"><b>Friday: home game vs. Marion</b><span>Wear black and gold. Jerseys $15 at lunch. Foam fingers at the gate.</span></span><span class=\"notif\"><b>Student section</b><span>Learn the chant: “R-H-S, we never rest!” Show your pride.</span></span>",
+      terms: ["<b>Material culture:</b> things you can touch.", "<b>Nonmaterial culture:</b> ideas, values, chants, norms."],
+      q: "In this text, which one is nonmaterial culture?",
+      options: ["The chant and the school pride", "The $15 jerseys sold at lunch", "The foam fingers at the gate", "The bleachers and the football field"],
+      hint: "Which one can you NOT pick up and hold?",
+      why: "A chant and school pride are ideas you share, not objects. That's nonmaterial culture." },
+    { id: "c2", std: "Soc.6", slide: "Tipping Shows How Culture Shapes You", short: "Tourist calls tip refusal rude = ethnocentrism",
+      frame: "phone", ftitle: "📱 Dani's feed · lunch",
+      ev: "<span class=\"notif\"><b>🎥 @tripwithtyler</b><span>Tokyo waiter chased me down to give my tip back. RUDE. 😤</span></span><span class=\"notif\"><b>💬 Top comment</b><span>In Japan, tips aren't expected. Good service is already the job.</span></span>",
       cite: "Fact source: Japan National Tourism Organization",
+      terms: ["<b>Ethnocentrism:</b> judging another culture by your own rules.", "<b>Cultural relativism:</b> understanding it by its own rules first."],
       q: "The tourist calls the waiter rude. That's…",
       options: ["Ethnocentrism: judging Japan by U.S. rules", "Relativism: seeing Japan by its own rules", "A law that Japan's government wrote", "Following Japan's norms like a local"],
-      hint: "Whose rules is the tourist using?",
-      why: "Judging another culture by your own rules = ethnocentrism." },
-    { id: "c2", std: "Soc.5", short: "Respect learning = value · phone basket = material culture", unlock: "Unlock: After School",
-      frame: "wall", ftitle: "🧱 Ms. Ortiz's wall",
-      terms: ["<b>Value:</b> what a group thinks matters.", "<b>Material culture:</b> things you can touch."],
-      ev: "<span class=\"poster\">WE RESPECT LEARNING</span><span class=\"rulecard\">📵 Phones stay in pockets.</span><span class=\"basket\">🧺 Phone basket</span>",
-      q: "Which match is right?",
-      options: ["“Respect learning” = value. Basket = material.", "“Respect learning” = value. Basket = nonmaterial.", "“Respect learning” = norm. Basket = material.", "“Respect learning” = norm. Basket = nonmaterial."],
-      hint: "Value = what matters. Material = you can touch it.",
-      why: "The poster is a value (nonmaterial). The basket is material culture." },
-    { id: "c3", std: "Soc.7", short: "Leo's insurance comes through Mom's job", unlock: "Unlock: Evening",
-      frame: "receipt", ftitle: "🧾 Pharmacy receipt",
-      ev: "<span class=\"rl\"><span>ITEM</span><span>Leo's inhaler</span></span><span class=\"rl\"><span>COPAY</span><span>$10.00</span></span><span class=\"rl\"><span>PLAN</span><span>Cedar Valley Plant employee plan (Mom)</span></span>",
-      real: "Real: 54% of Americans get insurance through work.",
-      cite: "U.S. Census Bureau, 2023",
-      q: "Why could Mom's hour cut hit Leo's inhaler?",
-      options: ["His insurance comes through Mom's job", "The pharmacy only serves plant families", "Mom's boss sets medicine prices", "Leo's school decides his medicine"],
-      hint: "Read the PLAN line.",
-      why: "Leo's insurance comes through Mom's job. Economy and health care are connected." },
-    { id: "c4", std: "Soc.6", short: "Pantry feeling = internalized value", unlock: "Unlock: Night",
-      frame: "thought", ftitle: "💭 Inside Dani's head",
-      terms: ["<b>Internalize:</b> a taught value becomes part of you."],
-      ev: "“Nobody makes me go. Skipping just feels wrong. Grandma says, ‘We show up.’”",
-      q: "What does Dani's feeling show?",
-      options: ["Dani internalized a family and church value", "Dani is obeying a city volunteer law", "Dani fears a punishment from the pastor", "Dani is breaking a norm at church"],
-      hint: "Nobody forces Dani. Where's the feeling from?",
-      why: "A value from family and church became Dani's own. That's internalizing." },
-    { id: "c5", std: "Soc.8", short: "One change spreads to other institutions", unlock: "Unlock: The Ending",
-      frame: "chain", ftitle: "🔗 Chain reaction",
-      ev: "<span class=\"lnk\">🏭 New machines</span><span class=\"lnk\">⏬ Mom's hours cut</span><span class=\"lnk\">❤️ Insurance at risk</span><span class=\"lnk\">🌙 Mom's night job</span><span class=\"lnk\">🏠 Dani watches Leo</span>",
-      real: "Real: U.S. women working or job-hunting.",
-      cite: "U.S. Bureau of Labor Statistics",
+      hint: "Whose rules is the tourist using to judge?",
+      why: "He judged Japan by U.S. tipping rules. That's ethnocentrism." },
+    { id: "c3", std: "Soc.7", slide: "Each Institution Answers a Need", short: "City bus rule = government (who makes the rules)",
+      frame: "receipt", ftitle: "🚌 City Transit notice",
+      ev: "<span class=\"rl\"><span>FROM</span><span>City Council, Transit Dept.</span></span><span class=\"rl\"><span>CHANGE</span><span>Last Route 7 bus now leaves at 6:40 PM</span></span><span class=\"rl\"><span>WHY</span><span>Budget vote at Monday's council meeting</span></span>",
+      needs: true,
+      q: "Which institution is behind this change?",
+      options: ["Government: it answers “Who makes the rules?”", "Economy: it answers “How do we get what we need?”", "Family: it answers “Who cares for us?”", "Education: it answers “How do we learn skills?”"],
+      hint: "Read the FROM and WHY lines. Who voted?",
+      why: "The city council voted on it. Government is the institution that makes the rules and runs public services." },
+    { id: "c4", std: "Soc.8", slide: "Rosie Shows How Change Spreads", short: "Working women rising = change spreads across institutions",
+      frame: "thought", ftitle: "💬 Grandma, at the pantry",
+      ev: "“My grandma built bomber parts in 1943 while her husband was overseas. After the war she kept working. My mom worked. I worked. Your mom works. That's why somebody like you walks Leo to the bus.”",
       bars: true,
-      q: "What do the chain and chart show?",
-      options: ["One institution's change spreads to others", "Institutions stay the same no matter what", "Only the economy feels job changes", "Families change alone, without institutions"],
-      hint: "Follow the arrows.",
-      why: "One change spread into family, health care, school, and jobs." },
-    { id: "c6", std: "Soc.7", short: "Ending = institutions' rules collided", unlock: "File Dani's day",
-      frame: "file", ftitle: "", ev: "",
-      q: "Why did Dani's day end this way?",
-      options: ["Rules from several institutions crashed", "Dani just needed better time skills", "Random bad luck nobody could see", "Dani's personality, not the rules"],
-      hint: "Whose rules wanted Dani's hours?",
-      why: "Every boss met a need. Together they wanted more hours than a day has." }
+      cite: "Source: U.S. Bureau of Labor Statistics",
+      q: "What do Grandma's story and the chart show?",
+      options: ["A change in work spread into family and child care", "Women's jobs went back to normal after the war", "Only the economy changed; families stayed the same", "Institutions change alone without touching others"],
+      hint: "Grandma links the factory job to who watches Leo. Follow that link.",
+      why: "More women working (economy) changed who cares for kids (family) and what older siblings do. Change in one institution spreads to others." }
   ];
 
   const ENDINGS = {
-    er:     { i: "🌙", t: "The Long Night", text: "Leo's okay. Dani got home from urgent care at 2 AM." },
-    empty:  { i: "🪫", t: "Running on Empty", text: "Dani crashed at midnight. Tomorrow starts tired." },
-    job:    { i: "📵", t: "Off the Schedule", text: "Rick takes Dani off next week's schedule. Less money." },
-    school: { i: "✉️", t: "The Letter Home", text: "Chem drops to an F. A letter goes home." },
-    family: { i: "🪑", t: "The Empty Chair", text: "Mom and Leo eat without Dani again." },
-    held:   { i: "🧩", t: "Held Together (For Now)", text: "Nothing broke today. But Dani is wiped out." }
+    family:     { i: "🪑", t: "The Empty Chair", text: "Mom and Leo eat without Dani again. Mom lost pay covering for Leo." },
+    education:  { i: "✉️", t: "The Letter Home", text: "Chem drops to an F. A letter goes home." },
+    religion:   { i: "📦", t: "Short-Handed at the Pantry", text: "Grandma ran the pantry alone. One more no-show and Dani loses the spot." },
+    economy:    { i: "📵", t: "Off the Schedule", text: "Rick takes Dani off next week's schedule. Less money." },
+    government: { i: "🥶", t: "The Long Walk Home", text: "The last bus left at 6:40. Dani walked home in the cold." }
   };
 
   const PROMPTS = [
     { id: "why", short: "Why Dani dropped something", min: 60, newWords: 5,
-      label: "1. Explain one drop:",
-      stem: "Dani dropped ___ because ___ crashed into ___.",
-      mustAll: [["family", "mom", "leo", "grandma", "school", "education", "chem", "ortiz", "teacher", "job", "work", "economy", "store", "rick", "shift", "fresh fare", "plant", "health", "pharmacy", "inhaler", "insurance", "church", "religion", "pantry", "government", "bus", "law", "city", "media", "app", "phone", "news"],
+      label: "1. Pick one thing Dani dropped. Which two institutions wanted the same time?",
+      stem: "Dani dropped ___ because the ___ and the ___ wanted the same time.",
+      mustAll: [["family", "mom", "leo", "grandma", "school", "education", "chem", "ortiz", "teacher", "job", "work", "economy", "store", "rick", "shift", "fresh fare", "church", "religion", "pantry", "government", "bus", "city", "law", "rule"],
                 ["because", "so ", "since", "but", "when", "couldn", "could not", "same time", "both"]],
-      mustMsg: "In answer 1, name what got dropped and the institutions whose rules crashed (use \"because\")." },
-    { id: "norm", short: "Norm and value for the new student", min: 50, newWords: 3,
-      label: "2. New kid shouts answers, phone out:",
-      stem: "She breaks the norm of ___ from the value of ___.",
-      mustAll: [["hand", "raise", "shout", "interrupt", "quiet", "turn", "wait", "listen", "talk", "phone", "pocket", "away", "call", "speak", "blurt"],
+      mustMsg: "In answer 1, name what got dropped and the institutions that wanted the same time (use \"because\")." },
+    { id: "norm", short: "Exit ticket: the new student", min: 50, newWords: 3,
+      label: "2. Exit ticket: A new student interrupts, never raises a hand, and dresses very differently. Explain with unit terms.",
+      stem: "The student is breaking the norm of ___, which comes from the value of ___.",
+      mustAll: [["hand", "raise", "shout", "interrupt", "quiet", "turn", "wait", "listen", "talk", "speak", "blurt", "dress", "clothes"],
                 ["respect", "learn", "order", "fair", "focus", "education", "attention", "polite", "manners", "kind", "others", "everyone", "turn", "school", "class", "safe", "equal"]],
       mustMsg: "In answer 2, name the norm (a rule for how to act) AND the value behind it (what matters, like respect)." }
   ];
 
   // ---------- Steps, in strict order ----------
-  const has = (st, r, id) => !!(st.plans[r] && st.plans[r].includes(id));
   const STEPS = [
     { k: "plan", r: 0 }, { k: "result", r: 0 }, { k: "check", c: 0 },
-    { k: "plan", r: 1 }, { k: "decide", d: "phone" }, { k: "result", r: 1 }, { k: "check", c: 1 },
-    { k: "plan", r: 2 }, { k: "decide", d: "leoWork", when: st => has(st, 2, "shift") && has(st, 2, "leo") }, { k: "result", r: 2 }, { k: "check", c: 2 },
+    { k: "plan", r: 1 }, { k: "decide" }, { k: "result", r: 1 }, { k: "check", c: 1 },
+    { k: "plan", r: 2 }, { k: "result", r: 2 }, { k: "check", c: 2 },
     { k: "plan", r: 3 }, { k: "result", r: 3 }, { k: "check", c: 3 },
-    { k: "decide", d: "nextWeek" }, { k: "plan", r: 4 }, { k: "result", r: 4 }, { k: "check", c: 4 },
     { k: "ending" }, { k: "write" }
   ];
-  const partOf = i => { const s = STEPS[i]; if (!s) return 5; if (s.r != null) return s.r + 1; if (s.d) return DECISIONS[s.d].r + 1; if (s.c != null) return Math.min(s.c, 4) + 1; return 5; };
+  const partOf = i => { const s = STEPS[i]; if (!s) return 4; if (s.r != null) return s.r + 1; if (s.k === "decide") return 2; if (s.c != null) return s.c + 1; return 4; };
 
-  // ---------- State + rules of play (no page needed, so it can be tested) ----------
-  const START = { school: 5, job: 5, family: 5, health: 5, energy: 6 };
+  // ---------- State + rules of play ----------
   function fresh() {
-    return { v: 2, name: "", step: -1, m: Object.assign({}, START), cash: 14, plans: {}, out: {}, dec: {}, rules: [], flags: {},
-      penalty: 0, crashes: 0, wrong: {}, done: {}, trail: [], writing: {}, ending: "", turnedIn: false };
+    return { v: 3, name: "", step: -1, plans: {}, out: {}, dec: null, rules: [], flags: {},
+      hits: { family: 0, education: 0, religion: 0, economy: 0, government: 0 }, trail: [],
+      wrong: {}, done: {}, writing: {}, ending: "", turnedIn: false };
   }
-  const clamp = v => Math.max(0, Math.min(10, v));
-  function applyFx(st, fx) { Object.keys(fx || {}).forEach(k => { if (k in st.m) st.m[k] = clamp(st.m[k] + fx[k]); }); }
   function addRule(st, id) { if (id && !st.rules.includes(id)) { st.rules.push(id); return id; } return ""; }
-  function slotsFor(st, r) { return Math.max(1, ROUNDS[r].slots - (st.planPenalty && st.planPenalty[r] || 0)); }
-  function crashCheck(st, lines) {
-    if (st.m.energy > 0) return;
-    st.crashes++; st.m.energy = 2; st.penalty = 1;
-    lines.push({ k: "crash", text: "Crashed! One less slot next.", fx: {} });
-    st.trail.push({ k: "event", t: "Crashed: no energy", fx: { energy: -1 } });
-  }
-  // Lock in a round's plan: played cards give, dropped cards cost, hidden rules show up.
   function lockRound(st, r, picked) {
     const R = ROUNDS[r], lines = [];
     st.plans[r] = picked.slice();
-    st.penalty = 0;
     R.cards.forEach(c => {
       if (picked.includes(c.id)) {
-        applyFx(st, c.give); if (c.cash) st.cash -= c.cash;
         if (c.flag) st.flags[c.flag] = 1;
-        lines.push({ k: "did", id: c.id, text: "", fx: Object.assign({}, c.give, c.cash ? { cash: -c.cash } : {}), rule: addRule(st, c.prule) });
+        lines.push({ k: "did", id: c.id, rule: addRule(st, c.prule) });
       } else {
-        applyFx(st, c.dfx);
-        if (c.dflag) st.flags[c.dflag] = 1;
-        lines.push({ k: "drop", id: c.id, text: c.skip, fx: Object.assign({}, c.dfx), rule: addRule(st, c.rule) });
-        if (Object.keys(c.dfx || {}).length || c.rule || c.dflag) st.trail.push({ k: "drop", id: c.id, fx: Object.assign({}, c.dfx) });
+        st.hits[c.b]++;
+        st.trail.push({ k: "drop", id: c.id });
+        lines.push({ k: "drop", id: c.id, text: c.skip, rule: c.rule ? (addRule(st, c.rule) || c.rule) : "" });
       }
     });
-    // Evening: the city bus (government) decides how Dani gets home from the pantry.
+    // Evening pantry: how Dani gets home depends on the city's bus rule (government).
     if (R.id === "evening" && picked.includes("pantry")) {
-      if (st.flags.knowsBus) lines.push({ k: "note", b: "government", text: "You knew about the 6:40 bus. Grandma drives you home. 🚗", fx: {} });
-      else { const fx = { energy: -2 }; applyFx(st, fx); lines.push({ k: "note", b: "government", text: "Last bus left at 6:40. You walked home in the cold.", fx, rule: addRule(st, "G1") }); st.trail.push({ k: "event", t: "Missed last bus, walked home", fx }); }
+      if (st.flags.knowsBus) lines.push({ k: "note", b: "government", text: "You read the bus notice this morning, so Grandma drives you home. 🚗" });
+      else { st.hits.government++; st.trail.push({ k: "event", b: "government", t: "Missed the 6:40 bus, walked home" }); lines.push({ k: "note", b: "government", text: "The last bus left at 6:40. You walked home in the cold.", rule: "G1" }); addRule(st, "G1"); }
     }
-    // Night: Leo's inhaler.
-    if (R.id === "night") {
-      if (st.flags.noInhaler) {
-        const fx = { health: -2, energy: -2, school: -1 }; applyFx(st, fx); st.flags.er = 1;
-        lines.push({ k: "note", b: "health", text: "11:40 PM: Leo wheezing, inhaler empty. Urgent care.", fx });
-        st.trail.push({ k: "event", t: "Inhaler ran out: urgent care", fx });
-      } else {
-        const fx = { health: 1 }; applyFx(st, fx);
-        lines.push({ k: "note", b: "health", text: "11:40 PM: Leo coughs, uses his inhaler, sleeps.", fx });
-      }
-    }
-    crashCheck(st, lines);
-    if (st.penalty) { st.planPenalty = st.planPenalty || {}; st.planPenalty[r + 1] = 1; }
     st.out[r] = lines;
   }
-  function decide(st, d, i) {
-    const D = DECISIONS[d], o = D.options[i];
-    st.dec[d] = i;
-    applyFx(st, o.fx); if (o.cash) st.cash -= o.cash; if (o.flag) st.flags[o.flag] = 1;
-    st.decRule = st.decRule || {};
-    st.decRule[d] = addRule(st, o.rule) || "";
-    if (D.rule) addRule(st, D.rule);
-    st.trail.push({ k: "chose", d, i, fx: Object.assign({}, o.fx) });
+  function decide(st, i) {
+    const o = DECISION.options[i];
+    st.dec = i; st.hits[o.hit]++;
+    addRule(st, o.rule);
+    st.trail.push({ k: "chose", i, b: o.hit });
   }
   function endingFor(st) {
-    const low = [["job", st.m.job], ["school", st.m.school], ["family", st.m.family]].filter(x => x[1] <= 2).sort((a, b) => a[1] - b[1]);
-    if (st.m.health <= 2 || st.crashes >= 2) return st.flags.er ? "er" : "empty";
-    if (low.length) return low[0][0];
-    return st.flags.er ? "er" : "held";
+    let best = "family";
+    BOSS_ORDER.forEach(b => { if (st.hits[b] > st.hits[best]) best = b; });
+    return best;
   }
-  window.SevenBosses = { ROUNDS, DECISIONS, CHECKS, ENDINGS, RULES, STEPS, fresh, lockRound, decide, endingFor, slotsFor };
+  window.FiveBosses = { ROUNDS, DECISION, CHECKS, ENDINGS, RULES, STEPS, fresh, lockRound, decide, endingFor };
   if (typeof document === "undefined" || !document.getElementById("app")) return;
 
   // =====================================================================
@@ -334,92 +233,48 @@
 
   let st;
   try { st = JSON.parse(localStorage.getItem(KEY)); } catch (e) {}
-  if (!st || typeof st !== "object" || st.v !== 2 || !st.m) st = fresh();
+  if (!st || typeof st !== "object" || st.v !== 3 || !st.hits) st = fresh();
   try {
     const who = window.classShortName ? window.classShortName(localStorage.getItem("site-student-name") || "") : "";
     if (who && st.name && who.toLowerCase() !== st.name.toLowerCase()) { st = fresh(); localStorage.setItem(KEY, JSON.stringify(st)); if (window.classFirstTry) window.classFirstTry.reset(); }
   } catch (e) {}
   const save = () => { try { localStorage.setItem(KEY, JSON.stringify(st)); } catch (e) {} };
   const cardById = id => { for (const R of ROUNDS) for (const c of R.cards) if (c.id === id) return c; return null; };
-  const stepOk = i => !STEPS[i] || !STEPS[i].when || STEPS[i].when(st);
-  function nextStep() { st.step++; while (st.step < STEPS.length && !stepOk(st.step)) st.step++; save(); render(true); }
+  function nextStep() { st.step++; save(); render(true); }
 
   // ---------- Small pieces ----------
   const bossTag = b => `<span class="btag b-${b}"><span aria-hidden="true">${BOSS[b].i}</span> <span>${esc(BOSS[b].n)}</span></span>`;
-  function fxTags(fx) {
-    const order = ["school", "job", "family", "health", "energy", "cash"];
-    const icon = { school: "🎓", job: "💼", family: "🏠", health: "❤️", energy: "⚡", cash: "💵" };
-    return order.filter(k => fx && fx[k]).map(k => {
-      const v = fx[k], up = v > 0;
-      const txt = k === "cash" ? (up ? "+$" + v : "−$" + Math.abs(v)) : (up ? "+" + v : "−" + Math.abs(v));
-      return `<span class="fx ${up ? "up" : "down"}">${icon[k]} ${txt}</span>`;
-    }).join("");
-  }
+  const job = t => `<p class="job"><b>Your job:</b> <span>${esc(t)}</span></p>`;
   function ruleBox(id) {
     if (!id) return "";
     const R = RULES[id];
-    return `<div class="rule"><p class="rk">🔓 <span class="stamp rnew">NEW RULE</span> ${bossTag(R.b)}</p><p class="rt">${esc(R.t)}</p></div>`;
-  }
-  let prevM = null;
-  function dropCount() { return st.trail.filter(x => x.k === "drop").length; }
-  function clockLine() {
-    if (st.step < 0) return "";
-    const s = STEPS[Math.min(st.step, STEPS.length - 1)];
-    if (s.k === "plan") return ROUNDS[s.r].clock;
-    if (s.k === "result") return (st.out[s.r] || []).filter(l => l.k === "drop").length + " dropped. Mine now.";
-    if (s.k === "check") return "Pick the key.";
-    if (s.k === "decide") return "Every choice costs.";
-    if (s.k === "ending") return "Same time tomorrow.";
-    return "Still ticking.";
+    return `<div class="rule"><p class="rk">📏 <span>The rule</span> ${bossTag(R.b)}</p><p class="rt">${esc(R.t)}</p></div>`;
   }
   function hud() {
     const show = st.step >= 0;
     $("hud").hidden = !show;
-    if (!show) { prevM = null; return; }
-    $("meters").innerHTML = METERS.map(([k, icon, label]) => {
-      const v = st.m[k], low = v <= 2;
-      const bump = prevM && prevM[k] !== v ? (v > prevM[k] ? " bump-up" : " bump-down") : "";
-      return `<div class="meter${low ? " low" : ""}${bump}"><span class="ml"><span aria-hidden="true">${icon}</span> <span>${esc(label)}</span></span><span class="mt" aria-hidden="true"><span style="width:${v * 10}%"></span></span><span class="mv">${v}</span></div>`;
-    }).join("") + `<div class="meter cash${prevM && prevM.cash !== st.cash ? " bump-down" : ""}"><span class="ml"><span aria-hidden="true">💵</span> <span>Cash</span></span><span class="mv">$${st.cash}</span></div>`;
-    prevM = Object.assign({ cash: st.cash }, st.m);
-    const met = bossesMet();
-    $("bosses").innerHTML = BOSS_ORDER.map(b => `<span class="chip${met.has(b) ? " on" : ""}" title="${esc(BOSS[b].n)}"><span aria-hidden="true">${BOSS[b].i}</span><span class="cn">${esc(BOSS[b].n)}</span></span>`).join("");
-    $("bossCount").textContent = met.size;
-    $("ruleCount").textContent = st.rules.length;
-    const p = st.step >= STEPS.length ? 5 : partOf(st.step);
-    $("partTag").textContent = st.step >= 18 ? "Day report" : "Part " + p + " of 5";
-    const d = dropCount();
-    $("rivalMood").textContent = d >= 8 ? "😈" : d >= 4 ? "😏" : "🙂";
-    $("rivalSay").textContent = clockLine();
-    $("rival").classList.remove("talk"); void $("rival").offsetWidth; $("rival").classList.add("talk");
+    if (!show) return;
+    const s = STEPS[Math.min(st.step, STEPS.length - 1)];
+    const p = partOf(Math.min(st.step, STEPS.length - 1));
+    $("partTag").textContent = s.k === "ending" || s.k === "write" ? "Wrap-up" : "Part " + p + " of 4 · " + ROUNDS[p - 1].name;
+    $("bosses").innerHTML = BOSS_ORDER.map(b => `<span class="chip b-${b}${st.hits[b] ? " hit" : ""}" title="${esc(BOSS[b].n)}: dropped ${st.hits[b]}"><span aria-hidden="true">${BOSS[b].i}</span><span class="cn">${esc(BOSS[b].n)}</span>${st.hits[b] ? `<span class="hn">❌${st.hits[b]}</span>` : ""}</span>`).join("");
   }
-  function bossesMet() {
-    const met = new Set();
-    const lastRound = st.step < 0 ? -1 : Math.max(...STEPS.slice(0, Math.min(st.step, STEPS.length - 1) + 1).map(s => s.r != null ? s.r : (s.d ? DECISIONS[s.d].r : -1)));
-    for (let r = 0; r <= lastRound && r < ROUNDS.length; r++) ROUNDS[r].cards.forEach(c => { if (BOSS_ORDER.includes(c.b)) met.add(c.b); });
-    st.rules.forEach(id => met.add(RULES[id].b));
-    Object.keys(st.dec).forEach(d => met.add(DECISIONS[d].boss));
-    return met;
-  }
-  function openRulebook() {
-    const list = st.rules.length ? st.rules.map(id => `<li>${bossTag(RULES[id].b)}<span class="rbt">${esc(RULES[id].t)}</span></li>`).join("") : `<li class="empty">No hidden rules found yet. You find them by hitting them.</li>`;
-    $("rulebookList").innerHTML = list;
-    const d = $("rulebook");
-    if (d.showModal) d.showModal(); else d.setAttribute("open", "");
-  }
-
-  function skyHead(R, p) {
+  function skyHead(R) {
     return `<div class="sky sky-${R.sky}"><span class="sun" aria-hidden="true">${R.icon}</span><div><p class="when">${esc(R.time)}</p><h2>${esc(R.name)}</h2></div></div>`;
   }
 
   // ---------- Intro ----------
   function intro() {
     app.innerHTML = `<section class="intro card">
-      <div class="cover" aria-hidden="true"><span class="clock">⏰</span><span class="orb o1">🏠</span><span class="orb o2">🎓</span><span class="orb o3">💼</span><span class="orb o4">❤️</span><span class="orb o5">⛪</span><span class="orb o6">🏛️</span><span class="orb o7">📱</span></div>
-      <h1>Seven Bosses, One Tuesday</h1>
-      <p class="hook">Dani is 16. Seven bosses want Dani's hours.</p>
-      <ul class="plan-list"><li><b>🗓️ Plan</b> <span>Dani's day</span></li><li><b>🔓 Find</b> <span>hidden rules</span></li><li><b>⏱️ About</b> <span>25 minutes</span></li></ul>
-      <p class="goal"><b>Goal:</b> <span>Explain how institutions meet needs, shape us, and change.</span></p>
+      <div class="cover" aria-hidden="true"><span class="clock">⏰</span><span class="orb o1">🏠</span><span class="orb o2">🎓</span><span class="orb o3">⛪</span><span class="orb o4">💼</span><span class="orb o5">🏛️</span></div>
+      <h1>Five Bosses, One Tuesday</h1>
+      <p class="hook">Dani is 16. Five institutions want Dani's time today. There aren't enough hours.</p>
+      <ol class="howto">
+        <li><b>Plan</b> each part of Dani's day. Whatever doesn't fit gets dropped.</li>
+        <li><b>See</b> what got dropped and which rule bit.</li>
+        <li><b>Unlock</b> the next part with one review question from today's slides.</li>
+      </ol>
+      <p class="goal"><b>Done =</b> <span>4 parts, then 2 short answers, then Turn in. About 20 minutes.</span></p>
       <div class="namebox"><label for="nameBox" class="sr">Your name: first name + last initial</label>
       <input id="nameBox" maxlength="40" autocomplete="off" placeholder="First name + last initial (like Jordan M.)" value="${esc(st.name)}"></div>
       <p id="introMsg" class="msg" role="status"></p>
@@ -435,55 +290,45 @@
   // ---------- Plan a part of the day ----------
   let picks = [];
   function plan(r) {
-    const R = ROUNDS[r], n = slotsFor(st, r);
+    const R = ROUNDS[r], n = R.slots;
     picks = picks.filter(id => R.cards.some(c => c.id === id));
     const used = () => picks.reduce((a, id) => a + R.cards.find(c => c.id === id).s, 0);
-    const cashLeft = () => st.cash - picks.reduce((a, id) => a + (R.cards.find(c => c.id === id).cash || 0), 0);
-    const p = r + 1;
-    app.innerHTML = `<section class="card round">${skyHead(R, p)}
+    app.innerHTML = `<section class="card round">${skyHead(R)}
+      ${job("Tap demands to fill Dani's " + n + " slots. Whatever's left gets dropped.")}
       <p class="setup">${esc(R.setup)}</p>
-      ${n < R.slots ? `<p class="warn">😴 <span>Dani crashed: one less slot.</span></p>` : ""}
       <div class="board">
         <div class="planner"><p class="ph">🗓️ <span>Dani's planner</span></p><ol class="slots" id="slots"></ol><p class="filled" id="filled"></p></div>
-        <div class="handwrap"><p class="ph">📥 <span>Demands</span>${r === 0 ? ` <span class="sub">Tap to add</span>` : ""}</p><div class="hand" id="hand"></div></div>
+        <div class="handwrap"><p class="ph">📥 <span>Demands</span></p><div class="hand" id="hand"></div></div>
       </div>
       <button type="button" class="go" id="lockBtn">Lock in my plan →</button>
       <p class="msg" id="planMsg" role="status" aria-live="polite"></p></section>`;
     function draw() {
       const u = used();
-      const times = R.times.slice(0, n);
       let html = "", i = 0;
       picks.forEach(id => {
         const c = R.cards.find(x => x.id === id);
-        for (let k = 0; k < c.s && i < n; k++, i++) html += `<li class="slot full b-${c.b}${k ? " cont" : ""}"><span class="tm">${esc(times[i])}</span>${k ? `<span class="cn2">⋮</span>` : `<button type="button" class="slotbtn" data-id="${c.id}"><span aria-hidden="true">${BOSS[c.b].i}</span> <span>${esc(c.t)}</span> <span class="x" aria-label="Remove">✕</span></button>`}</li>`;
+        for (let k = 0; k < c.s && i < n; k++, i++) html += `<li class="slot full b-${c.b}${k ? " cont" : ""}"><span class="tm">${esc(R.times[i])}</span>${k ? `<span class="cn2">⋮</span>` : `<button type="button" class="slotbtn" data-id="${c.id}"><span aria-hidden="true">${BOSS[c.b].i}</span> <span>${esc(c.t)}</span> <span class="x" aria-label="Remove">✕</span></button>`}</li>`;
       });
-      for (; i < n; i++) html += `<li class="slot open"><span class="tm">${esc(times[i])}</span><span class="emp">Empty</span></li>`;
+      for (; i < n; i++) html += `<li class="slot open"><span class="tm">${esc(R.times[i])}</span><span class="emp">Empty</span></li>`;
       $("slots").innerHTML = html;
       $("filled").textContent = "Slots filled: " + u + " of " + n;
       $("hand").innerHTML = R.cards.map(c => {
-        const inP = picks.includes(c.id);
-        const fits = inP || (u + c.s <= n);
-        const cash = inP || !c.cash || cashLeft() >= c.cash;
-        const lockTxt = c.rule && !st.rules.includes(c.rule) ? `<span class="pc-lock">🔒 <span>Hidden rule</span></span>` : (c.rule ? `<span class="pc-lock known">📕 <span>Rule known</span></span>` : "");
-        const give = c.info ? `<span class="fx info">🔍 <span>Info</span></span>` : fxTags(Object.assign({}, c.give, c.cash ? { cash: -c.cash } : {}));
-        const why = !cash ? `<span class="pc-no">Need $${c.cash}</span>` : (!fits ? `<span class="pc-no">Doesn't fit</span>` : "");
-        return `<button type="button" class="pcard b-${c.b}${inP ? " in" : ""}${(!fits || !cash) ? " nofit" : ""}" data-id="${c.id}" aria-pressed="${inP}" ${(!fits || !cash) ? 'aria-disabled="true"' : ""}>
-          <span class="pc-top">${bossTag(c.b)}<span class="pc-cost" aria-label="Time slots">${"⏱".repeat(c.s)}</span></span>
+        const inP = picks.includes(c.id), fits = inP || (u + c.s <= n);
+        return `<button type="button" class="pcard b-${c.b}${inP ? " in" : ""}${!fits ? " nofit" : ""}" data-id="${c.id}" aria-pressed="${inP}" ${!fits ? 'aria-disabled="true"' : ""}>
+          <span class="pc-top">${bossTag(c.b)}<span class="pc-cost">${c.s === 1 ? "1 slot" : c.s + " slots"}</span></span>
           <span class="pc-who">${esc(c.who)}</span><span class="pc-t">${esc(c.t)}</span>
-          <span class="pc-give">${give}</span>${lockTxt}${why}${inP ? `<span class="pc-in">✓ <span>Planned</span></span>` : ""}</button>`;
+          ${!fits ? `<span class="pc-no">Doesn't fit</span>` : ""}${inP ? `<span class="pc-in">✓ <span>Planned</span></span>` : ""}</button>`;
       }).join("");
       $("lockBtn").disabled = u < n;
       $("lockBtn").classList.toggle("ready", u >= n);
       document.querySelectorAll("#hand .pcard, #slots .slotbtn").forEach(b => b.onclick = () => toggle(b.dataset.id));
     }
     function toggle(id) {
-      const c = R.cards.find(x => x.id === id);
-      const msg = $("planMsg");
-      if (picks.includes(id)) { picks = picks.filter(x => x !== id); msg.textContent = ""; }
-      else if (c.cash && cashLeft() < c.cash) { msg.textContent = "Not enough cash for that one."; msg.className = "msg bad"; return; }
-      else if (used() + c.s > n) { msg.textContent = "No room. Take something out of the planner first."; msg.className = "msg bad"; return; }
-      else { picks.push(id); msg.textContent = ""; }
-      msg.className = "msg"; draw();
+      const c = R.cards.find(x => x.id === id), msg = $("planMsg");
+      if (picks.includes(id)) picks = picks.filter(x => x !== id);
+      else if (used() + c.s > n) { msg.textContent = "No room. Tap something in the planner to take it out first."; msg.className = "msg bad"; return; }
+      else picks.push(id);
+      msg.textContent = ""; msg.className = "msg"; draw();
     }
     $("lockBtn").onclick = () => {
       if (used() < n) { $("planMsg").textContent = "Fill every slot in Dani's planner first."; $("planMsg").className = "msg bad"; return; }
@@ -492,33 +337,27 @@
     draw();
   }
 
-  // ---------- A text-message decision ----------
-  function decideView(d) {
-    const D = DECISIONS[d], p = D.r + 1;
-    const chosen = st.dec[d];
-    const texts = D.texts.concat(d === "nextWeek" && st.flags.momLostPay ? [D.lostPay] : []);
-    let html = `<section class="card decide">
+  // ---------- The text-message decision ----------
+  function decideView() {
+    const D = DECISION, chosen = st.dec;
+    let html = `<section class="card decide">${chosen == null ? job("Read Rick's text. Pick what Dani does. Every choice costs something.") : ""}
       <div class="phone"><p class="ph-top"><span class="ph-when">${esc(D.when)}</span></p>
         <p class="ph-from">${bossTag(D.boss)} <span>${esc(D.from)}</span></p>
-        ${chosen == null ? texts.map(t => `<p class="bubble">${esc(t)}</p>`).join("") + (D.note ? `<p class="ph-note">${esc(D.note)}</p>` : "") : ""}</div>`;
-    if (chosen == null) {
-      html += `<h3 class="ask">${esc(D.ask)}</h3><div class="opts" id="opts"></div>`;
-    } else {
+        ${D.texts.map(t => `<p class="bubble">${esc(t)}</p>`).join("")}<p class="ph-note">${esc(D.note)}</p></div>`;
+    if (chosen == null) html += `<h3 class="ask">${esc(D.ask)}</h3><div class="opts" id="opts"></div>`;
+    else {
       const o = D.options[chosen];
-      html += `<p class="picked"><span class="oic" aria-hidden="true">${o.ic}</span> <span>You chose:</span> <b>${esc(o.label)}</b></p><div class="result reply"><p>${o.res}</p><p class="fxrow">${fxTags(Object.assign({}, o.fx, o.cash ? { cash: -o.cash } : {}))}</p></div>${D.rule ? ruleBox(D.rule) : ""}
+      html += `<p class="picked"><span class="oic" aria-hidden="true">${o.ic}</span> <span>You chose:</span> <b>${esc(o.label)}</b></p><div class="result reply"><p>${o.res}</p><p class="cost">Cost: ${bossTag(o.hit)}</p></div>${ruleBox(o.rule)}
         <button type="button" class="go" id="nextBtn">Next →</button>`;
     }
-    html += `</section>`;
-    app.innerHTML = html;
+    app.innerHTML = html + `</section>`;
     if (chosen == null) {
       const box = $("opts");
       shuffle(D.options.map((o, i) => i)).forEach(i => {
-        const o = D.options[i];
-        const b = document.createElement("button"); b.type = "button"; b.className = "opt";
-        const broke = o.cash && st.cash < o.cash;
-        b.innerHTML = `<span class="oic" aria-hidden="true">${o.ic}</span><span class="olb">${esc(o.label)}</span>${broke ? `<span class="pc-no">Need $${o.cash}</span>` : ""}`;
-        if (broke) { b.disabled = true; }
-        b.onclick = () => { decide(st, d, i); save(); render(true); };
+        const o = D.options[i], b = document.createElement("button");
+        b.type = "button"; b.className = "opt";
+        b.innerHTML = `<span class="oic" aria-hidden="true">${o.ic}</span><span class="olb">${esc(o.label)}</span>`;
+        b.onclick = () => { decide(st, i); save(); render(true); };
         box.appendChild(b);
       });
     } else $("nextBtn").onclick = () => nextStep();
@@ -527,74 +366,69 @@
   // ---------- What happened ----------
   function result(r) {
     const R = ROUNDS[r], lines = st.out[r] || [];
-    const did = lines.filter(l => l.k === "did"), drop = lines.filter(l => l.k === "drop"), other = lines.filter(l => l.k === "note" || l.k === "crash");
+    const did = lines.filter(l => l.k === "did"), drop = lines.filter(l => l.k === "drop"), notes = lines.filter(l => l.k === "note");
     let n = 0;
     const tile = l => {
       const c = l.id ? cardById(l.id) : null, delay = `style="animation-delay:${(n++) * 0.18}s"`;
-      const stamp = l.k === "did" ? `<span class="stamp ok">DONE</span>` : l.k === "drop" ? `<span class="stamp no">DROPPED</span>` : "";
-      return `<li class="tile ${l.k}${c ? " b-" + c.b : ""}" ${delay}>${stamp}${c ? `<p class="tt">${bossTag(c.b)}</p><p class="tn">${esc(c.t)}</p>` : (l.b ? `<p class="tt">${bossTag(l.b)}</p>` : `<p class="tt">⚠️</p>`)}${l.text ? `<p class="bub">${esc(l.text)}</p>` : ""}<p class="fxrow">${fxTags(l.fx)}</p>${ruleBox(l.rule)}</li>`;
+      return `<li class="tile ${l.k}${c ? " b-" + c.b : ""}" ${delay}>${l.k === "drop" ? `<span class="stamp no">DROPPED</span>` : ""}<p class="tt">${bossTag(c ? c.b : l.b)}</p>${c ? `<p class="tn">${esc(c.t)}</p>` : ""}<p class="bub">${esc(l.text)}</p>${ruleBox(l.rule)}</li>`;
     };
-    const chip = l => { const c = cardById(l.id); return `<li class="dchip b-${c.b}" title="${esc(c.t)}"><span class="stamp ok">DONE</span> <span aria-hidden="true">${BOSS[c.b].i}</span> ${fxTags(l.fx)}${ruleBox(l.rule)}</li>`; };
-    app.innerHTML = `<section class="card resultc">${skyHead(R, r + 1)}
-      <ul class="dchips">${did.map(chip).join("")}</ul>
-      <ul class="tiles">${drop.map(tile).join("")}${other.map(tile).join("")}</ul>
+    app.innerHTML = `<section class="card resultc">${skyHead(R)}
+      ${job("Read what got dropped and what it cost Dani.")}
+      <p class="donel"><b>✓ Done:</b> ${did.map(l => { const c = cardById(l.id); return `<span class="dchip b-${c.b}"><span aria-hidden="true">${BOSS[c.b].i}</span> ${esc(c.t)}</span>`; }).join(" ")}</p>
+      ${did.filter(l => l.rule).map(l => ruleBox(l.rule)).join("")}
+      <ul class="tiles">${drop.map(tile).join("")}${notes.map(tile).join("")}</ul>
       ${R.idea ? `<div class="idea"><span class="bulb" aria-hidden="true">💡</span><div><p>${R.idea}</p></div></div>` : ""}
       <button type="button" class="go wait" id="nextBtn" disabled><span class="wbar" aria-hidden="true"></span><span class="wtxt">Read the cards… 3</span></button></section>`;
     $("nextBtn").onclick = () => nextStep();
-    // A short read-first pause. The button counts down and fills up, so it never looks broken.
     let left = 3;
     const tickNext = () => {
       const b = $("nextBtn"); if (!b || !b.classList.contains("wait")) return;
       left--;
       if (left > 0) { b.querySelector(".wtxt").textContent = "Read the cards… " + left; setTimeout(tickNext, 1000); return; }
-      b.disabled = false; b.classList.remove("wait"); b.classList.add("ready"); b.textContent = tr("Next →");
+      b.disabled = false; b.classList.remove("wait"); b.classList.add("ready"); b.textContent = tr("Next: review check →");
     };
-    if (window.classIsTestT && window.classIsTestT()) { left = 1; tickNext(); }   // Test T.: no read-first pause
+    if (window.classIsTestT && window.classIsTestT()) { left = 1; tickNext(); }
     else setTimeout(tickNext, 1000);
   }
 
-  // ---------- Evidence check (must be right to move on) ----------
+  // ---------- Review check (must be right to move on) ----------
   let locked = false;
   function frameHtml(C) {
-    if (!C.ev && !C.terms) return "";
-    const bars = C.bars ? `<span class="mini"><span class="mb" style="--w:34%"><i>1950</i><b>34%</b></span><span class="mb" style="--w:60%"><i>1999</i><b>60%</b></span></span>` : "";
-    const ev = C.ev ? `<div class="frame f-${C.frame}"><p class="ft">${esc(C.ftitle)}</p><div class="evbody">${C.ev}</div>${bars}${C.real ? `<p class="real">${esc(C.real)}</p>` : ""}${C.cite ? `<p class="cite">${esc(C.cite)}</p>` : ""}</div>` : "";
-    const terms = C.terms ? `<div class="terms"><p class="tk" aria-label="Key words">📘</p>${C.terms.map(t => `<p>${t}</p>`).join("")}</div>` : "";
-    return `<div class="evrow">${ev}${terms}</div>`;
+    const bars = C.bars ? `<span class="mini"><span class="mbt">U.S. women working or job-hunting</span><span class="mb" style="--w:34%"><i>1950</i><b>34%</b></span><span class="mb" style="--w:60%"><i>1999</i><b>60%</b></span></span>` : "";
+    const ev = `<div class="frame f-${C.frame}"><p class="ft">${esc(C.ftitle)}</p><div class="evbody">${C.ev}</div>${bars}${C.cite ? `<p class="cite">${esc(C.cite)}</p>` : ""}</div>`;
+    const needs = C.needs ? `<div class="terms"><p class="tk">📘 <span>Each institution answers a need</span></p>${BOSS_ORDER.map(b => `<p>${BOSS[b].i} <b>${esc(BOSS[b].n)}:</b> ${esc(BOSS[b].need)}</p>`).join("")}</div>` : "";
+    const terms = C.terms ? `<div class="terms"><p class="tk">📘 <span>Key words</span></p>${C.terms.map(t => `<p>${t}</p>`).join("")}</div>` : "";
+    return `<div class="evrow">${ev}${terms}${needs}</div>`;
   }
   function checkBlock(C, host, onRight) {
     const done = st.done[C.id];
-    host.innerHTML = `<div class="check"><div class="lockhead"><span class="padlock${done ? " open" : ""}" id="pad_${C.id}" aria-hidden="true">${done ? "🔓" : "🔒"}</span><p class="ck">${esc(C.unlock)}</p>${done ? `<span class="stamp ok big">UNLOCKED</span>` : ""}</div>${frameHtml(C)}<p class="q"><span class="qb">${esc(C.q)}</span></p><div class="choices keys" id="ch_${C.id}"></div><p class="msg" id="fb_${C.id}" aria-live="polite"></p></div>`;
-    const area = $("ch_" + C.id), fb = $("fb_" + C.id), pad = $("pad_" + C.id);
-    if (done) {
-      area.outerHTML = `<p class="answered">✓ ${esc(C.options[0])}</p><p class="why">${esc(C.why)}</p>`;
-      return;
-    }
+    const last = C.id === "c4";
+    host.innerHTML = `<p class="slidetag">📽️ <span>From today's slides:</span> <b>${esc(C.slide)}</b> <span class="std">${esc(C.std)}</span></p>
+      ${done ? "" : job("Read the clue. Pick the right answer to " + (last ? "finish Dani's day." : "unlock the next part."))}
+      <div class="check">${frameHtml(C)}<p class="q"><span class="qb">${esc(C.q)}</span></p><div class="choices keys" id="ch_${C.id}"></div><p class="msg" id="fb_${C.id}" aria-live="polite"></p></div>`;
+    const area = $("ch_" + C.id), fb = $("fb_" + C.id);
+    if (done) { area.outerHTML = `<p class="answered">✓ ${esc(C.options[0])}</p><p class="why">${esc(C.why)}</p>`; return; }
     let lastOrder = "";
     function draw() {
       area.replaceChildren();
       let order = shuffle(C.options.map((t, n) => ({ t, n })));
-      for (let k = 0; k < 12 && order.map(o => o.n).join() === lastOrder; k++) order = shuffle(order);   // a reshuffle always looks different
+      for (let k = 0; k < 12 && order.map(o => o.n).join() === lastOrder; k++) order = shuffle(order);
       lastOrder = order.map(o => o.n).join();
       order.forEach(o => {
         const b = document.createElement("button"); b.type = "button"; b.className = "choice"; b.textContent = o.t;
         b.onclick = () => {
           if (locked) return;
-          if (o.n === 0) {
-            st.done[C.id] = true; if (window.classFirstTry) window.classFirstTry.right(C.id); save(); onRight();
-          } else {
-            st.wrong[C.id] = (st.wrong[C.id] || 0) + 1; if (window.classFirstTry) window.classFirstTry.wrong(); save();
-            pad.classList.remove("shake"); void pad.offsetWidth; pad.classList.add("shake");
-            locked = true; area.querySelectorAll("button").forEach(x => x.disabled = true);
-            let left = (window.classIsTestT && window.classIsTestT()) ? 0 : LOCK;   // Test T.: no wait
-            const tick = () => {
-              if (!fb.isConnected) { locked = false; return; }
-              fb.textContent = "Not quite. " + C.hint + " The choices will mix up. Try again in " + left + "…"; fb.className = "msg bad";
-              if (left-- <= 0) { locked = false; fb.textContent = "Not quite. " + C.hint + " Try again."; fb.className = "msg"; draw(); return; }
-              setTimeout(tick, 1000);
-            };
-            tick();
-          }
+          if (o.n === 0) { st.done[C.id] = true; if (window.classFirstTry) window.classFirstTry.right(C.id); save(); onRight(); return; }
+          st.wrong[C.id] = (st.wrong[C.id] || 0) + 1; if (window.classFirstTry) window.classFirstTry.wrong(); save();
+          locked = true; area.querySelectorAll("button").forEach(x => x.disabled = true);
+          let left = (window.classIsTestT && window.classIsTestT()) ? 0 : LOCK;
+          const tick = () => {
+            if (!fb.isConnected) { locked = false; return; }
+            fb.textContent = "Not quite. " + C.hint + " The choices will mix up. Try again in " + left + "…"; fb.className = "msg bad";
+            if (left-- <= 0) { locked = false; fb.textContent = "Not quite. " + C.hint + " Try again."; fb.className = "msg"; draw(); return; }
+            setTimeout(tick, 1000);
+          };
+          tick();
         };
         area.appendChild(b);
       });
@@ -604,53 +438,38 @@
   function checkView(c) {
     const C = CHECKS[c];
     app.innerHTML = `<section class="card checkc"><div id="ckhost"></div><div id="ckend"></div></section>`;
-    const after = () => { checkBlock(C, $("ckhost"), after); $("ckend").innerHTML = `<button type="button" class="go" id="nextBtn">Next →</button>`; $("nextBtn").onclick = () => nextStep(); };
+    const label = c < 3 ? "Unlocked! Next: " + ROUNDS[c + 1].name + " →" : "See how Dani's day ended →";
+    const after = () => { checkBlock(C, $("ckhost"), after); $("ckend").innerHTML = `<button type="button" class="go" id="nextBtn">${esc(label)}</button>`; $("nextBtn").onclick = () => nextStep(); };
     if (st.done[C.id]) after(); else checkBlock(C, $("ckhost"), after);
   }
 
   // ---------- Ending ----------
-  // Which trail entries pushed Dani toward this ending (they go first, starred).
-  function isKey(x) {
-    const e = st.ending, fx = x.fx || {};
-    if (e === "er") return x.id === "pharmacy" || /inhaler/.test(x.t || "");
-    if (e === "empty") return (fx.health < 0) || (fx.energy < 0);
-    if (e === "job" || e === "school" || e === "family") return fx[e] < 0;
-    return false;
-  }
-  function trailHtml() {
-    const sorted = st.trail.filter(isKey).concat(st.trail.filter(x => !isKey(x)));
-    const items = sorted.map(x => {
-      const star = isKey(x) ? " key" : "";
-      return trailItem(x).replace("<li>", `<li class="${star.trim()}">${star ? `<span class="star">⭐ <span>Big cause</span></span> ` : ""}`);
-    });
-    const more = items.length - 6;
-    return `<ul class="trail">${items.slice(0, 6).join("")}</ul>${more > 0 ? `<p class="fine">+ ${more} more</p>` : ""}`;
-  }
-  function trailItem(x) {
-    return [x].map(x => {
-      if (x.k === "drop") { const c = cardById(x.id); return `<li><span class="lk" title="Dropped">❌</span> ${bossTag(c.b)} <span>${esc(c.t)}</span></li>`; }
-      if (x.k === "chose") { const D = DECISIONS[x.d]; return `<li><span class="lk" title="Chose">💬</span> ${bossTag(D.boss)} <span>${esc(D.options[x.i].label)}</span></li>`; }
-      return `<li><span class="lk" title="Event">⚠️</span> <span>${esc(x.t)}</span></li>`;
-    })[0];
+  function trailLabel(x) {
+    if (x.k === "drop") return "Dropped: " + cardById(x.id).t;
+    if (x.k === "chose") return "Phone in class: " + DECISION.options[x.i].label;
+    return x.t;
   }
   function endingView() {
     if (!st.ending) { st.ending = endingFor(st); save(); }
     const E = ENDINGS[st.ending];
+    const rows = BOSS_ORDER.map(b => {
+      const items = st.trail.filter(x => (x.k === "drop" ? cardById(x.id).b : x.b) === b).map(trailLabel);
+      return `<li class="${b === st.ending ? "key" : ""}">${bossTag(b)} <b>${items.length}</b> <span class="fine">${esc(items.join(" · ") || "Nothing dropped")}</span></li>`;
+    }).join("");
     app.innerHTML = `<section class="card endc">
       <div class="endhead e-${st.ending}"><span class="ei" aria-hidden="true">${E.i}</span><div><p class="when">Dani's Tuesday is over</p><h2>${esc(E.t)}</h2></div></div>
       <p class="etext">${esc(E.text)}</p>
-      <p class="every">Every boss met a need. Together, they wanted too many hours.</p>
-      <h3 class="rh">Caused by:</h3>${trailHtml()}
-      <p class="fine">1 of 6 endings.</p>
-      <div id="ckhost"></div><div id="ckend"></div></section>`;
-    const after = () => { checkBlock(CHECKS[5], $("ckhost"), after); $("ckend").innerHTML = `<button type="button" class="go" id="nextBtn">Last step: 2 short answers →</button>`; $("nextBtn").onclick = () => nextStep(); };
-    if (st.done.c6) after(); else checkBlock(CHECKS[5], $("ckhost"), after);
+      <p class="every">Every boss met a real need. Together, they wanted more hours than a day has.</p>
+      <h3 class="rh">What Dani dropped, by boss:</h3><ul class="trail">${rows}</ul>
+      <p class="fine">You got 1 of 5 endings. Your ending = the boss Dani dropped most.</p>
+      <button type="button" class="go" id="nextBtn">Last step: 2 short answers →</button></section>`;
+    $("nextBtn").onclick = () => nextStep();
   }
 
   // ---------- Write + turn in ----------
   function writeView() {
-    const E = ENDINGS[st.ending || endingFor(st)];
-    app.innerHTML = `<section class="card writec journal"><h2>📓 Journal <span class="e-mini" title="${esc(E.t)}">${E.i}</span></h2>
+    app.innerHTML = `<section class="card writec journal"><h2>📓 Two short answers</h2>
+      ${job("Fill in each sentence starter with your own words. Then tap Turn in.")}
       ${PROMPTS.map(p => `<label for="w_${p.id}">${esc(p.label)}</label><p class="stem">${esc(p.stem)}</p><textarea id="w_${p.id}" rows="3">${esc(st.writing[p.id] || "")}</textarea>`).join("")}
       <button type="button" class="go" id="sendBtn">${st.turnedIn ? "Turn in again" : "Turn in"}</button>
       <p id="sendMsg" class="msg" role="status" aria-live="polite">${st.turnedIn ? "✓ Turned in" : ""}</p></section>`;
@@ -660,7 +479,7 @@
   async function send() {
     const msg = $("sendMsg");
     const plain = s => String(s || "").normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
-    const testT = window.classIsTestT && window.classIsTestT();   // Test T. (teacher) skips the writing rules
+    const testT = window.classIsTestT && window.classIsTestT();
     for (const p of (testT ? [] : PROMPTS)) {
       const box = $("w_" + p.id), v = (box.value || "").trim();
       if (window.classJunkStop) {
@@ -673,7 +492,7 @@
       const freshW = new Set((plain(v).match(/[\p{L}']{3,}/gu) || []).filter(w => !stemWords.has(w)));
       if (freshW.size < p.newWords) { msg.textContent = "Add more of your own ideas for: " + p.short + ". Use details from today."; msg.className = "msg bad"; box.focus(); return; }
       let groups = p.mustAll;
-      const esWords = window.SiteLang && window.SiteLang.must(p.id);
+      const esWords = window.SiteLang && window.SiteLang.must && window.SiteLang.must(p.id);
       if (esWords) groups = groups.map((g, i) => esWords[i] ? g.concat(esWords[i]) : g);
       const txt = plain(v);
       if (groups.some(g => !g.some(w => new RegExp("(^|[^\\p{L}])" + plain(w).replace(/[.*+?^${}()|[\]\\]/g, "\\$&"), "iu").test(txt)))) { msg.textContent = p.mustMsg; msg.className = "msg bad"; box.focus(); return; }
@@ -681,23 +500,18 @@
     const answers = { "Standard": STANDARD };
     const right = CHECKS.filter(c => !st.wrong[c.id]).length;
     answers["First-try correct"] = right + " of " + CHECKS.length;
-    const byStd = {};
-    CHECKS.forEach(c => { byStd[c.std] = byStd[c.std] || [0, 0]; byStd[c.std][1]++; if (!st.wrong[c.id]) byStd[c.std][0]++; });
-    answers["First-try by standard"] = Object.keys(byStd).sort().map(k => k + ": " + byStd[k][0] + " of " + byStd[k][1]).join(" · ");
-    CHECKS.forEach(c => { answers[c.short] = c.options[0] + (st.wrong[c.id] ? " (after " + st.wrong[c.id] + " wrong " + (st.wrong[c.id] === 1 ? "try" : "tries") + ")" : " (first try)"); });
+    answers["First-try by standard"] = CHECKS.map(c => c.std + ": " + (st.wrong[c.id] ? "0" : "1") + " of 1").join(" · ");
+    CHECKS.forEach(c => { answers[c.std + " · " + c.short] = c.options[0] + (st.wrong[c.id] ? " (after " + st.wrong[c.id] + " wrong " + (st.wrong[c.id] === 1 ? "try" : "tries") + ")" : " (first try)"); });
     ROUNDS.forEach((R, r) => {
       if (!st.plans[r]) return;
       const kept = R.cards.filter(c => st.plans[r].includes(c.id)).map(c => c.t).join(", ");
       const dropped = R.cards.filter(c => !st.plans[r].includes(c.id)).map(c => c.t).join(", ");
       answers["Choice · " + R.name + " plan"] = "Did: " + kept + " | Dropped: " + dropped;
     });
-    Object.keys(DECISIONS).forEach(d => { if (st.dec[d] != null) answers["Choice · " + DECISIONS[d].short] = DECISIONS[d].options[st.dec[d]].label; });
+    if (st.dec != null) answers["Choice · " + DECISION.short] = DECISION.options[st.dec].label;
     PROMPTS.forEach(p => { answers["Writing: " + p.short] = ($("w_" + p.id).value || "").trim(); });
-    const E = ENDINGS[st.ending || endingFor(st)];
-    answers["Ending"] = E.t;
-    answers["Caused by"] = st.trail.map(x => x.k === "drop" ? "Dropped " + cardById(x.id).t : x.k === "chose" ? "Chose " + DECISIONS[x.d].options[x.i].label : x.t).join("; ");
-    answers["Meters at end"] = "School " + st.m.school + " · Job " + st.m.job + " · Family " + st.m.family + " · Health " + st.m.health + " · Energy " + st.m.energy + " · Cash $" + st.cash;
-    answers["Hidden rules found"] = st.rules.length + " of " + Object.keys(RULES).length;
+    answers["Ending"] = ENDINGS[st.ending || endingFor(st)].t;
+    answers["Dropped by boss"] = BOSS_ORDER.map(b => BOSS[b].n + " " + st.hits[b]).join(" · ");
     $("sendBtn").disabled = true; msg.textContent = "Sending your work…"; msg.className = "msg";
     try {
       const res = await window.classTurnIn(OLD_API, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ studentName: st.name, assignmentId: ASSIGNMENT_ID, assignmentTitle: TITLE, answers }) });
@@ -705,9 +519,7 @@
       if (!res.ok) throw new Error(data.error || "Your work did not save. Try again.");
       st.turnedIn = true; save();
       msg.textContent = "✓ Turned in. You're done!"; msg.className = "msg good";
-      $("sendBtn").textContent = "Turned in ✓"; $("sendBtn").disabled = false;
-      $("sendBtn").onclick = send;
-
+      $("sendBtn").textContent = "Turned in ✓"; $("sendBtn").disabled = false; $("sendBtn").onclick = send;
     } catch (err) { msg.textContent = err.message || "Could not turn in. Try again."; msg.className = "msg bad"; $("sendBtn").disabled = false; }
   }
 
@@ -715,13 +527,12 @@
   let first = true;
   function render(scroll) {
     if (!first && $("welcome")) $("welcome").hidden = true;
-    first = false;
-    locked = false;
+    first = false; locked = false;
     hud();
     if (st.step < 0) return intro();
     const s = STEPS[Math.min(st.step, STEPS.length - 1)];
     if (s.k === "plan") plan(s.r);
-    else if (s.k === "decide") decideView(s.d);
+    else if (s.k === "decide") decideView();
     else if (s.k === "result") result(s.r);
     else if (s.k === "check") checkView(s.c);
     else if (s.k === "ending") endingView();
@@ -735,13 +546,9 @@
     if (window.classFirstTry) window.classFirstTry.reset();
     save(); render(); window.scrollTo(0, 0);
   };
-  $("rulebookBtn").onclick = openRulebook;
-  $("rulebookClose").onclick = () => { const d = $("rulebook"); if (d.close) d.close(); else d.removeAttribute("open"); };
   if (st.step >= 0 && $("welcome")) {
-    const shown = STEPS.map((s, i) => i).filter(stepOk);
-    const at = Math.max(1, shown.indexOf(Math.min(st.step, STEPS.length - 1)) + 1);
-    // Shared Chromebooks: a different student can wipe the last kid's game and writing in one tap.
-    $("welcome").innerHTML = `<span>${esc("Welcome back, " + st.name + " — you're on step " + at + " of " + shown.length + ".")}</span> <button type="button" class="notme" id="notMeBtn">${esc("Not " + st.name + "? Start fresh")}</button>`;
+    const at = Math.min(st.step, STEPS.length - 1) + 1;
+    $("welcome").innerHTML = `<span>${esc("Welcome back, " + st.name + " — you're on step " + at + " of " + STEPS.length + ".")}</span> <button type="button" class="notme" id="notMeBtn">${esc("Not " + st.name + "? Start fresh")}</button>`;
     $("welcome").hidden = false;
     $("notMeBtn").onclick = () => {
       st = fresh(); picks = [];
@@ -752,37 +559,27 @@
   render();
 
   // ---------- Test T. skip bar (shared/turnin.js) ----------
-  // The teacher signed in as Test T. can jump to any screen or answer the current check.
   try {
-    // Fill a round's planner in card order (whatever fits), for Test T. only.
-    const tPlan = r => {
-      const R = ROUNDS[r], n = slotsFor(st, r); let used = 0, cash = st.cash; const out = [];
-      R.cards.forEach(c => { if (used + c.s <= n && (!c.cash || cash >= c.cash)) { out.push(c.id); used += c.s; cash -= c.cash || 0; } });
-      return out;
-    };
-    const tFirstOk = d => { const D = DECISIONS[d]; const i = D.options.findIndex(o => !o.cash || st.cash >= o.cash); return i < 0 ? 0 : i; };
-    const TK = { plan: "plan", result: "what happened", decide: "text", check: "check" };
+    const tPlan = r => { const R = ROUNDS[r]; let used = 0; const out = []; R.cards.forEach(c => { if (used + c.s <= R.slots) { out.push(c.id); used += c.s; } }); return out; };
+    const TK = { plan: "plan", result: "what happened", check: "review check" };
     (window.classTestHooks = window.classTestHooks || []).push({
       count: () => STEPS.length + 1,
       index: () => st.step < 0 ? 0 : Math.min(st.step, STEPS.length - 1) + 1,
       label: i => {
         if (i === 0) return "Title";
         const s = STEPS[i - 1];
-        if (s.k === "ending") return "Ending + last check";
-        if (s.k === "write") return "Journal + turn in";
-        const part = "Part " + partOf(i - 1);
-        if (s.k === "decide") return part + " text: " + DECISIONS[s.d].short;
-        if (s.k === "check") return part + " check";
-        return part + " " + TK[s.k] + " (" + ROUNDS[s.r].name + ")";
+        if (s.k === "ending") return "Ending";
+        if (s.k === "write") return "2 short answers + turn in";
+        if (s.k === "decide") return "Part 2 text: phone in class";
+        return "Part " + partOf(i - 1) + " " + TK[s.k] + (s.k === "check" ? " (" + CHECKS[s.c].std + ")" : " (" + ROUNDS[s.r].name + ")");
       },
       go: i => {
         if (!st.name) st.name = "Test T.";
         const t = i - 1;
-        // safe defaults (first choice that fits) for plans and texts the jump skips past
         for (let j = 0; j < t && j < STEPS.length; j++) {
           const s = STEPS[j];
           if (s.k === "plan" && !st.plans[s.r]) lockRound(st, s.r, tPlan(s.r));
-          else if (s.k === "decide" && st.dec[s.d] == null && stepOk(j)) decide(st, s.d, tFirstOk(s.d));
+          else if (s.k === "decide" && st.dec == null) decide(st, 0);
         }
         if (t < STEPS.findIndex(s => s.k === "ending")) st.ending = "";
         picks = []; locked = false;
@@ -792,9 +589,8 @@
         if (st.step < 0) return;
         const s = STEPS[Math.min(st.step, STEPS.length - 1)];
         if (s.k === "plan") { picks = tPlan(s.r); render(); }
-        else if (s.k === "decide") { if (st.dec[s.d] == null) { const b = document.querySelector("#opts .opt:not([disabled])"); if (b) b.click(); } }
+        else if (s.k === "decide") { if (st.dec == null) { const b = document.querySelector("#opts .opt"); if (b) b.click(); } }
         else if (s.k === "check") { const C = CHECKS[s.c]; if (!st.done[C.id]) { st.done[C.id] = true; save(); render(); } }
-        else if (s.k === "ending") { if (!st.done.c6) { st.done.c6 = true; save(); render(); } }
       }
     });
     if (window.classTestSkip) window.classTestSkip.refresh();
