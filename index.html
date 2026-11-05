@@ -93,6 +93,7 @@ h1:focus{outline:none}
 .drecap{margin:2px 0 4px;color:#e8eff4;font-size:.98rem;line-height:1.4}
 .qrow .qkind{display:block;font-size:.88rem;color:var(--muted);font-weight:700}
 .qrow.paperrow{background:#fff8ec}
+.pgo{display:flex;gap:8px;align-items:center;flex-wrap:wrap;justify-content:flex-end}
 .getit{background:#efe9dc;color:#5a4b2c;border-radius:8px;padding:6px 10px;font-weight:800;font-size:.92rem;text-align:center}
 .qgo.soft{background:#e7e0d1!important;color:var(--navy)!important}
 .qrow .qrecap{display:block;font-size:.88rem;color:var(--muted);margin-top:2px;line-height:1.35}
@@ -627,12 +628,14 @@ function homeBody(course, work) {
   const RECAP = (window.CLASS_RECAPS || {})[course] || {};
   const recapOf = a => { const u = RECAP[a.part === 1 ? -1 : a.unit] || {}; return u[(spanOf(a) || [a.day])[0]] || ""; };
   const shortWhere = a => (unitKey(a) === nowKey ? "" : unitLabel(course, unitKey(a)).replace(/ · .*/, "") + " · ") + dayWithDate(a);
+  // Paper handout row (today's box + missed days look the same, Fynn 11-05): "Get this from your teacher" + a link to see it.
+  const paperQuick = (a, kind) => `<div class="qrow paperrow"><div>${kind === "today" ? `<span class="qday">${esc(shortWhere(a))}</span>` : ""}<span class="qtitle">📄 ${esc(cleanTitle(a.title))}</span><span class="qkind">${kind === "today" ? "Paper · in class" : "Paper · done in class"}</span></div><div class="pgo"><span class="getit">Get this from your teacher</span>${/^https?:/.test(a.path || "") ? `<a class="btn qgo soft" href="${href(a)}"${ext(a)}>Open ↗</a>` : ""}</div></div>`;
   const quick = (a, btn, recap) => `<div class="qrow"><div><span class="qday">${esc(shortWhere(a))}</span><span class="qtitle">${esc(cleanTitle(a.title))}</span>${recap && recapOf(a) ? `<span class="qrecap">In class: ${esc(recapOf(a))}</span>` : ""}</div><a class="btn qgo" href="${href(a)}"${ext(a)}>${btn} →</a></div>`;
   // Welcome back: this Chromebook hasn't opened the page in 3+ school days.
   let away = 0;
   try { const last = localStorage.getItem("hub-last-seen:" + course); if (last && last < todayIso) away = weekdaysBetween(last, todayIso); localStorage.setItem("hub-last-seen:" + course, todayIso); } catch (e) {}
   const welcome = away >= 3 && !testMode;
-  const todayRow = todays.length || todaysPaper.length ? `<div class="qlabel">${classToday ? "Today's work" : "Next class · " + esc(longDate(nextClassIso))}</div>${todays.map(a => quick(a, "Start")).join("")}${todaysPaper.map(a => quick(a, "On paper · open")).join("")}` : "";
+  const todayRow = todays.length || todaysPaper.length ? `<div class="qlabel">${classToday ? "Today's work" : "Next class · " + esc(longDate(nextClassIso))}</div>${todays.map(a => quick(a, "Start")).join("")}${todaysPaper.map(a => paperQuick(a, "today")).join("")}` : "";
   // Learning goals in Fynn's own kid-friendly words, from his scale docs (shared/targets.js): the day's "I can"
   // targets plus what a 3 (Proficient) looks like. Shown for today and for each day a student missed.
   const TARGETS = (window.CLASS_TARGETS || {})[course] || {};
@@ -680,7 +683,7 @@ function homeBody(course, work) {
   const missRow = a => {
     if (isOnline(a)) return mine[a.id] ? "" : `<div class="qrow"><div><span class="qtitle">${esc(cleanTitle(a.title))}</span>${kindWord(a) ? `<span class="qkind">${esc(kindWord(a))} · online</span>` : `<span class="qkind">Online</span>`}</div><a class="btn qgo" href="${href(a)}"${ext(a)}>Start →</a></div>`;
     // Paper handouts get a link too (Fynn, 11-05), so a student who was gone can see what the class did.
-    if (isPaper(a)) return `<div class="qrow paperrow"><div><span class="qtitle">📄 ${esc(cleanTitle(a.title))}</span><span class="qkind">Paper · done in class</span></div>${/^https?:/.test(a.path || "") ? `<a class="btn qgo soft" href="${href(a)}"${ext(a)}>Open ↗</a>` : `<span class="getit">Get this from your teacher</span>`}</div>`;
+    if (isPaper(a)) return paperQuick(a, "missed");
     return `<div class="qrow"><div><span class="qtitle">${esc(cleanTitle(a.title))}</span><span class="qkind">Done in class · you can open it here</span></div><a class="btn qgo soft" href="${href(a)}"${ext(a)}>Open ↗</a></div>`;
   };
   const dayGroups = [...missedDays.values()].sort((x, y) => unitOrder(x.unit) - unitOrder(y.unit) || x.day - y.day).map(g => {
