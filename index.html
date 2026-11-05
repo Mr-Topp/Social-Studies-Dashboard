@@ -356,7 +356,7 @@ const unitOrder = k => (k.startsWith("p1|") ? 0 : 1000) + (+k.split("|").pop() |
 
 // ---------- No grades here ----------
 // Students see grades in PowerSchool, not on this site (Fynn's decision, 2026-11-02). A turned-in activity just
-// shows "✓ Turned in", plus the teacher's feedback tip and a "Fix it" button when the work needs another try.
+// shows "✓ Turned in" and the teacher's feedback tip. No "Fix it" offers on past work (Fynn, 11-05).
 function gradeOf(w) {
   if (!w) return null;
   if (w.exempt) return { exempt: true };
@@ -606,7 +606,6 @@ function homeBody(course, work) {
   // Paper work never counts as missing (Fynn, 11-05: it's always "Done in class").
   const missing = sortItems(due.filter(a => !mine[a.id]).concat(online.filter(a => markedM.has(a.id) && !mine[a.id] && !isDue(a) && !exempt.has(a.id))));
   const turnedIn = online.filter(a => mine[a.id]);
-  const fix = sortItems(turnedIn.filter(a => { const g = gradeOf(mine[a.id]); return g && g.fix; }));
   const ahead = sortItems(online.filter(a => !isDue(a) && !mine[a.id] && unitOrder(unitKey(a)) === nowOrder));
   const todays = ahead.filter(isToday);
   // Paper work happening today (Fynn, 11-05): tell students and link the handout, so they know and can open it.
@@ -700,11 +699,8 @@ function homeBody(course, work) {
     const nDays = missedDays.size;
     status = `<section class="status miss" aria-label="What to do"><div class="shead"><h2>${welcome ? "Welcome back! " : ""}You're missing work from ${nDays} ${nDays === 1 ? "day" : "days"}</h2>${readBtn}</div><p>${welcome ? "Here's what the class did while you were gone. " : ""}Start at the top and work down.</p>${dayGroups}${todayRow}</section>`;
   } else {
-    // Near a test, the test card already lists what to redo, so don't repeat it here.
-    const tc = (CAL[course] || {})[nowKey.split("|").pop()], td = !nowKey.startsWith("p1|") && tc && tc.summative;
-    const nearTest = td && td >= todayIso && classDaysBetween(todayIso, td) <= 2;
-    const fixRow = fix.length && !nearTest ? `<div class="qlabel">Optional: fix these up</div>${fix.map(a => quick(a, "Fix it")).join("")}` : "";
-    status = `<section class="status done" aria-label="What to do"><div class="shead"><h2>${welcome ? "Welcome back! " : ""}You're all caught up! 🎉</h2>${readBtn}</div><p>${todays.length || todaysPaper.length ? (classToday ? "Nothing missing. Here's today's work:" : "Nothing missing. Here's what's next:") : due.length ? "You've turned in everything so far." : "Nothing is due yet."}</p>${todayRow}${fixRow}</section>`;
+    // No "fix these up" list (Fynn, 11-05): students stay on missing and current work, never redoing past work.
+    status = `<section class="status done" aria-label="What to do"><div class="shead"><h2>${welcome ? "Welcome back! " : ""}You're all caught up! 🎉</h2>${readBtn}</div><p>${todays.length || todaysPaper.length ? (classToday ? "Nothing missing. Here's today's work:" : "Nothing missing. Here's what's next:") : due.length ? "You've turned in everything so far." : "Nothing is due yet."}</p>${todayRow}</section>`;
   }
   const cal = (CAL[course] || {})[nowKey.split("|").pop()];
   const testDay = !nowKey.startsWith("p1|") && cal && cal.summative ? cal.summative : "";
@@ -735,13 +731,13 @@ function homeBody(course, work) {
       return `<div class="row lite"><div class="info"><div class="day">Paper</div><div class="title">📄 ${esc(cleanTitle(a.title))}</div></div><div class="act"><span class="pill ${later ? "p-wait\">Coming up" : isToday(a) ? "p-in\">" + (classToday ? "Today · in class" : "Next class · in class") : "p-class\">Done in class"}</span>${/^https?:/.test(a.path || "") ? `<a class="btn open soft" href="${href(a)}"${ext(a)}>Open ↗</a>` : ""}</div></div>`;
     }
     if (!on) { pill = later ? `<span class="pill p-wait">Coming up</span>` : isToday(a) ? `<span class="pill p-in">${classToday ? "Today · in class" : "Next class · in class"}</span>` : `<span class="pill p-class">Done in class</span>`; }
-    else if (w) { pill = gradePill(g); btn = g && g.exempt ? "Open" : g && g.fix ? "Fix it" : "Look again"; }
+    else if (w) { pill = gradePill(g); btn = g && g.exempt ? "Open" : "Look again"; }   // never "Fix it" on past work (Fynn, 11-05)
     else if (isDue(a)) { pill = `<span class="pill p-miss">Missing</span>`; btn = "Start"; }
     else if (isToday(a)) { pill = `<span class="pill p-in">${classToday ? "Today" : "Next class"}</span>`; btn = "Start"; }
     else { pill = `<span class="pill p-wait">Coming up</span>`; btn = "Look ahead"; }
     const ft = g && g.ft ? `<div class="ft">${g.ft.right} of ${g.ft.total} right on the first try</div>` : "";
     const fb = w && (w.feedback || (g && g.talk)) ? `<p class="fb"><b>Feedback:</b> ${esc(g && g.talk ? "Your teacher wants to talk with you about this one." : w.feedback)}</p>` : "";
-    const strong = on && (!w && (isDue(a) || isToday(a)) || (g && g.fix));
+    const strong = on && !w && (isDue(a) || isToday(a));
     return `<div class="row${on ? "" : " lite"}"><div class="info">${kw || on ? `<div class="day">${esc(kw || "Online")}</div>` : ""}<div class="title">${esc(cleanTitle(a.title))}</div>${ft}${fb}</div>
       <div class="act">${pill}<a class="btn open${strong ? "" : " soft"}" href="${href(a)}"${ext(a)}>${btn}${/^https?:/.test(a.path) ? " ↗" : ""}</a></div></div>`;
   };
