@@ -24,13 +24,17 @@ Object.assign(window.CLASS_ASSIGNMENTS, {
 
   // ---- U.S. History · Unit 2 ----
   "ush-u2-d1-video--HazLOy71Jg": { course: "us-history", unit: 2, day: 1, turnIn: false, video: true, std: [], title: "Day 1 · Germany Invades Poland in 1939", path: "https://www.youtube.com/watch?v=-HazLOy71Jg" },
+  "ush-u2-d1-video-jFICRFKtAc4": { course: "us-history", unit: 2, day: 1, turnIn: false, video: true, std: [], title: "Day 1 · TED-Ed: How Did Hitler Rise to Power?", path: "https://www.youtube.com/watch?v=jFICRFKtAc4" },
   "ush-u2-d2-video-b-M8PdXte5o": { course: "us-history", unit: 2, day: 2, turnIn: false, video: true, std: [], title: "Day 2 · The Attack on Pearl Harbor Changed Everything", path: "https://www.youtube.com/watch?v=b-M8PdXte5o" },
   "ush-u2-d2-video-0WMnRoQQTZA": { course: "us-history", unit: 2, day: 2, turnIn: false, video: true, std: [], title: "Day 2 · The Minutes that Changed World War II", path: "https://www.youtube.com/watch?v=0WMnRoQQTZA" },
   "ush-u2-d2-video-DNV8enpVwok": { course: "us-history", unit: 2, day: 2, turnIn: false, video: true, std: [], title: "Day 2 · The Attack on Pearl Harbor", path: "https://www.youtube.com/watch?v=DNV8enpVwok" },
   "ush-u2-d3-video-0FDfhPMA95I": { course: "us-history", unit: 2, day: 3, turnIn: false, video: true, std: [], title: "Day 3 · WW2: The Rise of Nazism and the Holocaust", path: "https://www.youtube.com/watch?v=0FDfhPMA95I" },
   "ush-u2-d3-video-WBrWfhudElQ": { course: "us-history", unit: 2, day: 3, turnIn: false, video: true, std: [], title: "Day 3 · These American Veterans Never Forgot the Horrors of Dachau", path: "https://www.youtube.com/watch?v=WBrWfhudElQ" },
   "ush-u2-d4-video-9aRVVae2i_c": { course: "us-history", unit: 2, day: 4, turnIn: false, video: true, std: [], title: "Day 4 · The U.S. Homefront During WWII", path: "https://www.youtube.com/watch?v=9aRVVae2i_c" },
+  "ush-u2-d4-video-bU2tt1h53jM": { course: "us-history", unit: 2, day: 4, turnIn: false, video: true, std: [], title: "Day 4 · HISTORY: Ask History: Rosie the Riveter", path: "https://www.youtube.com/watch?v=bU2tt1h53jM" },
   "ush-u2-d5-video-cZTioTkHcB0": { course: "us-history", unit: 2, day: 5, turnIn: false, video: true, std: [], title: "Day 5 · Japanese-American Internment During WWII", path: "https://www.youtube.com/watch?v=cZTioTkHcB0" },
+  "ush-u2-d5-video-hI4NoVWq87M": { course: "us-history", unit: 2, day: 5, turnIn: false, video: true, std: [], title: "Day 5 · TED-Ed: Ugly History: Japanese American Incarceration Camps", path: "https://www.youtube.com/watch?v=hI4NoVWq87M" },
+  "ush-u2-d5-video-35QYX94qz6g": { course: "us-history", unit: 2, day: 5, turnIn: false, video: true, std: [], title: "Day 5 · HISTORY: Navajo Code Talkers", path: "https://www.youtube.com/watch?v=35QYX94qz6g" },
   "ush-u2-d6-video-dik51bMfPaQ": { course: "us-history", unit: 2, day: 6, turnIn: false, video: true, std: [], title: "Day 6 · The Allies Undertake Operation Overlord", path: "https://www.youtube.com/watch?v=dik51bMfPaQ" },
   "ush-u2-d6-video-7fs9huKifoo": { course: "us-history", unit: 2, day: 6, turnIn: false, video: true, std: [], title: "Day 6 · Codebreaking Turns the Tide Against Germany", path: "https://www.youtube.com/watch?v=7fs9huKifoo" },
   "ush-u2-d7-video-PF1A8NS1L9g": { course: "us-history", unit: 2, day: 7, turnIn: false, video: true, std: [], title: "Day 7 · The Pacific Campaign Reaches a Fever Pitch", path: "https://www.youtube.com/watch?v=PF1A8NS1L9g" },
