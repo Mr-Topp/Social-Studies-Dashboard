@@ -238,7 +238,16 @@ async function tools(payload) {
   const res = await fetch(TOOLS, { method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify(payload) });
   const d = await res.json();
   if (!d || !d.ok) throw new Error((d && d.error) || "failed");
+  if (SAVED_READS[payload.action]) { try { localStorage.setItem(savedKey(payload), JSON.stringify({ t: Date.now(), d })); } catch (e) {} }
   return d;
+}
+// Speed (Fynn, 11-05: "taking way too long to load"): the Google Sheet takes a few seconds to answer, so the page first
+// shows this Chromebook's last copy of the student's list right away, then quietly updates when the sheet answers.
+const SAVED_READS = { my_work: 1, class_list: 1 };
+const savedKey = p => "hub-saved:" + p.action + ":" + p.course + ":" + String(p.name || "").trim().toLowerCase();
+function savedRead(p) {
+  try { const c = JSON.parse(localStorage.getItem(savedKey(p))); if (c && c.d && Date.now() - c.t < 14 * 864e5) return c.d; } catch (e) {}
+  return null;
 }
 const infoCache = {};
 const classInfo = course => infoCache[course] || (infoCache[course] = tools({ action: "class_list", course }).catch(() => ({})));
@@ -255,8 +264,9 @@ function addPaperCols(course, cols) {
     REG[p.id] = Object.assign({ course, unit: +p.unit, day: +p.day, title: "Day " + p.day + " · " + p.title + " (printed)", path: "", turnIn: false, paperCol: true, paperId: p.id }, +p.part === 1 ? { part: 1 } : {});
   });
 }
-async function addTeacherLinks(course) {
-  const d = await classInfo(course);
+async function addTeacherLinks(course, saved) {
+  const d = saved || await classInfo(course);
+  Object.keys(REG).forEach(id => { if (REG[id].course === course && (id.startsWith("todo-link-") || REG[id].paperCol)) delete REG[id]; });
   addPaperCols(course, d.paperCols);
   (d.links || []).forEach(l => {
     if (!l || !/^https:\/\//i.test(l.url || "") || /answer key|teacher key|summative/i.test(l.title || "")) return;
@@ -374,19 +384,24 @@ function gradePill(g) {
 // ---------- My work ----------
 // From the sheet when the Teacher Tools web app knows about student pages; otherwise from the
 // receipts this Chromebook kept when the student turned work in (feedback tips come from the sheet; no grades).
+const myWorkFresh = {};   // this visit's answer from the sheet, so the feedback step doesn't ask twice
 function receipts() { try { return JSON.parse(localStorage.getItem("class-feedback-receipts")) || []; } catch (e) { return []; } }
 // Exempt work (EX on the teacher dashboard): "Exempt everyone" comes with the class info, one student's EX with their own work.
-async function loadWork(course, name) {
-  const w = await loadWork0(course, name);
-  try { const info = await classInfo(course); w.exemptAll = (info && info.exemptAll) || []; } catch (e) { w.exemptAll = []; }
+async function loadWork(course, name, stage) {
+  const w = await loadWork0(course, name, stage);
+  if (!w) return null;
+  try { const info = stage === "saved" ? savedRead({ action: "class_list", course }) : await classInfo(course); w.exemptAll = (info && info.exemptAll) || []; } catch (e) { w.exemptAll = []; }
   w.exempt = w.exempt || [];
   return w;
 }
-async function loadWork0(course, name) {
+// stage: "saved" = this Chromebook's last copy only (null if none) · "sheet" = ask the sheet, skip feedback tips · "full" = everything
+async function loadWork0(course, name, stage) {
   // Fynn 11-03: the student's own to-do comes from the Sheet (what they turned in, what the teacher marked M or EX),
   // so it matches the teacher dashboard on any Chromebook. Never grades. Receipts on this Chromebook still add feedback tips.
   let classIds = null, sheet = null;
-  try { const d = await tools({ action: "my_work", course, name }); classIds = d.classDone || []; if (Array.isArray(d.mine)) sheet = d; } catch (e) {}
+  if (stage === "saved") { const d = savedRead({ action: "my_work", course, name }); if (!d) return null; classIds = d.classDone || []; if (Array.isArray(d.mine)) sheet = d; }
+  else if (stage === "full" && myWorkFresh[course + "|" + name]) { const d = myWorkFresh[course + "|" + name]; classIds = d.classDone || []; if (Array.isArray(d.mine)) sheet = d; }
+  else { try { const d = await tools({ action: "my_work", course, name }); myWorkFresh[course + "|" + name] = d; classIds = d.classDone || []; if (Array.isArray(d.mine)) sheet = d; } catch (e) {} }
   const mine = {};
   const list = receipts().filter(r => REG[r.id] && REG[r.id].course === course && (!r.who || r.who.toLowerCase() === String(name || "").toLowerCase()));
   list.forEach(r => { if (!mine[r.id] || r.at > mine[r.id].atMs) mine[r.id] = { id: r.id, atMs: r.at, token: r.token }; });
@@ -394,7 +409,7 @@ async function loadWork0(course, name) {
     sheet.mine.forEach(id => { if (REG[id] && !mine[id]) mine[id] = { id, atMs: 0 }; });
     (sheet.missing || []).forEach(id => { if (mine[id] && !mine[id].token) delete mine[id]; });
   }
-  const tokens = Object.values(mine).map(w => w.token).filter(Boolean);
+  const tokens = stage === "full" ? Object.values(mine).map(w => w.token).filter(Boolean) : [];
   if (tokens.length) {
     try {
       const d = await tools({ action: "feedback", tokens });
@@ -501,13 +516,30 @@ async function drawHome(app) {
   showWork(course, name);
 }
 async function showWork(course, name) {
-  const [work] = await Promise.all([loadWork(course, name), addTeacherLinks(course)]);
-  if (me.current !== course || screen !== "home") return;
-  if (testMode && preview === "caught") work.preview = true;
-  $("body").innerHTML = homeBody(course, work);
-  if (testMode) previewFeedback(course);
-  $("body").querySelectorAll("details.unit").forEach(d => d.addEventListener("toggle", () => { openUnits[course + "|" + d.dataset.k] = d.open; }));
-  const all = $("body").querySelector("details.allwork"); if (all) all.addEventListener("toggle", () => { allOpen[course] = all.open; });
+  let last = "", first = true;
+  const paint = work => {
+    if (!work || me.current !== course || screen !== "home") return false;
+    if (testMode && preview === "caught") work.preview = true;
+    const html = homeBody(course, work);
+    if (html !== last) {
+      last = html;
+      $("body").innerHTML = html;
+      $("body").querySelectorAll("details.unit").forEach(d => d.addEventListener("toggle", () => { openUnits[course + "|" + d.dataset.k] = d.open; }));
+      const all = $("body").querySelector("details.allwork"); if (all) all.addEventListener("toggle", () => { allOpen[course] = all.open; });
+    }
+    if (first) { first = false; if (testMode) previewFeedback(course); }
+    return true;
+  };
+  // 1) Right away: this Chromebook's last copy (if it has one).
+  const savedInfo = savedRead({ action: "class_list", course });
+  let savedShown = false;
+  if (savedInfo) { await addTeacherLinks(course, savedInfo); savedShown = paint(await loadWork(course, name, "saved")); }
+  // 2) The sheet's answer (what's turned in, M/EX marks, teacher links) — asked at the same time.
+  const [work] = await Promise.all([loadWork(course, name, "sheet"), addTeacherLinks(course)]);
+  if (savedShown && work && !work.full) return;   // the sheet didn't answer: keep the saved copy on screen
+  if (!paint(work)) return;
+  // 3) Feedback tips on turned-in work (only if this Chromebook has receipts).
+  if (receipts().some(r => REG[r.id] && REG[r.id].course === course)) paint(await loadWork(course, name, "full"));
 }
 
 // "Read it to me": reads the top card(s) out loud with the Chromebook's own voice.
