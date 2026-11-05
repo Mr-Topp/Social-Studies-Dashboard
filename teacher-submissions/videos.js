@@ -189,6 +189,17 @@ Object.assign(window.CLASS_ASSIGNMENTS, {
   "soc-u4-d6-video-TwVuQ_Llh4k": { course: "sociology", unit: 4, day: 6, turnIn: false, video: true, std: [], title: "Day 6 · Do protests actually work?", path: "https://www.youtube.com/watch?v=TwVuQ_Llh4k" },
   "soc-u4-d6-video-_gTgloPR0Aw": { course: "sociology", unit: 4, day: 6, turnIn: false, video: true, std: [], title: "Day 6 · What’s the best way to lift people out of poverty?", path: "https://www.youtube.com/watch?v=_gTgloPR0Aw" },
 
+  // ---- Sociology · videos already on the slides, added to the dashboard 2026-11-04 ----
+  "soc-u2-d2-video-kGrVhM_Gi8k": { course: "sociology", unit: 2, day: 2, turnIn: false, video: true, std: [], title: "Day 2 · Symbols, Values & Norms: Crash Course Sociology #10", path: "https://www.youtube.com/watch?v=kGrVhM_Gi8k" },
+  "soc-u2-d4-video-BsRSL3duSko": { course: "sociology", unit: 2, day: 4, turnIn: false, video: true, std: [], title: "Day 4 · How We Got Here: Crash Course Sociology #12", path: "https://www.youtube.com/watch?v=BsRSL3duSko" },
+  "soc-u3-d3-video-BGq9zW9w3Fw": { course: "sociology", unit: 3, day: 3, turnIn: false, video: true, std: [], title: "Day 3 · Deviance: Crash Course Sociology #18", path: "https://www.youtube.com/watch?v=BGq9zW9w3Fw" },
+  "soc-u3-d4-video-UUukBV82P9A": { course: "sociology", unit: 3, day: 4, turnIn: false, video: true, std: [], title: "Day 4 · Social Interaction & Performance: Crash Course Sociology #15", path: "https://www.youtube.com/watch?v=UUukBV82P9A" },
+  "soc-u3-d5-video-_wFZ5Dbj8DA": { course: "sociology", unit: 3, day: 5, turnIn: false, video: true, std: [], title: "Day 5 · Social Groups: Crash Course Sociology #16", path: "https://www.youtube.com/watch?v=_wFZ5Dbj8DA" },
+  "soc-u4-d1-video-SlkIKCMt-Fs": { course: "sociology", unit: 4, day: 1, turnIn: false, video: true, std: [], title: "Day 1 · Social Stratification: Crash Course Sociology #21", path: "https://www.youtube.com/watch?v=SlkIKCMt-Fs" },
+  "soc-u4-d2-video-c8PEv5SV4sU": { course: "sociology", unit: 4, day: 2, turnIn: false, video: true, std: [], title: "Day 2 · Social Class & Poverty in the US: Crash Course Sociology #24", path: "https://www.youtube.com/watch?v=c8PEv5SV4sU" },
+  "soc-u4-d3-video-b350ljkYWrU": { course: "sociology", unit: 4, day: 3, turnIn: false, video: true, std: [], title: "Day 3 · Theories of Global Stratification: Crash Course Sociology #28", path: "https://www.youtube.com/watch?v=b350ljkYWrU" },
+  "soc-u4-d4-video-hYMk3Bk08NA": { course: "sociology", unit: 4, day: 4, turnIn: false, video: true, std: [], title: "Day 4 · Schools & Social Inequality: Crash Course Sociology #41", path: "https://www.youtube.com/watch?v=hYMk3Bk08NA" },
+
   // ---- Government · Unit 1 ----
   "gov-u1-d1-video-3QGy2SbXTNE": { course: "government", unit: 1, day: 1, turnIn: false, video: true, std: [], title: "Day 1 · People on the Street: What is the Purpose of Government", path: "https://www.youtube.com/watch?v=3QGy2SbXTNE" },
   "gov-u1-d1-video-hMqEnmDp2m8": { course: "government", unit: 1, day: 1, turnIn: false, video: true, std: [], title: "Day 1 · Why Do So Many Americans Not Know How Their Government Works?", path: "https://www.youtube.com/watch?v=hMqEnmDp2m8" },
