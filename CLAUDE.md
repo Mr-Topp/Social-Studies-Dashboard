@@ -41,7 +41,10 @@ commits, and don't undo another chat's work unless Fynn says to.
 
 Students see their grades in **PowerSchool**, not here. Fynn chose "no grades, no PINs."
 - The student home page and activities never show levels, scores, first-try scores, or paper grades. A turned-in
-  activity shows "✓ Turned in", the teacher's feedback tip, and a "Fix it" button when the work needs another try.
+  activity shows "✓ Turned in" and the teacher's feedback tip.
+- **Students never redo formatives (Fynn, 2026-11-05).** No "Fix it", "Fix it now", "Redo", "fix these up" or
+  "practice these first" offers anywhere on the student site, including the feedback card and the test card.
+  Students stay in the moment with their missing and current work.
 - Teacher Tools never sends grades, scores or answers to the public site, and never sends class lists (students type
   their name). **Changed by Fynn 2026-11-03 ("look up by name only"):** `my_work` returns, for the name a student
   types, only which activities that student turned in and which ones the teacher marked M (missing) or EX, so the

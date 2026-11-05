@@ -821,7 +821,8 @@ const TEACHER_TOOLS_URL = "https://script.google.com/macros/s/AKfycbwiVW6Cufw8Dq
 
   // --- Feedback card on the next activity ----------------------------------------------
   // After the hourly AI grader (or the teacher) grades a turn-in, the student sees a short card the
-  // next time they open any class activity: level, what went well, one next step. Fix it now / Got it.
+  // next time they open any class activity: what went well, one next step, Got it. No "Fix it now": students never
+  // redo formatives (Fynn, 11-05).
   const RECEIPTS = "class-feedback-receipts";
   function newReceipt() {
     const a = new Uint8Array(16);
@@ -880,12 +881,11 @@ const TEACHER_TOOLS_URL = "https://script.google.com/macros/s/AKfycbwiVW6Cufw8Dq
     document.head.appendChild(css);
     const wrap = document.createElement("div");
     wrap.className = "fb-wrap"; wrap.setAttribute("role", "dialog"); wrap.setAttribute("aria-modal", "true"); wrap.setAttribute("aria-label", "Your feedback");
-    wrap.innerHTML = `<div class="fb-card">${preview ? '<p class="fb-sub" style="background:#dbe8fb;color:#1c3f78;border-radius:8px;padding:4px 10px;font-weight:700">🧪 Teacher preview: this is the card students see when you grade their work. Sample feedback.</p>' : ""}<h2>Your feedback is ready</h2><p class="fb-sub">Read it, then fix it or keep going.</p>` +
+    wrap.innerHTML = `<div class="fb-card">${preview ? '<p class="fb-sub" style="background:#dbe8fb;color:#1c3f78;border-radius:8px;padding:4px 10px;font-weight:700">🧪 Teacher preview: this is the card students see when you grade their work. Sample feedback.</p>' : ""}<h2>Your feedback is ready</h2><p class="fb-sub">Read it, then keep going.</p>` +
       ready.map(x => {
         const r = byToken.get(x.token) || {}, lvl = "";   // no level numbers for students (grades live in PowerSchool)
         const msg = x.flagged ? "Your teacher wants to talk with you about this one." : (x.feedback || "Your teacher graded this one.");
-        const fix = !x.flagged && (x.fix || (+x.level > 0 && +x.level <= 2)) && r.page ? `<a class="fb-fix" href="${esc(r.page)}" data-t="${esc(x.token)}">Fix it now</a>` : "";
-        return `<div class="fb-item"><b>${esc(x.title || r.title)}</b>${lvl}<p>${esc(msg)}</p><div class="fb-btns">${fix}<button class="fb-ok" data-t="${esc(x.token)}">Got it</button></div></div>`;
+        return `<div class="fb-item"><b>${esc(x.title || r.title)}</b>${lvl}<p>${esc(msg)}</p><div class="fb-btns"><button class="fb-ok" data-t="${esc(x.token)}">Got it</button></div></div>`;
       }).join("") + `<button class="fb-ok fb-close" data-all="1">Got it, start today's work</button></div>`;
     document.body.appendChild(wrap);
     const done = token => {
@@ -898,7 +898,7 @@ const TEACHER_TOOLS_URL = "https://script.google.com/macros/s/AKfycbwiVW6Cufw8Dq
       if (b.tagName === "BUTTON") { const item = b.closest(".fb-item"); item.remove(); if (!wrap.querySelector(".fb-item")) wrap.remove(); }
     }));
     wrap.querySelector("[data-all]").addEventListener("click", () => { ready.forEach(x => done(x.token)); wrap.remove(); });
-    // "Got it" unlocks after 2 seconds so the feedback gets read, not skipped. "Fix it now" works right away.
+    // "Got it" unlocks after 2 seconds so the feedback gets read, not skipped.
     const oks = wrap.querySelectorAll(".fb-ok"); oks.forEach(b => { b.disabled = true; b.style.opacity = ".55"; });
     setTimeout(() => oks.forEach(b => { b.disabled = false; b.style.opacity = ""; }), 2000);
     const first = wrap.querySelector("a,button"); if (first) first.focus();

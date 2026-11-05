@@ -710,12 +710,10 @@ function homeBody(course, work) {
   if (daysToTest >= 0 && daysToTest <= 2) {
     const inUnit = online.filter(a => unitKey(a) === nowKey);
     const review = inUnit.filter(a => /review/i.test(a.title || ""));
-    const graded = inUnit.filter(a => mine[a.id] && !mine[a.id].cleared).map(a => ({ a, g: gradeOf(mine[a.id]) })).filter(x => x.g && x.g.n).sort((x, y) => x.g.n - y.g.n);
-    const weak = graded.filter(x => x.g.n <= 2).slice(0, 2);
     const when = daysToTest === 0 ? "today" : daysToTest === 1 ? "tomorrow" : new Date(testDay + "T12:00:00").toLocaleDateString("en-US", { weekday: "long" });
     testCard = `<section class="testcard" aria-label="Test coming up"><h2>📅 ${esc(unitLabel(course, nowKey).replace(/ · .*/, ""))} test ${esc(when)}${daysToTest === 0 ? "! Good luck." : ". Get ready!"}</h2>` +
       (review.length ? `<div class="qlabel">Review game</div>${review.map(a => quick(a, "Play")).join("")}` : "") +
-      (weak.length ? `<div class="qlabel">Practice these first</div>${weak.map(x => quick(x.a, "Redo")).join("")}` : `<p>${graded.length ? "Your grades look solid. Look back over this unit's work and your notes." : "Look back over this unit's work and your notes."}</p>`) +
+      `<p>Look back over this unit's work and your notes.</p>` +   // no redo links: students never redo formatives (Fynn, 11-05)
       `</section>`;
   }
   const testLine = testDay ? `<p class="testline">📅 ${esc(unitLabel(course, nowKey).replace(/ · .*/, ""))} test: <b>${esc(niceDate(testDay))}</b>${testDay === todayIso ? " (today!)" : ""} · on paper in class</p>` : "";
