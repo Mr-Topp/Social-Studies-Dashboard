@@ -844,7 +844,12 @@ const TEACHER_TOOLS_URL = "https://script.google.com/macros/s/AKfycbwiVW6Cufw8Dq
   function esc(t) { return String(t == null ? "" : t).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c])); }
   async function showFeedback() {
     if (!TEACHER_TOOLS_URL || /teacher-submissions/.test(location.pathname) || window.NO_FEEDBACK_POPUP) return;
-    const waiting = loadReceipts().filter(r => !r.seen && Date.now() - r.at < 45 * 864e5);
+    // Fynn 11-05: only feedback on the LAST class day's lesson (Monday shows Thursday's), and only work this
+    // student actually turned in (a receipt is saved only when a turn-in really saves). Older feedback still
+    // shows on the student's home page under that activity; it just doesn't pop up.
+    const fromLast = window.classFromLastClassDay;
+    if (!fromLast) return;
+    const waiting = loadReceipts().filter(r => !r.seen && fromLast(r.id, r.at));
     if (!waiting.length) return;
     let got;
     try { got = await toolsPost({ action: "feedback", tokens: waiting.map(r => r.token) }); } catch (e) { return; }

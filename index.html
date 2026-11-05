@@ -158,11 +158,11 @@ footer a{color:var(--muted)}
 @media (max-width:600px){.next .btn{width:100%;text-align:center}.row .act{width:100%}}
 </style>
 <script>window.HUB_PAGE = true;   // student home page: feedback card pops up here, name boxes are not auto-filled</script>
-<script src="shared/assignments.js?v=20261104notes1"></script>
+<script src="shared/assignments.js?v=20261105fb1"></script>
 <script src="shared/recaps.js?v=20261103c"></script>
 <script src="shared/targets.js?v=20261103g"></script>
 <script src="teacher-submissions/presentations.js?v=20261103s1"></script>
-<script src="shared/turnin.js?v=20261103ttt"></script>
+<script src="shared/turnin.js?v=20261105fb1"></script>
 </head>
 <body>
 <main id="app" aria-live="polite"></main>
@@ -534,7 +534,10 @@ function wireReadAloud() {
 function previewFeedback(course) {
   let key = "hub-test-pop:" + course;
   try { if (sessionStorage.getItem(key)) return; sessionStorage.setItem(key, "1"); } catch (e) {}
-  const acts = studentItems(course).filter(isOnline).sort((a, b) => (a.unit || 0) - (b.unit || 0) || (a.day || 0) - (b.day || 0)).slice(0, 2);
+  // Same rule as real students (Fynn, 11-05): only the last class day's online work, so nothing shows when that
+  // day had none. Civics has no dated days, so its sample is just its first online work, as before.
+  const online = studentItems(course).filter(isOnline).sort((a, b) => (a.unit || 0) - (b.unit || 0) || (a.day || 0) - (b.day || 0));
+  const acts = (course === "civics" ? online : online.filter(a => window.classFromLastClassDay && window.classFromLastClassDay(a.id, 0, todayIso))).slice(0, 2);
   if (!acts.length || !window.classFeedbackPreview) return;
   const SAMPLES = [
     { fix: true, feedback: "You named the main idea. Add one specific detail from the lesson to explain why." },

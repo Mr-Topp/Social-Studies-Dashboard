@@ -720,3 +720,57 @@ window.classCourseFor = function (id) {
   if (id.startsWith("ush-") || id.startsWith("us-history-") || id.startsWith("wwii-graphic-reading")) return "us-history";
   return "world-history";
 };
+
+// ---- Which lesson was the class's LAST class day? (Fynn, 11-05) ----
+// The feedback card only shows feedback on work from the class day before today, and only work the student
+// turned in. Same day-counting rules as the student home page (index.html: unitPlan / dayOnDate):
+// core classes meet Mon–Thu, skipping CLASS_NO_SCHOOL; Civics meets Fridays (no green-sheet dates).
+(function () {
+  const iso = d => d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0");
+  const off = d => (window.CLASS_NO_SCHOOL || []).some(([a, z]) => { const i = iso(d); return i >= a && i <= z; });
+  const isClass = (course, d) => !off(d) && (course === "civics" ? d.getDay() === 5 : d.getDay() >= 1 && d.getDay() <= 4);
+  const between = (a, b) => { let n = 0; const d = new Date(a + "T12:00:00"), end = new Date(b + "T12:00:00"); while (d < end) { d.setDate(d.getDate() + 1); if (isClass("", d)) n++; } return n; };
+  const step = (s, n) => { const d = new Date(s + "T12:00:00"), dir = n < 0 ? -1 : 1; for (let k = Math.abs(n); k > 0;) { d.setDate(d.getDate() + dir); if (isClass("", d)) k--; } return iso(d); };
+  function plan(course, u) {
+    const cal = (window.CLASS_CALENDAR || {})[course], c = cal && cal[u];
+    if (!c || !c.summative) return null;
+    const pin = (window.CLASS_TODAY || {})[course];
+    if (pin && pin.unit === u) return { from: pin.date, fromDay: pin.day, days: c.days, test: c.summative };
+    const prev = cal[u - 1];
+    return prev && prev.summative ? { from: step(prev.summative, 1), fromDay: 1, days: c.days, test: c.summative } : null;
+  }
+  // The class day before today (a date), e.g. Thursday when it's Monday.
+  window.classLastClassDay = function (course, today) {
+    const d = new Date((today || iso(new Date())) + "T12:00:00");
+    for (let i = 0; i < 60; i++) { d.setDate(d.getDate() - 1); if (isClass(course, d)) return iso(d); }
+    return "";
+  };
+  // { unit, day } of the lesson a class had on that date (Part 2 units on the green sheet), or null.
+  window.classLessonOn = function (course, date) {
+    const cal = (window.CLASS_CALENDAR || {})[course];
+    if (!cal || !date) return null;
+    for (const u of Object.keys(cal).map(Number).sort((a, b) => a - b)) {
+      const p = plan(course, u);
+      if (!p || date > p.test) continue;
+      const first = p.fromDay > 1 ? step(p.from, -(p.fromDay - 1)) : p.from;
+      if (date < first) return null;
+      const day = date >= p.test ? p.days : date <= p.from ? Math.max(1, p.fromDay - between(date, p.from)) : Math.min(p.days - 1, p.fromDay + between(p.from, date));
+      return { unit: u, day };
+    }
+    return null;
+  };
+  // True when this activity was part of the class's lesson on its last class day.
+  // Civics has no dated calendar, so there it's work turned in on the last Friday (atMs = when it was turned in).
+  window.classFromLastClassDay = function (id, atMs, today) {
+    const a = (window.CLASS_ASSIGNMENTS || {})[id];
+    if (!a) return false;
+    const last = window.classLastClassDay(a.course, today);
+    if (!last) return false;
+    if (a.course === "civics") return !!atMs && iso(new Date(atMs)) === last;
+    if (a.part === 1 || !a.day) return false;
+    const l = window.classLessonOn(a.course, last);
+    if (!l || l.unit !== a.unit) return false;
+    const m = String(a.title || "").match(/^Days (\d+)[–-](\d+)/);   // "Days 1–3 · ..." covers each of those days
+    return m ? +m[1] <= l.day && l.day <= +m[2] : a.day === l.day;
+  };
+})();
