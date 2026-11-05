@@ -117,16 +117,16 @@
       ],
       days: [{ day: 1, title: "Government: Why Do People Make Rules?", std: "Gov.1, 5", slide: "g1d1s01" }, { day: 2, title: "Enlightenment: Who Gives Government Its Power?", std: "Gov.2", slide: "g1d2s01" }, { day: 3, title: "Types of Government: Who Holds the Power?", std: "Gov.1", slide: "g1d3s01" }, { day: 4, title: "American Roots: Where Did Our Rights Start?", std: "Gov.3, 4", slide: "g1d4s01" }, { day: 5, title: "Articles: Why Did Our First Government Fail?", std: "Gov.3, 4", slide: "g1u1d5bell" }, { day: 6, title: "Constitution: How Do You Make a Fair Deal?", std: "Gov.3, 4", slide: "g1d5s01" }, { day: 7, title: "Constitution: How Much Power Is Too Much?", std: "Gov.3, 4, 5", slide: "g1d8s01" }, { day: 8, title: "Bill of Rights: How Free Are You at School?", std: "Gov.3, 4, 5", slide: "g1d7s01" }, { day: 9, title: "Federalism: Who Holds the Power?", std: "Gov.3, 4, 9", slide: "g1d6s01" }, { day: 10, title: "Review: What Have We Built So Far?", std: "Gov.1–5, 9", slide: "g1d9s01" }] },
     { course: "government", unit: 2, title: "Political Beliefs, Parties & Citizenship", url: g("1r_9cfbyiq-eIJujo9HQqOoTCqDmfSucM0VhRUgc3pDE"), pub: "2PACX-1vR3QERGgirHqReDreLZfqfNMOWtQUtXyVwAiMIr6ZcfAPI0MEQAo37l0U19sJMFzmQujfjAPeX7DM0O", summativeSlide: "g2d1s01summ",
-      // Rows follow Fynn's Schoology day posts; each row opens the deck day(s) that teach that topic.
+      // 2026-11-04: deck rebuilt into Fynn's 5 Schoology days, so each row opens its own deck day.
       plan: [
         { day: 1, title: "Political Ideology and Parties", std: "Gov.12", slides: [{ day: 1 }] },
         { day: 2, title: "Republican and Democratic Parties", std: "Gov.12, 11", slides: [{ day: 2 }] },
-        { day: 3, title: "Major and Third Parties; Media, Bias and Misinformation", std: "Gov.12, 11", slides: [{ day: 1, slide: "g2d1s07", label: "third parties" }, { day: 3, slide: "g2d3s07", label: "media & misinformation" }] },
-        { day: 4, title: "Interest Groups, Lobbying, PACs and Civic Virtue", std: "Gov.11, 12, 15, 16", slides: [{ day: 3 }] },
-        { day: 5, title: "Iowa Elections, Voting, Citizenship, Rights and Duties", std: "Gov.13, 14, 17", slides: [{ day: 4 }, { day: 2, slide: "g2d2s05", label: "caucuses & primaries" }] },
+        { day: 3, title: "Major and Third Parties; Media, Bias and Misinformation", std: "Gov.12, 11", slides: [{ day: 3 }] },
+        { day: 4, title: "Interest Groups, Lobbying, PACs and Civic Virtue", std: "Gov.11, 12, 15, 16", slides: [{ day: 4 }] },
+        { day: 5, title: "Iowa Elections, Voting, Citizenship, Rights and Duties", std: "Gov.13, 14, 17", slides: [{ day: 5 }] },
         { day: 6, title: "Summative", std: "Gov.11–17" }
       ],
-      days: [{ day: 1, title: "Political Beliefs: Where Do Our Ideas Come From?", std: "Gov.12", slide: "g2d1s01" }, { day: 2, title: "Political Parties: What Do Parties Actually Do?", std: "Gov.12, 11", slide: "g2d2s01" }, { day: 3, title: "Interest Groups: Who Else Tries to Shape Laws?", std: "Gov.12, 11", slide: "g2d3s01" }, { day: 4, title: "Elections: How Do Iowans Vote, and Who Counts?", std: "Gov.13, 14", slide: "g2d4s01" }, { day: 5, title: "Citizenship: What Do We Owe Each Other?", std: "Gov.15, 16, 17, 11", slide: "g2d5s01" }] },
+      days: [{ day: 1, title: "Political Beliefs: Where Do Our Ideas Come From?", std: "Gov.12", slide: "g2d1s01" }, { day: 2, title: "Political Parties: What Do Parties Actually Do?", std: "Gov.12, 11", slide: "g2d2s01" }, { day: 3, title: "Third Parties and Media: Who Gets Heard?", std: "Gov.12, 11", slide: "g2d3b01" }, { day: 4, title: "Interest Groups: Who Else Tries to Shape Laws?", std: "Gov.11, 12, 15, 16", slide: "g2d3s01" }, { day: 5, title: "Elections: How Do Iowans Vote, and Who Counts?", std: "Gov.13, 14, 17", slide: "g2d4s01" }] },
     { course: "government", unit: 3, title: "Judicial Branch", url: g("1OU07tOXL0fJSdysLL5_gEQdNfFMjW-CCAlIPfXPPFxk"), pub: "2PACX-1vQGl-Erbse5mtH9-_ONeJ6irGZAAv4E9FdJkWAF-NNhr50kNdNYhRahqiZ2mP9NAb59oWYeEGnwTrPk", summativeSlide: "g3d1s01summ",
       // Rows follow Fynn's Schoology day posts; each row opens the deck day(s) that teach that topic.
       plan: [
