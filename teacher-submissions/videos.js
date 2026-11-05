@@ -94,6 +94,7 @@ Object.assign(window.CLASS_ASSIGNMENTS, {
 
   // ---- World History · Unit 1 ----
   "wh-u1-d1-video-DduN1cU2p9U": { course: "world-history", unit: 1, day: 1, turnIn: false, video: true, std: [], title: "Day 1 · What was the 'Scramble for Africa'? - BBC What's New", path: "https://www.youtube.com/watch?v=DduN1cU2p9U" },
+  "wh-u1-d1-video-MU4vua2kNQY": { course: "world-history", unit: 1, day: 1, turnIn: false, video: true, title: "Day 1 · TED-Ed: History's Deadliest King (Leopold II and the Congo)", path: "https://www.youtube.com/watch?v=MU4vua2kNQY" },
   "wh-u1-d2-video-1VIe42pAhuA": { course: "world-history", unit: 1, day: 2, turnIn: false, video: true, std: [], title: "Day 2 · Birth of Empire: The East India Company", path: "https://www.youtube.com/watch?v=1VIe42pAhuA" },
   "wh-u1-d3-video-NbHAWNQRV70": { course: "world-history", unit: 1, day: 3, turnIn: false, video: true, std: [], title: "Day 3 · How Britain Got China Hooked on Opium I Empires of Dirt", path: "https://www.youtube.com/watch?v=NbHAWNQRV70" },
   "wh-u1-d3-video-tfyEGBJ1INA": { course: "world-history", unit: 1, day: 3, turnIn: false, video: true, std: [], title: "Day 3 · Japan's Home Run: The Meiji Restoration", path: "https://www.youtube.com/watch?v=tfyEGBJ1INA" },
@@ -145,11 +146,13 @@ Object.assign(window.CLASS_ASSIGNMENTS, {
   "soc-u1-d4-video-DbTt_ySTjaY": { course: "sociology", unit: 1, day: 4, turnIn: false, video: true, std: [], title: "Day 4 · Major Sociological Paradigms: Crash Course Sociology", path: "https://www.youtube.com/watch?v=DbTt_ySTjaY" },
   "soc-u1-d5-video-ZIwyNIdgJBE": { course: "sociology", unit: 1, day: 5, turnIn: false, video: true, std: [], title: "Day 5 · Sociology & the Scientific Method: Crash Course Sociology", path: "https://www.youtube.com/watch?v=ZIwyNIdgJBE" },
   "soc-u1-d5-video-o4XX90lqT6E": { course: "sociology", unit: 1, day: 5, turnIn: false, video: true, std: [], title: "Day 5 · The Hawthorne Effect - Or Why Everything Works", path: "https://www.youtube.com/watch?v=o4XX90lqT6E" },
+  "soc-u1-d5-video-sxYrzzy3cq8": { course: "sociology", unit: 1, day: 5, turnIn: false, video: true, title: "Day 5 · TED-Ed: How Statistics Can Be Misleading", path: "https://www.youtube.com/watch?v=sxYrzzy3cq8" },
   "soc-u1-d6-video-QwhK-iEyXYA": { course: "sociology", unit: 1, day: 6, turnIn: false, video: true, std: [], title: "Day 6 · Sociology Research Methods: Crash Course Sociology", path: "https://www.youtube.com/watch?v=QwhK-iEyXYA" },
   "soc-u1-d7-video-ZV7RzS8QRXE": { course: "sociology", unit: 1, day: 7, turnIn: false, video: true, std: [], title: "Day 7 · Ugly History: The U.S. Syphilis Experiment - Susan M. Reverby", path: "https://www.youtube.com/watch?v=ZV7RzS8QRXE" },
   "soc-u1-d7-video-vuMt8b4UrcI": { course: "sociology", unit: 1, day: 7, turnIn: false, video: true, std: [], title: "Day 7 · The Milgram Experiment: Obedience to Authority", path: "https://www.youtube.com/watch?v=vuMt8b4UrcI" },
   "soc-u1-d7-video-kGn_EoHiOvc": { course: "sociology", unit: 1, day: 7, turnIn: false, video: true, std: [], title: "Day 7 · The Little Albert Experiment", path: "https://www.youtube.com/watch?v=kGn_EoHiOvc" },
   "soc-u1-d7-video-IRR7CwdHxUE": { course: "sociology", unit: 1, day: 7, turnIn: false, video: true, std: [], title: "Day 7 · The Stanford Prison Experiment Was One of the Most Disturbing Studies Ever", path: "https://www.youtube.com/watch?v=IRR7CwdHxUE" },
+  "soc-u1-d7-video-22lGbAVWhro": { course: "sociology", unit: 1, day: 7, turnIn: false, video: true, title: "Day 7 · TED-Ed: The Immortal Cells of Henrietta Lacks", path: "https://www.youtube.com/watch?v=22lGbAVWhro" },
   "soc-u1-d8-video-r7RrB8WOam4": { course: "sociology", unit: 1, day: 8, turnIn: false, video: true, std: [], title: "Day 8 · The Truman Show", path: "https://www.youtube.com/watch?v=r7RrB8WOam4" },
 
   // ---- Sociology · Unit 2 ----
