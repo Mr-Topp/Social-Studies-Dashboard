@@ -5,6 +5,8 @@
  * and (4) feeds each student's own home page (their class list name + their own grades and what's missing),
  * and (5) saves links you add from the dashboard's To-do tab to fill in a lesson day that isn't made yet,
  * and (7) saves paper grades you type on the dashboard (paper columns, 1-4 / EX exempt / M missing) and "exempt everyone",
+ * and (8) shares your lesson-day video list (videos you added, swapped or removed) so the dashboard shows the same videos
+ *     locked or unlocked. Only video titles and links go out: no names, grades or answers.
  * Students never see grades on the site (they use PowerSchool), so nothing about one student is ever sent out:
  * no grades, no class lists. Wrong teacher codes are limited, so nobody can sit and guess.
  * It edits the "Class Turn-ins" Google Sheet. It does not replace or touch the turn-in saver script.
@@ -39,7 +41,9 @@ function doPost(e) {
     if (body.action === "class_list") return json(classList(body));
     if (body.action === "my_work") return json(myWork(body));
     // Lets the update page check which version is running. Shares nothing.
-    if (body.action === "version") return json({ ok: true, version: 11, can: ["links", "student-links", "paper", "no-grades", "student-todo", "online-grade", "name-caps", "online-m"] });
+    // Teacher dashboard video list, so locked = unlocked (Fynn, 2026-11-05). Video links only, nothing about students.
+    if (body.action === "videos") return json(videoList());
+    if (body.action === "version") return json({ ok: true, version: 12, can: ["links", "student-links", "paper", "no-grades", "student-todo", "online-grade", "name-caps", "online-m", "videos"] });
   } catch (err) { return json({ ok: false, error: "Try again later." }); }
   var check = codeCheck(body.code);
   if (check === "locked") return json({ ok: false, error: "Too many wrong teacher codes. Wait 15 minutes, then try again." });
@@ -317,6 +321,32 @@ function courseRows(course) {
   var paperCols = Object.keys(papers).map(function (k) { return papers[k]; }).filter(function (p) { return !p.removed; })
     .map(function (p) { return { id: "paper-" + p.id, part: +p.part === 1 ? 1 : 2, unit: +p.unit || 0, day: +p.day || 0, title: String(p.title || "") }; });
   return { roster: roster, rows: rows, links: links, pins: pins, exemptAll: exAll, exempt: exempt, paperCols: paperCols, marks: marks };
+}
+// Every class's video changes from the dashboard: videos added to a day, and "Hidden video (teacher key)" marks for
+// videos removed or swapped out. Only rows whose link is a video (or titled "(Video)") are sent. No student info.
+var VIDEO_URL = /youtube\.com|youtu\.be|vimeo\.com|edpuzzle\.com/i;
+function videoList() {
+  var data = sheet().getDataRange().getValues(), c = cols(data[0]);
+  var kindCol = ("Kind" in c) ? c["Kind"] : c["Type"];
+  if (kindCol == null) return { ok: true, videos: [] };
+  var links = {};
+  for (var i = 1; i < data.length; i++) {
+    var r = data[i];
+    if (String(r[kindCol] || "") !== "link") continue;
+    var course = String(r[c["Class"]]).trim();
+    if (COURSES.indexOf(course) < 0) continue;
+    var a; try { a = JSON.parse(String(r[c["Answers"]] || "{}")); } catch (e) { continue; }
+    if (a && a.id) links[course + "|" + a.id] = { course: course, a: a };   // rows are in time order, so the newest wins
+  }
+  var videos = Object.keys(links).map(function (k) { return links[k]; }).filter(function (x) {
+    var l = x.a, url = String(l.url || ""), title = String(l.title || "");
+    if (l.removed || !/^https:\/\//i.test(url)) return false;
+    return title === "Hidden video (teacher key)" || VIDEO_URL.test(url) || /\(video\)/i.test(title);
+  }).map(function (x) {
+    var l = x.a;
+    return { id: String(l.id), course: x.course, part: +l.part === 1 ? 1 : 2, unit: +l.unit || 0, day: +l.day || 0, title: String(l.title || ""), url: String(l.url) };
+  });
+  return { ok: true, videos: videos };
 }
 function classList(b) {
   var course = String(b.course || "");

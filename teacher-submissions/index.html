@@ -380,6 +380,8 @@ async function load() {
   // Links you added from the To-do tab ("link" rows). Newest row per link wins; removed ones drop out.
   LINKS = {};
   got.filter(r => r.kind === "link").sort((a, b) => a.submittedAt.localeCompare(b.submittedAt)).forEach(r => { const a = r.answers || {}; if (a.id) LINKS[a.id] = a; });
+  // If the Sheet didn't answer (wrong code, no internet), keep the last video list instead of falling back to the old one.
+  if (got.length) cacheVideos(videoLinksOnly(Object.values(LINKS))); else LINKS = cachedVideos();
   applyLinks(); loaded = true;
   // Paper columns, paper grades / EX / M, and "Exempt everyone" (rows saved from this dashboard). Newest row wins.
   PAPER = {}; MARKS = {}; COLEX = {};
@@ -948,6 +950,21 @@ function applyLinks() {
   });
   Object.keys(REG).forEach(id => { const a = REG[id]; if (a.video && !a.fromTodo) a.hiddenVid = !!HIDDEN[vidKey(a.course, a.part, a.unit, a.day, a.path)]; });
 }
+// Same videos locked or unlocked (Fynn, 2026-11-05). Your video changes (added, swapped, removed) live in the Sheet.
+// Teacher Tools shares just those video rows (no student info) with "videos", so the locked dashboard shows them too.
+// The last list is also kept on this computer so the right videos show instantly, even before Google answers.
+const VID_CACHE = "dash-videos";
+const isVideoLink = l => l && !l.removed && (isHideMark(l) || VIDEO_URL.test(l.url || "") || /\(video\)/i.test(l.title || ""));
+function videoLinksOnly(list) { const out = {}; (list || []).forEach(l => { if (l && l.id && isVideoLink(l)) out[l.id] = l; }); return out; }
+function cacheVideos(map) { try { localStorage.setItem(VID_CACHE, JSON.stringify(Object.values(map))); } catch (e) {} }
+function cachedVideos() { try { return videoLinksOnly(JSON.parse(localStorage.getItem(VID_CACHE) || "[]")); } catch (e) { return {}; } }
+function showVideosWhileLocked(map) { if (loaded) return; LINKS = map; applyLinks(); render(); }
+function loadPublicVideos() {
+  if (!TOOLS_URL) return;
+  fetch(TOOLS_URL, { method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify({ action: "videos" }) })
+    .then(r => r.json()).then(d => { if (!d || !d.ok || !Array.isArray(d.videos)) return; const map = videoLinksOnly(d.videos); if (!loaded) { cacheVideos(map); showVideosWhileLocked(map); } })
+    .catch(() => {});
+}
 const isoOf = d => d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0");
 const TODAY = isoOf(new Date());
 // No-school stretches (winter break) live in shared/assignments.js (CLASS_NO_SCHOOL); skipped when estimating lesson dates.
@@ -1506,7 +1523,7 @@ async function copyOld() {
 $("teacherCode").value = sessionStorage.getItem("teacher-code") || "";
 $("teacherCode").addEventListener("keydown", e => { if (e.key === "Enter") load(); });
 $("loadBtn").onclick = load; $("refreshBtn").onclick = load;
-$("lockBtn").onclick = () => { sessionStorage.removeItem("teacher-code"); $("teacherCode").value = ""; rows = []; baseRows = []; oldRows = []; LINKS = {}; PAPER = {}; MARKS = {}; COLEX = {}; loaded = false; applyLinks(); applyPaper(); $("importPanel").hidden = true; render(); $("status").textContent = "Dashboard locked."; };
+$("lockBtn").onclick = () => { sessionStorage.removeItem("teacher-code"); $("teacherCode").value = ""; rows = []; baseRows = []; oldRows = []; LINKS = cachedVideos(); PAPER = {}; MARKS = {}; COLEX = {}; loaded = false; applyLinks(); applyPaper(); $("importPanel").hidden = true; render(); $("status").textContent = "Dashboard locked."; loadPublicVideos(); };
 $("gradesMode").onclick = () => { mode = "grades"; sessionStorage.setItem("dash-mode", mode); render(); };
 $("lessonsMode").onclick = () => { mode = "lessons"; sessionStorage.setItem("dash-mode", mode); render(); };
 $("gridView").onclick = () => { view = "grid"; render(); };
@@ -1515,12 +1532,13 @@ $("masteryView").onclick = () => { view = "mastery"; render(); };
 $("search").oninput = render; $("assignment").onchange = render;
 $("csvBtn").onclick = downloadCsv; $("importBtn").onclick = copyOld;
 $("paperBtn").onclick = () => { const b = $("paperBox"); if (!b.hidden) { b.hidden = true; return; } b.dataset.tab = tab; openPaperBox(); };
+if (!$("teacherCode").value) { LINKS = cachedVideos(); applyLinks(); }
 render();
-if ($("teacherCode").value) load();
-// "⚠ Update needed" shows only while your Teacher Tools script is an older version (no student PINs yet).
+if ($("teacherCode").value) load(); else loadPublicVideos();
+// "⚠ Update needed" shows only while your Teacher Tools script is an older version (no locked-view video list yet).
 // If Google can't be reached, it stays hidden rather than crying wolf.
 if (TOOLS_URL) fetch(TOOLS_URL, { method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify({ action: "version" }) })
-  .then(r => r.json()).then(d => { $("toolsUpdate").hidden = !!(d && d.ok && (d.can || []).includes("online-m")); }).catch(() => {});
+  .then(r => r.json()).then(d => { $("toolsUpdate").hidden = !!(d && d.ok && (d.can || []).includes("videos")); }).catch(() => {});
 </script>
 </body>
 </html>
