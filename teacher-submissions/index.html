@@ -146,6 +146,7 @@ details.partdrop>summary .parthint{font-size:.75rem;font-weight:600;letter-spaci
 .vidform{display:flex;flex-wrap:wrap;align-items:center;gap:6px;width:100%;margin:4px 0 2px;padding:8px;background:#f6f8f9;border:1px solid #d6dde2;border-radius:8px}
 .vidform input{font:inherit;font-size:.86rem;padding:6px 8px;border:1px solid #c5ced4;border-radius:6px;flex:1 1 180px;min-width:0}
 .vidformlabel{font-size:.82rem;font-weight:800;width:100%}
+.vidform select{font:inherit;font-size:.86rem;padding:6px 8px;border:1px solid #c5ced4;border-radius:6px;flex:1 1 100%;min-width:0;background:#fff}
 .vidform .formstat{font-size:.82rem;color:var(--red);width:100%}
 .todonote button{margin-left:8px}
 .chip.todo{background:#fbeceb;border:1px dashed #c9776f;color:var(--red);font-weight:800;cursor:default}
@@ -773,7 +774,7 @@ function linksHtml() {
     const list = ids.filter(id => !REG[id].alt && kindOf(id) === "video");
     if (!list.length && !wantVideo) return "";
     const one = id => `<span class="vidchip">${chip(id)}<button type="button" class="vbtn vswap" data-id="${safe(id)}" data-name="${safe(chipText(id))}" title="Replace this video" aria-label="Replace ${safe(chipText(id))}">↻</button><button type="button" class="vbtn vdel" data-id="${safe(id)}" data-name="${safe(chipText(id))}" title="Remove this video" aria-label="Remove ${safe(chipText(id))}">✕</button></span>`;
-    const form = `<form class="vidform" novalidate hidden><span class="vidformlabel"></span><input name="title" maxlength="100" autocomplete="off" placeholder="Video title (e.g. Crash Course: The Cold War)" aria-label="Video title"><input name="url" type="url" inputmode="url" autocomplete="off" placeholder="Paste the YouTube link" aria-label="Video link"><button type="submit">Save</button><button type="button" class="light vcancel">Cancel</button><span class="formstat" role="status"></span></form>`;
+    const form = `<form class="vidform" novalidate hidden><span class="vidformlabel"></span><input name="title" maxlength="100" autocomplete="off" placeholder="Video title (e.g. Crash Course: The Cold War)" aria-label="Video title"><input name="url" type="url" inputmode="url" autocomplete="off" placeholder="Paste the YouTube link" aria-label="Video link"><select name="slide" aria-label="Which slide gets the video link?" hidden></select><button type="submit">Save</button><button type="button" class="light vcancel">Cancel</button><span class="formstat" role="status"></span></form>`;
     return `<div class="altrow vidrow" data-course="${safe(ctx.course)}" data-part="${ctx.part}" data-unit="${ctx.unit}" data-day="${ctx.day}"><span class="altlabel">Video${list.length > 1 ? "s" : ""}</span>${list.length ? list.map(one).join("") : `<span class="chip todo novid">⚠ No video yet. Add one</span>`}<button type="button" class="vadd">＋ Add video</button>${form}</div>`;
   };
   const altRow = (ids, reading) => { const list = ids.filter(id => REG[id].alt && isAltReading(id) === reading); return list.length ? `<div class="altrow"><span class="altlabel">${reading ? "Alternative reading" : "Alternative assignment"}${list.length > 1 ? "s" : ""}</span>${list.map(chip).join("")}</div>` : ""; };
@@ -1170,6 +1171,43 @@ async function removeVideo(id) {
   const mark = await saveLink({ course: a.course, part: a.part === 1 ? 1 : 2, unit: a.unit, day: a.day, title: HIDE_TITLE, url: a.path });
   return () => dropLink(mark);
 }
+// ---- Keep the unit slide decks matched to these videos (Fynn, 2026-11-05) ----
+// Adding a video asks which slide of that day gets its "▶ Video" link; removing or swapping one takes its link off the deck.
+// Teacher Tools (v14+) makes the slide changes. If it's older, the dashboard still saves and says the slides weren't changed.
+const deckIdOf = url => (String(url || "").match(/\/presentation\/d\/([A-Za-z0-9_-]+)/) || [])[1] || "";
+function deckFor(course, part, unit, day) {
+  const p1 = +part === 1;
+  const d = (window.CLASS_PRESENTATIONS || []).find(x => x.course === course && (x.part === 1) === p1 && +x.unit === +unit && x.url);
+  if (!d || !deckIdOf(d.url)) return null;
+  const days = d.days || [], slideOf = n => (days.find(x => +x.day === +n) || {}).slide;
+  const deckDays = d.plan ? (((d.plan.find(x => +x.day === +day) || {}).slides) || []).map(x => x.day) : [day];
+  let starts = deckDays.map(slideOf).filter(Boolean), whole = false;
+  const stops = days.map(x => x.slide).concat(d.summativeSlide || []).filter(Boolean);
+  if (!starts.length) { starts = days.map(x => x.slide).filter(Boolean).slice(0, 1); whole = true; }   // review days have no slides: pick from the whole unit
+  return starts.length ? { deckId: deckIdOf(d.url), starts, stops: whole ? [d.summativeSlide].filter(Boolean) : stops, whole } : null;
+}
+const SLIDE_CACHE = {};
+async function loadSlidePicker(f, ctx) {
+  const sel = f.elements.slide, deck = deckFor(ctx.course, ctx.part, ctx.unit, ctx.day);
+  f.dataset.deck = deck ? deck.deckId : "";
+  if (!deck) { sel.hidden = true; sel.innerHTML = ""; return; }
+  sel.hidden = false; sel.disabled = true; sel.innerHTML = `<option value="">Loading this day's slides…</option>`;
+  const key = deck.deckId + "|" + deck.starts.join(",");
+  try {
+    const list = SLIDE_CACHE[key] || (SLIDE_CACHE[key] = (await tools("day_slides", { deckId: deck.deckId, starts: deck.starts, stops: deck.stops })).slides || []);
+    sel.innerHTML = `<option value="">${deck.whole ? "This day has no slides. Pick a slide in the unit for the link:" : "Which slide gets the video link?"}</option>` +
+      list.map(x => `<option value="${safe(x.id)}">Slide ${x.n}: ${safe(x.title)}</option>`).join("") + `<option value="none">Don't put it on the slides</option>`;
+  } catch (err) {
+    delete SLIDE_CACHE[key];
+    sel.innerHTML = `<option value="none">${/unknown request|teacher code didn/i.test(err.message) ? "Slides won't change until you update Teacher Tools" : "Couldn't load the slides (" + safe(err.message) + ")"}</option>`;
+  }
+  sel.disabled = false;
+}
+async function slideSync(data) {
+  try { return await tools("slide_video", data); }
+  catch (err) { return { ok: false, error: /unknown request|teacher code didn/i.test(err.message) ? "your Teacher Tools needs a quick update first" : err.message }; }
+}
+const SLIDE_FIX = ` <a href="update-teacher-tools.html">2-minute update</a>`;
 function wireVideoEdits(root) {
   const ready = () => {
     if (!loaded) { flashNote("Enter your code at the top first."); return false; }
@@ -1184,6 +1222,7 @@ function wireVideoEdits(root) {
     f.querySelector(".vidformlabel").textContent = replaceId ? `Replace "${name}" with:` : "Add a video to this day:";
     f.querySelectorAll("button,input").forEach(x => x.disabled = false);
     f.hidden = false; f.elements.title.focus();
+    loadSlidePicker(f, f.closest(".vidrow").dataset);
   };
   root.querySelectorAll(".vadd").forEach(b => b.onclick = () => openForm(b, "", ""));
   root.querySelectorAll(".vswap").forEach(b => b.onclick = () => openForm(b, b.dataset.id, b.dataset.name));
@@ -1192,7 +1231,16 @@ function wireVideoEdits(root) {
     if (!ready() || !REG[b.dataset.id]) return;
     if (!confirm(`Remove "${b.dataset.name}" from this day?`)) return;
     b.disabled = true; b.textContent = "…";
-    try { const undo = await removeVideo(b.dataset.id); applyLinks(); render(); flashUndo("Video removed.", undo); }
+    try {
+      const a = REG[b.dataset.id], ctx = { course: a.course, part: a.part === 1 ? 1 : 2, unit: a.unit, day: a.day }, url = a.path, name = b.dataset.name;
+      const undo = await removeVideo(b.dataset.id); applyLinks(); render();
+      const deck = deckFor(ctx.course, ctx.part, ctx.unit, ctx.day);
+      if (!deck) { flashUndo("Video removed.", undo); return; }
+      const r = await slideSync({ op: "remove", deckId: deck.deckId, url });
+      const where = r.ok ? (r.removedFrom || []) : [];
+      const msg = !r.ok ? "Video removed from the dashboard. Slides weren't changed: " + r.error + "." : where.length ? "Video removed from the dashboard and the slides." : "Video removed. (It wasn't on the slides.)";
+      flashUndo(msg, async () => { await undo(); if (where.length) await slideSync({ op: "add", deckId: deck.deckId, slideId: where[0], title: name, url }); });
+    }
     catch (err) { b.disabled = false; b.textContent = "✕"; flashNote(err.message); }
   });
   root.querySelectorAll(".vidform").forEach(f => f.onsubmit = async e => {
@@ -1205,13 +1253,27 @@ function wireVideoEdits(root) {
     if (!title) { st.textContent = "Give it a title."; return; }
     if (!/^https:\/\/[^\s/]+\.[^\s]+$/i.test(url)) { st.textContent = "That doesn't look like a link. Copy it from the address bar and paste it here."; return; }
     if (!VIDEO_URL.test(url) && !/\(video\)/i.test(title)) title += " (Video)";   // so it lands in the Videos row
-    const old = f.dataset.replace ? REG[f.dataset.replace] : null;
+    const sel = f.elements.slide, slideId = sel.hidden ? "none" : sel.value;
+    if (!sel.hidden && sel.disabled) { st.textContent = "Wait a second for the slides to load."; return; }
+    if (!slideId) { st.textContent = "Pick the slide that gets the video link (or \"Don't put it on the slides\")."; sel.focus(); return; }
+    const old = f.dataset.replace ? REG[f.dataset.replace] : null, oldUrl = old ? old.path : "";
     const base = { course: ctx.course, part: +ctx.part, unit: +ctx.unit, day: +ctx.day, title, url };
     f.querySelectorAll("button,input").forEach(x => x.disabled = true); st.textContent = "Saving…";
     try {
       if (old && old.fromTodo) await saveLink(Object.assign({ id: old.linkId }, base));   // same row, new link
       else { await saveLink(base); if (old) await removeVideo(f.dataset.replace); }
-      applyLinks(); render(); flashNote(old ? "Replaced ✓" : "Added ✓ It's on Day " + base.day + " now.");
+      applyLinks(); render();
+      let note = old ? "Replaced ✓" : "Added ✓ It's on Day " + base.day + " now.", fix = false;
+      const deckId = f.dataset.deck;
+      if (deckId) {
+        const bad = [];
+        if (oldUrl && oldUrl !== url) { const r = await slideSync({ op: "remove", deckId, url: oldUrl }); if (!r.ok) bad.push(r.error); }
+        if (slideId !== "none") { const r = await slideSync({ op: "add", deckId, slideId, title, url }); if (!r.ok) bad.push(r.error); }
+        if (bad.length) { note += " Slides weren't changed: " + bad[0] + "."; fix = /update/.test(bad[0]); }
+        else if (slideId !== "none") note += " Slides updated too.";
+        else if (oldUrl) note += " Old video taken off the slides.";
+      }
+      flashNote(note); if (fix || /Slides weren't/.test(note)) { const n = $("todoNote"); if (fix) n.innerHTML = safe(note) + SLIDE_FIX; clearTimeout(flashNote.t); flashNote.t = setTimeout(() => n.hidden = true, 12000); }
     } catch (err) {
       f.querySelectorAll("button,input").forEach(x => x.disabled = false);
       st.innerHTML = /unknown request|teacher code didn/i.test(err.message) ? `Your Teacher Tools needs a quick update first: <a href="update-teacher-tools.html">2-minute update</a>` : safe(err.message);

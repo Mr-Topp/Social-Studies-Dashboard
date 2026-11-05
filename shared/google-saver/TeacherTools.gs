@@ -8,6 +8,8 @@
  * and (8) shares your lesson-day video list (videos you added, swapped or removed) so the dashboard shows the same videos
  *     locked or unlocked. Only video titles and links go out: no names, grades or answers.
  * and (9) answers students' home pages fast: remembers each class's to-do facts for 60 seconds (your changes clear it).
+ * and (10) keeps your unit slide decks matched to the dashboard's videos: adding a video puts its "▶ Video" link on the
+ *     slide you pick, and removing or swapping one takes its link off the deck (Fynn, 2026-11-05). Slides only, no student info.
  * Students never see grades on the site (they use PowerSchool), so nothing about one student is ever sent out:
  * no grades, no class lists. Wrong teacher codes are limited, so nobody can sit and guess.
  * It edits the "Class Turn-ins" Google Sheet. It does not replace or touch the turn-in saver script.
@@ -44,7 +46,7 @@ function doPost(e) {
     // Lets the update page check which version is running. Shares nothing.
     // Teacher dashboard video list, so locked = unlocked (Fynn, 2026-11-05). Video links only, nothing about students.
     if (body.action === "videos") return json(videoList());
-    if (body.action === "version") return json({ ok: true, version: 13, can: ["links", "student-links", "paper", "no-grades", "student-todo", "online-grade", "name-caps", "online-m", "videos", "fast"] });
+    if (body.action === "version") return json({ ok: true, version: 14, can: ["links", "student-links", "paper", "no-grades", "student-todo", "online-grade", "name-caps", "online-m", "videos", "fast", "slides"] });
   } catch (err) { return json({ ok: false, error: "Try again later." }); }
   var check = codeCheck(body.code);
   if (check === "locked") return json({ ok: false, error: "Too many wrong teacher codes. Wait 15 minutes, then try again." });
@@ -57,6 +59,8 @@ function doPost(e) {
     if (body.action === "paper_task") return json(setPaperTask(body));
     if (body.action === "marks") return json(setMarks(body));
     if (body.action === "col_exempt") return json(setColExempt(body));
+    if (body.action === "day_slides") return json(slidesSafe(function () { return daySlides(body); }));
+    if (body.action === "slide_video") return json(slidesSafe(function () { return slideVideo(body); }));
     return json({ ok: false, error: "Unknown request." });
   } catch (err) {
     return json({ ok: false, error: "The sheet had a problem. Try again in a minute." });
@@ -362,6 +366,156 @@ function videoList() {
   });
   return { ok: true, videos: videos };
 }
+// ---------- Video links on the unit slide decks (Fynn, 2026-11-05) ----------
+// Adding a video on the dashboard puts a "▶ Video: <title>" link on the slide you pick; removing or swapping a video
+// takes its link off every slide in that unit's deck. Links look like the deck's other video links (same box, color, size).
+// day_slides lists one lesson day's slides (id + title) for the dashboard's "Which slide?" menu.
+var DECK_RE = /^[A-Za-z0-9_-]{20,80}$/;
+var VLINK_RE = /^\s*▶\s*Videos?:/;
+function slidesSafe(fn) {
+  try { return fn(); }
+  catch (err) {
+    var m = String(err && err.message || err);
+    if (/permission|authoriz|access/i.test(m)) return { ok: false, error: "Teacher Tools needs permission to edit your slides. Open the update page and do the \"Allow slides\" step." };
+    return { ok: false, error: "Google Slides had a problem. Try again in a minute." };
+  }
+}
+function openDeck(id) {
+  if (!DECK_RE.test(String(id || ""))) throw new Error("bad deck id");
+  return SlidesApp.openById(String(id));
+}
+function idSet(list) { var o = {}; (Array.isArray(list) ? list : []).forEach(function (x) { o[String(x)] = true; }); return o; }
+function daySlides(b) {
+  var deck = openDeck(b.deckId), starts = idSet(b.starts), stops = idSet(b.stops), on = false, out = [];
+  deck.getSlides().forEach(function (s, i) {
+    var id = s.getObjectId();
+    if (starts[id]) on = true; else if (stops[id]) on = false;
+    if (!on) return;
+    var hidden = false; try { hidden = s.isSkipped(); } catch (e) {}
+    if (!hidden) out.push({ id: id, n: i + 1, title: slideTitle(s) });
+  });
+  return { ok: true, slides: out.slice(0, 60) };
+}
+// A slide's title = its biggest text that isn't a video link.
+function slideTitle(s) {
+  var best = "", size = -1;
+  s.getShapes().forEach(function (sh) {
+    var t; try { t = sh.getText(); } catch (e) { return; }
+    var txt = t.asString().replace(/\s+/g, " ").trim();
+    if (!txt || VLINK_RE.test(txt)) return;
+    var fs = 0; try { fs = t.getRuns()[0].getTextStyle().getFontSize() || 0; } catch (e) {}
+    if (fs > size) { size = fs; best = txt; }
+  });
+  return best.slice(0, 90) || "(no title)";
+}
+function slideVideo(b) {
+  var deck = openDeck(b.deckId);
+  var url = clean(b.url, 500), title = clean(b.title, 70).replace(/\s*\(video\)\s*$/i, "");
+  if (!/^https:\/\/\S+$/i.test(url)) return { ok: false, error: "That video link doesn't look right." };
+  var lock = LockService.getScriptLock(); lock.waitLock(20000);
+  try {
+    if (b.op === "remove") return removeVideoLinks(deck, url);
+    if (b.op === "add") return addVideoLink(deck, String(b.slideId || ""), title || "Video", url);
+    return { ok: false, error: "Unknown request." };
+  } finally { lock.releaseLock(); }
+}
+// Same video = same YouTube id (youtu.be/ID and watch?v=ID match), otherwise the same link.
+function videoKey(u) {
+  u = String(u || "");
+  var m = u.match(/(?:[?&]v=|youtu\.be\/|\/embed\/|\/shorts\/)([\w-]{11})/);
+  return m ? "yt:" + m[1] : u.replace(/^https?:\/\/(www\.)?/i, "").replace(/[#?].*$/, "").replace(/\/$/, "").toLowerCase();
+}
+function isVlink(sh) { try { return VLINK_RE.test(sh.getText().asString()); } catch (e) { return false; } }
+function vlinkItems(sh) {
+  var items = [];
+  sh.getText().getRuns().forEach(function (r) {
+    var link = r.getTextStyle().getLink(), u = link && link.getUrl();
+    if (!u) return;
+    var label = r.asString().replace(/^\s*▶\s*Videos?:\s*/, "").replace(/\s+$/, "");
+    var last = items[items.length - 1];
+    if (last && last.url === u) last.label += label; else items.push({ label: label, url: u });
+  });
+  return items;
+}
+function rgbOf(style) { try { return style.getForegroundColor().asRgbColor().asHexString(); } catch (e) { return null; } }
+// The deck's video-link look: color of the plain "▶ Videos:" text, font and size.
+function vlinkLook(deck, sh) {
+  var look = { color: null, size: 14, font: "Arial" };
+  var take = function (box) {
+    box.getText().getRuns().forEach(function (r) {
+      var st = r.getTextStyle();
+      if (!r.asString().trim()) return;
+      if (st.getFontSize()) look.size = st.getFontSize();
+      if (st.getFontFamily()) look.font = st.getFontFamily();
+      if (!look.color && !st.getLink()) look.color = rgbOf(st);
+    });
+  };
+  if (sh) take(sh);
+  if (!look.color) deck.getSlides().some(function (s) { s.getShapes().some(function (x) { if (isVlink(x)) take(x); return !!look.color; }); return !!look.color; });
+  if (!look.color && sh) sh.getText().getRuns().some(function (r) { look.color = rgbOf(r.getTextStyle()); return !!look.color; });
+  look.color = look.color || "#984230";
+  return look;
+}
+function writeVlink(deck, sh, items) {
+  var look = vlinkLook(deck, sh);
+  var prefix = items.length > 1 ? "▶ Videos: " : "▶ Video: ";
+  var maxChars = Math.max(30, Math.floor(sh.getWidth() / (look.size * 0.6)));
+  var text = prefix, lineLen = prefix.length, lines = 1, spans = [];
+  items.forEach(function (it, i) {
+    var sep = i === 0 ? "" : "  ·  ";
+    if (i > 0 && lineLen + sep.length + it.label.length > maxChars) { sep = "\n"; lineLen = 0; lines++; }
+    text += sep; if (sep !== "\n") lineLen += sep.length;
+    spans.push([text.length, text.length + it.label.length, it.url]);
+    text += it.label; lineLen += it.label.length;
+  });
+  sh.getText().setText(text);
+  var all = sh.getText().getTextStyle();
+  all.removeLink();
+  all.setBold(true).setFontSize(look.size).setFontFamily(look.font).setUnderline(false).setForegroundColor(look.color);
+  spans.forEach(function (sp) {
+    sh.getText().getRange(sp[0], sp[1]).getTextStyle().setLinkUrl(sp[2]).setUnderline(true).setForegroundColor(look.color);
+  });
+  var need = lines * look.size * 1.25 + 6;
+  if (sh.getHeight() < need) sh.setHeight(need);
+}
+function removeVideoLinks(deck, url) {
+  var key = videoKey(url), from = [];
+  deck.getSlides().forEach(function (s) {
+    s.getShapes().forEach(function (sh) {
+      if (!isVlink(sh)) return;
+      var items = vlinkItems(sh), keep = items.filter(function (it) { return videoKey(it.url) !== key; });
+      if (keep.length === items.length) return;
+      if (from.indexOf(s.getObjectId()) < 0) from.push(s.getObjectId());
+      if (keep.length) writeVlink(deck, sh, keep); else sh.remove();
+    });
+  });
+  return { ok: true, removedFrom: from };
+}
+function addVideoLink(deck, slideId, title, url) {
+  var slide = deck.getSlideById(slideId);
+  if (!slide) return { ok: false, error: "Couldn't find that slide. Refresh the dashboard and pick again." };
+  var key = videoKey(url), box = null;
+  slide.getShapes().some(function (sh) { if (isVlink(sh)) box = sh; return !!box; });
+  if (box) {
+    var items = vlinkItems(box);
+    if (items.some(function (it) { return videoKey(it.url) === key; })) return { ok: true, slideId: slideId, already: true };
+    items.push({ label: title, url: url });
+    writeVlink(deck, box, items);
+  } else {
+    var proto = null;
+    deck.getSlides().some(function (s) { s.getShapes().some(function (sh) { if (isVlink(sh)) proto = sh; return !!proto; }); return !!proto; });
+    if (proto) box = slide.insertShape(proto);   // same spot and look as the deck's other video links
+    else {
+      var W = deck.getPageWidth(), H = deck.getPageHeight();
+      box = slide.insertTextBox("▶ Video: " + title, W * 0.49, H * 0.157, W * 0.474, 24);
+    }
+    writeVlink(deck, box, [{ label: title, url: url }]);
+  }
+  return { ok: true, slideId: slideId };
+}
+// Run this once from the script editor (pick "allowSlides" at the top, click Run, then Allow) so Teacher Tools
+// can edit your slide decks. It only opens one deck to ask for permission; it changes nothing.
+function allowSlides() { SlidesApp.openById("1IhgaaVGGyevEVLE8JeCGkWLmATK3OxWQgUZQ3WMPm1U").getName(); }
 function classList(b) {
   var course = String(b.course || "");
   if (COURSES.indexOf(course) < 0) return { ok: false, error: "Unknown class." };

@@ -34,12 +34,13 @@ kbd{background:#fff;border:1px solid #cfc5b3;border-bottom-width:2px;border-radi
 <main>
 <p class="eyebrow">Teacher dashboard · quick update</p>
 <h1>Update your Teacher Tools</h1>
-<p class="lead">This makes the <b>student home page load faster</b>, even the first time on a Chromebook. It keeps everything from before: same videos locked or unlocked, the M (missing) button, hand grades for online work, and name matching on students' to-do lists.</p>
+<p class="lead">This lets the dashboard <b>keep your slides matched to your videos</b>: when you add a video, you pick the slide and its link goes there; when you remove or swap one, its link comes off the slides. It keeps everything from before (fast student home page, same videos locked or unlocked, the M button, hand grades, name matching).</p>
 <ol>
   <li id="s1"><b>Copy the new script.</b><br><button class="btn" id="copyBtn">Copy the script</button><span class="st" id="copySt" aria-live="polite"></span></li>
   <li id="s2"><b>Open your Teacher Tools script.</b><br>
     <a class="btn navy" id="openBtn" href="https://script.google.com/d/10LC5rbmH37Slf-FvWpwqhNtP9NGPVgyh-zBuCphEoBgHCkWOSww485Uq/edit" target="_blank" rel="noopener">Open my Teacher Tools script ↗</a></li>
   <li id="s3"><b>Paste over the old code.</b> Click inside the code, then press <kbd>Ctrl</kbd>+<kbd>A</kbd>, <kbd>Ctrl</kbd>+<kbd>V</kbd>, <kbd>Ctrl</kbd>+<kbd>S</kbd>.</li>
+  <li id="s3b"><b>Allow slides (one time).</b> At the top of the code, click the menu that shows a function name, pick <b>allowSlides</b>, then click <b>▶ Run</b>. Google asks for permission: click <b>Review permissions</b>, pick your school account, then <b>Allow</b>. (If it says "Google hasn't verified this app," click <b>Advanced</b> → <b>Go to Teacher Tools</b>. It's your own script.)</li>
   <li id="s4"><b>Publish it.</b> <b>Deploy</b> (top right) → <b>Manage deployments</b> → <b>pencil ✏️</b> → Version: <b>New version</b> → <b>Deploy</b>.
     <p class="warn">Don't click "New deployment." That makes a new address, and your site wouldn't find it.</p></li>
   <li id="s5"><b>Check that it worked.</b><br><button class="btn navy" id="checkBtn">Check it</button><div class="st" id="result" aria-live="polite"></div></li>
@@ -55,7 +56,7 @@ $("copyBtn").onclick = async () => {
   const st = $("copySt");
   try {
     const code = await fetch("../shared/google-saver/TeacherTools.gs", { cache: "no-store" }).then(r => { if (!r.ok) throw 0; return r.text(); });
-    if (!/no-grades/.test(code) || !/set_link/.test(code) || !/paperCols/.test(code) || !/videoList/.test(code) || !/forgetRows/.test(code)) throw 0;
+    if (!/no-grades/.test(code) || !/set_link/.test(code) || !/paperCols/.test(code) || !/videoList/.test(code) || !/forgetRows/.test(code) || !/slideVideo/.test(code)) throw 0;
     await navigator.clipboard.writeText(code);
     st.className = "st ok"; st.textContent = "Copied! Now do step 2.";
     $("s1").classList.add("done");
@@ -68,14 +69,14 @@ $("checkBtn").onclick = async () => {
   out.className = "st"; out.textContent = "Checking…";
   try {
     const ver = await fetch(URL_, { method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify({ action: "version" }) }).then(r => r.json()).catch(() => ({}));
-    if (!(ver.ok && (ver.can || []).includes("fast"))) {
+    if (!(ver.ok && (ver.can || []).includes("slides"))) {
       out.className = "st bad";
       out.innerHTML = "Not updated yet. Google is still running the old version. Redo step 4 and make sure you pick <b>New version</b> before Deploy. Then check again.";
       return;
     }
-    ["s3", "s4", "s5"].forEach(id => $(id).classList.add("done"));
+    ["s3", "s3b", "s4", "s5"].forEach(id => $(id).classList.add("done"));
     out.className = "st ok";
-    out.innerHTML = "✅ It worked! Students' home pages load faster now. <a href=\"./\">Back to your dashboard →</a>";
+    out.innerHTML = "✅ It worked! Adding or removing a video on the dashboard now changes your slides too. <a href=\"./\">Back to your dashboard →</a>";
   } catch (e) {
     out.className = "st bad"; out.textContent = "Couldn't reach Google. Check your internet and try again.";
   }
