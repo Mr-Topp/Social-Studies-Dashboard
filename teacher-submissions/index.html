@@ -797,7 +797,7 @@ function linksHtml() {
   const chip = id => { const k = kindOf(id); return `<a class="chip ${k}${REG[id].alt ? " alt" : ""}" href="${safe(hrefOf(id))}" target="_blank" rel="noopener" title="${safe(REG[id].title)}${k === "key" ? " (teacher only)" : ""}">${ICON[k]} ${safe(chipText(id))}</a>`; };
   const actDay = id => { const m = (REG[id].title || "").match(/^Days? (\d+)/); return REG[id].day || (m ? +m[1] : 0); };
   // Blue reminder: units Fynn still needs to go through again (Fynn, 2026-11-03). Delete a line when it's done.
-  const REVIEW_AGAIN = new Set(["us-history|3", "us-history|4", "us-history|5", "us-history|6", "world-history|2", "world-history|3", "sociology|2", "sociology|3", "sociology|4"]);
+  const REVIEW_AGAIN = new Set(["us-history|3", "us-history|4", "us-history|5", "us-history|6", "world-history|2", "world-history|3", "sociology|3", "sociology|4"]);
   // Purple reminder: units that still need graphic novels added (Fynn, 2026-11-03). Units in REVIEW_AGAIN get it too.
   const ADD_GN = new Set([...REVIEW_AGAIN]); // Government units removed (Fynn, 2026-11-04)
   const unitBlock = (key, name, ids, decks, cal) => {
