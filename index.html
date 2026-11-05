@@ -584,7 +584,8 @@ function homeBody(course, work) {
   // "Completed in class" (CLASS_CLEARED with a label) wins over EX, same as the teacher dashboard (Fynn, 11-03).
   online.forEach(a => { if (exempt.has(a.id) && !(clr.label && isCleared(a))) mine[a.id] = { id: a.id, exempt: true }; });
   // Test T. (the teacher) is always caught up: anything due before today counts as done unless really turned in.
-  if (testMode) online.forEach(a => { if (!mine[a.id] && isDue(a)) mine[a.id] = { id: a.id, cleared: true }; });
+  // Shown the way a caught-up student sees it (Fynn, 11-05): "✓ Turned in", not "Completed in class" / "Done".
+  if (testMode) online.forEach(a => { if ((!mine[a.id] || mine[a.id].cleared) && isDue(a)) mine[a.id] = { id: a.id, at: todayIso, teacher: false, flagged: false }; });
   // Teacher preview: pretend this student turned in everything due (and today's work), with sample grades.
   if (work.preview) {
     const SAMPLE = [
@@ -722,6 +723,8 @@ function homeBody(course, work) {
       if (a.paperId && exempt.has(a.paperId)) return `<div class="row lite"><div class="info"><div class="day">Paper</div><div class="title">📄 ${esc(cleanTitle(a.title))}</div></div><div class="act"><span class="pill p-in">Exempt · you don't need to do this</span></div></div>`;
       if (pg && pg.level) return `<div class="row lite"><div class="info"><div class="day">Paper</div><div class="title">📄 ${esc(cleanTitle(a.title))}</div></div><div class="act"><span class="pill p-l${pg.level}">Level ${pg.level} · ${WORD[pg.level]}</span></div></div>`;
       if (pg && pg.mark === "M") return `<div class="row lite"><div class="info"><div class="day">Paper</div><div class="title">📄 ${esc(cleanTitle(a.title))}</div></div><div class="act"><span class="pill p-miss">Missing · get it from your teacher</span></div></div>`;
+      // Test T. is caught up: earlier paper work shows as turned in, not "Missed it?" (Fynn, 11-05).
+      if (testMode && isDue(a) && !isToday(a)) return `<div class="row lite"><div class="info"><div class="day">Paper</div><div class="title">📄 ${esc(cleanTitle(a.title))}</div></div><div class="act"><span class="pill p-in">✓ Turned in</span></div></div>`;
       return `<div class="row lite"><div class="info"><div class="day">Paper</div><div class="title">📄 ${esc(cleanTitle(a.title))}</div></div><div class="act"><span class="pill ${later ? "p-wait\">Coming up" : isToday(a) ? "p-in\">" + (classToday ? "Today · in class" : "Next class · in class") : "p-class\">Missed it? Get it from your teacher"}</span></div></div>`;
     }
     if (!on) { pill = later ? `<span class="pill p-wait">Coming up</span>` : isToday(a) ? `<span class="pill p-in">${classToday ? "Today · in class" : "Next class · in class"}</span>` : `<span class="pill p-class">Done in class</span>`; }
