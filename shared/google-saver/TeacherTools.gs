@@ -46,7 +46,7 @@ function doPost(e) {
     // Lets the update page check which version is running. Shares nothing.
     // Teacher dashboard video list, so locked = unlocked (Fynn, 2026-11-05). Video links only, nothing about students.
     if (body.action === "videos") return json(videoList());
-    if (body.action === "version") return json({ ok: true, version: 15, can: ["links", "student-links", "paper", "no-grades", "student-todo", "online-grade", "name-caps", "online-m", "videos", "fast", "slides", "name-short-long"] });
+    if (body.action === "version") return json({ ok: true, version: 16, can: ["links", "student-links", "paper", "no-grades", "student-todo", "online-grade", "name-caps", "online-m", "videos", "fast", "slides", "name-short-long", "safe-append"] });
   } catch (err) { return json({ ok: false, error: "Try again later." }); }
   var check = codeCheck(body.code);
   if (check === "locked") return json({ ok: false, error: "Too many wrong teacher codes. Wait 15 minutes, then try again." });
@@ -222,7 +222,9 @@ function setMarks(b) {
         saved.push({ activity: it.act, student: it.student, at: row[c["Turned in"]] });
       }
     });
-    if (add.length) sh.getRange(sh.getLastRow() + 1, 1, add.length, add[0].length).setValues(add);
+    // appendRow, never "write into getLastRow()+1": the turn-in saver is a separate script with its own lock, so a
+    // student's turn-in can land between finding the last row and writing it, and get written over (11-05).
+    add.forEach(function (row) { sh.appendRow(row); });
   });
   return { ok: true, saved: saved };
 }
@@ -582,7 +584,7 @@ function cols(header) { var c = {}; header.forEach(function (h, i) { c[String(h)
 function withLock(fn) {
   var lock = LockService.getScriptLock();
   lock.waitLock(20000);
-  try { fn(sheet()); } finally { lock.releaseLock(); forgetRows(); }
+  try { fn(sheet()); SpreadsheetApp.flush(); } finally { lock.releaseLock(); forgetRows(); }
 }
 // Checks the teacher code. If you set a TEACHER_CODE script property it uses that; otherwise it asks your
 // turn-in saver whether the code works (so there's nothing to type in here). Remembered for 30 minutes.
