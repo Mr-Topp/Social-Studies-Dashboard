@@ -588,7 +588,9 @@ function homeBody(course, work) {
   online.forEach(a => { if (exempt.has(a.id) && !(clr.label && isCleared(a))) mine[a.id] = { id: a.id, exempt: true }; });
   // Test T. (the teacher) is always caught up: anything due before today counts as done unless really turned in.
   // Shown the way a caught-up student sees it (Fynn, 11-05): "✓ Turned in", not "Completed in class" / "Done".
-  if (testMode) online.forEach(a => { if ((!mine[a.id] || mine[a.id].cleared) && isDue(a)) mine[a.id] = { id: a.id, at: todayIso, teacher: false, flagged: false }; });
+  // Counts whether this device used the ?teacher-test link or someone just typed the name "Test T.".
+  const isTestT = testMode || String((me.classes || {})[course] || "").trim().toLowerCase() === TEST_NAME.toLowerCase();
+  if (isTestT) online.forEach(a => { if ((!mine[a.id] || mine[a.id].cleared) && isDue(a)) mine[a.id] = { id: a.id, at: todayIso, teacher: false, flagged: false }; });
   // Teacher preview: pretend this student turned in everything due (and today's work), with sample grades.
   if (work.preview) {
     const SAMPLE = [
