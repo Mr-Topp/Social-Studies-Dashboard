@@ -675,7 +675,14 @@ function mergeNames() {
         const typed = full.filter(n => firstKey(n) === fk);
         if (onList.length === 1) r.studentName = onList[0];
         else if (typed.length === 1) r.studentName = typed[0];
+        return;
       }
+      // Short or long version of the same first name + same last initial ("Alex R." / "Alexandra R.",
+      // "Jo M." / "Josie M."): joins the ONE class-list student it fits (Fynn, 11-05). Needs 3+ letters,
+      // and does nothing if two students on the list could fit.
+      const [fk, ini] = k.split("|");
+      const fits = roster.filter(n => { const [rf, ri] = nameKey(n).split("|"); return ri === ini && rf !== fk && Math.min(rf.length, fk.length) >= 3 && (rf.startsWith(fk) || fk.startsWith(rf)); });
+      if (fits.length === 1) r.studentName = fits[0];
     });
   });
 }

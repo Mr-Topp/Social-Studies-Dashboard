@@ -46,7 +46,7 @@ function doPost(e) {
     // Lets the update page check which version is running. Shares nothing.
     // Teacher dashboard video list, so locked = unlocked (Fynn, 2026-11-05). Video links only, nothing about students.
     if (body.action === "videos") return json(videoList());
-    if (body.action === "version") return json({ ok: true, version: 14, can: ["links", "student-links", "paper", "no-grades", "student-todo", "online-grade", "name-caps", "online-m", "videos", "fast", "slides"] });
+    if (body.action === "version") return json({ ok: true, version: 15, can: ["links", "student-links", "paper", "no-grades", "student-todo", "online-grade", "name-caps", "online-m", "videos", "fast", "slides", "name-short-long"] });
   } catch (err) { return json({ ok: false, error: "Try again later." }); }
   var check = codeCheck(body.code);
   if (check === "locked") return json({ ok: false, error: "Too many wrong teacher codes. Wait 15 minutes, then try again." });
@@ -540,9 +540,23 @@ function myWork(b) {
     var meFirst = firstKey(me), meInit = initialOf(me);
     // A first name alone and the same first name + last initial count as one student, and capitals don't matter
     // ("JORDAN M." = "Jordan M.") -- same rule as the teacher dashboard (Fynn, 11-04).
+    // Short or long version of the same first name + same last initial ("Alex R." / "Alexandra R.") counts as the
+    // ONE class-list student it fits -- same rule as the teacher dashboard (Fynn, 11-05). 3+ letters; never when two fit.
+    var listOf = (d.roster || []).map(function (n) { return { f: firstKey(n), i: initialOf(n) }; });
+    var canon = function (n) {
+      var f = firstKey(n), i = initialOf(n);
+      if (!f || !i) return "";
+      var fits = listOf.filter(function (s) {
+        return s.i === i && (s.f === f || (Math.min(s.f.length, f.length) >= 3 && (s.f.indexOf(f) === 0 || f.indexOf(s.f) === 0)));
+      });
+      return fits.length === 1 ? fits[0].f + "|" + fits[0].i : "";
+    };
+    var meCanon = canon(me);
     var same = function (n) {
       n = shortName(n);
-      if (!n || firstKey(n) !== meFirst) return false;
+      if (!n) return false;
+      if (meCanon && canon(n) === meCanon) return true;
+      if (firstKey(n) !== meFirst) return false;
       var nInit = initialOf(n);
       return !nInit || !meInit || nInit === meInit;
     };
