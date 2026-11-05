@@ -259,6 +259,8 @@ async function addTeacherLinks(course) {
   addPaperCols(course, d.paperCols);
   (d.links || []).forEach(l => {
     if (!l || !/^https:\/\//i.test(l.url || "") || /answer key|teacher key|summative/i.test(l.title || "")) return;
+    // Videos are teacher only (Fynn, 2026-11-04): ones added from the dashboard never show on students' pages.
+    if (/youtube\.com|youtu\.be|vimeo\.com|edpuzzle\.com/i.test(l.url) || /\(video\)/i.test(l.title || "")) return;
     REG["todo-link-" + l.id] = Object.assign({ course, unit: +l.unit, day: +l.day, title: "Day " + l.day + " · " + l.title, path: l.url, turnIn: false }, +l.part === 1 ? { part: 1 } : {});
   });
 }

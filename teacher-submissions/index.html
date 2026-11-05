@@ -139,6 +139,15 @@ details.partdrop>summary .parthint{font-size:.75rem;font-weight:600;letter-spaci
 .altlabel{font-size:.72rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
 .chip.alt{background:#f1f5f2;border:1px dashed #9db8a8}
 .chip.todo.novid{font-weight:700;white-space:nowrap}
+.vidchip{display:inline-flex;align-items:center;gap:2px}
+.vbtn{font:inherit;font-size:.8rem;line-height:1;border:1px solid #d6dde2;background:#fff;color:var(--muted);border-radius:6px;padding:5px 7px;cursor:pointer;min-width:28px;min-height:28px}
+.vbtn:hover{color:var(--navy);border-color:var(--navy)}.vbtn.vdel:hover{color:var(--red);border-color:var(--red)}
+.vadd{font:inherit;font-size:.8rem;font-weight:800;border:1px dashed var(--navy);background:#fff;color:var(--navy);border-radius:7px;padding:5px 9px;cursor:pointer;min-height:28px}
+.vidform{display:flex;flex-wrap:wrap;align-items:center;gap:6px;width:100%;margin:4px 0 2px;padding:8px;background:#f6f8f9;border:1px solid #d6dde2;border-radius:8px}
+.vidform input{font:inherit;font-size:.86rem;padding:6px 8px;border:1px solid #c5ced4;border-radius:6px;flex:1 1 180px;min-width:0}
+.vidformlabel{font-size:.82rem;font-weight:800;width:100%}
+.vidform .formstat{font-size:.82rem;color:var(--red);width:100%}
+.todonote button{margin-left:8px}
 .chip.todo{background:#fbeceb;border:1px dashed #c9776f;color:var(--red);font-weight:800;cursor:default}
 .dayrow.summ{background:#fff5f3;border-left:4px solid var(--red);padding-left:8px}
 .sumdate{font-size:.8rem;font-weight:800;color:var(--red)}
@@ -757,7 +766,14 @@ function linksHtml() {
   // YouTube videos from the Schoology day posts get their own "Videos" row under the day (videos.js).
   // A lesson day with no videos gets a red "No video yet" box so you remember to add one (Fynn, 2026-11-03).
   // Also listed in the To-do tab as "Add a video" (Fynn, 2026-11-03), but not counted in the unit's "not made yet". Test days and "Other" rows are skipped.
-  const vidRow = (ids, wantVideo) => { const list = ids.filter(id => !REG[id].alt && kindOf(id) === "video"); return list.length ? `<div class="altrow vidrow"><span class="altlabel">Video${list.length > 1 ? "s" : ""}</span>${list.map(chip).join("")}</div>` : wantVideo ? `<div class="altrow vidrow"><span class="altlabel">Videos</span><span class="chip todo novid">⚠ No video yet. Add one later</span></div>` : ""; };
+  // Edit buttons (Fynn, 2026-11-04): ↻ replace and ✕ remove on each video, ＋ Add video on every lesson day. Saved in the Sheet.
+  const vidRow = (ids, wantVideo, ctx) => {
+    const list = ids.filter(id => !REG[id].alt && kindOf(id) === "video");
+    if (!list.length && !wantVideo) return "";
+    const one = id => `<span class="vidchip">${chip(id)}<button type="button" class="vbtn vswap" data-id="${safe(id)}" data-name="${safe(chipText(id))}" title="Replace this video" aria-label="Replace ${safe(chipText(id))}">↻</button><button type="button" class="vbtn vdel" data-id="${safe(id)}" data-name="${safe(chipText(id))}" title="Remove this video" aria-label="Remove ${safe(chipText(id))}">✕</button></span>`;
+    const form = `<form class="vidform" novalidate hidden><span class="vidformlabel"></span><input name="title" maxlength="100" autocomplete="off" placeholder="Video title (e.g. Crash Course: The Cold War)" aria-label="Video title"><input name="url" type="url" inputmode="url" autocomplete="off" placeholder="Paste the YouTube link" aria-label="Video link"><button type="submit">Save</button><button type="button" class="light vcancel">Cancel</button><span class="formstat" role="status"></span></form>`;
+    return `<div class="altrow vidrow" data-course="${safe(ctx.course)}" data-part="${ctx.part}" data-unit="${ctx.unit}" data-day="${ctx.day}"><span class="altlabel">Video${list.length > 1 ? "s" : ""}</span>${list.length ? list.map(one).join("") : `<span class="chip todo novid">⚠ No video yet. Add one</span>`}<button type="button" class="vadd">＋ Add video</button>${form}</div>`;
+  };
   const altRow = (ids, reading) => { const list = ids.filter(id => REG[id].alt && isAltReading(id) === reading); return list.length ? `<div class="altrow"><span class="altlabel">${reading ? "Alternative reading" : "Alternative assignment"}${list.length > 1 ? "s" : ""}</span>${list.map(chip).join("")}</div>` : ""; };
   // Answer keys + Drive alternatives sit behind a small "+ more" so the day row shows only what you teach from.
   const moreBox = ids => {
@@ -773,6 +789,8 @@ function linksHtml() {
   // Purple reminder: units that still need graphic novels added (Fynn, 2026-11-03). Units in REVIEW_AGAIN get it too.
   const ADD_GN = new Set([...REVIEW_AGAIN]); // Government units removed (Fynn, 2026-11-04)
   const unitBlock = (key, name, ids, decks, cal) => {
+    ids = ids.filter(id => !REG[id].hiddenVid);   // videos Fynn removed from this day
+    const kp = String(key).split("|"), vctx = { course: kp[0], part: kp[1] === "p1" ? 1 : 2, unit: +kp[kp.length - 1] || 0 };
     const main = decks.find(p => !p.note) || decks[0];
     const extra = decks.filter(p => p !== main);
     const rows = new Map();
@@ -853,7 +871,7 @@ function linksHtml() {
       const t = r.title || (r.summ || r.ids.some(id => /summative/i.test(REG[id].title)) ? "Summative" : r.ids.length ? chipText(r.ids[0]).replace(/\s*\([^)]*\)\s*$/, "") : "");
       const slides = r.slides.map(s => `<a class="chip slides" href="${safe(s.url)}${s.slide ? "#slide=id." + safe(s.slide) : ""}" target="_blank" rel="noopener">▶ ${safe(s.label)}</a>`).join("");
       const todo = (r.todo || []).map(x => `<span class="chip todo">⚠ ${safe(x)}</span>`).join("");
-      return `<div class="dayrow${r.summ ? " summ" : ""}" id="${safe(dayAnchor(key, r.day))}"><div class="daylabel">${label}<span class="daytitle${t ? "" : " unplanned"}">${safe(t || "Nothing planned yet")}</span>${r.std ? `<span class="daystd">${stdHover(r.std)}</span>` : ""}</div><div class="daychips">${slides}${r.ids.filter(id => !REG[id].alt && kindOf(id) !== "key" && kindOf(id) !== "video").map(chip).join("")}${todo}${vidRow(r.ids, wantsVideo(r))}${moreBox(r.ids)}</div></div>`;
+      return `<div class="dayrow${r.summ ? " summ" : ""}" id="${safe(dayAnchor(key, r.day))}"><div class="daylabel">${label}<span class="daytitle${t ? "" : " unplanned"}">${safe(t || "Nothing planned yet")}</span>${r.std ? `<span class="daystd">${stdHover(r.std)}</span>` : ""}</div><div class="daychips">${slides}${r.ids.filter(id => !REG[id].alt && kindOf(id) !== "key" && kindOf(id) !== "video").map(chip).join("")}${todo}${r.day > 0 && vctx.unit ? vidRow(r.ids, wantsVideo(r), Object.assign({ day: r.day }, vctx)) : ""}${moreBox(r.ids)}</div></div>`;
     }).join("");
     const deckLinks = [list.some(r => r.single) ? null : main, ...extra].filter(Boolean).map(p => `<a href="${safe(p.url)}" target="_blank" rel="noopener">${p === main ? "▶ Open the whole deck" : "Older version: " + safe(p.title) + (p.note ? " (" + safe(p.note) + ")" : "")}</a>`).join(" · ");
     const inner = list.length ? `<div class="daytable">${body}</div>${deckLinks ? `<div class="deckfoot">${deckLinks}</div>` : ""}` : `<p class="status">No slides for this unit yet.</p>`;
@@ -908,18 +926,27 @@ const SUMM_REVIEW_TITLE = "Summative reviewed (teacher key)";
 const SUMM_REVIEW_COURSES = new Set(["us-history", "world-history", "sociology", "government"]);
 const isSummMark = l => l && l.title === SUMM_REVIEW_TITLE;
 const isReviewMark = l => l && (l.title === REVIEW_TITLE || l.title === SUMM_REVIEW_TITLE);
+// Videos removed from a day on the Lessons view (Fynn, 2026-11-04). Videos in videos.js live in the code, so removing one
+// saves a "Hidden video (teacher key)" link row (its url = the video's link) and the dashboard hides it. "teacher key"
+// keeps the row off students' home pages. Remove the row (To-do tab > Videos you removed > Bring back) and it comes back.
+const HIDE_TITLE = "Hidden video (teacher key)";
+const isHideMark = l => l && l.title === HIDE_TITLE;
+const vidKey = (course, part, unit, day, url) => [course, +part === 1 ? 1 : 2, +unit, +day, String(url || "")].join("|");
+let HIDDEN = {};
 // A link added for a "no video" day counts as that day's video: YouTube/Vimeo/Edpuzzle links, or anything named "(Video)".
 const VIDEO_URL = /youtube\.com|youtu\.be|vimeo\.com|edpuzzle\.com/i;
 const dayAnchor = (key, day) => "d-" + String(key).replace(/[^a-z0-9]+/gi, "-") + "-" + (day || 0);
 function applyLinks() {
   Object.keys(REG).filter(id => REG[id].fromTodo).forEach(id => delete REG[id]);
-  REVIEWED = {};
+  REVIEWED = {}; HIDDEN = {};
   Object.values(LINKS).forEach(l => {
     if (l.removed || !l.url || !COURSES[l.course]) return;
+    if (isHideMark(l)) { HIDDEN[vidKey(l.course, l.part, l.unit, l.day, l.url)] = l; return; }
     if (isReviewMark(l)) { REVIEWED[(isSummMark(l) ? "summ|" : "") + l.course + (+l.part === 1 ? "|p1" : "") + "|" + l.unit + "|" + l.day] = l; return; }
     const video = VIDEO_URL.test(l.url) || /\(video\)/i.test(l.title);
     REG["todo-link-" + l.id] = Object.assign({ course: l.course, unit: +l.unit, day: +l.day, title: "Day " + l.day + " · " + l.title.replace(/\s*\(video\)\s*$/i, ""), path: l.url, turnIn: false, fromTodo: true, linkId: l.id }, video ? { video: true } : {}, +l.part === 1 ? { part: 1 } : {});
   });
+  Object.keys(REG).forEach(id => { const a = REG[id]; if (a.video && !a.fromTodo) a.hiddenVid = !!HIDDEN[vidKey(a.course, a.part, a.unit, a.day, a.path)]; });
 }
 const isoOf = d => d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0");
 const TODAY = isoOf(new Date());
@@ -994,7 +1021,8 @@ function renderTodo() {
   const all = collectTodos(), pane = $("todoPane");
   if (!TODO_FILTERS.some(f => f[0] === todoFilter)) todoFilter = "all";
   const items = all.map((t, i) => Object.assign(t, { i })), shown = items.filter(t => todoFilter === "all" || filterOf(t) === todoFilter);
-  const linkList = Object.values(LINKS).filter(l => !l.removed && l.url && COURSES[l.course] && !isReviewMark(l));
+  const linkList = Object.values(LINKS).filter(l => !l.removed && l.url && COURSES[l.course] && !isReviewMark(l) && !isHideMark(l));
+  const hideList = Object.values(LINKS).filter(l => !l.removed && COURSES[l.course] && isHideMark(l));
   const reviewList = Object.values(LINKS).filter(l => !l.removed && COURSES[l.course] && isReviewMark(l));
   const nOf = f => f === "all" ? items.length : items.filter(t => filterOf(t) === f).length;
   const head = `<div class="todofilters" role="group" aria-label="Show">${TODO_FILTERS.map(([f, label]) => `<button class="mode" data-f="${f}" aria-pressed="${todoFilter === f}">${label} <span class="n">${nOf(f)}</span></button>`).join("")}</div>` +
@@ -1032,6 +1060,8 @@ function renderTodo() {
   }).join("");
   if (reviewList.length) html += `<details class="mini addedlist"><summary>Days and summatives you marked reviewed (${reviewList.length})</summary><ul>${reviewList.map(l => `<li><b>${safe(COURSES[l.course])}</b> · Unit ${safe(l.unit)} · ${isSummMark(l) ? "Summative" : "Day " + safe(l.day)} <button class="light rmlink" data-id="${safe(l.id)}">Undo</button></li>`).join("")}</ul></details>`;
   if (linkList.length) html += `<details class="mini addedlist"><summary>Links you added (${linkList.length})</summary><ul>${linkList.map(l => `<li><b>${safe(COURSES[l.course])}</b> · ${+l.part === 1 ? "Part 1 · " : ""}Unit ${safe(l.unit)} · Day ${safe(l.day)}: <a href="${safe(l.url)}" target="_blank" rel="noopener">${safe(l.title)}</a> <button class="light rmlink" data-id="${safe(l.id)}">Remove</button></li>`).join("")}</ul></details>`;
+  const hiddenName = l => { const id = Object.keys(REG).find(k => REG[k].hiddenVid && vidKey(REG[k].course, REG[k].part, REG[k].unit, REG[k].day, REG[k].path) === vidKey(l.course, l.part, l.unit, l.day, l.url)); return id ? (REG[id].title || "").replace(/^Days? [\d–-]+ · /, "") : l.url; };
+  if (hideList.length) html += `<details class="mini addedlist"><summary>Videos you removed (${hideList.length})</summary><ul>${hideList.map(l => `<li><b>${safe(COURSES[l.course])}</b> · ${+l.part === 1 ? "Part 1 · " : ""}Unit ${safe(l.unit)} · Day ${safe(l.day)}: <a href="${safe(l.url)}" target="_blank" rel="noopener">${safe(hiddenName(l))}</a> <button class="light rmlink" data-id="${safe(l.id)}">Bring back</button></li>`).join("")}</ul></details>`;
   pane.innerHTML = html;
   pane.querySelectorAll(".todofilters .mode").forEach(b => b.onclick = () => { todoFilter = b.dataset.f; sessionStorage.setItem("todo-filter", todoFilter); todoOpen = null; renderTodo(); });
   pane.querySelectorAll(".markrev").forEach(b => b.onclick = async () => {
@@ -1085,7 +1115,7 @@ function renderTodo() {
   });
   pane.querySelectorAll(".rmlink").forEach(b => b.onclick = async () => {
     const l = LINKS[b.dataset.id]; const label0 = b.textContent; b.disabled = true; b.textContent = isReviewMark(l) ? "Undoing…" : "Removing…";
-    try { await tools("set_link", { id: l.id, course: l.course, remove: true }); l.removed = true; applyLinks(); render(); flashNote(isReviewMark(l) ? "Undone. It's back on the list." : "Removed."); }
+    try { await tools("set_link", { id: l.id, course: l.course, remove: true }); l.removed = true; applyLinks(); render(); flashNote(isReviewMark(l) ? "Undone. It's back on the list." : isHideMark(l) ? "It's back on that day." : "Removed."); }
     catch (err) { b.disabled = false; b.textContent = label0; flashNote(err.message); }
   });
 }
@@ -1100,6 +1130,76 @@ function renderTabs() {
   if (tab === "todo") return;
   $("links").innerHTML = linksHtml();
   $("links").querySelectorAll(".unitdrop, .partdrop").forEach(d => d.addEventListener("toggle", () => { linkOpen[d.dataset.k] = d.open; }));
+  wireVideoEdits($("links"));
+}
+
+// ---- Add / replace / remove a day's videos on the Lessons view (Fynn, 2026-11-04) ----
+// Uses Teacher Tools' set_link (no Teacher Tools update needed). Added videos are link rows, like To-do links.
+function flashUndo(msg, undo) {
+  const n = $("todoNote"); n.innerHTML = safe(msg) + ' <button class="light" type="button">Undo</button>'; n.hidden = false;
+  clearTimeout(flashNote.t); flashNote.t = setTimeout(() => n.hidden = true, 10000);
+  const b = n.querySelector("button");
+  b.onclick = async () => { b.disabled = true; b.textContent = "Undoing…"; try { await undo(); applyLinks(); render(); flashNote("Undone ✓"); } catch (err) { b.disabled = false; b.textContent = "Undo"; flashNote(err.message); } };
+}
+async function saveLink(l) {
+  const d = await tools("set_link", { id: l.id, course: l.course, part: l.part, unit: l.unit, day: l.day, title: l.title, url: l.url });
+  return LINKS[d.id] = { id: d.id, course: l.course, part: l.part, unit: l.unit, day: l.day, title: l.title, url: l.url, removed: false };
+}
+async function dropLink(l) { await tools("set_link", { id: l.id, course: l.course, remove: true }); l.removed = true; }
+// Takes a video off its day. Returns an undo function.
+async function removeVideo(id) {
+  const a = REG[id];
+  if (a.fromTodo) { const l = LINKS[a.linkId], copy = Object.assign({}, l); await dropLink(l); return () => saveLink(copy); }
+  const mark = await saveLink({ course: a.course, part: a.part === 1 ? 1 : 2, unit: a.unit, day: a.day, title: HIDE_TITLE, url: a.path });
+  return () => dropLink(mark);
+}
+function wireVideoEdits(root) {
+  const ready = () => {
+    if (!loaded) { flashNote("Enter your code at the top first."); return false; }
+    if (!TOOLS_URL) { flashNote("Finish the Teacher Tools setup first."); return false; }
+    return true;
+  };
+  const openForm = (b, replaceId, name) => {
+    if (!ready()) return;
+    root.querySelectorAll(".vidform").forEach(f => f.hidden = true);
+    const f = b.closest(".vidrow").querySelector(".vidform");
+    f.reset(); f.dataset.replace = replaceId || ""; f.querySelector(".formstat").textContent = "";
+    f.querySelector(".vidformlabel").textContent = replaceId ? `Replace "${name}" with:` : "Add a video to this day:";
+    f.querySelectorAll("button,input").forEach(x => x.disabled = false);
+    f.hidden = false; f.elements.title.focus();
+  };
+  root.querySelectorAll(".vadd").forEach(b => b.onclick = () => openForm(b, "", ""));
+  root.querySelectorAll(".vswap").forEach(b => b.onclick = () => openForm(b, b.dataset.id, b.dataset.name));
+  root.querySelectorAll(".vcancel").forEach(b => b.onclick = () => { b.closest("form").hidden = true; });
+  root.querySelectorAll(".vdel").forEach(b => b.onclick = async () => {
+    if (!ready() || !REG[b.dataset.id]) return;
+    if (!confirm(`Remove "${b.dataset.name}" from this day?`)) return;
+    b.disabled = true; b.textContent = "…";
+    try { const undo = await removeVideo(b.dataset.id); applyLinks(); render(); flashUndo("Video removed.", undo); }
+    catch (err) { b.disabled = false; b.textContent = "✕"; flashNote(err.message); }
+  });
+  root.querySelectorAll(".vidform").forEach(f => f.onsubmit = async e => {
+    e.preventDefault();
+    const st = f.querySelector(".formstat"), ctx = f.closest(".vidrow").dataset;
+    let title = f.elements.title.value.trim(), url = f.elements.url.value.trim();
+    if (url && !/^https?:\/\//i.test(url)) url = "https://" + url;
+    url = url.replace(/^http:\/\//i, "https://");
+    if (!ready()) return;
+    if (!title) { st.textContent = "Give it a title."; return; }
+    if (!/^https:\/\/[^\s/]+\.[^\s]+$/i.test(url)) { st.textContent = "That doesn't look like a link. Copy it from the address bar and paste it here."; return; }
+    if (!VIDEO_URL.test(url) && !/\(video\)/i.test(title)) title += " (Video)";   // so it lands in the Videos row
+    const old = f.dataset.replace ? REG[f.dataset.replace] : null;
+    const base = { course: ctx.course, part: +ctx.part, unit: +ctx.unit, day: +ctx.day, title, url };
+    f.querySelectorAll("button,input").forEach(x => x.disabled = true); st.textContent = "Saving…";
+    try {
+      if (old && old.fromTodo) await saveLink(Object.assign({ id: old.linkId }, base));   // same row, new link
+      else { await saveLink(base); if (old) await removeVideo(f.dataset.replace); }
+      applyLinks(); render(); flashNote(old ? "Replaced ✓" : "Added ✓ It's on Day " + base.day + " now.");
+    } catch (err) {
+      f.querySelectorAll("button,input").forEach(x => x.disabled = false);
+      st.innerHTML = /unknown request|teacher code didn/i.test(err.message) ? `Your Teacher Tools needs a quick update first: <a href="update-teacher-tools.html">2-minute update</a>` : safe(err.message);
+    }
+  });
 }
 
 
