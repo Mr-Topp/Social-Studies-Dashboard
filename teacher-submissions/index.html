@@ -701,6 +701,8 @@ function clearedLabel(course, id) {
 }
 const doneAll = (course, id) => DONE_ALL[id] || clearedLabel(course, id);
 const isTestStudent = s => /^test [ts]\.?$/i.test(String(s || "").trim()); // "Test T." (and "Test S.", its first name), any capitals
+// Fynn's call (11-05): never show an AI/copied flag for Wyatt. His answers are still graded 1–4 like everyone's.
+const noAiFlag = s => /^wyatt\b/i.test(String(s || "").trim());
 const offList = (t, s) => rosterOf(t).length && !rosterOf(t).includes(s);
 const studentCell = (t, s) => `<td class="student">${safe(s)}${isTestStudent(s) ? '<small class="testtag">TEST (you)</small>' : offList(t, s) ? '<small class="offlist">not on class list</small>' : ""}</td>`;
 
@@ -711,7 +713,7 @@ function attentionHtml(list) {
   list.forEach(r => { const k = r.studentName + "|" + r.assignmentId; if (!latest.has(k)) latest.set(k, r); });
   // Only turned-in work that has a grade shows here (Fynn, 11-03): Level 1s, and AI/copied flags on graded
   // written answers. Missing work and "nothing turned in yet" stay in the grade table, not here.
-  const flagText = r => { const a = aiOf(r), ans = r.answers || {}; if (!a || a.teacher) return ""; if (a.flag) return a.flag; return ans["Pasted writing"] ? ans["Pasted writing"] + ". Check with the student." : ""; };
+  const flagText = r => { const a = aiOf(r), ans = r.answers || {}; if (!a || a.teacher || noAiFlag(r.studentName)) return ""; if (a.flag) return a.flag; return ans["Pasted writing"] ? ans["Pasted writing"] + ". Check with the student." : ""; };
   const flags = [...latest.values()].filter(r => flagText(r)).map(r => `<li><b>${safe(r.studentName)}</b> · ${safe(titleOf(r))}: ${safe(flagText(r))}</li>`);
   const data = masteryData(list), ones = [];
   Object.keys(data).sort().forEach(s => { const c = Object.keys(data[s]).filter(c => data[s][c].n === 1); if (c.length) ones.push(`<li><b>${safe(s)}</b> · Level 1 on ${safe(c.map(shortStd).join(", "))}</li>`); });
@@ -1307,7 +1309,7 @@ function aiOf(r) {
   const a = r.answers || {}, t = parseInt(a["Teacher level"], 10);
   if (t >= 1 && t <= 4) return { n: t, reason: String(a["Teacher note"] || "Set by you"), flag: "", teacher: true };
   const n = parseInt(a["AI level"], 10);
-  return n >= 1 && n <= 4 ? { n, reason: String(a["AI reason"] || ""), flag: String(a["AI flag"] || ""), teacher: false } : null;
+  return n >= 1 && n <= 4 ? { n, reason: String(a["AI reason"] || ""), flag: noAiFlag(r.studentName) ? "" : String(a["AI flag"] || ""), teacher: false } : null;
 }
 // Halves round down: a 3 has to be earned, not reached by rounding (2.5 -> 2, 3.5 -> 3).
 const roundDown = x => Math.ceil(x - 0.5);
@@ -1550,7 +1552,7 @@ function gradeBox(r, i) {
   if (r.kind === "mark") return `<div class="gradebox"><b>${REG[r.assignmentId] && REG[r.assignmentId].paper ? "Paper grade" : "Your grade (turn-in didn't save)"}: Level ${safe((r.answers || {})["Teacher level"])}</b> <span class="status">Change it in the By day view.</span></div>`;
   const a = r.answers || {}, t = parseInt(a["Teacher level"], 10), ai = parseInt(a["AI level"], 10);
   const now = t >= 1 ? `<b>Your grade: Level ${t}</b>${a["Teacher note"] ? " · " + safe(a["Teacher note"]) : ""}${ai >= 1 ? ` <span class="status">(AI said ${ai})</span>` : ""}`
-    : ai >= 1 ? `<b>AI grade: Level ${ai}</b> · ${safe(a["AI reason"] || "")}${a["AI flag"] ? ` <span class="warn">⚠ ${safe(a["AI flag"])}</span>` : ""}`
+    : ai >= 1 ? `<b>AI grade: Level ${ai}</b> · ${safe(a["AI reason"] || "")}${a["AI flag"] && !noAiFlag(r.studentName) ? ` <span class="warn">⚠ ${safe(a["AI flag"])}</span>` : ""}`
     : `<span class="status">No written-answer grade yet.</span>`;
   const fb = a["AI student feedback"] ? `<div class="status">Student sees: “${safe(a["AI student feedback"])}”${a["Student saw feedback"] ? ' <b class="seen">✓ seen ' + safe(a["Student saw feedback"]) + "</b>" : ""}</div>` : "";
   const tr = "";
