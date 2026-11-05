@@ -7,6 +7,7 @@
  * and (7) saves paper grades you type on the dashboard (paper columns, 1-4 / EX exempt / M missing) and "exempt everyone",
  * and (8) shares your lesson-day video list (videos you added, swapped or removed) so the dashboard shows the same videos
  *     locked or unlocked. Only video titles and links go out: no names, grades or answers.
+ * and (9) answers students' home pages fast: remembers each class's to-do facts for 60 seconds (your changes clear it).
  * Students never see grades on the site (they use PowerSchool), so nothing about one student is ever sent out:
  * no grades, no class lists. Wrong teacher codes are limited, so nobody can sit and guess.
  * It edits the "Class Turn-ins" Google Sheet. It does not replace or touch the turn-in saver script.
@@ -43,7 +44,7 @@ function doPost(e) {
     // Lets the update page check which version is running. Shares nothing.
     // Teacher dashboard video list, so locked = unlocked (Fynn, 2026-11-05). Video links only, nothing about students.
     if (body.action === "videos") return json(videoList());
-    if (body.action === "version") return json({ ok: true, version: 12, can: ["links", "student-links", "paper", "no-grades", "student-todo", "online-grade", "name-caps", "online-m", "videos"] });
+    if (body.action === "version") return json({ ok: true, version: 13, can: ["links", "student-links", "paper", "no-grades", "student-todo", "online-grade", "name-caps", "online-m", "videos", "fast"] });
   } catch (err) { return json({ ok: false, error: "Try again later." }); }
   var check = codeCheck(body.code);
   if (check === "locked") return json({ ok: false, error: "Too many wrong teacher codes. Wait 15 minutes, then try again." });
@@ -290,7 +291,18 @@ function shortName(raw) {
 }
 function firstKey(n) { return String(n || "").split(" ")[0].toLowerCase().replace(/[^a-zÀ-ɏ]/g, ""); }
 function initialOf(n) { var p = String(n || "").trim().split(/\s+/); return p.length > 1 ? p[p.length - 1].replace(/[^A-Za-z]/g, "").charAt(0).toLowerCase() : ""; }
+// Speed (Fynn, 11-05): the student page asks this a lot, so the answer is remembered for 60 seconds, and students'
+// answers are never unpacked here (only names, activity ids and times are needed). Your dashboard changes clear it.
+var ROWS_SECS = 60;
 function courseRows(course) {
+  var cache = CacheService.getScriptCache(), key = "rows2_" + course;
+  try { var hit = cache.get(key); if (hit) return JSON.parse(hit); } catch (e) {}
+  var d = courseRowsRead(course);
+  try { var txt = JSON.stringify(d); if (txt.length < 95000) cache.put(key, txt, ROWS_SECS); } catch (e) {}
+  return d;
+}
+function forgetRows() { try { CacheService.getScriptCache().removeAll(COURSES.map(function (k) { return "rows2_" + k; })); } catch (e) {} }
+function courseRowsRead(course) {
   var data = sheet().getDataRange().getValues(), c = cols(data[0]);
   var kindCol = ("Kind" in c) ? c["Kind"] : c["Type"];
   var roster = [], rosterAt = -1, rows = [], links = {}, pins = {}, colEx = {}, exempt = {}, papers = {}, marks = {};
@@ -299,7 +311,9 @@ function courseRows(course) {
     if (String(r[c["Class"]]).trim() !== course) continue;
     var id = String(r[c["Activity ID"]] || "").trim();
     var when = r[c["Turned in"]] instanceof Date ? r[c["Turned in"]].getTime() : new Date(r[c["Turned in"]]).getTime();
-    var a; try { a = JSON.parse(String(r[c["Answers"]] || "{}")); } catch (e) { a = {}; }
+    var kind0 = kindCol == null ? "turn-in" : String(r[kindCol] || "turn-in");
+    var needA = id === "class-roster" || kind0 === "link" || kind0 === "col" || kind0 === "mark" || kind0 === "paper-task";
+    var a = {}; if (needA) { try { a = JSON.parse(String(r[c["Answers"]] || "{}")); } catch (e) { a = {}; } }
     if (id === "class-roster") {
       if ((when || 0) >= rosterAt && Array.isArray(a.students)) {
         rosterAt = when || 0; roster = a.students.map(shortName).filter(function (n) { return n; });
@@ -314,7 +328,7 @@ function courseRows(course) {
     if (kind === "mark") { var who = shortName(r[c["Student"]]); exempt[id + "|" + who] = a.Mark === "EX"; marks[id + "|" + who] = a; continue; }
     if (kind === "paper-task") { if (a && a.id) papers[a.id] = a; continue; }
     if (kind === "progress" || kind === "roster" || !id) continue;
-    rows.push({ name: shortName(r[c["Student"]]), id: id, at: isNaN(when) ? "" : new Date(when).toISOString(), a: a });
+    rows.push({ name: shortName(r[c["Student"]]), id: id });
   }
   var exAll = Object.keys(colEx).filter(function (k) { return colEx[k]; });
   // Paper columns still in use (name + day only), so students' pages can show their paper grades on that day.
@@ -400,7 +414,7 @@ function cols(header) { var c = {}; header.forEach(function (h, i) { c[String(h)
 function withLock(fn) {
   var lock = LockService.getScriptLock();
   lock.waitLock(20000);
-  try { fn(sheet()); } finally { lock.releaseLock(); }
+  try { fn(sheet()); } finally { lock.releaseLock(); forgetRows(); }
 }
 // Checks the teacher code. If you set a TEACHER_CODE script property it uses that; otherwise it asks your
 // turn-in saver whether the code works (so there's nothing to type in here). Remembered for 30 minutes.
