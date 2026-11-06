@@ -73,3 +73,37 @@ window.CLASS_RECAPS = {
   const clr = (window.CLASS_CLEARED || {}).civics;
   if (clr && clr.ids) clr.ids = clr.ids.filter(id => /^civics-test-s1-/.test(id));
 })();
+
+// Civics learning goals for the student home page, one set per Friday (Fynn 11-06). From his "SF 369 High School
+// Civics Test Scale" doc, matched to his real Fridays by topic. g3 = that scale's Level 3 (Proficient) line.
+// Friday 5 targets were drafted in his scale's style (the doc has no later-history Friday) for Fynn to review.
+window.CIVICS_TARGETS = {
+  "1": { t: ["I can explain the purpose of government and the Constitution.",
+             "I can identify important founding documents and democratic principles.",
+             "I can analyze how the Constitution limits government power."],
+         g3: "I can analyze important concepts about American government, citizenship, and history." },
+  "2": { t: ["I can explain the structure and powers of Congress.",
+             "I can explain the powers of the president and executive branch.",
+             "I can identify the role of the Supreme Court and federal courts.",
+             "I can analyze how checks and balances limit government power."],
+         g3: "I can analyze how constitutional principles and government systems affect citizens and society." },
+  "3": { t: ["I can explain rights protected by the Constitution and Bill of Rights.",
+             "I can identify the responsibilities of United States citizens.",
+             "I can analyze why civic participation is important in a democracy."],
+         g3: "I can analyze how constitutional principles and government systems affect citizens and society." },
+  "4": { t: ["I can explain important events from early American history.",
+             "I can identify major historical figures and their contributions.",
+             "I can analyze how historical events shaped the United States government."],
+         g3: "I can analyze important concepts about American government, citizenship, and history." },
+  "5": { t: ["I can explain important events from the Civil War to today, like the end of slavery, the World Wars, and September 11.",
+             "I can identify major historical figures, like Abraham Lincoln, Susan B. Anthony, and Martin Luther King Jr., and their contributions.",
+             "I can analyze how wars and movements like civil rights changed the United States."],
+         g3: "I can analyze important concepts about American government, citizenship, and history." },
+  "6": { t: ["I can identify important states, capitals, and geographic regions.",
+             "I can explain the meaning of important American symbols and traditions.",
+             "I can analyze how federalism divides power between state and national governments."],
+         g3: "I can analyze important concepts about American government, citizenship, and history." },
+  "7": { test: 1, t: ["I can apply civics knowledge independently during the assessment.",
+             "I can demonstrate understanding of government, history, and citizenship concepts."],
+         g3: "I can analyze civics questions and identify correct answers using evidence and reasoning." }
+};
