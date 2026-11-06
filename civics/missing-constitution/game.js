@@ -1,6 +1,7 @@
 /* =====================================================================
-   POWER GRAB: The Missing Constitution  (Government Unit 1, Day 7)
-   A card duel. Gov. Victor Hale (a made-up character) grabs power 7 times.
+   POWER GRAB: Call the Foul  (Government Unit 1, Day 7)
+   Gov. Victor Hale (a made-up character) grabs power 7 times. The player calls
+   the foul by playing the Constitution rule he broke.
    Each showdown deals 3 rule cards: one best fit, one that works slowly, one that
    doesn't fit. A wrong card makes Hale stronger; the player tries again.
    - Shortcuts beat Hale fast but break the Constitution (2 = "You became Hale").
@@ -19,7 +20,7 @@
   const FX = { best: -10, ok: -4, miss: 12, cut: -8, slide: 18, objection: 4 };
   const STEPS = 10; // 1 briefing, 2-8 showdowns, 9 ending, 10 report
 
-  // ---------- The Constitution's pieces (the "missing" document) ----------
+  // ---------- The Constitution ideas each card stands for ----------
   const PIECES = [
     ["pop", "🗳️", "Popular Sovereignty"],
     ["lim", "📏", "Limited Government"],
@@ -70,7 +71,7 @@
     },
     {
       id: "r2", deal: ["rule", "strike", "job"], short: "Phone searches", title: "Checkpoints", art: "🚔",
-      flash: "Hale orders police to search every phone for the thief. <b>No warrants</b> (no judge said OK).",
+      flash: "Someone leaked Hale's plans. He orders police to search every phone in Marion. <b>No warrants</b> (no judge said OK).",
       taunt: "Nothing to hide? Hand it over.",
       ev: { lab: "📎 Evidence · 4th Amendment (real)", html: "The 4th Amendment bans <b>unreasonable searches</b> (searches without a good reason). Real case: phone searches need a <b>warrant</b> (a judge's OK).", src: "Source: U.S. Constitution, 4th Amendment; Riley v. California (2014)" },
       fits: {
@@ -111,12 +112,12 @@
     },
     {
       id: "r4", deal: ["order", "vote", "strike"], short: "Hale's texts", title: "The Texts", art: "📱",
-      flash: "Police learn the thief texted Hale's office. Hale refuses to hand over his texts.",
+      flash: "Storm money is missing. Hale's texts could show where it went. He refuses to hand them over.",
       taunt: "You can't make me.",
       ev: { lab: "📎 Evidence · Real case, 1974", html: "President Nixon wouldn't hand over secret tapes. The Supreme Court ruled <b>8–0</b>: hand them over. <b>He resigned 16 days later.</b>", src: "Source: United States v. Nixon (1974)" },
       fits: {
-        order: { fit: "best", head: "Court order", res: "Hale must obey. The texts lead to the Constitution in Ankeny.", crane: "You'll regret this.", reveal: "<b>Rule of law</b>: even the most powerful leader must obey the law." },
-        vote:  { fit: "ok", head: "Lawmakers investigate", res: "Lawmakers investigate. Three months later, the texts and Constitution turn up.", crane: "Three months. I'll survive.", reveal: "<b>Checks and balances</b>: lawmakers can investigate and impeach a governor." }
+        order: { fit: "best", head: "Court order", res: "Hale must obey. The texts show the storm money went to his friends.", crane: "You'll regret this.", reveal: "<b>Rule of law</b>: even the most powerful leader must obey the law." },
+        vote:  { fit: "ok", head: "Lawmakers investigate", res: "Lawmakers investigate. Three months later, the texts come out.", crane: "Three months. I'll survive.", reveal: "<b>Checks and balances</b>: lawmakers can investigate and impeach a governor." }
       },
       miss: {
         strike: "No law to strike down. He's hiding texts. Who can FORCE him to hand them over?",
@@ -127,7 +128,7 @@
         people: "Voters can't force him to hand over texts."
       },
       cut: { label: "Hack his phone", head: "You hack the phone", res: "The texts are real, but a judge throws them out.", reveal: "That broke the <b>rule of law</b>. Illegal evidence gets thrown out." },
-      slide: { head: "Texts stay secret", res: "Hale keeps his texts. The Constitution stays missing.", reveal: "If leaders can ignore courts, nobody is equal under law." },
+      slide: { head: "Texts stay secret", res: "Hale keeps his texts. Nobody finds out where the money went.", reveal: "If leaders can ignore courts, nobody is equal under law." },
       check: "c3"
     },
     {
@@ -294,6 +295,7 @@
   let order = null;        // current shuffled order of a check's choices
   let lastPower = st.power;
   const app = $("app");
+  try { document.title = "Power Grab: Call the Foul | Government Unit 1 Day 7"; const bs = document.querySelector(".brand small"); if (bs) bs.textContent = "CALL THE FOUL"; } catch (e) {}
   // 3-card showdown layout (kept here so index.html stays unchanged)
   (function () { const el = document.createElement("style"); el.textContent = ".hand.three{grid-template-columns:repeat(3,minmax(0,1fr))}.hand.three .pcard{min-height:150px}.hand.three .ce{font-size:2.3rem}.hand.three .cn{font-size:1rem}.hand.three .cl{font-size:.8rem}.howto{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:6px;align-items:stretch;margin:10px 0}.how-step{display:flex;flex-direction:column;align-items:center;text-align:center;gap:2px;background:#fff;color:#17233a;border-radius:12px;padding:8px 6px;box-shadow:0 4px 12px #0005}.how-step.win{border:3px solid #1f8a55}.how-e{font-size:1.5rem;line-height:1.1}.how-step b{font-size:.88rem;line-height:1.15}.how-step small{font-size:.74rem;color:#55627a;line-height:1.2}.how-arrow{align-self:center;color:#f2b632;font-size:1.3rem;font-weight:900}@media(max-width:620px){.hand.three{grid-template-columns:1fr}.hand.three .pcard{min-height:0}.howto{grid-template-columns:1fr}.how-arrow{transform:rotate(90deg);justify-self:center;line-height:1}}"; document.head.appendChild(el); })();
 
@@ -316,8 +318,7 @@
     $("cardsLeft").textContent = nBlocked + " blocked";
     $("breaks").textContent = st.breaks ? "⚠️".repeat(st.breaks) : "0";
     $("breakBox").classList.toggle("warn", st.breaks > 0);
-    $("pieces").innerHTML = PIECES.map(p => `<span class="pc ${st.pieces[p[0]] ? "on" : ""}" title="${esc(p[2])}" aria-label="${esc(p[2])}">${st.pieces[p[0]] ? p[1] : "?"}</span>`).join("");
-    $("pieceNum").textContent = Object.keys(st.pieces).length + "/8";
+    const pb = $("pieces"); if (pb && pb.parentNode) pb.parentNode.hidden = true;   // no "Constitution pieces" meter anymore
     if (st.power !== lastPower) {
       const d = st.power - lastPower, pop = $("powerPop");
       pop.textContent = (d > 0 ? "+" : "−") + Math.abs(d);
@@ -357,14 +358,14 @@
       <div class="title-text">
         <p class="kicker">Government · Unit 1 · Day 7</p>
         <h1>POWER GRAB</h1>
-        <p class="hook">Someone stole the Constitution. The rules still count, but only if someone uses them. Hale is betting nobody will.</p>
-        ${craneSays("No rulebook? Now I make the rules.")}
+        <p class="hook">Iowa's governor keeps grabbing power he doesn't have. Every time, you call the foul.</p>
+        ${craneSays("Rules? I make the rules.")}
         <div class="howto" aria-label="How to play">
           <div class="how-step"><span class="how-e" aria-hidden="true">😏</span><b>Hale grabs power</b><small>“Search every phone. No warrants.”</small></div>
           <span class="how-arrow" aria-hidden="true">➜</span>
           <div class="how-step"><span class="how-e" aria-hidden="true">🃏🃏🃏</span><b>You get 3 rule cards</b><small>The evidence shows which rule fits.</small></div>
           <span class="how-arrow" aria-hidden="true">➜</span>
-          <div class="how-step win"><span class="how-e" aria-hidden="true">🛑</span><b>Play the one that stops him</b><small>Wrong card = Hale gets stronger.</small></div>
+          <div class="how-step win"><span class="how-e" aria-hidden="true">🚩</span><b>Call the foul</b><small>Play the rule he broke. Wrong card = Hale gets stronger.</small></div>
         </div>
         <div class="what">
           <span>🃏 <b>Rule cards</b></span><span>⏱️ <b>25 min</b></span><span>⚔️ <b>7 showdowns</b></span>
@@ -373,7 +374,7 @@
         <button type="button" class="go big" id="startBtn">START ▶</button>
         <p class="fine">Hale and this story are made up. The rules and cases are real.</p>
       </div>
-      <figure class="title-art"><img src="img/we-the-people.jpg" alt="The words We the People on the original U.S. Constitution"><figcaption>U.S. Constitution, 1787 · National Archives (public domain)</figcaption><div class="stamp slam">MISSING</div></figure>
+      <figure class="title-art"><img src="img/we-the-people.jpg" alt="The words We the People on the original U.S. Constitution"><figcaption>U.S. Constitution, 1787 · National Archives (public domain)</figcaption></figure>
     </section>`;
     $("startBtn").onclick = () => go(1);
   }
@@ -484,7 +485,7 @@
     if (r.twist && (rr.outcome === "best" || rr.outcome === "ok")) stamp = ["RULES KEPT", "good"];
     if (rr.outcome === "ok" && r.fits[rr.card].okStamp) stamp = [r.fits[rr.card].okStamp, "meh"];
     const d = rr.delta || 0;
-    const chip = rr.card ? `<p class="chip piece fly">📜 <span>Piece restored:</span> <b>${esc(PIECE[CARDS[rr.card].p][2])}</b></p>` : "";
+    const chip = "";
     const nextLabel = r.check ? "Hale's lawyer objects ▶" : (roundIx() === ROUNDS.length - 1 ? "See how it ends ▶" : "Next showdown ▶");
     app.innerHTML = `<section class="table result">
       <div class="arena">
@@ -598,18 +599,16 @@
     if (!st.ending) { st.ending = computeEnding(); save(); }
     const E = ENDINGS[st.ending];
     const rows = causeRows();
-    const found = (st.rounds.r4 || {}).outcome;
-    const docLine = found === "best" ? "The Constitution was found in one day. The thief: a Hale staffer." : found === "ok" ? "The Constitution was found after three months. The thief: a Hale staffer." : found === "cut" ? "Found, but the thief walked free." : "Found at the very end.";
     const good = st.ending === "balance" || st.ending === "close";
     app.innerHTML = `<section class="table end">
       <article class="paper ${st.ending}">
         <div class="masthead"><span>THE CEDAR VALLEY GAZETTE</span><small>Made-up newspaper · Final edition</small></div>
-        <div class="paper-top"><div><p class="kicker">Your ending</p><h2 class="headline">${E.e} <span>${esc(E.head)}</span></h2><p class="endtext">${esc(E.text)}</p><p class="docline">📜 <span>${esc(docLine)}</span></p></div>
+        <div class="paper-top"><div><p class="kicker">Your ending</p><h2 class="headline">${E.e} <span>${esc(E.head)}</span></h2><p class="endtext">${esc(E.text)}</p></div>
           <div class="paper-art"><div class="paper-face">${good ? "😰" : st.ending === "crane" ? "😈" : "🪞"}</div><div class="stamp slam ${good ? "good" : "bad"}">${good ? "CASE CLOSED" : "GAME OVER"}</div></div></div>
-        <div class="final-meters"><p>😏 <span>Hale's power</span> <b>${st.power}</b></p><p>⚠️ <span>Rules broken</span> <b>${st.breaks}</b></p><p>📜 <span>Constitution pieces</span> <b>${Object.keys(st.pieces).length}/8</b></p></div>
+        <div class="final-meters"><p>😏 <span>Hale's power</span> <b>${st.power}</b></p><p>⚠️ <span>Rules you broke</span> <b>${st.breaks}</b></p><p>🚩 <span>Fouls you blocked</span> <b>${ROUNDS.filter(r => (st.rounds[r.id] || {}).outcome === "best").length} of 7</b></p></div>
         <h3>Caused by:</h3>
         <div class="cause">${rows.map((x, i) => `<div class="cause-card ${x.cls}" style="--i:${i}"><span class="cc-round">${x.r.art} <b>${esc(x.r.short)}</b></span><span class="cc-play">${x.e} <span>${esc(x.what)}</span></span><em>${esc(x.fitText)}</em>${x.misses ? `<small>${x.misses === 1 ? "1 wrong card" : x.misses + " wrong cards"}</small>` : ""}</div>`).join("")}</div>
-        <p class="reveal">💡 <span><b>The Constitution only works when people use it.</b></span></p>
+        <p class="reveal">💡 <span><b>The rules only work when people call the fouls.</b></span></p>
       </article>
       <button type="button" class="go" id="toReport">Last step: your case file ▶</button></section>`;
     $("toReport").onclick = () => go(10);
@@ -678,7 +677,7 @@
     answers["Ending"] = ENDINGS[st.ending || computeEnding()].name;
     answers["Hale's power at the end"] = st.power + " of 100";
     answers["Rules broken"] = String(st.breaks);
-    answers["Constitution pieces restored"] = Object.keys(st.pieces).length + " of 8";
+    answers["Fouls blocked (best card)"] = ROUNDS.filter(r => (st.rounds[r.id] || {}).outcome === "best").length + " of 7";
 
     const btn = $("sendBtn");
     btn.disabled = true; msg.textContent = "Sending your work…"; msg.className = "msg";
