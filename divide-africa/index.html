@@ -178,37 +178,76 @@ h2{font-size:20px;line-height:1.25;margin:0;color:var(--navy)}
 .why-note{display:block;margin-top:6px;font-weight:650;font-size:15px;color:#24563d}
 .turn-in-status.error{color:#9b3932}
 .welcome-back{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:8px 16px;margin:0 0 16px;padding:12px 16px;border-radius:12px;background:#e8f6ef;border:1px solid #9fd3b8;color:#14532d;font-weight:600}.restart-link{background:none;border:none;color:#1d4ed8;text-decoration:underline;font:inherit;font-weight:600;cursor:pointer;padding:4px}
+/* v3: everything you need on one screen (11/5) */
+.site-header{padding:10px clamp(16px,4vw,54px)}
+h1{font-size:clamp(20px,2.4vw,26px)}
+main{padding-top:14px}
+.top-row{display:grid;grid-template-columns:minmax(0,1fr) 260px;gap:12px;margin-bottom:12px;align-items:stretch}
+.top-row .std-line{margin:0;padding:8px 12px;font-size:13.5px}
+.top-row .name-card{padding:10px 12px;align-self:stretch}
+.top-row .name-card label{font-size:14px;margin-bottom:5px}
+.top-row .name-card input{height:40px}
+.phase-banner{padding:10px 18px}
+.phase-directions{padding:9px 18px;font-size:15px}
+.solve-layout{display:grid;grid-template-columns:minmax(330px,.85fr) minmax(0,1.15fr);gap:16px;padding:14px 16px 16px;align-items:start}
+.solve-layout .clue-box{margin:0;padding:16px;max-width:none;position:sticky;top:10px;border:1px solid var(--line);border-radius:13px;background:#fff}
+.solve-layout .clue-box[hidden]{display:none}
+.clue-top{margin-bottom:10px}
+.clue-box h3{font-size:19px}
+.clue-text{font-size:17px!important;padding:10px 12px}
+#clue-prompt{font-size:16px;margin:0 0 10px}
+.clue-box .choice{min-width:0;flex:1 1 calc(33% - 10px);min-height:46px}
+.solve-layout .facts{padding:12px 14px;border-radius:13px;box-shadow:none}
+.solve-layout .facts h2{font-size:16px}
+.solve-layout .facts>p{margin:2px 0 8px;font-size:14px}
+.solve-layout .fact-grid{grid-template-columns:repeat(2,minmax(0,1fr))!important;gap:8px!important}
+.solve-layout .fact{padding:8px 10px!important}
+.solve-layout .fact p{font-size:14px;line-height:1.4}
+.assign-card{position:sticky!important;top:10px}
+.assign-card .transfer-list{grid-template-columns:repeat(2,minmax(0,1fr))!important;padding:10px 12px;gap:6px}
+.assign-card .transfer-item{padding:7px 9px;font-size:13.5px}
+.assign-body{padding:12px 15px}
+.selected-place{margin:6px 0 2px}
+.map-card .map-svg{max-height:calc(100vh - 190px)!important}
+.map-workspace{padding:12px 16px;align-items:start}
+.phase{overflow:clip}
+.solve-layout:has(.clue-box[hidden]){grid-template-columns:1fr}
+@media(max-width:1100px){.solve-layout .fact-grid{grid-template-columns:1fr!important}}
+@media(max-width:850px){.top-row{grid-template-columns:1fr}.solve-layout{grid-template-columns:1fr}.solve-layout .clue-box{position:static}.solve-layout .fact-grid{grid-template-columns:repeat(auto-fit,minmax(220px,1fr))!important}.assign-card{position:static!important}.map-card .map-svg{max-height:none!important}}
+@media(max-width:600px){.clue-box .choice{flex:1 1 calc(50% - 8px)}}
+@media print{.top-row{grid-template-columns:1fr 200px}.solve-layout .clue-box,.assign-card{position:static!important}}
+.map-card .card-head,.assign-card .card-head{padding:8px 13px}
+.map-card .head-icon,.assign-card .head-icon{width:26px;height:26px;font-size:15px}
+.map-card .map-svg{max-height:calc(100vh - 150px)!important}
+.assign-card .transfer-list{grid-template-columns:repeat(3,minmax(0,1fr))!important;padding:8px 10px;gap:5px}
+.assign-card .transfer-item{padding:5px 8px;font-size:13px}
+.assign-body{padding:10px 13px}
+.assign-body p{margin:0 0 4px}
+.selected-place{font-size:18px;margin:2px 0}
+.color-choices{gap:6px;margin-top:8px}
+.color-choice{min-height:40px}
+.map-workspace{scroll-margin-top:6px}
+@media(max-width:850px){.map-card .map-svg{max-height:none!important}}
 </style>
 <script src="../shared/assignments.js?v=20261105fb1"></script><script src="../shared/turnin.js?v=20261105fb1"></script></head>
 <body>
 <a class="skip-link" href="#activity">Skip to the map and questions</a>
 <header class="site-header"><div class="header-inner"><h1>DIVIDE AFRICA <span aria-hidden="true">|</span> READ, SOLVE &amp; COLOR</h1><div class="work-note"><span class="work-dot" aria-hidden="true"></span>Work on your own</div></div></header>
 <main id="activity">
+<div class="top-row">
 <section class="std-line" aria-label="Standard and goal">
 <p><b>World History · Day 1</b> · <span class="std-code">Standard SS.9-12.WH.24</span> — Describe the economic, political and cultural factors that contributed to a new wave of European imperialism in the 19th century.</p>
 <p><b>Today's goal:</b> Explain why European countries raced to take over Africa in the late 1800s — for money, for power, or for their beliefs.</p>
-<p><b>How to finish (about 20–25 minutes):</b> 1) Read the 7 fact cards. 2) Solve 10 mystery places. 3) Color the map from memory and press <b>Turn in</b> at the bottom. You are done when all 10 places are colored and it says "Turned in!"</p>
+<p><b>How to finish (about 20–25 minutes):</b> 1) Solve 10 mystery places using the fact cards. 2) Color the map from memory and press <b>Turn in</b>. You are done when all 10 places are colored and it says "Turned in!"</p>
 </section>
-<section class="intro" aria-label="Activity facts and name">
-<div class="facts">
-<div class="facts-head"><h2>STEP 1: READ — WHO CONTROLLED AFRICA BY 1914?</h2></div>
-<p>Read all seven cards. You will need them to solve the mystery places below. They disappear in Part 2.</p>
-<div class="fact-grid">
-<div class="fact"><strong><span class="swatch" style="background:var(--britain)"></span>BRITAIN</strong><p>Wanted a short sea route to its colony (a land ruled by another country) in India, so it took over <b>Egypt</b> and the Suez Canal (a shortcut for ships between Europe and Asia). It also ruled <b>Nigeria</b>, where British companies bought palm oil, and <b>South Africa</b>, where miners dug gold and diamonds.</p></div>
-<div class="fact"><strong><span class="swatch" style="background:var(--france)"></span>FRANCE</strong><p>Ruled the most land in Africa, mostly in the north and west. In <b>Algeria</b>, hundreds of thousands of European settlers moved in and took farmland from Algerians. French leaders claimed they were "civilizing" Africans — a racist idea that French ways were better.</p></div>
-<div class="fact"><strong><span class="swatch" style="background:var(--belgium)"></span>BELGIUM</strong><p>King Leopold II owned the <b>Congo</b> as his personal property. People were forced to collect rubber and were beaten or killed if they fell short. In 1908, Belgium's government took over.</p></div>
-<div class="fact"><strong><span class="swatch" style="background:var(--germany)"></span>GERMANY</strong><p>Wanted colonies to prove it was a world power. In German East Africa (today's <b>Tanzania</b>), it forced farmers to grow cotton. People fought back in the Maji Maji uprising (rebellion) of 1905.</p></div>
-<div class="fact"><strong><span class="swatch" style="background:var(--italy)"></span>ITALY</strong><p>Tried to conquer Ethiopia and lost. Then, in 1911, Italy attacked the Ottoman Empire (the Turkish empire) and took <b>Libya</b>, a desert land just across the sea from Italy.</p></div>
-<div class="fact"><strong><span class="swatch" style="background:var(--portugal)"></span>PORTUGAL</strong><p>Arrived in <b>Angola</b> in the 1500s and shipped enslaved Africans across the Atlantic. By 1914 it controlled most of Angola and forced many people to work for little or no pay.</p></div>
-<div class="fact"><strong><span class="swatch" style="background:var(--independent)"></span>INDEPENDENT</strong><p>Only two African countries stayed free. <b>Ethiopia</b>'s army beat Italy at the Battle of Adwa in 1896. <b>Liberia</b>, settled by freed Black Americans, kept its own government.</p></div>
-</div>
-</div>
 <div class="name-card"><label for="student-name">First name + last initial (like Jordan M.)</label><input id="student-name" autocomplete="off" placeholder="First name + last initial (like Jordan M.)"></div>
-</section>
+</div>
+
 <section class="workflow" aria-label="Two-part activity">
 <section class="phase" id="phase-one" aria-labelledby="phase-one-title">
 <div class="phase-banner"><div><span class="phase-kicker">PART 1 OF 2</span><h2 id="phase-one-title">SOLVE 10 MYSTERY PLACES</h2></div><span class="phase-time">About 20–25 minutes total</span></div>
-<p class="phase-directions"><b>Step 2:</b> Read each clue and match it to a fact card. Pick who controlled the place, then answer why. Wrong answers reshuffle — read again and retry. <b>Step 3:</b> Color the map from memory and turn it in.</p>
+<p class="phase-directions">Read the clue. Find the fact card that matches it (they sit right beside the clue). Pick who controlled the place, then answer why.</p>
+<div class="solve-layout">
 <div class="clue-box">
 <div class="clue-top"><span id="clue-number" class="clue-number">MYSTERY PLACE 1 OF 10</span><div class="progress-track" role="progressbar" aria-label="Clues solved" aria-valuemin="0" aria-valuemax="10" aria-valuenow="0"><span id="progress-fill"></span></div></div>
 <h3 id="clue-title">Mystery place #1</h3>
@@ -219,6 +258,20 @@ h2{font-size:20px;line-height:1.25;margin:0;color:var(--navy)}
 <p id="clue-reveal" class="clue-reveal" aria-live="polite" hidden></p>
 <div class="clue-actions"><button id="clue-next" class="primary-button" type="button" hidden>Next clue</button></div>
 </div>
+<div class="facts">
+<div class="facts-head"><h2>FACT CARDS: WHO CONTROLLED AFRICA BY 1914?</h2></div>
+<p>Use these cards to solve each clue. They disappear in Part 2.</p>
+<div class="fact-grid">
+<div class="fact"><strong><span class="swatch" style="background:var(--britain)"></span>BRITAIN</strong><p>Wanted a short sea route to its colony (a land ruled by another country) in India, so it took over <b>Egypt</b> and the Suez Canal (a shortcut for ships between Europe and Asia). It also ruled <b>Nigeria</b>, where British companies bought palm oil, and <b>South Africa</b>, where miners dug gold and diamonds.</p></div>
+<div class="fact"><strong><span class="swatch" style="background:var(--france)"></span>FRANCE</strong><p>Ruled the most land in Africa, mostly in the north and west. In <b>Algeria</b>, hundreds of thousands of European settlers moved in and took farmland from Algerians. French leaders claimed they were "civilizing" Africans — a racist idea that French ways were better.</p></div>
+<div class="fact"><strong><span class="swatch" style="background:var(--belgium)"></span>BELGIUM</strong><p>King Leopold II owned the <b>Congo</b> as his personal property. People were forced to collect rubber and were beaten or killed if they fell short. In 1908, Belgium's government took over.</p></div>
+<div class="fact"><strong><span class="swatch" style="background:var(--germany)"></span>GERMANY</strong><p>Wanted colonies to prove it was a world power. In German East Africa (today's <b>Tanzania</b>), it forced farmers to grow cotton. People fought back in the Maji Maji uprising (rebellion) of 1905.</p></div>
+<div class="fact"><strong><span class="swatch" style="background:var(--italy)"></span>ITALY</strong><p>Tried to conquer Ethiopia and lost. Then, in 1911, Italy attacked the Ottoman Empire (the Turkish empire) and took <b>Libya</b>, a desert land just across the sea from Italy.</p></div>
+<div class="fact"><strong><span class="swatch" style="background:var(--portugal)"></span>PORTUGAL</strong><p>Arrived in <b>Angola</b> in the 1500s and shipped enslaved Africans across the Atlantic. By 1914 it controlled most of Angola and forced many people to work for little or no pay.</p></div>
+<div class="fact"><strong><span class="swatch" style="background:var(--independent)"></span>INDEPENDENT</strong><p>Only two African countries stayed free. <b>Ethiopia</b>'s army beat Italy at the Battle of Adwa in 1896. <b>Liberia</b>, settled by freed Black Americans, kept its own government.</p></div>
+</div>
+</div>
+</div>
 <div id="part-one-done" class="part-done" hidden>
 <div class="done-mark" aria-hidden="true">✓</div><div><h3>All ten places solved</h3><p>Next, color the map from memory. The fact cards will be hidden.</p></div>
 <button id="open-map" class="primary-button" type="button">Go to Part 2: Color the map</button>
@@ -227,7 +280,6 @@ h2{font-size:20px;line-height:1.25;margin:0;color:var(--navy)}
 <section class="phase map-phase" id="phase-two" aria-labelledby="phase-two-title" hidden>
 <div class="phase-banner"><div><span class="phase-kicker">PART 2 OF 2</span><h2 id="phase-two-title">ASSIGN THE COLORS</h2></div><span id="map-status" class="phase-time" aria-live="polite">0 of 10 places colored</span></div>
 <p class="phase-directions">Click a numbered place (on the map or in the list), then pick the power that controlled it. A wrong pick won't color — think back and try again.</p>
-<div class="transfer-list" id="answer-transfer" aria-label="Places to color"></div>
 <div class="map-workspace">
 <section class="map-card" aria-labelledby="map-heading">
 <div class="card-head"><div class="head-title"><span class="head-icon" aria-hidden="true">⌖</span><h3 id="map-heading">AFRICA MAP</h3></div><span class="map-hint">Click a number or a shaded place</span></div>
@@ -309,6 +361,7 @@ h2{font-size:20px;line-height:1.25;margin:0;color:var(--navy)}
 </section>
 <section class="assign-card" aria-labelledby="assign-heading">
 <div class="card-head"><div class="head-title"><span class="head-icon" aria-hidden="true">▣</span><h3 id="assign-heading">COLOR ONE PLACE AT A TIME</h3></div></div>
+<div class="transfer-list" id="answer-transfer" aria-label="Places to color"></div>
 <div class="assign-body">
 <p id="assign-help">Select a numbered place to begin.</p>
 <div id="selected-place" class="selected-place" aria-live="polite">No place selected</div>
@@ -418,7 +471,7 @@ $("open-map").addEventListener("click",()=>{
  $("phase-one").hidden=true;
  document.querySelector(".facts").hidden=true;
  phaseTwo.hidden=false;
- phaseTwo.scrollIntoView({behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth",block:"start"});
+ (innerWidth>850?phaseTwo.querySelector(".map-workspace"):phaseTwo).scrollIntoView({behavior:matchMedia("(prefers-reduced-motion: reduce)").matches?"auto":"smooth",block:"start"});
  renderMap();
 });
 function renderColorButtons(){
