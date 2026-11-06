@@ -45,7 +45,7 @@ function showFinish(){clearInterval(timer);$('intro').hidden=true;$('work').hidd
 function start(){clearInterval(timer);clearSaved();misses={};groupIndex=0;questionIndex=0;completed=0;finished=false;savedPos={g:0,q:0};previousOrder='';$('bar').value=0;if($('reflection'))$('reflection').value='';$('intro').hidden=true;$('finish').hidden=true;$('work').hidden=false;showGroup()}
 function resume(s){clearInterval(timer);misses=s.misses||{};completed=s.completed;finished=!!s.finished||completed>=total;savedPos={g:s.g,q:s.q};previousOrder='';$('bar').value=completed;if($('reflection'))$('reflection').value=s.reflection||'';if(finished){showFinish();return}groupIndex=Math.min(s.g,groups.length-1);questionIndex=Math.min(s.q,groups[groupIndex].questions.length-1);$('intro').hidden=true;$('finish').hidden=true;$('work').hidden=false;showGroup()}
 $('start').onclick=start;$('restart').onclick=()=>{if(confirm('Start over? This clears your answers on this device.'))start()};
-$('next').onclick=()=>{if(!correct)return;questionIndex++;if(questionIndex<groups[groupIndex].questions.length){showQuestion(false);return}groupIndex++;questionIndex=0;if(groupIndex===groups.length){finished=true;save();showFinish();$('reflection').focus();return}showGroup()};
+$('next').onclick=()=>{if(!correct)return;questionIndex++;if(questionIndex<groups[groupIndex].questions.length){showQuestion(false);return}groupIndex++;questionIndex=0;if(groupIndex===groups.length){finished=true;save();showFinish();const fx=$('reflection')||$('turnName');if(fx)fx.focus();return}showGroup()};
 $('toggleHelp').onclick=()=>{const hide=!$('helpText').hidden;$('helpText').hidden=hide;$('toggleHelp').setAttribute('aria-expanded',String(!hide));$('toggleHelp').textContent=hide?'Reading help':'Hide reading help'};
 $('close').onclick=()=>$('zoom').close();$('zoom').addEventListener('click',e=>{if(e.target===$('zoom'))$('zoom').close()});$('print').onclick=()=>window.print();
 if($('reflection'))$('reflection').addEventListener('input',save);
@@ -55,7 +55,7 @@ if($('reflection'))$('reflection').addEventListener('input',save);
  const s=loadSaved();if(!s||!(s.completed>0||s.finished))return;
  const intro=$('intro'),startBtn=$('start');
  const note=document.createElement('p');note.className='resume-note';note.setAttribute('role','status');
- note.textContent=(s.finished||s.completed>=total)?'Welcome back — you finished all '+total+' questions. Write your final thought and turn it in.':'Welcome back — you’re on question '+(s.completed+1)+' of '+total+'.';
+ note.textContent=(s.finished||s.completed>=total)?'Welcome back — you finished all '+total+' questions. '+($('reflection')?'Write your final thought and turn it in.':'Type your name and turn it in.'):'Welcome back — you’re on question '+(s.completed+1)+' of '+total+'.';
  intro.insertBefore(note,startBtn);
  startBtn.textContent='Keep going';startBtn.onclick=()=>resume(s);
  const over=document.createElement('button');over.type='button';over.className='secondary';over.textContent='Start over';over.style.marginLeft='8px';
@@ -79,11 +79,11 @@ if($('reflection'))$('reflection').addEventListener('input',save);
   const raw=$('turnName').value.trim(),name=window.classShortName?window.classShortName(raw):raw;
   if(!/^\S+ [A-Z]\.$/.test(name)){msg.style.color='#b42318';msg.textContent='Type your first name and last initial, like Jordan M.';$('turnName').focus();return}
   const ref=($('reflection')&&$('reflection').value||'').trim();
-  if(ref.split(/\s+/).filter(Boolean).length<5){msg.style.color='#b42318';msg.textContent='Write your final thought (at least one full sentence) before turning in.';$('reflection').focus();return}
-  const junk=window.classJunkStop?window.classJunkStop($('reflection')):'';if(junk){msg.style.color='#19364b';msg.textContent=junk;return}
+  if($('reflection')&&ref.split(/\s+/).filter(Boolean).length<5){msg.style.color='#b42318';msg.textContent='Write your final thought (at least one full sentence) before turning in.';$('reflection').focus();return}
+  const junk=($('reflection')&&window.classJunkStop)?window.classJunkStop($('reflection')):'';if(junk){msg.style.color='#19364b';msg.textContent=junk;return}
   const answers={'Standard':meta.standard||'','First-try correct':'','Reading':t};let n=0,ft=0;
   groups.forEach((g,gi)=>g.questions.forEach((q,qi)=>{const m=misses[gi+'-'+qi]||0;n++;if(!m)ft++;answers['Q'+n+': '+q.question]=m?('Correct after '+m+' wrong '+(m===1?'try':'tries')):'Correct on first try'}));
-  answers['First-try correct']=ft+' of '+n;answers['Final thought']=ref;
+  answers['First-try correct']=ft+' of '+n;if($('reflection'))answers['Final thought']=ref;
   btn.disabled=true;msg.style.color='#475467';msg.textContent='Turning in...';
   try{
    if(!window.classTurnIn)throw new Error('The turn-in system did not load. Refresh the page and try again.');
@@ -105,18 +105,18 @@ if($('reflection'))$('reflection').addEventListener('input',save);
   if(small){const sm=document.createElement('small');sm.textContent=small;t.append(sm)}
   s.title=label;s.append(dot,t);li.append(s);ol.append(li);return li}
  const steps=groups.map((g,i)=>step(String(i+1),g.title,g.questions.length+(g.questions.length===1?' question':' questions')));
- const thought=step('✎','Final thought','Last sentence'),turn=step('★','Turn in','Last step');
- const many=steps.length+2>6;
- function fit(){nav.classList.toggle('compact',many||(window.innerWidth<=700&&steps.length+2>5))}
+ const hasRef=!!$('reflection'),thought=hasRef?step('✎','Final thought','Last sentence'):null,turn=step('★','Turn in','Last step'),extra=hasRef?2:1;
+ const many=steps.length+extra>6;
+ function fit(){nav.classList.toggle('compact',many||(window.innerWidth<=700&&steps.length+extra>5))}
  fit();window.addEventListener('resize',fit);
  const hand=document.querySelector('.question-card');
  function update(){
   const onWork=!$('work').hidden,onFinish=!$('finish').hidden;
   const saved=(!onWork&&!onFinish&&loadSaved())||null,count=Math.max(completed,saved?saved.completed||0:0);
   steps.forEach((li,i)=>{const here=onWork&&i===groupIndex;li.classList.toggle('done',count>=ends[i]);li.classList.toggle('current',here);if(here)li.firstChild.setAttribute('aria-current','step');else li.firstChild.removeAttribute('aria-current')});
-  const ref=$('reflection'),wrote=!!(ref&&ref.value.trim()),sent=!!($('turnBtn')&&$('turnBtn').textContent==='Turned in');
-  thought.classList.toggle('done',onFinish&&wrote);turn.classList.toggle('done',sent);
-  thought.classList.toggle('current',onFinish&&!wrote);turn.classList.toggle('current',onFinish&&wrote&&!sent);
+  const ref=$('reflection'),wrote=!ref||!!ref.value.trim(),sent=!!($('turnBtn')&&$('turnBtn').textContent==='Turned in');
+  if(thought){thought.classList.toggle('done',onFinish&&wrote);thought.classList.toggle('current',onFinish&&!wrote)}turn.classList.toggle('done',sent);
+  turn.classList.toggle('current',onFinish&&wrote&&!sent);
   if(hand)hand.classList.toggle('is-done',onWork&&correct);
  }
  /* Mark the right answer green after a correct pick. */
