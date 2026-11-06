@@ -203,3 +203,12 @@
     R[C[c][1] + "-p1u" + u + "-summative-review"] = { course: C[c][0], part: 1, unit: u, day: d, turnIn: false, std: [], title: "Day " + d + " · Summative Review (Blooket)", path: "https://dashboard.blooket.com/set/" + set };
   });
 })();
+
+// Fynn 11-06: on a day with a reading and a game, the reading always comes first (teacher dashboard + student page).
+// Both pages list same-day work in this list's order, so readings move to the front of it here.
+(function () {
+  const R = window.CLASS_ASSIGNMENTS; if (!R) return;
+  const all = Object.keys(R).map(id => [id, R[id], /\(Reading/i.test((R[id] && R[id].title) || "")]);
+  all.forEach(([id]) => { delete R[id]; });
+  all.filter(x => x[2]).concat(all.filter(x => !x[2])).forEach(([id, a]) => { R[id] = a; });
+})();
