@@ -160,7 +160,7 @@ footer a{color:var(--muted)}
 </style>
 <script>window.HUB_PAGE = true;   // student home page: feedback card pops up here, name boxes are not auto-filled</script>
 <script src="shared/assignments.js?v=20261105fb1"></script>
-<script src="shared/recaps.js?v=20261103c"></script>
+<script src="shared/recaps.js?v=20261106c"></script>
 <script src="shared/targets.js?v=20261103g"></script>
 <script src="teacher-submissions/presentations.js?v=20261103s1"></script>
 <script src="shared/turnin.js?v=20261105fb1"></script>
@@ -596,14 +596,18 @@ function homeBody(course, work) {
   // evenly (weekdays only) to the test day on the green sheet.
   const nowPlan = !nowKey.startsWith("p1|") ? unitPlan(course, +nowKey.split("|").pop()) : null;
   // On a day with no class (Friday, weekend, no-school day), "today's" lesson is really the next class.
-  const classToday = classDay(new Date(todayIso + "T12:00:00"));
-  const nextClassIso = classToday ? todayIso : stepClassDays(todayIso, 1);
+  // Civics meets Fridays (Fynn 11-06): "today" is Friday, and the rest of the week shows the coming Friday's work.
+  const civ = course === "civics", schoolFri = d => d.getDay() === 5 && schoolDay(d);
+  const nextFri = iso => { const d = new Date(iso + "T12:00:00"); while (!schoolFri(d)) d.setDate(d.getDate() + 1); return isoDay(d); };
+  const classToday = civ ? schoolFri(new Date(todayIso + "T12:00:00")) : classDay(new Date(todayIso + "T12:00:00"));
+  const nextClassIso = classToday ? todayIso : civ ? nextFri(todayIso) : stepClassDays(todayIso, 1);
   const todayDay = nowPlan ? (nextClassIso <= nowPlan.from ? Math.min(nowPlan.fromDay, nowPlan.days) : dayOnDate(nowPlan, nextClassIso)) : 0;
-  const isToday = a => unitKey(a) === nowKey && todayDay && a.day && (spanOf(a) ? a.day <= todayDay && todayDay <= spanOf(a)[1] : a.day === todayDay);
+  const isToday = a => civ ? unitKey(a) === nowKey : unitKey(a) === nowKey && todayDay && a.day && (spanOf(a) ? a.day <= todayDay && todayDay <= spanOf(a)[1] : a.day === todayDay);
   const isDue = a => {
     const k = unitKey(a), o = unitOrder(k);
     if (o < nowOrder) return true;                    // earlier units are all due
     if (o > nowOrder) return false;                   // later units are coming up
+    if (civ) return false;                            // Civics: this Friday's work is today's work, not due yet
     if (!a.day) return classDone.has(a.id);
     if (todayDay) return (spanOf(a) ? spanOf(a)[1] : a.day) < todayDay;   // everything before today's day
     return a.day <= (reached[k] || 0);                 // no day known: how far the class has gotten
