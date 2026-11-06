@@ -295,7 +295,7 @@
   let lastPower = st.power;
   const app = $("app");
   // 3-card showdown layout (kept here so index.html stays unchanged)
-  (function () { const el = document.createElement("style"); el.textContent = ".hand.three{grid-template-columns:repeat(3,minmax(0,1fr))}.hand.three .pcard{min-height:150px}.hand.three .ce{font-size:2.3rem}.hand.three .cn{font-size:1rem}.hand.three .cl{font-size:.8rem}@media(max-width:620px){.hand.three{grid-template-columns:1fr}.hand.three .pcard{min-height:0}}"; document.head.appendChild(el); })();
+  (function () { const el = document.createElement("style"); el.textContent = ".hand.three{grid-template-columns:repeat(3,minmax(0,1fr))}.hand.three .pcard{min-height:150px}.hand.three .ce{font-size:2.3rem}.hand.three .cn{font-size:1rem}.hand.three .cl{font-size:.8rem}.howto{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:6px;align-items:stretch;margin:10px 0}.how-step{display:flex;flex-direction:column;align-items:center;text-align:center;gap:2px;background:#fff;color:#17233a;border-radius:12px;padding:8px 6px;box-shadow:0 4px 12px #0005}.how-step.win{border:3px solid #1f8a55}.how-e{font-size:1.5rem;line-height:1.1}.how-step b{font-size:.88rem;line-height:1.15}.how-step small{font-size:.74rem;color:#55627a;line-height:1.2}.how-arrow{align-self:center;color:#f2b632;font-size:1.3rem;font-weight:900}@media(max-width:620px){.hand.three{grid-template-columns:1fr}.hand.three .pcard{min-height:0}.howto{grid-template-columns:1fr}.how-arrow{transform:rotate(90deg);justify-self:center;line-height:1}}"; document.head.appendChild(el); })();
 
   const roundIx = () => st.step - 2;
   const curRound = () => ROUNDS[roundIx()];
@@ -359,6 +359,13 @@
         <h1>POWER GRAB</h1>
         <p class="hook">Someone stole the Constitution. The rules still count, but only if someone uses them. Hale is betting nobody will.</p>
         ${craneSays("No rulebook? Now I make the rules.")}
+        <div class="howto" aria-label="How to play">
+          <div class="how-step"><span class="how-e" aria-hidden="true">😏</span><b>Hale grabs power</b><small>“Search every phone. No warrants.”</small></div>
+          <span class="how-arrow" aria-hidden="true">➜</span>
+          <div class="how-step"><span class="how-e" aria-hidden="true">🃏🃏🃏</span><b>You get 3 rule cards</b><small>The evidence shows which rule fits.</small></div>
+          <span class="how-arrow" aria-hidden="true">➜</span>
+          <div class="how-step win"><span class="how-e" aria-hidden="true">🛑</span><b>Play the one that stops him</b><small>Wrong card = Hale gets stronger.</small></div>
+        </div>
         <div class="what">
           <span>🃏 <b>Rule cards</b></span><span>⏱️ <b>25 min</b></span><span>⚔️ <b>7 showdowns</b></span>
         </div>
