@@ -243,7 +243,7 @@
       "Start over? This clears your work on this device.": "¿Empezar de nuevo? Esto borra tu trabajo en esta computadora.",
       "Start over? This clears your answers on this device.": "¿Empezar de nuevo? Esto borra tus respuestas en esta computadora.",
       "Progress saves on this device. Your teacher sees your work after you turn it in.": "Tu progreso se guarda en esta computadora. Tu profesor ve tu trabajo cuando lo entregas.",
-      "Heads up: pasted writing shows up for your teacher. Write your answer in your own words.": "Ojo: tu profesor puede ver cuando pegas texto. Escribe tu respuesta con tus propias palabras.",
+      "Pasting is off. Type your answer in your own words.": "No se puede pegar. Escribe tu respuesta con tus propias palabras.",
       "Open it here ↗": "Ábrela aquí ↗",
       "Your feedback is ready": "Tus comentarios están listos",
       "Read it, then keep going.": "Léelos y luego sigue adelante.",

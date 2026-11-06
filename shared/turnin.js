@@ -904,9 +904,10 @@ const TEACHER_TOOLS_URL = "https://script.google.com/macros/s/AKfycbwiVW6Cufw8Dq
     const first = wrap.querySelector("a,button"); if (first) first.focus();
   }
   window.classFeedbackPreview = items => renderFeedback(items, new Map(items.map(x => [x.token, x])), true);
-  // --- Writing check -------------------------------------------------------------------
-  // Counts what students type vs. paste into written-answer boxes, so copied or AI-written text
-  // shows up on the teacher dashboard. Students get a short heads-up the moment they paste.
+  // --- Writing check + no copy/paste ---------------------------------------------------------
+  // On student activity pages, copy, cut, paste, and drag-and-drop are turned off. Pasting into an
+  // answer box simply doesn't work (students get a plain "type it" note, never a "your teacher knows").
+  // Typed counts still go to the teacher dashboard as the writing check, plus how many paste tries were stopped.
   // Counts are kept on this device per page and box, so a refresh doesn't reset them.
   const WKEY = "writingcheck:" + location.pathname;
   let wdata;
@@ -914,24 +915,37 @@ const TEACHER_TOOLS_URL = "https://script.google.com/macros/s/AKfycbwiVW6Cufw8Dq
   const wsave = () => { try { localStorage.setItem(WKEY, JSON.stringify(wdata)); } catch (e) {} };
   const wid = t => t.id || t.name || ("box" + [...document.querySelectorAll("textarea")].indexOf(t));
   const wstat = t => (wdata[wid(t)] = wdata[wid(t)] || { typed: 0, pasted: 0, pastes: 0 });
+  const NO_COPY = !(window.HUB_PAGE || window.NO_FEEDBACK_POPUP || /teacher-submissions|setup-|update-teacher/.test(location.pathname));
+  const isBox = t => t && (t.tagName === "TEXTAREA" || (t.tagName === "INPUT" && /^(text|search|)$/i.test(t.type || "")) || t.isContentEditable);
   function pasteNotice(t) {
+    if (!t || !t.insertAdjacentElement) return;
     let n = t.nextElementSibling;
     if (!n || !n.classList || !n.classList.contains("paste-note")) {
       n = document.createElement("p");
       n.className = "paste-note"; n.setAttribute("role", "status");
-      n.style.cssText = "margin:6px 0 0;padding:8px 10px;border-radius:8px;background:#fff4d6;color:#5c4300;font:700 .9rem/1.35 system-ui,Segoe UI,Arial,sans-serif";
+      n.style.cssText = "margin:6px 0 0;padding:8px 10px;border-radius:8px;background:#eef3f7;color:#19364b;font:700 .9rem/1.35 system-ui,Segoe UI,Arial,sans-serif";
       t.insertAdjacentElement("afterend", n);
     }
-    n.textContent = "Heads up: pasted writing shows up for your teacher. Write your answer in your own words.";
+    n.textContent = "Pasting is off. Type your answer in your own words.";
+    clearTimeout(n._hide); n._hide = setTimeout(() => n.remove(), 4000);
   }
-  function onPasteLike(t, text) {
-    if (!t || t.tagName !== "TEXTAREA") return;
-    const len = String(text || "").trim().length; if (!len) return;
-    const s = wstat(t); s.pasted += len; s.pastes++; wsave();
-    if (len >= 25) pasteNotice(t);
+  function blockPaste(e) {
+    if (!NO_COPY) return;
+    const t = e.target;
+    e.preventDefault(); e.stopImmediatePropagation();
+    if (t && t.tagName === "TEXTAREA") { const s = wstat(t); s.pastes++; wsave(); }
+    if (isBox(t)) pasteNotice(t);
   }
-  document.addEventListener("paste", e => onPasteLike(e.target, e.clipboardData && e.clipboardData.getData("text")), true);
-  document.addEventListener("drop", e => onPasteLike(e.target, e.dataTransfer && e.dataTransfer.getData("text")), true);
+  if (NO_COPY) {
+    document.addEventListener("paste", blockPaste, true);
+    // Only text dropped into a writing box is stopped, so drag-and-drop games keep working.
+    document.addEventListener("drop", e => { if (isBox(e.target)) blockPaste(e); }, true);
+    document.addEventListener("beforeinput", e => { if (/^insertFrom(Paste|Drop|PasteAsQuotation)$/.test(e.inputType || "")) blockPaste(e); }, true);
+    document.addEventListener("copy", e => e.preventDefault(), true);
+    document.addEventListener("cut", e => e.preventDefault(), true);
+    // Dragging highlighted text out of the page is stopped; dragging game cards is not.
+    document.addEventListener("dragstart", e => { if (e.target && e.target.nodeType === 3) e.preventDefault(); }, true);
+  }
   document.addEventListener("input", e => {
     const t = e.target; if (!t || t.tagName !== "TEXTAREA") return;
     if (e.inputType === "insertText" && e.data) { wstat(t).typed += e.data.length; wsave(); }
@@ -946,7 +960,7 @@ const TEACHER_TOOLS_URL = "https://script.google.com/macros/s/AKfycbwiVW6Cufw8Dq
     });
     if (!boxes) return null;
     const share = written ? Math.round(pasted / written * 100) : 0;
-    const text = "Typed about " + typed + " characters, pasted about " + pasted + (pastes ? " (" + pastes + " paste" + (pastes === 1 ? "" : "s") + ")" : "") + " · final writing " + written + " characters";
+    const text = "Typed about " + typed + " characters" + (pasted ? ", pasted about " + pasted : "") + (pastes ? " · " + pastes + " paste tr" + (pastes === 1 ? "y" : "ies") + " blocked" : "") + " · final writing " + written + " characters";
     return { text, mostlyPasted: pasted >= 40 && share >= 50, detail: "About " + share + "% of the final writing was pasted in" };
   }
 
