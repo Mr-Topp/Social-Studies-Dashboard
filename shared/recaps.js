@@ -54,3 +54,16 @@ window.CLASS_RECAPS = {
   all.forEach(([id]) => { delete R[id]; });
   all.filter(x => x[2]).concat(all.filter(x => !x[2])).forEach(([id, a]) => { R[id] = a; });
 })();
+
+// Fynn 11-06: Civics (Fridays) had no "where the class is" pin, so the student page fell back to Friday 1 and hid
+// Fridays 2–7. Fri Nov 6 = Friday 2. Moves up one Friday each school Friday after that (skips no-school Fridays).
+// To re-pin: change CIVICS_PIN. Only the student home page loads this file.
+(function () {
+  const CIVICS_PIN = { unit: 2, date: "2026-11-06" };
+  const off = window.CLASS_NO_SCHOOL || [], iso = d => d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0");
+  const t = new Date(), now = new Date(t.getFullYear(), t.getMonth(), t.getDate(), 12);
+  const d = new Date(CIVICS_PIN.date + "T12:00:00"); let u = CIVICS_PIN.unit;
+  for (d.setDate(d.getDate() + 7); d <= now; d.setDate(d.getDate() + 7)) { const i = iso(d); if (!off.some(([a, z]) => i >= a && i <= z)) u++; }
+  window.CLASS_TODAY = window.CLASS_TODAY || {};
+  window.CLASS_TODAY.civics = { unit: Math.min(u, 7), date: CIVICS_PIN.date };
+})();
