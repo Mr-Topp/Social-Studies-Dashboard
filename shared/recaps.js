@@ -45,3 +45,12 @@ window.CLASS_RECAPS = {
     9: "Federalism: how power is split between the national government, Iowa, and local governments."
   } }
 };
+
+// Fynn 11-06: on a day with a reading and a game, the reading always comes first (teacher dashboard + student page).
+// Both pages list same-day work in this list's order, so readings move to the front of it here.
+(function () {
+  const R = window.CLASS_ASSIGNMENTS; if (!R) return;
+  const all = Object.keys(R).map(id => [id, R[id], /\(Reading/i.test((R[id] && R[id].title) || "")]);
+  all.forEach(([id]) => { delete R[id]; });
+  all.filter(x => x[2]).concat(all.filter(x => !x[2])).forEach(([id, a]) => { R[id] = a; });
+})();
