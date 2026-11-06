@@ -160,7 +160,7 @@ footer a{color:var(--muted)}
 </style>
 <script>window.HUB_PAGE = true;   // student home page: feedback card pops up here, name boxes are not auto-filled</script>
 <script src="shared/assignments.js?v=20261105fb1"></script>
-<script src="shared/recaps.js?v=20261106c"></script>
+<script src="shared/recaps.js?v=20261106d"></script>
 <script src="shared/targets.js?v=20261103g"></script>
 <script src="teacher-submissions/presentations.js?v=20261103s1"></script>
 <script src="shared/turnin.js?v=20261105fb1"></script>
@@ -643,7 +643,7 @@ function homeBody(course, work) {
   const missing = sortItems(due.filter(a => !mine[a.id]).concat(online.filter(a => markedM.has(a.id) && !mine[a.id] && !isDue(a) && !exempt.has(a.id))));
   const turnedIn = online.filter(a => mine[a.id]);
   const ahead = sortItems(online.filter(a => !isDue(a) && !mine[a.id] && unitOrder(unitKey(a)) === nowOrder));
-  const todays = ahead.filter(isToday);
+  const todays = ahead.filter(a => isToday(a) && !(civ && a.hideLink));   // Civics slides go in the slides button, not the work list (Fynn 11-06)
   // Paper work happening today (Fynn, 11-05): tell students and link the handout, so they know and can open it.
   const isHandout = a => !isOnline(a) && /\(printed\)/i.test(a.title || "") && !a.alt && /^https?:/.test(a.path || "");
   const todaysPaper = sortItems(items.filter(a => isHandout(a) && unitKey(a) === nowKey && isToday(a)));
@@ -673,8 +673,9 @@ function homeBody(course, work) {
   const todayRow = todays.length || todaysPaper.length ? `<div class="qlabel">${classToday ? "Today's work" : "Next class · " + esc(longDate(nextClassIso))}</div>${todays.map(a => quick(a, "Start")).join("")}${todaysPaper.map(a => paperQuick(a, "today")).join("")}` : "";
   // Learning goals in Fynn's own kid-friendly words, from his scale docs (shared/targets.js): the day's "I can"
   // targets plus what a 3 (Proficient) looks like. Shown for today and for each day a student missed.
-  const TARGETS = (window.CLASS_TARGETS || {})[course] || {};
-  const goalOf = (unit, day) => TARGETS[unit + "|" + day] || null;
+  const TARGETS = (window.CLASS_TARGETS || {})[course] || (civ && window.CIVICS_TARGETS) || {};
+  // Civics goals are one set per Friday (keyed by Friday number), from Fynn's SF 369 Civics Test Scale.
+  const goalOf = (unit, day) => (civ ? TARGETS[String(unit)] : TARGETS[unit + "|" + day]) || null;
   const goalList = g => g && g.t && g.t.length ? `<ul class="goallist">${g.t.map(x => `<li>${esc(x)}</li>`).join("")}</ul>` : "";
   const goal3 = g => g && g.g3 ? `<p class="goal3"><span class="lv3">To get a 3</span> ${esc(g.g3)}</p>` : "";
   // Slides for a lesson day (teacher-submissions/presentations.js). Students get Google's "Publish to web" view:
@@ -695,12 +696,12 @@ function homeBody(course, work) {
     const d = deckDay(day);
     return d ? [{ url: pub(d.slide), label: "Slides" }] : [];
   };
-  const tg = todayDay ? goalOf(nowKey, todayDay) : null;
-  const todaySlides = todayDay ? slidesFor(nowKey, todayDay) : [];
+  const tg = civ ? goalOf(nowKey, 0) : todayDay ? goalOf(nowKey, todayDay) : null;
+  const todaySlides = civ ? slidesFor(nowKey, 0) : todayDay ? slidesFor(nowKey, todayDay) : [];
   const slideBtns = !todaySlides.length ? "" : `<div class="slidebtns">${todaySlides.map(s => `<a class="btn sbtn" href="${esc(s.url)}" target="_blank" rel="noopener">📽 ${classToday ? "Today's" : "Next class"} ${esc(s.label.toLowerCase())} ↗</a>`).join("")}</div>`;
   const goalCard = !tg ? (slideBtns ? `<section class="goalcard" aria-label="Today's slides"><h2>📽 ${classToday ? "Today's slides" : "Next class slides"}</h2>${slideBtns}</section>` : "") : tg.test
     ? `<section class="goalcard" aria-label="Today's goal"><h2>🎯 ${classToday ? "Test today" : "Test next class (" + esc(niceDate(nextClassIso)) + ")"}: show what you know</h2>${tg.t && tg.t.length ? `<p class="gfirst"><b>First, a short lesson:</b></p>${goalList(tg)}` : ""}${goal3(tg)}${slideBtns}</section>`
-    : `<section class="goalcard" aria-label="Today's goal"><h2>🎯 ${classToday ? "Today's goal" : "Next class goal"} <span class="gday">Day ${todayDay}${classToday ? "" : " · " + esc(niceDate(nextClassIso))}</span></h2>${goalList(tg)}${goal3(tg)}${slideBtns}</section>`;
+    : `<section class="goalcard" aria-label="Today's goal"><h2>🎯 ${classToday ? "Today's goal" : "Next class goal"} <span class="gday">${civ ? esc(unitLabel(course, nowKey).replace(/ · .*/, "")) : "Day " + todayDay}${classToday ? "" : " · " + esc(niceDate(nextClassIso))}</span></h2>${goalList(tg)}${goal3(tg)}${slideBtns}</section>`;
   // Missed days: every day with missing online work, plus the days in between (a kid gone Day 3 and Day 5 missed Day 4 too).
   // Each day shows what happened in class, its online work (Start), and its paper work ("Get this from your teacher").
   const dayKey = a => unitKey(a) + "#" + ((spanOf(a) || [a.day])[0] || 0);
@@ -722,7 +723,7 @@ function homeBody(course, work) {
     return `<div class="qrow"><div><span class="qtitle">${esc(cleanTitle(a.title))}</span><span class="qkind">Done in class · you can open it here</span></div><a class="btn qgo soft" href="${href(a)}"${ext(a)}>Open ↗</a></div>`;
   };
   const dayGroups = [...missedDays.values()].sort((x, y) => unitOrder(x.unit) - unitOrder(y.unit) || x.day - y.day).map(g => {
-    const list = sortItems(items.filter(a => unitKey(a) === g.unit && ((spanOf(a) || [a.day])[0] || 0) === g.day && (!isCleared(a) || missing.includes(a))));
+    const list = sortItems(items.filter(a => unitKey(a) === g.unit && ((spanOf(a) || [a.day])[0] || 0) === g.day && (!isCleared(a) || missing.includes(a)) && !(civ && a.hideLink)));
     const head = (g.unit === nowKey ? "" : unitLabel(course, g.unit).replace(/ · .*/, "") + " · ") + (g.day ? dayWithDate(g.ex) : "Other");
     const recap = recapOf(g.ex);
     const dg = goalOf(g.unit, g.day), dgoal = dg && dg.t && dg.t.length ? `<div class="dgoal"><b>🎯 Goal:</b>${goalList(dg)}</div>` : "";
