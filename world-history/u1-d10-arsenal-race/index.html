@@ -1,191 +1,261 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Arsenal Race: What Wins a War? | U.S. History Unit 2 Day 6</title>
-<meta name="description" content="WWII campaign: command the Allies through 4 missions (Midway, Stalingrad, the Atlantic, D-Day) and figure out what wins a war: tech, factories, or people.">
+<meta name="description" content="A WWII action campaign: 4 real battles, 4 different people. Crack codes at Midway, build tanks at Stalingrad, hunt U-boats in the Atlantic, and storm Omaha Beach on D-Day.">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@500;700&family=Special+Elite&display=swap" rel="stylesheet">
 <style>
-:root{--bg:#0c0d0c;--panel:#17191799;--solid:#191b19;--line:#3d4238;--bone:#ece4cf;--muted:#b3ab97;--brass:#d9ad4f;--olive:#8a9a4b;--rust:#d0583f;--green:#86c98d;--amber:#e9b949;
-  --tech:#7fb6e0;--fact:#e0a35a;--ppl:#9ccf7a}
+:root{--bg:#0a0b0a;--line:#3a3f36;--bone:#ece4cf;--muted:#b3ab97;--brass:#d9ad4f;--olive:#8a9a4b;--rust:#d0583f;--green:#86c98d;--amber:#e9b949;--radar:#62f08a;--tech:#7fb6e0;--fact:#e0a35a;--ppl:#9ccf7a}
 *{box-sizing:border-box}
 html,body{overflow-x:clip}
 body{margin:0;background:var(--bg);color:var(--bone);font:18px/1.45 system-ui,Segoe UI,Arial,sans-serif}
-body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:60;opacity:.07;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
-.ttl{font-family:Oswald,Impact,"Arial Narrow",sans-serif;font-weight:700;text-transform:uppercase;letter-spacing:.04em}
-.tw{font-family:"Special Elite","Courier New",monospace}
+body::after{content:"";position:fixed;inset:0;pointer-events:none;z-index:60;opacity:.06;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+button{font:inherit;cursor:pointer}
+button:focus-visible,input:focus-visible{outline:3px solid var(--amber);outline-offset:2px}
 
-/* ---------- top bar / HUD ---------- */
-.top{position:sticky;top:0;z-index:20;background:#070807f2;border-bottom:2px solid #2b2f28;display:flex;flex-wrap:wrap;align-items:center;gap:6px 16px;padding:6px max(12px,calc((100vw - 1180px)/2))}
+/* HUD */
+.top{position:sticky;top:0;z-index:20;background:#060706f2;border-bottom:2px solid #262a23;display:flex;flex-wrap:wrap;align-items:center;gap:6px 16px;padding:6px max(12px,calc((100vw - 1100px)/2))}
 .logo{font:700 1.05rem Oswald,Impact,sans-serif;letter-spacing:.08em;color:var(--brass);white-space:nowrap}
 .logo small{display:block;font:600 .62rem system-ui,sans-serif;letter-spacing:.12em;color:var(--muted)}
-.hudgrp{display:flex;align-items:center;gap:7px;font-weight:800;font-size:.8rem;white-space:nowrap}
+.hud{display:flex;align-items:center;gap:7px;font-weight:800;font-size:.8rem;white-space:nowrap}
 .rank{font:700 .95rem Oswald,Impact,sans-serif;letter-spacing:.06em;color:var(--brass)}
-.bar{width:90px;height:8px;background:#2a2d27;border-radius:9px;overflow:hidden}.bar span{display:block;height:100%;width:0;transition:width .5s}
-.xp span{background:var(--brass)}.ax span{background:var(--rust)}
+.bar{width:90px;height:8px;background:#2a2d27;border-radius:9px;overflow:hidden}.bar span{display:block;height:100%;width:0;background:var(--brass);transition:width .5s}
 .mut{color:var(--muted);font-weight:700}
-.ars{display:flex;gap:6px}
-.m{border:1px solid var(--line);border-radius:7px;padding:2px 8px;background:#151714;transition:background .4s}
-.m b{font-size:.95rem}.m.t b{color:var(--tech)}.m.f b{color:var(--fact)}.m.p b{color:var(--ppl)}
-.m.flash{background:#4a3e16}
-.axl{color:var(--rust);letter-spacing:.06em}
-.pips{display:flex;gap:4px}.pip{font:700 .7rem Oswald,sans-serif;letter-spacing:.05em;border:1px solid var(--line);border-radius:5px;padding:1px 6px;color:var(--muted)}
-.pip.win{color:#0c0d0c;background:var(--green);border-color:var(--green)}.pip.mid{color:#0c0d0c;background:var(--amber);border-color:var(--amber)}.pip.loss{color:#fff;background:var(--rust);border-color:var(--rust)}
-.pip.now{border-color:var(--brass);color:var(--brass)}
-@media(max-width:760px){.bar{width:60px}.top{gap:4px 10px}.m .w{display:none}.axl:first-child{font-size:.7rem}}
+.pips{display:flex;gap:4px;margin-left:auto}.pip{font:700 .72rem Oswald,sans-serif;letter-spacing:.05em;border:1px solid var(--line);border-radius:5px;padding:1px 7px;color:var(--muted)}
+.pip.win{color:#0c0d0c;background:var(--green);border-color:var(--green)}.pip.mid{color:#0c0d0c;background:var(--amber);border-color:var(--amber)}.pip.loss{color:#fff;background:var(--rust);border-color:var(--rust)}.pip.now{border-color:var(--brass);color:var(--brass)}
+.snd{background:#1b1e1a;border:1px solid var(--line);color:var(--bone);border-radius:8px;padding:3px 9px;font-weight:800;font-size:.8rem}
+@media(max-width:760px){.bar{width:56px}.top{gap:4px 10px}.pips{margin-left:0}}
 
-/* ---------- stage ---------- */
-.welcome{max-width:1180px;margin:8px auto 0;padding:6px 14px;background:#1d3322;color:var(--green);font-weight:800;border-radius:8px;font-size:.9rem}
+/* stage */
+.welcome{max-width:1100px;margin:8px auto 0;padding:6px 14px;background:#1d3322;color:var(--green);font-weight:800;border-radius:8px;font-size:.9rem}
 .welcome[hidden]{display:none}
-.welcome button{background:#0c0d0c;color:var(--bone);border:1px solid var(--line);border-radius:7px;margin-left:8px;padding:3px 10px;font:inherit;cursor:pointer}
-#app{max-width:1180px;margin:0 auto;padding:12px 14px 20px}
-.stage{position:relative;border-radius:14px;overflow:hidden;border:1px solid #2b2f28;background:#121311;animation:fade .35s ease-out}
+.welcome button{background:#0c0d0c;color:var(--bone);border:1px solid var(--line);border-radius:7px;margin-left:8px;padding:3px 10px}
+#app{max-width:1100px;margin:0 auto;padding:12px 14px 20px}
+.stage{position:relative;border-radius:14px;overflow:hidden;border:1px solid #23261f;background:#111311;animation:fade .35s ease-out}
 @keyframes fade{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
-.bgart{position:absolute;inset:0;background-size:cover;background-position:center;filter:grayscale(.55) sepia(.35) contrast(1.1) brightness(.42)}
-.vign{position:absolute;inset:0;background:radial-gradient(ellipse at center,transparent 35%,#000c 100%)}
-.lbox{min-height:min(540px,calc(100vh - 120px))}
+.bgart{position:absolute;inset:0;background-size:cover;background-position:center;filter:grayscale(.55) sepia(.35) contrast(1.1) brightness(.4)}
+.vign{position:absolute;inset:0;background:radial-gradient(ellipse at center,transparent 30%,#000d 100%)}
+.lbox{min-height:min(560px,calc(100vh - 110px))}
 .lbox::before,.lbox::after{content:"";position:absolute;left:0;right:0;height:22px;background:#000;z-index:2}.lbox::before{top:0}.lbox::after{bottom:0}
-.inner{position:relative;z-index:3;padding:22px 26px}
-.split{display:grid;grid-template-columns:1.05fr 1fr;gap:18px;align-items:start}
-@media(max-width:820px){.split{grid-template-columns:1fr}.inner{padding:16px}}
+.inner{position:relative;z-index:3;padding:20px 24px}
+@media(max-width:700px){.inner{padding:14px}}
 .kick{font:400 .95rem "Special Elite",monospace;color:var(--brass);letter-spacing:.04em;margin:0 0 2px}
 h2{margin:0 0 8px;font:700 clamp(1.6rem,3.2vw,2.3rem)/1.05 Oswald,Impact,sans-serif;text-transform:uppercase;letter-spacing:.03em}
-.lead{font-size:1.12rem;font-weight:650;margin:0 0 10px}
+.lead{font-size:1.1rem;font-weight:650;margin:0 0 10px}
+.split{display:grid;grid-template-columns:1.1fr 1fr;gap:18px;align-items:start}
+@media(max-width:820px){.split{grid-template-columns:1fr}}
 .panel{background:#0e100ee6;border:1px solid var(--line);border-radius:12px;padding:14px 16px}
 .panel h3{margin:0 0 10px;font-size:1.12rem;line-height:1.35}
-.panel h3 b{color:var(--brass)}
-figure{margin:0 0 10px}figure img{display:block;width:100%;max-height:200px;object-fit:cover;border-radius:9px;border:1px solid var(--line);filter:grayscale(.35) sepia(.2) contrast(1.05)}
+figure{margin:0 0 10px}figure img{display:block;width:100%;max-height:230px;object-fit:cover;border-radius:9px;border:1px solid var(--line);filter:grayscale(.3) sepia(.2) contrast(1.05)}
 figcaption{font-size:.7rem;color:var(--muted);margin-top:3px;line-height:1.3}
-.intel{background:#0e100ee6;border:1px solid var(--line);border-left:5px solid var(--brass);border-radius:10px;padding:12px 14px}
+.intel{background:#0e100ee6;border:1px solid var(--line);border-left:5px solid var(--brass);border-radius:10px;padding:12px 14px;margin-bottom:10px}
 .intel .who{font:400 .9rem "Special Elite",monospace;color:var(--brass);margin-bottom:6px;text-transform:uppercase}
 .intel p{margin:4px 0}.intel b{color:var(--brass)}
-.radio{font-family:"Special Elite","Courier New",monospace;background:#050805;color:#cdeec4;border:1px solid #2b4a2e;border-radius:8px;padding:10px 12px;margin:8px 0;font-size:1rem;line-height:1.6}
+.radio{font-family:"Special Elite","Courier New",monospace;background:#050805;color:#cdeec4;border:1px solid #2b4a2e;border-radius:8px;padding:10px 12px;margin:8px 0;font-size:1rem;line-height:1.6;white-space:pre-line}
 .radio span{color:#9cf0a2}
-.big{display:flex;gap:12px;align-items:center;margin:8px 0}.big .n{flex:none;min-width:84px;text-align:center;font:700 2.1rem/1 Oswald,Impact,sans-serif;color:var(--brass)}
-.duo{display:grid;grid-template-columns:1fr 1fr;gap:10px}.duo>div{background:#1b1e1a;border:1px solid var(--line);border-radius:10px;padding:10px}
-.duo b{display:block;color:var(--bone)!important}.duo .where{font-size:.85rem;color:var(--muted)}
-.duo i{display:block;margin-top:8px;font:400 1.06rem/1.35 "Special Elite",monospace;color:#f3dfae}
-@media(max-width:560px){.duo{grid-template-columns:1fr}}
+.paper{background:#ece3cc;color:#1d1b16;border-radius:6px;padding:12px 16px;font:400 1.02rem/1.55 "Special Elite","Courier New",monospace;box-shadow:0 6px 24px #000a;transform:rotate(-.6deg)}
+.paper .src{display:block;font:700 .72rem system-ui,sans-serif;letter-spacing:.06em;color:#6b4a1f;margin-top:8px;text-transform:uppercase}
+.big{display:flex;gap:12px;align-items:center;margin:8px 0}.big .n{flex:none;min-width:84px;text-align:center;font:700 2.1rem/1 Oswald,Impact,sans-serif;color:var(--brass)}.big p{margin:0}
 
-/* choices + buttons */
-button{font:inherit;cursor:pointer}
+/* buttons */
 .choices{display:grid;gap:9px}
 .choice{text-align:left;background:#121411f2;color:var(--bone);border:2px solid #4b5144;border-radius:10px;padding:11px 13px;font-weight:700;line-height:1.3;min-height:52px;transition:border-color .15s,transform .1s,background .15s}
 .choice:hover:not(:disabled){border-color:var(--brass);background:#1d2019;transform:translateY(-1px)}
 .choice:disabled{opacity:.4;cursor:not-allowed}
-.tags{display:flex;gap:5px;flex-wrap:wrap;margin-top:6px}
-.tag{font:700 .72rem system-ui,sans-serif;letter-spacing:.04em;border-radius:6px;padding:1px 7px;border:1px solid}
-.tag.T{color:var(--tech);border-color:#3f6a8a}.tag.F{color:var(--fact);border-color:#8a6232}.tag.P{color:var(--ppl);border-color:#55803f}
-.tag.cost{opacity:.95;border-style:dashed}
-.go{display:inline-block;margin-top:12px;background:var(--brass);color:#141410;border:0;border-radius:9px;padding:11px 24px;font:700 1.15rem Oswald,Impact,sans-serif;letter-spacing:.08em;text-transform:uppercase;min-height:48px}
-.go:hover{background:#ecc56b}
-button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid var(--amber);outline-offset:2px}
+.choice small{display:block;font-weight:600;color:var(--muted);margin-top:3px}
+.go{display:inline-block;margin-top:12px;background:var(--brass);color:#141410;border:0;border-radius:9px;padding:11px 26px;font:700 1.15rem Oswald,Impact,sans-serif;letter-spacing:.08em;text-transform:uppercase;min-height:48px}
+.go:hover{background:#ecc56b}.go:disabled{opacity:.45;cursor:not-allowed}
 .msg{min-height:1.3em;font-weight:750;margin:8px 0 0}.msg.bad{color:var(--amber)}.msg.good{color:var(--green)}
 .okline{color:var(--green);font-weight:800;margin:4px 0}.why{color:var(--muted);margin:2px 0}
 .sent{border:2px solid var(--brass);border-radius:10px;padding:10px 12px;background:#1d1a10}
-.sent .lbl{font:700 .8rem Oswald,sans-serif;letter-spacing:.12em;color:var(--brass)}
-.sent p{margin:4px 0}
+.sent .lbl{font:700 .8rem Oswald,sans-serif;letter-spacing:.12em;color:var(--brass)}.sent p{margin:4px 0}
+.ck{font:700 .78rem Oswald,sans-serif;letter-spacing:.14em;color:var(--olive);margin:0 0 4px}
 
-/* intro */
-.hero h1{margin:4px 0 0;font:700 clamp(2.6rem,7vw,4.6rem)/.95 Oswald,Impact,sans-serif;text-transform:uppercase;letter-spacing:.03em;color:var(--bone);text-shadow:0 3px 18px #000}
-.hero .gloss{font-size:.95rem;color:var(--muted);margin:2px 0 12px}
-.hero .hook{font-size:1.3rem;font-weight:750;max-width:640px;margin:0 0 12px;text-shadow:0 2px 10px #000}
+/* title */
+.hero h1{margin:4px 0 0;font:700 clamp(2.8rem,8vw,5.2rem)/.92 Oswald,Impact,sans-serif;text-transform:uppercase;letter-spacing:.03em;text-shadow:0 3px 18px #000}
+.hero .hook{font-size:1.3rem;font-weight:750;max-width:640px;margin:10px 0 12px;text-shadow:0 2px 10px #000}
 .chips{display:flex;gap:6px;flex-wrap:wrap;margin:0 0 14px}.chips span{background:#0e100ee6;border:1px solid var(--line);border-radius:8px;padding:3px 10px;font-weight:800;font-size:.88rem}
-.namebox{max-width:460px}
-.namebox label{display:block;font-weight:800;margin:0 0 4px}
-textarea{height:86px;resize:vertical}
-input,textarea{width:100%;font:inherit;border:2px solid #4b5144;border-radius:9px;padding:10px;background:#0b0c0b;color:var(--bone)}
-input::placeholder,textarea::placeholder{color:#7f7a6c}
-.std{font-size:.78rem;color:var(--muted);margin-top:14px}.std summary{cursor:pointer}
-.credit{position:absolute;right:12px;bottom:28px;z-index:4;font-size:.66rem;color:#a29a86;max-width:300px;text-align:right}
+.roles{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;max-width:760px;margin:0 0 14px}
+.roles div{background:#0e100ee6;border:1px solid var(--line);border-radius:10px;padding:8px 10px;font-size:.85rem;font-weight:700;line-height:1.25}
+.roles b{display:block;font:700 1rem Oswald,sans-serif;letter-spacing:.06em;color:var(--brass)}
+@media(max-width:700px){.roles{grid-template-columns:1fr 1fr}}
+.namebox{max-width:440px}.namebox label{display:block;font-weight:800;margin:0 0 4px}
+input{width:100%;font:inherit;border:2px solid #4b5144;border-radius:9px;padding:10px;background:#0b0c0b;color:var(--bone)}
+input::placeholder{color:#7f7a6c}
+.std{font-size:.78rem;color:var(--muted);margin-top:12px}.std summary{cursor:pointer}
+.credit{position:absolute;right:12px;bottom:26px;z-index:4;font-size:.64rem;color:#a29a86;max-width:320px;text-align:right}
 
-/* how to win */
-.three{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin:12px 0}
-.three>div{background:#0e100ee6;border:2px solid var(--line);border-radius:12px;padding:14px;text-align:center}
-.three .ic{font-size:2.4rem;line-height:1}.three .nm{font:700 1.4rem Oswald,sans-serif;letter-spacing:.06em;margin:4px 0}
-.three .t{border-color:#3f6a8a}.three .t .nm{color:var(--tech)}.three .f{border-color:#8a6232}.three .f .nm{color:var(--fact)}.three .p{border-color:#55803f}.three .p .nm{color:var(--ppl)}
-.three p{margin:0;font-weight:650}
-@media(max-width:640px){.three{grid-template-columns:1fr}}
-
-/* mission title card */
+/* mission card (loading screen) */
 .mcard{display:flex;flex-direction:column;justify-content:flex-end}
-.mcard .inner{padding:40px 30px 44px}
+.mcard .inner{padding:40px 30px 46px}
 .mnum{font:700 1rem Oswald,sans-serif;letter-spacing:.3em;color:var(--brass)}
-.mname{font:700 clamp(3rem,9vw,5.6rem)/.9 Oswald,Impact,sans-serif;text-transform:uppercase;margin:4px 0 6px;text-shadow:0 4px 24px #000}
-.mdate{font:400 1.2rem "Special Elite",monospace;color:var(--bone);min-height:1.5em}
-.mobj{display:inline-block;margin-top:12px;background:#0e100ee6;border-left:5px solid var(--rust);border-radius:6px;padding:8px 14px;font-weight:750;max-width:720px}
-.mobj b{color:var(--rust);letter-spacing:.08em}
-.marker{position:absolute;z-index:3;transform:translate(-50%,-50%)}
-.marker i{display:block;width:18px;height:18px;border-radius:50%;background:var(--rust);box-shadow:0 0 0 0 #d0583faa;animation:ping 1.6s infinite}
-.marker span{position:absolute;left:24px;top:-4px;white-space:nowrap;font:700 .85rem Oswald,sans-serif;letter-spacing:.08em;background:#000b;padding:1px 7px;border-radius:5px}
-.marker.left span{left:auto;right:24px}
-@keyframes ping{0%{box-shadow:0 0 0 0 #d0583faa}80%{box-shadow:0 0 0 22px #d0583f00}100%{box-shadow:0 0 0 0 #d0583f00}}
+.mname{font:700 clamp(3rem,9vw,5.6rem)/.9 Oswald,Impact,sans-serif;text-transform:uppercase;margin:4px 0 10px;text-shadow:0 4px 24px #000}
+.tline{font:400 1.15rem/1.6 "Special Elite",monospace;min-height:1.6em;margin:0}
+.tline.you{color:var(--brass)}
+.mobj{display:inline-block;margin-top:12px;background:#0e100ee6;border-left:5px solid var(--rust);border-radius:6px;padding:8px 14px;font-weight:750;max-width:720px;opacity:0;transition:opacity .5s}
+.mobj.on{opacity:1}.mobj b{color:var(--rust);letter-spacing:.08em}
+
+/* games: shared */
+.gtop{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center;margin:0 0 6px}.gtop h2{margin:0;font-size:clamp(1.4rem,2.6vw,1.9rem)}.gstage .inner{padding:12px 18px}
+.obj{background:#0e100ee6;border-left:5px solid var(--rust);border-radius:6px;padding:6px 12px;font-weight:750}
+.obj b{color:var(--rust);letter-spacing:.06em}
+.stat{font:700 1rem Oswald,sans-serif;letter-spacing:.06em;background:#0e100e;border:1px solid var(--line);border-radius:8px;padding:3px 10px}
+.stat b{color:var(--brass);font-size:1.2rem}
+.arena{position:relative;width:100%;border-radius:12px;overflow:hidden;border:2px solid #2b2f28;user-select:none;-webkit-user-select:none;touch-action:manipulation}
+.callout{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:9;font:700 clamp(1.6rem,5vw,2.8rem) Oswald,Impact,sans-serif;letter-spacing:.06em;text-transform:uppercase;text-shadow:0 3px 14px #000;pointer-events:none;opacity:0;white-space:nowrap}
+.callout.show{animation:pop 1.2s ease-out}
+@keyframes pop{0%{opacity:0;transform:translate(-50%,-50%) scale(1.6)}15%{opacity:1;transform:translate(-50%,-50%) scale(1)}75%{opacity:1}100%{opacity:0}}
+.ctrl{display:flex;gap:10px;align-items:center;flex-wrap:wrap;margin-top:8px}
+.act{background:var(--rust);color:#fff;border:0;border-radius:10px;padding:12px 30px;font:700 1.3rem Oswald,Impact,sans-serif;letter-spacing:.1em;min-height:56px;box-shadow:0 4px 0 #7a2b1c}
+.act:active{transform:translateY(3px);box-shadow:0 1px 0 #7a2b1c}.act:disabled{opacity:.45;cursor:not-allowed}
+.key{font:700 .8rem system-ui;color:var(--muted)}
+.skipT{background:#2c2350;color:#e4dcff;border:1px dashed #8a7be0;border-radius:8px;padding:6px 12px;font-weight:800;font-size:.85rem}
+.howbox{display:flex;gap:8px;flex-wrap:wrap;margin:0 0 8px}
+.howbox span{background:#1b1e1a;border:1px solid var(--line);border-radius:8px;padding:3px 10px;font-weight:750;font-size:.88rem}
+.timer{height:8px;background:#2a2d27;border-radius:9px;overflow:hidden;flex:1;min-width:120px}.timer span{display:block;height:100%;background:var(--amber);width:100%}
+
+/* dive bomb */
+.dive{height:300px;background:#0b3a52;background-image:repeating-linear-gradient(170deg,#ffffff08 0 2px,transparent 2px 26px),radial-gradient(ellipse at 50% 120%,#0f5574,#08283a)}
+.dive .waves{position:absolute;inset:-40px;background-image:repeating-linear-gradient(175deg,#ffffff0d 0 3px,transparent 3px 40px);animation:wv 3s linear infinite}
+@keyframes wv{to{transform:translateY(40px)}}
+.carrier{position:absolute;top:50%;left:0;width:200px;height:60px;margin-top:-30px;transform-origin:center;will-change:transform}
+.carrier svg{width:100%;height:100%;display:block;filter:drop-shadow(0 6px 6px #0008)}
+.carrier.burn svg{filter:drop-shadow(0 0 18px #ff7a1a) drop-shadow(0 6px 6px #0008)}
+.reticle{position:absolute;left:50%;top:50%;width:70px;height:70px;margin:-35px 0 0 -35px;border:3px solid #ffe08acc;border-radius:50%;z-index:5;pointer-events:none}
+.reticle::before,.reticle::after{content:"";position:absolute;background:#ffe08acc}.reticle::before{left:50%;top:-14px;bottom:-14px;width:2px;margin-left:-1px}.reticle::after{top:50%;left:-14px;right:-14px;height:2px;margin-top:-1px}
+.alt{position:absolute;right:12px;top:12px;z-index:6;font:700 1.1rem "Special Elite",monospace;color:#ffe08a;background:#0009;padding:4px 10px;border-radius:6px}
+.alt.low{color:#ff8a6a}
+.tgt{position:absolute;left:12px;top:12px;z-index:6;font:700 1rem Oswald,sans-serif;letter-spacing:.1em;background:#0009;padding:4px 10px;border-radius:6px}
+.bomb{position:absolute;left:50%;top:50%;width:14px;height:14px;margin:-7px;border-radius:50%;background:#222;border:2px solid #ffe08a;z-index:4;animation:drop .5s ease-in forwards}
+@keyframes drop{to{transform:scale(.25);opacity:.6}}
+.boom{position:absolute;z-index:7;width:120px;height:120px;margin:-60px;border-radius:50%;background:radial-gradient(circle,#fff6c8,#ff9b2f 40%,#d0583f00 70%);animation:boom .8s ease-out forwards;pointer-events:none}
+@keyframes boom{from{transform:scale(.2);opacity:1}to{transform:scale(1.6);opacity:0}}
+.splash{position:absolute;z-index:7;width:60px;height:60px;margin:-30px;border-radius:50%;border:4px solid #d7f3ff;animation:spl .7s ease-out forwards;pointer-events:none}
+@keyframes spl{from{transform:scale(.2);opacity:1}to{transform:scale(1.8);opacity:0}}
+.flash{position:absolute;inset:0;background:#fff;z-index:8;opacity:0;pointer-events:none}.flash.on{animation:fl .35s}
+@keyframes fl{0%{opacity:.7}100%{opacity:0}}
+
+/* assembly */
+.factory{display:grid;grid-template-columns:1fr 1.3fr;gap:12px;background:#1a1712;background-image:repeating-linear-gradient(90deg,#ffffff06 0 1px,transparent 1px 60px);padding:14px;min-height:270px}
+@media(max-width:760px){.factory{grid-template-columns:1fr}}
+.score{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.score div{background:#0e0d0a;border:1px solid #3d3628;border-radius:10px;padding:8px;text-align:center}
+.score b{display:block;font:700 2.4rem/1 Oswald,Impact,sans-serif}
+.score .us b{color:var(--green)}.score .them b{color:var(--rust)}
+.score small{font-weight:800;font-size:.75rem;letter-spacing:.06em;color:var(--muted)}
+.front{margin-top:10px;font-weight:750;font-size:.95rem}
+.bp{background:#13202c;border:2px solid #34506a;border-radius:10px;padding:10px;text-align:center}
+.bp .slots{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:8px 0}
+.bp .slot{border:2px dashed #4f6d88;border-radius:8px;padding:6px 2px;font:700 .8rem Oswald,sans-serif;letter-spacing:.06em;color:#7e9ab3;min-height:52px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:2px}
+.bp .slot.ok{border-style:solid;border-color:var(--green);color:var(--green);background:#16301f}
+.bp .slot.next{border-color:var(--amber);color:var(--amber);animation:blink 1s infinite}
+@keyframes blink{50%{background:#3a3010}}
+.bp .need{font:700 1.3rem Oswald,sans-serif;letter-spacing:.06em}.bp .need b{color:var(--amber)}
+.parts{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:10px}
+.part{background:#2b2620;color:var(--bone);border:2px solid #5a4f3d;border-radius:10px;padding:10px 4px;font:700 1rem Oswald,sans-serif;letter-spacing:.06em;min-height:70px;display:flex;flex-direction:column;align-items:center;gap:4px}
+.part:hover:not(:disabled){border-color:var(--brass)}.part:disabled{opacity:.4}
+.part .ic{font-size:1.5rem;line-height:1}
+.jam{animation:shake .35s}
+@keyframes shake{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+.roll{position:absolute;bottom:8px;left:-90px;font-size:2rem;animation:roll 1.6s linear forwards;z-index:5;pointer-events:none}
+@keyframes roll{to{left:110%}}
+.tanksvg{width:120px;height:56px}
+
+/* radar */
+.sonar{display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:center;background:#030a05;padding:14px}
+@media(max-width:760px){.sonar{grid-template-columns:1fr;justify-items:center}}
+.scope{position:relative;width:min(320px,82vw);aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,#0b2a14 0,#061a0c 60%,#041208 100%);border:3px solid #1f4d2a;box-shadow:0 0 30px #62f08a22 inset;overflow:hidden;cursor:crosshair}
+.scope .ring{position:absolute;border:1px solid #62f08a33;border-radius:50%;left:50%;top:50%;transform:translate(-50%,-50%)}
+.scope .ax{position:absolute;background:#62f08a22}
+.sweep{position:absolute;inset:0;border-radius:50%;background:conic-gradient(from 0deg,#62f08a55,#62f08a00 50deg,#62f08a00);pointer-events:none}
+.sector{position:absolute;inset:0;border-radius:50%;background:conic-gradient(from 0deg,#e9b94922 0 90deg,transparent 90deg);pointer-events:none}
+.sector-l{position:absolute;right:16%;top:14%;font:700 .7rem Oswald,sans-serif;letter-spacing:.1em;color:var(--amber);pointer-events:none}
+.ship{position:absolute;width:13px;height:13px;margin:-6.5px;background:var(--radar);border-radius:2px;box-shadow:0 0 8px var(--radar)}
+.ship.sunk{background:#ff6b4a;box-shadow:0 0 12px #ff6b4a;animation:sink 1.4s forwards}
+@keyframes sink{to{opacity:0;transform:scale(.3)}}
+.sub{position:absolute;width:40px;height:40px;margin:-20px;border:0;background:transparent;padding:0;display:flex;align-items:center;justify-content:center}
+.sub i{display:block;width:14px;height:14px;border-radius:50%;background:#ffd36b;box-shadow:0 0 12px #ffd36b}
+.legend{font-size:.95rem;font-weight:700}
+.legend p{margin:6px 0;display:flex;gap:8px;align-items:center}
+.lg{display:inline-block;width:14px;height:14px}
+.lg.s{background:var(--radar);border-radius:2px}.lg.u{background:#ffd36b;border-radius:50%}
+.radar-msg{min-height:1.4em;font:700 1.05rem "Special Elite",monospace;color:var(--radar)}
+
+/* beach */
+.beach{height:330px;background:linear-gradient(#3d4a3a 0,#4b5640 12%,#7d7158 14%,#c8b48a 20%,#d8c59a 70%,#9fb0a6 80%,#4b7186 86%,#2e5367 100%)}
+.bluff{position:absolute;left:0;right:0;top:0;height:13%;background:linear-gradient(#2c3527,#47533c)}
+.bunker{position:absolute;left:50%;top:2%;width:64px;height:28px;margin-left:-32px;background:#6f6f66;border:2px solid #45453f;border-radius:6px 6px 2px 2px;z-index:3}
+.bunker::after{content:"";position:absolute;left:12px;right:12px;top:11px;height:5px;background:#111}
+.cone{position:absolute;left:0;top:0;width:100%;height:100%;pointer-events:none;z-index:2}
+.wall{position:absolute;left:0;right:0;top:15.5%;height:4%;background:repeating-linear-gradient(90deg,#8b8a80 0 18px,#77766d 18px 20px);border-top:2px solid #5d5c55}
+.cover{position:absolute;width:44px;height:44px;margin:-22px;z-index:3}
+.cover svg{width:100%;height:100%}
+.gi{position:absolute;width:22px;height:22px;margin:-11px;border-radius:50%;background:#556b2f;border:3px solid #2b3818;z-index:4;transition:left .7s linear,top .7s linear;box-shadow:0 2px 4px #0008}
+.gi::after{content:"";position:absolute;left:2px;right:2px;top:-6px;height:9px;border-radius:9px 9px 2px 2px;background:#3f4f24}
+.gi.me{background:#7d9a3a;border-color:#ffe08a;box-shadow:0 0 0 3px #ffe08a88}
+.gi.pinned{animation:shake .4s}
+.dirt{position:absolute;width:8px;height:8px;margin:-4px;border-radius:50%;background:#6b5a3a;z-index:5;animation:dirt .5s ease-out forwards;pointer-events:none}
+@keyframes dirt{to{transform:translateY(-22px) scale(.4);opacity:0}}
+.boat{position:absolute;bottom:3%;width:70px;height:26px;margin-left:-35px;background:#59625a;border:2px solid #353b35;border-radius:4px 4px 16px 16px;z-index:2}
+.lane{font:800 1rem system-ui;padding:4px 12px;border-radius:8px;background:#0e100e;border:1px solid var(--line)}
+.lane.safe{color:var(--green);border-color:#3f7a49}.lane.hot{color:#ff8a6a;border-color:#8a3a2a}
 
 /* debrief */
 .stamp{display:inline-block;font:700 1.5rem Oswald,Impact,sans-serif;letter-spacing:.08em;text-transform:uppercase;border:4px solid currentColor;border-radius:8px;padding:2px 14px;transform:rotate(-3deg);animation:slam .4s ease-out}
 @keyframes slam{from{transform:rotate(-3deg) scale(1.6);opacity:0}to{transform:rotate(-3deg) scale(1);opacity:1}}
 .stamp.win{color:var(--green)}.stamp.mid{color:var(--amber)}.stamp.loss{color:var(--rust)}
-.gains{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0 6px}.gains span{background:#1f221d;border-radius:7px;padding:2px 9px;font-weight:800;font-size:.85rem}
-.gains .gx{color:var(--brass)}.gains .ga{color:var(--rust)}
+.gains{display:flex;gap:8px;flex-wrap:wrap;margin:10px 0 6px}.gains span{background:#1f221d;border-radius:7px;padding:2px 9px;font-weight:800;font-size:.85rem;color:var(--brass)}
 .yours{font-weight:750;margin:6px 0}
-.cause{font-size:.9rem;color:var(--muted);margin:4px 0}.cause b{color:var(--bone)}
+.cause{font-size:.92rem;color:var(--muted);margin:4px 0}.cause b{color:var(--bone)}
 .lesson{margin:10px 0 0;border-radius:9px;padding:8px 12px;background:#1b2330;border:1px solid #3f6a8a;font-weight:750}
 .lesson .lb{font:700 .78rem Oswald,sans-serif;letter-spacing:.14em;color:var(--tech);display:block}
 .real{background:#e6dfcb;color:#1b1d1a;border-radius:9px;padding:8px 12px;margin-top:10px}
 .real .lb{display:block;font-size:.7rem;font-weight:900;letter-spacing:.12em;color:#7a3f14}
 .real .big{margin:2px 0}.real .n{color:#7a3f14;font-size:1.8rem}.real p{margin:0;font-weight:600}
 
-/* toast */
+/* finale */
+.frank{font:700 2.4rem/1 Oswald,Impact,sans-serif;color:var(--brass);text-transform:uppercase}
+.frank small{display:block;font:800 .75rem system-ui,sans-serif;letter-spacing:.16em;color:var(--muted);margin-bottom:4px}
+.board{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin:10px 0}.board div{border-radius:8px;padding:6px;text-align:center;font-size:.85rem;font-weight:800;border:1px solid var(--line)}
+.board small{display:block;font-weight:600;color:var(--muted)}
+.board .win{color:var(--green);border-color:#3f7a49}.board .mid{color:var(--amber);border-color:#8a6d22}.board .loss{color:var(--rust);border-color:#8a3a2a}
+.medals{display:flex;flex-wrap:wrap;gap:6px;margin:6px 0}.medals span{border:1px solid #6a5a2a;background:#1d1a10;border-radius:20px;padding:3px 10px;font-weight:800;font-size:.82rem;color:var(--brass)}
+.medals span.off{opacity:.35;border-style:dashed}
+.hint{font-size:.85rem;color:var(--muted);margin:6px 0 0}
 #toast{position:fixed;left:50%;top:84px;transform:translate(-50%,-20px);opacity:0;z-index:70;pointer-events:none;background:#0c0d0c;border:3px solid var(--brass);border-radius:12px;padding:10px 26px;text-align:center;box-shadow:0 10px 40px #000c;transition:opacity .3s,transform .3s}
 #toast.show{opacity:1;transform:translate(-50%,0)}
 #toast small{display:block;font:800 .72rem system-ui,sans-serif;letter-spacing:.2em;color:var(--muted)}
 #toast b{font:700 1.8rem Oswald,Impact,sans-serif;letter-spacing:.06em;color:var(--brass)}
-
-/* finale */
-.frank{font:700 2.4rem/1 Oswald,Impact,sans-serif;color:var(--brass);text-transform:uppercase}
-.frank small{display:block;font:800 .75rem system-ui,sans-serif;letter-spacing:.16em;color:var(--muted);margin-bottom:4px}
-.fstats{font-weight:800;color:var(--muted);margin:8px 0}.fstats b{color:var(--bone)}
-.board{display:grid;grid-template-columns:1fr 1fr;gap:6px;margin:8px 0}.board div{border-radius:8px;padding:5px;text-align:center;font-size:.82rem;font-weight:800;border:1px solid var(--line)}
-.board .win{color:var(--green);border-color:#3f7a49}.board .mid{color:var(--amber);border-color:#8a6d22}.board .loss{color:var(--rust);border-color:#8a3a2a}
-.calls{font-size:.85rem;color:var(--muted)}.calls b{color:var(--bone)}
-.wlabel{display:block;font-weight:800;margin:4px 0 2px;line-height:1.35}
-.stem{margin:0 0 4px;color:var(--muted);font-size:.88rem}
-.hint{font-size:.85rem;color:var(--muted);margin:6px 0 0}
-
-.foot{max-width:1180px;margin:0 auto;padding:0 14px 30px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:10px;color:var(--muted);font-size:.82rem}
-.foot button{background:#1f221d;color:var(--bone);border:0;border-radius:8px;padding:6px 12px;font-weight:800}
+.foot{max-width:1100px;margin:0 auto;padding:0 14px 30px;color:var(--muted);font-size:.82rem}
 body .start-over-zone{border-top-color:#2b2f28;color:var(--muted)}
 body .start-over-zone .start-over-btn{color:var(--rust)}
 body .start-over-zone.fixed{background:#17191799;border-color:#2b2f28}
-@media print{.top,.foot,.go{display:none}}
+@media (prefers-reduced-motion:reduce){*{animation-duration:.01ms!important;transition-duration:.01ms!important}}
 </style>
-<script src="../../shared/assignments.js?v=20261105fb1"></script>
-<script src="../../shared/turnin.js?v=20261105fb1"></script>
+<script src="../../shared/assignments.js?v=20261106ar4"></script>
+<script src="../../shared/turnin.js?v=20261106ar4"></script>
 </head><body>
-<div class="top" aria-label="Your rank, arsenal, and the war">
+<div class="top" aria-label="Your rank and missions">
   <div class="logo">ARSENAL RACE<small>U.S. HISTORY · UNIT 2 · DAY 6</small></div>
-  <div class="hudgrp"><span class="rank" id="rankName">🎖 PRIVATE</span><div class="bar xp" aria-hidden="true"><span id="xpFill"></span></div><span class="mut" id="xpText">0 XP</span></div>
-  <div class="ars" aria-label="Your arsenal">
-    <span class="m t" id="mT" title="Tech: spy on and spot the enemy">📡 <span class="w">TECH</span> <b id="vT">0</b></span>
-    <span class="m f" id="mF" title="Factories: build more than the enemy">🏭 <span class="w">FACTORIES</span> <b id="vF">0</b></span>
-    <span class="m p" id="mP" title="People: workers, soldiers, families">👥 <span class="w">PEOPLE</span> <b id="vP">0</b></span>
-  </div>
-  <div class="hudgrp"><span class="axl">AXIS CONTROL</span><div class="bar ax" aria-hidden="true"><span id="axFill"></span></div><span class="axl" id="axText">85%</span></div>
+  <div class="hud"><span class="rank" id="rankName">🎖 PRIVATE</span><div class="bar" aria-hidden="true"><span id="xpFill"></span></div><span class="mut" id="xpText">0 XP</span></div>
   <div class="pips" id="pips"></div>
+  <button type="button" class="snd" id="sndBtn" aria-pressed="true">🔊 Sound</button>
 </div>
 <div id="toast" role="status" aria-live="polite"><small>PROMOTED</small><b id="toastRank"></b></div>
 <p class="welcome" id="welcome" hidden></p>
 <main id="app"></main>
-<div class="foot"><span>Progress saves on this device. Your teacher sees your work after you turn it in.</span><button type="button" id="restartBtn">Start over</button></div>
-
+<div class="foot"><span>Progress saves on this device. Your teacher sees your work after you turn it in.</span> <button type="button" id="restartBtn">Start over</button></div>
 <script>
 (function () {
 "use strict";
 // =====================================================================
-//  ARSENAL RACE — one screen at a time, no scrolling, no skipping.
-//  Choices are saved by their place in each list (screen shuffles them).
-//  Keep every choice in the same order, or the battle math breaks.
+//  ARSENAL RACE v4 — a WWII action campaign. 4 missions, 4 people.
+//  Midway (codebreaker + dive bomber) · Stalingrad (Soviet tank factory)
+//  The Atlantic (radar operator) · D-Day (Eisenhower's call + Omaha Beach)
+//  7 quick checks (first-try score), no writing. Games set the results,
+//  and results carry forward into D-Day.
 // =====================================================================
-const KEY = "ush-u2-d6-arsenal-race-v3";
+const KEY = "ush-u2-d6-arsenal-race-v4";
 const API = "https://fynn-class-assignment-submissions-20261024.neotboy.chatgpt.site/api/submit";
 const ASSIGNMENT = "ush-u2-d6-arsenal-race";
 const TITLE = "U.S. History · Unit 2 · Day 6 · Arsenal Race: What Wins a War?";
@@ -195,245 +265,229 @@ const $ = id => document.getElementById(id);
 const esc = s => String(s == null ? "" : s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
 const shuffle = a => { const b = a.slice(); for (let i = b.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [b[i], b[j]] = [b[j], b[i]]; } return b; };
 const isTest = () => !!(window.classIsTestT && window.classIsTestT());
+const clamp = (v, a, b) => Math.max(a, Math.min(b, v));
 
-// ---------- art (real archival images; maps live on this site) ----------
+// ---------- art: real archival images (maps + Pearl Harbor live on this site) ----------
 const D8 = "../../day8-wwii-decision-map/";
-const MAP_PAC = { src: D8 + "asia-pacific-1943-army-atlas.jpg", cap: "U.S. War Department map, July 1943. White = held by Japan. Public domain." };
-const MAP_EU = { src: D8 + "europe-1943-army-atlas.jpg", cap: "U.S. War Department map, July 1943. White = held by Germany. Red = Allies. Public domain." };
+const MAP_PAC = { src: D8 + "asia-pacific-1943-army-atlas.jpg", cap: "U.S. War Department map, July 1943. Public domain." };
+const MAP_EU = { src: D8 + "europe-1943-army-atlas.jpg", cap: "U.S. War Department map, July 1943. Public domain." };
 const PEARL = { src: D8 + "pearl-harbor-1941-80-G-19942.jpg", cap: "Pearl Harbor, Dec. 7, 1941. U.S. Navy photo 80-G-19942, National Archives." };
 const WC = f => "https://commons.wikimedia.org/wiki/Special:FilePath/" + f + "?width=1100";
 const PHOTO = {
-  women: { src: WC("Rosie_the_Riveter_(Vultee)_DS.jpg"), alt: "A woman uses a hand drill on a warplane in a factory", cap: "War worker at the Vultee aircraft plant, Nashville, 1943. Photo by Alfred T. Palmer, Office of War Information. Library of Congress." },
   midway: { src: WC("SBD-3_Dauntless_bombers_of_VS-8_over_the_burning_Japanese_cruiser_Mikuma_on_6_June_1942.jpg"), alt: "U.S. dive bombers fly over a burning Japanese warship", cap: "U.S. Navy dive bombers over a burning Japanese warship, Battle of Midway, June 6, 1942. U.S. Navy photo, National Archives." },
   stalingrad: { src: WC("RIAN_archive_602161_Center_of_Stalingrad_after_liberation.jpg"), alt: "The center of Stalingrad in ruins after the battle", cap: "Center of Stalingrad after the battle, 1943. RIA Novosti archive #602161, CC BY-SA 3.0." },
   enigma: { src: WC("Enigma_(crittografia)_-_Museo_scienza_e_tecnologia_Milano.jpg"), alt: "A German Enigma code machine with a keyboard and rotors", cap: "A real German Enigma code machine. Museo Scienza e Tecnologia, Milan. Photo: Alessandro Nassiri, CC BY-SA 4.0." },
-  dday: { src: WC("Into_the_Jaws_of_Death_23-0455M_edit.jpg"), alt: "U.S. soldiers wade from a landing craft toward Omaha Beach", cap: "\"Into the Jaws of Death\": U.S. troops wade ashore at Omaha Beach, June 6, 1944. Photo by Robert F. Sargent, U.S. Coast Guard. National Archives." }
+  dday: { src: WC("Into_the_Jaws_of_Death_23-0455M_edit.jpg"), alt: "U.S. soldiers wade from a landing craft toward Omaha Beach", cap: "\"Into the Jaws of Death\": U.S. troops wade toward Omaha Beach, June 6, 1944. Photo by Robert F. Sargent, U.S. Coast Guard. National Archives." }
 };
-// If an outside photo can't load, swap in the map (or just remove the photo). Never a broken image.
 window.arsArtFail = function (img) {
-  const fig = img.closest("figure"); if (!fig) return;
-  if (img.dataset.fb && !img.dataset.tried) { img.dataset.tried = "1"; img.src = img.dataset.fb; const c = fig.querySelector("figcaption"); if (c) c.textContent = img.dataset.fbcap || ""; }
-  else fig.remove();
+  const f = img.closest("figure"); if (!f) return;
+  if (img.dataset.fb && !img.dataset.tried) { img.dataset.tried = "1"; img.src = img.dataset.fb; const c = f.querySelector("figcaption"); if (c) c.textContent = img.dataset.fbcap || ""; }
+  else f.remove();
 };
 const fig = (p, fb) => `<figure><img src="${p.src}" alt="${esc(p.alt || "")}" loading="lazy"${fb ? ` data-fb="${fb.src}" data-fbcap="${esc(fb.cap)}"` : ""} onerror="arsArtFail(this)"><figcaption>${esc(p.cap)}</figcaption></figure>`;
 const intel = (who, body) => `<div class="intel"><div class="who">${who}</div>${body}</div>`;
 
 // ---------- state ----------
-const fresh = () => ({ name: "", i: 0, picks: {}, wrong: {}, done: {}, fx: { prod: 0, morale: 0 }, writing: {}, turnedIn: false });
+const fresh = () => ({ name: "", i: 0, picks: {}, wrong: {}, done: {}, g: {}, turnedIn: false, sound: true });
 let st;
 try { st = JSON.parse(localStorage.getItem(KEY)); } catch (e) {}
 if (!st || typeof st !== "object" || !st.picks) st = fresh();
-try { // shared Chromebooks: a different student signed in = start clean
-  const nowName = localStorage.getItem("site-student-name") || "", short = window.classShortName || (x => x);
-  if (st.name && nowName && short(st.name).toLowerCase() !== short(nowName).toLowerCase()) { st = fresh(); localStorage.removeItem(KEY); }
-} catch (e) {}
+st.g = st.g || {}; if (st.sound == null) st.sound = true;
 const save = () => { try { localStorage.setItem(KEY, JSON.stringify(st)); } catch (e) {} };
-const N = k => (st.fx && st.fx[k]) || 0;
 const pick = id => st.picks[id];
-function applyFx(fx) { Object.keys(fx || {}).forEach(k => { st.fx[k] = (st.fx[k] || 0) + fx[k]; }); st.fx.prod = Math.max(0, st.fx.prod || 0); }
+const first = n => String(n || "").split(" ")[0] || "Soldier";
 
-// ---------- how your choices decide each battle (same math as before) ----------
-function homeFront(o) { return N("morale") + (o.midway === "win" ? 1 : 0) + (o.atlantic === "win" ? 1 : 0); }
+// ---------- sound (made in the browser, no files) ----------
+let AC = null;
+function ac() { if (!st.sound) return null; try { if (!AC) AC = new (window.AudioContext || window.webkitAudioContext)(); if (AC.state === "suspended") AC.resume(); } catch (e) { AC = null; } return AC; }
+function tone(f, dur, type, vol, f2) {
+  const c = ac(); if (!c) return;
+  const o = c.createOscillator(), g = c.createGain(), t = c.currentTime;
+  o.type = type || "sine"; o.frequency.setValueAtTime(f, t); if (f2) o.frequency.exponentialRampToValueAtTime(f2, t + dur);
+  g.gain.setValueAtTime(vol || .06, t); g.gain.exponentialRampToValueAtTime(.0001, t + dur);
+  o.connect(g).connect(c.destination); o.start(t); o.stop(t + dur + .02);
+}
+function noise(dur, vol, freq, type) {
+  const c = ac(); if (!c) return;
+  const n = Math.floor(c.sampleRate * dur), buf = c.createBuffer(1, n, c.sampleRate), d = buf.getChannelData(0);
+  for (let i = 0; i < n; i++) d[i] = (Math.random() * 2 - 1) * (1 - i / n);
+  const s = c.createBufferSource(), f = c.createBiquadFilter(), g = c.createGain();
+  f.type = type || "lowpass"; f.frequency.value = freq || 400; g.gain.value = vol || .25;
+  s.buffer = buf; s.connect(f).connect(g).connect(c.destination); s.start();
+}
+const SFX = {
+  ping: () => tone(1150, .5, "sine", .05),
+  key: () => noise(.025, .05, 3000, "highpass"),
+  morse: () => tone(720, .07, "square", .025),
+  boom: () => { noise(1.1, .45, 260); tone(70, .6, "sine", .2, 35); },
+  splash: () => noise(.5, .18, 900),
+  whistle: () => tone(1500, .5, "sine", .035, 420),
+  clank: () => { noise(.08, .25, 1800, "bandpass"); tone(180, .08, "square", .04); },
+  bad: () => tone(160, .25, "sawtooth", .05),
+  good: () => { tone(660, .12, "triangle", .06); setTimeout(() => tone(990, .18, "triangle", .06), 110); },
+  mg: () => { for (let i = 0; i < 6; i++) setTimeout(() => noise(.05, .22, 1400, "bandpass"), i * 70); },
+  rumble: () => tone(55, 1.2, "sawtooth", .05, 45)
+};
+function sndBtn() { const b = $("sndBtn"); b.textContent = st.sound ? "🔊 Sound" : "🔇 Muted"; b.setAttribute("aria-pressed", st.sound ? "true" : "false"); }
+$("sndBtn").onclick = () => { st.sound = !st.sound; save(); sndBtn(); if (st.sound) SFX.ping(); };
+sndBtn();
+
+// ---------- typewriter ----------
+function typeInto(el, txt, speed, done, sound) {
+  let n = 0;
+  (function step() {
+    if (!el.isConnected) return;
+    el.textContent = txt.slice(0, n);
+    if (sound && n % 2 === 0 && txt[n] && txt[n] !== " ") SFX.key();
+    if (n++ < txt.length) setTimeout(step, speed || 38); else if (done) done();
+  })();
+}
+
+// ---------- cleanup between screens (games use timers + animation frames) ----------
+let live = [];
+function onLeave(fn) { live.push(fn); }
+function cleanup() { live.forEach(f => { try { f(); } catch (e) {} }); live = []; }
+
+// =====================================================================
+//  RESULTS — games decide them, and they carry into D-Day
+// =====================================================================
+const STAMP = { win: "Mission complete", mid: "Costly win", loss: "Mission failed" };
 function outcomes() {
-  const o = {};
-  const m = pick("m1");
-  o.midway = m == null ? null : m === 0 ? (pick("t1") === 0 ? "win" : "mid") : "loss";   // ambush + extra codebreakers
-  const s = pick("s1");
-  o.stalingrad = s == null ? null : s === 2 ? "mid" : "win";                             // Soviets win it; your help sets the pace
-  const rad = N("radar") > 0, cod = N("code") > 0;
-  o.atlantic = pick("a1") == null ? null : rad && cod ? "win" : rad || cod || N("ships") >= 2 ? "mid" : "loss";   // needs radar AND codes
-  o.dday = null;
-  if (pick("d2") != null) { const d = ddayPoints(o); o.dday = d.pts >= 5 ? "win" : d.pts >= 2 ? "mid" : "loss"; }
+  const g = st.g, o = {};
+  o.midway = g.midway && g.midway.done ? (g.midway.misses <= 2 ? "win" : "mid") : null;
+  o.stalingrad = g.stal && g.stal.done ? (g.stal.built > g.stal.lost ? "win" : "mid") : null;   // the Soviets win either way; you set the pace
+  o.atlantic = g.atl && g.atl.done ? (g.atl.lost <= 1 && !g.atl.ff ? "win" : g.atl.lost <= 3 ? "mid" : "loss") : null;
+  o.dday = g.dday && g.dday.done ? (g.dday.pinned <= 1 ? "win" : g.dday.pinned <= 3 ? "mid" : "loss") : null;
   return o;
 }
-function ddayPoints(o) {
-  const plus = [], minus = []; let pts = 0;
-  const add = (n, why) => { pts += n; (n > 0 ? plus : minus).push(why); };
-  const d1 = pick("d1"), d2 = pick("d2");
-  if (d1 === 0) add(2, "fake army fooled Germany"); else if (d1 === 1) add(-2, "landed where Germany waited"); else if (d1 === 2) add(-1, "split army");
-  if (d2 === 0) add(1, "weather break"); else if (d2 === 1) add(-1, "June 19 storm"); else if (d2 === 2) add(-2, "stormy landing");
-  if (N("ships") >= 1) add(1, "ships");
-  if (N("prod") >= 2) add(1, "factories");
-  if (homeFront(o) >= 1) add(1, "home front");
-  if (N("army") >= 1) add(1, "troops");
-  if (N("tanks") >= 1) add(1, "tanks");
-  if (o.atlantic === "win") add(1, "Atlantic won"); else if (o.atlantic === "loss") add(-1, "U-boats");
-  if (pick("s1") === 2) add(-1, "no help to Soviets");
-  return { pts, plus, minus };
+// What makes the German machine gun faster or slower on Omaha Beach
+function ddayMods() {
+  const o = outcomes(), m = [];
+  m.push([-.1, "📡 The fake army kept many German troops waiting at Calais"]);
+  const w = pick("weather");
+  if (w === 0) m.push([-.1, "🌧 You went June 6: Germany didn't expect a landing in that weather"]);
+  else if (w === 1) m.push([.3, "🌧 You waited: the June 19 storm hit, and Germany dug in deeper"]);
+  else if (w === 2) m.push([.35, "🌧 You went into the storm: boats swamped, troops seasick"]);
+  if (o.atlantic === "win") m.push([-.15, "🚢 You won the Atlantic: ships and supplies got through"]);
+  else if (o.atlantic === "loss") m.push([.15, "🚢 U-boats sank supplies you needed"]);
+  if (o.stalingrad === "win") m.push([-.15, "🏭 Stalingrad: Germany's army was being ground down in the east"]);
+  if (pick("lend") === 2) m.push([-.05, "🏭 You saved Lend-Lease supplies for your own invasion"]);
+  else if (pick("lend") != null) m.push([0, "🏭 You sent supplies to the Soviets (they used them against Germany)"]);
+  return m;
 }
-// The 3 things that win a war (what the HUD shows)
-const tech = () => N("radar") + N("code");
-const fact = () => N("prod") + N("ships") + N("tanks");
-const ppl = () => homeFront(outcomes()) + N("army");
+const ddaySpeed = () => clamp(1 + ddayMods().reduce((s, x) => s + x[0], 0), .65, 1.6);
 
-// ---------- rank, XP, Axis control (game feel only; never a grade) ----------
-const ORDERS = ["h1", "t1", "m1", "s1", "a1", "d1", "d2"];
-const MXP = { win: 250, mid: 100, loss: 25 }, AX = { win: -15, mid: -8, loss: 5 };
-const RANKS = [[0, "Private"], [200, "Corporal"], [450, "Sergeant"], [700, "Lieutenant"], [1000, "Captain"], [1300, "Major"], [1600, "Colonel"], [1800, "General"]];
-function xpNow() { let xp = ORDERS.filter(id => pick(id) != null).length * 25 + Object.keys(st.done).filter(k => st.done[k]).length * 100; Object.values(outcomes()).forEach(r => { if (r) xp += MXP[r]; }); return xp; }
+// ---------- rank + XP (game feel only; never a grade) ----------
+const MXP = { win: 300, mid: 150, loss: 50 };
+const RANKS = [[0, "Private"], [250, "Corporal"], [550, "Sergeant"], [850, "Lieutenant"], [1200, "Captain"], [1500, "Major"], [1750, "Colonel"], [1950, "General"]];
+function xpNow() {
+  let xp = 0;
+  CHECKS.forEach(q => { if (st.done[q.id]) xp += st.wrong[q.id] ? 50 : 100; });
+  Object.values(outcomes()).forEach(r => { if (r) xp += MXP[r]; });
+  return xp;
+}
 const rankOf = xp => { let i = 0; RANKS.forEach((r, n) => { if (xp >= r[0]) i = n; }); return i; };
-function axisNow() { let a = 85; Object.values(outcomes()).forEach(r => { if (r) a += AX[r]; }); return Math.max(0, Math.min(100, a)); }
-const STAMP = { win: "Mission complete", mid: "Costly win", loss: "Mission failed" };
-
-// ---------- tags on choices ----------
-const T = { T: "📡 TECH", F: "🏭 FACTORIES", P: "👥 PEOPLE" };
-const tags = (up, cost) => `<span class="tags">${(up || []).map(k => `<span class="tag ${k}">+ ${T[k]}</span>`).join("")}${(cost || []).map(k => `<span class="tag ${k} cost">− ${T[k]}</span>`).join("")}</span>`;
-
-// ---------- debriefs ----------
-function debrief(name, r, yours, cause, lesson, realN, realT) {
-  return `<span class="stamp ${r}">${STAMP[r]}</span>
-    <div class="gains"><span class="gx">+${MXP[r]} XP</span><span class="ga">Axis control ${AX[r] > 0 ? "+" : "−"}${Math.abs(AX[r])}%</span></div>
-    <p class="yours">${yours}</p>${cause ? `<p class="cause"><b>Caused by:</b> ${cause}</p>` : ""}
-    <div class="lesson"><span class="lb">What won it</span>${lesson}</div>
-    <div class="real"><span class="lb">What really happened</span><div class="big"><span class="n">${realN}</span><p>${realT}</p></div></div>`;
+function medals() {
+  const g = st.g, o = outcomes();
+  return [
+    ["🎯 Clean Dive", g.midway && g.midway.done && g.midway.misses === 0],
+    ["🏭 Iron Line", g.stal && g.stal.done && g.stal.built >= g.stal.lost + 3],
+    ["📡 Sharp Eye", g.atl && g.atl.done && g.atl.lost === 0 && !g.atl.ff],
+    ["🪖 First Off the Beach", g.dday && g.dday.done && g.dday.pinned === 0],
+    ["🔐 Codebreaker", CHECKS.every(q => st.done[q.id] && !st.wrong[q.id])],
+    ["⭐ Four for Four", ["midway", "stalingrad", "atlantic", "dday"].every(k => o[k] === "win")]
+  ];
 }
-const DEB = {
-  midway() { const r = outcomes().midway || "mid", code = pick("t1") === 0;
-    return debrief("Midway", r,
-      r === "win" ? "You find Japan's carriers first and hit them while their decks are full of planes." : r === "mid" ? "Codebreakers knew WHERE, but not WHEN. You launch late and lose more pilots." : "Japan takes Midway and keeps attacking.",
-      r === "loss" ? "you kept your carriers away" : code ? "ambush ✓ · extra codebreakers ✓" : "ambush ✓ · extra codebreakers ✗",
-      "📡 <b>TECH.</b> Codebreakers told the U.S. where Japan would attack.",
-      "4", "Japanese carriers sunk. The U.S. lost 1. Japan could never replace them fast enough."); },
-  stalingrad() { const r = outcomes().stalingrad || "win", s = pick("s1");
-    return debrief("Stalingrad", r,
-      "The Soviets win it themselves. " + (s === 0 ? "Your trucks help them race west." : s === 1 ? "Your tanks help them push west." : "With no help, they push west slowly. Germany moves troops to France."),
-      s === 0 ? "Soviet factories + your trucks" : s === 1 ? "Soviet factories + your tanks and planes" : "Soviet factories, but you sent nothing",
-      "🏭 <b>FACTORIES.</b> The Soviets built tanks faster than Germany could destroy them.",
-      "91,000", "German soldiers surrendered in Feb. 1943. About 2 million people were killed, hurt, or captured."); },
-  atlantic() { const r = outcomes().atlantic || "mid", rad = N("radar"), code = N("code");
-    return debrief("The Atlantic", r,
-      r === "win" ? "Codes tell you where the packs are. Radar finds them. U-boats sink fast." : rad ? "Radar spots U-boats up close, but you can't find the packs." : code ? "You know where the packs are, but you can't spot them in the dark." : r === "mid" ? "You build ships as fast as they sink. Sailors keep dying." : "U-boats keep winning. Britain runs short of food.",
-      "radar " + (rad ? "✓" : "✗") + " · codebreakers " + (code ? "✓" : "✗") + (N("ships") ? " · extra ships ✓" : ""),
-      "📡 <b>TECH</b> + 🏭 <b>FACTORIES.</b> It took radar AND codebreakers to find U-boats, plus shipyards to replace lost ships.",
-      "41", "U-boats lost in May 1943 to radar and cracked codes. Germany pulled its U-boats back."); },
-  dday() { const o = outcomes(), r = o.dday || "mid", d = ddayPoints(o);
-    const cause = (d.plus.length ? "✓ " + d.plus.join(" · ✓ ") : "") + (d.minus.length ? (d.plus.length ? "<br>" : "") + "✗ " + d.minus.join(" · ✗ ") : "");
-    return debrief("D-Day", r,
-      r === "win" ? "You get ashore and push inland." : r === "mid" ? "You get ashore, but at a terrible cost." : "The landing fails.",
-      cause, "<b>ALL THREE.</b> 📡 A trick on Germany + 🏭 ships and supplies + 👥 millions of troops and workers.",
-      "156,000", "Allied troops landed on June 6, 1944. About 4,400 of them died that day."); }
+
+// =====================================================================
+//  QUICK CHECKS (7) — right answer is always options[0]; screens shuffle
+// =====================================================================
+const Q = {
+  q1: { std: "US.33", short: "Midway: what the 'AF' message proved", prompt: "Read Japan's message. What did it prove?", options: ["\"AF\" was Midway, so the U.S. knew Japan's next target", "Japan's navy was running out of fresh drinking water", "Midway's water machine had really broken down that week", "Japan had cracked the U.S. Navy's secret radio code"], hint: "Midway faked the news. Who repeated it, and what name did they use?", why: "Japan repeated the fake news and called the place \"AF.\" So AF = Midway." },
+  q2: { std: "US.29", short: "Why Midway was a turning point", prompt: "Why was Midway a <b>turning point</b> (the moment the war flipped)?", options: ["Japan lost 4 carriers it could not quickly replace", "Japan captured Midway and used it to attack Hawaii", "U.S. battleships sank most of Japan's navy there", "Japan gave up the war a few weeks after the battle"], hint: "Look at the big number. Could Japan get those back fast?", why: "After Midway, Japan was mostly on defense in the Pacific." },
+  q3: { std: "US.29", short: "Stalingrad: Soviet advantage", prompt: "What let the Soviets keep fighting such a long, brutal battle?", options: ["Factories moved east kept building tanks far from Germany", "Germany decided to stop attacking once winter came", "British codebreakers told them every German plan", "American soldiers came to fight inside the city"], hint: "Look at the two big numbers.", why: "They could replace lost tanks faster than Germany could destroy them." },
+  q4: { std: "US.29", short: "Atlantic: what beat the U-boats", prompt: "What finally beat the U-boats in 1943?", options: ["Radar and cracked codes found them; shipyards replaced losses", "German subs ran out of fuel and had to sail back home", "The Allies stopped sending supply ships across the ocean", "U.S. battleships blocked every port in Germany"], hint: "What did you use in the mission? What did the shipyards do?", why: "📡 Tech found the U-boats. 🏭 Factories built ships faster than they sank." },
+  q5: { std: "US.29", short: "D-Day: why the fake army mattered", prompt: "How did a fake army help the real landing?", options: ["Germany kept troops at Calais, away from Normandy", "The rubber tanks were used in the real battle", "Germany got scared and surrendered right away", "The Allies didn't have to cross the English Channel"], hint: "Where did the Allies want Germany to wait?", why: "Every German soldier waiting at Calais was one fewer at Normandy." },
+  q6: { std: "US.33", short: "Eisenhower's note: what it shows", prompt: "Read Eisenhower's note. Why would he write it the day <b>before</b> D-Day?", options: ["He knew it might fail, and he would take the blame", "He had already heard the landing had failed", "He wanted to blame the Navy if anything went wrong", "He planned to cancel the landing and go home"], hint: "Look at the last line. Whose fault would it be?", why: "A leader taking responsibility before he knows how it ends." },
+  q7: { std: "US.29", short: "Big idea: what won the war vs. Germany", prompt: "A friend says, \"D-Day soldiers beat Germany all by themselves.\" Best reply?", options: ["It took codes, factories, and millions of people together", "Mostly true: one huge landing beat Germany on its own", "Mostly the cold winters, which froze Germany's army", "Mostly new tanks, since better weapons won every battle"], hint: "Think about all 4 missions. Did one thing win them all?", why: "📡 Tech + 🏭 factories + 👥 people. No single thing won it." }
 };
+const CHECKS = Object.keys(Q).map(id => Object.assign({ id }, Q[id]));
 
 // =====================================================================
 //  SCREENS (in order)
 // =====================================================================
 const SCREENS = [
   { type: "intro", label: "Start" },
-  { type: "howto", label: "How to win a war" },
+  { type: "opana", label: "Cold open · Dec. 7, 1941" },
+  { type: "mcard", m: 1, label: "Mission 1 · Midway", name: "Midway", bg: MAP_PAC, lines: ["May 1942", "Station HYPO · Pearl Harbor, Hawaii", "You are: a U.S. Navy codebreaker"], obj: "Find out where Japan's navy will strike next." },
+  { type: "order", id: "bait", short: "Midway bait message", label: "Midway · Set the trap", kick: "Station HYPO · May 1942", title: "Set a trap",
+    art: () => intel("📻 What you know", `<p>Japan's coded messages keep naming a target: <b>"AF."</b></p><p>You think AF = <b>Midway</b>, a tiny U.S. island base. Your bosses aren't sure.</p><p>Send a fake message from Midway. If Japan repeats it, you've got your answer.</p>`),
+    text: "Which fake message do you send?",
+    choices: [
+      { label: "\"Our water machine broke. We're short of water.\"", sub: "Boring news. Japan might repeat it.", result: "Midway sends it in plain English. Now you wait…" },
+      { label: "\"Midway is getting 50 new warplanes.\"", sub: "Big news. Japan might change its plan.", result: "Japan hears it… and goes quiet. You lose two days." },
+      { label: "\"The U.S. fleet is leaving Hawaii.\"", sub: "Could lure them in. Could scare them off.", result: "Japan's messages get confusing. You lose time." }
+    ] },
+  { type: "check", id: "q1", label: "Midway · Read the reply", kick: "Station HYPO · 2 days later", title: "Japan takes the bait",
+    left: () => intel("📻 Message caught · decoded", `<div class="radio" id="reply"></div><p style="font-size:.85rem;color:var(--muted)">Real messages, 1942. Midway sent the fake water news. Japan's reply was caught and decoded in Hawaii.</p>`),
+    onShow: () => { const el = $("reply"); if (el) typeInto(el, (pick("bait") === 0 ? "" : "(Two days late, but it worked when you finally sent the water message.)\n") + "MIDWAY: \"Our water machine broke.\"\n\nJAPAN, 2 days later:\n\"AF IS SHORT OF WATER.\"", 26, null, true); } },
+  { type: "dive", label: "Midway · Dive!" },
+  { type: "debrief", key: "midway", label: "Midway · Debrief", check: "q2", art: () => fig(PHOTO.midway, MAP_PAC) },
 
-  { type: "order", id: "h1", short: "Home front plan", label: "Order 1 · Home front", kick: "Boot camp · 1942 · The home front", title: "Build the arsenal",
-    art: () => fig(PHOTO.women) + intel("1942", `<p>Millions of men are leaving to fight. Factories need someone to build the planes, tanks, and ships.</p>`), text: "Your factories need more <b>workers</b> and more <b>steel</b>. Pick your plan.",
+  { type: "mcard", m: 2, label: "Mission 2 · Stalingrad", name: "Stalingrad", bg: MAP_EU, lines: ["September 1942", "Tractor Factory · Stalingrad, Soviet Union", "You are: a Soviet factory worker, age 16"], obj: "Build tanks faster than Germany can destroy them." },
+  { type: "check", id: "q3", label: "Stalingrad · The factory trick", kick: "Stalingrad · Sept. 1942", title: "The factories that ran away",
+    left: () => intel("Intel · Soviet factories", `<div class="big"><span class="n">1,500</span><p>Soviet factories were taken apart in 1941, loaded on trains, and rebuilt far east, out of Germany's reach.</p></div><div class="big"><span class="n">4×</span><p>In 1942, Soviet factories built about 4 times as many tanks as Germany.</p></div><p>Your factory is <b>inside</b> Stalingrad. The fighting is a few blocks away.</p>`) },
+  { type: "order", id: "lend", short: "Lend-Lease choice", label: "Stalingrad · Lend-Lease", kick: "Meanwhile · Washington, D.C.", title: "America's call",
+    art: () => intel("Lend-Lease", `<p><b>Lend-Lease</b> = the U.S. ships weapons and supplies to its allies.</p><p>Whatever you send the Soviets, your own army can't use later.</p>`),
+    text: "You're a U.S. war planner. What goes on the next convoy?",
     choices: [
-      { label: "Hire millions of women to work in war factories", up: ["F", "P"], fx: { prod: 2, morale: 1 }, result: "About 6 million more U.S. women go to work. Families are stretched thin." },
-      { label: "Ration (limit) gas, meat, and metal at home", up: ["F"], cost: ["P"], fx: { prod: 2, morale: -1, ships: 1 }, result: "Saved steel becomes ships. People grumble." },
-      { label: "Draft more men and leave the factories alone", up: ["P"], fx: { army: 1 }, result: "More soldiers, but no new weapons for them." }
+      { label: "Trucks, food, and boots", sub: "Their army moves faster. Costs you supplies.", result: "American trucks and canned meat head east. (Your factory gets parts faster: +6 seconds.)" },
+      { label: "Tanks and fighter planes", sub: "Firepower now. Costs you supplies.", result: "American tanks and planes head east. (You start with 2 extra tanks.)" },
+      { label: "Nothing. Save it for D-Day", sub: "Helps your own invasion. Soviets get no help.", result: "The ships stay home. You'll have more for D-Day." }
     ] },
-  { type: "check", id: "q0", std: "US.33", short: "Two voices: why so different", label: "Check · Two real people", kick: "Intel · 1943", title: "Same war. Two lives.",
-    left: () => intel("Two real people · same war", `<div class="duo"><div><b>Fanny Christina Hill</b><span class="where">Los Angeles, U.S.</span><br>Quit cleaning houses to build warplanes.<i>"The war made me live better, it really did."</i></div><div><b>Tanya Savicheva, age 11</b><span class="where">Leningrad, Soviet Union</span><br>German armies trapped her city for almost 2½ years. About 800,000 people there died, mostly from hunger. Her diary:<i>"The Savichevs died. Everyone died. Only Tanya is left."</i></div></div>`),
-    prompt: "Why were Fanny's and Tanya's lives so different?", options: ["The war reached Tanya's city, but not Fanny's", "Tanya was younger, so the war hit her family less", "Fanny's city was bombed, but she had a better shelter", "They lived through the same thing in different places"], hint: "Did the war reach Los Angeles? Did it reach Leningrad?", why: "👥 PEOPLE: War jobs changed Americans' lives. Soviet families were trapped inside the war." },
-  { type: "order", id: "t1", short: "First tech bet", label: "Order 2 · Tech bet", kick: "Boot camp · 1942 · The lab", title: "Pick one big project",
-    art: () => intel("Your scientists", `<p>They can only rush <b>ONE</b> project this year.</p><p>Choose well. It might matter in more than one mission.</p>`), text: "",
-    choices: [
-      { label: "🔐 Codebreakers: read the enemy's secret messages", up: ["T"], fx: { code: 1 }, result: "Puzzle experts go to work on enemy codes." },
-      { label: "📡 Radar: spot ships and planes in fog and dark", up: ["T"], fx: { radar: 1 }, result: "Radar goes on ships and planes." },
-      { label: "🚢 Cargo ships: build them faster than they sink", up: ["F"], fx: { ships: 1 }, result: "Shipyards start pumping out \"Liberty ships.\"" },
-      { label: "🛡️ Tanks: turn car factories into tank factories", up: ["F"], fx: { tanks: 1 }, result: "Detroit stops making cars and builds tanks." }
-    ] },
+  { type: "factory", label: "Stalingrad · Tank line" },
+  { type: "debrief", key: "stalingrad", label: "Stalingrad · Debrief", art: () => fig(PHOTO.stalingrad, MAP_EU) },
 
-  { type: "mission", n: 1, key: "midway", label: "Mission 1 · Midway", name: "Midway", date: "June 4, 1942 · Pacific Ocean", map: MAP_PAC, marker: { x: 95, y: 38, label: "MIDWAY", left: true },
-    obj: "Stop Japan from sinking America's last <b>aircraft carriers</b> (giant ships that carry warplanes)." },
-  { type: "check", id: "q2", std: "US.29", short: "Midway: the fake water message", label: "Check · Enemy message", kick: "Mission 1 · Midway", title: "Crack the code",
-    left: () => intel("📻 Enemy message caught · Hawaii", `<p>Japan plans to attack a place it calls <b>"AF."</b> Where is AF? U.S. codebreakers set a trap:</p><div class="radio">MIDWAY BASE (fake message):<br><span>"Our water machine broke."</span><br>JAPAN, 2 days later:<br><span>"AF is short of water."</span></div>`),
-    prompt: "What did the fake water message prove?", options: ["That \"AF\" meant Midway, so the U.S. knew the target", "That Japan's navy was running low on fresh water", "That Midway's water machine had really broken down", "That Japan had cracked the U.S. Navy's secret code"], hint: "Who repeated the fake news, and what name did they use?", why: "Japan repeated the fake news, so AF = Midway." },
-  { type: "order", id: "m1", short: "Midway plan", label: "Order 3 · Midway", kick: "Mission 1 · Midway", title: "Move your carriers",
-    art: () => fig(MAP_PAC), text: "You know Japan is coming for Midway. You have only <b>3 carriers</b> ready to fight. Where do they go?", battle: true,
-    choices: [
-      { label: "Hide near Midway and ambush Japan's fleet", fx: {}, result: "Big risk, big reward." },
-      { label: "Pull back to guard Hawaii and play it safe", fx: {}, result: "Your carriers head home." },
-      { label: "Warn Midway but keep the carriers far away", fx: {}, result: "Midway faces the attack alone." }
-    ] },
-  { type: "check", id: "q3", std: "US.29", short: "Why Midway was a turning point", label: "Debrief · Midway", kick: "Mission 1 · Debrief", title: "Midway",
-    left: () => fig(PHOTO.midway) + `<div class="panel">${DEB.midway()}</div>`,
-    prompt: "Why was Midway a <b>turning point</b> (the moment the war flipped)?", options: ["Japan lost carriers it could not quickly replace", "Japan took Midway and used it to attack Hawaii", "U.S. battleships sank most of Japan's navy there", "Japan gave up the war a few weeks after the battle"], hint: "Look at the big number. Could Japan get those back?", why: "After Midway, Japan was mostly on defense." },
+  { type: "mcard", m: 3, label: "Mission 3 · The Atlantic", name: "The Atlantic", bg: MAP_EU, lines: ["May 1943 · Night", "North Atlantic · U.S. Navy escort ship", "You are: the radar operator"], obj: "Protect the supply convoy from German U-boats (submarines)." },
+  { type: "radar", label: "Atlantic · Radar hunt" },
+  { type: "debrief", key: "atlantic", label: "Atlantic · Debrief", check: "q4", art: () => fig(PHOTO.enigma) },
 
-  { type: "mission", n: 2, key: "stalingrad", label: "Mission 2 · Stalingrad", name: "Stalingrad", date: "1942–1943 · Soviet Union", map: MAP_EU, marker: { x: 96, y: 44, label: "→ STALINGRAD", left: true },
-    obj: "Help the Soviets hold <b>Stalingrad</b>, a big factory city. Germany fights for it street by street. Families hide in basements." },
-  { type: "check", id: "q4", std: "US.29", short: "Stalingrad: Soviet advantage", label: "Check · Factories", kick: "Mission 2 · Stalingrad", title: "Factories on the move",
-    left: () => intel("Intel · Soviet factories", `<div class="big"><span class="n">1,500</span><p>Soviet factories moved east by train in 1941, far from Germany. Teens and women rebuilt them.</p></div><div class="big"><span class="n">4×</span><p>Soviet factories built about 4 times as many tanks as Germany in 1942.</p></div>`),
-    prompt: "What let the Soviets keep fighting a long, brutal battle?", options: ["Moved factories kept making tanks far from Germany", "Germany decided to stop attacking when winter came", "British codebreakers told them every German plan", "American soldiers came to fight inside the city"], hint: "Look at the two big numbers.", why: "They could replace the tanks they lost." },
-  { type: "order", id: "s1", short: "Lend-Lease choice", label: "Order 4 · Lend-Lease", kick: "Mission 2 · Stalingrad", title: "Send help?",
-    art: () => intel("Lend-Lease", `<p><b>Lend-Lease</b> = the U.S. sends weapons and supplies to its allies.</p><p>Whatever you send, you can't use yourself.</p>`), text: "What do you send the Soviets?",
+  { type: "mcard", m: 4, label: "Mission 4 · D-Day", name: "D-Day", bg: MAP_EU, lines: ["June 4, 1944", "Allied headquarters · southern England", "You are: on General Eisenhower's staff"], obj: "Plan the biggest sea invasion in history, then survive it." },
+  { type: "check", id: "q5", label: "D-Day · The fake army", kick: "Top secret · Operation Fortitude", title: "The ghost army",
+    left: () => intel("Top secret", `<p>The Allies build a <b>fake army</b> in England, aimed at <b>Calais</b>:</p><p>🎈 blow-up rubber tanks<br>📻 fake radio chatter<br>🕵️ double agents feeding Germany lies</p><p>The real landing: <b>Normandy</b>, farther away.</p>`) },
+  { type: "order", id: "weather", short: "D-Day weather call", label: "D-Day · Storm call", kick: "⚠ June 5, 1944 · 4:00 AM", title: "Storm warning",
+    art: () => intel("📻 Weather team", `<div class="radio">STORM OVER THE CHANNEL.
+<span>SHORT BREAK: JUNE 6.</span>
+NEXT GOOD TIDES: <span>ABOUT 2 WEEKS.</span></div><p>156,000 troops are loaded on ships and waiting. Every option is a gamble.</p>`),
+    text: "Eisenhower asks what you think. Your call:",
     choices: [
-      { label: "Trucks, food, and boots so their army can move", cost: ["F"], fx: { prod: -1 }, result: "Supply ships sail through icy seas." },
-      { label: "Tanks and fighter planes for their front lines", cost: ["F"], fx: { prod: -1 }, result: "Tanks and planes head east." },
-      { label: "Nothing. Save it all for your own invasion", up: ["F"], fx: { ships: 1 }, result: "You keep it for later." }
+      { label: "Go June 6, in the short break", sub: "Rough seas. But Germany won't expect it.", result: "Eisenhower: \"OK, let's go.\" The fleet sails." },
+      { label: "Wait 2 weeks for calm seas", sub: "Safer water. But secrets might leak.", result: "You wait. June 19: the worst Channel storm in 40 years." },
+      { label: "Go right now, into the storm", sub: "Total surprise. Brutal crossing.", result: "Boats pitch in the waves. Troops land seasick." }
     ] },
-  { type: "check", id: "q5", std: "US.33", short: "Stalingrad: cost of total war", label: "Debrief · Stalingrad", kick: "Mission 2 · Debrief", title: "Stalingrad",
-    left: () => fig(PHOTO.stalingrad) + `<div class="panel">${DEB.stalingrad()}</div>`,
-    prompt: "<b>Total war</b> = the whole country fights, not just soldiers. What does Stalingrad show about total war?", options: ["Families were stuck in the city during the fighting", "All the families left the city before the fighting", "The fighting stayed in empty fields and forests", "Only soldiers were in danger, never their families"], hint: "Who was hiding in basements?", why: "In total war, families end up inside the battle." },
+  { type: "check", id: "q6", label: "D-Day · Eisenhower's note", kick: "June 5, 1944 · Eisenhower's pocket", title: "The note he hoped to throw away",
+    left: () => `<div class="paper">"Our landings … have failed … and I have withdrawn the troops. My decision to attack at this time and place was based upon the best information available. … If any blame or fault attaches to the attempt it is mine alone."<span class="src">Handwritten note by Gen. Dwight D. Eisenhower, June 5, 1944 (he wrote "July 5" by mistake). Eisenhower Library. Shortened.</span></div><p class="hint">He wrote this in case D-Day failed. He never had to use it.</p>` },
+  { type: "beach", label: "D-Day · Omaha Beach" },
+  { type: "debrief", key: "dday", label: "D-Day · Debrief", art: () => fig(PHOTO.dday, MAP_EU) },
 
-  { type: "mission", n: 3, key: "atlantic", label: "Mission 3 · The Atlantic", name: "The Atlantic", date: "1943 · Atlantic Ocean", map: MAP_EU, marker: { x: 4, y: 50, label: "ATLANTIC ←" },
-    obj: "Stop German <b>U-boats</b> (submarines). They hunt in packs and sink the ships bringing food and fuel to Britain." },
-  { type: "order", id: "a1", short: "Second tech bet", label: "Order 5 · Beat the U-boats", kick: "Mission 3 · The Atlantic", title: "Hunt the wolf packs",
-    art: () => fig(PHOTO.enigma) + `<p class="lead" style="margin:0">U-boat radio messages are scrambled by a code machine called <b>Enigma</b>.</p>`, text: "Your second big tech bet. How do you beat the U-boats?",
-    choices: [
-      { label: "📡 Put radar on planes and ships to hunt them", up: ["T"], fx: { radar: 1 }, result: "Radar planes patrol the ocean." },
-      { label: "🔐 Crack the U-boats' Enigma code machine", up: ["T"], fx: { code: 1 }, result: "Codebreakers in England go after the Enigma code." },
-      { label: "🚢 Build cargo ships faster than they sink", up: ["F"], fx: { ships: 1 }, result: "One ship gets built in under 5 days." }
-    ] },
-  { type: "debrief", key: "atlantic", label: "Debrief · The Atlantic", kick: "Mission 3 · Debrief", title: "The Atlantic" },
-
-  { type: "mission", n: 4, key: "dday", label: "Mission 4 · D-Day", name: "D-Day", date: "June 1944 · Normandy, France", map: MAP_EU, marker: { x: 11, y: 46, label: "NORMANDY" },
-    obj: "Cross the English Channel, land on beaches full of German guns, and start freeing France." },
-  { type: "check", id: "q7", std: "US.29", short: "D-Day: why the fake army mattered", label: "Check · Fake army", kick: "Mission 4 · D-Day", title: "Top secret",
-    left: () => intel("Top secret · Operation Fortitude", `<p>The Allies build a <b>fake army</b> in England:</p><p>🎈 blow-up rubber tanks<br>📻 fake radio chatter</p><p>The goal: make Germany think the landing will hit <b>Calais</b>, not <b>Normandy</b>.</p>`),
-    prompt: "How would a fake army help the real landing?", options: ["Germany would keep troops at Calais, not Normandy", "The rubber tanks could fight in the real battle", "Germany would get scared and give up right away", "The Allies could skip crossing the English Channel"], hint: "Where did the Allies want Germany to wait?", why: "Every German soldier at Calais was one fewer at Normandy." },
-  { type: "order", id: "d1", short: "D-Day landing spot", label: "Order 6 · Landing spot", kick: "Mission 4 · D-Day", title: "Pick the beach",
-    art: () => fig(MAP_EU), text: "<b>Calais</b> is the shortest trip across the water. <b>Normandy</b> is farther. Where do you land?", battle: true,
-    choices: [
-      { label: "Normandy, while the fake army fools Germany", fx: {}, result: "Ships load up for Normandy." },
-      { label: "Calais, the shortest trip across the water", fx: {}, result: "Ships load up for Calais." },
-      { label: "Both: split the army between two beaches", fx: {}, result: "Half your army goes to each." }
-    ] },
-  { type: "order", id: "d2", short: "D-Day weather call", label: "Order 7 · Surprise storm", kick: "⚠ Surprise · June 5, 1944", title: "Storm warning",
-    art: () => intel("📻 Weather team", `<div class="radio">STORM OVER THE CHANNEL.<br><span>SHORT BREAK: JUNE 6.</span><br>NEXT GOOD TIDES: <span>2 WEEKS.</span></div>`), text: "Thousands of ships are loaded and waiting. Make the call.", battle: true,
-    choices: [
-      { label: "Go June 6 in the short break", fx: {}, result: "Germany didn't expect an attack in this weather." },
-      { label: "Wait 2 weeks for calm seas", fx: {}, result: "June 19: the worst storm on the Channel in 40 years." },
-      { label: "Go right now, into the storm", fx: {}, result: "Boats get swamped. Troops land seasick." }
-    ] },
-  { type: "check", id: "q8", std: "US.29", short: "D-Day: what made it work", label: "Debrief · D-Day", kick: "Mission 4 · Debrief", title: "D-Day",
-    left: () => fig(PHOTO.dday) + `<div class="panel">${DEB.dday()}</div>`,
-    prompt: "Think about all 4 missions. Which <b>mix</b> made D-Day work?", options: ["Ships from home, a safe ocean, and a trick on Germany", "More tanks, a bigger army, and the shortest crossing", "Heavy bombing, calm weather, and help from Italy", "Codebreakers, radar, and a surprise landing at Calais"], hint: "Which mix matches what really happened?", why: "No one thing won it. It took all of it." },
-
-  { type: "finale", label: "Turn in" }
+  { type: "finale", label: "Service record + turn in" }
 ];
-const CHECKS = SCREENS.filter(s => s.type === "check");
-const PROMPTS = [
-  { id: "wins", short: "What wins a war", label: "1. What wins a war: 📡 tech, 🏭 factories, or 👥 people? Pick ONE. Give 2 examples from today.", stem: "I think ___ mattered most because ___. For example, ___.", min: 70, newWords: 8,
-    mustAll: [["tech", "weapon", "radar", "code", "factor", "people", "home", "women", "worker"], ["because", "since", "so "], ["radar", "code", "enigma", "ship", "liberty", "tank", "t-34", "factor", "midway", "stalingrad", "atlantic", "d-day", "normandy", "u-boat", "women", "rationing", "fake", "rubber", "fortitude", "lend", "truck", "carrier", "weather", "storm"]],
-    mustMsg: "Pick one (tech, factories, or people), say \"because,\" and give real examples from today, like radar, Midway, or the 1,500 factories." },
-  { id: "people", short: "How total war changed ordinary lives", label: "2. Pick one group of ordinary people from today (like U.S. women, Soviet teens, or families in Stalingrad). How did the war change their lives?", stem: "In ___, ___ had to ___ because ___.", min: 50, newWords: 6,
-    mustAll: [["women", "worker", "famil", "civilian", "teen", "kid", "children", "mother", "girl", "tanya", "fanny"], ["u.s", "us ", "america", "united states", "britain", "british", "england", "soviet", "ussr", "russia", "leningrad", "stalingrad", "los angeles", "germany", "japan"]],
-    mustMsg: "Name a country (or city) AND a group of ordinary people, like Soviet teens or U.S. women, and say how their lives changed." }
-];
+const GAMES = { dive: "midway", factory: "stal", radar: "atl", beach: "dday" };
 
 // =====================================================================
 //  HUD
 // =====================================================================
-let lastRank = null, toastT = null; const lastV = {};
+let lastRank = null, toastT = null;
 function hud() {
   const xp = xpNow(), ri = rankOf(xp), next = RANKS[ri + 1];
   $("rankName").textContent = "🎖 " + RANKS[ri][1].toUpperCase();
   $("xpText").textContent = next ? xp + " / " + next[0] + " XP" : xp + " XP · MAX";
   $("xpFill").style.width = (next ? Math.round((xp - RANKS[ri][0]) / (next[0] - RANKS[ri][0]) * 100) : 100) + "%";
-  if (lastRank != null && ri > lastRank) { $("toastRank").textContent = "🎖 " + RANKS[ri][1]; $("toast").classList.add("show"); clearTimeout(toastT); toastT = setTimeout(() => $("toast").classList.remove("show"), 2600); }
+  if (lastRank != null && ri > lastRank) { $("toastRank").textContent = "🎖 " + RANKS[ri][1]; $("toast").classList.add("show"); SFX.good(); clearTimeout(toastT); toastT = setTimeout(() => $("toast").classList.remove("show"), 2600); }
   lastRank = ri;
-  [["T", tech()], ["F", fact()], ["P", ppl()]].forEach(([k, v]) => { const txt = (k === "P" && v > 0 ? "" : "") + v; if (lastV[k] != null && lastV[k] !== v) { $("m" + k).classList.add("flash"); setTimeout(() => $("m" + k).classList.remove("flash"), 900); } lastV[k] = v; $("v" + k).textContent = txt; });
-  const ax = axisNow(); $("axText").textContent = ax + "%"; $("axFill").style.width = ax + "%";
   const o = outcomes(), cur = SCREENS[st.i] || {};
-  const curMission = SCREENS.slice(0, st.i + 1).filter(s => s.type === "mission").length;
-  $("pips").innerHTML = ["midway", "stalingrad", "atlantic", "dday"].map((k, n) => `<span class="pip ${o[k] || (curMission === n + 1 && cur.type !== "finale" ? "now" : "")}" title="${["Midway", "Stalingrad", "Atlantic", "D-Day"][n]}">M${n + 1}${o[k] === "win" ? " ✓" : o[k] === "loss" ? " ✗" : o[k] === "mid" ? " ~" : ""}</span>`).join("");
+  const curM = SCREENS.slice(0, st.i + 1).filter(s => s.type === "mcard").length;
+  $("pips").innerHTML = ["midway", "stalingrad", "atlantic", "dday"].map((k, n) => `<span class="pip ${o[k] || (curM === n + 1 && cur.type !== "finale" ? "now" : "")}" title="${["Midway", "Stalingrad", "The Atlantic", "D-Day"][n]}">M${n + 1}${o[k] === "win" ? " ✓" : o[k] === "loss" ? " ✗" : o[k] === "mid" ? " ~" : ""}</span>`).join("");
 }
 
 // =====================================================================
@@ -442,103 +496,129 @@ function hud() {
 const app = $("app");
 let locked = false; const order = {};
 function next() { st.i = Math.min(st.i + 1, SCREENS.length - 1); save(); render(); window.scrollTo(0, 0); }
-function goBtn(txt) { return `<button type="button" class="go" id="goBtn">▶ ${txt}</button>`; }
+const goBtn = (txt, id) => `<button type="button" class="go" id="${id || "goBtn"}">▶ ${txt}</button>`;
+const testSkip = () => isTest() ? `<button type="button" class="skipT" id="tSkip">🧪 Test T.: finish this game</button>` : "";
 
 function render() {
-  hud();
+  cleanup(); hud();
   const s = SCREENS[st.i];
-  if (s.type === "intro") return intro();
-  if (s.type === "howto") return howto();
-  if (s.type === "mission") return mission(s);
-  if (s.type === "order") return orderScreen(s);
-  if (s.type === "check") return checkScreen(s);
-  if (s.type === "debrief") return debriefScreen(s);
-  return finale();
+  ({ intro, opana, mcard, order: orderScreen, check: checkScreen, dive, factory, radar, beach, debrief: debriefScreen, finale })[s.type](s);
 }
 
+// ---------- title ----------
 function intro() {
   app.innerHTML = `<section class="stage lbox"><div class="bgart" style="background-image:url('${PEARL.src}')"></div><div class="vign"></div>
-    <div class="inner hero" style="padding-top:44px">
-      <p class="kick">December 7, 1941</p>
-      <h1>Arsenal Race</h1><p class="gloss">arsenal = your stockpile of weapons</p>
-      <p class="hook">Japan just bombed Pearl Harbor. America is in the war, and the Allies are losing. <span style="color:var(--brass)">You're in command.</span></p>
-      <div class="chips"><span>⚔️ 4 missions</span><span>🎖 7 orders</span><span>✅ 7 quick checks</span><span>✍️ 2 short answers</span><span>⏱ about 25 min</span></div>
+    <div class="inner hero" style="padding-top:42px">
+      <p class="kick">World War II · 1941–1944</p>
+      <h1>Arsenal Race</h1>
+      <p class="hook">4 real battles. 4 different people. You play all of them. <span style="color:var(--brass)">Figure out what really wins a war.</span></p>
+      <div class="roles"><div><b>Codebreaker</b>+ dive-bomber pilot · Midway</div><div><b>Factory worker</b>age 16 · Stalingrad</div><div><b>Radar operator</b>U-boat hunt · Atlantic</div><div><b>Soldier</b>Omaha Beach · D-Day</div></div>
+      <div class="chips"><span>🎮 4 action missions</span><span>✅ 7 quick checks</span><span>✍️ No writing</span><span>⏱ about 20 min</span><span>🔊 Sound on</span></div>
       <div class="namebox"><label for="nameBox">Your name: first name + last initial</label>
         <input id="nameBox" maxlength="60" autocomplete="off" placeholder="like Jordan M." value="${esc(st.name)}">
-        <p id="introMsg" class="msg" role="status"></p>
-        ${goBtn("Enlist")}</div>
-      <details class="std"><summary>Goal + standards</summary>Goal: figure out what wins a war: tech, factories, or people. · SS.9‑12.US.29 (WWII turning points) · SS.9‑12.US.33 (sources on total war)</details>
+        <p id="introMsg" class="msg" role="status"></p>${goBtn("Enlist")}</div>
+      <details class="std"><summary>Goal + standards</summary>Goal: figure out what wins a war: tech, factories, or people. · SS.9‑12.US.29 (WWII turning points: Midway, D-Day, the war in Europe) · SS.9‑12.US.33 (WWII primary sources)</details>
     </div><div class="credit">${esc(PEARL.cap)}</div></section>`;
-  $("goBtn").onclick = () => {
+  const go = () => {
     const fixed = window.classShortName ? window.classShortName($("nameBox").value) : $("nameBox").value.trim();
     if (!/^\S+ [A-Z]\.$/.test(fixed)) { $("introMsg").textContent = "Type your first name and last initial, like Jordan M."; $("introMsg").className = "msg bad"; $("nameBox").focus(); return; }
-    st.name = fixed; next();
+    st.name = fixed; ac(); SFX.good(); next();
+  };
+  $("goBtn").onclick = go;
+  $("nameBox").addEventListener("keydown", e => { if (e.key === "Enter") go(); });
+}
+
+// ---------- cold open: the radar blip nobody believed ----------
+function opana() {
+  app.innerHTML = `<section class="stage"><div class="inner">
+    <p class="kick">December 7, 1941 · 7:02 AM · Opana radar station, Hawaii</p><h2>Cold open: the blip</h2>
+    <div class="split"><div style="display:flex;justify-content:center"><div class="scope" id="oscope" style="width:min(300px,78vw);cursor:default"><div class="sweep" id="osw"></div>
+      <div class="ring" style="width:33%;height:33%"></div><div class="ring" style="width:66%;height:66%"></div>
+      <span class="sub" id="oblip" style="left:50%;top:14%;opacity:0"><i style="width:26px;height:26px"></i></span></div></div>
+    <div><div class="panel" id="opanaText"><p class="lead">You're a young Army private on early-morning radar duty. Something huge shows up on the screen, 132 miles north.</p>
+      <button type="button" class="act" id="callIt" disabled>📞 CALL IT IN</button><p class="hint" id="ohint">Watch the scope…</p></div></div></div></div></section>`;
+  let ang = 0, raf, t0 = performance.now(), seen = false;
+  const sw = $("osw"), blip = $("oblip");
+  (function loop(t) {
+    ang = ((t - t0) / 2600 * 360) % 360; sw.style.transform = `rotate(${ang}deg)`;
+    if (t - t0 > 1400 && ang > 355 || ang < 6) { if (t - t0 > 1400) { blip.style.opacity = 1; if (!seen) { seen = true; SFX.ping(); $("callIt").disabled = false; $("ohint").textContent = "That's a LOT of planes."; } } }
+    else blip.style.opacity = Math.max(0, parseFloat(blip.style.opacity || 0) - .012);
+    raf = requestAnimationFrame(loop);
+  })(t0);
+  onLeave(() => cancelAnimationFrame(raf));
+  $("callIt").onclick = () => {
+    $("callIt").disabled = true;
+    $("opanaText").innerHTML = `<div class="radio" id="phone"></div>`;
+    typeInto($("phone"), "YOU: \"Large flight of planes, 132 miles north, coming in fast.\"\n\nLIEUTENANT: \"Well… don't worry about it.\"", 30, () => {
+      setTimeout(() => {
+        if (!$("opanaText")) return;
+        SFX.boom();
+        $("opanaText").innerHTML = `<figure><img src="${PEARL.src}" alt="Ships burning at Pearl Harbor" style="max-height:120px"><figcaption>${esc(PEARL.cap)}</figcaption></figure>
+          <p class="lead" style="margin:6px 0">7:55 AM: Japan's planes hit Pearl Harbor. Over 2,400 Americans are killed. <i>The lieutenant thought the blip was U.S. bombers. This really happened.</i></p>
+          <div class="paper" style="transform:none">"Yesterday, December 7th, 1941 — a date which will live in infamy — the United States of America was suddenly and deliberately attacked…"<span class="src">President Franklin D. Roosevelt, asking Congress to declare war, Dec. 8, 1941</span></div>
+          <p class="lead" style="margin:10px 0 0">America is in the war. The Allies are losing. <span style="color:var(--brass)">Lesson #1: tech only wins if people use it.</span></p>${goBtn("Start Mission 1")}`;
+        $("goBtn").onclick = next;
+      }, 900);
+    }, true);
   };
 }
 
-function howto() {
-  app.innerHTML = `<section class="stage lbox"><div class="bgart" style="background-image:url('${MAP_EU.src}')"></div><div class="vign"></div>
-    <div class="inner" style="padding-top:40px"><p class="kick">Briefing · before your first order</p><h2>How to win a war</h2>
-    <p class="lead">You need 3 things. Every order you give builds one of them. Watch them at the top of the screen.</p>
-    <div class="three"><div class="t"><div class="ic">📡</div><div class="nm">Tech</div><p>Spy on the enemy. Spot them first.</p></div>
-      <div class="f"><div class="ic">🏭</div><div class="nm">Factories</div><p>Build more weapons and ships than they can.</p></div>
-      <div class="p"><div class="ic">👥</div><div class="nm">People</div><p>Workers, soldiers, and families at home.</p></div></div>
-    <p class="lead" style="margin:0">At the end, <span style="color:var(--brass)">you decide which one matters MOST.</span> Win missions to rank up. Wrong answers on checks cost 🏭 −1.</p>
-    ${goBtn("Start boot camp")}</div></section>`;
+// ---------- mission card (loading screen) ----------
+function mcard(s) {
+  app.innerHTML = `<section class="stage lbox mcard"><div class="bgart" style="background-image:url('${s.bg.src}')"></div><div class="vign"></div>
+    <div class="inner"><div class="mnum">MISSION ${s.m} OF 4</div><div class="mname">${s.name}</div>
+    ${s.lines.map((l, n) => `<p class="tline${n === 2 ? " you" : ""}" id="tl${n}"></p>`).join("")}
+    <div class="mobj" id="mobj"><b>🎯 OBJECTIVE:</b> ${s.obj}</div><br>${goBtn("Begin mission")}</div>
+    <div class="credit">${esc(s.bg.cap)}</div></section>`;
+  SFX.rumble();
+  let n = 0;
+  const lines = s.lines.slice(); lines[2] = lines[2].replace("You are:", "You are " + first(st.name) + ",");
+  (function nextLine() { if (n >= lines.length) { const m = $("mobj"); if (m) m.classList.add("on"); return; } typeInto($("tl" + n), lines[n], 34, () => { n++; setTimeout(nextLine, 220); }, true); })();
   $("goBtn").onclick = next;
 }
 
-function mission(s) {
-  app.innerHTML = `<section class="stage lbox mcard"><div class="bgart" style="background-image:url('${s.map.src}');filter:grayscale(.4) sepia(.35) contrast(1.1) brightness(.5)"></div><div class="vign"></div>
-    <div class="marker${s.marker.left ? " left" : ""}" style="left:${s.marker.x}%;top:${s.marker.y}%"><i></i><span>${s.marker.label}</span></div>
-    <div class="inner"><div class="mnum">MISSION ${s.n} OF 4</div><div class="mname">${s.name}</div><div class="mdate" id="tw"></div>
-    <div class="mobj"><b>🎯 OBJECTIVE:</b> ${s.obj}</div><br>${goBtn("Begin mission")}</div>
-    <div class="credit">${esc(s.map.cap)}</div></section>`;
-  const el = $("tw"), txt = s.date; let n = 0;
-  (function type() { if (!el.isConnected) return; el.textContent = txt.slice(0, n++); if (n <= txt.length) setTimeout(type, 45); })();
-  $("goBtn").onclick = next;
-}
-
+// ---------- choice screen ----------
 function orderScreen(s) {
   const p = pick(s.id);
   const right = p != null
-    ? `<div class="sent"><span class="lbl">ORDER SENT</span><p><b>${esc(s.choices[p].label)}</b></p>${s.choices[p].up || s.choices[p].cost ? tags(s.choices[p].up, s.choices[p].cost) : ""}<p>${s.choices[p].result}</p></div>${goBtn("Continue")}`
-    : `<div class="panel"><h3>${s.text ? s.text : "Make the call."}</h3><div class="choices" id="ch"></div>${s.battle ? `<p class="hint">⚔️ Battle call: this decides how the mission goes.</p>` : ""}</div>`;
-  app.innerHTML = `<section class="stage"><div class="inner"><p class="kick">${s.kick} · ${s.label.split(" · ")[0]}</p><h2>${s.title}</h2>
+    ? `<div class="sent"><span class="lbl">ORDER SENT</span><p><b>${esc(s.choices[p].label)}</b></p><p>${esc(s.choices[p].result)}</p></div>${goBtn("Continue")}`
+    : `<div class="panel"><h3>${s.text}</h3><div class="choices" id="ch"></div><p class="hint">Every choice has a cost. This one changes how your next mission plays.</p></div>`;
+  app.innerHTML = `<section class="stage"><div class="inner"><p class="kick">${s.kick}</p><h2>${s.title}</h2>
     <div class="split"><div>${s.art()}</div><div>${right}</div></div></div></section>`;
   if (p != null) { $("goBtn").onclick = next; return; }
   if (!order[s.id]) order[s.id] = shuffle(s.choices.map((c, i) => i));
-  const box = $("ch");
   order[s.id].forEach(i => {
     const c = s.choices[i], b = document.createElement("button");
-    b.type = "button"; b.className = "choice"; b.innerHTML = esc(c.label) + (c.up || c.cost ? tags(c.up, c.cost) : "");
-    b.onclick = () => { st.picks[s.id] = i; applyFx(c.fx); save(); render(); };
-    box.appendChild(b);
+    b.type = "button"; b.className = "choice"; b.innerHTML = esc(c.label) + `<small>${esc(c.sub)}</small>`;
+    b.onclick = () => { st.picks[s.id] = i; SFX.morse(); save(); render(); };
+    $("ch").appendChild(b);
   });
 }
 
-function checkScreen(s) {
-  const done = st.done[s.id];
-  app.innerHTML = `<section class="stage"><div class="inner"><p class="kick">${s.kick}</p><h2>${s.title}</h2>
-    <div class="split"><div>${s.left()}</div><div class="panel"><p class="kick" style="color:var(--olive)">QUICK CHECK</p><h3>${s.prompt}</h3>
-    ${done ? `<p class="okline">✓ ${esc(s.options[0])}</p><p class="why">${s.why}</p>${goBtn("Continue")}` : `<div class="choices" id="ch"></div><p class="msg" id="fb" aria-live="polite"></p>`}</div></div></div></section>`;
+// ---------- quick check (shared) ----------
+function checkBlock(id, wrapId) {
+  const q = Q[id], done = st.done[id], wrap = $(wrapId);
+  wrap.innerHTML = `<p class="ck">QUICK CHECK</p><h3>${q.prompt}</h3>` + (done
+    ? `<p class="okline">✓ ${esc(q.options[0])}</p><p class="why">${q.why}</p>${goBtn("Continue")}`
+    : `<div class="choices" id="ch"></div><p class="msg" id="fb" aria-live="polite"></p>`);
   if (done) { $("goBtn").onclick = next; return; }
   const area = $("ch"), fb = $("fb");
   function draw() {
     area.replaceChildren();
-    shuffle(s.options.map((t, n) => ({ t, n }))).forEach(o => {
+    shuffle(q.options.map((t, n) => ({ t, n }))).forEach(o => {
       const b = document.createElement("button"); b.type = "button"; b.className = "choice"; b.textContent = o.t;
       b.onclick = () => {
         if (locked) return;
-        if (o.n === 0) { st.done[s.id] = true; if (window.classFirstTry) window.classFirstTry.right(s.id); save(); render(); return; }
-        st.wrong[s.id] = (st.wrong[s.id] || 0) + 1; if (window.classFirstTry) window.classFirstTry.wrong();
-        applyFx({ prod: -1 }); save(); hud();
-        if (isTest()) { fb.textContent = "Not quite. " + s.hint; fb.className = "msg bad"; draw(); return; }
+        if (o.n === 0) { st.done[id] = true; if (window.classFirstTry) window.classFirstTry.right(id); SFX.good(); save(); hud(); checkBlock(id, wrapId); return; }
+        st.wrong[id] = (st.wrong[id] || 0) + 1; if (window.classFirstTry) window.classFirstTry.wrong();
+        SFX.bad(); save();
+        if (isTest()) { fb.textContent = "Not quite. " + q.hint; fb.className = "msg bad"; draw(); return; }
         locked = true; area.querySelectorAll("button").forEach(x => x.disabled = true);
         let left = LOCK;
         (function tick() {
-          fb.textContent = "Not quite (🏭 −1). " + s.hint + " New order in " + left + "…"; fb.className = "msg bad";
-          if (left-- <= 0) { locked = false; fb.textContent = "Not quite. " + s.hint + " Try again."; draw(); return; }
+          if (!fb.isConnected) { locked = false; return; }
+          fb.textContent = "Not quite. " + q.hint + " Try again in " + left + "…"; fb.className = "msg bad";
+          if (left-- <= 0) { locked = false; fb.textContent = "Not quite. " + q.hint; draw(); return; }
           setTimeout(tick, 1000);
         })();
       };
@@ -547,65 +627,391 @@ function checkScreen(s) {
   }
   draw();
 }
-
-function debriefScreen(s) {
+function checkScreen(s) {
   app.innerHTML = `<section class="stage"><div class="inner"><p class="kick">${s.kick}</p><h2>${s.title}</h2>
-    <div class="split"><div class="panel">${DEB[s.key]()}</div><div class="panel"><p class="lead" style="margin:0">Last mission: <b style="color:var(--brass)">D-Day</b>. Everything you built so far counts.</p>${goBtn("Next mission")}</div></div></div></section>`;
-  $("goBtn").onclick = next;
+    <div class="split"><div>${s.left()}</div><div class="panel" id="cwrap"></div></div></div></section>`;
+  checkBlock(s.id, "cwrap");
+  if (s.onShow) s.onShow();
 }
 
+// ---------- game frame + finish ----------
+function gameFrame(kick, title, objective, how, arenaHtml, ctrlHtml) {
+  app.innerHTML = `<section class="stage gstage"><div class="inner"><p class="kick">${kick}</p>
+    <div class="gtop"><h2>${title}</h2><span class="obj"><b>OBJECTIVE:</b> ${objective}</span></div>
+    <div class="howbox">${how.map(h => `<span>${h}</span>`).join("")}</div>
+    ${arenaHtml}<div class="ctrl" id="ctrl">${ctrlHtml || ""}${testSkip()}</div><div id="after"></div></div></section>`;
+}
+function finishGame(key, data, line) {
+  st.g[key] = Object.assign({}, data, { done: true }); save(); hud();
+  const a = $("after"); if (!a) return;
+  const c = $("ctrl"); if (c) c.innerHTML = "";
+  a.innerHTML = `<div class="sent" style="margin-top:10px"><span class="lbl">MISSION OVER</span><p><b>${line}</b></p></div>${goBtn("See the debrief")}`;
+  $("goBtn").onclick = next; $("goBtn").focus();
+}
+function callout(arena, txt, color) {
+  let c = arena.querySelector(".callout");
+  if (!c) { c = document.createElement("div"); c.className = "callout"; arena.appendChild(c); }
+  c.textContent = txt; c.style.color = color || "#ffe08a"; c.classList.remove("show"); void c.offsetWidth; c.classList.add("show");
+}
+function alreadyPlayed(key, line) {
+  gameFrame("Mission already played", "You finished this one", line, [], "", "");
+  $("after").innerHTML = goBtn("See the debrief"); $("goBtn").onclick = next;
+}
+const keyFire = fn => { const h = e => { if ((e.code === "Space" || e.key === " ") && !(e.target.closest && e.target.closest("button,input,textarea"))) { e.preventDefault(); fn(); } }; document.addEventListener("keydown", h); onLeave(() => document.removeEventListener("keydown", h)); };
+
+// =====================================================================
+//  GAME 1 · MIDWAY DIVE BOMB
+// =====================================================================
+const CARRIER_SVG = `<svg viewBox="0 0 200 60" aria-hidden="true"><path d="M8 30 L30 8 H180 Q196 8 196 30 Q196 52 180 52 H30 Z" fill="#6c7275" stroke="#2c3133" stroke-width="2"/><rect x="34" y="14" width="150" height="32" fill="#9a8a6a"/><path d="M40 30 H178" stroke="#fff8" stroke-width="2" stroke-dasharray="8 6"/><rect x="128" y="4" width="16" height="10" fill="#4b5052"/><circle cx="100" cy="36" r="13" fill="#c9302c"/><circle cx="100" cy="36" r="10" fill="#9a8a6a"/>${[54, 70, 86, 140, 156, 170].map(x => `<path d="M${x} 22 l0 14 M${x - 6} 27 h12 M${x - 3} 35 h6" stroke="#2c3133" stroke-width="2.5"/>`).join("")}</svg>`;
+function dive() {
+  if (st.g.midway && st.g.midway.done) return alreadyPlayed("midway", "Midway is done.");
+  const goodIntel = pick("bait") === 0;
+  const NAMES = ["Kaga", "Akagi", "Sōryū"];
+  gameFrame("June 4, 1942 · 10:22 AM · 14,000 feet over the Pacific", "Dive!",
+    "Hit 3 Japanese carriers while their decks are full of planes.",
+    ["You're now a dive-bomber pilot", "1. Wait for the carrier to slide under your sight", "2. Hit 💣 DROP (or Space)"],
+    `<div class="arena dive" id="ar"><div class="waves"></div><div class="carrier" id="car">${CARRIER_SVG}</div><div class="reticle"></div><div class="alt" id="alt">14,000 FT</div><div class="tgt" id="tgt">TARGET 1 OF 3: ${NAMES[0]}</div><div class="flash" id="fl"></div></div>`,
+    `<button type="button" class="act" id="drop">💣 DROP</button><span class="key">or press Space</span><span class="stat">HITS <b id="hits">0</b>/3</span><span class="stat">MISSES <b id="miss">0</b></span>`);
+  const ar = $("ar"), car = $("car"), altEl = $("alt");
+  const speed = goodIntel ? 1.45 : 2.05, passMs = goodIntel ? 5200 : 4200;
+  let hits = 0, misses = 0, t0 = performance.now(), passStart = t0, busy = false, raf, phase = Math.random() * 6, cx = 0, scale = .6;
+  function pos(t) {
+    const w = ar.clientWidth, s = (t - t0) / 1000 * speed;
+    return w / 2 + w * .33 * (.72 * Math.sin(s + phase) + .28 * Math.sin(s * 2.3 + phase * 1.7));
+  }
+  function frame(t) {
+    const frac = clamp((t - passStart) / passMs, 0, 1);
+    scale = .8 + frac * .9; cx = pos(t);
+    car.style.transform = `translate(${cx - 100}px,0) scale(${scale})`;
+    const alt = Math.round(14000 - frac * 12500);
+    altEl.textContent = alt.toLocaleString() + " FT"; altEl.classList.toggle("low", alt < 4500);
+    if (!busy && frac >= 1) { busy = true; miss("TOO LOW! PULL UP!"); }
+    raf = requestAnimationFrame(frame);
+  }
+  raf = requestAnimationFrame(frame);
+  onLeave(() => cancelAnimationFrame(raf));
+  function newPass(delay) { const tm = setTimeout(() => { passStart = performance.now(); busy = false; $("drop") && ($("drop").disabled = false); }, delay); onLeave(() => clearTimeout(tm)); }
+  function miss(txt) {
+    misses++; $("miss").textContent = misses; $("drop").disabled = true;
+    SFX.splash(); callout(ar, txt || "MISSED! COME AROUND", "#d7f3ff");
+    newPass(1500);
+  }
+  function fire() {
+    if (busy) return; busy = true; $("drop").disabled = true;
+    const at = cx, half = 62 * scale;
+    const b = document.createElement("div"); b.className = "bomb"; ar.appendChild(b); SFX.whistle();
+    const tm = setTimeout(() => {
+      b.remove();
+      if (Math.abs(at - ar.clientWidth / 2) <= half) {
+        hits++; $("hits").textContent = hits;
+        const bm = document.createElement("div"); bm.className = "boom"; bm.style.left = "50%"; bm.style.top = "50%"; ar.appendChild(bm); setTimeout(() => bm.remove(), 900);
+        $("fl").classList.remove("on"); void $("fl").offsetWidth; $("fl").classList.add("on");
+        SFX.boom(); car.classList.add("burn"); callout(ar, NAMES[hits - 1] + " HIT!", "#ffb15c");
+        if (hits >= 3) {
+          const t2 = setTimeout(() => finishGame("midway", { hits, misses, goodIntel },
+            `3 carriers burning in minutes. ${misses === 0 ? "Not one wasted bomb." : misses + (misses === 1 ? " miss" : " misses") + " along the way."}`), 1300);
+          onLeave(() => clearTimeout(t2)); return;
+        }
+        const t3 = setTimeout(() => { car.classList.remove("burn"); $("tgt").textContent = "TARGET " + (hits + 1) + " OF 3: " + NAMES[hits]; phase = Math.random() * 6; }, 1300);
+        onLeave(() => clearTimeout(t3));
+        newPass(1500);
+      } else {
+        const sp = document.createElement("div"); sp.className = "splash"; sp.style.left = "50%"; sp.style.top = "50%"; ar.appendChild(sp); setTimeout(() => sp.remove(), 800);
+        miss();
+      }
+    }, 500);
+    onLeave(() => clearTimeout(tm));
+  }
+  $("drop").onclick = fire; keyFire(fire);
+  if ($("tSkip")) $("tSkip").onclick = () => finishGame("midway", { hits: 3, misses: 0, goodIntel }, "Test T. skipped the dive.");
+  if (!goodIntel) callout(ar, "LATE WARNING: THEY'RE FAST", "#ff8a6a");
+}
+
+// =====================================================================
+//  GAME 2 · STALINGRAD TANK LINE
+// =====================================================================
+const PARTS = [{ k: "HULL", ic: "🟫" }, { k: "ENGINE", ic: "⚙️" }, { k: "TURRET", ic: "🔘" }, { k: "TRACKS", ic: "⛓️" }];
+function factory() {
+  if (st.g.stal && st.g.stal.done) return alreadyPlayed("stal", "Stalingrad is done.");
+  const lend = pick("lend"), DUR = 40 + (lend === 0 ? 6 : 0), EVERY = 4.6;
+  gameFrame("Stalingrad Tractor Factory · Sept. 1942", "The tank line",
+    "Build T-34 tanks faster than Germany destroys them.",
+    ["Click the part the blueprint needs next", "Build in order: Hull → Engine → Turret → Tracks", "Wrong part = the line jams"],
+    `<div class="arena factory" id="ar"><div><div class="score"><div class="us"><small>TANKS YOU BUILT</small><b id="built">0</b></div><div class="them"><small>TANKS GERMANY DESTROYED</small><b id="lost">0</b></div></div>
+      <div class="ctrl" style="margin-top:8px"><span class="stat">⏱ <b id="secs">${DUR}</b>s</span><div class="timer"><span id="tbar"></span></div></div>
+      <p class="front" id="front">The front line is 3 blocks away. Every tank you finish drives straight into battle.</p></div>
+      <div><div class="bp"><div class="need" id="need">NEXT: <b>HULL</b></div><div class="slots" id="slots"></div></div><div class="parts" id="parts"></div></div></div>`,
+    `<span class="key">Tip: the parts shuffle every time. Read before you click.</span>`);
+  const ar = $("ar");
+  let built = lend === 1 ? 2 : 0, lost = 0, step = 0, jam = false, over = false, start = performance.now(), raf, lastHit = 0;
+  $("built").textContent = built;
+  function drawBP() {
+    $("slots").innerHTML = PARTS.map((p, i) => `<div class="slot ${i < step ? "ok" : i === step ? "next" : ""}"><span>${p.ic}</span>${p.k}</div>`).join("");
+    $("need").innerHTML = "NEXT: <b>" + PARTS[step].k + "</b>";
+    const box = $("parts"); box.replaceChildren();
+    shuffle(PARTS.map((p, i) => i)).forEach(i => {
+      const b = document.createElement("button"); b.type = "button"; b.className = "part"; b.innerHTML = `<span class="ic">${PARTS[i].ic}</span>${PARTS[i].k}`;
+      b.disabled = jam || over; b.onclick = () => pickPart(i, b); box.appendChild(b);
+    });
+  }
+  function pickPart(i, b) {
+    if (jam || over) return;
+    if (i === step) {
+      SFX.clank(); step++;
+      if (step === 4) {
+        step = 0; built++; $("built").textContent = built; SFX.rumble();
+        const r = document.createElement("div"); r.className = "roll"; r.textContent = "🛡️➡"; ar.appendChild(r); setTimeout(() => r.remove(), 1700);
+        callout(ar, "TANK #" + built + " TO THE FRONT", "#86c98d");
+      }
+      drawBP();
+    } else {
+      jam = true; SFX.bad(); $("parts").classList.add("jam"); $("need").innerHTML = "⚠ JAMMED! Needed: <b>" + PARTS[step].k + "</b>";
+      $("parts").querySelectorAll("button").forEach(x => x.disabled = true);
+      const tm = setTimeout(() => { jam = false; $("parts") && $("parts").classList.remove("jam"); if (!over) drawBP(); }, 1100); onLeave(() => clearTimeout(tm));
+    }
+  }
+  function frame(t) {
+    const el = (t - start) / 1000, left = Math.max(0, DUR - el);
+    $("secs").textContent = Math.ceil(left); $("tbar").style.width = (left / DUR * 100) + "%";
+    const shouldLost = Math.floor(el / EVERY);
+    if (shouldLost > lastHit && !over) { lastHit = shouldLost; lost++; $("lost").textContent = lost; SFX.boom(); callout(ar, "TANK LOST", "#ff8a6a"); }
+    $("front").textContent = built > lost ? "✅ You're ahead. The front line is holding." : built === lost ? "⚠ Dead even. Build faster!" : "🔥 Germany is winning the race. Build faster!";
+    if (left <= 0 && !over) {
+      over = true; drawBP();
+      finishGame("stal", { built, lost }, built > lost ? `You built ${built} tanks. Germany destroyed ${lost}. The line held.` : `You built ${built} tanks. Germany destroyed ${lost}. The line bent, but the factory kept going.`);
+      return;
+    }
+    raf = requestAnimationFrame(frame);
+  }
+  drawBP(); raf = requestAnimationFrame(frame);
+  onLeave(() => { over = true; cancelAnimationFrame(raf); });
+  if ($("tSkip")) $("tSkip").onclick = () => { over = true; cancelAnimationFrame(raf); finishGame("stal", { built: 12, lost: 8 }, "Test T. skipped the tank line."); };
+}
+
+// =====================================================================
+//  GAME 3 · ATLANTIC RADAR HUNT
+// =====================================================================
+function radar() {
+  if (st.g.atl && st.g.atl.done) return alreadyPlayed("atl", "The Atlantic is done.");
+  const DUR = 46000, SPAWN = 3300, TRAVEL = 13500, PERIOD = 2600;
+  gameFrame("North Atlantic · May 1943 · 2:00 AM", "Hunt the wolf pack",
+    "Stop U-boats before they reach the convoy.",
+    ["🟡 Click U-boats when the sweep lights them up", "🟩 Never fire on the green convoy ships", "💣 Miss = slow reload", "🔐 Codebreakers: most come from the NORTH-EAST"],
+    `<div class="arena sonar"><div class="scope" id="sc"><div class="sector"></div><span class="sector-l">ENIGMA TIP</span><div class="ring" style="width:33%;height:33%"></div><div class="ring" style="width:66%;height:66%"></div>
+      <div class="ax" style="left:50%;top:0;bottom:0;width:1px"></div><div class="ax" style="top:50%;left:0;right:0;height:1px"></div><div class="sweep" id="sw"></div></div>
+      <div class="legend"><p><span class="lg u"></span> U-boat (enemy sub) on the surface</p><p><span class="lg s"></span> Convoy ship (yours: food and fuel for Britain)</p>
+      <p class="stat">STOPPED <b id="stop">0</b> · SHIPS LOST <b id="lost">0</b></p><div class="ctrl"><span class="stat">⏱ <b id="secs">46</b>s</span><div class="timer"><span id="tbar"></span></div></div>
+      <p class="radar-msg" id="rmsg" aria-live="polite">Contacts incoming…</p></div></div>`, "");
+  const sc = $("sc"), sw = $("sw");
+  const ships = [[0, 0], [-.09, -.06], [.09, -.05], [-.1, .07], [.08, .08], [0, -.12], [0, .12]].map(([x, y]) => {
+    const d = document.createElement("button"); d.type = "button"; d.className = "ship"; d.setAttribute("aria-label", "Convoy ship"); d.style.left = (50 + x * 100) + "%"; d.style.top = (50 + y * 100) + "%"; d.style.border = "0"; d.style.padding = "0";
+    d.onclick = e => { e.stopPropagation(); if (d.classList.contains("sunk")) return; ff++; SFX.bad(); msg("⚠ FRIENDLY SHIP! Hold your fire!"); };
+    sc.appendChild(d); return d;
+  });
+  let subs = [], stopped = 0, lost = 0, ff = 0, start = performance.now(), lastSpawn = start - SPAWN + 1200, raf, over = false, cool = 0;
+  const msg = t => { const m = $("rmsg"); if (m) m.textContent = t; };
+  function spawn(now) {
+    const ne = Math.random() < .72, deg = ne ? -85 + Math.random() * 80 : Math.random() * 360;
+    const el = document.createElement("button"); el.type = "button"; el.className = "sub"; el.setAttribute("aria-label", "U-boat contact"); el.innerHTML = "<i></i>"; el.style.opacity = 0;
+    const s = { a: deg * Math.PI / 180, r: 1, born: now, seen: -9999, el, dead: false };
+    el.onclick = e => {
+      e.stopPropagation(); if (s.dead || over) return;
+      const now = performance.now();
+      if (now < cool) { msg("⏳ Reloading depth charges…"); return; }
+      if (parseFloat(el.style.opacity) < .12) { cool = now + 1500; SFX.splash(); msg("Nothing on the scope there. Reloading… wait for the sweep."); return; }
+      cool = now + 450;
+      s.dead = true; stopped++; $("stop").textContent = stopped; SFX.boom(); msg("💥 Depth charges! U-boat stopped.");
+      const sp = document.createElement("div"); sp.className = "splash"; sp.style.left = el.style.left; sp.style.top = el.style.top; sc.appendChild(sp); setTimeout(() => sp.remove(), 800);
+      el.remove();
+    };
+    sc.appendChild(el); subs.push(s);
+  }
+  sc.addEventListener("click", () => { if (over) return; const now = performance.now(); if (now < cool) { msg("⏳ Reloading depth charges…"); return; } cool = now + 1500; SFX.splash(); msg("Empty water! Reloading… only fire at real contacts."); });
+  function frame(now) {
+    const el = now - start, sweepDeg = (el / PERIOD * 360) % 360;
+    sw.style.transform = `rotate(${sweepDeg}deg)`;
+    if (el < DUR - TRAVEL * .6 && now - lastSpawn > SPAWN) { lastSpawn = now; spawn(now); }
+    subs.forEach(s => {
+      if (s.dead) return;
+      s.r = 1 - (now - s.born) / TRAVEL * .8;
+      const deg = ((s.a * 180 / Math.PI) + 90 + 360) % 360;              // screen angle measured like the sweep (0 = up)
+      const diff = (sweepDeg - deg + 360) % 360;
+      if (diff < 14) { if (now - s.seen > 1500) SFX.ping(); s.seen = now; }
+      const op = clamp(1 - (now - s.seen) / 1900, 0, 1);
+      s.el.style.opacity = op; s.el.style.left = (50 + Math.cos(s.a) * s.r * 46) + "%"; s.el.style.top = (50 + Math.sin(s.a) * s.r * 46) + "%";
+      if (s.r <= .2) {
+        s.dead = true; s.el.remove(); lost++; $("lost").textContent = lost; SFX.boom();
+        const alive = ships.filter(d => !d.classList.contains("sunk")); if (alive.length) alive[Math.floor(Math.random() * alive.length)].classList.add("sunk");
+        msg("🔥 Torpedo hit! A convoy ship is going down.");
+      }
+    });
+    const left = Math.max(0, DUR - el); $("secs").textContent = Math.ceil(left / 1000); $("tbar").style.width = (left / DUR * 100) + "%";
+    if ((left <= 0 || (el > DUR - TRAVEL * .6 && subs.every(s => s.dead))) && !over) {
+      over = true;
+      finishGame("atl", { stopped, lost, ff }, `You stopped ${stopped} U-boats. ${lost === 0 ? "The whole convoy made it." : lost + " convoy " + (lost === 1 ? "ship" : "ships") + " lost."}${ff ? " (You fired on your own ships " + ff + (ff === 1 ? " time.)" : " times.)") : ""}`);
+      return;
+    }
+    raf = requestAnimationFrame(frame);
+  }
+  raf = requestAnimationFrame(frame);
+  onLeave(() => { over = true; cancelAnimationFrame(raf); });
+  if ($("tSkip")) $("tSkip").onclick = () => { over = true; cancelAnimationFrame(raf); finishGame("atl", { stopped: 12, lost: 0, ff: 0 }, "Test T. skipped the radar hunt."); };
+}
+
+// =====================================================================
+//  GAME 4 · OMAHA BEACH
+// =====================================================================
+const HEDGE = `<svg viewBox="0 0 44 44" aria-hidden="true"><path d="M6 38 L38 6 M6 6 L38 38 M22 4 V40" stroke="#3a3530" stroke-width="5" stroke-linecap="round"/></svg>`;
+function beach() {
+  if (st.g.dday && st.g.dday.done) return alreadyPlayed("dday", "D-Day is done.");
+  const spd = ddaySpeed();
+  // cover spots: x%, y% (start in the surf, end at the seawall)
+  const SPOTS = [[46, 88], [30, 72], [62, 58], [36, 44], [66, 31], [50, 18]];
+  gameFrame("June 6, 1944 · 6:36 AM · Omaha Beach, France", "Get off the beach",
+    "Reach the seawall. Move only when the machine gun is aimed away.",
+    ["You're now a private, 1st Infantry Division", "1. Watch the red gun line", "2. Hit 🏃 MOVE (or Space) when it swings away"],
+    `<div class="arena beach" id="ar"><div class="bluff"></div><div class="wall"></div><div class="bunker"></div>
+      <svg class="cone" id="cone" viewBox="0 0 100 100" preserveAspectRatio="none"><polygon id="conep" fill="#ff3b2066" points="50,6 50,6 50,6"/></svg>
+      ${SPOTS.slice(1, 5).map(([x, y]) => `<div class="cover" style="left:${x}%;top:${y}%">${HEDGE}</div>`).join("")}
+      <div class="boat" style="left:22%"></div><div class="boat" style="left:46%"></div><div class="boat" style="left:74%"></div>
+      <div class="gi" style="left:20%;top:72%"></div><div class="gi" style="left:76%;top:58%"></div><div class="gi" style="left:58%;top:86%"></div>
+      <div class="gi me" id="me" style="left:${SPOTS[0][0]}%;top:${SPOTS[0][1]}%"></div></div>`,
+    `<button type="button" class="act" id="mv">🏃 MOVE</button><span class="key">or press Space</span><span class="lane safe" id="lane">🟢 Gun is away</span><span class="stat">COVER <b id="cv">0</b>/5</span><span class="stat">PINNED <b id="pn">0</b></span>`);
+  const ar = $("ar"), me = $("me"), conep = $("conep"), lane = $("lane");
+  const BX = 50, BY = 6, HALF = 7;                                     // bunker spot + half-width of the gun's cone (degrees)
+  let at = 0, pinned = 0, moving = null, stun = 0, raf, t0 = performance.now(), ang = 0, over = false, w = 1.1 * spd, phase = 0;
+  const angTo = (x, y) => Math.atan2(x - BX, (y - BY) * .62) * 180 / Math.PI;   // 0 = straight down the beach
+  function hot(x, y) { return Math.abs(angTo(x, y) - ang) < HALF + 2; }
+  function frame(t) {
+    const s = (t - t0) / 1000;
+    phase += (w + .35 * Math.sin(s * .7)) * (1 / 60);
+    ang = 52 * Math.sin(phase);
+    const r = 120, a1 = (ang - HALF) * Math.PI / 180, a2 = (ang + HALF) * Math.PI / 180;
+    conep.setAttribute("points", `${BX},${BY} ${BX + Math.sin(a1) * r},${BY + Math.cos(a1) * r / .62} ${BX + Math.sin(a2) * r},${BY + Math.cos(a2) * r / .62}`);
+    // where am I right now?
+    let x = SPOTS[at][0], y = SPOTS[at][1];
+    if (moving) {
+      const f = clamp((t - moving.t) / 700, 0, 1), a = SPOTS[moving.from], b = SPOTS[moving.from + 1];
+      x = a[0] + (b[0] - a[0]) * f; y = a[1] + (b[1] - a[1]) * f;
+      if (f > .08 && f < .95 && hot(x, y)) {                                 // caught in the open
+        pinned++; $("pn").textContent = pinned; SFX.mg(); SFX.bad();
+        for (let i = 0; i < 6; i++) { const d = document.createElement("div"); d.className = "dirt"; d.style.left = (x + (Math.random() - .5) * 8) + "%"; d.style.top = (y + (Math.random() - .5) * 6) + "%"; ar.appendChild(d); setTimeout(() => d.remove(), 600); }
+        me.style.transition = "none"; me.style.left = a[0] + "%"; me.style.top = a[1] + "%"; void me.offsetWidth; me.style.transition = "";
+        me.classList.add("pinned"); setTimeout(() => me.classList.remove("pinned"), 450);
+        callout(ar, "PINNED DOWN!", "#ff8a6a"); moving = null; stun = t + 1300; $("mv").disabled = true;
+      } else if (f >= 1) {
+        at = moving.from + 1; moving = null; $("cv").textContent = at; SFX.clank();
+        if (at >= SPOTS.length - 1) {
+          over = true; callout(ar, "SEAWALL!", "#86c98d");
+          const tm = setTimeout(() => finishGame("dday", { pinned, speed: Math.round(spd * 100) / 100 }, pinned === 0 ? "You made the seawall without getting pinned once." : `You made the seawall. Pinned down ${pinned} ${pinned === 1 ? "time" : "times"} on the way.`), 1100);
+          onLeave(() => clearTimeout(tm)); return;
+        }
+      }
+    }
+    if (stun && t > stun) { stun = 0; $("mv").disabled = false; }
+    if (!moving && at < SPOTS.length - 1) {
+      const a = SPOTS[at], b = SPOTS[at + 1], mid = [(a[0] + b[0]) / 2, (a[1] + b[1]) / 2];
+      const danger = hot(...a) || hot(...mid) || hot(...b) || Math.abs(angTo(...mid) - ang) < 18;
+      lane.textContent = danger ? "🔴 Gun is on your path. WAIT" : "🟢 Gun is away. GO"; lane.className = "lane " + (danger ? "hot" : "safe");
+    }
+    if (!over) raf = requestAnimationFrame(frame);
+  }
+  raf = requestAnimationFrame(frame);
+  const mgT = setInterval(() => { if (!over && Math.random() < .5) noise(.04, .06, 1400, "bandpass"); }, 300);
+  onLeave(() => { over = true; cancelAnimationFrame(raf); clearInterval(mgT); });
+  function move() {
+    if (over || moving || stun || at >= SPOTS.length - 1) return;
+    moving = { from: at, t: performance.now() };
+    me.style.left = SPOTS[at + 1][0] + "%"; me.style.top = SPOTS[at + 1][1] + "%";
+  }
+  $("mv").onclick = move; keyFire(move);
+  if ($("tSkip")) $("tSkip").onclick = () => { over = true; finishGame("dday", { pinned: 0, speed: spd }, "Test T. skipped the beach."); };
+  if (spd > 1.15) callout(ar, "THE GUN IS FAST TODAY", "#ff8a6a");
+}
+
+// =====================================================================
+//  DEBRIEFS
+// =====================================================================
+function debriefHtml(r, yours, cause, lesson, realN, realT) {
+  return `<span class="stamp ${r}">${STAMP[r]}</span><div class="gains"><span>+${MXP[r]} XP</span></div>
+    <p class="yours">${yours}</p>${cause ? `<p class="cause"><b>Caused by:</b> ${cause}</p>` : ""}
+    <div class="lesson"><span class="lb">What won it</span>${lesson}</div>
+    <div class="real"><span class="lb">What really happened</span><div class="big"><span class="n">${realN}</span><p>${realT}</p></div></div>`;
+}
+const DEB = {
+  midway() { const g = st.g.midway || {}, r = outcomes().midway || "mid";
+    return debriefHtml(r, r === "win" ? "You caught Japan's carriers packed with planes, fuel, and bombs. Three were burning within minutes." : "You got the carriers, but missed drops cost planes and pilots.",
+      (g.goodIntel ? "✓ water trick set up the ambush early" : "✗ your first fake message cost 2 days, so less warning") + " · " + (g.misses || 0) + " missed " + ((g.misses || 0) === 1 ? "drop" : "drops"),
+      "📡 <b>TECH.</b> Codebreakers told the U.S. where Japan would strike. That set up the ambush.",
+      "4", "Japanese carriers sunk at Midway. The U.S. lost 1 (the Yorktown). Japan could not replace its carriers or skilled pilots fast enough."); },
+  stalingrad() { const g = st.g.stal || {}, r = outcomes().stalingrad || "mid", l = pick("lend");
+    return debriefHtml(r, (r === "win" ? "Your line kept the tanks coming. " : "Germany kept up with your line, so the fight dragged on. ") + "In November, Soviet armies circle behind the Germans and trap them.",
+      `you built ${g.built || 0}, Germany destroyed ${g.lost || 0}` + (l === 0 ? " · ✓ U.S. trucks sped up parts" : l === 1 ? " · ✓ U.S. tanks gave you a head start" : l === 2 ? " · ✗ no U.S. help this time" : ""),
+      "🏭 <b>FACTORIES.</b> The Soviets built tanks faster than Germany could destroy them. Some rolled out unpainted, straight into battle.",
+      "91,000", "German soldiers surrendered on Feb. 2, 1943. About 2 million people were killed, wounded, or captured. Germany never fully recovered in the east."); },
+  atlantic() { const g = st.g.atl || {}, r = outcomes().atlantic || "mid";
+    return debriefHtml(r, r === "win" ? "Codes told you where to look. Radar found them. The convoy made it." : r === "mid" ? "Some U-boats got through. Sailors died, but most supplies made it." : "The wolf pack shredded the convoy. Britain runs short of food and fuel.",
+      `${g.stopped || 0} U-boats stopped · ${g.lost || 0} ships lost` + (g.ff ? ` · ✗ fired on your own ships ${g.ff}×` : ""),
+      "📡 <b>TECH</b> + 🏭 <b>FACTORIES.</b> Radar and cracked Enigma codes found U-boats. U.S. shipyards built cargo ships faster than they sank. One took under 5 days.",
+      "41", "U-boats sunk in May 1943 alone. Germany pulled its U-boats out of the North Atlantic. Supplies for D-Day could now cross safely."); },
+  dday() { const g = st.g.dday || {}, r = outcomes().dday || "mid";
+    return debriefHtml(r, r === "win" ? "You got off the beach fast and helped open a path inland." : r === "mid" ? "You made it, but your unit took heavy losses." : "Your unit was stuck on the sand for hours. Omaha nearly failed for real.",
+      ddayMods().map(m => (m[0] < 0 ? "✓ " : m[0] > 0 ? "✗ " : "• ") + m[1].replace(/^\S+ /, "")).join("<br>") + `<br>• pinned down ${g.pinned || 0}×`,
+      "<b>ALL THREE.</b> 📡 The fake army + 🏭 ships and supplies from home + 👥 156,000 troops and millions of workers behind them.",
+      "4,400", "Allied troops died on D-Day. Rough seas sank 27 of 32 swimming tanks headed for Omaha. Still, 156,000 troops got ashore, and Paris was free by August."); }
+};
+function debriefScreen(s) {
+  const nextLabel = { midway: "Next: Stalingrad", stalingrad: "Next: The Atlantic", atlantic: "Next: D-Day", dday: "See your service record" }[s.key];
+  app.innerHTML = `<section class="stage"><div class="inner"><p class="kick">Debrief</p><h2>${{ midway: "Midway", stalingrad: "Stalingrad", atlantic: "The Atlantic", dday: "D-Day" }[s.key]}</h2>
+    <div class="split"><div>${s.art()}<div class="panel">${DEB[s.key]()}</div></div><div class="panel" id="cwrap">${s.check ? "" : `<p class="lead">${s.key === "stalingrad" ? "Every German soldier stuck in the east was one fewer waiting for you on D-Day." : "That was the last mission. Less than a year later, in May 1945, Germany surrendered."}</p>` + goBtn(nextLabel)}</div></div></div></section>`;
+  if (s.check) checkBlock(s.check, "cwrap"); else $("goBtn").onclick = next;
+}
+
+// =====================================================================
+//  FINALE + TURN IN
+// =====================================================================
 function finale() {
-  const o = outcomes(), vals = Object.values(o), wins = vals.filter(x => x === "win").length, costly = vals.filter(x => x === "mid").length;
-  const xp = xpNow(), ri = rankOf(xp);
-  const SHORT = { h1: ["Women workers", "Rationing", "Draft"], t1: ["Codebreakers", "Radar", "Cargo ships", "Tanks"], m1: ["Ambush", "Guard Hawaii", "Stay away"], s1: ["Trucks & food", "Tanks & planes", "Sent nothing"], a1: ["Radar", "Codebreakers", "More ships"], d1: ["Normandy", "Calais", "Split army"], d2: ["Go June 6", "Wait 2 weeks", "Into the storm"] };
-  const calls = ORDERS.filter(id => pick(id) != null).map(id => SHORT[id][pick(id)]);
-  const names = { midway: "Midway", stalingrad: "Stalingrad", atlantic: "Atlantic", dday: "D-Day" };
-  app.innerHTML = `<section class="stage"><div class="inner"><p class="kick">Campaign complete</p><h2>What wins a war?</h2>
-    <div class="split"><div class="panel"><div class="frank"><small>FINAL RANK</small>🎖 ${RANKS[ri][1]}</div>
-      <p class="fstats"><b>${xp} XP</b> · ${wins} clean ${wins === 1 ? "win" : "wins"} · ${costly} costly · Axis control left: <b>${axisNow()}%</b></p>
-      <div class="board">${Object.keys(names).map(k => `<div class="${o[k] || ""}">${names[k]}<br>${o[k] ? STAMP[o[k]] : "—"}</div>`).join("")}</div>
-      <p class="calls"><b>Your orders:</b> ${calls.join(" → ")}</p>
-      <div class="lesson"><span class="lb">Remember</span>📡 Tech won Midway. 🏭 Factories won Stalingrad. The Atlantic took both. D-Day took all three, plus 👥 people.</div>
-      ${ri < RANKS.length - 1 ? `<p class="hint">Want to make General? Turn in first. Then hit Start over and try a new plan.</p>` : ""}</div>
-    <div class="panel">${PROMPTS.map(p => `<label class="wlabel" for="w_${p.id}">${p.label}</label><p class="stem">${esc(p.stem)}</p><textarea id="w_${p.id}" rows="3">${esc(st.writing[p.id] || "")}</textarea>`).join("")}
-      <button type="button" class="go" id="sendBtn">${st.turnedIn ? "Turn in again" : "Turn in"}</button>
-      <p id="sendMsg" class="msg" role="status" aria-live="polite">${st.turnedIn ? "You already turned this in. You can fix your writing and turn it in again." : ""}</p></div></div></div></section>`;
-  PROMPTS.forEach(p => $("w_" + p.id).addEventListener("input", e => { st.writing[p.id] = e.target.value; save(); }));
+  const o = outcomes(), xp = xpNow(), ri = rankOf(xp), names = { midway: "Midway", stalingrad: "Stalingrad", atlantic: "The Atlantic", dday: "D-Day" };
+  const sub = { midway: "📡 tech", stalingrad: "🏭 factories", atlantic: "📡 + 🏭", dday: "all three" };
+  app.innerHTML = `<section class="stage"><div class="inner"><p class="kick">Campaign complete · ${esc(st.name)}</p><h2>Service record</h2>
+    <div class="split"><div class="panel"><div class="frank"><small>FINAL RANK</small>🎖 ${RANKS[ri][1]}</div><p class="mut" style="margin:6px 0">${xp} XP</p>
+      <div class="board">${Object.keys(names).map(k => `<div class="${o[k] || ""}">${names[k]}<br>${o[k] ? STAMP[o[k]] : "—"}<small>won by ${sub[k]}</small></div>`).join("")}</div>
+      <div class="medals">${medals().map(([m, on]) => `<span class="${on ? "" : "off"}">${m}</span>`).join("")}</div>
+      ${ri < RANKS.length - 1 ? `<p class="hint">Want to make General? Turn in first. Then hit Start over (bottom of the page) and run it again.</p>` : ""}</div>
+    <div class="panel"><div id="cwrap2"></div><div id="turn"></div></div></div></div></section>`;
+  const q = Q.q7, wrap = $("cwrap2");
+  if (!st.done.q7) {
+    checkBlock("q7", "cwrap2");
+    const obs = new MutationObserver(() => { if (st.done.q7) { obs.disconnect(); finale(); } }); obs.observe(wrap, { childList: true, subtree: true }); onLeave(() => obs.disconnect());
+    return;
+  }
+  wrap.innerHTML = `<p class="ck">FINAL CHECK</p><h3>${q.prompt}</h3><p class="okline">✓ ${esc(q.options[0])}</p><p class="why">${q.why}</p>`;
+  $("turn").innerHTML = `<button type="button" class="go" id="sendBtn">${st.turnedIn ? "Turn in again" : "Turn in"}</button>
+    <p id="sendMsg" class="msg" role="status" aria-live="polite">${st.turnedIn ? "You already turned this in. You're done." : ""}</p>`;
   $("sendBtn").onclick = turnIn;
 }
 
 async function turnIn() {
   const msg = $("sendMsg");
-  const plain = s => String(s || "").normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
-  for (const p of (isTest() ? [] : PROMPTS)) {
-    const box = $("w_" + p.id), v = (box.value || "").trim();
-    if (window.classJunkStop) { const junk = window.classJunkStop(box, { starter: p.stem || "", source: "from today" }); if (junk) { msg.textContent = "For " + p.short + ": " + junk; msg.className = "msg"; return; } }
-    if (v.length < (p.min || 40)) { msg.textContent = "Write a little more for: " + p.short + " (1–2 full sentences)."; msg.className = "msg bad"; box.focus(); return; }
-    if (/_{2,}/.test(v)) { msg.textContent = "Fill in the blanks with your own words for: " + p.short + "."; msg.className = "msg bad"; box.focus(); return; }
-    const stemWords = new Set(plain(p.stem).match(/[\p{L}']+/gu) || []);
-    const freshW = new Set((plain(v).match(/[\p{L}']{3,}/gu) || []).filter(w => !stemWords.has(w)));
-    if (freshW.size < (p.newWords || 6)) { msg.textContent = "Add more of your own ideas for: " + p.short + ". Use details from today."; msg.className = "msg bad"; box.focus(); return; }
-    if (p.mustAll.some(g => !g.some(w => new RegExp("(^|[^\\p{L}])" + plain(w).replace(/[.*+?^${}()|[\]\\]/g, "\\$&"), "iu").test(plain(v))))) { msg.textContent = p.mustMsg; msg.className = "msg bad"; box.focus(); return; }
-  }
+  const missing = CHECKS.filter(q => !st.done[q.id]);
+  if (missing.length && !isTest()) { msg.textContent = "Finish every quick check first."; msg.className = "msg bad"; return; }
   const answers = { "Standard": STANDARD };
   answers["First-try correct"] = CHECKS.filter(q => !st.wrong[q.id]).length + " of " + CHECKS.length;
   const byStd = {};
   CHECKS.forEach(q => { byStd[q.std] = byStd[q.std] || [0, 0]; byStd[q.std][1]++; if (!st.wrong[q.id]) byStd[q.std][0]++; });
   answers["First-try by standard"] = Object.keys(byStd).sort().map(k => k + ": " + byStd[k][0] + " of " + byStd[k][1]).join(" · ");
-  PROMPTS.forEach(p => { answers["Writing: " + p.short] = ($("w_" + p.id).value || "").trim(); });
-  SCREENS.forEach(s => {
-    if (s.type === "order" && pick(s.id) != null) answers["Choice · " + s.short] = s.choices[pick(s.id)].label;
-    if (s.type === "check") answers[s.short] = s.options[0] + (st.wrong[s.id] ? " (after " + st.wrong[s.id] + " wrong " + (st.wrong[s.id] === 1 ? "try" : "tries") + ")" : " (first try)");
-  });
-  const o = outcomes();
-  answers["Results"] = ["midway", "stalingrad", "atlantic", "dday"].map(k => k + ": " + (o[k] ? STAMP[o[k]] : "—")).join(" · ");
-  answers["D-Day points"] = String(ddayPoints(o).pts);
+  CHECKS.forEach(q => { answers[q.short] = q.options[0] + (st.wrong[q.id] ? " (after " + st.wrong[q.id] + " wrong " + (st.wrong[q.id] === 1 ? "try" : "tries") + ")" : " (first try)"); });
+  SCREENS.forEach(s => { if (s.type === "order" && pick(s.id) != null) answers["Choice · " + s.short] = s.choices[pick(s.id)].label; });
+  const o = outcomes(), g = st.g;
+  answers["Mission results"] = ["midway", "stalingrad", "atlantic", "dday"].map(k => k + ": " + (o[k] ? STAMP[o[k]] : "—")).join(" · ");
+  answers["Game stats"] = [g.midway ? "Midway misses " + g.midway.misses : "", g.stal ? "Tanks " + g.stal.built + " vs " + g.stal.lost : "", g.atl ? "U-boats stopped " + g.atl.stopped + ", ships lost " + g.atl.lost + (g.atl.ff ? ", friendly fire " + g.atl.ff : "") : "", g.dday ? "Beach pinned " + g.dday.pinned : ""].filter(Boolean).join(" · ");
+  answers["Rank"] = RANKS[rankOf(xpNow())][1] + " (" + xpNow() + " XP)";
   $("sendBtn").disabled = true; msg.textContent = "Sending your work…"; msg.className = "msg";
   try {
     const res = await window.classTurnIn(API, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ studentName: st.name, assignmentId: ASSIGNMENT, assignmentTitle: TITLE, answers }) });
     const data = await res.json().catch(() => ({}));
     if (!res.ok) throw new Error(data.error || "Your work did not save. Try again.");
-    st.turnedIn = true; save();
+    st.turnedIn = true; save(); SFX.good();
     msg.textContent = "Turned in! Your teacher can see your work. You're done."; msg.className = "msg good"; $("sendBtn").textContent = "Turned in ✓";
   } catch (err) { msg.textContent = err.message || "Could not turn in. Try again."; msg.className = "msg bad"; $("sendBtn").disabled = false; }
 }
@@ -613,38 +1019,34 @@ async function turnIn() {
 // ---------- start over / welcome back ----------
 $("restartBtn").onclick = () => {
   if (!confirm("Start over? This clears your work on this device.")) return;
-  const name = st.name; st = fresh(); st.name = name; st.i = name ? 1 : 0;
+  const name = st.name, snd = st.sound; st = fresh(); st.name = name; st.sound = snd; st.i = name ? 1 : 0;
   if (window.classFirstTry) window.classFirstTry.reset();
   lastRank = null; save(); render(); window.scrollTo(0, 0);
 };
 if (st.i > 0 && st.name) {
-  const w = $("welcome"); w.textContent = "Welcome back, " + st.name + ". You're right where you left off.";
+  const w = $("welcome"); w.textContent = "Welcome back, " + st.name + " You're right where you left off.";
   const b = document.createElement("button"); b.type = "button"; b.textContent = "Not " + st.name + "? Start fresh";
   b.onclick = () => { try { localStorage.removeItem(KEY); localStorage.removeItem("site-student-name"); } catch (e) {} if (window.classFirstTry) window.classFirstTry.reset(); st = fresh(); save(); location.reload(); };
   w.appendChild(b); w.hidden = false;
-  const hide = () => { w.hidden = true; }; app.addEventListener("click", e => { if (e.target.closest("#goBtn")) hide(); });
+  app.addEventListener("click", e => { if (e.target.closest("#goBtn")) w.hidden = true; });
 }
 render();
 
 // ---------- Test T.: jump to any screen, answer the current one ----------
 try {
+  const autoGame = k => { const d = { midway: { hits: 3, misses: 0, goodIntel: true }, stal: { built: 12, lost: 8 }, atl: { stopped: 12, lost: 0, ff: 0 }, dday: { pinned: 0, speed: 1 } }[k]; if (!(st.g[k] && st.g[k].done)) st.g[k] = Object.assign({ done: true }, d); };
+  const fill = s => {
+    if (s.type === "order" && pick(s.id) == null) st.picks[s.id] = 0;
+    if (s.type === "check") st.done[s.id] = true;
+    if (s.check) st.done[s.check] = true;
+    if (GAMES[s.type]) autoGame(GAMES[s.type]);
+  };
   (window.classTestHooks = window.classTestHooks || []).push({
     count: () => SCREENS.length,
     index: () => st.i,
     label: i => SCREENS[i].label,
-    go: i => {
-      if (!st.name) st.name = "Test T.";
-      // Fill any earlier orders/checks so later screens have something to show.
-      SCREENS.slice(0, i).forEach(s => { if (s.type === "order" && pick(s.id) == null) { st.picks[s.id] = 0; applyFx(s.choices[0].fx); } if (s.type === "check") st.done[s.id] = true; });
-      st.i = i; save(); render(); window.scrollTo(0, 0);
-    },
-    solve: () => {
-      const s = SCREENS[st.i];
-      if (s.type === "order" && pick(s.id) == null) { st.picks[s.id] = 0; applyFx(s.choices[0].fx); }
-      if (s.type === "check") st.done[s.id] = true;
-      if (s.type === "intro" && !st.name) st.name = "Test T.";
-      save(); render();
-    }
+    go: i => { if (!st.name) st.name = "Test T."; SCREENS.slice(0, i).forEach(fill); st.i = i; save(); render(); window.scrollTo(0, 0); },
+    solve: () => { const s = SCREENS[st.i]; if (s.type === "intro" && !st.name) st.name = "Test T."; fill(s); if (s.type === "finale") st.done.q7 = true; save(); render(); }
   });
   if (window.classTestSkip) window.classTestSkip.refresh();
 } catch (e) {}
