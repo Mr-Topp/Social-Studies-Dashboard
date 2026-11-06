@@ -812,7 +812,12 @@ function linksHtml() {
   // Purple reminder: units that still need graphic novels added (Fynn, 2026-11-03). Units in REVIEW_AGAIN get it too.
   const ADD_GN = new Set([...REVIEW_AGAIN]); // Government units removed (Fynn, 2026-11-04)
   // Unit scale pictures (Fynn, 2026-11-05): copied from each unit's Schoology page. Teacher dashboard only.
-  const SCALE_PICS = { "sociology|1": "scales/sociology-u1.png", "sociology|2": "scales/sociology-u2.png", "sociology|3": "scales/sociology-u3.png", "sociology|4": "scales/sociology-u4.png" };
+  const SCALE_PICS = { "sociology|1": "scales/sociology-u1.png", "sociology|2": "scales/sociology-u2.png", "sociology|3": "scales/sociology-u3.png", "sociology|4": "scales/sociology-u4.png",
+    "government|1": "scales/government-u1.png", "government|2": "scales/government-u2.png", "government|3": "scales/government-u3-6.png", "government|4": "scales/government-u3-6.png", "government|5": "scales/government-u3-6.png", "government|6": "scales/government-u3-6.png",
+    "us-history|p1|1": "scales/us-history-p1-u1.png", "us-history|p1|2": "scales/us-history-p1-u2.png", "us-history|p1|3": "scales/us-history-p1-u3.png", "us-history|p1|4": "scales/us-history-p1-u4.png",
+    "us-history|1": "scales/us-history-u1.png", "us-history|2": "scales/us-history-u2.png", "us-history|3": "scales/us-history-u3.png", "us-history|4": "scales/us-history-u4.png", "us-history|5": "scales/us-history-u5.png", "us-history|6": "scales/us-history-u6.png",
+    "world-history|p1|1": "scales/world-history-p1-u1.png", "world-history|p1|2": "scales/world-history-p1-u2.png", "world-history|p1|3": "scales/world-history-p1-u3.png", "world-history|p1|4": "scales/world-history-p1-u4.png",
+    "world-history|1": "scales/world-history-u1.png", "world-history|2": "scales/world-history-u2.png", "world-history|3": "scales/world-history-u3.png" };
   const scaleBox = key => SCALE_PICS[key] ? `<details class="scalebox"><summary>📏 Unit scale</summary><a href="${SCALE_PICS[key]}" target="_blank" rel="noopener" title="Open full size"><img src="${SCALE_PICS[key]}" alt="Proficiency scale for this unit" loading="lazy"></a></details>` : "";
   const unitBlock = (key, name, ids, decks, cal) => {
     ids = ids.filter(id => !REG[id].hiddenVid);   // videos Fynn removed from this day
