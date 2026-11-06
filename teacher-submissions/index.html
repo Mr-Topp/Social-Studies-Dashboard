@@ -6,7 +6,6 @@
 <meta name="robots" content="noindex,nofollow">
 <title>Teacher Dashboard · All Classes</title>
 <script src="../shared/assignments.js?v=20261105fb1"></script>
-   <script src="part1-schoology.js?v=20261105a"></script>
 <script src="videos.js?v=20261105vid18"></script>
 <script src="presentations.js?v=20261103civics3"></script>
 <script src="../shared/turnin.js?v=20261105fb1"></script>
@@ -106,6 +105,7 @@ td.sum.l3{background:#eef7f0;color:#1f5e2c}td.sum.l2{background:#fff8e2;color:#7
 .seen{color:#1f6b3a}
 .unitdrop{background:#fff;border:1px solid var(--line);border-radius:10px;padding:10px 12px;margin:0 0 8px}
 .unitdrop summary{cursor:pointer;font-weight:900;color:var(--navy)}.unitdrop .links{margin:10px 0 2px}
+.scalebox{margin:10px 0 8px;border:1px solid var(--line);border-radius:8px;padding:6px 10px;background:#fafbfd}.scalebox summary{font-weight:800;color:var(--navy);font-size:.9rem}.scalebox img{display:block;width:100%;max-width:900px;height:auto;margin:8px 0 4px;border-radius:6px;border:1px solid var(--line)}
 .deckhead{font-size:.78rem;font-weight:900;letter-spacing:.04em;text-transform:uppercase;color:var(--muted);margin:10px 0 0}
 .links.decks a{background:#fff6e5;border-color:#e7cf9c}
 .parthead{font-size:.95rem;font-weight:900;letter-spacing:.06em;text-transform:uppercase;color:var(--red);margin:16px 0 6px;padding-bottom:4px;border-bottom:2px solid var(--line)}
@@ -810,6 +810,9 @@ function linksHtml() {
   const REVIEW_AGAIN = new Set(["us-history|3", "us-history|4", "us-history|5", "us-history|6", "world-history|2", "world-history|3", "sociology|3", "sociology|4"]);
   // Purple reminder: units that still need graphic novels added (Fynn, 2026-11-03). Units in REVIEW_AGAIN get it too.
   const ADD_GN = new Set([...REVIEW_AGAIN]); // Government units removed (Fynn, 2026-11-04)
+  // Unit scale pictures (Fynn, 2026-11-05): copied from each unit's Schoology page. Teacher dashboard only.
+  const SCALE_PICS = { "sociology|1": "scales/sociology-u1.png", "sociology|2": "scales/sociology-u2.png", "sociology|3": "scales/sociology-u3.png", "sociology|4": "scales/sociology-u4.png" };
+  const scaleBox = key => SCALE_PICS[key] ? `<details class="scalebox"><summary>📏 Unit scale</summary><a href="${SCALE_PICS[key]}" target="_blank" rel="noopener" title="Open full size"><img src="${SCALE_PICS[key]}" alt="Proficiency scale for this unit" loading="lazy"></a></details>` : "";
   const unitBlock = (key, name, ids, decks, cal) => {
     ids = ids.filter(id => !REG[id].hiddenVid);   // videos Fynn removed from this day
     const kp = String(key).split("|"), vctx = { course: kp[0], part: kp[1] === "p1" ? 1 : 2, unit: +kp[kp.length - 1] || 0 };
@@ -899,7 +902,7 @@ function linksHtml() {
     // Scale link: opens this course's Scales Google Doc (Fynn, 2026-11-05: link only, no copied text).
     const scaleUrl = SCALE_DOCS[tab];
     const scaleBar = scaleUrl ? `<div class="scalebar"><a class="chip scale" href="${safe(scaleUrl)}" target="_blank" rel="noopener">📏 Scale</a></div>` : "";
-    const inner = scaleBar + (list.length ? `<div class="daytable">${body}</div>${deckLinks ? `<div class="deckfoot">${deckLinks}</div>` : ""}` : `<p class="status">No slides for this unit yet.</p>`);
+    const inner = scaleBar + scaleBox(key) + (list.length ? `<div class="daytable">${body}</div>${deckLinks ? `<div class="deckfoot">${deckLinks}</div>` : ""}` : `<p class="status">No slides for this unit yet.</p>`);
     return `<details class="unitdrop" data-k="${safe(key)}"${linkOpen[key] ? " open" : ""}><summary>${safe(name)} <span class="unitcount">${count}</span></summary>${inner}</details>`;
   };
   const legend = `<details class="mini"><summary>Key</summary><p>▶ slides · 💻 online, turns in here · 🖨 printed · 🔗 outside link · 🔑 answer key (teacher only)</p><p><b>+ key / alternative</b> under a day = its answer keys and your Drive alternatives (for absent students, subs, paper days).</p><p><span style="color:var(--red);font-weight:800">⚠ red</span> = not made yet. The last day of each unit is the summative, dated from your green sheet.</p></details>`;
