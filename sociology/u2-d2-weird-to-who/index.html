@@ -1,0 +1,597 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Weird to Who? | Sociology Unit 2 Day 2</title>
+<meta name="description" content="Exchange students DM you about American habits that confuse them. Answer before the rival account does, and find the parts of culture hiding in everyday life.">
+<style>
+:root{--ink:#14181f;--muted:#5a6470;--paper:#f4f2ee;--card:#fff;--line:#dcd8d0;--hot:#e2402b;--hot2:#fde9e5;--blue:#1f5fbf;--blue2:#e7effb;--gold:#f4b400;--green:#1e7a45;--green2:#e4f4ea;--bad:#b3261e;--rival:#6b3fa0;--rival2:#f1ecfb}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{margin:0;color:var(--ink);font:17px/1.45 system-ui,Segoe UI,Arial,sans-serif;background:var(--paper);background-image:radial-gradient(#14181f0d 1px,transparent 1px);background-size:18px 18px}
+.topline{background:var(--ink);color:#c9ced6;padding:6px max(14px,calc((100vw - 980px)/2));font-size:.82rem;display:flex;gap:10px;flex-wrap:wrap;justify-content:space-between}
+.topline b{color:#fff}.topline summary{color:#fff;font-weight:700;cursor:pointer}
+#hud{position:sticky;top:0;z-index:5;background:#fff;border-bottom:3px solid var(--ink);padding:7px max(14px,calc((100vw - 980px)/2));display:flex;flex-wrap:wrap;gap:6px 12px;align-items:center;justify-content:space-between}
+.track{display:flex;gap:4px;list-style:none;margin:0;padding:0;flex-wrap:wrap}
+.track li{font-size:.78rem;font-weight:800;background:#efede8;color:#79818b;border-radius:20px;padding:3px 9px 3px 4px;display:flex;align-items:center;gap:4px}
+.track li span{display:inline-grid;place-items:center;width:18px;height:18px;border-radius:50%;background:#cfcac0;color:#fff;font-size:.7rem}
+.track li.done{background:var(--green2);color:var(--green)}.track li.done span{background:var(--green)}
+.track li.now{background:var(--ink);color:#fff}.track li.now span{background:var(--hot)}
+.score{display:flex;gap:6px;flex-wrap:wrap}
+.pill{border-radius:20px;padding:3px 12px;font-weight:800;font-size:.9rem;white-space:nowrap;background:var(--blue2);color:var(--blue)}
+.pill.r{background:var(--rival2);color:var(--rival)}
+.pill.bump{animation:bump .6s}
+@keyframes bump{40%{transform:scale(1.18)}}
+main{max-width:980px;margin:auto;padding:12px 14px 30px}
+.welcome{background:var(--green2);color:var(--green);font-weight:800;border-radius:9px;padding:8px 12px;margin:0 0 10px}
+.card{background:var(--card);border:3px solid var(--ink);border-radius:18px;padding:18px;box-shadow:0 6px 0 var(--ink)}
+.kicker{font-size:.78rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:var(--hot);margin:0}
+h1{margin:4px 0 8px;font-size:clamp(2.4rem,6vw,3.6rem);line-height:1;letter-spacing:-.02em}
+h2{margin:4px 0 8px;font-size:1.45rem;line-height:1.2}
+h3{margin:4px 0 10px;font-size:1.1rem;line-height:1.35}
+p{margin:6px 0}
+.titlecard{display:grid;grid-template-columns:1.15fr .85fr;gap:24px;align-items:center}
+.hook{font-size:1.2rem;font-weight:650}
+.facts{list-style:none;padding:0;margin:10px 0;display:grid;gap:4px}.facts li{font-weight:700}
+.goal{background:var(--blue2);border-left:5px solid var(--blue);border-radius:9px;padding:7px 11px;font-size:.95rem}
+.phone{background:var(--ink);border-radius:28px;padding:14px 12px 18px;max-width:290px;margin:auto;transform:rotate(2deg);box-shadow:0 8px 0 #0004}
+.phone .scr{background:#fff;border-radius:18px;padding:10px;display:grid;gap:7px}
+.phone .row{display:flex;gap:7px;align-items:center;font-size:.85rem;font-weight:750;border-bottom:1px solid #eee;padding-bottom:6px}
+.phone .row:last-child{border:0}
+.phone .av{font-size:1.4rem}.phone .dot{margin-left:auto;width:10px;height:10px;border-radius:50%;background:var(--hot)}
+.phone small{display:block;font-weight:500;color:var(--muted)}
+label{display:block;font-weight:850;margin:10px 0 4px}
+input,textarea{width:100%;font:inherit;border:2px solid #c4beb3;border-radius:10px;padding:9px 10px;background:#fff;color:var(--ink)}
+textarea{min-height:84px}
+button{font:inherit;cursor:pointer;border-radius:12px;min-height:46px}
+button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid var(--blue);outline-offset:2px}
+.go{margin-top:14px;background:var(--hot);color:#fff;border:0;padding:11px 22px;font-weight:900;box-shadow:0 5px 0 #8f2416}
+.go:active:not(:disabled){transform:translateY(4px);box-shadow:0 1px 0 #8f2416}
+.go:disabled{background:#c9a39d;box-shadow:0 5px 0 #a58079;cursor:not-allowed}
+.go.big{font-size:1.2rem;padding:13px 28px;width:100%;max-width:360px}
+.msg{min-height:1.2em;font-weight:750;margin:8px 0 0}.msg.hint{color:#6b4d00;background:#fff6dc;border-radius:9px;padding:6px 10px}.msg.bad{color:var(--bad)}.msg.good{color:var(--green)}
+/* DM thread */
+.dmhead{display:flex;gap:10px;align-items:center;border-bottom:2px solid var(--line);padding-bottom:10px;margin-bottom:10px}
+.dmhead .av{font-size:2.4rem;line-height:1}
+.dmhead b{font-size:1.15rem;display:block}.dmhead small{color:var(--muted)}
+.bubble{background:#efede8;border-radius:18px 18px 18px 4px;padding:10px 14px;max-width:560px;font-size:1.08rem;font-weight:600;margin:6px 0}
+.bubble.me{background:var(--blue);color:#fff;border-radius:18px 18px 4px 18px;margin-left:auto}
+.bubble.rv{background:var(--rival2);color:var(--rival);border:2px dashed #c9b4e6}
+.bubble.rv b{color:var(--rival)}
+.step{margin-top:14px;border-top:2px dashed var(--line);padding-top:10px;scroll-margin-top:70px}
+.step-tag{font-size:.76rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:var(--hot);margin:0 0 2px}
+.free{font-weight:700;letter-spacing:0;text-transform:none;color:var(--muted);font-size:.8rem;margin-left:4px}
+.opts{display:grid;gap:8px}
+@media(min-width:720px){.opts.three{grid-template-columns:repeat(3,1fr)}.opts.two{grid-template-columns:1fr 1fr}}
+.opt{text-align:left;background:#fff;color:var(--ink);border:3px solid var(--ink);box-shadow:0 4px 0 var(--ink);padding:10px 12px;font-weight:750;line-height:1.3}
+.opt:hover:not(:disabled){background:#fffaf2;transform:translateY(-2px)}
+.opt:disabled{opacity:.5;cursor:not-allowed}
+.opt.picked{opacity:1;background:var(--blue2);border-color:var(--blue);box-shadow:0 4px 0 var(--blue)}
+.real{background:#fffaf0;border:2px solid #ecd9a8;border-left:6px solid var(--gold);border-radius:12px;padding:10px 13px;margin:10px 0}
+.real .src{font-size:.82rem;color:var(--muted);margin-top:4px}
+.yourcall{font-weight:800;border-radius:10px;padding:6px 11px;display:inline-block;margin-top:4px}
+.yourcall.hit{background:var(--green2);color:var(--green)}.yourcall.miss{background:var(--rival2);color:var(--rival)}
+.react{border-radius:12px;padding:9px 12px;margin:8px 0;font-weight:700}
+.react.good{background:var(--green2);color:var(--green)}
+.react.bad{background:var(--rival2);color:var(--rival)}
+.cause{display:block;font-weight:600;font-size:.92rem;color:var(--ink);margin-top:3px}
+.rulebox{background:var(--blue2);border:2px solid #b9cdee;border-left:6px solid var(--blue);border-radius:12px;padding:10px 13px;margin:12px 0}
+.rulebox .step-tag{color:var(--blue)}.rulebox b{color:var(--blue)}
+.check{position:relative;margin:12px 0 4px;padding:13px;border:3px solid var(--ink);border-radius:16px;background:#fff;box-shadow:0 5px 0 var(--ink)}
+.check.solved{border-color:#9fd0b2;box-shadow:0 5px 0 #9fd0b2}
+.check.shake{animation:shake .5s}
+.check-tag{font-size:.76rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:var(--green);margin:0}
+.choices{display:grid;gap:8px}@media(min-width:720px){.choices{grid-template-columns:1fr 1fr}}
+.choice{text-align:left;background:#fff;color:var(--ink);border:3px solid #c4beb3;box-shadow:0 3px 0 #c4beb3;padding:10px 12px;font-weight:700;line-height:1.3}
+.choice:hover:not(:disabled){border-color:var(--ink)}
+.choice:disabled{opacity:.5;cursor:not-allowed}
+.stamp{position:absolute;right:14px;top:-14px;background:#fff;color:var(--green);border:3px solid var(--green);border-radius:8px;padding:2px 10px;font-weight:1000;font-size:.9rem;letter-spacing:.06em;text-transform:uppercase;transform:rotate(-6deg)}
+@keyframes shake{20%{transform:translateX(-6px)}40%{transform:translateX(6px)}60%{transform:translateX(-4px)}80%{transform:translateX(4px)}}
+.writebox{background:#fffef7;border:3px solid var(--ink);border-radius:16px;padding:12px 14px;margin-top:12px}
+.stem{margin:0 0 2px;color:var(--muted);font-size:.95rem}
+.ending{text-align:center;border:3px solid var(--ink);border-radius:16px;padding:16px;background:var(--hot2)}
+.e-icon{font-size:3rem}.ending h2{font-size:1.8rem;margin:0 0 4px}
+.found{margin:14px 0;background:#faf9f6;border:2px solid var(--line);border-radius:14px;padding:10px 14px}
+.found ul{list-style:none;padding:0;margin:6px 0;display:grid;gap:6px}
+.f-tag{background:var(--ink);color:#fff;font-size:.75rem;font-weight:800;border-radius:6px;padding:1px 7px;margin-right:6px}
+.found b{color:var(--blue)}
+.turned{display:inline-block;background:var(--green2);color:var(--green);font-weight:900;font-size:1.15rem;border-radius:12px;padding:6px 14px}
+.foot{color:var(--muted);font-size:.8rem;margin-top:16px}
+.foot summary{cursor:pointer;font-weight:700}.foot ul{margin:4px 0;padding-left:18px}
+.restart{margin-top:22px;text-align:center}
+.linkbtn{background:none;border:0;color:var(--muted);text-decoration:underline;font-size:.8rem;min-height:0;padding:4px}
+@media(max-width:820px){.titlecard{grid-template-columns:1fr}.phone{transform:none;max-width:100%}}
+@media(max-width:600px){.track li:not(.now){font-size:0;gap:0;padding:2px}.card{padding:14px}h2{font-size:1.3rem}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+<script src="../../shared/assignments.js?v=20261105fb1"></script>
+<script src="../../shared/turnin.js?v=20261105fb1"></script>
+</head><body>
+<div class="topline"><span><b>Sociology · Unit 2 · Day 2</b> · Weird to Who?</span>
+  <details><summary>Iowa standards</summary><b>SS.9-12.Soc.5</b> Describe the components of culture. · <b>SS.9-12.Soc.6</b> Analyze how culture influences individuals, including themselves.</details></div>
+<div id="hud" hidden>
+  <ol class="track" id="track" aria-label="Your progress"></ol>
+  <span class="score"><span class="pill" id="youPill"></span><span class="pill r" id="rivalPill"></span></span>
+</div>
+<main>
+  <p class="welcome" id="welcome" hidden></p>
+  <div id="app"></div>
+  <div class="foot">
+    <p>💾 Saves on this device. Press Turn in at the end to send it to your teacher.</p>
+    <p>The exchange students and the rival account are made up. Every fact in “The real story” is real.</p>
+    <details><summary>Where these facts come from</summary><ul>
+      <li>Ice: Deseret News, “Why do Americans love ice so much?” Oct. 22, 2022 (Frederic Tudor, the ice trade, Boston and New York deliveries, how Europeans see ice water).</li>
+      <li>“How are you?”: MIT International Students Office, “Hi, how are you? Greetings in the United States.”</li>
+      <li>Pledge: The Week, “The Pledge of Allegiance is not normal,” July 2019; CNN, “Here’s why students don’t have to recite the Pledge of Allegiance,” Feb. 2019 (West Virginia v. Barnette, 1943).</li>
+      <li>Smiling: Nautilus, “What a Russian Smile Means,” June 2018 (Kuba Krys study of 5,000+ people in 44 cultures); Russian Life, “Why Don’t Russians Smile?” Jan. 2014.</li>
+      <li>Shoes: Wikipedia, “Removal of footwear indoors” (Japan’s genkan; Canada and Scandinavia; Hawaii and Alaska).</li>
+      <li>Butter cow: Iowa State Fair, “History of the Butter Cow.”</li>
+    </ul></details>
+  </div>
+  <p class="restart"><button type="button" class="linkbtn" id="restartBtn">Start over</button></p>
+</main>
+<script>
+// =====================================================================
+//  WEIRD TO WHO?  (Sociology Unit 2 · Day 2 · SS.9-12.Soc.5, SS.9-12.Soc.6)
+//  Replaces The Arrival (Fynn 11-05: "they will find this one boring" → new source).
+//  You run a help account for exchange students. 7 DMs about real American habits.
+//  Same rhythm every DM:
+//    1. Guess first (free, never blocks) → The real story (sourced)
+//    2. Pick your reply (followers vs. the rival @JustGoogleIt; shows the cause)
+//    3. Name it (graded check; wrong = hint, short lock, reshuffle) → the term, plainly
+//    4. DMs 2, 4, 7 only: type your own reply (one sentence)
+//  Then: result + terms you found + 2-sentence Explain It + Turn in.
+// =====================================================================
+(function () {
+  "use strict";
+  const KEY = "soc-u2-d2-weird-to-who-v1";
+  const ASSIGNMENT_ID = "sociology-unit2-arrival-culture";   // same id as The Arrival, so the dashboard keeps working
+  const TITLE = "Sociology · Unit 2 · Day 2 · Weird to Who?";
+  const STANDARD = "SS.9-12.Soc.5, SS.9-12.Soc.6";
+  const API = "https://fynn-class-assignment-submissions-20261024.neotboy.chatgpt.site/api/submit";
+  const LOCK = 3;
+  const START = 100;
+
+  const $ = id => document.getElementById(id);
+  const esc = s => String(s == null ? "" : s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+  const shuffle = a => { const b = a.slice(); for (let i = b.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [b[i], b[j]] = [b[j], b[i]]; } return b; };
+  const test = () => !!(window.classIsTestT && window.classIsTestT());
+
+  // guess.options[0], check.options[0] are right (screen shuffles them).
+  // replies: kind "best" | "judge" (ethnocentric) | "wrong" (bad fact). Screen shuffles them.
+  const DMS = [
+    {
+      id: "ice", tag: "Ice", av: "🇩🇪", who: "Lukas, 16", from: "exchange student from Germany",
+      msg: ["Why is every drink here HALF ice?? 😂", "I ordered a soda and got a cup of ice with a little soda in it."],
+      guess: { q: "Where did America’s love of ice start?",
+        options: ["A businessman in the 1800s sold ice everywhere", "The government told restaurants to add ice", "Soda companies invented ice cubes in the 1950s"] },
+      real: "In the 1800s, Frederic Tudor, the “Ice King,” cut ice from frozen lakes in New England and shipped it as far as India. People say he gave away free cold drinks to get people hooked. By the 1860s, about <b>2 out of 3 homes</b> in Boston and New York got ice delivered every day.",
+      src: "Deseret News, 2022",
+      replies: [
+        { kind: "best", t: "We grew up with ice in everything, so we just expect drinks cold." },
+        { kind: "judge", t: "Warm soda is gross, man. Germany is honestly doing drinks wrong." },
+        { kind: "wrong", t: "Health rules here make restaurants fill every cup with ice." }
+      ],
+      react: { best: "Lukas: “Ohhh, so it’s a habit. That makes sense 👍”",
+        judge: "Lukas: “Wow. Okay.” He follows @JustGoogleIt instead.",
+        wrong: "Lukas looked it up. There’s no rule like that. He follows @JustGoogleIt instead." },
+      cause: { judge: "You judged Germany by American rules.", wrong: "You gave him a fake fact." },
+      check: { label: "Material or nonmaterial?", prompt: "Which part of Lukas’s soda is NONmaterial culture?",
+        options: ["The shared idea that drinks should be ice-cold", "The ice machine behind the restaurant counter", "The plastic cup the soda and ice came in", "The ice cubes filling up half of the cup"],
+        hint: "Nonmaterial means you can’t pick it up. Which one is an idea, not a thing?",
+        why: "The cup, the machine, and the ice are things. The idea that cold = better is something people <b>learned</b>." },
+      rule: "<b>Material culture</b> = the physical stuff a group makes and uses (cups, ice machines).<br><b>Nonmaterial culture</b> = the ideas, beliefs, and habits (“drinks should be cold”).",
+      found: { t: "Material vs. nonmaterial", d: "Ice is stuff. Expecting it is an idea." }
+    },
+    {
+      id: "howareyou", tag: "“How are you?”", av: "🇧🇷", who: "Ana, 17", from: "exchange student from Brazil",
+      msg: ["A cashier asked me “How are you?” so I told her about my day.", "She looked confused and walked away?? Did I do something wrong? 😳"],
+      guess: { q: "What did the cashier really mean by “How are you?”",
+        options: ["Just “hello.” No real answer needed", "She wanted to hear about Ana’s day", "She was checking if Ana needed help"] },
+      real: "MIT tells its students from other countries: in the U.S., “How are you?” just means hello. “<b>There is no expectation for an answer.</b>” The normal reply is “Good, how are you?” and people keep walking.",
+      src: "MIT International Students Office",
+      replies: [
+        { kind: "best", t: "Here that’s just a way to say hi. Say “Good, you?” and keep going." },
+        { kind: "judge", t: "Everybody knows that’s not a real question. Just act normal, lol." },
+        { kind: "wrong", t: "She was probably just rushed. Next time, keep your answer short." }
+      ],
+      react: { best: "Ana: “So it’s like a hello with a question mark. Got it 😂”",
+        judge: "Ana: “I’m not from here. How would I know?” She follows @JustGoogleIt.",
+        wrong: "Ana: “But she wasn’t rushed. She asked ME.” She still doesn’t get it. She follows @JustGoogleIt." },
+      cause: { judge: "You treated your normal as everyone’s normal.", wrong: "You missed the real reason: it was a language mix-up." },
+      check: { label: "Language", prompt: "Ana speaks good English. So why did she get confused?",
+        options: ["She knew the words but not what they mean here", "She didn’t know enough English words to answer", "The cashier talked way too fast for her to follow", "Cashiers in the U.S. aren’t allowed to talk much"],
+        hint: "She understood every word. What did she still not know?",
+        why: "Language is more than words. You also have to know what the words <b>mean to that group</b>." },
+      rule: "<b>Language</b> = the words and symbols a group shares, plus what they really mean. Slang and greetings show who’s “in” the group.",
+      found: { t: "Language", d: "“How are you?” = hello." },
+      write: { prompt: "Type your own reply to Ana. Explain “How are you?” and use the word language.",
+        starter: "In the U.S., “How are you?” really means ___. That’s part of our language because ___.",
+        need: [/\blanguage\b/i, /\b(hi|hello|hey|greet\w*|answer|reply|good|fine)\b/i], needMsg: "Use the word language and say what “How are you?” really means here." }
+    },
+    {
+      id: "pledge", tag: "The Pledge", av: "🇪🇸", who: "Sofia, 16", from: "exchange student from Spain",
+      msg: ["First day of school: everybody stood up, faced a flag, and said something together. 🫡", "Wait, do you guys do this EVERY day?"],
+      guess: { q: "How common is a daily school pledge to a flag around the world?",
+        options: ["Rare. Most democracies don’t do it", "Normal. Most countries do it daily", "Common. About half of countries do it"] },
+      real: "In many U.S. schools, students say the Pledge of Allegiance every day. <b>Most democracies</b> (countries where people vote for leaders) <b>don’t</b> have a daily flag pledge. India is one of the few that does. In the U.S., students can’t be forced to say it. The Supreme Court decided that in 1943.",
+      src: "The Week, 2019; CNN, 2019",
+      replies: [
+        { kind: "best", t: "To us the flag stands for the country. The pledge teaches kids that." },
+        { kind: "judge", t: "Every real country should do it. It’s kinda weird that Spain doesn’t." },
+        { kind: "wrong", t: "Yep, it’s the law. Students get in trouble if they don’t say it." }
+      ],
+      react: { best: "Sofia: “Okay, so the flag means way more than cloth here. Interesting.”",
+        judge: "Sofia: “Spain is a real country 🙄” She follows @JustGoogleIt.",
+        wrong: "Sofia read that nobody can be forced to say it. She follows @JustGoogleIt." },
+      cause: { judge: "You judged Spain by American rules.", wrong: "You gave her a fake fact. The Supreme Court says no one can be forced." },
+      check: { label: "Symbols", prompt: "What makes the U.S. flag a symbol?",
+        options: ["It stands for the country, and people learn that", "It’s made of cloth in red, white, and blue", "It’s the biggest object in most classrooms", "It looks the same in every school building"],
+        hint: "A symbol stands for something else. What does the flag stand for?",
+        why: "A flag is just cloth until a group <b>teaches</b> what it stands for. That learned meaning makes it a symbol." },
+      rule: "<b>Symbol</b> = anything that stands for something else to a group: a flag, a team logo, a 👍. The meaning is learned, not natural.",
+      found: { t: "Symbols", d: "The flag stands for the country." }
+    },
+    {
+      id: "smile", tag: "Smiling", av: "🇷🇺", who: "Dmitri, 17", from: "exchange student from Russia",
+      msg: ["Why do strangers here smile at me? At the store, on the street. 😐", "Do they know me? Back home that would be strange."],
+      guess: { q: "In a study of 44 cultures, how did Russians rate a smiling face?",
+        options: ["Less smart than most cultures did", "More honest than most cultures did", "Friendlier than most cultures did"] },
+      real: "A study of more than 5,000 people in 44 cultures found Russians rated smiling faces as <b>less smart</b> than most cultures did. A Russian saying goes: “Smiling with no reason is a sign of stupidity.” In the U.S., people are taught that being cheerful is good, even at work.",
+      src: "Nautilus, 2018; Russian Life, 2014",
+      replies: [
+        { kind: "best", t: "People here think being friendly is good. It means “I’m nice,” not “I know you.”" },
+        { kind: "judge", t: "Honestly, Russians just seem kind of rude. You should smile more." },
+        { kind: "wrong", t: "Stores pay workers extra to smile. Everyone else just copies them." }
+      ],
+      react: { best: "Dmitri: “So the smile is just politeness. In Russia we save it for when it’s real.”",
+        judge: "Dmitri: “We are not rude. We just smile for a reason.” He follows @JustGoogleIt.",
+        wrong: "Dmitri: “Strangers on the street aren’t getting paid.” He follows @JustGoogleIt." },
+      cause: { judge: "You judged Russia by American rules.", wrong: "That’s not why. You missed what Americans value." },
+      check: { label: "Values", prompt: "Which American value explains the smiles at Dmitri?",
+        options: ["Being cheerful and friendly, even with strangers", "Staying quiet so you never bother a stranger", "Saving your smiles for close friends and family", "Following a written store rule that says to smile"],
+        hint: "A value is what a group thinks is good. What do Americans think is good about smiling?",
+        why: "Americans tend to <b>value</b> cheerfulness. Many Russians value saving a smile for when it’s real. Different values, different normal." },
+      rule: "<b>Values</b> = a group’s shared ideas about what is good or important. Our habits (like smiling at strangers) grow out of our values.",
+      found: { t: "Values", d: "Americans value cheerful and friendly." },
+      write: { prompt: "Type your own reply to Dmitri. Explain the smiling and use the word value.",
+        starter: "People here smile at strangers because they value ___.",
+        need: [/\bvalu\w*/i, /\b(friend\w*|cheer\w*|nice|kind|polite|happy|welcom\w*)\b/i], needMsg: "Use the word value and name what Americans value (like being friendly)." }
+    },
+    {
+      id: "shoes", tag: "Shoes", av: "🇯🇵", who: "Hana, 16", from: "exchange student from Japan",
+      msg: ["My host family walked into the house with their SHOES ON. 😱", "On the carpet!! Is that okay here?"],
+      guess: { q: "Which of these countries also expects shoes off in someone’s home?",
+        options: ["Canada", "France", "Ireland"] },
+      real: "Japanese homes have a <b>genkan</b>, an entry spot where everyone takes shoes off. In Canada, Norway, Sweden, and Finland, keeping shoes on in someone’s home is seen as rude. In most of the U.S. it’s not a tradition, though lots of families do it. In Hawaii and Alaska, shoes off is expected.",
+      src: "Wikipedia, “Removal of footwear indoors”",
+      replies: [
+        { kind: "best", t: "It’s a small habit here, not a big rule. Lots of families do shoes off. Ask yours!" },
+        { kind: "judge", t: "Taking shoes off is kind of weird. Just keep them on like a normal person." },
+        { kind: "wrong", t: "Here it’s actually rude to take your shoes off, so keep them on for sure." }
+      ],
+      react: { best: "Hana: “I asked. They said I can do shoes off in my room 😊”",
+        judge: "Hana: “It’s not weird where I’m from.” She follows @JustGoogleIt.",
+        wrong: "Hana took her shoes off anyway. Nobody cared. She follows @JustGoogleIt." },
+      cause: { judge: "You called her normal weird.", wrong: "That’s not a real rule here. You made it sound like a big deal." },
+      check: { label: "Folkways vs. mores", prompt: "Shoes on in the house is a folkway. Which would break a MORE instead?",
+        options: ["Taking money from your host family’s wallet", "Walking across their carpet in your sneakers", "Forgetting to say thanks after a family dinner", "Showing up a few minutes late for dinner"],
+        hint: "A more is about right and wrong. Which one would make people truly angry, not just give you a look?",
+        why: "Stealing breaks a <b>more</b>: people see it as truly wrong. The others are <b>folkways</b>: break them and you get a look." },
+      rule: "<b>Folkway</b> = an everyday habit. Break it and you get a look.<br><b>More</b> (say “MOR-ay”) = a serious rule about right and wrong. Break it and people get angry.",
+      found: { t: "Folkway vs. more", d: "Shoes = a look. Stealing = anger." }
+    },
+    {
+      id: "butter", tag: "Butter cow", av: "🇰🇪", who: "Amani, 17", from: "exchange student from Kenya",
+      msg: ["My host family took me to the Iowa State Fair.", "There was a COW. Made of BUTTER. 🐄🧈 And people waited in LINE to look at it?!"],
+      guess: { q: "How long has the Iowa State Fair had a butter cow?",
+        options: ["Since 1911, over 100 years", "Since 1990, about 35 years", "Since 2015, about 10 years"] },
+      real: "The first butter cow was made in <b>1911</b>. Today’s cow uses about 600 pounds of Iowa butter. That would butter about 19,200 slices of toast. Much of the butter is reused for up to 10 years.",
+      src: "Iowa State Fair",
+      replies: [
+        { kind: "best", t: "Fair fans have their own traditions inside normal American life. That’s one!" },
+        { kind: "judge", t: "Bet Kenya doesn’t have anything even close to as cool as this." },
+        { kind: "wrong", t: "It started as a protest. Fair people were rejecting city life." }
+      ],
+      react: { best: "Amani: “A whole tradition about butter. I love it. Sending pics home 📸”",
+        judge: "Amani: “Kenya has plenty of cool things.” She follows @JustGoogleIt.",
+        wrong: "Amani: “A protest… made of butter?” It wasn’t a protest. She follows @JustGoogleIt." },
+      cause: { judge: "You put down her country to make yours look better.", wrong: "You made up a fact. Nobody at the fair was rejecting American culture." },
+      check: { label: "Subculture vs. counterculture", prompt: "State Fair regulars have their own traditions but still live like other Americans. What are they?",
+        options: ["A subculture: they don’t reject the main culture", "A counterculture: they reject the main culture", "A subculture: they reject the main American values", "A counterculture: their traditions are different"],
+        hint: "Do fair fans reject American culture, or just add their own traditions inside it?",
+        why: "A <b>subculture</b> keeps its own style inside the bigger culture, like gamers or K-pop fans. A <b>counterculture</b> rejects the main culture’s big values." },
+      rule: "<b>Subculture</b> = a group with its own style or traditions inside a bigger culture (gamers, K-pop fans, State Fair regulars).<br><b>Counterculture</b> = a group that rejects the main culture’s big values.",
+      found: { t: "Subculture", d: "Fair fans add their own traditions." }
+    },
+    {
+      id: "flip", tag: "Plot twist", av: "🇩🇪", who: "Lukas, 16", from: "exchange student from Germany",
+      flip: true,
+      msg: ["Did you see what @JustGoogleIt posted? 👀", "“Went to Europe. NO ICE in my drinks. Europe is so backwards 🙄” It has 2,000 likes. Is that what Americans think of us?"],
+      guess: { q: "What do many Europeans think about American ice water?",
+        options: ["It’s strange and unnecessary", "They wish they had more of it", "They’ve never really noticed it"] },
+      real: "A glass of ice water, normal in the U.S., “<b>is seen as strange and unnecessary</b>” in many other places. Some Europeans see ice as taking up room that should be drink. Same drink. Two cultures. Two different “normals.”",
+      src: "Deseret News, 2022",
+      replies: [
+        { kind: "best", t: "That post judged Europe by our rules. Ice isn’t right or wrong, just a habit." },
+        { kind: "judge", t: "I mean, he’s kind of right. Our way of doing drinks is just better." },
+        { kind: "wrong", t: "Don’t worry. It’s just because most homes there don’t have freezers." }
+      ],
+      react: { best: "Lukas: “Thank you. You’re way better than that account.” Your reply gets more likes than the post. 🔥",
+        judge: "Lukas: “So you think the same thing.” He follows @JustGoogleIt.",
+        wrong: "Lukas: “We have freezers 😂” He follows @JustGoogleIt." },
+      cause: { judge: "You agreed with judging Europe by American rules.", wrong: "You gave him a fake fact." },
+      check: { label: "Ethnocentrism vs. relativism", prompt: "The “Europe is so backwards” post is an example of what?",
+        options: ["Ethnocentrism: judging a culture by your own", "Cultural relativism: understanding it first", "Culture shock: feeling lost somewhere new", "Subculture: a group inside a bigger culture"],
+        hint: "The post uses American habits as the measuring stick. What’s the name for that?",
+        why: "Calling Europe “backwards” for no ice is <b>ethnocentrism</b>. Cultural relativism would ask why Europeans don’t use ice first." },
+      rule: "<b>Ethnocentrism</b> = judging another culture by your own culture’s rules.<br><b>Cultural relativism</b> = trying to understand a habit inside its own culture before judging it.",
+      found: { t: "Ethnocentrism", d: "“Backwards” = judging by your own rules." },
+      write: { prompt: "Reply to @JustGoogleIt’s post in one sentence. Use the word ethnocentrism or cultural relativism.",
+        starter: "Your post is ___ because ___.",
+        need: [/(ethnocentr|relativ)/i, /\b(ice|europe\w*|judg\w*|backwards?|drinks?|rules?|habits?)\b/i], needMsg: "Use ethnocentrism or cultural relativism and say what the post got wrong about Europe." }
+    }
+  ];
+  const N = DMS.length;
+  const POINTS = { best: 30, judge: 0, wrong: 0 };
+  const RIVAL = { best: 0, judge: 30, wrong: 20 };
+
+  // ---------------- State ----------------
+  const blank = () => ({ v: 1, name: "", started: false, pos: 0, guess: Array(N).fill(null), reply: Array(N).fill(null), done: Array(N).fill(false), wrong: Array(N).fill(0), notes: Array(N).fill(""), noteOk: Array(N).fill(false), final: "", submitted: false });
+  let S = blank();
+  try { const s = JSON.parse(localStorage.getItem(KEY)); if (s && s.v === 1 && Array.isArray(s.done) && s.done.length === N) S = Object.assign(blank(), s); } catch (e) {}
+  const save = () => { try { localStorage.setItem(KEY, JSON.stringify(S)); } catch (e) {} };
+  let locked = false;
+
+  function scores() {
+    let you = START, rival = START;
+    DMS.forEach((d, i) => {
+      if (S.guess[i] === 0) you += 10;
+      const r = S.reply[i]; if (r != null) { const k = d.replies[r].kind; you += POINTS[k]; rival += RIVAL[k]; }
+      if (S.done[i] && S.wrong[i] === 0) you += 10;
+    });
+    return { you, rival };
+  }
+  function hud(bump) {
+    const sc = scores();
+    $("youPill").textContent = "You: " + sc.you + " followers";
+    $("rivalPill").textContent = "@JustGoogleIt: " + sc.rival;
+    if (bump) { const p = $(bump); p.classList.remove("bump"); void p.offsetWidth; p.classList.add("bump"); }
+    $("track").innerHTML = DMS.map((d, i) => '<li class="' + (S.done[i] && (!d.write || S.noteOk[i]) ? "done" : i === S.pos ? "now" : "") + '"><span>' + (i + 1) + "</span>" + esc(d.tag) + "</li>").join("");
+  }
+  const roundDone = i => S.done[i] && (!DMS[i].write || S.noteOk[i]);
+
+  // ---------------- Title screen ----------------
+  function titleScreen() {
+    $("hud").hidden = true;
+    $("app").innerHTML =
+      '<section class="card titlecard"><div>' +
+      '<p class="kicker">Sociology · Unit 2 · Day 2</p><h1>Weird to Who?</h1>' +
+      '<p class="hook">To you it’s normal. To a visitor, it’s the strangest thing they’ve ever seen.</p>' +
+      '<ul class="facts"><li>📱 You run a help account for exchange students new to the U.S.</li><li>💬 7 DMs about real American habits. Answer before the rival account <b>@JustGoogleIt</b> does.</li><li>⏱️ About 25 minutes · 7 checks · 3 one-sentence replies · 2 sentences at the end</li></ul>' +
+      '<p class="goal"><b>Today’s goal:</b> Name the parts of culture hiding inside habits Americans think are normal.</p>' +
+      '<label for="studentName">Your name: first name + last initial (like Jordan M.)</label>' +
+      '<input id="studentName" autocomplete="off" maxlength="60" placeholder="Jordan M." value="' + esc(S.name) + '">' +
+      '<p class="msg bad" id="introStatus"></p>' +
+      '<button type="button" class="go big" id="startBtn">Open your DMs →</button></div>' +
+      '<div class="phone" aria-hidden="true"><div class="scr">' +
+      DMS.slice(0, 5).map(d => '<div class="row"><span class="av">' + d.av + "</span><span>" + esc(d.who.split(",")[0]) + "<small>" + esc(d.msg[0].slice(0, 30)) + "…</small></span><span class=\"dot\"></span></div>").join("") +
+      "</div></div></section>";
+    $("studentName").addEventListener("input", () => { S.name = $("studentName").value; save(); });
+    $("startBtn").onclick = () => {
+      let name = $("studentName").value.trim();
+      name = window.classShortName ? window.classShortName(name) : name;
+      if (!/^\S+ [A-Z]\.$/.test(name) && !test()) { $("introStatus").textContent = "Type your first name and last initial, like Jordan M."; $("studentName").focus(); return; }
+      S.name = name || "Test T."; S.started = true; save(); render(); window.scrollTo(0, 0);
+    };
+  }
+
+  // ---------------- One DM ----------------
+  function dmScreen() {
+    const i = S.pos, d = DMS[i];
+    $("hud").hidden = false; hud();
+    let h = '<section class="card">' +
+      '<div class="dmhead"><span class="av">' + d.av + '</span><div><b>' + esc(d.who) + '</b><small>' + esc(d.from) + " · DM " + (i + 1) + " of " + N + "</small></div></div>" +
+      (d.flip ? '<p class="step-tag">Plot twist: this time the “weird” habit is ours</p>' : "") +
+      d.msg.map(m => '<p class="bubble">' + esc(m) + "</p>").join("");
+
+    // Step 1: guess
+    h += '<div class="step" id="s1"><p class="step-tag">1 · Guess first<span class="free">(just a guess, counts for bonus followers)</span></p><h3>' + esc(d.guess.q) + "</h3>";
+    if (S.guess[i] == null) {
+      h += '<div class="opts three" id="guessOpts"></div></div></section>';
+      $("app").innerHTML = h;
+      shuffle(d.guess.options.map((t, n) => ({ t, n }))).forEach(o => {
+        const b = document.createElement("button"); b.type = "button"; b.className = "opt"; b.textContent = o.t;
+        b.onclick = () => { S.guess[i] = o.n; save(); render(); if (o.n === 0) hud("youPill"); focusStep("s1real"); };
+        $("guessOpts").append(b);
+      });
+      return;
+    }
+    const hit = S.guess[i] === 0;
+    h += '<p class="yourcall ' + (hit ? "hit" : "miss") + '">' + (hit ? "✓ Nailed it! +10 followers" : "Not quite. You guessed: " + esc(d.guess.options[S.guess[i]])) + "</p>" +
+      '<div class="real" id="s1real"><p class="step-tag" style="color:#7a5600">The real story</p><p>' + d.real + '</p><p class="src">Source: ' + esc(d.src) + "</p></div></div>";
+
+    // Step 2: reply
+    h += '<div class="step" id="s2"><p class="step-tag">2 · Pick your reply to ' + esc(d.who.split(",")[0]) + "</p>";
+    if (S.reply[i] == null) {
+      h += '<p class="stem">The best reply explains the habit without putting anyone down.</p><div class="opts three" id="replyOpts"></div></div></section>';
+      $("app").innerHTML = h;
+      shuffle(d.replies.map((r, n) => ({ r, n }))).forEach(o => {
+        const b = document.createElement("button"); b.type = "button"; b.className = "opt"; b.textContent = "“" + o.r.t + "”";
+        b.onclick = () => { S.reply[i] = o.n; save(); render(); hud(o.r.kind === "best" ? "youPill" : "rivalPill"); focusStep("s2react"); };
+        $("replyOpts").append(b);
+      });
+      return;
+    }
+    const k = d.replies[S.reply[i]].kind;
+    h += '<p class="bubble me">' + esc(d.replies[S.reply[i]].t) + "</p>" +
+      '<div class="react ' + (k === "best" ? "good" : "bad") + '" id="s2react">' + esc(d.react[k]) +
+      (k === "best" ? '<span class="cause">+30 followers. Caused by: you explained the habit without judging.</span>'
+        : '<span class="cause">@JustGoogleIt +' + RIVAL[k] + ". Caused by: " + esc(d.cause[k]) + "</span>") + "</div></div>";
+
+    // Step 3: name it
+    h += '<div class="step" id="s3"><p class="step-tag">3 · Name it</p>' +
+      '<div class="check' + (S.done[i] ? " solved" : "") + '" id="check">' + (S.done[i] ? '<span class="stamp">Named it</span>' : "") +
+      '<p class="check-tag">' + esc(d.check.label) + "</p><h3>" + esc(d.check.prompt) + "</h3>";
+    if (!S.done[i]) {
+      h += '<div class="choices" id="choices"></div><p class="msg" id="checkMsg" aria-live="polite"></p></div></div></section>';
+      $("app").innerHTML = h; drawChoices(i); return;
+    }
+    h += '<p class="msg good">✓ ' + esc(d.check.options[0]) + "</p><p>" + d.check.why + "</p></div>" +
+      '<div class="rulebox" id="rule"><p class="step-tag">The culture idea</p><p>' + d.rule + "</p></div></div>";
+
+    // Step 4: write (some DMs)
+    if (d.write) {
+      h += '<div class="step writebox" id="s4"><p class="step-tag">4 · Your own reply</p>';
+      if (!S.noteOk[i]) {
+        h += '<label for="note">' + esc(d.write.prompt) + '</label><p class="stem starter">Start like this: ' + esc(d.write.starter) + '</p>' +
+          '<textarea id="note" maxlength="500"></textarea><p class="msg bad" id="noteMsg" aria-live="polite"></p>' +
+          '<button type="button" class="go" id="noteBtn">Send reply</button></div></section>';
+        $("app").innerHTML = h;
+        $("note").value = S.notes[i] || "";
+        $("note").oninput = () => { S.notes[i] = $("note").value; save(); };
+        $("noteBtn").onclick = () => {
+          const v = $("note").value.trim();
+          if (!test()) {
+            if (v.split(/\s+/).filter(Boolean).length < 8) { $("noteMsg").textContent = "Write one full sentence (8+ words)."; $("note").focus(); return; }
+            if (d.write.need && !d.write.need.every(r => r.test(v))) { $("noteMsg").textContent = d.write.needMsg; $("note").focus(); return; }
+            if (window.classJunkStop) { const m = window.classJunkStop($("note"), { source: "from the DM" }); if (m) { $("noteMsg").textContent = ""; return; } }
+          }
+          S.notes[i] = v; S.noteOk[i] = true; save(); render(); focusStep("nextBtn");
+        };
+        return;
+      }
+      h += '<p class="bubble me">' + esc(S.notes[i]) + "</p></div>";
+    }
+    // Next
+    h += '<button type="button" class="go big" id="nextBtn">' + (i === N - 1 ? "See how you did →" : "Next DM →") + "</button></section>";
+    $("app").innerHTML = h;
+    $("nextBtn").onclick = () => { S.pos = i + 1; save(); $("welcome").hidden = true; render(); window.scrollTo(0, 0); };
+  }
+
+  function drawChoices(i) {
+    const d = DMS[i], box = $("choices"); box.innerHTML = "";
+    shuffle(d.check.options.map((t, n) => ({ t, n }))).forEach(o => {
+      const b = document.createElement("button"); b.type = "button"; b.className = "choice"; b.textContent = o.t;
+      b.onclick = () => {
+        if (locked) return;
+        if (o.n === 0) {
+          S.done[i] = true; save();
+          if (window.classFirstTry) window.classFirstTry.right("u2d2_" + d.id);
+          render(); hud(S.wrong[i] === 0 ? "youPill" : null); focusStep("rule");
+        } else {
+          S.wrong[i]++; save();
+          if (window.classFirstTry) window.classFirstTry.wrong();
+          const c = $("check"); c.classList.remove("shake"); void c.offsetWidth; c.classList.add("shake");
+          $("checkMsg").className = "msg hint"; $("checkMsg").textContent = "Not quite. " + d.check.hint + " Try again in " + LOCK + " seconds.";
+          locked = true; box.querySelectorAll("button").forEach(x => x.disabled = true);
+          setTimeout(() => { locked = false; drawChoices(i); }, test() ? 0 : LOCK * 1000);
+        }
+      };
+      box.append(b);
+    });
+  }
+  function focusStep(id) { setTimeout(() => { const el = $(id); if (el) el.scrollIntoView({ behavior: "smooth", block: "center" }); }, 60); }
+
+  // ---------------- Ending ----------------
+  function endScreen() {
+    $("hud").hidden = false; hud();
+    const sc = scores(), best = S.reply.filter((r, i) => r != null && DMS[i].replies[r].kind === "best").length;
+    const won = sc.you > sc.rival;
+    const first = S.wrong.filter((w, i) => S.done[i] && !w).length;
+    let h = '<section class="card"><div class="ending"><div class="e-icon">' + (won ? "🏆" : "📉") + "</div><h2>" +
+      (won ? "You beat @JustGoogleIt!" : "Close race. @JustGoogleIt got more this time") + '</h2><p class="score"><b>' + sc.you + "</b> followers vs. <b>" + sc.rival + "</b> · " + best + " of " + N + " best replies · " + first + " of " + N + " checks on the first try</p>" +
+      "<p>" + (won ? "Visitors trusted you because you explained habits without judging them." : "Every judging or fake-fact reply sent a visitor to the rival. The visitors wanted explanations, not put-downs.") + "</p></div>" +
+      '<div class="found"><b>Culture ideas you found</b><ul>' + DMS.map(d => '<li><span class="f-tag">' + esc(d.tag) + "</span><b>" + esc(d.found.t) + ":</b> " + esc(d.found.d) + "</li>").join("") + "</ul></div>" +
+      '<div class="writebox"><p class="step-tag">Explain it · 2 sentences</p>' +
+      '<label for="finalBox">Pick one habit from today. Explain it to a new visitor using one culture term from today.</label>' +
+      '<p class="stem starter">Start like this: In America, people ___. This is an example of ___ because ___.</p>' +
+      '<textarea id="finalBox" maxlength="800"></textarea>' +
+      '<button type="button" class="go big" id="sendBtn">' + (S.submitted ? "Turned in ✓" : "Turn in") + '</button><p class="msg" id="status" aria-live="polite"></p></div></section>';
+    $("app").innerHTML = h;
+    $("finalBox").value = S.final || "";
+    $("finalBox").oninput = () => { S.final = $("finalBox").value; save(); };
+    if (S.submitted) { $("status").innerHTML = '<span class="turned">Turned in ✓</span> You can change your writing and turn in again.'; $("sendBtn").textContent = "Turn in again"; }
+    $("sendBtn").onclick = send;
+  }
+
+  async function send() {
+    const st = $("status"), ref = $("finalBox").value.trim();
+    st.className = "msg bad";
+    if (!DMS.every((d, i) => roundDone(i)) && !test()) { st.textContent = "Finish all 7 DMs first."; return; }
+    if (!test() && (ref.length < 60 || (ref.match(/[.!?]+(?=\s|$)/g) || []).length < 2)) { st.textContent = "Write 2 sentences: the habit, then the culture term and why."; $("finalBox").focus(); return; }
+    if (!test() && !/(material|language|symbol|value|folkway|more|mores|subculture|counterculture|ethnocentr|relativ)/i.test(ref)) { st.textContent = "Use one culture term from today (like value, symbol, folkway, or ethnocentrism)."; $("finalBox").focus(); return; }
+    if (window.classJunkStop) { const m = window.classJunkStop($("finalBox"), { source: "from today’s DMs" }); if (m) { st.textContent = ""; return; } }
+    S.final = ref; save();
+    const sc = scores();
+    const answers = {
+      "Standard": STANDARD,
+      "Activity": "Weird to Who? (replaces The Arrival)",
+      "First-try correct": S.wrong.filter((w, i) => S.done[i] && !w).length + " of " + N,
+      "Best replies (no judging, no fake facts)": S.reply.filter((r, i) => r != null && DMS[i].replies[r].kind === "best").length + " of " + N,
+      "Followers": sc.you + " vs. rival " + sc.rival
+    };
+    DMS.forEach((d, i) => {
+      answers["DM " + (i + 1) + " · " + d.check.prompt] = S.done[i] ? d.check.options[0] + (S.wrong[i] ? " (after " + S.wrong[i] + " wrong " + (S.wrong[i] === 1 ? "try" : "tries") + ")" : " (first try)") : "Not completed";
+      if (S.reply[i] != null) { const r = d.replies[S.reply[i]]; answers["DM " + (i + 1) + " · Reply picked"] = r.t + " [" + (r.kind === "best" ? "best" : r.kind === "judge" ? "judging" : "fake fact") + "]"; }
+      if (d.write) answers["DM " + (i + 1) + " · Own reply"] = S.notes[i] || "(blank)";
+    });
+    answers["Writing: one habit + one culture term"] = ref;
+    $("sendBtn").disabled = true; st.className = "msg"; st.textContent = "Sending your work…";
+    try {
+      if (!window.classTurnIn) throw Error("Turn-in connection did not load. Refresh and try again; your work is saved.");
+      const r = await window.classTurnIn(API, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ studentName: S.name, assignmentId: ASSIGNMENT_ID, assignmentTitle: TITLE, answers }) });
+      const res = await r.json();
+      if (!r.ok) throw Error(res.error || "Could not send your work.");
+      S.submitted = true; save();
+      st.innerHTML = '<span class="turned">Turned in ✓</span> Your teacher can see your work. Nice job.';
+      $("sendBtn").textContent = "Turn in again";
+    } catch (e) { st.className = "msg bad"; st.textContent = e.message || "Could not turn in. Your work is saved; try again."; }
+    $("sendBtn").disabled = false;
+  }
+
+  function render() {
+    if (!S.started) return titleScreen();
+    if (S.pos >= N) return endScreen();
+    dmScreen();
+  }
+
+  $("restartBtn").onclick = () => {
+    if (!confirm("Start over? This clears your answers on this device.")) return;
+    const name = S.name; S = blank(); S.name = name; save();
+    if (window.classFirstTry) window.classFirstTry.reset();
+    $("welcome").hidden = true; render(); window.scrollTo(0, 0);
+  };
+
+  // Come back to the first unfinished DM (never past it).
+  if (S.started) {
+    const open = DMS.findIndex((d, i) => !roundDone(i));
+    S.pos = open === -1 ? Math.min(S.pos, N) : Math.min(S.pos, open);
+    if (S.guess.some(g => g != null)) { $("welcome").textContent = S.pos >= N ? "Welcome back. All 7 DMs are done. Write your 2 sentences and turn it in." : "Welcome back. You’re on DM " + (S.pos + 1) + " of " + N + "."; $("welcome").hidden = false; }
+  }
+  render();
+
+  // ---------------- Test T. skip bar (shared/turnin.js) ----------------
+  try {
+    (window.classTestHooks = window.classTestHooks || []).push({
+      count: () => N + 1,
+      index: () => Math.min(S.pos, N),
+      label: i => i < N ? "DM " + (i + 1) + ": " + DMS[i].tag : "Ending + turn in",
+      go: i => {
+        S.started = true; if (!S.name) S.name = "Test T."; locked = false;
+        if (i >= N) { DMS.forEach((d, j) => { if (S.guess[j] == null) S.guess[j] = 0; if (S.reply[j] == null) S.reply[j] = 0; S.done[j] = true; S.noteOk[j] = true; }); S.pos = N; }
+        else { S.pos = i; S.guess[i] = null; S.reply[i] = null; S.done[i] = false; S.noteOk[i] = false; }
+        save(); render(); window.scrollTo(0, 0);
+      },
+      solve: () => {
+        const i = S.pos; if (i >= N) return; locked = false;
+        if (S.guess[i] == null) S.guess[i] = 0;
+        if (S.reply[i] == null) S.reply[i] = 0;
+        S.done[i] = true;
+        if (DMS[i].write && !S.noteOk[i]) { S.notes[i] = S.notes[i] || "Test T. preview reply for this DM."; S.noteOk[i] = true; }
+        save(); render();
+      }
+    });
+    if (window.classTestSkip) window.classTestSkip.refresh();
+  } catch (e) {}
+})();
+</script>
+</body></html>
