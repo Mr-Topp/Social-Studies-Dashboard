@@ -61,9 +61,15 @@ window.CLASS_RECAPS = {
 (function () {
   const CIVICS_PIN = { unit: 2, date: "2026-11-06" };
   const off = window.CLASS_NO_SCHOOL || [], iso = d => d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0");
+  const noSchool = d => { const i = iso(d); return off.some(([a, z]) => i >= a && i <= z); };
+  // The coming school Friday (today if it's Friday), so Mon–Thu already show the next Friday's work.
   const t = new Date(), now = new Date(t.getFullYear(), t.getMonth(), t.getDate(), 12);
+  while (now.getDay() !== 5 || noSchool(now)) now.setDate(now.getDate() + 1);
   const d = new Date(CIVICS_PIN.date + "T12:00:00"); let u = CIVICS_PIN.unit;
-  for (d.setDate(d.getDate() + 7); d <= now; d.setDate(d.getDate() + 7)) { const i = iso(d); if (!off.some(([a, z]) => i >= a && i <= z)) u++; }
+  for (d.setDate(d.getDate() + 7); d <= now; d.setDate(d.getDate() + 7)) { if (!noSchool(d)) u++; }
   window.CLASS_TODAY = window.CLASS_TODAY || {};
   window.CLASS_TODAY.civics = { unit: Math.min(u, 7), date: CIVICS_PIN.date };
+  // Fynn 11-06: Fridays 2–6 are real to-do work again (they were marked done for everyone in CLASS_CLEARED).
+  const clr = (window.CLASS_CLEARED || {}).civics;
+  if (clr && clr.ids) clr.ids = clr.ids.filter(id => /^civics-test-s1-/.test(id));
 })();
