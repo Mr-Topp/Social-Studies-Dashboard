@@ -1,105 +1,145 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Arsenal Race: What Wins a War? | U.S. History Unit 2 Day 6</title>
-<meta name="description" content="Run the Allied war effort in World War II: make 7 big calls, then see Midway, Stalingrad, the Atlantic, and D-Day play out.">
+<meta name="description" content="WWII campaign: you command the Allied war effort. Give 7 orders, run 4 missions (Midway, Stalingrad, the Atlantic, D-Day), and rank up from Private to General.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Black+Ops+One&display=swap" rel="stylesheet">
 <style>
-:root{--ink:#1f2630;--muted:#565f6b;--paper:#f4f4f1;--card:#fff;--line:#d7d8d2;--accent:#36503a;--accent2:#8a4b1c;--soft:#edf1f6;--glow:#2c4a6b2e;--green:#2a6b45;--bad:#a2392f;--hdr:#e9edf2;--srcbg:#faf6f3;--srcline:#e3d5cf;--gold:#7a5a12}
+:root{--bg:#10161b;--panel:#18212a;--panel2:#1f2b35;--line:#33434f;--ink:#eef2ec;--muted:#aab6ae;--olive:#a6c65f;--olive-d:#7f9e3d;--amber:#f2b630;--red:#ff7a6b;--green:#76d68f;--steel:#8fb3d1;--glow:#a6c65f55}
 *{box-sizing:border-box}
 html,body{overflow-x:clip}
-body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.5 system-ui,Segoe UI,Arial,sans-serif}
-header{background:var(--hdr);border-bottom:4px solid var(--accent);padding:8px max(16px,calc((100vw - 900px)/2)) 8px}
-.k{font-size:.74rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin:0}
-h1{margin:0;font-size:clamp(1.5rem,3vw,2rem);line-height:1.15}
-h1 small{font-size:.55em;font-weight:700;color:var(--muted);margin-left:8px}
-.std{margin:2px 0 0;font-size:.85rem;color:var(--muted)}
-.std summary{cursor:pointer;display:inline}.std b{color:var(--ink)}
-.hud{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line);padding:6px max(12px,calc((100vw - 1080px)/2));display:flex;gap:6px 8px;flex-wrap:wrap;align-items:center;font-weight:800;font-size:.88rem;box-shadow:0 2px 8px #1f2b3312}
-.hud .bar{flex:1;min-width:80px;height:10px;background:#e6e6de;border-radius:9px;overflow:hidden}.hud .bar span{display:block;height:100%;width:0;background:var(--accent);transition:width .4s}
-.pill{background:#f0efe8;border-radius:20px;padding:3px 10px;white-space:nowrap;transition:background .4s}
-.pill.flash{background:#fbefd5}
-.meters{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
-.badge{border-radius:8px;padding:2px 8px;font-size:.8rem;white-space:nowrap;border:2px solid #d7d8d2;background:#fafaf7;color:var(--muted)}
-.badge.win{background:#dcefe2;border-color:#9cc9ad;color:var(--green)}.badge.mid{background:#fbefd5;border-color:#e2c886;color:var(--gold)}.badge.loss{background:#f6dcd8;border-color:#dfa59d;color:var(--bad)}
-main{max-width:900px;margin:auto;padding:12px 16px 60px}
-.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px;box-shadow:0 3px 12px #1f2b330d}
-.kicker{font-size:.76rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:var(--accent2);margin:0}
-h2{margin:2px 0 8px;font-size:1.4rem}
-.teach{background:var(--soft);border-left:5px solid var(--accent);border-radius:9px;padding:8px 14px;margin:0 0 10px}.teach p{margin:4px 0}.teach b{color:var(--accent)}
-.block{margin:12px 0;padding:14px;border-radius:12px;border:2px solid var(--line);background:#fff}
-.block.current{border-color:var(--ink);box-shadow:0 0 0 4px var(--glow)}
-.block h3{margin:0 0 10px;font-size:1.06rem;line-height:1.4;font-weight:700}
+body{margin:0;background:var(--bg) radial-gradient(1200px 500px at 50% -120px,#26343f 0,transparent 70%) no-repeat;color:var(--ink);font:17px/1.5 system-ui,Segoe UI,Arial,sans-serif}
+.stencil{font-family:"Black Ops One",Impact,"Arial Black",sans-serif;font-weight:400;letter-spacing:.04em}
+header{padding:12px max(16px,calc((100vw - 900px)/2)) 8px;border-bottom:2px solid var(--line)}
+.k{font-size:.74rem;font-weight:900;letter-spacing:.12em;text-transform:uppercase;color:var(--olive);margin:0}
+h1{margin:2px 0 0;font:400 clamp(1.7rem,4vw,2.4rem)/1.05 "Black Ops One",Impact,sans-serif;letter-spacing:.04em}
+h1 small{font:700 .9rem system-ui,sans-serif;letter-spacing:0;color:var(--muted);margin-left:8px}
+.std{margin:4px 0 0;font-size:.85rem;color:var(--muted)}
+.std summary{cursor:pointer;display:inline}.std b{color:var(--ink)}.std u{color:var(--steel)}
+
+/* HUD */
+.hud{position:sticky;top:0;z-index:5;background:#0b1014f2;border-bottom:2px solid var(--line);padding:6px max(12px,calc((100vw - 1080px)/2));display:flex;gap:6px 12px;flex-wrap:wrap;align-items:center;font-weight:800;font-size:.86rem;box-shadow:0 4px 14px #0007}
+.rankbox{display:flex;align-items:center;gap:8px;min-width:190px;flex:1}
+.rank-name{font-family:"Black Ops One",Impact,sans-serif;font-weight:400;letter-spacing:.05em;color:var(--amber);white-space:nowrap;font-size:1rem}
+.xpbar,.axbar,.bar{flex:1;min-width:60px;height:9px;background:#2a3640;border-radius:9px;overflow:hidden}
+.xpbar span,.axbar span,.bar span{display:block;height:100%;width:0;transition:width .5s}
+.xpbar span{background:var(--amber)}.axbar span{background:var(--red)}.bar span{background:var(--olive)}
+.xp{color:var(--muted);white-space:nowrap;font-size:.78rem}
+.axbox{display:flex;align-items:center;gap:6px;min-width:170px;flex:1}.axbox b{color:var(--red);white-space:nowrap;font-size:.78rem;letter-spacing:.06em}
+.chk{display:flex;align-items:center;gap:6px;min-width:150px;flex:1}.chk span:first-child{white-space:nowrap;font-size:.78rem;color:var(--muted)}
+.meters{display:flex;gap:6px;flex-wrap:wrap;align-items:center;width:100%}
+.hud b,.hud .xp,.chk span:first-child,.rank-name{flex-shrink:0}
+@media(max-width:640px){.rankbox,.axbox,.chk{flex:1 1 100%;min-width:0}.axbox b:first-child{font-size:.7rem}.hud{font-size:.8rem}}
+.pill{background:#24313b;border:1px solid var(--line);border-radius:20px;padding:2px 10px;white-space:nowrap;transition:background .4s}
+.pill.flash{background:#5a4a14}
+.badge{border-radius:7px;padding:1px 8px;font-size:.78rem;white-space:nowrap;border:2px solid var(--line);background:#1a232b;color:var(--muted)}
+.badge.win{background:#173524;border-color:#3f8a57;color:var(--green)}.badge.mid{background:#3a3014;border-color:#9b7d24;color:var(--amber)}.badge.loss{background:#3d1d1a;border-color:#a3463c;color:var(--red)}
+
+main{max-width:900px;margin:auto;padding:14px 16px 60px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px;box-shadow:0 6px 20px #0006}
+.kicker{font-size:.78rem;font-weight:900;letter-spacing:.14em;text-transform:uppercase;color:var(--amber);margin:0}
+h2{margin:2px 0 10px;font:400 1.7rem/1.1 "Black Ops One",Impact,sans-serif;letter-spacing:.04em}
+.teach{background:#13202a;border:1px solid #2c4252;border-left:5px solid var(--olive);border-radius:9px;padding:8px 14px;margin:0 0 10px}.teach p{margin:4px 0}.teach b{color:var(--olive)}
+.obj{font-weight:800}.obj b{color:var(--amber)!important;letter-spacing:.06em}
+.block{margin:12px 0;padding:14px;border-radius:12px;border:2px solid var(--line);background:var(--panel2)}
+.block.current{border-color:var(--olive);box-shadow:0 0 0 4px var(--glow)}
+.block.past{opacity:.82}
+.block h3{margin:0 0 10px;font-size:1.08rem;line-height:1.4;font-weight:750}
+.block h3 b{color:var(--amber)}
 .block.note p{margin:6px 0}
-.event{background:#fbf9f4;border-style:dashed;border-color:#cdbf9a}.event.current{border-style:solid}
+.event{border-style:dashed;border-color:#5b6b3a}.event.current{border-style:solid}
 .event-body p{margin:4px 0 10px}
-.event-body .call{display:inline-block;background:var(--ink);color:#fff;font-size:.74rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase;border-radius:6px;padding:2px 8px;margin-right:6px}
-.event-body .surprise{background:var(--bad)}
-.picked{margin:8px 0 4px;color:var(--muted)}.result{background:#f0efe8;border-radius:9px;padding:8px 12px}.result p{margin:2px 0}
-.fx{font-weight:900;white-space:nowrap}
-.qlabel{font-size:.75rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:var(--accent);margin:0 0 4px}
+.event-body b{color:var(--amber)}
+.event-body .call{display:inline-block;background:var(--olive);color:#10161b;font:400 .82rem "Black Ops One",Impact,sans-serif;letter-spacing:.08em;border-radius:5px;padding:2px 9px;margin-right:8px}
+.event-body .surprise{background:var(--red);color:#1a0d0b}
+.picked{margin:8px 0 4px;color:var(--muted)}.picked b{color:var(--ink)}
+.result{background:#141c22;border:1px solid var(--line);border-radius:9px;padding:8px 12px}.result p{margin:2px 0}
+.fx{font-weight:900;white-space:nowrap;color:var(--amber);margin-right:4px}
+.qlabel{font-size:.75rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:var(--olive);margin:0 0 4px}
 .choices{display:grid;gap:8px}
 @media(min-width:700px){.choices{grid-template-columns:1fr 1fr}}
 button{font:inherit;cursor:pointer;border-radius:10px;min-height:46px}
-.choice{text-align:left;background:#fff;color:var(--ink);border:2px solid #cfcdbf;padding:10px 12px;font-weight:650;line-height:1.3}
-.choice:hover:not(:disabled){border-color:var(--ink);background:#fcfcfa}.choice:disabled{opacity:.5;cursor:not-allowed}
-.go{margin-top:12px;background:var(--accent);color:#fff;border:0;padding:11px 20px;font-weight:900;font-size:1.05rem}
-button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid #2f7dbd;outline-offset:2px}
+.choice{text-align:left;background:#121a20;color:var(--ink);border:2px solid #45555f;padding:10px 12px;font-weight:650;line-height:1.3;transition:border-color .15s,transform .1s}
+.choice:hover:not(:disabled){border-color:var(--olive);background:#18242c;transform:translateY(-1px)}.choice:disabled{opacity:.45;cursor:not-allowed}
+.go{margin-top:12px;background:var(--olive);color:#10161b;border:0;padding:11px 22px;font:400 1.1rem "Black Ops One",Impact,sans-serif;letter-spacing:.06em}
+.go:hover{background:#b8d86e}
+button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid var(--amber);outline-offset:2px}
 .answered{font-weight:800;color:var(--green);margin:4px 0}.why{margin:2px 0;color:var(--muted)}
-.msg{min-height:1.3em;font-weight:750;margin:8px 0 0}.msg.bad{color:#7a4a12}.msg.good{color:var(--green)}
+.msg{min-height:1.3em;font-weight:750;margin:8px 0 0}.msg.bad{color:var(--amber)}.msg.good{color:var(--green)}
 label{display:block;font-weight:850;margin:14px 0 4px}.stem{margin:0 0 4px;color:var(--muted);font-size:.92rem}
-input,textarea{width:100%;font:inherit;border:2px solid #cfcdbf;border-radius:9px;padding:10px;background:#fff;color:var(--ink)}
-.src{font-size:.78rem;color:var(--muted)}
-.welcome{background:#e6f1ea;color:var(--green);font-weight:800;border-radius:9px;padding:8px 12px;margin:0 0 10px}
+input,textarea{width:100%;font:inherit;border:2px solid #45555f;border-radius:9px;padding:10px;background:#0f151a;color:var(--ink)}
+input::placeholder{color:#7d8a83}
+.src{font-size:.8rem;color:var(--muted)}
+.welcome{background:#173524;color:var(--green);font-weight:800;border-radius:9px;padding:8px 12px;margin:0 0 10px}
+.welcome button{background:#10161b;color:var(--ink);border:1px solid var(--line);border-radius:7px;min-height:0}
 .foot{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-top:14px;color:var(--muted);font-size:.85rem}
-.foot button{background:#ebe9e0;border:0;padding:8px 12px;font-weight:800;color:var(--ink)}
+.foot button{background:#24313b;border:0;padding:8px 12px;font-weight:800;color:var(--ink)}
+body .start-over-zone{border-top-color:var(--line);color:var(--muted)}
+body .start-over-zone .start-over-btn{color:var(--red)}
+body .start-over-zone.fixed{background:#18212ae6;border-color:var(--line)}
 @media print{.hud,.foot,.go{display:none}}
 
 /* intro */
-.intro-grid{display:grid;grid-template-columns:220px 1fr;gap:14px;align-items:start}
-.intro-grid figure{margin:0}.intro-grid img{width:100%;border-radius:10px;display:block}
+.intro-grid{display:grid;grid-template-columns:230px 1fr;gap:16px;align-items:start}
+.intro-grid figure{margin:0}.intro-grid img{width:100%;border-radius:10px;display:block;border:2px solid var(--line);filter:contrast(1.05)}
 .intro-grid figcaption{font-size:.72rem;color:var(--muted);line-height:1.3;margin-top:3px}
-@media(max-width:640px){.intro-grid{grid-template-columns:1fr}.intro-grid figure{max-width:300px}}
-.hook{font-size:1.15rem;font-weight:800;margin:0 0 6px}
+@media(max-width:640px){.intro-grid{grid-template-columns:1fr}.intro-grid figure{max-width:320px}}
+.hook{font-size:1.2rem;font-weight:800;margin:2px 0 8px;line-height:1.35}
 .teams{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin:6px 0}
-.team{border-radius:9px;padding:5px 10px;font-weight:800;font-size:.92rem}
-.team.allies{background:#dcefe2;color:var(--green)}.team.axis{background:#f6dcd8;color:var(--bad)}
-.vs{font-weight:900;color:var(--muted)}
-.plan{display:flex;gap:6px;flex-wrap:wrap;margin:6px 0 0;padding:0;list-style:none}.plan li{background:#f0efe8;border-radius:9px;padding:3px 9px;font-weight:800;font-size:.85rem}
-.intro p{margin:4px 0}.intro label{margin-top:10px}.intro .msg{min-height:0;margin:4px 0 0}.intro .go{margin-top:6px}
-.intro .row{display:flex;gap:10px;align-items:end;flex-wrap:wrap}
+.team{border-radius:8px;padding:4px 10px;font-weight:800;font-size:.9rem}
+.team.allies{background:#173524;color:var(--green)}.team.axis{background:#3d1d1a;color:var(--red)}
+.vs{font:400 1rem "Black Ops One",Impact,sans-serif;color:var(--muted)}
+.missions{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:10px 0 6px}
+.missions div{background:#121a20;border:1px solid var(--line);border-radius:9px;padding:6px 8px;font-size:.85rem;font-weight:800;line-height:1.25}
+.missions span{display:block;font:400 .72rem "Black Ops One",Impact,sans-serif;letter-spacing:.08em;color:var(--amber)}
+@media(max-width:640px){.missions{grid-template-columns:1fr 1fr}}
+.plan{display:flex;gap:6px;flex-wrap:wrap;margin:6px 0 0;padding:0;list-style:none}.plan li{background:#24313b;border-radius:8px;padding:3px 9px;font-weight:800;font-size:.85rem}
+.ranks{font-size:.85rem;color:var(--muted);margin:8px 0 0}.ranks b{color:var(--amber)}
+.intro p{margin:4px 0}.intro label{margin-top:12px}.intro .msg{min-height:0;margin:4px 0 0}.intro .go{margin-top:8px}
 
 /* intel cards */
-.intel{background:var(--srcbg);border:1px solid var(--srcline);border-left:5px solid var(--accent2);border-radius:10px;padding:10px 12px}
-.intel .who{font-size:.74rem;font-weight:900;letter-spacing:.06em;text-transform:uppercase;color:var(--accent2);margin-bottom:4px}
-.intel p{margin:3px 0}
+.intel{background:#141c22;border:1px solid var(--line);border-left:5px solid var(--amber);border-radius:10px;padding:10px 12px}
+.intel .who{font:400 .8rem "Black Ops One",Impact,sans-serif;letter-spacing:.1em;text-transform:uppercase;color:var(--amber);margin-bottom:4px}
+.intel p{margin:3px 0}.intel b{color:var(--amber)}
 .bigrow{display:flex;gap:12px;align-items:center}
-.bignum{flex:none;white-space:nowrap;font-size:2rem;font-weight:900;line-height:1;color:var(--accent2);min-width:70px;text-align:center}
-.radio{font-family:"Courier New",monospace;background:#1f2630;color:#e9f3e6;border-radius:8px;padding:8px 12px;margin:6px 0;font-size:.98rem}
-.radio span{color:#9fd3a9}
-.duo{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:4px 0}.duo div{border-radius:10px;padding:8px 10px;font-size:.95rem;background:#f0efe8}.duo b{display:block}
-.duo i{display:block;margin-top:4px;font-family:Georgia,serif;font-size:1.02rem}
+.bignum{flex:none;white-space:nowrap;font:400 2rem/1 "Black Ops One",Impact,sans-serif;color:var(--amber);min-width:76px;text-align:center}
+.radio{font-family:"Courier New",monospace;background:#071009;color:#c9f0c4;border:1px solid #2b4a2e;border-radius:8px;padding:8px 12px;margin:6px 0;font-size:.98rem;text-shadow:0 0 6px #7ee08755}
+.radio span{color:#8ff09c}
+.duo{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:4px 0}.duo div{border-radius:10px;padding:8px 10px;font-size:.95rem;background:#1f2b35;border:1px solid var(--line)}.duo b{display:block;color:var(--ink)!important}
+.duo i{display:block;margin-top:6px;font-family:Georgia,serif;font-size:1.04rem;color:#f4e6c4}
 @media(max-width:640px){.duo{grid-template-columns:1fr}}
 
-/* battle reports */
-.report-card{border:3px solid var(--line);border-radius:12px;padding:10px 14px;background:#fff;animation:pop .45s ease-out}
-.report-card.win{border-color:#9cc9ad}.report-card.mid{border-color:#e2c886}.report-card.loss{border-color:#dfa59d}
-@keyframes pop{from{transform:scale(.96);opacity:0}to{transform:scale(1);opacity:1}}
+/* mission debriefs */
+.report-card{border:3px solid var(--line);border-radius:12px;padding:12px 14px;background:#121a20;animation:pop .45s ease-out}
+.report-card.win{border-color:#3f8a57}.report-card.mid{border-color:#9b7d24}.report-card.loss{border-color:#a3463c}
+@keyframes pop{from{transform:scale(.95);opacity:0}to{transform:scale(1);opacity:1}}
 .rc-top{display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap}
-.rc-name{font-size:.76rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:var(--muted)}
-.stamp{display:inline-block;font-weight:900;font-size:1.15rem;letter-spacing:.06em;text-transform:uppercase;border:3px solid currentColor;border-radius:8px;padding:2px 12px;transform:rotate(-2deg)}
-.stamp.win{color:var(--green);background:#dcefe2}.stamp.mid{color:var(--gold);background:#fbefd5}.stamp.loss{color:var(--bad);background:#f6dcd8}
+.rc-name{font:400 .82rem "Black Ops One",Impact,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+.stamp{display:inline-block;font:400 1.2rem "Black Ops One",Impact,sans-serif;letter-spacing:.06em;text-transform:uppercase;border:3px solid currentColor;border-radius:8px;padding:2px 12px;transform:rotate(-2deg)}
+.stamp.win{color:var(--green)}.stamp.mid{color:var(--amber)}.stamp.loss{color:var(--red)}
+.gains{display:flex;gap:8px;flex-wrap:wrap;margin:8px 0 0}.gains span{background:#24313b;border-radius:7px;padding:2px 9px;font-weight:800;font-size:.85rem}
+.gains .g-xp{color:var(--amber)}.gains .g-ax{color:var(--red)}
 .yours{font-weight:700;margin:8px 0 4px}
 .cause{margin:4px 0;font-size:.93rem;color:var(--muted)}.cause b{color:var(--ink)}
-.real{background:#f3f0e6;border-radius:9px;padding:8px 12px;margin-top:8px}
-.real .h{display:block;font-size:.72rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase;color:var(--accent2);margin-bottom:2px}
+.real{background:#e9e4d6;color:#1c232a;border-radius:9px;padding:9px 12px;margin-top:10px}
+.real .h{display:block;font-size:.72rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:#7a3f14;margin-bottom:2px}
+.real .bignum{color:#7a3f14}
 .real .bigrow p{margin:0}
 
+/* promotion toast */
+#toast{position:fixed;left:50%;top:70px;transform:translate(-50%,-20px);opacity:0;z-index:50;pointer-events:none;background:#10161b;border:3px solid var(--amber);border-radius:12px;padding:10px 22px;text-align:center;box-shadow:0 10px 40px #000a;transition:opacity .3s,transform .3s}
+#toast.show{opacity:1;transform:translate(-50%,0)}
+#toast small{display:block;font:800 .75rem system-ui,sans-serif;letter-spacing:.14em;color:var(--muted)}
+#toast b{font:400 1.6rem "Black Ops One",Impact,sans-serif;letter-spacing:.06em;color:var(--amber)}
+
 /* finale */
-.final-top{display:flex;gap:14px;align-items:center;flex-wrap:wrap;margin:4px 0 8px}
-.score{font-size:2.4rem;font-weight:900;line-height:1}.score small{font-size:.9rem;color:var(--muted);display:block;font-weight:800}
-.rank{font-size:1.1rem;font-weight:900;background:var(--ink);color:#fff;border-radius:9px;padding:6px 12px}
+.final-top{display:flex;gap:16px;align-items:center;flex-wrap:wrap;margin:4px 0 10px}
+.final-rank{font:400 2.2rem/1 "Black Ops One",Impact,sans-serif;color:var(--amber);letter-spacing:.05em}
+.final-rank small{display:block;font:800 .8rem system-ui,sans-serif;letter-spacing:.12em;color:var(--muted);margin-bottom:4px}
+.final-stats{font-weight:800;color:var(--muted);line-height:1.6}.final-stats b{color:var(--ink)}
 .board{display:grid;grid-template-columns:repeat(4,1fr);gap:6px;margin:6px 0}.board div{border-radius:9px;padding:6px;text-align:center;font-size:.85rem;font-weight:800}
 @media(max-width:640px){.board{grid-template-columns:1fr 1fr}}
-.calls{font-size:.88rem;color:var(--muted);margin:6px 0 0}.calls b{color:var(--ink)}
+.calls{font-size:.88rem;color:var(--muted);margin:8px 0 0}.calls b{color:var(--ink)}
 </style>
 <script src="../../shared/assignments.js?v=20261105fb1"></script>
 <script src="../../shared/turnin.js?v=20261105fb1"></script>
@@ -108,14 +148,16 @@ input,textarea{width:100%;font:inherit;border:2px solid #cfcdbf;border-radius:9p
 <header>
   <p class="k">U.S. History · Unit 2 · Day 6 · How Did the Allies Beat Germany?</p>
   <h1>Arsenal Race <small>arsenal = your stockpile of weapons</small></h1>
-  <details class="std"><summary><b>Goal:</b> Figure out what wins a war: weapons, factories, or people at home. · About 25 min · <u>Standards</u></summary> SS.9‑12.US.29 (WWII turning points) · SS.9‑12.US.33 (sources on total war)</details>
+  <details class="std"><summary><b>Goal:</b> Figure out what wins a war: tech, factories, or people at home. · About 25 min · <u>Standards</u></summary> SS.9‑12.US.29 (WWII turning points) · SS.9‑12.US.33 (sources on total war)</details>
 </header>
-<div class="hud" aria-label="Progress and war effort">
-  <span id="progressText">0 of 7 checks done</span>
-  <div class="bar" aria-hidden="true"><span id="progressFill"></span></div>
+<div class="hud" aria-label="Rank, enemy control, and progress">
+  <div class="rankbox"><span class="rank-name" id="rankName">🎖 Private</span><div class="xpbar" aria-hidden="true"><span id="xpFill"></span></div><span class="xp" id="xpText">0 XP</span></div>
+  <div class="axbox"><b>AXIS CONTROL</b><div class="axbar" aria-hidden="true"><span id="axFill"></span></div><b id="axText">85%</b></div>
+  <div class="chk"><span id="progressText">0 of 7 checks done</span><div class="bar" aria-hidden="true"><span id="progressFill"></span></div></div>
   <span class="meters"><span class="pill" id="prodPill">🏭 Factories 0</span><span class="pill" id="moralePill">🏠 Home front 0</span><span class="pill" id="shipPill">🚢 Ships 0</span>
     <span class="badge" id="b-midway" data-n="Midway">Midway</span><span class="badge" id="b-stalingrad" data-n="Stalingrad">Stalingrad</span><span class="badge" id="b-atlantic" data-n="Atlantic">Atlantic</span><span class="badge" id="b-dday" data-n="D-Day">D-Day</span></span>
 </div>
+<div id="toast" role="status" aria-live="polite"><small>PROMOTED</small><b id="toastRank"></b></div>
 <main>
   <p class="welcome" id="welcome" hidden></p>
   <div id="app"></div>
@@ -126,8 +168,10 @@ const KEY = "ush-u2-d6-arsenal-race-v2";
 const N = (st, k) => (st.fx && st.fx[k]) || 0;
 const live = () => { try { return JSON.parse(localStorage.getItem(KEY)) || { fx: {}, picks: {} }; } catch (e) { return { fx: {}, picks: {} }; } };
 // Event choices are saved by their place in each list below (the screen shuffles them).
+// Keep every choice in the same order, or saved games and the battle math break.
 const pick = (st, id) => st.picks ? st.picks[id] : undefined;
 const intel = (who, body) => `<div class="intel"><div class="who">${who}</div>${body}</div>`;
+const obj = txt => `<p class="obj"><b>🎯 OBJECTIVE:</b> ${txt}</p>`;
 
 // ---------- How your choices decide each battle ----------
 // Home front gets a lift from good news: each win at Midway or in the Atlantic adds +1.
@@ -164,12 +208,34 @@ function ddayPoints(st, o) {
   if (pick(st, "s1") === 2) add(-1, "no help to Soviets");
   return { pts, plus, minus };
 }
-const STAMP = { win: "Allied win", mid: "Costly win", loss: "Setback" };
-const report = (name, r, yours, causes, realNum, realText) => `<div class="report-card ${r}"><div class="rc-top"><span class="rc-name">Battle report · ${name}</span><span class="stamp ${r}">${STAMP[r]}</span></div>
+
+// ---------- Rank, XP, and Axis control (game feel only; never a grade) ----------
+// XP comes from giving orders, clearing checks (any number of tries), and how missions go.
+const ORDERS = ["h1", "t1", "m1", "s1", "a1", "d1", "d2"];
+const MISSION_XP = { win: 250, mid: 100, loss: 25 };
+const AXIS_SHIFT = { win: -15, mid: -8, loss: 5 };
+const RANKS = [[0, "Private"], [200, "Corporal"], [450, "Sergeant"], [700, "Lieutenant"], [1000, "Captain"], [1300, "Major"], [1600, "Colonel"], [1800, "General"]];
+function xpOf(st) {
+  const o = outcomes(st);
+  let xp = ORDERS.filter(id => pick(st, id) != null).length * 25;
+  xp += Object.keys(st.done || {}).filter(k => st.done[k]).length * 100;
+  Object.values(o).forEach(r => { if (r) xp += MISSION_XP[r]; });
+  return xp;
+}
+function rankOf(xp) { let i = 0; RANKS.forEach((r, n) => { if (xp >= r[0]) i = n; }); return i; }
+function axisOf(st) { let a = 85; Object.values(outcomes(st)).forEach(r => { if (r) a += AXIS_SHIFT[r]; }); return Math.max(0, Math.min(100, a)); }
+
+const STAMP = { win: "Mission complete", mid: "Costly win", loss: "Mission failed" };
+const report = (name, r, yours, causes, realNum, realText) => `<div class="report-card ${r}"><div class="rc-top"><span class="rc-name">Mission debrief · ${name}</span><span class="stamp ${r}">${STAMP[r]}</span></div>
+  <div class="gains"><span class="g-xp">+${MISSION_XP[r]} XP</span><span class="g-ax">Axis control ${AXIS_SHIFT[r] > 0 ? "+" : "−"}${Math.abs(AXIS_SHIFT[r])}%</span></div>
   <p class="yours">${yours}</p>${causes ? `<p class="cause"><b>Caused by:</b> ${causes}</p>` : ""}
   <div class="real"><span class="h">What really happened</span><div class="bigrow"><span class="bignum">${realNum}</span><p>${realText}</p></div></div></div>`;
 
-let lastFx = "";
+let lastFx = "", lastRank = null, toastTimer = null;
+function promote(name) {
+  const t = document.getElementById("toast"); document.getElementById("toastRank").textContent = "🎖 " + name;
+  t.classList.add("show"); clearTimeout(toastTimer); toastTimer = setTimeout(() => t.classList.remove("show"), 2600);
+}
 const CFG = {
   key: KEY,
   assignmentId: "ush-u2-d6-arsenal-race",
@@ -188,118 +254,130 @@ const CFG = {
     set("shipPill", "🚢 Ships " + N(st, "ships"));
     lastFx = "on";
     ["midway", "stalingrad", "atlantic", "dday"].forEach(k => { const b = document.getElementById("b-" + k); b.className = "badge" + (o[k] ? " " + o[k] : ""); b.textContent = (o[k] === "win" ? "✓ " : o[k] === "mid" ? "~ " : o[k] === "loss" ? "✗ " : "") + b.dataset.n; b.title = o[k] ? STAMP[o[k]] : "Not played yet"; });
+    // rank + XP
+    const xp = xpOf(st), ri = rankOf(xp), next = RANKS[ri + 1];
+    document.getElementById("rankName").textContent = "🎖 " + RANKS[ri][1];
+    document.getElementById("xpText").textContent = next ? xp + " / " + next[0] + " XP" : xp + " XP · MAX";
+    document.getElementById("xpFill").style.width = (next ? Math.round((xp - RANKS[ri][0]) / (next[0] - RANKS[ri][0]) * 100) : 100) + "%";
+    if (lastRank != null && ri > lastRank && st.scene >= 0) promote(RANKS[ri][1]);
+    lastRank = ri;
+    // Axis control
+    const ax = axisOf(st);
+    document.getElementById("axText").textContent = ax + "%";
+    document.getElementById("axFill").style.width = ax + "%";
   },
-  startLabel: "Take command",
+  startLabel: "Start the campaign",
   introHtml: `<div class="intro-grid"><figure><img src="../../day8-wwii-decision-map/pearl-harbor-1941-80-G-19942.jpg" alt="A U.S. battleship burning under huge clouds of smoke at Pearl Harbor"><figcaption>Pearl Harbor, Dec. 7, 1941. U.S. Navy photo 80-G-19942, National Archives.</figcaption></figure>
-    <div><p class="kicker">Early 1942</p><p class="hook">Japan just bombed Pearl Harbor. The U.S. is in the war, and the Allies are losing.</p>
-    <div class="teams"><span class="team allies">Allies: U.S. · Britain · Soviet Union</span><span class="vs">vs.</span><span class="team axis">Axis: Germany · Japan · Italy</span></div>
-    <p>You plan the Allied war effort. Make <b>7 big calls</b>. Then watch <b>4 battles</b> play out based on what you picked.</p>
-    <ul class="plan"><li>🏭 Factories</li><li>🏠 People at home</li><li>📡 New tech</li><li>⚔️ 4 battles</li><li>✍️ 2 short answers</li></ul>
-    <p class="src">Every choice leaves something out. Wrong guesses cost 🏭 −1.</p></div></div>`,
+    <div><p class="kicker">Campaign · 1942–1944</p><p class="hook">Japan just bombed Pearl Harbor. America is in the war, and the Allies are losing. You're in command.</p>
+    <div class="teams"><span class="team allies">Allies: U.S. · Britain · Soviet Union</span><span class="vs">VS</span><span class="team axis">Axis: Germany · Japan · Italy</span></div>
+    <div class="missions"><div><span>Mission 1</span>Midway</div><div><span>Mission 2</span>Stalingrad</div><div><span>Mission 3</span>The Atlantic</div><div><span>Mission 4</span>D-Day</div></div>
+    <ul class="plan"><li>🎖 7 orders</li><li>✅ 7 quick checks</li><li>✍️ 2 short answers</li><li>⏱ About 25 min</li></ul>
+    <p class="ranks">Start as a <b>Private</b>. Win missions to rank up. Only a perfect campaign makes <b>General</b>.</p>
+    <p class="src">Every order has a cost. Wrong answers on checks cost 🏭 −1 factory.</p></div></div>`,
   scenes: [
-    { kicker: "Round 1 · 1942", title: "Build the Arsenal",
-      teach: `<p><b>Total war:</b> the whole country fights, not just soldiers.</p>`,
+    { kicker: "Boot camp · 1942 · The home front", title: "Build the Arsenal",
+      teach: obj("Get America's factories ready for war.") + `<p><b>Total war</b> = the whole country fights, not just soldiers.</p>`,
       blocks: [
-        { type: "event", id: "h1", short: "Home front plan", html: `<p><span class="call">Call 1</span>Your factories are short on <b>workers</b> and <b>steel</b>. Pick your home-front plan.</p>`,
+        { type: "event", id: "h1", short: "Home front plan", html: `<p><span class="call">Order 1</span>Your factories need more <b>workers</b> and more <b>steel</b>. Pick your plan.</p>`,
           choices: [
-            { label: "Hire millions of women for war factories", fx: { prod: 2, morale: 1 }, result: `<p><span class="fx">🏭 +2 · 🏠 +1</span> 6 million more U.S. women take jobs. Families stretched thin.</p>` },
-            { label: "Ration gas, meat, and metal at home", fx: { prod: 2, morale: -1, ships: 1 }, result: `<p><span class="fx">🏭 +2 · 🚢 +1 · 🏠 −1</span> Saved steel becomes ships. People grumble.</p>` },
-            { label: "Draft more men and leave factories alone", fx: { army: 1 }, result: `<p><span class="fx">🪖 +1 troops</span> More soldiers, but no new weapons for them.</p>` }
+            { label: "Hire millions of women to work in war factories", fx: { prod: 2, morale: 1 }, result: `<p><span class="fx">🏭 +2 · 🏠 +1</span> About 6 million more U.S. women go to work. Families are stretched thin.</p>` },
+            { label: "Ration (limit) gas, meat, and metal at home", fx: { prod: 2, morale: -1, ships: 1 }, result: `<p><span class="fx">🏭 +2 · 🚢 +1 · 🏠 −1</span> Saved steel becomes ships. People grumble.</p>` },
+            { label: "Draft more men and leave the factories alone", fx: { army: 1 }, result: `<p><span class="fx">🪖 +1 troops</span> More soldiers, but no new weapons for them.</p>` }
           ] },
-        { type: "note", html: intel("Two real voices from the home front", `<div class="duo"><div><b>Fanny Christina Hill · Los Angeles, U.S.</b>Left housekeeping to build warplanes, 1943.<i>"The war made me live better, it really did."</i></div><div><b>Tanya Savicheva, age 11 · Leningrad, Soviet Union</b>Germany surrounded her city. About 800,000 people there died, most from hunger. Her diary:<i>"The Savichevs died. Everyone died. Only Tanya is left."</i></div></div>`) },
-        { type: "q", id: "q0", std: "US.33", short: "Two voices: why so different", prompt: "Same war. Why were Fanny's and Tanya's lives so different?", options: ["The war reached Tanya's city, but not Fanny's", "Tanya was younger, so the war hit her family less", "Fanny's city was bombed, but she had a better shelter", "They lived through the same thing in different places"], hint: "Did the war reach Los Angeles? Did it reach Leningrad?", why: "War jobs helped some Americans. Soviet civilians were trapped by the war." },
-        { type: "event", id: "t1", short: "First tech bet", html: `<p><span class="call">Call 2</span>Your scientists can only push <b>one</b> big project in 1942. Pick it. (It may matter more than once.)</p>`,
+        { type: "note", html: intel("Two real people · same war", `<div class="duo"><div><b>Fanny Christina Hill · Los Angeles, U.S.</b>Quit cleaning houses to build warplanes in 1943.<i>"The war made me live better, it really did."</i></div><div><b>Tanya Savicheva, age 11 · Leningrad, Soviet Union</b>German armies trapped her city for almost 2½ years. About 800,000 people there died, mostly from hunger. From her diary:<i>"The Savichevs died. Everyone died. Only Tanya is left."</i></div></div>`) },
+        { type: "q", id: "q0", std: "US.33", short: "Two voices: why so different", prompt: "Same war. Why were Fanny's and Tanya's lives so different?", options: ["The war reached Tanya's city, but not Fanny's", "Tanya was younger, so the war hit her family less", "Fanny's city was bombed, but she had a better shelter", "They lived through the same thing in different places"], hint: "Did the war reach Los Angeles? Did it reach Leningrad?", why: "War jobs helped some Americans. Soviet families were trapped inside the war." },
+        { type: "event", id: "t1", short: "First tech bet", html: `<p><span class="call">Order 2</span>Your scientists can only rush <b>one</b> big project this year. Pick it. (It might matter more than once.)</p>`,
           choices: [
             { label: "🔐 Codebreakers: read the enemy's secret messages", fx: { code: 1 }, result: `<p>Puzzle experts go to work on enemy codes.</p>` },
             { label: "📡 Radar: spot ships and planes in fog and dark", fx: { radar: 1 }, result: `<p>Radar goes on ships and planes.</p>` },
-            { label: "🚢 Cargo ships: build them faster than they sink", fx: { ships: 1 }, result: `<p><span class="fx">🚢 +1</span> Shipyards start mass-producing "Liberty ships."</p>` },
+            { label: "🚢 Cargo ships: build them faster than they sink", fx: { ships: 1 }, result: `<p><span class="fx">🚢 +1</span> Shipyards start pumping out "Liberty ships."</p>` },
             { label: "🛡️ Tanks: turn car factories into tank factories", fx: { tanks: 1 }, result: `<p>Detroit stops making cars and builds tanks.</p>` }
           ] }
       ] },
-    { kicker: "Battle 1 · June 1942", title: "Midway",
-      teach: `<p>Japan wants to sink America's <b>aircraft carriers</b> (ships that carry warplanes).</p>`,
+    { kicker: "Mission 1 · June 1942 · Pacific Ocean", title: "Midway",
+      teach: obj("Stop Japan from sinking America's last <b>aircraft carriers</b> (giant ships that carry warplanes)."),
       blocks: [
-        { type: "note", html: intel("Intercepted · U.S. codebreakers in Hawaii", `<p>Japan will attack a target called <b>"AF."</b> The U.S. tests a guess:</p><div class="radio">MIDWAY BASE (fake message): <span>"Our water machine broke."</span><br>JAPAN (2 days later): <span>"AF is short of water."</span></div>`) },
+        { type: "note", html: intel("📻 Enemy message caught · U.S. codebreakers, Hawaii", `<p>Japan plans to hit a target it calls <b>"AF."</b> But where is AF? The U.S. sets a trap:</p><div class="radio">MIDWAY BASE (fake message): <span>"Our water machine broke."</span><br>JAPAN (2 days later): <span>"AF is short of water."</span></div>`) },
         { type: "q", id: "q2", std: "US.29", short: "Midway: the fake water message", prompt: "What did the fake water message prove?", options: ["That \"AF\" meant Midway, so the U.S. knew the target", "That Japan's navy was running low on fresh water", "That Midway's water machine had really broken down", "That Japan had cracked the U.S. Navy's secret code"], hint: "Who repeated the fake news, and what name did they use?", why: "Japan repeated the fake news, so AF = Midway." },
-        { type: "event", id: "m1", short: "Midway plan", html: `<p><span class="call">Call 3</span>You have only <b>3 carriers</b> left in the Pacific. Where do they go?</p>`,
+        { type: "event", id: "m1", short: "Midway plan", html: `<p><span class="call">Order 3</span>You have only <b>3 carriers</b> ready to fight. Where do they go?</p>`,
           choices: [
             { label: "Hide near Midway and ambush Japan's fleet", fx: {}, result: `<p>Big risk, big reward.</p>` },
             { label: "Pull back to guard Hawaii and play it safe", fx: {}, result: `<p>Your carriers head home.</p>` },
             { label: "Warn Midway but keep the carriers far away", fx: {}, result: `<p>Midway faces the attack alone.</p>` }
           ] },
         { type: "note", get html() { const st = live(), r = outcomes(st).midway || "mid", code = pick(st, "t1") === 0;
-            const yours = r === "win" ? "You find Japan's carriers first and hit them while their decks are full of planes." : r === "mid" ? "Codebreakers knew WHERE, not WHEN. You launch late and lose more pilots." : "Japan takes Midway and keeps attacking.";
+            const yours = r === "win" ? "You find Japan's carriers first and hit them while their decks are full of planes." : r === "mid" ? "Codebreakers knew WHERE, but not WHEN. You launch late and lose more pilots." : "Japan takes Midway and keeps attacking.";
             const cause = r === "loss" ? "you kept your carriers away" : code ? "ambush ✓ · extra codebreakers ✓" : "ambush ✓ · extra codebreakers ✗";
-            return report("Midway", r, yours, cause, "4", `Japanese carriers sunk (U.S. lost 1). Japan never caught up.`); } },
+            return report("Midway", r, yours, cause, "4", `Japanese carriers sunk (the U.S. lost 1). Japan could never replace them fast enough.`); } },
         { type: "q", id: "q3", std: "US.29", short: "Why Midway was a turning point", prompt: "Why was Midway a <b>turning point</b> (the moment the war flipped)?", options: ["Japan lost carriers it could not quickly replace", "Japan took Midway and used it to attack Hawaii", "U.S. battleships sank most of Japan's navy there", "Japan gave up the war a few weeks after the battle"], hint: "Look at the big number. Could Japan get those back?", why: "After Midway, Japan was mostly on defense." }
       ] },
-    { kicker: "Battle 2 · 1942–43", title: "Stalingrad",
-      teach: `<p>Germany attacks <b>Stalingrad</b>, a Soviet factory city. They fight street by street while families hide in basements.</p>`,
+    { kicker: "Mission 2 · 1942–43 · Soviet Union", title: "Stalingrad",
+      teach: obj("Help the Soviets hold <b>Stalingrad</b>, a big factory city.") + `<p>Germany fights for it street by street. Families hide in basements.</p>`,
       blocks: [
-        { type: "note", html: intel("Intel · Factories on the move", `<div class="bigrow"><span class="bignum">1,500</span><p>Soviet factories moved east by train in 1941, away from Germany. Teens and women rebuilt them.</p></div><div class="bigrow"><span class="bignum">4×</span><p>Soviet factories built about 4 times as many tanks as Germany in 1942.</p></div>`) },
-        { type: "q", id: "q4", std: "US.29", short: "Stalingrad: Soviet advantage", prompt: "What let the Soviets keep fighting a long, brutal battle?", options: ["Moved factories kept making tanks far from Germany", "Germany decided to stop attacking when winter came", "British codebreakers told them every German plan", "American soldiers came to fight inside the city"], hint: "Look at the two big numbers.", why: "They could replace every tank they lost." },
-        { type: "event", id: "s1", short: "Lend-Lease choice", html: `<p><span class="call">Call 4</span><b>Lend-Lease:</b> the U.S. lends supplies to the Soviets. What do you send?</p>`,
+        { type: "note", html: intel("Intel · Factories on the move", `<div class="bigrow"><span class="bignum">1,500</span><p>Soviet factories moved east by train in 1941, far from Germany. Teens and women rebuilt them.</p></div><div class="bigrow"><span class="bignum">4×</span><p>Soviet factories built about 4 times as many tanks as Germany in 1942.</p></div>`) },
+        { type: "q", id: "q4", std: "US.29", short: "Stalingrad: Soviet advantage", prompt: "What let the Soviets keep fighting a long, brutal battle?", options: ["Moved factories kept making tanks far from Germany", "Germany decided to stop attacking when winter came", "British codebreakers told them every German plan", "American soldiers came to fight inside the city"], hint: "Look at the two big numbers.", why: "They could replace the tanks they lost." },
+        { type: "event", id: "s1", short: "Lend-Lease choice", html: `<p><span class="call">Order 4</span><b>Lend-Lease</b> = the U.S. sends supplies to its allies. What do you send the Soviets?</p>`,
           choices: [
-            { label: "Trucks, food, and boots so their army can move", fx: { prod: -1 }, result: `<p><span class="fx">🏭 −1</span> Convoys sail through icy seas.</p>` },
+            { label: "Trucks, food, and boots so their army can move", fx: { prod: -1 }, result: `<p><span class="fx">🏭 −1</span> Supply ships sail through icy seas.</p>` },
             { label: "Tanks and fighter planes for their front lines", fx: { prod: -1 }, result: `<p><span class="fx">🏭 −1</span> Tanks and planes head east.</p>` },
-            { label: "Nothing. Save it all for your own invasion", fx: { ships: 1 }, result: `<p><span class="fx">🚢 +1</span> You save it for later.</p>` }
+            { label: "Nothing. Save it all for your own invasion", fx: { ships: 1 }, result: `<p><span class="fx">🚢 +1</span> You keep it for later.</p>` }
           ] },
         { type: "note", get html() { const st = live(), r = outcomes(st).stalingrad || "win", s = pick(st, "s1");
-            const yours = "The Soviets win it themselves. " + (s === 0 ? "Your trucks help them race west." : s === 1 ? "Your tanks help them push west." : "Without help they push west slowly. Germany sends troops to France.");
+            const yours = "The Soviets win it themselves. " + (s === 0 ? "Your trucks help them race west." : s === 1 ? "Your tanks help them push west." : "With no help, they push west slowly. Germany moves troops to France.");
             const cause = s === 0 ? "Soviet factories + your trucks" : s === 1 ? "Soviet factories + your tanks and planes" : "Soviet factories, but you sent nothing";
-            return report("Stalingrad", r, yours, cause, "91,000", `German soldiers surrendered, Feb. 1943. About 2 million killed, hurt, or captured.`); } },
-        { type: "q", id: "q5", std: "US.33", short: "Stalingrad: cost of total war", prompt: "What does Stalingrad show about <b>total war</b>?", options: ["Families were stuck in the city during the fighting", "All the families left the city before the fighting", "The fighting stayed in empty fields and forests", "Only soldiers were in danger, never their families"], hint: "Reread the blue box at the top. Who hid in basements?", why: "In total war, families end up inside the battle." }
+            return report("Stalingrad", r, yours, cause, "91,000", `German soldiers surrendered in Feb. 1943. About 2 million people were killed, hurt, or captured.`); } },
+        { type: "q", id: "q5", std: "US.33", short: "Stalingrad: cost of total war", prompt: "What does Stalingrad show about <b>total war</b>?", options: ["Families were stuck in the city during the fighting", "All the families left the city before the fighting", "The fighting stayed in empty fields and forests", "Only soldiers were in danger, never their families"], hint: "Reread the Objective box at the top. Who hid in basements?", why: "In total war, families end up inside the battle." }
       ] },
-    { kicker: "Battle 3 · 1943", title: "The Battle of the Atlantic",
-      teach: `<p>German <b>U-boats</b> (submarines) hunt in packs and sink ships bringing Britain food and fuel.</p>`,
+    { kicker: "Mission 3 · 1943 · Atlantic Ocean", title: "The Battle of the Atlantic",
+      teach: obj("Stop German <b>U-boats</b> (submarines).") + `<p>They hunt in packs and sink the ships carrying food and fuel to Britain. Their radio messages are scrambled by a code machine called <b>Enigma</b>.</p>`,
       blocks: [
-        { type: "event", id: "a1", short: "Second tech bet", html: `<p><span class="call">Call 5</span>Your second big bet. How do you beat the U-boats?</p>`,
+        { type: "event", id: "a1", short: "Second tech bet", html: `<p><span class="call">Order 5</span>Your second big tech bet. How do you beat the U-boats?</p>`,
           choices: [
             { label: "📡 Put radar on planes and ships to hunt them", fx: { radar: 1 }, result: `<p>Radar planes patrol the ocean.</p>` },
-            { label: "🔐 Crack the U-boats' Enigma code machine", fx: { code: 1 }, result: `<p>Codebreakers in England attack the Enigma code.</p>` },
+            { label: "🔐 Crack the U-boats' Enigma code machine", fx: { code: 1 }, result: `<p>Codebreakers in England go after the Enigma code.</p>` },
             { label: "🚢 Build cargo ships faster than they sink", fx: { ships: 1 }, result: `<p><span class="fx">🚢 +1</span> One ship gets built in under 5 days.</p>` }
           ] },
         { type: "note", get html() { const st = live(), r = outcomes(st).atlantic || "mid", rad = N(st, "radar"), code = N(st, "code");
-            const yours = r === "win" ? "Codes say where the packs are. Radar finds them. U-boats sink fast." : rad ? "Radar spots U-boats up close, but you can't find the packs." : code ? "You know where the packs are, but can't spot them in the dark." : r === "mid" ? "You build ships as fast as they sink. Sailors keep dying." : "U-boats keep winning. Britain runs short of food.";
+            const yours = r === "win" ? "Codes tell you where the packs are. Radar finds them. U-boats sink fast." : rad ? "Radar spots U-boats up close, but you can't find the packs." : code ? "You know where the packs are, but you can't spot them in the dark." : r === "mid" ? "You build ships as fast as they sink. Sailors keep dying." : "U-boats keep winning. Britain runs short of food.";
             const cause = "radar " + (rad ? "✓" : "✗") + " · codebreakers " + (code ? "✓" : "✗") + (N(st, "ships") ? " · extra ships ✓" : "") + ". It took radar AND codebreakers.";
-            return report("The Atlantic", r, yours, cause, "41", `U-boats sunk in May 1943 with radar and cracked codes. Germany pulled back.`); } }
+            return report("The Atlantic", r, yours, cause, "41", `U-boats lost in May 1943 to radar and cracked codes. Germany pulled its U-boats back.`); } }
       ] },
-    { kicker: "Battle 4 · June 1944", title: "D-Day",
-      teach: `<p>To free France, the Allies must cross the English Channel and land on beaches full of German guns.</p>`,
+    { kicker: "Mission 4 · June 1944 · France", title: "D-Day",
+      teach: obj("Cross the English Channel, land on beaches full of German guns, and start freeing France."),
       blocks: [
-        { type: "note", html: intel("Top secret · Operation Fortitude", `<p>A <b>fake army</b> in England: rubber tanks and fake radio chatter. Goal: make Germany expect the landing at <b>Calais</b>, not <b>Normandy</b>.</p>`) },
-        { type: "q", id: "q7", std: "US.29", short: "D-Day: why the fake army mattered", prompt: "How would a fake army help the real landing?", options: ["Germany would keep troops at Calais, not Normandy", "The rubber tanks could fight in the real battle", "Germany would get scared and give up right away", "The Allies could skip crossing the English Channel"], hint: "Where did the Allies want Germany to wait?", why: "Every German at Calais was one fewer at Normandy." },
-        { type: "event", id: "d1", short: "D-Day landing spot", html: `<p><span class="call">Call 6</span>Where do you land?</p>`,
+        { type: "note", html: intel("Top secret · Operation Fortitude", `<p>The Allies build a <b>fake army</b> in England: blow-up rubber tanks and fake radio chatter. The goal: make Germany think the landing will hit <b>Calais</b>, not <b>Normandy</b>.</p>`) },
+        { type: "q", id: "q7", std: "US.29", short: "D-Day: why the fake army mattered", prompt: "How would a fake army help the real landing?", options: ["Germany would keep troops at Calais, not Normandy", "The rubber tanks could fight in the real battle", "Germany would get scared and give up right away", "The Allies could skip crossing the English Channel"], hint: "Where did the Allies want Germany to wait?", why: "Every German soldier at Calais was one fewer at Normandy." },
+        { type: "event", id: "d1", short: "D-Day landing spot", html: `<p><span class="call">Order 6</span>Where do you land?</p>`,
           choices: [
             { label: "Normandy, while the fake army fools Germany", fx: {}, result: `<p>Ships load up for Normandy.</p>` },
             { label: "Calais, the shortest trip across the water", fx: {}, result: `<p>Ships load up for Calais.</p>` },
             { label: "Both: split the army between two beaches", fx: {}, result: `<p>Half your army goes to each.</p>` }
           ] },
-        { type: "event", id: "d2", short: "D-Day weather call", html: `<p><span class="call surprise">Surprise!</span>A storm hits. Forecast: a <b>short break</b> June 6. Next good tides: <b>2 weeks</b>.</p>`,
+        { type: "event", id: "d2", short: "D-Day weather call", html: `<p><span class="call surprise">⚠ Order 7 · Surprise</span>A storm hits. Your weather team says: a <b>short break</b> on June 6. After that, the next good tides are <b>2 weeks</b> away.</p>`,
           choices: [
             { label: "Go June 6 in the short break", fx: {}, result: `<p>Germany didn't expect an attack in this weather.</p>` },
-            { label: "Wait 2 weeks for calm seas", fx: {}, result: `<p>June 19: the worst Channel storm in 40 years.</p>` },
-            { label: "Go right now, into the storm", fx: {}, result: `<p>Boats get swamped. Troops arrive seasick.</p>` }
+            { label: "Wait 2 weeks for calm seas", fx: {}, result: `<p>June 19: the worst storm on the Channel in 40 years.</p>` },
+            { label: "Go right now, into the storm", fx: {}, result: `<p>Boats get swamped. Troops land seasick.</p>` }
           ] },
         { type: "note", get html() { const st = live(), o = outcomes(st), r = o.dday || "mid", d = ddayPoints(st, o);
             const yours = r === "win" ? "You get ashore and push inland." : r === "mid" ? "You get ashore, but at a terrible cost." : "The landing fails.";
             const cause = (d.plus.length ? "✓ " + d.plus.join(" · ✓ ") : "") + (d.minus.length ? (d.plus.length ? "<br>" : "") + "✗ " + d.minus.join(" · ✗ ") : "");
-            return report("D-Day", r, yours, cause, "156,000", `Allied troops landed June 6, 1944. About 4,400 died that day.`); } },
-        { type: "q", id: "q8", std: "US.29", short: "D-Day: what made it work", prompt: "Look back at all 4 battles. Which <b>mix</b> made D-Day work?", options: ["Ships from home, a safe ocean, and a trick on Germany", "More tanks, a bigger army, and the shortest crossing", "Heavy bombing, calm weather, and help from Italy", "Codebreakers, radar, and a surprise landing at Calais"], hint: "Which mix matches what really happened?", why: "No one thing won it. It took all of it." }
+            return report("D-Day", r, yours, cause, "156,000", `Allied troops landed on June 6, 1944. About 4,400 of them died that day.`); } },
+        { type: "q", id: "q8", std: "US.29", short: "D-Day: what made it work", prompt: "Look back at all 4 missions. Which <b>mix</b> made D-Day work?", options: ["Ships from home, a safe ocean, and a trick on Germany", "More tanks, a bigger army, and the shortest crossing", "Heavy bombing, calm weather, and help from Italy", "Codebreakers, radar, and a surprise landing at Calais"], hint: "Which mix matches what really happened?", why: "No one thing won it. It took all of it." }
       ] }
   ],
   finale: {
-    title: "What Wins a War?",
+    title: "Campaign Complete: What Wins a War?",
     report: st => { const o = outcomes(st), names = { midway: "Midway", stalingrad: "Stalingrad", atlantic: "Atlantic", dday: "D-Day" };
       const vals = Object.values(o), wins = vals.filter(x => x === "win").length, costly = vals.filter(x => x === "mid").length;
-      const score = wins * 2 + costly;
-      const rank = score === 8 ? "Master Planner" : score >= 6 ? "Strong Planner" : score >= 4 ? "Rough Win" : "Back to the Map Room";
+      const xp = xpOf(st), ri = rankOf(xp);
       const SHORT = { h1: ["Women workers", "Rationing", "Draft"], t1: ["Codebreakers", "Radar", "Cargo ships", "Tanks"], m1: ["Ambush", "Guard Hawaii", "Stay away"], s1: ["Trucks & food", "Tanks & planes", "Sent nothing"], a1: ["Radar", "Codebreakers", "More ships"], d1: ["Normandy", "Calais", "Split army"], d2: ["Go June 6", "Wait 2 weeks", "Into the storm"] };
       const calls = Object.keys(SHORT).filter(id => pick(st, id) != null).map(id => SHORT[id][pick(st, id)]);
-      return `<div class="final-top"><div class="score">${score}/8<small>war score · ${wins} clean ${wins === 1 ? "win" : "wins"} · ${costly} costly</small></div><span class="rank">${rank}</span></div>
+      return `<div class="final-top"><div class="final-rank"><small>FINAL RANK</small>🎖 ${RANKS[ri][1]}</div>
+        <div class="final-stats"><b>${xp} XP</b><br>${wins} clean ${wins === 1 ? "win" : "wins"} · ${costly} costly<br>Axis control left: <b>${axisOf(st)}%</b></div></div>
         <div class="board">${Object.keys(names).map(k => `<div class="badge ${o[k] || ""}">${names[k]}<br>${o[k] ? STAMP[o[k]] : "—"}</div>`).join("")}</div>
-        <p class="calls"><b>Your calls:</b> ${calls.join(" → ")}</p>
-        ${score < 8 ? `<p class="src">Want 8/8? Turn in first, then hit Start over and try a new plan.</p>` : ""}`; },
+        <p class="calls"><b>Your orders:</b> ${calls.join(" → ")}</p>
+        ${ri < RANKS.length - 1 ? `<p class="src">Want to make General? Turn in first. Then hit Start over and try a new plan.</p>` : ""}`; },
     prompts: [
       { id: "wins", short: "What wins a war", label: "1. What wins a war: tech and weapons, factories, or people at home? Pick ONE. Give 2 examples from today.", stem: "I think ___ mattered most because ___. For example, ___.", min: 70, newWords: 8,
         mustAll: [["tech", "weapon", "radar", "code", "factor", "people", "home", "women", "worker"], ["because", "since", "so "], ["radar", "code", "enigma", "ship", "liberty", "tank", "t-34", "factor", "midway", "stalingrad", "atlantic", "d-day", "normandy", "u-boat", "women", "rationing", "fake", "rubber", "fortitude", "lend", "truck", "carrier", "weather", "storm"]],
