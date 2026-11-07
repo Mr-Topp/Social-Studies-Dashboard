@@ -6,242 +6,213 @@
 .feedback.bad{color:#9c443a}.actions{display:flex;gap:9px;flex-wrap:wrap;margin-top:16px}.hidden{display:none!important}.connection{border-left:4px solid #78916f;background:#eef4eb;padding:11px 13px;border-radius:7px;margin:13px 0}.connection p{margin:3px 0}.booknote{color:var(--muted);font-size:.82rem}.std-line{margin:4px 0 6px;color:#e7edf0;font-size:.9rem;line-height:1.4}.std-line b{color:#fff}.welcome{background:#e9f0ea;border-left:4px solid var(--green);padding:8px 12px;border-radius:7px;font-weight:700;color:var(--green);margin:8px 0 0}.done{padding:16px;text-align:center;background:#eef4eb;border-radius:9px}@media(max-width:850px){.layout{grid-template-columns:1fr}.reader{position:static}.picture img{max-height:56vh}}@media print{header,.controls,.actions{display:none}.layout{display:block}.picture img{max-height:240px}}
 
 .hero{max-width:860px;margin:8vh auto;background:var(--card);border:1px solid var(--line);border-radius:16px;padding:clamp(22px,5vw,48px)}.hero h1{font-size:clamp(2rem,5vw,3.2rem);line-height:1.08}.hero .primary{width:100%;margin-top:16px;background:var(--navy)}.hero p{max-width:65ch}.hero .kicker{color:var(--accent)}.scene-context{font-size:1rem;margin:10px 0}.focus{border-left:4px solid #6a8799;padding:9px 12px;background:#edf3f5;border-radius:6px}.practice{padding:24px;background:#edf3f5;min-height:260px;font-size:1.15rem;line-height:1.65;border-radius:9px}.source{margin-bottom:0}.picture img{max-height:65vh}.picture{flex-direction:column}.picture #extraPanels{width:100%;display:grid;gap:16px;margin-top:16px}.picture #extraPanels:empty{display:none}.reader{position:static}.layout>section:last-child{position:sticky;top:12px}@media(max-width:850px){.layout>section:last-child{position:static}}.picture.zoomed{display:block}.picture.zoomed img{width:100%;max-height:none}.error{padding:18px;background:#fff2e7}.footer{max-width:1360px;margin:30px auto;padding:20px;text-align:center;border-top:1px dashed var(--line)}.footer button{font-size:.85rem;background:none;text-decoration:underline}.choice{font-weight:600}.header-row{display:flex;justify-content:space-between;gap:12px;flex-wrap:wrap}.zoom-note{font-size:.8rem;color:var(--muted)}[hidden]{display:none!important}h3{line-height:1.4}.finish-note{background:#e9f0ea;border-radius:9px;padding:14px}</style><script src="../../shared/assignments.js?v=20261105fb1-normal"></script><script src="../../shared/turnin.js?v=20261105fb1"></script><script src="../../shared/lang.js?v=20261103c"></script></head><body>
-<main id="intro"><section class="hero"><p class="kicker">Sociology · Unit 2 · Day 4</p><h1>Walk to Freedom</h1><p>In 1955, thousands of people in Montgomery, Alabama, walked to work for over a year instead of riding the bus. Why would people do that, and did it work?</p><p>Read a real 1957 comic about the bus boycott in 10 short sections. Answer one check per section, write 3 short “look closer” notes, then write 3–4 sentences. About 20–25 minutes.</p><label for="studentName">Your name: first name + last initial</label><input id="studentName" maxlength="100" autocomplete="off" placeholder="Like Jordan M."><p id="introStatus" role="status"></p><button id="startBtn" type="button" class="primary">Start reading →</button></section></main>
+<main id="intro"><section class="hero"><p class="kicker">Sociology · Unit 2 · Day 4</p><h1>Walk to Freedom</h1><p>In 1955, thousands of people in Montgomery, Alabama, walked to work for over a year instead of riding the bus. Why would people do that, and did it work?</p><p>Read a real 1957 comic about the bus boycott in 9 short sections. Answer one check per section, write 3 short “look closer” notes, then write 3–4 sentences. About 20 minutes.</p><label for="studentName">Your name: first name + last initial</label><input id="studentName" maxlength="100" autocomplete="off" placeholder="Like Jordan M."><p id="introStatus" role="status"></p><button id="startBtn" type="button" class="primary">Start reading →</button></section></main>
 <div id="reading" hidden><header><div class="header-row"><div><div class="kicker">Sociology · Unit 2 · Day 4</div><h1>Walk to Freedom</h1></div><p id="working"></p></div><p>SS.9-12.Soc.7 · Evaluate social institutions and how they respond to social needs. · SS.9-12.Soc.8 · Assess how institutions and cultures change.</p></header>
 <main><p id="welcome" class="welcome" hidden></p><div class="layout"><section class="panel reader" aria-label="Reading scene"><p id="sceneNo" class="eyebrow"></p><h2 id="sceneTitle"></h2><p id="setup" class="scene-context"></p><div id="pictureFrame" class="picture"><img id="art" alt=""><div id="extraPanels"></div></div><p id="imageError" class="error" role="status" hidden>The comic page did not load. Tap “Open page in Internet Archive” to read it there, then come back.</p><div id="practice" class="practice" hidden></div><div id="imageControls" class="controls"><button type="button" id="zoomBtn" aria-pressed="false">Make page bigger</button><a id="sourceOpen" target="_blank" rel="noopener noreferrer">Open page in Internet Archive</a></div><p id="focus" class="focus"></p><p id="artCredit" class="source">Pages from <i>Martin Luther King and the Montgomery Story</i> (Fellowship of Reconciliation, 1957), shown from the <a href="https://archive.org/details/ms_for_comic" target="_blank" rel="noopener noreferrer">Internet Archive</a>. Dates and numbers: Stanford King Institute, “Montgomery Bus Boycott.” This activity uses selected pages, not the complete comic.</p></section>
-<section class="panel"><p id="counter" class="counter"></p><div class="bar"><span id="fill"></span></div><div id="questionArea"></div><div id="concept" class="connection" hidden><strong id="conceptTerm"></strong><p id="conceptMeaning"></p></div><div id="writing" hidden><h2>Make the connection</h2><label for="reflection">Why did people in Montgomery team up for change? Name two stages the movement went through, and explain how one institution (the city, the bus system, or the courts) responded.</label><textarea id="reflection" maxlength="1000" placeholder="People teamed up because ___. In the ___ stage, they ___. Later, in the ___ stage, they ___. The ___ responded by ___."></textarea><p class="booknote">Write 3–4 sentences. Use at least two details from the comic.</p></div><div class="actions"><button id="backBtn" type="button">← Back</button><button id="nextBtn" class="next" type="button" hidden>Next section →</button><button id="sendBtn" class="primary" type="button" hidden>Turn in answers</button></div><p id="status" class="feedback" role="status" aria-live="polite"></p><p class="booknote">Progress saves on this device. Your teacher sees your work after you turn it in.</p></section></div></main></div>
+<section class="panel"><p id="counter" class="counter"></p><div class="bar"><span id="fill"></span></div><div id="questionArea"></div><div id="concept" class="connection" hidden><strong id="conceptTerm"></strong><p id="conceptMeaning"></p></div><div id="writing" hidden><h2>Make the connection</h2><label for="reflection">Why did people in Montgomery team up for change? Name two tools the movement used, and explain how one institution (the city, the bus system, or the courts) responded: did it resist, make a small reform, or create a new policy?</label><textarea id="reflection" maxlength="1000" placeholder="People teamed up because ___. They used tools like ___ and ___. The ___ responded by ___. That was a ___ (resist / small reform / new policy)."></textarea><p class="booknote">Write 3–4 sentences. Use at least two details from the comic.</p></div><div class="actions"><button id="backBtn" type="button">← Back</button><button id="nextBtn" class="next" type="button" hidden>Next section →</button><button id="sendBtn" class="primary" type="button" hidden>Turn in answers</button></div><p id="status" class="feedback" role="status" aria-live="polite"></p><p class="booknote">Progress saves on this device. Your teacher sees your work after you turn it in.</p></section></div></main></div>
 <footer class="footer"><button id="restartBtn" type="button">Start over</button></footer><script>(() => {"use strict";
 const SCENES=[
-  {
-    "title": "Riding Under Jim Crow",
-    "image": "https://archive.org/download/ms_for_comic/page/n2_w1200.jpg",
-    "leaf": 2,
-    "alt": "Comic page 3: the narrator introduces life in Montgomery under Jim Crow, and Rosa Parks refuses to give up her bus seat.",
-    "setup": "This comic came out in 1957. The narrator, “Jones,” is a made-up everyday Montgomery man telling a true story. The comic uses “Negro,” a common word then; today we say Black or African American. The story starts on Montgomery’s city buses in 1955.",
-    "focus": "Look at how the bus driver talks to riders, then find Rosa Parks saying no.",
-    "term": "Social institution",
-    "meaning": "A social institution is an organized system that meets a basic need. A city bus system meets the need to get to work, school, and stores.",
-    "check": {
-      "prompt": "The bus system met a real need. Based on this page, what was wrong with HOW it met that need?",
-      "answers": [
-        "It carried Black riders but made them follow separate, unequal rules",
-        "It let Black riders ride, but only on separate buses with fewer routes",
-        "It charged Black riders higher fares than white riders paid each day",
-        "It ran too few buses in Black neighborhoods, so riders waited longer"
-      ],
-      "hint": "Look at where Black riders sit and what the driver tells them to do.",
-      "why": "Under Jim Crow laws, Black riders had to sit in the back and give up their seats to white riders. The buses served Black riders but made them second-class riders. An institution can meet a need and still meet it unfairly.",
-      "std": "SS.9-12.Soc.7"
-    },
-    "look": "Find a panel that shows how Black riders were treated on the bus. Describe what is happening in it."
+ {
+  "title": "Riding Under Jim Crow",
+  "image": "https://archive.org/download/ms_for_comic/page/n2_w1200.jpg",
+  "leaf": 2,
+  "alt": "Comic page 3: the narrator introduces life in Montgomery under Jim Crow, and Rosa Parks refuses to give up her bus seat.",
+  "setup": "This comic came out in 1957. The narrator, “Jones,” is a made-up everyday Montgomery man telling a true story. The comic uses “Negro,” a common word then; today we say Black or African American. The story starts on Montgomery’s city buses in 1955.",
+  "focus": "Look at how the bus driver talks to riders, then find Rosa Parks saying no.",
+  "term": "Social institution",
+  "meaning": "A social institution is an organized system that meets a basic need. A city bus system meets the need to get to work, school, and stores.",
+  "check": {
+   "prompt": "The bus system met a real need. Based on this page, what was wrong with HOW it met that need?",
+   "answers": [
+    "It carried Black riders but made them follow separate, unequal rules",
+    "It let Black riders ride, but only on separate buses with fewer routes",
+    "It charged Black riders higher fares than white riders paid each day",
+    "It ran too few buses in Black neighborhoods, so riders waited longer"
+   ],
+   "hint": "Look at where Black riders sit and what the driver tells them to do.",
+   "why": "Under Jim Crow laws, Black riders had to sit in the back and give up their seats to white riders. The buses served Black riders but made them second-class riders. An institution can meet a need and still meet it unfairly.",
+   "std": "SS.9-12.Soc.7"
   },
-  {
-    "title": "One Arrest, One Flyer",
-    "image": "https://archive.org/download/ms_for_comic/page/n3_w1200.jpg",
-    "leaf": 3,
-    "alt": "Comic page 4: Rosa Parks is arrested, and a copied sheet calling for a one-day bus boycott spreads across the city.",
-    "setup": "Rosa Parks was arrested on December 1, 1955. This page shows what happened in Montgomery over the next few days.",
-    "focus": "Find the sheet of paper, then follow how the news spreads.",
-    "term": "Emergence",
-    "meaning": "The first stage of a social movement. People are upset about a problem and the word spreads, but there is no lasting organized group yet.",
-    "check": {
-      "prompt": "Why does this page show the EMERGENCE stage, not a later stage?",
-      "answers": [
-        "News spreads by word of mouth and a flyer, but no group is running it yet",
-        "A new group has already picked a leader and is planning its next steps",
-        "The city is already meeting with leaders about changing the bus rules",
-        "People have stayed off the buses for months and are running carpools"
-      ],
-      "hint": "Follow how the news travels on this page. Is anyone organizing it yet, or is it just spreading?",
-      "why": "A copied flyer asked Black residents to stay off the buses for one day, December 5. Upset people spreading the word is the start of a movement. The organized group comes next.",
-      "std": "SS.9-12.Soc.8"
-    }
-  },
-  {
-    "title": "From One Day to a Movement",
-    "image": "https://archive.org/download/ms_for_comic/page/n4_w1200.jpg",
-    "leaf": 4,
-    "alt": "Comic page 5: on December 5 almost no one rides the buses, leaders form the Montgomery Improvement Association, and King speaks.",
-    "setup": "December 5, 1955, was the day of the one-day boycott. This page shows what happened that day and what came next.",
-    "focus": "Compare the empty buses with the meeting where the group gets a name and a leader.",
-    "term": "Coalescence",
-    "meaning": "The second stage. A crowd becomes an organized, public movement with leaders and a goal. Collective behavior is short and unplanned; a social movement is organized and lasts.",
-    "check": {
-      "prompt": "Based on this page, what turned the one-day protest into a social movement?",
-      "answers": [
-        "Leaders formed a named group with a president and decided to keep going",
-        "So many people stayed off the buses that the company lost most riders",
-        "News reports spread the story, so people in other cities heard about it",
-        "A huge crowd packed a church that night to cheer and hear the speeches"
-      ],
-      "hint": "Big numbers and big crowds can still go home the next day. Look for what makes it organized.",
-      "why": "About 90% of Black riders stayed off the buses on December 5. That afternoon, leaders formed the Montgomery Improvement Association (MIA) and elected Martin Luther King Jr. president. That night, people voted to keep going. A name, a leader, and a plan to continue is coalescence.",
-      "std": "SS.9-12.Soc.8"
-    }
-  },
-  {
-    "title": "Building Their Own Bus System",
-    "image": "https://archive.org/download/ms_for_comic/page/n5_w1200.jpg",
-    "leaf": 5,
-    "alt": "Comic page 6: boycotters walk, police hand out tickets, and the movement buys station wagons and sets up a carpool.",
-    "setup": "The boycott kept going for months. People still had to get to work every day, and the city made that harder.",
-    "focus": "Find the station wagons and the planned pickup system.",
-    "term": "Bureaucratization",
-    "meaning": "The third stage. The movement gets staff, rules, money, and a system so it can last. It is slower, but it keeps people going.",
-    "check": {
-      "prompt": "Which detail on this page is the best evidence of BUREAUCRATIZATION?",
-      "answers": [
-        "Station wagons paid for with donations, running a planned pickup system",
-        "Crowds of riders choosing to walk long distances to work every day",
-        "Police officers stopping boycott drivers and writing them tickets",
-        "Neighbors giving each other rides whenever they happened to pass by"
-      ],
-      "hint": "Bureaucratization means money, staff, and a system. Find the detail on the page that shows planning, not just effort.",
-      "why": "Police ticketed and stopped boycott drivers, even King. The MIA answered with a carpool of about 300 cars, plus station wagons bought with donations from across the country. Money and a planned system are what a lasting organization has.",
-      "std": "SS.9-12.Soc.8"
-    }
-  },
-  {
-    "title": "A Bomb at King’s House",
-    "image": "https://archive.org/download/ms_for_comic/page/n6_w1200.jpg",
-    "leaf": 6,
-    "alt": "Comic page 7: King’s home is bombed, an angry crowd gathers, and King asks them to stay peaceful.",
-    "setup": "On January 30, 1956, the King family’s home was attacked. His wife, Coretta, and their baby were inside.",
-    "focus": "Compare what the crowd wants to do with what King tells them.",
-    "term": "Opposition and bad actions",
-    "meaning": "Movements face pushback, sometimes violent. How a movement responds matters: violence by a movement can cost it support and help it fail.",
-    "check": {
-      "prompt": "Why did King’s choice here matter for the movement?",
-      "answers": [
-        "Fighting back could have cost the movement the support it needed",
-        "Fighting back could have scared the city into ending segregation sooner",
-        "Sending the crowd home kept police from learning who the leaders were",
-        "Calming the crowd kept King from being charged for the boycott later"
-      ],
-      "hint": "Think about how courts, newspapers, and supporters across the country would react to a violent crowd.",
-      "why": "King’s home was bombed. Coretta and the baby were not hurt. An angry crowd gathered, some ready to fight back. Staying peaceful kept the movement’s support. The angry crowd was collective behavior; King steered it back into an organized movement.",
-      "std": "SS.9-12.Soc.8"
-    },
-    "look": "Describe what the crowd outside wants to do, and what King tells them instead. Use what you see or read on the page."
-  },
-  {
-    "title": "The City Fights Back",
-    "image": "https://archive.org/download/ms_for_comic/page/n7_w1200.jpg",
-    "leaf": 7,
-    "alt": "Comic page 8: boycott leaders are charged and turn themselves in, and people practice how to ride the buses peacefully.",
-    "setup": "The MIA’s first demands were small: polite drivers, first-come seating, and Black drivers on mostly Black routes. They did not even ask to end segregation. This page shows how the city answered.",
-    "focus": "Look at the leaders turning themselves in, then the practice session on the bus.",
-    "term": "How institutions respond",
-    "meaning": "An institution can resist (say no), make a small reform (change a little), or create a new policy (fully meet the need). Here, the city resisted.",
-    "check": {
-      "prompt": "Look at what the city does on this page. What kind of institutional response is it?",
-      "answers": [
-        "Resistance: it refused even small changes and went after the leaders",
-        "Small reform: it agreed to polite drivers but kept segregated seats",
-        "New policy: it changed the rules so riders’ needs were fully met",
-        "Small reform: it dropped the charges once leaders turned themselves in"
-      ],
-      "hint": "Find what happens to the boycott leaders on this page. Is that the city saying yes, or no?",
-      "why": "The city said no. In February 1956, officials charged more than 80 boycott leaders under an old law against interfering with business. That is resistance, and it did not stop the movement.",
-      "std": "SS.9-12.Soc.7"
-    }
-  },
-  {
-    "title": "A Court Changes the Rules",
-    "image": "https://archive.org/download/ms_for_comic/page/n8_w1200.jpg",
-    "leaf": 8,
-    "alt": "Comic page 9: a headline says the Supreme Court ruled bus segregation illegal, and riders return to the buses and stay calm when insulted.",
-    "setup": "The boycott had now lasted almost a year. This page shows how the bus rules finally changed.",
-    "focus": "Find the news headline, then see how riders react when someone insults them.",
-    "term": "Institutions change",
-    "meaning": "One institution can force another to change. Here, the courts (part of government) changed the rules for the city bus system.",
-    "check": {
-      "prompt": "Which explanation best fits how the bus rules finally changed?",
-      "answers": [
-        "The Supreme Court ruled bus segregation illegal after a year of pressure",
-        "The bus company gave in because it was losing too much money to keep going",
-        "City leaders voted to end segregation once the boycott leaders were tried",
-        "The governor ordered the buses to change so the long boycott would end"
-      ],
-      "hint": "Find the headline on this page. Who made the decision it reports?",
-      "why": "In November 1956, the U.S. Supreme Court agreed that bus segregation laws were unconstitutional. On December 21, 1956, Black riders went back on integrated buses, about 13 months after the boycott began. The city never gave in; the courts made the new policy.",
-      "std": "SS.9-12.Soc.8"
-    }
-  },
-  {
-    "title": "Backlash, Then Quiet",
-    "image": "https://archive.org/download/ms_for_comic/page/n9_w1200.jpg",
-    "leaf": 9,
-    "alt": "Comic page 10: shots are fired at buses and churches are bombed, then many white citizens turn against the violence and buses run in peace.",
-    "setup": "Black riders were back on the buses. Not everyone in Montgomery accepted the ruling.",
-    "focus": "Find the bombed church, then the panel where things become quiet.",
-    "term": "Decline by success",
-    "meaning": "A movement can wind down because it won. Its goal became part of the system, here the law. Sociologists call this institutionalization.",
-    "check": {
-      "prompt": "The boycott ended. Why is that decline by SUCCESS, not decline by failure?",
-      "answers": [
-        "It ended because its goal became the law, not because people quit",
-        "It ended because the violence turned many white residents against it",
-        "It ended because leaders accepted a deal that kept some unfair rules",
-        "It ended because the bombings made people too afraid to keep protesting"
-      ],
-      "hint": "Go back to the headline in the last section. Why did people start riding the buses again?",
-      "why": "After the ruling, some opponents shot at buses and bombed churches and homes. The comic says many white citizens then turned against the violence. The boycott stopped because bus segregation was now illegal, and the violence did not undo the win.",
-      "std": "SS.9-12.Soc.8"
-    },
-    "look": "Find the bombed church and the panel where things grow quiet. What changed between those two moments, and what does the comic say caused it?"
-  },
-  {
-    "title": "Same Method, Bigger Goal: India",
-    "image": "https://archive.org/download/ms_for_comic/page/n10_w1200.jpg",
-    "leaf": 10,
-    "alt": "Comic pages 11–12: King tells how Gandhi led India’s nonviolent campaign, including the Salt March, until Britain granted independence.",
-    "setup": "In this part of the comic, King tells the story of another nonviolent movement, in India.",
-    "focus": "Compare what India’s movement wanted with what Montgomery’s wanted.",
-    "term": "Types of movements",
-    "meaning": "Reform: change one policy. Revolutionary: replace the whole system or who rules. Resistance: stop a change. Alternative: change personal habits.",
-    "check": {
-      "prompt": "Both used nonviolence. What type of movement was each one?",
-      "answers": [
-        "Montgomery was a reform movement; India’s was a revolutionary movement",
-        "Montgomery was a revolutionary movement; India’s was a reform movement",
-        "Both were reform movements, because each one changed one unfair law",
-        "Both were revolutionary movements, because each one used mass protest"
-      ],
-      "hint": "Read what India’s campaign was trying to win, then compare it to what Montgomery wanted.",
-      "why": "Gandhi led India’s nonviolent campaign to end British rule, and India became independent in 1947. Same tactics, different size of goal. Changing one policy is reform; replacing who rules is revolutionary.",
-      "std": "SS.9-12.Soc.8"
-    },
-    "extraPanels": [
-      {
-        "image": "https://archive.org/download/ms_for_comic/page/n11_w1200.jpg",
-        "leaf": 11,
-        "alt": "The next comic page about Gandhi’s campaign in India."
-      }
-    ]
-  },
-  {
-    "title": "The Montgomery Method",
-    "image": "https://archive.org/download/ms_for_comic/page/n13_w1200.jpg",
-    "leaf": 13,
-    "alt": "Comic page 14: the steps of the Montgomery Method, starting with choosing one special thing to change and getting the facts.",
-    "setup": "The comic ends with a how-to guide. It was published by a religious peace group, so it explains the method in religious terms. You don’t have to share those beliefs to study the strategy. John Lewis said this comic helped inspire students who planned sit-ins.",
-    "focus": "Read the first two steps: pick ONE thing to change, and get the facts.",
-    "term": "Why focus matters",
-    "meaning": "Movements that pick one clear goal can organize lots of people around it. That is a big reason reform movements can win.",
-    "check": {
-      "prompt": "Step one says pick ONE special thing to change, not everything at once. How does Montgomery show why that works?",
-      "answers": [
-        "One clear goal, fair buses, gave thousands of people a shared target",
-        "One clear goal let leaders skip the carpools and the long meetings",
-        "One clear goal kept the city from fighting back against the boycott",
-        "One clear goal meant the movement could win in just a few weeks"
-      ],
-      "hint": "Think back: did Montgomery still need carpools, still face pushback, and still take 13 months?",
-      "why": "A single, clear target let thousands work together for 13 months. It still took planning, and it still faced pushback.",
-      "std": "SS.9-12.Soc.8"
-    }
+  "look": "Find a panel that shows how Black riders were treated on the bus. Describe what is happening in it."
+ },
+ {
+  "title": "One Arrest, One Flyer",
+  "image": "https://archive.org/download/ms_for_comic/page/n3_w1200.jpg",
+  "leaf": 3,
+  "alt": "Comic page 4: Rosa Parks is arrested, and a copied sheet calling for a one-day bus boycott spreads across the city.",
+  "setup": "Rosa Parks was arrested on December 1, 1955. This page shows what happened in Montgomery over the next few days.",
+  "focus": "Find the sheet of paper. Read what it asks people to do.",
+  "term": "Boycott (a tool of change)",
+  "meaning": "A boycott means refusing to buy or use something to push for change. It is one of the tools from today’s slides, along with protests, petitions, court cases, voting, and online organizing.",
+  "check": {
+   "prompt": "Find the flyer. What did it ask people to do, and why would that put pressure on the bus system?",
+   "answers": [
+    "Stay off the buses for one day, so the bus company would lose riders’ fares",
+    "Sign a petition to the mayor, so the city council would vote on new bus rules",
+    "March to City Hall on Monday, so newspapers would report on the arrest",
+    "Stay off the buses for one day, so the rude drivers would be fired right away"
+   ],
+   "hint": "Read the flyer on this page. Then think: who gets hurt when the seats are empty?",
+   "why": "The flyer asked Black residents to stay off the buses on Monday, December 5. Most of the bus system’s riders were Black, so empty seats cost the company money. That is how a boycott puts pressure on an institution.",
+   "std": "SS.9-12.Soc.8"
   }
+ },
+ {
+  "title": "From One Day to a Movement",
+  "image": "https://archive.org/download/ms_for_comic/page/n4_w1200.jpg",
+  "leaf": 4,
+  "alt": "Comic page 5: on December 5 almost no one rides the buses, leaders form the Montgomery Improvement Association, and King speaks.",
+  "setup": "December 5, 1955, was the day of the one-day boycott. This page shows what happened that day and what came next.",
+  "focus": "Compare the empty buses with the meeting where the group gets a name and a leader.",
+  "term": "Social movement",
+  "meaning": "A social movement is an organized effort by many people to create or resist change. One day of protest is not a movement yet. Organizing is what makes it last.",
+  "check": {
+   "prompt": "Based on this page, what turned the one-day protest into a social movement?",
+   "answers": [
+    "Leaders formed a named group with a president and decided to keep going",
+    "So many people stayed off the buses that the company lost most riders",
+    "News reports spread the story, so people in other cities heard about it",
+    "A huge crowd packed a church that night to cheer and hear the speeches"
+   ],
+   "hint": "Big numbers and big crowds can still go home the next day. Look for what makes it organized.",
+   "why": "About 90% of Black riders stayed off the buses on December 5. That afternoon, leaders formed the Montgomery Improvement Association (MIA) and elected Martin Luther King Jr. president. That night, people voted to keep going. A name, a leader, and a plan to keep going made it an organized social movement.",
+   "std": "SS.9-12.Soc.8"
+  }
+ },
+ {
+  "title": "Building Their Own Bus System",
+  "image": "https://archive.org/download/ms_for_comic/page/n5_w1200.jpg",
+  "leaf": 5,
+  "alt": "Comic page 6: boycotters walk, police hand out tickets, and the movement buys station wagons and sets up a carpool.",
+  "setup": "The boycott kept going for months. People still had to get to work every day, and the city made that harder.",
+  "focus": "Find the station wagons and the planned pickup system.",
+  "term": "Meeting the need themselves",
+  "meaning": "People still needed to get to work, school, and stores. When an institution won’t meet a need fairly, people sometimes organize their own system to meet it.",
+  "check": {
+   "prompt": "Which detail on this page best shows the movement ORGANIZING its own way to meet riders’ need to get to work?",
+   "answers": [
+    "Station wagons paid for with donations, running a planned pickup system",
+    "Crowds of riders choosing to walk long distances to work every day",
+    "Police officers stopping boycott drivers and writing them tickets",
+    "Neighbors giving each other rides whenever they happened to pass by"
+   ],
+   "hint": "Walking takes effort, but it isn’t a system. Find the detail that shows planning and money.",
+   "why": "Police ticketed and stopped boycott drivers, even King. The MIA answered with a carpool of about 300 cars, plus station wagons bought with donations from across the country. Money and a planned pickup system let people get to work without the city buses.",
+   "std": "SS.9-12.Soc.8"
+  }
+ },
+ {
+  "title": "A Bomb at King’s House",
+  "image": "https://archive.org/download/ms_for_comic/page/n6_w1200.jpg",
+  "leaf": 6,
+  "alt": "Comic page 7: King’s home is bombed, an angry crowd gathers, and King asks them to stay peaceful.",
+  "setup": "On January 30, 1956, the King family’s home was attacked. His wife, Coretta, and their baby were inside.",
+  "focus": "Compare what the crowd wants to do with what King tells them.",
+  "term": "Peaceful protest as a tool",
+  "meaning": "Movements face pushback, sometimes violent. Staying peaceful is a tool too. It helps a movement keep the support of the public, newspapers, and courts.",
+  "check": {
+   "prompt": "Why did King’s choice here matter for the movement?",
+   "answers": [
+    "Fighting back could have cost the movement the support it needed",
+    "Fighting back could have scared the city into ending segregation sooner",
+    "Sending the crowd home kept police from learning who the leaders were",
+    "Calming the crowd kept King from being charged for the boycott later"
+   ],
+   "hint": "Think about how courts, newspapers, and supporters across the country would react to a violent crowd.",
+   "why": "King’s home was bombed. Coretta and the baby were not hurt. An angry crowd gathered, some ready to fight back. King asked them to stay peaceful, and that kept the movement’s support across the country.",
+   "std": "SS.9-12.Soc.8"
+  },
+  "look": "Describe what the crowd outside wants to do, and what King tells them instead. Use what you see or read on the page."
+ },
+ {
+  "title": "The City Fights Back",
+  "image": "https://archive.org/download/ms_for_comic/page/n7_w1200.jpg",
+  "leaf": 7,
+  "alt": "Comic page 8: boycott leaders are charged and turn themselves in, and people practice how to ride the buses peacefully.",
+  "setup": "The MIA’s first demands were small: polite drivers, first-come seating, and Black drivers on mostly Black routes. They did not even ask to end segregation. This page shows how the city answered.",
+  "focus": "Look at the leaders turning themselves in, then the practice session on the bus.",
+  "term": "How institutions respond",
+  "meaning": "An institution can resist (say no), make a small reform (change a little), or create a new policy (fully meet the need). Here, the city resisted.",
+  "check": {
+   "prompt": "Look at what the city does on this page. What kind of institutional response is it?",
+   "answers": [
+    "Resistance: it refused even small changes and went after the leaders",
+    "Small reform: it agreed to polite drivers but kept segregated seats",
+    "New policy: it changed the rules so riders’ needs were fully met",
+    "Small reform: it dropped the charges once leaders turned themselves in"
+   ],
+   "hint": "Find what happens to the boycott leaders on this page. Is that the city saying yes, or no?",
+   "why": "The city said no. In February 1956, officials charged more than 80 boycott leaders under an old law against interfering with business. That is resistance, and it did not stop the movement.",
+   "std": "SS.9-12.Soc.7"
+  }
+ },
+ {
+  "title": "A Court Changes the Rules",
+  "image": "https://archive.org/download/ms_for_comic/page/n8_w1200.jpg",
+  "leaf": 8,
+  "alt": "Comic page 9: a headline says the Supreme Court ruled bus segregation illegal, and riders return to the buses and stay calm when insulted.",
+  "setup": "The boycott had now lasted almost a year. This page shows how the bus rules finally changed.",
+  "focus": "Find the news headline, then see how riders react when someone insults them.",
+  "term": "Institutions change",
+  "meaning": "One institution can force another to change. Here, the courts (part of government) changed the rules for the city bus system. A court case is one of the tools of change from today’s slides.",
+  "check": {
+   "prompt": "Which explanation best fits how the bus rules finally changed?",
+   "answers": [
+    "The Supreme Court ruled bus segregation illegal after a year of pressure",
+    "The bus company gave in because it was losing too much money to keep going",
+    "City leaders voted to end segregation once the boycott leaders were tried",
+    "The governor ordered the buses to change so the long boycott would end"
+   ],
+   "hint": "Find the headline on this page. Who made the decision it reports?",
+   "why": "In November 1956, the U.S. Supreme Court agreed that bus segregation laws were unconstitutional. On December 21, 1956, Black riders went back on integrated buses, about 13 months after the boycott began. The city never gave in; the courts made the new policy.",
+   "std": "SS.9-12.Soc.8"
+  }
+ },
+ {
+  "title": "Backlash, Then Quiet",
+  "image": "https://archive.org/download/ms_for_comic/page/n9_w1200.jpg",
+  "leaf": 9,
+  "alt": "Comic page 10: shots are fired at buses and churches are bombed, then many white citizens turn against the violence and buses run in peace.",
+  "setup": "Black riders were back on the buses. Not everyone in Montgomery accepted the ruling.",
+  "focus": "Find the bombed church, then the panel where things become quiet.",
+  "term": "Unintended consequence",
+  "meaning": "An unintended consequence is a result nobody planned. A change can meet one need and still spark a new problem, like angry backlash.",
+  "check": {
+   "prompt": "The court ruling met riders’ need for fair buses. What unintended consequence shows up on this page?",
+   "answers": [
+    "Some opponents attacked buses and churches after the ruling",
+    "Black riders kept walking because they still didn’t trust the buses",
+    "The city shut down its bus system for good after the ruling",
+    "The Supreme Court took back its ruling because of the violence"
+   ],
+   "hint": "Find the bombed church. Did that happen before or after the ruling?",
+   "why": "After the ruling, some opponents shot at buses and bombed churches and homes. That was backlash against the change. The comic says many white citizens then turned against the violence, and the buses ran in peace. The ruling stood.",
+   "std": "SS.9-12.Soc.8"
+  },
+  "look": "Find the bombed church and the panel where things grow quiet. What changed between those two moments, and what does the comic say caused it?"
+ },
+ {
+  "title": "The Montgomery Method",
+  "image": "https://archive.org/download/ms_for_comic/page/n13_w1200.jpg",
+  "leaf": 13,
+  "alt": "Comic page 14: the steps of the Montgomery Method, starting with choosing one special thing to change and getting the facts.",
+  "setup": "The comic ends with a how-to guide. It was published by a religious peace group, so it explains the method in religious terms. You don’t have to share those beliefs to study the strategy. John Lewis said this comic helped inspire students who planned sit-ins.",
+  "focus": "Read the first two steps: pick ONE thing to change, and get the facts.",
+  "term": "Why focus matters",
+  "meaning": "A movement that picks one clear goal can get lots of people working on it together. You’ll use this idea in today’s Build a Social Movement activity.",
+  "check": {
+   "prompt": "Step one says pick ONE special thing to change, not everything at once. How does Montgomery show why that works?",
+   "answers": [
+    "One clear goal, fair buses, gave thousands of people a shared target",
+    "One clear goal let leaders skip the carpools and the long meetings",
+    "One clear goal kept the city from fighting back against the boycott",
+    "One clear goal meant the movement could win in just a few weeks"
+   ],
+   "hint": "Think back: did Montgomery still need carpools, still face pushback, and still take 13 months?",
+   "why": "A single, clear target let thousands work together for 13 months. It still took planning, and it still faced pushback.",
+   "std": "SS.9-12.Soc.8"
+  }
+ }
 ];
 const ID="soc-u2-d4-montgomery-story", TITLE="Sociology Unit 2 · Day 4 · Walk to Freedom", KEY="soc-u2d4-montgomery-20261105", API="https://fynn-class-assignment-submissions-20261024.neotboy.chatgpt.site/api/submit";
 const $=id=>document.getElementById(id), N=SCENES.length;
@@ -277,7 +248,7 @@ $("zoomBtn").onclick=()=>{const z=$("pictureFrame").classList.toggle("zoomed");$
 function go(pos){cancelRetry();state.pos=pos;$("status").textContent="";save();render();window.scrollTo(0,0)}
 $("backBtn").onclick=()=>{if(state.pos>0)go(state.pos-1)};$("nextBtn").onclick=()=>{if(state.pos<N-1&&state.done[state.pos])go(state.pos+1)};
 $("restartBtn").onclick=()=>{if(!confirm("Start over? This clears only this activity’s progress on this device."))return;cancelRetry();const name=state.name;state=fresh();state.name=name;$("studentName").value=name;$("reflection").value="";$("introStatus").textContent="";$("welcome").hidden=true;save();render();window.scrollTo(0,0)};
-$("sendBtn").onclick=async()=>{const status=$("status"),ref=$("reflection").value.trim();if(!state.done.every(Boolean)&&!test()){status.textContent="Finish all ten checks first.";return}if(!test()&&(ref.length<100||(ref.match(/[.!?]+(?=\s|$)/g)||[]).length<3)){status.textContent="Write 3–4 sentences: name two stages and how one institution responded.";$("reflection").focus();return}if(window.classJunkStop){const msg=window.classJunkStop($("reflection"),{source:"from the comic"});if(msg){status.textContent=msg;return}}
+$("sendBtn").onclick=async()=>{const status=$("status"),ref=$("reflection").value.trim();if(!state.done.every(Boolean)&&!test()){status.textContent="Finish all nine checks first.";return}if(!test()&&(ref.length<100||(ref.match(/[.!?]+(?=\s|$)/g)||[]).length<3)){status.textContent="Write 3–4 sentences: name two tools and how one institution responded.";$("reflection").focus();return}if(window.classJunkStop){const msg=window.classJunkStop($("reflection"),{source:"from the comic"});if(msg){status.textContent=msg;return}}
 state.reflection=ref;save();const answers={"Standard":"SS.9-12.Soc.7, SS.9-12.Soc.8","Reading":"Selected pages from Martin Luther King and the Montgomery Story (1957)","First-try correct":state.wrong.filter((v,i)=>state.done[i]&&v===0).length+" of "+N,"First-try by standard":["SS.9-12.Soc.7","SS.9-12.Soc.8"].map(k=>k+": "+SCENES.filter((s,i)=>s.check.std===k&&state.done[i]&&state.wrong[i]===0).length+" of "+SCENES.filter(s=>s.check.std===k).length).join(" · ")};SCENES.forEach((s,i)=>{answers["Section "+(i+1)+" · "+s.check.prompt]=state.done[i]?s.check.answers[0]+(state.wrong[i]?" (after "+state.wrong[i]+" wrong tries)":" (first try)"):"Not completed in teacher preview"});SCENES.forEach((s,i)=>{if(s.look)answers["Look closer · Section "+(i+1)]=state.looks[i]||"(blank)"});answers["Writing: Why did people in Montgomery team up for change?"]=ref;
 $("sendBtn").disabled=true;status.textContent="Sending your work…";try{if(!window.classTurnIn)throw Error("Turn-in connection did not load. Refresh and try again; your work is saved.");const r=await window.classTurnIn(API,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({studentName:state.name,assignmentId:ID,assignmentTitle:TITLE,answers})});const result=await r.json();if(!r.ok)throw Error(result.error||"Could not send your work.");state.submitted=true;save();status.textContent="Turned in. Your teacher can see your work.";$("sendBtn").textContent="Turned in ✓"}catch(e){status.textContent=e.message||"Could not turn in. Your work is saved; try again.";$("sendBtn").disabled=false}};
 render();if(state.started&&state.done.some(Boolean)){$("welcome").textContent="Welcome back. Your progress and writing are saved.";$("welcome").hidden=false}
