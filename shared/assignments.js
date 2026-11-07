@@ -223,7 +223,7 @@ window.CLASS_ASSIGNMENTS = {
   // ---- Government · Unit 2 ----
   "gov-unit2-day1-the-feed":          { course: "government", unit: 2, day: 1, title: "Day 1 · Decision Desk: Ideology vs. Party", path: "civics/unit2-day1-the-feed/", std: ["SS.9-12.Gov.12"] },
   "gov-unit2-day2-fair-game":         { course: "government", unit: 2, day: 2, title: "Day 2 · Fair Game: Comparing the Parties", path: "civics/unit2-day2-fair-game/", std: ["SS.9-12.Gov.12"] },
-  "gov-unit2-day2-lobby-day":         { course: "government", unit: 2, day: 4, title: "Day 4 · Lobby Day: Pass It or Block It", path: "civics/unit2-day2-lobby-day/", std: ["SS.9-12.Gov.11", "SS.9-12.Gov.12", "SS.9-12.Gov.15", "SS.9-12.Gov.16"] },
+  // 2026-11-06: Lobby Day (civics/unit2-day2-lobby-day/) taken off Gov U2 Day 4 by Fynn. Game files kept on the site.
   // ---- Government · Unit 2 · activities from the Schoology day posts (links only, no turn-in) ----
   "gov-u2-d1-poster": { alt: true, course: "government", unit: 2, day: 1, turnIn: false, std: [], title: "Days 1–3 · Political Party Poster (Printed)", path: "https://docs.google.com/document/d/1Z8OsrG8eBL8005dEy6XuV9o7wvWctfCvm4g2-h-AmFQ/edit?usp=sharing" },
   "gov-u2-d1-poster-directions": { alt: true, course: "government", unit: 2, day: 1, turnIn: false, std: [], title: "Days 1–3 · Political Party Poster Directions", path: "https://linnmarcsd-my.sharepoint.com/:p:/g/personal/fynnley_toppert_linnmar_k12_ia_us/IQDKPVnodH6XRaNjq_Hy3NjXATRK4fMXb5Pi0YSG_d-qA_k?e=C064xb" },
