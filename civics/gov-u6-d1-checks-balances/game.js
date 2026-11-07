@@ -11,7 +11,7 @@
 // =====================================================================
 (function () {
   "use strict";
-  const KEY = "gov-u6-d1-checks-balances-v2";
+  const KEY = "gov-u6-d1-checks-balances-v3";
   const ASSIGNMENT_ID = "gov-u6-d1-checks-balances";
   const TITLE = "Government · Unit 6 · Day 1 · Branch Wars: Checks & Balances";
   const STANDARD = "SS.9-12.Gov.4, SS.9-12.Gov.9";
@@ -52,111 +52,89 @@
   // hit: the round's power move, applied once when the step first opens.
   // event: a counter-move. fx moves the bars.
   const STEPS = [
-    // ===== Round 1 · Veto Showdown =====
-    { id: "c1", type: "check", r: 0, std: "Gov.4", kicker: "Round 1 · Why have rules at all?", short: "Fed 51: why limit power", stamp: "TRUE",
-      scene: () => mc("Why fence in the fighters? Ask Madison.") +
-        parch("James Madison · Federalist No. 51 (1788)", "If men were angels, no government would be necessary. If angels were to govern men, neither… controls on government would be necessary."),
-      ask: "What's Madison's point?",
-      options: ["Leaders are human, so limit power", "Only good people should be leaders", "Good laws mean we need no government", "People are evil, so take rights"],
-      miss: ["He says nobody is an angel. You can't count on good leaders.", "He says we DO need government, because people aren't angels.", "He's not taking rights away. He's limiting the people in power."],
-      hint: "Are leaders angels? So what do they need?",
-      reveal: "<b>Separation of powers</b> splits the job. <b>Checks</b> let each branch block the others." },
+    { id:"c1", type:"check", r:0, std:"Gov.4", kicker:"The rule", short:"Why divide power?", stamp:"CHECKS",
+      scene:()=>ex("THREE BRANCHES",ln("📜","Congress makes laws")+ln("✒️","President carries out laws")+ln("🔨","Courts review laws")),
+      ask:"Why split power between branches?", options:["Each branch can check another","One branch can act alone","Courts run the whole government","The President makes every law"],
+      miss:["Checks stop one branch from taking all the power.","The game is about shared power.","Courts review laws, but do not run everything."],
+      hint:"A check helps stop a power grab.", reveal:"Checks and balances let each branch limit the others." },
 
-    { id: "c2", type: "check", r: 0, std: "Gov.4", kicker: "Round 1 · The bill comes back", short: "President rejects bill = veto", stamp: "VETO",
-      hit: { P: 1 }, hitText: "The President blocks your bill!",
-      scene: () => vs("P", "C") +
-        ex("Bill from Congress", `<p class="docT">TEEN DATA PRIVACY ACT</p>${ln("📱", "Apps can't sell teens' data.")}${ln("✅", "Passed House + Senate")}<div class="rstamp">RETURNED · NOT SIGNED</div>`, "Made-up bill. The rules are real."),
-      ask: "The President's NO on a bill is called…",
-      options: ["A veto", "An override", "Impeachment", "Judicial review"],
-      miss: ["An override is Congress fighting BACK against this move.", "Impeachment is charging an official with wrongdoing. Nobody's on trial.", "Judicial review is what courts do. This came from the President."],
-      hint: "It's the President's check on Congress.",
-      reveal: "<b>Veto</b>: the President's NO on a bill. Checks Congress." },
+    { id:"c2", type:"check", r:0, std:"Gov.4", kicker:"Round 1 · Veto", short:"What is a veto?", stamp:"VETO",
+      hit:{P:1}, hitText:"The President blocks a bill.",
+      scene:()=>vs("P","C")+ex("THE BILL",ln("📜","Congress passes a bill")+ln("✒️","President says NO")),
+      ask:"What is the President's check?", options:["Veto the bill","Strike down a law","Confirm a judge","Impeach a member of Congress"],
+      miss:["That is the President's veto.","Courts can strike down laws.","The Senate confirms judges."],
+      hint:"The President can say no to a bill.", reveal:"A veto blocks a bill passed by Congress." },
 
-    { id: "c3", type: "check", r: 0, std: "Gov.4", kicker: "Round 1 · Override vote", short: "Override needs 2/3 of both (Senate 67)", stamp: "COUNTED",
-      scene: () => mc("Congress votes to override!") +
-        ex("Vote board", voteRow("House", 300, 435, 290) + voteRow("Senate", 64, 100, 67) + `<p class="vkey"><span class="needk"></span> 2/3 line</p>`, "Override: 2/3 vote in the House AND the Senate (U.S. Constitution, Article I, Section 7)."),
-      ask: "Did the override work?",
-      options: ["No. The Senate needed 67", "Yes. Both got more than half", "No. The House needed 435", "Yes. The House beat 290"],
-      miss: ["Half isn't enough. An override needs 2/3.", "The House only needs 2/3, which is 290. It got 300.", "The House did. But the Senate has to reach 2/3 too."],
-      hint: "Find the 2/3 line on each bar. Did BOTH reach it?",
-      reveal: "<b>Override</b>: Congress beats a veto with 2/3 of the House AND Senate." },
+    { id:"c3", type:"check", r:0, std:"Gov.4", kicker:"Round 1 · Override", short:"Can Congress override?", stamp:"VOTE",
+      scene:()=>ex("OVERRIDE VOTE",voteRow("House",300,435,290)+voteRow("Senate",64,100,67)+"<p class=\"vkey\"><span class=\"needk\"></span> 2/3 needed in both</p>"),
+      ask:"Does Congress override the veto?",
+      options:["No. The Senate needs 67","Yes. Both got over half","No. The House needs 435","Yes. The House reached 290"],
+      miss:["The Senate is short of 67 votes.","An override needs 2/3, not just over half.","The House reached its 2/3 mark.","Both chambers must reach 2/3."],
+      hint:"Both bars must pass the line.", reveal:"Congress can override a veto with 2/3 of the House and Senate." },
 
-    { id: "e1", type: "event", r: 0, kicker: "Round 1 · Your counter-move", short: "Round 1: after the veto",
-      scene: () => mc("You run Congress. The veto stands. Now what?") +
-        ex("Real record since 1789", `<div class="rec"><p><b>2,599</b><small>vetoes</small></p><p class="rare"><b>112</b><small>overridden</small></p></div>`, "U.S. Senate, Summary of Bills Vetoed, 1789–present"),
-      ask: "Pick your move.",
-      cards: [
-        { icon: "🛠️", t: "Fix the bill", line: "Win 3 more senators, vote again", fx: { C: 1, P: -1 }, res: "New version. Senate: 68 yes. Override! It's law.", cause: "Fixed the bill, overrode" },
-        { icon: "💸", t: "Cut the President's pay", line: "Payback in the budget", fx: { C: -1, P: 1 }, res: "Blocked. The Constitution bans changing a president's pay mid-term.", cause: "Tried illegal payback" },
-        { icon: "🏳️", t: "Drop the bill", line: "Move on, no fight", fx: { C: -1, P: 2 }, res: "The President wins without a fight. Next veto comes easier.", cause: "Gave up after the veto" }
+    { id:"e1", type:"event", r:0, kicker:"Round 1 · Your move", short:"Respond to a veto",
+      scene:()=>mc("The veto stands. What should Congress do?"), ask:"Choose a move.",
+      cards:[
+        {icon:"🛠️",t:"Revise the bill",line:"Find more votes; try again",fx:{C:1,P:-1},res:"The Senate reaches 67. Congress overrides the veto.",cause:"Revised bill and won votes"},
+        {icon:"📜",t:"Override now",line:"Vote again with the same numbers",fx:{C:-1,P:1},res:"The Senate still has only 64 votes. The veto stands.",cause:"Tried an override too soon"},
+        {icon:"🏳️",t:"Drop the bill",line:"No new vote",fx:{C:-1,P:1},res:"The veto ends this bill.",cause:"Accepted the veto"}
       ],
-      reveal: "A check only works if you use it by the rules." },
+      reveal:"Use the override only when both chambers have 2/3." },
 
-    // ===== Round 2 · Courts Strike Back =====
-    { id: "c4", type: "check", r: 1, std: "Gov.4", kicker: "Round 2 · Breaking news", short: "Court strikes law = judicial review", stamp: "STRUCK DOWN",
-      hit: { J: 1 }, hitText: "The Court throws out Congress's law!",
-      scene: () => vs("J", "C") +
-        `<div class="phone"><p class="ptop2">🔴 BREAKING</p><p>New law: police can search <b>any phone</b>, no warrant.</p></div>` +
-        parch("U.S. Constitution · 4th Amendment", "The right of the people to be secure… against unreasonable searches and seizures, shall not be violated…"),
-      ask: "Which power did the Court use?",
-      options: ["Judicial review", "Judicial appointment", "A veto", "Impeachment"],
-      miss: ["Appointing judges is the President's job. Here, judges tossed a law.", "Only the President vetoes. This came from judges.", "Impeachment removes officials. The Court tossed a law."],
-      hint: "Courts can toss a law that breaks the Constitution.",
-      reveal: "<b>Judicial review</b>: courts strike laws that break the Constitution.",
-      real: "Real case: in <i>Riley v. California</i> (2014), the Court said police usually need a warrant to search your phone." },
+    { id:"c4", type:"check", r:1, std:"Gov.4", kicker:"Round 2 · Court review", short:"What is judicial review?", stamp:"REVIEW",
+      hit:{J:1}, hitText:"The Court blocks a law.",
+      scene:()=>vs("J","C")+ex("NEW LAW",ln("📱","Police may search any phone")+ln("📜","No warrant needed")),
+      ask:"What check can the Court use?", options:["Judicial review","A veto","Senate confirmation","Power of the purse"],
+      miss:["Courts can review laws and strike ones that break the Constitution.","The President vetoes bills.","The Senate confirms the President's judge picks."],
+      hint:"Courts can strike laws that break the Constitution.",
+      reveal:"Judicial review lets courts strike down unconstitutional laws.",
+      real:"In Riley v. California (2014), the Supreme Court said police usually need a warrant to search a phone." },
 
-    { id: "e2", type: "event", r: 1, kicker: "Round 2 · A Supreme Court seat opens", short: "Round 2: Supreme Court pick",
-      scene: () => mc("Supreme Court seat open! The President picks. You run the Senate.") +
-        ex("The rule", ln("✒️", "President <b>picks</b> judges") + ln("📜", "Senate <b>confirms</b> (approves)") + ln("♾️", "Judges serve for life"), "U.S. Constitution, Articles II and III"),
-      ask: "Pick your move.",
-      cards: [
-        { icon: "🎤", t: "Hearings, then vote", line: "Grill the pick, then decide", fx: { C: 1 }, res: "4 days of hard questions. Confirmed 55–45. Both branches had a say.", cause: "Held hearings, then voted" },
-        { icon: "✅", t: "Rubber-stamp it", line: "Confirm today, no questions", fx: { P: 2, C: -2 }, res: "The President basically picked alone. The Senate skipped its check.", cause: "Rubber-stamped the pick" },
-        { icon: "🚫", t: "Never vote", line: "Leave the seat empty", fx: { C: 1, J: -3 }, res: "Empty over a year. 8 justices, so cases tie 4–4. (Real: this happened in 2016.)", cause: "Left the Court a seat short" }
+    { id:"e2", type:"event", r:1, kicker:"Round 2 · Open seat", short:"Check a judge pick",
+      scene:()=>ex("WHO DOES WHAT?",ln("✒️","President picks a judge")+ln("📜","Senate votes to confirm")),
+      ask:"Choose the Senate's move.",
+      cards:[
+        {icon:"🎤",t:"Hold a hearing",line:"Ask questions, then vote",fx:{C:1},res:"The Senate holds a hearing and votes. It confirms the judge.",cause:"Held hearing and voted"},
+        {icon:"✅",t:"Approve at once",line:"Skip questions and vote",fx:{P:1,C:-1},res:"The Senate skips its check on the President's pick.",cause:"Skipped the Senate check"},
+        {icon:"🚫",t:"Never vote",line:"Leave the seat open",fx:{J:-1,C:1},res:"The seat stays open. The Senate never uses its confirmation power.",cause:"Left the seat open"}
       ],
-      reveal: "<b>Confirm</b>: the Senate approves or rejects the President's picks." },
+      reveal:"The President picks. The Senate confirms or rejects." },
 
-    // ===== Round 3 · The Power Grab =====
-    { id: "c5", type: "check", r: 2, std: "Gov.4", kicker: "Round 3 · Follow the money", short: "Power of the purse = Congress", stamp: "PURSE",
-      hit: { P: 2 }, hitText: "President spends $5B Congress refused!",
-      scene: () => vs("P", "C") +
-        `<div class="check"><p class="ckt">U.S. TREASURY</p><p>Pay to: <b>Mega Project</b></p><p class="amt">$5,000,000,000</p><p class="sig">— The President</p></div>` +
-        parch("U.S. Constitution · Article I, Section 9", "No Money shall be drawn from the Treasury, but in Consequence of Appropriations made by Law…"),
-      ask: "Who decides how federal money is spent?",
-      options: ["Congress, through spending laws", "The President, in emergencies", "The Supreme Court, case by case", "Each state's governor"],
-      miss: ["Spending needs a law. The President doesn't make laws.", "Courts judge cases. They don't write budgets.", "This is federal (national) money, not state money."],
-      hint: "Money needs a law. Who makes laws?",
-      reveal: "<b>Power of the purse</b>: only Congress decides federal spending." },
+    { id:"c5", type:"check", r:2, std:"Gov.4", kicker:"Round 3 · Spending", short:"Who controls federal spending?", stamp:"THE PURSE",
+      hit:{P:2}, hitText:"The President spends money Congress refused.",
+      scene:()=>vs("P","C")+ex("FEDERAL FUNDS",ln("✒️","President orders $5 billion spent")+ln("📜","Congress did not approve it")),
+      ask:"Which branch controls federal spending?",
+      options:["Congress, by passing spending laws","The President, in an emergency","Courts, in each case","State governors"],
+      miss:["Federal spending needs Congress's approval.","An emergency does not give the President Congress's spending power.","Courts decide cases, not the budget."],
+      hint:"Who writes the laws that approve spending?", reveal:"Congress controls federal spending: the power of the purse." },
 
-    { id: "e3", type: "event", r: 2, kicker: "Round 3 · Final move", short: "Round 3: respond to spending grab",
-      scene: () => mc("The President spends it anyway. “It's an emergency!” You run Congress."),
-      ask: "Pick your final move.",
-      cards: [
-        { icon: "⚖️", t: "Sue + cut funds", line: "Court case, smaller budget", fx: { J: 1, P: -2 }, res: "A federal court rules the spending broke the law. Two branches checked one.", cause: "Sued and cut funds" },
-        { icon: "🔥", t: "Impeach now", line: "House charges the President", fx: { C: 2, P: -1 }, res: "The House impeaches. The Senate falls short of 67. Months of war over one money fight.", cause: "Impeached over one money fight" },
-        { icon: "🤷", t: "Let it slide", line: "Skip the fight", fx: { C: -1, P: 2 }, res: "Next year, the President spends even more without asking.", cause: "Let the spending slide" }
+    { id:"e3", type:"event", r:2, kicker:"Round 3 · Your move", short:"Stop spending without approval",
+      scene:()=>mc("The President spent the money anyway. You lead Congress."),
+      ask:"Choose a check.",
+      cards:[
+        {icon:"💰",t:"Block more funds",line:"Set spending in a new law",fx:{C:1,P:-1},res:"Congress uses its spending power to limit the next payment.",cause:"Set limits in a spending law"},
+        {icon:"🔥",t:"Impeach at once",line:"Skip an investigation",fx:{C:1,P:-1},res:"The House can impeach, but a Senate trial still follows.",cause:"Started impeachment at once"},
+        {icon:"🤷",t:"Allow the spending",line:"Take no action",fx:{C:-1,P:2},res:"The President gets more control of federal funds.",cause:"Allowed spending without approval"}
       ],
-      reveal: "<b>Impeach</b>: the House charges. The Senate holds a trial. 2/3 removes." },
+      reveal:"Congress can check spending by writing the budget into law." },
 
-    { id: "c6", type: "check", r: 2, std: "Gov.4", kicker: "Round 3 · The real record", short: "Impeachment: removal needs 2/3 of Senate", stamp: "ON RECORD",
-      scene: () => ex("Real presidents impeached by the House", `<table class="tbl"><tr><th>Year</th><th>President</th><th>Removed?</th></tr><tr><td>1868</td><td>Andrew Johnson</td><td class="no">No</td></tr><tr><td>1998</td><td>Bill Clinton</td><td class="no">No</td></tr><tr><td>2019</td><td>Donald Trump</td><td class="no">No</td></tr><tr><td>2021</td><td>Donald Trump</td><td class="no">No</td></tr></table>`, "U.S. House and Senate records. Nixon resigned in 1974 before a House vote."),
-      ask: "Why has no president ever been removed?",
-      options: ["Removal needs 2/3 of the Senate", "Only the House can remove", "Presidents can veto impeachment", "The Court must approve removal"],
-      miss: ["The House only charges. The Senate decides removal.", "There's no veto on impeachment. It's Congress's check.", "The Senate holds the trial, not the Court."],
-      hint: "Who holds the trial, and how many votes does it take?",
-      reveal: "Removal is rare on purpose. It takes <b>67 senators</b>." },
+    { id:"c6", type:"check", r:2, std:"Gov.4", kicker:"Round 3 · Removal", short:"Who can remove a president?", stamp:"TRIAL",
+      scene:()=>ex("IMPEACHMENT",ln("📜","House votes to impeach")+ln("📜","Senate holds a trial")+ln("✓","2/3 of Senate needed to remove")),
+      ask:"What must happen to remove a president?",
+      options:["2/3 of the Senate votes to convict","The House impeaches by itself","The Court orders removal","The President vetoes the charges"],
+      miss:["The Senate must convict by 2/3 vote to remove.","The House impeaches; the Senate holds the trial.","Courts do not remove a president.","A president cannot veto impeachment."],
+      hint:"The House charges. The Senate holds the trial.", reveal:"The House impeaches. A 2/3 Senate vote removes the president." },
 
-    { id: "c7", type: "check", r: 2, std: "Gov.9", kicker: "Bonus split · National vs. state", short: "Fed 51: double security = federalism", stamp: "DOUBLE LOCK",
-      scene: () => `<div class="tree"><p class="tp">👥 The People</p><div class="tsplit"><div class="tn"><b>🇺🇸 National</b><span>💵 money · 🪖 military · 🤝 treaties</span><em>📜 ✒️ 🔨</em></div><div class="tn"><b>🌽 States (Iowa)</b><span>🚗 licenses · 🗳️ elections · 🏫 schools</span><em>📜 ✒️ 🔨</em></div></div></div>` +
-        parch("James Madison · Federalist No. 51 (1788)", "…first divided between two distinct governments, and then… subdivided among distinct and separate departments. Hence a double security arises…"),
-      ask: "Madison's “double security” means power is…",
-      options: ["Split by level, then by branch", "Shared by the President and VP", "Passed twice by the same Congress", "Guarded by two separate armies"],
-      miss: ["The VP doesn't share the President's power. Look at the two boxes.", "Bills pass once. Madison means power is divided twice.", "He's talking about governments, not armies."],
-      hint: "Look at the chart: first split into two ___, then each into ___.",
-      reveal: "<b>Federalism</b>: power split between national and state governments." },
+    { id:"c7", type:"check", r:2, std:"Gov.4", kicker:"Final check · Judges", short:"Who checks a judge pick?", stamp:"CONFIRM",
+      scene:()=>vs("P","C")+ex("JUDGE PICK",ln("✒️","President names a judge")+ln("📜","Senate can approve or reject")),
+      ask:"How does the Senate check the President?",
+      options:["Confirm or reject the judge","Veto the judge's court rulings","Choose the judge for the President","Remove the judge by impeachment"],
+      miss:["The Senate votes to confirm or reject the pick.","A veto applies to bills, not court rulings.","The President nominates. The Senate votes.","Impeachment is a separate process."],
+      hint:"The President picks; the Senate votes.",
+      reveal:"Senate confirmation is a check on the President's power to appoint judges." },
 
-    { id: "end", type: "ending", r: 2, kicker: "Final bell" },
-    { id: "write", type: "write", r: 2, kicker: "Post-fight interview" }
+    { id:"end", type:"ending", r:2, kicker:"Final bell" },
+    { id:"write", type:"write", r:2, kicker:"Quick reflection" }
   ];
 
   const TOTAL = STEPS.length;
@@ -165,16 +143,11 @@
   const HITS = STEPS.filter(s => s.hit);
 
   const PROMPTS = [
-    { id: "check", short: "Most important check", label: "1. Which check matters most? What would happen without it?",
-      bank: ["✒️ veto", "📜 override", "🔨 judicial review", "✅ confirm", "💰 power of the purse", "🔥 impeach"],
-      stem: "The most important check is ___ because without it ___.", min: 60, newWords: 5,
-      mustAll: [["veto", "override", "impeach", "judicial review", "strike", "struck", "unconstitutional", "appoint", "confirm", "budget", "spend", "money", "purse"], ["because", "without", "would", "could"]],
-      mustMsg: "In answer 1, name a check (like veto, override, judicial review, or impeach) AND say what would happen without it." },
-    { id: "fed", short: "National vs state example", label: "2. Name one thing the national government controls and one thing Iowa controls. Why split it?",
-      bank: ["🇺🇸 money · military · treaties", "🌽 licenses · elections · schools"],
-      stem: "The national government controls ___. Iowa controls ___. Splitting power helps because ___.", min: 60, newWords: 5,
-      mustAll: [["national", "federal", "congress", "u.s", "country"], ["state", "iowa"], ["because", "so ", "protect", "help", "keep", "stop"]],
-      mustMsg: "In answer 2, name something the national government controls, something Iowa controls, AND why splitting helps." }
+    { id:"check", short:"Checks and balances", label:"Name one check from the game. How did it limit a branch's power?",
+      bank:["veto","override","judicial review","confirmation","spending law","impeachment"],
+      stem:"One check is ___. It limits power by ___.", min:35, newWords:3,
+      mustAll:[["veto","override","judicial review","confirm","confirmation","spending","purse","impeach"],["because","stop","limit","block","check","prevent","keep"]],
+      mustMsg:"Name a check (like a veto or judicial review) and say how it limits power." }
   ];
 
   // ---------------- State ----------------
@@ -305,14 +278,14 @@
       <div class="tcopy">
         <p class="tk">Government · Unit 6 · Day 1</p>
         <h1>Branch Wars</h1>
-        <p class="recap">⏪ Before break: 3 branches, 3 jobs. <b>Today: how they block each other.</b></p>
-        <ul class="how"><li><span>💥</span>A branch grabs power</li><li><span>🧠</span>Answer the checks</li><li><span>🛡️</span>Pick the counter-move</li></ul>
-        <p class="tline">🎯 Keep all 3 power bars balanced.</p>
-        <p class="tchips"><span>⏱️ 25 min</span><span>🧠 7 checks</span><span>🥊 3 big moves</span><span>✏️ 2 answers</span></p>
+        <p class="recap">Three branches. Each can check the others.</p>
+        <ul class="how"><li><span>1</span>Spot the power move</li><li><span>2</span>Name the check</li><li><span>3</span>Choose a response</li></ul>
+        <p class="tline">🎯 Keep any one branch from taking over.</p>
+        <p class="tchips"><span>⏱️ 20–25 min</span><span>🛡️ 7 checks</span><span>🥊 3 power moves</span><span>✏️ 1 short answer</span></p>
         <label for="nameBox">Your name (first name + last initial)</label>
         <div class="namerow"><input id="nameBox" maxlength="60" autocomplete="off" placeholder="Like Jordan M." value="${esc(pre || "")}"><button type="button" class="go big" id="startBtn">🔔 Ring the bell</button></div>
         <p id="introMsg" class="msg bad" role="status"></p>
-        <p class="src">The bills and fights are made up. The rules, quotes, and records are real. Standards: SS.9-12.Gov.4, Gov.9.</p>
+        <p class="src">Some events are made up. The checks are based on the Constitution. Standard: SS.9-12.Gov.4.</p>
       </div></section>`;
     $("startBtn").onclick = () => {
       const fixed = window.classShortName ? window.classShortName($("nameBox").value) : $("nameBox").value.trim();
@@ -455,7 +428,7 @@
          <p class="bank">${p.bank.map(b => `<span>${esc(b)}</span>`).join("")}</p>
          <p class="stem">Starter: ${esc(p.stem)}</p>
          <button type="button" class="mini" data-for="${p.id}">Use the starter</button>
-         <textarea id="w_${p.id}" rows="3" placeholder="1–2 full sentences…">${esc(st.writing[p.id] || "")}</textarea>`).join("")}
+         <textarea id="w_${p.id}" rows="3" placeholder="Write 1–2 short sentences…">${esc(st.writing[p.id] || "")}</textarea>`).join("")}
          <p class="src">Go deeper: use a real example from today, like the veto record or 0 removals.</p>
          <button type="button" class="go" id="sendBtn">${sent ? "Turn in again" : "Turn in ▶"}</button>
          <p id="sendMsg" class="msg" role="status" aria-live="polite">${sent ? "✓ Turned in. You can fix your answers and turn in again." : ""}</p>
