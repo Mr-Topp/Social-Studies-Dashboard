@@ -1,0 +1,228 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>When Should Someone Step In? | World History Day 8</title>
+<meta name="description" content="Read real 1940s comics about Japan in China and Hitler's rise (1931–1939), fact-check them, and decide when someone should have stepped in.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../shared/graphic-reading.css?v=3">
+<style>
+/* Wide comic crops: give the reader more room so the lettering is bigger. */
+.flip-layout{grid-template-columns:minmax(0,1.9fr) minmax(320px,1fr)}
+.flip-stage img{min-height:0;max-height:calc(100vh - 130px)}
+.qcol{padding-bottom:70px}
+.intro-line{font-size:1.02rem;margin:0 0 10px}
+.words{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0 10px;padding:0;list-style:none}
+.words li{background:#fff;border:1px solid #e6dcc8;border-left:4px solid var(--navy);border-radius:8px;padding:3px 9px;font-size:.88rem}
+.declass{display:block;background:#fff;border:2px dashed #7a2b26;border-radius:10px;padding:8px 11px;margin:6px 0 8px;font-weight:650;color:#3c2a20;line-height:1.4;font-style:normal}
+.declass b{display:block;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#a33d36;margin-bottom:2px}
+.declass.file{border-color:#18364a}.declass.file b{color:#18364a}
+.dime{display:inline-block;background:#e6bd64;color:#0f2433;border-radius:999px;font-weight:850;padding:0 9px;margin-right:4px}
+.credits{font-size:.8rem;color:var(--muted);margin:10px 0 0;line-height:1.4}
+/* Choices wait until the page's read timer is done. */
+body.reading-now .choices{opacity:.45;pointer-events:none}
+</style>
+<script src="../shared/assignments.js?v=20261105fb1"></script><script src="../shared/turnin.js?v=20261105fb1"></script></head><body>
+<header class="gr-head" data-years="1931 — 1939"><div class="gr-wrap">
+<div class="kicker">World History · Day 8 · Look Back: When Should Someone Step In?</div>
+<h1>When Should Someone Step In?</h1>
+<p class="hook"><span class="dime">10¢</span>Kids your age bought these comics <i>during</i> WWII. They turned real people into heroes. Fact-check them: what's true, what's puffed up, and when should someone have stepped in? 8 multiple-choice checks, no writing. <b>About 20 minutes.</b></p>
+<p class="goal"><b>Today's goal:</b> Explain how Japan and Germany grabbed land from 1931 to 1939, and decide when someone should have stepped in to stop them.</p>
+<details class="std-details"><summary>Iowa standards for today</summary>
+<p><b>Standard SS.9-12.WH.29</b> — Analyze the causes that led to the outbreak of World War I and World War II.</p><p><b>Standard SS.9-12.WH.30</b> — Compare and contrast the rise of dictators including their methods of repression and persecution, specifically addressing the causes and impact of the Holocaust.</p>
+</details>
+<nav><a class="back" href="../">← Class activities</a></nav>
+</div></header>
+
+<nav class="route" aria-label="Your progress"><ol id="flipRoute"></ol></nav>
+
+<main class="gr-main gr-wrap">
+<section class="card">
+<p class="intro-line"><b>You're the fact-checker.</b> For each part: <b>read</b> the comic on the left → get <b>both checks</b> right. Done = 8 green checks, then turn in at the bottom.</p>
+<ul class="words" aria-label="Word help">
+<li><b>Invader</b> = an army that attacks and takes another country's land</li><li><b>Manchuria</b> = a big region in northern China</li><li><b>League of Nations</b> = the peace group of countries made after WWI</li><li><b>Generalissimo</b> = top general (Chiang Kai-shek's title)</li><li><b>Concession</b> = a part of a Chinese city run by a foreign country</li><li><b>Appeasement</b> = giving a bully what they want to avoid a fight</li><li><b>Rearm</b> = build up an army and weapons again</li>
+</ul>
+<p class="content-note"><span><strong>Content note:</strong> These pages show war and invasion. The 1943 Shanghai pages used a hateful slur for Japanese people, common in U.S. wartime comics. We covered it with a <b>slur</b> tag. Some drawings of Japanese soldiers are also unfair wartime stereotypes.</span></p>
+<p class="welcome" id="welcome" role="status"></p>
+</section>
+
+<div class="flip-layout">
+<section class="flip-reader reading" id="flipReader" aria-label="Selected panels from 1940s comics about 1931 to 1939">
+<div class="flip-bar"><div><p class="eyebrow">The reading</p><h2>3 real WWII comics · 5 pages</h2></div><span class="flip-pos" id="flipPos"></span></div>
+<div class="flip-tools"><button type="button" class="quiet" id="flipBack">← Back a page</button><span class="grow"><span id="flipPart"></span><span id="flipTimer" aria-live="polite"></span></span><button type="button" class="secondary" id="flipNext">Next page →</button><button type="button" class="quiet" id="flipZoom">Make page bigger</button></div>
+<div class="flip-stage"><img id="flipImg" alt="" src="pages/p-01.jpg"></div>
+<p class="flip-cap">Click the page to make it bigger.</p>
+</section>
+
+<div class="qcol">
+<section class="card">
+<label for="studentName">First name + last initial (like Jordan M.)</label><input id="studentName" maxlength="100" autocomplete="off" placeholder="First name + last initial (like Jordan M.)" required>
+</section>
+<div id="flipCards"></div>
+<div class="flip-nav"><button type="button" class="quiet" id="flipBack2">← Back</button><button type="button" class="secondary" id="flipNext2">Next page →</button><p class="flip-why" id="flipWhy" aria-live="polite"></p></div>
+<section class="card finish" id="finish">
+<h2>Turn in your work</h2>
+<div class="actions"><button id="submitBtn" class="primary" type="button">Turn in answers</button><button id="clearBtn" class="quiet" type="button">Start over</button></div><p id="submitStatus" class="status" role="status" aria-live="polite"></p><p class="reader-note">Your work saves on this device, so you can come back later. Your teacher sees it after you turn it in.</p>
+<p class="credits">Comics: "Chinese Hero No. 1: Chiang Kai-shek," <i>True Comics</i> #3 (Aug. 1941); "Shanghai Heroine: The Inspiring Story of Yang Hui Ming," <i>True Comics</i> #26 (Aug. 1943); "Britain's Top Man," <i>Real Heroes</i> #4 (May 1942). Parents' Magazine Press. Public-domain scans from Comic Book Plus (comicbookplus.com). Panels were cropped to today's reading.</p>
+</section>
+</div></div></main>
+<div class="flip-big" id="flipBig" hidden role="dialog" aria-label="Bigger page"><button type="button" class="quiet" id="flipBigClose">✕ Close</button><img id="flipBigImg" alt="Bigger view of the current page"></div>
+<script>
+window.FLIP={
+title:"Selected panels from 1940s comics about 1931 to 1939",prefix:"wh-day8-roadtowar-",pages:5,readSeconds:8,lockSeconds:8,
+assignmentId:"day8-road-to-war",api:"https://fynn-class-assignment-submissions-20261024.neotboy.chatgpt.site/api/submit",
+lockedText:"This check opens when you get the first one right.",
+clearConfirm:"Start over? This clears your checks on this device.",
+successText:"Turned in! Your teacher got all 8 of your checks. You're done.",
+wrongText:(c,left)=>left>0?"Not quite. "+c.hint+" Try again in "+left+"…":"Not quite. "+c.hint+" The choices were mixed up. Try again.",
+parts:[
+ {
+  "short": "Manchuria",
+  "ref": "Reader page 1 · True Comics, 1941",
+  "title": "1. China, 1931: \"Chinese Hero No. 1\"",
+  "from": 1,
+  "to": 1,
+  "check": {
+   "page": 1,
+   "tag": "Reading check · Reader page 1",
+   "q": "This 1941 comic calls Chiang Kai-shek \"Chinese Hero No. 1.\" Read the small words beside him. What does the comic say he did?",
+   "right": "He built a united nation out of China and is fighting to free it from Japan.",
+   "wrong": [
+    "He kept China out of war by signing a peace deal with Japan's emperor.",
+    "He built China's first navy and drove Japan's ships away from the coast.",
+    "He asked the League of Nations to send armies to defend all of China."
+   ],
+   "why": "✓ Correct. The comic says he \"built a united nation out of China\" and calls him \"the greatest soldier-statesman of Asia.\" That's a hero poster. Now let's fact-check it.",
+   "hint": "Make the page bigger and read the words under CHIANG KAI-SHEK."
+  },
+  "check2": {
+   "tag": "Fact-check · Reader page 1",
+   "q": "<span class=\"declass file\"><b>Fact file</b>Sept. 1931: Japan's army took over Manchuria, a big region of northern China. China asked the League of Nations for help. The League's report blamed Japan, but it sent no troops and set no punishments. Japan quit the League in 1933 and kept Manchuria. Meanwhile, Chiang spent most of the early 1930s fighting Chinese Communists, not Japan.</span>What did the comic leave out?",
+   "right": "China was split by civil war, and Chiang fought the Communists before Japan.",
+   "wrong": [
+    "The League of Nations sent an army that pushed Japan out of Manchuria.",
+    "China was so united in 1931 that Japan was too afraid to attack it.",
+    "Chiang had already beaten Japan before this comic was printed in 1941."
+   ],
+   "why": "✓ Correct. China wasn't one \"united nation\" yet, and Chiang put fighting the Communists first until 1936. When Japan grabbed Manchuria in 1931, the League wrote a report but did nothing to stop it. Japan learned it could take land and get away with it.",
+   "hint": "Reread the last sentence of the fact file. Who was Chiang fighting in the early 1930s?"
+  }
+ },
+ {
+  "short": "China 1937",
+  "ref": "Reader pages 2–3 · True Comics, 1943",
+  "title": "2. Shanghai, 1937: Japan invades China",
+  "from": 2,
+  "to": 3,
+  "check": {
+   "page": 2,
+   "tag": "Reading check · Reader page 2",
+   "q": "Read reader page 2. Why does Yang Hui Ming sneak to the Chinese soldiers trapped in Shanghai?",
+   "right": "To bring them China's flag so they will fight even more bravely.",
+   "wrong": [
+    "To lead them out through a secret tunnel before Japan's army attacks.",
+    "To tell them China has surrendered and they should stop fighting.",
+    "To bring them food and medicine because their supplies ran out."
+   ],
+   "why": "✓ Correct. She thinks, \"Our men inside the city will fight even more bravely if I bring them their flag.\" The real Yang Huimin, a 22-year-old Girl Guide, really did carry a Chinese flag to soldiers trapped in a Shanghai warehouse in October 1937.",
+   "hint": "Read the thought bubble in the bottom-left panel."
+  },
+  "check2": {
+   "tag": "Step in? · Reader page 3",
+   "q": "<span class=\"declass file\"><b>Fact file</b>Japan invaded China in July 1937. By December it had taken Shanghai and China's capital, Nanjing, where Japanese troops killed huge numbers of people. The U.S., Britain, and France protested. But they sent no troops, and U.S. companies kept selling Japan oil and scrap metal until 1940–41.</span>On reader page 3, a French captain won't hand the prisoners over on \"French soil.\" Put that together with the fact file. How did outside countries act in 1937?",
+   "right": "They protected their own small zones but did nothing to stop Japan's invasion.",
+   "wrong": [
+    "They sent armies into Shanghai and forced Japan's troops out of China.",
+    "They helped Japan, so the French captain handed the prisoners right over.",
+    "They stayed out of China completely and had no people or land there."
+   ],
+   "why": "✓ Correct. France guarded its own neighborhood, but no country stepped in to stop Japan's war on China. Fact-check: Yang Huimin's real fame is the flag. Scenes like the Boy Scout escape were made more dramatic to turn her into a comic-book hero.",
+   "hint": "Reread what the French captain says in the bottom-left panel, then the last sentence of the fact file."
+  }
+ },
+ {
+  "short": "Hitler",
+  "ref": "Reader page 4 · Real Heroes, 1942",
+  "title": "3. Germany, 1930s: Churchill's warning",
+  "from": 4,
+  "to": 4,
+  "check": {
+   "page": 4,
+   "tag": "Reading check · Reader page 4",
+   "q": "Read reader page 4. What did Churchill warn Britain about in the 1930s?",
+   "right": "Hitler was building a huge army and air force, and Britain needed planes.",
+   "wrong": [
+    "Japan was about to attack Britain's navy, so Britain needed more ships.",
+    "Hitler wanted peace, so Britain could safely make its army smaller.",
+    "Germany was too poor to fight, so Britain should lend it money."
+   ],
+   "why": "✓ Correct. Churchill says Britain \"ought to deal in airplanes,\" and the comic shows Hitler's marching army and Germany's \"huge military air force.\" Building a giant military was one way Hitler grew his power.",
+   "hint": "Read the speech bubble at the BBC microphone and the two captions next to it."
+  },
+  "check2": {
+   "tag": "Fact-check · Reader page 4",
+   "q": "<span class=\"declass file\"><b>Fact file</b>In the 1930s, Churchill gave speech after speech warning about Germany's air force. Many leaders called him an alarmist. But Britain did start to rearm in the mid-1930s. It built new fighter planes and radar stations, just slower than Churchill wanted.</span>The comic says \"No one listened to him.\" What's the best fact-check?",
+   "right": "It's exaggerated: many ignored him, but Britain did start to rearm.",
+   "wrong": [
+    "It's true: Britain built no new planes at all until the war began.",
+    "It's false: Britain's leaders agreed with Churchill on everything.",
+    "It's false: Churchill really told Britain to make friends with Hitler."
+   ],
+   "why": "✓ Correct. Comics like this made Churchill the one man who saw it coming. He was the loudest warning, but not the only one. Britain's new fighters and radar helped save it in 1940.",
+   "hint": "Reread the fact file. Did Britain do nothing, or something?"
+  }
+ },
+ {
+  "short": "1939",
+  "ref": "Reader page 5 · Real Heroes, 1942",
+  "title": "4. 1938–1939: Too late to stop it?",
+  "from": 5,
+  "to": 5,
+  "check": {
+   "page": 5,
+   "tag": "Fact-check · Reader page 5",
+   "q": "<span class=\"declass file\"><b>Fact file</b>March 1938: Germany took over Austria. Sept. 1938: At Munich, Britain's leader Neville Chamberlain agreed to let Hitler take part of Czechoslovakia, hoping that would keep the peace. March 1939: Hitler took the rest of Czechoslovakia. Sept. 1, 1939: Germany invaded Poland. Two days later, Britain and France declared war.</span>The comic says Chamberlain bargained while the Nazis \"overran much of Europe behind his back.\" What's the best fact-check?",
+   "right": "Chamberlain openly gave Hitler land at Munich, and Hitler broke the deal.",
+   "wrong": [
+    "Chamberlain never met Hitler; France made the Munich deal all alone.",
+    "Hitler had already conquered France and Poland before Munich.",
+    "The comic is right: Germany ruled most of Europe by early 1938."
+   ],
+   "why": "✓ Correct. Chamberlain wasn't tricked in secret. He agreed at Munich to hand Hitler land. That's called appeasement. Six months later Hitler took the rest of Czechoslovakia. After Germany invaded Poland on Sept. 1, 1939, Britain and France declared war.",
+   "hint": "Compare the first caption on the page to the dates in the fact file."
+  },
+  "check2": {
+   "tag": "The big question · Reader pages 1–5",
+   "q": "Think about every page: Manchuria (1931), China (1937), Austria and Czechoslovakia (1938). When should someone have stepped in, and why?",
+   "right": "Early, like Manchuria in 1931, because each time no one acted, the next grab was bigger.",
+   "wrong": [
+    "Never, because Japan and Germany stopped once they got the land they asked for.",
+    "In 1941, because before then Japan and Germany had not invaded any country.",
+    "In 1939, because Poland was the first country Germany or Japan invaded."
+   ],
+   "why": "✓ Correct. Historians argue about the exact moment, but the pattern is clear: Manchuria, then China, then Austria and Czechoslovakia. Each time the world did little, Japan and Germany took more. By Sept. 1, 1939, stopping them took a world war.",
+   "hint": "Look back at the fact files. Did Japan or Germany ever stop after one grab?"
+  }
+ }
+],
+validate(s){if(!s.name)return{text:"Type your first name + last initial (like Jordan M.) at the top of the questions.",focus:"studentName"};
+ const mc=[1,2,3,4].find(i=>!s.checkDone(i));if(mc)return{text:"Get the check right for part "+mc+" first.",part:mc};
+ const m2=[1,2,3,4].find(i=>!s.check2Done(i));if(m2)return{text:"Get the second check right for part "+m2+" first.",part:m2};return null},
+buildAnswers(s){const I=[1,2,3,4],t=I.flatMap(i=>[s.tries(i)||1,s.tries2(i)||1]);
+ return{Standard:"SS.9-12.WH.29, SS.9-12.WH.30","First-try correct":t.filter(x=>x===1).length+" of 8","Checks":"8 of 8 correct · tries: "+t.join(", ")}}
+};
+</script>
+<script src="../shared/flip-reader.js?v=3mc"></script>
+<script>
+// This page only: choices wait for the read timer, and "Not quite" scrolls into view.
+(function(){
+  const t=document.getElementById("flipTimer");
+  const sync=()=>document.body.classList.toggle("reading-now",t.textContent.trim()!=="");
+  new MutationObserver(sync).observe(t,{childList:true,characterData:true,subtree:true});sync();
+  document.getElementById("flipCards").addEventListener("click",e=>{if(!e.target.closest(".choice"))return;
+    setTimeout(()=>{const f=[...document.querySelectorAll(".flip-part:not([hidden]) .fb")].find(x=>x.textContent.trim());
+      if(f){const r=f.getBoundingClientRect();if(r.bottom>innerHeight-80||r.top<0)f.scrollIntoView({behavior:"smooth",block:"center"})}
+      const a=document.querySelector(".flip-part:not([hidden]) .check2");
+      if(a&&f&&f.classList.contains("ok")){const r=a.getBoundingClientRect();if(r.bottom>innerHeight-80)a.scrollIntoView({behavior:"smooth",block:"center"})}},120)});
+})();
+</script>
+</body></html>
