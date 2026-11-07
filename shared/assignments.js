@@ -150,7 +150,8 @@ window.CLASS_ASSIGNMENTS = {
   "day6-world-in-crisis":        { course: "world-history", unit: 1, day: 6, title: "Day 6 · A World in Crisis", path: "day6-world-in-crisis/", std: ["SS.9-12.WH.31", "SS.9-12.WH.30"] },
   "day7-maus-reading-checks":    { course: "world-history", unit: 1, day: 7, title: "Day 7 · Maus I (Reading)", path: "day7-maus/", std: ["SS.9-12.WH.30", "SS.9-12.WH.33"] },
   "day7-warning-signs":          { course: "world-history", unit: 1, day: 7, title: "Day 7 · Spot the Warning Signs (now in Day 8)" },
-  "day8-wwii-combined":          { course: "world-history", unit: 1, day: 8, title: "Day 8 · Hold the Line, 1931–1939", path: "day8-wwii-decision-map/", std: ["SS.9-12.WH.29", "SS.9-12.WH.30"] },
+  "day8-road-to-war":            { course: "world-history", unit: 1, day: 8, title: "Day 8 · When Should Someone Step In? 1930s Comics (Reading)", path: "day8-road-to-war/", std: ["SS.9-12.WH.29", "SS.9-12.WH.30"] },
+  "day8-wwii-combined":          { course: "world-history", unit: 1, day: 8, title: "Day 8 · Hold the Line, 1931–1939 (older version)" },
   "day8-wwii-decision-map":      { course: "world-history", unit: 1, day: 8, title: "Day 8 · Decision Map (older version)" },
   "day9-maus2-reading-checks":   { course: "world-history", unit: 1, day: 9, title: "Day 9 · Maus II (Reading)", path: "day9-maus2/", std: ["SS.9-12.WH.30", "SS.9-12.WH.33"] },
   "day10-wwii-comics":           { course: "world-history", unit: 1, day: 10, title: "Day 10 · What Wins a War? 1940s War Comics (Reading)", path: "day10-wwii-comics/", std: ["SS.9-12.WH.32", "SS.9-12.WH.33"] },  // public-domain 1940s comics fact-check (Fynn, 11-03)
