@@ -14,7 +14,7 @@
   const KEY = "gov-u6-d1-checks-balances-v3";
   const ASSIGNMENT_ID = "gov-u6-d1-checks-balances";
   const TITLE = "Government · Unit 6 · Day 1 · Branch Wars: Checks & Balances";
-  const STANDARD = "SS.9-12.Gov.4, SS.9-12.Gov.9";
+  const STANDARD = "SS.9-12.Gov.4";
   const OLD_API = "https://fynn-class-assignment-submissions-20261024.neotboy.chatgpt.site/api/submit";
   const LOCK = 5;
   const isTestT = () => !!(window.classIsTestT && window.classIsTestT());   // Test T. (teacher) skips locks and writing rules
@@ -42,9 +42,9 @@
 
   // ---------------- Rounds (HUD chips + word help) ----------------
   const ROUNDS = [
-    { icon: "🥊", tag: "Veto Showdown", foe: "P", terms: [["Bill", "a plan for a law"], ["Veto", "the President's NO on a bill"], ["Override", "Congress beats a veto"], ["Two-thirds (2/3)", "2 out of every 3 votes"]] },
-    { icon: "🔨", tag: "Courts Strike Back", foe: "J", terms: [["Unconstitutional", "breaks the Constitution"], ["Warrant", "a judge's OK to search"], ["Nominee", "the person picked for a job"], ["Confirm", "approve"]] },
-    { icon: "💰", tag: "The Power Grab", foe: "P", terms: [["Treasury", "where the country's money is kept"], ["Appropriation", "a law that says how money is spent"], ["Impeach", "charge an official with wrongdoing"], ["Federal", "national, for the whole country"]] }
+    { icon:"🥊", tag:"Veto Showdown", foe:"P", terms:[["Veto","the President blocks a bill"],["Override","Congress passes it anyway"],["Two-thirds","2 out of every 3 votes"]] },
+    { icon:"🔨", tag:"Court Check", foe:"J", terms:[["Judicial review","courts check laws"],["Warrant","a judge's OK to search"],["Confirm","the Senate approves a judge pick"]] },
+    { icon:"💰", tag:"Power of the Purse", foe:"P", terms:[["Spending law","Congress approves how money is used"],["Impeach","the House charges an official"],["Convict","the Senate finds an official guilty"]] }
   ];
 
   // ---------------- Steps ----------------
