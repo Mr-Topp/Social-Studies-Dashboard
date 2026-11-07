@@ -155,3 +155,13 @@ dialog .close{float:right;border:none;font-size:22px;padding:0 6px}
 .titlemode .tray{display:none}
 header{position:relative;z-index:25}
 .final-tray #sendBtn{position:sticky;bottom:4px;z-index:2}
+
+/* ---- Bottom corners (page-local; shared/turnin.js adds these on its own) ----
+   The "Working as … · Not you? Start fresh" pill sits bottom-left and "Read to me" bottom-right.
+   Keep a clear strip under the tray so they never cover a card, a map box, or Next, and
+   move the "Start over" tab to the middle of that strip so it doesn't sit on top of the pill. */
+.tray{padding-bottom:72px}
+html body .start-over-zone.fixed{left:50%;right:auto;bottom:12px;transform:translateX(-50%)}
+.result + .row{justify-content:flex-end}
+@media (max-height:700px){.tray{padding-bottom:68px}}
+@media (prefers-reduced-motion:reduce){*,*:before,*:after{animation:none!important;transition:none!important}.pcard:hover:not(:disabled){transform:none}}

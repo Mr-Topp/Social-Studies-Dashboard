@@ -26,68 +26,67 @@ const PCOLOR = { D: '#3e6fb0', R: '#c2463f' };
 const INFL = { family: '👪 Family', friends: '🧑‍🤝‍🧑 Friends', school: '🏫 School', faith: '⛪ Faith', job: '💼 Job', media: '📱 Media', community: '🏘️ Community' };
 const QUADS = { pop: 'Populist', con: 'Conservative', lib: 'Liberal', libt: 'Libertarian' };
 const CARDS = {
-  health:   { p: 'D', ic: '🩺', t: 'Government help with health costs', s: 'Help people pay for care' },
-  wage:     { p: 'D', ic: '💵', t: 'Raise the minimum wage', s: "Iowa's is $7.25 an hour" },
-  unions:   { p: 'D', ic: '🦺', t: 'Stand up for unions', s: 'Workers bargain together for pay' },
-  college:  { p: 'D', ic: '🎓', t: 'Help pay for college', s: 'More state money for schools and colleges' },
-  gunsafe:  { p: 'D', ic: '🔒', t: 'Gun safety laws', s: 'Like background checks on all sales' },
-  energy:   { p: 'D', ic: '🌬️', t: 'Clean energy rules', s: 'Stricter limits on pollution' },
-  taxes:    { p: 'R', ic: '✂️', t: 'Cut taxes', s: 'Families and businesses keep more' },
-  regs:     { p: 'R', ic: '📋', t: 'Cut red tape for business', s: 'Less paperwork, fewer permits' },
-  gunright: { p: 'R', ic: '🦌', t: 'Protect gun rights', s: 'Fewer limits on owning guns' },
-  police:   { p: 'R', ic: '🚓', t: 'More money for police', s: 'More officers on the street' },
-  border:   { p: 'R', ic: '🛂', t: 'More border security', s: 'More agents and barriers at the border' },
-  choice:   { p: 'R', ic: '🏫', t: 'School choice', s: 'State money can follow a kid to private school' },
-  farmers:  { p: 'both', ic: '🌽', t: 'Support Iowa farmers', s: 'Ethanol, crop prices, farm aid' },
-  vets:     { p: 'both', ic: '🎖️', t: 'Take care of veterans', s: 'VA care and benefits' },
+  health:   { p: 'D', ic: '🩺', t: 'Government help with health costs', s: 'Help people pay for care', n: 'government help with health costs' },
+  wage:     { p: 'D', ic: '💵', t: 'Raise the minimum wage', s: "Iowa's is $7.25 an hour", n: 'raising the minimum wage' },
+  unions:   { p: 'D', ic: '🦺', t: 'Stand up for unions', s: 'Workers bargain together for pay', n: 'standing up for unions' },
+  college:  { p: 'D', ic: '🎓', t: 'Help pay for college', s: 'More state money for schools and colleges', n: 'help paying for college' },
+  gunsafe:  { p: 'D', ic: '🔒', t: 'Gun safety laws', s: 'Like background checks on all sales', n: 'gun safety laws' },
+  energy:   { p: 'D', ic: '🌬️', t: 'Clean energy rules', s: 'Stricter limits on pollution', n: 'clean energy rules' },
+  taxes:    { p: 'R', ic: '✂️', t: 'Cut taxes', s: 'Families and businesses keep more', n: 'cutting taxes' },
+  regs:     { p: 'R', ic: '📋', t: 'Cut red tape for business', s: 'Less paperwork, fewer permits', n: 'cutting red tape for business' },
+  gunright: { p: 'R', ic: '🦌', t: 'Protect gun rights', s: 'Fewer limits on owning guns', n: 'protecting gun rights' },
+  police:   { p: 'R', ic: '🚓', t: 'More money for police', s: 'More officers on the street', n: 'more money for police' },
+  border:   { p: 'R', ic: '🛂', t: 'More border security', s: 'More agents and barriers at the border', n: 'more border security' },
+  choice:   { p: 'R', ic: '🏫', t: 'School choice', s: 'State money can follow a kid to private school', n: 'school choice' },
+  farmers:  { p: 'both', ic: '🌽', t: 'Support Iowa farmers', s: 'Ethanol, crop prices, farm aid', n: 'supporting Iowa farmers' },
+  vets:     { p: 'both', ic: '🎖️', t: 'Take care of veterans', s: 'VA care and benefits', n: 'taking care of veterans' },
   redirect: { p: 'redirect', ic: '👉', t: 'Try the other booth', s: "Be honest: our party isn't your best fit" }
 };
 const deckOf = b => Object.keys(CARDS).filter(k => CARDS[k].p === b || CARDS[k].p === 'both');
 // Each fairgoer: one clear influence, one money clue + one personal-choices clue, what they respond to.
 const FOLKS = [
   { id: 'dana', name: 'Dana', bio: '34 · VA hospital nurse · Des Moines', clue: 'job', quad: 'lib',
-    say: 'At <mark>my job at the VA hospital</mark>, I see patients skip pills because they cost too much. <u>Government should help bring health costs down.</u> But <u>what people do in their own lives isn\'t the government\'s business.</u>',
+    say: 'At <mark>my job at the VA hospital</mark>, I see patients skip their medicine because they can\'t afford it. <u>The government should step in so seeing a doctor doesn\'t cost so much.</u> But <u>what people do in their own lives isn\'t the government\'s business.</u>',
     wants: ['health'], avoid: ['vets'], twist: 'Dana is registered with no party. Hundreds of thousands of Iowa voters are.',
     look: { skin: 2, hair: 'bun', hc: '#2d211b', shirt: '#6fb7c9', extra: 'badge' } },
   { id: 'earl', name: 'Earl', bio: '63 · corn and hog farmer · near Grundy Center', clue: 'community', quad: 'con',
-    say: '<mark>Everybody in my little town</mark> says the same thing: <u>property taxes are too high and farms drown in paperwork.</u> And <u>I want stricter rules on vaping. Kids get hooked.</u>',
+    say: '<mark>Everybody in my little town</mark> says the same thing: <u>the government takes too much of our money, and we lose whole days on government forms instead of working the land.</u> And <u>I want stricter rules on vaping. Kids get hooked.</u>',
     wants: ['taxes', 'regs', 'farmers'], twist: 'Earl has voted Republican for 40 years. He says both parties show up at the fair to talk farming.',
     look: { skin: 0, hair: 'cap', hc: '#9a9a9a', shirt: '#7b8f4e', extra: 'cap' } },
-  { id: 'maya', name: 'Maya', bio: '19 · Iowa State student · Ames', clue: 'media', quad: 'lib',
-    say: '<mark>My TikTok feed</mark> is full of videos about student debt. Now I think <u>college should cost way less, and the state should help pay.</u> And <u>adults should be free to live how they want.</u>',
-    wants: ['college'], twist: 'Maya hasn\'t picked a party yet. Lots of young voters haven\'t.',
-    look: { skin: 1, hair: 'long', hc: '#141014', shirt: '#c43b3b', extra: 'backpack' } },
   { id: 'ray', name: 'Ray', bio: '47 · owns a trucking company · Council Bluffs', clue: 'family', quad: 'libt',
-    say: '<mark>My grandpa started this company</mark>, and he always said: keep government off your back. <u>Cut taxes and cut the paperwork.</u> And <u>let adults make their own choices, like betting at 18.</u>',
+    say: '<mark>My grandpa started this company</mark>, and he always said: keep government off your back. <u>The government takes too much of every dollar we earn, and every new truck means a stack of forms.</u> And <u>let adults make their own choices, like betting at 18.</u>',
     wants: ['taxes', 'regs'], twist: 'Ray votes Republican on taxes, but on personal choices he sounds libertarian.',
     look: { skin: 3, hair: 'short', hc: '#4a3426', shirt: '#2f5d7c', extra: 'glasses' } },
   { id: 'walt', name: 'Walt', bio: '72 · Vietnam veteran · Dubuque', clue: 'friends', quad: 'pop',
-    say: '<mark>My old Army buddies</mark> and I still meet every week. We agree: <u>the government must take care of veterans and protect Social Security checks for retirees.</u> And <u>we need stricter rules, like curfews for teens.</u>',
+    say: '<mark>My old Army buddies</mark> and I still meet every week. We agree: <u>we served this country, so the government owes us good doctors and every check we were promised, Social Security too.</u> And <u>we need stricter rules, like curfews for teens.</u>',
     wants: ['vets'], twist: 'Walt has voted for Democrats AND Republicans. He votes for the person, not the party.',
     look: { skin: 2, hair: 'bald', hc: '#cfcfcf', shirt: '#5b6b3c', extra: 'vetcap' } },
   { id: 'tyler', name: 'Tyler', bio: '27 · union electrician · Cedar Rapids', clue: 'family', quad: 'pop',
-    say: '<mark>Growing up, my dad always told me</mark> unions built this country. <u>Unions got us better pay, and I want the minimum wage raised too.</u> And <u>keep strict rules on vaping and gambling.</u>',
+    say: '<mark>Growing up, my dad always told me</mark> working people are stronger when they stick together. <u>My crew got better pay by standing up to the boss as a group. And the lowest pay the law allows is way too low. The government should push it up.</u> And <u>keep strict rules on vaping and gambling.</u>',
     wants: ['unions', 'wage'], avoid: ['gunright'], twist: 'Plot twist: Tyler is a Democrat who also hunts and strongly backs gun rights. Lots of union members do.',
     look: { skin: 1, hair: 'short', hc: '#a0522d', shirt: '#f0a43a', extra: 'hardhat' } },
   { id: 'rosa', name: 'Rosa', bio: '45 · owns a bakery · West Liberty', clue: 'job', quad: 'con',
-    say: '<mark>Running my bakery</mark> taught me a lot. <u>Small shops need lower taxes and less red tape.</u> And <u>keep marijuana illegal in Iowa.</u>',
+    say: '<mark>Running my bakery</mark> taught me a lot. <u>Little shops like mine pay too much to the government, and I spend more time on government forms than on baking.</u> And <u>keep marijuana illegal in Iowa.</u>',
     wants: ['regs', 'taxes'], twist: 'Plot twist: Rosa is a registered Democrat. On business rules, she agrees with Republicans.',
     look: { skin: 2, hair: 'long', hc: '#2b1d16', shirt: '#f4f1ea', extra: 'apron' } },
+  // Jayden isn't in today's line (Ray took his spot so both booths get fair traffic). Kept so games saved earlier still load.
   { id: 'jayden', name: 'Jayden', bio: '18 · high school senior · Waterloo', clue: 'school', quad: 'pop',
     say: '<mark>Our econ teacher</mark> made us make a budget on $7.25 an hour. It doesn\'t work. <u>Pay should go up.</u> And <u>keep the betting age at 21. Gambling hooks too many people.</u>',
     wants: ['wage'], avoid: ['unions'], twist: 'Jayden just turned 18 and registered to vote at the voter sign-up booth in this same building.',
     look: { skin: 3, hair: 'short', hc: '#120d0b', shirt: '#4f8f5b', extra: 'none' } },
   { id: 'priya', name: 'Priya', bio: '29 · software tester, mom of a 6-year-old · West Des Moines', clue: 'media', quad: 'libt',
-    say: 'I listen to <mark>political podcasts on my commute</mark> every day. They convinced me <u>taxes are too high and government wastes money.</u> I also want to pick my daughter\'s school. And <u>what adults do on their own time is their business.</u>',
+    say: 'I listen to <mark>political podcasts on my commute</mark> every day. They convinced me <u>the government takes too much of my paycheck and wastes it.</u> I also want to send my daughter to whatever school fits her best, even a private one, and have the state money go with her. And <u>what adults do on their own time is their business.</u>',
     wants: ['taxes', 'choice'], avoid: ['regs'], twist: 'Priya usually votes Republican, but on personal freedom she agrees with a lot of Democrats.',
     look: { skin: 1, hair: 'long', hc: '#1c1412', shirt: '#7b5fb2', extra: 'earbuds' } },
   { id: 'luis', name: 'Luis', bio: '51 · factory worker · Newton', clue: 'faith', quad: 'lib',
-    say: '<mark>My church</mark> carried my family after the Maytag plant closed years ago. <u>Workers need protection: good wages and strong unions.</u> But <u>the government shouldn\'t tell adults how to live their lives.</u>',
+    say: '<mark>My church</mark> carried my family after the Maytag plant closed years ago. <u>The government should make sure workers earn enough to live on, and protect their right to team up and push for better pay.</u> But <u>the government shouldn\'t tell adults how to live their lives.</u>',
     wants: ['unions', 'wage'], twist: 'Luis has switched parties twice in his life. Party isn\'t forever.',
     look: { skin: 2, hair: 'short', hc: '#2a2a2a', shirt: '#8a4b3a', extra: 'none' } }
 ];
 const FOLK = Object.fromEntries(FOLKS.map(f => [f.id, f]));
-const BASE = [['dana', 'earl', 'walt', 'priya'], ['tyler', 'rosa', 'jayden', 'luis']]; // 8 fairgoers, 4 per shift
+// 8 fairgoers, 4 per shift. Each shift has all four idea-map spots, and each booth signs about half the line:
+// shift 1 D signs Dana, Walt, Earl (farmers) / R signs Earl, Walt, Priya; shift 2 D signs Tyler, Luis / R signs Rosa, Ray.
+const BASE = [['dana', 'earl', 'walt', 'priya'], ['tyler', 'rosa', 'ray', 'luis']];
 let ORDER = BASE[0].concat(BASE[1]);
 
 const CHECKS = {
@@ -100,7 +99,7 @@ const CHECKS = {
 const fresh = () => ({ v: 1, order: shuffle(BASE[0]).concat(shuffle(BASE[1])), phase: 'title', name: '', room: '', boothA: Math.random() < .5 ? 'D' : 'R', idx: 0, step: 'listen', res: {}, score: 0, checks: {}, writing: {}, turnedIn: false, bots: null, hand: null, chips: null, pat: 60, seen: {} });
 let st;
 try { st = JSON.parse(localStorage.getItem(KEY)); } catch (e) {}
-if (!st || st.v !== 1 || !st.order || st.order.length !== 8) st = fresh();
+if (!st || st.v !== 1 || !Array.isArray(st.order) || st.order.length !== 8 || st.order.some(id => !FOLK[id])) st = fresh();
 ORDER = st.order;
 const save = () => { try { localStorage.setItem(KEY, JSON.stringify(st)); } catch (e) {} };
 const HALF = 4;
@@ -185,9 +184,6 @@ function pIntro() {
   };
 }
 
-function deckHTML(b) {
-  return `<div class="deck"><h3 style="color:${PCOLOR[b]}">${PARTY[b]} booth deck</h3><ul>${deckOf(b).map(k => `<li class="${CARDS[k].p === 'both' ? 'shared' : ''}">${CARDS[k].ic} ${esc(CARDS[k].t)}${CARDS[k].p === 'both' ? ' (both)' : ''}</li>`).join('')}</ul></div>`;
-}
 function pPrimer() {
   SCENE.set(null);
   const card = $('#card'); card.className = 'card fun';
@@ -221,11 +217,9 @@ function pPlay() {
   ({ listen: sListen, map: sMap, pitch: sPitch, result: sResult })[st.step](f);
 }
 function bubble(f, withTwist) {
-  const r = rec(f.id);
   const el = $('#bubble'); el.hidden = false; if (!SCENE.arrived()) el.classList.add('wait'); else el.classList.remove('wait');
   const say = st.idx >= 3 ? f.say.replace(/<\/?mark>/g, '') : f.say;
   el.innerHTML = `<span class="who">${esc(f.name)} · ${esc(f.bio)}</span>${say}${withTwist ? `<span class="twist">🔎 ${esc(f.twist)}</span>` : ''}`;
-  if (!withTwist || r.pitch) {}
 }
 
 function sListen(f) {
@@ -300,9 +294,9 @@ function play(f, k, right) {
 function explain(f, b) {
   const right = correctCards(f, b), r = rec(f.id);
   const cards = right.filter(k => k !== 'redirect');
-  const names = cards.map(k => esc(CARDS[k].t.toLowerCase())).join(' or ');
-  if (!cards.length) return `${f.name}'s top issues (${f.wants.map(k => esc(CARDS[k].t.toLowerCase())).join(', ')}) aren't in the ${PARTY[b]} deck, so the honest move was sending ${f.name} to the ${PARTY[other(b)]} booth.`;
-  if (right.includes('redirect')) return `${f.name}'s #1 issue isn't in the ${PARTY[b]} deck. Pitching <b>${names}</b> or honestly sending ${f.name} to the ${PARTY[other(b)]} booth both work.`;
+  const names = cards.map(k => esc(CARDS[k].n)).join(' or ');
+  if (!cards.length) return `${f.name}'s top issues (${f.wants.map(k => esc(CARDS[k].n)).join(', ')}) aren't in the ${PARTY[b]}' deck, so the honest move was sending ${f.name} to the ${PARTY[other(b)]} booth.`;
+  if (right.includes('redirect')) return `${f.name}'s #1 issue isn't in the ${PARTY[b]}' deck. Playing <b>${cards.map(k => esc(CARDS[k].t)).join('</b> or <b>')}</b> or honestly sending ${f.name} to the ${PARTY[other(b)]} booth both work.`;
   if (r.pitch === 'walked' && r.card === CARDS.redirect.t) return `${f.name} cares about <b>${names}</b>, and that WAS in your deck. Sending ${f.name} away lost a supporter.`;
   if (r.pitch === 'walked') return `${f.name} cares most about <b>${names}</b>, and that card was in your hand.`;
   return `${f.name} cares about <b>${names}</b>${cards.some(k => CARDS[k].p === 'both') ? ' (a goal both parties share)' : ''}. That's in your deck.`;
@@ -317,6 +311,8 @@ function sResult(f) {
   $('#nextBtn').onclick = nextFolk;
 }
 function nextFolk() {
+  // Clear the speech bubble and send this fairgoer walking off now, before any fair news or shift change.
+  const bub = $('#bubble'); bub.hidden = true; void bub.offsetWidth; SCENE.set(null); // reflow so the next bubble fades in fresh
   if (st.idx === ORDER.length - 1) { st.phase = 'endchecks'; save(); return render(); }
   const nextIdx = st.idx + 1;
   const go = () => { st.idx = nextIdx; st.step = 'listen'; st.chips = null; st.hand = null; save(); render(); };
@@ -366,15 +362,19 @@ function pEnd() {
 
 /* ---------------- FINAL + TURN IN ---------------- */
 const PROMPTS = [
-  { id: 'cmp', short: 'Compare the parties', label: '1. You worked BOTH booths. Name one thing the two parties disagree on and one goal they both share.', stem: 'The parties disagree on ___. They both want ___.', min: 60,
-    must: [['tax', 'wage', 'union', 'gun', 'health', 'red tape', 'police', 'border', 'school', 'college', 'energy', 'pollution', 'business'], ['farm', 'veteran', 'vets']], msg: 'In answer 1, name a disagreement AND a goal they share (like farmers or veterans).' },
-  { id: 'why', short: 'Party vs. beliefs', label: '2. Pick Rosa, Tyler, or Priya. What do they believe that doesn\'t match their party?', stem: '___ is a ___, but ___. That shows ___.', min: 60,
+  { id: 'cmp', short: 'Compare the parties', label: '1. You worked BOTH booths. Name one thing the two parties disagree on and one goal they both share.', stem: 'The parties disagree on ___. They both want ___.', min: 45, own: 3,
+    must: [['tax', 'wage', 'union', 'gun', 'health', 'red tape', 'police', 'border', 'school', 'college', 'energy', 'pollution', 'business', 'pay'], ['farm', 'veteran', 'vet']], msg: 'In answer 1, name a disagreement AND a goal they share (like farmers or veterans).' },
+  { id: 'why', short: 'Party vs. beliefs', label: '2. Pick Rosa, Tyler, or Priya. What do they believe that doesn\'t match their party?', stem: '___ is a ___, but ___. That shows ___.', min: 60, own: 6,
     must: [['rosa', 'tyler', 'priya']], msg: 'In answer 2, name Rosa, Tyler, or Priya and the belief that doesn\'t match.' },
-  { id: 'crit', optional: true, short: '⭐ Go deeper', label: '⭐ Go deeper (optional, +300 🌽): Most Iowa voters only have two big parties to pick from. Is that good or bad for people like Walt or Dana? Give one plus AND one minus.', stem: 'One plus is ___. One minus is ___. Overall I think ___ because ___.', min: 90,
-    must: [['plus', 'good', 'help', 'benefit'], ['minus', 'bad', 'problem', 'hurt', 'downside']], msg: 'For Go deeper, give one plus AND one minus.' }
+  // Required: SS.9-12.Gov.12 asks students to critique how parties (intermediary institutions) shape government.
+  { id: 'crit', short: 'Two big parties', label: '3. Most Iowa voters only have two big parties to pick from. Is that good or bad for people like Walt or Dana? Give one plus AND one minus.', stem: 'One plus is ___. One minus is ___.', min: 60, own: 5,
+    must: [['plus', 'good', 'help', 'benefit', 'easy', 'easier', 'simple', 'simpler', 'pro', 'upside', 'better'], ['minus', 'bad', 'problem', 'hurt', 'downside', 'con', 'worse', 'fit', 'stuck']], msg: 'In answer 3, give one plus AND one minus of having only two big parties.' }
 ];
-const WHY_WORDS = { rosa: ['tax', 'taxes', 'red tape', 'permit', 'business', 'marijuana', 'bakery', 'republican'], tyler: ['gun', 'guns', 'hunt', 'hunting', 'rifle'], priya: ['adults', 'own time', 'freedom', 'personal', 'democrat', 'choices'] };
-const hasWord = (t, w) => new RegExp('\\b' + w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + (w.length > 4 ? '' : '\\b')).test(t);
+const WHY_WORDS = { rosa: ['tax', 'red tape', 'permit', 'paperwork', 'form', 'rule', 'regulation', 'government', 'business', 'shop', 'marijuana', 'bakery', 'republican'], tyler: ['gun', 'hunt', 'rifle', 'republican'], priya: ['adult', 'own time', 'freedom', 'free', 'personal', 'democrat', 'choice', 'their business', 'how they live'] };
+// A keyword matches as a whole word plus normal endings: tax -> taxes, gun -> guns, farm -> farmers/farming,
+// vet -> vets, wage -> wages. Longer keywords (5+ letters) also match as the start of a word (veteran -> veterans).
+const ENDINGS = "(?:s|es|ed|d|er|ers|ing|ies|'s|s')?";
+const hasWord = (t, w) => new RegExp('\\b' + w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + (w.length > 4 ? '' : ENDINGS + '\\b')).test(t);
 function firstTry() {
   const out = { clue: [0, 0], map: [0, 0], pitch: [0, 0], checks: [0, 0] };
   ORDER.forEach(id => { const r = st.res[id]; if (!r || !r.pitch) return; out.clue[1]++; out.map[1]++; out.pitch[1]++; if (!r.clueWrong) out.clue[0]++; if (!r.mapWrong) out.map[0]++; if (r.pitch !== 'walked') out.pitch[0]++; });
@@ -407,7 +407,7 @@ function checkWriting(p, v) {
   if ((v.match(/[a-z][.!?](\s|$)/gi) || []).length < 2) return 'Write at least 2 full sentences for: ' + p.short + '.';
   if (p.id === 'why') { const who = Object.keys(WHY_WORDS).find(n => hasWord(t, n)); if (who && !WHY_WORDS[who].some(w => hasWord(t, w))) return 'In answer 2, say what ' + who[0].toUpperCase() + who.slice(1) + ' believes that doesn\'t match their party.'; }
   const stem = new Set(p.stem.toLowerCase().match(/[a-z']+/g) || []);
-  if (new Set((t.match(/[a-z']{3,}/g) || []).filter(w => !stem.has(w))).size < 6) return 'Add more of your own words for: ' + p.short + '.';
+  if (new Set((t.match(/[a-z']{3,}/g) || []).filter(w => !stem.has(w))).size < (p.own || 6)) return 'Add more of your own words for: ' + p.short + '.';
   if (p.must.some(gr => !gr.some(w => hasWord(t, w)))) return p.msg;
   return '';
 }
@@ -420,13 +420,13 @@ async function turnIn() {
     'Booths worked': PARTY[st.boothA] + ' then ' + PARTY[other(st.boothA)] + ' (assigned at random)', 'Corn score': String(st.score) };
   ORDER.forEach((id, i) => { const r = st.res[id] || {}; const f = FOLK[id]; answers['Fairgoer ' + (i + 1) + ' · ' + f.name] = `Influence ${r.clueWrong ? '✗ (' + r.clueWrong + ' wrong)' : '✓'} · Map ${r.mapWrong ? '✗ (' + r.mapWrong + ' wrong)' : '✓'} · Pitched "${r.card || '-'}" → ${r.pitch === 'signed' ? 'signed up' : r.pitch === 'honest' ? 'honest redirect' : 'walked away'}`; });
   Object.keys(st.checks).forEach(k => { const d = CHECKS[k]; answers['Check · ' + d.prompt.replace(/<[^>]+>/g, '').slice(0, 60)] = d.options[0] + (st.checks[k].wrong ? ' (after ' + st.checks[k].wrong + ' wrong)' : ' (first try)'); });
-  PROMPTS.forEach(p => answers['Writing: ' + p.short] = ($('#w_' + p.id).value || '').trim() || (p.optional ? '(skipped)' : ''));
+  PROMPTS.forEach(p => answers['Writing: ' + p.short] = ($('#w_' + p.id).value || '').trim());
   $('#sendBtn').disabled = true; msg.className = 'fb'; msg.textContent = 'Sending your work…';
   try {
     const res = await classTurnIn(OLD_API, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ studentName: st.name, assignmentId: ASSIGN, assignmentTitle: 'Government Unit 2 · Day 2 · Fair Game', answers }) });
     const data = await res.json().catch(() => ({}));
     if (!res.ok) throw new Error(data.error || 'Your work did not save. Try again.');
-    if (!st.turnedIn && (($('#w_crit') || {}).value || '').trim()) { st.score += 300; pushScore(); hud(); } st.turnedIn = true; save(); msg.className = 'fb good'; msg.textContent = 'Turned in! Your teacher can see your work. You\'re done.'; $('#sendBtn').textContent = 'Turned in ✓'; $('#sendBtn').disabled = false;
+    st.turnedIn = true; save(); msg.className = 'fb good'; msg.textContent = 'Turned in! Your teacher can see your work. You\'re done.'; $('#sendBtn').textContent = 'Turned in ✓'; $('#sendBtn').disabled = false;
   } catch (e) { msg.className = 'fb bad'; msg.textContent = e.message || 'Could not turn in. Try again.'; $('#sendBtn').disabled = false; }
 }
 
@@ -437,17 +437,20 @@ const SCENE = (() => {
   const cv = $('#scene'), ctx = cv.getContext('2d'), H = 400; let W = 960;
   function fit() { const r = cv.parentElement.getBoundingClientRect(); if (!r.height) return; W = Math.max(760, Math.min(1500, Math.round(H * r.width / r.height))); cv.width = W; cv.height = H; }
   fit(); window.addEventListener('resize', fit);
-  let folk = null, boothParty = null, x = -140, targetX = 230, mood = 0, moodT = 0, leaving = null, kernels = [], t0 = performance.now();
+  let folk = null, boothParty = null, x = -140, targetX = 230, mood = 0, moodT = 0, kernels = [], t0 = performance.now();
+  // Reduced motion (Chromebook setting): no walking, no flying corn, Ferris wheel and crowd hold still.
+  const RMQ = window.matchMedia ? matchMedia('(prefers-reduced-motion: reduce)') : null, still = () => !!(RMQ && RMQ.matches);
   let stepT = 0, arrived = false, out = null, qShift = 0, floats = [];
   const STEP_MS = 1100, ease = t => 1 - Math.pow(1 - t, 3), lerp = (a, b, t) => a + (b - a) * t;
   function showBubble() { const el = $('#bubble'); el.classList.remove('wait'); }
   const SKIN = ['#f1c9a5', '#d9a77c', '#a8714b', '#6b4630'];
+  // Changing fairgoers (or closing the booth with f = null): the one at the counter walks off to the right
+  // while the next one walks up. Everyone stays at the counter until the student clicks Next.
   function set(f, b) {
     boothParty = b || boothParty;
     if (f !== folk) {
-      if (folk && f && !leaving) out = { f: folk, x, m: mood > 0 ? 1 : mood };
-      else if (folk && f && leaving && x > -150 && x < W + 150) out = { f: folk, x, m: mood, dir: leaving };
-      folk = f; leaving = null; mood = 0; x = 30;
+      if (folk) out = still() ? null : { f: folk, x, m: mood > 0 ? 1 : mood };
+      folk = f; mood = 0; x = 30;
       if (f) { stepT = performance.now(); arrived = false; qShift = 1; $('#bubble').classList.add('wait'); }
     }
   }
@@ -455,10 +458,9 @@ const SCENE = (() => {
   function setMood(m) { mood = m; moodT = performance.now(); }
   function react(kind, pts) {
     const now = performance.now(), jx = Math.min(W - 330, 760) + 30;
-    if (kind === 'signed' || kind === 'honest') { setMood(1); for (let i = 0; i < 7; i++) kernels.push({ sx: targetX + 60, sy: 240, ex: jx - 14 + Math.random() * 28, ey: 300, t: now + i * 80, d: 650 }); }
+    if (kind === 'signed' || kind === 'honest') { setMood(1); if (!still()) for (let i = 0; i < 7; i++) kernels.push({ sx: targetX + 60, sy: 240, ex: jx - 14 + Math.random() * 28, ey: 300, t: now + i * 80, d: 650 }); }
     else setMood(-1);
     if (pts) floats.push({ txt: '+' + pts + ' 🌽', x: jx, y: 300, t: now + 500 });
-    if (kind !== 'signed') setTimeout(() => { leaving = 1; }, 1100);
   }
   /* background */
   function sky(now) {
@@ -538,28 +540,28 @@ const SCENE = (() => {
     // kernels arc from the fairgoer into the jar
     kernels = kernels.filter(k => { if (now < k.t) return true; const p = Math.min(1, (now - k.t) / k.d); const kx = lerp(k.sx, k.ex, p), ky = lerp(k.sy, k.ey, p) - Math.sin(p * Math.PI) * 45; ctx.fillStyle = '#f0c94d'; ctx.strokeStyle = '#c99a1e'; ctx.lineWidth = 1.5; ctx.beginPath(); ctx.ellipse(kx, ky, 5, 7, p * 6, 0, 7); ctx.fill(); ctx.stroke(); return p < 1; });
     // floating points
-    floats = floats.filter(fl => { if (now < fl.t) return true; const p = Math.min(1, (now - fl.t) / 1300); ctx.globalAlpha = 1 - p * p; ctx.font = '900 28px system-ui,Arial'; ctx.lineWidth = 5; ctx.strokeStyle = '#fff'; ctx.strokeText(fl.txt, fl.x, fl.y - p * 40); ctx.fillStyle = '#2f9e60'; ctx.fillText(fl.txt, fl.x, fl.y - p * 40); ctx.globalAlpha = 1; return p < 1; });
+    floats = floats.filter(fl => { if (now < fl.t) return true; const p = Math.min(1, (now - fl.t) / 1300); ctx.globalAlpha = 1 - p * p; ctx.font = '900 28px system-ui,Arial'; ctx.lineWidth = 5; ctx.strokeStyle = '#fff'; const fy = fl.y - (still() ? 0 : p * 40); ctx.strokeText(fl.txt, fl.x, fy); ctx.fillStyle = '#2f9e60'; ctx.fillText(fl.txt, fl.x, fy); ctx.globalAlpha = 1; return p < 1; });
   }
   function draw(now) {
-    const dt = Math.min(50, now - t0); t0 = now;
-    sky(now);
+    const dt = Math.min(50, now - t0), rm = still(); t0 = now;
+    sky(rm ? 0 : now);
     // queue behind
     if (folk && st.phase === 'play') {
-      qShift = Math.max(0, 1 - (now - stepT) / STEP_MS); const qs = ease(1 - qShift);
+      qShift = rm ? 0 : Math.max(0, 1 - (now - stepT) / STEP_MS); const qs = ease(1 - qShift);
       const left = ORDER.length - st.idx - 1;
       for (let i = 0; i < Math.min(3, left); i++) { const qx = lerp(30 + (i + 1) * 52, 30 + i * 52, qs), qb = qShift > 0 ? Math.abs(Math.sin(now / 110 + i)) * -3 : 0; ctx.globalAlpha = .55; person(qx, 250 + qb, .32, { skin: (i + st.idx) % 4, hair: ['short', 'long', 'cap'][i % 3], hc: '#3a2a20', shirt: ['#8fb37a', '#d9a441', '#7aa6c2'][i], extra: 'none' }, 0); ctx.globalAlpha = 1; }
     }
+    if (out && rm) out = null;
     if (out) { // last fairgoer walks off to the right
-      out.x += (out.dir || 1) * dt * 0.7;
+      out.x += dt * 0.7;
       walker(out.x, 175, 1, out.f.look, out.m, now, 1);
-      if (out.x > W + 160 || out.x < -160) out = null;
+      if (out.x > W + 160) out = null;
     }
     if (folk) {
       const m = (now - moodT < 1600 || Math.abs(mood) >= 1) ? mood : 0;
-      const face = (st.step === 'result' && !leaving) ? mood : m;
-      if (leaving) { x += leaving * dt * 0.7; walker(x, 175, 1, folk.look, face, now, 1); }
-      else {
-        const p = Math.min(1, (now - stepT) / STEP_MS), e = ease(p);
+      const face = st.step === 'result' ? mood : m;
+      {
+        const p = rm ? 1 : Math.min(1, (now - stepT) / STEP_MS), e = ease(p);
         x = lerp(30, targetX, e);
         if (p >= 1 && !arrived) { arrived = true; showBubble(); }
         ctx.globalAlpha = lerp(.55, 1, Math.min(1, p * 2));
