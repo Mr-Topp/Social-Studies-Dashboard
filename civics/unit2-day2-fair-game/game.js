@@ -222,7 +222,7 @@ function pPlay() {
 }
 function bubble(f, withTwist) {
   const r = rec(f.id);
-  const el = $('#bubble'); el.hidden = false;
+  const el = $('#bubble'); el.hidden = false; if (!SCENE.arrived()) el.classList.add('wait'); else el.classList.remove('wait');
   const say = st.idx >= 3 ? f.say.replace(/<\/?mark>/g, '') : f.say;
   el.innerHTML = `<span class="who">${esc(f.name)} · ${esc(f.bio)}</span>${say}${withTwist ? `<span class="twist">🔎 ${esc(f.twist)}</span>` : ''}`;
   if (!withTwist || r.pitch) {}
@@ -294,7 +294,7 @@ function play(f, k, right) {
   let pts = 0;
   if (ok) { pts = 100; if (r.clueWrong === 0) pts += 20; if (r.mapWrong === 0) pts += 20; if (st.rainFor === st.idx) pts += 50; if (st.reporterFor === st.idx) pts *= 2; }
   r.pts = pts; st.score += pts; botsStep();
-  SCENE.react(r.pitch);
+  SCENE.react(r.pitch, pts);
   st.step = 'result'; save(); pushScore(); render();
 }
 function explain(f, b) {
@@ -438,16 +438,27 @@ const SCENE = (() => {
   function fit() { const r = cv.parentElement.getBoundingClientRect(); if (!r.height) return; W = Math.max(760, Math.min(1500, Math.round(H * r.width / r.height))); cv.width = W; cv.height = H; }
   fit(); window.addEventListener('resize', fit);
   let folk = null, boothParty = null, x = -140, targetX = 230, mood = 0, moodT = 0, leaving = null, kernels = [], t0 = performance.now();
+  let stepT = 0, arrived = false, out = null, qShift = 0, floats = [];
+  const STEP_MS = 1100, ease = t => 1 - Math.pow(1 - t, 3), lerp = (a, b, t) => a + (b - a) * t;
+  function showBubble() { const el = $('#bubble'); el.classList.remove('wait'); }
   const SKIN = ['#f1c9a5', '#d9a77c', '#a8714b', '#6b4630'];
   function set(f, b) {
     boothParty = b || boothParty;
-    if (f !== folk) { folk = f; x = f ? -140 : x; leaving = null; mood = 0; }
+    if (f !== folk) {
+      if (folk && f && !leaving) out = { f: folk, x, m: mood > 0 ? 1 : mood };
+      else if (folk && f && leaving && x > -150 && x < W + 150) out = { f: folk, x, m: mood, dir: leaving };
+      folk = f; leaving = null; mood = 0; x = 30;
+      if (f) { stepT = performance.now(); arrived = false; qShift = 1; $('#bubble').classList.add('wait'); }
+    }
   }
+  function isArrived() { return !folk || arrived; }
   function setMood(m) { mood = m; moodT = performance.now(); }
-  function react(kind) {
-    if (kind === 'signed') { setMood(1); for (let i = 0; i < 6; i++) kernels.push({ x: 640 + Math.random() * 20, y: 150 - i * 12, vy: 0, t: performance.now() + i * 90 }); }
-    else if (kind === 'honest') { setMood(1); setTimeout(() => { leaving = 1; }, 900); }
-    else { setMood(-1); setTimeout(() => { leaving = -1; }, 900); }
+  function react(kind, pts) {
+    const now = performance.now(), jx = Math.min(W - 330, 760) + 30;
+    if (kind === 'signed' || kind === 'honest') { setMood(1); for (let i = 0; i < 7; i++) kernels.push({ sx: targetX + 60, sy: 240, ex: jx - 14 + Math.random() * 28, ey: 300, t: now + i * 80, d: 650 }); }
+    else setMood(-1);
+    if (pts) floats.push({ txt: '+' + pts + ' 🌽', x: jx, y: 300, t: now + 500 });
+    if (kind !== 'signed') setTimeout(() => { leaving = 1; }, 1100);
   }
   /* background */
   function sky(now) {
@@ -502,6 +513,11 @@ const SCENE = (() => {
     if (m < -0.4) { ctx.beginPath(); ctx.moveTo(-24, -28); ctx.lineTo(-8, -23); ctx.moveTo(24, -28); ctx.lineTo(8, -23); ctx.stroke(); }
     ctx.restore();
   }
+  function walker(px, py, s, look, m, now, amt) {
+    if (!amt) return person(px, py, s, look, m);
+    const ph = now / 130, bob = -Math.abs(Math.sin(ph)) * 6 * s * amt;
+    ctx.save(); ctx.translate(px, py + bob); ctx.rotate(Math.sin(ph) * 0.035 * amt); person(0, 0, s, look, m); ctx.restore();
+  }
   function boothFront(now) {
     const c = boothParty ? PCOLOR[boothParty] : '#3aa776';
     // awning
@@ -510,7 +526,7 @@ const SCENE = (() => {
     ctx.fillStyle = '#9b6b43'; ctx.fillRect(0, 318, W, 14);
     ctx.fillStyle = c; ctx.fillRect(0, 332, W, H - 332);
     ctx.fillStyle = '#fff'; ctx.font = 'bold 26px system-ui,Arial'; ctx.textAlign = 'center';
-    ctx.fillText(boothParty ? (PARTY[boothParty] || '').toUpperCase() + ' · SIGN UP HERE' : 'IOWA STATE FAIR', W / 2 + 140, 370);
+    ctx.fillText(boothParty ? 'INTERESTED IN VOTING?' : 'IOWA STATE FAIR', W / 2 + 140, 370);
     if (!boothParty) return;
     // kernel jar
     const jx = Math.min(W - 330, 760), jy = 210;
@@ -518,27 +534,44 @@ const SCENE = (() => {
     ctx.fillStyle = '#6b7780'; ctx.fillRect(jx + 6, jy - 10, 48, 12);
     const n = ORDER.filter(id => st.res[id] && st.res[id].pitch && st.res[id].pitch !== 'walked').length;
     ctx.fillStyle = '#f0c94d'; const lvl = Math.min(1, n / 10); ctx.fillRect(jx + 4, jy + 104 - 96 * lvl, 52, 96 * lvl);
-    ctx.fillStyle = '#263b50'; ctx.font = 'bold 12px system-ui,Arial'; ctx.fillText(n + ' 🌽', jx + 30, jy + 128);
-    // falling kernels
-    kernels = kernels.filter(k => { if (now < k.t) return true; k.vy += .5; k.y += k.vy; ctx.fillStyle = '#f0c94d'; ctx.beginPath(); ctx.ellipse(k.x, k.y, 5, 7, 0, 0, 7); ctx.fill(); return k.y < jy + 100; });
+    ctx.font = 'bold 16px system-ui,Arial'; ctx.lineWidth = 4; ctx.strokeStyle = '#fff'; ctx.strokeText(n + ' 🌽', jx + 30, jy + 26); ctx.fillStyle = '#263b50'; ctx.fillText(n + ' 🌽', jx + 30, jy + 26);
+    // kernels arc from the fairgoer into the jar
+    kernels = kernels.filter(k => { if (now < k.t) return true; const p = Math.min(1, (now - k.t) / k.d); const kx = lerp(k.sx, k.ex, p), ky = lerp(k.sy, k.ey, p) - Math.sin(p * Math.PI) * 45; ctx.fillStyle = '#f0c94d'; ctx.strokeStyle = '#c99a1e'; ctx.lineWidth = 1.5; ctx.beginPath(); ctx.ellipse(kx, ky, 5, 7, p * 6, 0, 7); ctx.fill(); ctx.stroke(); return p < 1; });
+    // floating points
+    floats = floats.filter(fl => { if (now < fl.t) return true; const p = Math.min(1, (now - fl.t) / 1300); ctx.globalAlpha = 1 - p * p; ctx.font = '900 28px system-ui,Arial'; ctx.lineWidth = 5; ctx.strokeStyle = '#fff'; ctx.strokeText(fl.txt, fl.x, fl.y - p * 40); ctx.fillStyle = '#2f9e60'; ctx.fillText(fl.txt, fl.x, fl.y - p * 40); ctx.globalAlpha = 1; return p < 1; });
   }
   function draw(now) {
     const dt = Math.min(50, now - t0); t0 = now;
     sky(now);
     // queue behind
-    if (folk && st.phase === 'play') { const left = ORDER.length - st.idx - 1; for (let i = 0; i < Math.min(3, left); i++) { ctx.globalAlpha = .55; person(30 + i * 52, 250, .32, { skin: (i + st.idx) % 4, hair: ['short', 'long', 'cap'][i % 3], hc: '#3a2a20', shirt: ['#8fb37a', '#d9a441', '#7aa6c2'][i], extra: 'none' }, 0); ctx.globalAlpha = 1; } }
+    if (folk && st.phase === 'play') {
+      qShift = Math.max(0, 1 - (now - stepT) / STEP_MS); const qs = ease(1 - qShift);
+      const left = ORDER.length - st.idx - 1;
+      for (let i = 0; i < Math.min(3, left); i++) { const qx = lerp(30 + (i + 1) * 52, 30 + i * 52, qs), qb = qShift > 0 ? Math.abs(Math.sin(now / 110 + i)) * -3 : 0; ctx.globalAlpha = .55; person(qx, 250 + qb, .32, { skin: (i + st.idx) % 4, hair: ['short', 'long', 'cap'][i % 3], hc: '#3a2a20', shirt: ['#8fb37a', '#d9a441', '#7aa6c2'][i], extra: 'none' }, 0); ctx.globalAlpha = 1; }
+    }
+    if (out) { // last fairgoer walks off to the right
+      out.x += (out.dir || 1) * dt * 0.7;
+      walker(out.x, 175, 1, out.f.look, out.m, now, 1);
+      if (out.x > W + 160 || out.x < -160) out = null;
+    }
     if (folk) {
-      if (leaving) { x += leaving * dt * 0.6; }
-      else if (x < targetX) x = Math.min(targetX, x + dt * 0.55);
-      const bob = x < targetX && !leaving ? Math.sin(now / 90) * 3 : 0;
       const m = (now - moodT < 1600 || Math.abs(mood) >= 1) ? mood : 0;
-      person(x, 175 + bob, 1, folk.look, (st.step === 'result' && !leaving) ? mood : m);
+      const face = (st.step === 'result' && !leaving) ? mood : m;
+      if (leaving) { x += leaving * dt * 0.7; walker(x, 175, 1, folk.look, face, now, 1); }
+      else {
+        const p = Math.min(1, (now - stepT) / STEP_MS), e = ease(p);
+        x = lerp(30, targetX, e);
+        if (p >= 1 && !arrived) { arrived = true; showBubble(); }
+        ctx.globalAlpha = lerp(.55, 1, Math.min(1, p * 2));
+        walker(x, lerp(250, 175, e), lerp(.32, 1, e), folk.look, face, now, p < 1 ? 1 - e * .7 : 0);
+        ctx.globalAlpha = 1;
+      }
     }
     boothFront(now);
     requestAnimationFrame(draw);
   }
   requestAnimationFrame(draw);
-  return { set, mood: setMood, react };
+  return { set, mood: setMood, react, arrived: isArrived };
 })();
 
 /* ---------------- BOOT ---------------- */

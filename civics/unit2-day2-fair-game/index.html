@@ -3,6 +3,16 @@
 <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Fair Game · Booth Duty at the Iowa State Fair | Government Unit 2 Day 2</title>
 <link rel="stylesheet" href="style.css?v=fg8">
+<style>
+/* smoother delivery */
+.bubble{transition:opacity .25s ease,transform .25s ease}
+.bubble.wait{opacity:0;transform:translateY(6px);animation:none}
+.tray>*{animation:trayin .22s ease both}
+@keyframes trayin{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
+.overlay:not([hidden]){animation:fadein .2s ease}
+@keyframes fadein{from{opacity:0}to{opacity:1}}
+@media (prefers-reduced-motion:reduce){.bubble,.tray>*,.overlay,.card{animation:none!important;transition:none!important}}
+</style>
 <script src="../../shared/assignments.js?v=20261105fb1"></script>
 <script src="../../shared/turnin.js?v=20261105fb1"></script>
 <script src="../../shared/arena.js?v=20261103c"></script>
@@ -38,5 +48,5 @@
   <p class="note">Today's goal: compare the two big parties and see how parties connect people to government. <span style="opacity:.7">SS.9-12.Gov.12</span></p>
 </dialog>
 
-<script src="game.js?v=fg8tt"></script>
+<script src="game.js?v=fg9"></script>
 </body></html>
