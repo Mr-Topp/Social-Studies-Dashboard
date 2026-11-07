@@ -467,22 +467,42 @@ function pFinal() {
     <h2>⚡ ${st.score.toLocaleString()} · #${rank} of 4 ${rank === 1 ? '🏆 You beat the bots!' : ''}</h2>
     <div class="recap">${POSTS.map((P, i) => `<div class="v-${P.verdict}"><span>${i + 1}</span><b>${VERDICT[P.verdict].ic} ${P.verdict}</b><small>${esc(P.text.replace(/\p{Extended_Pictographic}|\uFE0F/gu, '').replace(/\s+/g, ' ').trim().slice(0, 52))}…</small></div>`).join('')}</div>
     <p class="note">The trick you learned: <b>leave the post and check</b>. For anything about voting in Iowa, go to the Iowa Secretary of State or your county auditor.</p>
+    <div class="explain">
+      <label for="whyBox"><b>Last step: beat Maya.</b> 🤖 Maya says, “If a post has thousands of likes, it must be true.” In 2–3 sentences, explain why she’s wrong. Use one post from today as your example, and say how a false post like it could affect voters or government.</label>
+      <textarea id="whyBox" rows="4" maxlength="800" placeholder="Maya is wrong because ___. For example, the ___ post ___. A false post like that could ___." ${st.turnedIn ? 'disabled' : ''}>${esc(st.why || '')}</textarea>
+    </div>
     <button class="primary big" id="sendBtn">${st.turnedIn ? '✓ Turned in' : 'Turn in'}</button>
     <p class="fb ${st.turnedIn ? 'good' : ''}" id="sendMsg">${st.turnedIn ? '✓ Turned in. Your teacher can see your work. You\'re done!' : ''}</p>
   </section>`;
   $('#sendBtn').onclick = turnIn;
+  $('#whyBox').addEventListener('input', e => { st.why = e.target.value; save(); });
+}
+
+// The one writing answer (Fynn, 11-06): short, but it has to use a post from today and give a reason.
+function whyProblem() {
+  const box = $('#whyBox'), t = (box.value || '').trim(), low = t.toLowerCase();
+  if (window.classIsTestT && window.classIsTestT()) return '';
+  const words = t.match(/[A-Za-z'’-]+/g) || [], sents = t.split(/[.!?]+/).filter(x => x.trim().split(/\s+/).length >= 3);
+  if (words.length < 20 || sents.length < 2) return 'Write 2–3 full sentences (at least 20 words) before you turn in.';
+  if (window.classJunkStop) { const m = window.classJunkStop(box, { source: 'from today\'s posts' }); if (m) return m; }
+  if (!/toll|dot|text|penn|mint|social security|150|vance|audio|feenstra|governor|primary|ballot|envelope|machine|flip|screenshot|trump|won/.test(low)) return 'Use one post from today as your example (like the toll text, the Vance audio, or the ballot envelopes).';
+  if (!/fake|false|lie|misleading|check|source|official|edited|\bai\b|bot|anyone|copy|share/.test(low)) return 'Say WHY likes don’t prove it’s true (for example: fakes get shared too, so you have to check real sources).';
+  return '';
 }
 
 async function turnIn() {
   const msg = $('#sendMsg'), btn = $('#sendBtn');
   if (st.turnedIn) { msg.className = 'fb good'; msg.textContent = '✓ Already turned in. You\'re done!'; return; }
+  const wp = whyProblem(); if (wp) { msg.className = 'fb bad'; msg.textContent = wp; $('#whyBox').focus(); return; }
+  st.why = $('#whyBox').value.trim(); save();
   const ft = { move: 0, call: 0, battle: 0, close: 0 };
   POSTS.forEach(P => { const r = rec(P.id); if (r.moveDone && !r.moveWrong) ft.move++; if (r.callDone && !r.callWrong) ft.call++; if (r.battleDone && !r.battleWrong) ft.battle++; });
   CLOSERS.forEach(C => { const c = crec(C.id); if (c.done && !c.wrong) ft.close++; });
   const answers = {
     'Standard': 'SS.9-12.Gov.12',
     'First-try by skill': 'Best checking move ' + ft.move + '/' + N + ' · Real/fake/misleading call ' + ft.call + '/' + N + ' · Bot comeback ' + ft.battle + '/' + N + ' · Final checks ' + ft.close + '/' + CLOSERS.length,
-    'Signal points': String(st.score)
+    'Signal points': String(st.score),
+    'Explain why (beat Maya)': st.why || ''
   };
   const mark = w => w ? '✗ (' + w + ' wrong)' : '✓';
   POSTS.forEach((P, i) => { const r = rec(P.id); answers['Post ' + (i + 1) + ' · ' + P.id + ' (' + P.verdict + ')'] = 'Move ' + mark(r.moveWrong) + ' · Call ' + mark(r.callWrong) + ' · Comeback ' + mark(r.battleWrong); });

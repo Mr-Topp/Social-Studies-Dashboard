@@ -159,3 +159,4 @@ dialog .close{position:absolute;right:12px;top:10px;border:none;font-size:26px;b
   .right{min-height:0}
 }
 @media (prefers-reduced-motion:reduce){#toast{transition:none}}
+.explain{text-align:left;margin:16px 0 8px}.explain label{display:block;font-size:16px;line-height:1.45;margin-bottom:8px}.explain textarea{width:100%;box-sizing:border-box;font:inherit;font-size:16px;padding:10px 12px;border:2px solid #c9d6e3;border-radius:10px;resize:vertical}.explain textarea:focus-visible{outline:3px solid #1473b8;outline-offset:2px}
