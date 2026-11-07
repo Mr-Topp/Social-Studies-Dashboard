@@ -25,15 +25,15 @@
 
   // ---------- Images (all real, all in this folder) ----------
   const IMG = {
-    asia: { src: "asia-pacific-1943-army-atlas.jpg", alt: "1943 U.S. Army map of East Asia. Japan-held land, including Manchuria, is white.", cap: "U.S. War Department, Atlas of the World Battle Fronts, July 1943. White = held by Japan. Public domain." },
-    ethiopia: { src: "italy-ethiopia.jpg", alt: "Italian troops marching in Ethiopia, 1935–1936", cap: "Italian troops in Ethiopia, 1935–1936. Photographer unknown, CC BY 4.0, via Wikimedia Commons." },
-    books: { src: "book-burning-1933.jpg", alt: "A Nazi supporter throws books onto a bonfire in Berlin, May 1933", cap: "Nazi book burning in Berlin, May 10, 1933. Public domain, via Wikimedia Commons." },
-    natgeo: { src: "germany-1939-natgeo-map.jpg", alt: "1944 National Geographic map of Germany and its neighbors in 1939, with 1938 borders in red", cap: "“Germany and Its Approaches,” National Geographic Society, July 1944. Public domain." },
+    asia: { src: "asia-pacific-1943-army-atlas.jpg", alt: "1943 U.S. Army map of East Asia. Japan-held land, including Manchuria, is white.", cap: "U.S. Army map, 1943. White = held by Japan. Public domain." },
+    ethiopia: { src: "italy-ethiopia.jpg", alt: "Italian troops marching in Ethiopia, 1935–1936", cap: "Italian troops in Ethiopia, 1935–36. CC BY 4.0, Wikimedia Commons." },
+    books: { src: "book-burning-1933.jpg", alt: "A Nazi supporter throws books onto a bonfire in Berlin, May 1933", cap: "Book burning, Berlin, May 1933. Public domain." },
+    natgeo: { src: "germany-1939-natgeo-map.jpg", alt: "1944 National Geographic map of Germany and its neighbors in 1939, with 1938 borders in red", cap: "National Geographic map, 1944. Public domain." },
     key: { src: "germany-1939-natgeo-key.jpg", alt: "Title of the 1944 National Geographic map: Germany and its approaches, with borders as of September 1, 1939, and in red, borders as of January 1, 1938", cap: "The map's title." },
-    mussolini: { src: "mussolini-poster.jpg", alt: "Italian poster showing Mussolini as a strong leader", cap: "Italian poster of Mussolini (Museo del Risorgimento). Photo: NicolaPasquale, CC BY-SA 3.0, via Wikimedia Commons." },
-    stalin: { src: "ussr-poster.jpg", alt: "Soviet poster celebrating unity under Stalin", cap: "Soviet poster praising Stalin, late 1930s. Public domain, via Wikimedia Commons." },
-    europe: { src: "europe-1943-army-atlas.jpg", alt: "1943 U.S. Army map of Europe: German-held land in white, Allies in red, neutral in gray", cap: "U.S. War Department, Atlas of the World Battle Fronts, July 1943. White = held by Germany and its partners. Red = Allies. Public domain." },
-    pearl: { src: "pearl-harbor-1941-80-G-19942.jpg", alt: "A U.S. battleship sunk and burning under huge clouds of smoke at Pearl Harbor", cap: "Pearl Harbor, December 7, 1941. Official U.S. Navy photograph (80-G-19942), National Archives. Public domain." }
+    mussolini: { src: "mussolini-poster.jpg", alt: "Italian poster showing Mussolini as a strong leader", cap: "Mussolini poster. Photo: NicolaPasquale, CC BY-SA 3.0." },
+    stalin: { src: "ussr-poster.jpg", alt: "Soviet poster celebrating unity under Stalin", cap: "Stalin poster, late 1930s. Public domain." },
+    europe: { src: "europe-1943-army-atlas.jpg", alt: "1943 U.S. Army map of Europe: German-held land in white, Allies in red, neutral in gray", cap: "U.S. Army map, 1943. White = Germany and partners. Red = Allies. Public domain." },
+    pearl: { src: "pearl-harbor-1941-80-G-19942.jpg", alt: "A U.S. battleship sunk and burning under huge clouds of smoke at Pearl Harbor", cap: "Pearl Harbor, Dec. 7, 1941. U.S. Navy photo. Public domain." }
   };
 
   // ---------- The seven evidence checks ----------
@@ -56,7 +56,7 @@
       hint: "Look at what is going into the fire. What is inside those things?",
       why: "Burning books wipes out ideas the Nazis hated." },
     q4: { std: "SS.9-12.WH.29", short: "What Munich shows", style: "slip", head: "📨 Telegram London",
-      q: "What does Munich show? Match the real file.",
+      q: "What does Munich show?",
       opts: ["Hitler kept demanding more land", "It kept the peace for ten years", "Czech leaders agreed to the deal", "Britain and France gained land"],
       hint: "Read the file again. What did Hitler do in March 1939?",
       why: "Giving in made Hitler want more.", stamp: "FILED" },
@@ -99,7 +99,7 @@
       concept: "<b>Aggression</b> means attacking another country first. In 1931, it worked.",
       history: ["The League's report blamed Japan. No country punished Japan.", "Japan quit the League in 1933 and kept Manchuria."],
       histBoard: { img: "asia", pin: { x: 32, y: 17, label: "Manchuria" } },
-      source: "Sources: National Diet Library of Japan, “Modern Japan in Archives”; the League of Nations' Lytton Report (1932).",
+      source: "Source: League of Nations, Lytton Report (1932).",
       report: "q1" },
 
     { id: "ethiopia", label: "Ethiopia 1935", year: "1935", when: "October 1935 · Ethiopia, Africa",
@@ -118,10 +118,10 @@
       ],
       real: "weak",
       concept: "<b>Sanctions</b> are trade limits to pressure a country. Weak ones fail.",
-      history: ["The League banned some trade with Italy, but not oil.", "Italy took Ethiopia's capital in May 1936. The League dropped its sanctions that July."],
+      history: ["The League banned some trade with Italy, but not oil.", "Italy took Ethiopia in 1936. The League gave up its sanctions."],
       quote: { text: "“God and history will remember your judgment.”", who: "Haile Selassie, Ethiopia's emperor, to the League of Nations, June 1936" },
       histBoard: { img: "mussolini" },
-      source: "Sources: League sanctions vote, Nov. 18, 1935; the Hoare–Laval Plan, Dec. 1935; Haile Selassie, “Appeal to the League of Nations,” Geneva, June 30, 1936." },
+      source: "Source: Haile Selassie's speech to the League, June 30, 1936." },
 
     { id: "rhineland", label: "Rhineland 1936", year: "1936", when: "March 7, 1936 · The Rhineland, Germany",
       title: "Troops where they're banned",
@@ -139,13 +139,13 @@
       ],
       real: "protest",
       concept: "Hitler broke the <b>Treaty of Versailles</b>, testing who would stop him.",
-      history: ["Britain and France did nothing. Hitler kept the Rhineland.", "Hitler later told his interpreter: if France had fought back, his troops would have retreated."],
+      history: ["Britain and France did nothing. Hitler kept the Rhineland.", "Hitler later admitted: if France had fought back, he would have retreated."],
       histBoard: { img: "natgeo", pin: { x: 35, y: 52, label: "Rhineland" } },
-      source: "Sources: German History in Documents and Images (German Historical Institute); memoir of Paul Schmidt, Hitler's interpreter." },
+      source: "Source: memoir of Paul Schmidt, Hitler's interpreter." },
 
     { id: "austria", label: "Austria 1938", year: "1938", when: "March 1938 · Austria",
       title: "Austria disappears",
-      brief: ["Hitler's troops roll in. Austria joins Germany: the Anschluss.", "Then a vote with a giant YES circle."],
+      brief: ["Hitler's troops roll in. Austria joins Germany: the Anschluss.", "Then a fake vote with a giant YES circle."],
       brief2: "Czechoslovakia is now almost surrounded.",
       board: { img: "natgeo", pin: { x: 68, y: 74, label: "Austria" }, ballot: true },
       ask: "What should Britain do?",
@@ -161,7 +161,7 @@
       concept: "A fake vote is <b>propaganda</b>, a dictator's warning sign.",
       history: ["Britain and France protested, but did nothing.", "The Nazis claimed over 99% voted yes. It was not a free vote."],
       histBoard: { img: "natgeo", pin: { x: 63, y: 58, label: "Czechoslovakia" } },
-      source: "Sources: National WWII Museum, “Appeasement and Peace for Our Time”; the April 10, 1938 ballot." },
+      source: "Source: National WWII Museum." },
 
     { id: "munich", label: "Munich 1938", year: "1938", when: "September 1938 · Munich, Germany",
       title: "“My last demand”",
@@ -179,9 +179,9 @@
       ],
       real: "sign",
       concept: "<b>Appeasement</b> means giving in to demands to avoid war.",
-      history: ["Britain's leader, Neville Chamberlain, signed. He promised “peace for our time.”", "In March 1939, Hitler took the rest of Czechoslovakia."],
+      history: ["Britain's leader, Chamberlain, signed. He promised “peace for our time.”", "In March 1939, Hitler took the rest of Czechoslovakia."],
       histBoard: { img: "natgeo", pin: { x: 72, y: 63, label: "Rest of Czechoslovakia" } },
-      source: "Source: National WWII Museum, “Appeasement and Peace for Our Time.”",
+      source: "Source: National WWII Museum.",
       report: "q4" },
 
     { id: "poland", label: "Poland 1939", year: "1939", when: "August–September 1939 · Poland",
@@ -201,7 +201,7 @@
       real: "war",
       concept: "Two sides: the <b>Allies</b> (Britain, France) vs. the <b>Axis</b> (Germany, Italy, Japan).",
       history: ["Sept. 3, 1939: Britain and France declare war."],
-      source: "Sources: National WWII Museum; the Nazi–Soviet Pact, August 23, 1939." }
+      source: "Source: National WWII Museum." }
   ];
 
   const ENDINGS = {
@@ -325,7 +325,7 @@
         '<text x="78" y="52" text-anchor="middle" font-size="12" font-weight="800" font-family="system-ui,Arial">YES</text><circle cx="78" cy="84" r="28" fill="none" stroke="#222" stroke-width="3"/>' +
         '<text x="168" y="74" text-anchor="middle" font-size="9" font-family="system-ui,Arial">NO</text><circle cx="168" cy="92" r="11" fill="none" stroke="#222" stroke-width="2"/></svg>' +
         "<span>Simple drawing of the real ballot's layout (not the real ballot)</span></div>" : "") +
-      "</div><figcaption>" + esc(im.cap) + (f.pin ? " <span>Tap the map to open it full size.</span>" : "") + "</figcaption></figure>";
+      "</div><figcaption>" + esc(im.cap) + (f.pin ? " <span>Tap to enlarge.</span>" : "") + "</figcaption></figure>";
   }
 
   function shuffledIdx(n) { const a = [...Array(n).keys()]; for (let i = n - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
@@ -379,23 +379,16 @@
     }).join("");
   }
 
-  function moodLine() {
-    const b = st.m.b;
-    if (b >= 60) return "They think you won't fight.";
-    if (b <= 25) return "They're nervous about you.";
-    return "They're watching you.";
-  }
-
   // ---------- Screens ----------
   function intro() {
     document.body.classList.remove("plain");
     app.innerHTML = '<section class="title-screen">' +
       '<div class="ts-left"><span class="tag">World History · Day 8 · Strategy game</span><h1>Hold the <em>Line</em><small>1931–1939</small></h1>' +
       '<p class="hook">Dictators grab land. Give in, or stand up and risk war?</p>' +
-      '<div class="facts"><span>🎖️ Made-up British adviser</span><span>🗺️ 6 real crises</span><span>⏱ 25 minutes</span></div>' +
+      '<div class="facts"><span>🎖️ You: British adviser</span><span>🗺️ 6 real crises</span><span>⏱ 25 minutes</span></div>' +
       '<p class="goal"><b>Goal:</b> Explain how giving in led to World War II, and spot a dictator\'s warning signs.</p>' +
       '<button type="button" class="big" data-act="start">▶ Enter the war room</button>' +
-      '<p class="fine">Standards SS.9-12.WH.29 and SS.9-12.WH.30. Your progress saves on this Chromebook. At the end you write a short memo and turn it in.</p></div>' +
+      '<p class="fine">SS.9-12.WH.29, WH.30 · Progress saves · Ends with a short memo</p></div>' +
       '<div class="ts-right" aria-hidden="true"><div class="vsbox"><div class="side-v you"><div class="av">🎖️</div><b>YOU</b><div class="toks"><span>🏠</span><span>🪖</span><span>🤝</span></div></div>' +
       '<div class="vs">VS</div><div class="side-v them"><div class="av">😈</div><b>THE DICTATORS</b><div class="toks"><span>😠</span></div></div></div>' +
       '<div class="stampline">EVERY MOVE COSTS SOMETHING</div></div>' +
@@ -406,7 +399,6 @@
     const c = CRISES[i];
     const intelDone = !c.intel || st.solved[c.intel];
     const homeLow = st.m.h < HOME_LOCK;
-    const rv = rivalMood(st.m.b);
     let move;
     if (!intelDone) move = '<div class="move locked"><div class="move-h">🔒 <span>Decode the intel first.</span></div>' + checkBox(c.intel) + "</div>";
     else move = '<div class="move">' + (c.intel ? checkBox(c.intel) : "") + '<div class="move-h">🎯 <span>Your move:</span> <span>' + esc(c.ask) + "</span></div>" +
@@ -419,7 +411,6 @@
       }).join("") + '</div><div class="confirm"><button type="button" class="go seal" data-act="commit"' + (selected ? "" : " disabled") + '>✒️ Sign the order</button></div></div>';
     app.innerHTML = track(i) + '<section class="scene">' + boardHtml(c.board, c.intel) +
       '<div class="side"><div class="telegram"><div class="tg-h">📟 <span>Telegram</span> · <span>' + esc(c.when) + "</span></div><h2>" + esc(c.title) + "</h2>" + c.brief.map(s => "<p>" + esc(s) + "</p>").join("") + "</div>" +
-      '<div class="bubble-row"><span class="face">' + rv.face + '</span><p class="bubble">' + esc(moodLine()) + "</p></div>" +
       (c.brief2 ? '<p class="sticky">' + esc(c.brief2) + "</p>" : "") + "</div></section>" + move;
   }
 
@@ -462,10 +453,10 @@
     const last = i === CRISES.length - 1;
     const rv = rivalMood(st.m.b);
     app.innerHTML = track(i) + '<section class="scene result">' +
-      '<div class="played"><div class="card big-card k-' + o.kind + '"><span class="ci">' + o.icon + '</span><span class="ct">' + esc(o.label) + '</span><span class="cd">' + esc(o.desc) + '</span><span class="stamp slam">ORDER SENT</span></div>' + deltaChips(d) + "</div>" +
+      '<div class="played"><div class="card big-card k-' + o.kind + '"><span class="ci">' + o.icon + '</span><span class="ct">' + esc(o.label) + '</span><span class="stamp slam">ORDER SENT</span></div>' + deltaChips(d) + "</div>" +
       '<div class="side"><div class="bubble-row large"><span class="face react">' + rv.face + '</span><div class="bubble rival-b"><small>😠 <span>The dictators react</span></small><p>' + esc(o.react) + "</p></div></div>" +
       '<div class="paper"><div class="mast">🗞️ <span>Back home</span></div><p class="headline">' + esc(o.home) + "</p>" +
-      (st.notes[c.id] === "army" ? '<p class="extra">' + esc("Weak army: people are even more scared.") + "</p>" : "") + "</div>" +
+      (st.notes[c.id] === "army" ? '<p class="extra">' + esc("Weak army: people are more scared.") + "</p>" : "") + "</div>" +
       '<div class="lesson"><small>💡 <span>Lesson unlocked</span></small><p>' + c.concept + "</p></div>" +
       '<button type="button" class="go" data-act="next">' + (last ? "▶ See how your story ends" : "▶ Open the real file") + "</button></div></section>";
   }
@@ -476,7 +467,7 @@
     const ready = !c.report || st.solved[c.report];
     const nextLabel = i + 1 < CRISES.length ? "▶ Next crisis: " + CRISES[i + 1].label : "▶ Next";
     app.innerHTML = track(i) + '<section class="scene">' +
-      '<div class="folder"><div class="ftab">DECLASSIFIED</div><span class="stamp tilt">WHAT REALLY HAPPENED</span><p class="when">' + esc(c.when) + "</p>" +
+      '<div class="folder"><div class="ftab">DECLASSIFIED</div><span class="stamp tilt">WHAT REALLY HAPPENED</span>' +
       '<div class="calls"><div class="call"><small>Your call</small><b><span class="ico">' + mine.icon + "</span> <span>" + esc(mine.label) + '</span></b></div><div class="call real"><small>Real leaders\' call</small><b><span class="ico">' + real.icon + "</span> <span>" + esc(real.label) + "</span></b></div>" +
       (same ? '<span class="match">✓ <span>Same as history</span></span>' : "") + "</div>" +
       c.history.map(s => "<p>" + esc(s) + "</p>").join("") +
@@ -494,7 +485,7 @@
       '<div class="brow"><small>November 9–10, 1938 · Kristallnacht</small><p>Nazis burned synagogues and sent about 30,000 Jewish men to camps.</p></div>' +
       '<div class="brow"><small>The U.S. response</small><p>Roosevelt called his ambassador home but kept refugee limits.</p></div>' +
       checkBox("q7") +
-      '<p class="src">Sources: United States Holocaust Memorial Museum, Holocaust Encyclopedia: “Kristallnacht” and “Emigration and the Évian Conference.”</p>' +
+      '<p class="src">Source: U.S. Holocaust Memorial Museum.</p>' +
       '<button type="button" class="go plain-btn" id="readBtn" data-act="next"' + (ok ? "" : " disabled") + '>I read this briefing →</button></section>';
   }
 
@@ -515,9 +506,9 @@
     app.innerHTML = track(-1) + '<section class="news ' + E.cls + '"><div class="masthead"><b>THE EVENING DISPATCH</b><small>A made-up newspaper · September 1939</small></div>' +
       '<span class="etag">' + esc(E.tag) + '</span><div class="news-grid"><div><div class="art" aria-hidden="true">' + E.art + '</div><h2 class="bighead">' + esc(E.title) + "</h2>" +
       E.text.map(s => "<p>" + esc(s) + "</p>").join("") +
-      '<div class="final-m">' + ["h", "a", "t", "b"].map(k => "<span>" + MICON[k] + " <span>" + esc(MNAME[k]) + "</span> " + st.m[k] + "</span>").join("") + "</div></div>" +
+      "</div>" +
       "<div>" + trailList(e) + '<div class="lesson"><small>💡 <span>The pattern</span></small><p>Each attack that paid off led to a bigger demand.</p></div></div></div>' +
-      '<p class="small">' + esc("1 of 5 endings. Your choices picked this one.") + "</p>" +
+      '<p class="small">' + esc("1 of 5 possible endings.") + "</p>" +
       '<button type="button" class="go" data-act="next">▶ Now open the real file</button></section>';
   }
 
