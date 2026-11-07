@@ -185,6 +185,7 @@ window.CLASS_ASSIGNMENTS = {
   "sociology-unit2-day1-first-shift":         { course: "sociology", unit: 2, day: 1, title: "Day 1 · Why Did That Blow Up?", path: "sociology/u2-d1-why-blow-up/", std: ["SS.9-12.Soc.5", "SS.9-12.Soc.7"] },
   "sociology-unit2-arrival-culture":          { course: "sociology", unit: 2, day: 2, title: "Day 2 · Mother Tongue (Reading)", path: "sociology/u2-d2-mother-tongue/", std: ["SS.9-12.Soc.5", "SS.9-12.Soc.6"] },
   "sociology-unit2-day3-culture-shock":      { course: "sociology", unit: 2, day: 3, title: "Day 3 · Who Decides What’s Normal? (Reading)", path: "sociology/unit2-day3-culture-shock-exchange/", std: ["SS.9-12.Soc.6", "SS.9-12.Soc.5"] },
+  "sociology-unit2-itchy-feet-culture":     { course: "sociology", unit: 2, day: 3, title: "Day 3 · Whose Normal? Itchy Feet Comics (Reading)", path: "sociology/u2-itchy-feet-culture/", std: ["SS.9-12.Soc.5", "SS.9-12.Soc.6"] },
 
   // ---- Government · Unit 1 ----
   "gov-stranded-day1":                { course: "government", unit: 1, day: 1, title: "Day 1 · Stranded: Govern or Collapse", path: "civics/stranded-government/", std: ["SS.9-12.Gov.1", "SS.9-12.Gov.5"] },
