@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Signal Break · Catch the Fake Before It Spreads | Government Unit 2 Day 3</title>
+<link rel="stylesheet" href="style.css?v=sb2">
+<script>
+/* Same as the home page: opening this page with ?teacher-test turns this device into Test T. */
+try { if (/[?&]teacher-test\b/.test(location.search)) { localStorage.setItem("hub-test-student", "1"); history.replaceState(null, "", location.pathname + location.hash); } } catch (e) {}
+</script>
+<script src="../../shared/assignments.js?v=20261105fb1"></script>
+<script src="../../shared/turnin.js?v=20261105fb1"></script>
+</head><body>
+<header>
+  <div class="brand"><span class="logo">SIGNAL<b>//</b>BREAK</span><small>FAKE NEWS · BOT BATTLE</small></div>
+  <div class="hud">
+    <span class="pill" id="postPill"></span>
+    <span class="pill zap" id="scorePill"></span>
+  </div>
+  <div class="race" id="race" aria-label="You vs. the bots"></div>
+  <button id="helpBtn" class="small">How to play</button>
+</header>
+
+<main id="app" aria-live="polite"></main>
+
+<dialog id="helpDialog"><button class="close" data-close="helpDialog" aria-label="Close">×</button>
+  <p class="eyebrow">HOW TO PLAY</p><h2>Catch the fake before it spreads</h2>
+  <p>Eight posts are going viral. Every post is built on a real story from 2025 or 2026 that trusted news outlets or fact-checkers checked. Usernames are made up.</p>
+  <ol class="howto"><li><b>🔎 Check it.</b> Pick the best move to check the post.</li><li><b>⚖️ Call it.</b> Real, fake, or misleading?</li><li><b>🤖 Clap back.</b> A bot classmate argues. Pick the best reply.</li></ol>
+  <p class="note"><b>Real</b> = true, trusted sources back it up. <b>Fake</b> = made up, or pretending to be someone. <b>Misleading</b> = something real in it, but twisted.</p>
+  <p class="note">Right on the first try = more ⚡. Beat Jax, the bot who always checks.</p>
+  <p class="note">Today's goal: see how the media connects people to government, and how false posts can change what voters and leaders do. <span style="opacity:.7">SS.9-12.Gov.12 (also touches Gov.13)</span></p>
+</dialog>
+
+<div class="bottom-zone"><button id="resetBtn" class="linkish">Start over</button></div>
+<script src="game.js?v=sb2"></script>
+</body></html>
