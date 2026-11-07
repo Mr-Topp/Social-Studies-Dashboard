@@ -25,7 +25,7 @@ body.reading-now .choices{opacity:.45;pointer-events:none}
 <header class="gr-head" data-years="1940 — 1945"><div class="gr-wrap">
 <div class="kicker">World History · Day 10 · WWII Turning Points</div>
 <h1>What Wins a War?</h1>
-<p class="hook"><span class="dime">10¢</span>Kids your age bought these comics <i>during</i> WWII. Fact-check them: what did they get wrong, and what did they keep secret? 4 checks + 4 short answers. <b>About 25 minutes.</b></p>
+<p class="hook"><span class="dime">10¢</span>Kids your age bought these comics <i>during</i> WWII. Fact-check them: what did they get wrong, and what did they keep secret? 8 multiple-choice checks, no writing. <b>About 20 minutes.</b></p>
 <p class="goal"><b>Today's goal:</b> Explain how new tools like radar, codebreaking, and the atomic bomb helped decide WWII, and whose story the comics left out.</p>
 <details class="std-details"><summary>Iowa standards for today</summary>
 <p><b>Standard SS.9-12.WH.32</b> — Analyze how new technology contributed to the major turning points in World War I and World War II.</p><p><b>Standard SS.9-12.WH.33</b> — Compare the experiences and perspectives of individuals affected by total war during World War I and World War II.</p>
@@ -37,7 +37,7 @@ body.reading-now .choices{opacity:.45;pointer-events:none}
 
 <main class="gr-main gr-wrap">
 <section class="card">
-<p class="intro-line"><b>You're the fact-checker.</b> For each part: <b>read</b> the comic on the left → get the <b>check</b> right → <b>write</b> 1–2 sentences. Done = 4 green checks + 4 answers, then turn in at the bottom.</p>
+<p class="intro-line"><b>You're the fact-checker.</b> For each part: <b>read</b> the comic on the left → get <b>both checks</b> right. Done = 8 green checks, then turn in at the bottom.</p>
 <ul class="words" aria-label="Word help">
 <li><b>RAF</b> = Britain's air force</li><li><b>Luftwaffe</b> = Germany's air force</li><li><b>Radar</b> (or radiolocation) = radio waves that find planes</li><li><b>Intercept</b> = cut off, catch</li><li><b>Vessels</b> = ships</li><li><b>Codebreaker</b> = reads the enemy's secret messages</li>
 </ul>
@@ -70,9 +70,9 @@ body.reading-now .choices{opacity:.45;pointer-events:none}
 window.FLIP={
 title:"Selected panels from 1940s WWII comics",prefix:"wh-day10-comics-",pages:5,readSeconds:8,lockSeconds:8,
 assignmentId:"day10-wwii-comics",api:"https://fynn-class-assignment-submissions-20261024.neotboy.chatgpt.site/api/submit",
-lockedText:"This box opens when you get the check right.",
-clearConfirm:"Start over? This clears your checks and answers on this device.",
-successText:"Turned in! Your teacher got your 4 checks and 4 answers. You're done.",
+lockedText:"This check opens when you get the first one right.",
+clearConfirm:"Start over? This clears your checks on this device.",
+successText:"Turned in! Your teacher got all 8 of your checks. You're done.",
 wrongText:(c,left)=>left>0?"Not quite. "+c.hint+" Try again in "+left+"…":"Not quite. "+c.hint+" The choices were mixed up. Try again.",
 parts:[
 {
@@ -89,9 +89,18 @@ parts:[
 "why":"✓ Correct. Radar found the planes' position, and fighters stopped many raiders \"before they reach their targets.\" A new technology helped Britain win the Battle of Britain.",
 "hint":"Make the page bigger and read the last two boxes. What do fighter planes do once radar finds the raiders?"
 },
-"prompt":"How did radar help Britain win the Battle of Britain? Use one detail from the page.",
-"stem":"Write 1–2 sentences. Start like this: <i>Radar helped Britain because ___ (reader page 1). Without radar, ___.</i>",
-"placeholder":"Radar helped Britain because ___ (reader page 1). Without radar, ___."
+"check2":{
+"tag": "Think it through · Reader page 1",
+"q": "Imagine Britain had <b>no radar</b> in 1940. Based on the last panel, what most likely happens?",
+"right": "Fighters can't tell where raiders are coming, so more bombers reach their targets.",
+"wrong": [
+"German pilots get lost over the sea, so fewer bombers reach their targets at all.",
+"British fighters shoot down more raiders, because they patrol the whole sky all day.",
+"Nothing changes much, because the RAF already had far more planes than Germany."
+],
+"why": "✓ Correct. The page says radar \"calculates the planes' position\" so fighters can \"intercept the raiders often before they reach their targets.\" Without it, fighters would be guessing. (Germany actually had more planes, which is why radar mattered so much.)",
+"hint": "Reread the last panel. What does radar tell the fighter bases, and what can fighters do with that?"
+}
 },
 {
 "short":"Midway",
@@ -107,9 +116,18 @@ parts:[
 "why":"✓ Correct. Losing 4 carriers cost Japan the upper hand at sea. (The \"19 warships\" box is about the Battle of the Coral Sea, a month earlier.)",
 "hint":"Read only the caption on the big battle panel in the middle. How many carriers, and whose?"
 },
-"prompt":"This 1943 comic tells Midway as a win for Admiral Nimitz and his fleet. What did it leave out, and what would have happened if Japan found out?",
-"stem":"<span class=\"declass\"><b>Declassified</b>Before Midway, U.S. Navy codebreakers cracked part of Japan's secret code. They knew Japan's attack plan, so U.S. carriers were waiting. This stayed secret during the war.</span>Write 1–2 sentences. Start like this: <i>The comic left out ___. If Japan had found out in 1943, ___.</i>",
-"placeholder":"The comic left out ___. If Japan had found out in 1943, ___."
+"check2":{
+"tag": "Declassified · Reader page 2",
+"q": "<span class=\"declass\"><b>Declassified</b>Before Midway, U.S. Navy codebreakers cracked part of Japan's secret code. They knew Japan's attack plan, so U.S. carriers were waiting. This stayed secret during the war.</span>Why would a 1943 comic leave the codebreaking out of the Midway story?",
+"right": "If Japan learned its code was broken, it would change it, and the U.S. would lose that edge.",
+"wrong": [
+"The Navy was embarrassed that it needed codebreakers instead of brave pilots to win.",
+"Codebreaking broke the rules of war, so the U.S. could have been punished after the war.",
+"The comic's writers knew about it but thought kids would find radio codes too boring."
+],
+"why": "✓ Correct. The secret was still useful in 1943. If Japan found out, it would switch codes and the U.S. would stop knowing its plans. So the comic gave all the credit to Nimitz and his fleet.",
+"hint": "Read the Declassified box. While the war is still going, who could read this comic, and what would they do?"
+}
 },
 {
 "short":"Stalingrad",
@@ -125,9 +143,18 @@ parts:[
 "why":"✓ Correct. The ring closed in November 1942. January 1943 is when the Soviets squeezed the trapped army, and it gave up in February. Germany never recovered from losing a whole army, and the Soviets pushed west from then on.",
 "hint":"Find the date in the bottom-left panel, then compare it to the fact file."
 },
-"prompt":"Compare Midway and Stalingrad. What helped win each one, and which matters more in a war?",
-"stem":"Write 1–2 sentences. (Remember: at Midway, codebreakers knew Japan's plan.) Start like this: <i>At Midway, the U.S. won with help from ___. At Stalingrad, the Soviets won by ___. I think wars are won more by ___ than by ___ because ___.</i>",
-"placeholder":"At Midway, the U.S. won with help from ___. At Stalingrad, the Soviets won by ___. I think wars are won more by ___ than by ___ because ___."
+"check2":{
+"tag": "Compare · Reader pages 2–3",
+"q": "Think about Midway (codebreakers knew Japan's plan) and Stalingrad (a ring trapped a whole German army). Which statement compares them correctly?",
+"right": "Midway was won with secret information; Stalingrad by trapping and wearing down an army.",
+"wrong": [
+"Both battles were won mainly by new weapons, like radar sets and the atomic bomb.",
+"Midway was won by troops landing on the island; Stalingrad by breaking German codes.",
+"Both battles were won because the enemy ran out of fuel before the fighting started."
+],
+"why": "✓ Correct. Midway shows how information and technology can win a war. Stalingrad shows how huge numbers of soldiers, cold, and a trap can win it too. Both turned the war against the Axis.",
+"hint": "Look back at the fact file on Stalingrad and the Declassified box on Midway. What did each side use to win?"
+}
 },
 {
 "short":"Atomic bomb",
@@ -143,21 +170,28 @@ parts:[
 "why":"✓ Correct. The comic shows the cloud from above but never one person in Hiroshima. Estimates say 90,000 to 166,000 people there died within four months. Fact-check: the bomber flew from Tinian, not Guam, and Nagasaki was bombed 3 days later (Aug. 6 to Aug. 9), not 4. Historians still debate whether the bombs or the Soviet Union declaring war on Japan (Aug. 8) did more to make Japan surrender. This comic only credits the bomb.",
 "hint":"Look at each panel on pages 4 and 5. Who do you see? Who is never drawn?"
 },
-"prompt":"Compare Truman's words in the comic with Setsuko Thurlow's. Why do they describe August 6, 1945 so differently?",
-"stem":"<span class=\"declass file\"><b>A survivor's voice</b>Setsuko Thurlow was 13 and about a mile from the blast. In her 2017 Nobel Peace Prize lecture, she said: \"At 8:15, I saw a blinding bluish-white flash from the window.\" She was trapped in a collapsed building and lost family members and most of her classmates.</span>Truman (reader page 5) calls the bomb \"a harnessing of the basic powers of the universe.\" Write 1–2 sentences. Start like this: <i>Truman wanted Americans to feel ___. Setsuko Thurlow remembers ___. They see the same day differently because ___.</i>",
-"placeholder":"Truman wanted Americans to feel ___. Setsuko Thurlow remembers ___. They see the same day differently because ___."
+"check2":{
+"tag": "Two perspectives · Reader page 5",
+"q": "<span class=\"declass file\"><b>A survivor's voice</b>Setsuko Thurlow was 13 and about a mile from the blast. In her 2017 Nobel Peace Prize lecture, she said: \"At 8:15, I saw a blinding bluish-white flash from the window.\" She was trapped in a collapsed building and lost family members and most of her classmates.</span>Truman (reader page 5) calls the bomb \"a harnessing of the basic powers of the universe.\" Why do he and Thurlow describe August 6, 1945 so differently?",
+"right": "Truman spoke as a leader far away; Thurlow lived through it inside the city that was hit.",
+"wrong": [
+"Truman didn't learn the bomb was dropped until weeks later, so he had to guess what happened.",
+"Thurlow was a scientist who built the bomb, and she later regretted the work she had done.",
+"They are talking about two different bombs: Truman means Nagasaki, Thurlow means Hiroshima."
+],
+"why": "✓ Correct. Truman wanted Americans to feel proud of a powerful new weapon. Thurlow saw the flash, was trapped in the rubble, and lost family and classmates. Where you stood in a total war shaped how you remember it.",
+"hint": "Read the survivor box again. Where was Thurlow? Where was Truman when he spoke?"
+}
 }
 ],
-questions:["How did radar help Britain win the Battle of Britain? Use one detail from the page.","This 1943 comic tells Midway as a win for Admiral Nimitz and his fleet. What did it leave out, and what would have happened if Japan found out?","Compare Midway and Stalingrad. What helped win each one, and which matters more in a war?","Compare Truman's words in the comic with Setsuko Thurlow's. Why do they describe August 6, 1945 so differently?"],
 validate(s){if(!s.name)return{text:"Type your first name + last initial (like Jordan M.) at the top of the questions.",focus:"studentName"};
  const mc=[1,2,3,4].find(i=>!s.checkDone(i));if(mc)return{text:"Get the check right for part "+mc+" first.",part:mc};
- const ma=[1,2,3,4].find(i=>!s.answer(i));if(ma)return{text:"Write your answer for part "+ma+" before turning in.",part:ma,focus:"answer"+ma};
- for(const i of [1,2,3,4]){const j=window.classJunkStop&&window.classJunkStop(document.getElementById("answer"+i));if(j)return{text:"Part "+i+": "+j,part:i}}return null},
-buildAnswers(s){const a={Standard:"SS.9-12.WH.32, SS.9-12.WH.33","First-try correct":[1,2,3,4].filter(i=>(s.tries(i)||1)===1).length+" of 4"};
- this.questions.forEach((q,i)=>a[q]=s.answer(i+1));a["Reading checks"]="4 of 4 correct · tries: "+[1,2,3,4].map(i=>s.tries(i)||1).join(", ");return a}
+ const m2=[1,2,3,4].find(i=>!s.check2Done(i));if(m2)return{text:"Get the second check right for part "+m2+" first.",part:m2};return null},
+buildAnswers(s){const I=[1,2,3,4],t=I.flatMap(i=>[s.tries(i)||1,s.tries2(i)||1]);
+ return{Standard:"SS.9-12.WH.32, SS.9-12.WH.33","First-try correct":t.filter(x=>x===1).length+" of 8","Checks":"8 of 8 correct · tries: "+t.join(", ")}}
 };
 </script>
-<script src="../shared/flip-reader.js?v=2tt"></script>
+<script src="../shared/flip-reader.js?v=3mc"></script>
 <script>
 // This page only: choices wait for the read timer, and "Not quite" scrolls into view.
 (function(){
@@ -167,7 +201,7 @@ buildAnswers(s){const a={Standard:"SS.9-12.WH.32, SS.9-12.WH.33","First-try corr
   document.getElementById("flipCards").addEventListener("click",e=>{if(!e.target.closest(".choice"))return;
     setTimeout(()=>{const f=[...document.querySelectorAll(".flip-part:not([hidden]) .fb")].find(x=>x.textContent.trim());
       if(f){const r=f.getBoundingClientRect();if(r.bottom>innerHeight-80||r.top<0)f.scrollIntoView({behavior:"smooth",block:"center"})}
-      const a=document.querySelector(".flip-part:not([hidden]) textarea:not([disabled])");
+      const a=document.querySelector(".flip-part:not([hidden]) .check2");
       if(a&&f&&f.classList.contains("ok")){const r=a.getBoundingClientRect();if(r.bottom>innerHeight-80)a.scrollIntoView({behavior:"smooth",block:"center"})}},120)});
 })();
 </script>

@@ -12,7 +12,11 @@ const parts=C.parts.map((p,i)=>Object.assign({n:i+1},p));
 const partOf=pg=>parts.find(p=>pg>=p.from&&pg<=p.to);
 const checkDone=i=>ls.get("check"+i)==="1";
 const tries=i=>Number(ls.get("tries"+i)||0);
-const answer=i=>($("answer"+i)?$("answer"+i).value:(ls.get("answer"+i)||""));
+// Multiple-choice-only pages (Fynn, 11-06): a part with "check2" swaps its writing box for a second check.
+const has2=i=>!!(parts[i-1]&&parts[i-1].check2);
+const check2Done=i=>ls.get("check2_"+i)==="1";
+const tries2=i=>Number(ls.get("tries2_"+i)||0);
+const answer=i=>has2(i)?(check2Done(i)?"✓":""):($("answer"+i)?$("answer"+i).value:(ls.get("answer"+i)||""));
 const partDone=i=>checkDone(i)&&answer(i).trim()!=="";
 // Junk writing ("idk", blanks left as ___) is caught before "Next part", not only at Turn in (Fynn, 11-03).
 const junk=i=>{const a=$("answer"+i);return a&&window.classJunkStop&&a.value.trim()?window.classJunkStop(a,{quiet:true}):""};
@@ -27,8 +31,9 @@ parts.forEach(p=>{
   s.innerHTML='<span class="stamp">Done</span><p class="case-tag"><span class="num">Part '+p.n+'</span> '+p.ref+'</p><h3>'+p.title+'</h3>'
    +'<p class="flip-wait" id="wait'+p.n+'"></p>'
    +'<div class="check" id="check'+p.n+'" hidden><p class="tag">'+p.check.tag+'</p><p class="q">'+p.check.q+'</p><div class="choices" id="choices'+p.n+'"></div><p class="fb" id="fb'+p.n+'" aria-live="polite"></p></div>'
-   +'<div class="flip-write" id="write'+p.n+'"><label class="prompt" for="answer'+p.n+'">'+p.prompt+'</label><p class="stem">'+p.stem+'</p>'
-   +(p.stemText?'<button class="stemBtn quiet" type="button" data-for="'+p.n+'">Use the sentence starter</button>':'')+'<textarea id="answer'+p.n+'" placeholder="'+p.placeholder.replace(/"/g,"&quot;")+'"></textarea><p class="lockmsg" id="unlock'+p.n+'"></p></div>';
+   +(p.check2?'<div class="flip-write" id="write'+p.n+'"><div class="check check2"><p class="tag">'+p.check2.tag+'</p><p class="q">'+p.check2.q+'</p><div class="choices" id="choices2_'+p.n+'"></div><p class="fb" id="fb2_'+p.n+'" aria-live="polite"></p></div><p class="lockmsg" id="unlock'+p.n+'"></p></div>':
+   '<div class="flip-write" id="write'+p.n+'"><label class="prompt" for="answer'+p.n+'">'+p.prompt+'</label><p class="stem">'+p.stem+'</p>'
+   +(p.stemText?'<button class="stemBtn quiet" type="button" data-for="'+p.n+'">Use the sentence starter</button>':'')+'<textarea id="answer'+p.n+'" placeholder="'+p.placeholder.replace(/"/g,"&quot;")+'"></textarea><p class="lockmsg" id="unlock'+p.n+'"></p></div>');
   qcol.appendChild(s);
 });
 qcol.addEventListener("click",e=>{const b=e.target.closest(".stemBtn");if(!b)return;const p=parts[Number(b.dataset.for)-1],t=$("answer"+p.n);if(t.disabled)return;if(!t.value.trim())t.value=p.stemText;else if(!t.value.includes(p.stemText))t.value=p.stemText+" "+t.value;t.focus();const k=t.value.indexOf("___");if(k>=0)t.setSelectionRange(k,k+3);ls.set("answer"+p.n,t.value);refresh()});
@@ -46,9 +51,15 @@ function renderChoices(p){const c=p.check,box=$("choices"+p.n);box.innerHTML="";
   const opts=checkDone(p.n)?[c.right]:shuffle([c.right,...c.wrong]);
   opts.forEach(t=>{const b=document.createElement("button");b.type="button";b.className="choice";b.textContent=t;
     if(checkDone(p.n)){b.classList.add("right");b.disabled=true}else{b.disabled=locked;b.addEventListener("click",()=>pick(p,t))}box.appendChild(b)});
-  const f=$("fb"+p.n);if(checkDone(p.n)){f.className="fb ok";f.textContent=c.why}}
-function pick(p,t){const c=p.check,f=$("fb"+p.n);ls.set("tries"+p.n,String(tries(p.n)+1));
-  if(t===c.right){ls.set("check"+p.n,"1");renderChoices(p);refresh();const a=$("answer"+p.n);if(a&&!C.noAutoFocus)a.focus({preventScroll:true});return}
+  const f=$("fb"+p.n);if(checkDone(p.n)){f.className="fb ok";f.textContent=c.why}
+  if(p.check2)renderChoices2(p)}
+function renderChoices2(p){const c=p.check2,box=$("choices2_"+p.n),d=check2Done(p.n),open=checkDone(p.n)||TT();box.innerHTML="";
+  (d?[c.right]:shuffle([c.right,...c.wrong])).forEach(t=>{const b=document.createElement("button");b.type="button";b.className="choice";b.textContent=t;
+    if(d){b.classList.add("right");b.disabled=true}else{b.disabled=locked||!open;b.addEventListener("click",()=>pick(p,t,2))}box.appendChild(b)});
+  const f=$("fb2_"+p.n);if(d){f.className="fb ok";f.textContent=c.why}}
+function pick(p,t,k){const two=k===2,c=two?p.check2:p.check,f=$(two?"fb2_"+p.n:"fb"+p.n);
+  if(two)ls.set("tries2_"+p.n,String(tries2(p.n)+1));else ls.set("tries"+p.n,String(tries(p.n)+1));
+  if(t===c.right){ls.set(two?"check2_"+p.n:"check"+p.n,"1");renderChoices(p);refresh();const a=$("answer"+p.n);if(a&&!C.noAutoFocus)a.focus({preventScroll:true});return}
   f.className="fb no";
   if(C.lockSeconds){locked=true;renderChoices(p);let left=C.lockSeconds;const tick=()=>{f.textContent=C.wrongText(c,left)};tick();clearInterval(lockTimer);
     lockTimer=setInterval(()=>{left--;if(left<=0){clearInterval(lockTimer);locked=false;renderChoices(p);f.textContent=C.wrongText(c,0)}else tick()},1000)}
@@ -91,7 +102,7 @@ function refresh(){
   $("wait"+p.n).textContent=showCheck?"":"Read the pages in order. This part's reading check is on reader page "+c.page+".";
   $("wait"+p.n).hidden=showCheck;
   const a=$("answer"+p.n),done=checkDone(p.n);
-  a.disabled=!done&&!TT();const sb=$("q"+p.n).querySelector(".stemBtn");if(sb)sb.disabled=!done;$("unlock"+p.n).textContent=done?"":C.lockedText;
+  if(a)a.disabled=!done&&!TT();const sb=$("q"+p.n).querySelector(".stemBtn");if(sb)sb.disabled=!done;$("unlock"+p.n).textContent=done||TT()?"":C.lockedText;
   $("write"+p.n).hidden=!(done||cur===p.to||TT());
   // nav
   // "Next page" only shows while this part still has more pages to read.
@@ -100,7 +111,7 @@ function refresh(){
   const n1=$("flipNext");n1.hidden=partEnd;n1.disabled=!!b;n1.textContent="Next page →";
   const n2=$("flipNext2");n2.disabled=!!b&&b!=="junk";n2.textContent=last?"Go to Turn in ↓":partEnd?"Next part →":"Next page →";
   ["flipBack","flipBack2"].forEach(id=>{$(id).disabled=cur===1});
-  const why={read:"Read this page first. Next opens in a few seconds.",check:"Get the reading check right to go on.",write:"Write your answer for this part to go on.",junk:"Fix your answer for this part to go on (see the note under the box).","":last?"All pages done. Turn in your work below.":""}[b];
+  const why={read:"Read this page first. Next opens in a few seconds.",check:"Get the reading check right to go on.",write:p.check2?"Get the second check right to go on.":"Write your answer for this part to go on.",junk:"Fix your answer for this part to go on (see the note under the box).","":last?"All pages done. Turn in your work below.":""}[b];
   $("flipWhy").textContent=why;$("flipWhy").hidden=!why;
   // progress marks
   const mo=maxOpen();
@@ -123,9 +134,9 @@ $("flipBigClose").addEventListener("click",closeBig);$("flipBig").addEventListen
 
 /* ---------- start over / turn in ---------- */
 $("clearBtn").addEventListener("click",()=>{if(!confirm(C.clearConfirm))return;
-  ["studentName","read","at",...parts.flatMap(p=>["answer"+p.n,"check"+p.n,"tries"+p.n])].forEach(k=>ls.del(k));(C.clearExtra||[]).forEach(k=>ls.del(k));location.reload()});
+  ["studentName","read","at",...parts.flatMap(p=>["answer"+p.n,"check"+p.n,"tries"+p.n,"check2_"+p.n,"tries2_"+p.n])].forEach(k=>ls.del(k));(C.clearExtra||[]).forEach(k=>ls.del(k));location.reload()});
 $("submitBtn").addEventListener("click",async()=>{const status=$("submitStatus"),btn=$("submitBtn");status.className="status";
-  const st={name:$("studentName").value.trim(),parts,checkDone,tries,answer:i=>answer(i).trim()};
+  const st={name:$("studentName").value.trim(),parts,checkDone,tries,check2Done,tries2,answer:i=>answer(i).trim()};
   if(TT()&&!st.name)st.name="Test T.";
   const err=TT()?null:C.validate(st);if(err){status.textContent=err.text;status.classList.add("error");if(err.focus)$(err.focus).focus();if(err.part){const p=parts[err.part-1];if(p.from<=maxOpen())show(Math.min(Math.max(p.check.page,p.from),maxOpen()),true)}return}
   btn.disabled=true;status.textContent="Sending your work…";
@@ -145,6 +156,6 @@ try{(window.classTestHooks=window.classTestHooks||[]).push({
   count:()=>N,index:()=>cur-1,
   label:i=>{const p=partOf(i+1);return "Part "+p.n+" · "+p.short},
   go:i=>show(i+1,true),
-  solve:()=>{const p=partOf(cur);ls.set("check"+p.n,"1");locked=false;clearInterval(lockTimer);renderChoices(p);refresh()}
+  solve:()=>{const p=partOf(cur);if(p.check2&&checkDone(p.n))ls.set("check2_"+p.n,"1");ls.set("check"+p.n,"1");locked=false;clearInterval(lockTimer);renderChoices(p);refresh()}
 });if(window.classTestSkip)window.classTestSkip.refresh()}catch(e){}
 })();
