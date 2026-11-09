@@ -306,21 +306,75 @@ const TEACHER_TOOLS_URL = "https://script.google.com/macros/s/AKfycbwiVW6Cufw8Dq
   }
   window.classShortName = shortName;
 
-  // --- Shared Chromebooks (FERPA, Fynn 11/3/26) -------------------------
-  // Saved progress lives on the device. When a DIFFERENT student starts using this Chromebook,
-  // erase the last student's saved games, answers and drafts so the next kid never sees them.
+  // --- Shared Chromebooks (FERPA, Fynn 11/3/26; "save it for later" added 11/9/26) ------------
+  // Saved progress lives on the device. When a DIFFERENT student starts using this Chromebook, the last student's
+  // saved games, answers and drafts are put away under their name instead of erased (Fynn 11-09: unfinished work
+  // should be saved), so the next kid never sees them. When that student signs back in on this Chromebook, their
+  // unfinished work comes back and they pick up where they left off. Work nobody comes back for is cleared after 60 days.
   // Who's on the device = the name tapped on the home page, or the name typed into an activity.
   // Site settings (language, home-page class, feedback receipts that are already matched by name) are kept.
   const OWNER_KEY = "site-progress-owner";
   const KEEP_KEY = /^(site-|hub-|class-feedback-receipts$|fd_muted$)/;
   const sameStudent = (a, b) => shortName(a).toLowerCase() === shortName(b).toLowerCase();
-  function wipeOtherStudent() {
-    const gone = [];
-    try {
-      for (let i = 0; i < localStorage.length; i++) { const k = localStorage.key(i); if (k && !KEEP_KEY.test(k)) gone.push(k); }
-      gone.forEach(k => localStorage.removeItem(k));
-    } catch (e) {}
-    return gone.length;
+  const STASH = "site-stash:", STASH_DAYS = 60;
+  const rawSet = Storage.prototype.setItem; // the real save, even after a page's saving is blocked below
+  const stashKey = who => STASH + shortName(who).toLowerCase();
+  function workKeys() {
+    const keys = [];
+    try { for (let i = 0; i < localStorage.length; i++) { const k = localStorage.key(i); if (k && !KEEP_KEY.test(k)) keys.push(k); } } catch (e) {}
+    return keys;
+  }
+  function allStashes() {
+    const out = [];
+    try { for (let i = 0; i < localStorage.length; i++) { const k = localStorage.key(i); if (k && k.startsWith(STASH)) out.push(k); } } catch (e) {}
+    return out;
+  }
+  function readStash(key) { try { const s = JSON.parse(localStorage.getItem(key)); if (s && s.data && typeof s.data === "object") return s; } catch (e) {} return null; }
+  // Put this Chromebook's unfinished work away under one student's name (added to anything already put away for them).
+  // Returns how many saved items were moved off the page.
+  function stashWork(who) {
+    const keys = workKeys();
+    if (!keys.length) return 0;
+    if (shortName(who)) {
+      const key = stashKey(who), old = readStash(key), data = old ? old.data : {};
+      keys.forEach(k => { try { data[k] = localStorage.getItem(k); } catch (e) {} });
+      const txt = JSON.stringify({ at: Date.now(), data });
+      for (let tries = 0; tries < 60; tries++) {
+        try { rawSet.call(localStorage, key, txt); break; }
+        catch (e) { // Chromebook storage full: make room by clearing the oldest other student's put-away work
+          const others = allStashes().filter(k => k !== key).map(k => ({ k, at: (readStash(k) || {}).at || 0 })).sort((a, b) => a.at - b.at);
+          if (!others.length) break;
+          try { localStorage.removeItem(others[0].k); } catch (e2) {}
+        }
+      }
+    }
+    keys.forEach(k => { try { localStorage.removeItem(k); } catch (e) {} });
+    return keys.length;
+  }
+  // Bring a student's put-away work back. Anything already saved on the Chromebook stays (it's newer).
+  // Returns how many saved items came back.
+  function restoreWork(who) {
+    const key = stashKey(who), s = shortName(who) ? readStash(key) : null;
+    if (!s) return 0;
+    let n = 0, failed = false;
+    Object.keys(s.data).forEach(k => {
+      try { if (!KEEP_KEY.test(k) && s.data[k] != null && localStorage.getItem(k) === null) { rawSet.call(localStorage, k, String(s.data[k])); n++; } }
+      catch (e) { failed = true; }
+    });
+    if (!failed) { try { localStorage.removeItem(key); } catch (e) {} }
+    return n;
+  }
+  // Put-away work nobody came back for in 60 days is cleared off the Chromebook.
+  try { allStashes().forEach(k => { const s = readStash(k); if (!s || Date.now() - (s.at || 0) > STASH_DAYS * 864e5) localStorage.removeItem(k); }); } catch (e) {}
+  // Before a reload: stop this page from saving its old game on the way out (it would land on the wrong student).
+  function blockWorkSaves() {
+    try { Storage.prototype.setItem = function (k, v) { if (this === localStorage && !KEEP_KEY.test(String(k))) return; return rawSet.call(this, k, v); }; } catch (e) {}
+  }
+  // "Erase the last student's work" now means "put it away under their name" (Fynn 11-09).
+  function wipeOtherStudent(fallbackName) {
+    let owner = "";
+    try { owner = localStorage.getItem(OWNER_KEY) || ""; } catch (e) {}
+    return stashWork(owner || fallbackName || "");
   }
   // The home page remembers the name used for each class ("hub-me"). Drop names that aren't this student,
   // so the home page can't greet the next kid as the last one (or switch the device back to that name).
@@ -339,15 +393,17 @@ const TEACHER_TOOLS_URL = "https://script.google.com/macros/s/AKfycbwiVW6Cufw8Dq
   function claimDevice(name) {
     const who = shortName(name);
     if (!who || /teacher-submissions/.test(location.pathname)) return 0;
-    let erased = 0;
+    let moved = 0;
     try {
       const owner = localStorage.getItem(OWNER_KEY) || "";
-      if (owner && !sameStudent(owner, who)) erased = wipeOtherStudent();
+      if (owner && !sameStudent(owner, who)) moved = stashWork(owner);
+      // Their own unfinished work from before comes back (other activities pick it up when they open them).
+      moved += restoreWork(who);
       dropOtherHubNames(who);
       localStorage.setItem(OWNER_KEY, who);
       localStorage.setItem("site-student-name", who);
     } catch (e) {}
-    return erased;
+    return moved;
   }
   window.classClaimDevice = claimDevice;
   // One-time clean start for every Chromebook (Fynn said yes 11/3/26): saved work from before the fix above
@@ -363,19 +419,20 @@ const TEACHER_TOOLS_URL = "https://script.google.com/macros/s/AKfycbwiVW6Cufw8Dq
   } catch (e) {}
   try {
     if (!/teacher-submissions/.test(location.pathname)) {
-      // A page we reloaded after erasing: erase once more in case it re-saved the old student's game on the way out.
-      if (sessionStorage.getItem("site-progress-wiped")) { sessionStorage.removeItem("site-progress-wiped"); wipeOtherStudent(); }
+      try { sessionStorage.removeItem("site-progress-wiped"); } catch (e) {} // old flag: saving is blocked before reloads now
       const nowName = localStorage.getItem("site-student-name") || "";
       const owner = localStorage.getItem(OWNER_KEY) || "";
+      let changed = 0;
       if (nowName && owner && !sameStudent(owner, nowName)) {
-        const erased = wipeOtherStudent();
+        changed = stashWork(owner); // the last student's work, put away under their name
         dropOtherHubNames(nowName);
-        localStorage.setItem(OWNER_KEY, shortName(nowName));
-        // Some activities read their saved game before this file loads. Reload once so they start clean.
-        if (erased) { sessionStorage.setItem("site-progress-wiped", "1"); location.reload(); }
-      } else if (nowName && !owner) {
-        localStorage.setItem(OWNER_KEY, shortName(nowName));
       }
+      if (nowName) {
+        changed += restoreWork(nowName); // this student's unfinished work comes back
+        if (!owner || !sameStudent(owner, nowName)) localStorage.setItem(OWNER_KEY, shortName(nowName));
+      }
+      // Some activities read their saved game before this file loads. Reload once so they start with the right student's work.
+      if (changed) { blockWorkSaves(); location.reload(); }
       // A tab the last student left open: when a different student signs in from another tab, reload this one
       // so it can't keep showing (or re-save) the last student's work. Its saves are blocked on the way out.
       const tabOwner = localStorage.getItem(OWNER_KEY) || "";
@@ -397,6 +454,13 @@ const TEACHER_TOOLS_URL = "https://script.google.com/macros/s/AKfycbwiVW6Cufw8Dq
   // Pages that draw their own button (the newer games) keep theirs, and this line stays away.
   // A page can also opt out with window.OWN_NOT_YOU = true or a data-own-not-you attribute.
   const OWN_NOT_YOU = /^\s*(Not .+\?\s*Start fresh|¿No eres .+\?\s*Empieza de nuevo)\s*$/i;
+  // Pages with their own "Not NAME? Start fresh" button (the newer games): put that student's work away first, so the
+  // button only clears it off the screen, not off the Chromebook (Fynn 11-09).
+  document.addEventListener("click", e => {
+    const b = e.target && e.target.closest && e.target.closest("button, a, [role=button]");
+    if (!b || b.closest("#siteNotYou") || !OWN_NOT_YOU.test(b.textContent || "")) return;
+    wipeOtherStudent(rememberedName());
+  }, true);
   function noNotYouHere() {
     return !!(window.HUB_PAGE || window.NO_FEEDBACK_POPUP || /teacher-submissions|setup-|update-teacher/.test(location.pathname));
   }
@@ -431,7 +495,7 @@ const TEACHER_TOOLS_URL = "https://script.google.com/macros/s/AKfycbwiVW6Cufw8Dq
         return set.call(this, k, v);
       };
     } catch (e) {}
-    wipeOtherStudent();
+    wipeOtherStudent(who); // puts their work away under their name (Fynn 11-09)
     try { localStorage.removeItem("site-student-name"); localStorage.removeItem(OWNER_KEY); } catch (e) {}
     try { sessionStorage.setItem("site-progress-wiped", "1"); } catch (e) {}
     // Empty any name box on the page right away (it's reloading anyway).
