@@ -379,7 +379,7 @@ async function load() {
   rosters = {};
   got.filter(r => r.kind === "roster").sort((a, b) => a.submittedAt.localeCompare(b.submittedAt)).forEach(r => {
     const list = (r.answers && r.answers.students) || [];
-    if (Array.isArray(list) && list.length) rosters[r.course] = list.map(n => window.classShortName(n) || String(n));
+    if (Array.isArray(list) && list.length) setRoster(r.course, list);
   });
   // Links you added from the To-do tab ("link" rows). Newest row per link wins; removed ones drop out.
   LINKS = {};
@@ -657,7 +657,17 @@ function openPaperBox() {
 }
 
 // ---- Class lists and name clean-up ----
-let rosters = {};
+let rosters = {}, rosterAlias = {}, rosterLines = {};
+// "Same kid, two names" (Fynn, 11-09): a class-list line like "Jordan M. = JJ M." means turn-ins typed as "JJ M."
+// belong to Jordan M. The part before "=" is the name the dashboard shows. Kept only in the private Sheet.
+const rosterLine = n => String(n || "").split("=").map(x => window.classShortName(x.trim())).filter(Boolean);
+function setRoster(course, list) {
+  const lines = list.map(rosterLine).filter(l => l.length);
+  rosters[course] = lines.map(l => l[0]);
+  rosterLines[course] = lines.map(l => l.join(" = "));
+  rosterAlias[course] = new Map();
+  lines.forEach(l => l.slice(1).forEach(a => rosterAlias[course].set(nameKey(a), l[0])));
+}
 const rosterOf = t => (rosters[t] || []).filter(s => !isTestStudent(s));   // Test T. hidden from the dashboard (Fynn, 11-04)
 const firstKey = n => String(n || "").split(" ")[0].toLowerCase().replace(/[^a-z]/g, "");
 const nameKey = n => { const p = String(n || "").trim().split(/\s+/); return firstKey(n) + "|" + (p.length > 1 ? p[p.length - 1].replace(/[^A-Za-z]/g, "").charAt(0).toLowerCase() : ""); };
@@ -669,8 +679,10 @@ function mergeNames() {
   Object.entries(byCourse).forEach(([course, list]) => {
     const roster = rosterOf(course), byKey = new Map(roster.map(n => [nameKey(n), n]));
     const full = [...new Set(list.map(r => r.studentName).filter(n => nameKey(n).split("|")[1]))];
+    const alias = rosterAlias[course] || new Map();
     list.forEach(r => {
       const k = nameKey(r.studentName);
+      if (alias.has(k)) { r.studentName = alias.get(k); return; }
       if (byKey.has(k)) { r.studentName = byKey.get(k); return; }
       if (!k.split("|")[1]) {                       // no last initial
         const fk = firstKey(r.studentName);
@@ -732,7 +744,7 @@ function attentionHtml(list) {
   if (ones.length) parts.push(`<div class="att low"><b>Level 1 on a standard (${ones.length})</b><ul>${ones.join("")}</ul></div>`);
   return `<details class="attention"${attentionOpen ? " open" : ""}><summary>Needs attention${count ? " (" + count + ")" : ": nothing right now"}</summary>${parts.join("")}
     <div class="rosteredit"><button class="light" id="rosterBtn">Edit class list (${roster.length})</button>
-    <div id="rosterBox" hidden><p class="status">One student per line, first name + last initial (like Jordan M.).</p><textarea id="rosterText" rows="8">${safe((rosters[tab] || []).join("\n"))}</textarea><button id="rosterSave">Save class list</button> <span id="rosterStat" class="status"></span></div></div></details>`;
+    <div id="rosterBox" hidden><p class="status">One student per line, first name + last initial (like Jordan M.). Same kid typing two names? Put both on one line: <b>Jordan M. = JJ M.</b> (the first name is the one shown).</p><textarea id="rosterText" rows="8">${safe((rosterLines[tab] || rosters[tab] || []).join("\n"))}</textarea><button id="rosterSave">Save class list</button> <span id="rosterStat" class="status"></span></div></div></details>`;
 }
 
 const UNITS = window.CLASS_UNITS || {}, UNIT_WORD = { civics: "Friday" };
@@ -1445,9 +1457,9 @@ function render() {
     $("rosterBtn").onclick = () => { $("rosterBox").hidden = !$("rosterBox").hidden; };
     $("rosterSave").onclick = async () => {
       if (!TOOLS_URL) { $("rosterStat").innerHTML = "Finish the " + SETUP_LINK + " first, or send the new list to Claude."; return; }
-      const names = $("rosterText").value.split("\n").map(n => window.classShortName(n.trim())).filter(Boolean);
+      const names = $("rosterText").value.split("\n").map(n => rosterLine(n).join(" = ")).filter(Boolean);
       $("rosterSave").disabled = true; $("rosterStat").textContent = "Saving…";
-      try { await tools("set_roster", { course: tab, students: names }); rosters[tab] = names; mergeNames(); render(); }
+      try { await tools("set_roster", { course: tab, students: names }); setRoster(tab, names); mergeNames(); render(); }
       catch (e) { $("rosterStat").textContent = e.message; $("rosterSave").disabled = false; }
     };
   }
