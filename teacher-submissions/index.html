@@ -9,7 +9,7 @@
    <script src="part1-schoology.js?v=20261105a"></script>
 <script src="videos.js?v=20261105vid18"></script>
 <script src="presentations.js?v=20261103civics3"></script>
-<script src="../shared/turnin.js?v=20261105fb1"></script>
+<script src="../shared/turnin.js?v=20261109nm1"></script>
 <style>
 :root{--navy:#19364b;--red:#a33d36;--green:#2f6b3a;--paper:#f4efe4;--card:#fffdf8;--ink:#22313b;--muted:#536571;--line:#d8cfbd}
 *{box-sizing:border-box}
@@ -684,6 +684,13 @@ function mergeNames() {
       // "Jo M." / "Josie M."): joins the ONE class-list student it fits (Fynn, 11-05). Needs 3+ letters,
       // and does nothing if two students on the list could fit.
       const [fk, ini] = k.split("|");
+// Initials only ("K. R." / "K R."): joins the ONE class-list student with that first letter and last initial
+// (Fynn, 11-09). Does nothing if two students on the list could fit.
+if (fk.length === 1) {
+const byInit = roster.filter(n => { const [rf, ri] = nameKey(n).split("|"); return ri === ini && rf.charAt(0) === fk; });
+if (byInit.length === 1) r.studentName = byInit[0];
+return;
+}
       const fits = roster.filter(n => { const [rf, ri] = nameKey(n).split("|"); return ri === ini && rf !== fk && Math.min(rf.length, fk.length) >= 3 && (rf.startsWith(fk) || fk.startsWith(rf)); });
       if (fits.length === 1) r.studentName = fits[0];
     });
