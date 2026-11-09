@@ -311,7 +311,7 @@ function forgetRows() { try { CacheService.getScriptCache().removeAll(COURSES.ma
 function courseRowsRead(course) {
   var data = sheet().getDataRange().getValues(), c = cols(data[0]);
   var kindCol = ("Kind" in c) ? c["Kind"] : c["Type"];
-  var roster = [], rosterAt = -1, rows = [], links = {}, pins = {}, colEx = {}, exempt = {}, papers = {}, marks = {};
+  var roster = [], aliases = {}, rosterAt = -1, rows = [], links = {}, pins = {}, colEx = {}, exempt = {}, papers = {}, marks = {};
   for (var i = 1; i < data.length; i++) {
     var r = data[i];
     if (String(r[c["Class"]]).trim() !== course) continue;
@@ -323,6 +323,12 @@ function courseRowsRead(course) {
     if (id === "class-roster") {
       if ((when || 0) >= rosterAt && Array.isArray(a.students)) {
         rosterAt = when || 0; roster = a.students.map(shortName).filter(function (n) { return n; });
+        // "Same kid, two names" (Fynn, 11-09): a line like "Jordan M. = JJ M." -- the first name is the real one.
+        aliases = {};
+        a.students.forEach(function (line) {
+          var parts = String(line || "").split("=").map(function (x) { return shortName(x); }).filter(function (x) { return x; });
+          for (var j = 1; j < parts.length; j++) aliases[firstKey(parts[j]) + "|" + initialOf(parts[j])] = parts[0];
+        });
         pins = {}; var p = (a.pins && typeof a.pins === "object") ? a.pins : {};
         Object.keys(p).forEach(function (n) { if (/^\d{4}$/.test(String(p[n]))) pins[shortName(n)] = String(p[n]); });
       }
@@ -340,7 +346,7 @@ function courseRowsRead(course) {
   // Paper columns still in use (name + day only), so students' pages can show their paper grades on that day.
   var paperCols = Object.keys(papers).map(function (k) { return papers[k]; }).filter(function (p) { return !p.removed; })
     .map(function (p) { return { id: "paper-" + p.id, part: +p.part === 1 ? 1 : 2, unit: +p.unit || 0, day: +p.day || 0, title: String(p.title || "") }; });
-  return { roster: roster, rows: rows, links: links, pins: pins, exemptAll: exAll, exempt: exempt, paperCols: paperCols, marks: marks };
+  return { roster: roster, aliases: aliases, rows: rows, links: links, pins: pins, exemptAll: exAll, exempt: exempt, paperCols: paperCols, marks: marks };
 }
 // Every class's video changes from the dashboard: videos added to a day, and "Hidden video (teacher key)" marks for
 // videos removed or swapped out. Only rows whose link is a video (or titled "(Video)") are sent. No student info.
@@ -537,7 +543,8 @@ function myWork(b) {
   if (COURSES.indexOf(course) < 0) return { ok: false, error: "Unknown class." };
   var d = courseRows(course), done = {};
   d.rows.forEach(function (r) { done[r.id] = true; });
-  var me = shortName(b.name), mine = {}, missing = {}, exempt = {};
+  var al = d.aliases || {}, real = function (n) { n = shortName(n); return al[firstKey(n) + "|" + initialOf(n)] || n; };
+  var me = real(b.name), mine = {}, missing = {}, exempt = {};
   if (me) {
     var meFirst = firstKey(me), meInit = initialOf(me);
     // A first name alone and the same first name + last initial count as one student, and capitals don't matter
@@ -555,7 +562,7 @@ function myWork(b) {
     };
     var meCanon = canon(me);
     var same = function (n) {
-      n = shortName(n);
+      n = real(n);
       if (!n) return false;
       if (meCanon && canon(n) === meCanon) return true;
       if (firstKey(n) !== meFirst) return false;
