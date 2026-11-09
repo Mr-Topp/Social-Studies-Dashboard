@@ -251,6 +251,41 @@ function savedRead(p) {
 }
 const infoCache = {};
 const classInfo = course => infoCache[course] || (infoCache[course] = tools({ action: "class_list", course }).catch(() => ({})));
+const rosterNames = info => {
+  const list = info && (info.students || info.roster || info.classRoster || info.studentNames);
+  return Array.isArray(list) ? list.map(n => shortName(typeof n === "string" ? n : n && (n.name || n.studentName))).filter(Boolean) : [];
+};
+const nameParts = n => {
+  const p = String(n || "").trim().split(/\s+/).filter(Boolean);
+  return { first: (p[0] || "").toLowerCase().replace(/[^a-z]/g, ""), last: (p[p.length - 1] || "").toLowerCase().replace(/[^a-z]/g, "") };
+};
+function rosterCanonicalName(name, info) {
+  const n = shortName(name), p = nameParts(n);
+  if (p.first.length !== 1 || !p.last) return n;
+  const fits = rosterNames(info).filter(s => {
+    const q = nameParts(s);
+    return q.first.startsWith(p.first) && q.last.charAt(0) === p.last.charAt(0);
+  });
+  return fits.length === 1 ? fits[0] : n;
+}
+function rosterAliasName(name, info) {
+  const p = nameParts(name);
+  if (p.first.length < 2 || !p.last) return "";
+  const fits = rosterNames(info).filter(s => {
+    const q = nameParts(s);
+    return q.first.startsWith(p.first.charAt(0)) && q.last.charAt(0) === p.last.charAt(0);
+  });
+  if (fits.length !== 1) return "";
+  const q = nameParts(fits[0]);
+  return q.first === p.first && q.last.charAt(0) === p.last.charAt(0)
+    ? q.first.charAt(0).toUpperCase() + " " + q.last.charAt(0).toUpperCase() + "."
+    : "";
+}
+function mergeWorkLists(primary, alias) {
+  ["mine", "missing", "exempt", "classDone"].forEach(k => {
+    primary[k] = [...new Set([...(Array.isArray(primary[k]) ? primary[k] : []), ...(Array.isArray(alias[k]) ? alias[k] : [])])];
+  });
+}
 // Links the teacher added from the dashboard's To-do tab. They join the activity list on their day, the same as
 // any other outside link (Teacher Tools never sends answer keys or summatives).
 // Paper columns the teacher grades on the dashboard. If one matches a printed handout already listed that day,
@@ -401,7 +436,20 @@ async function loadWork0(course, name, stage) {
   let classIds = null, sheet = null;
   if (stage === "saved") { const d = savedRead({ action: "my_work", course, name }); if (!d) return null; classIds = d.classDone || []; if (Array.isArray(d.mine)) sheet = d; }
   else if (stage === "full" && myWorkFresh[course + "|" + name]) { const d = myWorkFresh[course + "|" + name]; classIds = d.classDone || []; if (Array.isArray(d.mine)) sheet = d; }
-  else { try { const d = await tools({ action: "my_work", course, name }); myWorkFresh[course + "|" + name] = d; classIds = d.classDone || []; if (Array.isArray(d.mine)) sheet = d; } catch (e) {} }
+  else { try {
+    const d = await tools({ action: "my_work", course, name });
+    if (Array.isArray(d.mine)) {
+      const info = await classInfo(course);
+      const aliasName = rosterAliasName(name, info);
+      if (aliasName) {
+        try {
+          const alias = await tools({ action: "my_work", course, name: aliasName });
+          if (Array.isArray(alias.mine)) mergeWorkLists(d, alias);
+        } catch (e) {}
+      }
+    }
+    myWorkFresh[course + "|" + name] = d; classIds = d.classDone || []; if (Array.isArray(d.mine)) sheet = d;
+  } catch (e) {} }
   const mine = {};
   const list = receipts().filter(r => REG[r.id] && REG[r.id].course === course && (!r.who || r.who.toLowerCase() === String(name || "").toLowerCase()));
   list.forEach(r => { if (!mine[r.id] || r.at > mine[r.id].atMs) mine[r.id] = { id: r.id, atMs: r.at, token: r.token }; });
@@ -483,7 +531,11 @@ if (!/ [A-Z]\.$/.test(n)) { $("err").textContent = n ? "Add the first letter of 
 }
 
 async function drawHome(app) {
-  const course = me.current, name = me.classes[course], first = name.split(" ")[0];
+  const course = me.current, savedName = me.classes[course] || "";
+  const info = await classInfo(course).catch(() => ({}));
+  const name = rosterCanonicalName(savedName, info);
+  if (name && name !== savedName) { me.classes[course] = name; saveMe(); }
+  const first = name.split(" ")[0];
   const myClasses = Object.keys(COURSES).filter(k => me.classes[k]);
   let spanish = false; // Spanish is off site-wide (Fynn, 11/3/26)
   const testBar = testMode ? `<div class="testbar" role="note">🧪 <b>Test student mode.</b> You're seeing exactly what a student sees, as “${esc(TEST_NAME)}”. Your turn-ins show on your dashboard tagged TEST.
