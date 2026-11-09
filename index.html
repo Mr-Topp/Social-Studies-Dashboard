@@ -163,7 +163,7 @@ footer a{color:var(--muted)}
 <script src="shared/recaps.js?v=20261106d"></script>
 <script src="shared/targets.js?v=20261103g"></script>
 <script src="teacher-submissions/presentations.js?v=20261103s1"></script>
-<script src="shared/turnin.js?v=20261105fb1"></script>
+<script src="shared/turnin.js?v=20261109nm1"></script>
 </head>
 <body>
 <main id="app" aria-live="polite"></main>
@@ -473,7 +473,8 @@ async function drawNamePick(app) {
   };
   const useTyped = () => {
     const n = shortName($("typed").value);
-    if (!/ [A-Z]\.$/.test(n)) { $("err").textContent = n ? "Add the first letter of your last name. Example: " + n.split(" ")[0] + " M." : "Type your name first. Example: Jordan M."; $("typed").focus(); return; }
+    if (/ [A-Z]\.$/.test(n) && n.split(" ")[0].replace(/[^\p{L}]/gu, "").length < 2) { $("err").textContent = "Type your whole first name, then the first letter of your last name. Example: Jordan M."; $("typed").focus(); return; }
+if (!/ [A-Z]\.$/.test(n)) { $("err").textContent = n ? "Add the first letter of your last name. Example: " + n.split(" ")[0] + " M." : "Type your name first. Example: Jordan M."; $("typed").focus(); return; }
     confirmName(n);
   };
   $("useTyped").onclick = useTyped;
@@ -640,7 +641,10 @@ function homeBody(course, work) {
   const sortItems = list => list.slice().sort((a, b) => unitOrder(unitKey(a)) - unitOrder(unitKey(b)) || (a.day || 99) - (b.day || 99));
   const due = sortItems(online.filter(isDue));
   // Paper work never counts as missing (Fynn, 11-05: it's always "Done in class").
-  const missing = sortItems(due.filter(a => !mine[a.id]).concat(online.filter(a => markedM.has(a.id) && !mine[a.id] && !isDue(a) && !exempt.has(a.id))));
+  // Fynn 11-09: missing = ONLY the work the teacher marked M on the dashboard (the "missing" list from Teacher Tools).
+// Blank, graded, exempt, or "Completed in class" work is never missing, even after its day has passed.
+const isMissing = a => markedM.has(a.id) && !mine[a.id] && !exempt.has(a.id) && !(clr.label && isCleared(a));
+const missing = sortItems(online.filter(isMissing));
   const turnedIn = online.filter(a => mine[a.id]);
   const ahead = sortItems(online.filter(a => !isDue(a) && !mine[a.id] && unitOrder(unitKey(a)) === nowOrder));
   const todays = ahead.filter(a => isToday(a) && !(civ && a.hideLink));   // Civics slides go in the slides button, not the work list (Fynn 11-06)
@@ -707,17 +711,10 @@ function homeBody(course, work) {
   const dayKey = a => unitKey(a) + "#" + ((spanOf(a) || [a.day])[0] || 0);
   const missedDays = new Map();
   missing.forEach(a => { const k = dayKey(a); if (!missedDays.has(k)) missedDays.set(k, { unit: unitKey(a), day: (spanOf(a) || [a.day])[0] || 0, ex: a }); });
-  [...new Set(missing.map(unitKey))].forEach(u => {
-    const ds = missing.filter(a => unitKey(a) === u && a.day).map(a => (spanOf(a) || [a.day])[0]);
-    if (ds.length < 2) return;
-    for (let d = Math.min(...ds) + 1; d < Math.max(...ds); d++) {
-      const k = u + "#" + d, any = items.find(a => unitKey(a) === u && (spanOf(a) || [a.day])[0] === d && !isCleared(a));
-      if (any && !missedDays.has(k)) missedDays.set(k, { unit: u, day: d, ex: any });
-    }
-  });
+  // (Fynn 11-09) Only days with an M show here. No "days in between" filler: a day with no M is not missing.
   const isPaper = a => /\(printed\)/i.test(a.title || "");
   const missRow = a => {
-    if (isOnline(a)) return mine[a.id] ? "" : `<div class="qrow"><div><span class="qtitle">${esc(cleanTitle(a.title))}</span>${kindWord(a) ? `<span class="qkind">${esc(kindWord(a))} · online</span>` : `<span class="qkind">Online</span>`}</div><a class="btn qgo" href="${href(a)}"${ext(a)}>Start →</a></div>`;
+    if (isOnline(a)) return !isMissing(a) ? "" : `<div class="qrow"><div><span class="qtitle">${esc(cleanTitle(a.title))}</span>${kindWord(a) ? `<span class="qkind">${esc(kindWord(a))} · online</span>` : `<span class="qkind">Online</span>`}</div><a class="btn qgo" href="${href(a)}"${ext(a)}>Start →</a></div>`;
     // Paper handouts get a link too (Fynn, 11-05), so a student who was gone can see what the class did.
     if (isPaper(a)) return paperQuick(a, "missed");
     return `<div class="qrow"><div><span class="qtitle">${esc(cleanTitle(a.title))}</span><span class="qkind">Done in class · you can open it here</span></div><a class="btn qgo soft" href="${href(a)}"${ext(a)}>Open ↗</a></div>`;
@@ -737,7 +734,7 @@ function homeBody(course, work) {
     status = `<section class="status miss" aria-label="What to do"><div class="shead"><h2>${welcome ? "Welcome back! " : ""}You're missing work from ${nDays} ${nDays === 1 ? "day" : "days"}</h2>${readBtn}</div><p>${welcome ? "Here's what the class did while you were gone. " : ""}Start at the top and work down.</p>${dayGroups}${todayRow}</section>`;
   } else {
     // No "fix these up" list (Fynn, 11-05): students stay on missing and current work, never redoing past work.
-    status = `<section class="status done" aria-label="What to do"><div class="shead"><h2>${welcome ? "Welcome back! " : ""}You're all caught up! 🎉</h2>${readBtn}</div><p>${todays.length || todaysPaper.length ? (classToday ? "Nothing missing. Here's today's work:" : "Nothing missing. Here's what's next:") : due.length ? "You've turned in everything so far." : "Nothing is due yet."}</p>${todayRow}</section>`;
+    status = `<section class="status done" aria-label="What to do"><div class="shead"><h2>${welcome ? "Welcome back! " : ""}You're all caught up! 🎉</h2>${readBtn}</div><p>${todays.length || todaysPaper.length ? (classToday ? "Nothing missing. Here's today's work:" : "Nothing missing. Here's what's next:") : due.length ? "Nothing missing right now." : "Nothing is due yet."}</p>${todayRow}</section>`;
   }
   const cal = (CAL[course] || {})[nowKey.split("|").pop()];
   const testDay = !nowKey.startsWith("p1|") && cal && cal.summative ? cal.summative : "";
@@ -767,12 +764,13 @@ function homeBody(course, work) {
     }
     if (!on) { pill = later ? `<span class="pill p-wait">Coming up</span>` : isToday(a) ? `<span class="pill p-in">${classToday ? "Today · in class" : "Next class · in class"}</span>` : `<span class="pill p-class">Done in class</span>`; }
     else if (w) { pill = gradePill(g); btn = g && g.exempt ? "Open" : "Look again"; }   // never "Fix it" on past work (Fynn, 11-05)
-    else if (isDue(a)) { pill = `<span class="pill p-miss">Missing</span>`; btn = "Start"; }
+    else if (isMissing(a)) { pill = `<span class="pill p-miss">Missing</span>`; btn = "Start"; } // only your M marks (Fynn, 11-09)
     else if (isToday(a)) { pill = `<span class="pill p-in">${classToday ? "Today" : "Next class"}</span>`; btn = "Start"; }
-    else { pill = `<span class="pill p-wait">Coming up</span>`; btn = "Look ahead"; }
+    else if (isDue(a)) { btn = "Open"; } // a past day with no M: not missing, no label
+else { pill = `<span class="pill p-wait">Coming up</span>`; btn = "Look ahead"; }
     const ft = g && g.ft ? `<div class="ft">${g.ft.right} of ${g.ft.total} right on the first try</div>` : "";
     const fb = w && (w.feedback || (g && g.talk)) ? `<p class="fb"><b>Feedback:</b> ${esc(g && g.talk ? "Your teacher wants to talk with you about this one." : w.feedback)}</p>` : "";
-    const strong = on && !w && (isDue(a) || isToday(a));
+    const strong = on && !w && (isMissing(a) || isToday(a));
     return `<div class="row${on ? "" : " lite"}"><div class="info">${kw || on ? `<div class="day">${esc(kw || "Online")}</div>` : ""}<div class="title">${esc(cleanTitle(a.title))}</div>${ft}${fb}</div>
       <div class="act">${pill}<a class="btn open${strong ? "" : " soft"}" href="${href(a)}"${ext(a)}>${btn}${/^https?:/.test(a.path) ? " ↗" : ""}</a></div></div>`;
   };
@@ -783,7 +781,7 @@ function homeBody(course, work) {
     const list = sortItems(items.filter(a => unitKey(a) === k));
     const on = list.filter(isOnline), got = on.filter(a => mine[a.id]).length;
     const isNow = k === nowKey, future = unitOrder(k) > nowOrder;
-    const owed = on.filter(a => mine[a.id] || isDue(a)).length;
+    const owed = on.filter(a => mine[a.id] || isMissing(a)).length; // turned in + your M marks (Fynn, 11-09)
     const paper = list.filter(a => !isOnline(a));
     const c = !k.startsWith("p1|") && (CAL[course] || {})[k];
     // One block per lesson day: "DAY 3 · Wednesday, Oct 28", then that day's work.
@@ -810,7 +808,7 @@ function homeBody(course, work) {
     }).join("");
     const open = (course + "|" + k) in openUnits ? openUnits[course + "|" + k] : isNow;
     const past = unitOrder(k) < nowOrder;
-    const countTxt = !on.length ? "" : future && !got ? "Coming up" : !owed ? "Nothing due yet" : `${got} of ${owed} turned in`;
+    const countTxt = !on.length ? "" : future && !got ? "Coming up" : !owed ? (on.some(isDue) ? "" : "Nothing due yet") : `${got} of ${owed} turned in`;
     return `<section class="unitflat"><h3>${esc(unitLabel(course, k))}${isNow ? ` <span class="now">NOW</span>` : ""}<span class="count">${countTxt}${past && on.length && got === on.length ? " ✓" : ""}</span></h3>${dayBlocks}</section>`;
   }).join("");
 
