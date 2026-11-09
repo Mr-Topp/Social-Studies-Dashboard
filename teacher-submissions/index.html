@@ -688,7 +688,7 @@ function mergeNames() {
 // (Fynn, 11-09). Does nothing if two students on the list could fit.
 if (fk.length === 1) {
 const byInit = roster.filter(n => { const [rf, ri] = nameKey(n).split("|"); return ri === ini && rf.charAt(0) === fk; });
-if (byInit.length === 1) r.studentName = byInit[0];
+if (byInit.length === 1) { r.studentName = byInit[0]; r.typedName = r.studentName; }
 return;
 }
       const fits = roster.filter(n => { const [rf, ri] = nameKey(n).split("|"); return ri === ini && rf !== fk && Math.min(rf.length, fk.length) >= 3 && (rf.startsWith(fk) || fk.startsWith(rf)); });
