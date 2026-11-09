@@ -599,7 +599,7 @@ const TEACHER_TOOLS_URL = "https://script.google.com/macros/s/AKfycbwiVW6Cufw8Dq
     }
 
     if (nameState(body.studentName) !== "ok") {
-      return fakeResponse(400, { error: nameState(body.studentName) === "tooMuch" ? guardText("tooMuch") : NAME_HELP });
+      return fakeResponse(400, { error: /^(tooMuch|needFirst)$/.test(nameState(body.studentName)) ? guardText(nameState(body.studentName)) : NAME_HELP });
     }
     const name = shortName(body.studentName);
     if (!name || !/ [A-Z]\.$/.test(name)) return fakeResponse(400, { error: NAME_HELP });
@@ -659,11 +659,12 @@ const TEACHER_TOOLS_URL = "https://script.google.com/macros/s/AKfycbwiVW6Cufw8Dq
     if (NOT_A_PERSON.test(tag)) return false;
     return /student.?name|turn.?name|player.?name|your name|namebox|xname|^name | name$|first and last|first name|last initial|jordan m|nombre/.test(tag) || el.id.toLowerCase() === "name";
   }
-  // "ok", "empty", "needInitial" (just a first name), or "tooMuch" (a whole last name or extra words)
+  // "ok", "empty", "needInitial" (just a first name), "needFirst" (only a first initial, like "K R."), or "tooMuch"
   function nameState(raw) {
     const words = String(raw || "").trim().split(/\s+/).filter(Boolean);
     if (!words.length) return "empty";
     if (words.length === 1) return "needInitial";
+if (words.length === 2 && words[0].replace(/[^\p{L}]/gu, "").length < 2) return "needFirst"; // Fynn 11-09: "K R." made a second student
     if (words.length === 2 && /^\p{L}\.?$/u.test(words[1]) && /\p{L}/u.test(words[0])) return "ok";
     return "tooMuch";
   }
@@ -673,7 +674,10 @@ const TEACHER_TOOLS_URL = "https://script.google.com/macros/s/AKfycbwiVW6Cufw8Dq
     if (state === "tooMuch") return isEs()
       ? "Solo la inicial de tu apellido, no el apellido completo. Ejemplo: Jordan M."
       : "Only your last INITIAL, not your whole last name. Example: Jordan M.";
-    return isEs() ? "Agrega la inicial de tu apellido. Ejemplo: Jordan M." : "Add your last initial. Example: Jordan M.";
+    if (state === "needFirst") return isEs()
+? "Escribe tu nombre completo y la inicial de tu apellido. Ejemplo: Jordan M."
+: "Type your whole first name, then your last initial. Example: Jordan M.";
+return isEs() ? "Agrega la inicial de tu apellido. Ejemplo: Jordan M." : "Add your last initial. Example: Jordan M.";
   }
   function showGuard(box, state) {
     let msg = box.nextElementSibling && box.nextElementSibling.classList.contains("name-guard") ? box.nextElementSibling : null;
@@ -697,7 +701,7 @@ const TEACHER_TOOLS_URL = "https://script.google.com/macros/s/AKfycbwiVW6Cufw8Dq
     for (const el of document.querySelectorAll("input")) {
       if (!isNameBox(el) || !visible(el)) continue;
       const s = nameState(el.value);
-      if (s === "tooMuch" || s === "needInitial") return { el, s };
+      if (s === "tooMuch" || s === "needInitial" || s === "needFirst") return { el, s };
     }
     return null;
   }
