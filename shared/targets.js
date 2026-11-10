@@ -675,6 +675,20 @@ window.CLASS_TARGETS = {
    "g3": "I can analyze how imperialism impacted the modern world."
   },
   "1|12": {
+   "t": [
+    "I can explain how Nazi propaganda shaped what kids like Jojo believed about Jewish people.",
+    "I can analyze how the Hitler Youth trained young Germans to be loyal to Hitler."
+   ],
+   "g3": "I can analyze how fascism and Nazi ideas affected ordinary people during World War II."
+  },
+  "1|13": {
+   "t": [
+    "I can explain how Jojo's beliefs change once he gets to know Elsa as a real person.",
+    "I can compare what Jojo Rabbit shows with what really happened in Germany at the end of World War II."
+   ],
+   "g3": "I can analyze how fascism and Nazi ideas affected ordinary people during World War II."
+  },
+  "1|14": {
    "test": 1,
    "g3": "I can analyze how imperialism impacted the modern world."
   },

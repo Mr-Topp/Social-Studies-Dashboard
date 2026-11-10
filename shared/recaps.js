@@ -21,7 +21,9 @@ window.CLASS_RECAPS = {
     8: "The choices leaders made as Germany grabbed land before World War II, and the warning signs people could have acted on.",
     9: "Through Maus II, what happened at Auschwitz and why we remember the Holocaust.",
     10: "The big turning points that helped the Allies win World War II.",
-    11: "After World War II: punish the countries that lost, or help them rebuild, and why the world chose to rebuild."
+    11: "After World War II: punish the countries that lost, or help them rebuild, and why the world chose to rebuild.",
+    12: "Started the movie Jojo Rabbit, about a German boy in the Hitler Youth who finds out his mother is hiding a Jewish girl.",
+    13: "Finished Jojo Rabbit and talked about how propaganda shaped what Jojo believed, and how meeting Elsa changed him."
   } },
   "sociology": { 1: {
     1: "What sociology is: the study of how groups and society shape what people do.",

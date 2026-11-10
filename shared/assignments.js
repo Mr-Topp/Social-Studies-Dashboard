@@ -114,7 +114,7 @@ window.CLASS_DONE_FOR_ALL = {
 window.CLASS_CALENDAR = {
   "us-history":    { 1: { days: 6,  summative: "2026-11-05" }, 2: { days: 8,  summative: "2026-11-19" }, 3: { days: 5, summative: "2026-12-03" },
                      4: { days: 4,  summative: "2026-12-10" }, 5: { days: 4,  summative: "2026-12-17" }, 6: { days: 3, summative: "2027-01-06" } },
-  "world-history": { 1: { days: 12, summative: "2026-11-19" }, 2: { days: 9, summative: "2026-12-10" }, 3: { days: 7, summative: "2027-01-06" } },
+  "world-history": { 1: { days: 14, summative: "2026-11-19" }, 2: { days: 9, summative: "2026-12-10" }, 3: { days: 7, summative: "2027-01-06" } },
   "sociology":     { 1: { days: 10, summative: "2026-11-12" }, 2: { days: 6,  summative: "2026-11-24" }, 3: { days: 7, summative: "2026-12-10" }, 4: { days: 7, summative: "2027-01-06" } },
   "government":    { 1: { days: 10, summative: "2026-11-12" }, 2: { days: 6,  summative: "2026-11-24" }, 3: { days: 3, summative: "2026-12-03" },
                      4: { days: 4,  summative: "2026-12-10" }, 5: { days: 4,  summative: "2026-12-17" }, 6: { days: 3, summative: "2027-01-06" } }
@@ -156,6 +156,7 @@ window.CLASS_ASSIGNMENTS = {
   "day9-maus2-reading-checks":   { course: "world-history", unit: 1, day: 9, title: "Day 9 · Maus II (Reading)", path: "day9-maus2/", std: ["SS.9-12.WH.30", "SS.9-12.WH.33"] },
   "day10-wwii-comics":           { course: "world-history", unit: 1, day: 10, title: "Day 10 · What Wins a War? 1940s War Comics (Reading)", path: "day10-wwii-comics/", std: ["SS.9-12.WH.32", "SS.9-12.WH.33"] },  // public-domain 1940s comics fact-check (Fynn, 11-03)
   "day11-wwii-peace":            { course: "world-history", unit: 1, day: 11, title: "Day 11 · Never Again? A 1945 Comic's Peace Plan (Reading)", path: "day11-wwii-peace/", std: ["SS.9-12.WH.31", "SS.9-12.WH.29"] },  // public-domain 1945 True Comics #44 fact-check (Fynn, 11-03)
+  "wh-u1-jojo-rabbit":          { course: "world-history", unit: 1, day: 12, turnIn: false, std: [], title: "Days 12–13 · Jojo Rabbit (Movie)", path: "https://www.youtube.com/watch?v=JZx3dMqjfK4" },  // Fynn 11-10: movie days; test moved to Day 14 (still Thu 11/19)
 
   // ---- U.S. History · Unit 1 (Roaring 20s & Great Depression) · outside links, no dashboard turn-in (turnIn: false) ----
   "ush-u1-gd-assignment":     { course: "us-history", unit: 1, day: 1, turnIn: false, std: [], title: "Days 1–3 · Great Depression Project (Word)", path: "https://linnmarcsd-my.sharepoint.com/:w:/g/personal/fynnley_toppert_linnmar_k12_ia_us/IQAIG6nonFrZTpOf7Br6vdQGAVsfVh9lwF7Tub5K5XmvHl8?e=5uRa7c" },
@@ -369,10 +370,10 @@ window.CLASS_ASSIGNMENTS = {
   "wh-u1-d5-drive1": { course: "world-history", unit: 1, day: 5, title: "Day 5 · Treaty of Versailles: What Was at Stake? (Reading)", path: "https://drive.google.com/open?id=1ZvP5rShM5FSjB4Gi7TsxxGmaw2wogq6ej8y6rLGFJAw", turnIn: false, alt: true, std: ["SS.9-12.WH.31", "SS.9-12.WH.33"] },
   "wh-u1-d6-drive1": { course: "world-history", unit: 1, day: 6, title: "Day 6 · The Rise of Totalitarian Leaders (Reading)", path: "https://drive.google.com/open?id=13_33ACZIYW2kariAHlED_bg7TQ2wzj130l5RQm7zwiU", turnIn: false, alt: true, std: ["SS.9-12.WH.31", "SS.9-12.WH.30"] },
   "wh-u1-d8-drive1": { course: "world-history", unit: 1, day: 8, title: "Day 8 · America and the Holocaust: Help and Failure (Reading)", path: "https://drive.google.com/open?id=1tbFf2Ig7T_oCmUEj1Q1xl2OoaAjpQ-vZD5H3gnKKiwY", turnIn: false, alt: true, std: ["SS.9-12.WH.29", "SS.9-12.WH.30"] },
-  "wh-u1-summative": { course: "world-history", unit: 1, day: 12, turnIn: false, std: [], title: "Day 12 · Summative (Form A)", path: "https://docs.google.com/document/d/1N_nSVYkfx_SaNllrzwxUJ-l-PS16s9vzgAovSESogyU/edit" },
-  "wh-u1-summative-key": { course: "world-history", unit: 1, day: 12, turnIn: false, std: [], title: "Day 12 · Summative Form A Teacher Key", path: "https://docs.google.com/document/d/1Ch2DkgD13JsDErm76f8is07KHADolyhuqsgreYAySjY/edit" },
-  "wh-u1-summative-b": { course: "world-history", unit: 1, day: 12, turnIn: false, std: [], title: "Day 12 · Summative (Form B · retake)", path: "https://docs.google.com/document/d/1cdglPZyne8Ky7scLnS68CLJ8gJEYwXgttk1M729US7I/edit" },
-  "wh-u1-summative-b-key": { course: "world-history", unit: 1, day: 12, turnIn: false, std: [], title: "Day 12 · Summative Form B Teacher Key", path: "https://docs.google.com/document/d/1ij1KduLyGtF2ECcCb-xX0P3QA1Hd_XUWyUBlw59BOds/edit" },
+  "wh-u1-summative": { course: "world-history", unit: 1, day: 14, turnIn: false, std: [], title: "Day 14 · Summative (Form A)", path: "https://docs.google.com/document/d/1N_nSVYkfx_SaNllrzwxUJ-l-PS16s9vzgAovSESogyU/edit" },
+  "wh-u1-summative-key": { course: "world-history", unit: 1, day: 14, turnIn: false, std: [], title: "Day 14 · Summative Form A Teacher Key", path: "https://docs.google.com/document/d/1Ch2DkgD13JsDErm76f8is07KHADolyhuqsgreYAySjY/edit" },
+  "wh-u1-summative-b": { course: "world-history", unit: 1, day: 14, turnIn: false, std: [], title: "Day 14 · Summative (Form B · retake)", path: "https://docs.google.com/document/d/1cdglPZyne8Ky7scLnS68CLJ8gJEYwXgttk1M729US7I/edit" },
+  "wh-u1-summative-b-key": { course: "world-history", unit: 1, day: 14, turnIn: false, std: [], title: "Day 14 · Summative Form B Teacher Key", path: "https://docs.google.com/document/d/1ij1KduLyGtF2ECcCb-xX0P3QA1Hd_XUWyUBlw59BOds/edit" },
   "wh-u2-d4-drive1": { course: "world-history", unit: 2, day: 2, title: "Day 2 · Mao Zedong's China (Reading)", path: "https://drive.google.com/open?id=1JzDh5PPnzoNuHVz6w_Lo7KGIlE-5DlAM3Y_Hx_Fd3VU", turnIn: false, alt: true, std: ["SS.9-12.WH.34", "SS.9-12.WH.35", "SS.9-12.WH.38"] },
   "wh-u2-d6-drive1": { course: "world-history", unit: 2, day: 4, title: "Day 4 · The Indian Subcontinent Achieves Freedom (Reading)", path: "https://drive.google.com/open?id=11oyS3ZKwI03fpZHa6FI7Cpo331yY4-QaLikv7dYoYn0", turnIn: false, alt: true, std: ["SS.9-12.WH.36", "SS.9-12.WH.34"] },
   "wh-u2-d7-drive1": { course: "world-history", unit: 2, day: 5, title: "Day 5 · New Nations in Africa (Reading)", path: "https://drive.google.com/open?id=1rYuR06gcXLtHd_3MQigCF4LF62ILM9jgYSYyxDsFeIQ", turnIn: false, alt: true, std: ["SS.9-12.WH.36", "SS.9-12.WH.34", "SS.9-12.WH.37"] },
