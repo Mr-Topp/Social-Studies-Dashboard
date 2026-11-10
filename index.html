@@ -315,6 +315,10 @@ async function addTeacherLinks(course, saved) {
 const isKey = (id, a) => /answer key|teacher key/i.test(a.title || "") || /-key$/.test(id);
 const isTest = a => /summative/i.test(a.title || "") && !/review/i.test(a.title || "");
 const isOnline = a => !/^https?:/.test(a.path || "") && a.turnIn !== false;
+// A game on another site (iCivics games, Congress Drop, etc.): title says "Game" or "(2 Player)". Not printed, not an alternative.
+const isGame = a => /^https?:/.test(a.path || "") && !a.alt && !/\(printed\)|blooket/i.test((a.title || "") + " " + a.path) && /\bgame\b|\(2 player\)/i.test(a.title || "");
+const gameTitle = a => cleanTitle(a.title).replace(/ · (iCivics )?Game$/i, "").replace(/ \(Game\)$/i, "");
+const gameSite = a => /icivics\.org/i.test(a.path || "") ? "iCivics" : "another site";
 function studentItems(course) {
   return Object.entries(REG).filter(([id, a]) => a.course === course && (a.path || a.paperCol) && !a.alt && !isKey(id, a) && !isTest(a)
     && !/dashboard\.blooket\.com/.test(a.path)).map(([id, a]) => ({ id, ...a }));
@@ -681,6 +685,8 @@ function homeBody(course, work) {
   // Counts whether this device used the ?teacher-test link or someone just typed the name "Test T.".
   const isTestT = testMode || String((me.classes || {})[course] || "").trim().toLowerCase() === TEST_NAME.toLowerCase();
   if (isTestT) online.forEach(a => { if ((!mine[a.id] || mine[a.id].cleared) && isDue(a)) mine[a.id] = { id: a.id, at: todayIso, teacher: false, flagged: false }; });
+  // Fynn 11-10: Test T. has NOT turned in today's (or later) work, even after testing it, so he sees today's work like a student.
+  if (isTestT && !work.preview) online.forEach(a => { if (!isDue(a) && mine[a.id] && !mine[a.id].cleared) delete mine[a.id]; });
   // Teacher preview: pretend this student turned in everything due (and today's work), with sample grades.
   if (work.preview) {
     const SAMPLE = [
@@ -703,6 +709,9 @@ const missing = sortItems(online.filter(isMissing));
   // Paper work happening today (Fynn, 11-05): tell students and link the handout, so they know and can open it.
   const isHandout = a => !isOnline(a) && /\(printed\)/i.test(a.title || "") && !a.alt && /^https?:/.test(a.path || "");
   const todaysPaper = sortItems(items.filter(a => isHandout(a) && unitKey(a) === nowKey && isToday(a)));
+  // Games students play on another site (iCivics etc.) show in today's work with a Play button (Fynn, 11-10). Never missing.
+  const todaysGames = sortItems(items.filter(a => isGame(a) && unitKey(a) === nowKey && isToday(a)));
+  const hasToday = todays.length || todaysPaper.length || todaysGames.length;
   const href = a => esc(a.path);
   const ext = a => /^https?:/.test(a.path) ? ` target="_blank" rel="noopener"` : "";
   const dayText = a => { const s = spanOf(a); return s ? `Days ${s[0]}–${s[1]}` : a.day ? `Day ${a.day}` : ""; };
@@ -726,7 +735,8 @@ const missing = sortItems(online.filter(isMissing));
   let away = 0;
   try { const last = localStorage.getItem("hub-last-seen:" + course); if (last && last < todayIso) away = weekdaysBetween(last, todayIso); localStorage.setItem("hub-last-seen:" + course, todayIso); } catch (e) {}
   const welcome = away >= 3 && !testMode;
-  const todayRow = todays.length || todaysPaper.length ? `<div class="qlabel">${classToday ? "Today's work" : "Next class · " + esc(longDate(nextClassIso))}</div>${todays.map(a => quick(a, "Start")).join("")}${todaysPaper.map(a => paperQuick(a, "today")).join("")}` : "";
+  const gameQuick = (a, kind) => `<div class="qrow"><div>${kind === "today" ? `<span class="qday">${esc(shortWhere(a))}</span>` : ""}<span class="qtitle">🎮 ${esc(gameTitle(a))}</span><span class="qkind">${kind === "today" ? "Game · play it on " + esc(gameSite(a)) : "Game · you can play it here"}</span></div><a class="btn qgo${kind === "today" ? "" : " soft"}" href="${href(a)}"${ext(a)}>Play ↗</a></div>`;
+  const todayRow = hasToday ? `<div class="qlabel">${classToday ? "Today's work" : "Next class · " + esc(longDate(nextClassIso))}</div>${todays.map(a => quick(a, "Start")).join("")}${todaysGames.map(a => gameQuick(a, "today")).join("")}${todaysPaper.map(a => paperQuick(a, "today")).join("")}` : "";
   // Learning goals in Fynn's own kid-friendly words, from his scale docs (shared/targets.js): the day's "I can"
   // targets plus what a 3 (Proficient) looks like. Shown for today and for each day a student missed.
   const TARGETS = (window.CLASS_TARGETS || {})[course] || (civ && window.CIVICS_TARGETS) || {};
@@ -769,6 +779,7 @@ const missing = sortItems(online.filter(isMissing));
     if (isOnline(a)) return !isMissing(a) ? "" : `<div class="qrow"><div><span class="qtitle">${esc(cleanTitle(a.title))}</span>${kindWord(a) ? `<span class="qkind">${esc(kindWord(a))} · online</span>` : `<span class="qkind">Online</span>`}</div><a class="btn qgo" href="${href(a)}"${ext(a)}>Start →</a></div>`;
     // Paper handouts get a link too (Fynn, 11-05), so a student who was gone can see what the class did.
     if (isPaper(a)) return paperQuick(a, "missed");
+    if (isGame(a)) return gameQuick(a, "missed");
     return `<div class="qrow"><div><span class="qtitle">${esc(cleanTitle(a.title))}</span><span class="qkind">Done in class · you can open it here</span></div><a class="btn qgo soft" href="${href(a)}"${ext(a)}>Open ↗</a></div>`;
   };
   const dayGroups = [...missedDays.values()].sort((x, y) => unitOrder(x.unit) - unitOrder(y.unit) || x.day - y.day).map(g => {
@@ -786,7 +797,7 @@ const missing = sortItems(online.filter(isMissing));
     status = `<section class="status miss" aria-label="What to do"><div class="shead"><h2>${welcome ? "Welcome back! " : ""}You're missing work from ${nDays} ${nDays === 1 ? "day" : "days"}</h2>${readBtn}</div><p>${welcome ? "Here's what the class did while you were gone. " : ""}Start at the top and work down.</p>${dayGroups}${todayRow}</section>`;
   } else {
     // No "fix these up" list (Fynn, 11-05): students stay on missing and current work, never redoing past work.
-    status = `<section class="status done" aria-label="What to do"><div class="shead"><h2>${welcome ? "Welcome back! " : ""}You're all caught up! 🎉</h2>${readBtn}</div><p>${todays.length || todaysPaper.length ? (classToday ? "Nothing missing. Here's today's work:" : "Nothing missing. Here's what's next:") : due.length ? "Nothing missing right now." : "Nothing is due yet."}</p>${todayRow}</section>`;
+    status = `<section class="status done" aria-label="What to do"><div class="shead"><h2>${welcome ? "Welcome back! " : ""}You're all caught up! 🎉</h2>${readBtn}</div><p>${hasToday ? (classToday ? "Nothing missing. Here's today's work:" : "Nothing missing. Here's what's next:") : due.length ? "Nothing missing right now." : "Nothing is due yet."}</p>${todayRow}</section>`;
   }
   const cal = (CAL[course] || {})[nowKey.split("|").pop()];
   const testDay = !nowKey.startsWith("p1|") && cal && cal.summative ? cal.summative : "";
@@ -813,6 +824,10 @@ const missing = sortItems(online.filter(isMissing));
     // for every student, the same as other in-class work. Today = "Today · in class", later days = "Coming up".
     if (!on && /\(printed\)/i.test(a.title || "")) {
       return `<div class="row lite"><div class="info"><div class="day">Paper</div><div class="title">📄 ${esc(cleanTitle(a.title))}</div></div><div class="act"><span class="pill ${later ? "p-wait\">Coming up" : isToday(a) ? "p-in\">" + (classToday ? "Today · in class" : "Next class · in class") : "p-class\">Done in class"}</span>${/^https?:/.test(a.path || "") ? `<a class="btn open soft" href="${href(a)}"${ext(a)}>Open ↗</a>` : ""}</div></div>`;
+    }
+    if (!on && isGame(a)) {
+      const tp = later ? `<span class="pill p-wait">Coming up</span>` : isToday(a) ? `<span class="pill p-in">${classToday ? "Today" : "Next class"}</span>` : `<span class="pill p-class">Done in class</span>`;
+      return `<div class="row lite"><div class="info"><div class="day">Game</div><div class="title">🎮 ${esc(gameTitle(a))}</div></div><div class="act">${tp}<a class="btn open${isToday(a) ? "" : " soft"}" href="${href(a)}"${ext(a)}>Play ↗</a></div></div>`;
     }
     if (!on) { pill = later ? `<span class="pill p-wait">Coming up</span>` : isToday(a) ? `<span class="pill p-in">${classToday ? "Today · in class" : "Next class · in class"}</span>` : `<span class="pill p-class">Done in class</span>`; }
     else if (w) { pill = gradePill(g); btn = g && g.exempt ? "Open" : "Look again"; }   // never "Fix it" on past work (Fynn, 11-05)
