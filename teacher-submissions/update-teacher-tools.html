@@ -34,7 +34,7 @@ kbd{background:#fff;border:1px solid #cfc5b3;border-bottom-width:2px;border-radi
 <main>
 <p class="eyebrow">Teacher dashboard · quick update</p>
 <h1>Update your Teacher Tools</h1>
-<p class="lead">This lets the dashboard <b>keep your slides matched to your videos</b>: when you add a video, you pick the slide and its link goes there; when you remove or swap one, its link comes off the slides. It keeps everything from before (fast student home page, same videos locked or unlocked, the M button, hand grades, name matching).</p>
+<p class="lead">This lets you mark <b>one student "Completed in class"</b> from their box on the dashboard (counts as done, no score). It keeps everything from before (slides matched to videos, fast student home page, same videos locked or unlocked, the M button, hand grades, name matching).</p>
 <ol>
   <li id="s1"><b>Copy the new script.</b><br><button class="btn" id="copyBtn">Copy the script</button><span class="st" id="copySt" aria-live="polite"></span></li>
   <li id="s2"><b>Open your Teacher Tools script.</b><br>
@@ -69,14 +69,14 @@ $("checkBtn").onclick = async () => {
   out.className = "st"; out.textContent = "Checking…";
   try {
     const ver = await fetch(URL_, { method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify({ action: "version" }) }).then(r => r.json()).catch(() => ({}));
-    if (!(ver.ok && (ver.can || []).includes("name-short-long"))) {
+    if (!(ver.ok && (ver.can || []).includes("in-class"))) {
       out.className = "st bad";
       out.innerHTML = "Not updated yet. Google is still running the old version. Redo step 4 and make sure you pick <b>New version</b> before Deploy. Then check again.";
       return;
     }
     ["s3", "s3b", "s4", "s5"].forEach(id => $(id).classList.add("done"));
     out.className = "st ok";
-    out.innerHTML = "✅ It worked! Students' to-do lists now count a short or long version of their first name (like Alex R. / Alexandra R.) as the same student. <a href=\"./\">Back to your dashboard →</a>";
+    out.innerHTML = "✅ It worked! The <b>Completed in class</b> button on your dashboard now saves, and that student's to-do shows it as done. <a href=\"./\">Back to your dashboard →</a>";
   } catch (e) {
     out.className = "st bad"; out.textContent = "Couldn't reach Google. Check your internet and try again.";
   }
