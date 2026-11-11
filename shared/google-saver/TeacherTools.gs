@@ -46,7 +46,7 @@ function doPost(e) {
     // Lets the update page check which version is running. Shares nothing.
     // Teacher dashboard video list, so locked = unlocked (Fynn, 2026-11-05). Video links only, nothing about students.
     if (body.action === "videos") return json(videoList());
-    if (body.action === "version") return json({ ok: true, version: 16, can: ["links", "student-links", "paper", "no-grades", "student-todo", "online-grade", "name-caps", "online-m", "videos", "fast", "slides", "name-short-long", "safe-append"] });
+    if (body.action === "version") return json({ ok: true, version: 17, can: ["links", "student-links", "paper", "no-grades", "student-todo", "online-grade", "name-caps", "online-m", "videos", "fast", "slides", "name-short-long", "safe-append", "in-class"] });
   } catch (err) { return json({ ok: false, error: "Try again later." }); }
   var check = codeCheck(body.code);
   if (check === "locked") return json({ ok: false, error: "Too many wrong teacher codes. Wait 15 minutes, then try again." });
@@ -154,7 +154,7 @@ function setLink(b) {
 // paper_task: adds or removes a paper column on a lesson day (one "paper-task" row; newest row per id wins).
 // marks: what you type in a box. One "mark" row per student per activity, updated in place:
 //   "1"-"4" = level (paper columns, or online work whose turn-in didn't save; Fynn 11-04), "EX" = exempt (any activity),
-//   "M" = missing (paper columns), "" = clear.
+//   "M" = missing (paper columns), "IC" = completed in class (one student, no score), "" = clear.
 // col_exempt: "Exempt everyone" for one activity in one class (one "col" row; newest row per activity wins).
 // The AI grader skips all of these rows (Kind isn't "turn-in"). Students' pages only learn what's exempt.
 var STD_OK = /^SS\.9-12\.(WH|US|Gov|Soc)\.\d+$/;
@@ -195,7 +195,7 @@ function setMarks(b) {
   for (var k = 0; k < items.length; k++) {
     var it = items[k], paper = /^paper-[a-z0-9]{1,40}$/.test(it.act);
     if (!/^[a-z0-9][a-z0-9-]{0,79}$/.test(it.act) || !it.student) return { ok: false, error: "Missing the student or activity." };
-    if (!(it.value === "" || it.value === "EX" || /^[1-4]$/.test(it.value) || it.value === "M")) return { ok: false, error: "Type 1-4, EX or M." };
+    if (!(it.value === "" || it.value === "EX" || /^[1-4]$/.test(it.value) || it.value === "M" || it.value === "IC")) return { ok: false, error: "Type 1-4, EX, M or IC." };
   }
   var saved = [];
   withLock(function (sh) {
@@ -574,6 +574,7 @@ function myWork(b) {
       var cut = k.lastIndexOf("|"), id = k.slice(0, cut), who = k.slice(cut + 1), m = d.marks[k] || {};
       if (!same(who)) return;
       if (/^[1-4]$/.test(String(m["Teacher level"] || ""))) mine[id] = true;   // you graded it by hand: shows "✓ Turned in" (no grade sent)
+      if (m.Mark === "IC") mine[id] = true;   // "Completed in class" for one student (Fynn, 11-11): shows "✓ Turned in"
       if (m.Mark === "M") missing[id] = true; else delete missing[id];
       if (m.Mark === "EX") exempt[id] = true; else delete exempt[id];
     });
