@@ -1104,7 +1104,7 @@ return isEs() ? "Agrega la inicial de tu apellido. Ejemplo: Jordan M." : "Add yo
         "@media print{.start-over-zone{display:none}}";
       document.head.appendChild(css);
       zone = document.createElement("div");
-      zone.className = "start-over-zone"; zone.setAttribute("data-start-over-zone", "");
+      zone.className = "start-over-zone"; zone.setAttribute("data-start-over-zone", ""); zone.setAttribute("role", "region"); zone.setAttribute("aria-label", "Start over");
       const es = window.SiteLang && window.SiteLang.isEs && window.SiteLang.isEs();
       zone.innerHTML = "<p>" + (es ? "¿Necesitas borrar tu trabajo y empezar otra vez?" : "Need to erase your work and begin again?") + "</p>";
       document.body.appendChild(zone);

@@ -79,7 +79,7 @@ function maxOpen(){for(let pg=1;pg<=N;pg++)if(blocker(pg))return pg;return N}
 function show(pg,scroll){
   cur=Math.max(1,Math.min(N,pg));ls.set("at",String(cur));
   const p=partOf(cur),im=$("flipImg");
-  im.src=img(cur);im.alt=C.title+", reader page "+cur+" of "+N;
+  im.src=img(cur);im.alt=(C.alts&&C.alts[cur-1]?C.alts[cur-1]+" ":"")+"("+C.title+", reader page "+cur+" of "+N+")";
   if(cur<N){const pre=new Image();pre.src=img(cur+1)}
   parts.forEach(x=>{$("q"+x.n).hidden=x.n!==p.n});
   clearInterval(timer);
@@ -127,7 +127,7 @@ route.addEventListener("click",e=>{const a=e.target.closest("a[data-part]");if(!
 document.addEventListener("keydown",e=>{if(e.target.matches("input,textarea"))return;if(e.key==="ArrowRight")next();if(e.key==="ArrowLeft")back();if(e.key==="Escape")closeBig()});
 
 /* ---------- make page bigger ---------- */
-function openBig(){$("flipBigImg").src=img(cur);$("flipBig").hidden=false;$("flipBigClose").focus()}
+function openBig(){$("flipBigImg").src=img(cur);$("flipBigImg").alt=$("flipImg").alt;$("flipBig").hidden=false;$("flipBigClose").focus()}
 function closeBig(){$("flipBig").hidden=true}
 $("flipZoom").addEventListener("click",openBig);$("flipImg").addEventListener("click",openBig);
 $("flipBigClose").addEventListener("click",closeBig);$("flipBig").addEventListener("click",e=>{if(e.target.id==="flipBig")closeBig()});
