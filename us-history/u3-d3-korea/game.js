@@ -7,13 +7,15 @@
 //  World War III risk, support at home, and MacArthur (the rival who wants a bigger war).
 //  6 decisions carry forward to 5 endings. 6 evidence checks are part of the world
 //  (reporters at the press briefing, cables, the Constitution, the armistice paper).
+//  2026-11-13 (Fynn): simplified + shortened. Light look, 2 meters (war risk + MacArthur), a 3-step
+//  "Your job" strip on every screen, check + choice on ONE screen, 15 screens instead of 25.
 //  Word budget (Fynn, 2026-11-03): ≤35 words of reading per screen, short cards, one-line reveals.
 //  Turn-in goes through shared/turnin.js (classTurnIn), same payload shape as shared/unit-game.js.
 //  Spanish: es.js sets window.KOREA_ES (keys = the exact English strings below).
 // =====================================================================
 (function () {
   "use strict";
-  const KEY = "ush-u3-d3-korea-v2";
+  const KEY = "ush-u3-d3-korea-v3";
   const CFG = {
     assignmentId: "ush-u3-d3-korea",
     title: "U.S. History · Unit 3 · Day 2 · The Line That Moved: Korea",
@@ -33,12 +35,12 @@
 
   // ---------- state ----------
   function fresh() {
-    return { v: 2, name: "", step: 0, phase: 0, m: { risk: 2, support: 7, mac: 4 }, f: {}, line: "split",
+    return { v: 3, name: "", step: 0, phase: 0, m: { risk: 2, mac: 4 }, f: {}, line: "split",
       picks: {}, pickTitles: {}, wrong: {}, done: {}, trail: [], writing: {}, result: null, events: {}, turnedIn: false };
   }
   let st;
   try { st = JSON.parse(localStorage.getItem(KEY)); } catch (e) {}
-  if (!st || st.v !== 2 || !st.m) st = fresh();
+  if (!st || st.v !== 3 || !st.m) st = fresh();
   // Shared Chromebooks: if a different student is signed in on the home page now, don't show the last kid's game.
   try {
     const signedIn = window.classShortName ? window.classShortName(localStorage.getItem("site-student-name") || "") : "";
@@ -48,12 +50,13 @@
 
   function clampM() {
     const m = st.m;
-    ["risk", "support", "mac"].forEach(k => { m[k] = Math.max(0, Math.min(10, m[k])); });
+    ["risk", "mac"].forEach(k => { m[k] = Math.max(0, Math.min(10, m[k])); });
   }
   let pending = null;   // meter changes to animate after the next render
   let mapFrom = null;   // front line to slide FROM on the next render
   function applyFx(fx) {
-    ["risk", "support", "mac"].forEach(k => { if (fx[k]) st.m[k] += fx[k]; });
+    ["risk", "mac"].forEach(k => { if (fx[k]) st.m[k] += fx[k]; });
+    fx = Object.assign({}, fx); delete fx.support;
     clampM();
     pending = Object.assign({}, fx);
     return fxTags(fx);
@@ -62,18 +65,16 @@
   function fxTags(fx) {
     const out = [];
     if (fx.risk) out.push(`<span class="tag ${fx.risk > 0 ? "down" : "up"}">🌍 ${sg(fx.risk)} ${esc(L("war risk"))}</span>`);
-    if (fx.support) out.push(`<span class="tag ${fx.support > 0 ? "up" : "down"}">🗽 ${sg(fx.support)} ${esc(L("support"))}</span>`);
-    if (fx.mac) out.push(`<span class="tag mac">👨‍✈️ ${sg(fx.mac)} ${esc(L("clout"))}</span>`);
+    if (fx.mac) out.push(`<span class="tag mac">👨‍✈️ ${sg(fx.mac)} ${esc(L("MacArthur power"))}</span>`);
     return out.join("");
   }
   function fxText(fx) {
     const out = [];
     if (fx.risk) out.push("war risk " + sg(fx.risk));
-    if (fx.support) out.push("support " + sg(fx.support));
-    if (fx.mac) out.push("MacArthur clout " + sg(fx.mac));
+    if (fx.mac) out.push("MacArthur power " + sg(fx.mac));
     return out.join(", ");
   }
-  function addTrail(label, fx) { st.trail.push({ label, fx: Object.assign({}, fx) }); }
+  function addTrail(label, fx) { const f = Object.assign({}, fx); delete f.support; st.trail.push({ label, fx: f }); }
 
   // ---------- characters ----------
   const WHO = {
@@ -176,25 +177,22 @@
     $("stepText").textContent = F("Step {x} of {y}", { x: Math.min(st.step, TOTAL), y: TOTAL });
     $("stepFill").style.width = Math.round(Math.min(st.step, TOTAL) / TOTAL * 100) + "%";
     $("mRisk").style.width = m.risk * 10 + "%"; $("nRisk").textContent = m.risk + "/10";
-    $("mSup").style.width = m.support * 10 + "%"; $("nSup").textContent = m.support + "/10";
     $("mMac").style.width = m.mac * 10 + "%"; $("nMac").textContent = m.mac + "/10";
     const mm = macMood();
     $("macFace").textContent = mm[0]; $("macMood").textContent = L(mm[1]);
     $("riskFace").textContent = m.risk >= 8 ? "🔥" : m.risk >= 5 ? "⚠️" : "🕊️";
-    $("supFace").textContent = m.support <= 2 ? "😡" : m.support <= 5 ? "😐" : "🙂";
     document.documentElement.style.setProperty("--hudH", $("hud").offsetHeight + "px");
     $("hudRisk").classList.toggle("warn", m.risk >= 8);
-    $("hudSup").classList.toggle("warn", m.support <= 2);
     $("hudMac").classList.toggle("down", !!st.f.fired);
     $("hudMac").classList.toggle("warn", m.mac >= 8 && !st.f.fired);
   }
   // Animated "+2 🌍" pop-ups on the board after a choice.
   function pops(fx) {
-    const map = { risk: ["hudRisk", "🌍"], support: ["hudSup", "🗽"], mac: ["hudMac", "👨‍✈️"] };
+    const map = { risk: ["hudRisk", "🌍"], mac: ["hudMac", "👨‍✈️"] };
     Object.keys(map).forEach(k => {
       const n = fx[k]; if (!n) return;
       const el = $(map[k][0]); if (!el) return;
-      const good = k === "support" ? n > 0 : k === "risk" ? n < 0 : null;
+      const good = k === "risk" ? n < 0 : null;
       const p = document.createElement("span");
       p.className = "pop " + (good === null ? "mac" : good ? "good" : "bad");
       p.textContent = sg(n) + " " + map[k][1];
@@ -206,12 +204,17 @@
   }
 
   // ---------- scene frame: map on the left, speech on the right ----------
+  // The 3-step "Your job" strip (Fynn, 11-13: exactly three things to do, plain words).
+  function jobStrip(steps, now) {
+    if (!steps) return "";
+    return `<ol class="job" aria-label="${esc(L("Your job"))}">${steps.map((t, i) => `<li class="${i < now ? "did" : i === now ? "now" : ""}"${i === now ? ' aria-current="step"' : ""}>${esc(L(t))}</li>`).join("")}</ol>`;
+  }
   function scene(o) {
     const real = st.step === 4 && st.phase === 9 ? "yalu" : REAL[st.step];
     const map = o.map === false ? "" : `<div class="map-wrap">${mapSvg({ line: st.line, real, hills: o.hills })}</div>`;
     return `<section class="scene">
       <div class="sc-top"><h2>${esc(L(o.title))}</h2></div>
-      <div class="board${map ? "" : " nomap"}">${map}<div class="side">${o.bubbles && o.bubbles.length ? bubbles(o.bubbles) : ""}<div class="sc-body">${o.body || ""}</div></div></div></section>`;
+      ${o.job ? `<div class="sc-job">${jobStrip(o.job, o.jobNow)}</div>` : ""}<div class="board${map ? "" : " nomap"}">${map}<div class="side">${o.bubbles && o.bubbles.length ? bubbles(o.bubbles) : ""}<div class="sc-body">${o.body || ""}</div></div></div></section>`;
   }
   function nextBtn(label) { return `<button type="button" class="go" id="nextBtn">${esc(L(label || "Next →"))}</button>`; }
   function wireNext(fn) { const b = $("nextBtn"); if (b) b.onclick = fn || advance; }
@@ -296,15 +299,16 @@
   const solved = id => () => { justSolved = id; render(true); };
 
   // ---------- decision cards ----------
-  function mountChoices(choices, onPick) {
+  function mountChoices(choices, onPick, locked) {
     const box = $("choiceBox");
-    box.innerHTML = `<p class="pick-h">${esc(L("Your advice:"))}</p><div class="cards n${choices.length}" id="cChoices"></div>`;
+    box.innerHTML = `<p class="pick-h">${esc(L("Your advice:"))}</p><div class="cards n${choices.length}${locked ? " locked" : ""}" id="cChoices"${locked ? ' aria-disabled="true"' : ""}></div>` + (locked ? `<p class="locked-note">🔒 ${esc(L("Answer the question above to unlock your choices."))}</p>` : "");
     const area = $("cChoices");
     choices.forEach((c, i) => {
       const b = document.createElement("button");
       b.type = "button"; b.className = "dcard";
       b.innerHTML = `<span class="d-ico" aria-hidden="true">${c.icon}</span><b class="d-t">${esc(L(c.title))}</b>
         <span class="d-chips"><span class="chip g">👍 ${esc(L(c.good))}</span><span class="chip c">💸 ${esc(L(c.cost))}</span></span>`;
+      if (locked) b.disabled = true;
       b.onclick = () => onPick(i);
       area.appendChild(b);
     });
@@ -334,23 +338,21 @@
   //   intro (optional) → evidence + check (optional) → choice cards → result.
   function decisionStep(app, o) {
     const base = { title: o.title, hills: o.hills };
-    if (o.intro && st.phase === 0) {
-      if (o.intro.enter) o.intro.enter();
-      app.innerHTML = scene(Object.assign({}, base, { bubbles: o.intro.say, body: (o.intro.body || "") + nextBtn(o.intro.next) }));
-      return wireNext(() => toPhase(1));
-    }
+    if (o.enter) o.enter();
     if (st.phase === 9) {
-      app.innerHTML = scene(Object.assign({}, base, { body: resultHtml(st.result, o.id) + nextBtn(o.nextLabel) }));
+      app.innerHTML = scene(Object.assign({}, base, { job: ["Pick your advice", "See what happened", "Tap Next"], jobNow: 1, body: resultHtml(st.result, o.id) + nextBtn(o.nextLabel) }));
       return wireNext();
     }
-    if (o.check && !st.done[o.check]) {
-      app.innerHTML = scene(Object.assign({}, base, { bubbles: o.checkSay, body: (o.evidence || "") + `<div id="checkBox"></div>` }));
-      return mountCheck(o.check, solved(o.check));
-    }
     const say = typeof o.say === "function" ? o.say() : o.say;
-    app.innerHTML = scene(Object.assign({}, base, { bubbles: say, body: (o.check ? checkDone(o.check) : "") + (o.body || "") + `<div id="choiceBox"></div>` }));
+    const pre = typeof o.pre === "function" ? o.pre() : (o.pre || "");
+    const needCheck = o.check && !st.done[o.check];
+    const job = o.check ? ["Read the source", "Answer the question", "Pick your advice"] : ["Read what's happening", "Pick your advice", "See what happens"];
+    const jobNow = o.check ? (needCheck ? 1 : 2) : 1;
+    app.innerHTML = scene(Object.assign({}, base, { job, jobNow, bubbles: [].concat(o.checkSay || [], say || []),
+      body: pre + (o.evidence || "") + (o.check ? (needCheck ? `<div id="checkBox"></div>` : checkDone(o.check)) : "") + (o.body || "") + `<div id="choiceBox"></div>` }));
     const ch = o.choices();
-    mountChoices(ch, i => decide(o.id, ch[i]));
+    mountChoices(ch, i => decide(o.id, ch[i]), needCheck);
+    if (needCheck) mountCheck(o.check, solved(o.check));
   }
   // Apply a one-time event (meters + map) the first time a screen is shown.
   function eventOnce(id, fx, line, trail) {
@@ -369,25 +371,20 @@
   const S = {};
   const doc = (head, lines, src, cls) => `<div class="paper ${cls || ""}"><p class="p-h">${esc(L(head))}</p>${lines.map(l => `<p>${L(l)}</p>`).join("")}${src ? `<p class="src">${L(src)}</p>` : ""}</div>`;
 
-  // 1 · The line on the map (check 1)
+  // 1 · The line on the map (check 1) — one screen
   S[1] = app => {
-    if (st.phase === 0 && !st.done.c1) {
-      const body = `<div class="board-explain">
-          <div><span class="be-i" aria-hidden="true">🗺️</span><b>${esc(L("Move the front line"))}</b></div>
-          <div><span class="be-i" aria-hidden="true">🌍</span><b>${esc(L("Avoid World War III"))}</b></div>
+    const how = `<div class="board-explain">
+          <div><span class="be-i" aria-hidden="true">🗺️</span><b>${esc(L("Your choices move the front line"))}</b></div>
+          <div><span class="be-i" aria-hidden="true">🌍</span><b>${esc(L("Keep World War III risk low"))}</b></div>
           <div class="rival"><span class="be-i" aria-hidden="true">👨‍✈️</span><b>${esc(L("MacArthur wants a bigger war"))}</b></div>
-        </div>` +
-        `<p class="fict">${esc(L("You are a made-up adviser. 📜 = real history."))}</p>` +
-        nextBtn("Why is there a line? →");
-      app.innerHTML = scene({ title: "The Line on the Map", bubbles: [["cable", "June 25, 1950: North Korea invades South Korea."]], body });
-      return wireNext(() => toPhase(1));
-    }
+        </div><p class="fict">${esc(L("You are a made-up adviser. 📜 = real history."))}</p>`;
+    const file = doc("📁 FILE: KOREA, 1945", ["Japan ruled Korea, 1910–1945.", "1945: Japan loses World War II.", "Soviet troops take the North. U.S. troops take the South."], "U.S. State Department, Office of the Historian");
     if (st.done.c1) {
-      app.innerHTML = scene({ title: "The Line on the Map", body: checkDone("c1") + `<div id="after">${newWord("<b>38th parallel</b> = the map line that split Korea in 1945.")}${nextBtn("To the White House →")}</div>` });
+      app.innerHTML = scene({ title: "The Line on the Map", job: ["Read the file", "Answer the question", "Tap Next"], jobNow: 2, bubbles: [["cable", "June 25, 1950: North Korea invades South Korea."]],
+        body: how + checkDone("c1") + `<div id="after">${newWord("<b>38th parallel</b> = the map line that split Korea in 1945.")}${nextBtn("To the White House →")}</div>` });
       return wireNext();
     }
-    const body = doc("📁 FILE: KOREA, 1945", ["Japan ruled Korea, 1910–1945.", "1945: Japan loses World War II.", "Soviet troops take the North. U.S. troops take the South."], "U.S. State Department, Office of the Historian") + `<div id="checkBox"></div>`;
-    app.innerHTML = scene({ title: "The Line on the Map", body });
+    app.innerHTML = scene({ title: "The Line on the Map", job: ["Read the file", "Answer the question", "Tap Next"], jobNow: 1, bubbles: [["cable", "June 25, 1950: North Korea invades South Korea."]], body: how + file + `<div id="checkBox"></div>` });
     mountCheck("c1", solved("c1"));
   };
 
@@ -402,11 +399,10 @@
       result: "Planes can't stop tanks. The North keeps rolling south.", real: "Truman sent ships and planes June 27, then soldiers June 30.", src: "Truman Library", reveal: CONT }
   ];
   S[2] = app => decisionStep(app, { id: "d1", check: "c2", title: "Invasion",
-    intro: { next: "Hear from the President →", enter: () => { if (!st.events.inv) { moveLine("seoul"); st.events.inv = " "; save(); } },
-      say: [["cable", "Seoul falls in three days."], ["truman", "“If we are tough enough now… they won't take any next steps.”"]],
-      body: srcLine("Truman to an aide, June 26, 1950 (notes by George Elsey). Truman Library") },
+    enter: () => { if (!st.events.inv) { moveLine("seoul"); st.events.inv = " "; save(); } },
+    checkSay: [["cable", "Seoul falls in three days. The South is collapsing."]],
     evidence: doc("🇺🇸 PRESIDENT TRUMAN · JUNE 27, 1950", ["“Communism has passed beyond [secret plots] to conquer independent nations and will now use armed invasion and war.”"], "Statement by the President on the situation in Korea. Truman Library", "quote"),
-    say: [["cable", "The South is collapsing. What do we do?"]],
+    say: [],
     choices: () => D1 });
 
   // 3 · Pusan corner → Inchon (decision 2)
@@ -477,10 +473,9 @@
   S[5] = app => {
     const path = st.f.path || "yalu", E = CHINA_EVT[path];
     decisionStep(app, { id: "d4", title: path === "p38" ? "The North Rebuilds" : "China Attacks",
-      intro: { next: "MacArthur's demand →", say: E.say,
-        enter: () => eventOnce("china", E.fx, E.line, E.trail),
-        body: `<div class="tags">${st.events.china && st.events.china.trim() ? st.events.china : fxTags(E.fx)}</div>` + E.body() },
-      say: () => path === "p38" ? [["mac", "Let me go north and finish them."]] : [["mac", "Bomb China's bases. Use Taiwan's army too."]],
+      enter: () => eventOnce("china", E.fx, E.line, E.trail),
+      pre: () => `<div class="tags">${st.events.china && st.events.china.trim() ? st.events.china : fxTags(E.fx)}</div>` + E.body(),
+      say: () => E.say.concat(path === "p38" ? [["mac", "Let me go north and finish them."]] : [["mac", "Bomb China's bases. Use Taiwan's army too."]]),
       choices: () => path === "p38" ? D4S : D4X });
   };
 
@@ -502,7 +497,7 @@
     decisionStep(app, { id: "d5", check: "c4", title: "The General Goes Public",
       checkSay: [["cable", "April 1951: MacArthur's letter is read in Congress."], ["mac", "“There is no substitute for victory.”"]],
       evidence: doc("📜 U.S. CONSTITUTION · ARTICLE II", ["“The President shall be Commander in Chief…”"], "Article II, Section 2. MacArthur's letter to Rep. Joseph Martin, read April 5, 1951", "parchment"),
-      say: [["mac", "“There is no substitute for victory.”"]],
+      say: [],
       choices: () => D5 });
   };
 
@@ -518,25 +513,28 @@
   S[7] = app => {
     let extra = "";
     if (st.f.warned && !st.f.fired) extra = eventOnce("loose", { risk: 1 }, null, "MacArthur talked to the press again");
-    decisionStep(app, { id: "d6", check: "c5", title: "Stuck", hills: true,
-      checkSay: [["cable", "1951–1953: bloody fights for single hills."]],
-      evidence: `<div class="hillrow"><span>⛰️ ${esc(L("Heartbreak Ridge, 1951"))}</span><span>⛰️ ${esc(L("Pork Chop Hill, 1953"))}</span></div>` +
-        `<div class="moved"><div><b>1950</b><span class="mbar big"></span><small>${esc(L("line swings 300+ miles"))}</small></div><div><b>1951–53</b><span class="mbar tiny"></span><small>${esc(L("line barely moves"))}</small></div></div>` +
-        (extra && extra.trim() ? `<div class="tags">${extra}</div>` + bub("cable", "MacArthur talks to reporters again.") : "") +
-        srcLine("U.S. Army Center of Military History"),
-      say: [["cable", "Peace talks start July 1951. The fight: prisoners."], ["cable", "Thousands of Chinese and North Korean prisoners refuse to go home."]],
-      choices: () => D6 });
+    const evidence = `<div class="hillrow"><span>⛰️ ${esc(L("Heartbreak Ridge, 1951"))}</span><span>⛰️ ${esc(L("Pork Chop Hill, 1953"))}</span></div>` +
+      `<div class="moved"><div><b>1950</b><span class="mbar big"></span><small>${esc(L("line swings 300+ miles"))}</small></div><div><b>1951–53</b><span class="mbar tiny"></span><small>${esc(L("line barely moves"))}</small></div></div>` +
+      (extra && extra.trim() ? `<div class="tags">${extra}</div>` + bub("cable", "MacArthur talks to reporters again.") : "") + srcLine("U.S. Army Center of Military History");
+    const say = [["cable", "1951–1953: armies fight over the same hills near the 38th parallel."]];
+    if (st.done.c5) {
+      app.innerHTML = scene({ title: "Stuck", hills: true, job: ["Read the chart", "Answer the question", "Tap Next"], jobNow: 2, bubbles: say,
+        body: evidence + checkDone("c5") + `<div id="after">${newWord("<b>Stalemate</b> = neither side can win, so the fighting gets stuck.")}${nextBtn("Next →")}</div>` });
+      return wireNext();
+    }
+    app.innerHTML = scene({ title: "Stuck", hills: true, job: ["Read the chart", "Answer the question", "Tap Next"], jobNow: 1, bubbles: say, body: evidence + `<div id="checkBox"></div>` });
+    mountCheck("c5", solved("c5"));
   };
 
   // 8 · The shooting stops (check 6)
   S[8] = app => {
     const say = [["cable", "1952: Eisenhower wins. “I shall go to Korea.”"]];
     if (st.done.c6) {
-      app.innerHTML = scene({ title: "The Shooting Stops", body: checkDone("c6") + `<div id="after">${newWord("<b>Armistice</b> = a deal to stop fighting, not a peace treaty.")}${nextBtn("See your ending →")}</div>` });
+      app.innerHTML = scene({ title: "The Shooting Stops", job: ["Read the armistice", "Answer the question", "Tap Next"], jobNow: 2, body: checkDone("c6") + `<div id="after">${newWord("<b>Armistice</b> = a deal to stop fighting, not a peace treaty.")}${nextBtn("See your ending →")}</div>` });
       return wireNext();
     }
     const body = doc("📜 ARMISTICE · JULY 27, 1953", ["✔ Fighting stops.", "✔ A DMZ splits Korea.", "✖ No peace treaty. Still none."], "Korean Armistice Agreement. National Archives. DMZ = demilitarized zone, about 2.5 miles wide.", "parchment") + `<div id="checkBox"></div>`;
-    app.innerHTML = scene({ title: "The Shooting Stops", bubbles: say, body });
+    app.innerHTML = scene({ title: "The Shooting Stops", job: ["Read the armistice", "Answer the question", "Tap Next"], jobNow: 1, bubbles: say, body });
     mountCheck("c6", solved("c6"));
   };
 
@@ -544,7 +542,6 @@
   const ENDINGS = {
     brink: { e: "💥", title: "Brink of World War III", text: "Your advice kept widening the war. In real life, Truman refused to bomb China. The war stayed in Korea." },
     general: { e: "👨‍✈️", title: "The General Ran the War", text: "You never stopped MacArthur. In real life, Truman fired him so a civilian stayed in charge." },
-    homefront: { e: "📉", title: "Lost the Home Front", text: "South Korea survived. But Americans got sick of a war with no win. In 1952, Truman's approval fell to 22%." },
     held: { e: "🧱", title: "Held the Line", text: "A painful draw. South Korea survived, and the war never spread. That's a limited war." },
     costly: { e: "⚖️", title: "A Costly Draw", text: "South Korea survived. But your choices pushed the world close to a much bigger war." }
   };
@@ -552,33 +549,26 @@
     const m = st.m;
     if (m.risk >= 8 && st.f.widened) return "brink";
     if (!st.f.fired) return "general";
-    if (m.support <= 0) return "homefront";
     if (m.risk <= 4) return "held";
     return "costly";
   }
   S[9] = app => {
     const k = endingKey(), E = ENDINGS[k];
     if (st.ending !== k) { st.ending = k; save(); }
-    if (st.phase === 1) {
-      const body = `<div class="memorial"><p class="m-h">${esc(L("THE REAL COST"))}</p>
-          <p>🕯️ ${esc(L("About 36,500 Americans died."))}</p>
-          <p>🕯️ ${esc(L("Millions of Koreans died, many of them civilians."))}</p>
-          <p>🗺️ ${esc(L("The border barely moved."))}</p>
-          <p>🇰🇷 ${esc(L("South Korea: free elections since 1987."))}</p>
-          <p class="src">${esc(L("U.S. Department of Defense; Office of the Historian. South Korea was ruled by dictators until 1987. North Korea is still a communist dictatorship."))}</p></div>` +
-        newWord("<b>Korea → Vietnam</b>: next, another limited war to contain communism.") + nextBtn("Write your memo →");
-      app.innerHTML = scene({ title: "The Real Cost", map: false, body });
-      return wireNext();
-    }
-    const trail = st.trail.filter(t => Object.keys(t.fx).length).map(t => `<li><span>${esc(L(t.label))}</span><span class="tags">${fxTags(t.fx)}</span></li>`).join("");
+    const trail = st.trail.map(t => `<li><span>${esc(L(t.label))}</span><span class="tags">${fxTags(t.fx)}</span></li>`).join("");
     const body = `<div class="front ${k}"><p class="masthead" aria-hidden="true">${esc(L("WAR ROOM REPORT · JULY 1953"))}</p>
         <div class="headline"><span class="e-big" aria-hidden="true">${E.e}</span><h3>${esc(L(E.title))}</h3></div>
         <p>${esc(L(E.text))}</p>
-        <div class="finalm"><span>🌍 ${esc(L("War risk"))} <b>${st.m.risk}/10</b></span><span>🗽 ${esc(L("Support"))} <b>${st.m.support}/10</b></span><span>👨‍✈️ ${esc(L("MacArthur's clout"))} <b>${st.m.mac}/10</b></span></div>
+        <div class="finalm"><span>🌍 ${esc(L("War risk"))} <b>${st.m.risk}/10</b></span><span>👨‍✈️ ${esc(L("MacArthur's power"))} <b>${st.m.mac}/10</b></span></div>
         <h4 class="cb">${esc(L("Caused by:"))}</h4><ul class="trail">${trail}</ul></div>` +
-      nextBtn("The real cost →");
-    app.innerHTML = scene({ title: "Your Ending", body });
-    wireNext(() => toPhase(1));
+      `<div class="memorial"><p class="m-h">${esc(L("THE REAL COST"))}</p>
+          <p>🕯️ ${esc(L("About 36,500 Americans died."))}</p>
+          <p>🕯️ ${esc(L("Millions of Koreans died, many of them civilians."))}</p>
+          <p>🗺️ ${esc(L("Korea is still split near the 38th parallel today."))}</p>
+          <p class="src">${esc(L("U.S. Department of Defense; Office of the Historian. South Korea was ruled by dictators until 1987 and is now a democracy. North Korea is still a communist dictatorship."))}</p></div>` +
+      nextBtn("Write your memo →");
+    app.innerHTML = scene({ title: "Your Ending", map: false, job: ["See your ending", "Read the real cost", "Write your memo"], jobNow: 1, body });
+    wireNext();
   };
 
   // 10 · Memo to the President + turn in (two short pages)
@@ -593,25 +583,13 @@
       mustMsg: "In answer 2, name MacArthur, say what Truman wanted to avoid (like a war with China), and use “because.”" }
   ];
   S[10] = app => {
-    const pg = st.phase === 1 ? 1 : 0;
-    const page = (p, i) => `<div class="vpage"${i !== pg ? " hidden" : ""}><label for="w_${p.id}">${esc(L(p.label))}</label><p class="stem">${esc(L(p.stem))}</p><textarea id="w_${p.id}" rows="4">${esc(st.writing[p.id] || "")}</textarea></div>`;
-    const tail = pg === 0
-      ? `<button type="button" class="go" id="pageBtn">${esc(L("Next page →"))}</button><p id="pageMsg" class="msg" role="status" aria-live="polite"></p>`
-      : `<label for="nameBox2" class="namel">${esc(L("Your name"))}</label><input id="nameBox2" maxlength="60" autocomplete="off" placeholder="${esc(L("First name + last initial (like Jordan M.)"))}" value="${esc(st.name)}">` +
-        `<div class="vrow"><button type="button" class="back" id="backBtn">← ${esc(L("Page 1"))}</button><button type="button" class="go" id="sendBtn">📮 ${esc(L(st.turnedIn ? "Turn in again" : "Turn in"))}</button></div><p id="sendMsg" class="msg" role="status" aria-live="polite">${st.turnedIn ? esc(L("✓ Turned in. You can fix your writing and turn it in again.")) : ""}</p>`;
-    const body = `<div class="memo"><p class="vm-h">${esc(L("TOP SECRET · MEMO TO THE PRESIDENT"))} · ${pg + 1}/2</p>` + PROMPTS.map(page).join("") + tail + `</div>`;
-    app.innerHTML = scene({ title: "Your Memo", map: false, body });
+    const page = p => `<div class="vpage"><label for="w_${p.id}">${esc(L(p.label))}</label><p class="stem">${esc(L(p.stem))}</p><textarea id="w_${p.id}" rows="4">${esc(st.writing[p.id] || "")}</textarea></div>`;
+    const tail = `<label for="nameBox2" class="namel">${esc(L("Your name"))}</label><input id="nameBox2" maxlength="60" autocomplete="off" placeholder="${esc(L("First name + last initial (like Jordan M.)"))}" value="${esc(st.name)}">` +
+      `<div class="vrow"><button type="button" class="go" id="sendBtn">📮 ${esc(L(st.turnedIn ? "Turn in again" : "Turn in"))}</button></div><p id="sendMsg" class="msg" role="status" aria-live="polite">${st.turnedIn ? esc(L("✓ Turned in. You can fix your writing and turn it in again.")) : ""}</p>`;
+    const body = `<div class="memo"><p class="vm-h">${esc(L("TOP SECRET · MEMO TO THE PRESIDENT"))}</p>` + PROMPTS.map(page).join("") + tail + `</div>`;
+    app.innerHTML = scene({ title: "Your Memo", map: false, job: ["Answer question 1", "Answer question 2", "Turn in"], jobNow: 0, body });
     PROMPTS.forEach(p => $("w_" + p.id).addEventListener("input", e => { st.writing[p.id] = e.target.value; save(); }));
-    if (pg === 0) {
-      $("pageBtn").onclick = () => {
-        const err = writingProblem(PROMPTS[0]);
-        if (err) { $("pageMsg").textContent = err; $("pageMsg").className = "msg try"; return; }
-        toPhase(1);
-      };
-    } else {
-      $("backBtn").onclick = () => toPhase(0);
-      $("sendBtn").onclick = sendWork;
-    }
+    $("sendBtn").onclick = sendWork;
   };
 
   const plain = s => String(s || "").normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
@@ -651,12 +629,12 @@
     answers["First-try by standard"] = Object.keys(byStd).sort().map(k => k + ": " + byStd[k][0] + " of " + byStd[k][1]).join(" · ");
     PROMPTS.forEach(p => { answers["Writing: " + p.short] = ($("w_" + p.id).value || "").trim(); });
     CHECK_ORDER.forEach(id => { const q = CHECKS[id]; answers[q.short] = q.options[0] + (st.wrong[id] ? " (after " + st.wrong[id] + " wrong " + (st.wrong[id] === 1 ? "try" : "tries") + ")" : " (first try)"); });
-    const CH = { d1: "Response to the invasion", d2: "Inchon or slow breakout", d3: "How far north", d4: "MacArthur's demand to widen the war", d5: "What to do about MacArthur", d6: "Prisoners at the peace talks" };
+    const CH = { d1: "Response to the invasion", d2: "Inchon or slow breakout", d3: "How far north", d4: "MacArthur's demand to widen the war", d5: "What to do about MacArthur" };
     Object.keys(CH).forEach(k => { if (st.picks[k]) answers["Choice · " + CH[k]] = st.picks[k]; });
     const E = ENDINGS[st.ending || endingKey()];
     answers["Ending"] = E.title;
-    answers["Caused by"] = st.trail.filter(t => Object.keys(t.fx).length).map(t => t.label + " (" + fxText(t.fx) + ")").join(" · ");
-    answers["Final meters"] = "World War III risk " + st.m.risk + "/10 · Support at home " + st.m.support + "/10 · MacArthur's clout " + st.m.mac + "/10";
+    answers["Caused by"] = st.trail.map(t => t.label + (Object.keys(t.fx).length ? " (" + fxText(t.fx) + ")" : "")).join(" · ");
+    answers["Final meters"] = "World War III risk " + st.m.risk + "/10 · MacArthur's power " + st.m.mac + "/10";
     $("sendBtn").disabled = true; msg.textContent = L("Sending your work…"); msg.className = "msg";
     try {
       const res = await window.classTurnIn(CFG.oldApi, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ studentName: st.name, assignmentId: CFG.assignmentId, assignmentTitle: CFG.title, answers }) });
@@ -677,7 +655,7 @@
         <p class="t-kick">${esc(L("U.S. History · Unit 3 · Day 2"))}</p>
         <h1>${esc(L("The Line That Moved: Korea"))}</h1>
         <p class="hook">${esc(L("1950. A war swings up and down Korea. You advise the President."))}</p>
-        <div class="t-chips"><span>🗺️ ${esc(L("6 decisions"))}</span><span>🔍 ${esc(L("6 checks"))}</span><span>⏱️ ${esc(L("25 min"))}</span></div>
+        <div class="t-chips"><span>🗺️ ${esc(L("5 choices"))}</span><span>🔍 ${esc(L("6 checks"))}</span><span>⏱️ ${esc(L("15–20 min"))}</span></div>
         <p class="goal"><b>${esc(L("Goal:"))}</b> ${esc(L("explain why the U.S. fought in Korea and why the war stayed limited."))}</p>
         <div class="t-start"><label for="nameBox">${esc(L("Your name"))}</label>
         <div class="t-row"><input id="nameBox" maxlength="60" autocomplete="off" placeholder="${esc(L("First name + last initial (like Jordan M.)"))}" value="${esc(st.name)}">
@@ -738,44 +716,29 @@
   // The teacher signed in as Test T. can jump to any screen or answer the current check/decision.
   // Screens = each step's parts: intro · check · choice cards · result (and the ending/memo pages).
   try {
-    const DEC = { 2: { chk: "c2", intro: true }, 3: {}, 4: { chk: "c3" }, 5: { intro: true }, 6: { chk: "c4" }, 7: { chk: "c5" } };
     const NAMES = { 1: "The line on the map", 2: "Invasion", 3: "Trapped at Pusan", 4: "How far north?", 5: "China attacks", 6: "The general goes public", 7: "Stuck", 8: "The shooting stops", 9: "Your ending", 10: "Your memo" };
-    const KN = { intro: "intro", check: "check", choices: "decision", result: "result", p0: "", p1: "" };
+    const DEC = { 2: "c2", 3: null, 4: "c3", 5: null, 6: "c4" };   // decision steps (check id or none)
     const SCR = [];
     for (let n = 1; n <= TOTAL; n++) {
-      const d = DEC[n];
-      const ks = d ? [].concat(d.intro ? ["intro"] : [], d.chk ? ["check"] : [], ["choices", "result"]) : n === 1 ? ["intro", "check"] : n === 8 ? ["check"] : ["p0", "p1"];
-      ks.forEach(k => SCR.push({ s: n, k, chk: n === 1 ? "c1" : n === 8 ? "c6" : d && d.chk, intro: n === 1 || !!(d && d.intro) }));
+      if (n in DEC) { SCR.push({ s: n, k: "choices" }, { s: n, k: "result" }); }
+      else SCR.push({ s: n, k: "one" });
     }
-    const kindNow = () => {
-      const n = Math.max(1, Math.min(st.step, TOTAL)), d = DEC[n];
-      if (n === 1) return st.phase === 0 && !st.done.c1 ? "intro" : "check";
-      if (n === 8) return "check";
-      if (!d) return st.phase === 1 ? "p1" : "p0";
-      if (st.phase === 9) return "result";
-      if (d.intro && st.phase === 0) return "intro";
-      if (d.chk && !st.done[d.chk]) return "check";
-      return "choices";
-    };
+    const kindNow = () => { const n = Math.max(1, Math.min(st.step, TOTAL)); return n in DEC ? (st.phase === 9 ? "result" : "choices") : "one"; };
     (window.classTestHooks = window.classTestHooks || []).push({
       count: () => SCR.length,
-      index: () => { const n = Math.max(1, Math.min(st.step, TOTAL)), k = kindNow(); const i = SCR.findIndex(x => x.s === n && x.k === k); return Math.max(0, i); },
-      label: i => { const x = SCR[i]; return NAMES[x.s] + (x.s === 9 ? (x.k === "p1" ? " · real cost" : "") : x.s === 10 ? " · page " + (x.k === "p1" ? 2 : 1) : KN[x.k] ? " · " + KN[x.k] : ""); },
+      index: () => { const n = Math.max(1, Math.min(st.step, TOTAL)), k = kindNow(); return Math.max(0, SCR.findIndex(x => x.s === n && x.k === k)); },
+      label: i => { const x = SCR[i]; return NAMES[x.s] + (x.k === "result" ? " · result" : ""); },
       go: i => {
         const x = SCR[i]; if (!x) return;
         if (!st.name) st.name = "Test T.";
-        st.step = x.s; st.result = null;
-        if (x.k === "intro") { st.phase = 0; if (x.chk) delete st.done[x.chk]; }
-        else if (x.k === "check") { st.phase = x.intro ? 1 : 0; delete st.done[x.chk]; }
-        else if (x.k === "choices" || x.k === "result") { st.phase = x.intro ? 1 : 0; if (x.chk) st.done[x.chk] = true; }
-        else st.phase = x.k === "p1" ? 1 : 0;
+        st.step = x.s; st.result = null; st.phase = 0;
         save(); render(); window.scrollTo(0, 0);
-        if (x.k === "result") { const b = document.querySelector("#cChoices .dcard"); if (b) b.click(); }
+        if (x.k === "result") { const c = DEC[x.s]; if (c && !st.done[c]) { st.done[c] = true; save(); render(); } const b = document.querySelector("#cChoices .dcard"); if (b) b.click(); }
       },
       solve: () => {
-        const n = Math.max(1, Math.min(st.step, TOTAL)), k = kindNow(), d = DEC[n];
-        if (k === "check") { const id = n === 1 ? "c1" : n === 8 ? "c6" : d.chk; if (!st.done[id]) { st.done[id] = true; if (n === 1) st.phase = 1; save(); justSolved = id; render(true); } }
-        else if (k === "choices") { const b = document.querySelector("#cChoices .dcard"); if (b) b.click(); }
+        const n = Math.max(1, Math.min(st.step, TOTAL)), chk = { 1: "c1", 7: "c5", 8: "c6" }[n] || DEC[n];
+        if (chk && !st.done[chk]) { st.done[chk] = true; save(); justSolved = chk; render(true); }
+        else if (n in DEC && st.phase !== 9) { const b = document.querySelector("#cChoices .dcard"); if (b) b.click(); }
       }
     });
     if (window.classTestSkip) window.classTestSkip.refresh();
