@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Line That Moved: Korea | U.S. History Unit 3 Day 2</title>
+<meta name="description" content="Follow the Korean War through real maps, battlefield leaflets, and photos, 1950–1953.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../shared/graphic-reading.css?v=3">
+<style>
+.flip-stage img{min-height:0}
+.qcol{padding-bottom:100px}
+.wordhelp{margin:6px 0 0}.wordhelp summary{cursor:pointer;font-weight:750;color:var(--navy)}
+.intro-line{font-size:1.02rem;margin:0 0 10px}
+.words{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0 10px;padding:0;list-style:none}
+.words li{background:#fff;border:1px solid #e6dcc8;border-left:4px solid var(--navy);border-radius:8px;padding:3px 9px;font-size:.88rem}
+.declass{display:block;background:#fff;border:2px dashed #7a2b26;border-radius:10px;padding:8px 11px;margin:6px 0 8px;font-weight:650;color:#3c2a20;line-height:1.4;font-style:normal}
+.declass b{display:block;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#a33d36;margin-bottom:2px}
+.declass.file{border-color:#18364a}.declass.file b{color:#18364a}
+.declass i{font-style:normal;font-weight:800}
+.declass .line{display:block;margin:2px 0}
+.dime{display:inline-block;background:#e6bd64;color:#0f2433;border-radius:999px;font-weight:850;padding:0 9px;margin-right:4px}
+.credits{font-size:.8rem;color:var(--muted);margin:10px 0 0;line-height:1.4}
+body.reading-now .choices{opacity:.45;pointer-events:none}
+</style>
+<script src="../../shared/assignments.js?v=20261113ko1"></script><script src="../../shared/turnin.js?v=20261113ko1"></script></head><body>
+<header class="gr-head" data-years="1950–53"><div class="gr-wrap">
+<div class="kicker">U.S. History · Unit 3 Day 2 · The Korean War</div>
+<h1>The Line That Moved: Korea</h1>
+<p class="hook">The front line in Korea swung hundreds of miles, then froze. Track it with real 1950s maps, leaflets dropped on soldiers, and Army photos. 7 pages · 7 checks · 3 short answers. <b>About 25 minutes.</b></p>
+<p class="goal"><b>Today's goal:</b> Explain why the U.S. fought in Korea, how the war swung back and forth into a stalemate, and why Truman fired General MacArthur.</p>
+<details class="std-details"><summary>Iowa standards for today</summary>
+<p><b>Standard SS.9-12.US.35</b> — Compare and corroborate interpretations of the multiple causes and effects of the Korean War to the Vietnam War.</p><p><b>Standard SS.9-12.US.37</b> — Analyze the American policy of containment as a response to the threat of Communism during the Cold War.</p><p><b>Standard SS.9-12.US.40</b> — Analyze diverse ideologies through primary and secondary sources, noting the impact on social, economic, and political institutions during the Cold War Era.</p>
+</details>
+<nav><a class="back" href="../../">← Class activities</a></nav>
+</div></header>
+
+<nav class="route" aria-label="Your progress"><ol id="flipRoute"></ol></nav>
+
+<main class="gr-main gr-wrap">
+<section class="card">
+<p class="intro-line"><b>You're a war correspondent</b> sorting the evidence. For each part: <b>study</b> the page on the left → get the <b>check</b> right → <b>write</b> 1–2 sentences when asked. Done = 5 green parts, then turn in at the bottom.</p>
+<p class="content-note"><span><strong>Content note:</strong> War, prisoners, and refugees. One leaflet is enemy propaganda and says things that were not true.</span></p>
+<details class="wordhelp"><summary>Word help (tap to open)</summary>
+<ul class="words" aria-label="Word help">
+<li><b>38th parallel</b> = the line that split North and South Korea in 1945</li><li><b>UN forces</b> = troops from 16 countries, led by the U.S.</li><li><b>Containment</b> = stopping communism from spreading to new countries</li><li><b>POW</b> = prisoner of war</li><li><b>Stalemate</b> = neither side can win</li><li><b>Armistice</b> = a deal to stop fighting (not a peace treaty)</li>
+</ul></details>
+<p class="welcome" id="welcome" role="status"></p>
+</section>
+
+<div class="flip-layout">
+<section class="flip-reader reading" id="flipReader" aria-label="Maps, leaflets, and photos from the Korean War">
+<div class="flip-bar"><div><p class="eyebrow">The evidence</p><h2>3 maps · 2 leaflets · 2 photos</h2></div><span class="flip-pos" id="flipPos"></span></div>
+<div class="flip-tools"><button type="button" class="quiet" id="flipBack">← Back a page</button><span class="grow"><span id="flipPart"></span><span id="flipTimer" aria-live="polite"></span></span><button type="button" class="secondary" id="flipNext">Next page →</button><button type="button" class="quiet" id="flipZoom">Make page bigger</button></div>
+<div class="flip-stage"><img id="flipImg" alt="" src="pages/p-01.jpg"></div>
+<p class="flip-cap">Click the page to make it bigger.</p>
+</section>
+
+<div class="qcol">
+<section class="card">
+<label for="studentName">First name + last initial (like Jordan M.)</label><input id="studentName" maxlength="100" autocomplete="off" placeholder="First name + last initial (like Jordan M.)" required>
+</section>
+<div id="flipCards"></div>
+<div class="flip-nav"><button type="button" class="quiet" id="flipBack2">← Back</button><button type="button" class="secondary" id="flipNext2">Next page →</button><p class="flip-why" id="flipWhy" aria-live="polite"></p></div>
+<section class="card finish" id="finish">
+<h2>Turn in your work</h2>
+<div class="actions"><button id="submitBtn" class="primary" type="button">Turn in answers</button><button id="clearBtn" class="quiet" type="button">Start over</button></div><p id="submitStatus" class="status" role="status" aria-live="polite"></p><p class="reader-note">Your work saves on this device, so you can come back later. Your teacher sees it after you turn it in.</p>
+<p class="credits">Maps: "Korea War Phase I" (CC0) and "Korea War Phases II" (CC BY-SA 3.0), by Wikimedia Commons user 下一次登录 (a mislabeled scale bar was covered); "North Korea–South Korea Boundary," U.S. Department of State, 1962 (public domain). Leaflets: Busan Modern History Research Institute collection via the Korea Copyright Commission (CC BY 4.0). Photos: Truman and MacArthur at Wake Island, Oct. 15, 1950, U.S. Army Signal Corps / Truman Library; girl and brother at Haengju, June 1951, Maj. R. V. Spencer, U.S. Navy / National Archives (public domain).</p>
+</section>
+</div></div></main>
+<div class="flip-big" id="flipBig" hidden role="dialog" aria-label="Bigger page"><button type="button" class="quiet" id="flipBigClose">✕ Close</button><img id="flipBigImg" alt="Bigger view of the current page"></div>
+<script>
+window.FLIP={
+title:"Korean War maps, leaflets, and photos",prefix:"ush-u3-d2-korea-",pages:7,readSeconds:8,lockSeconds:8,
+alts:[
+"Map, June to September 1950. North Korea is pink and South Korea is tan. Red lines with dates show North Korean troops pushing south from the 38th parallel on June 25, past Seoul, down to a small green area around Pusan in the southeast corner by September 15.",
+"Map, September to October 1950. A blue arrow shows a UN landing at Incheon near Seoul on September 15. Blue lines show UN forces pushing north past the 38th parallel on September 30, past Pyongyang on October 19, and close to the Yalu River and China's border by October 24.",
+"UN Safe Conduct Pass. A UN flag, Korean writing, and big red words SAFE CONDUCT PASS. English text tells UN soldiers to give humane treatment to any North Korean who wants to stop fighting and to treat him as an honorable prisoner of war. Signed by Douglas MacArthur.",
+"Communist leaflet in English for American soldiers. A photo shows four smiling American prisoners in white hats walking down a road. Headline: Believe it or not, these are POWs! Text says the Korean and Chinese armies are generous to prisoners and that some GIs who doubted this died needlessly.",
+"Photo, October 15, 1950: General Douglas MacArthur in an open-collar uniform and cap stands next to President Harry Truman in a suit and hat at the Wake Island airfield.",
+"Photo, June 1951: a Korean girl with her little brother tied on her back walks past a stopped American tank at Haengju.",
+"U.S. State Department map of the North Korea–South Korea boundary. A red line with a striped zone around it (the Demilitarized Zone) crosses Korea near the line marked 38th Parallel, dipping below it in the west and running above it in the east."
+],
+assignmentId:"ush-u3-d2-korea-reader",api:"https://fynn-class-assignment-submissions-20261024.neotboy.chatgpt.site/api/submit",
+lockedText:"This box opens when you get the check right.",
+clearConfirm:"Start over? This clears your checks and answers on this device.",
+successText:"Turned in! Your teacher got your checks and answers. You're done.",
+wrongText:(c,left)=>left>0?"Not quite. "+c.hint+" Try again in "+left+"…":"Not quite. "+c.hint+" The choices were mixed up. Try again.",
+parts:[
+{
+"short":"Invasion",
+"ref":"Reader page 1 · Map, June–Sept. 1950",
+"title":"1. June 1950: North Korea attacks",
+"from":1,"to":1,
+"check":{
+"page":1,
+"tag":"Map check · Reader page 1",
+"q":"Follow the red lines from JUN 25 to SEP 15. Where were South Korean and UN troops by September 15, 1950?",
+"right":"Trapped in a small area around Pusan in the southeast.",
+"wrong":["Holding a line just south of the capital, Seoul.","Pushed off the peninsula and over to Japan.","Holding the 38th parallel where the war began."],
+"why":"✓ Correct. In under 3 months North Korea took almost all of South Korea. Only the green \"Pusan Perimeter\" was left.",
+"hint":"Find the last red line, marked SEP 15. The green area is what was left."
+},
+"prompt":"Why did President Truman send U.S. troops to Korea? Use the word containment.",
+"stem":"<span class=\"declass file\"><b>Fact file · June 1950</b><span class=\"line\">North Korea (communist, backed by the Soviet Union) invades South Korea on June 25.</span><span class=\"line\">Truman, June 27: <i>\"The attack upon Korea makes it plain beyond all doubt that communism has passed beyond the use of subversion to conquer independent nations and will now use armed invasion and war.\"</i></span><span class=\"line\">The UN votes to defend South Korea. Troops from 16 countries go, most of them American.</span></span>Write 1–2 sentences. Start like this: <i>Truman sent troops because ___. This was containment because ___.</i>",
+"placeholder":"Truman sent troops because ___. This was containment because ___.",
+"stemText":"Truman sent troops because ___. This was containment because ___."
+},
+{
+"short":"The swing",
+"ref":"Reader page 2 · Map, Sept.–Oct. 1950",
+"title":"2. Fall 1950: The line swings north",
+"from":2,"to":2,
+"check":{
+"page":2,
+"tag":"Map check · Reader page 2",
+"q":"Find the blue arrow at Incheon (SEP 15), then follow the blue lines. Where were UN forces by October 24?",
+"right":"Deep in North Korea, close to the border with China.",
+"wrong":["Back at the 38th parallel, where the war started.","Still trapped in the green area around Pusan.","Holding Seoul, but not past the 38th parallel."],
+"why":"✓ Correct. After a surprise landing at Incheon, UN forces crossed the 38th parallel and raced north toward the Yalu River, China's border.",
+"hint":"Find the line marked OCT 24 at the top of the map. What country is just above it?"
+},
+"check2":{
+"tag":"Fact-check · Use the fact file",
+"q":"<span class=\"declass file\"><b>Fact file · China enters</b>China warned it would fight if UN troops came near its border. In late 1950, about 300,000 Chinese troops attacked. By January 1951, UN forces were pushed back south of Seoul again.</span>Why did the line swing back south?",
+"right":"UN troops got close to China, so China sent a huge army.",
+"wrong":["The Soviet Union dropped an atomic bomb on UN troops.","The U.S. ran out of money and called its troops home.","South Korea surrendered and switched to North Korea's side."],
+"why":"✓ Correct. Pushing to China's border brought China into the war. Now the war was much bigger and much harder to win.",
+"hint":"Read the fact file. Who attacked, and why?"
+}
+},
+{
+"short":"Leaflet war",
+"ref":"Reader pages 3–4 · Leaflets dropped on soldiers",
+"title":"3. The war of words: leaflets from both sides",
+"from":3,"to":4,
+"check":{
+"page":3,
+"tag":"Source check · Reader page 3",
+"q":"Planes dropped millions of leaflets like this on the enemy.<span class=\"declass\"><b>Translation of the Korean</b>\"To North Korean soldiers: If you want to live, come over now to the United Nations side. We will welcome you and treat you well. We will give you good food and medical care. When the war ends, you will go home.\"</span>Read the translation and the English box at the bottom. What does the pass promise?",
+"right":"Fair treatment for North Koreans who stop fighting and give up.",
+"wrong":["Money and a new home in America for any soldier who escapes.","A free trip home right away for anyone who carries it.","A reward for North Koreans who capture a Chinese officer."],
+"why":"✓ Correct. It's a promise signed by General MacArthur: give up and you'll be treated as \"an honorable prisoner of war.\"",
+"hint":"Read the translation, then the English box that starts \"Attention all soldiers.\""
+},
+"check2":{
+"tag":"Fact-check · Reader page 4",
+"q":"Reader page 4 is a Communist leaflet made for American soldiers.<span class=\"declass file\"><b>Fact file · American POWs in Korea</b>About 7,000 Americans were captured. More than 1 in 3 of them died as prisoners, many from hunger, cold, and sickness in the camps.</span>Compare the leaflet with the fact file. What is the leaflet hiding?",
+"right":"Many American prisoners died from hunger, cold, and sickness.",
+"wrong":["The four smiling men in the photo were not really Americans.","Most American prisoners were set free within a few weeks.","China never took any American prisoners during the war."],
+"why":"✓ Correct. Both sides used leaflets to make giving up look safe. This one showed four happy POWs and hid how many died.",
+"hint":"Read the fact file. Then look at the photo. Does it show the whole story?"
+}
+},
+{
+"short":"MacArthur",
+"ref":"Reader page 5 · Photo, Wake Island, Oct. 1950",
+"title":"4. The general vs. the President",
+"from":5,"to":5,
+"check":{
+"page":5,
+"tag":"Photo check · Reader page 5",
+"q":"<span class=\"declass file\"><b>Fact file · Truman vs. MacArthur</b><span class=\"line\"><i>Oct. 15, 1950:</i> Truman flies to Wake Island to meet MacArthur (this photo). MacArthur tells him China probably won't enter the war. He was wrong.</span><span class=\"line\"><i>Spring 1951:</i> MacArthur wants to bomb China and says so in public. In a letter read in Congress he writes, <i>\"There is no substitute for victory.\"</i></span><span class=\"line\"><i>April 11, 1951:</i> Truman fires him. Truman says, <i>\"We are trying to prevent a third world war.\"</i></span></span>Why did Truman fire MacArthur?",
+"right":"MacArthur publicly pushed for a bigger war with China.",
+"wrong":["MacArthur lost the landing at Incheon in September.","MacArthur wanted to bring all U.S. troops home.","MacArthur refused to fly to meet Truman at Wake Island."],
+"why":"✓ Correct. Truman wanted a limited war to contain communism in Korea. MacArthur wanted total victory, even if it meant war with China and maybe the Soviets.",
+"hint":"Read the Spring 1951 line and Truman's quote."
+},
+"prompt":"Give the strongest reason FOR firing MacArthur and the strongest reason AGAINST it.",
+"stem":"<span class=\"declass file\"><b>Think about it</b>In the Constitution, the President is commander in chief, so generals take orders from him. But MacArthur was a WWII hero, and many Americans were angry when Truman fired him.</span>Write 1–2 sentences. Start like this: <i>The strongest reason for firing him is ___. The strongest reason against it is ___.</i>",
+"placeholder":"The strongest reason for firing him is ___. The strongest reason against it is ___.",
+"stemText":"The strongest reason for firing him is ___. The strongest reason against it is ___."
+},
+{
+"short":"Stalemate",
+"ref":"Reader pages 6–7 · Photo, 1951, and map of the 1953 line",
+"title":"5. 1951–1953: Stuck",
+"from":6,"to":7,
+"check":{
+"page":7,
+"tag":"Map check · Reader page 7",
+"q":"Reader page 7 shows the line where the fighting stopped in July 1953. Find the red line and the line labeled \"38th Parallel.\" Where did the war end?",
+"right":"Close to where it started, near the 38th parallel.",
+"wrong":["At the Yalu River, on the border with China.","Around Pusan, in the far southeast corner.","At the southern tip, so all of Korea was united."],
+"why":"✓ Correct. After 3 years, the line ended up close to where it began. Korea is still split along it today.",
+"hint":"Make the page bigger. Compare the red line with the label \"38th Parallel\" on the right side."
+},
+"prompt":"Korea ended in a stalemate. Was the war a success for containment? Use the cost in your answer.",
+"stem":"<span class=\"declass file\"><b>Fact file · The cost</b><span class=\"line\"><i>July 27, 1953:</i> An armistice stops the fighting. There is still no peace treaty today.</span><span class=\"line\">About 36,500 Americans died. Millions of Koreans died, most of them civilians, like the families on reader page 6.</span><span class=\"line\">South Korea stayed independent and non-communist.</span></span>Write 1–2 sentences. Start like this: <i>Korea was / was not a success for containment because ___. But the cost was ___.</i>",
+"placeholder":"Korea was / was not a success for containment because ___. But the cost was ___.",
+"stemText":"Korea was ___ a success for containment because ___. But the cost was ___."
+}
+],
+questions:["Why did President Truman send U.S. troops to Korea? Use the word containment.","(Check) Why did the line swing back south?","(Check) What is the Communist POW leaflet hiding?","Give the strongest reason FOR firing MacArthur and the strongest reason AGAINST it.","Korea ended in a stalemate. Was the war a success for containment? Use the cost."],
+validate(s){if(!s.name)return{text:"Type your first name + last initial (like Jordan M.) at the top of the questions.",focus:"studentName"};
+ const mc=[1,2,3,4,5].find(i=>!s.checkDone(i));if(mc)return{text:"Get the check right for part "+mc+" first.",part:mc};
+ const m2=[2,3].find(i=>!s.check2Done(i));if(m2)return{text:"Get the second check right for part "+m2+" first.",part:m2};
+ const ma=[1,4,5].find(i=>!s.answer(i));if(ma)return{text:"Write your answer for part "+ma+" before turning in.",part:ma,focus:"answer"+ma};
+ for(const i of [1,4,5]){const j=window.classJunkStop&&window.classJunkStop(document.getElementById("answer"+i));if(j)return{text:"Part "+i+": "+j,part:i}}return null},
+buildAnswers(s){const t1=i=>(s.tries(i)||1)===1,t2=i=>(s.tries2(i)||1)===1;
+ const first=[1,2,3,4,5].filter(t1).length+[2,3].filter(t2).length;
+ const a={Standard:"SS.9-12.US.35, SS.9-12.US.37, SS.9-12.US.40","First-try correct":first+" of 7"};
+ a["[US.37] "+this.questions[0]]=s.answer(1);
+ a["[US.35, US.37] "+this.questions[3]]=s.answer(4);
+ a["[US.35, US.37] "+this.questions[4]]=s.answer(5);
+ a["Reading checks"]="7 of 7 correct · tries: "+[1,2,3,4,5].map(i=>s.tries(i)||1).join(", ")+" · second checks: "+[2,3].map(i=>s.tries2(i)||1).join(", ");return a}
+};
+
+</script>
+<script src="../../shared/flip-reader.js?v=3alt"></script>
+<script>
+// Choices wait for the read timer, and "Not quite" scrolls into view (same as U.S. History Unit 3 Day 1).
+(function(){
+  document.addEventListener("click",e=>{const b=e.target.closest("#flipNext2");if(!b||!/Next part|Turn in/.test(b.textContent))return;
+    const a=document.querySelector(".flip-part:not([hidden]) textarea:not([disabled])");if(!a||!a.value.trim()||!window.classJunkStop)return;
+    if(window.classJunkStop(a)){e.stopImmediatePropagation();e.preventDefault()}},true);
+  const t=document.getElementById("flipTimer");
+  const sync=()=>document.body.classList.toggle("reading-now",t.textContent.trim()!=="");
+  new MutationObserver(sync).observe(t,{childList:true,characterData:true,subtree:true});sync();
+  document.getElementById("flipCards").addEventListener("click",e=>{if(!e.target.closest(".choice"))return;
+    setTimeout(()=>{const f=[...document.querySelectorAll(".flip-part:not([hidden]) .fb")].find(x=>x.textContent.trim());
+      if(f){const r=f.getBoundingClientRect();if(r.bottom>innerHeight-80||r.top<0)f.scrollIntoView({behavior:"smooth",block:"center"})}},120)});
+})();
+</script>
+</body></html>
