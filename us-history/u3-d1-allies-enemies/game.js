@@ -1,26 +1,24 @@
 // =====================================================================
-//  THE COLD WAR DESK  (U.S. History · Unit 3 · Day 1 · combined day)
-//  Part 1 (1945–1949): you're a young State Department aide moving containment cards on a map of
-//  Europe against Orlov, a made-up Soviet counterpart. 7 budget tokens; force raises War Risk;
+//  THE COLD WAR DESK  (U.S. History · Unit 3 · Day 1 · containment only)
+//  1945–1949: you're a young State Department aide moving containment cards on a map of
+//  Europe against Orlov, a made-up Soviet counterpart. 9 budget tokens; force raises War Risk;
 //  doing nothing lets countries fall. The historical path (aid, Marshall Plan, airlift, NATO)
-//  costs exactly 7 tokens, so early mistakes lock you out of later moves.
-//  Part 2 (1950–1954): the same aide is now a Red Scare suspect. Each file asks you to name names.
-//  Naming raises Fear and adds new names to the wall (the snowball). Refusing costs Career hearts,
-//  and high Fear makes refusing cost more. Ends with the Army–McCarthy hearings and the 1954 vote.
-//  Ending = abroad result (3) x home result (4), with a "Caused by" trail.
-//  5 evidence checks woven into play. Strict order. Saves on this device.
+//  costs 7 tokens, so one forceful mistake still leaves room for the later moves.
+//  8 steps: 5 moves, "1949 · Two Shocks", the ending, one writing answer + turn in.
+//  3 endings: Contained, No War / On the Brink (war risk 7+) / The Spread (any country lost),
+//  with a "Caused by" trail. 3 evidence checks woven into play. Strict order. Saves on this device.
 //  Turn-in: shared/turnin.js classTurnIn, same payload shape as shared/unit-game.js finish().
-//  Made up: the player, Orlov, Rep. Garrity, Ruth, Leo, Dana, and the game's what-ifs.
+//  Made up: the player, Orlov, and the game's what-ifs.
 //  Real: every quote, date, and number shown (sources in the small gray lines).
 // =====================================================================
 (function () {
   "use strict";
-  const KEY = "ush-u3-d1-allies-enemies-v2";
+  const KEY = "ush-u3-d1-allies-enemies-v3";
   const ASSIGNMENT_ID = "ush-u3-d1-allies-enemies";
   const TITLE = "U.S. History · Unit 3 · Day 1 · The Cold War Desk";
-  const STANDARD = "SS.9-12.US.36, SS.9-12.US.37, SS.9-12.US.40";
+  const STANDARD = "SS.9-12.US.37";
   const OLD_API = "https://fynn-class-assignment-submissions-20261024.neotboy.chatgpt.site/api/submit";
-  const LOCK = 5, TOTAL = 13, TOKENS = 7, HEARTS = 4;
+  const LOCK = 5, TOTAL = 8, TOKENS = 9;
 
   const $ = id => document.getElementById(id);
   const isT = () => { try { return !!(window.classIsTestT && window.classIsTestT()); } catch (e) { return false; } };   // Test T. (teacher preview)
@@ -60,12 +58,11 @@
   const histRed = id => Object.keys(HIST).some(s => +s <= st.step && HIST[s].includes(id));
 
   // ---------------- State ----------------
-  const fresh = () => ({ v: 2, name: "", step: 0, tokens: TOKENS, war: 0, lost: [], curtain: false, nato: false, orlov: "calm",
-    picks: {}, checks: {}, airlift: 0, fear: 0, fearParts: null, career: HEARTS, named: 0, jobs: 0, wall: [], hale: "hungry",
-    ticks: {}, tvDrop: false, writing: {}, atReport: false, turnedIn: false });
+  const fresh = () => ({ v: 3, name: "", step: 0, tokens: TOKENS, war: 0, lost: [], curtain: false, nato: false, orlov: "calm",
+    picks: {}, checks: {}, airlift: 0, ticks: {}, writing: {}, turnedIn: false });
   let st;
   try { st = JSON.parse(localStorage.getItem(KEY)); } catch (e) {}
-  if (!st || st.v !== 2) st = fresh();
+  if (!st || st.v !== 3) st = fresh();
   // Shared Chromebooks: if a different student is signed in on this device, start that student fresh.
   try {
     const raw = localStorage.getItem("site-student-name") || "";
@@ -83,14 +80,8 @@
     { year: "1948", t: "1948 · Berlin Blockade" },
     { year: "1949", t: "1949 · NATO" },
     { year: "1949", t: "1949 · Two Shocks" },
-    { year: "1950", t: "1950 · The List" },
-    { year: "1950", t: "1950 · One Senator" },
-    { year: "1951", t: "1951 · Hollywood" },
-    { year: "1953", t: "1953 · The Oath" },
-    { year: "1954", t: "1954 · Live on TV" },
-    { year: "1954", t: "Your ending" },
-    { year: "1954", t: "Your report" }];
-  const part = () => (st.step >= 7 ? 2 : 1);
+    { year: "1949", t: "Your ending" },
+    { year: "1949", t: "Your report" }];
 
   // ---------------- Evidence checks (options[0] is right) ----------------
   const CHECKS = {
@@ -121,26 +112,8 @@
       hint: "An attack on one counts as an attack on whom?",
       reveal: "<b>NATO</b>: an attack on one member is an attack on all.",
       unlock: "🤝 NATO card unlocked" },
-    c_smith: { std: "US.40", short: "Smith's Declaration of Conscience: what she defended",
-      tag: "Sen. Margaret Chase Smith (R-Maine) · June 1, 1950",
-      quote: "“The right to criticize; the right to hold unpopular beliefs; the right to protest; the right of independent thought.”",
-      gloss: "",
-      who: ["📰", "av gray", "Reporter"], q: "What is Smith defending?",
-      options: ["People's right to disagree out loud", "McCarthy's right to make his lists", "The Communist Party's secret plans", "Senators' right to accuse anyone"],
-      hint: "Read her list of rights. Who uses them?",
-      reveal: "<b>Declaration of Conscience</b>: Smith, a Republican, stood up to McCarthy.",
-      unlock: "🎤 Speak-up card unlocked" },
-    c_welch: { std: "US.36", short: "Welch at the Army–McCarthy hearings: why it hurt McCarthy",
-      tag: "",
-      quote: "",
-      gloss: "",
-      who: ["🧓", "av gold", "Your neighbor"], q: "Why did this moment hurt McCarthy?",
-      options: ["Viewers saw him bully someone live", "It proved the Army hid real spies", "Welch showed McCarthy was a spy", "TV networks banned his speeches"],
-      hint: "Look at the TV. Who was watching, and what did they see?",
-      reveal: "<b>Army–McCarthy hearings</b>: on live TV, millions saw McCarthy bully people.",
-      unlock: "📺 The spell breaks · 😨 −2" }
   };
-  const CHECK_IDS = ["c_truman", "c_marshall", "c_nato", "c_smith", "c_welch"];
+  const CHECK_IDS = ["c_truman", "c_marshall", "c_nato"];
 
   // ---------------- Decisions ----------------
   // chips: [class, text]. cost = tokens. fx applied on pick.
@@ -168,32 +141,8 @@
       { id: "sign", ic: "🤝", t: "Sign NATO", d: "12 nations defend each other.", cost: 1, chips: [["cost", "💵 −1"], ["bad", "🔥 +1"]], unlock: "c_nato" },
       { id: "alone", ic: "🧍", t: "Go it alone", d: "No promises to anyone.", cost: 0, chips: [["cost", "💵 0"], ["bad", "🔥 +2"]] }
     ],
-    7: [
-      { id: "name", ic: "📛", t: "Name Ruth", d: "You're cleared.", chips: [["bad", "😨 +2"], ["bad", "📌 +2 names"]] },
-      { id: "refuse", ic: "✋", t: "Refuse", d: "“I won't name anyone.”", chips: "refuse" }
-    ],
-    8: [
-      { id: "back", ic: "🎤", t: "Back Smith", d: "Say it on the record.", chips: "refuse", unlock: "c_smith" },
-      { id: "silent", ic: "🤐", t: "No comment", d: "Stay out of it.", chips: [["bad", "😨 +1"]] }
-    ],
-    9: [
-      { id: "name", ic: "📛", t: "Name Leo", d: "Your name stays off the list.", chips: [["bad", "😨 +2"], ["bad", "📌 +2 names"]] },
-      { id: "refuse", ic: "✋", t: "Refuse", d: "“Leo is no spy.”", chips: "refuse" }
-    ],
-    10: [
-      { id: "name", ic: "📛", t: "List Dana", d: "You keep your job.", chips: [["bad", "😨 +2"], ["bad", "📌 +2 names"]] },
-      { id: "refuse", ic: "✋", t: "Protect Dana", d: "“Dana is loyal.”", chips: "refuse" },
-      { id: "quiet", ic: "🤐", t: "Stay quiet", d: "Not your fight.", chips: [["bad", "😨 +1"], ["bad", "🚫 Dana?"]] }
-    ],
-    11: [
-      { id: "condemn", ic: "⚖️", t: "Censure him", d: "An official Senate scolding.", chips: [["good", "😨 −1"]] },
-      { id: "defend", ic: "🛡️", t: "Defend him", d: "He fights communists.", chips: [["bad", "😨 +1"]] }
-    ]
   };
-  const speakCost = () => (st.fear >= 7 ? 2 : 1);
-  const refuseChips = () => [["bad", "❤️ −" + speakCost()], ["good", "😨 −1"]];
-  const airliftCost = () => (st.picks[3] === "big" ? 2 : 3);
-  const cardCost = (step, c) => (step === 4 && c.id === "airlift" ? airliftCost() : (c.cost || 0));
+  const cardCost = (step, c) => c.cost || 0;   // Berlin Airlift is always 2
 
   function loseTiles(ids) { st.lastLost = ids; ids.forEach(id => { if (!st.lost.includes(id)) st.lost.push(id); }); }
   function applyPick(step, id) {
@@ -206,51 +155,12 @@
     if (step === 4) { if (id === "tanks") { st.war += 4; st.orlov = "angry"; } else if (id === "pull") { loseTiles(["berlin"]); st.orlov = "smug"; } else st.orlov = "nervous"; }
     if (step === 5) { if (id === "sign") { st.war += 1; st.nato = true; st.orlov = "angry"; } else { st.war += 2; st.orlov = "smug"; } }
     st.war = clamp(st.war, 0, 10);
-    const file = { 7: "ruth", 9: "leo", 10: "dana" }[step];
-    if (file) {
-      const pin = st.wall.find(p => p.id === file);
-      if (id === "quiet") {
-        st.fear += 1; st.jobs++; st.hale = "pleased";
-        if (pin) pin.st = "black";
-      } else if (id === "name") {
-        st.fear += 2; st.named++; st.jobs++; st.hale = "pleased";
-        if (pin) pin.st = "black";
-        const by = pin ? pin.n : "";
-        st.wall.push({ id: file + "q1", f: "❓", n: "New name", s: "named by " + by, st: "q", fresh: true }, { id: file + "q2", f: "❓", n: "New name", s: "named by " + by, st: "q", fresh: true });
-      } else {
-        st.career = clamp(st.career - speakCost(), 0, HEARTS); st.fear -= 1; st.hale = "angry";
-        if (pin) pin.st = "safe";
-      }
-    }
-    if (step === 8) { if (id === "back") { st.career = clamp(st.career - speakCost(), 0, HEARTS); st.fear -= 1; st.hale = "angry"; } else { st.fear += 1; st.hale = "pleased"; } }
-    if (step === 11) { st.fear += id === "condemn" ? -1 : 1; }
-    st.fear = clamp(st.fear, 0, 10);
   }
 
   // Things that happen when a step opens (once).
   function onEnter(step) {
     if (st.ticks[step]) return;
     const info = {};
-    if (step === 6) {
-      const lost = st.lost.length, warUp = st.war >= 7 ? 2 : st.war >= 4 ? 1 : 0;
-      st.fearParts = { news: 2, lost, war: warUp };
-      st.fear = clamp(2 + lost + warUp, 0, 10);
-    }
-    if (step === 7) {
-      st.wall = [{ id: "you", f: "🧑‍💼", n: "You", s: "State Dept. aide", st: "you" }, { id: "ruth", f: "👩‍💼", n: "Ruth K.", s: "Typist", st: "cur", fresh: true }];
-      st.hale = "hungry";
-    }
-    if (step >= 8 && step <= 11) {
-      const open = st.wall.filter(p => p.st === "q");
-      if (open.length) { open.forEach(p => { p.st = "black"; }); st.jobs += open.length; st.fear = clamp(st.fear + 1, 0, 10); info.snow = open.length; }
-    }
-    if (step === 9) {
-      st.fear = clamp(st.fear + 1, 0, 10); info.spy = true;
-      st.wall.push({ id: "spy", f: "🕵️", n: "J. Rosenberg", s: "Real spy case", st: "spy", fresh: true });
-      st.wall.push({ id: "leo", f: "🎬", n: "Leo M.", s: "Movie writer", st: "cur", fresh: true });
-      st.hale = "hungry";
-    }
-    if (step === 10) { st.wall.push({ id: "dana", f: "🧔", n: "Dana P.", s: "Your desk mate", st: "cur", fresh: true }); st.hale = "hungry"; }
     st.ticks[step] = info;
   }
 
@@ -271,17 +181,6 @@
            pull: { stamp: ["bad", "Lost"], line: "In this game, West Berlin goes communist.", real: "Real: Truman refused to give up Berlin." } },
       5: { sign: { stamp: ["", "Alliance"], line: "12 nations sign. Orlov answers with his own alliance.", real: "Real: the Soviets formed the Warsaw Pact in 1955." },
            alone: { stamp: ["warn", "Alone"], line: "Orlov tests you everywhere. Your allies feel alone.", real: "Real: the U.S. signed NATO on April 4, 1949." } },
-      7: { name: { stamp: ["bad", "Blacklisted"], line: "Ruth is fired. Now Garrity wants her names." },
-           refuse: { stamp: ["", "No names"], line: "Garrity calls you a troublemaker. Ruth keeps her job." } },
-      8: { back: { stamp: ["", "On record"], line: "Garrity is furious. Two coworkers quietly thank you.", real: "Real: only 6 senators joined Smith." },
-           silent: { stamp: ["warn", "No comment"], line: "Silence lets the fear grow.", real: "Real: only 6 senators joined Smith." } },
-      9: { name: { stamp: ["bad", "Blacklisted"], line: "Leo's studio drops him. No one will hire him.", real: "Real: hundreds of Hollywood workers were blacklisted." },
-           refuse: { stamp: ["", "No names"], line: "Garrity threatens to jail you for not answering.", real: "Real: the Hollywood Ten went to jail for refusing HUAC's questions." } },
-      10: { name: { stamp: ["bad", "Blacklisted"], line: "Dana is fired. No proof was ever shown." },
-            refuse: { stamp: ["", "No names"], line: "Your boss moves you to the basement office." },
-            quiet: { stamp: ["bad", "Blacklisted"], line: "Someone else lists Dana. Dana is fired. You said nothing." } },
-      11: { condemn: { stamp: ["", "Censured"], line: "The Senate censures McCarthy, 67–22. His power fades.", real: "Real: vote of December 2, 1954." },
-            defend: { stamp: ["warn", "Censured anyway"], line: "You lose. The Senate censures McCarthy, 67–22.", real: "Real: vote of December 2, 1954." } }
     };
     return R[step][id];
   }
@@ -291,45 +190,25 @@
     3: "<b>Marshall Plan</b>: U.S. money rebuilt Western Europe, so communism lost its pull.",
     4: "<b>Berlin Airlift</b>: planes fed West Berlin, and no one fired a shot.",
     5: "<b>Cold War</b>: two armed camps that never fought each other directly.",
-    7: "<b>HUAC</b> (House Un-American Activities Committee): questioned people about communist ties.",
-    8: "<b>Civic virtue</b>: standing up for others' rights, even when it's risky.",
-    9: "<b>Blacklist</b>: a list of people no one would hire.",
-    10: "<b>Loyalty oath</b>: a promise you're not a communist, required to keep many jobs.",
-    11: "<b>McCarthyism</b>: accusing people of disloyalty (betraying the country) without proof."
   };
 
   // ---------------- HUD ----------------
   const ORLOV = { calm: ["🙂", "Watching"], smug: ["😏", "Smug"], angry: ["😠", "Furious"], blocked: ["😤", "Blocked"], nervous: ["😬", "Nervous"] };
-  const HALE = { hungry: ["🧐", "Wants names"], pleased: ["😏", "Pleased"], angry: ["😠", "Angry"], beaten: ["😓", "Losing power"] };
   let last = {};
   function hud() {
     const on = st.step >= 1;
     $("hud").hidden = !on;
-    document.body.classList.toggle("home", on && part() === 2);
-    document.body.classList.toggle("fearhot", on && part() === 2 && st.fear >= 7 && st.step < 12);
     if (!on) return;
     const date = `<div class="date"><span>YEAR</span><b>${STEP[st.step].year}</b></div>`;
-    let h;
-    if (part() === 1) {
-      const toks = Array.from({ length: TOKENS }, (_, i) => `<i class="${i >= st.tokens ? "spent" : ""}">💵</i>`).join("");
-      const o = ORLOV[st.orlov] || ORLOV.calm;
-      h = date + `<span class="hm" id="mTok" title="Budget"><span class="tok" aria-label="Budget tokens">${toks}</span><b>${st.tokens}</b></span>
-        <span class="hm" id="mWar"><span class="ic">🔥</span><span class="lbl">War risk</span><span class="bar"><span id="warBar" style="width:${st.war * 10}%"></span></span><b>${st.war}/10</b></span>
-        <span class="hm" id="mLost"><span class="ic">🟥</span><span class="lbl">Countries lost</span><b>${st.lost.length}</b></span>
-        <span class="steppill">${"Step " + st.step + " of " + TOTAL}</span>
-        <span class="rival" id="rival"><span class="face">${o[0]}</span><span><b>Orlov</b><small>${o[1]}</small></span></span>`;
-    } else {
-      const hearts = Array.from({ length: HEARTS }, (_, i) => `<i class="${i >= st.career ? "gone" : ""}">❤️</i>`).join("");
-      const hl = HALE[st.hale] || HALE.hungry;
-      h = date + `<span class="hm" id="mFear"><span class="ic">😨</span><span class="lbl">Fear</span><span class="bar"><span id="fearBar" style="width:${st.fear * 10}%"></span></span><b>${st.fear}/10</b></span>
-        <span class="hm" id="mCareer"><span class="lbl">Career</span><span class="hearts">${hearts}</span></span>
-        <span class="hm" id="mJobs"><span class="ic">🚫</span><span class="lbl">Jobs lost</span><b>${st.jobs}</b></span>
-        <span class="steppill">${"Step " + st.step + " of " + TOTAL}</span>
-        <span class="rival" id="rival"><span class="face">${hl[0]}</span><span><b>Rep. Garrity</b><small>${hl[1]}</small></span></span>`;
-    }
-    $("hudIn").innerHTML = h;
-    const now = { tok: st.tokens, war: st.war, lost: st.lost.length, fear: st.fear, career: st.career, jobs: st.jobs, rival: st.orlov + st.hale };
-    [["tok", "mTok"], ["war", "mWar"], ["lost", "mLost"], ["fear", "mFear"], ["career", "mCareer"], ["jobs", "mJobs"], ["rival", "rival"]].forEach(([k, el]) => {
+    const toks = Array.from({ length: TOKENS }, (_, i) => `<i class="${i >= st.tokens ? "spent" : ""}">💵</i>`).join("");
+    const o = ORLOV[st.orlov] || ORLOV.calm;
+    $("hudIn").innerHTML = date + `<span class="hm" id="mTok" title="Budget"><span class="tok" aria-label="Budget tokens">${toks}</span><b>${st.tokens}</b></span>
+      <span class="hm" id="mWar"><span class="ic">🔥</span><span class="lbl">War risk</span><span class="bar"><span id="warBar" style="width:${st.war * 10}%"></span></span><b>${st.war}/10</b></span>
+      <span class="hm" id="mLost"><span class="ic">🟥</span><span class="lbl">Countries lost</span><b>${st.lost.length}</b></span>
+      <span class="steppill">${"Step " + st.step + " of " + TOTAL}</span>
+      <span class="rival" id="rival"><span class="face">${o[0]}</span><span><b>Orlov</b><small>${o[1]}</small></span></span>`;
+    const now = { tok: st.tokens, war: st.war, lost: st.lost.length, rival: st.orlov };
+    [["tok", "mTok"], ["war", "mWar"], ["lost", "mLost"], ["rival", "rival"]].forEach(([k, el]) => {
       if (last[k] != null && last[k] !== now[k] && $(el)) $(el).classList.add(k === "rival" ? "react" : "bump");
     });
     last = now;
@@ -340,7 +219,6 @@
   let locked = false, justSolved = null, justPicked = false;
   const say = (av, cls, who, text) => `<div class="say"><span class="${cls}">${av}</span><p class="bub"><small>${who}</small>${text}</p></div>`;
   const orlovSays = text => say("😏", "av", "Orlov", text);
-  const haleSays = text => say("🧐", "av", "Rep. Garrity", text);
   const reveal = html => `<p class="reveal">💡 ${html}</p>`;
   function card() { app.innerHTML = `<section class="card" id="stepCard"></section>`; return $("stepCard"); }
   function nextBtn(box, label) {
@@ -373,15 +251,6 @@
       <div class="legend"><span><i class="sw f"></i>Free elections + capitalism</span><span><i class="sw o"></i>🪖 Soviet army or pressure</span><span><i class="sw r"></i>Communist, one-party rule</span>${st.curtain ? "<span>▬ Iron Curtain</span>" : ""}${st.nato ? "<span>🛡️ NATO</span>" : ""}</div></div>`;
   }
 
-  function wallHtml() {
-    const pins = st.wall.map(p => {
-      const cls = ["pin", p.st === "cur" ? "cur" : p.st, p.fresh ? "new" : ""].join(" ");
-      return `<div class="${cls}"><span class="pf">${p.f}</span>${esc(p.n)}<span class="ps">${esc(p.s)}</span></div>`;
-    }).join("");
-    st.wall.forEach(p => { p.fresh = false; });
-    save();
-    return `<div class="wall" aria-label="Suspect wall">${pins}</div>`;
-  }
 
   // An evidence check on a document/screen. def.options[0] is right.
   function mountCheck(box, id, onRight) {
@@ -391,9 +260,14 @@
     wrap.innerHTML = say(def.who[0], def.who[1], def.who[2], `<span class="check-tag">🔎 Evidence check</span><br>${def.q}`);
     const area = document.createElement("div"); area.className = "opts";
     const fb = document.createElement("p"); fb.className = "msg"; fb.setAttribute("aria-live", "polite");
+    let lastOrder = "";
     function draw() {
       area.replaceChildren();
-      shuffle(def.options.map((t, n) => ({ t, n }))).forEach(o => {
+      // Wrong answers always come back in a NEW order (never the same order twice in a row).
+      let order, key, tries = 0;
+      do { order = shuffle(def.options.map((t, n) => ({ t, n }))); key = order.map(o => o.n).join(""); } while (key === lastOrder && ++tries < 50);
+      lastOrder = key;
+      order.forEach(o => {
         const b = document.createElement("button"); b.type = "button"; b.className = "opt"; b.textContent = o.t;
         b.onclick = () => {
           if (locked) return;
@@ -436,7 +310,7 @@
     const wrap = document.createElement("div"); wrap.className = "deck"; wrap.id = "deck";
     D[step].forEach(c => {
       const cost = cardCost(step, c);
-      const chips = c.chips === "refuse" ? refuseChips() : step === 4 && c.id === "airlift" ? [["cost", "💵 −" + cost]] : c.chips;
+      const chips = c.chips;
       const broke = step <= 5 && cost > st.tokens;
       const isNew = c.unlock && chk(c.unlock).done;
       const b = document.createElement("button"); b.type = "button";
@@ -467,8 +341,8 @@
       <div>
         <h1>The Cold War Desk</h1>
         <p class="hook">Your old ally is now your rival.</p>
-        <ul class="facts"><li>🗺️ Out-move the Soviets</li><li>🎙️ Survive the Red Scare</li><li>🏁 Many endings · 25 min</li></ul>
-        <p class="goal">🎯 <b>Goal:</b> explain containment and the Red Scare.</p>
+        <ul class="facts"><li>🗺️ Out-move the Soviets</li><li>🏁 3 endings · 15 min</li></ul>
+        <p class="goal">🎯 <b>Goal:</b> explain how the U.S. tried to contain communism.</p>
         <label for="nameBox">Name (like Jordan M.)</label>
         <input id="nameBox" maxlength="60" autocomplete="off" placeholder="Jordan M." value="${esc(st.name)}">
         <p id="introMsg" class="msg" role="status"></p>
@@ -476,7 +350,7 @@
       </div>
       <div class="title-right" aria-hidden="true">
         <div class="vsbox"><div class="who"><span class="big">🧑‍💼</span><b>You</b><small>🇺🇸</small></div><div class="vs">VS</div><div class="who red"><span class="big">😏</span><b>Orlov</b><small>☭</small></div></div>
-        <p class="ticker">📺 1945 → 1954</p>
+        <p class="ticker">📺 1945 → 1949</p>
       </div></section>`;
     $("startBtn").onclick = () => {
       const fixed = window.classShortName ? window.classShortName($("nameBox").value) : $("nameBox").value.trim();
@@ -512,7 +386,7 @@
     mapStep(1, {
       kicker: "May 1945 · Europe",
       boardOpts: { drawCurtain: picked && justPicked },
-      before: `<ul class="how"><li>💵 Spend 7 tokens wisely</li><li>🔥 Too much force = war</li><li>🟥 Do nothing = countries fall</li></ul>` +
+      before: `<ul class="how"><li>💵 Spend 9 tokens wisely</li><li>🔥 Too much force = war</li><li>🟥 Do nothing = countries fall</li></ul>` +
         orlovSays("We won together. Now my army stays in the East."),
       ask: "Your move?",
       after: () => `<div class="doc"><p class="dtag">📄 Winston Churchill · March 5, 1946</p><p class="quote">“An iron curtain has descended across the Continent.”</p></div>`
@@ -577,125 +451,23 @@
   }
   function step6() {
     const box = card();
-    const f = st.fearParts || { news: 2, lost: 0, war: 0 };
     box.innerHTML = `<span class="kicker">August–October 1949</span>
       <div class="split"><div>${board()}</div><div>
         <div class="banner"><span class="bi">💥</span><span>SOVIETS TEST ATOMIC BOMB<small>August 29, 1949</small></span></div>
         <div class="banner"><span class="bi">🇨🇳</span><span>COMMUNISTS WIN CHINA<small>October 1, 1949</small></span></div>
         <div class="banner"><span class="bi">🇩🇪</span><span>EAST GERMANY GOES COMMUNIST<small>October 7, 1949</small></span></div>
-        <div class="fx"><span class="chip bad">😨 +2 news</span>${f.lost ? `<span class="chip bad">${"😨 +" + f.lost + " lost"}</span>` : ""}${f.war ? `<span class="chip bad">${"😨 +" + f.war + " war"}</span>` : ""}</div>
-        ${reveal("<b>Red Scare</b>: fear of hidden communists. Some spies were real; most accused weren't.")}
-        ${say("📨", "av", "A letter for you", "You worked at State. Now Congress wants you.")}
+        ${orlovSays("Now we have the bomb too. And China has gone communist.")}
+        ${reveal("<b>Two shocks</b>: the Soviet bomb and a communist China made containment harder and the Cold War scarier.")}
       </div></div>`;
-    nextBtn(box.querySelector(".split > div:last-child"), "🎙️ Go to the hearing →");
-  }
-
-  // ---------------- Part 2: the hearing room ----------------
-  function fileHtml(id) {
-    const F = {
-      ruth: ["👩‍💼", "Ruth K. · typist", ["📅 One communist meeting, 1938", "🕵️ Spy proof: none"]],
-      leo: ["🎬", "Leo M. · movie writer", ["📅 Left-wing club, 1940", "🕵️ Spy proof: none"]],
-      dana: ["🧔", "Dana P. · desk mate", ["✍️ Won't sign the oath", "🕵️ Spy proof: none"]]
-    }[id];
-    return `<div class="file"><div class="fh"><span class="pf">${F[0]}</span><span>${F[1]}</span></div><ul>${F[2].map(x => `<li>${x}</li>`).join("")}</ul></div>`;
-  }
-  function tickHtml(step) {
-    const t = st.ticks[step] || {};
-    return t.snow ? `<p class="tick">${"📌 " + t.snow + " more people named and fired"}</p>` : "";
-  }
-  function hearing(step, o) {
-    const box = card();
-    box.innerHTML = `<span class="kicker">${o.kicker}</span><div class="split"><div>${wallHtml()}${o.news ? o.news() : ""}${scene(step)}</div><div id="right"></div></div>`;
-    const right = $("right");
-    if (!st.picks[step]) {
-      if (o.check && !chk(o.check).done) {
-        right.innerHTML = tickHtml(step) + (o.doc || "");
-        mountCheck(right, o.check, () => { render(); scrollToEl($("deck")); });
-        return;
-      }
-      right.innerHTML = (o.check ? solvedHtml(o.check) : tickHtml(step)) + (o.before ? o.before() : "");
-      deck(right, step, o.ask);
-      return;
-    }
-    right.innerHTML = resultHtml(step) + reveal(REVEAL[step]);
-    nextBtn(right);
-  }
-  function scene(step) {
-    if (step === 8) return `<div class="scene" aria-hidden="true"><span class="bench"><span class="bf">👩‍⚖️</span>Sen. Smith</span><span class="flash">📸</span><span class="witness"><span class="bf">🧑‍💼</span>You</span></div>`;
-    const h = HALE[st.hale] || HALE.hungry;
-    return `<div class="scene" aria-hidden="true"><span class="bench"><span class="bf">${h[0]}</span>Rep. Garrity</span><span class="flash">📸</span><span class="mic">🎙️</span><span class="witness"><span class="bf">🧑‍💼</span>You</span></div>`;
-  }
-  function step7() {
-    hearing(7, {
-      kicker: "February 1950 · HUAC hearing room",
-      news: () => `<div class="banner"><span class="bi">📺</span><span>Sen. Joseph McCarthy: “I have here in my hand a list of 205…”<small>Wheeling, West Virginia · Feb. 9, 1950</small></span></div>`,
-      before: () => haleSays("Give me Ruth's name, and you're cleared.") + fileHtml("ruth"),
-      ask: "Name names?"
-    });
-  }
-  function step8() {
-    hearing(8, {
-      kicker: "June 1950 · U.S. Senate",
-      doc: `<div class="doc"><p class="dtag">📄 ${CHECKS.c_smith.tag}</p><p class="quote">${CHECKS.c_smith.quote}</p></div>`,
-      check: "c_smith",
-      before: () => say("📰", "av gray", "Reporter", "Most senators are too scared to agree with her. What do you say?"),
-      ask: "Speak up?"
-    });
-  }
-  function step9() {
-    hearing(9, {
-      kicker: "1951 · HUAC hearing room",
-      news: () => `<div class="banner"><span class="bi">🕵️</span><span>REAL SPIES: The Rosenbergs are convicted of spying for the Soviets.<small>1951 · Historians still argue about Ethel's role.</small></span></div>`,
-      before: () => haleSays("Spies are real! Name your friend Leo, or you're next.") + fileHtml("leo"),
-      ask: "Name names?"
-    });
-  }
-  function step10() {
-    hearing(10, {
-      kicker: "1953 · Your office",
-      before: () => haleSays("Your office now requires a loyalty oath. Dana won't sign. List Dana as a risk.") + fileHtml("dana"),
-      ask: "Your call?"
-    });
-  }
-  function step11() {
-    const box = card();
-    const tv = `<div class="tv"><div class="screen"><span class="live">● LIVE · ARMY–McCARTHY HEARINGS</span>
-      <p class="quote">“Have you no sense of decency, sir, at long last?”</p>
-      <p class="cite">Joseph Welch, the Army's lawyer, to Sen. McCarthy · June 9, 1954</p></div><div class="knobs"><i></i><i></i></div></div>`;
-    box.innerHTML = `<span class="kicker">June 1954 · Your living room</span><div class="split"><div>${tv}${wallHtml()}</div><div id="right"></div></div>`;
-    const right = $("right");
-    if (!chk("c_welch").done) {
-      right.innerHTML = tickHtml(11) + say("📺", "av gray", "On TV", "Millions are watching. McCarthy just attacked a young lawyer from Welch's law firm.");
-      mountCheck(right, "c_welch", () => {
-        if (!st.tvDrop) { st.tvDrop = true; st.fear = clamp(st.fear - 2, 0, 10); st.hale = "beaten"; save(); }
-        render(); scrollToEl($("deck"));
-      });
-      return;
-    }
-    if (!st.picks[11]) {
-      right.innerHTML = solvedHtml("c_welch") +
-        say("🏛️", "av us", "December 1954", "The Senate votes on McCarthy.");
-      deck(right, 11, "Your letter to your senator:");
-      return;
-    }
-    right.innerHTML = resultHtml(11) + reveal(REVEAL[11]);
-    nextBtn(right, "🏁 See your ending →");
+    nextBtn(box.querySelector(".split > div:last-child"), "🏁 See your ending →");
   }
 
   // ---------------- Ending ----------------
-  function abroadId() { return st.war >= 7 ? "war" : st.lost.length >= 1 ? "dom" : "held"; }
-  function homeId() { return st.career <= 0 ? (st.named ? "black2" : "black") : st.fear >= 6 ? "witch" : st.named >= 1 ? "saved" : "free"; }
-  const ABROAD = {
-    held: ["🛡️", "Abroad: no war, no countries lost. That's containment."],
-    war: ["🔥", "Abroad: your force pushed the world toward World War III."],
-    dom: ["🟥", "Abroad: you lost ground to communism. Containment slipped."]
-  };
-  const HOME = {
-    free: { icon: "🗽", t: "Contained, and Still Free", line: "At home, you named no one and kept your job. The fear faded." },
-    saved: { icon: "🎭", t: "Safe, at a Price", line: "You kept your job. Others lost theirs because of names you gave." },
-    black: { icon: "🚫", t: "Blacklisted, Not Broken", line: "You named no one and lost your career. Many real Americans paid that price." },
-    black2: { icon: "🚫", t: "Blacklisted Anyway", line: "You gave names and still lost your career. Fear spared no one." },
-    witch: { icon: "😨", t: "Witch Hunt", line: "Fear ran wild. People lost jobs with no proof." }
+  function endId() { return st.war >= 7 ? "brink" : st.lost.length >= 1 ? "spread" : "held"; }
+  const ENDS = {
+    held: { icon: "🛡️", t: "Contained, No War", line: "No war, and no new countries lost. That's containment: stop the spread without fighting." },
+    brink: { icon: "🔥", t: "On the Brink", line: "You used too much force. Your moves pushed the world toward World War III." },
+    spread: { icon: "🟥", t: "The Spread", line: "Communism spread to new countries. Containment slipped." }
   };
   function causedBy() {
     const L = [];
@@ -705,38 +477,30 @@
     L.push({ big: "💰 Marshall Plan rebuilt Europe", loan: "💸 Small loan, Italy lost", none: "🏠 No aid, France and Italy lost" }[P[3]]);
     L.push({ airlift: "🛩️ Airlift fed Berlin", tanks: "🚚 Tanks at Berlin", pull: "🏳️ Gave up West Berlin" }[P[4]]);
     L.push(P[5] === "sign" ? "🤝 Signed NATO" : "🧍 Went it alone");
-    L.push(P[7] === "name" ? "📛 Named Ruth" : "✋ Protected Ruth");
-    L.push(P[8] === "back" ? "🎤 Backed Smith on record" : "🤐 No comment on Smith");
-    L.push(P[9] === "name" ? "📛 Named Leo" : "✋ Protected Leo");
-    L.push({ name: "📛 Listed Dana", refuse: "✋ Protected Dana", quiet: "🤐 Stayed quiet about Dana" }[P[10]]);
     return L;
   }
-  function step12() {
+  function step7() {
     const box = card();
-    const a = ABROAD[abroadId()], h = HOME[homeId()];
-    box.innerHTML = `<div class="ending ${homeId()}"><div class="e-icon">${h.icon}</div><h2>${h.t}</h2>
-      <p class="abroad ${abroadId()}">${a[0]} <span>${a[1]}</span></p><p>🏠 <span>${h.line}</span></p>
-      <div class="statrow"><span class="chip">🟥 ${st.lost.length}</span><span class="chip">🔥 ${st.war}/10</span><span class="chip">😨 ${st.fear}/10</span><span class="chip">🚫 ${st.jobs}</span><span class="chip">❤️ ${st.career}</span></div></div>
+    const e = ENDS[endId()];
+    box.innerHTML = `<div class="ending ${endId()}"><div class="e-icon">${e.icon}</div><h2>${e.t}</h2>
+      <p>${e.line}</p>
+      <div class="statrow"><span class="chip">🟥 Lost: ${st.lost.length}</span><span class="chip">🔥 War risk: ${st.war}/10</span><span class="chip">💵 Left: ${st.tokens}</span></div></div>
       <div class="caused"><p class="ctag">Caused by:</p><ul>${causedBy().map(c => `<li>${c}</li>`).join("")}</ul></div>`;
-    nextBtn(box, "📝 Write your statement →");
+    nextBtn(box, "📝 Write your answer →");
   }
 
   // ---------------- Report + turn in ----------------
   const PROMPTS = [
-    { id: "contain", short: "Containment: the move that did the most", label: "1. Best move to contain communism? Why?",
+    { id: "contain", short: "Containment: the move that did the most", label: "Best move to contain communism? Why?",
       stem: "The ___ did the most to contain communism because ___.", go4: "Bonus: how would Stalin see it?", min: 60, newWords: 5,
       mustAll: [["truman", "greece", "turkey", "aid", "marshall", "plan", "airlift", "berlin", "nato", "doctrine", "alliance", "plane", "money", "advisers"], ["because", "since", "so "]],
-      mustMsg: "In answer 1, name one U.S. move AND say why (use “because”)." },
-    { id: "fear", short: "Red Scare: safer or less free", label: "2. Red Scare: safer, or less free? Why?",
-      stem: "Fear of communism made the U.S. ___ because ___.", go4: "Bonus: one point for the other side.", min: 60, newWords: 5,
-      mustAll: [["safe", "free"], ["mccarthy", "blacklist", "oath", "loyalty", "rosenberg", "spy", "spies", "proof", "hearing", "fired", "job", "smith", "welch", "name", "huac", "hollywood", "accus", "list", "bomb", "decency"], ["because", "since", "so "]],
-      mustMsg: "In answer 2, say safer OR less free, use one fact from today, and say why (use “because”)." }
+      mustMsg: "Name one U.S. move AND say why (use “because”)." }
   ];
-  function step13() {
+  function step8() {
     const box = card();
-    const h = HOME[homeId()];
-    box.innerHTML = `<p class="mini-end">${h.icon} <b>${h.t}</b></p>
-      <div class="report" id="report"><p class="report-tag">📝 Your statement for the record</p></div>`;
+    const e = ENDS[endId()];
+    box.innerHTML = `<p class="mini-end">${e.icon} <b>${e.t}</b></p>
+      <div class="report" id="report"><p class="report-tag">📝 Your answer for the record</p></div>`;
     const rep = $("report");
     PROMPTS.forEach(p => {
       rep.insertAdjacentHTML("beforeend", `<label for="w_${p.id}">${p.label}</label><p class="stem">✏️ ${esc(p.stem)}</p><p class="go4">⭐ ${p.go4}</p><textarea id="w_${p.id}" rows="3">${esc(st.writing[p.id] || "")}</textarea>`);
@@ -787,11 +551,6 @@
     3: ["1948 · Rebuilding Europe", { big: "Rebuild big (Marshall Plan)", loan: "Small loan", none: "Keep the money home" }],
     4: ["1948 · Berlin Blockade", { airlift: "Berlin Airlift", tanks: "Send tanks", pull: "Pull out of Berlin" }],
     5: ["1949 · NATO", { sign: "Sign NATO", alone: "Go it alone" }],
-    7: ["1950 · Name Ruth?", { name: "Named Ruth", refuse: "Refused to name anyone" }],
-    8: ["1950 · Back Margaret Chase Smith?", { back: "Backed Smith on the record", silent: "No comment" }],
-    9: ["1951 · Name Leo?", { name: "Named Leo", refuse: "Refused" }],
-    10: ["1953 · List Dana?", { name: "Listed Dana as a risk", refuse: "Protected Dana", quiet: "Stayed quiet (Dana fired anyway)" }],
-    11: ["1954 · Letter on McCarthy", { condemn: "Censure McCarthy", defend: "Defend McCarthy" }]
   };
   function buildAnswers() {
     const a = { "Standard": STANDARD };
@@ -805,15 +564,15 @@
       a[CHECKS[id].short] = CHECKS[id].options[0] + (w ? " (after " + w + " wrong " + (w === 1 ? "try" : "tries") + ")" : " (first try)");
     });
     Object.keys(CHOICE_LABEL).forEach(k => { const [lab, map] = CHOICE_LABEL[k]; a["Choice · " + lab] = st.picks[k] ? map[st.picks[k]] : "—"; });
-    a["Ending"] = HOME[homeId()].t + " · " + ABROAD[abroadId()][1];
+    a["Ending"] = ENDS[endId()].t;
     a["Caused by"] = causedBy().join(" | ");
-    a["Game meters at the end"] = "Countries lost: " + st.lost.length + " · War risk: " + st.war + "/10 · Tokens left: " + st.tokens + " · Fear: " + st.fear + "/10 · Career: " + st.career + "/" + HEARTS + " · Jobs lost: " + st.jobs + " · Names given: " + st.named;
+    a["Game meters at the end"] = "Countries lost: " + st.lost.length + " · War risk: " + st.war + "/10 · Tokens left: " + st.tokens + "/" + TOKENS;
     PROMPTS.forEach(p => { a["Writing: " + p.short] = ($("w_" + p.id).value || "").trim(); });
     return a;
   }
 
   // ---------------- Render ----------------
-  const STEPS = [title, step1, step2, step3, step4, step5, step6, step7, step8, step9, step10, step11, step12, step13];
+  const STEPS = [title, step1, step2, step3, step4, step5, step6, step7, step8];
   let first = true;
   function render() {
     if (!first && $("welcome")) $("welcome").hidden = true;
@@ -833,9 +592,9 @@
   render();
 
   // ---------------- Test T. skip bar (shared/turnin.js) ----------------
-  // The teacher signed in as Test T. can jump to any screen (steps 1–13) or answer the current one.
+  // The teacher signed in as Test T. can jump to any screen (steps 1–8) or answer the current one.
   try {
-    const CHK_AT = { 2: "c_truman", 3: "c_marshall", 5: "c_nato", 8: "c_smith", 11: "c_welch" };
+    const CHK_AT = { 2: "c_truman", 3: "c_marshall", 5: "c_nato" };
     (window.classTestHooks = window.classTestHooks || []).push({
       count: () => TOTAL,
       index: () => Math.max(0, Math.min(st.step, TOTAL) - 1),
@@ -847,7 +606,7 @@
         for (let k = 1; k <= to; k++) {
           onEnter(k);
           if (k < to && D[k] && !st.picks[k]) {
-            const c = D[k].find(x => k > 5 || cardCost(k, x) <= st.tokens) || D[k][D[k].length - 1];
+            const c = D[k].find(x => cardCost(k, x) <= st.tokens) || D[k][D[k].length - 1];
             st.picks[k] = c.id; applyPick(k, c.id);
             if (k === 4 && c.id === "airlift") st.airlift = 10;
           }
@@ -859,7 +618,6 @@
         if (k < 1) return;
         if (id && !chk(id).done && !st.picks[k]) {
           chk(id).done = true; justSolved = id;
-          if (id === "c_welch" && !st.tvDrop) { st.tvDrop = true; st.fear = clamp(st.fear - 2, 0, 10); st.hale = "beaten"; }
           save(); render();
         } else if (D[k] && !st.picks[k]) { const b = document.querySelector("#deck .dcard:not([disabled])"); if (b) b.click(); }
         else if (k === 4 && st.picks[4] === "airlift" && st.airlift < 10) { st.airlift = 10; justPicked = true; save(); render(); }

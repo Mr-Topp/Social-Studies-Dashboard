@@ -1,14 +1,12 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>The Cold War Desk | U.S. History Unit 3 Day 1</title>
-<meta name="description" content="Out-move the Soviets in Europe from 1945 to 1949, then survive the Red Scare hearings at home.">
+<meta name="description" content="Out-move the Soviets in Europe from 1945 to 1949 and explain how the U.S. tried to contain communism.">
 <style>
 :root{--ink:#17233a;--muted:#5b6577;--navy:#1d3557;--navy2:#2b4a78;--sea:#cfe6f3;--cream:#fff8ea;--paper:#fffdf7;--red:#c8312b;--red2:#8f1f1a;--gold:#f2b134;--green:#23784a;--free:#4f8fd6;--free2:#2f6db3;--line:#e3d8bf;--wood:#b7834f;--cork:#e2c08f}
 *{box-sizing:border-box}
 html,body{overflow-x:clip}
 body{margin:0;color:var(--ink);font:17px/1.45 system-ui,"Segoe UI",Arial,sans-serif;background:#eaf3f9;background-image:radial-gradient(circle at 20% 0%,#fff 0,#eaf3f9 55%),repeating-linear-gradient(0deg,#1d355708 0 1px,transparent 1px 30px),repeating-linear-gradient(90deg,#1d355708 0 1px,transparent 1px 30px);background-attachment:fixed}
-body.home{background:#f6ead8;background-image:radial-gradient(circle at 50% 0%,#fff6e6 0,#f1dfc4 70%)}
-body.fearhot{box-shadow:inset 0 0 120px #c8312b55}
 [hidden]{display:none!important}
 button{font:inherit;cursor:pointer;border-radius:14px;min-height:46px}
 button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
@@ -28,8 +26,6 @@ button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px soli
 .bar{width:90px;height:11px;background:#ece3cf;border-radius:9px;overflow:hidden}
 .bar span{display:block;height:100%;border-radius:9px;transition:width .7s cubic-bezier(.3,1.4,.5,1)}
 #warBar{background:linear-gradient(90deg,#f2b134,#c8312b)}
-#fearBar{background:linear-gradient(90deg,#f6a5a0,#c8312b)}
-.hearts i{font-style:normal;transition:opacity .4s}.hearts i.gone{opacity:.18;filter:grayscale(1)}
 .rival{display:flex;align-items:center;gap:6px;margin-left:auto;background:#fff;border:2px solid var(--red);border-radius:30px;padding:2px 10px 2px 3px;font-weight:800;font-size:.84rem}
 .rival .face{font-size:1.5rem;line-height:1;background:#fde3e1;border-radius:50%;width:34px;height:34px;display:grid;place-items:center}
 .rival small{display:block;font-size:.68rem;color:var(--muted);font-weight:800;text-transform:uppercase;letter-spacing:.05em}
@@ -40,7 +36,6 @@ main{max-width:1060px;margin:auto;padding:12px 12px 90px}
 /* ---------- Cards / frame ---------- */
 .card{background:var(--paper);border:3px solid var(--ink);border-radius:20px;box-shadow:0 7px 0 var(--ink);padding:16px}
 .kicker{display:inline-block;background:var(--navy);color:#fff;border-radius:20px;padding:3px 12px;font-size:.78rem;font-weight:900;letter-spacing:.08em;text-transform:uppercase;margin:0 0 6px}
-body.home .kicker{background:var(--red2)}
 h1{margin:4px 0 8px;font-size:clamp(2.1rem,5vw,3.3rem);line-height:1;letter-spacing:-.02em;color:var(--navy)}
 h2{margin:2px 0 8px;font-size:1.4rem;line-height:1.2}
 p{margin:6px 0}
@@ -164,57 +159,15 @@ input,textarea{width:100%;font:inherit;border:2px solid #c9cfda;border-radius:10
 @keyframes fly{from{left:-60px}to{left:105%}}
 .food{display:flex;align-items:center;gap:8px;font-weight:900}
 .food .bar{width:200px;height:14px}.food .bar span{background:linear-gradient(90deg,#f2b134,#23784a)}
-/* ---------- Part 2: the wall ---------- */
-.wall{background:var(--cork);background-image:radial-gradient(#c79f66 1px,transparent 1.5px);background-size:9px 9px;border:8px solid var(--wood);border-radius:12px;padding:12px;display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:12px;box-shadow:inset 0 0 12px #0004}
-.pin{position:relative;background:#fff;border-radius:4px;padding:16px 6px 6px;text-align:center;box-shadow:2px 3px 0 #0003;font-size:.78rem;font-weight:800;line-height:1.15;transform:rotate(-2deg)}
-.pin:nth-child(even){transform:rotate(2deg)}
-.pin::before{content:"📌";position:absolute;top:-8px;left:50%;transform:translateX(-50%);font-size:1rem}
-.pin .pf{font-size:1.9rem;display:block;line-height:1.1}
-.pin .ps{display:block;font-size:.68rem;color:var(--muted);font-weight:700}
-.pin.cur{outline:4px solid var(--gold);animation:pulse 1.2s infinite}
-.pin.black{filter:grayscale(1);background:#e9e9e9}
-.pin.black::after,.pin.safe::after,.pin.spy::after{position:absolute;left:50%;top:44%;transform:translate(-50%,-50%) rotate(-14deg);border:3px solid var(--red);color:var(--red);background:#fffc;border-radius:5px;padding:0 4px;font-size:.62rem;font-weight:1000;letter-spacing:.04em;white-space:nowrap}
-.pin.black::after{content:"BLACKLISTED"}
-.pin.safe::after{content:"NO NAMES";border-color:var(--green);color:var(--green)}
-.pin.spy::after{content:"CONVICTED";border-color:var(--ink);color:var(--ink)}
-.pin.q{background:#fff6e6}
-.pin.new{animation:deal .7s cubic-bezier(.2,1.4,.4,1)}
-.pin.you{background:#e4ecf7;outline:3px solid var(--navy)}
-html[lang=es] .pin.black::after{content:"LISTA NEGRA"}html[lang=es] .pin.safe::after{content:"SIN NOMBRES"}html[lang=es] .pin.spy::after{content:"CONDENADO"}
-body.es .pin.black::after{content:"LISTA NEGRA"}body.es .pin.safe::after{content:"SIN NOMBRES"}body.es .pin.spy::after{content:"CONDENADO"}
-.file{background:#fffef6;border:2px solid #cdbf9a;border-left:8px solid var(--red);border-radius:8px;padding:8px 12px;margin:8px 0;box-shadow:3px 4px 0 #cdbf9a}
-.file .fh{display:flex;align-items:center;gap:8px;font-weight:900}
-.file .fh .pf{font-size:1.8rem}
-.file ul{margin:4px 0 0;padding-left:0;list-style:none;font-size:.92rem;font-weight:700}
-.file li{margin:2px 0}
+/* ---------- 1949 news banners ---------- */
 .banner{background:var(--ink);color:#fff;border-radius:12px;padding:8px 12px;font-weight:800;margin:8px 0;display:flex;gap:10px;align-items:center}
 .banner .bi{font-size:1.8rem}
 .banner small{display:block;color:#c9d3e3;font-weight:700;font-size:.78rem}
-.tick{display:inline-block;background:#fde3e1;color:var(--red2);border:2px solid #f2b0aa;border-radius:20px;padding:3px 12px;font-weight:900;font-size:.88rem;margin:4px 0;animation:pop .5s}
-/* ---------- Hearing room scene ---------- */
-.scene{display:flex;align-items:flex-end;justify-content:space-between;gap:10px;background:linear-gradient(#f9eedd,#ecd6b4);border:3px solid var(--wood);border-radius:14px;padding:10px 16px 0;margin-top:12px;min-height:118px;overflow:hidden}
-.scene .bench{display:flex;flex-direction:column;align-items:center;background:var(--wood);color:#fff;border-radius:10px 10px 0 0;padding:6px 18px 8px;font-weight:900;font-size:.82rem;box-shadow:inset 0 -6px 0 #8a5d33}
-.scene .bench .bf{font-size:2.6rem;line-height:1}
-.scene .mic{font-size:1.8rem;align-self:center}
-.scene .witness{display:flex;flex-direction:column;align-items:center;font-weight:900;font-size:.82rem;padding-bottom:6px}
-.scene .witness .bf{font-size:2.3rem;line-height:1}
-.scene .flash{font-size:1.5rem;align-self:flex-start;animation:pulse 1.4s infinite}
-/* ---------- TV ---------- */
-.tv{position:relative;max-width:520px;margin:40px auto 12px;background:#6b4a2f;border-radius:22px;padding:14px 14px 22px;box-shadow:0 6px 0 #3e2a1a}
-.tv::before,.tv::after{content:"";position:absolute;top:-34px;width:3px;height:40px;background:#333;border-radius:3px}
-.tv::before{left:44%;transform:rotate(-25deg)}.tv::after{left:54%;transform:rotate(25deg)}
-.screen{background:radial-gradient(circle,#e9eef0,#9aa6ab);border-radius:16px;padding:14px;filter:grayscale(1) contrast(1.1);min-height:120px;text-align:center}
-.screen .live{display:inline-block;background:#222;color:#fff;font-weight:900;font-size:.75rem;border-radius:6px;padding:1px 8px;letter-spacing:.06em}
-.screen .quote{font-family:Georgia,serif;font-size:1.25rem;font-weight:700;font-style:italic;margin:8px 0 4px}
-.screen .cite{font-size:.82rem;font-weight:800}
-.knobs{position:absolute;right:20px;bottom:4px;display:flex;gap:8px}.knobs i{width:12px;height:12px;border-radius:50%;background:#2a1b10;display:block}
 /* ---------- Ending ---------- */
 .ending{text-align:center;border:3px solid var(--ink);border-radius:18px;padding:14px;background:#fff;box-shadow:0 6px 0 var(--ink);animation:pop .5s cubic-bezier(.2,1.5,.4,1)}
 .ending .e-icon{font-size:3.2rem;line-height:1}
 .ending h2{font-size:1.75rem;margin:4px 0}
-.ending.free{background:#eaf6ef}.ending.saved{background:#fff6df}.ending.black,.ending.black2{background:#eef0f3}.ending.witch{background:#fde3e1}
-.abroad{display:inline-block;border-radius:20px;padding:4px 14px;font-weight:900;margin:4px 0;background:#e4ecf7}
-.abroad.war{background:#ffe6c7}.abroad.dom{background:#fde3e1}
+.ending.held{background:#eaf6ef}.ending.brink{background:#ffe6c7}.ending.spread{background:#fde3e1}
 .caused{background:#fff;border:2px solid var(--line);border-radius:12px;padding:8px 12px;margin-top:10px}
 .caused .ctag{font-size:.74rem;font-weight:900;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:0}
 .caused ul{margin:4px 0;padding-left:20px}.caused li{margin:2px 0;font-weight:700}
@@ -243,10 +196,8 @@ body.es .pin.black::after{content:"LISTA NEGRA"}body.es .pin.safe::after{content
   .dcard .ci{font-size:2rem}.dcard .chips{justify-content:flex-start}
   .dtext{display:flex;flex-direction:column;gap:2px;align-items:flex-start}
   .stamp{font-size:.85rem;right:8px}
-  .wall{grid-template-columns:repeat(3,1fr);gap:9px;padding:9px;border-width:6px}
   h2{font-size:1.25rem}
   .hm .lbl{display:none}
-  .scene{display:none}
   .berlin .bl{display:none}
   .topline span:first-child{font-size:.76rem}
 }
@@ -257,13 +208,13 @@ body.es .pin.black::after{content:"LISTA NEGRA"}body.es .pin.safe::after{content
 <script src="../../shared/turnin.js?v=20261105fb1"></script>
 <script src="../../shared/lang.js?v=20261103c"></script>
 </head><body>
-<div class="topline"><span><b>U.S. History · Unit 3 · Day 1</b> · How did allies become enemies, and why were Americans afraid at home?</span><span><b>SS.9-12.US.36 · US.37 · US.40</b></span></div>
+<div class="topline"><span><b>U.S. History · Unit 3 · Day 1</b> · How did allies become enemies, and how did the U.S. try to contain communism?</span><span><b>SS.9-12.US.37</b></span></div>
 <div id="hud" hidden><div class="hud-in" id="hudIn"></div></div>
 <main>
   <p class="welcome" id="welcome" hidden></p>
   <div id="app"></div>
   <div class="foot"><span>💾 Saves on this device. Turn in to send it to your teacher.</span><button type="button" id="restartBtn">Start over</button></div>
-  <p class="foot"><span>Made up: you, Orlov, Rep. Garrity, Ruth, Leo, Dana, and the game's "what ifs." Real: every quote, date, and number.</span></p>
+  <p class="foot"><span>Made up: you, Orlov, and the game's "what ifs." Real: every quote, date, and number.</span></p>
 </main>
-<script src="game.js?v=20261103att"></script>
+<script src="game.js?v=20261113v3"></script>
 </body></html>
