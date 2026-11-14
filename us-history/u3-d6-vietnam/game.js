@@ -1,623 +1,329 @@
 // =====================================================================
-//  FRONT PAGE: A NATION DIVIDED  (U.S. History · Unit 3 · Day 4)
-//  The Vietnam War on the American home front, 1954–1973, as an Iowa newspaper.
-//  Core loop: each edition, 3 real stories come in on the wire. There is room for 2:
-//  one LEAD (counts most) and one SIDE story. The third gets cut.
-//  Board: Reader trust, White House access (Mr. Whitcomb, a made-up press aide, the rival),
-//  hawk-vs-dove readers (a tug bar: lean too far and half the town cancels),
-//  and the credibility gap (what leaders SAID vs. what reporters SAW).
-//  Printing the official line wins access but stores an "unchecked claim" (🙈).
-//  In 1971 the Pentagon Papers come out and every unchecked claim is EXPOSED (trust drops).
-//  6 evidence checks live in the world (1954 file, Tonkin text, Tinker ruling, TV, letters, secret memo).
-//  5 endings, each with a "Caused by" trail. Word budget: ≤35 words a screen.
-//  Turn-in: shared/turnin.js classTurnIn, same payload shape as shared/unit-game.js finish().
-//  English only (Fynn, 2026-11-03).
+//  HOME FRONT IOWA: ONE FAMILY, 1964–1975  (U.S. History · Unit 3 · Day 4)
+//  Rebuilt 2026-11-14 (Fynn picked "An Iowa Family, 1964–1975"; the old "Front Page" game was replaced).
+//  Every round is one Day 4 slide topic, in slide order: domino theory → Gulf of Tonkin → the draft and
+//  guerrilla war → Tinker v. Des Moines → Tet on TV → hawks vs. doves and Kent State → the war ends,
+//  War Powers, and refugees come to Iowa → Korea vs. Vietnam.
+//  You are a made-up teen in a made-up Des Moines family (the Novaks). Real events reach your dinner table.
+//  Each round: real event → prove what it means with a real source (check) → make a family choice.
+//  Two meters that pull against each other: Family together vs. Your voice (speaking up strains the family;
+//  staying quiet keeps the peace). Rival: Uncle Walt, a Korea veteran and a hawk, pushes back.
+//  Ends with a "Caused by" trail and 2 short answers taken from the Day 4 exit ticket and civic-virtue activity.
+//  Turn-in: shared/turnin.js classTurnIn. Test T. can skip everything.
 // =====================================================================
 (function () {
   "use strict";
-  const KEY = "ush-u3-d6-vietnam-v2";
+  const KEY = "ush-u3-d6-iowa-family-v1";
   const CFG = {
     assignmentId: "ush-u3-d6-vietnam",
-    title: "U.S. History · Unit 3 · Day 4 · Front Page: A Nation Divided",
-    standard: "SS.9-12.US.35, SS.9-12.US.37, SS.9-12.US.38, SS.9-12.US.40, SS.9-12.US.41",
+    title: "U.S. History · Unit 3 · Day 4 · Home Front Iowa: One Family, 1964–1975",
+    standard: "SS.9-12.US.35, SS.9-12.US.37, SS.9-12.US.40, SS.9-12.US.41",
     oldApi: "https://fynn-class-assignment-submissions-20261024.neotboy.chatgpt.site/api/submit"
   };
-  const TOTAL = 9;
   const LOCK = 5;
-  const PAPER = "The Cedar Valley Courier";
-
   const $ = id => document.getElementById(id);
   const esc = s => String(s == null ? "" : s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
   function shuffle(a) { const b = a.slice(); for (let i = b.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [b[i], b[j]] = [b[j], b[i]]; } return b; }
-  const sg = n => (n > 0 ? "+" : "−") + Math.abs(n);
+  const TT = () => { try { return !!(window.classIsTestT && window.classIsTestT()); } catch (e) { return false; } };
+
+  // =====================================================================
+  //  ROUNDS. check.options[0] is right. choices: fx = { fam, voice }.
+  // =====================================================================
+  const ROUNDS = [
+    { id: "r1", date: "1964", title: "Why Vietnam?", mike: "home",
+      event: "Fall 1964: the TV news shows a map. Vietnam was split in 1954. Communist North Vietnam is fighting the U.S.-backed South. The U.S. is sending money, weapons, and advisers.",
+      source: ["🎙️ President Eisenhower · April 7, 1954", "“You have a row of dominoes set up, you knock over the first one, and what will happen to the last one is the certainty that it will go over very quickly.”"],
+      q: "What does Eisenhower say will happen if Vietnam falls to communism?",
+      options: ["Its neighbors will fall to communism too, one by one", "Communism will stop at Vietnam's borders for good", "The U.S. will have to give up its own allies in Asia"],
+      hint: "Picture a row of dominoes. What happens after the first one falls?",
+      key: "<b>Domino theory</b> = if one country falls to communism, its neighbors will fall too. It's why the U.S. backed South Vietnam (containment again).",
+      walt: "We stopped the communists in Korea. We'll stop them in Vietnam too.",
+      choices: [
+        { t: "Agree with Uncle Walt at dinner", fx: { fam: 1, voice: 0 }, r: "Uncle Walt grins. Dinner is peaceful." },
+        { t: "Ask why Vietnam matters to Iowa", fx: { fam: 0, voice: 1 }, r: "Uncle Walt explains dominoes. Dad nods. You keep wondering." }
+      ] },
+    { id: "r2", date: "AUG 1964", title: "The Gulf of Tonkin", mike: "home",
+      event: "August 1964: President Johnson says North Vietnam attacked U.S. Navy ships twice. Congress votes 416–0 in the House and 88–2 in the Senate.",
+      source: ["📜 Gulf of Tonkin Resolution · Aug. 1964", "Congress lets the President “take all necessary measures to repel any armed attack against the forces of the United States and to prevent further aggression.”"],
+      q: "What does the Gulf of Tonkin Resolution let Johnson do?",
+      options: ["Use military force without Congress declaring war", "Declare war on North Vietnam in Congress's place", "Send help only if a U.S. city is attacked"],
+      hint: "“All necessary measures.” Did Congress actually declare war?",
+      key: "Later evidence showed the second attack never happened. But the resolution let Johnson send more and more troops: over 500,000 by 1968.",
+      walt: "They shot at our Navy! Mike should sign up and serve, like I did in Korea.",
+      choices: [
+        { t: "Back Mike if he wants to enlist", fx: { fam: 1, voice: 0 }, r: "Mike decides to wait and see. Mom looks relieved." },
+        { t: "Ask if anyone checked what really happened", fx: { fam: -1, voice: 1 }, r: "Uncle Walt snaps: “You calling the President a liar?” The room goes quiet." }
+      ] },
+    { id: "r3", date: "1965", title: "Mike Is Drafted", mike: "vietnam",
+      event: "1965: Mike gets a letter. He's drafted, which means he's required to serve. Soon his letters come from Vietnam.",
+      source: ["📁 Fact file · Fighting in Vietnam", "The Viet Cong were communist fighters in South Vietnam. They used small surprise attacks, then hid in jungles, villages, and tunnels. The U.S. answered with helicopters, heavy bombing, and the chemical Agent Orange."],
+      q: "Use the fact file. What is guerrilla warfare?",
+      options: ["Small surprise attacks, then hiding among the land and people", "Two huge armies lined up on one big battlefield", "Fighting only from planes and ships, never on land"],
+      hint: "Find how the Viet Cong fought in the fact file.",
+      key: "<b>Guerrilla warfare</b> = small surprise attacks, then hiding. It made the war very hard to “win.” Agent Orange later sickened many Vietnamese people and U.S. veterans.",
+      walt: "Write him something proud. Soldiers need to hear we're behind them.",
+      choices: [
+        { t: "Write Mike only cheerful news from home", fx: { fam: 1, voice: 0 }, r: "Mike writes back: “Thanks. Tell Mom I'm fine.” You're not sure he is." },
+        { t: "Ask Mike what it's really like", fx: { fam: 0, voice: 1 }, r: "Mike's answer is short: “Nobody knows who the enemy is. I just want to come home.”" }
+      ] },
+    { id: "r4", date: "DEC 1965", title: "Armbands in Des Moines", mike: "vietnam",
+      event: "December 1965, right here in Des Moines: Mary Beth Tinker, John Tinker, and Christopher Eckhardt wear black armbands to school to mourn the dead in Vietnam. They're suspended. In 1969, the Supreme Court rules 7–2 for the students.",
+      source: ["⚖️ Justice Abe Fortas · Tinker v. Des Moines, 1969", "Students and teachers don't “shed their constitutional rights to freedom of speech or expression at the schoolhouse gate.”"],
+      q: "What did the Supreme Court decide in Tinker?",
+      options: ["Students keep free speech, unless they seriously disrupt school", "Students lose free speech once they walk into school", "Students can say anything at school, even in class tests"],
+      hint: "What do students NOT leave at the schoolhouse gate? What can a school still stop?",
+      key: "<b>Tinker v. Des Moines</b> = students keep free speech at school, as long as they don't seriously disrupt learning. It started in Iowa.",
+      walt: "Kids protesting while Mike is over there? That's disrespectful.",
+      choices: [
+        { t: "Wear a black armband to school too", fx: { fam: -2, voice: 2 }, r: "Uncle Walt won't speak to you for a week. Two kids at school thank you." },
+        { t: "Don't wear one, but defend their right to", fx: { fam: -1, voice: 1 }, r: "Uncle Walt grumbles. Your teacher says, “That's what the First Amendment is for.”" },
+        { t: "Stay out of it", fx: { fam: 1, voice: 0 }, r: "Things stay calm at home. The case goes on without you." }
+      ] },
+    { id: "r5", date: "FEB 1968", title: "Tet on the TV", mike: "vietnam",
+      event: "U.S. leaders said the war was being won. Then, in January 1968, North Vietnam and the Viet Cong attacked more than 100 cities in South Vietnam at once, during Tet, the Vietnamese New Year. U.S. forces pushed them back. Your family watched it on TV every night.",
+      source: ["📺 Walter Cronkite, CBS News · Feb. 27, 1968", "“To say that we are mired in stalemate seems the only realistic, yet unsatisfactory, conclusion.”"],
+      q: "Why did Tet change so many Americans' minds?",
+      options: ["TV showed the war was far from over, not almost won", "The U.S. lost every single base it had in Vietnam", "North Vietnam surrendered right after the attacks"],
+      hint: "Compare what leaders said with what Cronkite said after Tet.",
+      key: "Tet was a military loss for North Vietnam, but it changed opinion at home. Many Americans stopped believing the war would end soon.",
+      walt: "Turn that off. The news is making us look weak.",
+      choices: [
+        { t: "Turn off the TV for Uncle Walt", fx: { fam: 1, voice: 0 }, r: "Quiet night. But Mom keeps checking the news in the kitchen." },
+        { t: "Keep watching and talk about it", fx: { fam: -1, voice: 1 }, r: "Dad says, “Maybe Cronkite's right.” Uncle Walt leaves early." }
+      ] },
+    { id: "r6", date: "MAY 1970", title: "Hawks, Doves, and Kent State", mike: "vietnam",
+      event: "May 4, 1970: National Guard soldiers fire at student protesters at Kent State University in Ohio. Four students are killed. Some Americans march against the war. Others see the marchers as disloyal.",
+      source: ["📁 Fact file · A divided country", "Hawks wanted to keep fighting or fight harder. Doves wanted to pull out or negotiate. Some young men burned their draft cards. Many others supported the troops and the war."],
+      q: "Use the fact file. Which person is a dove?",
+      options: ["Someone who wants the U.S. to pull out or negotiate", "Someone who wants to send more troops and win", "Someone who wants to bomb North Vietnam harder"],
+      hint: "Doves wanted the fighting to stop. Hawks wanted to fight harder.",
+      key: "<b>Hawks vs. doves</b>: the war split families, campuses, and the whole country.",
+      walt: "Those protesters are spitting on everything Mike is fighting for.",
+      choices: [
+        { t: "Join a peaceful march in Des Moines", fx: { fam: -2, voice: 2 }, r: "Dad drives you there but won't march. Uncle Walt skips Sunday dinner." },
+        { t: "Write a letter to the editor supporting the troops", fx: { fam: 1, voice: 1 }, r: "The Register prints it. Uncle Walt cuts it out and hangs it on his fridge." },
+        { t: "Stay home and listen to Uncle Walt's side", fx: { fam: 1, voice: 0 }, r: "He tells you about Korea for an hour. You understand him a little better." }
+      ] },
+    { id: "r7", date: "1975", title: "The War Ends", mike: "home",
+      event: "The last U.S. troops leave in 1973. Mike comes home. In 1975, North Vietnam takes over the South. About 58,000 Americans died, and millions of Vietnamese. Many people flee. Iowa's governor, Robert Ray, invites refugees to Iowa, starting with Tai Dam families from Laos.",
+      source: ["📁 Fact file · Iowa answers", "Gov. Robert Ray invited refugees to come to Iowa in 1975. Churches and families across the state sponsored them. Iowa became a model for helping refugees."],
+      q: "Use the fact file. How did Iowa respond to refugees after the war?",
+      options: ["Gov. Ray invited them, and Iowans sponsored families", "Iowa closed its borders to all refugees from Asia", "Iowa sent the refugees back to Vietnam in 1975"],
+      hint: "Find what Governor Ray did in the fact file.",
+      key: "Also in 1973: the <b>War Powers Resolution</b>. A president must tell Congress within 48 hours of sending troops into combat, and bring them home in 60 days unless Congress approves.",
+      walt: "We fought them for ten years. Now we take them in?",
+      choices: [
+        { t: "Help your church sponsor a refugee family", fx: { fam: 0, voice: 2 }, r: "A Tai Dam family moves in down the street. Mike helps fix their car. Even Uncle Walt brings a casserole." },
+        { t: "Give money, but don't get involved", fx: { fam: 1, voice: 1 }, r: "Your money helps buy winter coats. Iowa winters are a shock." },
+        { t: "Stay out of it", fx: { fam: 1, voice: 0 }, r: "Life goes back to normal at your house." }
+      ] },
+    { id: "r8", date: "1975", title: "Korea vs. Vietnam", mike: "home", compare: true,
+      event: "Uncle Walt fought in Korea. Mike fought in Vietnam. At Thanksgiving, they finally compare.",
+      source: ["📁 Fact file · Same cause, different effects", "Korea: the U.S. fought to contain communism. Congress never declared war. It ended in a tie, and South Korea stayed non-communist. Vietnam: the U.S. fought to contain communism. Congress never declared war. The communists won, and the war split Americans."],
+      q: "Which is TRUE about BOTH wars?",
+      options: ["The U.S. fought to contain communism, without a declaration of war", "Both ended with the communists taking over the whole country", "Both had strong support at home from start to finish"],
+      hint: "Find what the fact file says about Korea AND Vietnam.",
+      key: "<b>Same cause, different effects</b>: both wars were containment. Korea ended in a tie. Vietnam ended in a communist win and left many Americans distrusting their leaders." }
+  ];
+  const STEPS = ROUNDS.length + 2;   // rounds, ending, writing
 
   // ---------- state ----------
-  function fresh() {
-    return { v: 1, name: "", step: 0, phase: 0, m: { t: 5, a: 6, l: 0 }, hidden: [], exposed: [],
-      drafts: {}, printed: {}, picks: {}, wrong: {}, done: {}, trail: [], writing: {}, turnedIn: false, ending: null, tapped: false };
-  }
+  function fresh() { return { v: 1, name: "", step: 0, ph: "check", fam: 7, voice: 2, wrong: {}, picks: {}, trail: [], writing: {}, turnedIn: false }; }
   let st;
   try { st = JSON.parse(localStorage.getItem(KEY)); } catch (e) {}
-  if (!st || st.v !== 1 || !st.m) st = fresh();
-  // Shared Chromebooks: if a different student is signed in on this device, start clean.
+  if (!st || st.v !== 1) st = fresh();
   try {
     const signedIn = window.classShortName ? window.classShortName(localStorage.getItem("site-student-name") || "") : "";
     if (signedIn && st.name && signedIn.toLowerCase() !== st.name.toLowerCase()) st = fresh();
   } catch (e) {}
   const save = () => { try { localStorage.setItem(KEY, JSON.stringify(st)); } catch (e) {} };
-  const clampM = () => { const m = st.m; m.t = Math.max(0, Math.min(10, m.t)); m.a = Math.max(0, Math.min(10, m.a)); m.l = Math.max(-6, Math.min(6, m.l)); };
-  const hiddenN = () => st.hidden.reduce((s, h) => s + h.w, 0);
-
-  let pending = null;
-  function applyFx(fx) {
-    if (fx.t) st.m.t += fx.t;
-    if (fx.a) st.m.a += fx.a;
-    if (fx.l) st.m.l += fx.l;
-    clampM();
-    pending = Object.assign({}, pending || {}, fx);
-  }
-  function fxTags(fx) {
-    const out = [];
-    if (fx.t) out.push(`<span class="tag ${fx.t > 0 ? "up" : "down"}">🗞️ ${sg(fx.t)} trust</span>`);
-    if (fx.a) out.push(`<span class="tag ${fx.a > 0 ? "up" : "down"}">🕴️ ${sg(fx.a)} access</span>`);
-    if (fx.l) out.push(`<span class="tag ${fx.l > 0 ? "h" : "d"}">${fx.l > 0 ? "🦅" : "🕊️"} +${Math.abs(fx.l)} ${fx.l > 0 ? "hawk" : "dove"}</span>`);
-    if (fx.s) out.push(`<span class="tag x">🙈 +${fx.s} unchecked</span>`);
-    return out.join("");
-  }
-  function fxText(fx) {
-    const out = [];
-    if (fx.t) out.push("trust " + sg(fx.t));
-    if (fx.a) out.push("access " + sg(fx.a));
-    if (fx.l) out.push((fx.l > 0 ? "hawk " : "dove ") + "+" + Math.abs(fx.l));
-    if (fx.s) out.push("unchecked +" + fx.s);
-    return out.join(", ");
-  }
-  function chipsFor(fx) {
-    const out = [];
-    if (fx.t) out.push(`<span class="chip ${fx.t > 0 ? "g" : "c"}">🗞️ ${sg(fx.t)}</span>`);
-    if (fx.a) out.push(`<span class="chip ${fx.a > 0 ? "g" : "c"}">🕴️ ${sg(fx.a)}</span>`);
-    if (fx.l) out.push(`<span class="chip ${fx.l > 0 ? "h" : "d"}">${fx.l > 0 ? "🦅" : "🕊️"} +${Math.abs(fx.l)}</span>`);
-    if (fx.s) out.push(`<span class="chip x">🙈 +${fx.s}</span>`);
-    return out.join("");
-  }
-  // A side story counts about half (never zero).
-  const half = v => !v ? 0 : Math.sign(v) * Math.max(1, Math.floor(Math.abs(v) / 2));
-
-  // ---------- characters ----------
-  const WHO = {
-    hale: ["🕴️", "Whitcomb · White House"],
-    lou: ["🧑‍💼", "Lou · reporter"],
-    file: ["🗄️", "The 1954 file"]
-  };
-  const bub = (who, text) => `<div class="bub ${who}"><span class="av" aria-hidden="true">${WHO[who][0]}</span><div class="bt"><b>${esc(WHO[who][1])}</b><p>${text}</p></div></div>`;
-  const bubbles = list => list && list.length ? `<div class="bubbles">${list.map(b => bub(b[0], b[1])).join("")}</div>` : "";
-  const realLine = (line, src) => `<div class="real"><p><b class="real-b">📜 Real</b> ${line}</p>${src ? `<p class="src">Source: ${src}</p>` : ""}</div>`;
-  const newWord = html => `<div class="reveal"><span class="nw">💡 NEW WORD</span><p>${html}</p></div>`;
-
-  const YEAR = { 1: "1954", 2: "1964", 3: "1965", 4: "1968", 5: "1969", 6: "1970", 7: "1971", 8: "1973", 9: "1973" };
-  const GAP = { 1: 0, 2: 2, 3: 3, 4: 7, 5: 6, 6: 7, 7: 9, 8: 8, 9: 8 };
+  const clamp = n => Math.max(0, Math.min(10, n));
+  let pending = null, justSolved = false;
 
   // ---------- HUD ----------
-  function haleMood() {
-    const a = st.m.a;
-    if (a >= 7) return ["😊", "pleased"];
-    if (a >= 4) return ["😐", "watching"];
-    if (a >= 2) return ["😠", "annoyed"];
-    return ["🚫", "shut you out"];
-  }
+  const MIKE = { home: ["🧑", "home in Des Moines"], vietnam: ["🪖", "in Vietnam"] };
   function hud() {
     const on = st.step >= 1;
     $("hud").hidden = !on;
     if (!on) return;
-    const m = st.m;
-    $("yrNum").textContent = YEAR[st.step] || "1973";
-    $("stepText").textContent = "Step " + Math.min(st.step, TOTAL) + " of " + TOTAL + " · " + (YEAR[st.step] || "");
-    $("stepFill").style.width = Math.round(Math.min(st.step, TOTAL) / TOTAL * 100) + "%";
-    $("mTrust").style.width = m.t * 10 + "%"; $("nTrust").textContent = m.t + "/10";
-    $("mAccess").style.width = m.a * 10 + "%"; $("nAccess").textContent = m.a + "/10";
-    const hm = haleMood(); $("haleFace").textContent = hm[0]; $("haleLab").textContent = "Whitcomb · " + hm[1];
-    $("tugDot").style.left = (50 - m.l * 7) + "%";
-    $("gapBar").style.width = (GAP[st.step] || 0) * 10 + "%";
-    $("hideN").textContent = "🙈 " + hiddenN();
-    $("hudTrust").classList.toggle("warn", m.t <= 3);
-    $("hudAccess").classList.toggle("warn", m.a <= 1);
-    $("hudLean").classList.toggle("warn", Math.abs(m.l) >= 3);
-  }
-  function pops(fx) {
-    const map = { t: ["hudTrust", "🗞️"], a: ["hudAccess", "🕴️"], l: ["hudLean", ""], s: ["hudGap", "🙈"] };
-    Object.keys(map).forEach(k => {
-      const n = fx[k]; if (!n) return;
-      const el = $(map[k][0]); if (!el) return;
-      const p = document.createElement("span");
-      const good = k === "t" || k === "a" ? n > 0 : false;
-      p.className = "pop " + (k === "l" ? "n" : k === "s" ? "bad" : good ? "good" : "bad");
-      p.textContent = k === "l" ? (n > 0 ? "🦅 +" + n : "🕊️ +" + (-n)) : sg(n) + " " + map[k][1];
-      p.setAttribute("aria-hidden", "true");
-      el.appendChild(p);
-      el.classList.remove("bump"); void el.offsetWidth; el.classList.add("bump");
-      setTimeout(() => p.remove(), 2000);
-    });
+    const r = ROUNDS[st.step - 1];
+    const d = (r ? r.date : "1975").split(" ");
+    $("calMo").textContent = d.length > 1 ? d[0] : "—"; $("calYr").textContent = d[d.length - 1];
+    $("stepText").textContent = "Step " + Math.min(st.step, STEPS) + " of " + STEPS;
+    $("stepFill").style.width = Math.round(Math.min(st.step, STEPS) / STEPS * 100) + "%";
+    $("mFam").style.width = st.fam * 10 + "%"; $("nFam").textContent = st.fam + "/10";
+    $("mVoice").style.width = st.voice * 10 + "%"; $("nVoice").textContent = st.voice + "/10";
+    $("famFace").textContent = st.fam >= 7 ? "🙂" : st.fam >= 4 ? "😐" : "😟";
+    const m = MIKE[(r && r.mike) || "home"];
+    $("mikeIco").textContent = m[0]; $("mikeAt").textContent = m[1];
+    document.documentElement.style.setProperty("--hudH", $("hud").offsetHeight + "px");
+    if (pending) {
+      [["fam", "hudFam", "🏠"], ["voice", "hudVoice", "📣"]].forEach(([k, id, ico]) => {
+        const n = pending[k]; if (!n) return;
+        const el = $(id), p = document.createElement("span");
+        p.className = "pop " + (n > 0 ? "good" : "bad"); p.textContent = (n > 0 ? "+" : "−") + Math.abs(n) + " " + ico; p.setAttribute("aria-hidden", "true");
+        el.appendChild(p); el.classList.remove("bump"); void el.offsetWidth; el.classList.add("bump"); setTimeout(() => p.remove(), 2000);
+      });
+      pending = null;
+    }
   }
 
-  // ---------- scene frame ----------
+  // ---------- pieces ----------
+  const bub = (who, name, ico, text) => `<div class="bub ${who}"><span class="av" aria-hidden="true">${ico}</span><div class="bt"><b>${esc(name)}</b><p>${esc(text)}</p></div></div>`;
+  function jobStrip(steps, now) {
+    return `<ol class="job" aria-label="Your job">${steps.map((t, i) => `<li class="${i < now ? "did" : i === now ? "now" : ""}"${i === now ? ' aria-current="step"' : ""}>${esc(t)}</li>`).join("")}</ol>`;
+  }
+  function famBoard(r) {
+    const away = r && r.mike === "vietnam";
+    return `<div class="fam" aria-label="Your family"><p class="f-h">THE NOVAKS · DES MOINES</p>
+      <div class="p"><span class="e" aria-hidden="true">🧑‍🎓</span><span><b>You</b><small>15 in 1964, a student in Des Moines</small></span></div>
+      <div class="p${away ? " away" : ""}"><span class="e" aria-hidden="true">${away ? "🪖" : "🧑"}</span><span><b>Mike, your brother</b><small>${away ? "Drafted. Serving in Vietnam." : "18 in 1964"}</small></span></div>
+      <div class="p"><span class="e" aria-hidden="true">👩👨</span><span><b>Mom and Dad</b><small>Just want the family safe</small></span></div>
+      <div class="p rival"><span class="e" aria-hidden="true">🎖️</span><span><b>Uncle Walt</b><small>Korea veteran. A hawk. Pushes back.</small></span></div>
+      <p class="fict">Your family is made up. Every event, date, and quote is real.</p></div>`;
+  }
   function scene(o) {
-    return `<section class="scene ${o.stage || ""}">
-      <div class="sc-top"><span class="chap">${esc(o.chap || "")}</span><h2>${esc(o.title)}</h2></div>
-      ${o.bubbles && o.bubbles.length ? `<div class="stage"><div class="stage-art" aria-hidden="true">${o.art || ""}</div>${bubbles(o.bubbles)}</div>` : ""}
-      <div class="sc-body">${o.body || ""}</div></section>`;
+    const left = o.board === false ? "" : `<div class="map-wrap">${famBoard(o.round)}</div>`;
+    return `<section class="scene"><div class="sc-top"><h2>${esc(o.title)}</h2></div>
+      ${o.job ? `<div class="sc-job">${o.job}</div>` : ""}
+      <div class="board${left ? "" : " nomap"}">${left}<div class="side">${o.body}</div></div></section>`;
   }
-  const nextBtn = label => `<button type="button" class="go" id="nextBtn">${esc(label || "Next →")}</button>`;
-  function wireNext(fn) { const b = $("nextBtn"); if (b) b.onclick = fn || (() => goStep(st.step + 1)); }
-  const hideWelcome = () => { const w = $("welcome"); if (w) w.hidden = true; };
-  function toPhase(p) { st.phase = p; hideWelcome(); save(); render(); window.scrollTo(0, 0); }
-  function goStep(n) { st.step = n; st.phase = 0; hideWelcome(); save(); render(); window.scrollTo(0, 0); }
-
-  // =====================================================================
-  //  EVIDENCE CHECKS (in-world). options[0] is right; shown shuffled.
-  // =====================================================================
-  const CHECKS = {
-    c1: { std: "US.37", short: "Domino theory: why the U.S. backed South Vietnam", who: "lou", icon: "🗄️", stamp: "FILED",
-      prompt: "So why did U.S. leaders back South Vietnam?",
-      options: ["To keep communism from spreading next door", "To make South Vietnam a new U.S. state", "To get back money France owed the U.S.", "To stop China from invading Korea again"],
-      hint: "Picture the dominoes. What falls after Vietnam?" },
-    c2: { std: "US.35", short: "Gulf of Tonkin Resolution: what it allowed", who: "lou", icon: "📜", stamp: "FACT-CHECKED",
-      prompt: "Headline check: what does this let Johnson do?",
-      options: ["Use force without declaring war", "Declare war on North Vietnam now", "Pull all U.S. troops out of Vietnam", "Get Congress's OK before every battle"],
-      hint: "“All necessary measures.” Did Congress declare war?" },
-    c3: { std: "US.41", short: "Tinker v. Des Moines: the ruling", who: "lou", icon: "⚖️", stamp: "UPHELD",
-      prompt: "Follow-up headline: what did the Court decide?",
-      options: ["Students keep free speech unless they disrupt school", "Students keep free speech in halls but not in class", "Students can say anything they want, even in class", "Only teachers keep free speech rights at school"],
-      hint: "What do students NOT leave at the gate? What can schools still stop?" },
-    c4: { std: "US.38", short: "Tet + TV news: why opinion changed", who: "lou", icon: "📺", stamp: "ON AIR",
-      prompt: "Why did Tet change so many minds?",
-      options: ["TV showed the war was far from over", "It proved the U.S. was winning easily", "The U.S. lost every base in Vietnam", "North Vietnam gave up right after it"],
-      hint: "Compare November's promise to February's TV news." },
-    c5: { std: "US.40", short: "Hawks vs. doves: Nixon's silent majority", who: "lou", icon: "✉️", stamp: "FILED",
-      prompt: "Hawk or dove? Who is Nixon's “silent majority”?",
-      options: ["Hawks who backed the war but didn't march", "Doves who marched to bring troops home", "Soldiers in Vietnam who couldn't vote yet", "Senators who skipped every vote on the war"],
-      hint: "Hawks backed the war. Doves wanted out. Silent = not marching." },
-    c6: { std: "US.40", short: "Pentagon Papers: public vs. secret reasons", who: "lou", icon: "🗄️", stamp: "EXPOSED",
-      prompt: "What does the secret memo show?",
-      options: ["In private, avoiding defeat mattered most", "In private, Vietnam's freedom mattered most", "Leaders planned to leave Vietnam by 1966", "China had already taken South Vietnam"],
-      hint: "Find the biggest percent. What goal is it?" }
-  };
-  const CHECK_ORDER = ["c1", "c2", "c3", "c4", "c5", "c6"];
+  function nextBtn(label) { return `<button type="button" class="go" id="nextBtn">${esc(label)}</button>`; }
+  function goStep(n) { st.step = n; st.ph = "check"; save(); render(); window.scrollTo(0, 0); }
 
   let lockTimer = null;
-  function mountCheck(id, onDone) {
-    const q = CHECKS[id];
-    const box = $("checkBox");
-    if (!box) return;
-    clearTimeout(lockTimer);
-    box.innerHTML = `<div class="check"><p class="qlabel" aria-hidden="true">${q.icon}</p>${bub(q.who, esc(q.prompt))}<p class="msg" id="qMsg" role="status" aria-live="polite"></p><div class="choices" id="qChoices"></div></div>`;
-    const area = $("qChoices"), msg = $("qMsg");
-    let locked = false, last = "";
+  function mountCheck(r) {
+    const box = $("pickBox"); if (!box) return;
+    const area = document.createElement("div"); area.className = "choices";
+    const msg = document.createElement("p"); msg.className = "msg"; msg.setAttribute("role", "status"); msg.setAttribute("aria-live", "polite");
+    box.append(area, msg);
+    let last = "", locked = false;
     function draw() {
       area.replaceChildren();
-      let order = shuffle(q.options.map((t, n) => n));
+      let order = shuffle(r.options.map((_, n) => n));
       if (order.join() === last && order.length > 1) order.push(order.shift());
       last = order.join();
       order.forEach(n => {
-        const b = document.createElement("button");
-        b.type = "button"; b.className = "choice reply";
-        b.innerHTML = `<span class="r-ico" aria-hidden="true">💬</span><span class="r-t">${esc(q.options[n])}</span>`;
+        const b = document.createElement("button"); b.type = "button"; b.className = "choice reply";
+        b.innerHTML = `<span class="r-ico" aria-hidden="true">💬</span><span class="r-t">${esc(r.options[n])}</span>`;
         b.onclick = () => {
           if (locked) return;
-          if (n === 0) {
-            st.done[id] = true;
-            if (window.classFirstTry) window.classFirstTry.right(id);
-            save(); onDone();
-          } else {
-            st.wrong[id] = (st.wrong[id] || 0) + 1;
-            if (window.classFirstTry) window.classFirstTry.wrong();
-            save();
-            b.classList.add("shake");
-            locked = true; area.querySelectorAll("button").forEach(x => { x.disabled = true; });
-            let left = LOCK;
-            const tick = () => {
-              msg.className = "msg try";
-              if (left <= 0) { locked = false; msg.textContent = "✖ " + q.hint; draw(); return; }
-              msg.textContent = "✖ " + q.hint + " ⏳ " + left;
-              left--; lockTimer = setTimeout(tick, 1000);
-            };
-            tick();
-          }
+          if (n === 0) { if (window.classFirstTry) window.classFirstTry.right(r.id); justSolved = true; st.ph = r.compare ? "done" : "choice"; save(); render(); scrollToId(r.compare ? "nextBtn" : "choiceBox"); return; }
+          st.wrong[r.id] = (st.wrong[r.id] || 0) + 1;
+          if (window.classFirstTry) window.classFirstTry.wrong();
+          save();
+          locked = true; area.querySelectorAll("button").forEach(x => { x.disabled = true; });
+          let left = TT() ? 0 : LOCK;
+          const tick = () => {
+            msg.className = "msg try";
+            if (left <= 0) { locked = false; msg.textContent = "✖ " + r.hint + " The choices were mixed up. Try again."; draw(); return; }
+            msg.textContent = "✖ " + r.hint + " ⏳ " + left;
+            left--; lockTimer = setTimeout(tick, 1000);
+          };
+          tick();
         };
         area.appendChild(b);
       });
     }
     draw();
   }
-  let justSolved = null;
-  const checkDone = id => `<div class="check done"><span class="stamp${justSolved === id ? " slam" : ""}">✔ ${esc(CHECKS[id].stamp)}</span></div>`;
-  const solved = id => () => { justSolved = id; save(); render(true); };
+  function scrollToId(id) { setTimeout(() => { const el = $(id); if (el && el.scrollIntoView) el.scrollIntoView({ behavior: "smooth", block: "center" }); }, 60); }
+  const fxTags = fx => [fx.fam ? `<span class="tag ${fx.fam > 0 ? "up" : "down"}">🏠 ${fx.fam > 0 ? "+" : "−"}${Math.abs(fx.fam)} family</span>` : "",
+    fx.voice ? `<span class="tag ${fx.voice > 0 ? "up" : "down"}">📣 ${fx.voice > 0 ? "+" : "−"}${Math.abs(fx.voice)} voice</span>` : ""].join("");
 
-  // =====================================================================
-  //  EDITIONS (real stories; Whitcomb, Lou and the paper are made up)
-  //  fx = lead effect. t = trust, a = White House access, l = lean (+ hawk / − dove), s = unchecked claim.
-  // =====================================================================
-  const ED = {
-    2: { key: "1964", chap: "Page 1 of 6 · Aug. 1964", date: "Aug. 8, 1964", title: "Gulf of Tonkin", art: "🚢",
-      bubbles: [["hale", "North Vietnam hit our Navy twice. Put that on top."], ["lou", "No reporter saw attack #2. It's just their word."]],
-      cards: [
-        { id: "a", icon: "🚢", title: "Navy Attacked Twice!", line: "The White House version.", off: true, claim: "“Navy attacked twice” (1964)", fx: { a: 2, l: 1, s: 1 } },
-        { id: "b", icon: "🏛️", title: "Congress Says Yes", line: "Votes 416–0 and 88–2 for force.", fx: { t: 1, a: 1 } },
-        { id: "c", icon: "🎙️", title: "Senator: “A Mistake”", line: "Sen. Wayne Morse votes no.", fx: { t: 1, a: -1, l: -1 } }
-      ],
-      check: "c2",
-      evidence: () => `<div class="docx"><p class="th">📜 GULF OF TONKIN RESOLUTION · AUG. 7, 1964</p>
-        <p class="q">Congress supports the President “to take <span class="hi">all necessary measures</span> to repel any armed attack… and to prevent further aggression.”</p>
-        <p class="gloss">repel = fight off · aggression = attacks</p><p>📌 A resolution is NOT a declaration of war.</p><p class="src">Source: National Archives</p></div>`,
-      reveal: "<b>Gulf of Tonkin Resolution</b>: Congress let Johnson fight without declaring war.",
-      real: ["Later evidence showed the second attack never happened.", "National Security Agency history, released 2005"] },
-    3: { key: "1965", chap: "Page 2 of 6 · Dec. 1965", date: "Dec. 17, 1965", title: "Black Armbands in Des Moines", art: "⚫", order: "bca",
-      bubbles: [["hale", "184,000 troops are there now. Tell readers we're winning."], ["lou", "Des Moines schools suspended kids for black armbands."]],
-      cards: [
-        { id: "a", icon: "🪖", title: "“We're Winning”", line: "White House: more troops, more wins.", off: true, claim: "“We're winning” (1965)", fx: { a: 2, l: 1, s: 1 } },
-        { id: "b", icon: "⚫", title: "Armband Kids Suspended", line: "Des Moines teens mourned the war dead.", fx: { t: 1, a: -1, l: -1 } },
-        { id: "c", icon: "🌳", title: "Hit and Hide", line: "Viet Cong strike, then vanish into tunnels.", fx: { t: 2, a: -1 } }
-      ],
-      always: "<b>Guerrilla warfare</b>: surprise attacks, then hiding in jungles, villages, tunnels.",
-      alwaysReal: ["U.S. answer: Agent Orange, a jungle-killing spray that later sickened many.", "U.S. Department of Veterans Affairs"],
-      check: "c3", followup: "📅 FOLLOW-UP · FEB. 24, 1969",
-      evidence: () => `<div class="docx"><p class="th">⚖️ TINKER v. DES MOINES · SUPREME COURT, 7–2</p>
-        <p class="q">Students don't “shed their constitutional rights to freedom of speech… at the schoolhouse gate.”</p>
-        <p class="gloss">shed = leave behind</p><p>⚠️ Schools can still stop speech that seriously disrupts class.</p><p class="src">Source: Justice Abe Fortas, for the Court, 1969</p></div>`,
-      reveal: "<b>Tinker v. Des Moines</b>: Iowa teens won free speech rights at school.",
-      real: ["Mary Beth Tinker was 13. John Tinker was 15. Chris Eckhardt was 16.", "Tinker v. Des Moines, 393 U.S. 503 (1969)"] },
-    4: { key: "1968", chap: "Page 3 of 6 · Feb. 1968", date: "Feb. 1, 1968", title: "The Tet Offensive", art: "💥", stage: "st-night", order: "cba",
-      bubbles: [["hale", "Our general said “the end begins to come into view.” Print that."], ["lou", "I'm in Hue. They hit 100+ cities at once."]],
-      cards: [
-        { id: "a", icon: "🎖️", title: "“End in View”", line: "The general's promise, Nov. 1967.", off: true, claim: "“The end is in view” (1967)", fx: { a: 2, t: -1, l: 1, s: 2 } },
-        { id: "b", icon: "📺", title: "Tet: 100 Cities Hit", line: "Lou's report from Hue.", fx: { t: 2, a: -2, l: -1 } },
-        { id: "c", icon: "🦅", title: "Attack Pushed Back", line: "U.S. troops win the battles.", fx: { t: 2, l: 1 } }
-      ],
-      check: "c4",
-      evidence: () => `<div class="two">
-        <div class="tv said"><div class="screen"><span class="live">NOV. 21, 1967</span><p class="q">“The end begins to come into view.”</p><p class="src">Gen. Westmoreland</p></div></div>
-        <div class="tv"><div class="screen"><span class="live">CBS · FEB. 27, 1968</span><p class="q">Vietnam “is to end in a stalemate.”</p><p class="gloss">stalemate = nobody wins</p><p class="src">Walter Cronkite, TV news</p></div></div></div>
-        <p class="src" style="text-align:center">📺 Most U.S. homes had a TV. The war was on every night.</p>`,
-      reveal: "<b>Credibility gap</b>: what leaders say doesn't match what people see.",
-      real: ["U.S. troops won the battles. But many Americans stopped believing the war would end soon.", "U.S. Army Center of Military History"] },
-    5: { key: "1969", chap: "Page 4 of 6 · Dec. 2, 1969", date: "Dec. 2, 1969", title: "Hawks vs. Doves", art: "🎱", order: "bac",
-      bubbles: [["hale", "Nixon asked the “silent majority” for support. Put him on top."], ["lou", "Last night, the draft lottery drew birthdays on TV."]],
-      cards: [
-        { id: "a", icon: "🎤", title: "“Silent Majority”", line: "Nixon asks quiet Americans for support.", off: true, fx: { a: 2, l: 2 } },
-        { id: "b", icon: "🕊️", title: "Millions March", line: "Antiwar protests across the U.S.", fx: { t: 1, a: -1, l: -2 } },
-        { id: "c", icon: "🎱", title: "Draft Lottery Results", line: "Sept. 14 birthdays go first.", fx: { t: 1 },
-          note: "<b>Deferment</b>: college could delay the draft, so working-class men went more." }
-      ],
-      check: "c5",
-      evidence: () => `<div class="docx"><p class="th">🎤 PRESIDENT NIXON · TV SPEECH, NOV. 3, 1969</p>
-        <p class="q">“To you, the great <span class="hi">silent majority</span>… I ask for your support.”</p></div>
-        <div class="mail"><div class="letter h"><b>🦅 Reader letter (made up)</b>My son's over there. I don't march. I back Nixon.</div><div class="letter d"><b>🕊️ Reader letter (made up)</b>Bring them home. I marched Oct. 15.</div></div>`,
-      reveal: "<b>Hawks vs. doves</b>: hawks fought on to stop communism. Doves wanted out.",
-      real: ["Fall 1969: millions joined the “Moratorium,” a nationwide day of antiwar protest.", "Library of Congress"] },
-    6: { key: "1970", chap: "Page 5 of 6 · May 16, 1970", date: "May 16, 1970", title: "Kent State and Jackson State", art: "🕯️", stage: "st-gray", somber: true, order: "bac",
-      bubbles: [["hale", "The Guard says a sniper fired first. Run their side."], ["lou", "Students were killed at two colleges this month."]],
-      cards: [
-        { id: "a", icon: "🪖", title: "Guard: “Sniper Fired”", line: "The Ohio Guard's version.", off: true, claim: "“A sniper fired first” (1970)", fx: { a: 2, t: -1, l: 1, s: 1 } },
-        { id: "b", icon: "🕯️", title: "4 Killed at Kent State", line: "Ohio Guard fired on students, May 4.", fx: { t: 1 } },
-        { id: "c", icon: "🕯️", title: "2 Killed at Jackson State", line: "Police fired at a Black college, May 15.", fx: { t: 2, a: -1 } }
-      ],
-      reveal: "<b>A nation divided</b>: Americans turned against Americans over the war.",
-      real: ["A U.S. commission called the Kent State shooting “unnecessary, unwarranted, and inexcusable.”", "President's Commission on Campus Unrest, 1970"] }
-  };
-  const ED_ORDER = [2, 3, 4, 5, 6];
-
-  // Reader mail after each front page (made-up voices, kept short).
-  const MAIL = {
-    // Balanced on purpose: each side gets a real reason, not just name-calling.
-    hawk: [["Good. Stand by our troops.", "Is that just the White House line?"], ["Finally, some good news.", "Where's the other side?"], ["Communism must be stopped.", "Bring our boys home."]],
-    dove: [["Our troops need support, not doubt.", "Good. Someone's asking questions."], ["If we quit, Laos falls next.", "Too many boys are dying."], ["Don't abandon South Vietnam.", "This war can't be won."]],
-    even: [["Fair. Just the facts."], ["Just the facts. Good."], ["I don't love it, but it's fair."]]
-  };
-
-  // ---------- layout helpers ----------
-  const cardOf = (s, id) => ED[s].cards.find(c => c.id === id);
-  function draft(s) { st.drafts[s] = st.drafts[s] || { lead: null, side: null }; return st.drafts[s]; }
-
-  function slotHtml(s, which, cid, printed) {
-    const label = which === "lead" ? "TOP STORY" : "SIDE STORY";
-    if (!cid) return `<button type="button" class="slot ${which}" data-slot="${which}" disabled><span class="s-ico" aria-hidden="true">${which === "lead" ? "🥇" : "📄"}</span><span><span class="tg">${label}</span><span class="hl">Tap a story</span></span></button>`;
-    const c = cardOf(s, cid);
-    return `<button type="button" class="slot ${which} full" data-slot="${which}"${printed ? " disabled" : ""} aria-label="${esc(label + ": " + c.title + (printed ? "" : ". Tap to take it off."))}"><span class="s-ico" aria-hidden="true">${c.icon}</span><span><span class="tg">${label}</span><span class="hl">${esc(c.title)}</span><span class="sl">${esc(c.line)}</span></span>${printed ? "" : `<span class="x" aria-hidden="true">✖</span>`}</button>`;
-  }
-  function frontHtml(s, d, printed, stamp) {
-    const E = ED[s];
-    const both = d.lead && d.side;
-    const cut = both ? E.cards.find(c => c.id !== d.lead && c.id !== d.side) : null;
-    return `<div class="front${printed ? " printed" : ""}" id="frontPage"><p class="mast">${esc(PAPER)}</p><p class="dline"><span>Cedar Valley, Iowa</span><span>${esc(E.date)}</span></p>
-      ${stamp || ""}${slotHtml(s, "lead", d.lead, printed)}${slotHtml(s, "side", d.side, printed)}
-      ${cut ? `<p class="cutline">✂️ Cut: ${esc(cut.title)}</p>` : ""}</div>`;
-  }
-
-  // ---- an edition: phase 0 layout · 1 printed + reactions · 2 fact-check ----
-  function edition(app, s) {
-    const E = ED[s];
-    const d = draft(s);
-    const P = st.printed[s];
-    if (st.phase === 0 || !P) return layoutScreen(app, s, E, d);
-    if (st.phase === 1) return printedScreen(app, s, E, P);
-    return checkScreen(app, s, E);
-  }
-
-  function layoutScreen(app, s, E, d) {
-    const howto = s === 2 ? `<div class="howto"><div><span class="hi">👆</span><b>Tap 2 stories onto the page</b></div><div><span class="hi">🥇</span><b>Top story counts most</b></div><div><span class="hi">🕴️</span><b>Whitcomb wants his on top</b></div></div>` : "";
-    const key = s === 2 ? `<p class="key">🗞️ trust · 🕴️ Whitcomb · 🦅 pro-war readers · 🕊️ antiwar readers · 🙈 unchecked claim</p>` : "";
-    let lou = E.bubbles[1][1];
-    const cards = (E.order || "abc").split("").map(id => cardOf(s, id)).map(c => {
-      const where = d.lead === c.id ? "TOP" : d.side === c.id ? "SIDE" : "";
-      return `<button type="button" class="scard${c.off ? " off" : ""}${where ? " used" : ""}" data-card="${c.id}" aria-pressed="${where ? "true" : "false"}">
-        ${c.off ? `<span class="hale-tag">🕴️ WHITCOMB'S PICK</span>` : ""}${where ? `<span class="slot-tag">ON PAGE · ${where}</span>` : ""}
-        <span class="s-ico" aria-hidden="true">${c.icon}</span><b class="s-t">${esc(c.title)}</b><span class="s-l">${esc(c.line)}</span><span class="chips">${chipsFor(c.fx)}</span></button>`;
-    }).join("");
-    const body = howto + `<div class="desk"><div class="wire"><h3>📠 The wire</h3><div class="cards">${cards}</div>${key}</div>
-      <div class="pagecol"><h3>🗞️ Page one</h3>${frontHtml(s, d, false)}
-      <div class="vrow"><button type="button" class="go" id="printBtn"${d.lead && d.side ? "" : " disabled"}>🖨️ Print it</button>${d.lead && d.side ? `<button type="button" class="back" id="swapBtn">⇅ Swap</button>` : ""}</div></div></div>
-      ${s === 2 ? `<p class="fict">Mr. Whitcomb, Lou, and the paper are made up. The stories are real.</p>` : ""}`;
-    app.innerHTML = scene({ chap: E.chap, title: E.title, art: E.art, stage: E.stage, bubbles: [E.bubbles[0], ["lou", lou]], body });
-    app.querySelectorAll("[data-card]").forEach(b => b.onclick = () => {
-      const id = b.dataset.card;
-      if (d.lead === id) d.lead = null;
-      else if (d.side === id) d.side = null;
-      else if (!d.lead) d.lead = id;
-      else d.side = id;   // fills the side slot, or replaces what was there
-      save(); render();
-      if (d.lead && d.side) { const p = $("printBtn"); if (p && p.scrollIntoView) setTimeout(() => p.scrollIntoView({ behavior: "smooth", block: "center" }), 40); }
-    });
-    app.querySelectorAll(".slot.full").forEach(b => b.onclick = () => { d[b.dataset.slot] = null; save(); render(); });
-    if ($("swapBtn")) $("swapBtn").onclick = () => { const x = d.lead; d.lead = d.side; d.side = x; save(); render(); };
-    $("printBtn").onclick = () => printEdition(s);
-  }
-
-  function printEdition(s) {
-    const E = ED[s], d = draft(s);
-    if (!d.lead || !d.side || st.printed[s]) return;
-    const lead = cardOf(s, d.lead), side = cardOf(s, d.side);
-    const cut = E.cards.find(c => c.id !== d.lead && c.id !== d.side);
-    const total = { t: 0, a: 0, l: 0, s: 0 };
-    ["t", "a", "l"].forEach(k => { total[k] += (lead.fx[k] || 0) + half(side.fx[k] || 0); });
-    let hale = "";
-    const off = E.cards.find(c => c.off);
-    if (off === lead) hale = "Good. The President is pleased.";
-    else if (off === side) hale = "Inside? Not on top? I'll remember.";
-    else { hale = "You cut our side of it? Noted."; total.a -= 1; }
-    [[lead, "top"], [side, "side"]].forEach(([c, where]) => {
-      if (c.fx.s) { const w = where === "top" ? c.fx.s : 1; st.hidden.push({ claim: c.claim, w }); total.s += w; }
-    });
-    applyFx(total);
-    let lopsided = false;
-    if (Math.abs(st.m.l) >= 4) { lopsided = true; applyFx({ t: -1 }); total.t -= 1; }
-    const leadLean = lead.fx.l || 0;
-    st.printed[s] = { lead: lead.id, side: side.id, cut: cut.id, fx: total, hale, lopsided, mood: leadLean > 0 ? "hawk" : leadLean < 0 ? "dove" : "even" };
-    st.picks[E.key] = "Top: " + lead.title + " · Side: " + side.title + " · Cut: " + cut.title;
-    st.trail.push({ label: E.key + " top: " + lead.title, fx: total });
-    if (lopsided) st.trail.push({ label: E.key + ": one-sided page", fx: { t: -1 } });
-    st.flash = s; hideWelcome();
-    st.phase = 1; save(); render(); window.scrollTo(0, 0);
-  }
-
-  function printedScreen(app, s, E, P) {
-    const d = { lead: P.lead, side: P.side };
-    const stamp = `<span class="stamp ${E.somber ? "q" : "g"}${st.flash === s ? " slam" : ""}">${E.somber ? "PRINTED" : "🖨️ PRINTED"}</span>`;
-    const lead = cardOf(s, P.lead), side = cardOf(s, P.side);
-    const note = [lead, side].map(c => c.note).filter(Boolean)[0];
-    const mail = MAIL[P.mood][(ED_ORDER.indexOf(s)) % 3];
-    let mid;
-    if (E.somber) {
-      mid = `<div class="candles"><div><b>🕯️ Kent State, Ohio · May 4</b>Allison Krause · Jeffrey Miller · Sandra Scheuer · William Schroeder</div><div><b>🕯️ Jackson State, Mississippi · May 15</b>Phillip Lafayette Gibbs · James Earl Green · far less news coverage</div></div>` +
-        newWord(E.reveal) + realLine(E.real[0], E.real[1]);
-    } else {
-      mid = (P.mood === "even"
-        ? `<div class="mail one"><div class="letter"><b>🦅🕊️ Hawk and dove readers</b>${esc(mail[0])}</div></div>`
-        : `<div class="mail"><div class="letter h"><b>🦅 Hawk reader</b>${esc(mail[0])}</div><div class="letter d"><b>🕊️ Dove reader</b>${esc(mail[1])}</div></div>`) +
-        (note ? newWord(note) : "") + (E.always ? newWord(E.always) + realLine(E.alwaysReal[0], E.alwaysReal[1]) : "");
+  // ---------- one round ----------
+  function roundScreen(app, i) {
+    const r = ROUNDS[i - 1];
+    const steps = r.compare ? ["Read what happened", "Prove it with the source", "Tap Next"] : ["Read what happened", "Prove it with the source", "Make your choice"];
+    const now = st.ph === "check" ? 1 : 2;
+    const event = `<div class="cause tv"><span class="c-tag">📺 ${esc(r.date)} · ON THE NEWS</span><p>${esc(r.event)}</p></div>`;
+    const src = `<div class="paper quote"><p class="p-h">${esc(r.source[0])}</p><p>${esc(r.source[1])}</p></div>`;
+    const solvedBox = `<div class="linked${justSolved ? " slam" : ""}">✔ <b>${esc(r.options[0])}</b></div>`;
+    justSolved = false;
+    const keyBox = `<div class="reveal"><span class="nw">💡 KEY IDEA</span><p>${r.key}</p></div>`;
+    if (st.ph === "check") {
+      app.innerHTML = scene({ title: r.title, round: r, job: jobStrip(steps, now), body: event + src + `<div class="pick proof"><p class="pick-h">🔍 ${esc(r.q)}</p><div id="pickBox"></div></div>` + (r.choices ? `<p class="locked-note">🔒 Prove it first. Then you make your family choice.</p>` : "") });
+      return mountCheck(r);
     }
-    const lottery = s === 5 ? `<div class="lottery" aria-label="Draft lottery, Dec. 1, 1969: Sept. 14 is number 1, April 24 is 2, Dec. 30 is 3"><span>SEP 14<br>#1</span><span>APR 24<br>#2</span><span>DEC 30<br>#3</span></div><p class="src" style="text-align:center">Real 1969 draft lottery. Selective Service System</p>` : "";
-    const body = frontHtml(s, d, true, stamp) +
-      `<div class="result flip"><div class="r-main">${E.somber ? "" : bub("hale", esc(P.hale))}${E.somber ? "" : `<div class="tags">${fxTags(P.fx)}</div>`}
-       ${P.lopsided && !E.somber ? `<p class="warnbox">📉 Half your readers feel ignored. Cancellations!</p>` : ""}${mid}</div></div>` + lottery +
-      (E.check ? nextBtn("🔍 Fact-check →") : nextBtn("Next front page →"));
-    app.innerHTML = scene({ chap: E.chap, title: E.title, stage: E.stage, body });
-    st.flash = null;
-    wireNext(E.check ? () => toPhase(2) : null);
-  }
-
-  function checkScreen(app, s, E) {
-    const id = E.check;
-    const top = E.followup ? `<p class="chap" style="display:inline-block;color:#fff;margin:0 0 8px">${esc(E.followup)}</p>` : "";
-    if (st.done[id]) {
-      const body = top + checkDone(id) + `<div id="after">${newWord(E.reveal)}${realLine(E.real[0], E.real[1])}${nextBtn("Next front page →")}</div>`;
-      app.innerHTML = scene({ chap: E.chap, title: "Fact-check", stage: E.stage, body });
-      return wireNext();
-    }
-    app.innerHTML = scene({ chap: E.chap, title: "Fact-check", stage: E.stage, body: top + `<div class="ev">${E.evidence()}</div><div id="checkBox"></div>` });
-    mountCheck(id, solved(id));
-  }
-
-  // =====================================================================
-  //  STEPS
-  // =====================================================================
-  const S = {};
-
-  // ---- 1 · The 1954 file: dominoes (check 1) ----
-  function dominoSvg() {
-    const names = ["VIETNAM", "LAOS", "CAMBODIA", "THAILAND", "BURMA", "INDONESIA"];
-    const doms = names.map((n, i) => {
-      const x = 40 + i * 100;
-      return `<g class="dom" style="transition-delay:${i * 0.28}s"><rect x="${x}" y="40" width="44" height="110" rx="7" fill="${i === 0 ? "#c4262e" : "#1b1b1d"}" stroke="#fff" stroke-width="3"/>
-        <circle cx="${x + 22}" cy="70" r="6" fill="#fff"/><circle cx="${x + 22}" cy="120" r="6" fill="#fff"/><line x1="${x + 6}" y1="95" x2="${x + 38}" y2="95" stroke="#fff" stroke-width="3"/></g>
-        <text x="${x + 22}" y="178" text-anchor="middle" font-size="15" font-weight="900" font-family="system-ui,Arial" fill="#1b1b1d">${n}</text>`;
-    }).join("");
-    return `<svg class="dominos${st.tapped ? " fallen" : ""}" id="domSvg" viewBox="0 0 660 190" role="img" aria-label="A row of dominoes labeled Vietnam, Laos, Cambodia, Thailand, Burma, Indonesia${st.tapped ? ", all knocked over" : ""}">
-      <rect x="0" y="150" width="660" height="10" fill="#b8a274"/>${doms}</svg>`;
-  }
-  S[1] = app => {
-    const flow = `<div class="flow"><div><span>🇫🇷</span>France rules Vietnam</div><div class="arr" aria-hidden="true">➜</div><div><span>💥</span>France loses, 1954</div><div class="arr" aria-hidden="true">➜</div><div><span>✂️</span>Split: North ☭ / South 🇺🇸</div></div>`;
-    const quote = `<div class="docx" style="margin-top:10px"><p class="th">🎤 PRESIDENT EISENHOWER · APRIL 7, 1954</p><p class="q">“You knock over the first one, and… the last one… will go over very quickly.”</p></div>`;
-    if (st.done.c1) {
-      const body = `<div class="morgue">${flow}${dominoSvg()}</div>` + checkDone("c1") + `<div id="after">${newWord("<b>Domino theory</b>: if one country goes communist, its neighbors fall too.")}${newWord("<b>Containment</b>: stop communism's spread. Korea, Cuba, and now Vietnam.")}${nextBtn("Open the newsroom, 1964 →")}</div>`;
-      app.innerHTML = scene({ chap: "Before the war · 1954", title: "The Old File", stage: "st-file", body });
-      return wireNext();
-    }
-    const body = `<div class="morgue">${flow}${dominoSvg()}${st.tapped ? quote : `<button type="button" class="go ink tapme" id="tapBtn">👆 Tap the first domino</button>`}</div><div id="checkBox"></div>`;
-    app.innerHTML = scene({ chap: "Before the war · 1954", title: "The Old File", stage: "st-file", art: "🗄️",
-      bubbles: st.tapped ? [] : [["lou", "New editor? First, see why America cares about Vietnam."]], body });
-    if (!st.tapped) {
-      $("tapBtn").onclick = () => {
-        st.tapped = true; save();
-        $("domSvg").classList.add("fallen");
-        const stg = document.querySelector(".stage"); if (stg) stg.remove();
-        $("tapBtn").outerHTML = quote;
-        setTimeout(() => { mountCheck("c1", solved("c1")); const c = $("checkBox"); if (c && c.scrollIntoView) c.scrollIntoView({ behavior: "smooth", block: "center" }); }, window.classIsTestT && window.classIsTestT() ? 0 : 1900);   // Test T. skips the wait
-      };
-    } else mountCheck("c1", solved("c1"));
-  };
-
-  ED_ORDER.forEach(n => { S[n] = app => edition(app, n); });
-
-  // ---- 7 · The Pentagon Papers (one big call, then the reckoning, then check 6) ----
-  const PP = [
-    { id: "print", icon: "🖨️", title: "Print It", line: "Risk court. Readers see the truth.", fx: { t: 3, a: -4 } },
-    { id: "wait", icon: "⏳", title: "Wait for the Court", line: "Safe. Other papers print first.", fx: { t: -1, a: 1 } },
-    { id: "bury", icon: "🗄️", title: "Bury It", line: "Keep Whitcomb happy.", off: true, claim: "Buried the Pentagon Papers (1971)", fx: { t: -2, a: 3, s: 1 } }
-  ];
-  S[7] = app => {
-    const chap = "Page 6 of 6 · June 1971";
-    if (st.phase === 0) {
-      const scoop = st.m.t >= 6;
-      const cards = PP.map(c => `<button type="button" class="scard${c.off ? " off" : ""}" data-pp="${c.id}">${c.off ? `<span class="hale-tag">🕴️ WHITCOMB'S PICK</span>` : ""}<span class="s-ico" aria-hidden="true">${c.icon}</span><b class="s-t">${esc(c.title)}</b><span class="s-l">${esc(c.line)}</span><span class="chips">${chipsFor(c.fx)}</span></button>`).join("");
-      const body = `<div class="docx secret"><p class="th">🔒 TOP SECRET · U.S.–VIETNAM RELATIONS, 1945–1967</p><p>7,000 pages. Never meant for the public.</p></div>
-        <h3 style="margin:14px 0 8px;font:900 .82rem 'Arial Black',Impact,sans-serif;letter-spacing:.08em;color:#c4262e">📠 ONE BIG CALL</h3><div class="cards" style="grid-template-columns:repeat(auto-fit,minmax(220px,1fr))">${cards}</div>`;
-      app.innerHTML = scene({ chap, title: "The Pentagon Papers", stage: "st-file", art: "🗄️",
-        bubbles: [["lou", scoop ? "Our source gave us a secret Pentagon study." : "The New York Times printed a secret Pentagon study."], ["hale", "Print it, and we'll see you in court."]], body });
-      app.querySelectorAll("[data-pp]").forEach(b => b.onclick = () => {
-        const c = PP.find(x => x.id === b.dataset.pp);
-        const fx = Object.assign({}, c.fx);
-        if (c.fx.s) st.hidden.push({ claim: c.claim, w: c.fx.s });
-        applyFx(fx);
-        st.picks["Pentagon Papers"] = c.title;
-        st.trail.push({ label: "1971: " + c.title, fx });
-        // The reckoning: the papers prove leaders misled the public, so readers re-check YOUR old front pages.
-        const hit = hiddenN();
-        st.exposed = st.hidden.slice(); st.hidden = [];
-        if (hit) { applyFx({ t: -hit }); st.trail.push({ label: "Exposed: " + st.exposed.length + " old claim" + (st.exposed.length === 1 ? "" : "s"), fx: { t: -hit } }); }
-        st.ppFx = fx;
-        st.phase = 1; save(); render(); window.scrollTo(0, 0);
+    if (st.ph === "choice") {
+      app.innerHTML = scene({ title: r.title, round: r, job: jobStrip(steps, 2), body: event + solvedBox + keyBox +
+        bub("walt", "Uncle Walt", "🎖️", r.walt) + `<div id="choiceBox" class="pick"><p class="pick-h">🏠 Your move:</p><div class="cards n${r.choices.length}" id="cChoices"></div></div>` });
+      const area = $("cChoices");
+      r.choices.forEach((c, n) => {
+        const b = document.createElement("button"); b.type = "button"; b.className = "dcard";
+        b.innerHTML = `<b class="d-t">${esc(c.t)}</b><span class="d-chips">${fxTags(c.fx) || '<span class="tag">no change</span>'}</span>`;
+        b.onclick = () => {
+          st.fam = clamp(st.fam + (c.fx.fam || 0)); st.voice = clamp(st.voice + (c.fx.voice || 0));
+          pending = c.fx; st.picks[r.id] = n; st.trail.push({ t: c.t, fx: c.fx, year: r.date }); st.ph = "done"; save(); render(); scrollToId("resultBox");
+        };
+        area.appendChild(b);
       });
       return;
     }
-    if (st.phase === 1) {
-      const list = st.exposed.length
-        ? `<div class="exposed">${st.exposed.map(h => `<div><span>📰 ${esc(h.claim)}</span><span><span class="tag down">🗞️ −${h.w}</span> <span class="stamp slam">EXPOSED</span></span></div>`).join("")}</div>`
-        : `<p style="text-align:center"><span class="stamp g slam">✔ CLEAN RECORD</span></p>`;
-      const body = `<div class="result flip"><div class="r-main"><p>📰 ${esc(st.picks["Pentagon Papers"])}</p><div class="tags">${fxTags(st.ppFx || {})}</div></div></div>` +
-        `<p style="font-weight:800;margin:12px 0 4px">${st.exposed.length ? "Readers dig up your old front pages:" : "Readers dig up your old front pages. Nothing to hide."}</p>` + list + nextBtn("🔍 Fact-check →");
-      app.innerHTML = scene({ chap, title: "The Truth Comes Out", stage: "st-file", art: "🔦",
-        bubbles: [["lou", "The study shows leaders misled the public for years."]], body });
-      return wireNext(() => toPhase(2));
-    }
-    if (st.done.c6) {
-      const body = checkDone("c6") + `<div id="after">${newWord("<b>Pentagon Papers</b>: a secret study showing leaders misled the public.")}${realLine("June 30, 1971: the Supreme Court ruled 6–3 that papers could print it.", "New York Times Co. v. United States (1971)")}${nextBtn("Final edition, 1973 →")}</div>`;
-      app.innerHTML = scene({ chap, title: "Fact-check", stage: "st-file", body });
-      return wireNext();
-    }
-    const ev = `<div class="two"><div class="docx"><p class="th">🎤 PUBLIC · PRESIDENT JOHNSON, APRIL 1965</p><p class="q">“Our objective is the independence of South Vietnam.”</p></div>
-      <div class="docx secret"><p class="th">🔒 SECRET · PENTAGON MEMO, MARCH 1965</p><p><span class="hi">70%</span> — avoid a humiliating (embarrassing) U.S. defeat</p><p>20% — keep the land from China</p><p>10% — a better, freer life for South Vietnam</p><p class="src">John McNaughton, U.S. Defense Dept.</p></div></div>`;
-    app.innerHTML = scene({ chap, title: "Fact-check", stage: "st-file", body: `<div class="ev">${ev}</div><div id="checkBox"></div>` });
-    mountCheck("c6", solved("c6"));
-  };
-
-  // ---- 8 · Ending ----
-  const ENDINGS = {
-    record: { e: "🏆", title: "The Paper Everyone Read", text: "Hawks and doves both read you, and both trusted you. You printed what leaders said AND what reporters saw." },
-    mouthpiece: { e: "📉", title: "The Paper Nobody Believed", bad: true, text: "You printed the official story. When the truth came out, readers felt fooled. You fell into the credibility gap." },
-    sidetaker: { e: "✂️", title: "Half the Town Canceled", bad: true, text: "You mostly printed one side. The other half of town stopped reading. Vietnam split America, and it split your paper." },
-    frozenout: { e: "🚪", title: "Trusted, but Shut Out", text: "Readers trust you. The White House stopped calling. Many real reporters paid that price." },
-    survivor: { e: "🗞️", title: "Still on the Stands", text: "You made it. Readers aren't sure about you yet. Some front pages helped. Some cost you." }
-  };
-  function endingKey() {
-    const m = st.m;
-    if (m.t <= 3) return "mouthpiece";
-    if (Math.abs(m.l) >= 4) return "sidetaker";
-    if (m.a <= 1) return "frozenout";
-    if (m.t >= 7) return "record";
-    return "survivor";
+    const c = r.choices ? r.choices[st.picks[r.id] || 0] : null;
+    const result = c ? `<div class="result2" id="resultBox"><p class="you">You chose: ${esc(c.t)}</p><div class="tags">${fxTags(c.fx)}</div><p>${esc(c.r)}</p></div>` : "";
+    const last = i === ROUNDS.length;
+    app.innerHTML = scene({ title: r.title, round: r, job: jobStrip(steps, 3), body: event + solvedBox + (c ? "" : keyBox) + result + nextBtn(last ? "See how your family ends up →" : "Next year →") });
+    $("nextBtn").onclick = () => goStep(i + 1);
   }
-  const leanText = l => l === 0 ? "even" : (l > 0 ? "hawk +" + l : "dove +" + (-l));
-  S[8] = app => {
-    const k = endingKey(), E = ENDINGS[k];
-    if (st.ending !== k) { st.ending = k; save(); }
-    const trail = st.trail.map(t => `<li><span>${esc(t.label)}</span><span class="tags">${fxTags(t.fx)}</span></li>`).join("");
-    const body = `<div class="front${E.bad ? " bad" : ""}"><p class="mast">${esc(PAPER)}</p><p class="dline"><span>Final edition</span><span>March 30, 1973</span></p>
-        <div class="headline"><span class="e-big" aria-hidden="true">${E.e}</span><h3>${esc(E.title)}</h3></div>
-        <p class="body">${esc(E.text)}</p>
-        <div class="finalm"><span>🗞️ Trust <b>${st.m.t}/10</b></span><span>🕴️ Access <b>${st.m.a}/10</b></span><span>🦅🕊️ Readers <b>${leanText(st.m.l)}</b></span><span>🙈 Exposed <b>${st.exposed.length}</b></span></div>
+
+  // ---------- ending ----------
+  const ENDINGS = {
+    both: { e: "🤝", t: "Spoke Up, Stayed Together", text: "You said what you believed and still kept your family talking. That's civic virtue: standing up for the common good without tearing people apart." },
+    split: { e: "💔", t: "Spoke Up, Split Apart", text: "You stood up for what you believed, but it cost you at home. Lots of American families split like this over Vietnam." },
+    quiet: { e: "🏠", t: "Kept the Peace at Home", text: "Your family stayed close, but you mostly stayed quiet while the country argued around you." },
+    lost: { e: "🌫️", t: "Divided and Silent", text: "The war pulled your family apart, and your voice never got heard." }
+  };
+  const endKey = () => st.voice >= 6 ? (st.fam >= 5 ? "both" : "split") : (st.fam >= 5 ? "quiet" : "lost");
+  function endingScreen(app) {
+    const E = ENDINGS[endKey()];
+    const trail = st.trail.length ? st.trail.map(t => `<li><span>${esc(t.year)}: ${esc(t.t)}</span><span class="tags">${fxTags(t.fx) || ""}</span></li>`).join("") : "<li><span>No choices yet.</span></li>";
+    const body = `<div class="front"><p class="masthead" aria-hidden="true">THE NOVAK FAMILY · THANKSGIVING 1975</p>
+        <div class="headline"><span class="e-big" aria-hidden="true">${E.e}</span><h3>${esc(E.t)}</h3></div>
+        <p>${esc(E.text)}</p>
+        <div class="finalm"><span>🏠 Family together <b>${st.fam}/10</b></span><span>📣 Your voice <b>${st.voice}/10</b></span></div>
         <h4 class="cb">Caused by:</h4><ul class="trail">${trail}</ul></div>
-      <h4 class="cb">📜 What really came next</h4>
-      <div class="after"><span>🪖 1973 · Last U.S. troops leave</span><span>⚖️ 1973 · War Powers Resolution limits presidents</span><span>🏳️ 1975 · South Vietnam falls</span><span>🏠 1975 · Iowa takes in refugees</span><span>🕯️ 58,000+ U.S. dead · millions of Vietnamese</span></div>
-      <p class="src" style="text-align:center">Sources: National Archives; Iowa Dept. of Human Rights</p>` + nextBtn("Write your last editorial →");
-    app.innerHTML = scene({ chap: "1973 · The war ends for America", title: "Your Ending", stage: "st-dawn", body });
-    wireNext();
-  };
+      <div class="memorial"><p class="m-h">THE REAL COST</p>
+        <p>🕯️ About 58,000 Americans died in Vietnam.</p><p>🕯️ Millions of Vietnamese died.</p>
+        <p>🏛️ Many Americans stopped trusting their leaders.</p>
+        <p class="src">Sources: National Archives; Office of the Historian.</p></div>` + nextBtn("Write your answers →");
+    app.innerHTML = scene({ title: "How Your Family Ends Up", board: false, job: jobStrip(["See your ending", "Read the real cost", "Write your answers"], 1), body });
+    $("nextBtn").onclick = () => goStep(STEPS);
+  }
 
-  // ---- 9 · Editorial + turn in ----
+  // ---------- writing + turn in ----------
+  const KW = ["contain", "domino", "communis", "tonkin", "draft", "guerrilla", "tet", "tv", "television", "kent state", "hawk", "dove", "protest", "tinker", "armband", "free speech", "refugee", "ray", "korea", "north vietnam", "south vietnam", "troops", "soldiers", "johnson", "nixon"];
   const PROMPTS = [
-    { id: "why", short: "Why the U.S. fought in Vietnam", label: "1. Why did the U.S. fight in Vietnam?",
-      stem: "The U.S. fought in Vietnam to ___ because leaders believed ___.", min: 55, newWords: 5,
-      mustAll: [["communis", "domino", "contain", "spread", "soviet", "china", "north vietnam", "ho chi minh"], ["because", "since", "so "]],
-      mustMsg: "In answer 1, name the reason (like the domino theory or stopping communism) and use “because.”" },
-    { id: "split", short: "Why Vietnam split Americans more than Korea", label: "2. Why did Vietnam split Americans more than Korea did?",
-      stem: "Vietnam split Americans more than Korea because ___. For example, ___.", min: 60, newWords: 6,
-      mustAll: [["tv", "television", "news", "cronkite", "draft", "lottery", "deferment", "tonkin", "tet", "gap", "lie", "lied", "misled", "trust", "protest", "march", "kent", "jackson", "pentagon", "dead", "death", "killed", "casualt", "stalemate", "tinker", "armband", "guerrilla", "guerilla", "jungle", "tunnel", "hide", "agent orange"], ["because", "since", "so "]],
-      mustMsg: "In answer 2, use one piece of evidence (like TV, the draft, guerrilla war, or Tet) and use “because.”" }
+    { id: "why", short: "Why the U.S. fought and how it divided Americans", label: "1. Why did the U.S. fight in Vietnam, and how did the war divide Americans at home?",
+      stem: "The U.S. fought in Vietnam because ___. It divided Americans because ___.", min: 60, newWords: 6,
+      mustAll: [KW, ["because", "since", "so "]],
+      mustMsg: "In answer 1, use a fact from today (like the domino theory, Tet, or Kent State) and explain with “because.”" },
+    { id: "virtue", short: "Who showed civic virtue", label: "2. Who showed civic virtue during the Vietnam years? Name one action and who it helped.",
+      stem: "___ showed civic virtue by ___. This helped ___.", min: 50, newWords: 5,
+      mustAll: [["tinker", "mary beth", "john", "eckhardt", "ray", "governor", "cronkite", "church", "family", "student", "veteran", "mike", "walt", "sponsor", "refugee"], ["help", "stood", "spoke", "protect", "right", "invite", "sponsor", "free"]],
+      mustMsg: "In answer 2, name a person (like Mary Beth Tinker or Gov. Robert Ray) and say what they did and who it helped." }
   ];
-  S[9] = app => {
-    const pg = st.phase === 1 ? 1 : 0;
-    const korea = `<div class="kv" aria-label="Korea compared to Vietnam"><div class="hd"></div><div class="hd">🇰🇷 Korea</div><div class="hd">🇻🇳 Vietnam</div>
-      <div>Why fight</div><div>Contain communism</div><div>Contain communism</div>
-      <div>How fought</div><div>Front lines</div><div>Guerrilla hit-and-hide</div>
-      <div>War declared?</div><div>No</div><div>No</div>
-      <div>Length</div><div>3 years</div><div>8 years of U.S. combat</div>
-      <div>U.S. dead</div><div>36,500</div><div>58,000</div>
-      <div>On TV?</div><div>A little</div><div>Every night</div>
-      <div>Ending</div><div>A tie</div><div>Communists won</div></div><p class="src">Source: National Archives; Department of Defense</p>`;
-    const page = (p, i) => `<div class="vpage"${i !== pg ? " hidden" : ""}>${i === 1 ? korea : ""}<label for="w_${p.id}">${esc(p.label)}</label><p class="stem">${esc(p.stem)}</p><textarea id="w_${p.id}" rows="4">${esc(st.writing[p.id] || "")}</textarea></div>`;
-    const tail = pg === 0
-      ? `<button type="button" class="go" id="pageBtn">Next page →</button><p id="pageMsg" class="msg" role="status" aria-live="polite"></p>`
-      : `<label for="nameBox2">Your name</label><input id="nameBox2" maxlength="60" autocomplete="off" placeholder="First name + last initial (like Jordan M.)" value="${esc(st.name)}">` +
-        `<div class="vrow"><button type="button" class="back" id="backBtn">← Page 1</button><button type="button" class="go" id="sendBtn">📨 ${st.turnedIn ? "Turn in again" : "Turn in"}</button></div><p id="sendMsg" class="msg" role="status" aria-live="polite">${st.turnedIn ? "✓ Turned in. You can fix your writing and turn it in again." : ""}</p>`;
-    const body = `<div class="edpage"><p class="ed-h">✒️ Editorial · ${esc(PAPER)} · ${pg + 1}/2</p>` + PROMPTS.map(page).join("") + tail + `</div>`;
-    app.innerHTML = scene({ chap: "1973 · Last editorial", title: "Your Editorial", stage: "st-dawn", art: "✒️",
-      bubbles: [["lou", pg === 0 ? "Readers want answers. Use what you printed." : "Last one. Compare Vietnam to Korea."]], body });
+  function memoScreen(app) {
+    const page = p => `<div class="vpage"><label for="w_${p.id}">${esc(p.label)}</label><p class="stem">${esc(p.stem)}</p><textarea id="w_${p.id}" rows="4">${esc(st.writing[p.id] || "")}</textarea></div>`;
+    const body = `<div class="memo"><p class="vm-h">YOUR ANSWERS</p>` + PROMPTS.map(page).join("") +
+      `<label for="nameBox2" class="namel">Your name</label><input id="nameBox2" maxlength="60" autocomplete="off" placeholder="First name + last initial (like Jordan M.)" value="${esc(st.name)}">` +
+      `<div class="vrow"><button type="button" class="go" id="sendBtn">📮 ${st.turnedIn ? "Turn in again" : "Turn in"}</button></div><p id="sendMsg" class="msg" role="status" aria-live="polite">${st.turnedIn ? "✓ Turned in. You can fix your writing and turn it in again." : ""}</p></div>`;
+    app.innerHTML = scene({ title: "Your Answers", board: false, job: jobStrip(["Answer question 1", "Answer question 2", "Turn in"], 0), body });
     PROMPTS.forEach(p => $("w_" + p.id).addEventListener("input", e => { st.writing[p.id] = e.target.value; save(); }));
-    if (pg === 0) {
-      $("pageBtn").onclick = () => {
-        const err = writingProblem(PROMPTS[0]);
-        if (err) { $("pageMsg").textContent = err; $("pageMsg").className = "msg try"; return; }
-        toPhase(1);
-      };
-    } else {
-      $("backBtn").onclick = () => toPhase(0);
-      $("sendBtn").onclick = sendWork;
-    }
-  };
-
+    $("sendBtn").onclick = sendWork;
+  }
   const plain = s => String(s || "").normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
   function writingProblem(p) {
-    if (window.classIsTestT && window.classIsTestT()) return "";   // Test T. (teacher) skips the writing rules
+    if (TT()) return "";
     const box = $("w_" + p.id), v = (box.value || "").trim();
-    if (window.classJunkStop) {
-      const junk = window.classJunkStop(box, { starter: p.stem, source: "from today" });
-      if (junk) return "For " + p.short + ": " + junk;
-    }
+    if (window.classJunkStop) { const junk = window.classJunkStop(box, { starter: p.stem, source: "from today" }); if (junk) return "For " + p.short + ": " + junk; }
     if (v.length < p.min) { box.focus(); return "Write a little more for: " + p.short + " (1–2 full sentences)."; }
     if (/_{2,}/.test(v)) { box.focus(); return "Fill in the blanks with your own words for: " + p.short + "."; }
     const stemWords = new Set(plain(p.stem).match(/[\p{L}']+/gu) || []);
     const freshW = new Set((plain(v).match(/[\p{L}']{3,}/gu) || []).filter(w => !stemWords.has(w)));
     if (freshW.size < p.newWords) { box.focus(); return "Add more of your own ideas for: " + p.short + ". Use details from today."; }
-    if (p.mustAll.some(g => !g.some(w => new RegExp("(^|[^\\p{L}])" + plain(w).replace(/[.*+?^${}()|[\]\\]/g, "\\$&"), "iu").test(plain(v))))) { box.focus(); return p.mustMsg; }
+    const pv = " " + plain(v) + " ";
+    if (p.mustAll.some(g => !g.some(w => pv.includes(plain(w))))) { box.focus(); return p.mustMsg; }
     return "";
   }
   async function sendWork() {
@@ -627,77 +333,58 @@
     if (!/^\S+ [A-Z]\.$/.test(nm)) { bad("Type your first name and last initial, like Jordan M."); $("nameBox2").focus(); return; }
     st.name = nm; save();
     for (const p of PROMPTS) { const err = writingProblem(p); if (err) { bad(err); return; } }
-    // ----- payload (same shape as shared/unit-game.js finish()) -----
     const answers = { "Standard": CFG.standard };
-    const right = CHECK_ORDER.filter(id => !st.wrong[id]).length;
-    answers["First-try correct"] = right + " of " + CHECK_ORDER.length;
-    const byStd = {};
-    CHECK_ORDER.forEach(id => { const s = CHECKS[id].std; byStd[s] = byStd[s] || [0, 0]; byStd[s][1]++; if (!st.wrong[id]) byStd[s][0]++; });
-    answers["First-try by standard"] = Object.keys(byStd).sort().map(k => k + ": " + byStd[k][0] + " of " + byStd[k][1]).join(" · ");
+    answers["First-try correct"] = ROUNDS.filter(r => !st.wrong[r.id]).length + " of " + ROUNDS.length;
     PROMPTS.forEach(p => { answers["Writing: " + p.short] = ($("w_" + p.id).value || "").trim(); });
-    CHECK_ORDER.forEach(id => { const q = CHECKS[id]; answers[q.short] = q.options[0] + (st.wrong[id] ? " (after " + st.wrong[id] + " wrong " + (st.wrong[id] === 1 ? "try" : "tries") + ")" : " (first try)"); });
-    const CH = { "1964": "1964 front page (Gulf of Tonkin)", "1965": "1965 front page (armbands, guerrilla war)", "1968": "1968 front page (Tet)", "1969": "1969 front page (hawks vs. doves)", "1970": "1970 front page (Kent State, Jackson State)", "Pentagon Papers": "1971 Pentagon Papers" };
-    Object.keys(CH).forEach(k => { if (st.picks[k]) answers["Choice · " + CH[k]] = st.picks[k]; });
-    const E = ENDINGS[st.ending || endingKey()];
-    answers["Ending"] = E.title;
-    answers["Caused by"] = st.trail.map(t => t.label + " (" + fxText(t.fx) + ")").join(" · ");
-    answers["Final meters"] = "Reader trust " + st.m.t + "/10 · White House access " + st.m.a + "/10 · Readers " + leanText(st.m.l) + " · Unchecked claims exposed " + st.exposed.length;
+    ROUNDS.forEach(r => { answers["Check · " + r.title] = r.options[0] + (st.wrong[r.id] ? " (after " + st.wrong[r.id] + " wrong)" : " (first try)"); });
+    ROUNDS.forEach(r => { if (r.choices && st.picks[r.id] != null) answers["Choice · " + r.title] = r.choices[st.picks[r.id]].t; });
+    answers["Ending"] = ENDINGS[endKey()].t;
+    answers["Meters at the end"] = "Family together " + st.fam + "/10 · Your voice " + st.voice + "/10";
     $("sendBtn").disabled = true; msg.textContent = "Sending your work…"; msg.className = "msg";
     try {
       const res = await window.classTurnIn(CFG.oldApi, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ studentName: st.name, assignmentId: CFG.assignmentId, assignmentTitle: CFG.title, answers }) });
       const data = await res.json().catch(() => ({}));
       if (!res.ok) throw new Error(data.error || "Your work did not save. Try again.");
       st.turnedIn = true; save();
-      msg.innerHTML = `<span class="stamp g slam">📨 FILED</span> ✓ Turned in! You're done.`; msg.className = "msg good";
+      msg.innerHTML = `<span class="stamp slam">📮 SENT</span> ✓ Turned in! You're done.`; msg.className = "msg good";
       $("sendBtn").textContent = "✓ Turned in";
     } catch (err) { msg.textContent = err.message || "Could not turn in. Try again."; msg.className = "msg try"; $("sendBtn").disabled = false; }
   }
 
-  // =====================================================================
-  //  TITLE + RENDER
-  // =====================================================================
+  // ---------- title + render ----------
   function title(app) {
-    app.innerHTML = `<section class="title-card">
-      <p class="t-mast">${esc(PAPER)}</p><p class="t-dl"><span>Cedar Valley, Iowa</span><span>1964–1973</span></p>
-      <div class="t-grid"><div class="t-left">
-        <span class="extra">EXTRA!</span>
-        <h1>Front Page: A Nation Divided</h1>
-        <p class="hook">The Vietnam War splits your town. You decide what goes on page one.</p>
-        <div class="t-chips"><span>🗞️ 6 front pages</span><span>🔍 6 fact-checks</span><span>⏱️ 25 min</span></div>
-        <p class="goal"><b>Goal:</b> explain why the U.S. fought in Vietnam and why Americans split over it.</p>
-        <label for="nameBox">Your name</label>
+    app.innerHTML = `<section class="title-card"><div class="t-grid"><div class="t-left">
+        <p class="t-kick">U.S. History · Unit 3 · Day 4</p>
+        <h1>Home Front Iowa</h1>
+        <p class="hook">Des Moines, 1964. The Vietnam War is coming to your dinner table. Your brother could be drafted, and your family can't agree.</p>
+        <ol class="how"><li><b>Read</b> the real news</li><li><b>Prove</b> it with a source</li><li><b>Choose</b> what you do</li></ol>
+        <div class="t-chips"><span>📺 8 events</span><span>🔍 8 checks</span><span>⏱️ 20 min</span></div>
+        <p class="goal"><b>Goal:</b> explain why the U.S. fought in Vietnam and how the war divided Americans at home.</p>
+        <div class="t-start"><label for="nameBox">Your name</label>
         <div class="t-row"><input id="nameBox" maxlength="60" autocomplete="off" placeholder="First name + last initial (like Jordan M.)" value="${esc(st.name)}">
         <button type="button" class="go start" id="startBtn">Start →</button></div>
-        <p id="introMsg" class="msg" role="status"></p>
+        <p id="introMsg" class="msg" role="status"></p></div>
+        <p class="fict">Your family is made up. Every event, date, and quote is real.</p>
       </div>
-      <div class="t-art" aria-hidden="true"><div class="t-paper"><span>🚁</span><b>War or Peace?</b></div>
-        <div class="t-cast"><span>🗞️</span><span class="vs">VS</span><span>🕴️</span></div>
-        <div class="t-cast"><span>🦅</span><span style="font-size:1.4rem">⚖️</span><span>🕊️</span></div></div></div>
-      <p class="t-fict fict">Made-up paper. Real events and quotes.</p>
-    </section>`;
+      <div class="t-art" aria-hidden="true">${famBoard(ROUNDS[0])}</div></div></section>`;
     $("startBtn").onclick = () => {
       const fixed = window.classShortName ? window.classShortName($("nameBox").value) : $("nameBox").value.trim();
       if (!/^\S+ [A-Z]\.$/.test(fixed)) { $("introMsg").textContent = "Type your first name and last initial, like Jordan M."; $("introMsg").className = "msg try"; $("nameBox").focus(); return; }
-      if (window.classClaimDevice) window.classClaimDevice(fixed);
-      st.name = fixed;
-      goStep(1);
+      st.name = fixed; save(); goStep(1);
     };
   }
-
-  function render(scrollToNew) {
-    const app = $("app");
+  let first = true;
+  function render() {
     clearTimeout(lockTimer);
+    if (!first && $("welcome")) $("welcome").hidden = true;
+    first = false;
+    const app = $("app");
     if (st.step < 1) { hud(); return title(app); }
-    (S[st.step] || S[TOTAL])(app);
-    justSolved = null;
+    if (st.step <= ROUNDS.length) roundScreen(app, st.step);
+    else if (st.step === ROUNDS.length + 1) endingScreen(app);
+    else memoScreen(app);
     hud();
-    if (pending) { const p = pending; pending = null; setTimeout(() => pops(p), 60); }
-    if (scrollToNew) {
-      const target = $("after");
-      if (target && target.scrollIntoView) setTimeout(() => target.scrollIntoView({ behavior: "smooth", block: "center" }), 40);
-    }
   }
-
   $("restartBtn").onclick = () => {
     if (!confirm("Start over? This clears your work on this device.")) return;
     const name = st.name; st = fresh(); st.name = name;
@@ -705,72 +392,29 @@
     save(); render(); window.scrollTo(0, 0);
   };
   if (st.step >= 1 && $("welcome")) {
-    // Shared Chromebooks: "Not you?" lets the next kid wipe this saved game on the spot.
     const nm = st.name || "";
-    $("welcome").innerHTML = `<span>${esc("Welcome back, " + nm + "! You're on step " + Math.min(st.step, TOTAL) + " of " + TOTAL + ".")}</span> <button type="button" class="notyou" id="notYouBtn">${esc("Not " + nm + "? Start fresh")}</button>`;
+    $("welcome").innerHTML = `<span>${esc("Welcome back, " + nm + "! You're on step " + Math.min(st.step, STEPS) + " of " + STEPS + ".")}</span> <button type="button" class="notyou" id="notYouBtn">${esc("Not " + nm + "? Start fresh")}</button>`;
     $("welcome").hidden = false;
     $("notYouBtn").onclick = () => {
-      st = fresh();
-      if (window.classFirstTry) window.classFirstTry.reset();
+      st = fresh(); if (window.classFirstTry) window.classFirstTry.reset();
       try { localStorage.removeItem(KEY); localStorage.removeItem("site-student-name"); localStorage.removeItem("writingcheck:" + location.pathname); } catch (e) {}
       location.reload();
     };
   }
+  window.addEventListener("resize", () => { if (st.step >= 1) document.documentElement.style.setProperty("--hudH", $("hud").offsetHeight + "px"); });
   render();
 
   // ---------------- Test T. skip bar (shared/turnin.js) ----------------
-  // The teacher signed in as Test T. can jump to any screen or answer the current check/page.
-  // Each front page = lay out · printed + reader mail · fact-check. Unplayed pages get the first two stories.
   try {
-    const SCR = [{ s: 1, k: "file", label: "The old file (dominoes)" }];
-    ED_ORDER.forEach(n => {
-      SCR.push({ s: n, k: "layout", label: ED[n].title + " · lay out" }, { s: n, k: "printed", label: ED[n].title + " · printed" });
-      if (ED[n].check) SCR.push({ s: n, k: "check", label: ED[n].title + " · fact-check" });
-    });
-    SCR.push({ s: 7, k: "pp", label: "Pentagon Papers · the call" }, { s: 7, k: "truth", label: "The truth comes out" }, { s: 7, k: "check", label: "Pentagon Papers · fact-check" },
-      { s: 8, k: "end", label: "Your ending" }, { s: 9, k: "p0", label: "Your editorial · page 1" }, { s: 9, k: "p1", label: "Your editorial · page 2" });
-    const kindNow = () => {
-      const n = Math.max(1, Math.min(st.step, TOTAL));
-      if (n === 1) return "file";
-      if (ED[n]) return st.phase === 0 || !st.printed[n] ? "layout" : st.phase === 1 ? "printed" : "check";
-      if (n === 7) return st.phase === 0 ? "pp" : st.phase === 1 ? "truth" : "check";
-      if (n === 8) return "end";
-      return st.phase === 1 ? "p1" : "p0";
-    };
-    const printNow = n => {   // fill the two slots (first two stories) and print, like pressing 🖨️
-      const d = draft(n), ids = (ED[n].order || "abc").split("");
-      if (!d.lead) d.lead = ids.find(id => id !== d.side);
-      if (!d.side) d.side = ids.find(id => id !== d.lead);
-      printEdition(n);
-    };
-    const pickPP = () => { const b = document.querySelector("[data-pp]"); if (b) b.click(); };
     (window.classTestHooks = window.classTestHooks || []).push({
-      count: () => SCR.length,
-      index: () => { const n = Math.max(1, Math.min(st.step, TOTAL)), k = kindNow(); return Math.max(0, SCR.findIndex(x => x.s === n && x.k === k)); },
-      label: i => SCR[i].label,
-      go: i => {
-        const x = SCR[i]; if (!x) return;
-        if (!st.name) st.name = "Test T.";
-        st.step = x.s; st.phase = 0; hideWelcome();
-        if (x.k === "file") delete st.done.c1;
-        else if (x.k === "layout") delete st.printed[x.s];
-        else if (ED[x.s]) {
-          if (!st.printed[x.s]) { save(); printNow(x.s); }
-          st.phase = x.k === "printed" ? 1 : 2;
-          if (x.k === "check") delete st.done[ED[x.s].check];
-        } else if (x.s === 7 && x.k !== "pp") {
-          if (!st.picks["Pentagon Papers"]) { save(); render(); pickPP(); }
-          st.phase = x.k === "truth" ? 1 : 2;
-          if (x.k === "check") delete st.done.c6;
-        } else if (x.k === "p1") st.phase = 1;
-        save(); render(); window.scrollTo(0, 0);
-      },
+      count: () => STEPS,
+      index: () => Math.max(0, Math.min(st.step, STEPS) - 1),
+      label: i => i < ROUNDS.length ? (i + 1) + ". " + ROUNDS[i].title : i === ROUNDS.length ? "How your family ends up" : "Your answers",
+      go: i => { if (!st.name) st.name = "Test T."; st.step = i + 1; st.ph = "check"; save(); render(); window.scrollTo(0, 0); },
       solve: () => {
-        const n = Math.max(1, Math.min(st.step, TOTAL)), k = kindNow();
-        if (k === "file" && !st.done.c1) { if (!st.tapped) st.tapped = true; else { st.done.c1 = true; justSolved = "c1"; } save(); render(true); }
-        else if (k === "layout") printNow(n);
-        else if (k === "pp") pickPP();
-        else if (k === "check") { const id = n === 7 ? "c6" : ED[n].check; if (!st.done[id]) { st.done[id] = true; justSolved = id; save(); render(true); } }
+        const r = ROUNDS[st.step - 1]; if (!r) return;
+        if (st.ph === "check") { justSolved = true; st.ph = r.compare ? "done" : "choice"; save(); render(); }
+        else if (st.ph === "choice") { const b = document.querySelector("#cChoices .dcard"); if (b) b.click(); }
       }
     });
     if (window.classTestSkip) window.classTestSkip.refresh();
