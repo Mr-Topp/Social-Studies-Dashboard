@@ -676,17 +676,19 @@ window.CLASS_TARGETS = {
   },
   "1|12": {
    "t": [
-    "I can explain how Nazi propaganda shaped what kids like Jojo believed about Jewish people.",
-    "I can analyze how the Hitler Youth trained young Germans to be loyal to Hitler."
+    "I can explain why European countries took over Africa and how empires ruled their colonies.",
+    "I can compare how people resisted or adapted when empires pushed in.",
+    "I can explain the causes of World War I and World War II."
    ],
-   "g3": "I can analyze how fascism and Nazi ideas affected ordinary people during World War II."
+   "g3": "I can analyze the causes of imperialism, how people responded to it, and the causes of the world wars."
   },
   "1|13": {
    "t": [
-    "I can explain how Jojo's beliefs change once he gets to know Elsa as a real person.",
-    "I can compare what Jojo Rabbit shows with what really happened in Germany at the end of World War II."
+    "I can compare how dictators took power and persecuted people, and explain the Holocaust.",
+    "I can explain how the world changed after World War I and World War II.",
+    "I can explain how new technology decided turning points and how total war affected people."
    ],
-   "g3": "I can analyze how fascism and Nazi ideas affected ordinary people during World War II."
+   "g3": "I can analyze dictators, the Holocaust, total war, and the changes after World War I and World War II."
   },
   "1|14": {
    "test": 1,

@@ -22,8 +22,8 @@ window.CLASS_RECAPS = {
     9: "Through Maus II, what happened at Auschwitz and why we remember the Holocaust.",
     10: "The big turning points that helped the Allies win World War II.",
     11: "After World War II: punish the countries that lost, or help them rebuild, and why the world chose to rebuild.",
-    12: "Started the movie Jojo Rabbit, about a German boy in the Hitler Youth who finds out his mother is hiding a Jewish girl.",
-    13: "Finished Jojo Rabbit and talked about how propaganda shaped what Jojo believed, and how meeting Elsa changed him."
+    12: "Unit Showdown review, Part 1: practiced test Parts 1–4 (why Europe took Africa, how empires ruled, resist or adapt, and the causes of both world wars).",
+    13: "Unit Showdown review, Part 2: practiced test Parts 5–8 (dictators and the Holocaust, changes after the wars, technology, and people in total war)."
   } },
   "sociology": { 1: {
     1: "What sociology is: the study of how groups and society shape what people do.",
