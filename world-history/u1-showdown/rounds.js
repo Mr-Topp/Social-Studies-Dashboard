@@ -4,6 +4,9 @@
 //  8 rounds = the 8 parts of the Unit 1 test (Form A): WH.24, 25, 27, 29 on Day 12;
 //  WH.30, 31, 32, 33 on Day 13. Each round: a bet, a Source Snap (real source), a Build It.
 //  Items practice the same skills as the test but are NOT the test questions.
+//  Fynn 11-14 (later): "make sure it is very aligned with the test and not any filler stuff" →
+//  checked every item against Form A; off-test items (Berlin Conference, Ethiopia/Liberia, Stalingrad,
+//  Ho Chi Minh 1945, "totalitarian", etc.) were swapped for items on what each test part asks.
 //  In "snap" options, the FIRST option is right (screen shuffles). In "build" rows, "a" is the right label.
 //  "order" builds: items are listed in the right order (screen shuffles them).
 // =====================================================================
@@ -23,11 +26,11 @@ window.SHOWDOWN_ROUNDS = [
         build: {
           type: "sort",
           ask: "Sort each clue by the kind of reason it shows.",
-          labels: ["Money", "Power & pride", "Racist beliefs"],
+          labels: ["Money (economic)", "Power & pride (political)", "Racist beliefs (cultural)"],
           rows: [
-            { icon: "🌳", t: "Belgium's King Leopold forced people in the Congo to collect rubber for him to sell.", a: "Money" },
-            { icon: "🦅", t: "Germany wanted “a place in the sun”: colonies to prove it was a great power.", a: "Power & pride" },
-            { icon: "📖", t: "European writers claimed they had a duty to “civilize” Africans.", a: "Racist beliefs" }
+            { icon: "🌳", t: "Belgium's King Leopold forced people in the Congo to collect rubber for him to sell.", a: "Money (economic)" },
+            { icon: "🏁", t: "Britain and France raced to claim land before their rival could get it.", a: "Power & pride (political)" },
+            { icon: "📖", t: "European writers claimed they had a duty to “civilize” Africans.", a: "Racist beliefs (cultural)" }
           ],
           hint: "Money = stuff to sell. Power = look strong next to rivals. Beliefs = ideas about who is “better.”",
           why: "<b>Imperialism</b> had three kinds of causes: economic (money), political (power and pride), and cultural (racist beliefs)."
@@ -60,15 +63,14 @@ window.SHOWDOWN_ROUNDS = [
             "Annexation": "The land becomes part of the empire"
           },
           prove: [
-            { icon: "🇳🇬", t: "Northern Nigeria: Britain let local rulers keep their thrones, as long as they followed British orders.", a: "Indirect rule" },
-            { icon: "🇻🇳", t: "Vietnam: France sent its own governors, like Paul Doumer, to run the colony and set its taxes.", a: "Direct rule" },
-            { icon: "🇰🇷", t: "Korea, 1910: Japan made Korea part of Japan.", a: "Annexation" },
-            { icon: "🚂", t: "China, 1898: Germany won special rights to trade and build railroads in Shandong province. China's emperor still ruled there.", a: "Sphere of influence" }
-          ],
-          rows: [
             { icon: "🇨🇩", t: "Belgian Congo after 1908: Belgian officials ran everything.", a: "Direct rule" },
             { icon: "👑", t: "India: some Indian princes kept their thrones, but they had to obey Britain.", a: "Indirect rule" },
-            { icon: "🚢", t: "China: Britain, France, Germany, and Japan each controlled trade in their own zone.", a: "Sphere of influence" },
+            { icon: "🇰🇷", t: "Korea, 1910: Japan made Korea part of Japan.", a: "Annexation" }
+          ],
+          rows: [
+            { icon: "🇻🇳", t: "Vietnam: France sent its own governors to run the colony and make its laws.", a: "Direct rule" },
+            { icon: "🇳🇬", t: "Northern Nigeria: Britain let local chiefs stay in charge, as long as they followed British orders.", a: "Indirect rule" },
+            { icon: "🚢", t: "China: Britain, France, Germany, and Japan each controlled trade in their own zone. The U.S. wanted in on the trade, not the land.", a: "Sphere of influence" },
             { icon: "🌺", t: "Hawaiʻi, 1898: the U.S. made the islands part of the United States.", a: "Annexation" }
           ],
           hint1: "Read each one again. Ask: who is really in charge there?",
@@ -102,9 +104,9 @@ window.SHOWDOWN_ROUNDS = [
             "Peaceful resistance": "Push back without weapons"
           },
           prove: [
-            { icon: "🛡️", t: "Ethiopia, 1896: Ethiopia's army beat Italy at the Battle of Adwa and stayed free.", a: "Armed resistance" },
             { icon: "🎓", t: "Japan, 1871: leaders sent a team to the U.S. and Europe to study their schools, factories, and armies.", a: "Adapt" },
-            { icon: "🧂", t: "India, 1930: Gandhi led thousands on a march to the sea to protest a British tax on salt.", a: "Peaceful resistance" }
+            { icon: "🏯", t: "China, 1900: the Boxers surrounded the foreign embassies in Beijing for 55 days.", a: "Armed resistance" },
+            { icon: "✉️", t: "Hawaiʻi, 1897: Hawaiian leaders carried the petitions to Washington, D.C., and asked the Senate to say no.", a: "Peaceful resistance" }
           ],
           rows: [
             { icon: "🚂", t: "Japan, after 1868: railroads like the one in the photo, factories, and a modern army.", a: "Adapt" },
@@ -266,35 +268,33 @@ window.SHOWDOWN_ROUNDS = [
   const MORE = {
     "WH.24": {
       snap2: {
-        file: "<b>Fact file · The Berlin Conference, 1884–85</b>Leaders from 14 countries, mostly European, met in Berlin, Germany. They set rules for claiming land in Africa: a country had to tell the others and show it controlled the area. No Africans were invited. By 1914, Europeans ruled almost 90% of Africa.",
-        ask: "Read the fact file. What does the Berlin Conference show about how Africa was taken over?",
-        options: ["Europeans split Africa among themselves without asking Africans", "African leaders voted on which country would protect them", "Europe agreed to leave Africa alone after 1885", "Africa's kingdoms sold their land to Europe for a fair price in gold"],
-        hint: "Who was in the room? Who was not invited?",
-        why: "At the <b>Berlin Conference</b>, Europe made the rules for taking Africa, and Africans had no say."
+        file: "<b>Fact file · The latecomers</b>Britain and France already had big empires. Germany (united in 1871) and Italy (united in 1861) were new countries with almost no colonies. In 1897, Germany's foreign minister said Germany demanded its own “place in the sun.” Italy tried to conquer Ethiopia in 1896 and lost. In 1911, it took Libya instead.",
+        ask: "Read the fact file. Which kind of reason pushed Germany and Italy to grab colonies?",
+        options: ["Political: to prove they were great powers too", "Economic: to buy cheap food for their farmers", "Cultural: to spread their religion and schools", "Military: to train their soldiers far from home"],
+        hint: "They were new and had almost no colonies. What did they want to show Britain and France?",
+        why: "Germany and Italy wanted colonies to look as strong as Britain and France. That's a <b>political</b> reason: power and pride."
       },
       fix: {
         intro: "A student wrote this Explain It for the test.",
-        lines: ["One reason Europe took over Africa was money.", "European factories needed rubber, palm oil, and diamonds from Africa.", "At the Berlin Conference, African leaders voted on which country would rule them.", "Colonies made European companies rich."],
+        lines: ["One reason Europe took over Africa was money.", "European factories needed rubber, palm oil, and diamonds from Africa.", "European companies paid African workers fair wages for the rubber.", "Colonies made European companies rich."],
         wrong: 2,
-        fixes: ["At the Berlin Conference, European leaders split up Africa, and no Africans were invited.", "At the Berlin Conference, African leaders picked new borders for all of Europe's countries.", "At the Berlin Conference, Europe agreed to pay African kings a fair price for every colony."],
-        hint: "Think about the fact file: who was invited to Berlin?",
-        why: "Facts in an Explain It have to be right. Africans were left out of the Berlin Conference."
+        fixes: ["In the Congo, King Leopold forced people to collect rubber for him.", "In the Congo, King Leopold shared the rubber money with each village.", "In the Congo, African kings sold the rubber and kept all the money."],
+        hint: "Think about King Leopold's Congo. Did people there get a fair deal?",
+        why: "Facts in an Explain It have to be right. Colonies made money because people were forced to work."
       },
       lightning: [
         { q: "Imperialism means…", options: ["a strong country taking control of other lands", "a country choosing its own leaders in elections", "two countries trading with each other as equals"] },
-        { q: "By 1914, which two African countries were still independent?", options: ["Ethiopia and Liberia", "Egypt and the Congo", "South Africa and Kenya"] },
-        { q: "What did King Leopold force people in the Congo to collect?", options: ["Rubber", "Oil", "Coffee"] }
+        { q: "Wanting colonies to look as strong as rival countries is which kind of reason?", options: ["Political (power and pride)", "Economic (money to be made)", "Cultural (racist beliefs)"] },
+        { q: "King Leopold got rich selling rubber from the Congo. Which kind of reason is that?", options: ["Economic (money to be made)", "Political (power and pride)", "Cultural (racist beliefs)"] }
       ]
     },
     "WH.25": {
       snap2: {
-        img: "../../day-2-hanoi/pages/p-04.jpg",
-        alt: "Page from The Great Hanoi Rat Hunt with a map titled Colonial Empires circa 1914, colored by empire.",
-        cite: "<i>The Great Hanoi Rat Hunt</i>, book page 31. Day 2 reading.",
-        ask: "Read the box above the map: the “new imperialism” (1871–1939) wasn't only European. Which other powers does it name?",
-        options: ["The United States and Japan", "China and the Ottoman Empire", "Brazil and Mexico", "India and Egypt"],
-        hint: "Read the sentence right above the map: “…when Europe, ___, and ___ colonized…”",
-        why: "Europe, the <b>United States</b>, and <b>Japan</b> all built empires. The U.S. took Hawaiʻi and the Philippines; Japan took Korea."
+        file: "<b>Fact file · Two U.S. moves in the Pacific</b><b>Hawaiʻi, 1898:</b> Congress passed a law that made the Hawaiian Islands part of the United States. The queen had already been overthrown.<br><b>China, 1899–1900:</b> Secretary of State John Hay pushed for an “Open Door”: every country could trade in China, and China would not be carved up into colonies.",
+        ask: "Read the fact file. What did the U.S. want in China?",
+        options: ["A share of the trade, not the land", "To make China the next U.S. state", "To remove China's ruler, like in Hawaiʻi", "To keep all other countries out of China"],
+        hint: "What does an “Open Door” let countries do?",
+        why: "In <b>Hawaiʻi</b>, the U.S. took the land (annexation). In <b>China</b>, it only wanted trade (the Open Door)."
       },
       fix: {
         intro: "A student wrote this Explain It about France in Vietnam.",
@@ -332,16 +332,16 @@ window.SHOWDOWN_ROUNDS = [
       lightning: [
         { q: "Adapting to imperialism means…", options: ["copying outside ideas to stay strong and free", "fighting with weapons to drive outsiders away", "refusing all contact with outsiders"] },
         { q: "The Boxers in China (1900) wanted to…", options: ["drive foreigners out of China", "copy Western factories and railroads", "make China part of the United States"] },
-        { q: "In 1945, Ho Chi Minh quoted the American Declaration of Independence to…", options: ["argue Vietnam deserved freedom from France", "ask the United States to rule Vietnam", "thank France for building roads and schools in Hanoi"] }
+        { q: "In 1897, Native Hawaiians pushed back against annexation by…", options: ["signing petitions against it", "attacking U.S. Navy ships", "copying U.S. factories"] }
       ]
     },
     "WH.29": {
       snap2: {
-        file: "<b>Fact file · Manchuria, 1931</b>Japan's army took over Manchuria, a big region of northern China. China asked the League of Nations for help. The League's report blamed Japan. But the League sent no troops and set no punishments. Japan simply quit the League.",
-        ask: "Why couldn't the League of Nations stop Japan?",
-        options: ["It had no army of its own to enforce its rules", "Japan had never been a member of the League", "The United States led the League and backed Japan", "China asked the League not to get involved"],
-        hint: "The League wrote a report. What did it NOT have to back it up?",
-        why: "The League had <b>no army</b>. Japan, then Italy and Germany, learned they could take land and get away with it."
+        file: "<b>Fact file · Manchuria, 1931</b>Japan is a group of islands with little coal or iron. Manchuria, a big region of northern China, had coal, iron, and farmland that Japan's growing empire wanted. In 1931, Japan's army took it over. The League of Nations blamed Japan, but it sent no troops and set no punishments. Japan simply quit the League.",
+        ask: "Read the fact file. Why did Japan take over Manchuria?",
+        options: ["It wanted Manchuria's coal, iron, and farmland", "It wanted to punish China for attacking Tokyo", "It wanted to guard China from the League's army", "It wanted to win back land it lost to Germany"],
+        hint: "What did Manchuria have that Japan's islands did not?",
+        why: "Japan wanted Manchuria's <b>coal, iron, and land</b>. The League had <b>no army</b> to stop it, so other dictators learned that taking land worked."
       },
       fix: {
         intro: "A student wrote this Explain It about World War I.",
@@ -377,7 +377,7 @@ window.SHOWDOWN_ROUNDS = [
       },
       lightning: [
         { q: "Propaganda is…", options: ["one-sided messages to control what people think", "a law that protects everyone's right to free speech", "a peace deal between two countries"] },
-        { q: "Totalitarian means…", options: ["the government controls nearly every part of life", "power is shared by many parties, courts, and voters", "the people choose a new king every year"] },
+        { q: "Why did many Germans turn to Hitler in the early 1930s?", options: ["The Great Depression left millions without jobs", "Germany had just won World War I and felt strong", "Britain and France asked him to lead Germany"] },
         { q: "The Holocaust was…", options: ["the Nazi murder of six million Jews and millions of others", "Germany's invasion of the Soviet Union in 1941", "the Allied bombing of German cities near the end of the war"] }
       ]
     },
@@ -425,17 +425,17 @@ window.SHOWDOWN_ROUNDS = [
       },
       lightning: [
         { q: "Why was WWI stuck in the trenches for years?", options: ["Machine guns and barbed wire made attacks deadly", "Tanks made attacking much too easy for both sides", "Both sides ran out of soldiers in 1914"] },
-        { q: "Stalingrad (1942–43) was a turning point because…", options: ["a whole German army was trapped and surrendered", "the U.S. dropped its first atomic bomb there", "Britain cracked Germany's Enigma code in that city"] },
-        { q: "Bombers in WWII meant that…", options: ["cities and civilians became targets", "only soldiers at the front were in danger", "wars could end in just a few weeks"] }
+        { q: "Tanks helped end the trench stalemate because they…", options: ["could roll over trenches and barbed wire", "could spot enemy planes with radio waves", "could sink supply ships far out at sea"] },
+        { q: "People still argue about the atomic bomb because it…", options: ["ended the war fast but killed huge numbers of civilians", "was built by Germany but used by the United States", "was dropped on Berlin after Germany had given up"] }
       ]
     },
     "WH.33": {
       snap2: {
-        file: "<b>Two points of view · August 1945</b><b>President Truman</b> (White House statement, Aug. 6, 1945): announced the bomb as a powerful new weapon and warned Japan to surrender.<br><b>Setsuko Thurlow</b>, age 13, about a mile from the blast in Hiroshima: “At 8:15, I saw a blinding bluish-white flash from the window.” She was trapped in a collapsed building and lost family and classmates. (Nobel Peace Prize lecture, 2017)",
-        ask: "Why do Truman and Thurlow remember the same bomb so differently?",
-        options: ["Truman led from far away; Thurlow lived through it in the city", "Truman was in Hiroshima; Thurlow heard about it later on the radio", "Both agreed the bomb was a mistake that changed nothing", "Thurlow was a soldier; Truman was a civilian child"],
-        hint: "Where was each person standing when the bomb fell?",
-        why: "Where you stood in a <b>total war</b> shaped what you saw, what you lost, and how you remember it."
+        file: "<b>Two points of view · the atomic bomb, 1945</b><b>President Truman</b> (radio speech, Aug. 9, 1945): “We have used it in order to shorten the agony of war, in order to save the lives of thousands and thousands of young Americans.”<br><b>Setsuko Thurlow</b>, age 13, about a mile from the blast in Hiroshima: “At 8:15, I saw a blinding bluish-white flash from the window.” She was trapped in a collapsed building and lost family and classmates. She spent her life working to ban nuclear weapons. (Nobel Peace Prize lecture, 2017)",
+        ask: "Read both. How are their points of view on the bomb different?",
+        options: ["Truman: it would end the war sooner · Thurlow: it caused terrible suffering", "Truman: it caused terrible suffering · Thurlow: it would end the war sooner", "Truman: Japan was about to win the war · Thurlow: the bomb was never dropped", "Truman: the bomb was a huge mistake · Thurlow: the bomb saved her family"],
+        hint: "What reason does Truman give? What happened to Thurlow?",
+        why: "Same bomb, two <b>points of view</b>. Truman: it ended the war fast and saved soldiers. Critics like Thurlow: killing civilians was wrong."
       },
       fix: {
         intro: "A student wrote this Explain It about Anne Frank.",
@@ -466,14 +466,14 @@ window.SHOWDOWN_ROUNDS = [
     "WH.24": {
       snap: { proof: ["His feet stand on Cape Town and Cairo, the two ends of Africa", "He is shaking hands with an African king to sign a treaty", "He is stepping onto a ship to sail home to Britain"],
         alt: { ask: "The cartoon calls Rhodes a “Colossus,” a giant. What does a giant standing over the whole map suggest about his goal?", options: ["Control of the whole continent for Britain", "A fair trade partnership with Africans", "Guarding Africa from other empires for free", "Exploring Africa only for science"] } },
-      snap2: { proof: ["“No Africans were invited.”", "“African kings voted on the borders.”", "“Europe paid each kingdom for its land.”"],
-        alt: { ask: "At the Berlin Conference, who got a say in how Africa was divided?", options: ["Only the outside powers, mostly European", "African kings and European leaders together", "Only Africans who lived near the coast", "Every country in the world, through a vote"] } }
+      snap2: { proof: ["Germany demanded its own “place in the sun”", "Germany's factories ran out of rubber in 1897", "Italy asked Ethiopia to teach its farmers"],
+        alt: { ask: "Italy lost in Ethiopia in 1896, then took Libya in 1911. Why did Italy keep trying to get a colony?", options: ["To show it was a great power like its rivals", "To pay Ethiopia back for the land it took", "To give the people of Libya free elections", "To get away from Britain's rules on trade"] } }
     },
     "WH.25": {
       snap: { proof: ["Doumer, the French governor, says his new “state monopolies” did the trick", "A Vietnamese emperor signs a brand-new tax law", "British ships unload their goods in Hanoi's port"],
         alt: { ask: "France sent Paul Doumer to run Vietnam and set its taxes himself. Which kind of rule is that?", options: ["Direct rule: the empire's own officials run it", "Indirect rule: local rulers stay but take orders", "A sphere of influence: control of trade only", "Self-rule: the Vietnamese run it themselves"] } },
-      snap2: { proof: ["The box says Europe, the United States, and Japan colonized most of Asia, Africa, and Oceania", "The map key lists China as an empire with colonies", "The box says only Britain and France took colonies"],
-        alt: { ask: "Based on the box above the map, was the new imperialism only a European thing?", options: ["No. The U.S. and Japan built empires too.", "Yes. Only European countries took colonies.", "No. China and India built the biggest empires.", "Yes. Only Britain and France took any land."] } }
+      snap2: { proof: ["Hawaiʻi became part of the U.S., but the “Open Door” was only about trade", "Congress passed a law that made China part of the United States in 1899", "John Hay asked every other country to stop all of its trade in China"],
+        alt: { ask: "Look at both U.S. moves. In which place did the U.S. take the land for itself?", options: ["Hawaiʻi: it became part of the U.S.", "China: it became part of the U.S.", "Both: the U.S. took both places", "Neither: the U.S. only traded"] } }
     },
     "WH.27": {
       snap: { proof: ["The official says people are raising rats and bringing rats in from the provinces", "Vietnamese soldiers attack a French fort with guns", "Workers build a new French-style factory in Hanoi"],
@@ -484,8 +484,8 @@ window.SHOWDOWN_ROUNDS = [
     "WH.29": {
       snap: { proof: ["Chamberlain bargains for peace, but then Poland is invaded in 1939", "Hitler signs a peace treaty and gives his land back", "Britain attacks Germany first, back in 1938"],
         alt: { ask: "In 1938, Britain and France let Hitler take part of Czechoslovakia, hoping he would stop. What happened next?", options: ["He took the rest, then invaded Poland in 1939", "He kept his word and stopped taking land", "He gave the land back to Czechoslovakia", "He joined the League of Nations to keep peace"] } },
-      snap2: { proof: ["“The League sent no troops and set no punishments.”", "“The League's army forced Japan out of Manchuria.”", "“China refused to ask the League for any help.”"],
-        alt: { ask: "The League of Nations blamed Japan for taking Manchuria. What did Japan do next?", options: ["It quit the League and kept Manchuria", "It apologized and gave Manchuria back", "It paid China for all the land it took", "It let the League take over Manchuria"] } }
+      snap2: { proof: ["“Manchuria… had coal, iron, and farmland that Japan's growing empire wanted.”", "“Manchuria's people voted to become part of Japan's growing empire.”", "“The League of Nations sent its army to attack Japan's islands first.”"],
+        alt: { ask: "Japan's islands had little coal or iron. What did taking Manchuria give Japan?", options: ["Resources and land for its empire", "A promise of help from the League", "A peace treaty with all of China", "New colonies in Africa, like Italy"] } }
     },
     "WH.30": {
       snap: { proof: ["The stories go from losing a business, to an arrest, to a town that is “Jew Free”", "The passengers say life in Germany is getting better", "Everyone on the train is a German soldier going home"],
@@ -508,8 +508,8 @@ window.SHOWDOWN_ROUNDS = [
     "WH.33": {
       snap: { proof: ["Vladek says, “They took from us our names”", "The guards hand out new clothes and name tags", "The prisoners are allowed to keep their papers"],
         alt: { ask: "Guards took prisoners' clothes, hair, and papers, and gave them numbers. Why?", options: ["To strip away who they were so they were easier to control", "To keep the prisoners clean and healthy", "To help families find each other after the war", "To get the prisoners ready to be set free"] } },
-      snap2: { proof: ["Thurlow was 13 and a mile from the blast; Truman spoke from the White House", "Both of them were standing in Hiroshima that morning", "Thurlow was a soldier flying on the bomber"],
-        alt: { ask: "What does comparing Truman and Thurlow teach about total war?", options: ["Where you were shaped what you saw and remembered", "Leaders always suffer the most in a war", "Civilians are never in danger in a total war", "Everyone remembers a war in the same way"] } }
+      snap2: { proof: ["Truman says it will “shorten the agony of war”; Thurlow lost family and classmates", "Truman says Japan is about to invade; Thurlow says she never saw the flash", "Truman and Thurlow both say the bomb should never have been built at all"],
+        alt: { ask: "Why do Truman and Thurlow see the same bomb so differently?", options: ["He was a leader trying to end a war; she was a child who lived through it", "He was a child living in Hiroshima; she was a leader far away in Washington", "They both wanted the war to keep going for a few more years", "She was a soldier on the bomber; he was a civilian living in Japan"] } }
     }
   };
   (window.SHOWDOWN_ROUNDS || []).forEach(r => { const p = P[r.std]; if (!p) return; Object.assign(r.snap, p.snap); Object.assign(r.snap2, p.snap2); });
