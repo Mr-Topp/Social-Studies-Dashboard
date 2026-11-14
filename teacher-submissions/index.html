@@ -1556,9 +1556,12 @@ function renderGrid(list) {
   // "Look at another unit" only lists units from the part the class is on now (Fynn, 11-03): Part 1 units
   // (keys below zero) or Part 2 units, never both, and no "Other activities".
   const partUnits = nowUnit ? allUnits.filter(g => nowUnit < 0 ? g.unit < 0 : g.unit > 0) : allUnits;
-  const pick = gridUnitPick[tab], showKey = partUnits.some(g => g.unit === pick) ? pick : nowUnit;
+  // Classes with no green sheet (Civics) open on the latest unit that has turn-ins, with the same picker (Fynn, 11-14: "so im not having to scroll a ton").
+  const latestKey = nowUnit ? null : ((allUnits.filter(g => g.unit && list.some(r => g.ids.includes(r.assignmentId))).pop() || allUnits.filter(g => g.unit).pop() || {}).unit || null);
+  const homeKey = nowUnit || latestKey;
+  const pick = gridUnitPick[tab], showKey = partUnits.some(g => g.unit === pick) ? pick : homeKey;
   const units = showKey && allUnits.some(g => g.unit === showKey) ? allUnits.filter(g => g.unit === showKey) : allUnits;
-  const unitPicker = partUnits.length > 1 && units.length === 1 ? `<div class="unitpick"><label>Look at another unit <select id="gridUnitSel">${partUnits.map(g => `<option value="${g.unit}"${g.unit === units[0].unit ? " selected" : ""}>${safe(g.name)}${g.unit === nowUnit ? " (now)" : ""}</option>`).join("")}</select></label>${units[0].unit !== nowUnit && nowUnit ? ` <button class="light" id="gridUnitNow">Back to current unit</button>` : ""}</div>` : "";
+  const unitPicker = partUnits.length > 1 && units.length === 1 ? `<div class="unitpick"><label>Look at another unit <select id="gridUnitSel">${partUnits.map(g => `<option value="${g.unit}"${g.unit === units[0].unit ? " selected" : ""}>${safe(g.name)}${g.unit === nowUnit ? " (now)" : g.unit === latestKey ? " (latest)" : ""}</option>`).join("")}</select></label>${units[0].unit !== homeKey && homeKey ? ` <button class="light" id="gridUnitNow">${nowUnit ? "Back to current unit" : "Back to latest"}</button>` : ""}</div>` : "";
   $("out").innerHTML = KEYLINE + HOWTO + unitPicker +
     units.map(g => {
       const inUnit = list.filter(r => g.ids.includes(r.assignmentId));
@@ -1567,7 +1570,7 @@ function renderGrid(list) {
     <div class="gridwrap"><table><thead><tr><th class="student">Student</th>${g.ids.map(id => `<th${colEx(tab, id) ? ' class="exall"' : ""}>${REG[id] && REG[id].paper ? '<span class="papertag">📄 PAPER</span>' : ""}${safe(titleOf({ assignmentId: id }))}<button class="colmenu" data-a="${safe(id)}" aria-label="Options for ${safe(titleOf({ assignmentId: id }))}" title="Exempt everyone${REG[id] && REG[id].paper ? ", fill blanks, remove" : ""}">⋮</button>${colEx(tab, id) ? '<span class="extag">EX · everyone exempt</span>' : ""}${(REG[id] && REG[id].std || []).length ? `<small class="stdtag">${REG[id].std.map(stdCodeHover).join(" · ")}</small>` : ""}</th>`).join("")}<th>Unit so far</th></tr></thead>
     <tbody>${who.length ? who.map(s => `<tr>${studentCell(tab, s)}${g.ids.map(id => cell(s, id)).join("")}${unitSum(s, g.ids, inUnit)}</tr>`).join("") : `<tr><td class="student" colspan="${g.ids.length + 2}">No students yet. Add your class list (Needs attention → Edit class list) so everyone gets a box.</td></tr>`}</tbody></table></div></section>`;
     }).join("");
-  if ($("gridUnitSel")) $("gridUnitSel").onchange = e => { gridUnitPick[tab] = +e.target.value === nowUnit ? null : +e.target.value; render(); };
+  if ($("gridUnitSel")) $("gridUnitSel").onchange = e => { gridUnitPick[tab] = +e.target.value === homeKey ? null : +e.target.value; render(); };
   if ($("gridUnitNow")) $("gridUnitNow").onclick = () => { gridUnitPick[tab] = null; render(); };
   $("out").querySelectorAll("td.done button:not(.mk)").forEach(b => b.onclick = () => { view = "list"; render(); $("search").value = b.dataset.s; $("assignment").value = b.dataset.a; render(); });
   wireGridExtras(list);
