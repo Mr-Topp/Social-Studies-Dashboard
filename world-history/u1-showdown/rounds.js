@@ -48,16 +48,32 @@ window.SHOWDOWN_ROUNDS = [
         },
         build: {
           type: "sort",
-          ask: "Match each place to the way it was ruled.",
+          ask: "What happened in each place? Tap the best match.",
           labels: ["Direct rule", "Indirect rule", "Sphere of influence", "Annexation"],
+          // Fynn 11-14: "they won't understand what the words mean" → picked "meaning first, then word."
+          // Step 1 chips show these plain meanings (not the words). Step 2: cards flip to the real names.
+          // Step 3: one new case from "prove," names only (a miss brings up a different case).
+          mean: {
+            "Direct rule": "The empire's own officials run it",
+            "Indirect rule": "Local rulers stay but take orders",
+            "Sphere of influence": "The empire controls trade only",
+            "Annexation": "The land becomes part of the empire"
+          },
+          prove: [
+            { icon: "🇳🇬", t: "Northern Nigeria: Britain let local rulers keep their thrones, as long as they followed British orders.", a: "Indirect rule" },
+            { icon: "🇻🇳", t: "Vietnam: France sent its own governors, like Paul Doumer, to run the colony and set its taxes.", a: "Direct rule" },
+            { icon: "🇰🇷", t: "Korea, 1910: Japan made Korea part of Japan.", a: "Annexation" },
+            { icon: "🚂", t: "China, 1898: Germany won special rights to trade and build railroads in Shandong province. China's emperor still ruled there.", a: "Sphere of influence" }
+          ],
           rows: [
             { icon: "🇨🇩", t: "Belgian Congo after 1908: Belgian officials ran everything.", a: "Direct rule" },
             { icon: "👑", t: "India: some Indian princes kept their thrones, but they had to obey Britain.", a: "Indirect rule" },
             { icon: "🚢", t: "China: Britain, France, Germany, and Japan each controlled trade in their own zone.", a: "Sphere of influence" },
             { icon: "🌺", t: "Hawaiʻi, 1898: the U.S. made the islands part of the United States.", a: "Annexation" }
           ],
+          hint1: "Read each one again. Ask: who is really in charge there?",
           hint: "Direct = the empire's own officials. Indirect = local rulers take orders. Sphere = control of trade only. Annexation = the land becomes part of the empire.",
-          why: "Empires didn't all rule the same way: <b>direct rule</b>, <b>indirect rule</b>, <b>spheres of influence</b>, and <b>annexation</b>."
+          why: "Empires didn't all rule the same way: <b>direct rule</b> (the empire's own officials), <b>indirect rule</b> (local rulers take orders), <b>sphere of influence</b> (trade only), and <b>annexation</b> (the land becomes part of the empire)."
         },
         write: { label: "Pick ONE pair: France in Vietnam vs. Britain in Nigeria, OR the U.S. in Hawaiʻi vs. the U.S. in China. Explain one way the two were different.", stem: "In ___, the empire ruled by… but in ___, it…" }
       },
@@ -80,11 +96,22 @@ window.SHOWDOWN_ROUNDS = [
           imgCite: "Railroad bridge at Shinagawa, Tokyo, Meiji era (1868–1912). Day 3: Pacific Case Files.",
           ask: "How did each group respond to outside powers?",
           labels: ["Adapt", "Armed resistance", "Peaceful resistance"],
+          mean: {
+            "Adapt": "Copy outside ideas to stay strong",
+            "Armed resistance": "Fight back with weapons",
+            "Peaceful resistance": "Push back without weapons"
+          },
+          prove: [
+            { icon: "🛡️", t: "Ethiopia, 1896: Ethiopia's army beat Italy at the Battle of Adwa and stayed free.", a: "Armed resistance" },
+            { icon: "🎓", t: "Japan, 1871: leaders sent a team to the U.S. and Europe to study their schools, factories, and armies.", a: "Adapt" },
+            { icon: "🧂", t: "India, 1930: Gandhi led thousands on a march to the sea to protest a British tax on salt.", a: "Peaceful resistance" }
+          ],
           rows: [
             { icon: "🚂", t: "Japan, after 1868: railroads like the one in the photo, factories, and a modern army.", a: "Adapt" },
             { icon: "⚔️", t: "China, 1900: the Boxers attacked foreigners and Chinese Christians.", a: "Armed resistance" },
             { icon: "📝", t: "Hawaiʻi, 1897: over 21,000 Native Hawaiians signed petitions against annexation.", a: "Peaceful resistance" }
           ],
+          hint1: "Read each one again. Ask: did they copy, fight, or protest?",
           hint: "Adapt = copy outside ideas to stay strong. Armed = fight. Peaceful = protest without weapons.",
           why: "When empires pushed in, people <b>resisted</b> (by fighting or protesting) or <b>adapted</b> (copied to stay free)."
         },
@@ -97,7 +124,7 @@ window.SHOWDOWN_ROUNDS = [
           img: "../../day8-road-to-war/pages/p-05.jpg",
           alt: "1940s comic page: Chamberlain tries to bargain for peace with Hitler, then Germany invades Poland in 1939.",
           cite: "1940s comic, Day 8 reading (When Should Someone Step In?).",
-          ask: "At Munich in 1938, Chamberlain let Hitler take part of Czechoslovakia to keep the peace. In 1939, Hitler took the rest, then invaded Poland. What did appeasement teach Hitler?",
+          ask: "At Munich in 1938, Chamberlain let Hitler take part of Czechoslovakia to keep the peace. Giving in like that is called appeasement. In 1939, Hitler took the rest, then invaded Poland. What did appeasement teach Hitler?",
           options: ["Grabbing land worked, and no one would stop him", "Britain would declare war if he took any more land", "The League of Nations would send its army after him", "He should sign a lasting peace deal with Poland"],
           hint: "What happened every time Hitler took land before 1939?",
           why: "<b>Appeasement</b> (giving in to keep the peace) showed dictators that taking land worked. So they took more."
@@ -162,7 +189,7 @@ window.SHOWDOWN_ROUNDS = [
           ask: "Did each change come after World War I or after World War II?",
           labels: ["After WWI", "After WWII"],
           rows: [
-            { icon: "💸", t: "Germany must pay huge reparations and accept all the blame for the war.", a: "After WWI" },
+            { icon: "💸", t: "Germany must pay huge reparations (money for war damage) and accept all the blame for the war.", a: "After WWI" },
             { icon: "🏛️", t: "The League of Nations forms, but the U.S. never joins.", a: "After WWI" },
             { icon: "🏗️", t: "The U.S. helps rebuild Europe with billions of dollars (the Marshall Plan).", a: "After WWII" },
             { icon: "🌐", t: "The United Nations forms, and the U.S. is a leading member.", a: "After WWII" }
@@ -187,11 +214,11 @@ window.SHOWDOWN_ROUNDS = [
         build: {
           type: "sort",
           ask: "Match each new technology to what it did.",
-          labels: ["Machine gun", "Tank", "U-boat", "Radar"],
+          labels: ["Machine gun", "Tank", "U-boat (submarine)", "Radar"],
           rows: [
             { icon: "🪖", t: "WWI: defenders mowed down charges, so armies dug trenches and the war got stuck.", a: "Machine gun" },
             { icon: "🛞", t: "Late WWI: armored machines rolled over trenches and barbed wire.", a: "Tank" },
-            { icon: "🌊", t: "Sank ships carrying supplies. Attacks on U.S. ships helped pull America into WWI.", a: "U-boat" },
+            { icon: "🌊", t: "Sank ships carrying supplies. Attacks on U.S. ships helped pull America into WWI.", a: "U-boat (submarine)" },
             { icon: "🛩️", t: "1940: spotted German planes early so British fighters could meet them.", a: "Radar" }
           ],
           hint: "U-boat = German submarine. Radar = finding planes with radio waves.",
@@ -325,7 +352,7 @@ window.SHOWDOWN_ROUNDS = [
         why: "Don't mix up the wars. 1914: Belgium → Britain joins. 1939: Poland → WWII."
       },
       lightning: [
-        { q: "The MAIN causes of WWI: Militarism, Alliances, Imperialism, and…", options: ["Nationalism", "Neutrality", "Negotiation"] },
+        { q: "The MAIN causes of WWI: Militarism, Alliances, Imperialism, and… (strong pride in your own nation)", options: ["Nationalism", "Neutrality", "Negotiation"] },
         { q: "Appeasement means…", options: ["giving in to an aggressor to avoid war", "building a huge army to scare enemies", "a promise to defend an ally if it is attacked"] },
         { q: "What started World War II in Europe on Sept. 1, 1939?", options: ["Germany invaded Poland", "Japan bombed Pearl Harbor", "Germany took over Austria"] }
       ]
@@ -444,7 +471,7 @@ window.SHOWDOWN_ROUNDS = [
     },
     "WH.25": {
       snap: { proof: ["Doumer, the French governor, says his new “state monopolies” did the trick", "A Vietnamese emperor signs a brand-new tax law", "British ships unload their goods in Hanoi's port"],
-        alt: { ask: "France sent Paul Doumer to run Vietnam and set its taxes himself. Which kind of rule is that?", options: ["Direct rule", "Indirect rule", "A sphere of influence", "Self-rule by the Vietnamese"] } },
+        alt: { ask: "France sent Paul Doumer to run Vietnam and set its taxes himself. Which kind of rule is that?", options: ["Direct rule: the empire's own officials run it", "Indirect rule: local rulers stay but take orders", "A sphere of influence: control of trade only", "Self-rule: the Vietnamese run it themselves"] } },
       snap2: { proof: ["The box says Europe, the United States, and Japan colonized most of Asia, Africa, and Oceania", "The map key lists China as an empire with colonies", "The box says only Britain and France took colonies"],
         alt: { ask: "Based on the box above the map, was the new imperialism only a European thing?", options: ["No. The U.S. and Japan built empires too.", "Yes. Only European countries took colonies.", "No. China and India built the biggest empires.", "Yes. Only Britain and France took any land."] } }
     },
@@ -464,7 +491,7 @@ window.SHOWDOWN_ROUNDS = [
       snap: { proof: ["The stories go from losing a business, to an arrest, to a town that is “Jew Free”", "The passengers say life in Germany is getting better", "Everyone on the train is a German soldier going home"],
         alt: { ask: "First a business is lost. Then a relative is arrested. Then a town bans Jews. What does this order show?", options: ["Nazi persecution got worse one step at a time", "The Nazis treated Jewish families fairly at first", "Jewish families were only hurt after the war ended", "Persecution stayed exactly the same every year"] } },
       snap2: { proof: ["The officer shouts “It's all YOUR fault, this war!” at the Jewish prisoners", "The officer gives the Jewish prisoners extra food", "The prisoners are sent home because the war is over"],
-        alt: { ask: "Blaming Jews for the war, for money problems, for everything: which Nazi tool is this?", options: ["Scapegoating", "Appeasement", "Rationing", "Annexation"] } }
+        alt: { ask: "Blaming Jews for the war, for money problems, for everything: which Nazi tool is this?", options: ["Scapegoating (blaming one group)", "Appeasement (giving in to keep peace)", "Rationing (limiting food and supplies)", "Annexation (taking over land)"] } }
     },
     "WH.31": {
       snap: { proof: ["The crying child behind the pillar is labeled “1940 Class”", "The leaders are smiling and shaking hands with Germany", "The cartoon's title is “Peace Forever”"],

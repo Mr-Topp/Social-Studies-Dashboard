@@ -44,10 +44,11 @@
   SCR.push({ k: "write", h: 2 }, { k: "done" });
   const firstOfRound = i => SCR.findIndex(s => s.r === i);
 
-  const fresh = () => ({ v: 2, name: "", step: -1, score: 0, bets: {}, miss: {}, done: {}, power: {}, pick: {}, writing: {}, turnedIn: {}, lockUntil: 0, bots: null, skipped1: false, fixPhase: {} });
+  const fresh = () => ({ v: 2, name: "", step: -1, score: 0, bets: {}, miss: {}, done: {}, power: {}, pick: {}, writing: {}, turnedIn: {}, lockUntil: 0, bots: null, skipped1: false, fixPhase: {}, bp: {}, bx: {} });
   let st;
   try { st = JSON.parse(localStorage.getItem(KEY)); } catch (e) {}
   if (!st || st.v !== 2) st = fresh();
+  st.bp = st.bp || {}; st.bx = st.bx || {};   // Build It "meaning first" step + which new case is up
   try {
     const nowName = localStorage.getItem("site-student-name") || "";
     const short = window.classShortName || (x => x);
@@ -260,12 +261,23 @@
 
   function build(i) {
     const r = R[i], b = r.build, id = i + "b";
+    // MEANING FIRST, THEN THE WORD (Fynn 11-14: "they won't understand what the words mean").
+    // Builds with b.mean + b.prove run in 3 steps: 1) match each case to a plain meaning,
+    // 2) the meanings flip to their real names, 3) one new case, names only. All 3 = one bet check.
+    const mf = !!(b.mean && b.prove);
+    const phase = () => st.bp[i] || 1;
     const head = b.img ? source(b.img, b.imgAlt, b.imgCite) : "";
     shell(roundTop(i, "🧩 Build It"),
-      `<div class="${b.img ? "split" : ""}">${head}<div class="qside"><p class="qtag">🧩 Build It${b.type === "order" ? " · put it in order" : " · tap a label for each row"}</p><h3>${esc(b.ask)}</h3><div id="rows"></div><p class="fb" id="fb" aria-live="polite"></p><div id="after"></div></div></div>`);
+      `<div class="${b.img ? "split" : ""}">${head}<div class="qside"><p class="qtag" id="btag"></p><h3 id="bask"></h3><div id="rows"></div><p class="fb" id="fb" aria-live="polite"></p><div id="after"></div></div></div>`);
     const fb = $("fb"), rows = $("rows");
+    const setHead = (tag, ask) => { $("btag").textContent = "🧩 Build It · " + tag; $("bask").textContent = ask; };
+    const place = x => String(x.t).split(":")[0];
+    const curCase = () => b.prove[(st.bx[i] || 0) % b.prove.length];
+    setHead(b.type === "order" ? "put it in order" : mf ? "step 1 of 3 · what happened?" : "tap a label for each row", b.ask);
     function done() {
+      if (mf) setHead("done", "You matched what happened, then named it.");
       if (b.type === "order") rows.innerHTML = `<ol class="chain done">${b.rows.map(x => `<li><span aria-hidden="true">${x.icon}</span> ${esc(x.t)}</li>`).join("")}</ol>`;
+      else if (mf) { const c = curCase(); rows.innerHTML = b.rows.map(x => `<div class="row done named"><span class="ri" aria-hidden="true">${x.icon}</span><p>${esc(x.t)}<small>${esc(b.mean[x.a])}</small></p><span class="lab">${esc(x.a)}</span></div>`).join("") + `<div class="row done named"><span class="ri" aria-hidden="true">${c.icon}</span><p>${esc(c.t)}<small>New case. You named it.</small></p><span class="lab">${esc(c.a)}</span></div>`; }
       else rows.innerHTML = b.rows.map(x => `<div class="row done"><span class="ri" aria-hidden="true">${x.icon}</span><p>${esc(x.t)}</p><span class="lab">${esc(x.a)}</span></div>`).join("");
       fb.className = "fb good"; fb.innerHTML = "✓ " + b.why;
       $("after").innerHTML = nextBtn("Next: 🔎 Second Source"); wire();
@@ -274,7 +286,7 @@
       if (st.done[id]) return done();
       const picks = {};
       const labs = shuffle(b.labels);
-      rows.innerHTML = b.rows.map((x, n) => `<div class="row" data-n="${n}"><span class="ri" aria-hidden="true">${x.icon}</span><p>${esc(x.t)}</p><div class="chips">${labs.map(l => `<button type="button" class="chip" data-l="${esc(l)}">${esc(l)}</button>`).join("")}</div></div>`).join("") +
+      rows.innerHTML = b.rows.map((x, n) => `<div class="row" data-n="${n}"><span class="ri" aria-hidden="true">${x.icon}</span><p>${esc(x.t)}</p><div class="chips ${mf ? "mean" : ""}">${labs.map(l => `<button type="button" class="chip" data-l="${esc(l)}">${esc(mf ? b.mean[l] : l)}</button>`).join("")}</div></div>`).join("") +
         `<button type="button" class="go" id="checkBtn" disabled>Check my answers</button>`;
       rows.querySelectorAll(".row").forEach(rw => rw.querySelectorAll(".chip").forEach(c => c.onclick = () => {
         if (locked()) return;
@@ -286,10 +298,42 @@
       $("checkBtn").onclick = () => {
         if (locked()) return;
         const wrong = b.rows.filter((x, n) => picks[n] !== x.a).length;
+        if (!wrong && mf) { st.bp[i] = 2; save(); fb.className = "fb"; fb.textContent = ""; drawCards(); return; }
         if (!wrong) { right(id, i); done(); return; }
         rows.querySelectorAll("button").forEach(x => x.disabled = true);
-        miss(id, i); lockMsg(fb, `${wrong} of ${b.rows.length} ${wrong === 1 ? "row is" : "rows are"} off. ${b.hint}`, drawSort);
+        miss(id, i); lockMsg(fb, `${wrong} of ${b.rows.length} ${wrong === 1 ? "row is" : "rows are"} off. ${mf ? (b.hint1 || "Read each one again, slowly.") : b.hint}`, drawSort);
       };
+    }
+    // Step 2: every meaning flips over to show its real name.
+    function drawCards() {
+      if (st.done[id]) return done();
+      setHead("step 2 of 3 · learn the names", "Nice. Each one has a name. These names are on the test.");
+      rows.innerHTML = `<div class="wcards">${b.rows.map((x, n) => `<div class="wcard"><div class="wc-in" style="--d:${(0.5 + n * 0.5).toFixed(1)}s">
+          <div class="wc-f"><span class="wi" aria-hidden="true">${x.icon}</span><p>${esc(b.mean[x.a])}</p></div>
+          <div class="wc-b"><b>${esc(x.a)}</b><p>${esc(b.mean[x.a])}</p><small><span aria-hidden="true">${x.icon}</span> Like ${esc(place(x))}</small></div></div></div>`).join("")}</div>
+        <button type="button" class="go" id="proveBtn">I know the names. Test me →</button>`;
+      const pb = $("proveBtn");
+      if (!TT()) { pb.disabled = true; setTimeout(() => { if (pb.isConnected) pb.disabled = false; }, 1200 + b.rows.length * 500); }
+      pb.onclick = () => { st.bp[i] = 3; if (st.bx[i] == null) st.bx[i] = Math.floor(Math.random() * b.prove.length); save(); drawProve(); window.scrollTo(0, 0); };
+    }
+    // Step 3: one new case, names only. A miss shows the meanings again, then a different case comes up.
+    function drawProve() {
+      if (st.done[id]) return done();
+      if (st.bx[i] == null) st.bx[i] = Math.floor(Math.random() * b.prove.length);
+      const c = curCase();
+      setHead("step 3 of 3 · use the names", "New case. Which name fits?");
+      rows.innerHTML = `<div class="row case"><span class="ri" aria-hidden="true">${c.icon}</span><p>${esc(c.t)}</p></div>
+        <div class="opts names" id="pv">${shuffle(b.labels).map(l => `<button type="button" class="opt" data-l="${esc(l)}">${esc(l)}</button>`).join("")}</div>`;
+      rows.querySelectorAll("#pv .opt").forEach(btn => {
+        btn.disabled = locked();
+        btn.onclick = () => {
+          if (locked()) return;
+          if (btn.dataset.l === c.a) { right(id, i); done(); return; }
+          rows.querySelectorAll("button").forEach(x => x.disabled = true);
+          st.bx[i] = (st.bx[i] || 0) + 1;
+          miss(id, i); lockMsg(fb, "That name doesn't fit. " + b.hint + " Next you'll get a new case.", drawProve);
+        };
+      });
     }
     function drawOrder() {
       if (st.done[id]) return done();
@@ -310,7 +354,7 @@
       }
       paint();
     }
-    const draw = b.type === "order" ? drawOrder : drawSort;
+    const draw = b.type === "order" ? drawOrder : !mf ? drawSort : () => (phase() === 1 ? drawSort() : phase() === 2 ? drawCards() : drawProve());
     if (locked() && !st.done[id]) lockMsg(fb, b.hint, draw); else draw();
   }
 
@@ -532,7 +576,7 @@
         st.lockUntil = 0;
         if (s.k === "bet") { st.bets[s.r] = st.bets[s.r] || "safe"; st.step++; }
         else if (s.k === "snap") right(s.r + "s", s.r);
-        else if (s.k === "build") right(s.r + "b", s.r);
+        else if (s.k === "build") { const bb = R[s.r].build; if (bb.mean && bb.prove && !st.done[s.r + "b"] && (st.bp[s.r] || 1) < 3) st.bp[s.r] = (st.bp[s.r] || 1) + 1; else right(s.r + "b", s.r); }
         else if (s.k === "snap2") right(s.r + "t", s.r);
         else if (s.k === "fix") right(s.r + "f", s.r);
         else if (s.k === "light") [0, 1, 2].forEach(k => right(s.r + "l" + k, s.r, true));
