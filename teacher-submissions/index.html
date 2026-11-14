@@ -902,7 +902,9 @@ function linksHtml() {
     const isExamRow = r => r.summ || r.ids.some(id => !REG[id].alt && isTest(id)) || /summative|civics exam/i.test(r.title || "");
     // Movie days (Cinderella Man, The Truman Show) don't need a "No video yet" box: the movie is the video (Fynn, 2026-11-03).
     const isMovieRow = r => r.ids.some(id => /\(Movie\)|Cinderella Man|Truman Show/i.test(REG[id].title || ""));
-    const wantsVideo = r => (r.single || r.day > 0) && !(cal && r.day > cal.days) && !isExamRow(r) && !isMovieRow(r);
+    // Days whose activity is marked noVideo (e.g. WH U1 Days 12–13 Unit Showdown review) don't need one either (Fynn, 2026-11-14).
+    const noVideoRow = r => r.ids.some(id => REG[id].noVideo);
+    const wantsVideo = r => (r.single || r.day > 0) && !(cal && r.day > cal.days) && !isExamRow(r) && !isMovieRow(r) && !noVideoRow(r);
     // To-do tab extras (Fynn, 2026-11-03): days with no video yet, and online days in "Go through material again" units
     // he hasn't marked reviewed. "Reviewed" marks live in the Sheet (see REVIEWED).
     if (window.__todoSink) list.forEach(r => {
