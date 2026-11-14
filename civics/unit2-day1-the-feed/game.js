@@ -24,98 +24,79 @@ const OLD_API = 'https://fynn-class-assignment-submissions-20261024.neotboy.chat
 // lib = liberal belief · con = conservative belief · party = something an organized party DOES (not a belief).
 // Both belief sides use "should," "should not," quotes, and plain statements, so wording doesn't give it away.
 const ITEMS = [
+  // Belief cards follow the class Political Spectrum board: one or more cards for each belief listed on the left (liberal) and right (conservative) sides.
+  // trick: true = the speaker's party does not match the belief. A set never holds more than one trick card.
   // ---- liberal beliefs ----
-  { id: 'l1', side: 'lib', t: 'The government should make sure every American has health care, even if taxes go up.', why: 'More government help (health care for everyone) = liberal.' },
-  { id: 'l2', side: 'lib', t: '“Rich people and big companies should pay higher taxes to fund programs that help everyone.”', why: 'Higher taxes on the wealthy to pay for programs = liberal.' },
-  { id: 'l3', side: 'lib', t: 'There should be a background check on every gun sale, even private sales.', why: 'More gun laws = liberal.' },
-  { id: 'l4', side: 'lib', t: 'The government should pass strong laws to cut pollution and fight climate change.', why: 'More rules to protect the environment = liberal.' },
-  { id: 'l5', side: 'lib', t: '“Raise the minimum wage to at least $15 an hour.”', why: 'The government setting higher pay = liberal. (The national minimum is still $7.25.)' },
-  { id: 'l6', side: 'lib', t: 'Same-sex marriage should be protected by law.', why: 'Expanding legal protections for LGBTQ+ people = liberal.' },
-  { id: 'l7', side: 'lib', t: '“Abortion should stay legal. That choice belongs to the woman.”', why: 'Keeping abortion legal = liberal.' },
-  { id: 'l8', side: 'lib', t: 'Community college should be free, paid for with tax money.', why: 'The government paying for a service = liberal.' },
-  { id: 'l9', side: 'lib', t: 'Immigrants brought here illegally as little kids should get a way to become citizens.', why: 'A way to become citizens for these "Dreamers" = liberal.' },
-  { id: 'l10', side: 'lib', t: '“Prisons should focus on helping people change, not just punishing them.”', why: 'Helping people turn their lives around and fixing the causes of crime = liberal.' },
-  { id: 'l11', side: 'lib', t: 'The government should spend more on food stamps and other programs that fight poverty.', why: 'Government programs to reduce poverty = liberal.' },
-  { id: 'l12', side: 'lib', t: 'Big companies need more rules so they can\'t take advantage of workers or customers.', why: 'More rules on business = liberal.' },
-  { id: 'l13', side: 'lib', t: '“Society should change faster to give every group equal rights.”', why: 'Pushing for change and equality = liberal.' },
-  { id: 'l14', side: 'lib', t: '“Don\'t cut programs that help poor families just to save money.”', why: 'Protecting government help programs = liberal.' },
-  { id: 'l15', side: 'lib', t: 'Workers should have an easier time forming unions (worker groups that bargain for pay).', why: 'Supporting unions and workers\' rights = liberal.' },
-  { id: 'l16', side: 'lib', t: 'Laws should protect transgender people from discrimination in housing and health care.', why: 'Expanding legal protections for LGBTQ+ people = liberal.' },
-  { id: 'l17', side: 'lib', t: '“The government should help people pay off their student loans.”', why: 'Government help with costs = liberal.' },
-  { id: 'l18', side: 'lib', t: 'Every worker should get paid family leave by law, like time off with pay after having a baby.', why: 'The government requiring a benefit for workers = liberal.' },
-  { id: 'l19', side: 'lib', t: 'Voting should be easier, with a mail-in ballot for anyone who wants one.', why: 'Liberals focus more on making voting easier. Conservatives focus more on preventing fraud.' },
-  { id: 'l20', side: 'lib', t: 'The government should build more affordable housing for low-income families.', why: 'Government help with housing = liberal.' },
-  { id: 'l21', side: 'lib', t: 'Someone outside the police department should review it every time an officer uses serious force.', why: 'More outside checks on police = liberal.' },
-  { id: 'l22', side: 'lib', t: 'The U.S. should take in more people who are running from war in their countries.', why: 'Welcoming more refugees (people running from war) = liberal.' },
-  { id: 'l23', side: 'lib', t: 'A Republican farmer says: “The government needs to do a lot more about climate change.”', why: 'Tricky! He\'s a Republican, but THIS belief is liberal. A party label doesn\'t decide every belief.' },
-  { id: 'l24', side: 'lib', t: 'A Democratic state senator says: “People making over $400,000 a year should pay higher taxes.”', why: 'Tricky! A party member is talking, but the card is a BELIEF. Higher taxes on the rich = liberal.' },
-  { id: 'l25', side: 'lib', t: 'At a Democratic Party meeting, a mom stands up and says: “Every kid should get free school lunch.”', why: 'Tricky! It happened at a party meeting, but the card is her BELIEF. Government help = liberal.' },
-  { id: 'l26', side: 'lib', t: 'Election Day should be a national holiday so more people can vote.', why: 'Making voting easier = liberal.' },
-  { id: 'l27', side: 'lib', t: 'A candidate at a town hall says: “Families should get help from the government to pay for child care.”', why: 'Tricky! A candidate is talking, but the card is a BELIEF. Government help = liberal.' },
+  { id: 'lb1', side: 'lib', t: '“Everyone should be treated equally, no matter their race, gender, or who they love.”', why: 'Equality for all = liberal.' },
+  { id: 'lb2', side: 'lib', t: 'The government should pass laws that stop people from being treated unfairly.', why: 'Using government to make things more equal = liberal.' },
+  { id: 'lb3', side: 'lib', t: '“We should support the LGBT community and protect their rights.”', why: 'Supporting LGBT rights is part of equality for all = liberal.' },
+  { id: 'lb4', side: 'lib', t: 'Same-sex couples should be able to get married.', why: 'Equal marriage rights = liberal.' },
+  { id: 'lb5', side: 'lib', t: '“It should be easier for immigrants to come here and become citizens.”', why: 'Easier immigration = liberal.' },
+  { id: 'lb6', side: 'lib', t: 'People brought here as little kids should get a way to become citizens.', why: 'More access for immigrants = liberal.' },
+  { id: 'lb7', side: 'lib', t: 'The government should make sure everyone has health care.', why: 'More government help (health care for everyone) = liberal.' },
+  { id: 'lb8', side: 'lib', t: '“The national government, not each state, should make the big rules.”', why: 'More power for the national government = liberal.' },
+  { id: 'lb9', side: 'lib', t: 'The government should spend more to help poor families.', why: 'More government help = liberal.' },
+  { id: 'lb10', side: 'lib', t: '“Rich people should pay higher taxes.”', why: 'Higher taxes on the wealthy = liberal.' },
+  { id: 'lb11', side: 'lib', t: 'Tax big companies more to pay for programs that help everyone.', why: 'Higher taxes on the wealthy to pay for programs = liberal.' },
+  { id: 'lb12', side: 'lib', t: '“Abortion should stay legal.”', why: 'Abortion access = liberal.' },
+  { id: 'lb13', side: 'lib', t: '“The choice to have an abortion belongs to the woman, not the government.”', why: 'Abortion access = liberal.' },
+  { id: 'lb14', side: 'lib', t: '“We need stricter gun laws.”', why: 'Stricter gun laws = liberal.' },
+  { id: 'lb15', side: 'lib', t: 'Everyone who buys a gun should have to pass a background check.', why: 'More gun laws = liberal.' },
+  { id: 'lb16', side: 'lib', t: 'The government should make laws to cut pollution.', why: 'More rules to protect the environment = liberal.' },
+  { id: 'lb17', side: 'lib', t: '“Protect the environment, even if it costs businesses money.”', why: 'Protecting the environment = liberal.' },
+  { id: 'lb18', side: 'lib', t: 'Big companies need more rules so they treat workers fairly.', why: 'More rules for businesses = liberal.' },
+  { id: 'lb19', side: 'lib', t: '“Raise the minimum wage.”', why: 'The government making businesses pay more is a rule on business = liberal.' },
+  { id: 'lb20', side: 'lib', t: '“Society needs to change fast to be more fair.”', why: 'Quick social change = liberal.' },
+  { id: 'lb21', side: 'lib', t: '“When something is unfair, change it now. Don\'t wait.”', why: 'Quick social change = liberal.' },
+  { id: 'lb22', side: 'lib', trick: true, t: 'A Republican farmer says: “We need more laws to protect the environment.”', why: 'Tricky! He\'s a Republican, but THIS belief is liberal. A party label doesn\'t decide every belief.' },
   // ---- conservative beliefs ----
-  { id: 'c1', side: 'con', t: '“Government should stay small and out of people\'s lives.”', why: 'Smaller government = conservative.' },
-  { id: 'c2', side: 'con', t: '“Cut taxes. People should keep more of the money they earn.”', why: 'Lower taxes = conservative.' },
-  { id: 'c3', side: 'con', t: 'People who follow the law have a right to own guns, and the government shouldn\'t make that harder.', why: 'Protecting gun rights and fewer gun laws = conservative.' },
-  { id: 'c4', side: 'con', t: 'Businesses should face fewer rules so the economy can grow.', why: 'Fewer rules on business = conservative.' },
-  { id: 'c5', side: 'con', t: 'The government should spend more to keep the U.S. military the strongest in the world.', why: 'A strong military = conservative. (Yes, it says "spend more," but on defense.)' },
-  { id: 'c6', side: 'con', t: '“Traditional marriage and family values should be protected.”', why: 'Protecting traditional values = conservative.' },
-  { id: 'c7', side: 'con', t: 'Abortion should be banned or strictly limited to protect unborn life.', why: 'Limiting abortion = conservative.' },
-  { id: 'c8', side: 'con', t: '“People should take care of themselves, not depend on government help.”', why: 'Taking care of yourself (personal responsibility) = conservative.' },
-  { id: 'c9', side: 'con', t: 'The government should build a border wall and hire more border agents.', why: 'Strict border security = conservative.' },
-  { id: 'c10', side: 'con', t: '“Give criminals longer, tougher sentences to keep our streets safe.”', why: 'Tough on crime, law and order = conservative.' },
-  { id: 'c11', side: 'con', t: 'Police officers should keep their legal protection from being sued over split-second decisions.', why: 'Protecting police from lawsuits (called qualified immunity) = conservative.' },
-  { id: 'c12', side: 'con', t: 'Parents should be able to use tax money to send their kids to private or religious schools.', why: 'School choice = conservative. (Iowa passed a school choice law in 2023.)' },
-  { id: 'c13', side: 'con', t: '“Change should happen slowly. Traditions are there for a reason.”', why: 'Slow change and protecting tradition = conservative.' },
-  { id: 'c14', side: 'con', t: 'State governments, not the national government in Washington, D.C., should make most of the big decisions.', why: 'Less power for the national government = conservative.' },
-  { id: 'c15', side: 'con', t: 'The U.S. should drill for more oil and gas here at home.', why: 'More energy production with fewer limits = conservative.' },
-  { id: 'c16', side: 'con', t: 'Adults who get government help (welfare) and can work should have to work or look for a job.', why: 'Requiring work and taking care of yourself = conservative.' },
-  { id: 'c17', side: 'con', t: '“Don\'t raise the minimum wage. Let businesses decide what to pay.”', why: 'Less government in the economy = conservative.' },
-  { id: 'c18', side: 'con', t: 'Voters should have to show a photo ID before they vote.', why: 'Voter ID laws = conservative. (Iowa requires an ID to vote, like a driver\'s license or a free Iowa voter ID card.) Conservatives focus more on preventing fraud. Liberals worry ID rules make voting harder for some people.' },
-  { id: 'c19', side: 'con', t: 'Prayer and religion should have a bigger place in public schools.', why: 'More religion in public life = conservative.' },
-  { id: 'c20', side: 'con', t: '“Climate rules hurt farmers and businesses. The economy should come first.”', why: 'Economy first, fewer environmental rules = conservative.' },
-  { id: 'c21', side: 'con', t: '“The government shouldn\'t pay for anybody\'s college. That\'s up to families.”', why: 'Less government spending = conservative.' },
-  { id: 'c22', side: 'con', t: 'Cut government spending, even on popular programs, so the national debt stops growing.', why: 'Smaller government and less spending = conservative.' },
-  { id: 'c23', side: 'con', t: 'A Democrat who works at a union plant says: “Gun laws are strict enough. Leave my rifles alone.”', why: 'Tricky! He\'s a Democrat, but THIS belief is conservative. A party label doesn\'t decide every belief.' },
-  { id: 'c24', side: 'con', t: 'A Republican county chair says: “Iowa should get rid of the state income tax.”', why: 'Tricky! A party leader is talking, but the card is a BELIEF. Cutting taxes = conservative.' },
-  { id: 'c26', side: 'con', t: 'People should have to show proof they are U.S. citizens when they register to vote.', why: 'Stricter voting rules to prevent fraud = conservative.' },
-  { id: 'c27', side: 'con', t: 'A candidate at a rally says: “Cut regulations on Iowa farms and get the government out of the way.”', why: 'Tricky! A candidate is talking, but the card is a BELIEF. Fewer rules on business = conservative.' },
-  { id: 'c25', side: 'con', t: 'At a Republican Party meeting, a dad says: “Parents, not the government, should decide what their kids learn about.”', why: 'Tricky! It happened at a party meeting, but the card is his BELIEF. Parents\' rights and less government = conservative.' },
+  { id: 'cn1', side: 'con', t: '“Traditional marriage and family values should be protected.”', why: 'Traditional values = conservative.' },
+  { id: 'cn2', side: 'con', t: '“Faith and religion should play a bigger part in American life.”', why: 'Traditional values = conservative.' },
+  { id: 'cn3', side: 'con', t: '“Government should be small and stay out of people\'s lives.”', why: 'Less government = conservative.' },
+  { id: 'cn4', side: 'con', t: 'Each state, not the national government, should make most of the big rules.', why: 'States\' rights (less national government) = conservative.' },
+  { id: 'cn5', side: 'con', t: '“People should take care of themselves, not count on government help.”', why: 'Less government help = conservative.' },
+  { id: 'cn6', side: 'con', t: 'The government should spend less money.', why: 'Smaller government = conservative.' },
+  { id: 'cn7', side: 'con', t: '“Cut taxes. People should keep more of the money they earn.”', why: 'Low taxes = conservative.' },
+  { id: 'cn8', side: 'con', t: 'Taxes should be low for everyone, including businesses.', why: 'Low taxes = conservative.' },
+  { id: 'cn9', side: 'con', t: 'The U.S. should have stricter rules about who can come into the country.', why: 'Strict immigration = conservative.' },
+  { id: 'cn10', side: 'con', t: '“Build a border wall and hire more border agents.”', why: 'Strict immigration = conservative.' },
+  { id: 'cn11', side: 'con', t: '“Abortion should be banned or strictly limited.”', why: 'Restricting abortion = conservative.' },
+  { id: 'cn12', side: 'con', t: 'Laws should protect unborn babies.', why: 'Restricting abortion to protect unborn life = conservative.' },
+  { id: 'cn13', side: 'con', t: '“People have a right to own guns. Don\'t make it harder.”', why: 'Stronger gun rights = conservative.' },
+  { id: 'cn14', side: 'con', t: 'There should be fewer gun laws, not more.', why: 'Stronger gun rights = conservative.' },
+  { id: 'cn15', side: 'con', t: 'The U.S. should spend more on a strong military.', why: 'A strong military = conservative.' },
+  { id: 'cn16', side: 'con', t: '“Give criminals tougher sentences to keep our streets safe.”', why: 'Law and order = conservative.' },
+  { id: 'cn17', side: 'con', t: '“Back the police. Law and order comes first.”', why: 'Law and order = conservative.' },
+  { id: 'cn18', side: 'con', t: 'Businesses should have fewer rules so they can grow.', why: 'Fewer rules for businesses = conservative.' },
+  { id: 'cn19', side: 'con', t: '“Don\'t raise the minimum wage. Let businesses decide what to pay.”', why: 'Fewer rules for businesses = conservative.' },
+  { id: 'cn20', side: 'con', t: '“Change should happen slowly. Traditions are there for a reason.”', why: 'Slow social change = conservative.' },
+  { id: 'cn21', side: 'con', t: '“Don\'t rush big changes. What worked before still works.”', why: 'Slow social change = conservative.' },
+  { id: 'cn22', side: 'con', trick: true, t: 'A Democrat says: “Gun laws are strict enough. Leave my rifles alone.”', why: 'Tricky! He\'s a Democrat, but THIS belief is conservative. A party label doesn\'t decide every belief.' },
   // ---- party actions (an organized group running candidates / trying to win elections) ----
-  { id: 'p1', side: 'party', t: 'The Democratic Party holds a huge meeting (a national convention) to pick its candidate for president.', why: 'Picking candidates is something a party DOES. It isn\'t a belief.' },
-  { id: 'p2', side: 'party', t: 'The Republican Party raises $50 million for TV ads before Election Day.', why: 'Raising money to win elections = party.' },
-  { id: 'p3', side: 'party', t: 'Iowa Republicans hold caucuses (neighborhood party meetings) in school gyms across the state.', why: 'Caucuses are meetings a party runs.' },
-  { id: 'p4', side: 'party', t: 'A paid organizer texts 500 volunteers: “Knocking doors Saturday. We need to win this seat.”', why: 'Organizing volunteers = party.' },
-  { id: 'p5', side: 'party', t: 'The Iowa Democratic Party turns in its list of candidates so they show up on the ballot.', why: 'Getting its candidates on the ballot = party. (On Iowa ballots, each candidate\'s party is printed next to their name.)' },
-  { id: 'p6', side: 'party', t: 'The Libertarian Party collects signatures to get its candidate on the Iowa ballot.', why: 'Getting candidates on the ballot = party. Smaller parties (third parties) are parties too.' },
-  { id: 'p7', side: 'party', t: 'National party leaders pick a city to host the big convention where they will name their candidate for president.', why: 'Leaders running party events = party.' },
-  { id: 'p8', side: 'party', t: 'Volunteers knock on 10,000 doors to help their side\'s candidates win in November.', why: 'Campaign work = party.' },
-  { id: 'p9', side: 'party', t: 'The Republican Party of Iowa picks a new state leader (the state chair).', why: 'Choosing leaders = party.' },
-  { id: 'p10', side: 'party', t: 'Party members meet and vote to write their platform: the official list of the party\'s goals.', why: 'Tricky! A platform is full of beliefs, but writing it at a convention is something a party DOES.' },
-  { id: 'p11', side: 'party', t: 'State leaders ask a local mayor to run for Congress, and promise money and volunteers if she says yes.', why: 'Recruiting candidates = party.' },
-  { id: 'p12', side: 'party', t: 'The Green Party runs a candidate for governor.', why: 'Running candidates = party, even a small one.' },
-  { id: 'p13', side: 'party', t: 'The Democratic Party holds a primary so its voters can pick who runs for U.S. Senate.', why: 'Primaries pick a party\'s candidates. (Iowa holds its primary in June.)' },
-  { id: 'p14', side: 'party', t: 'Republicans in the Iowa House meet and pick their leader.', why: 'Organizing its members in government = party.' },
-  { id: 'p15', side: 'party', t: 'Workers at a State Fair booth sign up volunteers to campaign for their candidates this fall.', why: 'Recruiting volunteers for its candidates = party.' },
-  { id: 'p16', side: 'party', t: '“Vote for our candidates on Tuesday!” (a flyer from the Iowa Democratic Party)', why: 'Campaigning for its own candidates = party.' },
-  { id: 'p17', side: 'party', t: 'The Republican Party texts voters: “Our candidate will cut your taxes. Vote Tuesday!”', why: 'Tricky! It mentions a belief, but this is a party campaigning to win an election.' },
-  { id: 'p19', side: 'party', t: 'Volunteers set up chairs and sign-in sheets for a caucus in a Marion school gym.', why: 'Running caucuses is something a party DOES.' },
-  { id: 'p20', side: 'party', t: 'Members pick a candidate for governor, print 5,000 yard signs, and ask people to vote for her.', why: 'Picking a candidate and campaigning = party.' },
-  { id: 'p21', side: 'party', t: 'A new group gets enough votes in an Iowa election to become an official political party.', why: 'Running candidates and winning votes = party.' },
-  { id: 'p22', side: 'party', t: '“Join us. We pick candidates, raise money, and help them win.” (a sign-up sheet)', why: 'That\'s basically the definition of a party.' },
-  { id: 'p23', side: 'party', t: 'The county chair says: “We should knock on every door in Linn County this Saturday.”', why: 'Tricky! It says "should," but it\'s about campaigning to win. That\'s a party action.' },
-  { id: 'p24', side: 'party', t: '“We should have a candidate on every ballot in Iowa this year,” the leaders decide, and they start calling people to run.', why: 'Tricky! It says "should," but recruiting candidates is something a party DOES.' },
-  { id: 'p18', side: 'party', t: 'The Democratic Party pays for an ad saying its candidate will protect health care.', why: 'Tricky! There\'s a belief in the ad, but running ads for its candidate = party.' }
+  { id: 'pt1', side: 'party', t: 'The Democratic Party picks who will run for president.', why: 'Picking candidates is something a party DOES. It isn\'t a belief.' },
+  { id: 'pt2', side: 'party', t: 'The Republican Party raises money for TV ads.', why: 'Raising money to win elections = party.' },
+  { id: 'pt3', side: 'party', t: 'Volunteers knock on doors to get votes for their party\'s candidate.', why: 'Working to win votes for a candidate = party.' },
+  { id: 'pt4', side: 'party', t: '“Vote for our candidates on Tuesday!” (a Democratic Party flyer)', why: 'Campaigning for its own candidates = party.' },
+  { id: 'pt5', side: 'party', t: 'The Republican Party texts voters: “Vote Tuesday!”', why: 'Getting people to vote for its side = party.' },
+  { id: 'pt6', side: 'party', t: 'Iowa Republicans meet in school gyms to pick their candidate.', why: 'Picking a candidate is something a party DOES. (In Iowa, these meetings are called caucuses.)' },
+  { id: 'pt7', side: 'party', t: 'A party asks a local mayor to run for Congress.', why: 'Finding people to run for office = party.' },
+  { id: 'pt8', side: 'party', t: 'A party prints yard signs for its candidate for governor.', why: 'Campaigning for a candidate = party.' },
+  { id: 'pt9', side: 'party', t: 'The Democratic Party pays for an ad for its candidate.', why: 'Paying for ads to win an election = party.' },
+  { id: 'pt10', side: 'party', t: '“Join us. We pick candidates and help them win.” (a party sign-up sheet)', why: 'That\'s basically the definition of a party.' }
 ];
 const ITEM = Object.fromEntries(ITEMS.map(i => [i.id, i]));
 const SIDE = { lib: { b: '🔵 LIBERAL', s: 'liberal belief' }, con: { b: '🔴 CONSERVATIVE', s: 'conservative belief' }, party: { b: '🏛️ PARTY', s: 'party action' } };
 const DECK_SIZE = 20, PASS = 16, MAX_MISS = DECK_SIZE - PASS; // need 80% right to move on
-// Random 20-card set: 5–7 party cards, the rest split close to even between liberal and conservative.
-// Unseen cards come first. No type shows up more than 3 times in a row.
+// Random 20-card set: 3–4 party cards, the rest split evenly between liberal and conservative.
+// Unseen cards come first. No type shows up more than 3 times in a row. At most one trick card per set.
 function newDeck(seen) {
   seen = seen || {};
   const pool = side => shuffle(ITEMS.filter(i => i.side === side && !seen[i.id]).map(i => i.id)).concat(shuffle(ITEMS.filter(i => i.side === side && seen[i.id]).map(i => i.id)));
-  const nP = 5 + Math.floor(Math.random() * 3), rest = DECK_SIZE - nP, nL = Math.floor(rest / 2) + (Math.random() < .5 ? 0 : (rest % 2 ? 1 : (Math.random() < .5 ? -1 : 1)));
-  const pick = pool('lib').slice(0, nL).concat(pool('con').slice(0, rest - nL), pool('party').slice(0, nP));
+  const nP = 3 + Math.floor(Math.random() * 2), rest = DECK_SIZE - nP, nL = Math.floor(rest / 2) + (rest % 2 && Math.random() < .5 ? 1 : 0);
+  let trickUsed = false;
+  const take = (side, n) => { const out = []; for (const id of pool(side)) { if (out.length >= n) break; if (ITEM[id].trick) { if (trickUsed) continue; trickUsed = true; } out.push(id); } return out; };
+  const got = {}; (Math.random() < .5 ? ['lib', 'con'] : ['con', 'lib']).forEach(s => { got[s] = take(s, s === 'lib' ? nL : rest - nL); });
+  const pick = got.lib.concat(got.con, take('party', nP));
   for (let k = 0; k < 300; k++) {
     const d = shuffle(pick); let run = 1, ok = true;
     for (let i = 1; i < d.length; i++) { run = ITEM[d[i]].side === ITEM[d[i - 1]].side ? run + 1 : 1; if (run > 3) { ok = false; break; } }
@@ -177,6 +158,11 @@ const fresh = () => ({ v: 3, phase: 'title', primer: 0, name: '', room: '', queu
 let st;
 try { st = JSON.parse(localStorage.getItem(KEY)); } catch (e) {}
 if (!st || st.v !== 3) st = fresh();
+// If a saved Round 1 set holds cards that are no longer in the game, deal a new set so nothing breaks.
+if (Array.isArray(st.queue) && st.queue.some(id => !ITEM[id])) {
+  if (['title', 'intro', 'r1'].includes(st.phase)) { st.queue = newDeck(st.seenIds); st.att = { n: (st.att && st.att.n) || 1, right: 0, seen: 0 }; st.streak = 0; st.r1Next = false; if (typeof st.r1Base === 'number') st.score = st.r1Base; }
+  else st.queue = st.queue.filter(id => ITEM[id]);
+}
 const save = () => { try { localStorage.setItem(KEY, JSON.stringify(st)); } catch (e) {} };
 
 const tray = $('#tray');
