@@ -440,11 +440,8 @@ function pFinal() {
   tray.classList.add('final-tray');
   tray.innerHTML = `<div class="final"><div><p class="eyebrow">FINAL RESULTS</p><p class="big">★ ${st.score.toLocaleString()}</p><p class="jarline">#${rank} in the class race · best streak 🔥${st.best}</p>
     <ul><li>Call It: <b>passed ✓</b></li><li>Voter ideologies (first try): <b>${t.ideo[0]} of ${t.ideo[1]}</b></li><li>Voter parties (first try): <b>${t.party[0]} of ${t.party[1]}</b></li><li>Same Belief, Different Party: <b>${t.why[0]} of ${t.why[1]}</b></li></ul>
-    <p class="note">✍️ Last step: 2 short answers, then turn in. Use the starters.</p></div>
-    <div>${PROMPTS.map(p => `<div class="pblock${p.optional ? ' opt' + (st.writing.crit || st.showCrit ? ' open' : '') : ''}">${p.optional ? '<button class="optbtn" id="optBtn" type="button">⭐ Want +300? Try the Go deeper question (optional)</button>' : ''}<label for="w_${p.id}" class="pl" style="font-weight:850;margin:10px 0 2px${p.optional ? ';color:#8a6400' : ''}">${esc(p.label)}</label><p class="stem">Starter: ${esc(p.stem)}</p><textarea id="w_${p.id}">${esc(st.writing[p.id] || '')}</textarea></div>`).join('')}
-    <button class="primary go" id="sendBtn">${st.turnedIn ? 'Turn in again' : 'Turn in'}</button><p class="fb ${st.turnedIn ? 'good' : ''}" id="sendMsg">${st.turnedIn ? 'Turned in! You can fix your answers and turn in again.' : ''}</p></div></div>`;
-  PROMPTS.forEach(p => $('#w_' + p.id).addEventListener('input', e => { st.writing[p.id] = e.target.value; save(); }));
-  $('#optBtn').onclick = () => { st.showCrit = true; save(); $('.pblock.opt').classList.add('open'); $('#w_crit').focus(); };
+    <p class="note">📤 Last step: turn in your results.</p></div>
+    <div><button class="primary go" id="sendBtn">${st.turnedIn ? 'Turn in again' : 'Turn in'}</button><p class="fb ${st.turnedIn ? 'good' : ''}" id="sendMsg">${st.turnedIn ? 'Turned in! You can turn in again if you need to.' : ''}</p></div></div>`;
   $('#sendBtn').onclick = turnIn; pushScore();
 }
 const hasWord = (t, w) => new RegExp('\\b' + w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + (w.length > 4 ? '' : '(s|es|ed|ing)?\\b')).test(t);
@@ -488,17 +485,15 @@ function checkWriting(p, v) {
 }
 async function turnIn() {
   const msg = $('#sendMsg');
-  for (const p of (isTestT() ? [] : PROMPTS)) { const v = ($('#w_' + p.id).value || '').trim(); const bad = checkWriting(p, v); if (bad) { msg.className = 'fb oops'; msg.textContent = bad; $('#w_' + p.id).focus(); return; } }
   const t = tally(), bs = bySide();
   const answers = { 'Standard': 'SS.9-12.Gov.12', 'First-try correct': t.tot[0] + ' of ' + t.tot[1] + ' (Call It set 1 + voter ideologies + same belief/different party)', 'First-try by standard': 'Gov.12: ' + t.tot[0] + ' of ' + t.tot[1],
-    'Suggested level (check the writing)': (() => { const pct = t.tot[1] ? t.tot[0] / t.tot[1] : 0, l4 = (((($('#w_crit') || {}).value || '').trim())); return (pct >= .75 ? 'Level 3' : pct >= .5 ? 'Level 2' : 'Level 1') + ' from first-try ' + Math.round(pct * 100) + '%' + (l4 ? ' · Level 4 attempted, read the challenge answer' : ''); })(),
+    'Suggested level': (() => { const pct = t.tot[1] ? t.tot[0] / t.tot[1] : 0; return (pct >= .75 ? 'Level 3' : pct >= .5 ? 'Level 2' : 'Level 1') + ' from first-try ' + Math.round(pct * 100) + '%'; })(),
     'First-try by part': 'Call It set 1: ' + t.sort[0] + ' right, ' + (t.sort[1] - t.sort[0]) + ' missed' + (t.sort[1] < DECK_SIZE ? ' (stopped at card ' + t.sort[1] + ')' : '') + ' (liberal ' + bs.lib.join('/') + ', conservative ' + bs.con.join('/') + ', party ' + bs.party.join('/') + ') · Voter ideology ' + t.ideo.join('/') + ' · Voter party ' + t.party.join('/') + ' · Same belief, different party ' + t.why.join('/'), 'Game points (not a grade)': String(st.score + (st.turnedIn ? 0 : 200 + (((($('#w_crit') || {}).value || '').trim()) ? 300 : 0))) };
   answers['Call It sets'] = (st.attempts || 1) + (st.attempts > 1 ? ' sets played to reach 80%' : ' (passed first set)') + ((st.attempts || 1) >= 3 ? ' ⚠️ check in with this student' : '') + (st.resets ? ' · used Start over ' + st.resets + 'x' : '');
   const missed = ITEMS.filter(i => st.r1[i.id] && st.r1[i.id].wrong).map(i => `"${i.t.replace(/[“”]/g, '')}" (is ${SIDE[i.side].s}; picked ${SIDE[st.r1[i.id].pick] ? SIDE[st.r1[i.id].pick].s : '?'})`);
   answers['Call It misses'] = missed.length ? missed.join('; ') : 'none';
   VOTERS.forEach(v => { const r = st.r2[v.id] || {}; answers['Voter · ' + v.name] = IDEO[v.ideo].b.replace(/^\S+ /, '').toLowerCase() + (r.iw ? ' (after ' + r.iw + ' wrong)' : ' (first try)') + ' → ' + PARTY[v.party] + (r.pw ? ' (after ' + r.pw + ' wrong)' : ' (first try)'); });
   CASES.forEach((c, i) => { const r = st.r3[i] || {}; answers['Why · ' + c.b.name] = REASONS[c.right].replace(/^\S+ /, '') + (r.wrong ? ' (after ' + r.wrong + ' wrong)' : ' (first try)'); });
-  PROMPTS.forEach(p => answers['Writing: ' + p.short] = ($('#w_' + p.id).value || '').trim() || (p.optional ? '(skipped)' : ''));
   $('#sendBtn').disabled = true; msg.className = 'fb'; msg.textContent = 'Sending your work…';
   try {
     const res = await classTurnIn(OLD_API, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ studentName: st.name, assignmentId: ASSIGN, assignmentTitle: 'Government Unit 2 · Day 1 · Decision Desk (Ideology vs. Party)', answers }) });
