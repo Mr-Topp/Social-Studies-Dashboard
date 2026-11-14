@@ -20,7 +20,7 @@
     1: { id: "wh-u1-d12-showdown", title: "World History · Unit 1 · Day 12 · Unit Showdown: Halftime (Rounds 1–4: WH.24, 25, 27, 29)", from: 0, to: 4, name: "Halftime" },
     2: { id: "wh-u1-d13-showdown", title: "World History · Unit 1 · Day 13 · Unit Showdown: Final (Rounds 5–8: WH.30, 31, 32, 33)", from: 4, to: 8, name: "Final" }
   };
-  const LOCK = 5, LIGHT_LOCK = 3, LIGHT_PTS = 50, WRITE_PTS = 250, BANK_PTS = 100, STEAL_PTS = 150;
+  const LOCKS = [5, 15, 30], LIGHT_LOCKS = [3, 10, 20], LIGHT_PTS = 50, WRITE_PTS = 250, BANK_PTS = 100, STEAL_PTS = 150;
   const BETS = {
     safe: { icon: "🛡️", name: "Play it safe", win: 100, lose: 0, line: "+100 per first-try answer. No risk." },
     bold: { icon: "🔥", name: "Go bold", win: 200, lose: 100, line: "+200 per first-try answer. −100 per miss." },
@@ -140,7 +140,9 @@
       if (!isLight) { const b = BETS[st.bets[r] || "safe"]; if (b.lose) addPts(-b.lose); }
       try { window.classFirstTry && window.classFirstTry.wrong(); } catch (e) {}
     }
-    st.lockUntil = Date.now() + (TT() ? 0 : (isLight ? LIGHT_LOCK : LOCK) * 1000); save(); hud();
+    // Each extra miss on the same item locks longer (Fynn 11-14: stop click-through): 5s → 15s → 30s.
+    const steps = isLight ? LIGHT_LOCKS : LOCKS;
+    st.lockUntil = Date.now() + (TT() ? 0 : steps[Math.min(st.miss[id], steps.length) - 1] * 1000); save(); hud();
   }
   function lockMsg(fb, hint, redraw) {
     const tick = () => {
@@ -210,21 +212,50 @@
     const cards = Object.keys(BETS).map(k => { const b = BETS[k]; return `<button type="button" class="betcard ${k}" data-k="${k}"><span class="bi" aria-hidden="true">${b.icon}</span><b>${b.name}</b><span>${b.line}</span></button>`; }).join("");
     shell(roundTop(i, "Place your bet"),
       `<p class="ican">🎯 ${esc(r.ican)}</p>
-       <p class="betq"><b>How sure are you on this topic?</b> Your bet counts on 4 challenges: two sources, Build It, and Fix It. Bet big if you know it. Play safe if you don't.</p>
+       <p class="betq"><b>How sure are you on this topic?</b> Your bet counts on 4 challenges: two sources (answer + proof), Build It, and Fix It. Bet big if you know it. Play safe if you don't.</p>
        <div class="bets">${cards}</div>`, "betscreen");
     app.querySelectorAll(".betcard").forEach(b => b.onclick = () => { st.bets[i] = b.dataset.k; next(); });
   }
 
+  // PROVE IT (Fynn 11-14): pick an answer AND the detail that proves it; the pair counts only if
+  // both are right. After a miss the other version of the question (alt) comes up, so kids
+  // can't just work through the same buttons. Feedback never says which half was wrong.
   function snapLike(i, s, id, tag, nextLabel) {
     const left = s.img ? source(s.img, s.alt, s.cite, s.quote) : `<div class="file">${s.file}</div>`;
     shell(roundTop(i, tag),
-      `<div class="split">${left}<div class="qside"><p class="qtag">${tag} · use the source</p><h3>${s.ask}</h3><div class="opts" id="opts"></div><p class="fb" id="fb" aria-live="polite"></p><div id="after"></div></div></div>`);
-    const fb = $("fb"), box = $("opts");
-    mc(box, fb, id, i, s.options, s.hint, () => {
-      box.innerHTML = `<p class="answered">✓ ${esc(s.options[0])}</p>`;
+      `<div class="split">${left}<div class="qside"><p class="qtag">${tag} · answer + prove it</p><div id="qa"></div><p class="fb" id="fb" aria-live="polite"></p><div id="after"></div></div></div>`);
+    const fb = $("fb"), qa = $("qa");
+    const useAlt = () => s.alt && (st.miss[id] || 0) % 2 === 1;
+    function done() {
+      qa.innerHTML = `<h3>${useAlt() ? s.alt.ask : s.ask}</h3><p class="answered">✓ ${esc(useAlt() ? s.alt.options[0] : s.options[0])}</p><p class="answered proofok">🔎 Proof: ${esc(s.proof[0])}</p>`;
       fb.className = "fb good"; fb.innerHTML = "✓ " + s.why;
       $("after").innerHTML = nextBtn(nextLabel); wire();
-    });
+    }
+    function draw() {
+      if (st.done[id]) return done();
+      const ask = useAlt() ? s.alt.ask : s.ask, opts = useAlt() ? s.alt.options : s.options;
+      const pick = { a: null, p: null };
+      qa.innerHTML = `<p class="pstep"><span>1</span> Answer</p><h3>${ask}</h3><div class="opts" id="optsA"></div>
+        <p class="pstep"><span>2</span> Prove it: which detail from the source backs up your answer?</p><div class="opts proofs" id="optsP"></div>
+        <button type="button" class="go" id="lockBtn" disabled>🔒 Lock it in</button>`;
+      const fill = (box, list, key) => {
+        box.innerHTML = shuffle(list.map((t, n) => ({ t, n }))).map(o => `<button type="button" class="opt" data-n="${o.n}">${esc(o.t)}</button>`).join("");
+        box.querySelectorAll(".opt").forEach(b => {
+          b.disabled = locked();
+          b.onclick = () => { if (locked()) return; pick[key] = b.dataset.n; box.querySelectorAll(".opt").forEach(x => x.classList.toggle("sel", x === b)); $("lockBtn").disabled = pick.a == null || pick.p == null; };
+        });
+      };
+      fill($("optsA"), opts, "a"); fill($("optsP"), s.proof, "p");
+      if (st.miss[id] && qa.scrollIntoView) qa.scrollIntoView({ block: "nearest", behavior: "smooth" });
+      $("lockBtn").onclick = () => {
+        if (locked()) return;
+        if (pick.a === "0" && pick.p === "0") { right(id, i); done(); return; }
+        qa.querySelectorAll("button").forEach(x => x.disabled = true);
+        miss(id, i);
+        lockMsg(fb, "Your answer, your proof, or both are off. " + s.hint + (s.alt ? " Next you'll get a new version of the question." : ""), draw);
+      };
+    }
+    if (locked() && !st.done[id]) lockMsg(fb, s.hint, draw); else draw();
   }
 
   function build(i) {
@@ -419,9 +450,9 @@
     answers["Bet vs. results (confidence check)"] = list.map(o => o.x.std + " bet " + (st.bets[o.n] ? BETS[st.bets[o.n]].name : "—") + " → " + BETCHECKS.filter(c => st.done[o.n + c] && !st.miss[o.n + c]).length + "/4").join(" · ");
     list.forEach(o => {
       const tag = id => !st.done[id] ? "not done" : st.miss[id] ? "after " + st.miss[id] + " wrong " + (st.miss[id] === 1 ? "try" : "tries") : "first try";
-      answers[o.x.std + " · 📸 " + plain(o.x.snap.ask).slice(0, 70) + "…"] = o.x.snap.options[0] + " (" + tag(o.n + "s") + ")";
+      answers[o.x.std + " · 📸 " + plain(o.x.snap.ask).slice(0, 70) + "…"] = o.x.snap.options[0] + " · proof: " + o.x.snap.proof[0] + " (" + tag(o.n + "s") + ")";
       answers[o.x.std + " · 🧩 " + o.x.build.ask] = tag(o.n + "b");
-      answers[o.x.std + " · 🔎 " + plain(o.x.snap2.ask).slice(0, 70) + "…"] = o.x.snap2.options[0] + " (" + tag(o.n + "t") + ")";
+      answers[o.x.std + " · 🔎 " + plain(o.x.snap2.ask).slice(0, 70) + "…"] = o.x.snap2.options[0] + " · proof: " + o.x.snap2.proof[0] + " (" + tag(o.n + "t") + ")";
       answers[o.x.std + " · 🛠️ Fix It (spot + fix the mistake)"] = tag(o.n + "f");
       answers[o.x.std + " · ⚡ Lightning"] = [0, 1, 2].map(k => tag(o.n + "l" + k)).join(" · ");
     });

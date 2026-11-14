@@ -427,3 +427,63 @@ window.SHOWDOWN_ROUNDS = [
   };
   (window.SHOWDOWN_ROUNDS || []).forEach(r => Object.assign(r, MORE[r.std] || {}));
 })();
+
+// ---------------------------------------------------------------------
+//  PROVE IT (Fynn 11-14: "way too much opportunity to just click through"; picked "Prove It pairs").
+//  Every source question needs an answer AND the detail that proves it; the pair only counts if
+//  both are right. After a miss, the next try uses the other version of the question (alt).
+//  proof[0] / alt.options[0] are right (screen shuffles). Wrong proofs are not in the source.
+// ---------------------------------------------------------------------
+(function () {
+  const P = {
+    "WH.24": {
+      snap: { proof: ["His feet stand on Cape Town and Cairo, the two ends of Africa", "He is shaking hands with an African king to sign a treaty", "He is stepping onto a ship to sail home to Britain"],
+        alt: { ask: "The cartoon calls Rhodes a “Colossus,” a giant. What does a giant standing over the whole map suggest about his goal?", options: ["Control of the whole continent for Britain", "A fair trade partnership with Africans", "Guarding Africa from other empires for free", "Exploring Africa only for science"] } },
+      snap2: { proof: ["“No Africans were invited.”", "“African kings voted on the borders.”", "“Europe paid each kingdom for its land.”"],
+        alt: { ask: "At the Berlin Conference, who got a say in how Africa was divided?", options: ["Only the outside powers, mostly European", "African kings and European leaders together", "Only Africans who lived near the coast", "Every country in the world, through a vote"] } }
+    },
+    "WH.25": {
+      snap: { proof: ["Doumer, the French governor, says his new “state monopolies” did the trick", "A Vietnamese emperor signs a brand-new tax law", "British ships unload their goods in Hanoi's port"],
+        alt: { ask: "France sent Paul Doumer to run Vietnam and set its taxes himself. Which kind of rule is that?", options: ["Direct rule", "Indirect rule", "A sphere of influence", "Self-rule by the Vietnamese"] } },
+      snap2: { proof: ["The box says Europe, the United States, and Japan colonized most of Asia, Africa, and Oceania", "The map key lists China as an empire with colonies", "The box says only Britain and France took colonies"],
+        alt: { ask: "Based on the box above the map, was the new imperialism only a European thing?", options: ["No. The U.S. and Japan built empires too.", "Yes. Only European countries took colonies.", "No. China and India built the biggest empires.", "Yes. Only Britain and France took any land."] } }
+    },
+    "WH.27": {
+      snap: { proof: ["The official says people are raising rats and bringing rats in from the provinces", "Vietnamese soldiers attack a French fort with guns", "Workers build a new French-style factory in Hanoi"],
+        alt: { ask: "The French paid a reward for rat tails, and the number of rats went UP. What does that show about how Vietnamese people responded?", options: ["They used the French rule to make money for themselves", "They followed the French plan exactly as it was written", "They fought the French army in the streets of Hanoi", "They left Hanoi and moved to Japan to start over"] } },
+      snap2: { proof: ["She says she wants to avoid armed fighting and the loss of life", "She says she is happy for Hawaiʻi to join the United States", "She says her army will fight until the Americans leave"],
+        alt: { ask: "Liliʻuokalani gave up power but said she did it “under this protest.” What kind of response is that?", options: ["Peaceful resistance", "Armed resistance", "Adapting by copying the West", "Agreeing with the takeover"] } }
+    },
+    "WH.29": {
+      snap: { proof: ["Chamberlain bargains for peace, but then Poland is invaded in 1939", "Hitler signs a peace treaty and gives his land back", "Britain attacks Germany first, back in 1938"],
+        alt: { ask: "In 1938, Britain and France let Hitler take part of Czechoslovakia, hoping he would stop. What happened next?", options: ["He took the rest, then invaded Poland in 1939", "He kept his word and stopped taking land", "He gave the land back to Czechoslovakia", "He joined the League of Nations to keep peace"] } },
+      snap2: { proof: ["“The League sent no troops and set no punishments.”", "“The League's army forced Japan out of Manchuria.”", "“China refused to ask the League for any help.”"],
+        alt: { ask: "The League of Nations blamed Japan for taking Manchuria. What did Japan do next?", options: ["It quit the League and kept Manchuria", "It apologized and gave Manchuria back", "It paid China for all the land it took", "It let the League take over Manchuria"] } }
+    },
+    "WH.30": {
+      snap: { proof: ["The stories go from losing a business, to an arrest, to a town that is “Jew Free”", "The passengers say life in Germany is getting better", "Everyone on the train is a German soldier going home"],
+        alt: { ask: "First a business is lost. Then a relative is arrested. Then a town bans Jews. What does this order show?", options: ["Nazi persecution got worse one step at a time", "The Nazis treated Jewish families fairly at first", "Jewish families were only hurt after the war ended", "Persecution stayed exactly the same every year"] } },
+      snap2: { proof: ["The officer shouts “It's all YOUR fault, this war!” at the Jewish prisoners", "The officer gives the Jewish prisoners extra food", "The prisoners are sent home because the war is over"],
+        alt: { ask: "Blaming Jews for the war, for money problems, for everything: which Nazi tool is this?", options: ["Scapegoating", "Appeasement", "Rationing", "Annexation"] } }
+    },
+    "WH.31": {
+      snap: { proof: ["The crying child behind the pillar is labeled “1940 Class”", "The leaders are smiling and shaking hands with Germany", "The cartoon's title is “Peace Forever”"],
+        alt: { ask: "The cartoon is called “Peace and Future Cannon Fodder.” Cannon fodder means soldiers sent to die. What is the cartoonist warning?", options: ["This peace will send today's kids into a new war", "This peace will end war for good", "Germany will become France's closest friend", "The League will keep every child safe from war"] } },
+      snap2: { proof: ["The chart shows troops sent by member countries", "The chart shows Germany paying for the whole war", "The chart shows only European countries as members"],
+        alt: { ask: "Why did the UN's planners add troops from member countries?", options: ["So it could actually stop an attacker, unlike the League", "So it could punish Germany one more time for WWI", "So it could take over weaker countries' governments", "So it could replace every country's own army"] } }
+    },
+    "WH.32": {
+      snap: { proof: ["Japan announced its surrender on Aug. 15, six days after Nagasaki", "Germany surrendered right after a bomb hit Berlin in August", "The U.S. only joined the war after the bombs were dropped"],
+        alt: { ask: "Germany had surrendered in May 1945. Which country was still fighting the Allies when the atomic bombs fell in August?", options: ["Japan", "Germany", "Italy", "France"] } },
+      snap2: { proof: ["Radar calculates the planes' position so fighters can meet them before they reach their targets", "British tanks fire at the German planes from the ground", "Codebreakers read every German battle plan in advance"],
+        alt: { ask: "Germany had more planes in 1940. What let Britain's fewer fighters be in the right place at the right time?", options: ["Radar spotting the planes early", "The atomic bomb", "Machine guns in the trenches", "U-boats in the English Channel"] } }
+    },
+    "WH.33": {
+      snap: { proof: ["Vladek says, “They took from us our names”", "The guards hand out new clothes and name tags", "The prisoners are allowed to keep their papers"],
+        alt: { ask: "Guards took prisoners' clothes, hair, and papers, and gave them numbers. Why?", options: ["To strip away who they were so they were easier to control", "To keep the prisoners clean and healthy", "To help families find each other after the war", "To get the prisoners ready to be set free"] } },
+      snap2: { proof: ["Thurlow was 13 and a mile from the blast; Truman spoke from the White House", "Both of them were standing in Hiroshima that morning", "Thurlow was a soldier flying on the bomber"],
+        alt: { ask: "What does comparing Truman and Thurlow teach about total war?", options: ["Where you were shaped what you saw and remembered", "Leaders always suffer the most in a war", "Civilians are never in danger in a total war", "Everyone remembers a war in the same way"] } }
+    }
+  };
+  (window.SHOWDOWN_ROUNDS || []).forEach(r => { const p = P[r.std]; if (!p) return; Object.assign(r.snap, p.snap); Object.assign(r.snap2, p.snap2); });
+})();
