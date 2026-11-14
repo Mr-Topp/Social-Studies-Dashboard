@@ -1,294 +1,201 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Home Front Iowa: One Family, 1964–1975 | U.S. History Unit 3 Day 4</title>
-<meta name="description" content="Live through the Vietnam War with one Des Moines family: the draft, the Tinker armbands, Tet on TV, Kent State, and refugees coming to Iowa.">
+<title>The Jungle War Promise: A 1962 Vietnam Comic | U.S. History Unit 3 Day 4</title>
+<meta name="description" content="Read the first American comic about the Vietnam War, then check what it promised against what really happened.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../shared/graphic-reading.css?v=3">
 <style>
-:root{--ink:#1d2430;--muted:#5b6470;--navy:#1d2b45;--olive:#4b5a2a;--olive2:#3a4720;--khaki:#efe6c8;--paper:#fffdf5;--red:#b8342a;--red2:#86231b;--gold:#e8b23a;--blue:#2f6fb3;--green:#1a6640;--try:#8a5a00;--line:#e2d8b8}
-*{box-sizing:border-box}
-html,body{overflow-x:clip}
-body{margin:0;color:var(--ink);font:18.5px/1.5 system-ui,"Segoe UI",Arial,sans-serif;background:#eef2f6;background-image:radial-gradient(#d6dde6 1px,transparent 1px);background-size:22px 22px}
-button{font:inherit;cursor:pointer;border-radius:14px;min-height:46px}
-button:focus-visible,input:focus-visible,textarea:focus-visible,a:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
-
-/* ---------- HUD ---------- */
-.hud{position:sticky;top:0;z-index:30;background:linear-gradient(#f6eed3,#ece1bd);border-bottom:4px solid var(--red);box-shadow:0 4px 14px #0005;padding:6px max(10px,calc((100vw - 1060px)/2)) 4px}
-.hud-in{display:grid;grid-template-columns:auto 1fr 1fr 1.2fr;gap:8px;align-items:stretch}
-.cal{background:#fff;border:2px solid var(--navy);border-radius:10px;text-align:center;min-width:64px;overflow:hidden;display:flex;flex-direction:column}
-.cal span{background:var(--red);color:#fff;font-weight:900;font-size:.8rem;letter-spacing:.08em;padding:1px 6px}
-.cal b{font-size:1.05rem;padding:2px 6px;color:var(--navy)}
-.mt{position:relative;display:flex;gap:8px;align-items:center;background:#fff;border:2px solid #d9cca4;border-radius:12px;padding:4px 8px;min-width:0}
-.mt-face{position:relative;font-size:1.6rem;line-height:1;flex:none}
-.mt-face i{position:absolute;right:-8px;bottom:-6px;font-style:normal;font-size:1.05rem;background:#fff;border-radius:50%;box-shadow:0 1px 3px #0003}
-.ls{display:none}
-.mt-r{flex:1;min-width:0;display:grid;grid-template-columns:1fr auto;align-items:center;column-gap:6px}
-.lab{grid-column:1/3;font-size:.72rem;font-weight:900;text-transform:uppercase;letter-spacing:.05em;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.trk{position:relative;height:10px;background:#ece3cf;border-radius:9px;overflow:hidden}
-.trk span{display:block;height:100%;border-radius:9px;transition:width .7s cubic-bezier(.3,1.4,.5,1)}
-#hudRisk .trk span{background:linear-gradient(90deg,#f2b134,#b8342a)}
-#hudSup .trk span{background:linear-gradient(90deg,#7fb3e6,#2f6fb3)}
-.mt b{font-size:.92rem;color:var(--navy)}
-.mt.rival{background:#2a2f3a;border-color:#4b5262;color:#fff}.mt.rival .lab{color:#ffd27a}.mt.rival b{color:#fff}.mt.rival .trk{background:#4b5262}#hudMac .trk span{background:linear-gradient(90deg,#ffd27a,#ff7a59)}
-.mt.rival.down{opacity:.7}.mt.rival.down .mt-face>span{filter:grayscale(1)}
-.mt.warn{animation:warn 1.4s ease-in-out infinite}
-@keyframes warn{50%{box-shadow:0 0 0 4px #ff7a5966}}
-.mt.bump{animation:bump .5s}
-@keyframes bump{30%{transform:scale(1.08)}}
-.pop{position:absolute;right:6px;bottom:-24px;font-weight:900;font-size:1rem;padding:2px 9px;border-radius:12px;pointer-events:none;animation:floatup 1.9s ease-out forwards;z-index:40;white-space:nowrap}
-.pop.good{background:var(--green);color:#fff}.pop.bad{background:var(--red);color:#fff}.pop.mac{background:#2a2f3a;color:#ffd27a}
-@keyframes floatup{0%{opacity:0;transform:translateY(14px) scale(.7)}15%{opacity:1;transform:translateY(0) scale(1.2)}80%{opacity:1}100%{opacity:0;transform:translateY(-10px)}}
-.hud-step{display:flex;gap:8px;align-items:center;margin-top:4px;font-size:.75rem;font-weight:900;color:var(--navy)}
-.sbar{flex:1;height:6px;background:#ddd0aa;border-radius:6px;overflow:hidden}.sbar span{display:block;height:100%;background:var(--red);transition:width .4s}
-
-main{max-width:1060px;margin:auto;padding:14px 12px 96px}
-.welcome{background:#e3f1e8;color:var(--green);font-weight:800;border-radius:12px;padding:8px 12px;margin:0 0 10px;border:2px solid #b9d8c4;display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between}
-.welcome[hidden]{display:none}
-.notyou{min-height:36px;font:800 .9rem system-ui,Arial,sans-serif;background:#fff;color:var(--green);border:2px solid var(--green);border-radius:10px;padding:5px 12px}
-.notyou:hover{background:var(--green);color:#fff}
-
-/* ---------- scene: map board + side ---------- */
-.scene{background:var(--paper);border-radius:20px;overflow:clip;box-shadow:0 8px 24px #1d2b4522;border:2px solid #d9dee6}
-.sc-top{background:var(--navy);color:#fff;padding:8px 18px 9px;border-bottom:4px solid var(--red)}
-.sc-top h2{margin:0;font-family:"Arial Black","Segoe UI Black",Impact,system-ui,sans-serif;font-size:clamp(1.2rem,2.6vw,1.7rem);letter-spacing:.01em;text-transform:uppercase}
-.board{display:grid;grid-template-columns:250px 1fr;gap:16px;padding:14px 18px 18px;align-items:start}
-.board.nomap{grid-template-columns:1fr}
-.side{min-width:0;display:flex;flex-direction:column;gap:8px}
-.map-wrap{position:sticky;top:calc(var(--hudH,96px) + 8px);background:#cfe3f2;border:3px solid var(--navy);border-radius:14px;padding:4px;box-shadow:0 5px 0 #1d2b4533}
-.map-wrap.swing{animation:swing .9s}
-@keyframes swing{20%{box-shadow:0 0 0 6px #e8b23a99}100%{box-shadow:0 5px 0 #1d2b4533}}
-.kmap{display:block;width:100%;height:auto}
-.kmap .sea{fill:#bcd8ee}.kmap .china{fill:#d9d2bf;stroke:#a89f86;stroke-width:1}.kmap .cn{font:900 15px system-ui,Arial;fill:#7d745c;letter-spacing:.15em}
-.kmap .land{fill:#5d93cf;stroke:#1d2b45;stroke-width:2}
-.kmap .nfill{fill:#c94a3c}
-.kmap .p38{stroke:#fff;stroke-width:1.5;stroke-dasharray:3 4;opacity:.9}.kmap .p38t{font:800 12px system-ui,Arial;fill:#1d2b45}
-.kmap .river{font:800 12px system-ui,Arial;fill:#1d2b45}
-.kmap .front{fill:none;stroke:#111;stroke-width:5;stroke-linejoin:round}
-.kmap .ghost{fill:none;stroke:#fff;stroke-width:3;stroke-dasharray:7 5}
-.kmap .city{fill:#fff;stroke:#111;stroke-width:2}.kmap .ct{font:800 13px system-ui,Arial;fill:#111;paint-order:stroke;stroke:#fff;stroke-width:3px}
-.kmap .hill{font-size:18px}.kmap .jp{font:800 11px system-ui,Arial;fill:#1d2b45}
-.legend{display:flex;flex-wrap:wrap;gap:4px 10px;font-size:.72rem;font-weight:800;padding:4px 4px 2px;color:var(--navy)}
-.lg{display:inline-block;width:14px;height:10px;border-radius:3px;margin-right:4px;vertical-align:-1px}.lg.n{background:#c94a3c}.lg.s{background:#5d93cf}.lg.g{background:repeating-linear-gradient(90deg,#fff 0 4px,#1d2b45 4px 6px);border:1px solid #1d2b45}
-.bubbles{display:flex;flex-direction:column;gap:8px}
-.bub{display:flex;gap:8px;align-items:flex-end;max-width:640px}
-.bub .av{font-size:1.9rem;width:48px;height:48px;flex:none;display:grid;place-items:center;background:#fff;border-radius:50%;border:3px solid var(--navy);box-shadow:0 2px 0 #0003}
-.bub .bt{position:relative;background:#fff;border-radius:16px;padding:7px 12px;box-shadow:0 3px 0 #0002;border:2px solid #1d2b4533}
-.bub .bt::before{content:"";position:absolute;left:-9px;bottom:10px;border:8px solid transparent;border-right-color:#fff;border-left:0}
-.bub .bt b{display:block;font-size:.72rem;letter-spacing:.06em;text-transform:uppercase;color:var(--red)}
-.bub .bt p{margin:0;font-size:1.04rem;font-weight:650}
-.bub.cable .bt{background:#fffbe6;border-color:#d9c98f}.bub.cable .bt::before{border-right-color:#fffbe6}.bub.cable .bt p{font-weight:800}
-.bub.mac .av{background:#2a2f3a;border-color:#ffd27a}.bub.mac .bt{background:#2a2f3a;color:#fff;border-color:#ffd27a}.bub.mac .bt::before{border-right-color:#2a2f3a}.bub.mac .bt b{color:#ffd27a}
-.bub.truman .av{background:#e7eef8}
-.sc-body{min-width:0}
-
-/* ---------- world objects ---------- */
-.board-explain{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:8px}
-.board-explain div{background:#fff;border:2px solid var(--line);border-radius:14px;padding:8px;text-align:center;display:flex;flex-direction:column;gap:2px}
-.board-explain .be-i{font-size:2.2rem}.board-explain b{color:var(--navy);font-size:1rem;line-height:1.25}
-.board-explain .rival{background:#2a2f3a;border-color:#ffd27a}.board-explain .rival b{color:#ffd27a}
-.paper{position:relative;background:#fbf6e4;border:1px solid #d8cba6;border-radius:4px;padding:10px 16px;margin:0 0 10px;box-shadow:3px 4px 0 #0002;font-family:Georgia,serif;transform:rotate(-.4deg)}
-.paper .p-h{font:900 .8rem system-ui,Arial,sans-serif;letter-spacing:.08em;color:var(--red);margin:0 0 4px}
-.paper p{margin:3px 0;font-size:1.08rem}
-.paper.quote p:not(.p-h):not(.src){font-style:italic;font-size:1.12rem}
-.paper.cable{background:#fffbe6;font-family:system-ui,"Segoe UI",Arial,sans-serif;border-left:6px solid var(--gold);transform:none}.paper.cable p{font-weight:700}
-.paper.parchment{background:linear-gradient(#f6ecd0,#efe0b8);border-color:#c9b27a}
-.cables{display:grid;grid-template-columns:1fr 1fr;gap:10px}.cables .paper{margin:0 0 10px}
-.tide{display:flex;gap:12px;align-items:center;background:#e6f2fb;border:2px solid #9cc3e6;border-radius:14px;padding:8px 14px;margin:0 0 10px}.tide .t-ico{font-size:2.6rem}.tide p{margin:2px 0}
-.real{background:#fff;border:2px dashed #d6c79c;border-radius:12px;padding:7px 12px;margin:8px 0;font-size:.98rem;font-weight:600}.real p{margin:2px 0}.real .src{font-weight:400}
-.real-b{display:inline-block;background:#7a5a00;color:#fff;font-size:.72rem;letter-spacing:.07em;text-transform:uppercase;border-radius:6px;padding:1px 7px;margin-right:4px;vertical-align:1px}
-.whatif{background:#f1eef6;border-left:5px solid #6b4fa0;border-radius:10px;padding:5px 10px;margin:8px 0;font-weight:700;font-size:.92rem;color:#4b3478}
-.src{font-size:.76rem;color:var(--muted);margin:3px 0 0;font-family:system-ui,Arial,sans-serif;font-style:normal;font-weight:400}
-.paper p.src{font-size:.76rem;font-weight:400}
-.fict{font-size:.85rem;color:var(--muted);font-style:italic;margin:6px 0}
-.hillrow{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 8px}.hillrow span{background:#fff;border:2px solid var(--line);border-radius:999px;padding:3px 12px;font-weight:800}
-.moved{display:grid;gap:6px;background:#fff;border:2px solid var(--line);border-radius:14px;padding:10px 14px;margin:0 0 6px}
-.moved div{display:grid;grid-template-columns:70px 1fr;align-items:center;column-gap:10px}.moved small{grid-column:2;font-weight:700;color:var(--muted)}
-.mbar{display:block;height:16px;border-radius:8px;background:linear-gradient(90deg,#c94a3c,#5d93cf)}.mbar.big{width:100%}.mbar.tiny{width:6%;min-width:14px}
-.memorial{background:var(--navy);color:#fff;border-radius:14px;padding:12px 16px;margin:0 0 10px;border:3px solid var(--gold)}
-.memorial .m-h{font-weight:900;color:var(--gold);margin:0 0 4px;letter-spacing:.08em}.memorial p{margin:5px 0;font-size:1.06rem;font-weight:650}.memorial .src{color:#c9d3e2}
-
-/* ---------- in-world checks ---------- */
-.check{position:relative;margin:12px 0 6px;padding:12px;border:3px solid var(--navy);border-radius:18px;background:#eef4fb;box-shadow:0 5px 0 #1d2b4533}
-.check.cable{background:#fffbe6;border-color:#c9a94a}
-.check.doc{background:#f6ecd0;border-color:#a8894a}
-.qlabel{position:absolute;top:-16px;left:-12px;font-size:1.5rem;margin:0;background:#fff;border:3px solid var(--navy);border-radius:50%;width:46px;height:46px;display:grid;place-items:center;box-shadow:0 3px 0 #1d2b4533}
-.check .bub{margin-bottom:6px}.check .msg{margin:0 0 6px;min-height:0}.check .bub .bt{border-color:var(--navy)}
-.choices{display:grid;gap:8px}
-@media(min-width:900px){.check .choices{grid-template-columns:1fr 1fr}}
-.reply{display:flex;gap:10px;align-items:center;text-align:left;background:#fff;color:var(--ink);border:3px solid #c9d6e6;padding:10px 12px;font-weight:750;line-height:1.3;border-radius:16px 16px 16px 4px;box-shadow:0 3px 0 #1d2b4522;transition:transform .12s}
-.reply:hover:not(:disabled){transform:translateY(-2px);border-color:var(--navy)}
-.reply:disabled{opacity:.55;cursor:not-allowed}
-.r-ico{font-size:1.2rem;flex:none}
-.shake{animation:shake .45s}
-@keyframes shake{20%,60%{transform:translateX(-7px)}40%,80%{transform:translateX(7px)}}
-.msg{min-height:1.3em;font-weight:800;margin:8px 0 0}.msg.try{color:var(--try)}.msg.good{color:var(--green);font-size:1.1rem}
-.check.done{background:#f1faf4;border-color:var(--green);box-shadow:none;padding:8px 14px;min-height:0;display:flex;justify-content:center}.check.done .stamp{position:static;font-size:1.15rem}
-.stamp{position:absolute;right:12px;top:10px;border:4px solid var(--red);color:var(--red);font:900 1rem/1 "Arial Black",Impact,sans-serif;padding:6px 10px;border-radius:8px;transform:rotate(-8deg);letter-spacing:.05em;background:#fff8;text-transform:uppercase}
-.msg .stamp{position:static;display:inline-block;margin-right:8px}
-.result .stamp.pick{position:static;display:inline-block;margin:2px 0 8px;font-size:1.05rem}
-.slam{animation:slam .55s cubic-bezier(.2,1.6,.4,1)}
-@keyframes slam{0%{opacity:0;transform:rotate(-8deg) scale(2.6)}60%{opacity:1;transform:rotate(-8deg) scale(.92)}100%{transform:rotate(-8deg) scale(1)}}
-
-/* ---------- decision cards ---------- */
-.pick-h{font:900 1.05rem "Arial Black",Impact,sans-serif;text-transform:uppercase;color:var(--red);margin:10px 0 6px;letter-spacing:.04em}
-.cards{display:grid;gap:12px}.cards.n2{grid-template-columns:1fr 1fr}.cards.n3{grid-template-columns:repeat(3,1fr)}
-.dcard{display:flex;flex-direction:column;align-items:center;gap:4px;text-align:center;background:#fff;border:3px solid var(--navy);border-radius:18px;padding:12px 10px 10px;color:var(--ink);box-shadow:0 6px 0 var(--navy);transition:transform .12s,box-shadow .12s}
-.dcard:hover{transform:translateY(-4px) rotate(-.5deg);box-shadow:0 10px 0 var(--navy)}
-.dcard:active{transform:translateY(3px);box-shadow:0 2px 0 var(--navy)}
-.d-ico{font-size:2.8rem;line-height:1.1}.d-t{font-size:1.15rem;line-height:1.2;color:var(--navy)}
-.d-chips{display:flex;flex-direction:column;gap:4px;margin-top:6px;width:100%}
-.chip{font-size:.8rem;font-weight:800;border-radius:10px;padding:3px 8px}.chip.g{background:#e3f3e8;color:var(--green)}.chip.c{background:#fde7e3;color:var(--red2)}
-
-/* ---------- results ---------- */
-.result{display:flex;gap:14px;align-items:flex-start;background:#fff;border:3px solid var(--gold);border-radius:18px;padding:12px 14px;box-shadow:0 6px 0 #e8b23a55}
-.flip{animation:flip .6s ease-out}
-@keyframes flip{0%{opacity:0;transform:perspective(700px) rotateX(-70deg)}100%{opacity:1;transform:none}}
-.r-big{font-size:3rem;line-height:1;flex:none}
-.r-main{flex:1;min-width:0}
-.tags{display:flex;flex-wrap:wrap;gap:6px;margin:2px 0 8px}
-.tag{display:inline-block;font-weight:900;font-size:.85rem;border-radius:12px;padding:3px 10px;white-space:nowrap}.tag.up{background:#dcefe2;color:var(--green)}.tag.down{background:#f9dcd7;color:#9a2f22}.tag.mac{background:#2a2f3a;color:#ffd27a}
-.reveal{position:relative;background:var(--navy);color:#fff;border-radius:14px;padding:10px 14px;margin:10px 0 2px;box-shadow:0 4px 0 #0003}
-.reveal .nw{display:inline-block;background:var(--gold);color:var(--navy);font-weight:900;font-size:.72rem;letter-spacing:.08em;border-radius:8px;padding:2px 8px;margin-bottom:4px}
-.reveal p{margin:0;font-size:1.05rem}.reveal b{color:var(--gold)}
-.go{margin-top:12px;background:var(--red);color:#fff;border:0;padding:13px 26px;font:900 1.1rem system-ui,Arial,sans-serif;box-shadow:0 5px 0 var(--red2)}
-.go:hover{filter:brightness(1.08)}.go:active{transform:translateY(3px);box-shadow:0 2px 0 var(--red2)}.go:disabled{opacity:.6}
-
-/* ---------- ending ---------- */
-.front{background:#f7f1e1;border:1px solid #d8cba6;padding:12px 16px;box-shadow:4px 6px 0 #0002;font-family:Georgia,serif}
-.front .masthead{font:900 clamp(.85rem,2vw,1.15rem) "Courier New",monospace;text-align:center;border-bottom:4px double #222;margin:0 0 8px;letter-spacing:.06em}
-.front>p{font-size:1.1rem}
-.headline{display:flex;gap:12px;align-items:center}.e-big{font-size:3.2rem;line-height:1}
-.headline h3{margin:0;font:900 clamp(1.4rem,3.6vw,2.1rem)/1.05 "Arial Black",Impact,sans-serif;text-transform:uppercase;color:var(--navy)}
-.front.brink .headline h3,.front.general .headline h3{color:var(--red)}
-.finalm{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0;font-family:system-ui,Arial,sans-serif}.finalm span{background:#fff;border-radius:10px;padding:4px 10px;font-weight:700;border:1px solid var(--line)}
-.cb{margin:10px 0 4px;font-family:system-ui,Arial,sans-serif;text-transform:uppercase;letter-spacing:.06em;font-size:.85rem}
-.trail{list-style:none;padding:0;margin:0;display:grid;gap:5px;font-family:system-ui,Arial,sans-serif}.trail li{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;background:#fff;border:1px solid var(--line);border-radius:9px;padding:5px 10px;font-size:.92rem}
-.trail .tags{margin:0}
-
-/* ---------- memo ---------- */
-.memo{background:#fffdf3;border:3px solid var(--navy);border-radius:6px;padding:12px 16px;box-shadow:0 6px 0 #0002;background-image:repeating-linear-gradient(#fffdf3 0 32px,#e9e2c9 32px 33px)}
-.vm-h{font:900 1rem "Courier New",monospace;color:var(--red);margin:0 0 4px;letter-spacing:.05em}
-label{display:block;font-weight:850;margin:12px 0 4px}.stem{margin:0 0 4px;color:var(--muted);font-size:.92rem}.stem::before{content:"✏️ "}
-.vrow{display:flex;gap:10px;align-items:flex-end;flex-wrap:wrap}.back{margin-top:12px;background:#fff;border:3px solid var(--navy);color:var(--navy);font-weight:900;padding:10px 18px}
-input,textarea{width:100%;font:inherit;border:2px solid #cfc6af;border-radius:10px;padding:10px;background:#fff;color:var(--ink)}
-textarea{font-family:system-ui,"Segoe UI",Arial,sans-serif;font-size:1.05rem}
-
-/* ---------- title ---------- */
-.title-card{background:var(--khaki);border-radius:22px;padding:22px 26px;box-shadow:0 8px 24px #1d2b4522;border:4px solid var(--gold);position:relative;overflow:hidden}
-.title-card::before{content:"";position:absolute;inset:0 0 auto 0;height:10px;background:repeating-linear-gradient(90deg,var(--red) 0 40px,#fff 40px 80px,var(--blue) 80px 120px)}
-.t-grid{display:grid;grid-template-columns:1.5fr 1fr;gap:20px;align-items:center}
-.t-kick{font-size:.76rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:var(--red);margin:6px 0 0}
-h1{font-family:"Arial Black","Segoe UI Black",Impact,system-ui,sans-serif;font-size:clamp(2.2rem,5.4vw,3.6rem);line-height:.98;margin:4px 0 8px;color:var(--navy);text-transform:uppercase;letter-spacing:-.01em;text-shadow:3px 3px 0 var(--gold)}
-.hook{font-size:1.2rem;font-weight:700;margin:0 0 10px}
-.t-chips{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px}.t-chips span{background:#fff;border:2px solid var(--line);border-radius:999px;padding:3px 12px;font-weight:750;font-size:.92rem}
-.goal{background:#e7eef8;border-radius:12px;padding:6px 12px;margin:6px 0}
-.t-start label{margin-top:8px}
-.t-row{display:flex;gap:8px;align-items:stretch;flex-wrap:wrap}.t-row input{flex:1;min-width:200px}
-.go.start{margin-top:0;font-size:1.3rem;padding:12px 34px}
-.t-art{display:flex;flex-direction:column;align-items:center}
-.map-wrap.mini{position:static;width:190px;transform:rotate(2deg)}.map-wrap.mini .legend{display:none}
-.t-cast{display:flex;justify-content:center;align-items:center;gap:4px;font-size:2.4rem;margin-top:10px}.t-cast .vs{font:900 1rem "Arial Black",Impact,sans-serif;background:var(--red);color:#fff;border-radius:50%;width:40px;height:40px;display:grid;place-items:center;margin:0 6px}
-
-.foot{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-top:14px;color:#4a5462;font-size:.9rem}
-.foot button{background:#fff;border:2px solid #c9d1dc;padding:8px 12px;font-weight:800;color:#1d2b45;min-height:40px}
-
-@media(max-width:1000px){.cards.n3{grid-template-columns:1fr}.cards.n3 .dcard{flex-direction:row;flex-wrap:wrap;text-align:left;justify-content:flex-start;padding:10px 12px}.cards.n3 .d-ico{font-size:2.2rem}.cards.n3 .d-t{flex:1;min-width:150px}.cards.n3 .d-chips{flex-direction:row;flex-wrap:wrap}}
-@media(max-width:760px){
-  .hud{padding:5px 6px 3px}
-  .hud-in{grid-template-columns:1fr 1fr 1fr;gap:5px}
-  .cal{display:none}
-  .lf{display:none}.ls{display:inline}.mt{padding:3px 5px;gap:4px}.mt-face{font-size:1.15rem}.lab{font-size:.6rem}.mt b{font-size:.78rem}
-  .board{grid-template-columns:118px 1fr;gap:10px;padding:10px 10px 14px}
-  .board.nomap{grid-template-columns:1fr}
-  .side{display:contents}
-  .map-wrap{grid-row:1;grid-column:1;position:static;padding:2px;border-width:2px}
-  .bubbles{grid-row:1;grid-column:2;align-self:center}
-  .sc-body{grid-column:1/-1}
-  .board.nomap .sc-body{grid-column:1}
-  .legend{font-size:.58rem;gap:2px 6px}.lg{width:10px;height:8px}
-  .bub .av{width:36px;height:36px;font-size:1.3rem}.bub .bt p{font-size:.95rem}.bub .bt{padding:5px 9px}
-  .board-explain{grid-template-columns:1fr}.board-explain div{flex-direction:row;align-items:center;gap:10px;text-align:left}
-  .cables{grid-template-columns:1fr}
-  .cards.n2{grid-template-columns:1fr}
-  .dcard{flex-direction:row;flex-wrap:wrap;text-align:left;justify-content:flex-start;padding:10px 12px}
-  .d-ico{font-size:2.2rem}.d-t{flex:1;min-width:150px}.d-chips{flex-direction:row;flex-wrap:wrap}
-  .t-grid{grid-template-columns:1fr}.t-art{display:none}
-  .title-card{padding:18px 16px}
-  .check.done .stamp{position:static;display:inline-block}
-  .result{flex-direction:column;gap:6px}.r-big{font-size:2.2rem}
-}
-@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
-@media print{.hud,.foot,.go{display:none}}
-.job{list-style:none;margin:0 0 10px;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:6px;counter-reset:j}
-.job li{display:flex;align-items:center;gap:8px;background:#f1f4f8;border:2px solid #d5dce6;border-radius:12px;padding:7px 10px;font-weight:800;font-size:1rem;color:#4a5462;line-height:1.2}
-.job li::before{counter-increment:j;content:counter(j);flex:none;width:26px;height:26px;border-radius:50%;display:grid;place-items:center;background:#d5dce6;color:#1d2b45;font-weight:900}
-.job li.now{background:#fff6d6;border-color:var(--gold);color:#1d2b45}.job li.now::before{background:var(--gold)}
-.job li.did{color:#1a6640;border-color:#b9d8c4;background:#e8f4ec}.job li.did::before{content:"✓";background:#1a6640;color:#fff}
-.locked-note{font-weight:800;color:#5b6470;background:#f1f4f8;border:2px dashed #c9d1dc;border-radius:12px;padding:10px 12px;margin:8px 0 0}
-.cards.locked{opacity:.4;pointer-events:none;filter:grayscale(.6)}
-.sc-job{padding:12px 18px 0}.sc-job .job{margin:0}
-@media(max-width:620px){.sc-job{padding:10px 10px 0}.job{gap:4px}.job li{font-size:.8rem;padding:5px 6px;gap:5px}.job li::before{width:20px;height:20px;font-size:.75rem}}
-#hudFam .trk span{background:linear-gradient(90deg,#e8b23a,#1a6640)}#hudVoice .trk span{background:linear-gradient(90deg,#7fb3e6,#2f6fb3)}
-#hudLinks b.big{font-size:1.25rem;color:var(--navy)}
-#hudPress .lab{font-size:.85rem}
-.how{list-style:none;margin:6px 0 10px;padding:0;display:grid;grid-template-columns:repeat(3,1fr);gap:6px;counter-reset:h}
-.how li{background:#fff;border:2px solid var(--line);border-radius:12px;padding:8px 10px;font-weight:700;display:flex;gap:6px;align-items:center}
-.how li::before{counter-increment:h;content:counter(h);flex:none;width:24px;height:24px;border-radius:50%;background:var(--gold);color:var(--navy);display:grid;place-items:center;font-weight:900}
-.cause{background:#fff;border:3px solid var(--navy);border-left:10px solid var(--red);border-radius:14px;padding:10px 14px;margin:0 0 10px}
-.cause .c-tag{display:inline-block;font-size:.78rem;font-weight:900;letter-spacing:.08em;color:var(--red)}
-.cause p{margin:4px 0 0;font-size:1.12rem;font-weight:700;line-height:1.4}
-.chainbox{background:#f1f4f8;border:2px solid #d5dce6;border-radius:14px;padding:8px 10px;margin:0 0 10px}
-.ch-h{margin:0 0 6px;font-weight:900;color:var(--navy);font-size:.9rem}
-.chain{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:6px;align-items:center}
-.chain li{background:#fff;border:2px solid var(--navy);border-radius:999px;padding:3px 10px;font-weight:800;font-size:.9rem;position:relative}
-.chain li+li::before{content:"→";position:absolute;left:-14px;top:50%;transform:translateY(-50%);color:var(--navy);font-weight:900}
-.chain li+li{margin-left:10px}
-.chain li.start{background:var(--navy);color:#fff}
-.chain li.new{background:#fff6d6;border-color:var(--gold);animation:pop .5s}
-.chain li.todo{border-style:dashed;color:#7a8594}
-@keyframes pop{0%{transform:scale(.6)}70%{transform:scale(1.12)}100%{transform:none}}
-.pick{background:#eef4fb;border:2px solid #c9d8ea;border-radius:16px;padding:10px 12px}
-.pick.proof{background:#fbf6e4;border-color:#e3d3a2}
-.pick-h{margin:0 0 8px;font-weight:900;font-size:1.08rem;color:var(--navy)}
-.pick .choices{grid-template-columns:1fr}
-.reply .src-h{display:block;font-size:.8rem;font-weight:900;letter-spacing:.04em;color:var(--red);text-transform:uppercase}
-.reply .src-q{display:block;font-family:Georgia,serif;font-size:1.05rem}
-.linked{background:#e8f4ec;border:2px solid #b9d8c4;color:#1a6640;border-radius:12px;padding:8px 12px;margin:0 0 8px;font-weight:700}
-.linked.proved{background:#fbf6e4;border-color:#e3d3a2;color:#6b4e00}
-.linked.slam{animation:pop .5s}
-.spinwarn{color:#86231b;font-weight:900}
-.bub.press .av{background:#2a2f3a}.bub.press .bt{background:#2a2f3a;color:#fff;border-color:#ffd27a}.bub.press .bt b{color:#ffd27a}.bub.press .bt::before{border-right-color:#2a2f3a}
-@media(max-width:620px){.how{grid-template-columns:1fr}}
-.spinq{display:block;font-weight:800;font-size:1.05rem;color:#ffd27a;margin-top:2px}
-.fam{background:#fff;border:3px solid var(--navy);border-radius:16px;padding:10px;display:grid;gap:6px}
-.fam .f-h{margin:0;font-weight:900;color:var(--navy);font-size:.9rem;text-align:center;letter-spacing:.04em}
-.fam .p{display:flex;gap:8px;align-items:center;background:#f1f4f8;border-radius:12px;padding:6px 8px}
-.fam .p .e{font-size:1.7rem;line-height:1}
-.fam .p b{display:block;font-size:.95rem}.fam .p small{display:block;color:#4a5462;font-size:.82rem;line-height:1.25}
-.fam .p.rival{background:#2a2f3a;color:#fff}.fam .p.rival small{color:#ffd27a}
-.fam .p.away{background:#fff6d6;border:2px solid var(--gold)}
-.tv{background:#1d2430;color:#fff;border-radius:14px;padding:10px 14px;margin:0 0 10px;border:4px solid #555}
-.tv .c-tag{color:#ffd27a}
-.bub.walt .av{background:#2a2f3a}.bub.walt .bt{background:#2a2f3a;color:#fff;border-color:#ffd27a}.bub.walt .bt b{color:#ffd27a}.bub.walt .bt::before{border-right-color:#2a2f3a}
-.result2{background:#fff;border:3px solid var(--gold);border-radius:16px;padding:10px 14px;margin:8px 0}
-.result2 .you{font-weight:900;color:var(--navy);margin:0 0 4px}
-.real2{font-size:.95rem;color:#3c4652;margin:6px 0 0}.real2 b{color:var(--red)}
+.flip-stage img{min-height:0}
+.qcol{padding-bottom:100px}
+.wordhelp{margin:6px 0 0}.wordhelp summary{cursor:pointer;font-weight:750;color:var(--navy)}
+.intro-line{font-size:1.02rem;margin:0 0 10px}
+.words{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0 10px;padding:0;list-style:none}
+.words li{background:#fff;border:1px solid #e6dcc8;border-left:4px solid var(--navy);border-radius:8px;padding:3px 9px;font-size:.88rem}
+.declass{display:block;background:#fff;border:2px dashed #7a2b26;border-radius:10px;padding:8px 11px;margin:6px 0 8px;font-weight:650;color:#3c2a20;line-height:1.4;font-style:normal}
+.declass b{display:block;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#a33d36;margin-bottom:2px}
+.declass.file{border-color:#18364a}.declass.file b{color:#18364a}
+.declass i{font-style:normal;font-weight:800}
+.declass .line{display:block;margin:2px 0}
+.dime{display:inline-block;background:#e6bd64;color:#0f2433;border-radius:999px;font-weight:850;padding:0 9px;margin-right:4px}
+.credits{font-size:.8rem;color:var(--muted);margin:10px 0 0;line-height:1.4}
+body.reading-now .choices{opacity:.45;pointer-events:none}
 </style>
-<script src="../../shared/assignments.js?v=20261105fb1"></script>
-<script src="../../shared/turnin.js?v=20261105fb1"></script>
-<script src="../../shared/lang.js?v=20261103c"></script>
-</head><body>
-<div class="hud" id="hud" hidden aria-label="Game board">
-  <div class="hud-in">
-    <div class="cal" aria-label="Date"><span id="calMo">AUG</span><b id="calYr">1964</b></div>
-    <div class="mt" id="hudFam"><div class="mt-face" aria-hidden="true"><span>🏠</span><i id="famFace">🙂</i></div><div class="mt-r"><span class="lab"><span class="lf">Family together</span><span class="ls">Family</span></span><div class="trk"><span id="mFam"></span></div><b id="nFam">7/10</b></div></div>
-    <div class="mt" id="hudVoice"><div class="mt-face" aria-hidden="true"><span>📣</span></div><div class="mt-r"><span class="lab"><span class="lf">Your voice</span><span class="ls">Voice</span></span><div class="trk"><span id="mVoice"></span></div><b id="nVoice">2/10</b></div></div>
-    <div class="mt rival" id="hudMike"><div class="mt-face" aria-hidden="true"><span id="mikeIco">🧑</span></div><div class="mt-r"><span class="lab"><span class="lf">Your brother Mike: </span><span id="mikeAt">home</span></span></div></div>
-  </div>
-  <div class="hud-step"><span id="stepText">Step 1 of 10</span><div class="sbar" aria-hidden="true"><span id="stepFill"></span></div></div>
-</div>
-<main>
-  <p class="welcome" id="welcome" hidden></p>
-  <div id="app"></div>
-  <div class="foot"><span>Progress saves on this device.</span><button type="button" id="restartBtn">Start over</button></div>
-</main>
-<script src="game.js?v=20261114fam"></script>
+<script src="../../shared/assignments.js?v=20261114jws"></script><script src="../../shared/turnin.js?v=20261114jws"></script></head><body>
+<header class="gr-head" data-years="1962"><div class="gr-wrap">
+<div class="kicker">U.S. History · Unit 3 Day 4 · Vietnam</div>
+<h1>The Jungle War Promise</h1>
+<p class="hook"><span class="dime">15¢</span>In 1962, this was the first American comic about the Vietnam War. It made a promise about how the war would go. Check that promise against what really happened. 9 pages · 5 checks · 3 short answers. <b>About 25 minutes.</b></p>
+<p class="goal"><b>Today's goal:</b> Explain why the U.S. got involved in Vietnam and why the war split Americans.</p>
+<details class="std-details"><summary>Iowa standards for today</summary>
+<p><b>Standard SS.9-12.US.35</b> — Compare and corroborate interpretations of the multiple causes and effects of the Korean War to the Vietnam War.</p><p><b>Standard SS.9-12.US.37</b> — Analyze the American policy of containment as a response to the threat of Communism during the Cold War.</p><p><b>Standard SS.9-12.US.40</b> — Analyze diverse ideologies through primary and secondary sources, noting the impact on social, economic, and political institutions during the Cold War Era.</p>
+</details>
+<nav><a class="back" href="../../">← Class activities</a></nav>
+</div></header>
+
+<nav class="route" aria-label="Your progress"><ol id="flipRoute"></ol></nav>
+
+<main class="gr-main gr-wrap">
+<section class="card">
+<p class="intro-line"><b>You're the fact-checker.</b> For each part: <b>read</b> the page on the left → get the <b>check</b> right → <b>write</b> 1–2 sentences. Done = 4 green parts (5 checks + 3 short answers), then turn in at the bottom.</p>
+<p class="content-note"><span><strong>Content note:</strong> This is a real 1962 war comic. It takes one side on purpose. It shows fighting, and the Americans talk down to the Vietnamese soldiers they train. One racist slur on page 8 is covered with a black box.</span></p>
+<details class="wordhelp"><summary>Word help (tap to open)</summary>
+<ul class="words" aria-label="Word help">
+<li><b>Viet Cong</b> = Communist fighters in South Vietnam, backed by North Vietnam</li><li><b>Guerrilla</b> = a fighter who hides, then attacks by surprise</li><li><b>Adviser</b> = a soldier sent to train another country's army</li><li><b>Rangers</b> = a special, tough fighting unit</li><li><b>Red</b> = 1960s slang for a Communist</li><li><b>Containment</b> = the U.S. plan to stop communism from spreading</li><li><b>Requiem</b> = a song for the dead</li>
+</ul></details>
+<p class="welcome" id="welcome" role="status"></p>
+</section>
+
+<div class="flip-layout">
+<section class="flip-reader reading" id="flipReader" aria-label="Pages from the 1962 comic Jungle War Stories">
+<div class="flip-bar"><div><p class="eyebrow">The reading</p><h2>A real 1962 comic · 9 pages</h2></div><span class="flip-pos" id="flipPos"></span></div>
+<div class="flip-tools"><button type="button" class="quiet" id="flipBack">← Back a page</button><span class="grow"><span id="flipPart"></span><span id="flipTimer" aria-live="polite"></span></span><button type="button" class="secondary" id="flipNext">Next page →</button><button type="button" class="quiet" id="flipZoom">Make page bigger</button></div>
+<div class="flip-stage"><img id="flipImg" alt="" src="pages/p-01.jpg"></div>
+<p class="flip-cap">Click the page to make it bigger.</p>
+</section>
+
+<div class="qcol">
+<section class="card">
+<label for="studentName">First name + last initial (like Jordan M.)</label><input id="studentName" maxlength="100" autocomplete="off" placeholder="First name + last initial (like Jordan M.)" required>
+</section>
+<div id="flipCards"></div>
+<div class="flip-nav"><button type="button" class="quiet" id="flipBack2">← Back</button><button type="button" class="secondary" id="flipNext2">Next page →</button><p class="flip-why" id="flipWhy" aria-live="polite"></p></div>
+<section class="card finish" id="finish">
+<h2>Turn in your work</h2>
+<div class="actions"><button id="submitBtn" class="primary" type="button">Turn in answers</button><button id="clearBtn" class="quiet" type="button">Start over</button></div><p id="submitStatus" class="status" role="status" aria-live="polite"></p><p class="reader-note">Your work saves on this device, so you can come back later. Your teacher sees it after you turn it in.</p>
+<p class="credits">Comic: <i>Jungle War Stories</i> #1 (July–Sept. 1962), Dell Publishing Co., New York. Public domain (published before 1964, copyright not renewed); scan from Comic Book Plus. Reader pages are the inside front cover ("Vietnam") and the 8-page story "Requiem for a Red…". One racist slur on reader page 8 is covered.</p>
+</section>
+</div></div></main>
+<div class="flip-big" id="flipBig" hidden role="dialog" aria-label="Bigger page"><button type="button" class="quiet" id="flipBigClose">✕ Close</button><img id="flipBigImg" alt="Bigger view of the current page"></div>
+<script>
+window.FLIP={
+title:"Pages from the 1962 comic Jungle War Stories",prefix:"ush-u3-d6-jws-",pages:9,readSeconds:8,lockSeconds:8,
+alts:[
+"Inside cover titled Vietnam, with a map of Vietnam. Text says France controlled Vietnam for many years, that in 1954 at Geneva it was split into North and South, and that since then the South has been plagued by invasion of Communist guerrillas from the north, called Viet Cong. Drawings show a water buffalo, a Buddha statue, river pirates, a spiked fort, and guerrillas taking village kids.",
+"Story title: Requiem for a Red. Three Korean War veterans, Captain Duke Larsen, Sergeant Cactus Kane, and Private Mike Williams, arrive in Saigon with aid for the anti-Red fight. Mike says these people have no belly for fighting the Viet Cong. Duke says Mike didn't grow up on the 38th parallel.",
+"The Americans fly north to a training base. An officer says an enemy band raided a town and left about forty townspeople dead. A young South Vietnamese lieutenant, Lo Chuong, says he planned to strike the enemy as it left. Mike calls the officers choke-ups.",
+"At the Phu Yen base, Lo Chuong tells Sergeant Cactus Kane that he and his men are under Kane's command for Ranger training. Mike says he wouldn't want Lo Chuong covering him. Kane says he likes what he sees. The Rangers train jumping from helicopters and sneaking through rice paddies.",
+"The Rangers learn to fight hand to hand and chant Rangers Kill. During a rope crossing over a gorge, Lo Chuong loses his hold and dangles high above the rocks, calling on his ancestors for help.",
+"Cactus Kane cuts the rope and swings Lo Chuong down into the river below. Lo Chuong vows to repay Kane, a life for a life. Mike says Lo Chuong is a coward and always will be. The Rangers head out on patrol the next day.",
+"An old woman tells the Rangers that invaders from the north went upriver. In the brush, a Viet Cong lookout watches them. A warning signal sounds, someone yells Viet Cong, and a Vietnamese lookout is shot.",
+"Viet Cong fighters attack, yelling about dogs from the South and their Yankee masters. Lo Chuong's men hold for a moment, then take cover with no leadership. Mike yells that Lo Chuong choked up again and shouts a racist slur, which is covered with a black box. Cactus Kane falls into a gully with a broken leg and calls to Lo Chuong to remember his vow.",
+"Lo Chuong leads his men out of the brush and breaks the guerrilla attack. He asks Kane if his debt is paid. Kane says in full. Kane jokes that they sang a requiem for a Red, for quite a few of them, and a helicopter comes to pick them up."
+],
+assignmentId:"ush-u3-d6-vietnam",api:"https://fynn-class-assignment-submissions-20261024.neotboy.chatgpt.site/api/submit",
+lockedText:"This box opens when you get the check right.",
+clearConfirm:"Start over? This clears your checks and answers on this device.",
+successText:"Turned in! Your teacher got your checks and answers.",
+wrongText:(c,left)=>left>0?"Not quite. "+c.hint+" Try again in "+left+"…":"Not quite. "+c.hint+" The choices were mixed up. Try again.",
+parts:[
+{
+"short":"Why we're there",
+"ref":"Reader page 1 · The comic's fact page",
+"title":"1. Why does the comic say the U.S. is in Vietnam?",
+"from":1,"to":1,
+"check":{
+"page":1,
+"tag":"Reading check · Reader page 1",
+"q":"Read the top paragraph on reader page 1. What does it say keeps happening to South Vietnam?",
+"right":"Communist guerrillas from the North keep invading it.",
+"wrong":["France keeps trying to take it back as a colony.","River pirates have taken over the city of Saigon.","Its farmers are moving north to find more land."],
+"why":"✓ Correct. It says the South is \"constantly plagued by invasion of Communist guerrillas from the north, called Viet Cong.\"",
+"hint":"Make the page bigger and read the paragraph right under the title."
+},
+"prompt":"Use the fact page and the fact file. Why did the U.S. send soldiers to South Vietnam in 1962, and how is that containment?",
+"stem":"<span class=\"declass file\"><b>Fact file · Was it the whole story?</b><span class=\"line\"><i>True:</i> North Vietnam sent fighters and supplies south.</span><span class=\"line\"><i>Left out:</i> Many Viet Cong were South Vietnamese people who had turned against their own government.</span><span class=\"line\"><i>The U.S. plan:</i> By the end of 1962, about 11,000 U.S. advisers were in South Vietnam. Leaders feared that if it fell to communism, nearby countries would fall too, like dominoes.</span></span>Write 1–2 sentences. Start like this: <i>The U.S. sent soldiers to Vietnam to ___. This is containment because ___.</i>",
+"placeholder":"The U.S. sent soldiers to Vietnam to ___. This is containment because ___.",
+"stemText":"The U.S. sent soldiers to Vietnam to ___. This is containment because ___."
+},
+{
+"short":"The mission",
+"ref":"Reader pages 2–5 · Training the Rangers",
+"title":"2. What job did the comic give the Americans?",
+"from":2,"to":5,
+"check":{
+"page":4,
+"tag":"Reading check · Reader page 4",
+"q":"Read the top of reader page 4. What job does Sergeant Cactus Kane have at the Phu Yen base?",
+"right":"Training South Vietnamese Rangers to fight.",
+"wrong":["Leading an all-American army into the North.","Flying food to villages hurt in the raids.","Guarding the U.S. embassy back in Saigon."],
+"why":"✓ Correct. Lo Chuong says his men are \"under your command\" for Ranger training. In 1962, U.S. soldiers were trainers, not a full army.",
+"hint":"Read the first box and Lo Chuong's speech bubble on page 4."
+},
+"check2":{
+"tag":"Compare · Use the fact file",
+"q":"<span class=\"declass file\"><b>Fact file · Why Korea shows up</b><span class=\"line\"><i>Reader page 2:</i> The heroes joke about Mike's time \"on the 38th parallel.\" That's the line that split Korea. All three heroes fought in the Korean War.</span><span class=\"line\"><i>Korea, 1950–1953:</i> The U.S. fought to stop Communist North Korea from taking over the South. It ended in a tie at the 38th parallel.</span></span>Why would a 1962 comic make its heroes Korean War veterans?",
+"right":"To show Vietnam as another fight to stop communism, like Korea.",
+"wrong":["To show that Korea and Vietnam were fighting each other.","To show the U.S. had lost in Korea and wanted revenge there.","To show that only older soldiers were being sent to Vietnam."],
+"why":"✓ Correct. Same cause in both wars: containment. A split country, a Communist North, and the U.S. backing the South.",
+"hint":"Read the Korea line in the fact file. What was the U.S. fighting to stop?"
+}
+},
+{
+"short":"The allies",
+"ref":"Reader pages 6–8 · On patrol",
+"title":"3. How do the Americans see their Vietnamese allies?",
+"from":6,"to":8,
+"check":{
+"page":8,
+"tag":"Reading check · Reader page 8",
+"q":"Read the top-right box on reader page 8. What happens to Lo Chuong's men when the attack starts?",
+"right":"They hold for a moment, then scatter with no one leading.",
+"wrong":["They charge the enemy and win the fight right away.","They run all the way back to the helicopter base.","They give up and agree to join the Viet Cong."],
+"why":"✓ Correct. \"With no sign of leadership it was duck for cover, every man for himself.\" The comic blames Lo Chuong.",
+"hint":"Find the box that starts \"For one bloody moment.\""
+},
+"prompt":"Look at what Mike says about Lo Chuong on pages 6 and 8. What does the comic show about how some Americans saw the Vietnamese people they were fighting beside?",
+"stem":"<span class=\"declass file\"><b>Fact file · The real allies</b><span class=\"line\"><i>Real:</i> Many U.S. advisers did complain about South Vietnam's army and its leaders.</span><span class=\"line\"><i>Also real:</i> More than 200,000 South Vietnamese soldiers died fighting in the war.</span><span class=\"line\"><i>Also real:</i> Some U.S. soldiers used racist slurs for all Vietnamese people, friend or enemy. The covered word on page 8 is one of them.</span></span>Write 1–2 sentences. Start like this: <i>Mike treats Lo Chuong like ___. This shows some Americans saw Vietnamese people as ___.</i>",
+"placeholder":"Mike treats Lo Chuong like ___. This shows some Americans saw Vietnamese people as ___.",
+"stemText":"Mike treats Lo Chuong like ___. This shows some Americans saw Vietnamese people as ___."
+},
+{
+"short":"The promise",
+"ref":"Reader page 9 · The ending",
+"title":"4. The comic made a promise. What really happened?",
+"from":9,"to":9,
+"check":{
+"page":9,
+"tag":"Reading check · Reader page 9",
+"q":"Read reader page 9. How does the story end?",
+"right":"Lo Chuong leads his men and breaks the guerrilla attack.",
+"wrong":["Cactus Kane beats the whole guerrilla force by himself.","The Viet Cong capture Cactus Kane and Mike Williams.","The Rangers pull back and call in U.S. bombers."],
+"why":"✓ Correct. That's the comic's promise: train them, and South Vietnam will win its own war, fast.",
+"hint":"Read the top-right box about the young man who \"tiger-like\" led his force."
+},
+"prompt":"The 1962 comic promised a quick win with a few U.S. trainers. Why did the real war end up splitting Americans? Use one fact from the fact file.",
+"stem":"<span class=\"declass file\"><b>Fact file · What really happened</b><span class=\"line\"><i>1964–65:</i> After reported attacks on U.S. Navy ships near North Vietnam (the Gulf of Tonkin), Congress gave President Johnson power to fight. U.S. combat troops arrived in 1965.</span><span class=\"line\"><i>1968:</i> More than 500,000 U.S. troops were in Vietnam. The Tet Offensive played on TV every night, after leaders said the war was being won.</span><span class=\"line\"><i>At home:</i> In 1965, Des Moines students wore black armbands to mourn the dead. In 1970, National Guard soldiers killed four students at Kent State.</span><span class=\"line\"><i>1975:</i> North Vietnam took over the South. About 58,000 Americans died.</span></span>Write 1–2 sentences. Start like this: <i>The comic promised ___. But by 1968 ___, so many Americans ___.</i>",
+"placeholder":"The comic promised ___. But by 1968 ___, so many Americans ___.",
+"stemText":"The comic promised ___. But by 1968 ___, so many Americans ___."
+}
+],
+questions:["Why did the U.S. send soldiers to South Vietnam in 1962, and how is that containment?","(Check) Why would a 1962 comic make its heroes Korean War veterans?","What does the comic show about how some Americans saw the Vietnamese people they fought beside?","The comic promised a quick win. Why did the real war end up splitting Americans?"],
+validate(s){if(!s.name)return{text:"Type your first name + last initial (like Jordan M.) at the top of the questions.",focus:"studentName"};
+ const mc=[1,2,3,4].find(i=>!s.checkDone(i));if(mc)return{text:"Get the check right for part "+mc+" first.",part:mc};
+ if(!s.check2Done(2))return{text:"Get the compare check right for part 2 first.",part:2};
+ const ma=[1,3,4].find(i=>!s.answer(i));if(ma)return{text:"Write your answer for part "+ma+" before turning in.",part:ma,focus:"answer"+ma};
+ for(const i of [1,3,4]){const j=window.classJunkStop&&window.classJunkStop(document.getElementById("answer"+i));if(j)return{text:"Part "+i+": "+j,part:i}}return null},
+buildAnswers(s){const first=[1,2,3,4].filter(i=>(s.tries(i)||1)===1).length+((s.tries2(2)||1)===1?1:0);
+ const a={Standard:"SS.9-12.US.35, SS.9-12.US.37, SS.9-12.US.40","First-try correct":first+" of 5"};
+ a["[US.37] "+this.questions[0]]=s.answer(1);
+ a["[US.35, US.37] Korea and Vietnam (check)"]=(s.tries2(2)||1)===1?"Right on first try":"Right after "+((s.tries2(2)||1)-1)+" wrong";
+ a["[US.40] "+this.questions[2]]=s.answer(3);
+ a["[US.35, US.40] "+this.questions[3]]=s.answer(4);
+ a["Reading checks"]="5 of 5 correct · tries: "+[1,2,3,4].map(i=>s.tries(i)||1).join(", ")+", "+(s.tries2(2)||1);return a}
+};
+</script>
+<script src="../../shared/flip-reader.js?v=3alt"></script>
+<script>
+// Choices wait for the read timer, and "Not quite" scrolls into view (same as the Day 1 Red Scare comic).
+(function(){
+  document.addEventListener("click",e=>{const b=e.target.closest("#flipNext2");if(!b||!/Next part|Turn in/.test(b.textContent))return;
+    const a=document.querySelector(".flip-part:not([hidden]) textarea:not([disabled])");if(!a||!a.value.trim()||!window.classJunkStop)return;
+    if(window.classJunkStop(a)){e.stopImmediatePropagation();e.preventDefault()}},true);
+  const t=document.getElementById("flipTimer");
+  const sync=()=>document.body.classList.toggle("reading-now",t.textContent.trim()!=="");
+  new MutationObserver(sync).observe(t,{childList:true,characterData:true,subtree:true});sync();
+  document.getElementById("flipCards").addEventListener("click",e=>{if(!e.target.closest(".choice"))return;
+    setTimeout(()=>{const f=[...document.querySelectorAll(".flip-part:not([hidden]) .fb")].find(x=>x.textContent.trim());
+      if(f){const r=f.getBoundingClientRect();if(r.bottom>innerHeight-80||r.top<0)f.scrollIntoView({behavior:"smooth",block:"center"})}},120)});
+})();
+</script>
 </body></html>
