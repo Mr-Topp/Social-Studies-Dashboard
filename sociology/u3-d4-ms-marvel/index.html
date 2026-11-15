@@ -1,88 +1,118 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Ms. Marvel: No Normal (Reading) | Sociology Unit 3 Day 4</title>
-<meta name="description" content="Read the start of Ms. Marvel: No Normal and use Cooley and Mead to explain how other people shape Kamala Khan's sense of self.">
-<link rel="stylesheet" href="../u3-engine/engine.css?v=20261114a">
+<title>Ms. Marvel: No Normal, Retold (Reading) | Sociology Unit 3 Day 4</title>
+<meta name="description" content="The story of Ms. Marvel: No Normal, retold as a short illustrated book. Use Cooley and Mead to explain how other people shape Kamala Khan's sense of self.">
+<link rel="stylesheet" href="../u3-engine/engine.css?v=20261115b">
 <style>body{--a:#b8233a;--a2:#ffe3e7;--a3:#6e1322}</style>
 <script src="../../shared/assignments.js?v=20261105fb1"></script>
 <script src="../../shared/turnin.js?v=20261105fb1"></script>
 <script src="../../shared/lang.js?v=20261103c"></script>
 </head><body>
 <script>
-// Sociology Unit 3 Day 4 · Ms. Marvel: No Normal (Reading) (SS.9-12.Soc.10) · Fynn picked this 11/14/26.
-// Book-in-hand reading: students read Chapters 1-2 of Ms. Marvel Vol. 1: No Normal (G. Willow Wilson,
-// Adrian Alphona; Marvel, 2014) from a class copy. No pages from the book are posted here (copyright).
-// Scenes checked against published recaps 11/14/26: Circle Q + Zoe's headscarf question to Nakia; dad says no
-// to the party, she climbs down the tree outside her window; Zoe makes fun of her and her family at the party;
-// the mist + vision of Captain Marvel, Captain America and Iron Man; she wishes to be Carol; she becomes the
-// blonde Carol look, saves Zoe from the water, and feels freaked out instead of confident.
-// Ideas used are from the Day 4 slides: the self, Cooley's looking-glass self (3 steps), Mead's "I" and "Me".
+// Sociology Unit 3 Day 4 · Ms. Marvel: No Normal, Retold (Reading) (SS.9-12.Soc.10).
+// Fynn (11/15/26): keep the Ms. Marvel story, make it feel like reading a real book with real long text and
+// real images from online (not AI-made). The comic itself is copyrighted and its free Marvel copy is now locked,
+// so the story is retold here in plain words (no text or art copied from the comic), and every picture is a real
+// photo or old painting from Wikimedia Commons with its credit and license under it.
+// Plot points checked against published recaps 11/14/26 (Circle Q + Zoe's headscarf question to Nakia; dad says
+// no, she's sent to her room, climbs down the tree; Zoe mocks her and her family; the mist knocks her out; vision of
+// Captain Marvel, Captain America, Iron Man; wants to be Carol; wakes blonde, feels freaked out; saves Zoe from the
+// river; makes her own costume with Bruno's help; keeps the name Ms. Marvel).
+// Ideas from the Day 4 slides: the self, Cooley's looking-glass self (3 steps), Mead's "I" and "Me".
+// Each question has a "prove it" tap: students tap the sentence on the page that proves the answer.
+const IMG = (file, title, by, lic) => ({ src: "https://commons.wikimedia.org/wiki/Special:FilePath/" + encodeURIComponent(file) + "?width=1000", page: "https://commons.wikimedia.org/wiki/File:" + encodeURIComponent(file), title, by, lic });
+const CH = [
+  { n: 1, t: "The Circle Q", img: IMG("Journal_Square_Jersey_City_November_2021_003.jpg", "Journal Square, Jersey City, 2021", "King of Hearts", "CC BY-SA 4.0"),
+    p: [["Kamala Khan is sixteen. She lives in Jersey City, New Jersey, right across the river from New York.", "Her family is Pakistani American and Muslim, and her parents have strict rules."],
+        ["One night she hangs out at the Circle Q, a corner store, with her best friend Nakia and her friend Bruno, who works there.", "Then Zoe and Josh walk in, two of the most popular kids at school.", "Zoe tells Nakia that her headscarf is pretty.", "Then Zoe asks if anyone pressured her into wearing it.", "Zoe smiles the whole time, like she is being nice.", "But the question really says Nakia is different, and maybe not by choice.", "Nakia answers that, actually, her dad wants her to stop wearing it."],
+        ["Kamala watches all of this and gets quiet.", "She thinks about how kids like Zoe must see her family and her rules.", "She feels like the weird one, like she will never be normal.", "She wishes her life were less complicated."]] },
+  { n: 2, t: "No Party", img: IMG("DSC_7767_Quiet_residential_street_at_night_softly_lit_by_row_of_lampposts_leading_toward_a_distant_illuminated_house.jpg", "A quiet street at night, 2024", "PattayaPatrol", "CC BY-SA 4.0"),
+    p: [["There is a party that night down by the river, and Kamala wants to go.", "At dinner, she asks her parents.", "Her dad says no.", "Kamala argues back, and she gets sent to her room."],
+        ["Upstairs, she is furious.", "She knows exactly what her parents expect from her.", "She knows the rules she grew up with.", "But another part of her wants to go right now, no matter what."],
+        ["She opens her window and climbs down the tree outside.", "She is going to the party."]] },
+  { n: 3, t: "The Party", img: IMG("Yellow_(Unsplash_wdTEHCq1mRo).jpg", "A fire on the shore at night, 2017", "Alan Chen", "CC0"),
+    p: [["The party is by the river, with music and kids from school everywhere.", "For a minute, Kamala feels excited just to be there."],
+        ["Then Zoe starts making fun of her and her family.", "Kamala realizes that to these kids, she is still an outsider.", "Sneaking out did not make her one of them."],
+        ["She feels embarrassed and alone.", "She leaves the party and starts walking home by herself."]] },
+  { n: 4, t: "The Mist", img: IMG("Hudson_River_Panorama_of_Manhattan.jpg", "Fog over the Hudson River", "ChoiChoi4life", "CC BY-SA 4.0"),
+    p: [["On her walk home, a strange mist rolls through Jersey City.", "It covers everything, and Kamala passes out."],
+        ["In a dream-like vision, she sees three famous superheroes: Captain Marvel, Captain America, and Iron Man.", "They ask her what she wants.", "Kamala thinks about the party and about Zoe."],
+        ["She says she wants to be Captain Marvel, whose real name is Carol Danvers.", "She wants to be beautiful, awesome, and less complicated.", "Carol is blonde, famous, and admired by everyone.", "To Kamala, Carol looks like the opposite of the weird one."]] },
+  { n: 5, t: "A New Look", img: IMG("Woman_with_hand_mirror,_by_George_Pressler.jpg", "Woman with Hand Mirror, painting by George Pressler", "George Pressler", "Public domain"),
+    p: [["When Kamala wakes up, something is very wrong.", "She looks like a stranger: long blonde hair, pale skin, and a famous hero's costume.", "She looks exactly like her wish."],
+        ["But she does not feel strong or confident.", "She feels freaked out, and the costume feels wrong on her."],
+        ["Then she learns that Zoe has fallen into the river.", "Kamala rushes to help and pulls Zoe out of the water.", "Afterward, she notices something.", "The best part of the night was not looking like Carol.", "It was seeing Zoe safe."]] },
+  { n: 6, t: "Her Own Hero", img: IMG("WeehawkenCove.HudsonRiver.Manhattan.skyline.sunrise.jpg", "Sunrise over the Hudson River", "Maria Eklind", "CC BY-SA 2.0"),
+    p: [["Kamala finds out she can change her shape and size.", "At first, she thought a hero had to look like Carol.", "But that look never felt like her."],
+        ["So she makes her own costume, with help from her friend Bruno.", "She keeps the name Ms. Marvel to honor Carol, her hero.", "But now the face behind the mask is her own."],
+        ["Her family, her friends, and even Zoe all helped shape who she is.", "Being a hero, she decides, is about what you do, not how you look."]] }
+];
+// One book page. proof = "p,s" (paragraph, sentence) of the sentence that proves the answer.
+function page(n, proof) {
+  const c = CH[n - 1], i = c.img;
+  const body = c.p.map((para, pi) => "<p>" + para.map((s, si) => (pi + "," + si) === proof ? "[[" + s + "]]" : "{{" + s + "}}").join(" ") + "</p>").join("");
+  return `<div class="bookpage"><figure><img src="${i.src}" alt="${i.title}" loading="lazy"><figcaption>Photo: ${i.title}. By ${i.by}, <a href="${i.page}" target="_blank" rel="noopener">${i.lic}, Wikimedia Commons</a>. (A real place or picture, not from the comic.)</figcaption></figure>
+    <p class="chap">Chapter ${c.n} of 6</p><h3>${c.t}</h3>${body}<p class="pg">— ${c.n} —</p></div>`;
+}
 window.U3GAME = {
-  key: "soc-u3-d4-ms-marvel-v1",
+  key: "soc-u3-d4-ms-marvel-v2",
   assignmentId: "soc-u3-d4-ms-marvel",
-  title: "Sociology · Unit 3 · Day 4 · Ms. Marvel: No Normal (Reading)",
+  title: "Sociology · Unit 3 · Day 4 · Ms. Marvel: No Normal, Retold (Reading)",
   standard: "SS.9-12.Soc.10",
   stdText: [["SS.9-12.Soc.10", "Explain the process of the social construction of the self."]],
   brand: "MS. MARVEL · NO NORMAL",
   eyebrow: "Sociology · Unit 3 · Day 4 · Reading",
-  titleHtml: "MS. MARVEL<small>No Normal · Chapters 1–2</small>",
+  titleHtml: "MS. MARVEL<small>No Normal · the story, retold</small>",
   hook: "Kamala Khan is 16 and tired of feeling like the weird one. Then she gets the chance to look like someone else.",
-  chips: ["🏪 Circle Q", "🪟 Sneaking out", "🌫️ The mist", "⚡ A new look"],
-  tiles: ["📖 <b>2</b> chapters", "✓ <b>7</b> quick checks", "✍️ <b>1</b> short answer", "⏱ <b>35</b> min"],
-  book: "📚 You need the book <b>Ms. Marvel, Vol. 1: No Normal</b>. Get a copy from your teacher.",
+  chips: ["🏪 The Circle Q", "🪟 Sneaking out", "🌫️ The mist", "⚡ A new look"],
+  tiles: ["📖 <b>6</b> short chapters", "✓ <b>7</b> questions", "🔎 Prove every answer", "✍️ <b>1</b> short answer", "⏱ <b>30</b> min"],
+  book: "📖 This is the story of the comic <b>Ms. Marvel: No Normal</b> (Marvel, 2014), retold in plain words. The pictures are real photos and paintings, not art from the comic.",
   goal: "Explain how other people shape the way we see ourselves.",
-  how: ["Each step tells you which scene to find in the book. Read it.", "Tap \"I read it\" and answer the question. Stuck? Use the scene help.", "Write one answer and turn it in."],
+  how: ["Read one chapter. It's short.", "Answer the question. Then prove it: tap the sentence on the page that shows it.", "Write one answer and turn it in."],
   startLabel: "Open the book",
-  stepWord: "Scene",
+  stepWord: "Page",
   steps: [
-    { kind: "read", id: "r1", label: "Circle Q: Zoe's question", std: "Soc.10", kicker: "Scene 1 · Chapter 1", title: "The Circle Q",
-      find: "Chapter 1, the first scene: Kamala and her friends at the Circle Q store, when Zoe and Josh walk in.",
-      help: "Kamala, Nakia, and Bruno are at the store. Zoe, a popular girl, tells Nakia her headscarf is pretty. Then she asks Nakia a question about it. Watch Kamala's face while Zoe talks.",
+    { kind: "q", id: "r1", label: "Ch. 1: Zoe's question", std: "Soc.10", kicker: "Chapter 1", title: "The Circle Q", left: page(1, "1,3"), readSec: 20,
       tag: "From the page", q: "What does Zoe ask Nakia about her headscarf?",
       choices: ["Whether someone pressured her into wearing it", "Where she bought it and how much it cost", "If she could borrow it for the party that night", "Why her family wants her to stop wearing it"], answer: 0,
+      proof: "Tap the sentence that shows Zoe's question.", proofHint: "Find the sentence that starts with \"Then Zoe asks.\"",
       why: "Zoe asks if anyone pressured her. She acts friendly, but she's really saying Nakia is different.",
       hint: "Reread what Zoe says right after she calls the headscarf pretty." },
-    { kind: "q", id: "r2", label: "Looking-glass step for Kamala", std: "Soc.10", kicker: "Scene 1 · Chapter 1", title: "The mirror in other people",
-      left: `<p class="fact">Kamala watches how popular kids like Zoe treat her and Nakia.</p><p class="fact">She feels like she doesn't fit in, like she's the weird one.</p>
-        <div class="callout"><b>Cooley's looking-glass self</b><br>1. You imagine how you look to others.<br>2. You imagine how they judge you.<br>3. You feel something about yourself.</div>`,
-      tag: "Use the idea", q: "Kamala feels like the weird one. Which step of the looking-glass self is that feeling?",
+    { kind: "q", id: "r2", label: "Ch. 1: looking-glass step", std: "Soc.10", kicker: "Chapter 1 · Use the idea", title: "The mirror in other people", left: page(1, "2,2"), readSec: 4,
+      tag: "Use the idea", q: "Cooley's looking-glass self: 1) imagine how you look to others, 2) imagine how they judge you, 3) feel something about yourself. Kamala feels like the weird one. Which step is that?",
       choices: ["Step 3: she feels something about herself.", "Step 1: she imagines how she looks to others.", "Step 2: she imagines how others judge her.", "None. She was born feeling like an outsider."], answer: 0,
-      why: "Step 3. She imagined Zoe's judgment (step 2), and now she feels bad about herself (step 3).",
+      proof: "Tap the sentence that shows step 3: how Kamala feels about herself.", proofHint: "Step 3 is a feeling. Find the sentence that says how she feels.",
+      why: "Step 3. She imagined how kids like Zoe judge her (step 2), and now she feels bad about herself (step 3).",
       hint: "A feeling about yourself comes last, after you imagine the judgment." },
-    { kind: "read", id: "r3", label: "Sneaking out: Mead's I", std: "Soc.10", kicker: "Scene 2 · Chapter 1", title: "No party for Kamala",
-      find: "Chapter 1: dinner at Kamala's house, when she asks to go to the party, and what she does after.",
-      help: "Kamala asks her parents if she can go to a party by the river. Her dad says no. She argues and gets sent to her room. Then she climbs out her window and down the tree.",
-      tag: "Use the idea", q: "When Kamala climbs out the window, which part of Mead's self is in charge?",
-      choices: ["The \"I\": the part that wants to do something right now", "The \"Me\": the part that follows rules learned from others", "The generalized other: what society expects from everyone", "Role-taking: seeing the night through her dad's eyes"], answer: 0,
-      why: "The \"I\" is the spontaneous you. Her \"Me\" knows her parents' rules, but tonight the \"I\" wins.",
+    { kind: "q", id: "r3", label: "Ch. 2: Mead's I", std: "Soc.10", kicker: "Chapter 2", title: "No Party", left: page(2, "1,3"), readSec: 18,
+      tag: "Use the idea", q: "Mead said the \"I\" is the part of you that acts on what you want right now. The \"Me\" is the part that follows rules you learned from others. When Kamala climbs out the window, which one is in charge?",
+      choices: ["The \"I\": she does what she wants right now", "The \"Me\": she follows the rules she learned", "Both equally, so neither one wins tonight", "Neither. Her parents are making the choice"], answer: 0,
+      proof: "Tap the sentence that shows her \"I\" taking over.", proofHint: "Find the sentence about the part of her that wants to go right now.",
+      why: "The \"I\" wins. Her \"Me\" knows the rules she grew up with, but tonight the part that wants to go right now takes over.",
       hint: "Is she following the rules she learned, or doing what she wants right now?" },
-    { kind: "read", id: "r4", label: "The party", std: "Soc.10", kicker: "Scene 3 · Chapter 1", title: "The party by the river",
-      find: "Chapter 1: Kamala at the party, and how it ends for her.",
-      help: "Kamala finally gets to the party. It doesn't go how she hoped. Zoe makes fun of her and her family, and Kamala leaves alone.",
+    { kind: "q", id: "r4", label: "Ch. 3: the party", std: "Soc.10", kicker: "Chapter 3", title: "The Party", left: page(3, "1,0"), readSec: 15,
       tag: "From the page", q: "What happens to Kamala at the party?",
       choices: ["Zoe makes fun of her and her family, so she leaves.", "Her parents show up and drag her back home with them.", "She wins everyone over and stays until the party ends.", "The police break up the party and send everyone home."], answer: 0,
+      proof: "Tap the sentence that shows what Zoe does.", proofHint: "Find the sentence where Zoe does something to Kamala.",
       why: "Zoe mocks her and her family. Kamala leaves feeling worse about herself, another hit from the looking-glass.",
-      hint: "Look at what Zoe says to her, and how Kamala leaves." },
-    { kind: "read", id: "r5", label: "The vision: wanting to be Carol", std: "Soc.10", kicker: "Scene 4 · Chapter 1", title: "The mist",
-      find: "End of Chapter 1: the strange mist on Kamala's walk home, and the heroes she sees.",
-      help: "A mist covers the city and knocks Kamala out. She sees Captain Marvel (Carol Danvers), Captain America, and Iron Man. They ask what she wants. She says she wants to be Carol: beautiful, awesome, and less complicated.",
-      tag: "From the page", q: "In the vision, what does Kamala wish for?",
-      choices: ["To be Carol Danvers: beautiful and less complicated", "To join the Avengers and leave Jersey City forever", "To have her parents finally let her go to parties", "To become a doctor like her dad wants her to be"], answer: 0,
-      why: "She wants to be Carol. After the party, she thinks being someone else would make her life easier.",
-      hint: "Reread what she tells Captain Marvel she wants." },
-    { kind: "read", id: "r6", label: "The new look feels wrong", std: "Soc.10", kicker: "Scene 5 · Chapter 2", title: "Wearing someone else's face",
-      find: "Chapter 2: Kamala wakes up looking like Carol Danvers, then hears a call for help by the water.",
-      help: "Kamala now looks like Carol: blonde hair, the classic costume. But she doesn't feel strong. She feels freaked out and strange. Then Zoe falls into the river, and Kamala saves her. What makes her happy is that Zoe is safe, not the new look.",
+      hint: "Look at what Zoe does, and how Kamala leaves." },
+    { kind: "q", id: "r5", label: "Ch. 4: wanting to be Carol", std: "Soc.10", kicker: "Chapter 4", title: "The Mist", left: page(4, "2,1"), readSec: 18,
+      tag: "From the page", q: "In the vision, why does Kamala wish to be Carol Danvers?",
+      choices: ["To be beautiful, awesome, and less complicated", "To join the Avengers and leave Jersey City", "To get her parents to let her go to parties", "To become a doctor like her dad wants"], answer: 0,
+      proof: "Tap the sentence that shows what she wants to be.", proofHint: "Find the sentence that lists what she wants to be.",
+      why: "She wants to be Carol so she can be beautiful and less complicated. After the party, being someone else sounds easier.",
+      hint: "Reread what she tells the heroes she wants." },
+    { kind: "q", id: "r6", label: "Ch. 5: the new look feels wrong", std: "Soc.10", kicker: "Chapter 5", title: "A New Look", left: page(5, "1,1"), readSec: 18,
       tag: "From the page", q: "How does Kamala feel when she finally looks like Carol?",
       choices: ["Freaked out and strange, not like herself", "Confident, like she finally fits in at school", "Angry at her parents for raising her so strict", "Proud because everyone at school can see her"], answer: 0,
+      proof: "Tap the sentence that shows how the new look feels.", proofHint: "Find the sentence that names her feeling.",
       why: "The look she wished for doesn't feel like her. Saving Zoe, doing something good, is what feels right.",
-      hint: "Look at her face and her words after she changes." },
-    { kind: "q", id: "r7", label: "The self is built", std: "Soc.10", kicker: "The big idea", title: "Who decides who you are?",
-      left: `<p class="fact">Kamala thought looking like Carol would fix how she felt. It didn't.</p><p class="fact">Later she builds her <b>own</b> hero: her own costume, her own way of doing things.</p>
-        <div class="callout"><b>George Herbert Mead, 1934</b><br>"The self ... is not initially there, at birth, but arises in the process of social experience and activity."</div>`,
-      tag: "Use the idea", q: "What does Kamala's story show about how the self is built?",
-      choices: ["It is built through experiences with people, not by copying a look.", "It is mostly something you are born with and can't change.", "It is shaped by your family alone, never by friends or school.", "It is finished in childhood and stays the same after that."], answer: 0,
-      why: "The self is built through social interaction. Zoe, her parents, and saving someone all helped shape who Kamala is.",
+      hint: "Look at how she feels right after she changes." },
+    { kind: "q", id: "r7", label: "Ch. 6: the self is built", std: "Soc.10", kicker: "Chapter 6", title: "Her Own Hero", left: page(6, "2,0"), readSec: 15,
+      tag: "Use the idea", q: "Mead said the self \"is not initially there, at birth, but arises in the process of social experience.\" What does Kamala's story show?",
+      choices: ["The self is built through people, not by copying a look.", "The self is mostly something you are born with.", "The self is shaped by your family alone, never friends.", "The self is finished in childhood and stays the same."], answer: 0,
+      proof: "Tap the sentence that shows other people shaping who she is.", proofHint: "Find the sentence that names the people who shaped her.",
+      why: "The self is built through social interaction. Her family, her friends, and even Zoe helped shape who Kamala is.",
       hint: "Mead says the self is not there at birth. Where does it come from?" }
   ],
   end: {
@@ -96,14 +126,14 @@ window.U3GAME = {
   write: {
     id: "w1", short: "How other people shape the self (Kamala)", heading: "Explain it with Kamala",
     label: "How can interaction with other people shape a person's sense of self? Use Kamala as your example.",
-    help: "Use a scene: Zoe at the Circle Q, her dad's rule, the party, or the new look.",
+    help: "Use a chapter: Zoe at the Circle Q, her dad's rule, the party, the new look, or her own costume.",
     stem: "Other people shape the self because ___. For example, Kamala ___.",
-    min: 80, more: "Use a real scene from the book.",
-    mustAll: [{ words: ["kamala", "zoe", "nakia", "dad", "parent", "carol", "party"], msg: "Use a scene from the book. Name Kamala, Zoe, her parents, or the party." },
-              { words: ["looking-glass", "looking glass", "mirror", "judge", "imagine", "\"i\"", " i ", "\"me\"", " me ", "generalized", "role", "self", "feel"], msg: "Use an idea from class: the looking-glass self, the \"I\" and \"Me,\" or how others' reactions make her feel." },
+    min: 80, more: "Use a real moment from the story.",
+    mustAll: [{ words: ["kamala", "zoe", "nakia", "dad", "parent", "carol", "party", "bruno"], msg: "Use a moment from the story. Name Kamala, Zoe, her parents, or the party." },
+              { words: ["looking-glass", "looking glass", "mirror", "judge", "imagine", "\"i\"", "\"me\"", "generalized", "role", "self", "feel"], msg: "Use an idea from class: the looking-glass self, the \"I\" and \"Me,\" or how others' reactions make her feel." },
               { words: ["because", "since"], msg: "Say why. Use the word \"because.\"" }]
   }
 };
 </script>
-<script src="../u3-engine/engine.js?v=20261114a"></script>
+<script src="../u3-engine/engine.js?v=20261115b"></script>
 </body></html>
