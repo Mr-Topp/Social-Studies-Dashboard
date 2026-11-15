@@ -43,11 +43,11 @@
   const kane = t => `<div class="kane"><span class="kface" aria-hidden="true">👔</span><div class="say"><span class="who-s">Prosecutor Kane</span>${t}</div></div>`;
 
   const ladder = () => `<div class="ladder">
-      <div class="rung top"><span class="ri" aria-hidden="true">🏛️</span><div><b>U.S. Supreme Court</b><span>Final word on the Constitution. 9 justices. They serve for life.</span></div></div>
+      <div class="rung top"><span class="ri" aria-hidden="true">🏛️</span><div><b>U.S. Supreme Court</b><span>The top court. It has the final say.</span></div></div>
       <div class="rarrow" aria-hidden="true">▲ can reverse the court below</div>
-      <div class="rung you"><span class="ri" aria-hidden="true">⚖️</span><div><b>Your court: the state's top court</b><span>Checks if the trial followed the law. No new witnesses. Voters elected you.</span></div><i class="youtag">YOU</i></div>
+      <div class="rung you"><span class="ri" aria-hidden="true">⚖️</span><div><b>Your court</b><span>Checks trials for mistakes. Voters picked you.</span></div><i class="youtag">YOU</i></div>
       <div class="rarrow" aria-hidden="true">▲ appeal</div>
-      <div class="rung"><span class="ri" aria-hidden="true">🔨</span><div><b>Trial court</b><span>Hears the witnesses. Decides guilty or not guilty.</span></div></div>
+      <div class="rung"><span class="ri" aria-hidden="true">🔨</span><div><b>Trial court</b><span>Decides guilty or not guilty.</span></div></div>
     </div>`;
 
   const file = c => `<div class="file"><span class="ftab">CASE FILE ${c.n} of ${CASES.length}</span>
@@ -55,20 +55,21 @@
       ${row(c.chargeLabel || "Charge", c.charge)}
       <p class="fsec">${c.recLabel}</p>
       ${c.record.map(r => ln(r[0], r[1])).join("")}
-      ${row(c.sentenceLabel || "Sentence", `<b>${c.sentence}</b>`)}
+      ${c.sentence ? row(c.sentenceLabel || "Sentence", `<b>${c.sentence}</b>`) : ""}
       ${c.extra ? `<p class="fextra">${c.extra}</p>` : ""}
-      ${src("Real case. Real record.")}</div>`;
+      ${src("Real case.")}</div>`;
 
-  const amend = c => `<div class="amend"><span class="atab">U.S. CONSTITUTION · ${c.amend}</span>
-      <p class="atext">${c.text}</p>
-      <p class="anote">${c.note}</p></div>`;
-
+  // Plain words first (big), then only the few real words that matter (small).
+  const amend = c => `<div class="amend"><span class="atab">${c.amend} · IN PLAIN WORDS</span>
+      <p class="aplain">${c.plain}</p>
+      <p class="atext"><span class="areal">Real words:</span> ${c.text}</p>
+      ${c.note ? `<p class="anote">${c.note}</p>` : ""}</div>`;
   const sides = c => `<div class="sides">
       <div class="side his"><span class="stag">${c.sideName}</span><p>${c.sideHis}</p></div>
       <div class="vsb" aria-hidden="true">VS</div>
       <div class="side state"><span class="stag">${c.stateName || "👔 The State · Prosecutor Kane"}</span><p>${c.sideState}</p></div>
     </div>`;
-  const cap = c => `<div class="mini-file"><span aria-hidden="true">${c.icon}</span><span>At the stand: <b>${c.name}</b> · ${c.short}</span></div>`;
+  const cap = c => `<div class="mini-file"><span aria-hidden="true">${c.icon}</span><span><b>${c.name}</b> · ${c.short}</span></div>`;
 
   // Real photos of the people and events. Claude can't pull these off the web, so each case has a spot
   // Fynn can fill with a photo he is allowed to use: put the file in this folder's img/ and fill in the line,
@@ -81,7 +82,7 @@
     return isTestT() ? `<div class="photo empty" title="Only Test T. sees this">📷<span>Photo spot<br>${esc(c.key)}</span></div>` : "";
   };
   // The record card: the real case name, where it is printed, the date, and who wrote the opinion.
-  const docCard = c => `<div class="doc">${photoSpot(c)}<div class="doct"><span class="dsm">Supreme Court of the United States</span><b>${c.doc.title}</b><span class="dcite">${c.doc.cite} · Decided ${c.doc.decided}</span><span class="dcite">Opinion of the Court by ${c.doc.by}</span></div></div>`;
+  const docCard = c => `<div class="doc">${photoSpot(c)}<div class="doct"><span class="dsm">Supreme Court of the United States</span><b>${c.doc.title}</b><span class="dcite">${c.doc.cite} · Decided ${c.doc.decided}</span><span class="dcite" hidden>Opinion of the Court by ${c.doc.by}</span></div></div>`;
 
   // ---------------- The courtroom (drawn, not photos) ----------------
   // The judge (the student) sits up on the bench on the right, looking down at the person at the stand.
@@ -210,187 +211,188 @@
   }
 
   // ---------------- The four real cases ----------------
+  // Reading rule (Fynn, 11-14): short sentences, everyday words, about a 12-year-old level.
+  // Each amendment shows a plain-words line first, then only the few real words that matter.
   const CASES = [
     { n: 1, key: "Miranda", icon: "🚨", name: "Ernesto Miranda", age: "22", place: "Phoenix, Arizona · 1963", status: "LOCKED UP",
-      charge: "Kidnapping and attacking a young woman", recLabel: "In the police room",
-      record: [["⏱️", "Police questioned him for about 2 hours."], ["🚫", "No lawyer was in the room."], ["🤐", "No one told him he could stay silent."], ["✍️", "He signed a confession."], ["👀", "At trial, the jury saw the confession. Guilty."]],
-      sentence: "20 to 30 years in prison",
-      short: "confession · 20 to 30 years", amend: "5th Amendment",
-      text: "“No person … shall be <mark>compelled</mark> in any criminal case to be a witness against himself.”",
-      note: "<b>Compelled</b> = forced. Police did not hit him or threaten him.",
-      sideName: "✉️ Miranda's lawyers", sideHis: "Alone with police for two hours, he never knew he could stay silent or ask for a lawyer. That pressure is a kind of force.",
-      sideState: "Nobody hurt him. Nobody threatened him. He signed it himself. Throw it out and a dangerous man could walk.",
+      charge: "Kidnapping and attacking a woman", recLabel: "With the police",
+      record: [["⏱️", "Police questioned him for 2 hours."], ["🚫", "He had no lawyer."], ["🤐", "No one said he could stay quiet."], ["✍️", "He signed a confession."]],
+      sentence: "20 to 30 years",
+      short: "confession", amend: "5th Amendment", plain: "You can't be forced to confess.",
+      text: "“No person … shall be <mark>compelled</mark> … to be a witness against himself.”",
+      note: "<b>Compelled</b> = forced.",
+      sideName: "✉️ Miranda's lawyers", sideHis: "He was alone and scared. He didn't know he could stay quiet.",
+      sideState: "Nobody forced him. He signed it. He may be dangerous.",
       doc: { title: "MIRANDA v. ARIZONA", cite: "384 U.S. 436", decided: "June 13, 1966", by: "Chief Justice Warren" },
-      terms: [["Appeal", "asking a higher court to check a trial"], ["Compelled", "forced"], ["Confession", "saying “I did it”"]] },
+      terms: [["Appeal", "asking a higher court to check a trial"], ["Confession", "saying “I did it”"]] },
     { n: 2, key: "Gault", icon: "📞", name: "Gerald Gault", age: "15", place: "Gila County, Arizona · 1964", status: "LOCKED UP",
       chargeLabel: "Accused of", charge: "A rude phone call to a neighbor", recLabel: "What happened",
-      record: [["🚓", "Police picked him up while his parents were at work. No one told them."], ["📄", "No written charges. No lawyer."], ["👻", "The neighbor never came to court."], ["📝", "No record was kept of the hearing."]],
-      sentence: "State reform school until age 21. Up to 6 years.", extra: "⚖️ An adult, same charge: a $5 to $50 fine, or up to 2 months in jail.",
-      short: "age 15 · up to 6 years", amend: "14th Amendment",
-      text: "“… nor shall <mark>any State</mark> deprive <mark>any person</mark> of <mark>life, liberty, or property</mark>, without <mark>due process of law</mark> …”",
-      note: "<b>Due process</b> = fair steps before the government takes your freedom. <b>Deprive</b> = take away.",
-      sideName: "✉️ Gerald's parents", sideHis: "Up to six years locked up is punishment, whatever you call it. He got fewer rights than an adult facing two months.",
-      sideState: "Juvenile court is built to help kids, not punish them. It works like a parent. Lawyers and trial rules would turn it into a criminal court.",
+      record: [["🚓", "Police took him. No one told his parents."], ["📄", "No lawyer. Nothing in writing."], ["👻", "The neighbor never came to court."]],
+      sentence: "Locked up until 21. Up to 6 years.", extra: "An adult would get a small fine or 2 months.",
+      short: "age 15", amend: "14th Amendment", plain: "The government can't lock you up without fair steps.",
+      text: "“… nor shall <mark>any State</mark> deprive <mark>any person</mark> of … <mark>liberty</mark> … without <mark>due process of law</mark>.”",
+      note: "<b>Due process</b> = fair steps. <b>Liberty</b> = freedom.",
+      sideName: "✉️ Gerald's parents", sideHis: "Six years is punishment. He got fewer rights than an adult.",
+      sideState: "Kids' court is there to help, not punish. It doesn't need lawyers.",
       doc: { title: "IN RE GAULT", cite: "387 U.S. 1", decided: "May 15, 1967", by: "Justice Fortas" },
-      terms: [["Due process", "fair steps before the government punishes you"], ["Juvenile court", "court for people under 18"], ["Accuser", "the person who says you did it"]] },
+      terms: [["Due process", "fair steps before the government punishes you"], ["Deprive", "take away"], ["Liberty", "freedom"]] },
     { n: 3, key: "T.L.O.", icon: "👜", name: "“T.L.O.”", age: "14", place: "Piscataway, New Jersey · 1980", status: "ON PROBATION",
-      chargeLabel: "Accused of", charge: "Selling marijuana at school", recLabel: "In the school office",
-      record: [["🚬", "A teacher caught her smoking in the school bathroom."], ["🙅", "She told the assistant principal she did not smoke at all."], ["👜", "He opened her purse. No warrant. He saw cigarettes."], ["🔎", "He kept looking. He found marijuana, cash, and a list of students who owed her money."]],
-      sentence: "1 year of probation", extra: "🔤 Courts used her initials because she was 14.",
-      short: "age 14 · purse search", amend: "4th Amendment",
-      text: "“The right of the people to be secure in their persons, houses, papers, and effects, against <mark>unreasonable</mark> searches and seizures, shall not be violated …”",
-      note: "<b>Effects</b> = your stuff. <b>Seizure</b> = taking it. The words ban <b>unreasonable</b> searches, not all searches.",
-      sideName: "✉️ T.L.O.'s lawyers", sideHis: "He works for the government. He had no warrant. Students keep their rights when they walk into school.",
-      sideState: "A school is not the street. Staff have to keep order for hundreds of kids. A teacher saw her smoking, so he had a reason to look.",
+      chargeLabel: "Accused of", charge: "Selling marijuana at school", recLabel: "At school",
+      record: [["🚬", "A teacher caught her smoking in the bathroom."], ["🙅", "She said she didn't smoke."], ["👜", "The assistant principal searched her purse."], ["🔎", "He found marijuana and a list of kids who owed her money."]],
+      sentence: "1 year of probation",
+      short: "purse search", amend: "4th Amendment", plain: "The government can't search you without a good reason.",
+      text: "“… against <mark>unreasonable</mark> searches …”",
+      note: "A public school is part of the government.",
+      sideName: "✉️ T.L.O.'s lawyers", sideHis: "He had no warrant. Students have rights at school too.",
+      sideState: "A teacher saw her smoking. That is a good reason to look.",
       doc: { title: "NEW JERSEY v. T. L. O.", cite: "469 U.S. 325", decided: "January 15, 1985", by: "Justice White" },
-      terms: [["Warrant", "a judge's OK to search"], ["Probation", "staying free, but under a court's rules"], ["Reverse", "a higher court cancels a lower court's ruling"]] },
+      terms: [["Warrant", "a judge's OK to search"], ["Probation", "staying free, but under a court's rules"]] },
     { n: 4, key: "Frederick", icon: "📣", name: "Joseph Frederick", age: "a senior", place: "Juneau, Alaska · 2002", status: "SUSPENDED",
-      chargeLabel: "Punished for", charge: "A banner that said BONG HiTS 4 JESUS", recLabel: "What happened",
-      record: [["🔥", "The Olympic torch was passing his high school. Students were let out of class to watch, with teachers in charge."], ["📺", "He stood across the street. When the TV cameras came, he held up a 14-foot banner."], ["🧑‍🏫", "The principal told him to take it down. He refused. She took it."]],
-      sentenceLabel: "Penalty", sentence: "Suspended for 10 days", extra: "🏛️ He sued the principal in federal court. For this one, you sit on a federal appeals court.",
-      short: "senior · banner", amend: "1st Amendment",
-      text: "“Congress shall make no law … abridging the <mark>freedom of speech</mark> …”",
-      note: "<b>Abridging</b> = cutting back. Public schools are part of the government, so this covers them too.",
-      sideName: "✉️ Frederick's lawyers", sideHis: "The banner was a joke to get on TV. It did not tell anyone to do anything. Free speech covers dumb jokes too.",
-      stateName: "🏫 The principal's lawyers", sideState: "This was a school event. The banner cheered on illegal drug use in front of students. A principal has to be able to stop that.",
+      chargeLabel: "In trouble for", charge: "A banner: BONG HiTS 4 JESUS", recLabel: "What happened",
+      record: [["🔥", "The Olympic torch passed his school. Students went out to watch."], ["📺", "He held up the banner for the TV cameras."], ["🧑‍🏫", "The principal took it away."]],
+      sentenceLabel: "Penalty", sentence: "Suspended 10 days", extra: "This one went to federal court.",
+      short: "banner", amend: "1st Amendment", plain: "The government can't stop you from speaking.",
+      text: "“… no law … abridging the <mark>freedom of speech</mark> …”",
+      note: "A public school is part of the government.",
+      sideName: "✉️ Frederick's lawyers", sideHis: "It was a joke to get on TV. Jokes are free speech.",
+      stateName: "🏫 The principal's lawyers", sideState: "It was a school event. The banner cheered for drugs.",
       doc: { title: "MORSE v. FREDERICK", cite: "551 U.S. 393", decided: "June 25, 2007", by: "Chief Justice Roberts" },
-      terms: [["Abridging", "cutting back"], ["Suspended", "kept out of school for a set time"], ["Federal court", "courts run by the national government, not a state"]] }
+      terms: [["Abridging", "limiting"], ["Suspended", "kept out of school for a while"], ["Federal court", "a court run by the national government"]] }
   ];
-  const LADDER_TERMS = [["Appeal", "asking a higher court to check a trial"], ["Trial court", "where witnesses speak and guilt is decided"], ["Reverse", "a higher court cancels a lower court's ruling"]];
+  const LADDER_TERMS = [["Appeal", "asking a higher court to check a trial"], ["Reverse", "cancel a lower court's ruling"]];
 
   // ---------------- Steps ----------------
   // check: options[0] is right; miss[i] teaches options[i+1].
   // rule: cards[].sc = "agreed" | "reversed" | "toofar"; fx = change in public trust.
-  // Cases 1-2 get two checks each (file, then words). Cases 3-4 put the file and the words on
-  // one screen with one check, so the whole game stays at 7 checks.
+  // Cases 1-2 get two checks each (file, then words). Cases 3-4 get one check, so the game stays at 7 checks.
   const STEPS = [
-    { id: "c1", type: "check", c: -1, std: "Gov.8", kicker: "Your first day on the bench", short: "What does your court do?", stamp: "SWORN IN", where: "ladder",
+    { id: "c1", type: "check", c: -1, std: "Gov.8", kicker: "Your first day", short: "What does your court do?", stamp: "SWORN IN", where: "chart",
       mid: () => ladder(),
-      ask: "Someone says their trial was unfair. What is your court's job?",
-      options: ["Make sure the trial was run by the rules", "Hear all the witnesses over again", "Decide if they are guilty or innocent", "Write a new law for the whole state"],
-      miss: ["Witnesses speak at the trial court. Read your rung of the ladder.", "Guilt is decided at the trial court. Read your rung of the ladder.", "Courts decide cases. Lawmakers write laws. Read your rung."],
-      hint: "Read the middle rung of the ladder.",
-      reveal: "<b>Trial courts</b> decide guilt. <b>Appeals courts</b> check that the trial followed the law." },
+      ask: "Someone says their trial was unfair. What is your job?",
+      options: ["See if the trial was fair", "Hear the witnesses again", "Decide if they are guilty", "Write a new law"],
+      miss: ["Witnesses talk at the trial court. Look at your court.", "The trial court decides guilt. Look at your court.", "Courts don't write laws. Look at your court."],
+      hint: "Look at your court in the chart.",
+      reveal: "<b>Trial courts</b> decide guilt. <b>Appeals courts</b> check if the trial was fair." },
 
     // ---- Case 1: Miranda ----
     { id: "c2", type: "check", c: 0, std: "Gov.8", kicker: "Case 1 · The file", short: "Miranda: what went wrong?", stamp: "NOTED", where: "case file",
-      ask: "What problem do Miranda's lawyers point to?",
-      options: ["No one told him his rights first", "Police had no reason to arrest him", "His lawyer was not allowed to speak", "The jury never saw his confession"],
-      miss: ["The file doesn't say that. Look at the police room.", "No lawyer was in the police room at all. What was he never told?", "The jury did see it. That is the problem. What was he never told?"],
-      hint: "Look at what happened in the police room.",
-      reveal: "Miranda's claim: a confession should not count if you never knew your rights." },
+      ask: "His lawyers say something was unfair. What?",
+      options: ["No one told him his rights", "Police had no reason to arrest", "The police hit him", "His trial had no jury"],
+      miss: ["The file doesn't say that. What did no one tell him?", "The file doesn't say that. What did no one tell him?", "The file doesn't say that. What did no one tell him?"],
+      hint: "What did no one tell him?",
+      reveal: "His claim: a confession doesn't count if you never knew your rights." },
     { id: "c3", type: "check", c: 0, std: "Gov.8", kicker: "Case 1 · The words", short: "Miranda: what does “compelled” mean?", stamp: "INTERPRET", where: "marked word",
       under: () => amend(CASES[0]),
-      ask: "No one hit or threatened him. What must the court decide about the word “compelled”?",
-      options: ["Can pressure in a police room count as force?", "Should every confession be banned from trials?", "Did Miranda really commit this crime?", "Can police arrest someone without proof?"],
-      miss: ["Too far. The words only ban forced confessions.", "Guilt was the trial court's job. Your job is what the words mean.", "The arrest isn't in this appeal. Look at the word “compelled.”"],
+      ask: "No one hit him. So what must the court decide?",
+      options: ["Can pressure count as force?", "Should all confessions be banned?", "Did he really do the crime?", "Was the arrest OK?"],
+      miss: ["Too far. Only forced confessions are banned.", "The trial court decides guilt. Your job is the words.", "This case isn't about the arrest. Look at the marked word."],
       hint: "Look at the marked word. What counts as forced?",
-      reveal: "Courts <b>interpret</b> the law: they decide what the words mean in a real case. Judges can disagree." },
+      reveal: "Courts <b>interpret</b> the law. That means they decide what the words mean." },
     { id: "e1", type: "rule", c: 0, kicker: "Case 1 · Your ruling", short: "Rule on Miranda",
       under: () => sides(CASES[0]),
-      ask: "Rule on Miranda's appeal.",
+      ask: "Rule on Miranda.",
       cards: [
         { icon: "🔒", t: "Keep him locked up", line: "The confession counts", fx: 2, sc: "reversed",
-          res: "The confession stands. So does the sentence.", head: "COURT KEEPS KIDNAPPER BEHIND BARS", cause: "Kept Miranda's confession",
-          kane: "Four of the nine justices agreed with us. Four is not five." },
-        { icon: "🔁", t: "Order a new trial", line: "The jury can't see the confession", fx: -3, sc: "agreed",
-          res: "You throw out the confession and order a new trial.", head: "JUDGE TOSSES SIGNED CONFESSION", cause: "Threw out Miranda's confession",
+          res: "The confession stays. So does the sentence.", head: "COURT KEEPS KIDNAPPER LOCKED UP", cause: "Kept Miranda's confession",
+          kane: "Four of nine judges agreed with us. Four is not five." },
+        { icon: "🔁", t: "Order a new trial", line: "No confession this time", fx: -3, sc: "agreed",
+          res: "You toss the confession. New trial.", head: "JUDGE TOSSES CONFESSION", cause: "Threw out Miranda's confession",
           kane: "He confessed. You know that, right?" },
-        { icon: "🔓", t: "Set him free for good", line: "No new trial", fx: -4, sc: "toofar",
-          res: "You open the cell door yourself. No new trial.", head: "JUDGE FREES CONFESSED KIDNAPPER", cause: "Freed Miranda with no new trial",
-          kane: "I'd start packing up that office, Judge." }
+        { icon: "🔓", t: "Set him free", line: "No new trial", fx: -4, sc: "toofar",
+          res: "You let him go. No new trial.", head: "JUDGE FREES KIDNAPPER", cause: "Freed Miranda",
+          kane: "Start packing your office, Judge." }
       ],
       vote: "5–4", caseName: "Miranda v. Arizona (1966)",
-      real: [["⚖️", "Arizona's top court kept the confession. Miranda stayed in prison."], ["🏛️", "The U.S. Supreme Court reversed that. The vote was 5 to 4 for Miranda."], ["📜", "The rule: before questioning, police must warn you. You can stay silent. You can have a lawyer."], ["🔁", "New trial, no confession. The jury said <b>guilty</b> again. He went back to prison."]],
-      tooFar: "The real Court never said he was innocent. It ordered a new trial without the confession.",
-      reveal: "An appeal is about a <b>fair process</b>, not about who seems guilty." },
+      real: [["🏛️", "The Supreme Court sided with Miranda, 5 to 4."], ["📜", "New rule: police must tell you your rights first."], ["🔁", "He got a new trial. <b>Guilty</b> again."]],
+      tooFar: "The real Court never said he was innocent. It ordered a new trial.",
+      reveal: "An appeal asks: was it <b>fair</b>? Not: did he do it?" },
 
     // ---- Case 2: Gault ----
     { id: "c4", type: "check", c: 1, std: "Gov.8", kicker: "Case 2 · The file", short: "Gault: what was unfair?", stamp: "NOTED", where: "case file",
-      ask: "Which fact best shows Gerald's hearing was unfair?",
-      options: ["His accuser never came to court", "He was 15 when he was picked up", "The call was made to a neighbor", "The hearing was run by a judge"],
-      miss: ["His age alone isn't unfair. Look at who never showed up.", "That is what he was accused of. Look at who never showed up.", "Judges run hearings. Look at who never showed up."],
-      hint: "Look at who never showed up.",
-      reveal: "No accuser. No lawyer. No written charges. And up to 6 years." },
+      ask: "What was unfair about his hearing?",
+      options: ["The neighbor never showed up", "He was only 15 years old", "The call was to a neighbor", "A judge ran the hearing"],
+      miss: ["Being 15 isn't unfair by itself. Who never came?", "That is what he was accused of. Who never came?", "Judges run hearings. Who never came?"],
+      hint: "Who never came to court?",
+      reveal: "No lawyer. No neighbor in court. Six years." },
     { id: "c5", type: "check", c: 1, std: "Gov.8", kicker: "Case 2 · The words", short: "Gault: do the words cover kids?", stamp: "INTERPRET", where: "marked words",
       under: () => amend(CASES[1]),
-      ask: "Arizona says these rights are for adults. Which words say who is protected?",
-      options: ["“any person”", "“any State”", "“life, liberty, or property”", "“due process of law”"],
-      miss: ["“State” is who must follow the rule. Who is protected?", "Those are what can't be taken away. Who is protected?", "Those are the fair steps. Who is protected?"],
+      ask: "Arizona says kids don't get these rights. Which words say who does?",
+      options: ["“any person”", "“any State”", "“liberty”", "“due process of law”"],
+      miss: ["That is who must follow the rule. Who is protected?", "That is what can't be taken. Who is protected?", "Those are the fair steps. Who is protected?"],
       hint: "Find the words that name who is protected.",
-      reveal: "The text says “any person.” It does not say “any adult.” The Court had to decide if kids count." },
+      reveal: "It says “any person.” Not “any adult.”" },
     { id: "e2", type: "rule", c: 1, kicker: "Case 2 · Your ruling", short: "Rule on Gault",
       under: () => sides(CASES[1]),
-      ask: "Rule on Gerald's case.",
+      ask: "Rule on Gerald.",
       cards: [
-        { icon: "🔒", t: "Keep him in until 21", line: "Juvenile court can use loose rules", fx: 1, sc: "reversed",
-          res: "The hearing stands. Gerald stays in reform school.", head: "COURT BACKS JUVENILE JUDGE", cause: "Kept Gerald locked up",
-          kane: "Juvenile court is supposed to act like a parent. Parents don't need lawyers." },
-        { icon: "🧾", t: "Throw the hearing out", line: "Kids get fair hearings too", fx: -1, sc: "agreed",
-          res: "You throw the hearing out. Kids facing lockup get rights too.", head: "JUDGE: TEENS GET LAWYERS TOO", cause: "Threw out Gerald's hearing",
+        { icon: "🔒", t: "Keep him locked up", line: "Kids' court can skip the rules", fx: 1, sc: "reversed",
+          res: "The hearing counts. He stays locked up.", head: "COURT BACKS KIDS' JUDGE", cause: "Kept Gerald locked up",
+          kane: "Kids' court is like a parent. Parents don't need lawyers." },
+        { icon: "🧾", t: "Throw out the hearing", line: "Kids get fair hearings too", fx: -1, sc: "agreed",
+          res: "You throw it out. Kids get rights too.", head: "JUDGE: TEENS GET LAWYERS TOO", cause: "Threw out Gerald's hearing",
           kane: "Next you'll want police to read them their rights. Oh. Wait." },
-        { icon: "✂️", t: "Cut his time", line: "Keep the hearing as it was", fx: 0, sc: "reversed",
-          res: "You cut his time. But he still never got a fair hearing.", head: "COURT TRIMS TEEN'S SENTENCE", cause: "Cut Gerald's time, kept the hearing",
-          kane: "A compromise. Nobody is happy. Classic." }
+        { icon: "✂️", t: "Cut his time", line: "Keep the hearing", fx: 0, sc: "reversed",
+          res: "You cut his time. The hearing was still unfair.", head: "COURT CUTS TEEN'S TIME", cause: "Cut Gerald's time, kept the hearing",
+          kane: "Half and half. Nobody is happy." }
       ],
       vote: "8–1", caseName: "In re Gault (1967)",
-      real: [["⚖️", "Arizona's top court said no. The hearing stood."], ["🏛️", "The U.S. Supreme Court reversed that. The vote was 8 to 1 for Gerald."], ["📜", "The rule: kids facing lockup get the charges in writing, a lawyer, the right to question their accuser, and the right to stay silent."], ["🌎", "That rule now covers every juvenile court in the country."]],
+      real: [["🏛️", "The Supreme Court sided with Gerald, 8 to 1."], ["📜", "New rule: kids get a lawyer and a fair hearing."], ["🌎", "That covers every kids' court in the country."]],
       tooFar: "",
-      reveal: "A Supreme Court ruling becomes the rule for <b>every court below it</b>." },
+      reveal: "A Supreme Court ruling is the rule for <b>every court below it</b>." },
 
     // ---- Case 3: T.L.O. (the Court sides with the school) ----
     { id: "c6", type: "check", c: 2, std: "Gov.8", kicker: "Case 3 · File + words", short: "T.L.O.: what is “unreasonable”?", stamp: "INTERPRET", where: "marked word",
       under: () => amend(CASES[2]),
-      ask: "She says the purse search broke the 4th Amendment. What must the court decide?",
-      options: ["Did he have a good enough reason to look?", "Did she really sell drugs to students?", "Should any search ever be allowed at all?", "Was one year of probation too much?"],
-      miss: ["Guilt was the trial court's job. Look at the marked word.", "The words only ban unreasonable searches. Look at the marked word.", "The appeal isn't about the sentence. Look at the marked word."],
+      ask: "She says the search was not OK. What must the court decide?",
+      options: ["Did he have a good reason to look?", "Did she really sell drugs?", "Should all searches be banned?", "Was probation too much?"],
+      miss: ["The trial court decides guilt. Look at the marked word.", "Too far. Only unreasonable searches are banned.", "This case isn't about the punishment. Look at the marked word."],
       hint: "Look at the marked word. What makes a search OK?",
-      reveal: "The text never says what “unreasonable” means in a school. Judges had to decide." },
+      reveal: "The words don't say what “unreasonable” means at school. Judges decide." },
     { id: "e3", type: "rule", c: 2, kicker: "Case 3 · Your ruling", short: "Rule on T.L.O.",
       under: () => sides(CASES[2]),
-      ask: "Rule on T.L.O.'s appeal.",
+      ask: "Rule on T.L.O.",
       cards: [
-        { icon: "🧾", t: "Throw out the evidence", line: "Schools need a warrant, like police", fx: -1, sc: "reversed",
-          res: "You throw out what he found. Schools need a warrant, like police.", head: "JUDGE TO PRINCIPALS: GET A WARRANT", cause: "Threw out the purse search",
-          kane: "Six justices just walked into that office and backed the principal." },
-        { icon: "🔎", t: "The search was fair", line: "He had a real reason to look", fx: 1, sc: "agreed",
-          res: "The search stands. He had a real reason to look.", head: "COURT BACKS SCHOOL IN PURSE SEARCH", cause: "Allowed the purse search",
-          kane: "Look at that. We agree. Mark the calendar." },
-        { icon: "🏫", t: "Schools can search anyone", line: "No reason needed", fx: 1, sc: "toofar",
-          res: "You rule that schools never need a reason to search a student.", head: "COURT: SCHOOLS CAN SEARCH ANY BAG", cause: "Let schools search with no reason",
-          kane: "Even I did not ask for that much." }
+        { icon: "🧾", t: "Throw out the search", line: "Schools need a warrant", fx: -1, sc: "reversed",
+          res: "You throw out what he found.", head: "JUDGE: PRINCIPALS NEED A WARRANT", cause: "Threw out the purse search",
+          kane: "Six judges just backed the principal." },
+        { icon: "🔎", t: "The search was OK", line: "He had a good reason", fx: 1, sc: "agreed",
+          res: "The search counts.", head: "COURT BACKS SCHOOL ON PURSE SEARCH", cause: "Allowed the purse search",
+          kane: "Look at that. We agree." },
+        { icon: "🏫", t: "Search anyone, any time", line: "No reason needed", fx: 1, sc: "toofar",
+          res: "You say schools never need a reason.", head: "COURT: SCHOOLS CAN SEARCH ANYONE", cause: "Let schools search with no reason",
+          kane: "Even I didn't ask for that." }
       ],
       vote: "6–3", caseName: "New Jersey v. T.L.O. (1985)",
-      real: [["⚖️", "New Jersey's top court sided with T.L.O. It threw out the evidence."], ["🏛️", "The U.S. Supreme Court reversed that. The vote was 6 to 3 for the school."], ["📜", "The rule: the 4th Amendment covers students. But schools don't need a warrant. They need a real reason to think a rule was broken."], ["🎒", "Courts still use that rule for school searches."]],
-      tooFar: "The real Court said schools still need a real reason to search. They just don't need a warrant.",
-      reveal: "The Court does not always side with the person appealing. Its job is to decide what the words <b>mean</b>." },
+      real: [["🏛️", "The Supreme Court sided with the school, 6 to 3."], ["📜", "Rule: schools need a good reason. They don't need a warrant."], ["🎒", "That is still the rule at school today."]],
+      tooFar: "The real Court said schools still need a good reason.",
+      reveal: "The Court doesn't always side with the person. It decides what the words <b>mean</b>." },
 
     // ---- Case 4: Morse v. Frederick ("Bong Hits 4 Jesus"; the Court sides with the school) ----
     { id: "c7", type: "check", c: 3, std: "Gov.8", kicker: "Case 4 · File + words", short: "Frederick: where does free speech stop?", stamp: "INTERPRET", where: "marked words",
       under: () => amend(CASES[3]),
-      ask: "He says the school broke the 1st Amendment. What must the court decide?",
-      options: ["Can a school limit speech at its own event?", "Is a banner really a kind of speech?", "Should students get out of class for events?", "Was ten days too long for a first time?"],
-      miss: ["Nobody argued that. A banner is speech. Look at where he held it up.", "That is the school's call, not the court's. Look at what the words protect.", "The appeal isn't about the number of days. Look at what the words protect."],
+      ask: "He says the school broke his free speech. What must the court decide?",
+      options: ["Can a school limit speech at its event?", "Is a banner a kind of speech?", "Should students watch the torch?", "Was 10 days too long?"],
+      miss: ["Nobody argued that. Look at where he held it up.", "That is the school's call. Look at the marked words.", "This case isn't about the days. Look at the marked words."],
       hint: "Look at the marked words, and at where he held up the banner.",
-      reveal: "Even “freedom of speech” has limits. Judges decide where they are." },
+      reveal: "Even free speech has limits. Judges decide where." },
     { id: "e4", type: "rule", c: 3, kicker: "Case 4 · Your ruling", short: "Rule on Frederick",
       under: () => sides(CASES[3]),
-      ask: "Rule on Frederick's appeal.",
+      ask: "Rule on Frederick.",
       cards: [
-        { icon: "📣", t: "Frederick wins", line: "Free speech covers the banner", fx: -1, sc: "reversed",
-          res: "You rule the banner was protected speech. The suspension was wrong.", head: "JUDGE OKS “BONG HITS” BANNER", cause: "Protected Frederick's banner",
-          kane: "Five justices read that banner differently than you did." },
-        { icon: "🏫", t: "The principal wins", line: "Schools can stop pro-drug messages", fx: 1, sc: "agreed",
-          res: "You rule the school could take the banner down.", head: "COURT BACKS PRINCIPAL IN BANNER FIGHT", cause: "Backed the principal on the banner",
-          kane: "Not even my case, and I'm enjoying it." },
-        { icon: "🤐", t: "Schools can ban any speech", line: "Whatever a principal dislikes", fx: 0, sc: "toofar",
-          res: "You rule that schools can punish any student speech they dislike.", head: "COURT: PRINCIPALS CAN BAN ANY SPEECH", cause: "Let schools ban any speech",
-          kane: "Easy, Judge. Even the principal did not ask for that." }
+        { icon: "📣", t: "Frederick wins", line: "The banner is free speech", fx: -1, sc: "reversed",
+          res: "You say the banner was OK.", head: "JUDGE OKS “BONG HITS” BANNER", cause: "Protected Frederick's banner",
+          kane: "Five judges read that banner another way." },
+        { icon: "🏫", t: "The principal wins", line: "Schools can stop pro-drug signs", fx: 1, sc: "agreed",
+          res: "You say the school could take it.", head: "COURT BACKS PRINCIPAL ON BANNER", cause: "Backed the principal on the banner",
+          kane: "Not my case. Still enjoying it." },
+        { icon: "🤐", t: "Ban any speech", line: "Whatever a principal dislikes", fx: 0, sc: "toofar",
+          res: "You say schools can ban any speech.", head: "COURT: PRINCIPALS CAN BAN ANYTHING", cause: "Let schools ban any speech",
+          kane: "Easy, Judge. Nobody asked for that." }
       ],
       vote: "5–4", caseName: "Morse v. Frederick (2007)",
-      real: [["⚖️", "The federal appeals court sided with Frederick."], ["🏛️", "The U.S. Supreme Court reversed that. The vote was 5 to 4 for the principal."], ["📜", "The rule: at a school event, a school can stop student speech that cheers on illegal drug use."], ["🗣️", "Students still have free speech at school. This is one limit on it."]],
-      tooFar: "The real Court only allowed limits on speech that cheers on illegal drug use at a school event.",
-      reveal: "Four cases. Four parts of the Constitution. Each time, judges had to decide what the words <b>mean</b>." },
+      real: [["🏛️", "The Supreme Court sided with the principal, 5 to 4."], ["📜", "Rule: schools can stop pro-drug speech at school events."], ["🗣️", "Students still have free speech at school."]],
+      tooFar: "The real Court only allowed limits on pro-drug speech.",
+      reveal: "Four cases. Each time, judges decided what the words <b>mean</b>." },
 
     { id: "end", type: "ending", c: 4, kicker: "Your record", short: "Ending" },
     { id: "write", type: "write", c: 4, kicker: "One last thing", short: "Short answer" }
@@ -401,9 +403,9 @@
   const RULES = STEPS.filter(s => s.type === "rule");
 
   const PROMPTS = [
-    { id: "meaning", short: "Interpreting the Constitution", label: "Pick one case. What did the Supreme Court decide the Constitution's words mean?",
+    { id: "meaning", short: "Interpreting the Constitution", label: "Pick one case. What did the Court say the words mean?",
       bank: ["Miranda", "Gault", "T.L.O.", "Frederick", "stay silent", "fair hearing", "search", "free speech"],
-      stem: "In the ___ case, the Court decided the words mean ___. That mattered because ___.", min: 40, newWords: 3,
+      stem: "In the ___ case, the Court said the words mean ___. That mattered because ___.", min: 40, newWords: 3,
       mustAll: [["miranda", "gault", "t.l.o", "tlo", "t. l. o", "frederick", "morse", "bong"], ["lawyer", "silent", "rights", "warn", "fair", "hearing", "due process", "confession", "accuser", "charges", "search", "warrant", "reason", "purse", "compelled", "forced", "person", "speech", "banner", "drug"]],
       mustMsg: "Name the case (Miranda, Gault, T.L.O., or Frederick) and say what the Court decided the words mean." }
   ];
@@ -431,7 +433,7 @@
     return t;
   };
   const trustWord = n => n <= 2 ? "Furious" : n <= 4 ? "Shaky" : n <= 7 ? "Steady" : "Loved";
-  const SC = { agreed: { word: "AGREED", mark: "✓", long: "The Supreme Court agreed with you" }, reversed: { word: "REVERSED", mark: "✗", long: "The Supreme Court reversed you" }, toofar: { word: "WENT TOO FAR", mark: "⚠", long: "You went further than the Supreme Court" } };
+  const SC = { agreed: { word: "AGREED", mark: "✓", long: "The Supreme Court agreed with you" }, reversed: { word: "REVERSED", mark: "✗", long: "The Supreme Court reversed you" }, toofar: { word: "WENT TOO FAR", mark: "⚠", long: "You went too far" } };
 
   // ---------------- HUD ----------------
   function hud() {
@@ -518,14 +520,14 @@
       <div class="tcopy">
         <p class="tk">Government · Unit 3 · Day 1 · Level 1: Unfair Trials</p>
         <h1>The Appeal</h1>
-        <p class="recap">Four real people say the system cheated them. Their appeals just hit your desk.</p>
-        <ul class="how"><li><span>1</span>Make your judge</li><li><span>2</span>Read each case file and the Constitution's words</li><li><span>3</span>Rule. Then see what the real Supreme Court did</li></ul>
-        <p class="tline">🎯 Today: how courts are set up, and how judges decide what the law means.</p>
+        <p class="recap">Four real people say they were treated unfairly. You decide.</p>
+        <ul class="how"><li><span>1</span>Make your judge</li><li><span>2</span>Read the case</li><li><span>3</span>Rule. Then see what the real Supreme Court did</li></ul>
+        <p class="tline">🎯 Today: how courts work, and how judges read the law.</p>
         <p class="tchips"><span>⏱️ 25–30 min</span><span>📁 4 real cases</span><span>🛡️ 7 checks</span><span>✏️ 1 short answer</span></p>
         <label for="nameBox">Your name (first name + last initial)</label>
         <div class="namerow"><input id="nameBox" maxlength="60" autocomplete="off" placeholder="Like Jordan M." value="${esc(pre || "")}"><button type="button" class="go big" id="startBtn">⚖️ Take the bench</button></div>
         <p id="introMsg" class="msg bad" role="status"></p>
-        <p class="src">The cases, the rulings, and what happened next are real. Your judge seat, Prosecutor Kane, and the headlines are made up. The pictures are drawings, not photos of the real people. Standard: SS.9-12.Gov.8.</p>
+        <p class="src">The cases and rulings are real. Kane and the headlines are made up. The pictures are drawings. Standard: SS.9-12.Gov.8.</p>
       </div></section>`;
     $("startBtn").onclick = () => {
       const fixed = window.classShortName ? window.classShortName($("nameBox").value) : $("nameBox").value.trim();
@@ -596,7 +598,7 @@
 
   // ---- Check ----
   function check(step) {
-    shell(step, `<p class="ask">${esc(step.ask)}</p><p class="warn">🔎 The answer is in the ${step.where} on this screen.</p><div class="replies" id="replies"></div><p class="msg" id="qmsg" role="status" aria-live="polite"></p><div id="after"></div>`);
+    shell(step, `<p class="ask">${esc(step.ask)}</p><p class="warn">🔎 Look at the ${step.where}.</p><div class="replies" id="replies"></div><p class="msg" id="qmsg" role="status" aria-live="polite"></p><div id="after"></div>`);
     if (st.done[step.id]) return solved(step, true);
     draw(step);
     if (lockLeft() > 0) { $("replies").querySelectorAll("button").forEach(x => x.disabled = true); runLock(st.lockMsg || step.hint, $("qmsg"), () => draw(step), lockLeft()); }
@@ -635,7 +637,7 @@
     const p = st.picks[step.id];
     if (p != null) return chosen(step, p, true);
     if (!step._order) step._order = shuffle(step.cards.map((c, i) => i));
-    $("dbox").innerHTML = `<div class="cards">${step._order.map(i => { const c = step.cards[i]; return `<button type="button" class="dcard" data-i="${i}"><span class="di" aria-hidden="true">${c.icon}</span><span class="dtx"><b>${esc(c.t)}</b><span class="dline">${esc(c.line)}</span></span></button>`; }).join("")}</div><p class="peek">📰 Your ruling moves public trust. 🏛️ Then the real Supreme Court rules. You can't take it back.</p>`;
+    $("dbox").innerHTML = `<div class="cards">${step._order.map(i => { const c = step.cards[i]; return `<button type="button" class="dcard" data-i="${i}"><span class="di" aria-hidden="true">${c.icon}</span><span class="dtx"><b>${esc(c.t)}</b><span class="dline">${esc(c.line)}</span></span></button>`; }).join("")}</div><p class="peek">📰 Your ruling moves public trust. No take-backs.</p>`;
     $("dbox").querySelectorAll(".dcard").forEach(b => b.onclick = () => {
       const i = +b.dataset.i, c = step.cards[i];
       st.picks[step.id] = i;
@@ -649,7 +651,7 @@
     const c = step.cards[i];
     const ask = document.querySelector("#play .ask"); if (ask) ask.remove();
     $("dbox").innerHTML = `<div class="chosen"><span class="di" aria-hidden="true">${c.icon}</span><span><b>Your ruling: ${esc(c.t)}</b><br><span class="dline">${esc(c.res)}</span></span></div>
-      <div class="paper"><span class="ptag">Next morning's headline (made up)</span><p class="phead">${esc(c.head)}</p><p class="pfx">${fxChip(c.fx)} Public trust is now ${st.trust} of 10.</p></div>
+      <div class="paper"><span class="ptag">Tomorrow's headline (made up)</span><p class="phead">${esc(c.head)}</p><p class="pfx">${fxChip(c.fx)} Public trust: ${st.trust} of 10.</p></div>
       <div id="scBox"></div>`;
     if (st.opened[step.id]) return opened(step, c, true);
     const b = document.createElement("button"); b.type = "button"; b.className = "go seal"; b.id = "openBtn";
@@ -664,11 +666,12 @@
         <span class="rtab">THE REAL RULING</span>
         ${docCard(cs)}
         <div class="rstamp">${sc.mark} ${sc.word}${c.sc === "toofar" ? "" : " " + esc(step.vote)}</div>
-        <p class="rlong">${sc.long}.${c.sc === "toofar" && step.tooFar ? " " + esc(step.tooFar) : ""}</p>
+        <p class="rlong">${c.sc === "toofar" && step.tooFar ? esc(step.tooFar) : sc.long + "."}</p>
         <p class="rsec">What really happened</p>
         ${step.real.map(r => ln(r[0], r[1])).join("")}
       </div>`;
     $("scBox").innerHTML = kane("“" + esc(c.kane) + "”");
+    const sd = document.querySelector("#scene .sides"); if (sd) sd.remove();   // less to read once they have ruled
     if (!quiet) stamp(sc.word, c.sc === "agreed" ? "" : "bad");
     addNext(step, step.reveal, true);
   }
@@ -678,11 +681,11 @@
     const t = tally();
     let e;
     const N = RULES.length;
-    if (t.toofar >= 2) e = { key: "Off the Rails", out: "Went too far twice", icon: "🚧", cls: "low", text: "Twice you went further than the law allows. Appeals courts fix what went wrong in a case. They don't get to rewrite everything." };
-    else if (t.agreed >= 3 && st.trust >= 3) e = { key: "Supreme Court Material", out: "Supreme Court agreed, kept the seat", icon: "🏛️", cls: "best", text: "The Supreme Court backed you " + t.agreed + " of " + N + " times, and the voters kept you. Barely. Not many judges pull that off." };
-    else if (st.trust <= 2 && t.agreed >= 2) e = { key: "Right. And Voted Out.", out: "Supreme Court agreed, voters did not", icon: "🗳️", cls: "mid", text: "The Supreme Court backed you " + t.agreed + " of " + N + " times. The voters fired you anyway. That is why federal judges are not elected. They serve for life." };
-    else if (t.reversed >= 2 && st.trust >= 6) e = { key: "Popular. And Reversed.", out: "Voters agreed, Supreme Court did not", icon: "📣", cls: "mid", text: "The voters love you. The Supreme Court reversed you " + t.reversed + " times. Your rulings are gone. Theirs are the law in all 50 states." };
-    else e = { key: "Split Decision", out: "Mixed record, kept the seat", icon: "⚖️", cls: "mid", text: "You kept your seat. Some days the Supreme Court backed you. Some days it did not. Welcome to judging." };
+    if (t.toofar >= 2) e = { key: "Off the Rails", out: "Went too far twice", icon: "🚧", cls: "low", text: "You went too far twice. Courts fix mistakes. They don't rewrite everything." };
+    else if (t.agreed >= 3 && st.trust >= 3) e = { key: "Supreme Court Material", out: "Supreme Court agreed, kept the seat", icon: "🏛️", cls: "best", text: "The Supreme Court backed you " + t.agreed + " of " + N + " times. And voters kept you. Barely." };
+    else if (st.trust <= 2 && t.agreed >= 2) e = { key: "Right. And Voted Out.", out: "Supreme Court agreed, voters did not", icon: "🗳️", cls: "mid", text: "The Supreme Court backed you " + t.agreed + " of " + N + " times. Voters fired you anyway." };
+    else if (t.reversed >= 2 && st.trust >= 6) e = { key: "Popular. And Reversed.", out: "Voters agreed, Supreme Court did not", icon: "📣", cls: "mid", text: "Voters love you. The Supreme Court reversed you " + t.reversed + " times." };
+    else e = { key: "Split Decision", out: "Mixed record, kept the seat", icon: "⚖️", cls: "mid", text: "You kept your job. The Supreme Court backed you some days. Not others." };
     const causes = RULES.map(s => { const c = cardOf(s); return c ? c.cause + " → " + SC[c.sc].word.toLowerCase() + " (trust " + (c.fx > 0 ? "+" : c.fx < 0 ? "−" : "±") + Math.abs(c.fx) + ")" : null; }).filter(Boolean);
     e.causes = causes;
     e.tally = t;
@@ -692,11 +695,11 @@
 
   function endingStep(step) {
     const e = ending();
-    const rows = RULES.map((s, i) => { const c = cardOf(s); return `<div class="recrow ${c ? c.sc : ""}"><span class="rc">${CASES[i].icon} ${CASES[i].key}</span><span class="rr">${c ? esc(c.t) : "No ruling"}</span><span class="rs">${c ? SC[c.sc].mark + " " + SC[c.sc].word : "—"}</span></div>`; }).join("");
+    const rows = RULES.map((s, i) => { const c = cardOf(s); return `<div class="recrow ${c ? c.sc : ""}"><span class="rc">${CASES[i].icon} ${CASES[i].key}</span><span class="rr">${c ? esc(c.t) : "No ruling"}</span><span class="rs">${c ? SC[c.sc].mark + " " + SC[c.sc].word : "—"}</span>${c ? fxChip(c.fx) : ""}</div>`; }).join("");
     shell(step,
-      `${reveal("State judges often face <b>elections</b>. Federal judges are picked by the President, approved by the Senate, and serve <b>for life</b>, so they can make calls people hate.")}<p class="endm">${recordLine()}</p><div id="after"></div>`,
+      `${reveal("State judges can be <b>voted out</b>. Federal judges serve <b>for life</b>, so they can make calls people hate.")}<p class="endm">${recordLine()}</p><div id="after"></div>`,
       { left: court(-1, st.name, { look: st.judge }) + `<div class="endcard ${e.cls}"><span class="eicon" aria-hidden="true">${e.icon}</span><h2>${esc(e.key)}</h2><p>${esc(e.text)}</p></div>`,
-        mid: `<div class="cause"><p class="ch">Your record</p>${rows}<p class="ch c2">Caused by</p><ul>${e.causes.map(c => `<li>${esc(c)}</li>`).join("")}</ul></div>` });
+        mid: `<div class="cause"><p class="ch">Your record · each ruling moved public trust</p>${rows}</div>` });
     const b = nextBtn(step); b.textContent = "✏️ One short answer ▶";
     $("after").appendChild(b);
   }
@@ -714,7 +717,7 @@
          <button type="button" class="go" id="sendBtn">${sent ? "Turn in again" : "Turn in ▶"}</button>
          <p id="sendMsg" class="msg" role="status" aria-live="polite">${sent ? "✓ Turned in. Court is adjourned." : ""}</p>
        </div>`,
-      { left: court(-1, st.name, { look: st.judge }) + `<div class="endcard small ${e.cls}"><span class="eicon" aria-hidden="true">${e.icon}</span><h2>${esc(e.key)}</h2></div><div class="typed"><p><b>Miranda:</b> police must warn you first.</p><p><b>Gault:</b> kids get fair hearings too.</p><p><b>T.L.O.:</b> schools can search with a real reason.</p><p><b>Frederick:</b> schools can stop pro-drug speech at school events.</p></div>`, mid: "" });
+      { left: court(-1, st.name, { look: st.judge }) + `<div class="endcard small ${e.cls}"><span class="eicon" aria-hidden="true">${e.icon}</span><h2>${esc(e.key)}</h2></div><div class="typed"><p><b>Miranda:</b> police must tell you your rights.</p><p><b>Gault:</b> kids get fair hearings.</p><p><b>T.L.O.:</b> schools need a good reason to search.</p><p><b>Frederick:</b> schools can stop pro-drug speech.</p></div>`, mid: "" });
     PROMPTS.forEach(p => {
       const box = $("w_" + p.id);
       box.addEventListener("input", () => { st.writing[p.id] = box.value; save(); });
