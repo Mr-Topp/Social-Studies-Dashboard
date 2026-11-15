@@ -23,11 +23,17 @@ main{max-width:1060px;margin:0 auto;padding:10px 14px 6px}
 h1{font-size:34px;margin:4px 0 2px;letter-spacing:-.5px}
 h2{font-size:23px;margin:0 0 4px}
 .hook{font-size:18px;color:var(--soft);margin:0 0 10px}
+.slidetag{font-size:13px;color:var(--soft);margin:0 0 8px}.slidetag b{color:#1d4fc4}
+.story{font-size:18px;margin:2px 0 10px}
+.sentence{font-size:21px;font-weight:600;margin:6px 0 14px;line-height:1.7}
+.trail{display:flex;align-items:center;gap:6px;flex-wrap:wrap;margin:4px 0 10px}.trail .arr{color:var(--soft);font-weight:800}
+.minichart{flex:0 0 260px}
+.bossbtns{display:flex;gap:8px;flex-wrap:wrap}.bossbtns button{border:2px solid #cfd6e4;background:#f6f8fd;border-radius:12px;padding:10px 16px;font-size:16px;font-weight:700}
 .slidebar{display:flex;align-items:center;gap:10px;background:#eef3ff;border:1px solid #cfdcff;border-radius:12px;padding:7px 12px;margin-bottom:10px;font-size:15px}
 .slidebar b{color:#1d4fc4}
 .slidebar .std{margin-left:auto;font-size:12px;color:var(--soft);white-space:nowrap}
 .slidebar .remind{color:var(--soft)}
-.job{background:#fffbe8;border-left:4px solid #f0c330;border-radius:6px;padding:6px 10px;margin:6px 0 10px;font-size:15px}
+.job{font-weight:700;font-size:16px;margin:8px 0}
 .go{background:var(--blue);color:#fff;border:0;border-radius:12px;padding:11px 20px;font-weight:700;font-size:17px}
 .go:disabled{background:#9fb4dc;cursor:not-allowed}
 .go.big{font-size:20px;padding:13px 28px}
@@ -40,9 +46,9 @@ h2{font-size:23px;margin:0 0 4px}
 .welcome[hidden]{display:none}
 .welcome{background:#eaf7ef;border:1px solid #bfe6cf;border-radius:10px;padding:6px 10px;font-size:14px;display:flex;gap:10px;align-items:center}
 .notme{background:none;border:0;color:var(--blue);text-decoration:underline;font-size:14px}
-.foot{display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--soft);margin-top:16px}
+.foot{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;font-size:12px;color:var(--soft);margin-top:16px}
 #restartBtn{background:none;border:0;color:var(--soft);text-decoration:underline;font-size:12px}
-.std-list{font-size:11px;color:#8a92a6;margin:4px 0 0}
+.std-list{font-size:11px;color:#8a92a6;max-width:60%}.std-list summary{cursor:pointer}.std-list p{margin:4px 0}
 .sr{position:absolute;left:-9999px}
 /* intro */
 .intro{text-align:center;padding:26px 24px}
@@ -131,7 +137,7 @@ h2{font-size:23px;margin:0 0 4px}
 .need.used{display:none}
 /* chain */
 .chainwrap{display:grid;grid-template-columns:300px 1fr;gap:16px}
-.bars{display:flex;align-items:flex-end;gap:10px;height:120px;margin:8px 0 2px;padding:0 4px;border-bottom:2px solid #cfd6e4}
+.bars{display:flex;align-items:flex-end;gap:10px;height:70px;margin:8px 0 2px;padding:0 4px;border-bottom:2px solid #cfd6e4}
 .bar{flex:1;background:var(--economy);border-radius:6px 6px 0 0;position:relative;color:#fff;font-size:13px;font-weight:800;text-align:center;padding-top:3px}
 .barl{display:flex;gap:10px;padding:0 4px;font-size:12px;color:var(--soft)}.barl span{flex:1;text-align:center}
 .links{display:grid;grid-template-columns:1fr 1fr;gap:8px}
@@ -153,13 +159,11 @@ textarea{width:100%;font:inherit;font-size:16px;padding:8px;border:2px solid #cf
 <div class="hud" id="hud" hidden><div class="hud-in">
   <span class="who"><span class="av" id="hudAv"></span><span id="hudNick"></span></span>
   <span class="daytag" id="dayTag"></span>
-  <span class="stamps" id="stamps"></span>
 </div></div>
 <main>
   <p class="welcome" id="welcome" hidden></p>
   <div id="app"></div>
-  <div class="foot"><span>Progress saves on this device. Your teacher sees your work after you turn it in.</span><button type="button" id="restartBtn">Start over</button></div>
-  <p class="std-list"><b>SS.9-12.Soc.5</b> Describe the components of culture. <b>SS.9-12.Soc.6</b> Analyze how culture influences individuals, including themselves. <b>SS.9-12.Soc.7</b> Evaluate important social institutions and how they respond to social needs. <b>SS.9-12.Soc.8</b> Assess how social institutions and cultures change and evolve.</p>
+  <div class="foot"><details class="std-list"><summary>Iowa standards</summary><p><b>SS.9-12.Soc.5</b> Describe the components of culture. <b>SS.9-12.Soc.6</b> Analyze how culture influences individuals, including themselves. <b>SS.9-12.Soc.7</b> Evaluate important social institutions and how they respond to social needs. <b>SS.9-12.Soc.8</b> Assess how social institutions and cultures change and evolve.</p></details><span>Progress saves on this device.</span><button type="button" id="restartBtn">Start over</button></div>
 </main>
 <script>
 // =====================================================================
@@ -176,7 +180,7 @@ textarea{width:100%;font:inherit;font-size:16px;padding:8px;border:2px solid #cf
 // =====================================================================
 (function () {
   "use strict";
-  const KEY = "soc-u2-d5-everyday-life-v4";
+  const KEY = "soc-u2-d5-everyday-life-v5";
   const ASSIGNMENT_ID = "soc-u2-d5-everyday-life";
   const TITLE = "Sociology · Unit 2 · Day 5 · My Week, My Rules";
   const OLD_API = "https://fynn-class-assignment-submissions-20261024.neotboy.chatgpt.site/api/submit";
@@ -230,8 +234,9 @@ textarea{width:100%;font:inherit;font-size:16px;padding:8px;border:2px solid #cf
 
   // ---------- Steps ----------
   const STEPS = [
-    { k: "build", day: 0 }, { k: "sort", day: 1 }, { k: "norm", day: 1 },
-    { k: "feed", day: 2 }, { k: "tip", day: 2 }, { k: "plan", day: 3 }, { k: "match", day: 3 },
+    { k: "build", day: 0 }, { k: "sort", day: 1 }, { k: "norm", day: 1 }, { k: "name", day: 1 },
+    { k: "feed", day: 2 }, { k: "tip", day: 2 }, { k: "mirror", day: 2 },
+    { k: "plan", day: 3 }, { k: "drops", day: 3 }, { k: "match", day: 3 },
     { k: "chain", day: 4 }, { k: "rosie", day: 4 }, { k: "write", day: 5 }
   ];
   const DAYS = ["", "Friday", "Saturday", "Monday", "Thursday", "Wrap-up"];
@@ -263,8 +268,8 @@ textarea{width:100%;font:inherit;font-size:16px;padding:8px;border:2px solid #cf
 
   // MC checks: options[0] is right; always shuffled on screen.
   const CHECKS = {
-    norm1: { q: "Standing for the chant is a…", options: ["Norm", "Value", "Law", "Material culture"], hint: "It's an unwritten rule for how to act." },
-    norm2: { q: "…that comes from the value of…", options: ["School pride", "Making money", "Staying safe", "Good grades"], hint: "What does the crowd care about at a home game?" },
+    norm1: { q: "What goes in the first blank?", options: ["Norm", "Value", "Law", "Material culture"], hint: "It's an unwritten rule for how to act." },
+    norm2: { q: "What goes in the second blank?", options: ["School pride", "Making money", "Staying safe", "Good grades"], hint: "What does the crowd care about at a home game?" },
     tip:   { q: "The tourist calls the waiter rude. That's…", options: ["Ethnocentrism: judging Japan by U.S. rules", "Relativism: seeing Japan by its own rules", "A law that Japan's government wrote", "Following Japan's norms like a local"], hint: "Whose rules is the tourist using to judge?", why: "He judged Japan by U.S. tipping rules. That's ethnocentrism." },
     rosie: { q: "What does the chain show?", options: ["A change in one institution spread into the others", "Women's jobs went back to normal after the war", "Only the economy changed; families stayed the same", "Institutions change alone without touching others"], hint: "Look at the colors on your chain. How many institutions changed?", why: "Women working (economy) changed family, school, and laws. Change spreads." }
   };
@@ -318,8 +323,8 @@ textarea{width:100%;font:inherit;font-size:16px;padding:8px;border:2px solid #cf
   function nextStep() { st.step++; save(); render(); }
   const nick = () => st.p.nick || "You";
   const bossTag = b => `<span class="btag b-${b}"><span aria-hidden="true">${BOSS[b].i}</span> ${esc(BOSS[b].n)}</span>`;
-  const job = t => `<p class="job"><b>Your job:</b> ${esc(t)}</p>`;
-  const slideBar = d => `<div class="slidebar">📽️ <span>Today's slide:</span> <b>${esc(SLIDES[d].t)}</b> <span class="remind">· ${esc(SLIDES[d].r)}</span> <span class="std">${SLIDES[d].std}</span></div>`;
+  const job = t => `<p class="job">👉 ${esc(t)}</p>`;
+  const slideBar = d => `<p class="slidetag">📽️ From the slide: <b>${esc(SLIDES[d].t)}</b></p>`;
   function wrongMark(id) { st.wrong[id] = (st.wrong[id] || 0) + 1; if (window.classFirstTry) window.classFirstTry.wrong(); save(); }
   function rightMark(id) { if (window.classFirstTry) window.classFirstTry.right(id); }
 
@@ -356,6 +361,7 @@ textarea{width:100%;font:inherit;font-size:16px;padding:8px;border:2px solid #cf
     draw();
   }
 
+  function mcBare(host, id, onRight) { mc(host, id, onRight); }
   // ---------- HUD ----------
   function hud() {
     const show = st.step >= 1;
@@ -365,7 +371,6 @@ textarea{width:100%;font:inherit;font-size:16px;padding:8px;border:2px solid #cf
     $("hudAv").textContent = st.p.av || "🙂";
     $("hudNick").textContent = nick() + "'s week";
     $("dayTag").textContent = s.day === 5 ? "Wrap-up" : "Day " + s.day + " of 4 · " + DAYS[s.day];
-    $("stamps").innerHTML = [1, 2, 3, 4].map(d => `<span class="stamp${dayDone(d) ? " on" : ""}">${dayDone(d) ? "✓ " : ""}${STAMP[d]}</span>`).join("");
   }
   function dayDone(d) { const lastIdx = STEPS.map(s => s.day).lastIndexOf(d); return st.step > lastIdx; }
 
@@ -428,92 +433,87 @@ textarea{width:100%;font:inherit;font-size:16px;padding:8px;border:2px solid #cf
   function sortCards() {
     const h = optOf("hobby", st.p.hobby);
     return [
-      { id: "jersey", t: "Black-and-gold jerseys ($15)", src: "at the game", m: "h" },
-      { id: "chant", t: "The student-section chant", src: "at the game", m: "m" },
-      { id: "foam", t: "Foam fingers at the gate", src: "at the game", m: "h" },
-      { id: "pride", t: "Feeling school pride", src: "at the game", m: "m" },
-      { id: "hmat", t: h.mat, src: "your " + h.crew, m: "h" },
-      { id: "hnon", t: h.non, src: "your " + h.crew, m: "m" }
+      { id: "jersey", t: "Black-and-gold jerseys", m: "h" },
+      { id: "chant", t: "The student-section chant", m: "m" },
+      { id: "foam", t: "Foam fingers", m: "h" },
+      { id: "pride", t: "School pride", m: "m" },
+      { id: "hmat", t: h.mat, m: "h" },
+      { id: "hnon", t: h.non, m: "m" }
     ];
   }
   function sortView() {
     const cards = sortCards();
     const allDone = cards.every(c => st.sort[c.id]);
     app.innerHTML = `<section class="card">${slideBar(1)}
-      <div class="row">
-        <div class="scene" style="flex:0 0 300px"><p class="when">Friday · 7:00 PM</p><p><b>${esc(nick())}</b> heads to the home football game. After, it's time with your ${esc(optOf("hobby", st.p.hobby).crew)}.</p><p style="color:#9fb4dc">Everything you bring with you is culture. Some you carry in your hands. Some you carry in your head.</p></div>
-        <div>${job("Tap where each thing goes: ✋ Hands or 🧠 Head.")}
-          <div class="bins"><div class="bin-h"><b>✋ Hands = Material culture</b><br>things you can touch</div><div class="bin-m"><b>🧠 Head = Nonmaterial culture</b><br>ideas, values, norms, words</div></div></div>
-      </div>
-      <div class="sortgrid">${cards.map(c => `<div class="scard${st.sort[c.id] ? " done" : ""}" id="sc_${c.id}"><span class="src">${esc(c.src)}</span>${esc(c.t)}
-        ${st.sort[c.id] ? `<span class="put">✓ ${c.m === "h" ? "✋ Material" : "🧠 Nonmaterial"}</span>` : ""}
+      <p class="story">${esc(nick())} goes to the Friday night football game, then hangs with the ${esc(optOf("hobby", st.p.hobby).crew)}.</p>
+      ${job("Is each one something you hold in your ✋ hands, or carry in your 🧠 head?")}
+      <div class="sortgrid">${cards.map(c => `<div class="scard${st.sort[c.id] ? " done" : ""}" id="sc_${c.id}">${esc(c.t)}
+        ${st.sort[c.id] ? `<span class="put">✓ ${c.m === "h" ? "✋ Material culture" : "🧠 Nonmaterial culture"}</span>` : ""}
         <div class="two"><button type="button" data-c="${c.id}" data-m="h">✋ Hands</button><button type="button" data-c="${c.id}" data-m="m">🧠 Head</button></div></div>`).join("")}</div>
       <p class="msg" id="sMsg" aria-live="polite"></p>
-      ${allDone ? `<button type="button" class="go" id="nextBtn">Keep going: the chant starts →</button>` : ""}</section>`;
+      ${allDone ? `<button type="button" class="go" id="nextBtn">Next →</button>` : ""}</section>`;
     app.querySelectorAll("[data-c]").forEach(b => b.onclick = () => {
       if (locked) return;
       const c = cards.find(x => x.id === b.dataset.c);
       if (b.dataset.m === c.m) { st.sort[c.id] = true; rightMark("sort_" + c.id); save(); sortView(); return; }
       wrongMark("sort"); const el = $("sc_" + c.id); el.classList.remove("shake"); void el.offsetWidth; el.classList.add("shake");
-      $("sMsg").textContent = c.m === "h" ? "Not quite. Could you pick it up and hold it?" : "Not quite. Can you actually hold it in your hand? Or is it an idea or habit?";
+      $("sMsg").textContent = c.m === "h" ? "Not quite. Could you pick it up and hold it?" : "Not quite. Can you hold it in your hand? Or is it an idea or habit?";
       $("sMsg").className = "msg bad";
       locked = true; setTimeout(() => { locked = false; }, isTestT() ? 0 : 1500);
     });
     if (allDone) $("nextBtn").onclick = nextStep;
   }
 
-  // ---------- Day 1 Fri: norm moment ----------
+  // ---------- Day 1 Fri: the kid who sat ----------
   function normView() {
     const picked = st.normPick;
     app.innerHTML = `<section class="card">${slideBar(1)}
-      <div class="row">
-        <div class="scene" style="flex:0 0 330px"><p class="when">Friday · 8:15 PM · student section</p>
-          <p>The chant starts. Everyone stands.</p><p>One kid stays sitting, scrolling his phone.</p><p>People start yelling: <b>“STAND UP!”</b></p></div>
-        <div>${picked == null ? job("What does " + nick() + " do?") : ""}
-          <div class="choices" style="grid-template-columns:1fr">${NORM_CHOICES.map((c, i) => `<button type="button" class="choice${picked === i ? " on" : ""}" data-i="${i}" ${picked != null ? "disabled" : ""}>${esc(c.t)}</button>`).join("")}</div>
-          ${picked != null ? `<p class="result tan">${esc(NORM_CHOICES[picked].res)} The yelling is a <b>sanction</b>: how a group punishes someone who breaks a norm.</p>` : ""}
-        </div></div>
-      ${picked != null ? `${job("Name it. Finish the sentence.")}<div class="row"><div id="n1"></div><div id="n2"></div></div><div id="nEnd"></div>` : ""}</section>`;
+      <p class="story">The chant starts. Everyone stands. One kid stays sitting on his phone. People yell: <b>“STAND UP!”</b></p>
+      ${picked == null ? job("What does " + nick() + " do?") : ""}
+      <div class="choices" style="grid-template-columns:1fr 1fr 1fr">${NORM_CHOICES.map((c, i) => `<button type="button" class="choice${picked === i ? " on" : ""}" data-i="${i}" ${picked != null ? "disabled" : ""}>${esc(c.t)}</button>`).join("")}</div>
+      ${picked != null ? `<p class="result tan">${esc(NORM_CHOICES[picked].res)}</p><p class="result">The yelling is a <b>sanction</b>: how a group punishes someone who breaks a norm.</p><button type="button" class="go" id="nextBtn">Next →</button>` : ""}</section>`;
     app.querySelectorAll("[data-i]").forEach(b => b.onclick = () => { st.normPick = +b.dataset.i; save(); normView(); });
-    if (picked == null) return;
-    const end = () => { if (!(st.done.norm1 && st.done.norm2)) return; $("nEnd").innerHTML = `<button type="button" class="go" id="nextBtn">Next: Saturday →</button>`; $("nextBtn").onclick = nextStep; };
-    mc($("n1"), "norm1", () => { mc($("n2"), "norm2", end); });
-    if (st.done.norm1) mc($("n2"), "norm2", end); else $("n2").innerHTML = "";
-    end();
+    if (picked != null) $("nextBtn").onclick = nextStep;
+  }
+  function nameView() {
+    const a = st.done.norm1 ? `<span class="blank">norm</span>` : `<span class="blank">?</span>`;
+    const b = st.done.norm2 ? `<span class="blank">school pride</span>` : `<span class="blank">?</span>`;
+    const both = st.done.norm1 && st.done.norm2;
+    app.innerHTML = `<section class="card">${slideBar(1)}
+      <p class="sentence">Standing for the chant is a ${a} that comes from the value of ${b}.</p>
+      <div id="nq"></div>
+      ${both ? `<button type="button" class="go" id="nextBtn">Next: Saturday →</button>` : ""}</section>`;
+    if (both) { $("nextBtn").onclick = nextStep; return; }
+    mcBare($("nq"), st.done.norm1 ? "norm2" : "norm1", () => nameView());
   }
 
   // ---------- Day 2 Sat: the feed ----------
   function feedView() {
-    const place = optOf("job", st.p.job).place;
     app.innerHTML = `<section class="card">${slideBar(2)}
-      <div class="row">
-        <div class="scene" style="flex:0 0 280px"><p class="when">Saturday · break at ${esc(place)}</p><p>${esc(nick())} opens their phone. This video has 2 million views.</p></div>
-        <div class="phone"><div class="hd">🎥 @tripwithtyler</div>
-          <p style="margin:4px 0">A waiter in Tokyo CHASED me down the street to give my tip back. RUDE. 😤</p>
-          <div class="cm">💬 <b>Top comment:</b> In Japan, tipping isn't expected. Good service is already part of the job.</div>
-          <p class="fine" style="margin:4px 0 0">Fact source: Japan National Tourism Organization</p></div>
-      </div>
-      ${job("You're about to comment. Pick what " + nick() + " types.")}
-      <div class="choices" style="grid-template-columns:repeat(3,1fr)">${REPLIES.map((r, i) => `<button type="button" class="choice" data-i="${i}">💬 ${esc(r.t)}</button>`).join("")}</div>
-      <p class="fine">No wrong answer here. Just be honest.</p></section>`;
+      <p class="story">Saturday. ${esc(nick())} is on break at ${esc(optOf("job", st.p.job).place)} and sees this video.</p>
+      <div class="phone"><div class="hd">🎥 @tripwithtyler</div>
+        <p style="margin:4px 0">A waiter in Tokyo CHASED me down the street to give my tip back. RUDE. 😤</p>
+        <div class="cm">💬 <b>Top comment:</b> In Japan, tipping isn't expected. Good service is already part of the job.</div>
+        <p class="fine" style="margin:4px 0 0">Fact source: Japan National Tourism Organization</p></div>
+      ${job("Pick the comment " + nick() + " would leave. Be honest.")}
+      <div class="choices" style="grid-template-columns:repeat(3,1fr)">${REPLIES.map((r, i) => `<button type="button" class="choice" data-i="${i}">💬 ${esc(r.t)}</button>`).join("")}</div></section>`;
     app.querySelectorAll("[data-i]").forEach(b => b.onclick = () => { st.reply = +b.dataset.i; save(); nextStep(); });
   }
   function tipView() {
-    const r = REPLIES[st.reply == null ? 0 : st.reply];
+    app.innerHTML = `<section class="card">${slideBar(2)}<div id="tq"></div><div id="tEnd"></div></section>`;
+    const end = () => { $("tEnd").innerHTML = `<button type="button" class="go" id="nextBtn">Next →</button>`; $("nextBtn").onclick = nextStep; };
+    mc($("tq"), "tip", end);
+    if (st.done.tip) end();
+  }
+  function mirrorView() {
+    const r = REPLIES[st.reply == null ? 0 : st.reply], eth = r.lab === "eth";
     app.innerHTML = `<section class="card">${slideBar(2)}
-      <div class="terms"><div><b>Ethnocentrism:</b> judging another culture by your own rules.</div><div><b>Cultural relativism:</b> understanding a culture by its own rules first.</div></div>
-      <div id="tq"></div><div id="tafter"></div></section>`;
-    const after = () => {
-      const eth = r.lab === "eth";
-      $("tafter").innerHTML = `<p class="result${eth ? " tan" : ""}">Your comment: “${esc(r.t)}” → That's <b>${eth ? "ethnocentrism" : "cultural relativism"}</b>. ${eth ? "Most people react this way at first. That's how strong culture is." : "You checked their rules before judging."}</p>
-        <p class="q">Why does tipping feel normal to ${esc(nick())}? Who taught you that?</p>
-        <div class="chips">${WHO_TAUGHT.map((w, i) => `<button type="button" class="chip${st.who === i ? " on" : ""}" data-w="${i}">${esc(w)}</button>`).join("")}</div>
-        ${st.who != null ? `<p class="result">${esc(WHO_SAYS[st.who])} That's <b>culture shaping YOU</b>. <button type="button" class="go" id="nextBtn" style="margin-left:10px">Next: Monday →</button></p>` : ""}`;
-      app.querySelectorAll("[data-w]").forEach(b => b.onclick = () => { st.who = +b.dataset.w; save(); after(); });
-      if (st.who != null) $("nextBtn").onclick = nextStep;
-    };
-    mc($("tq"), "tip", after);
-    if (st.done.tip) after();
+      <p class="result${eth ? " tan" : ""}">${esc(nick())}'s comment, “${esc(r.t)},” was <b>${eth ? "ethnocentrism" : "cultural relativism"}</b>. ${eth ? "Most people react that way at first." : "You checked their rules before judging."}</p>
+      ${job("Tipping feels normal to " + nick() + ". Who taught them that?")}
+      <div class="chips">${WHO_TAUGHT.map((w, i) => `<button type="button" class="chip${st.who === i ? " on" : ""}" data-w="${i}">${esc(w)}</button>`).join("")}</div>
+      ${st.who != null ? `<p class="result">${esc(WHO_SAYS[st.who])} That's <b>culture shaping YOU</b>.</p><button type="button" class="go" id="nextBtn">Next: Monday →</button>` : ""}</section>`;
+    app.querySelectorAll("[data-w]").forEach(b => b.onclick = () => { st.who = +b.dataset.w; save(); mirrorView(); });
+    if (st.who != null) $("nextBtn").onclick = nextStep;
   }
 
   // ---------- Day 3 Mon: plan ----------
@@ -527,10 +527,10 @@ textarea{width:100%;font:inherit;font-size:16px;padding:8px;border:2px solid #cf
   function planView() {
     const asks = asksFor(), n = st.plan.length;
     app.innerHTML = `<section class="card">${slideBar(3)}
-      <div class="row" style="align-items:center"><div class="scene" style="flex:0 0 auto"><p class="when">Monday · after school</p><p>5 texts in 10 minutes. ${esc(nick())} only has time for <b>3</b>.</p></div>
-        <div>${job("Tap 3 things to do tonight. The other 2 get dropped.")}<div class="slots">${[0, 1, 2].map(i => `<span class="slot${i < n ? " full" : ""}"></span>`).join("")} <span>${n} of 3</span></div></div></div>
-      <div class="asks">${asks.map(a => `<button type="button" class="ask${st.plan.includes(a.b) ? " on" : ""}" data-b="${a.b}">${bossTag(a.b)}<span class="t">${esc(a.t)}</span><span class="wh">${esc(a.wh)}</span><span class="ck">${st.plan.includes(a.b) ? "✓ Doing it" : "Tap to do"}</span></button>`).join("")}</div>
-      <button type="button" class="go" id="lockBtn" ${n === 3 ? "" : "disabled"}>Lock in my Monday →</button></section>`;
+      <p class="story">Monday after school. 5 people text ${esc(nick())}. There's only time for 3.</p>
+      ${job("Tap 3 to do. The other 2 get dropped. (" + n + " of 3 picked)")}
+      <div class="asks">${asks.map(a => `<button type="button" class="ask${st.plan.includes(a.b) ? " on" : ""}" data-b="${a.b}">${bossTag(a.b)}<span class="t">${esc(a.t)}</span><span class="wh">${esc(a.wh)}</span>${st.plan.includes(a.b) ? `<span class="ck">✓ Doing it</span>` : ""}</button>`).join("")}</div>
+      <button type="button" class="go" id="lockBtn" ${n === 3 ? "" : "disabled"}>Lock it in →</button></section>`;
     app.querySelectorAll("[data-b]").forEach(b => b.onclick = () => {
       const k = b.dataset.b, i = st.plan.indexOf(k);
       if (i >= 0) st.plan.splice(i, 1); else if (st.plan.length < 3) st.plan.push(k);
@@ -538,18 +538,23 @@ textarea{width:100%;font:inherit;font-size:16px;padding:8px;border:2px solid #cf
     });
     $("lockBtn").onclick = () => { st.planLocked = true; nextStep(); };
   }
+  function dropsView() {
+    const dropped = asksFor().filter(a => !st.plan.includes(a.b));
+    app.innerHTML = `<section class="card">${slideBar(3)}
+      <p class="story">What happened to the 2 things ${esc(nick())} dropped:</p>
+      <div class="drops">${dropped.map(a => `<div>${bossTag(a.b)} <b>${esc(a.t)}</b><br>${esc(a.drop)}</div>`).join("")}</div>
+      <p class="result">Every one of those 5 texts came from a social institution. Each one meets a real need, so each one wants your time.</p>
+      <button type="button" class="go" id="nextBtn">Next →</button></section>`;
+    $("nextBtn").onclick = nextStep;
+  }
   let selNeed = null;
   function matchView() {
-    const asks = asksFor(), dropped = asks.filter(a => !st.plan.includes(a.b));
     const done = BOSS_ORDER.every(b => st.match[b]);
     if (!matchView.order) matchView.order = shuffle(BOSS_ORDER);
     app.innerHTML = `<section class="card">${slideBar(3)}
-      <p class="q" style="margin-top:0">What ${esc(nick())} dropped:</p>
-      <div class="drops">${dropped.map(a => `<div>${bossTag(a.b)} <b>${esc(a.t)}</b><br>${esc(a.drop)}</div>`).join("")}</div>
-      <p class="fine" style="margin:4px 0">Every boss wanted your time because each one meets a real need.</p>
-      ${job(done ? "All 5 matched." : "Match each need to its institution. Tap a need, then tap the institution.")}
+      ${job(done ? "All 5 matched." : "Tap a need, then tap the institution that meets it.")}
       <div class="match"><div>${matchView.order.map(b => `<button type="button" class="need${st.match[b] ? " used" : ""}${selNeed === b ? " on" : ""}" data-n="${b}">“${esc(BOSS[b].need)}”</button>`).join("")}${done ? `<button type="button" class="go" id="nextBtn">Next: Thursday →</button>` : ""}</div>
-        <div>${BOSS_ORDER.map(b => `<button type="button" class="mrow${st.match[b] ? " ok" : ""}" data-r="${b}">${bossTag(b)}<span class="slotx">${st.match[b] ? "✓ " + esc(BOSS[b].need) : "tap to place"}</span></button>`).join("")}</div></div>
+        <div>${BOSS_ORDER.map(b => `<button type="button" class="mrow${st.match[b] ? " ok" : ""}" data-r="${b}">${bossTag(b)}<span class="slotx">${st.match[b] ? "✓ " + esc(BOSS[b].need) : ""}</span></button>`).join("")}</div></div>
       <p class="msg" id="mMsg" aria-live="polite"></p></section>`;
     app.querySelectorAll("[data-n]").forEach(b => b.onclick = () => { selNeed = b.dataset.n; matchView(); });
     app.querySelectorAll("[data-r]").forEach(b => b.onclick = () => {
@@ -565,39 +570,31 @@ textarea{width:100%;font:inherit;font-size:16px;padding:8px;border:2px solid #cf
     if (done) $("nextBtn").onclick = () => { selNeed = null; nextStep(); };
   }
 
-  // ---------- Day 4 Thu: change spreads ----------
+  // ---------- Day 4 Thu: change spreads (one link at a time) ----------
+  const chainTrail = () => `<div class="trail">${CHAIN.map(l => st.chain[l.id] ? bossTag(l.b) : `<span class="btag" style="background:#c9d0de">?</span>`).join(`<span class="arr">→</span>`)}</div>`;
   function chainView() {
-    const done = CHAIN.every(l => st.chain[l.id]);
+    const L = CHAIN.find(l => !st.chain[l.id]);
     const data = [["1950", 34], ["1970", 43], ["1990", 58], ["2023", 57]];
+    const chart = `<div class="minichart"><p class="fine" style="margin:0"><b>U.S. women with or looking for a job</b> (BLS)</p><div class="bars">${data.map(d => `<div class="bar" style="height:${d[1] * 1.1}px">${d[1]}%</div>`).join("")}</div><div class="barl">${data.map(d => `<span>${d[0]}</span>`).join("")}</div></div>`;
     app.innerHTML = `<section class="card">${slideBar(4)}
-      <div class="chainwrap">
-        <div><div class="scene"><p class="when">Thursday · kitchen</p><p>A photo on ${esc(nick())}'s fridge: great-grandma, 1943, building bomber parts in a factory. A real-life Rosie the Riveter.</p></div>
-          <p class="q" style="font-size:14px;margin:8px 0 0">% of U.S. women with or looking for a job</p>
-          <div class="bars">${data.map(d => `<div class="bar" style="height:${d[1] * 1.8}px">${d[1]}%</div>`).join("")}</div>
-          <div class="barl">${data.map(d => `<span>${d[0]}</span>`).join("")}</div>
-          <p class="fine">Source: U.S. Bureau of Labor Statistics</p></div>
-        <div>${job("Follow the change. Tap which institution each link is about.")}
-          <div class="links">${CHAIN.map(l => `<div class="link${st.chain[l.id] ? " ok" : ""}" id="lk_${l.id}"><span class="n">${esc(l.t)}</span>
-            ${st.chain[l.id] ? `<div style="margin-top:5px">${bossTag(l.b)}</div>` : `<div class="bs">${BOSS_ORDER.map(b => `<button type="button" data-l="${l.id}" data-b="${b}">${BOSS[b].i} ${BOSS[b].n}</button>`).join("")}</div>`}</div>`).join("")}
-            ${done ? `<div class="link you">➡️ ${esc(YOU_LINK[st.p.home] || YOU_LINK.mom)}</div>` : ""}</div>
-          <p class="msg" id="cMsg" aria-live="polite"></p>
-          ${done ? `<button type="button" class="go" id="nextBtn">One last question →</button>` : ""}</div></div></section>`;
-    app.querySelectorAll("[data-l]").forEach(b => b.onclick = () => {
+      <div class="row"><div><p class="story">A photo on ${esc(nick())}'s fridge: great-grandma in 1943, building bomber parts like Rosie the Riveter. That one change kept spreading.</p>${chainTrail()}</div>${chart}</div>
+      ${L ? `<div class="link" id="lk"><p class="fine" style="margin:0">Link ${CHAIN.indexOf(L) + 1} of 4</p><p class="n">${esc(L.t)}</p></div>
+        ${job("Which institution is this link about?")}
+        <div class="bossbtns">${BOSS_ORDER.map(b => `<button type="button" data-b="${b}">${BOSS[b].i} ${BOSS[b].n}</button>`).join("")}</div>
+        <p class="msg" id="cMsg" aria-live="polite"></p>`
+      : `<p class="result"><b>➡️ ${esc(YOU_LINK[st.p.home] || YOU_LINK.mom)}</b></p><button type="button" class="go" id="nextBtn">Next →</button>`}</section>`;
+    if (!L) { $("nextBtn").onclick = nextStep; return; }
+    app.querySelectorAll("[data-b]").forEach(b => b.onclick = () => {
       if (locked) return;
-      const L = CHAIN.find(x => x.id === b.dataset.l);
       if (b.dataset.b === L.b) { st.chain[L.id] = true; rightMark("chain_" + L.id); save(); chainView(); return; }
       wrongMark("chain");
-      const el = $("lk_" + L.id); el.classList.remove("shake"); void el.offsetWidth; el.classList.add("shake");
-      $("cMsg").textContent = "Not quite. Is that link about jobs and money, home life, school, or laws?"; $("cMsg").className = "msg bad";
+      const el = $("lk"); el.classList.remove("shake"); void el.offsetWidth; el.classList.add("shake");
+      $("cMsg").textContent = "Not quite. Is it about jobs and money, home life, laws, or school?"; $("cMsg").className = "msg bad";
       locked = true; setTimeout(() => { locked = false; }, isTestT() ? 0 : 1500);
     });
-    if (done) $("nextBtn").onclick = nextStep;
   }
   function rosieView() {
-    app.innerHTML = `<section class="card">${slideBar(4)}
-      <div class="row" style="align-items:center"><div class="scene" style="flex:0 0 330px"><p class="when">Your chain</p>
-        ${CHAIN.map(l => `<p>${bossTag(l.b)} ${esc(l.t.split(".")[0])}.</p>`).join("")}</div>
-        <div id="rq"></div></div><div id="rEnd"></div></section>`;
+    app.innerHTML = `<section class="card">${slideBar(4)}${chainTrail()}<div id="rq"></div><div id="rEnd"></div></section>`;
     const end = () => { $("rEnd").innerHTML = `<button type="button" class="go" id="nextBtn">See ${esc(nick())}'s week →</button>`; $("nextBtn").onclick = nextStep; };
     mc($("rq"), "rosie", end);
     if (st.done.rosie) end();
@@ -671,7 +668,7 @@ textarea{width:100%;font:inherit;font-size:16px;padding:8px;border:2px solid #cf
     if (st.step < 0) intro();
     else {
       const s = STEPS[Math.min(st.step, STEPS.length - 1)];
-      ({ build: buildView, sort: sortView, norm: normView, feed: feedView, tip: tipView, plan: planView, match: matchView, chain: chainView, rosie: rosieView, write: writeView })[s.k]();
+      ({ build: buildView, sort: sortView, norm: normView, name: nameView, feed: feedView, tip: tipView, mirror: mirrorView, plan: planView, drops: dropsView, match: matchView, chain: chainView, rosie: rosieView, write: writeView })[s.k]();
     }
     window.scrollTo(0, 0);
   }
@@ -690,13 +687,15 @@ textarea{width:100%;font:inherit;font-size:16px;padding:8px;border:2px solid #cf
 
   // ---------- Test T. skip bar (shared/turnin.js) ----------
   try {
-    const LABEL = { build: "Build your person", sort: "Fri: hands or head sort", norm: "Fri: the kid who sat", feed: "Sat: the tipping video", tip: "Sat: ethnocentrism check", plan: "Mon: pick 3 of 5", match: "Mon: match needs", chain: "Thu: change chain", rosie: "Thu: change check", write: "Recap + 2 short answers + turn in" };
+    const LABEL = { build: "Build your person", sort: "Fri: hands or head sort", norm: "Fri: the kid who sat", name: "Fri: norm + value blanks", feed: "Sat: the tipping video", tip: "Sat: ethnocentrism check", mirror: "Sat: who taught you", plan: "Mon: pick 3 of 5", drops: "Mon: what got dropped", match: "Mon: match needs", chain: "Thu: change chain", rosie: "Thu: change check", write: "Recap + 2 short answers + turn in" };
     function solveStep(s) {
       if (s.k === "build") fillPersonDefaults();
       else if (s.k === "sort") sortCards().forEach(c => st.sort[c.id] = true);
-      else if (s.k === "norm") { if (st.normPick == null) st.normPick = 0; st.done.norm1 = st.done.norm2 = true; }
+      else if (s.k === "norm") { if (st.normPick == null) st.normPick = 0; }
+      else if (s.k === "name") { st.done.norm1 = st.done.norm2 = true; }
       else if (s.k === "feed") { if (st.reply == null) st.reply = 0; }
-      else if (s.k === "tip") { st.done.tip = true; if (st.who == null) st.who = 0; }
+      else if (s.k === "tip") st.done.tip = true;
+      else if (s.k === "mirror") { if (st.who == null) st.who = 0; }
       else if (s.k === "plan") { if (st.plan.length !== 3) st.plan = ["family", "education", "economy"]; st.planLocked = true; }
       else if (s.k === "match") BOSS_ORDER.forEach(b => st.match[b] = true);
       else if (s.k === "chain") CHAIN.forEach(l => st.chain[l.id] = true);
