@@ -402,6 +402,11 @@ window.CLASS_ASSIGNMENTS = {
   "soc-u2-summative-b": { course: "sociology", unit: 2, day: 6, turnIn: false, std: [], title: "Day 6 · Summative (Form B · retake)", path: "https://docs.google.com/document/d/1tuEH_xHnJqa1wikRnpdwBJNIh6Lcm8mxz87XZt18tKI/edit" },
   "soc-u2-summative-b-key": { course: "sociology", unit: 2, day: 6, turnIn: false, std: [], title: "Day 6 · Summative Form B Teacher Key", path: "https://docs.google.com/document/d/12_tgsY6lXIV8au1wR4MoJh4FyRo7blkUXNdS7k3aBtQ/edit" },
   "soc-u3-d1-who-taught-you": { course: "sociology", unit: 3, day: 1, title: "Day 1 · Born This Way or Socialization?", path: "sociology/u3-d1-who-taught-you/", std: ["SS.9-12.Soc.9"] },
+  // 2026-11-14: Fynn picked the new Unit 3 Day 2-5 activities (Origin Story, Rule Breaker Court, and two book-in-hand graphic-novel readings).
+  "soc-u3-d2-origin-story": { course: "sociology", unit: 3, day: 2, title: "Day 2 · Origin Story", path: "sociology/u3-d2-origin-story/", std: ["SS.9-12.Soc.9"] },
+  "soc-u3-d3-rule-breaker-court": { course: "sociology", unit: 3, day: 3, title: "Day 3 · Rule Breaker Court", path: "sociology/u3-d3-rule-breaker-court/", std: ["SS.9-12.Soc.4", "SS.9-12.Soc.9"] },
+  "soc-u3-d4-ms-marvel": { course: "sociology", unit: 3, day: 4, title: "Day 4 · Ms. Marvel: No Normal (Reading)", path: "sociology/u3-d4-ms-marvel/", std: ["SS.9-12.Soc.10"] },
+  "soc-u3-d5-lord-of-the-flies": { course: "sociology", unit: 3, day: 5, title: "Day 5 · Lord of the Flies: The Graphic Novel (Reading)", path: "sociology/u3-d5-lord-of-the-flies/", std: ["SS.9-12.Soc.10", "SS.9-12.Soc.11"] },
   "soc-u4-d2-bad-day": { course: "sociology", unit: 4, day: 2, title: "Day 2 · Same Bad Day, Three Wallets", path: "sociology/u4-d2-bad-day/", std: ["SS.9-12.Soc.12", "SS.9-12.Soc.13"] },
   "soc-u4-d6-fight-inequality": { course: "sociology", unit: 4, day: 6, title: "Day 6 · The Organizer's Toolkit", path: "sociology/u4-d6-fight-inequality/", std: ["SS.9-12.Soc.15"] },
   // 2026-11-02 overnight: Sociology "not made yet" days filled in (Fynn said yes to linking finished drafts that pass every check).
