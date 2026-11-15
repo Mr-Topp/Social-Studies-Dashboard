@@ -183,11 +183,13 @@
     lastOrder = o.map(x => x.i).join("");
     return o;
   }
+  const P = t => String(t).replace(/\{P\}/g, who());
+  const face = () => photos.main ? `<img class="mini-face" src="${photos.main}" alt="">` : `<span class="mini-face emo">${st.noPhoto ? st.icon : "⭐"}</span>`;
   function checkView(scr) {
     const s = secById(scr.sec), c = scr.check;
     const nIn = s.checks.indexOf(c) + 1;
     app.innerHTML = `<section class="scene anim"><div class="checkcard"><span class="secbadge">${s.icon} ${esc(s.name)} · ${esc(s.sub)} · ${esc(s.short)}</span>
-      <p class="kicker">Quick test check ${nIn} of ${s.checks.length}</p><h2>${esc(c.q)}</h2>
+      <div class="entryhead">${face()}<div><p class="kicker">Quick test check ${nIn} of ${s.checks.length} · about ${esc(who())}</p><h2>${esc(P(c.q))}</h2></div></div>
       <div class="qbox" id="qbox"><div class="choices" id="choices"></div><p class="lock" id="lock"></p><div id="fb"></div></div>
       <div class="rowend">${backBtn()}<span id="nextSlot"></span></div></div></section>`;
     bindBack();
@@ -217,7 +219,7 @@
       if (window.classFirstTry) window.classFirstTry.wrong();
       save();
       q.classList.remove("shake"); void q.offsetWidth; q.classList.add("shake");
-      $("fb").innerHTML = `<div class="fb no">Not quite. ${esc(c.hint)} The choices got mixed up.</div>`;
+      $("fb").innerHTML = `<div class="fb no">Not quite. ${esc(P(c.hint))} The choices got mixed up.</div>`;
       draw(); setOff(true);
       let left = isT() ? 0 : LOCK;
       const tick = () => { if (left <= 0) { setOff(false); $("lock").textContent = ""; return; } $("lock").textContent = "Try again in " + left + "…"; left--; later(tick, 1000); };
@@ -380,7 +382,7 @@
     a["First-try correct"] = ft(CHECKS) + " of " + CHECKS.length;
     a["First-try by standard"] = SECS.map(s => { const l = CHECKS.filter(x => x.sec === s.id); return s.std + ": " + ft(l) + " of " + l.length; }).join(" · ");
     const tries = m => m ? " (after " + m + " wrong " + (m === 1 ? "try" : "tries") + ")" : " (first try)";
-    CHECKS.forEach((x, i) => { const s = secById(x.sec); a[(i + 1) + ". " + s.short + " check: " + x.check.q] = x.check.choices[x.check.answer] + tries(st.miss[x.check.id] || 0); });
+    CHECKS.forEach((x, i) => { const s = secById(x.sec); a[(i + 1) + ". " + s.short + " check: " + P(x.check.q)] = x.check.choices[x.check.answer] + tries(st.miss[x.check.id] || 0); });
     a["Person"] = who() + (st.known.trim() ? " (" + st.known.trim() + ")" : "");
     a["Photo added"] = photos.main ? "yes" : "no";
     const qs = [];

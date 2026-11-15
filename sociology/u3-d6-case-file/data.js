@@ -20,12 +20,12 @@ window.CF = {
     { id: "raised", std: "SS.9-12.Soc.9", short: "Soc.9", icon: "🏠", name: "Raised By", sub: "Socialization",
       poster: "Who taught them how to act",
       checks: [
-        { id: "c1", q: "Kayla is a senior who wants to be a nurse. She starts copying how the nurses at her job shadow talk and dress. Which idea is this?",
+        { id: "c1", q: "Picture {P} before they were famous, copying how the pros in their field talked, dressed, and practiced. Which idea is this?",
           choices: ["Anticipatory socialization", "Resocialization", "Primary socialization", "Hidden curriculum"], answer: 0,
-          hint: "Kayla is getting ready for a role she doesn't have yet.", why: "Anticipatory socialization: practicing the ways of a role before you get it." },
-        { id: "c2", q: "Grandma Rose, 70, retires and moves to a senior community. She learns new routines and makes new friends. What does this show?",
+          hint: "{P} was getting ready for a role they didn't have yet.", why: "Anticipatory socialization: practicing the ways of a role before you get it." },
+        { id: "c2", q: "Say {P} retires someday and has to learn a whole new daily routine and make new friends. What would that show?",
           choices: ["Socialization keeps going your whole life", "Socialization ends when school ends", "Only family can socialize a person", "Older adults can't learn new norms"], answer: 0,
-          hint: "Is Rose still learning new ways to act?", why: "Socialization happens across the whole life course, not just in childhood." }
+          hint: "Would {P} still be learning new ways to act?", why: "Socialization happens across the whole life course, not just in childhood." }
       ],
       fields: [
         { id: "agent", type: "pick", label: "Which agent of socialization shaped your person a lot?", options: ["Family", "School", "Peers", "Mass media", "Religion", "The workplace"] },
@@ -38,12 +38,12 @@ window.CF = {
     { id: "rule", std: "SS.9-12.Soc.4", short: "Soc.4", icon: "🚨", name: "Rule Breaker", sub: "Deviance theories",
       poster: "The rule or norm they broke",
       checks: [
-        { id: "c3", q: "Jay stops caring about a job or graduating. He skips school and plays video games all day. In Merton's strain theory, which response is this?",
+        { id: "c3", q: "What if {P} stopped caring about success AND stopped working for it, and just checked out of everything? In Merton's strain theory, which response is that?",
           choices: ["Retreatism", "Innovation", "Conformity", "Rebellion"], answer: 0,
-          hint: "Jay gave up on the goal AND on the normal ways to reach it.", why: "Retreatism: dropping both society's goals and the normal ways to reach them." },
-        { id: "c4", q: "A teacher calls Rico \"the bad kid\" in front of class. Other teachers start watching him. Soon Rico starts acting the part. Which theory explains this best?",
+          hint: "{P} would be giving up on the goal AND on the normal ways to reach it.", why: "Retreatism: dropping both society's goals and the normal ways to reach them." },
+        { id: "c4", q: "Say a reporter calls {P} \"a troublemaker.\" Fans start saying it too, and soon {P} starts acting the part. Which theory explains that best?",
           choices: ["Labeling theory", "Strain theory", "Differential association", "Conformity"], answer: 0,
-          hint: "What changed after people gave Rico a name?", why: "Labeling theory: once people call you deviant, you may start to act that way." }
+          hint: "What changed after people put a name on {P}?", why: "Labeling theory: once people call you deviant, you may start to act that way." }
       ],
       fields: [
         { id: "fact", type: "text", label: "The deviance: what rule or norm did your person break?", help: "Deviance = breaking a rule or norm. It can be a law, a sport's rule, or just what people expect. It doesn't have to be a crime.", ph: "Like: She played a sport most people said girls shouldn't play.", min: 30 },
@@ -56,12 +56,12 @@ window.CF = {
     { id: "mirror", std: "SS.9-12.Soc.10", short: "Soc.10", icon: "🪞", name: "The Mirror", sub: "Building the self",
       poster: "How other people shaped who they are",
       checks: [
-        { id: "c5", q: "Maya posts a selfie. It gets almost no likes. She decides she must look bad and deletes it. Which idea is this?",
+        { id: "c5", q: "Say {P} posts online and gets a flood of mean comments. Then {P} starts thinking, \"Maybe I'm not that good.\" Which idea is this?",
           choices: ["Looking-glass self", "Generalized other", "The \"I\"", "Play stage"], answer: 0,
-          hint: "Maya judged herself by what she imagined other people thought.", why: "Looking-glass self: we see ourselves the way we imagine others see us." },
-        { id: "c6", q: "No one is around, but Devon still throws his trash away instead of dropping it. He knows what society expects. This is the...",
+          hint: "{P} is judging themselves by what they imagine other people think.", why: "Looking-glass self: we see ourselves the way we imagine others see us." },
+        { id: "c6", q: "Even with no cameras around, {P} still waits in line and follows the rules society expects. This is the...",
           choices: ["Generalized other", "Looking-glass self", "Play stage", "The \"I\""], answer: 0,
-          hint: "Devon follows society's rules even when no one is watching.", why: "Generalized other (Mead): knowing what society as a whole expects of you." }
+          hint: "{P} follows society's rules even when no one is watching.", why: "Generalized other (Mead): knowing what society as a whole expects of you." }
       ],
       fields: [
         { id: "fact", type: "text", label: "A real time other people's words or reactions changed how your person saw themselves", help: "Think: a coach who doubted them, fans who cheered, a nickname, haters, a teacher who believed in them.", ph: "Like: A coach cut him from the team, so he started training every morning.", min: 30 },
@@ -72,15 +72,15 @@ window.CF = {
     { id: "crew", std: "SS.9-12.Soc.11", short: "Soc.11", icon: "👥", name: "The Crew", sub: "Groups: us vs. them",
       poster: "The groups that changed them",
       checks: [
-        { id: "c7", q: "Note 1: A store manager thinks all teens steal. Note 2: He makes a rule that only two teens can be in the store at once. Which is correct?",
+        { id: "c7", q: "Note 1: Someone believes all people from {P}'s hometown are lazy. Note 2: That person refuses to hire anyone from there. Which is correct?",
           choices: ["Note 1 = prejudice; Note 2 = discrimination", "Note 1 = discrimination; Note 2 = prejudice", "Both notes are prejudice", "Both notes are discrimination"], answer: 0,
           hint: "One note is a thought. The other is an action.", why: "Prejudice is a belief about a group. Discrimination is treating people unfairly because of it." },
-        { id: "c8", q: "Twenty strangers wait at the same bus stop. They don't talk or know each other. What kind of group is this?",
+        { id: "c8", q: "{P} waits at an airport gate with 50 strangers. Nobody talks or knows each other. What kind of group is that?",
           choices: ["Aggregate", "Category", "Primary group", "Secondary group"], answer: 0,
           hint: "They're in the same place, but are they connected?", why: "Aggregate: people in the same place at the same time who don't interact." },
-        { id: "c9", q: "A team's players all think a play is a bad idea, but nobody speaks up because they want to look united. The play fails. What is this?",
+        { id: "c9", q: "Say everyone on {P}'s team thinks a plan is a bad idea, but nobody speaks up because they want to look united. The plan fails. What is this?",
           choices: ["Groupthink", "Looking-glass self", "Strain theory", "Resocialization"], answer: 0,
-          hint: "The group cared more about agreeing than about a good decision.", why: "Groupthink: a group goes along to keep the peace and makes a worse decision." }
+          hint: "The group cared more about agreeing than about making a good choice.", why: "Groupthink: a group goes along to keep the peace and makes a worse decision." }
       ],
       fields: [
         { id: "primary", type: "text", label: "Primary group: a small, close group in their life", ph: "Like: his mom and two brothers", min: 4 },
