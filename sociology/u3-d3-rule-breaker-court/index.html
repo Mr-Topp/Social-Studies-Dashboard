@@ -2,7 +2,7 @@
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Rule Breaker Court | Sociology Unit 3 Day 3</title>
 <meta name="description" content="Six real rule-breakers. You are the judge. Use deviance, sanctions, and the theories to rule on each case.">
-<link rel="stylesheet" href="../u3-engine/engine.css?v=20261114a">
+<link rel="stylesheet" href="../u3-engine/engine.css?v=20261115a">
 <style>body{--a:#5b3fb8;--a2:#ece6ff;--a3:#33207a}</style>
 <script src="../../shared/assignments.js?v=20261105fb1"></script>
 <script src="../../shared/turnin.js?v=20261105fb1"></script>
@@ -27,16 +27,17 @@ window.U3GAME = {
   titleHtml: "⚖️ RULE BREAKER COURT<small>You are the judge. Six real cases.</small>",
   hook: "A civil rights hero. A TV star. Kids on TikTok. They all broke a rule. Now you rule on them.",
   chips: ["🚌 1955", "🎓 2019", "🚗 2022", "📱 2021"],
-  tiles: ["📁 <b>6</b> real case files", "⚖️ <b>6</b> rulings", "🔨 <b>2</b> verdicts that are yours", "✍️ <b>1</b> short answer", "⏱ <b>20</b> min"],
+  tiles: ["📁 <b>6</b> real case files", "⚖️ <b>6</b> rulings", "🔎 Prove every ruling", "🔨 <b>2</b> verdicts that are yours", "✍️ <b>1</b> short answer", "⏱ <b>25</b> min"],
   goal: "Explain why people break norms, how society reacts, and why deviance depends on time and place.",
-  how: ["Read the case file. It's short and it's real.", "Make your ruling with today's ideas: deviance, sanctions, and the theories.", "See what really happened. Then write one answer and turn it in."],
+  how: ["Read the case file. It's short and it's real.", "Make your ruling with today's ideas. Then prove it: tap the words in the case file that back you up.", "See what really happened. Then write one answer and turn it in."],
   startLabel: "Open the first case",
   stepWord: "Case",
   steps: [
     { kind: "q", id: "c1", label: "Rosa Parks: why deviant", std: "Soc.9", kicker: "Case 1 · Montgomery, Alabama · 1955", title: "The bus seat",
       left: `<div class="who"><span class="icon">🚌</span><div><b><span class="real">REAL</span>Rosa Parks</b><span>December 1, 1955</span></div></div>
-        <p class="fact">In 1955, a Montgomery law made Black riders give up bus seats to white riders.</p>
-        <p class="fact">The driver told Rosa Parks to move. She <b>said no</b> and stayed in her seat.</p>`,
+        <p class="fact">{{In 1955,}} [[a Montgomery law made Black riders give up bus seats to white riders.]]</p>
+        <p class="fact">{{The driver told Rosa Parks to move.}} {{She <b>said no</b> and stayed in her seat.}}</p>`,
+      proof: "Tap the words that show the norm she broke.", proofHint: "Which words name the rule of that time and place?",
       tag: "Your ruling", q: "Today she's a hero. So why do sociologists still call what she did deviance?",
       choices: ["She broke a norm of her time and place: a city bus law.", "She hurt the other riders who were on the bus that night.", "Deviance means any act that is bad for the whole society.", "She broke a rule that was the same in every U.S. state."], answer: 0,
       why: "Deviance is breaking a social norm. It isn't always bad. Whether it counts depends on the time and place.",
@@ -51,8 +52,9 @@ window.U3GAME = {
       after: "Her arrest started the Montgomery Bus Boycott. In 1956, the Supreme Court ruled that bus segregation broke the Constitution. Breaking a norm can push society to change it." },
     { kind: "q", id: "c2", label: "College scandal: strain theory", std: "Soc.4", kicker: "Case 2 · Los Angeles · 2019", title: "The fake rowers",
       left: `<div class="who"><span class="icon">🎓</span><div><b><span class="real">REAL</span>Lori Loughlin</b><span>Actress, Full House</span></div></div>
-        <p class="fact">Loughlin and her husband wanted their daughters to get into USC, a top college.</p>
-        <p class="fact">They paid <b>$500,000</b> to get the girls in as rowing team recruits. <b>Neither daughter rowed.</b></p>`,
+        <p class="fact">{{Loughlin and her husband}} {{wanted their daughters to get into USC, a top college.}}</p>
+        <p class="fact">[[They paid <b>$500,000</b> to get the girls in as rowing team recruits. <b>Neither daughter rowed.</b>]]</p>`,
+      proof: "Tap the words that show them breaking the rules to reach the goal.", proofHint: "The goal is a top college. Which words show the illegal way they tried to get there?",
       tag: "Your ruling", q: "Robert Merton's strain theory has five ways people respond. Which one fits the parents?",
       choices: ["Innovation: they kept the goal but broke the rules to reach it.", "Conformity: they followed the rules to reach the goal they wanted.", "Retreatism: they gave up on the goal and on the rules too.", "Rebellion: they threw out the old goal and made a new one."], answer: 0,
       why: "Innovation. The goal (a top college) stayed the same. They just used an illegal way to get there.",
@@ -61,8 +63,9 @@ window.U3GAME = {
       reveal: "In 2020 Loughlin pleaded guilty and spent 2 months in prison. That's a <b>formal negative sanction</b>. More than 50 people were charged in the scandal." },
     { kind: "q", id: "c3", label: "Kia challenge: differential association", std: "Soc.4", kicker: "Case 3 · Cities across the U.S. · 2022", title: "The car-theft videos",
       left: `<div class="who"><span class="icon">🚗</span><div><b><span class="real">REAL</span>The "Kia Boys" trend</b><span>TikTok, 2022</span></div></div>
-        <p class="fact">Videos spread online showing how to start some Kia and Hyundai cars <b>with a USB cable</b>. Many were made by teens.</p>
-        <p class="fact">Kids learned the trick from the videos and from friends who were doing it. <b>Thefts of those cars shot up.</b></p>`,
+        <p class="fact">{{Videos spread online showing how to start some Kia and Hyundai cars <b>with a USB cable</b>.}} {{Many were made by teens.}}</p>
+        <p class="fact">[[Kids learned the trick from the videos and from friends who were doing it.]] {{<b>Thefts of those cars shot up.</b>}}</p>`,
+      proof: "Tap the words that show who the kids learned it from.", proofHint: "Sutherland says you learn deviance from people around you. Which words say who taught them?",
       tag: "Your ruling", q: "Which theory best explains how these teens learned to steal cars?",
       choices: ["Differential association: they learned it from the people they spent time with.", "Strain theory: no fair way to a good job forced them to steal.", "Labeling theory: they stole only after someone called them criminals.", "Conformity: they followed the norms that most of society agrees with."], answer: 0,
       why: "Differential association (Sutherland): you learn deviance from the people around you, the same way you learn anything else.",
@@ -71,8 +74,9 @@ window.U3GAME = {
       reveal: "Police arrested many teens: <b>formal negative sanctions</b>. In 2023, Kia and Hyundai gave owners a free software update to stop the trick." },
     { kind: "q", id: "c4", label: "Devious licks: sanction type", std: "Soc.9", kicker: "Case 4 · Schools everywhere · 2021", title: "Devious licks",
       left: `<div class="who"><span class="icon">📱</span><div><b><span class="real">REAL</span>"Devious licks"</b><span>TikTok, September 2021</span></div></div>
-        <p class="fact">Students filmed themselves stealing or wrecking things from school bathrooms, like <b>soap dispensers</b>.</p>
-        <p class="fact">They posted the videos. Some got <b>millions of views and likes</b>, so more kids did it.</p>`,
+        <p class="fact">{{Students filmed themselves stealing or wrecking things from school bathrooms,}} {{like <b>soap dispensers</b>.}}</p>
+        <p class="fact">{{They posted the videos.}} [[Some got <b>millions of views and likes</b>,]] {{so more kids did it.}}</p>`,
+      proof: "Tap the words that show the sanction.", proofHint: "A sanction is a reaction from other people. Which words show how people reacted online?",
       tag: "Your ruling", q: "The likes and views those videos got are what kind of sanction?",
       choices: ["Informal positive: everyday people rewarding the act.", "Formal positive: an official group rewarding the act.", "Informal negative: everyday people punishing the act.", "Formal negative: an official group punishing the act."], answer: 0,
       why: "Informal positive. Likes come from regular people, not an official group, and they reward the behavior.",
@@ -81,8 +85,9 @@ window.U3GAME = {
       reveal: "Schools suspended students: a <b>formal negative sanction</b>. TikTok took down the videos. So the same act got a reward from peers online and a punishment from school." },
     { kind: "q", id: "c5", label: "Frances Haugen: labeling theory", std: "Soc.4", kicker: "Case 5 · Washington, D.C. · 2021", title: "The Instagram files",
       left: `<div class="who"><span class="icon">📂</span><div><b><span class="real">REAL</span>Frances Haugen</b><span>Worked at Facebook, which owns Instagram</span></div></div>
-        <p class="fact">Haugen <b>copied thousands of secret company pages</b> and gave them to reporters and Congress. That broke her company's rules.</p>
-        <p class="fact">The pages showed Facebook's own research: Instagram made some teen girls <b>feel worse about their bodies</b>.</p>`,
+        <p class="fact">{{Haugen <b>copied thousands of secret company pages</b>}} {{and gave them to reporters and Congress.}} {{That broke her company's rules.}}</p>
+        <p class="fact">{{The pages showed Facebook's own research:}} [[Instagram made some teen girls <b>feel worse about their bodies</b>.]]</p>`,
+      proof: "Tap the words that explain why some people labeled her a hero.", proofHint: "A hero helps people. Which words show who she was protecting?",
       tag: "Your ruling", q: "Some called her a hero. Others called her a rule-breaker who leaked secrets. Which idea explains why one act gets two labels?",
       choices: ["Labeling theory: an act becomes deviant when people label it that way.", "Differential association: she learned to leak from her coworkers.", "Strain theory: she wanted money but had no fair way to get it.", "Conformity: she went along with what her work group expected."], answer: 0,
       why: "Labeling theory (Becker). The act didn't change. What changed was who was doing the labeling.",
@@ -97,8 +102,9 @@ window.U3GAME = {
       after: "There's no single right answer. That's the point: <b>deviance is relative</b>. Whether an act is wrong depends on who is judging it." },
     { kind: "q", id: "c6", label: "Criminal record study: stigma", std: "Soc.4", kicker: "Case 6 · Milwaukee, Wisconsin · 2003", title: "The job hunt",
       left: `<div class="who"><span class="icon">📄</span><div><b><span class="real">REAL</span>Devah Pager's study</b><span>Sociologist, 2003</span></div></div>
-        <p class="fact">Pager sent pairs of young men to apply for the same jobs with <b>equal résumés</b>.</p>
-        <p class="fact">The only difference: one said he had a criminal record. He got called back <b>about half as often</b>, even though he had already served his time.</p>`,
+        <p class="fact">{{Pager sent pairs of young men to apply for the same jobs}} {{with <b>equal résumés</b>.}}</p>
+        <p class="fact">{{The only difference: one said he had a criminal record.}} [[He got called back <b>about half as often</b>, even though he had already served his time.]]</p>`,
+      proof: "Tap the words that show the rejection that followed the label.", proofHint: "Stigma is rejection. Which words show what happened to the man with the record?",
       tag: "Your ruling", q: "The shame and rejection that follow someone with that label is called what?",
       choices: ["Stigma", "Strain", "A stereotype", "A positive sanction"], answer: 0,
       why: "Stigma: shame or rejection aimed at someone seen as different. The label kept following him after his sentence ended.",
@@ -129,5 +135,5 @@ window.U3GAME = {
   }
 };
 </script>
-<script src="../u3-engine/engine.js?v=20261114a"></script>
+<script src="../u3-engine/engine.js?v=20261115a"></script>
 </body></html>
