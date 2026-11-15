@@ -2,7 +2,7 @@
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Origin Story | Sociology Unit 3 Day 2</title>
 <meta name="description" content="Three real superstars. Flip their real backstory and find which agents of socialization made them who they are.">
-<link rel="stylesheet" href="../u3-engine/engine.css?v=20261115a">
+<link rel="stylesheet" href="../u3-engine/engine.css?v=20261115c">
 <style>body{--a:#c2531c;--a2:#ffe8d9;--a3:#7d3110}</style>
 <script src="../../shared/assignments.js?v=20261105fb1"></script>
 <script src="../../shared/turnin.js?v=20261105fb1"></script>
@@ -18,6 +18,7 @@
 const AG = { fam: "Family", sch: "School", peer: "Peers", media: "Mass media", rel: "Religion", work: "The workplace" };
 window.U3GAME = {
   key: "soc-u3-d2-origin-story-v1",
+  pace: 180,
   assignmentId: "soc-u3-d2-origin-story",
   title: "Sociology · Unit 3 · Day 2 · Origin Story",
   standard: "SS.9-12.Soc.9",
@@ -36,7 +37,7 @@ window.U3GAME = {
     { kind: "q", id: "l1", label: "LeBron: the Walker family", std: "Soc.9", kicker: "Origin Story 1 · LeBron James", title: "Missing school in Akron",
       left: `<div class="who"><span class="icon">🏀</span><div><b><span class="real">REAL</span>LeBron James</b><span>Grew up in Akron, Ohio</span></div></div>
         <p class="fact">{{His mom raised him alone, and they moved a lot.}} {{In 4th grade he <b>missed 83 days of school</b>.}}</p>
-        <p class="fact">{{Then he moved in with his youth football coach's family, the Walkers.}} [[They gave him <b>chores, rules, and a wake-up time</b>.]] {{The next year he barely missed school.}}</p>`,
+        <p class="fact">[[Then he moved in with his youth football coach's family, the Walkers. They gave him <b>chores, rules, and a wake-up time</b>.]] {{The next year he barely missed school.}}</p>`,
       proof: "Tap the words in the card that show the family teaching him habits.", proofHint: "Look for what the Walkers actually gave him.",
       tag: "Who's teaching?", q: "Which agent of socialization taught LeBron his new daily habits?",
       choices: [AG.fam, AG.sch, AG.peer, AG.media], answer: 0,
@@ -54,12 +55,12 @@ window.U3GAME = {
     { kind: "q", id: "l3", label: "LeBron: The Chosen One", std: "Soc.9", kicker: "Origin Story 1 · LeBron James", title: "The Chosen One",
       left: `<div class="who"><span class="icon">🏀</span><div><b><span class="real">REAL</span>LeBron James</b><span>Age 17, a high school junior</span></div></div>
         <p class="fact">[[In 2002, LeBron was on the cover of <b>Sports Illustrated</b>. The headline called him <b>"The Chosen One."</b>]]</p>
-        <p class="fact">{{That December, he was 17 and still in high school.}} {{Millions of people were told who he was before he could vote.}}</p>`,
+        <p class="fact">{{He was only 17 and still in high school.}} {{Millions of people were told who he was before he could vote.}}</p>`,
       proof: "Tap the words that show mass media at work.", proofHint: "Mass media means TV, magazines, music, and the internet. Which words name one?",
       tag: "Who's teaching?", q: "Which agent of socialization is sending LeBron a message about who he is?",
       choices: [AG.media, AG.peer, AG.sch, AG.rel], answer: 0,
       why: "Mass media. Magazines and TV told LeBron, and everyone else, that he was a future star.",
-      hint: "Sports Illustrated and ESPN are what kind of thing?" },
+      hint: "Where did millions of people see him? Was it in person?" },
     { kind: "pick", id: "p1", label: "Top agent for LeBron", kicker: "Your call · LeBron James", title: "Who shaped LeBron the most?",
       left: `<p class="fact">🏠 <b>Family:</b> the Walkers' rules got him back to school.</p><p class="fact">🤝 <b>Peers:</b> the Fab Four picked his high school.</p><p class="fact">📺 <b>Media:</b> the whole country called him "The Chosen One."</p>`,
       q: "Which agent shaped LeBron the most?", options: [AG.fam, AG.peer, AG.media],
@@ -109,7 +110,7 @@ window.U3GAME = {
     { kind: "q", id: "s1", label: "Simone: adopted by grandparents", std: "Soc.9", kicker: "Origin Story 3 · Simone Biles", title: "A new home",
       left: `<div class="who"><span class="icon">🤸</span><div><b><span class="real">REAL</span>Simone Biles</b><span>Grew up near Houston, Texas</span></div></div>
         <p class="fact">{{When Simone was little,}} {{she and her sister went into foster care.}}</p>
-        <p class="fact">{{Her grandfather Ron and his wife Nellie <b>adopted them</b>.}} [[Simone calls them <b>Mom and Dad</b>.]]</p>`,
+        <p class="fact">[[Her grandfather Ron and his wife Nellie <b>adopted them</b>. Simone calls them <b>Mom and Dad</b>.]]</p>`,
       proof: "Tap the words that show Ron and Nellie are her family now.", proofHint: "What does Simone call them?",
       tag: "Who's teaching?", q: "Ron and Nellie raised Simone and taught her values. Which agent of socialization is that?",
       choices: [AG.fam, AG.sch, AG.rel, AG.peer], answer: 0,
@@ -123,7 +124,7 @@ window.U3GAME = {
       tag: "Who's teaching?", q: "Which agent of socialization gave Simone the habit of carrying a rosary?",
       choices: [AG.rel, AG.media, AG.work, AG.sch], answer: 0,
       why: "Religion. It teaches values, rituals, and gives people a community. Her family passed it on, and she carries it to every meet.",
-      hint: "Prayer beads and church come from which agent?" },
+      hint: "Think about where her rosary habit started. Was it a friend, a show, or something bigger?" },
     { kind: "q", id: "s3", label: "Simone: leaves regular school", std: "Soc.9", kicker: "Origin Story 3 · Simone Biles", title: "Trading the hallways for the gym",
       left: `<div class="who"><span class="icon">🤸</span><div><b><span class="real">REAL</span>Simone Biles</b><span>Age 15</span></div></div>
         <p class="fact">{{In 2012,}} [[Simone <b>left regular high school</b>]] {{and switched to homeschool}} {{so she could train more hours in the gym.}}</p>
@@ -162,5 +163,5 @@ window.U3GAME = {
   }
 };
 </script>
-<script src="../u3-engine/engine.js?v=20261115a"></script>
+<script src="../u3-engine/engine.js?v=20261115c"></script>
 </body></html>
