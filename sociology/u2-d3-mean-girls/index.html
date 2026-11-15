@@ -1,0 +1,146 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Mean Girls: New Girl, New Rules (Reading) | Sociology Unit 2 Day 3</title>
+<meta name="description" content="The story of the movie Mean Girls, retold as a short illustrated book. Use culture shock, ethnocentrism, cultural relativism, and norms to explain how culture shapes Cady Heron.">
+<link rel="stylesheet" href="../u3-engine/engine.css?v=20261115c">
+<style>body{--a:#c2255c;--a2:#ffe3ee;--a3:#6d1236}</style>
+<script src="../../shared/assignments.js?v=20261105fb1"></script>
+<script src="../../shared/turnin.js?v=20261105fb1"></script>
+<script src="../../shared/lang.js?v=20261103c"></script>
+</head><body>
+<script>
+// Sociology Unit 2 Day 3 · Mean Girls: New Girl, New Rules (Reading) (SS.9-12.Soc.5, SS.9-12.Soc.6).
+// Fynn (11/15/26): replaces the Itchy Feet reading for Day 3 ("Why Does Normal Feel So Normal?").
+// Built like the Unit 3 Day 4 Ms. Marvel reading: the movie's story retold in plain words (no script or images
+// copied from the film), every picture a real photo from Wikimedia Commons with its credit and license under it.
+// Plot points checked against published summaries 11/15/26 (12 years in Africa, parents study animals, homeschooled;
+// moves to Evanston, IL / North Shore High; eats lunch in a bathroom stall; Janis's cafeteria map; Plastics' rules:
+// pink on Wednesdays, ponytail once a week, jeans only Fridays; Gretchen's "fetch"; Janis's plan; mall watering-hole
+// daydream; pretends to be bad at math for Aaron and fails tests; skips Janis's art show for a party; Burn Book pages
+// spread by Regina; Ms. Norbury's gym assembly with apologies and trust falls; Cady takes the blame, is grounded,
+// joins the Mathletes and wins state; Spring Fling queen, breaks the plastic crown and hands out the pieces).
+// Left out on purpose: Halloween costumes, the weight-loss bars, the bus, and the movie's crude jokes.
+// Day 3 targets (shared/targets.js 2|3): culture shapes behavior and thinking; culture shock, ethnocentrism,
+// cultural relativism; culture shapes identity. Each question has a "prove it" tap on the page.
+const IMG = (file, title, by, lic) => ({ src: "https://commons.wikimedia.org/wiki/Special:FilePath/" + encodeURIComponent(file) + "?width=1000", page: "https://commons.wikimedia.org/wiki/File:" + encodeURIComponent(file), title, by, lic });
+const CH = [
+  { n: 1, t: "The New Girl", img: IMG("Northwestern HS Hallway.jpg", "A high school hallway in Maryland, 2009", "Maryland Pride", "CC BY-SA 3.0"),
+    p: [["Cady Heron is sixteen.", "For twelve years, she lived in Africa, where her parents studied wild animals.", "Her mom taught her at home, so she has never been to a real school."],
+        ["Now her family has moved to Evanston, Illinois, just outside Chicago.", "On her first day at North Shore High, everything feels strange.", "She doesn't know where to go, where to sit, or how to act.", "Kids stare at her, and nothing she does seems right."],
+        ["She knows a lot about lions and zebras.", "But she knows nothing about the rules of an American high school.", "By lunch, she feels so lost that she eats alone in a bathroom stall."]] },
+  { n: 2, t: "The Map", img: IMG("High school students eat lunch at a public school cafeteria in North Carolina 02.jpg", "Students at lunch in a North Carolina high school, 2004", "Harrison Keely", "CC BY 4.0"),
+    p: [["The next day, two kids rescue her.", "Janis and Damian are funny, a little strange, and they don't care what anyone thinks."],
+        ["Janis draws Cady a map of the cafeteria.", "Every table is its own group, like the jocks, the band kids, the preps, and the freshmen.", "Each group sits together, dresses alike, and has its own way of talking."],
+        ["Cady starts watching the groups the way her parents watched animals.", "Instead of calling them weird, she tries to figure out how each group works and why."],
+        ["At the top of the map are the Plastics, the most popular girls in school.", "Regina George is their leader, and Gretchen and Karen follow her everywhere.", "Janis warns Cady to stay far away from them."]] },
+  { n: 3, t: "The Rules", img: IMG("Clothes hanged inside a closet.jpg", "Clothes on pink hangers, 2020", "mycurrency.com", "CC BY-SA 4.0"),
+    p: [["Then Regina does something nobody expects.", "She invites Cady to sit with the Plastics."],
+        ["Gretchen explains their rules.", "On Wednesdays, they wear pink.", "You can only wear your hair in a ponytail once a week.", "Jeans are only for Fridays.", "Break a rule, and you can't sit with them at lunch."],
+        ["To the Plastics, their way is the right way.", "Anyone who does things differently is a loser to them."],
+        ["Gretchen even tries to start her own slang word, \"fetch,\" which means cool.", "Regina tells her to stop, because it is never going to catch on."],
+        ["Janis has a plan.", "Cady will pretend to be friends with the Plastics and secretly report back, so they can take Regina down."]] },
+  { n: 4, t: "The Watering Hole", img: IMG("Wildlife of Etosha National Park.jpg", "Zebras wait for lions to let them drink at a waterhole, Namibia, 2015", "Buiobuione", "CC BY-SA 4.0"),
+    p: [["Cady goes to the mall with the Plastics.", "As she watches the kids around the fountain, she pictures them as wild animals at a watering hole, like the ones she grew up watching.", "Twelve years in Africa still shape how she sees people."],
+        ["Little by little, Cady changes.", "She starts dressing like the Plastics, talking like them, and acting like them.", "She is great at math, but she pretends to be bad at it so a boy named Aaron will help her.", "She pretends for so long that she starts failing her math tests for real."],
+        ["Then she skips Janis's art show to throw a party.", "Janis is hurt and angry.", "She tells Cady that she isn't pretending anymore.", "She really is Plastic now."]] },
+  { n: 5, t: "The Burn Book", img: IMG("New Fold-Out Bleachers at Southwest High - DPLA - b6b949e89c1931922e4a61300d32be7a.jpg", "Bleachers in the gym at Southwest High School, Minneapolis", "Hennepin County Library", "No known copyright"),
+    p: [["The Plastics keep a secret notebook called the Burn Book.", "It is full of mean rumors and insults about other girls at school, and even some teachers."],
+        ["When Regina finds out that Cady has been tricking her, she gets revenge.", "She makes copies of the Burn Book pages and throws them all over the school.", "Girls read what was written about them, and fights break out in the halls."],
+        ["Ms. Norbury, Cady's math teacher, brings every junior girl into the gym.", "She asks them to raise a hand if another girl has ever talked about them behind their back.", "Almost every hand goes up.", "Then she asks who has ever talked about someone else.", "Most hands go up again."],
+        ["One by one, the girls apologize and fall back into the arms of the crowd.", "For the first time, girls from different groups see each other as people, not labels."]] },
+  { n: 6, t: "Breaking the Crown", img: IMG("Diadem Tiara Hochzeit Braut.jpg", "A rhinestone tiara, 2014", "Dieter Hollmann", "CC BY-SA 4.0"),
+    p: [["Cady takes the blame for the Burn Book, even though she didn't start it.", "Her parents ground her, and kids at school stop talking to her."],
+        ["To make up for the math tests she failed, she joins the Mathletes, the school math team.", "At the state championship, she answers the last question right and wins it for her team.", "This time, she doesn't hide that she's smart."],
+        ["That night at the Spring Fling dance, Cady is voted queen.", "She breaks the plastic crown into pieces and tosses them to girls from every group.", "Cady learned the rules of a new culture, and those rules changed her.", "But she also learned that she gets to choose which rules to keep."]] }
+];
+// One book page. proof = "p,s" (paragraph, sentence) of the sentence(s) that prove the answer.
+function page(n, proof) {
+  const c = CH[n - 1], i = c.img;
+  const body = c.p.map((para, pi) => "<p>" + para.map((s, si) => [].concat(proof).includes(pi + "," + si) ? "[[" + s + "]]" : "{{" + s + "}}").join(" ") + "</p>").join("");
+  return `<div class="bookpage"><figure><img src="${i.src}" alt="${i.title}" loading="lazy"><figcaption>Photo: ${i.title}. By ${i.by}, <a href="${i.page}" target="_blank" rel="noopener">${i.lic}, Wikimedia Commons</a>. (A real place or thing, not from the movie.)</figcaption></figure>
+    <p class="chap">Chapter ${c.n} of 6</p><h3>${c.t}</h3>${body}<p class="pg">— ${c.n} —</p></div>`;
+}
+window.U3GAME = {
+  key: "soc-u2-d3-mean-girls-v1",
+  pace: 230,
+  assignmentId: "soc-u2-d3-mean-girls",
+  title: "Sociology · Unit 2 · Day 3 · Mean Girls: New Girl, New Rules (Reading)",
+  standard: "SS.9-12.Soc.5, SS.9-12.Soc.6",
+  stdText: [["SS.9-12.Soc.5", "Describe the components of culture."], ["SS.9-12.Soc.6", "Analyze how culture influences individuals, including themselves."]],
+  brand: "MEAN GIRLS · NEW RULES",
+  eyebrow: "Sociology · Unit 2 · Day 3 · Reading",
+  titleHtml: "MEAN GIRLS<small>New Girl, New Rules · the story, retold</small>",
+  hook: "Cady Heron grew up in Africa. Now she's 16, starting her first real school, and she doesn't know any of the rules.",
+  chips: ["🍽️ The cafeteria map", "💗 Pink on Wednesdays", "🦓 The watering hole", "👑 The crown"],
+  tiles: ["📖 <b>6</b> short chapters", "✓ <b>7</b> questions", "🔎 Prove every answer", "✍️ <b>1</b> short answer", "⏱ <b>30</b> min"],
+  book: "📖 This is the story of the movie <b>Mean Girls</b> (2004), retold in plain words. You don't need to have seen it. The pictures are real photos, not from the movie.",
+  goal: "Explain how culture shapes the way people think, act, and judge others.",
+  how: ["Read one chapter. It's short.", "Answer the question. Then prove it: tap the sentence on the page that shows it.", "Write one answer and turn it in."],
+  startLabel: "Open the book",
+  stepWord: "Step",
+  steps: [
+    { kind: "q", id: "r1", label: "Ch. 1: culture shock", std: "Soc.6", kicker: "Chapter 1 · Use the idea", title: "The New Girl", left: page(1, ["1,2", "2,1"]),
+      tag: "Use the idea", q: "Culture shock is the lost, confused feeling you get when you're dropped into a culture you don't know. Why does Cady end up eating lunch in a bathroom stall?",
+      choices: ["She doesn't know how anything works at her new school yet", "She got in trouble, and a teacher made her eat by herself", "She thinks the kids at school are rude, so she avoids them", "She wants a quiet place to study before her next class"], answer: 0,
+      proof: "Tap the sentence that shows she doesn't know the rules.", proofHint: "Look for what Cady doesn't know at her new school.",
+      why: "That's culture shock. Everything she learned about how to act doesn't work here, so she feels lost.",
+      hint: "Reread the part about what she knows and doesn't know." },
+    { kind: "q", id: "r2", label: "Ch. 2: cultural relativism", std: "Soc.6", kicker: "Chapter 2 · Use the idea", title: "The Map", left: page(2, "2,1"),
+      tag: "Use the idea", q: "Cultural relativism means trying to understand a group's ways from the inside before you judge them. How does Cady show it in this chapter?",
+      choices: ["She tries to figure out how each group works and why", "She decides the groups are weird and stays away from all", "She tells Janis her old way of life in Africa was better", "She picks the most popular table and copies everything"], answer: 0,
+      proof: "Tap the sentence that shows Cady trying to understand the groups.", proofHint: "Look for what Cady does instead of calling the groups weird.",
+      why: "Cultural relativism. She doesn't judge the groups. She tries to understand them, the way her parents studied animals.",
+      hint: "Which choice is about understanding a group instead of judging it?" },
+    { kind: "q", id: "r3", label: "Ch. 3: norms", std: "Soc.5", kicker: "Chapter 3", title: "The Rules", left: page(3, ["1,1", "1,2", "1,3"]),
+      tag: "Parts of culture", q: "Pink on Wednesdays, a ponytail once a week, jeans only on Fridays. Which part of culture are these?",
+      choices: ["Norms: rules for how to act in the group", "Values: big ideas about what matters most", "Symbols: objects that stand for an idea", "Language: words the group made up"], answer: 0,
+      proof: "Tap a sentence that shows one of the Plastics' norms.", proofHint: "Look for one of the rules Gretchen explains.",
+      why: "These are norms. They're the group's rules for how to dress and act, and breaking one gets you kicked off the table.",
+      hint: "These tell people how to act. Which part of culture does that?" },
+    { kind: "q", id: "r4", label: "Ch. 3: ethnocentrism", std: "Soc.6", kicker: "Chapter 3 · Use the idea", title: "The Rules", left: page(3, ["2,0", "2,1"]), samePage: true,
+      tag: "Use the idea", q: "Ethnocentrism means judging other groups by your own group's ways, as if yours is the only right way. Where does this chapter show ethnocentrism?",
+      choices: ["The Plastics think anyone who's different is a loser", "Gretchen tries to make the word \"fetch\" catch on", "Regina invites Cady to come sit at the Plastics' table", "Janis makes a plan to take Regina George down"], answer: 0,
+      proof: "Tap the sentence that shows the Plastics judging other kids.", proofHint: "Look for what the Plastics think about kids who do things differently.",
+      why: "That's ethnocentrism. The Plastics measure everyone by their own rules, so anyone different is a loser to them.",
+      hint: "Look for a group acting like its way is the only right way." },
+    { kind: "q", id: "r5", label: "Ch. 4: the culture changes Cady", std: "Soc.6", kicker: "Chapter 4", title: "The Watering Hole", left: page(4, ["1,1", "1,2", "1,3"]),
+      tag: "How culture shapes people", q: "Which part of this chapter shows the Plastics' culture changing who Cady is?",
+      choices: ["She hides that she's smart and starts failing math", "She teaches the Plastics about animals in Africa", "She tells Regina the rules are silly and quits them", "She sits with Janis and Damian at lunch every day"], answer: 0,
+      proof: "Tap a sentence that shows Cady changing to fit in.", proofHint: "Look at the part that starts with \"Little by little.\"",
+      why: "The group's culture is changing her. She acts and dresses like them, and she even hides that she's smart to fit in.",
+      hint: "Look for the part that starts with \"Little by little.\"" },
+    { kind: "q", id: "r6", label: "Ch. 5: the hands go up", std: "Soc.6", kicker: "Chapter 5", title: "The Burn Book", left: page(5, ["2,2", "2,4"]),
+      tag: "Think like a sociologist", q: "In the gym, almost every girl raises her hand both times. What does that show?",
+      choices: ["Talking behind backs happens all over the school, not just with one girl", "The Plastics are the only girls who say mean things about other girls", "Only a few girls at this school have ever been talked about","The girls are raising hands so Ms. Norbury will let them leave early"], answer: 0,
+      proof: "Tap a sentence that shows how many girls raise their hands.", proofHint: "Look for what happens after each question Ms. Norbury asks.",
+      why: "It's not just one mean girl. Almost everyone has been hurt, and almost everyone has done it. That's a pattern in the school's culture.",
+      hint: "If almost everyone does it, is it one person's problem or the whole group's?" },
+    { kind: "q", id: "r7", label: "Ch. 6: choosing the rules", std: "Soc.6", kicker: "Chapter 6 · Use the idea", title: "Breaking the Crown", left: page(6, ["2,2", "2,3"]),
+      tag: "Use the idea", q: "What does Cady's whole story show about how culture affects a person?",
+      choices: ["A new culture can change you, but you can choose which rules to keep", "Fitting in is worth hiding the things you're good at, like math", "Once a group changes who you are, there's no way to change back", "Moving to a new place only changes how you look, not who you are"], answer: 0,
+      proof: "Tap a sentence that shows what Cady learned.", proofHint: "Look at the last two sentences of the chapter.",
+      why: "The new culture changed how Cady acted. But in the end, she chose which rules to keep and which to break, like the crown.",
+      hint: "Did the culture change her? Did she get a choice?" }
+  ],
+  end: {
+    kicker: "Cady's story", title: "How culture shaped Cady",
+    html: () => `<div class="cards3">
+        <div class="mini"><b>🍽️ The first day</b><span>Culture shock: she didn't know the rules</span></div>
+        <div class="mini"><b>💗 Pink on Wednesdays</b><span>Norms, plus their own word, "fetch" (language)</span></div>
+        <div class="mini"><b>🦓 The watering hole</b><span>The culture she grew up in shapes how she sees people</span></div></div>
+      <p class="bigidea">Culture isn't just where you're from. <b>It shapes how you think, how you act, and how you judge others</b>, and you can choose which rules to keep.</p>`
+  },
+  write: {
+    id: "w1", short: "How culture shapes a person (Cady + you)", heading: "Explain it with Cady, then with you",
+    label: "Pick ONE: culture shock, ethnocentrism, or cultural relativism. Explain how it shows up in Cady's story. Then give an example from your own life.",
+    help: "Your example can be a new school, a new job, a family rule, a team, or any group you're in.",
+    stem: "In Mean Girls, ___ shows ___ because ___. In my own life, ___.",
+    min: 100, more: "Use a real moment from the story and a real moment from your life.",
+    mustAll: [{ words: ["cady", "regina", "plastic", "janis", "damian", "gretchen", "karen", "burn book", "map", "pink", "crown", "mall", "lunch", "cafeteria", "norbury"], msg: "Use a moment from the story. Name Cady, the Plastics, the map, or another part." },
+              { words: ["culture shock", "ethnocentr", "relativ"], msg: "Use one idea from today: culture shock, ethnocentrism, or cultural relativism." },
+              { words: ["because", "since"], msg: "Say why. Use the word \"because.\"" }]
+  }
+};
+</script>
+<script src="../u3-engine/engine.js?v=20261115c"></script>
+</body></html>
