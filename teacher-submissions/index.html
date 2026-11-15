@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
 <title>Teacher Dashboard · All Classes</title>
-<script src="../shared/assignments.js?v=20261114born"></script>
+<script src="../shared/assignments.js?v=20261114u3off"></script>
    <script src="part1-schoology.js?v=20261105a"></script>
 <script src="videos.js?v=20261111vid19"></script>
 <script src="presentations.js?v=20261103civics3"></script>
@@ -886,7 +886,7 @@ function linksHtml() {
       if (r.summ) {
         if (!mainIds.some(isTest)) r.todo.push("Summative not made yet. Fill this in");
         else if (!r.ids.some(id => kindOf(id) === "key")) r.todo.push("Answer key not made yet. Fill this in");
-      } else if (!mainIds.some(id => kindOf(id) !== "key")) r.todo.push("Assignment not made yet. Fill this in");
+      } else if (!mainIds.some(id => kindOf(id) !== "key" && kindOf(id) !== "video")) r.todo.push("Assignment not made yet. Fill this in");  // videos alone don't count as the day's assignment (Fynn, 2026-11-14)
     });
     const list = [...rows.values()].sort((a, b) => (a.day || 999) - (b.day || 999));
     if (window.__todoSink) list.forEach(r => (r.todo || []).forEach(text => window.__todoSink.push({ key, name, day: r.day, span: r.span, title: r.title, std: r.std, text, summ: !!r.summ, after: !!(cal && r.day > cal.days), kind: /answer key/i.test(text) ? "key" : r.day > (cal ? cal.days : 999) ? "after" : r.summ ? "test" : "assignment" })));
