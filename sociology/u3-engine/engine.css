@@ -111,3 +111,12 @@ button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px soli
 
 @media (max-width:760px){.grid{grid-template-columns:1fr}.scene h2{font-size:1.35rem}.hud .brand{display:none}}
 @media print{.hud,.foot,.big,.next{display:none}body{background:#fff}}
+
+/* "Prove it": tap the words in the fact card that prove the answer */
+.prove{margin-top:10px;background:#fff6d6;border:2px solid #f1d68a;border-radius:12px;padding:8px 12px;font-weight:800}
+.panel.proofing{border-color:var(--a);box-shadow:0 0 0 4px var(--a2)}
+.panel.proofing .ev{cursor:pointer;border-radius:6px;padding:1px 3px;background:#f3f5fa;border-bottom:3px solid var(--line);transition:background .12s}
+.panel.proofing .ev:hover,.panel.proofing .ev:focus-visible{background:var(--a2);border-bottom-color:var(--a);outline:none}
+.panel.plocked .ev{cursor:wait;opacity:.7}
+.ev.evno{animation:shake .4s}
+.ev.evok{background:#d6f5e1;border-bottom:3px solid var(--good);border-radius:6px;padding:1px 3px}

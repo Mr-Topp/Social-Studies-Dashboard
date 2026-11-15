@@ -22,7 +22,15 @@
   const STEPS = G.steps;
   const N = STEPS.length;
   const TOTAL = N + 2;   // steps, wrap-up, writing
-  const graded = STEPS.filter(s => s.kind === "q" || s.kind === "read");
+  // Graded items: every question, plus a "prove it" tap for steps that have one.
+  const graded = [];
+  STEPS.forEach(s => {
+    if (s.kind !== "q" && s.kind !== "read") return;
+    graded.push({ id: s.id, std: s.std });
+    if (s.proof) graded.push({ id: s.id + "~p", std: s.std });
+  });
+  // Fact cards mark tappable "prove it" chunks: [[the proof]] and {{other words}}.
+  const evHtml = h => String(h || "").replace(/\[\[([\s\S]*?)\]\]/g, '<span class="ev" data-ok="1">$1</span>').replace(/\{\{([\s\S]*?)\}\}/g, '<span class="ev">$1</span>');
 
   // ---------- state ----------
   const fresh = () => ({ v: 1, name: "", step: -1, done: {}, miss: {}, picks: {}, opened: {}, writing: "", turnedIn: false });
@@ -89,7 +97,7 @@
   let solveFn = null;
   function stepView() {
     const s = STEPS[st.step];
-    const left = s.kind === "read" ? readPanel(s) : `<div class="panel">${s.left}</div>`;
+    const left = s.kind === "read" ? readPanel(s) : `<div class="panel" id="panel">${evHtml(s.left)}</div>`;
     app.innerHTML = `<section class="scene"><p class="kicker">${esc(s.kicker || "")}</p><h2>${esc(s.title)}</h2>
       <div class="grid">${left}<div class="qbox" id="qbox"></div></div></section>`;
     if (s.kind === "read") {
@@ -139,10 +147,43 @@
       <div class="choices" id="choices"></div><p class="lock" id="lock"></p><div id="fb"></div><div id="after"></div>`;
     const draw = () => { $("choices").innerHTML = choicesHtml(order(s)); bind(); };
     const setOff = off => q.querySelectorAll(".choice").forEach(b => b.disabled = off);
-    const finish = () => {
+    const pid = s.id + "~p";
+    const proofStage = () => {
       setOff(true);
       const r = q.querySelector(`.choice[data-i="${s.answer}"]`); if (r) r.classList.add("right");
       $("lock").textContent = "";
+      $("fb").innerHTML = `<div class="fb ok">✓ Right: ${esc(s.choices[s.answer].replace(/[.!]$/, ""))}. Now prove it.</div><div class="prove"><b>🔎</b> ${esc(s.proof)}</div><p class="lock" id="plock"></p><div id="pfb"></div>`;
+      const panel = $("panel"); panel.classList.add("proofing");
+      const evs = [...panel.querySelectorAll(".ev")];
+      evs.forEach(e => { e.setAttribute("role", "button"); e.tabIndex = 0; });
+      let plocked = false;
+      const tap = el => {
+        if (plocked || st.done[pid]) return;
+        if (el.dataset.ok) {
+          st.done[pid] = true;
+          if (window.classFirstTry) window.classFirstTry.right(pid);
+          save(); hud(); finish(); return;
+        }
+        st.miss[pid] = (st.miss[pid] || 0) + 1;
+        if (window.classFirstTry) window.classFirstTry.wrong();
+        save();
+        el.classList.remove("evno"); void el.offsetWidth; el.classList.add("evno");
+        $("pfb").innerHTML = `<div class="fb no">That part doesn't prove it. ${esc(s.proofHint || "Find the words that show who is doing the teaching.")}</div>`;
+        plocked = true; panel.classList.add("plocked");
+        let left = isT() ? 0 : 2;
+        const tick = () => { if (left <= 0) { plocked = false; panel.classList.remove("plocked"); el.classList.remove("evno"); $("plock").textContent = ""; return; } $("plock").textContent = "Look again in " + left + "…"; left--; later(tick, 1000); };
+        tick();
+      };
+      evs.forEach(e => { e.onclick = () => tap(e); e.onkeydown = ev => { if (ev.key === "Enter" || ev.key === " ") { ev.preventDefault(); tap(e); } }; });
+      solveFn = () => { plocked = false; const ok = panel.querySelector(".ev[data-ok]"); if (ok) tap(ok); };
+    };
+    const finish = () => {
+      if (s.proof && !st.done[pid]) return proofStage();
+      setOff(true);
+      const r = q.querySelector(`.choice[data-i="${s.answer}"]`); if (r) r.classList.add("right");
+      $("lock").textContent = "";
+      const panel = $("panel");
+      if (panel && s.proof) { panel.classList.remove("proofing"); const ok = panel.querySelector(".ev[data-ok]"); if (ok) ok.classList.add("evok"); }
       $("fb").innerHTML = `<div class="fb ok">✓ ${esc(s.why)}</div>`;
       $("after").innerHTML = (s.reveal ? `<div class="reveal"><span class="rt">${esc(s.revealTitle || "What happened")}</span>${s.reveal}</div>` : "") +
         `<div class="rowend"><button type="button" class="next" id="nextBtn">${st.step === N - 1 ? "Wrap it up" : "Next"} →</button></div>`;
@@ -230,8 +271,12 @@
     const stds = [...new Set(graded.map(s => s.std))];
     a["First-try by standard"] = stds.map(sd => { const l = graded.filter(s => s.std === sd); return sd + ": " + firstTry(l) + " of " + l.length; }).join(" · ");
     let n = 0;
+    const tries = m => m ? " (after " + m + " wrong " + (m === 1 ? "try" : "tries") + ")" : " (first try)";
     STEPS.forEach(s => {
-      if (s.kind === "q" || s.kind === "read") { n++; const m = st.miss[s.id] || 0; a[n + ". " + s.label] = s.choices[s.answer] + (m ? " (after " + m + " wrong " + (m === 1 ? "try" : "tries") + ")" : " (first try)"); }
+      if (s.kind === "q" || s.kind === "read") {
+        n++; a[n + ". " + s.label] = s.choices[s.answer] + tries(st.miss[s.id] || 0);
+        if (s.proof) { const ok = (s.left.match(/\[\[([\s\S]*?)\]\]/) || [])[1] || ""; a[n + ". " + s.label + " · proof"] = "\"" + ok.replace(/<[^>]+>/g, "") + "\"" + tries(st.miss[s.id + "~p"] || 0); }
+      }
       else if (s.kind === "pick") { const i = st.picks[s.id]; a["Pick · " + s.label] = i == null ? "—" : s.options[i]; }
     });
     a["Writing: " + W.short] = ($("w1").value || "").trim();
@@ -300,7 +345,7 @@
         const t = i - 1;
         for (let j = 0; j < t && j < N; j++) {
           const s = STEPS[j];
-          if (s.kind === "q" || s.kind === "read") { st.done[s.id] = true; st.opened[s.id] = true; }
+          if (s.kind === "q" || s.kind === "read") { st.done[s.id] = true; st.opened[s.id] = true; if (s.proof) st.done[s.id + "~p"] = true; }
           if (s.kind === "pick" && st.picks[s.id] == null) st.picks[s.id] = 0;
         }
         anim = false; st.step = t; save(); render(); toTop();
