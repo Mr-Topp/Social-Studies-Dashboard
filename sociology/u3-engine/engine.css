@@ -120,3 +120,16 @@ button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px soli
 .panel.plocked .ev{cursor:wait;opacity:.7}
 .ev.evno{animation:shake .4s}
 .ev.evok{background:#d6f5e1;border-bottom:3px solid var(--good);border-radius:6px;padding:1px 3px}
+
+/* Book pages (Day 4 and 5 story readings) */
+.bookpage{background:#fffef9;border:3px solid #e9e2cf;border-radius:16px;padding:14px 18px;box-shadow:inset 0 0 0 6px #fbf6e8}
+.bookpage figure{margin:0 0 10px}
+.bookpage figure img{display:block;width:100%;max-height:250px;object-fit:cover;border-radius:10px;background:#eee}
+.bookpage figcaption{font-size:.72rem;color:var(--muted);margin-top:3px;line-height:1.3}
+.bookpage figcaption a{color:var(--muted)}
+.bookpage .chap{font:800 .78rem system-ui,sans-serif;letter-spacing:.12em;text-transform:uppercase;color:var(--a);margin:0}
+.bookpage h3{font:700 1.45rem Georgia,"Times New Roman",serif;margin:2px 0 8px}
+.bookpage p{font:1.12rem/1.65 Georgia,"Times New Roman",serif;margin:0 0 10px}
+.bookpage .pg{font:700 .78rem system-ui,sans-serif;color:var(--muted);text-align:center;margin:6px 0 0}
+@media (min-width:761px){.grid .qbox{position:sticky;top:64px}}
+.panel:has(> .bookpage){padding:0;border:0;background:none}

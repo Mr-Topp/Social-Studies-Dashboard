@@ -211,7 +211,18 @@
     draw();
     solveFn = () => pick(s.answer);
     if (done) return finish();
-    if (anim && !isT()) { setOff(true); later(() => { if (!st.done[s.id]) setOff(false); }, READ_Q * 1000); }
+    if (anim && !isT()) {
+      // Reading pages: choices stay locked long enough to actually read the page first.
+      let left = s.readSec || READ_Q;
+      setOff(true);
+      const tick = () => {
+        if (st.done[s.id]) return;
+        if (left <= 0) { setOff(false); $("lock").textContent = ""; return; }
+        if (s.readSec) $("lock").textContent = "Read the page first. Choices open in " + left + "…";
+        left--; later(tick, 1000);
+      };
+      tick();
+    }
   }
   function pickView(s) {
     const q = $("qbox");
