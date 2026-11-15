@@ -396,7 +396,7 @@ window.CLASS_ASSIGNMENTS = {
   "soc-u2-summative-key": { course: "sociology", unit: 2, day: 6, turnIn: false, std: [], title: "Day 6 · Summative Form A Teacher Key", path: "https://docs.google.com/document/d/1zAjdjk2b4aiVY-PxtDzQItYtBQRkegg_yA8_bdbQC8o/edit" },
   "soc-u2-summative-b": { course: "sociology", unit: 2, day: 6, turnIn: false, std: [], title: "Day 6 · Summative (Form B · retake)", path: "https://docs.google.com/document/d/1tuEH_xHnJqa1wikRnpdwBJNIh6Lcm8mxz87XZt18tKI/edit" },
   "soc-u2-summative-b-key": { course: "sociology", unit: 2, day: 6, turnIn: false, std: [], title: "Day 6 · Summative Form B Teacher Key", path: "https://docs.google.com/document/d/12_tgsY6lXIV8au1wR4MoJh4FyRo7blkUXNdS7k3aBtQ/edit" },
-  "soc-u3-d1-who-taught-you": { course: "sociology", unit: 3, day: 1, title: "Day 1 · Raise Remi: Born or Taught?", path: "sociology/u3-d1-who-taught-you/", std: ["SS.9-12.Soc.9"] },
+  "soc-u3-d1-who-taught-you": { course: "sociology", unit: 3, day: 1, title: "Day 1 · Born This Way or Socialization?", path: "sociology/u3-d1-who-taught-you/", std: ["SS.9-12.Soc.9"] },
   "soc-u3-d5-groups-change-us": { course: "sociology", unit: 3, day: 5, title: "Day 5 · The Group Pressure Lab", path: "sociology/u3-d5-groups-change-us/", std: ["SS.9-12.Soc.10", "SS.9-12.Soc.11"] },
   "soc-u4-d2-bad-day": { course: "sociology", unit: 4, day: 2, title: "Day 2 · Same Bad Day, Three Wallets", path: "sociology/u4-d2-bad-day/", std: ["SS.9-12.Soc.12", "SS.9-12.Soc.13"] },
   "soc-u4-d6-fight-inequality": { course: "sociology", unit: 4, day: 6, title: "Day 6 · The Organizer's Toolkit", path: "sociology/u4-d6-fight-inequality/", std: ["SS.9-12.Soc.15"] },
