@@ -124,3 +124,13 @@ textarea{width:100%;font:inherit;border:3px solid #cdbdf3;border-radius:14px;pad
   .piles{grid-template-columns:1fr}.brand{display:none}
 }
 @media print{.hud,.foot{display:none}}
+
+/* "Prove it": tap the words on the card that prove the side (Fynn 11/15/26) */
+.card.proofing{box-shadow:0 0 0 5px var(--sun),0 8px 0 #d0d7e4}
+.card.proofing .ev{cursor:pointer;border-radius:6px;padding:1px 3px;background:#f3f5fa;border-bottom:3px solid var(--line)}
+.card.proofing .ev:hover,.card.proofing .ev:focus-visible{background:#fff3c4;border-bottom-color:var(--sun2);outline:none}
+.card.plocked .ev{cursor:wait;opacity:.7}
+.card .ev.evno{animation:shake .4s}
+.card .ev.evok{background:#d6f5e1;border-bottom:3px solid var(--good);border-radius:6px;padding:1px 3px}
+.bucket.chosen{outline:4px solid #fff;box-shadow:0 0 0 7px var(--good)}
+.cq b{color:var(--ink)}
