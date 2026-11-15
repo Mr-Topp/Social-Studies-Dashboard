@@ -1,23 +1,721 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Five Bosses, One Tuesday | Sociology Unit 2 Day 5</title>
-<meta name="description" content="Plan one teen's Tuesday. Five social institutions want the same hours. Review all four Unit 2 standards.">
-<link rel="stylesheet" href="style.css?v=5b">
+<title>My Week, My Rules | Sociology Unit 2 Day 5</title>
+<meta name="description" content="Build your own person and live their week. Each day is one Unit 2 review slide.">
 <script src="../../shared/assignments.js?v=20261105fb1"></script>
 <script src="../../shared/turnin.js?v=20261105fb1"></script>
-<script src="../../shared/lang.js?v=20261103c"></script>
+<style>
+:root{--ink:#1d2433;--soft:#5b6478;--line:#e3e7ef;--bg:#f4f6fb;--card:#fff;--blue:#2f6fed;--green:#14965a;--tan:#fff4e0;--tanl:#e9c98f;
+--family:#e2557a;--education:#2f6fed;--religion:#8a5cd6;--economy:#14965a;--government:#d9822b}
+*{box-sizing:border-box}
+html,body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.4 "Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif}
+button{font:inherit;cursor:pointer}
+main{max-width:1060px;margin:0 auto;padding:10px 14px 6px}
+.hud{background:#141b2d;color:#fff;position:sticky;top:0;z-index:5}
+.hud-in{max-width:1060px;margin:0 auto;padding:7px 14px;display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.who{display:flex;align-items:center;gap:8px;font-weight:700}
+.who .av{font-size:26px;line-height:1}
+.daytag{background:#ffffff1f;border-radius:999px;padding:3px 11px;font-size:14px}
+.stamps{margin-left:auto;display:flex;gap:6px}
+.stamp{font-size:12px;border:1.5px dashed #ffffff55;border-radius:8px;padding:2px 7px;color:#ffffff88}
+.stamp.on{border:1.5px solid #7ee2a8;color:#7ee2a8;font-weight:700}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px 20px;box-shadow:0 2px 10px #1d24330d}
+h1{font-size:34px;margin:4px 0 2px;letter-spacing:-.5px}
+h2{font-size:23px;margin:0 0 4px}
+.hook{font-size:18px;color:var(--soft);margin:0 0 10px}
+.slidebar{display:flex;align-items:center;gap:10px;background:#eef3ff;border:1px solid #cfdcff;border-radius:12px;padding:7px 12px;margin-bottom:10px;font-size:15px}
+.slidebar b{color:#1d4fc4}
+.slidebar .std{margin-left:auto;font-size:12px;color:var(--soft);white-space:nowrap}
+.slidebar .remind{color:var(--soft)}
+.job{background:#fffbe8;border-left:4px solid #f0c330;border-radius:6px;padding:6px 10px;margin:6px 0 10px;font-size:15px}
+.go{background:var(--blue);color:#fff;border:0;border-radius:12px;padding:11px 20px;font-weight:700;font-size:17px}
+.go:disabled{background:#9fb4dc;cursor:not-allowed}
+.go.big{font-size:20px;padding:13px 28px}
+.row{display:flex;gap:14px;align-items:flex-start}
+.row>*{flex:1}
+.msg{min-height:22px;margin:6px 0 0;font-size:15px}
+.msg.bad{background:var(--tan);border:1px solid var(--tanl);border-radius:8px;padding:5px 9px}
+.msg.good{color:var(--green);font-weight:700}
+.fine{font-size:13px;color:var(--soft)}
+.welcome[hidden]{display:none}
+.welcome{background:#eaf7ef;border:1px solid #bfe6cf;border-radius:10px;padding:6px 10px;font-size:14px;display:flex;gap:10px;align-items:center}
+.notme{background:none;border:0;color:var(--blue);text-decoration:underline;font-size:14px}
+.foot{display:flex;justify-content:space-between;align-items:center;font-size:12px;color:var(--soft);margin-top:16px}
+#restartBtn{background:none;border:0;color:var(--soft);text-decoration:underline;font-size:12px}
+.std-list{font-size:11px;color:#8a92a6;margin:4px 0 0}
+.sr{position:absolute;left:-9999px}
+/* intro */
+.intro{text-align:center;padding:26px 24px}
+.cover{font-size:46px;letter-spacing:6px;margin-bottom:4px}
+.howto{display:flex;gap:10px;justify-content:center;margin:12px 0 14px;padding:0;list-style:none}
+.howto li{background:#f6f8fd;border:1px solid var(--line);border-radius:12px;padding:10px 12px;width:220px;font-size:15px}
+.howto li b{display:block;font-size:17px}
+.namebox input,.nick{font:inherit;font-size:18px;padding:10px 12px;border:2px solid #cfd6e4;border-radius:10px;width:340px;max-width:100%;text-align:center}
+/* builder */
+.build{display:grid;grid-template-columns:250px 1fr;gap:18px}
+.idcard{background:linear-gradient(160deg,#1d2b4f,#2f6fed);color:#fff;border-radius:16px;padding:14px;text-align:center}
+.idcard .big{font-size:64px;line-height:1.1}
+.idcard .nm{font-size:22px;font-weight:800;margin:2px 0 6px}
+.idcard ul{list-style:none;padding:0;margin:0;text-align:left;font-size:14px}
+.idcard li{background:#ffffff1c;border-radius:8px;padding:4px 8px;margin:4px 0}
+.idcard li.empty{opacity:.5}
+.avs{display:flex;gap:6px;justify-content:center;margin:6px 0}
+.avs button{font-size:24px;background:#ffffff22;border:2px solid transparent;border-radius:10px;padding:2px 5px}
+.avs button.on{border-color:#ffd54a;background:#ffffff40}
+.pick{margin-bottom:7px}
+.pick .pl{font-size:14px;font-weight:700;margin-bottom:3px;display:flex;gap:6px;align-items:center}
+.opts4{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.opt{background:#f6f8fd;border:2px solid var(--line);border-radius:10px;padding:6px 8px;text-align:left;font-size:14px;line-height:1.2;display:flex;gap:6px;align-items:center}
+.opt .e{font-size:20px}
+.opt:hover{border-color:#b9c7e6}
+.opt.on{border-color:var(--blue);background:#e8efff;font-weight:700}
+.btag{display:inline-flex;align-items:center;gap:4px;font-size:12px;font-weight:700;border-radius:999px;padding:2px 8px;color:#fff;white-space:nowrap}
+.b-family{background:var(--family)}.b-education{background:var(--education)}.b-religion{background:var(--religion)}.b-economy{background:var(--economy)}.b-government{background:var(--government)}
+/* scene */
+.scene{background:#141b2d;color:#fff;border-radius:14px;padding:12px 16px;font-size:16px}
+.scene .when{font-size:12px;letter-spacing:1px;text-transform:uppercase;color:#9fb4dc;margin:0}
+.scene p{margin:4px 0}
+.phone{background:#fff;color:var(--ink);border-radius:14px;border:2px solid #d6dbe6;padding:10px 12px;font-size:15px}
+.phone .hd{font-weight:800}
+.phone .cm{background:#f1f3f8;border-radius:10px;padding:6px 9px;margin-top:6px;font-size:14px}
+/* sort */
+.sortgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin:8px 0}
+.scard{border:2px solid var(--line);border-radius:12px;padding:8px 10px;background:#fff;display:flex;flex-direction:column;gap:6px;font-weight:600;min-height:84px}
+.scard .src{font-size:11px;color:var(--soft);font-weight:400}
+.scard .two{display:flex;gap:6px;margin-top:auto}
+.scard .two button{flex:1;border:2px solid #cfd6e4;background:#f6f8fd;border-radius:9px;padding:5px 4px;font-size:13px;font-weight:700}
+.scard.done{background:#eaf7ef;border-color:#9ed8b6}
+.scard.done .two{display:none}
+.scard .put{font-size:13px;color:var(--green)}
+.shake{animation:sh .35s}
+@keyframes sh{25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
+.bins{display:flex;gap:10px}
+.bins div{flex:1;border-radius:10px;padding:6px 10px;font-size:14px}
+.bin-h{background:#fff2e5;border:1px solid #f5cfa6}.bin-m{background:#efe9ff;border:1px solid #cfc0f5}
+/* choices */
+.choices{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin:6px 0}
+.choice{background:#f6f8fd;border:2px solid var(--line);border-radius:12px;padding:10px 12px;text-align:left;font-size:15px}
+.choice:hover{border-color:#b9c7e6}
+.choice:disabled{opacity:.55;cursor:default}
+.choice.on,.choice.on:disabled{opacity:1;border-color:var(--blue);background:#e8efff;font-weight:700}
+.q{font-weight:700;font-size:17px;margin:8px 0 2px}
+.blank{display:inline-block;min-width:110px;border-bottom:2px solid var(--blue);text-align:center;color:var(--blue);font-weight:800}
+.result{background:#eaf7ef;border:1px solid #bfe6cf;border-radius:12px;padding:8px 12px;margin:8px 0;font-size:15px}
+.result.tan{background:var(--tan);border-color:var(--tanl)}
+.terms{display:flex;gap:8px;margin:6px 0}
+.terms div{flex:1;background:#f6f8fd;border-radius:10px;padding:6px 9px;font-size:14px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{border:2px solid #cfd6e4;background:#fff;border-radius:999px;padding:5px 12px;font-size:14px;font-weight:600}
+.chip.on{border-color:var(--blue);background:#e8efff}
+/* plan */
+.asks{display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin:8px 0}
+.ask{border:2px solid var(--line);border-radius:12px;padding:9px;background:#fff;text-align:left;display:flex;flex-direction:column;gap:5px;font-size:14px;min-height:150px}
+.ask .t{font-weight:800;font-size:15px}
+.ask .wh{color:var(--soft);font-size:13px}
+.ask.on{border-color:var(--green);background:#eaf7ef}
+.ask .ck{margin-top:auto;font-weight:800;font-size:13px;color:var(--soft)}
+.ask.on .ck{color:var(--green)}
+.slots{display:flex;gap:8px;align-items:center;font-weight:700}
+.slot{width:34px;height:12px;border-radius:6px;background:#dfe4ee}
+.slot.full{background:var(--green)}
+/* match */
+.drops{display:flex;gap:8px;margin:6px 0}
+.drops div{flex:1;background:var(--tan);border:1px solid var(--tanl);border-radius:10px;padding:6px 9px;font-size:14px}
+.match{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:8px}
+.mrow{display:flex;align-items:center;gap:8px;border:2px dashed #cfd6e4;border-radius:10px;padding:6px 8px;margin-bottom:6px;background:#fff;width:100%;text-align:left}
+.mrow .slotx{margin-left:auto;font-size:14px;color:var(--soft)}
+.mrow.ok{border-style:solid;border-color:#9ed8b6;background:#eaf7ef}
+.mrow.ok .slotx{color:var(--green);font-weight:700}
+.need{display:block;width:100%;text-align:left;border:2px solid #cfd6e4;background:#f6f8fd;border-radius:10px;padding:8px 10px;margin-bottom:6px;font-weight:700}
+.need.on{border-color:var(--blue);background:#e8efff}
+.need.used{display:none}
+/* chain */
+.chainwrap{display:grid;grid-template-columns:300px 1fr;gap:16px}
+.bars{display:flex;align-items:flex-end;gap:10px;height:120px;margin:8px 0 2px;padding:0 4px;border-bottom:2px solid #cfd6e4}
+.bar{flex:1;background:var(--economy);border-radius:6px 6px 0 0;position:relative;color:#fff;font-size:13px;font-weight:800;text-align:center;padding-top:3px}
+.barl{display:flex;gap:10px;padding:0 4px;font-size:12px;color:var(--soft)}.barl span{flex:1;text-align:center}
+.links{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.link{border:2px solid var(--line);border-radius:12px;padding:8px 10px;background:#fff;font-size:14px}
+.link .n{font-weight:800}
+.link .bs{display:flex;gap:4px;margin-top:6px;flex-wrap:wrap}
+.link .bs button{border:2px solid #cfd6e4;background:#f6f8fd;border-radius:999px;padding:2px 8px;font-size:12px;font-weight:700}
+.link.ok{background:#eaf7ef;border-color:#9ed8b6}
+.link.you{grid-column:1/-1;background:#141b2d;color:#fff;border:0}
+/* recap */
+.recap{display:grid;grid-template-columns:270px 1fr;gap:18px}
+.stampbig{display:block;border:2px solid #7ee2a8;color:#bff3d5;border-radius:8px;padding:3px 8px;margin:5px 0;font-size:13px;font-weight:700;text-align:left}
+label.wl{font-weight:700;display:block;margin-top:6px;font-size:15px}
+.stem{margin:2px 0;color:var(--soft);font-size:14px}
+textarea{width:100%;font:inherit;font-size:16px;padding:8px;border:2px solid #cfd6e4;border-radius:10px;resize:vertical}
+@media (max-width:820px){.build,.recap,.chainwrap{grid-template-columns:1fr}.asks{grid-template-columns:1fr 1fr}.opts4{grid-template-columns:1fr 1fr}.sortgrid{grid-template-columns:1fr 1fr}.howto{flex-direction:column;align-items:center}.choices,.match,.links{grid-template-columns:1fr}}
+</style>
 </head><body>
-<div class="hud" id="hud" hidden>
-  <div class="hud-in">
-    <span class="pt" id="partTag">Part 1 of 4</span>
-    <div class="bossrow"><span class="bl">Dropped:</span><div class="chips" id="bosses"></div></div>
-  </div>
-</div>
+<div class="hud" id="hud" hidden><div class="hud-in">
+  <span class="who"><span class="av" id="hudAv"></span><span id="hudNick"></span></span>
+  <span class="daytag" id="dayTag"></span>
+  <span class="stamps" id="stamps"></span>
+</div></div>
 <main>
   <p class="welcome" id="welcome" hidden></p>
   <div id="app"></div>
   <div class="foot"><span>Progress saves on this device. Your teacher sees your work after you turn it in.</span><button type="button" id="restartBtn">Start over</button></div>
-  <p class="std"><b>SS.9-12.Soc.5</b> <span>Describe the components of culture.</span> <b>SS.9-12.Soc.6</b> <span>Analyze how culture influences individuals, including themselves.</span> <b>SS.9-12.Soc.7</b> <span>Evaluate important social institutions and how they respond to social needs.</span> <b>SS.9-12.Soc.8</b> <span>Assess how social institutions and cultures change and evolve.</span></p>
+  <p class="std-list"><b>SS.9-12.Soc.5</b> Describe the components of culture. <b>SS.9-12.Soc.6</b> Analyze how culture influences individuals, including themselves. <b>SS.9-12.Soc.7</b> Evaluate important social institutions and how they respond to social needs. <b>SS.9-12.Soc.8</b> Assess how social institutions and cultures change and evolve.</p>
 </main>
-<script src="game.js?v=5b"></script>
+<script>
+// =====================================================================
+//  MY WEEK, MY RULES  (Sociology Unit 2 Day 5, review day)
+//  Students build their own person (5 taps), then live 4 days of that
+//  person's week. Each day = one Day 5 review slide:
+//    Fri  Soc.5 "Culture on a Friday Night"   (material vs nonmaterial, norm/value/sanction)
+//    Sat  Soc.6 "Tipping Shows How Culture Shapes You" (ethnocentrism vs relativism)
+//    Mon  Soc.7 "Each Institution Answers a Need" (5 institutions, 5 needs)
+//    Thu  Soc.8 "Rosie Shows How Change Spreads" (change in one institution spreads)
+//  Then a recap card + 2 short answers + turn in (same assignment ID as before).
+//  The student's person is made up. The facts (Japan tipping, BLS chart,
+//  Equal Pay Act 1963, Iowa permit rules, Kirkwood) are real.
+// =====================================================================
+(function () {
+  "use strict";
+  const KEY = "soc-u2-d5-everyday-life-v4";
+  const ASSIGNMENT_ID = "soc-u2-d5-everyday-life";
+  const TITLE = "Sociology · Unit 2 · Day 5 · My Week, My Rules";
+  const OLD_API = "https://fynn-class-assignment-submissions-20261024.neotboy.chatgpt.site/api/submit";
+  const LOCK = 5;
+
+  const BOSS = {
+    family:     { i: "🏠", n: "Family",     need: "Who cares for us?" },
+    education:  { i: "🎓", n: "Education",  need: "How do we learn skills?" },
+    religion:   { i: "⛪", n: "Religion",   need: "What gives life meaning?" },
+    economy:    { i: "💼", n: "Economy",    need: "How do we get what we need?" },
+    government: { i: "🏛️", n: "Government", need: "Who makes the rules?" }
+  };
+  const BOSS_ORDER = ["family", "education", "religion", "economy", "government"];
+
+  // ---------- Build-your-person options ----------
+  const AVATARS = ["🧑🏽", "👩🏻", "👨🏿", "👩🏾", "🧑🏼", "👨🏽", "👩🏼", "🧑🏿"];
+  const PICKS = [
+    { key: "home", b: "family", label: "Who you live with", opts: [
+      { id: "mom", e: "👩‍👦", t: "Mom + little brother", ask: { t: "Walk your little brother home from practice", wh: "Mom: “I'm stuck at work till 7.”", drop: "Your brother waited alone outside. Mom left work early and lost pay." } },
+      { id: "grand", e: "👵", t: "Grandparents raise you", ask: { t: "Take Grandma to the pharmacy", wh: "Grandma: “I can't read the tiny print.”", drop: "Grandma went alone and got the wrong refill." } },
+      { id: "big", e: "👨‍👩‍👧‍👦", t: "Big family, 4 kids", ask: { t: "Watch your 3 younger siblings", wh: "Mom: “I picked up a night shift.”", drop: "Mom turned down the night shift. Less money this month." } },
+      { id: "dad", e: "👨", t: "Just you + Dad", ask: { t: "Dad's birthday dinner", wh: "Dad: “I got us a table at 6.”", drop: "Dad ate his birthday dinner alone. He said it was fine." } }
+    ]},
+    { key: "job", b: "economy", label: "Your job", opts: [
+      { id: "grocery", e: "🛒", t: "Grocery cashier", place: "the grocery store", ask: { t: "Cover a 4–9 shift", wh: "Manager: “Two people called in.”", drop: "Your manager cut your hours next week. About $60 less." } },
+      { id: "food", e: "🍔", t: "Fast food crew", place: "the drive-thru", ask: { t: "Cover the dinner rush", wh: "Manager: “We're down two people.”", drop: "Your manager cut your hours next week. About $60 less." } },
+      { id: "shop", e: "🔧", t: "Auto shop helper", place: "the auto shop", ask: { t: "Stay late to finish a brake job", wh: "Boss: “Customer needs it by 8.”", drop: "The boss gave the overtime to someone else. Less pay." } },
+      { id: "sit", e: "🍼", t: "Babysitter", place: "a babysitting job", ask: { t: "Babysit for a regular family", wh: "Parent: “Can you do 5 to 9?”", drop: "They called a different sitter. They might keep calling her." } }
+    ]},
+    { key: "school", b: "education", label: "Your school life", opts: [
+      { id: "credit", e: "📈", t: "Credit recovery, almost done", ask: { t: "Finish 2 online modules", wh: "Teacher: “Due tonight to stay on pace.”", drop: "Now you're behind pace to graduate on time." } },
+      { id: "college", e: "🎓", t: "Junior who wants college", ask: { t: "Study for tomorrow's chem test", wh: "Teacher: “Test is at 8 AM.”", drop: "You guessed on half the test. 58%." } },
+      { id: "weld", e: "🔥", t: "Welding class at Kirkwood", ask: { t: "Go to night welding lab", wh: "Instructor: “Miss 3 labs, you're dropped.”", drop: "That's miss #2. One more and you're out." } },
+      { id: "online", e: "💻", t: "Online school from home", ask: { t: "Join the live review at 7", wh: "Teacher: “Quiz Friday covers all of it.”", drop: "You missed the review. Friday's quiz will hurt." } }
+    ]},
+    { key: "faith", b: "religion", label: "Faith + community", opts: [
+      { id: "church", e: "⛪", t: "Church youth group", ask: { t: "Serve dinner at the shelter with youth group", wh: "Youth leader: “We're two people short.”", drop: "The line moved slow. Your youth leader asked where you were." } },
+      { id: "mosque", e: "🕌", t: "Mosque with family", ask: { t: "Help with the mosque's food drive", wh: "Your uncle: “Need you to unload the truck.”", drop: "Your uncle unloaded 40 boxes alone." } },
+      { id: "temple", e: "🛕", t: "Temple with family", ask: { t: "Help set up a temple festival", wh: "Your aunt: “Everyone is helping.”", drop: "Your aunt noticed. The whole family heard about it." } },
+      { id: "none", e: "🙂", t: "Not religious (family is)", ask: { t: "Go to a church event with family", wh: "Grandpa: “It matters to me that you come.”", drop: "Grandpa went without you. It came up at breakfast." } }
+    ]},
+    { key: "hobby", b: "", label: "Your thing", opts: [
+      { id: "game", e: "🎮", t: "Gaming", crew: "gaming squad", mat: "Your gaming headset", non: "Typing “GG” after every match" },
+      { id: "hoops", e: "🏀", t: "Pickup basketball", crew: "pickup crew", mat: "Your basketball shoes", non: "Calling your own fouls in pickup" },
+      { id: "beats", e: "🎧", t: "Making beats", crew: "music crew", mat: "Your laptop + speakers", non: "Giving credit when you sample a song" },
+      { id: "cars", e: "🚗", t: "Cars", crew: "car crew", mat: "Your car's new rims", non: "Waving at drivers with the same car" }
+    ]}
+  ];
+  const optOf = (key, id) => { const P = PICKS.find(p => p.key === key); return P && P.opts.find(o => o.id === id); };
+  const GOV_ASK = { t: "Take your driver's permit test", wh: "Iowa DOT: “Closes at 5. Next opening in 3 weeks.”", drop: "Next test is 3 weeks away. Iowa law: no permit, no driving." };
+
+  // ---------- Steps ----------
+  const STEPS = [
+    { k: "build", day: 0 }, { k: "sort", day: 1 }, { k: "norm", day: 1 },
+    { k: "feed", day: 2 }, { k: "tip", day: 2 }, { k: "plan", day: 3 }, { k: "match", day: 3 },
+    { k: "chain", day: 4 }, { k: "rosie", day: 4 }, { k: "write", day: 5 }
+  ];
+  const DAYS = ["", "Friday", "Saturday", "Monday", "Thursday", "Wrap-up"];
+  const SLIDES = {
+    1: { t: "Culture on a Friday Night", std: "Soc.5", r: "Culture = material (things) + nonmaterial (ideas, norms, values)." },
+    2: { t: "Tipping Shows How Culture Shapes You", std: "Soc.6", r: "Your culture sets what feels “normal” to you." },
+    3: { t: "Each Institution Answers a Need", std: "Soc.7", r: "5 institutions, 5 needs every society has." },
+    4: { t: "Rosie Shows How Change Spreads", std: "Soc.8", r: "A change in one institution spreads to the others." }
+  };
+  const STAMP = { 1: "Culture", 2: "Shapes you", 3: "Institutions", 4: "Change" };
+
+  const NORM_CHOICES = [
+    { t: "Yell “STAND UP!” with everyone", res: "He stands up, red-faced. The crowd's yelling worked." },
+    { t: "Leave him alone", res: "He keeps sitting. A few people glare at you too." },
+    { t: "Sit down next to him", res: "Now the section yells at both of you." }
+  ];
+  const REPLIES = [
+    { t: "LOL that waiter was so disrespectful 😤", lab: "eth" },
+    { t: "Wait… maybe tipping just isn't a thing there", lab: "rel" },
+    { t: "Japan needs to learn how tipping works", lab: "eth" }
+  ];
+  const WHO_TAUGHT = ["My family", "Working a job", "TV + social media", "Nobody, I just know"];
+  const WHO_SAYS = [
+    "Family is usually the first place you learn your culture's rules.",
+    "Jobs teach culture too. Tip jars and “keep the change” are U.S. norms.",
+    "Shows and videos teach what's “normal” without saying it out loud.",
+    "Even “I just know” is culture. You learned it so young it feels natural."
+  ];
+
+  // MC checks: options[0] is right; always shuffled on screen.
+  const CHECKS = {
+    norm1: { q: "Standing for the chant is a…", options: ["Norm", "Value", "Law", "Material culture"], hint: "It's an unwritten rule for how to act." },
+    norm2: { q: "…that comes from the value of…", options: ["School pride", "Making money", "Staying safe", "Good grades"], hint: "What does the crowd care about at a home game?" },
+    tip:   { q: "The tourist calls the waiter rude. That's…", options: ["Ethnocentrism: judging Japan by U.S. rules", "Relativism: seeing Japan by its own rules", "A law that Japan's government wrote", "Following Japan's norms like a local"], hint: "Whose rules is the tourist using to judge?", why: "He judged Japan by U.S. tipping rules. That's ethnocentrism." },
+    rosie: { q: "What does the chain show?", options: ["A change in one institution spread into the others", "Women's jobs went back to normal after the war", "Only the economy changed; families stayed the same", "Institutions change alone without touching others"], hint: "Look at the colors on your chain. How many institutions changed?", why: "Women working (economy) changed family, school, and laws. Change spreads." }
+  };
+
+  const CHAIN = [
+    { id: "l1", t: "1943: Factories need workers for WWII. Millions of women take factory jobs.", b: "economy" },
+    { id: "l2", t: "Moms working means new questions: who watches the kids? Grandparents, daycare, older siblings.", b: "family" },
+    { id: "l3", t: "1963: Congress passes the Equal Pay Act. Same job, same pay.", b: "government" },
+    { id: "l4", t: "By 1982, women earn more college degrees than men.", b: "education" }
+  ];
+  const YOU_LINK = {
+    mom: "That's why YOU walk your little brother home while Mom works.",
+    grand: "That's why YOUR grandparents might still be working or helping raise kids.",
+    big: "That's why YOU watch your siblings when Mom picks up a shift.",
+    dad: "That's why “who works and who cooks” in YOUR house isn't set in stone."
+  };
+
+  const PROMPTS = [
+    { id: "why", short: "Why you dropped something", min: 60, newWords: 5,
+      label: "1. Pick one thing you dropped on Monday. Which two institutions wanted the same time?",
+      stem: "I dropped ___ because the ___ and the ___ wanted the same time.",
+      mustAll: [["family", "education", "school", "religion", "church", "mosque", "temple", "faith", "economy", "job", "work", "government", "dot", "permit", "law"],
+                ["because", "since", "so ", "same time", "both", "couldn"]],
+      mustMsg: "In answer 1, say what you dropped and name the institutions that wanted the same time (use “because”)." },
+    { id: "norm", short: "Exit ticket: the new student", min: 50, newWords: 4,
+      label: "2. Exit ticket: A new student interrupts, never raises a hand, and dresses very differently. Explain with unit terms.",
+      stem: "The student is breaking the norm of ___, which comes from the value of ___.",
+      mustAll: [["norm"], ["value"]],
+      mustMsg: "In answer 2, use the words norm and value." }
+  ];
+
+  // ---------- State ----------
+  const $ = id => document.getElementById(id);
+  const esc = s => String(s == null ? "" : s).replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+  const shuffle = a => { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+  const isTestT = () => !!(window.classIsTestT && window.classIsTestT());
+  const app = $("app");
+  function fresh() {
+    return { v: 4, name: "", step: -1, p: { av: "", nick: "" }, sort: {}, normPick: null, reply: null, who: null,
+      plan: [], planLocked: false, match: {}, chain: {}, done: {}, wrong: {}, writing: {}, turnedIn: false };
+  }
+  let st;
+  try { st = JSON.parse(localStorage.getItem(KEY)); } catch (e) {}
+  if (!st || typeof st !== "object" || st.v !== 4) st = fresh();
+  try {
+    const who = window.classShortName ? window.classShortName(localStorage.getItem("site-student-name") || "") : "";
+    if (who && st.name && who.toLowerCase() !== st.name.toLowerCase()) { st = fresh(); localStorage.setItem(KEY, JSON.stringify(st)); if (window.classFirstTry) window.classFirstTry.reset(); }
+  } catch (e) {}
+  const save = () => { try { localStorage.setItem(KEY, JSON.stringify(st)); } catch (e) {} };
+  let locked = false;
+  function nextStep() { st.step++; save(); render(); }
+  const nick = () => st.p.nick || "You";
+  const bossTag = b => `<span class="btag b-${b}"><span aria-hidden="true">${BOSS[b].i}</span> ${esc(BOSS[b].n)}</span>`;
+  const job = t => `<p class="job"><b>Your job:</b> ${esc(t)}</p>`;
+  const slideBar = d => `<div class="slidebar">📽️ <span>Today's slide:</span> <b>${esc(SLIDES[d].t)}</b> <span class="remind">· ${esc(SLIDES[d].r)}</span> <span class="std">${SLIDES[d].std}</span></div>`;
+  function wrongMark(id) { st.wrong[id] = (st.wrong[id] || 0) + 1; if (window.classFirstTry) window.classFirstTry.wrong(); save(); }
+  function rightMark(id) { if (window.classFirstTry) window.classFirstTry.right(id); }
+
+  // Generic shuffled multiple-choice with 5-second lock + reshuffle on a wrong answer.
+  function mc(host, id, onRight) {
+    const C = CHECKS[id];
+    if (st.done[id]) { host.innerHTML = `<p class="q">${esc(C.q)}</p><p class="result">✓ ${esc(C.options[0])}${C.why ? " — " + esc(C.why) : ""}</p>`; return; }
+    host.innerHTML = `<p class="q">${esc(C.q)}</p><div class="choices" id="ch_${id}"></div><p class="msg" id="fb_${id}" aria-live="polite"></p>`;
+    const area = $("ch_" + id), fb = $("fb_" + id);
+    let last = "";
+    function draw() {
+      area.replaceChildren();
+      let order = shuffle(C.options.map((t, n) => ({ t, n })));
+      for (let k = 0; k < 12 && order.map(o => o.n).join() === last; k++) order = shuffle(order);
+      last = order.map(o => o.n).join();
+      order.forEach(o => {
+        const b = document.createElement("button"); b.type = "button"; b.className = "choice"; b.textContent = o.t;
+        b.onclick = () => {
+          if (locked) return;
+          if (o.n === 0) { st.done[id] = true; rightMark(id); save(); mc(host, id, onRight); onRight(); return; }
+          wrongMark(id); locked = true; area.querySelectorAll("button").forEach(x => x.disabled = true);
+          let left = isTestT() ? 0 : LOCK;
+          const tick = () => {
+            if (!fb.isConnected) { locked = false; return; }
+            fb.textContent = "Not quite. " + C.hint + " New order in " + left + "…"; fb.className = "msg bad";
+            if (left-- <= 0) { locked = false; fb.textContent = "Not quite. " + C.hint + " Try again."; fb.className = "msg"; draw(); return; }
+            setTimeout(tick, 1000);
+          };
+          tick();
+        };
+        area.appendChild(b);
+      });
+    }
+    draw();
+  }
+
+  // ---------- HUD ----------
+  function hud() {
+    const show = st.step >= 1;
+    $("hud").hidden = !show;
+    if (!show) return;
+    const s = STEPS[Math.min(st.step, STEPS.length - 1)];
+    $("hudAv").textContent = st.p.av || "🙂";
+    $("hudNick").textContent = nick() + "'s week";
+    $("dayTag").textContent = s.day === 5 ? "Wrap-up" : "Day " + s.day + " of 4 · " + DAYS[s.day];
+    $("stamps").innerHTML = [1, 2, 3, 4].map(d => `<span class="stamp${dayDone(d) ? " on" : ""}">${dayDone(d) ? "✓ " : ""}${STAMP[d]}</span>`).join("");
+  }
+  function dayDone(d) { const lastIdx = STEPS.map(s => s.day).lastIndexOf(d); return st.step > lastIdx; }
+
+  // ---------- Intro ----------
+  function intro() {
+    app.innerHTML = `<section class="card intro">
+      <div class="cover" aria-hidden="true">🧑🏽📅🏠🎓⛪💼🏛️</div>
+      <h1>My Week, My Rules</h1>
+      <p class="hook">Make your own person. Live their week. Every day is one slide from this unit.</p>
+      <ol class="howto">
+        <li><b>1. Build</b> your person in 5 taps.</li>
+        <li><b>2. Live</b> 4 days. Your choices play out.</li>
+        <li><b>3. Name it</b> with the sociology word from the slide.</li>
+      </ol>
+      <div class="namebox"><label for="nameBox" class="sr">Your real name: first name + last initial</label>
+      <input id="nameBox" maxlength="40" autocomplete="off" placeholder="Your real name (like Jordan M.)" value="${esc(st.name)}"></div>
+      <p id="introMsg" class="msg" role="status"></p>
+      <button type="button" class="go big" id="startBtn">Build my person →</button>
+      <p class="fine">About 20 minutes. Your person is made up. The facts are real.</p></section>`;
+    $("startBtn").onclick = () => {
+      const fixed = window.classShortName ? window.classShortName($("nameBox").value) : $("nameBox").value.trim();
+      if (!/^\S+ [A-Z]\.$/.test(fixed)) { $("introMsg").textContent = "Type your first name and last initial, like Jordan M."; $("introMsg").className = "msg bad"; $("nameBox").focus(); return; }
+      st.name = fixed; st.step = 0; save(); render();
+    };
+  }
+
+  // ---------- Build your person ----------
+  function buildView() {
+    const p = st.p;
+    const lines = PICKS.map(P => { const o = optOf(P.key, p[P.key]); return `<li class="${o ? "" : "empty"}">${o ? o.e + " " + esc(o.t) : "— " + esc(P.label)}</li>`; }).join("");
+    app.innerHTML = `<section class="card"><h2>Build your person</h2>
+      ${job("Pick a face, a name, and one card in each row. You'll live as this person all week.")}
+      <div class="build">
+        <div class="idcard"><div class="big">${p.av || "❔"}</div>
+          <div class="avs">${AVATARS.slice(0, 4).map(a => `<button type="button" data-av="${a}" class="${p.av === a ? "on" : ""}">${a}</button>`).join("")}</div>
+          <div class="avs">${AVATARS.slice(4).map(a => `<button type="button" data-av="${a}" class="${p.av === a ? "on" : ""}">${a}</button>`).join("")}</div>
+          <input class="nick" id="nick" maxlength="16" placeholder="Name your person" value="${esc(p.nick)}" style="width:100%;font-size:16px;padding:6px">
+          <ul>${lines}</ul></div>
+        <div>${PICKS.map(P => `<div class="pick"><div class="pl">${P.b ? bossTag(P.b) : "⭐"} ${esc(P.label)}</div>
+          <div class="opts4">${P.opts.map(o => `<button type="button" class="opt${p[P.key] === o.id ? " on" : ""}" data-k="${P.key}" data-id="${o.id}"><span class="e">${o.e}</span><span>${esc(o.t)}</span></button>`).join("")}</div></div>`).join("")}
+          <div style="display:flex;align-items:center;gap:12px;margin-top:8px"><button type="button" class="go" id="goBtn">Start Friday →</button><p class="msg" id="bMsg"></p></div>
+        </div></div></section>`;
+    app.querySelectorAll("[data-av]").forEach(b => b.onclick = () => { st.p.av = b.dataset.av; save(); buildView(); });
+    app.querySelectorAll(".opt").forEach(b => b.onclick = () => { st.p.nick = $("nick").value.trim(); st.p[b.dataset.k] = b.dataset.id; save(); buildView(); });
+    $("nick").oninput = e => { st.p.nick = e.target.value.trim(); save(); };
+    $("goBtn").onclick = () => {
+      st.p.nick = $("nick").value.trim();
+      const miss = !p.av ? "a face" : !st.p.nick ? "a name" : (PICKS.find(P => !p[P.key]) || {}).label;
+      if (miss && !isTestT()) { $("bMsg").textContent = "Still need: " + miss.toLowerCase() + "."; $("bMsg").className = "msg bad"; return; }
+      fillPersonDefaults(); nextStep();
+    };
+  }
+  function fillPersonDefaults() {
+    if (!st.p.av) st.p.av = AVATARS[0];
+    if (!st.p.nick) st.p.nick = "Sam";
+    PICKS.forEach(P => { if (!st.p[P.key]) st.p[P.key] = P.opts[0].id; });
+  }
+
+  // ---------- Day 1 Fri: sort material / nonmaterial ----------
+  function sortCards() {
+    const h = optOf("hobby", st.p.hobby);
+    return [
+      { id: "jersey", t: "Black-and-gold jerseys ($15)", src: "at the game", m: "h" },
+      { id: "chant", t: "The student-section chant", src: "at the game", m: "m" },
+      { id: "foam", t: "Foam fingers at the gate", src: "at the game", m: "h" },
+      { id: "pride", t: "Feeling school pride", src: "at the game", m: "m" },
+      { id: "hmat", t: h.mat, src: "your " + h.crew, m: "h" },
+      { id: "hnon", t: h.non, src: "your " + h.crew, m: "m" }
+    ];
+  }
+  function sortView() {
+    const cards = sortCards();
+    const allDone = cards.every(c => st.sort[c.id]);
+    app.innerHTML = `<section class="card">${slideBar(1)}
+      <div class="row">
+        <div class="scene" style="flex:0 0 300px"><p class="when">Friday · 7:00 PM</p><p><b>${esc(nick())}</b> heads to the home football game. After, it's time with your ${esc(optOf("hobby", st.p.hobby).crew)}.</p><p style="color:#9fb4dc">Everything you bring with you is culture. Some you carry in your hands. Some you carry in your head.</p></div>
+        <div>${job("Tap where each thing goes: ✋ Hands or 🧠 Head.")}
+          <div class="bins"><div class="bin-h"><b>✋ Hands = Material culture</b><br>things you can touch</div><div class="bin-m"><b>🧠 Head = Nonmaterial culture</b><br>ideas, values, norms, words</div></div></div>
+      </div>
+      <div class="sortgrid">${cards.map(c => `<div class="scard${st.sort[c.id] ? " done" : ""}" id="sc_${c.id}"><span class="src">${esc(c.src)}</span>${esc(c.t)}
+        ${st.sort[c.id] ? `<span class="put">✓ ${c.m === "h" ? "✋ Material" : "🧠 Nonmaterial"}</span>` : ""}
+        <div class="two"><button type="button" data-c="${c.id}" data-m="h">✋ Hands</button><button type="button" data-c="${c.id}" data-m="m">🧠 Head</button></div></div>`).join("")}</div>
+      <p class="msg" id="sMsg" aria-live="polite"></p>
+      ${allDone ? `<button type="button" class="go" id="nextBtn">Keep going: the chant starts →</button>` : ""}</section>`;
+    app.querySelectorAll("[data-c]").forEach(b => b.onclick = () => {
+      if (locked) return;
+      const c = cards.find(x => x.id === b.dataset.c);
+      if (b.dataset.m === c.m) { st.sort[c.id] = true; rightMark("sort_" + c.id); save(); sortView(); return; }
+      wrongMark("sort"); const el = $("sc_" + c.id); el.classList.remove("shake"); void el.offsetWidth; el.classList.add("shake");
+      $("sMsg").textContent = c.m === "h" ? "Not quite. Could you pick it up and hold it?" : "Not quite. Can you actually hold it in your hand? Or is it an idea or habit?";
+      $("sMsg").className = "msg bad";
+      locked = true; setTimeout(() => { locked = false; }, isTestT() ? 0 : 1500);
+    });
+    if (allDone) $("nextBtn").onclick = nextStep;
+  }
+
+  // ---------- Day 1 Fri: norm moment ----------
+  function normView() {
+    const picked = st.normPick;
+    app.innerHTML = `<section class="card">${slideBar(1)}
+      <div class="row">
+        <div class="scene" style="flex:0 0 330px"><p class="when">Friday · 8:15 PM · student section</p>
+          <p>The chant starts. Everyone stands.</p><p>One kid stays sitting, scrolling his phone.</p><p>People start yelling: <b>“STAND UP!”</b></p></div>
+        <div>${picked == null ? job("What does " + nick() + " do?") : ""}
+          <div class="choices" style="grid-template-columns:1fr">${NORM_CHOICES.map((c, i) => `<button type="button" class="choice${picked === i ? " on" : ""}" data-i="${i}" ${picked != null ? "disabled" : ""}>${esc(c.t)}</button>`).join("")}</div>
+          ${picked != null ? `<p class="result tan">${esc(NORM_CHOICES[picked].res)} The yelling is a <b>sanction</b>: how a group punishes someone who breaks a norm.</p>` : ""}
+        </div></div>
+      ${picked != null ? `${job("Name it. Finish the sentence.")}<div class="row"><div id="n1"></div><div id="n2"></div></div><div id="nEnd"></div>` : ""}</section>`;
+    app.querySelectorAll("[data-i]").forEach(b => b.onclick = () => { st.normPick = +b.dataset.i; save(); normView(); });
+    if (picked == null) return;
+    const end = () => { if (!(st.done.norm1 && st.done.norm2)) return; $("nEnd").innerHTML = `<button type="button" class="go" id="nextBtn">Next: Saturday →</button>`; $("nextBtn").onclick = nextStep; };
+    mc($("n1"), "norm1", () => { mc($("n2"), "norm2", end); });
+    if (st.done.norm1) mc($("n2"), "norm2", end); else $("n2").innerHTML = "";
+    end();
+  }
+
+  // ---------- Day 2 Sat: the feed ----------
+  function feedView() {
+    const place = optOf("job", st.p.job).place;
+    app.innerHTML = `<section class="card">${slideBar(2)}
+      <div class="row">
+        <div class="scene" style="flex:0 0 280px"><p class="when">Saturday · break at ${esc(place)}</p><p>${esc(nick())} opens their phone. This video has 2 million views.</p></div>
+        <div class="phone"><div class="hd">🎥 @tripwithtyler</div>
+          <p style="margin:4px 0">A waiter in Tokyo CHASED me down the street to give my tip back. RUDE. 😤</p>
+          <div class="cm">💬 <b>Top comment:</b> In Japan, tipping isn't expected. Good service is already part of the job.</div>
+          <p class="fine" style="margin:4px 0 0">Fact source: Japan National Tourism Organization</p></div>
+      </div>
+      ${job("You're about to comment. Pick what " + nick() + " types.")}
+      <div class="choices" style="grid-template-columns:repeat(3,1fr)">${REPLIES.map((r, i) => `<button type="button" class="choice" data-i="${i}">💬 ${esc(r.t)}</button>`).join("")}</div>
+      <p class="fine">No wrong answer here. Just be honest.</p></section>`;
+    app.querySelectorAll("[data-i]").forEach(b => b.onclick = () => { st.reply = +b.dataset.i; save(); nextStep(); });
+  }
+  function tipView() {
+    const r = REPLIES[st.reply == null ? 0 : st.reply];
+    app.innerHTML = `<section class="card">${slideBar(2)}
+      <div class="terms"><div><b>Ethnocentrism:</b> judging another culture by your own rules.</div><div><b>Cultural relativism:</b> understanding a culture by its own rules first.</div></div>
+      <div id="tq"></div><div id="tafter"></div></section>`;
+    const after = () => {
+      const eth = r.lab === "eth";
+      $("tafter").innerHTML = `<p class="result${eth ? " tan" : ""}">Your comment: “${esc(r.t)}” → That's <b>${eth ? "ethnocentrism" : "cultural relativism"}</b>. ${eth ? "Most people react this way at first. That's how strong culture is." : "You checked their rules before judging."}</p>
+        <p class="q">Why does tipping feel normal to ${esc(nick())}? Who taught you that?</p>
+        <div class="chips">${WHO_TAUGHT.map((w, i) => `<button type="button" class="chip${st.who === i ? " on" : ""}" data-w="${i}">${esc(w)}</button>`).join("")}</div>
+        ${st.who != null ? `<p class="result">${esc(WHO_SAYS[st.who])} That's <b>culture shaping YOU</b>. <button type="button" class="go" id="nextBtn" style="margin-left:10px">Next: Monday →</button></p>` : ""}`;
+      app.querySelectorAll("[data-w]").forEach(b => b.onclick = () => { st.who = +b.dataset.w; save(); after(); });
+      if (st.who != null) $("nextBtn").onclick = nextStep;
+    };
+    mc($("tq"), "tip", after);
+    if (st.done.tip) after();
+  }
+
+  // ---------- Day 3 Mon: plan ----------
+  function asksFor() {
+    return BOSS_ORDER.map(b => {
+      if (b === "government") return Object.assign({ b }, GOV_ASK);
+      const P = PICKS.find(x => x.b === b);
+      return Object.assign({ b }, optOf(P.key, st.p[P.key]).ask);
+    });
+  }
+  function planView() {
+    const asks = asksFor(), n = st.plan.length;
+    app.innerHTML = `<section class="card">${slideBar(3)}
+      <div class="row" style="align-items:center"><div class="scene" style="flex:0 0 auto"><p class="when">Monday · after school</p><p>5 texts in 10 minutes. ${esc(nick())} only has time for <b>3</b>.</p></div>
+        <div>${job("Tap 3 things to do tonight. The other 2 get dropped.")}<div class="slots">${[0, 1, 2].map(i => `<span class="slot${i < n ? " full" : ""}"></span>`).join("")} <span>${n} of 3</span></div></div></div>
+      <div class="asks">${asks.map(a => `<button type="button" class="ask${st.plan.includes(a.b) ? " on" : ""}" data-b="${a.b}">${bossTag(a.b)}<span class="t">${esc(a.t)}</span><span class="wh">${esc(a.wh)}</span><span class="ck">${st.plan.includes(a.b) ? "✓ Doing it" : "Tap to do"}</span></button>`).join("")}</div>
+      <button type="button" class="go" id="lockBtn" ${n === 3 ? "" : "disabled"}>Lock in my Monday →</button></section>`;
+    app.querySelectorAll("[data-b]").forEach(b => b.onclick = () => {
+      const k = b.dataset.b, i = st.plan.indexOf(k);
+      if (i >= 0) st.plan.splice(i, 1); else if (st.plan.length < 3) st.plan.push(k);
+      save(); planView();
+    });
+    $("lockBtn").onclick = () => { st.planLocked = true; nextStep(); };
+  }
+  let selNeed = null;
+  function matchView() {
+    const asks = asksFor(), dropped = asks.filter(a => !st.plan.includes(a.b));
+    const done = BOSS_ORDER.every(b => st.match[b]);
+    if (!matchView.order) matchView.order = shuffle(BOSS_ORDER);
+    app.innerHTML = `<section class="card">${slideBar(3)}
+      <p class="q" style="margin-top:0">What ${esc(nick())} dropped:</p>
+      <div class="drops">${dropped.map(a => `<div>${bossTag(a.b)} <b>${esc(a.t)}</b><br>${esc(a.drop)}</div>`).join("")}</div>
+      <p class="fine" style="margin:4px 0">Every boss wanted your time because each one meets a real need.</p>
+      ${job(done ? "All 5 matched." : "Match each need to its institution. Tap a need, then tap the institution.")}
+      <div class="match"><div>${matchView.order.map(b => `<button type="button" class="need${st.match[b] ? " used" : ""}${selNeed === b ? " on" : ""}" data-n="${b}">“${esc(BOSS[b].need)}”</button>`).join("")}${done ? `<button type="button" class="go" id="nextBtn">Next: Thursday →</button>` : ""}</div>
+        <div>${BOSS_ORDER.map(b => `<button type="button" class="mrow${st.match[b] ? " ok" : ""}" data-r="${b}">${bossTag(b)}<span class="slotx">${st.match[b] ? "✓ " + esc(BOSS[b].need) : "tap to place"}</span></button>`).join("")}</div></div>
+      <p class="msg" id="mMsg" aria-live="polite"></p></section>`;
+    app.querySelectorAll("[data-n]").forEach(b => b.onclick = () => { selNeed = b.dataset.n; matchView(); });
+    app.querySelectorAll("[data-r]").forEach(b => b.onclick = () => {
+      if (st.match[b.dataset.r] || locked) return;
+      if (!selNeed) { $("mMsg").textContent = "Tap a need on the left first."; $("mMsg").className = "msg"; return; }
+      if (selNeed === b.dataset.r) { st.match[selNeed] = true; rightMark("match_" + selNeed); selNeed = null; save(); matchView(); return; }
+      wrongMark("match");
+      $("mMsg").textContent = "Not quite. What would go wrong without " + BOSS[b.dataset.r].n.toLowerCase() + "? Try another spot.";
+      $("mMsg").className = "msg bad"; selNeed = null;
+      app.querySelectorAll(".need.on").forEach(x => x.classList.remove("on"));
+      locked = true; setTimeout(() => { locked = false; }, isTestT() ? 0 : 1500);
+    });
+    if (done) $("nextBtn").onclick = () => { selNeed = null; nextStep(); };
+  }
+
+  // ---------- Day 4 Thu: change spreads ----------
+  function chainView() {
+    const done = CHAIN.every(l => st.chain[l.id]);
+    const data = [["1950", 34], ["1970", 43], ["1990", 58], ["2023", 57]];
+    app.innerHTML = `<section class="card">${slideBar(4)}
+      <div class="chainwrap">
+        <div><div class="scene"><p class="when">Thursday · kitchen</p><p>A photo on ${esc(nick())}'s fridge: great-grandma, 1943, building bomber parts in a factory. A real-life Rosie the Riveter.</p></div>
+          <p class="q" style="font-size:14px;margin:8px 0 0">% of U.S. women with or looking for a job</p>
+          <div class="bars">${data.map(d => `<div class="bar" style="height:${d[1] * 1.8}px">${d[1]}%</div>`).join("")}</div>
+          <div class="barl">${data.map(d => `<span>${d[0]}</span>`).join("")}</div>
+          <p class="fine">Source: U.S. Bureau of Labor Statistics</p></div>
+        <div>${job("Follow the change. Tap which institution each link is about.")}
+          <div class="links">${CHAIN.map(l => `<div class="link${st.chain[l.id] ? " ok" : ""}" id="lk_${l.id}"><span class="n">${esc(l.t)}</span>
+            ${st.chain[l.id] ? `<div style="margin-top:5px">${bossTag(l.b)}</div>` : `<div class="bs">${BOSS_ORDER.map(b => `<button type="button" data-l="${l.id}" data-b="${b}">${BOSS[b].i} ${BOSS[b].n}</button>`).join("")}</div>`}</div>`).join("")}
+            ${done ? `<div class="link you">➡️ ${esc(YOU_LINK[st.p.home] || YOU_LINK.mom)}</div>` : ""}</div>
+          <p class="msg" id="cMsg" aria-live="polite"></p>
+          ${done ? `<button type="button" class="go" id="nextBtn">One last question →</button>` : ""}</div></div></section>`;
+    app.querySelectorAll("[data-l]").forEach(b => b.onclick = () => {
+      if (locked) return;
+      const L = CHAIN.find(x => x.id === b.dataset.l);
+      if (b.dataset.b === L.b) { st.chain[L.id] = true; rightMark("chain_" + L.id); save(); chainView(); return; }
+      wrongMark("chain");
+      const el = $("lk_" + L.id); el.classList.remove("shake"); void el.offsetWidth; el.classList.add("shake");
+      $("cMsg").textContent = "Not quite. Is that link about jobs and money, home life, school, or laws?"; $("cMsg").className = "msg bad";
+      locked = true; setTimeout(() => { locked = false; }, isTestT() ? 0 : 1500);
+    });
+    if (done) $("nextBtn").onclick = nextStep;
+  }
+  function rosieView() {
+    app.innerHTML = `<section class="card">${slideBar(4)}
+      <div class="row" style="align-items:center"><div class="scene" style="flex:0 0 330px"><p class="when">Your chain</p>
+        ${CHAIN.map(l => `<p>${bossTag(l.b)} ${esc(l.t.split(".")[0])}.</p>`).join("")}</div>
+        <div id="rq"></div></div><div id="rEnd"></div></section>`;
+    const end = () => { $("rEnd").innerHTML = `<button type="button" class="go" id="nextBtn">See ${esc(nick())}'s week →</button>`; $("nextBtn").onclick = nextStep; };
+    mc($("rq"), "rosie", end);
+    if (st.done.rosie) end();
+  }
+
+  // ---------- Recap + write + turn in ----------
+  function writeView() {
+    const asks = asksFor(), dropped = asks.filter(a => !st.plan.includes(a.b));
+    const r = REPLIES[st.reply == null ? 0 : st.reply];
+    app.innerHTML = `<section class="card"><div class="recap">
+      <div class="idcard"><div class="big">${st.p.av}</div><div class="nm">${esc(nick())}'s week</div>
+        <span class="stampbig">Fri · Culture: the chant is 🧠 nonmaterial</span>
+        <span class="stampbig">Sat · Shapes you: “${esc(r.lab === "eth" ? "ethnocentrism" : "cultural relativism")}”</span>
+        <span class="stampbig">Mon · Institutions: dropped ${dropped.map(a => BOSS[a.b].n).join(" + ")}</span>
+        <span class="stampbig">Thu · Change: economy → family → laws → school</span></div>
+      <div><h2>📓 Two short answers</h2>
+        ${job("Fill in each sentence starter with your own words. Then tap Turn in.")}
+        ${PROMPTS.map(p => `<label class="wl" for="w_${p.id}">${esc(p.label)}</label><p class="stem">${esc(p.stem)}</p><textarea id="w_${p.id}" rows="2">${esc(st.writing[p.id] || "")}</textarea>`).join("")}
+        <div style="display:flex;align-items:center;gap:12px;margin-top:8px"><button type="button" class="go" id="sendBtn">${st.turnedIn ? "Turn in again" : "Turn in"}</button>
+        <p id="sendMsg" class="msg" role="status" aria-live="polite">${st.turnedIn ? "✓ Turned in" : ""}</p></div></div></div></section>`;
+    PROMPTS.forEach(p => $("w_" + p.id).addEventListener("input", e => { st.writing[p.id] = e.target.value; save(); }));
+    $("sendBtn").onclick = send;
+  }
+  async function send() {
+    const msg = $("sendMsg");
+    const plain = s => String(s || "").normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
+    for (const p of (isTestT() ? [] : PROMPTS)) {
+      const box = $("w_" + p.id), v = (box.value || "").trim();
+      if (window.classJunkStop) { const junk = window.classJunkStop(box, { starter: p.stem, source: "from today" }); if (junk) { msg.textContent = "For " + p.short + ": " + junk; msg.className = "msg bad"; return; } }
+      if (v.length < p.min) { msg.textContent = "Write a little more for: " + p.short + "."; msg.className = "msg bad"; box.focus(); return; }
+      if (/_{2,}/.test(v)) { msg.textContent = "Fill in the blanks with your own words for: " + p.short + "."; msg.className = "msg bad"; box.focus(); return; }
+      const stemWords = new Set(plain(p.stem).match(/[a-z']+/g) || []);
+      const freshW = new Set((plain(v).match(/[a-z']{3,}/g) || []).filter(w => !stemWords.has(w)));
+      if (freshW.size < p.newWords) { msg.textContent = "Add more of your own ideas for: " + p.short + "."; msg.className = "msg bad"; box.focus(); return; }
+      const txt = plain(v);
+      if (p.mustAll.some(g => !g.some(w => txt.includes(plain(w))))) { msg.textContent = p.mustMsg; msg.className = "msg bad"; box.focus(); return; }
+    }
+    const asks = asksFor();
+    const answers = {};
+    answers["My person"] = (st.p.av || "") + " " + nick() + " · " + PICKS.map(P => (optOf(P.key, st.p[P.key]) || {}).t).join(" · ");
+    answers["Fri · Sorting misses (material/nonmaterial)"] = String(st.wrong.sort || 0);
+    answers["Fri · What they did when the kid sat"] = st.normPick != null ? NORM_CHOICES[st.normPick].t : "";
+    answers["Fri · Norm/value check misses"] = String((st.wrong.norm1 || 0) + (st.wrong.norm2 || 0));
+    answers["Sat · Their comment"] = st.reply != null ? REPLIES[st.reply].t + " (" + (REPLIES[st.reply].lab === "eth" ? "ethnocentrism" : "relativism") + ")" : "";
+    answers["Sat · Ethnocentrism check misses"] = String(st.wrong.tip || 0);
+    answers["Sat · Who taught them tipping"] = st.who != null ? WHO_TAUGHT[st.who] : "";
+    answers["Mon · Kept"] = asks.filter(a => st.plan.includes(a.b)).map(a => BOSS[a.b].n + ": " + a.t).join(" | ");
+    answers["Mon · Dropped"] = asks.filter(a => !st.plan.includes(a.b)).map(a => BOSS[a.b].n + ": " + a.t).join(" | ");
+    answers["Mon · Institution/need match misses"] = String(st.wrong.match || 0);
+    answers["Thu · Change chain misses"] = String(st.wrong.chain || 0);
+    answers["Thu · Change-spreads check misses"] = String(st.wrong.rosie || 0);
+    PROMPTS.forEach(p => { answers["Writing: " + p.short] = ($("w_" + p.id).value || "").trim(); });
+    $("sendBtn").disabled = true; msg.textContent = "Sending your work…"; msg.className = "msg";
+    try {
+      if (!window.classTurnIn) throw new Error("Turn-in isn't available right now. Try again.");
+      const res = await window.classTurnIn(OLD_API, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ studentName: st.name, assignmentId: ASSIGNMENT_ID, assignmentTitle: TITLE, answers }) });
+      const data = await res.json().catch(() => ({}));
+      if (!res.ok) throw new Error(data.error || "Your work did not save. Try again.");
+      st.turnedIn = true; save();
+      msg.textContent = "✓ Turned in. You're done!"; msg.className = "msg good";
+      $("sendBtn").textContent = "Turned in ✓"; $("sendBtn").disabled = false;
+    } catch (err) { msg.textContent = err.message || "Could not turn in. Try again."; msg.className = "msg bad"; $("sendBtn").disabled = false; }
+  }
+
+  // ---------- Router ----------
+  let first = true;
+  function render() {
+    if (!first && $("welcome")) $("welcome").hidden = true;
+    first = false; locked = false;
+    hud();
+    if (st.step < 0) intro();
+    else {
+      const s = STEPS[Math.min(st.step, STEPS.length - 1)];
+      ({ build: buildView, sort: sortView, norm: normView, feed: feedView, tip: tipView, plan: planView, match: matchView, chain: chainView, rosie: rosieView, write: writeView })[s.k]();
+    }
+    window.scrollTo(0, 0);
+  }
+  $("restartBtn").onclick = () => {
+    if (!confirm("Start over? This clears your work on this device.")) return;
+    const name = st.name; st = fresh(); st.name = name; matchView.order = null;
+    if (window.classFirstTry) window.classFirstTry.reset();
+    save(); render();
+  };
+  if (st.step >= 0 && st.name) {
+    $("welcome").innerHTML = `<span>${esc("Welcome back, " + st.name + "!")}</span> <button type="button" class="notme" id="notMeBtn">${esc("Not " + st.name + "? Start fresh")}</button>`;
+    $("welcome").hidden = false;
+    $("notMeBtn").onclick = () => { st = fresh(); matchView.order = null; if (window.classFirstTry) window.classFirstTry.reset(); save(); $("welcome").hidden = true; render(); };
+  }
+  render();
+
+  // ---------- Test T. skip bar (shared/turnin.js) ----------
+  try {
+    const LABEL = { build: "Build your person", sort: "Fri: hands or head sort", norm: "Fri: the kid who sat", feed: "Sat: the tipping video", tip: "Sat: ethnocentrism check", plan: "Mon: pick 3 of 5", match: "Mon: match needs", chain: "Thu: change chain", rosie: "Thu: change check", write: "Recap + 2 short answers + turn in" };
+    function solveStep(s) {
+      if (s.k === "build") fillPersonDefaults();
+      else if (s.k === "sort") sortCards().forEach(c => st.sort[c.id] = true);
+      else if (s.k === "norm") { if (st.normPick == null) st.normPick = 0; st.done.norm1 = st.done.norm2 = true; }
+      else if (s.k === "feed") { if (st.reply == null) st.reply = 0; }
+      else if (s.k === "tip") { st.done.tip = true; if (st.who == null) st.who = 0; }
+      else if (s.k === "plan") { if (st.plan.length !== 3) st.plan = ["family", "education", "economy"]; st.planLocked = true; }
+      else if (s.k === "match") BOSS_ORDER.forEach(b => st.match[b] = true);
+      else if (s.k === "chain") CHAIN.forEach(l => st.chain[l.id] = true);
+      else if (s.k === "rosie") st.done.rosie = true;
+    }
+    (window.classTestHooks = window.classTestHooks || []).push({
+      count: () => STEPS.length + 1,
+      index: () => st.step < 0 ? 0 : Math.min(st.step, STEPS.length - 1) + 1,
+      label: i => i === 0 ? "Title" : LABEL[STEPS[i - 1].k],
+      go: i => {
+        if (!st.name) st.name = "Test T.";
+        const t = i - 1;
+        for (let j = 0; j < t && j < STEPS.length; j++) solveStep(STEPS[j]);
+        st.step = t; save(); render();
+      },
+      solve: () => { if (st.step < 0) return; solveStep(STEPS[Math.min(st.step, STEPS.length - 1)]); save(); render(); }
+    });
+    if (window.classTestSkip) window.classTestSkip.refresh();
+  } catch (e) {}
+})();
+</script>
 </body></html>
