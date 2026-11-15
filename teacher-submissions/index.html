@@ -1665,5 +1665,6 @@ if ($("teacherCode").value) load(); else loadPublicVideos();
 if (TOOLS_URL) fetch(TOOLS_URL, { method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify({ action: "version" }) })
   .then(r => r.json()).then(d => { $("toolsUpdate").hidden = !!(d && d.ok && (d.can || []).includes("videos")); }).catch(() => {});
 </script>
+   <script src="video-order.js?v=20261115order1"></script>
 </body>
 </html>
