@@ -15,7 +15,25 @@
   "use strict";
   const G = window.U3GAME;
   const OLD_API = "https://fynn-class-assignment-submissions-20261024.neotboy.chatgpt.site/api/submit";
-  const LOCK = 3, READ_Q = 2, READ_BOOK = 8;
+  const READ_BOOK = 8;
+  // Fynn (11/15/26): "even the rusher takes 15 minutes." Choices stay locked for a fair read time
+  // (on-screen words at a fast reader's pace), and each wrong answer on a screen locks longer than the last.
+  const PACE = G.pace || 200, MIN_READ = G.minRead || 8;
+  const WRONG = G.wrongLocks || [8, 15, 25, 35];
+  const wrongLock = n => WRONG[Math.min(Math.max(n, 1), WRONG.length) - 1];
+  const words = h => (String(h || "").replace(/<[^>]+>/g, " ").replace(/\[\[|\]\]|\{\{|\}\}/g, " ").match(/[A-Za-z0-9'’]+/g) || []).length;
+  const readFor = (h, min) => Math.max(min == null ? MIN_READ : min, Math.ceil(words(h) * 60 / PACE));
+  // Lock a button (or a set of buttons) for n seconds with a countdown line. Test T. never waits.
+  function countdown(n, setOff, lineEl, msg) {
+    if (isT() || n <= 0) { setOff(false); if (lineEl) lineEl.textContent = ""; return; }
+    setOff(true); let left = n;
+    const tick = () => {
+      if (left <= 0) { setOff(false); if (lineEl) lineEl.textContent = ""; return; }
+      if (lineEl) lineEl.textContent = msg + " " + left + "…";
+      left--; later(tick, 1000);
+    };
+    tick();
+  }
   const $ = id => document.getElementById(id);
   const esc = s => String(s == null ? "" : s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
   const isT = () => !!(window.classIsTestT && window.classIsTestT());
@@ -170,9 +188,7 @@
         el.classList.remove("evno"); void el.offsetWidth; el.classList.add("evno");
         $("pfb").innerHTML = `<div class="fb no">That part doesn't prove it. ${esc(s.proofHint || "Find the words that show who is doing the teaching.")}</div>`;
         plocked = true; panel.classList.add("plocked");
-        let left = isT() ? 0 : 2;
-        const tick = () => { if (left <= 0) { plocked = false; panel.classList.remove("plocked"); el.classList.remove("evno"); $("plock").textContent = ""; return; } $("plock").textContent = "Look again in " + left + "…"; left--; later(tick, 1000); };
-        tick();
+        countdown(wrongLock(st.miss[pid]), off => { if (!off) { plocked = false; panel.classList.remove("plocked"); el.classList.remove("evno"); } }, $("plock"), "Read the page again. Try again in");
       };
       evs.forEach(e => { e.onclick = () => tap(e); e.onkeydown = ev => { if (ev.key === "Enter" || ev.key === " ") { ev.preventDefault(); tap(e); } }; });
       solveFn = () => { plocked = false; const ok = panel.querySelector(".ev[data-ok]"); if (ok) tap(ok); };
@@ -186,8 +202,9 @@
       if (panel && s.proof) { panel.classList.remove("proofing"); const ok = panel.querySelector(".ev[data-ok]"); if (ok) ok.classList.add("evok"); }
       $("fb").innerHTML = `<div class="fb ok">✓ ${esc(s.why)}</div>`;
       $("after").innerHTML = (s.reveal ? `<div class="reveal"><span class="rt">${esc(s.revealTitle || "What happened")}</span>${s.reveal}</div>` : "") +
-        `<div class="rowend"><button type="button" class="next" id="nextBtn">${st.step === N - 1 ? "Wrap it up" : "Next"} →</button></div>`;
+        `<div class="rowend"><span class="lock" id="nlock"></span><button type="button" class="next" id="nextBtn">${st.step === N - 1 ? "Wrap it up" : "Next"} →</button></div>`;
       $("nextBtn").onclick = goNext;
+      countdown(readFor((s.why || "") + " " + (s.reveal || ""), 4), off => { const b = $("nextBtn"); if (b) b.disabled = off; }, $("nlock"), "Read why. Next opens in");
       solveFn = null;
     };
     const pick = i => {
@@ -203,26 +220,15 @@
       q.classList.remove("shake"); void q.offsetWidth; q.classList.add("shake");
       $("fb").innerHTML = `<div class="fb no">Not quite. ${esc(s.hint)} The choices got mixed up.</div>`;
       draw(); setOff(true);
-      let left = isT() ? 0 : LOCK;
-      const tick = () => { if (left <= 0) { setOff(false); $("lock").textContent = ""; return; } $("lock").textContent = "Try again in " + left + "…"; left--; later(tick, 1000); };
-      tick();
+      countdown(wrongLock(st.miss[s.id]), setOff, $("lock"), "Read it again. Try again in");
     };
     function bind() { q.querySelectorAll(".choice").forEach(b => b.onclick = () => pick(+b.dataset.i)); }
     draw();
     solveFn = () => pick(s.answer);
     if (done) return finish();
-    if (anim && !isT()) {
-      // Reading pages: choices stay locked long enough to actually read the page first.
-      let left = s.readSec || READ_Q;
-      setOff(true);
-      const tick = () => {
-        if (st.done[s.id]) return;
-        if (left <= 0) { setOff(false); $("lock").textContent = ""; return; }
-        if (s.readSec) $("lock").textContent = "Read the page first. Choices open in " + left + "…";
-        left--; later(tick, 1000);
-      };
-      tick();
-    }
+    // Choices stay locked for a fair read time (also after a refresh, so reloading can't skip it).
+    const qText = s.q + " " + s.choices.join(" ");
+    countdown(readFor(s.samePage ? qText : (s.left || "") + " " + qText), off => { if (!st.done[s.id]) setOff(off); }, $("lock"), "Read first. Choices open in");
   }
   function pickView(s) {
     const q = $("qbox");
@@ -233,20 +239,23 @@
       q.querySelectorAll(".choice").forEach(b => b.classList.toggle("pickme", +b.dataset.i === i));
       const extra = typeof s.after === "function" ? s.after(i, st) : (s.after || "");
       $("after").innerHTML = (extra ? `<div class="reveal"><span class="rt">${esc(s.afterTitle || "What happened")}</span>${extra}</div>` : "") +
-        `<div class="rowend"><button type="button" class="next" id="nextBtn">${st.step === N - 1 ? "Wrap it up" : "Next"} →</button></div>`;
+        `<div class="rowend"><span class="lock" id="nlock"></span><button type="button" class="next" id="nextBtn">${st.step === N - 1 ? "Wrap it up" : "Next"} →</button></div>`;
       $("nextBtn").onclick = goNext;
+      if (extra) countdown(readFor(extra, 4), off => { const b = $("nextBtn"); if (b) b.disabled = off; }, $("nlock"), "Read this. Next opens in");
     };
     q.querySelectorAll(".choice").forEach(b => b.onclick = () => { st.picks[s.id] = +b.dataset.i; save(); show(); });
-    solveFn = () => { if (st.picks[s.id] == null) { st.picks[s.id] = 0; save(); } show(); };
+    solveFn = () => { if (st.picks[s.id] == null) { st.picks[s.id] = 0; save(); } clearTimers(); q.querySelectorAll(".choice").forEach(b => b.disabled = false); show(); };
     if (st.picks[s.id] != null) show();
+    else { q.insertAdjacentHTML("beforeend", `<p class="lock" id="plk"></p>`); countdown(readFor((s.left || "") + " " + s.q + " " + s.options.join(" ")), off => q.querySelectorAll(".choice").forEach(b => b.disabled = off), $("plk"), "Read first. Choices open in"); }
   }
 
   // ---------- wrap-up ----------
   function endView() {
     solveFn = null;
     app.innerHTML = `<section class="scene"><p class="kicker">${esc(G.end.kicker)}</p><h2>${esc(G.end.title)}</h2>${G.end.html(st)}
-      <div class="rowend"><button type="button" class="next" id="nextBtn">Last step: write it →</button></div></section>`;
+      <div class="rowend"><span class="lock" id="nlock"></span><button type="button" class="next" id="nextBtn">Last step: write it →</button></div></section>`;
     $("nextBtn").onclick = goNext;
+    countdown(readFor(G.end.html(st), 6), off => { const b = $("nextBtn"); if (b) b.disabled = off; }, $("nlock"), "Look it over. Next opens in");
   }
 
   // ---------- writing + turn in ----------

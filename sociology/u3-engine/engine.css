@@ -133,3 +133,4 @@ button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px soli
 .bookpage .pg{font:700 .78rem system-ui,sans-serif;color:var(--muted);text-align:center;margin:6px 0 0}
 @media (min-width:761px){.grid .qbox{position:sticky;top:64px}}
 .panel:has(> .bookpage){padding:0;border:0;background:none}
+.rowend .lock{margin:0}
