@@ -39,13 +39,13 @@
   const kane = t => `<div class="kane"><span class="kface" aria-hidden="true">👔</span><div class="say"><span class="who-s">Kane</span>${t}</div></div>`;
 
   const ladder = () => `<div class="ladder flow">
-      <div class="rung"><span class="ri" aria-hidden="true">📜</span><div><b>1. Lawmakers pass a law</b><span>Congress, a state, or a school board makes a rule.</span></div></div>
+      <div class="rung"><span class="ri" aria-hidden="true">📜</span><div><b>1. A law gets passed</b><span>By Congress, a state, or a school.</span></div></div>
       <div class="rarrow" aria-hidden="true">▼</div>
-      <div class="rung"><span class="ri" aria-hidden="true">🙋</span><div><b>2. Someone says it breaks the Constitution</b><span>They take it to court.</span></div></div>
+      <div class="rung"><span class="ri" aria-hidden="true">🙋</span><div><b>2. Someone says it breaks the Constitution</b><span>They go to court.</span></div></div>
       <div class="rarrow" aria-hidden="true">▼</div>
-      <div class="rung you"><span class="ri" aria-hidden="true">⚖️</span><div><b>3. Your Court compares the law to the Constitution</b><span>This power is called judicial review.</span></div><i class="youtag">YOU</i></div>
+      <div class="rung you"><span class="ri" aria-hidden="true">⚖️</span><div><b>3. Your Court checks the law</b><span>This is called judicial review.</span></div><i class="youtag">YOU</i></div>
       <div class="rarrow" aria-hidden="true">▼</div>
-      <div class="rtwo"><div class="rung ok"><b>✅ It fits</b><span>The law stands.</span></div><div class="rung no"><b>❌ It doesn't</b><span>The law is struck down.</span></div></div>
+      <div class="rtwo"><div class="rung ok"><b>✅ It fits</b><span>The law stays.</span></div><div class="rung no"><b>❌ It doesn't</b><span>The law is struck down.</span></div></div>
     </div>`;
 
   const file = c => `<div class="file"><span class="ftab">CASE FILE ${c.n} of ${CASES.length}</span>
@@ -53,20 +53,21 @@
       ${row(c.chargeLabel || "Charge", c.charge)}
       <p class="fsec">${c.recLabel}</p>
       ${c.record.map(r => ln(r[0], r[1])).join("")}
-      ${row(c.sentenceLabel || "Sentence", `<b>${c.sentence}</b>`)}
+      ${c.sentence ? row(c.sentenceLabel || "Sentence", `<b>${c.sentence}</b>`) : ""}
       ${c.extra ? `<p class="fextra">${c.extra}</p>` : ""}
-      ${src("Real case. Real record.")}</div>`;
+      ${src("Real case.")}</div>`;
 
-  const amend = c => `<div class="amend"><span class="atab">U.S. CONSTITUTION · ${c.amend}</span>
-      <p class="atext">${c.text}</p>
-      <p class="anote">${c.note}</p></div>`;
-
+  // Plain words first (big), then only the few real words that matter (small).
+  const amend = c => `<div class="amend"><span class="atab">${c.amend} · IN PLAIN WORDS</span>
+      <p class="aplain">${c.plain}</p>
+      <p class="atext"><span class="areal">Real words:</span> ${c.text}</p>
+      ${c.note ? `<p class="anote">${c.note}</p>` : ""}</div>`;
   const sides = c => `<div class="sides">
       <div class="side his"><span class="stag">${c.sideName}</span><p>${c.sideHis}</p></div>
       <div class="vsb" aria-hidden="true">VS</div>
       <div class="side state"><span class="stag">${c.stateName || "👔 Defending the law · Kane"}</span><p>${c.sideState}</p></div>
     </div>`;
-  const cap = c => `<div class="mini-file"><span aria-hidden="true">${c.icon}</span><span>At the stand: <b>${c.name}</b> · ${c.short}</span></div>`;
+  const cap = c => `<div class="mini-file"><span aria-hidden="true">${c.icon}</span><span><b>${c.name}</b> · ${c.short}</span></div>`;
 
   // Real photos of the people and events. Claude can't pull these off the web, so each case has a spot
   // Fynn can fill with a photo he is allowed to use: put the file in this folder's img/ and fill in the line,
@@ -79,7 +80,7 @@
     return isTestT() ? `<div class="photo empty" title="Only Test T. sees this">📷<span>Photo spot<br>${esc(c.key)}</span></div>` : "";
   };
   // The record card: the real case name, where it is printed, the date, and who wrote the opinion.
-  const docCard = c => `<div class="doc">${photoSpot(c)}<div class="doct"><span class="dsm">Supreme Court of the United States</span><b>${c.doc.title}</b><span class="dcite">${c.doc.cite} · Decided ${c.doc.decided}</span><span class="dcite">${c.doc.by}</span></div></div>`;
+  const docCard = c => `<div class="doc">${photoSpot(c)}<div class="doct"><span class="dsm">Supreme Court of the United States</span><b>${c.doc.title}</b><span class="dcite">${c.doc.cite} · Decided ${c.doc.decided}</span><span class="dcite" hidden>${c.doc.by}</span></div></div>`;
 
   // ---------------- The courtroom (drawn, not photos) ----------------
   // The judge (the student) sits up on the bench on the right, looking down at the person at the stand.
@@ -209,186 +210,186 @@
   }
 
   // ---------------- The four real cases (a LAW or RULE is on trial in each one) ----------------
-  const E8 = "“Excessive bail shall not be required, nor excessive fines imposed, nor <mark>cruel and unusual punishments</mark> inflicted.”";
+  // Reading rule (Fynn, 11-14): short sentences, everyday words, about a 12-year-old level.
+  // Each amendment shows a plain-words line first, then only the few real words that matter.
+  const E8 = "“… nor <mark>cruel and unusual punishments</mark> …”";
   const CASES = [
     { n: 1, key: "Tinker", icon: "🖤", name: "Mary Beth Tinker", age: "13", place: "Des Moines, Iowa · 1965", status: "SUSPENDED",
-      chargeLabel: "The rule", charge: "No armbands at school. Take it off or be suspended.", recLabel: "What happened",
-      record: [["🕊️", "She and other students wore black armbands to protest the Vietnam War."], ["📋", "Principals heard about the plan. They banned armbands before anyone wore one."], ["🤫", "She wore hers anyway. No one could show that a class was disrupted."], ["🚪", "She was sent home until she came back without it."]],
-      sentenceLabel: "Penalty", sentence: "Suspended", extra: "📍 This happened in Iowa. Her brother John, 15, and a friend, 16, were suspended too.",
-      short: "age 13 · armband", amend: "1st Amendment",
-      text: "“Congress shall make no law … abridging the <mark>freedom of speech</mark> …”",
-      note: "<b>Abridging</b> = cutting back. An armband has no words on it. Public schools are part of the government.",
-      sideName: "✉️ The Tinkers' lawyers", sideHis: "It was quiet. Nobody's class was stopped. Students don't lose their rights when they walk into school.",
-      stateName: "👔 Defending the rule · Kane", sideState: "Schools are for learning, not protests. Principals have to be able to stop trouble before it starts.",
+      chargeLabel: "The rule", charge: "No armbands at school", recLabel: "What happened",
+      record: [["🕊️", "She wore a black armband to protest a war."], ["📋", "The school had just banned armbands."], ["🤫", "No class was interrupted."], ["🚪", "She was sent home."]],
+      short: "armband", amend: "1st Amendment", plain: "The government can't stop you from speaking.",
+      text: "“… no law … abridging the <mark>freedom of speech</mark> …”",
+      note: "An armband has no words. A public school is part of the government.",
+      sideName: "✉️ The Tinkers' lawyers", sideHis: "It was quiet. No class was stopped. Students have rights at school.",
+      stateName: "👔 For the rule · Kane", sideState: "School is for learning, not protests. Principals must stop trouble early.",
       doc: { title: "TINKER v. DES MOINES SCHOOL DISTRICT", cite: "393 U.S. 503", decided: "February 24, 1969", by: "Opinion of the Court by Justice Fortas" },
-      terms: [["Judicial review", "courts checking if a law or rule fits the Constitution"], ["Strike down", "cancel a law or rule"], ["Abridging", "cutting back"]] },
+      terms: [["Judicial review", "courts checking if a law fits the Constitution"], ["Strike down", "cancel a law or rule"], ["Abridging", "limiting"]] },
     { n: 2, key: "Ewing", icon: "⛳", name: "Gary Ewing", age: "", place: "El Segundo, California · 2000", status: "LOCKED UP",
-      chargeLabel: "The law", charge: "Three strikes: a third serious crime means 25 years to life.", recLabel: "What happened",
-      record: [["⛳", "He walked out of a golf shop with 3 golf clubs hidden in his pants. Each cost $399."], ["📂", "He already had a record: a robbery and three home break-ins."], ["3️⃣", "That made the golf clubs his third strike."]],
-      sentence: "25 years to life in prison",
-      short: "golf clubs · 25 to life", amend: "8th Amendment",
+      chargeLabel: "The law", charge: "Three strikes: a third big crime means 25 years to life", recLabel: "What happened",
+      record: [["⛳", "He stole 3 golf clubs. Each cost $399."], ["📂", "He had a record: a robbery and three break-ins."], ["3️⃣", "The golf clubs were strike three."]],
+      sentence: "25 years to life",
+      short: "golf clubs", amend: "8th Amendment", plain: "Punishments can't be cruel.",
       text: E8,
-      note: "The words don't say how long is too long. Judges have to decide.",
-      sideName: "✉️ Ewing's lawyers", sideHis: "Twenty-five years to life for golf clubs. The punishment is far bigger than the crime. That is cruel and unusual.",
-      stateName: "👔 Defending the law · Kane", sideState: "This is not about golf clubs. It is about a man who keeps committing crimes. Lawmakers are allowed to lock up repeat offenders for a long time.",
+      note: "It doesn't say how long is too long.",
+      sideName: "✉️ Ewing's lawyers", sideHis: "25 years for golf clubs is way too much. That is cruel.",
+      stateName: "👔 For the law · Kane", sideState: "He keeps breaking the law. Lawmakers can lock up people like that.",
       doc: { title: "EWING v. CALIFORNIA", cite: "538 U.S. 11", decided: "March 5, 2003", by: "Lead opinion by Justice O'Connor" },
-      terms: [["Three strikes", "a law that gives a very long sentence for a third serious crime"], ["Repeat offender", "someone who keeps breaking the law"], ["Unconstitutional", "breaks the Constitution"]] },
+      terms: [["Three strikes", "a law that gives a very long sentence for a third big crime"], ["Record", "a list of someone's past crimes"]] },
     { n: 3, key: "Acton", icon: "🏈", name: "James Acton", age: "7th grade", place: "Vernonia, Oregon · 1991", status: "OFF THE TEAM",
-      chargeLabel: "The rule", charge: "Student athletes must take random drug tests.", recLabel: "What happened",
-      record: [["🏈", "He signed up to play football."], ["📝", "The school said: sign the drug-test form first. Each week, 10% of athletes get tested."], ["🎲", "The tests were random. The school did not need a reason to suspect a student."], ["✋", "He and his parents refused to sign."]],
-      sentenceLabel: "Result", sentence: "Not allowed to play", extra: "📈 The school said student drug use had jumped, and athletes were part of it.",
-      short: "7th grade · drug test", amend: "4th Amendment",
-      text: "“The right of the people to be secure in their persons, houses, papers, and effects, against <mark>unreasonable</mark> searches and seizures, shall not be violated …”",
-      note: "A drug test counts as a <b>search</b>. The words ban <b>unreasonable</b> ones.",
-      sideName: "✉️ The Actons' lawyers", sideHis: "The school has no reason to suspect James. Testing kids with no reason at all is an unreasonable search.",
-      stateName: "👔 Defending the rule · Kane", sideState: "Sports are a choice. Athletes already share locker rooms and get physicals. And the school had a real drug problem.",
+      chargeLabel: "The rule", charge: "Athletes must take random drug tests", recLabel: "What happened",
+      record: [["🏈", "He signed up for football."], ["🎲", "Tests were random. No reason was needed."], ["✋", "He and his parents said no."], ["🚫", "He was not allowed to play."]],
+      short: "drug test", amend: "4th Amendment", plain: "The government can't search you without a good reason.",
+      text: "“… against <mark>unreasonable</mark> searches …”",
+      note: "A drug test counts as a search.",
+      sideName: "✉️ The Actons' lawyers", sideHis: "The school has no reason to think he uses drugs.",
+      stateName: "👔 For the rule · Kane", sideState: "Sports are a choice. And the school had a drug problem.",
       doc: { title: "VERNONIA SCHOOL DIST. 47J v. ACTON", cite: "515 U.S. 646", decided: "June 26, 1995", by: "Opinion of the Court by Justice Scalia" },
-      terms: [["Random", "picked by chance, not for a reason"], ["Suspect", "have a reason to think someone did it"], ["Search", "the government looking through you or your things"]] },
+      terms: [["Random", "picked by chance, not for a reason"], ["Search", "the government looking through you or your things"]] },
     { n: 4, key: "Simmons", icon: "⏳", name: "Christopher Simmons", age: "17", place: "Missouri · 1993", status: "DEATH ROW",
-      chargeLabel: "The law", charge: "Missouri allowed the death penalty at ages 16 and 17.", recLabel: "What happened",
-      record: [["📁", "He planned a break-in and murdered a woman. He was 17."], ["⚖️", "He was tried as an adult. The jury said guilty."], ["🗓️", "In 1989, the Supreme Court had ruled that laws like Missouri's were allowed."]],
-      sentence: "Death", extra: "🗺️ About 20 states had laws like this one.",
-      short: "age 17 · death sentence", amend: "8th Amendment",
+      chargeLabel: "The law", charge: "Missouri allowed the death penalty at 16 and 17", recLabel: "What happened",
+      record: [["📁", "He planned a break-in and killed a woman."], ["⚖️", "A jury found him guilty."], ["🗓️", "In 1989, the Supreme Court said laws like this were OK."]],
+      sentence: "Death",
+      short: "age 17", amend: "8th Amendment", plain: "Punishments can't be cruel.",
       text: E8,
-      note: "Same words as the golf club case. Does a person's <b>age</b> change what is cruel and unusual?",
-      sideName: "✉️ Simmons's lawyers", sideHis: "A 17-year-old can't vote or sit on a jury. Teens are still growing up. Executing them is cruel and unusual.",
-      stateName: "👔 Defending the law · Kane", sideState: "He planned it. The jury knew his age and still chose death. And this Court already said these laws are allowed.",
+      note: "Does being 17 change what is cruel?",
+      sideName: "✉️ Simmons's lawyers", sideHis: "Teens are still growing up. Killing them for a crime is cruel.",
+      stateName: "👔 For the law · Kane", sideState: "He planned it. A jury chose death. The Court said that was OK.",
       doc: { title: "ROPER v. SIMMONS", cite: "543 U.S. 551", decided: "March 1, 2005", by: "Opinion of the Court by Justice Kennedy" },
-      terms: [["Precedent", "an earlier ruling that courts follow"], ["Overturn", "cancel an earlier ruling"], ["Tried as an adult", "sent to adult court, not juvenile court"]] }
+      terms: [["Precedent", "an old ruling that courts follow"], ["Overturn", "cancel an old ruling"]] }
   ];
-  const LADDER_TERMS = [["Judicial review", "courts checking if a law fits the Constitution"], ["Strike down", "cancel a law"], ["Unconstitutional", "breaks the Constitution"]];
+  const LADDER_TERMS = [["Judicial review", "courts checking if a law fits the Constitution"], ["Strike down", "cancel a law"]];
 
   // ---------------- Steps ----------------
   // check: options[0] is right; miss[i] teaches options[i+1].
   // rule: cards[].sc = "agreed" (voted with the real majority) | "reversed" (outvoted) | "toofar"; fx = change in public trust.
   const STEPS = [
-    { id: "c1", type: "check", c: -1, std: "Gov.8", kicker: "Your first day on the Supreme Court", short: "What is judicial review?", stamp: "SWORN IN", where: "chart",
+    { id: "c1", type: "check", c: -1, std: "Gov.8", kicker: "Your first day", short: "What is judicial review?", stamp: "SWORN IN", where: "chart",
       mid: () => ladder(),
-      ask: "A state passes a law. Someone says it breaks the Constitution. What can your Court do?",
-      options: ["Strike it down if it breaks the Constitution", "Rewrite the law so that it works much better", "Send the law to the President for a veto", "Make the lawmakers hold a brand-new vote"],
-      miss: ["Courts don't write laws. Look at the last step of the chart.", "A veto comes before a bill becomes a law. Look at the last step.", "Courts can't order a new vote. Look at the last step of the chart."],
+      ask: "A law may break the Constitution. What can your Court do?",
+      options: ["Strike the law down", "Rewrite the law", "Ask the President to fix it", "Make lawmakers vote again"],
+      miss: ["Courts don't write laws. Look at the last step.", "The President isn't in this chart. Look at the last step.", "Courts can't order a vote. Look at the last step."],
       hint: "Look at the last step of the chart.",
       reveal: "<b>Judicial review</b>: courts can strike down a law that breaks the Constitution." },
 
     // ---- Case 1: Tinker v. Des Moines (rule struck down, 7-2) ----
     { id: "c2", type: "check", c: 0, std: "Gov.8", kicker: "Case 1 · The file", short: "Tinker: why was the rule unfair?", stamp: "NOTED", where: "case file",
-      ask: "Why does Mary Beth say the rule was unfair?",
-      options: ["Her armband did not disrupt any class", "The rule was made after she wore it", "She was never told about the rule", "Only girls were punished for armbands"],
-      miss: ["The file says the ban came first. Look at what happened in class.", "The file doesn't say that. Look at what happened in class.", "Her brother was suspended too. Look at what happened in class."],
-      hint: "Look at what happened in class.",
-      reveal: "Her claim: a quiet armband hurt no one, so the school had no reason to ban it." },
+      ask: "Why does she say the rule was unfair?",
+      options: ["Her armband hurt no one's class", "The rule came after she wore it", "No one told her the rule", "Only girls got in trouble"],
+      miss: ["The file says the ban came first. What happened in class?", "The file doesn't say that. What happened in class?", "The file doesn't say that. What happened in class?"],
+      hint: "What happened in class?",
+      reveal: "Her claim: a quiet armband hurt no one." },
     { id: "c3", type: "check", c: 0, std: "Gov.8", kicker: "Case 1 · The words", short: "Tinker: is an armband speech?", stamp: "INTERPRET", where: "marked words",
       under: () => amend(CASES[0]),
-      ask: "An armband has no words on it. What must the Court decide?",
-      options: ["Can wearing something count as speech?", "Was the Vietnam War a good idea?", "Should schools ever have dress rules?", "Did she stay suspended for too long?"],
-      miss: ["The Court doesn't rule on the war. Look at the marked words.", "Too broad. This case is about one rule. Look at the marked words.", "The case isn't about how long. Look at the marked words."],
-      hint: "Look at the marked words. Is an armband a way of saying something?",
-      reveal: "The Court had to decide if “speech” covers more than talking." },
+      ask: "An armband has no words. What must the Court decide?",
+      options: ["Can wearing something be speech?", "Was the war a good idea?", "Should schools have dress rules?", "Was she sent home too long?"],
+      miss: ["The Court doesn't rule on the war. Look at the marked words.", "Too big. This case is about one rule.", "This case isn't about how long. Look at the marked words."],
+      hint: "Look at the marked words. Does an armband say something?",
+      reveal: "The Court had to decide if “speech” means more than talking." },
     { id: "e1", type: "rule", c: 0, kicker: "Case 1 · Your vote", short: "Vote on Tinker",
       under: () => sides(CASES[0]),
-      ask: "Cast your vote on the armband rule.",
+      ask: "Vote on the armband rule.",
       cards: [
-        { icon: "❌", t: "Strike down the rule", line: "Quiet protest is protected speech", fx: -1, sc: "agreed",
-          res: "You vote to strike down the armband rule.", head: "COURT SIDES WITH TEEN WAR PROTESTERS", cause: "Struck down the armband rule",
-          kane: "Wonderful. Now every kid with an opinion has a lawyer." },
-        { icon: "✅", t: "Let the rule stand", line: "Schools decide what is allowed", fx: 1, sc: "reversed",
-          res: "You vote to let the armband rule stand.", head: "JUSTICE BACKS PRINCIPALS ON ARMBANDS", cause: "Let the armband rule stand",
-          kane: "You and I lost that one, 7 to 2. Good company, though." },
-        { icon: "📢", t: "Students can say anything", line: "No limits at school, ever", fx: -2, sc: "toofar",
-          res: "You vote that schools can never limit student speech.", head: "JUSTICE: NO LIMITS ON STUDENT SPEECH", cause: "Voted for no limits on student speech",
-          kane: "Even the Tinkers did not ask for that." }
+        { icon: "❌", t: "Strike down the rule", line: "Quiet protest is free speech", fx: -1, sc: "agreed",
+          res: "You vote to cancel the armband rule.", head: "COURT SIDES WITH TEEN PROTESTERS", cause: "Struck down the armband rule",
+          kane: "Great. Now every kid with an opinion has a lawyer." },
+        { icon: "✅", t: "Let the rule stand", line: "Schools decide", fx: 1, sc: "reversed",
+          res: "You vote to keep the armband rule.", head: "JUDGE BACKS PRINCIPALS", cause: "Let the armband rule stand",
+          kane: "We lost that one, 7 to 2." },
+        { icon: "📢", t: "No limits at school", line: "Students can say anything", fx: -2, sc: "toofar",
+          res: "You vote for no limits on student speech.", head: "JUDGE: NO LIMITS ON STUDENT SPEECH", cause: "Voted for no limits on student speech",
+          kane: "Even the Tinkers didn't ask for that." }
       ],
       vote: "7–2", caseName: "Tinker v. Des Moines (1969)",
-      real: [["🏛️", "The real vote was 7 to 2 to strike down the rule."], ["📜", "The rule now: students keep free speech at school. A school can stop speech only if it really disrupts class."], ["🔁", "A later case (Bong Hits 4 Jesus) added one limit: pro-drug speech at a school event."], ["📍", "It started with a few students in Des Moines."]],
-      tooFar: "The real Court said schools can still stop speech that truly disrupts class.",
-      reveal: "That is <b>judicial review</b>: the Court struck down a government rule because it broke the Constitution." },
+      real: [["🏛️", "The real vote: 7 to 2 to strike down the rule."], ["📜", "Rule: students have free speech, unless it stops class."], ["📍", "It started with a few kids in Des Moines."]],
+      tooFar: "The real Court said schools can stop speech that stops class.",
+      reveal: "That is <b>judicial review</b>: the Court canceled a rule that broke the Constitution." },
 
     // ---- Case 2: Ewing v. California (law upheld, 5-4) ----
     { id: "c4", type: "check", c: 1, std: "Gov.8", kicker: "Case 2 · The file", short: "Ewing: why 25 to life?", stamp: "NOTED", where: "case file",
-      ask: "Why did stealing golf clubs get him 25 years to life?",
-      options: ["It counted as his third strike", "The clubs were worth over a million", "He hurt a worker during the theft", "He stole from the same shop twice"],
+      ask: "Why did golf clubs get him 25 years to life?",
+      options: ["It was his third strike", "The clubs cost a million dollars", "He hurt a worker", "He robbed the shop twice"],
       miss: ["The file says $399 each. Look at his record.", "The file doesn't say that. Look at his record.", "The file doesn't say that. Look at his record."],
       hint: "Look at his record and at the law.",
-      reveal: "The law looked at his whole record, not only the golf clubs." },
-    { id: "c5", type: "check", c: 1, std: "Gov.8", kicker: "Case 2 · The words", short: "Ewing: what is “cruel and unusual”?", stamp: "INTERPRET", where: "marked words",
+      reveal: "The law counted his whole record, not just the golf clubs." },
+    { id: "c5", type: "check", c: 1, std: "Gov.8", kicker: "Case 2 · The words", short: "Ewing: what is “cruel”?", stamp: "INTERPRET", where: "marked words",
       under: () => amend(CASES[1]),
-      ask: "The words ban “cruel and unusual punishments.” What must the Court decide?",
-      options: ["Is this sentence too harsh for this crime?", "Did he really steal the golf clubs?", "Should every prison be shut down?", "Should stealing be a crime at all?"],
-      miss: ["Nobody argued he didn't. Look at the marked words.", "Too far. The words only ban cruel and unusual punishments.", "Nobody argued that. Look at the marked words."],
+      ask: "The words ban cruel punishments. What must the Court decide?",
+      options: ["Is this punishment too harsh?", "Did he steal the golf clubs?", "Should prisons be closed?", "Should stealing be legal?"],
+      miss: ["Nobody said he didn't. Look at the marked words.", "Too far. Only cruel punishments are banned.", "Nobody argued that. Look at the marked words."],
       hint: "Look at the marked words. What is being called cruel?",
-      reveal: "Same job as Day 1: decide what the words mean. Today a whole law depends on it." },
+      reveal: "Same job as Day 1: decide what the words mean." },
     { id: "e2", type: "rule", c: 1, kicker: "Case 2 · Your vote", short: "Vote on Ewing",
       under: () => sides(CASES[1]),
-      ask: "Cast your vote on the three-strikes law.",
+      ask: "Vote on the three-strikes law.",
       cards: [
-        { icon: "❌", t: "Strike down the sentence", line: "25 to life is cruel for this crime", fx: -2, sc: "reversed",
-          res: "You vote that the three-strikes sentence is cruel and unusual.", head: "JUSTICE: THREE STRIKES GOES TOO FAR", cause: "Voted against the three-strikes sentence",
-          kane: "Four justices agreed with you. You needed five." },
-        { icon: "✅", t: "Let the law stand", line: "Lawmakers can punish repeat crimes hard", fx: 1, sc: "agreed",
-          res: "You vote to let the three-strikes law stand.", head: "COURT UPHOLDS THREE-STRIKES LAW", cause: "Let the three-strikes law stand",
-          kane: "A justice who lets lawmakers make the laws. I could cry." },
-        { icon: "🔓", t: "Throw out his conviction", line: "Set him free", fx: -3, sc: "toofar",
-          res: "You vote to throw out the conviction and free him.", head: "JUSTICE VOTES TO FREE GOLF CLUB THIEF", cause: "Voted to free Ewing",
-          kane: "He was caught limping out of the store, Your Honor." }
+        { icon: "❌", t: "Strike it down", line: "25 to life is cruel here", fx: -2, sc: "reversed",
+          res: "You vote that the sentence is cruel.", head: "JUDGE: THREE STRIKES GOES TOO FAR", cause: "Voted against the three-strikes sentence",
+          kane: "Four judges agreed with you. You needed five." },
+        { icon: "✅", t: "Let the law stand", line: "Lawmakers set punishments", fx: 1, sc: "agreed",
+          res: "You vote to keep the three-strikes law.", head: "COURT KEEPS THREE-STRIKES LAW", cause: "Let the three-strikes law stand",
+          kane: "A judge who lets lawmakers make laws. I could cry." },
+        { icon: "🔓", t: "Set him free", line: "Erase the guilty verdict", fx: -3, sc: "toofar",
+          res: "You vote to let him go.", head: "JUDGE VOTES TO FREE THIEF", cause: "Voted to free Ewing",
+          kane: "He was caught limping out of the store." }
       ],
       vote: "5–4", caseName: "Ewing v. California (2003)",
-      real: [["🏛️", "The real vote was 5 to 4 to let the law stand."], ["📜", "The ruling: a long sentence for a repeat offender is not cruel and unusual."], ["⛓️", "Ewing's sentence stayed: 25 years to life."], ["🗳️", "Four justices said the sentence was far too harsh. They lost by one vote."]],
-      tooFar: "Nobody argued he was innocent. The only question was whether the sentence was too harsh.",
-      reveal: "Judicial review cuts both ways. Sometimes the Court says the law <b>stands</b>." },
+      real: [["🏛️", "The real vote: 5 to 4 to keep the law."], ["📜", "Ruling: a long sentence for a repeat crime is not cruel."], ["⛓️", "His sentence stayed: 25 years to life."]],
+      tooFar: "Nobody said he was innocent. The question was the sentence.",
+      reveal: "Judicial review goes both ways. Sometimes the law <b>stays</b>." },
 
     // ---- Case 3: Vernonia v. Acton (rule upheld, 6-3) ----
-    { id: "c6", type: "check", c: 2, std: "Gov.8", kicker: "Case 3 · File + words", short: "Acton: is a random test reasonable?", stamp: "INTERPRET", where: "marked word",
+    { id: "c6", type: "check", c: 2, std: "Gov.8", kicker: "Case 3 · File + words", short: "Acton: is a random test OK?", stamp: "INTERPRET", where: "marked word",
       under: () => amend(CASES[2]),
-      ask: "He says random drug tests break the 4th Amendment. What must the Court decide?",
-      options: ["Is testing with no suspicion reasonable?", "Did James really use any drugs?", "Should schools have football teams?", "Is 10% of athletes too few to test?"],
-      miss: ["Nobody said he did. Look at the marked word.", "The case isn't about football itself. Look at the marked word.", "The case isn't about the number. Look at the marked word."],
-      hint: "Look at the marked word, and at how students were picked.",
-      reveal: "On Day 1 (T.L.O.), a school searched a purse because it had a reason. Here the school had none. Does that change the answer?" },
+      ask: "He says random tests are not OK. What must the Court decide?",
+      options: ["Is a test with no reason OK?", "Did James use drugs?", "Should schools have football?", "Do the tests cost too much?"],
+      miss: ["Nobody said he did. Look at the marked word.", "This case isn't about football. Look at the marked word.", "This case isn't about cost. Look at the marked word."],
+      hint: "Look at the marked word, and at how kids were picked.",
+      reveal: "On Day 1, a school had a reason to search. Here it had none." },
     { id: "e3", type: "rule", c: 2, kicker: "Case 3 · Your vote", short: "Vote on Acton",
       under: () => sides(CASES[2]),
-      ask: "Cast your vote on the drug-test rule.",
+      ask: "Vote on the drug-test rule.",
       cards: [
-        { icon: "❌", t: "Strike down the rule", line: "No testing without a reason", fx: -1, sc: "reversed",
-          res: "You vote to strike down random drug tests.", head: "JUSTICE: NO DRUG TESTS WITHOUT A REASON", cause: "Voted against random drug tests",
-          kane: "Six to three. The school wins. I love this building." },
-        { icon: "✅", t: "Let the rule stand", line: "Testing athletes is reasonable", fx: 1, sc: "agreed",
-          res: "You vote to let the drug-test rule stand.", head: "COURT OKS DRUG TESTS FOR ATHLETES", cause: "Let the drug-test rule stand",
-          kane: "See? We can agree. Don't let it go to your head." },
+        { icon: "❌", t: "Strike down the rule", line: "No test without a reason", fx: -1, sc: "reversed",
+          res: "You vote to cancel random drug tests.", head: "JUDGE: NO TESTS WITHOUT A REASON", cause: "Voted against random drug tests",
+          kane: "Six to three. The school wins." },
+        { icon: "✅", t: "Let the rule stand", line: "Testing athletes is OK", fx: 1, sc: "agreed",
+          res: "You vote to keep the drug tests.", head: "COURT OKS DRUG TESTS FOR ATHLETES", cause: "Let the drug-test rule stand",
+          kane: "See? We can agree." },
         { icon: "🧪", t: "Test every student", line: "Any student, any time", fx: 0, sc: "toofar",
-          res: "You vote that schools can drug test any student at any time.", head: "JUSTICE: TEST EVERY STUDENT", cause: "Voted to test every student",
-          kane: "Easy. The school only asked about athletes." }
+          res: "You vote to test any student, any time.", head: "JUDGE: TEST EVERY STUDENT", cause: "Voted to test every student",
+          kane: "The school only asked about athletes." }
       ],
       vote: "6–3", caseName: "Vernonia v. Acton (1995)",
-      real: [["🏛️", "The real vote was 6 to 3 to let the rule stand."], ["📜", "The ruling: random drug tests for student athletes are a reasonable search."], ["⚖️", "A lower federal court had struck the rule down. The Supreme Court reversed it."], ["🗳️", "Three justices disagreed. They said searching students with no suspicion goes too far."]],
-      tooFar: "The real ruling only covered student athletes.",
-      reveal: "The Supreme Court can also <b>reverse</b> a lower court that struck a rule down." },
+      real: [["🏛️", "The real vote: 6 to 3 to keep the rule."], ["📜", "Ruling: random drug tests for athletes are OK."], ["⚖️", "A lower court had struck the rule down. It got reversed."]],
+      tooFar: "The real ruling only covered athletes.",
+      reveal: "The Supreme Court can <b>reverse</b> a lower court." },
 
     // ---- Case 4: Roper v. Simmons (law struck down, 5-4, overturning the Court's own 1989 ruling) ----
     { id: "c7", type: "check", c: 3, std: "Gov.8", kicker: "Case 4 · File + words", short: "Simmons: can the Court change its mind?", stamp: "PRECEDENT", where: "case file",
       under: () => amend(CASES[3]),
-      ask: "In 1989 the Court said laws like this were allowed. What can the Court do now?",
-      options: ["Overturn its own earlier ruling", "Nothing. Old rulings can't change", "Ask Missouri to vote on the law", "Let the President decide the case"],
-      miss: ["The Court can overturn its own rulings. It is rare, but it happens.", "Courts can't order a vote. Who made the 1989 ruling?", "The President has no say in a court case. Who made the 1989 ruling?"],
-      hint: "Who made the 1989 ruling? They can unmake it.",
-      reveal: "A ruling that courts follow is a <b>precedent</b>. The Supreme Court can overturn its own precedent." },
+      ask: "In 1989 the Court said this law was OK. What can it do now?",
+      options: ["Change its own old ruling", "Nothing. Old rulings stay", "Make Missouri vote on it", "Let the President decide"],
+      miss: ["The Court can change its old rulings. It is rare.", "Courts can't order a vote. Who made the 1989 ruling?", "The President has no say here. Who made the 1989 ruling?"],
+      hint: "Who made the 1989 ruling? They can undo it.",
+      reveal: "An old ruling that courts follow is a <b>precedent</b>. The Supreme Court can overturn its own." },
     { id: "e4", type: "rule", c: 3, kicker: "Case 4 · Your vote", short: "Vote on Simmons",
       under: () => sides(CASES[3]),
-      ask: "Cast your vote on the death penalty law.",
+      ask: "Vote on the death penalty law.",
       cards: [
         { icon: "❌", t: "Strike down the law", line: "No death penalty under 18", fx: -2, sc: "agreed",
-          res: "You vote to strike down the death penalty for crimes under 18.", head: "COURT: NO DEATH PENALTY UNDER 18", cause: "Struck down the under-18 death penalty",
-          kane: "Five to four. One vote. And the 1989 ruling is gone." },
+          res: "You vote to end the death penalty under 18.", head: "COURT: NO DEATH PENALTY UNDER 18", cause: "Struck down the under-18 death penalty",
+          kane: "Five to four. One vote." },
         { icon: "✅", t: "Let the law stand", line: "Follow the 1989 ruling", fx: 1, sc: "reversed",
-          res: "You vote to follow the 1989 ruling and let the law stand.", head: "JUSTICE STANDS BY DEATH PENALTY LAW", cause: "Let the death penalty law stand",
-          kane: "We followed the Court's own ruling and still lost. Precedent isn't forever." },
-        { icon: "🚫", t: "End the death penalty", line: "For everyone, at any age", fx: -3, sc: "toofar",
-          res: "You vote to end the death penalty for everyone.", head: "JUSTICE VOTES TO END DEATH PENALTY", cause: "Voted to end the death penalty for all",
-          kane: "Nobody asked about adults, Your Honor." }
+          res: "You vote to keep the law.", head: "JUDGE KEEPS DEATH PENALTY LAW", cause: "Let the death penalty law stand",
+          kane: "We followed the old ruling and still lost." },
+        { icon: "🚫", t: "End it for everyone", line: "No death penalty at any age", fx: -3, sc: "toofar",
+          res: "You vote to end the death penalty for all.", head: "JUDGE: END THE DEATH PENALTY", cause: "Voted to end the death penalty for all",
+          kane: "Nobody asked about adults." }
       ],
       vote: "5–4", caseName: "Roper v. Simmons (2005)",
-      real: [["🏛️", "The real vote was 5 to 4 to strike down the law."], ["📜", "The rule now: no death penalty for a crime committed before age 18."], ["🗺️", "Laws in about 20 states were struck down at once."], ["🔁", "The Court overturned its own 1989 ruling. Simmons got life in prison instead."]],
-      tooFar: "The real ruling only covered crimes committed before age 18.",
-      reveal: "One ruling can cancel laws in many states. And the Court can <b>overturn</b> its own earlier ruling." },
+      real: [["🏛️", "The real vote: 5 to 4 to strike down the law."], ["📜", "Rule: no death penalty for a crime before age 18."], ["🔁", "The Court overturned its own 1989 ruling."]],
+      tooFar: "The real ruling only covered crimes before age 18.",
+      reveal: "The Court can <b>overturn</b> its own old ruling." },
 
     { id: "end", type: "ending", c: 4, kicker: "Your record", short: "Ending" },
     { id: "write", type: "write", c: 4, kicker: "One last thing", short: "Short answer" }
@@ -399,8 +400,8 @@
   const RULES = STEPS.filter(s => s.type === "rule");
 
   const PROMPTS = [
-    { id: "meaning", short: "Judicial review", label: "Pick one case. Did the Court strike the law down or let it stand? Why?",
-      bank: ["Tinker", "Ewing", "Acton", "Simmons", "struck down", "let it stand", "judicial review"],
+    { id: "meaning", short: "Judicial review", label: "Pick one case. Was the law struck down or kept? Why?",
+      bank: ["Tinker", "Ewing", "Acton", "Simmons", "struck down", "kept", "judicial review"],
       stem: "In the ___ case, the Court ___ the law because ___.", min: 40, newWords: 3,
       mustAll: [["tinker", "ewing", "acton", "vernonia", "simmons", "roper"], ["struck", "strike", "stand", "stood", "stay", "upheld", "uphold", "overturn", "cancel", "threw", "kept", "keep", "allowed", "allow", "ended", "banned"]],
       mustMsg: "Name the case (Tinker, Ewing, Acton, or Simmons) and say if the law was struck down or left standing." }
@@ -430,7 +431,7 @@
     return t;
   };
   const trustWord = n => n <= 2 ? "Furious" : n <= 4 ? "Shaky" : n <= 7 ? "Steady" : "Loved";
-  const SC = { agreed: { word: "MAJORITY", mark: "✓", long: "You voted with the majority" }, reversed: { word: "OUTVOTED", mark: "✗", long: "The other justices outvoted you" }, toofar: { word: "WENT TOO FAR", mark: "⚠", long: "You went further than the real Court" } };
+  const SC = { agreed: { word: "MAJORITY", mark: "✓", long: "You voted with the majority" }, reversed: { word: "OUTVOTED", mark: "✗", long: "The other judges outvoted you" }, toofar: { word: "WENT TOO FAR", mark: "⚠", long: "You went too far" } };
 
   // ---------------- HUD ----------------
   function hud() {
@@ -517,15 +518,15 @@
       <div class="tcopy">
         <p class="tk">Government · Unit 3 · Day 2 · Level 2: Strike It Down</p>
         <h1>The Appeal</h1>
-        <p class="recap">You got promoted. You sit on the U.S. Supreme Court now, and four laws are on trial.</p>
-        <p class="missed">Day 1: you checked if people got a fair process. Today: you check the laws themselves.</p>
-        <ul class="how"><li><span>1</span>Check your judge</li><li><span>2</span>Read each case file and the Constitution's words</li><li><span>3</span>Vote: strike the law down or let it stand. Then see the real vote</li></ul>
-        <p class="tline">🎯 Today: judicial review. How courts can throw out a law that breaks the Constitution.</p>
+        <p class="recap">You got promoted to the Supreme Court. Four laws are on trial.</p>
+        <p class="missed">Day 1: was the trial fair? Today: is the law itself OK?</p>
+        <ul class="how"><li><span>1</span>Check your judge</li><li><span>2</span>Read the case</li><li><span>3</span>Vote. Then see the real vote</li></ul>
+        <p class="tline">🎯 Today: how courts can throw out a law.</p>
         <p class="tchips"><span>⏱️ 25–30 min</span><span>📁 4 real cases</span><span>🛡️ 7 checks</span><span>✏️ 1 short answer</span></p>
         <label for="nameBox">Your name (first name + last initial)</label>
         <div class="namerow"><input id="nameBox" maxlength="60" autocomplete="off" placeholder="Like Jordan M." value="${esc(pre || "")}"><button type="button" class="go big" id="startBtn">⚖️ Take your seat</button></div>
         <p id="introMsg" class="msg bad" role="status"></p>
-        <p class="src">The cases, the laws, the votes, and what happened next are real. Your seat on the Court, Kane, and the headlines are made up. The pictures are drawings, not photos of the real people. Standard: SS.9-12.Gov.8.</p>
+        <p class="src">The cases and votes are real. Kane and the headlines are made up. The pictures are drawings. Standard: SS.9-12.Gov.8.</p>
       </div></section>`;
     $("startBtn").onclick = () => {
       const fixed = window.classShortName ? window.classShortName($("nameBox").value) : $("nameBox").value.trim();
@@ -596,7 +597,7 @@
 
   // ---- Check ----
   function check(step) {
-    shell(step, `<p class="ask">${esc(step.ask)}</p><p class="warn">🔎 The answer is in the ${step.where} on this screen.</p><div class="replies" id="replies"></div><p class="msg" id="qmsg" role="status" aria-live="polite"></p><div id="after"></div>`);
+    shell(step, `<p class="ask">${esc(step.ask)}</p><p class="warn">🔎 Look at the ${step.where}.</p><div class="replies" id="replies"></div><p class="msg" id="qmsg" role="status" aria-live="polite"></p><div id="after"></div>`);
     if (st.done[step.id]) return solved(step, true);
     draw(step);
     if (lockLeft() > 0) { $("replies").querySelectorAll("button").forEach(x => x.disabled = true); runLock(st.lockMsg || step.hint, $("qmsg"), () => draw(step), lockLeft()); }
@@ -635,7 +636,7 @@
     const p = st.picks[step.id];
     if (p != null) return chosen(step, p, true);
     if (!step._order) step._order = shuffle(step.cards.map((c, i) => i));
-    $("dbox").innerHTML = `<div class="cards">${step._order.map(i => { const c = step.cards[i]; return `<button type="button" class="dcard" data-i="${i}"><span class="di" aria-hidden="true">${c.icon}</span><span class="dtx"><b>${esc(c.t)}</b><span class="dline">${esc(c.line)}</span></span></button>`; }).join("")}</div><p class="peek">📰 Your vote moves public trust. 🏛️ Then you see how the real Court voted. You can't take it back.</p>`;
+    $("dbox").innerHTML = `<div class="cards">${step._order.map(i => { const c = step.cards[i]; return `<button type="button" class="dcard" data-i="${i}"><span class="di" aria-hidden="true">${c.icon}</span><span class="dtx"><b>${esc(c.t)}</b><span class="dline">${esc(c.line)}</span></span></button>`; }).join("")}</div><p class="peek">📰 Your vote moves public trust. No take-backs.</p>`;
     $("dbox").querySelectorAll(".dcard").forEach(b => b.onclick = () => {
       const i = +b.dataset.i, c = step.cards[i];
       st.picks[step.id] = i;
@@ -649,7 +650,7 @@
     const c = step.cards[i];
     const ask = document.querySelector("#play .ask"); if (ask) ask.remove();
     $("dbox").innerHTML = `<div class="chosen"><span class="di" aria-hidden="true">${c.icon}</span><span><b>Your vote: ${esc(c.t)}</b><br><span class="dline">${esc(c.res)}</span></span></div>
-      <div class="paper"><span class="ptag">Next morning's headline (made up)</span><p class="phead">${esc(c.head)}</p><p class="pfx">${fxChip(c.fx)} Public trust is now ${st.trust} of 10.</p></div>
+      <div class="paper"><span class="ptag">Tomorrow's headline (made up)</span><p class="phead">${esc(c.head)}</p><p class="pfx">${fxChip(c.fx)} Public trust: ${st.trust} of 10.</p></div>
       <div id="scBox"></div>`;
     if (st.opened[step.id]) return opened(step, c, true);
     const b = document.createElement("button"); b.type = "button"; b.className = "go seal"; b.id = "openBtn";
@@ -664,11 +665,12 @@
         <span class="rtab">THE REAL VOTE</span>
         ${docCard(cs)}
         <div class="rstamp">${sc.mark} ${sc.word}${c.sc === "toofar" ? "" : " " + esc(step.vote)}</div>
-        <p class="rlong">${sc.long}.${c.sc === "toofar" && step.tooFar ? " " + esc(step.tooFar) : ""}</p>
+        <p class="rlong">${c.sc === "toofar" && step.tooFar ? esc(step.tooFar) : sc.long + "."}</p>
         <p class="rsec">What really happened</p>
         ${step.real.map(r => ln(r[0], r[1])).join("")}
       </div>`;
     $("scBox").innerHTML = kane("“" + esc(c.kane) + "”");
+    const sd = document.querySelector("#scene .sides"); if (sd) sd.remove();   // less to read once they have ruled
     if (!quiet) stamp(sc.word, c.sc === "agreed" ? "" : "bad");
     addNext(step, step.reveal, true);
   }
@@ -678,11 +680,11 @@
     const t = tally();
     let e;
     const N = RULES.length;
-    if (t.toofar >= 2) e = { key: "Off the Rails", out: "Went too far twice", icon: "🚧", cls: "low", text: "Twice you went further than the case asked. A court answers the question in front of it. It doesn't get to rewrite everything." };
-    else if (st.trust <= 2) e = { key: "The Court Nobody Trusts", out: "Lost the public's trust", icon: "🏚️", cls: "low", text: "You can't be voted out. But the Court has no army and no police. Its rulings only work if people respect them, and right now they don't." };
-    else if (t.agreed >= 3) e = { key: "In the Majority", out: "Voted with the majority " + t.agreed + " of " + N, icon: "🏛️", cls: "best", text: "You voted with the winning side " + t.agreed + " of " + N + " times. Those votes are now the law in all 50 states." };
-    else if (t.reversed >= 3) e = { key: "The Great Dissenter", out: "Outvoted " + t.reversed + " of " + N, icon: "✍️", cls: "mid", text: "You lost most of your votes. Losing votes still matter. The winning side in the death penalty case started as the losing side in 1989." };
-    else e = { key: "Split Bench", out: "Mixed record", icon: "⚖️", cls: "mid", text: "Some days you had five votes. Some days you didn't. That is life on a court of nine." };
+    if (t.toofar >= 2) e = { key: "Off the Rails", out: "Went too far twice", icon: "🚧", cls: "low", text: "You went too far twice. A court answers the question it was asked. Nothing more." };
+    else if (st.trust <= 2) e = { key: "The Court Nobody Trusts", out: "Lost the public's trust", icon: "🏚️", cls: "low", text: "You can't be voted out. But the Court has no army. People have to trust it. Right now they don't." };
+    else if (t.agreed >= 3) e = { key: "In the Majority", out: "Voted with the majority " + t.agreed + " of " + N, icon: "🏛️", cls: "best", text: "You were on the winning side " + t.agreed + " of " + N + " times. Those votes are now the law." };
+    else if (t.reversed >= 3) e = { key: "Outvoted Again", out: "Outvoted " + t.reversed + " of " + N, icon: "✍️", cls: "mid", text: "You lost most votes. Losing votes still matter. Sometimes they win years later." };
+    else e = { key: "Split Court", out: "Mixed record", icon: "⚖️", cls: "mid", text: "Some days you had five votes. Some days you didn't." };
     const causes = RULES.map(s => { const c = cardOf(s); return c ? c.cause + " → " + SC[c.sc].word.toLowerCase() + " (trust " + (c.fx > 0 ? "+" : c.fx < 0 ? "−" : "±") + Math.abs(c.fx) + ")" : null; }).filter(Boolean);
     e.causes = causes;
     e.tally = t;
@@ -692,11 +694,11 @@
 
   function endingStep(step) {
     const e = ending();
-    const rows = RULES.map((s, i) => { const c = cardOf(s); return `<div class="recrow ${c ? c.sc : ""}"><span class="rc">${CASES[i].icon} ${CASES[i].key}</span><span class="rr">${c ? esc(c.t) : "No ruling"}</span><span class="rs">${c ? SC[c.sc].mark + " " + SC[c.sc].word : "—"}</span></div>`; }).join("");
+    const rows = RULES.map((s, i) => { const c = cardOf(s); return `<div class="recrow ${c ? c.sc : ""}"><span class="rc">${CASES[i].icon} ${CASES[i].key}</span><span class="rr">${c ? esc(c.t) : "No ruling"}</span><span class="rs">${c ? SC[c.sc].mark + " " + SC[c.sc].word : "—"}</span>${c ? fxChip(c.fx) : ""}</div>`; }).join("");
     shell(step,
-      `${reveal("<b>Judicial review</b> is the courts' power to strike down laws that break the Constitution. It is not written in the Constitution. The Court claimed it in <b>Marbury v. Madison</b> (1803).")}<p class="endm">${recordLine()}</p><div id="after"></div>`,
+      `${reveal("<b>Judicial review</b>: courts can strike down laws that break the Constitution. The Court claimed this power in 1803, in <b>Marbury v. Madison</b>.")}<p class="endm">${recordLine()}</p><div id="after"></div>`,
       { left: court(-1, st.name, { look: st.judge }) + `<div class="endcard ${e.cls}"><span class="eicon" aria-hidden="true">${e.icon}</span><h2>${esc(e.key)}</h2><p>${esc(e.text)}</p></div>`,
-        mid: `<div class="cause"><p class="ch">Your record</p>${rows}<p class="ch c2">Caused by</p><ul>${e.causes.map(c => `<li>${esc(c)}</li>`).join("")}</ul></div>` });
+        mid: `<div class="cause"><p class="ch">Your record · each ruling moved public trust</p>${rows}</div>` });
     const b = nextBtn(step); b.textContent = "✏️ One short answer ▶";
     $("after").appendChild(b);
   }
