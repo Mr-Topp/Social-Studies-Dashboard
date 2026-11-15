@@ -8,6 +8,7 @@
 <style>
 .flip-stage img{min-height:0}
 .qcol{padding-bottom:100px}
+.qwait{margin:6px 0;font-weight:800;color:#8a5a00}.qwait:empty{display:none}
 .wordhelp{margin:6px 0 0}.wordhelp summary{cursor:pointer;font-weight:750;color:var(--navy)}
 .intro-line{font-size:1.02rem;margin:0 0 10px}
 .words{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0 10px;padding:0;list-style:none}
@@ -73,7 +74,7 @@ body.reading-now .choices{opacity:.45;pointer-events:none}
 <div class="flip-big" id="flipBig" hidden role="dialog" aria-label="Bigger page"><button type="button" class="quiet" id="flipBigClose">✕ Close</button><img id="flipBigImg" alt="Bigger view of the current page"></div>
 <script>
 window.FLIP={
-title:"Pages from two Cold War comics, 1960 and 1961",prefix:"wh-u2-d1-coldwar-",pages:4,readSeconds:8,lockSeconds:8,
+title:"Pages from two Cold War comics, 1960 and 1961",prefix:"wh-u2-d1-coldwar-",pages:4,readSeconds:30,lockSeconds:20,lockSteps:[20,30,40],qReadWps:2.5,qMin:10,qDuringRead:true,
 alts:[
 "World War II. Stalin says he will pretend to shut down the Comintern so Americans trust him. The U.S. ships trucks and supplies to Russia: by war's end, more than 11 billion dollars in war goods. Pearl Harbor brings the U.S. into the war, and Russia becomes an ally. Maps show the German attack on Russia in 1942 and the German retreat in 1943. Churchill and Roosevelt plan the invasion of Europe.",
 "Stalin's goal is world domination. At a wartime meeting, Roosevelt and Churchill ask Stalin to promise that freed countries will form democratic governments. Stalin says: You have my promise, but only if Russia gets the veto power in the new United Nations. Then Stalin breaks his promise: Soviet tanks stay, and people say the Reds will force a red government on them. The USSR uses its veto again and again. By the end of 1947 East Germany, Poland, Hungary, Czechoslovakia, Romania, Bulgaria, Albania, Yugoslavia and North Korea are under communist control. A hand from Moscow pulls strings on captive countries.",
@@ -94,17 +95,17 @@ parts:[
 "check":{
 "page":1,
 "tag":"Reading check · Reader page 1",
-"q":"Read the top left panel on reader page 1. The comic says Stalin pretended to shut down the Comintern (the group that spread communism to other countries) so Americans would trust him. What is the comic trying to show?",
-"right":"Even while they were allies, the two sides didn't trust each other.",
-"wrong":["The U.S. and the USSR became best friends during the war.","Stalin gave up on communism to help America.","Americans asked Stalin to spread communism faster."],
-"why":"✓ Correct. Stalin really did shut down the Comintern in 1943 to calm his allies. Suspicion on both sides was there the whole war. It just stayed quiet while they had a common enemy.",
-"hint":"Read the first panel with Stalin. Why does he want Americans to trust him?"
+"q":"Read the top left panel on reader page 1. The comic says Stalin pretended to shut down the Comintern (the group that spread communism to other countries) so Americans would trust him and keep sending supplies. What was Stalin really after?",
+"right":"U.S. help to beat Hitler, while keeping his plan to spread communism.",
+"wrong":["Peace with America, so he gave up on communism for good.","A U.S.-style democracy for Russia once the war was over.","A way to keep the U.S. out of World War II completely."],
+"why":"✓ Correct. Stalin really did shut down the Comintern in 1943 to calm his allies. Stalin was pushing the USSR's goals: get American help now, and spread communism later.",
+"hint":"Read the first panel with Stalin. What does he want from Americans, and what is he hiding?"
 },
 "check2":{
 "tag":"Fact-check · Use the fact file",
-"q":"<span class=\"declass file\"><b>Fact file · Strange allies</b><span class=\"line\"><i>The enemy:</i> Hitler's Germany attacked the Soviet Union in June 1941. Japan attacked the U.S. that December.</span><span class=\"line\"><i>The cost:</i> About 27 million Soviet people died in World War II, more than any other country.</span><span class=\"line\"><i>The trust:</i> Low. The U.S. was a democracy with private business. The USSR was a communist dictatorship. They had been rivals since 1917.</span></span>Why did these two very different countries fight on the same side?",
-"right":"They had the same enemy, Hitler's Germany.",
-"wrong":["They both wanted to spread communism around the world.","They had been close friends since 1917.","The Soviet Union was a democracy like the U.S."],
+"q":"<span class=\"declass file\"><b>Fact file · Strange allies</b><span class=\"line\"><i>The enemy:</i> Hitler's Germany attacked the Soviet Union in June 1941. Japan attacked the U.S. that December.</span><span class=\"line\"><i>The cost:</i> About 27 million Soviet people died in World War II, more than any other country.</span><span class=\"line\"><i>The trust:</i> Low. The U.S. was a democracy with private business. The USSR was a communist dictatorship. They had been rivals since 1917.</span></span>What goal did these two very different countries share that put them on the same side?",
+"right":"Beating Hitler's Germany, the enemy that attacked them both.",
+"wrong":["Spreading communism to every country in the world.","Building a democracy in the Soviet Union together.","Splitting Japan's colonies in Asia between them."],
 "why":"✓ Correct. \"The enemy of my enemy is my friend.\" Once Hitler was beaten, the thing holding them together was gone.",
 "hint":"Read the first line of the fact file. Who attacked both of them?"
 }
@@ -123,10 +124,11 @@ parts:[
 "why":"✓ Correct. In February 1945 at Yalta, Stalin promised free elections in Eastern Europe. Then Soviet troops stayed, and communist governments took over.",
 "hint":"Find the panel with the three leaders at a table."
 },
-"prompt":"The comic only shows the American side. Read the fact file. Why did Stalin say the USSR needed friendly governments in Eastern Europe? Do you think that was a good enough reason?",
-"stem":"<span class=\"declass file\"><b>Fact file · The Soviet side</b><span class=\"line\"><i>Invaded through Poland:</i> Germany invaded Russia through Poland in 1914 and again in 1941. Napoleon came that way in 1812.</span><span class=\"line\"><i>Stalin's goal:</i> a wall of friendly, communist countries (a \"buffer zone\") so it could never happen again.</span><span class=\"line\"><i>The result:</i> Poland's 1947 election was rigged. By 1948, communists ran all of Eastern Europe.</span></span>Write 1–2 sentences. Start like this: <i>Stalin wanted control of Eastern Europe because ___. I think this was / was not a good reason because ___.</i>",
-"placeholder":"Stalin wanted control of Eastern Europe because ___. I think this was / was not a good reason because ___.",
-"stemText":"Stalin wanted control of Eastern Europe because ___. I think this was / was not a good reason because ___."
+"prompt":"The comic only shows the American side. Read the fact file. Why did Stalin want control of Eastern Europe, and how did he take control?",
+"must":{"groups":[["invad","invasi","attack","buffer","safe","protect","friendly","wall","never happen","defen"],["rigg","election","vote","troop","army","soldier","forc","took over","take over"]],"msg":"Use the fact file: give Stalin's reason (like the invasions through Poland) AND how he took control (like the rigged election)."},
+"stem":"<span class=\"declass file\"><b>Fact file · The Soviet side</b><span class=\"line\"><i>Invaded through Poland:</i> Germany invaded Russia through Poland in 1914 and again in 1941. Napoleon came that way in 1812.</span><span class=\"line\"><i>Stalin's goal:</i> a wall of friendly, communist countries (a \"buffer zone\") so it could never happen again.</span><span class=\"line\"><i>The result:</i> Poland's 1947 election was rigged. By 1948, communists ran all of Eastern Europe.</span></span>Write 1–2 sentences. Start like this: <i>Stalin wanted control of Eastern Europe because ___. He took control by ___.</i>",
+"placeholder":"Stalin wanted control of Eastern Europe because ___. He took control by ___.",
+"stemText":"Stalin wanted control of Eastern Europe because ___. He took control by ___."
 },
 {
 "short":"Iron Curtain",
@@ -136,9 +138,9 @@ parts:[
 "check":{
 "page":3,
 "tag":"Reading check · Reader page 3",
-"q":"Look at the cover on reader page 3. How does the artist show Poland, Hungary, East Germany, and the other countries?",
-"right":"As gravestones in front of a red communist iceberg.",
-"wrong":["As happy ships sailing beside the USA.","As islands of freedom in the ocean.","As flags flying over the United Nations."],
+"q":"Look at the cover on reader page 3. The gravestones are labeled Poland, Hungary, East Germany, and more. What change after World War II is the artist showing?",
+"right":"These countries fell under communist rule after the war.",
+"wrong":["These countries were destroyed by American bombs.","These countries became free democracies after the war.","These countries all joined the U.S. side in NATO."],
 "why":"✓ Correct. Gravestones say: these countries are dead. That's the artist's view, and it's propaganda. The people were still there, living under communist rule.",
 "hint":"Look at the white stone shapes at the bottom of the cover."
 },
@@ -166,29 +168,31 @@ parts:[
 "hint":"Compare the two bottom panels. Who is helping each side?"
 },
 "prompt":"Pick ONE from the fact file: the Marshall Plan, the Berlin Airlift, or NATO. How did it try to contain communism?",
+"must":{"groups":[["marshall","airlift","nato"],["money","$","billion","rebuild","food","coal","flight","plane","fly","flew","attack on one","defend","protect","promise"," ally"," allies","hungry","poor"]],"msg":"Name the Marshall Plan, the Berlin Airlift, or NATO, and use a fact from the fact file about what it did."},
 "stem":"<span class=\"declass file\"><b>Fact file · Containment, 1947–1949</b><span class=\"line\"><i>Marshall Plan, 1948:</i> The U.S. gave about $13 billion to rebuild Western Europe, so poor, hungry people wouldn't turn to communism. The USSR said no for Eastern Europe.</span><span class=\"line\"><i>Berlin Airlift, 1948–49:</i> The USSR blocked every road and train into West Berlin. For 11 months, U.S. and British planes flew in food and coal, over 270,000 flights. The USSR gave up.</span><span class=\"line\"><i>NATO, 1949:</i> The U.S., Canada, and Western Europe promised: an attack on one is an attack on all. In 1955 the USSR made its own team, the Warsaw Pact.</span></span>Write 1–2 sentences. Start like this: <i>The ___ tried to stop communism by ___.</i>",
 "placeholder":"The ___ tried to stop communism by ___.",
 "stemText":"The ___ tried to stop communism by ___."
 }
 ],
-questions:["(Check) Why were the U.S. and the USSR allies?","Why did Stalin want control of Eastern Europe? Was it a good reason?","(Check) The Iron Curtain: which country was in Asia?","Pick the Marshall Plan, the Berlin Airlift, or NATO. How did it try to contain communism?"],
+questions:["(Check) What goal put the U.S. and the USSR on the same side?","Why did Stalin want control of Eastern Europe, and how did he take control?","(Check) The Iron Curtain: which country was in Asia?","Pick the Marshall Plan, the Berlin Airlift, or NATO. How did it try to contain communism?"],
 validate(s){if(!s.name)return{text:"Type your first name + last initial (like Jordan M.) at the top of the questions.",focus:"studentName"};
  const mc=[1,2,3,4].find(i=>!s.checkDone(i));if(mc)return{text:"Get the check right for part "+mc+" first.",part:mc};
  const m2=[1,3].find(i=>!s.check2Done(i));if(m2)return{text:"Get the second check right for part "+m2+" first.",part:m2};
  const ma=[2,4].find(i=>!s.answer(i));if(ma)return{text:"Write your answer for part "+ma+" before turning in.",part:ma,focus:"answer"+ma};
+ for(const i of [2,4]){const f=s.mustProblem&&s.mustProblem(i);if(f)return{text:"Part "+i+": "+f,part:i,focus:"answer"+i}}
  for(const i of [2,4]){const j=window.classJunkStop&&window.classJunkStop(document.getElementById("answer"+i));if(j)return{text:"Part "+i+": "+j,part:i}}return null},
 buildAnswers(s){const t1=i=>(s.tries(i)||1),t2=i=>(s.tries2(i)||1);
  const first=[1,2,3,4].filter(i=>t1(i)===1).length+[1,3].filter(i=>t2(i)===1).length;
  const a={Standard:"SS.9-12.WH.34, SS.9-12.WH.35, SS.9-12.WH.37","First-try correct":first+" of 6"};
  const ft=n=>n===1?"Right on first try":"Right after "+(n-1)+" wrong";
- a["[WH.34] "+this.questions[0]]=ft(t2(1));
+ a["[WH.37] "+this.questions[0]]=ft(t2(1));
  a["[WH.35, WH.37] "+this.questions[1]]=s.answer(2);
  a["[WH.34] "+this.questions[2]]=ft(t2(3));
  a["[WH.37, WH.34] "+this.questions[3]]=s.answer(4);
  a["Reading checks"]="6 of 6 correct · tries: "+[1,2,3,4].map(t1).join(", ")+" · second checks: "+t2(1)+", "+t2(3);return a}
 };
 </script>
-<script src="../../shared/flip-reader.js?v=3alt"></script>
+<script src="../../shared/flip-reader.js?v=5overlap"></script>
 <script>
 // Choices wait for the read timer, and "Not quite" scrolls into view (same as U.S. History Unit 2 Day 7).
 (function(){
