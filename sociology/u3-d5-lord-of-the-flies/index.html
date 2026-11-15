@@ -3,7 +3,10 @@
 <title>Lord of the Flies, Retold (Reading) | Sociology Unit 3 Day 5</title>
 <meta name="description" content="The story of Lord of the Flies, retold as a short illustrated book. Use today's group ideas to explain how the boys split into us and them.">
 <link rel="stylesheet" href="../u3-engine/engine.css?v=20261115c">
-<style>body{--a:#2c7a4b;--a2:#e0f4e7;--a3:#17482a}</style>
+<style>body{--a:#2c7a4b;--a2:#e0f4e7;--a3:#17482a}
+.bookpage .words{background:#eef7f1;border:2px solid #b9dcc6;border-radius:12px;padding:8px 12px;margin:0 0 12px;font:.95rem/1.45 system-ui,sans-serif;color:#1d2b22}
+.bookpage .words .wt{display:block;font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--a3);margin-bottom:3px}
+.bookpage .words .wd{margin:2px 0}.bookpage .words .wd b{color:var(--a3)}</style>
 <script src="../../shared/assignments.js?v=20261105fb1"></script>
 <script src="../../shared/turnin.js?v=20261105fb1"></script>
 <script src="../../shared/lang.js?v=20261103c"></script>
@@ -14,48 +17,65 @@
 // real images from online (not AI-made). William Golding's novel (1954) and Aimée de Jongh's graphic novel (2024)
 // are copyrighted with no free copy, so the plot is retold here in plain words (no text or art copied), and every
 // picture is a real photo from Wikimedia Commons with its credit and license under it.
-// Plot follows Golding: plane crash, conch, Ralph elected, Jack's choir becomes hunters; face paint; the twins leave
-// the fire to hunt and a ship passes; Jack's failed vote, his own tribe at Castle Rock; Simon killed in the storm
-// dance; Piggy's glasses stolen and Piggy killed; the island set on fire; the naval officer.
-// Ideas from the Day 5 slides: group size (Simmel), groups changing behavior, in-/out-groups (Sumner),
-// groupthink, Robbers Cave and superordinate goals (Sherif). Each question has a "prove it" tap.
+// Plot follows Golding: plane crash, conch, Ralph elected, Jack's choir becomes hunters; the first fire; the huts-vs-hunting
+// quarrel; face paint; the twins leave the fire to hunt and a ship passes; the "beast"; Jack's failed vote, his own tribe at
+// Castle Rock; Simon killed in the storm dance; Piggy's glasses stolen; Piggy killed; the island set on fire; the naval officer.
+// Each chapter here lists which of Golding's 12 chapters it covers, so it lines up with a real copy of the novel.
+// 11/15/26 rework: longer, more book-like chapters; questions swapped to match BOTH Day 5 decks (part 1 + "us vs. them"):
+// secondary groups, Simmel group size, Robbers Cave competition, prejudice vs. discrimination, reference groups (Soc.10),
+// in-/out-groups, groupthink, superordinate goals.
 const IMG = (file, title, by, lic) => ({ src: "https://commons.wikimedia.org/wiki/Special:FilePath/" + encodeURIComponent(file) + "?width=1000", page: "https://commons.wikimedia.org/wiki/File:" + encodeURIComponent(file), title, by, lic });
 const CH = [
-  { n: 1, t: "The Shell", img: IMG("Mvey0290.jpg", "A small Pacific island from the air", "NOAA (Ben Mieremet)", "Public domain"),
-    p: [["During a war, a plane carrying a group of British schoolboys crashes on a tropical island.", "There are no grown-ups anywhere.", "The oldest boys are about twelve."],
-        ["A fair-haired boy named Ralph and a heavy boy with glasses, called Piggy, find a big shell on the beach.", "It is a conch.", "Ralph blows it like a horn, and boys come running out of the trees from all over the island.", "There are dozens of boys, and everyone is talking at once."],
-        ["A group of choir boys marches up in black cloaks, led by a tough boy named Jack.", "The boys vote, and Ralph becomes chief.", "Jack wanted to be chief, so Ralph puts him in charge of his choir, who will be the hunters.", "They make one rule: whoever holds the conch gets to speak at meetings."]] },
-  { n: 2, t: "Painted Faces", img: IMG("Sus_scrofa_-Whipsnade_Zoo,_Bedfordshire,_England_-adult_female-8a.jpg", "A wild pig", "Spencer Wright", "CC BY 2.0"),
-    p: [["Ralph wants the boys to build shelters and keep a smoke fire burning on the mountain, so passing ships can see them.", "They light the first fire with Piggy's glasses."],
-        ["Jack cares more about hunting the wild pigs that live on the island.", "One day he smears colored clay and charcoal across his face.", "He looks at his reflection in the water and sees a stranger."],
+  { n: 1, t: "The Shell", g: "1", w: [["conch", "a big sea shell you can blow like a horn"], ["lagoon", "calm, shallow water closed off from the open ocean"], ["secondary group", "a group built around a job or goal, where people act through roles like leader and member"]], img: IMG("Mvey0290.jpg", "A small Pacific island from the air", "NOAA (Ben Mieremet)", "Public domain"),
+    p: [["During a war, a plane carrying a group of British schoolboys is shot down over the ocean.", "It crashes on a small tropical island.", "There are no grown-ups anywhere.", "The oldest boys are about twelve, and the youngest are about six."],
+        ["A fair-haired boy named Ralph climbs out of the jungle onto the beach.", "A heavy boy with thick glasses follows him.", "He tells Ralph that kids at school called him Piggy, and he asks Ralph not to tell anyone.", "Ralph tells everyone anyway, and the name sticks."],
+        ["In a lagoon, the two boys find a big, cream-colored shell.", "It is a conch.", "Piggy shows Ralph how to blow it like a horn.", "The sound booms across the island, and boys come running out of the trees from every direction.", "There are dozens of boys, and everyone is talking at once."],
+        ["Then a line of choir boys marches up the beach in matching black cloaks, two by two.", "They came to the island as a school choir with one job, singing, and they still follow their leader's orders.", "Their leader is a tall, tough boy named Jack."],
+        ["Jack says he should be chief because he is the head of the choir.", "The boys vote anyway, and Ralph wins, partly because he is the one holding the conch.", "To keep the peace, Ralph tells Jack the choir is still his.", "Jack decides they will be the hunters."],
+        ["The boys make their first rule: whoever holds the conch gets to speak at meetings, and no one can interrupt.", "Later, Jack finds a piglet caught in some vines.", "He raises his knife, but he freezes, and the piglet gets away.", "Jack swears that next time, he will not hold back."]] },
+  { n: 2, t: "Painted Faces", g: "2 to 4", w: [["signal fire", "a smoky fire made so a passing ship or plane will see it"], ["rivalry", "when two sides compete and each wants to win"], ["Robbers Cave", "a 1954 summer-camp study where two groups of boys turned into enemies once they had to compete"]], img: IMG("Sus_scrofa_-Whipsnade_Zoo,_Bedfordshire,_England_-adult_female-8a.jpg", "A wild pig", "Spencer Wright", "CC BY 2.0"),
+    p: [["Ralph has a plan.", "The boys will build shelters on the beach and keep a smoke fire burning on the mountain so passing ships can see them.", "They light the first fire by focusing sunlight through Piggy's glasses."],
+        ["At first, even Jack wants rules.", "He says they are English, and the English do things the right way, so they should act that way too."],
+        ["But the boys pile on too much wood.", "The fire races out of control and burns part of the forest.", "Afterward, one of the little kids is missing, and no one ever sees him again."],
+        ["Days go by.", "Ralph and a quiet boy named Simon are the only ones still building shelters.", "Everyone else would rather swim, play, or go hunting with Jack."],
+        ["Ralph and Jack start to fight over what matters most.", "Ralph wants the boys' time for shelters and the fire.", "Jack wants it for hunting and meat.", "Each one wants the other boys on his side, and only one of them can win."],
+        ["Jack still has not killed a pig.", "So he smears colored clay and black charcoal across his face to hide from them.", "He looks at his reflection in the water and sees a scary stranger."],
         ["Behind the paint, he no longer feels shy or ashamed.", "He laughs, dances, and acts wilder than ever.", "Soon the other hunters paint their faces too.", "They start to look, sound, and act like one group."]] },
-  { n: 3, t: "The Ship", img: IMG("Koh_Mak_(island),_Thailand,_Palms_on_the_beach.jpg", "A tropical beach", "Vyacheslav Argenberg", "CC BY 4.0"),
-    p: [["Jack takes the hunters on a hunt, including the twins who were supposed to watch the fire.", "While they are gone, the fire goes out."],
-        ["Then Ralph sees smoke from a ship far out on the ocean.", "He races up the mountain, but there is no signal fire.", "The ship sails away without seeing them."],
-        ["The hunters come back cheering and chanting, carrying a dead pig.", "Ralph is furious.", "They had a chance to go home, and the hunters threw it away for a pig.", "Jack's hunters care most about their own group's win.", "Rescue, the goal that would help everyone, came second."]] },
-  { n: 4, t: "Two Tribes", img: IMG("(Ocean_view_from_Kauai_Island,_United_States)_-_DPLA_-_113107283a2e4c18a666d024f1f10319.jpg", "Rocky cliffs on an island", "Sherwin Carlquist", "CC BY 4.0"),
-    p: [["The boys start to fear a \"beast\" that might live on the island.", "Jack calls a meeting and asks the boys to vote Ralph out as chief.", "No one raises a hand."],
-        ["Embarrassed, Jack walks off into the forest and starts his own tribe.", "He promises hunting, meat, and fun, with no rules and no chores.", "One by one, boys sneak away to join him.", "His tribe camps at a rocky cliff they call Castle Rock."],
-        ["Now Ralph, Piggy, and the few boys left with them are \"the others.\"", "Jack's tribe treats them like rivals to beat, not friends to help."]] },
-  { n: 5, t: "The Storm", img: IMG("Ficus_watkinsiana_canopy_complex_notophyll_vine_forest_Victoria_Park_Nature_Reserve_Alstonville_NSW_P1050669.jpg", "A thick rainforest", "John Robert McPherson", "CC BY-SA 4.0"),
-    p: [["One stormy night, Jack's tribe throws a feast.", "Even Ralph and Piggy come for the meat."],
-        ["As thunder rolls, the boys form a circle and dance, chanting about killing the beast.", "Ralph and Piggy join in at the edge of the circle."],
-        ["Simon, a quiet boy, has found out that the \"beast\" is not real.", "He runs out of the dark forest to tell them.", "In the darkness and the noise, the crowd thinks he is the beast.", "The boys rush at him and kill him.", "No one stops to think, and no one steps away from the group."],
-        ["The next day, Ralph and Piggy can barely talk about what they did."]] },
-  { n: 6, t: "Rescue", img: IMG("Chalk_Mountain_Fire_junipers_burning_at_night.jpg", "A forest fire at night", "National Interagency Fire Center", "Public domain"),
-    p: [["Jack's tribe steals Piggy's glasses so they can make fire for themselves.", "When Ralph and Piggy go to get them back, the fight turns deadly, and Piggy is killed."],
-        ["Then the hunters chase Ralph across the island.", "They set the forest on fire to smoke him out.", "Ralph runs onto the beach and falls at the feet of a naval officer.", "A ship saw the giant fire."],
-        ["The officer stares at the painted, dirty boys holding sharp sticks.", "He says he expected British boys to act better than this.", "Ralph starts to cry for everything they lost."],
+  { n: 3, t: "The Ship", g: "4", w: [["prejudice", "an unfair belief about someone because of a group they're in or how they look (a thought)"], ["discrimination", "treating someone unfairly because of that belief (an action)"], ["asthma", "a lung problem that makes it hard to breathe"]], img: IMG("Koh_Mak_(island),_Thailand,_Palms_on_the_beach.jpg", "A tropical beach", "Vyacheslav Argenberg", "CC BY 4.0"),
+    p: [["Jack takes the hunters on a big hunt.", "He even takes the twins, Sam and Eric, who were supposed to watch the fire.", "While they are gone, the fire goes out."],
+        ["Then Ralph spots a thin line of smoke far out on the ocean.", "It is a ship.", "He races up the mountain with Piggy stumbling behind him, but there is no signal fire.", "The ship sails away without seeing them."],
+        ["The hunters come back chanting, with their faces painted, carrying a dead pig on a pole.", "Jack is bursting with pride about his first kill.", "Ralph only says that they let the fire go out."],
+        ["The bigger boys have never really listened to Piggy.", "They think he is weak and useless because he is fat, wears glasses, and has asthma.", "So they leave him out of the hunts, laugh when he talks, and tell him to shut up, even when he holds the conch."],
+        ["Piggy tells Jack off.", "Jack gets angry, hits Piggy, and his glasses fly off.", "One of the lenses breaks.", "Now Piggy can only see well out of one eye."],
+        ["They had a chance to go home, and the hunters threw it away for a pig.", "Jack's hunters care most about their own group's win.", "Rescue, the goal that would help everyone, came second."]] },
+  { n: 4, t: "Two Tribes", g: "5 to 8", w: [["out-group", "a group you don't belong to and may compete with: \"them\""], ["reference group", "a group you measure yourself by, even if you're not in it"], ["parachute", "a big cloth that lets a person float down from a plane"]], img: IMG("(Ocean_view_from_Kauai_Island,_United_States)_-_DPLA_-_113107283a2e4c18a666d024f1f10319.jpg", "Rocky cliffs on an island", "Sherwin Carlquist", "CC BY 4.0"),
+    p: [["The little kids start having nightmares about a \"beast\" that lives on the island.", "Ralph calls a meeting to talk about the rules, but the meeting falls apart.", "Jack yells that the rules don't matter, and boys run off whooping into the dark."],
+        ["Piggy is upset.", "He keeps asking what grown-ups would think if they could see the boys now.", "He tries to act the way he believes grown-ups would, even though he is not one."],
+        ["One night, the twins see something huge and dark on the mountaintop.", "It is really a dead pilot, still hanging in his parachute, but in the dark they think it is the beast.", "Now even the big boys are scared."],
+        ["Jack calls a meeting and asks the boys to vote Ralph out as chief.", "No one raises a hand.", "Embarrassed and crying with anger, Jack walks off into the forest to start his own tribe."],
+        ["Jack promises hunting, meat, and fun, with no rules and no chores.", "One by one, boys sneak away to join him.", "His tribe camps at a rocky cliff they call Castle Rock.", "They kill a pig and leave its head on a stick as a gift for the beast."],
+        ["That night, painted hunters run into Ralph's camp, grab burning sticks from his fire, and invite everyone to come eat meat.", "Now Ralph, Piggy, and the few boys left with them are \"the others.\"", "Jack's tribe treats them like rivals to beat, not friends to help."]] },
+  { n: 5, t: "The Storm", g: "9", w: [["groupthink", "when a group wants to agree so badly that no one questions a bad idea"], ["feast", "a big meal for a lot of people"], ["tide", "the ocean rising and falling up the beach each day"]], img: IMG("Ficus_watkinsiana_canopy_complex_notophyll_vine_forest_Victoria_Park_Nature_Reserve_Alstonville_NSW_P1050669.jpg", "A thick rainforest", "John Robert McPherson", "CC BY-SA 4.0"),
+    p: [["Simon goes up the mountain alone.", "He finds the \"beast\" and sees that it is only the dead pilot, flapping in the wind.", "He frees the body from the tangled lines and heads down to tell the others the truth."],
+        ["Meanwhile, Jack's tribe throws a feast on the beach.", "Even Ralph and Piggy come for the meat.", "Jack sits like a king, painted, and asks who will join his tribe."],
+        ["A storm rolls in.", "As thunder cracks, the boys form a circle and dance, chanting about killing the beast.", "Ralph and Piggy join in at the edge of the circle."],
+        ["Simon stumbles out of the dark forest, trying to shout the news.", "In the darkness and the noise, the crowd thinks he is the beast.", "The boys rush at him and kill him.", "No one stops to think, and no one steps away from the group."],
+        ["The tide carries Simon's body out to sea.", "The next day, Ralph and Piggy can barely talk about what they did.", "Piggy keeps saying it was an accident."]] },
+  { n: 6, t: "Rescue", g: "10 to 12", w: [["naval officer", "a leader in a country's navy, the military at sea"], ["boulder", "a huge rock"], ["superordinate goal", "a goal both groups need that neither one can reach alone"]], img: IMG("Chalk_Mountain_Fire_junipers_burning_at_night.jpg", "A forest fire at night", "National Interagency Fire Center", "Public domain"),
+    p: [["Only Ralph, Piggy, and the twins are left in Ralph's group.", "One night, Jack's hunters attack their shelter in the dark.", "They steal Piggy's glasses so they can make fire for themselves.", "Now Piggy is almost blind."],
+        ["Ralph, Piggy, and the twins walk to Castle Rock to get the glasses back.", "Piggy holds up the conch and asks the tribe which is better, rules or hunting and killing.", "A boy named Roger, high up on the rocks, pushes a huge boulder down.", "It hits Piggy, and he falls to his death.", "The conch smashes into a thousand pieces."],
+        ["The tribe grabs the twins and forces them to join.", "Then the hunters chase Ralph across the island like he is a pig.", "They set the forest on fire to smoke him out."],
+        ["Ralph runs onto the beach and falls at the feet of a naval officer.", "A ship saw the giant fire.", "The officer stares at the painted, dirty boys holding sharp sticks.", "He says he expected British boys to act better than this.", "Ralph starts to cry for Piggy and for everything they lost."],
         ["The boys had one goal that could have saved them all: keep the signal fire going so everyone could go home.", "In the end, rescue came from a fire set to hunt a boy."]] }
 ];
 function page(n, proof) {
   const c = CH[n - 1], i = c.img;
   const body = c.p.map((para, pi) => "<p>" + para.map((s, si) => [].concat(proof).includes(pi + "," + si) ? "[[" + s + "]]" : "{{" + s + "}}").join(" ") + "</p>").join("");
   return `<div class="bookpage"><figure><img src="${i.src}" alt="${i.title}" loading="lazy"><figcaption>Photo: ${i.title}. By ${i.by}, <a href="${i.page}" target="_blank" rel="noopener">${i.lic}, Wikimedia Commons</a>. (A real place or thing, not art from the book.)</figcaption></figure>
-    <p class="chap">Chapter ${c.n} of 6</p><h3>${c.t}</h3>${body}<p class="pg">— ${c.n} —</p></div>`;
+    <p class="chap">Chapter ${c.n} of 6 · the novel's chapter${c.g.includes(" ") ? "s" : ""} ${c.g}</p><h3>${c.t}</h3><div class="words"><b class="wt">📘 Words to know</b>${c.w.map(x => `<div class="wd"><b>${x[0]}</b>: ${x[1]}</div>`).join("")}</div>${body}<p class="pg">— ${c.n} —</p></div>`;
 }
 window.U3GAME = {
-  key: "soc-u3-d5-lord-of-the-flies-v2",
+  key: "soc-u3-d5-lord-of-the-flies-v3",
   pace: 230,
   assignmentId: "soc-u3-d5-lord-of-the-flies",
   title: "Sociology · Unit 3 · Day 5 · Lord of the Flies, Retold (Reading)",
@@ -66,50 +86,62 @@ window.U3GAME = {
   titleHtml: "LORD OF THE FLIES<small>the story, retold in six chapters</small>",
   hook: "A plane crashes. A group of boys lands on an island with no adults. Watch one group turn into two, and then into enemies.",
   chips: ["🐚 The conch", "🎨 Painted faces", "🔥 The fire", "⚔️ Two tribes"],
-  tiles: ["📖 <b>6</b> short chapters", "✓ <b>7</b> questions", "🔎 Prove every answer", "✍️ <b>1</b> short answer", "⏱ <b>30</b> min"],
-  book: "📖 This is the story of the novel <b>Lord of the Flies</b> by William Golding (1954), retold in plain words. The pictures are real photos, not art from the book. Heads up: some parts are violent.",
+  tiles: ["📖 <b>6</b> short chapters", "✓ <b>9</b> questions", "🔎 Prove every answer", "✍️ <b>1</b> short answer", "⏱ <b>40</b> min"],
+  book: "📖 This is the story of the novel <b>Lord of the Flies</b> by William Golding (1954), retold in plain words. Each chapter tells you which chapters of the real book it covers. The pictures are real photos, not art from the book. Heads up: some parts are violent.",
   goal: "Explain how groups change the way people act, and how \"us vs. them\" starts.",
   how: ["Read one chapter. It's short.", "Answer the question. Then prove it: tap the sentence on the page that shows it.", "Write one answer and turn it in."],
   startLabel: "Open the book",
   stepWord: "Step",
   steps: [
-    { kind: "q", id: "f1", label: "Ch. 1: the conch rule", std: "Soc.11", kicker: "Chapter 1", title: "The Shell", left: page(1, "2,3"),
-      tag: "From the page", q: "What is the conch rule at the boys' meetings?",
-      choices: ["Whoever holds the conch gets to speak.", "Whoever finds the conch becomes the chief.", "The conch is blown only when a ship is seen.", "Only the oldest boys may touch the conch."], answer: 0,
-      proof: "Tap the sentence that shows the rule.", proofHint: "Look for what the boys agree to about meetings.",
-      why: "Whoever holds the conch can talk. The conch is their first rule for keeping order.",
-      hint: "Reread the last sentence about the meetings." },
-    { kind: "q", id: "f2", label: "Ch. 1: Simmel, big groups need rules", std: "Soc.11", kicker: "Chapter 1 · Use the idea", title: "Why a chief?", left: page(1, "1,3"), samePage: true,
+    { kind: "q", id: "f1", label: "Ch. 1: the choir is a secondary group", std: "Soc.11", kicker: "Chapter 1", title: "The Shell", left: page(1, "3,1"),
+      tag: "Use the idea", q: "When Jack's choir lands on the island, what kind of group is it?",
+      choices: ["A secondary group: built around a job, with a leader giving orders", "A primary group: close friends who care about each other as people", "An aggregate: strangers in one place who never interact", "A category: people who share a trait but never meet"], answer: 0,
+      proof: "Tap the sentence that shows what holds the choir together.", proofHint: "Look for the choir's job and who they follow.",
+      why: "The choir came together for a task (singing) and works through roles (leader and members). That's a secondary group. Watch it change into something much stronger.",
+      hint: "Is the choir held together by close friendship, or by a job and a leader?" },
+    { kind: "q", id: "f2", label: "Ch. 1: Simmel, big groups need rules", std: "Soc.11", kicker: "Chapter 1 · Use the idea", title: "Why a chief?", left: page(1, "2,4"), samePage: true,
       tag: "Use the idea", q: "Georg Simmel studied group size. What problem do the chief and the conch rule solve for this group?",
       choices: ["Dozens of boys talking at once, no one in charge", "Not enough food to feed every boy on the island", "Not knowing which way a rescue ship would come", "No way to start a fire without Piggy's glasses"], answer: 0,
       proof: "Tap the sentence that shows this is a big group.", proofHint: "Find the sentence about how many boys there are.",
       why: "Dozens of boys all talking at once is chaos. Simmel said bigger groups need more rules and leaders to stay organized.",
       hint: "How many boys are on the island? Which part of Simmel's idea is about big groups?" },
-    { kind: "q", id: "f3", label: "Ch. 2: paint changes Jack", std: "Soc.10", kicker: "Chapter 2", title: "Painted Faces", left: page(2, ["2,0", "2,1"]),
-      tag: "Use the idea", q: "Behind the paint, Jack acts in ways he wouldn't before. What does this show about groups?",
-      choices: ["A group look can free people to act in new ways.", "People are born brave or shy and never change.", "Paint is a formal sanction for breaking a rule.", "Only adults can change how a group of kids acts."], answer: 0,
-      proof: "Tap the sentence that shows how the paint changes Jack.", proofHint: "Look at how Jack is different behind the paint.",
-      why: "The paint hides who he is. Freed from shame, he acts wilder, and soon the whole group does too.",
-      hint: "How does Jack act before the paint, and after it?" },
+    { kind: "q", id: "f3", label: "Ch. 2: competition starts a rivalry (Robbers Cave)", std: "Soc.11", kicker: "Chapter 2", title: "Painted Faces", left: page(2, "4,3"),
+      tag: "Use the idea", q: "At Robbers Cave, the Rattlers and Eagles turned on each other when they competed for prizes only one group could win. What starts the rivalry between Ralph and Jack?",
+      choices: ["They compete for the boys: shelters and fire, or hunting", "Piggy tells everyone to stop listening to Jack", "The boys vote to have two chiefs instead of one", "Jack's hunters came from a different school"], answer: 0,
+      proof: "Tap the sentence that shows only one of them can win.", proofHint: "Look at what Ralph and Jack each want from the other boys.",
+      why: "Ralph and Jack are fighting over the same prize: the other boys. Like at Robbers Cave, competition where only one side can win turns people into rivals.",
+      hint: "What do Ralph and Jack BOTH want that only one of them can have?" },
     { kind: "q", id: "f4", label: "Ch. 3: why the fire went out", std: "Soc.11", kicker: "Chapter 3", title: "The Ship", left: page(3, ["0,0", "0,1"]),
       tag: "From the page", q: "Why is the signal fire out when the ship passes?",
       choices: ["The boys on fire duty left to hunt a pig with Jack.", "A storm put it out while everyone was asleep.", "Piggy's glasses broke, so nobody could light it.", "Ralph told the boys to save the wood for night."], answer: 0,
       proof: "Tap the sentence that shows why the fire went out.", proofHint: "Who was supposed to watch the fire, and where did they go?",
       why: "The hunters chose the hunt over the fire. Their group's win beat the whole island's goal of rescue.",
       hint: "Where were the boys who were supposed to watch the fire?" },
-    { kind: "q", id: "f5", label: "Ch. 4: out-group", std: "Soc.11", kicker: "Chapter 4", title: "Two Tribes", left: page(4, "2,1"),
+    { kind: "q", id: "f4b", label: "Ch. 3: prejudice vs. discrimination", std: "Soc.11", kicker: "Chapter 3 · Use the idea", title: "How they treat Piggy", left: page(3, "3,2"), samePage: true,
+      tag: "Use the idea", q: "Prejudice is a belief. Discrimination is an action. Which one shows discrimination against Piggy?",
+      choices: ["They leave him out, laugh at him, and tell him to shut up.", "They think he is weak and useless because of how he looks.", "He lights the first fire with sunlight through his glasses.", "He keeps saying that Simon's death was an accident."], answer: 0,
+      proof: "Tap the sentence that shows what the boys DO to Piggy.", proofHint: "Find actions, not thoughts. What do the boys actually do?",
+      why: "Thinking Piggy is useless is prejudice (a belief). Leaving him out and shutting him down is discrimination (an action). The belief leads to the action.",
+      hint: "One choice is a thought in the boys' heads. Which one is something they actually do?" },
+    { kind: "q", id: "f5", label: "Ch. 4: out-group", std: "Soc.11", kicker: "Chapter 4", title: "Two Tribes", left: page(4, "5,2"),
       tag: "Use the idea", q: "After the split, how do Jack's hunters see Ralph's group?",
       choices: ["As an out-group: \"them,\" a group to compete with", "As their primary group: close, caring, long-lasting", "As a reference group they want to be just like", "As an aggregate: people they never even notice"], answer: 0,
       proof: "Tap the sentence that shows how Jack's tribe treats Ralph's group.", proofHint: "Look at how Jack's tribe acts toward Ralph's boys.",
       why: "Out-group. One island, two groups, and now it's \"us\" vs. \"them,\" just like Sumner described.",
       hint: "Do the hunters belong to Ralph's group anymore? How do they treat it?" },
-    { kind: "q", id: "f6", label: "Ch. 5: no one stops it", std: "Soc.11", kicker: "Chapter 5", title: "The Storm", left: page(5, "2,4"),
+    { kind: "q", id: "f5b", label: "Ch. 4: grown-ups as a reference group", std: "Soc.10", kicker: "Chapter 4 · Use the idea", title: "What would grown-ups think?", left: page(4, "1,2"), samePage: true,
+      tag: "Use the idea", q: "Piggy keeps judging the boys by what grown-ups would think. For Piggy, grown-ups are what kind of group?",
+      choices: ["A reference group: one he measures himself by, without being in it", "An out-group: \"them,\" a group he competes with and dislikes", "A primary group: the close friends he sees every day", "An aggregate: people in one place who never interact"], answer: 0,
+      proof: "Tap the sentence that shows Piggy measuring himself by grown-ups.", proofHint: "Look for how Piggy tries to act.",
+      why: "Piggy isn't a grown-up, but he uses grown-ups as the standard for how to act. That's a reference group, like a young player measuring her game against Caitlin Clark.",
+      hint: "Is Piggy part of the group of grown-ups? Does he want to beat them, or act like them?" },
+    { kind: "q", id: "f6", label: "Ch. 5: no one stops it (groupthink)", std: "Soc.11", kicker: "Chapter 5", title: "The Storm", left: page(5, "3,3"),
       tag: "Use the idea", q: "Why doesn't anyone stop the attack on Simon?",
       choices: ["Caught up in the group, no one wants to stand apart.", "The boys planned the attack days ahead of time.", "Simon broke the conch rule, so he was punished.", "Ralph ordered the hunters to go after Simon."], answer: 0,
       proof: "Tap the sentence that shows the group taking over.", proofHint: "Look at what the whole crowd does, not just one boy.",
-      why: "In the crowd and the chanting, no one breaks from the group. Groups can push people to do what they'd never do alone.",
+      why: "In the crowd and the chanting, no one breaks from the group. Like groupthink, going along with the group beats stopping to think.",
       hint: "Was this a plan, or did it happen in the middle of the crowd?" },
-    { kind: "q", id: "f7", label: "Ch. 6: shared goal (Robbers Cave)", std: "Soc.11", kicker: "Chapter 6", title: "Rescue", left: page(6, "3,0"),
+    { kind: "q", id: "f7", label: "Ch. 6: shared goal (Robbers Cave)", std: "Soc.11", kicker: "Chapter 6", title: "Rescue", left: page(6, "4,0"),
       tag: "Use the idea", q: "At Robbers Cave, Sherif ended a feud with shared goals that neither group could reach alone. Which island goal could have worked that way?",
       choices: ["Keeping the signal fire going so all could be rescued", "Letting the hunters compete to kill the most pigs", "Splitting the island between the two tribes for good", "Picking a new chief every time a vote went badly"], answer: 0,
       proof: "Tap the sentence that names the goal that could have saved them all.", proofHint: "Look for a goal every boy needed.",
@@ -120,7 +152,7 @@ window.U3GAME = {
     kicker: "The island", title: "How one group became two",
     html: () => `<div class="cards3">
         <div class="mini"><b>🐚 The conch</b><span>Big groups need rules and leaders</span></div>
-        <div class="mini"><b>🎨 The paint</b><span>Groups change how people act</span></div>
+        <div class="mini"><b>🐗 The hunt</b><span>Competing for one prize makes rivals</span></div>
         <div class="mini"><b>⚔️ The split</b><span>In-group vs. out-group</span></div>
         <div class="mini"><b>🔥 The fire</b><span>The shared goal they dropped</span></div></div>
       <p class="bigidea">Groups can make us loyal and brave. They can also make "them" look like enemies. <b>Shared goals pull people back together.</b></p>`
@@ -128,7 +160,7 @@ window.U3GAME = {
   write: {
     id: "w1", short: "How a group changed the boys + a shared goal", heading: "Explain the island",
     label: "Explain one way belonging to a group changed how the boys acted. Then name a shared goal that could have stopped the feud.",
-    help: "Use a chapter: the conch, the paint, the ship, the split, or the storm.",
+    help: "Use a chapter: The Shell, Painted Faces, The Ship, Two Tribes, The Storm, or Rescue.",
     stem: "Being part of ___ changed how the boys acted because ___. A shared goal that could have helped is ___.",
     min: 90, more: "Use a real moment from the story.",
     mustAll: [{ words: ["jack", "ralph", "piggy", "simon", "hunter", "tribe", "conch", "fire", "paint", "dance", "island"], msg: "Use a moment from the story. Name Jack, Ralph, the hunters, the conch, the fire, or the dance." },
