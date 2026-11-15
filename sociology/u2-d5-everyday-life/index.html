@@ -236,7 +236,7 @@ textarea{width:100%;font:inherit;font-size:16px;padding:8px;border:2px solid #cf
   const STEPS = [
     { k: "build", day: 0 }, { k: "sort", day: 1 }, { k: "norm", day: 1 }, { k: "name", day: 1 },
     { k: "feed", day: 2 }, { k: "tip", day: 2 }, { k: "mirror", day: 2 },
-    { k: "plan", day: 3 }, { k: "drops", day: 3 }, { k: "match", day: 3 },
+    { k: "plan", day: 3 }, { k: "drops", day: 3 }, { k: "match", day: 3 }, { k: "chris", day: 3 }, { k: "chrisq", day: 3 },
     { k: "chain", day: 4 }, { k: "rosie", day: 4 }, { k: "write", day: 5 }
   ];
   const DAYS = ["", "Friday", "Saturday", "Monday", "Thursday", "Wrap-up"];
@@ -271,6 +271,7 @@ textarea{width:100%;font:inherit;font-size:16px;padding:8px;border:2px solid #cf
     norm1: { q: "What goes in the first blank?", options: ["Norm", "Value", "Law", "Material culture"], hint: "It's an unwritten rule for how to act." },
     norm2: { q: "What goes in the second blank?", options: ["School pride", "Making money", "Staying safe", "Good grades"], hint: "What does the crowd care about at a home game?" },
     tip:   { q: "The tourist calls the waiter rude. That's…", options: ["Ethnocentrism: judging Japan by U.S. rules", "Relativism: seeing Japan by its own rules", "A law that Japan's government wrote", "Following Japan's norms like a local"], hint: "Whose rules is the tourist using to judge?", why: "He judged Japan by U.S. tipping rules. That's ethnocentrism." },
+    chris: { q: "The night Chris had nowhere to sleep, which institution met that need?", options: ["Religion: a church shelter gave them a bed", "Government: the IRS gave his money back", "Economy: his internship paid for a hotel", "Education: a school let them sleep there"], hint: "Look back at part 4 of Chris's night." },
     rosie: { q: "What does the chain show?", options: ["A change in one institution spread into the others", "Women's jobs went back to normal after the war", "Only the economy changed; families stayed the same", "Institutions change alone without touching others"], hint: "Look at the colors on your chain. How many institutions changed?", why: "Women working (economy) changed family, school, and laws. Change spreads." }
   };
 
@@ -309,7 +310,7 @@ textarea{width:100%;font:inherit;font-size:16px;padding:8px;border:2px solid #cf
   const app = $("app");
   function fresh() {
     return { v: 4, name: "", step: -1, p: { av: "", nick: "" }, sort: {}, normPick: null, reply: null, who: null,
-      plan: [], planLocked: false, match: {}, chain: {}, done: {}, wrong: {}, writing: {}, turnedIn: false };
+      plan: [], planLocked: false, match: {}, chris: {}, chain: {}, done: {}, wrong: {}, writing: {}, turnedIn: false };
   }
   let st;
   try { st = JSON.parse(localStorage.getItem(KEY)); } catch (e) {}
@@ -553,7 +554,7 @@ textarea{width:100%;font:inherit;font-size:16px;padding:8px;border:2px solid #cf
     if (!matchView.order) matchView.order = shuffle(BOSS_ORDER);
     app.innerHTML = `<section class="card">${slideBar(3)}
       ${job(done ? "All 5 matched." : "Tap a need, then tap the institution that meets it.")}
-      <div class="match"><div>${matchView.order.map(b => `<button type="button" class="need${st.match[b] ? " used" : ""}${selNeed === b ? " on" : ""}" data-n="${b}">“${esc(BOSS[b].need)}”</button>`).join("")}${done ? `<button type="button" class="go" id="nextBtn">Next: Thursday →</button>` : ""}</div>
+      <div class="match"><div>${matchView.order.map(b => `<button type="button" class="need${st.match[b] ? " used" : ""}${selNeed === b ? " on" : ""}" data-n="${b}">“${esc(BOSS[b].need)}”</button>`).join("")}${done ? `<button type="button" class="go" id="nextBtn">Next: Chris Gardner →</button>` : ""}</div>
         <div>${BOSS_ORDER.map(b => `<button type="button" class="mrow${st.match[b] ? " ok" : ""}" data-r="${b}">${bossTag(b)}<span class="slotx">${st.match[b] ? "✓ " + esc(BOSS[b].need) : ""}</span></button>`).join("")}</div></div>
       <p class="msg" id="mMsg" aria-live="polite"></p></section>`;
     app.querySelectorAll("[data-n]").forEach(b => b.onclick = () => { selNeed = b.dataset.n; matchView(); });
@@ -568,6 +569,41 @@ textarea{width:100%;font:inherit;font-size:16px;padding:8px;border:2px solid #cf
       locked = true; setTimeout(() => { locked = false; }, isTestT() ? 0 : 1500);
     });
     if (done) $("nextBtn").onclick = () => { selNeed = null; nextStep(); };
+  }
+
+  // ---------- Day 3 Mon: Chris Gardner (The Pursuit of Happyness clip) ----------
+  const CHRIS = [
+    { id: "k1", t: "Chris works 6 months at a stockbroker internship. It pays nothing.", b: "economy" },
+    { id: "k2", t: "The IRS takes the last money out of his bank account for taxes he owes.", b: "government" },
+    { id: "k3", t: "With nowhere to go, he locks himself and his son in a subway bathroom and holds him all night.", b: "family" },
+    { id: "k4", t: "Later, a church shelter gives them a bed, if they get in line early enough.", b: "religion" }
+  ];
+  function chrisView() {
+    st.chris = st.chris || {};
+    const K = CHRIS.find(k => !st.chris[k.id]);
+    const trail = `<div class="trail">${CHRIS.map(k => st.chris[k.id] ? bossTag(k.b) : `<span class="btag" style="background:#c9d0de">?</span>`).join(`<span class="arr">·</span>`)}</div>`;
+    app.innerHTML = `<section class="card">${slideBar(3)}
+      <p class="story">Remember the bathroom scene? Chris Gardner (a real person) and his son, San Francisco, 1981. ${esc(nick())} could drop 2 things on Monday. Chris couldn't drop anything.</p>${trail}
+      ${K ? `<div class="link" id="lk"><p class="fine" style="margin:0">Chris's night · ${CHRIS.indexOf(K) + 1} of 4</p><p class="n">${esc(K.t)}</p></div>
+        ${job("Which institution is this part of Chris's story about?")}
+        <div class="bossbtns">${BOSS_ORDER.map(b => `<button type="button" data-b="${b}">${BOSS[b].i} ${BOSS[b].n}</button>`).join("")}</div>
+        <p class="msg" id="kMsg" aria-live="polite"></p>`
+      : `<button type="button" class="go" id="nextBtn">Next →</button>`}</section>`;
+    if (!K) { $("nextBtn").onclick = nextStep; return; }
+    app.querySelectorAll("[data-b]").forEach(b => b.onclick = () => {
+      if (locked) return;
+      if (b.dataset.b === K.b) { st.chris[K.id] = true; rightMark("chris_" + K.id); save(); chrisView(); return; }
+      wrongMark("chris");
+      const el = $("lk"); el.classList.remove("shake"); void el.offsetWidth; el.classList.add("shake");
+      $("kMsg").textContent = "Not quite. Is it about money and jobs, laws and taxes, home and kids, or faith?"; $("kMsg").className = "msg bad";
+      locked = true; setTimeout(() => { locked = false; }, isTestT() ? 0 : 1500);
+    });
+  }
+  function chrisqView() {
+    app.innerHTML = `<section class="card">${slideBar(3)}<div class="trail">${CHRIS.map(k => bossTag(k.b)).join(`<span class="arr">·</span>`)}</div><div id="kq"></div><div id="kEnd"></div></section>`;
+    const end = () => { $("kEnd").innerHTML = `<p class="result">Institutions don't meet everyone's needs the same way. When the economy left Chris with no pay and no home, his family and a church had to fill the gap.</p><button type="button" class="go" id="nextBtn">Next: Thursday →</button>`; $("nextBtn").onclick = nextStep; };
+    mc($("kq"), "chris", end);
+    if (st.done.chris) end();
   }
 
   // ---------- Day 4 Thu: change spreads (one link at a time) ----------
@@ -644,6 +680,7 @@ textarea{width:100%;font:inherit;font-size:16px;padding:8px;border:2px solid #cf
     answers["Mon · Kept"] = asks.filter(a => st.plan.includes(a.b)).map(a => BOSS[a.b].n + ": " + a.t).join(" | ");
     answers["Mon · Dropped"] = asks.filter(a => !st.plan.includes(a.b)).map(a => BOSS[a.b].n + ": " + a.t).join(" | ");
     answers["Mon · Institution/need match misses"] = String(st.wrong.match || 0);
+    answers["Mon · Chris Gardner misses"] = String((st.wrong.chris || 0));
     answers["Thu · Change chain misses"] = String(st.wrong.chain || 0);
     answers["Thu · Change-spreads check misses"] = String(st.wrong.rosie || 0);
     PROMPTS.forEach(p => { answers["Writing: " + p.short] = ($("w_" + p.id).value || "").trim(); });
@@ -668,7 +705,7 @@ textarea{width:100%;font:inherit;font-size:16px;padding:8px;border:2px solid #cf
     if (st.step < 0) intro();
     else {
       const s = STEPS[Math.min(st.step, STEPS.length - 1)];
-      ({ build: buildView, sort: sortView, norm: normView, name: nameView, feed: feedView, tip: tipView, mirror: mirrorView, plan: planView, drops: dropsView, match: matchView, chain: chainView, rosie: rosieView, write: writeView })[s.k]();
+      ({ build: buildView, sort: sortView, norm: normView, name: nameView, feed: feedView, tip: tipView, mirror: mirrorView, plan: planView, drops: dropsView, match: matchView, chris: chrisView, chrisq: chrisqView, chain: chainView, rosie: rosieView, write: writeView })[s.k]();
     }
     window.scrollTo(0, 0);
   }
@@ -687,7 +724,7 @@ textarea{width:100%;font:inherit;font-size:16px;padding:8px;border:2px solid #cf
 
   // ---------- Test T. skip bar (shared/turnin.js) ----------
   try {
-    const LABEL = { build: "Build your person", sort: "Fri: hands or head sort", norm: "Fri: the kid who sat", name: "Fri: norm + value blanks", feed: "Sat: the tipping video", tip: "Sat: ethnocentrism check", mirror: "Sat: who taught you", plan: "Mon: pick 3 of 5", drops: "Mon: what got dropped", match: "Mon: match needs", chain: "Thu: change chain", rosie: "Thu: change check", write: "Recap + 2 short answers + turn in" };
+    const LABEL = { build: "Build your person", sort: "Fri: hands or head sort", norm: "Fri: the kid who sat", name: "Fri: norm + value blanks", feed: "Sat: the tipping video", tip: "Sat: ethnocentrism check", mirror: "Sat: who taught you", plan: "Mon: pick 3 of 5", drops: "Mon: what got dropped", match: "Mon: match needs", chris: "Mon: Chris Gardner's night", chrisq: "Mon: Chris question", chain: "Thu: change chain", rosie: "Thu: change check", write: "Recap + 2 short answers + turn in" };
     function solveStep(s) {
       if (s.k === "build") fillPersonDefaults();
       else if (s.k === "sort") sortCards().forEach(c => st.sort[c.id] = true);
@@ -698,6 +735,8 @@ textarea{width:100%;font:inherit;font-size:16px;padding:8px;border:2px solid #cf
       else if (s.k === "mirror") { if (st.who == null) st.who = 0; }
       else if (s.k === "plan") { if (st.plan.length !== 3) st.plan = ["family", "education", "economy"]; st.planLocked = true; }
       else if (s.k === "match") BOSS_ORDER.forEach(b => st.match[b] = true);
+      else if (s.k === "chris") { st.chris = st.chris || {}; CHRIS.forEach(k => st.chris[k.id] = true); }
+      else if (s.k === "chrisq") st.done.chris = true;
       else if (s.k === "chain") CHAIN.forEach(l => st.chain[l.id] = true);
       else if (s.k === "rosie") st.done.rosie = true;
     }
