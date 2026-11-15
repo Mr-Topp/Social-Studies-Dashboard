@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Rule Breaker Court | Sociology Unit 3 Day 3</title>
+<meta name="description" content="Six real rule-breakers. You are the judge. Use deviance, sanctions, and the theories to rule on each case.">
+<link rel="stylesheet" href="../u3-engine/engine.css?v=20261114a">
+<style>body{--a:#5b3fb8;--a2:#ece6ff;--a3:#33207a}</style>
+<script src="../../shared/assignments.js?v=20261105fb1"></script>
+<script src="../../shared/turnin.js?v=20261105fb1"></script>
+<script src="../../shared/lang.js?v=20261103c"></script>
+</head><body>
+<script>
+// Sociology Unit 3 Day 3 · Rule Breaker Court (SS.9-12.Soc.4, SS.9-12.Soc.9) · Fynn picked this 11/14/26.
+// Uses only Day 3 slide ideas: deviance is relative, sanctions (formal/informal, positive/negative),
+// Merton's strain theory, Sutherland's differential association, Becker's labeling theory, stigma.
+// Real cases: Rosa Parks (1955, fined $10 + $4 court costs; Browder v. Gayle 1956; Congressional Gold Medal 1999);
+// 2019 college admissions scandal (Lori Loughlin, $500,000, USC rowing, 2 months in prison, 2020);
+// the 2022 TikTok Kia/Hyundai theft trend (free anti-theft software update, 2023); "devious licks" (Sept 2021);
+// Frances Haugen (Facebook documents, Senate testimony Oct 5, 2021); Devah Pager's 2003 Milwaukee job study.
+window.U3GAME = {
+  key: "soc-u3-d3-rule-breaker-court-v1",
+  assignmentId: "soc-u3-d3-rule-breaker-court",
+  title: "Sociology · Unit 3 · Day 3 · Rule Breaker Court",
+  standard: "SS.9-12.Soc.4, SS.9-12.Soc.9",
+  stdText: [["SS.9-12.Soc.4", "Explain the sociological theories that are the basis of sociology."], ["SS.9-12.Soc.9", "Describe the process of socialization across the life course."]],
+  brand: "⚖️ RULE BREAKER COURT",
+  eyebrow: "Sociology · Unit 3 · Day 3",
+  titleHtml: "⚖️ RULE BREAKER COURT<small>You are the judge. Six real cases.</small>",
+  hook: "A civil rights hero. A TV star. Kids on TikTok. They all broke a rule. Now you rule on them.",
+  chips: ["🚌 1955", "🎓 2019", "🚗 2022", "📱 2021"],
+  tiles: ["📁 <b>6</b> real case files", "⚖️ <b>6</b> rulings", "🔨 <b>2</b> verdicts that are yours", "✍️ <b>1</b> short answer", "⏱ <b>20</b> min"],
+  goal: "Explain why people break norms, how society reacts, and why deviance depends on time and place.",
+  how: ["Read the case file. It's short and it's real.", "Make your ruling with today's ideas: deviance, sanctions, and the theories.", "See what really happened. Then write one answer and turn it in."],
+  startLabel: "Open the first case",
+  stepWord: "Case",
+  steps: [
+    { kind: "q", id: "c1", label: "Rosa Parks: why deviant", std: "Soc.9", kicker: "Case 1 · Montgomery, Alabama · 1955", title: "The bus seat",
+      left: `<div class="who"><span class="icon">🚌</span><div><b><span class="real">REAL</span>Rosa Parks</b><span>December 1, 1955</span></div></div>
+        <p class="fact">In 1955, a Montgomery law made Black riders give up bus seats to white riders.</p>
+        <p class="fact">The driver told Rosa Parks to move. She <b>said no</b> and stayed in her seat.</p>`,
+      tag: "Your ruling", q: "Today she's a hero. So why do sociologists still call what she did deviance?",
+      choices: ["She broke a norm of her time and place: a city bus law.", "She hurt the other riders who were on the bus that night.", "Deviance means any act that is bad for the whole society.", "She broke a rule that was the same in every U.S. state."], answer: 0,
+      why: "Deviance is breaking a social norm. It isn't always bad. Whether it counts depends on the time and place.",
+      hint: "Deviance is breaking a norm. It doesn't have to hurt anyone.",
+      revealTitle: "What happened next",
+      reveal: "She was arrested and fined $10 plus $4 in court costs. That's a <b>formal negative sanction</b>. In 1999, Congress gave her its Gold Medal, a <b>formal positive sanction</b>. Same act, different time." },
+    { kind: "pick", id: "v1", label: "Verdict: Rosa Parks", kicker: "Case 1 · Your verdict", title: "Was breaking that law right?",
+      left: `<p class="fact">Howard Becker said groups "create deviance by making the rules."</p><p class="fact">Montgomery made the rule. Rosa Parks broke it.</p>`,
+      q: "Was Rosa Parks right to break that law?",
+      options: ["Yes. The law itself was unfair.", "It was right, but she still broke the law.", "Laws should be changed first, not broken."],
+      afterTitle: "What happened to the rule",
+      after: "Her arrest started the Montgomery Bus Boycott. In 1956, the Supreme Court ruled that bus segregation broke the Constitution. Breaking a norm can push society to change it." },
+    { kind: "q", id: "c2", label: "College scandal: strain theory", std: "Soc.4", kicker: "Case 2 · Los Angeles · 2019", title: "The fake rowers",
+      left: `<div class="who"><span class="icon">🎓</span><div><b><span class="real">REAL</span>Lori Loughlin</b><span>Actress, Full House</span></div></div>
+        <p class="fact">Loughlin and her husband wanted their daughters to get into USC, a top college.</p>
+        <p class="fact">They paid <b>$500,000</b> to get the girls in as rowing team recruits. <b>Neither daughter rowed.</b></p>`,
+      tag: "Your ruling", q: "Robert Merton's strain theory has five ways people respond. Which one fits the parents?",
+      choices: ["Innovation: they kept the goal but broke the rules to reach it.", "Conformity: they followed the rules to reach the goal they wanted.", "Retreatism: they gave up on the goal and on the rules too.", "Rebellion: they threw out the old goal and made a new one."], answer: 0,
+      why: "Innovation. The goal (a top college) stayed the same. They just used an illegal way to get there.",
+      hint: "Did they keep the goal of a top college? Did they follow the rules?",
+      revealTitle: "What happened next",
+      reveal: "In 2020 Loughlin pleaded guilty and spent 2 months in prison. That's a <b>formal negative sanction</b>. More than 50 people were charged in the scandal." },
+    { kind: "q", id: "c3", label: "Kia challenge: differential association", std: "Soc.4", kicker: "Case 3 · Cities across the U.S. · 2022", title: "The car-theft videos",
+      left: `<div class="who"><span class="icon">🚗</span><div><b><span class="real">REAL</span>The "Kia Boys" trend</b><span>TikTok, 2022</span></div></div>
+        <p class="fact">Videos spread online showing how to start some Kia and Hyundai cars <b>with a USB cable</b>. Many were made by teens.</p>
+        <p class="fact">Kids learned the trick from the videos and from friends who were doing it. <b>Thefts of those cars shot up.</b></p>`,
+      tag: "Your ruling", q: "Which theory best explains how these teens learned to steal cars?",
+      choices: ["Differential association: they learned it from the people they spent time with.", "Strain theory: no fair way to a good job forced them to steal.", "Labeling theory: they stole only after someone called them criminals.", "Conformity: they followed the norms that most of society agrees with."], answer: 0,
+      why: "Differential association (Sutherland): you learn deviance from the people around you, the same way you learn anything else.",
+      hint: "Look at where they learned it: the videos and the kids making them.",
+      revealTitle: "What happened next",
+      reveal: "Police arrested many teens: <b>formal negative sanctions</b>. In 2023, Kia and Hyundai gave owners a free software update to stop the trick." },
+    { kind: "q", id: "c4", label: "Devious licks: sanction type", std: "Soc.9", kicker: "Case 4 · Schools everywhere · 2021", title: "Devious licks",
+      left: `<div class="who"><span class="icon">📱</span><div><b><span class="real">REAL</span>"Devious licks"</b><span>TikTok, September 2021</span></div></div>
+        <p class="fact">Students filmed themselves stealing or wrecking things from school bathrooms, like <b>soap dispensers</b>.</p>
+        <p class="fact">They posted the videos. Some got <b>millions of views and likes</b>, so more kids did it.</p>`,
+      tag: "Your ruling", q: "The likes and views those videos got are what kind of sanction?",
+      choices: ["Informal positive: everyday people rewarding the act.", "Formal positive: an official group rewarding the act.", "Informal negative: everyday people punishing the act.", "Formal negative: an official group punishing the act."], answer: 0,
+      why: "Informal positive. Likes come from regular people, not an official group, and they reward the behavior.",
+      hint: "Do likes come from an official group or regular people? Do they reward or punish?",
+      revealTitle: "What happened next",
+      reveal: "Schools suspended students: a <b>formal negative sanction</b>. TikTok took down the videos. So the same act got a reward from peers online and a punishment from school." },
+    { kind: "q", id: "c5", label: "Frances Haugen: labeling theory", std: "Soc.4", kicker: "Case 5 · Washington, D.C. · 2021", title: "The Instagram files",
+      left: `<div class="who"><span class="icon">📂</span><div><b><span class="real">REAL</span>Frances Haugen</b><span>Worked at Facebook, which owns Instagram</span></div></div>
+        <p class="fact">Haugen <b>copied thousands of secret company pages</b> and gave them to reporters and Congress. That broke her company's rules.</p>
+        <p class="fact">The pages showed Facebook's own research: Instagram made some teen girls <b>feel worse about their bodies</b>.</p>`,
+      tag: "Your ruling", q: "Some called her a hero. Others called her a rule-breaker who leaked secrets. Which idea explains why one act gets two labels?",
+      choices: ["Labeling theory: an act becomes deviant when people label it that way.", "Differential association: she learned to leak from her coworkers.", "Strain theory: she wanted money but had no fair way to get it.", "Conformity: she went along with what her work group expected."], answer: 0,
+      why: "Labeling theory (Becker). The act didn't change. What changed was who was doing the labeling.",
+      hint: "One act, two names. Which theory is about the names people give an act?",
+      revealTitle: "What happened next",
+      reveal: "She testified to the U.S. Senate on October 5, 2021. Senators from both parties thanked her. Facebook said she was taking its research out of context." },
+    { kind: "pick", id: "v2", label: "Verdict: Frances Haugen", kicker: "Case 5 · Your verdict", title: "Hero or rule-breaker?",
+      left: `<p class="fact">She broke her company's rules.</p><p class="fact">She also showed the public something about teens it didn't know.</p>`,
+      q: "Was Frances Haugen right to break her company's rules?",
+      options: ["Yes. Teens' safety matters more than company rules.", "No. She should have fixed it inside the company.", "It depends on whether it actually changed anything."],
+      afterTitle: "Sociology says",
+      after: "There's no single right answer. That's the point: <b>deviance is relative</b>. Whether an act is wrong depends on who is judging it." },
+    { kind: "q", id: "c6", label: "Criminal record study: stigma", std: "Soc.4", kicker: "Case 6 · Milwaukee, Wisconsin · 2003", title: "The job hunt",
+      left: `<div class="who"><span class="icon">📄</span><div><b><span class="real">REAL</span>Devah Pager's study</b><span>Sociologist, 2003</span></div></div>
+        <p class="fact">Pager sent pairs of young men to apply for the same jobs with <b>equal résumés</b>.</p>
+        <p class="fact">The only difference: one said he had a criminal record. He got called back <b>about half as often</b>, even though he had already served his time.</p>`,
+      tag: "Your ruling", q: "The shame and rejection that follow someone with that label is called what?",
+      choices: ["Stigma", "Strain", "A stereotype", "A positive sanction"], answer: 0,
+      why: "Stigma: shame or rejection aimed at someone seen as different. The label kept following him after his sentence ended.",
+      hint: "Which word means shame or rejection aimed at a person?",
+      revealTitle: "Why it matters",
+      reveal: "Labeling theory warns that if a label blocks every job, a person may start to act the part. Many states and cities now <b>\"ban the box\"</b>, which delays the record question on job applications." }
+  ],
+  end: {
+    kicker: "Court is out of session", title: "Your docket",
+    html: st => `<div class="cards3">
+        <div class="mini"><b>🚌 Rosa Parks</b><span>Deviance is relative</span></div>
+        <div class="mini"><b>🎓 Fake rowers</b><span>Strain: innovation</span></div>
+        <div class="mini"><b>🚗 Car-theft videos</b><span>Differential association</span></div>
+        <div class="mini"><b>📱 Devious licks</b><span>Informal positive sanction</span></div>
+        <div class="mini"><b>📂 Frances Haugen</b><span>Labeling theory</span></div>
+        <div class="mini"><b>📄 The job hunt</b><span>Stigma</span></div></div>
+      <p class="bigidea">Breaking a rule isn't always wrong. <b>Society decides what counts as deviant</b>, and that can change.</p>`
+  },
+  write: {
+    id: "w1", short: "Which theory explains a case + which agent taught it", heading: "Write your opinion for the court",
+    label: "Pick one case. Which theory explains it best? Which agent of socialization might have taught it?",
+    help: "Theories: strain, differential association, labeling. Agents: family, school, peers, media, religion, work.",
+    stem: "___ explains this best because ___. The agent that taught it was ___.",
+    min: 80, more: "Name the case, the theory, and the agent.",
+    mustAll: [{ words: ["strain", "innovat", "differential", "association", "label", "stigma", "merton", "sutherland", "becker", "relative"], msg: "Name a theory: strain, differential association, or labeling." },
+              { words: ["family", "parent", "school", "peer", "friend", "media", "tiktok", "video", "social media", "religion", "church", "work", "job", "coworker"], msg: "Name the agent of socialization that might have taught it (family, school, peers, media, religion, or work)." },
+              { words: ["because", "since"], msg: "Say why. Use the word \"because.\"" }]
+  }
+};
+</script>
+<script src="../u3-engine/engine.js?v=20261114a"></script>
+</body></html>
