@@ -4,7 +4,7 @@
 <meta name="description" content="Three real superstars. Flip their real backstory and find which agents of socialization made them who they are.">
 <link rel="stylesheet" href="../u3-engine/engine.css?v=20261115c">
 <style>body{--a:#c2531c;--a2:#ffe8d9;--a3:#7d3110}
-.who img.face{width:64px;height:64px;flex:none;object-fit:cover;object-position:center top;border-radius:18px;border:3px solid var(--a);background:var(--a2)}</style>
+.place{position:relative;margin:0 0 10px;border-radius:14px;overflow:hidden;background:var(--a2)}.place img{display:block;width:100%;height:120px;object-fit:cover}.place figcaption{position:absolute;left:0;right:0;bottom:0;padding:6px 10px;background:linear-gradient(transparent,rgba(0,0,0,.75));color:#fff;font-weight:800;font-size:.9rem}.place small{display:block;font-weight:600;font-size:.7rem;opacity:.85}</style>
 <script src="../../shared/assignments.js?v=20261105fb1"></script>
 <script src="../../shared/turnin.js?v=20261105fb1"></script>
 <script src="../../shared/lang.js?v=20261103c"></script>
@@ -19,13 +19,16 @@
 // Taylor Swift: grandma Marjorie Finlay was an opera singer; left out by middle-school girls; family moved to
 // Hendersonville, TN; signed a Sony/ATV songwriting deal at 14. Simone Biles: adopted by grandfather Ron and
 // his wife Nellie; Catholic, carries a rosary; switched to homeschool in 2012 to train more.
-// PHOTOS: Fynn pastes one photo link per star between the quotes. Empty = the emoji shows instead.
-const PHOTO = {
-  lebron: "",
-  taylor: "",
-  simone: ""
+// PLACE PHOTOS (Fynn chose place photos 11/15/26, not photos of the stars). Wikimedia Commons:
+// Akron "Evening Downtown Akron Skyline" by Dillguy9 (CC0); Nashville "Nashville skyline 2009" by Kaldari (public domain);
+// Houston "Houston Downtown Skyline 2010" by Ed Uthman (CC BY 3.0, credit shown on the card).
+const WM = "https://upload.wikimedia.org/wikipedia/commons/thumb/";
+const PLACE = {
+  lebron: { src: WM + "5/5c/Evening_Downtown_Akron_Skyline.jpg/960px-Evening_Downtown_Akron_Skyline.jpg", cap: "📍 Akron, Ohio: where LeBron grew up", credit: "" },
+  taylor: { src: WM + "0/08/Nashville_skyline_2009.jpg/960px-Nashville_skyline_2009.jpg", cap: "📍 Nashville, Tennessee: where Taylor's family moved for her music", credit: "" },
+  simone: { src: WM + "8/85/Houston_Downtown_Skyline_2010.JPG/960px-Houston_Downtown_Skyline_2010.JPG", cap: "📍 Houston, Texas: Simone grew up just outside it", credit: "Photo: Ed Uthman, CC BY 3.0" }
 };
-const who = (k, icon, name, sub) => `<div class="who">${PHOTO[k] ? `<img class="face" src="${PHOTO[k]}" alt="Photo of ${name}" onerror="this.outerHTML='<span class=&quot;icon&quot;>${icon}</span>'">` : `<span class="icon">${icon}</span>`}<div><b><span class="real">REAL</span>${name}</b><span>${sub}</span></div></div>`;
+const who = (k, icon, name, sub) => { const pl = PLACE[k]; return `<figure class="place"><img src="${pl.src}" alt="Skyline of ${pl.cap.replace(/^📍 /, "").split(":")[0]}" onerror="this.parentNode.remove()"><figcaption>${pl.cap}${pl.credit ? `<small>${pl.credit}</small>` : ""}</figcaption></figure><div class="who"><span class="icon">${icon}</span><div><b><span class="real">REAL</span>${name}</b><span>${sub}</span></div></div>`; };
 const AG = { fam: "Family", sch: "School", peer: "Peers", media: "Mass media", rel: "Religion", work: "The workplace" };
 window.U3GAME = {
   key: "soc-u3-d2-origin-story-v1",
