@@ -46,28 +46,28 @@ const deckOf = b => Object.keys(CARDS).filter(k => CARDS[k].p === b || CARDS[k].
 // Each fairgoer: one clear influence, one money clue + one personal-choices clue, what they respond to.
 const FOLKS = [
   { id: 'dana', name: 'Dana', bio: '34 · VA hospital nurse · Des Moines', clue: 'job', quad: 'lib',
-    say: 'At <mark>my job at the VA hospital</mark>, I see patients skip their medicine because they can\'t afford it. <u>The government should step in so seeing a doctor doesn\'t cost so much.</u> But <u>what people do in their own lives isn\'t the government\'s business.</u>',
-    wants: ['health'], avoid: ['vets'], twist: 'Dana is registered with no party. Hundreds of thousands of Iowa voters are.',
+    say: "At <mark>my job at the VA hospital</mark>, I see people skip their medicine because it costs too much. <u>The government should help pay for doctor visits.</u> But <u>how adults live their lives is their own business.</u>",
+    wants: ['health'], avoid: ['vets'], twist: "Dana isn't in any party. Lots of Iowa voters aren't.",
     look: { skin: 2, hair: 'bun', hc: '#2d211b', shirt: '#6fb7c9', extra: 'badge' } },
   { id: 'earl', name: 'Earl', bio: '63 · corn and hog farmer · near Grundy Center', clue: 'community', quad: 'con',
-    say: '<mark>Everybody in my little town</mark> says the same thing: <u>the government takes too much of our money, and we lose whole days on government forms instead of working the land.</u> And <u>I want stricter rules on vaping. Kids get hooked.</u>',
-    wants: ['taxes', 'regs', 'farmers'], twist: 'Earl has voted Republican for 40 years. He says both parties show up at the fair to talk farming.',
+    say: "<mark>Everybody in my small town</mark> agrees: <u>the government takes too much of our money and buries us in forms.</u> And <u>we need stricter rules on vaping. Kids get hooked.</u>",
+    wants: ['taxes', 'regs', 'farmers'], twist: "Earl has voted Republican for 40 years.",
     look: { skin: 0, hair: 'cap', hc: '#9a9a9a', shirt: '#7b8f4e', extra: 'cap' } },
   { id: 'ray', name: 'Ray', bio: '47 · owns a trucking company · Council Bluffs', clue: 'family', quad: 'libt',
-    say: '<mark>My grandpa started this company</mark>, and he always said: keep government off your back. <u>The government takes too much of every dollar we earn, and every new truck means a stack of forms.</u> And <u>let adults make their own choices, like betting at 18.</u>',
-    wants: ['taxes', 'regs'], twist: 'Ray votes Republican on taxes, but on personal choices he sounds libertarian.',
+    say: "<mark>My grandpa started our trucking company.</mark> He taught me: <u>keep taxes low and government forms short.</u> And <u>let adults make their own choices, like betting at 18.</u>",
+    wants: ['taxes', 'regs'], twist: "Ray votes Republican on taxes. On personal choices, he sounds libertarian.",
     look: { skin: 3, hair: 'short', hc: '#4a3426', shirt: '#2f5d7c', extra: 'glasses' } },
   { id: 'walt', name: 'Walt', bio: '72 · Vietnam veteran · Dubuque', clue: 'friends', quad: 'pop',
-    say: '<mark>My old Army buddies</mark> and I still meet every week. We agree: <u>we served this country, so the government owes us good doctors and every check we were promised, Social Security too.</u> And <u>we need stricter rules, like curfews for teens.</u>',
-    wants: ['vets'], twist: 'Walt has voted for Democrats AND Republicans. He votes for the person, not the party.',
+    say: "<mark>My old Army buddies and I</mark> meet every week. We agree: <u>the government owes veterans good doctors and every check we were promised.</u> And <u>we need stricter rules, like curfews for teens.</u>",
+    wants: ['vets'], twist: "Walt has voted for both parties. He votes for the person, not the party.",
     look: { skin: 2, hair: 'bald', hc: '#cfcfcf', shirt: '#5b6b3c', extra: 'vetcap' } },
   { id: 'tyler', name: 'Tyler', bio: '27 · union electrician · Cedar Rapids', clue: 'family', quad: 'pop',
-    say: '<mark>Growing up, my dad always told me</mark> working people are stronger when they stick together. <u>My crew got better pay by standing up to the boss as a group. And the lowest pay the law allows is way too low. The government should push it up.</u> And <u>keep strict rules on vaping and gambling.</u>',
-    wants: ['unions', 'wage'], avoid: ['gunright'], twist: 'Plot twist: Tyler is a Democrat who also hunts and strongly backs gun rights. Lots of union members do.',
+    say: "<mark>My dad always told me</mark> workers are stronger together. <u>My union got us better pay. The government should raise the minimum wage too.</u> And <u>keep strict rules on vaping and gambling.</u>",
+    wants: ['unions', 'wage'], avoid: ['gunright'], twist: "Plot twist: Tyler is a Democrat who hunts and backs gun rights. Lots of union members do.",
     look: { skin: 1, hair: 'short', hc: '#a0522d', shirt: '#f0a43a', extra: 'hardhat' } },
   { id: 'rosa', name: 'Rosa', bio: '45 · owns a bakery · West Liberty', clue: 'job', quad: 'con',
-    say: '<mark>Running my bakery</mark> taught me a lot. <u>Little shops like mine pay too much to the government, and I spend more time on government forms than on baking.</u> And <u>keep marijuana illegal in Iowa.</u>',
-    wants: ['regs', 'taxes'], twist: 'Plot twist: Rosa is a registered Democrat. On business rules, she agrees with Republicans.',
+    say: "<mark>Running my bakery</mark> taught me a lot. <u>Small shops pay too much in taxes and fill out too many government forms.</u> And <u>keep marijuana illegal in Iowa.</u>",
+    wants: ['regs', 'taxes'], twist: "Plot twist: Rosa is a Democrat. On business rules, she agrees with Republicans.",
     look: { skin: 2, hair: 'long', hc: '#2b1d16', shirt: '#f4f1ea', extra: 'apron' } },
   // Jayden isn't in today's line (Ray took his spot so both booths get fair traffic). Kept so games saved earlier still load.
   { id: 'jayden', name: 'Jayden', bio: '18 · high school senior · Waterloo', clue: 'school', quad: 'pop',
@@ -75,12 +75,12 @@ const FOLKS = [
     wants: ['wage'], avoid: ['unions'], twist: 'Jayden just turned 18 and registered to vote at the voter sign-up booth in this same building.',
     look: { skin: 3, hair: 'short', hc: '#120d0b', shirt: '#4f8f5b', extra: 'none' } },
   { id: 'priya', name: 'Priya', bio: '29 · software tester, mom of a 6-year-old · West Des Moines', clue: 'media', quad: 'libt',
-    say: 'I listen to <mark>political podcasts on my commute</mark> every day. They convinced me <u>the government takes too much of my paycheck and wastes it.</u> I also want to send my daughter to whatever school fits her best, even a private one, and have the state money go with her. And <u>what adults do on their own time is their business.</u>',
-    wants: ['taxes', 'choice'], avoid: ['regs'], twist: 'Priya usually votes Republican, but on personal freedom she agrees with a lot of Democrats.',
+    say: "<mark>The podcasts I listen to on my drive</mark> changed my mind. <u>The government takes too much of my paycheck.</u> I want state money to follow my daughter to any school, even a private one. And <u>what adults do on their own time is their business.</u>",
+    wants: ['taxes', 'choice'], avoid: ['regs'], twist: "Priya usually votes Republican. On personal freedom, she agrees with many Democrats.",
     look: { skin: 1, hair: 'long', hc: '#1c1412', shirt: '#7b5fb2', extra: 'earbuds' } },
   { id: 'luis', name: 'Luis', bio: '51 · factory worker · Newton', clue: 'faith', quad: 'lib',
-    say: '<mark>My church</mark> carried my family after the Maytag plant closed years ago. <u>The government should make sure workers earn enough to live on, and protect their right to team up and push for better pay.</u> But <u>the government shouldn\'t tell adults how to live their lives.</u>',
-    wants: ['unions', 'wage'], twist: 'Luis has switched parties twice in his life. Party isn\'t forever.',
+    say: "<mark>My church</mark> helped my family when the Maytag plant closed. <u>The government should make sure workers earn enough, and protect unions.</u> But <u>it shouldn't tell adults how to live.</u>",
+    wants: ['unions', 'wage'], twist: "Luis has switched parties twice. Party isn't forever.",
     look: { skin: 2, hair: 'short', hc: '#2a2a2a', shirt: '#8a4b3a', extra: 'none' } }
 ];
 const FOLK = Object.fromEntries(FOLKS.map(f => [f.id, f]));
@@ -90,9 +90,9 @@ const BASE = [['dana', 'earl', 'walt', 'priya'], ['tyler', 'rosa', 'ray', 'luis'
 let ORDER = BASE[0].concat(BASE[1]);
 
 const CHECKS = {
-  c_both: { prompt: 'Shift change! Before you switch booths: which goal do <b>BOTH</b> parties push for?', options: ['Take care of veterans', 'Raise the minimum wage', 'Protect gun rights', 'Cut taxes'], hint: 'Think about the purple cards you saw in your hand.', why: 'The parties disagree on a lot, but they also share goals, like supporting veterans and Iowa farmers.' },
-  c_iv: { prompt: 'Rosa landed in <b>Conservative</b> on the idea map, but she\'s a registered <b>Democrat</b>. What does that show?', options: ['Your party and your beliefs don\'t always match', 'Rosa joined the wrong party by mistake', 'Rosa\'s beliefs will change to match her party', 'Democrats and Republicans want the same things'], hint: 'One is a set of beliefs. The other is a group you join.', why: 'Your ideology is your set of beliefs. A party is a group that runs candidates. People join the party that fits them BEST, not perfectly.' },
-  c_link: { prompt: 'How did your booth connect fairgoers to <b>government</b>?', options: ['It got people to vote and help elect candidates', 'It decided which laws Iowa would pass next', 'It ran the election and printed the ballots', 'It counted the official votes for governor'], hint: 'What did people actually do at your booth?', why: 'Parties are a link between people and government. They recruit voters and volunteers and help elect candidates who make laws.' }
+  c_both: { prompt: 'Shift change! Before you switch booths: which goal do <b>BOTH</b> parties push for?', options: ['Take care of veterans', 'Raise the minimum wage', 'Protect gun rights', 'Cut taxes'], hint: 'Think about the purple cards you saw in your hand.', why: "The parties disagree a lot, but both push to help veterans and Iowa farmers." },
+  c_iv: { prompt: 'Rosa landed in <b>Conservative</b> on the idea map, but she\'s a registered <b>Democrat</b>. What does that show?', options: ['Your party and your beliefs don\'t always match', 'Rosa joined the wrong party by mistake', 'Rosa\'s beliefs will change to match her party', 'Democrats and Republicans want the same things'], hint: 'One is a set of beliefs. The other is a group you join.', why: "Ideology = your beliefs. Party = a group you join. People pick the party that fits them BEST, not perfectly." },
+  c_link: { prompt: 'How did your booth connect fairgoers to <b>government</b>?', options: ['It got people to vote and help elect candidates', 'It decided which laws Iowa would pass next', 'It ran the election and printed the ballots', 'It counted the official votes for governor'], hint: 'What did people actually do at your booth?', why: "Parties link people to government. They sign up voters and help elect the people who make laws." }
 };
 
 /* ---------------- STATE ---------------- */
@@ -249,7 +249,7 @@ function sMap(f) {
         <span class="ax rowl">🎲 MORE rules<br>on how people live</span><button class="q-pop" data-q="pop">Populist</button><button class="q-con" data-q="con">Conservative</button>
         <span class="ax rowl">🎲 FEWER rules<br>on how people live</span><button class="q-lib" data-q="lib">Liberal</button><button class="q-libt" data-q="libt">Libertarian</button>
       </div></div>
-      <div class="idea-help">Read the <u>underlined</u> parts of what ${esc(f.name)} said.<br>💵 First: MORE government help, or LESS government and lower taxes?<br>🎲 Then: MORE or FEWER rules on how people live?<p class="fb" id="fb">${msg ? esc(msg) : ''}</p></div></div>`;
+      <div class="idea-help">Read the <u>underlined</u> words.<br>💵 First: MORE government help, or LESS?<br>🎲 Then: MORE or FEWER rules on how people live?<p class="fb" id="fb">${msg ? esc(msg) : ''}</p></div></div>`;
     tray.querySelectorAll('[data-q]').forEach(b => b.onclick = () => {
       if (b.dataset.q === f.quad) {
         if (window.classFirstTry) classFirstTry.right('map-' + f.id);
@@ -276,7 +276,7 @@ function sPitch(f) {
     const bad = shuffle(deck.filter(k => !f.wants.includes(k) && !(f.avoid || []).includes(k))).slice(0, 3 - good.length);
     st.hand = { for: f.id, cards: shuffle(good.concat(bad, ['redirect'])) }; save();
   }
-  tray.innerHTML = `${stepsBar('pitch')}<h2>Play one card to pitch ${esc(f.name)}.</h2><p class="sub">You're working the <b style="color:${PCOLOR[b]}">${PARTY[b]}</b> booth. What does ${esc(f.name)} care about most? Pick the best fit.</p>
+  tray.innerHTML = `${stepsBar('pitch')}<h2>Play one card to pitch ${esc(f.name)}.</h2><p class="sub">You're at the <b style="color:${PCOLOR[b]}">${PARTY[b]}</b> booth. Pick what ${esc(f.name)} cares about most.</p>
   <div class="hand">${st.hand.cards.map(k => { const c = CARDS[k]; return `<button class="pcard" data-c="${k}"><span class="band ${c.p === 'both' ? 'both' : c.p === 'redirect' ? 'redirect' : c.p}">${c.p === 'both' ? 'BOTH PARTIES' : c.p === 'redirect' ? 'BE HONEST' : PARTY[c.p].toUpperCase()}</span><span class="ic">${c.ic}</span><b>${esc(c.t)}</b><small>${esc(c.s)}</small></button>`; }).join('')}</div>`;
   tray.querySelectorAll('[data-c]').forEach(btn => btn.onclick = () => play(f, btn.dataset.c, right));
 }
@@ -306,7 +306,7 @@ function sResult(f) {
   if (r.pitch === 'signed' && !st.nextShown) { st.nextShown = f.id; save(); }
   const head = r.pitch === 'signed' ? `✅ ${f.name} signed up at your booth!` : r.pitch === 'honest' ? `🤝 Good call. ${f.name} heads to the ${PARTY[other(b)]} booth and says thanks for being straight with them.` : `😕 ${f.name} wasn't sold.`;
   const last = st.idx === ORDER.length - 1;
-  tray.innerHTML = `${stepsBar('result')}<div class="result"><div class="big">${r.pitch === 'walked' ? '😕' : '🌽'}</div><div><p><b>${head}</b> ${r.pts ? `<b style="color:var(--good)">+${r.pts} corn</b>${st.reporterFor === st.idx ? ' (doubled by the reporter!)' : ''}` : ''}</p><p>${explain(f, b)}</p>${r.pitch === 'signed' && (!st.nextShown || st.nextShown === f.id) ? `<p>📋 <b>What happens next:</b> ${esc(f.name)} gets on the ${PARTY[b]}' list. They'll get invites to volunteer, go to party meetings, and vote for ${PARTY[b]} running for office. That's how a party links people to government.</p>` : ''}<p class="note">What shaped them: <b>${INFL[f.clue]}</b> · Idea map: <b>${QUADS[f.quad]}</b></p></div></div>
+  tray.innerHTML = `${stepsBar('result')}<div class="result"><div class="big">${r.pitch === 'walked' ? '😕' : '🌽'}</div><div><p><b>${head}</b> ${r.pts ? `<b style="color:var(--good)">+${r.pts} corn</b>${st.reporterFor === st.idx ? ' (doubled by the reporter!)' : ''}` : ''}</p><p>${explain(f, b)}</p>${r.pitch === 'signed' && (!st.nextShown || st.nextShown === f.id) ? `<p>📋 <b>What happens next:</b> ${esc(f.name)} joins the ${PARTY[b]}' list. They'll be asked to volunteer and vote for ${PARTY[b]}. That's how parties link people to government.</p>` : ''}<p class="note">What shaped them: <b>${INFL[f.clue]}</b> · Idea map: <b>${QUADS[f.quad]}</b></p></div></div>
   <div class="row"><button class="primary" id="nextBtn">${last ? 'Close the booth →' : 'Next fairgoer →'}</button></div>`;
   $('#nextBtn').onclick = nextFolk;
 }
@@ -316,7 +316,7 @@ function nextFolk() {
   if (st.idx === ORDER.length - 1) { st.phase = 'endchecks'; save(); return render(); }
   const nextIdx = st.idx + 1;
   const go = () => { st.idx = nextIdx; st.step = 'listen'; st.chips = null; st.hand = null; save(); render(); };
-  if (nextIdx === 2 && st.rainFor == null) return eventCard('🌧️', 'Rain!', 'A storm rolls in and everyone crowds into the Varied Industries Building. Your booth is packed!', 'Bonus +50 corn if you nail the next fairgoer.', () => { st.rainFor = 2; go(); });
+  if (nextIdx === 2 && st.rainFor == null) return eventCard('🌧️', 'Rain!', 'A storm hits! Everyone crowds inside. Your booth is packed!', 'Bonus +50 corn if you nail the next fairgoer.', () => { st.rainFor = 2; go(); });
   if (nextIdx === HALF && !st.swapped) return swapCard(go);
   if (nextIdx === 6 && st.reporterFor == null) return eventCard('📸', 'A TV reporter is filming your booth.', 'The next pitch could end up on the evening news. Nail it!', 'Corn for the next fairgoer is doubled.', () => { st.reporterFor = 6; go(); });
   go();
@@ -364,10 +364,10 @@ function pEnd() {
 const PROMPTS = [
   { id: 'cmp', short: 'Compare the parties', label: '1. You worked BOTH booths. Name one thing the two parties disagree on and one goal they both share.', stem: 'The parties disagree on ___. They both want ___.', min: 45, own: 3,
     must: [['tax', 'wage', 'union', 'gun', 'health', 'red tape', 'police', 'border', 'school', 'college', 'energy', 'pollution', 'business', 'pay'], ['farm', 'veteran', 'vet']], msg: 'In answer 1, name a disagreement AND a goal they share (like farmers or veterans).' },
-  { id: 'why', short: 'Party vs. beliefs', label: '2. Pick Rosa, Tyler, or Priya. What do they believe that doesn\'t match their party?', stem: '___ is a ___, but ___. That shows ___.', min: 60, own: 6,
+  { id: 'why', short: 'Party vs. beliefs', label: '2. Pick Rosa, Tyler, or Priya. What do they believe that doesn\'t fit their party?', stem: '___ is a ___, but ___. That shows ___.', min: 60, own: 6,
     must: [['rosa', 'tyler', 'priya']], msg: 'In answer 2, name Rosa, Tyler, or Priya and the belief that doesn\'t match.' },
   // Required: SS.9-12.Gov.12 asks students to critique how parties (intermediary institutions) shape government.
-  { id: 'crit', short: 'Two big parties', label: '3. Most Iowa voters only have two big parties to pick from. Is that good or bad for people like Walt or Dana? Give one plus AND one minus.', stem: 'One plus is ___. One minus is ___.', min: 60, own: 5,
+  { id: 'crit', short: 'Two big parties', label: '3. Iowa voters mostly get just two big parties to pick from. Give one plus AND one minus of that.', stem: 'One plus is ___. One minus is ___.', min: 60, own: 5,
     must: [['plus', 'good', 'help', 'benefit', 'easy', 'easier', 'simple', 'simpler', 'pro', 'upside', 'better'], ['minus', 'bad', 'problem', 'hurt', 'downside', 'con', 'worse', 'fit', 'stuck']], msg: 'In answer 3, give one plus AND one minus of having only two big parties.' }
 ];
 const WHY_WORDS = { rosa: ['tax', 'red tape', 'permit', 'paperwork', 'form', 'rule', 'regulation', 'government', 'business', 'shop', 'marijuana', 'bakery', 'republican'], tyler: ['gun', 'hunt', 'rifle', 'republican'], priya: ['adult', 'own time', 'freedom', 'free', 'personal', 'democrat', 'choice', 'their business', 'how they live'] };
@@ -435,8 +435,8 @@ async function turnIn() {
    ===================================================================== */
 const SCENE = (() => {
   const cv = $('#scene'), ctx = cv.getContext('2d'), H = 400; let W = 960;
-  function fit() { const r = cv.parentElement.getBoundingClientRect(); if (!r.height) return; W = Math.max(760, Math.min(1500, Math.round(H * r.width / r.height))); cv.width = W; cv.height = H; }
-  fit(); window.addEventListener('resize', fit);
+  function fit() { const r = cv.parentElement.getBoundingClientRect(); if (!r.height) return; W = Math.max(760, Math.min(2600, Math.round(H * r.width / r.height))); cv.width = W; cv.height = H; }
+  fit(); window.addEventListener('resize', fit); if (window.ResizeObserver) new ResizeObserver(fit).observe(cv.parentElement);
   let folk = null, boothParty = null, x = -140, targetX = 230, mood = 0, moodT = 0, kernels = [], t0 = performance.now();
   // Reduced motion (Chromebook setting): no walking, no flying corn, Ferris wheel and crowd hold still.
   const RMQ = window.matchMedia ? matchMedia('(prefers-reduced-motion: reduce)') : null, still = () => !!(RMQ && RMQ.matches);
