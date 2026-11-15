@@ -2,7 +2,7 @@
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Origin Story | Sociology Unit 3 Day 2</title>
 <meta name="description" content="Three real superstars. Flip their real backstory and find which agents of socialization made them who they are.">
-<link rel="stylesheet" href="../u3-engine/engine.css?v=20261114a">
+<link rel="stylesheet" href="../u3-engine/engine.css?v=20261115a">
 <style>body{--a:#c2531c;--a2:#ffe8d9;--a3:#7d3110}</style>
 <script src="../../shared/assignments.js?v=20261105fb1"></script>
 <script src="../../shared/turnin.js?v=20261105fb1"></script>
@@ -27,32 +27,35 @@ window.U3GAME = {
   titleHtml: "ORIGIN STORY<small>Every superstar was taught to be who they are.</small>",
   hook: "LeBron. Taylor. Simone. Nobody is born a legend. Flip their real backstories and find out who shaped them.",
   chips: ["🏀 LeBron James", "🎤 Taylor Swift", "🤸 Simone Biles"],
-  tiles: ["🃏 <b>3</b> real origin stories", "✓ <b>10</b> quick calls", "🏆 Crown the agent that matters most", "✍️ <b>1</b> short answer", "⏱ <b>20</b> min"],
+  tiles: ["🃏 <b>3</b> real origin stories", "✓ <b>10</b> calls", "🔎 Prove every call", "🏆 Crown the agent that matters most", "✍️ <b>1</b> short answer", "⏱ <b>25</b> min"],
   goal: "Name the agents of socialization and show how they shape a person.",
-  how: ["Read one real fact from a star's life.", "Tap the agent of socialization that is doing the teaching.", "After each star, make your call. Then write one answer and turn it in."],
+  how: ["Read one real fact from a star's life.", "Tap the agent of socialization. Then prove it: tap the words in the card that show it.", "After each star, make your call. Then write one answer and turn it in."],
   startLabel: "Flip the first card",
   stepWord: "Card",
   steps: [
     { kind: "q", id: "l1", label: "LeBron: the Walker family", std: "Soc.9", kicker: "Origin Story 1 · LeBron James", title: "Missing school in Akron",
       left: `<div class="who"><span class="icon">🏀</span><div><b><span class="real">REAL</span>LeBron James</b><span>Grew up in Akron, Ohio</span></div></div>
-        <p class="fact">His mom raised him alone, and they moved a lot. In 4th grade he <b>missed 83 days of school</b>.</p>
-        <p class="fact">Then he moved in with his youth football coach's family, the Walkers. They gave him <b>chores, rules, and a wake-up time</b>. The next year he barely missed school.</p>`,
+        <p class="fact">{{His mom raised him alone, and they moved a lot.}} {{In 4th grade he <b>missed 83 days of school</b>.}}</p>
+        <p class="fact">{{Then he moved in with his youth football coach's family, the Walkers.}} [[They gave him <b>chores, rules, and a wake-up time</b>.]] {{The next year he barely missed school.}}</p>`,
+      proof: "Tap the words in the card that show the family teaching him habits.", proofHint: "Look for what the Walkers actually gave him.",
       tag: "Who's teaching?", q: "Which agent of socialization taught LeBron his new daily habits?",
       choices: [AG.fam, AG.sch, AG.peer, AG.media], answer: 0,
       why: "Family. The Walkers' home taught him daily habits. Family can be the people you live with, not just the people you're born to.",
       hint: "Whose house set the chores and the wake-up time?" },
     { kind: "q", id: "l2", label: "LeBron: the Fab Four", std: "Soc.9", kicker: "Origin Story 1 · LeBron James", title: "The Fab Four",
       left: `<div class="who"><span class="icon">🏀</span><div><b><span class="real">REAL</span>LeBron James</b><span>Age 11 to 18</span></div></div>
-        <p class="fact">At 11, LeBron joined a travel team with three close friends his age. They called themselves <b>the Fab Four</b>.</p>
-        <p class="fact">They pushed each other in every practice. Then they <b>picked the same high school</b> so they could keep playing together.</p>`,
+        <p class="fact">[[At 11, LeBron joined a travel team with three close friends his age.]] {{They called themselves <b>the Fab Four</b>.}}</p>
+        <p class="fact">{{They pushed each other in every practice.}} {{Then they <b>picked the same high school</b> so they could keep playing together.}}</p>`,
+      proof: "Tap the words that show these people are his peers.", proofHint: "Peers are people about your age. Which words say how old his friends are?",
       tag: "Who's teaching?", q: "Which agent of socialization is shaping LeBron here?",
       choices: [AG.peer, AG.fam, AG.work, AG.sch], answer: 0,
       why: "Peers. A peer group is people about your age who share interests. His friends even helped decide where he went to school.",
       hint: "Look at who he is with. How old are they?" },
     { kind: "q", id: "l3", label: "LeBron: The Chosen One", std: "Soc.9", kicker: "Origin Story 1 · LeBron James", title: "The Chosen One",
       left: `<div class="who"><span class="icon">🏀</span><div><b><span class="real">REAL</span>LeBron James</b><span>Age 17, a high school junior</span></div></div>
-        <p class="fact">In 2002, LeBron was on the cover of <b>Sports Illustrated</b>. The headline called him <b>"The Chosen One."</b></p>
-        <p class="fact">That December, <b>ESPN</b> showed his high school game on national TV. Millions of people were told who he was before he could vote.</p>`,
+        <p class="fact">[[In 2002, LeBron was on the cover of <b>Sports Illustrated</b>. The headline called him <b>"The Chosen One."</b>]]</p>
+        <p class="fact">{{That December, he was 17 and still in high school.}} {{Millions of people were told who he was before he could vote.}}</p>`,
+      proof: "Tap the words that show mass media at work.", proofHint: "Mass media means TV, magazines, music, and the internet. Which words name one?",
       tag: "Who's teaching?", q: "Which agent of socialization is sending LeBron a message about who he is?",
       choices: [AG.media, AG.peer, AG.sch, AG.rel], answer: 0,
       why: "Mass media. Magazines and TV told LeBron, and everyone else, that he was a future star.",
@@ -64,32 +67,36 @@ window.U3GAME = {
 
     { kind: "q", id: "t1", label: "Taylor: opera grandma", std: "Soc.9", kicker: "Origin Story 2 · Taylor Swift", title: "Grandma on stage",
       left: `<div class="who"><span class="icon">🎤</span><div><b><span class="real">REAL</span>Taylor Swift</b><span>Grew up in Pennsylvania</span></div></div>
-        <p class="fact">Taylor's grandma, <b>Marjorie Finlay</b>, was a professional opera singer.</p>
-        <p class="fact">Taylor has said watching her grandma perform made her want to be on stage too. Later she even wrote a song named "Marjorie."</p>`,
+        <p class="fact">[[Taylor's grandma, <b>Marjorie Finlay</b>,]] {{was a professional opera singer.}}</p>
+        <p class="fact">{{Taylor has said watching her perform made her want to be on stage too.}} {{Later she even wrote a song named "Marjorie."}}</p>`,
+      proof: "Tap the words that show this teacher is family.", proofHint: "Which words say how Marjorie is related to Taylor?",
       tag: "Who's teaching?", q: "Which agent of socialization gave Taylor her first push toward singing?",
       choices: [AG.fam, AG.media, AG.peer, AG.work], answer: 0,
       why: "Family. Families pass on skills and dreams. That know-how is part of cultural capital.",
       hint: "How is Marjorie related to Taylor?" },
     { kind: "q", id: "t2", label: "Taylor: left out in middle school", std: "Soc.9", kicker: "Origin Story 2 · Taylor Swift", title: "The lunch table",
       left: `<div class="who"><span class="icon">🎤</span><div><b><span class="real">REAL</span>Taylor Swift</b><span>Middle school</span></div></div>
-        <p class="fact">Taylor has said that in middle school, the girls she sat with <b>left her out</b>. Liking country music made her seem weird to them.</p>
-        <p class="fact">She felt alone, so she turned those feelings into songs.</p>`,
+        <p class="fact">{{Taylor has said that in middle school,}} [[the girls she sat with <b>left her out</b>. Liking country music made her seem weird to them.]]</p>
+        <p class="fact">{{She felt alone,}} {{so she turned those feelings into songs.}}</p>`,
+      proof: "Tap the words that show her peers sending the message.", proofHint: "Find the words about the kids her age and what they did.",
       tag: "Who's teaching?", q: "Which agent of socialization sent Taylor the message that country music was not cool?",
       choices: [AG.peer, AG.sch, AG.fam, AG.rel], answer: 0,
       why: "Peers. Kids her own age decided what counted as cool, and they punished her for not fitting it.",
       hint: "Who left her out? Teachers, family, or kids her age?" },
     { kind: "q", id: "t3", label: "Taylor: agents in conflict", std: "Soc.9", kicker: "Origin Story 2 · Taylor Swift", title: "Two agents, two messages",
       left: `<div class="who"><span class="icon">🎤</span><div><b><span class="real">REAL</span>Taylor Swift</b><span>Age 14</span></div></div>
-        <p class="fact">Girls at school thought country music was weird.</p>
-        <p class="fact">But when Taylor was 14, her parents <b>moved the whole family to Tennessee</b>, near Nashville, so she could chase country music.</p>`,
+        <p class="fact">[[Girls at school thought country music was weird.]]</p>
+        <p class="fact">{{But when Taylor was 14,}} {{her parents <b>moved the whole family to Tennessee</b>,}} {{near Nashville, so she could chase country music.}}</p>`,
+      proof: "One agent sent the opposite message from her family. Tap the words that show that other message.", proofHint: "Her family said go for country. Which words show someone saying the opposite?",
       tag: "Agents in conflict", q: "Which two agents of socialization sent Taylor different messages?",
       choices: ["Peers and family", "School and religion", "Media and the workplace", "Religion and family"], answer: 0,
       why: "Peers said country was weird. Family said go for it. When agents disagree, people sort the mixed messages and choose.",
       hint: "One message came from kids at school. Who moved her to Tennessee?" },
     { kind: "q", id: "t4", label: "Taylor: songwriting deal", std: "Soc.9", kicker: "Origin Story 2 · Taylor Swift", title: "A job at 14",
       left: `<div class="who"><span class="icon">🎤</span><div><b><span class="real">REAL</span>Taylor Swift</b><span>Age 14, Nashville</span></div></div>
-        <p class="fact">At 14, Taylor signed a deal to <b>write songs for a music company</b>. She was one of the youngest songwriters they ever signed.</p>
-        <p class="fact">After school, she wrote with grown-up songwriters and learned how the music business works.</p>`,
+        <p class="fact">[[At 14, Taylor signed a deal to <b>write songs for a music company</b>.]] {{She was one of the youngest songwriters they ever signed.}}</p>
+        <p class="fact">{{After school,}} {{she wrote with grown-up songwriters}} {{and learned how the music business works.}}</p>`,
+      proof: "Tap the words that show this is a job.", proofHint: "Which words show she signed on to work for a company?",
       tag: "Who's teaching?", q: "Which agent of socialization is teaching Taylor here?",
       choices: [AG.work, AG.sch, AG.peer, AG.media], answer: 0,
       why: "The workplace. A job teaches new rules: deadlines, working with adults, and how a business runs.",
@@ -101,24 +108,27 @@ window.U3GAME = {
 
     { kind: "q", id: "s1", label: "Simone: adopted by grandparents", std: "Soc.9", kicker: "Origin Story 3 · Simone Biles", title: "A new home",
       left: `<div class="who"><span class="icon">🤸</span><div><b><span class="real">REAL</span>Simone Biles</b><span>Grew up near Houston, Texas</span></div></div>
-        <p class="fact">When Simone was little, she and her sister went into foster care.</p>
-        <p class="fact">Her grandfather Ron and his wife Nellie <b>adopted them</b>. Simone calls them <b>Mom and Dad</b>.</p>`,
+        <p class="fact">{{When Simone was little,}} {{she and her sister went into foster care.}}</p>
+        <p class="fact">{{Her grandfather Ron and his wife Nellie <b>adopted them</b>.}} [[Simone calls them <b>Mom and Dad</b>.]]</p>`,
+      proof: "Tap the words that show Ron and Nellie are her family now.", proofHint: "What does Simone call them?",
       tag: "Who's teaching?", q: "Ron and Nellie raised Simone and taught her values. Which agent of socialization is that?",
       choices: [AG.fam, AG.sch, AG.rel, AG.peer], answer: 0,
       why: "Family, the first and most powerful agent. A family is the people who raise you, however you came to them.",
       hint: "She calls them Mom and Dad. What kind of agent is that?" },
     { kind: "q", id: "s2", label: "Simone: the rosary", std: "Soc.9", kicker: "Origin Story 3 · Simone Biles", title: "In her gym bag",
       left: `<div class="who"><span class="icon">🤸</span><div><b><span class="real">REAL</span>Simone Biles</b><span>Olympic gymnast</span></div></div>
-        <p class="fact">Nellie raised Simone <b>Catholic</b>. The family went to church together.</p>
-        <p class="fact">Simone has said she brings a <b>rosary</b> (prayer beads) to her meets.</p>`,
+        <p class="fact">{{Nellie is Simone's mom.}} [[She raised Simone <b>Catholic</b>.]]</p>
+        <p class="fact">{{Simone has said she brings a <b>rosary</b> (prayer beads)}} {{to her meets.}}</p>`,
+      proof: "Tap the words that show where the habit came from.", proofHint: "The rosary is the habit. Which words show the agent that taught it?",
       tag: "Who's teaching?", q: "Which agent of socialization gave Simone the habit of carrying a rosary?",
       choices: [AG.rel, AG.media, AG.work, AG.sch], answer: 0,
       why: "Religion. It teaches values, rituals, and gives people a community. Her family passed it on, and she carries it to every meet.",
       hint: "Prayer beads and church come from which agent?" },
     { kind: "q", id: "s3", label: "Simone: leaves regular school", std: "Soc.9", kicker: "Origin Story 3 · Simone Biles", title: "Trading the hallways for the gym",
       left: `<div class="who"><span class="icon">🤸</span><div><b><span class="real">REAL</span>Simone Biles</b><span>Age 15</span></div></div>
-        <p class="fact">In 2012, Simone <b>left regular high school</b> and switched to homeschool so she could train more hours in the gym.</p>
-        <p class="fact">She gave up classes, bells, and hallways full of kids her age.</p>`,
+        <p class="fact">{{In 2012,}} [[Simone <b>left regular high school</b>]] {{and switched to homeschool}} {{so she could train more hours in the gym.}}</p>
+        <p class="fact">{{She gave up hallways full of kids her age.}}</p>`,
+      proof: "Tap the words that show which agent she stepped away from.", proofHint: "Which words name the place she left?",
       tag: "Which agent got smaller?", q: "Simone stepped away from one agent of socialization to train. Which one?",
       choices: [AG.sch, AG.rel, AG.fam, AG.media], answer: 0,
       why: "School. Homeschool meant less of school's hidden curriculum, like bells and schedules, and less time with peers. The gym took its place.",
@@ -152,5 +162,5 @@ window.U3GAME = {
   }
 };
 </script>
-<script src="../u3-engine/engine.js?v=20261114a"></script>
+<script src="../u3-engine/engine.js?v=20261115a"></script>
 </body></html>
