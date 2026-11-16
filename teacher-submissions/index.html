@@ -8,6 +8,7 @@
 <script src="../shared/assignments.js?v=20261116p1g"></script>
    <script src="part1-schoology.js?v=20261105a"></script>
 <script src="videos.js?v=20261111vid19"></script>
+<script src="video-channels.js?v=20261115ch2"></script>
 <script src="presentations.js?v=20261115soc89"></script>
 <script src="../shared/turnin.js?v=20261109nm1"></script>
 <style>
@@ -449,6 +450,34 @@ function rebuildRows() {
   rows = rows.filter(r => !isTestStudent(r.studentName) && !isTestStudent(r.typedName));
 }
 // Redraw without losing your place: keeps each table's scroll and the box you were typing in.
+// Channel of a YouTube link (video-channels.js), or "" if it's not a well-known channel (Fynn, 2026-11-15).
+// Videos added after 2026-11-15 aren't in that file: they're looked up from YouTube once, remembered on this computer, then the page redraws.
+const ytId = url => { const m = String(url || "").match(/(?:[?&]v=|youtu\.be\/|embed\/|shorts\/)([\w-]{11})/); return m ? m[1] : ""; };
+let CH_CACHE = {}; try { CH_CACHE = JSON.parse(localStorage.getItem("videoChannels") || "{}"); } catch (e) {}
+const CH_PENDING = new Set(); let chTimer = 0;
+function channelOf(url) {
+  const id = ytId(url);
+  if (!id) { const site = [[/iowapbs\.org/i, "Iowa PBS"], [/netflix\.com/i, "Netflix"], [/pbslearningmedia\.org/i, "PBS LearningMedia"], [/pbs\.org/i, "PBS"], [/history\.com/i, "History Channel"], [/ted\.com/i, "TED"], [/c-span\.org/i, "C-SPAN"]].find(([re]) => re.test(String(url || ""))); return site ? site[1] : ""; }
+  const known = window.VIDEO_CHANNELS || {};
+  if (id in known) return known[id];
+  if (id in CH_CACHE) return CH_CACHE[id];
+  if (!CH_PENDING.has(id)) { CH_PENDING.add(id); clearTimeout(chTimer); chTimer = setTimeout(lookupChannels, 300); }
+  return "";
+}
+async function lookupChannels() {
+  const ids = [...CH_PENDING].filter(id => !(id in CH_CACHE)), NAMES = window.VIDEO_CHANNEL_NAMES || {};
+  let found = false;
+  await Promise.all(ids.map(async id => {
+    try {
+      const r = await fetch("https://www.youtube.com/oembed?format=json&url=" + encodeURIComponent("https://www.youtube.com/watch?v=" + id));
+      if (!r.ok) return;
+      const j = await r.json(), label = NAMES[j.author_name] || "";
+      CH_CACHE[id] = label; if (label) found = true;
+    } catch (e) {}
+  }));
+  try { localStorage.setItem("videoChannels", JSON.stringify(CH_CACHE)); } catch (e) {}
+  if (found) renderKeep();
+}
 function renderKeep() {
   const wraps = [...document.querySelectorAll("#out .gridwrap")].map(w => [w.scrollLeft, w.scrollTop]);
   const f = document.activeElement, fs = f && f.dataset ? { s: f.dataset.s, a: f.dataset.a, cls: f.className } : null, y = window.scrollY;
@@ -830,7 +859,21 @@ function linksHtml() {
     const what = [keys.length ? (keys.length > 1 ? keys.length + " keys" : "key") : "", alts.length ? (alts.length > 1 ? alts.length + " alternatives" : "alternative") : ""].filter(Boolean).join(" + ");
     return `<details class="more"><summary>${what}</summary><div class="inner">${keys.map(chip).join("")}${altRow(ids, true)}${altRow(ids, false)}</div></details>`;
   };
-  const chip = id => { const k = kindOf(id); return `<a class="chip ${k}${REG[id].alt ? " alt" : ""}" href="${safe(hrefOf(id))}" target="_blank" rel="noopener" title="${safe(REG[id].title)}${k === "key" ? " (teacher only)" : ""}">${ICON[k]} ${safe(chipText(id))}</a>`; };
+  const chip = id => { const k = kindOf(id); return `<a class="chip ${k}${REG[id].alt ? " alt" : ""}" href="${safe(hrefOf(id))}" target="_blank" rel="noopener" title="${safe(REG[id].title)}${k === "key" ? " (teacher only)" : ""}">${ICON[k]} ${safe(k === "video" ? vidText(id) : chipText(id))}</a>`; };
+  // Videos show their channel first, e.g. "TED-Ed: Who Were the Vikings?" (Fynn, 2026-11-15). Channel list: video-channels.js.
+  // If the title already names the channel ("…: Crash Course Sociology #21", "TED-Ed: …"), that part is dropped so it isn't said twice.
+  const vidText = id => {
+    const t = chipText(id), label = channelOf(REG[id].path);
+    if (!label) return t;
+    const n = x => String(x).toLowerCase().replace(/[^a-z0-9]/g, ""), L = n(label);
+    const names = x => { const v = n(x); return !!v && (v.startsWith(L) || L.startsWith(v) || (v.length >= 8 && L.includes(v)) || (L === "historychannel" && v === "history") || (L === "pbsfrontline" && /^(pbs)?frontline/.test(v))); };
+    let s = t, note = "";
+    const lead = s.match(/^([^:]{2,40}):\s*/); if (lead && names(lead[1])) s = s.slice(lead[0].length);
+    const paren = s.match(/\s*\(([^()]{2,120})\)\s*$/);   // a trailing "(…)" — dropped if it's the channel, otherwise kept as a note
+    if (paren) { s = s.slice(0, paren.index); const bits = paren[1].match(/^([^,;]+)[,;]\s*(.+)$/); if (bits && names(bits[1])) note = " (" + bits[2] + ")"; else if (!names(paren[1])) note = paren[0]; }
+    for (let k = 0; k < 2; k++) { const tail = s.match(/\s*(?::|\s[-–|]\s)\s*((?:(?!\s[-–|]\s)[^:]){2,45})$/); if (tail && names(tail[1])) s = s.slice(0, tail.index); }
+    return label + ": " + s + note;
+  };
   const actDay = id => { const m = (REG[id].title || "").match(/^Days? (\d+)/); return REG[id].day || (m ? +m[1] : 0); };
   // Blue reminder: units Fynn still needs to go through again (Fynn, 2026-11-03). Delete a line when it's done.
   const REVIEW_AGAIN = new Set(["us-history|4", "us-history|5", "us-history|6", "world-history|3", "sociology|4"]);
