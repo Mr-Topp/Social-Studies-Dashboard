@@ -113,6 +113,8 @@ td.sum.l3{background:#eef7f0;color:#1f5e2c}td.sum.l2{background:#fff8e2;color:#7
 .parthead{font-size:.95rem;font-weight:900;letter-spacing:.06em;text-transform:uppercase;color:var(--red);margin:16px 0 6px;padding-bottom:4px;border-bottom:2px solid var(--line)}
 .parthead:first-child{margin-top:0}
 details.partdrop{margin:0 0 6px}
+.dayrow.today{background:rgba(224,168,0,.13);box-shadow:inset 4px 0 0 #e0a800}.nextbadge{display:inline-block;margin:0 6px 2px 0;padding:1px 8px;border-radius:999px;background:#e0a800;color:#1b1b1b;font-size:.75rem;font-weight:900}
+details.donedrop{margin:0 0 10px}details.donedrop>summary{cursor:pointer;color:var(--muted);font-weight:800;padding:4px 2px}
 details.partdrop>summary.parthead{cursor:pointer;list-style:none;color:var(--muted)}
 details.partdrop>summary.parthead::-webkit-details-marker{display:none}
 details.partdrop>summary.parthead::before{content:"▶ ";font-size:.75em}
@@ -812,7 +814,7 @@ function byUnit(ids, course) {
   return groups;
 }
 
-// Assignments at the top of each class: one dropdown per unit. Everything starts closed;
+// Assignments at the top of each class: one dropdown per unit. The unit the class is on opens by itself (Fynn, 11-15);
 // whatever you open stays open until you close it.
 const linkOpen = {};
 let attentionOpen = false;
@@ -887,6 +889,16 @@ function linksHtml() {
     "world-history|p1|1": "scales/world-history-p1-u1.png", "world-history|p1|2": "scales/world-history-p1-u2.png", "world-history|p1|3": "scales/world-history-p1-u3.png", "world-history|p1|4": "scales/world-history-p1-u4.png",
     "world-history|1": "scales/world-history-u1.png", "world-history|2": "scales/world-history-u2.png", "world-history|3": "scales/world-history-u3.png" };
   const scaleBox = key => SCALE_PICS[key] ? `<details class="scalebox"><summary>📏 Unit scale</summary><a href="${SCALE_PICS[key]}" target="_blank" rel="noopener" title="Open full size"><img src="${SCALE_PICS[key]}" alt="Proficiency scale for this unit" loading="lazy"></a></details>` : "";
+  // Next class day's lesson for this class (Fynn, 2026-11-15: open the unit he's on, mark the day, fold finished units).
+  const isoD = d => d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0");
+  const todayIso = isoD(new Date());
+  const NEXT = (() => {
+    if (!window.classLessonOn) return null;
+    const d = new Date(todayIso + "T12:00:00"), off = i => (window.CLASS_NO_SCHOOL || []).some(([a, z]) => i >= a && i <= z);
+    for (let k = 0; k < 40; k++, d.setDate(d.getDate() + 1)) { const i = isoD(d), w = d.getDay(); if (w >= 1 && w <= 4 && !off(i)) { const l = window.classLessonOn(tab, i); return l ? Object.assign({ iso: i }, l) : null; } }
+    return null;
+  })();
+  if (NEXT && linkOpen[tab + "|" + NEXT.unit] === undefined) linkOpen[tab + "|" + NEXT.unit] = true;
   const unitBlock = (key, name, ids, decks, cal) => {
     ids = ids.filter(id => !REG[id].hiddenVid);   // videos Fynn removed from this day
     const kp = String(key).split("|"), vctx = { course: kp[0], part: kp[1] === "p1" ? 1 : 2, unit: +kp[kp.length - 1] || 0 };
@@ -983,7 +995,8 @@ function linksHtml() {
       const t = r.title || (r.summ || r.ids.some(id => /summative/i.test(REG[id].title)) ? "Summative" : r.ids.length ? chipText(r.ids[0]).replace(/\s*\([^)]*\)\s*$/, "") : "");
       const slides = r.slides.map(s => `<a class="chip slides" href="${safe(s.url)}${s.slide ? "#slide=id." + safe(s.slide) : ""}" target="_blank" rel="noopener">▶ ${safe(s.label)}</a>`).join("");
       const todo = (r.todo || []).map(x => `<span class="chip todo">⚠ ${safe(x)}</span>`).join("");
-      return `<div class="dayrow${r.summ ? " summ" : ""}" id="${safe(dayAnchor(key, r.day))}"><div class="daylabel">${label}<span class="daytitle${t ? "" : " unplanned"}">${safe(t || "Nothing planned yet")}</span>${r.std ? `<span class="daystd">${stdHover(r.std)}</span>` : ""}</div><div class="daychips">${daySections(r, slides, todo, vctx)}${moreBox(r.ids)}</div></div>`;
+      const isNext = NEXT && !isP1 && unitNo === NEXT.unit && r.day && (r.day === NEXT.day || (r.span && r.day <= NEXT.day && NEXT.day <= r.span));
+      return `<div class="dayrow${r.summ ? " summ" : ""}${isNext ? " today" : ""}" id="${safe(dayAnchor(key, r.day))}"><div class="daylabel">${isNext ? `<span class="nextbadge">${NEXT.iso === todayIso ? "⭐ Today" : "⭐ Next class"}</span>` : ""}${label}<span class="daytitle${t ? "" : " unplanned"}">${safe(t || "Nothing planned yet")}</span>${r.std ? `<span class="daystd">${stdHover(r.std)}</span>` : ""}</div><div class="daychips">${daySections(r, slides, todo, vctx)}${moreBox(r.ids)}</div></div>`;
     }).join("");
     const deckLinks = [list.some(r => r.single) ? null : main, ...extra].filter(Boolean).map(p => `<a href="${safe(p.url)}" target="_blank" rel="noopener">${p === main ? "▶ Open the whole deck" : "Older version: " + safe(p.title) + (p.note ? " (" + safe(p.note) + ")" : "")}</a>`).join(" · ");
     // Scale link: opens this course's Scales Google Doc (Fynn, 2026-11-05: link only, no copied text).
@@ -1000,7 +1013,12 @@ function linksHtml() {
   decks.forEach(p => { const u = p.unit || 0; if (!groups.find(x => x.unit === u)) groups.push({ unit: u, name: unitName(tab, u), ids: [] }); });
   groups.sort((a, b) => (a.unit || 999) - (b.unit || 999));
   const CAL = (window.CLASS_CALENDAR || {})[tab] || {};
-  const current = groups.map(g => unitBlock(tab + "|" + g.unit, g.name, g.ids, decks.filter(p => (p.unit || 0) === g.unit), CAL[g.unit])).join("");
+  // Units whose summative date has passed fold into one "Finished units" row at the top.
+  const isDone = g => CAL[g.unit] && CAL[g.unit].summative && CAL[g.unit].summative < todayIso;
+  const blockOf = g => unitBlock(tab + "|" + g.unit, g.name, g.ids, decks.filter(p => (p.unit || 0) === g.unit), CAL[g.unit]);
+  const doneGs = groups.filter(isDone), dk = tab + "|done";
+  const current = (doneGs.length ? `<details class="donedrop" data-k="${safe(dk)}"${linkOpen[dk] ? " open" : ""}><summary>✓ Finished units (${doneGs.length})</summary>${doneGs.map(blockOf).join("")}</details>` : "")
+    + groups.filter(g => !isDone(g)).map(blockOf).join("");
   if (!P1) return legend + current;
 
   // Part 1 first (the order you teach it), then Part 2. Every Part 1 unit is listed, built or not.
@@ -1215,7 +1233,7 @@ function renderTodo() {
   pane.querySelectorAll(".addlink").forEach(b => b.onclick = () => { todoOpen = +b.dataset.i; pane.querySelectorAll(".linkform").forEach(f => f.hidden = f.dataset.i !== b.dataset.i); const f = pane.querySelector(`.linkform[data-i="${b.dataset.i}"]`); (f.elements.title.value ? f.elements.url : f.elements.title).focus(); });
   pane.querySelectorAll(".linkform .cancel").forEach(b => b.onclick = () => { todoOpen = null; b.closest("form").hidden = true; });
   pane.querySelectorAll(".seeday").forEach(b => b.onclick = () => {
-    const t = items[+b.dataset.i]; tab = t.course; mode = "lessons"; linkOpen[t.key] = true;
+    const t = items[+b.dataset.i]; tab = t.course; mode = "lessons"; linkOpen[t.key] = true; linkOpen[t.course + "|done"] = true;
     sessionStorage.setItem("dash-tab", tab); sessionStorage.setItem("dash-mode", mode); render();
     const el = document.getElementById(dayAnchor(t.key, t.day)); if (el) { el.scrollIntoView({ block: "center" }); el.classList.add("flash"); setTimeout(() => el.classList.remove("flash"), 2000); }
   });
@@ -1259,7 +1277,7 @@ function renderTabs() {
   $("tabs").querySelectorAll(".tab").forEach(b => b.onclick = () => { tab = b.dataset.tab; sessionStorage.setItem("dash-tab", tab); $("search").value = ""; render(); });
   if (tab === "todo") return;
   $("links").innerHTML = linksHtml();
-  $("links").querySelectorAll(".unitdrop, .partdrop").forEach(d => d.addEventListener("toggle", () => { linkOpen[d.dataset.k] = d.open; }));
+  $("links").querySelectorAll(".unitdrop, .partdrop, .donedrop").forEach(d => d.addEventListener("toggle", () => { linkOpen[d.dataset.k] = d.open; }));
   wireVideoEdits($("links"));
 }
 
@@ -1400,7 +1418,7 @@ function wireVideoEdits(root) {
 const STDTXT = window.CLASS_STANDARDS || {};
 // One short color key for the grade views; the full explanation sits behind "How grades work".
 const KEYLINE = `<div class="keyline"><span><i class="sw" style="background:#dbe8fb"></i>4</span><span><i class="sw" style="background:#dff0e2"></i>3</span><span><i class="sw" style="background:#fff1c9"></i>2</span><span><i class="sw" style="background:#f8dcd8"></i>1</span><span>Check = not graded yet</span><span>⚠ = flagged</span><span>— = nothing yet</span><span>EX = exempt</span><span>M = missing</span></div>`;
-const HOWTO = `<details class="mini"><summary>How grades work</summary><p>Each activity gets one level: its first-try score (90%+ = 3, 70–89% = 2, under 70% = 1) averaged with the AI grade of the written answers (1–4), rounded down. Your own grade replaces the AI grade.</p><p>A real 3 needs a written answer. 90%+ with no written answer shows as “On track for 3.”</p><p>Hover a box for the details. Click it to read the student's answers and change the grade.</p><p><b>Paper work:</b> click <b>＋ Paper grades</b>, pick the day, then type 1–4 in each box (EX = exempt, M = missing). Enter moves down. It saves by itself.</p><p><b>Exempt:</b> click a student's “—” box to exempt just them, or use a column's <b>⋮</b> menu to exempt everyone. Exempt work doesn't count in averages, standards or Missing.</p></details>`;
+const HOWTO = `<details class="mini"><summary>How grades work</summary><p>Each activity gets one level: its first-try score (90%+ = 3, 70–89% = 2, under 70% = 1) averaged with the AI grade of the written answers (1–4), rounded down. Your own grade replaces the AI grade.</p><p>A real 3 needs a written answer. 90%+ with no written answer shows as “On track for 3.”</p><p>Hover a box for the details. Click it to read the student's answers and change the grade.</p><p><b>Paper work</b> (like iCivics printables) is never graded here. Once its day has passed it shows “Done in class” for every student and never counts as missing.</p><p><b>Exempt:</b> click a student's “—” box to exempt just them, or use a column's <b>⋮</b> menu to exempt everyone. Exempt work doesn't count in averages, standards or Missing.</p></details>`;
 const STD_RE = /SS\.9-12\.(?:WH|US|Gov|Soc)\.\d+/g;
 const shortStd = c => c.replace("SS.9-12.", "");
 function stdsOf(r) { const got = String((r.answers || {}).Standard || "").match(STD_RE); return [...new Set(got && got.length ? got : (REG[r.assignmentId] && REG[r.assignmentId].std) || [])]; }
@@ -1529,7 +1547,7 @@ function render() {
   $("listView").setAttribute("aria-pressed", view === "list");
   $("masteryView").setAttribute("aria-pressed", view === "mastery");
   $("filters").hidden = view !== "list";
-  $("paperBtn").hidden = view !== "grid";
+  $("paperBtn").hidden = true;   // Fynn 11-05: paper work is never graded on the dashboard (it shows "Done in class")
   if (view !== "grid" || $("paperBox").dataset.tab !== tab) $("paperBox").hidden = true;
   const sel = $("assignment"), keep = sel.value;
   sel.innerHTML = '<option value="all">All activities</option>' + byUnit(activitiesFor(list), tab).map(g => `<optgroup label="${safe(g.name)}">${g.ids.map(id => `<option value="${safe(id)}">${safe(titleOf({ assignmentId: id }))}</option>`).join("")}</optgroup>`).join("");
