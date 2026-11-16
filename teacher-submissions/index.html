@@ -73,6 +73,7 @@ summary{font-weight:800;color:var(--navy);cursor:pointer}
 .unitblock{margin:0 0 18px}
 .unithead{font-size:1.05rem;margin:6px 0 6px;color:var(--navy)}
 .unitcount{font-size:.82rem;font-weight:600;color:var(--muted);margin-left:6px}
+.aheadbar{margin:0 0 10px;padding:8px 10px;border:1px solid var(--line,#d8cfbd);border-radius:10px;font-size:.9rem;display:flex;flex-wrap:wrap;gap:8px;align-items:center}.aheadbar select{margin-left:6px;font-weight:700}.aheadchip{font-weight:700}.aheadbar .muted{color:var(--muted)}.aheadchip button{padding:0 6px;margin-left:2px}
 .unitpick{margin:4px 0 10px;font-size:.88rem;color:var(--muted)}.unitpick select{margin-left:6px;font-weight:700}
 .legend{display:flex;flex-wrap:wrap;gap:6px 10px;align-items:center;font-size:.85rem;color:var(--muted);margin:0 0 6px}
 .legend .lv{display:inline-block;border-radius:6px;padding:2px 8px;font-weight:800}
@@ -501,7 +502,7 @@ function queueMark(course, id, s, value) {
   chip("", "Saving…");
   clearTimeout(flushTimer); flushTimer = setTimeout(flushMarks, 700);
 }
-const needUpdate = msg => /unknown request|Type 1-4, EX or M/i.test(msg) ? `Teacher Tools needs a quick update first: <a href="update-teacher-tools.html">2-minute update</a>` : safe(msg);
+const needUpdate = msg => /unknown request|Type 1-4, EX or M|Type 1-4, EX, M or IC/i.test(msg) ? `Teacher Tools needs a quick update first: <a href="update-teacher-tools.html">2-minute update</a>` : safe(msg);
 async function flushMarks() {
   clearTimeout(flushTimer);
   if (flushing) { flushTimer = setTimeout(flushMarks, 400); return; }
@@ -525,7 +526,7 @@ async function flushMarks() {
     if (Object.keys(pend).length) flushTimer = setTimeout(flushMarks, 300);
   } catch (e) {
     flushing = false; saveErr = e.message; renderKeep();
-    const c = $("saveChip"); chip("bad", "Not saved yet. Your typing is kept."); if (c && /unknown request|Type 1-4, EX or M/i.test(e.message)) c.innerHTML = "⚠ " + needUpdate(e.message);
+    const c = $("saveChip"); chip("bad", "Not saved yet. Your typing is kept."); if (c && /unknown request|Type 1-4, EX or M|Type 1-4, EX, M or IC/i.test(e.message)) c.innerHTML = "⚠ " + needUpdate(e.message);
   }
 }
 window.addEventListener("beforeunload", e => { if (Object.keys(pend).length || flushing) { e.preventDefault(); e.returnValue = ""; } });
@@ -1639,7 +1640,14 @@ function renderGrid(list) {
   const pick = gridUnitPick[tab], showKey = partUnits.some(g => g.unit === pick) ? pick : homeKey;
   const units = showKey && allUnits.some(g => g.unit === showKey) ? allUnits.filter(g => g.unit === showKey) : allUnits;
   const unitPicker = partUnits.length > 1 && units.length === 1 ? `<div class="unitpick"><label>Look at another unit <select id="gridUnitSel">${partUnits.map(g => `<option value="${g.unit}"${g.unit === units[0].unit ? " selected" : ""}>${safe(g.name)}${g.unit === nowUnit ? " (now)" : g.unit === latestKey ? " (latest)" : ""}</option>`).join("")}</select></label>${units[0].unit !== homeKey && homeKey ? ` <button class="light" id="gridUnitNow">${nowUnit ? "Back to current unit" : "Back to latest"}</button>` : ""}</div>` : "";
-  $("out").innerHTML = KEYLINE + HOWTO + unitPicker +
+  // Work ahead (Fynn, 11-16): open a later unit early for one student, so it shows on their page with Start buttons.
+  // Saved as an "ahead-u<unit>" mark (AH) in Teacher Tools. Only for units after the one you're teaching now.
+  const aheadU = units.length === 1 && nowUnit > 0 && units[0].unit > nowUnit ? units[0].unit : 0;
+  const aheadId = "ahead-u" + aheadU;
+  const aheadOn = aheadU ? rosterOf(tab).filter(s => markOf(tab, aheadId, s) === "AH") : [];
+  const aheadBar = !aheadU ? "" : `<div class="aheadbar"><b>🚀 Work ahead:</b> ${aheadOn.length ? aheadOn.map(s => `<span class="aheadchip">${safe(s)} <button class="light aheadoff" data-s="${safe(s)}" title="Close this unit for ${safe(s)}" aria-label="Close this unit for ${safe(s)}">×</button></span>`).join(" ") : `<span class="muted">nobody yet</span>`}
+    <label>Open this unit early for <select id="aheadSel"><option value="">pick a student…</option>${rosterOf(tab).filter(s => !aheadOn.includes(s)).map(s => `<option>${safe(s)}</option>`).join("")}</select></label></div>`;
+  $("out").innerHTML = KEYLINE + HOWTO + unitPicker + aheadBar +
     units.map(g => {
       const inUnit = list.filter(r => g.ids.includes(r.assignmentId));
       const who = [...new Set([...rosterOf(tab), ...inUnit.map(r => r.studentName)])].sort((a, b) => a.localeCompare(b));
@@ -1648,6 +1656,8 @@ function renderGrid(list) {
     <tbody>${who.length ? who.map(s => `<tr>${studentCell(tab, s)}${g.ids.map(id => cell(s, id)).join("")}${unitSum(s, g.ids, inUnit)}</tr>`).join("") : `<tr><td class="student" colspan="${g.ids.length + 2}">No students yet. Add your class list (Needs attention → Edit class list) so everyone gets a box.</td></tr>`}</tbody></table></div></section>`;
     }).join("");
   if ($("gridUnitSel")) $("gridUnitSel").onchange = e => { gridUnitPick[tab] = +e.target.value === homeKey ? null : +e.target.value; render(); };
+  if ($("aheadSel")) $("aheadSel").onchange = e => { if (e.target.value) { queueMark(tab, aheadId, e.target.value, "AH"); render(); } };
+  $("out").querySelectorAll(".aheadoff").forEach(b => b.onclick = () => { queueMark(tab, aheadId, b.dataset.s, ""); render(); });
   if ($("gridUnitNow")) $("gridUnitNow").onclick = () => { gridUnitPick[tab] = null; render(); };
   $("out").querySelectorAll("td.done button:not(.mk)").forEach(b => b.onclick = () => { view = "list"; render(); $("search").value = b.dataset.s; $("assignment").value = b.dataset.a; render(); });
   wireGridExtras(list);
