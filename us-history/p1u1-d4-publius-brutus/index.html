@@ -1,0 +1,259 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Publius vs. Brutus | U.S. History Part 1 · Unit 1 · Day 4</title>
+<meta name="description" content="U.S. History Part 1, Unit 1, Day 4. Run a New York newspaper during the fight to ratify the Constitution, and test how checks and balances stop abuse of power.">
+<style>
+:root{--ink:#1f2b33;--muted:#55626b;--paper:#f4f1ea;--card:#fff;--line:#dcd5c4;--acc:#34495e;--acc2:#8a5a1f;--soft:#eef0f3;--green:#2a6b45;--bad:#a2392f;--parch:#fbf5e6;--parchline:#e2d3ad}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.5 system-ui,Segoe UI,Arial,sans-serif}
+.top{background:#26333f;color:#fff;padding:8px max(16px,calc((100vw - 900px)/2));display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.top .k{font-size:.78rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;margin:0;color:#e9dcc0}
+.stds{font-size:.85rem;position:relative}
+.stds summary{cursor:pointer;color:#cfd8e0;font-weight:700;list-style:none}.stds summary::-webkit-details-marker{display:none}
+.stds summary::after{content:" ▾"}.stds[open] summary::after{content:" ▴"}
+.stds .box{position:absolute;right:0;top:130%;z-index:20;width:min(460px,92vw);background:#fff;color:var(--ink);border:1px solid var(--line);border-radius:10px;padding:10px 12px;box-shadow:0 8px 24px #0003}
+.stds .box p{margin:4px 0}
+.hud{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line);padding:7px max(16px,calc((100vw - 900px)/2));display:flex;gap:12px;flex-wrap:wrap;align-items:center;font-weight:800;font-size:.9rem;box-shadow:0 2px 8px #1f2b3312}
+body.intro .hud{display:none}
+.hud .bar{flex:1;min-width:100px;height:10px;background:#e6e3da;border-radius:9px;overflow:hidden}.hud .bar span{display:block;height:100%;width:0;background:var(--acc);transition:width .4s}
+.pill{background:#f0ede4;border-radius:20px;padding:3px 10px;white-space:nowrap;display:flex;align-items:center;gap:6px}
+.pill .track{width:70px;height:9px;border-radius:9px;background:#e0dccf;overflow:hidden}.pill .track span{display:block;height:100%;background:var(--acc2);transition:width .5s}
+.pill.w .track span{background:#2f6f8f}
+.pill em{font-style:normal;color:var(--acc2)}.pill.w em{color:#2f6f8f}
+main{max-width:900px;margin:auto;padding:12px 16px 50px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px;box-shadow:0 3px 12px #1f2b330d}
+.kicker{font-size:.76rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:var(--acc2);margin:0}
+h2{margin:2px 0 8px;font-size:1.4rem}
+/* first screen */
+.hero{display:grid;grid-template-columns:1fr 200px;gap:18px;align-items:center}
+.hero h1{font-size:clamp(2.2rem,5vw,3.2rem);line-height:1.05;margin:4px 0 8px;font-family:Georgia,"Times New Roman",serif}
+.hook{font-size:1.1rem;margin:0 0 10px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:0}.chips span{background:#f0ede4;border:1px solid var(--line);border-radius:20px;padding:4px 11px;font-weight:800;font-size:.88rem}
+.hero figure{margin:0}.hero img{width:100%;height:215px;object-fit:cover;object-position:top;border-radius:10px;border:1px solid var(--line)}
+.intro label{margin-top:12px}
+.intro input{max-width:420px}
+@media(max-width:640px){.hero{grid-template-columns:1fr}.hero figure{display:none}}
+.teach{background:var(--soft);border-left:5px solid var(--acc);border-radius:9px;padding:9px 13px;margin:0 0 10px;display:flow-root}.teach p{margin:3px 0}.teach b{color:var(--acc)}
+.block{margin:12px 0;padding:13px;border-radius:12px;border:2px solid var(--line);background:#fff;display:flow-root}
+.block.current{border-color:var(--ink);box-shadow:0 0 0 4px #34495e30}
+.block h3{margin:0 0 8px;font-size:1.04rem;line-height:1.35;font-weight:700}
+.block.past{padding:9px 13px;background:#fbfaf7}
+.block.past .srccard,.block.past figure,.block.past .bigq{display:none}
+.event{background:#fbf9f4;border-style:dashed;border-color:#cdbf9a}.event.current{border-style:solid}
+.event-body p{margin:4px 0}
+.srccard{background:var(--parch);border:1px solid var(--parchline);border-left:5px solid #b8975a;border-radius:10px;padding:8px 12px;margin:0 0 8px;font-weight:400}
+.srccard .who{font-size:.74rem;font-weight:900;letter-spacing:.06em;text-transform:uppercase;color:#7a5c26;margin-bottom:2px}
+.srccard .quote{font-family:Georgia,"Times New Roman",serif;font-style:italic}
+.srccard p{margin:3px 0}
+figure.pic{float:right;width:190px;margin:0 0 6px 12px}
+figure.pic img{width:100%;max-height:230px;object-fit:cover;object-position:top;border-radius:8px;border:1px solid var(--line);display:block}
+figure figcaption{font-size:.76rem;line-height:1.3;color:var(--muted);margin-top:3px;font-weight:400}
+@media(max-width:560px){figure.pic{float:none;width:100%;margin:0 0 8px}figure.pic img{max-height:260px}}
+.picked{margin:8px 0 4px;color:var(--muted)}.result{background:#f0ede4;border-radius:9px;padding:8px 12px}.result p{margin:3px 0}
+.tag{display:inline-block;font-weight:900;font-size:.78rem;border-radius:12px;padding:2px 9px;margin-right:5px}.tag.up{background:#dcefe2;color:var(--green)}.tag.down{background:#f6dcd8;color:var(--bad)}.tag.flat{background:#ebe9e0;color:var(--ink)}
+.choices{display:grid;gap:8px}
+@media(min-width:700px){.q .choices,.event .choices{grid-template-columns:1fr 1fr}}
+button{font:inherit;cursor:pointer;border-radius:10px;min-height:46px}
+.choice{text-align:left;background:#fff;color:var(--ink);border:2px solid #cfcab9;padding:9px 12px;font-weight:650;line-height:1.3}
+.choice:hover:not(:disabled){border-color:var(--ink);background:#fcfcfa}.choice:disabled{opacity:.5;cursor:not-allowed}
+.go{margin-top:12px;background:var(--acc);color:#fff;border:0;padding:11px 22px;font-weight:900;font-size:1.05rem}
+button:focus-visible,input:focus-visible,textarea:focus-visible,.wh:focus-visible{outline:3px solid #2f7dbd;outline-offset:2px}
+.answered{font-weight:800;color:var(--green);margin:3px 0}.why{margin:2px 0;color:var(--muted)}
+.msg{min-height:1.3em;font-weight:750;margin:8px 0 0}.msg.bad{color:var(--bad);background:#fbeeec;border-radius:8px;padding:6px 10px}.msg.good{color:var(--green)}
+label{display:block;font-weight:850;margin:14px 0 4px}.stem{margin:0 0 4px;color:var(--muted);font-size:.92rem}
+input,textarea{width:100%;font:inherit;border:2px solid #cfcab9;border-radius:9px;padding:10px;background:#fff;color:var(--ink)}
+.welcome{background:#e6f1ea;color:var(--green);font-weight:800;border-radius:9px;padding:8px 12px;margin:0 0 10px}
+.foot{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-top:14px;color:var(--muted);font-size:.85rem}
+.foot button{background:#ebe9e0;border:0;padding:8px 12px;font-weight:800;color:var(--ink)}
+.src{font-size:.8rem;color:var(--muted)}
+.tl{list-style:none;padding:0;margin:4px 0}.tl li{border-left:4px solid var(--acc2);padding:2px 0 2px 10px;margin:3px 0}
+.wh{border-bottom:2px dotted var(--acc2);cursor:help;position:relative;font-style:normal}
+.wh:hover::after,.wh:focus::after{content:attr(data-tip);position:absolute;left:0;top:115%;z-index:30;background:#26333f;color:#fff;padding:6px 9px;border-radius:8px;font:600 .84rem/1.35 system-ui,Segoe UI,Arial,sans-serif;width:max-content;max-width:250px;white-space:normal;box-shadow:0 4px 14px #0004}
+.outcome{background:#f3efe4;border-radius:10px;padding:10px 14px;margin:6px 0 4px}.outcome p{margin:4px 0}
+.credits{margin-top:10px;font-size:.78rem;color:var(--muted)}.credits summary{cursor:pointer;font-weight:700}
+@media print{.hud,.foot,.go{display:none}}
+</style>
+<style>
+:root{--acc:#2f5d46;--soft:#edf3ee}
+.top{background:#21392d}
+.block.current{box-shadow:0 0 0 4px #2f5d4630}
+.pill.w .track span{background:#6b4f8a}.pill.w em{color:#6b4f8a}
+.hero img{object-position:center}
+.serious{border-left:5px solid #555;background:#f6f6f4;border-radius:9px;padding:9px 13px;margin:0 0 10px}
+.ledger{width:100%;border-collapse:collapse;font-size:.9rem;margin:4px 0;font-weight:400}.ledger th,.ledger td{border:1px solid var(--parchline);padding:4px 8px;text-align:left}.ledger th{background:#f3ead2}
+</style>
+<script src="../../shared/assignments.js?v=20261116p1g"></script>
+<script src="../../shared/turnin.js?v=20261105fb1"></script>
+<script src="../../shared/unit-game.js?v=20261103ctt"></script>
+</head><body class="intro">
+<header class="top">
+  <p class="k">U.S. History · Part 1 · Unit 1 · Day 4</p>
+  <details class="stds"><summary>Standard &amp; goal</summary><div class="box">
+    <p><b>SS.9-12.US.2</b> Analyze ideas in founding documents using primary and secondary sources.</p>
+    <p><b>Today's goal:</b> I can explain how separation of powers and checks and balances stop abuse of power, and compare Federalist and Anti-Federalist arguments.</p>
+  </div></details>
+</header>
+<div class="hud" aria-label="Progress and meters">
+  <span id="progressText">0 checks done</span>
+  <div class="bar" aria-hidden="true"><span id="progressFill"></span></div>
+  <span class="pill v">Readers: <span class="track" aria-hidden="true"><span id="vFill" style="width:50%"></span></span> <em id="vWord"></em></span>
+  <span class="pill w">Chance it passes: <span class="track" aria-hidden="true"><span id="wFill" style="width:50%"></span></span> <em id="wWord"></em></span>
+</div>
+<main>
+  <p class="welcome" id="welcome" hidden></p>
+  <div id="app"></div>
+  <div class="foot"><span>Progress saves on this device. Your teacher sees your work after you turn it in.</span><button type="button" id="restartBtn">Start over</button></div>
+  <details class="credits"><summary>Picture credits</summary>
+    <p><i>The Federalist</i>, first edition, volume 1 (1788). Via Wikimedia Commons (public domain).</p>
+    <p>Federal Hall, New York City, engraving (1790), Library of Congress. Via Wikimedia Commons (public domain).</p>
+  </details>
+</main>
+<script>
+const SRC = (who, body) => `<div class="srccard"><div class="who">${who}</div>${body}</div>`;
+const W = (word, tip) => `<span class="wh" tabindex="0" data-tip="${tip}">${word}</span>`;
+const IMG = "../../shared/wtp-bell/img/";
+const PIC = (src, alt, cap) => `<figure class="pic"><img src="${IMG}${src}" alt="${alt}"><figcaption>${cap}</figcaption></figure>`;
+const up = t => `<span class="tag up">▲ ${t}</span>`, down = t => `<span class="tag down">▼ ${t}</span>`, flat = t => `<span class="tag flat">= ${t}</span>`;
+// Two meters (0–6): how many readers your paper keeps vs. the chance New York approves the Constitution.
+// Exciting attacks sell papers but hurt the Constitution's chances (and the reverse).
+const rWord = v => v <= 1 ? "Losing them" : v <= 3 ? "Steady" : v <= 4 ? "Growing" : "Booming";
+const cWord = w => w <= 1 ? "Doomed" : w <= 3 ? "Toss-up" : w <= 4 ? "Likely" : "Strong";
+
+UnitGame.start({
+  key: "ush-p1u1-d4-publius-brutus-v1",
+  assignmentId: "ush-p1u1-d4-publius-brutus",
+  title: "U.S. History · Part 1 · Unit 1 · Day 4 · Publius vs. Brutus",
+  standard: "SS.9-12.US.2",
+  oldApi: "https://fynn-class-assignment-submissions-20261024.neotboy.chatgpt.site/api/submit",
+  lockSeconds: 4,
+  startFx: { readers: 3, ratify: 3 },
+  clampFx: fx => { fx.readers = Math.max(0, Math.min(6, fx.readers)); fx.ratify = Math.max(0, Math.min(6, fx.ratify)); },
+  hud: st => {
+    document.body.classList.toggle("intro", st.scene < 0);
+    const v = st.fx.readers || 0, w = st.fx.ratify || 0;
+    document.getElementById("vFill").style.width = Math.round(v / 6 * 100) + "%";
+    document.getElementById("wFill").style.width = Math.round(w / 6 * 100) + "%";
+    document.getElementById("vWord").textContent = rWord(v);
+    document.getElementById("wWord").textContent = cWord(w);
+  },
+  startLabel: "Run the paper",
+  introHtml: `<div class="hero"><div>
+      <p class="kicker">New York City · 1787–1788</p>
+      <h1>Publius vs. Brutus</h1>
+      <p class="hook">You run a New York newspaper. Two secret writers are at war over the new Constitution. What you print could decide if it lives or dies.</p>
+      <div class="chips"><span>3 parts</span><span>7 quick checks</span><span>3 tough calls</span><span>2 short answers</span><span>About 25 min</span></div>
+    </div>
+    <figure><img src="../../shared/wtp-bell/img/ratify.jpg" alt="Title page of The Federalist, 1788"><figcaption>The Federalist essays, collected into a book in 1788.</figcaption></figure></div>
+    <p class="src">You and your paper are made up. The essays, people, and votes are real.</p>`,
+  scenes: [
+    { kicker: "Part 1 of 3 · Fall 1787", title: "The Machine",
+      teach: `<p>The new Constitution splits power three ways. This is called <b>separation of powers</b>:</p>
+        <p><b>Congress</b> makes the laws · the <b>President</b> carries them out · the <b>courts</b> decide what laws mean.</p>
+        <p>Each branch can block the others. That's <b>checks and balances</b>. The goal: <b>no one gets too much power</b>.</p>`,
+      blocks: [
+        { type: "q", id: "angels", std: "US.2", short: "Fed. 51: no angels, so check each other",
+          prompt: SRC("James Madison (\"Publius\"), Federalist No. 51, 1788", `<p class="quote">"If men were angels, no government would be necessary."</p><p class="quote">"Ambition must be made to counteract ambition."</p><p>"Counteract" = push back against.</p>`) + "What is Madison's point?",
+          options: ["Leaders aren't angels, so each branch should check the others", "Leaders are mostly angels, so government needs very few rules", "Ambitious people should be kept out of government jobs", "One strong leader is the best way to stop bad laws"],
+          hint: "If people aren't angels, what do you need to keep them in line? Who pushes back against whom?",
+          why: "Madison expected people in power to grab for more. So he set up each branch to guard its own power and push back on the others." },
+        { type: "q", id: "override", std: "US.2", short: "Override a veto with 2/3 of both houses",
+          prompt: SRC("Case 1", `<p>Congress passes a law. The President thinks it's a bad idea and ${W("vetoes", "Rejects. Says no to a bill.")} it. Most of Congress still wants the law badly.</p>`) + "What can Congress do?",
+          options: ["Pass it again with two-thirds of both houses", "Ask the Supreme Court to sign it instead", "Pass it again with a simple majority vote", "Wait for the governors to approve it instead"],
+          hint: "A veto is a check on Congress. The check on the veto needs MORE than a normal vote.",
+          why: "Congress can override a veto with a two-thirds vote in both the House and the Senate. Each side has a way to push back." },
+        { type: "q", id: "court", std: "US.2", short: "Senate must approve justices",
+          prompt: SRC("Case 2", `<p>A President wants to fill the Supreme Court with friends who will always side with him.</p>`) + "Which check stops him from doing it alone?",
+          options: ["The Senate has to approve each justice he picks", "The House picks half of all the justices itself", "Voters elect every justice again every four years", "The Chief Justice can veto any pick he dislikes"],
+          hint: "The President nominates (picks). Then which part of Congress has to say yes?",
+          why: "The President picks, but the Senate must approve. That check makes it harder for one person to control the courts." }
+      ] },
+    { kicker: "Part 2 of 3 · Winter 1787–1788", title: "The Fears",
+      teach: `<p>Now 9 of the 13 states must <b>ratify</b> (approve) it. Two sides form:</p>
+        <table class="ledger"><tr><th>Federalists (for it)</th><th>Anti-Federalists (against it)</th></tr><tr><td>The country needs a stronger government. Checks and balances will keep it in line.</td><td>A strong national government could crush the states and people's rights.</td></tr><tr><td>Writers: Hamilton, Madison, Jay, as "Publius"</td><td>Writers like "Brutus," plus Patrick Henry and George Mason</td></tr></table>`,
+      blocks: [
+        { type: "event", id: "e1", short: "Front page: Publius or Brutus",
+          html: SRC("Your office · October 1787", `<p>Two essays land on your desk the same day. "Publius" says the Constitution will protect liberty. "Brutus" says it will swallow up the states. You have room for <b>one</b> on the front page.</p>`) + `<p><b>Tough call.</b> Which one leads?</p>`,
+          choices: [
+            { label: "Publius: the Constitution protects liberty", fx: { readers: 0, ratify: 1 },
+              result: `<p>${flat("Readers")}${up("Chance it passes")}Federalists send you more essays. <b>Real history:</b> Publius wrote 85 essays, later called <i>The Federalist Papers</i>.</p>` },
+            { label: "Brutus: the Constitution is dangerous", fx: { readers: 1, ratify: -1 },
+              result: `<p>${up("Readers")}${down("Chance it passes")}Fear sells. People line up for copies. <b>Real history:</b> Brutus's essays were some of the strongest arguments against the Constitution.</p>` },
+            { label: "Cut both in half to fit them side by side", fx: { readers: -1, ratify: 0 },
+              result: `<p>${down("Readers")}${flat("Chance it passes")}Fair, but both arguments get chopped up and confusing. Readers complain they can't follow either one.</p>` }
+          ] },
+        { type: "q", id: "brutus", std: "US.2", short: "Brutus fears national gov't swallowing states",
+          prompt: SRC("\"Brutus,\" Essay I, October 1787 (short version)", `<p>Congress can make any law it calls "necessary and proper." Its laws will be "the supreme law of the land." Over time, it could take every power away from the states.</p>`) + "What is Brutus most afraid of?",
+          options: ["A national government that grows until the states have no power", "A national government too weak to collect any taxes at all", "A king from Britain coming back to rule over the states", "Small states getting more votes than the big states"],
+          hint: "Look at what he says could happen \"over time\" to the states.",
+          why: "Anti-Federalists feared that a powerful national government, far away from regular people, would slowly crush the states and people's rights." },
+        { type: "q", id: "mason", std: "US.2", short: "Mason's fix: a bill of rights",
+          prompt: SRC("George Mason, \"Objections to This Constitution,\" 1787", `<p class="quote">"There is no Declaration of Rights…"</p><p>He says the new national laws will be stronger than the states, so the states' own lists of rights won't protect anyone.</p>`) + "Which addition would answer Mason's complaint?",
+          options: ["A list of freedoms the government can never take away", "A second President to watch over the first one", "A rule letting any state ignore a national law", "More seats in the House for the biggest states"],
+          hint: "What does Mason say is missing? Which choice adds that?",
+          why: "Mason wanted a bill of rights: a written list of freedoms like speech, religion, and a fair trial that the government can't take away." },
+        { type: "event", id: "e2", short: "Patrick Henry's offer",
+          html: SRC("A letter from Virginia · Spring 1788", `<p>Patrick Henry says he "smelt a rat" and skipped the Convention. In this game, he offers to write for your paper, but only if you call the Constitution a plot to bring back a king. Sales would jump.</p>`) + `<p><b>Tough call.</b> What do you do?</p>`,
+          choices: [
+            { label: "Print his piece exactly as he wrote it", fx: { readers: 2, ratify: -1 },
+              result: `<p>${up("Readers")}${down("Chance it passes")}It's a sensation. Federalists say you're spreading scary stories, not facts.</p>` },
+            { label: "Print it with a Federalist answer right beside it", fx: { readers: 1, ratify: 0 },
+              result: `<p>${up("Readers")}${flat("Chance it passes")}Readers get both sides in one place. Henry grumbles, but people buy the paper to watch the fight.</p>` },
+            { label: "Turn him down. You won't print scare stories", fx: { readers: -1, ratify: 1 },
+              result: `<p>${down("Readers")}${up("Chance it passes")}Henry takes his writing to a rival paper. You lose readers but keep your reputation.</p>` }
+          ] }
+      ] },
+    { kicker: "Part 3 of 3 · 1788", title: "The Deal",
+      teach: `<p>State after state held special meetings to vote. Some votes were close. In Massachusetts, Federalists made a deal: <b>vote yes now, and we'll add a bill of rights after.</b></p>
+        <p>On June 21, 1788, New Hampshire became the <b>9th state</b>. The Constitution was officially approved. But big states like Virginia and New York still hadn't voted.</p>`,
+      blocks: [
+        { type: "q", id: "deal", std: "US.2", short: "Promise of a bill of rights won votes",
+          prompt: SRC("Massachusetts, February 1788", `<p>Many delegates came ready to vote no. Federalist leaders agreed to send along a list of changes to add later. The final vote: 187 yes, 168 no.</p>`) + "What helped the Constitution pass in Massachusetts?",
+          options: ["Federalists promised to add changes like a bill of rights", "Britain threatened war unless the state approved it", "George Washington ordered the state to vote yes", "Anti-Federalists were not allowed to vote at all"],
+          hint: "What did Federalist leaders agree to send along?",
+          why: "The promise of amendments won over enough doubters. In 1791, the first 10 amendments, the Bill of Rights, were added." },
+        { type: "q", id: "ny", std: "US.2", short: "Close votes = deep split",
+          prompt: SRC("Final votes", `<p>Virginia: 89 yes, 79 no. New York: 30 yes, 27 no.</p>`) + "What do these close votes show?",
+          options: ["Americans were deeply split over how strong the government should be", "Almost everyone in those states loved the new Constitution right away", "Both states voted no and stayed out of the Union for many years", "The votes were ties that George Washington had to break himself"],
+          hint: "Compare the yes and no numbers. How far apart are they?",
+          why: "Both sides had real support. The Anti-Federalists lost the vote, but they won the Bill of Rights, and their fears about national power are still argued about today." },
+        { type: "event", id: "e3", short: "Headline before New York votes",
+          html: SRC("Your office · July 1788", `<p>New York's vote is days away. Ten states have already said yes. Your last front page before the vote needs a headline.</p>`) + `<p><b>Tough call.</b> Which headline do you run?</p>`,
+          choices: [
+            { label: "TEN STATES SAY YES: Join or Be Left Out", fx: { readers: 0, ratify: 2 },
+              result: `<p>${flat("Readers")}${up("Chance it passes")}Fear of being left alone works. Some no-voters start to waver.</p>` },
+            { label: "WHERE ARE OUR RIGHTS? Demand Changes First", fx: { readers: 1, ratify: -1 },
+              result: `<p>${up("Readers")}${down("Chance it passes")}Anti-Federalists pass your paper around. Federalists stop advertising with you.</p>` },
+            { label: "BOTH SIDES SPEAK: You Decide", fx: { readers: 1, ratify: 0 },
+              result: `<p>${up("Readers")}${flat("Chance it passes")}Readers trust you. Neither side is fully happy, which might mean you were fair.</p>` }
+          ] }
+      ] }
+  ],
+  finale: {
+    title: "Your Final Edition",
+    report: st => {
+      const r = st.fx.readers, c = st.fx.ratify;
+      let out;
+      if (c >= 4 && r >= 3) out = "Your paper stayed popular and helped push the Constitution over the line.";
+      else if (c >= 4) out = "You helped the Constitution pass, but lost a lot of readers doing it.";
+      else if (r >= 4) out = "Your paper is the talk of the town, but your choices made New York's yes vote harder.";
+      else out = "Readers drifted away, and the Constitution passed without much help from you.";
+      return `<div class="outcome"><p>${out}</p><p><b>What really happened:</b> New York said yes on July 26, 1788, by just 3 votes. In 1791, the Bill of Rights was added, the deal that ended the fight.</p></div>
+        <p>Answer both in 1–2 full sentences, using evidence from today.</p>`;
+    },
+    prompts: [
+      { id: "check", short: "One check and balance",
+        label: "1. Pick one check and balance from today. How does it stop one branch from abusing its power?",
+        stem: "One check is ___. It stops abuse of power because ___.", min: 70, newWords: 7,
+        mustAll: [["veto", "override", "senate", "approve", "two-thirds", "2/3", "court", "justice", "impeach"], ["stop", "check", "block", "can't", "cannot", "so", "because"]],
+        mustMsg: "In answer 1, name a real check from today (like a veto override or the Senate approving justices) AND say how it stops abuse." },
+      { id: "side", short: "Stronger argument: Federalist or Anti-Federalist",
+        label: "2. Which side had the stronger argument, the Federalists or the Anti-Federalists? Use one piece of evidence.",
+        stem: "The ___ had the stronger argument because ___.", min: 70, newWords: 7,
+        mustAll: [["federalist", "anti", "publius", "brutus", "madison", "mason", "henry"], ["because", "since", "so"]],
+        mustMsg: "In answer 2, name a side or one of its writers AND give your reason (use \"because\")." }
+    ]
+  }
+});
+
+</script>
+</body></html>

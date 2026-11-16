@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Print the Promise | U.S. History Part 1 · Unit 1 · Day 1</title>
+<meta name="description" content="U.S. History Part 1, Unit 1, Day 1. Work in a Philadelphia print shop from the Stamp Act to the Declaration of Independence, and decide who the promise of equality really covered.">
+<style>
+:root{--ink:#1f2b33;--muted:#55626b;--paper:#f4f1ea;--card:#fff;--line:#dcd5c4;--acc:#34495e;--acc2:#8a5a1f;--soft:#eef0f3;--green:#2a6b45;--bad:#a2392f;--parch:#fbf5e6;--parchline:#e2d3ad}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.5 system-ui,Segoe UI,Arial,sans-serif}
+.top{background:#26333f;color:#fff;padding:8px max(16px,calc((100vw - 900px)/2));display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.top .k{font-size:.78rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;margin:0;color:#e9dcc0}
+.stds{font-size:.85rem;position:relative}
+.stds summary{cursor:pointer;color:#cfd8e0;font-weight:700;list-style:none}.stds summary::-webkit-details-marker{display:none}
+.stds summary::after{content:" ▾"}.stds[open] summary::after{content:" ▴"}
+.stds .box{position:absolute;right:0;top:130%;z-index:20;width:min(460px,92vw);background:#fff;color:var(--ink);border:1px solid var(--line);border-radius:10px;padding:10px 12px;box-shadow:0 8px 24px #0003}
+.stds .box p{margin:4px 0}
+.hud{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line);padding:7px max(16px,calc((100vw - 900px)/2));display:flex;gap:12px;flex-wrap:wrap;align-items:center;font-weight:800;font-size:.9rem;box-shadow:0 2px 8px #1f2b3312}
+body.intro .hud{display:none}
+.hud .bar{flex:1;min-width:100px;height:10px;background:#e6e3da;border-radius:9px;overflow:hidden}.hud .bar span{display:block;height:100%;width:0;background:var(--acc);transition:width .4s}
+.pill{background:#f0ede4;border-radius:20px;padding:3px 10px;white-space:nowrap;display:flex;align-items:center;gap:6px}
+.pill .track{width:70px;height:9px;border-radius:9px;background:#e0dccf;overflow:hidden}.pill .track span{display:block;height:100%;background:var(--acc2);transition:width .5s}
+.pill.w .track span{background:#2f6f8f}
+.pill em{font-style:normal;color:var(--acc2)}.pill.w em{color:#2f6f8f}
+main{max-width:900px;margin:auto;padding:12px 16px 50px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px;box-shadow:0 3px 12px #1f2b330d}
+.kicker{font-size:.76rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:var(--acc2);margin:0}
+h2{margin:2px 0 8px;font-size:1.4rem}
+/* first screen */
+.hero{display:grid;grid-template-columns:1fr 200px;gap:18px;align-items:center}
+.hero h1{font-size:clamp(2.2rem,5vw,3.2rem);line-height:1.05;margin:4px 0 8px;font-family:Georgia,"Times New Roman",serif}
+.hook{font-size:1.1rem;margin:0 0 10px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:0}.chips span{background:#f0ede4;border:1px solid var(--line);border-radius:20px;padding:4px 11px;font-weight:800;font-size:.88rem}
+.hero figure{margin:0}.hero img{width:100%;height:215px;object-fit:cover;object-position:top;border-radius:10px;border:1px solid var(--line)}
+.intro label{margin-top:12px}
+.intro input{max-width:420px}
+@media(max-width:640px){.hero{grid-template-columns:1fr}.hero figure{display:none}}
+.teach{background:var(--soft);border-left:5px solid var(--acc);border-radius:9px;padding:9px 13px;margin:0 0 10px;display:flow-root}.teach p{margin:3px 0}.teach b{color:var(--acc)}
+.block{margin:12px 0;padding:13px;border-radius:12px;border:2px solid var(--line);background:#fff;display:flow-root}
+.block.current{border-color:var(--ink);box-shadow:0 0 0 4px #34495e30}
+.block h3{margin:0 0 8px;font-size:1.04rem;line-height:1.35;font-weight:700}
+.block.past{padding:9px 13px;background:#fbfaf7}
+.block.past .srccard,.block.past figure,.block.past .bigq{display:none}
+.event{background:#fbf9f4;border-style:dashed;border-color:#cdbf9a}.event.current{border-style:solid}
+.event-body p{margin:4px 0}
+.srccard{background:var(--parch);border:1px solid var(--parchline);border-left:5px solid #b8975a;border-radius:10px;padding:8px 12px;margin:0 0 8px;font-weight:400}
+.srccard .who{font-size:.74rem;font-weight:900;letter-spacing:.06em;text-transform:uppercase;color:#7a5c26;margin-bottom:2px}
+.srccard .quote{font-family:Georgia,"Times New Roman",serif;font-style:italic}
+.srccard p{margin:3px 0}
+figure.pic{float:right;width:190px;margin:0 0 6px 12px}
+figure.pic img{width:100%;max-height:230px;object-fit:cover;object-position:top;border-radius:8px;border:1px solid var(--line);display:block}
+figure figcaption{font-size:.76rem;line-height:1.3;color:var(--muted);margin-top:3px;font-weight:400}
+@media(max-width:560px){figure.pic{float:none;width:100%;margin:0 0 8px}figure.pic img{max-height:260px}}
+.picked{margin:8px 0 4px;color:var(--muted)}.result{background:#f0ede4;border-radius:9px;padding:8px 12px}.result p{margin:3px 0}
+.tag{display:inline-block;font-weight:900;font-size:.78rem;border-radius:12px;padding:2px 9px;margin-right:5px}.tag.up{background:#dcefe2;color:var(--green)}.tag.down{background:#f6dcd8;color:var(--bad)}.tag.flat{background:#ebe9e0;color:var(--ink)}
+.choices{display:grid;gap:8px}
+@media(min-width:700px){.q .choices,.event .choices{grid-template-columns:1fr 1fr}}
+button{font:inherit;cursor:pointer;border-radius:10px;min-height:46px}
+.choice{text-align:left;background:#fff;color:var(--ink);border:2px solid #cfcab9;padding:9px 12px;font-weight:650;line-height:1.3}
+.choice:hover:not(:disabled){border-color:var(--ink);background:#fcfcfa}.choice:disabled{opacity:.5;cursor:not-allowed}
+.go{margin-top:12px;background:var(--acc);color:#fff;border:0;padding:11px 22px;font-weight:900;font-size:1.05rem}
+button:focus-visible,input:focus-visible,textarea:focus-visible,.wh:focus-visible{outline:3px solid #2f7dbd;outline-offset:2px}
+.answered{font-weight:800;color:var(--green);margin:3px 0}.why{margin:2px 0;color:var(--muted)}
+.msg{min-height:1.3em;font-weight:750;margin:8px 0 0}.msg.bad{color:var(--bad);background:#fbeeec;border-radius:8px;padding:6px 10px}.msg.good{color:var(--green)}
+label{display:block;font-weight:850;margin:14px 0 4px}.stem{margin:0 0 4px;color:var(--muted);font-size:.92rem}
+input,textarea{width:100%;font:inherit;border:2px solid #cfcab9;border-radius:9px;padding:10px;background:#fff;color:var(--ink)}
+.welcome{background:#e6f1ea;color:var(--green);font-weight:800;border-radius:9px;padding:8px 12px;margin:0 0 10px}
+.foot{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-top:14px;color:var(--muted);font-size:.85rem}
+.foot button{background:#ebe9e0;border:0;padding:8px 12px;font-weight:800;color:var(--ink)}
+.src{font-size:.8rem;color:var(--muted)}
+.tl{list-style:none;padding:0;margin:4px 0}.tl li{border-left:4px solid var(--acc2);padding:2px 0 2px 10px;margin:3px 0}
+.wh{border-bottom:2px dotted var(--acc2);cursor:help;position:relative;font-style:normal}
+.wh:hover::after,.wh:focus::after{content:attr(data-tip);position:absolute;left:0;top:115%;z-index:30;background:#26333f;color:#fff;padding:6px 9px;border-radius:8px;font:600 .84rem/1.35 system-ui,Segoe UI,Arial,sans-serif;width:max-content;max-width:250px;white-space:normal;box-shadow:0 4px 14px #0004}
+.outcome{background:#f3efe4;border-radius:10px;padding:10px 14px;margin:6px 0 4px}.outcome p{margin:4px 0}
+.credits{margin-top:10px;font-size:.78rem;color:var(--muted)}.credits summary{cursor:pointer;font-weight:700}
+@media print{.hud,.foot,.go{display:none}}
+</style>
+<style>
+:root{--acc:#7a3b2e;--soft:#f6eeec}
+.top{background:#3a2620}
+.block.current{box-shadow:0 0 0 4px #7a3b2e30}
+.pill.w .track span{background:#2f6f8f}.pill.w em{color:#2f6f8f}
+.hero img{object-position:center}
+.serious{border-left:5px solid #555;background:#f6f6f4;border-radius:9px;padding:9px 13px;margin:0 0 10px}
+.ledger{width:100%;border-collapse:collapse;font-size:.9rem;margin:4px 0;font-weight:400}.ledger th,.ledger td{border:1px solid var(--parchline);padding:4px 8px;text-align:left}.ledger th{background:#f3ead2}
+</style>
+<script src="../../shared/assignments.js?v=20261116p1g"></script>
+<script src="../../shared/turnin.js?v=20261105fb1"></script>
+<script src="../../shared/unit-game.js?v=20261103ctt"></script>
+</head><body class="intro">
+<header class="top">
+  <p class="k">U.S. History · Part 1 · Unit 1 · Day 1</p>
+  <details class="stds"><summary>Standard &amp; goal</summary><div class="box">
+    <p><b>SS.9-12.US.2</b> Analyze ideas in founding documents using primary and secondary sources.</p>
+    <p><b>SS.9-12.US.1</b> Analyze change, continuity, and context of American citizenship from 1776 to 1870.</p>
+    <p><b>Today's goal:</b> I can explain the main ideas of the Declaration of Independence, where they came from, and who was left out of its promise in 1776.</p>
+  </div></details>
+</header>
+<div class="hud" aria-label="Progress and meters">
+  <span id="progressText">0 checks done</span>
+  <div class="bar" aria-hidden="true"><span id="progressFill"></span></div>
+  <span class="pill v">Freedom's promise: <span class="track" aria-hidden="true"><span id="vFill" style="width:50%"></span></span> <em id="vWord"></em></span>
+  <span class="pill w">Shop safety: <span class="track" aria-hidden="true"><span id="wFill" style="width:50%"></span></span> <em id="wWord"></em></span>
+</div>
+<main>
+  <p class="welcome" id="welcome" hidden></p>
+  <div id="app"></div>
+  <div class="foot"><span>Progress saves on this device. Your teacher sees your work after you turn it in.</span><button type="button" id="restartBtn">Start over</button></div>
+  <details class="credits"><summary>Picture credits</summary>
+    <p>John Trumbull, <i>Declaration of Independence</i> (1819), U.S. Capitol. Via Wikimedia Commons (public domain).</p>
+    <p>Paul Revere, <i>The Bloody Massacre</i> (1770), National Gallery of Art. Via Wikimedia Commons (public domain).</p>
+    <p>Magna Carta (1215), British Library, Cotton MS Augustus II.106. Via Wikimedia Commons (public domain).</p>
+  </details>
+</main>
+<script>
+const SRC = (who, body) => `<div class="srccard"><div class="who">${who}</div>${body}</div>`;
+const W = (word, tip) => `<span class="wh" tabindex="0" data-tip="${tip}">${word}</span>`;
+const IMG = "../../shared/wtp-bell/img/";
+const PIC = (src, alt, cap) => `<figure class="pic"><img src="${IMG}${src}" alt="${alt}"><figcaption>${cap}</figcaption></figure>`;
+const up = t => `<span class="tag up">▲ ${t}</span>`, down = t => `<span class="tag down">▼ ${t}</span>`, flat = t => `<span class="tag flat">= ${t}</span>`;
+// Two meters (0–6): how far the promise of freedom spreads vs. how safe the print shop stays.
+// Printing bold ideas spreads the promise but puts the shop at risk (and the reverse).
+const pWord = v => v <= 1 ? "Fading" : v <= 3 ? "Spreading" : v <= 4 ? "Growing" : "Loud";
+const sWord = w => w <= 1 ? "In danger" : w <= 3 ? "Risky" : w <= 4 ? "Okay" : "Safe";
+
+UnitGame.start({
+  key: "ush-p1u1-d1-promise-v1",
+  assignmentId: "ush-p1u1-d1-promise",
+  title: "U.S. History · Part 1 · Unit 1 · Day 1 · Print the Promise",
+  standard: "SS.9-12.US.2, SS.9-12.US.1",
+  oldApi: "https://fynn-class-assignment-submissions-20261024.neotboy.chatgpt.site/api/submit",
+  lockSeconds: 4,
+  startFx: { promise: 3, safety: 4 },
+  clampFx: fx => { fx.promise = Math.max(0, Math.min(6, fx.promise)); fx.safety = Math.max(0, Math.min(6, fx.safety)); },
+  hud: st => {
+    document.body.classList.toggle("intro", st.scene < 0);
+    const v = st.fx.promise || 0, w = st.fx.safety || 0;
+    document.getElementById("vFill").style.width = Math.round(v / 6 * 100) + "%";
+    document.getElementById("wFill").style.width = Math.round(w / 6 * 100) + "%";
+    document.getElementById("vWord").textContent = pWord(v);
+    document.getElementById("wWord").textContent = sWord(w);
+  },
+  startLabel: "Open the shop",
+  introHtml: `<div class="hero"><div>
+      <p class="kicker">Philadelphia · 1765–1777</p>
+      <h1>Print the Promise</h1>
+      <p class="hook">You're an apprentice in a print shop. Every paper you print could start a revolution, or get the shop shut down.</p>
+      <div class="chips"><span>3 parts</span><span>7 quick checks</span><span>3 tough calls</span><span>2 short answers</span><span>About 25 min</span></div>
+    </div>
+    <figure><img src="../../shared/wtp-bell/img/declaration.jpg" alt="John Trumbull's painting of the Declaration of Independence being presented to Congress"><figcaption>The Declaration is presented to Congress (painted 1819).</figcaption></figure></div>
+    <p class="src">You and the shop are made up. The laws, letters, and documents are real.</p>`,
+  scenes: [
+    { kicker: "Part 1 of 3 · 1765", title: "Old Rules, New Taxes",
+      teach: `${PIC("revolution.jpg", "Paul Revere's 1770 print of the Boston Massacre", "Paul Revere's 1770 print of the Boston Massacre. It was made to make people angry.")}
+        <p>The colonists were <b>English</b>. They grew up with two old English rules:</p>
+        <p><b>Magna Carta (1215):</b> even the king has to obey the law. · <b>English Bill of Rights (1689):</b> no taxes without Parliament's OK.</p>
+        <p>In 1763, Britain finished a costly war with France. To pay its debt, <b>Parliament</b> (Britain's lawmakers) started taxing the colonies. But no colonist had a seat in Parliament.</p>`,
+      blocks: [
+        { type: "event", id: "e1", short: "Stamp Act: what to do",
+          html: SRC("Stamp Act · November 1765", `<p>A new British law says every newspaper must be printed on paper with a tax stamp. Your boss asks you what the shop should do.</p>`) + `<p><b>Tough call.</b> What do you tell him?</p>`,
+          choices: [
+            { label: "Print without stamps and dare officials to stop us", fx: { promise: 2, safety: -2 },
+              result: `<p>${up("Freedom's promise")}${down("Shop safety")}Patriot customers cheer. Officials take down your name. <b>This really happened:</b> many printers kept printing without stamps. Protests got so loud that Parliament dropped the Stamp Act in 1766.</p>` },
+            { label: "Pay the tax and keep printing like normal", fx: { promise: -1, safety: 1 },
+              result: `<p>${down("Freedom's promise")}${up("Shop safety")}The shop is safe, but customers call you cowards. Some take their business across the street.</p>` },
+            { label: "Stop printing the paper until the law is gone", fx: { promise: 1, safety: 0 },
+              result: `<p>${up("Freedom's promise")}${flat("Shop safety")}A quiet protest. One real Philadelphia paper printed a black-bordered issue shaped like a tombstone, as if freedom had died.</p>` }
+          ] },
+        { type: "q", id: "taxrep", std: "US.2", short: "No taxation without representation",
+          prompt: SRC("Stamp Act Congress, 1765 (short version)", `<p class="quote">"…no taxes be imposed on them, but with their own consent, given personally, or by their representatives."</p><p>"Consent" = agreeing to it.</p>`) + "What were the colonists arguing?",
+          options: ["Only lawmakers they elected should tax them", "Britain had no right to keep any army at all", "Every tax should be paid in gold and silver", "Colonists should pay less than people in Britain"],
+          hint: "Who has to agree to a tax? Look at \"by their representatives.\"",
+          why: "That's \"no taxation without representation.\" Colonists had no one in Parliament, so they said Parliament couldn't tax them." },
+        { type: "q", id: "britain", std: "US.2", short: "Britain's side: colonists should help pay",
+          prompt: SRC("Britain's side of the story", `<p>The war with France protected the colonies. It left Britain deep in debt. Parliament says it speaks for everyone in the empire, even people who don't vote for it.</p>`) + "Which line would a member of Parliament most likely say?",
+          options: ["The colonists should help pay for the war that protected them", "The colonists should be allowed to elect their own Parliament", "The colonies should make all of their own tax laws from now on", "The king alone should decide every tax without Parliament"],
+          hint: "Read the box again. Who does Parliament think should pay off the debt?",
+          why: "Britain saw the taxes as fair: the war protected the colonies, so the colonies should help pay. Both sides thought they were right." }
+      ] },
+    { kicker: "Part 2 of 3 · July 1776", title: "The Words That Broke an Empire",
+      teach: `${PIC("declaration.jpg", "John Trumbull's painting of the Declaration of Independence", "Trumbull's painting is on the back of the $2 bill.")}
+        <p>Fighting started at Lexington and Concord in April 1775. On <b>July 4, 1776</b>, Congress approved the <b>Declaration of Independence</b>. Thomas Jefferson wrote most of it.</p>
+        <p>That same night, printer John Dunlap printed the first copies. Now your shop gets the order too.</p>`,
+      blocks: [
+        { type: "q", id: "rights", std: "US.2", short: "Unalienable rights: born with them",
+          prompt: SRC("Declaration of Independence, 1776", `<p class="quote">"…all men are created equal, that they are endowed by their Creator with certain ${W("unalienable", "Can't be taken away.")} Rights, that among these are Life, Liberty and the pursuit of Happiness."</p>`) + "A customer asks you: \"Where do these rights come from?\" What does the Declaration say?",
+          options: ["People are born with them, and no ruler hands them out", "The king hands them out to subjects who stay loyal", "Congress grants them again after a vote each year", "They come from owning land and paying your taxes"],
+          hint: "\"Endowed by their Creator\" means people have them from birth. Who is NOT the source?",
+          why: "The Declaration says rights come with being human. Governments don't give them. Governments exist to protect them." },
+        { type: "q", id: "consent", std: "US.2", short: "Consent of the governed",
+          prompt: SRC("Declaration of Independence, 1776", `<p class="quote">"…Governments are instituted among Men, deriving their just powers from the consent of the governed…"</p><p>"Instituted" = set up. "Deriving" = getting.</p>`) + "What does \"consent of the governed\" mean?",
+          options: ["A government's power comes from the people agreeing to it", "A government's power comes from winning a war against rivals", "A government must ask the king before it can act on anything", "A government's power comes from its richest and oldest families"],
+          hint: "\"Consent\" means agreeing. Who are \"the governed\"?",
+          why: "The people are the source of a government's power. If a government destroys their rights, the Declaration says the people can change it or replace it." },
+        { type: "event", id: "e2", short: "How many copies to print",
+          html: SRC("Your shop · July 5, 1776", `<p>Your Loyalist neighbor (made up) warns you: printing this is ${W("treason", "Betraying your country. In 1776 it could get you hanged.")}. If Britain wins, every printer could be punished. Your boss asks how many copies to make.</p>`) + `<p><b>Tough call.</b> What do you do?</p>`,
+          choices: [
+            { label: "Print hundreds and post them all over town", fx: { promise: 2, safety: -2 },
+              result: `<p>${up("Freedom's promise")}${down("Shop safety")}Crowds gather to read it. <b>This really happened:</b> on July 8, the Declaration was read out loud to a crowd in Philadelphia, and bells rang. Your neighbor now watches your door.</p>` },
+            { label: "Print only the copies Congress paid for", fx: { promise: 0, safety: 1 },
+              result: `<p>${flat("Freedom's promise")}${up("Shop safety")}You play it safe. Other printers and newspapers copy it anyway, and it spreads to every colony within weeks.</p>` },
+            { label: "Refuse the job. It's too dangerous", fx: { promise: -2, safety: 1 },
+              result: `<p>${down("Freedom's promise")}${up("Shop safety")}Another shop takes the order. Patriot customers stop coming, and your boss is furious.</p>` }
+          ] },
+        { type: "q", id: "complaint", std: "US.2", short: "Complaints connect to English Bill of Rights",
+          prompt: SRC("Complaints against King George III, from the Declaration", `<p class="quote">"For imposing Taxes on us without our Consent…"</p><p class="quote">"He has kept among us, in times of peace, Standing Armies without the Consent of our legislatures."</p>`) + "Both complaints match an old English rule from Part 1. Which one?",
+          options: ["The English Bill of Rights: no taxes or peacetime army without lawmakers", "The Magna Carta: nobles must give their land to the king when asked", "The divine right of kings: a king answers only to God, not to laws", "The Stamp Act: every printer must buy official tax stamps from Britain"],
+          hint: "Go back to the blue box in Part 1. Which rule was about taxes and Parliament's OK?",
+          why: "The English Bill of Rights (1689) said the king couldn't tax or keep an army in peacetime without Parliament's permission. The colonists said King George broke those same rules." }
+      ] },
+    { kicker: "Part 3 of 3 · 1776–1777", title: "Who Was Left Out?",
+      teach: `<div class="serious"><p>"All men are created equal" was a huge promise. But in 1776, about <b>1 in 5 people</b> in the colonies was <b>enslaved</b>. <b>Women</b> could not vote in almost every colony. <b>Native nations</b> were not part of the deal at all. The Declaration even called Native people "merciless Indian Savages."</p></div>`,
+      blocks: [
+        { type: "q", id: "abigail", std: "US.1", short: "Abigail Adams: remember the ladies",
+          prompt: SRC("Abigail Adams, letter to her husband John, March 1776", `<p class="quote">"…remember the ladies, and be more generous and favourable to them than your ancestors."</p><p>John was in Congress. He wrote back that he could only laugh.</p>`) + "What was Abigail Adams pointing out?",
+          options: ["The new nation's rights should include women too", "Women should stay out of the fight for freedom", "Congress should give the king one more chance", "Women already had equal rights in every colony"],
+          hint: "Who did she ask Congress to \"remember\"?",
+          why: "She saw that the new rules were being written by men, for men. Women would not win the national vote until 1920." },
+        { type: "q", id: "draft", std: "US.1", short: "Signers didn't apply it to enslaved people",
+          prompt: SRC("Jefferson's first draft, 1776 (short version)", `<p>Jefferson's draft blamed King George for the slave trade. Congress cut that part out, partly because delegates from South Carolina and Georgia objected. Jefferson himself enslaved more than 600 people during his life.</p>`) + "What does this show about \"all men are created equal\" in 1776?",
+          options: ["Many signers did not apply it to the people they enslaved", "Congress voted to end slavery everywhere on July 4, 1776", "Jefferson freed every person he enslaved that same summer", "Enslaved people were counted as full citizens that year"],
+          hint: "Did the men who signed it live by it? Look at what Jefferson did in his own life.",
+          why: "The words were bigger than the people who wrote them. For almost 90 more years, slavery stayed legal in the United States." },
+        { type: "event", id: "e3", short: "Prince Hall's petition",
+          html: SRC("Petition to the Massachusetts lawmakers · January 1777 (real)", `<p>Prince Hall and other Black Bostonians ask lawmakers to end slavery. They use the Declaration's own words: enslaved people have "a natural and unalienable right to that freedom which the Great Parent of the Universe hath bestowed equally on all mankind."</p>`) + `<p><b>Tough call.</b> A friend brings a copy to your shop. Do you print it?</p>`,
+          choices: [
+            { label: "Print it on the front page", fx: { promise: 2, safety: -1 },
+              result: `<p>${up("Freedom's promise")}${down("Shop safety")}Some customers cancel. Others say it holds America to its own words. <b>What really happened:</b> lawmakers ignored the petition. But in the early 1780s, Massachusetts courts ended slavery there.</p>` },
+            { label: "Print it small, on a back page", fx: { promise: 1, safety: 0 },
+              result: `<p>${up("Freedom's promise")}${flat("Shop safety")}A few people notice. <b>What really happened:</b> lawmakers ignored the petition. But in the early 1780s, Massachusetts courts ended slavery there.</p>` },
+            { label: "Don't print it. Customers will be angry", fx: { promise: -1, safety: 1 },
+              result: `<p>${down("Freedom's promise")}${up("Shop safety")}The shop stays quiet. <b>What really happened:</b> lawmakers ignored the petition. But in the early 1780s, Massachusetts courts ended slavery there, using the same ideas.</p>` }
+          ] }
+      ] }
+  ],
+  finale: {
+    title: "Your Shop's Last Page",
+    report: st => {
+      const p = st.fx.promise, s = st.fx.safety;
+      let out;
+      if (p >= 4 && s <= 2) out = "You printed the boldest ideas in town, and the shop paid for it. You were betting America would live up to its words.";
+      else if (p >= 4) out = "You spread the promise far and still kept the shop open. That took smart choices.";
+      else if (s >= 4) out = "The shop is safe, but you stayed quiet when the big ideas were on the line. Others carried the promise forward.";
+      else out = "You played it down the middle. The ideas spread anyway, but not because of you.";
+      return `<div class="outcome"><p>${out}</p><p><b>What really happened:</b> The Declaration's ideas outlived the war. Over the next 200 years, enslaved people, women, and Native Americans used its own words to demand their rights.</p></div>
+        <p>Answer both in 1–2 full sentences, using evidence from today.</p>`;
+    },
+    prompts: [
+      { id: "ideas", short: "Two big ideas of the Declaration",
+        label: "1. What are two big ideas in the Declaration of Independence? Say them in your own words.",
+        stem: "Two big ideas in the Declaration are ___ and ___.", min: 70, newWords: 7,
+        mustAll: [["right", "equal"], ["govern", "consent", "people", "replace", "change", "king", "power"]],
+        mustMsg: "In answer 1, name an idea about rights or equality AND an idea about government (like consent of the governed)." },
+      { id: "promise", short: "Who was left out",
+        label: "2. Who was left out of \"all men are created equal\" in 1776? Give one piece of evidence from today.",
+        stem: "In 1776, ___ were left out. One piece of evidence is ___.", min: 70, newWords: 7,
+        mustAll: [["enslav", "slave", "women", "woman", "native", "indian", "black"], ["abigail", "jefferson", "draft", "petition", "prince", "vote", "letter", "600", "savage", "1 in 5", "evidence", "because"]],
+        mustMsg: "In answer 2, name a group that was left out AND a piece of evidence (like Abigail Adams's letter, Jefferson's draft, or Prince Hall's petition)." }
+    ]
+  }
+});
+
+</script>
+</body></html>
