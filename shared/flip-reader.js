@@ -18,6 +18,8 @@ const check2Done=i=>ls.get("check2_"+i)==="1";
 const tries2=i=>Number(ls.get("tries2_"+i)||0);
 const answer=i=>has2(i)?(check2Done(i)?"✓":""):($("answer"+i)?$("answer"+i).value:(ls.get("answer"+i)||""));
 const partDone=i=>checkDone(i)&&answer(i).trim()!=="";
+// Predict, Then See (Fynn, 11-16): a part with "predict" asks for a prediction (no wrong answer) on predict.page before the reveal pages open.
+const predOf=i=>ls.get("pred"+i);const predDone=i=>!(parts[i-1]&&parts[i-1].predict)||predOf(i)!==null;
 // Junk writing ("idk", blanks left as ___) is caught before "Next part", not only at Turn in (Fynn, 11-03).
 const junk=i=>{const a=$("answer"+i);return a&&window.classJunkStop&&a.value.trim()?window.classJunkStop(a,{quiet:true}):""};
 let cur=1,timer=null,lockTimer=null,locked=false;
@@ -46,6 +48,7 @@ const qcol=$("flipCards");
 parts.forEach(p=>{
   const s=document.createElement("section");s.className="card qcard question flip-part";s.id="q"+p.n;s.hidden=true;
   s.innerHTML='<span class="stamp">Done</span><p class="case-tag"><span class="num">Part '+p.n+'</span> '+p.ref+'</p><h3>'+p.title+'</h3>'
+   +(p.predict?'<div class="check predict" id="pred'+p.n+'" hidden><p class="tag">'+(p.predict.tag||"Predict · no wrong answer")+'</p><p class="q">'+p.predict.q+'</p><div class="choices" id="pchoices'+p.n+'"></div><p class="fb" id="pfb'+p.n+'" aria-live="polite"></p></div>':'')
    +'<p class="flip-wait" id="wait'+p.n+'"></p>'
    +'<div class="check" id="check'+p.n+'" hidden><p class="tag">'+p.check.tag+'</p><p class="q">'+p.check.q+'</p><p class="qwait" id="qw1_'+p.n+'" aria-live="polite"></p><div class="choices" id="choices'+p.n+'"></div><p class="fb" id="fb'+p.n+'" aria-live="polite"></p></div>'
    +(p.check2?'<div class="flip-write" id="write'+p.n+'"><div class="check check2"><p class="tag">'+p.check2.tag+'</p><p class="q">'+p.check2.q+'</p><p class="qwait" id="qw2_'+p.n+'" aria-live="polite"></p><div class="choices" id="choices2_'+p.n+'"></div><p class="fb" id="fb2_'+p.n+'" aria-live="polite"></p></div><p class="lockmsg" id="unlock'+p.n+'"></p></div>':
@@ -64,7 +67,11 @@ parts.forEach(p=>{const li=document.createElement("li");li.id="r"+p.n;li.innerHT
 
 /* ---------- checks ---------- */
 function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
-function renderChoices(p){const c=p.check,box=$("choices"+p.n);box.innerHTML="";
+function renderPredict(p){if(!p.predict)return;const box=$("pchoices"+p.n),f=$("pfb"+p.n),mine=predOf(p.n);box.innerHTML="";
+  p.predict.options.forEach(t=>{const b=document.createElement("button");b.type="button";b.className="choice";b.textContent=t;
+    if(mine!==null){b.disabled=true;if(t===mine)b.classList.add("picked")}else b.addEventListener("click",()=>{ls.set("pred"+p.n,t);renderPredict(p);refresh()});box.appendChild(b)});
+  f.className=mine!==null?"fb ok":"fb";f.textContent=mine===null?"":checkDone(p.n)?(p.predict.after||"Compare: was your prediction right?"):(p.predict.locked||"Locked in. Keep reading to see what really happened.")}
+function renderChoices(p){renderPredict(p);const c=p.check,box=$("choices"+p.n);box.innerHTML="";
   const opts=checkDone(p.n)?[c.right]:shuffle([c.right,...c.wrong]);
   opts.forEach(t=>{const b=document.createElement("button");b.type="button";b.className="choice";b.textContent=t;
     if(checkDone(p.n)){b.classList.add("right");b.disabled=true}else{b.disabled=locked||qWaiting(p,1);b.addEventListener("click",()=>pick(p,t))}box.appendChild(b)});
@@ -88,6 +95,7 @@ function blocker(pg){ // why you can't leave page pg yet ("" = free to go on)
   if(TT())return "";
   const p=partOf(pg);
   if(!read.has(pg))return "read";
+  if(p.predict&&p.predict.page===pg&&!predDone(p.n))return "predict";
   if(p.check.page===pg&&!checkDone(p.n))return "check";
   if(pg===p.to&&!partDone(p.n))return checkDone(p.n)?"write":"check";
   if(pg===p.to&&junk(p.n))return "junk";
@@ -118,6 +126,7 @@ function refresh(){
   const showCheck=cur>=c.page||checkDone(p.n)||TT();
   if(C.qReadWps){if(showCheck&&(read.has(c.page)||C.qDuringRead)&&!checkDone(p.n))startQ(p,1);if(p.check2&&checkDone(p.n)&&!check2Done(p.n))startQ(p,2)}
   $("check"+p.n).hidden=!showCheck;
+  if(p.predict)$("pred"+p.n).hidden=!(cur>=p.predict.page||predOf(p.n)!==null||TT());
   $("wait"+p.n).textContent=showCheck?"":"Read the pages in order. This part's reading check is on reader page "+c.page+".";
   $("wait"+p.n).hidden=showCheck;
   const a=$("answer"+p.n),done=checkDone(p.n);
@@ -130,7 +139,7 @@ function refresh(){
   const n1=$("flipNext");n1.hidden=partEnd;n1.disabled=!!b;n1.textContent="Next page →";
   const n2=$("flipNext2");n2.disabled=!!b&&b!=="junk"&&b!=="fact";n2.textContent=last?"Go to Turn in ↓":partEnd?"Next part →":"Next page →";
   ["flipBack","flipBack2"].forEach(id=>{$(id).disabled=cur===1});
-  const why={read:"Read this page first. Next opens in a few seconds.",check:"Get the reading check right to go on.",write:p.check2?"Get the second check right to go on.":"Write your answer for this part to go on.",junk:"Fix your answer for this part to go on (see the note under the box).",fact:"","":last?"All pages done. Turn in your work below.":""}[b];
+  const why={read:"Read this page first. Next opens in a few seconds.",predict:"Make your prediction to go on. There's no wrong answer.",check:"Get the reading check right to go on.",write:p.check2?"Get the second check right to go on.":"Write your answer for this part to go on.",junk:"Fix your answer for this part to go on (see the note under the box).",fact:"","":last?"All pages done. Turn in your work below.":""}[b];
   $("flipWhy").textContent=why;$("flipWhy").hidden=!why;
   // progress marks
   const mo=maxOpen();
@@ -153,9 +162,9 @@ $("flipBigClose").addEventListener("click",closeBig);$("flipBig").addEventListen
 
 /* ---------- start over / turn in ---------- */
 $("clearBtn").addEventListener("click",()=>{if(!confirm(C.clearConfirm))return;
-  ["studentName","read","at",...parts.flatMap(p=>["answer"+p.n,"check"+p.n,"tries"+p.n,"check2_"+p.n,"tries2_"+p.n,"qr"+p.n,"qr2_"+p.n])].forEach(k=>ls.del(k));(C.clearExtra||[]).forEach(k=>ls.del(k));location.reload()});
+  ["studentName","read","at",...parts.flatMap(p=>["answer"+p.n,"check"+p.n,"tries"+p.n,"check2_"+p.n,"tries2_"+p.n,"qr"+p.n,"qr2_"+p.n,"pred"+p.n])].forEach(k=>ls.del(k));(C.clearExtra||[]).forEach(k=>ls.del(k));location.reload()});
 $("submitBtn").addEventListener("click",async()=>{const status=$("submitStatus"),btn=$("submitBtn");status.className="status";
-  const st={name:$("studentName").value.trim(),parts,checkDone,tries,check2Done,tries2,answer:i=>answer(i).trim(),mustProblem};
+  const st={name:$("studentName").value.trim(),parts,checkDone,tries,check2Done,tries2,answer:i=>answer(i).trim(),mustProblem,predict:i=>predOf(i)||""};
   if(TT()&&!st.name)st.name="Test T.";
   const err=TT()?null:C.validate(st);if(err){status.textContent=err.text;status.classList.add("error");if(err.focus)$(err.focus).focus();if(err.part){const p=parts[err.part-1];if(p.from<=maxOpen())show(Math.min(Math.max(p.check.page,p.from),maxOpen()),true)}return}
   btn.disabled=true;status.textContent="Sending your work…";
@@ -175,6 +184,6 @@ try{(window.classTestHooks=window.classTestHooks||[]).push({
   count:()=>N,index:()=>cur-1,
   label:i=>{const p=partOf(i+1);return "Part "+p.n+" · "+p.short},
   go:i=>show(i+1,true),
-  solve:()=>{const p=partOf(cur);ls.set(qKey(p.n,1),"1");ls.set(qKey(p.n,2),"1");if(p.check2&&checkDone(p.n))ls.set("check2_"+p.n,"1");ls.set("check"+p.n,"1");locked=false;clearInterval(lockTimer);renderChoices(p);refresh()}
+  solve:()=>{const p=partOf(cur);if(p.predict&&predOf(p.n)===null)ls.set("pred"+p.n,p.predict.options[0]);ls.set(qKey(p.n,1),"1");ls.set(qKey(p.n,2),"1");if(p.check2&&checkDone(p.n))ls.set("check2_"+p.n,"1");ls.set("check"+p.n,"1");locked=false;clearInterval(lockTimer);renderChoices(p);refresh()}
 });if(window.classTestSkip)window.classTestSkip.refresh()}catch(e){}
 })();
