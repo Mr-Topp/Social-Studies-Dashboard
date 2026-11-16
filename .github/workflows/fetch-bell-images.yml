@@ -1,0 +1,31 @@
+# Downloads the bell ringer pictures from Wikimedia Commons into shared/wtp-bell/img/
+# so the pages never depend on an outside site. Runs when the picture list changes (or by hand).
+name: Save bell ringer pictures
+on:
+  push:
+    paths: ["shared/wtp-bell/img/list.txt"]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download missing pictures
+        run: |
+          cd shared/wtp-bell/img
+          grep -v '^#' list.txt | while IFS='|' read -r name file; do
+            [ -z "$name" ] && continue
+            [ -s "$name" ] && continue
+            url="https://commons.wikimedia.org/wiki/Special:FilePath/$(python3 -c 'import sys,urllib.parse;print(urllib.parse.quote(sys.argv[1].replace(" ","_")))' "$file")?width=1200"
+            curl -sSfL -A "SocialStudiesDashboard/1.0 (classroom site; GitHub Actions)" -o "$name" "$url" && echo "saved $name" || echo "FAILED $name"
+            sleep 1
+          done
+          ls -la
+      - name: Commit pictures
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
+          git add shared/wtp-bell/img/*.jpg || true
+          git diff --cached --quiet || (git commit -m "Save bell ringer pictures from Wikimedia Commons" && git push)
