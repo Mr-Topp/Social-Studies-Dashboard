@@ -1,6 +1,6 @@
 // Puts each day's videos in the same order they show up in that unit's slides (Fynn, 2026-11-15).
 // Videos that aren't on the slides go after, in their old order.
-// List built from the slide decks on 2026-11-15 (refreshed after the Sociology Unit 2 swaps). A new video lands at the end of its day until this list is refreshed.
+// List built from the slide decks (last refreshed 2026-11-16). A new video lands at the end of its day until this list is refreshed.
 (function () {
   var ORDER = {
     "government|0|1": ["hMqEnmDp2m8","3QGy2SbXTNE","ttu8va9_x1g","3sgAwVpCOOI","RSLbmtqlLLk","7xo4tUMdAMw","KovOrGBciQg","pTliCI6uwmo","LKJMWHCUoiw","tlEoopuYny0","CRUqhh1tDm4","C31YmCbHsX4","VV6yOTg04zc","YJOiEr58ESc","HuFR5XBYLfU","FwREAW4SlVY","yYEfLm5dLMQ","Xq4x84xUdpg","VRDRNDtx9j4"],
@@ -10,8 +10,8 @@
     "government|0|5": ["BWR2p9j9hWo","Z9v9PEng7Xo","oyOf3g-PJ94","HqBTas0_ryg","8oier528TrE","-bKT5rc6rsU","qL9kqmn-dUA","PNojm8f6Seo"],
     "government|0|6": ["S4ymux9l-Qo","lw7eDkAL0lo"],
     "sociology|0|1": ["DthAMxn8zp0","gsgZOjCS8Ao","OhVamhT4Q3s","z9W0GQvONKc","ICppFQ6Tabw","DbTt_ySTjaY","ZIwyNIdgJBE","o4XX90lqT6E","sxYrzzy3cq8","QwhK-iEyXYA","kGn_EoHiOvc","ZV7RzS8QRXE","vuMt8b4UrcI"],
-    "sociology|0|2": ["UUukBV82P9A","mhK40bkBzsc","s-FbhEUdpGY","RV50AV7-Iwc","JYXF08ZS66w","fkfwrXgfRr4","DESE8x3p8Z0","foMa-8dvFyA","P9VdyPbbzlI","FE6Yvy--5aw","r7isb4Cu6Xc","bU2tt1h53jM"],
-    "sociology|0|3": ["uM5TQ4f7ycw","2K-zTQRdGCU","No149Vn4HhI","YmVpwXH4jhA","UvtJja2ihYQ","XmtSbVNnuyQ","5lZ2AjV307U","ge7i60GuNRg","WDu5nc_uEPo","j3jUzK3p3Qo","i3rVzhWIqSU","fNUQ8RnuUFk","NnnZ6y1HPqI"],
+    "sociology|0|2": ["UUukBV82P9A","mhK40bkBzsc","_XI6ILZGtT4","s-FbhEUdpGY","RV50AV7-Iwc","w-2gC-IQl6w","JYXF08ZS66w","fkfwrXgfRr4","DESE8x3p8Z0","foMa-8dvFyA","P9VdyPbbzlI","FE6Yvy--5aw","r7isb4Cu6Xc","bU2tt1h53jM"],
+    "sociology|0|3": ["uM5TQ4f7ycw","2K-zTQRdGCU","No149Vn4HhI","YmVpwXH4jhA","UvtJja2ihYQ","XmtSbVNnuyQ","5lZ2AjV307U","ge7i60GuNRg","WDu5nc_uEPo","j3jUzK3p3Qo","i3rVzhWIqSU","TYIh4MkcfJA","fNUQ8RnuUFk","ujupEUFDm3E"],
     "sociology|0|4": ["2KlmvmuxzYE","SlkIKCMt-Fs","D9N7QaIOkG8","rEnf_CFoyv0","c8PEv5SV4sU","WTbo4gb_c3o","b350ljkYWrU","hYMk3Bk08NA","HoKkasEyDOI","hZZmMrFQzVs","HQvetA1P4Yg","9diZJks95Ko","13XU4fMlN3w","tyKhRAU35nA","zySKwvQCpXE","TwVuQ_Llh4k","_gTgloPR0Aw"],
     "us-history|0|1": ["7TfgJnXlaxo","9gboEyrj02g","y4BDnlUQ3CA","uWMkJ8IOHBU","D2iuUzkKu9k","-J_RbFkv82o","zle3Y3LgJJQ","k4SoSUsQK9U","N1Gc2BxU_zQ","VWvA26V4wk0"],
     "us-history|0|2": ["jFICRFKtAc4","-HazLOy71Jg","b-M8PdXte5o","0FDfhPMA95I","gdgPAetNY5U","WBrWfhudElQ","9aRVVae2i_c","bU2tt1h53jM","WrK1j4BNmHE","hI4NoVWq87M","dik51bMfPaQ","PF1A8NS1L9g","j25HTJ3Aud0"],
