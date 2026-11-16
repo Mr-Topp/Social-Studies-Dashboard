@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="robots" content="noindex,nofollow">
 <title>Teacher Dashboard · All Classes</title>
-<script src="../shared/assignments.js?v=20261115soc89"></script>
+<script src="../shared/assignments.js?v=20261116bell1"></script>
    <script src="part1-schoology.js?v=20261105a"></script>
 <script src="videos.js?v=20261111vid19"></script>
 <script src="presentations.js?v=20261115soc89"></script>
@@ -764,9 +764,11 @@ const unitOf = id => { const r = REG[id]; if (!r || !r.unit) return 0; return r.
 const dayOf = id => (REG[id] && REG[id].day) || 99;
 const UNITS_P1 = window.CLASS_UNITS_PART1 || {};
 const unitName = (course, u) => u < 0 ? "Part 1 · Unit " + (u + 100) + (UNITS_P1[course] && UNITS_P1[course][u + 100] ? " · " + UNITS_P1[course][u + 100] : "") : u ? (UNIT_WORD[course] || "Unit") + " " + u + (UNITS[course] && UNITS[course][u] ? " · " + UNITS[course][u] : "") : "Other activities";
+// Within a day the bell ringer always comes first (backup bell ringers right after it), then everything else (Fynn, 11-15).
+const bellRank = id => { const r = REG[id] || {}; return /Bell Ringer/i.test(r.title || "") ? (r.alt || /Backup Bell/i.test(r.title || "") ? 1 : 0) : 2; };
 function sortIds(ids) {
   const order = Object.keys(REG);
-  return ids.slice().sort((a, b) => ((unitOf(a) || 999) - (unitOf(b) || 999)) || (dayOf(a) - dayOf(b)) || ((order.indexOf(a) + 1 || 999) - (order.indexOf(b) + 1 || 999)));
+  return ids.slice().sort((a, b) => ((unitOf(a) || 999) - (unitOf(b) || 999)) || (dayOf(a) - dayOf(b)) || (bellRank(a) - bellRank(b)) || ((order.indexOf(a) + 1 || 999) - (order.indexOf(b) + 1 || 999)));
 }
 // Chunks a list of activity ids into units: [{ unit, name, ids }], Unit 1 first.
 function byUnit(ids, course) {
