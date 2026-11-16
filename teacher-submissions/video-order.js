@@ -9,7 +9,7 @@
     "government|0|4": ["hltv8-nzcUc","aLFeBfxzurc","Otbml6WIQPo","G7O9ZpJ-aiU","u5jKL6hFNdk","pHSttXOpvYg"],
     "government|0|5": ["BWR2p9j9hWo","Z9v9PEng7Xo","oyOf3g-PJ94","HqBTas0_ryg","8oier528TrE","-bKT5rc6rsU","qL9kqmn-dUA","PNojm8f6Seo"],
     "government|0|6": ["S4ymux9l-Qo","lw7eDkAL0lo"],
-    "sociology|0|1": ["DthAMxn8zp0","gsgZOjCS8Ao","OhVamhT4Q3s","z9W0GQvONKc","ICppFQ6Tabw","DbTt_ySTjaY","ZIwyNIdgJBE","o4XX90lqT6E","sxYrzzy3cq8","QwhK-iEyXYA","kGn_EoHiOvc","ZV7RzS8QRXE","vuMt8b4UrcI"],
+    "sociology|0|1": ["DthAMxn8zp0","gsgZOjCS8Ao","OhVamhT4Q3s","z9W0GQvONKc","ICppFQ6Tabw","DbTt_ySTjaY","ZIwyNIdgJBE","o4XX90lqT6E","sxYrzzy3cq8","QwhK-iEyXYA","22lGbAVWhro","kGn_EoHiOvc","ZV7RzS8QRXE","vuMt8b4UrcI","IRR7CwdHxUE","r7RrB8WOam4"],
     "sociology|0|2": ["UUukBV82P9A","mhK40bkBzsc","_XI6ILZGtT4","s-FbhEUdpGY","RV50AV7-Iwc","w-2gC-IQl6w","JYXF08ZS66w","fkfwrXgfRr4","DESE8x3p8Z0","foMa-8dvFyA","P9VdyPbbzlI","FE6Yvy--5aw","r7isb4Cu6Xc","bU2tt1h53jM"],
     "sociology|0|3": ["uM5TQ4f7ycw","2K-zTQRdGCU","No149Vn4HhI","YmVpwXH4jhA","UvtJja2ihYQ","XmtSbVNnuyQ","5lZ2AjV307U","ge7i60GuNRg","WDu5nc_uEPo","j3jUzK3p3Qo","i3rVzhWIqSU","TYIh4MkcfJA","fNUQ8RnuUFk","ujupEUFDm3E"],
     "sociology|0|4": ["2KlmvmuxzYE","SlkIKCMt-Fs","D9N7QaIOkG8","rEnf_CFoyv0","c8PEv5SV4sU","WTbo4gb_c3o","b350ljkYWrU","hYMk3Bk08NA","HoKkasEyDOI","hZZmMrFQzVs","HQvetA1P4Yg","9diZJks95Ko","13XU4fMlN3w","tyKhRAU35nA","zySKwvQCpXE","TwVuQ_Llh4k","_gTgloPR0Aw"],
