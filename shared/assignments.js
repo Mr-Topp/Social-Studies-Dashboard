@@ -106,9 +106,8 @@ window.CLASS_DONE_FOR_ALL = {
   "civics-test-s1-founders-defense": "Completed in class",  // Friday 1 Founders' Defense: everyone did it (Fynn, 11-03)
   // Gov Unit 1 bell ringers were added 11-15 after Unit 1 ended (Fynn chose "put them on Unit 1 days anyway").
   // Days 1–4 are already covered by CLASS_CLEARED above; these are Days 5–9, so nobody shows missing.
-  "gov-u1-d5-bell-articles": "Completed in class", "gov-u1-d6-bell-compromise": "Completed in class", "gov-u1-d6-bell-slavery": "Completed in class",
-  "gov-u1-d7-bell-checks": "Completed in class", "gov-u1-d8-bell-ratify": "Completed in class", "gov-u1-d8-bell-billofrights": "Completed in class",
-  "gov-u1-d9-bell-federalism": "Completed in class", "gov-u1-d9-bell-iowa": "Completed in class"
+  "gov-u1-d5-bell-articles": "Completed in class", "gov-u1-d6-bell": "Completed in class",
+  "gov-u1-d7-bell-checks": "Completed in class", "gov-u1-d8-bell": "Completed in class", "gov-u1-d9-bell": "Completed in class"
 };
 
 // 🔒 LOCKED by Fynn (2026-11-02). Don't change unit day counts or test dates without his yes in your chat (see CLAUDE.md).
@@ -224,16 +223,12 @@ window.CLASS_ASSIGNMENTS = {
   "gov-u1-d1-bell-why-gov": { course: "government", unit: 1, day: 1, title: "Day 1 · Bell Ringer: Why Do We Need Government? (Reading)", path: "civics/bell-ringers/?r=why-gov", std: ["SS.9-12.Gov.1"] },  // We the People bell ringer (Fynn, 11-15)
   "gov-u1-d2-bell-england": { course: "government", unit: 1, day: 2, title: "Day 2 · Bell Ringer: Rules for Kings (Reading)", path: "civics/bell-ringers/?r=england", std: ["SS.9-12.Gov.4"] },  // We the People bell ringer (Fynn, 11-15)
   "gov-u1-d3-bell-republic": { course: "government", unit: 1, day: 3, title: "Day 3 · Bell Ringer: Who Holds the Power? (Reading)", path: "civics/bell-ringers/?r=republic", std: ["SS.9-12.Gov.1"] },  // We the People bell ringer (Fynn, 11-15)
-  "gov-u1-d4-bell-revolution": { course: "government", unit: 1, day: 4, title: "Day 4 · Bell Ringer: Road to Revolution (Reading)", path: "civics/bell-ringers/?r=revolution", std: ["SS.9-12.Gov.3"] },  // We the People bell ringer (Fynn, 11-15)
-  "gov-u1-d4-bell-declaration": { course: "government", unit: 1, day: 4, title: "Day 4 · Bell Ringer: The Declaration of Independence (Reading)", path: "civics/bell-ringers/?r=declaration", std: ["SS.9-12.Gov.3"] },  // We the People bell ringer (Fynn, 11-15)
+  "gov-u1-d4-bell": { course: "government", unit: 1, day: 4, title: "Day 4 · Bell Ringer: Road to Revolution + The Declaration of Independence (Reading)", path: "civics/bell-ringers/?r=revolution,declaration", std: ["SS.9-12.Gov.3"] },  // We the People: 2 readings in ONE turn-in (Fynn 11-15: one assignment, not separate ones)
   "gov-u1-d5-bell-articles": { course: "government", unit: 1, day: 5, title: "Day 5 · Bell Ringer: The Articles of Confederation Flop (Reading)", path: "civics/bell-ringers/?r=articles", std: ["SS.9-12.Gov.3"] },  // We the People bell ringer (Fynn, 11-15)
-  "gov-u1-d6-bell-compromise": { course: "government", unit: 1, day: 6, title: "Day 6 · Bell Ringer: Big States vs. Small States (Reading)", path: "civics/bell-ringers/?r=compromise", std: ["SS.9-12.Gov.4"] },  // We the People bell ringer (Fynn, 11-15)
-  "gov-u1-d6-bell-slavery": { course: "government", unit: 1, day: 6, title: "Day 6 · Bell Ringer: The Slavery Compromises (Reading)", path: "civics/bell-ringers/?r=slavery", std: ["SS.9-12.Gov.4"] },  // We the People bell ringer (Fynn, 11-15)
+  "gov-u1-d6-bell": { course: "government", unit: 1, day: 6, title: "Day 6 · Bell Ringer: Big States vs. Small States + The Slavery Compromises (Reading)", path: "civics/bell-ringers/?r=compromise,slavery", std: ["SS.9-12.Gov.4"] },  // We the People: 2 readings in ONE turn-in (Fynn 11-15: one assignment, not separate ones)
   "gov-u1-d7-bell-checks": { course: "government", unit: 1, day: 7, title: "Day 7 · Bell Ringer: Checks and Balances (Reading)", path: "civics/bell-ringers/?r=checks", std: ["SS.9-12.Gov.4"] },  // We the People bell ringer (Fynn, 11-15)
-  "gov-u1-d8-bell-ratify": { course: "government", unit: 1, day: 8, title: "Day 8 · Bell Ringer: The Fight to Ratify (Reading)", path: "civics/bell-ringers/?r=ratify", std: ["SS.9-12.Gov.3"] },  // We the People bell ringer (Fynn, 11-15)
-  "gov-u1-d8-bell-billofrights": { course: "government", unit: 1, day: 8, title: "Day 8 · Bell Ringer: The Bill of Rights (Reading)", path: "civics/bell-ringers/?r=billofrights", std: ["SS.9-12.Gov.3"] },  // We the People bell ringer (Fynn, 11-15)
-  "gov-u1-d9-bell-federalism": { course: "government", unit: 1, day: 9, title: "Day 9 · Bell Ringer: Federalism: Who's in Charge? (Reading)", path: "civics/bell-ringers/?r=federalism", std: ["SS.9-12.Gov.9"] },  // We the People bell ringer (Fynn, 11-15)
-  "gov-u1-d9-bell-iowa": { course: "government", unit: 1, day: 9, title: "Day 9 · Bell Ringer: Iowa's Constitution (Reading)", path: "civics/bell-ringers/?r=iowa", std: ["SS.9-12.Gov.3"] },  // We the People bell ringer (Fynn, 11-15)
+  "gov-u1-d8-bell": { course: "government", unit: 1, day: 8, title: "Day 8 · Bell Ringer: The Fight to Ratify + The Bill of Rights (Reading)", path: "civics/bell-ringers/?r=ratify,billofrights", std: ["SS.9-12.Gov.3"] },  // We the People: 2 readings in ONE turn-in (Fynn 11-15: one assignment, not separate ones)
+  "gov-u1-d9-bell": { course: "government", unit: 1, day: 9, title: "Day 9 · Bell Ringer: Federalism + Iowa's Constitution (Reading)", path: "civics/bell-ringers/?r=federalism,iowa", std: ["SS.9-12.Gov.9", "SS.9-12.Gov.3"] },  // We the People: 2 readings in ONE turn-in (Fynn 11-15: one assignment, not separate ones)
   "gov-stranded-day1":                { course: "government", unit: 1, day: 1, title: "Day 1 · Stranded: Govern or Collapse", path: "civics/stranded-government/", std: ["SS.9-12.Gov.1", "SS.9-12.Gov.5"] },
   "gov-my-country-day3":              { course: "government", unit: 1, day: 3, title: "Day 3 · My Country, My Rules", path: "civics/my-country-my-rules/", std: ["SS.9-12.Gov.1", "SS.9-12.Gov.4"] },
   "gov-articles-day5":                { course: "government", unit: 1, day: 5, title: "Day 5 · 13 States. One Mess.", path: "civics/articles-confederation-game/", std: ["SS.9-12.Gov.3", "SS.9-12.Gov.9"] },
@@ -268,8 +263,7 @@ window.CLASS_ASSIGNMENTS = {
   // ---- Government · Unit 2 ----
   "gov-u2-d2-bell-parties": { course: "government", unit: 2, day: 2, title: "Day 2 · Bell Ringer: Where Political Parties Came From (Reading)", path: "civics/bell-ringers/?r=parties", std: ["SS.9-12.Gov.12"] },  // We the People bell ringer (Fynn, 11-15)
   "gov-u2-d4-bell-responsibility": { course: "government", unit: 2, day: 4, title: "Day 4 · Bell Ringer: Rights Come With Responsibilities (Reading)", path: "civics/bell-ringers/?r=responsibility", std: ["SS.9-12.Gov.16"] },  // We the People bell ringer (Fynn, 11-15)
-  "gov-u2-d5-bell-voting": { course: "government", unit: 2, day: 5, title: "Day 5 · Bell Ringer: Who Gets to Vote? (Reading)", path: "civics/bell-ringers/?r=voting", std: ["SS.9-12.Gov.14"] },  // We the People bell ringer (Fynn, 11-15)
-  "gov-u2-d5-bell-participate": { course: "government", unit: 2, day: 5, title: "Day 5 · Bell Ringer: How Citizens Take Part (Reading)", path: "civics/bell-ringers/?r=participate", std: ["SS.9-12.Gov.17"] },  // We the People bell ringer (Fynn, 11-15)
+  "gov-u2-d5-bell": { course: "government", unit: 2, day: 5, title: "Day 5 · Bell Ringer: Who Gets to Vote? + How Citizens Take Part (Reading)", path: "civics/bell-ringers/?r=voting,participate", std: ["SS.9-12.Gov.14", "SS.9-12.Gov.17"] },  // We the People: 2 readings in ONE turn-in (Fynn 11-15: one assignment, not separate ones)
   "gov-unit2-day1-the-feed":          { course: "government", unit: 2, day: 1, title: "Day 1 · Decision Desk: Ideology vs. Party", path: "civics/unit2-day1-the-feed/", std: ["SS.9-12.Gov.12"] },
   "gov-unit2-day2-fair-game":        { course: "government", unit: 2, day: 2, title: "Day 2 · Fair Game: Comparing the Parties", path: "civics/unit2-day2-fair-game/", std: ["SS.9-12.Gov.12"] },
   // 2026-11-06: Lobby Day (civics/unit2-day2-lobby-day/) taken off Gov U2 Day 4 by Fynn. Game files kept on the site.
@@ -288,12 +282,8 @@ window.CLASS_ASSIGNMENTS = {
   "gov-u2-d7-summative-b-key": { course: "government", unit: 2, day: 6, turnIn: false, std: [], title: "Day 6 · Summative Form B Teacher Key", path: "https://docs.google.com/document/d/1W92Z1z-g8y8l_pLm3EEnX2N23FEiiqcPfc-uvSH-zZg/edit" },
 
   // ---- Government · Unit 3 (Judicial) · activities from the Schoology day posts (links only, no turn-in) ----
-  "gov-u3-d1-bell-courts": { course: "government", unit: 3, day: 1, title: "Day 1 · Bell Ringer: How the Courts Are Set Up (Reading)", path: "civics/bell-ringers/?r=courts", std: ["SS.9-12.Gov.8"] },  // We the People bell ringer (Fynn, 11-15)
-  "gov-u3-d1-bell-gault": { course: "government", unit: 3, day: 1, title: "Day 1 · Bell Ringer: Due Process: The Gerald Gault Case (Reading)", path: "civics/bell-ringers/?r=gault", std: ["SS.9-12.Gov.8"] },  // We the People bell ringer (Fynn, 11-15)
-  "gov-u3-d1-bell-equal": { course: "government", unit: 3, day: 1, title: "Day 1 · Bell Ringer: Separate Is Not Equal (Reading)", path: "civics/bell-ringers/?r=equal", std: ["SS.9-12.Gov.8"] },  // We the People bell ringer (Fynn, 11-15)
-  "gov-u3-d2-bell-marbury": { course: "government", unit: 3, day: 2, title: "Day 2 · Bell Ringer: Marbury v. Madison (Reading)", path: "civics/bell-ringers/?r=marbury", std: ["SS.9-12.Gov.8"] },  // We the People bell ringer (Fynn, 11-15)
-  "gov-u3-d2-bell-interpret": { course: "government", unit: 3, day: 2, title: "Day 2 · Bell Ringer: How Do Judges Decide? (Reading)", path: "civics/bell-ringers/?r=interpret", std: ["SS.9-12.Gov.8"] },  // We the People bell ringer (Fynn, 11-15)
-  "gov-u3-d2-bell-tinker": { course: "government", unit: 3, day: 2, title: "Day 2 · Bell Ringer: Tinker v. Des Moines (Reading)", path: "civics/bell-ringers/?r=tinker", std: ["SS.9-12.Gov.8"] },  // We the People bell ringer (Fynn, 11-15)
+  "gov-u3-d1-bell": { course: "government", unit: 3, day: 1, title: "Day 1 · Bell Ringer: How Courts Work: The Court System, Due Process, and Equal Protection (Reading)", path: "civics/bell-ringers/?r=courts,gault,equal", std: ["SS.9-12.Gov.8"] },  // We the People: 3 readings in ONE turn-in (Fynn 11-15: one assignment, not separate ones)
+  "gov-u3-d2-bell": { course: "government", unit: 3, day: 2, title: "Day 2 · Bell Ringer: Judicial Review: Marbury, How Judges Decide, and Tinker (Reading)", path: "civics/bell-ringers/?r=marbury,interpret,tinker", std: ["SS.9-12.Gov.8"] },  // We the People: 3 readings in ONE turn-in (Fynn 11-15: one assignment, not separate ones)
   "gov-u3-d1-interpreting": { course: "government", unit: 3, day: 2, turnIn: false, std: [], title: "Day 2 · Interpreting the Constitution — iCivics (Printed)", path: "https://ed.icivics.org/resource-assets/lesson_plan/587/assets/interpreting_the_constitution_student_docs.pdf" },
   "gov-u3-d1-interpreting-key": { course: "government", unit: 3, day: 2, turnIn: false, std: [], title: "Day 2 · Interpreting the Constitution Answer Key", path: "https://ed.icivics.org/resource-assets/lesson_plan/587/assets/interpreting_the_constitution_answer_key.pdf" },
   "gov-u3-d1-the-appeal": { course: "government", unit: 3, day: 1, title: "Day 1 · The Appeal", path: "civics/gov-u3-d1-the-appeal/", std: ["SS.9-12.Gov.8"] },  // judge game: Miranda, Gault, T.L.O., Morse v. Frederick (Fynn, 11-14)
