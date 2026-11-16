@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 520 150" font-family="Arial,Helvetica,sans-serif">
+<rect width="520" height="150" fill="#eef3f7"/>
+<g font-size="14" font-weight="700" fill="#19364b" text-anchor="middle">
+<g transform="translate(65,62)"><circle r="38" fill="#fff" stroke="#19364b" stroke-width="3"/><path d="M-16 0l10 11 22-24" fill="none" stroke="#067647" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/><text y="62">1 · Consent</text></g>
+<g transform="translate(195,62)"><circle r="38" fill="#fff" stroke="#19364b" stroke-width="3"/><rect x="-17" y="-20" width="34" height="40" rx="4" fill="#f8ebc5" stroke="#19364b" stroke-width="3"/><path d="M-9-8h18M-9 0h18M-9 8h11" stroke="#19364b" stroke-width="3"/><text y="62">2 · Honesty</text></g>
+<g transform="translate(325,62)"><circle r="38" fill="#fff" stroke="#19364b" stroke-width="3"/><path d="M0-22l18 7v11c0 13-8 21-18 26c-10-5-18-13-18-26v-11z" fill="#d1e9dc" stroke="#19364b" stroke-width="3" stroke-linejoin="round"/><text y="62">3 · Safety</text></g>
+<g transform="translate(455,62)"><circle r="38" fill="#fff" stroke="#19364b" stroke-width="3"/><rect x="-15" y="-4" width="30" height="24" rx="4" fill="#e6bd64" stroke="#19364b" stroke-width="3"/><path d="M-9-4v-8a9 9 0 0 1 18 0v8" fill="none" stroke="#19364b" stroke-width="3"/><text y="62">4 · Privacy</text></g>
+</g>
+</svg>
