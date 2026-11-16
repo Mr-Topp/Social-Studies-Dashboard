@@ -283,7 +283,7 @@ function rosterAliasName(name, info) {
     : "";
 }
 function mergeWorkLists(primary, alias) {
-  ["mine", "missing", "exempt", "classDone"].forEach(k => {
+  ["mine", "missing", "exempt", "classDone", "ahead"].forEach(k => {
     primary[k] = [...new Set([...(Array.isArray(primary[k]) ? primary[k] : []), ...(Array.isArray(alias[k]) ? alias[k] : [])])];
   });
 }
@@ -473,7 +473,7 @@ async function loadWork0(course, name, stage) {
       Object.values(mine).forEach(w => { const x = by.get(w.token); if (x && x.graded && String(x.who || "").toLowerCase() === me_) { w.flagged = x.flagged; w.feedback = x.feedback; w.fix = !x.flagged && (x.fix || (+x.level > 0 && +x.level <= 2)); } });
     } catch (e) {}
   }
-  const extra = sheet ? { markedMissing: sheet.missing || [], exempt: sheet.exempt || [] } : {};
+  const extra = sheet ? { markedMissing: sheet.missing || [], exempt: sheet.exempt || [], ahead: sheet.ahead || [] } : {};
   if (classIds) return Object.assign({ mine, classDone: new Set([...classIds, ...Object.keys(mine)]), full: true }, extra);
   return { mine, classDone: new Set(Object.keys(mine)), full: false };
 }
@@ -648,6 +648,9 @@ function homeBody(course, work) {
   // Fynn 11-03: once the class is in Part 2, Part 1 work never shows as missing or to-do (matches the teacher dashboard).
   if (!nowKey.startsWith("p1|")) { items = items.filter(a => a.part !== 1); keys = keys.filter(k => !k.startsWith("p1|")); }
   const nowOrder = unitOrder(nowKey);
+  // Work ahead (Fynn, 11-16): later units the teacher opened early for THIS student (Teacher Tools "ahead" marks).
+  const aheadKeys = new Set((work.ahead || []).map(u => String(+u)).filter(k => keys.includes(k) && unitOrder(k) > nowOrder));
+  const isAhead = a => aheadKeys.has(unitKey(a));
   // How far the class has gotten in each unit = the latest day anyone turned in work for.
   const reached = {};
   [...classDone, ...Object.keys(mine)].forEach(id => { const a = REG[id]; if (a && a.day) { const k = unitKey(a); reached[k] = Math.max(reached[k] || 0, (spanOf(a) || [a.day, a.day])[0]); } });
@@ -715,6 +718,7 @@ const missing = sortItems(online.filter(isMissing));
   // Games students play on another site (iCivics etc.) show in today's work with a Play button (Fynn, 11-10). Never missing.
   const todaysGames = sortItems(items.filter(a => isGame(a) && unitKey(a) === nowKey && isToday(a)));
   const hasToday = todays.length || todaysPaper.length || todaysGames.length;
+  const aheadTodo = sortItems(online.filter(a => isAhead(a) && !mine[a.id]));
   const href = a => esc(a.path);
   const ext = a => /^https?:/.test(a.path) ? ` target="_blank" rel="noopener"` : "";
   const dayText = a => { const s = spanOf(a); return s ? `Days ${s[0]}–${s[1]}` : a.day ? `Day ${a.day}` : ""; };
@@ -739,7 +743,9 @@ const missing = sortItems(online.filter(isMissing));
   try { const last = localStorage.getItem("hub-last-seen:" + course); if (last && last < todayIso) away = weekdaysBetween(last, todayIso); localStorage.setItem("hub-last-seen:" + course, todayIso); } catch (e) {}
   const welcome = away >= 3 && !testMode;
   const gameQuick = (a, kind) => `<div class="qrow"><div>${kind === "today" ? `<span class="qday">${esc(shortWhere(a))}</span>` : ""}<span class="qtitle">🎮 ${esc(gameTitle(a))}</span><span class="qkind">${kind === "today" ? "Game · play it on " + esc(gameSite(a)) : "Game · you can play it here"}</span></div><a class="btn qgo${kind === "today" ? "" : " soft"}" href="${href(a)}"${ext(a)}>Play ↗</a></div>`;
-  const todayRow = hasToday ? `<div class="qlabel">${classToday ? "Today's work" : "Next class · " + esc(longDate(nextClassIso))}</div>${todays.map(a => quick(a, "Start")).join("")}${todaysGames.map(a => gameQuick(a, "today")).join("")}${todaysPaper.map(a => paperQuick(a, "today")).join("")}` : "";
+  const aheadRow = () => !aheadTodo.length ? "" : `<div class="qlabel">🚀 Work ahead · ${esc([...aheadKeys].map(k => unitLabel(course, k)).join(", "))}</div>${aheadTodo.map(a => quick(a, "Start")).join("")}`;
+  const todayRow0 = hasToday ? `<div class="qlabel">${classToday ? "Today's work" : "Next class · " + esc(longDate(nextClassIso))}</div>${todays.map(a => quick(a, "Start")).join("")}${todaysGames.map(a => gameQuick(a, "today")).join("")}${todaysPaper.map(a => paperQuick(a, "today")).join("")}` : "";
+  const todayRow = todayRow0 + aheadRow();
   // Learning goals in Fynn's own kid-friendly words, from his scale docs (shared/targets.js): the day's "I can"
   // targets plus what a 3 (Proficient) looks like. Shown for today and for each day a student missed.
   const TARGETS = (window.CLASS_TARGETS || {})[course] || (civ && window.CIVICS_TARGETS) || {};
@@ -837,17 +843,18 @@ const missing = sortItems(online.filter(isMissing));
     else if (isMissing(a)) { pill = `<span class="pill p-miss">Missing</span>`; btn = "Start"; } // only your M marks (Fynn, 11-09)
     else if (isToday(a)) { pill = `<span class="pill p-in">${classToday ? "Today" : "Next class"}</span>`; btn = "Start"; }
     else if (isDue(a)) { btn = "Open"; } // a past day with no M: not missing, no label
+else if (isAhead(a)) { pill = `<span class="pill p-in">Work ahead</span>`; btn = "Start"; }   // unit opened early for this student (Fynn, 11-16)
 else { pill = `<span class="pill p-wait">Coming up</span>`; btn = "Look ahead"; }
     const ft = g && g.ft ? `<div class="ft">${g.ft.right} of ${g.ft.total} right on the first try</div>` : "";
     const fb = w && (w.feedback || (g && g.talk)) ? `<p class="fb"><b>Feedback:</b> ${esc(g && g.talk ? "Your teacher wants to talk with you about this one." : w.feedback)}</p>` : "";
-    const strong = on && !w && (isMissing(a) || isToday(a));
+    const strong = on && !w && (isMissing(a) || isToday(a) || isAhead(a));
     return `<div class="row${on ? "" : " lite"}"><div class="info">${kw || on ? `<div class="day">${esc(kw || "Online")}</div>` : ""}<div class="title">${esc(cleanTitle(a.title))}</div>${ft}${fb}</div>
       <div class="act">${pill}<a class="btn open${strong ? "" : " soft"}" href="${href(a)}"${ext(a)}>${btn}${/^https?:/.test(a.path) ? " ↗" : ""}</a></div></div>`;
   };
 
   // --- Every unit, in day order. The class's current unit starts open. ---
   // Only this unit and earlier ones (future units would just be clutter).
-  const units = keys.filter(k => unitOrder(k) <= nowOrder).map(k => {
+  const units = keys.filter(k => unitOrder(k) <= nowOrder || aheadKeys.has(k)).map(k => {
     const list = sortItems(items.filter(a => unitKey(a) === k));
     const on = list.filter(isOnline), got = on.filter(a => mine[a.id]).length;
     const isNow = k === nowKey, future = unitOrder(k) > nowOrder;
@@ -861,7 +868,7 @@ else { pill = `<span class="pill p-wait">Coming up</span>`; btn = "Look ahead"; 
     // Kids never look ahead (Fynn, 2026-11-02): days the class hasn't reached yet stay hidden until they're taught.
     // A day still shows if this student already turned something in from it, so their work never disappears.
     const notYet = d => {
-      if (!d) return false;
+      if (!d || aheadKeys.has(k)) return false;   // a unit opened early for this student shows every day
       if (k === nowKey && todayDay) return d > todayDay;
       const iso = p ? dateOfDay(p, d) : "";
       return !!iso && iso > nextClassIso;
@@ -871,14 +878,14 @@ else { pill = `<span class="pill p-wait">Coming up</span>`; btn = "Look ahead"; 
       const span = acts.map(spanOf).find(Boolean);
       const label = d ? (span ? `Days ${span[0]}–${span[1]}` : `Day ${d}`) : (course === "civics" ? "Friday" : "Other");
       const iso = p && d ? dateOfDay(p, d) : "", isTest = p && d === p.days;
-      const tag = k === nowKey && d && todayDay && (d === todayDay || (span && d <= todayDay && todayDay <= span[1])) ? `<span class="dtag today">${classToday ? "Today" : "Next class"}</span>` : (iso && iso > todayIso) || (!iso && unitOrder(k) > nowOrder) ? `<span class="dtag later">Coming up</span>` : "";
+      const tag = k === nowKey && d && todayDay && (d === todayDay || (span && d <= todayDay && todayDay <= span[1])) ? `<span class="dtag today">${classToday ? "Today" : "Next class"}</span>` : aheadKeys.has(k) ? `<span class="dtag later">Work ahead</span>` : (iso && iso > todayIso) || (!iso && unitOrder(k) > nowOrder) ? `<span class="dtag later">Coming up</span>` : "";
       const iso2 = p && span ? dateOfDay(p, span[1]) : "";
       const when = iso ? longDate(iso) + (iso2 && iso2 !== iso ? " – " + longDate(iso2) : "") : "";
       return `<div class="dayblock${tag.includes("today") ? " isToday" : ""}"><div class="daybar"><b>${esc(label)}</b>${when ? `<span>${esc(when)}</span>` : ""}${tag}</div>${acts.map(a => row(a, true)).join("")}${isTest ? `<div class="row summ"><div class="info"><div class="title">📅 Unit test · on paper in class</div></div></div>` : ""}</div>`;
     }).join("");
     const open = (course + "|" + k) in openUnits ? openUnits[course + "|" + k] : isNow;
     const past = unitOrder(k) < nowOrder;
-    const countTxt = !on.length ? "" : future && !got ? "Coming up" : !owed ? (on.some(isDue) ? "" : "Nothing due yet") : `${got} of ${owed} turned in`;
+    const countTxt = !on.length ? "" : aheadKeys.has(k) ? `Work ahead · ${got} of ${on.length} done` : future && !got ? "Coming up" : !owed ? (on.some(isDue) ? "" : "Nothing due yet") : `${got} of ${owed} turned in`;
     return `<section class="unitflat"><h3>${esc(unitLabel(course, k))}${isNow ? ` <span class="now">NOW</span>` : ""}<span class="count">${countTxt}${past && on.length && got === on.length ? " ✓" : ""}</span></h3>${dayBlocks}</section>`;
   }).join("");
 
