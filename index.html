@@ -160,7 +160,7 @@ footer a{color:var(--muted)}
 </style>
 <script src="shared/theme.js?v=20261111dark1"></script>
 <script>window.HUB_PAGE = true;   // student home page: feedback card pops up here, name boxes are not auto-filled</script>
-<script src="shared/assignments.js?v=20261115soc89"></script>
+<script src="shared/assignments.js?v=20261116bell1"></script>
 <script src="shared/recaps.js?v=20261115soc89"></script>
 <script src="shared/targets.js?v=20261115soc89"></script>
 <script src="teacher-submissions/presentations.js?v=20261115soc89"></script>
@@ -320,9 +320,11 @@ const isOnline = a => !/^https?:/.test(a.path || "") && a.turnIn !== false;
 const isGame = a => /^https?:/.test(a.path || "") && !a.alt && !/\(printed\)|blooket/i.test((a.title || "") + " " + a.path) && /\bgame\b|\(2 player\)/i.test(a.title || "");
 const gameTitle = a => cleanTitle(a.title).replace(/ · (iCivics )?Game$/i, "").replace(/ \(Game\)$/i, "");
 const gameSite = a => /icivics\.org/i.test(a.path || "") ? "iCivics" : "another site";
+// Bell ringers first, so in every day list (and today's work) the bell ringer is on top (Fynn, 11-15). Later sorts by unit/day keep this order.
+const bellFirst = a => /Bell Ringer/i.test(a.title || "") ? 0 : 1;
 function studentItems(course) {
   return Object.entries(REG).filter(([id, a]) => a.course === course && (a.path || a.paperCol) && !a.alt && !isKey(id, a) && !isTest(a)
-    && !/dashboard\.blooket\.com/.test(a.path)).map(([id, a]) => ({ id, ...a }));
+    && !/dashboard\.blooket\.com/.test(a.path)).map(([id, a]) => ({ id, ...a })).sort((a, b) => bellFirst(a) - bellFirst(b));
 }
 const unitKey = a => (a.part === 1 ? "p1|" : "") + (a.unit || 0);
 const spanOf = a => { const m = (a.title || "").match(/^Days (\d+)[–-](\d+)/); return m ? [+m[1], +m[2]] : null; };
