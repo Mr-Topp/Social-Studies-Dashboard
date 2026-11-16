@@ -46,7 +46,7 @@ function doPost(e) {
     // Lets the update page check which version is running. Shares nothing.
     // Teacher dashboard video list, so locked = unlocked (Fynn, 2026-11-05). Video links only, nothing about students.
     if (body.action === "videos") return json(videoList());
-    if (body.action === "version") return json({ ok: true, version: 17, can: ["links", "student-links", "paper", "no-grades", "student-todo", "online-grade", "name-caps", "online-m", "videos", "fast", "slides", "name-short-long", "safe-append", "in-class"] });
+    if (body.action === "version") return json({ ok: true, version: 18, can: ["links", "student-links", "paper", "no-grades", "student-todo", "online-grade", "name-caps", "online-m", "videos", "fast", "slides", "name-short-long", "safe-append", "in-class", "work-ahead"] });
   } catch (err) { return json({ ok: false, error: "Try again later." }); }
   var check = codeCheck(body.code);
   if (check === "locked") return json({ ok: false, error: "Too many wrong teacher codes. Wait 15 minutes, then try again." });
@@ -195,6 +195,8 @@ function setMarks(b) {
   for (var k = 0; k < items.length; k++) {
     var it = items[k], paper = /^paper-[a-z0-9]{1,40}$/.test(it.act);
     if (!/^[a-z0-9][a-z0-9-]{0,79}$/.test(it.act) || !it.student) return { ok: false, error: "Missing the student or activity." };
+    // "AH" = let one student work ahead on a whole unit (Fynn, 11-16). Only on "ahead-u<unit>" rows.
+    if (/^ahead-u\d{1,2}$/.test(it.act)) { if (!(it.value === "" || it.value === "AH")) return { ok: false, error: "Work ahead is on or off." }; continue; }
     if (!(it.value === "" || it.value === "EX" || /^[1-4]$/.test(it.value) || it.value === "M" || it.value === "IC")) return { ok: false, error: "Type 1-4, EX, M or IC." };
   }
   var saved = [];
@@ -544,7 +546,7 @@ function myWork(b) {
   var d = courseRows(course), done = {};
   d.rows.forEach(function (r) { done[r.id] = true; });
   var al = d.aliases || {}, real = function (n) { n = shortName(n); return al[firstKey(n) + "|" + initialOf(n)] || n; };
-  var me = real(b.name), mine = {}, missing = {}, exempt = {};
+  var me = real(b.name), mine = {}, missing = {}, exempt = {}, ahead = {};
   if (me) {
     var meFirst = firstKey(me), meInit = initialOf(me);
     // A first name alone and the same first name + last initial count as one student, and capitals don't matter
@@ -573,6 +575,8 @@ function myWork(b) {
     Object.keys(d.marks).forEach(function (k) {
       var cut = k.lastIndexOf("|"), id = k.slice(0, cut), who = k.slice(cut + 1), m = d.marks[k] || {};
       if (!same(who)) return;
+      // Units you opened early for this student (Fynn, 11-16): unit numbers only.
+      if (/^ahead-u\d{1,2}$/.test(id)) { if (m.Mark === "AH") ahead[id.slice(7)] = true; else delete ahead[id.slice(7)]; return; }
       if (/^[1-4]$/.test(String(m["Teacher level"] || ""))) mine[id] = true;   // you graded it by hand: shows "✓ Turned in" (no grade sent)
       if (m.Mark === "IC") mine[id] = true;   // "Completed in class" for one student (Fynn, 11-11): shows "✓ Turned in"
       if (m.Mark === "M") missing[id] = true; else delete missing[id];
@@ -580,7 +584,8 @@ function myWork(b) {
     });
   }
   return { ok: true, items: [], classDone: Object.keys(done), exemptAll: d.exemptAll || {}, noGrades: true,
-           mine: Object.keys(mine), missing: Object.keys(missing).filter(function (id) { return !mine[id]; }), exempt: Object.keys(exempt) };
+           mine: Object.keys(mine), missing: Object.keys(missing).filter(function (id) { return !mine[id]; }), exempt: Object.keys(exempt),
+           ahead: Object.keys(ahead).map(Number) };
 }
 
 // Wrong-code limits (see codeCheck below).
