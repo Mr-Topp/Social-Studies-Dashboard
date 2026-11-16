@@ -140,6 +140,7 @@ details.partdrop>summary .parthint{font-size:.75rem;font-weight:600;letter-spaci
 .chiplegend{font-size:.8rem;color:var(--muted);margin:0 0 8px}
 .altrow{display:flex;flex-wrap:wrap;align-items:center;gap:6px;width:100%;margin-top:2px}
 .altlabel{font-size:.72rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.daysec,.vidrow{position:relative;padding-left:100px;min-height:28px}.daysec>.altlabel,.vidrow>.altlabel{position:absolute;left:0;top:7px}.daysec+.daysec>.altlabel,.daysec+.vidrow>.altlabel,.vidrow+.daysec>.altlabel{top:13px}.daysec+.daysec,.daysec+.vidrow,.vidrow+.daysec{border-top:1px dashed #e1e6ea;padding-top:6px;margin-top:4px}
 .chip.alt{background:#f1f5f2;border:1px dashed #9db8a8}
 .chip.todo.novid{font-weight:700;white-space:nowrap}
 .vidchip{display:inline-flex;align-items:center;gap:2px}
@@ -922,13 +923,24 @@ function linksHtml() {
         window.__todoSink.push(Object.assign({}, base, { summ: true, kind: "sumreview", acts: tests.map(id => ({ title: chipText(id), href: hrefOf(id), icon: ICON[kindOf(id)] })) }));
       }
     });
+    // Each day is split into labeled sections, in this order: Bell ringer, Slides, Videos, Activities (Fynn, 2026-11-15).
+    // Empty sections are left out (except Videos, which keeps its "No video yet" box). Keys + alternatives stay in "+ more" at the bottom.
+    const daySections = (r, slides, todo, vctx) => {
+      const sec = (label, inner) => inner ? `<div class="altrow daysec"><span class="altlabel">${label}</span>${inner}</div>` : "";
+      const mainActs = r.ids.filter(id => !REG[id].alt && kindOf(id) !== "key" && kindOf(id) !== "video");
+      const bells = mainActs.filter(id => bellRank(id) < 2), acts = mainActs.filter(id => bellRank(id) === 2);
+      return sec(bells.length > 1 ? "Bell ringers" : "Bell ringer", bells.map(chip).join(""))
+        + sec("Slides", slides)
+        + (r.day > 0 && vctx.unit ? vidRow(r.ids, wantsVideo(r), Object.assign({ day: r.day }, vctx)) : "")
+        + sec(acts.length > 1 ? "Activities" : "Activity", acts.map(chip).join("") + todo);
+    };
     const body = list.map(r => {
       // Summative row: just the green-sheet date, no "Day N · Summative" (Fynn, 2026-11-02).
       const label = r.single ? "" : r.summ && cal && cal.summative ? `<span class="sumdate">📅 ${safe(niceDate(cal.summative))}</span>` : r.day ? `<b>${r.span ? `Days ${r.day}–${r.span}` : `Day ${r.day}`}</b>${rowDate(r)}` : `<b>Other</b>`;
       const t = r.title || (r.summ || r.ids.some(id => /summative/i.test(REG[id].title)) ? "Summative" : r.ids.length ? chipText(r.ids[0]).replace(/\s*\([^)]*\)\s*$/, "") : "");
       const slides = r.slides.map(s => `<a class="chip slides" href="${safe(s.url)}${s.slide ? "#slide=id." + safe(s.slide) : ""}" target="_blank" rel="noopener">▶ ${safe(s.label)}</a>`).join("");
       const todo = (r.todo || []).map(x => `<span class="chip todo">⚠ ${safe(x)}</span>`).join("");
-      return `<div class="dayrow${r.summ ? " summ" : ""}" id="${safe(dayAnchor(key, r.day))}"><div class="daylabel">${label}<span class="daytitle${t ? "" : " unplanned"}">${safe(t || "Nothing planned yet")}</span>${r.std ? `<span class="daystd">${stdHover(r.std)}</span>` : ""}</div><div class="daychips">${slides}${r.ids.filter(id => !REG[id].alt && kindOf(id) !== "key" && kindOf(id) !== "video").map(chip).join("")}${todo}${r.day > 0 && vctx.unit ? vidRow(r.ids, wantsVideo(r), Object.assign({ day: r.day }, vctx)) : ""}${moreBox(r.ids)}</div></div>`;
+      return `<div class="dayrow${r.summ ? " summ" : ""}" id="${safe(dayAnchor(key, r.day))}"><div class="daylabel">${label}<span class="daytitle${t ? "" : " unplanned"}">${safe(t || "Nothing planned yet")}</span>${r.std ? `<span class="daystd">${stdHover(r.std)}</span>` : ""}</div><div class="daychips">${daySections(r, slides, todo, vctx)}${moreBox(r.ids)}</div></div>`;
     }).join("");
     const deckLinks = [list.some(r => r.single) ? null : main, ...extra].filter(Boolean).map(p => `<a href="${safe(p.url)}" target="_blank" rel="noopener">${p === main ? "▶ Open the whole deck" : "Older version: " + safe(p.title) + (p.note ? " (" + safe(p.note) + ")" : "")}</a>`).join(" · ");
     // Scale link: opens this course's Scales Google Doc (Fynn, 2026-11-05: link only, no copied text).
