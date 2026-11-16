@@ -1,0 +1,262 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Secret Room | U.S. History Part 1 · Unit 1 · Day 3</title>
+<meta name="description" content="U.S. History Part 1, Unit 1, Day 3. Be a delegate at the secret Constitutional Convention of 1787. Vote on the Great Compromise and face the deals over slavery.">
+<style>
+:root{--ink:#1f2b33;--muted:#55626b;--paper:#f4f1ea;--card:#fff;--line:#dcd5c4;--acc:#34495e;--acc2:#8a5a1f;--soft:#eef0f3;--green:#2a6b45;--bad:#a2392f;--parch:#fbf5e6;--parchline:#e2d3ad}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.5 system-ui,Segoe UI,Arial,sans-serif}
+.top{background:#26333f;color:#fff;padding:8px max(16px,calc((100vw - 900px)/2));display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.top .k{font-size:.78rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;margin:0;color:#e9dcc0}
+.stds{font-size:.85rem;position:relative}
+.stds summary{cursor:pointer;color:#cfd8e0;font-weight:700;list-style:none}.stds summary::-webkit-details-marker{display:none}
+.stds summary::after{content:" ▾"}.stds[open] summary::after{content:" ▴"}
+.stds .box{position:absolute;right:0;top:130%;z-index:20;width:min(460px,92vw);background:#fff;color:var(--ink);border:1px solid var(--line);border-radius:10px;padding:10px 12px;box-shadow:0 8px 24px #0003}
+.stds .box p{margin:4px 0}
+.hud{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line);padding:7px max(16px,calc((100vw - 900px)/2));display:flex;gap:12px;flex-wrap:wrap;align-items:center;font-weight:800;font-size:.9rem;box-shadow:0 2px 8px #1f2b3312}
+body.intro .hud{display:none}
+.hud .bar{flex:1;min-width:100px;height:10px;background:#e6e3da;border-radius:9px;overflow:hidden}.hud .bar span{display:block;height:100%;width:0;background:var(--acc);transition:width .4s}
+.pill{background:#f0ede4;border-radius:20px;padding:3px 10px;white-space:nowrap;display:flex;align-items:center;gap:6px}
+.pill .track{width:70px;height:9px;border-radius:9px;background:#e0dccf;overflow:hidden}.pill .track span{display:block;height:100%;background:var(--acc2);transition:width .5s}
+.pill.w .track span{background:#2f6f8f}
+.pill em{font-style:normal;color:var(--acc2)}.pill.w em{color:#2f6f8f}
+main{max-width:900px;margin:auto;padding:12px 16px 50px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px;box-shadow:0 3px 12px #1f2b330d}
+.kicker{font-size:.76rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:var(--acc2);margin:0}
+h2{margin:2px 0 8px;font-size:1.4rem}
+/* first screen */
+.hero{display:grid;grid-template-columns:1fr 200px;gap:18px;align-items:center}
+.hero h1{font-size:clamp(2.2rem,5vw,3.2rem);line-height:1.05;margin:4px 0 8px;font-family:Georgia,"Times New Roman",serif}
+.hook{font-size:1.1rem;margin:0 0 10px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:0}.chips span{background:#f0ede4;border:1px solid var(--line);border-radius:20px;padding:4px 11px;font-weight:800;font-size:.88rem}
+.hero figure{margin:0}.hero img{width:100%;height:215px;object-fit:cover;object-position:top;border-radius:10px;border:1px solid var(--line)}
+.intro label{margin-top:12px}
+.intro input{max-width:420px}
+@media(max-width:640px){.hero{grid-template-columns:1fr}.hero figure{display:none}}
+.teach{background:var(--soft);border-left:5px solid var(--acc);border-radius:9px;padding:9px 13px;margin:0 0 10px;display:flow-root}.teach p{margin:3px 0}.teach b{color:var(--acc)}
+.block{margin:12px 0;padding:13px;border-radius:12px;border:2px solid var(--line);background:#fff;display:flow-root}
+.block.current{border-color:var(--ink);box-shadow:0 0 0 4px #34495e30}
+.block h3{margin:0 0 8px;font-size:1.04rem;line-height:1.35;font-weight:700}
+.block.past{padding:9px 13px;background:#fbfaf7}
+.block.past .srccard,.block.past figure,.block.past .bigq{display:none}
+.event{background:#fbf9f4;border-style:dashed;border-color:#cdbf9a}.event.current{border-style:solid}
+.event-body p{margin:4px 0}
+.srccard{background:var(--parch);border:1px solid var(--parchline);border-left:5px solid #b8975a;border-radius:10px;padding:8px 12px;margin:0 0 8px;font-weight:400}
+.srccard .who{font-size:.74rem;font-weight:900;letter-spacing:.06em;text-transform:uppercase;color:#7a5c26;margin-bottom:2px}
+.srccard .quote{font-family:Georgia,"Times New Roman",serif;font-style:italic}
+.srccard p{margin:3px 0}
+figure.pic{float:right;width:190px;margin:0 0 6px 12px}
+figure.pic img{width:100%;max-height:230px;object-fit:cover;object-position:top;border-radius:8px;border:1px solid var(--line);display:block}
+figure figcaption{font-size:.76rem;line-height:1.3;color:var(--muted);margin-top:3px;font-weight:400}
+@media(max-width:560px){figure.pic{float:none;width:100%;margin:0 0 8px}figure.pic img{max-height:260px}}
+.picked{margin:8px 0 4px;color:var(--muted)}.result{background:#f0ede4;border-radius:9px;padding:8px 12px}.result p{margin:3px 0}
+.tag{display:inline-block;font-weight:900;font-size:.78rem;border-radius:12px;padding:2px 9px;margin-right:5px}.tag.up{background:#dcefe2;color:var(--green)}.tag.down{background:#f6dcd8;color:var(--bad)}.tag.flat{background:#ebe9e0;color:var(--ink)}
+.choices{display:grid;gap:8px}
+@media(min-width:700px){.q .choices,.event .choices{grid-template-columns:1fr 1fr}}
+button{font:inherit;cursor:pointer;border-radius:10px;min-height:46px}
+.choice{text-align:left;background:#fff;color:var(--ink);border:2px solid #cfcab9;padding:9px 12px;font-weight:650;line-height:1.3}
+.choice:hover:not(:disabled){border-color:var(--ink);background:#fcfcfa}.choice:disabled{opacity:.5;cursor:not-allowed}
+.go{margin-top:12px;background:var(--acc);color:#fff;border:0;padding:11px 22px;font-weight:900;font-size:1.05rem}
+button:focus-visible,input:focus-visible,textarea:focus-visible,.wh:focus-visible{outline:3px solid #2f7dbd;outline-offset:2px}
+.answered{font-weight:800;color:var(--green);margin:3px 0}.why{margin:2px 0;color:var(--muted)}
+.msg{min-height:1.3em;font-weight:750;margin:8px 0 0}.msg.bad{color:var(--bad);background:#fbeeec;border-radius:8px;padding:6px 10px}.msg.good{color:var(--green)}
+label{display:block;font-weight:850;margin:14px 0 4px}.stem{margin:0 0 4px;color:var(--muted);font-size:.92rem}
+input,textarea{width:100%;font:inherit;border:2px solid #cfcab9;border-radius:9px;padding:10px;background:#fff;color:var(--ink)}
+.welcome{background:#e6f1ea;color:var(--green);font-weight:800;border-radius:9px;padding:8px 12px;margin:0 0 10px}
+.foot{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-top:14px;color:var(--muted);font-size:.85rem}
+.foot button{background:#ebe9e0;border:0;padding:8px 12px;font-weight:800;color:var(--ink)}
+.src{font-size:.8rem;color:var(--muted)}
+.tl{list-style:none;padding:0;margin:4px 0}.tl li{border-left:4px solid var(--acc2);padding:2px 0 2px 10px;margin:3px 0}
+.wh{border-bottom:2px dotted var(--acc2);cursor:help;position:relative;font-style:normal}
+.wh:hover::after,.wh:focus::after{content:attr(data-tip);position:absolute;left:0;top:115%;z-index:30;background:#26333f;color:#fff;padding:6px 9px;border-radius:8px;font:600 .84rem/1.35 system-ui,Segoe UI,Arial,sans-serif;width:max-content;max-width:250px;white-space:normal;box-shadow:0 4px 14px #0004}
+.outcome{background:#f3efe4;border-radius:10px;padding:10px 14px;margin:6px 0 4px}.outcome p{margin:4px 0}
+.credits{margin-top:10px;font-size:.78rem;color:var(--muted)}.credits summary{cursor:pointer;font-weight:700}
+@media print{.hud,.foot,.go{display:none}}
+</style>
+<style>
+:root{--acc:#2f4f7a;--soft:#edf1f7}
+.top{background:#1f2d44}
+.block.current{box-shadow:0 0 0 4px #2f4f7a30}
+.pill.w .track span{background:#8a5a1f}.pill.w em{color:#8a5a1f}
+.hero img{object-position:center}
+.serious{border-left:5px solid #555;background:#f6f6f4;border-radius:9px;padding:9px 13px;margin:0 0 10px}
+.ledger{width:100%;border-collapse:collapse;font-size:.9rem;margin:4px 0;font-weight:400}.ledger th,.ledger td{border:1px solid var(--parchline);padding:4px 8px;text-align:left}.ledger th{background:#f3ead2}
+</style>
+<script src="../../shared/assignments.js?v=20261116p1g"></script>
+<script src="../../shared/turnin.js?v=20261105fb1"></script>
+<script src="../../shared/unit-game.js?v=20261103ctt"></script>
+</head><body class="intro">
+<header class="top">
+  <p class="k">U.S. History · Part 1 · Unit 1 · Day 3</p>
+  <details class="stds"><summary>Standard &amp; goal</summary><div class="box">
+    <p><b>SS.9-12.US.3</b> Analyze civic virtue and how individuals contributed to the founding.</p>
+    <p><b>SS.9-12.US.2</b> Analyze ideas in founding documents using primary and secondary sources.</p>
+    <p><b>Today's goal:</b> I can explain how individual delegates shaped the Constitution, what the Great Compromise did, and how the Constitution protected slavery.</p>
+  </div></details>
+</header>
+<div class="hud" aria-label="Progress and meters">
+  <span id="progressText">0 checks done</span>
+  <div class="bar" aria-hidden="true"><span id="progressFill"></span></div>
+  <span class="pill v">Union: <span class="track" aria-hidden="true"><span id="vFill" style="width:50%"></span></span> <em id="vWord"></em></span>
+  <span class="pill w">Your state's power: <span class="track" aria-hidden="true"><span id="wFill" style="width:50%"></span></span> <em id="wWord"></em></span>
+</div>
+<main>
+  <p class="welcome" id="welcome" hidden></p>
+  <div id="app"></div>
+  <div class="foot"><span>Progress saves on this device. Your teacher sees your work after you turn it in.</span><button type="button" id="restartBtn">Start over</button></div>
+  <details class="credits"><summary>Picture credits</summary>
+    <p>Junius Brutus Stearns, <i>Washington as Statesman at the Constitutional Convention</i> (1856). Via Wikimedia Commons (public domain).</p>
+    <p>Anti-slavery medallion, Wedgwood, 1787, Walters Art Museum. Via Wikimedia Commons (public domain).</p>
+  </details>
+</main>
+<script>
+const SRC = (who, body) => `<div class="srccard"><div class="who">${who}</div>${body}</div>`;
+const W = (word, tip) => `<span class="wh" tabindex="0" data-tip="${tip}">${word}</span>`;
+const IMG = "../../shared/wtp-bell/img/";
+const PIC = (src, alt, cap) => `<figure class="pic"><img src="${IMG}${src}" alt="${alt}"><figcaption>${cap}</figcaption></figure>`;
+const up = t => `<span class="tag up">▲ ${t}</span>`, down = t => `<span class="tag down">▼ ${t}</span>`, flat = t => `<span class="tag flat">= ${t}</span>`;
+// Two meters (0–6): how well the Union holds together vs. how much power your own state keeps.
+// Giving ground holds the Union together but costs your state (and the reverse).
+const uWord = v => v <= 1 ? "Breaking" : v <= 3 ? "Shaky" : v <= 4 ? "Holding" : "Strong";
+const sWord = w => w <= 1 ? "Weak" : w <= 3 ? "Some" : w <= 4 ? "Solid" : "Strong";
+
+UnitGame.start({
+  key: "ush-p1u1-d3-secret-room-v1",
+  assignmentId: "ush-p1u1-d3-secret-room",
+  title: "U.S. History · Part 1 · Unit 1 · Day 3 · The Secret Room",
+  standard: "SS.9-12.US.3, SS.9-12.US.2",
+  oldApi: "https://fynn-class-assignment-submissions-20261024.neotboy.chatgpt.site/api/submit",
+  lockSeconds: 4,
+  startFx: { union: 3, power: 3 },
+  clampFx: fx => { fx.union = Math.max(0, Math.min(6, fx.union)); fx.power = Math.max(0, Math.min(6, fx.power)); },
+  hud: st => {
+    document.body.classList.toggle("intro", st.scene < 0);
+    const v = st.fx.union || 0, w = st.fx.power || 0;
+    document.getElementById("vFill").style.width = Math.round(v / 6 * 100) + "%";
+    document.getElementById("wFill").style.width = Math.round(w / 6 * 100) + "%";
+    document.getElementById("vWord").textContent = uWord(v);
+    document.getElementById("wWord").textContent = sWord(w);
+  },
+  startLabel: "Take your seat",
+  introHtml: `<div class="hero"><div>
+      <p class="kicker">Philadelphia · Summer 1787</p>
+      <h1>The Secret Room</h1>
+      <p class="hook">55 men. One hot room. Windows shut. A promise to tell no one. You're Maryland's newest delegate. Can you make a deal without breaking the country?</p>
+      <div class="chips"><span>3 parts</span><span>7 quick checks</span><span>3 tough calls</span><span>2 short answers</span><span>About 25 min</span></div>
+    </div>
+    <figure><img src="../../shared/wtp-bell/img/compromise.jpg" alt="Painting of George Washington leading the Constitutional Convention"><figcaption>Washington leads the Convention (painted in 1856).</figcaption></figure></div>
+    <p class="src">You are made up. Everyone else, and every vote, is real.</p>`,
+  scenes: [
+    { kicker: "Part 1 of 3 · May 1787", title: "Who's in the Room",
+      teach: `<p>The Articles of Confederation had failed. Delegates came to Philadelphia only to <b>fix</b> them. Instead, they wrote a whole new plan.</p>
+        <p><b>George Washington</b> was picked to run the meeting. <b>Ben Franklin</b>, 81, was the oldest. <b>James Madison</b>, 36, showed up with a plan already written.</p>
+        <p><b>Not in the room:</b> no women, no Black Americans, no Native Americans. Rhode Island sent no one at all.</p>`,
+      blocks: [
+        { type: "q", id: "secret", std: "US.2", short: "Secrecy rule: freedom to change minds",
+          prompt: SRC("Convention rule, May 29, 1787", `<p class="quote">"That nothing spoken in the House be printed, or otherwise published or communicated without leave."</p><p>"Without leave" = without permission.</p>`) + "Why would delegates want their talks kept secret?",
+          options: ["So they could change their minds without public pressure", "So British spies would not find out where they were meeting", "So the states would think the Articles were simply fixed", "So they could skip votes and let Washington decide alone"],
+          hint: "Think about arguing in front of a crowd. Is it easy to say \"I was wrong\" with everyone watching?",
+          why: "In secret, delegates could argue, compromise, and change their votes without newspapers and voters back home attacking them every day." },
+        { type: "q", id: "madison", std: "US.3", short: "Madison's notes: our main record",
+          prompt: SRC("James Madison's notes", `<p>Madison sat up front every day and wrote down almost every speech. His notes were published in 1840, after every delegate had died. The official record mostly listed motions and votes.</p>`) + "Without Madison's notes, what would we know about the debates?",
+          options: ["Very little, since the official record mostly listed votes", "All of it, since reporters sat in on every single day", "All of it, since each state printed its delegates' speeches", "Nothing, since the delegates burned every paper at the end"],
+          hint: "The rule said nothing could be printed. What did the official record mostly keep?",
+          why: "Madison's notes are our best window into the secret room. That's one reason he's called the \"Father of the Constitution.\"" },
+        { type: "event", id: "e1", short: "Reporter offers money for leaks",
+          html: SRC("A tavern near the State House · June 1787", `<p>A newspaperman (made up) slides you a bag of coins. He wants a list of who said what inside. Your state could use the attention, and so could you.</p>`) + `<p><b>Tough call.</b> What do you do?</p>`,
+          choices: [
+            { label: "Refuse and keep your promise", fx: { union: 1, power: 0 },
+              result: `<p>${up("Union")}${flat("Your state's power")}You keep your word. Other delegates notice. Trust in the room grows.</p>` },
+            { label: "Take the money and leak a little", fx: { union: -2, power: 1 },
+              result: `<p>${down("Union")}${up("Your state's power")}A story runs. Delegates are furious and start guarding every word. Deals get harder to make.</p>` },
+            { label: "Refuse, but write secret letters to leaders at home", fx: { union: -1, power: 1 },
+              result: `<p>${down("Union")}${up("Your state's power")}Your state's leaders love the inside news. But you broke the rule, and if anyone finds out, you lose the room's trust.</p>` }
+          ] }
+      ] },
+    { kicker: "Part 2 of 3 · June–July 1787", title: "Big States vs. Small States",
+      teach: `${PIC("compromise.jpg", "George Washington at the Constitutional Convention", "Washington at the Convention, painted in 1856")}
+        <p>The biggest fight: <b>how should states be represented in Congress?</b></p>
+        <table class="ledger"><tr><th>Virginia Plan</th><th>New Jersey Plan</th></tr><tr><td>More people = more votes</td><td>Every state gets an equal vote</td></tr><tr><td>Big states like it</td><td>Small states like it</td></tr></table>
+        <p>Virginia had more than 10 times as many people as Delaware.</p>`,
+      blocks: [
+        { type: "q", id: "bedford", std: "US.2", short: "Bedford defends equal votes (NJ Plan)",
+          prompt: SRC("Gunning Bedford of Delaware, speech, June 30, 1787", `<p class="quote">"The large States dare not dissolve the confederation. If they do the small ones will find some foreign ally of more honor and good faith…"</p><p>"Dissolve" = break up. "Ally" = partner.</p>`) + "Which plan is Bedford fighting for?",
+          options: ["The New Jersey Plan: an equal vote for each state", "The Virginia Plan: more seats for states with more people", "The Articles: no national Congress of any kind", "A new plan where one king rules all of the states"],
+          hint: "Delaware is tiny. Which plan protects small states?",
+          why: "Small states feared big states would run everything. Bedford even hinted small states might find a foreign partner. That's how close the Convention came to falling apart." },
+        { type: "event", id: "e2", short: "Vote on the Great Compromise",
+          html: SRC("July 16, 1787 · The vote", `<p>Roger Sherman of Connecticut pushes a deal, the <b>Great Compromise</b>: the House of Representatives is based on population, and the Senate gives every state 2 seats. The vote looks very close. Big-state delegates say it's unfair. Small-state delegates say it's the best they'll get.</p>`) + `<p><b>Tough call.</b> How does Maryland vote?</p>`,
+          choices: [
+            { label: "Vote yes: half a win beats no deal", fx: { union: 2, power: 0 },
+              result: `<p>${up("Union")}${flat("Your state's power")}It passes, 5 states to 4, with Massachusetts split. <b>This really happened, and Maryland really voted yes.</b> One state switching would have killed it.</p>` },
+            { label: "Vote no: hold out for equal votes in both houses", fx: { union: -2, power: 1 },
+              result: `<p>${down("Union")}${up("Your state's power")}With Maryland voting no, the deal fails 4 to 5, and big-state delegates talk about going home. <b>In real life, Maryland voted yes</b>, and the deal passed by one state.</p>` },
+            { label: "Skip the vote to protest", fx: { union: -1, power: -1 },
+              result: `<p>${down("Union")}${down("Your state's power")}Maryland's vote doesn't count, and the deal ties. Nobody trusts you now. <b>In real life, Maryland voted yes</b>, and the deal passed by one state.</p>` }
+          ] },
+        { type: "q", id: "iowa", std: "US.2", short: "Iowa & California: 2 senators each",
+          prompt: SRC("Today", `<p>Iowa has about 3.2 million people. California has about 39 million.</p>`) + "Because of the Great Compromise, which is true?",
+          options: ["Both get 2 senators, and California gets far more House seats", "Both get the same number of House seats and of senators", "California gets more senators, and both get equal House seats", "Iowa gets more senators because it is the smaller state"],
+          hint: "Senate = equal. House = based on people. Apply both rules.",
+          why: "The Senate gives every state 2 seats. The House is based on population, so California has 52 House members and Iowa has 4." },
+        { type: "q", id: "sherman", std: "US.3", short: "Sherman: gave ground for the Union",
+          prompt: SRC("Roger Sherman, Connecticut", `<p>Sherman signed the Declaration, the Articles, and the Constitution. At the Convention, big states and small states both thought they were right. Sherman pushed a plan where each side gave up something.</p>`) + "Why is Sherman an example of civic virtue (putting the country first)?",
+          options: ["He gave up part of what he wanted so the country held together", "He refused to budge until small states won every single point", "He wrote the whole Constitution by himself in a single night", "He walked out so the big states could decide on their own"],
+          hint: "Civic virtue = doing what's good for everyone, not just your side. What did Sherman do?",
+          why: "Sherman didn't win everything. He found a deal both sides could live with, and the Union survived because of it." }
+      ] },
+    { kicker: "Part 3 of 3 · August–September 1787", title: "The Deals Over Slavery",
+      teach: `${PIC("slavery.jpg", "A 1787 anti-slavery medallion showing a kneeling enslaved man in chains", "\"Am I not a man and a brother?\" An anti-slavery medallion from 1787.")}
+        <div class="serious"><p>By 1790, about <b>700,000 people</b> in the U.S. were enslaved, almost 1 in 6 people. Delegates from South Carolina and Georgia said they would not join unless slavery was protected. The delegates made three deals: the <b>Three-Fifths Clause</b>, no ban on the overseas slave trade until <b>1808</b>, and a rule that people who escaped slavery must be <b>returned</b>. The word "slavery" never appears in the original Constitution.</p></div>`,
+      blocks: [
+        { type: "q", id: "threefifths", std: "US.2", short: "3/5 Clause gave South extra House seats",
+          prompt: SRC("Article I, Section 2 (short version)", `<p>A state's House seats are based on the number of free persons, plus <span class="quote">"three fifths of all other Persons."</span></p><p>"All other Persons" = enslaved people. They could not vote.</p>`) + "Who gained power from the Three-Fifths Clause?",
+          options: ["Slaveholding states, through extra seats in the House", "Enslaved people, who got three-fifths of a vote each", "Northern states, because they had more free people", "The Senate, which got more members from each state"],
+          hint: "Enslaved people couldn't vote. So who actually used the extra seats?",
+          why: "Counting enslaved people gave slaveholding states more seats and more power, while the people being counted had no rights at all." },
+        { type: "q", id: "agree", std: "US.2", short: "Delegates chose Union over fight on slavery",
+          prompt: SRC("From the debates, August 1787 (short version)", `<p>South Carolina's delegates said their state would never join if the slave trade were banned. Some Northern delegates called slavery evil, but voted for the deals anyway.</p>`) + "Why did most delegates agree to these deals?",
+          options: ["They wanted the new Union more than a fight over slavery", "They had already voted to end slavery in all of their states", "They were ordered to agree by the British government", "They thought enslaved people would vote for the new plan"],
+          hint: "What did South Carolina threaten to do? What did most delegates want more?",
+          why: "They chose the Union over freedom for enslaved people. The deals kept slavery protected until the Civil War and the 13th Amendment in 1865." },
+        { type: "event", id: "e3", short: "Sign the Constitution?",
+          html: SRC("September 17, 1787 · Signing day", `<p>Ben Franklin, 81, asks everyone to sign: <span class="quote">"I consent, Sir, to this Constitution because I expect no better, and because I am not sure, that it is not the best."</span> George Mason of Virginia refuses. He says it has no bill of rights to protect people.</p>`) + `<p><b>Tough call.</b> Do you sign?</p>`,
+          choices: [
+            { label: "Sign it, like Franklin: not perfect, but the best we'll get", fx: { union: 2, power: -1 },
+              result: `<p>${up("Union")}${down("Your state's power")}You sign with 38 others. Now 9 of 13 states have to approve it. That fight is next.</p>` },
+            { label: "Refuse, like George Mason: no bill of rights", fx: { union: -2, power: 1 },
+              result: `<p>${down("Union")}${up("Your state's power")}You join Mason, Edmund Randolph, and Elbridge Gerry, the three delegates still there who refused. Your complaint will become a huge issue in the fight to approve it.</p>` },
+            { label: "Sign, but write home that the slavery deals are wrong", fx: { union: 1, power: 0 },
+              result: `<p>${up("Union")}${flat("Your state's power")}You sign and speak up at the same time. Some delegates, like Gouverneur Morris, had attacked slavery during the debates too, then signed anyway.</p>` }
+          ] }
+      ] }
+  ],
+  finale: {
+    title: "Your Report Home to Maryland",
+    report: st => {
+      const u = st.fx.union, s = st.fx.power;
+      let out;
+      if (u >= 4 && s >= 3) out = "You helped hold the Union together and still protected Maryland. Smooth work.";
+      else if (u >= 4) out = "You gave up a lot for Maryland so the country could hold together, like Roger Sherman.";
+      else if (s >= 4) out = "You fought hard for Maryland, but your choices put the whole Convention at risk.";
+      else out = "It was a rough summer. The Constitution got written, but not because of your deals.";
+      return `<div class="outcome"><p>${out}</p><p><b>What really happened:</b> 39 delegates signed on September 17, 1787. The deals that made it possible included both the Great Compromise and protections for slavery.</p></div>
+        <p>Answer both in 1–2 full sentences, using evidence from today.</p>`;
+    },
+    prompts: [
+      { id: "person", short: "One founder's contribution",
+        label: "1. Pick Washington, Madison, Franklin, Sherman, or Mason. What did he do at the Convention, and how did it shape the Constitution?",
+        stem: "___ helped shape the Constitution by ___.", min: 70, newWords: 7,
+        mustAll: [["washington", "madison", "franklin", "sherman", "mason"], ["by", "because", "so", "when", "wrote", "pushed", "refused", "signed", "led", "notes"]],
+        mustMsg: "In answer 1, name one of the five men AND say what he did." },
+      { id: "fair", short: "Was the Great Compromise fair?",
+        label: "2. Was the Great Compromise fair? Explain using what big states and small states each got.",
+        stem: "The Great Compromise was ___ because ___.", min: 70, newWords: 7,
+        mustAll: [["senate", "house"], ["because", "since", "so"]],
+        mustMsg: "In answer 2, use the Senate or the House in your reason (and use \"because\")." }
+    ]
+  }
+});
+
+</script>
+</body></html>

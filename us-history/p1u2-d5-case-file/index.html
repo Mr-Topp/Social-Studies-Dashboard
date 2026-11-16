@@ -1,0 +1,257 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Case File: Separate but Equal? | U.S. History Part 1 · Unit 2 · Day 5</title>
+<meta name="description" content="U.S. History Part 1, Unit 2, Day 5. Work as a law clerk on Homer Plessy's case, from the end of Reconstruction to the Supreme Court in 1896, and compare it to an Iowa case.">
+<style>
+:root{--ink:#1f2b33;--muted:#55626b;--paper:#f4f1ea;--card:#fff;--line:#dcd5c4;--acc:#34495e;--acc2:#8a5a1f;--soft:#eef0f3;--green:#2a6b45;--bad:#a2392f;--parch:#fbf5e6;--parchline:#e2d3ad}
+*{box-sizing:border-box}
+body{margin:0;background:var(--paper);color:var(--ink);font:17px/1.5 system-ui,Segoe UI,Arial,sans-serif}
+.top{background:#26333f;color:#fff;padding:8px max(16px,calc((100vw - 900px)/2));display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
+.top .k{font-size:.78rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;margin:0;color:#e9dcc0}
+.stds{font-size:.85rem;position:relative}
+.stds summary{cursor:pointer;color:#cfd8e0;font-weight:700;list-style:none}.stds summary::-webkit-details-marker{display:none}
+.stds summary::after{content:" ▾"}.stds[open] summary::after{content:" ▴"}
+.stds .box{position:absolute;right:0;top:130%;z-index:20;width:min(460px,92vw);background:#fff;color:var(--ink);border:1px solid var(--line);border-radius:10px;padding:10px 12px;box-shadow:0 8px 24px #0003}
+.stds .box p{margin:4px 0}
+.hud{position:sticky;top:0;z-index:5;background:#fff;border-bottom:1px solid var(--line);padding:7px max(16px,calc((100vw - 900px)/2));display:flex;gap:12px;flex-wrap:wrap;align-items:center;font-weight:800;font-size:.9rem;box-shadow:0 2px 8px #1f2b3312}
+body.intro .hud{display:none}
+.hud .bar{flex:1;min-width:100px;height:10px;background:#e6e3da;border-radius:9px;overflow:hidden}.hud .bar span{display:block;height:100%;width:0;background:var(--acc);transition:width .4s}
+.pill{background:#f0ede4;border-radius:20px;padding:3px 10px;white-space:nowrap;display:flex;align-items:center;gap:6px}
+.pill .track{width:70px;height:9px;border-radius:9px;background:#e0dccf;overflow:hidden}.pill .track span{display:block;height:100%;background:var(--acc2);transition:width .5s}
+.pill.w .track span{background:#2f6f8f}
+.pill em{font-style:normal;color:var(--acc2)}.pill.w em{color:#2f6f8f}
+main{max-width:900px;margin:auto;padding:12px 16px 50px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:16px 18px;box-shadow:0 3px 12px #1f2b330d}
+.kicker{font-size:.76rem;font-weight:900;letter-spacing:.1em;text-transform:uppercase;color:var(--acc2);margin:0}
+h2{margin:2px 0 8px;font-size:1.4rem}
+/* first screen */
+.hero{display:grid;grid-template-columns:1fr 200px;gap:18px;align-items:center}
+.hero h1{font-size:clamp(2.2rem,5vw,3.2rem);line-height:1.05;margin:4px 0 8px;font-family:Georgia,"Times New Roman",serif}
+.hook{font-size:1.1rem;margin:0 0 10px}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin:0}.chips span{background:#f0ede4;border:1px solid var(--line);border-radius:20px;padding:4px 11px;font-weight:800;font-size:.88rem}
+.hero figure{margin:0}.hero img{width:100%;height:215px;object-fit:cover;object-position:top;border-radius:10px;border:1px solid var(--line)}
+.intro label{margin-top:12px}
+.intro input{max-width:420px}
+@media(max-width:640px){.hero{grid-template-columns:1fr}.hero figure{display:none}}
+.teach{background:var(--soft);border-left:5px solid var(--acc);border-radius:9px;padding:9px 13px;margin:0 0 10px;display:flow-root}.teach p{margin:3px 0}.teach b{color:var(--acc)}
+.block{margin:12px 0;padding:13px;border-radius:12px;border:2px solid var(--line);background:#fff;display:flow-root}
+.block.current{border-color:var(--ink);box-shadow:0 0 0 4px #34495e30}
+.block h3{margin:0 0 8px;font-size:1.04rem;line-height:1.35;font-weight:700}
+.block.past{padding:9px 13px;background:#fbfaf7}
+.block.past .srccard,.block.past figure,.block.past .bigq{display:none}
+.event{background:#fbf9f4;border-style:dashed;border-color:#cdbf9a}.event.current{border-style:solid}
+.event-body p{margin:4px 0}
+.srccard{background:var(--parch);border:1px solid var(--parchline);border-left:5px solid #b8975a;border-radius:10px;padding:8px 12px;margin:0 0 8px;font-weight:400}
+.srccard .who{font-size:.74rem;font-weight:900;letter-spacing:.06em;text-transform:uppercase;color:#7a5c26;margin-bottom:2px}
+.srccard .quote{font-family:Georgia,"Times New Roman",serif;font-style:italic}
+.srccard p{margin:3px 0}
+figure.pic{float:right;width:190px;margin:0 0 6px 12px}
+figure.pic img{width:100%;max-height:230px;object-fit:cover;object-position:top;border-radius:8px;border:1px solid var(--line);display:block}
+figure figcaption{font-size:.76rem;line-height:1.3;color:var(--muted);margin-top:3px;font-weight:400}
+@media(max-width:560px){figure.pic{float:none;width:100%;margin:0 0 8px}figure.pic img{max-height:260px}}
+.picked{margin:8px 0 4px;color:var(--muted)}.result{background:#f0ede4;border-radius:9px;padding:8px 12px}.result p{margin:3px 0}
+.tag{display:inline-block;font-weight:900;font-size:.78rem;border-radius:12px;padding:2px 9px;margin-right:5px}.tag.up{background:#dcefe2;color:var(--green)}.tag.down{background:#f6dcd8;color:var(--bad)}.tag.flat{background:#ebe9e0;color:var(--ink)}
+.choices{display:grid;gap:8px}
+@media(min-width:700px){.q .choices,.event .choices{grid-template-columns:1fr 1fr}}
+button{font:inherit;cursor:pointer;border-radius:10px;min-height:46px}
+.choice{text-align:left;background:#fff;color:var(--ink);border:2px solid #cfcab9;padding:9px 12px;font-weight:650;line-height:1.3}
+.choice:hover:not(:disabled){border-color:var(--ink);background:#fcfcfa}.choice:disabled{opacity:.5;cursor:not-allowed}
+.go{margin-top:12px;background:var(--acc);color:#fff;border:0;padding:11px 22px;font-weight:900;font-size:1.05rem}
+button:focus-visible,input:focus-visible,textarea:focus-visible,.wh:focus-visible{outline:3px solid #2f7dbd;outline-offset:2px}
+.answered{font-weight:800;color:var(--green);margin:3px 0}.why{margin:2px 0;color:var(--muted)}
+.msg{min-height:1.3em;font-weight:750;margin:8px 0 0}.msg.bad{color:var(--bad);background:#fbeeec;border-radius:8px;padding:6px 10px}.msg.good{color:var(--green)}
+label{display:block;font-weight:850;margin:14px 0 4px}.stem{margin:0 0 4px;color:var(--muted);font-size:.92rem}
+input,textarea{width:100%;font:inherit;border:2px solid #cfcab9;border-radius:9px;padding:10px;background:#fff;color:var(--ink)}
+.welcome{background:#e6f1ea;color:var(--green);font-weight:800;border-radius:9px;padding:8px 12px;margin:0 0 10px}
+.foot{display:flex;justify-content:space-between;gap:10px;flex-wrap:wrap;margin-top:14px;color:var(--muted);font-size:.85rem}
+.foot button{background:#ebe9e0;border:0;padding:8px 12px;font-weight:800;color:var(--ink)}
+.src{font-size:.8rem;color:var(--muted)}
+.tl{list-style:none;padding:0;margin:4px 0}.tl li{border-left:4px solid var(--acc2);padding:2px 0 2px 10px;margin:3px 0}
+.wh{border-bottom:2px dotted var(--acc2);cursor:help;position:relative;font-style:normal}
+.wh:hover::after,.wh:focus::after{content:attr(data-tip);position:absolute;left:0;top:115%;z-index:30;background:#26333f;color:#fff;padding:6px 9px;border-radius:8px;font:600 .84rem/1.35 system-ui,Segoe UI,Arial,sans-serif;width:max-content;max-width:250px;white-space:normal;box-shadow:0 4px 14px #0004}
+.outcome{background:#f3efe4;border-radius:10px;padding:10px 14px;margin:6px 0 4px}.outcome p{margin:4px 0}
+.credits{margin-top:10px;font-size:.78rem;color:var(--muted)}.credits summary{cursor:pointer;font-weight:700}
+@media print{.hud,.foot,.go{display:none}}
+</style>
+<style>
+:root{--acc:#34495e;--soft:#eef0f3}
+.top{background:#26333f}
+.block.current{box-shadow:0 0 0 4px #34495e30}
+.pill.w .track span{background:#8a5a1f}.pill.w em{color:#8a5a1f}
+.hero img{object-position:center}
+.serious{border-left:5px solid #555;background:#f6f6f4;border-radius:9px;padding:9px 13px;margin:0 0 10px}
+.ledger{width:100%;border-collapse:collapse;font-size:.9rem;margin:4px 0;font-weight:400}.ledger th,.ledger td{border:1px solid var(--parchline);padding:4px 8px;text-align:left}.ledger th{background:#f3ead2}
+</style>
+<script src="../../shared/assignments.js?v=20261116p1g"></script>
+<script src="../../shared/turnin.js?v=20261105fb1"></script>
+<script src="../../shared/unit-game.js?v=20261103ctt"></script>
+</head><body class="intro">
+<header class="top">
+  <p class="k">U.S. History · Part 1 · Unit 2 · Day 5</p>
+  <details class="stds"><summary>Standard &amp; goal</summary><div class="box">
+    <p><b>SS.9-12.US.5</b> Analyze the consequences of the Civil War and Reconstruction.</p>
+    <p><b>SS.9-12.US.7</b> Assess the impact of exemplary Americans and Iowans who displayed civic virtues in the Civil War and Reconstruction.</p>
+    <p><b>Today's goal:</b> I can explain how Reconstruction ended, how states got around the new amendments, and how Americans and Iowans fought for equal rights.</p>
+  </div></details>
+</header>
+<div class="hud" aria-label="Progress and meters">
+  <span id="progressText">0 checks done</span>
+  <div class="bar" aria-hidden="true"><span id="progressFill"></span></div>
+  <span class="pill v">Case strength: <span class="track" aria-hidden="true"><span id="vFill" style="width:50%"></span></span> <em id="vWord"></em></span>
+  <span class="pill w">Public attention: <span class="track" aria-hidden="true"><span id="wFill" style="width:50%"></span></span> <em id="wWord"></em></span>
+</div>
+<main>
+  <p class="welcome" id="welcome" hidden></p>
+  <div id="app"></div>
+  <div class="foot"><span>Progress saves on this device. Your teacher sees your work after you turn it in.</span><button type="button" id="restartBtn">Start over</button></div>
+  <details class="credits"><summary>Picture credits</summary>
+    <p>The 14th Amendment, page 1, U.S. National Archives. Via Wikimedia Commons (public domain).</p>
+    <p>Soldiers of the 101st Airborne escort the Little Rock Nine, 1957, U.S. Army. Via Wikimedia Commons (public domain).</p>
+  </details>
+</main>
+<script>
+const SRC = (who, body) => `<div class="srccard"><div class="who">${who}</div>${body}</div>`;
+const W = (word, tip) => `<span class="wh" tabindex="0" data-tip="${tip}">${word}</span>`;
+const IMG = "../../shared/wtp-bell/img/";
+const PIC = (src, alt, cap) => `<figure class="pic"><img src="${IMG}${src}" alt="${alt}"><figcaption>${cap}</figcaption></figure>`;
+const up = t => `<span class="tag up">▲ ${t}</span>`, down = t => `<span class="tag down">▼ ${t}</span>`, flat = t => `<span class="tag flat">= ${t}</span>`;
+// Two meters (0–6): how strong Plessy's legal case is vs. how much public attention it gets.
+// Courtroom strategy builds the case; loud public moves build attention. You can't max both.
+const kWord = v => v <= 1 ? "Weak" : v <= 3 ? "Fair" : v <= 4 ? "Solid" : "Strong";
+const aWord = w => w <= 1 ? "Ignored" : w <= 3 ? "Some" : w <= 4 ? "Growing" : "National";
+
+UnitGame.start({
+  key: "ush-p1u2-d5-case-file-v1",
+  assignmentId: "ush-p1u2-d5-case-file",
+  title: "U.S. History · Part 1 · Unit 2 · Day 5 · Case File: Separate but Equal?",
+  standard: "SS.9-12.US.5, SS.9-12.US.7",
+  oldApi: "https://fynn-class-assignment-submissions-20261024.neotboy.chatgpt.site/api/submit",
+  lockSeconds: 4,
+  startFx: { case: 2, press: 2 },
+  clampFx: fx => { fx.case = Math.max(0, Math.min(6, fx.case)); fx.press = Math.max(0, Math.min(6, fx.press)); },
+  hud: st => {
+    document.body.classList.toggle("intro", st.scene < 0);
+    const v = st.fx.case || 0, w = st.fx.press || 0;
+    document.getElementById("vFill").style.width = Math.round(v / 6 * 100) + "%";
+    document.getElementById("wFill").style.width = Math.round(w / 6 * 100) + "%";
+    document.getElementById("vWord").textContent = kWord(v);
+    document.getElementById("wWord").textContent = aWord(w);
+  },
+  startLabel: "Open the case file",
+  introHtml: `<div class="hero"><div>
+      <p class="kicker">1877–1896 · New Orleans to Washington</p>
+      <h1>Case File: Separate but Equal?</h1>
+      <p class="hook">The promises of Reconstruction are being broken one law at a time. You're a law clerk building a case to take it all the way to the Supreme Court.</p>
+      <div class="chips"><span>3 parts</span><span>7 quick checks</span><span>3 tough calls</span><span>2 short answers</span><span>About 25 min</span></div>
+    </div>
+    <figure><img src="../../shared/wtp-bell/img/reconstruction.jpg" alt="The handwritten first page of the 14th Amendment"><figcaption>The 14th Amendment promised \"equal protection of the laws.\"</figcaption></figure></div>
+    <p class="src">You are a made-up clerk. The cases, laws, and people are real.</p>`,
+  scenes: [
+    { kicker: "Part 1 of 3 · 1877–1890", title: "How Reconstruction Ended",
+      teach: `<p>By the 1870s, many Northern voters were tired of Reconstruction. Then came a disputed election in 1876.</p>
+        <p>After federal troops left, Southern states passed <b>Jim Crow laws</b> that forced <b>segregation</b> (keeping races apart) and made it nearly impossible for Black men to vote.</p>`,
+      blocks: [
+        { type: "q", id: "troops", std: "US.5", short: "Troops left = no one enforced rights",
+          prompt: SRC("The deal of 1877 (short version)", `<p>Democrats agree to let Republican Rutherford B. Hayes become President. In return, the last federal troops leave the South.</p>`) + "Why did the troops leaving matter so much for Black Southerners?",
+          options: ["No one was left to enforce their new rights", "They lost the right to own any property", "They had to join the army to replace the troops", "Their states went back under British rule"],
+          hint: "In Day 4, what did the army do when voters were threatened?",
+          why: "The amendments were still on paper, but without troops, nobody enforced them. Violence and new state laws took back much of what Reconstruction had won." },
+        { type: "q", id: "polltax", std: "US.5", short: "Poll tax + test blocked Black voters",
+          prompt: SRC("Mississippi constitution, 1890 (short version)", `<p>To vote, a man must pay a $2 ${W("poll tax", "A fee you pay to be allowed to vote.")} and read or explain part of the state constitution to an official.</p>`) + "These rules never mention race. How did they still block Black voters?",
+          options: ["White officials decided who passed, and many freedmen were poor", "The rules only applied to people who had moved there from the North", "The tax was only charged in towns that had no Black residents", "The test was in Latin, which only lawyers were able to read"],
+          hint: "Who judged the test? And who was least likely to have extra cash after slavery?",
+          why: "Officials could pass white men and fail Black men on the same test, and $2 was a lot for poor farmers. Black voting in Mississippi collapsed." },
+        { type: "event", id: "e1", short: "How to fight the Separate Car Act",
+          html: SRC("New Orleans · 1891", `<p>Louisiana passes the <b>Separate Car Act</b>: Black and white passengers must ride in separate train cars. A group of Black New Orleans leaders, the Citizens' Committee, hires lawyer Albion Tourgée. He asks for your plan.</p>`) + `<p><b>Tough call.</b> What do you suggest?</p>`,
+          choices: [
+            { label: "A planned test case: someone breaks the law on purpose to get to court", fx: { case: 2, press: 1 },
+              result: `<p>${up("Case strength")}${up("Public attention")}<b>This is what really happened.</b> The committee even worked with a railroad that didn't like the law, since extra cars cost it money.</p>` },
+            { label: "A boycott: Black riders stop using the trains", fx: { case: 0, press: 2 },
+              result: `<p>${flat("Case strength")}${up("Public attention")}Newspapers notice. But the law is still on the books, and many workers can't afford to stop riding.</p>` },
+            { label: "Ask Congress to pass a new law against it", fx: { case: 0, press: 0 },
+              result: `<p>${flat("Case strength")}${flat("Public attention")}Congress has lost interest in civil rights. Your letters go unanswered for years.</p>` }
+          ] }
+      ] },
+    { kicker: "Part 2 of 3 · 1892", title: "Homer Plessy's Ride",
+      teach: `<p>On June 7, 1892, <b>Homer Plessy</b>, a 30-year-old shoemaker, bought a first-class ticket and sat in the whites-only car. When asked, he said he was Black. He was arrested. <b>It was all planned.</b></p>`,
+      blocks: [
+        { type: "q", id: "plan", std: "US.7", short: "Planned arrest = test the law in court",
+          prompt: SRC("The Citizens' Committee", `<p>The committee told the railroad ahead of time. They even hired a detective to make the arrest, so Plessy would be charged under the state law.</p>`) + "Why plan Plessy's arrest on purpose?",
+          options: ["To get the law in front of a court so it could be struck down", "To show the railroad that its trains were always too crowded", "To get Plessy a well-paying job working for the railroad", "To prove that the law did not apply inside New Orleans"],
+          hint: "You can't challenge a law in court until someone is charged under it.",
+          why: "Plessy chose to be arrested so the law could be challenged in court. It took courage: he risked jail to stand up for everyone." },
+        { type: "event", id: "e2", short: "Main argument for Plessy",
+          html: SRC("Tourgée's office · 1895", `<p>The case is headed to the U.S. Supreme Court. Tourgée asks you which argument should lead.</p>`) + `<p><b>Tough call.</b> What do you pick?</p>`,
+          choices: [
+            { label: "The 14th Amendment: separate cars deny equal protection", fx: { case: 2, press: 0 },
+              result: `<p>${up("Case strength")}${flat("Public attention")}Strong. Tourgée really used this, along with a 13th Amendment argument.</p>` },
+            { label: "The 13th Amendment: segregation is a leftover of slavery", fx: { case: 1, press: 1 },
+              result: `<p>${up("Case strength")}${up("Public attention")}A bold point that gets people talking. Tourgée really used it, along with the 14th Amendment.</p>` },
+            { label: "Money: railroads lose money running extra cars", fx: { case: 0, press: 1 },
+              result: `<p>${flat("Case strength")}${up("Public attention")}Railroads agree, but this argument says nothing about people's rights. It's not what the case is about.</p>` }
+          ] },
+        { type: "q", id: "eqprot", std: "US.5", short: "Splitting by race = unequal treatment",
+          prompt: SRC("14th Amendment, 1868", `<p class="quote">"…nor shall any State… deny to any person within its jurisdiction the equal protection of the laws."</p>`) + "What is the strongest point for Plessy using these words?",
+          options: ["A law that splits people by race treats them unequally", "The railroad charged both groups the same ticket price", "Louisiana was not a state when the 14th was passed", "Train cars are not mentioned anywhere in the Constitution"],
+          hint: "The words are \"equal protection of the laws.\" Which choice is about being treated unequally?",
+          why: "Plessy's side said a law that labels and separates people by race can never treat them equally. The Court disagreed, for now." }
+      ] },
+    { kicker: "Part 3 of 3 · 1896 and beyond", title: "The Ruling",
+      teach: `<p>On May 18, 1896, the Supreme Court ruled <b>7 to 1 against Plessy</b> in <b>Plessy v. Ferguson</b>. It said segregation was legal as long as things were <b>"separate but equal."</b> They almost never were.</p>
+        <p>One justice, <b>John Marshall Harlan</b>, disagreed. He had once enslaved people himself, but came to oppose slavery.</p>`,
+      blocks: [
+        { type: "q", id: "ruling", std: "US.5", short: "Separate but equal = segregation allowed",
+          prompt: SRC("Plessy v. Ferguson, 1896 (short version)", `<p>The Court said separating the races does not mean one race is lower than the other, as long as both get equal places.</p>`) + "What did \"separate but equal\" let states do?",
+          options: ["Keep the races apart as long as places were called equal", "Force all schools and trains to let everyone in together", "Make Black and white passengers pay different fares", "Let every railroad decide for itself who sat where"],
+          hint: "\"Separate\" is the key word. Did the ruling end segregation or allow it?",
+          why: "States used it to segregate schools, trains, and public places for almost 60 years. Black schools and services got far less money." },
+        { type: "q", id: "harlan", std: "US.7", short: "Harlan: law can't sort citizens by race",
+          prompt: SRC("Justice John Marshall Harlan, dissent, 1896", `<p class="quote">"Our Constitution is color-blind, and neither knows nor tolerates classes among citizens."</p><p>"Dissent" = the opinion of a judge who disagrees. "Tolerates" = allows.</p>`) + "What did Harlan mean?",
+          options: ["The law can't treat citizens differently because of race", "Judges should stop looking at the Constitution in race cases", "The Constitution doesn't say anything at all about citizens", "Only Congress can decide what \"color-blind\" really means"],
+          hint: "\"Classes among citizens\" = ranking people into higher and lower groups. Does the Constitution allow that?",
+          why: "Harlan stood alone. Decades later, lawyer Thurgood Marshall used Harlan's words in the fight that led to Brown v. Board of Education (1954)." },
+        { type: "q", id: "clark", std: "US.7", short: "Iowa's Clark case: 28 years before Plessy",
+          prompt: SRC("Alexander Clark, Muscatine, Iowa · 1867–1868", `<p>Alexander Clark, a Black barber and businessman, sued when his 12-year-old daughter Susan was turned away from her neighborhood school. In 1868, the Iowa Supreme Court ruled that Iowa schools could not separate students by race.</p>`) + "How does Clark's case compare to Plessy's?",
+          options: ["Iowa's court rejected segregation 28 years before Plessy allowed it", "Iowa's court used Plessy to allow separate schools across Iowa", "Clark lost his case, just like Homer Plessy did years later", "Clark's case was about train cars instead of schools"],
+          hint: "Check the years: 1868 and 1896. And who won in Iowa?",
+          why: "An Iowa family won equal schooling in 1868. The U.S. Supreme Court didn't reach the same answer until Brown v. Board in 1954, 86 years later." },
+        { type: "event", id: "e3", short: "What to do after losing",
+          html: SRC("After the ruling · 1896", `<p>You lost. Tourgée asks what you'll do next.</p>`) + `<p><b>Tough call.</b> What's your next move?</p>`,
+          choices: [
+            { label: "Save Harlan's dissent so future lawyers can use it", fx: { case: 2, press: 0 },
+              result: `<p>${up("Case strength")}${flat("Public attention")}Smart. <b>Real history:</b> later civil rights lawyers leaned on Harlan's words. Brown v. Board overturned "separate but equal" for schools in 1954.</p>` },
+            { label: "Start a group to keep fighting in court", fx: { case: 1, press: 1 },
+              result: `<p>${up("Case strength")}${up("Public attention")}<b>Real history:</b> in 1909, the NAACP was founded to do exactly this. Its lawyers won Brown v. Board.</p>` },
+            { label: "Focus on schools and businesses instead of courts", fx: { case: 0, press: 1 },
+              result: `<p>${flat("Case strength")}${up("Public attention")}<b>Real history:</b> Booker T. Washington argued for this in 1895: build skills and wealth first. Others, like W.E.B. Du Bois, said that gave up too much.</p>` }
+          ] }
+      ] }
+  ],
+  finale: {
+    title: "Close the Case File",
+    report: st => {
+      const k = st.fx.case, a = st.fx.press;
+      let out;
+      if (k >= 5) out = "You built a strong case and left a trail future lawyers could follow. You lost in 1896, but you helped win in 1954.";
+      else if (a >= 4) out = "You got the country talking, but the legal case was thinner than it could have been.";
+      else out = "You lost, like Plessy really did. The question is what you left behind for the next fight.";
+      return `<div class="outcome"><p>${out}</p><p><b>What really happened:</b> Plessy pleaded guilty in 1897 and paid a $25 fine. "Separate but equal" stood until Brown v. Board of Education in 1954.</p></div>
+        <p>Answer both in 1–2 full sentences, using evidence from today.</p>`;
+    },
+    prompts: [
+      { id: "broken", short: "How Reconstruction's promises were broken",
+        label: "1. How were Reconstruction's promises broken after 1877? Give one example.",
+        stem: "After 1877, Reconstruction's promises were broken when ___.", min: 70, newWords: 7,
+        mustAll: [["troops", "jim crow", "poll", "literacy", "test", "separate", "segregat", "plessy", "klan", "violence", "tax"]],
+        mustMsg: "In answer 1, give a real example from today (like troops leaving, poll taxes, or Plessy v. Ferguson)." },
+      { id: "hero", short: "One person who stood up",
+        label: "2. Pick Homer Plessy, John Marshall Harlan, or Alexander Clark. How did he stand up for equal rights?",
+        stem: "___ stood up for equal rights by ___.", min: 70, newWords: 7,
+        mustAll: [["plessy", "harlan", "clark"], ["by", "when", "because", "sued", "refused", "wrote", "said", "sat", "arrest", "court"]],
+        mustMsg: "In answer 2, name Plessy, Harlan, or Clark AND say what he did." }
+    ]
+  }
+});
+
+</script>
+</body></html>
