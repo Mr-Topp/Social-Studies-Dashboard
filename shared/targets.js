@@ -948,6 +948,14 @@ window.CLASS_TARGETS = {
    ],
    "g3": "I can analyze how the sociological imagination connects individual experiences to society."
   },
+  "1|9": {
+   "t": [
+    "I can analyze how sociologists study society using research and evidence.",
+    "I can apply sociological imagination to real-world situations.",
+    "I can use sociological theories and evidence to explain social behavior."
+   ],
+   "g3": "I can analyze how the sociological imagination connects individual experiences to society."
+  },
   "1|10": {
    "test": 1,
    "g3": "I can analyze how the sociological imagination connects individual experiences to society."

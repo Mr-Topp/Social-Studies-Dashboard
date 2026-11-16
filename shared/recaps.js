@@ -33,7 +33,8 @@ window.CLASS_RECAPS = {
     5: "How sociologists use evidence to test a hot take instead of just arguing opinions.",
     6: "How sociologists study people: surveys, interviews, watching people, and experiments.",
     7: "Research ethics: why researchers need permission and can't harm or lie to the people they study.",
-    8: "Unit 1 review: Escape from Seahaven."
+    8: "The Truman Show: spotting Unit 1 ideas in the movie.",
+    9: "Unit 1 review: Escape from Seahaven."
   } },
   "government": { 1: {
     1: "Why people create governments: to keep order, protect people, and provide things everyone needs.",
