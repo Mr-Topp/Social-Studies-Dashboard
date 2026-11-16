@@ -122,6 +122,7 @@ Object.assign(window.CLASS_ASSIGNMENTS, {
   "wh-u1-d10-video-RIIN0Ug8wg8": { course: "world-history", unit: 1, day: 10, turnIn: false, video: true, std: [], title: "Day 10 · America the Story of Us: D-Day Invasion", path: "https://www.youtube.com/watch?v=RIIN0Ug8wg8" },
   "wh-u1-d10-video-hKIsvh59Bj4": { course: "world-history", unit: 1, day: 10, turnIn: false, video: true, std: [], title: "Day 10 · WWII in HD: VICTORY IN EUROPE: VE Day Celebrated Across the Globe, 5/8/45", path: "https://www.youtube.com/watch?v=hKIsvh59Bj4" },
   "wh-u1-d11-video-rJBGjtOlAYw": { course: "world-history", unit: 1, day: 11, turnIn: false, video: true, std: [], title: "Day 11 · Sound Smart: Mahatma Gandhi", path: "https://www.youtube.com/watch?v=rJBGjtOlAYw" },
+  "wh-u1-d11-video-RsA6AdCRI-k": { course: "world-history", unit: 1, day: 11, turnIn: false, video: true, std: [], title: "Day 11 · What Happened at the Nuremberg Trials?", path: "https://www.youtube.com/watch?v=RsA6AdCRI-k" },
   "wh-u1-d11-video-FnQESSTouNU": { course: "world-history", unit: 1, day: 11, turnIn: false, video: true, std: [], title: "Day 11 · The United Nations Is Created", path: "https://www.youtube.com/watch?v=FnQESSTouNU" },
 
   // ---- Sociology · Unit 1 ----
