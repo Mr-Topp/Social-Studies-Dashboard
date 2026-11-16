@@ -1,8 +1,8 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Bell Ringer | Government</title>
-<link rel="stylesheet" href="bell.css?v=20261116b1">
-<script src="../../shared/assignments.js?v=20261116b1"></script>
+<link rel="stylesheet" href="bell.css?v=20261116b2">
+<script src="../../shared/assignments.js?v=20261116b2"></script>
 <script src="../../shared/turnin.js?v=20261105fb1"></script>
 <script src="../../shared/lang.js?v=20261103c"></script>
 </head><body>
@@ -10,16 +10,18 @@
 <main id="app"></main>
 <footer><button id="restartBtn" type="button">Start over</button></footer>
 <script>
-/* One page for every Government bell ringer: civics/bell-ringers/?r=<id>. Each one has its own link and its own
+/* One page for every Government bell ringer: civics/bell-ringers/?r=<id> or ?r=<id>,<id>,<id> (stacked = one turn-in). Each one has its own link and its own
    line in shared/assignments.js (path "civics/bell-ringers/?r=<id>"), which gives its course, unit, day and standard. */
 (function () {
-  var id = (new URLSearchParams(location.search).get("r") || "").replace(/[^a-z0-9-]/gi, "");
+  // ?r=courts (one reading) or ?r=courts,gault,equal (several readings, ONE turn-in; Fynn 11-15)
+  var raw = (new URLSearchParams(location.search).get("r") || "").replace(/[^a-z0-9,-]/gi, "");
+  var ids = raw.split(",").filter(Boolean);
   var reg = window.CLASS_ASSIGNMENTS || {}, aid = "";
-  Object.keys(reg).forEach(function (k) { if (reg[k].path === "civics/bell-ringers/?r=" + id) aid = k; });
-  window.BELL = { id: id, assignmentId: aid, std: aid ? (reg[aid].std || []).join(", ") : "" };
+  Object.keys(reg).forEach(function (k) { if (reg[k].path === "civics/bell-ringers/?r=" + ids.join(",")) aid = k; });
+  window.BELL = { id: ids[0] || "", ids: ids, assignmentId: aid, std: aid ? (reg[aid].std || []).join(", ") : "" };
   if (aid) document.title = reg[aid].title.replace(/^Day \d+ · /, "").replace(/ \(Reading\)$/, "") + " | Government Unit " + reg[aid].unit + " Day " + reg[aid].day;
 })();
 </script>
-<script src="data.js?v=20261116b1"></script>
-<script src="bell.js?v=20261116b1"></script>
+<script src="data.js?v=20261116b2"></script>
+<script src="bell.js?v=20261116b2"></script>
 </body></html>
