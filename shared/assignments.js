@@ -388,8 +388,8 @@ window.CLASS_ASSIGNMENTS = {
   "gov-u6-d2-marion-local": { course: "government", unit: 6, day: 2, title: "Day 2 · Local Governments: Marion (Reading)", path: "https://drive.google.com/open?id=1Mrcx2EpKQyCXqDadGEarMcEnl9P3mfjl9Dsp5DaN-kM", turnIn: false, alt: true, std: ["SS.9-12.Gov.20"] },
 
   // ---- Added 2026-11-02: activities that were already built but not listed here yet ----
-  "soc-u1-d5-prove-hot-take": { course: "sociology", unit: 1, day: 5, title: "Day 5 · Prove It Lab", path: "sociology/u1-d5-prove-hot-take/", std: ["SS.9-12.Soc.1"] },
-  "soc-u1-d6-study-people": { course: "sociology", unit: 1, day: 6, title: "Day 6 · Research Rivals", path: "sociology/u1-d6-study-people/", std: ["SS.9-12.Soc.1", "SS.9-12.Soc.3"] },
+  "soc-u1-d5-prove-hot-take": { course: "sociology", unit: 1, day: 5, title: "Day 5 · Prove It Lab, Part 1: Test the Hot Take", path: "sociology/u1-prove-it-lab/?part=1", std: ["SS.9-12.Soc.1"] },  // Day 5 + Day 6 joined as one game, Part 2 locked until Part 1 is proved (Fynn, 11-15)
+  "soc-u1-d6-study-people": { course: "sociology", unit: 1, day: 6, title: "Day 6 · Prove It Lab, Part 2: Research Rivals", path: "sociology/u1-prove-it-lab/?part=2", std: ["SS.9-12.Soc.1", "SS.9-12.Soc.3"] },
   "soc-u1-summative": { course: "sociology", unit: 1, day: 10, turnIn: false, std: [], title: "Day 10 · Summative (Form A)", path: "https://docs.google.com/document/d/18I-54X4zp2SSFxJdkUDqyXNG_js25ZRcmNiaBoTFzug/edit" },
   "soc-u1-summative-key": { course: "sociology", unit: 1, day: 10, turnIn: false, std: [], title: "Day 10 · Summative Form A Teacher Key", path: "https://docs.google.com/document/d/1A2yW1-otWk4xMh09Vrcb9UxPlEu2rKJ-crQz6jlTWWM/edit" },
   "soc-u1-summative-b": { course: "sociology", unit: 1, day: 10, turnIn: false, std: [], title: "Day 10 · Summative (Form B · retake)", path: "https://docs.google.com/document/d/16ITBZ-XNZra9i9jgJrI43AzzRk7d7gIKhh7Ch6KIJ_c/edit" },
