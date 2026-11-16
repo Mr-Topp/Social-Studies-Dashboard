@@ -141,6 +141,32 @@ window.CLASS_CALENDAR_PART1 = {
 };
 
 window.CLASS_ASSIGNMENTS = {
+  // ---- Bell ringers: U.S. History, World History, Sociology (We the People readings, Fynn 11-15) ----
+  // Listed first so each one shows at the top of its day. "Backup" ones are alternates Fynn can swap in (not on students' to-do).
+  "ush-p1u1-d1-bell-declaration": { course: "us-history", unit: 1, day: 1, part: 1, title: "Day 1 · Bell Ringer: The Declaration of Independence", path: "us-history/bell-p1u1-d1-declaration/", std: ["SS.9-12.US.2","SS.9-12.US.1"] },
+  "ush-p1u1-d1-bell-revolution": { course: "us-history", unit: 1, day: 1, part: 1, title: "Day 1 · Backup Bell Ringer: Road to Revolution", path: "us-history/bell-p1u1-d1-revolution/", alt: true, std: ["SS.9-12.US.2"] },
+  "ush-p1u1-d1-bell-england": { course: "us-history", unit: 1, day: 1, part: 1, title: "Day 1 · Backup Bell Ringer: Rules for Kings", path: "us-history/bell-p1u1-d1-england/", alt: true, std: ["SS.9-12.US.2"] },
+  "ush-p1u1-d2-bell-articles": { course: "us-history", unit: 1, day: 2, part: 1, title: "Day 2 · Bell Ringer: The Articles of Confederation Flop", path: "us-history/bell-p1u1-d2-articles/", std: ["SS.9-12.US.2"] },
+  "ush-p1u1-d3-bell-compromise": { course: "us-history", unit: 1, day: 3, part: 1, title: "Day 3 · Bell Ringer: Big States vs. Small States", path: "us-history/bell-p1u1-d3-compromise/", std: ["SS.9-12.US.3","SS.9-12.US.2"] },
+  "ush-p1u1-d3-bell-slavery": { course: "us-history", unit: 1, day: 3, part: 1, title: "Day 3 · Backup Bell Ringer: The Slavery Compromises", path: "us-history/bell-p1u1-d3-slavery/", alt: true, std: ["SS.9-12.US.3","SS.9-12.US.2"] },
+  "ush-p1u1-d4-bell-ratify": { course: "us-history", unit: 1, day: 4, part: 1, title: "Day 4 · Bell Ringer: The Fight to Ratify", path: "us-history/bell-p1u1-d4-ratify/", std: ["SS.9-12.US.2"] },
+  "ush-p1u1-d4-bell-washington": { course: "us-history", unit: 1, day: 4, part: 1, title: "Day 4 · Backup Bell Ringer: Washington Sets the Example", path: "us-history/bell-p1u1-d4-washington/", alt: true, std: ["SS.9-12.US.2"] },
+  "ush-p1u1-d4-bell-parties": { course: "us-history", unit: 1, day: 4, part: 1, title: "Day 4 · Backup Bell Ringer: Where Political Parties Came From", path: "us-history/bell-p1u1-d4-parties/", alt: true, std: ["SS.9-12.US.2"] },
+  "ush-p1u1-d5-bell-life1780s": { course: "us-history", unit: 1, day: 5, part: 1, title: "Day 5 · Bell Ringer: Life in the 1780s", path: "us-history/bell-p1u1-d5-life1780s/", std: ["SS.9-12.US.1"] },
+  "ush-p1u2-d4-bell-reconstruction": { course: "us-history", unit: 2, day: 4, part: 1, title: "Day 4 · Bell Ringer: The Reconstruction Amendments", path: "us-history/bell-p1u2-d4-reconstruction/", std: ["SS.9-12.US.5","SS.9-12.US.6"] },
+  "ush-p1u2-d5-bell-equal": { course: "us-history", unit: 2, day: 5, part: 1, title: "Day 5 · Bell Ringer: Separate Is Not Equal", path: "us-history/bell-p1u2-d5-equal/", std: ["SS.9-12.US.5","SS.9-12.US.7"] },
+  "ush-p1u4-d6-bell-suffrage": { course: "us-history", unit: 4, day: 6, part: 1, title: "Day 6 · Bell Ringer: Votes for Women", path: "us-history/bell-p1u4-d6-suffrage/", std: ["SS.9-12.US.15","SS.9-12.US.18"] },
+  "ush-u3-d4-bell-tinker": { course: "us-history", unit: 3, day: 4, title: "Day 4 · Bell Ringer: Tinker v. Des Moines", path: "us-history/bell-u3-d4-tinker/", std: ["SS.9-12.US.35","SS.9-12.US.40"] },
+  "ush-u4-d1-bell-equal": { course: "us-history", unit: 4, day: 1, title: "Day 1 · Bell Ringer: Separate Is Not Equal", path: "us-history/bell-u4-d1-equal/", std: ["SS.9-12.US.42","SS.9-12.US.43"] },
+  "ush-u4-d2-bell-voting": { course: "us-history", unit: 4, day: 2, title: "Day 2 · Bell Ringer: Who Gets to Vote?", path: "us-history/bell-u4-d2-voting/", std: ["SS.9-12.US.42","SS.9-12.US.44"] },
+  "ush-u4-d3-bell-youthvote": { course: "us-history", unit: 4, day: 3, title: "Day 3 · Bell Ringer: Old Enough to Fight, Old Enough to Vote", path: "us-history/bell-u4-d3-youthvote/", std: ["SS.9-12.US.42","SS.9-12.US.44"] },
+  "wh-p1u3-d6-bell-enlightenment": { course: "world-history", unit: 3, day: 6, part: 1, title: "Day 6 · Bell Ringer: Enlightenment Ideas Change the World", path: "world-history/bell-p1u3-d6-enlightenment/", std: ["SS.9-12.WH.12"] },
+  "wh-p1u4-d1-bell-why-gov": { course: "world-history", unit: 4, day: 1, part: 1, title: "Day 1 · Bell Ringer: Why Do We Need Government?", path: "world-history/bell-p1u4-d1-why-gov/", std: ["SS.9-12.WH.15","SS.9-12.WH.17"] },
+  "wh-p1u4-d3-bell-england": { course: "world-history", unit: 4, day: 3, part: 1, title: "Day 3 · Bell Ringer: Rules for Kings", path: "world-history/bell-p1u4-d3-england/", std: ["SS.9-12.WH.16","SS.9-12.WH.19"] },
+  "soc-u4-d1-bell-stratify": { course: "sociology", unit: 4, day: 1, title: "Day 1 · Bell Ringer: Who Counted in the 1780s?", path: "sociology/bell-u4-d1-stratify/", std: ["SS.9-12.Soc.12"] },
+  "soc-u4-d4-bell-equal": { course: "sociology", unit: 4, day: 4, title: "Day 4 · Bell Ringer: Separate Is Not Equal", path: "sociology/bell-u4-d4-equal/", std: ["SS.9-12.Soc.14"] },
+  "soc-u4-d6-bell-movements": { course: "sociology", unit: 4, day: 6, title: "Day 6 · Bell Ringer: How Movements Change the Rules", path: "sociology/bell-u4-d6-movements/", std: ["SS.9-12.Soc.15"] },
+
   // ---- World History · Unit 1 ----
   "divide-africa-day1":          { course: "world-history", unit: 1, day: 1, title: "Day 1 · Divide Africa", path: "divide-africa/", std: ["SS.9-12.WH.24"] },
   "day-2-hanoi-rat-hunt":        { course: "world-history", unit: 1, day: 2, title: "Day 2 · The Great Hanoi Rat Hunt (Reading)", path: "day-2-hanoi/", std: ["SS.9-12.WH.27", "SS.9-12.WH.24"] },

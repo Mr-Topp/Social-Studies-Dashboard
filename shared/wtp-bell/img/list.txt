@@ -1,0 +1,22 @@
+# Bell ringer pictures: saved-name|Wikimedia Commons file name (all public domain).
+# A GitHub Action (.github/workflows/fetch-bell-images.yml) downloads any that are missing.
+england.jpg|Magna Carta (British Library Cotton MS Augustus II.106).jpg
+revolution.jpg|Paul Revere, after Henry Pelham, The Boston Massacre, 1770, NGA 11550.jpg
+declaration.jpg|Declaration of Independence (1819), by John Trumbull.jpg
+life1780s.jpg|High Street from 9th Birch's Views Plate 12.jpg
+articles.jpg|Daniel Shays and Job Shattuck.jpg
+compromise.jpg|Washington Constitutional Convention 1787.jpg
+slavery.jpg|Wedgwood - Anti-Slavery Medallion - Walters 482597.jpg
+ratify.jpg|The Federalist (1st ed, 1788, vol I, title page).jpg
+washington.jpg|Federal Hall. The seat of Congress LCCN2003664760.jpg
+parties.jpg|Alexander Hamilton portrait by John Trumbull (c. 1806).jpg
+reconstruction.jpg|14th Amendment Pg1of2 AC.jpg
+equal.jpg|Operation Arkansas, Little Rock Nine.jpg
+suffrage.jpg|Mrs. Carrie Chapman Catt, half-length portrait, facing front LCCN94504767.jpg
+voting.jpg|Women suffragists picketing in front of the White house.jpg
+youthvote.jpg|26th Amendment Pg1of1 AC.jpg
+tinker.jpg|SCOTUS Justice Abe Fortas.jpeg
+enlightenment.jpg|Declaration of the Rights of Man and of the Citizen in 1789.jpg
+why-gov.jpg|Godfrey Kneller - Portrait of John Locke (Hermitage).jpg
+stratify.jpg|Alms House Birch's Views Plate 25.jpg
+movements.jpg|March on washington Aug 28 1963.jpg
