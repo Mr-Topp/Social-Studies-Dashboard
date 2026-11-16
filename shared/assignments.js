@@ -57,7 +57,8 @@ window.CLASS_UNITS_PART1 = {
     1: "Founding & Citizenship",
     2: "Civil War & Reconstruction",
     3: "Westward & Industrial Expansion",
-    4: "Progressive Era"
+    4: "Progressive Era",
+    5: "Imperialism & World War I"   // added 2026-11-15 (deck built 11-14): 4 lesson days + summative
   },
   "world-history": {
     1: "Exploration & Global Trade",
@@ -140,7 +141,7 @@ window.CLASS_NO_SCHOOL = [
 // Part 1 units (first half of U.S. History and World History): not on the green sheet, so no dates.
 // The summative is the day right after the last lesson day.
 window.CLASS_CALENDAR_PART1 = {
-  "us-history":    { 1: { days: 6 }, 2: { days: 6 }, 3: { days: 7 }, 4: { days: 8 } },
+  "us-history":    { 1: { days: 6 }, 2: { days: 6 }, 3: { days: 7 }, 4: { days: 8 }, 5: { days: 5 } },
   "world-history": { 1: { days: 6 }, 2: { days: 6 }, 3: { days: 7 }, 4: { days: 9 } }
 };
 
@@ -648,18 +649,24 @@ window.CLASS_STANDARDS = {
   // Part 1 standards (first half of U.S. and World History): exact state wording, Jan 2026 set (via Common Planner).
   "SS.9-12.US.4": "Evaluate the multiple causes and effects of the Civil War.",
   "SS.9-12.US.5": "Analyze the consequences of the Civil War and Reconstruction.",
+  "SS.9-12.US.6": "Analyze diverse ideologies through primary and secondary sources, noting the impact on social, economic, and political institutions during the Civil War and Reconstruction.",
   "SS.9-12.US.7": "Assess the impact of exemplary Americans and Iowans who displayed civic virtues in the Civil War and Reconstruction.",
   "SS.9-12.US.8": "Evaluate the impact of inventions and technological innovations on American society and culture.",
   "SS.9-12.US.19": "Evaluate the multiple causes and effects of the Spanish-American War, the Philippine–American War, and World War I.",
+  "SS.9-12.US.20": "Analyze how labor and government actions during imperialism and World War I influenced American economic systems, urbanization, and cultural development.",
+  "SS.9-12.US.21": "Analyze diverse ideologies through primary and secondary sources, noting the impact on social, economic, and political institutions.",
+  "SS.9-12.US.22": "Assess the impact of exemplary Americans and Iowans who displayed civic virtues during the expansion of the United States’ global role.",
   "SS.9-12.WH.2": "Evaluate the impacts of the Columbian Exchange on global populations and environments.",
   "SS.9-12.WH.5": "Explain how and why land-based and maritime empires expanded from 1450 - 1750.",
   "SS.9-12.WH.7": "Map the development and expansion of land-based and maritime empires from 1450 to 1750.",
   "SS.9-12.WH.8": "Assess how the artistic accomplishments of an empire reflected and reinforced their values and beliefs from 1450 to 1750.",
   "SS.9-12.WH.9": "Evaluate the long-term impacts of expanding empires from 1450 to 1750 in world history.",
   "SS.9-12.WH.10": "Explain how the Renaissance changed European societies from 1450 to 1750.",
+  "SS.9-12.WH.12": "Analyze how the Scientific Revolution and the Enlightenment created new ways of thinking and challenged traditional authority.",
   "SS.9-12.WH.13": "Describe the ways in which various groups supported and/or resisted the Reformation.",
   "SS.9-12.WH.14": "Analyze the role of printing and the printing press in the development of new intellectual and belief systems.",
   "SS.9-12.WH.15": "Explain the causes of political revolutions in the period of 1750 to 1826.",
+  "SS.9-12.WH.16": "Compare and contrast two or more revolutions, including the course of events and their periodizations in the period from 1750-1826.",
   "SS.9-12.WH.17": "Explain the intellectual context that shaped and spread revolutions in the Atlantic world from 1750 to 1826.",
   "SS.9-12.WH.18": "Analyze how revolutions from 1750 to 1826 impacted various groups of people.",
   "SS.9-12.WH.19": "Assess to what extent the revolutions changed political, economic, and/or social systems from 1750-1826.",
