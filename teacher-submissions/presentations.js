@@ -160,13 +160,14 @@
       days: [{ day: 1, title: "Checks & Balances: Who Keeps Power in Check?", std: "Gov.4, 9", slide: "g6d1s01" }, { day: 2, title: "Iowa Government: Who Runs Things Near You?", std: "Gov.18, 19, 20", slide: "g6d2s01" }] },
     { course: "government", unit: 1, title: "Foundations of the Constitution", note: "earlier 7-day version", url: g("1Ec44PBzUBZ8M1vsZldP_BVnRZqpDZBLLEXu50aD9q-A") },
 
-    // ---- Civics (Friday Iowa civics-test prep) · web presentations ----
-    { course: "civics", unit: 1, title: "Founders' Files (Q1–15)", url: "https://mr-topp.github.io/Social-Studies-Dashboard/civics/civics-test-s1-presentation/" },
-    { course: "civics", unit: 2, title: "How the Government Works (Q16–62)", url: "https://mr-topp.github.io/Social-Studies-Dashboard/civics/friday2-government-presentation/" },
-    { course: "civics", unit: 3, title: "Rights & Responsibilities (Q63–72)", url: "https://mr-topp.github.io/Social-Studies-Dashboard/civics/friday3-rights-presentation/" },
-    { course: "civics", unit: 4, title: "The 1776 Files (Q73–89)", url: "https://mr-topp.github.io/Social-Studies-Dashboard/civics/friday4-1776-presentation/" },
-    { course: "civics", unit: 5, title: "Civil War to Modern America (Q90–118)", url: "https://mr-topp.github.io/Social-Studies-Dashboard/civics/friday5-1800s-civics-presentation/" },
-    { course: "civics", unit: 6, title: "Symbols & Holidays (Q119–128)", url: "https://mr-topp.github.io/Social-Studies-Dashboard/civics/friday6-geography-symbols-presentation/" }
+    // ---- Civics (Friday Iowa civics-test prep) · Google Slides decks with Pear Deck (Fynn, 2026-11-17; replaced the web presentations) ----
+    // web: the old web presentation, shown to students only until the deck has a "pub" (Publish to web) id. Students never get the editor link.
+    { course: "civics", unit: 1, title: "Founders' Files (Q1–15)", url: g("1n39vEyk4Tp6IN830-raAULJvnb-wk3-ZkoPSLZfp9S8"), web: "https://mr-topp.github.io/Social-Studies-Dashboard/civics/civics-test-s1-presentation/" },
+    { course: "civics", unit: 2, title: "How the Government Works (Q16–62)", url: g("12m_0Mv9-wMs7vSDvp6BIAIrRD1f3I-VJNZgjOltq9XA"), web: "https://mr-topp.github.io/Social-Studies-Dashboard/civics/friday2-government-presentation/" },
+    { course: "civics", unit: 3, title: "Rights & Responsibilities (Q63–72)", url: g("1KE7r7njv5y0UHqPytdPMzBS7zdug-Hq5UWUDjkqOVk0"), web: "https://mr-topp.github.io/Social-Studies-Dashboard/civics/friday3-rights-presentation/" },
+    { course: "civics", unit: 4, title: "The 1776 Files (Q73–89)", url: g("1FT94CSBKrbjd7xy7ncASZqCg8T_FxUlRbNMwNvo3dgI"), web: "https://mr-topp.github.io/Social-Studies-Dashboard/civics/friday4-1776-presentation/" },
+    { course: "civics", unit: 5, title: "Civil War to Modern America (Q90–118)", url: g("1NjJyo7MWHULisCBTwhynA-V6SDnLmECuDiFyniezEf4"), web: "https://mr-topp.github.io/Social-Studies-Dashboard/civics/friday5-1800s-civics-presentation/" },
+    { course: "civics", unit: 6, title: "Symbols & Holidays (Q119–128)", url: g("16My1a0k4aKCH5-QHBg9pzyM8jD5Z0mpPxZ6r3-hMhpQ"), web: "https://mr-topp.github.io/Social-Studies-Dashboard/civics/friday6-geography-symbols-presentation/" }
     // Friday 7 = Iowa Civics Exam (Google Form, in shared/assignments.js), no slides. Fynn, 2026-11-03.
   ];
 })();
