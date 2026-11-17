@@ -395,6 +395,7 @@ async function load() {
   // If the Sheet didn't answer (wrong code, no internet), keep the last video list instead of falling back to the old one.
   if (got.length) cacheVideos(videoLinksOnly(Object.values(LINKS))); else LINKS = cachedVideos();
   applyLinks(); loaded = true;
+  if (sessionStorage.getItem("dash-tab") === "todo") tab = "todo";  // reopen To-do after the code goes in
   // Paper columns, paper grades / EX / M, and "Exempt everyone" (rows saved from this dashboard). Newest row wins.
   PAPER = {}; MARKS = {}; COLEX = {};
   const asc = list => list.sort((a, b) => a.submittedAt.localeCompare(b.submittedAt));
@@ -1271,10 +1272,11 @@ function renderTodo() {
 function flashNote(msg) { const n = $("todoNote"); n.textContent = msg; n.hidden = false; clearTimeout(flashNote.t); flashNote.t = setTimeout(() => n.hidden = true, 4000); }
 
 function renderTabs() {
-  const todoN = collectTodos().filter(t => t.group < 3).length;
+  if (tab === "todo" && !loaded) tab = Object.keys(COURSES)[0];  // locked: no To-do tab (Fynn, 2026-11-16)
+  const todoN = loaded ? collectTodos().filter(t => t.group < 3).length : 0;
   $("tabs").innerHTML = Object.keys(COURSES).map(k =>
     `<button class="tab" role="tab" data-tab="${k}" aria-selected="${k === tab}">${COURSES[k]}</button>`).join("") +
-    `<button class="tab todotab" role="tab" data-tab="todo" aria-selected="${tab === "todo"}">📝 To-do<span class="n">${todoN}</span></button>`;
+    (loaded ? `<button class="tab todotab" role="tab" data-tab="todo" aria-selected="${tab === "todo"}">📝 To-do<span class="n">${todoN}</span></button>` : "");  // To-do only shows once the teacher code is in (Fynn, 2026-11-16)
   $("tabs").querySelectorAll(".tab").forEach(b => b.onclick = () => { tab = b.dataset.tab; sessionStorage.setItem("dash-tab", tab); $("search").value = ""; render(); });
   if (tab === "todo") return;
   $("links").innerHTML = linksHtml();
