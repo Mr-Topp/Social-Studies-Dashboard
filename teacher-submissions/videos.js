@@ -171,6 +171,7 @@ Object.assign(window.CLASS_ASSIGNMENTS, {
   "soc-u2-d1-video-TCs_hyI15R8": { course: "sociology", unit: 2, day: 1, turnIn: false, video: true, std: [], title: "Day 1 · Politics: Crash Course Sociology", path: "https://www.youtube.com/watch?v=TCs_hyI15R8" },
   "soc-u2-d1-video-L72h7bk6HZs": { course: "sociology", unit: 2, day: 1, turnIn: false, video: true, std: [], title: "Day 1 · Social institutions - government, economy, health and medicine", path: "https://www.youtube.com/watch?v=L72h7bk6HZs" },
   "wh-u2-d2-video-s-FbhEUdpGY": { course: "world-history", unit: 2, day: 2, turnIn: false, video: true, std: [], title: "Day 2 · Inside North Korea: Life Under the World's Most Isolated Regime", path: "https://www.youtube.com/watch?v=s-FbhEUdpGY" },
+  "wh-u2-d2-video-N35IugBYH04": { course: "world-history", unit: 2, day: 2, turnIn: false, video: true, std: [], title: "Day 2 · TED-Ed: What is McCarthyism? And how did it happen? - Ellen Schrecker", path: "https://www.youtube.com/watch?v=N35IugBYH04" },  // TED-Ed/HISTORY match added 2026-11-16
 
   // ---- Sociology · Unit 4 ----
   "soc-u4-d1-video-2KlmvmuxzYE": { course: "sociology", unit: 4, day: 1, turnIn: false, video: true, std: [], title: "Day 1 · Students Learn A Powerful Lesson About Privilege", path: "https://www.youtube.com/watch?v=2KlmvmuxzYE" },
@@ -252,6 +253,7 @@ Object.assign(window.CLASS_ASSIGNMENTS, {
   "gov-u3-d1-video-9giPmCWnepU": { course: "government", unit: 3, day: 1, turnIn: false, video: true, std: [], title: "Day 1 · What Is the Judicial Branch of the U.S. Government?", path: "https://www.youtube.com/watch?v=9giPmCWnepU" },
   "gov-u3-d1-video-KEjgAXxrkXY": { course: "government", unit: 3, day: 1, turnIn: false, video: true, std: [], title: "Day 1 · How a case gets to the US Supreme Court", path: "https://www.youtube.com/watch?v=KEjgAXxrkXY" },
   "gov-u3-d1-video-netflix-81250873": { course: "government", unit: 3, day: 1, turnIn: false, video: true, std: [], title: "Day 1 · We the People: The Courts (Netflix, 5 min)", path: "https://www.netflix.com/watch/81250873" },
+  "gov-u3-d1-video-0xnzGSV66x4": { course: "government", unit: 3, day: 1, turnIn: false, video: true, std: [], title: "Day 1 · TED-Ed: How do US Supreme Court justices get appointed? - Peter Paccone", path: "https://www.youtube.com/watch?v=0xnzGSV66x4" },  // TED-Ed/HISTORY match added 2026-11-16
   "gov-u3-d2-video-na6JXT_F0ZI": { course: "government", unit: 3, day: 2, turnIn: false, video: true, std: [], title: "Day 2 · Marbury v. Madison: What is Judicial Review?", path: "https://www.youtube.com/watch?v=na6JXT_F0ZI" },
   "gov-u3-d2-video-Ao5k3KNURE8": { course: "government", unit: 3, day: 2, turnIn: false, video: true, std: [], title: "Day 2 · Constitution Hall Pass: Tinker v. Des Moines", path: "https://www.youtube.com/watch?v=Ao5k3KNURE8" },
 
@@ -276,6 +278,7 @@ Object.assign(window.CLASS_ASSIGNMENTS, {
 
   // ---- Government · Unit 6 (added 2026-11-04, Fynn) ----
   "gov-u6-d1-video-netflix-81250869": { course: "government", unit: 6, day: 1, turnIn: false, video: true, std: [], title: "Day 1 · We the People: The Three Branches of Government (Netflix, 5 min)", path: "https://www.netflix.com/watch/81250869" },
+  "gov-u6-d1-video-HuFR5XBYLfU": { course: "government", unit: 6, day: 1, turnIn: false, video: true, std: [], title: "Day 1 · TED-Ed: How is power divided in the United States government? - Belinda Stutzman", path: "https://www.youtube.com/watch?v=HuFR5XBYLfU" },  // TED-Ed/HISTORY match added 2026-11-16
   "gov-u6-d1-video-S4ymux9l-Qo": { course: "government", unit: 6, day: 1, turnIn: false, video: true, std: [], title: "Day 1 · Facts of Congress - Checks and Balances", path: "https://www.youtube.com/watch?v=S4ymux9l-Qo" },
   "gov-u6-d2-video-lw7eDkAL0lo": { course: "government", unit: 6, day: 2, turnIn: false, video: true, std: [], title: "Day 2 · Iowa Constitution & Government: The Iowa Legislature", path: "https://www.youtube.com/watch?v=lw7eDkAL0lo" },
 
@@ -366,6 +369,7 @@ Object.assign(window.CLASS_ASSIGNMENTS, {
   "wh-u3-d5-video-hy0I_1A9R_A": { course: "world-history", unit: 3, day: 5, turnIn: false, video: true, std: [], title: "Day 5 · How K-pop became South Korea's soft power", path: "https://www.youtube.com/watch?v=hy0I_1A9R_A" },
   "wh-u3-d6-video-kPfzwLbzVYs": { course: "world-history", unit: 3, day: 6, turnIn: false, video: true, std: [], title: "Day 6 · 9/11: THE DAY THE WORLD STOOD STILL", path: "https://www.youtube.com/watch?v=kPfzwLbzVYs" },
   "wh-u3-d6-video-nlsnnhn3VWE": { course: "world-history", unit: 3, day: 6, turnIn: false, video: true, std: [], title: "Day 6 · Terrorism, War, and Bush 43: Crash Course US History #46", path: "https://www.youtube.com/watch?v=nlsnnhn3VWE" },
+  "wh-u3-d7-video-KP9VklrXPZs": { course: "world-history", unit: 3, day: 7, turnIn: false, video: true, std: [], title: "Day 7 · Here's Why the Patriot Act Is So Controversial", path: "https://www.youtube.com/watch?v=KP9VklrXPZs" },  // TED-Ed/HISTORY match added 2026-11-16
   "soc-u2-d5-video--gYl3nfChEM": { course: "sociology", unit: 2, day: 5, turnIn: false, video: true, std: [], title: "Day 5 · What are Social Institutions?", path: "https://www.youtube.com/watch?v=-gYl3nfChEM" },
   "soc-u2-d5-video-yaeiCEro0iU": { course: "sociology", unit: 2, day: 5, turnIn: false, video: true, std: [], title: "Day 5 · Theories About Family & Marriage: Crash Course Sociology #37", path: "https://www.youtube.com/watch?v=yaeiCEro0iU" },
   "soc-u2-d5-video-L72h7bk6HZs": { course: "sociology", unit: 2, day: 5, turnIn: false, video: true, std: [], title: "Day 5 · Social institutions - government, economy, health and medicine", path: "https://www.youtube.com/watch?v=L72h7bk6HZs" },
