@@ -59,7 +59,7 @@ parts.forEach(p=>{
 qcol.addEventListener("click",e=>{const b=e.target.closest(".stemBtn");if(!b)return;const p=parts[Number(b.dataset.for)-1],t=$("answer"+p.n);if(t.disabled)return;if(!t.value.trim())t.value=p.stemText;else if(!t.value.includes(p.stemText))t.value=p.stemText+" "+t.value;t.focus();const k=t.value.indexOf("___");if(k>=0)t.setSelectionRange(k,k+3);ls.set("answer"+p.n,t.value);refresh()});
 /* route strip */
 const route=$("flipRoute");
-parts.forEach(p=>{const li=document.createElement("li");li.id="r"+p.n;li.innerHTML='<a href="#" data-part="'+p.n+'"><span class="dot"><span>'+p.n+'</span></span><span>'+p.short+'<small>Pages '+p.from+(p.to>p.from?"–"+p.to:"")+'</small></span></a>';route.appendChild(li)});
+parts.forEach(p=>{const li=document.createElement("li");li.id="r"+p.n;li.innerHTML='<a href="#" data-part="'+p.n+'"><span class="dot"><span>'+p.n+'</span></span><span>'+p.short+'<small>Page'+(p.to>p.from?'s ':' ')+p.from+(p.to>p.from?"–"+p.to:"")+'</small></span></a>';route.appendChild(li)});
 {const li=document.createElement("li");li.id="rFinish";li.innerHTML='<a href="#finish"><span class="dot"><span>★</span></span><span>Turn in<small>Last step</small></span></a>';route.appendChild(li)}
 
 /* ---------- saved text ---------- */
@@ -105,12 +105,16 @@ function maxOpen(){for(let pg=1;pg<=N;pg++)if(blocker(pg))return pg;return N}
 function show(pg,scroll){
   cur=Math.max(1,Math.min(N,pg));ls.set("at",String(cur));
   const p=partOf(cur),im=$("flipImg");
-  im.src=img(cur);im.alt=(C.alts&&C.alts[cur-1]?C.alts[cur-1]+" ":"")+"("+C.title+", reader page "+cur+" of "+N+")";
-  if(cur<N){const pre=new Image();pre.src=img(cur+1)}
+  // Opt-in text pages (Fynn, 11-16): C.htmlPages = {pageNumber: "<html>"} shows a written page in place of a scan.
+  const hp=C.htmlPages&&C.htmlPages[cur];
+  if(C.htmlPages){let hb=$("flipHtml");if(!hb){hb=document.createElement("div");hb.id="flipHtml";hb.className="flip-html";im.parentNode.appendChild(hb)}
+    hb.hidden=!hp;hb.innerHTML=hp||"";im.hidden=!!hp;const z=$("flipZoom");if(z)z.hidden=!!hp;const cp=document.querySelector(".flip-cap");if(cp)cp.hidden=!!hp}
+  if(!hp){im.src=img(cur);im.alt=(C.alts&&C.alts[cur-1]?C.alts[cur-1]+" ":"")+"("+C.title+", reader page "+cur+" of "+N+")"}
+  if(cur<N&&!(C.htmlPages&&C.htmlPages[cur+1])){const pre=new Image();pre.src=img(cur+1)}
   parts.forEach(x=>{$("q"+x.n).hidden=x.n!==p.n});
   clearInterval(timer);stopQ();
   if(!read.has(cur)&&TT()){read.add(cur);ls.set("read",JSON.stringify([...read]))}
-  if(!read.has(cur)){let left=C.readSeconds;
+  if(!read.has(cur)){let left=(C.pageSeconds&&C.pageSeconds[cur])||C.readSeconds;
     const tick=()=>{$("flipTimer").textContent="Read this page · "+left+" sec"};tick();
     timer=setInterval(()=>{left--;if(left<=0){clearInterval(timer);read.add(cur);ls.set("read",JSON.stringify([...read]));$("flipTimer").textContent="";refresh()}else tick()},1000)}
   else $("flipTimer").textContent="";
