@@ -4,7 +4,7 @@
 (function(){
 const C=window.FLIP, $=id=>document.getElementById(id), P=C.prefix, N=C.pages;
 const pad=n=>String(n).padStart(2,"0");
-const img=n=>"pages/p-"+pad(n)+".jpg";
+const img=n=>(C.pageDir||"pages")+"/p-"+pad(n)+".jpg";  // C.pageDir opt-in (Fynn, 11-16: re-scanned page folder)
 const ls={get:k=>{try{return localStorage.getItem(P+k)}catch(e){return null}},set:(k,v)=>{try{localStorage.setItem(P+k,v)}catch(e){}},del:k=>{try{localStorage.removeItem(P+k)}catch(e){}}};
 if(C.migrate)C.migrate(ls);
 let read=new Set();try{read=new Set((JSON.parse(ls.get("read")||"[]")||[]).map(Number))}catch(e){}
@@ -108,7 +108,7 @@ function show(pg,scroll){
   // Opt-in text pages (Fynn, 11-16): C.htmlPages = {pageNumber: "<html>"} shows a written page in place of a scan.
   const hp=C.htmlPages&&C.htmlPages[cur];
   if(C.htmlPages){let hb=$("flipHtml");if(!hb){hb=document.createElement("div");hb.id="flipHtml";hb.className="flip-html";im.parentNode.appendChild(hb)}
-    hb.hidden=!hp;hb.innerHTML=hp||"";im.hidden=!!hp;const z=$("flipZoom");if(z)z.hidden=!!hp;const cp=document.querySelector(".flip-cap");if(cp)cp.hidden=!!hp}
+    hb.hidden=!hp;hb.innerHTML=hp||"";im.hidden=!!hp;im.style.display=hp?"none":"";const z=$("flipZoom");if(z)z.hidden=!!hp;const cp=document.querySelector(".flip-cap");if(cp)cp.hidden=!!hp}
   if(!hp){im.src=img(cur);im.alt=(C.alts&&C.alts[cur-1]?C.alts[cur-1]+" ":"")+"("+C.title+", reader page "+cur+" of "+N+")"}
   if(cur<N&&!(C.htmlPages&&C.htmlPages[cur+1])){const pre=new Image();pre.src=img(cur+1)}
   parts.forEach(x=>{$("q"+x.n).hidden=x.n!==p.n});
@@ -135,7 +135,7 @@ function refresh(){
   $("wait"+p.n).hidden=showCheck;
   const a=$("answer"+p.n),done=checkDone(p.n);
   if(a)a.disabled=!done&&!TT();const sb=$("q"+p.n).querySelector(".stemBtn");if(sb)sb.disabled=!done;$("unlock"+p.n).textContent=done||TT()?"":C.lockedText;
-  $("write"+p.n).hidden=!(done||cur===p.to||TT());
+  $("write"+p.n).hidden=!(done||(cur===p.to&&(!C.oneAtATime||checkDone(p.n)))||TT());  // C.oneAtATime opt-in (Fynn, 11-16): next question shows after the first is right
   // nav
   // "Next page" only shows while this part still has more pages to read.
   // On a part's last (or only) page, the way forward is "Next part" under the question.
