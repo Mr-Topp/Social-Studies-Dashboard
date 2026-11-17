@@ -945,7 +945,7 @@ function linksHtml() {
       if (r.summ) {
         if (!mainIds.some(isTest)) r.todo.push("Summative not made yet. Fill this in");
         else if (!r.ids.some(id => kindOf(id) === "key")) r.todo.push("Answer key not made yet. Fill this in");
-      } else if (!mainIds.some(id => kindOf(id) !== "key" && kindOf(id) !== "video")) r.todo.push("Assignment not made yet. Fill this in");  // videos alone don't count as the day's assignment (Fynn, 2026-11-14)
+      } else if (!mainIds.some(id => kindOf(id) !== "key" && kindOf(id) !== "video" && !/bell ringer/i.test(REG[id].title || ""))) r.todo.push("Assignment not made yet. Fill this in");  // videos alone don't count as the day's assignment (Fynn, 2026-11-14); neither does a bell ringer alone (Fynn, 2026-11-16)
     });
     const list = [...rows.values()].sort((a, b) => (a.day || 999) - (b.day || 999));
     if (window.__todoSink) list.forEach(r => (r.todo || []).forEach(text => window.__todoSink.push({ key, name, day: r.day, span: r.span, title: r.title, std: r.std, text, summ: !!r.summ, after: !!(cal && r.day > cal.days), kind: /answer key/i.test(text) ? "key" : r.day > (cal ? cal.days : 999) ? "after" : r.summ ? "test" : "assignment" })));
