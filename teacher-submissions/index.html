@@ -900,7 +900,7 @@ function linksHtml() {
     for (let k = 0; k < 40; k++, d.setDate(d.getDate() + 1)) { const i = isoD(d), w = d.getDay(); if (w >= 1 && w <= 4 && !off(i)) { const l = window.classLessonOn(tab, i); return l ? Object.assign({ iso: i }, l) : null; } }
     return null;
   })();
-  if (NEXT && linkOpen[tab + "|" + NEXT.unit] === undefined) linkOpen[tab + "|" + NEXT.unit] = true;
+  // Fynn (2026-11-17): every unit starts closed when a class opens; he opens the ones he wants.
   const unitBlock = (key, name, ids, decks, cal) => {
     ids = ids.filter(id => !REG[id].hiddenVid);   // videos Fynn removed from this day
     const kp = String(key).split("|"), vctx = { course: kp[0], part: kp[1] === "p1" ? 1 : 2, unit: +kp[kp.length - 1] || 0 };
