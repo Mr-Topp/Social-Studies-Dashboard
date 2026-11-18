@@ -1,6 +1,6 @@
 // Puts each day's videos in the same order they show up in that unit's slides (Fynn, 2026-11-15).
 // Videos that aren't on the slides go after, in their old order.
-// List built from the slide decks (last refreshed 2026-11-16). A new video lands at the end of its day until this list is refreshed.
+// List built from the slide decks (last refreshed 2026-11-16; Sociology 2026-11-18). A new video lands at the end of its day until this list is refreshed.
 (function () {
   var ORDER = {
     "government|0|1": ["hMqEnmDp2m8","3QGy2SbXTNE","ttu8va9_x1g","3sgAwVpCOOI","RSLbmtqlLLk","7xo4tUMdAMw","KovOrGBciQg","pTliCI6uwmo","LKJMWHCUoiw","tlEoopuYny0","CRUqhh1tDm4","C31YmCbHsX4","VV6yOTg04zc","YJOiEr58ESc","HuFR5XBYLfU","FwREAW4SlVY","yYEfLm5dLMQ","Xq4x84xUdpg","VRDRNDtx9j4"],
@@ -9,10 +9,10 @@
     "government|0|4": ["hltv8-nzcUc","aLFeBfxzurc","Otbml6WIQPo","G7O9ZpJ-aiU","u5jKL6hFNdk","pHSttXOpvYg"],
     "government|0|5": ["BWR2p9j9hWo","Z9v9PEng7Xo","oyOf3g-PJ94","HqBTas0_ryg","8oier528TrE","-bKT5rc6rsU","qL9kqmn-dUA","PNojm8f6Seo"],
     "government|0|6": ["S4ymux9l-Qo","lw7eDkAL0lo"],
-    "sociology|0|1": ["DthAMxn8zp0","gsgZOjCS8Ao","OhVamhT4Q3s","z9W0GQvONKc","ICppFQ6Tabw","DbTt_ySTjaY","ZIwyNIdgJBE","o4XX90lqT6E","sxYrzzy3cq8","QwhK-iEyXYA","22lGbAVWhro","kGn_EoHiOvc","ZV7RzS8QRXE","vuMt8b4UrcI","IRR7CwdHxUE","r7RrB8WOam4"],
-    "sociology|0|2": ["UUukBV82P9A","mhK40bkBzsc","_XI6ILZGtT4","s-FbhEUdpGY","RV50AV7-Iwc","w-2gC-IQl6w","JYXF08ZS66w","fkfwrXgfRr4","DESE8x3p8Z0","foMa-8dvFyA","P9VdyPbbzlI","FE6Yvy--5aw","r7isb4Cu6Xc","bU2tt1h53jM"],
-    "sociology|0|3": ["uM5TQ4f7ycw","2K-zTQRdGCU","No149Vn4HhI","YmVpwXH4jhA","UvtJja2ihYQ","XmtSbVNnuyQ","5lZ2AjV307U","ge7i60GuNRg","WDu5nc_uEPo","j3jUzK3p3Qo","i3rVzhWIqSU","TYIh4MkcfJA","fNUQ8RnuUFk","ujupEUFDm3E"],
-    "sociology|0|4": ["2KlmvmuxzYE","SlkIKCMt-Fs","D9N7QaIOkG8","rEnf_CFoyv0","c8PEv5SV4sU","WTbo4gb_c3o","b350ljkYWrU","hYMk3Bk08NA","HoKkasEyDOI","hZZmMrFQzVs","HQvetA1P4Yg","9diZJks95Ko","13XU4fMlN3w","tyKhRAU35nA","zySKwvQCpXE","TwVuQ_Llh4k","_gTgloPR0Aw"],
+    "sociology|0|1": ["YnCJU6PaCio","DthAMxn8zp0","gsgZOjCS8Ao","IZfGGF-YYzY","OhVamhT4Q3s","Wg9FWxpZeJ8","z9W0GQvONKc","gR3igiwaeyc","ICppFQ6Tabw","-wny0OAz3g8","DbTt_ySTjaY","ZIwyNIdgJBE","o4XX90lqT6E","sxYrzzy3cq8","QwhK-iEyXYA","vuMt8b4UrcI","22lGbAVWhro","kGn_EoHiOvc","ZV7RzS8QRXE","Kzd6Ew3TraA","IRR7CwdHxUE","r7RrB8WOam4"],
+    "sociology|0|2": ["UUukBV82P9A","mhK40bkBzsc","L72h7bk6HZs","RV50AV7-Iwc","kGrVhM_Gi8k","w-2gC-IQl6w","JYXF08ZS66w","fkfwrXgfRr4","InMeuBdncQg","BsRSL3duSko","fKnAJCSGSdk","DESE8x3p8Z0","foMa-8dvFyA","FE6Yvy--5aw","P9VdyPbbzlI","yaeiCEro0iU","-gYl3nfChEM","bU2tt1h53jM"],
+    "sociology|0|3": ["WbBm_YLwowc","wo5eb7BjCec","uM5TQ4f7ycw","2K-zTQRdGCU","K-RvJQxqVQc","No149Vn4HhI","S294zRodS_4","YmVpwXH4jhA","XHIhkM1cAv4","UvtJja2ihYQ","XmtSbVNnuyQ","PF7m1fFr2eQ","BGq9zW9w3Fw","5lZ2AjV307U","zBodqwAlW3A","BOOPDY_jMC8","06IS_X7hWWI","UUukBV82P9A","WDu5nc_uEPo","j3jUzK3p3Qo","i3rVzhWIqSU","_wFZ5Dbj8DA","aGedUxTAfBk","YDuBh7VbGgU","kVAztNx0rHQ","TYIh4MkcfJA","fNUQ8RnuUFk","ujupEUFDm3E"],
+    "sociology|0|4": ["SlkIKCMt-Fs","2KlmvmuxzYE","D9N7QaIOkG8","rEnf_CFoyv0","RtxtI5IGrfw","c8PEv5SV4sU","DeiHz5tzlws","0a21mndoORE","WTbo4gb_c3o","GjuV-XdYHhA","b350ljkYWrU","6rts_PWIVTU","hYMk3Bk08NA","hZZmMrFQzVs","gSddUPkVD24","HoKkasEyDOI","Yb1_4FPtzrI","HQvetA1P4Yg","9diZJks95Ko","13XU4fMlN3w","D9SWRByzDSo","tyKhRAU35nA","zySKwvQCpXE","TwVuQ_Llh4k","_gTgloPR0Aw"],
     "us-history|0|1": ["7TfgJnXlaxo","9gboEyrj02g","y4BDnlUQ3CA","uWMkJ8IOHBU","D2iuUzkKu9k","-J_RbFkv82o","zle3Y3LgJJQ","k4SoSUsQK9U","N1Gc2BxU_zQ","VWvA26V4wk0"],
     "us-history|0|2": ["jFICRFKtAc4","-HazLOy71Jg","b-M8PdXte5o","0FDfhPMA95I","gdgPAetNY5U","WBrWfhudElQ","9aRVVae2i_c","bU2tt1h53jM","WrK1j4BNmHE","hI4NoVWq87M","dik51bMfPaQ","PF1A8NS1L9g","j25HTJ3Aud0"],
     "us-history|0|3": ["Jb8aW46T3bg","tMXjsVLOznc","UVAaVEoxqmg","N35IugBYH04","h1wFrXKanC0","Cmv6KMsi36g","SepPz7ODnKg","gN6xojGcH0Y","7WapJczNfw8","2QxVwafUFgY","iAEshwQmMvU","09fNp4hVnHA","bwWW3sbk4EU","crALHjTiXbk","ezuFR5OwHU8","vVNUlOUlMeo"],

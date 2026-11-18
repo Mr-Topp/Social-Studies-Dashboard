@@ -7,8 +7,8 @@
 <title>Teacher Dashboard · All Classes</title>
 <script src="../shared/assignments.js?v=20261117civ"></script>
    <script src="part1-schoology.js?v=20261105a"></script>
-<script src="videos.js?v=20261116vid20"></script>
-<script src="video-channels.js?v=20261115ch2"></script>
+<script src="videos.js?v=20261118cc1"></script>
+<script src="video-channels.js?v=20261118cc1"></script>
 <script src="presentations.js?v=20261117civ"></script>
 <script src="../shared/turnin.js?v=20261109nm1"></script>
 <style>
@@ -1752,6 +1752,6 @@ if ($("teacherCode").value) load(); else loadPublicVideos();
 if (TOOLS_URL) fetch(TOOLS_URL, { method: "POST", headers: { "Content-Type": "text/plain;charset=utf-8" }, body: JSON.stringify({ action: "version" }) })
   .then(r => r.json()).then(d => { $("toolsUpdate").hidden = !!(d && d.ok && (d.can || []).includes("videos")); }).catch(() => {});
 </script>
-   <script src="video-order.js?v=20261115order1"></script>
+   <script src="video-order.js?v=20261118cc1"></script>
 </body>
 </html>

@@ -199,6 +199,27 @@ Object.assign(window.CLASS_ASSIGNMENTS, {
   "soc-u4-d3-video-b350ljkYWrU": { course: "sociology", unit: 4, day: 3, turnIn: false, video: true, std: [], title: "Day 3 · Theories of Global Stratification: Crash Course Sociology #28", path: "https://www.youtube.com/watch?v=b350ljkYWrU" },
   "soc-u4-d4-video-hYMk3Bk08NA": { course: "sociology", unit: 4, day: 4, turnIn: false, video: true, std: [], title: "Day 4 · Schools & Social Inequality: Crash Course Sociology #41", path: "https://www.youtube.com/watch?v=hYMk3Bk08NA" },
 
+  // ---- Sociology · the rest of the Crash Course Sociology episodes that fit a lesson day (Fynn, 2026-11-18) ----
+  // Each day's Crash Course link sits on that day's Bell Ringer slide; extra ones sit on the slide that fits their topic.
+  "soc-u1-d1-video-YnCJU6PaCio": { course: "sociology", unit: 1, day: 1, turnIn: false, video: true, std: [], title: "Day 1 · What Is Sociology?: Crash Course Sociology #1", path: "https://www.youtube.com/watch?v=YnCJU6PaCio" },
+  "soc-u1-d3-video-IZfGGF-YYzY": { course: "sociology", unit: 1, day: 3, turnIn: false, video: true, std: [], title: "Day 3 · Émile Durkheim on Suicide & Society: Crash Course Sociology #5", path: "https://www.youtube.com/watch?v=IZfGGF-YYzY" },
+  "soc-u1-d3-video-gR3igiwaeyc": { course: "sociology", unit: 1, day: 3, turnIn: false, video: true, std: [], title: "Day 3 · Karl Marx & Conflict Theory: Crash Course Sociology #6", path: "https://www.youtube.com/watch?v=gR3igiwaeyc" },
+  "soc-u1-d3-video--wny0OAz3g8": { course: "sociology", unit: 1, day: 3, turnIn: false, video: true, std: [], title: "Day 3 · Du Bois & Race Conflict: Crash Course Sociology #7", path: "https://www.youtube.com/watch?v=-wny0OAz3g8" },
+  "soc-u1-d3-video-Wg9FWxpZeJ8": { course: "sociology", unit: 1, day: 3, turnIn: false, video: true, std: [], title: "Day 3 · Harriet Martineau & Gender Conflict Theory: Crash Course Sociology #8", path: "https://www.youtube.com/watch?v=Wg9FWxpZeJ8" },
+  "soc-u1-d3-video-69VF7mT4nRU": { course: "sociology", unit: 1, day: 3, turnIn: false, video: true, std: [], title: "Day 3 · Max Weber & Modernity: Crash Course Sociology #9", path: "https://www.youtube.com/watch?v=69VF7mT4nRU" },
+  "soc-u3-d1-video-WbBm_YLwowc": { course: "sociology", unit: 3, day: 1, turnIn: false, video: true, std: [], title: "Day 1 · Social Development: Crash Course Sociology #13", path: "https://www.youtube.com/watch?v=WbBm_YLwowc" },
+  "soc-u3-d3-video-06IS_X7hWWI": { course: "sociology", unit: 3, day: 3, turnIn: false, video: true, std: [], title: "Day 3 · Theory & Deviance: Crash Course Sociology #19", path: "https://www.youtube.com/watch?v=06IS_X7hWWI" },
+  "soc-u3-d3-video-zBodqwAlW3A": { course: "sociology", unit: 3, day: 3, turnIn: false, video: true, std: [], title: "Day 3 · Crime: Crash Course Sociology #20", path: "https://www.youtube.com/watch?v=zBodqwAlW3A" },
+  "soc-u3-d5-video-YDuBh7VbGgU": { course: "sociology", unit: 3, day: 5, turnIn: false, video: true, std: [], title: "Day 5 · Formal Organizations: Crash Course Sociology #17", path: "https://www.youtube.com/watch?v=YDuBh7VbGgU" },
+  "soc-u4-d1-video-RtxtI5IGrfw": { course: "sociology", unit: 4, day: 1, turnIn: false, video: true, std: [], title: "Day 1 · Why Is There Social Stratification?: Crash Course Sociology #22", path: "https://www.youtube.com/watch?v=RtxtI5IGrfw" },
+  "soc-u4-d2-video-DeiHz5tzlws": { course: "sociology", unit: 4, day: 2, turnIn: false, video: true, std: [], title: "Day 2 · Social Stratification in the US: Crash Course Sociology #23", path: "https://www.youtube.com/watch?v=DeiHz5tzlws" },
+  "soc-u4-d2-video-0a21mndoORE": { course: "sociology", unit: 4, day: 2, turnIn: false, video: true, std: [], title: "Day 2 · The Impacts of Social Class: Crash Course Sociology #25", path: "https://www.youtube.com/watch?v=0a21mndoORE" },
+  "soc-u4-d2-video-GjuV-XdYHhA": { course: "sociology", unit: 4, day: 2, turnIn: false, video: true, std: [], title: "Day 2 · Social Mobility: Crash Course Sociology #26", path: "https://www.youtube.com/watch?v=GjuV-XdYHhA" },
+  "soc-u4-d3-video-6rts_PWIVTU": { course: "sociology", unit: 4, day: 3, turnIn: false, video: true, std: [], title: "Day 3 · Global Stratification & Poverty: Crash Course Sociology #27", path: "https://www.youtube.com/watch?v=6rts_PWIVTU" },
+  "soc-u4-d4-video-gSddUPkVD24": { course: "sociology", unit: 4, day: 4, turnIn: false, video: true, std: [], title: "Day 4 · Racial/Ethnic Prejudice & Discrimination: Crash Course Sociology #35", path: "https://www.youtube.com/watch?v=gSddUPkVD24" },
+  "soc-u4-d5-video-Yb1_4FPtzrI": { course: "sociology", unit: 4, day: 5, turnIn: false, video: true, std: [], title: "Day 5 · Gender Stratification: Crash Course Sociology #32", path: "https://www.youtube.com/watch?v=Yb1_4FPtzrI" },
+  "soc-u4-d5-video-D9SWRByzDSo": { course: "sociology", unit: 4, day: 5, turnIn: false, video: true, std: [], title: "Day 5 · Population Health: Crash Course Sociology #43", path: "https://www.youtube.com/watch?v=D9SWRByzDSo" },
+
   // ---- Government · Unit 1 ----
   "gov-u1-d1-video-3QGy2SbXTNE": { course: "government", unit: 1, day: 1, turnIn: false, video: true, std: [], title: "Day 1 · People on the Street: What is the Purpose of Government", path: "https://www.youtube.com/watch?v=3QGy2SbXTNE" },
   "gov-u1-d1-video-hMqEnmDp2m8": { course: "government", unit: 1, day: 1, turnIn: false, video: true, std: [], title: "Day 1 · Why Do So Many Americans Not Know How Their Government Works?", path: "https://www.youtube.com/watch?v=hMqEnmDp2m8" },
