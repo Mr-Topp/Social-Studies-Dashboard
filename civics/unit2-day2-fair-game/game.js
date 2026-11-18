@@ -49,19 +49,19 @@ const FOLKS = [
     say: "At <mark>my job at the VA hospital</mark>, I see people skip their medicine because it costs too much. <u>The government should help pay for doctor visits.</u> But <u>how adults live their lives is their own business.</u>",
     wants: ['health'], avoid: ['vets'], twist: "Dana isn't in any party. Lots of Iowa voters aren't.",
     look: { skin: 2, hair: 'bun', hc: '#2d211b', shirt: '#6fb7c9', extra: 'badge' } },
-  { id: 'earl', name: 'Earl', bio: '63 · corn and hog farmer · near Grundy Center', clue: 'community', quad: 'con',
+  { id: 'earl', clueOk: ['community', 'friends'],  name: 'Earl', bio: '63 · corn and hog farmer · near Grundy Center', clue: 'community', quad: 'con',
     say: "<mark>Everybody in my small town</mark> agrees: <u>the government takes too much of our money and buries us in forms.</u> And <u>we need stricter rules on vaping. Kids get hooked.</u>",
     wants: ['taxes', 'regs', 'farmers'], twist: "Earl has voted Republican for 40 years.",
     look: { skin: 0, hair: 'cap', hc: '#9a9a9a', shirt: '#7b8f4e', extra: 'cap' } },
-  { id: 'ray', name: 'Ray', bio: '47 · owns a trucking company · Council Bluffs', clue: 'family', quad: 'libt',
+  { id: 'ray', clueOk: ['family', 'job'],  name: 'Ray', bio: '47 · owns a trucking company · Council Bluffs', clue: 'family', quad: 'libt',
     say: "<mark>My grandpa started our trucking company.</mark> He taught me: <u>keep taxes low and government forms short.</u> And <u>let adults make their own choices, like betting at 18.</u>",
     wants: ['taxes', 'regs'], twist: "Ray votes Republican on taxes. On personal choices, he sounds libertarian.",
     look: { skin: 3, hair: 'short', hc: '#4a3426', shirt: '#2f5d7c', extra: 'glasses' } },
-  { id: 'walt', name: 'Walt', bio: '72 · Vietnam veteran · Dubuque', clue: 'friends', quad: 'pop',
+  { id: 'walt', clueOk: ['friends', 'community', 'job'], also: ['health', 'police'],  name: 'Walt', bio: '72 · Vietnam veteran · Dubuque', clue: 'friends', quad: 'pop',
     say: "<mark>My old Army buddies and I</mark> meet every week. We agree: <u>the government owes veterans good doctors and every check we were promised.</u> And <u>we need stricter rules, like curfews for teens.</u>",
     wants: ['vets'], twist: "Walt has voted for both parties. He votes for the person, not the party.",
     look: { skin: 2, hair: 'bald', hc: '#cfcfcf', shirt: '#5b6b3c', extra: 'vetcap' } },
-  { id: 'tyler', name: 'Tyler', bio: '27 · union electrician · Cedar Rapids', clue: 'family', quad: 'pop',
+  { id: 'tyler', clueOk: ['family', 'job'],  name: 'Tyler', bio: '27 · union electrician · Cedar Rapids', clue: 'family', quad: 'pop',
     say: "<mark>My dad always told me</mark> workers are stronger together. <u>My union got us better pay. The government should raise the minimum wage too.</u> And <u>keep strict rules on vaping and gambling.</u>",
     wants: ['unions', 'wage'], avoid: ['gunright'], twist: "Plot twist: Tyler is a Democrat who hunts and backs gun rights. Lots of union members do.",
     look: { skin: 1, hair: 'short', hc: '#a0522d', shirt: '#f0a43a', extra: 'hardhat' } },
@@ -74,16 +74,19 @@ const FOLKS = [
     say: '<mark>Our econ teacher</mark> made us make a budget on $7.25 an hour. It doesn\'t work. <u>Pay should go up.</u> And <u>keep the betting age at 21. Gambling hooks too many people.</u>',
     wants: ['wage'], avoid: ['unions'], twist: 'Jayden just turned 18 and registered to vote at the voter sign-up booth in this same building.',
     look: { skin: 3, hair: 'short', hc: '#120d0b', shirt: '#4f8f5b', extra: 'none' } },
-  { id: 'priya', name: 'Priya', bio: '29 · software tester, mom of a 6-year-old · West Des Moines', clue: 'media', quad: 'libt',
+  { id: 'priya', quadOk: ['libt', 'lib'],  name: 'Priya', bio: '29 · software tester, mom of a 6-year-old · West Des Moines', clue: 'media', quad: 'libt',
     say: "<mark>The podcasts I listen to on my drive</mark> changed my mind. <u>The government takes too much of my paycheck.</u> I want state money to follow my daughter to any school, even a private one. And <u>what adults do on their own time is their business.</u>",
     wants: ['taxes', 'choice'], avoid: ['regs'], twist: "Priya usually votes Republican. On personal freedom, she agrees with many Democrats.",
     look: { skin: 1, hair: 'long', hc: '#1c1412', shirt: '#7b5fb2', extra: 'earbuds' } },
-  { id: 'luis', name: 'Luis', bio: '51 · factory worker · Newton', clue: 'faith', quad: 'lib',
+  { id: 'luis', clueOk: ['faith', 'community', 'job'],  name: 'Luis', bio: '51 · factory worker · Newton', clue: 'faith', quad: 'lib',
     say: "<mark>My church</mark> helped my family when the Maytag plant closed. <u>The government should make sure workers earn enough, and protect unions.</u> But <u>it shouldn't tell adults how to live.</u>",
     wants: ['unions', 'wage'], twist: "Luis has switched parties twice. Party isn't forever.",
     look: { skin: 2, hair: 'short', hc: '#2a2a2a', shirt: '#8a4b3a', extra: 'none' } }
 ];
 const FOLK = Object.fromEntries(FOLKS.map(f => [f.id, f]));
+// Fynn 11-17: count every answer that reasonably fits (clueOk / quadOk / also), not just one.
+const okClues = f => f.clueOk || [f.clue];
+const okQuads = f => f.quadOk || [f.quad];
 // 8 fairgoers, 4 per shift. Each shift has all four idea-map spots, and each booth signs about half the line:
 // shift 1 D signs Dana, Walt, Earl (farmers) / R signs Earl, Walt, Priya; shift 2 D signs Tyler, Luis / R signs Rosa, Ray.
 const BASE = [['dana', 'earl', 'walt', 'priya'], ['tyler', 'rosa', 'ray', 'luis']];
@@ -229,7 +232,8 @@ function sListen(f) {
     st.chips.list = shuffle(st.chips.list); save();
     tray.innerHTML = `${stepsBar('listen')}<h2>What shaped ${esc(f.name)}'s beliefs the most?</h2><p class="sub">${st.idx >= 3 ? 'No more highlights. Find WHO or WHAT taught them.' : 'Look at the highlighted words.'}</p><div class="chips">${st.chips.list.map(k => `<button data-k="${k}">${INFL[k]}</button>`).join('')}</div><p class="fb" id="fb">${msg ? esc(msg) : ''}</p>`;
     tray.querySelectorAll('[data-k]').forEach(b => b.onclick = () => {
-      if (b.dataset.k === f.clue) {
+      if (okClues(f).includes(b.dataset.k)) {
+        r.clueGot = b.dataset.k;
         if (window.classFirstTry) classFirstTry.right('clue-' + f.id);
         SCENE.mood(1); st.step = 'map'; save(); render();
       } else {
@@ -251,7 +255,8 @@ function sMap(f) {
       </div></div>
       <div class="idea-help">Read the <u>underlined</u> words.<br>💵 First: MORE government help, or LESS?<br>🎲 Then: MORE or FEWER rules on how people live?<p class="fb" id="fb">${msg ? esc(msg) : ''}</p></div></div>`;
     tray.querySelectorAll('[data-q]').forEach(b => b.onclick = () => {
-      if (b.dataset.q === f.quad) {
+      if (okQuads(f).includes(b.dataset.q)) {
+        r.quadGot = b.dataset.q;
         if (window.classFirstTry) classFirstTry.right('map-' + f.id);
         SCENE.mood(1); st.step = 'pitch'; st.hand = null; save(); render();
       } else {
@@ -265,7 +270,7 @@ function sMap(f) {
 // Right answers: if the deck has the fairgoer's #1 issue, any matching card works (redirect is wrong).
 // If the deck only matches a smaller issue, that card OR an honest redirect both count.
 function correctCards(f, b) {
-  const deck = deckOf(b); const fits = f.wants.filter(k => deck.includes(k));
+  const deck = deckOf(b); const fits = f.wants.concat(f.also || []).filter(k => deck.includes(k));
   if (!fits.length) return ['redirect'];
   return deck.includes(f.wants[0]) ? fits : fits.concat(['redirect']);
 }
@@ -301,12 +306,13 @@ function explain(f, b) {
   if (r.pitch === 'walked') return `${f.name} cares most about <b>${names}</b>, and that card was in your hand.`;
   return `${f.name} cares about <b>${names}</b>${cards.some(k => CARDS[k].p === 'both') ? ' (a goal both parties share)' : ''}. That's in your deck.`;
 }
+const alsoFair = (list, got, names) => { const rest = list.filter(k => k !== got); return rest.length ? ` (${rest.map(k => names[k]).join(' or ')} also counts)` : ''; };
 function sResult(f) {
   const r = rec(f.id), b = booth();
   if (r.pitch === 'signed' && !st.nextShown) { st.nextShown = f.id; save(); }
   const head = r.pitch === 'signed' ? `✅ ${f.name} signed up at your booth!` : r.pitch === 'honest' ? `🤝 Good call. ${f.name} heads to the ${PARTY[other(b)]} booth and says thanks for being straight with them.` : `😕 ${f.name} wasn't sold.`;
   const last = st.idx === ORDER.length - 1;
-  tray.innerHTML = `${stepsBar('result')}<div class="result"><div class="big">${r.pitch === 'walked' ? '😕' : '🌽'}</div><div><p><b>${head}</b> ${r.pts ? `<b style="color:var(--good)">+${r.pts} corn</b>${st.reporterFor === st.idx ? ' (doubled by the reporter!)' : ''}` : ''}</p><p>${explain(f, b)}</p>${r.pitch === 'signed' && (!st.nextShown || st.nextShown === f.id) ? `<p>📋 <b>What happens next:</b> ${esc(f.name)} joins the ${PARTY[b]}' list. They'll be asked to volunteer and vote for ${PARTY[b]}. That's how parties link people to government.</p>` : ''}<p class="note">What shaped them: <b>${INFL[f.clue]}</b> · Idea map: <b>${QUADS[f.quad]}</b></p></div></div>
+  tray.innerHTML = `${stepsBar('result')}<div class="result"><div class="big">${r.pitch === 'walked' ? '😕' : '🌽'}</div><div><p><b>${head}</b> ${r.pts ? `<b style="color:var(--good)">+${r.pts} corn</b>${st.reporterFor === st.idx ? ' (doubled by the reporter!)' : ''}` : ''}</p><p>${explain(f, b)}</p>${r.pitch === 'signed' && (!st.nextShown || st.nextShown === f.id) ? `<p>📋 <b>What happens next:</b> ${esc(f.name)} joins the ${PARTY[b]}' list. They'll be asked to volunteer and vote for ${PARTY[b]}. That's how parties link people to government.</p>` : ''}<p class="note">What shaped them: <b>${INFL[r.clueGot || f.clue]}</b>${alsoFair(okClues(f), r.clueGot || f.clue, INFL)} · Idea map: <b>${QUADS[r.quadGot || f.quad]}</b>${alsoFair(okQuads(f), r.quadGot || f.quad, QUADS)}</p></div></div>
   <div class="row"><button class="primary" id="nextBtn">${last ? 'Close the booth →' : 'Next fairgoer →'}</button></div>`;
   $('#nextBtn').onclick = nextFolk;
 }
@@ -361,20 +367,12 @@ function pEnd() {
 }
 
 /* ---------------- FINAL + TURN IN ---------------- */
+// Fynn 11-17: cut to 2 short questions. One real sentence is fine. Only junk (idk, mashing, blanks, copied question) is blocked.
 const PROMPTS = [
-  { id: 'cmp', short: 'Compare the parties', label: '1. You worked BOTH booths. Name one thing the two parties disagree on and one goal they both share.', stem: 'The parties disagree on ___. They both want ___.', min: 45, own: 3,
-    must: [['tax', 'wage', 'union', 'gun', 'health', 'red tape', 'police', 'border', 'school', 'college', 'energy', 'pollution', 'business', 'pay'], ['farm', 'veteran', 'vet']], msg: 'In answer 1, name a disagreement AND a goal they share (like farmers or veterans).' },
-  { id: 'why', short: 'Party vs. beliefs', label: '2. Pick Rosa, Tyler, or Priya. What do they believe that doesn\'t fit their party?', stem: '___ is a ___, but ___. That shows ___.', min: 60, own: 6,
-    must: [['rosa', 'tyler', 'priya']], msg: 'In answer 2, name Rosa, Tyler, or Priya and the belief that doesn\'t match.' },
+  { id: 'cmp', short: 'Compare the parties', label: '1. You worked BOTH booths. Name one thing the two parties disagree on and one goal they both share.', stem: 'The parties disagree on ___. They both want ___.' },
   // Required: SS.9-12.Gov.12 asks students to critique how parties (intermediary institutions) shape government.
-  { id: 'crit', short: 'Two big parties', label: '3. Iowa voters mostly get just two big parties to pick from. Give one plus AND one minus of that.', stem: 'One plus is ___. One minus is ___.', min: 60, own: 5,
-    must: [['plus', 'good', 'help', 'benefit', 'easy', 'easier', 'simple', 'simpler', 'pro', 'upside', 'better'], ['minus', 'bad', 'problem', 'hurt', 'downside', 'con', 'worse', 'fit', 'stuck']], msg: 'In answer 3, give one plus AND one minus of having only two big parties.' }
+  { id: 'crit', short: 'Two big parties', label: '2. Iowa voters mostly get just two big parties to pick from. Give one plus AND one minus of that.', stem: 'One plus is ___. One minus is ___.' }
 ];
-const WHY_WORDS = { rosa: ['tax', 'red tape', 'permit', 'paperwork', 'form', 'rule', 'regulation', 'government', 'business', 'shop', 'marijuana', 'bakery', 'republican'], tyler: ['gun', 'hunt', 'rifle', 'republican'], priya: ['adult', 'own time', 'freedom', 'free', 'personal', 'democrat', 'choice', 'their business', 'how they live'] };
-// A keyword matches as a whole word plus normal endings: tax -> taxes, gun -> guns, farm -> farmers/farming,
-// vet -> vets, wage -> wages. Longer keywords (5+ letters) also match as the start of a word (veteran -> veterans).
-const ENDINGS = "(?:s|es|ed|d|er|ers|ing|ies|'s|s')?";
-const hasWord = (t, w) => new RegExp('\\b' + w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + (w.length > 4 ? '' : ENDINGS + '\\b')).test(t);
 function firstTry() {
   const out = { clue: [0, 0], map: [0, 0], pitch: [0, 0], checks: [0, 0] };
   ORDER.forEach(id => { const r = st.res[id]; if (!r || !r.pitch) return; out.clue[1]++; out.map[1]++; out.pitch[1]++; if (!r.clueWrong) out.clue[0]++; if (!r.mapWrong) out.map[0]++; if (r.pitch !== 'walked') out.pitch[0]++; });
@@ -397,18 +395,10 @@ function pFinal() {
   pushScore();
 }
 function checkWriting(p, v) {
-  const t = v.toLowerCase();
-  if (p.optional && !v.trim()) return '';
-  // Shared junk check (shared/turnin.js) first: idk, mashing, repeats, filler, copied question, bare keyword lists.
-  if (window.classJunkStop) { const j = window.classJunkStop(document.getElementById('w_' + p.id), { prompt: p.label, starter: p.stem, source: 'from the game' }); if (j) return 'For ' + p.short + ': ' + j; }
-  if (/\b(idk|lol|bruh|asdf|dunno|bathroom|blah|bye)\b|ok done/.test(t)) return 'Write a real answer for: ' + p.short + '. Use the starter to help.';
+  if (!v.trim()) return 'Answer question ' + p.label.split('.')[0] + ' (' + p.short + ').';
   if (/_{2,}/.test(v)) return 'Replace the ___ blanks with your own words in: ' + p.short + '.';
-  if (v.length < p.min) return 'Write a little more for: ' + p.short + ' (2 full sentences).';
-  if ((v.match(/[a-z][.!?](\s|$)/gi) || []).length < 2) return 'Write at least 2 full sentences for: ' + p.short + '.';
-  if (p.id === 'why') { const who = Object.keys(WHY_WORDS).find(n => hasWord(t, n)); if (who && !WHY_WORDS[who].some(w => hasWord(t, w))) return 'In answer 2, say what ' + who[0].toUpperCase() + who.slice(1) + ' believes that doesn\'t match their party.'; }
-  const stem = new Set(p.stem.toLowerCase().match(/[a-z']+/g) || []);
-  if (new Set((t.match(/[a-z']{3,}/g) || []).filter(w => !stem.has(w))).size < (p.own || 6)) return 'Add more of your own words for: ' + p.short + '.';
-  if (p.must.some(gr => !gr.some(w => hasWord(t, w)))) return p.msg;
+  // Shared junk check (shared/turnin.js): idk, mashing, repeats, copied question, bare word lists.
+  if (window.classJunkStop) { const j = window.classJunkStop(document.getElementById('w_' + p.id), { prompt: p.label, starter: p.stem, source: 'from the game' }); if (j) return 'For ' + p.short + ': ' + j; }
   return '';
 }
 async function turnIn() {
