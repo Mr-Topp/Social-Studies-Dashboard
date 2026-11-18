@@ -28,6 +28,7 @@ window.VIDEO_CHANNELS = (function () {
   "Imperial War Museums": "_tcUogFo9yE",
   "Infographics Show": "gxVsVA72wRU jA9neyKI62k",
   "Iowa History": "lw7eDkAL0lo",
+  "OER Project": "pk-vWCV0HeU",
   "Iowa PBS": "Cmv6KMsi36g SepPz7ODnKg gN6xojGcH0Y vVNUlOUlMeo",
   "IU Center on Rep. Government": "G7O9ZpJ-aiU S4ymux9l-Qo u5jKL6hFNdk",
   "Ken Burns": "-p9GGIJdWXc",
