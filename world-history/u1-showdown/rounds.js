@@ -15,7 +15,7 @@ window.SHOWDOWN_ROUNDS = [
         std: "WH.24", part: 1, title: "Why Europe Took Africa", icon: "🌍",
         ican: "I can explain why European countries raced to take over Africa in the 1800s.",
         snap: {
-          img: "https://commons.wikimedia.org/wiki/Special:FilePath/Punch_Rhodes_Colossus.png?width=800",
+          img: "img/rhodes-colossus.jpg",
           alt: "1892 cartoon: Cecil Rhodes stands like a giant over Africa with one foot in Cape Town and one in Cairo, holding a telegraph wire.",
           cite: "“The Rhodes Colossus,” <i>Punch</i> magazine (London), 1892. Cecil Rhodes was a British businessman and leader in southern Africa.",
           ask: "Rhodes stands over the whole map. One foot is in Cape Town (bottom). One is in Cairo (top). What is the cartoon saying he wants?",
@@ -93,7 +93,7 @@ window.SHOWDOWN_ROUNDS = [
         },
         build: {
           type: "sort",
-          img: "https://commons.wikimedia.org/wiki/Special:FilePath/Shinagawa%20Across%20railroad%20Bridge%20in%20Meiji%20era.jpg?width=700",
+          img: "img/shinagawa-bridge.jpg",
           imgAlt: "Old photo of a railroad bridge in Tokyo, Japan, during the Meiji era.",
           imgCite: "Railroad bridge at Shinagawa, Tokyo, Meiji era (1868–1912). Day 3: Pacific Case Files.",
           ask: "How did each group respond to outside powers?",
@@ -312,7 +312,7 @@ window.SHOWDOWN_ROUNDS = [
     },
     "WH.27": {
       snap2: {
-        img: "https://commons.wikimedia.org/wiki/Special:FilePath/Liliuokalani%20%28PPWD-16-4-005%29.jpg?width=600",
+        img: "img/liliuokalani.jpg",
         alt: "Photo portrait of Queen Liliʻuokalani of Hawaiʻi.",
         cite: "Queen Liliʻuokalani, the last monarch of Hawaiʻi. Day 3: Pacific Case Files.",
         quote: "“…to avoid any collision of armed forces, and perhaps the loss of life, I do, under this protest… yield my authority…” — Queen Liliʻuokalani, January 17, 1893, after U.S. businessmen and Marines helped overthrow her",
