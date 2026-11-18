@@ -221,7 +221,6 @@ window.CLASS_ASSIGNMENTS = {
   // ---- Sociology · Unit 2 ----
   "sociology-unit2-day1-first-shift":         { course: "sociology", unit: 2, day: 1, title: "Day 1 · Why Did That Blow Up?", path: "sociology/u2-d1-why-blow-up/", std: ["SS.9-12.Soc.5", "SS.9-12.Soc.7"] },
   "sociology-unit2-arrival-culture":          { course: "sociology", unit: 2, day: 2, title: "Day 2 · Mother Tongue (Reading)", path: "sociology/u2-d2-mother-tongue/", std: ["SS.9-12.Soc.5", "SS.9-12.Soc.6"] },
-  "sociology-unit2-day3-culture-shock":      { course: "sociology", unit: 2, day: 3, title: "Day 3 · Who Decides What’s Normal? (Reading)", path: "sociology/unit2-day3-culture-shock-exchange/", alt: true, std: ["SS.9-12.Soc.6", "SS.9-12.Soc.5"] },
 
   // ---- Government · Unit 1 ----
   "gov-u1-d1-bell-why-gov": { course: "government", unit: 1, day: 1, title: "Day 1 · Bell Ringer: Why Do We Need Government? (Reading)", path: "civics/bell-ringers/?r=why-gov", std: ["SS.9-12.Gov.1"] },  // We the People bell ringer (Fynn, 11-15)
