@@ -44,23 +44,20 @@
   ];
 
   // ---------------- Photos (real, archival) ----------------
-  // Grape strike photos are copied into img/. The others load from Wikimedia Commons
-  // (public domain / CC), with a backup address and a text fallback if both fail.
-  const WM = "https://upload.wikimedia.org/wikipedia/commons/thumb/";
-  const TM = "https://thumb.wikimedia.org/wikipedia/commons/thumb/";
+  // Every photo lives in img/ on our own site (school filters often block Wikimedia).
+  // If one ever fails, a text description shows so the question still works.
   const PH = {
     pickets: { src: ["img/grape-pickets-1965.jpg"], alt: "Picketers outside a grocery store holding signs that say DON'T BUY DELANO GRAPES and SUPPORT STRIKING FARM WORKERS. A man in a suit points in front.",
       credit: "Encino, California, December 1965. Los Angeles Times Photographic Archive, UCLA Library (CC BY 4.0)" },
     contract: { src: ["img/grape-contract-1970.jpg"], alt: "César Chávez, seated at a table of microphones, shakes hands with a grower. Priests and workers stand behind them under a LA HUELGA poster.",
       credit: "Delano, California, July 1970. Photo: John Malmin. Los Angeles Times Photographic Archive, UCLA Library (CC BY 4.0)" },
-    alcatraz: { src: [WM + "a/a2/Alcatraz_Island_01_Prison_sign.jpg/960px-Alcatraz_Island_01_Prison_sign.jpg", TM + "a/a2/Alcatraz_Island_01_Prison_sign.jpg/1280px-Alcatraz_Island_01_Prison_sign.jpg"],
+    alcatraz: { src: ["img/alcatraz-sign.jpg"],
       alt: "The old U.S. Penitentiary sign at the Alcatraz Island dock, with red paint added by the Native American activists who occupied the island.",
       credit: "Alcatraz dock sign, photographed in 2006. The red paint is from the 1969–71 occupation. Photo: Tewy (CC BY 2.5), Wikimedia Commons" },
-    march: { src: [WM + "5/5f/Women%27s_march.jpg/960px-Women%27s_march.jpg", TM + "5/5f/Women%27s_march.jpg/1280px-Women%27s_march.jpg"],
-      alt: "A crowd of women carrying banners and signs marches down a street in Washington, D.C.",
+    march: { src: ["img/womens-march-1970.jpg"],
+      alt: "A crowd of women marches down a street in Washington, D.C., carrying banners that say WOMEN DEMAND EQUALITY and GWU WOMEN'S LIBERATION.",
       credit: "Washington, D.C., August 26, 1970. Photo: Warren K. Leffler, Library of Congress (public domain)" },
-    stopera: { src: [WM + "7/71/Activist_Phyllis_Schafly_wearing_a_%22Stop_ERA%22_badge%2C_demonstrating_with_other_women_against_the_Equal_Rights_Amendment_in_front_of_the_White_House%2C_Washington%2C_D.C._%2842219314092%29.jpg/960px-thumbnail.jpg",
-                      TM + "7/71/Activist_Phyllis_Schafly_wearing_a_%22Stop_ERA%22_badge%2C_demonstrating_with_other_women_against_the_Equal_Rights_Amendment_in_front_of_the_White_House%2C_Washington%2C_D.C._%2842219314092%29.jpg/1280px-thumbnail.jpg"],
+    stopera: { src: ["img/stop-era-1977.jpg"],
       alt: "Phyllis Schlafly, wearing a STOP ERA badge, stands with other women protesting the Equal Rights Amendment in front of the White House.",
       credit: "Phyllis Schlafly (center) at a STOP ERA protest, White House, February 4, 1977. Photo: Warren K. Leffler, Library of Congress (public domain)" }
   };
@@ -254,8 +251,6 @@
   function wireImages() {
     document.querySelectorAll("img[data-alt-src]").forEach(img => {
       img.onerror = () => {
-        const alt = img.getAttribute("data-alt-src");
-        if (alt) { img.setAttribute("data-alt-src", ""); img.src = alt; return; }
         const box = document.createElement("div"); box.className = "nophoto";
         box.innerHTML = `<b>📷 The photo didn't load.</b><span>What it shows: ${esc(img.alt)}</span><small>Tell your teacher. You can still answer from this description.</small>`;
         img.replaceWith(box);
