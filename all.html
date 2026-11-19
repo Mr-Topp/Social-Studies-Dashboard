@@ -40,7 +40,7 @@ details .card{opacity:.85}
 .part.later .card{opacity:.9}
 .none{color:var(--muted);margin:4px 0}
 </style>
-<script src="shared/assignments.js?v=20261105fb1"></script>
+<script src="shared/assignments.js?v=20261119icv"></script>
 </head>
 <body>
 <main>
@@ -135,7 +135,7 @@ function show(key) {
   const items = CLASSES[key].items;
   // Being used now = the activities on the Schoology day posts (the same list the teacher dashboard uses, in shared/assignments.js).
   // Answer keys and the unit tests stay off this public page (they're on the teacher dashboard).
-  const using = Object.entries(REG).filter(([id, a]) => a.path && hubClass(a.course) === key && !/answer key|teacher key/i.test(a.title || "") && !/-key$/.test(id) && !(/summative/i.test(a.title || "") && !/review/i.test(a.title || "")))
+  const using = Object.entries(REG).filter(([id, a]) => a.path && hubClass(a.course) === key && !(/icivics/i.test((a.title || "") + " " + a.path) && /printed/i.test(a.title || "")) && !/answer key|teacher key/i.test(a.title || "") && !/-key$/.test(id) && !(/summative/i.test(a.title || "") && !/review/i.test(a.title || "")))
     .sort(([, a], [, b]) => (a.course === b.course ? 0 : a.course === "civics" ? 1 : -1) || (a.unit || 99) - (b.unit || 99) || (a.day || 99) - (b.day || 99));
   const usedPaths = new Set(using.map(([, a]) => base(a.path)));
   let html = `<section class="part now"><h2 class="parthead">Being used now <span>${using.length}</span></h2>`;

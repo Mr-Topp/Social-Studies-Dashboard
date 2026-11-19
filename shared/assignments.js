@@ -274,7 +274,7 @@ window.CLASS_ASSIGNMENTS = {
   "gov-unit2-day2-fair-game":        { course: "government", unit: 2, day: 2, title: "Day 2 · Fair Game: Comparing the Parties", path: "civics/unit2-day2-fair-game/", std: ["SS.9-12.Gov.12"] },
   // 2026-11-06: Lobby Day (civics/unit2-day2-lobby-day/) taken off Gov U2 Day 4 by Fynn. Game files kept on the site.
   // ---- Government · Unit 2 · activities from the Schoology day posts (links only, no turn-in) ----
-  "gov-u2-d1-poster": { course: "government", unit: 2, day: 1, turnIn: false, std: [], title: "Days 1–5 · Political Party Poster (Printed)", path: "https://docs.google.com/document/d/1Z8OsrG8eBL8005dEy6XuV9o7wvWctfCvm4g2-h-AmFQ/edit?usp=sharing" },
+  // 2026-11-19 (Fynn): Political Party Poster (Printed) taken off both dashboards entirely.
   "gov-u2-d2-pew-quiz": { course: "government", unit: 2, day: 2, turnIn: false, std: [], title: "Day 2 · Pew Political Typology Quiz (Optional)", path: "https://www.pewresearch.org/politics/quiz/political-typology/" },
   "gov-u2-d3-signal-break": { course: "government", unit: 2, day: 3, std: ["SS.9-12.Gov.12"], title: "Day 3 · Signal Break: Check It, Call It, Clap Back", path: "civics/unit2-day3-signal-break/" },  // rebuilt one-player on GitHub 11-06 (was a ChatGPT site)
   "gov-u2-d4-interest-groups": { course: "government", unit: 2, day: 4, turnIn: false, std: [], title: "Day 4 · Interest Groups — iCivics (Printed)", path: "https://ed.icivics.org/resource-assets/lesson_plan/166930/assets/interest_groups_student_docs.pdf" },
