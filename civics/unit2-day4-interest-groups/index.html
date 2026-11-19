@@ -4,166 +4,140 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Interest Groups – Pages 5 &amp; 6</title>
-<script src="../../shared/assignments.js?v=20261119ig1"></script>
-<script src="../../shared/turnin.js?v=20261119ig1"></script>
+<script src="../../shared/assignments.js?v=20261119ig2"></script>
+<script src="../../shared/turnin.js?v=20261119ig2"></script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 :root{
-  --navy:#1d2b53; --ink:#1f2433; --muted:#5b6275; --bg:#f6f3ec; --card:#ffffff;
-  --line:#e3ddd0; --accent:#0f8b8d; --accent2:#e4572e; --gold:#f2b134;
-  --green:#2e9d5b; --greenbg:#e5f6ec; --tan:#fbf1dc; --sel:#fff3c4;
+  --navy:#1d2b53; --ink:#1f2433; --muted:#5b6275; --bg:#f6f3ec; --line:#e3ddd0;
+  --accent:#0f8b8d; --accent2:#e4572e; --gold:#f2b134; --green:#2e9d5b; --greenbg:#e5f6ec; --sel:#fff3c4;
+  --big:clamp(16px, 1.2vw + 1.4vh, 22px);   /* main reading text */
+  --mid:clamp(14px, .7vw + 1vh, 17px);      /* answer choices */
 }
 *{box-sizing:border-box}
 html,body{margin:0;height:100%}
-body{font-family:Nunito,system-ui,sans-serif;color:var(--ink);background:var(--bg);display:flex;flex-direction:column;min-height:100vh}
-button{font-family:inherit;cursor:pointer}
-header{background:var(--navy);color:#fff;display:flex;align-items:center;gap:16px;padding:8px 18px;flex:0 0 auto}
-header h1{font-size:19px;margin:0;font-weight:900;letter-spacing:.2px}
-header .sub{font-size:13px;opacity:.75}
-.steps{display:flex;gap:6px;margin-left:auto}
-.step{font-size:13px;font-weight:800;padding:5px 11px;border-radius:999px;background:rgba(255,255,255,.12);color:#cfd6ea}
+body{font-family:Nunito,system-ui,"Segoe UI",Arial,sans-serif;color:var(--ink);background:var(--bg);display:flex;flex-direction:column;min-height:100vh;line-height:1.35}
+button{font-family:inherit;cursor:pointer;color:inherit}
+
+/* ---------- header ---------- */
+header{background:var(--navy);color:#fff;display:flex;align-items:center;gap:12px;padding:7px 16px;flex:0 0 auto}
+header h1{font-size:18px;margin:0;font-weight:900;white-space:nowrap}
+.steps{display:flex;gap:6px;margin-left:auto;flex-wrap:nowrap}
+.step{font-size:13px;font-weight:800;padding:5px 11px;border-radius:999px;background:rgba(255,255,255,.12);color:#cfd6ea;white-space:nowrap}
 .step.on{background:var(--gold);color:var(--navy)}
 .step.done{background:var(--green);color:#fff}
-.who{font-size:13px;font-weight:700;background:rgba(255,255,255,.12);padding:5px 11px;border-radius:8px}
-main{flex:1 1 auto;padding:12px 18px 6px;display:flex;flex-direction:column;min-height:0}
-.dir{background:#fff;border:1px solid var(--line);border-left:6px solid var(--accent);border-radius:10px;padding:8px 14px;margin-bottom:10px;display:flex;align-items:center;gap:14px}
-.dir .tag{font-weight:900;font-size:22px;color:var(--accent);min-width:28px}
+@media (max-width:1050px){ .step .long{display:none} .step{padding:5px 10px} }
+
+/* ---------- page frame ---------- */
+main{flex:1 0 auto;padding:10px 16px 4px;display:flex;flex-direction:column;width:100%;max-width:1150px;margin:0 auto}
+.dir{background:#fff;border:1px solid var(--line);border-left:6px solid var(--accent);border-radius:10px;padding:7px 12px;margin-bottom:8px;display:flex;gap:12px;align-items:flex-start}
+.dir .tag{font-weight:900;font-size:20px;color:var(--accent);line-height:1.2}
 .dir p{margin:0;font-size:15px;line-height:1.35}
-.dir .how{font-size:13px;color:var(--muted);margin-top:2px}
-.bar{display:flex;align-items:center;gap:12px;margin-top:10px;padding-right:185px}
+.bar{display:flex;align-items:center;gap:10px;margin-top:8px;padding-right:180px;flex:0 0 auto}
 .msg{font-size:15px;font-weight:700;flex:1}
 .msg.good{color:var(--green)} .msg.try{color:#9a6a12}
-.btn{border:0;border-radius:10px;padding:10px 22px;font-size:16px;font-weight:800;background:var(--accent);color:#fff}
+.btn{border:0;border-radius:10px;padding:10px 22px;font-size:16px;font-weight:800;background:var(--accent);color:#fff;white-space:nowrap}
 .btn:disabled{background:#b9c3c4;cursor:not-allowed}
 .btn.next{background:var(--green)}
 .btn.ghost{background:#fff;color:var(--navy);border:2px solid var(--navy)}
-.skip{background:#7a3db8}
-.icon{display:inline-flex;align-items:center;justify-content:center;border-radius:12px;background:#eef4f4;flex:0 0 auto}
+.btn.small{padding:8px 14px;font-size:14px}
+footer{text-align:center;padding:4px 0 6px;font-size:11px;color:#8a8f9c;flex:0 0 auto}
+footer a{color:#8a8f9c}
 .shake{animation:shake .4s}
 @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
-.pop{animation:pop .25s}
-@keyframes pop{0%{transform:scale(.96)}100%{transform:scale(1)}}
-footer{text-align:center;padding:6px 0 8px;font-size:11px;color:#8a8f9c}
-footer a{color:#8a8f9c}
+.icon{display:inline-flex;align-items:center;justify-content:center;border-radius:14px;background:#eef4f4;flex:0 0 auto}
 
-/* start */
-.start{flex:1;display:flex;align-items:center;justify-content:center}
-.startcard{background:#fff;border-radius:18px;box-shadow:0 8px 30px rgba(29,43,83,.12);padding:26px 34px;max-width:720px;width:100%;display:grid;grid-template-columns:1fr 210px;gap:24px;align-items:center}
-.startcard h2{margin:0 0 6px;font-size:30px;font-weight:900;color:var(--navy)}
-.startcard .hook{font-size:17px;margin:0 0 12px}
-.plan{display:grid;grid-template-columns:1fr 1fr;gap:6px 14px;font-size:14px;margin:0 0 14px;padding:0;list-style:none}
-.plan li{background:var(--bg);border-radius:8px;padding:6px 10px}
-.plan b{color:var(--accent)}
-.startcard label{font-weight:800;font-size:14px;display:block;margin-bottom:4px}
-.startcard input{font:inherit;font-size:17px;padding:9px 12px;border:2px solid var(--line);border-radius:10px;width:100%;margin-bottom:12px}
-.hero{font-size:58px;text-align:center;line-height:1.05}
-.hero small{display:block;font-size:13px;color:var(--muted);margin-top:8px}
+/* ---------- item navigator (numbers across the top) ---------- */
+.nav{display:flex;align-items:center;gap:6px;margin-bottom:8px;flex-wrap:wrap}
+.nav .lbl{font-size:13px;font-weight:800;color:var(--muted);margin-right:4px}
+.dot{min-width:38px;height:34px;padding:0 8px;border-radius:9px;border:2px solid var(--line);background:#fff;font-weight:900;font-size:14px;display:inline-flex;align-items:center;justify-content:center;gap:4px}
+.dot.ans{border-color:var(--accent);background:#eaf6f6}
+.dot.lock{border-color:var(--green);background:var(--greenbg);color:var(--green)}
+.dot.cur{box-shadow:0 0 0 3px var(--gold)}
+.nav .count{margin-left:auto;font-size:13px;font-weight:700;color:var(--muted)}
 
-/* Part A */
-.aGrid{display:grid;grid-template-columns:1fr 1fr;gap:16px;flex:1;min-height:0}
-.panel{background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px 12px;display:flex;flex-direction:column;gap:6px;min-height:0}
-.panel h3{margin:0 0 2px;font-size:13px;text-transform:uppercase;letter-spacing:.6px;color:var(--muted)}
-.term{display:flex;align-items:center;gap:10px;font-size:16px;font-weight:700}
-.term .icon{width:36px;height:36px;font-size:20px}
-.slot{min-width:150px;flex:1;min-height:38px;border:2px dashed #c9c1ad;border-radius:9px;display:flex;align-items:center;padding:4px 10px;font-size:13px;font-weight:600;color:var(--muted);background:#fcfbf7;text-align:left}
-.slot.filled{border-style:solid;border-color:var(--accent);background:#eaf6f6;color:var(--ink)}
-.slot.locked{border-color:var(--green);background:var(--greenbg);cursor:default}
-.slot.target{border-color:var(--gold);background:var(--sel)}
-.slot .ltr{font-weight:900;color:var(--accent);margin-right:6px}
-.slot.locked .ltr{color:var(--green)}
-.tname{width:190px}
-.chip{border:2px solid var(--line);background:#fff;border-radius:10px;padding:7px 10px;text-align:left;font-size:14.5px;line-height:1.25;display:flex;gap:8px;align-items:flex-start;color:var(--ink)}
-.chip b{color:var(--navy);font-weight:900}
-.chip:hover{border-color:var(--accent)}
-.chip.sel{border-color:var(--gold);background:var(--sel);box-shadow:0 0 0 3px rgba(242,177,52,.35)}
-.chip.used{visibility:hidden}
+/* ---------- one-item-at-a-time stage ---------- */
+.stage{flex:1 0 auto;display:flex;flex-direction:column;gap:10px}
+.item{background:#fff;border:2px solid var(--line);border-radius:14px;padding:12px 16px;display:flex;gap:14px;align-items:center}
+.item.lock{border-color:var(--green);background:var(--greenbg)}
+.item .icon{width:clamp(46px,7vh,64px);height:clamp(46px,7vh,64px);font-size:clamp(26px,4vh,36px)}
+.item .num{font-size:13px;font-weight:900;color:var(--accent);text-transform:uppercase;letter-spacing:.5px}
+.item .txt{font-size:var(--big);font-weight:700}
+.item .txt.term{font-size:clamp(20px,1.6vw + 1.6vh,28px);font-weight:900;color:var(--navy)}
+.ask{font-size:14px;font-weight:800;color:var(--muted);margin:0 2px}
+.opts{display:grid;gap:8px}
+.opts.two{grid-template-columns:1fr 1fr}
+.opts.three{grid-template-columns:repeat(3,1fr)}
+.opt{border:2px solid var(--line);background:#fff;border-radius:11px;padding:8px 12px;text-align:left;font-size:var(--mid);font-weight:600;display:flex;gap:10px;align-items:center;min-height:44px}
+.opt:hover:not(:disabled){border-color:var(--accent)}
+.opt .ltr{font-weight:900;color:var(--navy);min-width:22px}
+.opt.sel{border-color:var(--accent);background:#eaf6f6;box-shadow:0 0 0 2px var(--accent) inset}
+.opt.used{opacity:.5}
+.opt .note{margin-left:auto;font-size:12px;font-weight:800;color:var(--muted);white-space:nowrap}
+.opt.right{border-color:var(--green);background:#c9ecd6;box-shadow:none}
+.opt:disabled{cursor:default}
+.opt.big{flex-direction:column;justify-content:center;text-align:center;gap:2px;padding:10px}
+.opt.big .em{font-size:clamp(24px,4vh,34px);line-height:1.1}
+.opt.big .k{font-size:var(--big);font-weight:900;color:var(--navy)}
+.opt.big .d{font-size:13px;color:var(--muted);font-weight:600;line-height:1.25}
+.opt.full{opacity:.55}
 
-/* Part B */
-.legend{display:flex;gap:10px;margin-bottom:8px}
-.legend div{background:#fff;border:1px solid var(--line);border-radius:10px;padding:6px 12px;font-size:14px;display:flex;align-items:center;gap:8px}
-.legend .k{font-weight:900;font-size:16px}
-.bGrid{display:grid;grid-template-columns:repeat(3,1fr);grid-template-rows:1fr 1fr;gap:10px;flex:1;min-height:0}
-.scen{background:#fff;border:2px solid var(--line);border-radius:12px;padding:10px 12px;display:flex;flex-direction:column;gap:6px;min-height:0}
-.scen.locked{border-color:var(--green);background:var(--greenbg)}
-.scen .top{display:flex;gap:10px;align-items:flex-start}
-.scen .icon{width:46px;height:46px;font-size:26px}
-.scen .num{font-weight:900;color:var(--accent);font-size:14px}
-.scen p{margin:0;font-size:14.5px;line-height:1.3}
-.opts{display:flex;gap:6px;margin-top:auto}
-.opt{flex:1;border:2px solid var(--line);background:#fff;border-radius:9px;padding:6px 4px;font-size:14px;font-weight:800;color:var(--navy)}
-.opt.sel{border-color:var(--accent);background:#eaf6f6}
-.scen.locked .opt{cursor:default}
-.scen.locked .opt.sel{border-color:var(--green);background:#c9ecd6}
-
-/* Part C */
-.question{background:var(--navy);color:#fff;border-radius:12px;padding:10px 16px;display:flex;align-items:center;gap:14px;margin-bottom:10px}
-.question .big{font-size:34px}
-.question p{margin:0;font-size:17px;font-weight:800}
-.question .lab{font-size:12px;text-transform:uppercase;letter-spacing:.8px;opacity:.7;font-weight:700}
-.cWrap{position:relative;flex:1;display:grid;grid-template-columns:1fr 170px 1.25fr;min-height:0}
-.cCol{display:flex;flex-direction:column;gap:14px;justify-content:center}
-.cCol h3{margin:0;font-size:13px;text-transform:uppercase;letter-spacing:.6px;color:var(--muted)}
-.grp,.ans{border:2px solid var(--line);background:#fff;border-radius:12px;padding:12px 14px;text-align:left;font-size:15px;line-height:1.35;color:var(--ink);display:flex;gap:12px;align-items:flex-start;position:relative}
-.grp .icon{width:54px;height:54px;font-size:30px}
-.grp b{display:block;font-size:17px;color:var(--navy)}
+/* ---------- Part C ---------- */
+.question{background:var(--navy);color:#fff;border-radius:12px;padding:8px 14px;display:flex;align-items:center;gap:12px;margin-bottom:8px}
+.question .big{font-size:28px}
+.question p{margin:0;font-size:var(--mid);font-weight:800}
+.question .lab{font-size:11px;text-transform:uppercase;letter-spacing:.8px;opacity:.7;font-weight:700}
+.cWrap{position:relative;flex:1;min-height:0;display:grid;grid-template-columns:minmax(0,1fr) clamp(50px,9vw,150px) minmax(0,1.25fr)}
+.cCol{display:flex;flex-direction:column;gap:12px;justify-content:center}
+.cCol h3{margin:0;font-size:12px;text-transform:uppercase;letter-spacing:.6px;color:var(--muted)}
+.grp,.ans{border:2px solid var(--line);background:#fff;border-radius:12px;padding:10px 12px;text-align:left;font-size:var(--mid);line-height:1.35;display:flex;gap:10px;align-items:flex-start;position:relative}
+.grp .icon{width:44px;height:44px;font-size:24px}
+.grp b{display:block;font-size:calc(var(--mid) + 1px);color:var(--navy)}
 .ans{background:#fffdf7}
-.ans .q{font-size:30px;color:var(--gold);font-weight:900;line-height:1}
+.ans .q{font-size:26px;color:var(--gold);font-weight:900;line-height:1}
 .grp.sel{border-color:var(--gold);background:var(--sel)}
 .grp.linked,.ans.linked{border-color:var(--accent)}
 .grp.locked,.ans.locked{border-color:var(--green);background:var(--greenbg);cursor:default}
-.dot{position:absolute;width:16px;height:16px;border-radius:50%;background:var(--accent);top:50%;margin-top:-8px;border:3px solid #fff;box-shadow:0 0 0 2px var(--accent)}
-.grp .dot{right:-9px} .ans .dot{left:-9px}
-.locked .dot{background:var(--green);box-shadow:0 0 0 2px var(--green)}
+.pin{position:absolute;width:16px;height:16px;border-radius:50%;background:var(--accent);top:50%;margin-top:-8px;border:3px solid #fff;box-shadow:0 0 0 2px var(--accent)}
+.grp .pin{right:-9px} .ans .pin{left:-9px}
+.locked .pin{background:var(--green);box-shadow:0 0 0 2px var(--green)}
 svg.lines{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
 
-/* Part D */
-.dGrid{display:grid;grid-template-columns:44% 1fr;gap:14px;flex:1;min-height:0}
-.tray{background:#efe9dc;border-radius:12px;padding:8px;display:grid;grid-template-columns:1fr 1fr;align-content:start;gap:6px;overflow:auto}
-.tray h3,.tray .alldone{grid-column:1/-1}
-.tray h3{margin:2px 4px;font-size:13px;text-transform:uppercase;letter-spacing:.6px;color:var(--muted)}
-.card{border:2px dashed #b9b09b;background:#fff;border-radius:10px;padding:6px 8px;text-align:left;font-size:12.5px;line-height:1.28;display:flex;gap:8px;align-items:flex-start;color:var(--ink)}
-.card .icon{width:28px;height:28px;font-size:16px;border-radius:8px}
-.card.sel{border-color:var(--gold);border-style:solid;background:var(--sel);box-shadow:0 0 0 3px rgba(242,177,52,.35)}
-.tray .card.gone{display:none}
-.cols{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;min-height:0}
-.col{background:#fff;border:2px solid #d9cfe9;border-radius:12px;padding:8px;display:flex;flex-direction:column;gap:6px;min-height:0}
-.col.target{border-color:var(--gold);background:#fffbea}
-.ghead{display:flex;gap:8px;align-items:center;border:2px solid #c4386a33;border-radius:10px;padding:6px 8px;background:#fdf6f9}
-.ghead .icon{width:44px;height:44px;font-size:26px;background:#fff}
-.ghead b{display:block;font-size:15px;color:var(--navy)}
-.ghead span{font-size:12px;line-height:1.25;color:var(--muted)}
-.drop{flex:1;border:2px dashed #ddd3ea;border-radius:10px;display:flex;align-items:center;justify-content:center;color:#b5abc6;font-size:12.5px;font-weight:700;padding:4px;min-height:0}
-.drop .card{border-style:solid;border-color:var(--accent);width:100%;cursor:pointer}
-.drop .card.locked{border-color:var(--green);background:var(--greenbg);cursor:default}
+/* ---------- start + finish ---------- */
+.center{flex:1;display:flex;align-items:center;justify-content:center}
+.startcard,.fcard{background:#fff;border-radius:18px;box-shadow:0 8px 30px rgba(29,43,83,.12);padding:22px 30px;max-width:680px;width:100%}
+.startcard h2{margin:0 0 6px;font-size:clamp(22px,3vw,30px);font-weight:900;color:var(--navy)}
+.startcard .hook{font-size:var(--mid);margin:0 0 10px}
+.plan{display:grid;grid-template-columns:1fr 1fr;gap:6px 10px;font-size:14px;margin:0 0 10px;padding:0;list-style:none}
+.plan li{background:var(--bg);border-radius:8px;padding:6px 10px}
+.plan b{color:var(--accent)}
+.startcard label{font-weight:800;font-size:14px;display:block;margin-bottom:4px}
+.startcard input{font:inherit;font-size:17px;padding:9px 12px;border:2px solid var(--line);border-radius:10px;width:100%;margin-bottom:10px}
+.fcard{text-align:center;max-width:600px}
+.fcard h2{margin:0;font-size:clamp(22px,3vw,28px);color:var(--navy);font-weight:900}
+.fcard p{font-size:var(--mid);margin:8px 0}
 
-/* finish */
-.finish{flex:1;display:flex;align-items:center;justify-content:center}
-.fcard{background:#fff;border-radius:18px;box-shadow:0 8px 30px rgba(29,43,83,.12);padding:24px 34px;max-width:640px;width:100%;text-align:center}
-.fcard h2{margin:0;font-size:28px;color:var(--navy);font-weight:900}
-.fcard .stamp{display:inline-block;margin:10px 0;background:var(--green);color:#fff;font-weight:900;padding:6px 16px;border-radius:999px;transform:rotate(-2deg)}
-.scores{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin:12px 0}
-.scores div{background:var(--bg);border-radius:10px;padding:8px}
-.scores b{display:block;font-size:22px;color:var(--accent)}
-.scores span{font-size:12px;color:var(--muted);font-weight:700}
-.total{font-size:18px;font-weight:800;margin:6px 0}
-.fcard p{font-size:15px;margin:6px 0}
+/* very short screens: tighten everything */
+@media (max-height:560px){
+  .dir{padding:5px 10px;margin-bottom:6px} .dir p{font-size:14px}
+  .nav{margin-bottom:6px} .dot{height:30px;min-width:34px}
+  .item{padding:8px 12px} .opt{min-height:38px;padding:6px 10px}
+  .stage{gap:7px} .opts{gap:6px}
+}
+@media (max-width:600px){ .opts.two{grid-template-columns:1fr} .plan{grid-template-columns:1fr} }
 </style>
 </head>
 <body>
 <header>
-  <div>
-    <h1>Interest Groups</h1>
-    <div class="sub">Student pages 5 &amp; 6</div>
-  </div>
-  <div class="who" id="who" hidden></div>
+  <h1>Interest Groups</h1>
   <div class="steps" id="steps"></div>
 </header>
 <main id="main"></main>
 <footer>Activity adapted from iCivics, “Interest Groups” (© 2023 iCivics, Inc.) &nbsp;·&nbsp; <a href="#" id="restart">Start over</a></footer>
 
 <script>
-/* ===================== CONTENT (from the worksheet) ===================== */
+/* ===================== CONTENT (from the worksheet, pages 5–6) ===================== */
 const A_TERMS = [
   {t:"interest", ans:"B", ic:"👀"},
   {t:"advocate", ans:"C", ic:"📣"},
@@ -192,7 +166,7 @@ const B_ITEMS = [
   {ic:"🎉", ans:"D", t:"Once a candidate has been endorsed, members of an interest group help raise donations to help the candidate’s campaign."},
   {ic:"📻", ans:"I", t:"A group runs TV and radio ads about an issue in order to raise public concern and spur the public to action."}
 ];
-const B_OPTS = [["I","📢","Inform"],["D","💵","Donate"],["E","👍","Endorse"]];
+const B_OPTS = [["I","📢","Inform","informing"],["D","💵","Donate","donating money"],["E","👍","Endorse","endorsing a candidate"]];
 const C_GROUPS = [
   {id:"ev", ic:"🔋", name:"EV Drive Coalition", mission:"Mission: to encourage policy that would make the United States lead the world in use of electric vehicles.", ans:"y"},
   {id:"api", ic:"🛢️", name:"American Petroleum Institute", mission:"Mission: to encourage policy that supports U.S. production and sales of oil and natural gas.", ans:"x"}
@@ -220,158 +194,184 @@ const STANDARD = "SS.9-12.Gov.12";
 const OLD_API = "https://fynn-class-assignment-submissions-20261024.neotboy.chatgpt.site/api/submit";
 const PARTS = ["A","B","C","D"];
 const TOTALS = {A:8,B:6,C:2,D:6};
+const PART_NAMES = {A:"Vocabulary",B:"How Do You Lobby?",C:"Just the Facts?",D:"Who’s Interested?"};
 
 /* ===================== STATE ===================== */
 const KEY = "ig_p56_";
-let S = null; let sel = null;
-function fresh(name){ return {name, part:"A", A:{placed:{},locked:{},first:{},tried:{}}, B:{pick:{},locked:{},first:{},tried:{}}, C:{link:{},locked:{},first:{},tried:{}}, D:{place:{},locked:{},first:{},tried:{}}, done:{}, order:{A:shuffle(Object.keys(A_DEFS)), D:shuffle(D_CARDS.map(c=>c.id))}, finished:null}; }
-function save(){ try{ localStorage.setItem(KEY+S.name.toLowerCase(), JSON.stringify(S)); localStorage.setItem(KEY+"last", S.name);}catch(e){} }
-function load(name){ try{ const v=localStorage.getItem(KEY+name.toLowerCase()); return v?JSON.parse(v):null; }catch(e){ return null; } }
+let S = null, sel = null, SOLVE = null;
+function fresh(name){ return {name, part:"A", A:{ans:{},locked:{},first:{},tried:{},cur:0}, B:{ans:{},locked:{},first:{},tried:{},cur:0}, C:{link:{},locked:{},first:{},tried:{}}, D:{ans:{},locked:{},first:{},tried:{},cur:0}, done:{}, order:{D:shuffle(D_CARDS.map(c=>c.id))}}; }
+function save(){ try{ localStorage.setItem(KEY+S.name.toLowerCase(), JSON.stringify(S)); }catch(e){} }
+function load(name){ try{ const v=JSON.parse(localStorage.getItem(KEY+name.toLowerCase())); return v && v.A && v.A.ans ? v : null; }catch(e){ return null; } }
 function shuffle(a){ a=[...a]; for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]];} return a; }
-let SOLVE = null;
-const $ = (h)=>{ const d=document.createElement("div"); d.innerHTML=h.trim(); return d.firstElementChild; };
+const $ = h=>{ const d=document.createElement("div"); d.innerHTML=h.trim(); return d.firstElementChild; };
+const esc = s=>String(s).replace(/[<>&"]/g,c=>({"<":"&lt;",">":"&gt;","&":"&amp;",'"':"&quot;"}[c]));
 const main = document.getElementById("main");
 
 function header(){
   const st=document.getElementById("steps"); st.innerHTML="";
-  if(!S) { document.getElementById("who").hidden=true; return; }
-  const labels={A:"A · Vocabulary",B:"B · How Do You Lobby?",C:"C · Just the Facts?",D:"D · Who’s Interested?"};
-  PARTS.forEach(p=>{ const cls = S.done[p]?"done":(S.part===p?"on":""); st.appendChild($(`<span class="step ${cls}">${S.done[p]?"✓ ":""}${labels[p]}</span>`)); });
-  const w=document.getElementById("who"); w.hidden=false; w.textContent="👤 "+S.name;
+  if(!S) return;
+  PARTS.forEach(p=>{ const cls=S.done[p]?"done":(S.part===p?"on":""); st.appendChild($(`<span class="step ${cls}">${S.done[p]?"✓ ":""}${p}<span class="long"> · ${PART_NAMES[p]}</span></span>`)); });
 }
-function dirBox(tag, text, how){ return `<div class="dir"><div class="tag">${tag}.</div><div><p>${text}</p><div class="how">${how}</div></div></div>`; }
+function dirBox(tag, html){ return `<div class="dir"><div class="tag">${tag}.</div><p>${html}</p></div>`; }
 function barHTML(){ return `<div class="bar"><div class="msg" id="msg"></div><button class="btn" id="check" disabled>Check</button></div>`; }
-function setMsg(t,cls){ const m=document.getElementById("msg"); m.textContent=t; m.className="msg "+(cls||""); }
-function finishPart(p){
-  S.done[p]=true; save(); header();
-  const c=document.getElementById("check"); c.textContent = p==="D" ? "See my results →" : "Next part →"; c.className="btn next"; c.disabled=false;
-  c.onclick=()=>{ const i=PARTS.indexOf(p); S.part = i<3 ? PARTS[i+1] : "END"; if(S.part==="END" && !S.finished) S.finished=new Date().toLocaleString(); sel=null; save(); render(); };
+function setMsg(t,cls){ const m=document.getElementById("msg"); if(m){ m.textContent=t; m.className="msg "+(cls||""); } }
+function record(p,k,right){ const P=S[p]; if(!P.tried[k]){ P.tried[k]=true; P.first[k]=right; } }
+function firstScore(p){ return Object.values(S[p].first).filter(Boolean).length; }
+function finishPart(p, text){
+  S.done[p]=true; save(); header(); setMsg(text,"good");
+  const c=document.getElementById("check"); c.textContent = p==="D" ? "Finish →" : "Next part →"; c.className="btn next"; c.disabled=false;
+  c.onclick=()=>{ const i=PARTS.indexOf(p); S.part = i<3 ? PARTS[i+1] : "END"; sel=null; save(); render(); };
   SOLVE=null; if(window.classTestSkip) window.classTestSkip.refresh();
 }
-function record(part, key, right){ const P=S[part]; if(!P.tried[key]){ P.tried[key]=true; P.first[key]=right; } }
-function firstScore(p){ return Object.values(S[p].first).filter(Boolean).length; }
+function wireSkip(fn){ SOLVE=fn; if(window.classTestSkip) window.classTestSkip.refresh(); }
 
-/* ===================== START ===================== */
-function renderStart(){
-  S=null; header();
-  let last=""; try{ last=localStorage.getItem("site-student-name")||localStorage.getItem(KEY+"last")||""; }catch(e){}
+/* ===================== ONE-ITEM-AT-A-TIME ENGINE (Parts A, B, D) =====================
+   cfg: part, n, keyOf(i), right(i), label(i), drawItem(i), drawOpts(i, box), chipText(i) */
+function itemPart(cfg){
+  const P=S[cfg.part], n=cfg.n, keys=[...Array(n).keys()].map(cfg.keyOf);
+  if(P.cur==null||P.cur>=n) P.cur=0;
+  const answered=k=>P.ans[k]!=null;
   main.innerHTML="";
-  main.appendChild($(`<div class="start"><div class="startcard">
-    <div>
-      <h2>Who’s pulling the strings?</h2>
-      <p class="hook">Groups spend big to sway the government. Today you figure out <b>how</b> they do it — and <b>who</b> wants what.</p>
-      <ul class="plan">
-        <li><b>A</b> Match 8 vocab words</li>
-        <li><b>B</b> Inform, Donate, or Endorse? (6)</li>
-        <li><b>C</b> Match 2 groups to their answers</li>
-        <li><b>D</b> Sort 6 laws to the right group</li>
-      </ul>
-      <p style="margin:0 0 12px;font-size:14px;color:var(--muted)">About 20 minutes · 4 parts · each part opens after the one before it.</p>
-      <label for="nm">Your name (first name + last initial)</label>
-      <input id="nm" data-student-name="1" placeholder="Example: Jordan M." value="${last.replace(/"/g,'')}" autocomplete="off">
-      <button class="btn" id="go" style="width:100%;font-size:18px;padding:12px">Start ▶</button>
-    </div>
-    <div class="hero">🏛️<br>📢💵👍<small>Inform · Donate · Endorse</small></div>
-  </div></div>`));
-  const go=()=>{ const n=document.getElementById("nm").value.trim().replace(/\s+/g," "); const ok = window.classNameState ? window.classNameState(n)==="ok" : n.length>=2;
-    if(!ok){ document.getElementById("nm").focus(); document.getElementById("nm").classList.add("shake"); setTimeout(()=>document.getElementById("nm").classList.remove("shake"),400); return; } S = load(n) || fresh(n); S.name=n; try{ localStorage.setItem("site-student-name", n); }catch(e){} save(); render(); };
-  document.getElementById("go").onclick=go;
-  document.getElementById("nm").onkeydown=e=>{ if(e.key==="Enter") go(); };
+  main.insertAdjacentHTML("beforeend", dirBox(cfg.part, cfg.dir));
+  const nav=$(`<div class="nav"><span class="lbl">${cfg.navLabel}</span></div>`);
+  keys.forEach((k,i)=>{
+    const d=$(`<button class="dot ${P.locked[k]?"lock":answered(k)?"ans":""} ${i===P.cur?"cur":""}" data-k="${k}" title="Go to ${cfg.label(i)}">${P.locked[k]?"✓":""}${cfg.label(i)}${answered(k)?" "+cfg.chipText(i):""}</button>`);
+    d.onclick=()=>{ P.cur=i; save(); itemPart(cfg); };
+    nav.appendChild(d);
+  });
+  const nAns=keys.filter(answered).length;
+  nav.appendChild($(`<span class="count">${nAns} of ${n} answered</span>`));
+  main.appendChild(nav);
+  const stage=$(`<div class="stage"></div>`); main.appendChild(stage);
+  const i=P.cur, k=keys[i], locked=!!P.locked[k];
+  stage.appendChild($(cfg.drawItem(i, locked)));
+  if(cfg.ask) stage.appendChild($(`<div class="ask">${cfg.ask}</div>`));
+  const box=$(`<div class="opts ${cfg.cols}"></div>`); stage.appendChild(box);
+  cfg.drawOpts(i, box, locked, (val)=>{
+    if(locked) return;
+    if(cfg.beforePick && cfg.beforePick(i,val)===false) return;
+    P.ans[k]=val;
+    // jump to the next item that still needs an answer
+    let next=-1; for(let s=1;s<=n;s++){ const j=(i+s)%n; if(!P.locked[keys[j]] && !answered(keys[j])){ next=j; break; } }
+    if(next>=0) P.cur=next;
+    save(); itemPart(cfg);
+  });
+  main.insertAdjacentHTML("beforeend", barHTML());
+  const allLocked=keys.every(x=>P.locked[x]);
+  if(allLocked){ finishPart(cfg.part, `All ${n} right! ✔`); return; }
+  const chk=document.getElementById("check");
+  chk.disabled = nAns<n;
+  if(nAns<n) setMsg(cfg.tip||"");
+  else setMsg("All answered — press Check.");
+  if(cfg.msgAfter){ setMsg(cfg.msgAfter.t, cfg.msgAfter.c); cfg.msgAfter=null; }
+  chk.onclick=()=>{
+    const wrong=[];
+    keys.forEach((x,j)=>{ if(P.locked[x]) return; const ok=cfg.right(j); record(cfg.part,x,ok); if(ok) P.locked[x]=true; else wrong.push(j); });
+    if(!wrong.length){ save(); itemPart(cfg); return; }
+    document.querySelectorAll(".nav .dot").forEach((d,j)=>{ if(wrong.includes(j)) d.classList.add("shake"); });
+    setTimeout(()=>{
+      wrong.forEach(j=>delete P.ans[keys[j]]); P.cur=wrong[0]; save();
+      cfg.msgAfter={t:`${n-wrong.length} right! Number${wrong.length>1?"s":""} ${wrong.map(j=>cfg.label(j)).join(", ")} went back — try ${wrong.length>1?"those":"that one"} again.`, c:"try"};
+      itemPart(cfg);
+    },450);
+  };
+  wireSkip(()=>{ keys.forEach((x,j)=>{ P.ans[x]=cfg.answerOf(j); P.locked[x]=true; }); save(); itemPart(cfg); });
 }
 
-/* ===================== PART A ===================== */
+/* ---------- Part A ---------- */
 function renderA(){
   const P=S.A;
-  main.innerHTML="";
-  main.appendChild($(dirBox("A","<b>Vocabulary.</b> Match the term to the correct definition.","Tap a definition on the right, then tap the blank next to its term. Tap a filled blank to take it back out.")));
-  const grid=$(`<div class="aGrid"><div class="panel" id="terms"><h3>Terms</h3></div><div class="panel" id="defs"><h3>Definitions</h3></div></div>`);
-  main.appendChild(grid);
-  main.insertAdjacentHTML("beforeend", barHTML());
-  const T=grid.querySelector("#terms"), D=grid.querySelector("#defs");
-  A_TERMS.forEach((x,i)=>{
-    const L=P.placed[i], locked=P.locked[i];
-    const row=$(`<div class="term"><span class="icon">${x.ic}</span><span class="tname">${i+1}. ${x.t}</span></div>`);
-    const slot=$(`<button class="slot ${L?"filled":""} ${locked?"locked":""} ${(!L&&sel)?"target":""}" data-i="${i}">${L?`<span class="ltr">${L})</span>${A_DEFS[L]}`:"tap to place a definition"}</button>`);
-    slot.onclick=()=>{ if(locked) return; if(sel){ P.placed[i]=sel; sel=null; } else if(L){ delete P.placed[i]; } save(); renderA(); };
-    row.appendChild(slot); T.appendChild(row);
+  itemPart({
+    part:"A", n:8, keyOf:i=>i, label:i=>String(i+1), chipText:i=>P.ans[i],
+    dir:"<b>Vocabulary.</b> Match the term to the correct definition.",
+    navLabel:"Term", cols:"two", ask:"Pick its definition:",
+    tip:"Click any number to go back and change it.",
+    right:i=>P.ans[i]===A_TERMS[i].ans, answerOf:i=>A_TERMS[i].ans,
+    drawItem:(i,locked)=>`<div class="item ${locked?"lock":""}"><span class="icon">${A_TERMS[i].ic}</span><div><div class="num">Term ${i+1} of 8</div><div class="txt term">${A_TERMS[i].t}</div></div></div>`,
+    drawOpts:(i,box,locked,pick)=>{
+      const usedBy={}; for(const k in P.ans) if(+k!==i) usedBy[P.ans[k]]=+k;
+      Object.keys(A_DEFS).forEach(L=>{
+        const on=P.ans[i]===L, used=L in usedBy;
+        const b=$(`<button class="opt ${on?(locked?"right":"sel"):""} ${used&&!on?"used":""}" ${locked?"disabled":""}><span class="ltr">${L})</span><span>${A_DEFS[L]}</span>${used&&!on?`<span class="note">on #${usedBy[L]+1}</span>`:""}</button>`);
+        b.onclick=()=>{ if(used && !P.locked[usedBy[L]]) delete P.ans[usedBy[L]]; else if(used) return; pick(L); };
+        if(used && P.locked[usedBy[L]]) b.disabled=true;
+        box.appendChild(b);
+      });
+    }
   });
-  const used=new Set(Object.values(P.placed));
-  S.order.A.forEach(k=>{
-    const c=$(`<button class="chip ${sel===k?"sel":""} ${used.has(k)?"used":""}"><b>${k})</b><span>${A_DEFS[k]}</span></button>`);
-    c.onclick=()=>{ sel = sel===k?null:k; renderA(); };
-    D.appendChild(c);
-  });
-  const chk=document.getElementById("check");
-  if(Object.keys(P.locked).length===8){ finishPart("A"); setMsg("All 8 matched! ✔","good"); return; }
-  chk.disabled = Object.keys(P.placed).length<8;
-  if(chk.disabled) setMsg(`${Object.keys(P.placed).length} of 8 placed`);
-  chk.onclick=()=>{
-    let wrong=[];
-    A_TERMS.forEach((x,i)=>{ if(P.locked[i]) return; const ok=P.placed[i]===x.ans; record("A",i,ok); if(ok) P.locked[i]=true; else wrong.push(i); });
-    if(!wrong.length){ save(); renderA(); return; }
-    document.querySelectorAll(".slot").forEach(s=>{ if(wrong.includes(+s.dataset.i)) s.classList.add("shake"); });
-    setTimeout(()=>{ wrong.forEach(i=>delete P.placed[i]); S.order.A=shuffle(S.order.A); save(); renderA(); setMsg(`${8-wrong.length} right! ${wrong.length} went back — try ${wrong.length===1?"that one":"those"} again.`,"try"); },450);
-  };
-  wireSkip(()=>{ A_TERMS.forEach((x,i)=>{P.placed[i]=x.ans;P.locked[i]=true;}); save(); renderA(); });
 }
 
-/* ===================== PART B ===================== */
+/* ---------- Part B ---------- */
 function renderB(){
   const P=S.B;
-  main.innerHTML="";
-  main.appendChild($(dirBox("B","<b>How Do You Lobby?</b> Read each interest group lobby activity and decide if it is an example of informing (I), donating money (D), or endorsing a candidate running for office (E).","Pick I, D, or E on every card, then press Check.")));
-  main.appendChild($(`<div class="legend">${B_OPTS.map(o=>`<div><span style="font-size:20px">${o[1]}</span><span class="k">${o[0]}</span> = ${o[2]}${o[0]==="I"?" the public and officials":o[0]==="D"?" money to campaigns":" a candidate"}</div>`).join("")}</div>`));
-  const grid=$(`<div class="bGrid"></div>`); main.appendChild(grid);
-  main.insertAdjacentHTML("beforeend", barHTML());
-  B_ITEMS.forEach((x,i)=>{
-    const locked=P.locked[i];
-    const card=$(`<div class="scen ${locked?"locked":""}" data-i="${i}"><div class="top"><span class="icon">${x.ic}</span><div><div class="num">${i+1}.</div><p>${x.t}</p></div></div><div class="opts"></div></div>`);
-    B_OPTS.forEach(o=>{ const b=$(`<button class="opt ${P.pick[i]===o[0]?"sel":""}">${o[1]} ${o[0]}</button>`); b.onclick=()=>{ if(locked) return; P.pick[i]=o[0]; save(); renderB(); }; card.querySelector(".opts").appendChild(b); });
-    grid.appendChild(card);
+  itemPart({
+    part:"B", n:6, keyOf:i=>i, label:i=>String(i+1), chipText:i=>P.ans[i],
+    dir:"<b>How Do You Lobby?</b> Read each interest group lobby activity and decide if it is an example of informing (I), donating money (D), or endorsing a candidate running for office (E).",
+    navLabel:"Activity", cols:"three", ask:"Is this informing, donating money, or endorsing a candidate?",
+    tip:"Click any number to go back and change it.",
+    right:i=>P.ans[i]===B_ITEMS[i].ans, answerOf:i=>B_ITEMS[i].ans,
+    drawItem:(i,locked)=>`<div class="item ${locked?"lock":""}"><span class="icon">${B_ITEMS[i].ic}</span><div><div class="num">Activity ${i+1} of 6</div><div class="txt">${B_ITEMS[i].t}</div></div></div>`,
+    drawOpts:(i,box,locked,pick)=>{
+      B_OPTS.forEach(o=>{
+        const on=P.ans[i]===o[0];
+        const b=$(`<button class="opt big ${on?(locked?"right":"sel"):""}" ${locked?"disabled":""}><span class="em">${o[1]}</span><span class="k">${o[0]} · ${o[2]}</span><span class="d">${o[3]}</span></button>`);
+        b.onclick=()=>pick(o[0]); box.appendChild(b);
+      });
+    }
   });
-  const chk=document.getElementById("check");
-  if(Object.keys(P.locked).length===6){ finishPart("B"); setMsg("All 6 right! ✔","good"); return; }
-  chk.disabled = Object.keys(P.pick).length<6;
-  if(chk.disabled) setMsg(`${Object.keys(P.pick).length} of 6 answered`);
-  chk.onclick=()=>{
-    let wrong=[];
-    B_ITEMS.forEach((x,i)=>{ if(P.locked[i]) return; const ok=P.pick[i]===x.ans; record("B",i,ok); if(ok) P.locked[i]=true; else wrong.push(i); });
-    if(!wrong.length){ save(); renderB(); return; }
-    document.querySelectorAll(".scen").forEach(s=>{ if(wrong.includes(+s.dataset.i)) s.classList.add("shake"); });
-    setTimeout(()=>{ wrong.forEach(i=>delete P.pick[i]); save(); renderB(); setMsg(`${6-wrong.length} right! Re-read card${wrong.length>1?"s":""} ${wrong.map(i=>i+1).join(", ")} and pick again.`,"try"); },450);
-  };
-  wireSkip(()=>{ B_ITEMS.forEach((x,i)=>{P.pick[i]=x.ans;P.locked[i]=true;}); save(); renderB(); });
 }
 
-/* ===================== PART C ===================== */
+/* ---------- Part D ---------- */
+function renderD(){
+  const P=S.D, order=S.order.D, card=i=>D_CARDS.find(c=>c.id===order[i]);
+  const grp=id=>D_GROUPS.find(g=>g.id===id);
+  itemPart({
+    part:"D", n:6, keyOf:i=>order[i], label:i=>String(i+1), chipText:i=>grp(P.ans[order[i]]).ic,
+    dir:"<b>Who’s Interested?</b> Place the description of the law or action taken by the government beneath the interest group most likely to have supported the policy.",
+    navLabel:"Card", cols:"three", ask:"Which interest group most likely supported this? (Each group gets 2 cards.)",
+    tip:"Click any number to go back and change it.",
+    right:i=>P.ans[order[i]]===card(i).g, answerOf:i=>card(i).g,
+    beforePick:(i,g)=>{ const here=Object.keys(P.ans).filter(k=>P.ans[k]===g && +k!==order[i]).length; if(here>=2){ setMsg(`${grp(g).name} already has 2 cards. Change one of those first.`,"try"); return false; } },
+    drawItem:(i,locked)=>`<div class="item ${locked?"lock":""}"><span class="icon">${card(i).ic}</span><div><div class="num">Card ${i+1} of 6</div><div class="txt">${card(i).t}</div></div></div>`,
+    drawOpts:(i,box,locked,pick)=>{
+      D_GROUPS.forEach(g=>{
+        const on=P.ans[order[i]]===g.id, cnt=Object.keys(P.ans).filter(k=>P.ans[k]===g.id).length;
+        const b=$(`<button class="opt big ${on?(locked?"right":"sel"):""} ${cnt>=2&&!on?"full":""}" ${locked?"disabled":""}><span class="em">${g.ic}</span><span class="k" style="font-size:var(--mid)">${g.name}</span><span class="d">${g.d}</span><span class="d"><b>${cnt} of 2 cards</b></span></button>`);
+        b.onclick=()=>pick(g.id); box.appendChild(b);
+      });
+    }
+  });
+}
+
+/* ---------- Part C (draw the lines) ---------- */
 function renderC(){
   const P=S.C;
   main.innerHTML="";
-  main.appendChild($(dirBox("C","<b>Just the Facts?</b> Look at how two different interest groups might address the same question. Draw a line matching each group to the answer it would give.","Tap a group, then tap the answer it would give. A line connects them. Tap a group again to erase its line.")));
+  main.insertAdjacentHTML("beforeend", dirBox("C","<b>Just the Facts?</b> Look at how two different interest groups might address the same question. Draw a line matching each group to the answer it would give."));
   main.appendChild($(`<div class="question"><span class="big">⚡🚗</span><div><div class="lab">Question</div><p>Should the government give tax credits to encourage people to buy electric vehicles?</p></div></div>`));
   const wrap=$(`<div class="cWrap"><div class="cCol" id="gcol"><h3>The Groups</h3></div><div></div><div class="cCol" id="acol"><h3>The Answers</h3></div><svg class="lines" id="svg"></svg></div>`);
   main.appendChild(wrap);
   main.insertAdjacentHTML("beforeend", barHTML());
-  const linkedAns=new Set(Object.values(P.link));
+  const linked=new Set(Object.values(P.link));
   C_GROUPS.forEach(g=>{
     const locked=P.locked[g.id];
-    const b=$(`<button class="grp ${sel===g.id?"sel":""} ${P.link[g.id]?"linked":""} ${locked?"locked":""}" data-g="${g.id}"><span class="icon">${g.ic}</span><span><b>${g.name}</b>${g.mission}</span><span class="dot"></span></button>`);
+    const b=$(`<button class="grp ${sel===g.id?"sel":""} ${P.link[g.id]?"linked":""} ${locked?"locked":""}" data-g="${g.id}"><span class="icon">${g.ic}</span><span><b>${g.name}</b>${g.mission}</span><span class="pin"></span></button>`);
     b.onclick=()=>{ if(locked) return; if(P.link[g.id]){ delete P.link[g.id]; sel=null; } else sel = sel===g.id?null:g.id; save(); renderC(); };
     wrap.querySelector("#gcol").appendChild(b);
   });
   C_ANS.forEach(a=>{
     const lockedA=Object.keys(P.locked).some(g=>P.link[g]===a.id);
-    const b=$(`<button class="ans ${linkedAns.has(a.id)?"linked":""} ${lockedA?"locked":""}" data-a="${a.id}"><span class="q">“</span><span>${a.t}</span><span class="dot"></span></button>`);
-    b.onclick=()=>{ if(lockedA||!sel) return; for(const k in P.link) if(P.link[k]===a.id) delete P.link[k]; P.link[sel]=a.id; sel=null; save(); renderC(); };
+    const b=$(`<button class="ans ${linked.has(a.id)?"linked":""} ${lockedA?"locked":""}" data-a="${a.id}"><span class="q">“</span><span>${a.t}</span><span class="pin"></span></button>`);
+    b.onclick=()=>{ if(lockedA) return; if(!sel){ setMsg("First tap a group on the left.","try"); return; } for(const k in P.link) if(P.link[k]===a.id) delete P.link[k]; P.link[sel]=a.id; sel=null; save(); renderC(); };
     wrap.querySelector("#acol").appendChild(b);
   });
   requestAnimationFrame(drawLines);
+  if(Object.keys(P.locked).length===2){ finishPart("C","Both matched! ✔ Each group’s answer helps its own mission."); return; }
   const chk=document.getElementById("check");
-  if(Object.keys(P.locked).length===2){ finishPart("C"); setMsg("Both matched! ✔ Notice how each group’s answer helps its own mission.","good"); return; }
   chk.disabled = Object.keys(P.link).length<2;
-  if(chk.disabled) setMsg(sel?"Now tap the answer this group would give.":`${Object.keys(P.link).length} of 2 lines drawn`);
+  setMsg(sel?"Now tap the answer this group would give.":(chk.disabled?"Tap a group, then tap its answer. Tap a group again to erase its line.":"Both lines drawn — press Check."));
   chk.onclick=()=>{
-    let wrong=[];
+    const wrong=[];
     C_GROUPS.forEach(g=>{ if(P.locked[g.id]) return; const ok=P.link[g.id]===g.ans; record("C",g.id,ok); if(ok) P.locked[g.id]=true; else wrong.push(g.id); });
     if(!wrong.length){ save(); renderC(); return; }
     document.querySelectorAll(".grp").forEach(s=>{ if(wrong.includes(s.dataset.g)) s.classList.add("shake"); });
@@ -383,78 +383,63 @@ function drawLines(){
   const svg=document.getElementById("svg"); if(!svg||!S||S.part!=="C") return;
   const box=svg.getBoundingClientRect(); svg.innerHTML="";
   for(const g in S.C.link){
-    const gd=document.querySelector(`.grp[data-g="${g}"] .dot`), ad=document.querySelector(`.ans[data-a="${S.C.link[g]}"] .dot`);
-    if(!gd||!ad) continue;
-    const r1=gd.getBoundingClientRect(), r2=ad.getBoundingClientRect();
+    const a=document.querySelector(`.grp[data-g="${g}"] .pin`), b=document.querySelector(`.ans[data-a="${S.C.link[g]}"] .pin`);
+    if(!a||!b) continue;
+    const r1=a.getBoundingClientRect(), r2=b.getBoundingClientRect();
     const x1=r1.left+r1.width/2-box.left, y1=r1.top+r1.height/2-box.top, x2=r2.left+r2.width/2-box.left, y2=r2.top+r2.height/2-box.top;
-    const col=S.C.locked[g]?"#2e9d5b":"#0f8b8d";
-    svg.insertAdjacentHTML("beforeend",`<path d="M${x1},${y1} C${x1+70},${y1} ${x2-70},${y2} ${x2},${y2}" stroke="${col}" stroke-width="4" fill="none" stroke-linecap="round"/>`);
+    const bend=Math.max(20,(x2-x1)/2);
+    svg.insertAdjacentHTML("beforeend",`<path d="M${x1},${y1} C${x1+bend},${y1} ${x2-bend},${y2} ${x2},${y2}" stroke="${S.C.locked[g]?"#2e9d5b":"#0f8b8d"}" stroke-width="4" fill="none" stroke-linecap="round"/>`);
   }
 }
 window.addEventListener("resize", drawLines);
 
-/* ===================== PART D ===================== */
-function renderD(){
-  const P=S.D;
+/* ===================== START ===================== */
+function renderStart(){
+  S=null; header();
+  let last=""; try{ last=localStorage.getItem("site-student-name")||""; }catch(e){}
   main.innerHTML="";
-  main.appendChild($(dirBox("D","<b>Who’s Interested?</b> Place the description of the law or action taken by the government beneath the interest group most likely to have supported the policy.","Tap a card on the left, then tap the group it belongs under. Each group gets 2 cards. Tap a placed card to send it back.")));
-  const grid=$(`<div class="dGrid"><div class="tray" id="tray"><h3>Cards</h3></div><div class="cols" id="cols"></div></div>`);
-  main.appendChild(grid);
-  main.insertAdjacentHTML("beforeend", barHTML());
-  const tray=grid.querySelector("#tray"), cols=grid.querySelector("#cols");
-  S.order.D.forEach(id=>{
-    const c=D_CARDS.find(x=>x.id===id);
-    const b=$(`<button class="card ${sel===id?"sel":""} ${P.place[id]?"gone":""}"><span class="icon">${c.ic}</span><span>${c.t}</span></button>`);
-    b.onclick=()=>{ sel = sel===id?null:id; renderD(); };
-    tray.appendChild(b);
-  });
-  if(D_CARDS.every(c=>P.place[c.id])) tray.appendChild($(`<div class="alldone" style="padding:10px;font-size:14px;color:var(--muted);font-weight:700">All cards placed. Press Check! ↘</div>`));
-  D_GROUPS.forEach(g=>{
-    const inCol=D_CARDS.filter(c=>P.place[c.id]===g.id);
-    const col=$(`<div class="col ${sel&&inCol.length<2?"target":""}" data-g="${g.id}"><div class="ghead"><span class="icon">${g.ic}</span><div><b>${g.name}</b><span>${g.d}</span></div></div></div>`);
-    for(let k=0;k<2;k++){
-      const c=inCol[k];
-      const drop=$(`<div class="drop">${c?"":"empty"}</div>`);
-      if(c){ const locked=P.locked[c.id]; const cb=$(`<button class="card ${locked?"locked":""}" data-id="${c.id}"><span class="icon">${c.ic}</span><span>${c.t}</span></button>`); cb.onclick=(e)=>{ e.stopPropagation(); if(sel){ if(inCol.length>=2){ if(locked){ setMsg("That group already has 2 cards.","try"); return; } delete P.place[c.id]; } P.place[sel]=g.id; sel=null; save(); renderD(); return; } if(locked) return; delete P.place[c.id]; save(); renderD(); }; drop.appendChild(cb); }
-      col.appendChild(drop);
-    }
-    col.onclick=()=>{ if(!sel) return; if(inCol.length>=2){ setMsg("That group already has 2 cards. Tap one to send it back first.","try"); return; } P.place[sel]=g.id; sel=null; save(); renderD(); };
-    cols.appendChild(col);
-  });
-  const chk=document.getElementById("check");
-  if(Object.keys(P.locked).length===6){ finishPart("D"); setMsg("All 6 sorted! ✔","good"); return; }
-  const n=Object.keys(P.place).length;
-  chk.disabled = n<6;
-  if(chk.disabled) setMsg(sel?"Now tap the group this card belongs under.":`${n} of 6 placed`);
-  chk.onclick=()=>{
-    let wrong=[];
-    D_CARDS.forEach(c=>{ if(P.locked[c.id]) return; const ok=P.place[c.id]===c.g; record("D",c.id,ok); if(ok) P.locked[c.id]=true; else wrong.push(c.id); });
-    if(!wrong.length){ save(); renderD(); return; }
-    document.querySelectorAll(".drop .card").forEach(s=>{ if(wrong.includes(+s.dataset.id)) s.classList.add("shake"); });
-    setTimeout(()=>{ wrong.forEach(id=>delete P.place[id]); S.order.D=shuffle(S.order.D); save(); renderD(); setMsg(`${6-wrong.length} right! ${wrong.length} card${wrong.length>1?"s":""} went back — who would care most about ${wrong.length>1?"those":"that"} law?`,"try"); },450);
+  main.appendChild($(`<div class="center"><div class="startcard">
+      <h2>🏛️ Who’s pulling the strings?</h2>
+      <p class="hook">Groups spend big to sway the government. Today you figure out <b>how</b> they do it — and <b>who</b> wants what.</p>
+      <ul class="plan">
+        <li><b>A</b> Match 8 vocab words</li>
+        <li><b>B</b> Inform, Donate, or Endorse? (6)</li>
+        <li><b>C</b> Match 2 groups to their answers</li>
+        <li><b>D</b> Sort 6 laws to the right group</li>
+      </ul>
+      <p style="margin:0 0 10px;font-size:14px;color:var(--muted)">About 20 minutes · each part opens after the one before it.</p>
+      <label for="nm">Your name (first name + last initial)</label>
+      <input id="nm" data-student-name="1" placeholder="Example: Jordan M." value="${esc(last)}" autocomplete="off">
+      <button class="btn" id="go" style="width:100%;font-size:18px;padding:12px">Start ▶</button>
+  </div></div>`));
+  const go=()=>{
+    const box=document.getElementById("nm"), n=box.value.trim().replace(/\s+/g," ");
+    const ok = window.classNameState ? window.classNameState(n)==="ok" : n.length>=2;
+    if(!ok){ box.focus(); box.classList.add("shake"); setTimeout(()=>box.classList.remove("shake"),400); return; }
+    S = load(n) || fresh(n); S.name=n; try{ localStorage.setItem("site-student-name", n); }catch(e){} save(); render();
   };
-  wireSkip(()=>{ D_CARDS.forEach(c=>{P.place[c.id]=c.g;P.locked[c.id]=true;}); save(); renderD(); });
+  document.getElementById("go").onclick=go;
+  document.getElementById("nm").onkeydown=e=>{ if(e.key==="Enter") go(); };
 }
 
-/* ===================== FINISH ===================== */
+/* ===================== FINISH + TURN IN ===================== */
 function renderEnd(){
   main.innerHTML="";
-  main.appendChild($(`<div class="finish"><div class="fcard">
-    <div style="font-size:46px">🏛️✅</div>
+  main.appendChild($(`<div class="center"><div class="fcard">
+    <div style="font-size:42px">🏛️✅</div>
     <h2>Pages 5 &amp; 6 — All Four Parts Done</h2>
-    <p>Nice work, <b>${S.name.replace(/[<>&]/g,"")}</b> — press the button to send your work to your teacher.</p>
-    <button class="btn next" id="sendBtn" style="font-size:19px;padding:13px 30px;margin:10px 0">${S.turnedIn?"✓ Turned in":"Turn it in ▶"}</button>
+    <p>Nice work, <b>${esc(S.name)}</b> — press the button to send your work to your teacher.</p>
+    <button class="btn next" id="sendBtn" style="font-size:19px;padding:13px 30px;margin:8px 0">${S.turnedIn?"✓ Turned in":"Turn it in ▶"}</button>
     <p class="msg ${S.turnedIn?"good":""}" id="sendMsg" style="min-height:22px">${S.turnedIn?"✓ Turned in. Your teacher can see your work.":""}</p>
   </div></div>`));
   const btn=document.getElementById("sendBtn"), msg=document.getElementById("sendMsg");
   if(S.turnedIn){ btn.disabled=true; return; }
   btn.onclick=async()=>{
     if(typeof window.classTurnIn!=="function"){ msg.textContent="Turn-in isn't working right now. Keep this page open and tell your teacher."; msg.className="msg try"; return; }
-    btn.disabled=true; btn.textContent="Sending…"; msg.textContent=""; 
+    btn.disabled=true; btn.textContent="Sending…"; msg.textContent="";
     const tot=PARTS.reduce((t,p)=>t+firstScore(p),0);
-    const names={A:"A · Vocabulary",B:"B · How Do You Lobby?",C:"C · Just the Facts?",D:"D · Who’s Interested?"};
     const answers={"Standard":STANDARD, "First-try correct": tot+" of 22"};
-    answers["First-try by part"]=PARTS.map(p=>`${names[p]}: ${firstScore(p)} of ${TOTALS[p]}`).join(" · ");
+    answers["First-try by part"]=PARTS.map(p=>`${p} · ${PART_NAMES[p]}: ${firstScore(p)} of ${TOTALS[p]}`).join(" · ");
     const tag=(p,k)=>S[p].first[k]===false?" (fixed after a miss)":" (first try)";
     A_TERMS.forEach((x,i)=>{ answers[`A${i+1} · ${x.t}`]=`${x.ans}) ${A_DEFS[x.ans]}`+tag("A",i); });
     const full={I:"Inform",D:"Donate",E:"Endorse"};
@@ -472,20 +457,19 @@ function renderEnd(){
 }
 
 /* ===================== ROUTER ===================== */
-function wireSkip(fn){ SOLVE=fn; if(window.classTestSkip) window.classTestSkip.refresh(); }
 function render(){
-  header(); sel=sel||null;
+  header();
   if(!S) return renderStart();
   ({A:renderA,B:renderB,C:renderC,D:renderD,END:renderEnd})[S.part]();
 }
 document.getElementById("restart").onclick=e=>{
-  e.preventDefault();
-  if(!S){ return; }
-  const box=$(`<div style="position:fixed;inset:0;background:rgba(0,0,0,.35);display:flex;align-items:center;justify-content:center;z-index:9"><div style="background:#fff;border-radius:14px;padding:20px 24px;max-width:380px;text-align:center"><p style="font-weight:800;font-size:17px;margin:0 0 12px">Erase your answers and start over?</p><button class="btn ghost" id="no">Keep my work</button> <button class="btn" id="yes" style="background:var(--accent2)">Start over</button></div></div>`);
+  e.preventDefault(); if(!S) return;
+  const box=$(`<div style="position:fixed;inset:0;background:rgba(0,0,0,.35);display:flex;align-items:center;justify-content:center;z-index:9999"><div style="background:#fff;border-radius:14px;padding:20px 24px;max-width:380px;text-align:center"><p style="font-weight:800;font-size:17px;margin:0 0 12px">Erase your answers and start over?</p><button class="btn ghost" id="no">Keep my work</button> <button class="btn" id="yes" style="background:var(--accent2)">Start over</button></div></div>`);
   document.body.appendChild(box);
   box.querySelector("#no").onclick=()=>box.remove();
   box.querySelector("#yes").onclick=()=>{ try{ localStorage.removeItem(KEY+S.name.toLowerCase()); }catch(x){} S=null; sel=null; box.remove(); render(); };
 };
+
 /* ===================== TEST T. SKIP MODE (shared/turnin.js) ===================== */
 try{
   const SCREENS=["A","B","C","D","END"], LABELS=["A · Vocabulary","B · How Do You Lobby?","C · Just the Facts?","D · Who’s Interested?","Turn in"];
@@ -493,7 +477,7 @@ try{
     count: () => SCREENS.length,
     index: () => S ? Math.max(0, SCREENS.indexOf(S.part)) : 0,
     label: i => LABELS[i],
-    go: i => { if(!S){ S=fresh("Test T."); } S.part=SCREENS[i]; sel=null; save(); render(); },
+    go: i => { if(!S) S=fresh("Test T."); S.part=SCREENS[i]; sel=null; save(); render(); },
     solve: () => { if(SOLVE) SOLVE(); }
   });
   if (window.classTestSkip) window.classTestSkip.refresh();
