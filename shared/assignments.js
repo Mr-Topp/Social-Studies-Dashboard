@@ -265,8 +265,7 @@ window.CLASS_ASSIGNMENTS = {
 
   // ---- Government · Unit 2 ----
   "gov-u2-d2-bell-parties": { course: "government", unit: 2, day: 2, title: "Day 2 · Bell Ringer: Where Political Parties Came From (Reading)", path: "civics/bell-ringers/?r=parties", std: ["SS.9-12.Gov.12"] },  // We the People bell ringer (Fynn, 11-15)
-  "gov-u2-d4-bell-responsibility": { course: "government", unit: 2, day: 4, title: "Day 4 · Bell Ringer: Rights Come With Responsibilities (Reading)", path: "civics/bell-ringers/?r=responsibility", std: ["SS.9-12.Gov.16"] },  // We the People bell ringer (Fynn, 11-15)
-  "gov-u2-d5-bell": { course: "government", unit: 2, day: 5, title: "Day 5 · Bell Ringer: Who Gets to Vote? + How Citizens Take Part (Reading)", path: "civics/bell-ringers/?r=voting,participate", std: ["SS.9-12.Gov.14", "SS.9-12.Gov.17"] },  // We the People: 2 readings in ONE turn-in (Fynn 11-15: one assignment, not separate ones)
+  "gov-u2-d5-bell": { course: "government", unit: 2, day: 5, title: "Day 5 · Bell Ringer: Who Gets to Vote? + How Citizens Take Part + Rights Come With Responsibilities (Reading)", path: "civics/bell-ringers/?r=voting,participate,responsibility", std: ["SS.9-12.Gov.14", "SS.9-12.Gov.17", "SS.9-12.Gov.16"] },  // We the People: 3 readings in ONE turn-in (Fynn 11-15: one assignment; 11-19: Rights/Responsibilities moved here from Day 4, no Day 4 bell ringer)
   "gov-unit2-day1-the-feed":          { course: "government", unit: 2, day: 1, title: "Day 1 · Decision Desk: Ideology vs. Party", path: "civics/unit2-day1-the-feed/", std: ["SS.9-12.Gov.12"] },
   "gov-unit2-day2-fair-game":        { course: "government", unit: 2, day: 2, title: "Day 2 · Fair Game: Comparing the Parties", path: "civics/unit2-day2-fair-game/", std: ["SS.9-12.Gov.12"] },
   // 2026-11-06: Lobby Day (civics/unit2-day2-lobby-day/) taken off Gov U2 Day 4 by Fynn. Game files kept on the site.
