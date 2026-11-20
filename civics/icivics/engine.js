@@ -15,6 +15,7 @@
 //              q:{type:"choice"|"type"|"write", ask, opts:[...], cols, big, unique, cap, short},  // default question
 //              items:[ { text, ic, who, style:"term"|"long", ans, qs:[ {type, ask, opts, ans, ...} ] } ] } ] }
 //  opts: strings or {v, label, em, sub, ltr}. type answers: string or [strings]. write: no answer.
+//  pick passages: a "\n" in the passage starts a new line (2026-11-19, for the founding-documents line list).
 // =====================================================================
 (function(){
 "use strict";
@@ -115,7 +116,7 @@ function renderPart(){
       String(q.passage).split(/(\[\[[^\]]+\]\])/).forEach(chunk=>{
         let id="x", txt=chunk; const m=chunk.match(/^\[\[([^|\]]+)\|([^\]]+)\]\]$/); if(m){ id=m[1]; txt=m[2]; }
         const span=document.createElement("span"); span.dataset.id=id; span.className="seg"+(val!=null&&val===id&&id!=="x"?(qLocked?" right":" sel"):"");
-        txt.split(/(\s+)/).forEach(w=>{ if(!w) return; if(/^\s+$/.test(w)){ span.appendChild(document.createTextNode(w)); return; }
+        txt.split(/(\s+)/).forEach(w=>{ if(!w) return; if(/^\s+$/.test(w)){ if(w.includes("\n")) w.replace(/[^\n]/g,"").split("").forEach(()=>span.appendChild(document.createElement("br"))); else span.appendChild(document.createTextNode(w)); return; }
           const b=document.createElement("span"); b.className="w"+(val==="x:"+w&&id==="x"?" sel":""); b.textContent=w;
           b.onclick=()=>{ if(qLocked) return; setA(pk,cur,qi, id==="x" ? "x:"+w : id); save(); if(itemDone(part,cur) && qs.every(x=>x.type==="pick"||x.type==="choice"||!x.type)){ for(let s2=1;s2<=n;s2++){ const j=(cur+s2)%n; if(!itemLocked(part,j) && !itemDone(part,j)){ S.cur[pk]=j; break; } } save(); } renderPart(); };
           span.appendChild(b); });
