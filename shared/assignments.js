@@ -168,6 +168,8 @@ window.CLASS_ASSIGNMENTS = {
   "ush-u4-d2-bell-voting": { course: "us-history", unit: 4, day: 2, title: "Day 2 · Bell Ringer: Who Gets to Vote?", path: "us-history/bell-u4-d2-voting/", std: ["SS.9-12.US.42","SS.9-12.US.44"] },
   "ush-u4-d3-bell-youthvote": { course: "us-history", unit: 4, day: 3, title: "Day 3 · Bell Ringer: Old Enough to Fight, Old Enough to Vote", path: "us-history/bell-u4-d3-youthvote/", std: ["SS.9-12.US.42","SS.9-12.US.44"] },
   // ---- U.S. History Part 1 day games built from the bell-ringer readings (Fynn, 2026-11-16). Listed right after the bell ringers so each day shows bell ringer first, then the game.
+  // ---- World History Part 1 comic readings (Fynn, 2026-11-21: fill the empty Part 1 days with comic readings; pilot = U1 D2) ----
+  "wh-p1u1-d2-1492-comic": { course: "world-history", unit: 1, day: 2, part: 1, title: "Day 2 · Fact-Check 1492: A 1953 Columbus Comic (Reading)", path: "world-history/p1u1-d2-1492-comic/", std: ["SS.9-12.WH.3", "SS.9-12.WH.4"] },
   "wh-p1u3-d6-bell-enlightenment": { course: "world-history", unit: 3, day: 6, part: 1, title: "Day 6 · Bell Ringer: Enlightenment Ideas Change the World", path: "world-history/bell-p1u3-d6-enlightenment/", std: ["SS.9-12.WH.12"] },
   "wh-p1u4-d1-bell-why-gov": { course: "world-history", unit: 4, day: 1, part: 1, title: "Day 1 · Bell Ringer: Why Do We Need Government?", path: "world-history/bell-p1u4-d1-why-gov/", std: ["SS.9-12.WH.15","SS.9-12.WH.17"] },
   "wh-p1u4-d3-bell-england": { course: "world-history", unit: 4, day: 3, part: 1, title: "Day 3 · Bell Ringer: Rules for Kings", path: "world-history/bell-p1u4-d3-england/", std: ["SS.9-12.WH.16","SS.9-12.WH.19"] },
