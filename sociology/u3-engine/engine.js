@@ -7,6 +7,7 @@
 //           and the question opens only after "I read it" (short wait so it can't be skipped)
 //    pick = an opinion choice (not graded, every answer is OK), then a reveal
 //    info = read and go on
+//    own  = the student builds their own example (name + 3 agents + one fact each + crown one); sent with the turn-in
 //  Then a wrap-up screen, then one written answer + turn in (shared/turnin.js).
 //  No scores on screen (students never see scores); the first-try count goes only to the teacher dashboard.
 //  Progress saves on the device ("Welcome back"). Test T. can skip everything (🧪 bar).
@@ -125,7 +126,85 @@
     }
     if (s.kind === "info") return infoView(s);
     if (s.kind === "pick") return pickView(s);
+    if (s.kind === "own") return ownView(s);
     return askView(s);
+  }
+  // ---------- own = the student builds their own origin story (Fynn, 11/21/26) ----------
+  // Name a famous person, pick 3 different agents, write one real fact for each, crown the biggest one.
+  // Not graded on screen; everything they write goes to the teacher dashboard with the turn-in.
+  const OWN_AG = ["Family", "School", "Peers", "Mass media", "Religion", "The workplace"];
+  function ownState(s) {
+    const n = (s && s.rows) || 3;
+    if (!st.own || !Array.isArray(st.own.rows)) st.own = { name: "", rows: [], top: -1, done: false };
+    while (st.own.rows.length < n) st.own.rows.push({ a: "", t: "" });
+    return st.own;
+  }
+  function fillOwnSample(s) {
+    const o = ownState(s);
+    if (!o.name.trim()) o.name = "Test Star";
+    const ag = s.agents || OWN_AG;
+    o.rows.forEach((r, i) => { if (!r.a) r.a = ag[i % ag.length]; if (!r.t.trim()) r.t = "Test T. sample fact about how this agent shaped them."; });
+    if (o.top < 0) o.top = 0;
+    o.done = true; save();
+  }
+  function ownView(s) {
+    const o = ownState(s), ag = s.agents || OWN_AG;
+    // The star box goes before the example (if there is one), since students fill it in first.
+    const ex = $("panel").querySelector(".reveal");
+    (ex ? ex : $("panel")).insertAdjacentHTML(ex ? "beforebegin" : "beforeend", `<div class="ownname"><label for="ownStar">Your star (a famous person)</label>
+      <input id="ownStar" maxlength="60" autocomplete="off" placeholder="${esc(s.namePlaceholder || "Type a famous person's name")}" value="${esc(o.name)}"></div>`);
+    const q = $("qbox");
+    q.innerHTML = `<span class="tag">${esc(s.tag || "Your star")}</span><p class="qt">${esc(s.q || "Pick 3 different agents. For each one, write one real thing that happened to your star.")}</p>
+      <div class="ownrows">${o.rows.map((r, i) => `<div class="ownrow"><select id="oa${i}" aria-label="Agent ${i + 1}"><option value="">Pick agent ${i + 1}…</option>${ag.map(a => `<option${a === r.a ? " selected" : ""}>${esc(a)}</option>`).join("")}</select>
+        <textarea id="ot${i}" rows="2" maxlength="300" aria-label="What happened (agent ${i + 1})" placeholder="What happened? One real fact.">${esc(r.t)}</textarea></div>`).join("")}</div>
+      <p class="qt ownq">${esc(s.topQ || "Which one shaped them the most?")}</p><div class="choices owntop" id="ownTop"></div>
+      <div class="rowend"><button type="button" class="next" id="ownBtn">${esc(s.saveLabel || "Save my star")} →</button></div><p class="msg" id="ownMsg" role="status"></p><div id="after"></div>`;
+    const fields = () => [$("ownStar"), ...o.rows.flatMap((r, i) => [$("oa" + i), $("ot" + i)])];
+    const drawTop = () => {
+      const opts = o.rows.map((r, i) => ({ a: r.a, i })).filter(x => x.a);
+      if (o.top >= 0 && !(o.rows[o.top] && o.rows[o.top].a)) o.top = -1;
+      $("ownTop").innerHTML = opts.length ? opts.map((x, k) => `<button type="button" class="choice${x.i === o.top ? " pickme" : ""}" data-i="${x.i}"${o.done ? " disabled" : ""}><span class="l">${"ABC"[k]}</span><span>${esc(x.a)}</span></button>`).join("")
+        : `<p class="opinion">Pick your agents first.</p>`;
+      $("ownTop").querySelectorAll(".choice").forEach(b => b.onclick = () => { o.top = +b.dataset.i; save(); drawTop(); });
+    };
+    $("ownStar").addEventListener("input", e => { o.name = e.target.value; save(); });
+    o.rows.forEach((r, i) => {
+      $("oa" + i).addEventListener("change", e => { r.a = e.target.value; save(); drawTop(); });
+      $("ot" + i).addEventListener("input", e => { r.t = e.target.value; save(); });
+    });
+    const problem = () => {
+      if (!/\p{L}.*\p{L}/u.test(o.name)) return { m: "Type your famous person.", f: $("ownStar") };
+      const seen = new Set();
+      for (let i = 0; i < o.rows.length; i++) {
+        const r = o.rows[i];
+        if (!r.a) return { m: "Pick an agent in row " + (i + 1) + ".", f: $("oa" + i) };
+        if (seen.has(r.a)) return { m: "Use 3 different agents. " + r.a + " is in there twice.", f: $("oa" + i) };
+        seen.add(r.a);
+        if (words(r.t) < 6) return { m: "Row " + (i + 1) + ": write a real fact (at least one full sentence).", f: $("ot" + i) };
+        if (o.rows.some((x, j) => j < i && plain(x.t).trim() === plain(r.t).trim())) return { m: "Row " + (i + 1) + ": write a different fact for each agent.", f: $("ot" + i) };
+      }
+      if (o.top < 0) return { m: "Tap the agent that shaped your star the most.", f: null };
+      return null;
+    };
+    const finish = () => {
+      fields().forEach(el => { if (el) el.disabled = true; });
+      $("ownBtn").parentNode.remove(); $("ownMsg").remove();
+      drawTop();
+      const extra = typeof s.after === "function" ? s.after(o, st) : (s.after || "");
+      $("after").innerHTML = `<div class="reveal"><span class="rt">${esc(s.afterTitle || "Saved")}</span>⭐ <b>${esc(o.name)}</b>: ${o.rows.map(r => esc(r.a)).join(", ")}. Biggest shaper: <b>${esc(o.rows[o.top].a)}</b>.${extra ? " " + extra : ""}</div>
+        <div class="rowend"><button type="button" class="next" id="nextBtn">${st.step === N - 1 ? "Wrap it up" : "Next"} →</button></div>`;
+      $("nextBtn").onclick = goNext;
+      solveFn = null;
+    };
+    $("ownBtn").onclick = () => {
+      if (isT()) { fillOwnSample(s); return ownView(s); }
+      const p = problem();
+      if (p) { $("ownMsg").textContent = p.m; $("ownMsg").className = "msg bad"; if (p.f) p.f.focus({ preventScroll: true }); return; }
+      o.done = true; save(); finish();
+    };
+    drawTop();
+    solveFn = () => { fillOwnSample(s); stepView(); };
+    if (o.done) finish();
   }
   function readPanel(s) {
     return `<div class="panel"><div class="findit"><span class="ft">📖 In your book</span><p>${esc(s.find)}</p></div>
@@ -298,6 +377,12 @@
         if (s.proof) { const ok = (s.left.match(/\[\[([\s\S]*?)\]\]/) || [])[1] || ""; a[n + ". " + s.label + " · proof"] = "\"" + ok.replace(/<[^>]+>/g, "") + "\"" + tries(st.miss[s.id + "~p"] || 0); }
       }
       else if (s.kind === "pick") { const i = st.picks[s.id]; a["Pick · " + s.label] = i == null ? "—" : s.options[i]; }
+      else if (s.kind === "own") {
+        const o = st.own || { name: "", rows: [], top: -1 };
+        a[s.label + " · name"] = (o.name || "").trim() || "—";
+        (o.rows || []).forEach((r, i) => { a[s.label + " · agent " + (i + 1)] = r.a ? r.a + ": " + (r.t || "").trim() : "—"; });
+        a[s.label + " · shaped them most"] = o.top >= 0 && o.rows[o.top] && o.rows[o.top].a ? o.rows[o.top].a : "—";
+      }
     });
     a["Writing: " + W.short] = ($("w1").value || "").trim();
     return a;
@@ -367,6 +452,7 @@
           const s = STEPS[j];
           if (s.kind === "q" || s.kind === "read") { st.done[s.id] = true; st.opened[s.id] = true; if (s.proof) st.done[s.id + "~p"] = true; }
           if (s.kind === "pick" && st.picks[s.id] == null) st.picks[s.id] = 0;
+          if (s.kind === "own" && !(st.own && st.own.done)) fillOwnSample(s);
         }
         anim = false; st.step = t; save(); render(); toTop();
       },

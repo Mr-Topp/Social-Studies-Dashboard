@@ -2,7 +2,7 @@
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Origin Story | Sociology Unit 3 Day 2</title>
 <meta name="description" content="Three real superstars. Flip their real backstory and find which agents of socialization made them who they are.">
-<link rel="stylesheet" href="../u3-engine/engine.css?v=20261115c">
+<link rel="stylesheet" href="../u3-engine/engine.css?v=20261121a">
 <style>body{--a:#c2531c;--a2:#ffe8d9;--a3:#7d3110}
 .place{position:relative;margin:0 0 10px;border-radius:14px;overflow:hidden;background:var(--a2)}.place img{display:block;width:100%;height:120px;object-fit:cover}.place figcaption{position:absolute;left:0;right:0;bottom:0;padding:6px 10px;background:linear-gradient(transparent,rgba(0,0,0,.75));color:#fff;font-weight:800;font-size:.9rem}.place small{display:block;font-weight:600;font-size:.7rem;opacity:.85}</style>
 <script src="../../shared/assignments.js?v=20261105fb1"></script>
@@ -19,6 +19,9 @@
 // Taylor Swift: grandma Marjorie Finlay was an opera singer; left out by middle-school girls; family moved to
 // Hendersonville, TN; signed a Sony/ATV songwriting deal at 14. Simone Biles: adopted by grandfather Ron and
 // his wife Nellie; Catholic, carries a rosary; switched to homeschool in 2012 to train more.
+// 11/21/26 (Fynn: more variety in the answers + students add their own famous person): Taylor's first card is now
+// Media (she has said a TV show about Faith Hill at about age 10 made her want Nashville; CMT Insider 2008, TIME 2014),
+// replacing the opera-grandma Family card, so Family is the right answer 2 times instead of 3. Added Origin Story 4 (kind "own").
 // PLACE PHOTOS (Fynn chose place photos 11/15/26, not photos of the stars). Wikimedia Commons:
 // Akron "Evening Downtown Akron Skyline" by Dillguy9 (CC0); Nashville "Nashville skyline 2009" by Kaldari (public domain);
 // Houston "Houston Downtown Skyline 2010" by Ed Uthman (CC BY 3.0, credit shown on the card).
@@ -41,10 +44,10 @@ window.U3GAME = {
   eyebrow: "Sociology · Unit 3 · Day 2",
   titleHtml: "ORIGIN STORY<small>Every superstar was taught to be who they are.</small>",
   hook: "LeBron. Taylor. Simone. Nobody is born a legend. Flip their real backstories and find out who shaped them.",
-  chips: ["🏀 LeBron James", "🎤 Taylor Swift", "🤸 Simone Biles"],
-  tiles: ["🃏 <b>3</b> real origin stories", "✓ <b>10</b> calls", "🔎 Prove every call", "🏆 Crown the agent that matters most", "✍️ <b>1</b> short answer", "⏱ <b>25</b> min"],
+  chips: ["🏀 LeBron James", "🎤 Taylor Swift", "🤸 Simone Biles", "⭐ Your pick"],
+  tiles: ["🃏 <b>3</b> real origin stories", "⭐ <b>1</b> you build", "✓ <b>10</b> calls", "🔎 Prove every call", "🏆 Crown the agent that matters most", "✍️ <b>1</b> short answer", "⏱ <b>30</b> min"],
   goal: "Name the agents of socialization and show how they shape a person.",
-  how: ["Read one real fact from a star's life.", "Tap the agent of socialization. Then prove it: tap the words in the card that show it.", "After each star, make your call. Then write one answer and turn it in."],
+  how: ["Read one real fact from a star's life.", "Tap the agent of socialization. Then prove it: tap the words in the card that show it.", "After each star, make your call. Then build your own star's story, write one answer, and turn it in."],
   startLabel: "Flip the first card",
   stepWord: "Card",
   steps: [
@@ -80,16 +83,15 @@ window.U3GAME = {
       q: "Which agent shaped LeBron the most?", options: [AG.fam, AG.peer, AG.media],
       afterTitle: "Fun fact", after: "LeBron's foundation opened the I Promise School in Akron in 2018. It's for kids who are falling behind, like he once did." },
 
-    { kind: "q", id: "t1", label: "Taylor: opera grandma", std: "Soc.9", kicker: "Origin Story 2 · Taylor Swift", title: "Grandma on stage",
+    { kind: "q", id: "t1m", label: "Taylor: Faith Hill on TV", std: "Soc.9", kicker: "Origin Story 2 · Taylor Swift", title: "The TV show that started it",
       left: `${who("taylor", "🎤", "Taylor Swift", "Grew up on a Christmas tree farm in Pennsylvania")}
-        <p class="fact">[[Taylor's grandma, <b>Marjorie Finlay</b>,]] {{was a professional opera singer.}}</p>
-        <p class="fact">{{Taylor has said watching her perform made her want to be on stage too.}} {{Later she even wrote a song named "Marjorie."}}</p>
-        <p class="fact">{{Music ran in the family. Her mom named her after the singer James Taylor.}}</p>`,
-      proof: "Tap the words that show this teacher is family.", proofHint: "Which words say how Marjorie is related to Taylor?",
-      tag: "Who's teaching?", q: "Which agent of socialization gave Taylor her first push toward singing?",
-      choices: [AG.fam, AG.media, AG.peer, AG.work], answer: 0,
-      why: "Family. Families pass on skills and dreams. That know-how is part of cultural capital.",
-      hint: "How is Marjorie related to Taylor?" },
+        <p class="fact">{{Taylor grew up loving country music.}} [[When she was about 10, she <b>watched a TV show about the country star Faith Hill</b>.]]</p>
+        <p class="fact">{{The show said Faith Hill moved to Nashville, and that's how she made it.}} {{After that, Taylor begged her parents <b>every day</b> to take her to Nashville.}}</p>`,
+      proof: "Tap the words that show mass media at work.", proofHint: "Which words name something lots of people watch at the same time?",
+      tag: "Who's teaching?", q: "Which agent of socialization gave Taylor the idea to go to Nashville?",
+      choices: [AG.media, AG.fam, AG.peer, AG.sch], answer: 0,
+      why: "Mass media. One TV show gave a 10-year-old in Pennsylvania a plan for her life. Media can show you what success looks like.",
+      hint: "Where did she learn about Faith Hill? Did she meet her in person?" },
     { kind: "q", id: "t2", label: "Taylor: left out in middle school", std: "Soc.9", kicker: "Origin Story 2 · Taylor Swift", title: "The lunch table",
       left: `${who("taylor", "🎤", "Taylor Swift", "Middle school")}
         <p class="fact">{{Taylor has said that in middle school,}} [[the girls she sat with <b>left her out</b>. Liking country music made her seem weird to them.]]</p>
@@ -118,9 +120,9 @@ window.U3GAME = {
       choices: [AG.work, AG.sch, AG.peer, AG.media], answer: 0,
       why: "The workplace. A job teaches new rules: deadlines, working with adults, and how a business runs.",
       hint: "She signed a deal and got paid to write. What kind of place is that?" },
-    { kind: "pick", id: "p2", label: "Top agent for Taylor", kicker: "Your call · Taylor Swift", title: "Who shaped Taylor the most?",
-      left: `${who("taylor", "🎤", "Taylor Swift", "Three agents, one star")}<p class="fact">🏠 <b>Family:</b> an opera-singer grandma and a move to Tennessee.</p><p class="fact">🤝 <b>Peers:</b> girls at school left her out for liking country.</p><p class="fact">💼 <b>Workplace:</b> a songwriting job at 14 that taught her the music business.</p>`,
-      q: "Which agent shaped Taylor the most?", options: [AG.fam, AG.peer, AG.work],
+    { kind: "pick", id: "p2m", label: "Top agent for Taylor", kicker: "Your call · Taylor Swift", title: "Who shaped Taylor the most?",
+      left: `${who("taylor", "🎤", "Taylor Swift", "Three agents, one star")}<p class="fact">📺 <b>Media:</b> a TV show about Faith Hill made her dream of Nashville.</p><p class="fact">🤝 <b>Peers:</b> girls at school left her out for liking country.</p><p class="fact">💼 <b>Workplace:</b> a songwriting job at 14 that taught her the music business.</p>`,
+      q: "Which agent shaped Taylor the most?", options: [AG.media, AG.peer, AG.work],
       afterTitle: "Think about it", after: "Being left out hurt, but it also gave her the stories for her first songs. Even a bad message from an agent can shape who you become." },
 
     { kind: "q", id: "s1", label: "Simone: adopted by grandparents", std: "Soc.9", kicker: "Origin Story 3 · Simone Biles", title: "A new home",
@@ -153,17 +155,28 @@ window.U3GAME = {
     { kind: "pick", id: "p3", label: "Top agent for Simone", kicker: "Your call · Simone Biles", title: "Who shaped Simone the most?",
       left: `${who("simone", "🤸", "Simone Biles", "Three agents, one star")}<p class="fact">🏠 <b>Family:</b> Ron and Nellie adopted her, and she calls them Mom and Dad.</p><p class="fact">⛪ <b>Religion:</b> raised Catholic, she brings a rosary to every meet.</p><p class="fact">🏫 <b>School:</b> she left regular high school to train more.</p>`,
       q: "Which agent shaped Simone the most?", options: [AG.fam, AG.rel, AG.sch],
-      afterTitle: "Fun fact", after: "Simone has more Olympic and World medals than any gymnast in history." }
+      afterTitle: "Fun fact", after: "Simone has more Olympic and World medals than any gymnast in history." },
+
+    // Origin Story 4: the student builds one for a famous person they pick (Fynn, 11/21/26).
+    { kind: "own", id: "own", label: "Your own star", kicker: "Origin Story 4 · Your pick", title: "Build your own origin story",
+      left: `<div class="who"><span class="icon">⭐</span><div><b>YOUR STAR</b><span>Anyone famous you know about</span></div></div>
+        <p class="fact">Pick a famous person you know about: an athlete, singer, rapper, actor, or creator.</p>
+        <p class="fact">Fill out their origin story, just like LeBron, Taylor, and Simone. Use real facts. You can look them up.</p>
+        <div class="reveal"><span class="rt">Example</span><b>Simone Biles · Religion:</b> She was raised Catholic and brings a rosary to every meet.</div>`,
+      namePlaceholder: "Like: Steph Curry", rows: 3, afterTitle: "Your star is saved" }
   ],
   end: {
     kicker: "Three origin stories", title: "Your picks",
     html: st => {
       const p = (id, opts) => st.picks[id] == null ? "—" : opts[st.picks[id]];
+      const e = s => String(s == null ? "" : s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+      const o = st.own, top = o && o.done && o.rows && o.rows[o.top];
+      const own = top ? `<div class="mini"><b>⭐ ${e(o.name)}</b><span>Your pick: ${e(top.a)}</span></div>` : "";
       return `<div class="cards3">
         <div class="mini"><b>🏀 LeBron</b><span>Your pick: ${p("p1", [AG.fam, AG.peer, AG.media])}</span></div>
-        <div class="mini"><b>🎤 Taylor</b><span>Your pick: ${p("p2", [AG.fam, AG.peer, AG.work])}</span></div>
-        <div class="mini"><b>🤸 Simone</b><span>Your pick: ${p("p3", [AG.fam, AG.rel, AG.sch])}</span></div></div>
-        <p class="bigidea">Family shows up in all three stories. But in the teen years, <b>peers and media get louder.</b></p>
+        <div class="mini"><b>🎤 Taylor</b><span>Your pick: ${p("p2m", [AG.media, AG.peer, AG.work])}</span></div>
+        <div class="mini"><b>🤸 Simone</b><span>Your pick: ${p("p3", [AG.fam, AG.rel, AG.sch])}</span></div>${own}</div>
+        <p class="bigidea">Family shows up in all three real stories. But in the teen years, <b>peers and media get louder.</b></p>
         <p class="callout">In a 2024 Pew survey, nearly half of U.S. teens said they are online <b>almost constantly</b>. So which agent wins for teens today?</p>`;
     }
   },
@@ -179,5 +192,5 @@ window.U3GAME = {
   }
 };
 </script>
-<script src="../u3-engine/engine.js?v=20261115c"></script>
+<script src="../u3-engine/engine.js?v=20261121a"></script>
 </body></html>
