@@ -4,7 +4,7 @@
 (function(){
 const C=window.FLIP, $=id=>document.getElementById(id), P=C.prefix, N=C.pages;
 const pad=n=>String(n).padStart(2,"0");
-const img=n=>(C.pageDir||"pages")+"/p-"+pad(n)+".jpg";  // C.pageDir opt-in (Fynn, 11-16: re-scanned page folder)
+const img=n=>(C.pageUrls&&C.pageUrls[n-1])||((C.pageDir||"pages")+"/p-"+pad(n)+".jpg");  // C.pageDir opt-in (Fynn, 11-16: re-scanned page folder); C.pageUrls opt-in = full image links, e.g. Library of Congress cartoons (11-21)
 const ls={get:k=>{try{return localStorage.getItem(P+k)}catch(e){return null}},set:(k,v)=>{try{localStorage.setItem(P+k,v)}catch(e){}},del:k=>{try{localStorage.removeItem(P+k)}catch(e){}}};
 if(C.migrate)C.migrate(ls);
 let read=new Set();try{read=new Set((JSON.parse(ls.get("read")||"[]")||[]).map(Number))}catch(e){}
