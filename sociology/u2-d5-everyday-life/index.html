@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>My Week, My Rules | Sociology Unit 2 Day 5</title>
-<meta name="description" content="Build your own person and live their week. Each day is one Unit 2 review slide.">
+<meta name="description" content="Build your own person and live their week. Each day is a real story that reviews one Unit 2 idea.">
 <script src="../../shared/assignments.js?v=20261105fb1"></script>
 <script src="../../shared/turnin.js?v=20261105fb1"></script>
 <style>
@@ -169,14 +169,15 @@ textarea{width:100%;font:inherit;font-size:16px;padding:8px;border:2px solid #cf
 // =====================================================================
 //  MY WEEK, MY RULES  (Sociology Unit 2 Day 5, review day)
 //  Students build their own person (5 taps), then live 4 days of that
-//  person's week. Each day = one Day 5 review slide:
-//    Fri  Soc.5 "Culture on a Friday Night"   (material vs nonmaterial, norm/value/sanction)
-//    Sat  Soc.6 "Tipping Shows How Culture Shapes You" (ethnocentrism vs relativism)
-//    Mon  Soc.7 "Each Institution Answers a Need" (5 institutions, 5 needs)
-//    Thu  Soc.8 "Rosie Shows How Change Spreads" (change in one institution spreads)
+//  person's week. Each day = one real story + one Day 5 review idea:
+//    Fri  Soc.5 Labubu/Stanley/6-7 sort + 2025 US Open hat grab (norm/value/sanction)
+//    Sat  Soc.6 RedNote "cat tax," Jan 2025 (ethnocentrism vs relativism)
+//    Mon  Soc.7 persona plan + Chris Gardner (5 institutions, 5 needs)
+//    Thu  Soc.8 smartphones -> family -> Iowa HF 782 -> school phone rules
 //  Then a recap card + 2 short answers + turn in (same assignment ID as before).
-//  The student's person is made up. The facts (Japan tipping, BLS chart,
-//  Equal Pay Act 1963, Iowa permit rules, Kirkwood) are real.
+//  The student's person is made up. Sources: CBS News (US Open, Sept 2025),
+//  NPR/Reuters (RedNote, Jan 2025), Pew Research (teen smartphones 2015/2018/2022),
+//  Iowa Governor's office (HF 782, signed Apr 30 2025).
 // =====================================================================
 (function () {
   "use strict";
@@ -241,27 +242,27 @@ textarea{width:100%;font:inherit;font-size:16px;padding:8px;border:2px solid #cf
   ];
   const DAYS = ["", "Friday", "Saturday", "Monday", "Thursday", "Wrap-up"];
   const SLIDES = {
-    1: { t: "Culture on a Friday Night", std: "Soc.5", r: "Culture = material (things) + nonmaterial (ideas, norms, values)." },
-    2: { t: "Tipping Shows How Culture Shapes You", std: "Soc.6", r: "Your culture sets what feels “normal” to you." },
-    3: { t: "Each Institution Answers a Need", std: "Soc.7", r: "5 institutions, 5 needs every society has." },
-    4: { t: "Rosie Shows How Change Spreads", std: "Soc.8", r: "A change in one institution spreads to the others." }
+    1: { t: "Material + nonmaterial culture", std: "Soc.5", r: "Culture = material (things) + nonmaterial (ideas, norms, values)." },
+    2: { t: "Ethnocentrism vs. cultural relativism", std: "Soc.6", r: "Your culture sets what feels “normal” to you." },
+    3: { t: "Each institution meets a need", std: "Soc.7", r: "5 institutions, 5 needs every society has." },
+    4: { t: "Change in one institution spreads", std: "Soc.8", r: "A change in one institution spreads to the others." }
   };
   const STAMP = { 1: "Culture", 2: "Shapes you", 3: "Institutions", 4: "Change" };
 
   const NORM_CHOICES = [
-    { t: "Yell “STAND UP!” with everyone", res: "He stands up, red-faced. The crowd's yelling worked." },
-    { t: "Leave him alone", res: "He keeps sitting. A few people glare at you too." },
-    { t: "Sit down next to him", res: "Now the section yells at both of you." }
+    { t: "Comment “GIVE THE KID THE HAT”", res: "Tons of people online said the same thing. Days later, the man said sorry in public and gave the hat back." },
+    { t: "Scroll past it", res: "You stayed out of it. Tons of other people didn't. Days later, the man said sorry in public and gave the hat back." },
+    { t: "Comment “finders keepers lol”", res: "Your comment got ratioed. Now people are mad at you too." }
   ];
   const REPLIES = [
-    { t: "LOL that waiter was so disrespectful 😤", lab: "eth" },
-    { t: "Wait… maybe tipping just isn't a thing there", lab: "rel" },
-    { t: "Japan needs to learn how tipping works", lab: "eth" }
+    { t: "Why do they want my cat?? This app is so weird 😂", lab: "eth" },
+    { t: "Wait… cat tax must be how they say welcome there", lab: "rel" },
+    { t: "They need to learn how apps work in America", lab: "eth" }
   ];
   const WHO_TAUGHT = ["My family", "Working a job", "TV + social media", "Nobody, I just know"];
   const WHO_SAYS = [
     "Family is usually the first place you learn your culture's rules.",
-    "Jobs teach culture too. Tip jars and “keep the change” are U.S. norms.",
+    "Jobs teach culture too, like how to talk to people and what's polite.",
     "Shows and videos teach what's “normal” without saying it out loud.",
     "Even “I just know” is culture. You learned it so young it feels natural."
   ];
@@ -269,23 +270,23 @@ textarea{width:100%;font:inherit;font-size:16px;padding:8px;border:2px solid #cf
   // MC checks: options[0] is right; always shuffled on screen.
   const CHECKS = {
     norm1: { q: "What goes in the first blank?", options: ["Norm", "Value", "Law", "Material culture"], hint: "It's an unwritten rule for how to act." },
-    norm2: { q: "What goes in the second blank?", options: ["School pride", "Making money", "Staying safe", "Good grades"], hint: "What does the crowd care about at a home game?" },
-    tip:   { q: "The tourist calls the waiter rude. That's…", options: ["Ethnocentrism: judging Japan by U.S. rules", "Relativism: seeing Japan by its own rules", "A law that Japan's government wrote", "Following Japan's norms like a local"], hint: "Whose rules is the tourist using to judge?", why: "He judged Japan by U.S. tipping rules. That's ethnocentrism." },
+    norm2: { q: "What goes in the second blank?", options: ["Being fair to kids", "Making money", "Winning the match", "Good grades"], hint: "Why were people so mad at the man?" },
+    tip:   { q: "An American posts: “Chinese users are so weird. Why do they want my cat?” That's…", options: ["Ethnocentrism: judging RedNote by U.S. rules", "Relativism: seeing RedNote by its own rules", "A law that China's government wrote", "Following RedNote's norms like a local"], hint: "Whose rules is the American using to judge?", why: "They judged a Chinese app by American rules. That's ethnocentrism." },
     chris: { q: "The night Chris had nowhere to sleep, which institution met that need?", options: ["Religion: a church shelter gave them a bed", "Government: the IRS gave his money back", "Economy: his internship paid for a hotel", "Education: a school let them sleep there"], hint: "Look back at part 4 of Chris's night." },
-    rosie: { q: "What does the chain show?", options: ["A change in one institution spread into the others", "Women's jobs went back to normal after the war", "Only the economy changed; families stayed the same", "Institutions change alone without touching others"], hint: "Look at the colors on your chain. How many institutions changed?", why: "Women working (economy) changed family, school, and laws. Change spreads." }
+    rosie: { q: "What does the phone chain show?", options: ["A change in one institution spread into the others", "Phones changed the economy, but schools stayed the same", "Schools banned phones before anyone owned one", "Institutions change alone without touching others"], hint: "Look at the colors on your chain. How many institutions changed?", why: "Phones (economy) changed home life (family), then Iowa law (government), then school (education). Change spreads." }
   };
 
   const CHAIN = [
-    { id: "l1", t: "1943: Factories need workers for WWII. Millions of women take factory jobs.", b: "economy" },
-    { id: "l2", t: "Moms working means new questions: who watches the kids? Grandparents, daycare, older siblings.", b: "family" },
-    { id: "l3", t: "1963: Congress passes the Equal Pay Act. Same job, same pay.", b: "government" },
-    { id: "l4", t: "By 1982, women earn more college degrees than men.", b: "education" }
+    { id: "l1", t: "2007: Apple starts selling the iPhone. Phone companies race to sell one to everybody, including teens.", b: "economy" },
+    { id: "l2", t: "Home life changes. Parents text kids instead of calling, and many track their kids' location on an app.", b: "family" },
+    { id: "l3", t: "April 2025: Iowa passes a law (HF 782). No cell phones during class time.", b: "government" },
+    { id: "l4", t: "2025–26 school year: Iowa schools make phone rules. Phones go in caddies, pouches, or lockers.", b: "education" }
   ];
   const YOU_LINK = {
-    mom: "That's why YOU walk your little brother home while Mom works.",
-    grand: "That's why YOUR grandparents might still be working or helping raise kids.",
-    big: "That's why YOU watch your siblings when Mom picks up a shift.",
-    dad: "That's why “who works and who cooks” in YOUR house isn't set in stone."
+    mom: "That's why Mom texts YOU to grab your brother, and why your phone sits in a caddy during class.",
+    grand: "That's why YOU set up Grandma's phone, and why yours sits in a caddy during class.",
+    big: "That's why YOUR family group chat never stops, and why your phone sits in a caddy during class.",
+    dad: "That's why Dad can text YOU all day, except during class, when your phone sits in a caddy."
   };
 
   const PROMPTS = [
@@ -325,7 +326,7 @@ textarea{width:100%;font:inherit;font-size:16px;padding:8px;border:2px solid #cf
   const nick = () => st.p.nick || "You";
   const bossTag = b => `<span class="btag b-${b}"><span aria-hidden="true">${BOSS[b].i}</span> ${esc(BOSS[b].n)}</span>`;
   const job = t => `<p class="job">👉 ${esc(t)}</p>`;
-  const slideBar = d => `<p class="slidetag">📽️ From the slide: <b>${esc(SLIDES[d].t)}</b></p>`;
+  const slideBar = d => `<p class="slidetag">📽️ Today's idea: <b>${esc(SLIDES[d].t)}</b></p>`;
   function wrongMark(id) { st.wrong[id] = (st.wrong[id] || 0) + 1; if (window.classFirstTry) window.classFirstTry.wrong(); save(); }
   function rightMark(id) { if (window.classFirstTry) window.classFirstTry.right(id); }
 
@@ -380,17 +381,17 @@ textarea{width:100%;font:inherit;font-size:16px;padding:8px;border:2px solid #cf
     app.innerHTML = `<section class="card intro">
       <div class="cover" aria-hidden="true">🧑🏽📅🏠🎓⛪💼🏛️</div>
       <h1>My Week, My Rules</h1>
-      <p class="hook">Make your own person. Live their week. Every day is one slide from this unit.</p>
+      <p class="hook">Make your own person. Live their week. Every day is a real story everyone saw online.</p>
       <ol class="howto">
         <li><b>1. Build</b> your person in 5 taps.</li>
         <li><b>2. Live</b> 4 days. Your choices play out.</li>
-        <li><b>3. Name it</b> with the sociology word from the slide.</li>
+        <li><b>3. Name it</b> with the sociology word from this unit.</li>
       </ol>
       <div class="namebox"><label for="nameBox" class="sr">Your real name: first name + last initial</label>
       <input id="nameBox" maxlength="40" autocomplete="off" placeholder="Your real name (like Jordan M.)" value="${esc(st.name)}"></div>
       <p id="introMsg" class="msg" role="status"></p>
       <button type="button" class="go big" id="startBtn">Build my person →</button>
-      <p class="fine">About 20 minutes. Your person is made up. The facts are real.</p></section>`;
+      <p class="fine">About 20 minutes. Your person is made up. The stories are real.</p></section>`;
     $("startBtn").onclick = () => {
       const fixed = window.classShortName ? window.classShortName($("nameBox").value) : $("nameBox").value.trim();
       if (!/^\S+ [A-Z]\.$/.test(fixed)) { $("introMsg").textContent = "Type your first name and last initial, like Jordan M."; $("introMsg").className = "msg bad"; $("nameBox").focus(); return; }
@@ -434,10 +435,10 @@ textarea{width:100%;font:inherit;font-size:16px;padding:8px;border:2px solid #cf
   function sortCards() {
     const h = optOf("hobby", st.p.hobby);
     return [
-      { id: "jersey", t: "Black-and-gold jerseys", m: "h" },
-      { id: "chant", t: "The student-section chant", m: "m" },
-      { id: "foam", t: "Foam fingers", m: "h" },
-      { id: "pride", t: "School pride", m: "m" },
+      { id: "labubu", t: "A Labubu doll", m: "h" },
+      { id: "sixseven", t: "Yelling “6-7!” when someone says 6 or 7", m: "m" },
+      { id: "stanley", t: "A Stanley cup", m: "h" },
+      { id: "status", t: "The idea that a rare Labubu makes you cool", m: "m" },
       { id: "hmat", t: h.mat, m: "h" },
       { id: "hnon", t: h.non, m: "m" }
     ];
@@ -446,7 +447,7 @@ textarea{width:100%;font:inherit;font-size:16px;padding:8px;border:2px solid #cf
     const cards = sortCards();
     const allDone = cards.every(c => st.sort[c.id]);
     app.innerHTML = `<section class="card">${slideBar(1)}
-      <p class="story">${esc(nick())} goes to the Friday night football game, then hangs with the ${esc(optOf("hobby", st.p.hobby).crew)}.</p>
+      <p class="story">${esc(nick())} hangs with the ${esc(optOf("hobby", st.p.hobby).crew)} Friday night. Everyone's talking about the same stuff.</p>
       ${job("Is each one something you hold in your ✋ hands, or carry in your 🧠 head?")}
       <div class="sortgrid">${cards.map(c => `<div class="scard${st.sort[c.id] ? " done" : ""}" id="sc_${c.id}">${esc(c.t)}
         ${st.sort[c.id] ? `<span class="put">✓ ${c.m === "h" ? "✋ Material culture" : "🧠 Nonmaterial culture"}</span>` : ""}
@@ -469,19 +470,20 @@ textarea{width:100%;font:inherit;font-size:16px;padding:8px;border:2px solid #cf
   function normView() {
     const picked = st.normPick;
     app.innerHTML = `<section class="card">${slideBar(1)}
-      <p class="story">The chant starts. Everyone stands. One kid stays sitting on his phone. People yell: <b>“STAND UP!”</b></p>
+      <p class="story">The crew watches a viral clip from the 2025 US Open. Tennis player Kamil Majchrzak reaches out to give his hat to a kid in the crowd. <b>A grown man grabs it first.</b></p>
+      <p class="fine" style="margin:0 0 6px">Real event · Source: CBS News, Sept. 2025</p>
       ${picked == null ? job("What does " + nick() + " do?") : ""}
       <div class="choices" style="grid-template-columns:1fr 1fr 1fr">${NORM_CHOICES.map((c, i) => `<button type="button" class="choice${picked === i ? " on" : ""}" data-i="${i}" ${picked != null ? "disabled" : ""}>${esc(c.t)}</button>`).join("")}</div>
-      ${picked != null ? `<p class="result tan">${esc(NORM_CHOICES[picked].res)}</p><p class="result">The yelling is a <b>sanction</b>: how a group punishes someone who breaks a norm.</p><button type="button" class="go" id="nextBtn">Next →</button>` : ""}</section>`;
+      ${picked != null ? `<p class="result tan">${esc(NORM_CHOICES[picked].res)}</p><p class="result">The internet pile-on is a <b>sanction</b>: how a group punishes someone who breaks a norm. (Happy ending: Majchrzak found the kid and gave him a new hat.)</p><button type="button" class="go" id="nextBtn">Next →</button>` : ""}</section>`;
     app.querySelectorAll("[data-i]").forEach(b => b.onclick = () => { st.normPick = +b.dataset.i; save(); normView(); });
     if (picked != null) $("nextBtn").onclick = nextStep;
   }
   function nameView() {
     const a = st.done.norm1 ? `<span class="blank">norm</span>` : `<span class="blank">?</span>`;
-    const b = st.done.norm2 ? `<span class="blank">school pride</span>` : `<span class="blank">?</span>`;
+    const b = st.done.norm2 ? `<span class="blank">being fair to kids</span>` : `<span class="blank">?</span>`;
     const both = st.done.norm1 && st.done.norm2;
     app.innerHTML = `<section class="card">${slideBar(1)}
-      <p class="sentence">Standing for the chant is a ${a} that comes from the value of ${b}.</p>
+      <p class="sentence">Letting the kid have the hat is a ${a} that comes from the value of ${b}.</p>
       <div id="nq"></div>
       ${both ? `<button type="button" class="go" id="nextBtn">Next: Saturday →</button>` : ""}</section>`;
     if (both) { $("nextBtn").onclick = nextStep; return; }
@@ -491,11 +493,11 @@ textarea{width:100%;font:inherit;font-size:16px;padding:8px;border:2px solid #cf
   // ---------- Day 2 Sat: the feed ----------
   function feedView() {
     app.innerHTML = `<section class="card">${slideBar(2)}
-      <p class="story">Saturday. ${esc(nick())} is on break at ${esc(optOf("job", st.p.job).place)} and sees this video.</p>
-      <div class="phone"><div class="hd">🎥 @tripwithtyler</div>
-        <p style="margin:4px 0">A waiter in Tokyo CHASED me down the street to give my tip back. RUDE. 😤</p>
-        <div class="cm">💬 <b>Top comment:</b> In Japan, tipping isn't expected. Good service is already part of the job.</div>
-        <p class="fine" style="margin:4px 0 0">Fact source: Japan National Tourism Organization</p></div>
+      <p class="story">Saturday. ${esc(nick())} is on break at ${esc(optOf("job", st.p.job).place)}, scrolling back to January 2025. TikTok was about to be banned, so Americans rushed to <b>RedNote</b>, a Chinese app. Over 700,000 new users joined in 2 days.</p>
+      <div class="phone"><div class="hd">📕 RedNote · reply from a Chinese user</div>
+        <p style="margin:4px 0">Welcome, TikTok refugees! 👋 First, pay your <b>cat tax</b> 🐱</p>
+        <div class="cm">💬 <b>What it means:</b> On RedNote, newcomers post a pet photo to say hi. It's a joke welcome.</div>
+        <p class="fine" style="margin:4px 0 0">Real event · Sources: NPR and Reuters, Jan. 2025</p></div>
       ${job("Pick the comment " + nick() + " would leave. Be honest.")}
       <div class="choices" style="grid-template-columns:repeat(3,1fr)">${REPLIES.map((r, i) => `<button type="button" class="choice" data-i="${i}">💬 ${esc(r.t)}</button>`).join("")}</div></section>`;
     app.querySelectorAll("[data-i]").forEach(b => b.onclick = () => { st.reply = +b.dataset.i; save(); nextStep(); });
@@ -510,7 +512,7 @@ textarea{width:100%;font:inherit;font-size:16px;padding:8px;border:2px solid #cf
     const r = REPLIES[st.reply == null ? 0 : st.reply], eth = r.lab === "eth";
     app.innerHTML = `<section class="card">${slideBar(2)}
       <p class="result${eth ? " tan" : ""}">${esc(nick())}'s comment, “${esc(r.t)},” was <b>${eth ? "ethnocentrism" : "cultural relativism"}</b>. ${eth ? "Most people react that way at first." : "You checked their rules before judging."}</p>
-      ${job("Tipping feels normal to " + nick() + ". Who taught them that?")}
+      ${job("American apps feel “normal” to " + nick() + ". Who taught them what's normal?")}
       <div class="chips">${WHO_TAUGHT.map((w, i) => `<button type="button" class="chip${st.who === i ? " on" : ""}" data-w="${i}">${esc(w)}</button>`).join("")}</div>
       ${st.who != null ? `<p class="result">${esc(WHO_SAYS[st.who])} That's <b>culture shaping YOU</b>.</p><button type="button" class="go" id="nextBtn">Next: Monday →</button>` : ""}</section>`;
     app.querySelectorAll("[data-w]").forEach(b => b.onclick = () => { st.who = +b.dataset.w; save(); mirrorView(); });
@@ -610,10 +612,10 @@ textarea{width:100%;font:inherit;font-size:16px;padding:8px;border:2px solid #cf
   const chainTrail = () => `<div class="trail">${CHAIN.map(l => st.chain[l.id] ? bossTag(l.b) : `<span class="btag" style="background:#c9d0de">?</span>`).join(`<span class="arr">→</span>`)}</div>`;
   function chainView() {
     const L = CHAIN.find(l => !st.chain[l.id]);
-    const data = [["1950", 34], ["1970", 43], ["1990", 58], ["2023", 57]];
-    const chart = `<div class="minichart"><p class="fine" style="margin:0"><b>U.S. women with or looking for a job</b> (BLS)</p><div class="bars">${data.map(d => `<div class="bar" style="height:${d[1] * 1.1}px">${d[1]}%</div>`).join("")}</div><div class="barl">${data.map(d => `<span>${d[0]}</span>`).join("")}</div></div>`;
+    const data = [["2015", 73], ["2018", 95], ["2022", 95]];
+    const chart = `<div class="minichart"><p class="fine" style="margin:0"><b>U.S. teens with a smartphone</b> (Pew Research)</p><div class="bars">${data.map(d => `<div class="bar" style="height:${d[1] * 0.7}px">${d[1]}%</div>`).join("")}</div><div class="barl">${data.map(d => `<span>${d[0]}</span>`).join("")}</div></div>`;
     app.innerHTML = `<section class="card">${slideBar(4)}
-      <div class="row"><div><p class="story">A photo on ${esc(nick())}'s fridge: great-grandma in 1943, building bomber parts like Rosie the Riveter. That one change kept spreading.</p>${chainTrail()}</div>${chart}</div>
+      <div class="row"><div><p class="story">Thursday, 8 AM. ${esc(nick())}'s phone goes in the class caddy. Why? It started with one product, and the change kept spreading.</p>${chainTrail()}</div>${chart}</div>
       ${L ? `<div class="link" id="lk"><p class="fine" style="margin:0">Link ${CHAIN.indexOf(L) + 1} of 4</p><p class="n">${esc(L.t)}</p></div>
         ${job("Which institution is this link about?")}
         <div class="bossbtns">${BOSS_ORDER.map(b => `<button type="button" data-b="${b}">${BOSS[b].i} ${BOSS[b].n}</button>`).join("")}</div>
@@ -625,7 +627,7 @@ textarea{width:100%;font:inherit;font-size:16px;padding:8px;border:2px solid #cf
       if (b.dataset.b === L.b) { st.chain[L.id] = true; rightMark("chain_" + L.id); save(); chainView(); return; }
       wrongMark("chain");
       const el = $("lk"); el.classList.remove("shake"); void el.offsetWidth; el.classList.add("shake");
-      $("cMsg").textContent = "Not quite. Is it about jobs and money, home life, laws, or school?"; $("cMsg").className = "msg bad";
+      $("cMsg").textContent = "Not quite. Is it about selling things, home life, laws, or school?"; $("cMsg").className = "msg bad";
       locked = true; setTimeout(() => { locked = false; }, isTestT() ? 0 : 1500);
     });
   }
@@ -642,10 +644,10 @@ textarea{width:100%;font:inherit;font-size:16px;padding:8px;border:2px solid #cf
     const r = REPLIES[st.reply == null ? 0 : st.reply];
     app.innerHTML = `<section class="card"><div class="recap">
       <div class="idcard"><div class="big">${st.p.av}</div><div class="nm">${esc(nick())}'s week</div>
-        <span class="stampbig">Fri · Culture: the chant is 🧠 nonmaterial</span>
+        <span class="stampbig">Fri · Culture: “6-7” is 🧠 nonmaterial</span>
         <span class="stampbig">Sat · Shapes you: “${esc(r.lab === "eth" ? "ethnocentrism" : "cultural relativism")}”</span>
         <span class="stampbig">Mon · Institutions: dropped ${dropped.map(a => BOSS[a.b].n).join(" + ")}</span>
-        <span class="stampbig">Thu · Change: economy → family → laws → school</span></div>
+        <span class="stampbig">Thu · Change: iPhone → family → Iowa law → school</span></div>
       <div><h2>📓 Two short answers</h2>
         ${job("Fill in each sentence starter with your own words. Then tap Turn in.")}
         ${PROMPTS.map(p => `<label class="wl" for="w_${p.id}">${esc(p.label)}</label><p class="stem">${esc(p.stem)}</p><textarea id="w_${p.id}" rows="2">${esc(st.writing[p.id] || "")}</textarea>`).join("")}
@@ -672,11 +674,11 @@ textarea{width:100%;font:inherit;font-size:16px;padding:8px;border:2px solid #cf
     const answers = {};
     answers["My person"] = (st.p.av || "") + " " + nick() + " · " + PICKS.map(P => (optOf(P.key, st.p[P.key]) || {}).t).join(" · ");
     answers["Fri · Sorting misses (material/nonmaterial)"] = String(st.wrong.sort || 0);
-    answers["Fri · What they did when the kid sat"] = st.normPick != null ? NORM_CHOICES[st.normPick].t : "";
+    answers["Fri · What they did about the hat grab"] = st.normPick != null ? NORM_CHOICES[st.normPick].t : "";
     answers["Fri · Norm/value check misses"] = String((st.wrong.norm1 || 0) + (st.wrong.norm2 || 0));
     answers["Sat · Their comment"] = st.reply != null ? REPLIES[st.reply].t + " (" + (REPLIES[st.reply].lab === "eth" ? "ethnocentrism" : "relativism") + ")" : "";
     answers["Sat · Ethnocentrism check misses"] = String(st.wrong.tip || 0);
-    answers["Sat · Who taught them tipping"] = st.who != null ? WHO_TAUGHT[st.who] : "";
+    answers["Sat · Who taught them what's normal"] = st.who != null ? WHO_TAUGHT[st.who] : "";
     answers["Mon · Kept"] = asks.filter(a => st.plan.includes(a.b)).map(a => BOSS[a.b].n + ": " + a.t).join(" | ");
     answers["Mon · Dropped"] = asks.filter(a => !st.plan.includes(a.b)).map(a => BOSS[a.b].n + ": " + a.t).join(" | ");
     answers["Mon · Institution/need match misses"] = String(st.wrong.match || 0);
@@ -724,7 +726,7 @@ textarea{width:100%;font:inherit;font-size:16px;padding:8px;border:2px solid #cf
 
   // ---------- Test T. skip bar (shared/turnin.js) ----------
   try {
-    const LABEL = { build: "Build your person", sort: "Fri: hands or head sort", norm: "Fri: the kid who sat", name: "Fri: norm + value blanks", feed: "Sat: the tipping video", tip: "Sat: ethnocentrism check", mirror: "Sat: who taught you", plan: "Mon: pick 3 of 5", drops: "Mon: what got dropped", match: "Mon: match needs", chris: "Mon: Chris Gardner's night", chrisq: "Mon: Chris question", chain: "Thu: change chain", rosie: "Thu: change check", write: "Recap + 2 short answers + turn in" };
+    const LABEL = { build: "Build your person", sort: "Fri: hands or head sort", norm: "Fri: the US Open hat grab", name: "Fri: norm + value blanks", feed: "Sat: RedNote cat tax", tip: "Sat: ethnocentrism check", mirror: "Sat: who taught you", plan: "Mon: pick 3 of 5", drops: "Mon: what got dropped", match: "Mon: match needs", chris: "Mon: Chris Gardner's night", chrisq: "Mon: Chris question", chain: "Thu: change chain", rosie: "Thu: change check", write: "Recap + 2 short answers + turn in" };
     function solveStep(s) {
       if (s.k === "build") fillPersonDefaults();
       else if (s.k === "sort") sortCards().forEach(c => st.sort[c.id] = true);
