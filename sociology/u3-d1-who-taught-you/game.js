@@ -6,6 +6,7 @@
 //  Right: the card flies into that pile and the one-line "why" rides along on top of the next card.
 //  Wrong: the card shakes, a short hint shows, try again (the teacher's first-try score stays honest).
 //  Then: both piles side by side (8 and 8), then ONE reflection, then turn in.
+//  11/21/26: Part 1 added first: a 4-page true story (Three Identical Strangers), one question + prove-it tap per page.
 //  Scenarios come from the Day 1 slides (habits, eye color, reflexes, language, Isabelle, boot camp).
 //  One screen, no scrolling on a Chromebook. Test T. can skip everything.
 //  Turn-in via shared/turnin.js with the SAME assignmentId as before, so the dashboard link holds.
@@ -74,6 +75,85 @@
   const N = CARDS.length;
   const TOTAL = N + 2;   // cards, results, reflection
 
+  // ---------------- Part 1: the true story (Fynn 11/21/26) ----------------
+  // Fynn: "they will breeze through this and need a reading before this part, like the Ms. Marvel thing."
+  // Picked: Three Identical Strangers, built in as Part 1 of this page (one turn-in).
+  // Facts checked 11/21/26 against NPR (2018), KCRW, The Forward, The Telegraph, Slant, NYU Med Humanities,
+  // KQED, and the Neubauer study papers (Twin Research & Human Genetics). Eddy's 1995 death is left out on purpose.
+  // Pictures are real places from Wikimedia Commons (no photos of the brothers: those are copyrighted).
+  const IMG = (file, title, by, lic) => ({ src: "https://commons.wikimedia.org/wiki/Special:FilePath/" + encodeURIComponent(file) + "?width=900", page: "https://commons.wikimedia.org/wiki/File:" + encodeURIComponent(file), title, by, lic });
+  const STORY = [
+    { id: "s1", kicker: "New York · 1980", title: "Everyone Knows Bobby",
+      img: IMG("SUNY Sullivan library.jpg", "The college Bobby went to (today called SUNY Sullivan)", "J. Passepartout", "CC BY-SA 4.0"),
+      s: ["In 1980, Bobby Shafran was 19 years old.",
+          "It was his first day at a small college in upstate New York, and he had never been there before.",
+          "But strangers kept hugging him, high-fiving him, and calling him “Eddy.”",
+          "Finally, one student asked him if he was adopted.",
+          "He was. His birthday was July 12, 1961.",
+          "The student's friend Eddy Galland had gone to the college the year before, and he looked exactly like Bobby.",
+          "Eddy was adopted too, with the same birthday.",
+          "That night, Bobby stood face to face with Eddy. They were identical twins, split up as babies.",
+          "Identical twins have the exact same genes."],
+      paras: [3, 7],
+      q: "Why did strangers at the college keep calling Bobby “Eddy”?",
+      choices: ["He looked exactly like Eddy, a student there the year before", "Eddy was a nickname everyone there used for new students", "Bobby had signed up for his classes under the name Eddy", "Bobby had visited the college before and called himself Eddy"],
+      why: "Eddy had gone there the year before, and Bobby was his double.",
+      hint: "Reread what the page says about Eddy Galland.",
+      proof: 5, proofAsk: "Tap the sentence that explains the mix-up.", proofHint: "Find the sentence about what Eddy looked like." },
+    { id: "s2", kicker: "A few months later", title: "Make That Three",
+      img: IMG("2011 newsstand 5381532713.jpg", "A newsstand in New York City", "rob zand", "CC BY-SA 2.0"),
+      s: ["Newspapers ran the story, with a photo of the two brothers.",
+          "In Queens, New York, a college student named David Kellman saw that photo.",
+          "He was looking at two faces exactly like his own.",
+          "David was adopted too, and his birthday was July 12, 1961.",
+          "They weren't twins. They were identical triplets.",
+          "They became famous, on TV talk shows and even in a Madonna movie.",
+          "People were amazed at how alike they were.",
+          "All three had wrestled in high school, smoked the same brand of cigarettes, and had an older sister who was also adopted.",
+          "Some people said this proved it: your genes decide who you become."],
+      paras: [4, 6],
+      q: "Nature means traits you get from your genes. Why did people say the triplets proved nature wins?",
+      choices: ["They grew up apart but still had a lot of the same habits", "Their parents had all agreed to teach them the same habits", "They had grown up together in the same house as kids", "Their college classes taught the three of them the same things"],
+      why: "Raised in different homes, they still matched. That looked like their genes at work.",
+      hint: "They were split up as babies. What surprised people when they met?",
+      proof: 7, proofAsk: "Tap the sentence that shows how alike they were.", proofHint: "Find the list of things all three had in common." },
+    { id: "s3", kicker: "Then people looked closer", title: "Three Different Homes",
+      img: IMG("Levittown houses. LOC gsc.5a25986 (cropped).jpg", "Houses on Long Island, New York", "Gottscho-Schleisner Collection, Library of Congress", "Public domain"),
+      s: ["But the brothers were not copies.",
+          "As babies, they had been placed in three very different homes.",
+          "Bobby grew up rich. His dad was a doctor, and his mom was a lawyer.",
+          "Eddy grew up middle class on Long Island. His dad was a teacher.",
+          "David grew up working class. His parents ran a small grocery store.",
+          "Their dads were different too.",
+          "David's dad was warm and loving, Bobby's dad was busy and often at work, and Eddy's dad was strict.",
+          "Each family had its own money, its own rules, and its own way of showing love.",
+          "As adults, the brothers' lives went in different directions."],
+      paras: [2, 5],
+      q: "Socialization is learning how to be a person from the people around you. Which part of the triplets' story is socialization?",
+      choices: ["Each family raised its boy with its own rules and love", "Each brother was born with the exact same genes", "Each brother was born on the very same day", "Each brother had the same face, hair, and smile"],
+      why: "Same genes, different homes. The families taught each boy a different way to live.",
+      hint: "Socialization comes from people. Which choice is about the families?",
+      proof: 6, proofAsk: "Tap the sentence that shows the parents raising them differently.", proofHint: "Find the sentence about each brother's dad." },
+    { id: "s4", kicker: "The twist", title: "The Secret Study",
+      img: IMG("Sterling Memorial Library Highsmith.jpg", "Yale University's main library", "Carol M. Highsmith", "Public domain"),
+      s: ["Then came the biggest shock: splitting them up was not an accident.",
+          "A psychiatrist (a doctor for the mind) named Dr. Peter Neubauer was running a secret study.",
+          "He wanted to answer an old question: nature or nurture? Do your genes shape you, or do the people who raise you?",
+          "So the adoption agency placed twins and triplets in different homes on purpose.",
+          "The parents were never told their baby had a twin or triplet. They were told it was a normal study of how kids grow.",
+          "For years, researchers visited the boys' homes to test them and film them.",
+          "The study was never published. Its records are locked up at Yale University until 2066.",
+          "The brothers still don't know everything the researchers learned about them."],
+      paras: [3, 6],
+      q: "Why did the researchers split up the babies?",
+      choices: ["To test if genes or the people raising you matter more", "Because one family could not afford to adopt all three", "Because their birth mother asked for it in writing", "To find out which kind of family raises the smartest kids"],
+      why: "It was a nature-or-nurture test. The brothers never agreed to be part of it.",
+      hint: "What old question did Dr. Neubauer want to answer?",
+      proof: 2, proofAsk: "Tap the sentence that shows what the study wanted to find out.", proofHint: "Find the sentence with the old question." }
+  ];
+  const R = STORY.length;
+  const readTime = p => Math.max(25, Math.ceil(((p.s.join(" ") + " " + p.q).split(/\s+/).length) * 60 / 120));
+
   // ---------------- The reflection ----------------
   const PROMPT = { id: "w1", short: "Reflection: born with it vs. socialized",
     label: "Now you. Name one thing you were born with and one thing you were socialized to do.",
@@ -83,7 +163,7 @@
     mustMsg: "Name one thing you were born with AND one thing you learned from other people." };
 
   // ---------------- State ----------------
-  const fresh = () => ({ v: 1, name: "", step: -1, done: {}, miss: {}, pdone: {}, pmiss: {}, streak: 0, last: null, writing: {}, turnedIn: false });
+  const fresh = () => ({ v: 1, name: "", step: -1, read: 0, rdone: {}, rmiss: {}, rpdone: {}, rpmiss: {}, done: {}, miss: {}, pdone: {}, pmiss: {}, streak: 0, last: null, writing: {}, turnedIn: false });
   let st;
   try { st = JSON.parse(localStorage.getItem(KEY)); } catch (e) {}
   if (!st || typeof st !== "object" || st.v !== 1 || !st.done || !st.miss) st = fresh();
@@ -94,11 +174,17 @@
     if (now && st.name && now !== st.name.trim().toLowerCase()) st = fresh();
   } catch (e) {}
   if (!st.pdone) st.pdone = {}; if (!st.pmiss) st.pmiss = {};
+  // Saved from before Part 1 existed: a student already sorting keeps going (no surprise reading mid-game).
+  if (typeof st.read !== "number") st.read = st.step >= 0 ? R : 0;
+  ["rdone", "rmiss", "rpdone", "rpmiss"].forEach(k => { if (!st[k]) st[k] = {}; });
   const save = () => { try { localStorage.setItem(KEY, JSON.stringify(st)); } catch (e) {} };
   let anim = false, locked = false;
   const firstTry = () => CARDS.filter(c => st.done[c.id] && !st.miss[c.id]).length;
   const proofFirst = () => CARDS.filter(c => st.pdone[c.id] && !st.pmiss[c.id]).length;
   const pile = side => CARDS.filter(c => st.done[c.id] && c.ans === side).length;
+  const readFirst = () => STORY.filter(p => st.rdone[p.id] && !st.rmiss[p.id]).length;
+  const readProofFirst = () => STORY.filter(p => st.rpdone[p.id] && !st.rpmiss[p.id]).length;
+  const inStory = () => st.step >= 0 && st.read < R;
 
   // ---------------- Status bar ----------------
   let lastStreak = null, lastScore = null;
@@ -107,11 +193,11 @@
     $("hud").hidden = !show;
     document.body.classList.toggle("on-title", !show);
     if (!show) return;
-    const doneN = CARDS.filter(c => st.done[c.id]).length;
-    $("progFill").style.width = Math.round(doneN / N * 100) + "%";
-    $("stepCt").textContent = st.step < N ? "Card " + (st.step + 1) + " of " + N : st.step === N ? "Results" : "Reflection";
-    const sc = firstTry();
-    $("streak").textContent = st.streak; $("score").textContent = sc + "/" + N;
+    const doneN = CARDS.filter(c => st.done[c.id]).length + STORY.filter(p => st.rpdone[p.id]).length;
+    $("progFill").style.width = Math.round(doneN / (N + R) * 100) + "%";
+    $("stepCt").textContent = inStory() ? "Part 1 · Page " + (st.read + 1) + " of " + R : st.step < N ? "Part 2 · Card " + (st.step + 1) + " of " + N : st.step === N ? "Results" : "Reflection";
+    const sc = firstTry() + readFirst();
+    $("streak").textContent = st.streak; $("score").textContent = sc + "/" + (N + R);
     if (lastStreak != null && st.streak > lastStreak) { const b = $("streakBox"); b.classList.remove("pop"); void b.offsetWidth; b.classList.add("pop"); }
     if (lastScore != null && sc > lastScore) { const b = $("scoreBox"); b.classList.remove("pop"); void b.offsetWidth; b.classList.add("pop"); }
     lastStreak = st.streak; lastScore = sc;
@@ -142,26 +228,144 @@
     app.innerHTML = `<section class="title-card">
       <p class="eyebrow">Sociology · Unit 3 · Day 1</p>
       <h1 class="big-title"><span class="tb">BORN THIS WAY</span><span class="tor">or</span><span class="tm">SOCIALIZATION?</span></h1>
-      <p class="hook">16 people. One question each. Were they born this way, or did people teach them?</p>
-      <div class="demo" aria-hidden="true"><span class="b born">🧬 Born this way</span><span class="arrow">←</span><span class="mini">🏈 Dre roots for the Hawkeyes…</span><span class="arrow">→</span><span class="b soc">🤝 Socialization</span></div>
-      <div class="title-tiles"><span>🃏 <b>16</b> quick cards</span><span>🔎 Prove every card</span><span>✍️ <b>1</b> reflection</span><span>⏱ <b>15</b> minutes</span></div>
+      <p class="hook">Three brothers. Same genes. Split up as babies, on purpose. Then you sort 16 more people.</p>
+      <div class="parts"><div class="part"><span class="pn">Part 1</span><b>📖 A true story</b><span>4 short pages about the triplets, 1 question each</span></div>
+        <div class="part"><span class="pn">Part 2</span><b>🃏 Sort the cards</b><span>16 people: <i class="tb">born this way</i> or <i class="tm">socialization</i>?</span></div></div>
+      <div class="title-tiles"><span>🔎 Prove every answer</span><span>✍️ <b>1</b> reflection</span><span>⏱ <b>25</b> minutes</span></div>
       <p class="goal"><b>Today's goal:</b> <span>Explain how people teach us who to be, from birth to adulthood.</span></p>
       <div class="title-start"><div class="namebox"><label for="nameBox">Your name: first name + last initial (like Jordan M.)</label>
         <input id="nameBox" maxlength="40" autocomplete="off" placeholder="First name + last initial (like Jordan M.)" value="${esc(pre)}"></div>
-        <button type="button" class="big" id="startBtn"><span>Deal the cards</span> →</button></div>
+        <button type="button" class="big" id="startBtn"><span>Start the story</span> →</button></div>
       <p id="introMsg" class="msg" role="status"></p>
       <p class="small-print"><b>SS.9-12.Soc.9</b> Describe the process of socialization across the life course.</p></section>`;
     $("startBtn").onclick = () => {
       const fixed = window.classShortName ? window.classShortName($("nameBox").value) : $("nameBox").value.trim();
       if (!/^\S+ \p{Lu}\.$/u.test(fixed)) { $("introMsg").textContent = "Type your first name and last initial, like Jordan M."; $("introMsg").className = "msg bad"; $("nameBox").focus(); return; }
-      st.name = fixed; st.step = 0; anim = true; save(); render(); toTop();
+      st.name = fixed; st.step = 0; st.read = 0; anim = true; save(); render(); toTop();
     };
+  }
+
+
+  // ---------------- Part 1: a story page ----------------
+  const shuffle = a => { const b = a.slice(); for (let i = b.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [b[i], b[j]] = [b[j], b[i]]; } return b; };
+  // New order each time, and never the same spot for the right answer twice in a row.
+  function mixChoices(p, avoid) {
+    let o; do { o = shuffle(p.choices.map((t, i) => i)); } while (avoid != null && o.indexOf(0) === avoid);
+    return o;
+  }
+  function readView() {
+    pickFn = null;
+    const p = STORY[st.read], i = p.img, last = st.read === R - 1;
+    app.innerHTML = `<section class="scene story">
+      <div class="rgrid">
+        <article class="book" aria-label="Story page ${st.read + 1} of ${R}">
+          <figure><img src="${i.src}" alt="${esc(i.title)}"><figcaption>${esc(i.title)}. Photo: ${esc(i.by)}, <a href="${i.page}" target="_blank" rel="noopener">${esc(i.lic)}</a>. A real place, not the brothers.</figcaption></figure>
+          <p class="bk">📖 True story · Page ${st.read + 1} of ${R} · ${esc(p.kicker)}</p>
+          <h2>${esc(p.title)}</h2>
+          <div class="btext" id="btext"><p>${p.s.map((x, k) => ((p.paras || []).includes(k) ? "</p><p>" : "") + `<span class="sn" data-i="${k}">${esc(x)}</span>`).join(" ")}</p></div>
+        </article>
+        <div class="rq">
+          <p class="rtag">Question ${st.read + 1} of ${R}</p>
+          <p class="rqq">${esc(p.q)}</p>
+          <div class="rchoices" id="rch"></div>
+          <p class="msg" id="rmsg" aria-live="polite"></p>
+          <div id="rafter"></div>
+        </div>
+      </div></section>`;
+    const fb = $("rmsg"), box = $("rch"), after = $("rafter"), text = $("btext");
+    let order = mixChoices(p), locked = false, plocked = false;
+    const drawChoices = off => {
+      box.innerHTML = order.map(k => `<button type="button" class="rc" data-k="${k}"${off ? " disabled" : ""}>${esc(p.choices[k])}</button>`).join("");
+      box.querySelectorAll(".rc").forEach(b => b.onclick = () => pick(+b.dataset.k));
+    };
+    const setOff = off => box.querySelectorAll(".rc").forEach(b => b.disabled = off);
+    const finish = () => {
+      text.classList.remove("proofing");
+      after.innerHTML = `<div class="rdone"><p class="rwhy">✓ ${esc(p.why)}</p>${nextBtn(last ? "Part 2: sort the cards" : "Next page")}</div>`;
+      fb.textContent = "";
+      $("nextBtn").onclick = () => { st.read = Math.min(st.read + 1, R); anim = true; save(); render(); toTop(); };
+    };
+    const proofStage = () => {
+      box.innerHTML = `<p class="rright">✓ ${esc(p.choices[0])}</p>`;
+      if (st.rpdone[p.id]) { const ok = text.querySelector(`.sn[data-i="${p.proof}"]`); if (ok) ok.classList.add("snok"); return finish(); }
+      text.classList.add("proofing");
+      after.innerHTML = `<p class="rproof">🔎 <b>Now prove it.</b> ${esc(p.proofAsk)}</p>`;
+      const sns = [...text.querySelectorAll(".sn")];
+      const tap = el => {
+        if (plocked || st.rpdone[p.id]) return;
+        if (+el.dataset.i === p.proof) {
+          st.rpdone[p.id] = true; el.classList.add("snok");
+          if (window.classFirstTry) window.classFirstTry.right(p.id + "~p");
+          save(); hud(); setTimeout(finish, isT() ? 0 : 350); return;
+        }
+        st.rpmiss[p.id] = (st.rpmiss[p.id] || 0) + 1; st.streak = 0;
+        if (window.classFirstTry) window.classFirstTry.wrong();
+        save(); hud();
+        el.classList.remove("evno"); void el.offsetWidth; el.classList.add("evno");
+        plocked = true; text.classList.add("plocked");
+        let left = isT() ? 0 : lockFor(st.rpmiss[p.id]);
+        const tick = () => {
+          if (st.read !== STORY.indexOf(p)) return;
+          if (left <= 0) { plocked = false; text.classList.remove("plocked"); fb.textContent = "Try again. " + p.proofHint; fb.className = "msg bad"; return; }
+          fb.textContent = "That sentence doesn't prove it. " + p.proofHint + " " + left + "…"; fb.className = "msg bad";
+          left--; setTimeout(tick, 1000);
+        };
+        tick();
+      };
+      sns.forEach(e => { e.setAttribute("role", "button"); e.tabIndex = 0; e.onclick = () => tap(e); e.onkeydown = ev => { if (ev.key === "Enter" || ev.key === " ") { ev.preventDefault(); tap(e); } }; });
+      solveFn = () => { plocked = false; tap(sns[p.proof]); };
+    };
+    const pick = k => {
+      if (locked || st.rdone[p.id]) return;
+      if (k === 0) {
+        st.rdone[p.id] = true; st.streak = st.rmiss[p.id] ? 0 : st.streak + 1;
+        if (window.classFirstTry) window.classFirstTry.right(p.id);
+        save(); hud(); fb.textContent = ""; proofStage(); return;
+      }
+      st.rmiss[p.id] = (st.rmiss[p.id] || 0) + 1; st.streak = 0;
+      if (window.classFirstTry) window.classFirstTry.wrong();
+      save(); hud();
+      locked = true; order = mixChoices(p, order.indexOf(0)); drawChoices(true);   // reshuffle, no red left behind
+      let left = isT() ? 0 : lockFor(st.rmiss[p.id]);
+      const tick = () => {
+        if (st.read !== STORY.indexOf(p)) return;
+        if (left <= 0) { locked = false; setOff(false); fb.textContent = "Try again. " + p.hint; fb.className = "msg bad"; return; }
+        fb.textContent = "Not quite. " + p.hint + " " + left + "…"; fb.className = "msg bad";
+        left--; setTimeout(tick, 1000);
+      };
+      tick();
+    };
+    solveFn = () => { locked = false; pick(0); };
+    if (st.rdone[p.id]) { proofStage(); fitStory(); return; }   // came back mid-page: finish the proof
+    drawChoices(!isT());
+    fitStory();
+    if (!isT()) {   // the page stays up long enough to read, even after a refresh
+      locked = true;
+      let left = readTime(p);
+      const tick = () => {
+        if (st.read !== STORY.indexOf(p) || st.rdone[p.id]) return;
+        if (left <= 0) { locked = false; setOff(false); fb.textContent = ""; return; }
+        fb.textContent = "Read the page. The answers open in " + left + "…"; fb.className = "msg";
+        left--; setTimeout(tick, 1000);
+      };
+      tick();
+    }
+  }
+  let solveFn = null;
+  // Story pages run a little taller than a card. If one doesn't fit the window, shrink it just enough (never below 70%).
+  function fitStory() {
+    fitZoom();
+    const sc = app.querySelector(".scene"); if (!sc) return;
+    const base = parseFloat($("wrap").style.zoom) || 1;
+    const need = (sc.getBoundingClientRect().height + 30) * 1 + ($("hud").getBoundingClientRect().height || 50);
+    const room = window.innerHeight / base;
+    if (need > room) { const z = String(Math.max(0.7, Math.round(base * room / need * 100) / 100)); $("wrap").style.zoom = z; }
   }
 
   // ---------------- A card ----------------
   function lastStrip() {
     const c = st.last && CARDS.find(x => x.id === st.last);
-    if (!c) return `<p class="last empty">Read the card. Tap the side it belongs on. Then prove it: tap the words that show it.</p>`;
+    if (!c) return `<p class="last empty"><b>Part 2.</b> Same question the study asked. Read the card, tap the side it belongs on, then tap the words that prove it.</p>`;
     return `<p class="last ${c.ans}" role="status"><span class="ltag">✓ ${esc(SIDES[c.ans].name)}</span><span>${esc(c.why)}</span></p>`;
   }
   function bucketHtml(side, off) {
@@ -256,7 +460,7 @@
     }
   }
   document.addEventListener("keydown", ev => {
-    if (st.step < 0 || st.step >= N || !pickFn) return;
+    if (st.step < 0 || inStory() || st.step >= N || !pickFn) return;
     if (/^(INPUT|TEXTAREA|SELECT)$/.test((ev.target && ev.target.tagName) || "")) return;
     if (ev.key === "ArrowLeft") { ev.preventDefault(); pickFn("born"); }
     else if (ev.key === "ArrowRight") { ev.preventDefault(); pickFn("soc"); }
@@ -307,8 +511,13 @@
   }
   function buildAnswers() {
     const a = { "Standard": STANDARD };
-    a["First-try correct"] = (firstTry() + proofFirst()) + " of " + (2 * N);
-    a["First-try by standard"] = "Soc.9: " + (firstTry() + proofFirst()) + " of " + (2 * N);
+    const all = firstTry() + proofFirst() + readFirst() + readProofFirst(), outOf = 2 * N + 2 * R;
+    a["First-try correct"] = all + " of " + outOf;
+    a["First-try by standard"] = "Soc.9: " + all + " of " + outOf;
+    a["First-try · Part 1 story questions"] = readFirst() + " of " + R;
+    a["First-try · Part 1 story prove-it taps"] = readProofFirst() + " of " + R;
+    STORY.forEach((p, i) => { const m = st.rmiss[p.id] || 0, pm = st.rpmiss[p.id] || 0;
+      a["Story " + (i + 1) + ". " + p.title] = (m ? "Answer after " + m + " wrong " + (m === 1 ? "try" : "tries") : "Answer first try") + "; " + (pm ? "proof after " + pm + " wrong " + (pm === 1 ? "tap" : "taps") : "proof first try"); });
     a["First-try · Prove-it taps"] = proofFirst() + " of " + N;
     const side = k => CARDS.filter(c => c.ans === k);
     a["First-try · Born this way cards"] = side("born").filter(c => !st.miss[c.id]).length + " of " + side("born").length;
@@ -343,6 +552,8 @@
     app.classList.toggle("anim", anim);
     try {
       if (st.step < 0) { pickFn = null; return intro(); }
+      if (st.read < R) return readView();
+      fitZoom();
       if (st.step < N) return cardView();
       if (st.step === N) return endView();
       return writeView();
@@ -356,7 +567,7 @@
     lastStreak = null; lastScore = null; locked = false; save(); render(); toTop();
   };
   if (st.step >= 0) {
-    $("welcome").innerHTML = `<span>${esc("Welcome back, " + st.name + " — you're on " + (st.step < N ? "card " + (st.step + 1) + " of " + N : st.step === N ? "the results" : "the reflection") + ".")}</span> <button type="button" class="notyou" id="notYouBtn">Not you? Start fresh</button>`;
+    $("welcome").innerHTML = `<span>${esc("Welcome back, " + st.name + " — you're on " + (inStory() ? "page " + (st.read + 1) + " of the story" : st.step < N ? "card " + (st.step + 1) + " of " + N : st.step === N ? "the results" : "the reflection") + ".")}</span> <button type="button" class="notyou" id="notYouBtn">Not you? Start fresh</button>`;
     $("welcome").hidden = false;
     try { history.scrollRestoration = "manual"; } catch (e) {}
     window.scrollTo(0, 0);
@@ -370,24 +581,30 @@
   }
   fitZoom();
   // Read-only test hook (lets automated tests see progress). Students never see it.
-  window.__sortGame = { get state() { return JSON.parse(JSON.stringify(st)); }, cards: CARDS.map(c => ({ id: c.id, ans: c.ans })) };
+  window.__sortGame = { get state() { return JSON.parse(JSON.stringify(st)); }, cards: CARDS.map(c => ({ id: c.id, ans: c.ans })), story: STORY.map(p => ({ id: p.id, proof: p.proof, right: p.choices[0] })) };
   render();
 
   // ---------------- Test T. skip bar (shared/turnin.js) ----------------
   try {
     (window.classTestHooks = window.classTestHooks || []).push({
-      count: () => TOTAL + 1,
-      index: () => st.step < 0 ? 0 : Math.min(st.step, TOTAL - 1) + 1,
-      label: i => i === 0 ? "Title" : i <= N ? "Card " + i + ": " + CARDS[i - 1].tag : i === N + 1 ? "Results (the two piles)" : "Reflection + turn in",
+      count: () => TOTAL + 1 + R,
+      index: () => st.step < 0 ? 0 : inStory() ? 1 + st.read : R + 1 + Math.min(st.step, TOTAL - 1),
+      label: i => i === 0 ? "Title" : i <= R ? "Story page " + i + ": " + STORY[i - 1].title : (i - R) <= N ? "Card " + (i - R) + ": " + CARDS[i - R - 1].tag : i - R === N + 1 ? "Results (the two piles)" : "Reflection + turn in",
       go: i => {
         if (!st.name) st.name = "Test T.";
-        const t = i - 1;
+        locked = false; anim = false;
+        if (i === 0) { st.step = -1; save(); render(); toTop(); return; }
+        if (i <= R) {
+          for (let j = 0; j < i - 1; j++) { st.rdone[STORY[j].id] = true; st.rpdone[STORY[j].id] = true; }
+          st.step = 0; st.read = i - 1; st.last = null; save(); render(); toTop(); return;
+        }
+        STORY.forEach(p => { st.rdone[p.id] = true; st.rpdone[p.id] = true; }); st.read = R;
+        const t = i - R - 1;
         for (let j = 0; j < t && j < N; j++) { st.done[CARDS[j].id] = true; st.pdone[CARDS[j].id] = true; }
         st.last = t > 0 && t <= N ? CARDS[Math.min(t, N) - 1].id : null;
-        locked = false; anim = false;
         st.step = t; save(); render(); toTop();
       },
-      solve: () => { if (st.step >= 0 && st.step < N && pickFn) { if (!st.done[CARDS[st.step].id]) locked = false; pickFn(CARDS[st.step].ans); } }
+      solve: () => { if (inStory()) { if (solveFn) solveFn(); return; } if (st.step >= 0 && st.step < N && pickFn) { if (!st.done[CARDS[st.step].id]) locked = false; pickFn(CARDS[st.step].ans); } }
     });
     if (window.classTestSkip) window.classTestSkip.refresh();
   } catch (e) {}
