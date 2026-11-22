@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Prices Gone Wild | U.S. History Unit 5 Day 1</title>
+<meta name="description" content="A real Federal Reserve comic about inflation, plus the 1970s problems that pushed voters toward conservatives.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../shared/graphic-reading.css?v=3">
+<style>
+.flip-layout{grid-template-columns:minmax(0,1.9fr) minmax(320px,1fr)}
+.flip-stage img{min-height:0;max-height:calc(100vh - 150px)}
+.qcol{padding-bottom:100px}
+.intro-line{font-size:1.02rem;margin:0 0 10px}
+.wordhelp{margin:6px 0 0}.wordhelp summary{cursor:pointer;font-weight:750;color:var(--navy)}
+.words{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0 10px;padding:0;list-style:none}
+.words li{background:#fff;border:1px solid #e6dcc8;border-left:4px solid var(--navy);border-radius:8px;padding:3px 9px;font-size:.88rem}
+.declass{display:block;background:#fff;border:2px dashed #18364a;border-radius:10px;padding:8px 11px;margin:6px 0 8px;font-weight:650;color:#22313b;line-height:1.4;font-style:normal}
+.declass > b:first-child{display:block;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#18364a;margin-bottom:2px}
+.declass .line{display:block;margin:3px 0}
+.declass .note{display:block;margin-top:5px;font-weight:600;font-size:.9rem;color:#5b4632}
+.dime{display:inline-block;background:#e6bd64;color:#0f2433;border-radius:999px;font-weight:850;padding:0 9px;margin-right:4px}
+.credits{font-size:.8rem;color:var(--muted);margin:10px 0 0;line-height:1.4}
+.pg-cap{margin:8px 2px 0;font-size:.95rem;line-height:1.35;background:#fff;border:1px solid #e6dcc8;border-left:4px solid #e6bd64;border-radius:8px;padding:6px 10px}.pg-cap:empty{display:none}
+.gr-head{padding-top:18px;padding-bottom:16px}.gr-head h1{margin:6px 0 6px}.gr-head .hook{margin-bottom:8px}
+body.reading-now .choices{opacity:.45;pointer-events:none}
+</style>
+<script src="../../shared/assignments.js?v=20261116m2"></script><script src="../../shared/turnin.js?v=20261116m2"></script></head><body>
+<header class="gr-head" data-years="1980">
+<div class="gr-wrap">
+<div class="kicker">U.S. History · Unit 5 Day 1 · Rise of Conservatism</div>
+<h1>Prices Gone Wild: Why Did Voters Change?</h1>
+<p class="hook"><span class="dime">1968–1980</span>Gas lines, prices that wouldn't stop climbing, a president who quit, and 52 Americans held hostage. Read a real Federal Reserve comic about inflation, then decide what pushed voters toward Ronald Reagan in 1980. 6 pages · 3 checks · 3 short answers. <b>About 20 minutes.</b></p>
+<p class="goal"><b>Today's goal:</b> Explain how protests, Watergate, stagflation, and the hostage crisis pushed many voters toward conservatives.</p>
+<details class="std-details"><summary>Iowa standards for today</summary>
+<p><b>Standard SS.9-12.US.46</b> — Assess the impact of social movements, including reactionary movements, in creating reform in the United States.</p><p><b>Standard SS.9-12.US.47</b> — Explain how American policies towards globalization impacted various economic growth, labor markets, the environment, and income distribution.</p><p><b>Standard SS.9-12.US.49</b> — Analyze diverse ideologies through primary and secondary sources, noting the impact on social, economic, and political institutions from the late 60s through 1990.</p>
+</details>
+<nav><a class="back" href="../../">← Class activities</a></nav>
+</div></header>
+
+<nav class="route" aria-label="Your progress"><ol id="flipRoute"></ol></nav>
+
+<main class="gr-main gr-wrap">
+<section class="card">
+<p class="intro-line"><b>You're the campaign analyst.</b> For each part: <b>read</b> the comic on the left → get the <b>check</b> right → read the <b>fact file</b> → write 1–2 sentences. Done = all parts green, then turn in at the bottom.</p>
+<details class="wordhelp"><summary>Word help (tap to open)</summary>
+<ul class="words" aria-label="Word help">
+<li><b>Inflation</b> = prices keep going up</li><li><b>Stagflation</b> = high prices + lots of people out of work, at the same time</li><li><b>Embargo</b> = a ban on trade</li><li><b>Conservative</b> = wants lower taxes, smaller government, a strong military, traditional values</li><li><b>Liberal</b> = wants government to do more to help people and set rules</li><li><b>Pension</b> = money a retired worker gets each month</li>
+</ul></details>
+<p class="welcome" id="welcome" role="status"></p>
+</section>
+
+<div class="flip-layout">
+<section class="flip-reader reading" id="flipReader" aria-label="Pages from the Federal Reserve comic The Story of Inflation">
+<div class="flip-bar"><div><p class="eyebrow">The reading</p><h2>A real Federal Reserve comic · 6 pages</h2></div><span class="flip-pos" id="flipPos"></span></div>
+<div class="flip-tools"><button type="button" class="quiet" id="flipBack">← Back a page</button><span class="grow"><span id="flipPart"></span><span id="flipTimer" aria-live="polite"></span></span><button type="button" class="secondary" id="flipNext">Next page →</button><button type="button" class="quiet" id="flipZoom">Make page bigger</button></div>
+<div class="flip-stage"><img id="flipImg" alt="" src="pages/p-01.jpg"></div>
+<p class="pg-cap" id="pgCap" aria-live="polite"></p>
+<p class="flip-cap">Click the page to make it bigger.</p>
+</section>
+
+<div class="qcol">
+<section class="card">
+<label for="studentName">First name + last initial (like Jordan M.)</label><input id="studentName" maxlength="100" autocomplete="off" placeholder="First name + last initial (like Jordan M.)" required>
+</section>
+<div id="flipCards"></div>
+<div class="flip-nav"><button type="button" class="quiet" id="flipBack2">← Back</button><button type="button" class="secondary" id="flipNext2">Next page →</button><p class="flip-why" id="flipWhy" aria-live="polite"></p></div>
+<section class="card finish" id="finish">
+<h2>Turn in your work</h2>
+<div class="actions"><button id="submitBtn" class="primary" type="button">Turn in answers</button></div><p id="submitStatus" class="status" role="status" aria-live="polite"></p><p class="reader-note">Your work saves on this device, so you can come back later. Your teacher sees it after you turn it in.</p>
+<p class="credits">Comic: <i>The Story of Inflation</i>, Federal Reserve Bank of New York, a free classroom comic (2006 edition; story by Ed Steinberg, revised by Steven Malin, art by Jesse Chen). Scan via the Internet Archive. Cropped to today's reading.</p>
+</section>
+<p class="credits" style="text-align:center"><button id="clearBtn" class="quiet" type="button" style="font-size:.8rem">Start over</button></p>
+</div></div></main>
+<div class="flip-big" id="flipBig" hidden role="dialog" aria-label="Bigger page"><button type="button" class="quiet" id="flipBigClose">✕ Close</button><img id="flipBigImg" alt="Bigger view of the current page"></div>
+<script>
+window.FLIP={
+title:"Pages from the Federal Reserve comic The Story of Inflation",prefix:"ush-u5d1-prices-comic-",pages:6,readSeconds:8,lockSeconds:8,
+alts:["Reader page 1. An angry crowd marches with signs: JUST SAY NO TO INFLATION, DOWN WITH INFLATION, BRING PRICES DOWN NOW, STOP INFLATION NOW. Boxes say: Inflation is very unpopular. But what is inflation? The dictionary defines inflation as a substantial and continuing rise in the general price level.", "Reader page 2. An oil tanker and an oil rig sit under a giant arrow pointing up. A box says: Of course, a large increase in the price of one item can sometimes lead to rapid inflation, that is, to a rapid increase in the general price level. For example, a very rapid rise of oil prices could lead to a rise in the general price level, because oil plays a key role throughout our economy.", "Reader page 3. On a city street, a landlord says: I have to raise rents because higher oil prices make it more expensive to heat my buildings. A chef says: My distributor charges me more for fruit now because transportation costs have gone up, so I have to raise my prices, too.", "Reader page 4. Protesters hold signs. A box asks: What's wrong with inflation anyway? After all, if prices go up, people who sell things will receive more dollars than they did before. That means that incomes go up too. A box answers: Not everyone's income goes up as much as prices do. People whose incomes rise less than prices, or don't rise at all, are hurt by inflation. A worker holding his new paycheck says: I got a 3% raise, but with prices up more than 5%, I'm worse off than I was before. Price tags change from $200 to $210 and $1,000 to $1,050.", "Reader page 5. A box says: Among those hurt by inflation are lenders who charge interest rates that are lower than the rate of inflation. A lender at his desk says: It now costs $110 to buy what the $100 I lent you last year could buy then, but you're paying me back only $105. A box says: Many retired people are hurt by inflation because their pensions don't keep up with increases in the price level. A retired man on his porch says: I remember the good old days when my pension allowed me to enjoy a few luxuries, like an occasional movie.", "Reader page 6. A box says: In the 1970s and early 1980s, inflation was often very rapid, even reaching double-digit annual rates. A bar chart, Percent Change in CPI 1970 to 1982, shows how much prices rose each year: about 6% in 1970, 4% in 1971, 3% in 1972, 6% in 1973, 11% in 1974, 9% in 1975, 6% in 1976, 6.5% in 1977, 7.5% in 1978, 11% in 1979, 13.5% in 1980, 10% in 1981, and 6% in 1982."],
+assignmentId:"ush-u5-d1-prices-comic",api:"https://fynn-class-assignment-submissions-20261024.neotboy.chatgpt.site/api/submit",
+lockedText:"This box opens when you get the check right.",
+clearConfirm:"Start over? This clears your checks and answers on this device.",
+successText:"Turned in! Your teacher got your 3 checks and 3 answers. You are done.",
+wrongText:(c,left)=>left>0?"Not quite. "+c.hint+" Try again in "+left+"…":"Not quite. "+c.hint+" The choices were mixed up. Try again.",
+parts:[
+{
+"short": "Oil",
+"ref": "Reader pages 1–3",
+"title": "1. When oil prices jump",
+"from": 1,
+"to": 3,
+"check": {
+"page": 2,
+"tag": "Reading check · Reader page 2",
+"q": "Read the box at the top. What does the comic say a very fast rise in oil prices can lead to?",
+"right": "Higher prices on almost everything",
+"wrong": [
+"Lower prices at most stores",
+"More jobs in every factory",
+"Cheaper gas for most drivers"
+],
+"why": "✓ Correct. Oil heats buildings and moves trucks, so when oil jumps, almost every price climbs.",
+"hint": "Read the end of the box: oil plays a key role in what?"
+},
+"prompt": "Prices and gas lines made people angry. Why did that help conservatives who wanted a smaller government?",
+"stem": "<span class=\"declass\"><b>Fact file</b><span class=\"line\">In <b>October 1973</b>, Arab oil countries stopped selling oil to the U.S. That <b>embargo</b> made gas prices jump, and drivers waited in long lines. A second oil shock hit in <b>1979</b>.</span><span class=\"line\">Since FDR's New Deal and LBJ's Great Society, the federal government had grown a lot.</span><span class=\"line\">Conservatives like <b>Barry Goldwater</b> (1964) and <b>Ronald Reagan</b> said big government and high taxes were making things worse.</span></span>Write 1–2 sentences. Start like this: <i>When prices and gas lines got worse, conservatives said ___.</i>",
+"stemText": "When prices and gas lines got worse, conservatives said ___.",
+"placeholder": "When prices and gas lines got worse, conservatives said ___."
+},
+{
+"short": "Who's hurt",
+"ref": "Reader pages 4–5",
+"title": "2. Stagflation",
+"from": 4,
+"to": 5,
+"check": {
+"page": 4,
+"tag": "Reading check · Reader page 4",
+"q": "The worker with the new paycheck got a 3% raise. Why is he worse off?",
+"right": "Prices went up more than his raise",
+"wrong": [
+"His boss cut his pay that month",
+"He lost his job that same week",
+"His taxes took his whole raise"
+],
+"why": "✓ Correct. If your pay goes up 3% but prices go up 5%, your money buys less than before.",
+"hint": "Read the worker's speech bubble. Compare the two numbers."
+},
+"prompt": "What was stagflation, and why did many voters blame President Carter?",
+"stem": "<span class=\"declass\"><b>Fact file</b><span class=\"line\">In the 1970s, prices kept rising <b>and</b> many people lost their jobs. That mix got a new name: <b>stagflation</b>.</span><span class=\"line\">By <b>1980</b>, prices were rising about <b>13.5%</b> a year, and about <b>7%</b> of workers couldn't find jobs.</span><span class=\"line\">President <b>Jimmy Carter</b>, a Democrat, couldn't fix it. In a 1979 TV speech, he said America faced a \"crisis of confidence.\" Many voters felt blamed.</span></span>Write 1–2 sentences. Start like this: <i>Stagflation means ___. Voters blamed Carter because ___.</i>",
+"stemText": "Stagflation means ___. Voters blamed Carter because ___.",
+"placeholder": "Stagflation means ___. Voters blamed Carter because ___."
+},
+{
+"short": "1980",
+"ref": "Reader page 6",
+"title": "3. Read the chart, then decide",
+"from": 6,
+"to": 6,
+"check": {
+"page": 6,
+"tag": "Reading check · Reader page 6",
+"q": "Look at the chart. Which year had the biggest jump in prices?",
+"right": "1980",
+"wrong": [
+"1972",
+"1976",
+"1982"
+],
+"why": "✓ Correct. Prices rose about 13.5% in 1980, the tallest bar. That was election year.",
+"hint": "Find the tallest bar, then read the year under it."
+},
+"prompt": "Which 1970s problem pushed the most voters toward conservatives? Why?",
+"stem": "<span class=\"declass\"><b>Fact file</b><span class=\"line\"><b>Protests and crime:</b> in 1968, Richard Nixon promised \"law and order\" and spoke for the \"<b>silent majority</b>\" who didn't protest.</span><span class=\"line\"><b>Watergate:</b> Nixon covered up a break-in and <b>resigned in 1974</b>. Many Americans stopped trusting government. <b>Hostages:</b> Iranian students held <b>52 Americans</b> for <b>444 days</b>, 1979–1981.</span><span class=\"line\">In 1980, Reagan asked voters, \"<b>Are you better off than you were four years ago?</b>\" He won <b>44 states</b>.</span></span>Write 1–2 sentences. Start like this: <i>___ pushed voters toward conservatives because ___.</i>",
+"stemText": "___ pushed voters toward conservatives because ___.",
+"placeholder": "___ pushed voters toward conservatives because ___."
+}
+],
+questions:["Prices and gas lines made people angry. Why did that help conservatives who wanted a smaller government?", "What was stagflation, and why did many voters blame President Carter?", "Which 1970s problem pushed the most voters toward conservatives? Why?"],
+validate(s){if(!s.name)return{text:"Type your first name + last initial (like Jordan M.) at the top of the questions.",focus:"studentName"};
+ const mc=[1, 2, 3].find(i=>!s.checkDone(i));if(mc)return{text:"Get the check right for part "+mc+" first.",part:mc};
+ const ma=[1, 2, 3].find(i=>!s.answer(i));if(ma)return{text:"Write your answer for part "+ma+" before turning in.",part:ma,focus:"answer"+ma};
+ for(const i of [1, 2, 3]){const j=window.classJunkStop&&window.classJunkStop(document.getElementById("answer"+i));if(j)return{text:"Part "+i+": "+j,part:i}}return null},
+buildAnswers(s){const a={Standard:"SS.9-12.US.46, SS.9-12.US.47, SS.9-12.US.49","First-try correct":[1, 2, 3].filter(i=>(s.tries(i)||1)===1).length+" of 3"};
+ this.questions.forEach((q,i)=>a[q]=s.answer(i+1));a["Reading checks"]="3 of 3 correct · tries: "+[1, 2, 3].map(i=>s.tries(i)||1).join(", ");return a}
+};
+</script>
+<script src="../../shared/flip-reader.js?v=5urls"></script>
+<script>
+// One-line "what's going on" caption under each page, for kids who missed the lecture.
+(function(){const caps=["<b>Inflation</b> = prices keep going up, on almost everything.", "<b>Why oil matters.</b> Top box: \"A very rapid rise of oil prices could lead to a rise in the general price level, because oil plays a key role throughout our economy.\"", "<b>The chain reaction.</b> Higher oil prices spread to rent and food.", "<b>Who gets hurt?</b> The worker with the paycheck: \"I got a 3% raise, but with prices up more than 5%, I'm worse off than I was before.\"", "<b>Who else gets hurt?</b> Lenders and retired people.", "<b>The real numbers.</b> How fast prices rose each year, 1970–1982."];
+ const pos=document.getElementById("flipPos"),cap=document.getElementById("pgCap");
+ const sync=()=>{const m=pos.textContent.match(/page (\d+)/);cap.innerHTML=m?caps[+m[1]-1]||"":""};
+ new MutationObserver(sync).observe(pos,{childList:true,characterData:true,subtree:true});sync();})();
+// Choices wait for the read timer, and "Not quite" scrolls into view (same as the other readings).
+(function(){
+  document.addEventListener("click",e=>{const b=e.target.closest("#flipNext2");if(!b||!/Next part|Turn in/.test(b.textContent))return;
+    const a=document.querySelector(".flip-part:not([hidden]) textarea:not([disabled])");if(!a||!a.value.trim()||!window.classJunkStop)return;
+    if(window.classJunkStop(a)){e.stopImmediatePropagation();e.preventDefault()}},true);
+  const t=document.getElementById("flipTimer");
+  const sync=()=>document.body.classList.toggle("reading-now",t.textContent.trim()!=="");
+  new MutationObserver(sync).observe(t,{childList:true,characterData:true,subtree:true});sync();
+  document.getElementById("flipCards").addEventListener("click",e=>{if(!e.target.closest(".choice"))return;
+    setTimeout(()=>{const f=[...document.querySelectorAll(".flip-part:not([hidden]) .fb")].find(x=>x.textContent.trim());
+      if(f){const r=f.getBoundingClientRect();if(r.bottom>innerHeight-80||r.top<0)f.scrollIntoView({behavior:"smooth",block:"center"})}},120)});
+})();
+</script>
+</body></html>
