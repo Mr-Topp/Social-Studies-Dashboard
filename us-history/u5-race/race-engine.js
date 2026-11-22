@@ -246,8 +246,8 @@
       ${p.id === "credit" && C.credit ? (() => { const t = credits(), srt = C.credit.who.slice().sort((a, b) => t[b.id] - t[a.id]), tie = t[srt[0].id] === t[srt[1].id]; return `<p class="sub">⭐ ${tie ? "Your stars are split" : "Your stars went mostly to <b>" + esc(srt[0].n) + "</b>"} (${C.credit.who.map(w => esc(w.n) + " " + t[w.id]).join(" · ")}). Back up your pick, or change your mind.</p>`; })() : ""}
       <div class="write"><p class="prompt" style="font-size:1.15rem">${esc(p.label)}</p><p class="stem">Start like this: <i>${esc(p.stem)}</i> <button type="button" class="mini" id="stemBtn">Use the sentence starter</button></p>
       <textarea id="w_${p.id}" rows="3" placeholder="1–2 full sentences…">${esc(st.writing[p.id] || "")}</textarea></div>
-      ${last ? `<button type="button" class="go" id="sendBtn">${sent ? "Turn in again" : "Turn in ▶"}</button>` : `<button type="button" class="go" id="wNext">Next →</button>`}
-      <p id="sendMsg" class="msg" role="status" aria-live="polite">${last && sent ? "✓ Turned in. You can fix your answers and turn in again." : ""}</p></div>`);
+      ${last ? `<button type="button" class="go" id="sendBtn"${sent ? " disabled" : ""}>${sent ? "✓ Turned in" : "Turn in ▶"}</button>` : `<button type="button" class="go" id="wNext">Next →</button>`}
+      <p id="sendMsg" class="msg${last && sent ? " good" : ""}" role="status" aria-live="polite">${last && sent ? "✓ Turned in. Your teacher can see your work." : ""}</p></div>`);   // Students never redo formatives (Fynn, 11-05): no "turn in again"
     const box = $("w_" + p.id);
     box.addEventListener("input", () => { st.writing[p.id] = box.value; save(); });
     $("stemBtn").onclick = () => { if (!box.value.trim()) { box.value = p.stem; st.writing[p.id] = box.value; save(); } box.focus(); const i = box.value.indexOf("___"); if (i >= 0) box.setSelectionRange(i, i + 3); };
@@ -258,6 +258,7 @@
   const plain = s => String(s || "").normalize("NFD").replace(/[\u0300-\u036f]/g, "").toLowerCase();
   async function send() {
     const msg = $("sendMsg");
+    if (st.turnedIn && !TT()) { const b = $("sendBtn"); if (b) b.disabled = true; return; }   // already turned in: one turn-in per student
     const notDone = CHECKS.find(c => !st.done[c.id]);
     if (notDone && !TT()) { msg.textContent = "Finish every quick check first (use Back to find it)."; msg.className = "msg bad"; return; }
     for (const p of C.prompts) {
@@ -312,7 +313,7 @@
   }
   $("restartBtn").onclick = () => {
     if (!confirm("Start over? This clears your work on this device.")) return;
-    const name = st.name; st = fresh(); st.name = name; st.step = name ? 0 : -1; save(); render(); window.scrollTo(0, 0);
+    const name = st.name, wasIn = st.turnedIn; st = fresh(); st.name = name; st.turnedIn = wasIn; st.step = name ? 0 : -1; save(); render(); window.scrollTo(0, 0);   // Start over never re-opens turning in
   };
   if (st.step >= 0 && st.name) {
     const w = $("welcome");
