@@ -1101,6 +1101,8 @@ return isEs() ? "Agrega la inicial de tu apellido. Ejemplo: Jordan M." : "Add yo
         ".start-over-zone[hidden]{display:none}.start-over-zone p{margin:0 0 6px}.start-over-zone .start-over-btn{all:unset;cursor:pointer;color:#7a2b26;text-decoration:underline;font-weight:700;font-size:14px;padding:6px 10px;border-radius:6px}" +
         ".start-over-zone .start-over-btn[hidden]{display:none}.start-over-zone .start-over-btn:focus-visible{outline:3px solid #2b6cb0}.start-over-zone .start-over-btn:hover{background:#f3e6e3}" +
         ".start-over-zone.fixed{position:fixed;left:10px;bottom:10px;z-index:9989;margin:0;padding:4px 8px;border:1px solid #d8cdb8;border-radius:8px;background:#fffdf8e6;max-width:none}.start-over-zone.fixed p{display:none}" +
+        // On full-screen pages the "Working as…" pill sits in the same corner: lift Start over above it so they never overlap.
+        "body:has(#siteNotYou.snu-pill) .start-over-zone.fixed{bottom:60px}" +
         "@media print{.start-over-zone{display:none}}";
       document.head.appendChild(css);
       zone = document.createElement("div");
