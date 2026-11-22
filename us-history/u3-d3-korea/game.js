@@ -5,8 +5,8 @@
 //  containment, Inchon, China enters, stalemate, MacArthur fired, armistice).
 //  You are a made-up war reporter. Each round: an event happens (cause) → you pick what it caused →
 //  on 3 rounds you prove it with the right real source (corroboration, US.35 / US.40).
-//  Rival: MacArthur's press office slips you spin ("home by Christmas"). Printing spin costs credibility.
-//  One meter: Credibility. The map's front line moves as your chain grows.
+//  Rival: MacArthur's press office slips you spin ("home by Christmas"). Printing spin gets flagged by your editor.
+//  Credibility is tracked for the teacher only (no meter or number on screen). The map's front line moves as your chain grows.
 //  Ends with your front-page chain (no score or rank shown), the real cost, and 2 short answers.
 //  The ending, misses and credibility still go to the teacher in the turn-in data.
 //  Turn-in: shared/turnin.js classTurnIn, same payload shape as before. Test T. can skip everything.
@@ -178,8 +178,9 @@
     if (signedIn && st.name && signedIn.toLowerCase() !== st.name.toLowerCase()) st = fresh();
   } catch (e) {}
   const save = () => { try { localStorage.setItem(KEY, JSON.stringify(st)); } catch (e) {} };
-  let mapFrom = null, popCred = 0, justLinked = false;
-  function cred(n) { st.cred = Math.max(0, Math.min(10, st.cred + n)); popCred = n; }
+  let mapFrom = null, justLinked = false;
+  // Credibility goes to the teacher in the turn-in data only. Students never see it.
+  function cred(n) { st.cred = Math.max(0, Math.min(10, st.cred + n)); }
 
   // ---------- HUD ----------
   function hud() {
@@ -191,17 +192,8 @@
     $("calMo").textContent = d.length > 1 ? d[0] : "—"; $("calYr").textContent = d[d.length - 1];
     $("stepText").textContent = "Step " + Math.min(st.step, STEPS) + " of " + STEPS;
     $("stepFill").style.width = Math.round(Math.min(st.step, STEPS) / STEPS * 100) + "%";
-    $("mCred").style.width = st.cred * 10 + "%"; $("nCred").textContent = st.cred + "/10";
-    $("credFace").textContent = st.cred >= 8 ? "😎" : st.cred >= 5 ? "🙂" : "😬";
-    $("nLinks").textContent = st.links + "/" + ROUNDS.length;
     $("pressMood").textContent = st.misses.some(m => m.spin) ? "fooled you" : "spinning";
     document.documentElement.style.setProperty("--hudH", $("hud").offsetHeight + "px");
-    if (popCred) {
-      const el = $("hudCred"), p = document.createElement("span");
-      p.className = "pop " + (popCred > 0 ? "good" : "bad"); p.textContent = (popCred > 0 ? "+" : "−") + Math.abs(popCred) + " 📰"; p.setAttribute("aria-hidden", "true");
-      el.appendChild(p); el.classList.remove("bump"); void el.offsetWidth; el.classList.add("bump"); setTimeout(() => p.remove(), 2000);
-      popCred = 0;
-    }
   }
 
   // ---------- pieces ----------
@@ -278,7 +270,7 @@
           const spin = n === r.spin;
           cred(spin ? -2 : -1);
           st.misses.push({ label: (spin ? "Printed the press office's spin: “" : "Wrong link: “") + r.effects[n] + "”", n: spin ? -2 : -1, spin });
-          return spin ? `<span class="spinwarn">📣 That was MacArthur's spin. −2 credibility. Run a correction.</span><br>` : "";
+          return spin ? `<span class="spinwarn">🧑‍💼 Your editor flags the story: that was MacArthur's spin, not what happened. Run a correction.</span><br>` : "";
         },
         r.hint, t => `<span class="r-ico" aria-hidden="true">➡️</span><span class="r-t">${esc(t)}</span>`);
       return;

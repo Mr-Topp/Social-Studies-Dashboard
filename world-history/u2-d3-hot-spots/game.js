@@ -6,8 +6,10 @@
 //   2. what local groups AND superpowers each wanted (WH.37) → 4 "Whose goal?" source proofs
 //      + propaganda from BOTH sides (Chinese radio, North Korean radio, MacArthur's press office)
 //   3. locate other hot spots on a map (WH.34) → Hot Spot Radar (Cuba, Vietnam, Afghanistan + Berlin)
-//  One meter: Credibility. The Korea map's front line moves as the chain grows.
-//  Ends with the front page, "Caused by" misses, the real cost, and 2 short answers.
+//  Credibility is tracked for the teacher only (no meter, number or rank on screen). Printing propaganda
+//  gets flagged by your editor. The Korea map's front line moves as the chain grows.
+//  Ends with a neutral front page (the chain, no score or rank), the real cost, and 2 short answers.
+//  The ending, misses and credibility still go to the teacher in the turn-in data.
 //  Same assignmentId as the old Hot Seat. Turn-in: shared/turnin.js classTurnIn. Test T. can skip everything.
 // =====================================================================
 (function () {
@@ -211,8 +213,9 @@
     if (signedIn && st.name && signedIn.toLowerCase() !== st.name.toLowerCase()) st = fresh();
   } catch (e) {}
   const save = () => { try { localStorage.setItem(KEY, JSON.stringify(st)); } catch (e) {} };
-  let mapFrom = null, popCred = 0, justLinked = false;
-  function cred(n) { st.cred = Math.max(0, Math.min(10, st.cred + n)); popCred = n; }
+  let mapFrom = null, justLinked = false;
+  // Credibility goes to the teacher in the turn-in data only. Students never see it.
+  function cred(n) { st.cred = Math.max(0, Math.min(10, st.cred + n)); }
 
   // ---------- HUD ----------
   function hud() {
@@ -224,17 +227,8 @@
     $("calMo").textContent = d.length > 1 ? d[0] : "—"; $("calYr").textContent = d[d.length - 1];
     $("stepText").textContent = "Step " + Math.min(st.step, STEPS) + " of " + STEPS;
     $("stepFill").style.width = Math.round(Math.min(st.step, STEPS) / STEPS * 100) + "%";
-    $("mCred").style.width = st.cred * 10 + "%"; $("nCred").textContent = st.cred + "/10";
-    $("credFace").textContent = st.cred >= 8 ? "😎" : st.cred >= 5 ? "🙂" : "😬";
-    $("nLinks").textContent = st.links + "/" + ROUNDS.length;
     $("pressMood").textContent = st.misses.some(m => m.spin) ? "fooled you" : "spinning";
     document.documentElement.style.setProperty("--hudH", $("hud").offsetHeight + "px");
-    if (popCred) {
-      const el = $("hudCred"), p = document.createElement("span");
-      p.className = "pop " + (popCred > 0 ? "good" : "bad"); p.textContent = (popCred > 0 ? "+" : "−") + Math.abs(popCred) + " 📰"; p.setAttribute("aria-hidden", "true");
-      el.appendChild(p); el.classList.remove("bump"); void el.offsetWidth; el.classList.add("bump"); setTimeout(() => p.remove(), 2000);
-      popCred = 0;
-    }
   }
 
   // ---------- pieces ----------
@@ -313,7 +307,7 @@
           cred(spin ? -2 : -1);
           const desk = WHO[r.spinBy || "press"][1];
           st.misses.push({ label: (spin ? "Printed propaganda from " + desk + ": “" : "Wrong link: “") + r.effects[n] + "”", n: spin ? -2 : -1, spin });
-          return spin ? `<span class="spinwarn">📣 That was propaganda from ${esc(desk)}. −2 credibility. Run a correction.</span><br>` : "";
+          return spin ? `<span class="spinwarn">🧑‍💼 Your editor flags the story: that was the propaganda line from ${esc(desk)}. Run a correction.</span><br>` : "";
         },
         r.hint, t => `<span class="r-ico" aria-hidden="true">➡️</span><span class="r-t">${esc(t)}</span>`);
       return;
@@ -433,6 +427,7 @@
   }
 
   // ---------- ending ----------
+  // ENDINGS / endKey go to the teacher in the turn-in data only. The student's front page shows no rank.
   const ENDINGS = {
     legend: { e: "🏆", t: "Front-Page Legend", text: "Your chain is solid, you knew what every side wanted, and no propaganda got past you. Readers around the world trust you." },
     solid: { e: "📰", t: "Solid Reporter", text: "You got the story right in the end, but a few wrong links or bits of propaganda made it into print." },
@@ -440,14 +435,10 @@
   };
   const endKey = () => st.cred >= 9 ? "legend" : st.cred >= 6 ? "solid" : "spun";
   function endingScreen(app) {
-    const E = ENDINGS[endKey()];
-    const misses = st.misses.length ? st.misses.map(m => `<li><span>${esc(m.label)}</span><span class="tag down">📰 ${m.n} credibility</span></li>`).join("") : `<li><span>No misses. Every link was right the first time.</span></li>`;
     const body = `<div class="front"><p class="masthead" aria-hidden="true">THE WORLD DISPATCH · KOREA 1950–1953</p>
-        <div class="headline"><span class="e-big" aria-hidden="true">${E.e}</span><h3>${esc(E.t)}</h3></div>
-        <p>${esc(E.text)}</p>
-        <div class="finalm"><span>📰 Credibility <b>${st.cred}/10</b></span><span>🔗 Links <b>${st.links}/${ROUNDS.length}</b></span></div>
-        ${chainHtml(ROUNDS.length)}
-        <h4 class="cb">Caused by:</h4><ul class="trail">${misses}</ul></div>
+        <div class="headline"><span class="e-big" aria-hidden="true">📰</span><h3>${esc("Korea's Hot War, Start to Finish")}</h3></div>
+        <p>${esc("You reported the whole war as one chain: Korea split into two rival halves, the North invaded, the UN defended the South, MacArthur landed at Inchon, China attacked, the war got stuck in a stalemate, Truman fired MacArthur, and an armistice stopped the shooting. Then you tracked the Cold War to more hot spots: Cuba, Vietnam, Afghanistan, and Berlin.")}</p>
+        ${chainHtml(ROUNDS.length)}</div>
       <div class="memorial"><p class="m-h">THE REAL COST</p>
         <p>🕯️ Millions of Koreans died, many of them civilians.</p><p>🕯️ Hundreds of thousands of Chinese soldiers died.</p>
         <p>🕯️ About 36,500 Americans died, plus soldiers from Britain, Turkey, and other UN countries.</p>

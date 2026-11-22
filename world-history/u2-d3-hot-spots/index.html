@@ -12,7 +12,7 @@ button:focus-visible,input:focus-visible,textarea:focus-visible,a:focus-visible{
 
 /* ---------- HUD ---------- */
 .hud{position:sticky;top:0;z-index:30;background:linear-gradient(#f6eed3,#ece1bd);border-bottom:4px solid var(--red);box-shadow:0 4px 14px #0005;padding:6px max(10px,calc((100vw - 1060px)/2)) 4px}
-.hud-in{display:grid;grid-template-columns:auto 1fr 1fr 1.2fr;gap:8px;align-items:stretch}
+.hud-in{display:grid;grid-template-columns:auto 1fr;gap:8px;align-items:stretch}
 .cal{background:#fff;border:2px solid var(--navy);border-radius:10px;text-align:center;min-width:64px;overflow:hidden;display:flex;flex-direction:column}
 .cal span{background:var(--red);color:#fff;font-weight:900;font-size:.8rem;letter-spacing:.08em;padding:1px 6px}
 .cal b{font-size:1.05rem;padding:2px 6px;color:var(--navy)}
@@ -193,7 +193,7 @@ h1{font-family:"Arial Black","Segoe UI Black",Impact,system-ui,sans-serif;font-s
 @media(max-width:1000px){.cards.n3{grid-template-columns:1fr}.cards.n3 .dcard{flex-direction:row;flex-wrap:wrap;text-align:left;justify-content:flex-start;padding:10px 12px}.cards.n3 .d-ico{font-size:2.2rem}.cards.n3 .d-t{flex:1;min-width:150px}.cards.n3 .d-chips{flex-direction:row;flex-wrap:wrap}}
 @media(max-width:760px){
   .hud{padding:5px 6px 3px}
-  .hud-in{grid-template-columns:1fr 1fr 1fr;gap:5px}
+  .hud-in{grid-template-columns:1fr;gap:5px}
   .cal{display:none}
   .lf{display:none}.ls{display:inline}.mt{padding:3px 5px;gap:4px}.mt-face{font-size:1.15rem}.lab{font-size:.6rem}.mt b{font-size:.78rem}
   .board{grid-template-columns:118px 1fr;gap:10px;padding:10px 10px 14px}
@@ -319,8 +319,6 @@ button.pin.shake{animation:pshake .45s}
 <div class="hud" id="hud" hidden aria-label="Game board">
   <div class="hud-in">
     <div class="cal" aria-label="Date"><span id="calMo">JUN</span><b id="calYr">1950</b></div>
-    <div class="mt" id="hudCred"><div class="mt-face" aria-hidden="true"><span>📰</span><i id="credFace">🙂</i></div><div class="mt-r"><span class="lab"><span class="lf">Your credibility</span><span class="ls">Credibility</span></span><div class="trk"><span id="mCred"></span></div><b id="nCred">10/10</b></div></div>
-    <div class="mt" id="hudLinks"><div class="mt-face" aria-hidden="true"><span>🔗</span></div><div class="mt-r"><span class="lab">Chain links</span><b id="nLinks" class="big">0/7</b></div></div>
     <div class="mt rival" id="hudPress"><div class="mt-face" aria-hidden="true"><span>📣</span></div><div class="mt-r"><span class="lab"><span class="lf">Propaganda desks: </span><span id="pressMood">spinning</span></span></div></div>
   </div>
   <div class="hud-step"><span id="stepText">Step 1 of 10</span><div class="sbar" aria-hidden="true"><span id="stepFill"></span></div></div>
@@ -330,5 +328,5 @@ button.pin.shake{animation:pshake .45s}
   <div id="app"></div>
   <div class="foot"><span>Progress saves on this device.</span><button type="button" id="restartBtn">Start over</button></div>
 </main>
-<script src="game.js?v=20261121even"></script>
+<script src="game.js?v=20261121nomtr"></script>
 </body></html>
