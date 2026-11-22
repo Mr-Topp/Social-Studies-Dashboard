@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Who Got the Promise? | U.S. History Part 1 · Unit 1 Day 1</title>
+<meta name="description" content="Read a 1953 U.S. government comic about 1776, then check who the Declaration&#x27;s promise left out.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../shared/graphic-reading.css?v=3">
+<style>
+.flip-layout{grid-template-columns:minmax(0,1.9fr) minmax(320px,1fr)}
+.flip-stage img{min-height:0;max-height:calc(100vh - 150px)}
+.qcol{padding-bottom:100px}
+.intro-line{font-size:1.02rem;margin:0 0 10px}
+.wordhelp{margin:6px 0 0}.wordhelp summary{cursor:pointer;font-weight:750;color:var(--navy)}
+.words{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0 10px;padding:0;list-style:none}
+.words li{background:#fff;border:1px solid #e6dcc8;border-left:4px solid var(--navy);border-radius:8px;padding:3px 9px;font-size:.88rem}
+.declass{display:block;background:#fff;border:2px dashed #18364a;border-radius:10px;padding:8px 11px;margin:6px 0 8px;font-weight:650;color:#22313b;line-height:1.4;font-style:normal}
+.declass > b:first-child{display:block;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#18364a;margin-bottom:2px}
+.declass .line{display:block;margin:3px 0}
+.declass .note{display:block;margin-top:5px;font-weight:600;font-size:.9rem;color:#5b4632}
+.dime{display:inline-block;background:#e6bd64;color:#0f2433;border-radius:999px;font-weight:850;padding:0 9px;margin-right:4px}
+.credits{font-size:.8rem;color:var(--muted);margin:10px 0 0;line-height:1.4}
+.pg-cap{margin:8px 2px 0;font-size:.95rem;line-height:1.35;background:#fff;border:1px solid #e6dcc8;border-left:4px solid #e6bd64;border-radius:8px;padding:6px 10px}.pg-cap:empty{display:none}
+.gr-head{padding-top:18px;padding-bottom:16px}.gr-head h1{margin:6px 0 6px}.gr-head .hook{margin-bottom:8px}
+body.reading-now .choices{opacity:.45;pointer-events:none}
+</style>
+<script src="../../shared/assignments.js?v=20261116m2"></script><script src="../../shared/turnin.js?v=20261116m2"></script></head><body>
+<header class="gr-head" data-years="1776">
+<div class="gr-wrap">
+<div class="kicker">U.S. History · Part 1 · Unit 1 Day 1 · Founding &amp; Citizenship</div>
+<h1>Who Got the Promise?</h1>
+<p class="hook"><span class="dime">1953</span>The U.S. government made this comic to tell America's story to the world. Here's its version of 1776. Read it, then check who it leaves out. 4 pages · 4 checks · 4 short answers. <b>About 25 minutes.</b></p>
+<p class="goal"><b>Today's goal:</b> Explain why the colonists broke away in 1776 and who the Declaration's promise really included.</p>
+<details class="std-details"><summary>Iowa standards for today</summary>
+<p><b>Standard SS.9-12.US.2</b> — Analyze diverse ideologies through primary and secondary sources, noting the impact on social, economic, and political institutions.</p><p><b>Standard SS.9-12.US.1</b> — Analyze change, continuity, and context of American citizenship from 1776 to 1870.</p>
+</details>
+<nav><a class="back" href="../../">← Class activities</a></nav>
+</div></header>
+
+<nav class="route" aria-label="Your progress"><ol id="flipRoute"></ol></nav>
+
+<main class="gr-main gr-wrap">
+<section class="card">
+<p class="intro-line"><b>You're the fact-checker.</b> For each part: <b>read</b> the comic on the left → get the <b>check</b> right → read the <b>fact file</b> → write 1–2 sentences. Done = all parts green, then turn in at the bottom.</p>
+<details class="wordhelp"><summary>Word help (tap to open)</summary>
+<ul class="words" aria-label="Word help">
+<li><b>Tax</b> = money the government makes you pay</li><li><b>Parliament</b> = Britain's lawmakers in London</li><li><b>Representation</b> = having someone you elected speak for you</li><li><b>Consent of the governed</b> = the people agree to be ruled</li><li><b>Contradiction</b> = when what you say and what you do don't match</li><li><b>1953 comic</b> = made by the U.S. government to tell America's story in other countries. It shows one point of view.</li>
+</ul></details>
+<p class="welcome" id="welcome" role="status"></p>
+</section>
+
+<div class="flip-layout">
+<section class="flip-reader reading" id="flipReader" aria-label="Pages from the 1953 comic A Picture Story of the United States">
+<div class="flip-bar"><div><p class="eyebrow">The reading</p><h2>A real 1953 comic · 4 pages</h2></div><span class="flip-pos" id="flipPos"></span></div>
+<div class="flip-tools"><button type="button" class="quiet" id="flipBack">← Back a page</button><span class="grow"><span id="flipPart"></span><span id="flipTimer" aria-live="polite"></span></span><button type="button" class="secondary" id="flipNext">Next page →</button><button type="button" class="quiet" id="flipZoom">Make page bigger</button></div>
+<div class="flip-stage"><img id="flipImg" alt="" src="pages/p-01.jpg"></div>
+<p class="pg-cap" id="pgCap" aria-live="polite"></p>
+<p class="flip-cap">Click the page to make it bigger.</p>
+</section>
+
+<div class="qcol">
+<section class="card">
+<label for="studentName">First name + last initial (like Jordan M.)</label><input id="studentName" maxlength="100" autocomplete="off" placeholder="First name + last initial (like Jordan M.)" required>
+</section>
+<div id="flipCards"></div>
+<div class="flip-nav"><button type="button" class="quiet" id="flipBack2">← Back</button><button type="button" class="secondary" id="flipNext2">Next page →</button><p class="flip-why" id="flipWhy" aria-live="polite"></p></div>
+<section class="card finish" id="finish">
+<h2>Turn in your work</h2>
+<div class="actions"><button id="submitBtn" class="primary" type="button">Turn in answers</button></div><p id="submitStatus" class="status" role="status" aria-live="polite"></p><p class="reader-note">Your work saves on this device, so you can come back later. Your teacher sees it after you turn it in.</p>
+<p class="credits">Comic: <i>A Picture Story of the United States</i> (1953), made for the United States Information Service, a U.S. government agency. Public domain. Scan: University of Nebraska–Lincoln Libraries, educational comics collection, via the Internet Archive.</p>
+</section>
+<p class="credits" style="text-align:center"><button id="clearBtn" class="quiet" type="button" style="font-size:.8rem">Start over</button></p>
+</div></div></main>
+<div class="flip-big" id="flipBig" hidden role="dialog" aria-label="Bigger page"><button type="button" class="quiet" id="flipBigClose">✕ Close</button><img id="flipBigImg" alt="Bigger view of the current page"></div>
+<script>
+window.FLIP={
+title:"Pages from the 1953 comic A Picture Story of the United States",prefix:"ush-p1u1d1-promise-comic-",pages:4,readSeconds:8,lockSeconds:8,
+alts:["Reader page 1. A yellow box says King George III found his treasury drained by wars with France, so new taxes were put on the colonies and officials could search their homes. A woman tells a tax officer he has no right entering her house. Below, colonists dressed as Indians dump British tea into Boston Harbor.", "Reader page 2. Colonists meet in Philadelphia in 1774, the First Continental Congress, and say: No taxation without representation, we'll buy no British goods. In Virginia, Patrick Henry says: Is life so dear as to be purchased at the price of chains and slavery? Give me liberty, or give me death!", "Reader page 3. In 1776 Richard Henry Lee proposes independence. Thomas Jefferson, who studied Locke and other writers, writes the Declaration. A big scroll shows the words: all men are created equal, with rights to Life, Liberty and the pursuit of Happiness, and governments get their just powers from the consent of the governed.", "Reader page 4. On July 4, 1776, representatives of the 13 colonies adopt the Declaration of Independence. The Liberty Bell rings. A new nation had been born!"],
+assignmentId:"ush-p1u1-d1-promise-comic",api:"https://fynn-class-assignment-submissions-20261024.neotboy.chatgpt.site/api/submit",
+lockedText:"This box opens when you get the check right.",
+clearConfirm:"Start over? This clears your checks and answers on this device.",
+successText:"Turned in! Your teacher got your 4 checks and 4 answers. You are done.",
+wrongText:(c,left)=>left>0?"Not quite. "+c.hint+" Try again in "+left+"…":"Not quite. "+c.hint+" The choices were mixed up. Try again.",
+parts:[
+{
+"short": "Taxes",
+"ref": "Reader page 1",
+"title": "1. Fair tax or not?",
+"from": 1,
+"to": 1,
+"check": {
+"page": 1,
+"tag": "Reading check · Reader page 1",
+"q": "Read the yellow box at the top left. Why did King George III put new taxes on the colonies?",
+"right": "His treasury was drained by wars with France.",
+"wrong": [
+"The colonists asked him to build them new forts.",
+"He wanted money to build a bigger palace.",
+"Parliament wanted to punish Boston for the tea."
+],
+"why": "✓ Correct. That's Britain's side. After the French and Indian War (1754–1763), Britain was deep in debt.",
+"hint": "Read the yellow box at the top left of reader page 1."
+},
+"prompt": "Was the Stamp Act fair? Give Britain's side and the colonists' side.",
+"stem": "<span class=\"declass\"><b>Fact file</b><span class=\"line\"><b>Britain's side:</b> British soldiers protected the colonists in the French and Indian War. Britain was deep in debt, so its leaders said colonists should help pay. The Stamp Act (1765) taxed newspapers, legal papers, and even playing cards.</span><span class=\"line\"><b>Colonists' side:</b> Colonists didn't elect anyone to Parliament. So they said Parliament had no right to tax them: <b>\"No taxation without representation.\"</b></span></span>Write 1–2 sentences. Start like this: <i>Britain thought the tax was fair because ___. The colonists thought it was unfair because ___.</i>",
+"stemText": "Britain thought the tax was fair because ___. The colonists thought it was unfair because ___.",
+"placeholder": "Britain thought the tax was fair because ___. The colonists thought it was unfair because ___."
+},
+{
+"short": "Liberty",
+"ref": "Reader page 2",
+"title": "2. Chains and slavery?",
+"from": 2,
+"to": 2,
+"check": {
+"page": 2,
+"tag": "Reading check · Reader page 2",
+"q": "Read Patrick Henry's speech bubble. What does he compare living under British rule to?",
+"right": "Being held in chains and slavery.",
+"wrong": [
+"Being locked up in a British jail.",
+"Being lost at sea with no captain.",
+"Being a servant in the king's house."
+],
+"why": "✓ Correct. Henry says he would rather die than live in \"chains and slavery\" under Britain.",
+"hint": "Read the speech bubble in the bottom-right panel."
+},
+"prompt": "Patrick Henry called British taxes \"chains and slavery.\" What's the contradiction?",
+"stem": "<span class=\"declass\"><b>Fact file</b><span class=\"line\">In 1775, about <b>450,000</b> Black people in the colonies were really enslaved, in real chains.</span><span class=\"line\">Patrick Henry enslaved people himself. In a 1773 letter he admitted it: <b>\"Would any one believe that I am Master of Slaves of my own purchase!\"</b> He wrote that he could not justify it. Most of the people he enslaved stayed enslaved.</span></span>Write 1–2 sentences. Start like this: <i>Henry said Britain treated colonists like slaves, but ___. That's a contradiction because ___.</i>",
+"stemText": "Henry said Britain treated colonists like slaves, but ___. That's a contradiction because ___.",
+"placeholder": "Henry said Britain treated colonists like slaves, but ___. That's a contradiction because ___."
+},
+{
+"short": "The big idea",
+"ref": "Reader page 3",
+"title": "3. What is government for?",
+"from": 3,
+"to": 3,
+"check": {
+"page": 3,
+"tag": "Reading check · Reader page 3",
+"q": "Read the big scroll. Where do governments get their \"just powers\"?",
+"right": "From the consent of the governed.",
+"wrong": [
+"From the will of their Creator.",
+"From the strength of their army.",
+"From the wisdom of all men."
+],
+"why": "✓ Correct. \"Consent of the governed\" means the people agree to be ruled. Power comes from the people, not from being born a king.",
+"hint": "Read the last line of the big scroll."
+},
+"prompt": "In your own words: what is government's job, according to the Declaration?",
+"stem": "<span class=\"declass\"><b>Fact file</b><span class=\"line\">The comic says Jefferson studied <b>Locke</b>. About 90 years earlier, English writer John Locke argued that people are born with rights to life, liberty, and property, and that government exists to protect them.</span><span class=\"line\">Jefferson wrote \"Life, Liberty and the pursuit of Happiness.\" The Declaration says that if a government keeps breaking people's rights, the people can change it or get rid of it.</span></span>Write 1–2 sentences. Start like this: <i>According to the Declaration, government's job is to ___. If it fails, the people can ___.</i>",
+"stemText": "According to the Declaration, government's job is to ___. If it fails, the people can ___.",
+"placeholder": "According to the Declaration, government's job is to ___. If it fails, the people can ___."
+},
+{
+"short": "All men?",
+"ref": "Reader page 4",
+"title": "4. Who did \"all men\" include?",
+"from": 4,
+"to": 4,
+"check": {
+"page": 4,
+"tag": "Reading check · Reader page 4",
+"q": "Read the box at the top of the big panel. Who adopted the Declaration on July 4, 1776?",
+"right": "Representatives of the 13 colonies.",
+"wrong": [
+"All the people living in the colonies.",
+"The king and Parliament in London.",
+"Jefferson alone, since he wrote it."
+],
+"why": "✓ Correct. The 56 men who signed it were all white men, most of them wealthy. Read the fact file to see who was left out.",
+"hint": "Read the words at the top of the big panel on reader page 4."
+},
+"prompt": "The comic says \"a new nation had been born.\" In 1776, who did \"all men are created equal\" leave out?",
+"stem": "<span class=\"declass\"><b>Fact file</b><span class=\"line\">Jefferson, who wrote \"all men are created equal,\" enslaved more than 600 people during his life.</span><span class=\"line\">Women couldn't vote in most places. In 1776, Abigail Adams wrote to her husband John, a leader in Congress: <b>\"Remember the ladies.\"</b></span><span class=\"line\">The Declaration called Native people \"merciless Indian Savages.\"</span><span class=\"line\">Still, about 5,000 Black men fought for the Patriots. Later, groups fighting for their rights quoted this same line.</span></span>Write 1–2 sentences. Start like this: <i>In 1776, \"all men are created equal\" left out ___. It was mostly a (promise / contradiction) because ___.</i>",
+"stemText": "In 1776, \"all men are created equal\" left out ___. It was mostly a (promise / contradiction) because ___.",
+"placeholder": "In 1776, \"all men are created equal\" left out ___. It was mostly a (promise / contradiction) because ___."
+}
+],
+questions:["Was the Stamp Act fair? Give Britain's side and the colonists' side.", "Patrick Henry called British taxes \"chains and slavery.\" What's the contradiction?", "In your own words: what is government's job, according to the Declaration?", "The comic says \"a new nation had been born.\" In 1776, who did \"all men are created equal\" leave out?"],
+validate(s){if(!s.name)return{text:"Type your first name + last initial (like Jordan M.) at the top of the questions.",focus:"studentName"};
+ const mc=[1, 2, 3, 4].find(i=>!s.checkDone(i));if(mc)return{text:"Get the check right for part "+mc+" first.",part:mc};
+ const ma=[1, 2, 3, 4].find(i=>!s.answer(i));if(ma)return{text:"Write your answer for part "+ma+" before turning in.",part:ma,focus:"answer"+ma};
+ for(const i of [1, 2, 3, 4]){const j=window.classJunkStop&&window.classJunkStop(document.getElementById("answer"+i));if(j)return{text:"Part "+i+": "+j,part:i}}return null},
+buildAnswers(s){const a={Standard:"SS.9-12.US.2, SS.9-12.US.1","First-try correct":[1, 2, 3, 4].filter(i=>(s.tries(i)||1)===1).length+" of 4"};
+ this.questions.forEach((q,i)=>a[q]=s.answer(i+1));a["Reading checks"]="4 of 4 correct · tries: "+[1, 2, 3, 4].map(i=>s.tries(i)||1).join(", ");return a}
+};
+</script>
+<script src="../../shared/flip-reader.js?v=5urls"></script>
+<script>
+// One-line "what's going on" caption under each page, for kids who missed the lecture.
+(function(){const caps=["<b>1763–1773.</b> Britain is broke after a war with France. It taxes the colonies, and Boston fights back.", "<b>1774–1775.</b> Colonists meet in Philadelphia. In Virginia, Patrick Henry gives a famous speech.", "<b>June 1776.</b> Thomas Jefferson writes the Declaration of Independence.", "<b>July 4, 1776.</b> Congress approves the Declaration."];
+ const pos=document.getElementById("flipPos"),cap=document.getElementById("pgCap");
+ const sync=()=>{const m=pos.textContent.match(/page (\d+)/);cap.innerHTML=m?caps[+m[1]-1]||"":""};
+ new MutationObserver(sync).observe(pos,{childList:true,characterData:true,subtree:true});sync();})();
+// Choices wait for the read timer, and "Not quite" scrolls into view (same as the other readings).
+(function(){
+  document.addEventListener("click",e=>{const b=e.target.closest("#flipNext2");if(!b||!/Next part|Turn in/.test(b.textContent))return;
+    const a=document.querySelector(".flip-part:not([hidden]) textarea:not([disabled])");if(!a||!a.value.trim()||!window.classJunkStop)return;
+    if(window.classJunkStop(a)){e.stopImmediatePropagation();e.preventDefault()}},true);
+  const t=document.getElementById("flipTimer");
+  const sync=()=>document.body.classList.toggle("reading-now",t.textContent.trim()!=="");
+  new MutationObserver(sync).observe(t,{childList:true,characterData:true,subtree:true});sync();
+  document.getElementById("flipCards").addEventListener("click",e=>{if(!e.target.closest(".choice"))return;
+    setTimeout(()=>{const f=[...document.querySelectorAll(".flip-part:not([hidden]) .fb")].find(x=>x.textContent.trim());
+      if(f){const r=f.getBoundingClientRect();if(r.bottom>innerHeight-80||r.top<0)f.scrollIntoView({behavior:"smooth",block:"center"})}},120)});
+})();
+</script>
+</body></html>

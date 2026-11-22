@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Deal Makers | U.S. History Part 1 · Unit 1 Day 3</title>
+<meta name="description" content="Read a 1953 U.S. government comic about the Constitutional Convention. Catch its mistake and the deal it left out.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../shared/graphic-reading.css?v=3">
+<style>
+.flip-layout{grid-template-columns:minmax(0,1.9fr) minmax(320px,1fr)}
+.flip-stage img{min-height:0;max-height:calc(100vh - 150px)}
+.qcol{padding-bottom:100px}
+.intro-line{font-size:1.02rem;margin:0 0 10px}
+.wordhelp{margin:6px 0 0}.wordhelp summary{cursor:pointer;font-weight:750;color:var(--navy)}
+.words{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0 10px;padding:0;list-style:none}
+.words li{background:#fff;border:1px solid #e6dcc8;border-left:4px solid var(--navy);border-radius:8px;padding:3px 9px;font-size:.88rem}
+.declass{display:block;background:#fff;border:2px dashed #18364a;border-radius:10px;padding:8px 11px;margin:6px 0 8px;font-weight:650;color:#22313b;line-height:1.4;font-style:normal}
+.declass > b:first-child{display:block;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#18364a;margin-bottom:2px}
+.declass .line{display:block;margin:3px 0}
+.declass .note{display:block;margin-top:5px;font-weight:600;font-size:.9rem;color:#5b4632}
+.dime{display:inline-block;background:#e6bd64;color:#0f2433;border-radius:999px;font-weight:850;padding:0 9px;margin-right:4px}
+.credits{font-size:.8rem;color:var(--muted);margin:10px 0 0;line-height:1.4}
+.pg-cap{margin:8px 2px 0;font-size:.95rem;line-height:1.35;background:#fff;border:1px solid #e6dcc8;border-left:4px solid #e6bd64;border-radius:8px;padding:6px 10px}.pg-cap:empty{display:none}
+.gr-head{padding-top:18px;padding-bottom:16px}.gr-head h1{margin:6px 0 6px}.gr-head .hook{margin-bottom:8px}
+body.reading-now .choices{opacity:.45;pointer-events:none}
+</style>
+<script src="../../shared/assignments.js?v=20261116m2"></script><script src="../../shared/turnin.js?v=20261116m2"></script></head><body>
+<header class="gr-head" data-years="1787">
+<div class="gr-wrap">
+<div class="kicker">U.S. History · Part 1 · Unit 1 Day 3 · Founding &amp; Citizenship</div>
+<h1>The Deal Makers</h1>
+<p class="hook"><span class="dime">1787</span>Summer 1787: 55 men lock the doors and fight over a new government. The 1953 comic has one mistake and leaves out one big deal. Find both. 3 pages · 3 checks · 3 short answers. <b>About 20 minutes.</b></p>
+<p class="goal"><b>Today's goal:</b> Explain who wrote the Constitution, the deals they made, and whose voices were missing.</p>
+<details class="std-details"><summary>Iowa standards for today</summary>
+<p><b>Standard SS.9-12.US.3</b> — Assess the impact of exemplary Americans who displayed civic virtues in the creation of the United States of America.</p><p><b>Standard SS.9-12.US.2</b> — Analyze diverse ideologies through primary and secondary sources, noting the impact on social, economic, and political institutions.</p>
+</details>
+<nav><a class="back" href="../../">← Class activities</a></nav>
+</div></header>
+
+<nav class="route" aria-label="Your progress"><ol id="flipRoute"></ol></nav>
+
+<main class="gr-main gr-wrap">
+<section class="card">
+<p class="intro-line"><b>You're the fact-checker.</b> For each part: <b>read</b> the comic on the left → get the <b>check</b> right → read the <b>fact file</b> → write 1–2 sentences. Done = all parts green, then turn in at the bottom.</p>
+<details class="wordhelp"><summary>Word help (tap to open)</summary>
+<ul class="words" aria-label="Word help">
+<li><b>Convention</b> = a big meeting to make decisions</li><li><b>Delegate</b> = a person chosen to speak for their state</li><li><b>Compromise</b> = a deal where each side gives up something</li><li><b>Representation</b> = how many votes you get in Congress</li><li><b>Civic virtue</b> = putting the common good ahead of yourself</li><li><b>1953 comic</b> = made by the U.S. government to tell America's story in other countries. It shows one point of view.</li>
+</ul></details>
+<p class="welcome" id="welcome" role="status"></p>
+</section>
+
+<div class="flip-layout">
+<section class="flip-reader reading" id="flipReader" aria-label="Pages from the 1953 comic A Picture Story of the United States">
+<div class="flip-bar"><div><p class="eyebrow">The reading</p><h2>A real 1953 comic · 3 pages</h2></div><span class="flip-pos" id="flipPos"></span></div>
+<div class="flip-tools"><button type="button" class="quiet" id="flipBack">← Back a page</button><span class="grow"><span id="flipPart"></span><span id="flipTimer" aria-live="polite"></span></span><button type="button" class="secondary" id="flipNext">Next page →</button><button type="button" class="quiet" id="flipZoom">Make page bigger</button></div>
+<div class="flip-stage"><img id="flipImg" alt="" src="pages/p-01.jpg"></div>
+<p class="pg-cap" id="pgCap" aria-live="polite"></p>
+<p class="flip-cap">Click the page to make it bigger.</p>
+</section>
+
+<div class="qcol">
+<section class="card">
+<label for="studentName">First name + last initial (like Jordan M.)</label><input id="studentName" maxlength="100" autocomplete="off" placeholder="First name + last initial (like Jordan M.)" required>
+</section>
+<div id="flipCards"></div>
+<div class="flip-nav"><button type="button" class="quiet" id="flipBack2">← Back</button><button type="button" class="secondary" id="flipNext2">Next page →</button><p class="flip-why" id="flipWhy" aria-live="polite"></p></div>
+<section class="card finish" id="finish">
+<h2>Turn in your work</h2>
+<div class="actions"><button id="submitBtn" class="primary" type="button">Turn in answers</button></div><p id="submitStatus" class="status" role="status" aria-live="polite"></p><p class="reader-note">Your work saves on this device, so you can come back later. Your teacher sees it after you turn it in.</p>
+<p class="credits">Comic: <i>A Picture Story of the United States</i> (1953), made for the United States Information Service, a U.S. government agency. Public domain. Scan: University of Nebraska–Lincoln Libraries, educational comics collection, via the Internet Archive.</p>
+</section>
+<p class="credits" style="text-align:center"><button id="clearBtn" class="quiet" type="button" style="font-size:.8rem">Start over</button></p>
+</div></div></main>
+<div class="flip-big" id="flipBig" hidden role="dialog" aria-label="Bigger page"><button type="button" class="quiet" id="flipBigClose">✕ Close</button><img id="flipBigImg" alt="Bigger view of the current page"></div>
+<script>
+window.FLIP={
+title:"Pages from the 1953 comic A Picture Story of the United States",prefix:"ush-p1u1d3-convention-comic-",pages:3,readSeconds:8,lockSeconds:8,
+alts:["Reader page 1. A box says that at Washington's urging, a convention met in Philadelphia in 1787 to write a new Constitution, and its start was stormy. One delegate shouts: Why should your state be equal with mine, which is five times as big? Another says: Yes, but mine produces five times the goods that yours does! Someone shouts: Gentlemen, gentlemen!", "Reader page 2. After weeks of angry debate, the 84-year-old Benjamin Franklin rises and says: When the planks of a table do not fit, the carpenter takes a little from both sides. In like manner, both sides here must part with some of their demands. A box says it was Franklin's last great service.", "Reader page 3. A box says compromises were reached: each state got representation in the lower house based on population, and in the Senate each state would have two representatives. After four months, a delegate reads: We, the People of the United States, in order to form a more perfect union, do ordain and establish this Constitution."],
+assignmentId:"ush-p1u1-d3-convention-comic",api:"https://fynn-class-assignment-submissions-20261024.neotboy.chatgpt.site/api/submit",
+lockedText:"This box opens when you get the check right.",
+clearConfirm:"Start over? This clears your checks and answers on this device.",
+successText:"Turned in! Your teacher got your 3 checks and 3 answers. You are done.",
+wrongText:(c,left)=>left>0?"Not quite. "+c.hint+" Try again in "+left+"…":"Not quite. "+c.hint+" The choices were mixed up. Try again.",
+parts:[
+{
+"short": "Big vs. small",
+"ref": "Reader page 1",
+"title": "1. Big states vs. small states",
+"from": 1,
+"to": 1,
+"check": {
+"page": 1,
+"tag": "Reading check · Reader page 1",
+"q": "Read the two speech bubbles. What are the two delegates arguing about?",
+"right": "Whether big and small states should get equal votes.",
+"wrong": [
+"Whether the new country should have a king.",
+"Whether to make peace again with Great Britain.",
+"Whether Washington should be the first president."
+],
+"why": "✓ Correct. Big states wanted votes based on population. Small states wanted every state to count the same.",
+"hint": "Read the first speech bubble: \"Why should your state be equal with mine…\""
+},
+"prompt": "Big states vs. small states: what did each side want, and why?",
+"stem": "<span class=\"declass\"><b>Fact file</b><span class=\"line\">In 1787, <b>55 delegates</b> from 12 states met in secret in Philadelphia. They were supposed to fix the Articles. Instead they wrote a brand-new Constitution.</span><span class=\"line\"><b>Virginia Plan</b> (big states): more people = more votes in Congress. <b>New Jersey Plan</b> (small states): every state gets an equal vote.</span></span>Write 1–2 sentences. Start like this: <i>Big states wanted ___ because ___. Small states wanted ___ because ___.</i>",
+"stemText": "Big states wanted ___ because ___. Small states wanted ___ because ___.",
+"placeholder": "Big states wanted ___ because ___. Small states wanted ___ because ___."
+},
+{
+"short": "Franklin",
+"ref": "Reader page 2",
+"title": "2. Catch the comic's mistake",
+"from": 2,
+"to": 2,
+"check": {
+"page": 2,
+"tag": "Reading check · Reader page 2",
+"q": "Read Franklin's speech bubble. What does he compare the Convention to?",
+"right": "A carpenter trimming boards so they fit.",
+"wrong": [
+"A captain steering a ship through a storm.",
+"A farmer planting seeds in a new field.",
+"A judge deciding who wins a court case."
+],
+"why": "✓ Correct. Each side shaves off a little so the pieces fit. That's a compromise.",
+"hint": "Read Franklin's speech bubble about the planks of a table."
+},
+"prompt": "Fact-check: the comic gets Franklin's age wrong. Then explain why Franklin pushed for compromise.",
+"stem": "<span class=\"declass\"><b>Fact file</b><span class=\"line\">The comic calls Franklin \"84-year-old.\" He was really <b>81</b> in 1787. He died in 1790, at 84.</span><span class=\"line\">Franklin was the oldest delegate and often sick, but he kept showing up. On the last day he said: <b>\"I agree to this Constitution with all its faults… because I think a general Government necessary for us.\"</b></span></span>Write 1–2 sentences. Start like this: <i>Franklin was really ___ years old. He pushed for compromise because ___.</i>",
+"stemText": "Franklin was really ___ years old. He pushed for compromise because ___.",
+"placeholder": "Franklin was really ___ years old. He pushed for compromise because ___."
+},
+{
+"short": "The deals",
+"ref": "Reader page 3",
+"title": "3. The deal the comic left out",
+"from": 3,
+"to": 3,
+"check": {
+"page": 3,
+"tag": "Reading check · Reader page 3",
+"q": "Read the box on the left. How is the Senate set up?",
+"right": "Every state gets two senators.",
+"wrong": [
+"Bigger states get more senators.",
+"The President picks every senator.",
+"Every state gets one senator."
+],
+"why": "✓ Correct. That's the Great Compromise: the House is based on population, and the Senate is equal. That's why Iowa has 4 House members and 2 senators.",
+"hint": "Read the box on the left side of reader page 3."
+},
+"prompt": "The comic says \"compromises were reached.\" Which deal did it leave out, and who was missing from the room?",
+"stem": "<span class=\"declass\"><b>Fact file</b><span class=\"line\">The <b>Three-Fifths Compromise</b> counted 3 of every 5 enslaved people when deciding House seats. That gave slave states more seats and more power.</span><span class=\"line\">The Constitution also said Congress couldn't ban bringing in enslaved Africans until 1808.</span><span class=\"line\">All 55 delegates were white men, most of them wealthy. No women, no Black Americans, no Native nations, and few poor farmers were in the room.</span></span>Write 1–2 sentences. Start like this: <i>The comic left out the ___ Compromise, which ___. Missing from the room were ___.</i>",
+"stemText": "The comic left out the ___ Compromise, which ___. Missing from the room were ___.",
+"placeholder": "The comic left out the ___ Compromise, which ___. Missing from the room were ___."
+}
+],
+questions:["Big states vs. small states: what did each side want, and why?", "Fact-check: the comic gets Franklin's age wrong. Then explain why Franklin pushed for compromise.", "The comic says \"compromises were reached.\" Which deal did it leave out, and who was missing from the room?"],
+validate(s){if(!s.name)return{text:"Type your first name + last initial (like Jordan M.) at the top of the questions.",focus:"studentName"};
+ const mc=[1, 2, 3].find(i=>!s.checkDone(i));if(mc)return{text:"Get the check right for part "+mc+" first.",part:mc};
+ const ma=[1, 2, 3].find(i=>!s.answer(i));if(ma)return{text:"Write your answer for part "+ma+" before turning in.",part:ma,focus:"answer"+ma};
+ for(const i of [1, 2, 3]){const j=window.classJunkStop&&window.classJunkStop(document.getElementById("answer"+i));if(j)return{text:"Part "+i+": "+j,part:i}}return null},
+buildAnswers(s){const a={Standard:"SS.9-12.US.3, SS.9-12.US.2","First-try correct":[1, 2, 3].filter(i=>(s.tries(i)||1)===1).length+" of 3"};
+ this.questions.forEach((q,i)=>a[q]=s.answer(i+1));a["Reading checks"]="3 of 3 correct · tries: "+[1, 2, 3].map(i=>s.tries(i)||1).join(", ");return a}
+};
+</script>
+<script src="../../shared/flip-reader.js?v=5urls"></script>
+<script>
+// One-line "what's going on" caption under each page, for kids who missed the lecture.
+(function(){const caps=["<b>May 1787.</b> Delegates meet in secret in Philadelphia. The first big fight: big states vs. small states.", "<b>Summer 1787.</b> Benjamin Franklin, the oldest delegate, speaks up.", "<b>September 1787.</b> After four months, the Constitution is done."];
+ const pos=document.getElementById("flipPos"),cap=document.getElementById("pgCap");
+ const sync=()=>{const m=pos.textContent.match(/page (\d+)/);cap.innerHTML=m?caps[+m[1]-1]||"":""};
+ new MutationObserver(sync).observe(pos,{childList:true,characterData:true,subtree:true});sync();})();
+// Choices wait for the read timer, and "Not quite" scrolls into view (same as the other readings).
+(function(){
+  document.addEventListener("click",e=>{const b=e.target.closest("#flipNext2");if(!b||!/Next part|Turn in/.test(b.textContent))return;
+    const a=document.querySelector(".flip-part:not([hidden]) textarea:not([disabled])");if(!a||!a.value.trim()||!window.classJunkStop)return;
+    if(window.classJunkStop(a)){e.stopImmediatePropagation();e.preventDefault()}},true);
+  const t=document.getElementById("flipTimer");
+  const sync=()=>document.body.classList.toggle("reading-now",t.textContent.trim()!=="");
+  new MutationObserver(sync).observe(t,{childList:true,characterData:true,subtree:true});sync();
+  document.getElementById("flipCards").addEventListener("click",e=>{if(!e.target.closest(".choice"))return;
+    setTimeout(()=>{const f=[...document.querySelectorAll(".flip-part:not([hidden]) .fb")].find(x=>x.textContent.trim());
+      if(f){const r=f.getBoundingClientRect();if(r.bottom>innerHeight-80||r.top<0)f.scrollIntoView({behavior:"smooth",block:"center"})}},120)});
+})();
+</script>
+</body></html>

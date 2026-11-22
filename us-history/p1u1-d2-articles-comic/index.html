@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Falling Apart? | U.S. History Part 1 · Unit 1 Day 2</title>
+<meta name="description" content="Read a 1953 U.S. government comic about the Articles of Confederation, then fill in what it skipped.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../shared/graphic-reading.css?v=3">
+<style>
+.flip-layout{grid-template-columns:minmax(0,1.9fr) minmax(320px,1fr)}
+.flip-stage img{min-height:0;max-height:calc(100vh - 150px)}
+.qcol{padding-bottom:100px}
+.intro-line{font-size:1.02rem;margin:0 0 10px}
+.wordhelp{margin:6px 0 0}.wordhelp summary{cursor:pointer;font-weight:750;color:var(--navy)}
+.words{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0 10px;padding:0;list-style:none}
+.words li{background:#fff;border:1px solid #e6dcc8;border-left:4px solid var(--navy);border-radius:8px;padding:3px 9px;font-size:.88rem}
+.declass{display:block;background:#fff;border:2px dashed #18364a;border-radius:10px;padding:8px 11px;margin:6px 0 8px;font-weight:650;color:#22313b;line-height:1.4;font-style:normal}
+.declass > b:first-child{display:block;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#18364a;margin-bottom:2px}
+.declass .line{display:block;margin:3px 0}
+.declass .note{display:block;margin-top:5px;font-weight:600;font-size:.9rem;color:#5b4632}
+.dime{display:inline-block;background:#e6bd64;color:#0f2433;border-radius:999px;font-weight:850;padding:0 9px;margin-right:4px}
+.credits{font-size:.8rem;color:var(--muted);margin:10px 0 0;line-height:1.4}
+.pg-cap{margin:8px 2px 0;font-size:.95rem;line-height:1.35;background:#fff;border:1px solid #e6dcc8;border-left:4px solid #e6bd64;border-radius:8px;padding:6px 10px}.pg-cap:empty{display:none}
+.gr-head{padding-top:18px;padding-bottom:16px}.gr-head h1{margin:6px 0 6px}.gr-head .hook{margin-bottom:8px}
+body.reading-now .choices{opacity:.45;pointer-events:none}
+</style>
+<script src="../../shared/assignments.js?v=20261116m2"></script><script src="../../shared/turnin.js?v=20261116m2"></script></head><body>
+<header class="gr-head" data-years="1781">
+<div class="gr-wrap">
+<div class="kicker">U.S. History · Part 1 · Unit 1 Day 2 · Founding &amp; Citizenship</div>
+<h1>Falling Apart?</h1>
+<p class="hook"><span class="dime">1781–1787</span>The war is won, but the new country is broke and the states are fighting each other. Read the 1953 comic's version, then fill in what it skipped. 3 pages · 3 checks · 3 short answers. <b>About 20 minutes.</b></p>
+<p class="goal"><b>Today's goal:</b> Explain why the Articles of Confederation made a weak government and why that scared leaders.</p>
+<details class="std-details"><summary>Iowa standards for today</summary>
+<p><b>Standard SS.9-12.US.2</b> — Analyze diverse ideologies through primary and secondary sources, noting the impact on social, economic, and political institutions.</p>
+</details>
+<nav><a class="back" href="../../">← Class activities</a></nav>
+</div></header>
+
+<nav class="route" aria-label="Your progress"><ol id="flipRoute"></ol></nav>
+
+<main class="gr-main gr-wrap">
+<section class="card">
+<p class="intro-line"><b>You're the fact-checker.</b> For each part: <b>read</b> the comic on the left → get the <b>check</b> right → read the <b>fact file</b> → write 1–2 sentences. Done = all parts green, then turn in at the bottom.</p>
+<details class="wordhelp"><summary>Word help (tap to open)</summary>
+<ul class="words" aria-label="Word help">
+<li><b>Articles of Confederation</b> = America's first plan of government (1781)</li><li><b>Confederation</b> = a loose team of states that keep most of their power</li><li><b>Duty</b> = a tax on goods brought in</li><li><b>Debt</b> = money you owe</li><li><b>Territory</b> = land that isn't a state yet</li><li><b>1953 comic</b> = made by the U.S. government to tell America's story in other countries. It shows one point of view.</li>
+</ul></details>
+<p class="welcome" id="welcome" role="status"></p>
+</section>
+
+<div class="flip-layout">
+<section class="flip-reader reading" id="flipReader" aria-label="Pages from the 1953 comic A Picture Story of the United States">
+<div class="flip-bar"><div><p class="eyebrow">The reading</p><h2>A real 1953 comic · 3 pages</h2></div><span class="flip-pos" id="flipPos"></span></div>
+<div class="flip-tools"><button type="button" class="quiet" id="flipBack">← Back a page</button><span class="grow"><span id="flipPart"></span><span id="flipTimer" aria-live="polite"></span></span><button type="button" class="secondary" id="flipNext">Next page →</button><button type="button" class="quiet" id="flipZoom">Make page bigger</button></div>
+<div class="flip-stage"><img id="flipImg" alt="" src="pages/p-01.jpg"></div>
+<p class="pg-cap" id="pgCap" aria-live="polite"></p>
+<p class="flip-cap">Click the page to make it bigger.</p>
+</section>
+
+<div class="qcol">
+<section class="card">
+<label for="studentName">First name + last initial (like Jordan M.)</label><input id="studentName" maxlength="100" autocomplete="off" placeholder="First name + last initial (like Jordan M.)" required>
+</section>
+<div id="flipCards"></div>
+<div class="flip-nav"><button type="button" class="quiet" id="flipBack2">← Back</button><button type="button" class="secondary" id="flipNext2">Next page →</button><p class="flip-why" id="flipWhy" aria-live="polite"></p></div>
+<section class="card finish" id="finish">
+<h2>Turn in your work</h2>
+<div class="actions"><button id="submitBtn" class="primary" type="button">Turn in answers</button></div><p id="submitStatus" class="status" role="status" aria-live="polite"></p><p class="reader-note">Your work saves on this device, so you can come back later. Your teacher sees it after you turn it in.</p>
+<p class="credits">Comic: <i>A Picture Story of the United States</i> (1953), made for the United States Information Service, a U.S. government agency. Public domain. Scan: University of Nebraska–Lincoln Libraries, educational comics collection, via the Internet Archive.</p>
+</section>
+<p class="credits" style="text-align:center"><button id="clearBtn" class="quiet" type="button" style="font-size:.8rem">Start over</button></p>
+</div></div></main>
+<div class="flip-big" id="flipBig" hidden role="dialog" aria-label="Bigger page"><button type="button" class="quiet" id="flipBigClose">✕ Close</button><img id="flipBigImg" alt="Bigger view of the current page"></div>
+<script>
+window.FLIP={
+title:"Pages from the 1953 comic A Picture Story of the United States",prefix:"ush-p1u1d2-articles-comic-",pages:3,readSeconds:8,lockSeconds:8,
+alts:["Reader page 1. A box says the colonies were now free states, but under their loose confederation they acted like separate nations, quarreling over borders and printing their own money. At a border gate, a guard tells a man with a cart: You can't bring potatoes from New Jersey to New York without paying duty. The man says: Why not? We fought together. Why can't we trade together?", "Reader page 2. Leaders say the states must have a stronger organization and a central authority to settle disputes. Business is at a standstill. Ordinary people say: Paper money won't fill my market basket! People can't pay their debts! A box says it looked as if the new nation were already falling apart.", "Reader page 3. A map shows the Northwest Territory next to the 13 original colonies, with a covered wagon and a settler. Boxes say the Northwest Territory was turned over to the country as a whole, opening the way west. The Northwest Ordinance of 1787 banned slavery in the territory and promised religious freedom and education for all."],
+assignmentId:"ush-p1u1-d2-articles-comic",api:"https://fynn-class-assignment-submissions-20261024.neotboy.chatgpt.site/api/submit",
+lockedText:"This box opens when you get the check right.",
+clearConfirm:"Start over? This clears your checks and answers on this device.",
+successText:"Turned in! Your teacher got your 3 checks and 3 answers. You are done.",
+wrongText:(c,left)=>left>0?"Not quite. "+c.hint+" Try again in "+left+"…":"Not quite. "+c.hint+" The choices were mixed up. Try again.",
+parts:[
+{
+"short": "Trade fight",
+"ref": "Reader page 1",
+"title": "1. Why can't we trade together?",
+"from": 1,
+"to": 1,
+"check": {
+"page": 1,
+"tag": "Reading check · Reader page 1",
+"q": "Read the speech bubbles. What problem does the man with the cart run into?",
+"right": "He must pay a tax to bring potatoes into New York.",
+"wrong": [
+"He must show a pass from the British army first.",
+"He must trade his potatoes for New York money.",
+"He must wait for Congress to approve his trip."
+],
+"why": "✓ Correct. States taxed each other's goods like rival countries. Under the Articles, Congress couldn't stop it.",
+"hint": "Read what the guard at the gate says."
+},
+"prompt": "Why couldn't Congress fix fights like this between the states?",
+"stem": "<span class=\"declass\"><b>Fact file</b><span class=\"line\">Under the <b>Articles of Confederation</b> (1781), Congress could not control trade between states. There was no president and no national courts.</span><span class=\"line\">Congress could not tax. It could only <b>ask</b> the states for money, and they often said no. Soldiers waited years for their pay.</span><span class=\"line\">Changing the Articles took all 13 states. When Congress tried a small tax on imports, Rhode Island said no, and the plan died.</span></span>Write 1–2 sentences. Start like this: <i>Congress couldn't fix it because ___. The worst weakness was ___.</i>",
+"stemText": "Congress couldn't fix it because ___. The worst weakness was ___.",
+"placeholder": "Congress couldn't fix it because ___. The worst weakness was ___."
+},
+{
+"short": "Broke",
+"ref": "Reader page 2",
+"title": "2. The rebellion the comic skipped",
+"from": 2,
+"to": 2,
+"check": {
+"page": 2,
+"tag": "Reading check · Reader page 2",
+"q": "Read the speech bubbles. What are the ordinary people at the bottom complaining about?",
+"right": "Paper money is worthless, and people can't pay debts.",
+"wrong": [
+"British soldiers are still living in their towns.",
+"Congress keeps raising their taxes much too high.",
+"The new president keeps ignoring the states."
+],
+"why": "✓ Correct. Money trouble was everywhere. In Massachusetts, it turned into a rebellion.",
+"hint": "Read the two speech bubbles from the woman and the man at the bottom."
+},
+"prompt": "The comic skips Shays' Rebellion. Why did it scare leaders into wanting a stronger government?",
+"stem": "<span class=\"declass\"><b>Fact file</b><span class=\"line\">In Massachusetts, many farmers were war veterans who were never fully paid. Courts were taking their farms for unpaid debts and taxes.</span><span class=\"line\">In 1786, armed farmers led by <b>Daniel Shays</b> shut down courts. In January 1787, they marched on a weapons storehouse in Springfield.</span><span class=\"line\">Congress had no army to stop them. A state militia broke it up. Leaders were scared.</span></span>Write 1–2 sentences. Start like this: <i>Shays' Rebellion scared leaders because ___. It showed the Articles were weak because ___.</i>",
+"stemText": "Shays' Rebellion scared leaders because ___. It showed the Articles were weak because ___.",
+"placeholder": "Shays' Rebellion scared leaders because ___. It showed the Articles were weak because ___."
+},
+{
+"short": "Whose land?",
+"ref": "Reader page 3",
+"title": "3. Open land?",
+"from": 3,
+"to": 3,
+"check": {
+"page": 3,
+"tag": "Reading check · Reader page 3",
+"q": "Read the boxes on the right. What did the Northwest Ordinance of 1787 do?",
+"right": "Banned slavery and promised education in the territory.",
+"wrong": [
+"Gave the whole territory back to Great Britain.",
+"Split the territory up among the 13 states.",
+"Saved the territory for war veterans only."
+],
+"why": "✓ Correct. The comic calls it the one \"bright event.\" It also gave territories a path to become states equal to the old ones.",
+"hint": "Read the box on the right side of reader page 3."
+},
+"prompt": "The comic shows the Northwest Territory as open land for settlers. Whose land was it?",
+"stem": "<span class=\"declass\"><b>Fact file</b><span class=\"line\">Native nations like the Shawnee (shaw-NEE), Miami, and Delaware already lived there.</span><span class=\"line\">The Ordinance itself promised that their \"lands and property shall never be taken from them without their consent.\"</span><span class=\"line\">Settlers poured in anyway. After U.S. troops won the Battle of Fallen Timbers in 1794, the 1795 Treaty of Greenville forced Native nations to give up most of what is now Ohio.</span></span>Write 1–2 sentences. Start like this: <i>The land belonged to ___. The Ordinance promised ___, but ___.</i>",
+"stemText": "The land belonged to ___. The Ordinance promised ___, but ___.",
+"placeholder": "The land belonged to ___. The Ordinance promised ___, but ___."
+}
+],
+questions:["Why couldn't Congress fix fights like this between the states?", "The comic skips Shays' Rebellion. Why did it scare leaders into wanting a stronger government?", "The comic shows the Northwest Territory as open land for settlers. Whose land was it?"],
+validate(s){if(!s.name)return{text:"Type your first name + last initial (like Jordan M.) at the top of the questions.",focus:"studentName"};
+ const mc=[1, 2, 3].find(i=>!s.checkDone(i));if(mc)return{text:"Get the check right for part "+mc+" first.",part:mc};
+ const ma=[1, 2, 3].find(i=>!s.answer(i));if(ma)return{text:"Write your answer for part "+ma+" before turning in.",part:ma,focus:"answer"+ma};
+ for(const i of [1, 2, 3]){const j=window.classJunkStop&&window.classJunkStop(document.getElementById("answer"+i));if(j)return{text:"Part "+i+": "+j,part:i}}return null},
+buildAnswers(s){const a={Standard:"SS.9-12.US.2","First-try correct":[1, 2, 3].filter(i=>(s.tries(i)||1)===1).length+" of 3"};
+ this.questions.forEach((q,i)=>a[q]=s.answer(i+1));a["Reading checks"]="3 of 3 correct · tries: "+[1, 2, 3].map(i=>s.tries(i)||1).join(", ");return a}
+};
+</script>
+<script src="../../shared/flip-reader.js?v=5urls"></script>
+<script>
+// One-line "what's going on" caption under each page, for kids who missed the lecture.
+(function(){const caps=["<b>1781–1786.</b> The war is over, but the states act like separate countries.", "<b>1786.</b> Money trouble is everywhere, and leaders want a stronger government.", "<b>1787.</b> Congress makes a plan for the land northwest of the Ohio River."];
+ const pos=document.getElementById("flipPos"),cap=document.getElementById("pgCap");
+ const sync=()=>{const m=pos.textContent.match(/page (\d+)/);cap.innerHTML=m?caps[+m[1]-1]||"":""};
+ new MutationObserver(sync).observe(pos,{childList:true,characterData:true,subtree:true});sync();})();
+// Choices wait for the read timer, and "Not quite" scrolls into view (same as the other readings).
+(function(){
+  document.addEventListener("click",e=>{const b=e.target.closest("#flipNext2");if(!b||!/Next part|Turn in/.test(b.textContent))return;
+    const a=document.querySelector(".flip-part:not([hidden]) textarea:not([disabled])");if(!a||!a.value.trim()||!window.classJunkStop)return;
+    if(window.classJunkStop(a)){e.stopImmediatePropagation();e.preventDefault()}},true);
+  const t=document.getElementById("flipTimer");
+  const sync=()=>document.body.classList.toggle("reading-now",t.textContent.trim()!=="");
+  new MutationObserver(sync).observe(t,{childList:true,characterData:true,subtree:true});sync();
+  document.getElementById("flipCards").addEventListener("click",e=>{if(!e.target.closest(".choice"))return;
+    setTimeout(()=>{const f=[...document.querySelectorAll(".flip-part:not([hidden]) .fb")].find(x=>x.textContent.trim());
+      if(f){const r=f.getBoundingClientRect();if(r.bottom>innerHeight-80||r.top<0)f.scrollIntoView({behavior:"smooth",block:"center"})}},120)});
+})();
+</script>
+</body></html>

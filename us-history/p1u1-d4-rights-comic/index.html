@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Stop the Power Grab | U.S. History Part 1 · Unit 1 Day 4</title>
+<meta name="description" content="Read a 1953 U.S. government comic about checks and balances and the Bill of Rights.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../shared/graphic-reading.css?v=3">
+<style>
+.flip-layout{grid-template-columns:minmax(0,1.9fr) minmax(320px,1fr)}
+.flip-stage img{min-height:0;max-height:calc(100vh - 150px)}
+.qcol{padding-bottom:100px}
+.intro-line{font-size:1.02rem;margin:0 0 10px}
+.wordhelp{margin:6px 0 0}.wordhelp summary{cursor:pointer;font-weight:750;color:var(--navy)}
+.words{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0 10px;padding:0;list-style:none}
+.words li{background:#fff;border:1px solid #e6dcc8;border-left:4px solid var(--navy);border-radius:8px;padding:3px 9px;font-size:.88rem}
+.declass{display:block;background:#fff;border:2px dashed #18364a;border-radius:10px;padding:8px 11px;margin:6px 0 8px;font-weight:650;color:#22313b;line-height:1.4;font-style:normal}
+.declass > b:first-child{display:block;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#18364a;margin-bottom:2px}
+.declass .line{display:block;margin:3px 0}
+.declass .note{display:block;margin-top:5px;font-weight:600;font-size:.9rem;color:#5b4632}
+.dime{display:inline-block;background:#e6bd64;color:#0f2433;border-radius:999px;font-weight:850;padding:0 9px;margin-right:4px}
+.credits{font-size:.8rem;color:var(--muted);margin:10px 0 0;line-height:1.4}
+.pg-cap{margin:8px 2px 0;font-size:.95rem;line-height:1.35;background:#fff;border:1px solid #e6dcc8;border-left:4px solid #e6bd64;border-radius:8px;padding:6px 10px}.pg-cap:empty{display:none}
+.gr-head{padding-top:18px;padding-bottom:16px}.gr-head h1{margin:6px 0 6px}.gr-head .hook{margin-bottom:8px}
+body.reading-now .choices{opacity:.45;pointer-events:none}
+</style>
+<script src="../../shared/assignments.js?v=20261116m2"></script><script src="../../shared/turnin.js?v=20261116m2"></script></head><body>
+<header class="gr-head" data-years="1789">
+<div class="gr-wrap">
+<div class="kicker">U.S. History · Part 1 · Unit 1 Day 4 · Founding &amp; Citizenship</div>
+<h1>Stop the Power Grab</h1>
+<p class="hook"><span class="dime">1787–1791</span>They just got rid of a king. How do you stop the next leader from becoming one? Read the 1953 comic's answer and figure out who won the fight. 3 pages · 3 checks · 3 short answers. <b>About 20 minutes.</b></p>
+<p class="goal"><b>Today's goal:</b> Explain how the Constitution limits power and why people demanded a Bill of Rights.</p>
+<details class="std-details"><summary>Iowa standards for today</summary>
+<p><b>Standard SS.9-12.US.2</b> — Analyze diverse ideologies through primary and secondary sources, noting the impact on social, economic, and political institutions.</p>
+</details>
+<nav><a class="back" href="../../">← Class activities</a></nav>
+</div></header>
+
+<nav class="route" aria-label="Your progress"><ol id="flipRoute"></ol></nav>
+
+<main class="gr-main gr-wrap">
+<section class="card">
+<p class="intro-line"><b>You're the fact-checker.</b> For each part: <b>read</b> the comic on the left → get the <b>check</b> right → read the <b>fact file</b> → write 1–2 sentences. Done = all parts green, then turn in at the bottom.</p>
+<details class="wordhelp"><summary>Word help (tap to open)</summary>
+<ul class="words" aria-label="Word help">
+<li><b>Branch</b> = one part of the government</li><li><b>Checks and balances</b> = each branch can limit the others</li><li><b>Veto</b> = the President rejects a bill</li><li><b>Amendment</b> = a change added to the Constitution</li><li><b>Federalism</b> = power split between the national government and the states</li><li><b>1953 comic</b> = made by the U.S. government to tell America's story in other countries. It shows one point of view.</li>
+</ul></details>
+<p class="welcome" id="welcome" role="status"></p>
+</section>
+
+<div class="flip-layout">
+<section class="flip-reader reading" id="flipReader" aria-label="Pages from the 1953 comic A Picture Story of the United States">
+<div class="flip-bar"><div><p class="eyebrow">The reading</p><h2>A real 1953 comic · 3 pages</h2></div><span class="flip-pos" id="flipPos"></span></div>
+<div class="flip-tools"><button type="button" class="quiet" id="flipBack">← Back a page</button><span class="grow"><span id="flipPart"></span><span id="flipTimer" aria-live="polite"></span></span><button type="button" class="secondary" id="flipNext">Next page →</button><button type="button" class="quiet" id="flipZoom">Make page bigger</button></div>
+<div class="flip-stage"><img id="flipImg" alt="" src="pages/p-01.jpg"></div>
+<p class="pg-cap" id="pgCap" aria-live="polite"></p>
+<p class="flip-cap">Click the page to make it bigger.</p>
+</section>
+
+<div class="qcol">
+<section class="card">
+<label for="studentName">First name + last initial (like Jordan M.)</label><input id="studentName" maxlength="100" autocomplete="off" placeholder="First name + last initial (like Jordan M.)" required>
+</section>
+<div id="flipCards"></div>
+<div class="flip-nav"><button type="button" class="quiet" id="flipBack2">← Back</button><button type="button" class="secondary" id="flipNext2">Next page →</button><p class="flip-why" id="flipWhy" aria-live="polite"></p></div>
+<section class="card finish" id="finish">
+<h2>Turn in your work</h2>
+<div class="actions"><button id="submitBtn" class="primary" type="button">Turn in answers</button></div><p id="submitStatus" class="status" role="status" aria-live="polite"></p><p class="reader-note">Your work saves on this device, so you can come back later. Your teacher sees it after you turn it in.</p>
+<p class="credits">Comic: <i>A Picture Story of the United States</i> (1953), made for the United States Information Service, a U.S. government agency. Public domain. Scan: University of Nebraska–Lincoln Libraries, educational comics collection, via the Internet Archive.</p>
+</section>
+<p class="credits" style="text-align:center"><button id="clearBtn" class="quiet" type="button" style="font-size:.8rem">Start over</button></p>
+</div></div></main>
+<div class="flip-big" id="flipBig" hidden role="dialog" aria-label="Bigger page"><button type="button" class="quiet" id="flipBigClose">✕ Close</button><img id="flipBigImg" alt="Bigger view of the current page"></div>
+<script>
+window.FLIP={
+title:"Pages from the 1953 comic A Picture Story of the United States",prefix:"ush-p1u1d4-rights-comic-",pages:3,readSeconds:8,lockSeconds:8,
+alts:["Reader page 1. A box says the Constitution took effect in 1789, but not all citizens were satisfied. One man reads: It says that Congress shall make the laws, that the President shall enforce them, that the Supreme Court shall act as a check on both. Thus we need not fear a concentration of power. The other man answers: Nevertheless, the people's rights require greater protection!", "Reader page 2. Two years later, ten amendments drafted by James Madison were added, known as the Bill of Rights. A scroll lists: Freedom of religion, freedom of speech, freedom of the press, freedom of assembly, sanctity of the home.", "Reader page 3. Alexander Hamilton, Secretary of the Treasury, founded the Federalist Party, which believed in strong central government. Thomas Jefferson, Secretary of State, headed the opposition party, which favored dividing authority among the states."],
+assignmentId:"ush-p1u1-d4-rights-comic",api:"https://fynn-class-assignment-submissions-20261024.neotboy.chatgpt.site/api/submit",
+lockedText:"This box opens when you get the check right.",
+clearConfirm:"Start over? This clears your checks and answers on this device.",
+successText:"Turned in! Your teacher got your 3 checks and 3 answers. You are done.",
+wrongText:(c,left)=>left>0?"Not quite. "+c.hint+" Try again in "+left+"…":"Not quite. "+c.hint+" The choices were mixed up. Try again.",
+parts:[
+{
+"short": "Checks",
+"ref": "Reader page 1",
+"title": "1. Who's right?",
+"from": 1,
+"to": 1,
+"check": {
+"page": 1,
+"tag": "Reading check · Reader page 1",
+"q": "Read the first man's speech bubble. Why does he say \"we need not fear a concentration of power\"?",
+"right": "Power is split among Congress, the President, and the courts.",
+"wrong": [
+"The President can overrule Congress and the courts.",
+"The states must approve every new law first.",
+"Washington promised he would never abuse power."
+],
+"why": "✓ Correct. That's separation of powers. Each branch can also check the others.",
+"hint": "Read the first man's speech bubble, the one holding the paper."
+},
+"prompt": "The second man says \"the people's rights require greater protection.\" Which side was he on, and what did he want?",
+"stem": "<span class=\"declass\"><b>Fact file</b><span class=\"line\"><b>Federalists</b> (Madison, Hamilton) said the country needed a stronger government. They wrote 85 essays called the Federalist Papers.</span><span class=\"line\"><b>Anti-Federalists</b> (Patrick Henry, George Mason) feared it could become a new tyranny. Their biggest complaint: no list of protected rights.</span><span class=\"line\">Checks example: the President can <b>veto</b> a bill. Congress can override a veto with a two-thirds vote. Courts can rule that a law breaks the Constitution.</span></span>Write 1–2 sentences. Start like this: <i>He was on the (Federalist / Anti-Federalist) side because ___. He wanted ___.</i>",
+"stemText": "He was on the (Federalist / Anti-Federalist) side because ___. He wanted ___.",
+"placeholder": "He was on the (Federalist / Anti-Federalist) side because ___. He wanted ___."
+},
+{
+"short": "Rights",
+"ref": "Reader page 2",
+"title": "2. Rights you use every day",
+"from": 2,
+"to": 2,
+"check": {
+"page": 2,
+"tag": "Reading check · Reader page 2",
+"q": "Read the words next to the scroll. Who drafted the ten amendments?",
+"right": "James Madison",
+"wrong": [
+"Patrick Henry",
+"George Mason",
+"Thomas Jefferson"
+],
+"why": "✓ Correct. Madison was a Federalist. He wrote the Bill of Rights to keep the Federalists' promise to the other side.",
+"hint": "Read the words between the speech bubbles and the scroll."
+},
+"prompt": "Pick one right on the scroll. How does it protect you today?",
+"stem": "<span class=\"declass\"><b>Fact file</b><span class=\"line\">The <b>Bill of Rights</b> became part of the Constitution in 1791.</span><span class=\"line\"><b>1st Amendment:</b> religion, speech, press, and gathering peacefully. Iowa case: in 1965, Des Moines students wore black armbands to protest the Vietnam War. In <b>Tinker v. Des Moines</b> (1969), the Supreme Court said students keep free speech at school.</span><span class=\"line\">\"Sanctity of the home\" means your home is protected. The <b>4th Amendment</b> bans unreasonable searches.</span></span>Write 1–2 sentences. Start like this: <i>___ protects me today because ___. For example, ___.</i>",
+"stemText": "___ protects me today because ___. For example, ___.",
+"placeholder": "___ protects me today because ___. For example, ___."
+},
+{
+"short": "Federalism",
+"ref": "Reader page 3",
+"title": "3. Strong national government or strong states?",
+"from": 3,
+"to": 3,
+"check": {
+"page": 3,
+"tag": "Reading check · Reader page 3",
+"q": "Read the yellow box. What did Hamilton's Federalist Party believe in?",
+"right": "A strong central government.",
+"wrong": [
+"Giving most power to the states.",
+"Getting rid of the Constitution.",
+"Bringing back a king for America."
+],
+"why": "✓ Correct. Jefferson's party wanted more power left with the states. That tug-of-war is about federalism.",
+"hint": "Read the words next to Hamilton's picture."
+},
+"prompt": "Federalism splits power between the national government and the states. Give one example of each.",
+"stem": "<span class=\"declass\"><b>Fact file</b><span class=\"line\">The national government runs the army and prints money. Iowa runs its own schools and gives out driver's licenses.</span><span class=\"line\">The <b>10th Amendment</b> says powers not given to the national government belong to the states or to the people.</span><span class=\"line\">The Constitution starts with \"We the People.\" That means the government's power comes from the people.</span></span>Write 1–2 sentences. Start like this: <i>The national government handles ___. Iowa handles ___. Splitting power this way helps because ___.</i>",
+"stemText": "The national government handles ___. Iowa handles ___. Splitting power this way helps because ___.",
+"placeholder": "The national government handles ___. Iowa handles ___. Splitting power this way helps because ___."
+}
+],
+questions:["The second man says \"the people's rights require greater protection.\" Which side was he on, and what did he want?", "Pick one right on the scroll. How does it protect you today?", "Federalism splits power between the national government and the states. Give one example of each."],
+validate(s){if(!s.name)return{text:"Type your first name + last initial (like Jordan M.) at the top of the questions.",focus:"studentName"};
+ const mc=[1, 2, 3].find(i=>!s.checkDone(i));if(mc)return{text:"Get the check right for part "+mc+" first.",part:mc};
+ const ma=[1, 2, 3].find(i=>!s.answer(i));if(ma)return{text:"Write your answer for part "+ma+" before turning in.",part:ma,focus:"answer"+ma};
+ for(const i of [1, 2, 3]){const j=window.classJunkStop&&window.classJunkStop(document.getElementById("answer"+i));if(j)return{text:"Part "+i+": "+j,part:i}}return null},
+buildAnswers(s){const a={Standard:"SS.9-12.US.2","First-try correct":[1, 2, 3].filter(i=>(s.tries(i)||1)===1).length+" of 3"};
+ this.questions.forEach((q,i)=>a[q]=s.answer(i+1));a["Reading checks"]="3 of 3 correct · tries: "+[1, 2, 3].map(i=>s.tries(i)||1).join(", ");return a}
+};
+</script>
+<script src="../../shared/flip-reader.js?v=5urls"></script>
+<script>
+// One-line "what's going on" caption under each page, for kids who missed the lecture.
+(function(){const caps=["<b>1789.</b> The Constitution is the law now, but people still argue about it.", "<b>1791.</b> The Bill of Rights is added.", "<b>1790s.</b> The first two political parties form."];
+ const pos=document.getElementById("flipPos"),cap=document.getElementById("pgCap");
+ const sync=()=>{const m=pos.textContent.match(/page (\d+)/);cap.innerHTML=m?caps[+m[1]-1]||"":""};
+ new MutationObserver(sync).observe(pos,{childList:true,characterData:true,subtree:true});sync();})();
+// Choices wait for the read timer, and "Not quite" scrolls into view (same as the other readings).
+(function(){
+  document.addEventListener("click",e=>{const b=e.target.closest("#flipNext2");if(!b||!/Next part|Turn in/.test(b.textContent))return;
+    const a=document.querySelector(".flip-part:not([hidden]) textarea:not([disabled])");if(!a||!a.value.trim()||!window.classJunkStop)return;
+    if(window.classJunkStop(a)){e.stopImmediatePropagation();e.preventDefault()}},true);
+  const t=document.getElementById("flipTimer");
+  const sync=()=>document.body.classList.toggle("reading-now",t.textContent.trim()!=="");
+  new MutationObserver(sync).observe(t,{childList:true,characterData:true,subtree:true});sync();
+  document.getElementById("flipCards").addEventListener("click",e=>{if(!e.target.closest(".choice"))return;
+    setTimeout(()=>{const f=[...document.querySelectorAll(".flip-part:not([hidden]) .fb")].find(x=>x.textContent.trim());
+      if(f){const r=f.getBoundingClientRect();if(r.bottom>innerHeight-80||r.top<0)f.scrollIntoView({behavior:"smooth",block:"center"})}},120)});
+})();
+</script>
+</body></html>
