@@ -357,7 +357,7 @@ function law(){const slot=G.task-16,existing=state.rules[slot];if(lawTask!==G.ta
 function yearEnding(){const end=CH.ending(state,E,CountrySociety);return end.title+'. '+end.text;}
 const STANDARD='SS.9-12.Gov.1, SS.9-12.Gov.4';
 function scoreCard(sc,end){return `<section class="final-score ending-${end.key}"><div class="fs-kicker">YOUR ENDING</div><div class="fs-row"><div class="fs-dead"><span>Lives lost</span><b>${sc.deaths}</b></div><div class="fs-dead"><span>People hurt</span><b>${sc.injuries}</b></div></div><p class="fs-ending"><b>${esc(end.title)}.</b> ${esc(end.text)}</p><p class="guided-help">Compare your ending and lives lost with your class.</p></section>`;}
-function turnInBox(){return G.turnedIn?`<section class="turnin-box"><p class="guided-success">✓ Turned in. Your teacher can see your work.<br><b>Name:</b> ${esc(G.turnedIn)}</p><button id="turninAgain" class="wide guide-back">Turn in again (after changes)</button></section>`:`<section class="turnin-box"><h3>Turn in to my teacher</h3><label for="turninName">First name + last initial (like Jordan M.)</label><input id="turninName" maxlength="40" autocomplete="off" placeholder="Jordan M."><button id="turninBtn" class="primary wide">Turn in to my teacher</button><p id="turninMsg" class="guided-help" role="status"></p></section>`;}
+function turnInBox(){return G.turnedIn?`<section class="turnin-box"><p class="guided-success">✓ Turned in.</p></section>`:`<section class="turnin-box"><h3>Turn in to my teacher</h3><label for="turninName">First name + last initial (like Jordan M.)</label><input id="turninName" maxlength="40" autocomplete="off" placeholder="Jordan M."><button id="turninBtn" class="primary wide">Turn in to my teacher</button><p id="turninMsg" class="guided-help" role="status"></p></section>`;}
 function checkResult(id){const r=G.knowledge.log[id];if(!r||!r.passed)return 'not done';return r.attempts[0]?.correct?'right on first try':'right after '+(r.attempts.length-1)+' miss'+(r.attempts.length>2?'es':'');}
 function turnInAnswers(sc,end){
  const stats=learningStats(),events=E.governanceEvents,harm=CountrySociety.consequences(state,events);
@@ -375,7 +375,6 @@ function turnInAnswers(sc,end){
  return answers;
 }
 function bindTurnIn(sc,end){
- if($('#turninAgain'))$('#turninAgain').onclick=()=>{G.turnedIn='';refresh();};
  const btn=$('#turninBtn');if(!btn)return;
  btn.onclick=async()=>{
   const name=$('#turninName').value.trim(),msg=$('#turninMsg');

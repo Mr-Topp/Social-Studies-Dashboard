@@ -713,8 +713,8 @@
          <p class="stem">Starter: ${esc(p.stem)}</p>
          <button type="button" class="mini" data-for="${p.id}">Use the starter</button>
          <textarea id="w_${p.id}" rows="4" placeholder="Write 2 short sentences…">${esc(st.writing[p.id] || "")}</textarea>`).join("")}
-         <button type="button" class="go" id="sendBtn">${sent ? "Turn in again" : "Turn in ▶"}</button>
-         <p id="sendMsg" class="msg" role="status" aria-live="polite">${sent ? "✓ Turned in. Court is adjourned." : ""}</p>
+         <button type="button" class="go" id="sendBtn"${sent ? " disabled" : ""}>${sent ? "✓ Turned in" : "Turn in ▶"}</button>
+         <p id="sendMsg" class="msg${sent ? " good" : ""}" role="status" aria-live="polite">${sent ? "✓ Turned in. Court is adjourned." : ""}</p>
        </div>`,
       { left: court(-1, st.name, { look: st.judge }) + `<div class="endcard small ${e.cls}"><span class="eicon" aria-hidden="true">${e.icon}</span><h2>${esc(e.key)}</h2></div><div class="typed"><p><b>Tinker:</b> armband rule struck down.</p><p><b>Ewing:</b> three-strikes law stands.</p><p><b>Acton:</b> drug tests for athletes stand.</p><p><b>Simmons:</b> death penalty under 18 struck down.</p></div>`, mid: "" });
     PROMPTS.forEach(p => {
@@ -794,7 +794,9 @@
 
   $("restartBtn").onclick = () => {
     if (!confirm("Start over? This clears your work on this device.")) return;
+    const wasIn = st.turnedIn && !(window.classIsTestT && window.classIsTestT());
     const name = st.name, look = st.judge; st = fresh(); st.name = name; st.judge = cleanLook(look); st.step = name ? 0 : -1;
+    st.turnedIn = wasIn;   // starting over never re-opens turning in
     try { window.classFirstTry && window.classFirstTry.reset(); } catch (e) {}
     save(); render(); window.scrollTo(0, 0);
   };

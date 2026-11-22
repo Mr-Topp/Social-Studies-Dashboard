@@ -669,8 +669,8 @@
     panel().innerHTML = `<section class="card">
       <h2>${T("📝 Your campaign report")}</h2>
       ${PROMPTS.map(p => `<label for="w_${p.id}">${p.label[s]}</label><p class="stem">${p.stem}</p><textarea id="w_${p.id}" rows="3">${esc(st.writing[p.id] || "")}</textarea>`).join("")}
-      <button type="button" class="go" id="sendBtn">${st.turnedIn ? T("Turn in again") : T("Turn in")}</button>
-      <p id="sendMsg" class="msg" role="status" aria-live="polite">${st.turnedIn ? T("✓ Turned in. You can fix your writing and turn it in again.") : ""}</p>
+      <button type="button" class="go" id="sendBtn"${st.turnedIn ? " disabled" : ""}>${st.turnedIn ? T("✓ Turned in") : T("Turn in")}</button>
+      <p id="sendMsg" class="msg${st.turnedIn ? " good" : ""}" role="status" aria-live="polite">${st.turnedIn ? T("✓ Turned in.") : ""}</p>
     </section>`;
     PROMPTS.forEach(p => { $("w_" + p.id).addEventListener("input", e => { st.writing[p.id] = e.target.value; save(); }); });
     $("sendBtn").onclick = turnIn;
@@ -703,8 +703,8 @@
       const data = await res.json().catch(() => ({}));
       if (!res.ok) throw new Error(data.error || "Your work did not save. Try again.");
       st.turnedIn = true; save();
-      msg.textContent = "✓ Turned in! Your teacher can see your work. You're done."; msg.className = "msg good";
-      $("sendBtn").textContent = "✓ Turned in"; $("sendBtn").disabled = false;
+      msg.textContent = "✓ Turned in."; msg.className = "msg good";
+      $("sendBtn").textContent = "✓ Turned in";
     } catch (err) { msg.textContent = err.message || "Could not turn in. Try again."; msg.className = "msg bad"; $("sendBtn").disabled = false; }
   }
   function buildAnswers() {
@@ -763,7 +763,8 @@
   });
   $("restartBtn").onclick = () => {
     if (!confirm("Start over? This clears your work on this device.")) return;
-    const name = st.name; st = fresh(); st.name = name;
+    const name = st.name, wasIn = st.turnedIn && !(window.classIsTestT && window.classIsTestT());
+    st = fresh(); st.name = name; st.turnedIn = wasIn;   // starting over never re-opens turning in
     if (window.classFirstTry) window.classFirstTry.reset();
     voteAnimated = false; save(); render(); window.scrollTo(0, 0);
   };

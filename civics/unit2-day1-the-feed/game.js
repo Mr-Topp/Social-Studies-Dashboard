@@ -439,9 +439,9 @@ function pFinal() {
   const rank = [{ s: st.score, me: true }].concat(liveOthers().length ? liveOthers().map(p => ({ s: p.score })) : st.bots).sort((a, b) => b.s - a.s).findIndex(x => x.me) + 1;
   tray.classList.add('final-tray');
   tray.innerHTML = `<div class="final"><div><p class="eyebrow">FINAL RESULTS</p><p class="big">★ ${st.score.toLocaleString()}</p><p class="jarline">#${rank} in the class race · best streak 🔥${st.best}</p>
-    <ul><li>Call It: <b>passed ✓</b></li><li>Voter ideologies (first try): <b>${t.ideo[0]} of ${t.ideo[1]}</b></li><li>Voter parties (first try): <b>${t.party[0]} of ${t.party[1]}</b></li><li>Same Belief, Different Party: <b>${t.why[0]} of ${t.why[1]}</b></li></ul>
-    <p class="note">📤 Last step: turn in your results.</p></div>
-    <div><button class="primary go" id="sendBtn">${st.turnedIn ? 'Turn in again' : 'Turn in'}</button><p class="fb ${st.turnedIn ? 'good' : ''}" id="sendMsg">${st.turnedIn ? 'Turned in! You can turn in again if you need to.' : ''}</p></div></div>`;
+    <ul><li>Call It: <b>✓ done</b></li><li>Voter ideologies: <b>✓ done</b></li><li>Voter parties: <b>✓ done</b></li><li>Same Belief, Different Party: <b>✓ done</b></li></ul>
+    ${st.turnedIn ? '' : '<p class="note">📤 Last step: turn in your results.</p>'}</div>
+    <div><button class="primary go" id="sendBtn"${st.turnedIn ? ' disabled' : ''}>${st.turnedIn ? 'Turned in ✓' : 'Turn in'}</button><p class="fb ${st.turnedIn ? 'yay' : ''}" id="sendMsg">${st.turnedIn ? '✓ Turned in.' : ''}</p></div></div>`;
   $('#sendBtn').onclick = turnIn; pushScore();
 }
 const hasWord = (t, w) => new RegExp('\\b' + w.replace(/[.*+?^${}()|[\]\\]/g, '\\$&') + (w.length > 4 ? '' : '(s|es|ed|ing)?\\b')).test(t);
@@ -499,7 +499,7 @@ async function turnIn() {
     const res = await classTurnIn(OLD_API, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ studentName: st.name, assignmentId: ASSIGN, assignmentTitle: 'Government Unit 2 · Day 1 · Decision Desk (Ideology vs. Party)', answers }) });
     const data = await res.json().catch(() => ({}));
     if (!res.ok) throw new Error(data.error || 'Your work did not save. Try again.');
-    const hasL4 = !!((($('#w_crit') || {}).value || '').trim()); if (!st.bonusPaid || (hasL4 && !st.l4Paid)) { st.score += (st.bonusPaid ? 0 : 200) + (hasL4 && !st.l4Paid ? 300 : 0); st.bonusPaid = true; if (hasL4) st.l4Paid = true; pushScore(); hud(); SCENE.confetti(); const bg = document.querySelector('.final .big'); if (bg) bg.textContent = '★ ' + st.score.toLocaleString(); } st.turnedIn = true; save(); msg.className = 'fb yay'; msg.textContent = st.turnedIn && st.sentOnce ? 'Updated! Your teacher sees your newest answers.' : 'Turned in! +200 bonus. Your teacher can see your work.'; st.sentOnce = true; save(); $('#sendBtn').textContent = 'Turned in ✓'; $('#sendBtn').disabled = false;
+    const hasL4 = !!((($('#w_crit') || {}).value || '').trim()); if (!st.bonusPaid || (hasL4 && !st.l4Paid)) { st.score += (st.bonusPaid ? 0 : 200) + (hasL4 && !st.l4Paid ? 300 : 0); st.bonusPaid = true; if (hasL4) st.l4Paid = true; pushScore(); hud(); SCENE.confetti(); const bg = document.querySelector('.final .big'); if (bg) bg.textContent = '★ ' + st.score.toLocaleString(); } st.turnedIn = true; save(); msg.className = 'fb yay'; msg.textContent = '✓ Turned in.'; st.sentOnce = true; save(); $('#sendBtn').textContent = 'Turned in ✓'; const nt = document.querySelector('.final .note'); if (nt) nt.hidden = true;
   } catch (e) { msg.className = 'fb oops'; msg.textContent = e.message || 'Could not turn in. Try again.'; $('#sendBtn').disabled = false; }
 }
 
@@ -613,6 +613,7 @@ document.querySelectorAll('[data-close]').forEach(b => b.onclick = () => $('#' +
 $('#resetBtn').onclick = () => { if (!confirm('Start over? This erases your progress on this device.')) return; const old = st; st = fresh(); st.name = old.name; st.room = old.room; st.phase = 'intro'; st.primer = 1; ['firstAtt', 'firstSeen', 'r1'].forEach(k => { if (old[k] != null) st[k] = old[k]; });
   if (st.firstAtt == null && old.att && old.att.seen > 0) { st.firstAtt = old.att.right; st.firstSeen = old.att.seen; } if (st.firstAtt != null || Object.keys(st.r1 || {}).length) st.lockFirst = true;
   Object.keys(old.r2 || {}).forEach(k => { const o = old.r2[k]; st.r2[k] = { iw: o.iw || 0, pw: o.pw || 0, idone: false, pdone: false, li: !!(o.idone || o.li), lp: !!(o.pdone || o.lp) }; }); Object.keys(old.r3 || {}).forEach(k => { const o = old.r3[k]; st.r3[k] = { wrong: o.wrong || 0, done: false, lk: !!(o.done || o.lk) }; });
+  st.turnedIn = !!old.turnedIn && !(window.classIsTestT && window.classIsTestT());   // starting over never re-opens turning in
   st.bonusPaid = old.bonusPaid || old.turnedIn; st.l4Paid = old.l4Paid; st.sentOnce = old.sentOnce; if (old.phase !== 'r1' && old.phase !== 'intro' && old.phase !== 'title' && old.attempts) st.passedSets = old.attempts; else if (old.passedSets) st.passedSets = old.passedSets; st.prevTries = (old.prevTries || 0) + (old.att && (old.att.seen > 0 || old.att.n > 1) ? old.att.n : 0); st.attempts = old.attempts; st.resets = (old.resets || 0) + 1; save(); location.reload(); };
 if (st.name) startArena();
 SCENE.sync();

@@ -3,7 +3,8 @@
    20 real moments, all from the Day 7 slides. Students name the principle
    or fact behind each one and build a streak.
    - Wrong answer: streak resets, the reason shows, and that question comes
-     back at the end. Only first tries count toward the score.
+     back at the end. First tries go to the teacher in the turn-in only;
+     students never see a score (locked rule, Fynn 11/2).
    - Halfway break after 10. Exit ticket (from the Day 7 slides) at the end.
    Saved on this device. Turn-in goes through shared/turnin.js (classTurnIn).
    ===================================================================== */
@@ -167,7 +168,6 @@
     $("hud").hidden = !on;
     if (!on) return;
     $("progTxt").textContent = solved() + " of " + N + " done";
-    $("rightTxt").textContent = firstTry() + " right on the first try";
     $("progFill").style.width = Math.round(solved() / N * 100) + "%";
     $("streakNum").textContent = st.streak;
     $("streakBox").classList.toggle("hot", st.streak >= 3);
@@ -189,7 +189,6 @@
         </div>
         <div class="chips"><span>⏱️ <b>About 15 min</b></span><span>❓ <b>20 questions</b></span><span>✍️ <b>1 exit ticket</b></span></div>
         <button type="button" class="go" id="startBtn">START ▶</button>
-        <p class="fine">Only your first try on each question counts toward your score.</p>
       </div>
       <div class="sample" aria-hidden="true">
         <span class="tag">EXAMPLE</span>
@@ -282,7 +281,7 @@
     app.innerHTML = `<section class="panel">
       <p class="kicker" style="color:#a8770c">Halfway</p>
       <h2>10 down, ${N - solved()} to go.</h2>
-      <div class="stats"><p>✅ <b>${firstTry()}</b> right on the first try</p><p>🔥 Best streak: <b>${st.best}</b></p></div>
+      <div class="stats"><p>🔥 Best streak: <b>${st.best}</b></p></div>
       <p>Next up: checks and balances, amendments, and how rights limit what government can do.</p>
       <button type="button" class="go" id="goOn">Keep going ▶</button>
     </section>`;
@@ -292,18 +291,14 @@
   // ---------- End + exit ticket + turn in ----------
   function mins() { const ms = (st.finished || Date.now()) - (st.started || Date.now()); return Math.max(1, Math.round(ms / 60000)); }
   function endScreen() {
-    const ft = firstTry();
-    const head = ft >= 18 ? "Constitution expert." : ft >= 14 ? "Strong work." : ft >= 10 ? "You got there." : "You finished. Now lock it in.";
     app.innerHTML = `<section class="panel">
-      <p class="kicker" style="color:#a8770c">All 20 done · ${esc(head)}</p>
+      <p class="kicker" style="color:#a8770c">✓ All 20 done</p>
       <h2>One last step: your exit ticket ↓</h2>
-      <div class="stats"><p>✅ <b>${ft} of ${N}</b> right on the first try</p><p>🔥 Best streak: <b>${st.best}</b></p><p>⏱️ About <b>${mins()}</b> min</p></div>
+      <div class="stats"><p>🔥 Best streak: <b>${st.best}</b></p><p>⏱️ About <b>${mins()}</b> min</p></div>
       <div class="sheet"><label for="w1">✍️ Exit ticket: ${esc(PROMPT.label)}</label><p class="stem">Start: <i>${esc(PROMPT.stem)}</i></p><textarea id="w1" rows="4">${esc(st.writing)}</textarea></div>
       <div class="sheet"><label for="studentName">First name + last initial</label><input id="studentName" type="text" autocomplete="off" maxlength="60" placeholder="Like Jordan M." value="${esc(st.name)}"></div>
-      <button type="button" class="go" id="sendBtn">${st.turnedIn ? "Turn in again" : "Turn in"}</button>
-      <p id="sendMsg" class="msg" role="status" aria-live="polite">${st.turnedIn ? "✓ Turned in. You can fix your writing and turn it in again." : ""}</p>
-      <h3 style="margin:18px 0 4px">How you did on each one</h3>
-      <div class="plist">${QS.map(q => { const r = st.res[q.id] || {}; const c = !r.wrong ? "g" : r.wrong === 1 ? "m" : "b"; return `<div class="pitem ${c}">${q.e} ${esc(q.short)}<small>${!r.wrong ? "First try" : r.wrong === 1 ? "Second try" : r.wrong + " misses"} · ${esc(q.opts[0].t)}</small></div>`; }).join("")}</div>
+      <button type="button" class="go" id="sendBtn"${st.turnedIn ? " disabled" : ""}>${st.turnedIn ? "✓ Turned in" : "Turn in"}</button>
+      <p id="sendMsg" class="msg${st.turnedIn ? " good" : ""}" role="status" aria-live="polite">${st.turnedIn ? "✓ Turned in." : ""}</p>
     </section>`;
     $("w1").addEventListener("input", e => { st.writing = e.target.value; save(); });
     $("studentName").addEventListener("input", e => { st.name = e.target.value; save(); });
@@ -344,8 +339,8 @@
       const data = await res.json().catch(() => ({}));
       if (!res.ok) throw new Error(data.error || "Your work did not save. Try again.");
       st.turnedIn = true; save();
-      msg.textContent = "✓ Turned in! Your teacher can see your work. You're done."; msg.className = "msg good";
-      btn.textContent = "Turn in again"; btn.disabled = false;
+      msg.textContent = "✓ Turned in."; msg.className = "msg good";
+      btn.textContent = "✓ Turned in";
     } catch (err) { msg.textContent = err.message || "Could not turn in. Try again."; msg.className = "msg wait"; btn.disabled = false; }
   }
 
@@ -361,7 +356,8 @@
 
   $("restartBtn").onclick = () => {
     if (!confirm("Start over? This clears your work on this device.")) return;
-    const name = st.name; st = fresh(); st.name = name; save();
+    const name = st.name, wasIn = st.turnedIn && !isTestT();
+    st = fresh(); st.name = name; st.turnedIn = wasIn; save();   // starting over never re-opens turning in
     if (window.classFirstTry) window.classFirstTry.reset();
     render(); window.scrollTo(0, 0);
   };

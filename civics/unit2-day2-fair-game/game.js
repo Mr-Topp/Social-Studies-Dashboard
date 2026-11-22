@@ -389,7 +389,7 @@ function pFinal() {
     <ul><li>Signed up: <b>${signed}</b> · Sent honestly to the other booth: <b>${honest}</b> · Walked away: <b>${ORDER.length - signed - honest}</b></li></ul>
     <p class="note">${ORDER.map(id => { const r = st.res[id] || {}; return `${FOLK[id].name} ${r.pitch === 'walked' ? '😕' : r.pitch === 'honest' ? '🤝' : '✅'}`; }).join(' · ')}</p></div>
     <div>${PROMPTS.map(p => `<label for="w_${p.id}" style="display:block;font-weight:850;margin:10px 0 2px${p.optional ? ';color:#7a5800' : ''}">${esc(p.label)}</label><p class="stem">Starter: ${esc(p.stem)}</p><textarea id="w_${p.id}">${esc(st.writing[p.id] || '')}</textarea>`).join('')}
-    <button class="primary go" id="sendBtn">${st.turnedIn ? 'Turn in again' : 'Turn in'}</button><p class="fb ${st.turnedIn ? 'good' : ''}" id="sendMsg">${st.turnedIn ? 'Turned in! You can fix your answers and turn in again.' : ''}</p></div></div>`;
+    <button class="primary go" id="sendBtn"${st.turnedIn ? ' disabled' : ''}>${st.turnedIn ? 'Turned in ✓' : 'Turn in'}</button><p class="fb ${st.turnedIn ? 'good' : ''}" id="sendMsg">${st.turnedIn ? '✓ Turned in.' : ''}</p></div></div>`;
   PROMPTS.forEach(p => $('#w_' + p.id).addEventListener('input', e => { st.writing[p.id] = e.target.value; save(); }));
   $('#sendBtn').onclick = turnIn;
   pushScore();
@@ -416,7 +416,7 @@ async function turnIn() {
     const res = await classTurnIn(OLD_API, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ studentName: st.name, assignmentId: ASSIGN, assignmentTitle: 'Government Unit 2 · Day 2 · Fair Game', answers }) });
     const data = await res.json().catch(() => ({}));
     if (!res.ok) throw new Error(data.error || 'Your work did not save. Try again.');
-    st.turnedIn = true; save(); msg.className = 'fb good'; msg.textContent = 'Turned in! Your teacher can see your work. You\'re done.'; $('#sendBtn').textContent = 'Turned in ✓'; $('#sendBtn').disabled = false;
+    st.turnedIn = true; save(); msg.className = 'fb good'; msg.textContent = '✓ Turned in.'; $('#sendBtn').textContent = 'Turned in ✓';
   } catch (e) { msg.className = 'fb bad'; msg.textContent = e.message || 'Could not turn in. Try again.'; $('#sendBtn').disabled = false; }
 }
 
@@ -569,7 +569,7 @@ const SCENE = (() => {
 /* ---------------- BOOT ---------------- */
 $('#helpBtn').onclick = () => $('#helpDialog').showModal();
 document.querySelectorAll('[data-close]').forEach(b => b.onclick = () => $('#' + b.dataset.close).close());
-$('#resetBtn').onclick = () => { if (!confirm('Start over? This erases your progress on this device.')) return; const n = st.name, r = st.room; st = fresh(); ORDER = st.order; st.name = n; st.room = r; st.phase = 'intro'; if (window.classFirstTry) classFirstTry.reset(); save(); location.reload(); };
+$('#resetBtn').onclick = () => { if (!confirm('Start over? This erases your progress on this device.')) return; const n = st.name, r = st.room, wasIn = st.turnedIn && !(window.classIsTestT && window.classIsTestT()); st = fresh(); ORDER = st.order; st.name = n; st.room = r; st.turnedIn = wasIn; st.phase = 'intro'; if (window.classFirstTry) classFirstTry.reset(); save(); location.reload(); };
 if (st.phase !== 'intro') startArena();
 render();
 

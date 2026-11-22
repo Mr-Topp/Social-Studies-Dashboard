@@ -185,15 +185,15 @@ function report() {
     <div class="kicker">YOUR MOVES</div><ol class="moves-log">${s.log.map(l => `<li>${esc(l)}</li>`).join('')}</ol></article></section>
     <section class="right" id="right"><div class="kicker">STEP 8 OF 8 · TURN IN</div><h3>Explain one fix.</h3>
     <label for="exitAnswer" class="q">${esc(EXIT_Q)}</label><p class="starter">Start like this: <b>${esc(STARTER)}</b></p>
-    <textarea id="exitAnswer" rows="5" placeholder="Under the Articles, Congress could not…">${esc(s.writing || '')}</textarea><p id="wHelp" class="sub" role="status"></p>
-    <label for="studentName">Your name (first name + last initial)</label><input id="studentName" type="text" autocomplete="off" placeholder="Jordan M.">
-    <button id="turnInBtn" class="primary big">${done.length ? 'Turn in again' : 'Turn in'}</button><p id="tiStatus" class="ti-status" role="status" aria-live="polite">${done.length ? '✓ Turned in for ' + done.map(esc).join(', ') + '.' : ''}</p>
+    <textarea id="exitAnswer" rows="5" placeholder="Under the Articles, Congress could not…"${done.length ? ' disabled' : ''}>${esc(s.writing || '')}</textarea><p id="wHelp" class="sub" role="status"></p>
+    ${done.length ? '' : `<label for="studentName">Your name (first name + last initial)</label><input id="studentName" type="text" autocomplete="off" placeholder="Jordan M.">
+    <button id="turnInBtn" class="primary big">Turn in</button>`}<p id="tiStatus" class="ti-status" role="status" aria-live="polite">${done.length ? '✓ Turned in.' : ''}</p>
     <div class="btnrow"><button id="printBtn" class="ghost">Print my report</button></div></section></div>`;
   const ta = $('#exitAnswer');
   if (!ta.value) { ta.value = STARTER.replace('___', ''); }
   ta.oninput = () => { s.writing = ta.value; save(); $('#wHelp').textContent = ''; };
   $('#printBtn').onclick = () => window.print();
-  $('#turnInBtn').onclick = turnIn;
+  if ($('#turnInBtn')) $('#turnInBtn').onclick = turnIn;
 }
 async function turnIn() {
   const st = $('#tiStatus'), ans = $('#exitAnswer').value.trim(), name = $('#studentName').value.trim(), btn = $('#turnInBtn');
@@ -222,7 +222,7 @@ async function turnIn() {
     const d = await res.json().catch(() => ({}));
     if (!res.ok) throw new Error(d.error || 'Your work did not save. Try again.');
     s.turnedIn = [...(s.turnedIn || []), window.classShortName ? classShortName(name) : name]; save();
-    report(); $('#tiStatus').textContent = 'Turned in! Your teacher can see your work. You can close this page.';
+    report();
   } catch (err) { st.textContent = err.message; btn.disabled = false; }
 }
 
@@ -231,7 +231,10 @@ $('#sourceBtn').onclick = () => $('#sourceDialog').showModal();
 document.querySelectorAll('[data-close]').forEach(b => b.onclick = () => $('#' + b.dataset.close).close());
 $('#restartBtn').onclick = () => {
   if (!resetArmed) { resetArmed = true; $('#restartBtn').textContent = 'Click again to restart'; setTimeout(() => { resetArmed = false; $('#restartBtn').textContent = 'Restart'; }, 4000); return; }
-  try { localStorage.removeItem(KEY); } catch (e) {} if (window.classFirstTry) classFirstTry.reset(); location.reload();
+  // Starting over never re-opens turning in (Test T. excepted).
+  const keepIn = (window.classIsTestT && window.classIsTestT()) ? [] : (s.turnedIn || []);
+  try { if (keepIn.length) localStorage.setItem(KEY, JSON.stringify(Object.assign(A.fresh(), { turnedIn: keepIn }))); else localStorage.removeItem(KEY); } catch (e) {}
+  if (window.classFirstTry) classFirstTry.reset(); location.reload();
 };
 const returning = s.started;
 render();

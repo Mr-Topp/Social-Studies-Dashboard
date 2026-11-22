@@ -624,8 +624,8 @@
         ${PROMPTS.map(p => `<div class="sheet"><p class="sheet-tag">${esc(PROMPT_TAGS[p.id])}</p><label for="w_${p.id}">${esc(p.label)}</label><p class="stem">Start: <i>${esc(p.stem)}</i></p><textarea id="w_${p.id}" rows="3">${esc(st.writing[p.id] || "")}</textarea></div>`).join("")}
         <div class="sheet sign"><label for="studentName">First name + last initial</label>
         <input id="studentName" type="text" autocomplete="off" maxlength="60" placeholder="First name + last initial (like Jordan M.)" value="${esc(st.name)}"></div>
-        <button type="button" class="go" id="sendBtn">${st.turnedIn ? "Turn in again" : "Turn in"}</button>
-        <p id="sendMsg" class="msg" role="status" aria-live="polite">${st.turnedIn ? "✓ Turned in. You can fix your writing and turn it in again." : ""}</p>
+        <button type="button" class="go" id="sendBtn"${st.turnedIn ? " disabled" : ""}>${st.turnedIn ? "✓ Turned in" : "Turn in"}</button>
+        <p id="sendMsg" class="msg${st.turnedIn ? " good" : ""}" role="status" aria-live="polite">${st.turnedIn ? "✓ Turned in." : ""}</p>
         <div class="stamp slam good ${st.turnedIn ? "" : "hide"}" id="filedStamp">FILED</div>
       </article></section>`;
     PROMPTS.forEach(p => $("w_" + p.id).addEventListener("input", e => { st.writing[p.id] = e.target.value; save(); }));
@@ -686,8 +686,8 @@
       const data = await res.json().catch(() => ({}));
       if (!res.ok) throw new Error(data.error || "Your work did not save. Try again.");
       st.turnedIn = true; save();
-      msg.textContent = "✓ Turned in! Your teacher can see your work. You're done."; msg.className = "msg good";
-      btn.textContent = "Turn in again"; btn.disabled = false;
+      msg.textContent = "✓ Turned in."; msg.className = "msg good";
+      btn.textContent = "✓ Turned in";
       $("filedStamp").classList.remove("hide");
     } catch (err) { msg.textContent = err.message || "Could not turn in. Try again."; msg.className = "msg wait"; btn.disabled = false; }
   }
@@ -712,7 +712,8 @@
 
   $("restartBtn").onclick = () => {
     if (!confirm("Start over? This clears your work on this device.")) return;
-    const name = st.name; st = fresh(); st.name = name; save();
+    const name = st.name, wasIn = st.turnedIn && !(window.classIsTestT && window.classIsTestT());
+    st = fresh(); st.name = name; st.turnedIn = wasIn; save();   // starting over never re-opens turning in
     $("welcome").hidden = true; locked = false; lastPower = st.power; render(); window.scrollTo(0, 0);
   };
   if (st.step > 0) { $("welcome").textContent = "Welcome back! You're on step " + st.step + " of " + STEPS + "."; $("welcome").hidden = false; }

@@ -160,8 +160,8 @@
         const prompts = cfg.finale.prompts;
         app.innerHTML = `<section class="card finale"><p class="kicker">Last step</p><h2>${esc(cfg.finale.title)}</h2>${cfg.finale.report ? cfg.finale.report(st) : ""}
           ${prompts.map(p => `<label for="w_${p.id}">${p.label}</label><p class="stem">${esc(p.stem)}</p><textarea id="w_${p.id}" rows="3">${esc(st.writing[p.id] || "")}</textarea>`).join("")}
-          <button type="button" class="go" id="sendBtn">${st.turnedIn ? "Turn in again" : "Turn in"}</button>
-          <p id="sendMsg" class="msg" role="status" aria-live="polite">${st.turnedIn ? "You already turned this in. You can fix your writing and turn it in again." : ""}</p></section>`;
+          <button type="button" class="go" id="sendBtn"${st.turnedIn ? " disabled" : ""}>${st.turnedIn ? "Turned in ✓" : "Turn in"}</button>
+          <p id="sendMsg" class="msg${st.turnedIn ? " good" : ""}" role="status" aria-live="polite">${st.turnedIn ? "✓ Turned in." : ""}</p></section>`;
         prompts.forEach(p => { $("w_" + p.id).addEventListener("input", e => { st.writing[p.id] = e.target.value; save(); }); });
         $("sendBtn").onclick = async () => {
           const msg = $("sendMsg");
@@ -205,7 +205,7 @@
             const data = await res.json().catch(() => ({}));
             if (!res.ok) throw new Error(data.error || "Your work did not save. Try again.");
             st.turnedIn = true; save();
-            msg.textContent = "Turned in! Your teacher can see your work. You're done."; msg.className = "msg good";
+            msg.textContent = "✓ Turned in."; msg.className = "msg good";
             $("sendBtn").textContent = "Turned in ✓";
           } catch (err) { msg.textContent = err.message || "Could not turn in. Try again."; msg.className = "msg bad"; $("sendBtn").disabled = false; }
         };
@@ -223,7 +223,8 @@
 
       if ($("restartBtn")) $("restartBtn").onclick = () => {
         if (!confirm("Start over? This clears your work on this device.")) return;
-        const name = st.name; st = fresh(); st.name = name;
+        const name = st.name, wasIn = st.turnedIn && !(window.classIsTestT && window.classIsTestT());
+        st = fresh(); st.name = name; st.turnedIn = wasIn;   // starting over never re-opens turning in
         if (window.classFirstTry) window.classFirstTry.reset();
         save(); render(); window.scrollTo(0, 0);
       };

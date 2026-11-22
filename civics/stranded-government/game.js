@@ -413,11 +413,11 @@ function showEnding(){
  }else if(state.phase==='score'){
   const f=finalScore(),pt=f.parts,sg=n=>(n>=0?'+':'−')+Math.abs(n);
   box.innerHTML=`<div class="eyebrow">STEP 10 OF 10 · YOUR ISLAND’S STORY</div><div class="score-row"><div class="score-big"><b>${alive(state)}</b><span> of 30 survived</span></div><div class="lives-big ${state.dead?'hit':''}"><b>${state.dead}</b><span>lives lost</span></div></div><p class="ending-line">${e.badge} ${esc(e.title)}</p><p class="compare">You finished! Compare your island’s story with your class: who kept the most people alive and free?</p>
-  <div class="turnin"><label for="studentName">First name + last initial (like Jordan M.)</label><input id="studentName" maxlength="40" autocomplete="off" value="${esc(state.studentName)}" placeholder="Jordan M."><button class="primary wide" id="turnIn">Turn in to my teacher</button><div id="turnStatus" role="status" class="turn-status ${state.submitted?'ok':''}">${state.submitted?'✓ Turned in! Your teacher can see your work. You can send it again if you need to.':''}</div></div>
+  <div class="turnin">${state.submitted?'':`<label for="studentName">First name + last initial (like Jordan M.)</label><input id="studentName" maxlength="40" autocomplete="off" value="${esc(state.studentName)}" placeholder="Jordan M."><button class="primary wide" id="turnIn">Turn in to my teacher</button>`}<div id="turnStatus" role="status" class="turn-status ${state.submitted?'ok':''}">${state.submitted?'✓ Turned in.':''}</div></div>
   <div class="end-actions"><button class="text-button" id="finalDownload">Download my island report ↓</button><button class="text-button" id="journalEnd">Read my captain’s log</button><button class="text-button" id="replay">Play again</button></div>`;
   $('.score-big b').style.minWidth=String(alive(state)).length+'ch';$('.lives-big b').style.minWidth=String(state.dead).length+'ch';
   countTo($('.score-big b'),0,alive(state),1300,undefined,250,()=>pulse($('.score-big'),'landed'));countTo($('.lives-big b'),0,state.dead,900,undefined,500);
-  $('#studentName').oninput=e=>{state.studentName=e.target.value;save()};$('#turnIn').onclick=turnIn;$('#finalDownload').onclick=download;$('#journalEnd').onclick=journal;$('#replay').onclick=restart;
+  if($('#studentName')){$('#studentName').oninput=e=>{state.studentName=e.target.value;save()};$('#turnIn').onclick=turnIn;}$('#finalDownload').onclick=download;$('#journalEnd').onclick=journal;$('#replay').onclick=restart;
  }
 }
 function renderCheck(feedback){
@@ -439,12 +439,15 @@ async function turnIn(){
  if(typeof window.classTurnIn!=='function'){say('Turn-in is not available right now. Keep this page open and tell your teacher.');return}
  btn.disabled=true;say('Sending…',true);
  try{const res=await classTurnIn(SUBMIT_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({studentName:name,assignmentId:ASSIGNMENT_ID,answers:buildAnswers()})});const data=await res.json().catch(()=>({}));
-  if(res.ok){state.submitted=true;state.studentName=name;save();say('✓ Turned in! Your teacher can see your work now.',true);beep(900,.2)}else say(data.error||'That didn’t go through. Check your name and try again.');}
- catch{say('Could not reach the class site. Keep this page open and try again.')}finally{btn.disabled=false}
+  if(res.ok){state.submitted=true;state.studentName=name;save();say('✓ Turned in.',true);beep(900,.2);btn.hidden=true;$('#studentName').disabled=true}else say(data.error||'That didn’t go through. Check your name and try again.');}
+ catch{say('Could not reach the class site. Keep this page open and try again.')}finally{if(!state.submitted)btn.disabled=false}
 }
 function journal(){$('#journalTitle').textContent=`${state.name}: captain’s log`;$('#journalEntries').innerHTML=state.log.length?state.log.map((l,n)=>`<article class="log-entry"><span>${l.kind==='event'?'⚡ DISASTER':'DECISION'}</span><h3>${esc(l.title)}</h3><p>You chose: ${esc(l.choice)}</p><p>${esc(l.result)}</p>${l.news&&l.news.length?`<p class="log-dead">BREAKING: ${esc(l.news.join('. '))}.</p>`:''}<small>${esc(l.learn)}</small></article>`).join(''):'<p>Your first decision is waiting at the water station.</p>';$('#journalDialog').showModal();}
 function download(){const e=ENDINGS[state.ending],f=finalScore();const lines=[`STRANDED: GOVERN OR COLLAPSE · ISLAND REPORT`,`Island: ${state.name}`,`Standards: ${STANDARD}`,`Ending: ${e?e.title:'In progress'}`,`Lives lost: ${state.dead} of 30 · Survivors: ${alive(state)}${state.fled?` · Fled: ${state.fled}`:''}`,`Meters: ${labels.map((n,i)=>`${n} ${state.stats[i]}`).join(' | ')} | Ren's power ${state.ren}`,'',...state.log.map(l=>`${l.kind==='event'?'DISASTER':'DECISION'}: ${l.title}\n  Choice: ${l.choice}\n  Result: ${l.result}${l.news&&l.news.length?`\n  Breaking: ${l.news.join('. ')}`:''}\n  Concept: ${l.learn}\n`),state.sentence?`My sentence: Our island needed a government because ${state.sentence.trim()}`:'','','Game outcomes are fictional. They are not facts about real countries.'];const blob=new Blob([lines.filter(x=>x!==undefined).join('\n')],{type:'text/plain'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='stranded-island-report.txt';a.click();setTimeout(()=>URL.revokeObjectURL(a.href),1000);}
-function restart(){if(confirm('Start over? Your island on this device will be erased.')){localStorage.removeItem(KEY);try{window.classFirstTry&&classFirstTry.reset()}catch{}location.reload()}}
+function restart(){if(confirm('Start over? Your island on this device will be erased.')){
+ // Starting over never re-opens turning in (Test T. excepted).
+ if(state.submitted&&!isTestT()){try{localStorage.setItem(KEY,JSON.stringify(Object.assign(freshState(),{submitted:true,studentName:state.studentName})))}catch{}}else localStorage.removeItem(KEY);
+ try{window.classFirstTry&&classFirstTry.reset()}catch{}location.reload()}}
 /* ===== Island map =====
    Static art (sea, island, trails, trunks) is painted once into two cached layers and rebuilt only on resize.
    Each frame only redraws the moving parts. The loop stops while the tab is hidden, holds one still frame

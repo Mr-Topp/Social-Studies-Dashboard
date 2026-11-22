@@ -435,15 +435,15 @@ var ov=document.createElement('div');ov.id='exitOverlay';ov.hidden=true;ov.setAt
 function draw(msg){var html='<div class="xp"><button class="xclose" aria-label="Close exit ticket">×</button><h2>Exit ticket · '+esc(C.title)+'</h2><p class="xsub">Answer all '+(Q.length+1)+'. Then type your name and turn in.</p>';
 Q.forEach(function(q,n){var ok=st.done[q.id];html+='<div class="xq"><b>'+(n+1)+'. '+esc(q.text)+'</b>'+(ok?'<p class="xok">✓ '+esc(q.right)+'</p>':'<div class="xch">'+shuffle(q.choices).map(function(c){return '<button data-q="'+q.id+'" data-c="'+esc(c)+'">'+esc(c)+'</button>'}).join('')+'</div>')+(msg&&msg.q===q.id?'<p class="xmsg">'+msg.t+'</p>':'')+'</div>'});
 var done=st.turnedIn||[];
-html+='<div class="xq"><b>'+(Q.length+1)+'. '+esc(W)+'</b><textarea id="xAns" rows="3" placeholder="'+esc(C.w.placeholder)+'">'+esc(st.draft||'')+'</textarea></div>'+
-(done.length?'<p class="xok">✓ Turned in for '+done.map(esc).join(', ')+(/\.$/.test(done[done.length-1])?'':'.')+' Partner? Type their name and answer, then turn in again.</p>':'')+
-'<label for="xName"><b>Your name (first name + last initial)</b></label><input id="xName" type="text" autocomplete="off" placeholder="Jordan M."><button id="xTurn" class="xgo">Turn in</button><p id="xStatus" class="xmsg" role="status" aria-live="polite"></p></div>';
+html+='<div class="xq"><b>'+(Q.length+1)+'. '+esc(W)+'</b><textarea id="xAns" rows="3" placeholder="'+esc(C.w.placeholder)+'"'+(done.length?' disabled':'')+'>'+esc(st.draft||'')+'</textarea></div>'+
+(done.length?'<p class="xok">✓ Turned in.</p>':
+'<label for="xName"><b>Your name (first name + last initial)</b></label><input id="xName" type="text" autocomplete="off" placeholder="Jordan M."><button id="xTurn" class="xgo">Turn in</button>')+'<p id="xStatus" class="xmsg" role="status" aria-live="polite"></p></div>';
 ov.innerHTML=html;ov.querySelector('.xclose').onclick=function(){ov.hidden=true};
 document.getElementById('xAns').oninput=function(e){st.draft=e.target.value;save()};
 ov.querySelectorAll('[data-q]').forEach(function(b){b.onclick=function(){var q=Q.filter(function(x){return x.id===b.dataset.q})[0];
  if(b.dataset.c===q.right){if(window.classFirstTry)classFirstTry.right(q.id);st.done[q.id]=true;save();draw()}
  else{if(window.classFirstTry)classFirstTry.wrong();draw({q:q.id,t:'Not quite. The choices moved. Think back to the slides and try again.'})}}});
-document.getElementById('xTurn').onclick=turnIn}
+var xt=document.getElementById('xTurn');if(xt)xt.onclick=turnIn}
 function turnIn(){var tt=window.classIsTestT&&window.classIsTestT(),s=document.getElementById('xStatus'),ans=document.getElementById('xAns').value.trim(),name=document.getElementById('xName').value.trim(),btn=document.getElementById('xTurn');
  if(!tt&&Q.some(function(q){return !st.done[q.id]})){s.textContent='Answer questions 1'+(Q.length>1?' and 2':'')+' first.';return}
  if(!tt&&ans.split(/\s+/).filter(Boolean).length<(C.w.min||8)){s.textContent=C.w.short;document.getElementById('xAns').focus();return}
@@ -455,7 +455,7 @@ function turnIn(){var tt=window.classIsTestT&&window.classIsTestT(),s=document.g
  var answers={Standard:STANDARD};Q.forEach(function(q){answers[q.label]=q.right});answers[C.w.label]=ans;
  classTurnIn('https://fynn-class-assignment-submissions-20261024.neotboy.chatgpt.site/api/submit',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({studentName:name,assignmentId:C.assignmentId,answers:answers})})
  .then(function(r){return r.json().catch(function(){return{}}).then(function(d){if(!r.ok)throw new Error(d.error||'Your work did not save. Try again.')})})
- .then(function(){st.turnedIn=(st.turnedIn||[]).concat([window.classShortName?classShortName(name):name]);st.draft='';save();draw();document.getElementById('xStatus').textContent='Turned in! Nice work.'})
+ .then(function(){st.turnedIn=(st.turnedIn||[]).concat([window.classShortName?classShortName(name):name]);save();draw()})
  .catch(function(e){s.textContent=e.message;btn.disabled=false})}
 open.onclick=function(){draw();ov.hidden=false};
 var exitIx=S.indexOf(document.getElementById('exit'));
