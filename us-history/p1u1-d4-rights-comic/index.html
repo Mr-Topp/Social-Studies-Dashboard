@@ -38,7 +38,7 @@ body.reading-now .choices{opacity:.45;pointer-events:none}
 <p class="hook"><span class="dime">1787–1791</span>They just got rid of a king. How do you stop the next leader from becoming one? Read the 1953 comic's answer and figure out who won the fight. 3 pages · 3 checks · 3 short answers. <b>About 20 minutes.</b></p>
 <p class="goal"><b>Today's goal:</b> Explain how the Constitution limits power and why people demanded a Bill of Rights.</p>
 <details class="std-details"><summary>Iowa standards for today</summary>
-<p><b>Standard SS.9-12.US.2</b> — Analyze diverse ideologies through primary and secondary sources, noting the impact on social, economic, and political institutions.</p>
+<p><b>Standard SS.9-12.US.2</b> — Analyze diverse ideologies through primary and secondary sources, noting the impact on social, economic, and political institutions.</p><p><b>Standard SS.9-12.US.3</b> — Assess the impact of exemplary Americans who displayed civic virtues in the creation of the United States of America.</p>
 </details>
 <nav><a class="back" href="../../">← Class activities</a></nav>
 </div></header>
@@ -166,7 +166,7 @@ validate(s){if(!s.name)return{text:"Type your first name + last initial (like Jo
  const mc=[1, 2, 3].find(i=>!s.checkDone(i));if(mc)return{text:"Get the check right for part "+mc+" first.",part:mc};
  const ma=[1, 2, 3].find(i=>!s.answer(i));if(ma)return{text:"Write your answer for part "+ma+" before turning in.",part:ma,focus:"answer"+ma};
  for(const i of [1, 2, 3]){const j=window.classJunkStop&&window.classJunkStop(document.getElementById("answer"+i));if(j)return{text:"Part "+i+": "+j,part:i}}return null},
-buildAnswers(s){const a={Standard:"SS.9-12.US.2","First-try correct":[1, 2, 3].filter(i=>(s.tries(i)||1)===1).length+" of 3"};
+buildAnswers(s){const a={Standard:"SS.9-12.US.2, SS.9-12.US.3","First-try correct":[1, 2, 3].filter(i=>(s.tries(i)||1)===1).length+" of 3"};
  this.questions.forEach((q,i)=>a[q]=s.answer(i+1));a["Reading checks"]="3 of 3 correct · tries: "+[1, 2, 3].map(i=>s.tries(i)||1).join(", ");return a}
 };
 </script>
