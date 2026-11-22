@@ -30,22 +30,22 @@ window.WS = {
       items: [
         { text: "The committee doesn’t like the bill. What can happen to it?", ic: "🔍", short: "Committee doesn't like it",
           qs: [{ type: "choice", ans: "B", opts: [
-            { v: "A", label: "It goes straight to the President", ltr: "A" },
-            { v: "B", label: "It can be changed, or it can be killed and never get a vote", ltr: "B" },
-            { v: "C", label: "It automatically becomes a law", ltr: "C" },
-            { v: "D", label: "The Supreme Court decides if it moves on", ltr: "D" } ] }] },
+            { v: "A", label: "It skips ahead to the President for a signature", ltr: "A" },
+            { v: "B", label: "It can be changed, or killed before any vote", ltr: "B" },
+            { v: "C", label: "It becomes law anyway once 30 days have passed", ltr: "C" },
+            { v: "D", label: "The Supreme Court decides if it can move on", ltr: "D" } ] }] },
         { text: "The House and Senate pass <b>different</b> versions of the bill. What happens next?", ic: "🏛️", short: "Different versions",
           qs: [{ type: "choice", ans: "C", opts: [
-            { v: "A", label: "The House version wins because the House is bigger", ltr: "A" },
-            { v: "B", label: "The President picks which version to sign", ltr: "B" },
-            { v: "C", label: "They work out one version, and both chambers vote on it again", ltr: "C" },
-            { v: "D", label: "The bill becomes two separate laws", ltr: "D" } ] }] },
+            { v: "A", label: "The House version wins because the House has more members", ltr: "A" },
+            { v: "B", label: "The President chooses which of the two versions to sign", ltr: "B" },
+            { v: "C", label: "They agree on one version, and both chambers vote again", ltr: "C" },
+            { v: "D", label: "The bill becomes two separate laws, one for each chamber", ltr: "D" } ] }] },
         { text: "The President vetoes the bill. Is the bill dead forever?", ic: "🖊️", short: "Veto",
           qs: [{ type: "choice", ans: "D", opts: [
-            { v: "A", label: "Yes — a veto always ends the bill", ltr: "A" },
-            { v: "B", label: "No — the states vote on it next", ltr: "B" },
-            { v: "C", label: "No — the Supreme Court can sign it instead", ltr: "C" },
-            { v: "D", label: "Not always — 2/3 of both the House and Senate can override the veto", ltr: "D" } ] }] }
+            { v: "A", label: "Yes — once vetoed, the bill can never come back", ltr: "A" },
+            { v: "B", label: "No — the states vote on it next, and most must agree", ltr: "B" },
+            { v: "C", label: "No — the Supreme Court can sign it into law instead", ltr: "C" },
+            { v: "D", label: "Not always — 2/3 of both chambers can override it", ltr: "D" } ] }] }
       ] },
     { key: "C", name: "Finish Your Poster", plan: "Title your poster + the hardest step",
       dir: "<b>Finish your poster.</b> Every poster needs a title — and a point.",

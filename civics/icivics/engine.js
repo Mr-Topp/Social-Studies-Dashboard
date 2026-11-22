@@ -37,6 +37,33 @@ function qsOf(part,item){
 }
 function partByKey(k){ return W.parts.find(p=>p.key===k); }
 
+/* Shuffle plain multiple-choice lists (2026-11-21, review fix) so the right answer isn't always in the same spot.
+   NOT shuffled: word banks / matching banks (unique or cap), banks set on the whole part, lists reused on several
+   items (category buttons like For/Against or Large/Small), 2-choice lists, number lists (50/100/435), free picks.
+   A question can force it with shuffle:true or shuffle:false. Order is fixed per student (seeded by name), so it
+   stays put between clicks. Answers are saved by value, so grading and Test T. "Answer it" don't change.
+   Lettered choices (A–D) are re-lettered in display order; the turn-in still reports the original key letter. */
+const vsig = q=>JSON.stringify((q.opts||[]).map(o=>{ const x=opt(o); return [x.v,x.label]; }));
+function shouldShuffle(part,q){
+  if(q.shuffle===true) return true;
+  if(q.shuffle===false || (q.type && q.type!=="choice") || q.unique || q.cap || q.free) return false;
+  const o=(q.opts||[]).map(opt);
+  if(o.length<3 || (part.q && part.q.opts===q.opts) || o.every(x=>/^\d/.test(String(x.label)))) return false;
+  const sig=vsig(q); let uses=0;
+  part.items.forEach(it=>qsOf(part,it).forEach(qq=>{ if(qq.opts && vsig(qq)===sig) uses++; }));
+  return uses<2;
+}
+function seeded(str){ let h=2166136261; for(let i=0;i<str.length;i++){ h^=str.charCodeAt(i); h=Math.imul(h,16777619); }
+  return ()=>{ h=(h+0x6D2B79F5)|0; let t=Math.imul(h^(h>>>15),1|h); t=(t+Math.imul(t^(t>>>7),61|t))^t; return ((t^(t>>>14))>>>0)/4294967296; }; }
+function arrange(part,i,qi,q){
+  const o=(q.opts||[]).map(opt);
+  if(!shouldShuffle(part,q)) return o;
+  const rnd=seeded([(S&&S.name||"").toLowerCase(), W.id, part.key, i, qi].join("|")), a=o.slice();
+  for(let k=a.length-1;k>0;k--){ const j=Math.floor(rnd()*(k+1)); [a[k],a[j]]=[a[j],a[k]]; }
+  if(o.some(x=>x.ltr)) return a.map((x,k)=>Object.assign({},x,{ltr:o[k].ltr}));
+  return a;
+}
+
 /* ---------------- state ---------------- */
 function fresh(name){ const s={name, part:PARTS[0], ans:{}, lock:{}, first:{}, cur:{}, done:{}, turnedIn:false};
   W.parts.forEach(p=>{ s.ans[p.key]={}; s.lock[p.key]={}; s.first[p.key]={}; s.cur[p.key]=0; }); return s; }
@@ -130,7 +157,7 @@ function renderPart(){
       inp.onkeydown=e=>{ if(e.key==="Enter"){ e.preventDefault(); goNext(part); } };
       wrap.appendChild(row);
     } else {
-      const opts=(q.opts||[]).map(opt);
+      const opts=arrange(part,cur,qi,q);
       const box=$(`<div class="opts c${q.cols||1}${q.compact?" compact":""}"></div>`);
       const usedBy={}; if(q.unique) part.items.forEach((_,j)=>{ if(j!==cur){ const v=A(pk,j,qi); if(v!=null) usedBy[v]=j; } });
       const count={}; if(q.cap) part.items.forEach((_,j)=>{ if(j!==cur){ const v=A(pk,j,qi); if(v!=null) count[v]=(count[v]||0)+1; } });

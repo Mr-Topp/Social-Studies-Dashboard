@@ -14,7 +14,7 @@ window.WTP_READINGS = {
     "c": [
      "Even the king has to obey the law",
      "The king owns all the land in England",
-     "Nobles must obey every order from the king",
+     "Nobles must obey every royal order",
      "Parliament should choose the next king"
     ],
     "why": "That's the rule of law: nobody, not even a king, is above it.",
@@ -24,9 +24,9 @@ window.WTP_READINGS = {
     "q": "Under the English Bill of Rights, what could the king no longer do on his own?",
     "c": [
      "Tax people without Parliament agreeing",
-     "Sign treaties with other countries",
-     "Choose the people who work for him",
-     "Live in the royal palace in London"
+     "Sign peace treaties with other countries",
+     "Choose the advisers who work for him",
+     "Name new lords to sit in Parliament"
     ],
     "why": "The king needed Parliament's okay to tax people.",
     "hint": "Look at the 1689 paragraph."
@@ -49,9 +49,9 @@ window.WTP_READINGS = {
     "q": "Why did Parliament start taxing the colonies after 1763?",
     "c": [
      "Britain was in debt from a war with France",
-     "Colonists asked Britain to send more soldiers",
-     "Colonists had stopped sending crops to Britain",
-     "The king wanted to build colonial schools"
+     "Colonists asked for more British soldiers",
+     "Colonists stopped trading with Britain",
+     "The king wanted to pay for colonial roads"
     ],
     "why": "The war with France left Britain deep in debt.",
     "hint": "Look at the 1763 sentence."
@@ -59,9 +59,9 @@ window.WTP_READINGS = {
    {
     "q": "What did \"no taxation without representation\" mean?",
     "c": [
-     "Only lawmakers we choose should be able to tax us",
-     "Colonists should never pay any kind of tax",
-     "Britain should send more people to America",
+     "Only lawmakers we elect should be able to tax us",
+     "Colonists should never have to pay any tax at all",
+     "Britain should send more settlers to America",
      "Only the king, not Parliament, should tax us"
     ],
     "why": "Colonists had no representatives in Parliament, so they said it had no right to tax them.",
@@ -85,9 +85,9 @@ window.WTP_READINGS = {
     "q": "According to the Declaration, where does a government's power come from?",
     "c": [
      "From the people who agree to be governed",
-     "From the king who inherits the throne",
-     "From the army that protects the country",
-     "From the wealthy people who own land"
+     "From the king who inherits the throne by birth",
+     "From the army that protects the whole country",
+     "From the wealthy people who own the most land"
     ],
     "why": "\"Consent of the governed\" means the people give government its power.",
     "hint": "Find the words \"consent of the governed.\""
@@ -95,10 +95,10 @@ window.WTP_READINGS = {
    {
     "q": "Why did Jefferson list complaints about King George III?",
     "c": [
-     "To prove the king had broken the deal with the people",
+     "To prove the king broke his deal with the people",
      "To ask the king for lower taxes and more trade",
      "To show Britain the colonies could pay their debts",
-     "To explain why Congress needed a new king"
+     "To explain why the colonies needed a new king"
     ],
     "why": "If the king broke the deal, the people could replace that government.",
     "hint": "Read the sentence about the complaints."
@@ -123,7 +123,7 @@ window.WTP_READINGS = {
      "They made most of what they needed themselves",
      "They bought most goods from big-city stores",
      "The government gave them food and supplies",
-     "They traded crops with Britain for everything"
+     "They traded crops with Britain for all goods"
     ],
     "why": "They grew, built, and made most things on their own.",
     "hint": "Read the second paragraph."
@@ -132,8 +132,8 @@ window.WTP_READINGS = {
     "q": "Who could usually vote in the 1780s?",
     "c": [
      "White men who owned property",
-     "All adults born in America",
-     "Every man over age 21",
+     "All adults who were born in America",
+     "Every man over the age of 21",
      "Married women who owned land"
     ],
     "why": "Property and being a white man were usually required.",
@@ -156,10 +156,10 @@ window.WTP_READINGS = {
    {
     "q": "Why did Congress run out of money under the Articles?",
     "c": [
-     "It could only ask states for money, and they often refused",
+     "It could only ask states for money; they often said no",
      "It spent too much paying the president and national judges",
-     "Big states got more votes and kept the money",
-     "Britain's king still collected the taxes"
+     "Big states got more votes and kept most of the tax money",
+     "The British king still collected taxes in many states"
     ],
     "why": "Congress had no power to tax. It could only ask.",
     "hint": "Look at the last bullet."
@@ -168,9 +168,9 @@ window.WTP_READINGS = {
     "q": "What did Shays' Rebellion show leaders?",
     "c": [
      "The national government was too weak to keep order",
-     "The farmers wanted a king to run the country",
-     "The states had too little power over their people",
-     "Congress had too many soldiers in Massachusetts"
+     "The farmers wanted a strong king to run the country",
+     "The states had too little power over their own people",
+     "Congress had kept too many soldiers in Massachusetts"
     ],
     "why": "Congress had no army, so it couldn't stop the uprising.",
     "hint": "Read the last two paragraphs."
@@ -193,9 +193,9 @@ window.WTP_READINGS = {
     "q": "Why did small states like the New Jersey Plan?",
     "c": [
      "Every state would get an equal vote",
-     "States with more people would get more votes",
-     "It replaced Congress with a single king",
-     "It let Delaware choose the president"
+     "Bigger states would get more votes",
+     "Seats would depend on each state's land",
+     "Small states would pay less tax"
     ],
     "why": "Equal votes meant big states couldn't outvote them.",
     "hint": "Look at the New Jersey Plan bullet."
@@ -224,15 +224,15 @@ window.WTP_READINGS = {
   "title": "The Slavery Compromises",
   "serious": true,
   "goal": "Explain how the original Constitution protected slavery, and why the delegates agreed to it.",
-  "html": "<p>In 1790, about <b>700,000</b> people in the United States were enslaved, almost 1 out of every 6 people. Most lived in the South.</p>\n<p>At the Convention, delegates from South Carolina, North Carolina, and Georgia warned they would not join unless slavery was protected. Most delegates wanted the new government more than they wanted a fight over slavery. So they made deals:</p>\n<ul><li><b>Three-Fifths Clause:</b> every 5 enslaved people counted as 3 when deciding a state's seats in the House. Enslaved people could not vote, but their numbers gave Southern states more power.</li>\n<li><b>Slave trade:</b> Congress could not ban bringing enslaved people from overseas until <b>1808</b>. Congress banned it the first year it could.</li>\n<li><b>Fugitive Slave Clause:</b> people who escaped slavery had to be returned.</li></ul>\n<p>The original Constitution never uses the word \"slavery.\" Slavery did not end until the <b>13th Amendment</b> in 1865.</p>",
+  "html": "<p>In 1790, about <b>700,000</b> people in the United States were enslaved, about 1 out of every 6 people. Most lived in the South.</p>\n<p>At the Convention, delegates from South Carolina, North Carolina, and Georgia warned they would not join unless slavery was protected. Most delegates wanted the new government more than they wanted a fight over slavery. So they made deals:</p>\n<ul><li><b>Three-Fifths Clause:</b> every 5 enslaved people counted as 3 when deciding a state's seats in the House. Enslaved people could not vote, but their numbers gave Southern states more power.</li>\n<li><b>Slave trade:</b> Congress could not ban bringing enslaved people from overseas until <b>1808</b>. Congress banned it the first year it could.</li>\n<li><b>Fugitive Slave Clause:</b> people who escaped slavery had to be returned.</li></ul>\n<p>The original Constitution never uses the word \"slavery.\" Slavery did not end until the <b>13th Amendment</b> in 1865.</p>",
   "qs": [
    {
     "q": "Why did Southern states want enslaved people counted when deciding House seats?",
     "c": [
-     "More people counted meant more seats and more power",
-     "Enslaved people would then be allowed to vote",
-     "It would lower the taxes their states owed",
-     "Northern states demanded that they be counted"
+     "Counting more people meant more seats and power",
+     "Enslaved people would then be allowed to vote too",
+     "It would lower the taxes their states had to pay",
+     "Northern states had demanded that they be counted"
     ],
     "why": "House seats are based on population, so counting enslaved people gave the South more seats.",
     "hint": "Look at the Three-Fifths bullet."
@@ -241,9 +241,9 @@ window.WTP_READINGS = {
     "q": "Why did most delegates agree to these deals?",
     "c": [
      "They wanted the new government more than a fight over slavery",
-     "Most delegates wanted slavery to spread to new states",
-     "The Constitution said slavery would end in 1808",
-     "Enslaved people's leaders agreed to the deals"
+     "Most delegates wanted slavery to spread into all the new states",
+     "The Constitution said slavery would have to end by the year 1808",
+     "The Northern states had already ended slavery everywhere"
     ],
     "why": "Three Southern states threatened to stay out, and most delegates chose the union over the fight.",
     "hint": "Read the second paragraph. (1808 was about the overseas trade, not slavery itself.)"
@@ -268,7 +268,7 @@ window.WTP_READINGS = {
      "It had no bill of rights to protect people",
      "It gave small states too many senators",
      "It made the President too weak to lead",
-     "It let states keep their own courts"
+     "It let the states keep their own separate armies"
     ],
     "why": "Mason refused to sign mainly because rights weren't listed.",
     "hint": "Read the first paragraph."
@@ -277,7 +277,7 @@ window.WTP_READINGS = {
     "q": "What deal helped the Constitution get ratified?",
     "c": [
      "Federalists promised to add a bill of rights",
-     "Anti-Federalists got to pick the first President",
+     "Anti-Federalists picked the first President",
      "Small states got more seats in the House",
      "States could ignore laws they didn't like"
     ],
@@ -301,7 +301,7 @@ window.WTP_READINGS = {
    {
     "q": "Why didn't Washington use the title \"His Highness\"?",
     "c": [
-     "It sounded too much like a king",
+     "It sounded too much like a king's title",
      "Congress said the title cost too much",
      "Jefferson refused to work for a \"Highness\"",
      "Other countries made fun of the title"
@@ -314,8 +314,8 @@ window.WTP_READINGS = {
     "c": [
      "Washington chose to step down after two terms",
      "The Constitution set it from the very start",
-     "Congress passed it right after Washington won",
-     "The Supreme Court decided it in 1789"
+     "Congress passed it after Washington won",
+     "The Supreme Court ruled on it back in 1789"
     ],
     "why": "It began as Washington's example and became law in 1951.",
     "hint": "Read the last paragraph."
@@ -338,9 +338,9 @@ window.WTP_READINGS = {
     "q": "Why did Jefferson oppose the national bank?",
     "c": [
      "The Constitution didn't clearly give that power",
-     "He wanted each state to print its own money",
+     "He wanted each state to print its own paper money",
      "He thought Britain should run America's bank",
-     "He believed banks should be against the law"
+     "He believed all banks should be against the law"
     ],
     "why": "Jefferson read the Constitution strictly, and it never mentions banks.",
     "hint": "Read the paragraph about the bank."
@@ -385,9 +385,9 @@ window.WTP_READINGS = {
     "q": "How did Southern states get around the 15th Amendment?",
     "c": [
      "Poll taxes and literacy tests blocked Black voters",
-     "They passed a new amendment to cancel it",
-     "They let only Union soldiers vote",
-     "They held elections only every ten years"
+     "They passed a new amendment that canceled it",
+     "They let only Union army veterans vote in elections",
+     "They held state elections only once every ten years"
     ],
     "why": "These rules kept Black men from voting without saying \"race.\"",
     "hint": "Look at the second list."
@@ -411,9 +411,9 @@ window.WTP_READINGS = {
     "q": "What did \"separate but equal\" allow?",
     "c": [
      "States to keep the races apart if things were \"equal\"",
-     "Black and white students to pick any school",
-     "Congress to end segregation in every state",
-     "States to ignore the 14th Amendment completely"
+     "Black and white students to pick any school they wanted",
+     "Congress to end segregation in every state at once",
+     "Each state to decide if Black citizens could vote"
     ],
     "why": "Plessy let segregation stand as long as facilities were supposedly equal.",
     "hint": "Read the Plessy paragraph."
@@ -422,7 +422,7 @@ window.WTP_READINGS = {
     "q": "How was Brown v. Board different from Plessy?",
     "c": [
      "It said separate schools could never be truly equal",
-     "It said segregation was fine on trains only",
+     "It said segregation was fine on trains and buses only",
      "It let each school vote on whether to segregate",
      "It agreed with Plessy but sped up the changes"
     ],
@@ -447,9 +447,9 @@ window.WTP_READINGS = {
     "q": "What did the Supreme Court decide in Minor v. Happersett (1875)?",
     "c": [
      "Being a citizen didn't guarantee the right to vote",
-     "Women could vote in every federal election",
-     "States had to let women serve in Congress",
-     "Women were not citizens of the United States"
+     "Women could now vote in every federal election",
+     "States had to let women vote in state elections",
+     "Women were not full citizens of the United States"
     ],
     "why": "The Court said citizenship and voting were separate.",
     "hint": "Read the second paragraph."
@@ -483,8 +483,8 @@ window.WTP_READINGS = {
     "q": "How did many Southern states keep Black men from voting after the 15th Amendment?",
     "c": [
      "Poll taxes, literacy tests, and threats",
-     "A new amendment taking the vote away",
-     "Allowing only soldiers to vote",
+     "A new amendment that took the vote away",
+     "Allowing only Union army veterans to vote",
      "Holding elections only in big cities"
     ],
     "why": "These tricks blocked voters without saying \"race\" out loud.",
@@ -520,7 +520,7 @@ window.WTP_READINGS = {
     "c": [
      "They could be drafted to fight in Vietnam",
      "They paid the most taxes in the country",
-     "Most of them had already finished college",
+     "Most of them had already gone to college",
      "The Constitution already said they could"
     ],
     "why": "If the country could send them to war, they should get a say.",
@@ -530,7 +530,7 @@ window.WTP_READINGS = {
     "q": "Why did the 26th Amendment pass so fast?",
     "c": [
      "Two different voting ages would have been a mess",
-     "The President ordered the states to pass it",
+     "The President ordered every state to pass it quickly",
      "The Supreme Court wrote the amendment itself",
      "Most states had already lowered the age to 16"
     ],
@@ -566,8 +566,8 @@ window.WTP_READINGS = {
     "q": "Based on Tinker, when CAN a school limit student speech?",
     "c": [
      "When it seriously disrupts school or others' rights",
-     "Whenever a teacher disagrees with the message",
-     "Whenever the speech is about war or politics",
+     "Whenever a teacher or principal dislikes the message",
+     "Whenever the speech is about war or the government",
      "Only when a parent complains to the principal"
     ],
     "why": "Disruption is the line the Court drew.",
@@ -591,9 +591,9 @@ window.WTP_READINGS = {
     "q": "What did Montesquieu argue?",
     "c": [
      "Power should be split so no one becomes a tyrant",
-     "Kings rule because God chose them",
-     "People should give all power to one leader",
-     "Governments should own all property"
+     "Kings rule because God chose them, so obey them",
+     "People should give all power to one strong leader",
+     "Governments should own all land and property"
     ],
     "why": "Separate branches can check each other.",
     "hint": "Look at the Montesquieu bullet."
@@ -602,9 +602,9 @@ window.WTP_READINGS = {
     "q": "Which document used Locke's ideas to justify breaking away from a king?",
     "c": [
      "The American Declaration of Independence",
-     "The Magna Carta of 1215",
-     "The Treaty of Versailles",
-     "The laws of the Roman Republic"
+     "The Magna Carta from England in 1215",
+     "The Treaty of Versailles from 1919",
+     "The laws of the ancient Roman Republic"
     ],
     "why": "In 1776, Americans used Locke's ideas about rights and consent.",
     "hint": "Look at the 1776 bullet. (The Magna Carta came long before Locke.)"
@@ -626,10 +626,10 @@ window.WTP_READINGS = {
    {
     "q": "In a state of nature, why would nobody feel safe?",
     "c": [
-     "Nothing protects people's rights from stronger people",
+     "Nothing protects people's rights from the strong",
      "The government takes too much of people's property",
-     "Too many laws make everyday life confusing",
-     "A king owns the land and makes every rule"
+     "Too many laws make everyday life confusing and slow",
+     "A king would own all the land and make every rule"
     ],
     "why": "With no laws or police, the strong can take whatever they want.",
     "hint": "Reread the part about what happens when there are no laws."
@@ -662,7 +662,7 @@ window.WTP_READINGS = {
    {
     "q": "Being born into slavery in 1785 is an example of what?",
     "c": [
-     "Ascribed status, because it was assigned at birth",
+     "Ascribed status, because it was given at birth",
      "Achieved status, because it was earned",
      "A folkway, because it was an everyday habit",
      "Upward mobility, because it could change"
@@ -675,8 +675,8 @@ window.WTP_READINGS = {
     "c": [
      "Ranking people into layers with unequal power",
      "Moving to a new country for a better life",
-     "Splitting government into three branches",
-     "Everyone in a society having equal rights"
+     "Splitting government into three equal branches",
+     "Everyone in a society having the same rights"
     ],
     "why": "Stratification is about layers of unequal power, money, and respect.",
     "hint": "Read the first sentence."
@@ -699,9 +699,9 @@ window.WTP_READINGS = {
     "q": "What is a social movement?",
     "c": [
      "A large group working over time to change society",
-     "A single protest that happens on one day",
-     "A law that Congress passes very quickly",
-     "A group of friends who share a hobby"
+     "A single protest march that happens on just one day",
+     "A new law that Congress passes to change society",
+     "An everyday habit that most people in society follow"
     ],
     "why": "Movements are large, organized, and last over time.",
     "hint": "Read the first sentence."
@@ -711,7 +711,7 @@ window.WTP_READINGS = {
     "c": [
      "Civil disobedience",
      "A literacy test",
-     "A folkway",
+     "Upward mobility",
      "Achieved status"
     ],
     "why": "Protesters broke an unjust law on purpose and accepted arrest.",
