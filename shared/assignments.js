@@ -197,6 +197,7 @@ window.CLASS_ASSIGNMENTS = {
   "ush-p1u5-d3-wwi-comic": { course: "us-history", unit: 5, day: 3, part: 1, title: "Day 3 · None of Our Business? A 1953 Comic (Reading)", path: "us-history/p1u5-d3-wwi-comic/", std: ["SS.9-12.US.19", "SS.9-12.US.22"] },
   "ush-p1u5-d4-homefront-comic": { course: "us-history", unit: 5, day: 4, part: 1, title: "Day 4 · The Mighty Partnership: A 1953 Comic (Reading)", path: "us-history/p1u5-d4-homefront-comic/", std: ["SS.9-12.US.20", "SS.9-12.US.21", "SS.9-12.US.22"] },
   // ---- World History Part 1 comic readings (Fynn, 2026-11-21: fill the empty Part 1 days with comic readings; pilot = U1 D2) ----
+  "wh-p1u1-d1-spice-comic": { course: "world-history", unit: 1, day: 1, part: 1, title: "Day 1 · The Road to the Spice Coast: 1940s Comics (Reading)", path: "world-history/p1u1-d1-spice-comic/", std: ["SS.9-12.WH.3"] },
   "wh-p1u1-d2-1492-comic": { course: "world-history", unit: 1, day: 2, part: 1, title: "Day 2 · Fact-Check 1492: A 1953 Columbus Comic (Reading)", path: "world-history/p1u1-d2-1492-comic/", std: ["SS.9-12.WH.3", "SS.9-12.WH.4"] },
   "wh-p1u1-d4-peru-comic": { course: "world-history", unit: 1, day: 4, part: 1, title: "Day 4 · 183 Men vs. an Empire: A 1943 Comic (Reading)", path: "world-history/p1u1-d4-peru-comic/", std: ["SS.9-12.WH.3", "SS.9-12.WH.1"] },
   "wh-p1u3-d1-michelangelo-comic": { course: "world-history", unit: 3, day: 1, part: 1, title: "Day 1 · Maker of Giants: A 1942 Michelangelo Comic (Reading)", path: "world-history/p1u3-d1-michelangelo-comic/", std: ["SS.9-12.WH.10"] },
