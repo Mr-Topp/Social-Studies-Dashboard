@@ -341,7 +341,7 @@ function finish(){hud();
  "<p style='font-size:1.1rem'><b>You finished!</b> All three acts are done, and the founders’ plan for government still stands.</p>"+
  (list.length?"<p><b>Test questions to review:</b> "+list.join(", ")+". Find them on your study sheet.</p>":"<p>Keep your study sheet handy for the real civics test.</p>")+
  "<p>Completion code: <span class='code'>"+code().replace(/-\d+$/,"")+"</span></p><p class='small muted'>Tap <b>Turn in to my teacher</b>. If that doesn't work, screenshot this screen and turn it in on Schoology.</p>"+
- "<div class='row'><button class='btn' id='turnin'>Turn in to my teacher</button><button class='btn ghost' id='again'>Play again</button></div><div id='tistatus' style='font-weight:800;margin-top:10px'></div></div>";
+ "<div class='row'><button class='btn' id='turnin'>Turn in to my teacher</button></div><div id='tistatus' style='font-weight:800;margin-top:10px'></div></div>";   // no "Play again": students never redo formatives (Fynn, 11-05)
  confetti();
  var tb=$("turnin"),ts=$("tistatus");
  if(S.turnedIn){tb.textContent="Turned in";tb.disabled=true;ts.textContent="Your results were sent to your teacher.";ts.style.color="var(--green)";}
@@ -355,7 +355,7 @@ function finish(){hud();
    S.turnedIn=true;save();tb.textContent="Turned in";ts.textContent="Turned in! Your results were sent to your teacher.";ts.style.color="var(--green)";}
   catch(e){tb.disabled=false;ts.textContent=(e&&e.message?e.message:"Could not send.")+" Try again, or screenshot this screen.";ts.style.color="var(--red)";}
  };
- var ag=$("again"),armed=false;ag.onclick=function(){if(!armed){armed=true;ag.textContent="Tap again to start over";return;}var n=S.name;clearSave();S=fresh(n);save();route();};}
+}
 start();
 // ---------------- Test T. skip bar (shared/turnin.js) ----------------
 // The teacher signed in as Test T. can jump to any act, crisis, boss phase or the results, and play the right card.
