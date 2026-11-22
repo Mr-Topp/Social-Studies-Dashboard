@@ -459,8 +459,8 @@
          <p class="stem">Starter: ${esc(p.stem)} <button type="button" class="mini" data-starter="${p.id}">Use it</button></p>
          <textarea id="w_${p.id}" rows="3" placeholder="Type 1–2 sentences…">${esc(st.writing[p.id] || "")}</textarea>`).join("")}
          <p class="src">Go deeper: explain <b>why</b> it worked.</p>
-         <button type="button" class="go" id="sendBtn">${sent ? "Turn in again" : "Send memo + turn in ▶"}</button>
-         <p id="sendMsg" class="msg" role="status" aria-live="polite">${sent ? "✓ Turned in. You can fix your memo and turn it in again." : ""}</p>
+         <button type="button" class="go" id="sendBtn"${sent ? " disabled" : ""}>${sent ? "✓ Turned in" : "Send memo + turn in ▶"}</button>
+         <p id="sendMsg" class="msg${sent ? " good" : ""}" role="status" aria-live="polite">${sent ? "✓ Turned in." : ""}</p>
        </div>`);
     PROMPTS.forEach(p => {
       const box = $("w_" + p.id);
@@ -550,7 +550,7 @@
 
   $("restartBtn").onclick = () => {
     if (!confirm("Start over? This clears your work on this device.")) return;
-    const name = st.name; st = fresh(); st.name = name;
+    const name = st.name, wasIn = st.turnedIn; st = fresh(); st.name = name; st.turnedIn = wasIn;   // Start over never re-opens turning in
     try { window.classFirstTry && window.classFirstTry.reset(); } catch (e) {}
     save(); render(); window.scrollTo(0, 0);
   };

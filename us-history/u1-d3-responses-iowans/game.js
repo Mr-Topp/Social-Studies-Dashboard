@@ -458,8 +458,8 @@
          <button type="button" class="mini" data-for="${p.id}">Use the starter</button>
          <textarea id="w_${p.id}" rows="3" placeholder="1–2 full sentences…">${esc(st.writing[p.id] || "")}</textarea>`).join("")}
          <p class="src">Go deeper: say what the OTHER side would argue back.</p>
-         <button type="button" class="go" id="sendBtn">${sent ? "Turn in again" : "Mail it + turn in ▶"}</button>
-         <p id="sendMsg" class="msg" role="status" aria-live="polite">${sent ? "✓ Turned in. You can fix your answers and turn in again." : ""}</p>
+         <button type="button" class="go" id="sendBtn"${sent ? " disabled" : ""}>${sent ? "✓ Turned in" : "Mail it + turn in ▶"}</button>
+         <p id="sendMsg" class="msg${sent ? " good" : ""}" role="status" aria-live="polite">${sent ? "✓ Turned in." : ""}</p>
        </div>`);
     PROMPTS.forEach(p => {
       const box = $("w_" + p.id);
@@ -543,7 +543,7 @@
 
   $("restartBtn").onclick = () => {
     if (!confirm("Start over? This clears your work on this device.")) return;
-    const name = st.name; st = fresh(); st.name = name; st.step = name ? 0 : -1;
+    const name = st.name, wasIn = st.turnedIn; st = fresh(); st.name = name; st.turnedIn = wasIn;   // Start over never re-opens turning in st.step = name ? 0 : -1;
     try { window.classFirstTry && window.classFirstTry.reset(); } catch (e) {}
     save(); render(); window.scrollTo(0, 0);
   };

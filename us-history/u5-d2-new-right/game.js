@@ -282,7 +282,7 @@ function pFinal() {
     <p class="note">Use the starters. Look back at the debates if you need to:</p>
     <div class="peek">${PAIRS.map(p => `<details><summary>${esc(p.icon)} ${esc(p.goal)}</summary><p><b>👍 ${esc(p.sup.name)}:</b> ${esc(p.sup.plain)}</p><p><b>👎 ${esc(p.cri.name)}:</b> ${esc(p.cri.plain)}</p></details>`).join('')}</div></div>
     <div>${PROMPTS.map(p => `<div class="pblock${p.optional ? ' opt' + (st.writing.deep || st.showDeep ? ' open' : '') : ''}">${p.optional ? '<button class="optbtn" id="optBtn" type="button">⭐ Want a challenge? Try the Go deeper question (optional)</button>' : ''}<label for="w_${p.id}" class="pl" style="font-weight:850;margin:10px 0 2px${p.optional ? ';color:#7a5800' : ''}">${esc(p.label)}</label><p class="stem">Starter: ${esc(p.stem)}</p><textarea id="w_${p.id}">${esc(st.writing[p.id] || '')}</textarea></div>`).join('')}
-    <button class="primary go" id="sendBtn">${st.turnedIn ? 'Turn in again' : 'Turn in'}</button><p class="fb ${st.turnedIn ? 'yay' : ''}" id="sendMsg">${st.turnedIn ? '✓ Turned in. You can fix your answers and turn in again.' : ''}</p></div></div>`;
+    <button class="primary go" id="sendBtn"${st.turnedIn ? ' disabled' : ''}>${st.turnedIn ? '✓ Turned in' : 'Turn in'}</button><p class="fb ${st.turnedIn ? 'yay' : ''}" id="sendMsg">${st.turnedIn ? '✓ Turned in.' : ''}</p></div></div>`;
   PROMPTS.forEach(p => $('#w_' + p.id).addEventListener('input', e => { st.writing[p.id] = e.target.value; save(); }));
   $('#optBtn').onclick = () => { st.showDeep = true; save(); $('.pblock.opt').classList.add('open'); $('#w_deep').focus(); };
   $('#sendBtn').onclick = turnIn;
@@ -322,9 +322,9 @@ async function turnIn() {
     const res = await classTurnIn(OLD_API, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ studentName: st.name, assignmentId: ASSIGN, assignmentTitle: TITLE, answers }) });
     const data = await res.json().catch(() => ({}));
     if (!res.ok) throw new Error(data.error || 'Your work did not save. Try again.');
-    const again = st.turnedIn; st.turnedIn = true; save(); SCENE.confetti();
-    msg.className = 'fb yay'; msg.textContent = again ? '✓ Turned in again. Your teacher sees your newest answers.' : '✓ Turned in. Your teacher can see your work.';
-    $('#sendBtn').textContent = '✓ Turned in'; $('#sendBtn').disabled = false;
+    st.turnedIn = true; save(); SCENE.confetti();
+    msg.className = 'fb yay'; msg.textContent = '✓ Turned in. Your teacher can see your work.';
+    $('#sendBtn').textContent = '✓ Turned in';
   } catch (e) { msg.className = 'fb oops'; msg.textContent = e.message || 'Could not turn in. Try again.'; $('#sendBtn').disabled = false; }
 }
 
@@ -411,7 +411,8 @@ $('#helpBtn').onclick = () => $('#helpDialog').showModal();
 document.querySelectorAll('[data-close]').forEach(b => b.onclick = () => $('#' + b.dataset.close).close());
 $('#resetBtn').onclick = () => {
   if (!confirm('Start over? This erases your progress on this device.')) return;
-  const old = st; st = fresh(); st.name = old.name; st.ftStarted = old.ftStarted; st.phase = old.name ? 'intro' : 'title'; st.primer = 1;
+  const old = st; st = fresh(); st.name = old.name; st.ftStarted = old.ftStarted; st.turnedIn = old.turnedIn;   // Start over never re-opens turning in
+  st.phase = old.name ? 'intro' : 'title'; st.primer = 1;
   // Keep first-try results from the first run so the teacher sees the real first try.
   st.ftSort = old.ftSort || []; st.ftView = old.ftView || {}; st.resets = (old.resets || 0) + (old.phase === 'title' ? 0 : 1);
   save(); location.reload();

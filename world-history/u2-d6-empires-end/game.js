@@ -569,8 +569,8 @@
       <details class="factbox"><summary>📌 Facts</summary><p class="chips facts"><span class="chip">🧂 Salt March</span><span class="chip">📰 Dharasana news</span><span class="chip">🪖 2.5 million soldiers</span><span class="chip">💷 Britain deep in debt</span><span class="chip">🇺🇸 ☭ Both oppose empires</span><span class="chip">🚶 14–15 million forced from home</span></p></details></div>`;
     const rep = $("report");
     PROMPTS.forEach(p => rep.insertAdjacentHTML("beforeend", `<label for="w_${p.id}">${p.label}</label><p class="stem">✏️ ${esc(p.stem)}</p><textarea id="w_${p.id}" rows="3">${esc(st.writing[p.id] || "")}</textarea>`));
-    rep.insertAdjacentHTML("beforeend", `<button type="button" class="go" id="sendBtn">${st.turnedIn ? "Turn in again" : "Turn in"}</button>
-      <p id="sendMsg" class="msg" role="status" aria-live="polite">${st.turnedIn ? "You already turned this in. You can fix your writing and turn it in again." : ""}</p>
+    rep.insertAdjacentHTML("beforeend", `<button type="button" class="go" id="sendBtn"${st.turnedIn ? " disabled" : ""}>${st.turnedIn ? "Turned in ✓" : "Turn in"}</button>
+      <p id="sendMsg" class="msg" role="status" aria-live="polite"></p>
       <p class="turned" id="turnedBadge" ${st.turnedIn ? "" : "hidden"}>✓ Turned in</p>`);
     PROMPTS.forEach(p => $("w_" + p.id).addEventListener("input", e => { st.writing[p.id] = e.target.value; save(); }));
     $("sendBtn").onclick = send;
@@ -636,7 +636,7 @@
   }
   $("restartBtn").onclick = () => {
     if (!confirm("Start over? This clears your work on this device.")) return;
-    const name = st.name; st = fresh(); st.name = name; prev = null;
+    const name = st.name, wasIn = st.turnedIn; st = fresh(); st.name = name; st.turnedIn = wasIn; prev = null;   // Start over never re-opens turning in
     if (window.classFirstTry) window.classFirstTry.reset();
     $("chain").innerHTML = "";
     save(); render(); window.scrollTo(0, 0);

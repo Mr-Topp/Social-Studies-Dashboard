@@ -417,13 +417,10 @@
 
   function result(i) {
     const r = R[i], perfect = roundPerfect(i), bt = BETS[st.bets[i] || "safe"];
-    const line = c => {
-      const m = st.miss[i + c] || 0;
-      return `<li class="${m ? "miss" : "hit"}"><span>${CHECKNAME[c]}</span><b>${m ? "✗ missed first try" + (bt.lose ? " (−" + bt.lose + ")" : "") : "✓ first try (+" + bt.win + ")"}</b></li>`;
-    };
-    const lightN = r.lightning.filter((q, n) => !st.miss[i + "l" + n]).length;
+    // No first-try results on the student screen (Fynn 11/21). First-try data still goes in the turn-in.
+    const line = c => `<li class="hit"><span>${CHECKNAME[c]}</span><b>✓ done</b></li>`;
     const L = leader();
-    const powerBox = !perfect ? `<p class="nopower">Get all 4 challenges right on the first try to earn a power move.</p>` :
+    const powerBox = !perfect ? `<p class="nopower">No power move this round. Next round is a new chance.</p>` :
       st.power[i] ? `<p class="powered">${st.power[i] === "steal" ? "⚡ You stole " + STEAL_PTS + " points!" : "💰 You banked +" + BANK_PTS + "."}</p>` :
       `<div class="power"><p><b>Perfect round! Pick a power move:</b></p><div class="pw">
          <button type="button" class="pcard" data-p="steal"><span aria-hidden="true">⚡</span><b>Steal ${STEAL_PTS}</b><span>Take them from the leader${L ? ": " + esc(L.name) : ""}.</span></button>
@@ -433,7 +430,7 @@
     shell(roundTop(i, "Results"),
       `<div class="res ${perfect ? "perfect" : ""}"><p class="big">${perfect ? "🔥 PERFECT ROUND" : "Round " + (i + 1) + " done"}</p>
         <p class="betline">You bet <b>${bt.icon} ${bt.name}</b>.</p>
-        <ul class="tally">${BETCHECKS.map(line).join("")}<li class="hit"><span>⚡ Lightning</span><b>${lightN} of 3 first try</b></li></ul>
+        <ul class="tally">${BETCHECKS.map(line).join("")}<li class="hit"><span>⚡ Lightning</span><b>✓ done</b></li></ul>
         <div class="remember"><b>Remember for Test Part ${r.part}:</b> ${r.build.why}</div>
         ${powerBox}</div>
         <div id="after">${(!perfect || st.power[i]) ? nextBtn(label) : ""}</div>`);
@@ -465,8 +462,8 @@
       <p class="stem">Start with: <b>“${esc(r.write.stem)}”</b></p>
       <textarea id="wbox" rows="5" placeholder="Use the starter, then add one real fact from the unit…">${esc(st.writing[h] || "")}</textarea>
       <p class="tip">A strong answer = the starter + a real fact (a name, place, date, or event) + <b>because…</b> to explain why it matters.</p>
-      <button type="button" class="go big" id="sendBtn">${st.turnedIn[h] ? "Turn in again" : "Turn in my " + H.name}</button>
-      <p id="sendMsg" class="msg ${st.turnedIn[h] ? "good" : ""}" role="status" aria-live="polite">${st.turnedIn[h] ? "✓ Turned in! Your teacher can see your work." : ""}</p>` : `<p class="msg">👆 Tap a topic to start writing.</p>`}
+      <button type="button" class="go big" id="sendBtn"${st.turnedIn[h] ? " disabled" : ""}>${st.turnedIn[h] ? "✓ Turned in" : "Turn in my " + H.name}</button>
+      <p id="sendMsg" class="msg ${st.turnedIn[h] ? "good" : ""}" role="status" aria-live="polite">${st.turnedIn[h] ? "✓ Turned in." : ""}</p>` : `<p class="msg">👆 Tap a topic to start writing.</p>`}
       <div id="after">${after}</div></div></section>`;
     app.querySelectorAll(".topic").forEach(b => b.onclick = () => { if (st.pick[h] !== +b.dataset.n) { st.pick[h] = +b.dataset.n; save(); write(h); const w = $("wbox"); if (w) w.focus(); } });
     wire();
@@ -546,7 +543,7 @@
 
   if ($("restartBtn")) $("restartBtn").onclick = () => {
     if (!confirm("Start over? This clears your Showdown on this device.")) return;
-    const name = st.name; st = fresh(); st.name = name;
+    const name = st.name, wasIn = st.turnedIn; st = fresh(); st.name = name; st.turnedIn = wasIn || {};   // Start over never re-opens turning in
     try { window.classFirstTry && window.classFirstTry.reset(); } catch (e) {}
     save(); render(); window.scrollTo(0, 0);
   };

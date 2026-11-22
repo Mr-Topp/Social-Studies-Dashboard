@@ -400,7 +400,7 @@
       ${PROMPTS.map(p => `<label for="${p.id}">${p.label}</label>${p.ideas ? `<p class="ideas">💡 ${p.ideas}</p>` : ""}<p class="stem">✏️ <b>${p.stem}</b></p><textarea id="${p.id}" placeholder="${p.stem}"></textarea>`).join("")}
       <label for="studentName">4. First name + last initial</label>
       <input id="studentName" type="text" maxlength="60" autocomplete="off" placeholder="Like Jordan M.">
-      <button type="button" class="go" id="sendBtn">${st.turnedIn ? "Turn in again" : "Turn in"}</button>
+      <button type="button" class="go" id="sendBtn"${st.turnedIn ? " disabled" : ""}>${st.turnedIn ? "Turned in ✓" : "Turn in"}</button>
       <p class="msg" id="sendMsg" role="status" aria-live="polite"></p>
       ${st.turnedIn ? `<p class="turned" id="turnedBox">✓ Turned in</p>` : ""}
       <details class="sources"><summary>Sources</summary><p>Woodrow Wilson, address to Congress, Feb. 11, 1918. Treaty of Versailles (1919), Articles 119 (colonies), 156–158 (Shandong), 160 (army), 231 (war guilt), Part III (borders). Photos and cartoons: “The Big Four,” U.S. Army Signal Corps, May 27, 1919; map of Europe in 1923 by Historicair and Fluteflute (CC BY-SA 2.5, Wikimedia Commons); Indian soldiers in France, 1914 postcard, National Army Museum; Luther D. Bradley, <i>Chicago Daily News</i>, March 13, 1915 (Library of Congress); May Fourth protest, Beijing, 1919; Lenin in Moscow, May 5, 1920, by G. Goldstein; Will Dyson, “Peace and Future Cannon Fodder,” <i>Daily Herald</i>, May 1919. The reporter is a made-up role. Everything in the case files is real.</p></details>
@@ -462,7 +462,7 @@
       st.turnedIn = true; save();
       msg.className = "msg good"; msg.textContent = "Preview copy: turn-in is OFF here, so nothing was sent. On the class site this sends to the dashboard.";
       window.__lastTurnIn = { studentName: name, assignmentId: ID, assignmentTitle: TITLE, answers };
-      btn.disabled = false; btn.textContent = "Turned in ✓"; return;
+      btn.textContent = "Turned in ✓"; return;
     }
     try {
       const res = await window.classTurnIn(API, { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ studentName: name, assignmentId: ID, assignmentTitle: TITLE, answers }) });
@@ -472,7 +472,6 @@
       msg.className = "msg good"; msg.textContent = "Turned in! You're done.";
       btn.textContent = "Turned in ✓";
       if (!$("turnedBox")) btn.insertAdjacentHTML("afterend", `<p class="turned" id="turnedBox">✓ Turned in</p>`);
-      btn.disabled = false;
     } catch (err) {
       msg.className = "msg bad"; msg.textContent = (err && err.message) || "Could not turn in. Try again."; btn.disabled = false;
     }
@@ -495,7 +494,7 @@
 
   $("restartBtn").onclick = () => {
     if (!PREVIEW && !confirm("Start over? This clears your work on this device.")) return;
-    const name = st.name; st = fresh(); st.name = name;
+    const name = st.name, wasIn = st.turnedIn; st = fresh(); st.name = name; st.turnedIn = wasIn;   // Start over never re-opens turning in
     if (window.classFirstTry) window.classFirstTry.reset();
     save(); render(); window.scrollTo(0, 0);
   };

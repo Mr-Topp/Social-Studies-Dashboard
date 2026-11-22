@@ -522,8 +522,8 @@
       <p class="chips"><span class="chip">${E.icon} <span>${E.t}</span></span></p></div>`;
     const rep = $("report");
     PROMPTS.forEach(p => rep.insertAdjacentHTML("beforeend", `<label for="w_${p.id}">${p.label}</label><p class="stem">✏️ ${esc(p.stem)}</p><textarea id="w_${p.id}" rows="3">${esc(st.writing[p.id] || "")}</textarea>`));
-    rep.insertAdjacentHTML("beforeend", `<button type="button" class="go" id="sendBtn">${st.turnedIn ? "Turn in again" : "Turn in"}</button>
-      <p id="sendMsg" class="msg" role="status" aria-live="polite">${st.turnedIn ? "You already turned this in. You can fix your writing and turn it in again." : ""}</p>
+    rep.insertAdjacentHTML("beforeend", `<button type="button" class="go" id="sendBtn"${st.turnedIn ? " disabled" : ""}>${st.turnedIn ? "Turned in ✓" : "Turn in"}</button>
+      <p id="sendMsg" class="msg" role="status" aria-live="polite"></p>
       <p class="turned" id="turnedBadge" ${st.turnedIn ? "" : "hidden"}>✓ Turned in</p>`);
     PROMPTS.forEach(p => $("w_" + p.id).addEventListener("input", e => { st.writing[p.id] = e.target.value; save(); }));
     $("sendBtn").onclick = send;
@@ -593,7 +593,7 @@
   }
   $("restartBtn").onclick = () => {
     if (!confirm("Start over? This clears your work on this device.")) return;
-    const name = st.name; st = fresh(); st.name = name; draftF = 5; draftR = null; prev = null;
+    const name = st.name, wasIn = st.turnedIn; st = fresh(); st.name = name; st.turnedIn = wasIn; draftF = 5; draftR = null; prev = null;
     if (window.classFirstTry) window.classFirstTry.reset();
     $("houses").innerHTML = "";
     save(); render(); window.scrollTo(0, 0);

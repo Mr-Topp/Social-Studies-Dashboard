@@ -394,8 +394,8 @@
       <p class="bank">${PROMPT.bank.map(b => `<span>${esc(b)}</span>`).join("")}</p>
       <p class="stem">Starter: ${esc(PROMPT.stem)} <button type="button" class="mini" id="stemBtn">Use the starter</button></p>
       <textarea id="wbox" rows="3" placeholder="2 full sentences…">${esc(st.writing || "")}</textarea>
-      <div class="sendrow"><button type="button" class="go" id="sendBtn">${sent ? "Turn in again" : "Turn in ▶"}</button>
-      <p id="sendMsg" class="msg" role="status" aria-live="polite">${sent ? "✓ Turned in. You can fix your answer and turn in again." : ""}</p></div>`);
+      <div class="sendrow"><button type="button" class="go" id="sendBtn"${sent ? " disabled" : ""}>${sent ? "✓ Turned in" : "Turn in ▶"}</button>
+      <p id="sendMsg" class="msg${sent ? " good" : ""}" role="status" aria-live="polite">${sent ? "✓ Turned in." : ""}</p></div>`);
     const box = $("wbox");
     box.addEventListener("input", () => { st.writing = box.value; save(); });
     $("stemBtn").onclick = () => {
@@ -498,7 +498,7 @@
 
   $("restartBtn").onclick = () => {
     if (!confirm("Start over? This clears your work on this device.")) return;
-    const name = st.name; st = fresh(); st.name = name;
+    const name = st.name, wasIn = st.turnedIn; st = fresh(); st.name = name; st.turnedIn = wasIn;   // Start over never re-opens turning in
     try { window.classFirstTry && window.classFirstTry.reset(); } catch (e) {}
     save(); render();
   };

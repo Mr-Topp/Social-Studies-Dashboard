@@ -307,7 +307,7 @@
     const page = p => `<div class="vpage"><label for="w_${p.id}">${esc(p.label)}</label><p class="stem">${esc(p.stem)}</p><textarea id="w_${p.id}" rows="4">${esc(st.writing[p.id] || "")}</textarea></div>`;
     const body = `<div class="memo"><p class="vm-h">YOUR ANSWERS</p>` + PROMPTS.map(page).join("") +
       `<label for="nameBox2" class="namel">Your name</label><input id="nameBox2" maxlength="60" autocomplete="off" placeholder="First name + last initial (like Jordan M.)" value="${esc(st.name)}">` +
-      `<div class="vrow"><button type="button" class="go" id="sendBtn">📮 ${st.turnedIn ? "Turn in again" : "Turn in"}</button></div><p id="sendMsg" class="msg" role="status" aria-live="polite">${st.turnedIn ? "✓ Turned in. You can fix your writing and turn it in again." : ""}</p></div>`;
+      `<div class="vrow"><button type="button" class="go" id="sendBtn"${st.turnedIn ? " disabled" : ""}>📮 ${st.turnedIn ? "✓ Turned in" : "Turn in"}</button></div><p id="sendMsg" class="msg${st.turnedIn ? " good" : ""}" role="status" aria-live="polite">${st.turnedIn ? "✓ Turned in." : ""}</p></div>`;
     app.innerHTML = scene({ title: "Your Answers", board: false, job: jobStrip(["Answer question 1", "Answer question 2", "Turn in"], 0), body });
     PROMPTS.forEach(p => $("w_" + p.id).addEventListener("input", e => { st.writing[p.id] = e.target.value; save(); }));
     $("sendBtn").onclick = sendWork;
@@ -387,7 +387,7 @@
   }
   $("restartBtn").onclick = () => {
     if (!confirm("Start over? This clears your work on this device.")) return;
-    const name = st.name; st = fresh(); st.name = name;
+    const name = st.name, wasIn = st.turnedIn; st = fresh(); st.name = name; st.turnedIn = wasIn;   // Start over never re-opens turning in
     if (window.classFirstTry) window.classFirstTry.reset();
     save(); render(); window.scrollTo(0, 0);
   };

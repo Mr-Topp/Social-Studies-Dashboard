@@ -653,7 +653,7 @@
     const tail = pg === 0
       ? `<button type="button" class="go" id="pageBtn">${esc(L("Next page →"))}</button><p id="pageMsg" class="msg" role="status" aria-live="polite"></p>`
       : `<label for="nameBox2" class="namel">${esc(L("Your name"))}</label><input id="nameBox2" maxlength="60" autocomplete="off" placeholder="${esc(L("First name + last initial (like Jordan M.)"))}" value="${esc(st.name)}">` +
-        `<div class="vrow"><button type="button" class="back" id="backBtn">← ${esc(L("Page 1"))}</button><button type="button" class="go" id="sendBtn">📮 ${esc(L(st.turnedIn ? "Turn in again" : "Turn in"))}</button></div><p id="sendMsg" class="msg" role="status" aria-live="polite">${st.turnedIn ? esc(L("✓ Turned in. You can fix your writing and turn it in again.")) : ""}</p>`;
+        `<div class="vrow"><button type="button" class="back" id="backBtn">← ${esc(L("Page 1"))}</button><button type="button" class="go" id="sendBtn"${st.turnedIn ? " disabled" : ""}>📮 ${esc(L(st.turnedIn ? "✓ Turned in" : "Turn in"))}</button></div><p id="sendMsg" class="msg${st.turnedIn ? " good" : ""}" role="status" aria-live="polite">${st.turnedIn ? esc(L("✓ Turned in.")) : ""}</p>`;
     const body = `<div class="vmail"><p class="vm-h">✉️ V-MAIL · ${pg + 1}/2</p>` + PROMPTS.map(page).join("") + tail + `</div>`;
     app.innerHTML = scene({ title: "Write to Frank", stage: "st-home", art: "✉️", body });
     PROMPTS.forEach(p => $("w_" + p.id).addEventListener("input", e => { st.writing[p.id] = e.target.value; save(); }));
@@ -768,7 +768,7 @@
 
   $("restartBtn").onclick = () => {
     if (!confirm(L("Start over? This clears your work on this device."))) return;
-    const name = st.name; st = fresh(); st.name = name;
+    const name = st.name, wasIn = st.turnedIn; st = fresh(); st.name = name; st.turnedIn = wasIn;   // Start over never re-opens turning in
     if (window.classFirstTry) window.classFirstTry.reset();
     save(); render(); window.scrollTo(0, 0);
   };

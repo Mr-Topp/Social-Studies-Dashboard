@@ -553,9 +553,9 @@
       PROMPTS.map(p => '<label class="wq" for="' + p.id + '">' + esc(p.label) + '</label><p class="starter"><span>Start:</span> <span>' + esc(p.starter) + "</span></p>" +
         '<textarea id="' + p.id + '" data-starter="' + esc(p.starter) + '" rows="3" maxlength="700">' + esc(st.writing[p.id] || "") + "</textarea>").join("") +
       '<div class="sign-row"><label class="wq" for="studentName">First name + last initial (like Jordan M.)</label><input id="studentName" type="text" maxlength="40" autocomplete="off" placeholder="First name + last initial (like Jordan M.)" value="' + esc(name) + '"></div>' +
-      '<div><button type="button" class="big" id="sendBtn" data-act="send">' + (st.turnedIn ? "Turn in again" : "Turn in") + "</button></div>" +
+      '<div><button type="button" class="big" id="sendBtn" data-act="send"' + (st.turnedIn ? " disabled" : "") + ">" + (st.turnedIn ? tr("Turned in ✓") : "Turn in") + "</button></div>" +
       '<p id="sendMsg" class="msg" role="status" aria-live="polite"></p>' +
-      (st.turnedIn ? '<p><span class="done-badge">✓ Turned in</span></p><p class="small">' + esc("You already turned this in. You can fix your writing and turn it in again.") + "</p>" : "") +
+      (st.turnedIn ? '<p><span class="done-badge">✓ Turned in</span></p>' : "") +
       "</section>";
     PROMPTS.forEach(p => $(p.id).addEventListener("input", e => { st.writing[p.id] = e.target.value; save(); }));
     $("studentName").addEventListener("input", e => { try { localStorage.setItem(NAMEKEY, e.target.value); } catch (x) {} });
@@ -660,7 +660,7 @@
 
   $("restartBtn").addEventListener("click", () => {
     if (!confirm("Start over? This clears your work on this device.")) return;
-    clearTimers(); st = fresh(); selected = null; anim = null; save(); render(true);
+    const wasIn = st.turnedIn; clearTimers(); st = fresh(); st.turnedIn = wasIn; selected = null; anim = null; save(); render(true);
   });
 
   render();
