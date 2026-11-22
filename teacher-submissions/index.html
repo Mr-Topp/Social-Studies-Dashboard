@@ -709,7 +709,7 @@ function setRoster(course, list) {
 const rosterOf = t => (rosters[t] || []).filter(s => !isTestStudent(s));   // Test T. hidden from the dashboard (Fynn, 11-04)
 const firstKey = n => String(n || "").split(" ")[0].toLowerCase().replace(/[^a-z]/g, "");
 const nameKey = n => { const p = String(n || "").trim().split(/\s+/); return firstKey(n) + "|" + (p.length > 1 ? p[p.length - 1].replace(/[^A-Za-z]/g, "").charAt(0).toLowerCase() : ""); };
-// Same student typed two ways ("Kai" and "Kai S.") counts as one person: match to the class list first,
+// Same student typed two ways ("Sam" and "Sam T.") counts as one person: match to the class list first,
 // then to another turn-in in the same class with the same first name.
 function mergeNames() {
   const byCourse = {};
