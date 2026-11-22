@@ -7,7 +7,8 @@
 //  on 3 rounds you prove it with the right real source (corroboration, US.35 / US.40).
 //  Rival: MacArthur's press office slips you spin ("home by Christmas"). Printing spin costs credibility.
 //  One meter: Credibility. The map's front line moves as your chain grows.
-//  Ends with your front-page chain, "Caused by" misses, the real cost, and 2 short answers.
+//  Ends with your front-page chain (no score or rank shown), the real cost, and 2 short answers.
+//  The ending, misses and credibility still go to the teacher in the turn-in data.
 //  Turn-in: shared/turnin.js classTurnIn, same payload shape as before. Test T. can skip everything.
 // =====================================================================
 (function () {
@@ -101,13 +102,13 @@
     { id: "r1", got: "Two rival Koreas", date: "1945", title: "A Line on the Map", from: "split", to: "split",
       cause: "1945: Japan loses World War II. Soviet troops take North Korea. U.S. troops take the South. The line between them is the 38th parallel.",
       q: "What did splitting Korea cause?",
-      effects: ["Two rival Koreas: a communist North and a U.S.-backed South", "One united Korea, run by the United Nations", "Japan kept ruling the South until 1950"],
+      effects: ["Two rival Koreas: a communist North, a U.S.-backed South", "One united Korea, run by the United Nations until 1950", "Japan kept ruling the South as a U.S. ally until 1950"],
       hint: "The USSR backed one half and the U.S. backed the other. What does that make?",
       link: "Korea split", key: "<b>38th parallel</b> = the map line that split Korea in two in 1945." },
     { id: "r2", got: "UN defends the South", date: "JUN 1950", title: "Invasion", from: "split", to: "seoul",
       cause: "June 25, 1950: North Korea's army invades the South. In three days it takes Seoul, the capital.",
       q: "What did President Truman do because of the invasion?",
-      effects: ["Sent U.S. troops, and the UN voted to defend the South", "Asked Congress to declare war on North Korea first", "Stayed out, since Korea was too far from America"],
+      effects: ["Sent troops, and the UN voted to defend the South", "Asked Congress to declare war on North Korea first", "Stayed out and sent only money and weapons to the South"],
       hint: "He saw it as a test of containment. Did he ask Congress first?",
       link: "North invades",
       proof: { q: "Prove it: which source shows WHY Truman cared about Korea?",
@@ -120,13 +121,13 @@
     { id: "r3", got: "Inchon landing", date: "SEP 1950", title: "Trapped at Pusan", from: "pusan", to: "split",
       cause: "Summer 1950: UN troops are pushed into a small corner around Pusan, at the southern tip of Korea.",
       q: "What did General MacArthur do to break out?",
-      effects: ["Landed troops behind enemy lines at Inchon, near Seoul", "Pulled every UN soldier out of Korea by ship", "Asked China to help push North Korea back"],
+      effects: ["Landed troops behind enemy lines at Inchon, near Seoul", "Pulled every UN soldier out of Korea by ship to Japan", "Waited at Pusan for the Soviet Union to ask for a truce"],
       hint: "Look at the map. Where is Inchon compared to the enemy army?",
       link: "UN defends the South", key: "<b>Inchon</b> = MacArthur's surprise landing, Sept. 15, 1950. It pushed the North Koreans back to the 38th." },
     { id: "r4", got: "China attacks", date: "NOV 1950", title: "Too Close to China", from: "yalu", to: "jan51",
       cause: "Fall 1950: UN troops cross the 38th parallel and race north toward the Yalu River, China's border.",
       q: "What did pushing toward China cause?",
-      effects: ["China sent hundreds of thousands of soldiers to attack", "The war ended and troops were home by Christmas", "The Soviet Union handed North Korea over to the UN"],
+      effects: ["China sent hundreds of thousands of troops to attack", "The war ended, and U.S. troops were home by Christmas", "The Soviet Union told North Korea to surrender to the UN"],
       spin: 1,
       hint: "Look at who lives on the other side of the Yalu River.",
       link: "Inchon landing",
@@ -154,14 +155,14 @@
       proof: { q: "Prove it: which source shows Truman's REASON for firing him?",
         sources: [
           ["🇺🇸 Truman on the radio · April 11, 1951", "“We are trying to prevent a third world war.”"],
-          ["👨‍✈️ MacArthur's letter · April 5, 1951", "“There is no substitute for victory.”"],
+          ["👨‍✈️ MacArthur's letter · March 20, 1951 (read in Congress April 5)", "“There is no substitute for victory.”"],
           ["📰 Newspaper · April 1951", "“Huge crowds cheer MacArthur's return home.”"]],
         hint: "Find Truman's own words." },
       key: "<b>Civilian control</b> = an elected civilian (the President), not a general, commands the military." },
     { id: "r7", got: "Armistice", date: "JUL 1953", title: "The Shooting Stops", from: "stale", to: "stale",
       cause: "Peace talks drag on for two years while soldiers keep dying. By 1953, both sides are worn out.",
       q: "What did the talks finally cause?",
-      effects: ["An armistice: the fighting stopped, but no peace treaty", "A peace treaty that made Korea one country again", "A new war that spread into China and the USSR"],
+      effects: ["An armistice: the fighting stopped, but no peace treaty", "A peace treaty that made Korea one united country again", "A new war that spread into China and the Soviet Union"],
       hint: "Was Korea ever reunited? Is it still split today?",
       link: "MacArthur fired", key: "<b>Armistice</b> = an agreement to stop fighting. No peace treaty was ever signed. Korea is still split near the 38th." }
   ];
@@ -307,14 +308,10 @@
   };
   const endKey = () => st.cred >= 9 ? "legend" : st.cred >= 6 ? "solid" : "spun";
   function endingScreen(app) {
-    const E = ENDINGS[endKey()];
-    const misses = st.misses.length ? st.misses.map(m => `<li><span>${esc(m.label)}</span><span class="tag down">📰 ${m.n} credibility</span></li>`).join("") : `<li><span>No misses. Every link was right the first time.</span></li>`;
     const body = `<div class="front"><p class="masthead" aria-hidden="true">THE KOREA DISPATCH · JULY 1953</p>
-        <div class="headline"><span class="e-big" aria-hidden="true">${E.e}</span><h3>${esc(E.t)}</h3></div>
-        <p>${esc(E.text)}</p>
-        <div class="finalm"><span>📰 Credibility <b>${st.cred}/10</b></span><span>🔗 Links <b>${st.links}/${ROUNDS.length}</b></span></div>
-        ${chainHtml(ROUNDS.length)}
-        <h4 class="cb">Caused by:</h4><ul class="trail">${misses}</ul></div>
+        <div class="headline"><span class="e-big" aria-hidden="true">📰</span><h3>${esc("The Korean War, Start to Finish")}</h3></div>
+        <p>${esc("You reported the whole war as one chain: Korea split at the 38th parallel, the North invaded, the UN defended the South, MacArthur landed at Inchon, China attacked, the war got stuck in a stalemate, Truman fired MacArthur, and an armistice stopped the shooting.")}</p>
+        ${chainHtml(ROUNDS.length)}</div>
       <div class="memorial"><p class="m-h">THE REAL COST</p>
         <p>🕯️ About 36,500 Americans died.</p><p>🕯️ Millions of Koreans died, many of them civilians.</p>
         <p>🗺️ Korea is still split near the 38th parallel today.</p>
@@ -340,10 +337,10 @@
     const page = p => `<div class="vpage"><label for="w_${p.id}">${esc(p.label)}</label><p class="stem">${esc(p.stem)}</p><textarea id="w_${p.id}" rows="4">${esc(st.writing[p.id] || "")}</textarea></div>`;
     const body = `<div class="memo"><p class="vm-h">YOUR STORY FOR TOMORROW'S PAPER</p>${chainHtml(ROUNDS.length)}` + PROMPTS.map(page).join("") +
       `<label for="nameBox2" class="namel">Your name</label><input id="nameBox2" maxlength="60" autocomplete="off" placeholder="First name + last initial (like Jordan M.)" value="${esc(st.name)}">` +
-      `<div class="vrow"><button type="button" class="go" id="sendBtn">📮 ${st.turnedIn ? "Turn in again" : "Turn in"}</button></div><p id="sendMsg" class="msg" role="status" aria-live="polite">${st.turnedIn ? "✓ Turned in. You can fix your writing and turn it in again." : ""}</p></div>`;
+      `<div class="vrow"><button type="button" class="go" id="sendBtn"${st.turnedIn ? " disabled" : ""}>${st.turnedIn ? "✓ Turned in" : "📮 Turn in"}</button></div><p id="sendMsg" class="msg${st.turnedIn ? " good" : ""}" role="status" aria-live="polite">${st.turnedIn ? "✓ Turned in." : ""}</p></div>`;
     app.innerHTML = scene({ title: "Write Your Story", map: false, job: jobStrip(["Answer question 1", "Answer question 2", "Turn in"], 0), body });
     PROMPTS.forEach(p => $("w_" + p.id).addEventListener("input", e => { st.writing[p.id] = e.target.value; save(); }));
-    $("sendBtn").onclick = sendWork;
+    if (!st.turnedIn) $("sendBtn").onclick = sendWork;
   }
   const plain = s => String(s || "").normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
   function writingProblem(p) {
@@ -360,6 +357,7 @@
     return "";
   }
   async function sendWork() {
+    if (st.turnedIn) return;
     const msg = $("sendMsg");
     const bad = t => { msg.textContent = t; msg.className = "msg try"; };
     const nm = window.classShortName ? window.classShortName($("nameBox2").value) : $("nameBox2").value.trim();
@@ -431,7 +429,7 @@
 
   $("restartBtn").onclick = () => {
     if (!confirm("Start over? This clears your work on this device.")) return;
-    const name = st.name; st = fresh(); st.name = name;
+    const name = st.name, done = st.turnedIn; st = fresh(); st.name = name; st.turnedIn = done;
     if (window.classFirstTry) window.classFirstTry.reset();
     save(); render(); window.scrollTo(0, 0);
   };

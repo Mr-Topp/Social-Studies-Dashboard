@@ -100,7 +100,7 @@
     { id: "r1", got: "Two rival Koreas", date: "1945–48", title: "A Line on the Map", from: "split", to: "split",
       cause: "1945: Japan loses World War II. Soviet troops take the North. U.S. troops take the South. By 1948, each half has its own government, and BOTH leaders claim all of Korea.",
       q: "What did splitting Korea cause?",
-      effects: ["Two rival Koreas, and each one wanted to rule the whole country", "One united Korea, run by the United Nations", "Japan kept ruling the South until 1950"],
+      effects: ["Two rival Koreas, each wanting to rule the whole country", "One united Korea, run for a few years by the United Nations", "Japan kept ruling the South as a colony until 1950"],
       hint: "The USSR backed one half and the U.S. backed the other. Did either leader want to share?",
       link: "Korea split",
       proof: { q: "Whose goal? Which source shows what a KOREAN leader wanted?",
@@ -113,7 +113,7 @@
     { id: "r2", got: "UN defends the South", date: "JUN 1950", title: "Invasion", from: "split", to: "seoul",
       cause: "June 25, 1950: North Korea invades the South, with Soviet tanks and Stalin's OK. Stalin wants a communist Korea, but he won't send a Soviet army. In three days, Seoul falls.",
       q: "What did the United Nations do?",
-      effects: ["Voted to defend the South. 16 countries sent troops, led by the U.S.", "Nothing, because the USSR used its veto to block it", "Sent peacekeepers to protect North Korea"],
+      effects: ["Voted to defend the South. 16 countries sent troops.", "Nothing, because the USSR used its veto to block any action", "Sent peacekeepers to keep the two Korean armies apart"],
       hint: "That summer the USSR was boycotting the UN, so it wasn't there to vote no.",
       link: "North invades",
       proof: { q: "Whose goal? Which source shows why the U.S. cared about a country so far away?",
@@ -126,13 +126,13 @@
     { id: "r3", got: "Inchon landing", date: "SEP 1950", title: "Trapped at Pusan", from: "pusan", to: "split",
       cause: "Summer 1950: UN troops from the U.S., Britain, and other countries are pushed into a small corner around Pusan, at the southern tip of Korea.",
       q: "What did the UN commander, U.S. General MacArthur, do to break out?",
-      effects: ["Landed troops behind enemy lines at Inchon, near Seoul", "Pulled every UN soldier out of Korea by ship", "Asked China to help push North Korea back"],
+      effects: ["Landed troops behind enemy lines at Inchon, near Seoul", "Pulled every UN soldier out of Pusan by ship to Japan", "Asked China to send its army to help push North Korea back"],
       hint: "Look at the map. Where is Inchon compared to the enemy army?",
       link: "UN defends the South", key: "<b>Inchon</b> = MacArthur's surprise landing, Sept. 15, 1950. It pushed the North Koreans back to the 38th." },
     { id: "r4", got: "China attacks", date: "NOV 1950", title: "Too Close to China", from: "yalu", to: "jan51",
       cause: "Fall 1950: UN troops cross the 38th parallel and race north toward the Yalu River, China's border. China became communist just one year ago.",
       q: "What did pushing toward China cause?",
-      effects: ["China sent hundreds of thousands of soldiers to attack", "Only a few Chinese volunteers joined, on their own", "The Soviet Union handed North Korea over to the UN"],
+      effects: ["China sent hundreds of thousands of troops to attack", "Only a few Chinese volunteers joined the fight, on their own", "The Soviet Union told North Korea to surrender to the UN"],
       spin: 1, spinBy: "beijing",
       hint: "Look at who lives on the other side of the Yalu River. And how many came?",
       link: "Inchon landing",
@@ -146,13 +146,13 @@
     { id: "r5", got: "Stalemate", date: "1951–53", title: "Stuck", from: "jan51", to: "stale",
       cause: "1951: China's huge army and the UN's air power are evenly matched. Neither side can break through.",
       q: "What did that cause?",
-      effects: ["Two years of fighting over the same hills near the 38th", "A quick UN win and one united Korea by 1951", "North Korea gave up after one big bombing raid"],
+      effects: ["Two years of fighting over the same hills near the 38th", "A quick UN win and one united Korea by the end of 1951", "North Korea gave up after a huge bombing raid on Pyongyang"],
       hint: "If neither side can break through, does the line move much?",
       link: "China attacks", key: "<b>Stalemate</b> = neither side can win, so the fighting gets stuck." },
     { id: "r6", got: "MacArthur fired", date: "APR 1951", title: "Keep It Small", from: "stale", to: "stale",
       cause: "1951: MacArthur wants to bomb China, maybe with atomic bombs. China's ally is the USSR, which has atomic bombs too. MacArthur says in public: “There is no substitute for victory.”",
       q: "What did MacArthur's public fight with President Truman cause?",
-      effects: ["Truman fired him to keep Korea from turning into a world war", "The UN made MacArthur the leader of all its countries", "Truman let him bomb China to win faster"],
+      effects: ["Truman fired him to keep Korea from turning into a world war", "The UN put MacArthur in charge of all its member countries", "Truman let him bomb China so the war would end faster"],
       spin: 2, spinBy: "press",
       hint: "If the U.S. bombs China, who might join the fight next?",
       link: "Stalemate",
@@ -160,7 +160,7 @@
     { id: "r7", got: "Armistice", date: "JUL 1953", title: "The Shooting Stops", from: "stale", to: "stale",
       cause: "Peace talks drag on for two years while soldiers keep dying. In March 1953, Stalin dies, and the new Soviet leaders want calmer times.",
       q: "What did the talks finally cause?",
-      effects: ["An armistice: the fighting stopped, but no peace treaty", "A peace treaty that made Korea one country again", "North Korea won, and the Americans went home"],
+      effects: ["An armistice: the fighting stopped, but no peace treaty", "A full peace treaty that made Korea one united country again", "North Korea won the war, and the Americans went home"],
       spin: 2, spinBy: "pyongyang",
       hint: "Was Korea ever reunited? Is it still split today?",
       link: "MacArthur fired",
@@ -484,7 +484,7 @@
     const page = p => `<div class="vpage"><label for="w_${p.id}">${esc(p.label)}</label>${peek(p.id)}<p class="stem">${esc(p.stem)}</p><textarea id="w_${p.id}" rows="4">${esc(st.writing[p.id] || "")}</textarea></div>`;
     const body = `<div class="memo"><p class="vm-h">YOUR STORY FOR TOMORROW'S PAPER</p>` + PROMPTS.map(page).join("") +
       `<label for="nameBox2" class="namel">Your name</label><input id="nameBox2" maxlength="60" autocomplete="off" placeholder="First name + last initial (like Jordan M.)" value="${esc(st.name)}">` +
-      `<div class="vrow"><button type="button" class="go" id="sendBtn">📮 ${st.turnedIn ? "Turn in again" : "Turn in"}</button></div><p id="sendMsg" class="msg" role="status" aria-live="polite">${st.turnedIn ? "✓ Turned in. You can fix your writing and turn it in again." : ""}</p></div>`;
+      `<div class="vrow"><button type="button" class="go" id="sendBtn"${st.turnedIn ? " disabled" : ""}>${st.turnedIn ? "✓ Turned in" : "📮 Turn in"}</button></div><p id="sendMsg" class="msg${st.turnedIn ? " good" : ""}" role="status" aria-live="polite">${st.turnedIn ? "✓ Turned in." : ""}</p></div>`;
     app.innerHTML = scene({ title: "Write Your Story", map: false, job: jobStrip(["Answer question 1", "Answer question 2", "Turn in"], 0), body });
     PROMPTS.forEach(p => $("w_" + p.id).addEventListener("input", e => { st.writing[p.id] = e.target.value; save(); }));
     $("sendBtn").onclick = sendWork;
@@ -510,6 +510,7 @@
     return "";
   }
   async function sendWork() {
+    if (st.turnedIn) return;
     const msg = $("sendMsg");
     const bad = t => { msg.textContent = t; msg.className = "msg try"; };
     const nm = window.classShortName ? window.classShortName($("nameBox2").value) : $("nameBox2").value.trim();
@@ -584,7 +585,7 @@
 
   $("restartBtn").onclick = () => {
     if (!confirm("Start over? This clears your work on this device.")) return;
-    const name = st.name; st = fresh(); st.name = name;
+    const name = st.name, done = st.turnedIn; st = fresh(); st.name = name; st.turnedIn = done;
     if (window.classFirstTry) window.classFirstTry.reset();
     save(); render(); window.scrollTo(0, 0);
   };

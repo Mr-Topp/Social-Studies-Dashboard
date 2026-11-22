@@ -303,7 +303,7 @@ window.CLASS_ASSIGNMENTS = {
   "gov-u2-d7-summative": { course: "government", unit: 2, day: 6, turnIn: false, std: [], title: "Day 6 · Summative (Form A)", path: "https://docs.google.com/document/d/1NmA1UFbPv7QwTpiHTMQpCrG0rt2Izql-IlULiUNJP4E/edit" },
   "gov-u2-d7-summative-key": { course: "government", unit: 2, day: 6, turnIn: false, std: [], title: "Day 6 · Summative Form A Teacher Key", path: "https://docs.google.com/document/d/1DWdlvVGbelbw67HFCcnoqWVC-HfvNo9qAzjZnekLw8M/edit" },
   "gov-u2-d7-summative-b": { course: "government", unit: 2, day: 6, turnIn: false, std: [], title: "Day 6 · Summative (Form B · retake)", path: "https://docs.google.com/document/d/1SyZAzGGwCH0uyDBtytaV6ui6-8K3xadyr0pJLjg1g84/edit" },
-  "gov-u2-d7-summative-b-key": { course: "government", unit: 2, day: 6, turnIn: false, std: [], title: "Day 6 · Summative Form B Teacher Key", path: "https://docs.google.com/document/d/1W92Z1z-g8y8l_pLm3EEnX2N23FEiiqcPfc-uvSH-zZg/edit" },
+  "gov-u2-d7-summative-b-key": { course: "government", unit: 2, day: 6, turnIn: false, std: [], title: "Day 6 · Summative Form B Teacher Key", path: "https://docs.google.com/document/d/1kyO8LAGOmw9sOe_4VcLTIKJQTRkLPF0rHrzzlA71Od8/edit" },
 
   // ---- Government · Unit 3 (Judicial) · activities from the Schoology day posts (links only, no turn-in) ----
   "gov-u3-d1-bell": { course: "government", unit: 3, day: 1, title: "Day 1 · Bell Ringer: How Courts Work: The Court System, Due Process, and Equal Protection (Reading)", path: "civics/bell-ringers/?r=courts,gault,equal", std: ["SS.9-12.Gov.8"] },  // We the People: 3 readings in ONE turn-in (Fynn 11-15: one assignment, not separate ones)
