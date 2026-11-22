@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Made in Rana Plaza | World History Unit 3 Day 2</title>
+<meta name="description" content="A real 2023 graphic novel about the Rana Plaza factory collapse: who wins and who pays when clothes are cheap.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../shared/graphic-reading.css?v=3">
+<style>
+.flip-layout{grid-template-columns:minmax(0,1.9fr) minmax(320px,1fr)}
+.flip-stage img{min-height:0;max-height:calc(100vh - 150px)}
+.qcol{padding-bottom:100px}
+.intro-line{font-size:1.02rem;margin:0 0 10px}
+.wordhelp{margin:6px 0 0}.wordhelp summary{cursor:pointer;font-weight:750;color:var(--navy)}
+.words{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0 10px;padding:0;list-style:none}
+.words li{background:#fff;border:1px solid #e6dcc8;border-left:4px solid var(--navy);border-radius:8px;padding:3px 9px;font-size:.88rem}
+.declass{display:block;background:#fff;border:2px dashed #18364a;border-radius:10px;padding:8px 11px;margin:6px 0 8px;font-weight:650;color:#22313b;line-height:1.4;font-style:normal}
+.declass > b:first-child{display:block;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#18364a;margin-bottom:2px}
+.declass .line{display:block;margin:3px 0}
+.declass .note{display:block;margin-top:5px;font-weight:600;font-size:.9rem;color:#5b4632}
+.dime{display:inline-block;background:#e6bd64;color:#0f2433;border-radius:999px;font-weight:850;padding:0 9px;margin-right:4px}
+.credits{font-size:.8rem;color:var(--muted);margin:10px 0 0;line-height:1.4}
+.pg-cap{margin:8px 2px 0;font-size:.95rem;line-height:1.35;background:#fff;border:1px solid #e6dcc8;border-left:4px solid #e6bd64;border-radius:8px;padding:6px 10px}.pg-cap:empty{display:none}
+.gr-head{padding-top:18px;padding-bottom:16px}.gr-head h1{margin:6px 0 6px}.gr-head .hook{margin-bottom:8px}
+body.reading-now .choices{opacity:.45;pointer-events:none}
+</style>
+<script src="../../shared/assignments.js?v=20261116m2"></script><script src="../../shared/turnin.js?v=20261116m2"></script></head><body>
+<header class="gr-head" data-years="2013">
+<div class="gr-wrap">
+<div class="kicker">World History · Unit 3 Day 2 · The World Since 1991</div>
+<h1>Made in Rana Plaza: Who Pays for Cheap Clothes?</h1>
+<p class="hook"><span class="dime">Dhaka, 2013</span>Your shirt might have been sewn in Bangladesh. Follow Fariha into the factory where it was made, and decide who wins and who pays when clothes are cheap. 22 pages · 4 checks · 4 short answers. <b>About 25 minutes.</b></p>
+<p class="goal"><b>Today's goal:</b> Explain who wins and who pays from globalization, and how people pushed back after Rana Plaza.</p>
+<details class="std-details"><summary>Iowa standards for today</summary>
+<p><b>Standard SS.9-12.WH.39</b> — Evaluate the effects of globalization since the 1990s.</p><p><b>Standard SS.9-12.WH.42</b> — Explain various responses to increasing globalization since the 1990s</p>
+</details>
+<nav><a class="back" href="../../">← Class activities</a></nav>
+</div></header>
+
+<nav class="route" aria-label="Your progress"><ol id="flipRoute"></ol></nav>
+
+<main class="gr-main gr-wrap">
+<section class="card">
+<p class="intro-line"><b>Read like a reporter.</b> For each part: <b>read</b> the comic on the left → get the <b>check</b> right → read the <b>fact file</b> → write 1–2 sentences. Done = all parts green, then turn in at the bottom. <i>Heads-up: this is a true story about a building collapse where workers died.</i></p>
+<details class="wordhelp"><summary>Word help (tap to open)</summary>
+<ul class="words" aria-label="Word help">
+<li><b>Globalization</b> = countries trading, making and selling things all over the world</li><li><b>Garment</b> = a piece of clothing</li><li><b>Brand</b> = the company name on the label, like Walmart or Benetton</li><li><b>Building code</b> = safety rules for how buildings must be built</li><li><b>Abysmal</b> = terrible</li><li><b>Dock your wages</b> = cut your pay</li><li><b>Accord</b> = a written agreement companies must follow</li><li><b>Activist</b> = someone who works hard to change things</li>
+</ul></details>
+<p class="welcome" id="welcome" role="status"></p>
+</section>
+
+<div class="flip-layout">
+<section class="flip-reader reading" id="flipReader" aria-label="Pages from the 2023 graphic novel Made in Rana Plaza">
+<div class="flip-bar"><div><p class="eyebrow">The reading</p><h2>A real 2023 graphic novel · 22 pages</h2></div><span class="flip-pos" id="flipPos"></span></div>
+<div class="flip-tools"><button type="button" class="quiet" id="flipBack">← Back a page</button><span class="grow"><span id="flipPart"></span><span id="flipTimer" aria-live="polite"></span></span><button type="button" class="secondary" id="flipNext">Next page →</button><button type="button" class="quiet" id="flipZoom">Make page bigger</button></div>
+<div class="flip-stage"><img id="flipImg" alt="" src="pages/p-01.jpg"></div>
+<p class="pg-cap" id="pgCap" aria-live="polite"></p>
+<p class="flip-cap">Click the page to make it bigger.</p>
+</section>
+
+<div class="qcol">
+<section class="card">
+<label for="studentName">First name + last initial (like Jordan M.)</label><input id="studentName" maxlength="100" autocomplete="off" placeholder="First name + last initial (like Jordan M.)" required>
+</section>
+<div id="flipCards"></div>
+<div class="flip-nav"><button type="button" class="quiet" id="flipBack2">← Back</button><button type="button" class="secondary" id="flipNext2">Next page →</button><p class="flip-why" id="flipWhy" aria-live="polite"></p></div>
+<section class="card finish" id="finish">
+<h2>Turn in your work</h2>
+<div class="actions"><button id="submitBtn" class="primary" type="button">Turn in answers</button></div><p id="submitStatus" class="status" role="status" aria-live="polite"></p><p class="reader-note">Your work saves on this device, so you can come back later. Your teacher sees it after you turn it in.</p>
+<p class="credits">Comic: <i>Made in Rana Plaza</i> by François Simard (January 2023), a free graphic novel from AQOCI (a group of Quebec aid organizations) with Oxfam Canada and Development and Peace, made with support from Global Affairs Canada. English translation by Amie Monroe. Story pages 4–9 and 11–14 shown whole, for class study.</p>
+</section>
+<p class="credits" style="text-align:center"><button id="clearBtn" class="quiet" type="button" style="font-size:.8rem">Start over</button></p>
+</div></div></main>
+<div class="flip-big" id="flipBig" hidden role="dialog" aria-label="Bigger page"><button type="button" class="quiet" id="flipBigClose">✕ Close</button><img id="flipBigImg" alt="Bigger view of the current page"></div>
+<script>
+window.FLIP={
+title:"Pages from the 2023 graphic novel Made in Rana Plaza",prefix:"wh-u3d2-rana-comic-",pages:22,readSeconds:8,lockSeconds:8,
+alts:["Reader page 1. An older woman in a doorway, Fariha's mother, says: This is my daughter, Fariha. Fariha hugs her small child.", "Reader page 2. Fariha sews at a machine. Boxes say: Like four million other workers in Bangladesh, she is a seamstress in a garment factory. She makes clothes for some of the largest Western brands: Walmart, Joe Fresh, The Children's Place, Benetton and Mango.", "Reader page 3. Fariha's family at their small home. Boxes say: Fariha must work 12 hours a day, six days a week, in order to pay her bills. There is very little time left for her to spend with her family.", "Reader page 4. Fariha looks up at a tall concrete building on a busy street. Boxes say: The factory where my daughter works is on the top two stories of Rana Plaza. More than 5,000 people work there every day.", "Reader page 5. Long rows of women at sewing machines. Boxes say: Fariha spends her days in a noisy, unsafe and unclean garment factory. The heat is suffocating, and she rarely sees daylight. Working conditions are abysmal, even dangerous.", "Reader page 6. A boss stands over three women sewing fast. A box says: Workers are under a huge amount of pressure to produce garments quickly. The machines go TAKA TAKA TAKA.", "Reader page 7. A woman shouts: Hurry! We have to get out! Workers rush past Fariha's sewing machine.", "Reader page 8. Fariha asks: What's going on? A coworker says: We have to evacuate the building immediately. Another says: Fariha! Don't ask questions, get out!", "Reader page 9. Workers hurry down the stairs. A box says: They found cracks in the building's structure. A crack runs across a wall.", "Reader page 10. Workers gather outside Rana Plaza. Boxes say: A few years ago, three floors were added to the Rana Plaza building. But this construction was not done according to code.", "Reader page 11. A manager asks: What's going on here? Why aren't you working? Workers answer: There are all these cracks inside. It's dangerous! We're afraid!", "Reader page 12. The manager says: There's nothing dangerous here, everything is safe. You have our word. Workers say: We're not going back to work! We're staying right here! The manager says: If you don't come to work tomorrow, we'll dock your wages at the end of the month. Got it?", "Reader page 13. Boxes say: The next day, under threat, Fariha and her coworkers were forced back to the workshop, despite the fear they felt.", "Reader page 14. A loud rumble, BRRRR, fills the page. Fariha's eyes go wide. A box says: Fear of what would happen.", "Reader page 15. TV news anchors say: Good evening. Tragic events today in Dhaka, the capital of Bangladesh. A building collapsed while over 2,000 workers were inside. The latest reports indicate that over a hundred have died and over a thousand were wounded.", "Reader page 16. Boxes say: Media around the world covered this tragedy. First responders did their best to find survivors trapped in the rubble of concrete and steel. A firefighter carries a hurt worker out of the rubble.", "Reader page 17. A TV reporter says: The flags are at half-mast today in Bangladesh as the country enters a day of mourning for the Rana Plaza victims. Several days after the worst industrial accident in the country's history, reports out of Dhaka only grow more somber.", "Reader page 18. Fariha's mother holds up her photo and says: I'm looking for my daughter, Fariha! The reporter says: Dozens of people are still missing. Families hope that their loved ones will return safe and sound.", "Reader page 19. The reporter says: Mohamed Sohel Rana, 35, was arrested as he tried to flee the country. He will be called to face the charges against him. Police lead him away.", "Reader page 20. Fariha's mother says: Sohel is not the only person responsible for my daughter's death. Boxes say: 40 others were charged with murder and violation of construction codes. Organizations and some of the big clothing companies sent money.", "Reader page 21. Her mother says: But that money won't bring my daughter back. Boxes say: This tragedy meant that defenders of workers' rights were able to make major improvements in building safety in the textile industry. Unfortunately, working conditions for workers are still just as poor. Yet these women continue to fight, day after day. Women march with raised fists. Among them is Kalpona Akter, a passionate activist who travels the world to advocate for garment workers. People everywhere can show solidarity by learning more about the stories behind the clothes that they buy.", "Reader page 22. Fariha's mother walks with her child past a monument on the empty lot where Rana Plaza stood. A box says: So that things will finally change. The child asks: This is where mommy worked? She says: Yes, my dear. The bottom says: In honour of the 1,130 victims, the 2,500 people who were wounded, and their families and loved ones."],
+assignmentId:"wh-u3-d2-rana-plaza-comic",api:"https://fynn-class-assignment-submissions-20261024.neotboy.chatgpt.site/api/submit",
+lockedText:"This box opens when you get the check right.",
+clearConfirm:"Start over? This clears your checks and answers on this device.",
+successText:"Turned in! Your teacher got your 4 checks and 4 answers. You are done.",
+wrongText:(c,left)=>left>0?"Not quite. "+c.hint+" Try again in "+left+"…":"Not quite. "+c.hint+" The choices were mixed up. Try again.",
+parts:[
+{
+"short": "Fariha",
+"ref": "Reader pages 1–6",
+"title": "1. Who sews your clothes?",
+"from": 1,
+"to": 6,
+"check": {
+"page": 2,
+"tag": "Reading check · Reader page 2",
+"q": "Read the boxes next to Fariha's sewing machine. Who is she making clothes for?",
+"right": "Big Western brands like Walmart",
+"wrong": [
+"Small shops in her own city",
+"Uniforms for Bangladesh's army",
+"Her family's own clothing store"
+],
+"why": "✓ Correct. Clothes sewn in Dhaka end up in stores in the U.S. and Canada. That's globalization.",
+"hint": "Read the two boxes beside her sewing machine."
+},
+"prompt": "Clothes made by workers like Fariha are cheap. Who wins from that, and who pays?",
+"stem": "<span class=\"declass\"><b>Fact file</b><span class=\"line\">Bangladesh is the world's <b>2nd-biggest clothing exporter</b>, after China. Clothes and textiles are more than <b>80%</b> of everything it sells to other countries.</span><span class=\"line\">Brands make clothes in Bangladesh because pay is very low. The comic's makers say the average garment worker earned about <b>$125 a month</b> (2021).</span><span class=\"line\">Those jobs are still wanted. About <b>4 million</b> Bangladeshis, mostly women, work in garment factories.</span></span>Write 1–2 sentences. Start like this: <i>Cheap clothes help ___, but workers like Fariha pay because ___.</i>",
+"stemText": "Cheap clothes help ___, but workers like Fariha pay because ___.",
+"placeholder": "Cheap clothes help ___, but workers like Fariha pay because ___."
+},
+{
+"short": "Cracks",
+"ref": "Reader pages 7–14",
+"title": "2. Cracks in the walls",
+"from": 7,
+"to": 14,
+"check": {
+"page": 12,
+"tag": "Reading check · Reader page 12",
+"q": "The workers said they would not go back inside. What did the manager say would happen if they didn't come to work?",
+"right": "They would lose part of their pay",
+"wrong": [
+"Inspectors would close the building",
+"The police would arrest them all",
+"They would get a bonus for staying"
+],
+"why": "✓ Correct. \"We'll dock your wages\" means the boss would cut their pay. Most workers couldn't afford that.",
+"hint": "Read the manager's last speech bubble, on the right."
+},
+"prompt": "Fariha knew the building had cracks. Why did she go back inside anyway?",
+"stem": "<span class=\"declass\"><b>Fact file</b><span class=\"line\">On <b>April 23, 2013</b>, workers saw big cracks in Rana Plaza's walls. A bank on a lower floor sent its workers home.</span><span class=\"line\">The garment factory bosses told workers to come back the next morning or lose pay. Families like Fariha's needed every paycheck.</span><span class=\"line\">The top floors had been added without following the building code. Heavy sewing machines and generators shook the building every day.</span></span>Write 1–2 sentences. Start like this: <i>Fariha went back because ___. If she refused, ___.</i>",
+"stemText": "Fariha went back because ___. If she refused, ___.",
+"placeholder": "Fariha went back because ___. If she refused, ___."
+},
+{
+"short": "Collapse",
+"ref": "Reader pages 15–19",
+"title": "3. April 24, 2013",
+"from": 15,
+"to": 19,
+"check": {
+"page": 15,
+"tag": "Reading check · Reader page 15",
+"q": "Read the TV news boxes at the top. How many workers were inside when the building fell?",
+"right": "Over 2,000 workers",
+"wrong": [
+"About 50 workers",
+"About 200 workers",
+"Over 20,000 workers"
+],
+"why": "✓ Correct. Over 2,000 people were inside. The final count was much worse than the first news reports.",
+"hint": "Read the middle news box."
+},
+"prompt": "Workers saw the cracks the day before. Who was responsible for the deaths, and why?",
+"stem": "<span class=\"declass\"><b>Fact file</b><span class=\"line\">The final count: <b>1,134 people died</b> and about <b>2,500</b> were hurt. It was the deadliest garment-factory disaster in history.</span><span class=\"line\">Rescuers found clothing labels from big Western brands in the rubble, like <b>Benetton, Mango, Primark, and Joe Fresh</b>.</span><span class=\"line\">The building's owner, <b>Sohel Rana</b>, was arrested near the border with India. Factory owners, officials, and inspectors were charged too.</span></span>Write 1–2 sentences. Start like this: <i>___ was responsible because ___.</i>",
+"stemText": "___ was responsible because ___.",
+"placeholder": "___ was responsible because ___."
+},
+{
+"short": "Pushback",
+"ref": "Reader pages 20–22",
+"title": "4. What changed?",
+"from": 20,
+"to": 22,
+"check": {
+"page": 21,
+"tag": "Reading check · Reader page 21",
+"q": "Read the boxes over the march. What got better after Rana Plaza, and what didn't?",
+"right": "Safety got better, but pay and work stayed poor",
+"wrong": [
+"Pay went up, but buildings stayed unsafe",
+"Nothing changed at all after the collapse",
+"The factories closed and moved to China"
+],
+"why": "✓ Correct. Workers' rights groups won safer buildings. Pay and working conditions were still poor.",
+"hint": "Read the two boxes that start \"This tragedy meant\" and \"Unfortunately.\""
+},
+"prompt": "Who gained the most from globalization, and who paid the biggest price? Use Rana Plaza and one fact from the fact file.",
+"stem": "<span class=\"declass\"><b>Fact file</b><span class=\"line\"><b>Pushing back:</b> weeks after the collapse, more than <b>200 brands</b> signed the <b>Accord</b>, a binding agreement to inspect factories and fix dangers. Activists like <b>Kalpona Akter</b> kept up the pressure.</span><span class=\"line\"><b>Winners:</b> new factory jobs and trade helped cut extreme poverty. In 1990, about <b>2.3 billion</b> people lived on under $3 a day. By 2024, the World Bank counted about <b>824 million</b>.</span><span class=\"line\"><b>Losers here too:</b> in 2007, Whirlpool closed the Maytag plant in <b>Newton, Iowa</b>. About <b>1,800</b> jobs were lost in a town of about 15,000.</span></span>Write 1–2 sentences. Start like this: <i>The biggest winners were ___, but ___ paid a price because ___.</i>",
+"stemText": "The biggest winners were ___, but ___ paid a price because ___.",
+"placeholder": "The biggest winners were ___, but ___ paid a price because ___."
+}
+],
+questions:["Clothes made by workers like Fariha are cheap. Who wins from that, and who pays?", "Fariha knew the building had cracks. Why did she go back inside anyway?", "Workers saw the cracks the day before. Who was responsible for the deaths, and why?", "Who gained the most from globalization, and who paid the biggest price? Use Rana Plaza and one fact from the fact file."],
+validate(s){if(!s.name)return{text:"Type your first name + last initial (like Jordan M.) at the top of the questions.",focus:"studentName"};
+ const mc=[1, 2, 3, 4].find(i=>!s.checkDone(i));if(mc)return{text:"Get the check right for part "+mc+" first.",part:mc};
+ const ma=[1, 2, 3, 4].find(i=>!s.answer(i));if(ma)return{text:"Write your answer for part "+ma+" before turning in.",part:ma,focus:"answer"+ma};
+ for(const i of [1, 2, 3, 4]){const j=window.classJunkStop&&window.classJunkStop(document.getElementById("answer"+i));if(j)return{text:"Part "+i+": "+j,part:i}}return null},
+buildAnswers(s){const a={Standard:"SS.9-12.WH.39, SS.9-12.WH.42","First-try correct":[1, 2, 3, 4].filter(i=>(s.tries(i)||1)===1).length+" of 4"};
+ this.questions.forEach((q,i)=>a[q]=s.answer(i+1));a["Reading checks"]="4 of 4 correct · tries: "+[1, 2, 3, 4].map(i=>s.tries(i)||1).join(", ");return a}
+};
+</script>
+<script src="../../shared/flip-reader.js?v=5urls"></script>
+<script>
+// One-line "what's going on" caption under each page, for kids who missed the lecture.
+(function(){const caps=["<b>Dhaka, Bangladesh.</b> \"This is my daughter, Fariha.\"", "<b>Her job.</b> Who does she sew for?", "<b>Her week.</b> 12 hours a day, six days a week.", "<b>Rana Plaza.</b> More than 5,000 people work here.", "<b>Inside the factory.</b>", "<b>Faster, faster.</b>", "<b>April 23, 2013.</b> \"Hurry! We have to get out!\"", "<b>April 23.</b> Nobody explains at first.", "<b>April 23.</b> Workers find cracks.", "<b>Outside.</b> How the building grew.", "<b>Outside.</b> The workers refuse.", "<b>Outside.</b> The manager's answer.", "<b>April 24, 2013.</b> Back to work.", "<b>April 24, 2013.</b> A rumble.", "<b>That evening.</b> The world hears the news.", "<b>The rescue.</b>", "<b>Days later.</b> A country in mourning.", "<b>Days later.</b> Families search.", "<b>Days later.</b> The owner is arrested.", "<b>Afterward.</b> Who is responsible?", "<b>Afterward.</b> What changed, and what didn't?", "<b>Today.</b> A monument stands where Rana Plaza was."];
+ const pos=document.getElementById("flipPos"),cap=document.getElementById("pgCap");
+ const sync=()=>{const m=pos.textContent.match(/page (\d+)/);cap.innerHTML=m?caps[+m[1]-1]||"":""};
+ new MutationObserver(sync).observe(pos,{childList:true,characterData:true,subtree:true});sync();})();
+// Choices wait for the read timer, and "Not quite" scrolls into view (same as the other readings).
+(function(){
+  document.addEventListener("click",e=>{const b=e.target.closest("#flipNext2");if(!b||!/Next part|Turn in/.test(b.textContent))return;
+    const a=document.querySelector(".flip-part:not([hidden]) textarea:not([disabled])");if(!a||!a.value.trim()||!window.classJunkStop)return;
+    if(window.classJunkStop(a)){e.stopImmediatePropagation();e.preventDefault()}},true);
+  const t=document.getElementById("flipTimer");
+  const sync=()=>document.body.classList.toggle("reading-now",t.textContent.trim()!=="");
+  new MutationObserver(sync).observe(t,{childList:true,characterData:true,subtree:true});sync();
+  document.getElementById("flipCards").addEventListener("click",e=>{if(!e.target.closest(".choice"))return;
+    setTimeout(()=>{const f=[...document.querySelectorAll(".flip-part:not([hidden]) .fb")].find(x=>x.textContent.trim());
+      if(f){const r=f.getBoundingClientRect();if(r.bottom>innerHeight-80||r.top<0)f.scrollIntoView({behavior:"smooth",block:"center"})}},120)});
+})();
+</script>
+</body></html>
