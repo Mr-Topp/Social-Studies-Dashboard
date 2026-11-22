@@ -272,12 +272,12 @@ const D8 = "../../day8-wwii-decision-map/";
 const MAP_PAC = { src: D8 + "asia-pacific-1943-army-atlas.jpg", cap: "U.S. War Department map, July 1943. Public domain." };
 const MAP_EU = { src: D8 + "europe-1943-army-atlas.jpg", cap: "U.S. War Department map, July 1943. Public domain." };
 const PEARL = { src: D8 + "pearl-harbor-1941-80-G-19942.jpg", cap: "Pearl Harbor, Dec. 7, 1941. U.S. Navy photo 80-G-19942, National Archives." };
-const WC = f => "https://commons.wikimedia.org/wiki/Special:FilePath/" + f + "?width=1100";
+// These four photos are saved in this page's img/ folder so a school filter can't block them (Fynn, 11-21). Originals: Wikimedia Commons.
 const PHOTO = {
-  midway: { src: WC("SBD-3_Dauntless_bombers_of_VS-8_over_the_burning_Japanese_cruiser_Mikuma_on_6_June_1942.jpg"), alt: "U.S. dive bombers fly over a burning Japanese warship", cap: "U.S. Navy dive bombers over a burning Japanese warship, Battle of Midway, June 6, 1942. U.S. Navy photo, National Archives." },
-  stalingrad: { src: WC("RIAN_archive_602161_Center_of_Stalingrad_after_liberation.jpg"), alt: "The center of Stalingrad in ruins after the battle", cap: "Center of Stalingrad after the battle, 1943. RIA Novosti archive #602161, CC BY-SA 3.0." },
-  enigma: { src: WC("Enigma_(crittografia)_-_Museo_scienza_e_tecnologia_Milano.jpg"), alt: "A German Enigma code machine with a keyboard and rotors", cap: "A real German Enigma code machine. Museo Scienza e Tecnologia, Milan. Photo: Alessandro Nassiri, CC BY-SA 4.0." },
-  dday: { src: WC("Into_the_Jaws_of_Death_23-0455M_edit.jpg"), alt: "U.S. soldiers wade from a landing craft toward Omaha Beach", cap: "\"Into the Jaws of Death\": U.S. troops wade toward Omaha Beach, June 6, 1944. Photo by Robert F. Sargent, U.S. Coast Guard. National Archives." }
+  midway: { src: "img/midway.jpg", alt: "U.S. dive bombers fly over a burning Japanese warship", cap: "U.S. Navy dive bombers over a burning Japanese warship, Battle of Midway, June 6, 1942. U.S. Navy photo, National Archives." },
+  stalingrad: { src: "img/stalingrad.jpg", alt: "The center of Stalingrad in ruins after the battle", cap: "Center of Stalingrad after the battle, 1943. RIA Novosti archive #602161 / Zelma, CC BY-SA 3.0." },
+  enigma: { src: "img/enigma.jpg", alt: "A German Enigma code machine with a keyboard and rotors", cap: "A real German Enigma code machine. Museo Scienza e Tecnologia, Milan. Photo: Alessandro Nassiri, CC BY-SA 4.0." },
+  dday: { src: "img/dday.jpg", alt: "U.S. soldiers wade from a landing craft toward Omaha Beach", cap: "\"Into the Jaws of Death\": U.S. troops wade toward Omaha Beach, June 6, 1944. Photo by Robert F. Sargent, U.S. Coast Guard. National Archives." }
 };
 window.arsArtFail = function (img) {
   const f = img.closest("figure"); if (!f) return;

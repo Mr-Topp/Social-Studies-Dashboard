@@ -20,29 +20,31 @@
 // river; makes her own costume with Bruno's help; keeps the name Ms. Marvel).
 // Ideas from the Day 4 slides: the self, Cooley's looking-glass self (3 steps), Mead's "I" and "Me".
 // Each question has a "prove it" tap: students tap the sentence on the page that proves the answer.
-const IMG = (file, title, by, lic) => ({ src: "https://commons.wikimedia.org/wiki/Special:FilePath/" + encodeURIComponent(file) + "?width=1000", page: "https://commons.wikimedia.org/wiki/File:" + encodeURIComponent(file), title, by, lic });
+// Pictures are saved in this page's img/ folder so a school filter can't block them (Fynn, 11-21).
+// The credit under each one still links to the original on Wikimedia Commons.
+const IMG = (file, title, by, lic, local) => ({ src: "img/" + local, page: "https://commons.wikimedia.org/wiki/File:" + encodeURIComponent(file), title, by, lic });
 const CH = [
-  { n: 1, t: "The Circle Q", img: IMG("Journal_Square_Jersey_City_November_2021_003.jpg", "Journal Square, Jersey City, 2021", "King of Hearts", "CC BY-SA 4.0"),
+  { n: 1, t: "The Circle Q", img: IMG("Journal_Square_Jersey_City_November_2021_003.jpg", "Journal Square, Jersey City, 2021", "King of Hearts", "CC BY-SA 4.0", "p1.jpg"),
     p: [["Kamala Khan is sixteen. She lives in Jersey City, New Jersey, right across the river from New York.", "Her family is Pakistani American and Muslim, and her parents have strict rules."],
         ["One night she hangs out at the Circle Q, a corner store, with her best friend Nakia and her friend Bruno, who works there.", "Then Zoe and Josh walk in, two of the most popular kids at school.", "Zoe tells Nakia that her headscarf is pretty.", "Then Zoe asks if anyone pressured her into wearing it.", "Zoe smiles the whole time, like she is being nice.", "But the question really says Nakia is different, and maybe not by choice.", "Nakia answers that, actually, her dad wants her to stop wearing it."],
         ["Kamala watches all of this and gets quiet.", "She thinks about how kids like Zoe must see her family and her rules.", "She feels like the weird one, like she will never be normal.", "She wishes her life were less complicated."]] },
-  { n: 2, t: "No Party", img: IMG("DSC_7767_Quiet_residential_street_at_night_softly_lit_by_row_of_lampposts_leading_toward_a_distant_illuminated_house.jpg", "A quiet street at night, 2024", "PattayaPatrol", "CC BY-SA 4.0"),
+  { n: 2, t: "No Party", img: IMG("DSC_7767_Quiet_residential_street_at_night_softly_lit_by_row_of_lampposts_leading_toward_a_distant_illuminated_house.jpg", "A quiet street at night, 2024", "PattayaPatrol", "CC BY-SA 4.0", "p2.jpg"),
     p: [["There is a party that night down by the river, and Kamala wants to go.", "At dinner, she asks her parents.", "Her dad says no.", "Kamala argues back, and she gets sent to her room."],
         ["Upstairs, she is furious.", "She knows exactly what her parents expect from her.", "She knows the rules she grew up with.", "But another part of her wants to go right now, no matter what."],
         ["She opens her window and climbs down the tree outside.", "She is going to the party."]] },
-  { n: 3, t: "The Party", img: IMG("Yellow_(Unsplash_wdTEHCq1mRo).jpg", "A fire on the shore at night, 2017", "Alan Chen", "CC0"),
+  { n: 3, t: "The Party", img: IMG("Yellow_(Unsplash_wdTEHCq1mRo).jpg", "A fire on the shore at night, 2017", "Alan Chen", "CC0", "p3.jpg"),
     p: [["The party is by the river, with music and kids from school everywhere.", "For a minute, Kamala feels excited just to be there."],
         ["Then Zoe starts making fun of her and her family.", "Kamala realizes that to these kids, she is still an outsider.", "Sneaking out did not make her one of them."],
         ["She feels embarrassed and alone.", "She leaves the party and starts walking home by herself."]] },
-  { n: 4, t: "The Mist", img: IMG("Hudson_River_Panorama_of_Manhattan.jpg", "Fog over the Hudson River", "ChoiChoi4life", "CC BY-SA 4.0"),
+  { n: 4, t: "The Mist", img: IMG("Hudson_River_Panorama_of_Manhattan.jpg", "Fog over the Hudson River", "ChoiChoi4life", "CC BY-SA 4.0", "p4.jpg"),
     p: [["On her walk home, a strange mist rolls through Jersey City.", "It covers everything, and Kamala passes out."],
         ["In a dream-like vision, she sees three famous superheroes: Captain Marvel, Captain America, and Iron Man.", "They ask her what she wants.", "Kamala thinks about the party and about Zoe."],
         ["She says she wants to be Captain Marvel, whose real name is Carol Danvers.", "She wants to be beautiful, awesome, and less complicated.", "Carol is blonde, famous, and admired by everyone.", "To Kamala, Carol looks like the opposite of the weird one."]] },
-  { n: 5, t: "A New Look", img: IMG("Woman_with_hand_mirror,_by_George_Pressler.jpg", "Woman with Hand Mirror, painting by George Pressler", "George Pressler", "Public domain"),
+  { n: 5, t: "A New Look", img: IMG("Woman_with_hand_mirror,_by_George_Pressler.jpg", "Woman with Hand Mirror, painting by George Pressler", "George Pressler", "Public domain", "p5.jpg"),
     p: [["When Kamala wakes up, something is very wrong.", "She looks like a stranger: long blonde hair, pale skin, and a famous hero's costume.", "She looks exactly like her wish."],
         ["But she does not feel strong or confident.", "She feels freaked out, and the costume feels wrong on her."],
         ["Then she learns that Zoe has fallen into the river.", "Kamala rushes to help and pulls Zoe out of the water.", "Afterward, she notices something.", "The best part of the night was not looking like Carol.", "It was seeing Zoe safe."]] },
-  { n: 6, t: "Her Own Hero", img: IMG("WeehawkenCove.HudsonRiver.Manhattan.skyline.sunrise.jpg", "Sunrise over the Hudson River", "Maria Eklind", "CC BY-SA 2.0"),
+  { n: 6, t: "Her Own Hero", img: IMG("WeehawkenCove.HudsonRiver.Manhattan.skyline.sunrise.jpg", "Sunrise over the Hudson River", "Maria Eklind", "CC BY-SA 2.0", "p6.jpg"),
     p: [["Kamala finds out she can change her shape and size.", "At first, she thought a hero had to look like Carol.", "But that look never felt like her."],
         ["So she makes her own costume, with help from her friend Bruno.", "She keeps the name Ms. Marvel to honor Carol, her hero.", "But now the face behind the mask is her own."],
         ["Her family, her friends, and even Zoe all helped shape who she is.", "Being a hero, she decides, is about what you do, not how you look."]] }

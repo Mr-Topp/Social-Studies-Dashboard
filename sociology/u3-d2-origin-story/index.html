@@ -25,11 +25,11 @@
 // PLACE PHOTOS (Fynn chose place photos 11/15/26, not photos of the stars). Wikimedia Commons:
 // Akron "Evening Downtown Akron Skyline" by Dillguy9 (CC0); Nashville "Nashville skyline 2009" by Kaldari (public domain);
 // Houston "Houston Downtown Skyline 2010" by Ed Uthman (CC BY 3.0, credit shown on the card).
-const WM = "https://upload.wikimedia.org/wikipedia/commons/thumb/";
+// Skyline photos are saved in this page's img/ folder so a school filter can't block them (Fynn, 11-21). Originals: Wikimedia Commons.
 const PLACE = {
-  lebron: { src: WM + "5/5c/Evening_Downtown_Akron_Skyline.jpg/960px-Evening_Downtown_Akron_Skyline.jpg", cap: "📍 Akron, Ohio: where LeBron grew up", credit: "" },
-  taylor: { src: WM + "0/08/Nashville_skyline_2009.jpg/960px-Nashville_skyline_2009.jpg", cap: "📍 Nashville, Tennessee: where Taylor's family moved for her music", credit: "" },
-  simone: { src: WM + "8/85/Houston_Downtown_Skyline_2010.JPG/960px-Houston_Downtown_Skyline_2010.JPG", cap: "📍 Houston, Texas: Simone grew up just outside it", credit: "Photo: Ed Uthman, CC BY 3.0" }
+  lebron: { src: "img/akron.jpg", cap: "📍 Akron, Ohio: where LeBron grew up", credit: "" },
+  taylor: { src: "img/nashville.jpg", cap: "📍 Nashville, Tennessee: where Taylor's family moved for her music", credit: "" },
+  simone: { src: "img/houston.jpg", cap: "📍 Houston, Texas: Simone grew up just outside it", credit: "Photo: Ed Uthman, CC BY 3.0" }
 };
 const who = (k, icon, name, sub) => { const pl = PLACE[k]; return `<figure class="place"><img src="${pl.src}" alt="Skyline of ${pl.cap.replace(/^📍 /, "").split(":")[0]}" onerror="this.parentNode.remove()"><figcaption>${pl.cap}${pl.credit ? `<small>${pl.credit}</small>` : ""}</figcaption></figure><div class="who"><span class="icon">${icon}</span><div><b><span class="real">REAL</span>${name}</b><span>${sub}</span></div></div>`; };
 const AG = { fam: "Family", sch: "School", peer: "Peers", media: "Mass media", rel: "Religion", work: "The workplace" };
