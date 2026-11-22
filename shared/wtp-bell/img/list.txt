@@ -20,3 +20,34 @@ enlightenment.jpg|Declaration of the Rights of Man and of the Citizen in 1789.jp
 why-gov.jpg|Godfrey Kneller - Portrait of John Locke (Hermitage).jpg
 stratify.jpg|Alms House Birch's Views Plate 25.jpg
 movements.jpg|March on washington Aug 28 1963.jpg
+# TEMPORARY (2026-11-21): pictures for 7 other pages, fetched here by the same GitHub Action so a school filter
+# can't block them. They get moved into each page's own img/ folder in the next commit, and these lines come out.
+tmp-meangirls-1.jpg|Northwestern HS Hallway.jpg
+tmp-meangirls-2.jpg|High school students eat lunch at a public school cafeteria in North Carolina 02.jpg
+tmp-meangirls-3.jpg|Clothes hanged inside a closet.jpg
+tmp-meangirls-4.jpg|Wildlife of Etosha National Park.jpg
+tmp-meangirls-5.jpg|New Fold-Out Bleachers at Southwest High - DPLA - b6b949e89c1931922e4a61300d32be7a.jpg
+tmp-meangirls-6.jpg|Diadem Tiara Hochzeit Braut.jpg
+tmp-msmarvel-1.jpg|Journal_Square_Jersey_City_November_2021_003.jpg
+tmp-msmarvel-2.jpg|DSC_7767_Quiet_residential_street_at_night_softly_lit_by_row_of_lampposts_leading_toward_a_distant_illuminated_house.jpg
+tmp-msmarvel-3.jpg|Yellow_(Unsplash_wdTEHCq1mRo).jpg
+tmp-msmarvel-4.jpg|Hudson_River_Panorama_of_Manhattan.jpg
+tmp-msmarvel-5.jpg|Woman_with_hand_mirror,_by_George_Pressler.jpg
+tmp-msmarvel-6.jpg|WeehawkenCove.HudsonRiver.Manhattan.skyline.sunrise.jpg
+tmp-lotf-1.jpg|Mvey0290.jpg
+tmp-lotf-2.jpg|Sus_scrofa_-Whipsnade_Zoo,_Bedfordshire,_England_-adult_female-8a.jpg
+tmp-lotf-3.jpg|Koh_Mak_(island),_Thailand,_Palms_on_the_beach.jpg
+tmp-lotf-4.jpg|(Ocean_view_from_Kauai_Island,_United_States)_-_DPLA_-_113107283a2e4c18a666d024f1f10319.jpg
+tmp-lotf-5.jpg|Ficus_watkinsiana_canopy_complex_notophyll_vine_forest_Victoria_Park_Nature_Reserve_Alstonville_NSW_P1050669.jpg
+tmp-lotf-6.jpg|Chalk_Mountain_Fire_junipers_burning_at_night.jpg
+tmp-origin-akron.jpg|Evening_Downtown_Akron_Skyline.jpg
+tmp-origin-nashville.jpg|Nashville_skyline_2009.jpg
+tmp-origin-houston.jpg|Houston_Downtown_Skyline_2010.JPG
+tmp-casebook-triangle.jpg|Image_of_Triangle_Shirtwaist_Factory_fire_on_March_25_-_1911.jpg
+tmp-arsenal-midway.jpg|SBD-3_Dauntless_bombers_of_VS-8_over_the_burning_Japanese_cruiser_Mikuma_on_6_June_1942.jpg
+tmp-arsenal-stalingrad.jpg|RIAN_archive_602161_Center_of_Stalingrad_after_liberation.jpg
+tmp-arsenal-enigma.jpg|Enigma_(crittografia)_-_Museo_scienza_e_tecnologia_Milano.jpg
+tmp-arsenal-dday.jpg|Into_the_Jaws_of_Death_23-0455M_edit.jpg
+tmp-pacific-meiji.jpg|Shinagawa Across railroad Bridge in Meiji era.jpg
+tmp-pacific-liliuokalani.jpg|Liliuokalani (PPWD-16-4-005).jpg
+tmp-pacific-boxer.jpg|Photograph of enemy flags captured by the soldiers of the British Indian Army during the Boxer Rebellion, China, 13 October 1900.jpg
