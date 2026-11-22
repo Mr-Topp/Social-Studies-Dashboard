@@ -165,9 +165,9 @@ function advance(){if(state.phase==="locked"){startReview();return}if(state.phas
  if(state.inClear){state.inClear=false;state.chapter++;state.scene=0;renderScene();return}const ch=chapters[state.chapter];if(state.scene<ch.scenes.length-1){state.scene++;renderScene()}else if(state.chapter<chapters.length-1)renderChapterClear();else if(score()>=PASS||(window.classIsTestT&&window.classIsTestT()))finish();else renderLockedDoor()}
 function finish(){clearInterval(state.timer);const first=state.phase!=="done";if(first){state.finalTime=fmtTime(elapsed());state.phase="done";state.turnedIn=false}$("meter-fill").style.width="100%";const pct=Math.round(score()*100);
  $("final-correct").textContent=`${state.correct}/${state.possible}`;$("final-evidence").textContent=state.evidence.length;$("final-score").textContent=pct+"%";$("final-time").textContent=state.finalTime||"—";
- $("end-message").innerHTML=`<span>${escH(state.name)}, you exposed the system behind Seahaven and walked through the door. Below: how ready you are for each part of the test.</span>`+(state.reviewDone?`<br><br><span>You fixed every clue you missed.</span>`:"");
+ $("end-message").innerHTML=`<span>${escH(state.name)}, you exposed the system behind Seahaven and walked through the door.</span>`+(state.reviewDone?`<br><br><span>You fixed every clue you missed.</span>`:"");
  $("result-stamp").textContent="ESCAPED";
- const topics=[...new Set(chapters.flatMap(c=>c.scenes.map(s=>s.topic)))];$("mastery-report").innerHTML=`<p class="report-head">Your test, part by part (first-try clues)</p>`+topics.map(t=>{const a=state.topicScores[t]||0,p=state.topicPossible[t]||0,n=p?Math.round(a/p*100):0;return `<div class="mastery-row"><span>${t}</span><b class="${n>=70?"strong":"review"}">${n>=70?"Strong":"Review this"}</b></div>`}).join("");
+ $("mastery-report").innerHTML=`<p class="report-head">✓ Review done</p>`; // Fynn 11-21: no part-by-part readiness on the student side; topic scores still go to the teacher in the turn-in
  save();showScreen("end");renderTurnIn();if(first)tone(760,.18)}
 
 // ---------- Start, resume, restart ----------

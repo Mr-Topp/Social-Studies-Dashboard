@@ -117,7 +117,6 @@ function toast(m) { const t = $('#toast'); t.textContent = m; t.classList.add('s
 function hud() {
   $('#shiftPill').style.display = st.phase === 'title' ? 'none' : ''; $('#shiftPill').textContent = st.phase === 'play' ? (st.idx < HALF ? 'Shift 1' : 'Shift 2') + ' · ' + PARTY[booth()] + ' booth' : st.phase === 'final' ? 'Fair\'s over!' : 'Iowa State Fair';
   $('#countPill').textContent = st.phase === 'play' ? 'Fairgoer ' + (st.idx + 1) + ' of ' + ORDER.length : '';
-  $('#scorePill').textContent = '🌽 ' + st.score.toLocaleString();
   race();
 }
 function stepsBar(on) {
@@ -128,11 +127,12 @@ function stepsBar(on) {
 /* ---------------- CLASS RACE ---------------- */
 let livePlayers = [];
 function liveOthers() { return (window.Arena && Arena.live) ? livePlayers.filter(p => !p.me && p.name !== st.name) : []; }
+// Students see only their own progress through the fair: no corn totals, no ranks, no classmates' names (Fynn, 11-21).
 function race() {
-  if (!st.bots) st.bots = [{ name: 'Kenzie R.', s: 0 }, { name: 'Marcus T.', s: 0 }, { name: 'Ava L.', s: 0 }];
-  const lo = liveOthers(), live = lo.length > 0;
-  const rows = (live ? lo.map(p => ({ name: p.name, s: p.score })) : st.bots).map(o => ({ name: o.name, s: o.s })).concat([{ name: 'You', s: st.score, me: true }]).sort((a, b) => b.s - a.s).slice(0, 5);
-  $('#race').innerHTML = `<div class="t">🏁 CLASS RACE<span class="tag ${live ? 'live' : ''}">${live ? 'LIVE' : 'practice'}</span></div><ol>${rows.map((r, i) => `<li class="${r.me ? 'me' : ''}"><span class="n">${i + 1}</span><span class="nm">${esc(r.name)}</span><span class="sc">🌽${r.s}</span></li>`).join('')}</ol>`;
+  if (!st.bots) st.bots = [{ name: 'Bot 1', s: 0 }, { name: 'Bot 2', s: 0 }, { name: 'Bot 3', s: 0 }];
+  st.bots.forEach((b, i) => { if (!/^Bot \d$/.test(b.name)) b.name = 'Bot ' + (i + 1); }); // games saved before 11-21 had classmate-like bot names
+  const live = liveOthers().length > 0, at = st.phase === 'final' ? 3 : st.phase === 'endchecks' ? 2 : st.phase === 'play' ? (st.idx < HALF ? 0 : 1) : -1;
+  $('#race').innerHTML = `<div class="t">🏁 YOUR RACE<span class="tag ${live ? 'live' : ''}">${live ? 'LIVE' : 'practice'}</span></div><ol>${['Shift 1', 'Shift 2', 'Clock out'].map((x, i) => `<li class="${i === at ? 'me' : ''}"><span class="n">${i < at ? '✓' : i + 1}</span><span class="nm">${x}</span></li>`).join('')}</ol>`;
   $('#race').style.display = (st.phase === 'intro' || st.phase === 'title') ? 'none' : '';
 }
 function botsStep() { if (liveOthers().length) return; (st.bots || []).forEach((b, i) => { b.s += Math.round([95, 120, 80][i] * (0.6 + Math.random() * 0.8)); }); }
@@ -312,7 +312,7 @@ function sResult(f) {
   if (r.pitch === 'signed' && !st.nextShown) { st.nextShown = f.id; save(); }
   const head = r.pitch === 'signed' ? `✅ ${f.name} signed up at your booth!` : r.pitch === 'honest' ? `🤝 Good call. ${f.name} heads to the ${PARTY[other(b)]} booth and says thanks for being straight with them.` : `😕 ${f.name} wasn't sold.`;
   const last = st.idx === ORDER.length - 1;
-  tray.innerHTML = `${stepsBar('result')}<div class="result"><div class="big">${r.pitch === 'walked' ? '😕' : '🌽'}</div><div><p><b>${head}</b> ${r.pts ? `<b style="color:var(--good)">+${r.pts} corn</b>${st.reporterFor === st.idx ? ' (doubled by the reporter!)' : ''}` : ''}</p><p>${explain(f, b)}</p>${r.pitch === 'signed' && (!st.nextShown || st.nextShown === f.id) ? `<p>📋 <b>What happens next:</b> ${esc(f.name)} joins the ${PARTY[b]}' list. They'll be asked to volunteer and vote for ${PARTY[b]}. That's how parties link people to government.</p>` : ''}<p class="note">What shaped them: <b>${INFL[r.clueGot || f.clue]}</b>${alsoFair(okClues(f), r.clueGot || f.clue, INFL)} · Idea map: <b>${QUADS[r.quadGot || f.quad]}</b>${alsoFair(okQuads(f), r.quadGot || f.quad, QUADS)}</p></div></div>
+  tray.innerHTML = `${stepsBar('result')}<div class="result"><div class="big">${r.pitch === 'walked' ? '😕' : '🌽'}</div><div><p><b>${head}</b> ${r.pts ? `<b style="color:var(--good)">🌽 Corn earned${st.reporterFor === st.idx ? ', doubled by the reporter!' : ''}</b>` : ''}</p><p>${explain(f, b)}</p>${r.pitch === 'signed' && (!st.nextShown || st.nextShown === f.id) ? `<p>📋 <b>What happens next:</b> ${esc(f.name)} joins the ${PARTY[b]}' list. They'll be asked to volunteer and vote for ${PARTY[b]}. That's how parties link people to government.</p>` : ''}<p class="note">What shaped them: <b>${INFL[r.clueGot || f.clue]}</b>${alsoFair(okClues(f), r.clueGot || f.clue, INFL)} · Idea map: <b>${QUADS[r.quadGot || f.quad]}</b>${alsoFair(okQuads(f), r.quadGot || f.quad, QUADS)}</p></div></div>
   <div class="row"><button class="primary" id="nextBtn">${last ? 'Close the booth →' : 'Next fairgoer →'}</button></div>`;
   $('#nextBtn').onclick = nextFolk;
 }
@@ -322,7 +322,7 @@ function nextFolk() {
   if (st.idx === ORDER.length - 1) { st.phase = 'endchecks'; save(); return render(); }
   const nextIdx = st.idx + 1;
   const go = () => { st.idx = nextIdx; st.step = 'listen'; st.chips = null; st.hand = null; save(); render(); };
-  if (nextIdx === 2 && st.rainFor == null) return eventCard('🌧️', 'Rain!', 'A storm hits! Everyone crowds inside. Your booth is packed!', 'Bonus +50 corn if you nail the next fairgoer.', () => { st.rainFor = 2; go(); });
+  if (nextIdx === 2 && st.rainFor == null) return eventCard('🌧️', 'Rain!', 'A storm hits! Everyone crowds inside. Your booth is packed!', 'Bonus corn if you nail the next fairgoer.', () => { st.rainFor = 2; go(); });
   if (nextIdx === HALF && !st.swapped) return swapCard(go);
   if (nextIdx === 6 && st.reporterFor == null) return eventCard('📸', 'A TV reporter is filming your booth.', 'The next pitch could end up on the evening news. Nail it!', 'Corn for the next fairgoer is doubled.', () => { st.reporterFor = 6; go(); });
   go();
@@ -383,9 +383,8 @@ function firstTry() {
 function pFinal() {
   stopPatience(); $('#patience').hidden = true; $('#bubble').hidden = true; SCENE.set(null, booth());
   const ft = firstTry(), signed = ORDER.filter(id => st.res[id] && st.res[id].pitch === 'signed').length, honest = ORDER.filter(id => st.res[id] && st.res[id].pitch === 'honest').length;
-  const rank = [{ s: st.score, me: true }].concat((liveOthers().length ? liveOthers().map(p => ({ s: p.score })) : st.bots)).sort((a, b) => b.s - a.s).findIndex(x => x.me) + 1;
   tray.classList.add('final-tray');
-  tray.innerHTML = `<div class="final"><div><p class="eyebrow">FAIR'S OVER</p><p class="big">🌽 ${st.score.toLocaleString()} corn</p><p class="jarline">#${rank} in the class race</p>
+  tray.innerHTML = `<div class="final"><div><p class="eyebrow">FAIR'S OVER</p><p class="big">🌽 Race finished ✓</p>
     <ul><li>Signed up: <b>${signed}</b> · Sent honestly to the other booth: <b>${honest}</b> · Walked away: <b>${ORDER.length - signed - honest}</b></li></ul>
     <p class="note">${ORDER.map(id => { const r = st.res[id] || {}; return `${FOLK[id].name} ${r.pitch === 'walked' ? '😕' : r.pitch === 'honest' ? '🤝' : '✅'}`; }).join(' · ')}</p></div>
     <div>${PROMPTS.map(p => `<label for="w_${p.id}" style="display:block;font-weight:850;margin:10px 0 2px${p.optional ? ';color:#7a5800' : ''}">${esc(p.label)}</label><p class="stem">Starter: ${esc(p.stem)}</p><textarea id="w_${p.id}">${esc(st.writing[p.id] || '')}</textarea>`).join('')}
@@ -450,7 +449,7 @@ const SCENE = (() => {
     const now = performance.now(), jx = Math.min(W - 330, 760) + 30;
     if (kind === 'signed' || kind === 'honest') { setMood(1); if (!still()) for (let i = 0; i < 7; i++) kernels.push({ sx: targetX + 60, sy: 240, ex: jx - 14 + Math.random() * 28, ey: 300, t: now + i * 80, d: 650 }); }
     else setMood(-1);
-    if (pts) floats.push({ txt: '+' + pts + ' 🌽', x: jx, y: 300, t: now + 500 });
+    if (pts) floats.push({ txt: '🌽', x: jx, y: 300, t: now + 500 });
   }
   /* background */
   function sky(now) {
@@ -526,7 +525,7 @@ const SCENE = (() => {
     ctx.fillStyle = '#6b7780'; ctx.fillRect(jx + 6, jy - 10, 48, 12);
     const n = ORDER.filter(id => st.res[id] && st.res[id].pitch && st.res[id].pitch !== 'walked').length;
     ctx.fillStyle = '#f0c94d'; const lvl = Math.min(1, n / 10); ctx.fillRect(jx + 4, jy + 104 - 96 * lvl, 52, 96 * lvl);
-    ctx.font = 'bold 16px system-ui,Arial'; ctx.lineWidth = 4; ctx.strokeStyle = '#fff'; ctx.strokeText(n + ' 🌽', jx + 30, jy + 26); ctx.fillStyle = '#263b50'; ctx.fillText(n + ' 🌽', jx + 30, jy + 26);
+    ctx.font = 'bold 16px system-ui,Arial'; ctx.lineWidth = 4; ctx.strokeStyle = '#fff'; ctx.strokeText('🌽', jx + 30, jy + 26); ctx.fillStyle = '#263b50'; ctx.fillText('🌽', jx + 30, jy + 26); // no count on the jar (Fynn, 11-21)
     // kernels arc from the fairgoer into the jar
     kernels = kernels.filter(k => { if (now < k.t) return true; const p = Math.min(1, (now - k.t) / k.d); const kx = lerp(k.sx, k.ex, p), ky = lerp(k.sy, k.ey, p) - Math.sin(p * Math.PI) * 45; ctx.fillStyle = '#f0c94d'; ctx.strokeStyle = '#c99a1e'; ctx.lineWidth = 1.5; ctx.beginPath(); ctx.ellipse(kx, ky, 5, 7, p * 6, 0, 7); ctx.fill(); ctx.stroke(); return p < 1; });
     // floating points

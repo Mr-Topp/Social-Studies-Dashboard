@@ -44,17 +44,16 @@ main:has(.final-tray) .scene{display:none}
   <div class="hud">
     <span class="pill" id="shiftPill">Getting started</span>
     <span class="pill" id="countPill"></span>
-    <span class="pill corn" id="scorePill">🌽 0</span>
   </div>
   <div class="head-actions"><button id="helpBtn" class="small">How to play</button><button id="resetBtn" class="small">Start over</button></div>
 </header>
-<div id="title" class="title-screen" hidden><div class="logo"><h1><span class="t3">FAIR</span> <span class="t2">GAME</span></h1><p>🌽 Work a party booth. Beat your class. 🌽</p><br><button class="playbtn" id="playBtn">▶ PLAY</button></div></div>
+<div id="title" class="title-screen" hidden><div class="logo"><h1><span class="t3">FAIR</span> <span class="t2">GAME</span></h1><p>🌽 Work a party booth. Race your class. 🌽</p><br><button class="playbtn" id="playBtn">▶ PLAY</button></div></div>
 <main>
   <section class="scene" aria-label="Your booth at the fair">
     <canvas id="scene" width="960" height="400" aria-hidden="true"></canvas>
     <div id="bubble" class="bubble" hidden></div>
     <div id="patience" class="patience" hidden><span>Patience</span><i><b id="patienceFill"></b></i></div>
-    <div id="race" class="race" aria-label="Class race"></div>
+    <div id="race" class="race" aria-label="Your progress"></div>
     <div id="toast" role="status" aria-live="polite"></div>
   </section>
   <section class="tray" id="tray" aria-live="polite"></section>
@@ -66,9 +65,9 @@ main:has(.final-tray) .scene{display:none}
   <p class="eyebrow">HOW TO PLAY</p><h2>Booth duty at the Iowa State Fair</h2>
   <p>Your summer job: work a political party's booth. Your boss picks the booth. Halfway through, you switch to the other party's booth.</p>
   <ol class="howto"><li><b>Listen.</b> Spot what shaped the fairgoer's beliefs.</li><li><b>Map it.</b> Put them on the idea map.</li><li><b>Pitch.</b> Play the card from your hand that fits them. If your party isn't a fit, be honest and send them to the other booth.</li></ol>
-  <p class="note">Right answers = more corn 🌽. Beat your classmates. The fairgoers are made up. The fair, the booths, and the party positions are real.</p>
+  <p class="note">Right answers = more corn 🌽. The fairgoers are made up. The fair, the booths, and the party positions are real.</p>
   <p class="note">Today's goal: compare the two big parties and see how parties connect people to government. <span style="opacity:.7">SS.9-12.Gov.12</span></p>
 </dialog>
 
-<script src="game.js?v=20261121nr"></script>
+<script src="game.js?v=20261121nr2"></script>
 </body></html>

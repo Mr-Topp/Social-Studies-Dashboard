@@ -172,18 +172,17 @@ function hud() {
   const T = { r1: 'Round 1 · Call It', r2: 'Round 2 · Where Do They Stand?', r3: 'Round 3 · Same Belief, Different Party', final: 'Final' };
   $('#shiftPill').textContent = T[st.phase] || '';
   $('#countPill').textContent = st.phase === 'r1' ? 'Card ' + Math.min(DECK_SIZE, att().seen + (st.r1Next ? 0 : 1)) + ' of ' + DECK_SIZE : st.phase === 'r2' ? 'Voter ' + Math.min(VOTERS.length, st.vi + 1) + ' of ' + VOTERS.length : st.phase === 'r3' ? 'Pair ' + Math.min(CASES.length, st.ci + 1) + ' of ' + CASES.length : '';
-  $('#scorePill').textContent = '★ ' + st.score.toLocaleString();
   race();
 }
 
 /* ---------------- CLASS RACE ---------------- */
 let livePlayers = [];
 function liveOthers() { return (window.Arena && Arena.live) ? livePlayers.filter(p => !p.me && p.name !== st.name) : []; }
+// Students see only their own progress through the 3 rounds: no scores, no ranks, no classmates' names (Fynn, 11-21).
 function race() {
-  if (!st.bots) st.bots = [{ name: 'Bot Kenzie', s: 0 }, { name: 'Bot Devon', s: 0 }, { name: 'Bot Ava', s: 0 }];
-  const lo = liveOthers(), live = lo.length > 0;
-  const rows = (live ? lo.map(p => ({ name: p.name, s: p.score })) : st.bots).map(o => ({ name: o.name, s: o.s })).concat([{ name: 'You', s: st.score, me: true }]).sort((a, b) => b.s - a.s).slice(0, 5);
-  $('#race').innerHTML = `<div class="t">CLASS RACE<span class="tag ${live ? 'live' : ''}">${live ? '● LIVE' : 'practice'}</span></div><ol>${rows.map((r, i) => `<li class="${r.me ? 'me' : ''}"><span class="n">${i + 1}</span><span class="nm">${esc(r.name)}</span><span class="sc">${r.s.toLocaleString()}</span></li>`).join('')}</ol>`;
+  if (!st.bots) st.bots = [{ name: 'Bot 1', s: 0 }, { name: 'Bot 2', s: 0 }, { name: 'Bot 3', s: 0 }];
+  const live = liveOthers().length > 0, steps = [['r1', 'Call It'], ['r2', 'Where Do They Stand?'], ['r3', 'Same Belief, Different Party']], at = steps.findIndex(x => x[0] === st.phase);
+  $('#race').innerHTML = `<div class="t">YOUR RACE<span class="tag ${live ? 'live' : ''}">${live ? '● LIVE' : 'practice'}</span></div><ol>${steps.map((x, i) => `<li class="${i === at ? 'me' : ''}"><span class="n">${i < at ? '✓' : i + 1}</span><span class="nm">${x[1]}</span></li>`).join('')}</ol>`;
   $('#race').style.display = ['r1', 'r2', 'r3'].includes(st.phase) ? '' : 'none';
 }
 function botsStep(k) { if (liveOthers().length) return; (st.bots || []).forEach((b, i) => { b.s += Math.round(k * [1, 1.15, .85][i] * (0.55 + Math.random() * 0.8)); }); }
@@ -252,7 +251,7 @@ function pR1() {
   SCENE.show('r1');
   const card = $('#item'); card.hidden = false; card.className = 'itemcard'; card.style.top = '';
   card.innerHTML = `<span class="who"><i class="dot"></i> INCOMING · CALL IT</span><span class="txt">${esc(it.t)}</span>`;
-  tray.innerHTML = `<div class="rhead"><span class="rtag">CALL IT${a.n > 1 ? ' · SET ' + a.n : ''}</span><span>Liberal belief, conservative belief, or party action?</span><span class="streak">✓ ${a.right} right · misses left ${hearts()}${st.streak >= 3 ? ' · 🔥 ' + st.streak + ' in a row' : ''}</span></div>
+  tray.innerHTML = `<div class="rhead"><span class="rtag">CALL IT${a.n > 1 ? ' · SET ' + a.n : ''}</span><span>Liberal belief, conservative belief, or party action?</span><span class="streak">✓ ${a.right} right · misses left ${hearts()}</span></div>
   <div class="callbtns"><button class="lib" data-s="lib">← 🔵 LIBERAL<small>more government help · change · equality</small></button><button class="con" data-s="con">🔴 CONSERVATIVE →<small>smaller government · lower taxes · tradition</small></button><button class="party" data-s="party">↓ 🏛️ PARTY<small>a group running candidates, not a belief</small></button></div><p class="fb" id="fb"></p>`;
   st.shownAt = Date.now(); r1Busy = false;
   tray.querySelectorAll('[data-s]').forEach(b => b.onclick = () => sort(b.dataset.s));
@@ -261,7 +260,7 @@ function pR1() {
 function showMiss(it) {
   tray.querySelectorAll('[data-s]').forEach(b => b.disabled = true);
   const a = att(), sk = tray.querySelector('.streak'); if (sk) sk.innerHTML = `✓ ${a.right} right · misses left ${hearts()}`; hud();
-  $('#fb').className = 'fb oops'; $('#fb').innerHTML = `Not quite (−50). That's a <b>${SIDE[it.side].s.toUpperCase()}</b>. ${esc(it.why)} <button class="primary" id="gotit" style="margin-left:8px;padding:6px 14px">Got it →</button>`;
+  $('#fb').className = 'fb oops'; $('#fb').innerHTML = `Not quite. That's a <b>${SIDE[it.side].s.toUpperCase()}</b>. ${esc(it.why)} <button class="primary" id="gotit" style="margin-left:8px;padding:6px 14px">Got it →</button>`;
   setTimeout(() => { const b = $('#gotit'); if (b) b.onclick = () => { st.r1Next = false; st.queue.shift(); save(); render(); }; }, 400);
 }
 function sort(side) {
@@ -276,10 +275,8 @@ function sort(side) {
     st.score += pts; botsStep(90); st.queue.shift(); save(); pushScore();
     if (a.seen === DECK_SIZE / 2) setTimeout(() => toast('Halfway there. ' + a.right + ' right so far.'), 300);
     card.classList.add('fly-' + side);
-    const sr = $('.scene').getBoundingClientRect();
-    plus(pts, side === 'lib' ? sr.width * .1 : side === 'con' ? sr.width * .84 : sr.width * .47, sr.height * .3);
     SCENE.call(side);
-    $('#fb').className = 'fb yay'; $('#fb').innerHTML = (st.streak >= 3 ? '🔥 ' : '✓ ') + esc(it.why);
+    $('#fb').className = 'fb yay'; $('#fb').innerHTML = '✓ ' + esc(it.why);
     hud();
     setTimeout(() => render(), 1500);
   } else {
@@ -319,7 +316,7 @@ function roundDone(next, title, line, extra) {
   $('#item').hidden = true; tray.innerHTML = '';
   SCENE.confetti();
   const card = $('#card'); card.className = 'card brief';
-  card.innerHTML = `<p class="eyebrow">ROUND COMPLETE</p><h2>${esc(title)}</h2><p class="lead">${esc(line)}</p>${extra || ''}<p class="bigscore">★ ${st.score.toLocaleString()}</p><button class="primary go" id="go">Next round →</button>`;
+  card.innerHTML = `<p class="eyebrow">ROUND COMPLETE</p><h2>${esc(title)}</h2><p class="lead">${esc(line)}</p>${extra || ''}<button class="primary go" id="go">Next round →</button>`;
   $('#overlay').hidden = false;
   st.phase = next; save();
   $('#go').onclick = () => { $('#overlay').hidden = true; render(); };
@@ -345,7 +342,7 @@ function pR2() {
         r.idone = true; if (window.classFirstTry) classFirstTry.right('ideo-' + v.id);
         const pts = r.iw ? 0 : 150; st.score += pts; botsStep(120); save(); pushScore(); hud(); SCENE.show('r2', voterPins()); SCENE.ping(v.ideo);
         r2Party(v, r);
-      } else { if (!r.li) r.iw++; delete r.iorder; st.score = Math.max(0, st.score - 25); hud(); if (window.classFirstTry) classFirstTry.wrong(); save(); SCENE.oops(); pause(tray, $('#fb'), 'Not quite (−25). Check each belief: more government, less government, a mix, or less on everything?', draw); }
+      } else { if (!r.li) r.iw++; delete r.iorder; st.score = Math.max(0, st.score - 25); hud(); if (window.classFirstTry) classFirstTry.wrong(); save(); SCENE.oops(); pause(tray, $('#fb'), 'Not quite. Check each belief: more government, less government, a mix, or less on everything?', draw); }
     });
   };
   draw();
@@ -361,7 +358,7 @@ function r2Party(v, r) {
       if (b.dataset.p === v.party) {
         r.pdone = true; if (window.classFirstTry) classFirstTry.right('party-' + v.id);
         const pts = r.pw ? 0 : 100; st.score += pts; botsStep(80); save(); pushScore(); hud(); r2Result(v, r);
-      } else { if (!r.lp) r.pw++; delete r.popt; st.score = Math.max(0, st.score - 25); hud(); if (window.classFirstTry) classFirstTry.wrong(); save(); SCENE.oops(); pause(tray, $('#fb'), v.ideo === 'mod' ? 'Not quite (−25). Moderates are a mix. Would they always stick with one party?' : 'Not quite (−25). Which party\'s beliefs match a ' + IDEO[v.ideo].b.replace(/^\S+ /, '').toLowerCase() + ' best?', draw); }
+      } else { if (!r.lp) r.pw++; delete r.popt; st.score = Math.max(0, st.score - 25); hud(); if (window.classFirstTry) classFirstTry.wrong(); save(); SCENE.oops(); pause(tray, $('#fb'), v.ideo === 'mod' ? 'Not quite. Moderates are a mix. Would they always stick with one party?' : 'Not quite. Which party\'s beliefs match a ' + IDEO[v.ideo].b.replace(/^\S+ /, '').toLowerCase() + ' best?', draw); }
     });
   };
   save(); draw();
@@ -394,7 +391,7 @@ function pR3() {
       if (b.dataset.k === c.right) {
         r.done = true; if (window.classFirstTry) classFirstTry.right('why-' + ci);
         const pts = r.wrong ? 0 : 150; st.score += pts; botsStep(130); save(); pushScore(); hud(); r3Result(c);
-      } else { if (!r.lk) r.wrong++; delete r.opt; st.score = Math.max(0, st.score - 25); hud(); if (window.classFirstTry) classFirstTry.wrong(); save(); SCENE.oops(); pause(tray, $('#fb'), 'Not quite (−25). ' + c.hint, draw); }
+      } else { if (!r.lk) r.wrong++; delete r.opt; st.score = Math.max(0, st.score - 25); hud(); if (window.classFirstTry) classFirstTry.wrong(); save(); SCENE.oops(); pause(tray, $('#fb'), 'Not quite. ' + c.hint, draw); }
     });
   };
   save(); draw();
@@ -436,9 +433,8 @@ function bySide() { const o = { lib: [0, 0], con: [0, 0], party: [0, 0] }; ITEMS
 function pFinal() {
   $('#item').hidden = true; SCENE.show('final', voterPins()); SCENE.confetti();
   const t = tally();
-  const rank = [{ s: st.score, me: true }].concat(liveOthers().length ? liveOthers().map(p => ({ s: p.score })) : st.bots).sort((a, b) => b.s - a.s).findIndex(x => x.me) + 1;
   tray.classList.add('final-tray');
-  tray.innerHTML = `<div class="final"><div><p class="eyebrow">FINAL RESULTS</p><p class="big">★ ${st.score.toLocaleString()}</p><p class="jarline">#${rank} in the class race · best streak 🔥${st.best}</p>
+  tray.innerHTML = `<div class="final"><div><p class="eyebrow">FINAL RESULTS</p><p class="big">Race finished ✓</p>
     <ul><li>Call It: <b>✓ done</b></li><li>Voter ideologies: <b>✓ done</b></li><li>Voter parties: <b>✓ done</b></li><li>Same Belief, Different Party: <b>✓ done</b></li></ul>
     ${st.turnedIn ? '' : '<p class="note">📤 Last step: turn in your results.</p>'}</div>
     <div><button class="primary go" id="sendBtn"${st.turnedIn ? ' disabled' : ''}>${st.turnedIn ? 'Turned in ✓' : 'Turn in'}</button><p class="fb ${st.turnedIn ? 'yay' : ''}" id="sendMsg">${st.turnedIn ? '✓ Turned in.' : ''}</p></div></div>`;
@@ -499,7 +495,7 @@ async function turnIn() {
     const res = await classTurnIn(OLD_API, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ studentName: st.name, assignmentId: ASSIGN, assignmentTitle: 'Government Unit 2 · Day 1 · Decision Desk (Ideology vs. Party)', answers }) });
     const data = await res.json().catch(() => ({}));
     if (!res.ok) throw new Error(data.error || 'Your work did not save. Try again.');
-    const hasL4 = !!((($('#w_crit') || {}).value || '').trim()); if (!st.bonusPaid || (hasL4 && !st.l4Paid)) { st.score += (st.bonusPaid ? 0 : 200) + (hasL4 && !st.l4Paid ? 300 : 0); st.bonusPaid = true; if (hasL4) st.l4Paid = true; pushScore(); hud(); SCENE.confetti(); const bg = document.querySelector('.final .big'); if (bg) bg.textContent = '★ ' + st.score.toLocaleString(); } st.turnedIn = true; save(); msg.className = 'fb yay'; msg.textContent = '✓ Turned in.'; st.sentOnce = true; save(); $('#sendBtn').textContent = 'Turned in ✓'; const nt = document.querySelector('.final .note'); if (nt) nt.hidden = true;
+    const hasL4 = !!((($('#w_crit') || {}).value || '').trim()); if (!st.bonusPaid || (hasL4 && !st.l4Paid)) { st.score += (st.bonusPaid ? 0 : 200) + (hasL4 && !st.l4Paid ? 300 : 0); st.bonusPaid = true; if (hasL4) st.l4Paid = true; pushScore(); hud(); SCENE.confetti(); } st.turnedIn = true; save(); msg.className = 'fb yay'; msg.textContent = '✓ Turned in.'; st.sentOnce = true; save(); $('#sendBtn').textContent = 'Turned in ✓'; const nt = document.querySelector('.final .note'); if (nt) nt.hidden = true;
   } catch (e) { msg.className = 'fb oops'; msg.textContent = e.message || 'Could not turn in. Try again.'; $('#sendBtn').disabled = false; }
 }
 

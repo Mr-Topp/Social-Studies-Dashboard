@@ -169,8 +169,6 @@
     if (!on) return;
     $("progTxt").textContent = solved() + " of " + N + " done";
     $("progFill").style.width = Math.round(solved() / N * 100) + "%";
-    $("streakNum").textContent = st.streak;
-    $("streakBox").classList.toggle("hot", st.streak >= 3);
   }
 
   function show(screen) { $("welcome").hidden = true; st.screen = screen; save(); render(); window.scrollTo(0, 0); }
@@ -185,7 +183,7 @@
         <div class="steps">
           <div class="step"><span class="e" aria-hidden="true">📼</span><b>Read the moment</b><small>All from today's slides</small></div>
           <div class="step"><span class="e" aria-hidden="true">👆</span><b>Pick 1 of 3</b><small>Name the principle or fact</small></div>
-          <div class="step"><span class="e" aria-hidden="true">🔥</span><b>Build a streak</b><small>Miss one? It comes back later</small></div>
+          <div class="step"><span class="e" aria-hidden="true">🏁</span><b>Clear all 20</b><small>Miss one? It comes back later</small></div>
         </div>
         <div class="chips"><span>⏱️ <b>About 15 min</b></span><span>❓ <b>20 questions</b></span><span>✍️ <b>1 exit ticket</b></span></div>
         <button type="button" class="go" id="startBtn">START ▶</button>
@@ -242,7 +240,7 @@
       st.streak++; st.best = Math.max(st.best, st.streak);
       st.queue.shift();
       if (window.classFirstTry) window.classFirstTry.right(q.id);
-      if (st.streak >= 3 && !r.wrong) popup(st.streak >= 5 ? "🔥 " + st.streak + " IN A ROW!" : "🔥 " + st.streak + " streak");
+      // Streak still goes to the teacher (Best streak) but is never shown to students (Fynn, 11-21).
     } else {
       r.wrong++;
       st.streak = 0;
@@ -264,7 +262,7 @@
     const last = !st.queue.length;
     $("fb").innerHTML = ok
       ? `<div class="fb good" role="status"><b class="h">✓ Right!</b>${esc(q.why)}</div><button type="button" class="go" id="nextBtn">${last ? "Finish ▶" : "Next ▶"}</button>`
-      : `<div class="fb bad" role="status"><b class="h">Not this one.</b>${esc(q.why)}<span class="back">↻ This question comes back at the end. Your streak starts over.</span></div><button type="button" class="go" id="nextBtn">Got it ▶</button>`;
+      : `<div class="fb bad" role="status"><b class="h">Not this one.</b>${esc(q.why)}<span class="back">↻ This question comes back at the end.</span></div><button type="button" class="go" id="nextBtn">Got it ▶</button>`;
     $("nextBtn").onclick = nextQ;
     const nb = $("nextBtn");
     if (nb.getBoundingClientRect().bottom > window.innerHeight) nb.scrollIntoView({ behavior: "smooth", block: "center" });
@@ -281,7 +279,6 @@
     app.innerHTML = `<section class="panel">
       <p class="kicker" style="color:#a8770c">Halfway</p>
       <h2>10 down, ${N - solved()} to go.</h2>
-      <div class="stats"><p>🔥 Best streak: <b>${st.best}</b></p></div>
       <p>Next up: checks and balances, amendments, and how rights limit what government can do.</p>
       <button type="button" class="go" id="goOn">Keep going ▶</button>
     </section>`;
@@ -294,7 +291,7 @@
     app.innerHTML = `<section class="panel">
       <p class="kicker" style="color:#a8770c">✓ All 20 done</p>
       <h2>One last step: your exit ticket ↓</h2>
-      <div class="stats"><p>🔥 Best streak: <b>${st.best}</b></p><p>⏱️ About <b>${mins()}</b> min</p></div>
+      <div class="stats"><p>⏱️ About <b>${mins()}</b> min</p></div>
       <div class="sheet"><label for="w1">✍️ Exit ticket: ${esc(PROMPT.label)}</label><p class="stem">Start: <i>${esc(PROMPT.stem)}</i></p><textarea id="w1" rows="4">${esc(st.writing)}</textarea></div>
       <div class="sheet"><label for="studentName">First name + last initial</label><input id="studentName" type="text" autocomplete="off" maxlength="60" placeholder="Like Jordan M." value="${esc(st.name)}"></div>
       <button type="button" class="go" id="sendBtn"${st.turnedIn ? " disabled" : ""}>${st.turnedIn ? "✓ Turned in" : "Turn in"}</button>
