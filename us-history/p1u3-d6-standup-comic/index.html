@@ -121,23 +121,23 @@ parts:[
 "check": {
 "page": 2,
 "tag": "Reading check · Reader page 2",
-"q": "Whitman wrote, \"Nothing is good that ignores individuals.\" What did the judge decide in Standing Bear's 1879 case?",
-"right": "An Indian is a person under U.S. law",
+"q": "Read the scroll. Whitman says the American compact (deal) is with whom? Standing Bear won his 1879 court case with the same idea.",
+"right": "Individuals: every person counts",
 "wrong": [
-"Only U.S. citizens could bring a case to court",
-"The Ponca had to stay in Oklahoma forever",
-"Standing Bear had to pay for walking home"
+"The states: each state makes the rules",
+"Its leaders: they decide for everyone",
+"Its citizens: only voters have rights"
 ],
-"why": "✓ Correct. Standing Bear said, \"I am a man.\" The judge agreed that he had rights the courts must protect.",
-"hint": "Read the first line on the scroll."
+"why": "✓ Correct. The scroll says the American deal is \"altogether with individuals.\" Standing Bear told the court, \"I am a man.\" The judge ruled that an Indian is a person under U.S. law, with rights the courts must protect.",
+"hint": "Read the last lines on the scroll: \"altogether with ___.\""
 },
-"prompt": "Whose actions did the most for their community: Standing Bear, Susette La Flesche, Kate Shelley, or the Grangers? What risk did they take?",
-"stem": "<span class=\"declass\"><b>Fact file</b><b class=\"kf\">Know this</b><span class=\"line\"><b>Susette La Flesche</b> (luh-FLESH) of the Omaha Nation translated for Standing Bear on a speaking tour of Eastern cities.</span><span class=\"line\">In 1881, Iowa teen <b>Kate Shelley</b> crawled across a railroad bridge in a storm to warn the station about a train wreck.</span></span>Write 1–2 sentences. Start like this: <i>___ did the most because ___. The risk they took was ___.</i>",
-"stemText": "___ did the most because ___. The risk they took was ___.",
-"placeholder": "___ did the most because ___. The risk they took was ___."
+"prompt": "Whose actions did the most for their community: Standing Bear, Susette La Flesche, Kate Shelley, or the Grangers? What risk did they take, and what changed because of it?",
+"stem": "<span class=\"declass\"><b>Fact file</b><b class=\"kf\">Know this</b><span class=\"line\"><b>Susette La Flesche</b> (luh-FLESH) of the Omaha Nation translated for Standing Bear on a speaking tour of Eastern cities.</span><span class=\"line\">In 1881, Iowa teen <b>Kate Shelley</b> crawled across a railroad bridge in a storm to warn the station about a train wreck.</span></span>Write 1–2 sentences. Start like this: <i>___ did the most because ___. The risk they took was ___. Because of it, ___.</i>",
+"stemText": "___ did the most because ___. The risk they took was ___. Because of it, ___.",
+"placeholder": "___ did the most because ___. The risk they took was ___. Because of it, ___."
 }
 ],
-questions:["The Populists lost elections. Did they lose or win in the end? Use one fact.", "Whose actions did the most for their community: Standing Bear, Susette La Flesche, Kate Shelley, or the Grangers? What risk did they take?"],
+questions:["The Populists lost elections. Did they lose or win in the end? Use one fact.", "Whose actions did the most for their community: Standing Bear, Susette La Flesche, Kate Shelley, or the Grangers? What risk did they take, and what changed because of it?"],
 validate(s){if(!s.name)return{text:"Type your first name + last initial (like Jordan M.) at the top of the questions.",focus:"studentName"};
  const mc=[1, 2].find(i=>!s.checkDone(i));if(mc)return{text:"Get the check right for part "+mc+" first.",part:mc};
  const ma=[1, 2].find(i=>!s.answer(i));if(ma)return{text:"Write your answer for part "+ma+" before turning in.",part:ma,focus:"answer"+ma};

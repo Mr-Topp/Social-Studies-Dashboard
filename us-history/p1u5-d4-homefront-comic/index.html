@@ -107,7 +107,7 @@ parts:[
 "why": "✓ Correct. The whole country went to work for the war. Families even saved food, and Americans bought Liberty Bonds to pay for it.",
 "hint": "Read the yellow box: what did the \"mighty partnership\" pour forth?"
 },
-"prompt": "Who did the most to make the \"mighty partnership\" work? Pick one group or person.",
+"prompt": "Who did the most to make the \"mighty partnership\" work? Pick one group or person, and explain why their work helped win the war.",
 "stem": "<span class=\"declass\"><b>Fact file</b><b class=\"kf\">Know this</b><span class=\"line\"><b>Herbert Hoover</b>, born in West Branch, Iowa, ran the U.S. Food Administration. Saving food was called <b>Hooverizing</b>.</span><span class=\"line\">Women took factory jobs. About 500,000 Black Southerners moved north for work, the start of the <b>Great Migration</b>.</span></span>Write 1–2 sentences. Start like this: <i>___ did the most because ___.</i>",
 "stemText": "___ did the most because ___.",
 "placeholder": "___ did the most because ___."
@@ -121,23 +121,23 @@ parts:[
 "check": {
 "page": 2,
 "tag": "Reading check · Reader page 2",
-"q": "As Americans cheered the end of the war, what did they hope?",
-"right": "That it would end war forever",
+"q": "An armistice (a deal to stop fighting) was signed. What did the cheering crowds hope?",
+"right": "War would end forever",
 "wrong": [
-"That the soldiers would stay in Europe",
-"That Germany would pay for every ship",
-"That the draft would last for good"
+"Soldiers would stay in Europe",
+"America would rule Germany",
+"Germany would pay for the war"
 ],
-"why": "✓ Correct. That hope didn't last. And the war had already changed life at home, including free speech.",
-"hint": "Read the green box at the bottom of the page."
+"why": "✓ Correct. Wilson built on that hope with the League of Nations, where countries would talk out fights. The Senate said no, fearing more wars. Two ideas clashed: work with the world, or stay out.",
+"hint": "Read the green box at the bottom: \"the war that they hoped would...\""
 },
-"prompt": "Did the war make Americans less free? Give one reason.",
+"prompt": "Did the war make Americans less free? Explain why, using one law or order as evidence.",
 "stem": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">(Nothing about free speech.)</span><span class=\"rl\">The Sedition Act (1918) made \"disloyal\" words a crime. Eugene Debs got 10 years for an antiwar speech.</span></span><span class=\"fix\"><span class=\"cs\">(Nothing about Iowa.)</span><span class=\"rl\">Iowa's Babel Proclamation (May 1918) ordered English only in public, on the phone, and in church.</span></span><b class=\"kf\">Know this</b><span class=\"line\"><b>Heads up:</b> the 1918 flu killed about 675,000 Americans, more than died in the war.</span></span>Write 1–2 sentences. Start like this: <i>The war made Americans (more / less) free because ___.</i>",
 "stemText": "The war made Americans (more / less) free because ___.",
 "placeholder": "The war made Americans (more / less) free because ___."
 }
 ],
-questions:["Who did the most to make the \"mighty partnership\" work? Pick one group or person.", "Did the war make Americans less free? Give one reason."],
+questions:["Who did the most to make the \"mighty partnership\" work? Pick one group or person, and explain why their work helped win the war.", "Did the war make Americans less free? Explain why, using one law or order as evidence."],
 validate(s){if(!s.name)return{text:"Type your first name + last initial (like Jordan M.) at the top of the questions.",focus:"studentName"};
  const mc=[1, 2].find(i=>!s.checkDone(i));if(mc)return{text:"Get the check right for part "+mc+" first.",part:mc};
  const ma=[1, 2].find(i=>!s.answer(i));if(ma)return{text:"Write your answer for part "+ma+" before turning in.",part:ma,focus:"answer"+ma};

@@ -97,20 +97,20 @@ parts:[
 "check": {
 "page": 1,
 "tag": "Reading check · Reader page 1",
-"q": "As president, Roosevelt \"continued to rough ride.\" How did he handle the 1902 coal strike?",
-"right": "He acted as a fair judge for both sides",
+"q": "Read the box. As president, Roosevelt \"continued to rough ride.\" What does that say about how he used the president's power?",
+"right": "He used it boldly on big problems",
 "wrong": [
-"He sent troops to end it, like Cleveland",
-"He let the mine owners settle it on their own",
-"He took over the mines for the government"
+"He let business run itself, no rules",
+"He left the big choices to Congress",
+"He kept leading soldiers in Cuba"
 ],
-"why": "✓ Correct. Roosevelt called both sides in. Miners won a 10% raise and a 9-hour day. Cleveland had sent troops against the Pullman strikers.",
-"hint": "Read the yellow box at the top."
+"why": "✓ Correct. A Rough Rider charged ahead. As president, Roosevelt did too: he busted trusts and stepped into the 1902 coal strike as a fair judge for both sides. Miners won a 10% raise and a 9-hour day.",
+"hint": "Read the yellow box at the top. \"Now, as president\" tells you what changed and what stayed the same."
 },
-"prompt": "Compare Roosevelt's 1902 coal strike with Cleveland's 1894 Pullman strike. What changed?",
-"stem": "<span class=\"declass\"><b>Fact file</b><b class=\"kf\">Know this</b><span class=\"line\">Roosevelt promised a <b>Square Deal</b>: control big corporations, protect consumers, and conserve nature.</span><span class=\"line\">In 1904, the Supreme Court agreed with Roosevelt and broke up <b>Northern Securities</b>, a giant railroad company.</span></span>Write 1–2 sentences. Start like this: <i>Cleveland ___, but Roosevelt ___. That changed ___.</i>",
-"stemText": "Cleveland ___, but Roosevelt ___. That changed ___.",
-"placeholder": "Cleveland ___, but Roosevelt ___. That changed ___."
+"prompt": "Compare Roosevelt's 1902 coal strike with Cleveland's 1894 Pullman strike. What changed, and why did it matter for workers?",
+"stem": "<span class=\"declass\"><b>Fact file</b><b class=\"kf\">Know this</b><span class=\"line\">Roosevelt promised a <b>Square Deal</b>: control big corporations, protect consumers, and conserve nature.</span><span class=\"line\">Cleveland sent troops against the 1894 Pullman strikers. Roosevelt was the first president to act as a <b>neutral judge</b> in a strike.</span></span>Write 1–2 sentences. Start like this: <i>Cleveland ___, but Roosevelt ___. This mattered for workers because ___.</i>",
+"stemText": "Cleveland ___, but Roosevelt ___. This mattered for workers because ___.",
+"placeholder": "Cleveland ___, but Roosevelt ___. This mattered for workers because ___."
 },
 {
 "short": "Forests",
@@ -137,7 +137,7 @@ parts:[
 "placeholder": "___ lasted the most because ___."
 }
 ],
-questions:["Compare Roosevelt's 1902 coal strike with Cleveland's 1894 Pullman strike. What changed?", "Trust-busting, conservation, or the income tax: which change lasted the most? Why?"],
+questions:["Compare Roosevelt's 1902 coal strike with Cleveland's 1894 Pullman strike. What changed, and why did it matter for workers?", "Trust-busting, conservation, or the income tax: which change lasted the most? Why?"],
 validate(s){if(!s.name)return{text:"Type your first name + last initial (like Jordan M.) at the top of the questions.",focus:"studentName"};
  const mc=[1, 2].find(i=>!s.checkDone(i));if(mc)return{text:"Get the check right for part "+mc+" first.",part:mc};
  const ma=[1, 2].find(i=>!s.answer(i));if(ma)return{text:"Write your answer for part "+ma+" before turning in.",part:ma,focus:"answer"+ma};

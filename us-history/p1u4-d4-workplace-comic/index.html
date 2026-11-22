@@ -97,18 +97,18 @@ parts:[
 "check": {
 "page": 1,
 "tag": "Reading check · Reader page 1",
-"q": "The box gives Wilson's government credit for shorter hours. Who does the comic leave out?",
-"right": "Workers who went on strike",
+"q": "Today is about workplace reform: making jobs safer and fairer for workers. Which change in the box was a workplace reform?",
+"right": "Working hours cut",
 "wrong": [
-"Banks, which Wilson overhauled",
-"Trusts, which Wilson regulated",
-"Wilson, the scholar turned reformer"
+"Banking overhauled",
+"Tariffs lowered",
+"Trusts regulated"
 ],
-"why": "✓ Correct. In 1909, more than 20,000 young women in New York's blouse factories went on strike. Most shops agreed to a 52-hour week.",
-"hint": "Read the box at the bottom: \"working hours reduced.\""
+"why": "✓ Correct. Shorter hours changed life on the job. The other three changed banks, taxes on imports, and big companies.",
+"hint": "Read the box at the bottom. Which change happens inside a factory or shop?"
 },
 "prompt": "The comic gives Wilson the credit. Who else won shorter hours, and how?",
-"stem": "<span class=\"declass\"><b>Fact file</b><b class=\"kf\">Know this</b><span class=\"line\"><b>Clara Lemlich</b> (LEM-lik), age 23, called for the 1909 strike. The <b>Triangle Shirtwaist Company</b> refused to give in.</span><span class=\"line\">In 1916, Wilson signed the Adamson Act, an 8-hour day for railroad workers.</span></span>Write 1–2 sentences. Start like this: <i>The comic credits ___, but ___ also won shorter hours by ___.</i>",
+"stem": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">Wilson's government reduced working hours.</span><span class=\"rl\">Wilson helped, but workers won shorter hours first. In 1909, over 20,000 young women in New York went on strike, and most shops agreed to a 52-hour week.</span></span><b class=\"kf\">Know this</b><span class=\"line\"><b>Clara Lemlich</b> (LEM-lik), age 23, called for the 1909 strike. The <b>Triangle Shirtwaist Company</b> refused to give in.</span><span class=\"line\">In 1916, Wilson signed the Adamson Act, an 8-hour day for railroad workers.</span></span>Write 1–2 sentences. Start like this: <i>The comic credits ___, but ___ also won shorter hours by ___.</i>",
 "stemText": "The comic credits ___, but ___ also won shorter hours by ___.",
 "placeholder": "The comic credits ___, but ___ also won shorter hours by ___."
 },
@@ -121,23 +121,23 @@ parts:[
 "check": {
 "page": 2,
 "tag": "Reading check · Reader page 2",
-"q": "New York's factories drew immigrants like this family. After 146 workers died in the 1911 Triangle fire, what did New York do?",
-"right": "Passed 36 new safety laws",
+"q": "Most of the 146 workers who died in the 1911 Triangle fire were immigrants. Why did immigrants like this family come to New York?",
+"right": "To find work in the city",
 "wrong": [
-"Sent the owners to prison for life",
-"Closed its factories for a whole year",
-"Banned all child labor in the country"
+"To get free farmland out West",
+"To join relatives on a farm",
+"To go to school in the city"
 ],
-"why": "✓ Correct. New York's Factory Investigating Commission led to 36 new state laws, like fire drills and sprinklers.",
-"hint": "Read the father's speech bubble: \"A good cigar-maker can always find work here.\""
+"why": "✓ Correct. The father says, \"A good cigar-maker can always find work here.\" Jobs pulled immigrants to New York's crowded shops and factories, like the Triangle factory.",
+"hint": "Read the father's speech bubble: \"We shall stay in New York...\""
 },
-"prompt": "Rank the reforms after the Triangle fire. Which helped workers most, and what didn't get fixed?",
-"stem": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">Gompers, like Carnegie, had English parents.</span><span class=\"rl\">Gompers's parents were Dutch Jews living in London. Carnegie's were Scottish.</span></span><b class=\"kf\">Know this</b><span class=\"line\"><b>Heads up:</b> at Triangle, a stairway door was locked and the fire escape collapsed. Most who died were young Jewish and Italian immigrant women.</span><span class=\"line\">The owners were found not guilty. <b>Iowa</b> passed workers' compensation in 1913.</span></span>Write 1–2 sentences. Start like this: <i>The reform that helped most was ___ because ___. Still not fixed: ___.</i>",
-"stemText": "The reform that helped most was ___ because ___. Still not fixed: ___.",
-"placeholder": "The reform that helped most was ___ because ___. Still not fixed: ___."
+"prompt": "Rank the reforms after the Triangle fire. Defend your #1: explain why it helped workers most. What didn't get fixed?",
+"stem": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">Gompers, like Carnegie, had English parents.</span><span class=\"rl\">Gompers's parents were Dutch Jews living in London. Carnegie's were Scottish.</span></span><b class=\"kf\">Know this</b><span class=\"line\"><b>Heads up:</b> at Triangle, a stairway door was locked and the fire escape collapsed. Most who died were young Jewish and Italian immigrant women.</span><span class=\"line\">Afterward, New York passed <b>36</b> new safety laws, like fire drills and sprinklers. <b>Iowa</b> passed workers' compensation in 1913.</span></span>Write 1–2 sentences. Start like this: <i>My #1 is ___ because ___. Still not fixed: ___.</i>",
+"stemText": "My #1 is ___ because ___. Still not fixed: ___.",
+"placeholder": "My #1 is ___ because ___. Still not fixed: ___."
 }
 ],
-questions:["The comic gives Wilson the credit. Who else won shorter hours, and how?", "Rank the reforms after the Triangle fire. Which helped workers most, and what didn't get fixed?"],
+questions:["The comic gives Wilson the credit. Who else won shorter hours, and how?", "Rank the reforms after the Triangle fire. Defend your #1: explain why it helped workers most. What didn't get fixed?"],
 validate(s){if(!s.name)return{text:"Type your first name + last initial (like Jordan M.) at the top of the questions.",focus:"studentName"};
  const mc=[1, 2].find(i=>!s.checkDone(i));if(mc)return{text:"Get the check right for part "+mc+" first.",part:mc};
  const ma=[1, 2].find(i=>!s.answer(i));if(ma)return{text:"Write your answer for part "+ma+" before turning in.",part:ma,focus:"answer"+ma};

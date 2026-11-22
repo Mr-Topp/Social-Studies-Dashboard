@@ -107,10 +107,10 @@ parts:[
 "why": "✓ Correct. The telegraph only sent dots and dashes that trained operators could read. The phone carried a real voice, so anyone could use it.",
 "hint": "Read the woman's speech bubble: \"I can hear someone speaking...\""
 },
-"prompt": "Which invention changed American life the most: the telephone, the light bulb, or cheap steel? Name one group it helped.",
-"stem": "<span class=\"declass\"><b>Fact file</b><b class=\"kf\">Know this</b><span class=\"line\">Edison's team made a long-lasting <b>light bulb</b> in 1879. By 1882, his power station lit buildings in New York, so factories and stores could work after dark.</span><span class=\"line\">Phones and typewriters made new office jobs. By 1900, about 3 in 4 typists were women.</span></span>Write 1–2 sentences. Start like this: <i>The ___ changed American life the most because ___. It helped ___.</i>",
-"stemText": "The ___ changed American life the most because ___. It helped ___.",
-"placeholder": "The ___ changed American life the most because ___. It helped ___."
+"prompt": "Which invention changed American life the most: the telephone, the light bulb, or cheap steel? Explain why, using one detail from the comic or a fact.",
+"stem": "<span class=\"declass\"><b>Fact file</b><b class=\"kf\">Know this</b><span class=\"line\">Edison's team made a long-lasting <b>light bulb</b> in 1879. By 1882, his power station lit buildings in New York, so factories and stores could work after dark.</span><span class=\"line\">Phones and typewriters made new office jobs. By 1900, about 3 in 4 typists were women.</span></span>Write 1–2 sentences. Start like this: <i>The ___ changed American life the most because ___. It helped ___, so ___.</i>",
+"stemText": "The ___ changed American life the most because ___. It helped ___, so ___.",
+"placeholder": "The ___ changed American life the most because ___. It helped ___, so ___."
 },
 {
 "short": "Carnegie",
@@ -161,7 +161,7 @@ parts:[
 "placeholder": "His steelworkers would (agree / disagree) because ___."
 }
 ],
-questions:["Which invention changed American life the most: the telephone, the light bulb, or cheap steel? Name one group it helped.", "Carnegie came as a poor 12-year-old and became one of the richest men in the world. Who did the hard work that made him rich?", "Carnegie wrote, \"The man who dies thus rich dies disgraced.\" Would his steelworkers agree? Why or why not?"],
+questions:["Which invention changed American life the most: the telephone, the light bulb, or cheap steel? Explain why, using one detail from the comic or a fact.", "Carnegie came as a poor 12-year-old and became one of the richest men in the world. Who did the hard work that made him rich?", "Carnegie wrote, \"The man who dies thus rich dies disgraced.\" Would his steelworkers agree? Why or why not?"],
 validate(s){if(!s.name)return{text:"Type your first name + last initial (like Jordan M.) at the top of the questions.",focus:"studentName"};
  const mc=[1, 2, 3].find(i=>!s.checkDone(i));if(mc)return{text:"Get the check right for part "+mc+" first.",part:mc};
  const ma=[1, 2, 3].find(i=>!s.answer(i));if(ma)return{text:"Write your answer for part "+ma+" before turning in.",part:ma,focus:"answer"+ma};

@@ -107,10 +107,10 @@ parts:[
 "why": "✓ Correct. Gilded means covered with a thin layer of gold. Under the shiny outside were tenements, child labor, and danger.",
 "hint": "Read the speech bubbles. Then think: who is NOT in this picture?"
 },
-"prompt": "Which Gilded Age problem was the worst: tenements, child labor, dangerous jobs, or monopolies? Back it up.",
-"stem": "<span class=\"declass\"><b>Fact file</b><b class=\"kf\">Know this</b><span class=\"line\"><b>Tenements:</b> in 1890, Jacob Riis (REES) wrote that three-fourths of New York City's people lived in cheap, crowded tenements.</span><span class=\"line\"><b>Dangerous jobs:</b> in 1907 alone, 3,242 coal miners died on the job. Hurt workers usually got nothing.</span></span>Write 1–2 sentences. Start like this: <i>The worst problem was ___ because ___.</i>",
-"stemText": "The worst problem was ___ because ___.",
-"placeholder": "The worst problem was ___ because ___."
+"prompt": "Which Gilded Age problem was the worst: tenements, child labor, dangerous jobs, or monopolies? Explain what caused it and who it hurt.",
+"stem": "<span class=\"declass\"><b>Fact file</b><b class=\"kf\">Know this</b><span class=\"line\"><b>Tenements:</b> in 1890, Jacob Riis (REES) wrote that three-fourths of New York City's people lived in cheap, crowded tenements.</span><span class=\"line\"><b>Dangerous jobs:</b> in 1907 alone, 3,242 coal miners died on the job. Hurt workers usually got nothing.</span></span>Write 1–2 sentences. Start like this: <i>The worst problem was ___ because ___. It was caused by ___.</i>",
+"stemText": "The worst problem was ___ because ___. It was caused by ___.",
+"placeholder": "The worst problem was ___ because ___. It was caused by ___."
 },
 {
 "short": "Kids at work",
@@ -137,7 +137,7 @@ parts:[
 "placeholder": "___ could fix it best because ___."
 }
 ],
-questions:["Which Gilded Age problem was the worst: tenements, child labor, dangerous jobs, or monopolies? Back it up.", "Who could fix child labor best: workers, reformers like Jane Addams, or the government?"],
+questions:["Which Gilded Age problem was the worst: tenements, child labor, dangerous jobs, or monopolies? Explain what caused it and who it hurt.", "Who could fix child labor best: workers, reformers like Jane Addams, or the government?"],
 validate(s){if(!s.name)return{text:"Type your first name + last initial (like Jordan M.) at the top of the questions.",focus:"studentName"};
  const mc=[1, 2].find(i=>!s.checkDone(i));if(mc)return{text:"Get the check right for part "+mc+" first.",part:mc};
  const ma=[1, 2].find(i=>!s.answer(i));if(ma)return{text:"Write your answer for part "+ma+" before turning in.",part:ma,focus:"answer"+ma};

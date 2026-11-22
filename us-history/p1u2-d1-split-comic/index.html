@@ -155,10 +155,10 @@ parts:[
 "why": "✓ Correct. Chief Justice Taney said Black people could not be citizens, and Congress could not ban slavery in the territories.",
 "hint": "Read the middle panel: the box and the man's speech bubble."
 },
-"prompt": "Which event pushed the country closest to war? Pick one and give a reason.",
-"stem": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">Dred Scott went to court in 1857.</span><span class=\"rl\">He first sued in 1846. The Supreme Court decided his case in 1857.</span></span><b class=\"kf\">Know this</b><span class=\"line\"><b>Uncle Tom's Cabin</b> (1852) showed slavery's cruelty. It sold 300,000 copies in a year.</span><span class=\"line\"><b>Bleeding Kansas</b> (1854–1859): settlers voted on slavery, and about 56 people were killed.</span></span>Write 1–2 sentences. Start like this: <i>___ pushed the country closest to war because ___.</i>",
-"stemText": "___ pushed the country closest to war because ___.",
-"placeholder": "___ pushed the country closest to war because ___."
+"prompt": "Evaluate the causes: which event in this comic pushed the country closest to war? Explain why, using the comic.",
+"stem": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">Dred Scott went to court in 1857.</span><span class=\"rl\">He first sued in 1846. The Supreme Court decided his case in 1857.</span></span><b class=\"kf\">Know this</b><span class=\"line\"><b>Uncle Tom's Cabin</b> (1852) showed slavery's cruelty. It sold 300,000 copies in a year.</span><span class=\"line\"><b>Bleeding Kansas</b> (1854–1859): settlers voted on slavery, and about 56 people were killed.</span></span>Write 1–2 sentences. Start like this: <i>___ pushed the country closest to war because ___. In the comic, ___.</i>",
+"stemText": "___ pushed the country closest to war because ___. In the comic, ___.",
+"placeholder": "___ pushed the country closest to war because ___. In the comic, ___."
 },
 {
 "short": "Why leave?",
@@ -185,7 +185,7 @@ parts:[
 "placeholder": "Southern states left because ___. Mississippi's leaders said ___."
 }
 ],
-questions:["Why did every new western state start a fight between the North and South?", "The girl says her father is breaking the law. Was it right to break the Fugitive Slave Act? Use an Iowa example.", "Which event pushed the country closest to war? Pick one and give a reason.", "Lincoln promised only to stop slavery from spreading. Why did Southern states leave anyway? Use Mississippi's own words."],
+questions:["Why did every new western state start a fight between the North and South?", "The girl says her father is breaking the law. Was it right to break the Fugitive Slave Act? Use an Iowa example.", "Evaluate the causes: which event in this comic pushed the country closest to war? Explain why, using the comic.", "Lincoln promised only to stop slavery from spreading. Why did Southern states leave anyway? Use Mississippi's own words."],
 validate(s){if(!s.name)return{text:"Type your first name + last initial (like Jordan M.) at the top of the questions.",focus:"studentName"};
  const mc=[1, 2, 3, 4].find(i=>!s.checkDone(i));if(mc)return{text:"Get the check right for part "+mc+" first.",part:mc};
  const ma=[1, 2, 3, 4].find(i=>!s.answer(i));if(ma)return{text:"Write your answer for part "+ma+" before turning in.",part:ma,focus:"answer"+ma};

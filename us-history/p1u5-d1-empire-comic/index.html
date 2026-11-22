@@ -97,18 +97,18 @@ parts:[
 "check": {
 "page": 1,
 "tag": "Reading check · Reader page 1",
-"q": "No one knew what blew up the Maine. So why did Americans want war with Spain?",
-"right": "Wild headlines blamed Spain",
+"q": "What does this page say made Congress declare war on Spain?",
+"right": "Public anger fed by newspapers",
 "wrong": [
-"Spain admitted that its navy sank the ship",
-"Spain's army had invaded the United States",
-"Cuba asked America to go to war for it"
+"Proof that Spain's navy sank the Maine",
+"A Spanish army attack on Florida",
+"A request for help from Cuba's leaders"
 ],
-"why": "✓ Correct. That's yellow journalism: shocking, exaggerated news to sell papers. It got Americans shouting \"Remember the Maine!\"",
-"hint": "Read the newsboy's headline, then the green box at the bottom: \"The cause of the explosion was...\""
+"why": "✓ Correct. The cause was \"never known,\" but headlines like \"THE MAINE BLOWN UP\" got people furious. Shocking, exaggerated news that sells papers is <b>yellow journalism</b>.",
+"hint": "Read the newsboy's headline, then the green box at the bottom: \"American opinion was so inflamed...\" (inflamed = stirred up, angry)."
 },
-"prompt": "The cause of the blast was unknown, but Americans went to war anyway. How did newspapers push the country into war?",
-"stem": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">The headline says 250 were killed.</span><span class=\"rl\">About 260 sailors died.</span></span><b class=\"kf\">Know this</b><span class=\"line\">In 1976, a U.S. Navy study found the blast was most likely an accident inside the ship, not a Spanish attack.</span><span class=\"line\">The war lasted about four months. In the <b>Treaty of Paris</b>, Spain handed the U.S. Puerto Rico, Guam, and the Philippines.</span></span>Write 1–2 sentences. Start like this: <i>Newspapers pushed the country toward war by ___.</i>",
+"prompt": "The cause of the blast was never known, but America went to war anyway. Explain how newspapers helped cause the war. Use the headline or the green box as evidence.",
+"stem": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">The headline says 250 were killed.</span><span class=\"rl\">About 260 sailors died.</span></span><b class=\"kf\">Know this</b><span class=\"line\">In 1976, a U.S. Navy study found the blast was most likely an accident inside the ship, not a Spanish attack.</span><span class=\"line\">Americans shouted \"Remember the Maine!\" By late April 1898, the U.S. and Spain were at war. It lasted about four months.</span></span>Write 1–2 sentences. Start like this: <i>Newspapers pushed the country toward war by ___.</i>",
 "stemText": "Newspapers pushed the country toward war by ___.",
 "placeholder": "Newspapers pushed the country toward war by ___."
 },
@@ -121,15 +121,15 @@ parts:[
 "check": {
 "page": 2,
 "tag": "Reading check · Reader page 2",
-"q": "The comic says Hawaii came \"by annexation.\" What does that leave out?",
-"right": "Planters overthrew Hawaii's queen",
+"q": "After the war, which islands did Spain hand over for the U.S. to keep?",
+"right": "Puerto Rico and the Philippines",
 "wrong": [
-"Hawaii's people voted to join the U.S.",
-"The U.S. bought Hawaii from Spain",
-"Japan gave Hawaii to the U.S."
+"Hawaii and the Territory of Alaska",
+"Alaska and the Hawaiian Islands",
+"Cuba and the Hawaiian Islands"
 ],
-"why": "✓ Correct. In 1893, American planters overthrew Queen Liliuokalani, and U.S. Marines backed them. Congress annexed Hawaii in 1898.",
-"hint": "Find item 2 on the list. Then think back to the slides: who lost her throne?"
+"why": "✓ Correct. In the <b>Treaty of Paris</b> (1898), Spain handed over Puerto Rico, Guam, and the Philippines. Cuba got its independence. Hawaii and Alaska came other ways.",
+"hint": "Read the list. Look for \"ceded by Spain.\" Ceded means handed over. Then check the line about Cuba."
 },
 "prompt": "Why did the U.S. take land overseas in 1898? Give one reason.",
 "stem": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">Hawaii came \"by annexation.\"</span><span class=\"rl\">First, planters overthrew Queen Liliuokalani in 1893. She said she gave in to \"the superior force of the United States.\"</span></span><span class=\"fix\"><span class=\"cs\">Alaska was a new possession in the 1890s.</span><span class=\"rl\">The U.S. bought Alaska in 1867, long before. The list also skips Guam.</span></span><b class=\"kf\">Know this</b><span class=\"line\">U.S. leaders wanted <b>Navy bases</b> where ships could refuel, and new buyers for American factories and farms.</span></span>Write 1–2 sentences. Start like this: <i>The U.S. wanted land overseas because ___.</i>",
@@ -137,7 +137,7 @@ parts:[
 "placeholder": "The U.S. wanted land overseas because ___."
 }
 ],
-questions:["The cause of the blast was unknown, but Americans went to war anyway. How did newspapers push the country into war?", "Why did the U.S. take land overseas in 1898? Give one reason."],
+questions:["The cause of the blast was never known, but America went to war anyway. Explain how newspapers helped cause the war. Use the headline or the green box as evidence.", "Why did the U.S. take land overseas in 1898? Give one reason."],
 validate(s){if(!s.name)return{text:"Type your first name + last initial (like Jordan M.) at the top of the questions.",focus:"studentName"};
  const mc=[1, 2].find(i=>!s.checkDone(i));if(mc)return{text:"Get the check right for part "+mc+" first.",part:mc};
  const ma=[1, 2].find(i=>!s.answer(i));if(ma)return{text:"Write your answer for part "+ma+" before turning in.",part:ma,focus:"answer"+ma};

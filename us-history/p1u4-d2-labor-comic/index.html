@@ -131,13 +131,13 @@ parts:[
 "why": "✓ Correct. At Homestead (1892), the governor sent 8,500 troops. At Pullman (1894), the president sent about 12,000. The unions lost.",
 "hint": "Read the box under the handshake."
 },
-"prompt": "Who usually won labor fights in the 1880s and 1890s: workers or owners? Whose side did the government take?",
-"stem": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">Workers and owners became \"partners.\"</span><span class=\"rl\">In the 1880s and 1890s, owners usually won, and the government took their side.</span></span><b class=\"kf\">Know this</b><span class=\"line\"><b>Homestead (1892):</b> a gun battle with company guards killed at least 10 people.</span><span class=\"line\"><b>Pullman (1894):</b> union leader Eugene Debs went to jail.</span></span>Write 1–2 sentences. Start like this: <i>___ usually won because ___. The government took the side of ___.</i>",
-"stemText": "___ usually won because ___. The government took the side of ___.",
-"placeholder": "___ usually won because ___. The government took the side of ___."
+"prompt": "Who usually won labor fights in the 1880s and 1890s: workers or owners? Whose side did the government take, and how did that change the result?",
+"stem": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">Workers and owners became \"partners.\"</span><span class=\"rl\">In the 1880s and 1890s, owners usually won, and the government took their side.</span></span><b class=\"kf\">Know this</b><span class=\"line\"><b>Homestead (1892):</b> a gun battle with company guards killed at least 10 people.</span><span class=\"line\"><b>Pullman (1894):</b> union leader Eugene Debs went to jail.</span></span>Write 1–2 sentences. Start like this: <i>___ usually won because ___. The government took the side of ___, so ___.</i>",
+"stemText": "___ usually won because ___. The government took the side of ___, so ___.",
+"placeholder": "___ usually won because ___. The government took the side of ___, so ___."
 }
 ],
-questions:["How was the AFL different from the Knights of Labor? Which was smarter?", "Who usually won labor fights in the 1880s and 1890s: workers or owners? Whose side did the government take?"],
+questions:["How was the AFL different from the Knights of Labor? Which was smarter?", "Who usually won labor fights in the 1880s and 1890s: workers or owners? Whose side did the government take, and how did that change the result?"],
 validate(s){if(!s.name)return{text:"Type your first name + last initial (like Jordan M.) at the top of the questions.",focus:"studentName"};
  const mc=[1, 2].find(i=>!s.checkDone(i));if(mc)return{text:"Get the check right for part "+mc+" first.",part:mc};
  const ma=[1, 2].find(i=>!s.answer(i));if(ma)return{text:"Write your answer for part "+ma+" before turning in.",part:ma,focus:"answer"+ma};

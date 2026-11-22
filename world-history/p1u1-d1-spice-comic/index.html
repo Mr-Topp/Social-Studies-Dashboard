@@ -121,7 +121,7 @@ parts:[
 "check": {
 "page": 4,
 "tag": "Reading check · Reader page 4",
-"q": "What did Dias's trip in 1488 prove?",
+"q": "What did Dias's 1488 trip prove, opening the way for Portugal to trade straight with India?",
 "right": "Ships could sail around Africa to India",
 "wrong": [
 "Ships could sail west to reach China",
@@ -145,23 +145,23 @@ parts:[
 "check": {
 "page": 6,
 "tag": "Reading check · Reader page 6",
-"q": "How did da Gama find his way across the Indian Ocean?",
-"right": "A local pilot showed him the way",
+"q": "At Malindi, da Gama finds a pilot to guide him to India. What does that show about Indian Ocean trade before 1498?",
+"right": "It already linked Africa and India",
 "wrong": [
-"He used Marco Polo's old map",
-"Dias had sailed there before him",
-"Storm winds blew him to India"
+"No ship had ever crossed that ocean before",
+"Portugal's navy already ruled those waters",
+"Only Europeans knew the sea road to India"
 ],
-"why": "✓ Correct. Indian Ocean sailors had crossed these waters for centuries. Da Gama needed one of them.",
-"hint": "Read the speech bubbles at Malindi: \"We seek a pilot...\""
+"why": "✓ Correct. An Indian sailor was working in an East African port. Indian Ocean traders had linked Africa, Arabia, and India for centuries. Da Gama needed their know-how.",
+"hint": "Read both speech bubbles at Malindi: \"We seek a pilot...\" and \"There is an Indian from Gujarat here!\""
 },
-"prompt": "The comic calls the Portuguese \"peaceful merchants.\" How would people in Calicut tell this story differently? Use one fact.",
-"stem": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">It took 4½ months to cross to India.</span><span class=\"rl\">With the monsoon winds and the pilot, it took about 23 days.</span></span><span class=\"fix\"><span class=\"cs\">The Portuguese were \"peaceful merchants.\"</span><span class=\"rl\">In 1502, da Gama fired cannons on Calicut and burned a ship full of pilgrims.</span></span><b class=\"kf\">Know this</b><span class=\"line\">Indian Ocean trade was busy long before Portugal showed up. Portugal was the newcomer.</span></span>Write 1–2 sentences. Start like this: <i>People in Calicut might tell it differently because ___.</i>",
-"stemText": "People in Calicut might tell it differently because ___.",
-"placeholder": "People in Calicut might tell it differently because ___."
+"prompt": "The comic calls the Portuguese \"peaceful merchants.\" Analyze how people in Calicut would tell this story differently, and explain why. Use one fact from the comic.",
+"stem": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">It took 4½ months to cross to India.</span><span class=\"rl\">With the monsoon winds and the pilot, it took about 23 days.</span></span><span class=\"fix\"><span class=\"cs\">The Portuguese were \"peaceful merchants.\"</span><span class=\"rl\">In 1502, da Gama fired cannons on Calicut and burned a ship full of pilgrims.</span></span><b class=\"kf\">Know this</b><span class=\"line\">Sailors crossed the Indian Ocean by riding the <b>monsoon</b>, winds that blow one way in summer and the other way in winter.</span><span class=\"line\">Portugal was the newcomer. It used cannons to force its way into a trade that was already busy.</span></span>Write 1–2 sentences. Start like this: <i>People in Calicut might say ___ because ___. One fact from the comic that backs this up: ___.</i>",
+"stemText": "People in Calicut might say ___ because ___. One fact from the comic that backs this up: ___.",
+"placeholder": "People in Calicut might say ___ because ___. One fact from the comic that backs this up: ___."
 }
 ],
-questions:["Marco Polo's book told Europeans about Asia's huge riches. Why would stories like that make Europeans want to reach Asia themselves?", "Why would Portugal pay for a long, dangerous voyage around Africa? Use the word middlemen.", "The comic calls the Portuguese \"peaceful merchants.\" How would people in Calicut tell this story differently? Use one fact."],
+questions:["Marco Polo's book told Europeans about Asia's huge riches. Why would stories like that make Europeans want to reach Asia themselves?", "Why would Portugal pay for a long, dangerous voyage around Africa? Use the word middlemen.", "The comic calls the Portuguese \"peaceful merchants.\" Analyze how people in Calicut would tell this story differently, and explain why. Use one fact from the comic."],
 validate(s){if(!s.name)return{text:"Type your first name + last initial (like Jordan M.) at the top of the questions.",focus:"studentName"};
  const mc=[1, 2, 3].find(i=>!s.checkDone(i));if(mc)return{text:"Get the check right for part "+mc+" first.",part:mc};
  const ma=[1, 2, 3].find(i=>!s.answer(i));if(ma)return{text:"Write your answer for part "+ma+" before turning in.",part:ma,focus:"answer"+ma};

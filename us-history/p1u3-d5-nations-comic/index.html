@@ -131,13 +131,13 @@ parts:[
 "why": "✓ Correct. The map shows no Native nations at all. But the West was already their home.",
 "hint": "Read the box under the map. Then look at the map: whose names are missing?"
 },
-"prompt": "What hurt Plains nations the most: losing the bison, losing land, or boarding schools?",
-"stem": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">The Oregon deal was a treaty with Canada.</span><span class=\"rl\">It was with Britain. Canada wasn't its own country until 1867.</span></span><b class=\"kf\">Know this</b><span class=\"line\"><b>Bison:</b> hide hunters killed millions. By 1889, only about 1,000 were left.</span><span class=\"line\"><b>Land:</b> the 1887 <b>Dawes Act</b> cut Native land from about 138 million acres to 48 million by 1934.</span></span>Write 1–2 sentences. Start like this: <i>___ hurt Plains nations the most because ___.</i>",
-"stemText": "___ hurt Plains nations the most because ___.",
-"placeholder": "___ hurt Plains nations the most because ___."
+"prompt": "What hurt Plains nations the most: losing the bison, losing land, or boarding schools? Explain the effect it had, using one fact.",
+"stem": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">The Oregon deal was a treaty with Canada.</span><span class=\"rl\">It was with Britain. Canada wasn't its own country until 1867.</span></span><b class=\"kf\">Know this</b><span class=\"line\"><b>Bison:</b> hide hunters killed millions. By 1889, only about 1,000 were left.</span><span class=\"line\"><b>Land:</b> the 1887 <b>Dawes Act</b> cut Native land from about 138 million acres to 48 million by 1934.</span></span>Write 1–2 sentences. Start like this: <i>___ hurt Plains nations the most because ___. As a result, ___.</i>",
+"stemText": "___ hurt Plains nations the most because ___. As a result, ___.",
+"placeholder": "___ hurt Plains nations the most because ___. As a result, ___."
 }
 ],
-questions:["Name one way a Native nation resisted or survived, like the Meskwaki in Iowa.", "What hurt Plains nations the most: losing the bison, losing land, or boarding schools?"],
+questions:["Name one way a Native nation resisted or survived, like the Meskwaki in Iowa.", "What hurt Plains nations the most: losing the bison, losing land, or boarding schools? Explain the effect it had, using one fact."],
 validate(s){if(!s.name)return{text:"Type your first name + last initial (like Jordan M.) at the top of the questions.",focus:"studentName"};
  const mc=[1, 2].find(i=>!s.checkDone(i));if(mc)return{text:"Get the check right for part "+mc+" first.",part:mc};
  const ma=[1, 2].find(i=>!s.answer(i));if(ma)return{text:"Write your answer for part "+ma+" before turning in.",part:ma,focus:"answer"+ma};

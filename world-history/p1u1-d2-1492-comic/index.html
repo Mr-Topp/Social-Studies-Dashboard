@@ -121,18 +121,18 @@ parts:[
 "check": {
 "page": 3,
 "tag": "Reading check · Reader page 3",
-"q": "Which country paid for Columbus's 1492 voyage?",
-"right": "Spain",
+"q": "What was Columbus's plan, the one Spain finally paid for?",
+"right": "Reach Asia by sailing west",
 "wrong": [
-"Portugal",
-"Italy",
-"England"
+"Reach India by sailing around Africa",
+"Find a new continent to settle",
+"Start a war with Portugal"
 ],
-"why": "✓ Correct. Spain's rulers paid. They wanted gold, land, and to spread Christianity.",
-"hint": "Read Queen Isabella's speech bubble and the box under it."
+"why": "✓ Correct. Columbus bet he could reach Asia's riches by sailing west. Portugal went around Africa instead. Spain's Queen Isabella paid for the bet.",
+"hint": "Read Columbus's speech bubble in the top-left panel: \"If the world is indeed round...\""
 },
 "prompt": "The comic adds two made-up details: people thinking the world was flat, and the queen selling her jewels. Why would a storyteller add them?",
-"stem": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">People thought the world was flat.</span><span class=\"rl\">Educated Europeans knew it was round. Columbus guessed it was much smaller than it is.</span></span><span class=\"fix\"><span class=\"cs\">The queen sold her jewels to pay.</span><span class=\"rl\">She didn't. A royal money manager raised most of the money.</span></span></span>Write 1–2 sentences. Start like this: <i>The comic adds these details to make Columbus look ___. A true version would show ___.</i>",
+"stem": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">People thought the world was flat.</span><span class=\"rl\">Educated Europeans knew it was round. Columbus guessed it was much smaller than it is.</span></span><span class=\"fix\"><span class=\"cs\">The queen sold her jewels to pay.</span><span class=\"rl\">She didn't. A royal money manager raised most of the money.</span></span><b class=\"kf\">Know this</b><span class=\"line\">Spain's rulers, Ferdinand and Isabella, paid. They wanted gold, land, and new Christians.</span></span>Write 1–2 sentences. Start like this: <i>The comic adds these details to make Columbus look ___. A true version would show ___.</i>",
 "stemText": "The comic adds these details to make Columbus look ___. A true version would show ___.",
 "placeholder": "The comic adds these details to make Columbus look ___. A true version would show ___."
 },
@@ -155,7 +155,7 @@ parts:[
 "why": "✓ Correct. Columbus thought he was in the \"Indies,\" near Asia. He was really in the Bahamas.",
 "hint": "Read the yellow box under the big panel."
 },
-"prompt": "This page shows the landing from the Spanish side. Whose voice is missing? What might that person say?",
+"prompt": "This page shows the landing from the Spanish side. Analyze it: whose voice is missing, what might that person say, and why would they see 1492 differently?",
 "stem": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">The people on the beach say nothing.</span><span class=\"rl\">They were Taíno. Columbus wrote in his journal that they would make \"good servants.\"</span></span><b class=\"kf\">Know this</b><span class=\"line\">The comic calls the Taíno \"red-skinned.\" That's an old, insulting term.</span></span>Write 1–2 sentences. Start like this: <i>The missing voice is ___. A Taíno person watching might say \"___\" because ___.</i>",
 "stemText": "The missing voice is ___. A Taíno person watching might say \"___\" because ___.",
 "placeholder": "The missing voice is ___. A Taíno person watching might say \"___\" because ___."
@@ -169,15 +169,15 @@ parts:[
 "check": {
 "page": 5,
 "tag": "Reading check · Reader page 5",
-"q": "Did Columbus find the riches of Asia he was looking for?",
-"right": "No, his later trips never found them",
+"q": "When Columbus died in 1506, what did he still not understand?",
+"right": "He had reached the Americas, not Asia",
 "wrong": [
-"Yes, he brought home spices from India",
-"Yes, he found gold in China",
-"No, he never sailed again"
+"Spain had paid for all four of his trips",
+"The Taíno had lived there for centuries",
+"Portugal had found a sea road to India"
 ],
-"why": "✓ Correct. He never reached Asia. He had landed in the Americas.",
-"hint": "Read the box at the top of page 5."
+"why": "✓ Correct. He died \"still unaware that he had opened a new world.\" A mapmaker named the new land America in 1507, after Amerigo Vespucci.",
+"hint": "Read the box at the bottom left: \"In 1506, still unaware...\""
 },
 "prompt": "Fix the comic's ending. Rewrite the last box so it tells the whole story.",
 "stem": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">Columbus died poor and forgotten.</span><span class=\"rl\">He lived comfortably. But in 1500, Spain sent him home in chains for ruling cruelly.</span></span><span class=\"fix\"><span class=\"cs\">(Nothing about the Taíno.)</span><span class=\"rl\">Forced work, violence, and disease killed most of them. On Hispaniola: over 100,000 in 1492 → about 26,000 by 1514.</span></span></span>Write 1–2 sentences. Start like this: <i>In 1506, Columbus died ___. Meanwhile, the Taíno ___. The comic left this out because ___.</i>",
@@ -185,7 +185,7 @@ parts:[
 "placeholder": "In 1506, Columbus died ___. Meanwhile, the Taíno ___. The comic left this out because ___."
 }
 ],
-questions:["Reader page 1 calls America \"an unknown continent.\" Unknown to whom?", "The comic adds two made-up details: people thinking the world was flat, and the queen selling her jewels. Why would a storyteller add them?", "This page shows the landing from the Spanish side. Whose voice is missing? What might that person say?", "Fix the comic's ending. Rewrite the last box so it tells the whole story."],
+questions:["Reader page 1 calls America \"an unknown continent.\" Unknown to whom?", "The comic adds two made-up details: people thinking the world was flat, and the queen selling her jewels. Why would a storyteller add them?", "This page shows the landing from the Spanish side. Analyze it: whose voice is missing, what might that person say, and why would they see 1492 differently?", "Fix the comic's ending. Rewrite the last box so it tells the whole story."],
 validate(s){if(!s.name)return{text:"Type your first name + last initial (like Jordan M.) at the top of the questions.",focus:"studentName"};
  const mc=[1, 2, 3, 4].find(i=>!s.checkDone(i));if(mc)return{text:"Get the check right for part "+mc+" first.",part:mc};
  const ma=[1, 2, 3, 4].find(i=>!s.answer(i));if(ma)return{text:"Write your answer for part "+ma+" before turning in.",part:ma,focus:"answer"+ma};

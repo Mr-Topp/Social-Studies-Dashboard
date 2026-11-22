@@ -131,7 +131,7 @@ parts:[
 "why": "✓ Correct. Germany started unlimited submarine attacks again. Wilson said the world \"must be made safe for democracy.\"",
 "hint": "Read the box at the bottom of the left panel."
 },
-"prompt": "Why did Americans go from \"stay out\" in 1914 to war in 1917?",
+"prompt": "Why did Americans go from \"stay out\" in 1914 to war in 1917? Explain what changed, using evidence from page 2.",
 "stem": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">(Nothing about Mexico.)</span><span class=\"rl\">The Zimmermann Telegram, a secret German offer to help Mexico win back Texas, New Mexico, and Arizona, outraged Americans in March 1917.</span></span><b class=\"kf\">Know this</b><span class=\"line\">U.S. banks had lent Britain and France billions of dollars.</span></span>Write 1–2 sentences. Start like this: <i>In 1914, Americans wanted to stay out because ___, but by 1917 ___.</i>",
 "stemText": "In 1914, Americans wanted to stay out because ___, but by 1917 ___.",
 "placeholder": "In 1914, Americans wanted to stay out because ___, but by 1917 ___."
@@ -155,13 +155,13 @@ parts:[
 "why": "✓ Correct. Fresh U.S. troops tipped the war. Germany signed an armistice on November 11, 1918.",
 "hint": "Read the green box in the middle and the pink box at the bottom right."
 },
-"prompt": "Civic virtue means putting the common good ahead of yourself. Who showed more civic virtue: Merle Hay or Henry Johnson? Defend it.",
+"prompt": "Civic virtue means putting the common good ahead of yourself. Assess: who showed more civic virtue, Merle Hay or Henry Johnson? Explain why, using what they did.",
 "stem": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">(Only white soldiers are shown.)</span><span class=\"rl\">The Army was segregated. Black soldiers of the 369th, the Harlem Hellfighters, fought under the French Army.</span></span><b class=\"kf\">Know this</b><span class=\"line\"><b>Merle Hay</b> of Glidden, Iowa, was one of the first three Americans killed in battle, on Nov. 3, 1917.</span><span class=\"line\"><b>Henry Johnson</b> of the 369th fought off a German raid while wounded 21 times. The U.S. gave him the Medal of Honor in 2015.</span></span>Write 1–2 sentences. Start like this: <i>___ showed the most civic virtue because ___.</i>",
 "stemText": "___ showed the most civic virtue because ___.",
 "placeholder": "___ showed the most civic virtue because ___."
 }
 ],
-questions:["How did one killing in 1914 become a world war?", "Why did Americans go from \"stay out\" in 1914 to war in 1917?", "Civic virtue means putting the common good ahead of yourself. Who showed more civic virtue: Merle Hay or Henry Johnson? Defend it."],
+questions:["How did one killing in 1914 become a world war?", "Why did Americans go from \"stay out\" in 1914 to war in 1917? Explain what changed, using evidence from page 2.", "Civic virtue means putting the common good ahead of yourself. Assess: who showed more civic virtue, Merle Hay or Henry Johnson? Explain why, using what they did."],
 validate(s){if(!s.name)return{text:"Type your first name + last initial (like Jordan M.) at the top of the questions.",focus:"studentName"};
  const mc=[1, 2, 3].find(i=>!s.checkDone(i));if(mc)return{text:"Get the check right for part "+mc+" first.",part:mc};
  const ma=[1, 2, 3].find(i=>!s.answer(i));if(ma)return{text:"Write your answer for part "+ma+" before turning in.",part:ma,focus:"answer"+ma};

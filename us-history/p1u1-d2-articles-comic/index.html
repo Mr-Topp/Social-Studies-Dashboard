@@ -97,15 +97,15 @@ parts:[
 "check": {
 "page": 1,
 "tag": "Reading check · Reader page 1",
-"q": "Why couldn't Congress stop states from taxing each other's goods?",
-"right": "The Articles gave it no power over trade",
+"q": "Why could New York make a farmer pay a tax on New Jersey potatoes?",
+"right": "Each state kept most of the power",
 "wrong": [
-"The king still controlled trade between the states",
-"The Supreme Court had ruled the taxes were legal",
-"Congress voted to let each state set its own"
+"Congress passed a tax on trade between states",
+"The king still set the rules for trade",
+"New York had won a war against New Jersey"
 ],
-"why": "✓ Correct. Americans made the Articles weak on purpose. So the states acted like separate countries.",
-"hint": "Read the pink box at the top: \"under their loose confederation...\""
+"why": "✓ Correct. Under the Articles, each state kept its <b>sovereignty</b>, the power to rule itself. Congress had no power over trade, so the states acted like separate nations.",
+"hint": "Read the pink box at the top: under their \"loose confederation,\" how did the states act?"
 },
 "prompt": "Why couldn't Congress fix fights like this between the states?",
 "stem": "<span class=\"declass\"><b>Fact file</b><b class=\"kf\">Know this</b><span class=\"line\">Americans had just fought a king, so they made the national government weak <b>on purpose</b>.</span><span class=\"line\">There was no president and no national courts. Each state got one vote in Congress.</span></span>Write 1–2 sentences. Start like this: <i>Congress couldn't fix it because ___.</i>",
@@ -121,20 +121,20 @@ parts:[
 "check": {
 "page": 2,
 "tag": "Reading check · Reader page 2",
-"q": "Why did leaders on this page want a stronger national government?",
-"right": "Paper money was worthless and business stalled",
+"q": "What do the leaders on this page say the country needs?",
+"right": "A stronger national government",
 "wrong": [
-"British troops were getting ready to invade again",
-"The states wanted to choose a king of their own",
-"Spain had closed every port on the East Coast"
+"A king to bring the 13 states together",
+"Separate armies for each of the states",
+"A return to British rule and trade"
 ],
-"why": "✓ Correct. Congress couldn't tax, so it couldn't pay its debts. Leaders feared the country was falling apart.",
-"hint": "Read the speech bubbles: \"Business is at a standstill\" and \"Paper money won't fill my market basket!\""
+"why": "✓ Correct. They want a \"central authority\" because the Articles left Congress too weak to settle fights or fix money troubles.",
+"hint": "Read the three speech bubbles across the top of the page."
 },
-"prompt": "Which weakness of the Articles was the worst? Rank your #1 and defend it.",
-"stem": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">(Nothing about Shays' Rebellion.)</span><span class=\"rl\">In 1786–87, armed Massachusetts farmers led by Daniel Shays shut down courts. Congress had no army to stop them.</span></span><b class=\"kf\">Know this</b><span class=\"line\">Congress could not tax. It could only <b>ask</b> the states for money, and they often said no.</span><span class=\"line\">Changing the Articles took all 13 states, so one state could block any fix.</span></span>Write 1–2 sentences. Start like this: <i>The worst weakness was ___ because ___.</i>",
-"stemText": "The worst weakness was ___ because ___.",
-"placeholder": "The worst weakness was ___ because ___."
+"prompt": "Analyze the Articles: which weakness was the worst, and what problem did it cause? Use the comic.",
+"stem": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">(Nothing about Shays' Rebellion.)</span><span class=\"rl\">In 1786–87, armed Massachusetts farmers led by Daniel Shays shut down courts. Congress had no army to stop them.</span></span><b class=\"kf\">Know this</b><span class=\"line\">Congress could not tax. It could only <b>ask</b> the states for money, and they often said no.</span><span class=\"line\">Changing the Articles took all 13 states, so one state could block any fix.</span></span>Write 1–2 sentences. Start like this: <i>The worst weakness was ___. It caused ___. I can see this in the comic when ___.</i>",
+"stemText": "The worst weakness was ___. It caused ___. I can see this in the comic when ___.",
+"placeholder": "The worst weakness was ___. It caused ___. I can see this in the comic when ___."
 },
 {
 "short": "Whose land?",
@@ -161,7 +161,7 @@ parts:[
 "placeholder": "The land belonged to ___. The Ordinance promised ___, but ___."
 }
 ],
-questions:["Why couldn't Congress fix fights like this between the states?", "Which weakness of the Articles was the worst? Rank your #1 and defend it.", "The comic shows the Northwest Territory as open land for settlers. Whose land was it?"],
+questions:["Why couldn't Congress fix fights like this between the states?", "Analyze the Articles: which weakness was the worst, and what problem did it cause? Use the comic.", "The comic shows the Northwest Territory as open land for settlers. Whose land was it?"],
 validate(s){if(!s.name)return{text:"Type your first name + last initial (like Jordan M.) at the top of the questions.",focus:"studentName"};
  const mc=[1, 2, 3].find(i=>!s.checkDone(i));if(mc)return{text:"Get the check right for part "+mc+" first.",part:mc};
  const ma=[1, 2, 3].find(i=>!s.answer(i));if(ma)return{text:"Write your answer for part "+ma+" before turning in.",part:ma,focus:"answer"+ma};

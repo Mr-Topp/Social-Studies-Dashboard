@@ -121,15 +121,15 @@ parts:[
 "check": {
 "page": 2,
 "tag": "Reading check · Reader page 2",
-"q": "The South won at Bull Run. What edge did the South have early on?",
-"right": "Skilled generals defending their own land",
+"q": "Bull Run was the first big battle. What did its result show both sides?",
+"right": "The war would not be short or easy",
 "wrong": [
-"More soldiers and more factories than the North",
-"Most of the country's railroads",
-"Help from British and French armies"
+"The South had more soldiers and factories",
+"Britain would soon join the South's side",
+"The North would give up and go home"
 ],
-"why": "✓ Correct. The South only had to defend its home, and it had skilled generals. The North had more people and factories.",
-"hint": "Read the bubbles: \"They're beating us back\" and \"There is Jackson... standing like a stone wall!\""
+"why": "✓ Correct. Many Northerners expected one quick win. After the Union was routed at Bull Run, both sides saw a long war ahead. In a long war, the North's people and factories counted most.",
+"hint": "Read the bubble \"They're beating us back\" and the caption at the bottom of the page."
 },
 "prompt": "The South won the first big battle. Why did the North still have the edge in a long war?",
 "stem": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">Stonewall Jackson became \"a hero of the reunited nation.\"</span><span class=\"rl\">He was a skilled general, but he fought for a side that wanted to keep slavery. In 2020, Richmond, Virginia, took down its statue of him.</span></span><b class=\"kf\">Know this</b><span class=\"line\">North: about <b>22 million</b> people and 90% of factory goods. South: about 9 million people, more than a third of them enslaved.</span></span>Write 1–2 sentences. Start like this: <i>The North had the edge because ___. The South's best hope was ___.</i>",
@@ -179,13 +179,13 @@ parts:[
 "why": "✓ Correct. That's total war: attacking everything the enemy needs to keep fighting, not just its army.",
 "hint": "Read the yellow box under Sherman, and look at his soldiers tearing up the railroad."
 },
-"prompt": "What mattered most for the Union win: more people and factories, the battles of 1863, or total war?",
-"stem": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">Sherman said \"War is hell\" when he reached the sea.</span><span class=\"rl\">He said something like it in a speech years later, around 1879. In 1864 he wrote: \"War is cruelty.\"</span></span><b class=\"kf\">Know this</b><span class=\"line\">Lee surrendered April 9, 1865. Between 620,000 and 750,000 soldiers died, about 2 of every 3 from disease.</span></span>Write 1–2 sentences. Start like this: <i>___ mattered most because ___.</i>",
-"stemText": "___ mattered most because ___.",
-"placeholder": "___ mattered most because ___."
+"prompt": "Evaluate: what mattered most for the Union win: more people and factories, the battles of 1863, or total war? Explain why, with one piece of evidence.",
+"stem": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">Sherman said \"War is hell\" when he reached the sea.</span><span class=\"rl\">He said something like it in a speech years later, around 1879. In 1864 he wrote: \"War is cruelty.\"</span></span><b class=\"kf\">Know this</b><span class=\"line\">Lee surrendered April 9, 1865. Between 620,000 and 750,000 soldiers died, about 2 of every 3 from disease.</span></span>Write 1–2 sentences. Start like this: <i>___ mattered most because ___. One piece of evidence is ___.</i>",
+"stemText": "___ mattered most because ___. One piece of evidence is ___.",
+"placeholder": "___ mattered most because ___. One piece of evidence is ___."
 }
 ],
-questions:["The comic says many Southerners opposed slavery but stayed loyal to their states. What were Southern leaders fighting to protect?", "The South won the first big battle. Why did the North still have the edge in a long war?", "Gettysburg or Vicksburg: which 1863 Union win mattered more? Why?", "What mattered most for the Union win: more people and factories, the battles of 1863, or total war?"],
+questions:["The comic says many Southerners opposed slavery but stayed loyal to their states. What were Southern leaders fighting to protect?", "The South won the first big battle. Why did the North still have the edge in a long war?", "Gettysburg or Vicksburg: which 1863 Union win mattered more? Why?", "Evaluate: what mattered most for the Union win: more people and factories, the battles of 1863, or total war? Explain why, with one piece of evidence."],
 validate(s){if(!s.name)return{text:"Type your first name + last initial (like Jordan M.) at the top of the questions.",focus:"studentName"};
  const mc=[1, 2, 3, 4].find(i=>!s.checkDone(i));if(mc)return{text:"Get the check right for part "+mc+" first.",part:mc};
  const ma=[1, 2, 3, 4].find(i=>!s.answer(i));if(ma)return{text:"Write your answer for part "+ma+" before turning in.",part:ma,focus:"answer"+ma};

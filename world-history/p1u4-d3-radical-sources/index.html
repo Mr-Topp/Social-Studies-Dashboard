@@ -97,15 +97,15 @@ parts:[
 "check": {
 "page": 2,
 "tag": "Reading check · Reader page 2",
-"q": "How did Robespierre defend the Terror?",
-"right": "He called fast, harsh punishment justice",
+"q": "What was the Reign of Terror?",
+"right": "Leaders arresting and killing \"enemies\"",
 "wrong": [
-"He said the Terror was a big mistake",
-"He blamed the king for all of the killing",
-"He said only foreign soldiers were killed"
+"A war France fought against Britain's navy",
+"A plague that swept through Paris in 1793",
+"The king's attack on the National Assembly"
 ],
-"why": "✓ Correct. Robespierre said terror protected the Revolution. In 1794, he was guillotined himself.",
-"hint": "Read the quote and the \"In plain words\" box on page 2."
+"why": "✓ Correct. During the Terror (1793–1794), at least 300,000 suspects were arrested and about 17,000 were executed. Robespierre called it \"justice.\"",
+"hint": "Read the box at the top of page 2."
 },
 "prompt": "The Revolution promised liberty, then killed thousands. Can a revolution go too far? Explain.",
 "stem": "<span class=\"declass\"><b>Fact file</b><b class=\"kf\">Know this</b><span class=\"line\">In July 1794, Robespierre's enemies turned on him, and he was executed. The Terror ended.</span></span>Write 1–2 sentences. Start like this: <i>A revolution goes too far when ___.</i>",
@@ -121,15 +121,15 @@ parts:[
 "check": {
 "page": 5,
 "tag": "Reading check · Reader page 5",
-"q": "What did Napoleon's Code do?",
-"right": "Made men equal before the law",
+"q": "Who gained the LEAST from Napoleon's Code?",
+"right": "Married women",
 "wrong": [
-"Gave women the right to vote",
-"Brought back the nobles' old powers",
-"Ended freedom of religion in France"
+"Men who were not nobles",
+"People of any religion",
+"People who owned property"
 ],
-"why": "✓ Correct. The Code kept some big ideas of the Revolution, but not equality for women.",
-"hint": "Read the box on page 5."
+"why": "✓ Correct. The Code made men equal and protected property and religion. But it made wives legally lower than their husbands.",
+"hint": "Read the last sentence in the box on page 5."
 },
 "prompt": "Which change from the French Revolution lasted longest: the metric system, the Code, or something else? Explain.",
 "stem": "<span class=\"declass\"><b>Fact file</b><b class=\"kf\">Know this</b><span class=\"line\">Napoleon's armies spread the Code and revolutionary ideas across Europe.</span></span>Write 1–2 sentences. Start like this: <i>The change that lasted longest was ___ because ___.</i>",
@@ -145,23 +145,23 @@ parts:[
 "check": {
 "page": 6,
 "tag": "Reading check · Reader page 6",
-"q": "What did America's revolution mostly keep the same?",
-"right": "Most of society, including slavery",
+"q": "How was France's revolution different from America's?",
+"right": "France tried to remake all of society",
 "wrong": [
-"The British king as its ruler forever",
-"The nobles' right to skip taxes",
-"One official church for everyone"
+"France kept its king and its nobles",
+"Only America ended slavery right after it won",
+"France broke away from a faraway king"
 ],
-"why": "✓ Correct. America changed who ruled, but kept most of society the same.",
-"hint": "Read the box on page 6."
+"why": "✓ Correct. America mostly broke from a faraway king and kept most of society the same, including slavery. France tried to rebuild everything.",
+"hint": "Read the box on page 6: \"France tried...\""
 },
-"prompt": "Compare the American and French Revolutions. Which one changed society more, and was it worth the cost?",
-"stem": "<span class=\"declass\"><b>Fact file</b><b class=\"kf\">Know this</b><span class=\"line\">France's revolution (1789–1799) ended noble privileges and the monarchy. America's (1775–1783) mostly broke away from Britain.</span></span>Write 1–2 sentences. Start like this: <i>The ___ Revolution changed more because ___.</i>",
-"stemText": "The ___ Revolution changed more because ___.",
-"placeholder": "The ___ Revolution changed more because ___."
+"prompt": "Compare the American and French Revolutions. Which one changed society more, and was it worth the cost? Explain why, using one fact.",
+"stem": "<span class=\"declass\"><b>Fact file</b><b class=\"kf\">Know this</b><span class=\"line\">France's revolution (1789–1799) ended noble privileges and the monarchy. America's (1775–1783) mostly broke away from Britain.</span></span>Write 1–2 sentences. Start like this: <i>The ___ Revolution changed more because ___. It was / was not worth the cost because ___.</i>",
+"stemText": "The ___ Revolution changed more because ___. It was / was not worth the cost because ___.",
+"placeholder": "The ___ Revolution changed more because ___. It was / was not worth the cost because ___."
 }
 ],
-questions:["The Revolution promised liberty, then killed thousands. Can a revolution go too far? Explain.", "Which change from the French Revolution lasted longest: the metric system, the Code, or something else? Explain.", "Compare the American and French Revolutions. Which one changed society more, and was it worth the cost?"],
+questions:["The Revolution promised liberty, then killed thousands. Can a revolution go too far? Explain.", "Which change from the French Revolution lasted longest: the metric system, the Code, or something else? Explain.", "Compare the American and French Revolutions. Which one changed society more, and was it worth the cost? Explain why, using one fact."],
 validate(s){if(!s.name)return{text:"Type your first name + last initial (like Jordan M.) at the top of the questions.",focus:"studentName"};
  const mc=[1, 2, 3].find(i=>!s.checkDone(i));if(mc)return{text:"Get the check right for part "+mc+" first.",part:mc};
  const ma=[1, 2, 3].find(i=>!s.answer(i));if(ma)return{text:"Write your answer for part "+ma+" before turning in.",part:ma,focus:"answer"+ma};

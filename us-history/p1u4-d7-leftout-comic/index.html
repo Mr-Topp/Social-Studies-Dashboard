@@ -97,15 +97,15 @@ parts:[
 "check": {
 "page": 1,
 "tag": "Reading check · Reader page 1",
-"q": "Mr. Griffith's 1915 film showed the KKK as heroes. That year a new KKK began, a reactionary movement. What does reactionary mean?",
-"right": "Fighting against change",
+"q": "Find the filmmaker's name in the woman's bubble. In 1915, his most famous film helped a reactionary movement grow. Which is true?",
+"right": "Griffith's film helped the KKK fight change",
 "wrong": [
-"Fighting to speed up change",
-"Reacting fast to disasters",
-"Supporting new immigrants"
+"Edison's film helped the KKK fight change",
+"Griffith's film helped the NAACP push change",
+"Edison's film helped the NAACP push change"
 ],
-"why": "✓ Correct. The second KKK began in 1915. By the mid-1920s it had millions of members and targeted Black Americans, Catholics, Jews, and immigrants.",
-"hint": "Read the speech bubbles: the comic only shows Griffith's friendly side. To react = to push back."
+"why": "✓ Correct. The woman calls him \"Mr. Griffith.\" His 1915 film <i>The Birth of a Nation</i> made the KKK look like heroes. A reactionary movement fights against change. The second KKK began that same year.",
+"hint": "Read the woman's speech bubble for his name. Reactionary = pushing back against change."
 },
 "prompt": "Why would a 1915 movie that made the KKK look like heroes be dangerous? Use one fact.",
 "stem": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">Griffith is a friendly movie pioneer.</span><span class=\"rl\">His film <i>The Birth of a Nation</i> made the KKK look like heroes. The NAACP protested it.</span></span><b class=\"kf\">Know this</b><span class=\"line\">In Iowa, an estimated <b>40,000</b> people joined the KKK by the mid-1920s. In the Midwest, Catholics were a main target.</span></span>Write 1–2 sentences. Start like this: <i>The movie was dangerous because ___. For example, ___.</i>",
@@ -121,23 +121,23 @@ parts:[
 "check": {
 "page": 2,
 "tag": "Reading check · Reader page 2",
-"q": "The comic lists \"free education for all.\" What did <i>Plessy v. Ferguson</i> (1896) allow?",
-"right": "Separate schools and trains by race",
+"q": "<i>Plessy v. Ferguson</i> (1896) made segregation legal if things were \"separate but equal.\" Which promise in the box did that break for Black students?",
+"right": "Free education for all",
 "wrong": [
-"Black students to join any public school",
-"States to close all their public schools",
-"Only boys to go to public high school"
+"The right to worship as they chose",
+"The free spread of knowledge and ideas",
+"Material progress and prosperity"
 ],
-"why": "✓ Correct. Plessy said segregation was legal if things were \"separate but equal.\" Black schools almost never got equal money.",
-"hint": "Read the box: \"free education for all...\""
+"why": "✓ Correct. Plessy let states keep Black and white students in separate schools. Black schools almost never got equal money, so \"free education for all\" was not equal for all.",
+"hint": "Read the list in the yellow box after \"their blessings rested.\" Which promise is about school?"
 },
-"prompt": "Did the Progressive Era reach its goals? Judge one reform: success, partial success, or failure. Who did it help, and who did it leave out?",
-"stem": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">Americans had \"free education for all.\"</span><span class=\"rl\">Under Jim Crow, Black schools got far less money.</span></span><span class=\"fix\"><span class=\"cs\">Americans could \"worship as they chose.\"</span><span class=\"rl\">In 1918, Iowa's Babel Proclamation banned other languages in public, even in church.</span></span><b class=\"kf\">Know this</b><span class=\"line\"><b>George Washington Carver</b>, born enslaved, became Iowa State's first Black student in 1891.</span></span>Write 1–2 sentences. Start like this: <i>___ was a (success / partial success / failure) because ___. It left out ___.</i>",
-"stemText": "___ was a (success / partial success / failure) because ___. It left out ___.",
-"placeholder": "___ was a (success / partial success / failure) because ___. It left out ___."
+"prompt": "Did the Progressive Era reach its goals? Judge one reform: success, partial success, or failure. Who did it help, who did it leave out, and why?",
+"stem": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">Americans had \"free education for all.\"</span><span class=\"rl\">Under Jim Crow, Black schools got far less money.</span></span><span class=\"fix\"><span class=\"cs\">Americans could \"worship as they chose.\"</span><span class=\"rl\">In 1918, Iowa's Babel Proclamation banned other languages in public, even in church.</span></span><b class=\"kf\">Know this</b><span class=\"line\"><b>George Washington Carver</b>, born enslaved, became Iowa State's first Black student in 1891.</span></span>Write 1–2 sentences. Start like this: <i>___ was a (success / partial success / failure) because ___. It left out ___ because ___.</i>",
+"stemText": "___ was a (success / partial success / failure) because ___. It left out ___ because ___.",
+"placeholder": "___ was a (success / partial success / failure) because ___. It left out ___ because ___."
 }
 ],
-questions:["Why would a 1915 movie that made the KKK look like heroes be dangerous? Use one fact.", "Did the Progressive Era reach its goals? Judge one reform: success, partial success, or failure. Who did it help, and who did it leave out?"],
+questions:["Why would a 1915 movie that made the KKK look like heroes be dangerous? Use one fact.", "Did the Progressive Era reach its goals? Judge one reform: success, partial success, or failure. Who did it help, who did it leave out, and why?"],
 validate(s){if(!s.name)return{text:"Type your first name + last initial (like Jordan M.) at the top of the questions.",focus:"studentName"};
  const mc=[1, 2].find(i=>!s.checkDone(i));if(mc)return{text:"Get the check right for part "+mc+" first.",part:mc};
  const ma=[1, 2].find(i=>!s.answer(i));if(ma)return{text:"Write your answer for part "+ma+" before turning in.",part:ma,focus:"answer"+ma};

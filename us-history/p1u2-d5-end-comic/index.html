@@ -121,23 +121,23 @@ parts:[
 "check": {
 "page": 2,
 "tag": "Reading check · Reader page 2",
-"q": "Washington wants his people to use their rights as citizens. What took those rights away after 1877?",
-"right": "Jim Crow laws, poll taxes, and reading tests",
+"q": "Booker T. Washington was born enslaved. What does he say his people need?",
+"right": "School, to use their rights as citizens",
 "wrong": [
-"The 14th and 15th Amendments, passed by Congress",
-"The Freedmen's Bureau and its new schools",
-"A Supreme Court ruling that ended the 13th Amendment"
+"Their own land and towns, far from the South",
+"A new army to guard Black towns and farms",
+"Money paid back for years of slavery"
 ],
-"why": "✓ Correct. In Louisiana, registered Black voters fell from about 130,000 in 1897 to about 5,300 in 1900.",
-"hint": "Read Booker T. Washington's speech bubble. Then think: what stopped Black citizens from using their rights?"
+"why": "✓ Correct. He led Tuskegee from 1881 to train Black teachers and workers. But after 1877, Jim Crow laws, poll taxes, and reading tests kept most Black men from voting.",
+"hint": "Read Booker T. Washington's speech bubble on the left."
 },
-"prompt": "Did the Civil War and Reconstruction really bring freedom? Yes, partly, or no?",
-"stem": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">Washington was \"self-educated.\"</span><span class=\"rl\">He studied at Hampton Institute in Virginia, a school for freedpeople, then opened Tuskegee in 1881.</span></span><b class=\"kf\">Know this</b><span class=\"line\"><b>Sharecropping</b> kept many families in debt, farming someone else's land.</span><span class=\"line\">The 14th Amendment stayed in the Constitution. In 1954, lawyers used it to win <b>Brown v. Board of Education</b>.</span></span>Write 1–2 sentences. Start like this: <i>The war and Reconstruction brought (full / partial / no) freedom because ___.</i>",
-"stemText": "The war and Reconstruction brought (full / partial / no) freedom because ___.",
-"placeholder": "The war and Reconstruction brought (full / partial / no) freedom because ___."
+"prompt": "Analyze the results: did the Civil War and Reconstruction really bring freedom? Explain why, with one fact from the comic or the fact file.",
+"stem": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">Washington was \"self-educated.\"</span><span class=\"rl\">He studied at Hampton Institute in Virginia, a school for freedpeople, then opened Tuskegee in 1881.</span></span><b class=\"kf\">Know this</b><span class=\"line\"><b>Sharecropping</b> kept many families in debt, farming someone else's land.</span><span class=\"line\">The 14th Amendment stayed in the Constitution. In 1954, lawyers used it to win <b>Brown v. Board of Education</b>.</span></span>Write 1–2 sentences. Start like this: <i>The war and Reconstruction brought (full / partial / no) freedom because ___. One fact is ___.</i>",
+"stemText": "The war and Reconstruction brought (full / partial / no) freedom because ___. One fact is ___.",
+"placeholder": "The war and Reconstruction brought (full / partial / no) freedom because ___. One fact is ___."
 }
 ],
-questions:["The 1876 poem says the country was \"united, free.\" Was it free for everyone? Use one fact.", "Did the Civil War and Reconstruction really bring freedom? Yes, partly, or no?"],
+questions:["The 1876 poem says the country was \"united, free.\" Was it free for everyone? Use one fact.", "Analyze the results: did the Civil War and Reconstruction really bring freedom? Explain why, with one fact from the comic or the fact file."],
 validate(s){if(!s.name)return{text:"Type your first name + last initial (like Jordan M.) at the top of the questions.",focus:"studentName"};
  const mc=[1, 2].find(i=>!s.checkDone(i));if(mc)return{text:"Get the check right for part "+mc+" first.",part:mc};
  const ma=[1, 2].find(i=>!s.answer(i));if(ma)return{text:"Write your answer for part "+ma+" before turning in.",part:ma,focus:"answer"+ma};

@@ -97,17 +97,17 @@ parts:[
 "check": {
 "page": 1,
 "tag": "Reading check · Reader page 1",
-"q": "The comic says many wanted Filipino self-rule to come slowly. What did Filipinos do in 1899?",
-"right": "Fought a war for independence",
+"q": "Americans argued about the Philippines. What does the top box say most of them wanted?",
+"right": "Slow self-rule, step by step",
 "wrong": [
-"Asked to become a U.S. state",
-"Voted to keep U.S. rule for good",
-"Asked Spain to come back and rule"
+"Independence for the islands at once",
+"Selling the islands back to Spain",
+"Making the islands a U.S. state"
 ],
-"why": "✓ Correct. Filipinos had declared their own country in 1898. When the U.S. took over instead, they fought back.",
-"hint": "Read the yellow box at the top: who wanted \"immediate independence\"? Then think back to Aguinaldo on the slides."
+"why": "✓ Correct. That was the imperialist side: keep ruling the islands for now. Anti-imperialists and Filipinos wanted independence right away. Full freedom didn't come until 1946.",
+"hint": "Read the yellow box at the top. \"Gradual\" means slowly, step by step."
 },
-"prompt": "Was taking the Philippines right or wrong? Use evidence.",
+"prompt": "Evaluate: was taking the Philippines right or wrong? Explain why, using one side's argument (imperialist or anti-imperialist) and one fact.",
 "stem": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">Self-rule came as a slow, \"gradual process.\"</span><span class=\"rl\">First came the Philippine-American War (1899–1902). At least 200,000 Filipino civilians died.</span></span><b class=\"kf\">Know this</b><span class=\"line\">On June 12, 1898, <b>Emilio Aguinaldo</b> (ah-gee-NAHL-doh) declared the Philippines independent. The Treaty of Paris gave it to the U.S. anyway.</span><span class=\"line\"><b>Anti-imperialists</b> like Mark Twain said ruling people without their consent broke the Declaration of Independence.</span></span>Write 1–2 sentences. Start like this: <i>Taking the Philippines was ___ because ___.</i>",
 "stemText": "Taking the Philippines was ___ because ___.",
 "placeholder": "Taking the Philippines was ___ because ___."
@@ -121,15 +121,15 @@ parts:[
 "check": {
 "page": 2,
 "tag": "Reading check · Reader page 2",
-"q": "Why did the U.S. want a canal across Panama?",
-"right": "To link the Atlantic and Pacific",
+"q": "Imperialists wanted more trade and a stronger Navy. How did this canal help with both?",
+"right": "Ships could cross between oceans",
 "wrong": [
-"To give France back its lost land",
-"To cut Colombia off from the sea",
-"To end trade with Europe and Asia"
+"It kept all other nations' ships out",
+"It gave the U.S. new land to farm",
+"It let the U.S. stop trading with Europe"
 ],
-"why": "✓ Correct. A canal let Navy and trade ships cross between the two oceans without sailing around South America.",
-"hint": "Read the box at the top left: \"A canal across the Isthmus of Panama...\""
+"why": "✓ Correct. Navy and trade ships could go between the Atlantic and Pacific without sailing around South America. That's the imperialist case: trade, bases, and power.",
+"hint": "Read the box at the top left (\"linking...\"), then the box on the map: whose ships use it?"
 },
 "prompt": "How did the U.S. get the land for the Panama Canal? Was it fair?",
 "stem": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">\"Teddy's\" government just finished France's job.</span><span class=\"rl\">Colombia ruled Panama and said no. In 1903, the U.S. backed a revolt that made Panama independent.</span></span><b class=\"kf\">Know this</b><span class=\"line\">\"<b>Speak softly and carry a big stick</b>\" = talk calmly, but keep a strong military ready.</span><span class=\"line\">The canal opened in <b>1914</b>. Thousands of workers, mostly from the Caribbean, died building it.</span></span>Write 1–2 sentences. Start like this: <i>The U.S. got the land by ___. It was (fair / unfair) because ___.</i>",
@@ -137,7 +137,7 @@ parts:[
 "placeholder": "The U.S. got the land by ___. It was (fair / unfair) because ___."
 }
 ],
-questions:["Was taking the Philippines right or wrong? Use evidence.", "How did the U.S. get the land for the Panama Canal? Was it fair?"],
+questions:["Evaluate: was taking the Philippines right or wrong? Explain why, using one side's argument (imperialist or anti-imperialist) and one fact.", "How did the U.S. get the land for the Panama Canal? Was it fair?"],
 validate(s){if(!s.name)return{text:"Type your first name + last initial (like Jordan M.) at the top of the questions.",focus:"studentName"};
  const mc=[1, 2].find(i=>!s.checkDone(i));if(mc)return{text:"Get the check right for part "+mc+" first.",part:mc};
  const ma=[1, 2].find(i=>!s.answer(i));if(ma)return{text:"Write your answer for part "+ma+" before turning in.",part:ma,focus:"answer"+ma};

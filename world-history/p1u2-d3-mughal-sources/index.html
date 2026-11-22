@@ -97,12 +97,12 @@ parts:[
 "check": {
 "page": 2,
 "tag": "Reading check · Reader page 2",
-"q": "What did Akbar do so Hindus would feel treated fairly?",
-"right": "Ended the extra tax on non-Muslims",
+"q": "Akbar chose tolerance. What did he do in 1564 that won Hindu support?",
+"right": "Ended the jizya, a tax on non-Muslims",
 "wrong": [
-"Made everyone in India become Muslim",
-"Moved his whole capital to Persia",
-"Banned all temples and churches in India"
+"Made Hindus pay a new tax on their temples",
+"Made Islam the only faith allowed in India",
+"Moved his capital back to Central Asia"
 ],
 "why": "✓ Correct. Akbar chose tolerance. Ending the jizya and hiring Hindu nobles won him loyal support.",
 "hint": "Read the box on page 2."
@@ -121,20 +121,20 @@ parts:[
 "check": {
 "page": 4,
 "tag": "Reading check · Reader page 4",
-"q": "What happened in Akbar's House of Worship?",
-"right": "People of many faiths debated ideas",
+"q": "Page 4 is a Mughal painting of Akbar's House of Worship. What value does it show?",
+"right": "Respect for many faiths and ideas",
 "wrong": [
-"Only Muslim soldiers trained there",
-"Akbar kept his treasure hidden there",
-"Artists built the Taj Mahal there"
+"Strict rule by one faith's law",
+"Power won with guns and cannons",
+"Victory over the sultan of Delhi in war"
 ],
-"why": "✓ Correct. Akbar invited many faiths to talk. That's cultural blending.",
-"hint": "Read the box on page 4."
+"why": "✓ Correct. Mughal art showed the empire's values. Here Akbar listens to many faiths: tolerance and cultural blending.",
+"hint": "Read the caption under the painting and the box on page 4."
 },
-"prompt": "How did Mughal art and ideas blend different cultures? Use one source.",
-"stem": "<span class=\"declass\"><b>Fact file</b><b class=\"kf\">Know this</b><span class=\"line\">Mughal painters mixed Persian and Indian styles. Mughal art showed the empire's values: power, faith, and tolerance.</span></span>Write 1–2 sentences. Start like this: <i>Mughal culture blended ___ because ___.</i>",
-"stemText": "Mughal culture blended ___ because ___.",
-"placeholder": "Mughal culture blended ___ because ___."
+"prompt": "Pick one Mughal artwork from this reading (a painting or the Taj Mahal). What value does it show, and why would an emperor want people to see it?",
+"stem": "<span class=\"declass\"><b>Fact file</b><b class=\"kf\">Know this</b><span class=\"line\">Mughal painters mixed Persian and Indian styles. Mughal art showed the empire's values: power, faith, and tolerance.</span></span>Write 1–2 sentences. Start like this: <i>The ___ shows the value of ___. An emperor wanted people to see this because ___.</i>",
+"stemText": "The ___ shows the value of ___. An emperor wanted people to see this because ___.",
+"placeholder": "The ___ shows the value of ___. An emperor wanted people to see this because ___."
 },
 {
 "short": "Aurangzeb",
@@ -145,23 +145,23 @@ parts:[
 "check": {
 "page": 6,
 "tag": "Reading check · Reader page 6",
-"q": "What happened after Aurangzeb brought back the jizya tax?",
+"q": "What happened after Aurangzeb turned away from Akbar's tolerance?",
 "right": "Many Hindus and Sikhs revolted",
 "wrong": [
 "Everyone in India became Muslim",
 "The empire stayed calm and grew richer",
-"Akbar came back to rule again"
+"Hindu nobles got even more power"
 ],
 "why": "✓ Correct. Taxing non-Muslims again made many people angry. Revolts weakened the empire.",
-"hint": "Read the box on page 6."
+"hint": "Read the box on page 6: \"In 1679...\""
 },
 "prompt": "Compare Akbar and Aurangzeb. Whose way of ruling different faiths kept the empire more stable? Explain.",
-"stem": "<span class=\"declass\"><b>Fact file</b><b class=\"kf\">Know this</b><span class=\"line\">The Ottomans also taxed non-Muslims with the jizya, but let them run their own communities.</span></span>Write 1–2 sentences. Start like this: <i>___'s way kept the empire more stable because ___.</i>",
+"stem": "<span class=\"declass\"><b>Fact file</b><b class=\"kf\">Know this</b><span class=\"line\">The Ottomans also taxed non-Muslims with the jizya. Akbar ended it, which the Ottomans did not do.</span><span class=\"line\">The Taj Mahal's huge size and cost showed the emperor's wealth and power.</span></span>Write 1–2 sentences. Start like this: <i>___'s way kept the empire more stable because ___.</i>",
 "stemText": "___'s way kept the empire more stable because ___.",
 "placeholder": "___'s way kept the empire more stable because ___."
 }
 ],
-questions:["If you ruled people of many faiths, what one rule would keep things fair? Use Akbar as an example.", "How did Mughal art and ideas blend different cultures? Use one source.", "Compare Akbar and Aurangzeb. Whose way of ruling different faiths kept the empire more stable? Explain."],
+questions:["If you ruled people of many faiths, what one rule would keep things fair? Use Akbar as an example.", "Pick one Mughal artwork from this reading (a painting or the Taj Mahal). What value does it show, and why would an emperor want people to see it?", "Compare Akbar and Aurangzeb. Whose way of ruling different faiths kept the empire more stable? Explain."],
 validate(s){if(!s.name)return{text:"Type your first name + last initial (like Jordan M.) at the top of the questions.",focus:"studentName"};
  const mc=[1, 2, 3].find(i=>!s.checkDone(i));if(mc)return{text:"Get the check right for part "+mc+" first.",part:mc};
  const ma=[1, 2, 3].find(i=>!s.answer(i));if(ma)return{text:"Write your answer for part "+ma+" before turning in.",part:ma,focus:"answer"+ma};

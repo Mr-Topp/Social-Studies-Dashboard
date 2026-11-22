@@ -121,18 +121,18 @@ parts:[
 "check": {
 "page": 4,
 "tag": "Reading check · Reader page 4",
-"q": "Why did so many city workers die young?",
-"right": "Crowded homes and dirty water spread disease",
+"q": "In Manchester, the average age at death in laborers' families was 17. Why so low?",
+"right": "So many of their babies died",
 "wrong": [
-"Most of them were killed fighting in faraway wars",
-"They moved back to farms at 17",
-"Factories gave out bad medicine"
+"Most workers died in the mills at 17",
+"Wars killed most of the young men",
+"Doctors there gave out bad medicine"
 ],
-"why": "✓ Correct. Fast-growing cities had no clean water or sewers yet, so disease spread fast.",
-"hint": "Read the box on page 4."
+"why": "✓ Correct. It does not mean most workers died at 17. So many babies and small children died that it pulled the average way down.",
+"hint": "Read the last sentence in the box on page 4."
 },
 "prompt": "What was the worst part of life in a factory city? Use one fact.",
-"stem": "<span class=\"declass\"><b>Fact file</b><b class=\"kf\">Know this</b><span class=\"line\">Over time, cities built sewers and clean water systems, and life expectancy went up.</span></span>Write 1–2 sentences. Start like this: <i>The worst part was ___ because ___.</i>",
+"stem": "<span class=\"declass\"><b>Fact file</b><b class=\"kf\">Know this</b><span class=\"line\">Crowded homes and dirty water spread deadly diseases like cholera. Later, sewers and clean water saved many lives.</span></span>Write 1–2 sentences. Start like this: <i>The worst part was ___ because ___.</i>",
 "stemText": "The worst part was ___ because ___.",
 "placeholder": "The worst part was ___ because ___."
 },
@@ -149,19 +149,19 @@ parts:[
 "right": "Banned kids under 9 from textile mills",
 "wrong": [
 "Closed every factory in Britain for a full year",
-"Raised every worker's pay",
-"Let kids work only at night"
+"Raised every adult worker's pay",
+"Let kids work only during the day"
 ],
 "why": "✓ Correct. It was the first real limit on child labor in Britain's mills.",
 "hint": "Read the last sentence on page 6."
 },
-"prompt": "Was the Industrial Revolution good or bad for workers and families? Give one positive and one negative.",
-"stem": "<span class=\"declass\"><b>Fact file</b><b class=\"kf\">Know this</b><span class=\"line\">Goods like cloth got cheaper, and railroads connected cities. Those were real gains for many families.</span></span>Write 1–2 sentences. Start like this: <i>For workers, industry was mostly ___ because ___.</i>",
+"prompt": "Was the Industrial Revolution good or bad for workers and families? Give one positive and one negative, and explain why one matters more.",
+"stem": "<span class=\"declass\"><b>Fact file</b><b class=\"kf\">Know this</b><span class=\"line\">Its weakness: only 4 inspectors had to check thousands of mills, so many owners broke the rules.</span><span class=\"line\">Goods like cloth got cheaper, and railroads connected cities. Those were real gains for many families.</span></span>Write 1–2 sentences. Start like this: <i>For workers, industry was mostly ___ because ___.</i>",
 "stemText": "For workers, industry was mostly ___ because ___.",
 "placeholder": "For workers, industry was mostly ___ because ___."
 }
 ],
-questions:["Would you take this job? Use Elizabeth Bentley or Sarah Gooder in your answer.", "What was the worst part of life in a factory city? Use one fact.", "Was the Industrial Revolution good or bad for workers and families? Give one positive and one negative."],
+questions:["Would you take this job? Use Elizabeth Bentley or Sarah Gooder in your answer.", "What was the worst part of life in a factory city? Use one fact.", "Was the Industrial Revolution good or bad for workers and families? Give one positive and one negative, and explain why one matters more."],
 validate(s){if(!s.name)return{text:"Type your first name + last initial (like Jordan M.) at the top of the questions.",focus:"studentName"};
  const mc=[1, 2, 3].find(i=>!s.checkDone(i));if(mc)return{text:"Get the check right for part "+mc+" first.",part:mc};
  const ma=[1, 2, 3].find(i=>!s.answer(i));if(ma)return{text:"Write your answer for part "+ma+" before turning in.",part:ma,focus:"answer"+ma};

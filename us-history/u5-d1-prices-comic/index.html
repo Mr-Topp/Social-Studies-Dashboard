@@ -145,23 +145,23 @@ parts:[
 "check": {
 "page": 6,
 "tag": "Reading check · Reader page 6",
-"q": "Which 1970s problem does this chart show?",
-"right": "Prices rising fast every year",
+"q": "Find the tallest bar. In which year did prices rise the fastest?",
+"right": "1980, when Reagan won",
 "wrong": [
-"A president caught in a cover-up",
-"Americans held hostage in Iran",
-"Protests and riots in big cities"
+"1974, when Nixon resigned",
+"1972, when Nixon won again",
+"1982, Reagan's second year"
 ],
-"why": "✓ Correct. Each bar is how much prices rose that year. The tallest bar, about 13.5%, is 1980, an election year.",
-"hint": "Read the box at the top: what was \"very rapid\" in the 1970s?"
+"why": "✓ Correct. Prices rose about 13.5% in 1980, an election year. Voters who felt poorer turned to Reagan and the conservatives.",
+"hint": "Each bar is one year. Find the tallest bar, then read the year under it."
 },
-"prompt": "Which 1970s problem pushed the most voters toward conservatives? Why?",
+"prompt": "Which 1970s problem pushed the most voters toward Reagan and the conservatives? Explain why, using one fact or the chart.",
 "stem": "<span class=\"declass\"><b>Fact file</b><b class=\"kf\">Know this</b><span class=\"line\">Other 1970s problems: protests and crime, <b>Watergate</b> (Nixon resigned in 1974), and the <b>Iran hostage crisis</b> (52 Americans held 444 days).</span><span class=\"line\">In 1980, Reagan asked voters, \"<b>Are you better off than you were four years ago?</b>\" He won 44 states.</span></span>Write 1–2 sentences. Start like this: <i>___ pushed voters toward conservatives because ___.</i>",
 "stemText": "___ pushed voters toward conservatives because ___.",
 "placeholder": "___ pushed voters toward conservatives because ___."
 }
 ],
-questions:["Prices and gas lines made people angry. Why did that help conservatives who wanted a smaller government?", "What was stagflation, and why did many voters blame President Carter?", "Which 1970s problem pushed the most voters toward conservatives? Why?"],
+questions:["Prices and gas lines made people angry. Why did that help conservatives who wanted a smaller government?", "What was stagflation, and why did many voters blame President Carter?", "Which 1970s problem pushed the most voters toward Reagan and the conservatives? Explain why, using one fact or the chart."],
 validate(s){if(!s.name)return{text:"Type your first name + last initial (like Jordan M.) at the top of the questions.",focus:"studentName"};
  const mc=[1, 2, 3].find(i=>!s.checkDone(i));if(mc)return{text:"Get the check right for part "+mc+" first.",part:mc};
  const ma=[1, 2, 3].find(i=>!s.answer(i));if(ma)return{text:"Write your answer for part "+ma+" before turning in.",part:ma,focus:"answer"+ma};

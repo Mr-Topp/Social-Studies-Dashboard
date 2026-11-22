@@ -97,20 +97,20 @@ parts:[
 "check": {
 "page": 1,
 "tag": "Reading check · Reader page 1",
-"q": "Most gold-seekers \"found only hardship.\" Who else paid a price when miners rushed into the Black Hills in 1874?",
-"right": "The Lakota, whose land it was by treaty",
+"q": "Read both yellow boxes. What usually happened to a gold-rush boomtown?",
+"right": "It grew fast, then often emptied out",
 "wrong": [
-"Farmers in California who lost their crops",
-"The U.S. Army, which had to pay the miners",
-"Bankers back East who had lent money"
+"It stayed small because few people came",
+"It grew slowly into a big, rich city",
+"It was run by the Army as a fort"
 ],
-"why": "✓ Correct. The 1868 Treaty of Fort Laramie promised the Black Hills to the Lakota. Miners poured in anyway.",
-"hint": "Read the slanted yellow box at the bottom right."
+"why": "✓ Correct. \"Thousands\" rushed in, so boomtowns grew almost overnight. But \"most found only hardship,\" so when the gold ran out, many became ghost towns. The people who stayed to farm changed the West for good.",
+"hint": "Read the top box (\"thousands\") and the slanted box at the bottom right (\"most found only hardship\")."
 },
-"prompt": "Homesteaders, cowboys, or miners: who changed the West the most? Who paid the price?",
-"stem": "<span class=\"declass\"><b>Fact file</b><b class=\"kf\">Know this</b><span class=\"line\"><b>Boomtowns</b> grew almost overnight. When the gold ran out, many became ghost towns.</span><span class=\"line\">The <b>Homestead Act</b> (1862) gave settlers 160 acres if they lived there and farmed it for 5 years.</span></span>Write 1–2 sentences. Start like this: <i>___ changed the West the most because ___. The people who paid the price were ___.</i>",
-"stemText": "___ changed the West the most because ___. The people who paid the price were ___.",
-"placeholder": "___ changed the West the most because ___. The people who paid the price were ___."
+"prompt": "Homesteaders, cowboys, or miners: who changed the West the most? Explain why, and explain how that change affected Native nations.",
+"stem": "<span class=\"declass\"><b>Fact file</b><b class=\"kf\">Know this</b><span class=\"line\">In 1874, gold was found in the <b>Black Hills</b>. The 1868 Treaty of Fort Laramie had promised that land to the Lakota. Miners poured in anyway.</span><span class=\"line\">The <b>Homestead Act</b> (1862) gave settlers 160 acres if they lived there and farmed it for 5 years.</span></span>Write 1–2 sentences. Start like this: <i>___ changed the West the most because ___. This hurt Native nations because ___.</i>",
+"stemText": "___ changed the West the most because ___. This hurt Native nations because ___.",
+"placeholder": "___ changed the West the most because ___. This hurt Native nations because ___."
 },
 {
 "short": "Cowboys",
@@ -137,7 +137,7 @@ parts:[
 "placeholder": "The comic shows ___, but real cowboys were ___. For example, ___."
 }
 ],
-questions:["Homesteaders, cowboys, or miners: who changed the West the most? Who paid the price?", "Movies show mostly white cowboys, like this one. Fact-check the comic's cowboy."],
+questions:["Homesteaders, cowboys, or miners: who changed the West the most? Explain why, and explain how that change affected Native nations.", "Movies show mostly white cowboys, like this one. Fact-check the comic's cowboy."],
 validate(s){if(!s.name)return{text:"Type your first name + last initial (like Jordan M.) at the top of the questions.",focus:"studentName"};
  const mc=[1, 2].find(i=>!s.checkDone(i));if(mc)return{text:"Get the check right for part "+mc+" first.",part:mc};
  const ma=[1, 2].find(i=>!s.answer(i));if(ma)return{text:"Write your answer for part "+ma+" before turning in.",part:ma,focus:"answer"+ma};

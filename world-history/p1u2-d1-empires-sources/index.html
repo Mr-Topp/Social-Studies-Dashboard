@@ -97,14 +97,14 @@ parts:[
 "check": {
 "page": 1,
 "tag": "Reading check · Reader page 1",
-"q": "How did the Ottomans break walls that had stood for 1,000 years?",
-"right": "With giant gunpowder cannons",
+"q": "Historians call the Ottomans a \"gunpowder empire.\" What does page 1 show that fits that name?",
+"right": "Cannons smashed walls 1,000 years old",
 "wrong": [
-"By digging tunnels under them with shovels",
-"By paying the guards to open the gates",
-"By starving the city for ten years"
+"Warships took control of faraway spice ports",
+"Guards were paid to open the city's gates",
+"The city was starved out over ten long years"
 ],
-"why": "✓ Correct. Gunpowder changed who could win. Big cannons could smash walls that had stood for centuries.",
+"why": "✓ Correct. A gunpowder empire grew strong with cannons and guns. Big cannons could smash walls that had stood for centuries.",
 "hint": "Read the box under the picture on page 1."
 },
 "prompt": "Why were cannons and guns so important for land empires?",
@@ -121,15 +121,15 @@ parts:[
 "check": {
 "page": 3,
 "tag": "Reading check · Reader page 3",
-"q": "How did Russia grow into a giant empire?",
-"right": "Soldiers and fur traders pushed east across Siberia",
+"q": "Was Russia a land empire or a sea empire? Pick the answer with the right proof.",
+"right": "Land: soldiers and traders crossed Siberia",
 "wrong": [
-"Its ships sailed all the way around Africa to reach Asia",
-"It bought land from the Ottoman sultan",
-"Its kings married into Asian royal families"
+"Sea: its warships sailed east to the Pacific",
+"Sea: it built trading posts on Asia's coasts",
+"Land: it bought Siberia from the Ottoman sultan"
 ],
-"why": "✓ Correct. Russia grew by land, one region after another, all the way to the Pacific.",
-"hint": "Read the box on page 3."
+"why": "✓ Correct. Russia grew by land, one region after another, all the way to the Pacific by 1639.",
+"hint": "Read the box on page 3: \"Then fur traders and soldiers...\""
 },
 "prompt": "Russia and the Ottomans both grew by land. How was their growth alike?",
 "stem": "<span class=\"declass\"><b>Fact file</b><b class=\"kf\">Know this</b><span class=\"line\">Russia became the biggest country on Earth by land, and it still is today.</span></span>Write 1–2 sentences. Start like this: <i>Russia and the Ottomans were alike because ___.</i>",
@@ -145,23 +145,23 @@ parts:[
 "check": {
 "page": 4,
 "tag": "Reading check · Reader page 4",
-"q": "How did Portugal control trade in Asia?",
-"right": "With coastal forts, trading posts, and warships",
+"q": "Portugal built a sea (maritime) empire. What did it mostly hold in Asia?",
+"right": "Forts and trading posts on the coasts",
 "wrong": [
-"By conquering all of India with a huge army on foot",
-"By sending farmers to settle all over Asia",
-"By paying the Ottomans for permission to trade"
+"Huge areas of land deep inside India",
+"Farms run by settlers from Portugal",
+"Cities it bought from the Ottoman sultan"
 ],
-"why": "✓ Correct. A small country could control a big trade with ships, forts, and ports.",
-"hint": "Read the box on page 4."
+"why": "✓ Correct. Spain ruled huge areas of land. Portugal mostly held coasts, with ships, forts, and ports to control the spice trade.",
+"hint": "Read the box on page 4: \"It built...\""
 },
-"prompt": "Pick one land empire and one sea empire. Explain one way each one grew.",
+"prompt": "Pick one land empire and one sea empire. Explain one way each one grew, and why that way worked for it. Use a source.",
 "stem": "<span class=\"declass\"><b>Fact file</b><b class=\"kf\">Know this</b><span class=\"line\">Spain shipped silver from the Americas across the Pacific to the Philippines and China.</span></span>Write 1–2 sentences. Start like this: <i>The ___ Empire grew by land because ___. The ___ Empire grew by sea because ___.</i>",
 "stemText": "The ___ Empire grew by land because ___. The ___ Empire grew by sea because ___.",
 "placeholder": "The ___ Empire grew by land because ___. The ___ Empire grew by sea because ___."
 }
 ],
-questions:["Why were cannons and guns so important for land empires?", "Russia and the Ottomans both grew by land. How was their growth alike?", "Pick one land empire and one sea empire. Explain one way each one grew."],
+questions:["Why were cannons and guns so important for land empires?", "Russia and the Ottomans both grew by land. How was their growth alike?", "Pick one land empire and one sea empire. Explain one way each one grew, and why that way worked for it. Use a source."],
 validate(s){if(!s.name)return{text:"Type your first name + last initial (like Jordan M.) at the top of the questions.",focus:"studentName"};
  const mc=[1, 2, 3].find(i=>!s.checkDone(i));if(mc)return{text:"Get the check right for part "+mc+" first.",part:mc};
  const ma=[1, 2, 3].find(i=>!s.answer(i));if(ma)return{text:"Write your answer for part "+ma+" before turning in.",part:ma,focus:"answer"+ma};

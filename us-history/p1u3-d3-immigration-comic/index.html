@@ -131,13 +131,13 @@ parts:[
 "why": "✓ Correct. The 1882 Chinese Exclusion Act was the first major U.S. law to keep out one nationality. It lasted until 1943.",
 "hint": "Read the orange sign under the statue."
 },
-"prompt": "Pick one group from today. What pushed or pulled them here, and how were they treated?",
-"stem": "<span class=\"declass\"><b>Fact file</b><b class=\"kf\">Know this</b><span class=\"line\">At <b>Ellis Island</b> (opened 1892), only about 2 of every 100 people were sent back.</span><span class=\"line\">In 1879, about 6,000 Black Southerners called <b>Exodusters</b> moved to Kansas to escape violence.</span></span>Write 1–2 sentences. Start like this: <i>The ___ came because ___. They were treated ___.</i>",
-"stemText": "The ___ came because ___. They were treated ___.",
-"placeholder": "The ___ came because ___. They were treated ___."
+"prompt": "Pick one group from today. What pushed or pulled them here, how were they treated, and why?",
+"stem": "<span class=\"declass\"><b>Fact file</b><b class=\"kf\">Know this</b><span class=\"line\">At <b>Ellis Island</b> (opened 1892), only about 2 of every 100 people were sent back.</span><span class=\"line\">In 1879, about 6,000 Black Southerners called <b>Exodusters</b> moved to Kansas to escape violence.</span></span>Write 1–2 sentences. Start like this: <i>The ___ came because ___. They were treated ___ because ___.</i>",
+"stemText": "The ___ came because ___. They were treated ___ because ___.",
+"placeholder": "The ___ came because ___. They were treated ___ because ___."
 }
 ],
-questions:["Pick one group that came to Iowa. What pushed or pulled them here?", "Pick one group from today. What pushed or pulled them here, and how were they treated?"],
+questions:["Pick one group that came to Iowa. What pushed or pulled them here?", "Pick one group from today. What pushed or pulled them here, how were they treated, and why?"],
 validate(s){if(!s.name)return{text:"Type your first name + last initial (like Jordan M.) at the top of the questions.",focus:"studentName"};
  const mc=[1, 2].find(i=>!s.checkDone(i));if(mc)return{text:"Get the check right for part "+mc+" first.",part:mc};
  const ma=[1, 2].find(i=>!s.answer(i));if(ma)return{text:"Write your answer for part "+ma+" before turning in.",part:ma,focus:"answer"+ma};

@@ -97,20 +97,20 @@ parts:[
 "check": {
 "page": 1,
 "tag": "Reading check · Reader page 1",
-"q": "Families now bought food made far away, in chain stores. What did Upton Sinclair's book <i>The Jungle</i> (1906) lead to?",
-"right": "New food safety laws",
+"q": "Read the box. Farm families now drove to \"chain\" groceries. Why did that make the 1906 food safety laws matter to them?",
+"right": "Their food now came from far-off plants",
 "wrong": [
-"Higher pay for meatpacking workers",
-"A ban on all chain grocery stores",
-"Shorter hours for factory workers"
+"They now grew all of their own food at home",
+"Their own farms now had to be inspected",
+"Chain stores sold only food made in town"
 ],
-"why": "✓ Correct. Readers were disgusted by the meat. In 1906, Congress passed the Meat Inspection Act and the Pure Food and Drug Act. The workers got no new pay or hours.",
-"hint": "Read the end of the yellow box: \"to shop in chain groceries...\""
+"why": "✓ Correct. Families who once lived off their own farms now bought packaged food, like meat from Chicago plants they never saw. After <i>The Jungle</i> (1906) showed filthy meat plants, Congress passed the Meat Inspection Act and the Pure Food and Drug Act.",
+"hint": "Read the end of the yellow box: \"from lonely farms... to shop in chain groceries.\" A chain is many stores run by one big company."
 },
-"prompt": "Sinclair said, \"I aimed at the public's heart, and by accident I hit it in the stomach.\" Was The Jungle a success or a failure?",
-"stem": "<span class=\"declass\"><b>Fact file</b><b class=\"kf\">Know this</b><span class=\"line\">Sinclair said, \"I aimed at the public's heart, and by accident I hit it in the stomach.\" He wanted readers to care about the workers.</span><span class=\"line\">The 1906 laws led to today's <b>FDA</b>, which still checks our food and medicine.</span></span>Write 1–2 sentences. Start like this: <i>The Jungle was a (success / failure / both) because ___.</i>",
-"stemText": "The Jungle was a (success / failure / both) because ___.",
-"placeholder": "The Jungle was a (success / failure / both) because ___."
+"prompt": "Sinclair said, \"I aimed at the public's heart, and by accident I hit it in the stomach.\" Was The Jungle a success or a failure? Explain what it changed and what it didn't.",
+"stem": "<span class=\"declass\"><b>Fact file</b><b class=\"kf\">Know this</b><span class=\"line\">Sinclair said, \"I aimed at the public's heart, and by accident I hit it in the stomach.\" He wanted readers to care about the workers, who got no new pay or hours.</span><span class=\"line\">The 1906 laws led to today's <b>FDA</b>, which still checks our food and medicine.</span></span>Write 1–2 sentences. Start like this: <i>The Jungle was a (success / failure / both) because it changed ___, but not ___.</i>",
+"stemText": "The Jungle was a (success / failure / both) because it changed ___, but not ___.",
+"placeholder": "The Jungle was a (success / failure / both) because it changed ___, but not ___."
 },
 {
 "short": "Trust buster",
@@ -137,7 +137,7 @@ parts:[
 "placeholder": "___ changed the most because ___. One problem that didn't change was ___."
 }
 ],
-questions:["Sinclair said, \"I aimed at the public's heart, and by accident I hit it in the stomach.\" Was The Jungle a success or a failure?", "Tarbell's articles, Sinclair's novel, or Hine's photos: which changed the most? Name one problem that didn't change."],
+questions:["Sinclair said, \"I aimed at the public's heart, and by accident I hit it in the stomach.\" Was The Jungle a success or a failure? Explain what it changed and what it didn't.", "Tarbell's articles, Sinclair's novel, or Hine's photos: which changed the most? Name one problem that didn't change."],
 validate(s){if(!s.name)return{text:"Type your first name + last initial (like Jordan M.) at the top of the questions.",focus:"studentName"};
  const mc=[1, 2].find(i=>!s.checkDone(i));if(mc)return{text:"Get the check right for part "+mc+" first.",part:mc};
  const ma=[1, 2].find(i=>!s.answer(i));if(ma)return{text:"Write your answer for part "+ma+" before turning in.",part:ma,focus:"answer"+ma};

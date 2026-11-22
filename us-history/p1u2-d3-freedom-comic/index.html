@@ -131,10 +131,10 @@ parts:[
 "why": "✓ Correct. Hundreds of thousands escaped to Union lines, and about 180,000 Black men fought for the Union.",
 "hint": "Look at who stands and who kneels. Who looks like the only hero?"
 },
-"prompt": "Who did the most to turn the war into a fight for freedom? Pick one and defend it.",
-"stem": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">The freed man kneels, waiting to be freed.</span><span class=\"rl\">The model was Archer Alexander. He escaped slavery after helping the Union Army.</span></span><b class=\"kf\">Know this</b><span class=\"line\">Frederick Douglass wrote that the statue showed the Black man \"on his knees.\"</span><span class=\"line\">In 1861, three men escaped to Fort Monroe. Gen. Butler called them <b>contraband</b> and would not send them back.</span></span>Write 1–2 sentences. Start like this: <i>___ did the most because ___.</i>",
-"stemText": "___ did the most because ___.",
-"placeholder": "___ did the most because ___."
+"prompt": "Assess: who did the most to turn the war into a fight for freedom: Lincoln, Black soldiers, or people who escaped slavery? Explain why, with one fact.",
+"stem": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">The freed man kneels, waiting to be freed.</span><span class=\"rl\">The model was Archer Alexander. He escaped slavery after helping the Union Army.</span></span><b class=\"kf\">Know this</b><span class=\"line\">Frederick Douglass wrote that the statue showed the Black man \"on his knees.\"</span><span class=\"line\">In 1861, three men escaped to Fort Monroe. Gen. Butler called them <b>contraband</b> and would not send them back.</span></span>Write 1–2 sentences. Start like this: <i>___ did the most because ___. One fact that shows this is ___.</i>",
+"stemText": "___ did the most because ___. One fact that shows this is ___.",
+"placeholder": "___ did the most because ___. One fact that shows this is ___."
 },
 {
 "short": "New birth",
@@ -161,7 +161,7 @@ parts:[
 "placeholder": "A new birth of freedom would help ___. Still left out were ___."
 }
 ],
-questions:["The scroll makes it sound like everyone was freed in 1863. What did the Proclamation really do, and not do?", "Who did the most to turn the war into a fight for freedom? Pick one and defend it.", "Who would gain a \"new birth of freedom\"? Who might still be left out?"],
+questions:["The scroll makes it sound like everyone was freed in 1863. What did the Proclamation really do, and not do?", "Assess: who did the most to turn the war into a fight for freedom: Lincoln, Black soldiers, or people who escaped slavery? Explain why, with one fact.", "Who would gain a \"new birth of freedom\"? Who might still be left out?"],
 validate(s){if(!s.name)return{text:"Type your first name + last initial (like Jordan M.) at the top of the questions.",focus:"studentName"};
  const mc=[1, 2, 3].find(i=>!s.checkDone(i));if(mc)return{text:"Get the check right for part "+mc+" first.",part:mc};
  const ma=[1, 2, 3].find(i=>!s.answer(i));if(ma)return{text:"Write your answer for part "+ma+" before turning in.",part:ma,focus:"answer"+ma};

@@ -102,7 +102,7 @@ parts:[
 "wrong": [
 "Whether to pay off the war debt to Britain first",
 "Which state's city would be the new capital",
-"Whether the new country should have a king"
+"Whether the new country should have its own king"
 ],
 "why": "✓ Correct. Big states wanted votes by population (Virginia Plan). Small states wanted equal votes (New Jersey Plan).",
 "hint": "Read the first speech bubble: \"Why should your state be equal with mine...\""
@@ -128,13 +128,13 @@ parts:[
 "Stop meeting and go home to their states",
 "Start over and fix the old Articles instead"
 ],
-"why": "✓ Correct. That's a compromise: each side gives up something to get something.",
+"why": "✓ Correct. That's a compromise. Franklin, at 81 the oldest delegate, urged both sides to give a little. Putting the country first like that is civic virtue.",
 "hint": "Read Franklin's speech bubble about the planks of a table."
 },
-"prompt": "Who showed the most civic virtue: Washington, Madison, or Franklin? Defend your pick.",
-"stem": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">Franklin was 84 years old.</span><span class=\"rl\">He was 81 in 1787. He died in 1790, at 84.</span></span><b class=\"kf\">Know this</b><span class=\"line\">On the last day, Franklin said he agreed to the Constitution \"with all its faults,\" because the country needed a national government.</span><span class=\"line\"><b>Madison</b> took careful notes every day. They are the best record of what was said.</span></span>Write 1–2 sentences. Start like this: <i>___ showed the most civic virtue because ___.</i>",
-"stemText": "___ showed the most civic virtue because ___.",
-"placeholder": "___ showed the most civic virtue because ___."
+"prompt": "Why did Franklin's speech matter? Explain what could have happened if neither side gave in.",
+"stem": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">Franklin was 84 years old.</span><span class=\"rl\">He was 81 in 1787. He died in 1790, at 84.</span></span><b class=\"kf\">Know this</b><span class=\"line\">On the last day, Franklin said he agreed to the Constitution \"with all its faults,\" because the country needed a national government.</span><span class=\"line\"><b>Madison</b> took careful notes every day. They are the best record of what was said.</span></span>Write 1–2 sentences. Start like this: <i>Franklin's speech mattered because ___. If neither side gave in, ___.</i>",
+"stemText": "Franklin's speech mattered because ___. If neither side gave in, ___.",
+"placeholder": "Franklin's speech mattered because ___. If neither side gave in, ___."
 },
 {
 "short": "The deals",
@@ -152,16 +152,16 @@ parts:[
 "One house of Congress, with votes based on population",
 "Each state gets one vote, just like under the Articles"
 ],
-"why": "✓ Correct. Big states got the House. Small states got the Senate. That's why Iowa has 4 House members and 2 senators.",
+"why": "✓ Correct. Roger Sherman of Connecticut pushed this deal. Big states got the House, small states got the Senate. That's why Iowa has 4 House members and 2 senators.",
 "hint": "Read the box on the left side of the page."
 },
-"prompt": "The comic says \"compromises were reached.\" Which deal did it leave out, and who was missing from the room?",
-"stem": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">(Nothing about slavery.)</span><span class=\"rl\">The Three-Fifths Compromise counted 3 of every 5 enslaved people for House seats. That gave slave states more power.</span></span><b class=\"kf\">Know this</b><span class=\"line\">All 55 delegates were white men, and most were wealthy. Women, Black Americans, Native nations, and most poor farmers had no seat.</span></span>Write 1–2 sentences. Start like this: <i>The comic left out the ___ Compromise, which ___. Missing from the room were ___.</i>",
-"stemText": "The comic left out the ___ Compromise, which ___. Missing from the room were ___.",
-"placeholder": "The comic left out the ___ Compromise, which ___. Missing from the room were ___."
+"prompt": "Assess: pick ONE of Washington, Madison, Franklin, or Sherman. How did he show civic virtue (putting the common good first), and how did it help the new country?",
+"stem": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">(Nothing about slavery.)</span><span class=\"rl\">The Three-Fifths Compromise counted 3 of every 5 enslaved people for House seats. That gave slave states more power.</span></span><b class=\"kf\">Know this</b><span class=\"line\">All 55 delegates were white men, and most were wealthy. Women, Black Americans, Native nations, and most poor farmers had no seat.</span></span>Write 1–2 sentences. Start like this: <i>___ showed civic virtue by ___. This helped the new country because ___.</i>",
+"stemText": "___ showed civic virtue by ___. This helped the new country because ___.",
+"placeholder": "___ showed civic virtue by ___. This helped the new country because ___."
 }
 ],
-questions:["Big states vs. small states: what did each side want, and why?", "Who showed the most civic virtue: Washington, Madison, or Franklin? Defend your pick.", "The comic says \"compromises were reached.\" Which deal did it leave out, and who was missing from the room?"],
+questions:["Big states vs. small states: what did each side want, and why?", "Why did Franklin's speech matter? Explain what could have happened if neither side gave in.", "Assess: pick ONE of Washington, Madison, Franklin, or Sherman. How did he show civic virtue (putting the common good first), and how did it help the new country?"],
 validate(s){if(!s.name)return{text:"Type your first name + last initial (like Jordan M.) at the top of the questions.",focus:"studentName"};
  const mc=[1, 2, 3].find(i=>!s.checkDone(i));if(mc)return{text:"Get the check right for part "+mc+" first.",part:mc};
  const ma=[1, 2, 3].find(i=>!s.answer(i));if(ma)return{text:"Write your answer for part "+ma+" before turning in.",part:ma,focus:"answer"+ma};

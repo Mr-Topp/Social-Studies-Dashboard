@@ -128,11 +128,11 @@ parts:[
 "Anyone who moved to the West",
 "All free people, Black or white"
 ],
-"why": "✓ Correct. By the 1850s, nearly all white men could vote. Women and most Black men could not.",
+"why": "✓ Correct. States dropped the rule that voters must own property, so poor white men gained the vote. By the 1850s, nearly all white men could vote. Women and most Black men could not.",
 "hint": "Read the yellow box on the left. Then ask: opportunity for ALL?"
 },
 "prompt": "\"Protection of individual rights… opportunity for all.\" Fact-check it: who got these rights, and who didn't?",
-"stem": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">There was \"opportunity for all.\"</span><span class=\"rl\">Iowa's 1846 constitution let only white men vote. Black settlers had to show proof they were free.</span></span><b class=\"kf\">Know this</b><span class=\"line\"><b>In re Ralph (1839):</b> Iowa's Supreme Court ruled Ralph free, since Iowa didn't allow slavery. But free didn't mean equal.</span></span>Write 1–2 sentences. Start like this: <i>The promise worked for ___, but not for ___. For example, ___.</i>",
+"stem": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">There was \"opportunity for all.\"</span><span class=\"rl\">Iowa's 1846 constitution let only white men vote. Black settlers had to show proof they were free.</span></span><b class=\"kf\">Know this</b><span class=\"line\"><b>In re Ralph (1839):</b> Iowa's Supreme Court ruled Ralph free, since Iowa didn't allow slavery. But free didn't mean equal.</span><span class=\"line\"><b>New Jersey, 1807:</b> women and free Black men had been voting there. That year, the state took their vote away.</span></span>Write 1–2 sentences. Start like this: <i>The promise worked for ___, but not for ___. For example, ___.</i>",
 "stemText": "The promise worked for ___, but not for ___. For example, ___.",
 "placeholder": "The promise worked for ___, but not for ___. For example, ___."
 },
@@ -155,13 +155,13 @@ parts:[
 "why": "✓ Correct. The 15th Amendment (1870) said no one could be denied the vote because of race.",
 "hint": "Read the last line of the green box."
 },
-"prompt": "From 1776 to 1870, did citizenship change a lot, a little, or not enough? Defend it.",
-"stem": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">Congress took the vote from former Confederates.</span><span class=\"rl\">Only some Confederate leaders lost the vote or the right to hold office. Most got those rights back by 1872.</span></span><b class=\"kf\">Know this</b><span class=\"line\"><b>13th (1865)</b> ended slavery. <b>14th (1868)</b> made people born here citizens. <b>15th (1870)</b> banned denying the vote by race.</span><span class=\"line\"><b>Iowa, 1868:</b> voters took \"white\" out of the voting rules. Women still couldn't vote.</span></span>Write 1–2 sentences. Start like this: <i>Citizenship changed (a lot / a little / not enough) because ___. One example is ___.</i>",
-"stemText": "Citizenship changed (a lot / a little / not enough) because ___. One example is ___.",
-"placeholder": "Citizenship changed (a lot / a little / not enough) because ___. One example is ___."
+"prompt": "Pick ONE group: Black men, women, or the Meskwaki. Analyze how its rights changed, or did not change, from 1776 to 1870. Use one fact and explain why.",
+"stem": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">Congress took the vote from former Confederates.</span><span class=\"rl\">Only some Confederate leaders lost the vote or the right to hold office. Most got those rights back by 1872.</span></span><b class=\"kf\">Know this</b><span class=\"line\"><b>13th (1865)</b> ended slavery. <b>14th (1868)</b> made people born here citizens. <b>15th (1870)</b> banned denying the vote by race.</span><span class=\"line\"><b>Iowa, 1868:</b> voters took \"white\" out of the voting rules. Women still couldn't vote.</span></span>Write 1–2 sentences. Start like this: <i>From 1776 to 1870, rights for ___ ___. One fact that shows this is ___. This happened because ___.</i>",
+"stemText": "From 1776 to 1870, rights for ___ ___. One fact that shows this is ___. This happened because ___.",
+"placeholder": "From 1776 to 1870, rights for ___ ___. One fact that shows this is ___. This happened because ___."
 }
 ],
-questions:["The comic shows the West as open land with \"elbow room.\" What happened to the Native nations who lived there? Use the Meskwaki.", "\"Protection of individual rights… opportunity for all.\" Fact-check it: who got these rights, and who didn't?", "From 1776 to 1870, did citizenship change a lot, a little, or not enough? Defend it."],
+questions:["The comic shows the West as open land with \"elbow room.\" What happened to the Native nations who lived there? Use the Meskwaki.", "\"Protection of individual rights… opportunity for all.\" Fact-check it: who got these rights, and who didn't?", "Pick ONE group: Black men, women, or the Meskwaki. Analyze how its rights changed, or did not change, from 1776 to 1870. Use one fact and explain why."],
 validate(s){if(!s.name)return{text:"Type your first name + last initial (like Jordan M.) at the top of the questions.",focus:"studentName"};
  const mc=[1, 2, 3].find(i=>!s.checkDone(i));if(mc)return{text:"Get the check right for part "+mc+" first.",part:mc};
  const ma=[1, 2, 3].find(i=>!s.answer(i));if(ma)return{text:"Write your answer for part "+ma+" before turning in.",part:ma,focus:"answer"+ma};

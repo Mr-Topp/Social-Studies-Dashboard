@@ -97,14 +97,14 @@ parts:[
 "check": {
 "page": 1,
 "tag": "Reading check · Reader page 1",
-"q": "What does the 1789 cartoon say about France?",
-"right": "Poor people carried the rich on their backs",
+"q": "Who paid most of the taxes in France before 1789?",
+"right": "The Third Estate, the common people",
 "wrong": [
-"Priests and nobles did all of the hard farm work",
-"Farmers were the richest people in France",
-"The king paid most of the country's taxes"
+"The First Estate, the clergy",
+"The Second Estate, the nobles",
+"The king and his royal family at court"
 ],
-"why": "✓ Correct. The Third Estate paid most of the taxes while the clergy and nobles paid little.",
+"why": "✓ Correct. The clergy and nobles paid little or no tax. Everyone else, about 97% of the people, carried the load.",
 "hint": "Look at who is carrying whom, and read the box on page 1."
 },
 "prompt": "Was the three-estate system fair? Use the cartoon or Sieyès.",
@@ -119,20 +119,20 @@ parts:[
 "from": 3,
 "to": 4,
 "check": {
-"page": 4,
-"tag": "Reading check · Reader page 4",
-"q": "Why did the crowd attack the Bastille?",
-"right": "To grab its gunpowder",
+"page": 3,
+"tag": "Reading check · Reader page 3",
+"q": "What did the deputies swear in the Tennis Court Oath?",
+"right": "To stay until France had a constitution",
 "wrong": [
-"To free hundreds of prisoners",
-"To crown a new king there",
-"To steal the king's gold"
+"To go home and let the nobles decide",
+"To pay the king's debts with their own money",
+"To crown a new king of France at once"
 ],
-"why": "✓ Correct. The crowd feared the king's troops and wanted gunpowder. The Bastille also stood for the king's power.",
-"hint": "Read the box on page 4: \"They wanted...\""
+"why": "✓ Correct. The Third Estate named itself the National Assembly and refused to quit. That took power away from the king.",
+"hint": "Read the last sentence in the box on page 3."
 },
 "prompt": "How did the Third Estate and the people of Paris take power away from the king?",
-"stem": "<span class=\"declass\"><b>Fact file</b><b class=\"kf\">Know this</b><span class=\"line\">July 14, Bastille Day, is still France's national holiday.</span></span>Write 1–2 sentences. Start like this: <i>They took power by ___.</i>",
+"stem": "<span class=\"declass\"><b>Fact file</b><b class=\"kf\">Know this</b><span class=\"line\">On July 14, 1789, a Paris crowd stormed the Bastille to get gunpowder. It showed the king had lost control of Paris.</span></span>Write 1–2 sentences. Start like this: <i>They took power by ___.</i>",
 "stemText": "They took power by ___.",
 "placeholder": "They took power by ___."
 },
@@ -155,13 +155,13 @@ parts:[
 "why": "✓ Correct. Hunger pushed ordinary people into the revolution.",
 "hint": "Read the box on page 5."
 },
-"prompt": "Which cause of the French Revolution mattered most: debt, bread prices, or the three estates? Explain.",
+"prompt": "Which cause of the French Revolution mattered most: debt, bread prices, or the three estates? Explain why it pushed people to act, using one source.",
 "stem": "<span class=\"declass\"><b>Fact file</b><b class=\"kf\">Know this</b><span class=\"line\">The Declaration promised rights to \"men.\" Women still could not vote. In 1791, Olympe de Gouges wrote a Declaration of the Rights of Woman.</span></span>Write 1–2 sentences. Start like this: <i>The biggest cause was ___ because ___.</i>",
 "stemText": "The biggest cause was ___ because ___.",
 "placeholder": "The biggest cause was ___ because ___."
 }
 ],
-questions:["Was the three-estate system fair? Use the cartoon or Sieyès.", "How did the Third Estate and the people of Paris take power away from the king?", "Which cause of the French Revolution mattered most: debt, bread prices, or the three estates? Explain."],
+questions:["Was the three-estate system fair? Use the cartoon or Sieyès.", "How did the Third Estate and the people of Paris take power away from the king?", "Which cause of the French Revolution mattered most: debt, bread prices, or the three estates? Explain why it pushed people to act, using one source."],
 validate(s){if(!s.name)return{text:"Type your first name + last initial (like Jordan M.) at the top of the questions.",focus:"studentName"};
  const mc=[1, 2, 3].find(i=>!s.checkDone(i));if(mc)return{text:"Get the check right for part "+mc+" first.",part:mc};
  const ma=[1, 2, 3].find(i=>!s.answer(i));if(ma)return{text:"Write your answer for part "+ma+" before turning in.",part:ma,focus:"answer"+ma};
