@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>The Devil's Copies? | World History Part 1 · Unit 3 Day 2</title>
+<meta name="description" content="Fact-check a 1940s comic about Gutenberg&#x27;s printing press, and explain how print helped ideas go viral.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../shared/graphic-reading.css?v=3">
+<style>
+.flip-layout{grid-template-columns:minmax(0,1.9fr) minmax(320px,1fr)}
+.flip-stage img{min-height:0;max-height:calc(100vh - 150px)}
+.qcol{padding-bottom:100px}
+.intro-line{font-size:1.02rem;margin:0 0 10px}
+.wordhelp{margin:6px 0 0}.wordhelp summary{cursor:pointer;font-weight:750;color:var(--navy)}
+.words{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0 10px;padding:0;list-style:none}
+.words li{background:#fff;border:1px solid #e6dcc8;border-left:4px solid var(--navy);border-radius:8px;padding:3px 9px;font-size:.88rem}
+.declass{display:block;background:#fff;border:2px dashed #18364a;border-radius:10px;padding:8px 11px;margin:6px 0 8px;font-weight:650;color:#22313b;line-height:1.4;font-style:normal}
+.declass > b:first-child{display:block;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#18364a;margin-bottom:2px}
+.declass .line{display:block;margin:3px 0}
+.declass .note{display:block;margin-top:5px;font-weight:600;font-size:.9rem;color:#5b4632}
+.dime{display:inline-block;background:#e6bd64;color:#0f2433;border-radius:999px;font-weight:850;padding:0 9px;margin-right:4px}
+.credits{font-size:.8rem;color:var(--muted);margin:10px 0 0;line-height:1.4}
+.pg-cap{margin:8px 2px 0;font-size:.95rem;line-height:1.35;background:#fff;border:1px solid #e6dcc8;border-left:4px solid #e6bd64;border-radius:8px;padding:6px 10px}.pg-cap:empty{display:none}
+.gr-head{padding-top:18px;padding-bottom:16px}.gr-head h1{margin:6px 0 6px}.gr-head .hook{margin-bottom:8px}
+body.reading-now .choices{opacity:.45;pointer-events:none}
+</style>
+<script src="../../shared/assignments.js?v=20261116m2"></script><script src="../../shared/turnin.js?v=20261116m2"></script></head><body>
+<header class="gr-head" data-years="1455">
+<div class="gr-wrap">
+<div class="kicker">World History · Part 1 · Unit 3 Day 2 · Renaissance, Reformation &amp; New Ideas</div>
+<h1>The Devil's Copies? Gutenberg's Press</h1>
+<p class="hook"><span class="dime">1440–1500</span>People saw two books that matched letter for letter and asked: is this the devil's work? Read a real 1940s comic about the printing press, then check what it got wrong. 9 pages · 3 checks · 3 short answers. <b>About 20 minutes.</b></p>
+<p class="goal"><b>Today's goal:</b> Explain how the printing press spread new ideas and changed who could read.</p>
+<details class="std-details"><summary>Iowa standards for today</summary>
+<p><b>Standard SS.9-12.WH.14</b> — Analyze the role of printing and the printing press in the development of new intellectual and belief systems.</p><p><b>Standard SS.9-12.WH.10</b> — Explain how the Renaissance changed European societies from 1450 to 1750.</p>
+</details>
+<nav><a class="back" href="../../">← Class activities</a></nav>
+</div></header>
+
+<nav class="route" aria-label="Your progress"><ol id="flipRoute"></ol></nav>
+
+<main class="gr-main gr-wrap">
+<section class="card">
+<p class="intro-line"><b>You're the fact-checker.</b> For each part: <b>read</b> the comic on the left → get the <b>check</b> right → read the <b>fact file</b> → write 1–2 sentences. Done = all parts green, then turn in at the bottom.</p>
+<details class="wordhelp"><summary>Word help (tap to open)</summary>
+<ul class="words" aria-label="Word help">
+<li><b>Scribe</b> = a person who copies books by hand</li><li><b>Movable type</b> = small letters that can be moved around and used again and again</li><li><b>Mold</b> = a hollow shape you pour hot metal into</li><li><b>Mass production</b> = making lots of the same thing fast</li><li><b>Mainz</b> (MINES) = Gutenberg's city in Germany</li><li><b>1940s comic</b> = made for Catholic schoolkids in the 1940s. It uses some old words and shows one point of view.</li>
+</ul></details>
+<p class="welcome" id="welcome" role="status"></p>
+</section>
+
+<div class="flip-layout">
+<section class="flip-reader reading" id="flipReader" aria-label="Pages from a 1940s Topix comic about the printing press">
+<div class="flip-bar"><div><p class="eyebrow">The reading</p><h2>A real 1940s comic · 9 pages</h2></div><span class="flip-pos" id="flipPos"></span></div>
+<div class="flip-tools"><button type="button" class="quiet" id="flipBack">← Back a page</button><span class="grow"><span id="flipPart"></span><span id="flipTimer" aria-live="polite"></span></span><button type="button" class="secondary" id="flipNext">Next page →</button><button type="button" class="quiet" id="flipZoom">Make page bigger</button></div>
+<div class="flip-stage"><img id="flipImg" alt="" src="pages/p-01.jpg"></div>
+<p class="pg-cap" id="pgCap" aria-live="polite"></p>
+<p class="flip-cap">Click the page to make it bigger.</p>
+</section>
+
+<div class="qcol">
+<section class="card">
+<label for="studentName">First name + last initial (like Jordan M.)</label><input id="studentName" maxlength="100" autocomplete="off" placeholder="First name + last initial (like Jordan M.)" required>
+</section>
+<div id="flipCards"></div>
+<div class="flip-nav"><button type="button" class="quiet" id="flipBack2">← Back</button><button type="button" class="secondary" id="flipNext2">Next page →</button><p class="flip-why" id="flipWhy" aria-live="polite"></p></div>
+<section class="card finish" id="finish">
+<h2>Turn in your work</h2>
+<div class="actions"><button id="submitBtn" class="primary" type="button">Turn in answers</button></div><p id="submitStatus" class="status" role="status" aria-live="polite"></p><p class="reader-note">Your work saves on this device, so you can come back later. Your teacher sees it after you turn it in.</p>
+<p class="credits">Comic: "That All May Read: The Story of Printing," <i>Topix</i> vol. 6 no. 5 (about 1948), Catechetical Guild Educational Society, a comic for Catholic schoolkids. Public domain. Page images from Comic Book Plus (comicbookplus.com). Cropped to today's reading.</p>
+</section>
+<p class="credits" style="text-align:center"><button id="clearBtn" class="quiet" type="button" style="font-size:.8rem">Start over</button></p>
+</div></div></main>
+<div class="flip-big" id="flipBig" hidden role="dialog" aria-label="Bigger page"><button type="button" class="quiet" id="flipBigClose">✕ Close</button><img id="flipBigImg" alt="Bigger view of the current page"></div>
+<script>
+window.FLIP={
+title:"Pages from a 1940s Topix comic about the printing press",prefix:"wh-p1u3d2-print-comic-",pages:9,readSeconds:8,lockSeconds:8,
+alts:["Reader page 1. Title: That All May Read, The Story of Printing. A label says: Catholic inventor. Monks copy books with feather pens. A scroll says: In the 15th century, before printing was discovered, reading was a luxury. Each book had to be copied by hand and cost so much that few people could have one.", "Reader page 2. A box says: Printing with movable type was invented by a young jewel polisher, Johann Gutenberg, who lived in Mainz, Germany. A box says: Gutenberg first tried to carve a whole page of type on one block of wood. Gutenberg says: Just two more words to carve, then the page will be completed. A woman says: Won't it be wonderful? When it's all finished, you can print as many copies as you like!", "Reader page 3. Gutenberg holds small pieces of wood and says: I have cut the letters apart, but I think I can make them print over and over again, just like the block would have done. Watch! He says: Now, Anna, let me have a piece of string and I'll show you. Anna says: Here you are. I don't understand. Will you print one letter at a time?", "Reader page 4. Gutenberg says: I put the letters together and blacken them with smoke. I could put a whole page together this way. He presses the tied letters onto paper. He says: It works! Anna says: How wonderful! My name!", "Reader page 5. A box says: Anna gave Johann an idea and he started to experiment again. He carved molds in the shape of the letters he wanted and then poured hot metal into them. Gutenberg says: I think it will work! A box says: When the metal cooled. Gutenberg says: The mold works perfectly. What would I have done without you, Anna?", "Reader page 6. A box says: Gutenberg cast his type in various metals, finally using a combination of lead, tin, and antimony, which is still used today, five hundred years later! A box says: But there was more to be done. A worker asks: But how can you print with a wine press? Gutenberg says: It's simple. I'll fix a flat board for paper under the big screw here.", "Reader page 7. Gutenberg says: It's better and cheaper than a hand-printed copy, and yet I can't tell anyone about it. Anna says: I know. If the scribes found out about your mass production, they would destroy your press. A box says: Gutenberg dreamed of another project, a printed Bible! He formed a partnership with Johann Fust, a wealthy man. And eight years later, in 1456. Gutenberg says: Finished at last! Now where can we sell our Bible? I can't try here in Strasbourg. Fust looks at the Bible.", "Reader page 8. A churchman says: There you are, Herr Fust. This Bible is truly a masterpiece. Fust says: Thank you, Your Excellency, and may you long enjoy it. A box says: But trouble lay ahead. No one had seen two books exactly alike. A man says: Unbelievable! I show you my new Bible, and you have an identical copy! Another says: Exactly the same in every detail! Could this be the work of the devil?", "Reader page 9. Fust says: So you see, Your Excellency, Gutenberg can print more books this way in one month than ten scribes can in a lifetime! The churchman says: I shall treasure my Bible all the more, knowing its story. You are free to return to Strasbourg, Herr Fust. A box says: The invention of printing could not be kept secret. It spread to other parts of Germany, then Italy, France, and England. The Church brought it to Mexico. From there it spread throughout the New World."],
+assignmentId:"wh-p1u3-d2-printing-comic",api:"https://fynn-class-assignment-submissions-20261024.neotboy.chatgpt.site/api/submit",
+lockedText:"This box opens when you get the check right.",
+clearConfirm:"Start over? This clears your checks and answers on this device.",
+successText:"Turned in! Your teacher got your 3 checks and 3 answers. You are done.",
+wrongText:(c,left)=>left>0?"Not quite. "+c.hint+" Try again in "+left+"…":"Not quite. "+c.hint+" The choices were mixed up. Try again.",
+parts:[
+{
+"short": "By hand",
+"ref": "Reader pages 1–2",
+"title": "1. Copied by hand",
+"from": 1,
+"to": 2,
+"check": {
+"page": 1,
+"tag": "Reading check · Reader page 1",
+"q": "Read the scroll. Before printing, why could so few people own a book?",
+"right": "Each book was copied by hand",
+"wrong": [
+"Books were against the law",
+"Paper had not been invented",
+"Only kings were taught to read"
+],
+"why": "✓ Correct. A scribe could spend months on one book, so books cost a fortune.",
+"hint": "Read the scroll on the left: \"Each book had to be...\""
+},
+"prompt": "Gutenberg first carved a whole page on one block of wood. What was the problem with that? (Hint: look at what happens on the next page.)",
+"stem": "<span class=\"declass\"><b>Fact file</b><span class=\"line\">Before 1450, a <b>scribe</b> could spend months copying one book. Many scribes were monks.</span><span class=\"line\">Most books were in <b>Latin</b>, the language of scholars and the Church. Most ordinary people could not read.</span><span class=\"line\">One mistake could ruin a carved wooden block. A whole page could only print that one page.</span></span>Write 1–2 sentences. Start like this: <i>Carving a whole page was a problem because ___.</i>",
+"stemText": "Carving a whole page was a problem because ___.",
+"placeholder": "Carving a whole page was a problem because ___."
+},
+{
+"short": "Type",
+"ref": "Reader pages 3–6",
+"title": "2. Letters that move",
+"from": 3,
+"to": 6,
+"check": {
+"page": 6,
+"tag": "Reading check · Reader page 6",
+"q": "What machine did Gutenberg turn into his printing press?",
+"right": "A wine press",
+"wrong": [
+"A blacksmith's anvil",
+"A water wheel",
+"A grain mill"
+],
+"why": "✓ Correct. Wine makers used a big screw press to squeeze grapes. Gutenberg used the same squeeze to press paper onto inked type.",
+"hint": "Read the worker's question at the bottom: \"But how can you print with a...\""
+},
+"prompt": "Why was movable type better than carving a whole page on one block?",
+"stem": "<span class=\"declass\"><b>Fact file</b><span class=\"line\"><b>Movable type</b> = one letter per piece. Line them up, print, then take them apart and reuse them for the next page.</span><span class=\"line\"><b>Fact-check:</b> the comic gives Gutenberg a wife named Anna who sparks his ideas. Records show he <b>never married</b>. A woman named Anna once sued him for breaking a promise to marry her. Her big idea is made up.</span><span class=\"line\"><b>Fact-check:</b> the comic calls this an invention from Germany. <b>China</b> had clay movable type in the 1040s, and <b>Korea</b> printed a book with metal type in 1377.</span><span class=\"note\">Old comics make mistakes. Check the facts!</span></span>Write 1–2 sentences. Start like this: <i>Movable type was better because ___.</i>",
+"stemText": "Movable type was better because ___.",
+"placeholder": "Movable type was better because ___."
+},
+{
+"short": "Spread",
+"ref": "Reader pages 7–9",
+"title": "3. Ideas go viral",
+"from": 7,
+"to": 9,
+"check": {
+"page": 8,
+"tag": "Reading check · Reader page 8",
+"q": "Why did people think the Bibles might be the devil's work?",
+"right": "Two copies were exactly alike",
+"wrong": [
+"The pages were written in German",
+"The books glowed in the dark",
+"The Bibles cost almost nothing"
+],
+"why": "✓ Correct. Hand copies always had small differences. Perfect matching copies seemed impossible, until the press.",
+"hint": "Read the box at the top right: \"No one had seen...\""
+},
+"prompt": "How did the printing press help new ideas spread and change society? Give your strongest reason.",
+"stem": "<span class=\"declass\"><b>Fact file</b><span class=\"line\"><b>Fact-check:</b> the comic says 1456. Gutenberg's shop finished about <b>180 Bibles around 1455</b>. The \"devil\" arrest in Paris is an old <b>legend</b>, not proven history.</span><span class=\"line\">What really happened: his money partner, <b>Johann Fust</b>, sued him in 1455 and took over much of the shop. Gutenberg never got rich.</span><span class=\"line\">By 1500, about <b>270 cities</b> had printers, and they had printed over <b>20 million</b> books. Cheaper books meant more readers.</span><span class=\"note\">Old comics make mistakes. Check the facts!</span></span>Write 1–2 sentences. Start like this: <i>The printing press changed society because ___.</i>",
+"stemText": "The printing press changed society because ___.",
+"placeholder": "The printing press changed society because ___."
+}
+],
+questions:["Gutenberg first carved a whole page on one block of wood. What was the problem with that? (Hint: look at what happens on the next page.)", "Why was movable type better than carving a whole page on one block?", "How did the printing press help new ideas spread and change society? Give your strongest reason."],
+validate(s){if(!s.name)return{text:"Type your first name + last initial (like Jordan M.) at the top of the questions.",focus:"studentName"};
+ const mc=[1, 2, 3].find(i=>!s.checkDone(i));if(mc)return{text:"Get the check right for part "+mc+" first.",part:mc};
+ const ma=[1, 2, 3].find(i=>!s.answer(i));if(ma)return{text:"Write your answer for part "+ma+" before turning in.",part:ma,focus:"answer"+ma};
+ for(const i of [1, 2, 3]){const j=window.classJunkStop&&window.classJunkStop(document.getElementById("answer"+i));if(j)return{text:"Part "+i+": "+j,part:i}}return null},
+buildAnswers(s){const a={Standard:"SS.9-12.WH.14, SS.9-12.WH.10","First-try correct":[1, 2, 3].filter(i=>(s.tries(i)||1)===1).length+" of 3"};
+ this.questions.forEach((q,i)=>a[q]=s.answer(i+1));a["Reading checks"]="3 of 3 correct · tries: "+[1, 2, 3].map(i=>s.tries(i)||1).join(", ");return a}
+};
+</script>
+<script src="../../shared/flip-reader.js?v=5urls"></script>
+<script>
+// One-line "what's going on" caption under each page, for kids who missed the lecture.
+(function(){const caps=["<b>Before 1450.</b> Every book is copied by hand.", "<b>Mainz, Germany.</b> First try: carve a whole page.", "<b>A new idea.</b> Cut the letters apart.", "<b>It works!</b> Letters that move.", "<b>Metal letters.</b> Pouring type in molds.", "<b>The press.</b> Borrowed from wine makers.", "<b>About 1455.</b> The Bible project.", "<b>Two books exactly alike.</b> How?", "<b>After 1455.</b> Printing spreads."];
+ const pos=document.getElementById("flipPos"),cap=document.getElementById("pgCap");
+ const sync=()=>{const m=pos.textContent.match(/page (\d+)/);cap.innerHTML=m?caps[+m[1]-1]||"":""};
+ new MutationObserver(sync).observe(pos,{childList:true,characterData:true,subtree:true});sync();})();
+// Choices wait for the read timer, and "Not quite" scrolls into view (same as the other readings).
+(function(){
+  document.addEventListener("click",e=>{const b=e.target.closest("#flipNext2");if(!b||!/Next part|Turn in/.test(b.textContent))return;
+    const a=document.querySelector(".flip-part:not([hidden]) textarea:not([disabled])");if(!a||!a.value.trim()||!window.classJunkStop)return;
+    if(window.classJunkStop(a)){e.stopImmediatePropagation();e.preventDefault()}},true);
+  const t=document.getElementById("flipTimer");
+  const sync=()=>document.body.classList.toggle("reading-now",t.textContent.trim()!=="");
+  new MutationObserver(sync).observe(t,{childList:true,characterData:true,subtree:true});sync();
+  document.getElementById("flipCards").addEventListener("click",e=>{if(!e.target.closest(".choice"))return;
+    setTimeout(()=>{const f=[...document.querySelectorAll(".flip-part:not([hidden]) .fb")].find(x=>x.textContent.trim());
+      if(f){const r=f.getBoundingClientRect();if(r.bottom>innerHeight-80||r.top<0)f.scrollIntoView({behavior:"smooth",block:"center"})}},120)});
+})();
+</script>
+</body></html>
