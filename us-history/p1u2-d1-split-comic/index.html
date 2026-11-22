@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>A House Divided | U.S. History Part 1 · Unit 2 Day 1</title>
+<meta name="description" content="Read a 1953 comic about the road to the Civil War, then fact-check what it says split the country.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../shared/graphic-reading.css?v=3">
+<style>
+.flip-layout{grid-template-columns:minmax(0,1.9fr) minmax(320px,1fr)}
+.flip-stage img{min-height:0;max-height:calc(100vh - 150px)}
+.qcol{padding-bottom:100px}
+.intro-line{font-size:1.02rem;margin:0 0 10px}
+.wordhelp{margin:6px 0 0}.wordhelp summary{cursor:pointer;font-weight:750;color:var(--navy)}
+.words{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0 10px;padding:0;list-style:none}
+.words li{background:#fff;border:1px solid #e6dcc8;border-left:4px solid var(--navy);border-radius:8px;padding:3px 9px;font-size:.88rem}
+.declass{display:block;background:#fff;border:2px dashed #18364a;border-radius:10px;padding:8px 11px;margin:6px 0 8px;font-weight:650;color:#22313b;line-height:1.4;font-style:normal}
+.declass > b:first-child{display:block;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#18364a;margin-bottom:2px}
+.declass .line{display:block;margin:3px 0}
+.declass .note{display:block;margin-top:5px;font-weight:600;font-size:.9rem;color:#5b4632}
+.dime{display:inline-block;background:#e6bd64;color:#0f2433;border-radius:999px;font-weight:850;padding:0 9px;margin-right:4px}
+.credits{font-size:.8rem;color:var(--muted);margin:10px 0 0;line-height:1.4}
+.pg-cap{margin:8px 2px 0;font-size:.95rem;line-height:1.35;background:#fff;border:1px solid #e6dcc8;border-left:4px solid #e6bd64;border-radius:8px;padding:6px 10px}.pg-cap:empty{display:none}
+.gr-head{padding-top:18px;padding-bottom:16px}.gr-head h1{margin:6px 0 6px}.gr-head .hook{margin-bottom:8px}
+body.reading-now .choices{opacity:.45;pointer-events:none}
+</style>
+<script src="../../shared/assignments.js?v=20261116m2"></script><script src="../../shared/turnin.js?v=20261116m2"></script></head><body>
+<header class="gr-head" data-years="1860">
+<div class="gr-wrap">
+<div class="kicker">U.S. History · Part 1 · Unit 2 Day 1 · Civil War &amp; Reconstruction</div>
+<h1>A House Divided</h1>
+<p class="hook"><span class="dime">1850–1860</span>Ten years of fights over slavery, told by a 1953 government comic. Follow the road to war, then check the comic's last line against what Southern leaders said themselves. 4 pages · 4 checks · 4 short answers. <b>About 25 minutes.</b></p>
+<p class="goal"><b>Today's goal:</b> Explain how fights over slavery in the West pulled the North and South apart.</p>
+<details class="std-details"><summary>Iowa standards for today</summary>
+<p><b>Standard SS.9-12.US.4</b> — Evaluate the multiple causes and effects of the Civil War.</p><p><b>Standard SS.9-12.US.6</b> — Analyze diverse ideologies through primary and secondary sources, noting the impact on social, economic, and political institutions during the Civil War and Reconstruction.</p>
+</details>
+<nav><a class="back" href="../../">← Class activities</a></nav>
+</div></header>
+
+<nav class="route" aria-label="Your progress"><ol id="flipRoute"></ol></nav>
+
+<main class="gr-main gr-wrap">
+<section class="card">
+<p class="intro-line"><b>You're the fact-checker.</b> For each part: <b>read</b> the comic on the left → get the <b>check</b> right → read the <b>fact file</b> → write 1–2 sentences. Done = all parts green, then turn in at the bottom.</p>
+<details class="wordhelp"><summary>Word help (tap to open)</summary>
+<ul class="words" aria-label="Word help">
+<li><b>Sectionalism</b> = loyalty to your part of the country over the whole nation</li><li><b>Compromise</b> = a deal where each side gives up something</li><li><b>Fugitive</b> = a person running away</li><li><b>Abolitionist</b> = someone who fought to end slavery right away</li><li><b>Secession</b> = officially leaving the United States</li><li><b>1953 comic</b> = made by the U.S. government to tell America's story in other countries. It shows one point of view.</li>
+</ul></details>
+<p class="welcome" id="welcome" role="status"></p>
+</section>
+
+<div class="flip-layout">
+<section class="flip-reader reading" id="flipReader" aria-label="Pages from the 1953 comic A Picture Story of the United States">
+<div class="flip-bar"><div><p class="eyebrow">The reading</p><h2>A real 1953 comic · 4 pages</h2></div><span class="flip-pos" id="flipPos"></span></div>
+<div class="flip-tools"><button type="button" class="quiet" id="flipBack">← Back a page</button><span class="grow"><span id="flipPart"></span><span id="flipTimer" aria-live="polite"></span></span><button type="button" class="secondary" id="flipNext">Next page →</button><button type="button" class="quiet" id="flipZoom">Make page bigger</button></div>
+<div class="flip-stage"><img id="flipImg" alt="" src="pages/p-01.jpg"></div>
+<p class="pg-cap" id="pgCap" aria-live="polite"></p>
+<p class="flip-cap">Click the page to make it bigger.</p>
+</section>
+
+<div class="qcol">
+<section class="card">
+<label for="studentName">First name + last initial (like Jordan M.)</label><input id="studentName" maxlength="100" autocomplete="off" placeholder="First name + last initial (like Jordan M.)" required>
+</section>
+<div id="flipCards"></div>
+<div class="flip-nav"><button type="button" class="quiet" id="flipBack2">← Back</button><button type="button" class="secondary" id="flipNext2">Next page →</button><p class="flip-why" id="flipWhy" aria-live="polite"></p></div>
+<section class="card finish" id="finish">
+<h2>Turn in your work</h2>
+<div class="actions"><button id="submitBtn" class="primary" type="button">Turn in answers</button></div><p id="submitStatus" class="status" role="status" aria-live="polite"></p><p class="reader-note">Your work saves on this device, so you can come back later. Your teacher sees it after you turn it in.</p>
+<p class="credits">Comic: <i>A Picture Story of the United States</i> (1953), made for the United States Information Service, a U.S. government agency. Public domain. Scan: University of Nebraska–Lincoln Libraries, educational comics collection, via the Internet Archive.</p>
+</section>
+<p class="credits" style="text-align:center"><button id="clearBtn" class="quiet" type="button" style="font-size:.8rem">Start over</button></p>
+</div></div></main>
+<div class="flip-big" id="flipBig" hidden role="dialog" aria-label="Bigger page"><button type="button" class="quiet" id="flipBigClose">✕ Close</button><img id="flipBigImg" alt="Bigger view of the current page"></div>
+<script>
+window.FLIP={
+title:"Pages from the 1953 comic A Picture Story of the United States",prefix:"ush-p1u2d1-split-comic-",pages:4,readSeconds:8,lockSeconds:8,
+alts:["Reader page 1. A box says slavery in a land devoted to freedom could not be ignored for long, and the problem boiled up again when California and other new western states sought to join the Union. Henry Clay says: Let California come in as a free state; in the others, let the people decide. William Lloyd Garrison's Boston newspaper, The Liberator, says: Slavery must go! Unconditionally and immediately.", "Reader page 2. A box says that in 1850 a law forced the return of slaves who fled to Northern states, and its opponents organized an Underground Railroad. At night a man points two escaping men to a distant light: your next stop. A girl says: But Papa is breaking the law! Her mother says: Your father feels, as many do, that there is a higher law.", "Reader page 3. In 1852, a woman reading Uncle Tom's Cabin says: I can't help weeping. In 1857, Dred Scott asked the Supreme Court to declare him free because he had lived in free territory; the Court refused. One man says the decision will open the entire West to slavery. Then Abraham Lincoln says: A house divided against itself cannot stand. This government cannot endure half slave and half free.", "Reader page 4. Lincoln debates Stephen Douglas: we think slavery is a moral, social and political wrong. Lincoln loses, but two years later the new Republican Party nominates him for president. A box says Lincoln was elected to guide a nation which, torn by slavery and states' rights, faced its darkest hour."],
+assignmentId:"ush-p1u2-d1-split-comic",api:"https://fynn-class-assignment-submissions-20261024.neotboy.chatgpt.site/api/submit",
+lockedText:"This box opens when you get the check right.",
+clearConfirm:"Start over? This clears your checks and answers on this device.",
+successText:"Turned in! Your teacher got your 4 checks and 4 answers. You are done.",
+wrongText:(c,left)=>left>0?"Not quite. "+c.hint+" Try again in "+left+"…":"Not quite. "+c.hint+" The choices were mixed up. Try again.",
+parts:[
+{
+"short": "The West",
+"ref": "Reader page 1",
+"title": "1. Why did new states start fights?",
+"from": 1,
+"to": 1,
+"check": {
+"page": 1,
+"tag": "Reading check · Reader page 1",
+"q": "Read the yellow box on the left. When did the slavery problem \"boil up once more\"?",
+"right": "When California and new western states asked to join.",
+"wrong": [
+"When Britain tried to take back the 13 colonies.",
+"When Southern states built their first factories.",
+"When Mexico asked to join the United States."
+],
+"why": "✓ Correct. Every new state would tip the balance of power in the Senate, slave or free.",
+"hint": "Read the last part of the yellow box on the left."
+},
+"prompt": "Why did every new western state start a fight between the North and South?",
+"stem": "<span class=\"declass\"><b>Fact file</b><span class=\"line\"><b>Missouri Compromise (1820):</b> Missouri joined as a slave state and Maine as a free state. A line across the West banned slavery north of it. Iowa was north of the line.</span><span class=\"line\"><b>Compromise of 1850:</b> California joined as a free state. To please the South, Congress passed the Fugitive Slave Act.</span><span class=\"line\"><b>Sectionalism</b> grew: people put their own region ahead of the whole country.</span></span>Write 1–2 sentences. Start like this: <i>Every new state started a fight because ___. For example, ___.</i>",
+"stemText": "Every new state started a fight because ___. For example, ___.",
+"placeholder": "Every new state started a fight because ___. For example, ___."
+},
+{
+"short": "Higher law",
+"ref": "Reader page 2",
+"title": "2. Break an unfair law?",
+"from": 2,
+"to": 2,
+"check": {
+"page": 2,
+"tag": "Reading check · Reader page 2",
+"q": "Read the yellow box. What did the 1850 law force people to do?",
+"right": "Return enslaved people who fled to the North.",
+"wrong": [
+"Pay a tax on every enslaved person.",
+"Move west to help settle California.",
+"Join the army to guard the border."
+],
+"why": "✓ Correct. Under the Fugitive Slave Act, Northerners could be forced to help catch people, and the accused got no jury trial.",
+"hint": "Read the yellow box at the top of reader page 2."
+},
+"prompt": "The girl says her father is breaking the law. Was it right to break the Fugitive Slave Act? Use an Iowa example.",
+"stem": "<span class=\"declass\"><b>Fact file</b><span class=\"line\">Accused people got <b>no jury trial</b>, and Northerners could be forced to help slave catchers. Many Northerners were furious.</span><span class=\"line\">Iowa had Underground Railroad stops, in towns like Tabor and Grinnell. In 1857–58, John Brown's men trained near Springdale, a Quaker town in Cedar County. In 1859, Brown raided a weapons storehouse at Harpers Ferry, Virginia, to start an uprising. He was hanged.</span></span>Write 1–2 sentences. Start like this: <i>Breaking the Fugitive Slave Act was (right / wrong) because ___. In Iowa, ___.</i>",
+"stemText": "Breaking the Fugitive Slave Act was (right / wrong) because ___. In Iowa, ___.",
+"placeholder": "Breaking the Fugitive Slave Act was (right / wrong) because ___. In Iowa, ___."
+},
+{
+"short": "1852–1858",
+"ref": "Reader page 3",
+"title": "3. What pushed hardest?",
+"from": 3,
+"to": 3,
+"check": {
+"page": 3,
+"tag": "Reading check · Reader page 3",
+"q": "Read the box in the middle panel. Why did Dred Scott say he should be free?",
+"right": "He had lived for a time in free territory.",
+"wrong": [
+"He had saved enough money to buy himself.",
+"He had served in the U.S. Army for years.",
+"He had escaped on the Underground Railroad."
+],
+"why": "✓ Correct. The Supreme Court ruled against him 7–2. Read the fact file for what it said.",
+"hint": "Read the box at the top of the middle panel."
+},
+"prompt": "Which pushed the country closer to war: Uncle Tom's Cabin, Bleeding Kansas, or the Dred Scott decision?",
+"stem": "<span class=\"declass\"><b>Fact file</b><span class=\"line\"><b>Uncle Tom's Cabin</b> (1852) showed slavery's cruelty. It sold 300,000 copies in a year.</span><span class=\"line\"><b>Bleeding Kansas</b> (1854–1859): settlers were allowed to vote on slavery. Both sides rushed in with guns, and about 56 people were killed.</span><span class=\"line\"><b>Dred Scott v. Sandford</b> (1857): Chief Justice Roger Taney (TAW-nee) said Black people could not be citizens, and Congress could not ban slavery in the territories.</span></span>Write 1–2 sentences. Start like this: <i>___ pushed the country closest to war because ___.</i>",
+"stemText": "___ pushed the country closest to war because ___.",
+"placeholder": "___ pushed the country closest to war because ___."
+},
+{
+"short": "Why leave?",
+"ref": "Reader page 4",
+"title": "4. Fact-check the last line",
+"from": 4,
+"to": 4,
+"check": {
+"page": 4,
+"tag": "Reading check · Reader page 4",
+"q": "Read the box at the bottom. What does the comic say tore the nation apart?",
+"right": "Slavery and states' rights.",
+"wrong": [
+"Taxes on trade with Europe.",
+"Railroads and new factories.",
+"Immigrants and new religions."
+],
+"why": "✓ Correct. That's the comic's version. Now check what Southern leaders said themselves.",
+"hint": "Read the pink box at the bottom right."
+},
+"prompt": "Lincoln promised only to stop slavery from spreading. Why did Southern states leave anyway? Use Mississippi's own words.",
+"stem": "<span class=\"declass\"><b>Fact file</b><span class=\"line\">Lincoln promised to stop slavery from spreading west, <b>not</b> to end it where it already existed. He won in 1860 without one electoral vote from the South.</span><span class=\"line\">South Carolina left in December 1860. By February 1861, seven states had formed the Confederacy.</span><span class=\"line\">Mississippi's leaders explained why they left: <b>\"Our position is thoroughly identified with the institution of slavery.\"</b> Southern leaders talked about states' rights, but the right they cared about most was the right to keep slavery.</span></span>Write 1–2 sentences. Start like this: <i>Southern states left because ___. Mississippi's leaders said ___.</i>",
+"stemText": "Southern states left because ___. Mississippi's leaders said ___.",
+"placeholder": "Southern states left because ___. Mississippi's leaders said ___."
+}
+],
+questions:["Why did every new western state start a fight between the North and South?", "The girl says her father is breaking the law. Was it right to break the Fugitive Slave Act? Use an Iowa example.", "Which pushed the country closer to war: Uncle Tom's Cabin, Bleeding Kansas, or the Dred Scott decision?", "Lincoln promised only to stop slavery from spreading. Why did Southern states leave anyway? Use Mississippi's own words."],
+validate(s){if(!s.name)return{text:"Type your first name + last initial (like Jordan M.) at the top of the questions.",focus:"studentName"};
+ const mc=[1, 2, 3, 4].find(i=>!s.checkDone(i));if(mc)return{text:"Get the check right for part "+mc+" first.",part:mc};
+ const ma=[1, 2, 3, 4].find(i=>!s.answer(i));if(ma)return{text:"Write your answer for part "+ma+" before turning in.",part:ma,focus:"answer"+ma};
+ for(const i of [1, 2, 3, 4]){const j=window.classJunkStop&&window.classJunkStop(document.getElementById("answer"+i));if(j)return{text:"Part "+i+": "+j,part:i}}return null},
+buildAnswers(s){const a={Standard:"SS.9-12.US.4, SS.9-12.US.6","First-try correct":[1, 2, 3, 4].filter(i=>(s.tries(i)||1)===1).length+" of 4"};
+ this.questions.forEach((q,i)=>a[q]=s.answer(i+1));a["Reading checks"]="4 of 4 correct · tries: "+[1, 2, 3, 4].map(i=>s.tries(i)||1).join(", ");return a}
+};
+</script>
+<script src="../../shared/flip-reader.js?v=5urls"></script>
+<script>
+// One-line "what's going on" caption under each page, for kids who missed the lecture.
+(function(){const caps=["<b>1850.</b> California wants to join as a free state. The old fight over slavery in the West starts again.", "<b>1850s.</b> A new law forces Northerners to help catch people escaping slavery.", "<b>1852–1858.</b> A best-selling book, a Supreme Court case, and a famous Lincoln speech.", "<b>1858–1860.</b> Lincoln runs for the Senate, loses, then wins the presidency."];
+ const pos=document.getElementById("flipPos"),cap=document.getElementById("pgCap");
+ const sync=()=>{const m=pos.textContent.match(/page (\d+)/);cap.innerHTML=m?caps[+m[1]-1]||"":""};
+ new MutationObserver(sync).observe(pos,{childList:true,characterData:true,subtree:true});sync();})();
+// Choices wait for the read timer, and "Not quite" scrolls into view (same as the other readings).
+(function(){
+  document.addEventListener("click",e=>{const b=e.target.closest("#flipNext2");if(!b||!/Next part|Turn in/.test(b.textContent))return;
+    const a=document.querySelector(".flip-part:not([hidden]) textarea:not([disabled])");if(!a||!a.value.trim()||!window.classJunkStop)return;
+    if(window.classJunkStop(a)){e.stopImmediatePropagation();e.preventDefault()}},true);
+  const t=document.getElementById("flipTimer");
+  const sync=()=>document.body.classList.toggle("reading-now",t.textContent.trim()!=="");
+  new MutationObserver(sync).observe(t,{childList:true,characterData:true,subtree:true});sync();
+  document.getElementById("flipCards").addEventListener("click",e=>{if(!e.target.closest(".choice"))return;
+    setTimeout(()=>{const f=[...document.querySelectorAll(".flip-part:not([hidden]) .fb")].find(x=>x.textContent.trim());
+      if(f){const r=f.getBoundingClientRect();if(r.bottom>innerHeight-80||r.top<0)f.scrollIntoView({behavior:"smooth",block:"center"})}},120)});
+})();
+</script>
+</body></html>

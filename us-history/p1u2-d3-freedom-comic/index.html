@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Who Made Freedom? | U.S. History Part 1 · Unit 2 Day 3</title>
+<meta name="description" content="Fact-check how a 1953 comic shows emancipation, using the real story behind the statue it drew.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../shared/graphic-reading.css?v=3">
+<style>
+.flip-layout{grid-template-columns:minmax(0,1.9fr) minmax(320px,1fr)}
+.flip-stage img{min-height:0;max-height:calc(100vh - 150px)}
+.qcol{padding-bottom:100px}
+.intro-line{font-size:1.02rem;margin:0 0 10px}
+.wordhelp{margin:6px 0 0}.wordhelp summary{cursor:pointer;font-weight:750;color:var(--navy)}
+.words{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0 10px;padding:0;list-style:none}
+.words li{background:#fff;border:1px solid #e6dcc8;border-left:4px solid var(--navy);border-radius:8px;padding:3px 9px;font-size:.88rem}
+.declass{display:block;background:#fff;border:2px dashed #18364a;border-radius:10px;padding:8px 11px;margin:6px 0 8px;font-weight:650;color:#22313b;line-height:1.4;font-style:normal}
+.declass > b:first-child{display:block;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#18364a;margin-bottom:2px}
+.declass .line{display:block;margin:3px 0}
+.declass .note{display:block;margin-top:5px;font-weight:600;font-size:.9rem;color:#5b4632}
+.dime{display:inline-block;background:#e6bd64;color:#0f2433;border-radius:999px;font-weight:850;padding:0 9px;margin-right:4px}
+.credits{font-size:.8rem;color:var(--muted);margin:10px 0 0;line-height:1.4}
+.pg-cap{margin:8px 2px 0;font-size:.95rem;line-height:1.35;background:#fff;border:1px solid #e6dcc8;border-left:4px solid #e6bd64;border-radius:8px;padding:6px 10px}.pg-cap:empty{display:none}
+.gr-head{padding-top:18px;padding-bottom:16px}.gr-head h1{margin:6px 0 6px}.gr-head .hook{margin-bottom:8px}
+body.reading-now .choices{opacity:.45;pointer-events:none}
+</style>
+<script src="../../shared/assignments.js?v=20261116m2"></script><script src="../../shared/turnin.js?v=20261116m2"></script></head><body>
+<header class="gr-head" data-years="1863">
+<div class="gr-wrap">
+<div class="kicker">U.S. History · Part 1 · Unit 2 Day 3 · Civil War &amp; Reconstruction</div>
+<h1>Who Made Freedom?</h1>
+<p class="hook"><span class="dime">1863</span>The 1953 comic gives emancipation one page, one scroll, and one statue. Find out who's missing, starting with the real man the statue was modeled on. 3 pages · 3 checks · 3 short answers. <b>About 20 minutes.</b></p>
+<p class="goal"><b>Today's goal:</b> Explain how enslaved people, Black soldiers, and leaders like Lincoln turned the war into a fight to end slavery.</p>
+<details class="std-details"><summary>Iowa standards for today</summary>
+<p><b>Standard SS.9-12.US.5</b> — Analyze the consequences of the Civil War and Reconstruction.</p><p><b>Standard SS.9-12.US.6</b> — Analyze diverse ideologies through primary and secondary sources, noting the impact on social, economic, and political institutions during the Civil War and Reconstruction.</p><p><b>Standard SS.9-12.US.7</b> — Assess the impact of exemplary Americans and Iowans who displayed civic virtues in the Civil War and Reconstruction.</p>
+</details>
+<nav><a class="back" href="../../">← Class activities</a></nav>
+</div></header>
+
+<nav class="route" aria-label="Your progress"><ol id="flipRoute"></ol></nav>
+
+<main class="gr-main gr-wrap">
+<section class="card">
+<p class="intro-line"><b>You're the fact-checker.</b> For each part: <b>read</b> the comic on the left → get the <b>check</b> right → read the <b>fact file</b> → write 1–2 sentences. Done = all parts green, then turn in at the bottom.</p>
+<details class="wordhelp"><summary>Word help (tap to open)</summary>
+<ul class="words" aria-label="Word help">
+<li><b>Emancipation</b> = freeing people from slavery</li><li><b>Proclamation</b> = an official announcement</li><li><b>Contraband</b> = enemy property taken in war</li><li><b>Regiment</b> = a large army unit</li><li><b>1953 comic</b> = made by the U.S. government to tell America's story in other countries. It shows one point of view.</li>
+</ul></details>
+<p class="welcome" id="welcome" role="status"></p>
+</section>
+
+<div class="flip-layout">
+<section class="flip-reader reading" id="flipReader" aria-label="Pages from the 1953 comic A Picture Story of the United States">
+<div class="flip-bar"><div><p class="eyebrow">The reading</p><h2>A real 1953 comic · 3 pages</h2></div><span class="flip-pos" id="flipPos"></span></div>
+<div class="flip-tools"><button type="button" class="quiet" id="flipBack">← Back a page</button><span class="grow"><span id="flipPart"></span><span id="flipTimer" aria-live="polite"></span></span><button type="button" class="secondary" id="flipNext">Next page →</button><button type="button" class="quiet" id="flipZoom">Make page bigger</button></div>
+<div class="flip-stage"><img id="flipImg" alt="" src="pages/p-01.jpg"></div>
+<p class="pg-cap" id="pgCap" aria-live="polite"></p>
+<p class="flip-cap">Click the page to make it bigger.</p>
+</section>
+
+<div class="qcol">
+<section class="card">
+<label for="studentName">First name + last initial (like Jordan M.)</label><input id="studentName" maxlength="100" autocomplete="off" placeholder="First name + last initial (like Jordan M.)" required>
+</section>
+<div id="flipCards"></div>
+<div class="flip-nav"><button type="button" class="quiet" id="flipBack2">← Back</button><button type="button" class="secondary" id="flipNext2">Next page →</button><p class="flip-why" id="flipWhy" aria-live="polite"></p></div>
+<section class="card finish" id="finish">
+<h2>Turn in your work</h2>
+<div class="actions"><button id="submitBtn" class="primary" type="button">Turn in answers</button></div><p id="submitStatus" class="status" role="status" aria-live="polite"></p><p class="reader-note">Your work saves on this device, so you can come back later. Your teacher sees it after you turn it in.</p>
+<p class="credits">Comic: <i>A Picture Story of the United States</i> (1953), made for the United States Information Service, a U.S. government agency. Public domain. Scan: University of Nebraska–Lincoln Libraries, educational comics collection, via the Internet Archive.</p>
+</section>
+<p class="credits" style="text-align:center"><button id="clearBtn" class="quiet" type="button" style="font-size:.8rem">Start over</button></p>
+</div></div></main>
+<div class="flip-big" id="flipBig" hidden role="dialog" aria-label="Bigger page"><button type="button" class="quiet" id="flipBigClose">✕ Close</button><img id="flipBigImg" alt="Bigger view of the current page"></div>
+<script>
+window.FLIP={
+title:"Pages from the 1953 comic A Picture Story of the United States",prefix:"ush-p1u2d3-freedom-comic-",pages:3,readSeconds:8,lockSeconds:8,
+alts:["Reader page 1. A scroll headed On January 1, 1863: Emancipation Proclamation. I do order and declare that all persons held as slaves... are and henceforward shall be free. Signed Abraham Lincoln.", "Reader page 2. A drawing labeled After the statue Emancipation by Thomas Ball. Lincoln stands holding a paper. A Black man kneels at his feet.", "Reader page 3. Lincoln gives the Gettysburg Address to a crowd: These dead shall not have died in vain. This nation shall have a new birth of freedom. Government of the people, by the people, for the people shall not perish from the earth."],
+assignmentId:"ush-p1u2-d3-freedom-comic",api:"https://fynn-class-assignment-submissions-20261024.neotboy.chatgpt.site/api/submit",
+lockedText:"This box opens when you get the check right.",
+clearConfirm:"Start over? This clears your checks and answers on this device.",
+successText:"Turned in! Your teacher got your 3 checks and 3 answers. You are done.",
+wrongText:(c,left)=>left>0?"Not quite. "+c.hint+" Try again in "+left+"…":"Not quite. "+c.hint+" The choices were mixed up. Try again.",
+parts:[
+{
+"short": "The order",
+"ref": "Reader page 1",
+"title": "1. What did it really do?",
+"from": 1,
+"to": 1,
+"check": {
+"page": 1,
+"tag": "Reading check · Reader page 1",
+"q": "Read the scroll. What did Lincoln order on January 1, 1863?",
+"right": "People held as slaves would be free from now on.",
+"wrong": [
+"Every Southern state had to leave the Union.",
+"Black men could vote in every state.",
+"Slave owners would be paid for each person."
+],
+"why": "✓ Correct. That's the Emancipation Proclamation. But it had big limits. Read the fact file.",
+"hint": "Read the words on the scroll."
+},
+"prompt": "The scroll makes it sound like everyone was freed in 1863. What did the Proclamation really do, and not do?",
+"stem": "<span class=\"declass\"><b>Fact file</b><span class=\"line\">It did <b>not</b> free anyone in the four slave states that stayed in the Union: Missouri, Kentucky, Maryland, and Delaware. In the Confederacy, it only worked where the Union army arrived.</span><span class=\"line\">But it changed what the war was about. Every mile the Union army marched now meant freedom. It also let Black men join the Union army and navy.</span><span class=\"line\">Slavery wasn't fully ended until the <b>13th Amendment</b> in 1865.</span></span>Write 1–2 sentences. Start like this: <i>The Proclamation did ___, but it did not ___.</i>",
+"stemText": "The Proclamation did ___, but it did not ___.",
+"placeholder": "The Proclamation did ___, but it did not ___."
+},
+{
+"short": "The statue",
+"ref": "Reader page 2",
+"title": "2. Who's kneeling?",
+"from": 2,
+"to": 2,
+"check": {
+"page": 2,
+"tag": "Reading check · Reader page 2",
+"q": "Look at the statue. How does it show Lincoln and the freed man?",
+"right": "Lincoln stands, and the freed man kneels at his feet.",
+"wrong": [
+"Both men stand side by side as equals.",
+"The freed man stands, and Lincoln kneels.",
+"Both men are kneeling in prayer together."
+],
+"why": "✓ Correct. The statue shows Lincoln as the one who gives freedom. Read who the kneeling man really was.",
+"hint": "Look at who is standing and who is kneeling."
+},
+"prompt": "The statue shows Lincoln freeing a kneeling man. Who else made emancipation happen?",
+"stem": "<span class=\"declass\"><b>Fact file</b><span class=\"line\">The kneeling man was modeled on <b>Archer Alexander</b>. He had escaped slavery after helping the Union Army. Formerly enslaved people paid for the statue, but they had no say in how it looked. Frederick Douglass complained that the man was still \"on his knees.\"</span><span class=\"line\">In 1861, three enslaved men escaped to Fort Monroe, a Union fort. Hundreds of thousands more escaped to Union lines during the war.</span><span class=\"line\">About <b>180,000</b> Black men served in the U.S. Colored Troops. The 1st Iowa Infantry, African Descent formed at Keokuk (KEE-uh-kuk) in 1863. Harriet Tubman helped lead a raid that freed more than 700 people.</span></span>Write 1–2 sentences. Start like this: <i>The statue shows only ___, but ___ also made emancipation happen by ___.</i>",
+"stemText": "The statue shows only ___, but ___ also made emancipation happen by ___.",
+"placeholder": "The statue shows only ___, but ___ also made emancipation happen by ___."
+},
+{
+"short": "New birth",
+"ref": "Reader page 3",
+"title": "3. A new birth of freedom?",
+"from": 3,
+"to": 3,
+"check": {
+"page": 3,
+"tag": "Reading check · Reader page 3",
+"q": "Read Lincoln's speech bubble. What does he say the nation shall have?",
+"right": "A new birth of freedom.",
+"wrong": [
+"A new king for the people.",
+"A new capital in the West.",
+"A new army to rule the South."
+],
+"why": "✓ Correct. Lincoln gave the Gettysburg Address in about two minutes at a new soldiers' cemetery.",
+"hint": "Read the middle of Lincoln's speech bubble."
+},
+"prompt": "Who would gain a \"new birth of freedom\"? Who might still be left out?",
+"stem": "<span class=\"declass\"><b>Fact file</b><span class=\"line\">Black Union soldiers were paid <b>$10</b> a month, minus $3 for clothes. White soldiers got $13. Many refused any pay until it was equal. Congress fixed it in 1864.</span><span class=\"line\">Frederick Douglass pushed Lincoln from the start to make it a war to end slavery. Two of his sons joined the 54th Massachusetts.</span><span class=\"line\">Women of every race still could not vote.</span></span>Write 1–2 sentences. Start like this: <i>A new birth of freedom would help ___. Still left out were ___.</i>",
+"stemText": "A new birth of freedom would help ___. Still left out were ___.",
+"placeholder": "A new birth of freedom would help ___. Still left out were ___."
+}
+],
+questions:["The scroll makes it sound like everyone was freed in 1863. What did the Proclamation really do, and not do?", "The statue shows Lincoln freeing a kneeling man. Who else made emancipation happen?", "Who would gain a \"new birth of freedom\"? Who might still be left out?"],
+validate(s){if(!s.name)return{text:"Type your first name + last initial (like Jordan M.) at the top of the questions.",focus:"studentName"};
+ const mc=[1, 2, 3].find(i=>!s.checkDone(i));if(mc)return{text:"Get the check right for part "+mc+" first.",part:mc};
+ const ma=[1, 2, 3].find(i=>!s.answer(i));if(ma)return{text:"Write your answer for part "+ma+" before turning in.",part:ma,focus:"answer"+ma};
+ for(const i of [1, 2, 3]){const j=window.classJunkStop&&window.classJunkStop(document.getElementById("answer"+i));if(j)return{text:"Part "+i+": "+j,part:i}}return null},
+buildAnswers(s){const a={Standard:"SS.9-12.US.5, SS.9-12.US.6, SS.9-12.US.7","First-try correct":[1, 2, 3].filter(i=>(s.tries(i)||1)===1).length+" of 3"};
+ this.questions.forEach((q,i)=>a[q]=s.answer(i+1));a["Reading checks"]="3 of 3 correct · tries: "+[1, 2, 3].map(i=>s.tries(i)||1).join(", ");return a}
+};
+</script>
+<script src="../../shared/flip-reader.js?v=5urls"></script>
+<script>
+// One-line "what's going on" caption under each page, for kids who missed the lecture.
+(function(){const caps=["<b>January 1, 1863.</b> The comic's whole story of emancipation starts here.", "<b>1876.</b> The comic copies a famous statue of Lincoln.", "<b>November 1863.</b> Lincoln speaks at a new soldiers' cemetery at Gettysburg."];
+ const pos=document.getElementById("flipPos"),cap=document.getElementById("pgCap");
+ const sync=()=>{const m=pos.textContent.match(/page (\d+)/);cap.innerHTML=m?caps[+m[1]-1]||"":""};
+ new MutationObserver(sync).observe(pos,{childList:true,characterData:true,subtree:true});sync();})();
+// Choices wait for the read timer, and "Not quite" scrolls into view (same as the other readings).
+(function(){
+  document.addEventListener("click",e=>{const b=e.target.closest("#flipNext2");if(!b||!/Next part|Turn in/.test(b.textContent))return;
+    const a=document.querySelector(".flip-part:not([hidden]) textarea:not([disabled])");if(!a||!a.value.trim()||!window.classJunkStop)return;
+    if(window.classJunkStop(a)){e.stopImmediatePropagation();e.preventDefault()}},true);
+  const t=document.getElementById("flipTimer");
+  const sync=()=>document.body.classList.toggle("reading-now",t.textContent.trim()!=="");
+  new MutationObserver(sync).observe(t,{childList:true,characterData:true,subtree:true});sync();
+  document.getElementById("flipCards").addEventListener("click",e=>{if(!e.target.closest(".choice"))return;
+    setTimeout(()=>{const f=[...document.querySelectorAll(".flip-part:not([hidden]) .fb")].find(x=>x.textContent.trim());
+      if(f){const r=f.getBoundingClientRect();if(r.bottom>innerHeight-80||r.top<0)f.scrollIntoView({behavior:"smooth",block:"center"})}},120)});
+})();
+</script>
+</body></html>
