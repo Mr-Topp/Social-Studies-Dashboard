@@ -16,6 +16,13 @@
 .declass{display:block;background:#fff;border:2px dashed #18364a;border-radius:10px;padding:8px 11px;margin:6px 0 8px;font-weight:650;color:#22313b;line-height:1.4;font-style:normal}
 .declass > b:first-child{display:block;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#18364a;margin-bottom:2px}
 .declass .line{display:block;margin:3px 0}
+.declass .fix{display:block;margin:6px 0;border:1px solid #c9d3da;border-radius:8px;overflow:hidden}
+.declass .cs,.declass .rl{display:block;padding:5px 9px}
+.declass .cs{background:#fdecea}
+.declass .cs::before{content:"\2717  Comic says: ";font-weight:800;color:#a3271a}
+.declass .rl{background:#e6f4e9}
+.declass .rl::before{content:"\2713  Really: ";font-weight:800;color:#1d6b33}
+.declass .kf{display:block;margin-top:8px;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#18364a}
 .declass .note{display:block;margin-top:5px;font-weight:600;font-size:.9rem;color:#5b4632}
 .dime{display:inline-block;background:#e6bd64;color:#0f2433;border-radius:999px;font-weight:850;padding:0 9px;margin-right:4px}
 .credits{font-size:.8rem;color:var(--muted);margin:10px 0 0;line-height:1.4}
@@ -40,7 +47,7 @@ body.reading-now .choices{opacity:.45;pointer-events:none}
 
 <main class="gr-main gr-wrap">
 <section class="card">
-<p class="intro-line"><b>You're the fact-checker.</b> For each part: <b>read</b> the comic on the left → get the <b>check</b> right → read the <b>fact file</b> → write 1–2 sentences. Done = all parts green, then turn in at the bottom.</p>
+<p class="intro-line"><b>How it works:</b> read the comic pages → answer the question about today's big idea → see what the comic got right and wrong → write 1–2 sentences. Done = all parts green, then turn in at the bottom.</p>
 <details class="wordhelp"><summary>Word help (tap to open)</summary>
 <ul class="words" aria-label="Word help">
 <li><b>Textile</b> = cloth, or anything to do with making cloth</li><li><b>Mill</b> = a factory, here one that spins thread or weaves cloth</li><li><b>Mechanic</b> = a worker who builds and fixes machines</li><li><b>Arkwright machine</b> = a British spinning machine run by water power</li><li><b>Power loom</b> = a machine that weaves cloth</li><li><b>1940s comic</b> = made for American kids in the 1940s. It uses some old words and shows one point of view.</li>
@@ -90,18 +97,18 @@ parts:[
 "check": {
 "page": 2,
 "tag": "Reading check · Reader page 2",
-"q": "Why did Slater have to sneak out of England disguised as a farmhand?",
-"right": "It was illegal for him to leave",
+"q": "Why did Slater have to sneak out of England?",
+"right": "Britain kept its machine experts home",
 "wrong": [
 "He owed the bank a lot of money",
-"He was wanted for stealing cotton",
-"The ships would not take workers"
+"He was wanted for stealing cotton from his boss",
+"Ships would not take workers"
 ],
-"why": "✓ Correct. Britain made it a crime for textile mechanics to leave, to keep its machines secret.",
+"why": "✓ Correct. Britain wanted to keep its factory secrets so no other country could catch up.",
 "hint": "Read the box at the top of the second panel."
 },
 "prompt": "How did America get Britain's machines? Was copying fair, or was Slater a \"traitor\"?",
-"stem": "<span class=\"declass\"><b>Fact file</b><span class=\"line\">Britain banned sending textile machine designs abroad. Slater started in a British mill at about age 10 and <b>memorized</b> every machine.</span><span class=\"line\">In 1793 he opened his mill in <b>Pawtucket, Rhode Island</b>. In Britain, people called him \"Slater the Traitor.\"</span><span class=\"line\"><b>Fact-check:</b> the comic says Slater built a power loom. He really built <b>spinning</b> machines. America's first power looms came in 1814, at Lowell's mill.</span><span class=\"note\">Old comics make mistakes. Check the facts!</span></span>Write 1–2 sentences. Start like this: <i>America got Britain's machines by ___. I think Slater was ___ because ___.</i>",
+"stem": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">Slater built a power loom.</span><span class=\"rl\">He built spinning machines. America's first power looms came in 1814.</span></span><b class=\"kf\">Know this</b><span class=\"line\">Slater memorized Britain's machines and opened America's first big cotton mill in 1793.</span></span>Write 1–2 sentences. Start like this: <i>America got Britain's machines by ___. I think Slater was ___ because ___.</i>",
 "stemText": "America got Britain's machines by ___. I think Slater was ___ because ___.",
 "placeholder": "America got Britain's machines by ___. I think Slater was ___ because ___."
 },
@@ -114,18 +121,18 @@ parts:[
 "check": {
 "page": 6,
 "tag": "Reading check · Reader page 6",
-"q": "What did Lowell's mill do for the first time?",
-"right": "Put every cloth-making step under one roof",
+"q": "What was new about Lowell's mill?",
+"right": "Every cloth-making step in one building",
 "wrong": [
-"Paid its workers twice as much",
-"Made cloth without any machines",
-"Shipped its cloth back to Britain"
+"It paid its workers twice as much as others",
+"It made cloth with no machines",
+"It shipped its cloth to Britain"
 ],
-"why": "✓ Correct. Spinning and weaving in one building made cloth faster and cheaper.",
+"why": "✓ Correct. Putting every step under one roof made cloth faster and cheaper.",
 "hint": "Read Lowell's speech bubble."
 },
 "prompt": "Compare how two countries industrialized. Who led it, private business or the government? Which way worked better?",
-"stem": "<span class=\"declass\"><b>Fact file</b><span class=\"line\"><b>U.S.:</b> private business owners ran the mills. In Lowell, young women worked 5 a.m. to 7 p.m. When pay was cut, they went on <b>strike</b> in 1834 and 1836.</span><span class=\"line\"><b>Germany:</b> industrialized later, mostly after 1850, using technical schools and science. Krupp steel became one of the world's biggest.</span><span class=\"line\"><b>Japan:</b> after 1868, the <b>government</b> led. It hired foreign experts and opened the Tomioka Silk Mill and the first railroad in 1872.</span></span>Write 1–2 sentences. Start like this: <i>___ and ___ industrialized differently because ___.</i>",
+"stem": "<span class=\"declass\"><b>Fact file</b><b class=\"kf\">Know this</b><span class=\"line\"><b>U.S.:</b> private business owners ran the factories. <b>Japan</b> (after 1868): the <b>government</b> built factories and railroads.</span><span class=\"line\">Lowell's young women workers put in about 14 hours a day, and went on strike when pay was cut.</span></span>Write 1–2 sentences. Start like this: <i>___ and ___ industrialized differently because ___.</i>",
 "stemText": "___ and ___ industrialized differently because ___.",
 "placeholder": "___ and ___ industrialized differently because ___."
 }

@@ -16,6 +16,13 @@
 .declass{display:block;background:#fff;border:2px dashed #18364a;border-radius:10px;padding:8px 11px;margin:6px 0 8px;font-weight:650;color:#22313b;line-height:1.4;font-style:normal}
 .declass > b:first-child{display:block;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#18364a;margin-bottom:2px}
 .declass .line{display:block;margin:3px 0}
+.declass .fix{display:block;margin:6px 0;border:1px solid #c9d3da;border-radius:8px;overflow:hidden}
+.declass .cs,.declass .rl{display:block;padding:5px 9px}
+.declass .cs{background:#fdecea}
+.declass .cs::before{content:"\2717  Comic says: ";font-weight:800;color:#a3271a}
+.declass .rl{background:#e6f4e9}
+.declass .rl::before{content:"\2713  Really: ";font-weight:800;color:#1d6b33}
+.declass .kf{display:block;margin-top:8px;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#18364a}
 .declass .note{display:block;margin-top:5px;font-weight:600;font-size:.9rem;color:#5b4632}
 .dime{display:inline-block;background:#e6bd64;color:#0f2433;border-radius:999px;font-weight:850;padding:0 9px;margin-right:4px}
 .credits{font-size:.8rem;color:var(--muted);margin:10px 0 0;line-height:1.4}
@@ -40,7 +47,7 @@ body.reading-now .choices{opacity:.45;pointer-events:none}
 
 <main class="gr-main gr-wrap">
 <section class="card">
-<p class="intro-line"><b>You're the fact-checker.</b> For each part: <b>read</b> the comic on the left → get the <b>check</b> right → read the <b>fact file</b> → write 1–2 sentences. Done = all parts green, then turn in at the bottom.</p>
+<p class="intro-line"><b>How it works:</b> read the comic pages → answer the question about today's big idea → see what the comic got right and wrong → write 1–2 sentences. Done = all parts green, then turn in at the bottom.</p>
 <details class="wordhelp"><summary>Word help (tap to open)</summary>
 <ul class="words" aria-label="Word help">
 <li><b>Scientific Revolution</b> = when people began testing ideas about nature with evidence and experiments</li><li><b>Telescope</b> = a tube with lenses that makes faraway things look close</li><li><b>Inquisition</b> = a Church court that tried people accused of going against Church teaching</li><li><b>Retract</b> = take back something you said</li><li><b>Blasphemy</b> = disrespecting God or holy things</li><li><b>1943 comic</b> = made for American kids in the 1940s. It uses some old words and shows one point of view.</li>
@@ -90,18 +97,18 @@ parts:[
 "check": {
 "page": 2,
 "tag": "Reading check · Reader page 2",
-"q": "What did Galileo show at the Leaning Tower of Pisa, according to the comic?",
-"right": "Heavy and light things fall at the same speed",
+"q": "What did Galileo do instead of just trusting old books?",
+"right": "He tested ideas for himself",
 "wrong": [
-"Heavy things always fall much faster",
-"Towers lean because the ground is soft",
-"Iron floats if you drop it from high up"
+"He asked the pope for answers",
+"He copied what Aristotle said",
+"He waited for a sign from God"
 ],
-"why": "✓ Correct. For about 2,000 years people trusted Aristotle, who said heavier things fall faster. Galileo tested it.",
+"why": "✓ Correct. Testing ideas instead of trusting old books is the start of the scientific method.",
 "hint": "Read the man's speech bubble about the wood and the iron."
 },
 "prompt": "How was Galileo's way of finding the truth different from just trusting old books?",
-"stem": "<span class=\"declass\"><b>Fact file</b><span class=\"line\">For centuries, scholars trusted the Greek thinker <b>Aristotle</b>, who said heavy things fall faster than light ones.</span><span class=\"line\">Galileo tested it. He timed balls rolling down ramps, again and again. That's the start of the <b>scientific method</b>: test it, don't just trust it.</span><span class=\"line\"><b>Fact-check:</b> the tower drop is a famous story, but historians aren't sure it ever happened. Galileo's ramp experiments were real.</span><span class=\"note\">Old comics mix facts and legends. Check the facts!</span></span>Write 1–2 sentences. Start like this: <i>Galileo found truth by ___, not by ___.</i>",
+"stem": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">Galileo dropped balls off the Leaning Tower.</span><span class=\"rl\">Nobody's sure that happened. His ramp tests were real.</span></span><b class=\"kf\">Know this</b><span class=\"line\">For centuries, scholars trusted the Greek thinker Aristotle without testing him.</span></span>Write 1–2 sentences. Start like this: <i>Galileo found truth by ___, not by ___.</i>",
 "stemText": "Galileo found truth by ___, not by ___.",
 "placeholder": "Galileo found truth by ___, not by ___."
 },
@@ -114,18 +121,18 @@ parts:[
 "check": {
 "page": 3,
 "tag": "Reading check · Reader page 3",
-"q": "What did Galileo discover around the planet Jupiter?",
-"right": "Moons circling around it",
+"q": "What did Galileo see that proved not everything circles the Earth?",
+"right": "Moons circling Jupiter",
 "wrong": [
-"Rings made of solid ice",
-"A second, hidden sun",
-"Clouds shaped like angels"
+"Rings around Saturn",
+"A second, hidden sun behind ours",
+"Stars that never move"
 ],
-"why": "✓ Correct. If moons circle Jupiter, then not everything in the sky circles the Earth.",
+"why": "✓ Correct. If moons circle Jupiter, then not everything circles the Earth.",
 "hint": "Read Galileo's speech bubble on the right."
 },
 "prompt": "Why did Jupiter's moons challenge the old idea that everything circles the Earth?",
-"stem": "<span class=\"declass\"><b>Fact file</b><span class=\"line\">The old view put the <b>Earth at the center</b> of everything. Churches and universities taught it.</span><span class=\"line\">In 1543, <b>Copernicus</b> argued that the Earth and planets circle the <b>Sun</b>. Galileo's telescope gave him evidence.</span><span class=\"line\"><b>Fact-check:</b> the comic says Earth might be \"a moon of the sun.\" No! The Earth is a <b>planet</b> that circles the Sun.</span><span class=\"note\">Old comics make mistakes. Check the facts!</span></span>Write 1–2 sentences. Start like this: <i>Jupiter's moons challenged the old idea because ___.</i>",
+"stem": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">Earth might be \"a moon of the sun.\"</span><span class=\"rl\">Earth is a planet that circles the Sun.</span></span><b class=\"kf\">Know this</b><span class=\"line\">In 1543, <b>Copernicus</b> said the planets circle the Sun. Galileo's telescope backed him up.</span></span>Write 1–2 sentences. Start like this: <i>Jupiter's moons challenged the old idea because ___.</i>",
 "stemText": "Jupiter's moons challenged the old idea because ___.",
 "placeholder": "Jupiter's moons challenged the old idea because ___."
 },
@@ -138,18 +145,18 @@ parts:[
 "check": {
 "page": 5,
 "tag": "Reading check · Reader page 5",
-"q": "What did the Inquisition order Galileo to do?",
-"right": "Take back what he had written",
+"q": "What did the Church court force Galileo to do?",
+"right": "Take back his ideas",
 "wrong": [
-"Leave Italy and never return",
-"Build telescopes for the Pope",
-"Teach at the university in Rome"
+"Leave Italy forever",
+"Build telescopes for the pope",
+"Teach in Rome"
 ],
-"why": "✓ Correct. He was ordered to retract, or take back, his claim that the Earth moves around the Sun.",
+"why": "✓ Correct. Old authority pushed back hard. But the new ideas kept spreading.",
 "hint": "Read the judges' speech bubble on the right."
 },
 "prompt": "How did the Scientific Revolution change the way people saw the world and challenge old authority?",
-"stem": "<span class=\"declass\"><b>Fact file</b><span class=\"line\">In <b>1633</b>, a Church court found Galileo guilty. He was forced to take back his ideas and his book was banned.</span><span class=\"line\"><b>Fact-check:</b> he wasn't kept in a dungeon. He spent his last years under <b>house arrest</b> at his home near Florence, and died there in 1642 at age 77. \"But the world still moves\" is probably a legend.</span><span class=\"line\">In 1687, <b>Isaac Newton</b> explained gravity with math, showing why the planets move. In 1992, the Pope said the Church had been wrong about Galileo.</span><span class=\"note\">Old comics mix facts and legends. Check the facts!</span></span>Write 1–2 sentences. Start like this: <i>The Scientific Revolution changed how people saw the world by ___.</i>",
+"stem": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">Galileo was locked in a dungeon.</span><span class=\"rl\">He lived under house arrest at home until he died in 1642.</span></span><b class=\"kf\">Know this</b><span class=\"line\">In 1687, <b>Isaac Newton</b> used math to explain gravity. In 1992, the Church said it had been wrong about Galileo.</span></span>Write 1–2 sentences. Start like this: <i>The Scientific Revolution changed how people saw the world by ___.</i>",
 "stemText": "The Scientific Revolution changed how people saw the world by ___.",
 "placeholder": "The Scientific Revolution changed how people saw the world by ___."
 }

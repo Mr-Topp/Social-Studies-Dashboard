@@ -16,6 +16,13 @@
 .declass{display:block;background:#fff;border:2px dashed #18364a;border-radius:10px;padding:8px 11px;margin:6px 0 8px;font-weight:650;color:#22313b;line-height:1.4;font-style:normal}
 .declass > b:first-child{display:block;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#18364a;margin-bottom:2px}
 .declass .line{display:block;margin:3px 0}
+.declass .fix{display:block;margin:6px 0;border:1px solid #c9d3da;border-radius:8px;overflow:hidden}
+.declass .cs,.declass .rl{display:block;padding:5px 9px}
+.declass .cs{background:#fdecea}
+.declass .cs::before{content:"\2717  Comic says: ";font-weight:800;color:#a3271a}
+.declass .rl{background:#e6f4e9}
+.declass .rl::before{content:"\2713  Really: ";font-weight:800;color:#1d6b33}
+.declass .kf{display:block;margin-top:8px;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#18364a}
 .declass .note{display:block;margin-top:5px;font-weight:600;font-size:.9rem;color:#5b4632}
 .dime{display:inline-block;background:#e6bd64;color:#0f2433;border-radius:999px;font-weight:850;padding:0 9px;margin-right:4px}
 .credits{font-size:.8rem;color:var(--muted);margin:10px 0 0;line-height:1.4}
@@ -40,7 +47,7 @@ body.reading-now .choices{opacity:.45;pointer-events:none}
 
 <main class="gr-main gr-wrap">
 <section class="card">
-<p class="intro-line"><b>You're the fact-checker.</b> For each part: <b>read</b> the comic on the left → get the <b>check</b> right → read the <b>fact file</b> → write 1–2 sentences. Done = all parts green, then turn in at the bottom.</p>
+<p class="intro-line"><b>How it works:</b> read the comic pages → answer the question about today's big idea → see what the comic got right and wrong → write 1–2 sentences. Done = all parts green, then turn in at the bottom.</p>
 <details class="wordhelp"><summary>Word help (tap to open)</summary>
 <ul class="words" aria-label="Word help">
 <li><b>Pamphlet</b> = a short, cheap booklet anyone could read</li><li><b>Tyranny</b> = cruel, unfair rule by someone with too much power</li><li><b>Tories</b> = colonists who stayed loyal to the British king</li><li><b>Treason</b> = betraying your own country or ruler</li><li><b>Directive</b> = a clear instruction about what to do</li><li><b>1945 comic</b> = made for American kids in the 1940s. It uses some old words and shows one point of view.</li>
@@ -88,20 +95,20 @@ parts:[
 "from": 1,
 "to": 3,
 "check": {
-"page": 3,
-"tag": "Reading check · Reader page 3",
-"q": "What did Paine say the confused people in the streets needed?",
-"right": "A clear directive to go by",
+"page": 2,
+"tag": "Reading check · Reader page 2",
+"q": "Why were colonists angry at the king?",
+"right": "Taxes with no vote in Parliament",
 "wrong": [
-"More soldiers from France",
-"A new and better king",
-"Lower taxes on their tea"
+"He banned them from farming",
+"He moved the capital of England to Boston",
+"He freed all their workers"
 ],
-"why": "✓ Correct. People knew what they were against, but not what they were fighting for. Paine decided to tell them.",
-"hint": "Read Paine's speech bubble at the bottom right: \"The people need a...\""
+"why": "✓ Correct. \"No taxation without representation.\" Colonists paid taxes but had no say.",
+"hint": "Read the first speech bubble: \"I say we shouldn't stand for...\""
 },
 "prompt": "Colonists were angry about taxes, but many weren't sure what they were fighting for. Why does a revolution need ideas, not just anger?",
-"stem": "<span class=\"declass\"><b>Fact file</b><span class=\"line\">Britain won the Seven Years' War in 1763, but its <b>debt nearly doubled</b>. Parliament taxed the colonies to help pay.</span><span class=\"line\">Colonists had <b>no members in Parliament</b>. Their slogan: \"No taxation without representation.\"</span><span class=\"line\">Paine arrived in Philadelphia in <b>November 1774</b>, nearly broke, with a letter from Benjamin Franklin. That part of the comic is true.</span></span>Write 1–2 sentences. Start like this: <i>A revolution needs ideas because ___.</i>",
+"stem": "<span class=\"declass\"><b>Fact file</b><b class=\"kf\">Know this</b><span class=\"line\">Britain taxed the colonies to pay off its war debt. Colonists had no one in Parliament.</span></span>Write 1–2 sentences. Start like this: <i>A revolution needs ideas because ___.</i>",
 "stemText": "A revolution needs ideas because ___.",
 "placeholder": "A revolution needs ideas because ___."
 },
@@ -114,18 +121,18 @@ parts:[
 "check": {
 "page": 4,
 "tag": "Reading check · Reader page 4",
-"q": "In Philadelphia, what idea does the man cheer?",
-"right": "All men are created equal",
+"q": "What big idea did <i>Common Sense</i> spread?",
+"right": "People should govern themselves",
 "wrong": [
-"The king always knows best",
+"Kings always know what's best for people",
 "Taxes keep the colonies safe",
 "Only rich men should vote"
 ],
-"why": "✓ Correct. That idea about equal rights came from Enlightenment thinkers like John Locke. Jefferson put it in the Declaration.",
-"hint": "Read the speech bubble that starts \"In Philadelphia...\""
+"why": "✓ Correct. That's a new idea about rights. It turned anger about taxes into a fight for independence.",
+"hint": "Read the New York speech bubble: \"Freedom to...\""
 },
 "prompt": "What caused the American Revolution more: taxes without a voice, or new ideas about rights? Explain.",
-"stem": "<span class=\"declass\"><b>Fact file</b><span class=\"line\"><i>Common Sense</i> came out in <b>January 1776</b>. It told colonists it was time to break from the king. About <b>25 editions</b> came out that first year.</span><span class=\"line\">Six months later, on <b>July 4, 1776</b>, Congress approved the Declaration of Independence. The comic says <i>Common Sense</i> \"fathered\" it. It pushed people toward it, but <b>Thomas Jefferson</b> wrote it.</span><span class=\"line\"><i>The Crisis</i> (\"These are the times that try men's souls\") came out in December 1776. Washington had it <b>read to his troops</b> before they crossed the Delaware.</span><span class=\"note\">Old comics stretch the truth. Check the facts!</span></span>Write 1–2 sentences. Start like this: <i>The bigger cause was ___ because ___.</i>",
+"stem": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\"><i>Common Sense</i> \"fathered\" the Declaration.</span><span class=\"rl\">It pushed people toward independence. Thomas Jefferson wrote the Declaration.</span></span><b class=\"kf\">Know this</b><span class=\"line\"><i>Common Sense</i> came out in January 1776. About <b>25 editions</b> came out that year.</span></span>Write 1–2 sentences. Start like this: <i>The bigger cause was ___ because ___.</i>",
 "stemText": "The bigger cause was ___ because ___.",
 "placeholder": "The bigger cause was ___ because ___."
 },
@@ -138,18 +145,18 @@ parts:[
 "check": {
 "page": 7,
 "tag": "Reading check · Reader page 7",
-"q": "What did the king of England want to do to Paine after <i>Rights of Man</i>?",
-"right": "Hang him for treason",
+"q": "Why did England's king want Paine hanged?",
+"right": "His writing stirred English people to revolt",
 "wrong": [
-"Make him a lord",
-"Pay him to stop writing",
-"Send him back to America as governor"
+"He stole money from the king",
+"He fought for France in a war against the English army",
+"He refused to pay his taxes"
 ],
-"why": "✓ Correct. Paine's writing told the English people they had the same rights as Americans. To the king, that was treason.",
-"hint": "Read the king's speech bubble on the right."
+"why": "✓ Correct. Ideas about rights crossed the ocean. Kings saw them as a threat.",
+"hint": "Read the advisor's speech bubble on the right."
 },
 "prompt": "Paine's ideas crossed the Atlantic. How did writing help spread revolution from America to Europe?",
-"stem": "<span class=\"declass\"><b>Fact file</b><span class=\"line\"><i>Rights of Man</i> (1791) said people can overthrow a government that doesn't protect their rights. England charged Paine with a crime, and he fled to France in 1792.</span><span class=\"line\"><b>Fact-check:</b> the comic says William Blake helped him escape. That story was told years later, and historians <b>doubt</b> it.</span><span class=\"line\"><b>Fact-check:</b> the comic says <i>The Age of Reason</i> got him arrested. A bigger reason: he <b>argued against executing King Louis XVI</b>, which angered the Jacobins. He was freed in 1794, after Robespierre fell.</span><span class=\"note\">Old comics make mistakes. Check the facts!</span></span>Write 1–2 sentences. Start like this: <i>Writing helped spread revolution because ___.</i>",
+"stem": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">Paine was jailed in France for <i>The Age of Reason</i>.</span><span class=\"rl\">A bigger reason: he argued against executing France's king.</span></span><b class=\"kf\">Know this</b><span class=\"line\">Revolution ideas traveled across the Atlantic: America → England → France.</span></span>Write 1–2 sentences. Start like this: <i>Writing helped spread revolution because ___.</i>",
 "stemText": "Writing helped spread revolution because ___.",
 "placeholder": "Writing helped spread revolution because ___."
 }

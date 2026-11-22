@@ -16,6 +16,13 @@
 .declass{display:block;background:#fff;border:2px dashed #18364a;border-radius:10px;padding:8px 11px;margin:6px 0 8px;font-weight:650;color:#22313b;line-height:1.4;font-style:normal}
 .declass > b:first-child{display:block;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#18364a;margin-bottom:2px}
 .declass .line{display:block;margin:3px 0}
+.declass .fix{display:block;margin:6px 0;border:1px solid #c9d3da;border-radius:8px;overflow:hidden}
+.declass .cs,.declass .rl{display:block;padding:5px 9px}
+.declass .cs{background:#fdecea}
+.declass .cs::before{content:"\2717  Comic says: ";font-weight:800;color:#a3271a}
+.declass .rl{background:#e6f4e9}
+.declass .rl::before{content:"\2713  Really: ";font-weight:800;color:#1d6b33}
+.declass .kf{display:block;margin-top:8px;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#18364a}
 .declass .note{display:block;margin-top:5px;font-weight:600;font-size:.9rem;color:#5b4632}
 .dime{display:inline-block;background:#e6bd64;color:#0f2433;border-radius:999px;font-weight:850;padding:0 9px;margin-right:4px}
 .credits{font-size:.8rem;color:var(--muted);margin:10px 0 0;line-height:1.4}
@@ -40,7 +47,7 @@ body.reading-now .choices{opacity:.45;pointer-events:none}
 
 <main class="gr-main gr-wrap">
 <section class="card">
-<p class="intro-line"><b>You're the fact-checker.</b> For each part: <b>read</b> the comic on the left → get the <b>check</b> right → read the <b>fact file</b> → write 1–2 sentences. Done = all parts green, then turn in at the bottom.</p>
+<p class="intro-line"><b>How it works:</b> read the comic pages → answer the question about today's big idea → see what the comic got right and wrong → write 1–2 sentences. Done = all parts green, then turn in at the bottom.</p>
 <details class="wordhelp"><summary>Word help (tap to open)</summary>
 <ul class="words" aria-label="Word help">
 <li><b>Scribe</b> = a person who copies books by hand</li><li><b>Movable type</b> = small letters that can be moved around and used again and again</li><li><b>Mold</b> = a hollow shape you pour hot metal into</li><li><b>Mass production</b> = making lots of the same thing fast</li><li><b>Mainz</b> (MINES) = Gutenberg's city in Germany</li><li><b>1940s comic</b> = made for Catholic schoolkids in the 1940s. It uses some old words and shows one point of view.</li>
@@ -90,18 +97,18 @@ parts:[
 "check": {
 "page": 1,
 "tag": "Reading check · Reader page 1",
-"q": "Read the scroll. Before printing, why could so few people own a book?",
-"right": "Each book was copied by hand",
+"q": "Why were books so rare before printing?",
+"right": "Each one was copied by hand",
 "wrong": [
 "Books were against the law",
 "Paper had not been invented",
 "Only kings were taught to read"
 ],
 "why": "✓ Correct. A scribe could spend months on one book, so books cost a fortune.",
-"hint": "Read the scroll on the left: \"Each book had to be...\""
+"hint": "Read the scroll: \"Each book had to be...\""
 },
 "prompt": "Gutenberg first carved a whole page on one block of wood. What was the problem with that? (Hint: look at what happens on the next page.)",
-"stem": "<span class=\"declass\"><b>Fact file</b><span class=\"line\">Before 1450, a <b>scribe</b> could spend months copying one book. Many scribes were monks.</span><span class=\"line\">Most books were in <b>Latin</b>, the language of scholars and the Church. Most ordinary people could not read.</span><span class=\"line\">One mistake could ruin a carved wooden block. A whole page could only print that one page.</span></span>Write 1–2 sentences. Start like this: <i>Carving a whole page was a problem because ___.</i>",
+"stem": "<span class=\"declass\"><b>Fact file</b><b class=\"kf\">Know this</b><span class=\"line\">Most books were in <b>Latin</b>, and most ordinary people could not read.</span></span>Write 1–2 sentences. Start like this: <i>Carving a whole page was a problem because ___.</i>",
 "stemText": "Carving a whole page was a problem because ___.",
 "placeholder": "Carving a whole page was a problem because ___."
 },
@@ -112,20 +119,20 @@ parts:[
 "from": 3,
 "to": 6,
 "check": {
-"page": 6,
-"tag": "Reading check · Reader page 6",
-"q": "What machine did Gutenberg turn into his printing press?",
-"right": "A wine press",
+"page": 3,
+"tag": "Reading check · Reader page 3",
+"q": "What was Gutenberg's big idea?",
+"right": "Letters that can be moved and reused",
 "wrong": [
-"A blacksmith's anvil",
-"A water wheel",
-"A grain mill"
+"Carving each whole page into one wood block",
+"Paper made from cotton rags",
+"Ink that never smudges"
 ],
-"why": "✓ Correct. Wine makers used a big screw press to squeeze grapes. Gutenberg used the same squeeze to press paper onto inked type.",
-"hint": "Read the worker's question at the bottom: \"But how can you print with a...\""
+"why": "✓ Correct. That's movable type. Line up the letters, print, then reuse them for the next page.",
+"hint": "Read Gutenberg's speech bubble: \"I have cut the letters apart...\""
 },
 "prompt": "Why was movable type better than carving a whole page on one block?",
-"stem": "<span class=\"declass\"><b>Fact file</b><span class=\"line\"><b>Movable type</b> = one letter per piece. Line them up, print, then take them apart and reuse them for the next page.</span><span class=\"line\"><b>Fact-check:</b> the comic gives Gutenberg a wife named Anna who sparks his ideas. Records show he <b>never married</b>. A woman named Anna once sued him for breaking a promise to marry her. Her big idea is made up.</span><span class=\"line\"><b>Fact-check:</b> the comic calls this an invention from Germany. <b>China</b> had clay movable type in the 1040s, and <b>Korea</b> printed a book with metal type in 1377.</span><span class=\"note\">Old comics make mistakes. Check the facts!</span></span>Write 1–2 sentences. Start like this: <i>Movable type was better because ___.</i>",
+"stem": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">Gutenberg's wife Anna gave him his ideas.</span><span class=\"rl\">He never married. Anna is mostly made up.</span></span><span class=\"fix\"><span class=\"cs\">Printing was a German invention.</span><span class=\"rl\">China (1040s) and Korea (1377) had movable type first.</span></span><b class=\"kf\">Know this</b><span class=\"line\">Gutenberg's press was working around <b>1450</b> in Mainz, Germany.</span></span>Write 1–2 sentences. Start like this: <i>Movable type was better because ___.</i>",
 "stemText": "Movable type was better because ___.",
 "placeholder": "Movable type was better because ___."
 },
@@ -136,20 +143,20 @@ parts:[
 "from": 7,
 "to": 9,
 "check": {
-"page": 8,
-"tag": "Reading check · Reader page 8",
-"q": "Why did people think the Bibles might be the devil's work?",
-"right": "Two copies were exactly alike",
+"page": 9,
+"tag": "Reading check · Reader page 9",
+"q": "What happened to printing after Gutenberg?",
+"right": "It spread across Europe and beyond",
 "wrong": [
-"The pages were written in German",
-"The books glowed in the dark",
-"The Bibles cost almost nothing"
+"It stayed secret for 200 years",
+"The Church banned it everywhere in Europe",
+"Only Germany ever used it"
 ],
-"why": "✓ Correct. Hand copies always had small differences. Perfect matching copies seemed impossible, until the press.",
-"hint": "Read the box at the top right: \"No one had seen...\""
+"why": "✓ Correct. Print shops popped up everywhere. Ideas could now reach thousands of people fast.",
+"hint": "Read the pink box at the bottom right."
 },
 "prompt": "How did the printing press help new ideas spread and change society? Give your strongest reason.",
-"stem": "<span class=\"declass\"><b>Fact file</b><span class=\"line\"><b>Fact-check:</b> the comic says 1456. Gutenberg's shop finished about <b>180 Bibles around 1455</b>. The \"devil\" arrest in Paris is an old <b>legend</b>, not proven history.</span><span class=\"line\">What really happened: his money partner, <b>Johann Fust</b>, sued him in 1455 and took over much of the shop. Gutenberg never got rich.</span><span class=\"line\">By 1500, about <b>270 cities</b> had printers, and they had printed over <b>20 million</b> books. Cheaper books meant more readers.</span><span class=\"note\">Old comics make mistakes. Check the facts!</span></span>Write 1–2 sentences. Start like this: <i>The printing press changed society because ___.</i>",
+"stem": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">People said the matching Bibles were the devil's work.</span><span class=\"rl\">That's a legend. About 180 Bibles were printed around 1455.</span></span><b class=\"kf\">Know this</b><span class=\"line\">By 1500, printers had made over <b>20 million</b> books. Cheaper books meant more readers.</span></span>Write 1–2 sentences. Start like this: <i>The printing press changed society because ___.</i>",
 "stemText": "The printing press changed society because ___.",
 "placeholder": "The printing press changed society because ___."
 }

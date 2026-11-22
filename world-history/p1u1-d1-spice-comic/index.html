@@ -16,6 +16,13 @@
 .declass{display:block;background:#fff;border:2px dashed #18364a;border-radius:10px;padding:8px 11px;margin:6px 0 8px;font-weight:650;color:#22313b;line-height:1.4;font-style:normal}
 .declass > b:first-child{display:block;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#18364a;margin-bottom:2px}
 .declass .line{display:block;margin:3px 0}
+.declass .fix{display:block;margin:6px 0;border:1px solid #c9d3da;border-radius:8px;overflow:hidden}
+.declass .cs,.declass .rl{display:block;padding:5px 9px}
+.declass .cs{background:#fdecea}
+.declass .cs::before{content:"\2717  Comic says: ";font-weight:800;color:#a3271a}
+.declass .rl{background:#e6f4e9}
+.declass .rl::before{content:"\2713  Really: ";font-weight:800;color:#1d6b33}
+.declass .kf{display:block;margin-top:8px;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#18364a}
 .declass .note{display:block;margin-top:5px;font-weight:600;font-size:.9rem;color:#5b4632}
 .dime{display:inline-block;background:#e6bd64;color:#0f2433;border-radius:999px;font-weight:850;padding:0 9px;margin-right:4px}
 .credits{font-size:.8rem;color:var(--muted);margin:10px 0 0;line-height:1.4}
@@ -40,7 +47,7 @@ body.reading-now .choices{opacity:.45;pointer-events:none}
 
 <main class="gr-main gr-wrap">
 <section class="card">
-<p class="intro-line"><b>You're the fact-checker.</b> For each part: <b>read</b> the comic on the left → get the <b>check</b> right → read the <b>fact file</b> → write 1–2 sentences. Done = all parts green, then turn in at the bottom.</p>
+<p class="intro-line"><b>How it works:</b> read the comic pages → answer the question about today's big idea → see what the comic got right and wrong → write 1–2 sentences. Done = all parts green, then turn in at the bottom.</p>
 <details class="wordhelp"><summary>Word help (tap to open)</summary>
 <ul class="words" aria-label="Word help">
 <li><b>Middlemen</b> = traders who buy goods and resell them for more</li><li><b>Pilot</b> = a sailor who guides ships through waters he knows</li><li><b>Armada</b> = a fleet of ships</li><li><b>Calicut</b> (KAL-ih-kut) = a rich pepper port in southwest India</li><li><b>Mohammedan</b> = an old, outdated word the comic uses for Muslims</li><li><b>1940s comic</b> = made for American kids in the 1940s. It uses some old words and shows one point of view.</li>
@@ -90,18 +97,18 @@ parts:[
 "check": {
 "page": 1,
 "tag": "Reading check · Reader page 1",
-"q": "Read the top box. What were Marco Polo's father and uncle looking for in Asia?",
-"right": "Silks and precious stones",
+"q": "Why did merchants like the Polos travel all the way to Asia?",
+"right": "To get rich trading silk and jewels",
 "wrong": [
-"Friars to bring to the Pope",
-"A sea road around Africa",
-"New farmland for Venice"
+"To find new land to farm",
+"To teach Christianity to people in China",
+"To map a sea road to India"
 ],
-"why": "✓ Correct. They were merchants. They went east to buy silk and jewels and sell them for a big profit back home.",
-"hint": "Read the yellow box at the top left: \"seeking the...\""
+"why": "✓ Correct. Asia had the riches Europe wanted. Merchants bought silk and jewels there and sold them for big profits.",
+"hint": "Read the top yellow box (\"seeking the silks...\") and the brothers' speech bubbles about profits."
 },
 "prompt": "Marco Polo's book told Europeans about Asia's huge riches. Why would stories like that make Europeans want to reach Asia themselves?",
-"stem": "<span class=\"declass\"><b>Fact file</b><span class=\"line\">The Polos traveled the <b>Silk Roads</b>. <b>Fact-check:</b> the comic says 1255. The brothers really left around <b>1260</b>. Marco joined their second trip in <b>1271</b>, at age 17.</span><span class=\"line\">Marco told his stories to a writer in prison, Rustichello (the comic's \"Rustician\"), about <b>1298</b>. The book was a hit. <b>Columbus owned a copy</b> and wrote notes in it.</span><span class=\"line\">Every silk or spice that reached Europe passed through many <b>middlemen</b>. Each one raised the price.</span><span class=\"note\">Old comics make mistakes. Check the facts!</span></span>Write 1–2 sentences. Start like this: <i>Stories of Asia's riches made Europeans want to reach Asia because ___.</i>",
+"stem": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">The Polo brothers left for Asia in 1255.</span><span class=\"rl\">They left around 1260. Marco joined them in 1271, at age 17.</span></span><b class=\"kf\">Know this</b><span class=\"line\">Silk and spices passed through many <b>middlemen</b> on the way to Europe. Each one raised the price.</span><span class=\"line\">Marco Polo's book made Europeans dream of Asia's riches. Columbus owned a copy.</span></span>Write 1–2 sentences. Start like this: <i>Stories of Asia's riches made Europeans want to reach Asia because ___.</i>",
 "stemText": "Stories of Asia's riches made Europeans want to reach Asia because ___.",
 "placeholder": "Stories of Asia's riches made Europeans want to reach Asia because ___."
 },
@@ -114,18 +121,18 @@ parts:[
 "check": {
 "page": 4,
 "tag": "Reading check · Reader page 4",
-"q": "What news did Dias bring home in 1488?",
-"right": "There is a sea road around Africa",
+"q": "What did Dias's trip in 1488 prove?",
+"right": "Ships could sail around Africa to India",
 "wrong": [
-"He reached India by the Red Sea",
-"He found a gold mine in Africa",
-"He sailed west and reached China"
+"Ships could sail west to reach China",
+"India could be reached by way of the Red Sea",
+"Africa was too big to sail around"
 ],
-"why": "✓ Correct. Dias sailed around Africa's southern tip, the Cape of Good Hope. That opened a sea road to India.",
-"hint": "Read Diaz's big speech bubble: \"Tremendous!...\""
+"why": "✓ Correct. Dias rounded the southern tip of Africa. Now Portugal knew there was a sea road to India.",
+"hint": "Read Diaz's big speech bubble: \"There is a way around...\""
 },
 "prompt": "Why would Portugal pay for a long, dangerous voyage around Africa? Use the word middlemen.",
-"stem": "<span class=\"declass\"><b>Fact file</b><span class=\"line\">Dias rounded the <b>Cape of Good Hope</b> in 1488. His tired crew made him turn back before India.</span><span class=\"line\"><b>Fact-check:</b> the comic says July 9, 1497. Da Gama really left Lisbon on <b>July 8, 1497</b>, with 4 ships and about 170 men.</span><span class=\"line\">He swung far out into the Atlantic and sailed about <b>3 months without seeing land</b>, longer than Columbus did in 1492.</span><span class=\"note\">Old comics make mistakes. Check the facts!</span></span>Write 1–2 sentences. Start like this: <i>Portugal paid for the voyage because ___.</i>",
+"stem": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">Da Gama sailed on July 9, 1497.</span><span class=\"rl\">He sailed on July 8, 1497, with 4 ships and about 170 men.</span></span><b class=\"kf\">Know this</b><span class=\"line\">Portugal wanted its <b>own</b> sea route so it could skip the middlemen and buy spices cheap.</span><span class=\"line\">Only about 55 of da Gama's men made it home.</span></span>Write 1–2 sentences. Start like this: <i>Portugal paid for the voyage because ___.</i>",
 "stemText": "Portugal paid for the voyage because ___.",
 "placeholder": "Portugal paid for the voyage because ___."
 },
@@ -138,18 +145,18 @@ parts:[
 "check": {
 "page": 6,
 "tag": "Reading check · Reader page 6",
-"q": "Who guided da Gama's ships across the ocean to India?",
-"right": "A pilot from Gujarat, India",
+"q": "How did da Gama find his way across the Indian Ocean?",
+"right": "A local pilot showed him the way",
 "wrong": [
-"Bartolomeu Dias",
-"A map from Marco Polo's book",
-"A Chinese admiral"
+"He used Marco Polo's old map",
+"Dias had sailed there before him",
+"Storm winds blew him to India"
 ],
-"why": "✓ Correct. Indian Ocean sailors had crossed these waters for centuries. Da Gama needed one of them to show him the way.",
-"hint": "Read the speech bubble on the right: \"There is an Indian from...\""
+"why": "✓ Correct. Indian Ocean sailors had crossed these waters for centuries. Da Gama needed one of them.",
+"hint": "Read the speech bubbles at Malindi: \"We seek a pilot...\""
 },
 "prompt": "The comic calls the Portuguese \"peaceful merchants.\" How would people in Calicut tell this story differently? Use one fact.",
-"stem": "<span class=\"declass\"><b>Fact file</b><span class=\"line\"><b>Fact-check:</b> the comic says \"four and one half months.\" With the <b>monsoon</b> winds behind them and the Gujarati pilot, the crossing from Malindi took only about <b>23 days</b>. They reached Calicut in May 1498.</span><span class=\"line\">Calicut's ruler, the <b>Zamorin</b>, was not impressed by da Gama's gifts: cloth, hats, and honey. Indian Ocean traders had far finer goods.</span><span class=\"line\"><b>Fact-check:</b> the comic calls the Portuguese peaceful. On his 1502 trip, da Gama <b>fired cannons on Calicut</b> and burned a ship of Muslim pilgrims coming home from Mecca. Hundreds died.</span><span class=\"note\">Old comics make mistakes. Check the facts!</span></span>Write 1–2 sentences. Start like this: <i>People in Calicut might tell it differently because ___.</i>",
+"stem": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">It took 4½ months to cross to India.</span><span class=\"rl\">With the monsoon winds and the pilot, it took about 23 days.</span></span><span class=\"fix\"><span class=\"cs\">The Portuguese were \"peaceful merchants.\"</span><span class=\"rl\">In 1502, da Gama fired cannons on Calicut and burned a ship full of pilgrims.</span></span><b class=\"kf\">Know this</b><span class=\"line\">Indian Ocean trade was busy long before Portugal showed up. Portugal was the newcomer.</span></span>Write 1–2 sentences. Start like this: <i>People in Calicut might tell it differently because ___.</i>",
 "stemText": "People in Calicut might tell it differently because ___.",
 "placeholder": "People in Calicut might tell it differently because ___."
 }

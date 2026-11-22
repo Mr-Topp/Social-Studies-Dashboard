@@ -16,6 +16,13 @@
 .declass{display:block;background:#fff;border:2px dashed #18364a;border-radius:10px;padding:8px 11px;margin:6px 0 8px;font-weight:650;color:#22313b;line-height:1.4;font-style:normal}
 .declass > b:first-child{display:block;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#18364a;margin-bottom:2px}
 .declass .line{display:block;margin:3px 0}
+.declass .fix{display:block;margin:6px 0;border:1px solid #c9d3da;border-radius:8px;overflow:hidden}
+.declass .cs,.declass .rl{display:block;padding:5px 9px}
+.declass .cs{background:#fdecea}
+.declass .cs::before{content:"\2717  Comic says: ";font-weight:800;color:#a3271a}
+.declass .rl{background:#e6f4e9}
+.declass .rl::before{content:"\2713  Really: ";font-weight:800;color:#1d6b33}
+.declass .kf{display:block;margin-top:8px;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#18364a}
 .declass .note{display:block;margin-top:5px;font-weight:600;font-size:.9rem;color:#5b4632}
 .dime{display:inline-block;background:#e6bd64;color:#0f2433;border-radius:999px;font-weight:850;padding:0 9px;margin-right:4px}
 .credits{font-size:.8rem;color:var(--muted);margin:10px 0 0;line-height:1.4}
@@ -40,7 +47,7 @@ body.reading-now .choices{opacity:.45;pointer-events:none}
 
 <main class="gr-main gr-wrap">
 <section class="card">
-<p class="intro-line"><b>You're the fact-checker.</b> For each part: <b>read</b> the comic on the left → get the <b>check</b> right → read the <b>fact file</b> → write 1–2 sentences. Done = all parts green, then turn in at the bottom.</p>
+<p class="intro-line"><b>How it works:</b> read the comic pages → answer the question about today's big idea → see what the comic got right and wrong → write 1–2 sentences. Done = all parts green, then turn in at the bottom.</p>
 <details class="wordhelp"><summary>Word help (tap to open)</summary>
 <ul class="words" aria-label="Word help">
 <li><b>Renaissance</b> = "rebirth," a burst of new art and ideas in Europe</li><li><b>Patron</b> = a rich person or group that pays an artist</li><li><b>Medici</b> (MED-ih-chee) = the richest banking family in Florence, Italy</li><li><b>Humanism</b> = celebrating human talent and life in this world</li><li><b>Sculptor</b> = an artist who carves statues</li><li><b>1942 comic</b> = made for American kids in the 1940s. It uses some old words and shows one point of view.</li>
@@ -90,18 +97,18 @@ parts:[
 "check": {
 "page": 2,
 "tag": "Reading check · Reader page 2",
-"q": "Who took Michelangelo into his home and paid for his training?",
-"right": "The head of the Medici family",
+"q": "How did the rich Medici family help Michelangelo?",
+"right": "They paid for him to train as an artist",
 "wrong": [
-"His father, a stonecutter",
-"The pope in Rome",
-"His art teacher in Florence"
+"They taught him how to run the family bank",
+"They sent him off to fight a war",
+"They trained him to be a priest"
 ],
-"why": "✓ Correct. Lorenzo de' Medici was a patron. He paid for artists so Florence would look great, and so would his family.",
-"hint": "Read the box at the top right: \"The head of the house of...\""
+"why": "✓ Correct. The Medici were patrons. Rich patrons paid artists, and that helped the Renaissance grow in Italy.",
+"hint": "Read Lorenzo's speech bubble: \"I wish to see that your son's talent...\""
 },
 "prompt": "Why did Renaissance artists need rich patrons like the Medici?",
-"stem": "<span class=\"declass\"><b>Fact file</b><span class=\"line\">Florence got rich making wool cloth and running banks. In 1397 the <b>Medici</b> opened a bank that became the biggest in Europe.</span><span class=\"line\">A <b>patron</b> pays an artist to make work. Patrons got beautiful art, and the art showed off their money and power.</span><span class=\"line\">Michelangelo really did live in Lorenzo de' Medici's home as a teenager, starting around age 15.</span></span>Write 1–2 sentences. Start like this: <i>Artists needed patrons because ___.</i>",
+"stem": "<span class=\"declass\"><b>Fact file</b><b class=\"kf\">Know this</b><span class=\"line\">A <b>patron</b> is a rich person who pays artists. The Medici got rich from banking.</span><span class=\"line\">Rich patrons are a big reason the Renaissance started in Italian cities.</span></span>Write 1–2 sentences. Start like this: <i>Artists needed patrons because ___.</i>",
 "stemText": "Artists needed patrons because ___.",
 "placeholder": "Artists needed patrons because ___."
 },
@@ -112,20 +119,20 @@ parts:[
 "from": 3,
 "to": 5,
 "check": {
-"page": 3,
-"tag": "Reading check · Reader page 3",
-"q": "What did Michelangelo do so everyone would know the statue was his?",
-"right": "He carved his name on it",
+"page": 5,
+"tag": "Reading check · Reader page 5",
+"q": "What famous statue did Michelangelo carve from the giant block of marble?",
+"right": "David",
 "wrong": [
-"He painted it bright gold",
-"He sold it to the Pope",
-"He hid it in his garden"
+"Moses",
+"The Thinker",
+"Venus"
 ],
-"why": "✓ Correct. The Pietà is the only statue he ever signed.",
-"hint": "Read his speech bubble on the right."
+"why": "✓ Correct. David shows a strong, real-looking human body. That's humanism: celebrating people and their talents.",
+"hint": "Read the box about the White Giant."
 },
 "prompt": "How do the Pietà and David show humanism, the idea that people and their talents are amazing?",
-"stem": "<span class=\"declass\"><b>Fact file</b><span class=\"line\">Michelangelo finished the <b>Pietà</b> in 1499, when he was about 24. It's the only work he ever signed.</span><span class=\"line\"><b>David</b> (1501–1504) is about 17 feet tall. The comic says artists had hacked at the marble for 100 years. It was really about <b>40 years</b>.</span><span class=\"line\">Renaissance artists studied real bodies so their art would look like <b>real life</b>. Medieval art was flatter and focused on heaven.</span><span class=\"note\">Old comics make mistakes. Check the facts!</span></span>Write 1–2 sentences. Start like this: <i>These statues show humanism because ___.</i>",
+"stem": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">Artists hacked at the marble for 100 years.</span><span class=\"rl\">It was about 40 years.</span></span><b class=\"kf\">Know this</b><span class=\"line\"><b>Humanism</b> = celebrating people and what they can do. Renaissance art looked like real life.</span></span>Write 1–2 sentences. Start like this: <i>These statues show humanism because ___.</i>",
 "stemText": "These statues show humanism because ___.",
 "placeholder": "These statues show humanism because ___."
 },
@@ -138,18 +145,18 @@ parts:[
 "check": {
 "page": 7,
 "tag": "Reading check · Reader page 7",
-"q": "What did the Pope want Michelangelo to paint?",
-"right": "The Sistine Chapel ceiling",
+"q": "Who ordered Michelangelo to paint the Sistine Chapel ceiling?",
+"right": "The pope",
 "wrong": [
-"A portrait of the Pope",
-"The front of his palace",
-"A map of the whole world"
+"The Medici family",
+"The king of France",
+"The city of Florence"
 ],
-"why": "✓ Correct. Pope Julius II was a patron too. He paid for the ceiling from 1508 to 1512.",
+"why": "✓ Correct. The Church was a huge patron too. Faith and humanism went together.",
 "hint": "Read Michelangelo's speech bubble on the left."
 },
 "prompt": "How did the Renaissance change the way Europeans saw people and art? Which change mattered most?",
-"stem": "<span class=\"declass\"><b>Fact file</b><span class=\"line\"><b>Myth busted:</b> the comic says he lay flat on his back. He really <b>stood</b> on a tall scaffold he designed, bending his head back for four years. He even wrote a poem complaining about his sore neck.</span><span class=\"line\">The ceiling shows stories from the Bible, like <b>The Creation of Adam</b>, with strong, real-looking human bodies.</span><span class=\"line\">Popes and the Church were patrons too. Faith and humanism went together for most Renaissance artists.</span><span class=\"note\">Old comics make mistakes. Check the facts!</span></span>Write 1–2 sentences. Start like this: <i>The Renaissance changed how Europeans saw people because ___.</i>",
+"stem": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">He painted lying flat on his back.</span><span class=\"rl\">He stood on a tall scaffold and bent his head back for 4 years.</span></span><b class=\"kf\">Know this</b><span class=\"line\">The ceiling shows Bible stories with powerful, real-looking people.</span></span>Write 1–2 sentences. Start like this: <i>The Renaissance changed how Europeans saw people because ___.</i>",
 "stemText": "The Renaissance changed how Europeans saw people because ___.",
 "placeholder": "The Renaissance changed how Europeans saw people because ___."
 }

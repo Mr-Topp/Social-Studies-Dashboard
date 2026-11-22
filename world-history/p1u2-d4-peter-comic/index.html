@@ -16,6 +16,13 @@
 .declass{display:block;background:#fff;border:2px dashed #18364a;border-radius:10px;padding:8px 11px;margin:6px 0 8px;font-weight:650;color:#22313b;line-height:1.4;font-style:normal}
 .declass > b:first-child{display:block;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#18364a;margin-bottom:2px}
 .declass .line{display:block;margin:3px 0}
+.declass .fix{display:block;margin:6px 0;border:1px solid #c9d3da;border-radius:8px;overflow:hidden}
+.declass .cs,.declass .rl{display:block;padding:5px 9px}
+.declass .cs{background:#fdecea}
+.declass .cs::before{content:"\2717  Comic says: ";font-weight:800;color:#a3271a}
+.declass .rl{background:#e6f4e9}
+.declass .rl::before{content:"\2713  Really: ";font-weight:800;color:#1d6b33}
+.declass .kf{display:block;margin-top:8px;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#18364a}
 .declass .note{display:block;margin-top:5px;font-weight:600;font-size:.9rem;color:#5b4632}
 .dime{display:inline-block;background:#e6bd64;color:#0f2433;border-radius:999px;font-weight:850;padding:0 9px;margin-right:4px}
 .credits{font-size:.8rem;color:var(--muted);margin:10px 0 0;line-height:1.4}
@@ -40,7 +47,7 @@ body.reading-now .choices{opacity:.45;pointer-events:none}
 
 <main class="gr-main gr-wrap">
 <section class="card">
-<p class="intro-line"><b>You're the fact-checker.</b> For each part: <b>read</b> the comic on the left → get the <b>check</b> right → read the <b>fact file</b> → write 1–2 sentences. Done = all parts green, then turn in at the bottom.</p>
+<p class="intro-line"><b>How it works:</b> read the comic pages → answer the question about today's big idea → see what the comic got right and wrong → write 1–2 sentences. Done = all parts green, then turn in at the bottom.</p>
 <details class="wordhelp"><summary>Word help (tap to open)</summary>
 <ul class="words" aria-label="Word help">
 <li><b>Absolutism</b> = one ruler holds all the power, and no one can say no</li><li><b>Czar</b> (ZAR) = the title of Russia's ruler</li><li><b>Westernize</b> = copy the ways of Western Europe</li><li><b>Ukase</b> (yoo-KAZE) = an order from the czar that everyone must obey</li><li><b>Nobles</b> = rich families with titles and land</li><li><b>1942 comic</b> = made for American kids in the 1940s. It uses some old words and shows one point of view.</li>
@@ -88,20 +95,20 @@ parts:[
 "from": 1,
 "to": 3,
 "check": {
-"page": 2,
-"tag": "Reading check · Reader page 2",
-"q": "What did Peter do to the nobles' beards?",
-"right": "He cut them off",
+"page": 1,
+"tag": "Reading check · Reader page 1",
+"q": "Why did Peter want Russians to look and act like Western Europeans?",
+"right": "To make Russia strong like Western Europe",
 "wrong": [
-"He ordered them grown longer",
-"He made them wear fake ones",
-"He let only soldiers keep them"
+"To punish all the nobles who had lost a war",
+"To follow an old Russian law",
+"Because the Church ordered it"
 ],
-"why": "✓ Correct. Long beards were part of old Russian style. Peter wanted Russians to look like Western Europeans.",
-"hint": "Look at what Peter is holding, and read the nobles' speech bubbles."
+"why": "✓ Correct. Peter thought Russia had to copy Western Europe to become a great power.",
+"hint": "Read Peter's speech bubble: \"We'll find no allies in Europe until...\""
 },
 "prompt": "Why did Peter care so much about beards and clothes? What does it show about absolute power?",
-"stem": "<span class=\"declass\"><b>Fact file</b><span class=\"line\">In 1697–1698, Peter toured Western Europe in disguise and even worked in a <b>Dutch shipyard</b>. He came home set on <b>westernizing</b> Russia.</span><span class=\"line\"><b>Fact-check:</b> the comic says April 26, 1698. Peter really cut the beards on <b>August 26, 1698</b>, the day after he got home. Later, men who kept beards had to pay a <b>beard tax</b>.</span><span class=\"line\">In 1703 Peter founded <b>St. Petersburg</b>, built by forced labor. Thousands of workers died building it.</span><span class=\"note\">Old comics make mistakes. Check the facts!</span></span>Write 1–2 sentences. Start like this: <i>Peter cared about beards because ___. It shows absolute power because ___.</i>",
+"stem": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">Peter cut the beards on April 26, 1698.</span><span class=\"rl\">It was August 26, 1698, the day after he got home.</span></span><b class=\"kf\">Know this</b><span class=\"line\">An <b>absolute ruler</b> has total power. Nobody could tell Peter no.</span><span class=\"line\">Men who kept their beards had to pay a <b>beard tax</b>.</span></span>Write 1–2 sentences. Start like this: <i>Peter cared about beards because ___. It shows absolute power because ___.</i>",
 "stemText": "Peter cared about beards because ___. It shows absolute power because ___.",
 "placeholder": "Peter cared about beards because ___. It shows absolute power because ___."
 },
@@ -114,18 +121,18 @@ parts:[
 "check": {
 "page": 4,
 "tag": "Reading check · Reader page 4",
-"q": "What new title did Peter take when the war ended?",
-"right": "First emperor of all Russia",
+"q": "What did Russia get from its long war with Sweden?",
+"right": "New land and the title of empire",
 "wrong": [
-"King of Sweden and Denmark",
-"Leader of the Russian church",
-"President of the nobles"
+"Nothing, because Sweden won",
+"A new king from Sweden",
+"A vote for all ordinary Russian people"
 ],
-"why": "✓ Correct. Winning the Baltic lands made Russia an empire, and Peter its first emperor, in 1721.",
-"hint": "Read the yellow box at the top right."
+"why": "✓ Correct. Russia won land on the Baltic Sea, and Peter became emperor.",
+"hint": "Read the speech bubbles at the table at the top."
 },
 "prompt": "Was absolute rule good or bad for ordinary people? Use Louis XIV, Peter, or Catherine as your example.",
-"stem": "<span class=\"declass\"><b>Fact file</b><span class=\"line\"><b>Louis XIV</b> of France, the \"Sun King,\" ruled 72 years. He kept nobles busy at his palace at <b>Versailles</b> so they couldn't rebel. His wars left France deep in debt.</span><span class=\"line\">Many kings claimed <b>divine right</b>: God chose the king, so disobeying the king meant disobeying God.</span><span class=\"line\"><b>Catherine the Great</b> made Russia bigger, but life got harder for <b>serfs</b>, peasants who could be sold with the land.</span></span>Write 1–2 sentences. Start like this: <i>Absolute rule was mostly ___ for ordinary people because ___.</i>",
+"stem": "<span class=\"declass\"><b>Fact file</b><b class=\"kf\">Know this</b><span class=\"line\"><b>Louis XIV</b> of France ruled for 72 years. His palace at Versailles and his wars left France deep in debt.</span><span class=\"line\">In Russia, <b>serfs</b> (peasants tied to the land) got no say, and their lives got harder.</span></span>Write 1–2 sentences. Start like this: <i>Absolute rule was mostly ___ for ordinary people because ___.</i>",
 "stemText": "Absolute rule was mostly ___ for ordinary people because ___.",
 "placeholder": "Absolute rule was mostly ___ for ordinary people because ___."
 }

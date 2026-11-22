@@ -16,6 +16,13 @@
 .declass{display:block;background:#fff;border:2px dashed #18364a;border-radius:10px;padding:8px 11px;margin:6px 0 8px;font-weight:650;color:#22313b;line-height:1.4;font-style:normal}
 .declass > b:first-child{display:block;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#18364a;margin-bottom:2px}
 .declass .line{display:block;margin:3px 0}
+.declass .fix{display:block;margin:6px 0;border:1px solid #c9d3da;border-radius:8px;overflow:hidden}
+.declass .cs,.declass .rl{display:block;padding:5px 9px}
+.declass .cs{background:#fdecea}
+.declass .cs::before{content:"\2717  Comic says: ";font-weight:800;color:#a3271a}
+.declass .rl{background:#e6f4e9}
+.declass .rl::before{content:"\2713  Really: ";font-weight:800;color:#1d6b33}
+.declass .kf{display:block;margin-top:8px;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#18364a}
 .declass .note{display:block;margin-top:5px;font-weight:600;font-size:.9rem;color:#5b4632}
 .dime{display:inline-block;background:#e6bd64;color:#0f2433;border-radius:999px;font-weight:850;padding:0 9px;margin-right:4px}
 .credits{font-size:.8rem;color:var(--muted);margin:10px 0 0;line-height:1.4}
@@ -40,7 +47,7 @@ body.reading-now .choices{opacity:.45;pointer-events:none}
 
 <main class="gr-main gr-wrap">
 <section class="card">
-<p class="intro-line"><b>You're the fact-checker.</b> For each part: <b>read</b> the comic on the left → get the <b>check</b> right → read the <b>fact file</b> → write 1–2 sentences. Done = all parts green, then turn in at the bottom.</p>
+<p class="intro-line"><b>How it works:</b> read the comic pages → answer the question about today's big idea → see what the comic got right and wrong → write 1–2 sentences. Done = all parts green, then turn in at the bottom.</p>
 <details class="wordhelp"><summary>Word help (tap to open)</summary>
 <ul class="words" aria-label="Word help">
 <li><b>Conquistador</b> = a Spanish soldier who conquered land in the Americas</li><li><b>Ransom</b> = a payment to free a prisoner</li><li><b>Civil war</b> = a war between groups inside one country</li><li><b>Viceroy</b> = a ruler sent by the king to govern a colony</li><li><b>Indians</b> = an old word the comic uses for Native people</li><li><b>1943 comic</b> = made for American kids in the 1940s. It uses some old words and shows one point of view.</li>
@@ -90,18 +97,18 @@ parts:[
 "check": {
 "page": 1,
 "tag": "Reading check · Reader page 1",
-"q": "Read the rider's speech bubble. What had weakened the Inca Empire before Pizarro arrived?",
-"right": "A civil war between two brothers",
+"q": "What helped Pizarro's small army beat the huge Inca Empire?",
+"right": "The Inca were split by a civil war",
 "wrong": [
-"An earthquake that ruined cities",
-"A long war with the Aztec",
-"A famine after years of drought"
+"The Inca had no army or weapons at all",
+"Spain sent 10,000 more soldiers",
+"The Inca king asked Spain to rule"
 ],
-"why": "✓ Correct. Two sons of the dead emperor fought for the throne. The winner, Atahualpa, was worn down when Pizarro came.",
-"hint": "Read the speech bubble that starts \"Good news, Pizarro!\""
+"why": "✓ Correct. Two Inca brothers had been fighting for the throne. The empire was weak and divided when Pizarro came.",
+"hint": "Read the rider's speech bubble: \"Good news, Pizarro!\""
 },
 "prompt": "How did the Inca civil war help Pizarro's tiny army win?",
-"stem": "<span class=\"declass\"><b>Fact file</b><span class=\"line\">Before the Spanish even arrived, a disease, probably smallpox, killed the Inca emperor. Then two of his sons fought a <b>civil war</b> for the throne.</span><span class=\"line\">Pizarro also had <b>steel</b> swords and armor, <b>horses</b>, and guns. The Inca had never seen any of them.</span><span class=\"line\">In Mexico, Hernán Cortés won with tens of thousands of <b>Native allies</b>, like the Tlaxcalans, who hated Aztec rule.</span></span>Write 1–2 sentences. Start like this: <i>The civil war helped Pizarro because ___.</i>",
+"stem": "<span class=\"declass\"><b>Fact file</b><b class=\"kf\">Know this</b><span class=\"line\"><b>Disease</b> (probably smallpox) killed the Inca emperor before Pizarro arrived. Then his sons fought over the throne.</span><span class=\"line\">The Spanish had <b>steel, horses, and guns</b>. The Inca had never seen them.</span></span>Write 1–2 sentences. Start like this: <i>The civil war helped Pizarro because ___.</i>",
 "stemText": "The civil war helped Pizarro because ___.",
 "placeholder": "The civil war helped Pizarro because ___."
 },
@@ -114,18 +121,18 @@ parts:[
 "check": {
 "page": 2,
 "tag": "Reading check · Reader page 2",
-"q": "What did Atahualpa offer so the Spanish would set him free?",
-"right": "A room filled high with gold",
+"q": "What did the conquistadors want most from the Inca?",
+"right": "Gold and silver",
 "wrong": [
-"His crown and his whole army",
-"Half of all the Inca land",
-"A ship loaded with llamas"
+"Land to grow wheat",
+"Spices for Europe",
+"Allies against Portugal"
 ],
-"why": "✓ Correct. He filled a room with gold, then rooms with silver. The Spanish killed him anyway.",
-"hint": "Read the soldier's speech bubble on the left."
+"why": "✓ Correct. The Spanish came for treasure. They took a room full of gold and still killed Atahualpa.",
+"hint": "Read the soldier's speech bubble about the ransom."
 },
 "prompt": "The Spanish took the ransom and killed Atahualpa anyway. What does that tell you about why the conquistadors came?",
-"stem": "<span class=\"declass\"><b>Fact file</b><span class=\"line\">The comic says Pizarro had <b>183 men</b>. Most historians count about <b>168</b> at the capture in November 1532. Close, but not exact.</span><span class=\"line\">The comic says Atahualpa was killed on August 29, 1533. Most historians now say <b>July 26, 1533</b>.</span><span class=\"line\">The comic says Lima was founded in 1532. It was really <b>January 18, 1535</b>.</span><span class=\"note\">Old comics make mistakes. Check the facts!</span></span>Write 1–2 sentences. Start like this: <i>The conquistadors came mostly for ___. I know because ___.</i>",
+"stem": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">Pizarro had 183 men.</span><span class=\"rl\">Most historians count about 168.</span></span><span class=\"fix\"><span class=\"cs\">Lima was founded in 1532.</span><span class=\"rl\">It was founded in 1535.</span></span><b class=\"kf\">Know this</b><span class=\"line\">Atahualpa filled a room with gold to buy his freedom. The Spanish killed him anyway.</span></span>Write 1–2 sentences. Start like this: <i>The conquistadors came mostly for ___. I know because ___.</i>",
 "stemText": "The conquistadors came mostly for ___. I know because ___.",
 "placeholder": "The conquistadors came mostly for ___. I know because ___."
 },
@@ -138,18 +145,18 @@ parts:[
 "check": {
 "page": 4,
 "tag": "Reading check · Reader page 4",
-"q": "Read the top box. Who did the work to build Lima?",
+"q": "Who did the hard work of building Spain's new city of Lima?",
 "right": "Native people forced to work",
 "wrong": [
 "Spanish soldiers and sailors",
-"Paid workers brought from Spain",
-"The defeated Inca army only"
+"Paid workers from Spain",
+"Enslaved people from Asia"
 ],
-"why": "✓ Correct. Spain forced Native people to build its new cities and dig its mines.",
+"why": "✓ Correct. Spain forced Native people to build its cities and dig its mines.",
 "hint": "Read the box at the top of the page: \"with the labor of...\""
 },
 "prompt": "Which mattered most in Spain's conquests: allies, disease, or weapons? Explain with one example.",
-"stem": "<span class=\"declass\"><b>Fact file</b><span class=\"line\">In 1545 the Spanish found a mountain of silver at <b>Potosí</b>. Under the <b>mita</b>, Native villages had to send about 1 in 7 men each year to the mines. Many died.</span><span class=\"line\">That silver crossed the Pacific to China. It helped create the <b>first global trade</b>.</span><span class=\"line\">In 1780, <b>Túpac Amaru II</b>, an Inca descendant, led one of the biggest revolts in Spain's empire. He was executed in 1781.</span></span>Write 1–2 sentences. Start like this: <i>I think ___ mattered most because ___.</i>",
+"stem": "<span class=\"declass\"><b>Fact file</b><b class=\"kf\">Know this</b><span class=\"line\">At the <b>Potosí</b> silver mine, Native villages had to send workers every year (the <b>mita</b>). Many died.</span><span class=\"line\">In 1780, <b>Túpac Amaru II</b> led a huge revolt against Spain. He lost and was executed.</span></span>Write 1–2 sentences. Start like this: <i>I think ___ mattered most because ___.</i>",
 "stemText": "I think ___ mattered most because ___.",
 "placeholder": "I think ___ mattered most because ___."
 }

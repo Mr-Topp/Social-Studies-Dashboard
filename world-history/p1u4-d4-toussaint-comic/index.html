@@ -16,6 +16,13 @@
 .declass{display:block;background:#fff;border:2px dashed #18364a;border-radius:10px;padding:8px 11px;margin:6px 0 8px;font-weight:650;color:#22313b;line-height:1.4;font-style:normal}
 .declass > b:first-child{display:block;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#18364a;margin-bottom:2px}
 .declass .line{display:block;margin:3px 0}
+.declass .fix{display:block;margin:6px 0;border:1px solid #c9d3da;border-radius:8px;overflow:hidden}
+.declass .cs,.declass .rl{display:block;padding:5px 9px}
+.declass .cs{background:#fdecea}
+.declass .cs::before{content:"\2717  Comic says: ";font-weight:800;color:#a3271a}
+.declass .rl{background:#e6f4e9}
+.declass .rl::before{content:"\2713  Really: ";font-weight:800;color:#1d6b33}
+.declass .kf{display:block;margin-top:8px;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#18364a}
 .declass .note{display:block;margin-top:5px;font-weight:600;font-size:.9rem;color:#5b4632}
 .dime{display:inline-block;background:#e6bd64;color:#0f2433;border-radius:999px;font-weight:850;padding:0 9px;margin-right:4px}
 .credits{font-size:.8rem;color:var(--muted);margin:10px 0 0;line-height:1.4}
@@ -40,7 +47,7 @@ body.reading-now .choices{opacity:.45;pointer-events:none}
 
 <main class="gr-main gr-wrap">
 <section class="card">
-<p class="intro-line"><b>You're the fact-checker.</b> For each part: <b>read</b> the comic on the left → get the <b>check</b> right → read the <b>fact file</b> → write 1–2 sentences. Done = all parts green, then turn in at the bottom.</p>
+<p class="intro-line"><b>How it works:</b> read the comic pages → answer the question about today's big idea → see what the comic got right and wrong → write 1–2 sentences. Done = all parts green, then turn in at the bottom.</p>
 <details class="wordhelp"><summary>Word help (tap to open)</summary>
 <ul class="words" aria-label="Word help">
 <li><b>Saint-Domingue</b> (san doh-MANG) = France's name for Haiti before 1804</li><li><b>Colony</b> = land ruled by a faraway country</li><li><b>Republic</b> = a country with no king, run by leaders the people choose</li><li><b>Louverture</b> (loo-ver-TOOR) = "the opening" in French</li><li><b>Negro</b> = an old word for Black people the comic uses. We don't use it today.</li><li><b>1942 comic</b> = made for American kids in the 1940s. It uses some old words and shows one point of view.</li>
@@ -90,18 +97,18 @@ parts:[
 "check": {
 "page": 3,
 "tag": "Reading check · Reader page 3",
-"q": "What news from France gave enslaved people in Haiti hope?",
-"right": "All men are born free and equal",
+"q": "Why did enslaved people in Haiti rise up in 1791?",
+"right": "France said all are free but kept them enslaved",
 "wrong": [
-"France was selling Haiti to Spain",
-"The king had freed all sailors",
-"Sugar prices were going up"
+"France doubled the tax on all the sugar they grew",
+"Spain's army invaded the whole island",
+"The French king ordered them to fight"
 ],
-"why": "✓ Correct. The French Revolution said everyone is born free and equal. Enslaved people asked: then why not us?",
-"hint": "Read the speech bubble at the top left of the page."
+"why": "✓ Correct. Enslaved people used France's own words, \"free and equal,\" against France.",
+"hint": "Read the speech bubble at the top left: \"The new government in France says...\""
 },
 "prompt": "France said all men are born free, but held about 500,000 people in slavery in Saint-Domingue. How did enslaved people use France's own words against it?",
-"stem": "<span class=\"declass\"><b>Fact file</b><span class=\"line\">Saint-Domingue was France's <b>richest colony</b>. It grew close to 40% of Europe's sugar. About <b>500,000</b> enslaved Africans did the work.</span><span class=\"line\"><b>Fact-check:</b> the comic says the masters refused \"the new law giving freedom to all.\" In 1791 there was <b>no such law</b>. Enslaved people rose up first, in <b>August 1791</b>. France only ended slavery in <b>1794</b>, after the revolt forced it.</span><span class=\"line\"><b>Fact-check:</b> Toussaint was born enslaved around 1743, but he was <b>already free by the 1770s</b>, long before the revolt.</span><span class=\"note\">Old comics make mistakes. Check the facts!</span></span>Write 1–2 sentences. Start like this: <i>Enslaved people used France's words by ___.</i>",
+"stem": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">France passed a law freeing everyone.</span><span class=\"rl\">No law yet. Enslaved people fought first (1791). France ended slavery later (1794).</span></span><b class=\"kf\">Know this</b><span class=\"line\">Haiti (then called Saint-Domingue) was France's richest colony, worked by about <b>500,000</b> enslaved people.</span></span>Write 1–2 sentences. Start like this: <i>Enslaved people used France's words by ___.</i>",
 "stemText": "Enslaved people used France's words by ___.",
 "placeholder": "Enslaved people used France's words by ___."
 },
@@ -112,20 +119,20 @@ parts:[
 "from": 4,
 "to": 6,
 "check": {
-"page": 5,
-"tag": "Reading check · Reader page 5",
-"q": "According to the comic, what did Toussaint say Haiti must be?",
-"right": "A republic with a constitution",
+"page": 6,
+"tag": "Reading check · Reader page 6",
+"q": "After slavery ended, what changed for workers?",
+"right": "They got paid for their work",
 "wrong": [
-"A kingdom with him as king",
-"A colony ruled by Spain",
-"Part of the United States"
+"They all moved to France",
+"They could vote for a new king",
+"They stopped growing sugar and coffee"
 ],
-"why": "✓ Correct. That's what the comic says. Now read the fact file to see what his real constitution did.",
-"hint": "Read Toussaint's speech bubble on the right: \"Haiti must be a...\""
+"why": "✓ Correct. Getting paid was a big change. But freedom was not complete. Read below.",
+"hint": "Read the workers' speech bubble: \"At last we...\""
 },
 "prompt": "After slavery ended, who gained freedom, and who still wasn't fully free? Use one fact.",
-"stem": "<span class=\"declass\"><b>Fact file</b><span class=\"line\">\"Louverture\" means <b>\"the opening.\"</b> He became the top general of the revolt and then ran the colony.</span><span class=\"line\"><b>Fact-check:</b> his real <b>1801 constitution</b> banned slavery forever. But it made him <b>governor for life</b>, and the colony stayed part of France. It was not a republic.</span><span class=\"line\"><b>Fact-check:</b> the comic shows workers cheering \"At last we get paid!\" Workers got a share of the crop, but Toussaint's rules <b>forced them to stay on plantations</b>. Many hated it.</span><span class=\"note\">Old comics make mistakes. Check the facts!</span></span>Write 1–2 sentences. Start like this: <i>___ gained freedom, but ___ wasn't fully free because ___.</i>",
+"stem": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">Workers were happy and free.</span><span class=\"rl\">They got paid, but Toussaint's rules forced them to stay on the plantations.</span></span><span class=\"fix\"><span class=\"cs\">Toussaint wanted a republic.</span><span class=\"rl\">His 1801 constitution banned slavery but made him governor for life.</span></span></span>Write 1–2 sentences. Start like this: <i>___ gained freedom, but ___ wasn't fully free because ___.</i>",
 "stemText": "___ gained freedom, but ___ wasn't fully free because ___.",
 "placeholder": "___ gained freedom, but ___ wasn't fully free because ___."
 },
@@ -138,18 +145,18 @@ parts:[
 "check": {
 "page": 8,
 "tag": "Reading check · Reader page 8",
-"q": "What happened to Toussaint after Haiti was at peace?",
-"right": "The French arrested him",
+"q": "What did Napoleon do to Toussaint?",
+"right": "Had him arrested and sent to France",
 "wrong": [
-"He was crowned king of Haiti",
-"He moved to the United States",
-"He died leading a battle"
+"Made him king of Haiti",
+"Paid him a fortune to stop fighting France",
+"Gave Haiti its freedom"
 ],
-"why": "✓ Correct. Napoleon wanted the colony back. His men arrested Toussaint and shipped him to France.",
-"hint": "Read the yellow box at the bottom right."
+"why": "✓ Correct. France tried to take back control. But the fight went on without Toussaint.",
+"hint": "Read the yellow boxes at the bottom."
 },
 "prompt": "To what extent did the Haitian Revolution change things? Who gained, and who didn't?",
-"stem": "<span class=\"declass\"><b>Fact file</b><span class=\"line\">Toussaint died in a cold French prison in the mountains in <b>April 1803</b>.</span><span class=\"line\"><b>Fact-check:</b> the comic says he created the first Black republic. He <b>died before it was born</b>. <b>Jean-Jacques Dessalines</b> beat the French and declared Haiti free on <b>January 1, 1804</b>.</span><span class=\"line\">In <b>1825</b>, French warships forced Haiti to pay <b>150 million francs</b> to former slaveholders for their lost \"property.\" Haiti was still paying off loans for it in the 1900s.</span><span class=\"note\">Old comics make mistakes. Check the facts!</span></span>Write 1–2 sentences. Start like this: <i>The Haitian Revolution changed things a lot / a little because ___.</i>",
+"stem": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">Toussaint created the first Black republic.</span><span class=\"rl\">He died in a French prison in 1803. Dessalines declared Haiti free on Jan. 1, 1804.</span></span><b class=\"kf\">Know this</b><span class=\"line\">In 1825, France forced Haiti to pay <b>150 million francs</b> to former slaveholders.</span></span>Write 1–2 sentences. Start like this: <i>The Haitian Revolution changed things a lot / a little because ___.</i>",
 "stemText": "The Haitian Revolution changed things a lot / a little because ___.",
 "placeholder": "The Haitian Revolution changed things a lot / a little because ___."
 }
