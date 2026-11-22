@@ -13,7 +13,12 @@ If you think the calendar doesn't fit, tell Fynn and ask with multiple-choice op
   - Government Unit 3 (Judicial) = 3 days: Day 1 What is the judicial branch; Day 2 Judicial review; Day 3 review Blooket + test (Thu 12/3). **All Blookets go on summative days** (Fynn, 11-03)
   - Sociology Unit 3 = 7 days: Day 5 = Groups change how we act + Us vs. them; Day 6 review; Day 7 test (Thu 12/10)
   - World History Unit 2 = 9 days: Day 1 = Cold War + Containment; Day 2 = Control + Mao's China; Day 7 = Cambodia + Apartheid; Day 9 test (Thu 12/10)
-- The four slide decks for those units are labeled to match ("DAY 1, PART 2", "Day 1 Exit Ticket (Part 2)", etc.).
+  - U.S. History Unit 6 = 3 days (Fynn, 11-21: "Days 2 + 3 together", replaces the 11-03 short lesson on test day):
+    Day 1 What Should a Superpower Do (9/11); Day 2 = Crisis + Still Fighting for Rights + Technology and Trade; Day 3 Review + test (Wed 1/6)
+  - World History Unit 3 = 7 days (Fynn, 11-21: "Days 1 + 2 together", replaces the 11-03 short lesson on test day):
+    Day 1 = How Far Did Your Stuff Travel + Who Wins, Who Loses; Day 2 Global Rules; Day 3 Pushing Back; Day 4 Pop Culture;
+    Day 5 Terrorism; Day 6 Fighting Terror; Day 7 test only (Wed 1/6)
+- The six slide decks for those units are labeled to match ("DAY 1, PART 2", "Day 1 Exit Ticket (Part 2)", etc.).
 - Where this lives: `CLASS_CALENDAR`, `CLASS_TODAY`, `CLASS_NO_SCHOOL` and activity `day:` numbers in `shared/assignments.js`;
   deck day `plan`s in `teacher-submissions/presentations.js`; day goals in `shared/targets.js`.
 

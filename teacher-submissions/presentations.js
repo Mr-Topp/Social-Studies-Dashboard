@@ -41,7 +41,8 @@
     { course: "us-history", unit: 6, title: "Modern America", url: g("1EaHd7ZHPbGRVHsgO_DhR_iF5ZW8Wvvvjy5BLjS1qCGE"), pub: "2PACX-1vSlvsSmo7zC6y9t_Byl97k4XFJT2igQdEK7-uwl7F0MH7PRApsw4YhEN1kE5UPWLuNPzyDJNjnMgvit", summativeSlide: "u6d1s01summ",
       // 2026-11-03: last summative by Wed Jan 6 (the unit is 3 days).
       // 2026-11-21 (Fynn): Days 2 + 3 together, instead of a short lesson on test day. Day 2 = crisis + rights + jobs and trade
-      // (deck labels: DAY 2, then DAY 2 PART 2 and DAY 2 PART 3). Day 3 = review + test. Slides hidden on 11-03 are still hidden.
+      // (deck labels: DAY 2, then DAY 2 PART 2 and DAY 2 PART 3). Day 3 = review + test. Two jobs-and-trade slides hidden on 11-03 are
+      // still hidden (Iowa exports, the Made in America activity); the Test-Day Warm-Up is shown again (Fynn, 11-22).
       plan: [
         { day: 1, title: "Modern America: What Should a Superpower Do?", std: "US.52, 53, 55, 56", slides: [{ day: 1 }] },
         { day: 2, title: "Modern America: How Should Government Handle a Crisis, and How Did Technology and Trade Change Jobs?", std: "US.51, 53–56", slides: [{ day: 2 }, { day: 3, label: "jobs and trade" }] },
@@ -76,7 +77,8 @@
     { course: "world-history", unit: 3, title: "The World Since 1991", url: g("12LQppsCMxrA3K5kbT_MK4ikKpFc8b1ae88G15Gm4m-0"), pub: "2PACX-1vSG2jTkw7wEu5nfT0huHbieqedtssUqxausVy74Syc4laaZfccvnnan1SjpwTLmAUh_tiZZK4sRQOi1", summativeSlide: "w3d01s01summ",
       // 2026-11-03: last summative by Wed Jan 6 (the unit is 7 days).
       // 2026-11-21 (Fynn): Days 1 + 2 together (both globalization), instead of a short lesson on test day. Every lesson after that
-      // moves up one day (deck labels match: DAY 1, DAY 1 PART 2, DAY 2 ... DAY 6). Day 7 = test only. Slides hidden on 11-03 are still hidden.
+      // moves up one day (deck labels match: DAY 1, DAY 1 PART 2, DAY 2 ... DAY 6). Day 7 = test only. The two Day 6 slides hidden on 11-03
+      // (primary source, exit ticket) are shown again (Fynn, 11-22).
       plan: [
         { day: 1, title: "Globalization: How Far Did Your Stuff Travel, and Who Wins and Loses?", std: "WH.39, 42", slides: [{ day: 1 }, { day: 2, label: "winners and losers" }] },
         { day: 2, title: "Global Rules: Who Should Make Them?", std: "WH.41", slides: [{ day: 3 }] },
