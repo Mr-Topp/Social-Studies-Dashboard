@@ -10,6 +10,7 @@
 <script src="videos.js?v=20261121st1"></script>
 <script src="video-channels.js?v=20261118cc1"></script>
 <script src="presentations.js?v=20261117civ"></script>
+<script src="../shared/must-watch.js?v=20261121mw2"></script>
 <script src="../shared/turnin.js?v=20261109nm1"></script>
 <style>
 :root{--navy:#19364b;--red:#a33d36;--green:#2f6b3a;--paper:#f4efe4;--card:#fffdf8;--ink:#22313b;--muted:#536571;--line:#d8cfbd}
@@ -149,7 +150,7 @@ details.partdrop>summary .parthint{font-size:.75rem;font-weight:600;letter-spaci
 .chip.todo.novid{font-weight:700;white-space:nowrap}
 .vidchip{display:inline-flex;align-items:center;gap:2px}
 .vbtn{font:inherit;font-size:.8rem;line-height:1;border:1px solid #d6dde2;background:#fff;color:var(--muted);border-radius:6px;padding:5px 7px;cursor:pointer;min-width:28px;min-height:28px}
-.vbtn:hover{color:var(--navy);border-color:var(--navy)}.vbtn.vdel:hover{color:var(--red);border-color:var(--red)}
+.vbtn:hover{color:var(--navy);border-color:var(--navy)}.vbtn.vstar{color:#b9c2c9}.vbtn.vstar.on{color:#b7791f;background:#fff6dd;border-color:#e2c377}.vbtn.vdel:hover{color:var(--red);border-color:var(--red)}
 .vadd{font:inherit;font-size:.8rem;font-weight:800;border:1px dashed var(--navy);background:#fff;color:var(--navy);border-radius:7px;padding:5px 9px;cursor:pointer;min-height:28px}
 .vidform{display:flex;flex-wrap:wrap;align-items:center;gap:6px;width:100%;margin:4px 0 2px;padding:8px;background:#f6f8f9;border:1px solid #d6dde2;border-radius:8px}
 .vidform input{font:inherit;font-size:.86rem;padding:6px 8px;border:1px solid #c5ced4;border-radius:6px;flex:1 1 180px;min-width:0}
@@ -851,7 +852,8 @@ function linksHtml() {
   const vidRow = (ids, wantVideo, ctx) => {
     const list = ids.filter(id => !REG[id].alt && kindOf(id) === "video");
     if (!list.length && !wantVideo) return "";
-    const one = id => `<span class="vidchip">${chip(id)}<button type="button" class="vbtn vswap" data-id="${safe(id)}" data-name="${safe(chipText(id))}" title="Replace this video" aria-label="Replace ${safe(chipText(id))}">↻</button><button type="button" class="vbtn vdel" data-id="${safe(id)}" data-name="${safe(chipText(id))}" title="Remove this video" aria-label="Remove ${safe(chipText(id))}">✕</button></span>`;
+    const star = id => { if (!MW) return ""; const on = isMustWatch(REG[id]); return `<button type="button" class="vbtn vstar${on ? " on" : ""}" data-id="${safe(id)}" data-name="${safe(chipText(id))}" aria-pressed="${on}" title="${on ? "Must-watch: students see this on a day they missed. Click to turn off." : "Make this a must-watch video for students who miss this day"}" aria-label="${on ? "Must-watch on" : "Must-watch off"}: ${safe(chipText(id))}">${on ? "★" : "☆"}</button>`; };
+    const one = id => `<span class="vidchip">${chip(id)}${star(id)}<button type="button" class="vbtn vswap" data-id="${safe(id)}" data-name="${safe(chipText(id))}" title="Replace this video" aria-label="Replace ${safe(chipText(id))}">↻</button><button type="button" class="vbtn vdel" data-id="${safe(id)}" data-name="${safe(chipText(id))}" title="Remove this video" aria-label="Remove ${safe(chipText(id))}">✕</button></span>`;
     const form = `<form class="vidform" novalidate hidden><span class="vidformlabel"></span><input name="title" maxlength="100" autocomplete="off" placeholder="Video title (e.g. Crash Course: The Cold War)" aria-label="Video title"><input name="url" type="url" inputmode="url" autocomplete="off" placeholder="Paste the YouTube link" aria-label="Video link"><select name="slide" aria-label="Which slide gets the video link?" hidden></select><button type="submit">Save</button><button type="button" class="light vcancel">Cancel</button><span class="formstat" role="status"></span></form>`;
     return `<div class="altrow vidrow" data-course="${safe(ctx.course)}" data-part="${ctx.part}" data-unit="${ctx.unit}" data-day="${ctx.day}"><span class="altlabel">Video${list.length > 1 ? "s" : ""}</span>${list.length ? list.map(one).join("") : `<span class="chip todo novid">⚠ No video yet. Add one</span>`}<button type="button" class="vadd">＋ Add video</button>${form}</div>`;
   };
@@ -1066,6 +1068,16 @@ const isReviewMark = l => l && (l.title === REVIEW_TITLE || l.title === SUMM_REV
 // keeps the row off students' home pages. Remove the row (To-do tab > Videos you removed > Bring back) and it comes back.
 const HIDE_TITLE = "Hidden video (teacher key)";
 const isHideMark = l => l && l.title === HIDE_TITLE;
+// Must-watch stars (Fynn, 2026-11-21): the 1-2 videos students see on a day they missed. The rules live in
+// ../shared/must-watch.js so this dashboard and the student page always agree. A star you turn on or off is saved as a
+// link row ("Must-watch (teacher key) · title" or "Not must-watch (teacher key)", url = the video's link).
+const MW = window.MUST_WATCH;
+const isStarMark = l => !!MW && MW.isMark(l);
+const starKey = a => a.course === "civics" ? a.unit + "|0" : (+a.part === 1 ? "p1|" : "") + a.unit + "|" + a.day;
+const liveLinks = () => Object.values(LINKS).filter(l => l && !l.removed);
+const isMustWatch = a => !!MW && MW.picks(a.course, starKey(a), liveLinks()).some(v => MW.same(v.url, a.path));
+const starMarks = a => !MW ? [] : MW.dayRows(a.course, starKey(a), liveLinks()).filter(l => isStarMark(l) && MW.same(l.url, a.path));
+async function dropStarMarks(a) { for (const l of starMarks(a)) await dropLink(l); }
 const vidKey = (course, part, unit, day, url) => [course, +part === 1 ? 1 : 2, +unit, +day, String(url || "")].join("|");
 let HIDDEN = {};
 // A link added for a "no video" day counts as that day's video: YouTube/Vimeo/Edpuzzle links, or anything named "(Video)".
@@ -1076,6 +1088,7 @@ function applyLinks() {
   REVIEWED = {}; HIDDEN = {};
   Object.values(LINKS).forEach(l => {
     if (l.removed || !l.url || !COURSES[l.course]) return;
+    if (isStarMark(l)) return;   // must-watch stars (students' missed-day videos), not a video of their own
     if (isHideMark(l)) { HIDDEN[vidKey(l.course, l.part, l.unit, l.day, l.url)] = l; return; }
     if (isReviewMark(l)) { REVIEWED[(isSummMark(l) ? "summ|" : "") + l.course + (+l.part === 1 ? "|p1" : "") + "|" + l.unit + "|" + l.day] = l; return; }
     const video = VIDEO_URL.test(l.url) || /\(video\)/i.test(l.title);
@@ -1171,7 +1184,7 @@ function renderTodo() {
   const all = collectTodos(), pane = $("todoPane");
   if (!TODO_FILTERS.some(f => f[0] === todoFilter)) todoFilter = "all";
   const items = all.map((t, i) => Object.assign(t, { i })), shown = items.filter(t => todoFilter === "all" || filterOf(t) === todoFilter);
-  const linkList = Object.values(LINKS).filter(l => !l.removed && l.url && COURSES[l.course] && !isReviewMark(l) && !isHideMark(l));
+  const linkList = Object.values(LINKS).filter(l => !l.removed && l.url && COURSES[l.course] && !isReviewMark(l) && !isHideMark(l) && !isStarMark(l));
   const hideList = Object.values(LINKS).filter(l => !l.removed && COURSES[l.course] && isHideMark(l));
   const reviewList = Object.values(LINKS).filter(l => !l.removed && COURSES[l.course] && isReviewMark(l));
   const nOf = f => f === "all" ? items.length : items.filter(t => filterOf(t) === f).length;
@@ -1300,6 +1313,7 @@ async function dropLink(l) { await tools("set_link", { id: l.id, course: l.cours
 // Takes a video off its day. Returns an undo function.
 async function removeVideo(id) {
   const a = REG[id];
+  await dropStarMarks(a);   // its must-watch star goes with it
   if (a.fromTodo) { const l = LINKS[a.linkId], copy = Object.assign({}, l); await dropLink(l); return () => saveLink(copy); }
   const mark = await saveLink({ course: a.course, part: a.part === 1 ? 1 : 2, unit: a.unit, day: a.day, title: HIDE_TITLE, url: a.path });
   return () => dropLink(mark);
@@ -1359,6 +1373,22 @@ function wireVideoEdits(root) {
   };
   root.querySelectorAll(".vadd").forEach(b => b.onclick = () => openForm(b, "", ""));
   root.querySelectorAll(".vswap").forEach(b => b.onclick = () => openForm(b, b.dataset.id, b.dataset.name));
+  // ★ Must-watch on/off: which 1-2 videos students see on a day they missed (Fynn, 2026-11-21).
+  root.querySelectorAll(".vstar").forEach(b => b.onclick = async () => {
+    const a = REG[b.dataset.id];
+    if (!ready() || !a || !MW) return;
+    const on = isMustWatch(a), ctx = { course: a.course, part: a.part === 1 ? 1 : 2, unit: a.unit, day: a.day || 0 };
+    if (!on && MW.picks(a.course, starKey(a), liveLinks()).length >= MW.MAX) { flashNote("Students see only " + MW.MAX + " videos on a missed day. Turn off a ★ on this day first."); return; }
+    if (!on && !(/^https:\/\//i.test(a.path || "") && VIDEO_URL.test(a.path))) { flashNote("Only YouTube-type videos can be must-watch. Students can't open this one on their own."); return; }
+    b.disabled = true;
+    try {
+      await dropStarMarks(a);
+      if (on) { if (isMustWatch(a)) await saveLink(Object.assign({ title: MW.OFF, url: a.path }, ctx)); }
+      else if (!isMustWatch(a)) await saveLink(Object.assign({ title: MW.ON + " · " + String(b.dataset.name || "Video").replace(/\s*\((?!\d{4}\))[^)]*\)\s*$/, "").slice(0, 80), url: a.path }, ctx));
+      applyLinks(); render();
+      flashNote(on ? "Star off. Students won't see this video on a missed day." : "★ Must-watch. Students who miss this day will see it.");
+    } catch (err) { b.disabled = false; flashNote(err.message); }
+  });
   root.querySelectorAll(".vcancel").forEach(b => b.onclick = () => { b.closest("form").hidden = true; });
   root.querySelectorAll(".vdel").forEach(b => b.onclick = async () => {
     if (!ready() || !REG[b.dataset.id]) return;
@@ -1393,7 +1423,7 @@ function wireVideoEdits(root) {
     const base = { course: ctx.course, part: +ctx.part, unit: +ctx.unit, day: +ctx.day, title, url };
     f.querySelectorAll("button,input").forEach(x => x.disabled = true); st.textContent = "Saving…";
     try {
-      if (old && old.fromTodo) await saveLink(Object.assign({ id: old.linkId }, base));   // same row, new link
+      if (old && old.fromTodo) { await dropStarMarks(old); await saveLink(Object.assign({ id: old.linkId }, base)); }   // same row, new link
       else { await saveLink(base); if (old) await removeVideo(f.dataset.replace); }
       applyLinks(); render();
       let note = old ? "Replaced ✓" : "Added ✓ It's on Day " + base.day + " now.", fix = false;

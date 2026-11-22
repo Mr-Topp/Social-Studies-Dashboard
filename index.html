@@ -164,7 +164,7 @@ footer a{color:var(--muted)}
 <script src="shared/recaps.js?v=20261115soc89"></script>
 <script src="shared/targets.js?v=20261115soc89"></script>
 <script src="teacher-submissions/presentations.js?v=20261117civ"></script>
-<script src="shared/must-watch.js?v=20261121mw1"></script>
+<script src="shared/must-watch.js?v=20261121mw2"></script>
 <script src="shared/turnin.js?v=20261109nm1"></script>
 </head>
 <body>
@@ -251,6 +251,13 @@ function savedRead(p) {
   try { const c = JSON.parse(localStorage.getItem(savedKey(p))); if (c && c.d && Date.now() - c.t < 14 * 864e5) return c.d; } catch (e) {}
   return null;
 }
+// The teacher dashboard's video changes (added, swapped, removed, starred), for the must-watch videos on missed days.
+// Video titles and links only. The last copy is kept on this Chromebook so the page still works if Google is slow.
+let VIDEO_ROWS = []; try { VIDEO_ROWS = JSON.parse(localStorage.getItem("hub-saved:videos") || "[]") || []; } catch (e) {}
+let videoRowsAsked = null;
+const loadVideoRows = () => videoRowsAsked || (videoRowsAsked = tools({ action: "videos" }).then(d => {
+  if (Array.isArray(d.videos)) { VIDEO_ROWS = d.videos; try { localStorage.setItem("hub-saved:videos", JSON.stringify(d.videos)); } catch (e) {} }
+}).catch(() => {}));
 const infoCache = {};
 const classInfo = course => infoCache[course] || (infoCache[course] = tools({ action: "class_list", course }).catch(() => ({})));
 const rosterNames = info => {
@@ -598,7 +605,7 @@ async function showWork(course, name) {
   let savedShown = false;
   if (savedInfo) { await addTeacherLinks(course, savedInfo); savedShown = paint(await loadWork(course, name, "saved")); }
   // 2) The sheet's answer (what's turned in, M/EX marks, teacher links) — asked at the same time.
-  const [work] = await Promise.all([loadWork(course, name, "sheet"), addTeacherLinks(course)]);
+  const [work] = await Promise.all([loadWork(course, name, "sheet"), addTeacherLinks(course), loadVideoRows()]);
   if (savedShown && work && !work.full) return;   // the sheet didn't answer: keep the saved copy on screen
   if (!paint(work)) return;
   // 3) Feedback tips on turned-in work (only if this Chromebook has receipts).
@@ -802,9 +809,9 @@ const missing = sortItems(online.filter(isMissing));
     const recap = recapOf(g.ex);
     const dg = goalOf(g.unit, g.day), dgoal = dg && dg.t && dg.t.length ? `<div class="dgoal"><b>🎯 Goal:</b>${goalList(dg)}</div>` : "";
     const sl = slidesFor(g.unit, g.day).map(s => `<div class="qrow sliderow"><div><span class="qtitle">📽 ${esc(s.label)} from this day</span><span class="qkind">See what the class learned</span></div><a class="btn qgo soft" href="${esc(s.url)}" target="_blank" rel="noopener">Open ↗</a></div>`).join("");
-    // Must-watch videos for a missed day (Fynn, 11-21): only the 1-2 that best explain the day, from shared/must-watch.js.
-    // The full video list stays teacher only. Opens on YouTube in a new tab.
-    const vids = (((window.CLASS_MUST_WATCH || {})[course] || {})[g.unit + "|" + (civ ? 0 : g.day)] || []).slice(0, 2).map(v => `<div class="qrow sliderow"><div><span class="qtitle">🎬 ${esc(v[1])}</span><span class="qkind">Video · watch this to catch up</span></div><a class="btn qgo soft" href="https://www.youtube.com/watch?v=${encodeURIComponent(v[0])}${v[2] ? "&t=" + (+v[2]) + "s" : ""}" target="_blank" rel="noopener">Watch ↗</a></div>`).join("");
+    // Must-watch videos for a missed day (Fynn, 11-21): only the 1-2 that best explain the day (shared/must-watch.js).
+    // They follow the teacher dashboard: removed videos drop off, added ones fill open spots, stars choose. Opens in a new tab.
+    const vids = (window.MUST_WATCH ? window.MUST_WATCH.picks(course, g.unit + "|" + (civ ? 0 : g.day), VIDEO_ROWS) : []).map(v => `<div class="qrow sliderow"><div><span class="qtitle">🎬 ${esc(v.title)}</span><span class="qkind">Video · watch this to catch up</span></div><a class="btn qgo soft" href="${esc(v.url)}" target="_blank" rel="noopener">Watch ↗</a></div>`).join("");
     return `<div class="dgroup"><div class="dhead">${esc(head)}</div>${recap ? `<p class="drecap">In class: ${esc(recap)}</p>` : ""}${dgoal}${sl}${vids}${list.map(missRow).join("")}</div>`;
   }).join("");
   const readBtn = "";   // read-aloud lives inside the activities (shared/turnin.js), not on this page

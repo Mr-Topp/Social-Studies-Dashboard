@@ -1,9 +1,17 @@
 // Must-watch videos for days a student missed (Fynn, 2026-11-21).
 // Students' home page shows these on each missed day, next to that day's slides: only the 1-2 videos that best
-// explain the day, never the whole list. Picked from teacher-submissions/videos.js (that file stays teacher only).
-// Left out on purpose: Netflix (needs a login), videos Fynn noted need him to frame or fact-check them, very long ones.
+// explain the day, never the whole list. The full list (teacher-submissions/videos.js) stays teacher only.
+//
+// These are the STARTING picks. They keep up with the teacher dashboard by themselves (Fynn, 2026-11-21):
+//   - a video Fynn removes from a day drops off students' pages
+//   - a video he adds or swaps in takes an open spot (so a replacement takes the old one's spot)
+//   - the star button on each dashboard video turns "must-watch" on or off for that day
+// Those changes live in the Sheet as link rows and reach this page through Teacher Tools' public "videos" list
+// (video titles and links only). See MUST_WATCH.picks at the bottom of this file.
+//
+// Starting picks leave out on purpose: Netflix (needs a login), videos Fynn noted need him to frame or
+// fact-check them, and very long ones.
 // Keys: "unit|day" ("p1|unit|day" for Part 1, "friday|0" for Civics). Each video: [YouTube id, title, start second (optional)].
-// To change a pick: swap the id and title. To show no video on a day: delete its line.
 window.CLASS_MUST_WATCH = {
   "civics": {
     "1|0": [["uihNc_tdGbk","The making of the American Constitution"],["aMCDikASE4o","Why wasn't the Bill of Rights originally in the US Constitution?"]],
@@ -118,3 +126,41 @@ window.CLASS_MUST_WATCH = {
     "3|7": [["KP9VklrXPZs","Here's Why the Patriot Act Is So Controversial"]],
   },
 };
+
+// ---------- Keeping the picks matched to the teacher dashboard ----------
+// Used by BOTH the student home page and the teacher dashboard, so the stars Fynn sees are exactly what students get.
+window.MUST_WATCH = (function () {
+  var MAX = 2;
+  var HIDE = "Hidden video (teacher key)";            // a video removed from its day (teacher dashboard)
+  var ON = "Must-watch (teacher key)";                 // starred by Fynn. Saved as: ON + " · " + the video's title
+  var OFF = "Not must-watch (teacher key)";            // un-starred by Fynn
+  var ytId = function (url) { var m = String(url || "").match(/(?:[?&]v=|youtu\.be\/|\/embed\/|\/shorts\/)([\w-]{11})/); return m ? m[1] : ""; };
+  var same = function (a, b) { var x = ytId(a), y = ytId(b); return x && y ? x === y : String(a || "") === String(b || ""); };
+  var isOn = function (l) { return !!l && String(l.title || "").indexOf(ON) === 0; };
+  var isOff = function (l) { return !!l && l.title === OFF; };
+  var isMark = function (l) { return isOn(l) || isOff(l); };
+  // The rows (from Teacher Tools) that belong to one lesson day. key = "unit|day", "p1|unit|day", or Civics "friday|0".
+  var dayRows = function (course, key, rows) {
+    var k = String(key).split("|"), p1 = k[0] === "p1", unit = +k[p1 ? 1 : 0], day = +k[p1 ? 2 : 1];
+    return (rows || []).filter(function (l) {
+      return l && !l.removed && l.course === course && /^https:\/\//i.test(l.url || "") && (+l.part === 1) === p1 && +l.unit === unit && (course === "civics" || +l.day === day);
+    });
+  };
+  // The videos a student sees on a missed day: [{ url, title }], never more than 2.
+  function picks(course, key, rows) {
+    var mine = dayRows(course, key, rows), out = [];
+    var gone = function (url) { return mine.some(function (l) { return (l.title === HIDE || isOff(l)) && same(l.url, url); }); };
+    var add = function (url, title) {
+      if (out.length >= MAX || !url || gone(url) || out.some(function (v) { return same(v.url, url); })) return;
+      out.push({ url: url, title: String(title || "Video").replace(/\s*\(video\)\s*$/i, "") });
+    };
+    // 1) Fynn's stars come first.
+    mine.filter(isOn).forEach(function (l) { add(l.url, l.title.slice(ON.length).replace(/^\s*·\s*/, "")); });
+    // 2) Then the starting picks above.
+    ((window.CLASS_MUST_WATCH[course] || {})[key] || []).forEach(function (v) { add("https://www.youtube.com/watch?v=" + v[0] + (v[2] ? "&t=" + (+v[2]) + "s" : ""), v[1]); });
+    // 3) Then videos he added or swapped in on the dashboard, if a spot is open.
+    mine.filter(function (l) { return !/teacher key/i.test(l.title || "") && /youtube\.com|youtu\.be|vimeo\.com/i.test(l.url); }).forEach(function (l) { add(l.url, l.title); });
+    return out;
+  }
+  return { MAX: MAX, HIDE: HIDE, ON: ON, OFF: OFF, ytId: ytId, same: same, isOn: isOn, isOff: isOff, isMark: isMark, dayRows: dayRows, picks: picks };
+})();
