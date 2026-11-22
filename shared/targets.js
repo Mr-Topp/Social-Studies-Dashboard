@@ -5,7 +5,8 @@
 // Built 2026-11-02. Matched to real lesson days by topic; Fynn reviews the matches.
 // U.S. and World History daily targets (and World History World Wars Level 3 lines) were drafted in his style and approved by Fynn 11/2/26.
 // 2026-11-02: days combined in U.S. History U3, Government U3, Sociology U3, World History U2 (merged days keep both days' targets).
-// 2026-11-03: U.S. History 6|3 and World History 3|7 are short lesson + test days (test: 1 plus that lesson's targets).
+// 2026-11-21 (Fynn): U.S. History U6 Days 2 + 3 combined and World History U3 Days 1 + 2 combined (merged days keep both days'
+// targets). U.S. History 6|3 and World History 3|7 are test days again. This replaces the 11-03 "short lesson + test" setup.
 window.CLASS_TARGETS = {
  "us-history": {
   "p1|1|1": {
@@ -419,16 +420,14 @@ window.CLASS_TARGETS = {
    "t": [
     "I can explain what caused the Great Recession of 2008 and how it hurt families.",
     "I can analyze how the government responded to the 2008 crisis and why people disagreed about it.",
-    "I can explain how the Disability Rights Movement won the ADA using tactics from earlier civil rights protests."
-   ],
-   "g3": "I can analyze how the government has responded to domestic challenges."
-  },
-  "6|3": {
-   "t": [
+    "I can explain how the Disability Rights Movement won the ADA using tactics from earlier civil rights protests.",
     "I can explain how trade with other countries and new technology changed American jobs.",
     "I can analyze who gained and who lost jobs as factories moved overseas or added machines and computers.",
     "I can explain how different Americans and leaders have responded to these changes in jobs."
    ],
+   "g3": "I can analyze how the government has responded to domestic challenges."
+  },
+  "6|3": {
    "test": 1,
    "g3": "I can analyze how the government has responded to domestic challenges."
   }
@@ -775,19 +774,14 @@ window.CLASS_TARGETS = {
    "t": [
     "I can explain what globalization is and how it connects countries through trade.",
     "I can analyze how the things I buy are made with parts, materials, and workers from many countries.",
-    "I can explain how globalization since the 1990s connects my daily life to people around the world."
-   ],
-   "g3": "I can analyze the effects of globalization."
-  },
-  "3|2": {
-   "t": [
+    "I can explain how globalization since the 1990s connects my daily life to people around the world.",
     "I can identify groups that have gained and groups that have lost because of globalization.",
     "I can analyze how globalization has affected jobs, pay, and workers in different countries.",
     "I can explain why some people and countries support globalization while others push back against it."
    ],
    "g3": "I can analyze the effects of globalization."
   },
-  "3|3": {
+  "3|2": {
    "t": [
     "I can explain what global institutions like the United Nations do and why countries join them.",
     "I can analyze how global institutions influence trade and political relationships between countries.",
@@ -795,7 +789,7 @@ window.CLASS_TARGETS = {
    ],
    "g3": "I can analyze how global institutions influence relationships."
   },
-  "3|4": {
+  "3|3": {
    "t": [
     "I can identify different ways people and countries have responded to globalization.",
     "I can analyze why some people choose to buy local or push back against big global companies.",
@@ -803,7 +797,7 @@ window.CLASS_TARGETS = {
    ],
    "g3": "I can analyze responses to globalization."
   },
-  "3|5": {
+  "3|4": {
    "t": [
     "I can explain how popular culture like music, movies, and food spreads around the world today.",
     "I can analyze how different regions adopt global pop culture and mix it with their own traditions.",
@@ -811,7 +805,7 @@ window.CLASS_TARGETS = {
    ],
    "g3": "I can analyze how regions adapt to global culture."
   },
-  "3|6": {
+  "3|5": {
    "t": [
     "I can explain what terrorism is and why some groups use violence and fear to reach their goals.",
     "I can analyze how terrorist organizations form, gain members, and spread their message.",
@@ -819,12 +813,15 @@ window.CLASS_TARGETS = {
    ],
    "g3": "I can analyze terrorism and efforts to address it."
   },
-  "3|7": {
+  "3|6": {
    "t": [
     "I can identify ways countries and global groups have worked to fight terrorism.",
     "I can analyze the trade-off between keeping people safe and protecting their freedom and privacy.",
     "I can explain how countries work together through global institutions to respond to terrorism."
    ],
+   "g3": "I can analyze terrorism and efforts to address it."
+  },
+  "3|7": {
    "test": 1,
    "g3": "I can analyze terrorism and efforts to address it."
   },

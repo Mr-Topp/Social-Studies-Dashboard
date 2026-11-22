@@ -118,6 +118,9 @@ window.CLASS_DONE_FOR_ALL = {
 // Government U3 4→3, Sociology U3 8→7, World History U2 12→9. Test dates unchanged.
 // 2026-11-03: Fynn said every last summative is by Wed Jan 6. U.S. History U6 4→3 and World History U3 8→7:
 // the last lesson day is now a short lesson + the test on 1/6 (cut slides are hidden in the decks, not deleted).
+// 2026-11-21: Fynn chose combined days for those two units instead of the short lesson on test day (day counts and test dates
+// did not change): U.S. History U6 Day 2 = crisis + rights + jobs and trade, Day 3 = review + test. World History U3 Day 1 = both
+// globalization lessons, so its readings moved up a day (Rana Plaza Day 1, Rule Makers Day 2, Pushing Back Day 3), Day 7 = test only.
 window.CLASS_CALENDAR = {
   "us-history":    { 1: { days: 6,  summative: "2026-11-05" }, 2: { days: 8,  summative: "2026-11-19" }, 3: { days: 5, summative: "2026-12-03" },
                      4: { days: 4,  summative: "2026-12-10" }, 5: { days: 4,  summative: "2026-12-17" }, 6: { days: 3, summative: "2027-01-06" } },
@@ -554,16 +557,16 @@ window.CLASS_ASSIGNMENTS = {
   "wh-u2-summative-b": { course: "world-history", unit: 2, day: 9, turnIn: false, std: [], title: "Day 9 · Summative (Form B · retake)", path: "https://docs.google.com/document/d/1EQov3YSzUS9bPeZoLe5PqiWOPBPy1lPFW0LlBkAkHwc/edit" },
   "wh-u2-summative-b-key": { course: "world-history", unit: 2, day: 9, turnIn: false, std: [], title: "Day 9 · Summative Form B Teacher Key", path: "https://docs.google.com/document/d/11NnFBp3WQ82zq6EKnhmAcWLhxs5VvGknP1PkpnBhrYQ/edit" },  // 11-14: new Form B key
   "wh-u3-summative": { course: "world-history", unit: 3, day: 7, turnIn: false, std: [], title: "Day 7 · Summative (Form A)", path: "https://docs.google.com/document/d/1dYA9oqOHGXjjFQfsTps3lUb2Cx5lCA8D548LFonLYJk/edit" },
-  // 11-21 replaced on the dashboard by the Rana Plaza comic reading (Fynn); game files kept: "wh-u3-d2-globalization": { course: "world-history", unit: 3, day: 2, title: "Day 2 · Follow the Cobalt", path: "world-history/u3-d2-globalization/", std: ["SS.9-12.WH.39", "SS.9-12.WH.42"] },  // reworked from Sociology's Cobalt Deal (Fynn, 11-03)
-  "wh-u3-d2-rana-plaza-comic": { course: "world-history", unit: 3, day: 2, title: "Day 2 · Made in Rana Plaza: Who Pays for Cheap Clothes? A 2023 Comic (Reading)", path: "world-history/u3-d2-rana-plaza-comic/", std: ["SS.9-12.WH.39", "SS.9-12.WH.42"] },
+  // 11-21 replaced on the dashboard by the Rana Plaza comic reading (Fynn); game files kept: "wh-u3-d2-globalization": { course: "world-history", unit: 3, day: 1, title: "Day 1 · Follow the Cobalt", path: "world-history/u3-d2-globalization/", std: ["SS.9-12.WH.39", "SS.9-12.WH.42"] },  // reworked from Sociology's Cobalt Deal (Fynn, 11-03)
+  "wh-u3-d2-rana-plaza-comic": { course: "world-history", unit: 3, day: 1, title: "Day 1 · Made in Rana Plaza: Who Pays for Cheap Clothes? A 2023 Comic (Reading)", path: "world-history/u3-d2-rana-plaza-comic/", std: ["SS.9-12.WH.39", "SS.9-12.WH.42"] },
   "wh-u3-summative-key": { course: "world-history", unit: 3, day: 7, turnIn: false, std: [], title: "Day 7 · Summative Form A Teacher Key", path: "https://docs.google.com/document/d/1AHq8BgAVJDNtAt8ZidykchIRxqMRBgubRh9F9jr9vBc/edit" },  // new key 11-21 (private doc)
   "wh-u3-summative-b": { course: "world-history", unit: 3, day: 7, turnIn: false, std: [], title: "Day 7 · Summative (Form B · retake)", path: "https://docs.google.com/document/d/1X2h-4hPOAECy1gAfBqPWGjq_VWzk7mN9RqELlCMaNXE/edit" },
   "wh-u3-summative-b-key": { course: "world-history", unit: 3, day: 7, turnIn: false, std: [], title: "Day 7 · Summative Form B Teacher Key", path: "https://docs.google.com/document/d/1Da2Z0pduqQA0d1i3OmHUcpH9fywIhzgZ6h6x_V2UBoI/edit" },  // new key 11-21 (private doc)
   // 2026-11-03: graphic-novel readings for the To-do days (Fynn chose free-to-share comics; Pop Culture and Terrorism left for later).
   "wh-u2-d7-secret-comic": { course: "world-history", unit: 2, day: 7, title: "Day 7 · Who Paid for This Hero? Apartheid's Secret Comic (Reading)", path: "world-history/u2-d7-secret-comic/", std: ["SS.9-12.WH.35", "SS.9-12.WH.37", "SS.9-12.WH.38"] },
   "wh-u3-d1-trade-comic": { course: "world-history", unit: 3, day: 1, title: "Day 1 · Made Everywhere? A 2008 Trade Comic (Reading)", path: "world-history/u3-d1-trade-comic/", std: ["SS.9-12.WH.39"] },
-  "wh-u3-d3-rule-makers": { course: "world-history", unit: 3, day: 3, title: "Day 3 · Who Makes the World's Rules? UN, WTO & EU Comics (Reading)", path: "world-history/u3-d3-rule-makers/", std: ["SS.9-12.WH.41"] },
-  "wh-u3-d4-pushback-comics": { course: "world-history", unit: 3, day: 4, title: "Day 4 · Walls, Taxes, or Coffee? Two Comics on Pushing Back (Reading)", path: "world-history/u3-d4-pushback-comics/", std: ["SS.9-12.WH.42"] },
+  "wh-u3-d3-rule-makers": { course: "world-history", unit: 3, day: 2, title: "Day 2 · Who Makes the World's Rules? UN, WTO & EU Comics (Reading)", path: "world-history/u3-d3-rule-makers/", std: ["SS.9-12.WH.41"] },
+  "wh-u3-d4-pushback-comics": { course: "world-history", unit: 3, day: 3, title: "Day 3 · Walls, Taxes, or Coffee? Two Comics on Pushing Back (Reading)", path: "world-history/u3-d4-pushback-comics/", std: ["SS.9-12.WH.42"] },
   "ush-u1-d3-responses-iowans": { course: "us-history", unit: 1, day: 3, title: "Day 3 · Hoover vs. the New Deal", path: "us-history/u1-d3-responses-iowans/", std: ["SS.9-12.US.25", "SS.9-12.US.27", "SS.9-12.US.28"] },
   "ush-u2-d6-arsenal-race": { course: "us-history", unit: 2, day: 6, title: "Day 6 · Arsenal Race: What Wins a War?", path: "world-history/u1-d10-arsenal-race/", std: ["SS.9-12.US.29", "SS.9-12.US.33"] },  // moved from WH U1 D10 to USH U2 D6 "How Did the Allies Beat Germany?" (Fynn, 11-03)
   "ush-u2-d7-war-with-japan": { course: "us-history", unit: 2, day: 7, title: "Day 7 · How Did the War with Japan End? 1945 War Comics (Reading)", path: "us-history/u2-d7-war-with-japan/", std: ["SS.9-12.US.29", "SS.9-12.US.32", "SS.9-12.US.33", "SS.9-12.US.34"] },  // public-domain True Comics #46 + Science Comics #1 fact-check, code talkers photo, slurs covered (Fynn, 11-03)
