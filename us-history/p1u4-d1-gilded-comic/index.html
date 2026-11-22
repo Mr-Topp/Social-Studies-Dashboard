@@ -50,7 +50,7 @@ body.reading-now .choices{opacity:.45;pointer-events:none}
 <p class="intro-line"><b>How it works:</b> read the comic pages → answer the question about today's big idea → see what the comic got right and wrong → write 1–2 sentences. Done = all parts green, then turn in at the bottom.</p>
 <details class="wordhelp"><summary>Word help (tap to open)</summary>
 <ul class="words" aria-label="Word help">
-<li><b>Gilded</b> = covered with a thin layer of gold</li><li><b>Tenement</b> = a cheap, crowded apartment building</li><li><b>Child labor</b> = kids working for pay instead of going to school</li><li><b>Progressive</b> = a reformer who wanted to fix problems from industry and cities</li><li><b>1953 comic</b> = made by the U.S. government to tell America's story in other countries. It shows one point of view.</li>
+<li><b>Gilded</b> = covered with a thin layer of gold</li><li><b>Tenement</b> = a cheap, crowded apartment building</li><li><b>Child labor</b> = kids working for pay instead of going to school</li><li><b>Progressive</b> = a reformer who wanted to fix problems from industry and cities</li><li><b>Monopoly</b> = one company with no rivals</li><li><b>1953 comic</b> = made by the U.S. government to tell America's story in other countries. It shows one point of view.</li>
 </ul></details>
 <p class="welcome" id="welcome" role="status"></p>
 </section>
@@ -107,8 +107,8 @@ parts:[
 "why": "✓ Correct. Gilded means covered with a thin layer of gold. Under the shiny outside were tenements, child labor, and danger.",
 "hint": "Read the speech bubbles. Then think: who is NOT in this picture?"
 },
-"prompt": "Which Gilded Age problem was the worst: tenements, child labor, dangerous jobs, or monopolies? Explain what caused it and who it hurt.",
-"stem": "<span class=\"declass\"><b>Fact file</b><b class=\"kf\">Know this</b><span class=\"line\"><b>Tenements:</b> in 1890, Jacob Riis (REES) wrote that three-fourths of New York City's people lived in cheap, crowded tenements.</span><span class=\"line\"><b>Dangerous jobs:</b> in 1907 alone, 3,242 coal miners died on the job. Hurt workers usually got nothing.</span></span>Write 1–2 sentences. Start like this: <i>The worst problem was ___ because ___. It was caused by ___.</i>",
+"prompt": "Which Gilded Age problem was the worst: tenements, child labor, dangerous jobs, or monopolies (one company with no rivals)? What caused it, and who did it hurt?",
+"stem": "<span class=\"declass\"><b>Fact file</b><b class=\"kf\">Know this</b><span class=\"line\"><b>Tenements:</b> in 1890, Jacob Riis (REES) wrote that 3 in 4 New Yorkers lived in cheap, crowded tenements.</span><span class=\"line\"><b>Dangerous jobs:</b> in 1907 alone, 3,242 coal miners died on the job. Hurt workers usually got nothing.</span></span>Write 1–2 sentences. Start like this: <i>The worst problem was ___ because ___. It was caused by ___.</i>",
 "stemText": "The worst problem was ___ because ___. It was caused by ___.",
 "placeholder": "The worst problem was ___ because ___. It was caused by ___."
 },
@@ -124,20 +124,20 @@ parts:[
 "q": "Gompers's wife says, \"Our children are hungry.\" Why did so many kids work in the Gilded Age?",
 "right": "Families needed every paycheck",
 "wrong": [
-"Schools had not been invented yet",
-"Kids got paid more than adults",
-"The law said every kid over 10 had to work"
+"Kids wanted their own spending money",
+"Kids earned more money than adults",
+"Most kids had already finished school"
 ],
 "why": "✓ Correct. Poor families needed every paycheck, and owners could pay kids much less than adults.",
 "hint": "Read the wife's speech bubble."
 },
-"prompt": "Who could fix child labor best: workers, reformers like Jane Addams, or the government?",
+"prompt": "Who could fix child labor best: workers, reformers like Jane Addams, or the government? Why?",
 "stem": "<span class=\"declass\"><b>Fact file</b><b class=\"kf\">Know this</b><span class=\"line\">In 1889, <b>Jane Addams</b> opened <b>Hull House</b> in Chicago. It gave day care and English classes and pushed for child labor laws.</span><span class=\"line\"><b>Progressives</b> were reformers who wanted citizens and government to fix problems caused by industry and big cities.</span></span>Write 1–2 sentences. Start like this: <i>___ could fix it best because ___.</i>",
 "stemText": "___ could fix it best because ___.",
 "placeholder": "___ could fix it best because ___."
 }
 ],
-questions:["Which Gilded Age problem was the worst: tenements, child labor, dangerous jobs, or monopolies? Explain what caused it and who it hurt.", "Who could fix child labor best: workers, reformers like Jane Addams, or the government?"],
+questions:["Which Gilded Age problem was the worst: tenements, child labor, dangerous jobs, or monopolies (one company with no rivals)? What caused it, and who did it hurt?", "Who could fix child labor best: workers, reformers like Jane Addams, or the government? Why?"],
 validate(s){if(!s.name)return{text:"Type your first name + last initial (like Jordan M.) at the top of the questions.",focus:"studentName"};
  const mc=[1, 2].find(i=>!s.checkDone(i));if(mc)return{text:"Get the check right for part "+mc+" first.",part:mc};
  const ma=[1, 2].find(i=>!s.answer(i));if(ma)return{text:"Write your answer for part "+ma+" before turning in.",part:ma,focus:"answer"+ma};

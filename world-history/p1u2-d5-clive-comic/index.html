@@ -100,7 +100,7 @@ parts:[
 "q": "Clive works for a trading company. How does he say Britain should win control in India?",
 "right": "Use force and side with Indian princes",
 "wrong": [
-"Buy all of India with gold and silver coins",
+"Pay the French governor to get out of India",
 "Send settlers to farm the land",
 "Ask the Mughal emperor for it"
 ],
@@ -155,13 +155,13 @@ parts:[
 "why": "✓ Correct. The treaty made Bengal pay, and Clive became governor. The company now controlled Bengal's riches.",
 "hint": "Read the treaty speech bubble and the box about Clive and Jafar Ali Khan."
 },
-"prompt": "Which empire from this unit had the biggest long-term impact on today's world? Explain with evidence.",
-"stem": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">Suraj-ud-Dowlah surrendered and signed a treaty.</span><span class=\"rl\">He fled and was killed. Clive had secretly paid his general, Mir Jafar (the comic's \"Jafar Ali Khan\"), to switch sides, then made him the new nawab.</span></span><span class=\"fix\"><span class=\"cs\">Clive died a hero.</span><span class=\"rl\">Parliament investigated him for getting rich in India. In 1770, a famine under company rule killed millions in Bengal.</span></span><b class=\"kf\">Know this</b><span class=\"line\">Britain ruled India until <b>1947</b>. That's one reason English is so widely spoken in India today.</span></span>Write 1–2 sentences. Start like this: <i>The ___ Empire had the biggest long-term impact because ___.</i>",
+"prompt": "Which empire from this unit (like the Ottoman, Mughal, Spanish, or British) had the biggest long-term impact on today's world? Explain with evidence.",
+"stem": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">Suraj-ud-Dowlah surrendered and signed a treaty.</span><span class=\"rl\">He fled and was killed. Clive had secretly paid his general, Mir Jafar (the comic's \"Jafar Ali Khan\"), to switch sides.</span></span><span class=\"fix\"><span class=\"cs\">Clive died a hero.</span><span class=\"rl\">Parliament investigated him for getting rich in India. In 1770, mass hunger under company rule killed millions in Bengal.</span></span><b class=\"kf\">Know this</b><span class=\"line\">Britain ruled India until <b>1947</b>. That's one reason English is so widely spoken in India today.</span></span>Write 1–2 sentences. Start like this: <i>The ___ Empire had the biggest long-term impact because ___.</i>",
 "stemText": "The ___ Empire had the biggest long-term impact because ___.",
 "placeholder": "The ___ Empire had the biggest long-term impact because ___."
 }
 ],
-questions:["The East India Company was a business, not a country. How did a trading company end up fighting wars?", "The comic calls Indian soldiers \"devils\" and Clive a hero. How might someone in Bengal tell this story?", "Which empire from this unit had the biggest long-term impact on today's world? Explain with evidence."],
+questions:["The East India Company was a business, not a country. How did a trading company end up fighting wars?", "The comic calls Indian soldiers \"devils\" and Clive a hero. How might someone in Bengal tell this story?", "Which empire from this unit (like the Ottoman, Mughal, Spanish, or British) had the biggest long-term impact on today's world? Explain with evidence."],
 validate(s){if(!s.name)return{text:"Type your first name + last initial (like Jordan M.) at the top of the questions.",focus:"studentName"};
  const mc=[1, 2, 3].find(i=>!s.checkDone(i));if(mc)return{text:"Get the check right for part "+mc+" first.",part:mc};
  const ma=[1, 2, 3].find(i=>!s.answer(i));if(ma)return{text:"Write your answer for part "+ma+" before turning in.",part:ma,focus:"answer"+ma};

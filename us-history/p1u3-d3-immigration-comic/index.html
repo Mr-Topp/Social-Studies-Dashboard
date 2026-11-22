@@ -35,7 +35,7 @@ body.reading-now .choices{opacity:.45;pointer-events:none}
 <div class="gr-wrap">
 <div class="kicker">U.S. History · Part 1 · Unit 3 Day 3 · Westward &amp; Industrial Expansion</div>
 <h1>The Golden Door</h1>
-<p class="hook"><span class="dime">1840–1900</span>The 1953 comic calls America "the melting pot" with a golden door. Check who got in and who got shut out. 2 pages · 2 checks · 2 short answers. <b>About 15 minutes.</b></p>
+<p class="hook"><span class="dime">1840–1900</span>Millions of families bet everything on a trip to America, like the Czechs who settled Cedar Rapids' Czech Village. The 1953 comic calls it a "golden door." Find out who got shut out. 2 pages · 2 checks · 2 short answers. <b>About 15 minutes.</b></p>
 <p class="goal"><b>Today's goal:</b> Explain who moved to America and the West, why they came, and who was shut out.</p>
 <details class="std-details"><summary>Iowa standards for today</summary>
 <p><b>Standard SS.9-12.US.10</b> — Explain the patterns of immigration and migration during the westward expansion and the influence on American economic, social, and political systems.</p><p><b>Standard SS.9-12.US.9</b> — Analyze how labor and government actions during westward expansion influenced American economic systems, urbanization, and cultural development.</p>
@@ -50,7 +50,7 @@ body.reading-now .choices{opacity:.45;pointer-events:none}
 <p class="intro-line"><b>How it works:</b> read the comic pages → answer the question about today's big idea → see what the comic got right and wrong → write 1–2 sentences. Done = all parts green, then turn in at the bottom.</p>
 <details class="wordhelp"><summary>Word help (tap to open)</summary>
 <ul class="words" aria-label="Word help">
-<li><b>Immigrant</b> = a person who moves to a new country to live</li><li><b>Push factor</b> = a problem that makes people leave home</li><li><b>Pull factor</b> = something that draws people to a new place</li><li><b>Famine</b> = a time when there isn't enough food</li><li><b>1953 comic</b> = made by the U.S. government to tell America's story in other countries. It shows one point of view.</li>
+<li><b>Immigrant</b> = a person who moves to a new country to live</li><li><b>Push factor</b> = a problem that makes people leave home</li><li><b>Pull factor</b> = something that draws people to a new place</li><li><b>Famine</b> = a time when there isn't enough food</li><li><b>Unrest</b> = fighting and trouble</li><li><b>1953 comic</b> = made by the U.S. government to tell America's story in other countries. It shows one point of view.</li>
 </ul></details>
 <p class="welcome" id="welcome" role="status"></p>
 </section>
@@ -104,10 +104,10 @@ parts:[
 "Factory jobs in American cities",
 "Opportunity in the West"
 ],
-"why": "✓ Correct. Famine (not enough food) and unrest pushed people out. Jobs and cheap land in America pulled them in.",
+"why": "✓ Correct. Famine (not enough food) and unrest (fighting and trouble) pushed people out. Jobs and cheap land in America pulled them in.",
 "hint": "Read the yellow box: \"...spurred them on.\""
 },
-"prompt": "Pick one group that came to Iowa. What pushed or pulled them here?",
+"prompt": "Pick one group that came to Iowa, like the Czechs. What pushed or pulled them here?",
 "stem": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">Hundreds of thousands came from Europe after 1840.</span><span class=\"rl\">It was millions. Nearly 12 million came from 1870 to 1900 alone.</span></span><b class=\"kf\">Know this</b><span class=\"line\">Often one family came first and wrote home. Then relatives followed. That's <b>chain migration</b>.</span><span class=\"line\">Czech families came to Cedar Rapids to work at the Sinclair meatpacking plant. Their neighborhood is still called <b>Czech Village</b>.</span></span>Write 1–2 sentences. Start like this: <i>The ___ came to Iowa because ___. That's a (push / pull) factor.</i>",
 "stemText": "The ___ came to Iowa because ___. That's a (push / pull) factor.",
 "placeholder": "The ___ came to Iowa because ___. That's a (push / pull) factor."
@@ -125,19 +125,19 @@ parts:[
 "right": "No, Congress banned Chinese workers",
 "wrong": [
 "Yes, anyone who reached New York got in",
-"No, only people from France could come",
+"No, only people with money could get in",
 "Yes, every new immigrant became a citizen"
 ],
 "why": "✓ Correct. The 1882 Chinese Exclusion Act was the first major U.S. law to keep out one nationality. It lasted until 1943.",
 "hint": "Read the orange sign under the statue."
 },
-"prompt": "Pick one group from today. What pushed or pulled them here, how were they treated, and why?",
+"prompt": "Pick one group that came to America, then or now. Why did they come, and how were they treated?",
 "stem": "<span class=\"declass\"><b>Fact file</b><b class=\"kf\">Know this</b><span class=\"line\">At <b>Ellis Island</b> (opened 1892), only about 2 of every 100 people were sent back.</span><span class=\"line\">In 1879, about 6,000 Black Southerners called <b>Exodusters</b> moved to Kansas to escape violence.</span></span>Write 1–2 sentences. Start like this: <i>The ___ came because ___. They were treated ___ because ___.</i>",
 "stemText": "The ___ came because ___. They were treated ___ because ___.",
 "placeholder": "The ___ came because ___. They were treated ___ because ___."
 }
 ],
-questions:["Pick one group that came to Iowa. What pushed or pulled them here?", "Pick one group from today. What pushed or pulled them here, how were they treated, and why?"],
+questions:["Pick one group that came to Iowa, like the Czechs. What pushed or pulled them here?", "Pick one group that came to America, then or now. Why did they come, and how were they treated?"],
 validate(s){if(!s.name)return{text:"Type your first name + last initial (like Jordan M.) at the top of the questions.",focus:"studentName"};
  const mc=[1, 2].find(i=>!s.checkDone(i));if(mc)return{text:"Get the check right for part "+mc+" first.",part:mc};
  const ma=[1, 2].find(i=>!s.answer(i));if(ma)return{text:"Write your answer for part "+ma+" before turning in.",part:ma,focus:"answer"+ma};

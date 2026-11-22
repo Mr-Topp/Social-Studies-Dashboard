@@ -149,16 +149,16 @@ parts:[
 "right": "He thought he had reached Asia",
 "wrong": [
 "The Taíno said they came from India",
-"He named them after his ship",
+"It was the Spanish word for strangers",
 "Spain's queen told him to"
 ],
 "why": "✓ Correct. Columbus thought he was in the \"Indies,\" near Asia. He was really in the Bahamas.",
 "hint": "Read the yellow box under the big panel."
 },
-"prompt": "This page shows the landing from the Spanish side. Analyze it: whose voice is missing, what might that person say, and why would they see 1492 differently?",
-"stem": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">The people on the beach say nothing.</span><span class=\"rl\">They were Taíno. Columbus wrote in his journal that they would make \"good servants.\"</span></span><b class=\"kf\">Know this</b><span class=\"line\">The comic calls the Taíno \"red-skinned.\" That's an old, insulting term.</span></span>Write 1–2 sentences. Start like this: <i>The missing voice is ___. A Taíno person watching might say \"___\" because ___.</i>",
-"stemText": "The missing voice is ___. A Taíno person watching might say \"___\" because ___.",
-"placeholder": "The missing voice is ___. A Taíno person watching might say \"___\" because ___."
+"prompt": "This page shows the landing from the Spanish side. Analyze it from the other side: what might a Taíno person on the beach say, and why?",
+"stem": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">The people on the beach say nothing.</span><span class=\"rl\">They were Taíno. Columbus wrote in his journal that they would make \"good servants.\"</span></span><b class=\"kf\">Know this</b><span class=\"line\">The comic calls the Taíno \"red-skinned.\" That's an old, insulting term.</span></span>Write 1–2 sentences. Start like this: <i>A Taíno person watching might say \"___\" because ___.</i>",
+"stemText": "A Taíno person watching might say \"___\" because ___.",
+"placeholder": "A Taíno person watching might say \"___\" because ___."
 },
 {
 "short": "Ending",
@@ -173,7 +173,7 @@ parts:[
 "right": "He had reached the Americas, not Asia",
 "wrong": [
 "Spain had paid for all four of his trips",
-"The Taíno had lived there for centuries",
+"The world was round, not flat",
 "Portugal had found a sea road to India"
 ],
 "why": "✓ Correct. He died \"still unaware that he had opened a new world.\" A mapmaker named the new land America in 1507, after Amerigo Vespucci.",
@@ -185,7 +185,7 @@ parts:[
 "placeholder": "In 1506, Columbus died ___. Meanwhile, the Taíno ___. The comic left this out because ___."
 }
 ],
-questions:["Reader page 1 calls America \"an unknown continent.\" Unknown to whom?", "The comic adds two made-up details: people thinking the world was flat, and the queen selling her jewels. Why would a storyteller add them?", "This page shows the landing from the Spanish side. Analyze it: whose voice is missing, what might that person say, and why would they see 1492 differently?", "Fix the comic's ending. Rewrite the last box so it tells the whole story."],
+questions:["Reader page 1 calls America \"an unknown continent.\" Unknown to whom?", "The comic adds two made-up details: people thinking the world was flat, and the queen selling her jewels. Why would a storyteller add them?", "This page shows the landing from the Spanish side. Analyze it from the other side: what might a Taíno person on the beach say, and why?", "Fix the comic's ending. Rewrite the last box so it tells the whole story."],
 validate(s){if(!s.name)return{text:"Type your first name + last initial (like Jordan M.) at the top of the questions.",focus:"studentName"};
  const mc=[1, 2, 3, 4].find(i=>!s.checkDone(i));if(mc)return{text:"Get the check right for part "+mc+" first.",part:mc};
  const ma=[1, 2, 3, 4].find(i=>!s.answer(i));if(ma)return{text:"Write your answer for part "+ma+" before turning in.",part:ma,focus:"answer"+ma};

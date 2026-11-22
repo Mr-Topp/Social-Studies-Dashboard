@@ -155,13 +155,13 @@ parts:[
 "why": "✓ Correct. Roger Sherman of Connecticut pushed this deal. Big states got the House, small states got the Senate. That's why Iowa has 4 House members and 2 senators.",
 "hint": "Read the box on the left side of the page."
 },
-"prompt": "Assess: pick ONE of Washington, Madison, Franklin, or Sherman. How did he show civic virtue (putting the common good first), and how did it help the new country?",
+"prompt": "Assess: pick ONE of Washington, Madison, Franklin, or Sherman. How did he put the country first (civic virtue), and why did that help?",
 "stem": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">(Nothing about slavery.)</span><span class=\"rl\">The Three-Fifths Compromise counted 3 of every 5 enslaved people for House seats. That gave slave states more power.</span></span><b class=\"kf\">Know this</b><span class=\"line\">All 55 delegates were white men, and most were wealthy. Women, Black Americans, Native nations, and most poor farmers had no seat.</span></span>Write 1–2 sentences. Start like this: <i>___ showed civic virtue by ___. This helped the new country because ___.</i>",
 "stemText": "___ showed civic virtue by ___. This helped the new country because ___.",
 "placeholder": "___ showed civic virtue by ___. This helped the new country because ___."
 }
 ],
-questions:["Big states vs. small states: what did each side want, and why?", "Why did Franklin's speech matter? Explain what could have happened if neither side gave in.", "Assess: pick ONE of Washington, Madison, Franklin, or Sherman. How did he show civic virtue (putting the common good first), and how did it help the new country?"],
+questions:["Big states vs. small states: what did each side want, and why?", "Why did Franklin's speech matter? Explain what could have happened if neither side gave in.", "Assess: pick ONE of Washington, Madison, Franklin, or Sherman. How did he put the country first (civic virtue), and why did that help?"],
 validate(s){if(!s.name)return{text:"Type your first name + last initial (like Jordan M.) at the top of the questions.",focus:"studentName"};
  const mc=[1, 2, 3].find(i=>!s.checkDone(i));if(mc)return{text:"Get the check right for part "+mc+" first.",part:mc};
  const ma=[1, 2, 3].find(i=>!s.answer(i));if(ma)return{text:"Write your answer for part "+ma+" before turning in.",part:ma,focus:"answer"+ma};

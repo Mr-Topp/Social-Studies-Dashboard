@@ -97,7 +97,7 @@ parts:[
 "check": {
 "page": 1,
 "tag": "Reading check · Reader page 1",
-"q": "Why does the first man say \"we need not fear a concentration of power\"?",
+"q": "The first man says \"we need not fear a concentration of power\" (all power in one place). Why not?",
 "right": "Power is split among three branches",
 "wrong": [
 "The states must approve every new law",
@@ -108,7 +108,7 @@ parts:[
 "hint": "Read the speech bubble of the man holding the paper."
 },
 "prompt": "The second man says \"the people's rights require greater protection.\" Which side was he on, and what did he want?",
-"stem": "<span class=\"declass\"><b>Fact file</b><b class=\"kf\">Know this</b><span class=\"line\">Checks: the President can <b>veto</b> a bill. Congress can override it with a two-thirds vote. Courts can strike down a law.</span><span class=\"line\"><b>Anti-Federalists</b> like Patrick Henry feared a new tyranny. Their biggest complaint: no list of protected rights. <b>George Mason</b> of Virginia refused to sign for that reason.</span></span>Write 1–2 sentences. Start like this: <i>He was on the (Federalist / Anti-Federalist) side because ___. He wanted ___.</i>",
+"stem": "<span class=\"declass\"><b>Fact file</b><b class=\"kf\">Know this</b><span class=\"line\">Checks: the President can <b>veto</b> a bill. Congress can override it with a two-thirds vote. Courts can strike down a law.</span><span class=\"line\"><b>Anti-Federalists</b> feared a new king-like ruler and wanted a list of rights. <b>George Mason</b> of Virginia refused to sign without one.</span></span>Write 1–2 sentences. Start like this: <i>He was on the (Federalist / Anti-Federalist) side because ___. He wanted ___.</i>",
 "stemText": "He was on the (Federalist / Anti-Federalist) side because ___. He wanted ___.",
 "placeholder": "He was on the (Federalist / Anti-Federalist) side because ___. He wanted ___."
 },
@@ -124,14 +124,14 @@ parts:[
 "q": "Why were these rights added to the Constitution?",
 "right": "Anti-Federalists demanded a list of rights",
 "wrong": [
-"The king of England asked for them in a treaty",
+"Federalists wanted a stronger President",
 "The Supreme Court ordered Congress to add them",
 "Washington wrote them during the war"
 ],
 "why": "✓ Correct. To win ratification, Federalists promised a bill of rights. Madison wrote it, and it was added in 1791.",
 "hint": "Read the box on the left. Then think back to page 1: \"the people's rights require greater protection!\""
 },
-"prompt": "Who won the ratification fight: Federalists, Anti-Federalists, or both? Defend it.",
+"prompt": "Who won the fight to approve the Constitution: Federalists, Anti-Federalists, or both? Explain why.",
 "stem": "<span class=\"declass\"><b>Fact file</b><b class=\"kf\">Know this</b><span class=\"line\"><b>1st Amendment:</b> religion, speech, press, gathering. In <b>Tinker v. Des Moines</b> (1969), the Supreme Court said students keep free speech at school.</span><span class=\"line\">\"Sanctity of the home\" = the <b>4th Amendment</b>, which bans unreasonable searches.</span></span>Write 1–2 sentences. Start like this: <i>I think ___ won because ___.</i>",
 "stemText": "I think ___ won because ___.",
 "placeholder": "I think ___ won because ___."
@@ -155,13 +155,13 @@ parts:[
 "why": "✓ Correct. Hamilton wanted a strong central government. Jefferson wanted more power left with the states. That's the federalism fight.",
 "hint": "Read the yellow boxes next to Hamilton and Jefferson."
 },
-"prompt": "Pick ONE: separation of powers, checks and balances, federalism, or the Bill of Rights. Explain how it keeps the government from getting too much power. Give one example from the comic.",
+"prompt": "Pick ONE: separation of powers, checks and balances, federalism, or the Bill of Rights. Explain how it stops a power grab, with one example from the comic.",
 "stem": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">Their two sides live on in today's two parties.</span><span class=\"rl\">Hamilton's Federalist Party died out by the 1820s. Today's Republican Party started in 1854.</span></span><b class=\"kf\">Know this</b><span class=\"line\"><b>Federalism</b> = power split between the national government and the states. The national government prints money. Iowa runs its schools.</span><span class=\"line\">The <b>10th Amendment</b>: powers not given to the national government belong to the states or the people.</span></span>Write 1–2 sentences. Start like this: <i>___ keeps the government from getting too much power because ___. For example, ___.</i>",
 "stemText": "___ keeps the government from getting too much power because ___. For example, ___.",
 "placeholder": "___ keeps the government from getting too much power because ___. For example, ___."
 }
 ],
-questions:["The second man says \"the people's rights require greater protection.\" Which side was he on, and what did he want?", "Who won the ratification fight: Federalists, Anti-Federalists, or both? Defend it.", "Pick ONE: separation of powers, checks and balances, federalism, or the Bill of Rights. Explain how it keeps the government from getting too much power. Give one example from the comic."],
+questions:["The second man says \"the people's rights require greater protection.\" Which side was he on, and what did he want?", "Who won the fight to approve the Constitution: Federalists, Anti-Federalists, or both? Explain why.", "Pick ONE: separation of powers, checks and balances, federalism, or the Bill of Rights. Explain how it stops a power grab, with one example from the comic."],
 validate(s){if(!s.name)return{text:"Type your first name + last initial (like Jordan M.) at the top of the questions.",focus:"studentName"};
  const mc=[1, 2, 3].find(i=>!s.checkDone(i));if(mc)return{text:"Get the check right for part "+mc+" first.",part:mc};
  const ma=[1, 2, 3].find(i=>!s.answer(i));if(ma)return{text:"Write your answer for part "+ma+" before turning in.",part:ma,focus:"answer"+ma};

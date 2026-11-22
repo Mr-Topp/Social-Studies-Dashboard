@@ -35,7 +35,7 @@ body.reading-now .choices{opacity:.45;pointer-events:none}
 <div class="gr-wrap">
 <div class="kicker">World History · Part 1 · Unit 1 Day 1 · Exploration &amp; Global Trade</div>
 <h1>The Road to the Spice Coast</h1>
-<p class="hook"><span class="dime">1271–1502</span>Europeans risked months at sea, storms, and mutiny for pepper. Read real 1940s comics about Marco Polo and Vasco da Gama, then check what they got wrong. 9 pages · 3 checks · 3 short answers. <b>About 25 minutes.</b></p>
+<p class="hook"><span class="dime">1271–1502</span>Europeans risked months at sea, storms, and their own crews turning on them, all for pepper. Read real 1940s comics about Marco Polo and Vasco da Gama, then check what they got wrong. 9 pages · 3 checks · 3 short answers. <b>About 20 minutes.</b></p>
 <p class="goal"><b>Today's goal:</b> Explain why Portugal wanted its own sea route to Asia, and how people in India saw the Portuguese.</p>
 <details class="std-details"><summary>Iowa standards for today</summary>
 <p><b>Standard SS.9-12.WH.3</b> — Analyze the interactions between Europeans and peoples of other regions around the world, considering multiple perspectives from 1450 - 1750.</p>
@@ -121,15 +121,15 @@ parts:[
 "check": {
 "page": 4,
 "tag": "Reading check · Reader page 4",
-"q": "What did Dias's 1488 trip prove, opening the way for Portugal to trade straight with India?",
+"q": "Dias's 1488 trip opened a new trade route for Portugal. What did it prove?",
 "right": "Ships could sail around Africa to India",
 "wrong": [
 "Ships could sail west to reach China",
-"India could be reached by way of the Red Sea",
+"India could be reached through the Red Sea",
 "Africa was too big to sail around"
 ],
 "why": "✓ Correct. Dias rounded the southern tip of Africa. Now Portugal knew there was a sea road to India.",
-"hint": "Read Diaz's big speech bubble: \"There is a way around...\""
+"hint": "Read the big speech bubble from Dias (the comic spells it Diaz): \"There is a way around...\""
 },
 "prompt": "Why would Portugal pay for a long, dangerous voyage around Africa? Use the word middlemen.",
 "stem": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">Da Gama sailed on July 9, 1497.</span><span class=\"rl\">He sailed on July 8, 1497, with 4 ships and about 170 men.</span></span><b class=\"kf\">Know this</b><span class=\"line\">Portugal wanted its <b>own</b> sea route so it could skip the middlemen and buy spices cheap.</span><span class=\"line\">Only about 55 of da Gama's men made it home.</span></span>Write 1–2 sentences. Start like this: <i>Portugal paid for the voyage because ___.</i>",
@@ -155,13 +155,13 @@ parts:[
 "why": "✓ Correct. An Indian sailor was working in an East African port. Indian Ocean traders had linked Africa, Arabia, and India for centuries. Da Gama needed their know-how.",
 "hint": "Read both speech bubbles at Malindi: \"We seek a pilot...\" and \"There is an Indian from Gujarat here!\""
 },
-"prompt": "The comic calls the Portuguese \"peaceful merchants.\" Analyze how people in Calicut would tell this story differently, and explain why. Use one fact from the comic.",
-"stem": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">It took 4½ months to cross to India.</span><span class=\"rl\">With the monsoon winds and the pilot, it took about 23 days.</span></span><span class=\"fix\"><span class=\"cs\">The Portuguese were \"peaceful merchants.\"</span><span class=\"rl\">In 1502, da Gama fired cannons on Calicut and burned a ship full of pilgrims.</span></span><b class=\"kf\">Know this</b><span class=\"line\">Sailors crossed the Indian Ocean by riding the <b>monsoon</b>, winds that blow one way in summer and the other way in winter.</span><span class=\"line\">Portugal was the newcomer. It used cannons to force its way into a trade that was already busy.</span></span>Write 1–2 sentences. Start like this: <i>People in Calicut might say ___ because ___. One fact from the comic that backs this up: ___.</i>",
+"prompt": "The comic calls the Portuguese \"peaceful merchants.\" How would people in Calicut tell this story differently, and why? Use one fact.",
+"stem": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">It took 4½ months to cross to India.</span><span class=\"rl\">With the monsoon winds and the pilot, it took about 23 days.</span></span><span class=\"fix\"><span class=\"cs\">The Portuguese were \"peaceful merchants.\"</span><span class=\"rl\">In 1502, da Gama fired cannons at Calicut and burned a ship of people coming home from Mecca.</span></span><b class=\"kf\">Know this</b><span class=\"line\">Sailors crossed by riding the <b>monsoon</b>, winds that switch direction with the seasons.</span></span>Write 1–2 sentences. Start like this: <i>People in Calicut might say ___ because ___. One fact from the comic that backs this up: ___.</i>",
 "stemText": "People in Calicut might say ___ because ___. One fact from the comic that backs this up: ___.",
 "placeholder": "People in Calicut might say ___ because ___. One fact from the comic that backs this up: ___."
 }
 ],
-questions:["Marco Polo's book told Europeans about Asia's huge riches. Why would stories like that make Europeans want to reach Asia themselves?", "Why would Portugal pay for a long, dangerous voyage around Africa? Use the word middlemen.", "The comic calls the Portuguese \"peaceful merchants.\" Analyze how people in Calicut would tell this story differently, and explain why. Use one fact from the comic."],
+questions:["Marco Polo's book told Europeans about Asia's huge riches. Why would stories like that make Europeans want to reach Asia themselves?", "Why would Portugal pay for a long, dangerous voyage around Africa? Use the word middlemen.", "The comic calls the Portuguese \"peaceful merchants.\" How would people in Calicut tell this story differently, and why? Use one fact."],
 validate(s){if(!s.name)return{text:"Type your first name + last initial (like Jordan M.) at the top of the questions.",focus:"studentName"};
  const mc=[1, 2, 3].find(i=>!s.checkDone(i));if(mc)return{text:"Get the check right for part "+mc+" first.",part:mc};
  const ma=[1, 2, 3].find(i=>!s.answer(i));if(ma)return{text:"Write your answer for part "+ma+" before turning in.",part:ma,focus:"answer"+ma};

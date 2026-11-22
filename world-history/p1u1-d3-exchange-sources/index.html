@@ -126,7 +126,7 @@ parts:[
 "wrong": [
 "They refused to see the Spanish doctors",
 "The disease came from their own animals",
-"Smallpox only spreads in very hot places"
+"They had no doctors or medicine at all"
 ],
 "why": "✓ Correct. Their bodies had never fought these germs before, so the diseases spread fast and killed millions.",
 "hint": "Read the box on page 4: \"Native Americans had never faced them...\""
@@ -155,13 +155,13 @@ parts:[
 "why": "✓ Correct. The same change helped one group and hurt another. That is why the Columbian Exchange had winners and losers.",
 "hint": "Read the box at the top of page 5, then the \"In plain words\" box."
 },
-"prompt": "Was the Columbian Exchange more helpful or more harmful? Give one example from each side, and explain why one side outweighs the other.",
-"stem": "<span class=\"declass\"><b>Fact file</b><b class=\"kf\">Know this</b><span class=\"line\">On Barbados, sugar planters cut down most of the island's forest. Planters got rich, while enslaved Africans did the deadly work.</span></span>Write 1–2 sentences. Start like this: <i>The Columbian Exchange was more ___ because ___. This matters more than ___ because ___.</i>",
-"stemText": "The Columbian Exchange was more ___ because ___. This matters more than ___ because ___.",
-"placeholder": "The Columbian Exchange was more ___ because ___. This matters more than ___ because ___."
+"prompt": "Was the Columbian Exchange more helpful or more harmful? Give one example from each side, and explain which matters more.",
+"stem": "<span class=\"declass\"><b>Fact file</b><b class=\"kf\">Know this</b><span class=\"line\">On Barbados, sugar planters cut down most of the island's forest. Planters got rich, while enslaved Africans did the deadly work.</span></span>Write 1–2 sentences. Start like this: <i>The Columbian Exchange was more ___ because ___. That matters more than ___.</i>",
+"stemText": "The Columbian Exchange was more ___ because ___. That matters more than ___.",
+"placeholder": "The Columbian Exchange was more ___ because ___. That matters more than ___."
 }
 ],
-questions:["How did the Columbian Exchange change what people around the world eat? Use one example.", "Horses and germs both came from Europe. How did each one change life in the Americas?", "Was the Columbian Exchange more helpful or more harmful? Give one example from each side, and explain why one side outweighs the other."],
+questions:["How did the Columbian Exchange change what people around the world eat? Use one example.", "Horses and germs both came from Europe. How did each one change life in the Americas?", "Was the Columbian Exchange more helpful or more harmful? Give one example from each side, and explain which matters more."],
 validate(s){if(!s.name)return{text:"Type your first name + last initial (like Jordan M.) at the top of the questions.",focus:"studentName"};
  const mc=[1, 2, 3].find(i=>!s.checkDone(i));if(mc)return{text:"Get the check right for part "+mc+" first.",part:mc};
  const ma=[1, 2, 3].find(i=>!s.answer(i));if(ma)return{text:"Write your answer for part "+ma+" before turning in.",part:ma,focus:"answer"+ma};

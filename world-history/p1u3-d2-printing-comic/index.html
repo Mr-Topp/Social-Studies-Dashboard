@@ -35,7 +35,7 @@ body.reading-now .choices{opacity:.45;pointer-events:none}
 <div class="gr-wrap">
 <div class="kicker">World History · Part 1 · Unit 3 Day 2 · Renaissance, Reformation &amp; New Ideas</div>
 <h1>The Devil's Copies? Gutenberg's Press</h1>
-<p class="hook"><span class="dime">1440–1500</span>People saw two books that matched letter for letter and asked: is this the devil's work? Read a real 1940s comic about the printing press, then check what it got wrong. 9 pages · 3 checks · 3 short answers. <b>About 20 minutes.</b></p>
+<p class="hook"><span class="dime">1440–1500</span>Legend says people saw two books that matched letter for letter and asked: is this the devil's work? Read a real 1940s comic about the printing press, then check what it got wrong. 9 pages · 3 checks · 3 short answers. <b>About 20 minutes.</b></p>
 <p class="goal"><b>Today's goal:</b> Explain how the printing press spread new ideas and changed who could read.</p>
 <details class="std-details"><summary>Iowa standards for today</summary>
 <p><b>Standard SS.9-12.WH.14</b> — Analyze the role of printing and the printing press in the development of new intellectual and belief systems.</p><p><b>Standard SS.9-12.WH.10</b> — Explain how the Renaissance changed European societies from 1450 to 1750.</p>
@@ -107,7 +107,7 @@ parts:[
 "why": "✓ Correct. A scribe could spend months on one book, so books cost a fortune.",
 "hint": "Read the scroll: \"Each book had to be...\""
 },
-"prompt": "Gutenberg first carved a whole page on one block of wood. What was the problem with that? (Hint: look at what happens on the next page.)",
+"prompt": "Gutenberg first carved a whole page on one block of wood. What was the problem with that?",
 "stem": "<span class=\"declass\"><b>Fact file</b><b class=\"kf\">Know this</b><span class=\"line\">Most books were in <b>Latin</b>, and most ordinary people could not read.</span></span>Write 1–2 sentences. Start like this: <i>Carving a whole page was a problem because ___.</i>",
 "stemText": "Carving a whole page was a problem because ___.",
 "placeholder": "Carving a whole page was a problem because ___."
@@ -161,7 +161,7 @@ parts:[
 "placeholder": "The printing press changed society because ___."
 }
 ],
-questions:["Gutenberg first carved a whole page on one block of wood. What was the problem with that? (Hint: look at what happens on the next page.)", "Why was movable type better than carving a whole page on one block?", "How did the printing press help new ideas spread and change society? Give your strongest reason."],
+questions:["Gutenberg first carved a whole page on one block of wood. What was the problem with that?", "Why was movable type better than carving a whole page on one block?", "How did the printing press help new ideas spread and change society? Give your strongest reason."],
 validate(s){if(!s.name)return{text:"Type your first name + last initial (like Jordan M.) at the top of the questions.",focus:"studentName"};
  const mc=[1, 2, 3].find(i=>!s.checkDone(i));if(mc)return{text:"Get the check right for part "+mc+" first.",part:mc};
  const ma=[1, 2, 3].find(i=>!s.answer(i));if(ma)return{text:"Write your answer for part "+ma+" before turning in.",part:ma,focus:"answer"+ma};

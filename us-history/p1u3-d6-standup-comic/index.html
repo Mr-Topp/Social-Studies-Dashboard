@@ -35,7 +35,7 @@ body.reading-now .choices{opacity:.45;pointer-events:none}
 <div class="gr-wrap">
 <div class="kicker">U.S. History · Part 1 · Unit 3 Day 6 · Westward &amp; Industrial Expansion</div>
 <h1>Who Stood Up?</h1>
-<p class="hook"><span class="dime">1867–1892</span>The 1953 comic gives the farmers' revolt to one famous speaker. It forgets the Iowan who ran for president first, and the Ponca chief who won in court. 2 pages · 2 checks · 2 short answers. <b>About 20 minutes.</b></p>
+<p class="hook"><span class="dime">1867–1892</span>An Iowan who got a million votes for president. A Ponca chief who took the U.S. Army to court and won. A teen girl who crawled across a bridge in a storm. The 1953 comic forgot all three. 2 pages · 2 checks · 2 short answers. <b>About 20 minutes.</b></p>
 <p class="goal"><b>Today's goal:</b> Explain how people showed civic virtue by standing up for their communities.</p>
 <details class="std-details"><summary>Iowa standards for today</summary>
 <p><b>Standard SS.9-12.US.13</b> — Assess the impact of exemplary Americans and Iowans who displayed civic virtues during the expansion westward and the building of an industrial America.</p><p><b>Standard SS.9-12.US.9</b> — Analyze how labor and government actions during westward expansion influenced American economic systems, urbanization, and cultural development.</p><p><b>Standard SS.9-12.US.12</b> — Analyze diverse ideologies through primary and secondary sources, noting the impact on social, economic, and political institutions during western and industrial expansion.</p>
@@ -50,7 +50,7 @@ body.reading-now .choices{opacity:.45;pointer-events:none}
 <p class="intro-line"><b>How it works:</b> read the comic pages → answer the question about today's big idea → see what the comic got right and wrong → write 1–2 sentences. Done = all parts green, then turn in at the bottom.</p>
 <details class="wordhelp"><summary>Word help (tap to open)</summary>
 <ul class="words" aria-label="Word help">
-<li><b>Civic virtue</b> = putting your community's good ahead of your own comfort</li><li><b>Grange</b> = a club for farm families</li><li><b>Populist</b> = a party of farmers and workers</li><li><b>Third party</b> = a party outside the two biggest ones</li><li><b>1953 comic</b> = made by the U.S. government to tell America's story in other countries. It shows one point of view.</li>
+<li><b>Civic virtue</b> = putting your community's good ahead of your own comfort</li><li><b>Grange</b> = a club for farm families</li><li><b>Populist</b> = a party of farmers and workers</li><li><b>Third party</b> = a party outside the two biggest ones</li><li><b>Compact</b> = a deal or agreement</li><li><b>1953 comic</b> = made by the U.S. government to tell America's story in other countries. It shows one point of view.</li>
 </ul></details>
 <p class="welcome" id="welcome" role="status"></p>
 </section>
@@ -97,10 +97,10 @@ parts:[
 "check": {
 "page": 1,
 "tag": "Reading check · Reader page 1",
-"q": "Bryan lost, but most Populist reforms became laws. What does that show about third parties?",
-"right": "They can lose and still change laws",
+"q": "The Populists were a third party. Read the box under Bryan. What does their story show about third parties?",
+"right": "Their ideas can win even if they lose",
 "wrong": [
-"They only matter when they win the White House",
+"They only matter if they win the White House",
 "They have to join a big party to get votes",
 "They hurt the country by splitting votes"
 ],
@@ -115,29 +115,29 @@ parts:[
 {
 "short": "Standing Bear",
 "ref": "Reader page 2",
-"title": "2. Nothing good ignores individuals",
+"title": "2. Every person counts",
 "from": 2,
 "to": 2,
 "check": {
 "page": 2,
 "tag": "Reading check · Reader page 2",
-"q": "Read the scroll. Whitman says the American compact (deal) is with whom? Standing Bear won his 1879 court case with the same idea.",
+"q": "Read the scroll. Whitman says the American \"compact\" (deal) is with whom?",
 "right": "Individuals: every person counts",
 "wrong": [
 "The states: each state makes the rules",
 "Its leaders: they decide for everyone",
 "Its citizens: only voters have rights"
 ],
-"why": "✓ Correct. The scroll says the American deal is \"altogether with individuals.\" Standing Bear told the court, \"I am a man.\" The judge ruled that an Indian is a person under U.S. law, with rights the courts must protect.",
+"why": "✓ Correct. The scroll says the deal is \"altogether with individuals.\" Ponca chief Standing Bear won his 1879 court case with that idea. He told the court, \"I am a man.\" The judge ruled that an Indian is a person under U.S. law, with rights the courts must protect.",
 "hint": "Read the last lines on the scroll: \"altogether with ___.\""
 },
-"prompt": "Whose actions did the most for their community: Standing Bear, Susette La Flesche, Kate Shelley, or the Grangers? What risk did they take, and what changed because of it?",
+"prompt": "Standing Bear, Susette La Flesche, Kate Shelley, or the Grangers: who did the most for their community? What risk did they take?",
 "stem": "<span class=\"declass\"><b>Fact file</b><b class=\"kf\">Know this</b><span class=\"line\"><b>Susette La Flesche</b> (luh-FLESH) of the Omaha Nation translated for Standing Bear on a speaking tour of Eastern cities.</span><span class=\"line\">In 1881, Iowa teen <b>Kate Shelley</b> crawled across a railroad bridge in a storm to warn the station about a train wreck.</span></span>Write 1–2 sentences. Start like this: <i>___ did the most because ___. The risk they took was ___. Because of it, ___.</i>",
 "stemText": "___ did the most because ___. The risk they took was ___. Because of it, ___.",
 "placeholder": "___ did the most because ___. The risk they took was ___. Because of it, ___."
 }
 ],
-questions:["The Populists lost elections. Did they lose or win in the end? Use one fact.", "Whose actions did the most for their community: Standing Bear, Susette La Flesche, Kate Shelley, or the Grangers? What risk did they take, and what changed because of it?"],
+questions:["The Populists lost elections. Did they lose or win in the end? Use one fact.", "Standing Bear, Susette La Flesche, Kate Shelley, or the Grangers: who did the most for their community? What risk did they take?"],
 validate(s){if(!s.name)return{text:"Type your first name + last initial (like Jordan M.) at the top of the questions.",focus:"studentName"};
  const mc=[1, 2].find(i=>!s.checkDone(i));if(mc)return{text:"Get the check right for part "+mc+" first.",part:mc};
  const ma=[1, 2].find(i=>!s.answer(i));if(ma)return{text:"Write your answer for part "+ma+" before turning in.",part:ma,focus:"answer"+ma};

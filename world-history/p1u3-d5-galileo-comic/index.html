@@ -102,7 +102,7 @@ parts:[
 "wrong": [
 "He asked the pope for answers",
 "He copied what Aristotle said",
-"He waited for a sign from God"
+"He trusted what his teachers said"
 ],
 "why": "✓ Correct. Testing ideas instead of trusting old books is the start of the scientific method.",
 "hint": "Read the man's speech bubble about the wood and the iron."
@@ -155,13 +155,13 @@ parts:[
 "why": "✓ Correct. Old authority pushed back hard. But the new ideas kept spreading.",
 "hint": "Read the judges' speech bubble on the right."
 },
-"prompt": "Analyze how the Scientific Revolution changed the way people saw the world and challenged old authority. Explain why it mattered, using one fact from the comic.",
-"stem": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">Galileo was locked in a dungeon.</span><span class=\"rl\">He lived under house arrest at home until he died in 1642.</span></span><b class=\"kf\">Know this</b><span class=\"line\">In 1687, <b>Isaac Newton</b> used math to explain gravity. In 1992, the Church said it had been wrong about Galileo.</span></span>Write 1–2 sentences. Start like this: <i>The Scientific Revolution changed how people saw the world by ___. This challenged old authority because ___.</i>",
+"prompt": "Analyze: how did the Scientific Revolution change the way people saw the world and challenge old authority? Use one fact from the comic.",
+"stem": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">Galileo was locked in a dungeon.</span><span class=\"rl\">He was locked up in his own home until he died in 1642.</span></span><b class=\"kf\">Know this</b><span class=\"line\">In 1687, <b>Isaac Newton</b> used math to explain gravity. In 1992, the Church said it had been wrong about Galileo.</span></span>Write 1–2 sentences. Start like this: <i>The Scientific Revolution changed how people saw the world by ___. This challenged old authority because ___.</i>",
 "stemText": "The Scientific Revolution changed how people saw the world by ___. This challenged old authority because ___.",
 "placeholder": "The Scientific Revolution changed how people saw the world by ___. This challenged old authority because ___."
 }
 ],
-questions:["How was Galileo's way of finding the truth different from just trusting old books?", "Why did Jupiter's moons challenge the old idea that everything circles the Earth?", "Analyze how the Scientific Revolution changed the way people saw the world and challenged old authority. Explain why it mattered, using one fact from the comic."],
+questions:["How was Galileo's way of finding the truth different from just trusting old books?", "Why did Jupiter's moons challenge the old idea that everything circles the Earth?", "Analyze: how did the Scientific Revolution change the way people saw the world and challenge old authority? Use one fact from the comic."],
 validate(s){if(!s.name)return{text:"Type your first name + last initial (like Jordan M.) at the top of the questions.",focus:"studentName"};
  const mc=[1, 2, 3].find(i=>!s.checkDone(i));if(mc)return{text:"Get the check right for part "+mc+" first.",part:mc};
  const ma=[1, 2, 3].find(i=>!s.answer(i));if(ma)return{text:"Write your answer for part "+ma+" before turning in.",part:ma,focus:"answer"+ma};

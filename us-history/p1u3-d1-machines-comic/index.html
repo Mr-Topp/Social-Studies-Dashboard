@@ -35,7 +35,7 @@ body.reading-now .choices{opacity:.45;pointer-events:none}
 <div class="gr-wrap">
 <div class="kicker">U.S. History · Part 1 · Unit 3 Day 1 · Westward &amp; Industrial Expansion</div>
 <h1>New Machines, New Money</h1>
-<p class="hook"><span class="dime">1876–1900</span>Telephones, light bulbs, and steel made a few men rich and changed everyone's life. Read the 1953 comic's version and check who it skips. 3 pages · 3 checks · 3 short answers. <b>About 20 minutes.</b></p>
+<p class="hook"><span class="dime">1876–1900</span>In 1876, people thought the telephone was a toy. A poor 12-year-old immigrant became one of the richest men alive. Read how, then find out who did the sweaty work. 3 pages · 3 checks · 3 short answers. <b>About 20 minutes.</b></p>
 <p class="goal"><b>Today's goal:</b> Explain how new machines changed work and life, and who got rich from them.</p>
 <details class="std-details"><summary>Iowa standards for today</summary>
 <p><b>Standard SS.9-12.US.8</b> — Evaluate the impact of inventions and technological innovations on American society and culture.</p><p><b>Standard SS.9-12.US.12</b> — Analyze diverse ideologies through primary and secondary sources, noting the impact on social, economic, and political institutions during western and industrial expansion.</p>
@@ -100,7 +100,7 @@ parts:[
 "q": "What could Bell's telephone do that the telegraph could not?",
 "right": "Let people talk by voice over a wire",
 "wrong": [
-"Light a whole room with no fire burning in it",
+"Light up a room with no flame or fire",
 "Send messages in dots and dashes",
 "Record music to play back later"
 ],
@@ -108,7 +108,7 @@ parts:[
 "hint": "Read the woman's speech bubble: \"I can hear someone speaking...\""
 },
 "prompt": "Which invention changed American life the most: the telephone, the light bulb, or cheap steel? Explain why, using one detail from the comic or a fact.",
-"stem": "<span class=\"declass\"><b>Fact file</b><b class=\"kf\">Know this</b><span class=\"line\">Edison's team made a long-lasting <b>light bulb</b> in 1879. By 1882, his power station lit buildings in New York, so factories and stores could work after dark.</span><span class=\"line\">Phones and typewriters made new office jobs. By 1900, about 3 in 4 typists were women.</span></span>Write 1–2 sentences. Start like this: <i>The ___ changed American life the most because ___. It helped ___, so ___.</i>",
+"stem": "<span class=\"declass\"><b>Fact file</b><b class=\"kf\">Know this</b><span class=\"line\">Edison's team made a long-lasting <b>light bulb</b> in 1879. Soon factories and stores could stay open after dark.</span><span class=\"line\">Phones and typewriters made new office jobs. By 1900, about 3 in 4 typists were women.</span></span>Write 1–2 sentences. Start like this: <i>The ___ changed American life the most because ___. It helped ___, so ___.</i>",
 "stemText": "The ___ changed American life the most because ___. It helped ___, so ___.",
 "placeholder": "The ___ changed American life the most because ___. It helped ___, so ___."
 },
@@ -125,7 +125,7 @@ parts:[
 "right": "Machines were replacing handwork",
 "wrong": [
 "Farms were replacing city factories",
-"Americans were moving back to Europe",
+"More things were being made by hand",
 "Factories were closing all over the country"
 ],
 "why": "✓ Correct. That's industrialization: making things by machine instead of by hand. Cheap steel from mills like Carnegie's built railroads, bridges, and cities.",
@@ -155,13 +155,13 @@ parts:[
 "why": "✓ Correct. Carnegie wrote that a man who dies rich dies disgraced. He paid for libraries, a technical school, and a peace group.",
 "hint": "Read the box at the bottom: \"he gave millions for...\""
 },
-"prompt": "Carnegie wrote, \"The man who dies thus rich dies disgraced.\" Would his steelworkers agree? Why or why not?",
+"prompt": "Carnegie wrote that dying rich is a disgrace (something to be ashamed of). Would his steelworkers agree? Why or why not?",
 "stem": "<span class=\"declass\"><b>Fact file</b><b class=\"kf\">Know this</b><span class=\"line\">Carnegie's money built about <b>100</b> public libraries in Iowa.</span><span class=\"line\">His steelworkers often worked <b>12-hour shifts</b> in hot, dangerous mills for low pay.</span></span>Write 1–2 sentences. Start like this: <i>His steelworkers would (agree / disagree) because ___.</i>",
 "stemText": "His steelworkers would (agree / disagree) because ___.",
 "placeholder": "His steelworkers would (agree / disagree) because ___."
 }
 ],
-questions:["Which invention changed American life the most: the telephone, the light bulb, or cheap steel? Explain why, using one detail from the comic or a fact.", "Carnegie came as a poor 12-year-old and became one of the richest men in the world. Who did the hard work that made him rich?", "Carnegie wrote, \"The man who dies thus rich dies disgraced.\" Would his steelworkers agree? Why or why not?"],
+questions:["Which invention changed American life the most: the telephone, the light bulb, or cheap steel? Explain why, using one detail from the comic or a fact.", "Carnegie came as a poor 12-year-old and became one of the richest men in the world. Who did the hard work that made him rich?", "Carnegie wrote that dying rich is a disgrace (something to be ashamed of). Would his steelworkers agree? Why or why not?"],
 validate(s){if(!s.name)return{text:"Type your first name + last initial (like Jordan M.) at the top of the questions.",focus:"studentName"};
  const mc=[1, 2, 3].find(i=>!s.checkDone(i));if(mc)return{text:"Get the check right for part "+mc+" first.",part:mc};
  const ma=[1, 2, 3].find(i=>!s.answer(i));if(ma)return{text:"Write your answer for part "+ma+" before turning in.",part:ma,focus:"answer"+ma};

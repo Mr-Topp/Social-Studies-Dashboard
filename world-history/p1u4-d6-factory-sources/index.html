@@ -97,12 +97,12 @@ parts:[
 "check": {
 "page": 2,
 "tag": "Reading check · Reader page 2",
-"q": "What does Elizabeth Bentley's testimony show about mill work?",
+"q": "What does Elizabeth Bentley tell Parliament about mill work?",
 "right": "Kids worked very long hours",
 "wrong": [
-"Kids worked only a few hours a day",
+"Kids worked only on busy days",
 "Mills paid kids more than adults",
-"Mill work was safe and easy for kids"
+"Kids got paid extra for long shifts"
 ],
 "why": "✓ Correct. Children worked 12 to 16 hours a day in mills and mines.",
 "hint": "Read the quote and the \"In plain words\" box on page 2."
@@ -148,20 +148,20 @@ parts:[
 "q": "What did the Factory Act of 1833 do?",
 "right": "Banned kids under 9 from textile mills",
 "wrong": [
-"Closed every factory in Britain for a full year",
+"Set a minimum wage for all mill workers",
 "Raised every adult worker's pay",
-"Let kids work only during the day"
+"Banned kids from coal mines"
 ],
 "why": "✓ Correct. It was the first real limit on child labor in Britain's mills.",
 "hint": "Read the last sentence on page 6."
 },
-"prompt": "Was the Industrial Revolution good or bad for workers and families? Give one positive and one negative, and explain why one matters more.",
-"stem": "<span class=\"declass\"><b>Fact file</b><b class=\"kf\">Know this</b><span class=\"line\">Its weakness: only 4 inspectors had to check thousands of mills, so many owners broke the rules.</span><span class=\"line\">Goods like cloth got cheaper, and railroads connected cities. Those were real gains for many families.</span></span>Write 1–2 sentences. Start like this: <i>For workers, industry was mostly ___ because ___.</i>",
-"stemText": "For workers, industry was mostly ___ because ___.",
-"placeholder": "For workers, industry was mostly ___ because ___."
+"prompt": "Was the Industrial Revolution good or bad for workers and families? Give one positive and one negative.",
+"stem": "<span class=\"declass\"><b>Fact file</b><b class=\"kf\">Know this</b><span class=\"line\">Its weakness: only 4 inspectors had to check thousands of mills, so many owners broke the rules.</span><span class=\"line\">Goods like cloth got cheaper, and railroads connected cities. Those were real gains for many families.</span></span>Write 1–2 sentences. Start like this: <i>One good thing was ___. One bad thing was ___. For workers, industry was mostly ___ because ___.</i>",
+"stemText": "One good thing was ___. One bad thing was ___. For workers, industry was mostly ___ because ___.",
+"placeholder": "One good thing was ___. One bad thing was ___. For workers, industry was mostly ___ because ___."
 }
 ],
-questions:["Would you take this job? Use Elizabeth Bentley or Sarah Gooder in your answer.", "What was the worst part of life in a factory city? Use one fact.", "Was the Industrial Revolution good or bad for workers and families? Give one positive and one negative, and explain why one matters more."],
+questions:["Would you take this job? Use Elizabeth Bentley or Sarah Gooder in your answer.", "What was the worst part of life in a factory city? Use one fact.", "Was the Industrial Revolution good or bad for workers and families? Give one positive and one negative."],
 validate(s){if(!s.name)return{text:"Type your first name + last initial (like Jordan M.) at the top of the questions.",focus:"studentName"};
  const mc=[1, 2, 3].find(i=>!s.checkDone(i));if(mc)return{text:"Get the check right for part "+mc+" first.",part:mc};
  const ma=[1, 2, 3].find(i=>!s.answer(i));if(ma)return{text:"Write your answer for part "+ma+" before turning in.",part:ma,focus:"answer"+ma};

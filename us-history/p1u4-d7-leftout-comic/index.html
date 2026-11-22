@@ -35,7 +35,7 @@ body.reading-now .choices{opacity:.45;pointer-events:none}
 <div class="gr-wrap">
 <div class="kicker">U.S. History · Part 1 · Unit 4 Day 7 · Progressive Era</div>
 <h1>Blessings for All?</h1>
-<p class="hook"><span class="dime">1896–1924</span>The 1953 comic makes a cheerful visit to early Hollywood and promises "free education for all." Find out who the Progressive Era left out. 2 pages · 2 checks · 2 short answers. <b>About 20 minutes.</b></p>
+<p class="hook"><span class="dime">1896–1924</span>Hollywood's first blockbuster made the KKK look like heroes. The 1953 comic shows its director as a friendly pioneer. Find out who the Progressive Era left out. 2 pages · 2 checks · 2 short answers. <b>About 20 minutes.</b></p>
 <p class="goal"><b>Today's goal:</b> Explain who Progressive reforms left out, and how Black Americans and immigrants pushed back.</p>
 <details class="std-details"><summary>Iowa standards for today</summary>
 <p><b>Standard SS.9-12.US.15</b> — Assess the impact of social movements, including reactionary movements, in creating reform in the United States.</p><p><b>Standard SS.9-12.US.17</b> — Analyze diverse ideologies through primary and secondary sources, noting the impact on social, economic, and political institutions during the Progressive Era.</p><p><b>Standard SS.9-12.US.18</b> — Assess the impact of exemplary Americans and Iowans who displayed civic virtues in the Progressive Era.</p>
@@ -97,7 +97,7 @@ parts:[
 "check": {
 "page": 1,
 "tag": "Reading check · Reader page 1",
-"q": "Find the filmmaker's name in the woman's bubble. In 1915, his most famous film helped a reactionary movement grow. Which is true?",
+"q": "Find the filmmaker's name in the woman's bubble. His 1915 film helped a reactionary group (one that fights change) grow. Which is true?",
 "right": "Griffith's film helped the KKK fight change",
 "wrong": [
 "Edison's film helped the KKK fight change",
@@ -131,13 +131,13 @@ parts:[
 "why": "✓ Correct. Plessy let states keep Black and white students in separate schools. Black schools almost never got equal money, so \"free education for all\" was not equal for all.",
 "hint": "Read the list in the yellow box after \"their blessings rested.\" Which promise is about school?"
 },
-"prompt": "Did the Progressive Era reach its goals? Judge one reform: success, partial success, or failure. Who did it help, who did it leave out, and why?",
+"prompt": "Did the Progressive Era reach its goals? Judge one reform: success, partial success, or failure? Who did it help, who did it leave out, and why?",
 "stem": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">Americans had \"free education for all.\"</span><span class=\"rl\">Under Jim Crow, Black schools got far less money.</span></span><span class=\"fix\"><span class=\"cs\">Americans could \"worship as they chose.\"</span><span class=\"rl\">In 1918, Iowa's Babel Proclamation banned other languages in public, even in church.</span></span><b class=\"kf\">Know this</b><span class=\"line\"><b>George Washington Carver</b>, born enslaved, became Iowa State's first Black student in 1891.</span></span>Write 1–2 sentences. Start like this: <i>___ was a (success / partial success / failure) because ___. It left out ___ because ___.</i>",
 "stemText": "___ was a (success / partial success / failure) because ___. It left out ___ because ___.",
 "placeholder": "___ was a (success / partial success / failure) because ___. It left out ___ because ___."
 }
 ],
-questions:["Why would a 1915 movie that made the KKK look like heroes be dangerous? Use one fact.", "Did the Progressive Era reach its goals? Judge one reform: success, partial success, or failure. Who did it help, who did it leave out, and why?"],
+questions:["Why would a 1915 movie that made the KKK look like heroes be dangerous? Use one fact.", "Did the Progressive Era reach its goals? Judge one reform: success, partial success, or failure? Who did it help, who did it leave out, and why?"],
 validate(s){if(!s.name)return{text:"Type your first name + last initial (like Jordan M.) at the top of the questions.",focus:"studentName"};
  const mc=[1, 2].find(i=>!s.checkDone(i));if(mc)return{text:"Get the check right for part "+mc+" first.",part:mc};
  const ma=[1, 2].find(i=>!s.answer(i));if(ma)return{text:"Write your answer for part "+ma+" before turning in.",part:ma,focus:"answer"+ma};

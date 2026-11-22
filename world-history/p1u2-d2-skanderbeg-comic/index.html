@@ -108,7 +108,7 @@ parts:[
 "hint": "Read the officer's big speech bubble and the box at the bottom left: \"Converted to...\""
 },
 "prompt": "Why would the Ottomans take boys from conquered lands and train them to serve the sultan?",
-"stem": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">George was taken in the devshirme.</span><span class=\"rl\">He was a noble's son held as a hostage. The devshirme took boys from ordinary villages, but trained them the same way.</span></span><b class=\"kf\">Know this</b><span class=\"line\">Under the <b>devshirme</b>, Ottoman officials took Christian boys from Balkan villages. They were converted to Islam and trained to serve the sultan.</span><span class=\"line\">The best became <b>Janissaries</b> (the sultan's elite soldiers) or top officials. Families lost their sons.</span></span>Write 1–2 sentences. Start like this: <i>The Ottomans took boys because ___.</i>",
+"stem": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">George was taken in the devshirme.</span><span class=\"rl\">He was a noble's son held as a hostage. The devshirme took boys from ordinary villages, but trained them the same way.</span></span><b class=\"kf\">Know this</b><span class=\"line\"><b>Devshirme</b>: Ottoman officials took Christian boys from villages in southeast Europe and trained them to serve the sultan.</span><span class=\"line\">The best became <b>Janissaries</b> (the sultan's top soldiers) or high officials. Families lost their sons.</span></span>Write 1–2 sentences. Start like this: <i>The Ottomans took boys because ___.</i>",
 "stemText": "The Ottomans took boys because ___.",
 "placeholder": "The Ottomans took boys because ___."
 },
@@ -131,10 +131,10 @@ parts:[
 "why": "✓ Correct. Ottoman officials could rise by merit, meaning skill and hard work, not family.",
 "hint": "Read the sultan's speech bubble: \"You have proved...\""
 },
-"prompt": "Explain how ONE Ottoman system (the devshirme, the Janissaries, or the millet system) helped keep order, and why it worked. Use one fact from the comic or today's lesson.",
-"stem": "<span class=\"declass\"><b>Fact file</b><b class=\"kf\">Know this</b><span class=\"line\">A European ambassador in the 1550s wrote that Ottoman officials rose by <b>merit</b>, not by birth. Europe's kings mostly picked nobles.</span><span class=\"line\">In <b>1453</b>, Sultan Mehmed II broke the walls of Constantinople with giant cannons. It became Istanbul, the Ottoman capital.</span></span>Write 1–2 sentences. Start like this: <i>The Ottomans kept order by ___. This worked because ___. For example, ___.</i>",
-"stemText": "The Ottomans kept order by ___. This worked because ___. For example, ___.",
-"placeholder": "The Ottomans kept order by ___. This worked because ___. For example, ___."
+"prompt": "Explain how ONE Ottoman system (the devshirme, the Janissaries, or the millet system) helped keep order.",
+"stem": "<span class=\"declass\"><b>Fact file</b><b class=\"kf\">Know this</b><span class=\"line\">A European ambassador in the 1550s wrote that Ottoman officials rose by <b>merit</b>, not by birth. Europe's kings mostly picked nobles.</span><span class=\"line\">In <b>1453</b>, Sultan Mehmed II broke the walls of Constantinople with giant cannons. It became Istanbul, the Ottoman capital.</span></span>Write 1–2 sentences. Start like this: <i>The Ottomans kept order by ___. This worked because ___.</i>",
+"stemText": "The Ottomans kept order by ___. This worked because ___.",
+"placeholder": "The Ottomans kept order by ___. This worked because ___."
 },
 {
 "short": "Switch",
@@ -156,12 +156,12 @@ parts:[
 "hint": "Read the tall yellow box on the right: \"True, the death of Albania's peerless leader...\""
 },
 "prompt": "The Ottomans trained Skanderbeg, then he fought them. Was he a hero or a traitor? Explain both sides.",
-"stem": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">The Ottomans were \"the oppressor.\"</span><span class=\"rl\">This comic was made during World War II and paints them as villains. The Ottomans let Christians and Jews keep their faith, but they paid an extra tax (the jizya) and weren't equal.</span></span><b class=\"kf\">Know this</b><span class=\"line\">Skanderbeg's small army used Albania's mountain passes to hold off a giant empire for about 25 years.</span><span class=\"line\">The Ottoman Empire lasted until <b>1922</b>, more than 600 years. Its borders and mix of peoples still shape the Balkans today.</span></span>Write 1–2 sentences. Start like this: <i>To Albanians he was ___, but to the Ottomans he was ___ because ___.</i>",
+"stem": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">The Ottomans were \"the oppressor.\"</span><span class=\"rl\">This WWII comic paints them as villains. Christians and Jews could keep their faith, but paid an extra tax.</span></span><b class=\"kf\">Know this</b><span class=\"line\">The Ottoman Empire lasted until <b>1922</b>, more than 600 years. Its borders and mix of peoples still shape the Balkans today.</span></span>Write 1–2 sentences. Start like this: <i>To Albanians he was ___, but to the Ottomans he was ___ because ___.</i>",
 "stemText": "To Albanians he was ___, but to the Ottomans he was ___ because ___.",
 "placeholder": "To Albanians he was ___, but to the Ottomans he was ___ because ___."
 }
 ],
-questions:["Why would the Ottomans take boys from conquered lands and train them to serve the sultan?", "Explain how ONE Ottoman system (the devshirme, the Janissaries, or the millet system) helped keep order, and why it worked. Use one fact from the comic or today's lesson.", "The Ottomans trained Skanderbeg, then he fought them. Was he a hero or a traitor? Explain both sides."],
+questions:["Why would the Ottomans take boys from conquered lands and train them to serve the sultan?", "Explain how ONE Ottoman system (the devshirme, the Janissaries, or the millet system) helped keep order.", "The Ottomans trained Skanderbeg, then he fought them. Was he a hero or a traitor? Explain both sides."],
 validate(s){if(!s.name)return{text:"Type your first name + last initial (like Jordan M.) at the top of the questions.",focus:"studentName"};
  const mc=[1, 2, 3].find(i=>!s.checkDone(i));if(mc)return{text:"Get the check right for part "+mc+" first.",part:mc};
  const ma=[1, 2, 3].find(i=>!s.answer(i));if(ma)return{text:"Write your answer for part "+ma+" before turning in.",part:ma,focus:"answer"+ma};

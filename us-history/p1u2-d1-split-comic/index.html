@@ -35,7 +35,7 @@ body.reading-now .choices{opacity:.45;pointer-events:none}
 <div class="gr-wrap">
 <div class="kicker">U.S. History · Part 1 · Unit 2 Day 1 · Civil War &amp; Reconstruction</div>
 <h1>A House Divided</h1>
-<p class="hook"><span class="dime">1850–1860</span>Ten years of fights over slavery, told by a 1953 government comic. Follow the road to war, then check the comic's last line against what Southern leaders said themselves. 4 pages · 4 checks · 4 short answers. <b>About 25 minutes.</b></p>
+<p class="hook"><span class="dime">1850–1860</span>People escaping slavery, a Supreme Court shocker, and a country cracking in half. Follow the 1953 comic's road to war, then fact-check its last line. 4 pages · 4 checks · 4 short answers. <b>About 25 minutes.</b></p>
 <p class="goal"><b>Today's goal:</b> Explain how fights over slavery in the West pulled the North and South apart.</p>
 <details class="std-details"><summary>Iowa standards for today</summary>
 <p><b>Standard SS.9-12.US.4</b> — Evaluate the multiple causes and effects of the Civil War.</p><p><b>Standard SS.9-12.US.6</b> — Analyze diverse ideologies through primary and secondary sources, noting the impact on social, economic, and political institutions during the Civil War and Reconstruction.</p>
@@ -107,10 +107,10 @@ parts:[
 "why": "✓ Correct. Every new state added 2 senators. The North and South each feared losing power over slavery.",
 "hint": "Read the yellow box on the left and Henry Clay's speech bubble."
 },
-"prompt": "Why did every new western state start a fight between the North and South?",
-"stem": "<span class=\"declass\"><b>Fact file</b><b class=\"kf\">Know this</b><span class=\"line\"><b>Sectionalism</b> = putting your part of the country ahead of the whole nation.</span><span class=\"line\"><b>Missouri Compromise (1820):</b> no slavery in new land north of a line. Iowa was north of it.</span></span>Write 1–2 sentences. Start like this: <i>Every new state started a fight because ___. For example, ___.</i>",
-"stemText": "Every new state started a fight because ___. For example, ___.",
-"placeholder": "Every new state started a fight because ___. For example, ___."
+"prompt": "You're a Southern senator in 1850. Why does California joining as a free state scare you?",
+"stem": "<span class=\"declass\"><b>Fact file</b><b class=\"kf\">Know this</b><span class=\"line\"><b>Sectionalism</b> = putting your part of the country ahead of the whole nation.</span><span class=\"line\"><b>Missouri Compromise (1820):</b> no slavery in new land north of a line. Iowa was north of it.</span></span>Write 1–2 sentences. Start like this: <i>It scares me because ___. If the North gets more senators, ___.</i>",
+"stemText": "It scares me because ___. If the North gets more senators, ___.",
+"placeholder": "It scares me because ___. If the North gets more senators, ___."
 },
 {
 "short": "Higher law",
@@ -185,7 +185,7 @@ parts:[
 "placeholder": "Southern states left because ___. Mississippi's leaders said ___."
 }
 ],
-questions:["Why did every new western state start a fight between the North and South?", "The girl says her father is breaking the law. Was it right to break the Fugitive Slave Act? Use an Iowa example.", "Evaluate the causes: which event in this comic pushed the country closest to war? Explain why, using the comic.", "Lincoln promised only to stop slavery from spreading. Why did Southern states leave anyway? Use Mississippi's own words."],
+questions:["You're a Southern senator in 1850. Why does California joining as a free state scare you?", "The girl says her father is breaking the law. Was it right to break the Fugitive Slave Act? Use an Iowa example.", "Evaluate the causes: which event in this comic pushed the country closest to war? Explain why, using the comic.", "Lincoln promised only to stop slavery from spreading. Why did Southern states leave anyway? Use Mississippi's own words."],
 validate(s){if(!s.name)return{text:"Type your first name + last initial (like Jordan M.) at the top of the questions.",focus:"studentName"};
  const mc=[1, 2, 3, 4].find(i=>!s.checkDone(i));if(mc)return{text:"Get the check right for part "+mc+" first.",part:mc};
  const ma=[1, 2, 3, 4].find(i=>!s.answer(i));if(ma)return{text:"Write your answer for part "+ma+" before turning in.",part:ma,focus:"answer"+ma};

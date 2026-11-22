@@ -50,7 +50,7 @@ body.reading-now .choices{opacity:.45;pointer-events:none}
 <p class="intro-line"><b>How it works:</b> read the comic pages → answer the question about today's big idea → see what the comic got right and wrong → write 1–2 sentences. Done = all parts green, then turn in at the bottom.</p>
 <details class="wordhelp"><summary>Word help (tap to open)</summary>
 <ul class="words" aria-label="Word help">
-<li><b>Colony</b> = a land ruled by another country</li><li><b>Guerrilla warfare</b> = small surprise attacks, then hiding</li><li><b>Anti-imperialist</b> = someone against taking other people's land</li><li><b>Isthmus</b> = a thin strip of land between two seas</li><li><b>1953 comic</b> = made by the U.S. government to tell America's story in other countries. It shows one point of view.</li>
+<li><b>Colony</b> = a land ruled by another country</li><li><b>Guerrilla warfare</b> = small surprise attacks, then hiding</li><li><b>Anti-imperialist</b> = someone against taking other people's land</li><li><b>Isthmus</b> = a thin strip of land between two seas</li><li><b>Gradual</b> = slow, step by step</li><li><b>Self-rule</b> = a people running their own government</li><li><b>1953 comic</b> = made by the U.S. government to tell America's story in other countries. It shows one point of view.</li>
 </ul></details>
 <p class="welcome" id="welcome" role="status"></p>
 </section>
@@ -107,7 +107,7 @@ parts:[
 "why": "✓ Correct. That was the imperialist side: keep ruling the islands for now. Anti-imperialists and Filipinos wanted independence right away. Full freedom didn't come until 1946.",
 "hint": "Read the yellow box at the top. \"Gradual\" means slowly, step by step."
 },
-"prompt": "Evaluate: was taking the Philippines right or wrong? Explain why, using one side's argument (imperialist or anti-imperialist) and one fact.",
+"prompt": "Evaluate: was taking the Philippines right or wrong? Explain why, using one side's argument and one fact.",
 "stem": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">Self-rule came as a slow, \"gradual process.\"</span><span class=\"rl\">First came the Philippine-American War (1899–1902). At least 200,000 Filipino civilians died.</span></span><b class=\"kf\">Know this</b><span class=\"line\">On June 12, 1898, <b>Emilio Aguinaldo</b> (ah-gee-NAHL-doh) declared the Philippines independent. The Treaty of Paris gave it to the U.S. anyway.</span><span class=\"line\"><b>Anti-imperialists</b> like Mark Twain said ruling people without their consent broke the Declaration of Independence.</span></span>Write 1–2 sentences. Start like this: <i>Taking the Philippines was ___ because ___.</i>",
 "stemText": "Taking the Philippines was ___ because ___.",
 "placeholder": "Taking the Philippines was ___ because ___."
@@ -122,7 +122,7 @@ parts:[
 "page": 2,
 "tag": "Reading check · Reader page 2",
 "q": "Imperialists wanted more trade and a stronger Navy. How did this canal help with both?",
-"right": "Ships could cross between oceans",
+"right": "It let ships cross between oceans",
 "wrong": [
 "It kept all other nations' ships out",
 "It gave the U.S. new land to farm",
@@ -137,7 +137,7 @@ parts:[
 "placeholder": "The U.S. got the land by ___. It was (fair / unfair) because ___."
 }
 ],
-questions:["Evaluate: was taking the Philippines right or wrong? Explain why, using one side's argument (imperialist or anti-imperialist) and one fact.", "How did the U.S. get the land for the Panama Canal? Was it fair?"],
+questions:["Evaluate: was taking the Philippines right or wrong? Explain why, using one side's argument and one fact.", "How did the U.S. get the land for the Panama Canal? Was it fair?"],
 validate(s){if(!s.name)return{text:"Type your first name + last initial (like Jordan M.) at the top of the questions.",focus:"studentName"};
  const mc=[1, 2].find(i=>!s.checkDone(i));if(mc)return{text:"Get the check right for part "+mc+" first.",part:mc};
  const ma=[1, 2].find(i=>!s.answer(i));if(ma)return{text:"Write your answer for part "+ma+" before turning in.",part:ma,focus:"answer"+ma};

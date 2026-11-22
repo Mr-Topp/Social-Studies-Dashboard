@@ -35,7 +35,7 @@ body.reading-now .choices{opacity:.45;pointer-events:none}
 <div class="gr-wrap">
 <div class="kicker">U.S. History · Part 1 · Unit 4 Day 3 · Progressive Era</div>
 <h1>Dig Up the Dirt</h1>
-<p class="hook"><span class="dime">1902–1911</span>The 1953 comic shows shiny new stores and a president busting trusts, but never says who dug up the dirt. Add the muckrakers back in. 2 pages · 2 checks · 2 short answers. <b>About 20 minutes.</b></p>
+<p class="hook"><span class="dime">1902–1911</span>A reporter, a novelist, and a guy with a camera took on the richest companies in America, and one book made people scared of their sausage. The 1953 comic skips them all. Add them back. 2 pages · 2 checks · 2 short answers. <b>About 20 minutes.</b></p>
 <p class="goal"><b>Today's goal:</b> Explain how muckrakers used the truth to change minds, and which laws changed because of them.</p>
 <details class="std-details"><summary>Iowa standards for today</summary>
 <p><b>Standard SS.9-12.US.16</b> — Assess the goals of the Progressive Era through the changes and continuities of the period to determine the influence of reformers.</p><p><b>Standard SS.9-12.US.17</b> — Analyze diverse ideologies through primary and secondary sources, noting the impact on social, economic, and political institutions during the Progressive Era.</p>
@@ -97,18 +97,18 @@ parts:[
 "check": {
 "page": 1,
 "tag": "Reading check · Reader page 1",
-"q": "Read the box. Farm families now drove to \"chain\" groceries. Why did that make the 1906 food safety laws matter to them?",
-"right": "Their food now came from far-off plants",
+"q": "Read the box. Farm families now shopped at \"chain\" groceries. Why did the 1906 food safety laws matter to them?",
+"right": "Their food came from far-off factories",
 "wrong": [
-"They now grew all of their own food at home",
+"They grew all of their own food at home",
 "Their own farms now had to be inspected",
 "Chain stores sold only food made in town"
 ],
-"why": "✓ Correct. Families who once lived off their own farms now bought packaged food, like meat from Chicago plants they never saw. After <i>The Jungle</i> (1906) showed filthy meat plants, Congress passed the Meat Inspection Act and the Pure Food and Drug Act.",
+"why": "✓ Correct. They now bought food like meat from Chicago plants they never saw. <i>The Jungle</i> (1906) showed how filthy those plants were, so Congress passed the Meat Inspection Act and the Pure Food and Drug Act.",
 "hint": "Read the end of the yellow box: \"from lonely farms... to shop in chain groceries.\" A chain is many stores run by one big company."
 },
-"prompt": "Sinclair said, \"I aimed at the public's heart, and by accident I hit it in the stomach.\" Was The Jungle a success or a failure? Explain what it changed and what it didn't.",
-"stem": "<span class=\"declass\"><b>Fact file</b><b class=\"kf\">Know this</b><span class=\"line\">Sinclair said, \"I aimed at the public's heart, and by accident I hit it in the stomach.\" He wanted readers to care about the workers, who got no new pay or hours.</span><span class=\"line\">The 1906 laws led to today's <b>FDA</b>, which still checks our food and medicine.</span></span>Write 1–2 sentences. Start like this: <i>The Jungle was a (success / failure / both) because it changed ___, but not ___.</i>",
+"prompt": "Was <i>The Jungle</i> a success, a failure, or both? Explain what it changed and what it didn't.",
+"stem": "<span class=\"declass\"><b>Fact file</b><b class=\"kf\">Know this</b><span class=\"line\">Sinclair said, \"I aimed at the public's heart, and by accident I hit it in the stomach.\" He wanted readers to care about the workers. They got no new pay or hours.</span><span class=\"line\">The 1906 laws led to today's <b>FDA</b>, which still checks our food and medicine.</span></span>Write 1–2 sentences. Start like this: <i>The Jungle was a (success / failure / both) because it changed ___, but not ___.</i>",
 "stemText": "The Jungle was a (success / failure / both) because it changed ___, but not ___.",
 "placeholder": "The Jungle was a (success / failure / both) because it changed ___, but not ___."
 },
@@ -121,7 +121,7 @@ parts:[
 "check": {
 "page": 2,
 "tag": "Reading check · Reader page 2",
-"q": "Roosevelt insisted the government supervise the trusts. How did muckrakers help?",
+"q": "Roosevelt wanted the government to watch over the trusts (giant companies). How did muckrakers help?",
 "right": "They dug up proof of what trusts did",
 "wrong": [
 "They wrote the antitrust laws for Congress",
@@ -137,7 +137,7 @@ parts:[
 "placeholder": "___ changed the most because ___. One problem that didn't change was ___."
 }
 ],
-questions:["Sinclair said, \"I aimed at the public's heart, and by accident I hit it in the stomach.\" Was The Jungle a success or a failure? Explain what it changed and what it didn't.", "Tarbell's articles, Sinclair's novel, or Hine's photos: which changed the most? Name one problem that didn't change."],
+questions:["Was <i>The Jungle</i> a success, a failure, or both? Explain what it changed and what it didn't.", "Tarbell's articles, Sinclair's novel, or Hine's photos: which changed the most? Name one problem that didn't change."],
 validate(s){if(!s.name)return{text:"Type your first name + last initial (like Jordan M.) at the top of the questions.",focus:"studentName"};
  const mc=[1, 2].find(i=>!s.checkDone(i));if(mc)return{text:"Get the check right for part "+mc+" first.",part:mc};
  const ma=[1, 2].find(i=>!s.answer(i));if(ma)return{text:"Write your answer for part "+ma+" before turning in.",part:ma,focus:"answer"+ma};
