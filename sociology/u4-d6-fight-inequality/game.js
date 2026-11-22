@@ -622,8 +622,8 @@
          <p class="stem">Starter: ${esc(p.stem)} <button type="button" class="mini" data-starter="${p.id}">Use it</button></p>
          <textarea id="w_${p.id}" rows="3" placeholder="Type 1–2 sentences…">${esc(st.writing[p.id] || "")}</textarea>`).join("")}
          <p class="src">Go deeper: say <b>why</b> it worked or failed.</p>
-         <button type="button" class="go" id="sendBtn">${sent ? "Turn in again" : "File report + turn in ▶"}</button>
-         <p id="sendMsg" class="msg" role="status" aria-live="polite">${sent ? "✓ Turned in. You can fix your report and turn it in again." : ""}</p>
+         <button type="button" class="go" id="sendBtn"${sent ? " disabled" : ""}>${sent ? "✓ Turned in" : "File report + turn in ▶"}</button>
+         <p id="sendMsg" class="msg" role="status" aria-live="polite">${sent ? "✓ Turned in." : ""}</p>
        </div>`);
     PROMPTS.forEach(p => {
       const box = $("w_" + p.id);
@@ -642,6 +642,7 @@
   const plain = s => String(s || "").normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
   async function send(e) {
     const msg = $("sendMsg");
+    if (st.turnedIn && !(window.classIsTestT && window.classIsTestT())) { $("sendBtn").disabled = true; return; }   // turned in = done (no redo)
     const testT = isT();   // Test T. (teacher) skips the writing rules
     for (const p of (testT ? [] : PROMPTS)) {
       const box = $("w_" + p.id);
@@ -711,7 +712,7 @@
 
   $("restartBtn").onclick = () => {
     if (!confirm("Start over? This clears your work on this device.")) return;
-    const name = st.name; st = fresh(); st.name = name;
+    const name = st.name, wasIn = st.turnedIn; st = fresh(); st.name = name; st.turnedIn = wasIn;   // Start over never re-opens turning in
     try { window.classFirstTry && window.classFirstTry.reset(); } catch (e) {}
     save(); render(); window.scrollTo(0, 0);
   };

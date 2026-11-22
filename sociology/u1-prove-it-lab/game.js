@@ -1207,8 +1207,8 @@
       <div class="report" id="report"><p class="rt">📝 ${part === 1 ? "Lab report" : "Research report"} · 1–2 sentences each</p></div>`);
     const rep = $("report");
     prompts.forEach(q => rep.insertAdjacentHTML("beforeend", `<label for="w${part}_${q.id}">${q.label}</label><p class="stem">✏️ ${esc(q.stem)}</p>${q.go4 ? `<p class="go4">⭐ ${q.go4}</p>` : ""}<textarea id="w${part}_${q.id}" rows="2">${esc(p.writing[q.id] || "")}</textarea>`));
-    rep.insertAdjacentHTML("beforeend", `<div class="row"><button type="button" class="go" id="sendBtn">${p.turnedIn ? "Turn in again" : "📨 Turn in"}</button><span class="turned" id="turnedBadge" ${p.turnedIn ? "" : "hidden"}>✓ Turned in</span><span id="afterSend" class="row"></span></div>
-      <p id="sendMsg" class="msg" role="status" aria-live="polite">${p.turnedIn ? "Already turned in. You can fix your writing and turn it in again." : ""}</p>`);
+    rep.insertAdjacentHTML("beforeend", `<div class="row"><button type="button" class="go" id="sendBtn"${p.turnedIn ? " disabled" : ""}>${p.turnedIn ? "✓ Turned in" : "📨 Turn in"}</button><span class="turned" id="turnedBadge" ${p.turnedIn ? "" : "hidden"}>✓ Turned in</span><span id="afterSend" class="row"></span></div>
+      <p id="sendMsg" class="msg" role="status" aria-live="polite"></p>`);
     prompts.forEach(q => $(`w${part}_${q.id}`).addEventListener("input", e => { p.writing[q.id] = e.target.value; save(); }));
     $("sendBtn").onclick = () => send(part, prompts);
     if (p.turnedIn) afterSend(part);
@@ -1222,6 +1222,7 @@
   }
   async function send(part, prompts) {
     const msg = $("sendMsg"), p = st["p" + part];
+    if (p.turnedIn && !isT()) { $("sendBtn").disabled = true; return; }   // turned in = done (no redo)
     const plain = s => String(s || "").normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
     for (const q of (isT() ? [] : prompts)) {
       const box = $(`w${part}_${q.id}`), v = (box.value || "").trim();
@@ -1245,7 +1246,7 @@
       if (!res.ok) throw new Error(data.error || "Your work did not save. Try again.");
       p.turnedIn = true; save();
       msg.textContent = "Turned in! Your teacher can see your work."; msg.className = "msg good";
-      $("sendBtn").textContent = "Turn in again"; $("turnedBadge").hidden = false; $("sendBtn").disabled = false;
+      $("sendBtn").textContent = "✓ Turned in"; $("turnedBadge").hidden = false; $("sendBtn").disabled = true;
       top(); afterSend(part);
     } catch (err) { msg.textContent = err.message || "Could not turn in. Try again."; msg.className = "msg bad"; $("sendBtn").disabled = false; }
   }
@@ -1334,7 +1335,8 @@
   addEventListener("resize", fit); setInterval(fit, 700); setTimeout(fit, 50);
   $("restartBtn").onclick = () => {
     if (!confirm("Start over? This clears your work on this Chromebook.")) return;
-    const name = st.name; st = fresh(); st.name = name; wire = { pick: null, iv: null, dv: null, order: null, v: -1 }; matchPick = null; kaiLine = "";
+    const name = st.name, in1 = st.p1.turnedIn, in2 = st.p2.turnedIn; st = fresh(); st.name = name; st.p1.turnedIn = in1; st.p2.turnedIn = in2;   // Start over never re-opens turning in
+    wire = { pick: null, iv: null, dv: null, order: null, v: -1 }; matchPick = null; kaiLine = "";
     save(); render();
   };
 

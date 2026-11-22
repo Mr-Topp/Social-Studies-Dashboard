@@ -531,8 +531,8 @@
          <button type="button" class="mini" id="useStarter">Use the starter</button>
          <div class="txbox"><textarea id="w_shape" rows="4" placeholder="Type your text to Jalen…">${esc(st.writing || "")}</textarea></div>
          <p class="src">Go deeper: say who did the shaping (family, peers, a coach, or media) and what it caused.</p>
-         <button type="button" class="go" id="sendBtn">${lockedOut ? "Turn in again" : "Send + turn in ▶"}</button>
-         <p id="sendMsg" class="msg" role="status" aria-live="polite">${lockedOut ? "✓ Turned in. You can fix your text and turn it in again." : ""}</p>
+         <button type="button" class="go" id="sendBtn"${lockedOut ? " disabled" : ""}>${lockedOut ? "✓ Turned in" : "Send + turn in ▶"}</button>
+         <p id="sendMsg" class="msg" role="status" aria-live="polite">${lockedOut ? "✓ Turned in." : ""}</p>
        </div>`);
     const box = $("w_shape");
     box.addEventListener("input", () => { st.writing = box.value; save(); });
@@ -543,6 +543,7 @@
   const plain = s => String(s || "").normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
   async function send(e) {
     const msg = $("sendMsg"), box = $("w_shape");
+    if (st.turnedIn && !(window.classIsTestT && window.classIsTestT())) { $("sendBtn").disabled = true; return; }   // turned in = done (no redo)
     const v = (box.value || "").trim();
     const say = t => { msg.textContent = t; msg.className = "msg bad"; box.focus(); };
     const testT = window.classIsTestT && window.classIsTestT();   // Test T. (teacher) skips the writing rules
@@ -605,7 +606,7 @@
 
   $("restartBtn").onclick = () => {
     if (!confirm("Start over? This clears your work on this device.")) return;
-    const name = st.name; st = fresh(); st.name = name;
+    const name = st.name, wasIn = st.turnedIn; st = fresh(); st.name = name; st.turnedIn = wasIn;   // Start over never re-opens turning in
     try { window.classFirstTry && window.classFirstTry.reset(); } catch (e) {}
     save(); render(); window.scrollTo(0, 0);
   };

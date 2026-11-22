@@ -652,8 +652,8 @@
          <button type="button" class="mini" id="useStarter">Use the starter</button>
          <textarea id="w_fix" rows="4" placeholder="Type your advice…">${esc(st.writing || "")}</textarea>
          <p class="src">Go deeper: name a real study and what it found.</p>
-         <button type="button" class="go" id="sendBtn">${sent ? "Turn in again" : "File report + turn in ▶"}</button>
-         <p id="sendMsg" class="msg" role="status" aria-live="polite">${sent ? "✓ Turned in. You can fix your report and turn it in again." : ""}</p>
+         <button type="button" class="go" id="sendBtn"${sent ? " disabled" : ""}>${sent ? "✓ Turned in" : "File report + turn in ▶"}</button>
+         <p id="sendMsg" class="msg" role="status" aria-live="polite">${sent ? "✓ Turned in." : ""}</p>
        </div>`);
     const box = $("w_fix");
     box.addEventListener("input", () => { st.writing = box.value; save(); });
@@ -664,6 +664,7 @@
   const plain = s => String(s || "").normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
   async function send(e) {
     const msg = $("sendMsg"), box = $("w_fix");
+    if (st.turnedIn && !(window.classIsTestT && window.classIsTestT())) { $("sendBtn").disabled = true; return; }   // turned in = done (no redo)
     const v = (box.value || "").trim();
     const sayBad = t => { msg.textContent = t; msg.className = "msg bad"; box.focus(); };
     if (window.classJunkStop) {
@@ -731,7 +732,7 @@
 
   $("restartBtn").onclick = () => {
     if (!confirm("Start over? This clears your work on this device.")) return;
-    const name = st.name; st = fresh(); st.name = name;
+    const name = st.name, wasIn = st.turnedIn; st = fresh(); st.name = name; st.turnedIn = wasIn;   // Start over never re-opens turning in
     try { window.classFirstTry && window.classFirstTry.reset(); } catch (e) {}
     save(); render(); window.scrollTo(0, 0);
   };

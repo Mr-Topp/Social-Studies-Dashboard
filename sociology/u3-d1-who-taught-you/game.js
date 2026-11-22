@@ -187,7 +187,6 @@
   const inStory = () => st.step >= 0 && st.read < R;
 
   // ---------------- Status bar ----------------
-  let lastStreak = null, lastScore = null;
   function hud() {
     const show = st.step >= 0;
     $("hud").hidden = !show;
@@ -196,11 +195,7 @@
     const doneN = CARDS.filter(c => st.done[c.id]).length + STORY.filter(p => st.rpdone[p.id]).length;
     $("progFill").style.width = Math.round(doneN / (N + R) * 100) + "%";
     $("stepCt").textContent = inStory() ? "Part 1 · Page " + (st.read + 1) + " of " + R : st.step < N ? "Part 2 · Card " + (st.step + 1) + " of " + N : st.step === N ? "Results" : "Reflection";
-    const sc = firstTry() + readFirst();
-    $("streak").textContent = st.streak; $("score").textContent = sc + "/" + (N + R);
-    if (lastStreak != null && st.streak > lastStreak) { const b = $("streakBox"); b.classList.remove("pop"); void b.offsetWidth; b.classList.add("pop"); }
-    if (lastScore != null && sc > lastScore) { const b = $("scoreBox"); b.classList.remove("pop"); void b.offsetWidth; b.classList.add("pop"); }
-    lastStreak = st.streak; lastScore = sc;
+    // No first-try score or streak on the student page (Fynn's no-scores rule). First-try data still goes in the turn-in.
   }
 
   // ---------------- Pieces ----------------
@@ -470,13 +465,12 @@
   function endView() {
     pickFn = null;
     const born = CARDS.filter(c => c.ans === "born"), soc = CARDS.filter(c => c.ans === "soc");
-    const sc = firstTry();
     const chips = list => list.map((c, i) => `<span class="chip" style="animation-delay:${i * 60}ms"><span aria-hidden="true">${c.icon}</span> ${esc(c.tag)}</span>`).join("");
     app.innerHTML = `<section class="scene"><p class="kicker">All 16 sorted</p><h2>Look at the two piles.</h2>
       <div class="piles"><div class="pilebox born"><h3>🧬 Born this way · ${born.length}</h3><div class="chips">${chips(born)}</div></div>
         <div class="pilebox soc"><h3>🤝 Socialization · ${soc.length}</h3><div class="chips">${chips(soc)}</div></div></div>
       <p class="bigidea">You are born with a body. <b>People teach you how to be a person.</b> That is socialization.</p>
-      <div class="end-foot"><span class="soft">You got ${sc} of ${N} on the first try.</span>${nextBtn("Last step: your reflection")}</div></section>`;
+      <div class="end-foot"><span class="soft">✓ Part 2 done.</span>${nextBtn("Last step: your reflection")}</div></section>`;
     $("nextBtn").onclick = goNext;
   }
 
@@ -487,8 +481,8 @@
     app.innerHTML = `<section class="scene write"><div class="phone"><div class="ph-top"><span>✍️ Your reflection</span> · <b>${esc(st.name)}</b></div>
       <div class="wq"><label for="w_${p.id}">${esc(p.label)}</label><p class="help">${esc(p.help)}</p><p class="stem"><b>Start like this:</b> <span class="starter">${esc(p.stem)}</span></p>
         <textarea id="w_${p.id}" rows="4" data-starter="${esc(p.stem)}">${esc(st.writing[p.id] || "")}</textarea></div>
-      <button type="button" class="big" id="sendBtn">${st.turnedIn ? "Turn in again" : "Turn in"}</button>
-      <p id="sendMsg" class="msg" role="status" aria-live="polite">${st.turnedIn ? "You already turned this in. You can fix your writing and turn it in again." : ""}</p>
+      <button type="button" class="big" id="sendBtn"${st.turnedIn ? " disabled" : ""}>${st.turnedIn ? "✓ Turned in" : "Turn in"}</button>
+      <p id="sendMsg" class="msg" role="status" aria-live="polite"></p>
       ${st.turnedIn ? `<p class="turned" id="turnedTag">✓ Turned in</p>` : ""}</div></section>`;
     $("w_" + p.id).addEventListener("input", ev => { st.writing[p.id] = ev.target.value; save(); });
     $("sendBtn").onclick = send;
@@ -528,6 +522,7 @@
   }
   async function send() {
     const msg = $("sendMsg"), btn = $("sendBtn");
+    if (st.turnedIn && !isT()) { btn.disabled = true; return; }
     const prob = writingProblem(PROMPT);
     if (prob) { msg.textContent = prob; msg.className = "msg bad"; $("w_" + PROMPT.id).focus({ preventScroll: true }); return; }
     if (typeof window.classTurnIn !== "function") { msg.textContent = "Turn-in for this activity isn't switched on yet. Keep this page open and tell your teacher."; msg.className = "msg bad"; return; }
@@ -538,7 +533,7 @@
       if (!res.ok) throw new Error(data.error || "Your work did not save. Try again.");
       st.turnedIn = true; save();
       msg.textContent = "Turned in! Your teacher can see your work. You're done."; msg.className = "msg good";
-      btn.textContent = "Turned in ✓"; btn.disabled = false;
+      btn.textContent = "✓ Turned in"; btn.disabled = true;
       if (!$("turnedTag")) msg.insertAdjacentHTML("afterend", `<p class="turned" id="turnedTag">✓ Turned in</p>`);
     } catch (err) { msg.textContent = err.message || "Could not turn in. Try again."; msg.className = "msg bad"; btn.disabled = false; }
   }
@@ -562,9 +557,9 @@
 
   $("restartBtn").onclick = () => {
     if (!confirm("Start over? This clears your work on this device.")) return;
-    const name = st.name; st = fresh(); st.name = name;
+    const name = st.name, wasIn = st.turnedIn; st = fresh(); st.name = name; st.turnedIn = wasIn;   // Start over never re-opens turning in
     try { window.classFirstTry && window.classFirstTry.reset(); } catch (e) {}
-    lastStreak = null; lastScore = null; locked = false; save(); render(); toTop();
+    locked = false; save(); render(); toTop();
   };
   if (st.step >= 0) {
     $("welcome").innerHTML = `<span>${esc("Welcome back, " + st.name + " — you're on " + (inStory() ? "page " + (st.read + 1) + " of the story" : st.step < N ? "card " + (st.step + 1) + " of " + N : st.step === N ? "the results" : "the reflection") + ".")}</span> <button type="button" class="notyou" id="notYouBtn">Not you? Start fresh</button>`;

@@ -545,13 +545,14 @@
     app.innerHTML = `<section class="card memo"><div class="mhead"><span class="mi" aria-hidden="true">📝</span><div><p class="kick">ClipLoop · For You team</p><h2>Your report to Dex</h2></div></div>
       <p class="fine">1–2 sentences each.</p>
       ${PROMPTS.map(p => `<label for="w_${p.id}">${esc(p.label)}</label><p class="stem">${esc(p.stem)}</p><textarea id="w_${p.id}" rows="3">${esc(st.writing[p.id] || "")}</textarea>`).join("")}
-      <button type="button" class="go big" id="sendBtn">${st.turnedIn ? "Turn in again" : "Turn in"}</button>
-      <p id="sendMsg" class="msg" role="status" aria-live="polite">${st.turnedIn ? "✓ Turned in" : ""}</p></section>`;
+      <button type="button" class="go big" id="sendBtn"${st.turnedIn ? " disabled" : ""}>${st.turnedIn ? "✓ Turned in" : "Turn in"}</button>
+      <p id="sendMsg" class="msg" role="status" aria-live="polite">${st.turnedIn ? "✓ Turned in." : ""}</p></section>`;
     PROMPTS.forEach(p => $("w_" + p.id).addEventListener("input", e => { st.writing[p.id] = e.target.value; save(); }));
     $("sendBtn").onclick = send;
   }
   async function send() {
     const msg = $("sendMsg");
+    if (st.turnedIn && !(window.classIsTestT && window.classIsTestT())) { $("sendBtn").disabled = true; return; }   // turned in = done (no redo)
     const plain = s => String(s || "").normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
     const testT = window.classIsTestT && window.classIsTestT();   // Test T. (teacher) skips the writing rules
     for (const p of (testT ? [] : PROMPTS)) {
@@ -595,7 +596,7 @@
       if (!res.ok) throw new Error(data.error || "Your work did not save. Try again.");
       st.turnedIn = true; save();
       msg.textContent = "✓ Turned in. You're done!"; msg.className = "msg good";
-      $("sendBtn").textContent = "Turned in ✓"; $("sendBtn").disabled = false;
+      $("sendBtn").textContent = "✓ Turned in"; $("sendBtn").disabled = true;
     } catch (err) { msg.textContent = err.message || "Could not turn in. Try again."; msg.className = "msg bad"; $("sendBtn").disabled = false; }
   }
 
@@ -617,7 +618,7 @@
 
   $("restartBtn").onclick = () => {
     if (!confirm("Start over? This clears your work on this device.")) return;
-    const name = st.name; st = fresh(); st.name = name;
+    const name = st.name, wasIn = st.turnedIn; st = fresh(); st.name = name; st.turnedIn = wasIn;   // Start over never re-opens turning in
     if (window.classFirstTry) window.classFirstTry.reset();
     save(); prev = null; render(); window.scrollTo(0, 0);
   };

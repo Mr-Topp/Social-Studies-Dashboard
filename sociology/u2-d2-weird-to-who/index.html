@@ -509,12 +509,13 @@ button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px soli
     $("app").innerHTML = h;
     $("finalBox").value = S.final || "";
     $("finalBox").oninput = () => { S.final = $("finalBox").value; save(); };
-    if (S.submitted) { $("status").innerHTML = '<span class="turned">Turned in ✓</span> You can change your writing and turn in again.'; $("sendBtn").textContent = "Turn in again"; }
+    if (S.submitted) { $("status").innerHTML = '<span class="turned">✓ Turned in.</span>'; $("sendBtn").disabled = true; }
     $("sendBtn").onclick = send;
   }
 
   async function send() {
     const st = $("status"), ref = $("finalBox").value.trim();
+    if (S.submitted && !test()) { $("sendBtn").disabled = true; return; }   // turned in = done (no redo)
     st.className = "msg bad";
     if (!DMS.every((d, i) => roundDone(i)) && !test()) { st.textContent = "Finish all 7 DMs first."; return; }
     if (!test() && (ref.length < 60 || (ref.match(/[.!?]+(?=\s|$)/g) || []).length < 2)) { st.textContent = "Write 2 sentences: the habit, then the culture term and why."; $("finalBox").focus(); return; }
@@ -543,9 +544,9 @@ button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px soli
       if (!r.ok) throw Error(res.error || "Could not send your work.");
       S.submitted = true; save();
       st.innerHTML = '<span class="turned">Turned in ✓</span> Your teacher can see your work. Nice job.';
-      $("sendBtn").textContent = "Turn in again";
+      $("sendBtn").textContent = "Turned in ✓";
     } catch (e) { st.className = "msg bad"; st.textContent = e.message || "Could not turn in. Your work is saved; try again."; }
-    $("sendBtn").disabled = false;
+    $("sendBtn").disabled = !!S.submitted && !test();
   }
 
   function render() {
@@ -556,7 +557,7 @@ button:focus-visible,input:focus-visible,textarea:focus-visible{outline:3px soli
 
   $("restartBtn").onclick = () => {
     if (!confirm("Start over? This clears your answers on this device.")) return;
-    const name = S.name; S = blank(); S.name = name; save();
+    const name = S.name, wasIn = S.submitted; S = blank(); S.name = name; S.submitted = wasIn; save();   // Start over never re-opens turning in
     if (window.classFirstTry) window.classFirstTry.reset();
     $("welcome").hidden = true; render(); window.scrollTo(0, 0);
   };

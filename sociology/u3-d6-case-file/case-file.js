@@ -365,8 +365,8 @@
   function posterView() {
     app.innerHTML = `<section class="scene anim"><p class="kicker noprint">Your infographic</p><h2 class="noprint">Case closed. Here's your infographic.</h2>
       <div class="posterwrap">${posterHtml()}</div>
-      <div class="posteractions">${backBtn()}<button type="button" class="printbtn" id="printBtn">🖨️ Print it</button><button type="button" class="big" id="sendBtn">${st.turnedIn ? "Turn in again" : "Turn it in"}</button></div>
-      <p id="sendMsg" class="msg center" role="status" aria-live="polite">${st.turnedIn ? "You already turned this in. You can go back, fix a part, and turn it in again." : "Check it over. Use ← Back to fix anything first."}</p>
+      <div class="posteractions">${backBtn()}<button type="button" class="printbtn" id="printBtn">🖨️ Print it</button><button type="button" class="big" id="sendBtn"${st.turnedIn ? " disabled" : ""}>${st.turnedIn ? "✓ Turned in" : "Turn it in"}</button></div>
+      <p id="sendMsg" class="msg center" role="status" aria-live="polite">${st.turnedIn ? "" : "Check it over. Use ← Back to fix anything first."}</p>
       ${st.turnedIn ? `<p class="center"><span class="turned" id="turnedTag">✓ Turned in</span></p>` : ""}
       <p class="galnote mute noprint">This is your study sheet for the test. Every test word is on it.</p></section>`;
     bindBack();
@@ -402,6 +402,7 @@
   }
   async function send() {
     const msg = $("sendMsg"), btn = $("sendBtn");
+    if (st.turnedIn && !isT()) { btn.disabled = true; return; }
     if (!isT()) {
       const bad = SECS.find(s => !E(s.id).write || String(E(s.id).write).trim().length < 60);
       if (bad) { msg.textContent = "The " + bad.name + " part isn't finished. Go back and finish it."; msg.className = "msg bad center"; return; }
@@ -414,7 +415,7 @@
       if (!res.ok) throw new Error(data.error || "Your work did not save. Try again.");
       st.turnedIn = true; save();
       msg.textContent = "Turned in! Your teacher can see your case file. Print your infographic if your teacher asks."; msg.className = "msg good center";
-      btn.textContent = "Turned in ✓"; btn.disabled = false;
+      btn.textContent = "✓ Turned in"; btn.disabled = true;
       if (!$("turnedTag")) msg.insertAdjacentHTML("afterend", `<p class="center"><span class="turned" id="turnedTag">✓ Turned in</span></p>`);
     } catch (err) { msg.textContent = err.message || "Could not turn in. Try again."; msg.className = "msg bad center"; btn.disabled = false; }
   }
@@ -444,7 +445,7 @@
   }
   $("restartBtn").onclick = () => {
     if (!confirm("Start over? This clears your case file and photos on this device.")) return;
-    const name = st.name; st = fresh(); st.name = name; photos = {}; savePhotos();
+    const name = st.name, wasIn = st.turnedIn; st = fresh(); st.name = name; st.turnedIn = wasIn; photos = {}; savePhotos();   // Start over never re-opens turning in
     try { window.classFirstTry && window.classFirstTry.reset(); } catch (e) {}
     save(); render(); toTop();
   };

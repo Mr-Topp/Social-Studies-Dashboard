@@ -698,14 +698,15 @@
     setBanner("📱", "", "Post your recap", "bg-teal");
     main().innerHTML = `<div class="phone"><div class="scr"><div class="ph"><span>🚌</span><span>📝</span></div>` +
       PROMPTS.map(p => `<label class="w" for="w_${p.id}">${p.label}</label><p class="stem">${esc(p.stem)}</p><textarea id="w_${p.id}" rows="3">${esc(st.writing[p.id] || "")}</textarea>`).join("") +
-      `<button type="button" class="go coral" id="sendBtn">${st.turnedIn ? "Turn in again" : "Turn in"}</button>` +
-      `<p id="sendMsg" class="send-msg" role="status" aria-live="polite">${st.turnedIn ? "You already turned this in. You can fix your writing and turn it in again." : ""}</p>` +
+      `<button type="button" class="go coral" id="sendBtn"${st.turnedIn ? " disabled" : ""}>${st.turnedIn ? "✓ Turned in" : "Turn in"}</button>` +
+      `<p id="sendMsg" class="send-msg" role="status" aria-live="polite"></p>` +
       (st.turnedIn ? `<div class="done-box"><p class="big-check">✓ Turned in</p></div>` : "") + `</div></div>`;
     PROMPTS.forEach(p => { $("w_" + p.id).addEventListener("input", ev => { st.writing[p.id] = ev.target.value; save(); }); });
     $("sendBtn").onclick = send;
   }
   async function send() {
     const msg = $("sendMsg");
+    if (st.turnedIn && !(window.classIsTestT && window.classIsTestT())) { $("sendBtn").disabled = true; return; }   // turned in = done (no redo)
     const plain = s => String(s || "").normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
     const testT = window.classIsTestT && window.classIsTestT();   // Test T. (teacher) skips the writing rules
     for (const p of (testT ? [] : PROMPTS)) {
@@ -754,7 +755,7 @@
       if (!res.ok) throw new Error(data.error || "Your work did not save. Try again.");
       st.turnedIn = true; save();
       msg.textContent = "Turned in! Your teacher can see your work. You're done."; msg.className = "send-msg good";
-      $("sendBtn").textContent = "Turned in ✓";
+      $("sendBtn").textContent = "✓ Turned in"; $("sendBtn").disabled = true;
       if (!document.querySelector(".done-box")) $("sendMsg").insertAdjacentHTML("afterend", `<div class="done-box"><p class="big-check">✓ Turned in</p></div>`);
     } catch (err) { msg.textContent = err.message || "Could not turn in. Try again."; msg.className = "send-msg bad"; $("sendBtn").disabled = false; }
   }
@@ -803,7 +804,7 @@
   }
   $("restartBtn").onclick = () => {
     if (!confirm("Start over? This clears your work on this device.")) return;
-    const name = st.name; st = fresh(); st.name = name; choiceStep.order = {}; shown = null;
+    const name = st.name, wasIn = st.turnedIn; st = fresh(); st.name = name; st.turnedIn = wasIn; choiceStep.order = {}; shown = null;   // Start over never re-opens turning in
     if (window.classFirstTry) window.classFirstTry.reset();
     st.phase = name ? "week" : "start";
     save(); render(); toTop();

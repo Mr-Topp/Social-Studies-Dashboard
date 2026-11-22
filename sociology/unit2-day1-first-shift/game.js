@@ -693,8 +693,8 @@
       <div class="report-form"><div class="rf-head"><span>CEDAR GRILL · END-OF-SHIFT REPORT</span><span class="rf-name">${esc(st.name)}</span></div>
       <p class="rf-end"><span>Your ending:</span> <b>${esc(e.title)}</b></p>
       ${PROMPTS.map((p, k) => `<div class="wq"${pg >= 0 && k !== pg ? " hidden" : ""}><label for="w_${p.id}">${esc(p.label)}</label><p class="stem"><b>Start like this:</b> <span class="starter">${esc(p.stem)}</span></p><textarea id="w_${p.id}" rows="3" data-starter="${esc(isEs() ? T(p.stem) : p.stem)}">${esc(st.writing[p.id] || "")}</textarea></div>`).join("")}
-      ${pg === 0 ? `<button type="button" class="big" id="w1Next"><span>Next answer</span> →</button>` : `<button type="button" class="big" id="sendBtn">${st.turnedIn ? "Turn in again" : "Turn in"}</button>`}
-      <p id="sendMsg" class="msg" role="status" aria-live="polite">${st.turnedIn ? "You already turned this in. You can fix your writing and turn it in again." : ""}</p>
+      ${pg === 0 ? `<button type="button" class="big" id="w1Next"><span>Next answer</span> →</button>` : `<button type="button" class="big" id="sendBtn"${st.turnedIn ? " disabled" : ""}>${st.turnedIn ? "✓ Turned in" : "Turn in"}</button>`}
+      <p id="sendMsg" class="msg" role="status" aria-live="polite"></p>
       ${st.turnedIn ? `<p class="turned" id="turnedTag">✓ Turned in</p>` : ""}</div></div></section>`;
     PROMPTS.forEach(p => $("w_" + p.id).addEventListener("input", ev => { st.writing[p.id] = ev.target.value; save(); }));
     if (pg === 0) $("w1Next").onclick = () => {
@@ -748,6 +748,7 @@
   }
   async function send() {
     const msg = $("sendMsg"), btn = $("sendBtn");
+    if (st.turnedIn && !isT()) { btn.disabled = true; return; }   // turned in = done (no redo)
     for (const p of PROMPTS) {
       const prob = writingProblem(p);
       if (prob) { msg.textContent = prob; msg.className = /^(For|En) /.test(prob) ? "msg" : "msg bad"; $("w_" + p.id).focus(); return; }
@@ -760,7 +761,7 @@
       if (!res.ok) throw new Error(data.error || "Your work did not save. Try again.");
       st.turnedIn = true; save();
       msg.textContent = "Turned in! Your teacher can see your work. You're done."; msg.className = "msg good";
-      btn.textContent = "Turned in ✓"; btn.disabled = false;
+      btn.textContent = "✓ Turned in"; btn.disabled = true;
       if (!$("turnedTag")) msg.insertAdjacentHTML("afterend", `<p class="turned" id="turnedTag">✓ Turned in</p>`);
     } catch (err) { msg.textContent = err.message || "Could not turn in. Try again."; msg.className = "msg bad"; btn.disabled = false; }
   }
@@ -787,7 +788,7 @@
 
   $("restartBtn").onclick = () => {
     if (!confirm("Start over? This clears your work on this device.")) return;
-    const name = st.name; st = fresh(); st.name = name;
+    const name = st.name, wasIn = st.turnedIn; st = fresh(); st.name = name; st.turnedIn = wasIn;   // Start over never re-opens turning in
     try { window.classFirstTry && window.classFirstTry.reset(); } catch (e) {}
     Object.keys(orders).forEach(k => delete orders[k]);
     lastM = null; save(); render(); window.scrollTo(0, 0);

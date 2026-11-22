@@ -651,13 +651,14 @@ textarea{width:100%;font:inherit;font-size:16px;padding:8px;border:2px solid #cf
       <div><h2>📓 Two short answers</h2>
         ${job("Fill in each sentence starter with your own words. Then tap Turn in.")}
         ${PROMPTS.map(p => `<label class="wl" for="w_${p.id}">${esc(p.label)}</label><p class="stem">${esc(p.stem)}</p><textarea id="w_${p.id}" rows="2">${esc(st.writing[p.id] || "")}</textarea>`).join("")}
-        <div style="display:flex;align-items:center;gap:12px;margin-top:8px"><button type="button" class="go" id="sendBtn">${st.turnedIn ? "Turn in again" : "Turn in"}</button>
-        <p id="sendMsg" class="msg" role="status" aria-live="polite">${st.turnedIn ? "✓ Turned in" : ""}</p></div></div></div></section>`;
+        <div style="display:flex;align-items:center;gap:12px;margin-top:8px"><button type="button" class="go" id="sendBtn"${st.turnedIn ? " disabled" : ""}>${st.turnedIn ? "✓ Turned in" : "Turn in"}</button>
+        <p id="sendMsg" class="msg" role="status" aria-live="polite">${st.turnedIn ? "✓ Turned in." : ""}</p></div></div></div></section>`;
     PROMPTS.forEach(p => $("w_" + p.id).addEventListener("input", e => { st.writing[p.id] = e.target.value; save(); }));
     $("sendBtn").onclick = send;
   }
   async function send() {
     const msg = $("sendMsg");
+    if (st.turnedIn && !(window.classIsTestT && window.classIsTestT())) { $("sendBtn").disabled = true; return; }   // turned in = done (no redo)
     const plain = s => String(s || "").normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
     for (const p of (isTestT() ? [] : PROMPTS)) {
       const box = $("w_" + p.id), v = (box.value || "").trim();
@@ -694,7 +695,7 @@ textarea{width:100%;font:inherit;font-size:16px;padding:8px;border:2px solid #cf
       if (!res.ok) throw new Error(data.error || "Your work did not save. Try again.");
       st.turnedIn = true; save();
       msg.textContent = "✓ Turned in. You're done!"; msg.className = "msg good";
-      $("sendBtn").textContent = "Turned in ✓"; $("sendBtn").disabled = false;
+      $("sendBtn").textContent = "✓ Turned in"; $("sendBtn").disabled = true;
     } catch (err) { msg.textContent = err.message || "Could not turn in. Try again."; msg.className = "msg bad"; $("sendBtn").disabled = false; }
   }
 
@@ -713,7 +714,7 @@ textarea{width:100%;font:inherit;font-size:16px;padding:8px;border:2px solid #cf
   }
   $("restartBtn").onclick = () => {
     if (!confirm("Start over? This clears your work on this device.")) return;
-    const name = st.name; st = fresh(); st.name = name; matchView.order = null;
+    const name = st.name, wasIn = st.turnedIn; st = fresh(); st.name = name; st.turnedIn = wasIn; matchView.order = null;   // Start over never re-opens turning in
     if (window.classFirstTry) window.classFirstTry.reset();
     save(); render();
   };

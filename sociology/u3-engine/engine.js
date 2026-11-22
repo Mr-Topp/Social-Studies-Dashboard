@@ -345,8 +345,8 @@
       <label for="w1">${esc(W.label)}</label><p class="help">${esc(W.help)}</p>
       <p class="stem"><b>Start like this:</b> ${esc(W.stem)}</p>
       <textarea id="w1" rows="5" data-starter="${esc(W.stem)}">${esc(st.writing || "")}</textarea>
-      <div class="rowend"><button type="button" class="big" id="sendBtn">${st.turnedIn ? "Turn in again" : "Turn in"}</button></div>
-      <p id="sendMsg" class="msg" role="status" aria-live="polite">${st.turnedIn ? "You already turned this in. You can fix your writing and turn it in again." : ""}</p>
+      <div class="rowend"><button type="button" class="big" id="sendBtn"${st.turnedIn ? " disabled" : ""}>${st.turnedIn ? "✓ Turned in" : "Turn in"}</button></div>
+      <p id="sendMsg" class="msg" role="status" aria-live="polite"></p>
       ${st.turnedIn ? `<p class="turned" id="turnedTag">✓ Turned in</p>` : ""}</section>`;
     $("w1").addEventListener("input", ev => { st.writing = ev.target.value; save(); });
     $("sendBtn").onclick = send;
@@ -389,6 +389,7 @@
   }
   async function send() {
     const msg = $("sendMsg"), btn = $("sendBtn");
+    if (st.turnedIn && !isT()) { btn.disabled = true; return; }
     const prob = writingProblem();
     if (prob) { msg.textContent = prob; msg.className = "msg bad"; $("w1").focus({ preventScroll: true }); return; }
     if (typeof window.classTurnIn !== "function") { msg.textContent = "Turn-in isn't working right now. Keep this page open and tell your teacher."; msg.className = "msg bad"; return; }
@@ -399,7 +400,7 @@
       if (!res.ok) throw new Error(data.error || "Your work did not save. Try again.");
       st.turnedIn = true; save();
       msg.textContent = "Turned in! Your teacher can see your work. You're done."; msg.className = "msg good";
-      btn.textContent = "Turned in ✓"; btn.disabled = false;
+      btn.textContent = "✓ Turned in"; btn.disabled = true;
       if (!$("turnedTag")) msg.insertAdjacentHTML("afterend", `<p class="turned" id="turnedTag">✓ Turned in</p>`);
     } catch (err) { msg.textContent = err.message || "Could not turn in. Try again."; msg.className = "msg bad"; btn.disabled = false; }
   }
@@ -421,7 +422,7 @@
   }
   $("restartBtn").onclick = () => {
     if (!confirm("Start over? This clears your work on this device.")) return;
-    const name = st.name; st = fresh(); st.name = name;
+    const name = st.name, wasIn = st.turnedIn; st = fresh(); st.name = name; st.turnedIn = wasIn;   // Start over never re-opens turning in
     try { window.classFirstTry && window.classFirstTry.reset(); } catch (e) {}
     save(); render(); toTop();
   };

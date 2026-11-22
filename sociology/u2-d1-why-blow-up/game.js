@@ -9,7 +9,7 @@
 //    3. See what happened + the Blow-Up Meter (side-eye / furious / police)
 //    4. The hidden rule: one sociology idea, bold term + plain words
 //    5. One quick check (two on the last story). Wrong = hint, short lock, reshuffle.
-//  Then: rank + "rules you found" recap + one Explain It + Turn in.
+//  Then: wrap-up + "rules you found" recap + one Explain It + Turn in.
 //  7 checks total. Strict order. Saves on this device.
 //  Every fact is sourced (see SOURCES at the bottom of the page).
 // =====================================================================
@@ -194,7 +194,6 @@
     id: "explain", short: "Explain It: folkway, mores, or law",
     label: "Pick ONE of these stories. Was the rule that got broken a folkway, mores, or a law? Prove it with how people reacted.",
     stem: "In the ___ story, the rule was ___ because when someone broke it, ___.",
-    go4: "Go for a 4: name a second story with a different kind of norm and compare them.",
     min: 50, newWords: 4,
     mustAll: [["folkway", "folkways", "mores", "law", "laws"], ["because", "since", "so", "proof", "shows"]],
     mustMsg: "Name the kind of norm (folkway, mores, or law) AND say how you know (use “because”)."
@@ -237,9 +236,7 @@
       return `<li class="${cls}" title="${esc(s.tag)}"><span>${i < now ? "✓" : i + 1}</span>${esc(s.tag)}</li>`;
     }).join("") + `<li class="${st.step === VOCAB_STEP ? "now" : st.step > VOCAB_STEP ? "done" : ""}"><span>${st.step > VOCAB_STEP ? "✓" : "7"}</span>Vocab</li>` +
       `<li class="${st.step >= WRAP_STEP ? "now" : ""}"><span>★</span>Wrap-up</li>`;
-    const made = STORIES.filter(s => st.calls[s.id] != null).length;
-    $("callPill").innerHTML = `🎯 Called it: <b>${callsRight()}</b> of ${made}`;
-    $("callPill").hidden = made === 0;
+    // No "Called it: N of N" count on the student page (no-scores rule). Calls still go in the turn-in.
   }
 
   // ---------------- Title ----------------
@@ -413,7 +410,7 @@
     if (doneN === VOCAB.length) {
       const end = document.createElement("div"); end.className = "vdone";
       end.innerHTML = `<p>✅ All ${VOCAB.length} matched!</p>`;
-      const nb = document.createElement("button"); nb.type = "button"; nb.className = "go"; nb.id = "nextBtn"; nb.textContent = "See your rank →";
+      const nb = document.createElement("button"); nb.type = "button"; nb.className = "go"; nb.id = "nextBtn"; nb.textContent = "Wrap-up →";
       nb.onclick = () => { st.step = WRAP_STEP; save(); render(); window.scrollTo(0, 0); };
       end.appendChild(nb); box.appendChild(end);
     }
@@ -421,18 +418,16 @@
 
   // ---------------- Wrap-up ----------------
   function wrap() {
-    const r = rank();
     const box = document.createElement("section"); box.className = "card";
     app.replaceChildren(box);
-    box.innerHTML = `<div class="ending"><div class="e-icon">${r.ic}</div><p class="kicker">Your rank</p><h2>${r.t}</h2><p>${r.line}</p><p class="score">✅ <b>${CHECK_IDS.length} of ${CHECK_IDS.length}</b> checks done · 🎯 You called <b>${callsRight()} of ${STORIES.length}</b> stories.</p></div>
+    box.innerHTML = `<div class="ending"><div class="e-icon">✅</div><p class="kicker">Wrap-up</p><h2>All ${STORIES.length} stories done</h2><p>You found the rule behind each blow-up. Now explain one.</p></div>
       <div class="report" id="report"><p class="report-tag">✍️ Explain It</p>
         <label for="w_explain">${PROMPT.label}</label>
         <div class="pickrow" id="pickRow"></div>
         <p class="stem">✏️ Starter: ${esc(PROMPT.stem)}</p>
-        <p class="go4">⭐ ${PROMPT.go4}</p>
         <textarea id="w_explain" rows="4">${esc(st.writing)}</textarea>
-        <button type="button" class="go" id="sendBtn">${st.turnedIn ? "Turn in again" : "Turn in"}</button>
-        <p id="sendMsg" class="msg" role="status" aria-live="polite">${st.turnedIn ? "You already turned this in. You can fix your writing and turn it in again." : ""}</p>
+        <button type="button" class="go" id="sendBtn"${st.turnedIn ? " disabled" : ""}>${st.turnedIn ? "✓ Turned in" : "Turn in"}</button>
+        <p id="sendMsg" class="msg" role="status" aria-live="polite"></p>
         <p class="turned" id="turnedBadge" ${st.turnedIn ? "" : "hidden"}>✓ Turned in</p></div>
       <details class="found"><summary class="step-tag">🔍 Rules you found today (tap to see)</summary>
         <ul>${STORIES.map(s => `<li><span class="f-tag">${esc(s.tag)}</span><b>${s.found.t}:</b> ${s.found.d}</li>`).join("")}</ul></details>`;
@@ -454,6 +449,7 @@
 
   async function send() {
     const msg = $("sendMsg"), box = $("w_explain"), v = (box.value || "").trim();
+    if (st.turnedIn && !(window.classIsTestT && window.classIsTestT())) { $("sendBtn").disabled = true; return; }   // turned in = done (no redo)
     const plain = s => String(s || "").normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
     const testT = window.classIsTestT && window.classIsTestT();   // Test T. (teacher) skips the writing rules
     if (testT && !st.pick) st.pick = STORIES[0].id;
@@ -492,7 +488,7 @@
       if (!res.ok) throw new Error(data.error || "Your work did not save. Try again.");
       st.turnedIn = true; save();
       msg.textContent = "Turned in! Your teacher can see your work. You're done."; msg.className = "msg good";
-      $("sendBtn").textContent = "Turned in ✓"; $("turnedBadge").hidden = false;
+      $("sendBtn").textContent = "✓ Turned in"; $("sendBtn").disabled = true; $("turnedBadge").hidden = false;
     } catch (err) { msg.textContent = err.message || "Could not turn in. Try again."; msg.className = "msg bad"; $("sendBtn").disabled = false; }
   }
 
@@ -530,7 +526,8 @@
   }
   $("restartBtn").onclick = () => {
     if (!confirm("Start over? This clears your work on this device.")) return;
-    const name = st.name; st = fresh(); st.name = name; hist.restarts++; saveHist(); vOrderT = vOrderM = null; vPick = null;
+    const name = st.name, wasIn = st.turnedIn; st = fresh(); st.name = name; st.turnedIn = wasIn; hist.restarts++;   // Start over never re-opens turning in
+    saveHist(); vOrderT = vOrderM = null; vPick = null;
     if (window.classFirstTry) window.classFirstTry.reset();
     save(); render(); window.scrollTo(0, 0);
   };

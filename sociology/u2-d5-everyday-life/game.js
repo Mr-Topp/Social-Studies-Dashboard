@@ -471,13 +471,14 @@
     app.innerHTML = `<section class="card writec journal"><h2>📓 Two short answers</h2>
       ${job("Fill in each sentence starter with your own words. Then tap Turn in.")}
       ${PROMPTS.map(p => `<label for="w_${p.id}">${esc(p.label)}</label><p class="stem">${esc(p.stem)}</p><textarea id="w_${p.id}" rows="3">${esc(st.writing[p.id] || "")}</textarea>`).join("")}
-      <button type="button" class="go" id="sendBtn">${st.turnedIn ? "Turn in again" : "Turn in"}</button>
-      <p id="sendMsg" class="msg" role="status" aria-live="polite">${st.turnedIn ? "✓ Turned in" : ""}</p></section>`;
+      <button type="button" class="go" id="sendBtn"${st.turnedIn ? " disabled" : ""}>${st.turnedIn ? "✓ Turned in" : "Turn in"}</button>
+      <p id="sendMsg" class="msg" role="status" aria-live="polite">${st.turnedIn ? "✓ Turned in." : ""}</p></section>`;
     PROMPTS.forEach(p => $("w_" + p.id).addEventListener("input", e => { st.writing[p.id] = e.target.value; save(); }));
     $("sendBtn").onclick = send;
   }
   async function send() {
     const msg = $("sendMsg");
+    if (st.turnedIn && !(window.classIsTestT && window.classIsTestT())) { $("sendBtn").disabled = true; return; }   // turned in = done (no redo)
     const plain = s => String(s || "").normalize("NFD").replace(/[̀-ͯ]/g, "").toLowerCase();
     const testT = window.classIsTestT && window.classIsTestT();
     for (const p of (testT ? [] : PROMPTS)) {
@@ -519,7 +520,7 @@
       if (!res.ok) throw new Error(data.error || "Your work did not save. Try again.");
       st.turnedIn = true; save();
       msg.textContent = "✓ Turned in. You're done!"; msg.className = "msg good";
-      $("sendBtn").textContent = "Turned in ✓"; $("sendBtn").disabled = false; $("sendBtn").onclick = send;
+      $("sendBtn").textContent = "✓ Turned in"; $("sendBtn").disabled = true;
     } catch (err) { msg.textContent = err.message || "Could not turn in. Try again."; msg.className = "msg bad"; $("sendBtn").disabled = false; }
   }
 
@@ -542,7 +543,7 @@
 
   $("restartBtn").onclick = () => {
     if (!confirm(tr("Start over? This clears your work on this device."))) return;
-    const name = st.name; st = fresh(); st.name = name; picks = [];
+    const name = st.name, wasIn = st.turnedIn; st = fresh(); st.name = name; st.turnedIn = wasIn; picks = [];   // Start over never re-opens turning in
     if (window.classFirstTry) window.classFirstTry.reset();
     save(); render(); window.scrollTo(0, 0);
   };

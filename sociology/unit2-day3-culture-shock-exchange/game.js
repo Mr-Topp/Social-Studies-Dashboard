@@ -657,12 +657,13 @@
     }
     const back = el("button", "usestem back", "← 1/" + WRITING.length); back.type = "button"; back.id = "wBackBtn";
     back.onclick = () => { st.wpage = 0; save(); render(); };
-    const send = el("button", "go", st.turnedIn ? "Turn in again" : "Turn in"); send.type = "button"; send.id = "sendBtn";
-    if (st.turnedIn) say("✓ Turned in. You can fix your writing and turn it in again.", "good");
+    const send = el("button", "go", st.turnedIn ? "✓ Turned in" : "Turn in"); send.type = "button"; send.id = "sendBtn";
+    if (st.turnedIn) { send.disabled = true; say("✓ Turned in.", "good"); }
     card.append(send, back, msg);
     send.onclick = () => turnIn(send, msg, say);
   }
   async function turnIn(send, msg, say) {
+    if (st.turnedIn && !(window.classIsTestT && window.classIsTestT())) { send.disabled = true; return; }   // turned in = done (no redo)
     for (let i = 0; i < WRITING.length; i++) {
       const p = WRITING[i], box = $("w_" + p.id);
       if (box.closest(".compose").hidden) {
@@ -695,7 +696,7 @@
       if (!res.ok) throw new Error(data.error || "Your work did not save. Try again.");
       st.turnedIn = true; save();
       msg.textContent = "✓ Turned in! Your teacher can see your work. You're done."; msg.className = "msg good";
-      send.textContent = "Turned in ✓";
+      send.textContent = "✓ Turned in"; send.disabled = true;
     } catch (err) { msg.textContent = err.message || "Could not turn in. Try again."; msg.className = "msg bad"; send.disabled = false; }
   }
 
@@ -774,7 +775,7 @@
 
   $("restartBtn").onclick = () => {
     if (!confirm("Start over? This clears your work on this device.")) return;
-    const name = st.name; st = fresh(); st.name = name; selLine = null; locked = false;
+    const name = st.name, wasIn = st.turnedIn; st = fresh(); st.name = name; st.turnedIn = wasIn; selLine = null; locked = false;   // Start over never re-opens turning in
     if (window.classFirstTry) window.classFirstTry.reset();
     save(); render(); window.scrollTo(0, 0);
   };
