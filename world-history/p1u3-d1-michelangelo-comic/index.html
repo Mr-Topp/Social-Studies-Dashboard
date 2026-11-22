@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Maker of Giants | World History Part 1 · Unit 3 Day 1</title>
+<meta name="description" content="Fact-check a 1942 comic about Michelangelo, the Medici, and the Sistine Chapel.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../shared/graphic-reading.css?v=3">
+<style>
+.flip-layout{grid-template-columns:minmax(0,1.9fr) minmax(320px,1fr)}
+.flip-stage img{min-height:0;max-height:calc(100vh - 150px)}
+.qcol{padding-bottom:100px}
+.intro-line{font-size:1.02rem;margin:0 0 10px}
+.wordhelp{margin:6px 0 0}.wordhelp summary{cursor:pointer;font-weight:750;color:var(--navy)}
+.words{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0 10px;padding:0;list-style:none}
+.words li{background:#fff;border:1px solid #e6dcc8;border-left:4px solid var(--navy);border-radius:8px;padding:3px 9px;font-size:.88rem}
+.declass{display:block;background:#fff;border:2px dashed #18364a;border-radius:10px;padding:8px 11px;margin:6px 0 8px;font-weight:650;color:#22313b;line-height:1.4;font-style:normal}
+.declass > b:first-child{display:block;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#18364a;margin-bottom:2px}
+.declass .line{display:block;margin:3px 0}
+.declass .note{display:block;margin-top:5px;font-weight:600;font-size:.9rem;color:#5b4632}
+.dime{display:inline-block;background:#e6bd64;color:#0f2433;border-radius:999px;font-weight:850;padding:0 9px;margin-right:4px}
+.credits{font-size:.8rem;color:var(--muted);margin:10px 0 0;line-height:1.4}
+.pg-cap{margin:8px 2px 0;font-size:.95rem;line-height:1.35;background:#fff;border:1px solid #e6dcc8;border-left:4px solid #e6bd64;border-radius:8px;padding:6px 10px}.pg-cap:empty{display:none}
+.gr-head{padding-top:18px;padding-bottom:16px}.gr-head h1{margin:6px 0 6px}.gr-head .hook{margin-bottom:8px}
+body.reading-now .choices{opacity:.45;pointer-events:none}
+</style>
+<script src="../../shared/assignments.js?v=20261116m2"></script><script src="../../shared/turnin.js?v=20261116m2"></script></head><body>
+<header class="gr-head" data-years="1500">
+<div class="gr-wrap">
+<div class="kicker">World History · Part 1 · Unit 3 Day 1 · Renaissance, Reformation &amp; New Ideas</div>
+<h1>Maker of Giants: Michelangelo</h1>
+<p class="hook"><span class="dime">1489–1512</span>A teenage stonecutter moves into the richest family's palace and grows up to paint the most famous ceiling in the world. Read a real 1942 comic, then check what it got wrong. 8 pages · 3 checks · 3 short answers. <b>About 20 minutes.</b></p>
+<p class="goal"><b>Today's goal:</b> Explain how rich patrons and new ideas about people helped the Renaissance grow in Italy.</p>
+<details class="std-details"><summary>Iowa standards for today</summary>
+<p><b>Standard SS.9-12.WH.10</b> — Explain how the Renaissance changed European societies from 1450 to 1750.</p>
+</details>
+<nav><a class="back" href="../../">← Class activities</a></nav>
+</div></header>
+
+<nav class="route" aria-label="Your progress"><ol id="flipRoute"></ol></nav>
+
+<main class="gr-main gr-wrap">
+<section class="card">
+<p class="intro-line"><b>You're the fact-checker.</b> For each part: <b>read</b> the comic on the left → get the <b>check</b> right → read the <b>fact file</b> → write 1–2 sentences. Done = all parts green, then turn in at the bottom.</p>
+<details class="wordhelp"><summary>Word help (tap to open)</summary>
+<ul class="words" aria-label="Word help">
+<li><b>Renaissance</b> = "rebirth," a burst of new art and ideas in Europe</li><li><b>Patron</b> = a rich person or group that pays an artist</li><li><b>Medici</b> (MED-ih-chee) = the richest banking family in Florence, Italy</li><li><b>Humanism</b> = celebrating human talent and life in this world</li><li><b>Sculptor</b> = an artist who carves statues</li><li><b>1942 comic</b> = made for American kids in the 1940s. It uses some old words and shows one point of view.</li>
+</ul></details>
+<p class="welcome" id="welcome" role="status"></p>
+</section>
+
+<div class="flip-layout">
+<section class="flip-reader reading" id="flipReader" aria-label="Pages from a 1942 True Comics story about Michelangelo">
+<div class="flip-bar"><div><p class="eyebrow">The reading</p><h2>A real 1942 comic · 8 pages</h2></div><span class="flip-pos" id="flipPos"></span></div>
+<div class="flip-tools"><button type="button" class="quiet" id="flipBack">← Back a page</button><span class="grow"><span id="flipPart"></span><span id="flipTimer" aria-live="polite"></span></span><button type="button" class="secondary" id="flipNext">Next page →</button><button type="button" class="quiet" id="flipZoom">Make page bigger</button></div>
+<div class="flip-stage"><img id="flipImg" alt="" src="pages/p-01.jpg"></div>
+<p class="pg-cap" id="pgCap" aria-live="polite"></p>
+<p class="flip-cap">Click the page to make it bigger.</p>
+</section>
+
+<div class="qcol">
+<section class="card">
+<label for="studentName">First name + last initial (like Jordan M.)</label><input id="studentName" maxlength="100" autocomplete="off" placeholder="First name + last initial (like Jordan M.)" required>
+</section>
+<div id="flipCards"></div>
+<div class="flip-nav"><button type="button" class="quiet" id="flipBack2">← Back</button><button type="button" class="secondary" id="flipNext2">Next page →</button><p class="flip-why" id="flipWhy" aria-live="polite"></p></div>
+<section class="card finish" id="finish">
+<h2>Turn in your work</h2>
+<div class="actions"><button id="submitBtn" class="primary" type="button">Turn in answers</button></div><p id="submitStatus" class="status" role="status" aria-live="polite"></p><p class="reader-note">Your work saves on this device, so you can come back later. Your teacher sees it after you turn it in.</p>
+<p class="credits">Comic: <i>True Comics</i> no. 14 (1942), Parents' Magazine Press, a true-history comic for kids. Public domain. Scan via the Internet Archive. Cropped to today's reading.</p>
+</section>
+<p class="credits" style="text-align:center"><button id="clearBtn" class="quiet" type="button" style="font-size:.8rem">Start over</button></p>
+</div></div></main>
+<div class="flip-big" id="flipBig" hidden role="dialog" aria-label="Bigger page"><button type="button" class="quiet" id="flipBigClose">✕ Close</button><img id="flipBigImg" alt="Bigger view of the current page"></div>
+<script>
+window.FLIP={
+title:"Pages from a 1942 True Comics story about Michelangelo",prefix:"wh-p1u3d1-mich-comic-",pages:8,readSeconds:8,lockSeconds:8,
+alts:["Reader page 1. A man says: Very good, Michel! I think I'll let you sketch in the gardens of the Medici palace. A boy says: Why, that's where Piero lives! The man says: If he pleases Piero's father, he's on the road to fame! A box says: One day in the palace gardens. Lorenzo de' Medici asks: Why have you knocked out one of the faun's teeth, Michel? Michelangelo says: Because he's a very old faun, Your Grace.", "Reader page 2. Lorenzo, the Magnificent, wants to see you, father. Michelangelo's father says: Some new prank of yours, I suppose. Now we'll all be thrown into jail! A box says: The head of the house of Medici had taken a liking to Michel. Lorenzo says: I wish to see that your son's talent is developed. I shall treat him as my own son from now on. The father says: You do my son and me great honor, sire.", "Reader page 3. A box says: His statue was greatly admired. People look at a marble statue of Mary holding Jesus. A man says: This is the work of a master, no doubt of it. Michelangelo carves into the statue and says: I will put my name where the whole world can see it!", "Reader page 4. Michelangelo reads a letter: My father is in trouble. I must go home at once. A box says: Home in Florence, Michelangelo was hailed this time by the people. People shout: It's Michelangelo! He's come back! They say he will tackle the White Giant!", "Reader page 5. A box says: The White Giant was a big slab of marble, three times as high as a man. A man says: For 100 years now, artists have been hacking away at that marble slab. A box says: Michelangelo turned the White Giant into his famed statue of David, the giant killer. He carves the huge statue of David.", "Reader page 6. A box says: David was guarded night and day. Guards say: Why are we on guard here? No harm must come to this great statue. A box says: Rival artists set a trap for Michelangelo. One says: He is stealing all the glory from us. Another says: If he had to do a painting, he'd fail. He's only a stone-cutter.", "Reader page 7. Michelangelo kneels before the Pope and says: Your Holiness, I am a stone-cutter, not a painter. There are many artists who could paint the ceiling of the Sistine Chapel better than I. The Pope says: But I want you, Michelangelo! A huge painted ceiling rises above a tall wooden scaffold.", "Reader page 8. A box says: He had to lie flat on his back to paint the ceiling. A man says: He never stops to eat. He carries bread crusts to munch on. Another says: We made a mistake. He paints as wonderfully as he carves. A third says: Who but Michelangelo would tackle the Creation of the World, the Last Judgment? A box says: The very trap set by his jealous rivals won him fame and immortality. People came from far and wide to look upon his work. They still do, for the giants he created on the ceiling of the Sistine Chapel in the Vatican in Rome will be famed forever."],
+assignmentId:"wh-p1u3-d1-michelangelo-comic",api:"https://fynn-class-assignment-submissions-20261024.neotboy.chatgpt.site/api/submit",
+lockedText:"This box opens when you get the check right.",
+clearConfirm:"Start over? This clears your checks and answers on this device.",
+successText:"Turned in! Your teacher got your 3 checks and 3 answers. You are done.",
+wrongText:(c,left)=>left>0?"Not quite. "+c.hint+" Try again in "+left+"…":"Not quite. "+c.hint+" The choices were mixed up. Try again.",
+parts:[
+{
+"short": "Patron",
+"ref": "Reader pages 1–2",
+"title": "1. Who paid for genius?",
+"from": 1,
+"to": 2,
+"check": {
+"page": 2,
+"tag": "Reading check · Reader page 2",
+"q": "Who took Michelangelo into his home and paid for his training?",
+"right": "The head of the Medici family",
+"wrong": [
+"His father, a stonecutter",
+"The pope in Rome",
+"His art teacher in Florence"
+],
+"why": "✓ Correct. Lorenzo de' Medici was a patron. He paid for artists so Florence would look great, and so would his family.",
+"hint": "Read the box at the top right: \"The head of the house of...\""
+},
+"prompt": "Why did Renaissance artists need rich patrons like the Medici?",
+"stem": "<span class=\"declass\"><b>Fact file</b><span class=\"line\">Florence got rich making wool cloth and running banks. In 1397 the <b>Medici</b> opened a bank that became the biggest in Europe.</span><span class=\"line\">A <b>patron</b> pays an artist to make work. Patrons got beautiful art, and the art showed off their money and power.</span><span class=\"line\">Michelangelo really did live in Lorenzo de' Medici's home as a teenager, starting around age 15.</span></span>Write 1–2 sentences. Start like this: <i>Artists needed patrons because ___.</i>",
+"stemText": "Artists needed patrons because ___.",
+"placeholder": "Artists needed patrons because ___."
+},
+{
+"short": "Real life",
+"ref": "Reader pages 3–5",
+"title": "2. Art that looks alive",
+"from": 3,
+"to": 5,
+"check": {
+"page": 3,
+"tag": "Reading check · Reader page 3",
+"q": "What did Michelangelo do so everyone would know the statue was his?",
+"right": "He carved his name on it",
+"wrong": [
+"He painted it bright gold",
+"He sold it to the Pope",
+"He hid it in his garden"
+],
+"why": "✓ Correct. The Pietà is the only statue he ever signed.",
+"hint": "Read his speech bubble on the right."
+},
+"prompt": "How do the Pietà and David show humanism, the idea that people and their talents are amazing?",
+"stem": "<span class=\"declass\"><b>Fact file</b><span class=\"line\">Michelangelo finished the <b>Pietà</b> in 1499, when he was about 24. It's the only work he ever signed.</span><span class=\"line\"><b>David</b> (1501–1504) is about 17 feet tall. The comic says artists had hacked at the marble for 100 years. It was really about <b>40 years</b>.</span><span class=\"line\">Renaissance artists studied real bodies so their art would look like <b>real life</b>. Medieval art was flatter and focused on heaven.</span><span class=\"note\">Old comics make mistakes. Check the facts!</span></span>Write 1–2 sentences. Start like this: <i>These statues show humanism because ___.</i>",
+"stemText": "These statues show humanism because ___.",
+"placeholder": "These statues show humanism because ___."
+},
+{
+"short": "Sistine",
+"ref": "Reader pages 6–8",
+"title": "3. Fact-check the ceiling",
+"from": 6,
+"to": 8,
+"check": {
+"page": 7,
+"tag": "Reading check · Reader page 7",
+"q": "What did the Pope want Michelangelo to paint?",
+"right": "The Sistine Chapel ceiling",
+"wrong": [
+"A portrait of the Pope",
+"The front of his palace",
+"A map of the whole world"
+],
+"why": "✓ Correct. Pope Julius II was a patron too. He paid for the ceiling from 1508 to 1512.",
+"hint": "Read Michelangelo's speech bubble on the left."
+},
+"prompt": "How did the Renaissance change the way Europeans saw people and art? Which change mattered most?",
+"stem": "<span class=\"declass\"><b>Fact file</b><span class=\"line\"><b>Myth busted:</b> the comic says he lay flat on his back. He really <b>stood</b> on a tall scaffold he designed, bending his head back for four years. He even wrote a poem complaining about his sore neck.</span><span class=\"line\">The ceiling shows stories from the Bible, like <b>The Creation of Adam</b>, with strong, real-looking human bodies.</span><span class=\"line\">Popes and the Church were patrons too. Faith and humanism went together for most Renaissance artists.</span><span class=\"note\">Old comics make mistakes. Check the facts!</span></span>Write 1–2 sentences. Start like this: <i>The Renaissance changed how Europeans saw people because ___.</i>",
+"stemText": "The Renaissance changed how Europeans saw people because ___.",
+"placeholder": "The Renaissance changed how Europeans saw people because ___."
+}
+],
+questions:["Why did Renaissance artists need rich patrons like the Medici?", "How do the Pietà and David show humanism, the idea that people and their talents are amazing?", "How did the Renaissance change the way Europeans saw people and art? Which change mattered most?"],
+validate(s){if(!s.name)return{text:"Type your first name + last initial (like Jordan M.) at the top of the questions.",focus:"studentName"};
+ const mc=[1, 2, 3].find(i=>!s.checkDone(i));if(mc)return{text:"Get the check right for part "+mc+" first.",part:mc};
+ const ma=[1, 2, 3].find(i=>!s.answer(i));if(ma)return{text:"Write your answer for part "+ma+" before turning in.",part:ma,focus:"answer"+ma};
+ for(const i of [1, 2, 3]){const j=window.classJunkStop&&window.classJunkStop(document.getElementById("answer"+i));if(j)return{text:"Part "+i+": "+j,part:i}}return null},
+buildAnswers(s){const a={Standard:"SS.9-12.WH.10","First-try correct":[1, 2, 3].filter(i=>(s.tries(i)||1)===1).length+" of 3"};
+ this.questions.forEach((q,i)=>a[q]=s.answer(i+1));a["Reading checks"]="3 of 3 correct · tries: "+[1, 2, 3].map(i=>s.tries(i)||1).join(", ");return a}
+};
+</script>
+<script src="../../shared/flip-reader.js?v=5urls"></script>
+<script>
+// One-line "what's going on" caption under each page, for kids who missed the lecture.
+(function(){const caps=["<b>Florence, about 1489.</b> A teen sketches in the Medici gardens.", "<b>The patron.</b> Lorenzo de' Medici makes an offer.", "<b>Rome, 1499.</b> The Pietà.", "<b>Florence, 1501.</b> Home to a hero's welcome.", "<b>1501–1504.</b> The White Giant becomes David.", "<b>Rivals.</b> Jealous artists plan a trap.", "<b>Rome, 1508.</b> The Pope gives an order.", "<b>1508–1512.</b> The Sistine Chapel ceiling."];
+ const pos=document.getElementById("flipPos"),cap=document.getElementById("pgCap");
+ const sync=()=>{const m=pos.textContent.match(/page (\d+)/);cap.innerHTML=m?caps[+m[1]-1]||"":""};
+ new MutationObserver(sync).observe(pos,{childList:true,characterData:true,subtree:true});sync();})();
+// Choices wait for the read timer, and "Not quite" scrolls into view (same as the other readings).
+(function(){
+  document.addEventListener("click",e=>{const b=e.target.closest("#flipNext2");if(!b||!/Next part|Turn in/.test(b.textContent))return;
+    const a=document.querySelector(".flip-part:not([hidden]) textarea:not([disabled])");if(!a||!a.value.trim()||!window.classJunkStop)return;
+    if(window.classJunkStop(a)){e.stopImmediatePropagation();e.preventDefault()}},true);
+  const t=document.getElementById("flipTimer");
+  const sync=()=>document.body.classList.toggle("reading-now",t.textContent.trim()!=="");
+  new MutationObserver(sync).observe(t,{childList:true,characterData:true,subtree:true});sync();
+  document.getElementById("flipCards").addEventListener("click",e=>{if(!e.target.closest(".choice"))return;
+    setTimeout(()=>{const f=[...document.querySelectorAll(".flip-part:not([hidden]) .fb")].find(x=>x.textContent.trim());
+      if(f){const r=f.getBoundingClientRect();if(r.bottom>innerHeight-80||r.top<0)f.scrollIntoView({behavior:"smooth",block:"center"})}},120)});
+})();
+</script>
+</body></html>
