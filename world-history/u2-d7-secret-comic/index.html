@@ -14,6 +14,15 @@
 .words li{background:#fff;border:1px solid #e6dcc8;border-left:4px solid var(--navy);border-radius:8px;padding:3px 9px;font-size:.88rem}
 .declass{display:block;background:#fff;border:2px dashed #18364a;border-radius:10px;padding:8px 11px;margin:6px 0 8px;font-weight:650;color:#22313b;line-height:1.4;font-style:normal}
 .declass > b:first-child{display:block;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#18364a;margin-bottom:2px}
+.declass .line{display:block;margin:3px 0}
+.declass .fix{display:block;margin:6px 0;border:1px solid #c9d3da;border-radius:8px;overflow:hidden}
+.declass .cs,.declass .rl{display:block;padding:5px 9px}
+.declass .cs{background:#fdecea}
+.declass .cs::before{content:"\2717  Comic says: ";font-weight:800;color:#a3271a}
+.declass .rl{background:#e6f4e9}
+.declass .rl::before{content:"\2713  Really: ";font-weight:800;color:#1d6b33}
+.declass .kf{display:block;margin-top:8px;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#18364a}
+.declass .note{display:block;margin-top:5px;font-weight:600;font-size:.9rem;color:#5b4632}
 .dime{display:inline-block;background:#e6bd64;color:#0f2433;border-radius:999px;font-weight:850;padding:0 9px;margin-right:4px}
 .credits{font-size:.8rem;color:var(--muted);margin:10px 0 0;line-height:1.4}
 .gr-head{padding-top:18px;padding-bottom:16px}.gr-head h1{margin:6px 0 6px}.gr-head .hook{margin-bottom:8px}
@@ -23,7 +32,7 @@ body.reading-now .choices{opacity:.45;pointer-events:none}
 <header class="gr-head" data-years="1975 — 1994"><div class="gr-wrap">
 <div class="kicker">World History · Unit 2 · Day 7 · Cambodia &amp; Apartheid</div>
 <h1>Who Paid for This Hero?</h1>
-<p class="hook">In 1975, a new superhero comic sold for 15 cents in Soweto, South Africa. It hid a big secret. Find out who really paid for it. 4 checks + 4 short answers. <b>About 25 minutes.</b></p>
+<p class="hook">In 1975, a new superhero comic sold for 15 cents in Soweto, South Africa. It hid a big secret. Find out who really paid for it. 6 checks + 2 short answers. <b>About 20 minutes.</b></p>
 <p class="goal"><b>Today's goal:</b> Compare how governments controlled people during the Cold War, and explain how regular people pushed back.</p>
 <details class="std-details"><summary>Iowa standards for today</summary>
 <p><b>Standard SS.9-12.WH.35</b> — Compare and contrast the methods of control used by various forms of government during the Cold War.</p><p><b>Standard SS.9-12.WH.37</b> — Explain how various groups promoted their interests and goals within the context of the Cold War.</p><p><b>Standard SS.9-12.WH.38</b> — Analyze the impact of mass atrocities committed during the Cold War.</p>
@@ -35,7 +44,7 @@ body.reading-now .choices{opacity:.45;pointer-events:none}
 
 <main class="gr-main gr-wrap">
 <section class="card">
-<p class="intro-line"><b>You're the investigator.</b> For each part: <b>read</b> the comic page on the left → get the <b>check</b> right → <b>write</b> 1–2 sentences. Done = 4 green checks + 4 answers, then turn in at the bottom.</p>
+<p class="intro-line"><b>How it works:</b> read the comic pages → answer the question about today's big idea → see what the comic got right and wrong → write 1–2 sentences or answer a second check. Done = all parts green, then turn in at the bottom.</p>
 <p class="intro-line" style="font-size:.95rem"><b>Heads up:</b> Part 4 mentions police shooting student protesters in 1976. There are no pictures of it.</p><ul class="words" aria-label="Word help">
 <li><b>Apartheid</b> = laws that split South Africa by race (1948–1994)</li><li><b>Propaganda</b> = messages made to change what people think</li><li><b>Soweto</b> = a large Black township near Johannesburg</li><li><b>Township</b> = an area where Black South Africans were forced to live</li><li><b>Law enforcing</b> = making people follow the law</li><li><b>Front company</b> = a fake business that hides who is really in charge</li>
 </ul>
@@ -69,7 +78,7 @@ title:"Pages from the 1975 comic Mighty Man, No. 1",prefix:"wh-u2d7-secret-comic
 assignmentId:"wh-u2-d7-secret-comic",api:"https://fynn-class-assignment-submissions-20261024.neotboy.chatgpt.site/api/submit",
 lockedText:"This box opens when you get the check right.",
 clearConfirm:"Start over? This clears your checks and answers on this device.",
-successText:"Turned in! Your teacher got your 4 checks and 4 answers. You are done.",
+successText:"Turned in! Your teacher got your 6 checks and 2 answers. You are done.",
 wrongText:(c,left)=>left>0?"Not quite. "+c.hint+" Try again in "+left+"…":"Not quite. "+c.hint+" The choices were mixed up. Try again.",
 parts:[
 {
@@ -82,19 +91,27 @@ parts:[
 "page": 1,
 "tag": "Reading check · Reader page 1",
 "q": "Read the yellow words under MIGHTY MAN. What kind of hero is he?",
-"right": "A hero who makes people follow the law",
+"right": "A hero who helps enforce the law",
 "wrong": [
-"A hero who fights to end the unfair laws of apartheid",
-"A soldier who protects South Africa from other armies",
-"A boxer who fights his way up to win a big title"
+"A hero who fights to change unfair laws",
+"A hero who stays out of police business",
+"A hero who protects people from the army"
 ],
-"why": "✓ Correct. He is \"The Human Law Enforcing Dynamo.\" On the cover, he is getting back stolen POLICE FILES from two armed crooks.",
-"hint": "Read the yellow words right under the big red title."
+"why": "✓ Correct. Under apartheid, \"the law\" included the race laws. A hero who enforces the law sends the government's message.",
+"hint": "Read the yellow words right under the big red title: \"The Human Law Enforcing...\""
 },
-"prompt": "Why would a comic like this be popular with kids in Soweto?",
-"stem": "<span class=\"declass\"><b>Fact file</b>Mighty Man cost 15 cents. It was one of the first comics with a Black South African superhero. About 47,000 copies were printed every month.</span>Write 1–2 sentences. Start like this: <i>Kids might like Mighty Man because ___. On the cover, he fights ___.</i>",
-"stemText": "Kids might like Mighty Man because ___. On the cover, he fights ___.",
-"placeholder": "Kids might like Mighty Man because ___. On the cover, he fights ___."
+"check2": {
+"tag": "Second check · Use the fact file",
+"q": "<span class=\"declass\"><b>Fact file</b><span class=\"line\"><b>Apartheid</b> (1948–1994) = South Africa's laws that split people by race. Black South Africans, the large majority, could not vote.</span></span>The yellow words call Mighty Man \"Law Enforcing.\" Under apartheid, what did the law do?",
+"right": "Split people up by race in daily life",
+"wrong": [
+"Let every adult citizen vote for leaders",
+"Gave every child an equal school",
+"Let Soweto choose its own city leaders"
+],
+"why": "✓ Correct. So a hero who enforces the law is backing apartheid too. That's the message the government wanted kids to get.",
+"hint": "Read the yellow words under the title (\"Law Enforcing\"), then the fact file: what did apartheid laws do?"
+}
 },
 {
 "short": "Who made it?",
@@ -105,18 +122,18 @@ parts:[
 "check": {
 "page": 2,
 "tag": "Reading check · Reader page 2",
-"q": "Read the small print at the bottom of the page. Who does it say owns and publishes Mighty Man?",
-"right": "Afri-Comics, a company based in Pretoria",
+"q": "Read the small print at the bottom. Who does it say owns and publishes Mighty Man?",
+"right": "Afri-Comics, a company in Pretoria",
 "wrong": [
-"Simon Sabela, the editor in the photo at the top",
+"Simon Sabela, the editor in the photo",
 "A student newspaper in Soweto",
 "A comic book company in the United States"
 ],
-"why": "✓ Correct. That is what the comic says. But the full truth came out later. Read the fact file below.",
+"why": "✓ Correct. That's what the comic says. The full truth came out later. Read the box below.",
 "hint": "Find the words \"owned and published by\" in the small print near the bottom."
 },
 "prompt": "Why would a government hide that it paid for a comic book?",
-"stem": "<span class=\"declass\"><b>Fact file</b>Afri-Comics was a front company (a fake company that hides who is really in charge). It was secretly paid for by apartheid South Africa's Department of Information, as part of a secret propaganda war (messages made to change what people think) to defend apartheid. In 1978, the department's secret projects were exposed in the \"Information Scandal,\" and it was shut down.</span>Write 1–2 sentences. Start like this: <i>The government hid that it paid for Mighty Man because ___. If readers knew, they might ___.</i>",
+"stem": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">It is \"owned and published by Afri-Comics.\"</span><span class=\"rl\">Afri-Comics was a front (a fake company). Apartheid South Africa's government secretly paid for it as propaganda.</span></span><b class=\"kf\">Know this</b><span class=\"line\">The secret came out in the 1978 \"Information Scandal.\"</span></span>Write 1–2 sentences. Start like this: <i>The government hid that it paid for Mighty Man because ___. If readers knew, they might ___.</i>",
 "stemText": "The government hid that it paid for Mighty Man because ___. If readers knew, they might ___.",
 "placeholder": "The government hid that it paid for Mighty Man because ___. If readers knew, they might ___."
 },
@@ -129,20 +146,28 @@ parts:[
 "check": {
 "page": 3,
 "tag": "Reading check · Reader page 3",
-"q": "Read the box at the bottom of the page. Who does Mighty Man use his powers against?",
-"right": "Criminals the comic calls snakes and vermin",
+"q": "Read the box at the bottom. Who are the enemies in this comic?",
+"right": "Crooks the comic calls snakes and vermin",
 "wrong": [
 "The leaders who made the apartheid laws",
 "Police officers who treat people unfairly",
-"Soldiers from another country invading Africa"
+"Soldiers from another country"
 ],
-"why": "✓ Correct. Mighty Man fights crooks in the township. These pages never show apartheid laws, pass books, or who was allowed to vote.",
-"hint": "Read the last box at the bottom. It starts with \"Mighty Man, using his awesome powers…\""
+"why": "✓ Correct. The comic blames crime, not apartheid. It never shows pass laws or who was allowed to vote.",
+"hint": "Read the last box at the bottom: \"Mighty Man, using his awesome powers against...\""
 },
-"prompt": "What does this comic leave out about life in Soweto?",
-"stem": "<span class=\"declass\"><b>Fact file</b>Under apartheid, laws decided where Black South Africans could live, work, and go to school. They had to carry pass books and could not vote. None of this shows up in Mighty Man.</span>Write 1–2 sentences. Start like this: <i>The comic leaves out ___. The government wanted kids to think the real problem was ___.</i>",
-"stemText": "The comic leaves out ___. The government wanted kids to think the real problem was ___.",
-"placeholder": "The comic leaves out ___. The government wanted kids to think the real problem was ___."
+"check2": {
+"tag": "Second check · Use the fact file",
+"q": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">The big danger in the township is crime.</span><span class=\"rl\">Apartheid laws decided where Black South Africans could live, work, and go to school.</span></span><b class=\"kf\">Know this</b><span class=\"line\"><b>Pass laws</b> forced Black South Africans to carry a passbook in areas set aside for whites.</span></span>The bottom box says Mighty Man fights \"criminal snakes and vermin.\" The comic says the big danger is crime. What really ran Black South Africans' lives?",
+"right": "Apartheid laws on where to live and work",
+"wrong": [
+"Gangs of crooks who ran the township streets",
+"Rules made by Soweto's own elected leaders",
+"Soldiers sent in from a nearby country"
+],
+"why": "✓ Correct. Apartheid laws decided where Black South Africans could live, work, and go to school. The comic hides that and blames crime instead.",
+"hint": "Read the bottom box on the page (who Mighty Man fights), then the \"Really\" line in the fact file."
+}
 },
 {
 "short": "Danny's job",
@@ -154,32 +179,39 @@ parts:[
 "page": 4,
 "tag": "Reading check · Reader page 4",
 "q": "Read the first two panels. What was Danny's job before he became Mighty Man?",
-"right": "He was a police officer who stopped a robbery",
+"right": "A police officer who stopped a robbery",
 "wrong": [
-"He was a student who marched against unfair schools",
-"He was a boxer who trained at a Soweto gym",
-"He was a doctor at the city hospital"
+"A student who marched against unfair schools",
+"A boxer who trained at a Soweto gym",
+"A doctor at the city hospital"
 ],
-"why": "✓ Correct. Danny is a brave policeman who gets shot stopping two robbers. The comic's message: the police are the heroes.",
-"hint": "Read the box in the top-left panel: \"It begins long months before, when Danny had been a member of the…\""
+"why": "✓ Correct. The comic's message: the police are the heroes. Real life in Soweto looked very different.",
+"hint": "Read the box in the top-left panel: \"Danny had been a member of the...\""
 },
-"prompt": "Compare how the two governments controlled people. Then: how did Soweto students push back?",
-"stem": "<span class=\"declass\"><b>Fact file</b><b>Soweto, June 16, 1976:</b> thousands of students marched against being taught in Afrikaans. Police opened fire. One of the first killed was 12-year-old Hector Pieterson. At least 176 people died, and some counts say far more. Mighty Man was sold from 1975 to 1977.<br><b>Cambodia, 1975–1979:</b> the Khmer Rouge ruled by open terror. It emptied the cities, and told people: \"Keeping you is no gain, losing you is no loss.\"</span>Write 1–2 sentences. Start like this: <i>The Khmer Rouge used terror, but South Africa's government also used ___. Soweto students pushed back by ___.</i>",
-"stemText": "The Khmer Rouge used terror, but South Africa's government also used ___. Soweto students pushed back by ___.",
-"placeholder": "The Khmer Rouge used terror, but South Africa's government also used ___. Soweto students pushed back by ___."
+"prompt": "Which did more to end apartheid: protest inside South Africa or pressure from the rest of the world? Explain.",
+"stem": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">The police are heroes who protect the township.</span><span class=\"rl\">On June 16, 1976, Soweto police fired on students marching against Afrikaans lessons. At least 176 people died.</span></span><b class=\"kf\">Know this</b><span class=\"line\">Protests at home and pressure from abroad (like U.S. sanctions in 1986) ended apartheid. In 1994 everyone could vote, and Mandela became president.</span></span>Write 1–2 sentences. Start like this: <i>Apartheid ended mostly because of ___ because ___.</i>",
+"stemText": "Apartheid ended mostly because of ___ because ___.",
+"placeholder": "Apartheid ended mostly because of ___ because ___."
 }
 ],
-questions:["Why would a comic like this be popular with kids in Soweto?", "Why would a government hide that it paid for a comic book?", "What does this comic leave out about life in Soweto?", "Compare how the two governments controlled people. Then: how did Soweto students push back?"],
+questions:["(Check) Under apartheid, what did \"the law\" Mighty Man enforces do?", "Why would a government hide that it paid for a comic book?", "(Check) What does the comic leave out about life in Soweto?", "Which did more to end apartheid: protest inside South Africa or pressure from the rest of the world? Explain."],
 validate(s){if(!s.name)return{text:"Type your first name + last initial (like Jordan M.) at the top of the questions.",focus:"studentName"};
- const mc=[1, 2, 3, 4].find(i=>!s.checkDone(i));if(mc)return{text:"Get the check right for part "+mc+" first.",part:mc};
- const ma=[1, 2, 3, 4].find(i=>!s.answer(i));if(ma)return{text:"Write your answer for part "+ma+" before turning in.",part:ma,focus:"answer"+ma};
- for(const i of [1, 2, 3, 4]){const j=window.classJunkStop&&window.classJunkStop(document.getElementById("answer"+i));if(j)return{text:"Part "+i+": "+j,part:i}}return null},
-buildAnswers(s){const a={Standard:"SS.9-12.WH.35, SS.9-12.WH.37, SS.9-12.WH.38","First-try correct":[1, 2, 3, 4].filter(i=>(s.tries(i)||1)===1).length+" of 4"};
- this.questions.forEach((q,i)=>a[q]=s.answer(i+1));a["Reading checks"]="4 of 4 correct · tries: "+[1, 2, 3, 4].map(i=>s.tries(i)||1).join(", ");return a}
-
+ const mc=[1,2,3,4].find(i=>!s.checkDone(i));if(mc)return{text:"Get the check right for part "+mc+" first.",part:mc};
+ const m2=[1,3].find(i=>!s.check2Done(i));if(m2)return{text:"Get the second check right for part "+m2+" first.",part:m2};
+ const ma=[2,4].find(i=>!s.answer(i));if(ma)return{text:"Write your answer for part "+ma+" before turning in.",part:ma,focus:"answer"+ma};
+ for(const i of [2,4]){const j=window.classJunkStop&&window.classJunkStop(document.getElementById("answer"+i));if(j)return{text:"Part "+i+": "+j,part:i}}return null},
+buildAnswers(s){const t1=i=>(s.tries(i)||1),t2=i=>(s.tries2(i)||1);
+ const first=[1,2,3,4].filter(i=>t1(i)===1).length+[1,3].filter(i=>t2(i)===1).length;
+ const a={Standard:"SS.9-12.WH.35, SS.9-12.WH.37, SS.9-12.WH.38","First-try correct":first+" of 6"};
+ const ft=n=>n===1?"Right on first try":"Right after "+(n-1)+" wrong";
+ a["[WH.35] "+this.questions[0]]=ft(t2(1));
+ a["[WH.35, WH.37] "+this.questions[1]]=s.answer(2);
+ a["[WH.35] "+this.questions[2]]=ft(t2(3));
+ a["[WH.37, WH.38] "+this.questions[3]]=s.answer(4);
+ a["Reading checks"]="6 of 6 correct · tries: "+[1,2,3,4].map(t1).join(", ")+" · second checks: "+t2(1)+", "+t2(3);return a}
 };
 </script>
-<script src="../../shared/flip-reader.js?v=2tt"></script>
+<script src="../../shared/flip-reader.js?v=5overlap"></script>
 <script>
 // This page only: choices wait for the read timer, and "Not quite" scrolls into view.
 (function(){

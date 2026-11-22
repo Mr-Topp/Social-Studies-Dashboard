@@ -12,10 +12,17 @@
 .intro-line{font-size:1.02rem;margin:0 0 10px}
 .words{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0 10px;padding:0;list-style:none}
 .words li{background:#fff;border:1px solid #e6dcc8;border-left:4px solid var(--navy);border-radius:8px;padding:3px 9px;font-size:.88rem}
-.declass{display:block;background:#fff;border:2px dashed #18364a;border-radius:10px;padding:8px 11px;margin:6px 0 8px;font-weight:650;color:#3c2a20;line-height:1.4;font-style:normal}
-.declass b{display:block;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#18364a;margin-bottom:2px}
-.declass i{font-style:normal;font-weight:800}
-.declass .line{display:block;margin:2px 0}
+.declass{display:block;background:#fff;border:2px dashed #18364a;border-radius:10px;padding:8px 11px;margin:6px 0 8px;font-weight:650;color:#22313b;line-height:1.4;font-style:normal}
+.declass > b:first-child{display:block;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#18364a;margin-bottom:2px}
+.declass .line{display:block;margin:3px 0}
+.declass .fix{display:block;margin:6px 0;border:1px solid #c9d3da;border-radius:8px;overflow:hidden}
+.declass .cs,.declass .rl{display:block;padding:5px 9px}
+.declass .cs{background:#fdecea}
+.declass .cs::before{content:"\2717  Comic says: ";font-weight:800;color:#a3271a}
+.declass .rl{background:#e6f4e9}
+.declass .rl::before{content:"\2713  Really: ";font-weight:800;color:#1d6b33}
+.declass .kf{display:block;margin-top:8px;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#18364a}
+.declass .note{display:block;margin-top:5px;font-weight:600;font-size:.9rem;color:#5b4632}
 .dime{display:inline-block;background:#e6bd64;color:#0f2433;border-radius:999px;font-weight:850;padding:0 9px;margin-right:4px}
 .credits{font-size:.8rem;color:var(--muted);margin:10px 0 0;line-height:1.4}
 /* Predict, Then See */
@@ -43,7 +50,7 @@ body.reading-now .choices{opacity:.45;pointer-events:none}
 <nav class="route" aria-label="Your progress"><ol id="flipRoute"></ol></nav>
 <main class="gr-main gr-wrap">
 <section class="card">
-<p class="intro-line"><b>How it works:</b> <b>read</b> the page on the left → <b>predict</b> what happens next (no wrong answer) → keep reading → get the <b>check</b> right. Done = 5 green parts, then turn in at the bottom.</p>
+<p class="intro-line"><b>How it works:</b> read the comic pages → <b>predict</b> what happens next (no wrong answer) → answer the question about today's big idea → read the fact file → write 1–2 sentences or answer a second check. Done = all parts green, then turn in at the bottom.</p>
 <p class="content-note"><span><strong>Content note:</strong> This book shows real violence from 1960–1963. Reader pages 8–11 show a mob beating the Freedom Riders. A few speech bubbles are covered with black bars because the attackers used a racist slur.</span></p>
 <details class="wordhelp"><summary>Word help (tap to open)</summary>
 <ul class="words" aria-label="Word help">
@@ -106,162 +113,282 @@ alts:[
 assignmentId:"ush-u4-d2-march-comic",api:"https://fynn-class-assignment-submissions-20261024.neotboy.chatgpt.site/api/submit",
 lockedText:"This box opens when you get the check right.",
 clearConfirm:"Start over? This clears your predictions, checks, and answers on this device.",
-successText:"Turned in! Your teacher got your predictions, checks, and answers.",
+successText:"Turned in! Your teacher got your predictions, 8 checks, and 2 answers. You are done.",
 wrongText:(c,left)=>left>0?"Not quite. "+c.hint+" Try again in "+left+"…":"Not quite. "+c.hint+" The choices were mixed up. Try again.",
 parts:[
 {
-"short":"Sit-in",
-"ref":"Reader pages 1–5 · Nashville, 1960",
-"title":"1. The sit-in: what do you do when they say leave?",
-"from":1,"to":5,
-"predict":{
-"page":3,
-"q":"Next, Lewis and a friend sit down inside the Krystal. A worker says, \"I'm closed! You'll have to leave.\" What do you think they do?",
-"options":["Get up and leave, then plan a bigger sit-in.","Stay in their seats and stay calm.","Argue with the worker until she backs down.","Call the police to report the restaurant."],
-"locked":"Locked in. Keep reading to see what they really did.",
-"after":"What really happened: they stayed, calm, even when they were locked in. Was your prediction right?"
+"short": "Sit-in",
+"ref": "Reader pages 1–5 · Nashville, 1960",
+"title": "1. The sit-in: what do you do when they say leave?",
+"from": 1,
+"to": 5,
+"predict": {
+"page": 3,
+"q": "Next, Lewis and a friend sit down inside the Krystal. A worker says, \"I'm closed! You'll have to leave.\" What do you think they do?",
+"options": [
+"Get up and leave, then plan a bigger sit-in.",
+"Stay in their seats and stay calm.",
+"Argue with the worker until she backs down.",
+"Call the police to report the restaurant."
+],
+"locked": "Locked in. Keep reading to see what they really did.",
+"after": "What really happened: they stayed, calm, even when they were locked in. Was your prediction right?"
 },
-"check":{
-"page":5,
-"tag":"Reading check · Reader pages 4–5",
-"q":"Read reader pages 4 and 5. What did the manager do after Lewis and his friend refused to leave?",
-"right":"Locked them in and turned on a fumigator, a machine for killing bugs.",
-"wrong":["Called the police, who came and arrested them both for trespassing.","Served them food, then charged them twice the normal price for it.","Closed the restaurant for the night and sent every other customer home."],
-"why":"✓ Correct. Lewis wrote: \"Were we not human to him?\" They didn't die that day, and they didn't fight back.",
-"hint":"Read the boxes on reader page 5: \"It was a ___.\""
+"check": {
+"page": 5,
+"tag": "Reading check · Reader page 5",
+"q": "Read reader pages 4 and 5. What do they show about nonviolent protest?",
+"right": "Protesters took abuse without hitting back",
+"wrong": [
+"The police always kept the protesters safe from harm",
+"Protesters fought back when they were attacked",
+"Restaurant owners agreed to serve them that night"
+],
+"why": "✓ Correct. By staying calm while being treated badly, they made segregation's unfairness easy to see. That's the point of nonviolence.",
+"hint": "Read reader pages 4 and 5. What did Lewis and his friend do when they were locked in with the poison smoke?"
 },
-"check2":{
-"tag":"Why stay calm? · Flip back to reader page 2",
-"q":"Flip back to reader page 2 and read the top line. Why did the students stay calm instead of fighting back?",
-"right":"Staying polite while treated badly made segregation's unfairness easy to see.",
-"wrong":["Staying quiet meant the workers would forget about them and finally serve them.","They were too scared of the workers to try fighting back.","A Nashville law said protesters had to stay calm or go to jail."],
-"why":"✓ Correct. It worked before. Look at reader page 1: by May 1960, months of sit-ins and a boycott of downtown stores had opened Nashville's lunch counters to Black customers.",
-"hint":"Read the top line of reader page 2: \"By respectfully insisting...\""
+"check2": {
+"tag": "Second check · Reader page 4 + fact file",
+"q": "<span class=\"declass\"><b>Fact file</b><span class=\"line\"><b>Nonviolence</b> = protesting without ever hitting back. Nashville students practiced it in workshops before the sit-ins.</span><span class=\"line\">By the end of March 1960, sit-ins had spread to 55 cities. In May 1960, Nashville's lunch counters opened to Black customers.</span></span>On reader page 4, a worker says, \"You'll have to leave.\" Lewis and his friend stayed, calmly and in the open. Why is that called civil disobedience?",
+"right": "They broke an unfair rule openly and calmly",
+"wrong": [
+"They asked a judge to throw out the store's rule",
+"They refused to buy anything from the store",
+"They quit their jobs at the store in protest"
+],
+"why": "✓ Correct. Civil disobedience = breaking an unfair law or rule in the open, peacefully, ready to be arrested. Sit-ins worked: by May 1960, Nashville's lunch counters opened.",
+"hint": "Reread reader page 4: the worker says leave. What did they do, and did they hide it?"
 }
 },
 {
-"short":"Freedom Ride",
-"ref":"Reader pages 6–11 · Montgomery, May 1961",
-"title":"2. The Freedom Ride: what happens when they don't hit back?",
-"from":6,"to":11,
-"predict":{
-"page":7,
-"q":"The bus pulls into Montgomery, Alabama. A rider says, \"This doesn't look right.\" If a mob attacks, what do you think the riders' leaders will tell them to do?",
-"options":["Run and split up so the mob can't catch everyone.","Stay together and don't fight back.","Fight back to protect the riders who get hurt.","Get back on the bus and lock the doors."],
-"locked":"Locked in. Turn the page to see what really happened.",
-"after":"What really happened: Lewis yelled, \"Do not run, riders... stay together.\" Was your prediction right?"
+"short": "Freedom Ride",
+"ref": "Reader pages 6–11 · Montgomery, May 1961",
+"title": "2. The Freedom Ride: what happens when they don't hit back?",
+"from": 6,
+"to": 11,
+"predict": {
+"page": 7,
+"q": "The bus pulls into Montgomery, Alabama. A rider says, \"This doesn't look right.\" If a mob attacks, what do you think the riders' leaders will tell them to do?",
+"options": [
+"Run and split up so the mob can't catch everyone.",
+"Stay together and don't fight back.",
+"Fight back to protect the riders who get hurt.",
+"Get back on the bus and lock the doors."
+],
+"locked": "Locked in. Turn the page to see what really happened.",
+"after": "What really happened: Lewis yelled, \"Do not run, riders... stay together.\" Was your prediction right?"
 },
-"check":{
-"page":9,
-"tag":"Reading check · Reader page 9",
-"q":"Read the bottom panels of reader page 9. Why wouldn't the driver take the two riders away from the mob?",
-"right":"State and city law said Black and white people couldn't share a car.",
-"wrong":["He was part of the mob himself and wanted the two riders to get hurt.","The police had blocked every single road leading out of the bus station.","The riders refused to leave the station without the rest of their group."],
-"why":"✓ Correct. That's what the Freedom Ride was testing. The Supreme Court had banned segregation on buses that cross state lines and in their bus stations (reader page 6), but the South kept enforcing its own segregation laws.",
-"hint":"Read the speech bubble that starts \"I can't...\""
+"check": {
+"page": 9,
+"tag": "Reading check · Reader page 9",
+"q": "The driver on reader page 9 says state law bans Black and white people riding together. What were the Freedom Riders testing?",
+"right": "Whether the South would obey the Supreme Court",
+"wrong": [
+"Whether drivers would give them a free ride home",
+"Whether the bus company would hire Black drivers",
+"Whether the mob would let them leave"
+],
+"why": "✓ Correct. The Supreme Court had banned segregation on buses and in bus stations for trips between states. Southern states kept enforcing their own laws anyway.",
+"hint": "Read the driver's bubble on reader page 9 (\"It would violate state and city law\"), then think back to the box on reader page 6."
 },
-"prompt":"Use the pages and the fact file. How did the attack in Montgomery end up helping the Freedom Riders?",
-"stem":"<span class=\"declass\"><b>Fact file · What happened next</b><span class=\"line\"><i>Reader page 10:</i> John Seigenthaler, the man beaten for helping, worked for Attorney General Robert Kennedy, the President's brother.</span><span class=\"line\"><i>The news:</i> Photos and TV news of the beatings, and of a Freedom Ride bus set on fire in Anniston, Alabama, went around the world.</span><span class=\"line\"><i>Right after:</i> Robert Kennedy sent hundreds of U.S. marshals (federal officers) to Montgomery to protect the riders.</span><span class=\"line\"><i>Nov. 1, 1961:</i> A new federal rule banned \"whites only\" signs and separate waiting rooms in bus stations.</span></span>Write 1–2 sentences. Start like this: <i>The attack helped the Freedom Riders because ___.</i>",
-"placeholder":"The attack helped the Freedom Riders because ___.",
-"stemText":"The attack helped the Freedom Riders because ___.",
-"must":{"groups":[["photo","picture","tv","television","news","camera","world","saw","see","watch","kennedy","marshal","government","federal","rule","law","sign","waiting room","seigenthaler","ban"]],"msg":"Use a fact from the page or the fact file, like the news photos, the U.S. marshals, or the new bus station rule."}
-},
-{
-"short":"Jail",
-"ref":"Reader pages 12–13 · Parchman prison, 1961",
-"title":"3. Jail: stop singing, or lose your bed?",
-"from":12,"to":13,
-"predict":{
-"page":12,
-"q":"More than 300 Freedom Riders were jailed in Mississippi in 1961. The guard says: stop singing, or I take your mattresses and you sleep on steel. What will the riders do?",
-"options":["Stop singing so they can keep their mattresses.","Keep singing and lose their mattresses.","Sing quietly so the guards can't hear them.","Pay bail so they can get out of jail."],
-"locked":"Locked in. Turn the page to see what really happened.",
-"after":"What really happened: they kept singing and slept on steel. Was your prediction right?"
-},
-"check":{
-"page":13,
-"tag":"Reading check · Reader page 13",
-"q":"Read reader page 13. How did the \"Mattress War\" end?",
-"right":"They kept singing, so the guards took all their mattresses.",
-"wrong":["The guards gave up and let the riders keep their mattresses.","The riders stopped singing so they could keep their mattresses.","The riders paid bail and left Parchman before it was over."],
-"why":"✓ Correct. A rider said, \"I'll keep my soul.\" Losing the mattresses was the cost of not giving in.",
-"hint":"Read the last box: \"But in the end...\""
-},
-"check2":{
-"tag":"Two ideas about nonviolence · Reader page 13",
-"q":"The book says to Stokely Carmichael, nonviolence was \"just a tactic, not a personal philosophy or a way of life.\" What does that mean?",
-"right":"He used nonviolence because it worked, not because he believed in it always.",
-"wrong":["He believed nonviolence was the right way to live every single day of his life.","He thought nonviolence never worked and wanted everyone to stop it.","He used nonviolence only inside jail and never at a protest."],
-"why":"✓ Correct. For Lewis, nonviolence was a way of life. For Carmichael, it was a tool. In 1966, Carmichael made \"Black Power\" famous, and the movement split over this exact question.",
-"hint":"A tactic is a tool you use to win."
+"prompt": "How did the attack in Montgomery end up helping the Freedom Riders?",
+"stem": "<span class=\"declass\"><b>Fact file</b><span class=\"line\">John Seigenthaler, the man beaten for helping (reader page 10), worked for Attorney General Robert Kennedy, the President's brother.</span><span class=\"line\">Photos of the beatings went around the world. Robert Kennedy sent U.S. marshals, and on Nov. 1, 1961, a new rule banned \"whites only\" signs in bus stations.</span></span>Write 1–2 sentences. Start like this: <i>The attack helped the Freedom Riders because ___.</i>",
+"stemText": "The attack helped the Freedom Riders because ___.",
+"placeholder": "The attack helped the Freedom Riders because ___.",
+"must": {
+"groups": [
+[
+"photo",
+"picture",
+"tv",
+"television",
+"news",
+"camera",
+"world",
+"saw",
+"see",
+"watch",
+"kennedy",
+"marshal",
+"government",
+"federal",
+"rule",
+"law",
+"sign",
+"waiting room",
+"seigenthaler",
+"ban"
+]
+],
+"msg": "Use a fact from the page or the fact file, like the news photos, the U.S. marshals, or the new bus station rule."
 }
 },
 {
-"short":"Birmingham",
-"ref":"Reader pages 14–17 · Birmingham, 1963",
-"title":"4. Birmingham: march if it means jail?",
-"from":14,"to":17,
-"predict":{
-"page":15,
-"q":"Next, a judge's order bans ALL protests in Birmingham, and bail is set 8 times higher than normal. Marching now means jail. What do you think Dr. King does?",
-"options":["Marches anyway and gets arrested.","Calls off the march until the order ends.","Moves the protest to a city with no order.","Sends others to march while he stays out of jail."],
-"locked":"Locked in. Turn the page to see what really happened.",
-"after":"What really happened: King marched on Good Friday and went to jail. Was your prediction right?"
+"short": "Jail",
+"ref": "Reader pages 12–13 · Parchman prison, 1961",
+"title": "3. Jail: stop singing, or lose your bed?",
+"from": 12,
+"to": 13,
+"predict": {
+"page": 12,
+"q": "More than 300 Freedom Riders were jailed in Mississippi in 1961. The guard says: stop singing, or I take your mattresses and you sleep on steel. What will the riders do?",
+"options": [
+"Stop singing so they can keep their mattresses.",
+"Keep singing and lose their mattresses.",
+"Sing quietly so the guards can't hear them.",
+"Pay bail so they can get out of jail."
+],
+"locked": "Locked in. Turn the page to see what really happened.",
+"after": "What really happened: they kept singing and slept on steel. Was your prediction right?"
 },
-"check":{
-"page":17,
-"tag":"Reading check · Reader page 17",
-"q":"Read the box on reader page 17. After Dr. King was arrested, what did some white leaders in the area say about him?",
-"right":"That he was stirring up conflict by leading the protests.",
-"wrong":["That he should march more often so the protests would end sooner.","That the police were treating the marchers unfairly.","That they would join his march once he got out of jail."],
-"why":"✓ Correct. King's answer, written on scraps of paper in his cell, was the \"Letter from Birmingham Jail.\" He wrote that waiting had almost always meant \"never.\"",
-"hint":"Read the box under the police van: \"he was criticized... for...\""
+"check": {
+"page": 13,
+"tag": "Reading check · Reader page 13",
+"q": "Read the last box on reader page 13. For Stokely Carmichael, nonviolence was \"just a tactic.\" What does that mean?",
+"right": "He used it because it worked, not as a way of life",
+"wrong": [
+"He believed it was the right way to live every single day",
+"He thought it never worked and wanted it stopped",
+"He used it only inside jail, never at protests"
+],
+"why": "✓ Correct. For Lewis, nonviolence was a way of life. For Carmichael, it was a tool. In 1966, Carmichael made \"Black Power\" famous.",
+"hint": "Read the last box: \"nonviolence was just a tactic, not a personal philosophy.\" A tactic is a tool you use to win."
 },
-"check2":{
-"tag":"The world was watching · Use the fact file",
-"q":"<span class=\"declass\"><b>Fact file · The world was watching</b><span class=\"line\"><i>April 1963:</i> Photographers snapped King's arrest. Look for the cameras on reader page 17.</span><span class=\"line\"><i>May 1963:</i> Hundreds of children and teens marched. Bull Connor's police hit them with fire hoses and set police dogs on them. TV news showed it in homes across the U.S. and the world.</span><span class=\"line\"><i>June 11, 1963:</i> President Kennedy went on TV and asked Congress to pass a civil rights law.</span></span>Based on the fact file, what pushed President Kennedy to act?",
-"right":"Americans saw police attack peaceful kids on TV and in photos.",
-"wrong":["Bull Connor asked Kennedy to make segregation the law everywhere.","The marchers fought back, and Kennedy wanted the fighting to end.","King promised to stop all protests if Kennedy passed the law."],
-"why":"✓ Correct. That's why nonviolence worked. When police beat people who didn't fight back, the cameras made it clear who was wrong, and millions of Americans changed their minds.",
-"hint":"Read the May 1963 line again. Who saw it?"
+"check2": {
+"tag": "Second check · Reader page 13 + fact file",
+"q": "<span class=\"declass\"><b>Fact file</b><span class=\"line\">More than 300 Freedom Riders were jailed in Mississippi in 1961, many in the harsh Parchman prison. More riders kept coming.</span></span>The guard took their mattresses, but the riders kept singing, and more riders kept coming. What were they showing?",
+"right": "Jail could not break their spirit",
+"wrong": [
+"They wanted to be moved to a nicer jail",
+"They were ready to fight the guards back",
+"They hoped the guards would join the song"
+],
+"why": "✓ Correct. \"I'll keep my soul.\" If jail can't scare you, it can't stop you.",
+"hint": "Read the rider's words on reader page 13: \"I'll keep my ___.\""
 }
 },
 {
-"short":"The March",
-"ref":"Reader pages 18–20 · Washington, D.C., 1963",
-"title":"5. The March on Washington: change your words?",
-"from":18,"to":20,
-"predict":{
-"page":18,
-"q":"The night before the March on Washington, older leaders say Lewis's speech is too harsh. They want him to cut lines like \"too little, too late\" about Kennedy's civil rights bill. What will he do?",
-"options":["Refuse and give the speech just as he wrote it.","Make the changes but keep his main message.","Skip the speech and let someone else talk.","Throw out the speech and talk about something else."],
-"locked":"Locked in. Keep reading to see what he decided.",
-"after":"What really happened: he made changes, but said his message was not compromised. Was your prediction right?"
+"short": "Birmingham",
+"ref": "Reader pages 14–17 · Birmingham, 1963",
+"title": "4. Birmingham: march if it means jail?",
+"from": 14,
+"to": 17,
+"predict": {
+"page": 15,
+"q": "Next, a judge's order bans ALL protests in Birmingham, and bail is set 8 times higher than normal. Marching now means jail. What do you think Dr. King does?",
+"options": [
+"Marches anyway and gets arrested.",
+"Calls off the march until the order ends.",
+"Moves the protest to a city with no order.",
+"Sends others to march while he stays out of jail."
+],
+"locked": "Locked in. Turn the page to see what really happened.",
+"after": "What really happened: King marched on Good Friday and went to jail. Was your prediction right?"
 },
-"check":{
-"page":19,
-"tag":"Reading check · Reader page 19",
-"q":"Read reader page 19. Why did Lewis finally agree to change his speech?",
-"right":"A. Philip Randolph asked him to keep the movement together.",
-"wrong":["President Kennedy called and ordered him to change it.","He was afraid the police would arrest him if he didn't change it.","The crowd at the march asked him to give a shorter speech."],
-"why":"✓ Correct. Randolph had waited 22 years for a march like this. Staying united mattered more than a few angry lines.",
-"hint":"Read what Randolph says: \"Let us ___ together.\""
+"check": {
+"page": 17,
+"tag": "Reading check · Reader page 17",
+"q": "Look at the photographers on reader page 17. Why did it matter that cameras were there?",
+"right": "The whole country could see what happened",
+"wrong": [
+"The police wanted pictures for their own files",
+"King wanted photos to sell to newspapers",
+"Photos proved the marchers broke the law first"
+],
+"why": "✓ Correct. TV and photos let millions of Americans see how peaceful protesters were treated. Public opinion began to shift.",
+"hint": "Look at the middle panel: \"CLIK CLIK CLIK.\" Who would see those photos?"
 },
-"prompt":"Use all the pages and the fact file. How did nonviolent protest lead to the Civil Rights Act of 1964?",
-"stem":"<span class=\"declass\"><b>Fact file · From protest to law</b><span class=\"line\"><i>1960:</i> Sit-ins open Nashville's lunch counters.</span><span class=\"line\"><i>1961:</i> Freedom Rides: \"whites only\" signs come down in bus stations.</span><span class=\"line\"><i>1963:</i> Birmingham on TV. Kennedy asks Congress for a civil rights law.</span><span class=\"line\"><i>Aug. 28, 1963:</i> About 250,000 people march on Washington, peacefully.</span><span class=\"line\"><i>July 2, 1964:</i> President Lyndon Johnson signs the Civil Rights Act. It bans segregation in places like restaurants, hotels, and stores, and bans job discrimination based on race.</span><span class=\"line\"><i>Next:</i> In 1965, TV showed police beating marchers in Selma, Alabama, including John Lewis. That August, Congress passed the Voting Rights Act.</span></span>Write 1–2 sentences. Start like this: <i>Nonviolent protest led to the Civil Rights Act because ___.</i>",
-"placeholder":"Nonviolent protest led to the Civil Rights Act because ___.",
-"stemText":"Nonviolent protest led to the Civil Rights Act because ___.",
-"must":{"groups":[["tv","television","news","photo","picture","camera","saw","see","watch","world","kennedy","president","congress","johnson","sit-in","sit in","freedom ride","rider","birmingham","nashville","march","washington","marshal","jail","lunch","bus"]],"msg":"Use an example from the reading or fact file, like the Freedom Rides, Birmingham on TV, or the March on Washington."}
+"check2": {
+"tag": "Second check · Use the fact file",
+"q": "<span class=\"declass\"><b>Fact file</b><span class=\"line\">May 1963: Bull Connor's police turned fire hoses and police dogs on marching kids and teens. TV showed it across the country.</span><span class=\"line\">June 1963: President Kennedy asked Congress for a strong civil rights law.</span></span>What happened after TV showed police dogs and fire hoses turned on kids in Birmingham?",
+"right": "Kennedy asked Congress for a civil rights law",
+"wrong": [
+"Bull Connor was named the new mayor of Birmingham",
+"Kennedy sent the army to stop the marches for good",
+"The marchers agreed to end their protests"
+],
+"why": "✓ Correct. Millions of Americans saw it on TV, and public opinion shifted. In June 1963, Kennedy asked Congress for a strong civil rights law.",
+"hint": "Look at the cameras on reader page 17: who would see those pictures? Then read the second line of the fact file."
+}
+},
+{
+"short": "The March",
+"ref": "Reader pages 18–20 · Washington, D.C., 1963",
+"title": "5. The March on Washington: change your words?",
+"from": 18,
+"to": 20,
+"predict": {
+"page": 18,
+"q": "The night before the March on Washington, older leaders say Lewis's speech is too harsh. They want him to cut lines like \"too little, too late\" about Kennedy's civil rights bill. What will he do?",
+"options": [
+"Refuse and give the speech just as he wrote it.",
+"Make the changes but keep his main message.",
+"Skip the speech and let someone else talk.",
+"Throw out the speech and talk about something else."
+],
+"locked": "Locked in. Keep reading to see what he decided.",
+"after": "What really happened: he made changes, but said his message was not compromised. Was your prediction right?"
+},
+"check": {
+"page": 19,
+"tag": "Reading check · Reader page 19",
+"q": "Read reader page 19. Why did Lewis finally agree to change his speech?",
+"right": "Randolph asked him to keep the movement together",
+"wrong": [
+"President Kennedy called and ordered him to change it",
+"He was afraid the police would arrest him otherwise",
+"The crowd asked him for a shorter speech"
+],
+"why": "✓ Correct. Staying united mattered more than a few angry lines. The next day, about 250,000 people marched together, peacefully.",
+"hint": "Read what Randolph says: \"Let us ___ together.\""
+},
+"prompt": "How did TV and public opinion help pass new civil rights laws?",
+"stem": "<span class=\"declass\"><b>Fact file</b><span class=\"line\">Aug. 28, 1963: about 250,000 people marched on Washington. Dr. King gave his \"I Have a Dream\" speech.</span><span class=\"line\">July 2, 1964: President Johnson signed the <b>Civil Rights Act</b>. It banned segregation in public places and job discrimination based on race.</span></span>Write 1–2 sentences. Start like this: <i>TV helped because ___.</i>",
+"stemText": "TV helped because ___.",
+"placeholder": "TV helped because ___.",
+"must": {
+"groups": [
+[
+"television",
+"news",
+"photo",
+"picture",
+"camera",
+"saw",
+"see",
+"watch",
+"world",
+"kennedy",
+"president",
+"congress",
+"johnson",
+"sit-in",
+"sit in",
+"freedom ride",
+"rider",
+"birmingham",
+"nashville",
+"march",
+"washington",
+"marshal",
+"jail",
+"lunch",
+"bus",
+"opinion"
+]
+],
+"msg": "Use an example from the reading or fact file, like the Freedom Rides, Birmingham on TV, or the March on Washington."
+}
 }
 ],
-questions:["(Check) Why did the students stay calm instead of fighting back?","How did the attack in Montgomery end up helping the Freedom Riders?","(Check) What does \"nonviolence was just a tactic\" mean?","(Check) What pushed President Kennedy to act after Birmingham?","How did nonviolent protest lead to the Civil Rights Act of 1964?"],
+questions:["(Check) Why is a sit-in called civil disobedience?", "How did the attack in Montgomery end up helping the Freedom Riders?", "(Check) Why was losing their mattresses worth it to the riders?", "(Check) What pushed President Kennedy to act after Birmingham?", "How did TV and public opinion help pass new civil rights laws?"],
 validate(s){if(!s.name)return{text:"Type your first name + last initial (like Jordan M.) at the top of the questions.",focus:"studentName"};
  const pr=[1,2,3,4,5].find(i=>!s.predict(i));if(pr)return{text:"Make your prediction for part "+pr+" first.",part:pr};
  const mc=[1,2,3,4,5].find(i=>!s.checkDone(i));if(mc)return{text:"Get the check right for part "+mc+" first.",part:mc};
  const m2=[1,3,4].find(i=>!s.check2Done(i));if(m2)return{text:"Get the second check right for part "+m2+" first.",part:m2};
  const ma=[2,5].find(i=>!s.answer(i));if(ma)return{text:"Write your answer for part "+ma+" before turning in.",part:ma,focus:"answer"+ma};
- for(const i of [2,5]){const j=window.classJunkStop&&window.classJunkStop(document.getElementById("answer"+i));if(j)return{text:"Part "+i+": "+j,part:i}}
- for(const i of [2,5]){const m=s.mustProblem(i);if(m)return{text:"Part "+i+": "+m,part:i,focus:"answer"+i}}return null},
+ for(const i of [2,5]){const f=s.mustProblem&&s.mustProblem(i);if(f)return{text:"Part "+i+": "+f,part:i,focus:"answer"+i}}
+ for(const i of [2,5]){const j=window.classJunkStop&&window.classJunkStop(document.getElementById("answer"+i));if(j)return{text:"Part "+i+": "+j,part:i}}return null},
 buildAnswers(s){const t1=i=>(s.tries(i)||1),t2=i=>(s.tries2(i)||1);
  const first=[1,2,3,4,5].filter(i=>t1(i)===1).length+[1,3,4].filter(i=>t2(i)===1).length;
  const a={Standard:"SS.9-12.US.42, SS.9-12.US.43, SS.9-12.US.44","First-try correct":first+" of 8"};
@@ -271,8 +398,7 @@ buildAnswers(s){const t1=i=>(s.tries(i)||1),t2=i=>(s.tries2(i)||1);
  a["[US.44] "+this.questions[2]]=ft(t2(3));
  a["[US.43] "+this.questions[3]]=ft(t2(4));
  a["[US.42] "+this.questions[4]]=s.answer(5);
- const real=["Stay in their seats and stay calm.","Stay together and don't fight back.","Keep singing and lose their mattresses.","Marches anyway and gets arrested.","Make the changes but keep his main message."];
- const pr=[1,2,3,4,5].map(i=>s.predict(i));
+ const real=["Stay in their seats and stay calm.", "Stay together and don't fight back.", "Keep singing and lose their mattresses.", "Marches anyway and gets arrested.", "Make the changes but keep his main message."],pr=[1, 2, 3, 4, 5].map(i=>s.predict(i));
  a["Predictions (not graded)"]=pr.filter((p,k)=>p===real[k]).length+" of 5 matched what happened · "+pr.map((p,k)=>(k+1)+": "+p).join(" | ");
  a["Reading checks"]="8 of 8 correct · tries: "+[1,2,3,4,5].map(t1).join(", ")+" · second checks: "+t2(1)+", "+t2(3)+", "+t2(4);return a}
 };

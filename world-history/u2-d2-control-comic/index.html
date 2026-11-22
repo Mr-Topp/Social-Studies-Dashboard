@@ -13,11 +13,17 @@
 .intro-line{font-size:1.02rem;margin:0 0 10px}
 .words{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0 10px;padding:0;list-style:none}
 .words li{background:#fff;border:1px solid #e6dcc8;border-left:4px solid var(--navy);border-radius:8px;padding:3px 9px;font-size:.88rem}
-.declass{display:block;background:#fff;border:2px dashed #7a2b26;border-radius:10px;padding:8px 11px;margin:6px 0 8px;font-weight:650;color:#3c2a20;line-height:1.4;font-style:normal}
-.declass b{display:block;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#a33d36;margin-bottom:2px}
-.declass.file{border-color:#18364a}.declass.file b{color:#18364a}
-.declass i{font-style:normal;font-weight:800}
-.declass .line{display:block;margin:2px 0}
+.declass{display:block;background:#fff;border:2px dashed #18364a;border-radius:10px;padding:8px 11px;margin:6px 0 8px;font-weight:650;color:#22313b;line-height:1.4;font-style:normal}
+.declass > b:first-child{display:block;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#18364a;margin-bottom:2px}
+.declass .line{display:block;margin:3px 0}
+.declass .fix{display:block;margin:6px 0;border:1px solid #c9d3da;border-radius:8px;overflow:hidden}
+.declass .cs,.declass .rl{display:block;padding:5px 9px}
+.declass .cs{background:#fdecea}
+.declass .cs::before{content:"\2717  Comic says: ";font-weight:800;color:#a3271a}
+.declass .rl{background:#e6f4e9}
+.declass .rl::before{content:"\2713  Really: ";font-weight:800;color:#1d6b33}
+.declass .kf{display:block;margin-top:8px;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#18364a}
+.declass .note{display:block;margin-top:5px;font-weight:600;font-size:.9rem;color:#5b4632}
 .dime{display:inline-block;background:#e6bd64;color:#0f2433;border-radius:999px;font-weight:850;padding:0 9px;margin-right:4px}
 .credits{font-size:.8rem;color:var(--muted);margin:10px 0 0;line-height:1.4}
 body.reading-now .choices{opacity:.45;pointer-events:none}
@@ -26,7 +32,7 @@ body.reading-now .choices{opacity:.45;pointer-events:none}
 <header class="gr-head" data-years="1961"><div class="gr-wrap">
 <div class="kicker">World History · Unit 2 Day 2 · Control</div>
 <h1>The Knock at the Door</h1>
-<p class="hook"><span class="dime">1961</span>Catholic schools across America handed out this comic, with a letter from the head of the FBI. It shows how Stalin controlled the Soviet Union. Read it, fact-check it, then compare it to Mao's China. 6 pages · 7 checks · 3 short answers. <b>About 25–30 minutes.</b></p>
+<p class="hook"><span class="dime">1961</span>Catholic schools across America handed out this comic, with a letter from the head of the FBI. It shows how Stalin controlled the Soviet Union. Read it, fact-check it, then compare it to Mao's China. 6 pages · 7 checks · 3 short answers. <b>About 25 minutes.</b></p>
 <p class="goal"><b>Today's goal:</b> Explain how communist governments used secret police, fear, and propaganda to control people, and compare Stalin's Soviet Union to Mao's China.</p>
 <details class="std-details"><summary>Iowa standards for today</summary>
 <p><b>Standard SS.9-12.WH.35</b> — Compare and contrast the methods of control used by various forms of government during the Cold War.</p>
@@ -38,7 +44,7 @@ body.reading-now .choices{opacity:.45;pointer-events:none}
 <nav class="route" aria-label="Your progress"><ol id="flipRoute"></ol></nav>
 <main class="gr-main gr-wrap">
 <section class="card">
-<p class="intro-line"><b>You're the fact-checker.</b> For each part: <b>read</b> the page on the left → get the <b>check</b> right → then a second check or 1–2 sentences. Done = 5 green parts, then turn in at the bottom.</p>
+<p class="intro-line"><b>How it works:</b> read the comic pages → answer the question about today's big idea → see what the comic got right and wrong → write 1–2 sentences or answer a second check. Done = all parts green, then turn in at the bottom.</p>
 <p class="content-note"><span><strong>Content note:</strong> This is a real 1961 American comic made to warn kids about communism. It is one-sided on purpose. It shows prison camps and people being arrested.</span></p>
 <details class="wordhelp"><summary>Word help (tap to open)</summary>
 <ul class="words" aria-label="Word help">
@@ -86,117 +92,249 @@ alts:[
 assignmentId:"wh-u2-d2-control-comic",api:"https://fynn-class-assignment-submissions-20261024.neotboy.chatgpt.site/api/submit",
 lockedText:"This box opens when you get the check right.",
 clearConfirm:"Start over? This clears your checks and answers on this device.",
-successText:"Turned in! Your teacher got your checks and answers.",
+successText:"Turned in! Your teacher got your 7 checks and 3 answers. You are done.",
 wrongText:(c,left)=>left>0?"Not quite. "+c.hint+" Try again in "+left+"…":"Not quite. "+c.hint+" The choices were mixed up. Try again.",
 parts:[
 {
-"short":"Who made this?",
-"ref":"Reader page 1 · Title page",
-"title":"1. Who made this comic, and why?",
-"from":1,"to":1,
-"check":{
-"page":1,
-"tag":"Reading check · Reader page 1",
-"q":"Read the yellow box at the bottom of reader page 1. How did the Communists first take power in Russia?",
-"right":"A small group overthrew Russia's temporary government by force.",
-"wrong":["The Russian people voted them in during a free election.","The U.S. sent troops to help put them in charge after World War I.","Russia's king (the czar) gave them his power peacefully."],
-"why":"✓ Correct. In a democracy, leaders win power in elections. The Communists took it by force, and then had to use force, fear, and propaganda to keep it. That's what you'll see on every page today.",
-"hint":"Read the box that starts \"Modern communism got its first toehold.\""
+"short": "Taking power",
+"ref": "Reader page 1 · Title page",
+"title": "1. How did the Communists get power?",
+"from": 1,
+"to": 1,
+"check": {
+"page": 1,
+"tag": "Reading check · Reader page 1",
+"q": "Read the yellow box at the bottom. How did the Communists first take power in Russia?",
+"right": "By force, in a violent revolution",
+"wrong": [
+"By winning a fair and free election",
+"The czar handed them his power",
+"The U.S. helped put them in charge"
+],
+"why": "✓ Correct. In a democracy, voters pick leaders. The Communists took power by force, then had to use force, fear, and propaganda to keep it.",
+"hint": "Read the box at the bottom: \"through violence and bloodshed.\""
 },
-"check2":{
-"tag":"Who made it? · Use the fact file",
-"q":"<span class=\"declass file\"><b>Fact file · Who made this comic?</b><span class=\"line\"><i>Made by:</i> <i>Treasure Chest</i>, a comic handed out in American Catholic schools. This story ran in 10 parts in 1961–62.</span><span class=\"line\"><i>With a letter from:</i> J. Edgar Hoover, head of the FBI. He wrote: \"Communism represents the most serious threat facing our way of life.\"</span></span>What does this tell you about the comic?",
-"right":"It's American and anti-communist, so it's one-sided and needs fact-checking.",
-"wrong":["It was made by the Soviet government, so it shows communism in a good way.","It is a neutral textbook, so every page can be trusted without any checking.","It was made to sell toys, so it has nothing to do with real history."],
-"why":"✓ Correct. That doesn't make it false. Parts are true. But a one-sided source has to be checked against facts. That's your job today.",
-"hint":"Who handed it out, and who wrote the letter? What side were they on?"
+"check2": {
+"tag": "Second check · Reader page 1 + fact file",
+"q": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">They attacked their \"representative government.\"</span><span class=\"rl\">The government they overthrew in 1917 was a temporary one. Russia had not held its election yet.</span></span><b class=\"kf\">Know this</b><span class=\"line\">In the USSR, the Communist Party was the <b>only</b> party allowed. Ballots often had one name, so people could not vote leaders out.</span><span class=\"line\">This comic ran in <i>Treasure Chest</i>, handed out in U.S. Catholic schools in 1961–62. It is anti-communist, so check it.</span></span>The yellow box at the bottom says people hoped for an easier life but \"gave up their freedom.\" Under one-party rule, what did that mean?",
+"right": "They could not vote their leaders out",
+"wrong": [
+"They could leave Russia whenever they liked",
+"They got to pick from many parties",
+"They could criticize leaders in the news"
+],
+"why": "✓ Correct. With one legal party and often one name on the ballot, voting changed nothing. Leaders never had to answer to the people.",
+"hint": "Read the yellow box at the bottom of page 1, then the \"Know this\" line in the fact file."
 }
 },
 {
-"short":"The knock",
-"ref":"Reader page 2 · Stalin's terror",
-"title":"2. What was the most feared sound in Stalin's Russia?",
-"from":2,"to":2,
-"check":{
-"page":2,
-"tag":"Reading check · Reader page 2",
-"q":"Read the right middle panel on reader page 2. What became the most feared sound in Russia?",
-"right":"A nighttime knock at the door: the secret police.",
-"wrong":["Air raid sirens warning that German bombers were coming.","Church bells ringing for a service the Party banned.","Factory whistles calling workers to a long night shift."],
-"why":"✓ Correct. Families feared the secret police would take someone away in the night, often for something they had said.",
-"hint":"Find the panel where the family hears someone at the door."
+"short": "The knock",
+"ref": "Reader page 2 · Stalin's terror",
+"title": "2. What was the most feared sound in Stalin's Russia?",
+"from": 2,
+"to": 2,
+"check": {
+"page": 2,
+"tag": "Reading check · Reader page 2",
+"q": "Read the middle and bottom panels. How did Stalin's government keep people afraid to speak out?",
+"right": "Secret police and informers everywhere",
+"wrong": [
+"Soldiers standing on every street corner",
+"Huge fines for anyone who complained",
+"Laws that banned all radios and phones"
+],
+"why": "✓ Correct. Families feared a knock at night. Since anyone might report you, people kept quiet.",
+"hint": "Read the panel where the family hears a knock, and the girl's thought bubble at the bottom."
 },
-"prompt":"Look at the bottom panels: kids were pushed to report anti-communist talk, even by their parents. If you lived where your friends or kids might report you, how would you act and talk?",
-"must":{"groups":[["secret police","police","knock","arrest","spy","spies","inform","pavlik","morozov","hero","parents","father","prison","camp","jail","taken away","propaganda","enem"]],"msg":"Use a fact from the page or the fact file (like the knock of the secret police, or Pavlik Morozov reporting his father)."},
-"stem":"<span class=\"declass file\"><b>Fact file · Was it real?</b><span class=\"line\"><i>Real:</i> Soviet kids were praised for reporting \"enemies.\" Pavlik Morozov, a boy killed in 1932, was made a national hero for reporting his father. Streets and schools were named after him.</span><span class=\"line\"><i>Also real:</i> Historians now think much of Pavlik's story was made up by Soviet propaganda. The government needed a hero who put the Party above his family.</span></span>Write 1–2 sentences. Start like this: <i>If people around me might report me, I would ___ because ___.</i>",
-"placeholder":"If people around me might report me, I would ___ because ___.",
-"stemText":"If people around me might report me, I would ___ because ___."
-},
-{
-"short":"Camps + purges",
-"ref":"Reader pages 3–4 · Camps, farms, and purges",
-"title":"3. How did Stalin punish people he didn't trust?",
-"from":3,"to":4,
-"check":{
-"page":3,
-"tag":"Reading check · Reader page 3",
-"q":"Read the speech bubbles on the collective farm panels on reader page 3. What happened to everything the farm families grew?",
-"right":"It all had to be turned over to the government.",
-"wrong":["The families sold it at the market for a profit.","It was shipped to America as a trade deal.","The families kept it to feed their own village."],
-"why":"✓ Correct. \"Everything we produce will be turned over to the government.\" Families lost their own land and their crops.",
-"hint":"Find the panel where a family is being sent to the collective farm."
-},
-"check2":{
-"tag":"Fact-check · Use the fact file",
-"q":"<span class=\"declass file\"><b>Fact file · The real numbers</b><span class=\"line\"><i>The camps (the Gulag):</i> About 18 million people were sent to Soviet labor camps from 1930 to 1953. At least 1.5 million died there.</span><span class=\"line\"><i>The Great Purge, 1937–38:</i> Soviet records show about 680,000 people were shot in two years. Most were ordinary people, not just Party leaders.</span></span>The comic says \"many thousands of Communists\" were executed. What does the fact file show?",
-"right":"Even more were killed than the comic says, and most were ordinary people.",
-"wrong":["The comic made up the purges, because Stalin never had anyone shot.","The comic is exactly right: only a few thousand Communist Party leaders died.","The camps were mostly for real criminals, so the comic exaggerates."],
-"why":"✓ Correct. A one-sided source can still be right about something. Here the real numbers are worse than the comic said.",
-"hint":"Compare \"many thousands\" to the number in the fact file. And who was shot?"
+"prompt": "Kids were pushed to report anti-communist talk, even about their parents. How would that change the way people talk at home, and why did it help Stalin keep control?",
+"stem": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">Pavlik Morozov was a hero for reporting his father.</span><span class=\"rl\">Soviet propaganda made him a hero. Historians think much of his story was made up.</span></span><b class=\"kf\">Know this</b><span class=\"line\"><b>Informers</b> secretly reported on other people, even their own family.</span></span>Write 1–2 sentences. Start like this: <i>If anyone might report me, I would ___. This helped Stalin keep control because ___.</i>",
+"stemText": "If anyone might report me, I would ___. This helped Stalin keep control because ___.",
+"placeholder": "If anyone might report me, I would ___. This helped Stalin keep control because ___.",
+"must": {
+"groups": [
+[
+"secret police",
+"police",
+"knock",
+"arrest",
+"spy",
+"spies",
+"inform",
+"pavlik",
+"morozov",
+"hero",
+"parents",
+"father",
+"prison",
+"camp",
+"jail",
+"taken away",
+"propaganda",
+"enem",
+"report"
+]
+],
+"msg": "Use a fact from the page or the fact file (like the knock of the secret police, or Pavlik Morozov)."
 }
 },
 {
-"short":"Everyday rules",
-"ref":"Reader page 5 · Life under control",
-"title":"4. What couldn't ordinary people do?",
-"from":5,"to":5,
-"check":{
-"page":5,
-"tag":"Reading check · Reader page 5",
-"q":"Read the middle panels on reader page 5. Why is the man on the bike arrested?",
-"right":"He traveled to see his parents without permission.",
-"wrong":["He was caught going to a secret church service.","He tried to quit his factory job without asking.","He was riding a bike stolen from the government."],
-"why":"✓ Correct. Soviet citizens needed permission to move or travel inside their own country. Farm families often couldn't even get the papers to leave their village.",
-"hint":"Read the bubbles where the man says he's going to see his parents."
+"short": "Camps + purges",
+"ref": "Reader pages 3–4 · Camps, farms, and purges",
+"title": "3. How did Stalin punish people he didn't trust?",
+"from": 3,
+"to": 4,
+"check": {
+"page": 3,
+"tag": "Reading check · Reader page 3",
+"q": "Read the top panel of reader page 3. What were people in the labor camps forced to do?",
+"right": "Build dams, canals, and railroads",
+"wrong": [
+"Fight as soldiers in the war against Germany",
+"Make posters and movies for the Party",
+"Grow food on their own family farms"
+],
+"why": "✓ Correct. That was the Gulag. Prisoners did hard labor, often in freezing places, and many had done nothing wrong.",
+"hint": "Read the yellow box at the bottom of the top panel: \"These slaves were forced to work...\""
 },
-"prompt":"Pick ONE rule on this page (travel, jobs, or church). How is it different in a democracy like the U.S.?",
-"must":{"groups":[["travel","trip","move","moving","passport","job","quit","work","church","pray","relig","worship","god"],["permission","passport","papers","1932","1974","1940","1956","crime","arrest","jail","prison","secret police","police","watch","spied","spy"]],"msg":"Name the rule (travel, jobs, or church) AND use a fact from the page or fact file (like needing permission or an internal passport, the 1940 job law, or the secret police watching churches)."},
-"stem":"<span class=\"declass file\"><b>Fact file · Real rules</b><span class=\"line\"><i>Travel:</i> From 1932, Soviet citizens needed an internal passport to live in a city. Most farm families didn't get one until 1974.</span><span class=\"line\"><i>Jobs:</i> A 1940 law made it a crime to quit your job without permission. It lasted until 1956.</span></span>Write 1–2 sentences. Start like this: <i>In the Soviet Union, people ___. In a democracy, people ___.</i>",
-"placeholder":"In the Soviet Union, people ___. In a democracy, people ___.",
-"stemText":"In the Soviet Union, people ___. In a democracy, people ___."
+"check2": {
+"tag": "Second check · Reader page 4 + fact file",
+"q": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">\"Many thousands of Communists\" were executed in the purges.</span><span class=\"rl\">Soviet records show about 680,000 people were shot in 1937–38. Most were ordinary people.</span></span><b class=\"kf\">Know this</b><span class=\"line\">The <b>Gulag</b> = Soviet forced-labor camps. About 18 million people went through them, and more than 1.5 million died.</span></span>Read the bottom of reader page 4: people whisper that there are informers everywhere. How did the purges control people who were never arrested?",
+"right": "Anyone could be next, so people stayed quiet",
+"wrong": [
+"It proved only real traitors got punished",
+"It showed the camps were safe places to work",
+"Only Party leaders ever had to fear the police"
+],
+"why": "✓ Correct. If anyone can be arrested, everyone stays quiet. Fear controlled millions who were never arrested. Most people shot in the purges were ordinary people.",
+"hint": "Read the whispers at the bottom of reader page 4: \"informers everywhere.\""
+}
 },
 {
-"short":"Propaganda + Mao",
-"ref":"Reader page 6 · The battle for minds",
-"title":"5. Propaganda: Stalin's Russia and Mao's China",
-"from":6,"to":6,
-"check":{
-"page":6,
-"tag":"Reading check · Reader page 6",
-"q":"Read the bottom of reader page 6. What does the comic say communist leaders claimed about their farms?",
-"right":"\"Our farms are the finest in the world.\"",
-"wrong":["\"Our farms will feed America by 1970.\"","\"Our farms belong to the families who work them.\"","\"Our farms need help from the United Nations.\""],
-"why":"✓ Correct. Communist governments bragged about their farms. Look at the fact file to see what happened in China when leaders believed their own propaganda.",
-"hint":"Find the bubble next to the people working in the field."
+"short": "Everyday rules",
+"ref": "Reader page 5 · Life under control",
+"title": "4. What couldn't ordinary people do?",
+"from": 5,
+"to": 5,
+"check": {
+"page": 5,
+"tag": "Reading check · Reader page 5",
+"q": "What does reader page 5 show about life for ordinary people in the USSR?",
+"right": "The government controlled travel, jobs, and church",
+"wrong": [
+"People could live and work anywhere they liked",
+"Ordinary people had more food than Party members did",
+"Workers could quit any job and pick a new one"
+],
+"why": "✓ Correct. The Party ran daily life. You needed permission to travel or change jobs, and the secret police watched churches.",
+"hint": "Read the bubbles about the bike trip to Kiev, the job change, and the church."
 },
-"prompt":"Read the fact file about Mao's China. How was Mao's control like Stalin's? Give one example from each.",
-"must":{"groups":[["secret police","police","knock","camp","gulag","purge","collective","shot","arrest","informer","report","propaganda","travel","permission"],["great leap","leap","commune","red guard","cultural revolution","starv","famine","fake","grain","30 million","parents","teacher","report"]],"msg":"Give one real example for Stalin (like the secret police, the camps, or collective farms) AND one for Mao (like the Great Leap Forward or the Red Guards)."},
-"stem":"<span class=\"declass file\"><b>Fact file · Mao's China</b><span class=\"line\"><i>1949:</i> Mao Zedong's Communists take over China. Farms become giant government \"communes.\"</span><span class=\"line\"><i>The Great Leap Forward, 1958–62:</i> Mao demanded record harvests. Officials were scared, so they reported fake, huge numbers. The government took grain based on those fake numbers. Historians estimate about 30 million people starved.</span><span class=\"line\"><i>The Cultural Revolution, 1966–76:</i> Students called Red Guards attacked teachers and neighbors. Kids were pushed to report their own parents. Hundreds of thousands, maybe more than a million, died.</span></span>Write 1–2 sentences. Start like this: <i>Mao was like Stalin because both ___. For example, Stalin ___ and Mao ___.</i>",
-"placeholder":"Mao was like Stalin because both ___. For example, Stalin ___ and Mao ___.",
-"stemText":"Mao was like Stalin because both ___. For example, Stalin ___ and Mao ___."
+"prompt": "Pick ONE rule on this page (travel, jobs, or church). How is it different in a democracy like the U.S.?",
+"stem": "<span class=\"declass\"><b>Fact file</b><span class=\"line\">From 1932, people needed an <b>internal passport</b> to live in a city. Most farm families didn't get one until 1974.</span><span class=\"line\">A 1940 law made it a crime to quit your job without permission. It lasted until 1956.</span></span>Write 1–2 sentences. Start like this: <i>In the Soviet Union, people ___. In a democracy, people ___.</i>",
+"stemText": "In the Soviet Union, people ___. In a democracy, people ___.",
+"placeholder": "In the Soviet Union, people ___. In a democracy, people ___.",
+"must": {
+"groups": [
+[
+"travel",
+"trip",
+"move",
+"moving",
+"passport",
+"job",
+"quit",
+"work",
+"church",
+"pray",
+"relig",
+"worship",
+"god"
+],
+[
+"permission",
+"passport",
+"papers",
+"1932",
+"1974",
+"1940",
+"1956",
+"crime",
+"arrest",
+"jail",
+"prison",
+"secret police",
+"police",
+"watch",
+"spied",
+"spy"
+]
+],
+"msg": "Name the rule (travel, jobs, or church) AND use a fact from the page or fact file (like needing permission or an internal passport, or the 1940 job law)."
+}
+},
+{
+"short": "Propaganda + Mao",
+"ref": "Reader page 6 · The battle for minds",
+"title": "5. Propaganda: Stalin's Russia and Mao's China",
+"from": 6,
+"to": 6,
+"check": {
+"page": 6,
+"tag": "Reading check · Reader page 6",
+"q": "Read the bottom of reader page 6. What was the main goal of these communist claims?",
+"right": "To convince people communism is best",
+"wrong": [
+"To warn people about a coming nuclear war",
+"To sell more farm goods to other countries",
+"To get more Americans to visit Russia"
+],
+"why": "✓ Correct. That's propaganda: one-sided messages to win support. Mao's China used it too, with terrible results.",
+"hint": "Read the yellow box at the bottom left: \"But the main effort...\""
+},
+"prompt": "How did communist governments in the USSR and China control people? Give one way they were alike and one way they were different.",
+"stem": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">\"Our farms are the finest in the world.\"</span><span class=\"rl\">In Mao's China, officials faked record harvests in the Great Leap Forward (1958–62). Between 15 and 45 million people starved.</span></span><b class=\"kf\">Know this</b><span class=\"line\">In Mao's <b>Cultural Revolution</b> (1966–76), teen <b>Red Guards</b> attacked teachers and neighbors in public. Kids were pushed to report their parents.</span></span>Write 1–2 sentences. Start like this: <i>Both the USSR and China controlled people by ___, but China also ___.</i>",
+"stemText": "Both the USSR and China controlled people by ___, but China also ___.",
+"placeholder": "Both the USSR and China controlled people by ___, but China also ___.",
+"must": {
+"groups": [
+[
+"secret police",
+"police",
+"camp",
+"gulag",
+"purge",
+"propaganda",
+"fear",
+"inform",
+"report",
+"one party",
+"one-party",
+"prison",
+"shot",
+"arrest",
+"censor",
+"knock"
+],
+[
+"great leap",
+"leap",
+"commune",
+"red guard",
+"cultural revolution",
+"starv",
+"famine",
+"fake",
+"harvest",
+"public",
+"teen",
+"student",
+"parents"
+]
+],
+"msg": "Give one way both controlled people (like secret police or propaganda) AND one thing from Mao's China (like the Great Leap Forward or the Red Guards)."
+}
 }
 ],
-questions:["(Check) Who made this comic, and what does that tell you?","If people around you might report you, how would you act and talk?","(Check) The comic vs. the real numbers on camps and purges","Pick one rule. How is it different in a democracy?","How was Mao's control like Stalin's? One example from each."],
+questions:["(Check) What did Russians give up under one-party rule?", "Kids were pushed to report anti-communist talk, even about their parents. How would that change the way people talk at home, and why did it help Stalin keep control?", "(Check) How did the camps and purges control people who were never arrested?", "Pick ONE rule on this page (travel, jobs, or church). How is it different in a democracy like the U.S.?", "How did communist governments in the USSR and China control people? Give one way they were alike and one way they were different."],
 validate(s){if(!s.name)return{text:"Type your first name + last initial (like Jordan M.) at the top of the questions.",focus:"studentName"};
  const mc=[1,2,3,4,5].find(i=>!s.checkDone(i));if(mc)return{text:"Get the check right for part "+mc+" first.",part:mc};
  const m2=[1,3].find(i=>!s.check2Done(i));if(m2)return{text:"Get the second check right for part "+m2+" first.",part:m2};

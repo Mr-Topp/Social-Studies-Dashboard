@@ -12,11 +12,17 @@
 .intro-line{font-size:1.02rem;margin:0 0 10px}
 .words{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0 10px;padding:0;list-style:none}
 .words li{background:#fff;border:1px solid #e6dcc8;border-left:4px solid var(--navy);border-radius:8px;padding:3px 9px;font-size:.88rem}
-.declass{display:block;background:#fff;border:2px dashed #7a2b26;border-radius:10px;padding:8px 11px;margin:6px 0 8px;font-weight:650;color:#3c2a20;line-height:1.4;font-style:normal}
-.declass b{display:block;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#a33d36;margin-bottom:2px}
-.declass.file{border-color:#18364a}.declass.file b{color:#18364a}
-.declass i{font-style:normal;font-weight:800}
-.declass .line{display:block;margin:2px 0}
+.declass{display:block;background:#fff;border:2px dashed #18364a;border-radius:10px;padding:8px 11px;margin:6px 0 8px;font-weight:650;color:#22313b;line-height:1.4;font-style:normal}
+.declass > b:first-child{display:block;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#18364a;margin-bottom:2px}
+.declass .line{display:block;margin:3px 0}
+.declass .fix{display:block;margin:6px 0;border:1px solid #c9d3da;border-radius:8px;overflow:hidden}
+.declass .cs,.declass .rl{display:block;padding:5px 9px}
+.declass .cs{background:#fdecea}
+.declass .cs::before{content:"\2717  Comic says: ";font-weight:800;color:#a3271a}
+.declass .rl{background:#e6f4e9}
+.declass .rl::before{content:"\2713  Really: ";font-weight:800;color:#1d6b33}
+.declass .kf{display:block;margin-top:8px;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#18364a}
+.declass .note{display:block;margin-top:5px;font-weight:600;font-size:.9rem;color:#5b4632}
 .dime{display:inline-block;background:#e6bd64;color:#0f2433;border-radius:999px;font-weight:850;padding:0 9px;margin-right:4px}
 .credits{font-size:.8rem;color:var(--muted);margin:10px 0 0;line-height:1.4}
 body.reading-now .choices{opacity:.45;pointer-events:none}
@@ -26,7 +32,7 @@ body.reading-now .choices{opacity:.45;pointer-events:none}
 <div class="gr-wrap">
 <div class="kicker">World History · Unit 2 Day 6 · Southeast Asia</div>
 <h1>Vietnam: From Freedom Fight to Cold War</h1>
-<p class="hook"><span class="dime">1940–60</span>In 1945, Ho Chi Minh declared Vietnam free. Twenty years later, hundreds of thousands of American soldiers were fighting there. How did a fight against France become America's war? Read a real 1967 comic that argued against the war, then fact-check it. 6 pages · 8 checks · 2 short answers. <b>About 25 minutes.</b></p>
+<p class="hook"><span class="dime">1940–60</span>In 1945, Ho Chi Minh declared Vietnam free. Twenty years later, hundreds of thousands of American soldiers were fighting there. How did a fight against France become America's war? Read a real 1967 comic that argued against the war, then fact-check it. 6 pages · 7 checks · 3 short answers. <b>About 25 minutes.</b></p>
 <p class="goal"><b>Today's goal:</b> Explain how Ho Chi Minh led Vietnam's fight for independence, how it turned into a Cold War conflict involving the U.S., and why splitting Vietnam in 1954 led to more conflict.</p>
 <details class="std-details"><summary>Iowa standards for today</summary>
 <p><b>Standard SS.9-12.WH.36</b> — Analyze the causes of decolonization within the context of the Cold War.</p>
@@ -38,7 +44,7 @@ body.reading-now .choices{opacity:.45;pointer-events:none}
 <nav class="route" aria-label="Your progress"><ol id="flipRoute"></ol></nav>
 <main class="gr-main gr-wrap">
 <section class="card">
-<p class="intro-line"><b>You're the fact-checker.</b> For each part: <b>read</b> the page on the left → get the <b>check</b> right → then a second check or 1–2 sentences. Done = 5 green parts, then turn in at the bottom.</p>
+<p class="intro-line"><b>How it works:</b> read the comic pages → answer the question about today's big idea → see what the comic got right and wrong → write 1–2 sentences or answer a second check. Done = all parts green, then turn in at the bottom.</p>
 <p class="content-note"><span><strong>Content note:</strong> This comic was made in 1967 to argue against the Vietnam War. It is one-sided on purpose. Page 1 shows a man in chains, and page 5 shows a prisoner who is tied up and blindfolded. One panel on page 5 is covered because it prints a racist slur. A note tells you what it said.</span></p>
 <details class="wordhelp"><summary>Word help (tap to open)</summary>
 <ul class="words" aria-label="Word help">
@@ -87,133 +93,162 @@ alts:[
 assignmentId:"wh-u2-d6-vietnam-comic",api:"https://fynn-class-assignment-submissions-20261024.neotboy.chatgpt.site/api/submit",
 lockedText:"This box opens when you get the check right.",
 clearConfirm:"Start over? This clears your checks and answers on this device.",
-successText:"Turned in! Your teacher got your checks and answers.",
+successText:"Turned in! Your teacher got your 7 checks and 3 answers. You are done.",
 wrongText:(c,left)=>left>0?"Not quite. "+c.hint+" Try again in "+left+"…":"Not quite. "+c.hint+" The choices were mixed up. Try again.",
 parts:[
 {
-"short":"Fight for freedom",
-"ref":"Reader page 1 · 1860–1945",
-"title":"1. Who was Ho Chi Minh fighting, and why?",
-"from":1,"to":1,
-"check":{
-"page":1,
-"tag":"Reading check · Reader page 1",
-"q":"Read the bottom-right panel on reader page 1. What did Ho Chi Minh's group do during World War II?",
-"right":"Fought the Japanese, because they wanted Vietnam to be free.",
-"wrong":["Fought for Japan, because Japan promised to give them their freedom.","Helped the French army defend Vietnam against the Japanese.","Stayed out of the war to keep their own villages safe."],
-"why":"✓ Correct. Ho's group was called the Viet Minh. In 1945, American agents even helped them fight Japan, so Ho hoped the U.S. would be a friend after the war.",
-"hint":"Read the box above the men running with rifles."
+"short": "Fight for freedom",
+"ref": "Reader page 1 · 1860–1945",
+"title": "1. Who was Ho Chi Minh fighting, and why?",
+"from": 1,
+"to": 1,
+"check": {
+"page": 1,
+"tag": "Reading check · Reader page 1",
+"q": "Read the panels about France and Ho Chi Minh. What did the Vietnamese want?",
+"right": "To run their own country",
+"wrong": [
+"To join France as French citizens",
+"To be ruled by Japan after the war",
+"To become part of China"
+],
+"why": "✓ Correct. Vietnam was a French colony. Ho Chi Minh's group fought Japan in World War II, and then France, for independence.",
+"hint": "Read panel 2 (\"the Vietnamese wanted to run their own country\") and the last panel about Ho Chi Minh."
 },
-"check2":{
-"tag":"Who made it? · Use the fact file",
-"q":"<span class=\"declass file\"><b>Fact file · Who made this comic?</b><span class=\"line\"><i>Writer:</i> Julian Bond, a young Black civil rights leader.</span><span class=\"line\"><i>1966:</i> Georgia's House of Representatives refused to let him take his seat because he spoke out against the Vietnam War. The U.S. Supreme Court ruled 9–0 that Georgia had to seat him.</span><span class=\"line\"><i>Made:</i> 1967, to turn readers against the war.</span></span>What should a fact-checker expect from this comic?",
-"right":"It will call the war wrong and may leave out facts that hurt its case.",
-"wrong":["It will be fair to every side, since it's a comic about real history.","It will support the war, since it was made by the U.S. Army.","It will tell the French government's side of the whole story."],
-"why":"✓ Correct. Example: page 1 says France fought to \"make slaves\" of the Vietnamese. French rule was harsh, with forced labor on rubber farms, but that's the comic using the strongest words it can. Watch for that on every page.",
-"hint":"Look at the last line: why was it made?"
+"check2": {
+"tag": "Second check · Reader page 1 + fact file",
+"q": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">France fought to \"make slaves\" of the Vietnamese.</span><span class=\"rl\">French rule was harsh, with forced labor on rubber farms. But the comic picks the strongest words it can.</span></span><b class=\"kf\">Know this</b><span class=\"line\">This comic was made in 1967 by Julian Bond, a civil rights leader who spoke out against the war.</span></span>Japan offered the Vietnamese \"freedom\" under Japanese rule. Why did Ho Chi Minh's group fight Japan anyway?",
+"right": "They wanted no foreign country ruling them",
+"wrong": [
+"They wanted France back in charge instead",
+"They had promised France they would fight",
+"They wanted Vietnam to become part of China"
+],
+"why": "✓ Correct. Ho's group wanted real independence: not French rule, and not Japanese rule either.",
+"hint": "Read the last panel on reader page 1: what kind of freedom did Ho Chi Minh's group want?"
 }
 },
 {
-"short":"France returns",
-"ref":"Reader page 2 · 1945–1946",
-"title":"2. How did Ho Chi Minh lead the fight?",
-"from":2,"to":2,
-"check":{
-"page":2,
-"tag":"Reading check · Reader page 2",
-"q":"Read the bottom two panels on reader page 2. What happened after Ho Chi Minh became president?",
-"right":"France took Hanoi back, and by 1946 the two sides were at war.",
-"wrong":["France left Vietnam for good and let Ho Chi Minh rule in peace.","Japan's army came back and took over the city of Hanoi again.","The United States sent soldiers to capture the city of Hanoi."],
-"why":"✓ Correct. Vietnam said it was free, but France wanted its colony back. That war lasted from 1946 to 1954.",
-"hint":"Read the boxes above the map and the tank."
+"short": "France returns",
+"ref": "Reader page 2 · 1945–1946",
+"title": "2. How did Ho Chi Minh lead the fight?",
+"from": 2,
+"to": 2,
+"check": {
+"page": 2,
+"tag": "Reading check · Reader page 2",
+"q": "Read the bottom two panels. What happened after Ho Chi Minh's government took over?",
+"right": "France came back and war began",
+"wrong": [
+"France left Vietnam for good in peace",
+"Japan's army took over Hanoi again",
+"The U.S. sent troops to capture Hanoi"
+],
+"why": "✓ Correct. France wanted its colony back. That war lasted from 1946 to 1954.",
+"hint": "Read the boxes above the map and the tank."
 },
-"prompt":"Use the page and the fact file. How did Ho Chi Minh lead Vietnam's fight for independence?",
-"stem":"<span class=\"declass file\"><b>Fact file · Ho Chi Minh, the leader</b><span class=\"line\"><i>Sept. 2, 1945:</i> In Hanoi, Ho declared Vietnam independent. He began with words from the U.S. Declaration of Independence: \"All men are created equal.\"</span><span class=\"line\"><i>1945–46:</i> He wrote letters asking President Truman for help. Truman never wrote back.</span><span class=\"line\"><i>A communist:</i> Ho helped start Vietnam's Communist Party in 1930. His Viet Minh fought France for 8 years, mostly with small hit-and-run attacks.</span><span class=\"line\"><i>Fact-check:</i> The 1946 election in the comic was real, but Ho's group ran it, so it was not fully free.</span></span>Write 1–2 sentences. Start like this: <i>Ho Chi Minh led the fight by ___.</i>",
-"placeholder":"Ho Chi Minh led the fight by ___.",
-"stemText":"Ho Chi Minh led the fight by ___."
+"prompt": "How did Ho Chi Minh lead Vietnam's fight for independence?",
+"stem": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">Vietnam \"had an election\" and Ho won.</span><span class=\"rl\">There was a 1946 vote, but Ho's group ran it, so it was not fully free.</span></span><b class=\"kf\">Know this</b><span class=\"line\">On Sept. 2, 1945, Ho declared Vietnam free. He began with words from the U.S. Declaration: \"All men are created equal.\"</span></span>Write 1–2 sentences. Start like this: <i>Ho Chi Minh led the fight by ___.</i>",
+"stemText": "Ho Chi Minh led the fight by ___.",
+"placeholder": "Ho Chi Minh led the fight by ___."
 },
 {
-"short":"U.S. picks a side",
-"ref":"Reader page 3 · 1946–1954",
-"title":"3. Why did the U.S. take France's side?",
-"from":3,"to":3,
-"check":{
-"page":3,
-"tag":"Reading check · Reader page 3",
-"q":"Read the top two panels on reader page 3. Whose side does the comic say the U.S. took?",
-"right":"France's side, even though Vietnam wanted independence.",
-"wrong":["The Vietnamese side, by sending Ho Chi Minh's army weapons.","No one's side, because the U.S. stayed out of the fighting.","Japan's side, to keep France from ruling in Asia again."],
-"why":"✓ Correct. Then the comic quotes Lyndon Johnson in 1954 saying he was against sending American soldiers. In 1967, Johnson was the president sending them. That's the comic's point.",
-"hint":"Read the box above the picture of Uncle Sam in his striped hat."
+"short": "U.S. picks a side",
+"ref": "Reader page 3 · 1946–1954",
+"title": "3. Why did the U.S. take France's side?",
+"from": 3,
+"to": 3,
+"check": {
+"page": 3,
+"tag": "Reading check · Reader page 3",
+"q": "Read the top two panels. Whose side did the U.S. take in Vietnam's war for independence?",
+"right": "France's side",
+"wrong": [
+"The Vietnamese side",
+"Japan's side",
+"No one's side"
+],
+"why": "✓ Correct. U.S. leaders saw Ho as a communist. That's how a fight for independence became a Cold War fight.",
+"hint": "Read the box above Uncle Sam in his striped hat."
 },
-"check2":{
-"tag":"Fact-check · Use the fact file",
-"q":"<span class=\"declass file\"><b>Fact file · Why did the U.S. back France?</b><span class=\"line\"><i>Fear of communism:</i> Ho was a communist. China turned communist in 1949, and the Korean War began in 1950. U.S. leaders feared Asia would fall to communism one country after another, \"like dominoes.\"</span><span class=\"line\"><i>Allies:</i> France was a key U.S. ally in NATO, the alliance against the Soviet Union.</span><span class=\"line\"><i>Money:</i> By 1954, the U.S. was paying about 75–80% of the cost of France's war.</span></span>Based on the fact file, what was the main reason the U.S. helped France?",
-"right":"U.S. leaders saw Ho as a communist and wanted to stop communism.",
-"wrong":["The U.S. wanted to turn Vietnam into an American colony someday.","France paid the U.S. a lot of money to fight the war for it.","Ho Chi Minh's army had attacked U.S. ships and soldiers first."],
-"why":"✓ Correct. That's how a fight for independence became a Cold War fight. To most Vietnamese, it was about freedom from France. To U.S. leaders, it was about stopping communism.",
-"hint":"Read the first line of the fact file again."
+"check2": {
+"tag": "Second check · Use the fact file",
+"q": "<span class=\"declass\"><b>Fact file</b><span class=\"line\"><b>Domino theory:</b> U.S. leaders feared that if one country fell to communism, its neighbors would fall too.</span><span class=\"line\">By 1954, the U.S. was paying about 75–80% of the cost of France's war.</span></span>Why did the U.S. pay most of the cost of France's war in Vietnam?",
+"right": "To stop communism from spreading in Asia",
+"wrong": [
+"To help Vietnam win its independence sooner",
+"France promised to free Vietnam once it won",
+"To get Vietnam's rubber farms for itself"
+],
+"why": "✓ Correct. That's the domino theory. U.S. leaders saw Ho as a communist first and an independence leader second.",
+"hint": "The panel with Uncle Sam shows WHO the U.S. helped. The \"Domino theory\" line in the fact file shows WHY."
 }
 },
 {
-"short":"Split in two",
-"ref":"Reader page 4 · 1954",
-"title":"4. Why didn't the 1954 deal bring peace?",
-"from":4,"to":4,
-"check":{
-"page":4,
-"tag":"Reading check · Reader page 4",
-"q":"Read the map panel at the top left of reader page 4. What did the 1954 agreement do?",
-"right":"Split Vietnam at the 17th parallel until a vote could unite it.",
-"wrong":["Gave all of Vietnam back to France to rule as a colony for good.","Made North and South Vietnam into two separate countries forever.","Gave South Vietnam to the United States to run for a while."],
-"why":"✓ Correct. The split was supposed to be short. A vote to unite the country was set for July 1956.",
-"hint":"Read the box above the map with the line across it."
+"short": "Split in two",
+"ref": "Reader page 4 · 1954",
+"title": "4. Why didn't the 1954 deal bring peace?",
+"from": 4,
+"to": 4,
+"check": {
+"page": 4,
+"tag": "Reading check · Reader page 4",
+"q": "Read the map panel at the top left. What did the 1954 peace deal do to Vietnam?",
+"right": "Split it at the 17th parallel until a vote could unite it",
+"wrong": [
+"Gave all of Vietnam back to France to rule as a colony for good",
+"Made North and South Vietnam into two separate countries forever",
+"Gave South Vietnam to the United States to run for a while"
+],
+"why": "✓ Correct. The split was supposed to be short. A vote to unite the country was set for 1956.",
+"hint": "Read the box above the map with the line across it."
 },
-"prompt":"Use the page and the fact file. Why did splitting Vietnam in 1954 lead to more conflict instead of peace?",
-"stem":"<span class=\"declass file\"><b>Fact file · The deal that didn't hold</b><span class=\"line\"><i>May 1954:</i> Ho's army beat the French at Dien Bien Phu after a 56-day battle. France gave up.</span><span class=\"line\"><i>July 1954, Geneva:</i> Ho's communists got the North. An anti-communist government got the South. A vote in 1956 would unite the country.</span><span class=\"line\"><i>Fact-check:</i> Eisenhower's \"80 per cent\" was about the war years, when Ho's rival was Vietnam's old emperor.</span><span class=\"line\"><i>1956:</i> The vote never happened. South Vietnam's leader refused, and the U.S. backed him.</span></span>Write 1–2 sentences. Start like this: <i>Splitting Vietnam led to more conflict because ___.</i>",
-"placeholder":"Splitting Vietnam led to more conflict because ___.",
-"stemText":"Splitting Vietnam led to more conflict because ___."
+"prompt": "Why did splitting Vietnam in 1954 lead to more conflict instead of peace?",
+"stem": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">Eisenhower said 80 per cent would vote for Ho.</span><span class=\"rl\">He said that about the war years, when Ho's rival was Vietnam's old emperor. Still, U.S. officials expected Ho to win.</span></span><b class=\"kf\">Know this</b><span class=\"line\">The 1956 unity vote never happened. South Vietnam refused, and the U.S. backed it.</span></span>Write 1–2 sentences. Start like this: <i>Splitting Vietnam led to more conflict because ___.</i>",
+"stemText": "Splitting Vietnam led to more conflict because ___.",
+"placeholder": "Splitting Vietnam led to more conflict because ___."
 },
 {
-"short":"Diem and the NLF",
-"ref":"Reader pages 5–6 · 1955–1967",
-"title":"5. Who fought for South Vietnam's future?",
-"from":5,"to":6,
-"check":{
-"page":5,
-"tag":"Reading check · Reader page 5",
-"q":"Read the top-left panel on reader page 5. Instead of the vote for all of Vietnam, what does the comic say the U.S. did?",
-"right":"Set up Ngo Dinh Diem as president of South Vietnam.",
-"wrong":["Let Ho Chi Minh become the president of all of Vietnam.","Asked France to come back and rule South Vietnam again.","Held the vote for all of Vietnam in July 1956 anyway."],
-"why":"✓ Correct. Diem was anti-communist, and the U.S. sent him money and advisers. The comic is right that his government jailed and tortured many people who were against him.",
-"hint":"Read the box above the man in the white suit."
+"short": "Diem and the NLF",
+"ref": "Reader pages 5–6 · 1955–1967",
+"title": "5. Who fought for South Vietnam's future?",
+"from": 5,
+"to": 6,
+"check": {
+"page": 6,
+"tag": "Reading check · Reader page 6",
+"q": "Read the last two panels on reader page 6. What happened after the NLF began fighting?",
+"right": "U.S. advisers came, then over 400,000 troops",
+"wrong": [
+"France sent its army back to rule South Vietnam",
+"The UN made both sides hold a peace vote",
+"The North and South agreed to stop fighting"
+],
+"why": "✓ Correct. A fight for independence had become a Cold War battle. By April 1969, there were 543,000 U.S. troops in Vietnam.",
+"hint": "Read the last two panels: \"military advisers\" and \"more than 400,000.\""
 },
-"check2":{
-"tag":"Fact-check · Reader page 6 + fact file",
-"q":"<span class=\"declass file\"><b>Fact file · Who ran the NLF?</b><span class=\"line\"><i>True part:</i> Many kinds of people joined, including many who just hated Diem.</span><span class=\"line\"><i>Left out:</i> North Vietnam's Communist Party decided to create the NLF in 1960 and secretly led it. The North sent fighters and weapons south on the Ho Chi Minh Trail.</span><span class=\"line\"><i>The name:</i> Diem's government called the NLF the \"Viet Cong,\" short for \"Vietnamese communists.\"</span></span>Flip to reader page 6. The comic says the NLF was doctors, lawyers, Catholics, Buddhists, and more. What does the fact file add?",
-"right":"Many kinds of people joined, but North Vietnam's communists led it.",
-"wrong":["It had no communists in it at all, only doctors, lawyers, and students.","The United States created it to fight against Diem's government.","France created it to help win back its old colony in Vietnam."],
-"why":"✓ Correct. The comic tells the true part and leaves out who was in charge. By 1967, more than 400,000 Americans were fighting in a war that began as Vietnam's fight against France.",
-"hint":"Read the line that starts with \"Left out.\""
-}
+"prompt": "Was the Vietnam War mostly a fight for independence or a Cold War battle? Explain using two points of view.",
+"stem": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">The NLF was doctors, lawyers, Catholics, Buddhists, and more.</span><span class=\"rl\">Many kinds of people joined, but North Vietnam's Communist Party created it in 1960 and secretly led it.</span></span><b class=\"kf\">Know this</b><span class=\"line\">The war killed 58,220 Americans and millions of Vietnamese.</span></span>Write 1–2 sentences. Start like this: <i>From the U.S. point of view, ___, but from Vietnam's point of view, ___.</i>",
+"stemText": "From the U.S. point of view, ___, but from Vietnam's point of view, ___.",
+"placeholder": "From the U.S. point of view, ___, but from Vietnam's point of view, ___."
 }
 ],
-questions:["(Check) Who made this comic, and what should a fact-checker expect?","How did Ho Chi Minh lead Vietnam's fight for independence?","(Check) Why did the U.S. help France?","Why did splitting Vietnam in 1954 lead to more conflict instead of peace?","(Check) Who really led the NLF?"],
+questions:["(Check) Why did Ho Chi Minh's group fight Japan and then France?", "How did Ho Chi Minh lead Vietnam's fight for independence?", "(Check) Why did the U.S. help France?", "Why did splitting Vietnam in 1954 lead to more conflict instead of peace?", "Was the Vietnam War mostly a fight for independence or a Cold War battle? Explain using two points of view."],
 validate(s){if(!s.name)return{text:"Type your first name + last initial (like Jordan M.) at the top of the questions.",focus:"studentName"};
  const mc=[1,2,3,4,5].find(i=>!s.checkDone(i));if(mc)return{text:"Get the check right for part "+mc+" first.",part:mc};
- const m2=[1,3,5].find(i=>!s.check2Done(i));if(m2)return{text:"Get the second check right for part "+m2+" first.",part:m2};
- const ma=[2,4].find(i=>!s.answer(i));if(ma)return{text:"Write your answer for part "+ma+" before turning in.",part:ma,focus:"answer"+ma};
- for(const i of [2,4]){const j=window.classJunkStop&&window.classJunkStop(document.getElementById("answer"+i));if(j)return{text:"Part "+i+": "+j,part:i}}return null},
+ const m2=[1,3].find(i=>!s.check2Done(i));if(m2)return{text:"Get the second check right for part "+m2+" first.",part:m2};
+ const ma=[2,4,5].find(i=>!s.answer(i));if(ma)return{text:"Write your answer for part "+ma+" before turning in.",part:ma,focus:"answer"+ma};
+ for(const i of [2,4,5]){const j=window.classJunkStop&&window.classJunkStop(document.getElementById("answer"+i));if(j)return{text:"Part "+i+": "+j,part:i}}return null},
 buildAnswers(s){const t1=i=>(s.tries(i)||1),t2=i=>(s.tries2(i)||1);
- const first=[1,2,3,4,5].filter(i=>t1(i)===1).length+[1,3,5].filter(i=>t2(i)===1).length;
- const a={Standard:"SS.9-12.WH.36, SS.9-12.WH.34, SS.9-12.WH.37","First-try correct":first+" of 8"};
+ const first=[1,2,3,4,5].filter(i=>t1(i)===1).length+[1,3].filter(i=>t2(i)===1).length;
+ const a={Standard:"SS.9-12.WH.36, SS.9-12.WH.34, SS.9-12.WH.37","First-try correct":first+" of 7"};
  const ft=n=>n===1?"Right on first try":"Right after "+(n-1)+" wrong";
  a["[WH.37] "+this.questions[0]]=ft(t2(1));
  a["[WH.36] "+this.questions[1]]=s.answer(2);
  a["[WH.34, WH.37] "+this.questions[2]]=ft(t2(3));
  a["[WH.36, WH.34] "+this.questions[3]]=s.answer(4);
- a["[WH.37, WH.34] "+this.questions[4]]=ft(t2(5));
- a["Reading checks"]="8 of 8 correct · tries: "+[1,2,3,4,5].map(t1).join(", ")+" · second checks: "+t2(1)+", "+t2(3)+", "+t2(5);return a}
+ a["[WH.37, WH.34] "+this.questions[4]]=s.answer(5);
+ a["Reading checks"]="7 of 7 correct · tries: "+[1,2,3,4,5].map(t1).join(", ")+" · second checks: "+t2(1)+", "+t2(3);return a}
 };
 </script>
 <script src="../../shared/flip-reader.js?v=3alt"></script>

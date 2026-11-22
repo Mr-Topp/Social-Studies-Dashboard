@@ -12,11 +12,17 @@
 .intro-line{font-size:1.02rem;margin:0 0 10px}
 .words{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0 10px;padding:0;list-style:none}
 .words li{background:#fff;border:1px solid #e6dcc8;border-left:4px solid var(--navy);border-radius:8px;padding:3px 9px;font-size:.88rem}
-.declass{display:block;background:#fff;border:2px dashed #7a2b26;border-radius:10px;padding:8px 11px;margin:6px 0 8px;font-weight:650;color:#3c2a20;line-height:1.4;font-style:normal}
-.declass b{display:block;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#a33d36;margin-bottom:2px}
-.declass.file{border-color:#18364a}.declass.file b{color:#18364a}
-.declass i{font-style:normal;font-weight:800}
-.declass .line{display:block;margin:2px 0}
+.declass{display:block;background:#fff;border:2px dashed #18364a;border-radius:10px;padding:8px 11px;margin:6px 0 8px;font-weight:650;color:#22313b;line-height:1.4;font-style:normal}
+.declass > b:first-child{display:block;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#18364a;margin-bottom:2px}
+.declass .line{display:block;margin:3px 0}
+.declass .fix{display:block;margin:6px 0;border:1px solid #c9d3da;border-radius:8px;overflow:hidden}
+.declass .cs,.declass .rl{display:block;padding:5px 9px}
+.declass .cs{background:#fdecea}
+.declass .cs::before{content:"\2717  Comic says: ";font-weight:800;color:#a3271a}
+.declass .rl{background:#e6f4e9}
+.declass .rl::before{content:"\2713  Really: ";font-weight:800;color:#1d6b33}
+.declass .kf{display:block;margin-top:8px;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#18364a}
+.declass .note{display:block;margin-top:5px;font-weight:600;font-size:.9rem;color:#5b4632}
 .dime{display:inline-block;background:#e6bd64;color:#0f2433;border-radius:999px;font-weight:850;padding:0 9px;margin-right:4px}
 .credits{font-size:.8rem;color:var(--muted);margin:10px 0 0;line-height:1.4}
 body.reading-now .choices{opacity:.45;pointer-events:none}
@@ -38,7 +44,7 @@ body.reading-now .choices{opacity:.45;pointer-events:none}
 <nav class="route" aria-label="Your progress"><ol id="flipRoute"></ol></nav>
 <main class="gr-main gr-wrap">
 <section class="card">
-<p class="intro-line"><b>You're the fact-checker.</b> For each part: <b>read</b> the page on the left → get the <b>check</b> right → then a second check or 1–2 sentences. Done = 4 green parts, then turn in at the bottom.</p>
+<p class="intro-line"><b>How it works:</b> read the comic pages → answer the question about today's big idea → see what the comic got right and wrong → write 1–2 sentences or answer a second check. Done = all parts green, then turn in at the bottom.</p>
 <p class="content-note"><span><strong>Content note:</strong> These comics were made to teach a lesson, so they tell one side. The 1943 comic praises British rule; the 1958 comic was made to teach nonviolence to civil rights marchers. Page 1 shows starving people, and page 2 shows soldiers shooting into a crowd.</span></p>
 <details class="wordhelp"><summary>Word help (tap to open)</summary>
 <ul class="words" aria-label="Word help">
@@ -85,95 +91,123 @@ alts:[
 assignmentId:"wh-u2-d4-india-comic",api:"https://fynn-class-assignment-submissions-20261024.neotboy.chatgpt.site/api/submit",
 lockedText:"This box opens when you get the check right.",
 clearConfirm:"Start over? This clears your checks and answers on this device.",
-successText:"Turned in! Your teacher got your checks and answers.",
+successText:"Turned in! Your teacher got your 6 checks and 2 answers. You are done.",
 wrongText:(c,left)=>left>0?"Not quite. "+c.hint+" Try again in "+left+"…":"Not quite. "+c.hint+" The choices were mixed up. Try again.",
 parts:[
 {
-"short":"British India",
-"ref":"Reader page 1 · 1600–1943",
-"title":"1. Why did Indians want Britain out?",
-"from":1,"to":1,
-"check":{
-"page":1,
-"tag":"Reading check · Reader page 1",
-"q":"Read the caption under the starving people at the bottom left of reader page 1. Who does this 1943 comic blame for the famine?",
-"right":"Indian rulers, for bad management, so Britain took more power.",
-"wrong":["British rulers, for shipping India's food away to England.","Queen Victoria, for raising the taxes on India's poor farmers.","Gandhi and Nehru, for leading strikes and protests against Britain."],
-"why":"✓ Correct. The comic makes British rule sound like a rescue. This is an American comic from 1943, when Britain was America's ally in World War II.",
-"hint":"Read the yellow box under the two riders on horses."
+"short": "British India",
+"ref": "Reader page 1 · 1600–1943",
+"title": "1. Why did Indians want Britain out?",
+"from": 1,
+"to": 1,
+"check": {
+"page": 1,
+"tag": "Reading check · Reader page 1",
+"q": "Read the box at the bottom right. In 1943, what was still going on in India?",
+"right": "A fight for independence from Britain",
+"wrong": [
+"A war to bring back the East India Company",
+"A plan to make Gandhi the king of India",
+"A war between India and France"
+],
+"why": "✓ Correct. India was a British colony. Gandhi and Nehru led the fight to end British rule.",
+"hint": "Read the yellow box at the bottom right, under the three portraits."
 },
-"check2":{
-"tag":"Fact-check · Use the fact file",
-"q":"<span class=\"declass file\"><b>Fact file · Famine under British rule</b><span class=\"line\"><i>1876–78:</i> More than 5 million people starved in South India while British officials kept shipping grain out.</span><span class=\"line\"><i>1943:</i> The same year this comic came out, about 3 million people died in the Bengal famine. British leaders were slow to send food because of the war.</span><span class=\"line\"><i>Who ruled?</i> Britain had ruled India directly since 1858.</span></span>What does the fact file show about the comic's famine panel?",
-"right":"The comic leaves out that the worst famines came under British rule.",
-"wrong":["Famines in India ended for good once Britain took over the government.","Indian rulers, not the British, were in charge during the 1943 Bengal famine.","India's famines were caused by Gandhi's protests and strikes."],
-"why":"✓ Correct. Deadly famines under British rule were one big reason many Indians wanted Britain gone.",
-"hint":"Check the years. Who ruled India in 1876 and 1943?"
+"check2": {
+"tag": "Second check · Reader page 1 + fact file",
+"q": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">Bad Indian rulers caused famine, so Britain took more power.</span><span class=\"rl\">The worst famines came under British rule. About 3 million died in Bengal in 1943, the year this comic came out.</span></span><b class=\"kf\">Know this</b><span class=\"line\"><b>Decolonization</b> = colonies becoming free countries. After WWII, Europe's empires fell apart fast.</span></span>Look at the panel where two British riders pass starving people. The comic blames Indian rulers. Who really ruled India during its worst famines?",
+"right": "Britain, which ruled India as a colony",
+"wrong": [
+"Indian princes, who answered to no one at all",
+"The Mughal emperors in Delhi",
+"Japan, which took India in World War II"
+],
+"why": "✓ Correct. About 3 million people died in the 1943 Bengal famine, under British rule. That's one reason Indians wanted Britain out.",
+"hint": "Find the two British riders passing starving people. Then read the \"Really\" line in the fact file."
 }
 },
 {
-"short":"Gandhi's way",
-"ref":"Reader page 2 · 1919–1930s",
-"title":"2. How did Gandhi fight without weapons?",
-"from":2,"to":2,
-"check":{
-"page":2,
-"tag":"Reading check · Reader page 2",
-"q":"Read the top-right box on reader page 2. What happened when Indians at Amritsar protested a bad law?",
-"right":"British soldiers shot hundreds of them, and the world was horrified.",
-"wrong":["The British soldiers backed down and changed the law right away.","Gandhi's followers fought back and took over a British army fort.","The police let the crowd march through the city without any trouble."],
-"why":"✓ Correct. That was April 13, 1919. British troops fired into an unarmed crowd trapped in a walled garden. Britain's count was 379 dead. Indian counts were much higher.",
-"hint":"Read the box above the soldiers firing the big gun."
+"short": "Gandhi's way",
+"ref": "Reader page 2 · 1919–1930s",
+"title": "2. How did Gandhi fight without weapons?",
+"from": 2,
+"to": 2,
+"check": {
+"page": 2,
+"tag": "Reading check · Reader page 2",
+"q": "Read the top-right box. Why did Amritsar matter for India's freedom?",
+"right": "The killings turned people against British rule",
+"wrong": [
+"It was the battle where India's army beat Britain",
+"Britain promised India its freedom there",
+"Gandhi was elected leader of India there"
+],
+"why": "✓ Correct. On April 13, 1919, British troops fired into an unarmed crowd. After that, millions of Indians decided British rule had to end.",
+"hint": "Read the top-right box: \"the British shot down hundreds... It raised horrified protests all over the world.\""
 },
-"prompt":"Use the page and the fact file. How did Gandhi and millions of Indians fight British rule without violence?",
-"stem":"<span class=\"declass file\"><b>Fact file · Gandhi's tools</b><span class=\"line\"><i>Boycott:</i> Indians refused to buy British cloth. They spun their own and burned British-made clothes.</span><span class=\"line\"><i>Break unfair laws on purpose:</i> Protesters broke laws in the open and let themselves be arrested. Tens of thousands filled the jails.</span><span class=\"line\"><i>Never hit back:</i> Gandhi asked protesters not to fight back, even when beaten, so the world could see who was using violence.</span></span>Write 1–2 sentences. Start like this: <i>Gandhi fought British rule without violence by ___.</i>",
-"placeholder":"Gandhi fought British rule without violence by ___.",
-"stemText":"Gandhi fought British rule without violence by ___."
+"prompt": "How did Gandhi and millions of Indians fight British rule without violence?",
+"stem": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">The British \"shot down hundreds\" at Amritsar.</span><span class=\"rl\">Britain's own count was 379 dead. Indian leaders said about 1,000.</span></span><b class=\"kf\">Know this</b><span class=\"line\">Gandhi's tools: <b>boycotts</b> of British cloth, marches, and breaking unfair laws on purpose. Protesters did not hit back, even when beaten.</span></span>Write 1–2 sentences. Start like this: <i>Gandhi fought British rule without violence by ___.</i>",
+"stemText": "Gandhi fought British rule without violence by ___.",
+"placeholder": "Gandhi fought British rule without violence by ___."
 },
 {
-"short":"Salt March",
-"ref":"Reader page 3 · 1930",
-"title":"3. Why march to the sea for salt?",
-"from":3,"to":3,
-"check":{
-"page":3,
-"tag":"Reading check · Reader page 3",
-"q":"Read the box next to Gandhi on the beach. What law did Gandhi break, and how?",
-"right":"The salt law, by marching to the sea and picking up salt.",
-"wrong":["The land tax law, by refusing to pay the tax on his own farm.","The prison law, by helping Nehru escape from a British jail.","The road law, by leading a march down a road that was forbidden."],
-"why":"✓ Correct. Everyone needs salt, so the salt tax hit the poorest Indians hardest. One fact-check: the march was about 240 miles, and Britain did not end the salt tax then. It lasted until just before independence.",
-"hint":"Read the box on the left, next to the man scooping from the beach."
+"short": "Salt March",
+"ref": "Reader page 3 · 1930",
+"title": "3. Why march to the sea for salt?",
+"from": 3,
+"to": 3,
+"check": {
+"page": 3,
+"tag": "Reading check · Reader page 3",
+"q": "Gandhi picked up salt at the sea to break the salt law on purpose. What kind of protest was this?",
+"right": "Breaking an unfair law peacefully",
+"wrong": [
+"Fighting the British army with weapons",
+"Refusing to talk to British leaders",
+"Voting the British out in an election"
+],
+"why": "✓ Correct. That's civil disobedience: break an unfair law in the open and accept arrest. Thousands copied him and filled the jails.",
+"hint": "Read the box on the left: Indians could not make their own salt, so Gandhi walked to the sea."
 },
-"check2":{
-"tag":"Compare · Use the fact file",
-"q":"<span class=\"declass file\"><b>Fact file · Three roads to freedom</b><span class=\"line\"><i>India, 1947:</i> Millions joined boycotts, strikes, and marches. Leaders like Gandhi and Nehru went to jail again and again.</span><span class=\"line\"><i>Kenya, 1963:</i> Kenyans fought British settlers and soldiers in the Mau Mau uprising. More than 11,000 Kenyans died.</span><span class=\"line\"><i>Algeria, 1962:</i> Algerians fought an 8-year war against France. Hundreds of thousands died.</span></span>What made India's road to freedom different from Kenya's and Algeria's?",
-"right":"India mostly used mass nonviolent protest instead of a war.",
-"wrong":["India won freedom much faster, in just a few months of fighting.","Britain handed India freedom without any protests.","India fought a longer war than Kenya and Algeria put together."],
-"why":"✓ Correct. Nonviolence turned the world against British rule. But as you'll see next, freedom still came with a terrible cost.",
-"hint":"Look at how each country fought. Which one didn't use a war?"
+"check2": {
+"tag": "Second check · Reader page 3 + fact file",
+"q": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">Gandhi walked 200 miles.</span><span class=\"rl\">He walked about 240 miles, in 1930.</span></span><span class=\"fix\"><span class=\"cs\">The British did away with the Salt Act.</span><span class=\"rl\">The salt tax stayed until just before independence.</span></span><b class=\"kf\">Know this</b><span class=\"line\">By the end of 1930, about 60,000 protesters were in jail.</span></span>Read the box at the bottom: the jails filled up with India's best-loved leaders. Why did full jails help Gandhi's side?",
+"right": "It made India harder for Britain to rule",
+"wrong": [
+"The prisoners agreed to join the British army",
+"It made Gandhi give up and leave India",
+"It let Gandhi win an election from jail"
+],
+"why": "✓ Correct. That's civil disobedience. Jailing thousands of peaceful people made British rule look unfair and made India hard to control.",
+"hint": "Read the bottom box: \"It became harder for the British to keep control...\""
 }
 },
 {
-"short":"Freedom's cost",
-"ref":"Reader page 4 · 1947",
-"title":"4. Freedom \"without firing a shot\"?",
-"from":4,"to":4,
-"check":{
-"page":4,
-"tag":"Reading check · Reader page 4",
-"q":"Read the panel with Big Ben on reader page 4. Why does the comic say Britain decided to get out of India?",
-"right":"British voters hated seeing unarmed Indians shot and leaders jailed.",
-"wrong":["India's own army beat the British army in one big final battle.","The United States told Britain it had to leave India right away.","Gandhi paid the British government a lot of money to leave India."],
-"why":"✓ Correct. Nonviolence worked partly by changing minds back in Britain. Also, World War II had left Britain broke and tired of running an empire.",
-"hint":"Read what the two men in front of the clock tower are saying."
+"short": "Freedom's cost",
+"ref": "Reader page 4 · 1947",
+"title": "4. Freedom \"without firing a shot\"?",
+"from": 4,
+"to": 4,
+"check": {
+"page": 4,
+"tag": "Reading check · Reader page 4",
+"q": "Read the panel with Big Ben. Why does the comic say Britain decided to leave India?",
+"right": "British voters hated the shootings and jailings",
+"wrong": [
+"India's army beat the British in one last battle",
+"The United States ordered Britain to leave",
+"Gandhi paid Britain a lot of money to leave"
+],
+"why": "✓ Correct. Nonviolence changed minds back in Britain. World War II had also left Britain broke and worn out.",
+"hint": "Read what the two men in front of the clock tower are saying."
 },
-"prompt":"King says that in India \"nobody is defeated.\" Use the fact file: what did Partition cost ordinary people?",
-"stem":"<span class=\"declass file\"><b>Fact file · What the comic leaves out: Partition</b><span class=\"line\"><i>August 1947:</i> Britain split its colony into two countries: India (mostly Hindu) and Pakistan (mostly Muslim).</span><span class=\"line\"><i>On the move:</i> About 15 million people fled their homes to cross the new border.</span><span class=\"line\"><i>Violence:</i> Mobs attacked families on both sides. Somewhere between 200,000 and 2 million people were killed.</span><span class=\"line\"><i>Gandhi:</i> He begged both sides to stop. In January 1948, a Hindu extremist who hated Gandhi's peace with Muslims shot and killed him.</span></span>Write 1–2 sentences. Start like this: <i>Partition cost ordinary people ___.</i>",
-"placeholder":"Partition cost ordinary people ___.",
-"stemText":"Partition cost ordinary people ___."
+"prompt": "What mattered most for India's freedom: Gandhi's protests, India's role in WWII, or Britain being broke? Explain.",
+"stem": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">Freedom came, and \"nobody is defeated.\"</span><span class=\"rl\">In 1947 India was split into India and Pakistan. About 14 to 15 million fled their homes, and 200,000 to 2 million were killed.</span></span><b class=\"kf\">Know this</b><span class=\"line\">In WWII, over 2.5 million Indians fought for Britain. By 1945, Britain was deep in debt.</span></span>Write 1–2 sentences. Start like this: <i>The biggest reason India won independence was ___ because ___.</i>",
+"stemText": "The biggest reason India won independence was ___ because ___.",
+"placeholder": "The biggest reason India won independence was ___ because ___."
 }
 ],
-questions:["(Check) Who ruled India during its worst famines?","How did Gandhi and millions of Indians fight British rule without violence?","(Check) How was India's road to freedom different from Kenya's and Algeria's?","What did the 1947 Partition of India and Pakistan cost ordinary people?"],
+questions:["(Check) Who ruled India during its worst famines?", "How did Gandhi and millions of Indians fight British rule without violence?", "(Check) Why did filling the jails help Gandhi's side?", "What mattered most for India's freedom: Gandhi's protests, India's role in WWII, or Britain being broke? Explain."],
 validate(s){if(!s.name)return{text:"Type your first name + last initial (like Jordan M.) at the top of the questions.",focus:"studentName"};
  const mc=[1,2,3,4].find(i=>!s.checkDone(i));if(mc)return{text:"Get the check right for part "+mc+" first.",part:mc};
  const m2=[1,3].find(i=>!s.check2Done(i));if(m2)return{text:"Get the second check right for part "+m2+" first.",part:m2};

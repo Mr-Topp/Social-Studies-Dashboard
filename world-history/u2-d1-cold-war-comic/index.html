@@ -13,11 +13,17 @@
 .intro-line{font-size:1.02rem;margin:0 0 10px}
 .words{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0 10px;padding:0;list-style:none}
 .words li{background:#fff;border:1px solid #e6dcc8;border-left:4px solid var(--navy);border-radius:8px;padding:3px 9px;font-size:.88rem}
-.declass{display:block;background:#fff;border:2px dashed #7a2b26;border-radius:10px;padding:8px 11px;margin:6px 0 8px;font-weight:650;color:#3c2a20;line-height:1.4;font-style:normal}
-.declass b{display:block;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#a33d36;margin-bottom:2px}
-.declass.file{border-color:#18364a}.declass.file b{color:#18364a}
-.declass i{font-style:normal;font-weight:800}
-.declass .line{display:block;margin:2px 0}
+.declass{display:block;background:#fff;border:2px dashed #18364a;border-radius:10px;padding:8px 11px;margin:6px 0 8px;font-weight:650;color:#22313b;line-height:1.4;font-style:normal}
+.declass > b:first-child{display:block;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#18364a;margin-bottom:2px}
+.declass .line{display:block;margin:3px 0}
+.declass .fix{display:block;margin:6px 0;border:1px solid #c9d3da;border-radius:8px;overflow:hidden}
+.declass .cs,.declass .rl{display:block;padding:5px 9px}
+.declass .cs{background:#fdecea}
+.declass .cs::before{content:"\2717  Comic says: ";font-weight:800;color:#a3271a}
+.declass .rl{background:#e6f4e9}
+.declass .rl::before{content:"\2713  Really: ";font-weight:800;color:#1d6b33}
+.declass .kf{display:block;margin-top:8px;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#18364a}
+.declass .note{display:block;margin-top:5px;font-weight:600;font-size:.9rem;color:#5b4632}
 .dime{display:inline-block;background:#e6bd64;color:#0f2433;border-radius:999px;font-weight:850;padding:0 9px;margin-right:4px}
 .credits{font-size:.8rem;color:var(--muted);margin:10px 0 0;line-height:1.4}
 body.reading-now .choices{opacity:.45;pointer-events:none}
@@ -38,7 +44,7 @@ body.reading-now .choices{opacity:.45;pointer-events:none}
 <nav class="route" aria-label="Your progress"><ol id="flipRoute"></ol></nav>
 <main class="gr-main gr-wrap">
 <section class="card">
-<p class="intro-line"><b>You're the fact-checker.</b> For each part: <b>read</b> the page on the left → get the <b>check</b> right → then a second check or 1–2 sentences. Done = 4 green parts, then turn in at the bottom.</p>
+<p class="intro-line"><b>How it works:</b> read the comic pages → answer the question about today's big idea → see what the comic got right and wrong → write 1–2 sentences or answer a second check. Done = all parts green, then turn in at the bottom.</p>
 <p class="content-note"><span><strong>Content note:</strong> These are real American comics from 1960 and 1961, made to warn kids about communism. They tell only the American side on purpose. The fact files give you the other side.</span></p>
 <details class="wordhelp"><summary>Word help (tap to open)</summary>
 <ul class="words" aria-label="Word help">
@@ -84,97 +90,172 @@ alts:[
 assignmentId:"wh-u2-d1-cold-war-comic",api:"https://fynn-class-assignment-submissions-20261024.neotboy.chatgpt.site/api/submit",
 lockedText:"This box opens when you get the check right.",
 clearConfirm:"Start over? This clears your checks and answers on this device.",
-successText:"Turned in! Your teacher got your checks and answers.",
+successText:"Turned in! Your teacher got your 6 checks and 2 answers. You are done.",
 wrongText:(c,left)=>left>0?"Not quite. "+c.hint+" Try again in "+left+"…":"Not quite. "+c.hint+" The choices were mixed up. Try again.",
 parts:[
 {
-"short":"Allies",
-"ref":"Reader page 1 · World War II",
-"title":"1. Why were the U.S. and the USSR on the same side?",
-"from":1,"to":1,
-"check":{
-"page":1,
-"tag":"Reading check · Reader page 1",
-"q":"Read the top left panel on reader page 1. The comic says Stalin pretended to shut down the Comintern (the group that spread communism to other countries) so Americans would trust him and keep sending supplies. What was Stalin really after?",
-"right":"U.S. help now to beat Hitler, and to spread communism later.",
-"wrong":["Peace with America, so he gave up on communism for good.","A U.S.-style democracy for Russia once the war was over.","A way to keep the U.S. from ever joining World War II in Europe."],
-"why":"✓ Correct. Stalin really did shut down the Comintern in 1943 to calm his allies. Stalin was pushing the USSR's goals: get American help now, and spread communism later.",
-"hint":"Read the first panel with Stalin. What does he want from Americans, and what is he hiding?"
+"short": "Allies",
+"ref": "Reader page 1 · World War II",
+"title": "1. Why were the U.S. and the USSR on the same side?",
+"from": 1,
+"to": 1,
+"check": {
+"page": 1,
+"tag": "Reading check · Reader page 1",
+"q": "Why did the U.S. and the Soviet Union fight on the same side in World War II?",
+"right": "They both had to beat Hitler's Germany",
+"wrong": [
+"They both had the same kind of government",
+"Russia promised to give up communism",
+"They had been close friends since 1917"
+],
+"why": "✓ Correct. The enemy of my enemy is my friend. Once Hitler was beaten, the thing holding them together was gone.",
+"hint": "Read the yellow box at the top right (\"Because of the threat of Hitler...\") and the box above Roosevelt."
 },
-"check2":{
-"tag":"Fact-check · Use the fact file",
-"q":"<span class=\"declass file\"><b>Fact file · Strange allies</b><span class=\"line\"><i>The enemy:</i> Hitler's Germany attacked the Soviet Union in June 1941. Japan attacked the U.S. that December.</span><span class=\"line\"><i>The cost:</i> About 27 million Soviet people died in World War II, more than any other country.</span><span class=\"line\"><i>The trust:</i> Low. The U.S. was a democracy with private business. The USSR was a communist dictatorship. They had been rivals since 1917.</span></span>What goal did these two very different countries share that put them on the same side?",
-"right":"Beating Hitler's Germany, which attacked them both.",
-"wrong":["Spreading communism to every country in Europe and Asia.","Building a new democracy in the Soviet Union together.","Splitting Japan's colonies in Asia between the two of them."],
-"why":"✓ Correct. \"The enemy of my enemy is my friend.\" Once Hitler was beaten, the thing holding them together was gone.",
-"hint":"Read the first line of the fact file. Who attacked both of them?"
+"check2": {
+"tag": "Second check · Reader page 1 + fact file",
+"q": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">U.S. supplies helped Russia defend itself.</span><span class=\"rl\">U.S. aid helped, but the USSR did most of the fighting against Germany. About 27 million Soviet people died.</span></span><b class=\"kf\">Know this</b><span class=\"line\">The U.S. had democracy and capitalism. The USSR had one-party communist rule. They had distrusted each other since 1917.</span></span>Read the top-left panel. Stalin says he will pretend to shut down the Comintern so Americans will trust him. What does that show about this alliance?",
+"right": "The two sides did not really trust each other",
+"wrong": [
+"Stalin had given up on spreading communism",
+"The U.S. and USSR wanted the same future",
+"Americans got to decide what Stalin would do next"
+],
+"why": "✓ Correct. Stalin was pushing the USSR's own goals: get U.S. help now, spread communism later. Once Hitler lost, nothing held them together.",
+"hint": "Read the top-left panel with Stalin: why does he pretend to shut down the Comintern?"
 }
 },
 {
-"short":"Broken promise",
-"ref":"Reader page 2 · After the war",
-"title":"2. What happened to Eastern Europe after the war?",
-"from":2,"to":2,
-"check":{
-"page":2,
-"tag":"Reading check · Reader page 2",
-"q":"Read the top right panel on reader page 2. What did Roosevelt and Churchill ask Stalin to promise?",
-"right":"That freed countries could pick democratic governments.",
-"wrong":["That Russia would pay the U.S. back for all the war goods.","That Russia would leave all of Germany to the U.S. and Britain.","That Germany would be split into two countries."],
-"why":"✓ Correct. In February 1945 at Yalta, Stalin promised free elections in Eastern Europe. Then Soviet troops stayed, and communist governments took over.",
-"hint":"Find the panel with the three leaders at a table."
+"short": "Broken promise",
+"ref": "Reader page 2 · After the war",
+"title": "2. What happened to Eastern Europe after the war?",
+"from": 2,
+"to": 2,
+"check": {
+"page": 2,
+"tag": "Reading check · Reader page 2",
+"q": "What happened to the Eastern European countries that Soviet troops freed from Hitler?",
+"right": "Soviet troops stayed and put in communists",
+"wrong": [
+"They held free elections and chose democracy",
+"American troops stayed to run them for years",
+"They became neutral and joined neither side"
+],
+"why": "✓ Correct. Stalin broke his promise of free elections. These countries became Soviet satellite states.",
+"hint": "Read the box \"Immediately, Stalin set about breaking his promise\" and the bubbles by the tank."
 },
-"prompt":"The comic only shows the American side. Read the fact file. Why did Stalin want control of Eastern Europe, and how did he take control?",
-"must":{"groups":[["invad","invasi","attack","buffer","safe","protect","friendly","wall","never happen","defen"],["rigg","election","vote","troop","army","soldier","forc","took over","take over"]],"msg":"Use the fact file: give Stalin's reason (like the invasions through Poland) AND how he took control (like the rigged election)."},
-"stem":"<span class=\"declass file\"><b>Fact file · The Soviet side</b><span class=\"line\"><i>Invaded through Poland:</i> Germany invaded Russia through Poland in 1914 and again in 1941. Napoleon came that way in 1812.</span><span class=\"line\"><i>Stalin's goal:</i> a wall of friendly, communist countries (a \"buffer zone\") so it could never happen again.</span><span class=\"line\"><i>The result:</i> Poland's 1947 election was rigged. By 1948, communists ran all of Eastern Europe.</span></span>Write 1–2 sentences. Start like this: <i>Stalin wanted control of Eastern Europe because ___. He took control by ___.</i>",
-"placeholder":"Stalin wanted control of Eastern Europe because ___. He took control by ___.",
-"stemText":"Stalin wanted control of Eastern Europe because ___. He took control by ___."
-},
-{
-"short":"Iron Curtain",
-"ref":"Reader page 3 · Comic cover, 1960",
-"title":"3. How does this cover show the split of Europe?",
-"from":3,"to":3,
-"check":{
-"page":3,
-"tag":"Reading check · Reader page 3",
-"q":"Look at the cover on reader page 3. The gravestones are labeled Poland, Hungary, East Germany, and more. What change after World War II is the artist showing?",
-"right":"These countries fell under communist rule after the war.",
-"wrong":["These countries were destroyed by American bombs in the war.","These countries became free democracies after the war.","These countries all joined the U.S. side in NATO after 1949."],
-"why":"✓ Correct. Gravestones say: these countries are dead. That's the artist's view, and it's propaganda. The people were still there, living under communist rule.",
-"hint":"Look at the white stone shapes at the bottom of the cover."
-},
-"check2":{
-"tag":"Map check · Use the fact file",
-"q":"<span class=\"declass file\"><b>Fact file · The Iron Curtain</b><span class=\"line\"><i>March 1946:</i> Winston Churchill said an \"iron curtain\" had come down across Europe, from the Baltic Sea in the north to the Adriatic Sea in the south.</span><span class=\"line\"><i>West of the line:</i> free countries, friends of the U.S.</span><span class=\"line\"><i>East of the line:</i> communist countries controlled by the USSR.</span></span>Which of these countries on the cover was in Asia, not behind the Iron Curtain in Europe?",
-"right":"China.",
-"wrong":["Poland.","Hungary.","Czechoslovakia."],
-"why":"✓ Correct. China became communist in 1949. So communism wasn't just a European problem anymore. You'll see that on Day 2 and Day 3.",
-"hint":"Which gravestone names are countries in Asia?"
+"prompt": "Why did Stalin want control of Eastern Europe, and how did he take control?",
+"stem": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">Stalin just wanted to rule the world \"by any means.\"</span><span class=\"rl\">Stalin wanted friendly governments on his border so Russia could never be invaded again. Germany came through Poland in 1914 and 1941.</span></span><b class=\"kf\">Know this</b><span class=\"line\">A <b>satellite state</b> looks free but takes orders from a stronger country. Their elections were not free. Poland's 1947 vote was rigged.</span></span>Write 1–2 sentences. Start like this: <i>Stalin wanted control of Eastern Europe because ___. He took control by ___.</i>",
+"stemText": "Stalin wanted control of Eastern Europe because ___. He took control by ___.",
+"placeholder": "Stalin wanted control of Eastern Europe because ___. He took control by ___.",
+"must": {
+"groups": [
+[
+"invad",
+"invasi",
+"attack",
+"buffer",
+"safe",
+"protect",
+"friendly",
+"wall",
+"never happen",
+"defen",
+"border"
+],
+[
+"rigg",
+"election",
+"vote",
+"troop",
+"army",
+"soldier",
+"forc",
+"took over",
+"take over",
+"satellite",
+"stay"
+]
+],
+"msg": "Give Stalin's reason (like stopping another invasion through Poland) AND how he took control (like troops that stayed, or rigged elections)."
 }
 },
 {
-"short":"Containment",
-"ref":"Reader page 4 · Berlin and the Marshall Plan",
-"title":"4. How did the U.S. try to stop communism from spreading?",
-"from":4,"to":4,
-"check":{
-"page":4,
-"tag":"Reading check · Reader page 4",
-"q":"Look at the two bottom panels on reader page 4: West Germany rebuilding \"with Marshall Plan help,\" and East Germany yelling \"Yankee, go home.\" What do they show?",
-"right":"Germany split in two: U.S. help in the West, Soviet control in the East.",
-"wrong":["All of Germany was rebuilt by the Soviet Union, with no U.S. help.","Germany was one united country, friendly to the U.S. and the USSR.","The U.S. refused to help any part of Germany after Hitler lost."],
-"why":"✓ Correct. Germany was the Iron Curtain in one country. U.S. aid in the West was part of containment: help people rebuild so communism looks less tempting.",
-"hint":"Compare the two bottom panels. Who is helping each side?"
+"short": "Iron Curtain",
+"ref": "Reader page 3 · Comic cover, 1960",
+"title": "3. How does this cover show the split of Europe?",
+"from": 3,
+"to": 3,
+"check": {
+"page": 3,
+"tag": "Reading check · Reader page 3",
+"q": "The cover shows gravestones labeled Poland, Hungary, East Germany, and more. What change is the artist showing?",
+"right": "They fell under communist rule",
+"wrong": [
+"They were bombed flat in the war",
+"They became free democracies after 1945",
+"They joined the U.S. side in NATO"
+],
+"why": "✓ Correct. After the war, communists took over these countries. An \"iron curtain\" now split Europe in two.",
+"hint": "Look at the names on the white gravestones at the bottom of the cover."
 },
-"prompt":"Pick ONE from the fact file: the Marshall Plan, the Berlin Airlift, or NATO. How did it try to contain communism?",
-"must":{"groups":[["marshall","airlift","nato"],["money","$","billion","rebuild","food","coal","flight","plane","fly","flew","attack on one","defend","protect","promise"," ally"," allies","hungry","poor"]],"msg":"Name the Marshall Plan, the Berlin Airlift, or NATO, and use a fact from the fact file about what it did."},
-"stem":"<span class=\"declass file\"><b>Fact file · Containment, 1947–1949</b><span class=\"line\"><i>Marshall Plan, 1948:</i> The U.S. gave about $13 billion to rebuild Western Europe, so poor, hungry people wouldn't turn to communism. The USSR said no for Eastern Europe.</span><span class=\"line\"><i>Berlin Airlift, 1948–49:</i> The USSR blocked every road and train into West Berlin. For 11 months, U.S. and British planes flew in food and coal, over 270,000 flights. The USSR gave up.</span><span class=\"line\"><i>NATO, 1949:</i> The U.S., Canada, and Western Europe promised: an attack on one is an attack on all. In 1955 the USSR made its own team, the Warsaw Pact.</span></span>Write 1–2 sentences. Start like this: <i>The ___ tried to stop communism by ___.</i>",
-"placeholder":"The ___ tried to stop communism by ___.",
-"stemText":"The ___ tried to stop communism by ___."
+"check2": {
+"tag": "Second check · Reader page 3 + fact file",
+"q": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">These countries are dead (gravestones).</span><span class=\"rl\">Their people lived on under communist rule. In 1989, Poland, Hungary, and East Germany broke free.</span></span><b class=\"kf\">Know this</b><span class=\"line\">In 1946, Churchill said an <b>iron curtain</b> had come down across Europe: a communist East run by the USSR, and a democratic West.</span></span>Churchill said an \"iron curtain\" split Europe. Look at the gravestones on the cover. Which side of that line were Poland, Hungary, and East Germany on?",
+"right": "The communist East, run by the USSR",
+"wrong": [
+"The free West, on the side of the U.S.",
+"Neither side, because they stayed neutral",
+"The West, as members of NATO"
+],
+"why": "✓ Correct. The Iron Curtain was a line, not a wall: a communist East run by the USSR, and a free West. The cover's red iceberg, with a hammer and sickle, stands behind those gravestones.",
+"hint": "Read the names on the gravestones, and look at what stands behind them: the red iceberg with the hammer and sickle."
+}
+},
+{
+"short": "Containment",
+"ref": "Reader page 4 · Berlin and the Marshall Plan",
+"title": "4. How did the U.S. try to stop communism from spreading?",
+"from": 4,
+"to": 4,
+"check": {
+"page": 4,
+"tag": "Reading check · Reader page 4",
+"q": "Read the bottom panels. How did the U.S. try to keep West Germany from turning communist?",
+"right": "It paid to help rebuild the country",
+"wrong": [
+"It sent its army to invade East Germany",
+"It let the Soviet Union run all of it",
+"It banned all Germans from voting"
+],
+"why": "✓ Correct. That's containment: help people rebuild so communism looks less tempting.",
+"hint": "Read the sign \"Mit Marshall-Plan Hilfe\" (With Marshall Plan help) and the box under it."
+},
+"prompt": "Why did the U.S. and the USSR go from allies to enemies, and how did the U.S. try to stop communism's spread?",
+"stem": "<span class=\"declass\"><b>Fact file</b><span class=\"line\"><b>Containment</b> = the U.S. plan to stop communism from spreading. The <b>Marshall Plan</b> (1948) sent about $13 billion to rebuild Western Europe.</span><span class=\"line\"><b>Berlin Airlift</b> (1948–49): planes flew food and coal into West Berlin for almost a year. <b>NATO</b> (1949): an attack on one is an attack on all.</span></span>Write 1–2 sentences. Start like this: <i>The U.S. and USSR became rivals because ___. The U.S. tried to stop communism with ___.</i>",
+"stemText": "The U.S. and USSR became rivals because ___. The U.S. tried to stop communism with ___.",
+"placeholder": "The U.S. and USSR became rivals because ___. The U.S. tried to stop communism with ___.",
+"must": {
+"groups": [
+[
+"marshall",
+"airlift",
+"nato",
+"money",
+"$",
+"billion",
+"rebuild",
+"aid",
+"plane",
+"contain",
+"allian"
+]
+],
+"msg": "Use a fact from the fact file, like the Marshall Plan, the Berlin Airlift, or NATO."
+}
 }
 ],
-questions:["(Check) What goal put the U.S. and the USSR on the same side?","Why did Stalin want control of Eastern Europe, and how did he take control?","(Check) The Iron Curtain: which country was in Asia?","Pick the Marshall Plan, the Berlin Airlift, or NATO. How did it try to contain communism?"],
+questions:["(Check) What does Stalin's trick on page 1 show about the U.S.-USSR alliance?", "Why did Stalin want control of Eastern Europe, and how did he take control?", "(Check) Which side of the Iron Curtain were Poland, Hungary, and East Germany on?", "Why did the U.S. and the USSR go from allies to enemies, and how did the U.S. try to stop communism's spread?"],
 validate(s){if(!s.name)return{text:"Type your first name + last initial (like Jordan M.) at the top of the questions.",focus:"studentName"};
  const mc=[1,2,3,4].find(i=>!s.checkDone(i));if(mc)return{text:"Get the check right for part "+mc+" first.",part:mc};
  const m2=[1,3].find(i=>!s.check2Done(i));if(m2)return{text:"Get the second check right for part "+m2+" first.",part:m2};

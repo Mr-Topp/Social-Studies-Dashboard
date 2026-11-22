@@ -12,11 +12,17 @@
 .intro-line{font-size:1.02rem;margin:0 0 10px}
 .words{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0 10px;padding:0;list-style:none}
 .words li{background:#fff;border:1px solid #e6dcc8;border-left:4px solid var(--navy);border-radius:8px;padding:3px 9px;font-size:.88rem}
-.declass{display:block;background:#fff;border:2px dashed #7a2b26;border-radius:10px;padding:8px 11px;margin:6px 0 8px;font-weight:650;color:#3c2a20;line-height:1.4;font-style:normal}
-.declass b{display:block;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#a33d36;margin-bottom:2px}
-.declass.file{border-color:#18364a}.declass.file b{color:#18364a}
-.declass i{font-style:normal;font-weight:800}
-.declass .line{display:block;margin:2px 0}
+.declass{display:block;background:#fff;border:2px dashed #18364a;border-radius:10px;padding:8px 11px;margin:6px 0 8px;font-weight:650;color:#22313b;line-height:1.4;font-style:normal}
+.declass > b:first-child{display:block;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#18364a;margin-bottom:2px}
+.declass .line{display:block;margin:3px 0}
+.declass .fix{display:block;margin:6px 0;border:1px solid #c9d3da;border-radius:8px;overflow:hidden}
+.declass .cs,.declass .rl{display:block;padding:5px 9px}
+.declass .cs{background:#fdecea}
+.declass .cs::before{content:"\2717  Comic says: ";font-weight:800;color:#a3271a}
+.declass .rl{background:#e6f4e9}
+.declass .rl::before{content:"\2713  Really: ";font-weight:800;color:#1d6b33}
+.declass .kf{display:block;margin-top:8px;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#18364a}
+.declass .note{display:block;margin-top:5px;font-weight:600;font-size:.9rem;color:#5b4632}
 .dime{display:inline-block;background:#e6bd64;color:#0f2433;border-radius:999px;font-weight:850;padding:0 9px;margin-right:4px}
 .credits{font-size:.8rem;color:var(--muted);margin:10px 0 0;line-height:1.4}
 body.reading-now .choices{opacity:.45;pointer-events:none}
@@ -38,7 +44,7 @@ body.reading-now .choices{opacity:.45;pointer-events:none}
 <nav class="route" aria-label="Your progress"><ol id="flipRoute"></ol></nav>
 <main class="gr-main gr-wrap">
 <section class="card">
-<p class="intro-line"><b>You're the fact-checker.</b> For each part: <b>read</b> the page on the left → get the <b>check</b> right → then a second check or 1–2 sentences. Done = 4 green parts, then turn in at the bottom.</p>
+<p class="intro-line"><b>How it works:</b> read the comic pages → answer the question about today's big idea → see what the comic got right and wrong → write 1–2 sentences or answer a second check. Done = all parts green, then turn in at the bottom.</p>
 <p class="content-note"><span><strong>Content note:</strong> This comic was made in 1977 to praise Mobutu, the Congo's dictator. It is one-sided on purpose. It was in French; the speech bubbles have been put into English for this class. Page 1 shows soldiers shooting at a crowd.</span></p>
 <details class="wordhelp"><summary>Word help (tap to open)</summary>
 <ul class="words" aria-label="Word help">
@@ -84,95 +90,123 @@ alts:[
 assignmentId:"wh-u2-d5-congo-comic",api:"https://fynn-class-assignment-submissions-20261024.neotboy.chatgpt.site/api/submit",
 lockedText:"This box opens when you get the check right.",
 clearConfirm:"Start over? This clears your checks and answers on this device.",
-successText:"Turned in! Your teacher got your checks and answers.",
+successText:"Turned in! Your teacher got your 6 checks and 2 answers. You are done.",
 wrongText:(c,left)=>left>0?"Not quite. "+c.hint+" Try again in "+left+"…":"Not quite. "+c.hint+" The choices were mixed up. Try again.",
 parts:[
 {
-"short":"The spark",
-"ref":"Reader page 1 · January 1959",
-"title":"1. What pushed the Congo toward freedom?",
-"from":1,"to":1,
-"check":{
-"page":1,
-"tag":"Reading check · Reader page 1",
-"q":"Read the middle panels on reader page 1. What does the Belgian general order his soldiers to do about the rally?",
-"right":"Break up the crowd hard, by any means, even with guns.",
-"wrong":["Let the rally go on, because the crowd is peaceful.","Arrest only Lumumba and let the rest of the crowd go.","Ask the crowd to vote on independence for the Congo."],
-"why":"✓ Correct. The officer says the rally is calm, but the general orders force anyway. The real riots of January 1959 left at least 49 people dead. Within a year, Belgium agreed to let the Congo go.",
-"hint":"Read the big bubble next to the general's red face."
+"short": "The spark",
+"ref": "Reader page 1 · January 1959",
+"title": "1. What pushed the Congo toward freedom?",
+"from": 1,
+"to": 1,
+"check": {
+"page": 1,
+"tag": "Reading check · Reader page 1",
+"q": "Read the middle panels. What did Belgium do when Congolese people rallied for independence?",
+"right": "Sent soldiers to break up the rally by force",
+"wrong": [
+"Agreed to hold a vote on independence that day",
+"Arrested only Lumumba and let the crowd go home",
+"Let the rally go on in peace"
+],
+"why": "✓ Correct. Soldiers fired on the crowd. The January 1959 riots left at least 49 dead. Within a year, Belgium agreed to let the Congo go.",
+"hint": "Read the general's big bubble in the middle panels."
 },
-"check2":{
-"tag":"Who made it? · Use the fact file",
-"q":"<span class=\"declass file\"><b>Fact file · Who made this comic?</b><span class=\"line\"><i>Made:</i> 1977, for readers in Zaire (the Congo's name from 1971 to 1997).</span><span class=\"line\"><i>Its hero:</i> Mobutu Sese Seko, who seized full power in 1965 and ruled as a dictator for 32 years. Schools taught kids to praise him.</span><span class=\"line\"><i>The series:</i> Its publisher made comics praising other African dictators too.</span></span>What should a fact-checker expect from this comic?",
-"right":"It will make Mobutu look like a hero and leave out his bad side.",
-"wrong":["It will be fair to every side, since it's a book about history.","It will make Mobutu look like a villain and leave out the good he did.","It will tell the Belgian government's side of the story."],
-"why":"✓ Correct. Watch for that on every page: the comic is true about some things, and silent about others.",
-"hint":"Who is the hero, and who was in power when it was made?"
+"check2": {
+"tag": "Second check · Reader page 1 + fact file",
+"q": "<span class=\"declass\"><b>Fact file</b><span class=\"line\">This comic was made in 1977 to praise <b>Mobutu</b>, who ruled the Congo then. Expect it to leave out his bad side.</span></span>The general says to break up the crowd \"by any means, even with guns.\" What was Belgium trying to stop?",
+"right": "The Congo's push for independence",
+"wrong": [
+"A Soviet army marching into the Congo",
+"A strike by Belgian mine owners",
+"An election Belgium had promised"
+],
+"why": "✓ Correct. Belgium used force to hold on to its colony. It backfired: within about a year, Belgium agreed to let the Congo go.",
+"hint": "Read the top of the page: what was the rally in Leopoldville for?"
 }
 },
 {
-"short":"Freedom Day",
-"ref":"Reader page 2 · June 30, 1960",
-"title":"2. Freedom Day: who's in charge?",
-"from":2,"to":2,
-"check":{
-"page":2,
-"tag":"Reading check · Reader page 2",
-"q":"Read the caption above the crowd on reader page 2. What are they celebrating on June 30, 1960?",
-"right":"The Congo's independence from Belgium.",
-"wrong":["Mobutu becoming the Congo's first president.","A new Belgian governor for the colony.","The day World War II ended in Europe."],
-"why":"✓ Correct. Just 18 months after the January 1959 shootings, Belgium handed over power. But Belgium rushed it, and the new country had almost no time to get ready. Keep that in mind for Part 4.",
-"hint":"Read the white box at the top left of the crowd scene."
+"short": "Freedom Day",
+"ref": "Reader page 2 · June 30, 1960",
+"title": "2. Freedom Day: who's in charge?",
+"from": 2,
+"to": 2,
+"check": {
+"page": 2,
+"tag": "Reading check · Reader page 2",
+"q": "Read the caption above the crowd. What happened on June 30, 1960?",
+"right": "The Congo became free from Belgium",
+"wrong": [
+"Mobutu was named the Congo's first president",
+"Belgium sent a new governor to run the colony",
+"World War II ended in Europe"
+],
+"why": "✓ Correct. The Congo was one of 17 African countries that won independence in 1960, the \"Year of Africa.\"",
+"hint": "Read the white box at the top left of the crowd scene."
 },
-"prompt":"Read the fact file. Was the Congo's road to freedom more like Ghana's or Kenya's? Explain.",
-"stem":"<span class=\"declass file\"><b>Fact file · Two other roads to freedom</b><span class=\"line\"><i>Ghana, 1957:</i> Kwame Nkrumah led strikes, boycotts, and marches against British rule. Ghana became the first colony south of the Sahara to win freedom, mostly without war.</span><span class=\"line\"><i>Kenya, 1963:</i> Kenyans who lost their land to British settlers fought the British in the Mau Mau uprising (1952–60). Britain locked tens of thousands of Kenyans in camps. More than 11,000 Kenyans died before Kenya won freedom.</span></span>Write 1–2 sentences. Start like this: <i>The Congo's road was more like ___ because ___.</i>",
-"placeholder":"The Congo's road was more like ___ because ___.",
-"stemText":"The Congo's road was more like ___ because ___."
+"prompt": "Was the Congo's road to freedom more like Ghana's or Kenya's? Explain.",
+"stem": "<span class=\"declass\"><b>Fact file</b><span class=\"line\"><b>Ghana, 1957:</b> Kwame Nkrumah led strikes and boycotts. Ghana won freedom mostly without war.</span><span class=\"line\"><b>Kenya, 1963:</b> the Mau Mau fought British rule. Britain held tens of thousands in prison camps, and more than 11,000 Kenyans died.</span></span>Write 1–2 sentences. Start like this: <i>The Congo's road was more like ___ because ___.</i>",
+"stemText": "The Congo's road was more like ___ because ___.",
+"placeholder": "The Congo's road was more like ___ because ___."
 },
 {
-"short":"Takeover",
-"ref":"Reader page 3 · September 1960",
-"title":"3. How did Mobutu get power?",
-"from":3,"to":3,
-"check":{
-"page":3,
-"tag":"Reading check · Reader page 3",
-"q":"Read Mobutu's bubble in the middle row of reader page 3. What does he say the army had to do?",
-"right":"Push the politicians aside until they agree.",
-"wrong":["Hold a new election for prime minister right away.","Ask Belgium to come back and run the country again.","Leave the government alone and stay out of politics."],
-"why":"✓ Correct. That's a coup: the army took over the government. The comic calls him a \"hope\" and \"neutral.\"",
-"hint":"Find the man talking to the room of young men at a long table."
+"short": "Takeover",
+"ref": "Reader page 3 · September 1960",
+"title": "3. How did Mobutu get power?",
+"from": 3,
+"to": 3,
+"check": {
+"page": 3,
+"tag": "Reading check · Reader page 3",
+"q": "Read the bubble from the man at the long table. How did Mobutu get power?",
+"right": "The army pushed the elected leaders aside",
+"wrong": [
+"He won a vote for prime minister",
+"Belgium chose him to run the country",
+"The United Nations voted to put him in charge"
+],
+"why": "✓ Correct. That's a coup: the army takes over the government. The comic calls him \"neutral,\" but he wasn't.",
+"hint": "Read the bubble in the middle row: \"the army had to push the politicians aside...\""
 },
-"check2":{
-"tag":"Fact-check · Use the fact file",
-"q":"<span class=\"declass file\"><b>Fact file · The Cold War comes to the Congo</b><span class=\"line\"><i>Summer 1960:</i> Lumumba asked the UN for help. When it moved too slowly, he asked the Soviet Union too.</span><span class=\"line\"><i>The U.S. reaction:</i> U.S. leaders feared the Congo would turn communist. The CIA even made plans to kill Lumumba. The U.S. backed Mobutu.</span><span class=\"line\"><i>Later:</i> Mobutu ruled for 32 years with U.S. support and took billions of dollars for himself.</span></span>The comic calls Mobutu \"neutral.\" What does the fact file show?",
-"right":"He wasn't neutral. The U.S. backed him in a Cold War fight.",
-"wrong":["He was neutral, because no other country cared about the Congo.","The Soviet Union secretly helped put Mobutu in power.","Mobutu gave power back to the voters in a few months."],
-"why":"✓ Correct. A new African nation got pulled into the Cold War. Both superpowers wanted the Congo, partly for its rich mines.",
-"hint":"Read the second line. Which country backed Mobutu, and why?"
+"check2": {
+"tag": "Second check · Reader page 3 + fact file",
+"q": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">Mobutu set up a \"neutral\" government.</span><span class=\"rl\">The CIA backed Mobutu from 1960. U.S. leaders feared Lumumba would side with the Soviet Union.</span></span><b class=\"kf\">Know this</b><span class=\"line\">Mobutu took full power in 1965 and ruled as a <b>dictator</b> for about 32 years, with U.S. support, because he was anti-communist.</span></span>The TV on reader page 3 calls Mobutu's government \"neutral.\" In the Cold War, what did a neutral (nonaligned) country claim?",
+"right": "It took neither the U.S. nor the Soviet side",
+"wrong": [
+"It had joined NATO to stay safe from the USSR",
+"It had joined the Soviet side in the Warsaw Pact",
+"It had given up its army to stay out of all wars"
+],
+"why": "✓ Correct. That's being nonaligned. But Mobutu wasn't really neutral: the CIA backed him because he was against communism.",
+"hint": "Find the word \"neutral\" in the TV's words. Neutral means not picking a side. Which two sides was everyone picking between?"
 }
 },
 {
-"short":"Breaking apart",
-"ref":"Reader page 4 · 1960–61",
-"title":"4. Why was freedom so hard to hold on to?",
-"from":4,"to":4,
-"check":{
-"page":4,
-"tag":"Reading check · Reader page 4",
-"q":"Read the bubbles in the middle row of reader page 4. Who does the comic say was fighting for the rebels in Katanga?",
-"right":"Foreign mercenaries, paid by foreign money men.",
-"wrong":["The United Nations peacekeepers sent to the Congo.","Soldiers sent by Ghana and Kenya to help the rebels.","Nobody, because Katanga stayed peaceful."],
-"why":"✓ Correct. That part is true. Katanga, the province with the richest copper mines, broke away with help from Belgian officers and hired soldiers.",
-"hint":"Read the three bubbles from the men in suits."
+"short": "Breaking apart",
+"ref": "Reader page 4 · 1960–61",
+"title": "4. Why was freedom so hard to hold on to?",
+"from": 4,
+"to": 4,
+"check": {
+"page": 4,
+"tag": "Reading check · Reader page 4",
+"q": "Read the middle row. What was making it hard for the new country to stay together?",
+"right": "Katanga broke away with foreign help",
+"wrong": [
+"Belgium's army took the whole country back",
+"Ghana and Kenya sent armies to invade it",
+"The UN split the country into two halves"
+],
+"why": "✓ Correct. Katanga, the province with the richest copper mines, broke away with help from Belgian officers and hired soldiers.",
+"hint": "Read the three bubbles from the men in suits: \"Foreign money men...\""
 },
-"prompt":"Pick ONE problem from the fact file. How did it make the Congo's freedom hard to hold on to?",
-"stem":"<span class=\"declass file\"><b>Fact file · After Freedom Day</b><span class=\"line\"><i>Borders:</i> Europeans drew the Congo's borders in 1885. Over 200 ethnic groups were put into one country.</span><span class=\"line\"><i>Few leaders trained:</i> In 1960, fewer than 30 Congolese had college degrees. Belgium had kept them out of top jobs.</span><span class=\"line\"><i>Mines:</i> Katanga's copper was worth a fortune, so outsiders helped it break away.</span><span class=\"line\"><i>Lumumba's death:</i> The comic leaves this out: Mobutu's men handed Lumumba to his enemies in Katanga, and he was shot in January 1961 with Belgian officers present.</span></span>Write 1–2 sentences. Start like this: <i>One problem was ___. It made freedom hard because ___.</i>",
-"placeholder":"One problem was ___. It made freedom hard because ___.",
-"stemText":"One problem was ___. It made freedom hard because ___."
+"prompt": "Which did more to free Africa's colonies: peaceful protest or war? How did the Cold War help or hurt?",
+"stem": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">Lumumba \"has just been killed in Katanga\" (no one is blamed).</span><span class=\"rl\">Mobutu's men handed him to his enemies in Katanga. He was shot in January 1961, with Belgian officers there.</span></span><b class=\"kf\">Know this</b><span class=\"line\">Europeans drew the Congo's borders in the 1880s and put over 200 ethnic groups in one country.</span></span>Write 1–2 sentences. Start like this: <i>The biggest reason Africa's colonies won freedom was ___. The Cold War ___.</i>",
+"stemText": "The biggest reason Africa's colonies won freedom was ___. The Cold War ___.",
+"placeholder": "The biggest reason Africa's colonies won freedom was ___. The Cold War ___."
 }
 ],
-questions:["(Check) Who made this comic, and what should a fact-checker expect?","Was the Congo's road to freedom more like Ghana's or Kenya's?","(Check) Was Mobutu really neutral?","Pick one problem after Freedom Day. How did it make freedom hard?"],
+questions:["(Check) What was Belgium trying to stop in January 1959?", "Was the Congo's road to freedom more like Ghana's or Kenya's? Explain.", "(Check) What did \"neutral\" (nonaligned) mean in the Cold War?", "Which did more to free Africa's colonies: peaceful protest or war? How did the Cold War help or hurt?"],
 validate(s){if(!s.name)return{text:"Type your first name + last initial (like Jordan M.) at the top of the questions.",focus:"studentName"};
  const mc=[1,2,3,4].find(i=>!s.checkDone(i));if(mc)return{text:"Get the check right for part "+mc+" first.",part:mc};
  const m2=[1,3].find(i=>!s.check2Done(i));if(m2)return{text:"Get the second check right for part "+m2+" first.",part:m2};

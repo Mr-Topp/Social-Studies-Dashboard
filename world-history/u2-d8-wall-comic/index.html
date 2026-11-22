@@ -12,11 +12,17 @@
 .intro-line{font-size:1.02rem;margin:0 0 10px}
 .words{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0 10px;padding:0;list-style:none}
 .words li{background:#fff;border:1px solid #e6dcc8;border-left:4px solid var(--navy);border-radius:8px;padding:3px 9px;font-size:.88rem}
-.declass{display:block;background:#fff;border:2px dashed #7a2b26;border-radius:10px;padding:8px 11px;margin:6px 0 8px;font-weight:650;color:#3c2a20;line-height:1.4;font-style:normal}
-.declass b{display:block;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#a33d36;margin-bottom:2px}
-.declass.file{border-color:#18364a}.declass.file b{color:#18364a}
-.declass i{font-style:normal;font-weight:800}
-.declass .line{display:block;margin:2px 0}
+.declass{display:block;background:#fff;border:2px dashed #18364a;border-radius:10px;padding:8px 11px;margin:6px 0 8px;font-weight:650;color:#22313b;line-height:1.4;font-style:normal}
+.declass > b:first-child{display:block;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#18364a;margin-bottom:2px}
+.declass .line{display:block;margin:3px 0}
+.declass .fix{display:block;margin:6px 0;border:1px solid #c9d3da;border-radius:8px;overflow:hidden}
+.declass .cs,.declass .rl{display:block;padding:5px 9px}
+.declass .cs{background:#fdecea}
+.declass .cs::before{content:"\2717  Comic says: ";font-weight:800;color:#a3271a}
+.declass .rl{background:#e6f4e9}
+.declass .rl::before{content:"\2713  Really: ";font-weight:800;color:#1d6b33}
+.declass .kf{display:block;margin-top:8px;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#18364a}
+.declass .note{display:block;margin-top:5px;font-weight:600;font-size:.9rem;color:#5b4632}
 .dime{display:inline-block;background:#e6bd64;color:#0f2433;border-radius:999px;font-weight:850;padding:0 9px;margin-right:4px}
 .credits{font-size:.8rem;color:var(--muted);margin:10px 0 0;line-height:1.4}
 body.reading-now .choices{opacity:.45;pointer-events:none}
@@ -38,7 +44,7 @@ body.reading-now .choices{opacity:.45;pointer-events:none}
 <nav class="route" aria-label="Your progress"><ol id="flipRoute"></ol></nav>
 <main class="gr-main gr-wrap">
 <section class="card">
-<p class="intro-line"><b>You're the fact-checker.</b> For each part: <b>read</b> the page on the left → get the <b>check</b> right → then a second check or 1–2 sentences. Done = 4 green parts, then turn in at the bottom.</p>
+<p class="intro-line"><b>How it works:</b> read the comic pages → answer the question about today's big idea → see what the comic got right and wrong → write 1–2 sentences or answer a second check. Done = all parts green, then turn in at the bottom.</p>
 <p class="content-note"><span><strong>Content note:</strong> These are real American comics from 1960 and 1961, made to warn kids about communism. They are one-sided on purpose. Page 1 shows a revolt crushed by tanks and graves of the dead.</span></p>
 <details class="wordhelp"><summary>Word help (tap to open)</summary>
 <ul class="words" aria-label="Word help">
@@ -84,95 +90,123 @@ alts:[
 assignmentId:"wh-u2-d8-wall-comic",api:"https://fynn-class-assignment-submissions-20261024.neotboy.chatgpt.site/api/submit",
 lockedText:"This box opens when you get the check right.",
 clearConfirm:"Start over? This clears your checks and answers on this device.",
-successText:"Turned in! Your teacher got your checks and answers.",
+successText:"Turned in! Your teacher got your 6 checks and 2 answers. You are done.",
 wrongText:(c,left)=>left>0?"Not quite. "+c.hint+" Try again in "+left+"…":"Not quite. "+c.hint+" The choices were mixed up. Try again.",
 parts:[
 {
-"short":"The old rule",
-"ref":"Reader page 1 · Hungary, 1956",
-"title":"1. What used to happen when people rose up?",
-"from":1,"to":1,
-"check":{
-"page":1,
-"tag":"Reading check · Reader page 1",
-"q":"Read the captions on reader page 1. What happened to the Hungarians fighting for freedom, and to similar revolts in East Germany and Poland?",
-"right":"Soviet tanks and soldiers crushed the revolts.",
-"wrong":["They won, and their countries left the Soviet bloc.","The United Nations sent troops to save them.","Their governments let them hold free elections."],
-"why":"✓ Correct. That was the rule for over 30 years: if a country tried to break free, Soviet tanks came. Keep that in mind for 1989.",
-"hint":"Read the yellow caption at the bottom of the big top panel."
+"short": "The old rule",
+"ref": "Reader page 1 · Hungary, 1956",
+"title": "1. What used to happen when people rose up?",
+"from": 1,
+"to": 1,
+"check": {
+"page": 1,
+"tag": "Reading check · Reader page 1",
+"q": "Read the captions. What happened when Hungarians fought for freedom from Soviet control in 1956?",
+"right": "Soviet tanks crushed the revolt",
+"wrong": [
+"They won and left the Soviet bloc",
+"The UN sent troops to save them",
+"They got to hold free elections"
+],
+"why": "✓ Correct. For over 30 years, that was the rule: if a country tried to break free, Soviet tanks came. Remember that for 1989.",
+"hint": "Read the yellow caption at the bottom of the big top panel."
 },
-"check2":{
-"tag":"Fact-check · Use the fact file",
-"q":"<span class=\"declass file\"><b>Fact file · The real numbers</b><span class=\"line\"><i>Hungarians killed:</i> about 2,500. About 700 Soviet soldiers died too.</span><span class=\"line\"><i>Fled the country:</i> about 200,000 Hungarians escaped to the West.</span></span>The comic says the Red Army killed \"some 30,000 Hungarians.\" What does the fact file show?",
-"right":"The comic's number is too big, but the killing was real.",
-"wrong":["The comic is exactly right about the number of deaths.","Nobody really died, so the comic made up the whole revolt.","The real number of deaths was even bigger than the comic says."],
-"why":"✓ Correct. 30,000 is about 12 times too big. Propaganda can be about something real and still stretch the facts.",
-"hint":"Compare 30,000 to the first line of the fact file."
+"check2": {
+"tag": "Second check · Use the fact file",
+"q": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">The Red Army killed \"some 30,000 Hungarians.\"</span><span class=\"rl\">About 2,500 Hungarians were killed, and about 200,000 fled the country.</span></span><b class=\"kf\">Know this</b><span class=\"line\">In 1968, Warsaw Pact troops also crushed the \"Prague Spring\" in Czechoslovakia.</span></span>The last caption says revolts were also crushed in East Germany and Poland. Then Czechoslovakia in 1968. What did people in Eastern Europe learn?",
+"right": "Revolts would be crushed by Soviet tanks",
+"wrong": [
+"Free elections would come within a few years",
+"The UN would send troops to protect them",
+"The U.S. would send its army to help them"
+],
+"why": "✓ Correct. That fear kept people quiet for years. It's why 1989, when the tanks didn't come, was such a shock.",
+"hint": "Read the last caption on the page: \"Similar revolts were crushed in...\" Then the \"Know this\" line."
 }
 },
 {
-"short":"The Wall",
-"ref":"Reader page 2 · Berlin, from a 1960 comic",
-"title":"2. Why did East Germany build a wall?",
-"from":2,"to":2,
-"check":{
-"page":2,
-"tag":"Reading check · Reader page 2",
-"q":"Look at the top left panel on reader page 2. What does the comic call West Berlin?",
-"right":"An island of freedom inside communist East Germany.",
-"wrong":["The new capital city of communist East Germany.","A city run by East Germany and the Soviet Union.","A city that was torn down by bombs and never rebuilt."],
-"why":"✓ Correct. West Berlin was free, but it sat 100 miles inside communist East Germany. That made it an escape hatch.",
-"hint":"Read the words on the white map under the hand."
+"short": "The Wall",
+"ref": "Reader page 2 · Berlin, from a 1960 comic",
+"title": "2. Why did East Germany build a wall?",
+"from": 2,
+"to": 2,
+"check": {
+"page": 2,
+"tag": "Reading check · Reader page 2",
+"q": "Look at the map at the top left. West Berlin was free, but where was it?",
+"right": "Deep inside communist East Germany",
+"wrong": [
+"On the coast, next to West Germany's ports",
+"Inside the Soviet Union, near Moscow",
+"On the border between Germany and Poland"
+],
+"why": "✓ Correct. West Berlin was an escape hatch. Millions of East Germans fled through it.",
+"hint": "Read the words on the white map under the hand: West Berlin, East Berlin, East Germany."
 },
-"check2":{
-"tag":"Think it through · Use the fact file",
-"q":"<span class=\"declass file\"><b>Fact file · The Berlin Wall</b><span class=\"line\"><i>1949–1961:</i> About 3 million East Germans fled to the West, many by just walking into West Berlin.</span><span class=\"line\"><i>August 13, 1961:</i> East Germany put up the Wall overnight, with guards, dogs, and a \"death strip.\"</span><span class=\"line\"><i>1961–1989:</i> At least 140 people were killed trying to cross it.</span></span>Who was the Wall really built to stop?",
-"right":"East Germans trying to escape to the West.",
-"wrong":["West German soldiers trying to invade the East.","American spies trying to sneak into East Berlin.","Soviet troops trying to leave East Germany."],
-"why":"✓ Correct. East Germany said the Wall protected it from the West. But the guns pointed at its own people trying to get out.",
-"hint":"Read the first line. Who was leaving, and where were they going?"
+"check2": {
+"tag": "Second check · Use the fact file",
+"q": "<span class=\"declass\"><b>Fact file</b><span class=\"line\">From 1949 to 1961, about 3 million East Germans fled to the West. On August 13, 1961, East Germany began building the <b>Berlin Wall</b>.</span><span class=\"line\">At least 140 people were killed or died at the Wall.</span></span>West Berlin was a free island inside East Germany. East Germany built the Berlin Wall around it in 1961. Who was it really built to stop?",
+"right": "East Germans trying to escape to the West",
+"wrong": [
+"Smugglers carrying Western goods into the East",
+"West German soldiers invading the East",
+"American spies sneaking into East Berlin"
+],
+"why": "✓ Correct. About 3 million East Germans had fled. The Wall was built to keep East Germany's own people in.",
+"hint": "West Berlin was an \"island of freedom\" inside East Germany (the map at the top left). Then read the first line of the fact file: who kept fleeing there?"
 }
 },
 {
-"short":"Watched",
-"ref":"Reader page 3 · Spying on your own people",
-"title":"3. How did the government control people inside the Wall?",
-"from":3,"to":3,
-"check":{
-"page":3,
-"tag":"Reading check · Reader page 3",
-"q":"Read the middle panels on reader page 3. What did the cardinal find, and what does Bishop Dibelius say is happening to children?",
-"right":"A hidden microphone, and children saying what they don't believe.",
-"wrong":["A secret escape tunnel, and children running away to the West.","A stolen Bible, and children who stopped going to church.","A letter from the FBI, and children being forced to join the army."],
-"why":"✓ Correct. When you know you might be recorded, you start saying what's safe, not what you think. Bishop Dibelius led a church in both East and West Germany.",
-"hint":"Read the panel with the wire recorder and the bishop's quote."
+"short": "Watched",
+"ref": "Reader page 3 · Spying on your own people",
+"title": "3. How did the government control people inside the Wall?",
+"from": 3,
+"to": 3,
+"check": {
+"page": 3,
+"tag": "Reading check · Reader page 3",
+"q": "Read the middle panels. How were people in communist countries watched?",
+"right": "Hidden microphones recorded what they said",
+"wrong": [
+"They had to sign in at police stations daily",
+"Teachers graded what families said at home",
+"Soldiers searched every home each night"
+],
+"why": "✓ Correct. When you might be recorded, you say what's safe, not what you think. The bishop says even children began saying things they didn't believe.",
+"hint": "Read the panel with the wire recorder and the bishop's quote."
 },
-"prompt":"Read the fact file about the Stasi. How did spying help East Germany control people, even without using tanks?",
-"stem":"<span class=\"declass file\"><b>Fact file · The Stasi</b><span class=\"line\"><i>Who:</i> East Germany's secret police. By 1989 it had about 91,000 workers and about 189,000 secret informers: neighbors, coworkers, even family members.</span><span class=\"line\"><i>What:</i> It bugged homes, opened mail, and kept files on millions of people.</span><span class=\"line\"><i>Why it worked:</i> No one knew who was an informer, so people stayed quiet.</span></span>Write 1–2 sentences. Start like this: <i>The Stasi controlled people by ___. This worked because ___.</i>",
-"placeholder":"The Stasi controlled people by ___. This worked because ___.",
-"stemText":"The Stasi controlled people by ___. This worked because ___."
+"prompt": "How did spying help East Germany control people, even without using tanks?",
+"stem": "<span class=\"declass\"><b>Fact file</b><span class=\"line\">East Germany's secret police, the <b>Stasi</b>, had about 91,000 workers and 189,000 informers by 1989. That's about 1 informer for every 90 people.</span><span class=\"line\">Neighbors, coworkers, even family members reported on each other.</span></span>Write 1–2 sentences. Start like this: <i>The Stasi controlled people by ___. This worked because ___.</i>",
+"stemText": "The Stasi controlled people by ___. This worked because ___.",
+"placeholder": "The Stasi controlled people by ___. This worked because ___."
 },
 {
-"short":"1989",
-"ref":"Reader page 4 · The old Soviet answer",
-"title":"4. 1989: Why didn't the tanks come this time?",
-"from":4,"to":4,
-"check":{
-"page":4,
-"tag":"Reading check · Reader page 4",
-"q":"Read the bottom panels on reader page 4. What did Khrushchev order when he heard the Hungarians wanted freedom?",
-"right":"Send in tanks, guns, and planes until they are smashed.",
-"wrong":["Hold free elections so Hungarians can vote on it.","Ask the United Nations to step in and calm things down.","Let Hungary go its own way, because times have changed."],
-"why":"✓ Correct. \"I want them crushed!\" Now read the fact file to see what the Soviet leader did in 1989.",
-"hint":"Read the bubble of the man pointing at his desk."
+"short": "1989",
+"ref": "Reader page 4 · The old Soviet answer",
+"title": "4. 1989: Why didn't the tanks come this time?",
+"from": 4,
+"to": 4,
+"check": {
+"page": 4,
+"tag": "Reading check · Reader page 4",
+"q": "Read the bottom panels. What did Khrushchev order in 1956 when Hungarians wanted freedom?",
+"right": "Send tanks and planes to crush them",
+"wrong": [
+"Hold free elections so Hungarians can vote",
+"Ask the UN to calm things down",
+"Let Hungary go its own way"
+],
+"why": "✓ Correct. \"I want them crushed!\" In 1989, the Soviet leader made the opposite choice. Read the box below.",
+"hint": "Read the bubble of the man pointing at his desk."
 },
-"prompt":"Use the fact file to explain the chain of events that brought the Wall down. Name at least two links in the chain.",
-"stem":"<span class=\"declass file\"><b>Fact file · 1989, step by step</b><span class=\"line\"><i>The new leader:</i> Mikhail Gorbachev ran the USSR from 1985. Its economy was failing. He said each country in Eastern Europe could choose its own way, and he would not send tanks.</span><span class=\"line\"><i>June:</i> In Poland, the workers' union Solidarity wins free elections. No tanks come.</span><span class=\"line\"><i>Summer:</i> Hungary opens its border with Austria. Tens of thousands of East Germans escape through it.</span><span class=\"line\"><i>October:</i> 70,000 people march in Leipzig, East Germany: \"We are the people!\" No one shoots.</span><span class=\"line\"><i>November 9:</i> East Germany says people may cross. Crowds rush the Wall, and guards open the gates.</span></span>Write 1–2 sentences. Start like this: <i>First, ___. That led to ___. Then ___.</i>",
-"placeholder":"First, ___. That led to ___. Then ___.",
-"stemText":"First, ___. That led to ___. Then ___."
+"prompt": "Explain the chain of events that brought the Wall down. Name at least two links in the chain.",
+"stem": "<span class=\"declass\"><b>Fact file</b><span class=\"line\">In 1985, <b>Gorbachev</b> took over the USSR. Its economy was failing, and he said he would not send tanks to stop change in Eastern Europe.</span><span class=\"line\">1989: Poland's union Solidarity wins elections. Hungary opens its border. East Germans march. On November 9, the Wall opens.</span></span>Write 1–2 sentences. Start like this: <i>First, ___. That led to ___. Then ___.</i>",
+"stemText": "First, ___. That led to ___. Then ___.",
+"placeholder": "First, ___. That led to ___. Then ___."
 }
 ],
-questions:["(Check) The comic's 30,000 vs. the real numbers","(Check) Who was the Berlin Wall built to stop?","How did the Stasi control people without tanks?","Explain the chain of events that brought the Wall down."],
+questions:["(Check) Why were people afraid to rise up after 1956?", "(Check) Who was the Berlin Wall built to stop?", "How did spying help East Germany control people, even without using tanks?", "Explain the chain of events that brought the Wall down. Name at least two links in the chain."],
 validate(s){if(!s.name)return{text:"Type your first name + last initial (like Jordan M.) at the top of the questions.",focus:"studentName"};
  const mc=[1,2,3,4].find(i=>!s.checkDone(i));if(mc)return{text:"Get the check right for part "+mc+" first.",part:mc};
  const m2=[1,2].find(i=>!s.check2Done(i));if(m2)return{text:"Get the second check right for part "+m2+" first.",part:m2};
