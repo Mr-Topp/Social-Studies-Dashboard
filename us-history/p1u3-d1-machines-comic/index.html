@@ -1,0 +1,186 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>New Machines, New Money | U.S. History Part 1 · Unit 3 Day 1</title>
+<meta name="description" content="Read a 1953 comic about inventions and Andrew Carnegie, then check who paid the price.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600;9..144,800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../shared/graphic-reading.css?v=3">
+<style>
+.flip-layout{grid-template-columns:minmax(0,1.9fr) minmax(320px,1fr)}
+.flip-stage img{min-height:0;max-height:calc(100vh - 150px)}
+.qcol{padding-bottom:100px}
+.intro-line{font-size:1.02rem;margin:0 0 10px}
+.wordhelp{margin:6px 0 0}.wordhelp summary{cursor:pointer;font-weight:750;color:var(--navy)}
+.words{display:flex;flex-wrap:wrap;gap:6px;margin:8px 0 10px;padding:0;list-style:none}
+.words li{background:#fff;border:1px solid #e6dcc8;border-left:4px solid var(--navy);border-radius:8px;padding:3px 9px;font-size:.88rem}
+.declass{display:block;background:#fff;border:2px dashed #18364a;border-radius:10px;padding:8px 11px;margin:6px 0 8px;font-weight:650;color:#22313b;line-height:1.4;font-style:normal}
+.declass > b:first-child{display:block;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#18364a;margin-bottom:2px}
+.declass .line{display:block;margin:3px 0}
+.declass .note{display:block;margin-top:5px;font-weight:600;font-size:.9rem;color:#5b4632}
+.dime{display:inline-block;background:#e6bd64;color:#0f2433;border-radius:999px;font-weight:850;padding:0 9px;margin-right:4px}
+.credits{font-size:.8rem;color:var(--muted);margin:10px 0 0;line-height:1.4}
+.pg-cap{margin:8px 2px 0;font-size:.95rem;line-height:1.35;background:#fff;border:1px solid #e6dcc8;border-left:4px solid #e6bd64;border-radius:8px;padding:6px 10px}.pg-cap:empty{display:none}
+.gr-head{padding-top:18px;padding-bottom:16px}.gr-head h1{margin:6px 0 6px}.gr-head .hook{margin-bottom:8px}
+body.reading-now .choices{opacity:.45;pointer-events:none}
+</style>
+<script src="../../shared/assignments.js?v=20261116m2"></script><script src="../../shared/turnin.js?v=20261116m2"></script></head><body>
+<header class="gr-head" data-years="1876">
+<div class="gr-wrap">
+<div class="kicker">U.S. History · Part 1 · Unit 3 Day 1 · Westward &amp; Industrial Expansion</div>
+<h1>New Machines, New Money</h1>
+<p class="hook"><span class="dime">1876–1900</span>Telephones, light bulbs, and steel made a few men rich and changed everyone's life. Read the 1953 comic's version and check who it skips. 3 pages · 3 checks · 3 short answers. <b>About 20 minutes.</b></p>
+<p class="goal"><b>Today's goal:</b> Explain how new machines changed work and life, and who got rich from them.</p>
+<details class="std-details"><summary>Iowa standards for today</summary>
+<p><b>Standard SS.9-12.US.8</b> — Evaluate the impact of inventions and technological innovations on American society and culture.</p><p><b>Standard SS.9-12.US.12</b> — Analyze diverse ideologies through primary and secondary sources, noting the impact on social, economic, and political institutions during western and industrial expansion.</p>
+</details>
+<nav><a class="back" href="../../">← Class activities</a></nav>
+</div></header>
+
+<nav class="route" aria-label="Your progress"><ol id="flipRoute"></ol></nav>
+
+<main class="gr-main gr-wrap">
+<section class="card">
+<p class="intro-line"><b>You're the fact-checker.</b> For each part: <b>read</b> the comic on the left → get the <b>check</b> right → read the <b>fact file</b> → write 1–2 sentences. Done = all parts green, then turn in at the bottom.</p>
+<details class="wordhelp"><summary>Word help (tap to open)</summary>
+<ul class="words" aria-label="Word help">
+<li><b>Invention</b> = a new machine or idea</li><li><b>Patent</b> = a paper that says only the inventor may sell an invention for a while</li><li><b>Industrialization</b> = switching from making things by hand to making them by machine</li><li><b>Exposition</b> = a big fair that shows off new things</li><li><b>1953 comic</b> = made by the U.S. government to tell America's story in other countries. It shows one point of view.</li>
+</ul></details>
+<p class="welcome" id="welcome" role="status"></p>
+</section>
+
+<div class="flip-layout">
+<section class="flip-reader reading" id="flipReader" aria-label="Pages from the 1953 comic A Picture Story of the United States">
+<div class="flip-bar"><div><p class="eyebrow">The reading</p><h2>A real 1953 comic · 3 pages</h2></div><span class="flip-pos" id="flipPos"></span></div>
+<div class="flip-tools"><button type="button" class="quiet" id="flipBack">← Back a page</button><span class="grow"><span id="flipPart"></span><span id="flipTimer" aria-live="polite"></span></span><button type="button" class="secondary" id="flipNext">Next page →</button><button type="button" class="quiet" id="flipZoom">Make page bigger</button></div>
+<div class="flip-stage"><img id="flipImg" alt="" src="pages/p-01.jpg"></div>
+<p class="pg-cap" id="pgCap" aria-live="polite"></p>
+<p class="flip-cap">Click the page to make it bigger.</p>
+</section>
+
+<div class="qcol">
+<section class="card">
+<label for="studentName">First name + last initial (like Jordan M.)</label><input id="studentName" maxlength="100" autocomplete="off" placeholder="First name + last initial (like Jordan M.)" required>
+</section>
+<div id="flipCards"></div>
+<div class="flip-nav"><button type="button" class="quiet" id="flipBack2">← Back</button><button type="button" class="secondary" id="flipNext2">Next page →</button><p class="flip-why" id="flipWhy" aria-live="polite"></p></div>
+<section class="card finish" id="finish">
+<h2>Turn in your work</h2>
+<div class="actions"><button id="submitBtn" class="primary" type="button">Turn in answers</button></div><p id="submitStatus" class="status" role="status" aria-live="polite"></p><p class="reader-note">Your work saves on this device, so you can come back later. Your teacher sees it after you turn it in.</p>
+<p class="credits">Comic: <i>A Picture Story of the United States</i> (1953), made for the United States Information Service, a U.S. government agency. Public domain. Scan: University of Nebraska–Lincoln Libraries, educational comics collection, via the Internet Archive.</p>
+</section>
+<p class="credits" style="text-align:center"><button id="clearBtn" class="quiet" type="button" style="font-size:.8rem">Start over</button></p>
+</div></div></main>
+<div class="flip-big" id="flipBig" hidden role="dialog" aria-label="Bigger page"><button type="button" class="quiet" id="flipBigClose">✕ Close</button><img id="flipBigImg" alt="Bigger view of the current page"></div>
+<script>
+window.FLIP={
+title:"Pages from the 1953 comic A Picture Story of the United States",prefix:"ush-p1u3d1-machines-comic-",pages:3,readSeconds:8,lockSeconds:8,
+alts:["Reader page 1. The 100th anniversary of the United States was marked in 1876 by a great exposition in Philadelphia. A woman says: What a wonderful toy, I can hear someone speaking in another room. A man answers: It is no toy, my child, it is Alexander Graham Bell's telephone. Others marvel at an electric arc light. A box says three years later Thomas Edison perfected the light bulb.", "Reader page 2. A boy named Andrew Carnegie arrives in America with his family, with the Statue of Liberty behind them. He asks: Where do we go now, Father? His father answers: To Pittsburgh, laddy, where we have relatives. They will help us find work. A box says he was 13 when his father, a Scottish weaver, brought the family to America.", "Reader page 3. A red-brick Carnegie Free Library with a flag. A box says: Remembering his own struggle for education, he gave millions for public libraries, for a great technical institute, for a world peace organization. He did indeed repay his adopted land."],
+assignmentId:"ush-p1u3-d1-machines-comic",api:"https://fynn-class-assignment-submissions-20261024.neotboy.chatgpt.site/api/submit",
+lockedText:"This box opens when you get the check right.",
+clearConfirm:"Start over? This clears your checks and answers on this device.",
+successText:"Turned in! Your teacher got your 3 checks and 3 answers. You are done.",
+wrongText:(c,left)=>left>0?"Not quite. "+c.hint+" Try again in "+left+"…":"Not quite. "+c.hint+" The choices were mixed up. Try again.",
+parts:[
+{
+"short": "Inventions",
+"ref": "Reader page 1",
+"title": "1. A wonderful toy?",
+"from": 1,
+"to": 1,
+"check": {
+"page": 1,
+"tag": "Reading check · Reader page 1",
+"q": "Read the speech bubbles on the left. What does the woman first think the telephone is?",
+"right": "A wonderful toy.",
+"wrong": [
+"A new kind of clock.",
+"A tool for farming.",
+"A music box."
+],
+"why": "✓ Correct. People had never heard a voice over a wire before. By 1881, Bell's company ran about 133,000 phones.",
+"hint": "Read the woman's speech bubble on the left."
+},
+"prompt": "Which changed American life more: the telephone or the light bulb? Name one group it helped.",
+"stem": "<span class=\"declass\"><b>Fact file</b><span class=\"line\">Before the phone, the fastest way to send news was the <b>telegraph</b>, in dots and dashes only trained operators could read. Bell's 1876 <b>telephone</b> let anyone talk by voice.</span><span class=\"line\">Edison's team made a long-lasting <b>light bulb</b> in 1879. In 1882, his power station sent electricity to buildings in New York City, so factories and stores could work after dark.</span><span class=\"line\">Offices needed typists and phone operators. In 1870, about 1 in 20 office typists was a woman. By 1900, about 3 in 4 were.</span></span>Write 1–2 sentences. Start like this: <i>The ___ changed American life more because ___. It helped ___.</i>",
+"stemText": "The ___ changed American life more because ___. It helped ___.",
+"placeholder": "The ___ changed American life more because ___. It helped ___."
+},
+{
+"short": "Carnegie",
+"ref": "Reader page 2",
+"title": "2. Rags to riches",
+"from": 2,
+"to": 2,
+"check": {
+"page": 2,
+"tag": "Reading check · Reader page 2",
+"q": "Read the speech bubbles. Why is the family going to Pittsburgh?",
+"right": "Relatives there will help them find work.",
+"wrong": [
+"The father already owns a steel mill there.",
+"The government gave them free land there.",
+"A school there offered the boy a scholarship."
+],
+"why": "✓ Correct. Like millions of immigrants, they followed family to find jobs.",
+"hint": "Read the father's speech bubbles."
+},
+"prompt": "Fact-check the comic's age for Carnegie. Then: he got rich. Who paid the price?",
+"stem": "<span class=\"declass\"><b>Fact file</b><span class=\"line\">Small catch: Carnegie was born in November 1835 and arrived in 1848. He was <b>12</b>, not 13.</span><span class=\"line\">Carnegie used the <b>Bessemer process</b>, which blew air through melted iron to make steel fast and cheap. U.S. steel went from almost nothing in 1870 to about 10 million tons a year by 1900.</span><span class=\"line\">His steelworkers often worked <b>12-hour shifts</b> in hot, dangerous mills.</span></span>Write 1–2 sentences. Start like this: <i>Carnegie was really ___. He got rich because ___, but ___ paid a price because ___.</i>",
+"stemText": "Carnegie was really ___. He got rich because ___, but ___ paid a price because ___.",
+"placeholder": "Carnegie was really ___. He got rich because ___, but ___ paid a price because ___."
+},
+{
+"short": "Giving",
+"ref": "Reader page 3",
+"title": "3. Did he repay his land?",
+"from": 3,
+"to": 3,
+"check": {
+"page": 3,
+"tag": "Reading check · Reader page 3",
+"q": "Read the box at the bottom. What did Carnegie give millions for?",
+"right": "Libraries, a technical school, and a peace group.",
+"wrong": [
+"Hospitals, new railroads, and city parks.",
+"Higher pay and shorter days for his workers.",
+"Churches, colleges, and soldiers' homes."
+],
+"why": "✓ Correct. Carnegie believed rich people should give their money away while alive.",
+"hint": "Read the box at the bottom of reader page 3."
+},
+"prompt": "Carnegie wrote, \"The man who dies thus rich dies disgraced.\" Would his steelworkers agree? Why or why not?",
+"stem": "<span class=\"declass\"><b>Fact file</b><span class=\"line\">In <b>The Gospel of Wealth</b> (1889), Carnegie said rich people should give away their fortunes to help their communities.</span><span class=\"line\">Carnegie's money built about <b>100</b> public libraries in Iowa.</span><span class=\"line\">His workers didn't get a say in how the money was spent, and they still worked long shifts for low pay.</span></span>Write 1–2 sentences. Start like this: <i>His workers would (agree / disagree) because ___.</i>",
+"stemText": "His workers would (agree / disagree) because ___.",
+"placeholder": "His workers would (agree / disagree) because ___."
+}
+],
+questions:["Which changed American life more: the telephone or the light bulb? Name one group it helped.", "Fact-check the comic's age for Carnegie. Then: he got rich. Who paid the price?", "Carnegie wrote, \"The man who dies thus rich dies disgraced.\" Would his steelworkers agree? Why or why not?"],
+validate(s){if(!s.name)return{text:"Type your first name + last initial (like Jordan M.) at the top of the questions.",focus:"studentName"};
+ const mc=[1, 2, 3].find(i=>!s.checkDone(i));if(mc)return{text:"Get the check right for part "+mc+" first.",part:mc};
+ const ma=[1, 2, 3].find(i=>!s.answer(i));if(ma)return{text:"Write your answer for part "+ma+" before turning in.",part:ma,focus:"answer"+ma};
+ for(const i of [1, 2, 3]){const j=window.classJunkStop&&window.classJunkStop(document.getElementById("answer"+i));if(j)return{text:"Part "+i+": "+j,part:i}}return null},
+buildAnswers(s){const a={Standard:"SS.9-12.US.8, SS.9-12.US.12","First-try correct":[1, 2, 3].filter(i=>(s.tries(i)||1)===1).length+" of 3"};
+ this.questions.forEach((q,i)=>a[q]=s.answer(i+1));a["Reading checks"]="3 of 3 correct · tries: "+[1, 2, 3].map(i=>s.tries(i)||1).join(", ");return a}
+};
+</script>
+<script src="../../shared/flip-reader.js?v=5urls"></script>
+<script>
+// One-line "what's going on" caption under each page, for kids who missed the lecture.
+(function(){const caps=["<b>1876.</b> The country's 100th birthday fair shows off new inventions.", "<b>1848.</b> A poor Scottish family arrives. Their son will become one of the richest men in the world.", "<b>1880s–1910s.</b> Carnegie gives away much of his fortune."];
+ const pos=document.getElementById("flipPos"),cap=document.getElementById("pgCap");
+ const sync=()=>{const m=pos.textContent.match(/page (\d+)/);cap.innerHTML=m?caps[+m[1]-1]||"":""};
+ new MutationObserver(sync).observe(pos,{childList:true,characterData:true,subtree:true});sync();})();
+// Choices wait for the read timer, and "Not quite" scrolls into view (same as the other readings).
+(function(){
+  document.addEventListener("click",e=>{const b=e.target.closest("#flipNext2");if(!b||!/Next part|Turn in/.test(b.textContent))return;
+    const a=document.querySelector(".flip-part:not([hidden]) textarea:not([disabled])");if(!a||!a.value.trim()||!window.classJunkStop)return;
+    if(window.classJunkStop(a)){e.stopImmediatePropagation();e.preventDefault()}},true);
+  const t=document.getElementById("flipTimer");
+  const sync=()=>document.body.classList.toggle("reading-now",t.textContent.trim()!=="");
+  new MutationObserver(sync).observe(t,{childList:true,characterData:true,subtree:true});sync();
+  document.getElementById("flipCards").addEventListener("click",e=>{if(!e.target.closest(".choice"))return;
+    setTimeout(()=>{const f=[...document.querySelectorAll(".flip-part:not([hidden]) .fb")].find(x=>x.textContent.trim());
+      if(f){const r=f.getBoundingClientRect();if(r.bottom>innerHeight-80||r.top<0)f.scrollIntoView({behavior:"smooth",block:"center"})}},120)});
+})();
+</script>
+</body></html>
