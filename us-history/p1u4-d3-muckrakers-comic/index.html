@@ -74,7 +74,7 @@ body.reading-now .choices{opacity:.45;pointer-events:none}
 <script>
 window.FLIP={
 title:"Pages from the 1953 comic A Picture Story of the United States",prefix:"ush-p1u4d3-muckrakers-comic-",pages:2,readSeconds:8,lockSeconds:8,
-alts:["Reader page 1. A box says the motion picture changed American leisure, especially in small towns. From lonely farms, people came in their new automobiles to be entertained and to shop in chain groceries and five-and-ten-cent stores. The face of the country was changing. Below is a small town with a school, stores, and a movie theater.", "Reader page 2. A box says Roosevelt fought against the trusts that sought control of industries such as steel, oil, and railroads, and insisted the government supervise them. An old cartoon shows Roosevelt swinging a big club at a figure labeled R.R. Trust. A box says: As this cartoon of the day indicates, people hailed him as the trust buster."],
+alts:["Reader page 1. A box says the motion picture changed American leisure, especially in small towns. From lonely farms, people came in their new automobiles to be entertained and to shop in chain groceries and five-and-ten-cent stores. The face of the country was changing. Below is a small town with a school, stores, and a movie theater.", "Reader page 2. A box says Roosevelt fought against the trusts that sought control of industries such as steel, oil, and railroads, and insisted the government supervise them. A box says: As this cartoon of the day indicates, people hailed him as the trust buster. (The old cartoon itself has been removed.)"],
 assignmentId:"ush-p1u4-d3-muckrakers-comic",api:"https://fynn-class-assignment-submissions-20261024.neotboy.chatgpt.site/api/submit",
 lockedText:"This box opens when you get the check right.",
 clearConfirm:"Start over? This clears your checks and answers on this device.",
@@ -122,7 +122,7 @@ parts:[
 "The peacemaker"
 ],
 "why": "✓ Correct. Roosevelt went after trusts he thought hurt the public. But reporters dug up a lot of the proof first.",
-"hint": "Read the box at the bottom of the cartoon."
+"hint": "Read the box at the bottom of reader page 2."
 },
 "prompt": "Tarbell's articles, Sinclair's novel, or Hine's photos: which changed the most? Name one problem that didn't change.",
 "stem": "<span class=\"declass\"><b>Fact file</b><span class=\"line\"><b>Ida Tarbell</b> dug through court records for years. From 1902 to 1904, <i>McClure's</i> magazine printed her 19-part series on how Rockefeller crushed his rivals. In 1911, the Supreme Court broke Standard Oil into 34 companies.</span><span class=\"line\"><b>Lewis Hine</b> photographed thousands of children in mills and mines starting in 1908. Child labor wasn't banned nationwide until 1938.</span><span class=\"line\">Roosevelt named these reporters <b>muckrakers</b> in 1906: people who rake up filth.</span></span>Write 1–2 sentences. Start like this: <i>___ changed the most because ___. One problem that didn't change was ___.</i>",
@@ -142,7 +142,7 @@ buildAnswers(s){const a={Standard:"SS.9-12.US.16, SS.9-12.US.17","First-try corr
 <script src="../../shared/flip-reader.js?v=5urls"></script>
 <script>
 // One-line "what's going on" caption under each page, for kids who missed the lecture.
-(function(){const caps=["<b>1900s–1910s.</b> Families start buying food made far away, in chain stores.", "<b>1902–1909.</b> President Theodore Roosevelt goes after the trusts."];
+(function(){const caps=["<b>1900s–1910s.</b> Families start buying food made far away, in chain stores.", "<b>1902–1909.</b> Full top box: \"Roosevelt fought against the trusts that sought control of such industries as steel, oil and railroads. He insisted the government supervise them.\""];
  const pos=document.getElementById("flipPos"),cap=document.getElementById("pgCap");
  const sync=()=>{const m=pos.textContent.match(/page (\d+)/);cap.innerHTML=m?caps[+m[1]-1]||"":""};
  new MutationObserver(sync).observe(pos,{childList:true,characterData:true,subtree:true});sync();})();
