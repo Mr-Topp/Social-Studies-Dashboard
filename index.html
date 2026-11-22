@@ -164,6 +164,7 @@ footer a{color:var(--muted)}
 <script src="shared/recaps.js?v=20261115soc89"></script>
 <script src="shared/targets.js?v=20261115soc89"></script>
 <script src="teacher-submissions/presentations.js?v=20261117civ"></script>
+<script src="shared/must-watch.js?v=20261121mw1"></script>
 <script src="shared/turnin.js?v=20261109nm1"></script>
 </head>
 <body>
@@ -801,7 +802,10 @@ const missing = sortItems(online.filter(isMissing));
     const recap = recapOf(g.ex);
     const dg = goalOf(g.unit, g.day), dgoal = dg && dg.t && dg.t.length ? `<div class="dgoal"><b>🎯 Goal:</b>${goalList(dg)}</div>` : "";
     const sl = slidesFor(g.unit, g.day).map(s => `<div class="qrow sliderow"><div><span class="qtitle">📽 ${esc(s.label)} from this day</span><span class="qkind">See what the class learned</span></div><a class="btn qgo soft" href="${esc(s.url)}" target="_blank" rel="noopener">Open ↗</a></div>`).join("");
-    return `<div class="dgroup"><div class="dhead">${esc(head)}</div>${recap ? `<p class="drecap">In class: ${esc(recap)}</p>` : ""}${dgoal}${sl}${list.map(missRow).join("")}</div>`;
+    // Must-watch videos for a missed day (Fynn, 11-21): only the 1-2 that best explain the day, from shared/must-watch.js.
+    // The full video list stays teacher only. Opens on YouTube in a new tab.
+    const vids = (((window.CLASS_MUST_WATCH || {})[course] || {})[g.unit + "|" + (civ ? 0 : g.day)] || []).slice(0, 2).map(v => `<div class="qrow sliderow"><div><span class="qtitle">🎬 ${esc(v[1])}</span><span class="qkind">Video · watch this to catch up</span></div><a class="btn qgo soft" href="https://www.youtube.com/watch?v=${encodeURIComponent(v[0])}${v[2] ? "&t=" + (+v[2]) + "s" : ""}" target="_blank" rel="noopener">Watch ↗</a></div>`).join("");
+    return `<div class="dgroup"><div class="dhead">${esc(head)}</div>${recap ? `<p class="drecap">In class: ${esc(recap)}</p>` : ""}${dgoal}${sl}${vids}${list.map(missRow).join("")}</div>`;
   }).join("");
   const readBtn = "";   // read-aloud lives inside the activities (shared/turnin.js), not on this page
   let status;
