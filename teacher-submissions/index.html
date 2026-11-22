@@ -882,9 +882,9 @@ function linksHtml() {
   };
   const actDay = id => { const m = (REG[id].title || "").match(/^Days? (\d+)/); return REG[id].day || (m ? +m[1] : 0); };
   // Blue reminder: units Fynn still needs to go through again (Fynn, 2026-11-03). Delete a line when it's done.
-  const REVIEW_AGAIN = new Set(["us-history|5", "us-history|6", "world-history|3", "sociology|4"]);
+  const REVIEW_AGAIN = new Set([]); // all cleared (Fynn, 2026-11-22)
   // Purple reminder: units that still need graphic novels added (Fynn, 2026-11-03). Units in REVIEW_AGAIN get it too.
-  const ADD_GN = new Set([...REVIEW_AGAIN]); // Government units removed (Fynn, 2026-11-04); U.S. History Unit 4 removed from both (Fynn, 2026-11-17)
+  const ADD_GN = new Set([]); // all cleared (Fynn, 2026-11-22) // Government units removed (Fynn, 2026-11-04); U.S. History Unit 4 removed from both (Fynn, 2026-11-17)
   // Unit scale pictures (Fynn, 2026-11-05): copied from each unit's Schoology page. Teacher dashboard only.
   const SCALE_PICS = { "sociology|1": "scales/sociology-u1.png", "sociology|2": "scales/sociology-u2.png", "sociology|3": "scales/sociology-u3.png", "sociology|4": "scales/sociology-u4.png",
     "government|1": "scales/government-u1.png", "government|2": "scales/government-u2.png", "government|3": "scales/government-u3-6.png", "government|4": "scales/government-u3-6.png", "government|5": "scales/government-u3-6.png", "government|6": "scales/government-u3-6.png",
