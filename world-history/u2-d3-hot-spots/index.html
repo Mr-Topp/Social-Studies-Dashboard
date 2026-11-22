@@ -310,6 +310,50 @@ button.pin.shake{animation:pshake .45s}
 .radar.mini{width:100%;max-width:380px;box-shadow:0 6px 0 #1d2b4533;transform:rotate(-1deg)}
 @media (max-width:640px){  .both-g{grid-template-columns:1fr}
   .pin{width:34px;height:34px;font-size:1rem}.pin.found{width:22px;height:22px}.pin-l{font-size:.62rem;padding:1px 4px}}
+/* ---------- Chromebook fit (Fynn, 11-22): no scrolling at 1366x768 ---------- */
+@media (min-width:900px) and (max-height:830px){
+  body{font-size:17px}
+  .hud{padding-top:3px;padding-bottom:2px}.hud-step{margin-top:2px}
+  main{padding-top:6px}
+  .sc-top{padding:3px 16px 4px;border-bottom-width:3px}.sc-top h2{font-size:1.2rem}
+  .sc-job{padding:6px 16px 0}.job li{padding:3px 9px;font-size:.92rem}.job li::before{width:22px;height:22px}
+  .board{padding:8px 16px 10px;gap:12px}
+  .side{gap:6px}
+  .map-wrap{padding:3px}.board>.map-wrap .kmap{max-height:calc(100vh - 290px);width:auto;max-width:100%;margin:auto}
+  .chainbox{display:flex;gap:8px;align-items:center;padding:4px 8px;margin:0 0 6px}
+  .ch-h{margin:0;flex:none;font-size:.8rem}.chain{gap:4px}.chain li{padding:1px 8px;font-size:.8rem}.chain li+li{margin-left:9px}
+  .cause{padding:5px 12px;margin:0 0 6px;border-width:2px;border-left-width:8px}.cause p{font-size:1.02rem;line-height:1.3;margin:2px 0 0}
+  .bub .av{width:38px;height:38px;font-size:1.4rem;border-width:2px}.bub .bt{padding:4px 10px}.bub .bt p{font-size:.96rem}.spinq{font-size:.98rem;margin-top:0}
+  .pick{padding:6px 10px}.pick-h{margin:0 0 4px;font-size:1rem}
+  .choices{gap:5px}.reply{padding:5px 12px;min-height:40px;border-width:2px}
+  .reply .src-q{font-size:.98rem}.reply .src-h{font-size:.74rem}
+  .msg{margin:4px 0 0}.linked{padding:5px 10px;margin:0 0 6px}
+  .result{padding:8px 12px}.reveal{padding:6px 12px;margin:6px 0 2px}.reveal p{font-size:1rem}
+  .go{margin-top:8px;padding:9px 22px;min-height:42px}
+  /* ending: front page on top, real cost beside the next button */
+  .board.nomap .side{display:grid;grid-template-columns:1.5fr 1fr;gap:8px 12px;align-items:start}
+  .board.nomap .side>*{grid-column:1/-1;margin-top:0;margin-bottom:0}
+  .board.nomap .side>.memorial{grid-column:1;grid-row:2/span 2}
+  .board.nomap .side>.memorial~.reveal{grid-column:2;grid-row:2}
+  .board.nomap .side>.memorial~.go{grid-column:2;grid-row:3;align-self:end}
+  .front{padding:6px 14px}.front .masthead{margin:0 0 4px}.e-big{font-size:2.2rem}.headline h3{font-size:1.5rem}.front>p{font-size:1rem;margin:4px 0;line-height:1.35}
+  .memorial{padding:8px 14px}.memorial p{margin:2px 0;font-size:.98rem}
+  /* writing page */
+  .memo{padding:8px 14px}.memo label{margin:6px 0 2px}.memo .stem{margin:0 0 2px}
+  .memo textarea{height:66px;min-height:0;padding:6px 10px}
+  .memo .namel{display:inline-block;margin:8px 10px 0 0}.memo #nameBox2{display:inline-block;width:300px;padding:6px 10px}
+  .memo .vrow{display:inline-flex;margin-left:10px;vertical-align:middle}.memo .vrow .go{margin-top:0}
+  .foot{margin-top:6px}
+  /* radar result: map on the left, "why both sides cared" + Next on the right */
+  .board.nomap .side:has(>.both){grid-template-columns:1fr 1fr;grid-template-rows:auto auto 1fr auto}
+  .board.nomap .side:has(>.both)>.rad-h{font-size:1rem;margin:0}
+  .board.nomap .side:has(>.both)>.radar{grid-column:1;grid-row:2}
+  .board.nomap .side:has(>.both)>.wlegend{grid-column:1;grid-row:3;align-self:start}
+  .board.nomap .side:has(>.both)>.wlegend .wsrc{margin-left:0;flex-basis:100%}
+  .board.nomap .side:has(>.both)>.both{grid-column:2;grid-row:2/span 2;padding:8px 12px}
+  .board.nomap .side:has(>.both)>.go{grid-column:2;grid-row:4}
+  .both-g{grid-template-columns:1fr;gap:6px}.both .bs p{margin:2px 0}.both .real{margin:6px 0 0;padding:5px 10px;font-size:.92rem}
+}
 </style>
 <script src="../../shared/assignments.js?v=20261105fb1"></script>
 <script src="../../shared/turnin.js?v=20261105fb1"></script>

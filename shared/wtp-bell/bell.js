@@ -118,6 +118,7 @@
     }
   });
   document.getElementById("restartBtn").onclick = () => {
+    if (st.done && !isTest()) return;   // stays locked after turn-in (Fynn, 11-22); Test T. can still restart
     if (!confirm("Start over? This clears only this bell ringer's progress on this device.")) return;
     st = { step: 0, wrong: {} }; save(); if (window.classFirstTry) window.classFirstTry.reset(); render(false);
   };

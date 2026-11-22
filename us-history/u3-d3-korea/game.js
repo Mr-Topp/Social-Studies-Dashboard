@@ -392,7 +392,7 @@
         <div class="t-row"><input id="nameBox" maxlength="60" autocomplete="off" placeholder="First name + last initial (like Jordan M.)" value="${esc(st.name)}">
         <button type="button" class="go start" id="startBtn">Start →</button></div>
         <p id="introMsg" class="msg" role="status"></p></div>
-        <p class="fict">You and your newspaper are made up. Every event, date, and quote is real.</p>
+        <p class="fict">You and your newspaper are made up. The events and dates are real. The press office's lines are spin, so check them.</p>
       </div>
       <div class="t-art" aria-hidden="true"><div class="map-wrap mini">${mapSvg({ line: "pusan" })}</div>
         <div class="t-cast"><span>🧑‍💼</span><span class="vs">VS</span><span>📣</span></div></div></div></section>`;

@@ -205,6 +205,7 @@
 
   // ---- Start over (bottom of page): clears only this bell ringer for this name on this Chromebook ----
   $("restartBtn").onclick = () => {
+    if (st.done && !isTest()) return;   // stays locked after turn-in (Fynn, 11-22); Test T. can still restart
     if (!confirm("Start over? This clears only this bell ringer's progress on this device.")) return;
     try { localStorage.removeItem(KEY + name.toLowerCase()); } catch (e) {}
     st = fresh(); view = -1; $("welcome").innerHTML = ""; draw();

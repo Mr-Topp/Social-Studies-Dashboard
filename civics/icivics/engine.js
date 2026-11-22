@@ -314,7 +314,8 @@ function renderEnd(){
 function render(){ header(); if(!S) return renderStart(); if(S.part==="END") return renderEnd(); renderPart(); }
 document.getElementById("restart").onclick=e=>{
   e.preventDefault(); if(!S) return;
-  const box=$(`<div class="modal"><div class="box" style="max-width:380px;text-align:center"><p style="font-weight:800;font-size:17px;margin:0 0 12px">Erase your answers and start over?</p><button class="btn ghost" id="no">Keep my work</button> <button class="btn" id="yes" style="background:var(--accent2)">Start over</button></div></div>`);
+  if(S.turnedIn && !(window.classIsTestT && window.classIsTestT())) return;   // stays locked after turn-in (Fynn, 11-22)
+  const box=$(`<div class="modal"><div class="box" style="max-width:380px;text-align:center"><p style="font-weight:800;font-size:17px;margin:0 0 12px">Erase your answers and start over?</p><button class="btn ghost" id="no">Keep my work</button> <button class="btn" id="yes" style="background:var(--accent2)">Yes, erase it</button></div></div>`);
   document.body.appendChild(box);
   box.querySelector("#no").onclick=()=>box.remove();
   box.querySelector("#yes").onclick=()=>{ try{ localStorage.removeItem(KEY+S.name.toLowerCase()); }catch(x){} S=null; box.remove(); render(); };

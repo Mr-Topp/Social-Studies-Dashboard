@@ -269,7 +269,7 @@ textarea{width:100%;font:inherit;font-size:16px;padding:8px;border:2px solid #cf
 
   // MC checks: options[0] is right; always shuffled on screen.
   const CHECKS = {
-    norm1: { q: "What goes in the first blank?", options: ["Norm", "Value", "Law", "Material culture"], hint: "It's an unwritten rule for how to act." },
+    norm1: { q: "What kind of norm goes in the first blank?", options: ["More (MOR-ay)", "Folkway", "Law", "Taboo"], hint: "No law was broken. But people were furious, because it felt wrong, not just rude.", why: "A folkway is a small everyday custom. A more is a norm about right and wrong. A law is written down. A taboo is so wrong people won't even talk about it." },
     norm2: { q: "What goes in the second blank?", options: ["Being fair to kids", "Making money", "Winning the match", "Good grades"], hint: "Why were people so mad at the man?" },
     tip:   { q: "An American posts: “Chinese users are so weird. Why do they want my cat?” That's…", options: ["Ethnocentrism: judging RedNote by U.S. rules", "Relativism: seeing RedNote by its own rules", "A law that China's government wrote", "Following RedNote's norms like a local"], hint: "Whose rules is the American using to judge?", why: "They judged a Chinese app by American rules. That's ethnocentrism." },
     chris: { q: "The night Chris had nowhere to sleep, which institution met that need?", options: ["Religion: a church shelter gave them a bed", "Government: the IRS gave his money back", "Economy: his internship paid for a hotel", "Education: a school let them sleep there"], hint: "Look back at part 4 of Chris's night." },
@@ -479,11 +479,12 @@ textarea{width:100%;font:inherit;font-size:16px;padding:8px;border:2px solid #cf
     if (picked != null) $("nextBtn").onclick = nextStep;
   }
   function nameView() {
-    const a = st.done.norm1 ? `<span class="blank">norm</span>` : `<span class="blank">?</span>`;
+    const a = st.done.norm1 ? `<span class="blank">more (MOR-ay)</span>` : `<span class="blank">?</span>`;
     const b = st.done.norm2 ? `<span class="blank">being fair to kids</span>` : `<span class="blank">?</span>`;
     const both = st.done.norm1 && st.done.norm2;
     app.innerHTML = `<section class="card">${slideBar(1)}
-      <p class="sentence">Letting the kid have the hat is a ${a} that comes from the value of ${b}.</p>
+      <p class="sentence">Letting the kid have the hat is a norm. The kind of norm is a ${a}. It comes from the value of ${b}.</p>
+      ${st.done.norm1 ? `<p class="result">${esc(CHECKS.norm1.why)}</p>` : ""}
       <div id="nq"></div>
       ${both ? `<button type="button" class="go" id="nextBtn">Next: Saturday →</button>` : ""}</section>`;
     if (both) { $("nextBtn").onclick = nextStep; return; }
@@ -632,7 +633,7 @@ textarea{width:100%;font:inherit;font-size:16px;padding:8px;border:2px solid #cf
     });
   }
   function rosieView() {
-    app.innerHTML = `<section class="card">${slideBar(4)}${chainTrail()}<div id="rq"></div><div id="rEnd"></div></section>`;
+    app.innerHTML = `<section class="card">${chainTrail()}<div id="rq"></div><div id="rEnd"></div></section>`;
     const end = () => { $("rEnd").innerHTML = `<button type="button" class="go" id="nextBtn">See ${esc(nick())}'s week →</button>`; $("nextBtn").onclick = nextStep; };
     mc($("rq"), "rosie", end);
     if (st.done.rosie) end();

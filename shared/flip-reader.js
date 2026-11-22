@@ -165,24 +165,30 @@ $("flipZoom").addEventListener("click",openBig);$("flipImg").addEventListener("c
 $("flipBigClose").addEventListener("click",closeBig);$("flipBig").addEventListener("click",e=>{if(e.target.id==="flipBig")closeBig()});
 
 /* ---------- start over / turn in ---------- */
-$("clearBtn").addEventListener("click",()=>{if(!confirm(C.clearConfirm))return;
+// Stays locked after turn-in (Fynn, 11-22): a reload or "Start over" never reopens Turn in or the writing boxes. Test T. is never locked.
+const turnedIn=()=>ls.get("turnedIn")==="1"&&!TT();
+function lockTurnedIn(){const btn=$("submitBtn");btn.disabled=true;btn.textContent="Turned in ✓";
+  ["studentName",...parts.map(p=>"answer"+p.n)].forEach(id=>{const el=$(id);if(el)el.readOnly=true});
+  document.querySelectorAll(".stemBtn").forEach(x=>x.disabled=true)}
+$("clearBtn").addEventListener("click",()=>{if(turnedIn()){const st=$("submitStatus");st.className="status success";st.textContent="You already turned this in. ✓ Nothing more to do here.";return}if(!confirm(C.clearConfirm))return;if(TT())ls.del("turnedIn");
   ["studentName","read","at",...parts.flatMap(p=>["answer"+p.n,"check"+p.n,"tries"+p.n,"check2_"+p.n,"tries2_"+p.n,"qr"+p.n,"qr2_"+p.n,"pred"+p.n])].forEach(k=>ls.del(k));(C.clearExtra||[]).forEach(k=>ls.del(k));location.reload()});
-$("submitBtn").addEventListener("click",async()=>{const status=$("submitStatus"),btn=$("submitBtn");status.className="status";
+$("submitBtn").addEventListener("click",async()=>{const status=$("submitStatus"),btn=$("submitBtn");status.className="status";if(turnedIn()){lockTurnedIn();return}
   const st={name:$("studentName").value.trim(),parts,checkDone,tries,check2Done,tries2,answer:i=>answer(i).trim(),mustProblem,predict:i=>predOf(i)||""};
   if(TT()&&!st.name)st.name="Test T.";
   const err=TT()?null:C.validate(st);if(err){status.textContent=err.text;status.classList.add("error");if(err.focus)$(err.focus).focus();if(err.part){const p=parts[err.part-1];if(p.from<=maxOpen())show(Math.min(Math.max(p.check.page,p.from),maxOpen()),true)}return}
   btn.disabled=true;status.textContent="Sending your work…";
   try{const r=await classTurnIn(C.api,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({studentName:st.name,assignmentId:C.assignmentId,answers:C.buildAnswers(st)})});
     const res=await r.json();if(!r.ok)throw new Error(res.error||"Could not send your work.");
-    status.textContent=C.successText;status.classList.add("success");btn.textContent="Turned in ✓";refresh()}
+    status.textContent=C.successText;status.classList.add("success");btn.textContent="Turned in ✓";if(!TT()){ls.set("turnedIn","1");lockTurnedIn()}refresh()}
   catch(err){status.textContent=err instanceof Error?err.message:"Could not turn in your work. Try again.";status.classList.add("error");btn.disabled=false}});
 
 /* ---------- start (re-entry) ---------- */
 const saved=Number(ls.get("at")||0),startAt=Math.min(saved||1,maxOpen());
 const any=read.size||parts.some(p=>checkDone(p.n)||answer(p.n).trim());
 if(any){let w=$("welcome");if(!w){w=document.createElement("p");w.className="welcome";w.id="welcome";w.setAttribute("role","status");document.querySelector("main").prepend(w)}w.style.display="block";
-  w.textContent=parts.every(p=>partDone(p.n))?"Welcome back — every part is done. Check your name and press Turn in.":"Welcome back — your work was saved. You're on reader page "+startAt+" of "+N+"."}
+  w.textContent=turnedIn()?"Welcome back — you already turned this in. ✓":parts.every(p=>partDone(p.n))?"Welcome back — every part is done. Check your name and press Turn in.":"Welcome back — your work was saved. You're on reader page "+startAt+" of "+N+"."}
 show(startAt,false);
+if(turnedIn()){lockTurnedIn();const st=$("submitStatus");if(st){st.className="status success";st.textContent=C.successText}refresh()}
 /* ---------- Test T. skip bar (shared/turnin.js) ---------- */
 try{(window.classTestHooks=window.classTestHooks||[]).push({
   count:()=>N,index:()=>cur-1,

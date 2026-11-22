@@ -2,8 +2,17 @@
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Rule Breaker Court | Sociology Unit 3 Day 3</title>
 <meta name="description" content="Six real rule-breakers. You are the judge. Use deviance, sanctions, and the theories to rule on each case.">
-<link rel="stylesheet" href="../u3-engine/engine.css?v=20261115c">
-<style>body{--a:#5b3fb8;--a2:#ece6ff;--a3:#33207a}</style>
+<link rel="stylesheet" href="../u3-engine/engine.css?v=20261122a">
+<style>body{--a:#5b3fb8;--a2:#ece6ff;--a3:#33207a}
+/* Fits one Chromebook screen (Fynn, 11-22): once the ruling is right, the other choices fold away so "what happened next" and Next stay in view. */
+.choices:has(.choice.right) .choice:not(.right){display:none}
+@media (min-width:761px) and (max-height:830px){
+  .scene{padding:10px 18px 12px;margin-top:4px}.scene h2{font-size:1.35rem;margin:0 0 6px}
+  .panel{padding:10px 14px}.who{margin-bottom:4px}.fact{font-size:1.04rem;margin:6px 0}
+  .qbox .qt{font-size:1.08rem;margin:4px 0 6px}.choice{padding:7px 10px;font-size:.98rem}
+  .reveal{margin-top:6px;padding:6px 10px}.rowend{margin-top:6px}
+}
+</style>
 <script src="../../shared/assignments.js?v=20261105fb1"></script>
 <script src="../../shared/turnin.js?v=20261105fb1"></script>
 <script src="../../shared/lang.js?v=20261103c"></script>
@@ -18,7 +27,7 @@
 // Frances Haugen (Facebook documents, Senate testimony Oct 5, 2021); Devah Pager's 2003 Milwaukee job study.
 window.U3GAME = {
   key: "soc-u3-d3-rule-breaker-court-v1",
-  pace: 140,
+  pace: 270,
   assignmentId: "soc-u3-d3-rule-breaker-court",
   title: "Sociology · Unit 3 · Day 3 · Rule Breaker Court",
   standard: "SS.9-12.Soc.4, SS.9-12.Soc.9",
@@ -28,7 +37,7 @@ window.U3GAME = {
   titleHtml: "⚖️ RULE BREAKER COURT<small>You are the judge. Six real cases.</small>",
   hook: "A civil rights hero. A TV star. Kids on TikTok. They all broke a rule. Now you rule on them.",
   chips: ["🚌 1955", "🎓 2019", "🚗 2022", "📱 2021"],
-  tiles: ["📁 <b>6</b> real case files", "⚖️ <b>6</b> rulings", "🔎 Prove every ruling", "🔨 <b>2</b> verdicts that are yours", "✍️ <b>1</b> short answer", "⏱ <b>25</b> min"],
+  tiles: ["📁 <b>6</b> real case files", "⚖️ <b>6</b> rulings", "🔎 Prove every ruling", "🔮 <b>1</b> prediction", "✍️ <b>1</b> short answer", "⏱ <b>20</b> min"],
   goal: "Explain why people break norms, how society reacts, and why deviance depends on time and place.",
   how: ["Read the case file. It's short and it's real.", "Make your ruling with today's ideas. Then prove it: tap the words in the case file that back you up.", "See what really happened. Then write one answer and turn it in."],
   startLabel: "Open the first case",
@@ -40,24 +49,24 @@ window.U3GAME = {
         <p class="fact">{{The driver told Rosa Parks to move.}} {{She <b>said no</b> and stayed in her seat.}}</p>`,
       proof: "Tap the words that show the norm she broke.", proofHint: "Which words name the rule of that time and place?",
       tag: "Your ruling", q: "Today she's a hero. So why do sociologists still call what she did deviance?",
-      choices: ["She broke a norm of her time and place: a city bus law.", "She hurt the other riders who were on the bus that night.", "Deviance means any act that is bad for the whole society.", "She broke a rule that was the same in every U.S. state."], answer: 0,
+      choices: ["She broke a norm of her time and place.", "She hurt the other riders on the bus.", "Deviance means any act that is bad.", "She broke a rule every state had."], answer: 0,
       why: "Deviance is breaking a social norm. It isn't always bad. Whether it counts depends on the time and place.",
       hint: "Deviance is breaking a norm. It doesn't have to hurt anyone.",
       revealTitle: "What happened next",
       reveal: "She was arrested and fined $10 plus $4 in court costs. That's a <b>formal negative sanction</b>. In 1999, Congress gave her its Gold Medal, a <b>formal positive sanction</b>. Same act, different time." },
-    { kind: "pick", id: "v1", label: "Verdict: Rosa Parks", kicker: "Case 1 · Your verdict", title: "Was breaking that law right?",
+    { kind: "pick", id: "v1", label: "Prediction: the bus law", kicker: "Case 1 · Your prediction", title: "What happens to the rule?", tag: "Your prediction", note: "Make your best guess. Then see what really happened.",
       left: `<p class="fact">Howard Becker said groups "create deviance by making the rules."</p><p class="fact">Montgomery made the rule. Rosa Parks broke it.</p>`,
-      q: "Was Rosa Parks right to break that law?",
-      options: ["Yes. The law itself was unfair.", "It was right, but she still broke the law.", "Laws should be changed first, not broken."],
-      afterTitle: "What happened to the rule",
+      q: "Predict: what happened to that bus law after her arrest?",
+      options: ["It stayed the law for decades.", "The Supreme Court struck it down.", "The city just stopped enforcing it."],
+      afterTitle: "What really happened",
       after: "Her arrest started the Montgomery Bus Boycott. In 1956, the Supreme Court ruled that bus segregation broke the Constitution. Breaking a norm can push society to change it." },
     { kind: "q", id: "c2", label: "College scandal: strain theory", std: "Soc.4", kicker: "Case 2 · Los Angeles · 2019", title: "The fake rowers",
       left: `<div class="who"><span class="icon">🎓</span><div><b><span class="real">REAL</span>Lori Loughlin</b><span>Actress, Full House</span></div></div>
         <p class="fact">{{Loughlin and her husband}} {{wanted their daughters to get into USC, a top college.}}</p>
         <p class="fact">[[They paid <b>$500,000</b> to get the girls in as rowing team recruits. <b>Neither daughter rowed.</b>]]</p>`,
       proof: "Tap the words that show them breaking the rules to reach the goal.", proofHint: "The goal is a top college. Which words show the illegal way they tried to get there?",
-      tag: "Your ruling", q: "Robert Merton's strain theory has five ways people respond. Which one fits the parents?",
-      choices: ["Innovation: they kept the goal but broke the rules to reach it.", "Conformity: they followed the rules to reach the goal they wanted.", "Retreatism: they gave up on the goal and on the rules too.", "Rebellion: they threw out the old goal and made a new one."], answer: 0,
+      tag: "Your ruling", q: "In Merton's strain theory, which response fits the parents?",
+      choices: ["Innovation: kept the goal, broke the rules.", "Conformity: kept the goal, followed the rules.", "Retreatism: gave up the goal and the rules.", "Rebellion: swapped in a new goal and new rules."], answer: 0,
       why: "Innovation. The goal (a top college) stayed the same. They just used an illegal way to get there.",
       hint: "Did they keep the goal of a top college? Did they follow the rules?",
       revealTitle: "What happened next",
@@ -68,7 +77,7 @@ window.U3GAME = {
         <p class="fact">[[Kids learned the trick from the videos and from friends who were doing it.]] {{<b>Thefts of those cars shot up.</b>}}</p>`,
       proof: "Tap the words that show who the kids learned it from.", proofHint: "Sutherland says you learn deviance from people around you. Which words say who taught them?",
       tag: "Your ruling", q: "Which theory best explains how these teens learned to steal cars?",
-      choices: ["Differential association: they learned it from the people they spent time with.", "Strain theory: no fair way to a good job forced them to steal.", "Labeling theory: they stole only after someone called them criminals.", "Conformity: they followed the norms that most of society agrees with."], answer: 0,
+      choices: ["Differential association: learned from people around them.", "Strain theory: no fair way to a job, so they stole.", "Labeling theory: stole after being called criminals.", "Conformity: followed norms most of society shares."], answer: 0,
       why: "Differential association (Sutherland): you learn deviance from the people around you, the same way you learn anything else.",
       hint: "Look at where they learned it: the videos and the kids making them.",
       revealTitle: "What happened next",
@@ -87,20 +96,15 @@ window.U3GAME = {
     { kind: "q", id: "c5", label: "Frances Haugen: labeling theory", std: "Soc.4", kicker: "Case 5 · Washington, D.C. · 2021", title: "The Instagram files",
       left: `<div class="who"><span class="icon">📂</span><div><b><span class="real">REAL</span>Frances Haugen</b><span>Worked at Facebook, which owns Instagram</span></div></div>
         <p class="fact">{{Haugen <b>copied thousands of secret company pages</b>}} {{and gave them to reporters and Congress.}} {{That broke her company's rules.}}</p>
-        <p class="fact">{{The pages showed Facebook's own research:}} [[Instagram made some teen girls <b>feel worse about their bodies</b>.]]</p>`,
-      proof: "Tap the words that explain why some people labeled her a hero.", proofHint: "A hero helps people. Which words show who she was protecting?",
-      tag: "Your ruling", q: "Some called her a hero. Others called her a rule-breaker who leaked secrets. Which idea explains why one act gets two labels?",
-      choices: ["Labeling theory: an act becomes deviant when people label it that way.", "Differential association: she learned to leak from her coworkers.", "Strain theory: she wanted money but had no fair way to get it.", "Conformity: she went along with what her work group expected."], answer: 0,
+        <p class="fact">{{The pages showed Facebook's own research:}} {{Instagram made some teen girls <b>feel worse about their bodies</b>.}}</p>
+        <p class="fact">[[Senators called her a hero. Facebook called her a rule-breaker.]]</p>`,
+      proof: "Tap the words that show one act getting two different names.", proofHint: "Which words show two groups naming the same act in two ways?",
+      tag: "Your ruling", q: "Same act, hero to some and rule-breaker to others. Which theory explains that?",
+      choices: ["Labeling theory: deviance depends on who is naming it.", "Differential association: she learned it from coworkers.", "Strain theory: she had no fair way to reach her goal.", "Conformity: she did what her work group expected."], answer: 0,
       why: "Labeling theory (Becker). The act didn't change. What changed was who was doing the labeling.",
       hint: "One act, two names. Which theory is about the names people give an act?",
       revealTitle: "What happened next",
-      reveal: "She testified to the U.S. Senate on October 5, 2021. Senators from both parties thanked her. Facebook said she was taking its research out of context." },
-    { kind: "pick", id: "v2", label: "Verdict: Frances Haugen", kicker: "Case 5 · Your verdict", title: "Hero or rule-breaker?",
-      left: `<p class="fact">She broke her company's rules.</p><p class="fact">She also showed the public something about teens it didn't know.</p>`,
-      q: "Was Frances Haugen right to break her company's rules?",
-      options: ["Yes. Teens' safety matters more than company rules.", "No. She should have fixed it inside the company.", "It depends on whether it actually changed anything."],
-      afterTitle: "Sociology says",
-      after: "There's no single right answer. That's the point: <b>deviance is relative</b>. Whether an act is wrong depends on who is judging it." },
+      reveal: "She testified to the U.S. Senate on October 5, 2021. Senators from both parties thanked her. Facebook said she was taking its research out of context. That's the point: <b>deviance is relative</b>. It depends on who is judging." },
     { kind: "q", id: "c6", label: "Criminal record study: stigma", std: "Soc.4", kicker: "Case 6 · Milwaukee, Wisconsin · 2003", title: "The job hunt",
       left: `<div class="who"><span class="icon">📄</span><div><b><span class="real">REAL</span>Devah Pager's study</b><span>Sociologist, 2003</span></div></div>
         <p class="fact">{{Pager sent pairs of young men to apply for the same jobs}} {{with <b>equal résumés</b>.}}</p>
@@ -136,5 +140,5 @@ window.U3GAME = {
   }
 };
 </script>
-<script src="../u3-engine/engine.js?v=20261121nr"></script>
+<script src="../u3-engine/engine.js?v=20261122a"></script>
 </body></html>

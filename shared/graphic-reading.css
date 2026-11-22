@@ -157,4 +157,11 @@ button:disabled{cursor:not-allowed;opacity:.6}
   .flip-layout{grid-template-columns:1fr}
   .flip-stage img{max-height:none;min-height:0;width:100%}
 }
+/* Bigger comic pages on Chromebooks (Fynn, 11-22): the page fills the reader column so the lettering can be read
+   without "Make page bigger". The question column stays in view while the student scrolls down the page. */
+@media(min-width:901px){
+  .flip-stage{padding:8px}
+  .flip-stage img{max-height:none;min-height:0;width:100%}
+  .flip-layout>.qcol{position:sticky;top:64px}
+}
 @media print{.flip-reader,.flip-nav,.flip-big{display:none!important}.flip-layout{display:block}.flip-part[hidden]{display:block!important}}

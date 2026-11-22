@@ -311,7 +311,7 @@
   }
   function pickView(s) {
     const q = $("qbox");
-    q.innerHTML = `<span class="tag">${esc(s.tag || "Your call")}</span><p class="opinion">No wrong answer here. Pick what you really think.</p><p class="qt">${esc(s.q)}</p>
+    q.innerHTML = `<span class="tag">${esc(s.tag || "Your call")}</span><p class="opinion">${esc(s.note || "No wrong answer here. Pick what you really think.")}</p><p class="qt">${esc(s.q)}</p>
       <div class="choices" id="choices">${s.options.map((t, i) => `<button type="button" class="choice" data-i="${i}"><span class="l">${"ABCD"[i]}</span><span>${esc(t)}</span></button>`).join("")}</div><div id="after"></div>`;
     const show = () => {
       const i = st.picks[s.id];
