@@ -16,6 +16,13 @@
 .declass{display:block;background:#fff;border:2px dashed #18364a;border-radius:10px;padding:8px 11px;margin:6px 0 8px;font-weight:650;color:#22313b;line-height:1.4;font-style:normal}
 .declass > b:first-child{display:block;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#18364a;margin-bottom:2px}
 .declass .line{display:block;margin:3px 0}
+.declass .fix{display:block;margin:6px 0;border:1px solid #c9d3da;border-radius:8px;overflow:hidden}
+.declass .cs,.declass .rl{display:block;padding:5px 9px}
+.declass .cs{background:#fdecea}
+.declass .cs::before{content:"\2717  Comic says: ";font-weight:800;color:#a3271a}
+.declass .rl{background:#e6f4e9}
+.declass .rl::before{content:"\2713  Really: ";font-weight:800;color:#1d6b33}
+.declass .kf{display:block;margin-top:8px;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#18364a}
 .declass .note{display:block;margin-top:5px;font-weight:600;font-size:.9rem;color:#5b4632}
 .dime{display:inline-block;background:#e6bd64;color:#0f2433;border-radius:999px;font-weight:850;padding:0 9px;margin-right:4px}
 .credits{font-size:.8rem;color:var(--muted);margin:10px 0 0;line-height:1.4}
@@ -40,7 +47,7 @@ body.reading-now .choices{opacity:.45;pointer-events:none}
 
 <main class="gr-main gr-wrap">
 <section class="card">
-<p class="intro-line"><b>You're the fact-checker.</b> For each part: <b>read</b> the comic on the left → get the <b>check</b> right → read the <b>fact file</b> → write 1–2 sentences. Done = all parts green, then turn in at the bottom.</p>
+<p class="intro-line"><b>How it works:</b> read the comic pages → answer the question about today's big idea → see what the comic got right and wrong → write 1–2 sentences. Done = all parts green, then turn in at the bottom.</p>
 <details class="wordhelp"><summary>Word help (tap to open)</summary>
 <ul class="words" aria-label="Word help">
 <li><b>Terrorism</b> = using violence to scare people into doing what you want</li><li><b>Sharecropping</b> = farming someone else's land for a share of the crop</li><li><b>Segregation</b> = keeping people apart by race</li><li><b>Poll tax</b> = a fee you had to pay to vote</li><li><b>1953 comic</b> = made by the U.S. government to tell America's story in other countries. It shows one point of view.</li>
@@ -90,18 +97,18 @@ parts:[
 "check": {
 "page": 1,
 "tag": "Reading check · Reader page 1",
-"q": "Read the poem in the box. How does it describe the country in 1876?",
-"right": "United and free.",
+"q": "The poem calls the country \"united, free\" in 1876. What was really going on in the South?",
+"right": "The KKK used terror to stop Black voters",
 "wrong": [
-"Divided and at war.",
-"Rich and powerful.",
-"Young and growing."
+"Freedpeople were getting free land from the government",
+"Black and white children shared the same schools",
+"Northern troops were arriving to protect voters"
 ],
-"why": "✓ Correct. That's the poem's promise. Now check what was happening in the South that same year.",
-"hint": "Read the first line of the poem in the box."
+"why": "✓ Correct. Groups like the KKK threatened, beat, and killed Black voters. The comic's party leaves that out.",
+"hint": "Read the poem in the box: \"We meet today, united, free...\" Free for whom?"
 },
 "prompt": "The 1876 poem says the country was \"united, free.\" Was it free for everyone? Use one fact.",
-"stem": "<span class=\"declass\"><b>Fact file</b><span class=\"line\"><b>KKK:</b> started in 1865 by Confederate veterans in Tennessee. Members in disguises threatened, beat, and murdered Black Americans and white allies who voted or opened schools.</span><span class=\"line\">The 1876 election was too close to call. In the <b>Compromise of 1877</b>, Rutherford B. Hayes became President, and federal troops left the South. Reconstruction was over.</span><span class=\"line\">Frederick Douglass told Republicans in 1876: <b>\"You turned us loose to the wrath of our infuriated masters.\"</b></span></span>Write 1–2 sentences. Start like this: <i>In 1876, the country was not free for everyone because ___.</i>",
+"stem": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">(Nothing about how Reconstruction ended.)</span><span class=\"rl\">In the Compromise of 1877, Hayes became President, and federal troops left the South.</span></span><b class=\"kf\">Know this</b><span class=\"line\">Frederick Douglass, 1876: <b>\"You turned us loose to the wrath of our infuriated masters.\"</b></span></span>Write 1–2 sentences. Start like this: <i>In 1876, the country was not free for everyone because ___.</i>",
 "stemText": "In 1876, the country was not free for everyone because ___.",
 "placeholder": "In 1876, the country was not free for everyone because ___."
 },
@@ -114,18 +121,18 @@ parts:[
 "check": {
 "page": 2,
 "tag": "Reading check · Reader page 2",
-"q": "Read Booker T. Washington's speech bubble. Why does he want a school?",
-"right": "His people must learn to use their rights as citizens.",
+"q": "Washington wants his people to use their rights as citizens. What took those rights away after 1877?",
+"right": "Jim Crow laws, poll taxes, and reading tests",
 "wrong": [
-"His people need to learn how to build railroads.",
-"His town needs more teachers from the North.",
-"His church wants to train new ministers."
+"The 14th and 15th Amendments, passed by Congress",
+"The Freedmen's Bureau and its new schools",
+"A Supreme Court ruling that ended the 13th Amendment"
 ],
-"why": "✓ Correct. Washington opened Tuskegee in 1881. It grew into one of the best-known Black colleges in the country.",
-"hint": "Read Booker T. Washington's speech bubble."
+"why": "✓ Correct. In Louisiana, registered Black voters fell from about 130,000 in 1897 to about 5,300 in 1900.",
+"hint": "Read Booker T. Washington's speech bubble. Then think: what stopped Black citizens from using their rights?"
 },
 "prompt": "Did the Civil War and Reconstruction really bring freedom? Yes, partly, or no?",
-"stem": "<span class=\"declass\"><b>Fact file</b><span class=\"line\"><b>Sharecropping:</b> without land, families farmed someone else's land and paid with half the crop. Most stayed in debt.</span><span class=\"line\"><b>Jim Crow</b> laws forced segregation and used poll taxes and reading tests to stop Black voters. In Louisiana, registered Black voters fell from about 130,000 in 1897 to about 5,300 in 1900.</span><span class=\"line\">But the 13th, 14th, and 15th Amendments stayed in the Constitution. In 1954, lawyers used the 14th to win Brown v. Board of Education.</span></span>Write 1–2 sentences. Start like this: <i>The war and Reconstruction brought (full / partial / no) freedom because ___.</i>",
+"stem": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">Washington was \"self-educated.\"</span><span class=\"rl\">He studied at Hampton Institute in Virginia, a school for freedpeople, then opened Tuskegee in 1881.</span></span><b class=\"kf\">Know this</b><span class=\"line\"><b>Sharecropping</b> kept many families in debt, farming someone else's land.</span><span class=\"line\">The 14th Amendment stayed in the Constitution. In 1954, lawyers used it to win <b>Brown v. Board of Education</b>.</span></span>Write 1–2 sentences. Start like this: <i>The war and Reconstruction brought (full / partial / no) freedom because ___.</i>",
 "stemText": "The war and Reconstruction brought (full / partial / no) freedom because ___.",
 "placeholder": "The war and Reconstruction brought (full / partial / no) freedom because ___."
 }

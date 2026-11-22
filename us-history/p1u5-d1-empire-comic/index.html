@@ -16,6 +16,13 @@
 .declass{display:block;background:#fff;border:2px dashed #18364a;border-radius:10px;padding:8px 11px;margin:6px 0 8px;font-weight:650;color:#22313b;line-height:1.4;font-style:normal}
 .declass > b:first-child{display:block;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#18364a;margin-bottom:2px}
 .declass .line{display:block;margin:3px 0}
+.declass .fix{display:block;margin:6px 0;border:1px solid #c9d3da;border-radius:8px;overflow:hidden}
+.declass .cs,.declass .rl{display:block;padding:5px 9px}
+.declass .cs{background:#fdecea}
+.declass .cs::before{content:"\2717  Comic says: ";font-weight:800;color:#a3271a}
+.declass .rl{background:#e6f4e9}
+.declass .rl::before{content:"\2713  Really: ";font-weight:800;color:#1d6b33}
+.declass .kf{display:block;margin-top:8px;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#18364a}
 .declass .note{display:block;margin-top:5px;font-weight:600;font-size:.9rem;color:#5b4632}
 .dime{display:inline-block;background:#e6bd64;color:#0f2433;border-radius:999px;font-weight:850;padding:0 9px;margin-right:4px}
 .credits{font-size:.8rem;color:var(--muted);margin:10px 0 0;line-height:1.4}
@@ -40,7 +47,7 @@ body.reading-now .choices{opacity:.45;pointer-events:none}
 
 <main class="gr-main gr-wrap">
 <section class="card">
-<p class="intro-line"><b>You're the fact-checker.</b> For each part: <b>read</b> the comic on the left → get the <b>check</b> right → read the <b>fact file</b> → write 1–2 sentences. Done = all parts green, then turn in at the bottom.</p>
+<p class="intro-line"><b>How it works:</b> read the comic pages → answer the question about today's big idea → see what the comic got right and wrong → write 1–2 sentences. Done = all parts green, then turn in at the bottom.</p>
 <details class="wordhelp"><summary>Word help (tap to open)</summary>
 <ul class="words" aria-label="Word help">
 <li><b>Imperialism</b> = a strong country taking control of weaker lands and people</li><li><b>Yellow journalism</b> = shocking, exaggerated news to sell papers</li><li><b>Annex</b> = add land to a country</li><li><b>Ceded</b> = handed over</li><li><b>1953 comic</b> = made by the U.S. government to tell America's story in other countries. It shows one point of view.</li>
@@ -90,20 +97,20 @@ parts:[
 "check": {
 "page": 1,
 "tag": "Reading check · Reader page 1",
-"q": "Read the box at the bottom. What does the comic say about the cause of the explosion?",
-"right": "It was never known.",
+"q": "No one knew what blew up the Maine. So why did Americans want war with Spain?",
+"right": "Wild headlines blamed Spain",
 "wrong": [
-"A Spanish mine sank the ship.",
-"Cuban rebels set off a bomb.",
-"The ship hit a sunken rock."
+"Spain admitted that its navy sank the ship",
+"Spain's army had invaded the United States",
+"Cuba asked America to go to war for it"
 ],
-"why": "✓ Correct. No one knew. Newspapers blamed Spain anyway.",
-"hint": "Read the first sentence of the box at the bottom."
+"why": "✓ Correct. That's yellow journalism: shocking, exaggerated news to sell papers. It got Americans shouting \"Remember the Maine!\"",
+"hint": "Read the newsboy's headline, then the green box at the bottom: \"The cause of the explosion was...\""
 },
-"prompt": "The cause was unknown, but Americans went to war anyway. How much did newspapers push the country into war?",
-"stem": "<span class=\"declass\"><b>Fact file</b><span class=\"line\">About <b>260</b> sailors died. Big newspapers blamed Spain with shocking headlines to sell papers. That's <b>yellow journalism</b>. Americans shouted \"Remember the Maine!\"</span><span class=\"line\">In 1976, a U.S. Navy study found the blast was most likely an accident inside the ship, probably a coal fire, not a Spanish attack.</span><span class=\"line\">The war lasted about four months. Theodore Roosevelt's Rough Riders and Black soldiers called <b>Buffalo Soldiers</b> charged up San Juan Hill.</span></span>Write 1–2 sentences. Start like this: <i>Newspapers pushed the country toward war by ___. The real cause was probably ___.</i>",
-"stemText": "Newspapers pushed the country toward war by ___. The real cause was probably ___.",
-"placeholder": "Newspapers pushed the country toward war by ___. The real cause was probably ___."
+"prompt": "The cause of the blast was unknown, but Americans went to war anyway. How did newspapers push the country into war?",
+"stem": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">The headline says 250 were killed.</span><span class=\"rl\">About 260 sailors died.</span></span><b class=\"kf\">Know this</b><span class=\"line\">In 1976, a U.S. Navy study found the blast was most likely an accident inside the ship, not a Spanish attack.</span><span class=\"line\">The war lasted about four months. In the <b>Treaty of Paris</b>, Spain handed the U.S. Puerto Rico, Guam, and the Philippines.</span></span>Write 1–2 sentences. Start like this: <i>Newspapers pushed the country toward war by ___.</i>",
+"stemText": "Newspapers pushed the country toward war by ___.",
+"placeholder": "Newspapers pushed the country toward war by ___."
 },
 {
 "short": "Hawaii",
@@ -114,23 +121,23 @@ parts:[
 "check": {
 "page": 2,
 "tag": "Reading check · Reader page 2",
-"q": "Read the list. How does the comic say the U.S. got Hawaii?",
-"right": "By annexation",
+"q": "The comic says Hawaii came \"by annexation.\" What does that leave out?",
+"right": "Planters overthrew Hawaii's queen",
 "wrong": [
-"Ceded by Spain",
-"Purchased from Russia",
-"Won in a war with Japan"
+"Hawaii's people voted to join the U.S.",
+"The U.S. bought Hawaii from Spain",
+"Japan gave Hawaii to the U.S."
 ],
-"why": "✓ Correct. \"Annexation\" sounds simple. Read how it really happened.",
-"hint": "Read item 2 on the list."
+"why": "✓ Correct. In 1893, American planters overthrew Queen Liliuokalani, and U.S. Marines backed them. Congress annexed Hawaii in 1898.",
+"hint": "Find item 2 on the list. Then think back to the slides: who lost her throne?"
 },
-"prompt": "The comic says Hawaii came \"by annexation.\" Fill in what that leaves out. Why did the U.S. want land overseas?",
-"stem": "<span class=\"declass\"><b>Fact file</b><span class=\"line\">American planters grew rich on Hawaiian sugar. In 1893, planters and businessmen overthrew <b>Queen Liliuokalani</b> (lih-LEE-oo-oh-kah-LAH-nee). U.S. Marines came ashore to back them.</span><span class=\"line\">The queen wrote: <b>\"I yield to the superior force of the United States of America.\"</b> President Cleveland said the overthrow was wrong, but Congress annexed Hawaii in 1898. In 1993, Congress formally apologized.</span><span class=\"line\">U.S. leaders wanted overseas buyers for factories and <b>Navy bases</b> where ships could refuel.</span></span>Write 1–2 sentences. Start like this: <i>\"By annexation\" leaves out ___. The U.S. wanted land overseas because ___.</i>",
-"stemText": "\"By annexation\" leaves out ___. The U.S. wanted land overseas because ___.",
-"placeholder": "\"By annexation\" leaves out ___. The U.S. wanted land overseas because ___."
+"prompt": "Why did the U.S. take land overseas in 1898? Give one reason.",
+"stem": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">Hawaii came \"by annexation.\"</span><span class=\"rl\">First, planters overthrew Queen Liliuokalani in 1893. She said she gave in to \"the superior force of the United States.\"</span></span><span class=\"fix\"><span class=\"cs\">Alaska was a new possession in the 1890s.</span><span class=\"rl\">The U.S. bought Alaska in 1867, long before. The list also skips Guam.</span></span><b class=\"kf\">Know this</b><span class=\"line\">U.S. leaders wanted <b>Navy bases</b> where ships could refuel, and new buyers for American factories and farms.</span></span>Write 1–2 sentences. Start like this: <i>The U.S. wanted land overseas because ___.</i>",
+"stemText": "The U.S. wanted land overseas because ___.",
+"placeholder": "The U.S. wanted land overseas because ___."
 }
 ],
-questions:["The cause was unknown, but Americans went to war anyway. How much did newspapers push the country into war?", "The comic says Hawaii came \"by annexation.\" Fill in what that leaves out. Why did the U.S. want land overseas?"],
+questions:["The cause of the blast was unknown, but Americans went to war anyway. How did newspapers push the country into war?", "Why did the U.S. take land overseas in 1898? Give one reason."],
 validate(s){if(!s.name)return{text:"Type your first name + last initial (like Jordan M.) at the top of the questions.",focus:"studentName"};
  const mc=[1, 2].find(i=>!s.checkDone(i));if(mc)return{text:"Get the check right for part "+mc+" first.",part:mc};
  const ma=[1, 2].find(i=>!s.answer(i));if(ma)return{text:"Write your answer for part "+ma+" before turning in.",part:ma,focus:"answer"+ma};

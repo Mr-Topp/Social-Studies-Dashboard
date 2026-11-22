@@ -16,6 +16,13 @@
 .declass{display:block;background:#fff;border:2px dashed #18364a;border-radius:10px;padding:8px 11px;margin:6px 0 8px;font-weight:650;color:#22313b;line-height:1.4;font-style:normal}
 .declass > b:first-child{display:block;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#18364a;margin-bottom:2px}
 .declass .line{display:block;margin:3px 0}
+.declass .fix{display:block;margin:6px 0;border:1px solid #c9d3da;border-radius:8px;overflow:hidden}
+.declass .cs,.declass .rl{display:block;padding:5px 9px}
+.declass .cs{background:#fdecea}
+.declass .cs::before{content:"\2717  Comic says: ";font-weight:800;color:#a3271a}
+.declass .rl{background:#e6f4e9}
+.declass .rl::before{content:"\2713  Really: ";font-weight:800;color:#1d6b33}
+.declass .kf{display:block;margin-top:8px;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#18364a}
 .declass .note{display:block;margin-top:5px;font-weight:600;font-size:.9rem;color:#5b4632}
 .dime{display:inline-block;background:#e6bd64;color:#0f2433;border-radius:999px;font-weight:850;padding:0 9px;margin-right:4px}
 .credits{font-size:.8rem;color:var(--muted);margin:10px 0 0;line-height:1.4}
@@ -40,7 +47,7 @@ body.reading-now .choices{opacity:.45;pointer-events:none}
 
 <main class="gr-main gr-wrap">
 <section class="card">
-<p class="intro-line"><b>You're the campaign analyst.</b> For each part: <b>read</b> the comic on the left → get the <b>check</b> right → read the <b>fact file</b> → write 1–2 sentences. Done = all parts green, then turn in at the bottom.</p>
+<p class="intro-line"><b>How it works:</b> read the comic pages → answer the question about today's big idea → read the fact file → write 1–2 sentences. Done = all parts green, then turn in at the bottom.</p>
 <details class="wordhelp"><summary>Word help (tap to open)</summary>
 <ul class="words" aria-label="Word help">
 <li><b>Inflation</b> = prices keep going up</li><li><b>Stagflation</b> = high prices + lots of people out of work, at the same time</li><li><b>Embargo</b> = a ban on trade</li><li><b>Conservative</b> = wants lower taxes, smaller government, a strong military, traditional values</li><li><b>Liberal</b> = wants government to do more to help people and set rules</li><li><b>Pension</b> = money a retired worker gets each month</li>
@@ -90,18 +97,18 @@ parts:[
 "check": {
 "page": 2,
 "tag": "Reading check · Reader page 2",
-"q": "Read the box at the top. What does the comic say a very fast rise in oil prices can lead to?",
-"right": "Higher prices on almost everything",
+"q": "In 1973, Arab countries stopped selling oil to the U.S. Why did prices rise on almost everything?",
+"right": "Oil is used all through the economy",
 "wrong": [
-"Lower prices at most stores",
-"More jobs in every factory",
-"Cheaper gas for most drivers"
+"Stores raised prices to pay new taxes",
+"Factories stopped paying their workers",
+"The government printed less money"
 ],
-"why": "✓ Correct. Oil heats buildings and moves trucks, so when oil jumps, almost every price climbs.",
-"hint": "Read the end of the box: oil plays a key role in what?"
+"why": "✓ Correct. Oil heats buildings and moves trucks. When oil jumps, rent, food, and almost every other price climbs.",
+"hint": "Read the box at the top: oil plays a key role in what?"
 },
 "prompt": "Prices and gas lines made people angry. Why did that help conservatives who wanted a smaller government?",
-"stem": "<span class=\"declass\"><b>Fact file</b><span class=\"line\">In <b>October 1973</b>, Arab oil countries stopped selling oil to the U.S. That <b>embargo</b> made gas prices jump, and drivers waited in long lines. A second oil shock hit in <b>1979</b>.</span><span class=\"line\">Since FDR's New Deal and LBJ's Great Society, the federal government had grown a lot.</span><span class=\"line\">Conservatives like <b>Barry Goldwater</b> (1964) and <b>Ronald Reagan</b> said big government and high taxes were making things worse.</span></span>Write 1–2 sentences. Start like this: <i>When prices and gas lines got worse, conservatives said ___.</i>",
+"stem": "<span class=\"declass\"><b>Fact file</b><b class=\"kf\">Know this</b><span class=\"line\">That ban on trade was an <b>embargo</b>. Gas prices jumped, and drivers waited in long lines. A second oil shock hit in <b>1979</b>.</span><span class=\"line\"><b>Conservatives</b> said big government and high taxes were making things worse.</span></span>Write 1–2 sentences. Start like this: <i>When prices and gas lines got worse, conservatives said ___.</i>",
 "stemText": "When prices and gas lines got worse, conservatives said ___.",
 "placeholder": "When prices and gas lines got worse, conservatives said ___."
 },
@@ -114,18 +121,18 @@ parts:[
 "check": {
 "page": 4,
 "tag": "Reading check · Reader page 4",
-"q": "The worker with the new paycheck got a 3% raise. Why is he worse off?",
-"right": "Prices went up more than his raise",
+"q": "Why were so many workers angry about the economy in the 1970s?",
+"right": "Pay bought less each year",
 "wrong": [
-"His boss cut his pay that month",
-"He lost his job that same week",
-"His taxes took his whole raise"
+"Prices kept falling too fast",
+"Their raises beat rising prices",
+"Stores ran out of paper money"
 ],
-"why": "✓ Correct. If your pay goes up 3% but prices go up 5%, your money buys less than before.",
-"hint": "Read the worker's speech bubble. Compare the two numbers."
+"why": "✓ Correct. If your pay goes up 3% but prices go up 5%, you can buy less than before. Add lost jobs, and you get stagflation.",
+"hint": "Read the worker's speech bubble at the bottom right. Compare the two numbers."
 },
 "prompt": "What was stagflation, and why did many voters blame President Carter?",
-"stem": "<span class=\"declass\"><b>Fact file</b><span class=\"line\">In the 1970s, prices kept rising <b>and</b> many people lost their jobs. That mix got a new name: <b>stagflation</b>.</span><span class=\"line\">By <b>1980</b>, prices were rising about <b>13.5%</b> a year, and about <b>7%</b> of workers couldn't find jobs.</span><span class=\"line\">President <b>Jimmy Carter</b>, a Democrat, couldn't fix it. In a 1979 TV speech, he said America faced a \"crisis of confidence.\" Many voters felt blamed.</span></span>Write 1–2 sentences. Start like this: <i>Stagflation means ___. Voters blamed Carter because ___.</i>",
+"stem": "<span class=\"declass\"><b>Fact file</b><b class=\"kf\">Know this</b><span class=\"line\"><b>Stagflation</b> = prices rising <b>and</b> lots of people out of work, at the same time.</span><span class=\"line\">President <b>Jimmy Carter</b>, a Democrat, struggled to fix it. Many voters blamed him.</span></span>Write 1–2 sentences. Start like this: <i>Stagflation means ___. Voters blamed Carter because ___.</i>",
 "stemText": "Stagflation means ___. Voters blamed Carter because ___.",
 "placeholder": "Stagflation means ___. Voters blamed Carter because ___."
 },
@@ -138,18 +145,18 @@ parts:[
 "check": {
 "page": 6,
 "tag": "Reading check · Reader page 6",
-"q": "Look at the chart. Which year had the biggest jump in prices?",
-"right": "1980",
+"q": "Which 1970s problem does this chart show?",
+"right": "Prices rising fast every year",
 "wrong": [
-"1972",
-"1976",
-"1982"
+"A president caught in a cover-up",
+"Americans held hostage in Iran",
+"Protests and riots in big cities"
 ],
-"why": "✓ Correct. Prices rose about 13.5% in 1980, the tallest bar. That was election year.",
-"hint": "Find the tallest bar, then read the year under it."
+"why": "✓ Correct. Each bar is how much prices rose that year. The tallest bar, about 13.5%, is 1980, an election year.",
+"hint": "Read the box at the top: what was \"very rapid\" in the 1970s?"
 },
 "prompt": "Which 1970s problem pushed the most voters toward conservatives? Why?",
-"stem": "<span class=\"declass\"><b>Fact file</b><span class=\"line\"><b>Protests and crime:</b> in 1968, Richard Nixon promised \"law and order\" and spoke for the \"<b>silent majority</b>\" who didn't protest.</span><span class=\"line\"><b>Watergate:</b> Nixon covered up a break-in and <b>resigned in 1974</b>. Many Americans stopped trusting government. <b>Hostages:</b> Iranian students held <b>52 Americans</b> for <b>444 days</b>, 1979–1981.</span><span class=\"line\">In 1980, Reagan asked voters, \"<b>Are you better off than you were four years ago?</b>\" He won <b>44 states</b>.</span></span>Write 1–2 sentences. Start like this: <i>___ pushed voters toward conservatives because ___.</i>",
+"stem": "<span class=\"declass\"><b>Fact file</b><b class=\"kf\">Know this</b><span class=\"line\">Other 1970s problems: protests and crime, <b>Watergate</b> (Nixon resigned in 1974), and the <b>Iran hostage crisis</b> (52 Americans held 444 days).</span><span class=\"line\">In 1980, Reagan asked voters, \"<b>Are you better off than you were four years ago?</b>\" He won 44 states.</span></span>Write 1–2 sentences. Start like this: <i>___ pushed voters toward conservatives because ___.</i>",
 "stemText": "___ pushed voters toward conservatives because ___.",
 "placeholder": "___ pushed voters toward conservatives because ___."
 }

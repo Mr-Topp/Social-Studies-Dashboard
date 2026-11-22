@@ -16,6 +16,13 @@
 .declass{display:block;background:#fff;border:2px dashed #18364a;border-radius:10px;padding:8px 11px;margin:6px 0 8px;font-weight:650;color:#22313b;line-height:1.4;font-style:normal}
 .declass > b:first-child{display:block;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#18364a;margin-bottom:2px}
 .declass .line{display:block;margin:3px 0}
+.declass .fix{display:block;margin:6px 0;border:1px solid #c9d3da;border-radius:8px;overflow:hidden}
+.declass .cs,.declass .rl{display:block;padding:5px 9px}
+.declass .cs{background:#fdecea}
+.declass .cs::before{content:"\2717  Comic says: ";font-weight:800;color:#a3271a}
+.declass .rl{background:#e6f4e9}
+.declass .rl::before{content:"\2713  Really: ";font-weight:800;color:#1d6b33}
+.declass .kf{display:block;margin-top:8px;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#18364a}
 .declass .note{display:block;margin-top:5px;font-weight:600;font-size:.9rem;color:#5b4632}
 .dime{display:inline-block;background:#e6bd64;color:#0f2433;border-radius:999px;font-weight:850;padding:0 9px;margin-right:4px}
 .credits{font-size:.8rem;color:var(--muted);margin:10px 0 0;line-height:1.4}
@@ -40,7 +47,7 @@ body.reading-now .choices{opacity:.45;pointer-events:none}
 
 <main class="gr-main gr-wrap">
 <section class="card">
-<p class="intro-line"><b>You're the fact-checker.</b> For each part: <b>read</b> the comic on the left → get the <b>check</b> right → read the <b>fact file</b> → write 1–2 sentences. Done = all parts green, then turn in at the bottom.</p>
+<p class="intro-line"><b>How it works:</b> read the comic pages → answer the question about today's big idea → see what the comic got right and wrong → write 1–2 sentences. Done = all parts green, then turn in at the bottom.</p>
 <details class="wordhelp"><summary>Word help (tap to open)</summary>
 <ul class="words" aria-label="Word help">
 <li><b>Civic virtue</b> = putting your community's good ahead of your own comfort</li><li><b>Grange</b> = a club for farm families</li><li><b>Populist</b> = a party of farmers and workers</li><li><b>Third party</b> = a party outside the two biggest ones</li><li><b>1953 comic</b> = made by the U.S. government to tell America's story in other countries. It shows one point of view.</li>
@@ -90,20 +97,20 @@ parts:[
 "check": {
 "page": 1,
 "tag": "Reading check · Reader page 1",
-"q": "Read the box at the bottom. What happened to most Populist reforms?",
-"right": "They eventually became laws.",
+"q": "Bryan lost, but most Populist reforms became laws. What does that show about third parties?",
+"right": "They can lose and still change laws",
 "wrong": [
-"They were struck down by the Supreme Court.",
-"They were forgotten after Bryan lost.",
-"They only passed in Iowa."
+"They only matter when they win the White House",
+"They have to join a big party to get votes",
+"They hurt the country by splitting votes"
 ],
-"why": "✓ Correct. A party can lose elections and still change the country.",
-"hint": "Read the last line of the box at the bottom."
+"why": "✓ Correct. Big parties borrow a third party's popular ideas. The 16th and 17th Amendments (1913) came from Populist ideas.",
+"hint": "Read the yellow box at the bottom right: \"Nevertheless...\""
 },
-"prompt": "The comic names Bryan as the Populists' champion. Which Iowan did it leave out? Did the Populists lose or win?",
-"stem": "<span class=\"declass\"><b>Fact file</b><span class=\"line\">Railroads often charged farmers high rates. In 1867, Oliver Kelley started the <b>Grange</b>. Iowa became a top Grange state, and in 1874 Iowa passed a <b>Granger law</b> limiting railroad rates.</span><span class=\"line\">In 1892, the Populist candidate for president was <b>James B. Weaver</b> of Bloomfield, Iowa. He won over 1 million votes and carried four states.</span><span class=\"line\">Populist ideas came back: the 16th Amendment (1913) allowed an income tax, and the 17th (1913) let voters elect senators directly.</span></span>Write 1–2 sentences. Start like this: <i>The comic left out ___ of Iowa. The Populists (lost / won) because ___.</i>",
-"stemText": "The comic left out ___ of Iowa. The Populists (lost / won) because ___.",
-"placeholder": "The comic left out ___ of Iowa. The Populists (lost / won) because ___."
+"prompt": "The Populists lost elections. Did they lose or win in the end? Use one fact.",
+"stem": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">Bryan was the Populists' champion.</span><span class=\"rl\">In 1892, they ran Iowan <b>James B. Weaver</b>. He won over 1 million votes.</span></span><b class=\"kf\">Know this</b><span class=\"line\">Railroads charged farmers high rates. In 1874, Iowa passed a <b>Granger law</b> that set the highest rates railroads could charge.</span></span>Write 1–2 sentences. Start like this: <i>The Populists (lost / won) because ___.</i>",
+"stemText": "The Populists (lost / won) because ___.",
+"placeholder": "The Populists (lost / won) because ___."
 },
 {
 "short": "Standing Bear",
@@ -114,23 +121,23 @@ parts:[
 "check": {
 "page": 2,
 "tag": "Reading check · Reader page 2",
-"q": "Read Whitman's scroll. What does he say is not good?",
-"right": "Anything that ignores individuals.",
+"q": "Whitman wrote, \"Nothing is good that ignores individuals.\" What did the judge decide in Standing Bear's 1879 case?",
+"right": "An Indian is a person under U.S. law",
 "wrong": [
-"Anything that costs too much money.",
-"Anything that moves too fast.",
-"Anything that comes from Europe."
+"Only U.S. citizens could bring a case to court",
+"The Ponca had to stay in Oklahoma forever",
+"Standing Bear had to pay for walking home"
 ],
-"why": "✓ Correct. Whitman believed every single person counts. Someone had to prove that in court.",
+"why": "✓ Correct. Standing Bear said, \"I am a man.\" The judge agreed that he had rights the courts must protect.",
 "hint": "Read the first line on the scroll."
 },
-"prompt": "Pick one person who made the country stop ignoring individuals: Standing Bear, Susette La Flesche, or Kate Shelley. What risk did they take?",
-"stem": "<span class=\"declass\"><b>Fact file</b><span class=\"line\">In 1877, the U.S. forced the <b>Ponca</b> (PONG-kuh) from Nebraska. Chief <b>Standing Bear</b>'s son died, and he walked home to bury him. Arrested, he told a judge in 1879: <b>\"I am a man.\"</b> The judge ruled that an Indian is a person under U.S. law.</span><span class=\"line\"><b>Susette La Flesche</b> (luh-FLESH) of the Omaha Nation translated for Standing Bear on a speaking tour of Eastern cities.</span><span class=\"line\">In 1881, Iowa teenager <b>Kate Shelley</b> crawled across a railroad bridge in a storm to warn the station about a train wreck near Moingona.</span></span>Write 1–2 sentences. Start like this: <i>___ took a risk by ___. It mattered because ___.</i>",
-"stemText": "___ took a risk by ___. It mattered because ___.",
-"placeholder": "___ took a risk by ___. It mattered because ___."
+"prompt": "Whose actions did the most for their community: Standing Bear, Susette La Flesche, Kate Shelley, or the Grangers? What risk did they take?",
+"stem": "<span class=\"declass\"><b>Fact file</b><b class=\"kf\">Know this</b><span class=\"line\"><b>Susette La Flesche</b> (luh-FLESH) of the Omaha Nation translated for Standing Bear on a speaking tour of Eastern cities.</span><span class=\"line\">In 1881, Iowa teen <b>Kate Shelley</b> crawled across a railroad bridge in a storm to warn the station about a train wreck.</span></span>Write 1–2 sentences. Start like this: <i>___ did the most because ___. The risk they took was ___.</i>",
+"stemText": "___ did the most because ___. The risk they took was ___.",
+"placeholder": "___ did the most because ___. The risk they took was ___."
 }
 ],
-questions:["The comic names Bryan as the Populists' champion. Which Iowan did it leave out? Did the Populists lose or win?", "Pick one person who made the country stop ignoring individuals: Standing Bear, Susette La Flesche, or Kate Shelley. What risk did they take?"],
+questions:["The Populists lost elections. Did they lose or win in the end? Use one fact.", "Whose actions did the most for their community: Standing Bear, Susette La Flesche, Kate Shelley, or the Grangers? What risk did they take?"],
 validate(s){if(!s.name)return{text:"Type your first name + last initial (like Jordan M.) at the top of the questions.",focus:"studentName"};
  const mc=[1, 2].find(i=>!s.checkDone(i));if(mc)return{text:"Get the check right for part "+mc+" first.",part:mc};
  const ma=[1, 2].find(i=>!s.answer(i));if(ma)return{text:"Write your answer for part "+ma+" before turning in.",part:ma,focus:"answer"+ma};

@@ -16,6 +16,13 @@
 .declass{display:block;background:#fff;border:2px dashed #18364a;border-radius:10px;padding:8px 11px;margin:6px 0 8px;font-weight:650;color:#22313b;line-height:1.4;font-style:normal}
 .declass > b:first-child{display:block;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#18364a;margin-bottom:2px}
 .declass .line{display:block;margin:3px 0}
+.declass .fix{display:block;margin:6px 0;border:1px solid #c9d3da;border-radius:8px;overflow:hidden}
+.declass .cs,.declass .rl{display:block;padding:5px 9px}
+.declass .cs{background:#fdecea}
+.declass .cs::before{content:"\2717  Comic says: ";font-weight:800;color:#a3271a}
+.declass .rl{background:#e6f4e9}
+.declass .rl::before{content:"\2713  Really: ";font-weight:800;color:#1d6b33}
+.declass .kf{display:block;margin-top:8px;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#18364a}
 .declass .note{display:block;margin-top:5px;font-weight:600;font-size:.9rem;color:#5b4632}
 .dime{display:inline-block;background:#e6bd64;color:#0f2433;border-radius:999px;font-weight:850;padding:0 9px;margin-right:4px}
 .credits{font-size:.8rem;color:var(--muted);margin:10px 0 0;line-height:1.4}
@@ -40,7 +47,7 @@ body.reading-now .choices{opacity:.45;pointer-events:none}
 
 <main class="gr-main gr-wrap">
 <section class="card">
-<p class="intro-line"><b>You're the fact-checker.</b> For each part: <b>read</b> the comic on the left → get the <b>check</b> right → read the <b>fact file</b> → write 1–2 sentences. Done = all parts green, then turn in at the bottom.</p>
+<p class="intro-line"><b>How it works:</b> read the comic pages → answer the question about today's big idea → see what the comic got right and wrong → write 1–2 sentences. Done = all parts green, then turn in at the bottom.</p>
 <details class="wordhelp"><summary>Word help (tap to open)</summary>
 <ul class="words" aria-label="Word help">
 <li><b>Confederacy</b> = the 11 Southern states that left the U.S.</li><li><b>Union</b> = the United States (the North)</li><li><b>Siege</b> = surrounding a place until it gives up</li><li><b>Total war</b> = attacking everything the enemy needs to keep fighting</li><li><b>Surrender</b> = give up</li><li><b>1953 comic</b> = made by the U.S. government to tell America's story in other countries. It shows one point of view.</li>
@@ -90,18 +97,18 @@ parts:[
 "check": {
 "page": 1,
 "tag": "Reading check · Reader page 1",
-"q": "Read the box in the middle. Why does the comic say many Southerners went along with secession?",
-"right": "Loyalty to their states came first.",
+"q": "How did the Civil War begin?",
+"right": "Confederates fired on a U.S. fort",
 "wrong": [
-"They were paid to join the army.",
-"Britain promised to protect them.",
-"Lincoln had freed all enslaved people."
+"Lincoln's army invaded South Carolina",
+"Britain attacked Northern ships at sea",
+"John Brown raided an army fort"
 ],
-"why": "✓ Correct. That's the comic's version. It makes the South's choice sound like it was about loyalty. Check it.",
-"hint": "Read the box in the middle of reader page 1."
+"why": "✓ Correct. On April 12, 1861, Confederate cannons fired on Fort Sumter. Lincoln then called for 75,000 volunteers.",
+"hint": "Read the box at the top right, over the exploding fort."
 },
 "prompt": "The comic says many Southerners opposed slavery but stayed loyal to their states. What were Southern leaders fighting to protect?",
-"stem": "<span class=\"declass\"><b>Fact file</b><span class=\"line\">In 1860, nearly <b>4 million</b> people were enslaved in the South. More than a third of the South's 9 million people were enslaved.</span><span class=\"line\">Mississippi explained why it left: <b>\"Our position is thoroughly identified with the institution of slavery.\"</b></span><span class=\"line\">After Fort Sumter, Lincoln called for 75,000 volunteers. Four more slave states then joined the Confederacy, making 11.</span></span>Write 1–2 sentences. Start like this: <i>The comic says ___, but Southern leaders were protecting ___. I know because ___.</i>",
+"stem": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">Many Southerners opposed slavery, but loyalty to their states came first.</span><span class=\"rl\">Southern leaders said they left to protect slavery. Mississippi said so in its own words.</span></span><b class=\"kf\">Know this</b><span class=\"line\">After Fort Sumter, four more slave states joined the Confederacy, making <b>11</b>.</span></span>Write 1–2 sentences. Start like this: <i>The comic says ___, but Southern leaders were protecting ___. I know because ___.</i>",
 "stemText": "The comic says ___, but Southern leaders were protecting ___. I know because ___.",
 "placeholder": "The comic says ___, but Southern leaders were protecting ___. I know because ___."
 },
@@ -114,18 +121,18 @@ parts:[
 "check": {
 "page": 2,
 "tag": "Reading check · Reader page 2",
-"q": "Read the bottom of the panel. What happened at the first big battle, Bull Run?",
-"right": "The Confederates rallied and drove the Union back.",
+"q": "The South won at Bull Run. What edge did the South have early on?",
+"right": "Skilled generals defending their own land",
 "wrong": [
-"The Union captured the Confederate capital.",
-"Both armies quit and went home for winter.",
-"Stonewall Jackson surrendered to the Union."
+"More soldiers and more factories than the North",
+"Most of the country's railroads",
+"Help from British and French armies"
 ],
-"why": "✓ Correct. The South won early battles. But the war would last four years.",
-"hint": "Read the words at the bottom of the big panel."
+"why": "✓ Correct. The South only had to defend its home, and it had skilled generals. The North had more people and factories.",
+"hint": "Read the bubbles: \"They're beating us back\" and \"There is Jackson... standing like a stone wall!\""
 },
 "prompt": "The South won the first big battle. Why did the North still have the edge in a long war?",
-"stem": "<span class=\"declass\"><b>Fact file</b><span class=\"line\">The North had about <b>22 million</b> people. The South had about 9 million. The North made about 90% of the country's factory goods and had most of the railroads.</span><span class=\"line\">The South only had to defend its own land, and it had skilled generals like Robert E. Lee.</span><span class=\"line\">Iowa had only about 675,000 people, but more than <b>76,000</b> Iowa men served in the Union army. Annie Wittenmyer of Keokuk set up hospital kitchens that cooked healthy meals for sick soldiers.</span></span>Write 1–2 sentences. Start like this: <i>The North had the edge because ___. The South's best hope was ___.</i>",
+"stem": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">Stonewall Jackson became \"a hero of the reunited nation.\"</span><span class=\"rl\">He was a skilled general, but he fought for a side that wanted to keep slavery. In 2020, Richmond, Virginia, took down its statue of him.</span></span><b class=\"kf\">Know this</b><span class=\"line\">North: about <b>22 million</b> people and 90% of factory goods. South: about 9 million people, more than a third of them enslaved.</span></span>Write 1–2 sentences. Start like this: <i>The North had the edge because ___. The South's best hope was ___.</i>",
 "stemText": "The North had the edge because ___. The South's best hope was ___.",
 "placeholder": "The North had the edge because ___. The South's best hope was ___."
 },
@@ -138,18 +145,18 @@ parts:[
 "check": {
 "page": 3,
 "tag": "Reading check · Reader page 3",
-"q": "Read the pink box at the bottom. What happened in Pickett's Charge?",
-"right": "15,000 Southern soldiers charged, and it failed.",
+"q": "Why is Gettysburg called the turning point of the war?",
+"right": "Lee's invasion of the North failed",
 "wrong": [
-"Union troops captured Lee on the battlefield.",
-"Southern troops captured Washington, D.C.",
-"Both armies agreed to stop for a day."
+"The Union captured the Confederate capital",
+"Lee was captured in Pickett's Charge",
+"The South won and nearly reached Washington"
 ],
-"why": "✓ Correct. Lee's invasion of the North failed. He never invaded the North again.",
-"hint": "Read the pink box at the bottom of reader page 3."
+"why": "✓ Correct. Pickett's Charge failed, and Lee never invaded the North again. The next day, Vicksburg surrendered too.",
+"hint": "Read the pink box at the bottom."
 },
 "prompt": "Gettysburg or Vicksburg: which 1863 Union win mattered more? Why?",
-"stem": "<span class=\"declass\"><b>Fact file</b><span class=\"line\"><b>Gettysburg</b> (July 1–3, 1863): about 51,000 soldiers on both sides were killed, wounded, captured, or missing.</span><span class=\"line\"><b>Vicksburg</b> surrendered July 4, 1863, after a 47-day siege. The Union soon controlled the whole Mississippi River and split the South in two. Iowa's memorial there honors 44 Iowa units.</span></span>Write 1–2 sentences. Start like this: <i>___ mattered more because ___.</i>",
+"stem": "<span class=\"declass\"><b>Fact file</b><b class=\"kf\">Know this</b><span class=\"line\"><b>Vicksburg</b> surrendered July 4, 1863. The Union soon held the whole Mississippi River and split the South in two.</span><span class=\"line\">About <b>51,000</b> soldiers were killed, wounded, captured, or missing at Gettysburg.</span></span>Write 1–2 sentences. Start like this: <i>___ mattered more because ___.</i>",
 "stemText": "___ mattered more because ___.",
 "placeholder": "___ mattered more because ___."
 },
@@ -162,18 +169,18 @@ parts:[
 "check": {
 "page": 4,
 "tag": "Reading check · Reader page 4",
-"q": "Read Sherman's speech bubble. What does he say about war?",
-"right": "There is no glory in war. War is hell.",
+"q": "What did Sherman's army do as it crossed Georgia?",
+"right": "Wrecked what the South needed to fight",
 "wrong": [
-"War is the best test of a man's courage.",
-"War is over once the army reaches the sea.",
-"War is won by the bravest generals."
+"Freed every enslaved person in the South",
+"Fought Lee's army outside of Richmond",
+"Signed a peace treaty with Georgia's leaders"
 ],
-"why": "✓ Correct. In 1864, Sherman also wrote: \"War is cruelty, and you cannot refine it.\"",
-"hint": "Read Sherman's speech bubble on the left."
+"why": "✓ Correct. That's total war: attacking everything the enemy needs to keep fighting, not just its army.",
+"hint": "Read the yellow box under Sherman, and look at his soldiers tearing up the railroad."
 },
 "prompt": "What mattered most for the Union win: more people and factories, the battles of 1863, or total war?",
-"stem": "<span class=\"declass\"><b>Fact file</b><span class=\"line\"><b>Total war:</b> Sherman's 60,000 soldiers marched about 300 miles from Atlanta to the sea. They tore up railroads and burned crops, barns, and factories. Thousands of enslaved people followed the army to freedom.</span><span class=\"line\">Lee surrendered on April 9, 1865. Between 620,000 and 750,000 soldiers died, more than in any other American war. About 2 of every 3 died from disease.</span></span>Write 1–2 sentences. Start like this: <i>___ mattered most because ___.</i>",
+"stem": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">Sherman said \"War is hell\" when he reached the sea.</span><span class=\"rl\">He said something like it in a speech years later, around 1879. In 1864 he wrote: \"War is cruelty.\"</span></span><b class=\"kf\">Know this</b><span class=\"line\">Lee surrendered April 9, 1865. Between 620,000 and 750,000 soldiers died, about 2 of every 3 from disease.</span></span>Write 1–2 sentences. Start like this: <i>___ mattered most because ___.</i>",
 "stemText": "___ mattered most because ___.",
 "placeholder": "___ mattered most because ___."
 }

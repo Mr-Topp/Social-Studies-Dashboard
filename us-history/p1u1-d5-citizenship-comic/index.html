@@ -16,6 +16,13 @@
 .declass{display:block;background:#fff;border:2px dashed #18364a;border-radius:10px;padding:8px 11px;margin:6px 0 8px;font-weight:650;color:#22313b;line-height:1.4;font-style:normal}
 .declass > b:first-child{display:block;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#18364a;margin-bottom:2px}
 .declass .line{display:block;margin:3px 0}
+.declass .fix{display:block;margin:6px 0;border:1px solid #c9d3da;border-radius:8px;overflow:hidden}
+.declass .cs,.declass .rl{display:block;padding:5px 9px}
+.declass .cs{background:#fdecea}
+.declass .cs::before{content:"\2717  Comic says: ";font-weight:800;color:#a3271a}
+.declass .rl{background:#e6f4e9}
+.declass .rl::before{content:"\2713  Really: ";font-weight:800;color:#1d6b33}
+.declass .kf{display:block;margin-top:8px;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#18364a}
 .declass .note{display:block;margin-top:5px;font-weight:600;font-size:.9rem;color:#5b4632}
 .dime{display:inline-block;background:#e6bd64;color:#0f2433;border-radius:999px;font-weight:850;padding:0 9px;margin-right:4px}
 .credits{font-size:.8rem;color:var(--muted);margin:10px 0 0;line-height:1.4}
@@ -40,7 +47,7 @@ body.reading-now .choices{opacity:.45;pointer-events:none}
 
 <main class="gr-main gr-wrap">
 <section class="card">
-<p class="intro-line"><b>You're the fact-checker.</b> For each part: <b>read</b> the comic on the left → get the <b>check</b> right → read the <b>fact file</b> → write 1–2 sentences. Done = all parts green, then turn in at the bottom.</p>
+<p class="intro-line"><b>How it works:</b> read the comic pages → answer the question about today's big idea → see what the comic got right and wrong → write 1–2 sentences. Done = all parts green, then turn in at the bottom.</p>
 <details class="wordhelp"><summary>Word help (tap to open)</summary>
 <ul class="words" aria-label="Word help">
 <li><b>Citizenship</b> = legally belonging to a country</li><li><b>Suffrage</b> = the right to vote</li><li><b>Equality</b> = the law treats people the same</li><li><b>Sovereignty</b> = a nation's power to govern itself</li><li><b>Amendment</b> = a change added to the Constitution</li><li><b>1953 comic</b> = made by the U.S. government to tell America's story in other countries. It shows one point of view.</li>
@@ -90,18 +97,18 @@ parts:[
 "check": {
 "page": 1,
 "tag": "Reading check · Reader page 1",
-"q": "Read the speech bubble at the bottom. Why does the man in the fur hat move farther west?",
-"right": "It's getting too crowded where he lives.",
+"q": "The man moves west for \"elbow room.\" What does the comic leave out?",
+"right": "Native nations already lived there",
 "wrong": [
-"The government took away his farm.",
-"He wants to look for gold in California.",
-"He's running away from British soldiers."
+"Settlers needed the king's permission to go",
+"The West belonged to France until 1850",
+"Only rich families could afford to move"
 ],
-"why": "✓ Correct. Settlers saw the West as open land with \"elbow room.\" Native nations saw it as home.",
-"hint": "Read the speech bubble at the bottom of reader page 1."
+"why": "✓ Correct. Settlers saw open land. Native nations saw their home. Treaties and wars pushed them out.",
+"hint": "Read the speech bubble at the bottom. Is anyone in the picture besides settlers?"
 },
 "prompt": "The comic shows the West as open land with \"elbow room.\" What happened to the Native nations who lived there? Use the Meskwaki.",
-"stem": "<span class=\"declass\"><b>Fact file</b><span class=\"line\">Treaties in the 1830s and 1840s took the Meskwaki (mes-KWAH-kee) people's land in Iowa. In 1845, most were forced to move to Kansas. Some hid in Iowa, and others came back.</span><span class=\"line\">In 1857, the Meskwaki used their own money, $1,000, to <b>buy</b> 80 acres in Tama (TAY-muh) County. Because they owned it, no one could make them leave.</span><span class=\"line\">Today the Meskwaki Nation owns more than 8,100 acres. It has <b>sovereignty</b>: its own constitution, police, and courts.</span></span>Write 1–2 sentences. Start like this: <i>Settlers saw ___, but the Meskwaki ___. They kept a home in Iowa by ___.</i>",
+"stem": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">The West had plenty of \"elbow room.\"</span><span class=\"rl\">Native nations lived there. In Iowa, treaties in the 1830s and 1840s took Meskwaki land.</span></span><b class=\"kf\">Know this</b><span class=\"line\">In 1857, the Meskwaki <b>bought</b> 80 acres in Tama County with their own money. Because they owned it, no one could make them leave.</span><span class=\"line\">Today the Meskwaki Nation has <b>sovereignty</b>: its own constitution, police, and courts.</span></span>Write 1–2 sentences. Start like this: <i>Settlers saw ___, but the Meskwaki ___. They kept a home in Iowa by ___.</i>",
 "stemText": "Settlers saw ___, but the Meskwaki ___. They kept a home in Iowa by ___.",
 "placeholder": "Settlers saw ___, but the Meskwaki ___. They kept a home in Iowa by ___."
 },
@@ -114,18 +121,18 @@ parts:[
 "check": {
 "page": 2,
 "tag": "Reading check · Reader page 2",
-"q": "Read the yellow box. Which promise does the comic say the new nation made?",
-"right": "Opportunity for all those willing to work for it.",
+"q": "The box promises \"protection of individual rights\" and \"opportunity for all.\" Who did that really fit?",
+"right": "White men, rich or poor",
 "wrong": [
-"Free land for every family that moved west.",
-"Equal voting rights for every adult.",
-"A new leader chosen by the people every year."
+"Every adult living in the states",
+"Anyone who moved to the West",
+"All free people, Black or white"
 ],
-"why": "✓ Correct. That's the comic's promise. Now test it with real cases from Iowa.",
-"hint": "Read the last two lines of the yellow box."
+"why": "✓ Correct. By the 1850s, nearly all white men could vote. Women and most Black men could not.",
+"hint": "Read the yellow box on the left. Then ask: opportunity for ALL?"
 },
 "prompt": "\"Protection of individual rights… opportunity for all.\" Fact-check it: who got these rights, and who didn't?",
-"stem": "<span class=\"declass\"><b>Fact file</b><span class=\"line\">In 1776, most states let only men who owned property vote. By the 1850s, nearly all white men could vote. In 1807, New Jersey took the vote away from women and free Black men.</span><span class=\"line\"><b>In re Ralph (1839):</b> Ralph was enslaved in Missouri and worked in the Dubuque (duh-BYOOK) lead mines to buy his freedom. Iowa's Supreme Court ruled him free, since Iowa didn't allow slavery.</span><span class=\"line\">But Iowa's 1846 constitution let only white men vote. Black settlers had to show proof they were free to live here.</span></span>Write 1–2 sentences. Start like this: <i>The promise worked for ___, but not for ___. For example, ___.</i>",
+"stem": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">There was \"opportunity for all.\"</span><span class=\"rl\">Iowa's 1846 constitution let only white men vote. Black settlers had to show proof they were free.</span></span><b class=\"kf\">Know this</b><span class=\"line\"><b>In re Ralph (1839):</b> Iowa's Supreme Court ruled Ralph free, since Iowa didn't allow slavery. But free didn't mean equal.</span></span>Write 1–2 sentences. Start like this: <i>The promise worked for ___, but not for ___. For example, ___.</i>",
 "stemText": "The promise worked for ___, but not for ___. For example, ___.",
 "placeholder": "The promise worked for ___, but not for ___. For example, ___."
 },
@@ -138,20 +145,20 @@ parts:[
 "check": {
 "page": 3,
 "tag": "Reading check · Reader page 3",
-"q": "Read the green box. After the Civil War, what right did Congress give the newly freed men?",
-"right": "The right to vote.",
+"q": "What big change in citizenship does the green box describe?",
+"right": "Freed Black men got the right to vote",
 "wrong": [
-"The right to own a farm.",
-"The right to pick the president.",
-"The right to run for president."
+"Women got the right to vote in every state",
+"Former Confederates became U.S. citizens",
+"Native Americans became full U.S. citizens"
 ],
 "why": "✓ Correct. The 15th Amendment (1870) said no one could be denied the vote because of race.",
 "hint": "Read the last line of the green box."
 },
 "prompt": "From 1776 to 1870, did citizenship change a lot, a little, or not enough? Defend it.",
-"stem": "<span class=\"declass\"><b>Fact file</b><span class=\"line\"><b>13th Amendment (1865):</b> ended slavery. <b>14th (1868):</b> people born in the U.S. are citizens, with equal protection of the laws. <b>15th (1870):</b> no one denied the vote because of race.</span><span class=\"line\"><b>Iowa, 1868:</b> two years before the 15th, Iowa voters took the word \"white\" out of the state's voting rules. That same year, Alexander Clark of Muscatine (MUS-kuh-teen) won a case letting his daughter Susan attend her local school.</span><span class=\"line\">But women still couldn't vote, and most Native Americans weren't counted as citizens.</span><span class=\"note\">Heads up: this 1953 comic tells the story of Reconstruction in a slanted way. You'll fact-check that in Unit 2.</span></span>Write 1–2 sentences. Start like this: <i>From 1776 to 1870, citizenship changed (a lot / a little / not enough) because ___. One example is ___.</i>",
-"stemText": "From 1776 to 1870, citizenship changed (a lot / a little / not enough) because ___. One example is ___.",
-"placeholder": "From 1776 to 1870, citizenship changed (a lot / a little / not enough) because ___. One example is ___."
+"stem": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">Congress took the vote from former Confederates.</span><span class=\"rl\">Only some Confederate leaders lost the vote or the right to hold office. Most got those rights back by 1872.</span></span><b class=\"kf\">Know this</b><span class=\"line\"><b>13th (1865)</b> ended slavery. <b>14th (1868)</b> made people born here citizens. <b>15th (1870)</b> banned denying the vote by race.</span><span class=\"line\"><b>Iowa, 1868:</b> voters took \"white\" out of the voting rules. Women still couldn't vote.</span></span>Write 1–2 sentences. Start like this: <i>Citizenship changed (a lot / a little / not enough) because ___. One example is ___.</i>",
+"stemText": "Citizenship changed (a lot / a little / not enough) because ___. One example is ___.",
+"placeholder": "Citizenship changed (a lot / a little / not enough) because ___. One example is ___."
 }
 ],
 questions:["The comic shows the West as open land with \"elbow room.\" What happened to the Native nations who lived there? Use the Meskwaki.", "\"Protection of individual rights… opportunity for all.\" Fact-check it: who got these rights, and who didn't?", "From 1776 to 1870, did citizenship change a lot, a little, or not enough? Defend it."],

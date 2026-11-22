@@ -16,6 +16,13 @@
 .declass{display:block;background:#fff;border:2px dashed #18364a;border-radius:10px;padding:8px 11px;margin:6px 0 8px;font-weight:650;color:#22313b;line-height:1.4;font-style:normal}
 .declass > b:first-child{display:block;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#18364a;margin-bottom:2px}
 .declass .line{display:block;margin:3px 0}
+.declass .fix{display:block;margin:6px 0;border:1px solid #c9d3da;border-radius:8px;overflow:hidden}
+.declass .cs,.declass .rl{display:block;padding:5px 9px}
+.declass .cs{background:#fdecea}
+.declass .cs::before{content:"\2717  Comic says: ";font-weight:800;color:#a3271a}
+.declass .rl{background:#e6f4e9}
+.declass .rl::before{content:"\2713  Really: ";font-weight:800;color:#1d6b33}
+.declass .kf{display:block;margin-top:8px;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#18364a}
 .declass .note{display:block;margin-top:5px;font-weight:600;font-size:.9rem;color:#5b4632}
 .dime{display:inline-block;background:#e6bd64;color:#0f2433;border-radius:999px;font-weight:850;padding:0 9px;margin-right:4px}
 .credits{font-size:.8rem;color:var(--muted);margin:10px 0 0;line-height:1.4}
@@ -40,7 +47,7 @@ body.reading-now .choices{opacity:.45;pointer-events:none}
 
 <main class="gr-main gr-wrap">
 <section class="card">
-<p class="intro-line"><b>You're the fact-checker.</b> For each part: <b>read</b> the comic on the left → get the <b>check</b> right → read the <b>fact file</b> → write 1–2 sentences. Done = all parts green, then turn in at the bottom.</p>
+<p class="intro-line"><b>How it works:</b> read the comic pages → answer the question about today's big idea → see what the comic got right and wrong → write 1–2 sentences. Done = all parts green, then turn in at the bottom.</p>
 <details class="wordhelp"><summary>Word help (tap to open)</summary>
 <ul class="words" aria-label="Word help">
 <li><b>Reconstruction</b> = rebuilding the South and bringing its states back (1865–1877)</li><li><b>Freedpeople</b> = people freed from slavery</li><li><b>Pardon</b> = officially forgive</li><li><b>Stereotype</b> = an unfair idea that all people in a group are the same</li><li><b>Unscrupulous</b> = dishonest</li><li><b>1953 comic</b> = made by the U.S. government to tell America's story in other countries. It shows one point of view.</li>
@@ -90,18 +97,18 @@ parts:[
 "check": {
 "page": 1,
 "tag": "Reading check · Reader page 1",
-"q": "Read the boxes. What happened five days after Lee's surrender?",
-"right": "Lincoln was shot at a theater in Washington.",
+"q": "Lincoln is shot on this page. What did his death mean for rebuilding the South?",
+"right": "Johnson took over and went easy on the South",
 "wrong": [
-"Lincoln won a second term as president.",
-"Lee was put on trial in Washington.",
-"The Confederacy started a new war."
+"The Confederacy started the war up again",
+"Congress ended Reconstruction right away",
+"The Union army left the South for good that year"
 ],
-"why": "✓ Correct. John Wilkes Booth, an actor who supported the Confederacy, shot Lincoln. Lincoln died the next morning.",
-"hint": "Read the yellow and pink boxes on reader page 1."
+"why": "✓ Correct. Johnson pardoned most ex-Confederates and let them form new governments fast. Those governments passed Black Codes.",
+"hint": "Read the boxes at the top: \"Five days after Lee's surrender...\" Then think: who became President?"
 },
 "prompt": "Lincoln wanted \"malice toward none.\" What did President Johnson's plan mean for freedpeople?",
-"stem": "<span class=\"declass\"><b>Fact file</b><span class=\"line\">Vice President <b>Andrew Johnson</b>, a Democrat from Tennessee, became President. He pardoned most ex-Confederates and let them form new state governments quickly.</span><span class=\"line\">Those governments passed <b>Black Codes</b>. In South Carolina, Black workers had to sign yearly contracts and could be arrested for quitting. A Black man with no job could be arrested and hired out to work, almost like slavery again.</span></span>Write 1–2 sentences. Start like this: <i>Under Johnson's plan, freedpeople ___ because ___.</i>",
+"stem": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">A \"crazed actor\" shot Lincoln.</span><span class=\"rl\">John Wilkes Booth planned it. He supported the Confederacy and was angry that Lincoln wanted some Black men to vote.</span></span><b class=\"kf\">Know this</b><span class=\"line\"><b>Black Codes</b> limited freedpeople. A Black man with no job could be arrested and hired out to work, almost like slavery again.</span></span>Write 1–2 sentences. Start like this: <i>Under Johnson's plan, freedpeople ___ because ___.</i>",
 "stemText": "Under Johnson's plan, freedpeople ___ because ___.",
 "placeholder": "Under Johnson's plan, freedpeople ___ because ___."
 },
@@ -114,18 +121,18 @@ parts:[
 "check": {
 "page": 2,
 "tag": "Reading check · Reader page 2",
-"q": "Read the green box. What did Congress do, overriding Johnson?",
-"right": "Gave freed men the vote and took it from ex-Confederates.",
+"q": "What were the Radical Republicans in Congress trying to do?",
+"right": "Protect freedpeople and their right to vote",
 "wrong": [
-"Let ex-Confederates run the South again right away.",
-"Sent all freedpeople to live in the North.",
-"Ended the war without changing any laws."
+"Let ex-Confederates run the South again quickly",
+"Send freedpeople to start new lives in Africa",
+"End the war without changing any laws"
 ],
-"why": "✓ Correct. The comic calls this \"punishing\" the South. Congress said it was protecting freedpeople.",
-"hint": "Read the last lines of the green box."
+"why": "✓ Correct. Congress overrode Johnson, gave freed men the vote, and passed the 14th Amendment.",
+"hint": "Read the last lines of the green box: \"granting this right to the newly freed slaves.\""
 },
 "prompt": "The comic says Congress wanted the South \"punished.\" What were the Radical Republicans really trying to do?",
-"stem": "<span class=\"declass\"><b>Fact file</b><span class=\"line\">The <b>Radical Republicans</b>, led by Thaddeus Stevens, wanted to protect freedpeople and punish Confederate leaders.</span><span class=\"line\">Johnson vetoed a civil rights law. Congress passed it anyway. In 1868, the House <b>impeached</b> Johnson. The Senate fell one vote short of removing him.</span><span class=\"line\"><b>14th Amendment (1868):</b> everyone born in the U.S. is a citizen, with equal protection. <b>15th (1870):</b> no denying the vote because of race.</span></span>Write 1–2 sentences. Start like this: <i>The comic says ___, but Congress was really trying to ___.</i>",
+"stem": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">Congress just wanted the South \"punished.\"</span><span class=\"rl\">Radical Republicans wanted to protect freedpeople. Some Confederate leaders lost the vote, but most white Southerners kept it.</span></span><b class=\"kf\">Know this</b><span class=\"line\"><b>14th Amendment (1868):</b> everyone born in the U.S. is a citizen, with equal protection of the laws.</span><span class=\"line\">In 1868, the House <b>impeached</b> Johnson. The Senate fell one vote short of removing him.</span></span>Write 1–2 sentences. Start like this: <i>The comic says ___, but Congress was really trying to ___.</i>",
 "stemText": "The comic says ___, but Congress was really trying to ___.",
 "placeholder": "The comic says ___, but Congress was really trying to ___."
 },
@@ -138,23 +145,23 @@ parts:[
 "check": {
 "page": 3,
 "tag": "Reading check · Reader page 3",
-"q": "Read the speech bubbles. What does the man in the hat tell the freed man?",
-"right": "\"Don't worry. We'll tell you what to do.\"",
+"q": "The comic shows a freed man who needs to be told what to do. What really happened?",
+"right": "About 2,000 Black men held office",
 "wrong": [
-"\"You should run for the Senate yourself.\"",
-"\"You'll have to leave town by morning.\"",
-"\"You can't vote until you pay a tax.\""
+"Northern men held every Southern office",
+"Black men were banned from office until 1900",
+"Few freed men ever tried to vote"
 ],
-"why": "✓ Correct. The comic shows freedpeople as helpless puppets. Historians call that a myth. Read the fact file.",
-"hint": "Read the speech bubble at the bottom left of the panel."
+"why": "✓ Correct. From sheriff to U.S. senator, Black leaders won office. Hiram Revels became the first Black U.S. senator in 1870.",
+"hint": "Read the speech bubbles at the bottom. Is that the whole story?"
 },
-"prompt": "This panel shows freedpeople as helpless and controlled. Fact-check it.",
-"stem": "<span class=\"declass\"><b>Fact file</b><span class=\"line\">About <b>2,000</b> Black men held office during Reconstruction, from sheriff to member of Congress. In 1870, <b>Hiram Revels</b> of Mississippi, a minister and teacher, became the first Black U.S. senator.</span><span class=\"line\">In most Southern states, it had been <b>illegal</b> to teach enslaved people to read. After the war, children and adults packed classrooms. The Freedmen's Bureau helped open more than 1,000 schools.</span><span class=\"line\">The \"helpless freedman\" story spread in early 1900s history books and the 1915 movie <i>The Birth of a Nation</i>. By 1953, many textbooks still told it.</span><span class=\"note\">This panel uses an old, racist stereotype. Historians today say it's false.</span></span>Write 1–2 sentences. Start like this: <i>The comic shows freedpeople as ___, but really ___. For example, ___.</i>",
-"stemText": "The comic shows freedpeople as ___, but really ___. For example, ___.",
-"placeholder": "The comic shows freedpeople as ___, but really ___. For example, ___."
+"prompt": "What helped freedpeople most: schools, the 14th Amendment, or Black leaders in office?",
+"stem": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">Freed men were helpless puppets who couldn't read.</span><span class=\"rl\">Most had been kept from reading by law. After the war, they packed new schools and ran for office.</span></span><span class=\"fix\"><span class=\"cs\">Reconstruction was run by \"unscrupulous schemers.\"</span><span class=\"rl\">That story came from early 1900s books and the 1915 movie <i>The Birth of a Nation</i>. Historians say it's false.</span></span><b class=\"kf\">Know this</b><span class=\"line\">The Freedmen's Bureau helped open more than <b>1,000</b> schools.</span></span>Write 1–2 sentences. Start like this: <i>___ helped freedpeople most because ___.</i>",
+"stemText": "___ helped freedpeople most because ___.",
+"placeholder": "___ helped freedpeople most because ___."
 }
 ],
-questions:["Lincoln wanted \"malice toward none.\" What did President Johnson's plan mean for freedpeople?", "The comic says Congress wanted the South \"punished.\" What were the Radical Republicans really trying to do?", "This panel shows freedpeople as helpless and controlled. Fact-check it."],
+questions:["Lincoln wanted \"malice toward none.\" What did President Johnson's plan mean for freedpeople?", "The comic says Congress wanted the South \"punished.\" What were the Radical Republicans really trying to do?", "What helped freedpeople most: schools, the 14th Amendment, or Black leaders in office?"],
 validate(s){if(!s.name)return{text:"Type your first name + last initial (like Jordan M.) at the top of the questions.",focus:"studentName"};
  const mc=[1, 2, 3].find(i=>!s.checkDone(i));if(mc)return{text:"Get the check right for part "+mc+" first.",part:mc};
  const ma=[1, 2, 3].find(i=>!s.answer(i));if(ma)return{text:"Write your answer for part "+ma+" before turning in.",part:ma,focus:"answer"+ma};

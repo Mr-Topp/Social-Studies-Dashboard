@@ -16,6 +16,13 @@
 .declass{display:block;background:#fff;border:2px dashed #18364a;border-radius:10px;padding:8px 11px;margin:6px 0 8px;font-weight:650;color:#22313b;line-height:1.4;font-style:normal}
 .declass > b:first-child{display:block;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#18364a;margin-bottom:2px}
 .declass .line{display:block;margin:3px 0}
+.declass .fix{display:block;margin:6px 0;border:1px solid #c9d3da;border-radius:8px;overflow:hidden}
+.declass .cs,.declass .rl{display:block;padding:5px 9px}
+.declass .cs{background:#fdecea}
+.declass .cs::before{content:"\2717  Comic says: ";font-weight:800;color:#a3271a}
+.declass .rl{background:#e6f4e9}
+.declass .rl::before{content:"\2713  Really: ";font-weight:800;color:#1d6b33}
+.declass .kf{display:block;margin-top:8px;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#18364a}
 .declass .note{display:block;margin-top:5px;font-weight:600;font-size:.9rem;color:#5b4632}
 .dime{display:inline-block;background:#e6bd64;color:#0f2433;border-radius:999px;font-weight:850;padding:0 9px;margin-right:4px}
 .credits{font-size:.8rem;color:var(--muted);margin:10px 0 0;line-height:1.4}
@@ -40,7 +47,7 @@ body.reading-now .choices{opacity:.45;pointer-events:none}
 
 <main class="gr-main gr-wrap">
 <section class="card">
-<p class="intro-line"><b>You're the fact-checker.</b> For each part: <b>read</b> the comic on the left → get the <b>check</b> right → read the <b>fact file</b> → write 1–2 sentences. Done = all parts green, then turn in at the bottom.</p>
+<p class="intro-line"><b>How it works:</b> read the comic pages → answer the question about today's big idea → see what the comic got right and wrong → write 1–2 sentences. Done = all parts green, then turn in at the bottom.</p>
 <details class="wordhelp"><summary>Word help (tap to open)</summary>
 <ul class="words" aria-label="Word help">
 <li><b>Convention</b> = a big meeting to make decisions</li><li><b>Delegate</b> = a person chosen to speak for their state</li><li><b>Compromise</b> = a deal where each side gives up something</li><li><b>Representation</b> = how many votes you get in Congress</li><li><b>Civic virtue</b> = putting the common good ahead of yourself</li><li><b>1953 comic</b> = made by the U.S. government to tell America's story in other countries. It shows one point of view.</li>
@@ -90,18 +97,18 @@ parts:[
 "check": {
 "page": 1,
 "tag": "Reading check · Reader page 1",
-"q": "Read the two speech bubbles. What are the two delegates arguing about?",
-"right": "Whether big and small states should get equal votes.",
+"q": "What were the big states and small states fighting about?",
+"right": "How many votes each state gets in Congress",
 "wrong": [
-"Whether the new country should have a king.",
-"Whether to make peace again with Great Britain.",
-"Whether Washington should be the first president."
+"Whether to pay off the war debt to Britain first",
+"Which state's city would be the new capital",
+"Whether the new country should have a king"
 ],
-"why": "✓ Correct. Big states wanted votes based on population. Small states wanted every state to count the same.",
-"hint": "Read the first speech bubble: \"Why should your state be equal with mine…\""
+"why": "✓ Correct. Big states wanted votes by population (Virginia Plan). Small states wanted equal votes (New Jersey Plan).",
+"hint": "Read the first speech bubble: \"Why should your state be equal with mine...\""
 },
 "prompt": "Big states vs. small states: what did each side want, and why?",
-"stem": "<span class=\"declass\"><b>Fact file</b><span class=\"line\">In 1787, <b>55 delegates</b> from 12 states met in secret in Philadelphia. They were supposed to fix the Articles. Instead they wrote a brand-new Constitution.</span><span class=\"line\"><b>Virginia Plan</b> (big states): more people = more votes in Congress. <b>New Jersey Plan</b> (small states): every state gets an equal vote.</span></span>Write 1–2 sentences. Start like this: <i>Big states wanted ___ because ___. Small states wanted ___ because ___.</i>",
+"stem": "<span class=\"declass\"><b>Fact file</b><b class=\"kf\">Know this</b><span class=\"line\"><b>55 delegates</b> from 12 states met in secret. They were supposed to fix the Articles. They wrote a new Constitution instead.</span><span class=\"line\"><b>Washington</b> ran the Convention. In 1783 he had given up command of the army instead of grabbing power.</span></span>Write 1–2 sentences. Start like this: <i>Big states wanted ___ because ___. Small states wanted ___ because ___.</i>",
 "stemText": "Big states wanted ___ because ___. Small states wanted ___ because ___.",
 "placeholder": "Big states wanted ___ because ___. Small states wanted ___ because ___."
 },
@@ -114,20 +121,20 @@ parts:[
 "check": {
 "page": 2,
 "tag": "Reading check · Reader page 2",
-"q": "Read Franklin's speech bubble. What does he compare the Convention to?",
-"right": "A carpenter trimming boards so they fit.",
+"q": "What is Franklin asking the delegates to do?",
+"right": "Each side gives up a little to make a deal",
 "wrong": [
-"A captain steering a ship through a storm.",
-"A farmer planting seeds in a new field.",
-"A judge deciding who wins a court case."
+"Let the biggest states make the final decision",
+"Stop meeting and go home to their states",
+"Start over and fix the old Articles instead"
 ],
-"why": "✓ Correct. Each side shaves off a little so the pieces fit. That's a compromise.",
+"why": "✓ Correct. That's a compromise: each side gives up something to get something.",
 "hint": "Read Franklin's speech bubble about the planks of a table."
 },
-"prompt": "Fact-check: the comic gets Franklin's age wrong. Then explain why Franklin pushed for compromise.",
-"stem": "<span class=\"declass\"><b>Fact file</b><span class=\"line\">The comic calls Franklin \"84-year-old.\" He was really <b>81</b> in 1787. He died in 1790, at 84.</span><span class=\"line\">Franklin was the oldest delegate and often sick, but he kept showing up. On the last day he said: <b>\"I agree to this Constitution with all its faults… because I think a general Government necessary for us.\"</b></span></span>Write 1–2 sentences. Start like this: <i>Franklin was really ___ years old. He pushed for compromise because ___.</i>",
-"stemText": "Franklin was really ___ years old. He pushed for compromise because ___.",
-"placeholder": "Franklin was really ___ years old. He pushed for compromise because ___."
+"prompt": "Who showed the most civic virtue: Washington, Madison, or Franklin? Defend your pick.",
+"stem": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">Franklin was 84 years old.</span><span class=\"rl\">He was 81 in 1787. He died in 1790, at 84.</span></span><b class=\"kf\">Know this</b><span class=\"line\">On the last day, Franklin said he agreed to the Constitution \"with all its faults,\" because the country needed a national government.</span><span class=\"line\"><b>Madison</b> took careful notes every day. They are the best record of what was said.</span></span>Write 1–2 sentences. Start like this: <i>___ showed the most civic virtue because ___.</i>",
+"stemText": "___ showed the most civic virtue because ___.",
+"placeholder": "___ showed the most civic virtue because ___."
 },
 {
 "short": "The deals",
@@ -138,23 +145,23 @@ parts:[
 "check": {
 "page": 3,
 "tag": "Reading check · Reader page 3",
-"q": "Read the box on the left. How is the Senate set up?",
-"right": "Every state gets two senators.",
+"q": "How did the Great Compromise settle the big-state, small-state fight?",
+"right": "House seats by population, 2 senators per state",
 "wrong": [
-"Bigger states get more senators.",
-"The President picks every senator.",
-"Every state gets one senator."
+"Big states get more senators, small states more House seats",
+"One house of Congress, with votes based on population",
+"Each state gets one vote, just like under the Articles"
 ],
-"why": "✓ Correct. That's the Great Compromise: the House is based on population, and the Senate is equal. That's why Iowa has 4 House members and 2 senators.",
-"hint": "Read the box on the left side of reader page 3."
+"why": "✓ Correct. Big states got the House. Small states got the Senate. That's why Iowa has 4 House members and 2 senators.",
+"hint": "Read the box on the left side of the page."
 },
 "prompt": "The comic says \"compromises were reached.\" Which deal did it leave out, and who was missing from the room?",
-"stem": "<span class=\"declass\"><b>Fact file</b><span class=\"line\">The <b>Three-Fifths Compromise</b> counted 3 of every 5 enslaved people when deciding House seats. That gave slave states more seats and more power.</span><span class=\"line\">The Constitution also said Congress couldn't ban bringing in enslaved Africans until 1808.</span><span class=\"line\">All 55 delegates were white men, most of them wealthy. No women, no Black Americans, no Native nations, and few poor farmers were in the room.</span></span>Write 1–2 sentences. Start like this: <i>The comic left out the ___ Compromise, which ___. Missing from the room were ___.</i>",
+"stem": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">(Nothing about slavery.)</span><span class=\"rl\">The Three-Fifths Compromise counted 3 of every 5 enslaved people for House seats. That gave slave states more power.</span></span><b class=\"kf\">Know this</b><span class=\"line\">All 55 delegates were white men, and most were wealthy. Women, Black Americans, Native nations, and most poor farmers had no seat.</span></span>Write 1–2 sentences. Start like this: <i>The comic left out the ___ Compromise, which ___. Missing from the room were ___.</i>",
 "stemText": "The comic left out the ___ Compromise, which ___. Missing from the room were ___.",
 "placeholder": "The comic left out the ___ Compromise, which ___. Missing from the room were ___."
 }
 ],
-questions:["Big states vs. small states: what did each side want, and why?", "Fact-check: the comic gets Franklin's age wrong. Then explain why Franklin pushed for compromise.", "The comic says \"compromises were reached.\" Which deal did it leave out, and who was missing from the room?"],
+questions:["Big states vs. small states: what did each side want, and why?", "Who showed the most civic virtue: Washington, Madison, or Franklin? Defend your pick.", "The comic says \"compromises were reached.\" Which deal did it leave out, and who was missing from the room?"],
 validate(s){if(!s.name)return{text:"Type your first name + last initial (like Jordan M.) at the top of the questions.",focus:"studentName"};
  const mc=[1, 2, 3].find(i=>!s.checkDone(i));if(mc)return{text:"Get the check right for part "+mc+" first.",part:mc};
  const ma=[1, 2, 3].find(i=>!s.answer(i));if(ma)return{text:"Write your answer for part "+ma+" before turning in.",part:ma,focus:"answer"+ma};

@@ -16,6 +16,13 @@
 .declass{display:block;background:#fff;border:2px dashed #18364a;border-radius:10px;padding:8px 11px;margin:6px 0 8px;font-weight:650;color:#22313b;line-height:1.4;font-style:normal}
 .declass > b:first-child{display:block;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#18364a;margin-bottom:2px}
 .declass .line{display:block;margin:3px 0}
+.declass .fix{display:block;margin:6px 0;border:1px solid #c9d3da;border-radius:8px;overflow:hidden}
+.declass .cs,.declass .rl{display:block;padding:5px 9px}
+.declass .cs{background:#fdecea}
+.declass .cs::before{content:"\2717  Comic says: ";font-weight:800;color:#a3271a}
+.declass .rl{background:#e6f4e9}
+.declass .rl::before{content:"\2713  Really: ";font-weight:800;color:#1d6b33}
+.declass .kf{display:block;margin-top:8px;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#18364a}
 .declass .note{display:block;margin-top:5px;font-weight:600;font-size:.9rem;color:#5b4632}
 .dime{display:inline-block;background:#e6bd64;color:#0f2433;border-radius:999px;font-weight:850;padding:0 9px;margin-right:4px}
 .credits{font-size:.8rem;color:var(--muted);margin:10px 0 0;line-height:1.4}
@@ -40,7 +47,7 @@ body.reading-now .choices{opacity:.45;pointer-events:none}
 
 <main class="gr-main gr-wrap">
 <section class="card">
-<p class="intro-line"><b>You're the fact-checker.</b> For each part: <b>read</b> the comic on the left → get the <b>check</b> right → read the <b>fact file</b> → write 1–2 sentences. Done = all parts green, then turn in at the bottom.</p>
+<p class="intro-line"><b>How it works:</b> read the comic pages → answer the question about today's big idea → see what the comic got right and wrong → write 1–2 sentences. Done = all parts green, then turn in at the bottom.</p>
 <details class="wordhelp"><summary>Word help (tap to open)</summary>
 <ul class="words" aria-label="Word help">
 <li><b>Alliance</b> = a promise to defend each other</li><li><b>U-boat</b> = a German submarine</li><li><b>Telegram</b> = a message sent over wires</li><li><b>Doughboys</b> = a nickname for U.S. soldiers</li><li><b>Segregated</b> = kept apart by race</li><li><b>1953 comic</b> = made by the U.S. government to tell America's story in other countries. It shows one point of view.</li>
@@ -90,20 +97,20 @@ parts:[
 "check": {
 "page": 1,
 "tag": "Reading check · Reader page 1",
-"q": "Read the man's speech bubble. What does he say about the war in 1914?",
-"right": "It's none of America's business.",
+"q": "In 1914, why did most Americans want to stay out of the war?",
+"right": "It seemed like Europe's fight",
 "wrong": [
-"America should join right away.",
-"Germany will win in a month.",
-"Britain started the whole war."
+"Germany had promised to win fast",
+"The U.S. had no army or navy",
+"Wilson had signed a deal with Britain"
 ],
-"why": "✓ Correct. Most Americans wanted to stay out. Wilson won in 1916 with \"He kept us out of war.\"",
-"hint": "Read the speech bubble at the bottom left."
+"why": "✓ Correct. Most Americans said it wasn't our fight, and many had family on both sides. Wilson won in 1916 with \"He kept us out of war.\"",
+"hint": "Read the man's speech bubble at the bottom left, then the box in the middle."
 },
-"prompt": "How did one killing in 1914 become a world war, and why did most Americans want to stay out?",
-"stem": "<span class=\"declass\"><b>Fact file</b><span class=\"line\">On June 28, 1914, a young Bosnian Serb shot Archduke Franz Ferdinand of Austria-Hungary. <b>Alliances</b> pulled in Germany, Russia, France, and Britain.</span><span class=\"line\">Many Americans had family on both sides of the war.</span><span class=\"line\">On May 7, 1915, a U-boat sank the <b>Lusitania</b>. The comic says \"more than 100\" Americans died. It was 128.</span></span>Write 1–2 sentences. Start like this: <i>One killing became a world war because ___. Americans wanted to stay out because ___.</i>",
-"stemText": "One killing became a world war because ___. Americans wanted to stay out because ___.",
-"placeholder": "One killing became a world war because ___. Americans wanted to stay out because ___."
+"prompt": "How did one killing in 1914 become a world war?",
+"stem": "<span class=\"declass\"><b>Fact file</b><b class=\"kf\">Know this</b><span class=\"line\">On June 28, 1914, a young Bosnian Serb shot Archduke Franz Ferdinand. <b>Alliances</b> (promises to defend each other) pulled in Germany, Russia, France, and Britain.</span><span class=\"line\">The <b>Lusitania</b> sank on May 7, 1915. Nearly 1,200 people died, including 128 Americans.</span></span>Write 1–2 sentences. Start like this: <i>One killing became a world war because ___.</i>",
+"stemText": "One killing became a world war because ___.",
+"placeholder": "One killing became a world war because ___."
 },
 {
 "short": "1917",
@@ -114,20 +121,20 @@ parts:[
 "check": {
 "page": 2,
 "tag": "Reading check · Reader page 2",
-"q": "Read the box on the left. What did Germany announce in January 1917?",
-"right": "It would restart unlimited submarine attacks.",
+"q": "What pushed America into the war in 1917?",
+"right": "U-boats sinking U.S. ships",
 "wrong": [
-"It would invade the United States.",
-"It would sign a peace treaty with France.",
-"It would stop sinking any ships at all."
+"German troops landing in Texas",
+"Spain sinking a U.S. battleship",
+"Britain's attack on the Lusitania"
 ],
-"why": "✓ Correct. U-boats sank 8 American ships in 2 months. But the comic skips another big reason.",
+"why": "✓ Correct. Germany started unlimited submarine attacks again. Wilson said the world \"must be made safe for democracy.\"",
 "hint": "Read the box at the bottom of the left panel."
 },
-"prompt": "Add the Zimmermann Telegram to the comic's story. What pushed Americans toward war the most?",
-"stem": "<span class=\"declass\"><b>Fact file</b><span class=\"line\">In January 1917, German official Arthur Zimmermann sent a secret coded message to Mexico. If the U.S. joined the war, Germany would help Mexico win back <b>Texas, New Mexico, and Arizona</b>.</span><span class=\"line\">British codebreakers cracked it. When newspapers printed it on March 1, 1917, Americans were outraged.</span><span class=\"line\">U.S. banks had also lent Britain and France billions of dollars.</span></span>Write 1–2 sentences. Start like this: <i>___ pushed Americans toward war the most because ___.</i>",
-"stemText": "___ pushed Americans toward war the most because ___.",
-"placeholder": "___ pushed Americans toward war the most because ___."
+"prompt": "Why did Americans go from \"stay out\" in 1914 to war in 1917?",
+"stem": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">(Nothing about Mexico.)</span><span class=\"rl\">The Zimmermann Telegram, a secret German offer to help Mexico win back Texas, New Mexico, and Arizona, outraged Americans in March 1917.</span></span><b class=\"kf\">Know this</b><span class=\"line\">U.S. banks had lent Britain and France billions of dollars.</span></span>Write 1–2 sentences. Start like this: <i>In 1914, Americans wanted to stay out because ___, but by 1917 ___.</i>",
+"stemText": "In 1914, Americans wanted to stay out because ___, but by 1917 ___.",
+"placeholder": "In 1914, Americans wanted to stay out because ___, but by 1917 ___."
 },
 {
 "short": "1918",
@@ -138,23 +145,23 @@ parts:[
 "check": {
 "page": 3,
 "tag": "Reading check · Reader page 3",
-"q": "Read the green box. How many Americans were in the trenches by summer 1918?",
-"right": "A million",
+"q": "What did American troops do for the Allies in 1918?",
+"right": "Helped push the Germans back",
 "wrong": [
-"Ten thousand",
-"A hundred thousand",
-"Ten million"
+"Signed a peace deal with Germany",
+"Took control of Paris from France",
+"Stayed home to guard U.S. ports"
 ],
-"why": "✓ Correct. About 2 million Americans reached France in all. About 116,000 died.",
-"hint": "Read the first line of the green box."
+"why": "✓ Correct. Fresh U.S. troops tipped the war. Germany signed an armistice on November 11, 1918.",
+"hint": "Read the green box in the middle and the pink box at the bottom right."
 },
-"prompt": "Which soldier from this war showed the most civic virtue: Merle Hay or Henry Johnson? Defend it.",
-"stem": "<span class=\"declass\"><b>Fact file</b><span class=\"line\">About 2.8 million men were <b>drafted</b>. Thousands trained at Camp Dodge near Des Moines. <b>Merle Hay</b> of Glidden, Iowa, was one of the first three Americans killed in battle, on November 3, 1917.</span><span class=\"line\">The Army was <b>segregated</b>, so the Black soldiers of the 369th Infantry, the Harlem Hellfighters, fought under the French. <b>Henry Johnson</b> fought off a German raid while wounded 21 times. France honored him right away. The U.S. gave him the Medal of Honor in 2015.</span><span class=\"line\">The war ended with an armistice on November 11, 1918.</span></span>Write 1–2 sentences. Start like this: <i>___ showed the most civic virtue because ___.</i>",
+"prompt": "Civic virtue means putting the common good ahead of yourself. Who showed more civic virtue: Merle Hay or Henry Johnson? Defend it.",
+"stem": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">(Only white soldiers are shown.)</span><span class=\"rl\">The Army was segregated. Black soldiers of the 369th, the Harlem Hellfighters, fought under the French Army.</span></span><b class=\"kf\">Know this</b><span class=\"line\"><b>Merle Hay</b> of Glidden, Iowa, was one of the first three Americans killed in battle, on Nov. 3, 1917.</span><span class=\"line\"><b>Henry Johnson</b> of the 369th fought off a German raid while wounded 21 times. The U.S. gave him the Medal of Honor in 2015.</span></span>Write 1–2 sentences. Start like this: <i>___ showed the most civic virtue because ___.</i>",
 "stemText": "___ showed the most civic virtue because ___.",
 "placeholder": "___ showed the most civic virtue because ___."
 }
 ],
-questions:["How did one killing in 1914 become a world war, and why did most Americans want to stay out?", "Add the Zimmermann Telegram to the comic's story. What pushed Americans toward war the most?", "Which soldier from this war showed the most civic virtue: Merle Hay or Henry Johnson? Defend it."],
+questions:["How did one killing in 1914 become a world war?", "Why did Americans go from \"stay out\" in 1914 to war in 1917?", "Civic virtue means putting the common good ahead of yourself. Who showed more civic virtue: Merle Hay or Henry Johnson? Defend it."],
 validate(s){if(!s.name)return{text:"Type your first name + last initial (like Jordan M.) at the top of the questions.",focus:"studentName"};
  const mc=[1, 2, 3].find(i=>!s.checkDone(i));if(mc)return{text:"Get the check right for part "+mc+" first.",part:mc};
  const ma=[1, 2, 3].find(i=>!s.answer(i));if(ma)return{text:"Write your answer for part "+ma+" before turning in.",part:ma,focus:"answer"+ma};

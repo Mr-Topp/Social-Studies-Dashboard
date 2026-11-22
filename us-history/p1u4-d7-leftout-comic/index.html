@@ -16,6 +16,13 @@
 .declass{display:block;background:#fff;border:2px dashed #18364a;border-radius:10px;padding:8px 11px;margin:6px 0 8px;font-weight:650;color:#22313b;line-height:1.4;font-style:normal}
 .declass > b:first-child{display:block;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#18364a;margin-bottom:2px}
 .declass .line{display:block;margin:3px 0}
+.declass .fix{display:block;margin:6px 0;border:1px solid #c9d3da;border-radius:8px;overflow:hidden}
+.declass .cs,.declass .rl{display:block;padding:5px 9px}
+.declass .cs{background:#fdecea}
+.declass .cs::before{content:"\2717  Comic says: ";font-weight:800;color:#a3271a}
+.declass .rl{background:#e6f4e9}
+.declass .rl::before{content:"\2713  Really: ";font-weight:800;color:#1d6b33}
+.declass .kf{display:block;margin-top:8px;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#18364a}
 .declass .note{display:block;margin-top:5px;font-weight:600;font-size:.9rem;color:#5b4632}
 .dime{display:inline-block;background:#e6bd64;color:#0f2433;border-radius:999px;font-weight:850;padding:0 9px;margin-right:4px}
 .credits{font-size:.8rem;color:var(--muted);margin:10px 0 0;line-height:1.4}
@@ -40,7 +47,7 @@ body.reading-now .choices{opacity:.45;pointer-events:none}
 
 <main class="gr-main gr-wrap">
 <section class="card">
-<p class="intro-line"><b>You're the fact-checker.</b> For each part: <b>read</b> the comic on the left → get the <b>check</b> right → read the <b>fact file</b> → write 1–2 sentences. Done = all parts green, then turn in at the bottom.</p>
+<p class="intro-line"><b>How it works:</b> read the comic pages → answer the question about today's big idea → see what the comic got right and wrong → write 1–2 sentences. Done = all parts green, then turn in at the bottom.</p>
 <details class="wordhelp"><summary>Word help (tap to open)</summary>
 <ul class="words" aria-label="Word help">
 <li><b>Segregation</b> = keeping races apart by law</li><li><b>Reactionary</b> = fighting against change</li><li><b>Nativism</b> = favoring people born in a country over immigrants</li><li><b>NAACP</b> = a group started in 1909 to fight for Black Americans' rights</li><li><b>1953 comic</b> = made by the U.S. government to tell America's story in other countries. It shows one point of view.</li>
@@ -90,20 +97,20 @@ parts:[
 "check": {
 "page": 1,
 "tag": "Reading check · Reader page 1",
-"q": "Read the speech bubbles. What does Mr. Griffith say the place used to be?",
-"right": "A ranch called Hollywood.",
+"q": "Mr. Griffith's 1915 film showed the KKK as heroes. That year a new KKK began, a reactionary movement. What does reactionary mean?",
+"right": "Fighting against change",
 "wrong": [
-"A gold mine called Hollywood.",
-"A movie studio in New York.",
-"A farm owned by Edison."
+"Fighting to speed up change",
+"Reacting fast to disasters",
+"Supporting new immigrants"
 ],
-"why": "✓ Correct. The comic makes Griffith look like a friendly pioneer. Read what he's most famous for.",
-"hint": "Read Mr. Griffith's speech bubble."
+"why": "✓ Correct. The second KKK began in 1915. By the mid-1920s it had millions of members and targeted Black Americans, Catholics, Jews, and immigrants.",
+"hint": "Read the speech bubbles: the comic only shows Griffith's friendly side. To react = to push back."
 },
-"prompt": "The comic shows Griffith as a friendly movie pioneer. What did his most famous movie do?",
-"stem": "<span class=\"declass\"><b>Fact file</b><span class=\"line\">In 1915, D.W. Griffith made <b>The Birth of a Nation</b>. It showed the KKK as heroes saving the South after the Civil War.</span><span class=\"line\">The <b>NAACP</b>, started in 1909, protested the film in cities across the country.</span><span class=\"line\">That same year, a <b>second Ku Klux Klan</b> started in Georgia. By the mid-1920s it had millions of members. It targeted Black Americans, Catholics, Jews, and immigrants. In Iowa, an estimated 40,000 people joined.</span></span>Write 1–2 sentences. Start like this: <i>The comic shows Griffith as ___, but his movie ___.</i>",
-"stemText": "The comic shows Griffith as ___, but his movie ___.",
-"placeholder": "The comic shows Griffith as ___, but his movie ___."
+"prompt": "Why would a 1915 movie that made the KKK look like heroes be dangerous? Use one fact.",
+"stem": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">Griffith is a friendly movie pioneer.</span><span class=\"rl\">His film <i>The Birth of a Nation</i> made the KKK look like heroes. The NAACP protested it.</span></span><b class=\"kf\">Know this</b><span class=\"line\">In Iowa, an estimated <b>40,000</b> people joined the KKK by the mid-1920s. In the Midwest, Catholics were a main target.</span></span>Write 1–2 sentences. Start like this: <i>The movie was dangerous because ___. For example, ___.</i>",
+"stemText": "The movie was dangerous because ___. For example, ___.",
+"placeholder": "The movie was dangerous because ___. For example, ___."
 },
 {
 "short": "For all?",
@@ -114,23 +121,23 @@ parts:[
 "check": {
 "page": 2,
 "tag": "Reading check · Reader page 2",
-"q": "Read the box. Which blessing does the comic list first?",
-"right": "Free education for all",
+"q": "The comic lists \"free education for all.\" What did <i>Plessy v. Ferguson</i> (1896) allow?",
+"right": "Separate schools and trains by race",
 "wrong": [
-"Equal pay for all workers",
-"The right to vote for all",
-"Free land for all families"
+"Black students to join any public school",
+"States to close all their public schools",
+"Only boys to go to public high school"
 ],
-"why": "✓ Correct. Now test that promise.",
-"hint": "Read the line right after the colon."
+"why": "✓ Correct. Plessy said segregation was legal if things were \"separate but equal.\" Black schools almost never got equal money.",
+"hint": "Read the box: \"free education for all...\""
 },
-"prompt": "Did the Progressive Era deliver \"free education for all\" and \"the right to worship as they chose\"? Judge it with one fact.",
-"stem": "<span class=\"declass\"><b>Fact file</b><span class=\"line\"><b>Plessy v. Ferguson</b> (1896) allowed \"separate but equal.\" Black schools almost never got equal money or supplies.</span><span class=\"line\"><b>George Washington Carver</b>, born enslaved, became Iowa State's first Black student in 1891, then taught farmers at Tuskegee.</span><span class=\"line\">In May 1918, Iowa Governor William Harding's <b>Babel Proclamation</b> banned speaking other languages in public, in schools, and even in church. German-speaking Iowans were hit hardest.</span></span>Write 1–2 sentences. Start like this: <i>The promise was (kept / partly kept / broken) because ___.</i>",
-"stemText": "The promise was (kept / partly kept / broken) because ___.",
-"placeholder": "The promise was (kept / partly kept / broken) because ___."
+"prompt": "Did the Progressive Era reach its goals? Judge one reform: success, partial success, or failure. Who did it help, and who did it leave out?",
+"stem": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">Americans had \"free education for all.\"</span><span class=\"rl\">Under Jim Crow, Black schools got far less money.</span></span><span class=\"fix\"><span class=\"cs\">Americans could \"worship as they chose.\"</span><span class=\"rl\">In 1918, Iowa's Babel Proclamation banned other languages in public, even in church.</span></span><b class=\"kf\">Know this</b><span class=\"line\"><b>George Washington Carver</b>, born enslaved, became Iowa State's first Black student in 1891.</span></span>Write 1–2 sentences. Start like this: <i>___ was a (success / partial success / failure) because ___. It left out ___.</i>",
+"stemText": "___ was a (success / partial success / failure) because ___. It left out ___.",
+"placeholder": "___ was a (success / partial success / failure) because ___. It left out ___."
 }
 ],
-questions:["The comic shows Griffith as a friendly movie pioneer. What did his most famous movie do?", "Did the Progressive Era deliver \"free education for all\" and \"the right to worship as they chose\"? Judge it with one fact."],
+questions:["Why would a 1915 movie that made the KKK look like heroes be dangerous? Use one fact.", "Did the Progressive Era reach its goals? Judge one reform: success, partial success, or failure. Who did it help, and who did it leave out?"],
 validate(s){if(!s.name)return{text:"Type your first name + last initial (like Jordan M.) at the top of the questions.",focus:"studentName"};
  const mc=[1, 2].find(i=>!s.checkDone(i));if(mc)return{text:"Get the check right for part "+mc+" first.",part:mc};
  const ma=[1, 2].find(i=>!s.answer(i));if(ma)return{text:"Write your answer for part "+ma+" before turning in.",part:ma,focus:"answer"+ma};

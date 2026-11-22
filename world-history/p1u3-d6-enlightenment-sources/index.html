@@ -155,13 +155,13 @@ parts:[
 "why": "✓ Correct. Wollstonecraft pushed Enlightenment ideas further: if people have rights, women do too.",
 "hint": "Read the \"In plain words\" box on page 5."
 },
-"prompt": "Which Enlightenment idea most challenged kings' power? Explain why, using a thinker from today.",
+"prompt": "Which Enlightenment idea most challenged kings' power? Explain why, using a thinker from this reading.",
 "stem": "<span class=\"declass\"><b>Fact file</b><b class=\"kf\">Know this</b><span class=\"line\">Rousseau's <i>Social Contract</i> (1762) said power should come from the people as a whole.</span></span>Write 1–2 sentences. Start like this: <i>The idea that most challenged kings was ___ because ___.</i>",
 "stemText": "The idea that most challenged kings was ___ because ___.",
 "placeholder": "The idea that most challenged kings was ___ because ___."
 }
 ],
-questions:["Hobbes and Locke disagreed. Who was right about why we need government? Explain.", "Montesquieu and Voltaire both pushed back on kings. Whose idea would protect people more?", "Which Enlightenment idea most challenged kings' power? Explain why, using a thinker from today."],
+questions:["Hobbes and Locke disagreed. Who was right about why we need government? Explain.", "Montesquieu and Voltaire both pushed back on kings. Whose idea would protect people more?", "Which Enlightenment idea most challenged kings' power? Explain why, using a thinker from this reading."],
 validate(s){if(!s.name)return{text:"Type your first name + last initial (like Jordan M.) at the top of the questions.",focus:"studentName"};
  const mc=[1, 2, 3].find(i=>!s.checkDone(i));if(mc)return{text:"Get the check right for part "+mc+" first.",part:mc};
  const ma=[1, 2, 3].find(i=>!s.answer(i));if(ma)return{text:"Write your answer for part "+ma+" before turning in.",part:ma,focus:"answer"+ma};

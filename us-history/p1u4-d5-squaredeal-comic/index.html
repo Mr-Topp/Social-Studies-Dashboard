@@ -16,6 +16,13 @@
 .declass{display:block;background:#fff;border:2px dashed #18364a;border-radius:10px;padding:8px 11px;margin:6px 0 8px;font-weight:650;color:#22313b;line-height:1.4;font-style:normal}
 .declass > b:first-child{display:block;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#18364a;margin-bottom:2px}
 .declass .line{display:block;margin:3px 0}
+.declass .fix{display:block;margin:6px 0;border:1px solid #c9d3da;border-radius:8px;overflow:hidden}
+.declass .cs,.declass .rl{display:block;padding:5px 9px}
+.declass .cs{background:#fdecea}
+.declass .cs::before{content:"\2717  Comic says: ";font-weight:800;color:#a3271a}
+.declass .rl{background:#e6f4e9}
+.declass .rl::before{content:"\2713  Really: ";font-weight:800;color:#1d6b33}
+.declass .kf{display:block;margin-top:8px;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#18364a}
 .declass .note{display:block;margin-top:5px;font-weight:600;font-size:.9rem;color:#5b4632}
 .dime{display:inline-block;background:#e6bd64;color:#0f2433;border-radius:999px;font-weight:850;padding:0 9px;margin-right:4px}
 .credits{font-size:.8rem;color:var(--muted);margin:10px 0 0;line-height:1.4}
@@ -40,7 +47,7 @@ body.reading-now .choices{opacity:.45;pointer-events:none}
 
 <main class="gr-main gr-wrap">
 <section class="card">
-<p class="intro-line"><b>You're the fact-checker.</b> For each part: <b>read</b> the comic on the left → get the <b>check</b> right → read the <b>fact file</b> → write 1–2 sentences. Done = all parts green, then turn in at the bottom.</p>
+<p class="intro-line"><b>How it works:</b> read the comic pages → answer the question about today's big idea → see what the comic got right and wrong → write 1–2 sentences. Done = all parts green, then turn in at the bottom.</p>
 <details class="wordhelp"><summary>Word help (tap to open)</summary>
 <ul class="words" aria-label="Word help">
 <li><b>Square Deal</b> = Roosevelt's promise of a fair chance for everyone</li><li><b>Conservation</b> = protecting forests and rivers so they last</li><li><b>Regulate</b> = make rules for</li><li><b>Consumer</b> = a person who buys things</li><li><b>1953 comic</b> = made by the U.S. government to tell America's story in other countries. It shows one point of view.</li>
@@ -90,18 +97,18 @@ parts:[
 "check": {
 "page": 1,
 "tag": "Reading check · Reader page 1",
-"q": "Read the box. How did Roosevelt first become a popular hero?",
-"right": "As a Rough Rider in the war in Cuba.",
+"q": "As president, Roosevelt \"continued to rough ride.\" How did he handle the 1902 coal strike?",
+"right": "He acted as a fair judge for both sides",
 "wrong": [
-"As a reporter who exposed the trusts.",
-"As a governor who fought the railroads.",
-"As a general in the Civil War."
+"He sent troops to end it, like Cleveland",
+"He let the mine owners settle it on their own",
+"He took over the mines for the government"
 ],
-"why": "✓ Correct. Roosevelt fought in the Spanish-American War in 1898. In 1901, after McKinley was shot, he became president.",
+"why": "✓ Correct. Roosevelt called both sides in. Miners won a 10% raise and a 9-hour day. Cleveland had sent troops against the Pullman strikers.",
 "hint": "Read the yellow box at the top."
 },
 "prompt": "Compare Roosevelt's 1902 coal strike with Cleveland's 1894 Pullman strike. What changed?",
-"stem": "<span class=\"declass\"><b>Fact file</b><span class=\"line\">Roosevelt promised a <b>Square Deal</b>: control big corporations, protect consumers, and conserve nature.</span><span class=\"line\">In 1904, the Supreme Court agreed with Roosevelt and broke up <b>Northern Securities</b>, a giant railroad company.</span><span class=\"line\">In the <b>1902 coal strike</b>, Roosevelt called both sides in. Miners won a 10% raise and a 9-hour day. It was the first time a president acted as a neutral judge in a strike instead of just sending troops.</span></span>Write 1–2 sentences. Start like this: <i>Cleveland ___, but Roosevelt ___. That changed ___.</i>",
+"stem": "<span class=\"declass\"><b>Fact file</b><b class=\"kf\">Know this</b><span class=\"line\">Roosevelt promised a <b>Square Deal</b>: control big corporations, protect consumers, and conserve nature.</span><span class=\"line\">In 1904, the Supreme Court agreed with Roosevelt and broke up <b>Northern Securities</b>, a giant railroad company.</span></span>Write 1–2 sentences. Start like this: <i>Cleveland ___, but Roosevelt ___. That changed ___.</i>",
 "stemText": "Cleveland ___, but Roosevelt ___. That changed ___.",
 "placeholder": "Cleveland ___, but Roosevelt ___. That changed ___."
 },
@@ -114,18 +121,18 @@ parts:[
 "check": {
 "page": 2,
 "tag": "Reading check · Reader page 2",
-"q": "Read Roosevelt's speech bubble. Why must the forests be protected?",
-"right": "They must not be ruined to benefit a few.",
+"q": "Roosevelt says the forests \"must not be devastated to benefit a few.\" What is conservation?",
+"right": "Protecting nature so it lasts",
 "wrong": [
-"They are needed to build more railroads.",
-"They belong to the Native nations nearby.",
-"They hide too many dangerous animals."
+"Selling public land to companies",
+"Cutting trees to build railroads",
+"Turning forests into new farmland"
 ],
-"why": "✓ Correct. Roosevelt worried companies were using up the forests too fast.",
+"why": "✓ Correct. Roosevelt protected about 230 million acres, including 150 national forests and 5 national parks.",
 "hint": "Read Roosevelt's speech bubble at the top."
 },
 "prompt": "Trust-busting, conservation, or the income tax: which change lasted the most? Why?",
-"stem": "<span class=\"declass\"><b>Fact file</b><span class=\"line\">Roosevelt protected about <b>230 million acres</b>: 150 national forests, 51 bird reserves, 5 national parks, and 18 national monuments. He started the U.S. Forest Service in 1905.</span><span class=\"line\">In 1913, the <b>16th Amendment</b> allowed an income tax, and the <b>17th</b> let voters elect senators directly.</span><span class=\"line\">Iowa Governor <b>Albert Cummins</b> fought the railroads' free passes for lawmakers and pushed for primary elections.</span></span>Write 1–2 sentences. Start like this: <i>___ lasted the most because ___.</i>",
+"stem": "<span class=\"declass\"><b>Fact file</b><b class=\"kf\">Know this</b><span class=\"line\">He started the <b>U.S. Forest Service</b> in 1905.</span><span class=\"line\">In 1913, the <b>16th Amendment</b> allowed an income tax, and the <b>17th</b> let voters elect senators directly.</span></span>Write 1–2 sentences. Start like this: <i>___ lasted the most because ___.</i>",
 "stemText": "___ lasted the most because ___.",
 "placeholder": "___ lasted the most because ___."
 }

@@ -16,6 +16,13 @@
 .declass{display:block;background:#fff;border:2px dashed #18364a;border-radius:10px;padding:8px 11px;margin:6px 0 8px;font-weight:650;color:#22313b;line-height:1.4;font-style:normal}
 .declass > b:first-child{display:block;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#18364a;margin-bottom:2px}
 .declass .line{display:block;margin:3px 0}
+.declass .fix{display:block;margin:6px 0;border:1px solid #c9d3da;border-radius:8px;overflow:hidden}
+.declass .cs,.declass .rl{display:block;padding:5px 9px}
+.declass .cs{background:#fdecea}
+.declass .cs::before{content:"\2717  Comic says: ";font-weight:800;color:#a3271a}
+.declass .rl{background:#e6f4e9}
+.declass .rl::before{content:"\2713  Really: ";font-weight:800;color:#1d6b33}
+.declass .kf{display:block;margin-top:8px;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#18364a}
 .declass .note{display:block;margin-top:5px;font-weight:600;font-size:.9rem;color:#5b4632}
 .dime{display:inline-block;background:#e6bd64;color:#0f2433;border-radius:999px;font-weight:850;padding:0 9px;margin-right:4px}
 .credits{font-size:.8rem;color:var(--muted);margin:10px 0 0;line-height:1.4}
@@ -40,7 +47,7 @@ body.reading-now .choices{opacity:.45;pointer-events:none}
 
 <main class="gr-main gr-wrap">
 <section class="card">
-<p class="intro-line"><b>You're the fact-checker.</b> For each part: <b>read</b> the comic on the left → get the <b>check</b> right → read the <b>fact file</b> → write 1–2 sentences. Done = all parts green, then turn in at the bottom.</p>
+<p class="intro-line"><b>How it works:</b> read the comic pages → answer the question about today's big idea → see what the comic got right and wrong → write 1–2 sentences. Done = all parts green, then turn in at the bottom.</p>
 <details class="wordhelp"><summary>Word help (tap to open)</summary>
 <ul class="words" aria-label="Word help">
 <li><b>Branch</b> = one part of the government</li><li><b>Checks and balances</b> = each branch can limit the others</li><li><b>Veto</b> = the President rejects a bill</li><li><b>Amendment</b> = a change added to the Constitution</li><li><b>Federalism</b> = power split between the national government and the states</li><li><b>1953 comic</b> = made by the U.S. government to tell America's story in other countries. It shows one point of view.</li>
@@ -90,18 +97,18 @@ parts:[
 "check": {
 "page": 1,
 "tag": "Reading check · Reader page 1",
-"q": "Read the first man's speech bubble. Why does he say \"we need not fear a concentration of power\"?",
-"right": "Power is split among Congress, the President, and the courts.",
+"q": "Why does the first man say \"we need not fear a concentration of power\"?",
+"right": "Power is split among three branches",
 "wrong": [
-"The President can overrule Congress and the courts.",
-"The states must approve every new law first.",
-"Washington promised he would never abuse power."
+"The states must approve every new law",
+"The President can overrule Congress and the courts",
+"Washington promised he would never abuse power"
 ],
-"why": "✓ Correct. That's separation of powers. Each branch can also check the others.",
-"hint": "Read the first man's speech bubble, the one holding the paper."
+"why": "✓ Correct. Congress makes laws, the President carries them out, and the courts decide what they mean. Each branch can check the others.",
+"hint": "Read the speech bubble of the man holding the paper."
 },
 "prompt": "The second man says \"the people's rights require greater protection.\" Which side was he on, and what did he want?",
-"stem": "<span class=\"declass\"><b>Fact file</b><span class=\"line\"><b>Federalists</b> (Madison, Hamilton) said the country needed a stronger government. They wrote 85 essays called the Federalist Papers.</span><span class=\"line\"><b>Anti-Federalists</b> (Patrick Henry, George Mason) feared it could become a new tyranny. Their biggest complaint: no list of protected rights.</span><span class=\"line\">Checks example: the President can <b>veto</b> a bill. Congress can override a veto with a two-thirds vote. Courts can rule that a law breaks the Constitution.</span></span>Write 1–2 sentences. Start like this: <i>He was on the (Federalist / Anti-Federalist) side because ___. He wanted ___.</i>",
+"stem": "<span class=\"declass\"><b>Fact file</b><b class=\"kf\">Know this</b><span class=\"line\">Checks: the President can <b>veto</b> a bill. Congress can override it with a two-thirds vote. Courts can strike down a law.</span><span class=\"line\"><b>Anti-Federalists</b> like Patrick Henry feared a new tyranny. Their biggest complaint: no list of protected rights.</span></span>Write 1–2 sentences. Start like this: <i>He was on the (Federalist / Anti-Federalist) side because ___. He wanted ___.</i>",
 "stemText": "He was on the (Federalist / Anti-Federalist) side because ___. He wanted ___.",
 "placeholder": "He was on the (Federalist / Anti-Federalist) side because ___. He wanted ___."
 },
@@ -114,20 +121,20 @@ parts:[
 "check": {
 "page": 2,
 "tag": "Reading check · Reader page 2",
-"q": "Read the words next to the scroll. Who drafted the ten amendments?",
-"right": "James Madison",
+"q": "Why were these rights added to the Constitution?",
+"right": "Anti-Federalists demanded a list of rights",
 "wrong": [
-"Patrick Henry",
-"George Mason",
-"Thomas Jefferson"
+"The king of England asked for them in a treaty",
+"The Supreme Court ordered Congress to add them",
+"Washington wrote them during the war"
 ],
-"why": "✓ Correct. Madison was a Federalist. He wrote the Bill of Rights to keep the Federalists' promise to the other side.",
-"hint": "Read the words between the speech bubbles and the scroll."
+"why": "✓ Correct. To win ratification, Federalists promised a bill of rights. Madison wrote it, and it was added in 1791.",
+"hint": "Read the box on the left. Then think back to page 1: \"the people's rights require greater protection!\""
 },
-"prompt": "Pick one right on the scroll. How does it protect you today?",
-"stem": "<span class=\"declass\"><b>Fact file</b><span class=\"line\">The <b>Bill of Rights</b> became part of the Constitution in 1791.</span><span class=\"line\"><b>1st Amendment:</b> religion, speech, press, and gathering peacefully. Iowa case: in 1965, Des Moines students wore black armbands to protest the Vietnam War. In <b>Tinker v. Des Moines</b> (1969), the Supreme Court said students keep free speech at school.</span><span class=\"line\">\"Sanctity of the home\" means your home is protected. The <b>4th Amendment</b> bans unreasonable searches.</span></span>Write 1–2 sentences. Start like this: <i>___ protects me today because ___. For example, ___.</i>",
-"stemText": "___ protects me today because ___. For example, ___.",
-"placeholder": "___ protects me today because ___. For example, ___."
+"prompt": "Who won the ratification fight: Federalists, Anti-Federalists, or both? Defend it.",
+"stem": "<span class=\"declass\"><b>Fact file</b><b class=\"kf\">Know this</b><span class=\"line\"><b>1st Amendment:</b> religion, speech, press, gathering. In <b>Tinker v. Des Moines</b> (1969), the Supreme Court said students keep free speech at school.</span><span class=\"line\">\"Sanctity of the home\" = the <b>4th Amendment</b>, which bans unreasonable searches.</span></span>Write 1–2 sentences. Start like this: <i>I think ___ won because ___.</i>",
+"stemText": "I think ___ won because ___.",
+"placeholder": "I think ___ won because ___."
 },
 {
 "short": "Federalism",
@@ -138,23 +145,23 @@ parts:[
 "check": {
 "page": 3,
 "tag": "Reading check · Reader page 3",
-"q": "Read the yellow box. What did Hamilton's Federalist Party believe in?",
-"right": "A strong central government.",
+"q": "What did Hamilton and Jefferson disagree about?",
+"right": "How strong the national government should be",
 "wrong": [
-"Giving most power to the states.",
-"Getting rid of the Constitution.",
-"Bringing back a king for America."
+"Whether to keep slavery in the Northern states",
+"Whether George Washington should be president",
+"Whether to go to war with France or Spain"
 ],
-"why": "✓ Correct. Jefferson's party wanted more power left with the states. That tug-of-war is about federalism.",
-"hint": "Read the words next to Hamilton's picture."
+"why": "✓ Correct. Hamilton wanted a strong central government. Jefferson wanted more power left with the states. That's the federalism fight.",
+"hint": "Read the yellow boxes next to Hamilton and Jefferson."
 },
 "prompt": "Federalism splits power between the national government and the states. Give one example of each.",
-"stem": "<span class=\"declass\"><b>Fact file</b><span class=\"line\">The national government runs the army and prints money. Iowa runs its own schools and gives out driver's licenses.</span><span class=\"line\">The <b>10th Amendment</b> says powers not given to the national government belong to the states or to the people.</span><span class=\"line\">The Constitution starts with \"We the People.\" That means the government's power comes from the people.</span></span>Write 1–2 sentences. Start like this: <i>The national government handles ___. Iowa handles ___. Splitting power this way helps because ___.</i>",
+"stem": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">Their two sides live on in today's two parties.</span><span class=\"rl\">Hamilton's Federalist Party died out by the 1820s. Today's Republican Party started in 1854.</span></span><b class=\"kf\">Know this</b><span class=\"line\"><b>Federalism</b> = power split between the national government and the states. The national government prints money. Iowa runs its schools.</span><span class=\"line\">The <b>10th Amendment</b>: powers not given to the national government belong to the states or the people.</span></span>Write 1–2 sentences. Start like this: <i>The national government handles ___. Iowa handles ___. Splitting power this way helps because ___.</i>",
 "stemText": "The national government handles ___. Iowa handles ___. Splitting power this way helps because ___.",
 "placeholder": "The national government handles ___. Iowa handles ___. Splitting power this way helps because ___."
 }
 ],
-questions:["The second man says \"the people's rights require greater protection.\" Which side was he on, and what did he want?", "Pick one right on the scroll. How does it protect you today?", "Federalism splits power between the national government and the states. Give one example of each."],
+questions:["The second man says \"the people's rights require greater protection.\" Which side was he on, and what did he want?", "Who won the ratification fight: Federalists, Anti-Federalists, or both? Defend it.", "Federalism splits power between the national government and the states. Give one example of each."],
 validate(s){if(!s.name)return{text:"Type your first name + last initial (like Jordan M.) at the top of the questions.",focus:"studentName"};
  const mc=[1, 2, 3].find(i=>!s.checkDone(i));if(mc)return{text:"Get the check right for part "+mc+" first.",part:mc};
  const ma=[1, 2, 3].find(i=>!s.answer(i));if(ma)return{text:"Write your answer for part "+ma+" before turning in.",part:ma,focus:"answer"+ma};

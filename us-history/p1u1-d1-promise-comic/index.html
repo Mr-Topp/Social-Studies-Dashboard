@@ -16,6 +16,13 @@
 .declass{display:block;background:#fff;border:2px dashed #18364a;border-radius:10px;padding:8px 11px;margin:6px 0 8px;font-weight:650;color:#22313b;line-height:1.4;font-style:normal}
 .declass > b:first-child{display:block;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#18364a;margin-bottom:2px}
 .declass .line{display:block;margin:3px 0}
+.declass .fix{display:block;margin:6px 0;border:1px solid #c9d3da;border-radius:8px;overflow:hidden}
+.declass .cs,.declass .rl{display:block;padding:5px 9px}
+.declass .cs{background:#fdecea}
+.declass .cs::before{content:"\2717  Comic says: ";font-weight:800;color:#a3271a}
+.declass .rl{background:#e6f4e9}
+.declass .rl::before{content:"\2713  Really: ";font-weight:800;color:#1d6b33}
+.declass .kf{display:block;margin-top:8px;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#18364a}
 .declass .note{display:block;margin-top:5px;font-weight:600;font-size:.9rem;color:#5b4632}
 .dime{display:inline-block;background:#e6bd64;color:#0f2433;border-radius:999px;font-weight:850;padding:0 9px;margin-right:4px}
 .credits{font-size:.8rem;color:var(--muted);margin:10px 0 0;line-height:1.4}
@@ -40,7 +47,7 @@ body.reading-now .choices{opacity:.45;pointer-events:none}
 
 <main class="gr-main gr-wrap">
 <section class="card">
-<p class="intro-line"><b>You're the fact-checker.</b> For each part: <b>read</b> the comic on the left → get the <b>check</b> right → read the <b>fact file</b> → write 1–2 sentences. Done = all parts green, then turn in at the bottom.</p>
+<p class="intro-line"><b>How it works:</b> read the comic pages → answer the question about today's big idea → see what the comic got right and wrong → write 1–2 sentences. Done = all parts green, then turn in at the bottom.</p>
 <details class="wordhelp"><summary>Word help (tap to open)</summary>
 <ul class="words" aria-label="Word help">
 <li><b>Tax</b> = money the government makes you pay</li><li><b>Parliament</b> = Britain's lawmakers in London</li><li><b>Representation</b> = having someone you elected speak for you</li><li><b>Consent of the governed</b> = the people agree to be ruled</li><li><b>Contradiction</b> = when what you say and what you do don't match</li><li><b>1953 comic</b> = made by the U.S. government to tell America's story in other countries. It shows one point of view.</li>
@@ -90,18 +97,18 @@ parts:[
 "check": {
 "page": 1,
 "tag": "Reading check · Reader page 1",
-"q": "Read the yellow box at the top left. Why did King George III put new taxes on the colonies?",
-"right": "His treasury was drained by wars with France.",
+"q": "Why were colonists so angry about Britain's new taxes?",
+"right": "They had no say in making the tax laws",
 "wrong": [
-"The colonists asked him to build them new forts.",
-"He wanted money to build a bigger palace.",
-"Parliament wanted to punish Boston for the tea."
+"The taxes were much higher than in England",
+"The money paid for French soldiers in Boston",
+"The king kept all the tax money for himself"
 ],
-"why": "✓ Correct. That's Britain's side. After the French and Indian War (1754–1763), Britain was deep in debt.",
-"hint": "Read the yellow box at the top left of reader page 1."
+"why": "✓ Correct. \"No taxation without representation.\" Colonists paid taxes, but they elected no one in Parliament.",
+"hint": "Read the speech bubble at the bottom: \"We'll teach them to tax us without...\""
 },
 "prompt": "Was the Stamp Act fair? Give Britain's side and the colonists' side.",
-"stem": "<span class=\"declass\"><b>Fact file</b><span class=\"line\"><b>Britain's side:</b> British soldiers protected the colonists in the French and Indian War. Britain was deep in debt, so its leaders said colonists should help pay. The Stamp Act (1765) taxed newspapers, legal papers, and even playing cards.</span><span class=\"line\"><b>Colonists' side:</b> Colonists didn't elect anyone to Parliament. So they said Parliament had no right to tax them: <b>\"No taxation without representation.\"</b></span></span>Write 1–2 sentences. Start like this: <i>Britain thought the tax was fair because ___. The colonists thought it was unfair because ___.</i>",
+"stem": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">The king closed Boston's port.</span><span class=\"rl\">Parliament passed that law in 1774, after colonists dumped 342 chests of tea.</span></span><b class=\"kf\">Know this</b><span class=\"line\">Britain was deep in <b>debt</b> after the French and Indian War (1754–1763). Its leaders said colonists should help pay.</span></span>Write 1–2 sentences. Start like this: <i>Britain thought the tax was fair because ___. The colonists thought it was unfair because ___.</i>",
 "stemText": "Britain thought the tax was fair because ___. The colonists thought it was unfair because ___.",
 "placeholder": "Britain thought the tax was fair because ___. The colonists thought it was unfair because ___."
 },
@@ -114,18 +121,18 @@ parts:[
 "check": {
 "page": 2,
 "tag": "Reading check · Reader page 2",
-"q": "Read Patrick Henry's speech bubble. What does he compare living under British rule to?",
-"right": "Being held in chains and slavery.",
+"q": "Patrick Henry called British rule \"chains and slavery.\" Why was that a contradiction?",
+"right": "Many colonists, Henry too, enslaved people",
 "wrong": [
-"Being locked up in a British jail.",
-"Being lost at sea with no captain.",
-"Being a servant in the king's house."
+"Britain had already ended slavery in its colonies",
+"Henry was born in England, not in Virginia",
+"Henry later moved to Britain to serve the king"
 ],
-"why": "✓ Correct. Henry says he would rather die than live in \"chains and slavery\" under Britain.",
-"hint": "Read the speech bubble in the bottom-right panel."
+"why": "✓ Correct. Henry wanted liberty for himself while people around him were held in real chains. That gap is a contradiction.",
+"hint": "Read Patrick Henry's speech bubble on the right: \"chains and slavery.\""
 },
 "prompt": "Patrick Henry called British taxes \"chains and slavery.\" What's the contradiction?",
-"stem": "<span class=\"declass\"><b>Fact file</b><span class=\"line\">In 1775, about <b>450,000</b> Black people in the colonies were really enslaved, in real chains.</span><span class=\"line\">Patrick Henry enslaved people himself. In a 1773 letter he admitted it: <b>\"Would any one believe that I am Master of Slaves of my own purchase!\"</b> He wrote that he could not justify it. Most of the people he enslaved stayed enslaved.</span></span>Write 1–2 sentences. Start like this: <i>Henry said Britain treated colonists like slaves, but ___. That's a contradiction because ___.</i>",
+"stem": "<span class=\"declass\"><b>Fact file</b><b class=\"kf\">Know this</b><span class=\"line\">In 1775, about <b>450,000</b> Black people in the colonies were enslaved.</span><span class=\"line\">Henry wrote in 1773 that he could not justify owning slaves. He kept them anyway.</span></span>Write 1–2 sentences. Start like this: <i>Henry said Britain treated colonists like slaves, but ___. That's a contradiction because ___.</i>",
 "stemText": "Henry said Britain treated colonists like slaves, but ___. That's a contradiction because ___.",
 "placeholder": "Henry said Britain treated colonists like slaves, but ___. That's a contradiction because ___."
 },
@@ -138,18 +145,18 @@ parts:[
 "check": {
 "page": 3,
 "tag": "Reading check · Reader page 3",
-"q": "Read the big scroll. Where do governments get their \"just powers\"?",
-"right": "From the consent of the governed.",
+"q": "According to the Declaration, where does a government get its power?",
+"right": "From the people it governs",
 "wrong": [
-"From the will of their Creator.",
-"From the strength of their army.",
-"From the wisdom of all men."
+"From the king, who is chosen by God",
+"From the strongest army in the land",
+"From the richest men in each colony"
 ],
 "why": "✓ Correct. \"Consent of the governed\" means the people agree to be ruled. Power comes from the people, not from being born a king.",
-"hint": "Read the last line of the big scroll."
+"hint": "Read the last line of the big scroll: \"deriving their just powers from...\""
 },
 "prompt": "In your own words: what is government's job, according to the Declaration?",
-"stem": "<span class=\"declass\"><b>Fact file</b><span class=\"line\">The comic says Jefferson studied <b>Locke</b>. About 90 years earlier, English writer John Locke argued that people are born with rights to life, liberty, and property, and that government exists to protect them.</span><span class=\"line\">Jefferson wrote \"Life, Liberty and the pursuit of Happiness.\" The Declaration says that if a government keeps breaking people's rights, the people can change it or get rid of it.</span></span>Write 1–2 sentences. Start like this: <i>According to the Declaration, government's job is to ___. If it fails, the people can ___.</i>",
+"stem": "<span class=\"declass\"><b>Fact file</b><b class=\"kf\">Know this</b><span class=\"line\"><b>John Locke</b> said people are born with rights to life, liberty, and property, and government exists to protect them.</span><span class=\"line\">If a government keeps breaking people's rights, the Declaration says the people can change it or get rid of it.</span></span>Write 1–2 sentences. Start like this: <i>According to the Declaration, government's job is to ___. If it fails, the people can ___.</i>",
 "stemText": "According to the Declaration, government's job is to ___. If it fails, the people can ___.",
 "placeholder": "According to the Declaration, government's job is to ___. If it fails, the people can ___."
 },
@@ -162,23 +169,23 @@ parts:[
 "check": {
 "page": 4,
 "tag": "Reading check · Reader page 4",
-"q": "Read the box at the top of the big panel. Who adopted the Declaration on July 4, 1776?",
-"right": "Representatives of the 13 colonies.",
+"q": "In 1776, who did \"all men are created equal\" really include?",
+"right": "Mostly free white men, like the signers",
 "wrong": [
-"All the people living in the colonies.",
-"The king and Parliament in London.",
-"Jefferson alone, since he wrote it."
+"Every person living in the 13 colonies",
+"All free men and women, but not slaves",
+"Every man in the colonies, enslaved or free"
 ],
-"why": "✓ Correct. The 56 men who signed it were all white men, most of them wealthy. Read the fact file to see who was left out.",
-"hint": "Read the words at the top of the big panel on reader page 4."
+"why": "✓ Correct. Every man in that room was white, and most were rich. Enslaved people, women, and Native people were left out.",
+"hint": "Look at the men around the table in the big panel. Who is in the room, and who isn't?"
 },
-"prompt": "The comic says \"a new nation had been born.\" In 1776, who did \"all men are created equal\" leave out?",
-"stem": "<span class=\"declass\"><b>Fact file</b><span class=\"line\">Jefferson, who wrote \"all men are created equal,\" enslaved more than 600 people during his life.</span><span class=\"line\">Women couldn't vote in most places. In 1776, Abigail Adams wrote to her husband John, a leader in Congress: <b>\"Remember the ladies.\"</b></span><span class=\"line\">The Declaration called Native people \"merciless Indian Savages.\"</span><span class=\"line\">Still, about 5,000 Black men fought for the Patriots. Later, groups fighting for their rights quoted this same line.</span></span>Write 1–2 sentences. Start like this: <i>In 1776, \"all men are created equal\" left out ___. It was mostly a (promise / contradiction) because ___.</i>",
-"stemText": "In 1776, \"all men are created equal\" left out ___. It was mostly a (promise / contradiction) because ___.",
-"placeholder": "In 1776, \"all men are created equal\" left out ___. It was mostly a (promise / contradiction) because ___."
+"prompt": "In 1776, was the Declaration mostly a promise or mostly a contradiction? Pick one.",
+"stem": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">A new nation had been born!</span><span class=\"rl\">Britain didn't agree. The war went on until 1781, and Britain accepted U.S. independence in 1783.</span></span><b class=\"kf\">Know this</b><span class=\"line\">Jefferson enslaved more than 600 people in his life. The Declaration called Native people \"merciless Indian Savages.\"</span><span class=\"line\">Later, women and Black Americans quoted this same line to demand their rights.</span></span>Write 1–2 sentences. Start like this: <i>In 1776, the Declaration was mostly a ___ because ___.</i>",
+"stemText": "In 1776, the Declaration was mostly a ___ because ___.",
+"placeholder": "In 1776, the Declaration was mostly a ___ because ___."
 }
 ],
-questions:["Was the Stamp Act fair? Give Britain's side and the colonists' side.", "Patrick Henry called British taxes \"chains and slavery.\" What's the contradiction?", "In your own words: what is government's job, according to the Declaration?", "The comic says \"a new nation had been born.\" In 1776, who did \"all men are created equal\" leave out?"],
+questions:["Was the Stamp Act fair? Give Britain's side and the colonists' side.", "Patrick Henry called British taxes \"chains and slavery.\" What's the contradiction?", "In your own words: what is government's job, according to the Declaration?", "In 1776, was the Declaration mostly a promise or mostly a contradiction? Pick one."],
 validate(s){if(!s.name)return{text:"Type your first name + last initial (like Jordan M.) at the top of the questions.",focus:"studentName"};
  const mc=[1, 2, 3, 4].find(i=>!s.checkDone(i));if(mc)return{text:"Get the check right for part "+mc+" first.",part:mc};
  const ma=[1, 2, 3, 4].find(i=>!s.answer(i));if(ma)return{text:"Write your answer for part "+ma+" before turning in.",part:ma,focus:"answer"+ma};

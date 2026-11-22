@@ -16,6 +16,13 @@
 .declass{display:block;background:#fff;border:2px dashed #18364a;border-radius:10px;padding:8px 11px;margin:6px 0 8px;font-weight:650;color:#22313b;line-height:1.4;font-style:normal}
 .declass > b:first-child{display:block;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#18364a;margin-bottom:2px}
 .declass .line{display:block;margin:3px 0}
+.declass .fix{display:block;margin:6px 0;border:1px solid #c9d3da;border-radius:8px;overflow:hidden}
+.declass .cs,.declass .rl{display:block;padding:5px 9px}
+.declass .cs{background:#fdecea}
+.declass .cs::before{content:"\2717  Comic says: ";font-weight:800;color:#a3271a}
+.declass .rl{background:#e6f4e9}
+.declass .rl::before{content:"\2713  Really: ";font-weight:800;color:#1d6b33}
+.declass .kf{display:block;margin-top:8px;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#18364a}
 .declass .note{display:block;margin-top:5px;font-weight:600;font-size:.9rem;color:#5b4632}
 .dime{display:inline-block;background:#e6bd64;color:#0f2433;border-radius:999px;font-weight:850;padding:0 9px;margin-right:4px}
 .credits{font-size:.8rem;color:var(--muted);margin:10px 0 0;line-height:1.4}
@@ -40,7 +47,7 @@ body.reading-now .choices{opacity:.45;pointer-events:none}
 
 <main class="gr-main gr-wrap">
 <section class="card">
-<p class="intro-line"><b>You're the fact-checker.</b> For each part: <b>read</b> the comic on the left → get the <b>check</b> right → read the <b>fact file</b> → write 1–2 sentences. Done = all parts green, then turn in at the bottom.</p>
+<p class="intro-line"><b>How it works:</b> read the comic pages → answer the question about today's big idea → see what the comic got right and wrong → write 1–2 sentences. Done = all parts green, then turn in at the bottom.</p>
 <details class="wordhelp"><summary>Word help (tap to open)</summary>
 <ul class="words" aria-label="Word help">
 <li><b>Boomtown</b> = a town that grows almost overnight</li><li><b>Treaty</b> = a formal agreement between nations</li><li><b>Homestead</b> = a farm settlers got from the government</li><li><b>Vaquero</b> (vah-KAIR-oh) = a Mexican cowboy</li><li><b>1953 comic</b> = made by the U.S. government to tell America's story in other countries. It shows one point of view.</li>
@@ -90,20 +97,20 @@ parts:[
 "check": {
 "page": 1,
 "tag": "Reading check · Reader page 1",
-"q": "Read the yellow box at the bottom right. What happened to most gold-seekers?",
-"right": "Most found only hardship and disappointment.",
+"q": "Most gold-seekers \"found only hardship.\" Who else paid a price when miners rushed into the Black Hills in 1874?",
+"right": "The Lakota, whose land it was by treaty",
 "wrong": [
-"Most got rich and moved to Europe.",
-"Most found gold within a week.",
-"Most gave their gold to the government."
+"Farmers in California who lost their crops",
+"The U.S. Army, which had to pay the miners",
+"Bankers back East who had lent money"
 ],
-"why": "✓ Correct. Boomtowns grew fast. When the gold ran out, many became ghost towns.",
+"why": "✓ Correct. The 1868 Treaty of Fort Laramie promised the Black Hills to the Lakota. Miners poured in anyway.",
 "hint": "Read the slanted yellow box at the bottom right."
 },
-"prompt": "In 1874, gold was found in the Black Hills. Why did that start a war?",
-"stem": "<span class=\"declass\"><b>Fact file</b><span class=\"line\">In the 1868 <b>Treaty of Fort Laramie</b> (LAIR-uh-mee), the U.S. promised the Black Hills to the <b>Lakota</b> (luh-KOH-tuh), who hold them sacred.</span><span class=\"line\">In 1874, an Army group led by George Custer found gold there. Miners poured in anyway, and towns like Deadwood sprang up.</span><span class=\"line\">The <b>Homestead Act</b> (1862) gave settlers 160 acres if they lived there and farmed it for 5 years. Many built houses out of sod.</span></span>Write 1–2 sentences. Start like this: <i>The gold started a war because ___. The U.S. broke ___.</i>",
-"stemText": "The gold started a war because ___. The U.S. broke ___.",
-"placeholder": "The gold started a war because ___. The U.S. broke ___."
+"prompt": "Homesteaders, cowboys, or miners: who changed the West the most? Who paid the price?",
+"stem": "<span class=\"declass\"><b>Fact file</b><b class=\"kf\">Know this</b><span class=\"line\"><b>Boomtowns</b> grew almost overnight. When the gold ran out, many became ghost towns.</span><span class=\"line\">The <b>Homestead Act</b> (1862) gave settlers 160 acres if they lived there and farmed it for 5 years.</span></span>Write 1–2 sentences. Start like this: <i>___ changed the West the most because ___. The people who paid the price were ___.</i>",
+"stemText": "___ changed the West the most because ___. The people who paid the price were ___.",
+"placeholder": "___ changed the West the most because ___. The people who paid the price were ___."
 },
 {
 "short": "Cowboys",
@@ -114,23 +121,23 @@ parts:[
 "check": {
 "page": 2,
 "tag": "Reading check · Reader page 2",
-"q": "Read the pink box. What does the comic say the cowboy became?",
-"right": "A part of American song and story.",
+"q": "The comic shows one white cowboy. Who were the real cowboys?",
+"right": "Many were Black or Mexican",
 "wrong": [
-"The owner of the great cattle farms.",
-"A soldier in the U.S. Army.",
-"The first mayor of a railroad town."
+"Most were immigrants from Europe",
+"Almost all were Army soldiers",
+"Most were rich ranch owners"
 ],
-"why": "✓ Correct. Movies and books turned cowboys into heroes. But who were the real cowboys?",
-"hint": "Read the pink box at the bottom of reader page 2."
+"why": "✓ Correct. Movies made cowboys look white. The real ones were a mix.",
+"hint": "Look at the cowboy in the picture and the pink box at the bottom."
 },
 "prompt": "Movies show mostly white cowboys, like this one. Fact-check the comic's cowboy.",
-"stem": "<span class=\"declass\"><b>Fact file</b><span class=\"line\">The National Park Service says about <b>1 in 4</b> cowboys was Black. <b>Nat Love</b>, a Black cowboy, wrote a book about his life in 1907.</span><span class=\"line\">Many others were Mexican <b>vaqueros</b>, who taught cowboy skills and words like \"lasso\" and \"rodeo.\"</span><span class=\"line\">Barbed wire fences and the deadly winter of 1886–1887 ended the long cattle drives.</span></span>Write 1–2 sentences. Start like this: <i>The comic shows ___, but real cowboys were ___. For example, ___.</i>",
+"stem": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">The cowboy is a white man.</span><span class=\"rl\">About 1 in 4 cowboys was Black. Many were Mexican <b>vaqueros</b>.</span></span><b class=\"kf\">Know this</b><span class=\"line\">Vaqueros taught cowboy skills and words like \"lasso\" and \"rodeo.\"</span><span class=\"line\">Barbed wire fences and the deadly winter of 1886–1887 ended the long cattle drives.</span></span>Write 1–2 sentences. Start like this: <i>The comic shows ___, but real cowboys were ___. For example, ___.</i>",
 "stemText": "The comic shows ___, but real cowboys were ___. For example, ___.",
 "placeholder": "The comic shows ___, but real cowboys were ___. For example, ___."
 }
 ],
-questions:["In 1874, gold was found in the Black Hills. Why did that start a war?", "Movies show mostly white cowboys, like this one. Fact-check the comic's cowboy."],
+questions:["Homesteaders, cowboys, or miners: who changed the West the most? Who paid the price?", "Movies show mostly white cowboys, like this one. Fact-check the comic's cowboy."],
 validate(s){if(!s.name)return{text:"Type your first name + last initial (like Jordan M.) at the top of the questions.",focus:"studentName"};
  const mc=[1, 2].find(i=>!s.checkDone(i));if(mc)return{text:"Get the check right for part "+mc+" first.",part:mc};
  const ma=[1, 2].find(i=>!s.answer(i));if(ma)return{text:"Write your answer for part "+ma+" before turning in.",part:ma,focus:"answer"+ma};

@@ -16,6 +16,13 @@
 .declass{display:block;background:#fff;border:2px dashed #18364a;border-radius:10px;padding:8px 11px;margin:6px 0 8px;font-weight:650;color:#22313b;line-height:1.4;font-style:normal}
 .declass > b:first-child{display:block;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#18364a;margin-bottom:2px}
 .declass .line{display:block;margin:3px 0}
+.declass .fix{display:block;margin:6px 0;border:1px solid #c9d3da;border-radius:8px;overflow:hidden}
+.declass .cs,.declass .rl{display:block;padding:5px 9px}
+.declass .cs{background:#fdecea}
+.declass .cs::before{content:"\2717  Comic says: ";font-weight:800;color:#a3271a}
+.declass .rl{background:#e6f4e9}
+.declass .rl::before{content:"\2713  Really: ";font-weight:800;color:#1d6b33}
+.declass .kf{display:block;margin-top:8px;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#18364a}
 .declass .note{display:block;margin-top:5px;font-weight:600;font-size:.9rem;color:#5b4632}
 .dime{display:inline-block;background:#e6bd64;color:#0f2433;border-radius:999px;font-weight:850;padding:0 9px;margin-right:4px}
 .credits{font-size:.8rem;color:var(--muted);margin:10px 0 0;line-height:1.4}
@@ -40,7 +47,7 @@ body.reading-now .choices{opacity:.45;pointer-events:none}
 
 <main class="gr-main gr-wrap">
 <section class="card">
-<p class="intro-line"><b>You're the fact-checker.</b> For each part: <b>read</b> the comic on the left → get the <b>check</b> right → read the <b>fact file</b> → write 1–2 sentences. Done = all parts green, then turn in at the bottom.</p>
+<p class="intro-line"><b>How it works:</b> read the comic pages → answer the question about today's big idea → see what the comic got right and wrong → write 1–2 sentences. Done = all parts green, then turn in at the bottom.</p>
 <details class="wordhelp"><summary>Word help (tap to open)</summary>
 <ul class="words" aria-label="Word help">
 <li><b>Colony</b> = a land ruled by another country</li><li><b>Guerrilla warfare</b> = small surprise attacks, then hiding</li><li><b>Anti-imperialist</b> = someone against taking other people's land</li><li><b>Isthmus</b> = a thin strip of land between two seas</li><li><b>1953 comic</b> = made by the U.S. government to tell America's story in other countries. It shows one point of view.</li>
@@ -90,18 +97,18 @@ parts:[
 "check": {
 "page": 1,
 "tag": "Reading check · Reader page 1",
-"q": "Read the box on the right. When does the comic say the Philippines became a free republic?",
-"right": "1946",
+"q": "The comic says many wanted Filipino self-rule to come slowly. What did Filipinos do in 1899?",
+"right": "Fought a war for independence",
 "wrong": [
-"1898",
-"1902",
-"1914"
+"Asked to become a U.S. state",
+"Voted to keep U.S. rule for good",
+"Asked Spain to come back and rule"
 ],
-"why": "✓ Correct. The comic jumps from 1898 straight to 1946. Read what happened in between.",
-"hint": "Read the box next to the Philippine flag."
+"why": "✓ Correct. Filipinos had declared their own country in 1898. When the U.S. took over instead, they fought back.",
+"hint": "Read the yellow box at the top: who wanted \"immediate independence\"? Then think back to Aguinaldo on the slides."
 },
-"prompt": "Was taking the Philippines right or wrong? Use one fact the comic skipped.",
-"stem": "<span class=\"declass\"><b>Fact file</b><span class=\"line\">In 1898, <b>Emilio Aguinaldo</b> (ah-gee-NAHL-doh) helped the U.S. fight Spain and declared the Philippines independent. Instead, Spain sold the islands to the U.S. for $20 million.</span><span class=\"line\"><b>Heads up: a brutal war.</b> In the Philippine-American War (1899–1902), about 4,200 U.S. soldiers and 20,000 Filipino fighters died. At least 200,000 Filipino civilians died, mostly from hunger and disease. The <b>51st Iowa</b> fought there in 1899.</span><span class=\"line\">Mark Twain said: <b>\"I am an anti-imperialist. I am opposed to having the eagle put its talons on any other land.\"</b></span></span>Write 1–2 sentences. Start like this: <i>Taking the Philippines was ___ because ___.</i>",
+"prompt": "Was taking the Philippines right or wrong? Use evidence.",
+"stem": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">Self-rule came as a slow, \"gradual process.\"</span><span class=\"rl\">First came the Philippine-American War (1899–1902). At least 200,000 Filipino civilians died.</span></span><b class=\"kf\">Know this</b><span class=\"line\">On June 12, 1898, <b>Emilio Aguinaldo</b> (ah-gee-NAHL-doh) declared the Philippines independent. The Treaty of Paris gave it to the U.S. anyway.</span><span class=\"line\"><b>Anti-imperialists</b> like Mark Twain said ruling people without their consent broke the Declaration of Independence.</span></span>Write 1–2 sentences. Start like this: <i>Taking the Philippines was ___ because ___.</i>",
 "stemText": "Taking the Philippines was ___ because ___.",
 "placeholder": "Taking the Philippines was ___ because ___."
 },
@@ -114,23 +121,23 @@ parts:[
 "check": {
 "page": 2,
 "tag": "Reading check · Reader page 2",
-"q": "Read the box on the map. What does the comic say the canal fulfilled?",
-"right": "Columbus's dream",
+"q": "Why did the U.S. want a canal across Panama?",
+"right": "To link the Atlantic and Pacific",
 "wrong": [
-"Lincoln's promise",
-"Spain's plan",
-"Washington's wish"
+"To give France back its lost land",
+"To cut Colombia off from the sea",
+"To end trade with Europe and Asia"
 ],
-"why": "✓ Correct. Columbus wanted a sea route west to Asia. The canal made a shortcut between the oceans.",
-"hint": "Read the box on the map, bottom right."
+"why": "✓ Correct. A canal let Navy and trade ships cross between the two oceans without sailing around South America.",
+"hint": "Read the box at the top left: \"A canal across the Isthmus of Panama...\""
 },
-"prompt": "Roosevelt said, \"Speak softly and carry a big stick.\" How did the U.S. get the land for the canal? Was it fair?",
-"stem": "<span class=\"declass\"><b>Fact file</b><span class=\"line\">Colombia ruled Panama and said no to the canal deal. In 1903, the U.S. backed a revolt that made Panama independent. The new country let the U.S. build.</span><span class=\"line\">The canal opened in <b>1914</b>. Thousands of workers, mostly from the Caribbean, died building it.</span><span class=\"line\">\"Big stick\" meant talk calmly but keep a strong military ready.</span></span>Write 1–2 sentences. Start like this: <i>The U.S. got the land by ___. It was (fair / unfair) because ___.</i>",
+"prompt": "How did the U.S. get the land for the Panama Canal? Was it fair?",
+"stem": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">\"Teddy's\" government just finished France's job.</span><span class=\"rl\">Colombia ruled Panama and said no. In 1903, the U.S. backed a revolt that made Panama independent.</span></span><b class=\"kf\">Know this</b><span class=\"line\">\"<b>Speak softly and carry a big stick</b>\" = talk calmly, but keep a strong military ready.</span><span class=\"line\">The canal opened in <b>1914</b>. Thousands of workers, mostly from the Caribbean, died building it.</span></span>Write 1–2 sentences. Start like this: <i>The U.S. got the land by ___. It was (fair / unfair) because ___.</i>",
 "stemText": "The U.S. got the land by ___. It was (fair / unfair) because ___.",
 "placeholder": "The U.S. got the land by ___. It was (fair / unfair) because ___."
 }
 ],
-questions:["Was taking the Philippines right or wrong? Use one fact the comic skipped.", "Roosevelt said, \"Speak softly and carry a big stick.\" How did the U.S. get the land for the canal? Was it fair?"],
+questions:["Was taking the Philippines right or wrong? Use evidence.", "How did the U.S. get the land for the Panama Canal? Was it fair?"],
 validate(s){if(!s.name)return{text:"Type your first name + last initial (like Jordan M.) at the top of the questions.",focus:"studentName"};
  const mc=[1, 2].find(i=>!s.checkDone(i));if(mc)return{text:"Get the check right for part "+mc+" first.",part:mc};
  const ma=[1, 2].find(i=>!s.answer(i));if(ma)return{text:"Write your answer for part "+ma+" before turning in.",part:ma,focus:"answer"+ma};

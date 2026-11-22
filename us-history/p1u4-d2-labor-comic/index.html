@@ -16,6 +16,13 @@
 .declass{display:block;background:#fff;border:2px dashed #18364a;border-radius:10px;padding:8px 11px;margin:6px 0 8px;font-weight:650;color:#22313b;line-height:1.4;font-style:normal}
 .declass > b:first-child{display:block;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#18364a;margin-bottom:2px}
 .declass .line{display:block;margin:3px 0}
+.declass .fix{display:block;margin:6px 0;border:1px solid #c9d3da;border-radius:8px;overflow:hidden}
+.declass .cs,.declass .rl{display:block;padding:5px 9px}
+.declass .cs{background:#fdecea}
+.declass .cs::before{content:"\2717  Comic says: ";font-weight:800;color:#a3271a}
+.declass .rl{background:#e6f4e9}
+.declass .rl::before{content:"\2713  Really: ";font-weight:800;color:#1d6b33}
+.declass .kf{display:block;margin-top:8px;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#18364a}
 .declass .note{display:block;margin-top:5px;font-weight:600;font-size:.9rem;color:#5b4632}
 .dime{display:inline-block;background:#e6bd64;color:#0f2433;border-radius:999px;font-weight:850;padding:0 9px;margin-right:4px}
 .credits{font-size:.8rem;color:var(--muted);margin:10px 0 0;line-height:1.4}
@@ -40,7 +47,7 @@ body.reading-now .choices{opacity:.45;pointer-events:none}
 
 <main class="gr-main gr-wrap">
 <section class="card">
-<p class="intro-line"><b>You're the fact-checker.</b> For each part: <b>read</b> the comic on the left → get the <b>check</b> right → read the <b>fact file</b> → write 1–2 sentences. Done = all parts green, then turn in at the bottom.</p>
+<p class="intro-line"><b>How it works:</b> read the comic pages → answer the question about today's big idea → see what the comic got right and wrong → write 1–2 sentences. Done = all parts green, then turn in at the bottom.</p>
 <details class="wordhelp"><summary>Word help (tap to open)</summary>
 <ul class="words" aria-label="Word help">
 <li><b>Union</b> = a group of workers who bargain with owners together</li><li><b>Strike</b> = all the workers stop working at once</li><li><b>Collective bargaining</b> = the union and owners work out a deal together</li><li><b>Class struggle</b> = the idea that workers and owners are always fighting</li><li><b>1953 comic</b> = made by the U.S. government to tell America's story in other countries. It shows one point of view.</li>
@@ -90,18 +97,18 @@ parts:[
 "check": {
 "page": 1,
 "tag": "Reading check · Reader page 1",
-"q": "Read Gompers' speech bubble. What does he say the AFL will NOT do?",
-"right": "Try to overthrow the employers.",
+"q": "Gompers says the AFL will not try to overthrow employers. What did the AFL want instead?",
+"right": "Better pay, hours, and safety",
 "wrong": [
-"Ask for better pay and hours.",
-"Let skilled workers join.",
-"Put workers' welfare first."
+"Workers to own all the factories",
+"One big union for every worker",
+"A new political party for workers"
 ],
-"why": "✓ Correct. Gompers wanted better pay, shorter hours, and safer jobs, not a revolution.",
-"hint": "Read the middle of Gompers' speech bubble."
+"why": "✓ Correct. The AFL was a union of skilled workers. It used collective bargaining: the union and the owners work out a deal together.",
+"hint": "Read Gompers's speech bubble: \"The welfare of the worker...\""
 },
 "prompt": "How was the AFL different from the Knights of Labor? Which was smarter?",
-"stem": "<span class=\"declass\"><b>Fact file</b><span class=\"line\">The <b>Knights of Labor</b> (1869) wanted one big union for all workers, skilled or not, Black or white, men or women. It claimed about 700,000 members.</span><span class=\"line\">In 1886, a bomb went off at a rally in Chicago's <b>Haymarket</b> Square. No one ever proved who threw it, but many Americans now saw unions as dangerous. The Knights shrank.</span><span class=\"line\">The <b>AFL</b> was for skilled workers only and stuck to simple goals. By the early 1900s it had over a million members.</span></span>Write 1–2 sentences. Start like this: <i>The AFL was different because ___. I think ___ was smarter because ___.</i>",
+"stem": "<span class=\"declass\"><b>Fact file</b><b class=\"kf\">Know this</b><span class=\"line\">The <b>Knights of Labor</b> wanted one big union for all workers. After the 1886 <b>Haymarket</b> bombing, many Americans saw unions as dangerous, and the Knights shrank.</span></span>Write 1–2 sentences. Start like this: <i>The AFL was different because ___. I think ___ was smarter because ___.</i>",
 "stemText": "The AFL was different because ___. I think ___ was smarter because ___.",
 "placeholder": "The AFL was different because ___. I think ___ was smarter because ___."
 },
@@ -114,18 +121,18 @@ parts:[
 "check": {
 "page": 2,
 "tag": "Reading check · Reader page 2",
-"q": "Read the box. What does the comic say replaced \"the delusion of class struggle\"?",
-"right": "A society where all men would be partners.",
+"q": "The comic says workers and owners became \"partners.\" In the Homestead and Pullman strikes, who won?",
+"right": "The owners, with help from troops",
 "wrong": [
-"A law that banned all labor unions.",
-"A plan for the government to own factories.",
-"A deal that gave every worker a farm."
+"The workers, with help from the president",
+"The unions, because owners gave in fast",
+"Nobody, because the courts stopped both"
 ],
-"why": "✓ Correct. That's the comic's happy ending. Check it against real strikes.",
-"hint": "Read the last line of the box."
+"why": "✓ Correct. At Homestead (1892), the governor sent 8,500 troops. At Pullman (1894), the president sent about 12,000. The unions lost.",
+"hint": "Read the box under the handshake."
 },
 "prompt": "Who usually won labor fights in the 1880s and 1890s: workers or owners? Whose side did the government take?",
-"stem": "<span class=\"declass\"><b>Fact file</b><span class=\"line\"><b>Homestead (1892):</b> Carnegie Steel locked out its workers. About 300 armed Pinkertons arrived and a gun battle killed at least 10 people. The governor sent 8,500 troops, and the union lost.</span><span class=\"line\"><b>Pullman (1894):</b> workers struck when pay was cut but rent wasn't. President Cleveland sent about 12,000 troops. Union leader Eugene Debs went to jail.</span><span class=\"line\"><b>Mother Jones (1903)</b> led child mill workers on a march toward President Roosevelt's home to show the country child labor.</span></span>Write 1–2 sentences. Start like this: <i>___ usually won because ___. The government took the side of ___.</i>",
+"stem": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">Workers and owners became \"partners.\"</span><span class=\"rl\">In the 1880s and 1890s, owners usually won, and the government took their side.</span></span><b class=\"kf\">Know this</b><span class=\"line\"><b>Homestead (1892):</b> a gun battle with company guards killed at least 10 people.</span><span class=\"line\"><b>Pullman (1894):</b> union leader Eugene Debs went to jail.</span></span>Write 1–2 sentences. Start like this: <i>___ usually won because ___. The government took the side of ___.</i>",
 "stemText": "___ usually won because ___. The government took the side of ___.",
 "placeholder": "___ usually won because ___. The government took the side of ___."
 }

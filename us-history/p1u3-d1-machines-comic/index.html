@@ -16,6 +16,13 @@
 .declass{display:block;background:#fff;border:2px dashed #18364a;border-radius:10px;padding:8px 11px;margin:6px 0 8px;font-weight:650;color:#22313b;line-height:1.4;font-style:normal}
 .declass > b:first-child{display:block;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#18364a;margin-bottom:2px}
 .declass .line{display:block;margin:3px 0}
+.declass .fix{display:block;margin:6px 0;border:1px solid #c9d3da;border-radius:8px;overflow:hidden}
+.declass .cs,.declass .rl{display:block;padding:5px 9px}
+.declass .cs{background:#fdecea}
+.declass .cs::before{content:"\2717  Comic says: ";font-weight:800;color:#a3271a}
+.declass .rl{background:#e6f4e9}
+.declass .rl::before{content:"\2713  Really: ";font-weight:800;color:#1d6b33}
+.declass .kf{display:block;margin-top:8px;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#18364a}
 .declass .note{display:block;margin-top:5px;font-weight:600;font-size:.9rem;color:#5b4632}
 .dime{display:inline-block;background:#e6bd64;color:#0f2433;border-radius:999px;font-weight:850;padding:0 9px;margin-right:4px}
 .credits{font-size:.8rem;color:var(--muted);margin:10px 0 0;line-height:1.4}
@@ -40,7 +47,7 @@ body.reading-now .choices{opacity:.45;pointer-events:none}
 
 <main class="gr-main gr-wrap">
 <section class="card">
-<p class="intro-line"><b>You're the fact-checker.</b> For each part: <b>read</b> the comic on the left → get the <b>check</b> right → read the <b>fact file</b> → write 1–2 sentences. Done = all parts green, then turn in at the bottom.</p>
+<p class="intro-line"><b>How it works:</b> read the comic pages → answer the question about today's big idea → see what the comic got right and wrong → write 1–2 sentences. Done = all parts green, then turn in at the bottom.</p>
 <details class="wordhelp"><summary>Word help (tap to open)</summary>
 <ul class="words" aria-label="Word help">
 <li><b>Invention</b> = a new machine or idea</li><li><b>Patent</b> = a paper that says only the inventor may sell an invention for a while</li><li><b>Industrialization</b> = switching from making things by hand to making them by machine</li><li><b>Exposition</b> = a big fair that shows off new things</li><li><b>1953 comic</b> = made by the U.S. government to tell America's story in other countries. It shows one point of view.</li>
@@ -90,20 +97,20 @@ parts:[
 "check": {
 "page": 1,
 "tag": "Reading check · Reader page 1",
-"q": "Read the speech bubbles on the left. What does the woman first think the telephone is?",
-"right": "A wonderful toy.",
+"q": "What could Bell's telephone do that the telegraph could not?",
+"right": "Let people talk by voice over a wire",
 "wrong": [
-"A new kind of clock.",
-"A tool for farming.",
-"A music box."
+"Light a whole room with no fire burning in it",
+"Send messages in dots and dashes",
+"Record music to play back later"
 ],
-"why": "✓ Correct. People had never heard a voice over a wire before. By 1881, Bell's company ran about 133,000 phones.",
-"hint": "Read the woman's speech bubble on the left."
+"why": "✓ Correct. The telegraph only sent dots and dashes that trained operators could read. The phone carried a real voice, so anyone could use it.",
+"hint": "Read the woman's speech bubble: \"I can hear someone speaking...\""
 },
-"prompt": "Which changed American life more: the telephone or the light bulb? Name one group it helped.",
-"stem": "<span class=\"declass\"><b>Fact file</b><span class=\"line\">Before the phone, the fastest way to send news was the <b>telegraph</b>, in dots and dashes only trained operators could read. Bell's 1876 <b>telephone</b> let anyone talk by voice.</span><span class=\"line\">Edison's team made a long-lasting <b>light bulb</b> in 1879. In 1882, his power station sent electricity to buildings in New York City, so factories and stores could work after dark.</span><span class=\"line\">Offices needed typists and phone operators. In 1870, about 1 in 20 office typists was a woman. By 1900, about 3 in 4 were.</span></span>Write 1–2 sentences. Start like this: <i>The ___ changed American life more because ___. It helped ___.</i>",
-"stemText": "The ___ changed American life more because ___. It helped ___.",
-"placeholder": "The ___ changed American life more because ___. It helped ___."
+"prompt": "Which invention changed American life the most: the telephone, the light bulb, or cheap steel? Name one group it helped.",
+"stem": "<span class=\"declass\"><b>Fact file</b><b class=\"kf\">Know this</b><span class=\"line\">Edison's team made a long-lasting <b>light bulb</b> in 1879. By 1882, his power station lit buildings in New York, so factories and stores could work after dark.</span><span class=\"line\">Phones and typewriters made new office jobs. By 1900, about 3 in 4 typists were women.</span></span>Write 1–2 sentences. Start like this: <i>The ___ changed American life the most because ___. It helped ___.</i>",
+"stemText": "The ___ changed American life the most because ___. It helped ___.",
+"placeholder": "The ___ changed American life the most because ___. It helped ___."
 },
 {
 "short": "Carnegie",
@@ -114,20 +121,20 @@ parts:[
 "check": {
 "page": 2,
 "tag": "Reading check · Reader page 2",
-"q": "Read the speech bubbles. Why is the family going to Pittsburgh?",
-"right": "Relatives there will help them find work.",
+"q": "The box calls this \"a time of great expansion in American industry.\" What was changing?",
+"right": "Machines were replacing handwork",
 "wrong": [
-"The father already owns a steel mill there.",
-"The government gave them free land there.",
-"A school there offered the boy a scholarship."
+"Farms were replacing city factories",
+"Americans were moving back to Europe",
+"Factories were closing all over the country"
 ],
-"why": "✓ Correct. Like millions of immigrants, they followed family to find jobs.",
-"hint": "Read the father's speech bubbles."
+"why": "✓ Correct. That's industrialization: making things by machine instead of by hand. Cheap steel from mills like Carnegie's built railroads, bridges, and cities.",
+"hint": "Read the yellow box at the top left."
 },
-"prompt": "Fact-check the comic's age for Carnegie. Then: he got rich. Who paid the price?",
-"stem": "<span class=\"declass\"><b>Fact file</b><span class=\"line\">Small catch: Carnegie was born in November 1835 and arrived in 1848. He was <b>12</b>, not 13.</span><span class=\"line\">Carnegie used the <b>Bessemer process</b>, which blew air through melted iron to make steel fast and cheap. U.S. steel went from almost nothing in 1870 to about 10 million tons a year by 1900.</span><span class=\"line\">His steelworkers often worked <b>12-hour shifts</b> in hot, dangerous mills.</span></span>Write 1–2 sentences. Start like this: <i>Carnegie was really ___. He got rich because ___, but ___ paid a price because ___.</i>",
-"stemText": "Carnegie was really ___. He got rich because ___, but ___ paid a price because ___.",
-"placeholder": "Carnegie was really ___. He got rich because ___, but ___ paid a price because ___."
+"prompt": "Carnegie came as a poor 12-year-old and became one of the richest men in the world. Who did the hard work that made him rich?",
+"stem": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">Carnegie was 13 when he came to America.</span><span class=\"rl\">He was 12. His family came in 1848.</span></span><span class=\"fix\"><span class=\"cs\">The family sails past the Statue of Liberty.</span><span class=\"rl\">The statue went up in 1886, 38 years after Carnegie arrived.</span></span><b class=\"kf\">Know this</b><span class=\"line\">The <b>Bessemer process</b> made steel fast and cheap. U.S. steel went from almost nothing in 1870 to about 10 million tons a year by 1900.</span></span>Write 1–2 sentences. Start like this: <i>Carnegie got rich because ___. The hard work was done by ___.</i>",
+"stemText": "Carnegie got rich because ___. The hard work was done by ___.",
+"placeholder": "Carnegie got rich because ___. The hard work was done by ___."
 },
 {
 "short": "Giving",
@@ -138,23 +145,23 @@ parts:[
 "check": {
 "page": 3,
 "tag": "Reading check · Reader page 3",
-"q": "Read the box at the bottom. What did Carnegie give millions for?",
-"right": "Libraries, a technical school, and a peace group.",
+"q": "What did Carnegie believe rich people should do with their money?",
+"right": "Give it away to help their communities",
 "wrong": [
-"Hospitals, new railroads, and city parks.",
-"Higher pay and shorter days for his workers.",
-"Churches, colleges, and soldiers' homes."
+"Keep it in the family for their children",
+"Save it to build even bigger factories",
+"Leave it all to the church when they die"
 ],
-"why": "✓ Correct. Carnegie believed rich people should give their money away while alive.",
-"hint": "Read the box at the bottom of reader page 3."
+"why": "✓ Correct. Carnegie wrote that a man who dies rich dies disgraced. He paid for libraries, a technical school, and a peace group.",
+"hint": "Read the box at the bottom: \"he gave millions for...\""
 },
 "prompt": "Carnegie wrote, \"The man who dies thus rich dies disgraced.\" Would his steelworkers agree? Why or why not?",
-"stem": "<span class=\"declass\"><b>Fact file</b><span class=\"line\">In <b>The Gospel of Wealth</b> (1889), Carnegie said rich people should give away their fortunes to help their communities.</span><span class=\"line\">Carnegie's money built about <b>100</b> public libraries in Iowa.</span><span class=\"line\">His workers didn't get a say in how the money was spent, and they still worked long shifts for low pay.</span></span>Write 1–2 sentences. Start like this: <i>His workers would (agree / disagree) because ___.</i>",
-"stemText": "His workers would (agree / disagree) because ___.",
-"placeholder": "His workers would (agree / disagree) because ___."
+"stem": "<span class=\"declass\"><b>Fact file</b><b class=\"kf\">Know this</b><span class=\"line\">Carnegie's money built about <b>100</b> public libraries in Iowa.</span><span class=\"line\">His steelworkers often worked <b>12-hour shifts</b> in hot, dangerous mills for low pay.</span></span>Write 1–2 sentences. Start like this: <i>His steelworkers would (agree / disagree) because ___.</i>",
+"stemText": "His steelworkers would (agree / disagree) because ___.",
+"placeholder": "His steelworkers would (agree / disagree) because ___."
 }
 ],
-questions:["Which changed American life more: the telephone or the light bulb? Name one group it helped.", "Fact-check the comic's age for Carnegie. Then: he got rich. Who paid the price?", "Carnegie wrote, \"The man who dies thus rich dies disgraced.\" Would his steelworkers agree? Why or why not?"],
+questions:["Which invention changed American life the most: the telephone, the light bulb, or cheap steel? Name one group it helped.", "Carnegie came as a poor 12-year-old and became one of the richest men in the world. Who did the hard work that made him rich?", "Carnegie wrote, \"The man who dies thus rich dies disgraced.\" Would his steelworkers agree? Why or why not?"],
 validate(s){if(!s.name)return{text:"Type your first name + last initial (like Jordan M.) at the top of the questions.",focus:"studentName"};
  const mc=[1, 2, 3].find(i=>!s.checkDone(i));if(mc)return{text:"Get the check right for part "+mc+" first.",part:mc};
  const ma=[1, 2, 3].find(i=>!s.answer(i));if(ma)return{text:"Write your answer for part "+ma+" before turning in.",part:ma,focus:"answer"+ma};

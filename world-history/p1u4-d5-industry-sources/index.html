@@ -73,7 +73,7 @@ body.reading-now .choices{opacity:.45;pointer-events:none}
 <section class="card finish" id="finish">
 <h2>Turn in your work</h2>
 <div class="actions"><button id="submitBtn" class="primary" type="button">Turn in answers</button></div><p id="submitStatus" class="status" role="status" aria-live="polite"></p><p class="reader-note">Your work saves on this device, so you can come back later. Your teacher sees it after you turn it in.</p>
-<p class="credits">Sources: Barton Aqueduct on the Bridgewater Canal (print, 1790s); Richard Marsden, <i>Cotton Spinning</i> (1880s), drawing of a spinning jenny; Joseph Wright, <i>Arkwright's Cotton Mills by Night</i> (about 1782); Matthew Boulton, as quoted by James Boswell (1776); Boulton & Watt steam engine engraving; William Wyld, <i>Manchester from Kersal Moor</i> (1852). Images public domain, via Wikimedia Commons.</p>
+<p class="credits">Sources: Barton Aqueduct on the Bridgewater Canal (print, 1790s); Richard Marsden, <i>Cotton Spinning</i> (1880s), drawing of a spinning jenny; Matthew Boulton, as quoted by James Boswell (1776); Boulton & Watt steam engine engraving; William Wyld, <i>Manchester from Kersal Moor</i> (1852). Images public domain, via Wikimedia Commons.</p>
 </section>
 <p class="credits" style="text-align:center"><button id="clearBtn" class="quiet" type="button" style="font-size:.8rem">Start over</button></p>
 </div></div></main>
@@ -81,7 +81,7 @@ body.reading-now .choices{opacity:.45;pointer-events:none}
 <script>
 window.FLIP={
 title:"Primary sources: Why Britain First? The Industrial Revolution",prefix:"wh-p1u4d5-ind-src-",pages:5,readSeconds:8,lockSeconds:8,
-alts:["Reader page 1. Source 1 · 1790s. A River Over a River. A print of the Barton Aqueduct on the Bridgewater Canal. Britain sat on mountains of coal, close to the surface. Moving it by horse and cart was slow and costly. When the Bridgewater Canal opened in 1761, the price of coal in Manchester dropped by about half.", "Reader page 2. Source 2 · 1764. One Machine, Eight Threads. A drawing of the spinning jenny from an 1880s book on cotton spinning. A spinning jenny. Around 1764, James Hargreaves built the spinning jenny. One worker could spin eight threads at once. Hand spinners feared for their jobs.", "Reader page 3. Source 3 · about 1782. Work by the Clock. Joseph Wright, Arkwright's Cotton Mills by Night. In 1771, Richard Arkwright built a cotton mill at Cromford, run by water power. This was the factory system: many workers and machines under one roof. The mill ran day and night in 12-hour shifts.", "Reader page 4. Source 4 · 1776. Selling Power. Matthew Boulton, James Watt's business partner, to a visitor. A Boulton & Watt steam engine. Quote: I sell here, Sir, what all the world desires to have—POWER. In plain words: We sell steam engines, and everybody wants power to run their machines. Steam engines let factories run anywhere, not just next to rivers.", "Reader page 5. Source 5 · 1852. Cotton City. A painting of Manchester's factory chimneys. Building factories took capital. British merchants had grown rich from trade, including the slave trade. Raw cotton came from the American South, picked by enslaved people. Britain's colonies bought its cloth."],
+alts:["Reader page 1. Source 1 · 1790s. A River Over a River. A print of the Barton Aqueduct on the Bridgewater Canal. Britain sat on mountains of coal, close to the surface. Moving it by horse and cart was slow and costly. When the Bridgewater Canal opened in 1761, the price of coal in Manchester dropped by about half.", "Reader page 2. Source 2 · 1764. One Machine, Eight Threads. A drawing of the spinning jenny from an 1880s book on cotton spinning. A spinning jenny. Around 1764, James Hargreaves built the spinning jenny. One worker could spin eight threads at once. Hand spinners feared for their jobs.", "Reader page 3. Source 3 · 1771. Work by the Clock. About Richard Arkwright's first factory. In 1771, Richard Arkwright built a cotton mill at Cromford, run by water power. This was the factory system: many workers and machines under one roof. The mill ran day and night in 12-hour shifts.", "Reader page 4. Source 4 · 1776. Selling Power. Matthew Boulton, James Watt's business partner, to a visitor. A Boulton & Watt steam engine. Quote: I sell here, Sir, what all the world desires to have—POWER. In plain words: We sell steam engines, and everybody wants power to run their machines. Steam engines let factories run anywhere, not just next to rivers.", "Reader page 5. Source 5 · 1852. Cotton City. A painting of Manchester's factory chimneys. Building factories took capital. British merchants had grown rich from trade, including the slave trade. Raw cotton came from the American South, picked by enslaved people. Britain's colonies bought its cloth."],
 assignmentId:"wh-p1u4-d5-industry-sources",api:"https://fynn-class-assignment-submissions-20261024.neotboy.chatgpt.site/api/submit",
 lockedText:"This box opens when you get the check right.",
 clearConfirm:"Start over? This clears your checks and answers on this device.",
@@ -131,7 +131,7 @@ parts:[
 "why": "✓ Correct. Machines did the work of many hand workers, so cloth got faster and cheaper to make.",
 "hint": "Read the box on page 2."
 },
-"prompt": "Pick one invention from today. How did it change the way people worked?",
+"prompt": "Pick one invention from this reading. How did it change the way people worked?",
 "stem": "<span class=\"declass\"><b>Fact file</b><b class=\"kf\">Know this</b><span class=\"line\">James Watt's improved steam engine (1769) became the power source of the Industrial Revolution.</span></span>Write 1–2 sentences. Start like this: <i>The ___ changed work because ___.</i>",
 "stemText": "The ___ changed work because ___.",
 "placeholder": "The ___ changed work because ___."
@@ -161,7 +161,7 @@ parts:[
 "placeholder": "Britain went first mainly because of ___, because ___."
 }
 ],
-questions:["Why did coal matter so much for Britain's factories?", "Pick one invention from today. How did it change the way people worked?", "Which mattered most for Britain going first: coal, money and colonies, or new inventions? Why?"],
+questions:["Why did coal matter so much for Britain's factories?", "Pick one invention from this reading. How did it change the way people worked?", "Which mattered most for Britain going first: coal, money and colonies, or new inventions? Why?"],
 validate(s){if(!s.name)return{text:"Type your first name + last initial (like Jordan M.) at the top of the questions.",focus:"studentName"};
  const mc=[1, 2, 3].find(i=>!s.checkDone(i));if(mc)return{text:"Get the check right for part "+mc+" first.",part:mc};
  const ma=[1, 2, 3].find(i=>!s.answer(i));if(ma)return{text:"Write your answer for part "+ma+" before turning in.",part:ma,focus:"answer"+ma};

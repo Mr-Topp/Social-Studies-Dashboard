@@ -16,6 +16,13 @@
 .declass{display:block;background:#fff;border:2px dashed #18364a;border-radius:10px;padding:8px 11px;margin:6px 0 8px;font-weight:650;color:#22313b;line-height:1.4;font-style:normal}
 .declass > b:first-child{display:block;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#18364a;margin-bottom:2px}
 .declass .line{display:block;margin:3px 0}
+.declass .fix{display:block;margin:6px 0;border:1px solid #c9d3da;border-radius:8px;overflow:hidden}
+.declass .cs,.declass .rl{display:block;padding:5px 9px}
+.declass .cs{background:#fdecea}
+.declass .cs::before{content:"\2717  Comic says: ";font-weight:800;color:#a3271a}
+.declass .rl{background:#e6f4e9}
+.declass .rl::before{content:"\2713  Really: ";font-weight:800;color:#1d6b33}
+.declass .kf{display:block;margin-top:8px;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#18364a}
 .declass .note{display:block;margin-top:5px;font-weight:600;font-size:.9rem;color:#5b4632}
 .dime{display:inline-block;background:#e6bd64;color:#0f2433;border-radius:999px;font-weight:850;padding:0 9px;margin-right:4px}
 .credits{font-size:.8rem;color:var(--muted);margin:10px 0 0;line-height:1.4}
@@ -40,7 +47,7 @@ body.reading-now .choices{opacity:.45;pointer-events:none}
 
 <main class="gr-main gr-wrap">
 <section class="card">
-<p class="intro-line"><b>You're the fact-checker.</b> For each part: <b>read</b> the comic on the left → get the <b>check</b> right → read the <b>fact file</b> → write 1–2 sentences. Done = all parts green, then turn in at the bottom.</p>
+<p class="intro-line"><b>How it works:</b> read the comic pages → answer the question about today's big idea → see what the comic got right and wrong → write 1–2 sentences. Done = all parts green, then turn in at the bottom.</p>
 <details class="wordhelp"><summary>Word help (tap to open)</summary>
 <ul class="words" aria-label="Word help">
 <li><b>Home front</b> = life at home during a war</li><li><b>Liberty Bond</b> = a loan people gave the government to pay for the war</li><li><b>Propaganda</b> = messages that push people toward one side</li><li><b>Sedition</b> = stirring up rebellion against the government</li><li><b>Pandemic</b> = a disease that spreads across the whole world</li><li><b>1953 comic</b> = made by the U.S. government to tell America's story in other countries. It shows one point of view.</li>
@@ -90,18 +97,18 @@ parts:[
 "check": {
 "page": 1,
 "tag": "Reading check · Reader page 1",
-"q": "Read the yellow box. What three groups made up the \"mighty partnership\"?",
-"right": "Industry, labor, and agriculture.",
+"q": "Why did winning World War I take more than soldiers?",
+"right": "Farms and factories had to supply it",
 "wrong": [
-"The Army, the Navy, and the Marines.",
-"Wilson, Congress, and the courts.",
-"Britain, France, and the United States."
+"Soldiers had to grow their own food",
+"The Allies already had all they needed",
+"Factories shut down so workers could fight"
 ],
-"why": "✓ Correct. Winning took farms and factories, not just soldiers.",
-"hint": "Read the first line of the yellow box."
+"why": "✓ Correct. The whole country went to work for the war. Families even saved food, and Americans bought Liberty Bonds to pay for it.",
+"hint": "Read the yellow box: what did the \"mighty partnership\" pour forth?"
 },
 "prompt": "Who did the most to make the \"mighty partnership\" work? Pick one group or person.",
-"stem": "<span class=\"declass\"><b>Fact file</b><span class=\"line\">Americans bought <b>Liberty Bonds</b> to pay for the war. Posters and speeches pushed everyone to help.</span><span class=\"line\"><b>Herbert Hoover</b>, born in West Branch, Iowa, ran the U.S. Food Administration. Families tried \"meatless Mondays\" and \"wheatless Wednesdays.\" Saving food was called <b>Hooverizing</b>.</span><span class=\"line\">Women took factory and railroad jobs. About 500,000 Black Southerners moved north for factory work. That was the start of the <b>Great Migration</b>.</span></span>Write 1–2 sentences. Start like this: <i>___ did the most because ___.</i>",
+"stem": "<span class=\"declass\"><b>Fact file</b><b class=\"kf\">Know this</b><span class=\"line\"><b>Herbert Hoover</b>, born in West Branch, Iowa, ran the U.S. Food Administration. Saving food was called <b>Hooverizing</b>.</span><span class=\"line\">Women took factory jobs. About 500,000 Black Southerners moved north for work, the start of the <b>Great Migration</b>.</span></span>Write 1–2 sentences. Start like this: <i>___ did the most because ___.</i>",
 "stemText": "___ did the most because ___.",
 "placeholder": "___ did the most because ___."
 },
@@ -114,18 +121,18 @@ parts:[
 "check": {
 "page": 2,
 "tag": "Reading check · Reader page 2",
-"q": "Read the box at the bottom. What did people hope as they celebrated?",
-"right": "That this war would end war forever.",
+"q": "As Americans cheered the end of the war, what did they hope?",
+"right": "That it would end war forever",
 "wrong": [
-"That Germany would pay for every ship.",
-"That soldiers would stay in Europe.",
-"That prices would go back down."
+"That the soldiers would stay in Europe",
+"That Germany would pay for every ship",
+"That the draft would last for good"
 ],
-"why": "✓ Correct. That hope didn't last. And the war had already changed life at home.",
-"hint": "Read the box at the bottom of reader page 2."
+"why": "✓ Correct. That hope didn't last. And the war had already changed life at home, including free speech.",
+"hint": "Read the green box at the bottom of the page."
 },
 "prompt": "Did the war make Americans less free? Give one reason.",
-"stem": "<span class=\"declass\"><b>Fact file</b><span class=\"line\">The <b>Espionage Act</b> (1917) and <b>Sedition Act</b> (1918) made it a crime to interfere with the draft or say \"disloyal\" things. Eugene Debs got 10 years in prison for an antiwar speech.</span><span class=\"line\">In May 1918, Iowa Governor William Harding's <b>Babel Proclamation</b> ordered English only in public, on the phone, and in church. It hit German, Danish, Czech, and Dutch speakers.</span><span class=\"line\"><b>Heads up:</b> the 1918 flu killed about 675,000 Americans, more than died in the war. More than 700 died at Camp Dodge.</span></span>Write 1–2 sentences. Start like this: <i>The war made Americans (more / less) free because ___.</i>",
+"stem": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">(Nothing about free speech.)</span><span class=\"rl\">The Sedition Act (1918) made \"disloyal\" words a crime. Eugene Debs got 10 years for an antiwar speech.</span></span><span class=\"fix\"><span class=\"cs\">(Nothing about Iowa.)</span><span class=\"rl\">Iowa's Babel Proclamation (May 1918) ordered English only in public, on the phone, and in church.</span></span><b class=\"kf\">Know this</b><span class=\"line\"><b>Heads up:</b> the 1918 flu killed about 675,000 Americans, more than died in the war.</span></span>Write 1–2 sentences. Start like this: <i>The war made Americans (more / less) free because ___.</i>",
 "stemText": "The war made Americans (more / less) free because ___.",
 "placeholder": "The war made Americans (more / less) free because ___."
 }

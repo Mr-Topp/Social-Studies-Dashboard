@@ -16,6 +16,13 @@
 .declass{display:block;background:#fff;border:2px dashed #18364a;border-radius:10px;padding:8px 11px;margin:6px 0 8px;font-weight:650;color:#22313b;line-height:1.4;font-style:normal}
 .declass > b:first-child{display:block;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#18364a;margin-bottom:2px}
 .declass .line{display:block;margin:3px 0}
+.declass .fix{display:block;margin:6px 0;border:1px solid #c9d3da;border-radius:8px;overflow:hidden}
+.declass .cs,.declass .rl{display:block;padding:5px 9px}
+.declass .cs{background:#fdecea}
+.declass .cs::before{content:"\2717  Comic says: ";font-weight:800;color:#a3271a}
+.declass .rl{background:#e6f4e9}
+.declass .rl::before{content:"\2713  Really: ";font-weight:800;color:#1d6b33}
+.declass .kf{display:block;margin-top:8px;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#18364a}
 .declass .note{display:block;margin-top:5px;font-weight:600;font-size:.9rem;color:#5b4632}
 .dime{display:inline-block;background:#e6bd64;color:#0f2433;border-radius:999px;font-weight:850;padding:0 9px;margin-right:4px}
 .credits{font-size:.8rem;color:var(--muted);margin:10px 0 0;line-height:1.4}
@@ -40,7 +47,7 @@ body.reading-now .choices{opacity:.45;pointer-events:none}
 
 <main class="gr-main gr-wrap">
 <section class="card">
-<p class="intro-line"><b>You're the fact-checker.</b> For each part: <b>read</b> the comic on the left → get the <b>check</b> right → read the <b>fact file</b> → write 1–2 sentences. Done = all parts green, then turn in at the bottom.</p>
+<p class="intro-line"><b>How it works:</b> read the comic pages → answer the question about today's big idea → see what the comic got right and wrong → write 1–2 sentences. Done = all parts green, then turn in at the bottom.</p>
 <details class="wordhelp"><summary>Word help (tap to open)</summary>
 <ul class="words" aria-label="Word help">
 <li><b>Immigrant</b> = a person who moves to a new country to live</li><li><b>Push factor</b> = a problem that makes people leave home</li><li><b>Pull factor</b> = something that draws people to a new place</li><li><b>Famine</b> = a time when there isn't enough food</li><li><b>1953 comic</b> = made by the U.S. government to tell America's story in other countries. It shows one point of view.</li>
@@ -90,18 +97,18 @@ parts:[
 "check": {
 "page": 1,
 "tag": "Reading check · Reader page 1",
-"q": "Read the yellow box. What does it say pushed people to leave Europe?",
-"right": "Famine and unrest at home.",
+"q": "A push factor makes people leave home. Which push factor does the box name?",
+"right": "Famine and unrest at home",
 "wrong": [
-"Free trips paid for by railroads.",
-"Laws that banned them from farming.",
-"Letters saying America had no taxes."
+"Cheap farmland sold by the railroads",
+"Factory jobs in American cities",
+"Opportunity in the West"
 ],
-"why": "✓ Correct. That's a push factor. \"Opportunity in the West\" is a pull factor.",
-"hint": "Read the end of the first paragraph in the yellow box."
+"why": "✓ Correct. Famine (not enough food) and unrest pushed people out. Jobs and cheap land in America pulled them in.",
+"hint": "Read the yellow box: \"...spurred them on.\""
 },
 "prompt": "Pick one group that came to Iowa. What pushed or pulled them here?",
-"stem": "<span class=\"declass\"><b>Fact file</b><span class=\"line\">Nearly <b>12 million</b> immigrants came between 1870 and 1900. Railroads printed land ads in German, Swedish, and other languages.</span><span class=\"line\"><b>Czech</b> families settled in Cedar Rapids and many worked at the Sinclair meatpacking plant. Their neighborhood is still called Czech Village. <b>Dutch</b> settlers founded Pella in 1847, <b>Norwegians</b> settled around Decorah, and Germans started the <b>Amana</b> Colonies in 1855.</span><span class=\"line\">Often one family came first and wrote home. Then relatives followed. That's <b>chain migration</b>.</span></span>Write 1–2 sentences. Start like this: <i>The ___ came to Iowa because ___. That's a (push / pull) factor.</i>",
+"stem": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">Hundreds of thousands came from Europe after 1840.</span><span class=\"rl\">It was millions. Nearly 12 million came from 1870 to 1900 alone.</span></span><b class=\"kf\">Know this</b><span class=\"line\">Often one family came first and wrote home. Then relatives followed. That's <b>chain migration</b>.</span><span class=\"line\">Czech families came to Cedar Rapids to work at the Sinclair meatpacking plant. Their neighborhood is still called <b>Czech Village</b>.</span></span>Write 1–2 sentences. Start like this: <i>The ___ came to Iowa because ___. That's a (push / pull) factor.</i>",
 "stemText": "The ___ came to Iowa because ___. That's a (push / pull) factor.",
 "placeholder": "The ___ came to Iowa because ___. That's a (push / pull) factor."
 },
@@ -114,23 +121,23 @@ parts:[
 "check": {
 "page": 2,
 "tag": "Reading check · Reader page 2",
-"q": "Read the sign under the statue. Whom does it welcome?",
-"right": "The tired and the poor.",
+"q": "The sign promises a \"golden door\" for the poor. Was that door open to everyone?",
+"right": "No, Congress banned Chinese workers",
 "wrong": [
-"The rich and the famous.",
-"Soldiers and sailors.",
-"Farmers from France."
+"Yes, anyone who reached New York got in",
+"No, only people from France could come",
+"Yes, every new immigrant became a citizen"
 ],
-"why": "✓ Correct. Those words come from a poem by Emma Lazarus, written in 1883.",
-"hint": "Read the words on the orange sign."
+"why": "✓ Correct. The 1882 Chinese Exclusion Act was the first major U.S. law to keep out one nationality. It lasted until 1943.",
+"hint": "Read the orange sign under the statue."
 },
-"prompt": "The statue welcomed \"your tired, your poor.\" That same decade, Congress passed the Chinese Exclusion Act. Was the door open to everyone?",
-"stem": "<span class=\"declass\"><b>Fact file</b><span class=\"line\">The <b>Chinese Exclusion Act</b> (1882) banned Chinese workers from coming for 10 years, and Chinese immigrants already here couldn't become citizens. It was the first major U.S. law to keep out one nationality. It lasted until 1943.</span><span class=\"line\">The Statue of Liberty was dedicated in <b>1886</b>. Ellis Island opened in 1892. Only about 2 of every 100 people there were sent back.</span><span class=\"line\">In 1879, about 6,000 Black Southerners called <b>Exodusters</b> moved to Kansas to escape violence after Reconstruction.</span></span>Write 1–2 sentences. Start like this: <i>The door was (open / not open) to everyone because ___.</i>",
-"stemText": "The door was (open / not open) to everyone because ___.",
-"placeholder": "The door was (open / not open) to everyone because ___."
+"prompt": "Pick one group from today. What pushed or pulled them here, and how were they treated?",
+"stem": "<span class=\"declass\"><b>Fact file</b><b class=\"kf\">Know this</b><span class=\"line\">At <b>Ellis Island</b> (opened 1892), only about 2 of every 100 people were sent back.</span><span class=\"line\">In 1879, about 6,000 Black Southerners called <b>Exodusters</b> moved to Kansas to escape violence.</span></span>Write 1–2 sentences. Start like this: <i>The ___ came because ___. They were treated ___.</i>",
+"stemText": "The ___ came because ___. They were treated ___.",
+"placeholder": "The ___ came because ___. They were treated ___."
 }
 ],
-questions:["Pick one group that came to Iowa. What pushed or pulled them here?", "The statue welcomed \"your tired, your poor.\" That same decade, Congress passed the Chinese Exclusion Act. Was the door open to everyone?"],
+questions:["Pick one group that came to Iowa. What pushed or pulled them here?", "Pick one group from today. What pushed or pulled them here, and how were they treated?"],
 validate(s){if(!s.name)return{text:"Type your first name + last initial (like Jordan M.) at the top of the questions.",focus:"studentName"};
  const mc=[1, 2].find(i=>!s.checkDone(i));if(mc)return{text:"Get the check right for part "+mc+" first.",part:mc};
  const ma=[1, 2].find(i=>!s.answer(i));if(ma)return{text:"Write your answer for part "+ma+" before turning in.",part:ma,focus:"answer"+ma};

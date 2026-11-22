@@ -16,6 +16,13 @@
 .declass{display:block;background:#fff;border:2px dashed #18364a;border-radius:10px;padding:8px 11px;margin:6px 0 8px;font-weight:650;color:#22313b;line-height:1.4;font-style:normal}
 .declass > b:first-child{display:block;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#18364a;margin-bottom:2px}
 .declass .line{display:block;margin:3px 0}
+.declass .fix{display:block;margin:6px 0;border:1px solid #c9d3da;border-radius:8px;overflow:hidden}
+.declass .cs,.declass .rl{display:block;padding:5px 9px}
+.declass .cs{background:#fdecea}
+.declass .cs::before{content:"\2717  Comic says: ";font-weight:800;color:#a3271a}
+.declass .rl{background:#e6f4e9}
+.declass .rl::before{content:"\2713  Really: ";font-weight:800;color:#1d6b33}
+.declass .kf{display:block;margin-top:8px;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#18364a}
 .declass .note{display:block;margin-top:5px;font-weight:600;font-size:.9rem;color:#5b4632}
 .dime{display:inline-block;background:#e6bd64;color:#0f2433;border-radius:999px;font-weight:850;padding:0 9px;margin-right:4px}
 .credits{font-size:.8rem;color:var(--muted);margin:10px 0 0;line-height:1.4}
@@ -40,7 +47,7 @@ body.reading-now .choices{opacity:.45;pointer-events:none}
 
 <main class="gr-main gr-wrap">
 <section class="card">
-<p class="intro-line"><b>You're the fact-checker.</b> For each part: <b>read</b> the comic on the left → get the <b>check</b> right → read the <b>fact file</b> → write 1–2 sentences. Done = all parts green, then turn in at the bottom.</p>
+<p class="intro-line"><b>How it works:</b> read the comic pages → answer the question about today's big idea → see what the comic got right and wrong → write 1–2 sentences. Done = all parts green, then turn in at the bottom.</p>
 <details class="wordhelp"><summary>Word help (tap to open)</summary>
 <ul class="words" aria-label="Word help">
 <li><b>Removal</b> = forcing a people to leave their land</li><li><b>Reservation</b> = land set aside for a Native nation</li><li><b>Sovereign</b> = governs itself</li><li><b>Allotment</b> = a small farm split off from a reservation</li><li><b>1953 comic</b> = made by the U.S. government to tell America's story in other countries. It shows one point of view.</li>
@@ -90,20 +97,20 @@ parts:[
 "check": {
 "page": 1,
 "tag": "Reading check · Reader page 1",
-"q": "Read the speech bubbles. What does the crowd call Jackson?",
-"right": "The hero of New Orleans.",
+"q": "The crowd cheers Jackson as a hero. Which people would NOT cheer him?",
+"right": "Native nations he forced west",
 "wrong": [
-"The friend of the Indians.",
-"The father of the Constitution.",
-"The voice of the North."
+"Soldiers who fought for him in 1815",
+"Poor farmers from the backwoods",
+"Voters who wanted a common man"
 ],
-"why": "✓ Correct. Jackson was famous for winning the Battle of New Orleans in 1815. The comic leaves out one of his biggest laws.",
-"hint": "Read the crowd's speech bubbles on the right."
+"why": "✓ Correct. In 1830, Jackson signed the Indian Removal Act. The U.S. forced tens of thousands of Native people off their homelands.",
+"hint": "Read the crowd's speech bubbles. Who is cheering, and who is not in the picture?"
 },
-"prompt": "The comic cheers Jackson but skips the Indian Removal Act. What happened, and how did it reach Iowa?",
-"stem": "<span class=\"declass\"><b>Fact file</b><span class=\"line\">In 1830, Jackson signed the <b>Indian Removal Act</b>. The U.S. forced tens of thousands of Native people from their homes to land west of the Mississippi.</span><span class=\"line\">In Iowa, after the <b>Black Hawk War</b> (1832), the Sauk and Meskwaki (mes-KWAH-kee) were forced to give up land in eastern Iowa, and settlers moved in.</span><span class=\"line\">In 1857, the Meskwaki <b>bought</b> 80 acres in Tama (TAY-muh) County. Because they bought it, it's a settlement, not a reservation. Today it's over 8,100 acres.</span></span>Write 1–2 sentences. Start like this: <i>The comic skips that Jackson ___. In Iowa, ___.</i>",
-"stemText": "The comic skips that Jackson ___. In Iowa, ___.",
-"placeholder": "The comic skips that Jackson ___. In Iowa, ___."
+"prompt": "Name one way a Native nation resisted or survived, like the Meskwaki in Iowa.",
+"stem": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">Jackson came from a humble background.</span><span class=\"rl\">He was born poor. But by 1829 he was a rich planter who enslaved many people.</span></span><b class=\"kf\">Know this</b><span class=\"line\">After the <b>Black Hawk War</b> (1832), the Sauk and Meskwaki (mes-KWAH-kee) were forced to give up land in Iowa.</span><span class=\"line\">In 1857, the Meskwaki <b>bought</b> 80 acres in Tama County. Today their settlement is over 8,100 acres.</span></span>Write 1–2 sentences. Start like this: <i>The ___ survived by ___. This mattered because ___.</i>",
+"stemText": "The ___ survived by ___. This mattered because ___.",
+"placeholder": "The ___ survived by ___. This mattered because ___."
 },
 {
 "short": "Collided",
@@ -114,23 +121,23 @@ parts:[
 "check": {
 "page": 2,
 "tag": "Reading check · Reader page 2",
-"q": "Read the box under the map. Who does the comic say westward expansion collided with?",
-"right": "British Canada and Mexico.",
+"q": "The box says the West \"collided\" with Canada and Mexico. Who already lived on that western land?",
+"right": "Native nations, like the Lakota",
 "wrong": [
-"The Lakota and the Cheyenne.",
-"France and Spain.",
-"Russia and China."
+"Nobody, because the West was empty land",
+"Only British and Mexican soldiers",
+"Mostly settlers from back East"
 ],
-"why": "✓ Correct. The comic only names other countries. It never names the Native nations who lived there.",
-"hint": "Read the box under the map."
+"why": "✓ Correct. The map shows no Native nations at all. But the West was already their home.",
+"hint": "Read the box under the map. Then look at the map: whose names are missing?"
 },
-"prompt": "What hurt Plains nations the most: losing the bison, losing land, or boarding schools? Name one way a nation fought back or survived.",
-"stem": "<span class=\"declass\"><b>Fact file</b><span class=\"line\"><b>Bison:</b> hide hunters killed millions in the 1870s and 1880s. By 1889, only about 1,000 were left.</span><span class=\"line\"><b>Land:</b> Lakota and Cheyenne fighters beat Custer at the Little Bighorn in 1876, but the U.S. took the Black Hills in 1877. In 1980, the Supreme Court ruled the taking illegal. The Lakota still want the land, not money. The 1887 <b>Dawes Act</b> cut Native land from about 138 million acres to 48 million by 1934.</span><span class=\"line\"><b>Boarding schools</b> like Carlisle (1879) cut students' hair, changed their names, and punished them for speaking their own languages.</span></span>Write 1–2 sentences. Start like this: <i>___ hurt Plains nations the most because ___. One nation survived by ___.</i>",
-"stemText": "___ hurt Plains nations the most because ___. One nation survived by ___.",
-"placeholder": "___ hurt Plains nations the most because ___. One nation survived by ___."
+"prompt": "What hurt Plains nations the most: losing the bison, losing land, or boarding schools?",
+"stem": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">The Oregon deal was a treaty with Canada.</span><span class=\"rl\">It was with Britain. Canada wasn't its own country until 1867.</span></span><b class=\"kf\">Know this</b><span class=\"line\"><b>Bison:</b> hide hunters killed millions. By 1889, only about 1,000 were left.</span><span class=\"line\"><b>Land:</b> the 1887 <b>Dawes Act</b> cut Native land from about 138 million acres to 48 million by 1934.</span></span>Write 1–2 sentences. Start like this: <i>___ hurt Plains nations the most because ___.</i>",
+"stemText": "___ hurt Plains nations the most because ___.",
+"placeholder": "___ hurt Plains nations the most because ___."
 }
 ],
-questions:["The comic cheers Jackson but skips the Indian Removal Act. What happened, and how did it reach Iowa?", "What hurt Plains nations the most: losing the bison, losing land, or boarding schools? Name one way a nation fought back or survived."],
+questions:["Name one way a Native nation resisted or survived, like the Meskwaki in Iowa.", "What hurt Plains nations the most: losing the bison, losing land, or boarding schools?"],
 validate(s){if(!s.name)return{text:"Type your first name + last initial (like Jordan M.) at the top of the questions.",focus:"studentName"};
  const mc=[1, 2].find(i=>!s.checkDone(i));if(mc)return{text:"Get the check right for part "+mc+" first.",part:mc};
  const ma=[1, 2].find(i=>!s.answer(i));if(ma)return{text:"Write your answer for part "+ma+" before turning in.",part:ma,focus:"answer"+ma};

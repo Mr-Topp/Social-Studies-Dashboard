@@ -16,6 +16,13 @@
 .declass{display:block;background:#fff;border:2px dashed #18364a;border-radius:10px;padding:8px 11px;margin:6px 0 8px;font-weight:650;color:#22313b;line-height:1.4;font-style:normal}
 .declass > b:first-child{display:block;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#18364a;margin-bottom:2px}
 .declass .line{display:block;margin:3px 0}
+.declass .fix{display:block;margin:6px 0;border:1px solid #c9d3da;border-radius:8px;overflow:hidden}
+.declass .cs,.declass .rl{display:block;padding:5px 9px}
+.declass .cs{background:#fdecea}
+.declass .cs::before{content:"\2717  Comic says: ";font-weight:800;color:#a3271a}
+.declass .rl{background:#e6f4e9}
+.declass .rl::before{content:"\2713  Really: ";font-weight:800;color:#1d6b33}
+.declass .kf{display:block;margin-top:8px;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#18364a}
 .declass .note{display:block;margin-top:5px;font-weight:600;font-size:.9rem;color:#5b4632}
 .dime{display:inline-block;background:#e6bd64;color:#0f2433;border-radius:999px;font-weight:850;padding:0 9px;margin-right:4px}
 .credits{font-size:.8rem;color:var(--muted);margin:10px 0 0;line-height:1.4}
@@ -40,7 +47,7 @@ body.reading-now .choices{opacity:.45;pointer-events:none}
 
 <main class="gr-main gr-wrap">
 <section class="card">
-<p class="intro-line"><b>You're the fact-checker.</b> For each part: <b>read</b> the comic on the left → get the <b>check</b> right → read the <b>fact file</b> → write 1–2 sentences. Done = all parts green, then turn in at the bottom.</p>
+<p class="intro-line"><b>How it works:</b> read the comic pages → answer the question about today's big idea → see what the comic got right and wrong → write 1–2 sentences. Done = all parts green, then turn in at the bottom.</p>
 <details class="wordhelp"><summary>Word help (tap to open)</summary>
 <ul class="words" aria-label="Word help">
 <li><b>Emancipation</b> = freeing people from slavery</li><li><b>Proclamation</b> = an official announcement</li><li><b>Contraband</b> = enemy property taken in war</li><li><b>Regiment</b> = a large army unit</li><li><b>1953 comic</b> = made by the U.S. government to tell America's story in other countries. It shows one point of view.</li>
@@ -90,18 +97,18 @@ parts:[
 "check": {
 "page": 1,
 "tag": "Reading check · Reader page 1",
-"q": "Read the scroll. What did Lincoln order on January 1, 1863?",
-"right": "People held as slaves would be free from now on.",
+"q": "How did the Emancipation Proclamation change the war?",
+"right": "It became a war to end slavery",
 "wrong": [
-"Every Southern state had to leave the Union.",
-"Black men could vote in every state.",
-"Slave owners would be paid for each person."
+"It ended slavery in every state at once",
+"It made the South rejoin the Union",
+"It paid slave owners to free people"
 ],
-"why": "✓ Correct. That's the Emancipation Proclamation. But it had big limits. Read the fact file.",
-"hint": "Read the words on the scroll."
+"why": "✓ Correct. Now every mile the Union army marched meant freedom. It also let Black men join the army.",
+"hint": "Read the words on the scroll: \"...henceforward shall be free.\""
 },
 "prompt": "The scroll makes it sound like everyone was freed in 1863. What did the Proclamation really do, and not do?",
-"stem": "<span class=\"declass\"><b>Fact file</b><span class=\"line\">It did <b>not</b> free anyone in the four slave states that stayed in the Union: Missouri, Kentucky, Maryland, and Delaware. In the Confederacy, it only worked where the Union army arrived.</span><span class=\"line\">But it changed what the war was about. Every mile the Union army marched now meant freedom. It also let Black men join the Union army and navy.</span><span class=\"line\">Slavery wasn't fully ended until the <b>13th Amendment</b> in 1865.</span></span>Write 1–2 sentences. Start like this: <i>The Proclamation did ___, but it did not ___.</i>",
+"stem": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">\"All persons held as slaves\" are free.</span><span class=\"rl\">The \"...\" cuts out key words: only in states \"in rebellion.\" Missouri, Kentucky, Maryland, and Delaware were left out.</span></span><b class=\"kf\">Know this</b><span class=\"line\">Slavery fully ended with the <b>13th Amendment</b> in 1865.</span></span>Write 1–2 sentences. Start like this: <i>The Proclamation did ___, but it did not ___.</i>",
 "stemText": "The Proclamation did ___, but it did not ___.",
 "placeholder": "The Proclamation did ___, but it did not ___."
 },
@@ -114,20 +121,20 @@ parts:[
 "check": {
 "page": 2,
 "tag": "Reading check · Reader page 2",
-"q": "Look at the statue. How does it show Lincoln and the freed man?",
-"right": "Lincoln stands, and the freed man kneels at his feet.",
+"q": "The statue shows Lincoln freeing a kneeling man. What does it leave out?",
+"right": "Enslaved people freed themselves too",
 "wrong": [
-"Both men stand side by side as equals.",
-"The freed man stands, and Lincoln kneels.",
-"Both men are kneeling in prayer together."
+"Lincoln never signed the Proclamation",
+"The kneeling man was a soldier from Britain",
+"Most enslaved people stayed on their plantations"
 ],
-"why": "✓ Correct. The statue shows Lincoln as the one who gives freedom. Read who the kneeling man really was.",
-"hint": "Look at who is standing and who is kneeling."
+"why": "✓ Correct. Hundreds of thousands escaped to Union lines, and about 180,000 Black men fought for the Union.",
+"hint": "Look at who stands and who kneels. Who looks like the only hero?"
 },
-"prompt": "The statue shows Lincoln freeing a kneeling man. Who else made emancipation happen?",
-"stem": "<span class=\"declass\"><b>Fact file</b><span class=\"line\">The kneeling man was modeled on <b>Archer Alexander</b>. He had escaped slavery after helping the Union Army. Formerly enslaved people paid for the statue, but they had no say in how it looked. Frederick Douglass complained that the man was still \"on his knees.\"</span><span class=\"line\">In 1861, three enslaved men escaped to Fort Monroe, a Union fort. Hundreds of thousands more escaped to Union lines during the war.</span><span class=\"line\">About <b>180,000</b> Black men served in the U.S. Colored Troops. The 1st Iowa Infantry, African Descent formed at Keokuk (KEE-uh-kuk) in 1863. Harriet Tubman helped lead a raid that freed more than 700 people.</span></span>Write 1–2 sentences. Start like this: <i>The statue shows only ___, but ___ also made emancipation happen by ___.</i>",
-"stemText": "The statue shows only ___, but ___ also made emancipation happen by ___.",
-"placeholder": "The statue shows only ___, but ___ also made emancipation happen by ___."
+"prompt": "Who did the most to turn the war into a fight for freedom? Pick one and defend it.",
+"stem": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">The freed man kneels, waiting to be freed.</span><span class=\"rl\">The model was Archer Alexander. He escaped slavery after helping the Union Army.</span></span><b class=\"kf\">Know this</b><span class=\"line\">Frederick Douglass wrote that the statue showed the Black man \"on his knees.\"</span><span class=\"line\">In 1861, three men escaped to Fort Monroe. Gen. Butler called them <b>contraband</b> and would not send them back.</span></span>Write 1–2 sentences. Start like this: <i>___ did the most because ___.</i>",
+"stemText": "___ did the most because ___.",
+"placeholder": "___ did the most because ___."
 },
 {
 "short": "New birth",
@@ -138,23 +145,23 @@ parts:[
 "check": {
 "page": 3,
 "tag": "Reading check · Reader page 3",
-"q": "Read Lincoln's speech bubble. What does he say the nation shall have?",
-"right": "A new birth of freedom.",
+"q": "What did Lincoln mean by \"a new birth of freedom\"?",
+"right": "A fresh start, with freedom for more people",
 "wrong": [
-"A new king for the people.",
-"A new capital in the West.",
-"A new army to rule the South."
+"A new government with a king to keep the peace",
+"Freedom for the South to leave the Union",
+"A new capital city built in the West"
 ],
-"why": "✓ Correct. Lincoln gave the Gettysburg Address in about two minutes at a new soldiers' cemetery.",
+"why": "✓ Correct. The soldiers died for a nation where freedom would reach more people, including the enslaved.",
 "hint": "Read the middle of Lincoln's speech bubble."
 },
 "prompt": "Who would gain a \"new birth of freedom\"? Who might still be left out?",
-"stem": "<span class=\"declass\"><b>Fact file</b><span class=\"line\">Black Union soldiers were paid <b>$10</b> a month, minus $3 for clothes. White soldiers got $13. Many refused any pay until it was equal. Congress fixed it in 1864.</span><span class=\"line\">Frederick Douglass pushed Lincoln from the start to make it a war to end slavery. Two of his sons joined the 54th Massachusetts.</span><span class=\"line\">Women of every race still could not vote.</span></span>Write 1–2 sentences. Start like this: <i>A new birth of freedom would help ___. Still left out were ___.</i>",
+"stem": "<span class=\"declass\"><b>Fact file</b><b class=\"kf\">Know this</b><span class=\"line\">Black Union soldiers got <b>$10</b> a month, minus $3 for clothes. White soldiers got $13. Congress fixed it in 1864.</span><span class=\"line\">Women of every race still could not vote.</span></span>Write 1–2 sentences. Start like this: <i>A new birth of freedom would help ___. Still left out were ___.</i>",
 "stemText": "A new birth of freedom would help ___. Still left out were ___.",
 "placeholder": "A new birth of freedom would help ___. Still left out were ___."
 }
 ],
-questions:["The scroll makes it sound like everyone was freed in 1863. What did the Proclamation really do, and not do?", "The statue shows Lincoln freeing a kneeling man. Who else made emancipation happen?", "Who would gain a \"new birth of freedom\"? Who might still be left out?"],
+questions:["The scroll makes it sound like everyone was freed in 1863. What did the Proclamation really do, and not do?", "Who did the most to turn the war into a fight for freedom? Pick one and defend it.", "Who would gain a \"new birth of freedom\"? Who might still be left out?"],
 validate(s){if(!s.name)return{text:"Type your first name + last initial (like Jordan M.) at the top of the questions.",focus:"studentName"};
  const mc=[1, 2, 3].find(i=>!s.checkDone(i));if(mc)return{text:"Get the check right for part "+mc+" first.",part:mc};
  const ma=[1, 2, 3].find(i=>!s.answer(i));if(ma)return{text:"Write your answer for part "+ma+" before turning in.",part:ma,focus:"answer"+ma};

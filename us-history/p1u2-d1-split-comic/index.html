@@ -16,6 +16,13 @@
 .declass{display:block;background:#fff;border:2px dashed #18364a;border-radius:10px;padding:8px 11px;margin:6px 0 8px;font-weight:650;color:#22313b;line-height:1.4;font-style:normal}
 .declass > b:first-child{display:block;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#18364a;margin-bottom:2px}
 .declass .line{display:block;margin:3px 0}
+.declass .fix{display:block;margin:6px 0;border:1px solid #c9d3da;border-radius:8px;overflow:hidden}
+.declass .cs,.declass .rl{display:block;padding:5px 9px}
+.declass .cs{background:#fdecea}
+.declass .cs::before{content:"\2717  Comic says: ";font-weight:800;color:#a3271a}
+.declass .rl{background:#e6f4e9}
+.declass .rl::before{content:"\2713  Really: ";font-weight:800;color:#1d6b33}
+.declass .kf{display:block;margin-top:8px;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#18364a}
 .declass .note{display:block;margin-top:5px;font-weight:600;font-size:.9rem;color:#5b4632}
 .dime{display:inline-block;background:#e6bd64;color:#0f2433;border-radius:999px;font-weight:850;padding:0 9px;margin-right:4px}
 .credits{font-size:.8rem;color:var(--muted);margin:10px 0 0;line-height:1.4}
@@ -40,7 +47,7 @@ body.reading-now .choices{opacity:.45;pointer-events:none}
 
 <main class="gr-main gr-wrap">
 <section class="card">
-<p class="intro-line"><b>You're the fact-checker.</b> For each part: <b>read</b> the comic on the left → get the <b>check</b> right → read the <b>fact file</b> → write 1–2 sentences. Done = all parts green, then turn in at the bottom.</p>
+<p class="intro-line"><b>How it works:</b> read the comic pages → answer the question about today's big idea → see what the comic got right and wrong → write 1–2 sentences. Done = all parts green, then turn in at the bottom.</p>
 <details class="wordhelp"><summary>Word help (tap to open)</summary>
 <ul class="words" aria-label="Word help">
 <li><b>Sectionalism</b> = loyalty to your part of the country over the whole nation</li><li><b>Compromise</b> = a deal where each side gives up something</li><li><b>Fugitive</b> = a person running away</li><li><b>Abolitionist</b> = someone who fought to end slavery right away</li><li><b>Secession</b> = officially leaving the United States</li><li><b>1953 comic</b> = made by the U.S. government to tell America's story in other countries. It shows one point of view.</li>
@@ -90,18 +97,18 @@ parts:[
 "check": {
 "page": 1,
 "tag": "Reading check · Reader page 1",
-"q": "Read the yellow box on the left. When did the slavery problem \"boil up once more\"?",
-"right": "When California and new western states asked to join.",
+"q": "Why did new western states like California start a fight?",
+"right": "They'd tip the balance of slave and free states",
 "wrong": [
-"When Britain tried to take back the 13 colonies.",
-"When Southern states built their first factories.",
-"When Mexico asked to join the United States."
+"Mexico still claimed California and wanted it back",
+"Northern states did not want any more states at all",
+"The South wanted California's gold for itself"
 ],
-"why": "✓ Correct. Every new state would tip the balance of power in the Senate, slave or free.",
-"hint": "Read the last part of the yellow box on the left."
+"why": "✓ Correct. Every new state added 2 senators. The North and South each feared losing power over slavery.",
+"hint": "Read the yellow box on the left and Henry Clay's speech bubble."
 },
 "prompt": "Why did every new western state start a fight between the North and South?",
-"stem": "<span class=\"declass\"><b>Fact file</b><span class=\"line\"><b>Missouri Compromise (1820):</b> Missouri joined as a slave state and Maine as a free state. A line across the West banned slavery north of it. Iowa was north of the line.</span><span class=\"line\"><b>Compromise of 1850:</b> California joined as a free state. To please the South, Congress passed the Fugitive Slave Act.</span><span class=\"line\"><b>Sectionalism</b> grew: people put their own region ahead of the whole country.</span></span>Write 1–2 sentences. Start like this: <i>Every new state started a fight because ___. For example, ___.</i>",
+"stem": "<span class=\"declass\"><b>Fact file</b><b class=\"kf\">Know this</b><span class=\"line\"><b>Sectionalism</b> = putting your part of the country ahead of the whole nation.</span><span class=\"line\"><b>Missouri Compromise (1820):</b> no slavery in new land north of a line. Iowa was north of it.</span></span>Write 1–2 sentences. Start like this: <i>Every new state started a fight because ___. For example, ___.</i>",
 "stemText": "Every new state started a fight because ___. For example, ___.",
 "placeholder": "Every new state started a fight because ___. For example, ___."
 },
@@ -114,18 +121,18 @@ parts:[
 "check": {
 "page": 2,
 "tag": "Reading check · Reader page 2",
-"q": "Read the yellow box. What did the 1850 law force people to do?",
-"right": "Return enslaved people who fled to the North.",
+"q": "Why did the 1850 law anger so many Northerners?",
+"right": "It forced them to help catch escaped slaves",
 "wrong": [
-"Pay a tax on every enslaved person.",
-"Move west to help settle California.",
-"Join the army to guard the border."
+"It put a new tax on Northern factories",
+"It let slavery spread into all the Northern states",
+"It sent Northern men to fight in Mexico"
 ],
-"why": "✓ Correct. Under the Fugitive Slave Act, Northerners could be forced to help catch people, and the accused got no jury trial.",
-"hint": "Read the yellow box at the top of reader page 2."
+"why": "✓ Correct. Under the Fugitive Slave Act, Northerners could be forced to help slave catchers, and accused people got no jury trial.",
+"hint": "Read the yellow box at the top: \"In 1850 a law was passed...\""
 },
 "prompt": "The girl says her father is breaking the law. Was it right to break the Fugitive Slave Act? Use an Iowa example.",
-"stem": "<span class=\"declass\"><b>Fact file</b><span class=\"line\">Accused people got <b>no jury trial</b>, and Northerners could be forced to help slave catchers. Many Northerners were furious.</span><span class=\"line\">Iowa had Underground Railroad stops, in towns like Tabor and Grinnell. In 1857–58, John Brown's men trained near Springdale, a Quaker town in Cedar County. In 1859, Brown raided a weapons storehouse at Harpers Ferry, Virginia, to start an uprising. He was hanged.</span></span>Write 1–2 sentences. Start like this: <i>Breaking the Fugitive Slave Act was (right / wrong) because ___. In Iowa, ___.</i>",
+"stem": "<span class=\"declass\"><b>Fact file</b><b class=\"kf\">Know this</b><span class=\"line\">Iowa had Underground Railroad stops in towns like Tabor and Grinnell.</span><span class=\"line\">In 1857–58, <b>John Brown</b>'s men trained near Springdale, Iowa. His 1859 raid at Harpers Ferry made Southerners fear the North wanted war.</span></span>Write 1–2 sentences. Start like this: <i>Breaking the Fugitive Slave Act was (right / wrong) because ___. In Iowa, ___.</i>",
 "stemText": "Breaking the Fugitive Slave Act was (right / wrong) because ___. In Iowa, ___.",
 "placeholder": "Breaking the Fugitive Slave Act was (right / wrong) because ___. In Iowa, ___."
 },
@@ -138,18 +145,18 @@ parts:[
 "check": {
 "page": 3,
 "tag": "Reading check · Reader page 3",
-"q": "Read the box in the middle panel. Why did Dred Scott say he should be free?",
-"right": "He had lived for a time in free territory.",
+"q": "Why did the Dred Scott decision rock the nation?",
+"right": "It said Congress couldn't ban slavery in the West",
 "wrong": [
-"He had saved enough money to buy himself.",
-"He had served in the U.S. Army for years.",
-"He had escaped on the Underground Railroad."
+"It set Dred Scott and his whole family free",
+"It ended slavery in every Northern state",
+"It said every new western state must be a free state"
 ],
-"why": "✓ Correct. The Supreme Court ruled against him 7–2. Read the fact file for what it said.",
-"hint": "Read the box at the top of the middle panel."
+"why": "✓ Correct. Chief Justice Taney said Black people could not be citizens, and Congress could not ban slavery in the territories.",
+"hint": "Read the middle panel: the box and the man's speech bubble."
 },
-"prompt": "Which pushed the country closer to war: Uncle Tom's Cabin, Bleeding Kansas, or the Dred Scott decision?",
-"stem": "<span class=\"declass\"><b>Fact file</b><span class=\"line\"><b>Uncle Tom's Cabin</b> (1852) showed slavery's cruelty. It sold 300,000 copies in a year.</span><span class=\"line\"><b>Bleeding Kansas</b> (1854–1859): settlers were allowed to vote on slavery. Both sides rushed in with guns, and about 56 people were killed.</span><span class=\"line\"><b>Dred Scott v. Sandford</b> (1857): Chief Justice Roger Taney (TAW-nee) said Black people could not be citizens, and Congress could not ban slavery in the territories.</span></span>Write 1–2 sentences. Start like this: <i>___ pushed the country closest to war because ___.</i>",
+"prompt": "Which event pushed the country closest to war? Pick one and give a reason.",
+"stem": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">Dred Scott went to court in 1857.</span><span class=\"rl\">He first sued in 1846. The Supreme Court decided his case in 1857.</span></span><b class=\"kf\">Know this</b><span class=\"line\"><b>Uncle Tom's Cabin</b> (1852) showed slavery's cruelty. It sold 300,000 copies in a year.</span><span class=\"line\"><b>Bleeding Kansas</b> (1854–1859): settlers voted on slavery, and about 56 people were killed.</span></span>Write 1–2 sentences. Start like this: <i>___ pushed the country closest to war because ___.</i>",
 "stemText": "___ pushed the country closest to war because ___.",
 "placeholder": "___ pushed the country closest to war because ___."
 },
@@ -162,23 +169,23 @@ parts:[
 "check": {
 "page": 4,
 "tag": "Reading check · Reader page 4",
-"q": "Read the box at the bottom. What does the comic say tore the nation apart?",
-"right": "Slavery and states' rights.",
+"q": "Why did Southern states leave after Lincoln won?",
+"right": "They believed slavery was in danger",
 "wrong": [
-"Taxes on trade with Europe.",
-"Railroads and new factories.",
-"Immigrants and new religions."
+"Lincoln promised to end slavery right away",
+"Lincoln raised taxes on Southern cotton",
+"The North voted to kick them out"
 ],
-"why": "✓ Correct. That's the comic's version. Now check what Southern leaders said themselves.",
-"hint": "Read the pink box at the bottom right."
+"why": "✓ Correct. Lincoln promised only to stop slavery from spreading. Southern leaders still saw him as a threat to slavery.",
+"hint": "Read Lincoln's speech bubble on the left: slavery is \"a moral, social and political wrong.\""
 },
 "prompt": "Lincoln promised only to stop slavery from spreading. Why did Southern states leave anyway? Use Mississippi's own words.",
-"stem": "<span class=\"declass\"><b>Fact file</b><span class=\"line\">Lincoln promised to stop slavery from spreading west, <b>not</b> to end it where it already existed. He won in 1860 without one electoral vote from the South.</span><span class=\"line\">South Carolina left in December 1860. By February 1861, seven states had formed the Confederacy.</span><span class=\"line\">Mississippi's leaders explained why they left: <b>\"Our position is thoroughly identified with the institution of slavery.\"</b> Southern leaders talked about states' rights, but the right they cared about most was the right to keep slavery.</span></span>Write 1–2 sentences. Start like this: <i>Southern states left because ___. Mississippi's leaders said ___.</i>",
+"stem": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">The nation was torn by \"slavery and states' rights.\"</span><span class=\"rl\">Mississippi said it left because its \"position is thoroughly identified with the institution of slavery.\" The main right was the right to keep slavery.</span></span><b class=\"kf\">Know this</b><span class=\"line\">South Carolina left in December 1860. By February 1861, seven states had formed the Confederacy.</span></span>Write 1–2 sentences. Start like this: <i>Southern states left because ___. Mississippi's leaders said ___.</i>",
 "stemText": "Southern states left because ___. Mississippi's leaders said ___.",
 "placeholder": "Southern states left because ___. Mississippi's leaders said ___."
 }
 ],
-questions:["Why did every new western state start a fight between the North and South?", "The girl says her father is breaking the law. Was it right to break the Fugitive Slave Act? Use an Iowa example.", "Which pushed the country closer to war: Uncle Tom's Cabin, Bleeding Kansas, or the Dred Scott decision?", "Lincoln promised only to stop slavery from spreading. Why did Southern states leave anyway? Use Mississippi's own words."],
+questions:["Why did every new western state start a fight between the North and South?", "The girl says her father is breaking the law. Was it right to break the Fugitive Slave Act? Use an Iowa example.", "Which event pushed the country closest to war? Pick one and give a reason.", "Lincoln promised only to stop slavery from spreading. Why did Southern states leave anyway? Use Mississippi's own words."],
 validate(s){if(!s.name)return{text:"Type your first name + last initial (like Jordan M.) at the top of the questions.",focus:"studentName"};
  const mc=[1, 2, 3, 4].find(i=>!s.checkDone(i));if(mc)return{text:"Get the check right for part "+mc+" first.",part:mc};
  const ma=[1, 2, 3, 4].find(i=>!s.answer(i));if(ma)return{text:"Write your answer for part "+ma+" before turning in.",part:ma,focus:"answer"+ma};

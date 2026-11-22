@@ -16,6 +16,13 @@
 .declass{display:block;background:#fff;border:2px dashed #18364a;border-radius:10px;padding:8px 11px;margin:6px 0 8px;font-weight:650;color:#22313b;line-height:1.4;font-style:normal}
 .declass > b:first-child{display:block;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#18364a;margin-bottom:2px}
 .declass .line{display:block;margin:3px 0}
+.declass .fix{display:block;margin:6px 0;border:1px solid #c9d3da;border-radius:8px;overflow:hidden}
+.declass .cs,.declass .rl{display:block;padding:5px 9px}
+.declass .cs{background:#fdecea}
+.declass .cs::before{content:"\2717  Comic says: ";font-weight:800;color:#a3271a}
+.declass .rl{background:#e6f4e9}
+.declass .rl::before{content:"\2713  Really: ";font-weight:800;color:#1d6b33}
+.declass .kf{display:block;margin-top:8px;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#18364a}
 .declass .note{display:block;margin-top:5px;font-weight:600;font-size:.9rem;color:#5b4632}
 .dime{display:inline-block;background:#e6bd64;color:#0f2433;border-radius:999px;font-weight:850;padding:0 9px;margin-right:4px}
 .credits{font-size:.8rem;color:var(--muted);margin:10px 0 0;line-height:1.4}
@@ -40,7 +47,7 @@ body.reading-now .choices{opacity:.45;pointer-events:none}
 
 <main class="gr-main gr-wrap">
 <section class="card">
-<p class="intro-line"><b>You're the fact-checker.</b> For each part: <b>read</b> the comic on the left → get the <b>check</b> right → read the <b>fact file</b> → write 1–2 sentences. Done = all parts green, then turn in at the bottom.</p>
+<p class="intro-line"><b>How it works:</b> read the comic pages → answer the question about today's big idea → see what the comic got right and wrong → write 1–2 sentences. Done = all parts green, then turn in at the bottom.</p>
 <details class="wordhelp"><summary>Word help (tap to open)</summary>
 <ul class="words" aria-label="Word help">
 <li><b>Suffrage</b> = the right to vote</li><li><b>Amendment</b> = a change added to the Constitution</li><li><b>Picket</b> = protest with signs</li><li><b>Ratify</b> = officially approve</li><li><b>1953 comic</b> = made by the U.S. government to tell America's story in other countries. It shows one point of view.</li>
@@ -90,18 +97,18 @@ parts:[
 "check": {
 "page": 1,
 "tag": "Reading check · Reader page 1",
-"q": "Read the scroll. Who does it say is created equal?",
-"right": "All men",
+"q": "The scroll says \"all men are created equal.\" How did the women at Seneca Falls (1848) change that line?",
+"right": "They wrote \"all men and women\"",
 "wrong": [
-"All people",
-"All citizens",
-"All women"
+"They wrote \"all citizens over 21\"",
+"They crossed out the word \"equal\"",
+"They added \"all people who pay taxes\""
 ],
-"why": "✓ Correct. In 1848, women's rights leaders rewrote that line on purpose.",
-"hint": "Read the first line of the scroll."
+"why": "✓ Correct. Their Declaration of Sentiments said \"all men and women are created equal\" and demanded suffrage, the right to vote.",
+"hint": "Read the first two lines of the scroll."
 },
 "prompt": "Why did suffragists rewrite the Declaration's famous line? How did an Iowan carry the fight forward?",
-"stem": "<span class=\"declass\"><b>Fact file</b><span class=\"line\">In 1848, about 300 people met at <b>Seneca Falls</b>, New York. Elizabeth Cady Stanton's Declaration of Sentiments said <b>\"all men and women are created equal\"</b> and demanded the vote.</span><span class=\"line\"><b>Carrie Chapman Catt</b> grew up near Charles City, Iowa, and graduated from Iowa State in 1880. In 1900 she became president of the biggest suffrage group. Her 1916 <b>Winning Plan</b> pushed state by state and in Congress at once.</span><span class=\"line\">In 1916, Iowa's men voted <b>against</b> women's suffrage by about 10,000 votes. Catt kept organizing anyway.</span></span>Write 1–2 sentences. Start like this: <i>Suffragists rewrote it because ___. Catt helped by ___.</i>",
+"stem": "<span class=\"declass\"><b>Fact file</b><b class=\"kf\">Know this</b><span class=\"line\"><b>Carrie Chapman Catt</b> grew up near Charles City, Iowa. In 1900 she became president of the biggest suffrage group.</span><span class=\"line\">Her 1916 <b>Winning Plan</b> pushed state by state and in Congress at once. That year, Iowa's men voted <b>against</b> women's suffrage.</span></span>Write 1–2 sentences. Start like this: <i>Suffragists rewrote it because ___. Catt helped by ___.</i>",
 "stemText": "Suffragists rewrote it because ___. Catt helped by ___.",
 "placeholder": "Suffragists rewrote it because ___. Catt helped by ___."
 },
@@ -114,23 +121,23 @@ parts:[
 "check": {
 "page": 2,
 "tag": "Reading check · Reader page 2",
-"q": "Read the box at the top. What does the comic say about the 1920 election?",
-"right": "It was the first one where women had the right to vote.",
+"q": "Women could vote for president in 1920. Who still had trouble voting after that?",
+"right": "Most Black women in the South",
 "wrong": [
-"It was the first one Wilson ever lost.",
-"It was the first one with voting machines.",
-"It was the first one Iowa women skipped."
+"Women in western states like Wyoming",
+"Women who were born in America",
+"Women who lived in Iowa"
 ],
-"why": "✓ Correct. Close, but not quite. Read the fact file.",
-"hint": "Read the second sentence in the box at the top."
+"why": "✓ Correct. Jim Crow laws in the South kept most Black women, and Black men, away from the polls.",
+"hint": "Read the box at the top. Then look at who is signing in."
 },
-"prompt": "Fact-check the comic's sentence. Then: Catt's plan or Alice Paul's protests, which did more? Who was still left out?",
-"stem": "<span class=\"declass\"><b>Fact file</b><span class=\"line\">Not quite the first: in about 15 states, mostly in the West, women could already vote in all elections before 1920. Wyoming let women vote starting in 1869.</span><span class=\"line\"><b>Alice Paul</b>'s Silent Sentinels picketed the White House in 1917. Many were jailed and force-fed during hunger strikes.</span><span class=\"line\">The <b>19th Amendment</b> became law in August 1920. Iowa approved it in 1919, the 10th state. But Jim Crow laws still blocked most Black women in the South.</span></span>Write 1–2 sentences. Start like this: <i>The comic is a little wrong because ___. ___ did more because ___. Still left out: ___.</i>",
-"stemText": "The comic is a little wrong because ___. ___ did more because ___. Still left out: ___.",
-"placeholder": "The comic is a little wrong because ___. ___ did more because ___. Still left out: ___."
+"prompt": "Catt's state-by-state plan or Alice Paul's protests: which did more to win the vote? Who was still left out?",
+"stem": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">1920 was the first election where women could vote.</span><span class=\"rl\">In 15 states, women could already vote. Wyoming women voted starting in 1869.</span></span><b class=\"kf\">Know this</b><span class=\"line\"><b>Alice Paul</b>'s Silent Sentinels picketed the White House in 1917. Many were jailed and force-fed.</span><span class=\"line\">The <b>19th Amendment</b> became law in August 1920. Iowa approved it in 1919, the 10th state.</span></span>Write 1–2 sentences. Start like this: <i>___ did more because ___. Still left out: ___.</i>",
+"stemText": "___ did more because ___. Still left out: ___.",
+"placeholder": "___ did more because ___. Still left out: ___."
 }
 ],
-questions:["Why did suffragists rewrite the Declaration's famous line? How did an Iowan carry the fight forward?", "Fact-check the comic's sentence. Then: Catt's plan or Alice Paul's protests, which did more? Who was still left out?"],
+questions:["Why did suffragists rewrite the Declaration's famous line? How did an Iowan carry the fight forward?", "Catt's state-by-state plan or Alice Paul's protests: which did more to win the vote? Who was still left out?"],
 validate(s){if(!s.name)return{text:"Type your first name + last initial (like Jordan M.) at the top of the questions.",focus:"studentName"};
  const mc=[1, 2].find(i=>!s.checkDone(i));if(mc)return{text:"Get the check right for part "+mc+" first.",part:mc};
  const ma=[1, 2].find(i=>!s.answer(i));if(ma)return{text:"Write your answer for part "+ma+" before turning in.",part:ma,focus:"answer"+ma};

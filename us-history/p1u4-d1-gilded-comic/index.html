@@ -16,6 +16,13 @@
 .declass{display:block;background:#fff;border:2px dashed #18364a;border-radius:10px;padding:8px 11px;margin:6px 0 8px;font-weight:650;color:#22313b;line-height:1.4;font-style:normal}
 .declass > b:first-child{display:block;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#18364a;margin-bottom:2px}
 .declass .line{display:block;margin:3px 0}
+.declass .fix{display:block;margin:6px 0;border:1px solid #c9d3da;border-radius:8px;overflow:hidden}
+.declass .cs,.declass .rl{display:block;padding:5px 9px}
+.declass .cs{background:#fdecea}
+.declass .cs::before{content:"\2717  Comic says: ";font-weight:800;color:#a3271a}
+.declass .rl{background:#e6f4e9}
+.declass .rl::before{content:"\2713  Really: ";font-weight:800;color:#1d6b33}
+.declass .kf{display:block;margin-top:8px;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#18364a}
 .declass .note{display:block;margin-top:5px;font-weight:600;font-size:.9rem;color:#5b4632}
 .dime{display:inline-block;background:#e6bd64;color:#0f2433;border-radius:999px;font-weight:850;padding:0 9px;margin-right:4px}
 .credits{font-size:.8rem;color:var(--muted);margin:10px 0 0;line-height:1.4}
@@ -40,7 +47,7 @@ body.reading-now .choices{opacity:.45;pointer-events:none}
 
 <main class="gr-main gr-wrap">
 <section class="card">
-<p class="intro-line"><b>You're the fact-checker.</b> For each part: <b>read</b> the comic on the left → get the <b>check</b> right → read the <b>fact file</b> → write 1–2 sentences. Done = all parts green, then turn in at the bottom.</p>
+<p class="intro-line"><b>How it works:</b> read the comic pages → answer the question about today's big idea → see what the comic got right and wrong → write 1–2 sentences. Done = all parts green, then turn in at the bottom.</p>
 <details class="wordhelp"><summary>Word help (tap to open)</summary>
 <ul class="words" aria-label="Word help">
 <li><b>Gilded</b> = covered with a thin layer of gold</li><li><b>Tenement</b> = a cheap, crowded apartment building</li><li><b>Child labor</b> = kids working for pay instead of going to school</li><li><b>Progressive</b> = a reformer who wanted to fix problems from industry and cities</li><li><b>1953 comic</b> = made by the U.S. government to tell America's story in other countries. It shows one point of view.</li>
@@ -90,20 +97,20 @@ parts:[
 "check": {
 "page": 1,
 "tag": "Reading check · Reader page 1",
-"q": "Read the speech bubble on the left. What does the man say Carnegie is doing?",
-"right": "Changing the face of America.",
+"q": "The man says Carnegie is \"changing the face of America.\" Why did Mark Twain call this time the Gilded Age?",
+"right": "It looked rich, but many were poor",
 "wrong": [
-"Running for president of the United States.",
-"Building ships to sail to Scotland.",
-"Selling his steel plant to the government."
+"Gold was found all over the western states",
+"Most families got rich from new jobs",
+"Banks made all their coins from gold"
 ],
-"why": "✓ Correct. That's the gold on the outside. Now look at what was underneath.",
-"hint": "Read the speech bubble next to the man in the gray suit."
+"why": "✓ Correct. Gilded means covered with a thin layer of gold. Under the shiny outside were tenements, child labor, and danger.",
+"hint": "Read the speech bubbles. Then think: who is NOT in this picture?"
 },
-"prompt": "The comic shows the gold. What was under it? Pick the worst Gilded Age problem and back it up.",
-"stem": "<span class=\"declass\"><b>Fact file</b><span class=\"line\"><b>Tenements:</b> in 1890, reporter Jacob Riis (REES) wrote that three-fourths of New York City's people lived in cheap, crowded tenements with little light or clean water.</span><span class=\"line\"><b>Dangerous jobs:</b> in 1907 alone, 3,242 coal miners died on the job. Hurt workers usually got nothing.</span><span class=\"line\"><b>Monopolies:</b> by 1880, Rockefeller's Standard Oil controlled about 90% of America's oil refining.</span></span>Write 1–2 sentences. Start like this: <i>Under the gold, the worst problem was ___ because ___.</i>",
-"stemText": "Under the gold, the worst problem was ___ because ___.",
-"placeholder": "Under the gold, the worst problem was ___ because ___."
+"prompt": "Which Gilded Age problem was the worst: tenements, child labor, dangerous jobs, or monopolies? Back it up.",
+"stem": "<span class=\"declass\"><b>Fact file</b><b class=\"kf\">Know this</b><span class=\"line\"><b>Tenements:</b> in 1890, Jacob Riis (REES) wrote that three-fourths of New York City's people lived in cheap, crowded tenements.</span><span class=\"line\"><b>Dangerous jobs:</b> in 1907 alone, 3,242 coal miners died on the job. Hurt workers usually got nothing.</span></span>Write 1–2 sentences. Start like this: <i>The worst problem was ___ because ___.</i>",
+"stemText": "The worst problem was ___ because ___.",
+"placeholder": "The worst problem was ___ because ___."
 },
 {
 "short": "Kids at work",
@@ -114,23 +121,23 @@ parts:[
 "check": {
 "page": 2,
 "tag": "Reading check · Reader page 2",
-"q": "Read the box at the top. How old was Gompers when he joined the union?",
-"right": "14",
+"q": "Gompers's wife says, \"Our children are hungry.\" Why did so many kids work in the Gilded Age?",
+"right": "Families needed every paycheck",
 "wrong": [
-"10",
-"18",
-"21"
+"Schools had not been invented yet",
+"Kids got paid more than adults",
+"The law said every kid over 10 had to work"
 ],
-"why": "✓ Correct. Gompers was a working kid himself. In 1900, about 1.75 million children ages 10 to 15 had jobs.",
-"hint": "Read the yellow box at the top of reader page 2."
+"why": "✓ Correct. Poor families needed every paycheck, and owners could pay kids much less than adults.",
+"hint": "Read the wife's speech bubble."
 },
-"prompt": "Who could fix child labor and crowded cities: workers, reformers like Jane Addams, or the government?",
-"stem": "<span class=\"declass\"><b>Fact file</b><span class=\"line\">Poor families needed every paycheck, and owners paid children much less than adults. Many kids got hurt and never finished school.</span><span class=\"line\">In 1889, <b>Jane Addams</b> opened <b>Hull House</b> in Chicago. It gave immigrant families day care, English classes, and a playground, and pushed Illinois to pass child labor laws.</span><span class=\"line\">In big cities, <b>political machines</b> like Boss Tweed's helped immigrants but stole millions.</span></span>Write 1–2 sentences. Start like this: <i>___ could fix it best because ___.</i>",
+"prompt": "Who could fix child labor best: workers, reformers like Jane Addams, or the government?",
+"stem": "<span class=\"declass\"><b>Fact file</b><b class=\"kf\">Know this</b><span class=\"line\">In 1889, <b>Jane Addams</b> opened <b>Hull House</b> in Chicago. It gave day care and English classes and pushed for child labor laws.</span><span class=\"line\"><b>Progressives</b> were reformers who wanted citizens and government to fix problems caused by industry and big cities.</span></span>Write 1–2 sentences. Start like this: <i>___ could fix it best because ___.</i>",
 "stemText": "___ could fix it best because ___.",
 "placeholder": "___ could fix it best because ___."
 }
 ],
-questions:["The comic shows the gold. What was under it? Pick the worst Gilded Age problem and back it up.", "Who could fix child labor and crowded cities: workers, reformers like Jane Addams, or the government?"],
+questions:["Which Gilded Age problem was the worst: tenements, child labor, dangerous jobs, or monopolies? Back it up.", "Who could fix child labor best: workers, reformers like Jane Addams, or the government?"],
 validate(s){if(!s.name)return{text:"Type your first name + last initial (like Jordan M.) at the top of the questions.",focus:"studentName"};
  const mc=[1, 2].find(i=>!s.checkDone(i));if(mc)return{text:"Get the check right for part "+mc+" first.",part:mc};
  const ma=[1, 2].find(i=>!s.answer(i));if(ma)return{text:"Write your answer for part "+ma+" before turning in.",part:ma,focus:"answer"+ma};

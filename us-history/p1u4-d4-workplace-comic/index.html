@@ -16,6 +16,13 @@
 .declass{display:block;background:#fff;border:2px dashed #18364a;border-radius:10px;padding:8px 11px;margin:6px 0 8px;font-weight:650;color:#22313b;line-height:1.4;font-style:normal}
 .declass > b:first-child{display:block;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#18364a;margin-bottom:2px}
 .declass .line{display:block;margin:3px 0}
+.declass .fix{display:block;margin:6px 0;border:1px solid #c9d3da;border-radius:8px;overflow:hidden}
+.declass .cs,.declass .rl{display:block;padding:5px 9px}
+.declass .cs{background:#fdecea}
+.declass .cs::before{content:"\2717  Comic says: ";font-weight:800;color:#a3271a}
+.declass .rl{background:#e6f4e9}
+.declass .rl::before{content:"\2713  Really: ";font-weight:800;color:#1d6b33}
+.declass .kf{display:block;margin-top:8px;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;color:#18364a}
 .declass .note{display:block;margin-top:5px;font-weight:600;font-size:.9rem;color:#5b4632}
 .dime{display:inline-block;background:#e6bd64;color:#0f2433;border-radius:999px;font-weight:850;padding:0 9px;margin-right:4px}
 .credits{font-size:.8rem;color:var(--muted);margin:10px 0 0;line-height:1.4}
@@ -40,7 +47,7 @@ body.reading-now .choices{opacity:.45;pointer-events:none}
 
 <main class="gr-main gr-wrap">
 <section class="card">
-<p class="intro-line"><b>You're the fact-checker.</b> For each part: <b>read</b> the comic on the left → get the <b>check</b> right → read the <b>fact file</b> → write 1–2 sentences. Done = all parts green, then turn in at the bottom.</p>
+<p class="intro-line"><b>How it works:</b> read the comic pages → answer the question about today's big idea → see what the comic got right and wrong → write 1–2 sentences. Done = all parts green, then turn in at the bottom.</p>
 <details class="wordhelp"><summary>Word help (tap to open)</summary>
 <ul class="words" aria-label="Word help">
 <li><b>Shirtwaist</b> = a woman's blouse</li><li><b>Workers' compensation</b> = money paid to workers hurt on the job</li><li><b>Manslaughter</b> = causing a death by carelessness</li><li><b>Reform</b> = a change to fix a problem</li><li><b>1953 comic</b> = made by the U.S. government to tell America's story in other countries. It shows one point of view.</li>
@@ -90,18 +97,18 @@ parts:[
 "check": {
 "page": 1,
 "tag": "Reading check · Reader page 1",
-"q": "Read the box at the bottom. Who does the comic give credit for reducing working hours?",
-"right": "Wilson's New Freedom administration",
+"q": "The box gives Wilson's government credit for shorter hours. Who does the comic leave out?",
+"right": "Workers who went on strike",
 "wrong": [
-"The American Federation of Labor",
-"The young women who went on strike",
-"The New York fire department"
+"Banks, which Wilson overhauled",
+"Trusts, which Wilson regulated",
+"Wilson, the scholar turned reformer"
 ],
-"why": "✓ Correct. The comic gives the president the credit. Read who really pushed first.",
-"hint": "Read the box at the bottom of reader page 1."
+"why": "✓ Correct. In 1909, more than 20,000 young women in New York's blouse factories went on strike. Most shops agreed to a 52-hour week.",
+"hint": "Read the box at the bottom: \"working hours reduced.\""
 },
-"prompt": "The comic gives Wilson the credit. Who else won shorter hours?",
-"stem": "<span class=\"declass\"><b>Fact file</b><span class=\"line\">In November 1909, 23-year-old <b>Clara Lemlich</b> (LEM-lik) called for a strike in New York's blouse factories. More than <b>20,000</b> young immigrant women walked out. Most shops agreed to a 52-hour week and better pay.</span><span class=\"line\">The <b>Triangle Shirtwaist Company</b> refused to give in.</span><span class=\"line\">In 1908, the Supreme Court allowed a 10-hour limit for women in <b>Muller v. Oregon</b>, but not for men.</span></span>Write 1–2 sentences. Start like this: <i>The comic credits ___, but ___ also won shorter hours by ___.</i>",
+"prompt": "The comic gives Wilson the credit. Who else won shorter hours, and how?",
+"stem": "<span class=\"declass\"><b>Fact file</b><b class=\"kf\">Know this</b><span class=\"line\"><b>Clara Lemlich</b> (LEM-lik), age 23, called for the 1909 strike. The <b>Triangle Shirtwaist Company</b> refused to give in.</span><span class=\"line\">In 1916, Wilson signed the Adamson Act, an 8-hour day for railroad workers.</span></span>Write 1–2 sentences. Start like this: <i>The comic credits ___, but ___ also won shorter hours by ___.</i>",
 "stemText": "The comic credits ___, but ___ also won shorter hours by ___.",
 "placeholder": "The comic credits ___, but ___ also won shorter hours by ___."
 },
@@ -114,23 +121,23 @@ parts:[
 "check": {
 "page": 2,
 "tag": "Reading check · Reader page 2",
-"q": "Read the father's speech bubble. Why does the family stay in New York?",
-"right": "A good cigar-maker can always find work there.",
+"q": "New York's factories drew immigrants like this family. After 146 workers died in the 1911 Triangle fire, what did New York do?",
+"right": "Passed 36 new safety laws",
 "wrong": [
-"Their relatives already own a factory there.",
-"The government gave them an apartment there.",
-"They couldn't afford a train ticket west."
+"Sent the owners to prison for life",
+"Closed its factories for a whole year",
+"Banned all child labor in the country"
 ],
-"why": "✓ Correct. New York's factories pulled in millions of immigrants, including the young women at Triangle.",
-"hint": "Read the father's speech bubble at the top."
+"why": "✓ Correct. New York's Factory Investigating Commission led to 36 new state laws, like fire drills and sprinklers.",
+"hint": "Read the father's speech bubble: \"A good cigar-maker can always find work here.\""
 },
 "prompt": "Rank the reforms after the Triangle fire. Which helped workers most, and what didn't get fixed?",
-"stem": "<span class=\"declass\"><b>Fact file</b><span class=\"line\"><b>Heads up: a deadly fire.</b> On March 25, 1911, fire broke out at the Triangle factory. A stairway door was locked and the fire escape collapsed. <b>146</b> workers died, mostly young Jewish and Italian immigrant women.</span><span class=\"line\">New York's investigations led to <b>36 new state laws</b>, like fire drills and sprinklers. <b>Iowa</b> passed workers' compensation in 1913.</span><span class=\"line\">But the owners were found not guilty. Congress's 1916 child labor ban was struck down by the Supreme Court in 1918.</span></span>Write 1–2 sentences. Start like this: <i>The reform that helped most was ___ because ___. Still not fixed: ___.</i>",
+"stem": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">Gompers, like Carnegie, had English parents.</span><span class=\"rl\">Gompers's parents were Dutch Jews living in London. Carnegie's were Scottish.</span></span><b class=\"kf\">Know this</b><span class=\"line\"><b>Heads up:</b> at Triangle, a stairway door was locked and the fire escape collapsed. Most who died were young Jewish and Italian immigrant women.</span><span class=\"line\">The owners were found not guilty. <b>Iowa</b> passed workers' compensation in 1913.</span></span>Write 1–2 sentences. Start like this: <i>The reform that helped most was ___ because ___. Still not fixed: ___.</i>",
 "stemText": "The reform that helped most was ___ because ___. Still not fixed: ___.",
 "placeholder": "The reform that helped most was ___ because ___. Still not fixed: ___."
 }
 ],
-questions:["The comic gives Wilson the credit. Who else won shorter hours?", "Rank the reforms after the Triangle fire. Which helped workers most, and what didn't get fixed?"],
+questions:["The comic gives Wilson the credit. Who else won shorter hours, and how?", "Rank the reforms after the Triangle fire. Which helped workers most, and what didn't get fixed?"],
 validate(s){if(!s.name)return{text:"Type your first name + last initial (like Jordan M.) at the top of the questions.",focus:"studentName"};
  const mc=[1, 2].find(i=>!s.checkDone(i));if(mc)return{text:"Get the check right for part "+mc+" first.",part:mc};
  const ma=[1, 2].find(i=>!s.answer(i));if(ma)return{text:"Write your answer for part "+ma+" before turning in.",part:ma,focus:"answer"+ma};
