@@ -79,7 +79,7 @@ const ROUNDS = [
    realHappened: 'The captured sailors were held for about 10 years. Many died. The U.S. did not create a new navy until 1794.',
    checks: [
      { q: 'Use the Articles rule on the left. Under the Articles, how did Congress get soldiers or sailors?', a: 'It asked each state to send its share', w: ['It drafted people right into service', 'It hired them with national tax money', 'The President ordered them to serve'], why: 'Article IX: Congress set the number, then made requisitions (requests) from each state.' },
-     { q: 'Use the real problem on the left. Why was there no national navy to rescue the sailors?', a: 'The U.S. had sold its last navy warship', w: ['The navy was busy fighting Britain', 'Congress sent the navy to Spain', 'The navy was guarding the Great Lakes'], why: 'The card says the U.S. sold its last navy warship in 1785.' }
+     { q: 'Use the real problem on the left. Why was there no national navy to rescue the sailors?', a: 'The U.S. had sold its last navy warship', w: ['Britain had captured its last navy warship', 'A storm had wrecked its last navy warship', 'A fire had destroyed its last navy warship'], why: 'The card says the U.S. sold its last navy warship in 1785.' }
    ] },
 
  { id: 'amend', year: '1786', tag: 'CHANGE THE RULES', title: 'One state says no.',

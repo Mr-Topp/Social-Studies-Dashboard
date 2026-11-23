@@ -115,7 +115,7 @@ parts:[
 },
 "check2": {
 "tag": "Second check · Reader page 1 + fact file",
-"q": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">Bad Indian rulers caused famine, so Britain took more power.</span><span class=\"rl\">The worst famines came under British rule. About 3 million died in Bengal in 1943, the year this comic came out.</span></span><b class=\"kf\">Know this</b><span class=\"line\"><b>Decolonization</b> = colonies becoming free countries. After WWII, Europe's empires fell apart fast.</span></span>Look at the panel where two British riders pass starving people. The comic blames Indian rulers. Who really ruled India during its worst famines?",
+"q": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">Bad Indian rulers caused famine, so Britain took more power.</span><span class=\"rl\">Some of India's deadliest famines came under British rule. About 3 million died in Bengal in 1943, the year this comic came out.</span></span><b class=\"kf\">Know this</b><span class=\"line\"><b>Decolonization</b> = colonies becoming free countries. After WWII, Europe's empires fell apart fast.</span></span>Look at the panel where two British riders pass starving people. The comic blames Indian rulers. Who ruled Bengal during the 1943 famine?",
 "right": "Britain, which ruled India as a colony",
 "wrong": [
 "Indian princes, who ruled without Britain",
@@ -207,7 +207,7 @@ parts:[
 "placeholder": "The biggest reason India won independence was ___ because ___."
 }
 ],
-questions:["(Check) Who ruled India during its worst famines?", "How did Gandhi and millions of Indians fight British rule without violence?", "(Check) Why did filling the jails help Gandhi's side?", "What mattered most for India's freedom: Gandhi's protests, India's role in WWII, or Britain being broke? Explain."],
+questions:["(Check) Who ruled Bengal during the 1943 famine?", "How did Gandhi and millions of Indians fight British rule without violence?", "(Check) Why did filling the jails help Gandhi's side?", "What mattered most for India's freedom: Gandhi's protests, India's role in WWII, or Britain being broke? Explain."],
 validate(s){if(!s.name)return{text:"Type your first name + last initial (like Jordan M.) at the top of the questions.",focus:"studentName"};
  const mc=[1,2,3,4].find(i=>!s.checkDone(i));if(mc)return{text:"Get the check right for part "+mc+" first.",part:mc};
  const m2=[1,3].find(i=>!s.check2Done(i));if(m2)return{text:"Get the second check right for part "+m2+" first.",part:m2};

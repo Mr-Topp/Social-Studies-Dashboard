@@ -471,7 +471,7 @@ window.SHOWDOWN_ROUNDS = [
     },
     "WH.25": {
       snap: { proof: ["Doumer, the French governor, says his new “state monopolies” did the trick", "A Vietnamese emperor signs a brand-new tax law", "British ships unload their goods in Hanoi's port"],
-        alt: { ask: "France sent Paul Doumer to run Vietnam and set its taxes himself. Which kind of rule is that?", options: ["Direct rule: the empire's own officials run it", "Indirect rule: local rulers stay but take orders", "A sphere of influence: control of its trade", "Self-rule: the Vietnamese run it themselves"] } },
+        alt: { ask: "France sent Paul Doumer to run Vietnam. French officials made the laws and set the taxes. Which kind of rule is that?", options: ["Direct rule: the empire's own officials run it", "Indirect rule: local rulers stay but take orders", "A sphere of influence: control of its trade", "Self-rule: the Vietnamese run it themselves"] } },
       snap2: { proof: ["Hawaiʻi became part of the U.S., but the “Open Door” was only about trade", "Congress passed a law that made China part of the United States in 1899", "John Hay asked every other country to stop all of its trade in China"],
         alt: { ask: "Look at both U.S. moves. In which place did the U.S. take the land for itself?", options: ["Hawaiʻi: it became part of the U.S.", "China: it became part of the U.S.", "Both: the U.S. took both places", "Neither: the U.S. just traded"] } }
     },
