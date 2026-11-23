@@ -65,7 +65,7 @@ window.CLASS_MUST_WATCH = {
     "3|4": [["UUukBV82P9A","Social Interaction & Performance"]],
     "3|5": [["_wFZ5Dbj8DA","Social Groups"]],
     "4|1": [["D9N7QaIOkG8","Why is it so hard to escape poverty?"],["2KlmvmuxzYE","Students Learn A Powerful Lesson About Privilege"]],
-    "4|2": [["c8PEv5SV4sU","Social Class & Poverty in the US"]],
+    "4|2": [["c8PEv5SV4sU","Social Class & Poverty in the US"],["kQVk9RYARIc","Charlie's Birthday Chocolate Bar (movie scene)"],["1YXmZvEdv6k","Charlie Finds the Last Golden Ticket (movie scene)"]],   // the two story-slide scenes, so the day still has a pick with the first one removed (Fynn, 11-22)
     "4|3": [["6rts_PWIVTU","Global Stratification & Poverty"]],
     "4|4": [["HoKkasEyDOI","The school-to-prison pipeline, explained"],["hZZmMrFQzVs","How Our Criminal Justice System Targets Communities"]],
     "4|5": [["9diZJks95Ko","How America Created Its Shameful Wealth Gap"],["13XU4fMlN3w","What people miss about the gender wage gap"]],
@@ -113,7 +113,7 @@ window.CLASS_MUST_WATCH = {
     "2|2": [["s-FbhEUdpGY","Inside North Korea: Life Under the World's Most Isolated Regime"],["e9H8pxLe74I","How the Great Leap Forward caused the Great Chinese Famine"]],
     "2|3": [["h1wFrXKanC0","The Korean War: 5 Things to Know"],["bwWW3sbk4EU","The history of the Cuban Missile Crisis"]],
     "2|4": [["DrcCTgwbsjc","Why was India split into two countries?"],["rJBGjtOlAYw","Sound Smart: Mahatma Gandhi"]],
-    "2|5": [["xf5CPacHt4Q","Kwame Nkrumah: Independence Speech, 1957"],["tuQmpflB0Qk","The Cold War & Decolonization"]],
+    "2|5": [["xf5CPacHt4Q","Real Footage: \"Ghana Is Free Forever!\" Independence Night, 1957"],["tuQmpflB0Qk","The Cold War & Decolonization"]],   // same video, now under the name on the slide and dashboard (Fynn, 11-22)
     "2|6": [["OiqTffD5U2I","Why Did US Go to War with Vietnam"],["poE_nNW9-yk","The infamous and ingenious Ho Chi Minh Trail"]],
     "2|7": [["8_TYFfkc_1U","Ugly History: The Khmer Rouge murders"],["ke4kVFycpYY","How did South African Apartheid happen, and how did it finally end?"]],
     "2|8": [["8thC4hOn_C8","The Berlin Wall: A Short History of its Rise and Fall"],["oxEn63IJPqM","The Berlin Wall came down by mistake"]],
@@ -149,7 +149,9 @@ window.MUST_WATCH = (function () {
   // The videos a student sees on a missed day: [{ url, title }], never more than 2.
   function picks(course, key, rows) {
     var mine = dayRows(course, key, rows), out = [];
-    var gone = function (url) { return mine.some(function (l) { return (l.title === HIDE || isOff(l)) && same(l.url, url); }); };
+    // A video Fynn removed and then added back (often under a new name) is on the day again, so it can be picked (11-22).
+    var back = function (url) { return mine.some(function (l) { return !/teacher key/i.test(l.title || "") && same(l.url, url); }); };
+    var gone = function (url) { return mine.some(function (l) { return (isOff(l) || (l.title === HIDE && !back(url))) && same(l.url, url); }); };
     var add = function (url, title) {
       if (out.length >= MAX || !url || gone(url) || out.some(function (v) { return same(v.url, url); })) return;
       out.push({ url: url, title: String(title || "Video").replace(/\s*\(video\)\s*$/i, "") });

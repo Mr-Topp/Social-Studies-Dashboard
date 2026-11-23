@@ -116,11 +116,14 @@ const CLASSES = {
 const ORDER = ["Games & activities", "Readings", "Slides"];
 const esc = s => String(s).replace(/[&<>"]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
 const card = ([, t, href, note]) => `<a class="card" href="${esc(href)}"><strong>${esc(t)}</strong>${note ? `<small>${esc(note)}</small>` : ""}</a>`;
-const REG = window.CLASS_ASSIGNMENTS || {}, UNITS = window.CLASS_UNITS || {};
+const REG = window.CLASS_ASSIGNMENTS || {}, UNITS = window.CLASS_UNITS || {}, UNITS_P1 = window.CLASS_UNITS_PART1 || {};
 const hubClass = c => c;
 const base = p => String(p || "").split("#")[0].replace(/index\.html$/, "");
+// Part 1 units have their own names (CLASS_UNITS_PART1), so they get their own headings: "Part 1 · Unit 2 · Civil War & Reconstruction".
+const isP1 = a => +a.part === 1 ? 1 : 0;
+const unitNames = a => (isP1(a) ? UNITS_P1 : UNITS)[a.course] || {};
 const unitLabel = a => a.course === "civics" ? "Friday " + (a.unit || "") + (UNITS.civics && UNITS.civics[a.unit] ? " · " + UNITS.civics[a.unit] : "")
-  : a.unit ? "Unit " + a.unit + (UNITS[a.course] && UNITS[a.course][a.unit] ? " · " + UNITS[a.course][a.unit] : "") : "Other";
+  : a.unit ? (isP1(a) ? "Part 1 · " : "") + "Unit " + a.unit + (unitNames(a)[a.unit] ? " · " + unitNames(a)[a.unit] : "") : "Other";
 let current = location.hash.slice(1);
 try { if (!CLASSES[current]) current = localStorage.getItem("hub-class") || ""; } catch (e) {}
 if (!CLASSES[current]) current = "us-history";
@@ -136,7 +139,7 @@ function show(key) {
   // Being used now = the activities on the Schoology day posts (the same list the teacher dashboard uses, in shared/assignments.js).
   // Answer keys and the unit tests stay off this public page (they're on the teacher dashboard).
   const using = Object.entries(REG).filter(([id, a]) => a.path && hubClass(a.course) === key && !a.teacherOnly && !(/icivics/i.test((a.title || "") + " " + a.path) && /printed/i.test(a.title || "")) && !/answer key|teacher key/i.test(a.title || "") && !/-key$/.test(id) && !(/summative/i.test(a.title || "") && !/review/i.test(a.title || "")))
-    .sort(([, a], [, b]) => (a.course === b.course ? 0 : a.course === "civics" ? 1 : -1) || (a.unit || 99) - (b.unit || 99) || (a.day || 99) - (b.day || 99));
+    .sort(([, a], [, b]) => (a.course === b.course ? 0 : a.course === "civics" ? 1 : -1) || isP1(a) - isP1(b) || (a.unit || 99) - (b.unit || 99) || (a.day || 99) - (b.day || 99));   // the units being taught now first, then Part 1
   const usedPaths = new Set(using.map(([, a]) => base(a.path)));
   let html = `<section class="part now"><h2 class="parthead">Being used now <span>${using.length}</span></h2>`;
   if (using.length) {
