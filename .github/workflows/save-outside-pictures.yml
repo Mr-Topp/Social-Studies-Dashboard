@@ -33,5 +33,5 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
-          git add -A -- '*/img/*.jpg' '*/img/*.jpeg' '*/img/*.png' || true
+          for pat in '*/img/*.jpg' '*/img/*.jpeg' '*/img/*.png'; do git add -- "$pat" 2>/dev/null || true; done
           git diff --cached --quiet || (git commit -m "Save outside pictures onto the site" && git pull --rebase -q && git push)
