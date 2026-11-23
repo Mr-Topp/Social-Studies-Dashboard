@@ -1302,3 +1302,48 @@ return isEs() ? "Agrega la inicial de tu apellido. Ejemplo: Jordan M." : "Add yo
   const start = () => { tick(); setInterval(tick, 700); };
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", start); else start();
 })();
+
+
+/* ============================================================
+   GOVERNMENT 2:00 PM LOCK (Fynn decided 2026-11-23)
+   Every class day (Mon-Thu, not a no-school day), TODAY'S Government work stays locked until 2:00 PM Central,
+   so students can't do it before class. Locks the links on the student home page and shows a lock screen on
+   the activity page itself. Earlier days' work stays open. Test T. is never locked.
+   To change the time, change HOUR (24-hour clock). Don't remove without Fynn saying so.
+   ============================================================ */
+;(function(){try{
+var HOUR=14,COURSE="government",LOCK="🔒";
+var me=(document.currentScript&&document.currentScript.src)||"";
+var root=me.replace(/shared\/turnin\.js.*$/,"");
+if(!root||/\/teacher-submissions\//.test(location.pathname))return;
+function now(){var p={};new Intl.DateTimeFormat("en-CA",{timeZone:"America/Chicago",year:"numeric",month:"2-digit",day:"2-digit",hour:"2-digit",hourCycle:"h23",weekday:"short"}).formatToParts(new Date()).forEach(function(x){p[x.type]=x.value;});return{date:p.year+"-"+p.month+"-"+p.day,hour:+p.hour,wd:p.weekday};}
+function lockedList(){
+if(window.classIsTestT&&window.classIsTestT())return null;
+var n=now();
+if(n.hour>=HOUR||!/^(Mon|Tue|Wed|Thu)$/.test(n.wd))return null;
+if((window.CLASS_NO_SCHOOL||[]).some(function(r){return n.date>=r[0]&&n.date<=r[1];}))return null;
+var L=window.classLessonOn&&window.classLessonOn(COURSE,n.date);
+if(!L)return null;
+var A=window.CLASS_ASSIGNMENTS||{},out=[];
+Object.keys(A).forEach(function(k){var a=A[k];if(a&&a.course===COURSE&&a.unit===L.unit&&a.day===L.day&&a.path){try{out.push(new URL(a.path,root));}catch(e){}}});
+return out;}
+function norm(p){return p.replace(/index\.html$/,"").replace(/\/+$/,"");}
+function hit(u,list){return list.some(function(t){if(t.origin!==u.origin||norm(t.pathname)!==norm(u.pathname))return false;var ok=true;t.searchParams.forEach(function(v,k){if(u.searchParams.get(k)!==v)ok=false;});return ok;});}
+function apply(){
+var list=lockedList(),here=!!list&&hit(new URL(location.href),list),o=document.getElementById("govLock");
+if(here&&!o&&document.body){o=document.createElement("div");o.id="govLock";o.setAttribute("role","alertdialog");o.style.cssText="position:fixed;inset:0;z-index:2147483647;background:#101522;color:#fff;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px;font:600 22px/1.4 system-ui,sans-serif";
+o.innerHTML='<div style="font-size:64px">'+LOCK+'</div><div style="font-size:30px;margin:12px 0">This opens at 2:00 PM</div><div style="font-weight:400;max-width:520px">Today’s Government work starts in class. Come back at 2:00.</div>';document.body.appendChild(o);}
+if(!here&&o)o.remove();
+var as=document.querySelectorAll("a[href],a[data-gov-href]");
+for(var i=0;i<as.length;i++){var a=as[i],raw=a.getAttribute("data-gov-href")||a.getAttribute("href"),u;
+if(!raw||raw.charAt(0)==="#")continue;
+try{u=new URL(raw,location.href);}catch(e){continue;}
+var lk=!!list&&hit(u,list);
+if(lk&&a.hasAttribute("href")){a.setAttribute("data-gov-href",raw);a.removeAttribute("href");a.setAttribute("aria-disabled","true");a.style.opacity=".55";a.style.cursor="not-allowed";
+if(!a.querySelector(".gov-lock-tag")){var s=document.createElement("span");s.className="gov-lock-tag";s.textContent=" "+LOCK+" Opens at 2:00 PM";a.appendChild(s);}}
+else if(!lk&&a.hasAttribute("data-gov-href")){a.setAttribute("href",raw);a.removeAttribute("data-gov-href");a.removeAttribute("aria-disabled");a.style.opacity="";a.style.cursor="";var t=a.querySelector(".gov-lock-tag");if(t)t.remove();}}}
+var wait=0;function soon(){if(wait)return;wait=setTimeout(function(){wait=0;try{apply();}catch(e){}},60);}
+soon();document.addEventListener("DOMContentLoaded",soon);
+new MutationObserver(soon).observe(document.documentElement,{childList:true,subtree:true});
+setInterval(soon,20000);
+}catch(e){}})();
