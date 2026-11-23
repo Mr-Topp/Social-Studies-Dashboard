@@ -80,11 +80,12 @@
   // Picked: Three Identical Strangers, built in as Part 1 of this page (one turn-in).
   // Facts checked 11/21/26 against NPR (2018), KCRW, The Forward, The Telegraph, Slant, NYU Med Humanities,
   // KQED, and the Neubauer study papers (Twin Research & Human Genetics). Eddy's 1995 death is left out on purpose.
+  // Pictures are saved in this page's img/ folder (11-22) so a school filter can't block them.
   // Pictures are real places from Wikimedia Commons (no photos of the brothers: those are copyrighted).
-  const IMG = (file, title, by, lic) => ({ src: "https://commons.wikimedia.org/wiki/Special:FilePath/" + encodeURIComponent(file) + "?width=900", page: "https://commons.wikimedia.org/wiki/File:" + encodeURIComponent(file), title, by, lic });
+  const IMG = (file, title, by, lic, local) => ({ src: "img/" + local, page: "https://commons.wikimedia.org/wiki/File:" + encodeURIComponent(file), title, by, lic });
   const STORY = [
     { id: "s1", kicker: "New York · 1980", title: "Everyone Knows Bobby",
-      img: IMG("SUNY Sullivan library.jpg", "The college Bobby went to (today called SUNY Sullivan)", "J. Passepartout", "CC BY-SA 4.0"),
+      img: IMG("SUNY Sullivan library.jpg", "The college Bobby went to (today called SUNY Sullivan)", "J. Passepartout", "CC BY-SA 4.0", "college.jpg"),
       s: ["In 1980, Bobby Shafran was 19 years old.",
           "It was his first day at a small college in upstate New York, and he had never been there before.",
           "But strangers kept hugging him, high-fiving him, and calling him “Eddy.”",
@@ -101,7 +102,7 @@
       hint: "Reread what the page says about Eddy Galland.",
       proof: 5, proofAsk: "Tap the sentence that explains the mix-up.", proofHint: "Find the sentence about what Eddy looked like." },
     { id: "s2", kicker: "A few months later", title: "Make That Three",
-      img: IMG("2011 newsstand 5381532713.jpg", "A newsstand in New York City", "rob zand", "CC BY-SA 2.0"),
+      img: IMG("2011 newsstand 5381532713.jpg", "A newsstand in New York City", "rob zand", "CC BY-SA 2.0", "newsstand.jpg"),
       s: ["Newspapers ran the story, with a photo of the two brothers.",
           "In Queens, New York, a college student named David Kellman saw that photo.",
           "He was looking at two faces exactly like his own.",
@@ -118,7 +119,7 @@
       hint: "They were split up as babies. What surprised people when they met?",
       proof: 7, proofAsk: "Tap the sentence that shows how alike they were.", proofHint: "Find the list of things all three had in common." },
     { id: "s3", kicker: "Then people looked closer", title: "Three Different Homes",
-      img: IMG("Levittown houses. LOC gsc.5a25986 (cropped).jpg", "Houses on Long Island, New York", "Gottscho-Schleisner Collection, Library of Congress", "Public domain"),
+      img: IMG("Levittown houses. LOC gsc.5a25986 (cropped).jpg", "Houses on Long Island, New York", "Gottscho-Schleisner Collection, Library of Congress", "Public domain", "levittown.jpg"),
       s: ["But the brothers were not copies.",
           "As babies, they had been placed in three very different homes.",
           "Bobby grew up rich. His dad was a doctor, and his mom was a lawyer.",
@@ -135,7 +136,7 @@
       hint: "Socialization comes from people. Which choice is about the families?",
       proof: 6, proofAsk: "Tap the sentence that shows the parents raising them differently.", proofHint: "Find the sentence about each brother's dad." },
     { id: "s4", kicker: "The twist", title: "The Secret Study",
-      img: IMG("Sterling Memorial Library Highsmith.jpg", "Yale University's main library", "Carol M. Highsmith", "Public domain"),
+      img: IMG("Sterling Memorial Library Highsmith.jpg", "Yale University's main library", "Carol M. Highsmith", "Public domain", "yale.jpg"),
       s: ["Then came the biggest shock: splitting them up was not an accident.",
           "A psychiatrist (a doctor for the mind) named Dr. Peter Neubauer was running a secret study.",
           "He wanted to answer an old question: nature or nurture? Do your genes shape you, or do the people who raise you?",

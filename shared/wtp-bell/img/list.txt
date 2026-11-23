@@ -20,9 +20,3 @@ enlightenment.jpg|Declaration of the Rights of Man and of the Citizen in 1789.jp
 why-gov.jpg|Godfrey Kneller - Portrait of John Locke (Hermitage).jpg
 stratify.jpg|Alms House Birch's Views Plate 25.jpg
 movements.jpg|March on washington Aug 28 1963.jpg
-# TEMPORARY (2026-11-22): 4 pictures for sociology/u3-d1-who-taught-you, fetched here by the GitHub Action so a
-# school filter can't block them. They move into that page's own img/ folder in the next commit, and these lines come out.
-soc-u3d1-college.jpg|SUNY Sullivan library.jpg
-soc-u3d1-newsstand.jpg|2011 newsstand 5381532713.jpg
-soc-u3d1-levittown.jpg|Levittown houses. LOC gsc.5a25986 (cropped).jpg
-soc-u3d1-yale.jpg|Sterling Memorial Library Highsmith.jpg
