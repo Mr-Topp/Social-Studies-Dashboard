@@ -29,7 +29,7 @@
       plan: [
         { day: 1, title: "The Cold War: How Did Allies Become Enemies, and Why Were Americans Afraid at Home?", std: "US.36, 37, 39, 40, 41", slides: [{ day: 1 }, { day: 2, label: "fear at home" }] },
         { day: 2, title: "The Cold War: Why Did Americans Fight in Korea?", std: "US.35, 37, 40", slides: [{ day: 3 }] },
-        { day: 3, title: "The Cold War: How Did Fear Shape the 1950s?", std: "US.37–40", slides: [{ day: 4 }] },
+        { day: 3, title: "The Cold War: How Did Fear Shape the 1950s, and How Close Did We Come to Nuclear War?", std: "US.37–40", slides: [{ day: 4 }] },
         { day: 4, title: "The Cold War: How Did Vietnam Divide Americans?", std: "US.35–37, 40, 41", slides: [{ day: 5 }] },
         { day: 5, title: "Review + Summative", std: "US.35–41", slides: [{ day: 6 }] }
       ],

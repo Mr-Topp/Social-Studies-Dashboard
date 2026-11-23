@@ -9,7 +9,7 @@ If you think the calendar doesn't fit, tell Fynn and ask with multiple-choice op
 - **Core classes meet Monday–Thursday.** No-school days are in `CLASS_NO_SCHOOL` in `shared/assignments.js`
   (including Nov 2–3, Thanksgiving Nov 25–27, Wed Dec 2, winter break Dec 21–Jan 1, Jan 11, Jan 18).
 - **Combined days (Fynn chose "keep test dates, combine days" over the other version):**
-  - U.S. History Unit 3 = 5 days: Day 1 = Allies to Enemies + Fear at Home; Day 2 Korea; Day 3 Thirteen Days; Day 4 Vietnam; Day 5 Review + test (Thu 12/3)
+  - U.S. History Unit 3 = 5 days: Day 1 = Allies to Enemies + Fear at Home; Day 2 Korea; Day 3 = Fear in the 1950s + Thirteen Days (slides "DAY 3" and "DAY 3, PART 2"; Fynn 11-22: dashboard title and goals match the slides); Day 4 Vietnam; Day 5 Review + test (Thu 12/3)
   - Government Unit 3 (Judicial) = 3 days: Day 1 What is the judicial branch; Day 2 Judicial review; Day 3 review Blooket + test (Thu 12/3). **All Blookets go on summative days** (Fynn, 11-03)
   - Sociology Unit 3 = 7 days: Day 5 = Groups change how we act + Us vs. them; Day 6 review; Day 7 test (Thu 12/10)
   - World History Unit 2 = 9 days: Day 1 = Cold War + Containment; Day 2 = Control + Mao's China; Day 7 = Cambodia + Apartheid; Day 9 test (Thu 12/10)

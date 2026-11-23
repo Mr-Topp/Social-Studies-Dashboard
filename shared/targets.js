@@ -333,13 +333,13 @@ window.CLASS_TARGETS = {
    "t": [
     "I can explain how the nuclear arms race between the U.S. and the Soviet Union created fear in the 1950s.",
     "I can analyze how Cold War fear changed everyday life for American families and schools.",
-    "I can explain how government spending on defense and new technology during the Cold War affected the economy."
+    "I can explain how government spending on defense and new technology during the Cold War affected the economy.",
+    "I can explain how the Bay of Pigs led to the Cuban Missile Crisis and how the crisis ended."
    ],
    "g3": "I can analyze how the Cold War affected life in the United States (society, politics, civil liberties)."
   },
   "3|4": {
    "t": [
-    "I can explain how the Bay of Pigs led to the Cuban Missile Crisis and how the crisis ended.",
     "I can analyze why the U.S. went to war in Vietnam and why Americans split over it.",
     "I can explain how the policy of containment connects the Cuban Missile Crisis and the Vietnam War."
    ],
