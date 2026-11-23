@@ -7,6 +7,7 @@
 // 2026-11-02: days combined in U.S. History U3, Government U3, Sociology U3, World History U2 (merged days keep both days' targets).
 // 2026-11-22 (Fynn: "you can do all that"): the other five combined days (U.S. History 6|2, World History 2|2, 2|7, 3|1,
 // Sociology 3|5) blended from six targets into three, same as Monday's. Every idea from the six is still there; Level 3 lines unchanged.
+// 2026-11-23 (Fynn): Sociology 2|5 goals now cover the whole-unit review that Day 5's slides and game do.
 // 2026-11-21 (Fynn): U.S. History U6 Days 2 + 3 combined and World History U3 Days 1 + 2 combined (merged days keep both days'
 // targets). U.S. History 6|3 and World History 3|7 are test days again. This replaces the 11-03 "short lesson + test" setup.
 window.CLASS_TARGETS = {
@@ -975,9 +976,9 @@ window.CLASS_TARGETS = {
   },
   "2|5": {
    "t": [
-    "I can identify major social institutions in society.",
-    "I can analyze how institutions like family, education, religion, economy, and government meet societal needs.",
-    "I can explain how institutions influence behavior and social roles."
+    "I can name the parts of culture, like norms, values, and material vs. nonmaterial culture.",
+    "I can explain how culture shapes me, using ethnocentrism, cultural relativism, and culture shock.",
+    "I can explain how institutions meet needs and how a change in one spreads to the others."
    ],
    "g3": "I can analyze how major social institutions function and meet the needs of society."
   },
