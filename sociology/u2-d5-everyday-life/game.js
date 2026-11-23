@@ -142,7 +142,7 @@
       bars: true,
       cite: "Source: U.S. Bureau of Labor Statistics",
       q: "What do Grandma's story and the chart show?",
-      options: ["A change in work spread into family and child care", "Women's jobs went back to normal after the war", "The economy changed, but families stayed the same", "Institutions change alone without touching others"],
+      options: ["A change in work spread into family and child care", "Women in her family stopped working after the war", "The economy changed, but families stayed the same", "Institutions change alone without touching others"],
       hint: "Grandma links the factory job to who watches Leo. Follow that link.",
       why: "More women working (economy) changed who cares for kids (family) and what older siblings do. Change in one institution spreads to others." }
   ];

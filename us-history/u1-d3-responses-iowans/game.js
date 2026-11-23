@@ -102,7 +102,7 @@
       scene: () => ex("What Hoover did, 1929–1932", ln("🤝", "Asked bosses not to cut pay") + ln("🏗️", "Building projects, like Hoover Dam") + ln("🏦", "<b>RFC</b> (1932): loans to banks and businesses") + ln("🚫", "No federal money to jobless families")) +
         ex("Meanwhile", ln("🏚️", "Tin-shack camps get a nickname: <b>“Hoovervilles.”</b>")),
       ask: "Which is TRUE about Hoover?",
-      options: ["He made RFC loans but avoided direct aid to people", "He sat back and waited for hard times to end", "He used RFC loans to pay jobless families", "He started Social Security for retired workers in 1932"],
+      options: ["He made RFC loans but avoided direct aid to people", "He sat back and waited for hard times to end", "He mailed RFC checks to jobless families", "He started Social Security for retired workers in 1932"],
       miss: ["He did act: RFC loans, building projects.", "RFC loans went to banks and businesses. Look at 🚫.", "Social Security came later, under FDR."],
       hint: "Read 🏦 and 🚫 together.",
       reveal: "<b>Direct relief</b> = money or food straight to people. Hoover said no." },

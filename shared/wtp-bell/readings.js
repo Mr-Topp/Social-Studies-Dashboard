@@ -449,7 +449,7 @@ window.WTP_READINGS = {
      "Being a citizen didn't guarantee the right to vote",
      "Women could now vote for President and Congress",
      "States had to let women vote in state elections",
-     "Women were not full citizens of the United States"
+     "Women were not citizens of the United States"
     ],
     "why": "The Court said citizenship and voting were separate.",
     "hint": "Read the second paragraph."
@@ -483,7 +483,7 @@ window.WTP_READINGS = {
     "q": "How did many Southern states keep Black men from voting after the 15th Amendment?",
     "c": [
      "Poll taxes, literacy tests, and threats",
-     "A new amendment that took the vote away",
+     "A new U.S. amendment that canceled the 15th",
      "Counting Black votes as three-fifths",
      "Requiring a college degree to vote"
     ],
@@ -640,7 +640,7 @@ window.WTP_READINGS = {
      "Some freedom, in return for protection of their rights",
      "Their property, in return for a safe place to live",
      "Their right to vote, in return for lower taxes",
-     "Their natural rights, in return for a strong king"
+     "Their natural rights, in return for a vote in elections"
     ],
     "why": "People trade a little freedom for a government that protects their rights.",
     "hint": "Look for the paragraph that starts \"So people make a deal.\""

@@ -13,7 +13,7 @@ const R = [
 <p>Locke's book came out in 1690. About 85 years later, American colonists used his ideas to explain why they had the right to break away from Britain.</p>`,
  qs:[
   {q:"In a state of nature, why would nobody feel safe?",c:["Nothing protects people's rights from the strong","The government takes too much of people's property","Too many laws make everyday life confusing and slow","A king would own all the land and make every rule"],why:"With no laws or police, the strong can take whatever they want.",hint:"Reread the part about what happens when there are no laws."},
-  {q:"In the social contract, what do people give up, and what do they get?",c:["Some freedom, in return for protection of their rights","Their property, in return for a safe place to live","Their right to vote, in return for lower taxes","Their natural rights, in return for a strong king"],why:"People trade a little freedom for a government that protects their rights.",hint:"Look for the paragraph that starts \"So people make a deal.\""}],
+  {q:"In the social contract, what do people give up, and what do they get?",c:["Some freedom, in return for protection of their rights","Their property, in return for a safe place to live","Their right to vote, in return for lower taxes","Their natural rights, in return for a vote in elections"],why:"People trade a little freedom for a government that protects their rights.",hint:"Look for the paragraph that starts \"So people make a deal.\""}],
  stem:"People agree to have a government because"},
 
 {id:"republic", title:"Who Holds the Power?", book:"Book Lessons 2–3",
@@ -206,7 +206,7 @@ const R2 = [
 <li><b>1964–1965:</b> the <b>24th Amendment</b> bans poll taxes in federal elections, and the <b>Voting Rights Act</b> (1965) starts ending literacy tests. By 1970 they were banned everywhere.</li>
 <li><b>1971, 26th Amendment:</b> voting age lowered to <b>18</b>. During the Vietnam War, people argued: old enough to be drafted (forced to join the military), old enough to vote.</li></ul>`,
  qs:[
-  {q:"How did many Southern states keep Black men from voting after the 15th Amendment?",c:["Poll taxes, literacy tests, and threats","A new amendment that took the vote away","Counting Black votes as three-fifths","Requiring a college degree to vote"],why:"These tricks blocked voters without saying \"race\" out loud.",hint:"Look at the 1870 bullet."},
+  {q:"How did many Southern states keep Black men from voting after the 15th Amendment?",c:["Poll taxes, literacy tests, and threats","A new U.S. amendment that canceled the 15th","Counting Black votes as three-fifths","Requiring a college degree to vote"],why:"These tricks blocked voters without saying \"race\" out loud.",hint:"Look at the 1870 bullet."},
   {q:"What argument helped lower the voting age to 18?",c:["Old enough to be drafted, old enough to vote","Eighteen-year-olds pay the most in taxes","Most 18-year-olds had already finished college","The Constitution first set the age at 18"],why:"Young men were being drafted to fight in Vietnam but couldn't vote.",hint:"Look at the 1971 bullet."}],
  stem:"The right to vote grew over time because"},
 
