@@ -316,11 +316,8 @@ window.CLASS_TARGETS = {
   "3|1": {
    "t": [
     "I can explain how the United States and the Soviet Union went from allies to enemies after World War II.",
-    "I can analyze how the Truman Doctrine and Marshall Plan used containment to stop the spread of communism.",
-    "I can explain how the U.S. responded to the Berlin Blockade and why it helped form NATO.",
-    "I can explain why many Americans feared communism inside the United States during the Red Scare.",
-    "I can analyze how fear of communism affected people's jobs, free speech, and civil liberties.",
-    "I can identify individuals who spoke up during the Red Scare and explain how their actions mattered."
+    "I can analyze how the U.S. used containment (the Truman Doctrine, the Marshall Plan, the Berlin Airlift, and NATO) to stop the spread of communism.",
+    "I can analyze how fear of communism during the Red Scare affected people's jobs, free speech, and civil liberties, and how some people spoke up."
    ],
    "g3": "I can analyze the causes of the Cold War between the United States and the Soviet Union. I can analyze how the Cold War affected life in the United States (society, politics, civil liberties)."
   },
@@ -695,12 +692,9 @@ window.CLASS_TARGETS = {
   },
   "2|1": {
    "t": [
-    "I can explain how the U.S. and Soviet Union went from allies in World War II to Cold War enemies.",
-    "I can analyze how communism in the Soviet Union and democracy in the U.S. organized power differently.",
-    "I can use a map to explain how Europe was split into U.S. and Soviet sides after 1945.",
-    "I can explain what containment was and why the U.S. wanted to stop the spread of communism.",
-    "I can analyze how the U.S. and Soviet Union each tried to win allies and influence around the world.",
-    "I can use a map to explain where communism spread and where the U.S. tried to stop it."
+    "I can explain how the U.S. and Soviet Union went from World War II allies to Cold War enemies, and how communism and democracy organized power differently.",
+    "I can use a map to explain how Europe was split after 1945 and where communism spread.",
+    "I can explain what containment was and analyze how each side tried to win allies around the world."
    ],
    "g3": "I can analyze forms of government during the Cold War. I can analyze how groups pursued goals during the Cold War."
   },
