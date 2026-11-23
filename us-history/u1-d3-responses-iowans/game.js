@@ -81,7 +81,7 @@
       scene: () => radio("📻 RADIO NEWS · OCT. 29, 1929", ln("📉", "Stock market crashes.") + ln("🏭", "Banks and factories close.")) +
         ex("President Hoover's big idea", ln("💪", "<b>Rugged individualism</b>: people solve their own problems.") + ln("⛪", "Help should be <b>voluntary</b>: churches, charities, neighbors.") + ln("⚠️", "Federal handouts make people depend on Washington.")),
       ask: "How would Hoover want hunger handled?",
-      options: ["By local charities and neighbors helping", "By federal checks to every family", "By the U.S. Army running soup lines", "By each family alone, with no help"],
+      options: ["By local charities and neighbors helping", "By federal checks sent to families", "By the U.S. Army running soup lines", "By each family alone, with no help"],
       miss: ["Federal checks = Washington. Hoover said no.", "The Army is federal too. Reread ⛪.", "Not NO help. Who does ⛪ say should help?"],
       hint: "Reread the ⛪ line.",
       reveal: "Hoover: help should come from <b>neighbors, not Washington</b>." },
@@ -102,7 +102,7 @@
       scene: () => ex("What Hoover did, 1929–1932", ln("🤝", "Asked bosses not to cut pay") + ln("🏗️", "Building projects, like Hoover Dam") + ln("🏦", "<b>RFC</b> (1932): loans to banks and businesses") + ln("🚫", "No federal money to jobless families")) +
         ex("Meanwhile", ln("🏚️", "Tin-shack camps get a nickname: <b>“Hoovervilles.”</b>")),
       ask: "Which is TRUE about Hoover?",
-      options: ["He made RFC loans but avoided direct aid to people", "He did nothing to fight the Depression", "He used RFC loans to pay jobless families", "He started Social Security for retired workers in 1932"],
+      options: ["He made RFC loans but avoided direct aid to people", "He sat back and waited for hard times to end", "He used RFC loans to pay jobless families", "He started Social Security for retired workers in 1932"],
       miss: ["He did act: RFC loans, building projects.", "RFC loans went to banks and businesses. Look at 🚫.", "Social Security came later, under FDR."],
       hint: "Read 🏦 and 🚫 together.",
       reveal: "<b>Direct relief</b> = money or food straight to people. Hoover said no." },

@@ -274,7 +274,7 @@
     // ---- Case 1: Tinker v. Des Moines (rule struck down, 7-2) ----
     { id: "c2", type: "check", c: 0, std: "Gov.8", kicker: "Case 1 · The file", short: "Tinker: why was the rule unfair?", stamp: "NOTED", where: "case file",
       ask: "Why does she say the rule was unfair?",
-      options: ["Her armband hurt no one's class", "The rule came after she wore it", "No one told her the rule", "Only girls got in trouble"],
+      options: ["Her armband hurt no one's class", "The rule came after she wore it", "No one told her the rule", "Boys didn't get in trouble"],
       miss: ["The file says the ban came first. What happened in class?", "The file doesn't say that. What happened in class?", "The file doesn't say that. What happened in class?"],
       hint: "What happened in class?",
       reveal: "Her claim: a quiet armband hurt no one." },
@@ -368,7 +368,7 @@
     { id: "c7", type: "check", c: 3, std: "Gov.8", kicker: "Case 4 · File + words", short: "Simmons: can the Court change its mind?", stamp: "PRECEDENT", where: "case file",
       under: () => amend(CASES[3]),
       ask: "In 1989 the Court said this law was OK. What can it do now?",
-      options: ["Change its own old ruling", "Nothing. Old rulings stay", "Make Missouri vote on it", "Let the President decide"],
+      options: ["Change its own old ruling", "Ask Congress to undo it", "Make Missouri vote on it", "Let the President decide"],
       miss: ["The Court can change its old rulings. It is rare.", "Courts can't order a vote. Who made the 1989 ruling?", "The President has no say here. Who made the 1989 ruling?"],
       hint: "Who made the 1989 ruling? They can undo it.",
       reveal: "An old ruling that courts follow is a <b>precedent</b>. The Supreme Court can overturn its own." },

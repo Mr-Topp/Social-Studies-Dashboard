@@ -19,7 +19,7 @@ window.SHOWDOWN_ROUNDS = [
           alt: "1892 cartoon: Cecil Rhodes stands like a giant over Africa with one foot in Cape Town and one in Cairo, holding a telegraph wire.",
           cite: "“The Rhodes Colossus,” <i>Punch</i> magazine (London), 1892. Cecil Rhodes was a British businessman and leader in southern Africa.",
           ask: "Rhodes stands over the whole map. One foot is in Cape Town (bottom). One is in Cairo (top). What is the cartoon saying he wants?",
-          options: ["British control of Africa from top to bottom", "A trade deal to split up Africa with France", "To pull British soldiers out of Africa", "To give African kingdoms back all of their land"],
+          options: ["British control of Africa from top to bottom", "A trade deal to split up Africa with France", "To pull British soldiers out of Africa", "To hand African kingdoms back their land"],
           hint: "Look where his feet are. What does a giant standing over a map want?",
           why: "Rhodes dreamed of British land and a railroad from Cape Town to Cairo. That's <b>power</b> and <b>money</b>."
         },
@@ -155,7 +155,7 @@ window.SHOWDOWN_ROUNDS = [
           alt: "Page from Maus I: on a train in 1938, Jewish passengers share stories of losing businesses, arrests, and a sign reading This town is Jew Free.",
           cite: "<i>Maus I</i> by Art Spiegelman. Day 7 reading.",
           ask: "On a train in 1938, people share stories from Germany: a cousin forced to sell his business, a relative taken by police, a sign saying “This town is Jew Free.” What pattern do the stories show?",
-          options: ["Persecution grew step by step, each worse than the last", "Jewish families were safe until the war itself began", "Only Jewish soldiers were being singled out by the Nazis", "The Nazis kept their hatred hidden from the public"],
+          options: ["Persecution grew step by step, each worse than the last", "Jewish families were safe until the war itself began", "Jewish soldiers were the ones singled out by the Nazis", "The Nazis kept their hatred hidden from the public"],
           hint: "Put the stories in order. Does each one get worse?",
           why: "Nazi <b>persecution</b> grew one step at a time: businesses, then arrests, then whole towns. Each step made the next one easier."
         },
@@ -182,7 +182,7 @@ window.SHOWDOWN_ROUNDS = [
           alt: "1919 cartoon by Will Dyson: the Big Four leave the peace conference while a crying child labeled 1940 Class stands behind a pillar.",
           cite: "“Peace and Future Cannon Fodder,” Will Dyson, <i>Daily Herald</i> (London), 1919. “The Tiger” is France's leader, Clemenceau. Day 5 reading.",
           ask: "The leaders walk out of the 1919 peace talks. The Tiger says, “Curious! I seem to hear a child weeping!” The child behind the pillar is labeled “1940 Class.” What is the cartoonist predicting?",
-          options: ["The harsh peace will cause a new war around 1940", "Children will be safe now that the war is over", "Germany will win back all of its lost land by 1940", "The League of Nations will end war by 1940"],
+          options: ["The harsh peace will cause a new war around 1940", "Children will be safe now that the war is over", "Germany will pay off its war debt by 1940", "The League of Nations will end war by 1940"],
           hint: "“Cannon fodder” means soldiers sent to die. What would kids born in 1919 be doing in 1940?",
           why: "Dyson predicted the angry, harsh <b>Treaty of Versailles</b> would lead to another war. WWII began in 1939."
         },
@@ -209,7 +209,7 @@ window.SHOWDOWN_ROUNDS = [
           alt: "1940s comic page: a bomber drops the atomic bomb and a huge mushroom cloud rises over Hiroshima.",
           cite: "1940s comic, Day 10 reading (What Wins a War?).",
           ask: "In August 1945, the U.S. dropped atomic bombs on Hiroshima (Aug. 6) and Nagasaki (Aug. 9). How did this new weapon change the war?",
-          options: ["Japan announced its surrender within days", "Germany gave up after a bomb hit Berlin", "It pulled the United States into the war", "It was tested in the desert but never used"],
+          options: ["Japan announced its surrender within days", "Germany gave up after a bomb hit Berlin", "It pulled the United States into the war", "Japan kept fighting for two more years"],
           hint: "Which country was still fighting in August 1945? Germany had already surrendered in May.",
           why: "Japan announced its surrender on Aug. 15, 1945. The <b>atomic bomb</b> ended the war in the Pacific, and it killed huge numbers of civilians."
         },
@@ -278,7 +278,7 @@ window.SHOWDOWN_ROUNDS = [
         intro: "A student wrote this Explain It for the test.",
         lines: ["One reason Europe took over Africa was money.", "European factories needed rubber, palm oil, and diamonds from Africa.", "European companies paid African workers fair wages for the rubber.", "Colonies made European companies rich."],
         wrong: 2,
-        fixes: ["In the Congo, King Leopold forced people to collect rubber for him.", "In the Congo, King Leopold shared the rubber money with each village.", "In the Congo, African kings sold the rubber and kept all the money."],
+        fixes: ["In the Congo, King Leopold forced people to collect rubber for him.", "In the Congo, King Leopold shared the rubber money with each village.", "In the Congo, African kings sold the rubber and kept the profits."],
         hint: "Think about King Leopold's Congo. Did people there get a fair deal?",
         why: "Facts in an Explain It have to be right. Colonies made money because people were forced to work."
       },
@@ -292,7 +292,7 @@ window.SHOWDOWN_ROUNDS = [
       snap2: {
         file: "<b>Fact file · Two U.S. moves in the Pacific</b><b>Hawaiʻi, 1898:</b> Congress passed a law that made the Hawaiian Islands part of the United States. The queen had already been overthrown.<br><b>China, 1899–1900:</b> Secretary of State John Hay pushed for an “Open Door”: every country could trade in China, and China would not be carved up into colonies.",
         ask: "Read the fact file. What did the U.S. want in China?",
-        options: ["A share of the trade, not the land", "To make China the next U.S. state", "To remove China's ruler, like in Hawaiʻi", "To keep all other countries out of China"],
+        options: ["A share of the trade, not the land", "To make China the next U.S. state", "To remove China's ruler, like in Hawaiʻi", "To keep other countries out of China"],
         hint: "What does an “Open Door” let countries do?",
         why: "In <b>Hawaiʻi</b>, the U.S. took the land (annexation). In <b>China</b>, it only wanted trade (the Open Door)."
       },
@@ -300,12 +300,12 @@ window.SHOWDOWN_ROUNDS = [
         intro: "A student wrote this Explain It about France in Vietnam.",
         lines: ["In Vietnam, France ruled by direct rule.", "French governors like Paul Doumer ran the colony.", "France let Vietnam's emperor make all of the laws.", "French officials set the taxes, like government-only sales of salt and opium."],
         wrong: 2,
-        fixes: ["Vietnam's emperor had little real power, and the French made the laws.", "Vietnamese villages voted every single year to pick the French governor.", "France left Vietnam alone and only sent traders to its biggest ports."],
+        fixes: ["Vietnam's emperor had little real power, and the French made the laws.", "Vietnamese villages held a vote each year to pick the French governor.", "France left Vietnam alone and just sent traders to its biggest ports."],
         hint: "In direct rule, who makes the laws: local rulers or the empire's own officials?",
         why: "That's what makes it <b>direct rule</b>: the empire's own officials make the laws."
       },
       lightning: [
-        { q: "Indirect rule means…", options: ["local rulers stay, but they take the empire's orders", "the empire sends its own officials to run everything", "the colony rules itself with no outside control"] },
+        { q: "Indirect rule means…", options: ["local rulers stay, but they take the empire's orders", "the empire sends its own officials to run the colony", "the colony rules itself with no outside control"] },
         { q: "A sphere of influence is…", options: ["an area where a foreign power controls trade", "land that an empire takes over and makes its own", "a colony run by its own elected leaders"] },
         { q: "Which European country ruled Vietnam in the 1890s?", options: ["France", "Britain", "Germany"] }
       ]
@@ -330,7 +330,7 @@ window.SHOWDOWN_ROUNDS = [
         why: "Japan <b>adapted</b>: it learned from the West to stay independent."
       },
       lightning: [
-        { q: "Adapting to imperialism means…", options: ["copying outside ideas to stay strong and free", "fighting with weapons to drive outsiders away", "refusing all contact with outsiders"] },
+        { q: "Adapting to imperialism means…", options: ["copying outside ideas to stay strong and free", "fighting with weapons to drive outsiders away", "shutting the ports to keep outsiders away"] },
         { q: "The Boxers in China (1900) wanted to…", options: ["drive foreigners out of China", "copy Western factories and railroads", "make China part of the United States"] },
         { q: "In 1897, Native Hawaiians pushed back against annexation by…", options: ["signing petitions against it", "attacking U.S. Navy ships", "copying U.S. factories"] }
       ]
@@ -371,12 +371,12 @@ window.SHOWDOWN_ROUNDS = [
         intro: "A student wrote this Explain It about Hitler.",
         lines: ["Hitler gained power because Germany was in crisis.", "After WWI and the Great Depression, many Germans were poor and angry.", "Hitler promised jobs and blamed Jews for Germany's problems.", "Once in power, he let free newspapers criticize him."],
         wrong: 3,
-        fixes: ["Once in power, he banned other parties and used propaganda and secret police.", "Once in power, he gave Jewish Germans equal rights and police protection.", "Once in power, he held free elections with many different parties every year."],
+        fixes: ["Once in power, he banned other parties and used propaganda and secret police.", "Once in power, he gave Jewish Germans equal rights and police protection.", "Once in power, he held free elections with many different parties each year."],
         hint: "Dictators control people. Would one allow free newspapers?",
         why: "Hitler, Mussolini, and Stalin all used <b>propaganda</b>, <b>secret police</b>, and banned opponents."
       },
       lightning: [
-        { q: "Propaganda is…", options: ["one-sided messages to control what people think", "a law that protects everyone's right to free speech", "a peace deal between two countries"] },
+        { q: "Propaganda is…", options: ["one-sided messages to control what people think", "a law that protects people's right to free speech", "a peace deal between two countries"] },
         { q: "Why did many Germans turn to Hitler in the early 1930s?", options: ["The Great Depression left millions without jobs", "Germany had just won World War I and felt strong", "Britain and France asked him to lead Germany"] },
         { q: "The Holocaust was…", options: ["the Nazi murder of six million Jews and millions of others", "Germany's invasion of the Soviet Union in 1941", "the Allied bombing of German cities near the end of the war"] }
       ]
@@ -387,7 +387,7 @@ window.SHOWDOWN_ROUNDS = [
         alt: "Page from a 1945 True Comics story explaining the plan for the United Nations with a chart of its parts.",
         cite: "“A Third World War Can Be Prevented Now!” <i>True Comics</i> #44, 1945. Day 11 reading.",
         ask: "The 1944 plan for the United Nations added something the League of Nations never had. What was it?",
-        options: ["Troops from member countries to stop an attacker", "A rule that Germany must pay the full cost of both wars", "A ban on every country building new weapons", "Membership only for countries in Europe"],
+        options: ["Troops from member countries to stop an attacker", "A rule that Germany would pay the cost of both wars", "A ban on member countries building weapons", "Seats saved for the countries of Europe"],
         hint: "Why was the League too weak to stop Japan in 1931?",
         why: "The <b>UN</b> could send troops from its members. The League never could."
       },
@@ -411,7 +411,7 @@ window.SHOWDOWN_ROUNDS = [
         alt: "1940s comic page about the Battle of Britain showing German planes, a radar station, and British fighter planes.",
         cite: "1940s comic, Day 10 reading (What Wins a War?).",
         ask: "In 1940, Germany had more planes than Britain. Read the comic. How did Britain still win the Battle of Britain?",
-        options: ["Radar showed where planes were coming, so fighters were waiting", "Britain had already cracked every German Enigma code", "An atomic bomb destroyed Germany's air force", "Tanks shot down the German planes from the English beaches"],
+        options: ["Radar showed where planes were coming, so fighters were waiting", "The Royal Navy shot down the planes at sea", "An atomic bomb destroyed Germany's air force", "Tanks shot down the German planes from the English beaches"],
         hint: "Find the radar panel. What did radar calculate?",
         why: "<b>Radar</b> found German planes early. A new technology helped decide a turning point."
       },
@@ -433,7 +433,7 @@ window.SHOWDOWN_ROUNDS = [
       snap2: {
         file: "<b>Two points of view · the atomic bomb, 1945</b><b>President Truman</b> (radio speech, Aug. 9, 1945): “We have used it in order to shorten the agony of war, in order to save the lives of thousands and thousands of young Americans.”<br><b>Setsuko Thurlow</b>, age 13, about a mile from the blast in Hiroshima: “At 8:15, I saw a blinding bluish-white flash from the window.” She was trapped in a collapsed building and lost family and classmates. She spent her life working to ban nuclear weapons. (Nobel Peace Prize lecture, 2017)",
         ask: "Read both. How are their points of view on the bomb different?",
-        options: ["Truman: it would end the war sooner · Thurlow: it caused terrible suffering", "Truman: it caused terrible suffering · Thurlow: it would end the war sooner", "Truman: Japan was about to win the war · Thurlow: the bomb was never dropped", "Truman: the bomb was a huge mistake · Thurlow: the bomb saved her family"],
+        options: ["Truman: it would end the war sooner · Thurlow: it caused terrible suffering", "Truman: it caused terrible suffering · Thurlow: it would end the war sooner", "Truman: Japan was about to win the war · Thurlow: the bomb did little harm", "Truman: the bomb was a huge mistake · Thurlow: the bomb saved her family"],
         hint: "What reason does Truman give? What happened to Thurlow?",
         why: "Same bomb, two <b>points of view</b>. Truman: it ended the war fast and saved soldiers. Critics like Thurlow: killing civilians was wrong."
       },
@@ -446,9 +446,9 @@ window.SHOWDOWN_ROUNDS = [
         why: "Anne was found in 1944 and died in Bergen-Belsen in 1945. Total war reached children in hiding."
       },
       lightning: [
-        { q: "Total war means…", options: ["a whole nation's people and factories are used for war", "only professional soldiers do any of the fighting", "a war that is fought on just one continent at a time"] },
-        { q: "On the U.S. home front in WWII, families…", options: ["rationed food and worked in war factories", "were not really affected by the war at all", "voted on every battle plan the army made"] },
-        { q: "Why do people who lived through the same war remember it differently?", options: ["Where they were shaped what they saw and lost", "Only soldiers are really able to remember a war", "Everyone's memories of a war are exactly the same"] }
+        { q: "Total war means…", options: ["a whole nation's people and factories are used for war", "trained soldiers do the fighting far from home", "a war that is fought on just one continent at a time"] },
+        { q: "On the U.S. home front in WWII, families…", options: ["rationed food and worked in war factories", "were barely affected by the war overseas", "had more gas, sugar, and meat than before"] },
+        { q: "Why do people who lived through the same war remember it differently?", options: ["Where they were shaped what they saw and lost", "Soldiers are the ones who truly remember a war", "People forget most of a war within a few years"] }
       ]
     }
   };
@@ -465,15 +465,15 @@ window.SHOWDOWN_ROUNDS = [
   const P = {
     "WH.24": {
       snap: { proof: ["His feet stand on Cape Town and Cairo, the two ends of Africa", "He is shaking hands with an African king to sign a treaty", "He is stepping onto a ship to sail home to Britain"],
-        alt: { ask: "The cartoon calls Rhodes a “Colossus,” a giant. What does a giant standing over the whole map suggest about his goal?", options: ["Control of the whole continent for Britain", "A fair trade partnership with Africans", "Guarding Africa from other empires for free", "Exploring Africa only for science"] } },
+        alt: { ask: "The cartoon calls Rhodes a “Colossus,” a giant. What does a giant standing over the whole map suggest about his goal?", options: ["Control of the whole continent for Britain", "A fair trade partnership with Africans", "Guarding Africa from other empires for free", "Exploring Africa to study its wildlife"] } },
       snap2: { proof: ["Germany demanded its own “place in the sun”", "Germany's factories ran out of rubber in 1897", "Italy asked Ethiopia to teach its farmers"],
         alt: { ask: "Italy lost in Ethiopia in 1896, then took Libya in 1911. Why did Italy keep trying to get a colony?", options: ["To show it was a great power like its rivals", "To pay Ethiopia back for the land it took", "To give the people of Libya free elections", "To get away from Britain's rules on trade"] } }
     },
     "WH.25": {
       snap: { proof: ["Doumer, the French governor, says his new “state monopolies” did the trick", "A Vietnamese emperor signs a brand-new tax law", "British ships unload their goods in Hanoi's port"],
-        alt: { ask: "France sent Paul Doumer to run Vietnam and set its taxes himself. Which kind of rule is that?", options: ["Direct rule: the empire's own officials run it", "Indirect rule: local rulers stay but take orders", "A sphere of influence: control of trade only", "Self-rule: the Vietnamese run it themselves"] } },
+        alt: { ask: "France sent Paul Doumer to run Vietnam and set its taxes himself. Which kind of rule is that?", options: ["Direct rule: the empire's own officials run it", "Indirect rule: local rulers stay but take orders", "A sphere of influence: control of its trade", "Self-rule: the Vietnamese run it themselves"] } },
       snap2: { proof: ["Hawaiʻi became part of the U.S., but the “Open Door” was only about trade", "Congress passed a law that made China part of the United States in 1899", "John Hay asked every other country to stop all of its trade in China"],
-        alt: { ask: "Look at both U.S. moves. In which place did the U.S. take the land for itself?", options: ["Hawaiʻi: it became part of the U.S.", "China: it became part of the U.S.", "Both: the U.S. took both places", "Neither: the U.S. only traded"] } }
+        alt: { ask: "Look at both U.S. moves. In which place did the U.S. take the land for itself?", options: ["Hawaiʻi: it became part of the U.S.", "China: it became part of the U.S.", "Both: the U.S. took both places", "Neither: the U.S. just traded"] } }
     },
     "WH.27": {
       snap: { proof: ["The official says people are raising rats and bringing rats in from the provinces", "Vietnamese soldiers attack a French fort with guns", "Workers build a new French-style factory in Hanoi"],
@@ -485,19 +485,19 @@ window.SHOWDOWN_ROUNDS = [
       snap: { proof: ["Chamberlain bargains for peace, but then Poland is invaded in 1939", "Hitler signs a peace treaty and gives his land back", "Britain attacks Germany first, back in 1938"],
         alt: { ask: "In 1938, Britain and France let Hitler take part of Czechoslovakia, hoping he would stop. What happened next?", options: ["He took the rest, then invaded Poland in 1939", "He kept his word and stopped taking land", "He gave the land back to Czechoslovakia", "He joined the League of Nations to keep peace"] } },
       snap2: { proof: ["“Manchuria… had coal, iron, and farmland that Japan's growing empire wanted.”", "“Manchuria's people voted to become part of Japan's growing empire.”", "“The League of Nations sent its army to attack Japan's islands first.”"],
-        alt: { ask: "Japan's islands had little coal or iron. What did taking Manchuria give Japan?", options: ["Resources and land for its empire", "A promise of help from the League", "A peace treaty with all of China", "New colonies in Africa, like Italy"] } }
+        alt: { ask: "Japan's islands had little coal or iron. What did taking Manchuria give Japan?", options: ["Resources and land for its empire", "A promise of help from the League", "A peace treaty with China's leaders", "New colonies in Africa, like Italy"] } }
     },
     "WH.30": {
       snap: { proof: ["The stories go from losing a business, to an arrest, to a town that is “Jew Free”", "The passengers say life in Germany is getting better", "Everyone on the train is a German soldier going home"],
-        alt: { ask: "First a business is lost. Then a relative is arrested. Then a town bans Jews. What does this order show?", options: ["Nazi persecution got worse one step at a time", "The Nazis treated Jewish families fairly at first", "Jewish families were only hurt after the war ended", "Persecution stayed exactly the same every year"] } },
+        alt: { ask: "First a business is lost. Then a relative is arrested. Then a town bans Jews. What does this order show?", options: ["Nazi persecution got worse one step at a time", "The Nazis treated Jewish families fairly at first", "Jewish families were safe until the war began", "Persecution stayed about the same each year"] } },
       snap2: { proof: ["The officer shouts “It's all YOUR fault, this war!” at the Jewish prisoners", "The officer gives the Jewish prisoners extra food", "The prisoners are sent home because the war is over"],
         alt: { ask: "Blaming Jews for the war, for money problems, for everything: which Nazi tool is this?", options: ["Scapegoating (blaming one group)", "Appeasement (giving in to keep peace)", "Rationing (limiting food and supplies)", "Annexation (taking over land)"] } }
     },
     "WH.31": {
       snap: { proof: ["The crying child behind the pillar is labeled “1940 Class”", "The leaders are smiling and shaking hands with Germany", "The cartoon's title is “Peace Forever”"],
-        alt: { ask: "The cartoon is called “Peace and Future Cannon Fodder.” Cannon fodder means soldiers sent to die. What is the cartoonist warning?", options: ["This peace will send today's kids into a new war", "This peace will end war for good", "Germany will become France's closest friend", "The League will keep every child safe from war"] } },
+        alt: { ask: "The cartoon is called “Peace and Future Cannon Fodder.” Cannon fodder means soldiers sent to die. What is the cartoonist warning?", options: ["This peace will send today's kids into a new war", "This peace will end war for good", "Germany will become France's closest friend", "This peace will leave Britain and France broke"] } },
       snap2: { proof: ["The chart shows troops sent by member countries", "The chart shows Germany paying for the whole war", "The chart shows only European countries as members"],
-        alt: { ask: "Why did the UN's planners add troops from member countries?", options: ["So it could actually stop an attacker, unlike the League", "So it could punish Germany one more time for WWI", "So it could take over weaker countries' governments", "So it could replace every country's own army"] } }
+        alt: { ask: "Why did the UN's planners add troops from member countries?", options: ["So it could actually stop an attacker, unlike the League", "So it could punish Germany one more time for WWI", "So it could take over weaker countries' governments", "So it could replace each member's own army"] } }
     },
     "WH.32": {
       snap: { proof: ["Japan announced its surrender on Aug. 15, six days after Nagasaki", "Germany surrendered right after a bomb hit Berlin in August", "The U.S. only joined the war after the bombs were dropped"],

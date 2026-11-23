@@ -128,7 +128,7 @@
       scene: () => phone("🧑🏾", "Friend", "Why can't we use phones in class anymore?") +
         ex("Real Iowa law · 2025", ln("📜", "April 2025: Iowa House and Senate pass a bill limiting phones in class.") + ln("✍️", "April 30: Governor signs it.") + ln("🏫", "Every public school must follow it."), "Iowa Capital Dispatch, April 30, 2025"),
       ask: "The House and Senate both passed it. Why did it still need the Governor?",
-      options: ["Governor signs or vetoes bills", "Governor writes all state bills", "Governor must ask the court first", "Governor runs every school district"],
+      options: ["Governor signs or vetoes bills", "Governor writes the state bills", "Governor asks the court first", "Governor runs the school districts"],
       miss: ["Lawmakers write bills. They passed it first.", "Courts only step in if someone sues.", "School boards run districts."],
       hint: "What happens after lawmakers pass a bill?",
       reveal: "The <b>Governor</b> signs or <b>vetoes</b> bills. Lawmakers can override a veto with 2/3 of both chambers." },

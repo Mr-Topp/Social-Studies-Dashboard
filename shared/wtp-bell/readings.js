@@ -13,8 +13,8 @@ window.WTP_READINGS = {
     "q": "What big idea came from the Magna Carta?",
     "c": [
      "Even the king has to obey the law",
-     "The king owns all the land in England",
-     "Nobles must obey every royal order",
+     "The king can tax people when he wants",
+     "Nobles should pay for the king's wars",
      "Parliament should choose the next king"
     ],
     "why": "That's the rule of law: nobody, not even a king, is above it.",
@@ -60,7 +60,7 @@ window.WTP_READINGS = {
     "q": "What did \"no taxation without representation\" mean?",
     "c": [
      "Only lawmakers we elect should be able to tax us",
-     "Colonists should never have to pay any tax at all",
+     "Colonists should pay lower taxes than the British",
      "Britain should send more settlers to America",
      "Only the king, not Parliament, should tax us"
     ],
@@ -123,7 +123,7 @@ window.WTP_READINGS = {
      "They made most of what they needed themselves",
      "They bought most goods from big-city stores",
      "The government gave them food and supplies",
-     "They traded crops with Britain for all goods"
+     "They traded crops with Britain for their goods"
     ],
     "why": "They grew, built, and made most things on their own.",
     "hint": "Read the second paragraph."
@@ -132,8 +132,8 @@ window.WTP_READINGS = {
     "q": "Who could usually vote in the 1780s?",
     "c": [
      "White men who owned property",
-     "All adults who were born in America",
-     "Every man over the age of 21",
+     "Adults who were born in America",
+     "Men who could read and write",
      "Married women who owned land"
     ],
     "why": "Property and being a white man were usually required.",
@@ -205,7 +205,7 @@ window.WTP_READINGS = {
     "c": [
      "The Senate, with two members per state",
      "The House, with seats based on population",
-     "Both, with ten members from every state",
+     "Both, with ten members from each state",
      "Neither, because seats depend on wealth"
     ],
     "why": "Every state gets two senators, big or small.",
@@ -241,7 +241,7 @@ window.WTP_READINGS = {
     "q": "Why did most delegates agree to these deals?",
     "c": [
      "They wanted the new government more than a fight over slavery",
-     "Most delegates wanted slavery to spread into all the new states",
+     "Most delegates wanted slavery to spread into the new states",
      "The Constitution said slavery would have to end by the year 1808",
      "The Northern states had already ended slavery everywhere"
     ],
@@ -340,7 +340,7 @@ window.WTP_READINGS = {
      "The Constitution didn't clearly give that power",
      "He wanted each state to print its own paper money",
      "He thought Britain should run America's bank",
-     "He believed all banks should be against the law"
+     "He wanted the bank built in Virginia instead"
     ],
     "why": "Jefferson read the Constitution strictly, and it never mentions banks.",
     "hint": "Read the paragraph about the bank."
@@ -386,8 +386,8 @@ window.WTP_READINGS = {
     "c": [
      "Poll taxes and literacy tests blocked Black voters",
      "They passed a new amendment that canceled it",
-     "They let only Union army veterans vote in elections",
-     "They held state elections only once every ten years"
+     "They counted each Black vote as three-fifths of a vote",
+     "They said voters had to finish college first"
     ],
     "why": "These rules kept Black men from voting without saying \"race.\"",
     "hint": "Look at the second list."
@@ -412,7 +412,7 @@ window.WTP_READINGS = {
     "c": [
      "States to keep the races apart if things were \"equal\"",
      "Black and white students to pick any school they wanted",
-     "Congress to end segregation in every state at once",
+     "Congress to end segregation in the Southern states",
      "Each state to decide if Black citizens could vote"
     ],
     "why": "Plessy let segregation stand as long as facilities were supposedly equal.",
@@ -447,7 +447,7 @@ window.WTP_READINGS = {
     "q": "What did the Supreme Court decide in Minor v. Happersett (1875)?",
     "c": [
      "Being a citizen didn't guarantee the right to vote",
-     "Women could now vote in every federal election",
+     "Women could now vote for President and Congress",
      "States had to let women vote in state elections",
      "Women were not full citizens of the United States"
     ],
@@ -458,9 +458,9 @@ window.WTP_READINGS = {
     "q": "How did women's suffrage spread before 1920?",
     "c": [
      "State by state, starting in the West",
-     "All at once, right after the Civil War",
-     "Only through Supreme Court rulings",
-     "Only in big Eastern cities first"
+     "Nationwide, right after the Civil War",
+     "By rulings from the Supreme Court",
+     "City by city, starting in the East"
     ],
     "why": "Wyoming, Colorado, Utah, and Idaho came first.",
     "hint": "Read the third paragraph."
@@ -484,8 +484,8 @@ window.WTP_READINGS = {
     "c": [
      "Poll taxes, literacy tests, and threats",
      "A new amendment that took the vote away",
-     "Allowing only Union army veterans to vote",
-     "Holding elections only in big cities"
+     "Counting Black votes as three-fifths",
+     "Requiring a college degree to vote"
     ],
     "why": "These tricks blocked voters without saying \"race\" out loud.",
     "hint": "Look at the 1870 bullet."
@@ -496,7 +496,7 @@ window.WTP_READINGS = {
      "Old enough to be drafted, old enough to vote",
      "Eighteen-year-olds pay the most in taxes",
      "Most 18-year-olds had already finished college",
-     "The Constitution always said 18 was the age"
+     "The Constitution first set the age at 18"
     ],
     "why": "Young men were being drafted to fight in Vietnam but couldn't vote.",
     "hint": "Look at the 1971 bullet."
@@ -530,7 +530,7 @@ window.WTP_READINGS = {
     "q": "Why did the 26th Amendment pass so fast?",
     "c": [
      "Two different voting ages would have been a mess",
-     "The President ordered every state to pass it quickly",
+     "The President ordered the states to pass it quickly",
      "The Supreme Court wrote the amendment itself",
      "Most states had already lowered the age to 16"
     ],
@@ -555,7 +555,7 @@ window.WTP_READINGS = {
     "q": "Why did the Court side with the students?",
     "c": [
      "The armbands were quiet and didn't disrupt school",
-     "The school had no rule against armbands at all",
+     "The school had no rule about wearing armbands",
      "Their parents had given them permission to protest",
      "Students have unlimited speech rights at school"
     ],
@@ -568,7 +568,7 @@ window.WTP_READINGS = {
      "When it seriously disrupts school or others' rights",
      "Whenever a teacher or principal dislikes the message",
      "Whenever the speech is about war or the government",
-     "Only when a parent complains to the principal"
+     "When a parent complains to the principal"
     ],
     "why": "Disruption is the line the Court drew.",
     "hint": "Find \"But there's a limit.\""
@@ -638,7 +638,7 @@ window.WTP_READINGS = {
     "q": "In the social contract, what do people give up, and what do they get?",
     "c": [
      "Some freedom, in return for protection of their rights",
-     "All their property, in return for a safe place to live",
+     "Their property, in return for a safe place to live",
      "Their right to vote, in return for lower taxes",
      "Their natural rights, in return for a strong king"
     ],
@@ -676,7 +676,7 @@ window.WTP_READINGS = {
      "Ranking people into layers with unequal power",
      "Moving to a new country for a better life",
      "Splitting government into three equal branches",
-     "Everyone in a society having the same rights"
+     "People in a society sharing the same rights"
     ],
     "why": "Stratification is about layers of unequal power, money, and respect.",
     "hint": "Read the first sentence."

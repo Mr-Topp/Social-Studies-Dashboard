@@ -13,7 +13,7 @@ const R = [
 <p>Locke's book came out in 1690. About 85 years later, American colonists used his ideas to explain why they had the right to break away from Britain.</p>`,
  qs:[
   {q:"In a state of nature, why would nobody feel safe?",c:["Nothing protects people's rights from the strong","The government takes too much of people's property","Too many laws make everyday life confusing and slow","A king would own all the land and make every rule"],why:"With no laws or police, the strong can take whatever they want.",hint:"Reread the part about what happens when there are no laws."},
-  {q:"In the social contract, what do people give up, and what do they get?",c:["Some freedom, in return for protection of their rights","All their property, in return for a safe place to live","Their right to vote, in return for lower taxes","Their natural rights, in return for a strong king"],why:"People trade a little freedom for a government that protects their rights.",hint:"Look for the paragraph that starts \"So people make a deal.\""}],
+  {q:"In the social contract, what do people give up, and what do they get?",c:["Some freedom, in return for protection of their rights","Their property, in return for a safe place to live","Their right to vote, in return for lower taxes","Their natural rights, in return for a strong king"],why:"People trade a little freedom for a government that protects their rights.",hint:"Look for the paragraph that starts \"So people make a deal.\""}],
  stem:"People agree to have a government because"},
 
 {id:"republic", title:"Who Holds the Power?", book:"Book Lessons 2–3",
@@ -37,7 +37,7 @@ const R = [
 <p>In <b>1689</b>, Parliament passed the <b>English Bill of Rights</b>. Now the king could not tax people without Parliament's okay, keep an army in peacetime without permission, or hand out cruel punishments.</p>
 <p>The colonists brought these ideas to America. They expected the same rights.</p>`,
  qs:[
-  {q:"What big idea came from the Magna Carta?",c:["Even the king has to obey the law","The king owns all the land in England","Nobles must obey every royal order","Parliament should choose the next king"],why:"That's the rule of law: nobody, not even a king, is above it.",hint:"Look at the 1215 paragraph."},
+  {q:"What big idea came from the Magna Carta?",c:["Even the king has to obey the law","The king can tax people when he wants","Nobles should pay for the king's wars","Parliament should choose the next king"],why:"That's the rule of law: nobody, not even a king, is above it.",hint:"Look at the 1215 paragraph."},
   {q:"Under the English Bill of Rights, what could the king no longer do on his own?",c:["Tax people without Parliament agreeing","Sign peace treaties with other countries","Choose the advisers who work for him","Name new lords to sit in Parliament"],why:"The king needed Parliament's okay to tax people.",hint:"Look at the 1689 paragraph."}],
  stem:"The colonists cared about the Magna Carta and the English Bill of Rights because"},
 
@@ -53,7 +53,7 @@ const R = [
 <p>In April <b>1775</b>, fighting broke out at Lexington and Concord.</p>`,
  qs:[
   {q:"Why did Parliament start taxing the colonies after 1763?",c:["Britain was in debt from a war with France","Colonists asked for more British soldiers","Colonists stopped trading with Britain","The king wanted to pay for colonial roads"],why:"The war with France left Britain deep in debt.",hint:"Look at the 1763 sentence."},
-  {q:"What did \"no taxation without representation\" mean?",c:["Only lawmakers we elect should be able to tax us","Colonists should never have to pay any tax at all","Britain should send more settlers to America","Only the king, not Parliament, should tax us"],why:"Colonists had no representatives in Parliament, so they said it had no right to tax them.",hint:"Read the sentence right before the slogan."}],
+  {q:"What did \"no taxation without representation\" mean?",c:["Only lawmakers we elect should be able to tax us","Colonists should pay lower taxes than the British","Britain should send more settlers to America","Only the king, not Parliament, should tax us"],why:"Colonists had no representatives in Parliament, so they said it had no right to tax them.",hint:"Read the sentence right before the slogan."}],
  stem:"The colonists thought the new taxes were unfair because"},
 
 {id:"declaration", title:"The Declaration of Independence", book:"Book Lesson 7",
@@ -95,7 +95,7 @@ const R = [
 <p>It passed by just one vote. That's why Iowa has the same number of senators as California: two.</p>`,
  qs:[
   {q:"Why did small states like the New Jersey Plan?",c:["Every state would get an equal vote","Bigger states would get more votes","Seats would depend on each state's land","Small states would pay less tax"],why:"Equal votes meant big states couldn't outvote them.",hint:"Look at the New Jersey Plan bullet."},
-  {q:"Under the Great Compromise, which part of Congress gives every state the same number of members?",c:["The Senate, with two members per state","The House, with seats based on population","Both, with ten members from every state","Neither, because seats depend on wealth"],why:"Every state gets two senators, big or small.",hint:"Look at the two Great Compromise bullets."}],
+  {q:"Under the Great Compromise, which part of Congress gives every state the same number of members?",c:["The Senate, with two members per state","The House, with seats based on population","Both, with ten members from each state","Neither, because seats depend on wealth"],why:"Every state gets two senators, big or small.",hint:"Look at the two Great Compromise bullets."}],
  stem:"The Great Compromise helped both big and small states because"},
 
 {id:"slavery", title:"The Slavery Compromises", book:"Book Lesson 13", serious:true,
@@ -108,7 +108,7 @@ const R = [
 <p>The original Constitution never uses the word "slavery." Slavery did not end until the <b>13th Amendment</b> in 1865.</p>`,
  qs:[
   {q:"Why did Southern states want enslaved people counted when deciding House seats?",c:["Counting more people meant more seats and power","Enslaved people would then be allowed to vote too","It would lower the taxes their states had to pay","Northern states had demanded that they be counted"],why:"House seats are based on population, so counting enslaved people gave the South more seats.",hint:"Look at the Three-Fifths bullet."},
-  {q:"Why did most delegates agree to these deals?",c:["They wanted the new government more than a fight over slavery","Most delegates wanted slavery to spread into all the new states","The Constitution said slavery would have to end by the year 1808","The Northern states had already ended slavery everywhere"],why:"Three Southern states threatened to stay out, and most delegates chose the union over the fight.",hint:"Reread paragraph 2. (1808 only ended the overseas trade.)"}],
+  {q:"Why did most delegates agree to these deals?",c:["They wanted the new government more than a fight over slavery","Most delegates wanted slavery to spread into the new states","The Constitution said slavery would have to end by the year 1808","The Northern states had already ended slavery everywhere"],why:"Three Southern states threatened to stay out, and most delegates chose the union over the fight.",hint:"Reread paragraph 2. (1808 only ended the overseas trade.)"}],
  stem:"The original Constitution protected slavery by"},
 
 {id:"checks", title:"Checks and Balances", book:"Book Lessons 4, 14–15",
@@ -126,7 +126,7 @@ const R = [
 <p>This makes government slow. The Founders thought slow was safer than a government that could act fast and crush people's rights.</p>`,
  qs:[
   {q:"The President vetoes a bill. What can Congress do next?",c:["Override it with two-thirds of both houses","Vote again and pass it with a simple majority","Ask the Vice President to sign it into law instead","Send it to the state legislatures to approve"],why:"A two-thirds vote in both the House and Senate overrides a veto.",hint:"Find the bullet about the President's veto."},
-  {q:"Why did the Founders accept a slow government?",c:["Slow was safer than one that could crush rights","They wanted Congress to hold almost all power","They thought the government had little to do","They wanted the President to act alone"],why:"Making each branch check the others slows things down, but it protects rights.",hint:"Read the last paragraph."}],
+  {q:"Why did the Founders accept a slow government?",c:["Slow was safer than one that could crush rights","They wanted Congress to hold most of the power","They thought the government had little to do","They wanted the President to act alone"],why:"Making each branch check the others slows things down, but it protects rights.",hint:"Read the last paragraph."}],
  stem:"Checks and balances protect people because"},
 
 {id:"ratify", title:"The Fight to Ratify", book:"Book Lessons 16–17",
@@ -151,7 +151,7 @@ const R = [
 <li><b>10th:</b> powers not given to the national government belong to the states or the people.</li></ul>
 <p><b>Iowa connection:</b> In 1969, the Supreme Court ruled in <i>Tinker v. Des Moines</i> that Des Moines students who wore black armbands to protest the Vietnam War were protected by the First Amendment.</p>`,
  qs:[
-  {q:"Which of these is one of the five First Amendment freedoms?",c:["Gathering peacefully with other people","Getting a free education in every state","Owning a business without paying taxes","Driving a car without getting a license"],why:"Gathering peacefully is called \"assembly.\"",hint:"Look at the list of five freedoms."},
+  {q:"Which of these is one of the five First Amendment freedoms?",c:["Gathering peacefully with other people","Getting a free education from the state","Owning a business without paying taxes","Driving a car without getting a license"],why:"Gathering peacefully is called \"assembly.\"",hint:"Look at the list of five freedoms."},
   {q:"Why is the 9th Amendment important?",c:["Rights not on the list are still protected","States can take away rights on the list","Congress can add new taxes at any time","The President can ignore court rulings"],why:"The list isn't the only rights people have.",hint:"Look at the 9th Amendment bullet."}],
  stem:"One First Amendment freedom that protects people is"},
 
@@ -176,8 +176,8 @@ const R = [
 <p><b>Massachusetts</b> (1780) tried something different: a stronger governor elected by the people, who could <b>veto</b> laws. Lawmakers could still override the veto with a two-thirds vote.</p>
 <p>Iowa works the same way today. Iowa's constitution (1857) sets up a <b>General Assembly</b> with two houses, a governor who can veto bills, and a two-thirds vote in each house to override. It even starts with its own <b>Bill of Rights</b>.</p>`,
  qs:[
-  {q:"Why did most early states keep their governors weak?",c:["They feared strong leaders after dealing with a king","Governors cost the states too much money to pay each year","Congress ordered every state to keep its governor weak","Voters wanted the state courts to make all of the laws"],why:"Memories of the king made them afraid of strong leaders.",hint:"Read the first paragraph."},
-  {q:"How is Iowa's government like Massachusetts' 1780 plan?",c:["The governor can veto, and lawmakers can override","The legislature holds almost all of the power","There is no governor at all, only a legislature","The state courts choose who becomes the governor"],why:"Both use a governor's veto with a two-thirds override.",hint:"Find what the Massachusetts governor could do."}],
+  {q:"Why did most early states keep their governors weak?",c:["They feared strong leaders after dealing with a king","Governors cost the states too much money to pay each year","Congress ordered the states to keep governors weak","Voters wanted the state courts to write the laws"],why:"Memories of the king made them afraid of strong leaders.",hint:"Read the first paragraph."},
+  {q:"How is Iowa's government like Massachusetts' 1780 plan?",c:["The governor can veto, and lawmakers can override","The legislature holds the power, not the governor","The governor picks the lawmakers for each district","The state courts choose who becomes the governor"],why:"Both use a governor's veto with a two-thirds override.",hint:"Find what the Massachusetts governor could do."}],
  stem:"Giving almost all the power to one branch is risky because"}
 ];
 
@@ -191,8 +191,8 @@ const R2 = [
 <p>Their first big fight: Hamilton wanted a national bank. The Constitution never mentions banks. Hamilton said the "necessary and proper" clause allowed it. Jefferson said it didn't. Washington sided with Hamilton.</p>
 <p><b>Heads up:</b> Jefferson's party later became today's <b>Democratic Party</b>. Today's <b>Republican Party</b> is a different party that started in 1854.</p>`,
  qs:[
-  {q:"Why did Jefferson oppose the national bank?",c:["The Constitution didn't clearly give that power","He wanted each state to print its own paper money","He thought Britain should run America's bank","He believed all banks should be against the law"],why:"Jefferson read the Constitution strictly, and it never mentions banks.",hint:"Read the paragraph about the bank."},
-  {q:"Today, Congress wants to pay for something the Constitution never mentions, like a space program. Whose way of reading the Constitution says that is allowed?",c:["Hamilton, because he read the Constitution loosely","Jefferson, because he read the Constitution strictly","Jefferson, because he wanted power kept in the states","Neither, because Washington banned all national banks"],why:"Reading the Constitution loosely means Congress can do things it doesn't list, if they're needed.",hint:"Find the words \"loosely\" and \"strictly.\""}],
+  {q:"Why did Jefferson oppose the national bank?",c:["The Constitution didn't clearly give that power","He wanted each state to print its own paper money","He thought Britain should run America's bank","He wanted the bank built in Virginia instead"],why:"Jefferson read the Constitution strictly, and it never mentions banks.",hint:"Read the paragraph about the bank."},
+  {q:"Today, Congress wants to pay for something the Constitution never mentions, like a space program. Whose way of reading the Constitution says that is allowed?",c:["Hamilton, because he read the Constitution loosely","Jefferson, because he read the Constitution strictly","Jefferson, because he wanted power kept in the states","Neither, because Washington closed the national bank"],why:"Reading the Constitution loosely means Congress can do things it doesn't list, if they're needed.",hint:"Find the words \"loosely\" and \"strictly.\""}],
  stem:"Washington and Madison worried about parties because"},
 
 {id:"voting", title:"Who Gets to Vote?", book:"Book Lesson 25",
@@ -206,8 +206,8 @@ const R2 = [
 <li><b>1964–1965:</b> the <b>24th Amendment</b> bans poll taxes in federal elections, and the <b>Voting Rights Act</b> (1965) starts ending literacy tests. By 1970 they were banned everywhere.</li>
 <li><b>1971, 26th Amendment:</b> voting age lowered to <b>18</b>. During the Vietnam War, people argued: old enough to be drafted (forced to join the military), old enough to vote.</li></ul>`,
  qs:[
-  {q:"How did many Southern states keep Black men from voting after the 15th Amendment?",c:["Poll taxes, literacy tests, and threats","A new amendment that took the vote away","Allowing only Union army veterans to vote","Holding elections only in big cities"],why:"These tricks blocked voters without saying \"race\" out loud.",hint:"Look at the 1870 bullet."},
-  {q:"What argument helped lower the voting age to 18?",c:["Old enough to be drafted, old enough to vote","Eighteen-year-olds pay the most in taxes","Most 18-year-olds had already finished college","The Constitution always said 18 was the age"],why:"Young men were being drafted to fight in Vietnam but couldn't vote.",hint:"Look at the 1971 bullet."}],
+  {q:"How did many Southern states keep Black men from voting after the 15th Amendment?",c:["Poll taxes, literacy tests, and threats","A new amendment that took the vote away","Counting Black votes as three-fifths","Requiring a college degree to vote"],why:"These tricks blocked voters without saying \"race\" out loud.",hint:"Look at the 1870 bullet."},
+  {q:"What argument helped lower the voting age to 18?",c:["Old enough to be drafted, old enough to vote","Eighteen-year-olds pay the most in taxes","Most 18-year-olds had already finished college","The Constitution first set the age at 18"],why:"Young men were being drafted to fight in Vietnam but couldn't vote.",hint:"Look at the 1971 bullet."}],
  stem:"The right to vote grew over time because"},
 
 {id:"participate", title:"How Citizens Take Part", book:"Book Lesson 28",
@@ -224,7 +224,7 @@ const R2 = [
 <p>Think of government like a mechanic you hired to fix your car. First you check that they can do the job. Then you keep an eye on them. If they do bad work, you replace them. Voting is how citizens hire and fire leaders.</p>`,
  qs:[
   {q:"Which right is only for U.S. citizens?",c:["Voting in federal elections","Freedom of speech and the press","Getting a fair trial with a lawyer","Freedom of religion and worship"],why:"Speech, religion, and fair trials protect everyone here. Voting in federal elections is citizens only.",hint:"Look at the second paragraph."},
-  {q:"In the mechanic example, what is voting like?",c:["Hiring the mechanic, or firing them for bad work","Paying the mechanic once the work is done","Fixing the car yourself so you never need help","Selling the old car and buying a brand-new one"],why:"Voting is how citizens choose leaders and replace them.",hint:"Read the last paragraph."}],
+  {q:"In the mechanic example, what is voting like?",c:["Hiring the mechanic, or firing them for bad work","Paying the mechanic once the work is done","Fixing the car yourself to save some money","Selling the old car and buying a brand-new one"],why:"Voting is how citizens choose leaders and replace them.",hint:"Read the last paragraph."}],
  stem:"One way I could take part in government is"},
 
 {id:"responsibility", title:"Rights Come With Responsibilities", book:"Book Lesson 29",
@@ -282,7 +282,7 @@ const R3 = [
 <p>The number 9 isn't in the Constitution. Congress set it, and it has been 9 since 1869.</p>`,
  qs:[
   {q:"You lose your case in a federal district court. What can you do next?",c:["Appeal and ask a higher court to review it","Ask Congress to vote to change the ruling","Start the same case over in the same court","Ask your state's governor to overturn the ruling"],why:"An appeal sends the case up to a higher court.",hint:"Read the second paragraph."},
-  {q:"Why do federal judges serve for life?",c:["So they can make unpopular rulings and not lose their jobs","So one President can't appoint too many judges to the Court","Because the Constitution says there must always be exactly nine","So the President can fire them if they ever rule against him"],why:"Job security lets judges follow the law, not popularity.",hint:"Read the paragraph about how judges are chosen."}],
+  {q:"Why do federal judges serve for life?",c:["So they can make unpopular rulings and not lose their jobs","So one President can't appoint too many judges to the Court","Because the Constitution sets the number of judges at nine","So the President can fire them if they ever rule against him"],why:"Job security lets judges follow the law, not popularity.",hint:"Read the paragraph about how judges are chosen."}],
  stem:"Being able to appeal a case is important because"},
 
 {id:"tinker", title:"Tinker v. Des Moines", book:"Book Lesson 23",
@@ -293,8 +293,8 @@ const R3 = [
 <p>But there's a limit. Schools <b>can</b> stop speech that seriously <b>disrupts</b> school or invades other people's rights. The armbands were quiet and caused no real disruption.</p>
 <p>Later cases drew more lines. In 2007, the Court let a school punish a student's "Bong Hits 4 Jesus" banner. In 2021, it sided with a cheerleader punished for an off-campus Snapchat post.</p>`,
  qs:[
-  {q:"Why did the Court side with the students?",c:["The armbands were quiet and didn't disrupt school","The school had no rule against armbands at all","Their parents had given them permission to protest","Students have unlimited speech rights at school"],why:"No real disruption meant the school couldn't punish their message.",hint:"Find \"The armbands were quiet.\""},
-  {q:"Based on Tinker, when CAN a school limit student speech?",c:["When it seriously disrupts school or others' rights","Whenever a teacher or principal dislikes the message","Whenever the speech is about war or the government","Only when a parent complains to the principal"],why:"Disruption is the line the Court drew.",hint:"Find \"But there's a limit.\""}],
+  {q:"Why did the Court side with the students?",c:["The armbands were quiet and didn't disrupt school","The school had no rule about wearing armbands","Their parents had given them permission to protest","Students have unlimited speech rights at school"],why:"No real disruption meant the school couldn't punish their message.",hint:"Find \"The armbands were quiet.\""},
+  {q:"Based on Tinker, when CAN a school limit student speech?",c:["When it seriously disrupts school or others' rights","Whenever a teacher or principal dislikes the message","Whenever the speech is about war or the government","When a parent complains to the principal"],why:"Disruption is the line the Court drew.",hint:"Find \"But there's a limit.\""}],
  stem:"Tinker v. Des Moines matters to students today because"},
 
 {id:"equal", title:"Separate Is Not Equal", book:"Book Lesson 26", serious:true,
@@ -305,7 +305,7 @@ const R3 = [
 <p>Many states fought back. In 1957, Arkansas's governor tried to stop nine Black students from entering Little Rock Central High. President Eisenhower sent the Army.</p>
 <p><b>Iowa connection:</b> In 1868, the Iowa Supreme Court ruled in <i>Clark v. Board</i> that Iowa schools could not separate students by race, 86 years before Brown.</p>`,
  qs:[
-  {q:"What did \"separate but equal\" allow?",c:["States to keep the races apart if things were \"equal\"","Black and white students to pick any school they wanted","Congress to end segregation in every state at once","Each state to decide if Black citizens could vote"],why:"Plessy let segregation stand as long as facilities were supposedly equal.",hint:"Read the Plessy paragraph."},
+  {q:"What did \"separate but equal\" allow?",c:["States to keep the races apart if things were \"equal\"","Black and white students to pick any school they wanted","Congress to end segregation in the Southern states","Each state to decide if Black citizens could vote"],why:"Plessy let segregation stand as long as facilities were supposedly equal.",hint:"Read the Plessy paragraph."},
   {q:"How was Brown v. Board different from Plessy?",c:["It said separate schools could never be truly equal","It said segregation was fine on trains and buses only","It let each school vote on whether to segregate","It agreed with Plessy but sped up the changes"],why:"Brown overturned the idea of \"separate but equal\" in schools.",hint:"Read the Brown paragraph."}],
  stem:"Brown v. Board was a turning point because"},
 
@@ -321,7 +321,7 @@ const R3 = [
 <p>In <i>In re Gault</i> (1967), the Supreme Court ruled 8 to 1 for Gerald. Teens in juvenile court get due process too: notice of the charges, a <b>lawyer</b>, the right to question witnesses, and the right to stay silent.</p>`,
  qs:[
   {q:"Which unfair step happened in Gerald's case?",c:["The neighbor who complained never came to court","He was forced to take a lawyer he didn't even want","A jury of adults from his own town found him guilty","His hearing was shown live on the town's TV news"],why:"He never got to face or question his accuser.",hint:"Look at the bullet list."},
-  {q:"What did In re Gault decide?",c:["Teens in juvenile court get due process rights too","Juvenile courts must use a jury of teenagers","Juveniles must always be tried in adult court","Only adults have a right to a lawyer in court"],why:"The Court said juveniles get fair-process rights like a lawyer and notice.",hint:"Read the last paragraph."}],
+  {q:"What did In re Gault decide?",c:["Teens in juvenile court get due process rights too","Juvenile courts should use a jury of teenagers","Teens accused of crimes go to adult court","Adults, but not teens, have a right to a lawyer"],why:"The Court said juveniles get fair-process rights like a lawyer and notice.",hint:"Read the last paragraph."}],
  stem:"Due process is important because"}
 ];
 
@@ -351,7 +351,7 @@ const RL = [
 <p>The Founders hoped voters would choose leaders with <b>civic virtue</b>: people who put the common good ahead of narrow interests. But people often disagree about what the common good actually is.</p>`,
  qs:[
   {q:"In this story, who would the tariff help?",c:["Workers at the shoe factories in the district","Families in the district who want cheaper shoes","Shoe factories in other countries with low wages","Stores that sell shoes made in other countries"],why:"The tariff makes foreign shoes cost more, so local factories can compete.",hint:"Look at \"If it passes.\""},
-  {q:"In this story, who would the tariff hurt?",c:["Shoppers, because shoes would cost more","Workers, because they'd lose their pay","The government, because it loses tax money","Nobody, because prices would stay the same"],why:"Everyone buying shoes would pay higher prices.",hint:"Look at \"But.\""}],
+  {q:"In this story, who would the tariff hurt?",c:["Shoppers, because shoes would cost more","Workers, because they'd lose their pay","The government, because it loses tax money","U.S. shoe makers, because they'd sell less"],why:"Everyone buying shoes would pay higher prices.",hint:"Look at \"But.\""}],
  stem:"A representative's choice on a bill like this is hard because"}
 ];
 
@@ -366,8 +366,8 @@ const RE = [
 <p>If a President is accused of serious wrongdoing, the <b>House</b> can <b>impeach</b> (formally accuse), and the <b>Senate</b> holds a trial. Two-thirds of senators are needed to remove a President. Three Presidents have been impeached: Andrew Johnson, Bill Clinton, and Donald Trump (twice). None was removed.</p>
 <p>Presidents are chosen by the <b>Electoral College</b>. Each state gets electors equal to its members of Congress. Iowa has 6. It takes <b>270</b> of 538 to win.</p>`,
  qs:[
-  {q:"The President signs a treaty with another country. What else has to happen?",c:["Two-thirds of the Senate must approve it","The House must vote to approve it first","The Supreme Court must approve it too","Every state governor must agree to it"],why:"Treaties need Senate approval.",hint:"Look at the treaties bullet."},
-  {q:"What does it mean when the House impeaches a President?",c:["It formally accuses the President of wrongdoing","The President is removed from office at once","The President loses the power to veto bills","Voters must hold a brand-new election right away"],why:"Impeaching is accusing. Removal takes a Senate trial and a two-thirds vote.",hint:"Read the impeachment paragraph."}],
+  {q:"The President signs a treaty with another country. What else has to happen?",c:["Two-thirds of the Senate must approve it","The House must vote to approve it first","The Supreme Court must approve it too","The state governors must agree to it"],why:"Treaties need Senate approval.",hint:"Look at the treaties bullet."},
+  {q:"What does it mean when the House impeaches a President?",c:["It formally accuses the President of wrongdoing","The President is removed from office at once","The President loses the power to veto bills","Voters hold a brand-new election within weeks"],why:"Impeaching is accusing. Removal takes a Senate trial and a two-thirds vote.",hint:"Read the impeachment paragraph."}],
  stem:"The Framers shared the President's powers with Congress because"},
 
 {id:"washington", title:"Washington Sets the Example", book:"Book Lesson 19",

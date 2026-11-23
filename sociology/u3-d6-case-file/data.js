@@ -24,7 +24,7 @@ window.CF = {
           choices: ["Anticipatory socialization", "Resocialization", "Primary socialization", "Hidden curriculum"], answer: 0,
           hint: "{P} was getting ready for a role they didn't have yet.", why: "Anticipatory socialization: practicing the ways of a role before you get it." },
         { id: "c2", q: "Say {P} retires someday and has to learn a whole new daily routine and make new friends. What would that show?",
-          choices: ["Socialization keeps going your whole life", "Socialization ends when school ends", "Only family can socialize a person", "Older adults can't learn new norms"], answer: 0,
+          choices: ["Socialization keeps going your whole life", "Socialization ends when school ends", "New friends replace the family's lessons", "Older adults can't learn new norms"], answer: 0,
           hint: "Would {P} still be learning new ways to act?", why: "Socialization happens across the whole life course, not just in childhood." }
       ],
       fields: [

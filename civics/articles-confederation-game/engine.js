@@ -54,7 +54,7 @@ const ROUNDS = [
    reveal: 'Weakness #2: <b>No power over trade between states.</b> Each state made its own rules.',
    realHappened: 'In 1786, a meeting about trade was held in Annapolis, Maryland. Only five states sent delegates. They called for a bigger meeting in Philadelphia in May 1787.',
    checks: [
-     { q: 'Use the Articles rule on the left. Under the Articles, who made the rules for trade between states?', a: 'Each state made its own rules', w: ['Congress made one rule for all', 'A national trade court decided', 'The President signed trade deals'], why: 'States kept their independence, and Congress had no power over trade between them.' },
+     { q: 'Use the Articles rule on the left. Under the Articles, who made the rules for trade between states?', a: 'Each state made its own rules', w: ['Congress set the trade rules', 'A national trade court decided', 'The President signed trade deals'], why: 'States kept their independence, and Congress had no power over trade between them.' },
      { q: 'Read Hamilton’s quote on the left. What could New York do to people in neighboring states?', a: 'Tax goods that its neighbors bought', w: ['Send its troops across their borders', 'Block their delegates in Congress', 'Print money they had to accept'], why: 'New York’s import duties were paid by buyers in New Jersey and Connecticut.' }
    ] },
 
@@ -79,7 +79,7 @@ const ROUNDS = [
    realHappened: 'The captured sailors were held for about 10 years. Many died. The U.S. did not create a new navy until 1794.',
    checks: [
      { q: 'Use the Articles rule on the left. Under the Articles, how did Congress get soldiers or sailors?', a: 'It asked each state to send its share', w: ['It drafted people right into service', 'It hired them with national tax money', 'The President ordered them to serve'], why: 'Article IX: Congress set the number, then made requisitions (requests) from each state.' },
-     { q: 'Use the real problem on the left. Why was there no national navy to rescue the sailors?', a: 'The U.S. had sold its last navy warship', w: ['The navy was busy fighting Britain', 'Congress sent the navy to Spain', 'The navy was only guarding the Great Lakes'], why: 'The card says the U.S. sold its last navy warship in 1785.' }
+     { q: 'Use the real problem on the left. Why was there no national navy to rescue the sailors?', a: 'The U.S. had sold its last navy warship', w: ['The navy was busy fighting Britain', 'Congress sent the navy to Spain', 'The navy was guarding the Great Lakes'], why: 'The card says the U.S. sold its last navy warship in 1785.' }
    ] },
 
  { id: 'amend', year: '1786', tag: 'CHANGE THE RULES', title: 'One state says no.',
@@ -127,7 +127,7 @@ const ROUNDS = [
    realHappened: 'At Springfield, the militia fired. Four rebels were killed and 20 were wounded. The scare pushed leaders to fix the government at the Philadelphia Convention in 1787.',
    checks: [
      { q: 'Use the Articles rule on the left. Why couldn’t Congress send its own army to Springfield?', a: 'It had no army of its own to send', w: ['Its army was guarding the coast', 'The President was out of the country', 'A court ordered the army to stay home'], why: 'Congress had no army and no money of its own. It could only ask the states.' },
-     { q: 'Use the real problem on the left. Who paid for the militia that stopped the rebels?', a: 'Merchants in Massachusetts', w: ['Congress, with national taxes', 'All 12 other states, together', 'Britain, as a friendly loan'], why: 'The card says Massachusetts merchants paid for the state militia.' }
+     { q: 'Use the real problem on the left. Who paid for the militia that stopped the rebels?', a: 'Merchants in Massachusetts', w: ['Congress, with national taxes', 'The 12 other states, together', 'Britain, as a friendly loan'], why: 'The card says Massachusetts merchants paid for the state militia.' }
    ] }
 ];
 
@@ -150,7 +150,7 @@ const PROBLEMS = [
 
 /* Final check (Gov.9): what did the states keep? */
 const FINAL = [
- { q: 'The Constitution gave Congress new powers. Under this new federal system, what did the states keep?', a: 'Their own governments and many powers', w: ['Nothing; Congress took all of their power', 'The power to tax other states’ goods', 'Their own navies and foreign treaties'], why: 'Federalism divides power. Congress handles national problems; states keep their own governments and many powers.' },
+ { q: 'The Constitution gave Congress new powers. Under this new federal system, what did the states keep?', a: 'Their own governments and many powers', w: ['The power to print their own money', 'The power to tax other states’ goods', 'Their own navies and foreign treaties'], why: 'Federalism divides power. Congress handles national problems; states keep their own governments and many powers.' },
  { q: 'Under the Constitution, who sets the rules for trade that crosses state lines?', a: 'Congress, for the whole country', w: ['Each state, at its own state borders', 'Whichever state is the biggest', 'A meeting of state governors'], why: 'The Commerce Clause gives Congress power over trade “among the several States.”' }
 ];
 

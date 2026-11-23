@@ -54,8 +54,8 @@
   const STEPS = [
     { id:"c1", type:"check", r:0, std:"Gov.4", kicker:"The rule", short:"Why divide power?", stamp:"CHECKS",
       scene:()=>ex("THREE BRANCHES",ln("📜","Congress makes laws")+ln("✒️","President carries out laws")+ln("🔨","Courts review laws")),
-      ask:"Why split power between branches?", options:["Each branch can check another","One branch can act alone","Courts run the whole government","The President makes every law"],
-      miss:["Checks stop one branch from taking all the power.","The game is about shared power.","Courts review laws, but do not run everything."],
+      ask:"Why split power between branches?", options:["Each branch can check another","One branch can act alone","Courts run the whole government","The President writes the laws"],
+      miss:["Checks stop one branch from taking all the power.","The game is about shared power.","Congress writes laws. The President signs them."],
       hint:"A check helps stop a power grab.", reveal:"Checks and balances let each branch limit the others." },
 
     { id:"c2", type:"check", r:0, std:"Gov.4", kicker:"Round 1 · Veto", short:"What is a veto?", stamp:"VETO",
