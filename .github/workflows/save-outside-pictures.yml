@@ -1,0 +1,37 @@
+# Downloads public-domain pictures listed in any "img/list.txt" (saved-name|address) into that same folder,
+# so pages never depend on an outside site. Only Library of Congress and National Archives addresses are allowed.
+# Runs when a list changes (or by hand). The Wikimedia bell ringer pictures have their own job.
+name: Save outside pictures
+on:
+  push:
+    paths: ["**/img/list.txt", "!shared/wtp-bell/img/list.txt"]
+  workflow_dispatch:
+permissions:
+  contents: write
+jobs:
+  fetch:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Download missing pictures
+        run: |
+          find . -path ./.git -prune -o -path ./shared/wtp-bell -prune -o -path '*/img/list.txt' -print | while read -r list; do
+            dir=$(dirname "$list")
+            grep -v '^#' "$list" | while IFS='|' read -r name url; do
+              [ -z "$name" ] && continue
+              [ -s "$dir/$name" ] && continue
+              case "$name" in */*|.*) echo "SKIPPED odd name $name"; continue;; esac
+              case "$url" in
+                https://cdn.loc.gov/*|https://tile.loc.gov/*|https://www.loc.gov/*|https://catalog.archives.gov/*|https://s3.amazonaws.com/NARAprodstorage/*) ;;
+                *) echo "SKIPPED (source not on the allowed list) $url"; continue;;
+              esac
+              curl -sSfL --max-filesize 8000000 -A "SocialStudiesDashboard/1.0 (classroom site; GitHub Actions)" -o "$dir/$name" "$url" && echo "saved $dir/$name" || { echo "FAILED $dir/$name"; rm -f "$dir/$name"; }
+              sleep 1
+            done
+          done
+      - name: Commit pictures
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898283+github-actions[bot]@users.noreply.github.com"
+          git add -A -- '*/img/*.jpg' '*/img/*.jpeg' '*/img/*.png' || true
+          git diff --cached --quiet || (git commit -m "Save outside pictures onto the site" && git pull --rebase -q && git push)

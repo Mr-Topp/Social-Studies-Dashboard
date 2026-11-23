@@ -1,0 +1,3 @@
+# Outside pictures saved onto the site so the page never depends on another website: saved-name|address.
+# A GitHub Action (.github/workflows/save-outside-pictures.yml) downloads any that are missing. Public-domain sources only.
+manhattan-1977.jpg|https://cdn.loc.gov/service/pnp/vrg/00400/00448r.jpg

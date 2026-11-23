@@ -5,6 +5,8 @@
 // Built 2026-11-02. Matched to real lesson days by topic; Fynn reviews the matches.
 // U.S. and World History daily targets (and World History World Wars Level 3 lines) were drafted in his style and approved by Fynn 11/2/26.
 // 2026-11-02: days combined in U.S. History U3, Government U3, Sociology U3, World History U2 (merged days keep both days' targets).
+// 2026-11-22 (Fynn: "you can do all that"): the other five combined days (U.S. History 6|2, World History 2|2, 2|7, 3|1,
+// Sociology 3|5) blended from six targets into three, same as Monday's. Every idea from the six is still there; Level 3 lines unchanged.
 // 2026-11-21 (Fynn): U.S. History U6 Days 2 + 3 combined and World History U3 Days 1 + 2 combined (merged days keep both days'
 // targets). U.S. History 6|3 and World History 3|7 are test days again. This replaces the 11-03 "short lesson + test" setup.
 window.CLASS_TARGETS = {
@@ -415,12 +417,9 @@ window.CLASS_TARGETS = {
   },
   "6|2": {
    "t": [
-    "I can explain what caused the Great Recession of 2008 and how it hurt families.",
-    "I can analyze how the government responded to the 2008 crisis and why people disagreed about it.",
+    "I can explain what caused the Great Recession of 2008, how it hurt families, and how the government responded.",
     "I can explain how the Disability Rights Movement won the ADA using tactics from earlier civil rights protests.",
-    "I can explain how trade with other countries and new technology changed American jobs.",
-    "I can analyze who gained and who lost jobs as factories moved overseas or added machines and computers.",
-    "I can explain how different Americans and leaders have responded to these changes in jobs."
+    "I can analyze how trade and new technology changed American jobs, who gained and who lost, and how Americans responded."
    ],
    "g3": "I can analyze how the government has responded to domestic challenges."
   },
@@ -700,12 +699,9 @@ window.CLASS_TARGETS = {
   },
   "2|2": {
    "t": [
-    "I can explain how communist governments used spying, secret police, and propaganda to control people.",
-    "I can analyze how being watched by the government changed the way people acted and spoke.",
+    "I can explain how communist governments used spying, secret police, and propaganda to control people, and how being watched changed the way people acted.",
     "I can explain how methods of control in communist countries were different from those in democracies.",
-    "I can explain how Mao Zedong tried to remake China after the Communists took power in 1949.",
-    "I can analyze how the Great Leap Forward and the Cultural Revolution affected ordinary families in China.",
-    "I can explain how Mao's policies led to a famine that killed millions of Chinese people."
+    "I can analyze how Mao's Great Leap Forward and Cultural Revolution affected ordinary families in China and led to a famine that killed millions."
    ],
    "g3": "I can analyze forms of government during the Cold War."
   },
@@ -743,12 +739,9 @@ window.CLASS_TARGETS = {
   },
   "2|7": {
    "t": [
-    "I can explain what the Khmer Rouge did to the people of Cambodia from 1975 to 1979.",
-    "I can analyze how the Khmer Rouge used fear, forced labor, and violence to control Cambodians.",
+    "I can explain how the Khmer Rouge used fear, forced labor, and violence against the people of Cambodia from 1975 to 1979.",
     "I can explain why the world promised \"never again\" after the Holocaust and how that promise failed in Cambodia.",
-    "I can explain what apartheid was and how it separated people by race in South Africa.",
-    "I can analyze how the apartheid government used laws and violence to control Black South Africans.",
-    "I can explain how protests, boycotts, and pressure from other countries helped bring apartheid to an end."
+    "I can explain what apartheid was, how South Africa's government enforced it, and how protests, boycotts, and outside pressure helped end it."
    ],
    "g3": "I can analyze impacts of mass atrocities. I can analyze how groups pursued goals during the Cold War."
   },
@@ -766,12 +759,9 @@ window.CLASS_TARGETS = {
   },
   "3|1": {
    "t": [
-    "I can explain what globalization is and how it connects countries through trade.",
+    "I can explain what globalization is and how it connects my daily life to people and workers around the world.",
     "I can analyze how the things I buy are made with parts, materials, and workers from many countries.",
-    "I can explain how globalization since the 1990s connects my daily life to people around the world.",
-    "I can identify groups that have gained and groups that have lost because of globalization.",
-    "I can analyze how globalization has affected jobs, pay, and workers in different countries.",
-    "I can explain why some people and countries support globalization while others push back against it."
+    "I can analyze who has gained and who has lost from globalization, and why some people support it while others push back."
    ],
    "g3": "I can analyze the effects of globalization."
   },
@@ -1029,12 +1019,9 @@ window.CLASS_TARGETS = {
   },
   "3|5": {
    "t": [
-    "I can identify different types of social groups.",
-    "I can analyze the differences between primary and secondary groups.",
-    "I can explain how groups influence behavior and identity.",
+    "I can identify different types of social groups and analyze the differences between primary and secondary groups.",
     "I can explain the concepts of in-groups, out-groups, and reference groups.",
-    "I can analyze how group membership shapes behavior and attitudes.",
-    "I can identify how groups can influence inclusion, exclusion, and identity."
+    "I can analyze how group membership shapes behavior, attitudes, and identity, including who gets included and excluded."
    ],
    "g3": "I can analyze how different groups influence individuals and behavior."
   },
