@@ -47,7 +47,7 @@ window.VIDEO_CHANNELS = (function () {
   "PBS LearningMedia": "SMCkdSU2kXc WNnu2cj3-pU",
   "School of Life": "ICppFQ6Tabw OhVamhT4Q3s aGedUxTAfBk z9W0GQvONKc",
   "Scripps News": "bhkpX9ZYBO4",
-  "Simple History": "xWRhPf9Qzmw JIIh00ETbxA QAT1KA3Xjbs crALHjTiXbk ezuFR5OwHU8",
+  "Simple History": "xWRhPf9Qzmw QAT1KA3Xjbs crALHjTiXbk ezuFR5OwHU8",
   "Smithsonian Air and Space": "DNV8enpVwok iAEshwQmMvU",
   "Smithsonian Channel": "M5z4I3aIn7E q_0tD7-FTEI uWMkJ8IOHBU",
   "Sprouts": "XHIhkM1cAv4 vuMt8b4UrcI",
