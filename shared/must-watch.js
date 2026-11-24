@@ -110,7 +110,7 @@ window.CLASS_MUST_WATCH = {
     "1|10": [["RIIN0Ug8wg8","America the Story of Us: D-Day Invasion"],["hKIsvh59Bj4","WWII in HD: Victory in Europe (VE Day)"]],
     "1|11": [["RsA6AdCRI-k","What Happened at the Nuremberg Trials?"],["FnQESSTouNU","The United Nations Is Created"]],
     "2|1": [["gxVsVA72wRU","How Did the Cold War Happen?"],["Jb8aW46T3bg","Here's How the Truman Doctrine Established the Cold War"]],
-    "2|2": [["s-FbhEUdpGY","Inside North Korea: Life Under the World's Most Isolated Regime"],["e9H8pxLe74I","How the Great Leap Forward caused the Great Chinese Famine"]],
+    "2|2": [["s-FbhEUdpGY","Inside North Korea: Life Under the World's Most Isolated Regime"],["xWRhPf9Qzmw","The Great Leap Forward (1958-62)"]],
     "2|3": [["h1wFrXKanC0","The Korean War: 5 Things to Know"],["bwWW3sbk4EU","The history of the Cuban Missile Crisis"]],
     "2|4": [["DrcCTgwbsjc","Why was India split into two countries?"],["rJBGjtOlAYw","Sound Smart: Mahatma Gandhi"]],
     "2|5": [["xf5CPacHt4Q","Real Footage: \"Ghana Is Free Forever!\" Independence Night, 1957"],["tuQmpflB0Qk","The Cold War & Decolonization"]],   // same video, now under the name on the slide and dashboard (Fynn, 11-22)
