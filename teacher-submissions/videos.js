@@ -162,7 +162,6 @@ Object.assign(window.CLASS_ASSIGNMENTS, {
   "soc-u3-d5-video-aGedUxTAfBk": { course: "sociology", unit: 3, day: 5, turnIn: false, video: true, std: [], title: "Day 5 · The Purpose of Friendship", path: "https://www.youtube.com/watch?v=aGedUxTAfBk" },
   "soc-u2-d1-video-TCs_hyI15R8": { course: "sociology", unit: 2, day: 1, turnIn: false, video: true, std: [], title: "Day 1 · Politics: Crash Course Sociology", path: "https://www.youtube.com/watch?v=TCs_hyI15R8" },
   "soc-u2-d1-video-L72h7bk6HZs": { course: "sociology", unit: 2, day: 1, turnIn: false, video: true, std: [], title: "Day 1 · Social institutions - government, economy, health and medicine", path: "https://www.youtube.com/watch?v=L72h7bk6HZs" },
-  "wh-u2-d2-video-s-FbhEUdpGY": { course: "world-history", unit: 2, day: 2, turnIn: false, video: true, std: [], title: "Day 2 · Inside North Korea: Life Under the World's Most Isolated Regime", path: "https://www.youtube.com/watch?v=s-FbhEUdpGY" },
   "wh-u2-d2-video-g_aUFlIAtcM": { course: "world-history", unit: 2, day: 2, turnIn: false, video: true, std: [], title: "Day 2 · Prison Chronicles: Deadly Conditions of the Soviet Gulag", path: "https://www.youtube.com/watch?v=g_aUFlIAtcM" },  // added 2026-11-24 (Gulag slide)
   "wh-u2-d2-video-N35IugBYH04": { course: "world-history", unit: 2, day: 2, turnIn: false, video: true, std: [], title: "Day 2 · TED-Ed: What is McCarthyism? And how did it happen? - Ellen Schrecker", path: "https://www.youtube.com/watch?v=N35IugBYH04" },  // TED-Ed/HISTORY match added 2026-11-16
 

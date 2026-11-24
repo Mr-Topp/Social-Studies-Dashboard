@@ -28,7 +28,6 @@ window.VIDEO_CHANNELS = (function () {
   "Imperial War Museums": "_tcUogFo9yE",
   "Infographics Show": "gxVsVA72wRU jA9neyKI62k",
   "Iowa History": "lw7eDkAL0lo",
-  "OER Project": "pk-vWCV0HeU",
   "Iowa PBS": "Cmv6KMsi36g SepPz7ODnKg gN6xojGcH0Y vVNUlOUlMeo",
   "IU Center on Rep. Government": "G7O9ZpJ-aiU S4ymux9l-Qo u5jKL6hFNdk",
   "Ken Burns": "-p9GGIJdWXc",
@@ -65,7 +64,7 @@ window.VIDEO_CHANNELS = (function () {
   "Wisecrack": "ttu8va9_x1g",
   "WWI Museum": "6UmERSpTtJc FGuAIzgkOUk GyEqUvij4Bo QvsJlWm6zsY UqZOQK731hQ YIiPRfjIzdE qU9zOLIPjdI s_CKhzqamEo ybrhBWrJrkI",
   "Weather Channel": "-J_RbFkv82o",
-  "": "-Y3tZpAdWTc -gYl3nfChEM 09fNp4hVnHA 0FDfhPMA95I 2K-zTQRdGCU 2QxVwafUFgY 2yKP_IRAKaQ 35cs2mf9Ie4 3Efq-aNBkvc 3QGy2SbXTNE 5dDFpHMYkI8 5lZ2AjV307U 6x0l_vkjozc 8thC4hOn_C8 9diZJks95Ko 9hodYUDDfsY ADPpVYZm-eM BOOPDY_jMC8 CNv5GfwY6qs DESE8x3p8Z0 DthAMxn8zp0 EoyUSYymLxo FITyIpePEsQ Faf6ISLbPQ8 GOjBbkGiwq0 H1hSOdu2Qeg InMeuBdncQg JG2i_0vPkoo JYXF08ZS66w Kzd6Ew3TraA MjY5Zkt51wY No149Vn4HhI OIQ7leKjS3w OiqTffD5U2I Otbml6WIQPo PoV7GGN-u7Q QpVnXUCGZVc RSLbmtqlLLk R_s0heq7olw RlFuGdWT17c Rnwkmx1kl7Q Sn32cWUT83E TYIh4MkcfJA UAZXFELMd2w UVAaVEoxqmg UdNYqBP_5q4 VV6yOTg04zc WDu5nc_uEPo XA7oQXrPaOA XmtSbVNnuyQ XyN77GuzyAw aLFeBfxzurc bgS0GPQhzHg dqTTojTija8 e9H8pxLe74I eNQAvDD6tWI fkfwrXgfRr4 ghF-OB9XMvE gsgZOjCS8Ao hy0I_1A9R_A i3rVzhWIqSU j3jUzK3p3Qo kGn_EoHiOvc kJOU9YYMzpw kMJm04hoGg8 kPfzwLbzVYs l3sfzIDrfUY mhK40bkBzsc nEkm96eHpoQ nuuFfECMt0E o4XX90lqT6E oxEn63IJPqM pD9mk0Y_pyo pG-aVDBScUw pHSttXOpvYg pHVksFyfBks qL9kqmn-dUA r7RrB8WOam4 r7isb4Cu6Xc rHBWwSyIbig s-FbhEUdpGY tLJKVVtiR3g tuQmpflB0Qk tyKhRAU35nA uM5TQ4f7ycw vIJMdGQrvzg wmhP5DYhpRw xTDVz4y6f5Q xf5CPacHt4Q yrHNig2aIjQ",
+  "": "-Y3tZpAdWTc -gYl3nfChEM 09fNp4hVnHA 0FDfhPMA95I 2K-zTQRdGCU 2QxVwafUFgY 2yKP_IRAKaQ 35cs2mf9Ie4 3Efq-aNBkvc 3QGy2SbXTNE 5dDFpHMYkI8 5lZ2AjV307U 6x0l_vkjozc 8thC4hOn_C8 9diZJks95Ko 9hodYUDDfsY ADPpVYZm-eM BOOPDY_jMC8 CNv5GfwY6qs DESE8x3p8Z0 DthAMxn8zp0 EoyUSYymLxo FITyIpePEsQ Faf6ISLbPQ8 GOjBbkGiwq0 H1hSOdu2Qeg InMeuBdncQg JG2i_0vPkoo JYXF08ZS66w Kzd6Ew3TraA MjY5Zkt51wY No149Vn4HhI OIQ7leKjS3w OiqTffD5U2I Otbml6WIQPo PoV7GGN-u7Q QpVnXUCGZVc RSLbmtqlLLk R_s0heq7olw RlFuGdWT17c Rnwkmx1kl7Q Sn32cWUT83E TYIh4MkcfJA UAZXFELMd2w UVAaVEoxqmg UdNYqBP_5q4 VV6yOTg04zc WDu5nc_uEPo XA7oQXrPaOA XmtSbVNnuyQ XyN77GuzyAw aLFeBfxzurc bgS0GPQhzHg dqTTojTija8 e9H8pxLe74I eNQAvDD6tWI fkfwrXgfRr4 ghF-OB9XMvE gsgZOjCS8Ao hy0I_1A9R_A i3rVzhWIqSU j3jUzK3p3Qo kGn_EoHiOvc kJOU9YYMzpw kMJm04hoGg8 kPfzwLbzVYs l3sfzIDrfUY mhK40bkBzsc nEkm96eHpoQ nuuFfECMt0E o4XX90lqT6E oxEn63IJPqM pD9mk0Y_pyo pG-aVDBScUw pHSttXOpvYg pHVksFyfBks qL9kqmn-dUA r7RrB8WOam4 r7isb4Cu6Xc rHBWwSyIbig tLJKVVtiR3g tuQmpflB0Qk tyKhRAU35nA uM5TQ4f7ycw vIJMdGQrvzg wmhP5DYhpRw xTDVz4y6f5Q xf5CPacHt4Q yrHNig2aIjQ",
   };
   const out = {};
   Object.keys(BY_LABEL).forEach(label => BY_LABEL[label].split(" ").filter(Boolean).forEach(id => { out[id] = label; }));
