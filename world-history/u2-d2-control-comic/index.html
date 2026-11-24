@@ -32,7 +32,7 @@ body.reading-now .choices{opacity:.45;pointer-events:none}
 <header class="gr-head" data-years="1961"><div class="gr-wrap">
 <div class="kicker">World History · Unit 2 Day 2 · Control</div>
 <h1>The Knock at the Door</h1>
-<p class="hook"><span class="dime">1961</span>Catholic schools across America handed out this comic, with a letter from the head of the FBI. It shows how Stalin controlled the Soviet Union. Read it, fact-check it, then compare it to Mao's China. 6 pages · 7 checks · 3 short answers. <b>About 25 minutes.</b></p>
+<p class="hook"><span class="dime">1961</span>Catholic schools across America handed out this comic, with a letter from the head of the FBI. It shows how Stalin controlled the Soviet Union. Read it, fact-check it, then compare it to Mao's China. 6 pages · 10 checks · no writing. <b>About 25 minutes.</b></p>
 <p class="goal"><b>Today's goal:</b> Explain how communist governments used secret police, fear, and propaganda to control people, and compare Stalin's Soviet Union to Mao's China.</p>
 <details class="std-details"><summary>Iowa standards for today</summary>
 <p><b>Standard SS.9-12.WH.35</b> — Compare and contrast the methods of control used by various forms of government during the Cold War.</p>
@@ -44,7 +44,7 @@ body.reading-now .choices{opacity:.45;pointer-events:none}
 <nav class="route" aria-label="Your progress"><ol id="flipRoute"></ol></nav>
 <main class="gr-main gr-wrap">
 <section class="card">
-<p class="intro-line"><b>How it works:</b> read the comic pages → answer the question about today's big idea → see what the comic got right and wrong → write 1–2 sentences or answer a second check. Done = all parts green, then turn in at the bottom.</p>
+<p class="intro-line"><b>How it works:</b> read the comic pages → answer the question about today's big idea → see what the comic got right and wrong → answer a second check. Done = all parts green, then turn in at the bottom.</p>
 <p class="content-note"><span><strong>Content note:</strong> This is a real 1961 American comic made to warn kids about communism. It is one-sided on purpose. It shows prison camps and people being arrested.</span></p>
 <details class="wordhelp"><summary>Word help (tap to open)</summary>
 <ul class="words" aria-label="Word help">
@@ -92,7 +92,7 @@ alts:[
 assignmentId:"wh-u2-d2-control-comic",api:"https://fynn-class-assignment-submissions-20261024.neotboy.chatgpt.site/api/submit",
 lockedText:"This box opens when you get the check right.",
 clearConfirm:"Start over? This clears your checks and answers on this device.",
-successText:"Turned in! Your teacher got your 7 checks and 3 answers. You are done.",
+successText:"Turned in! Your teacher got your 10 checks. You are done.",
 wrongText:(c,left)=>left>0?"Not quite. "+c.hint+" Try again in "+left+"…":"Not quite. "+c.hint+" The choices were mixed up. Try again.",
 parts:[
 {
@@ -146,35 +146,17 @@ parts:[
 "why": "✓ Correct. Families feared a knock at night. Since anyone might report you, people kept quiet.",
 "hint": "Read the panel where the family hears a knock, and the girl's thought bubble at the bottom."
 },
-"prompt": "Kids were pushed to report anti-communist talk, even about their parents. How would that change the way people talk at home, and why did it help Stalin keep control?",
-"stem": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">Pavlik Morozov was a hero for reporting his father.</span><span class=\"rl\">Soviet propaganda made him a hero. Historians think much of his story was made up.</span></span><b class=\"kf\">Know this</b><span class=\"line\"><b>Informers</b> secretly reported on other people, even their own family.</span></span>Write 1–2 sentences. Start like this: <i>If anyone might report me, I would ___. This helped Stalin keep control because ___.</i>",
-"stemText": "If anyone might report me, I would ___. This helped Stalin keep control because ___.",
-"placeholder": "If anyone might report me, I would ___. This helped Stalin keep control because ___.",
-"must": {
-"groups": [
-[
-"secret police",
-"police",
-"knock",
-"arrest",
-"spy",
-"spies",
-"inform",
-"pavlik",
-"morozov",
-"hero",
-"parents",
-"father",
-"prison",
-"camp",
-"jail",
-"taken away",
-"propaganda",
-"enem",
-"report"
-]
+"check2": {
+"tag": "Second check · Reader page 2 + fact file",
+"q": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">Pavlik Morozov was a hero for reporting his father.</span><span class=\"rl\">Soviet propaganda made him a hero. Historians think much of his story was made up.</span></span><b class=\"kf\">Know this</b><span class=\"line\"><b>Informers</b> secretly reported on other people, even their own family.</span></span>Kids were pushed to report anti-communist talk, even about their parents. How did that help Stalin keep control?",
+"right": "No one felt safe speaking freely, even at home",
+"wrong": [
+"Families trusted each other more than the Party",
+"Kids earned money that helped poor families eat",
+"Parents spoke out more to protect their children"
 ],
-"msg": "Use a fact from the page or the fact file (like the knock of the secret police, or Pavlik Morozov)."
+"why": "✓ Correct. If your own kid might report you, you keep quiet even at home. Fear of informers did the secret police's job for them.",
+"hint": "Read the girl's thought bubble at the bottom of reader page 2, then the \"Know this\" line."
 }
 },
 {
@@ -228,47 +210,17 @@ parts:[
 "why": "✓ Correct. The Party ran daily life. You needed permission to travel or change jobs, and the secret police watched churches.",
 "hint": "Read the bubbles about the bike trip to Kiev, the job change, and the church."
 },
-"prompt": "Pick ONE rule on this page (travel, jobs, or church). How is it different in a democracy like the U.S.?",
-"stem": "<span class=\"declass\"><b>Fact file</b><span class=\"line\">From 1932, people needed an <b>internal passport</b> to live in a city. Most farm families didn't get one until 1974.</span><span class=\"line\">A 1940 law made it a crime to quit your job without permission. It lasted until 1956.</span><span class=\"line\">The scroll on this page (\"brothers in Christ\") is the comic's own message to its 1961 Catholic-school readers. It is an opinion, not a fact.</span></span>Write 1–2 sentences. Start like this: <i>In the Soviet Union, people ___. In a democracy, people ___.</i>",
-"stemText": "In the Soviet Union, people ___. In a democracy, people ___.",
-"placeholder": "In the Soviet Union, people ___. In a democracy, people ___.",
-"must": {
-"groups": [
-[
-"travel",
-"trip",
-"move",
-"moving",
-"passport",
-"job",
-"quit",
-"work",
-"church",
-"pray",
-"relig",
-"worship",
-"god"
+"check2": {
+"tag": "Second check · Reader page 5 + fact file",
+"q": "<span class=\"declass\"><b>Fact file</b><span class=\"line\">From 1932, people needed an <b>internal passport</b> to live in a city. Most farm families didn't get one until 1974.</span><span class=\"line\">A 1940 law made it a crime to quit your job without permission. It lasted until 1956.</span><span class=\"line\">The scroll on this page (\"brothers in Christ\") is the comic's own message to its 1961 Catholic-school readers. It is an opinion, not a fact.</span></span>It's 1945. A Soviet factory worker wants to quit and take a better job in another city. What could happen to him?",
+"right": "He could be charged with a crime for quitting",
+"wrong": [
+"He could quit if he gave two weeks' notice",
+"He would get a raise so he would stay put",
+"He could move once he voted in the next election"
 ],
-[
-"permission",
-"passport",
-"papers",
-"1932",
-"1974",
-"1940",
-"1956",
-"crime",
-"arrest",
-"jail",
-"prison",
-"secret police",
-"police",
-"watch",
-"spied",
-"spy"
-]
-],
-"msg": "Name the rule (travel, jobs, or church) AND use a fact from the page or fact file (like needing permission or an internal passport, or the 1940 job law)."
+"why": "✓ Correct. A 1940 law made quitting without permission a crime, and you needed an internal passport to live in a city. In a democracy like the U.S., you can quit and move without asking the government.",
+"hint": "Read the fact file: what did the 1940 law say? Check the year."
 }
 },
 {
@@ -290,67 +242,35 @@ parts:[
 "why": "✓ Correct. That's propaganda: one-sided messages to win support. Mao's China used it too, with terrible results.",
 "hint": "Read the yellow box at the bottom left: \"But the main effort...\""
 },
-"prompt": "How did communist governments in the USSR and China control people? Give one way they were alike and one way they were different.",
-"stem": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">Soviet propaganda bragged, \"Our farms are the finest in the world.\"</span><span class=\"rl\">Soviet farms often fell short, and millions starved in the 1932–33 famine. In Mao's China, officials faked record harvests in the Great Leap Forward (1958–62). Between 15 and 45 million people starved.</span></span><b class=\"kf\">Know this</b><span class=\"line\">In Mao's <b>Cultural Revolution</b> (1966–76), teen <b>Red Guards</b> attacked teachers and neighbors in public. Kids were pushed to report their parents.</span></span>Write 1–2 sentences. Start like this: <i>Both the USSR and China controlled people by ___, but China also ___.</i>",
-"stemText": "Both the USSR and China controlled people by ___, but China also ___.",
-"placeholder": "Both the USSR and China controlled people by ___, but China also ___.",
-"must": {
-"groups": [
-[
-"secret police",
-"police",
-"camp",
-"gulag",
-"purge",
-"propaganda",
-"fear",
-"inform",
-"report",
-"one party",
-"one-party",
-"prison",
-"shot",
-"arrest",
-"censor",
-"knock"
+"check2": {
+"tag": "Second check · Reader page 6 + fact file",
+"q": "<span class=\"declass\"><b>Comic vs. real life</b><span class=\"fix\"><span class=\"cs\">Soviet propaganda bragged, \"Our farms are the finest in the world.\"</span><span class=\"rl\">Soviet farms often fell short, and millions starved in the 1932–33 famine. In Mao's China, officials faked record harvests in the Great Leap Forward (1958–62). Between 15 and 45 million people starved.</span></span><b class=\"kf\">Know this</b><span class=\"line\">In Mao's <b>Cultural Revolution</b> (1966–76), teen <b>Red Guards</b> attacked teachers and neighbors in public. Kids were pushed to report their parents.</span></span>Which is TRUE about how the USSR and Mao's China controlled people?",
+"right": "Both used propaganda, and China also used teen Red Guards",
+"wrong": [
+"Both held free elections, but China also used informers",
+"Both had record harvests, so almost no one went hungry",
+"Both used Red Guards, but only China had secret police"
 ],
-[
-"great leap",
-"leap",
-"commune",
-"red guard",
-"cultural revolution",
-"starv",
-"famine",
-"fake",
-"harvest",
-"public",
-"teen",
-"student",
-"parents"
-]
-],
-"msg": "Give one way both controlled people (like secret police or propaganda) AND one thing from Mao's China (like the Great Leap Forward or the Red Guards)."
+"why": "✓ Correct. Both used propaganda, fear, and informers. China also turned teens into Red Guards who attacked teachers and neighbors. And both bragged about farms while millions starved.",
+"hint": "Read the \"Really\" box about the harvests, then the \"Know this\" line about the Cultural Revolution."
 }
 }
 ],
-questions:["(Check) What did Russians give up under one-party rule?", "Kids were pushed to report anti-communist talk, even about their parents. How would that change the way people talk at home, and why did it help Stalin keep control?", "(Check) How did the camps and purges control people who were never arrested?", "Pick ONE rule on this page (travel, jobs, or church). How is it different in a democracy like the U.S.?", "How did communist governments in the USSR and China control people? Give one way they were alike and one way they were different."],
+questions:["(Check) What did Russians give up under one-party rule?", "(Check) How did kids reporting their parents help Stalin keep control?", "(Check) How did the camps and purges control people who were never arrested?", "(Check) What could happen to a Soviet worker who quit his job?", "(Check) How did the USSR and Mao’s China control people, alike and different?"],
 validate(s){if(!s.name)return{text:"Type your first name + last initial (like Jordan M.) at the top of the questions.",focus:"studentName"};
  const mc=[1,2,3,4,5].find(i=>!s.checkDone(i));if(mc)return{text:"Get the check right for part "+mc+" first.",part:mc};
- const m2=[1,3].find(i=>!s.check2Done(i));if(m2)return{text:"Get the second check right for part "+m2+" first.",part:m2};
- const ma=[2,4,5].find(i=>!s.answer(i));if(ma)return{text:"Write your answer for part "+ma+" before turning in.",part:ma,focus:"answer"+ma};
- for(const i of [2,4,5]){const f=s.mustProblem&&s.mustProblem(i);if(f)return{text:"Part "+i+": "+f,part:i,focus:"answer"+i}}
- for(const i of [2,4,5]){const j=window.classJunkStop&&window.classJunkStop(document.getElementById("answer"+i));if(j)return{text:"Part "+i+": "+j,part:i}}return null},
-buildAnswers(s){const t1=i=>(s.tries(i)||1),t2=i=>(s.tries2(i)||1);
- const first=[1,2,3,4,5].filter(i=>t1(i)===1).length+[1,3].filter(i=>t2(i)===1).length;
- const a={Standard:"SS.9-12.WH.35, SS.9-12.WH.34, SS.9-12.WH.38","First-try correct":first+" of 7"};
+ const m2=[1,2,3,4,5].find(i=>!s.check2Done(i));if(m2)return{text:"Get the second check right for part "+m2+" first.",part:m2};
+ return null},
+buildAnswers(s){const t1=i=>(s.tries(i)||1),t2=i=>(s.tries2(i)||1),all=[1,2,3,4,5];
+ const first=all.filter(i=>t1(i)===1).length+all.filter(i=>t2(i)===1).length;
+ const a={Standard:"SS.9-12.WH.35, SS.9-12.WH.34, SS.9-12.WH.38","First-try correct":first+" of 10"};
  const ft=n=>n===1?"Right on first try":"Right after "+(n-1)+" wrong";
  a["[WH.35] "+this.questions[0]]=ft(t2(1));
- a["[WH.35] "+this.questions[1]]=s.answer(2);
+ a["[WH.35] "+this.questions[1]]=ft(t2(2));
  a["[WH.38] "+this.questions[2]]=ft(t2(3));
- a["[WH.35] "+this.questions[3]]=s.answer(4);
- a["[WH.35, WH.34, WH.38] "+this.questions[4]]=s.answer(5);
- a["Reading checks"]="7 of 7 correct · tries: "+[1,2,3,4,5].map(t1).join(", ")+" · second checks: "+t2(1)+", "+t2(3);return a}
+ a["[WH.35] "+this.questions[3]]=ft(t2(4));
+ a["[WH.35, WH.34, WH.38] "+this.questions[4]]=ft(t2(5));
+ a["Reading checks"]="10 of 10 correct · tries: "+all.map(t1).join(", ")+" · second checks: "+all.map(t2).join(", ");return a}
 };
 </script>
 <script src="../../shared/flip-reader.js?v=5overlap"></script>
